@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel
 import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream
+import java.io.BufferedOutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,16 +56,17 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 	 * Overriding methods should first delegate to super before adding their own entries.
 	 */
 	protected def void writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
+		val bufferedOutput = new BufferedOutputStream(zipOut)
 		zipOut.putNextEntry(new ZipEntry("emf-contents"))
 		try {
-			writeContents(resource, zipOut)
+			writeContents(resource, bufferedOutput)
 		} finally {
 			zipOut.closeEntry
 		}
 		
 		zipOut.putNextEntry(new ZipEntry("resource-description"))
 		try {
-			writeResourceDescription(resource, zipOut)
+			writeResourceDescription(resource, bufferedOutput)
 		} finally {
 			zipOut.closeEntry
 		}
@@ -71,7 +74,7 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 		if (storeNodeModel) {
 			zipOut.putNextEntry(new ZipEntry("node-model"))
 			try {
-				writeNodeModel(resource, zipOut)
+				writeNodeModel(resource, bufferedOutput)
 			} finally {
 				zipOut.closeEntry
 			}
@@ -89,17 +92,22 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 			}
 			
 			override saveEObject(InternalEObject internalEObject, Check check) throws IOException {
+				beforeSaveEObject(internalEObject, this)
 				super.saveEObject(internalEObject, check)
 				handleSaveEObject(internalEObject, this)
 			}
 	
-			
+	
 		}
 		try {
 			out.saveResource(storageAwareResource)
 		} finally {
 			out.flush
 		}
+	}
+	
+	protected def beforeSaveEObject(InternalEObject object, EObjectOutputStream writable_1) {
+		// do nothing
 	}
 	
 	protected def void handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
