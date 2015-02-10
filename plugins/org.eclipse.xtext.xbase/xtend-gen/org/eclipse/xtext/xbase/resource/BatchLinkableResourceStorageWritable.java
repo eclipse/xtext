@@ -9,13 +9,12 @@ package org.eclipse.xtext.xbase.resource;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
+import java.io.BufferedOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -23,7 +22,6 @@ import java.util.zip.ZipOutputStream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -31,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
@@ -40,8 +39,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -55,28 +52,55 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
   
   @Override
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
-    TreeIterator<EObject> _allContents = resource.getAllContents();
-    Iterator<XComputedTypeReference> _filter = Iterators.<XComputedTypeReference>filter(_allContents, XComputedTypeReference.class);
-    final Procedure1<XComputedTypeReference> _function = new Procedure1<XComputedTypeReference>() {
-      @Override
-      public void apply(final XComputedTypeReference it) {
-        it.getType();
+    try {
+      super.writeEntries(resource, zipOut);
+      if ((resource instanceof BatchLinkableResource)) {
+        ZipEntry _zipEntry = new ZipEntry("associations");
+        zipOut.putNextEntry(_zipEntry);
+        final BufferedOutputStream buffOut = new BufferedOutputStream(zipOut);
+        try {
+          this.writeAssociationsAdapter(((BatchLinkableResource)resource), buffOut);
+        } finally {
+          buffOut.flush();
+          zipOut.closeEntry();
+        }
       }
-    };
-    IteratorExtensions.<XComputedTypeReference>forEach(_filter, _function);
-    super.writeEntries(resource, zipOut);
-    if ((resource instanceof BatchLinkableResource)) {
-      this.writeAssociationsAdapter(((BatchLinkableResource)resource), zipOut);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  protected Object beforeSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream writable_1) {
+    JvmType _xblockexpression = null;
+    {
+      super.beforeSaveEObject(object, writable_1);
+      JvmType _xifexpression = null;
+      if ((object instanceof XComputedTypeReference)) {
+        _xifexpression = ((XComputedTypeReference)object).getType();
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   @Override
   protected void handleSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream out) {
     try {
       super.handleSaveEObject(object, out);
+      DocumentationAdapter documentationAdapter = null;
+      JvmIdentifiableMetaData metaDataAdapter = null;
       EList<Adapter> _eAdapters = object.eAdapters();
-      Iterable<DocumentationAdapter> _filter = Iterables.<DocumentationAdapter>filter(_eAdapters, DocumentationAdapter.class);
-      final DocumentationAdapter documentationAdapter = IterableExtensions.<DocumentationAdapter>head(_filter);
+      for (final Adapter adapter : _eAdapters) {
+        {
+          if ((adapter instanceof DocumentationAdapter)) {
+            documentationAdapter = ((DocumentationAdapter)adapter);
+          }
+          if ((adapter instanceof JvmIdentifiableMetaData)) {
+            metaDataAdapter = ((JvmIdentifiableMetaData)adapter);
+          }
+        }
+      }
       boolean _notEquals = (!Objects.equal(documentationAdapter, null));
       if (_notEquals) {
         out.writeBoolean(true);
@@ -85,9 +109,6 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
       } else {
         out.writeBoolean(false);
       }
-      EList<Adapter> _eAdapters_1 = object.eAdapters();
-      Iterable<JvmIdentifiableMetaData> _filter_1 = Iterables.<JvmIdentifiableMetaData>filter(_eAdapters_1, JvmIdentifiableMetaData.class);
-      final JvmIdentifiableMetaData metaDataAdapter = IterableExtensions.<JvmIdentifiableMetaData>head(_filter_1);
       boolean _notEquals_1 = (!Objects.equal(metaDataAdapter, null));
       if (_notEquals_1) {
         out.writeBoolean(true);
@@ -101,13 +122,11 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     }
   }
   
-  protected void writeAssociationsAdapter(final BatchLinkableResource resource, final ZipOutputStream zipOut) {
+  protected void writeAssociationsAdapter(final BatchLinkableResource resource, final OutputStream zipOut) {
     try {
       EList<Adapter> _eAdapters = resource.eAdapters();
       Iterable<JvmModelAssociator.Adapter> _filter = Iterables.<JvmModelAssociator.Adapter>filter(_eAdapters, JvmModelAssociator.Adapter.class);
       final JvmModelAssociator.Adapter adapter = IterableExtensions.<JvmModelAssociator.Adapter>head(_filter);
-      ZipEntry _zipEntry = new ZipEntry("associations");
-      zipOut.putNextEntry(_zipEntry);
       final ObjectOutputStream objOut = new ObjectOutputStream(zipOut);
       try {
         final HashMap<String, String> logicalMap = CollectionLiterals.<String, String>newHashMap();
@@ -208,7 +227,6 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
       } finally {
         objOut.flush();
       }
-      zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
