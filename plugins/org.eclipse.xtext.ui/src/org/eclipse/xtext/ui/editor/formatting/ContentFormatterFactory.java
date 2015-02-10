@@ -14,6 +14,8 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.parser.IParseResult;
@@ -32,13 +34,18 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 			IXtextDocument doc = (IXtextDocument) document;
 			ReplaceRegion r = doc.priorityReadOnly(new FormattingUnitOfWork(region));
 			try {
-				if (r != null)
-					doc.replace(r.getOffset(), r.getLength(), r.getText());
+				if (r != null) {
+					TextEdit edit = createTextEdit(doc, r);
+					if (edit != null) {
+						edit.apply(doc);
+					}
+					
+				}
 			} catch (BadLocationException e) {
 				throw new RuntimeException(e);
 			}
 		}
-
+		
 		@Override
 		public IFormattingStrategy getFormattingStrategy(String contentType) {
 			return null;
@@ -75,6 +82,31 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	public IContentFormatter createConfiguredFormatter(
 			SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		return new ContentFormatter();
+	}
+	
+	/**
+	 * Create a text edit from the given replace region.
+	 * The default impl will strip the common leading and trailing parts of the replaced region and the replacement text. 
+	 * 
+	 * @since 2.8
+	 */
+	protected TextEdit createTextEdit(IXtextDocument doc, ReplaceRegion r) throws BadLocationException {
+		String originalText = doc.get(r.getOffset(), r.getLength());
+		String newText = r.getText();
+		int start = 0;
+		int originalEnd = originalText.length() - 1;
+		int newEnd = newText.length() - 1;
+		int minLen = Math.min(r.getLength(), newText.length());
+		while(start < minLen && originalText.charAt(start) == newText.charAt(start)) {
+			start++;
+		}
+		while (originalEnd >= start
+				&& newEnd >= start
+				&& originalText.charAt(originalEnd) == newText.charAt(newEnd)) {
+			originalEnd--;
+			newEnd--;
+		}
+		return new ReplaceEdit(r.getOffset() + start, originalEnd - start + 1, r.getText().substring(start, newEnd + 1));
 	}
 
 }
