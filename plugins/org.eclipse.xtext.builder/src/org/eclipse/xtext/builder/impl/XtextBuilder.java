@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -78,8 +77,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
-		if(isInterrupted())
-			throw new OperationCanceledException();
 		if (IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
 			forgetLastBuiltState();
 			return getProject().getReferencedProjects();
@@ -88,6 +85,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
 			queuedBuildData.createCheckpoint();
+			if(isInterrupted())
+				handleCanceled();
 			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -147,6 +146,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=454716
 		if(!isInterrupted())
 			operationCanceledManager.propagateIfCancelException(t);
+		handleCanceled();
+	}
+
+	private void handleCanceled() {
 		buildLogger.log("Build interrupted.");
 		queuedBuildData.rollback();
 		doRememberLastBuiltState();
