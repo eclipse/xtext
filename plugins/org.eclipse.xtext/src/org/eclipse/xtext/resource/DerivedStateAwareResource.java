@@ -8,22 +8,17 @@
 package org.eclipse.xtext.resource;
 
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
-import org.eclipse.xtext.util.Triple;
 
 import com.google.common.base.Throwables;
 import com.google.inject.Inject;
@@ -43,10 +38,22 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 		this.derivedStateComputer = lateInitialization;
 	}
 	
+	/**
+	 * If <code>true</code>, the contents list of the resource is complete.
+	 * Does not necessarily apply to the contents of the elements itself.
+	 */
 	protected volatile boolean fullyInitialized = false;
+	/**
+	 * <code>true</code> if this resource is currently running its {@link #derivedStateComputer}
+	 * to {@link IDerivedStateComputer#installDerivedState(DerivedStateAwareResource, boolean) install}
+	 * new elements.
+	 */
 	protected volatile boolean isInitializing = false;
 
 	/**
+	 * If <code>true</code>, the contents list of the resource is complete.
+	 * Does not necessarily apply to the contents of the elements itself.
+	 * 
 	 * @since 2.7
 	 */
 	public boolean isFullyInitialized() {
@@ -54,6 +61,10 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	}
 
 	/**
+	 * <code>true</code> if this resource is currently running its {@link #derivedStateComputer}
+	 * to {@link IDerivedStateComputer#installDerivedState(DerivedStateAwareResource, boolean) install}
+	 * new elements.
+	 * 
 	 * @since 2.7
 	 */
 	public boolean isInitializing() {
