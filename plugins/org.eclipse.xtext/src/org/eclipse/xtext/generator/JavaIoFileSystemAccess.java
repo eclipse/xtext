@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -213,7 +214,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		File file = getFile(fileName, outputCfgName);
 		try {
-			return new FileInputStream(file);
+			return new BufferedInputStream(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeIOException(e);
 		}

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -177,7 +178,7 @@ public class XtextResource extends ResourceImpl {
 		if (inputStream instanceof LazyStringInputStream) {
 			return new StringReader(((LazyStringInputStream) inputStream).getString());
 		}
-		return new InputStreamReader(inputStream, getEncoding());
+		return new InputStreamReader(new BufferedInputStream(inputStream), getEncoding());
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
