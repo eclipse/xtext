@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.base.Objects;
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -83,26 +84,30 @@ public class ResourceStorageWritable {
    */
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
     try {
+      final BufferedOutputStream bufferedOutput = new BufferedOutputStream(zipOut);
       ZipEntry _zipEntry = new ZipEntry("emf-contents");
       zipOut.putNextEntry(_zipEntry);
       try {
-        this.writeContents(resource, zipOut);
+        this.writeContents(resource, bufferedOutput);
       } finally {
+        bufferedOutput.flush();
         zipOut.closeEntry();
       }
       ZipEntry _zipEntry_1 = new ZipEntry("resource-description");
       zipOut.putNextEntry(_zipEntry_1);
       try {
-        this.writeResourceDescription(resource, zipOut);
+        this.writeResourceDescription(resource, bufferedOutput);
       } finally {
+        bufferedOutput.flush();
         zipOut.closeEntry();
       }
       if (this.storeNodeModel) {
         ZipEntry _zipEntry_2 = new ZipEntry("node-model");
         zipOut.putNextEntry(_zipEntry_2);
         try {
-          this.writeNodeModel(resource, zipOut);
+          this.writeNodeModel(resource, bufferedOutput);
         } finally {
+          bufferedOutput.flush();
           zipOut.closeEntry();
         }
       }
@@ -134,6 +139,7 @@ public class ResourceStorageWritable {
         
         @Override
         public void saveEObject(final InternalEObject internalEObject, final BinaryResourceImpl.EObjectOutputStream.Check check) throws IOException {
+          ResourceStorageWritable.this.beforeSaveEObject(internalEObject, this);
           super.saveEObject(internalEObject, check);
           ResourceStorageWritable.this.handleSaveEObject(internalEObject, this);
         }
@@ -146,6 +152,10 @@ public class ResourceStorageWritable {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected Object beforeSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream writable_1) {
+    return null;
   }
   
   protected void handleSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream out) {
