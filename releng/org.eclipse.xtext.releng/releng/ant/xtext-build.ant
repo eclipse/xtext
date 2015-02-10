@@ -31,8 +31,7 @@
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
 	<property name="WITH.MWE2" value="false" />
 	<property name="SWTBOT" value="false" />
-	<property name="JAVA8" value="true" />
-	<property name="DEV.BUILD" value="true" />
+	<property name="JAVA8" value="false" />
 
 	<target name="run-buckminster-build" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
@@ -41,8 +40,13 @@
 		<antcall target="buckminster-package" />
 	</target>
 
-	<target name="run-buckminster-tests" depends="common.cleanup">
+	<target name="run-buckminster-build-dev" depends="common.cleanup">
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+		<antcall target="-buckminster-resolve" />
+		<antcall target="buckminster-dev-bootstrap" />
+	</target>
 
+	<target name="run-buckminster-tests" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
 		<echo message="eclipse.download: ${eclipse.download}" />
@@ -115,12 +119,25 @@
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
+	<target name="buckminster-dev-bootstrap">
+		<property name="DEV.BUILD" value="true" />
+		<property name="commands.file" location="${temp.commands.location}/compile-dev-cmd.txt" />
+		<property name="buckminster.workspace" value="${build.root}/buckminster.dev.workspace" />
+		<echo file="${commands.file}" append="false">
+			resolve "${releng.project}/releng/xtext-platform.mspec"
+			build
+			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-dev-build.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/builder-dev-run.result.xml" 
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
 	<target name="buckminster-zip-compile-bootstrap">
 		<property name="commands.file" location="${temp.commands.location}/compile-cmd.txt" />
 		<echo file="${commands.file}" append="false">
 			perform "org.eclipse.xtext.build#zip.examples"
 			build
-			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-dev-build.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/builder-run.result.xml" 
+			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-build.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/builder-run.result.xml" 
 		</echo>
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />

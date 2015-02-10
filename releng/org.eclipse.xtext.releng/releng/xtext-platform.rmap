@@ -10,13 +10,14 @@
   <rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases"/>
   <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.4/1.4.1.20140328-1905/"/>
   <rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2"/>
-  <rm:property key="xtext.p2.repository" value="not_set"/>
+  <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/milestones/"/>
   
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
   <rm:property key="antlr_gen.p2.repository" value="http://download.itemis.de/updates/releases/2.0.0"/>
   <rm:property key="jdt_annotation.p2.repository" value="${eclipse.download}/eclipse/updates/3.8"/>
 
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
+  <rm:locator pattern="^org\.eclipse\.xtext\.junit4$" searchPathRef="local.xtext.junit4" resolutionFilter="(DEV.BUILD=true)"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend|xtend.typesystem.emf)(\.source)?$" searchPathRef="xpand"/>
@@ -73,6 +74,15 @@
     <rm:provider componentTypes="buckminster" readerType="local" mutable="false" source="true">
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/releng/{1}">
+        <bc:propertyRef key="checkout.location"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="local.xtext.junit4">
+    <rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false" source="true">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/plugins/{1}">
         <bc:propertyRef key="checkout.location"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
