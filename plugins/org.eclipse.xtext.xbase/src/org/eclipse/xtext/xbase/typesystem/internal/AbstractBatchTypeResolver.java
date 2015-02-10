@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
@@ -61,13 +62,20 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 			return IResolvedTypes.NULL;
 		}
 		Resource resource = object.eResource();
-		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
-			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage. Resource was : "+resource.getURI(), new Exception());
-		}
+		validateResourceState(resource);
 		if (resource instanceof JvmMemberInitializableResource) {
 			((JvmMemberInitializableResource) resource).ensureJvmMembersInitialized();
 		}
 		return doResolveTypes(object, monitor);
+	}
+
+	/**
+	 * Checks the internal state of the resource and logs if type resolution was triggered unexpectedly.
+	 */
+	protected void validateResourceState(Resource resource) {
+		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
+			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage. Resource was : "+resource.getURI(), new Exception());
+		}
 	}
 	
 	/* @NonNull */

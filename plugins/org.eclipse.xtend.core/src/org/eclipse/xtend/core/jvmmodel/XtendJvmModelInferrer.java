@@ -154,6 +154,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		final Set<JvmDeclaredType> types = new LinkedHashSet<JvmDeclaredType>();
 		final IJvmDeclaredTypeAcceptor wrapper = new IJvmDeclaredTypeAcceptor() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
 				types.add(type);
@@ -223,7 +224,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 					}
 				}
 			};
-			resource.addRunnableForJvmMembersInitialization(lateInit);
+			resource.addJvmMemberInitializer(lateInit);
 		}
 	}
 

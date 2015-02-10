@@ -386,7 +386,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		boolean lateJvmMemberInit = false;
 		if (resource instanceof JvmMemberInitializableResource) {
-			lateJvmMemberInit = ((JvmMemberInitializableResource) resource).isLazyJvmMemberInitialization();
+			lateJvmMemberInit = ((JvmMemberInitializableResource) resource).hasJvmMemberInitializers();
 		}
 		if (!preIndexingPhase) {
 			for (final Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
@@ -402,7 +402,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 					}
 				};
 				if (lateJvmMemberInit) {
-					((JvmMemberInitializableResource) resource).addRunnableForJvmMembersInitialization(initialization);
+					((JvmMemberInitializableResource) resource).addJvmMemberInitializer(initialization);
 				} else {
 					initialization.run();
 				}
@@ -423,7 +423,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				}
 			};
 			if (lateJvmMemberInit) {
-				((JvmMemberInitializableResource) resource).addRunnableForJvmMembersInitialization(completingRunnable);
+				((JvmMemberInitializableResource) resource).addJvmMemberInitializer(completingRunnable);
 			} else {
 				completingRunnable.run();
 			}
