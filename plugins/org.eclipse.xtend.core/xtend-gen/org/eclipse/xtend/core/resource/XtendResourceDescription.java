@@ -46,6 +46,8 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   private IQualifiedNameConverter nameConverter;
   
+  private Set<QualifiedName> importedNames;
+  
   public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     super(resource, strategy);
   }
@@ -74,12 +76,16 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   @Override
   public Iterable<QualifiedName> getImportedNames() {
+    boolean _notEquals = (!Objects.equal(this.importedNames, null));
+    if (_notEquals) {
+      return this.importedNames;
+    }
     final HashSet<QualifiedName> result = CollectionLiterals.<QualifiedName>newHashSet();
     Resource _resource = this.getResource();
     EList<EObject> _contents = _resource.getContents();
     final EObject astRoot = IterableExtensions.<EObject>head(_contents);
-    boolean _notEquals = (!Objects.equal(astRoot, null));
-    if (_notEquals) {
+    boolean _notEquals_1 = (!Objects.equal(astRoot, null));
+    if (_notEquals_1) {
       final IResolvedTypes types = this.typeResolver.resolveTypes(astRoot);
       TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(astRoot, true);
       Iterable<Object> _iterable = IteratorExtensions.<Object>toIterable(_allContents);
@@ -92,8 +98,8 @@ public class XtendResourceDescription extends DefaultResourceDescription {
               boolean _and = false;
               boolean _and_1 = false;
               JvmIdentifiableElement _feature = ((XMemberFeatureCall)expression).getFeature();
-              boolean _notEquals_1 = (!Objects.equal(_feature, null));
-              if (!_notEquals_1) {
+              boolean _notEquals_2 = (!Objects.equal(_feature, null));
+              if (!_notEquals_2) {
                 _and_1 = false;
               } else {
                 JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall)expression).getFeature();
@@ -151,8 +157,8 @@ public class XtendResourceDescription extends DefaultResourceDescription {
             }
           }
           final LightweightTypeReference typeRef = types.getActualType(expression);
-          boolean _notEquals_1 = (!Objects.equal(typeRef, null));
-          if (_notEquals_1) {
+          boolean _notEquals_2 = (!Objects.equal(typeRef, null));
+          if (_notEquals_2) {
             JvmType _type = typeRef.getType();
             final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
               @Override
@@ -191,8 +197,8 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           Iterator<LightweightTypeReference> _map = IteratorExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_filter_1, _function);
           final Iterable<LightweightTypeReference> typesOfIdentifiables = IteratorExtensions.<LightweightTypeReference>toIterable(_map);
           for (final LightweightTypeReference typeRef : typesOfIdentifiables) {
-            boolean _notEquals_1 = (!Objects.equal(typeRef, null));
-            if (_notEquals_1) {
+            boolean _notEquals_2 = (!Objects.equal(typeRef, null));
+            if (_notEquals_2) {
               JvmType _type = typeRef.getType();
               final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
                 @Override
@@ -219,8 +225,9 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       }
     };
     Iterable<QualifiedName> _filter_1 = IterableExtensions.<QualifiedName>filter(result, _function);
-    final Set<QualifiedName> finalResult = IterableExtensions.<QualifiedName>toSet(_filter_1);
-    return finalResult;
+    Set<QualifiedName> _set = IterableExtensions.<QualifiedName>toSet(_filter_1);
+    this.importedNames = _set;
+    return this.importedNames;
   }
   
   public void registerAllTypes(final JvmType type, final Function1<? super String, ? extends Boolean> acceptor) {
