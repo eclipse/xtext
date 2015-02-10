@@ -39,6 +39,9 @@ public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 		return ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			@Override
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
+				if (resource == null) {
+					return null;
+				}
 				if (helper instanceof ISourceViewerAware && textViewer instanceof ISourceViewer) {
 					((ISourceViewerAware) helper).setSourceViewer((ISourceViewer) textViewer);
 				}

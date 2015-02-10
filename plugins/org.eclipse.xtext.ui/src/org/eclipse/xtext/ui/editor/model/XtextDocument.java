@@ -515,7 +515,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 							hadUpdates = false;
 							if (getCancelIndicator().isCanceled() && isCancelable)
 								throw new OperationCanceledException();
-							notifyModelListeners(resource);
+							notifyModelListeners(state);
 						}
 					} catch (RuntimeException e) {
 						if (operationCanceledManager.isOperationCanceledException(e)) {
