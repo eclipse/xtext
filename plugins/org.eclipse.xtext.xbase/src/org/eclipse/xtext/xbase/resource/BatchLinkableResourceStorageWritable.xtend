@@ -8,13 +8,16 @@
 package org.eclipse.xtext.xbase.resource
 
 import com.google.common.collect.Sets
+import java.io.BufferedOutputStream
 import java.io.ObjectOutputStream
+import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
@@ -31,18 +34,42 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
 	
 	override protected writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
-		// make sure lazy type references are computed
-		resource.allContents.filter(XComputedTypeReference).forEach[ type ]
 		super.writeEntries(resource, zipOut)
 		if (resource instanceof BatchLinkableResource) {
-			writeAssociationsAdapter(resource, zipOut)
+			zipOut.putNextEntry(new ZipEntry("associations"))
+			val buffOut = new BufferedOutputStream(zipOut)
+			try {
+				writeAssociationsAdapter(resource, buffOut)
+			} finally {
+				buffOut.flush
+				zipOut.closeEntry
+			}
+		}
+	}
+	
+	override protected beforeSaveEObject(InternalEObject object, EObjectOutputStream writable_1) {
+		super.beforeSaveEObject(object, writable_1)
+		// make sure lazy type references are computed
+		if (object instanceof XComputedTypeReference) {
+			object.type
 		}
 	}
 	
 	override protected handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
 		super.handleSaveEObject(object, out)
+		
+		var DocumentationAdapter documentationAdapter = null;
+		var JvmIdentifiableMetaData metaDataAdapter = null;
+		for (adapter : object.eAdapters) {
+			if (adapter instanceof DocumentationAdapter) {
+				documentationAdapter = adapter;
+			}
+			if (adapter instanceof JvmIdentifiableMetaData) {
+				metaDataAdapter = adapter
+			}
+		}
+		
 		// store Documentation adapters
-		val documentationAdapter = object.eAdapters.filter(DocumentationAdapter).head
 		if (documentationAdapter!=null) {
 			out.writeBoolean(true)
 			out.writeString(documentationAdapter.documentation)
@@ -50,7 +77,6 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 			out.writeBoolean(false)
 		}
 		// store additional meta data
-		val metaDataAdapter = object.eAdapters.filter(JvmIdentifiableMetaData).head
 		if (metaDataAdapter != null) {
 			out.writeBoolean(true)
 			out.writeBoolean(metaDataAdapter.synthetic)
@@ -59,9 +85,8 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 		}
 	}
 	
-	protected def void writeAssociationsAdapter(BatchLinkableResource resource, ZipOutputStream zipOut) {
+	protected def void writeAssociationsAdapter(BatchLinkableResource resource, OutputStream zipOut) {
 		val adapter = resource.eAdapters.filter(JvmModelAssociator.Adapter).head
-		zipOut.putNextEntry(new ZipEntry("associations"))
 		val objOut = new ObjectOutputStream(zipOut);
 		try {
 			// logicalMap
@@ -99,8 +124,6 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 		} finally {
 			objOut.flush
 		}
-		
-		zipOut.closeEntry
 	}
 
 	protected def String getFragment(EObject obj) {
