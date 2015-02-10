@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 import com.google.common.base.Predicate;
@@ -47,7 +48,7 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 		if (compilerPhases.isIndexing(resourceSet)) {
 			// during indexing we don't want to see any local files
 			final String encodedProjectName = URI.encodeSegment(getProjectName(resourceSet), true);
-			return new FilteringResourceDescriptions(result, new Predicate<URI>() {
+			Predicate<URI> predicate = new Predicate<URI>() {
 				@Override
 				public boolean apply(URI uri) {
 					if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
@@ -55,7 +56,12 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 					else 
 						return !uri.segment(1).equals(encodedProjectName);
 				}
-			});
+			};
+			if (result instanceof IShadowedResourceDescriptions) {
+				return new ShadowedFilteringResourceDescriptions(result, predicate);
+			} else {
+				return new FilteringResourceDescriptions(result, predicate);
+			}
 		} else {
 			return result;
 		}
@@ -79,7 +85,15 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 			this.delegate = delegate;
 			this.filter = filter;
 		}
-
+		
+		protected IResourceDescriptions getDelegate() {
+			return delegate;
+		}
+		
+		protected Predicate<URI> getFilter() {
+			return filter;
+		}
+		
 		@Override 
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {
 			return filter(delegate.getAllResourceDescriptions(), new Predicate<IResourceDescription>() {
@@ -131,6 +145,27 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 		public boolean isEmpty() {
 			return Iterables.isEmpty(getAllResourceDescriptions());
 		}
+	}
+	
+	/**
+	 * Resource descriptions implementation that allows to filter a delegate instance
+	 * based on the URI of the resource description. Fulfills the contract of 
+	 * IShadowedResourceDescriptions.
+	 * 
+	 * @since 2.8
+	 */
+	protected static class ShadowedFilteringResourceDescriptions extends FilteringResourceDescriptions implements IShadowedResourceDescriptions {
+
+		public ShadowedFilteringResourceDescriptions(IResourceDescriptions delegate, Predicate<URI> filter) {
+			super(delegate, filter);
+		}
+
+		@Override
+		public boolean isShadowed(EClass type, QualifiedName name, boolean ignoreCase) {
+			boolean result = ((IShadowedResourceDescriptions) getDelegate()).isShadowed(type, name, ignoreCase);
+			return result;
+		}
+		
 	}
 }
 
