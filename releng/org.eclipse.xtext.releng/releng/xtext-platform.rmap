@@ -10,6 +10,7 @@
   <rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases"/>
   <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.4/1.4.1.20140328-1905/"/>
   <rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2"/>
+  <rm:property key="xtext.p2.repository" value="not_set"/>
   
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
   <rm:property key="antlr_gen.p2.repository" value="http://download.itemis.de/updates/releases/2.0.0"/>
@@ -18,6 +19,8 @@
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   
+  <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend|xtend.typesystem.emf)(\.source)?$" searchPathRef="xpand"/>
+  <rm:locator pattern="^org\.eclipse\.(?:xtext|xtend|xtend2)(?:\..+)?$" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.launch$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.language$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtext$" searchPathRef="mwe2-gen"/>
@@ -31,7 +34,7 @@
   <rm:locator pattern="^org\.antlr\.generator(?:\..+)?$" searchPathRef="mwe2-gen"/>
     
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
-  <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend)(?:\..+)?$" searchPathRef="xpand"/>
+  
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
   <rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Latest)" searchPathRef="google-maven"/>
   <rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(!(ECLIPSE.TARGET.ALIAS=Latest))" searchPathRef="orbit"/>
@@ -121,6 +124,16 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+  <rm:searchPath name="xtext">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"  resolutionFilter="(DEV.BUILD=true)">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="xtext.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  
   <rm:searchPath name="mwe2-gen">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(WITH.MWE2=true)" >
       <rm:property key="buckminster.source" value="false"/>
@@ -137,6 +150,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+  
   <rm:searchPath name="maven">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
@@ -146,6 +160,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+  
   <rm:searchPath name="gef">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
@@ -155,6 +170,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+  
   <rm:searchPath name="jdt.annotation">
     <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>

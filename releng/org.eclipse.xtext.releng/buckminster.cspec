@@ -24,6 +24,7 @@
         <cs:dependency name="org.eclipse.emf.mwe2.lib" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle"/>
         
+        <cs:dependency name="org.eclipse.xtend.sdk" componentType="eclipse.feature" filter="(DEV.BUILD=true)"/>
         <cs:dependency name="org.eclipse.emf.mwe2.launch" componentType="osgi.bundle" filter="(WITH.MWE2=true)"/>
         <cs:dependency name="de.itemis.xtext.antlr.feature" componentType="eclipse.feature" filter="(WITH.MWE2=true)"/>
         <cs:dependency name="org.eclipse.egit.core" componentType="osgi.bundle"  filter="(ECLIPSE.TARGET.ALIAS=Stable)"/>
