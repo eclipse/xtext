@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
+import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -54,6 +54,12 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	
 	@Inject
 	private CompilerPhases compilerPhases;
+	
+	private Set<Runnable> jvmMemberInitializers = null;
+	
+	private boolean hasJvmMemberInitializers = false;
+	
+	private boolean isInitializingJvmMembers = false;
 	
 	/**
 	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
@@ -191,22 +197,21 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	
 	// Lazy initialization
 	
-	private LinkedHashSet<Runnable> runnables = null;
-	
 	/**
-	 * Executes any {@link Runnable}s added through {@link #addRunnableForJvmMembersInitialization(Runnable)}
+	 * Executes any {@link Runnable}s added through {@link #addJvmMemberInitializer(Runnable)}
 	 * 
 	 * @since 2.8
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	public void ensureJvmMembersInitialized() {
-		if (runnables == null)
+		if (jvmMemberInitializers == null)
 			return;
 		Set<Runnable> localRunnables = null;
 		synchronized(this) {
-			localRunnables = runnables;
-			runnables = null;
+			localRunnables = jvmMemberInitializers;
+			jvmMemberInitializers = null;
+			hasJvmMemberInitializers = false;
 		}
 		if (localRunnables == null)
 			return;
@@ -217,10 +222,19 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 			if (!before.isEmpty()) {
 				resolving = new LinkedHashSet<Triple<EObject, EReference, INode>>();
 			}
-			for (Runnable runnable : localRunnables) {
-				runnable.run();
+			if (isInitializingJvmMembers) {
+				throw new IllegalStateException("Reentrant attempt to initialize JvmMembers");
+			}
+			try {
+				isInitializingJvmMembers = true;
+				for (Runnable runnable : localRunnables) {
+					runnable.run();
+				}
+			} finally {
+				isInitializingJvmMembers = false;
 			}
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		} finally {
 			if (!before.isEmpty()) {
 				resolving = before;
@@ -230,22 +244,32 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	}
 	
 	@Override
+	public boolean isInitializingJvmMembers() {
+		return isInitializingJvmMembers;
+	}
+	
+	@Override
 	public void discardDerivedState() {
-		this.runnables = null;
+		this.jvmMemberInitializers = null;
+		this.hasJvmMemberInitializers = false;
 		super.discardDerivedState();
 	}
 	
 	/**
-	 * register runnables to be executed on JvmMemberInitialization
+	 * Register runnables to be executed when the {@link JvmMember members} of {@link JvmType types}
+	 * in this resource are initialized.
 	 * 
 	 * @since 2.8
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
-	public void addRunnableForJvmMembersInitialization(Runnable runnable) {
-		if (this.runnables == null) {
-			this.runnables = new LinkedHashSet<Runnable>();
-			this.isLazyJvmMemberInitialization = true;
+	public void addJvmMemberInitializer(Runnable runnable) {
+		if (isInitializingJvmMembers) {
+			throw new IllegalStateException("Cannot enqueue runnables during JvmMemberInitialization");
+		}
+		if (this.jvmMemberInitializers == null) {
+			this.jvmMemberInitializers = new LinkedHashSet<Runnable>();
+			this.hasJvmMemberInitializers = true;
 			for (EObject obj : getContents()) {
 				if (obj instanceof JvmDeclaredTypeImplCustom) {
 					JvmDeclaredTypeImplCustom type = (JvmDeclaredTypeImplCustom) obj;
@@ -253,9 +277,12 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				}
 			}
 		}
-		this.runnables.add(runnable);
+		this.jvmMemberInitializers.add(runnable);
 	}
 	
+	/**
+	 * Recursively traverse the types in this resource to mark them as lazy initialized types. 
+	 */
 	private void markPendingInitialization(JvmDeclaredTypeImplCustom type) {
 		type.setPendingInitialization(true);
 		for (JvmMember member : type.basicGetMembers()) {
@@ -265,11 +292,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		}
 	}
 	
-	private boolean isLazyJvmMemberInitialization;
-	
 	@Override
-	public boolean isLazyJvmMemberInitialization() {
-		return isLazyJvmMemberInitialization;
+	public boolean hasJvmMemberInitializers() {
+		return hasJvmMemberInitializers;
 	}
 	
 }

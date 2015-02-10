@@ -22,17 +22,22 @@ import org.eclipse.xtext.common.types.JvmMember;
 public interface JvmMemberInitializableResource {
 
 	/**
-	 * Executes any {@link Runnable runnables} added through {@link #addRunnableForJvmMembersInitialization(Runnable)}
+	 * Executes any {@link Runnable runnables} added through {@link #addJvmMemberInitializer(Runnable)}
 	 */
-	public void ensureJvmMembersInitialized();
+	void ensureJvmMembersInitialized();
+	
+	/**
+	 * Returns {@code true} if this resource is currently initializing a the members of its contained types.
+	 */
+	boolean isInitializingJvmMembers();
 	
 	/**
 	 * register {@link Runnable runnables} to be executed on {@link #ensureJvmMembersInitialized()}.
 	 */
-	public void addRunnableForJvmMembersInitialization(Runnable runnable);
+	void addJvmMemberInitializer(Runnable runnable);
 	
 	/**
 	 * @return whether lazy {@link JvmMember} initialization is activated for this resource.
 	 */
-	public boolean isLazyJvmMemberInitialization();
+	boolean hasJvmMemberInitializers();
 }
