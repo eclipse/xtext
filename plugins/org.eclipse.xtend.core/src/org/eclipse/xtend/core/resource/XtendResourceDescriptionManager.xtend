@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import java.util.Set
 
 @Singleton
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
@@ -59,6 +60,8 @@ class XtendResourceDescription extends DefaultResourceDescription {
 
 	IBatchTypeResolver typeResolver
 	IQualifiedNameConverter nameConverter
+	
+	Set<QualifiedName> importedNames
 
 	new(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		super(resource, strategy)
@@ -79,8 +82,12 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	override getReferenceDescriptions() {
 		return Collections.emptyList
 	}
+	
 
 	def override Iterable<QualifiedName> getImportedNames() {
+		if (importedNames != null) {
+			return importedNames;
+		}
 		val result = newHashSet()
 		val astRoot = resource.contents.head
 		if (astRoot != null) {
@@ -132,10 +139,10 @@ class XtendResourceDescription extends DefaultResourceDescription {
 			}
 		}
 		result.addAll(super.getImportedNames())
-		val finalResult = result.filter [
+		importedNames = result.filter [
 			!primitivesFilter.contains(it.lastSegment)
 		].toSet
-		return finalResult
+		return importedNames
 	}
 	
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
