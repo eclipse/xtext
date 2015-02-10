@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
+import org.eclipse.xtext.xbase.XbasePackage
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -113,7 +114,7 @@ class ConstantConditionsInterpreter {
 	}
 
 	def dispatch EvaluationResult internalEvaluate(XAbstractFeatureCall it, EvaluationContext context) {
-		val feature = it.feature
+		val feature = getFeature(it, context)
 		if (feature.eIsProxy) {
 			return EvaluationResult.NOT_A_CONSTANT
 		}
@@ -177,6 +178,14 @@ class ConstantConditionsInterpreter {
 		return EvaluationResult.NOT_A_CONSTANT
 	}
 	
+	def getFeature(XAbstractFeatureCall call, EvaluationContext context) {
+		var feature = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as JvmIdentifiableElement
+		if (feature == null || feature.eIsProxy) {
+			feature = context.resolvedTypes.getLinkedFeature(call)
+		}
+		return feature
+	}
+	
 	def XExpression getAssociatedExpression(JvmField field) {
 		val resource = field.eResource
 		if (resource instanceof StorageAwareResource) {
@@ -201,11 +210,8 @@ class ConstantConditionsInterpreter {
 		return new EvaluationResult(null, true)
 	}
 	
-	def private boolean isFromXbaseLibrary(XAbstractFeatureCall it) {
-		val feature = it.feature
-		if (feature != null && feature.eIsProxy) {
-			throw new IllegalArgumentException("proxy")
-		}
+	def private boolean isFromXbaseLibrary(XAbstractFeatureCall it, EvaluationContext context) {
+		val feature = getFeature(it, context)
 		switch feature {
 			JvmMember: feature?.declaringType?.packageName == XImportSectionNamespaceScopeProvider.XBASE_LIB.toString
 			default: false
@@ -213,7 +219,7 @@ class ConstantConditionsInterpreter {
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XUnaryOperation it, EvaluationContext context) {
-		if (isFromXbaseLibrary) {
+		if (isFromXbaseLibrary(context)) {
 			val arg = operand.doEvaluate(context)
 			val op = concreteSyntaxFeatureName
 			switch op {
@@ -233,7 +239,7 @@ class ConstantConditionsInterpreter {
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XBinaryOperation it, EvaluationContext context) {
-		if (isFromXbaseLibrary && rightOperand != null) {
+		if (isFromXbaseLibrary(context) && rightOperand != null) {
 			val left = leftOperand.doEvaluate(context) 
 			val right = rightOperand.doEvaluate(context)
 			try {
