@@ -13,11 +13,18 @@ import org.eclipse.xtext.resource.XtextResource;
 import com.google.inject.ImplementedBy;
 
 /**
+ * The hyperlink helper should be implemented to detect hyperlinks at a given
+ * offset in a {@link XtextResource resource}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(HyperlinkHelper.class)
 public interface IHyperlinkHelper {
 
+	/**
+	 * Create hyperlinks at the given offset.
+	 * Return <code>null</code> if no hyperlinks are available.
+	 */
 	IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks);
 
 }

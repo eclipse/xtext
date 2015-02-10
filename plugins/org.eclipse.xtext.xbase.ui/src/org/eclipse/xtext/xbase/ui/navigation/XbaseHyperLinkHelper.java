@@ -85,7 +85,6 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 	 */
 	@Override
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
-		
 		List<IHyperlink> links = Lists.newArrayList();
 		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 		super.createHyperlinksByOffset(resource, offset, acceptor);

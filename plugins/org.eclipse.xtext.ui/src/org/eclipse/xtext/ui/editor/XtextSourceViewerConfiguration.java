@@ -182,7 +182,13 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 					public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region,
 							boolean canShowMultipleHyperlinks) {
 						try {
-							return detector.detectHyperlinks(textViewer, region, canShowMultipleHyperlinks);
+							IHyperlink[] result = detector.detectHyperlinks(textViewer, region, canShowMultipleHyperlinks);
+							// fail safe detector: don't return an empty array
+							// but null (see org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(IRegion))
+							if (result != null && result.length == 0) {
+								return null;
+							}
+							return result;
 						}
 						catch (Throwable e) {
 							// fail safe hyperlink detector - prevent others
