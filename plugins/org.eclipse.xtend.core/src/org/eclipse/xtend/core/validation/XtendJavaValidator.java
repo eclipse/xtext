@@ -247,7 +247,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (result == null) {
 			result = generatorConfigProvider.get(element);
 			getContext().put(GeneratorConfig.class, result);
-			if (result.getTargetVersion().isAtLeast(JAVA8)) {
+			if (result.getJavaSourceVersion().isAtLeast(JAVA8)) {
 				methodInInterfaceModifierValidator = new ModifierValidator(
 						newArrayList("public", "abstract", "static", "def", "override"), this);
 			} else {
@@ -677,7 +677,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 		if (inferredType instanceof JvmGenericType) {
-			JavaVersion targetVersion = getGeneratorConfig(xtendType).getTargetVersion();
+			JavaVersion targetVersion = getGeneratorConfig(xtendType).getJavaSourceVersion();
 			ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType, targetVersion);
 			
 			Set<EObject> flaggedOperations = Sets.newHashSet();
@@ -1244,7 +1244,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		} else if(function.getDeclaringType() instanceof XtendInterface) {
-			if (!getGeneratorConfig(function).getTargetVersion().isAtLeast(JAVA8)) {
+			if (!getGeneratorConfig(function).getJavaSourceVersion().isAtLeast(JAVA8)) {
 				error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
 			}
 		}
@@ -1973,7 +1973,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			GeneratorConfig config = getGeneratorConfig(method);
 			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());
 			int abstractIndex = method.getModifiers().indexOf("abstract");
-			if (config.getTargetVersion().isAtLeast(JAVA8) && method.getExpression() != null && abstractIndex != -1) {
+			if (config.getJavaSourceVersion().isAtLeast(JAVA8) && method.getExpression() != null && abstractIndex != -1) {
 				error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
 			}
 		}

@@ -1081,7 +1081,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		GeneratorConfig config = b.getGeneratorConfig();
 		boolean compileToSwitch;
-		if (config != null && config.getTargetVersion().isAtLeast(JAVA7)) {
+		if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA7)) {
 			compileToSwitch = isCompiledToJava7Switch(expr);
 		} else {
 			compileToSwitch = isCompiledToJavaSwitch(expr);
@@ -1556,7 +1556,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			String variableName = b.declareSyntheticVariable(closure, "_function");
 			b.append(variableName).append(" = ");
 			GeneratorConfig config = b.getGeneratorConfig();
-			if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
+			if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 				toLambda(closure, b, type, operation, false);
 			} else {
 				toAnonymousClass(closure, b, type, operation);
@@ -1665,7 +1665,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.newLine();
 		JvmDeclaredType declaringType = operation.getDeclaringType();
 		GeneratorConfig config = b.getGeneratorConfig();
-		if (config != null && config.getTargetVersion().isAtLeast(JAVA6)
+		if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA6)
 				|| declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
 			b.append("@").append(Override.class).newLine();
 		}
@@ -1738,7 +1738,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmOperation operation = findImplementingOperation(type);
 			if (operation != null) {
 				GeneratorConfig config = b.getGeneratorConfig();
-				if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
+				if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 					toLambda(closure, b.trace(closure, false), type, operation, true);
 				} else {
 					toAnonymousClass(closure, b.trace(closure, false), type, operation);
