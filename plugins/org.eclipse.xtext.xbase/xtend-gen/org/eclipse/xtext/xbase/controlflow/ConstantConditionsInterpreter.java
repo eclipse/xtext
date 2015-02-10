@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.controlflow.BooleanResult;
 import org.eclipse.xtext.xbase.controlflow.EvaluationContext;
 import org.eclipse.xtext.xbase.controlflow.EvaluationResult;
@@ -141,7 +142,7 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XAbstractFeatureCall it, final EvaluationContext context) {
-    final JvmIdentifiableElement feature = it.getFeature();
+    final JvmIdentifiableElement feature = this.getFeature(it, context);
     boolean _eIsProxy = feature.eIsProxy();
     if (_eIsProxy) {
       return EvaluationResult.NOT_A_CONSTANT;
@@ -289,6 +290,25 @@ public class ConstantConditionsInterpreter {
     return EvaluationResult.NOT_A_CONSTANT;
   }
   
+  public JvmIdentifiableElement getFeature(final XAbstractFeatureCall call, final EvaluationContext context) {
+    Object _eGet = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+    JvmIdentifiableElement feature = ((JvmIdentifiableElement) _eGet);
+    boolean _or = false;
+    boolean _equals = Objects.equal(feature, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _eIsProxy = feature.eIsProxy();
+      _or = _eIsProxy;
+    }
+    if (_or) {
+      IResolvedTypes _resolvedTypes = context.getResolvedTypes();
+      JvmIdentifiableElement _linkedFeature = _resolvedTypes.getLinkedFeature(call);
+      feature = _linkedFeature;
+    }
+    return feature;
+  }
+  
   public XExpression getAssociatedExpression(final JvmField field) {
     final Resource resource = field.eResource();
     if ((resource instanceof StorageAwareResource)) {
@@ -324,21 +344,10 @@ public class ConstantConditionsInterpreter {
     return new EvaluationResult(null, true);
   }
   
-  private boolean isFromXbaseLibrary(final XAbstractFeatureCall it) {
+  private boolean isFromXbaseLibrary(final XAbstractFeatureCall it, final EvaluationContext context) {
     boolean _xblockexpression = false;
     {
-      final JvmIdentifiableElement feature = it.getFeature();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(feature, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _eIsProxy = feature.eIsProxy();
-        _and = _eIsProxy;
-      }
-      if (_and) {
-        throw new IllegalArgumentException("proxy");
-      }
+      final JvmIdentifiableElement feature = this.getFeature(it, context);
       boolean _switchResult = false;
       boolean _matched = false;
       if (!_matched) {
@@ -366,7 +375,7 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XUnaryOperation it, final EvaluationContext context) {
     EvaluationResult _xifexpression = null;
-    boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it);
+    boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it, context);
     if (_isFromXbaseLibrary) {
       EvaluationResult _xblockexpression = null;
       {
@@ -436,7 +445,7 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XBinaryOperation it, final EvaluationContext context) {
     boolean _and = false;
-    boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it);
+    boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it, context);
     if (!_isFromXbaseLibrary) {
       _and = false;
     } else {
