@@ -7,15 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
+import static com.google.common.collect.Maps.*;
+
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -123,13 +127,30 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 	
 	protected TreeAppendable(SharedAppendableState state,
-			ITraceURIConverter converter,
+			final ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider,
 			IJvmModelAssociations jvmModelAssociations,
 			Set<ILocationData> sourceLocations, 
 			boolean useForDebugging) {
 		this.state = state;
-		this.traceURIConverter = converter;
+		this.traceURIConverter = new ITraceURIConverter() {
+			
+			private Map<XtextResource, URI> uriForTraceCache = newHashMap();
+			
+			@Override
+			public URI getURIForTrace(URI uri) {
+				return converter.getURIForTrace(uri);
+			}
+			
+			@Override
+			public URI getURIForTrace(XtextResource context) {
+				if (!uriForTraceCache.containsKey(context)) {
+					URI uriForTrace = converter.getURIForTrace(context);
+					uriForTraceCache.put(context, uriForTrace);
+				}
+				return uriForTraceCache.get(context);
+			}
+		};
 		this.locationProvider = locationProvider;
 		this.jvmModelAssociations = jvmModelAssociations;
 		this.children = Lists.newArrayList();
@@ -288,11 +309,13 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		ILocationData newData = createLocationData(traceURIConverter, object, (ITextRegionWithLineInformation) textRegion);
 		return trace(Collections.singleton(newData), false);
 	}
-
+	
 	protected static ILocationData createLocationData(ITraceURIConverter converter, EObject object, ITextRegionWithLineInformation textRegion) {
 		URI uri = null;
-		if (object.eResource() instanceof XtextResource)
-			uri = converter.getURIForTrace((XtextResource) object.eResource());
+		Resource resource = object.eResource();
+		if (resource instanceof XtextResource) {
+			uri = converter.getURIForTrace((XtextResource) resource);
+		}
 		ILocationData newData = new LocationData(textRegion, uri);
 		return newData;
 	}
