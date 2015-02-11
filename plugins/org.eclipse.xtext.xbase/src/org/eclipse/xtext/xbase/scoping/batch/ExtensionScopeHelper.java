@@ -58,6 +58,9 @@ public class ExtensionScopeHelper {
 				// short circuit - limit extension scope entries to real candidates
 				LightweightTypeReference parameterTypeReference = rawArgumentType.getOwner().toPlainTypeReference(rawParameterType);
 				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawArgumentType)) {
+					if (parameterTypeReference.isArray() && !rawArgumentType.isArray() && rawArgumentType.isSubtypeOf(Iterable.class)) {
+						return true;
+					}
 					return false;
 				}
 				if (parameterTypeReference.isArray() && !rawArgumentType.isArray() && !rawArgumentType.isSubtypeOf(Iterable.class)) {
