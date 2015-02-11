@@ -2078,6 +2078,19 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_142() throws Exception {
+		'''
+			class TestXtend {
+				val static int a = Click(#[ a, a.bitwiseAnd(3) << 1 ])
+				def meth() {}
+			}
+			annotation Click {
+				int[] value
+			}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
