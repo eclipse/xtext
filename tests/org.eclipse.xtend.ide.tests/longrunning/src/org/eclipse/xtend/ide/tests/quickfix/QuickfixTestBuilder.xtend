@@ -167,7 +167,7 @@ class QuickfixTestBuilder {
 				modifiedIssueCodes.forEach [ code |
 					setToDefault(code)
 				]
-				setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_COMPLIANCE)
+				setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE)
 				setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION)
 			]
 			modifiedIssueCodes = null;
