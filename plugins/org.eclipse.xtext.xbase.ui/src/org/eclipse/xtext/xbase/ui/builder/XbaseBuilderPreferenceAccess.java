@@ -48,9 +48,9 @@ public class XbaseBuilderPreferenceAccess {
 	public static final String PREF_JAVA_VERSION = "targetJavaVersion"; //$NON-NLS-1$
 	
 	/**
-	 * Preference identifier for using the version from the Java compiler compliance level.
+	 * Preference identifier for using the version from the Java compiler source compatibility level.
 	 */
-	public static final String PREF_USE_COMPILER_COMPLIANCE = "useJavaCompilerCompliance"; //$NON-NLS-1$
+	public static final String PREF_USE_COMPILER_SOURCE = "useJavaCompilerCompliance"; //$NON-NLS-1$
 	
 	public static class Initializer extends BuilderPreferenceAccess.Initializer {
 
@@ -61,7 +61,7 @@ public class XbaseBuilderPreferenceAccess {
 			store.setDefault(PREF_GENERATE_GENERATED, false);
 			store.setDefault(PREF_DATE_IN_GENERATED, false);
 			store.setDefault(PREF_JAVA_VERSION, JavaVersion.JAVA5.toString());
-			store.setDefault(PREF_USE_COMPILER_COMPLIANCE, true);
+			store.setDefault(PREF_USE_COMPILER_SOURCE, true);
 		}
 
 	}
@@ -81,16 +81,16 @@ public class XbaseBuilderPreferenceAccess {
 	}
 
 	public JavaVersion getJavaVersion(Object context, IPreferenceStore preferenceStore) {
-		boolean useCompilerCompliance = preferenceStore.getBoolean(PREF_USE_COMPILER_COMPLIANCE);
-		if (useCompilerCompliance) {
+		boolean useCompilerSource = preferenceStore.getBoolean(PREF_USE_COMPILER_SOURCE);
+		if (useCompilerSource) {
 			IJavaProject javaProject = JavaCore.create(context instanceof IProject ? (IProject) context : null);
-			String compilerCompliance;
+			String compilerSource;
 			if (javaProject != null && javaProject.exists() && javaProject.getProject().isAccessible()) {
-				compilerCompliance = javaProject.getOption(JavaCore.COMPILER_SOURCE, true);
+				compilerSource = javaProject.getOption(JavaCore.COMPILER_SOURCE, true);
 			} else {
-				compilerCompliance = JavaCore.getOption(JavaCore.COMPILER_SOURCE);
+				compilerSource = JavaCore.getOption(JavaCore.COMPILER_SOURCE);
 			}
-			return fromCompilerCompliance(compilerCompliance);
+			return fromCompilerSourceLevel(compilerSource);
 		} else {
 			String stringValue = preferenceStore.getString(PREF_JAVA_VERSION);
 			try {
@@ -104,16 +104,16 @@ public class XbaseBuilderPreferenceAccess {
 	
 	public void setJavaVersion(Object context, JavaVersion version) {
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getWritablePreferenceStore(context);
-		preferenceStore.setValue(PREF_USE_COMPILER_COMPLIANCE, false);
+		preferenceStore.setValue(PREF_USE_COMPILER_SOURCE, false);
 		preferenceStore.setValue(PREF_JAVA_VERSION, version.toString());
 	}
 	
-	private JavaVersion fromCompilerCompliance(String compilerCompliance) {
-		if ("1.8".equals(compilerCompliance))
+	public JavaVersion fromCompilerSourceLevel(String compilerSource) {
+		if ("1.8".equals(compilerSource))
 			return JavaVersion.JAVA8;
-		else if ("1.7".equals(compilerCompliance))
+		else if ("1.7".equals(compilerSource))
 			return JavaVersion.JAVA7;
-		else if ("1.6".equals(compilerCompliance))
+		else if ("1.6".equals(compilerSource))
 			return JavaVersion.JAVA6;
 		else
 			// Versions lower than 1.5 are not supported

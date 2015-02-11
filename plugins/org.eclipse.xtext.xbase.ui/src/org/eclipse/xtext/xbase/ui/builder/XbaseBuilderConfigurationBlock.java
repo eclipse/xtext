@@ -13,12 +13,15 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
+
+import com.google.inject.Inject;
 
 /**
  * Builder configuration block that adds compiler settings for Xbase.
@@ -27,14 +30,16 @@ import org.eclipse.xtext.xbase.compiler.JavaVersion;
  */
 public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 	
+	@Inject
+	private XbaseBuilderPreferenceAccess preferenceAccess;
+	
 	@Override
 	protected void createGeneralSectionItems(Composite composite) {
 		super.createGeneralSectionItems(composite);
 		
-		String javaComplianceVersion = javaValue(JavaCore.COMPILER_SOURCE);
 		final Button useComplianceButton = addCheckBox(composite,
-				"Use language version from compiler source compatibility level (" + javaComplianceVersion + ")",
-				PREF_USE_COMPILER_COMPLIANCE, BOOLEAN_VALUES, 0);
+				"Use language version from Java compiler source compatibility level",
+				PREF_USE_COMPILER_SOURCE, BOOLEAN_VALUES, 0);
 		
 		int valueCount = JavaVersion.values().length;
 		String[] values = new String[valueCount];
@@ -46,13 +51,23 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 		}
 		final Combo versionCombo = addComboBox(composite, "Java language version of generated code:",
 				PREF_JAVA_VERSION, 0, values, valueLabels);
-		versionCombo.setEnabled(!useComplianceButton.getSelection());
-		useComplianceButton.addSelectionListener(new SelectionAdapter() {
+		SelectionListener selectionListener = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				versionCombo.setEnabled(!useComplianceButton.getSelection());
+				boolean useCompliance = useComplianceButton.getSelection();
+				versionCombo.setEnabled(!useCompliance);
+				if (useCompliance) {
+					String javaSourceOption = javaValue(JavaCore.COMPILER_SOURCE);
+					JavaVersion javaVersion = preferenceAccess.fromCompilerSourceLevel(javaSourceOption);
+					JavaVersion selectedVersion = JavaVersion.values()[versionCombo.getSelectionIndex()];
+					if (javaVersion != selectedVersion) {
+						versionCombo.select(javaVersion.ordinal());
+					}
+				}
 			}
-		});
+		};
+		selectionListener.widgetSelected(null);
+		useComplianceButton.addSelectionListener(selectionListener);
 		
 		addCheckBox(composite, "Generate @SuppressWarnings annotations",
 				PREF_GENERATE_SUPPRESS_WARNINGS, BOOLEAN_VALUES, 0);
