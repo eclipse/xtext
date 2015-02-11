@@ -18,9 +18,9 @@ import com.google.common.base.Predicate;
  */
 public class FilteredSubDocument extends SubDocument {
 
-	private final Predicate<ITextReplacer> filter;
+	private final Predicate<? super ITextReplacer> filter;
 
-	public FilteredSubDocument(ITextSegment region, IFormattableDocument parent, Predicate<ITextReplacer> filter) {
+	public FilteredSubDocument(ITextSegment region, IFormattableDocument parent, Predicate<? super ITextReplacer> filter) {
 		super(region, parent);
 		this.filter = filter;
 	}

@@ -82,13 +82,13 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 					contents.add(low + 1, merged);
 				} else {
 					int segmentLengh = getRegion(segment).getLength();
-					int totalLenght = 0;
+					int totalLength = 0;
 					for (int i = 1; i < conflicting.size(); i++)
-						totalLenght += getRegion(conflicting.get(i)).getLength();
-					if (segmentLengh >= totalLenght)
+						totalLength += getRegion(conflicting.get(i)).getLength();
+					if (segmentLengh >= totalLength)
 						for (int i = high - 1; i > low; i--)
 							contents.remove(i);
-					if (segmentLengh > totalLenght) {
+					if (segmentLengh > totalLength) {
 						getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
 						contents.add(low + 1, segment);
 					}

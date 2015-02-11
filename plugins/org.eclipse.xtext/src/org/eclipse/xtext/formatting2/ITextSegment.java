@@ -13,6 +13,9 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
+ * A text segment describes a part of a document and carries a few more information,
+ * e.g. about the current indentation level.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
  */

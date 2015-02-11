@@ -9,12 +9,12 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.internal.CommentReplacer;
-import org.eclipse.xtext.formatting2.internal.FormattableDocument;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
@@ -38,38 +38,53 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
+ * <p>
  * This is an abstract base class for language-specific formatters.
+ * </p>
  * 
+ * <p>
  * It is the formatters responsibility to create a list of text replacements, which, when applied to a text document,
  * increase the documents readability for humans. At the same time the text changes should not have an impact on the
  * semantic model a parser would create from the document.
+ * </p>
  * 
+ * <p>
  * Formatters based on this class compute text replacements in two logical steps: First, they traverses the semantic
- * model and collect {@link ITextReplacer}s. Each TextReplacer is responsible for a (small) section of the document. In
- * a second step, the TextReplacers are are executed from the beginning to the end of the document and create the actual
- * text replacements. This decoupling allows it to traverse the semantic model in arbitrary order and yet compute
- * information that requires sequential processing of the document, e.g. indentation.
+ * model and collect {@link ITextReplacer text replaces}. Each replacer is responsible for a (small) section of the
+ * document. In a second step, the replacers are executed from the beginning to the end of the document and create the
+ * actual {@link TextReplacement text replacements}. This decoupling allows it to traverse the semantic model in
+ * arbitrary order and yet compute information that requires sequential processing of the document, e.g. indentation.
+ * </p>
  *
+ * <p>
  * To allow subclasses to implement this mechanism conveniently, there are several helper classes:
+ * </p>
  * 
  * <ul>
- * <li>{@link ITextRegionAccess} allows to obtain text regions for elements from the semantic model.</li>
- * <li>{@link ITextReplacer} creates {@link ITextReplacement}s for a specific region in the document.</li>
- * <li>{@link IFormattableDocument} collects {@link ITextReplacer}s and validates if they overlap.</li>
+ * <li>{@link ITextRegionAccess} allows to obtain text regions for elements in the semantic model.</li>
+ * <li>{@link ITextReplacer} creates {@link ITextReplacement replacements} for a specific region in the document.</li>
+ * <li>{@link IFormattableDocument} collects {@link ITextReplacer replacers} and validates if they overlap.</li>
  * </ul>
  * 
- * A formatter based on this class typically uses {@link ITextRegionAccess} to obtain the {@link IHiddenRegion} which
- * precedes or trails EObjects, EStructuralFeatures, Keywords, RuleCalls. This {@link IHiddenRegion} represents the
- * whitespace, newlines and comments between semantic tokens. No matter if there are zero or N hidden tokens between two
- * semantic tokens, there is always exactly one {@link IHiddenRegion}. In other words, the {@link IHiddenRegion} groups
- * all hidden tokens between two semantic tokens.
+ * <p>
+ * A formatter based on this class typically uses the {@link ITextRegionAccess} to obtain the {@link IHiddenRegion}
+ * which precedes or trails {@link EObject semantic object}, {@link EStructuralFeature features}, {@link Keyword
+ * keywords}, or {@link RuleCall rule calls}. This {@link IHiddenRegion} represents the whitespace, newlines and
+ * comments between semantic tokens. No matter if there are zero or N hidden tokens between two semantic tokens, there
+ * is always exactly one {@link IHiddenRegion}. In other words, the {@link IHiddenRegion} groups all hidden tokens
+ * between two semantic tokens.
+ * </p>
  * 
+ * <p>
  * For the {@link IHiddenRegion}, the formatter will create a {@link ITextReplacer} and store the replacer in the
  * {@link IFormattableDocument}. Typically this is a {@link HiddenRegionReplacer} parameterized with an
- * {@link IHiddenRegionFormatting}. The {@link HiddenRegionReplacer} will then delegate to {@link WhitespaceReplacer} or
- * {@link CommentReplacer}, depending on which kind of tokens are inside the hidden region.
+ * {@link IHiddenRegionFormatting}. The {@link HiddenRegionReplacer} will then delegate to a {@link WhitespaceReplacer}
+ * or {@link CommentReplacer}, depending on which kind of tokens are inside the hidden region.
+ * </p>
  * 
- * To format a document with syntax confirming to the parser rule
+ * <p>
+ * To format a document with syntax confirming to the parser rule:
+ * </p>
  * 
  * <pre>
  * Entity:
@@ -78,7 +93,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * 	'}';
  * </pre>
  * 
+ * <p>
  * the following formatter implementation (Xtend code) can be used:
+ * </p>
  * 
  * <pre>
  * 	def dispatch void format(Entity entity, extension IFormattableDocument document) {
@@ -92,25 +109,42 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * 	}
  * </pre>
  * 
- * For the full example, see the DomainModel Example. It can be accessed via Eclipse -> File -> New -> Example.
+ * <p>
+ * For the full example, see the DomainModel Example. It can be accessed via {@code Eclipse -> File -> New -> Example.}
+ * </p>
  * 
- * The class 'Entity' is part of the semantic model.
+ * <p>
+ * The class {@code Entity} is part of the semantic model.
+ * </p>
  * 
- * The methods 'regionForFeature()' and 'regionForKeyword' are extension methods:
+ * <p>
+ * The methods {@code regionForFeature()} and {@code regionForKeyword} are extension methods:
  * {@link ITextRegionAccess#regionForFeature(EObject, EStructuralFeature)} and
  * {@link ITextRegionAccess#regionForKeyword(EObject, String)}. They return an {@link ISemanticRegion}.
+ * </p>
  * 
- * The methods 'prepend', 'append' and 'surround' are extension methods from {@link IFormattableDocument}. They create
- * and register an {@link HiddenRegionReplacer} for the {@link IHiddenRegion} before and/or after the provided
- * {@link ISemanticRegion}.
+ * <p>
+ * The methods {@code prepend()}, {@code append()} and {@code surround()} are extension methods from
+ * {@link IFormattableDocument}. They create and register an {@link HiddenRegionReplacer} for the {@link IHiddenRegion}
+ * before and/or after the provided {@link ISemanticRegion}.
+ * </p>
+ *
+ * <p>
+ * Override {@code create*()} methods to customize formatter-local services.
+ * </p>
  * 
- * @see org.eclipse.xtext.formatting2 for an introduction to the topic
- * @see IFormatter2 to invoke a formatter
+ * <p>
+ * This implementation is stateful and cannot be used in parallel.
+ * </p>
  * 
- * @see #format(Object, IFormattableDocument) - overwrite to implement a formatter
- * @see #initalize(FormatterRequest) - overwrite to set values of member fields
- * @see #reset() - overwrite to cleanup after execution
- * @see "overwrite create*() methods to customize formatter-local services"
+ * @see org.eclipse.xtext.formatting2 The package {@code org.eclipse.xtext.formatting2} for an introduction to the topic
+ * @see IFormatter2 {@code IFormatter2}: the interface to invoke the formatter
+ * 
+ * @see #format(Object, IFormattableDocument) The method {@code format(Object, IFormattableDocument)} should be
+ *      overridden to implement a formatter
+ * @see #initalize(FormatterRequest) The method {@code initalize(FormatterRequest)} should be overridden to set values
+ *      of member fields
+ * @see #reset() The method {@code reset()} should be overridden to cleanup after execution.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
@@ -132,17 +166,17 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	/**
-	 * Fall-back for null-values in a subclasse's dispatch method.
+	 * Fall-back for subclasses that accidently try to dispatch over null values.
 	 */
 	protected void _format(Void obj, IFormattableDocument document) {
 	}
 
 	/**
-	 * For {@link XtextResource}s, assume we want to format the first EObject from the contents list only. Because
+	 * For {@link XtextResource resources}, assume we want to format the first EObject from the contents list only. Because
 	 * that's where the parser puts the semantic model.
 	 */
 	protected void _format(XtextResource resource, IFormattableDocument document) {
-		EList<EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (!contents.isEmpty()) {
 			EObject model = contents.get(0);
 			format(model, document);
@@ -164,10 +198,6 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		}
 		String elementName = new GrammarElementTitleSwitch().showQualified().showRule().doSwitch(grammarElement);
 		throw new IllegalStateException("No " + ITextReplacer.class.getSimpleName() + " configured for " + elementName);
-	}
-
-	public IFormattableDocument createFormattableDocument() {
-		return new RootDocument(this);
 	}
 
 	public IFormattableSubDocument createFormattableSubDocument(ITextSegment region, IFormattableDocument parent) {
@@ -201,15 +231,19 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	public ITextReplacer createWhitespaceReplacer(ITextSegment hiddens, IHiddenRegionFormatting formatting) {
 		return new WhitespaceReplacer(hiddens, formatting);
 	}
+	
+	public IFormattableDocument createFormattableRootDocument() {
+		return new RootDocument(this);
+	}
 
 	@Override
-	final public List<ITextReplacement> format(FormatterRequest request) {
+	public final List<ITextReplacement> format(FormatterRequest request) {
 		try {
 			initalize(request);
-			IFormattableDocument document = createFormattableDocument();
+			IFormattableDocument document = createFormattableRootDocument();
 			XtextResource xtextResource = request.getTextRegionAccess().getResource();
 			format(xtextResource, document);
-			List<ITextReplacement> replacements = ((FormattableDocument) document).renderToTextReplacements();
+			List<ITextReplacement> replacements = document.renderToTextReplacements();
 			return replacements;
 		} finally {
 			reset();

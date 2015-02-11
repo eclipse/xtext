@@ -21,15 +21,18 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * A Request tells the formatter what and how to format.
+ * <p>A request tells the formatter what and how to format.</p>
  * 
- * When invoking the formatter, the request is passed into {@link IFormatter2#format(FormatterRequest)}.
+ * <p>When invoking the formatter, the request is passed into {@link IFormatter2#format(FormatterRequest)}.</p>
  * 
- * @see #textRegionAccess - the to-be-formatted semantic model with text regions.
- * @see #preferences - provide for preferences key from e.g. {@link FormatterPreferenceKeys}.
- * @see #regions - restrict the text regions for which {@link ITextReplacement}s are produced.
- * @see #allowIdentityEdits - do not suppress text replacements that do not cause changes.
- * @see #formatUndenfinedTokensOnly - only format regions that have no whitespace information yet.
+ * <p>A request carries information about:<p>
+ * <ul>
+ * <li> The {@link #textRegionAccess} which allows to obtain the to-be-formatted semantic model with text regions.</li>
+ * <li>{@link #preferences Preferences} with keys from e.g. {@link FormatterPreferenceKeys}.</li>
+ * <li>{@link #regions} that describe how to restrict the text regions for which {@link ITextReplacement replacements} are produced.</li>
+ * <li>An option to {@link #allowIdentityEdits()} which will disable to automated suppression of text replacements that do not cause changes.</li>
+ * <li>A setting for green-field formatting ({@link #formatUndenfinedTokensOnly}): only format regions that have no whitespace information yet.</li>
+ * </ul>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
@@ -37,21 +40,30 @@ import com.google.common.collect.Maps;
 public class FormatterRequest {
 
 	/**
-	 * Restrict the formatter to produce {@link ITextReplacement}s inside the specified regions only. If no regions are
+	 * Restrict the formatter to produce {@link ITextReplacement replacements} inside the specified regions only. If no regions are
 	 * specified, the whole document is formatted.
 	 */
 	private Collection<ITextRegion> regions = Lists.newArrayList();
 
+	/**
+	 * @see #regions
+	 */
 	public FormatterRequest addRegion(ITextRegion region) {
 		this.regions.add(region);
 		return this;
 	}
 
+	/**
+	 * @see #regions
+	 */
 	public FormatterRequest setRegions(Collection<ITextRegion> regions) {
 		this.regions = regions;
 		return this;
 	}
 
+	/**
+	 * @see #regions
+	 */
 	public Collection<ITextRegion> getRegions() {
 		return regions;
 	}
@@ -61,6 +73,9 @@ public class FormatterRequest {
 	 */
 	private ITextRegionAccess textRegionAccess;
 
+	/**
+	 * @see #textRegionAccess
+	 */
 	public ITextRegionAccess getTextRegionAccess() {
 		return textRegionAccess;
 	}
@@ -78,18 +93,24 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * Allow the formatter to produce {@link ITextReplacement}s that replace regions with text equal to the text of the
-	 * region. Since these TextReplacements do not cause text changes, one usually doens't want to have them in a
+	 * Allow the formatter to produce {@link ITextReplacement replacements} that replace regions with text equal to the text of the
+	 * region. Since these replacements do not cause text changes, one usually doens't want to have them in a
 	 * production environment. However, they are useful to test if a formatter considers all significant regions, e.g.
-	 * all {@link IHiddenRegion}s.
+	 * all {@link IHiddenRegion hidden regions}.
 	 */
 	private boolean allowIdentityEdits;
 
+	/**
+	 * @see #allowIdentityEdits
+	 */
 	public FormatterRequest setAllowIdentityEdits(boolean allowIdentityEdits) {
 		this.allowIdentityEdits = allowIdentityEdits;
 		return this;
 	}
 
+	/**
+	 * @see #allowIdentityEdits
+	 */
 	public boolean allowIdentityEdits() {
 		return allowIdentityEdits;
 	}
@@ -99,11 +120,17 @@ public class FormatterRequest {
 	 */
 	private ITypedPreferenceValues preferences;
 
+	/**
+	 * @see #preferences
+	 */
 	public FormatterRequest setPreferences(ITypedPreferenceValues preferenceValues) {
 		this.preferences = preferenceValues;
 		return this;
 	}
 
+	/**
+	 * @see #preferences
+	 */
 	public ITypedPreferenceValues getPreferences() {
 		if (preferences == null)
 			preferences = new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap());
@@ -111,34 +138,40 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * {@link IHiddenRegion}s are considers undefined when their whitespace/comments are unknown. This happens for
-	 * HiddenRegions that emerged between programmatically created (not parsed!) model elements.
+	 * {@link IHiddenRegion Hidden regions} are considered undefined when their whitespace/comments are unknown. This happens for
+	 * regions that emerged between programmatically created (not parsed!) model elements.
 	 * 
 	 * Enable this options if, for example, you serialize a model after applying a quick fix, refactoring or have it
 	 * edited in a graphical editor and you want to keep the whitespace-changes to a minimum.
+	 */
+	private boolean formatUndenfinedTokensOnly;
+	
+	/**
+	 * @see #formatUndenfinedTokensOnly
 	 */
 	public boolean isFormatUndefinedHiddenRegionsOnly() {
 		return formatUndenfinedTokensOnly;
 	}
 
-	private boolean formatUndenfinedTokensOnly;
-
+	/**
+	 * @see #formatUndenfinedTokensOnly
+	 */
 	public FormatterRequest setFormatUndenfinedTokensOnly(boolean formatUndenfinedTokensOnly) {
 		this.formatUndenfinedTokensOnly = formatUndenfinedTokensOnly;
 		return this;
 	}
 
 	/**
-	 * Exceptions that occur during formatting are passed to this handler. The handler may choose to throw them, log
-	 * them, or ignore them. Formatting continues, unless the handler throws an exception.
+	 * <p>Exceptions that occur during formatting are passed to this handler. The handler may choose to throw them, log
+	 * them, or ignore them. Formatting continues, unless the handler throws an exception.</p>
 	 * 
-	 * Logging exceptions and continuing formatting is the default behavior.
+	 * <p>Logging exceptions and continuing formatting is the default behavior.</p>
 	 * 
-	 * Throwing exceptions is useful in unit tests.
+	 * <p>Throwing exceptions is useful in unit tests.</p>
 	 * 
-	 * Ignoring exceptions is useful when formatting a document with syntax errors.
+	 * <p>Ignoring exceptions is useful when formatting a document with syntax errors.</p>
 	 * 
-	 * Defaults to the {@link ExceptionAcceptor#LOGGING Logging Acceptor}
+	 * <p>Defaults to the {@link ExceptionAcceptor#LOGGING Logging Acceptor}</p>
 	 * 
 	 * @see ExceptionAcceptor#LOGGING
 	 * @see ExceptionAcceptor#THROWING
@@ -146,12 +179,18 @@ public class FormatterRequest {
 	 */
 	private IAcceptor<Exception> exceptionHandler;
 
+	/**
+	 * @see #exceptionHandler
+	 */
 	public IAcceptor<Exception> getExceptionHandler() {
 		if (exceptionHandler == null)
 			return ExceptionAcceptor.LOGGING;
 		return exceptionHandler;
 	}
 
+	/**
+	 * @see #exceptionHandler
+	 */
 	public FormatterRequest setExceptionHandler(IAcceptor<Exception> problemHandler) {
 		this.exceptionHandler = problemHandler;
 		return this;

@@ -44,15 +44,15 @@ public class TextRegionsInTextToString {
 	protected String box(String title, String content) {
 		final int width = 80;
 		final int min = 3;
-		int titleLenght = title.length() + 2;
-		final int left = Math.max((width - titleLenght) / 2, min);
+		int titleLength = title.length() + 2;
+		final int left = Math.max((width - titleLength) / 2, min);
 		StringBuilder result = new StringBuilder();
 		result.append(Strings.repeat("-", left));
 		result.append(" ");
 		result.append(title);
 		result.append(" ");
 		if (left > min)
-			result.append(Strings.repeat("-", width - left - titleLenght));
+			result.append(Strings.repeat("-", width - left - titleLength));
 		result.append("\n");
 		result.append(org.eclipse.xtext.util.Strings.trimTrailingLineBreak(content));
 		result.append("\n");

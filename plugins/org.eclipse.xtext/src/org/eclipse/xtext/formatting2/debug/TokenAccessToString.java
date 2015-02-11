@@ -74,11 +74,11 @@ public class TokenAccessToString {
 		return hightlightOrigin;
 	}
 
-	protected String quote(String string, int maxLenght) {
+	protected String quote(String string, int maxLength) {
 		if (string == null)
 			return "null";
-		if (string.length() > maxLenght)
-			string = string.substring(0, maxLenght - 3) + "...";
+		if (string.length() > maxLength)
+			string = string.substring(0, maxLength - 3) + "...";
 		string = string.replace("\n", "\\n").replace("\r", "\\r");
 		return "\"" + string + "\"";
 	}

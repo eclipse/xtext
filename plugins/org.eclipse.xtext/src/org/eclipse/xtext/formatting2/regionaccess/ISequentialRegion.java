@@ -10,10 +10,10 @@ package org.eclipse.xtext.formatting2.regionaccess;
 import org.eclipse.xtext.formatting2.ITextSegment;
 
 /**
- * Super-Interface for {@link IHiddenRegion} and {@link ISemanticRegion}.
+ * <p>Common interface for {@link IHiddenRegion} and {@link ISemanticRegion}.</p>
  * 
- * {@link IHiddenRegion} and {@link ISemanticRegion} are arranged strictly alternating in a linked list. This interface
- * provides the method to navigate that list.
+ * <p>{@link IHiddenRegion} and {@link ISemanticRegion} are arranged strictly alternating in a linked list. This interface
+ * provides the method to navigate that list.</p>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */

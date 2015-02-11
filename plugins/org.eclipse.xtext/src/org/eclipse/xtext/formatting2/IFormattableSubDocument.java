@@ -7,6 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+/**
+ * A sub document describes the formatting for a part of the entire document.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @see AbstractFormatter2#createFormattableSubDocument(ITextSegment, IFormattableDocument)
+ */
 public interface IFormattableSubDocument extends IFormattableDocument {
 	IFormattableSubDocument requireFitsInLine(); // TODO: fits in line completely vs. first line fits in line.
 
