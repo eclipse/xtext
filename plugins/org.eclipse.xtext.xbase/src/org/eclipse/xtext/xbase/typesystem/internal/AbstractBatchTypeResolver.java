@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
@@ -31,7 +30,8 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 
-	private static final Logger LOG = Logger.getLogger(AbstractBatchTypeResolver.class);
+	//non-final because of LoggerTester test
+	private static Logger LOG = Logger.getLogger(AbstractBatchTypeResolver.class);
 	
 	@Inject
 	private IBatchScopeProvider scopeProvider;
@@ -81,9 +81,7 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	/* @NonNull */
 	@Override
 	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, /* @Nullable */ CancelIndicator monitor) {
-		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
-			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage", new Exception());
-		}
+		validateResourceState(resource);
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
 			IFeatureScopeSession session = scopeProvider.newSession(resource);
