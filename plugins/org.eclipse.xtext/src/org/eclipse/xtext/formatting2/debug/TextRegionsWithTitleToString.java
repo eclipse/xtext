@@ -56,15 +56,15 @@ public class TextRegionsWithTitleToString {
 	protected String box(String title, String content) {
 		final int width = 80;
 		final int min = 3;
-		int titleLenght = title.length() + 2;
-		final int left = Math.max((width - titleLenght) / 2, min);
+		int titleLength = title.length() + 2;
+		final int left = Math.max((width - titleLength) / 2, min);
 		StringBuilder result = new StringBuilder();
 		result.append(Strings.repeat("-", left));
 		result.append(" ");
 		result.append(title);
 		result.append(" ");
 		if (left > min)
-			result.append(Strings.repeat("-", width - left - titleLenght));
+			result.append(Strings.repeat("-", width - left - titleLength));
 		result.append("\n");
 		result.append(org.eclipse.xtext.util.Strings.trimTrailingLineBreak(content));
 		result.append("\n");
@@ -139,7 +139,7 @@ public class TextRegionsWithTitleToString {
 		for (int i = 0; i < this.items.size(); i++) {
 			Item item = this.items.get(i);
 			ITextSegment region = item.getRegion();
-			String regionStr = "offset=" + region.getOffset() + " lenght=" + region.getLength();
+			String regionStr = "offset=" + region.getOffset() + " length=" + region.getLength();
 			String open = i < BRACKETS_OPEN.length ? BRACKETS_OPEN[i] : "[" + i + "[";
 			String close = i < BRACKETS_CLOSE.length ? BRACKETS_CLOSE[i] : "]" + i + "]";
 			builder.append(open + close + ": " + item.getTitle() + " at " + regionStr + "\n");

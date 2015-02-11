@@ -54,23 +54,23 @@ public class TextRegionListToString {
 	@Override
 	public String toString() {
 		int offsetDigits = 0;
-		int lenghtDigits = 0;
+		int lengthDigits = 0;
 		for (Item item : items) {
 			if (item.region != null) {
-				int lenghtD = String.valueOf(item.region.getLength()).length();
-				if (lenghtDigits < lenghtD)
-					lenghtDigits = lenghtD;
-				int lenghtO = String.valueOf(item.region.getOffset()).length();
-				if (offsetDigits < lenghtO)
-					offsetDigits = lenghtO;
+				int lengthD = String.valueOf(item.region.getLength()).length();
+				if (lengthDigits < lengthD)
+					lengthDigits = lengthD;
+				int lengthO = String.valueOf(item.region.getOffset()).length();
+				if (offsetDigits < lengthO)
+					offsetDigits = lengthO;
 			}
 		}
 		List<String> result = Lists.newArrayListWithExpectedSize(items.size());
-		String prefix = Strings.repeat(" ", offsetDigits + lenghtDigits + 2);
+		String prefix = Strings.repeat(" ", offsetDigits + lengthDigits + 2);
 		for (Item item : items) {
 			if (item.region != null) {
 				String offset = Strings.padStart(String.valueOf(item.region.getOffset()), offsetDigits, ' ');
-				String length = Strings.padStart(String.valueOf(item.region.getLength()), lenghtDigits, ' ');
+				String length = Strings.padStart(String.valueOf(item.region.getLength()), lengthDigits, ' ');
 				result.add(offset + " " + length + " " + item.text);
 			} else if (item.indented) {
 				result.add(prefix + item.text);

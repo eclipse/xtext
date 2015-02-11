@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.formatting2
 
 import com.google.inject.Inject
@@ -46,6 +53,9 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 class XbaseFormatter extends XtypeFormatter {
 
 	@Inject @Accessors(PUBLIC_GETTER) extension XbaseGrammarAccess grammar
@@ -227,8 +237,8 @@ class XbaseFormatter extends XtypeFormatter {
 			val operator = entry.leadingSeparator.separator
 			formatFeatureCallTypeParameters(call, format)
 			val feature = call.regionForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
-			val autowrapLenght = Math.min(entry.region.length, feature.length * 2)
-			operator.prepend[noSpace].append[noSpace; autowrap(autowrapLenght) onAutowrap = indentOnce]
+			val autowrapLength = Math.min(entry.region.length, feature.length * 2)
+			operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
 			if (call.explicitOperationCall) {
 				val open = call.regionForKeyword("(").prepend[noSpace]
 				val close = call.regionForKeyword(")")

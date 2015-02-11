@@ -14,7 +14,7 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 @FinalFieldsConstructor class IndentOnceAutowrapFormatter implements IAutowrapFormatter {
 	val IHiddenRegion last

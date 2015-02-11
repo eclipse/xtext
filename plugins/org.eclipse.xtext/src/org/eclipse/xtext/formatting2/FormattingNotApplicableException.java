@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+/**
+ * Indicates that a condition formatting attempt failed.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @SuppressWarnings("serial")
 public class FormattingNotApplicableException extends RuntimeException {
 }

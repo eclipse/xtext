@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xbase.formatting2;
 
 import com.google.common.base.Objects;
@@ -74,6 +81,9 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @SuppressWarnings("all")
 public class XbaseFormatter extends XtypeFormatter {
   @Inject
@@ -633,7 +643,7 @@ public class XbaseFormatter extends XtypeFormatter {
         int _length = _region.getLength();
         int _length_1 = feature.getLength();
         int _multiply = (_length_1 * 2);
-        final int autowrapLenght = Math.min(_length, _multiply);
+        final int autowrapLength = Math.min(_length, _multiply);
         final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -645,7 +655,7 @@ public class XbaseFormatter extends XtypeFormatter {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
-            it.autowrap(autowrapLenght);
+            it.autowrap(autowrapLength);
             it.setOnAutowrap(indentOnce);
           }
         };
@@ -2138,12 +2148,12 @@ public class XbaseFormatter extends XtypeFormatter {
             format.append(_prepend, _function_2);
           }
         }
-        format.append(open, ((Procedure1<IHiddenRegionFormatter>)init));
+        format.append(open, init);
         EList<JvmFormalParameter> _declaredFormalParameters_2 = expr.getDeclaredFormalParameters();
         boolean _isEmpty_1 = _declaredFormalParameters_2.isEmpty();
         boolean _not = (!_isEmpty_1);
         if (_not) {
-          format.prepend(last, ((Procedure1<IHiddenRegionFormatter>)init));
+          format.prepend(last, init);
         }
       }
       return last;
