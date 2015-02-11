@@ -3946,6 +3946,29 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_142() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class TestXtend {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val static int a = Click(#[ a, a.bitwiseAnd(3) << 1 ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation Click {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

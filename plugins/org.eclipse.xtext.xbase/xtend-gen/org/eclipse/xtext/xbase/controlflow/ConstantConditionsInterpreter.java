@@ -143,8 +143,15 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XAbstractFeatureCall it, final EvaluationContext context) {
     final JvmIdentifiableElement feature = this.getFeature(it, context);
-    boolean _eIsProxy = feature.eIsProxy();
-    if (_eIsProxy) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(feature, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _eIsProxy = feature.eIsProxy();
+      _or = _eIsProxy;
+    }
+    if (_or) {
       return EvaluationResult.NOT_A_CONSTANT;
     }
     boolean _matched = false;

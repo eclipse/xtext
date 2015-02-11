@@ -115,7 +115,7 @@ class ConstantConditionsInterpreter {
 
 	def dispatch EvaluationResult internalEvaluate(XAbstractFeatureCall it, EvaluationContext context) {
 		val feature = getFeature(it, context)
-		if (feature.eIsProxy) {
+		if (feature == null || feature.eIsProxy) {
 			return EvaluationResult.NOT_A_CONSTANT
 		}
 		switch feature {
