@@ -18,6 +18,8 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInpu
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.junit.After
 import org.junit.Test
+import org.eclipse.xtext.junit4.logging.LoggingTester
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractBatchTypeResolver
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -66,5 +68,50 @@ class XtendHoverInEditorTest extends AbstractXtendUITestCase {
 		val info2 = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
 		assertFalse(info2.html.contains("Hello Foo"))
 		assertTrue(info2.html.contains("Hello BAZ"))
+	}
+	
+	@Test def void testHoverOfReferencedElementWithAnnotation() {
+		val contentFoo = '''
+			/**
+			 * Hello Foo
+			 */
+			@SuppressWarnings("foo")
+			class Foo {}
+		'''
+		val contentBar = '''
+			class Bar extends Foo {}
+		'''
+		val fileFoo = createFile("Foo.xtend",contentFoo)
+		val fileBar = createFile("Bar.xtend",contentBar)
+		waitForBuild(null)
+		
+		val editor = openEditor(fileBar)
+		val loggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver) [
+			val info = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
+			assertTrue(info.html,info.html.contains("Hello Foo"))
+			assertTrue(info.html,info.html.contains('SuppressWarnings</a>("foo")'))
+		]
+		assertEquals(0, loggings)
+		
+		// check dirty State
+		val fooEditor = openEditor(fileFoo)
+		fooEditor.document.set('''
+			/**
+			 * Hello BAZ
+			 */
+			@SuppressWarnings("bar")
+			class Foo {}
+		''')
+		fooEditor.waitForReconciler
+		editor.waitForDirtyStateUpdater
+		editor.waitForReconciler
+		
+		val moreLoggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver) [
+			val info2 = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
+			assertFalse(info2.html.contains("Hello Foo"))
+			assertTrue(info2.html.contains("Hello BAZ"))
+			assertTrue(info2.html, info2.html.contains('SuppressWarnings</a>("bar")'))
+		]
+		assertEquals(0, moreLoggings)
 	}
 }

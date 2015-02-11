@@ -44,7 +44,6 @@ import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -68,9 +67,6 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 
@@ -104,7 +100,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	@Inject
 	protected IEObjectDocumentationProvider documentationProvider;
 	@Inject
-	protected JvmModelGenerator jvmModelGenerator;
+	protected JvmAnnotationReferencePrinter annotationValuePrinter;
 	@Inject
 	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
 	@Inject
@@ -277,19 +273,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		}
 		for (JvmAnnotationReference annotationReference : annotations) {
 			if (!typeExtensions.isSynthetic(annotationReference)) {
-				buffer.append("@");
-				URI uri = EcoreUtil.getURI(annotationReference.getAnnotation());
-				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, annotationReference.getAnnotation().getSimpleName()));
-				if (annotationReference.getExplicitValues().size() > 0) {
-					buffer.append("(");
-					for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
-						ITreeAppendable appendable = new FakeTreeAppendable();
-						jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
-						String java = appendable.getContent();
-						buffer.append(java);
-					}
-					buffer.append(")");
-				}
+				buffer.append(annotationValuePrinter.toHtmlString(annotationReference));
 				buffer.append("<br>");
 			}
 		}

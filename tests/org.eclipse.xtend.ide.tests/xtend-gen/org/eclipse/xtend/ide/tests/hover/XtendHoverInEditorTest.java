@@ -16,6 +16,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractBatchTypeResolver;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -110,6 +112,95 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       String _html_2 = info2.getHtml();
       boolean _contains_2 = _html_2.contains("Hello BAZ");
       Assert.assertTrue(_contains_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testHoverOfReferencedElementWithAnnotation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Hello Foo");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("@SuppressWarnings(\"foo\")");
+      _builder.newLine();
+      _builder.append("class Foo {}");
+      _builder.newLine();
+      final String contentFoo = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class Bar extends Foo {}");
+      _builder_1.newLine();
+      final String contentBar = _builder_1.toString();
+      final IFile fileFoo = this.helper.createFile("Foo.xtend", contentFoo);
+      final IFile fileBar = this.helper.createFile("Bar.xtend", contentBar);
+      this._syncUtil.waitForBuild(null);
+      final XtextEditor editor = this.helper.openEditor(fileBar);
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
+          Region _region = new Region(19, 1);
+          Object _hoverInfo2 = ((ITextHoverExtension2) XtendHoverInEditorTest.this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
+          final XtextBrowserInformationControlInput info = ((XtextBrowserInformationControlInput) _hoverInfo2);
+          String _html = info.getHtml();
+          String _html_1 = info.getHtml();
+          boolean _contains = _html_1.contains("Hello Foo");
+          Assert.assertTrue(_html, _contains);
+          String _html_2 = info.getHtml();
+          String _html_3 = info.getHtml();
+          boolean _contains_1 = _html_3.contains("SuppressWarnings</a>(\"foo\")");
+          Assert.assertTrue(_html_2, _contains_1);
+        }
+      };
+      final int loggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver.class, _function);
+      Assert.assertEquals(0, loggings);
+      final XtextEditor fooEditor = this.helper.openEditor(fileFoo);
+      IXtextDocument _document = fooEditor.getDocument();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("/**");
+      _builder_2.newLine();
+      _builder_2.append(" ");
+      _builder_2.append("* Hello BAZ");
+      _builder_2.newLine();
+      _builder_2.append(" ");
+      _builder_2.append("*/");
+      _builder_2.newLine();
+      _builder_2.append("@SuppressWarnings(\"bar\")");
+      _builder_2.newLine();
+      _builder_2.append("class Foo {}");
+      _builder_2.newLine();
+      _document.set(_builder_2.toString());
+      this._syncUtil.waitForReconciler(fooEditor);
+      this._syncUtil.waitForDirtyStateUpdater(editor);
+      this._syncUtil.waitForReconciler(editor);
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
+          Region _region = new Region(19, 1);
+          Object _hoverInfo2 = ((ITextHoverExtension2) XtendHoverInEditorTest.this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
+          final XtextBrowserInformationControlInput info2 = ((XtextBrowserInformationControlInput) _hoverInfo2);
+          String _html = info2.getHtml();
+          boolean _contains = _html.contains("Hello Foo");
+          Assert.assertFalse(_contains);
+          String _html_1 = info2.getHtml();
+          boolean _contains_1 = _html_1.contains("Hello BAZ");
+          Assert.assertTrue(_contains_1);
+          String _html_2 = info2.getHtml();
+          String _html_3 = info2.getHtml();
+          boolean _contains_2 = _html_3.contains("SuppressWarnings</a>(\"bar\")");
+          Assert.assertTrue(_html_2, _contains_2);
+        }
+      };
+      final int moreLoggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver.class, _function_1);
+      Assert.assertEquals(0, moreLoggings);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
