@@ -19,15 +19,13 @@ class ReadAndWriteTracking {
 	
 	def markReadAccess(EObject object) {
 		if (!isRead(object)) {
-			object.eAdapters.add(READ_MARKER)
+			object.eAdapters.add(new ReadMarker)
 		}
 	}
 	
 	def isRead(EObject object) {
-		object.eAdapters.contains(READ_MARKER)
+		object.eAdapters.filter(ReadMarker).head !== null
 	}
-	
-	static final AdapterImpl READ_MARKER = new AdapterImpl() {}
 	
 	def markInitialized(EObject it, JvmConstructor constructor) {
 		var initializedMarker = initializedMarker ?: newInitalizedMarker
@@ -46,6 +44,10 @@ class ReadAndWriteTracking {
 	
 	protected def getInitializedMarker(EObject object) {
 		object.eAdapters.filter(ReadAndWriteTracking.InitializedMarker).head
+	}
+	
+	protected static class ReadMarker extends AdapterImpl {
+		
 	}
 	
 	protected static class InitializedMarker extends AdapterImpl {

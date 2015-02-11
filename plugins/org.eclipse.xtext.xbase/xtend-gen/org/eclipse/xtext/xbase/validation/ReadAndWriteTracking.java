@@ -22,6 +22,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ReadAndWriteTracking {
+  protected static class ReadMarker extends AdapterImpl {
+  }
+  
   protected static class InitializedMarker extends AdapterImpl {
     private Set<JvmConstructor> byConstructors = CollectionLiterals.<JvmConstructor>newHashSet();
     
@@ -40,18 +43,18 @@ public class ReadAndWriteTracking {
     boolean _not = (!_isRead);
     if (_not) {
       EList<Adapter> _eAdapters = object.eAdapters();
-      _xifexpression = _eAdapters.add(ReadAndWriteTracking.READ_MARKER);
+      ReadAndWriteTracking.ReadMarker _readMarker = new ReadAndWriteTracking.ReadMarker();
+      _xifexpression = _eAdapters.add(_readMarker);
     }
     return _xifexpression;
   }
   
   public boolean isRead(final EObject object) {
     EList<Adapter> _eAdapters = object.eAdapters();
-    return _eAdapters.contains(ReadAndWriteTracking.READ_MARKER);
+    Iterable<ReadAndWriteTracking.ReadMarker> _filter = Iterables.<ReadAndWriteTracking.ReadMarker>filter(_eAdapters, ReadAndWriteTracking.ReadMarker.class);
+    ReadAndWriteTracking.ReadMarker _head = IterableExtensions.<ReadAndWriteTracking.ReadMarker>head(_filter);
+    return (_head != null);
   }
-  
-  private final static AdapterImpl READ_MARKER = new AdapterImpl() {
-  };
   
   public boolean markInitialized(final EObject it, final JvmConstructor constructor) {
     boolean _xblockexpression = false;
