@@ -422,7 +422,7 @@ public class QuickfixTestBuilder {
             }
           };
           IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
-          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_COMPLIANCE);
+          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE);
           it.setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION);
         }
       };
