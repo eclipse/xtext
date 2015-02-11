@@ -6,6 +6,7 @@ import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -143,6 +144,10 @@ public class XtendBatchCompiler {
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
 
 	private URI baseURI;
+
+	private URLClassLoader jvmTypesClassLoader;
+
+	private URLClassLoader annotationProcessingClassLoader;
 
 	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
 		this.currentClassLoader = currentClassLoader;
@@ -508,11 +513,28 @@ public class XtendBatchCompiler {
 			}
 			generateJavaFiles(resourceSet);
 		} finally {
+			cleanupClassLoaders();
 			if (isDeleteTempDirectory()) {
 				deleteTmpFolders();
 			}
 		}
 		return true;
+	}
+
+	private void cleanupClassLoaders() {
+		annotationProcessorFactory.setClassLoader(null);
+		if (Closeable.class.isAssignableFrom(URLClassLoader.class)) {
+			try {
+				((Closeable) jvmTypesClassLoader).close();
+			} catch (Exception e) {
+				log.warn("Unable to close the jvm type classloader", e);
+			}
+			try {
+				((Closeable) annotationProcessingClassLoader).close();
+			} catch (Exception e) {
+				log.warn("Unable to close the annotation processing classloader", e);
+			}			
+		}
 	}
 
 	/**
@@ -719,14 +741,14 @@ public class XtendBatchCompiler {
 				parentClassLoader = new BootClassLoader(toArray(bootClassPathUrls, URL.class));
 			}
 		}
-		ClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), parentClassLoader);
-		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess, null);
-		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
+		jvmTypesClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), parentClassLoader);
+		new ClasspathTypeProvider(jvmTypesClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess, null);
+		((XtextResourceSet) resourceSet).setClasspathURIContext(jvmTypesClassLoader);
 
 		// for annotation processing we need to have the compiler's classpath as a parent.
-		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class),
+		annotationProcessingClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class),
 				currentClassLoader);
-		annotationProcessorFactory.setClassLoader(urlClassLoaderForAnnotationProcessing);
+		annotationProcessorFactory.setClassLoader(annotationProcessingClassLoader);
 	}
 
 	protected void reportIssues(Iterable<Issue> issues) {

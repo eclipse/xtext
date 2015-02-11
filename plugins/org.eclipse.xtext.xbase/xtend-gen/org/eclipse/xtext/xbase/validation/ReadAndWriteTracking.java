@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.validation;
 import com.google.common.collect.Iterables;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -40,17 +42,34 @@ public class ReadAndWriteTracking {
     boolean _not = (!_isRead);
     if (_not) {
       EList<Adapter> _eAdapters = object.eAdapters();
-      _xifexpression = _eAdapters.add(ReadAndWriteTracking.READ_MARKER);
+      _xifexpression = _eAdapters.add(ReadAndWriteTracking.READMARKER);
     }
     return _xifexpression;
   }
   
   public boolean isRead(final EObject object) {
     EList<Adapter> _eAdapters = object.eAdapters();
-    return _eAdapters.contains(ReadAndWriteTracking.READ_MARKER);
+    return _eAdapters.contains(ReadAndWriteTracking.READMARKER);
   }
   
-  private final static AdapterImpl READ_MARKER = new AdapterImpl() {
+  private final static Adapter READMARKER = new Adapter() {
+    @Override
+    public Notifier getTarget() {
+      return null;
+    }
+    
+    @Override
+    public boolean isAdapterForType(final Object type) {
+      return false;
+    }
+    
+    @Override
+    public void notifyChanged(final Notification notification) {
+    }
+    
+    @Override
+    public void setTarget(final Notifier newTarget) {
+    }
   };
   
   public boolean markInitialized(final EObject it, final JvmConstructor constructor) {
