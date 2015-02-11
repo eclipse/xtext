@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.example.arithmetics.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.example.arithmetics.ui.ArithmeticsUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
+public abstract class AbstractArithmeticsUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractArithmeticsUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

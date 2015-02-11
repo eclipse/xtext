@@ -13,7 +13,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */
