@@ -19,7 +19,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
  * An implementation of the model object '<em><b>Multi</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

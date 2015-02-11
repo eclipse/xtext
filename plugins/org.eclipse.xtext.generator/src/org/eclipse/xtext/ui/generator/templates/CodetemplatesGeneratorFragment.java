@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.Naming;
  */
 public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	
-	private boolean suppressRestriction = true;
+	private boolean suppressRestriction = false;
 
 	/**
 	 * Set this flag to <code>false</code> if you don't want to add the 
