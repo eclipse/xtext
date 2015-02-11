@@ -53,7 +53,6 @@ import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
-import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider;
 import org.eclipse.xtext.findReferences.ReferenceFinder;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -245,8 +244,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		super.configure(binder);
 		binder.bind(boolean.class).annotatedWith(Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR))
 				.toInstance(false);
-		binder.bind(String.class).annotatedWith(Names.named(AbstractMultiLineCommentProvider.START_TAG))
-				.toInstance("/\\*\\*(?!\\*)");
 	}
 
 	@Override
