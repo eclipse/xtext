@@ -367,6 +367,8 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		}
 		for(JvmMember member: members) {
 			if (member instanceof JvmDeclaredType) {
+				// add nested types also with the dot delimiter
+				descriptions.add(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(member.getQualifiedName('.')), member));
 				doGetAllDescriptions((JvmDeclaredType) member, descriptions);
 			}
 		}

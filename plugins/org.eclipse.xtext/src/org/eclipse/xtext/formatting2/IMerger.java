@@ -10,6 +10,9 @@ package org.eclipse.xtext.formatting2;
 import java.util.List;
 
 /**
+ * Generic interface to describe an external merger for some 
+ * mergable type.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
  */

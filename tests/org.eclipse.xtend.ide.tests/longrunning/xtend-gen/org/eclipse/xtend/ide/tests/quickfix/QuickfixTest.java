@@ -27,11 +27,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-
+  
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-
+  
   private final static String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   
   @After
@@ -87,7 +87,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void obsoletCast() {
     this.builder.setSeverity(IssueCodes.OBSOLETE_CAST, "warning");

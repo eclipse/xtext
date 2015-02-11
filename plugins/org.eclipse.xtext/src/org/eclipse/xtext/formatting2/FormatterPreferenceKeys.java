@@ -11,19 +11,20 @@ import static java.lang.System.*;
 
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.IntegerKey;
+import org.eclipse.xtext.preferences.PreferenceKeysProvider;
 import org.eclipse.xtext.preferences.StringKey;
 import org.eclipse.xtext.preferences.TypedPreferenceKey;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
 
 /**
- * General preference keys used by this formatting infrastructure. Formatters based on this infrastructure should honor
- * these keys as well.
+ * <p>General preference keys used by this formatting infrastructure. Formatters based on this infrastructure should honor
+ * these keys as well.</p>
  * 
- * To set a values for one of these keys, use {@link FormatterRequest#setPreferences(ITypedPreferenceValues)}.
+ * <p>To set a values for one of these keys, use {@link FormatterRequest#setPreferences(ITypedPreferenceValues)}.</p>
  * 
- * To access a value for one of these keys, use {@link AbstractFormatter2#getPreference(TypedPreferenceKey)}.
+ * <p>To access a value for one of these keys, use {@link AbstractFormatter2#getPreference(TypedPreferenceKey)}.</p>
  * 
- * To introduce new keys, subclass this class.
+ * <p>To introduce new keys, subclass this class (see also {@link PreferenceKeysProvider#allConstantKeys(Class...)}.</p>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
@@ -32,7 +33,7 @@ import org.eclipse.xtext.preferences.TypedPreferenceValues;
 public class FormatterPreferenceKeys {
 
 	/**
-	 * The characters used to wrap lines. Usually "\n" or "\r\n".
+	 * The characters used to wrap lines. Usually {@code \n} or {@code \r\n}.
 	 */
 	public static StringKey lineSeparator = new StringKey("line.separator", getProperty("line.separator"));
 
@@ -42,7 +43,7 @@ public class FormatterPreferenceKeys {
 	public static StringKey indentation = new StringKey("indentation", "\t");
 
 	/**
-	 * The width of one level of indentation counted in characters. If {@link #indentation} is "\t" and the
+	 * The width of one level of indentation counted in characters. If {@link #indentation} is {@code \t} and the
 	 * display-width of one tab is fours, then this values should be four. The formatter uses this value to compute when
 	 * {@link #maxLineWidth} has been exceeded.
 	 */

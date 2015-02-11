@@ -52,8 +52,8 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 	}
 
 	@Override
-	public void autowrap(int triggerLenght) {
-		autowrap = triggerLenght;
+	public void autowrap(int triggerLength) {
+		autowrap = triggerLength;
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 	}
 
 	@Override
-	public Boolean getNoIndetation() {
+	public Boolean getNoIndentation() {
 		return noIndentation;
 	}
 
@@ -156,7 +156,7 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 		setNewLinesMax(merge(getNewLineMax(), other.getNewLineMax(), strategy, "newLineMax"));
 		setAutowrap(merge(getAutowrap(), other.getAutowrap(), strategy, "autowrap"));
 		setOnAutowrap(merge(getOnAutowrap(), other.getOnAutowrap(), strategy, "onAutowrap"));
-		setNoIndentation(merge(getNoIndetation(), other.getNoIndetation(), strategy, "noIndentation"));
+		setNoIndentation(merge(getNoIndentation(), other.getNoIndentation(), strategy, "noIndentation"));
 
 		if (getIndentationIncrease() != null && other.getIndentationIncrease() != null)
 			setIndentationIncrease(getIndentationIncrease() + other.getIndentationIncrease());

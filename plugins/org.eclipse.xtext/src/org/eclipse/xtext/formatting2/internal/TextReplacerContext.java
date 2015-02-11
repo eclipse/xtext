@@ -110,13 +110,13 @@ public class TextReplacerContext implements ITextReplacerContext {
 				String between = access.getText(endOffset, lastOffset - endOffset);
 				int idx = between.lastIndexOf('\n');
 				if (idx >= 0)
-					return count + logicalLenght(between.substring(idx + 1));
-				count += logicalLenght(between);
+					return count + logicalLength(between.substring(idx + 1));
+				count += logicalLength(between);
 				String text = rep.getReplacementText();
 				int idx2 = text.lastIndexOf('\n');
 				if (idx2 >= 0)
-					return count + logicalLenght(text.substring(idx2 + 1));
-				count += logicalLenght(text);
+					return count + logicalLength(text.substring(idx2 + 1));
+				count += logicalLength(text);
 				lastOffset = rep.getOffset();
 			}
 			current = current.getPreviousContext();
@@ -124,7 +124,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		String rest = access.getText(0, lastOffset);
 		int idx = rest.lastIndexOf('\n');
 		if (idx >= 0)
-			return count + logicalLenght(rest.substring(idx + 1));
+			return count + logicalLength(rest.substring(idx + 1));
 		count += lastOffset;
 		return count;
 	}
@@ -191,7 +191,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return true; // TODO: implement
 	}
 
-	protected int logicalLenght(String text) {
+	protected int logicalLength(String text) {
 		ITypedPreferenceValues preferences = getDocument().getRequest().getPreferences();
 		String indentation = preferences.getPreference(FormatterPreferenceKeys.indentation);
 		if (!"\t".equals(indentation))
@@ -214,9 +214,9 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	@Override
-	public void replaceText(int offset, int lenght, CharSequence text) {
+	public void replaceText(int offset, int length, CharSequence text) {
 		Preconditions.checkNotNull(text);
-		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, lenght, text.toString());
+		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, length, text.toString());
 		replaceText(replacement);
 	}
 
@@ -299,6 +299,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return Joiner.on("; ").join(items);
 	}
 
+	@Override
 	public ITextReplacerContext withDocument(IFormattableDocument document) {
 		TextReplacerContext context = new TextReplacerContext(document, this, indentation, null);
 		if (this.nextReplacerIsChild)

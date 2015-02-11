@@ -8,10 +8,15 @@
 package org.eclipse.xtext.formatting2;
 
 /**
- * @author Moritz Eysholdt - Initial contribution and API
+ * An ISubFormatter is responsible to format a sub document.
  * 
+ * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
  */
 public interface ISubFormatter {
+	/**
+	 * Format the given document or throw a {@link FormattingNotApplicableException}
+	 * if the document cannot be formatted by this formatter.
+	 */
 	void format(IFormattableSubDocument document) throws FormattingNotApplicableException;
 }
