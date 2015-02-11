@@ -11,6 +11,9 @@ import java.util.Set
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.emf.common.notify.Adapter
+import org.eclipse.emf.common.notify.Notification
+import org.eclipse.emf.common.notify.Notifier
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -19,15 +22,33 @@ class ReadAndWriteTracking {
 	
 	def markReadAccess(EObject object) {
 		if (!isRead(object)) {
-			object.eAdapters.add(READ_MARKER)
+			object.eAdapters.add(READMARKER)
 		}
 	}
 	
 	def isRead(EObject object) {
-		object.eAdapters.contains(READ_MARKER)
+		object.eAdapters.contains(READMARKER)
 	}
 	
-	static final AdapterImpl READ_MARKER = new AdapterImpl() {}
+	static val READMARKER = new Adapter() {
+		
+		override getTarget() {
+			null
+		}
+		
+		override isAdapterForType(Object type) {
+			false
+		}
+		
+		override notifyChanged(Notification notification) {
+			
+		}
+		
+		override setTarget(Notifier newTarget) {
+			
+		}
+		
+	}
 	
 	def markInitialized(EObject it, JvmConstructor constructor) {
 		var initializedMarker = initializedMarker ?: newInitalizedMarker
@@ -47,6 +68,8 @@ class ReadAndWriteTracking {
 	protected def getInitializedMarker(EObject object) {
 		object.eAdapters.filter(ReadAndWriteTracking.InitializedMarker).head
 	}
+	
+	
 	
 	protected static class InitializedMarker extends AdapterImpl {
 	
