@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.formatting2;
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement
@@ -12,6 +19,9 @@ import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
 
 import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.*
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 class DomainmodelFormatter extends XbaseFormatter {
 
 
