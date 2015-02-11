@@ -610,30 +610,17 @@
         <requirement
             name="org.eclipse.xtext.xtext.ui.examples"/>
         <requirement
-            name="org.eclipse.xtext.example.arithmetics.ui"/>
-        <requirement
             name="org.eclipse.xtext.example.arithmetics.tests"/>
         <requirement
+            name="org.eclipse.xtext.example.homeautomation.tests"/>
+        <requirement
             name="org.eclipse.xtext.example.fowlerdsl.ui"/>
-        <requirement
-            name="org.eclipse.xtext.example.tutorial"/>
-        <requirement
-            name="org.eclipse.xtext.example.tutorial.tests"/>
-        <requirement
-            name="org.eclipse.xtext.example.tutorial.ui"/>
         <requirement
             name="xbase.tutorial"/>
         <requirement
             name="xtend-euler"/>
         <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}">
-          <predicate
-              xsi:type="predicates:NotPredicate">
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*example\.gmf.*"/>
-          </predicate>
-        </sourceLocator>
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
         <sourceLocator
