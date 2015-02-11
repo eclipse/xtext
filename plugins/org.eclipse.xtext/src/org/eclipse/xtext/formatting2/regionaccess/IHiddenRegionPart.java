@@ -12,7 +12,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting2.ITextSegment;
 
 /**
- * Super-Interface for {@link IWhitespace} and {@link IComment}.
+ * Common interface for {@link IWhitespace} and {@link IComment}.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */

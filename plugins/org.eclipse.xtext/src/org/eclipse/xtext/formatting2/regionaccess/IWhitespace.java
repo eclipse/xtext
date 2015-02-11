@@ -8,9 +8,9 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 /**
- * Represents a whitespace token inside a {@link IHiddenRegion}.
+ * <p>Represents a whitespace token inside a {@link IHiddenRegion}.</p>
  * 
- * Whitespace are usually hidden tokens for which all characters have {@link Character#isWhitespace(char)} == true.
+ * <p>Whitespace are usually hidden tokens for which all characters have {@link Character#isWhitespace(char) isWhitespace == true}.</p>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * 
@@ -21,5 +21,4 @@ package org.eclipse.xtext.formatting2.regionaccess;
  * @since 2.8
  */
 public interface IWhitespace extends IHiddenRegionPart {
-
 }

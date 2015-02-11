@@ -139,7 +139,7 @@ public class TextRegionsWithTitleToString {
 		for (int i = 0; i < this.items.size(); i++) {
 			Item item = this.items.get(i);
 			ITextSegment region = item.getRegion();
-			String regionStr = "offset=" + region.getOffset() + " lenght=" + region.getLength();
+			String regionStr = "offset=" + region.getOffset() + " length=" + region.getLength();
 			String open = i < BRACKETS_OPEN.length ? BRACKETS_OPEN[i] : "[" + i + "[";
 			String close = i < BRACKETS_CLOSE.length ? BRACKETS_CLOSE[i] : "]" + i + "]";
 			builder.append(open + close + ": " + item.getTitle() + " at " + regionStr + "\n");

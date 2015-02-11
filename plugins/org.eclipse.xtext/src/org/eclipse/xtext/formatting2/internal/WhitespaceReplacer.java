@@ -86,7 +86,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 			if (space != null)
 				context.replaceText(region, space);
 		} else {
-			boolean noIndentation = formatting.getNoIndetation() == Boolean.TRUE;
+			boolean noIndentation = formatting.getNoIndentation() == Boolean.TRUE;
 			String newLines = context.getNewLinesString(newLineCount);
 			String indentation = noIndentation ? "" : context.getIndentationString(indentationCount);
 			context.replaceText(region, newLines + indentation);

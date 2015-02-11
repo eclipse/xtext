@@ -10,13 +10,17 @@ package org.eclipse.xtext.formatting2;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 
 /**
+ * <p>
  * HiddenRegionFormatting specifies formatting information for a HiddenRegion. A HiddenRegion is the group of all hidden
- * tokens (whitespace and commend) between to non-hidden tokens.
+ * tokens (whitespace and comments) between to non-hidden tokens.
+ * </p>
  * 
- * HiddenRegionFormattings can sometimes be automatically merged when two are registered for the same region in an
- * {@link IFormattableDocument}.
+ * <p>
+ * HiddenRegionFormattings can sometimes be automatically {@link #mergeValuesFrom(IHiddenRegionFormatting) merged} when
+ * two different formattings are registered for the same region in an {@link IFormattableDocument}.
+ * </p>
  * 
- * 
+ * @see IHiddenRegionFormatter
  * @noimplement This interface is not intended to be implemented by clients, use {@link HiddenRegionFormatting}
  * @noextend This interface is not intended to be extended by clients, use {@link HiddenRegionFormatting}
  * @author Moritz Eysholdt - Initial contribution and API
@@ -40,7 +44,7 @@ public interface IHiddenRegionFormatting {
 
 	Integer getNewLineMin();
 
-	Boolean getNoIndetation();
+	Boolean getNoIndentation();
 
 	IAutowrapFormatter getOnAutowrap();
 

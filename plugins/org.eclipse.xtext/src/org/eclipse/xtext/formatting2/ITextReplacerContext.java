@@ -10,10 +10,12 @@ package org.eclipse.xtext.formatting2;
 import java.util.List;
 
 /**
- * Relevant state and methods during execution of a TextReplacer.
+ * Relevant state and methods during execution of a {@link ITextReplacer text replacer}.
  * 
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
+ * @since 2.8
+ * @author Moritz Eysholdt - Initial API and implementation
  */
 public interface ITextReplacerContext {
 
@@ -47,7 +49,7 @@ public interface ITextReplacerContext {
 
 	void replaceText(CharSequence text);
 
-	void replaceText(int offset, int lenght, CharSequence text);
+	void replaceText(int offset, int length, CharSequence text);
 
 	void replaceText(ITextReplacement replacement);
 
@@ -60,6 +62,8 @@ public interface ITextReplacerContext {
 	void setNextReplacerIsChild();
 
 	ITextReplacerContext withIndentation(int indentation);
+	
+	ITextReplacerContext withDocument(IFormattableDocument document);
 
 	ITextReplacerContext withReplacer(ITextReplacer replacer);
 

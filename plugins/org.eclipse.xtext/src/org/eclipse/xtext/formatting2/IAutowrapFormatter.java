@@ -7,6 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+/**
+ * A strategy for formatting that is to be applied on auto wrapping.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @see IHiddenRegionFormatter#setOnAutowrap(IAutowrapFormatter)
+ */
 public interface IAutowrapFormatter { // TODO: add region
+	/**
+	 * Called if the region is supposed to wrapped.
+	 */
 	void format(IHiddenRegionFormatter wrapped, IFormattableDocument document);
 }

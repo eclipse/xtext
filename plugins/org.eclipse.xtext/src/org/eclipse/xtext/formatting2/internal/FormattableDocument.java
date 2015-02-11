@@ -73,7 +73,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public ISemanticRegion append(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> after) {
+	public ISemanticRegion append(ISemanticRegion token, Procedure1<? super IHiddenRegionFormatter> after) {
 		if (token != null) {
 			IHiddenRegion gap = token.getNextHiddenRegion();
 			set(gap, after);
@@ -82,7 +82,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public <T extends EObject> T append(T owner, Procedure1<IHiddenRegionFormatter> after) {
+	public <T extends EObject> T append(T owner, Procedure1<? super IHiddenRegionFormatter> after) {
 		if (owner != null) {
 			IHiddenRegion gap = getTextRegionAccess().trailingHiddenRegion(owner);
 			set(gap, after);
@@ -111,7 +111,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 
 	protected ITextReplacerContext createReplacements(ITextReplacerContext previous) {
 		Integer maxLineWidth = getRequest().getPreferences().getPreference(FormatterPreferenceKeys.maxLineWidth);
-		ITextReplacerContext context = ((TextReplacerContext) previous).withDocument(this);
+		ITextReplacerContext context = previous.withDocument(this);
 		ITextReplacerContext wrappable = null;
 		Set<ITextReplacer> wrapped = Sets.newHashSet();
 		LinkedList<ITextReplacer> queue = new LinkedList<ITextReplacer>();
@@ -149,7 +149,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 			}
 			context = nextContext;
 		}
-		return ((TextReplacerContext) context).withDocument(previous.getDocument());
+		return context.withDocument(previous.getDocument());
 	}
 
 	protected TextSegmentSet<ITextReplacer> createTextReplacerSet() {
@@ -203,7 +203,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public ISemanticRegion prepend(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> before) {
+	public ISemanticRegion prepend(ISemanticRegion token, Procedure1<? super IHiddenRegionFormatter> before) {
 		if (token != null) {
 			IHiddenRegion gap = token.getPreviousHiddenRegion();
 			set(gap, before);
@@ -212,7 +212,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public <T extends EObject> T prepend(T owner, Procedure1<IHiddenRegionFormatter> before) {
+	public <T extends EObject> T prepend(T owner, Procedure1<? super IHiddenRegionFormatter> before) {
 		if (owner != null) {
 			IHiddenRegion gap = getTextRegionAccess().leadingHiddenRegion(owner);
 			set(gap, before);
@@ -220,6 +220,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return owner;
 	}
 
+	@Override
 	public List<ITextReplacement> renderToTextReplacements() {
 		ITextReplacerContext first = getFormatter().createTextReplacerContext(this);
 		ITextReplacerContext last = createReplacements(first);
@@ -228,11 +229,11 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<IHiddenRegionFormatter> init) {
+	public IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<? super IHiddenRegionFormatter> init) {
 		if (hiddenRegion != null) {
 			AbstractFormatter2 formatter = getFormatter();
 			IHiddenRegionFormatting formatting = formatter.createHiddenRegionFormatting();
-			init.apply((IHiddenRegionFormatter) formatting);
+			init.apply(formatting.asFormatter());
 			ITextReplacer replacer = formatter.createHiddenRegionReplacer(hiddenRegion, formatting);
 			addReplacer(replacer);
 		}
@@ -240,14 +241,14 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public ISemanticRegion surround(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> beforeAndAfter) {
+	public ISemanticRegion surround(ISemanticRegion token, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
 		prepend(token, beforeAndAfter);
 		append(token, beforeAndAfter);
 		return token;
 	}
 
 	@Override
-	public <T extends EObject> T surround(T owner, Procedure1<IHiddenRegionFormatter> beforeAndAfter) {
+	public <T extends EObject> T surround(T owner, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
 		prepend(owner, beforeAndAfter);
 		append(owner, beforeAndAfter);
 		return owner;
@@ -264,7 +265,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public IFormattableSubDocument withReplacerFilter(Predicate<ITextReplacer> filter) {
+	public IFormattableSubDocument withReplacerFilter(Predicate<? super ITextReplacer> filter) {
 		return new FilteredSubDocument(getRegion(), this, filter);
 	}
 

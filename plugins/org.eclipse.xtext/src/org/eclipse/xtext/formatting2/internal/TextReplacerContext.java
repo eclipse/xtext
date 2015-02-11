@@ -214,9 +214,9 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	@Override
-	public void replaceText(int offset, int lenght, CharSequence text) {
+	public void replaceText(int offset, int length, CharSequence text) {
 		Preconditions.checkNotNull(text);
-		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, lenght, text.toString());
+		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, length, text.toString());
 		replaceText(replacement);
 	}
 
@@ -299,6 +299,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return Joiner.on("; ").join(items);
 	}
 
+	@Override
 	public ITextReplacerContext withDocument(IFormattableDocument document) {
 		TextReplacerContext context = new TextReplacerContext(document, this, indentation, null);
 		if (this.nextReplacerIsChild)

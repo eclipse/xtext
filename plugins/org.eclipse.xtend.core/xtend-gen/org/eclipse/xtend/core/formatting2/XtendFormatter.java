@@ -157,7 +157,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     for (final XAnnotation a : _annotations_1) {
       {
         this.format(a, document);
-        document.<XAnnotation>append(a, ((Procedure1<IHiddenRegionFormatter>)configKey));
+        document.<XAnnotation>append(a, configKey);
       }
     }
   }

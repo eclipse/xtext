@@ -8,6 +8,9 @@
 package org.eclipse.xtext.formatting2;
 
 /**
+ * An exception to indicate that a region of the document was formatted with
+ * conflicting settings.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ConflictingFormattingException extends RuntimeException {
