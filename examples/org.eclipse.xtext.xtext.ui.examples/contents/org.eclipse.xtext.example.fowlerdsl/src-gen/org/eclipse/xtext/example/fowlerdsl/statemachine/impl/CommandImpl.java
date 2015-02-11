@@ -17,7 +17,6 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage;
  * An implementation of the model object '<em><b>Command</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

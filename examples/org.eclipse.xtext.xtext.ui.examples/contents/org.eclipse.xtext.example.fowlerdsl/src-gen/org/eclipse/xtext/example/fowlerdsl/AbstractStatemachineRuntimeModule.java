@@ -6,7 +6,6 @@ package org.eclipse.xtext.example.fowlerdsl;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -14,7 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.fowlerdsl.StatemachineRuntimeModule}
  */
- @SuppressWarnings("all")
+@SuppressWarnings("all")
 public abstract class AbstractStatemachineRuntimeModule extends org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule {
 
 	protected Properties properties = null;

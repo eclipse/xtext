@@ -4,7 +4,6 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**

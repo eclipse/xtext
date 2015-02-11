@@ -194,6 +194,7 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
+		//// We modify the concrete syntax of two Xbase expressions and make them indentation-aware
 		//XBlockExpression returns xbase::XExpression:
 		//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ";"?)* END;
 		@Override public ParserRule getRule() { return rule; }
@@ -468,6 +469,7 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleAccess().getRule();
 	}
 
+	//// We modify the concrete syntax of two Xbase expressions and make them indentation-aware
 	//XBlockExpression returns xbase::XExpression:
 	//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ";"?)* END;
 	public XBlockExpressionElements getXBlockExpressionAccess() {
@@ -490,12 +492,15 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		return getXSwitchExpressionAccess().getRule();
 	}
 
+	//// The following synthetic tokens are used for the indentation-aware blocks
+	//// increase indentation
 	//terminal BEGIN:
 	//	"synthetic:BEGIN";
 	public TerminalRule getBEGINRule() {
 		return tBEGIN;
 	} 
 
+	//// decrease indentation
 	//terminal END:
 	//	"synthetic:END";
 	public TerminalRule getENDRule() {
