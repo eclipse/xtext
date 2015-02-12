@@ -17,7 +17,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
  * An implementation of the model object '<em><b>Abstract Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

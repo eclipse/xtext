@@ -21,7 +21,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
  * An implementation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

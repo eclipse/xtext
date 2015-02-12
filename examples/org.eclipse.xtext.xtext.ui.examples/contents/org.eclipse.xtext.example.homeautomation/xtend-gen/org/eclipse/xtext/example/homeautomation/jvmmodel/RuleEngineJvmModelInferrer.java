@@ -321,7 +321,10 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
   
   private String ruleMethodName(final Rule device) {
     String _description = device.getDescription();
-    String _replaceAll = _description.replaceAll("\\W", "_");
+    String _replaceAll = null;
+    if (_description!=null) {
+      _replaceAll=_description.replaceAll("\\W", "_");
+    }
     return ("execute" + _replaceAll);
   }
   

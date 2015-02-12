@@ -109,7 +109,7 @@ class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	private def ruleMethodName(Rule device) {
-		'execute' + device.description.replaceAll('\\W', '_')
+		'execute' + device.description?.replaceAll('\\W', '_')
 	}
 
 	private def String getQualifiedJavaName(State state) {

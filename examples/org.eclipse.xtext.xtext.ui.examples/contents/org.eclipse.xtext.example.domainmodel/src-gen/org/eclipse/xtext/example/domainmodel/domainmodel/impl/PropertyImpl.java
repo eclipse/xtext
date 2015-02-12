@@ -11,7 +11,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */
