@@ -193,7 +193,8 @@ the appropriate accessor method. That means you can write
 <p class="code">
 println(foo.bar)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;println(foo.getBar())<br/>
 </span>foo.bar&nbsp;=&nbsp;baz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;foo.setBar(baz)<br/>
-</span>foo.fooBars&nbsp;+=&nbsp;foobar&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;foo.getFooBars().add(foobar)</span>
+</span>foo.fooBars&nbsp;+=&nbsp;foobar&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;foo.getFooBars().add(foobar)<br/>
+</span>
 </p>
 </div>
 </div>
@@ -227,7 +228,7 @@ from the context:
 <span class="keyword">val</span>&nbsp;x&nbsp;=&nbsp;newArrayList(<span class="string">&apos;foo&apos;</span>,&nbsp;<span class="string">&apos;bar&apos;</span>,&nbsp;<span class="string">&apos;baz&apos;</span>)&nbsp;<span class="comment">//&nbsp;x&nbsp;is&nbsp;of&nbsp;type&nbsp;List&lt;String&gt;<br/>
 </span><span class="keyword">def</span>&nbsp;foo()&nbsp;{&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;&nbsp;def&nbsp;int&nbsp;foo()...<br/>
 </span>&nbsp;&nbsp;1<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -244,7 +245,7 @@ you can put the first argument in front as if it were the receiver of the call, 
 <br/>
 <span class="keyword">def</span>&nbsp;bar(Baz&nbsp;baz) {<br/>
 &nbsp;&nbsp;baz.foo&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;theFoo.foo(baz)<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -255,7 +256,8 @@ Static methods can be put on the extension scope with a <span class="inlinecode"
 <p class="code">
 <span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
 ...<br/>
-<span class="keyword">val</span>&nbsp;foo&nbsp;=&nbsp;singleton(<span class="string">&apos;foo&apos;</span>)&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.&lt;String&gt;singleton(&apos;foo&apos;)</span>
+<span class="keyword">val</span>&nbsp;foo&nbsp;=&nbsp;singleton(<span class="string">&apos;foo&apos;</span>)&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.&lt;String&gt;singleton(&apos;foo&apos;)<br/>
+</span>
 </p>
 </div>
 </div>
@@ -271,7 +273,7 @@ As with <span class="inlinecode"><span class="keyword">this</span></span>, you c
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;foo(Bar&nbsp;<span class="keyword">it</span>)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;foo&nbsp;<span class="comment">//&nbsp;will&nbsp;call&nbsp;it.foo()&nbsp;or&nbsp;if&nbsp;that&nbsp;doesn&apos;t&nbsp;exist&nbsp;this.foo()<br/>
 </span>&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -283,7 +285,8 @@ Xtend provides lambda expressions. These are anonymous functions in square brack
 <div class="incode">
 <p class="code">
 [String&nbsp;foo,&nbsp;String&nbsp;bar&nbsp;| foo&nbsp;+&nbsp;bar]&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;function&nbsp;(String&nbsp;foo,&nbsp;String&nbsp;bar)&nbsp;{&nbsp;foo&nbsp;+&nbsp;bar&nbsp;}</span>
+&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;function&nbsp;(String&nbsp;foo,&nbsp;String&nbsp;bar)&nbsp;{&nbsp;foo&nbsp;+&nbsp;bar&nbsp;}<br/>
+</span>
 </p>
 </div>
 </div>
@@ -311,7 +314,8 @@ As this is a bit bulky, there are more rules to make working with lambdas more a
 </span><span class="keyword">val</span>&nbsp;list&nbsp;=&nbsp;#[<span class="string">&apos;fooooo&apos;</span>,&nbsp;<span class="string">&apos;fo&apos;</span>,&nbsp;<span class="string">&apos;foo&apos;</span>]&nbsp;&nbsp;<span class="comment">//&nbsp;#[]&nbsp;delimits&nbsp;a&nbsp;list&nbsp;literal<br/>
 </span>list.sortBy[&nbsp;length&nbsp;]&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;lambda&nbsp;is&nbsp;coerced&nbsp;to&nbsp;a&nbsp;function&nbsp;(String)=&gt;Comparable<br/>
-</span>&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;list.sortBy[String&nbsp;it&nbsp;|&nbsp;it.length]</span>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;list.sortBy[String&nbsp;it&nbsp;|&nbsp;it.length]<br/>
+</span>
 </p>
 </div>
 </div>
@@ -351,7 +355,7 @@ an example from the <a href="Routing.html#httpRouting" title="Go to &quot;Http R
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
-&apos;&apos;&apos;</span>
+&apos;&apos;&apos;</span><br/>
 </p>
 </div>
 </div>

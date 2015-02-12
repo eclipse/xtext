@@ -69,7 +69,7 @@ An example mongoBeans file looks like this:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;seconds<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}*&nbsp;tracks<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -97,7 +97,7 @@ above example, this would look like
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_dbObject.put(<span class="string">"name"</span>,&nbsp;name);<br/>
 &nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -125,7 +125,7 @@ System.out.println(john.getName()&nbsp;+&nbsp;<span class="string">"&apos;s&nbsp
 &nbsp;&nbsp;System.out.println(track.getTitle());<br/>
 <br/>
 DBCollection&nbsp;dbCollection&nbsp;=&nbsp;...&nbsp;<span class="comment">//&nbsp;standard&nbsp;mongoDB&nbsp;driver&nbsp;code<br/>
-</span>dbCollection.save(john.getDBObject())
+</span>dbCollection.save(john.getDBObject())<br/>
 </p>
 </div>
 </div>
@@ -185,7 +185,7 @@ MongoOperation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;parameters+=FullJvmFormalParameter)*<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)?&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
 </p>
 </div>
 </div>
@@ -263,7 +263,7 @@ The inferrer code responsible for this section looks like this:
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;from&nbsp;the&nbsp;AbstractFeatures<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -286,7 +286,13 @@ JavaBeans from query results.
 DSL
 </td>
 <td>
-<span class="inlinecode">Artist&nbsp;{&nbsp;...</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Artist&nbsp;{&nbsp;...
+</p>
+</div>
+</div>
 </td>
 </tr>
 <tr>
@@ -312,7 +318,7 @@ Java
 &nbsp;&nbsp;&nbsp;&nbsp;_dbObject&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;BasicDBObject();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;_dbObject.put(JAVA_CLASS_KEY,&nbsp;<span class="string">"org.musicdb.Artist"</span>);<br/>
 &nbsp;&nbsp;}<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -351,7 +357,7 @@ for the constructors.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_dbObject.put(JAVA_CLASS_KEY,&nbsp;"&laquo;</span>inferredType.identifier<span class="string">&raquo;");<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -458,7 +464,7 @@ multi-valued properties:
 &nbsp;&nbsp;&nbsp;&nbsp;inferredType.members&nbsp;+=&nbsp;property.toMethod(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;get&apos;</span>&nbsp;+&nbsp;property.name.toFirstUpper,&nbsp;typeRef(List,&nbsp;propertyType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;[<br/>
-&nbsp;...
+&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -499,7 +505,7 @@ Java
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;java&nbsp;code&nbsp;you&nbsp;really&nbsp;don&apos;t&nbsp;care&nbsp;about&nbsp;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;but&nbsp;it&nbsp;should&nbsp;just&nbsp;do&nbsp;the&nbsp;right&nbsp;thing<br/>
 </span>&nbsp;&nbsp;}<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -526,7 +532,7 @@ transform that to Java.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter.parameterType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;operation.body<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -553,7 +559,7 @@ containers with a dot. In our example, the <em>MongoBean</em> <span class="inlin
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.<span class="keyword">create</span>(mongoBean.name)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -569,7 +575,7 @@ To make the framework pick up our customization, we have to add a binding in the
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IQualifiedNameProvider&gt;&nbsp;bindIQualifiedNameProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MongoQualifiedNameProvider.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -607,7 +613,7 @@ and avoids name collisions in the generated code with the implicitly defined pro
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">&apos;Type&nbsp;must&nbsp;be&nbsp;set&apos;</span>,&nbsp;ABSTRACT_FEATURE__NAME,&nbsp;MISSING_TYPE)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -633,7 +639,7 @@ We have implemented a quick fix to replace the invalid name:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.offset,&nbsp;issue.length,&nbsp;issue.data.head)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -661,7 +667,7 @@ To improve the language IDE visually, we have tuned the
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;_isLeaf(MongoProperty&nbsp;property)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;property.inlineType&nbsp;==&nbsp;null<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -686,7 +692,7 @@ and the <abbr title="org.xtext.mongobeans.ui.labeling.MongoBeansLabelProvider" >
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.image(element)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;}
+&nbsp;&nbsp;}&nbsp;<br/>
 </p>
 </div>
 </div>

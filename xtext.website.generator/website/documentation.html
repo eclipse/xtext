@@ -259,6 +259,7 @@
 	</ul>	</li>
 		<li><a href="#special_languages">Typical Language Configurations</a>
 	<ul>	<li><a href="#case_insensitive_languages">Case Insensitive Languages</a></li>
+		<li><a href="#whitespace_aware_languages">Whitespace-Aware Languages</a></li>
 		<li><a href="#java_independent_languages">Languages Independent of JDT</a></li>
 		<li><a href="#expressions">Parsing Expressions with Xtext</a></li>
 	</ul>	</li>
@@ -9069,6 +9070,95 @@ public interface ITokenStream {
 						<section id="formatting" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Formatting (Pretty Printing)</h2>
 						<p>
+							Formatting is the process of rearranging the text in a document to improve the readability
+							without changing the semantic value of the document. Therefore, a formatter is responsible
+							for arranging line-wraps, indentation, whitespace, etc. in a text to emphasize its structure.
+							A formatter is not supposed to alter a document in a way that impacts the semantic model.
+						</p>
+						<!-- subsection -->
+						<section id="formattingNew" style="padding-top: 68px; margin-top: -68px;">
+						<h3>New API in Xtext 2.8</h3>
+						<p>
+							The new formatting API is available since Xtext 2.8. It resolves the limitations of the first
+							API wich was present since the first version of Xtext. Namely the new API allows to implement
+							formatting not only based on the static structure of the grammar but it is possible to make 
+							decisions based on the current model structure. Things that are now possible include:
+						</p>
+						<p>
+							</p>
+							<ul>
+								<li>Add a line break to long list of items but keep shot lists in one line</li>
+								<li>Arrange elements in a tabular layout</li>
+								<li>Apply formatting to values of data type rules or comments</li>
+								<li>Consider the existing whitespace information and implement an adaptive layout</li>
+								<li>Provide user configurable preferences for the formatting settings</li>
+							</ul>
+							<p>
+						</p>
+						<p>
+							The actual formatting is done by constructing a list of text replacements. A text replacement
+							describes a new text which should replace an existing part of the document. This is described
+							by offset and length. Applying the text replacements turns the unformatted document into a formatted 
+							document.
+						</p>
+						<p>
+							To invoke the formatter programmatically, you need to instantiate a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/FormatterRequest.html">request</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/FormatterRequest.java">(src)</a>
+							and pass it to the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/IFormatter2.html">formatter</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormatter2.java">(src)</a>. This allows to
+							obtain the list of applicable replacements. The document modification itself if performed by a 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/TextReplacements.html">utility</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/TextReplacements.java">(src)</a> that is part of the formatting API.
+						</p>
+						<p>
+							Implementors of a formatter should extend the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/AbstractFormatter2.html"><abbr title="org.eclipse.xtext.formatting2.AbstractFormatter2">AbstractFormatter2</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/AbstractFormatter2.java">(src)</a>
+							and add dispatch cases for the model elements that should be formatted. The format routine has to be
+							invoked recursively if the children of an object should be formatted, too.
+						</p>
+						<p>
+							The following example illustrates that pattern. An instance of package declaration is passed to the format
+							method along with the current <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/IFormattableDocument.html">formattable document</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java">(src)</a>.
+							In this scenario, the package name is surrounded by a single space, the curly brace is followed by a
+							new line and increased indentation etc. All elements within that package should be formatted, too, thus
+							<code class="prettyprint lang-xtend">format(..)</code> is invoked on these as well.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+def dispatch void format(PackageDeclaration p, extension IFormattableDocument doc) {
+  p.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+  p.regionForKeyword("{").append[newLine; increaseIndentation]
+  for (AbstractElement element : p.elements) {
+    format(element, doc);
+    element.append[setNewLines(1, 1, 2)]
+  }
+  p.regionForKeyword("}").prepend[decreaseIndentation]
+}</pre>
+							<p>
+						</p>
+						<p>
+							The API is designed in a way that allows to describe the formatting in a declarative way by calling methods
+							on the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.html"><abbr title="org.eclipse.xtext.formatting2.IHiddenRegionFormatter">IHiddenRegionFormatter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.java">(src)</a> which is made available inside invocations
+							of <code class="prettyprint lang-xtend">prepend</code>, <code class="prettyprint lang-xtend">surround</code> or <code class="prettyprint lang-xtend">append</code> to specify the formatting rules.
+							This can be done in arbitrary order - the infrastructure will reorder all the configurations to execute
+							them from top to bottom of the document. If the configuration based approach is not sufficient for a
+							particular use case, the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/IFormattableDocument.html">document</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java">(src)</a> accepts
+							also imperative logic that is associated with a given range. The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting2/ITextReplacer.html"><abbr title="org.eclipse.xtext.formatting2.ITextReplacer">ITextReplacer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/ITextReplacer.java">(src)</a>
+							that can be added directly to the document allows to perform all kinds of modifications to the text in
+							the region that it is associated with.
+						</p>
+						<p>
+							More detailed information about the API is available as JavaDoc on the <code class="prettyprint lang-xtend">org.eclipse.xtext.formatting2</code>
+							package.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="formattingOld" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Before Xtext 2.8</h3>
+						<p>
+							<strong>The API in <code class="prettyprint lang-xtend">org.eclipse.xtext.formatting</code> is available since the early days of Xtext
+							and still present in Xtext 2.8. However, it will be deprecated and eventually be removed 
+							because of the limitations that it imposes due to its declarative and static approach.
+							New formatting implementations should be based on the new API in <code class="prettyprint lang-xtend">org.eclipse.xtext.formatting2</code>.</strong>
+						</p>
+						<p>
 							A formatter can be implemented via the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/formatting/IFormatter.html"><abbr title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">(src)</a> 
 							service. Technically speaking, a formatter is a <a href="#tokenstream">Token Stream</a> which 
 							inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
@@ -9150,7 +9240,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 						</p>
 						<!-- subsection -->
 						<section id="_66" style="padding-top: 68px; margin-top: -68px;">
-						<h3>General FormattingConfig Settings</h3>
+						<h4>General FormattingConfig Settings</h4>
 						<p>
 							<code class="prettyprint lang-java">setAutoLinewrap(int)</code> defines the amount of characters after which a line-break should 
 							be dynamically inserted between two tokens. The instructions <code class="prettyprint lang-java">setNoLinewrap().???()</code>, 
@@ -9160,7 +9250,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 						</section>
 						<!-- subsection -->
 						<section id="_67" style="padding-top: 68px; margin-top: -68px;">
-						<h3>FormattingConfig Instructions</h3>
+						<h4>FormattingConfig Instructions</h4>
 						<p>
 							Per default, the declarative formatter inserts one white space between two 
 							tokens. Instructions can be used to specify a different behavior. They consist of two parts: <strong>When</strong> 
@@ -9240,7 +9330,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 						</section>
 						<!-- subsection -->
 						<section id="_68" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar Element Finders</h3>
+						<h4>Grammar Element Finders</h4>
 						<p>
 							Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
 							to apply, it can be tedious to specify them for each grammar element individually. The 
@@ -9257,6 +9347,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 							</ul>
 							<p>
 						</p>
+						</section>
 						</section>
 						</section>
 						<!--  section -->
@@ -13877,7 +13968,7 @@ var anotherString = 'It is possible to embed ${aString} into
 						<h2 style="padding-top: 15px;">Case Insensitive Languages</h2>
 						<p>
 							In some cases, e.g. if your <strong>SHIFT</strong> key is broken, you might want to design a case insensitive language. Xtext offers options
-							on some its <a href="#generator_fragment">generator fragments</a> for this purpose.
+							on some of its <a href="#generator_fragment">generator fragments</a> for this purpose.
 						</p>
 						<p>
 							For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments:
@@ -13941,6 +14032,85 @@ fragment = scoping.ImportURIScopingFragment {
     ignoreCase = true
 }</pre>
 							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="whitespace_aware_languages" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Whitespace-Aware Languages</h2>
+						<p>
+							Some language designers prefer to use indentation to structure code blocks instead of surrounding them with
+							braces <code class="prettyprint lang-java">{ ... }</code>, which are really hard to type with certain kinds of keyboards.
+							A well-known example of such a language is <a href="https://www.python.org">Python</a>.
+							Another well-known example is the <strong>Home Automation</strong> language shipped with Xtext (since version 2.8),
+							available through <strong>File -&gt; New -&gt; Example -&gt; Xtext Examples -&gt; Xtext Home Automation Example</strong>.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-ruleengine linenums">
+Device Window can be open, closed
+
+Device Heater can be on, off, error
+
+Rule 'Save energy' when Window.open then
+    fire(Heater.off)
+    println('Another penny to the piggy bank!')</pre>
+							<p>
+						</p>
+						<p>
+							The <code class="prettyprint lang-ruleengine">'Save energy'</code> rule contains a code block with two operations, which is indicated
+							by the equal indentation of these operations. Nested blocks are also possible:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-ruleengine linenums">
+Rule 'Report error' when Heater.error then
+    var String report
+    do
+        Thread.sleep(500)
+        report = HeaterDiagnostic.readError
+    while (report == null)
+    println(report)</pre>
+							<p>
+						</p>
+						<p>
+							The first step for including whitespace-aware blocks in your language is to use the
+							<code class="prettyprint lang-mwe2">parser.antlr.ex.rt.AntlrGeneratorFragment</code> and <code class="prettyprint lang-mwe2">parser.antlr.ex.ca.ContentAssistParserGeneratorFragment</code>
+							in the workflow as shown in the <a href="#case_insensitive_languages">previous section</a>
+							(with or without the <code class="prettyprint lang-mwe2">ignoreCase</code> option).
+							Then define <strong>synthetic tokens</strong> in the grammar by writing terminals of the form <code class="prettyprint lang-xtext">'synthetic:&lt;terminal name&gt;'</code>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';</pre>
+							<p>
+						</p>
+						<p>
+							These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits
+							expressions from <a href="#Xbase">Xbase</a> and redefines the syntax of block expressions:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+XBlockExpression returns xbase::XExpression: 
+    {xbase::XBlockExpression}
+    BEGIN
+        (expressions+=XExpressionOrVarDeclaration ';'?)*
+    END;</pre>
+							<p>
+						</p>
+						<p>
+							After running the workflow, a stub implementation of <code class="prettyprint lang-java">AbstractIndentationTokenSource</code>
+							is generated in the subpackage <code class="prettyprint lang-java">parser.antlr</code>, e.g. <code class="prettyprint lang-java">RuleEngineTokenSource</code>.
+							Here you can specify which terminal rule should be applied to your synthetic tokens.
+							For the Home Automation language the <code class="prettyprint lang-xtext">WS</code> (whitespace) rule is selected,
+							which brings the indentation awareness as seen above.
+						</p>
+						<p>
+							In case of a whitespace-aware language, the <a href="#formatting">formatter</a> must be either adapted to
+							produce whitespace that correctly reflects the document structure, or it must be deactivated.
+							Otherwise automatic formatting might produce code with different semantics or even syntax errors.
 						</p>
 						</section>
 						<!--  section -->
@@ -15321,6 +15491,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 		registerLanguage('import|extension|this|create|cached|true|false|let|switch|case|if|then|else|context|WARNING|ERROR', 'check');
 		registerLanguage('Hello', 'mydsl');
 		registerLanguage('package|entity|datatype|many|import|extends|public|op|return|mapped-to', 'domainexample');
+		registerLanguage('Device|can|be|Rule|when|then|do|while', 'ruleengine');
 		registerLanguage('datatype|mapped-to', 'javatypesexample');
 		registerLanguage('events|commands|state|actions|end|resetEvents', 'fowlerexample');
 		registerLanguage('ref', 'linkingexample');

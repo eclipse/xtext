@@ -2,7 +2,7 @@ module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
 var projectDir = "."
-var targetDir = "${projectDir}/../../xtend.website.generator/website/documentation/2.7.0"
+var targetDir = "${projectDir}/../../xtend.website.generator/website/documentation/2.8.0"
 var modelPath = "${projectDir}/xdoc"
 
 Workflow {

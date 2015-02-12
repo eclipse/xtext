@@ -33,7 +33,7 @@ For case insensitive keywords, open your MWE workflow and replace the ANTLR rela
 <br/>
 <span class="comment">//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;ANTLR&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br/>
 </span>fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrUiGeneratorFragment&nbsp;{<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -58,7 +58,7 @@ with
 &nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -72,7 +72,7 @@ For case insensitive element names, use the <em>ignoreCase</em> option in your s
 <p class="code">
 fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -202,7 +202,7 @@ with support for the <em>&apos;classpath:&apos;</em> URI protocol, i.e.
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IResourceSetProvider&gt;&nbsp;bindIResourceSetProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;SimpleResourceSetProvider.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -217,7 +217,7 @@ Second, configure the global scope provider to scan project root folders instead
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -253,7 +253,7 @@ In in this case just remove the JDT stuff in this way:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.ManifestBuilder"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.SchemaBuilder"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;};<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -268,7 +268,7 @@ After that you have to bind the new <em>IProjectCreator</em>
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCreator()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;JDTFreeMyDslProjectCreator.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -302,7 +302,7 @@ or associativity, you&apos;ld probably write a grammar like this:
 Expression&nbsp;:<br/>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression&nbsp;|<br/>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;*&apos;</span>&nbsp;Expression&nbsp;|<br/>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;<br/>
 </p>
 </div>
 </div>
@@ -332,7 +332,7 @@ Multiplication:<br/>
 &nbsp;&nbsp;NumberLiteral&nbsp;(<span class="string">&apos;*&apos;</span>&nbsp;NumberLiteral)*;<br/>
 <br/>
 NumberLiteral:<br/>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;<br/>
 </p>
 </div>
 </div>
@@ -365,7 +365,7 @@ Primary&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
 <br/>
 NumberLiteral:<br/>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;<br/>
 </p>
 </div>
 </div>
@@ -392,13 +392,25 @@ inferred if the type&apos;s name is the same as the rule&apos;s name.
 That is
 </p>
 <p>
-<span class="inlinecode">NumberLiteral&nbsp;:&nbsp;...&nbsp;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+NumberLiteral&nbsp;:&nbsp;...&nbsp;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 is a short form of
 </p>
 <p>
-<span class="inlinecode">NumberLiteral&nbsp;<span class="keyword">returns</span>&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+NumberLiteral&nbsp;<span class="keyword">returns</span>&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 However in the case of the expression grammar above, all rules need to return the same type since they are 
@@ -420,7 +432,7 @@ Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
 &nbsp;&nbsp;<br/>
 NumberLiteral:<br/>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;<br/>
 </p>
 </div>
 </div>
@@ -445,7 +457,7 @@ Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
 &nbsp;&nbsp;<br/>
 NumberLiteral:<br/>
-&nbsp;&nbsp;value=INT;
+&nbsp;&nbsp;value=INT;<br/>
 </p>
 </div>
 </div>
@@ -454,7 +466,13 @@ NumberLiteral:<br/>
 This is how the parser processes the following expression:
 </p>
 <p>
-<span class="inlinecode">(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 It always starts with the first rule (Addition). Therein the first element is an unassigned rule call 
@@ -483,7 +501,7 @@ Java equivalent looks like:
 </span><span class="keyword">if</span>&nbsp;(current&nbsp;==&nbsp;<span class="keyword">null</span>)<br/>
 &nbsp;current&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;NumberLiteral();<br/>
 current.setValue(ruleINT());<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -512,7 +530,7 @@ was the to-be-returned object to the feature &apos;left&apos;. In Java this woul
 </span>Addition&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Addition();<br/>
 temp.setLeft(current);<br/>
 current&nbsp;=&nbsp;temp;<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -564,7 +582,7 @@ The most common variant is left associativity:
 <div class="incode">
 <p class="code">
 Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;<br/>
 </p>
 </div>
 </div>
@@ -576,7 +594,7 @@ Right associativity is done using a slightly modified pattern. Note the quantity
 <div class="incode">
 <p class="code">
 Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Addition)?;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Addition)?;<br/>
 </p>
 </div>
 </div>
@@ -590,7 +608,7 @@ to the next precedence level:
 <div class="incode">
 <p class="code">
 Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)?;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)?;<br/>
 </p>
 </div>
 </div>

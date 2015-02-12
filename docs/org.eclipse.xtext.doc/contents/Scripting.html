@@ -37,7 +37,13 @@ covered in the <a href="http://www.eclipse.org/Xtext/documentation.html">Xtext d
 A script is compiled to a Java class with one main method. That is the script
 </p>
 <p>
-<span class="inlinecode">println(<span class="string">&apos;Hello&nbsp;World!&apos;</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+println(<span class="string">&apos;Hello&nbsp;World!&apos;</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 is compiled to the following Java source code
@@ -52,7 +58,7 @@ is compiled to the following Java source code
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String...&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Hello&nbsp;World!"</span>);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -96,7 +102,7 @@ inferred from this grammar goes into the Ecore model <span class="inlinecode">si
 <br/>
 Script&nbsp;<span class="keyword">returns</span>&nbsp;XBlockExpression:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{Script}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(expressions+=XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*;
+&nbsp;&nbsp;&nbsp;&nbsp;(expressions+=XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*;<br/>
 </p>
 </div>
 </div>
@@ -150,7 +156,7 @@ The JVM model inferrer code for the scripting language looks like this:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -175,7 +181,7 @@ parameter <span class="inlinecode">args</span> defined in the main method is now
 <div class="incode">
 <p class="code">
 <span class="keyword">for</span>&nbsp;(arg&nbsp;:&nbsp;args)<br/>
-&nbsp;&nbsp;println(<span class="string">&apos;--&nbsp;&apos;</span>+arg)
+&nbsp;&nbsp;println(<span class="string">&apos;--&nbsp;&apos;</span>+arg)<br/>
 </p>
 </div>
 </div>

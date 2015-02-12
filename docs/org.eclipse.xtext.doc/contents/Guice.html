@@ -32,7 +32,7 @@ refer to injection points. You could for instance have the following field:
 <div class="incode">
 <p class="code">
 @Inject<br/>
-@Named(<span class="string">"properties"</span>)&nbsp;Map&lt;String,String&gt;&nbsp;properties;
+@Named(<span class="string">"properties"</span>)&nbsp;Map&lt;String,String&gt;&nbsp;properties;<br/>
 </p>
 </div>
 </div>
@@ -59,7 +59,7 @@ You could for instance declare the following module:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(Names.named(<span class="string">"properties"</span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toInstance(properties);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -81,7 +81,7 @@ The Guice DSL described in this section lets you describe the module above like 
 MyModule&nbsp;{<br/>
 &nbsp;&nbsp;@Named(<span class="string">"properties"</span>)&nbsp;Map&lt;String,String&gt;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">to</span>-instance&nbsp;newHashMap(<span class="string">&apos;debugLevel&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;info&apos;</span>)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -113,7 +113,7 @@ com.acme.RuntimeModule&nbsp;{<br/>
 com.acme.TestModule&nbsp;<span class="keyword">mixin</span>&nbsp;RuntimeModule&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;DataProvider&nbsp;<span class="keyword">to</span>-instance&nbsp;[<span class="string">&apos;dummy-data&apos;</span>&nbsp;]<br/>
 &nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;LoggingService&nbsp;<span class="keyword">to</span>&nbsp;BufferedLoggingService<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -168,7 +168,8 @@ BindingAST:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;to&apos;</span>&nbsp;to=KeyAST&nbsp;|&nbsp;<span class="string">&apos;to-instance&apos;</span>&nbsp;toInstance=XExpression)?;<br/>
 <br/>
 KeyAST:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;annotation=XAnnotation?&nbsp;type=JvmTypeReference;
+&nbsp;&nbsp;&nbsp;&nbsp;annotation=XAnnotation?&nbsp;type=JvmTypeReference;<br/>
+<br/>
 </p>
 </div>
 </div>
@@ -221,7 +222,7 @@ Java
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException(e);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -266,7 +267,7 @@ accept(module.toClass(module.fullyQualifiedName))[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException(e);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-&nbsp;&nbsp;]
+&nbsp;&nbsp;]<br/>
 </p>
 </div>
 </div>
@@ -289,7 +290,7 @@ The simplest way is to declare a private method for each expression.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;binding.toInstance<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}&nbsp;<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -331,7 +332,7 @@ Java
 <span class="comment">//&nbsp;and&nbsp;later&nbsp;the&nbsp;following&nbsp;code&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;key<br/>
 </span>&nbsp;&nbsp;Key&lt;java.lang.String&gt;&nbsp;key&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key.get(<span class="keyword">new</span>&nbsp;TypeLiteral&lt;String&gt;(){},&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getClass().getDeclaredField(<span class="string">"_from0"</span>).getAnnotations()[0]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getClass().getDeclaredField(<span class="string">"_from0"</span>).getAnnotations()[0]);<br/>
 </p>
 </div>
 </div>
@@ -370,7 +371,7 @@ The two sections in the model inferrer responsible for this are:
 &nbsp;&nbsp;Key.get(new&nbsp;TypeLiteral&lt;&laquo;</span>type&gt;(){}&laquo;<br/>
 &nbsp;&nbsp;<span class="keyword">IF</span>&nbsp;annotation&nbsp;!=&nbsp;null<br/>
 &nbsp;&nbsp;<span class="string">&raquo;,&nbsp;getClass().getDeclaredField("&laquo;</span>syntheticName<span class="string">&raquo;").getAnnotations()[0]&laquo;</span><br/>
-&nbsp;&nbsp;<span class="keyword">ENDIF</span><span class="string">&raquo;)&apos;&apos;&apos;</span>
+&nbsp;&nbsp;<span class="keyword">ENDIF</span><span class="string">&raquo;)&apos;&apos;&apos;</span><br/>
 </p>
 </div>
 </div>
@@ -402,7 +403,7 @@ This is the relevant code from <abbr title="org.xtext.guicemodules.validation.Gu
 &nbsp;&nbsp;error(<span class="string">"The&nbsp;annotation&nbsp;is&nbsp;not&nbsp;annotated&nbsp;with&nbsp;@BindingAnnotation"</span>,&nbsp;<br/>
 &nbsp;&nbsp;XANNOTATION__ANNOTATION_TYPE)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>

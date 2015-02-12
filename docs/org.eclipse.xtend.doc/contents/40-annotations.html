@@ -34,7 +34,7 @@ The annotation declaration looks like this:
 <div class="incode">
 <p class="code">
 @Active(ExtractProcessor)<br/>
-<span class="keyword">annotation</span>&nbsp;Extract&nbsp;{}
+<span class="keyword">annotation</span>&nbsp;Extract&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -112,7 +112,7 @@ For example the ExtractProcessor adds one interface per annotated class:
 &nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -180,7 +180,7 @@ The <span class="inlinecode">ExtractProcessor</span> implements the method <span
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -194,7 +194,13 @@ which is used as an <a href="20-classes-and-functions.html#Extension_Provider" t
 Next up the newly created interface is added to the existing list of implemented interfaces. 
 </p>
 <p>
-<span class="inlinecode">annotatedClass.implementedInterfaces&nbsp;=&nbsp;annotatedClass.implementedInterfaces&nbsp;+&nbsp;#[interfaceType.newTypeReference]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+annotatedClass.implementedInterfaces&nbsp;=&nbsp;annotatedClass.implementedInterfaces&nbsp;+&nbsp;#[interfaceType.newTypeReference]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The code calls <span class="inlinecode">setImplementedInterfaces(Iterable&lt;TypeReference&gt;)</span> on the annotated class. The right
@@ -240,7 +246,7 @@ The last phase in the lifecycle of the compiler lets you participate in writing 
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -273,7 +279,7 @@ observableType.addMethod(<span class="string">&apos;set&apos;</span>&nbsp;+&nbsp
 &nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>fieldName<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>fieldName<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;_propertyChangeSupport.firePropertyChange("&laquo;</span>fieldName<span class="string">&raquo;",&nbsp;_oldValue,&nbsp;&laquo;</span>fieldName<span class="string">&raquo;);<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -296,7 +302,7 @@ annotation <span class="inlinecode">@Lazy</span> which turns fields into lazily 
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
 &nbsp;&nbsp;@Lazy&nbsp;String&nbsp;myField&nbsp;=&nbsp;expensiveComputation()<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -331,7 +337,7 @@ The following code performs this transformation:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>field.simpleName<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>]<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -361,7 +367,7 @@ the constraint check accordingly:
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(field.initializer&nbsp;==&nbsp;<span class="keyword">null</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;field.addError(<span class="string">"A&nbsp;lazy&nbsp;field&nbsp;must&nbsp;have&nbsp;an&nbsp;initializer."</span>)<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -397,7 +403,7 @@ The maven dependency is
 &nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.core&lt;/artifactId&gt;<br/>
 &nbsp;&nbsp;&lt;version&gt;2.7.1&lt;/version&gt;<br/>
 &nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;<br/>
-&lt;/dependency&gt;
+&lt;/dependency&gt;<br/>
 </p>
 </div>
 </div>
@@ -452,7 +458,7 @@ The example project contains a couple of test cases:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -492,7 +498,7 @@ not so fragile against changes in the formatting. The <span class="inlinecode">@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(IllegalArgumentException.newTypeReference,&nbsp;exceptions.head)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -517,7 +523,13 @@ If you want to add getter and or setter methods for your fields <a class="jdoc" 
 Here&apos;s a basic example.
 </p>
 <p>
-<span class="inlinecode">@Accessors&nbsp;String&nbsp;name</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Accessors&nbsp;String&nbsp;name<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 will compile to the Java code
@@ -534,7 +546,7 @@ will compile to the Java code
 <br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(<span class="keyword">final</span>&nbsp;String&nbsp;name)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -555,7 +567,8 @@ Here is a more complex example, that shows how it works:
 &nbsp;&nbsp;String&nbsp;firstName<br/>
 &nbsp;&nbsp;@Accessors(PUBLIC_GETTER,&nbsp;PROTECTED_SETTER)&nbsp;<span class="keyword">int</span>&nbsp;age<br/>
 &nbsp;&nbsp;@Accessors(NONE)&nbsp;String&nbsp;internalField<br/>
-}
+}<br/>
+<br/>
 </p>
 </div>
 </div>
@@ -596,7 +609,7 @@ will compile to the Java code
 &nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;setAge(<span class="keyword">final</span>&nbsp;<span class="keyword">int</span>&nbsp;age)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.age&nbsp;=&nbsp;age;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -641,7 +654,7 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;p&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person(args.get(0),&nbsp;args.get(1))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;println(p.getFirstName()&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;p.lastName)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -662,7 +675,7 @@ Let&apos;s start with a basic example:
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;<span class="keyword">implements</span>&nbsp;SomeInterface<br/>
 <br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;generates&nbsp;all&nbsp;methods&nbsp;of&nbsp;List&nbsp;and&nbsp;delegates&nbsp;to&nbsp;this&nbsp;field<br/>
-</span>&nbsp;&nbsp;@Delegate&nbsp;SomeSubTypeOfSumInterface&nbsp;myDelegate
+</span>&nbsp;&nbsp;@Delegate&nbsp;SomeSubTypeOfSumInterface&nbsp;myDelegate<br/>
 </p>
 </div>
 </div>
@@ -688,7 +701,7 @@ Here&apos;s another example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;myDelegate<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
