@@ -14,5 +14,7 @@ config
 intellij-ce
 build/
 !**/src/**/build/
+!**/xtend-gen/**/build/
 lib/
 !**/src/**/lib/
+!**/xtend-gen/**/lib/
