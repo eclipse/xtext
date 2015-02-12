@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
