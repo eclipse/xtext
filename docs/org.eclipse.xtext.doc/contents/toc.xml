@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/xtext.html" label="Xtext Documentation" >
-	<topic href="contents/xtext_21.html#Xtext%20Documentation_21" label="Getting Started" >
+	<topic href="contents/xtext_22.html#Xtext%20Documentation_22" label="Getting Started" >
 		<topic href="contents/010-xtext-in-5-minutes.html#FirstFiveMinutes" label="5 Minutes Tutorial" >
 			<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
 			</topic>
@@ -44,7 +44,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_22.html#Xtext%20Documentation_22" label="Seven JVM Languages Built With Xbase" >
+	<topic href="contents/xtext_23.html#Xtext%20Documentation_23" label="Seven JVM Languages Built With Xbase" >
 		<topic href="contents/Intro.html#sevenlang_introduction" label="Introduction" >
 			<topic href="contents/Intro.html#sevenlang_introduction_3" label="Write the Grammar" >
 			</topic>
@@ -160,7 +160,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_23.html#Xtext%20Documentation_23" label="Reference Documentation" >
+	<topic href="contents/xtext_24.html#Xtext%20Documentation_24" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html#Overview" label="Overview" >
 			<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 			</topic>
@@ -391,11 +391,15 @@
 				</topic>
 			</topic>
 			<topic href="contents/050-heading-runtime.html#formatting" label="Formatting (Pretty Printing)" >
-				<topic href="contents/050-heading-runtime.html#formatting_8" label="General FormattingConfig Settings" >
+				<topic href="contents/050-heading-runtime.html#formattingNew" label="New API in Xtext 2.8" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#formatting_9" label="FormattingConfig Instructions" >
-				</topic>
-				<topic href="contents/050-heading-runtime.html#formatting_10" label="Grammar Element Finders" >
+				<topic href="contents/050-heading-runtime.html#formattingOld" label="Before Xtext 2.8" >
+					<topic href="contents/050-heading-runtime.html#formattingOld_9" label="General FormattingConfig Settings" >
+					</topic>
+					<topic href="contents/050-heading-runtime.html#formattingOld_10" label="FormattingConfig Instructions" >
+					</topic>
+					<topic href="contents/050-heading-runtime.html#formattingOld_11" label="Grammar Element Finders" >
+					</topic>
 				</topic>
 			</topic>
 			<topic href="contents/050-heading-runtime.html#fragmentProvider" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)" >
@@ -712,7 +716,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_24.html#Xtext%20Documentation_24" label="Appendix" >
+	<topic href="contents/xtext_25.html#Xtext%20Documentation_25" label="Appendix" >
 		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x" label="Migrating from Xtext 1.0.x to 2.0" >
 			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 			</topic>

@@ -109,7 +109,7 @@ RichStringElseIf&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XIfExpres
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=RichString<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(else=RichStringElseIf&nbsp;|&nbsp;<span class="string">"ELSE"</span>&nbsp;else=RichString)?;<br/>
 <br/>
-<span class="keyword">terminal</span>&nbsp;TEXT&nbsp;:&nbsp;<span class="string">&apos;&raquo;&apos;</span>&nbsp;(!<span class="string">&apos;&laquo;&apos;</span>)*&nbsp;(<span class="keyword">EOF</span>|<span class="string">&apos;&laquo;&apos;</span>);
+<span class="keyword">terminal</span>&nbsp;TEXT&nbsp;:&nbsp;<span class="string">&apos;&raquo;&apos;</span>&nbsp;(!<span class="string">&apos;&laquo;&apos;</span>)*&nbsp;(<span class="keyword">EOF</span>|<span class="string">&apos;&laquo;&apos;</span>);<br/>
 </p>
 </div>
 </div>
@@ -146,7 +146,8 @@ DSL
 <p class="code">
 &lt;!--&laquo;<br/>
 &nbsp;&nbsp;...<br/>
-<span class="string">&raquo;--&gt;</span>
+<span class="string">&raquo;--&gt;<br/>
+</span>
 </p>
 </div>
 </div>
@@ -173,7 +174,7 @@ Java
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -231,7 +232,13 @@ Each <em>Parameter</em> becomes a Java property, i.e. a field with a getter and 
 DSL
 </td>
 <td>
-<span class="inlinecode"><span class="keyword">param</span>&nbsp;title&nbsp;=&nbsp;<span class="string">"No&nbsp;Title"</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">param</span>&nbsp;title&nbsp;=&nbsp;<span class="string">"No&nbsp;Title"</span><br/>
+</p>
+</div>
+</div>
 </td>
 </tr>
 <tr>
@@ -250,7 +257,7 @@ Java
 <br/>
 <span class="keyword">public</span>&nbsp;String&nbsp;getTitle()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">this</span>.title;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -276,7 +283,7 @@ derive it from the initializer and if even that fails, use <a class="jdoc" href=
 &nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;members&nbsp;+=&nbsp;param.toSetter(param.name,&nbsp;type)<br/>
 &nbsp;&nbsp;members&nbsp;+=&nbsp;param.toGetter(param.name,&nbsp;type)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -305,7 +312,7 @@ DSL
 &nbsp;&nbsp;&lt;meta&nbsp;name="viewport"&nbsp;content="width=device-width,&nbsp;initial-sca..."&gt;<br/>
 &nbsp;&nbsp;&lt;meta&nbsp;name="description"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;content="&laquo;</span>description<span class="string">&raquo;"&gt;<br/>
-&nbsp;&nbsp;&lt;meta&nbsp;name="author"&nbsp;content="&laquo;</span>...
+&nbsp;&nbsp;&lt;meta&nbsp;name="author"&nbsp;content="&laquo;</span>...<br/>
 </p>
 </div>
 </div>
@@ -327,7 +334,7 @@ Java
 &nbsp;&nbsp;_appendable.append(ObjectExtensions.operator_elvis(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.title,<span class="string">""</span>));<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;appends&nbsp;galore<br/>
-</span>...
+</span>...<br/>
 </p>
 </div>
 </div>
@@ -361,7 +368,7 @@ current expression. This is where we have to hook in with our <abbr title="org.x
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.doInternalToJavaStatement(expr,&nbsp;<span class="keyword">it</span>,&nbsp;isReferenced)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -389,7 +396,7 @@ RichString&nbsp;:&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;nestedExpression.internalToJavaExpression(<span class="keyword">it</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;append(<span class="string">&apos;,""));&apos;</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -443,7 +450,7 @@ to teach it to compile them in an expression context. This is what the second me
 &nbsp;&nbsp;&nbsp;&nbsp;append(getName(obj))<br/>
 &nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.internalToConvertedExpression(obj,&nbsp;<span class="keyword">it</span>)&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -478,7 +485,7 @@ must be concatenatable, which is different from Xbase&apos;s for-loop.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>._computeTypes(expression&nbsp;<span class="keyword">as</span>&nbsp;XForLoopExpression,&nbsp;state)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.acceptActualType(getTypeForName(StringBuilder,&nbsp;state))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -515,7 +522,7 @@ when the cursor is inside a TEXT terminal:
 &nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;CompletionProposal(<span class="string">"&laquo;&raquo;"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.getOffset(),&nbsp;0,&nbsp;1));<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
