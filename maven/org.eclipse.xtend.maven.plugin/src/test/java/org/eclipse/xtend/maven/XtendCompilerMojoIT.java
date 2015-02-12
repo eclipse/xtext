@@ -6,12 +6,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 
-import junit.framework.Assert;
-
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Objects;
