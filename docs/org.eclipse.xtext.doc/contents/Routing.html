@@ -44,7 +44,7 @@ nicely with dependency injection and especially with the <a href="Guice.html#gui
 <span class="keyword">inject</span>&nbsp;GuessTheNumber&nbsp;controller<br/>
 <br/>
 <span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
-&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)<br/>
 </p>
 </div>
 </div>
@@ -65,7 +65,7 @@ as well as any parameters:
 &nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleWrongRange(theGuess)<br/>
 <br/>
 <span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
-&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)<br/>
 </p>
 </div>
 </div>
@@ -121,7 +121,7 @@ URL&nbsp;:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;/&apos;</span>&nbsp;variables+=Variable&nbsp;wildcard?=<span class="string">&apos;*&apos;</span>)?);<br/>
 <br/>
 Variable&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;name=ID;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;name=ID;<br/>
 </p>
 </div>
 </div>
@@ -149,7 +149,7 @@ First the <em>Dependencies</em> are translated to Java fields. This is almost a 
 &nbsp;&nbsp;&nbsp;&nbsp;annotations&nbsp;+=&nbsp;annotationRef(Inject)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAnnotations(field.annotations)<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -169,7 +169,7 @@ a proper scope and context.
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(route.condition&nbsp;!=&nbsp;null)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;route.toRouteConditionMethod<br/>
 &nbsp;&nbsp;members&nbsp;+=&nbsp;route.toRouteCallMethod<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -198,7 +198,7 @@ DSL
 <span class="keyword">inject</span>&nbsp;GuessTheNumber&nbsp;controller<br/>
 <br/>
 <span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
-&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)<br/>
 </p>
 </div>
 </div>
@@ -266,7 +266,7 @@ three parameters. This is done in the following method from <abbr title="org.xte
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;route.call<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>

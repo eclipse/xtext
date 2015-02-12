@@ -1,5 +1,77 @@
 section:formatting[Formatting (Pretty Printing)]
 
+Formatting is the process of rearranging the text in a document to improve the readability
+without changing the semantic value of the document. Therefore, a formatter is responsible
+for arranging line-wraps, indentation, whitespace, etc. in a text to emphasize its structure.
+A formatter is not supposed to alter a document in a way that impacts the semantic model.
+
+section2:formattingNew[New API in Xtext 2.8]
+
+The new formatting API is available since Xtext 2.8. It resolves the limitations of the first
+API wich was present since the first version of Xtext. Namely the new API allows to implement
+formatting not only based on the static structure of the grammar but it is possible to make 
+decisions based on the current model structure. Things that are now possible include:
+
+ul[
+  item[Add a line break to long list of items but keep shot lists in one line]
+  item[Arrange elements in a tabular layout]
+  item[Apply formatting to values of data type rules or comments]
+  item[Consider the existing whitespace information and implement an adaptive layout]
+  item[Provide user configurable preferences for the formatting settings]
+]
+
+The actual formatting is done by constructing a list of text replacements. A text replacement
+describes a new text which should replace an existing part of the document. This is described
+by offset and length. Applying the text replacements turns the unformatted document into a formatted 
+document.
+
+To invoke the formatter programmatically, you need to instantiate a codeRef[org.eclipse.xtext.formatting2.FormatterRequest][request]
+and pass it to the codeRef[org.eclipse.xtext.formatting2.IFormatter2][formatter]. This allows to
+obtain the list of applicable replacements. The document modification itself if performed by a 
+codeRef[org.eclipse.xtext.formatting2.TextReplacements][utility] that is part of the formatting API.
+
+Implementors of a formatter should extend the codeRef[org.eclipse.xtext.formatting2.AbstractFormatter2]
+and add dispatch cases for the model elements that should be formatted. The format routine has to be
+invoked recursively if the children of an object should be formatted, too.
+
+The following example illustrates that pattern. An instance of package declaration is passed to the format
+method along with the current codeRef[org.eclipse.xtext.formatting2.IFormattableDocument][formattable document].
+In this scenario, the package name is surrounded by a single space, the curly brace is followed by a
+new line and increased indentation etc. All elements within that package should be formatted, too, thus
+code[format(..)] is invoked on these as well.
+
+code[Xtend][
+def dispatch void format(PackageDeclaration p, extension IFormattableDocument doc) {
+  p.regionForFeature(ABSTRACT_ELEMENT__NAME).surround\[oneSpace\]
+  p.regionForKeyword("{").append\[newLine; increaseIndentation\]
+  for (AbstractElement element : p.elements) {
+    format(element, doc);
+    element.append\[setNewLines(1, 1, 2)\]
+  }
+  p.regionForKeyword("}").prepend\[decreaseIndentation\]
+}
+]
+
+The API is designed in a way that allows to describe the formatting in a declarative way by calling methods
+on the codeRef[org.eclipse.xtext.formatting2.IHiddenRegionFormatter] which is made available inside invocations
+of code[prepend], code[surround] or code[append] to specify the formatting rules.
+This can be done in arbitrary order - the infrastructure will reorder all the configurations to execute
+them from top to bottom of the document. If the configuration based approach is not sufficient for a
+particular use case, the codeRef[org.eclipse.xtext.formatting2.IFormattableDocument][document] accepts
+also imperative logic that is associated with a given range. The codeRef[org.eclipse.xtext.formatting2.ITextReplacer]
+that can be added directly to the document allows to perform all kinds of modifications to the text in
+the region that it is associated with.
+
+More detailed information about the API is available as JavaDoc on the code[org.eclipse.xtext.formatting2]
+package.
+
+section2:formattingOld[Before Xtext 2.8]
+
+e[The API in code[org.eclipse.xtext.formatting] is available since the early days of Xtext
+and still present in Xtext 2.8. However, it will be deprecated and eventually be removed 
+because of the limitations that it imposes due to its declarative and static approach.
+New formatting implementations should be based on the new API in code[org.eclipse.xtext.formatting2].] 
+
 A formatter can be implemented via the codeRef[org.eclipse.xtext.formatting.IFormatter] 
 service. Technically speaking, a formatter is a ref:tokenstream[Token Stream] which 
 inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
@@ -71,14 +143,14 @@ The codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig] consist of gener
 settings and a set of formatting instructions:
 
 
-section2[General FormattingConfig Settings]
+section3[General FormattingConfig Settings]
 
 code[Java][setAutoLinewrap(int)] defines the amount of characters after which a line-break should 
 be dynamically inserted between two tokens. The instructions code[Java][setNoLinewrap().???()], 
 code[Java][setNoSpace().???()] and code[Java][setSpace(space).???()] suppress this behavior locally. 
 The default is 80.
 
-section2[FormattingConfig Instructions]
+section3[FormattingConfig Instructions]
 
 Per default, the declarative formatter inserts one white space between two 
 tokens. Instructions can be used to specify a different behavior. They consist of two parts: e[When] 
@@ -146,7 +218,7 @@ ul[
 ]
 
 
-section2[Grammar Element Finders]
+section3[Grammar Element Finders]
 
 Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
 to apply, it can be tedious to specify them for each grammar element individually. The 

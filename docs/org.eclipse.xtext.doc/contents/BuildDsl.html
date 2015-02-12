@@ -77,7 +77,7 @@ Parameter:<br/>
 Task:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;task&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;depends&apos;</span>&nbsp;depends+=[Task|ValidID]&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;depends+=[Task|ValidID])*)?<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;action=XBlockExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;action=XBlockExpression;<br/>
 </p>
 </div>
 </div>
@@ -107,7 +107,13 @@ to the caller.
 DSL
 </td>
 <td>
-<span class="inlinecode"><span class="keyword">package</span>&nbsp;sample</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;sample<br/>
+</p>
+</div>
+</div>
 </td>
 </tr>
 <tr>
@@ -208,7 +214,7 @@ Java
 @DependsOn(<span class="string">"prepare"</span>)<br/>
 <span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;print()&nbsp;{<br/>
 &nbsp;&nbsp;InputOutput.&lt;String&gt;print(<span class="keyword">this</span>.name);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -228,7 +234,7 @@ The annotation part may be interesting, so here is the snippet from the inferrer
 &nbsp;&nbsp;annotations&nbsp;+=&nbsp;annotationRef(DependsOn,&nbsp;task.depends.map[name])<br/>
 &nbsp;&nbsp;body&nbsp;=&nbsp;task.action<br/>
 &nbsp;&nbsp;]<br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -244,7 +250,13 @@ The superclass will make the so marked fields initializable from command line ar
 DSL
 </td>
 <td>
-<span class="inlinecode"><span class="keyword">param</span>&nbsp;name&nbsp;=&nbsp;<span class="string">&apos;World&apos;</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">param</span>&nbsp;name&nbsp;=&nbsp;<span class="string">&apos;World&apos;</span><br/>
+</p>
+</div>
+</div>
 </td>
 </tr>
 <tr>
@@ -256,7 +268,7 @@ Java
 <div class="incode">
 <p class="code">
 @Param<br/>
-<span class="keyword">public</span>&nbsp;String&nbsp;name&nbsp;=&nbsp;<span class="string">"World"</span>;
+<span class="keyword">public</span>&nbsp;String&nbsp;name&nbsp;=&nbsp;<span class="string">"World"</span>;<br/>
 </p>
 </div>
 </div>
@@ -278,7 +290,7 @@ best type for the field. In the inferrer, this looks like:
 ...<br/>
 <span class="keyword">val</span>&nbsp;type&nbsp;=&nbsp;declaredParameter.type&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;?:&nbsp;declaredParameter?.init?.inferredType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;?:&nbsp;typeRef(String)
+&nbsp;&nbsp;&nbsp;&nbsp;?:&nbsp;typeRef(String)<br/>
 </p>
 </div>
 </div>
@@ -339,7 +351,7 @@ and <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Cla
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="keyword">super</span>.getExtensionClasses()&nbsp;+&nbsp;#[FileExtensions,&nbsp;ClassExtensions])<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -358,7 +370,7 @@ As always, such an implementation has to be bound in the <abbr title="org.xtext.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindImplicitlyImportedFeatures()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;BuildDSLImplicitlyImportedTypes.<span class="keyword">class</span>;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -383,7 +395,7 @@ DSL
 <p class="code">
 <span class="keyword">val</span>&nbsp;dir&nbsp;=&nbsp;<span class="string">&apos;someDir&apos;</span>.file<br/>
 <span class="keyword">val</span>&nbsp;file&nbsp;=&nbsp;dir&nbsp;/&nbsp;<span class="string">&apos;fileName.txt&apos;</span><br/>
-<span class="keyword">val</span>&nbsp;theSameFile&nbsp;=&nbsp;<span class="string">&apos;someDir&apos;</span>&nbsp;/&nbsp;<span class="string">&apos;fileName.txt&apos;</span>
+<span class="keyword">val</span>&nbsp;theSameFile&nbsp;=&nbsp;<span class="string">&apos;someDir&apos;</span>&nbsp;/&nbsp;<span class="string">&apos;fileName.txt&apos;</span><br/>
 </p>
 </div>
 </div>
@@ -401,7 +413,7 @@ Java
 <span class="keyword">final</span>&nbsp;File&nbsp;file&nbsp;=&nbsp;FileExtensions.operator_divide(dir,&nbsp;<span class="string">"fileName.txt"</span>);<br/>
 <span class="keyword">final</span>&nbsp;File&nbsp;theSameFile&nbsp;=&nbsp;FileExtensions.operator_divide(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"someDir"</span>,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"fileName.txt"</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"fileName.txt"</span>);<br/>
 </p>
 </div>
 </div>
