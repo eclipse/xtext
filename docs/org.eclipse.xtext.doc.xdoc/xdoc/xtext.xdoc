@@ -98,6 +98,8 @@ codelanguage-def[XML][]
 
 codelanguage-def[DomainExample][package, entity, datatype, many, import, extends, public, op, return, mapped-to]
 
+codelanguage-def[RuleEngine][Device, can, be, Rule, when, then, do, while]
+
 codelanguage-def[JavaTypesExample][datatype, mapped-to]
 
 codelanguage-def[FowlerExample][events, commands, state, actions, end, resetEvents]
