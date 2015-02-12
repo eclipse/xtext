@@ -9,18 +9,22 @@ package org.eclipse.xtend.ide.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -55,6 +59,31 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       return Objects.equal(type, JdtBasedProcessorProvider.ProcessorClassloaderAdapter.class);
     }
     
+    @Override
+    public void unsetTarget(final Notifier oldTarget) {
+      this.setTarget(null);
+    }
+    
+    @Override
+    public void setTarget(final Notifier newTarget) {
+      boolean _equals = Objects.equal(newTarget, null);
+      if (_equals) {
+        if ((this.classLoader instanceof Closeable)) {
+          try {
+            ((Closeable) this.classLoader).close();
+          } catch (final Throwable _t) {
+            if (_t instanceof IOException) {
+              final IOException e = (IOException)_t;
+              String _message = e.getMessage();
+              JdtBasedProcessorProvider.LOG.error(_message, e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+        }
+      }
+    }
+    
     public ProcessorClassloaderAdapter(final ClassLoader classLoader) {
       super();
       this.classLoader = classLoader;
@@ -65,6 +94,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       return this.classLoader;
     }
   }
+  
+  private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
   
   @Override
   public Object getProcessorInstance(final JvmType type) {
