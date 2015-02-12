@@ -6,7 +6,7 @@
  * semantic model.</p>
  * 
  * <p>This infrastructure is capable of formatting documents based on the node model and based on the serializer's output.
- * The actual formatting is done by constructing a list of text replacements. Applying the text replacement turns the
+ * The actual formatting is done by constructing a list of text replacements. Applying the text replacements turns the
  * unformatted document into a formatted document. Purpose of this infrastructure is to make it convenient for
  * implementers to construct these text replacements.</p>
  * 

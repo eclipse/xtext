@@ -116,6 +116,9 @@ class RegionSetTest {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @FinalFieldsConstructor class TestableTextSegmentSet {
 	val List<String> issues = newArrayList
 	val TextSegmentSet<ITextSegment> set
