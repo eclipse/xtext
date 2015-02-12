@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.formatting2
 
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
@@ -6,6 +13,9 @@ import org.eclipse.xtext.preferences.IntegerKey
 
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class BlankLineKey extends IntegerKey implements Procedures.Procedure1<IHiddenRegionFormatter> {
 	new(String name, Integer defaultValue) {
 		super(name, defaultValue)
@@ -22,6 +32,9 @@ class BlankLineKey extends IntegerKey implements Procedures.Procedure1<IHiddenRe
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class NewLineOrPreserveKey extends BooleanKey implements Procedures.Procedure1<IHiddenRegionFormatter> {
 	new(String name, Boolean defaultValue) {
 		super(name, defaultValue)
@@ -39,6 +52,9 @@ class NewLineOrPreserveKey extends BooleanKey implements Procedures.Procedure1<I
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class NewLineKey extends BooleanKey implements Procedures.Procedure1<IHiddenRegionFormatter> {
 	new(String name, Boolean defaultValue) {
 		super(name, defaultValue)
@@ -54,6 +70,9 @@ class NewLineKey extends BooleanKey implements Procedures.Procedure1<IHiddenRegi
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class WhitespaceKey extends BooleanKey implements Procedures.Procedure1<IHiddenRegionFormatter> {
 	new(String name, Boolean defaultValue) {
 		super(name, defaultValue)
