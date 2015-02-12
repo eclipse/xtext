@@ -645,6 +645,8 @@
             name="org.eclipse.xtend.bootstrapdoc"/>
         <requirement
             name="org.eclipse.xtext.xdoc.source"/>
+        <requirement
+            name="org.eclipse.xtext.xdoc.ui"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location}"/>
         <sourceLocator

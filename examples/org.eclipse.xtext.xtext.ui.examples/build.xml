@@ -63,7 +63,6 @@
 	</target>
 
 	<target name="generate_self">
-		<echo message="Don't add the xtext.example.tutorial by accident"/>
 		<exec executable="bash">
 			<arg value="-c" />
 			<arg value="for i in `ls ${source}`; do echo &quot;&lt;zip_example name=\&quot;$i\&quot; /&gt;&quot;; done" />
