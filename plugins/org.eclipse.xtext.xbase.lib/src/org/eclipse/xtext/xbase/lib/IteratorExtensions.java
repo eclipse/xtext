@@ -392,7 +392,7 @@ import com.google.common.collect.Sets;
 	 * @param iterator
 	 *            the iterator. May not be <code>null</code>.
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
-	 * @see #join(Iterator, CharSequence, Function1)
+	 * @see #join(Iterator, CharSequence, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static String join(Iterator<?> iterator) {
 		return join(iterator, "");
@@ -408,7 +408,7 @@ import com.google.common.collect.Sets;
 	 * @param separator
 	 *            the separator. May not be <code>null</code>.
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
-	 * @see #join(Iterator, CharSequence, Function1)
+	 * @see #join(Iterator, CharSequence, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static String join(Iterator<?> iterator, CharSequence separator) {
 		return Joiner.on(separator.toString()).useForNull("null").join(toIterable(iterator));
@@ -596,13 +596,13 @@ import com.google.common.collect.Sets;
 	 * </p>
 	 * <p>
 	 * One of the function parameters is an element of the iterator, and the other is the result of previous application
-	 * of the function. The seed of the operation is explicitly passed to {@link #fold(Iterator, Object, Function2)
+	 * of the function. The seed of the operation is explicitly passed to {@link #fold(Iterator, Object, org.eclipse.xtext.xbase.lib.Functions.Function2)
 	 * fold}. The first computed value is the result of the applied function for {@code seed} and the first element of
 	 * the iterator. This intermediate result together with the second element of the iterator produced the next result
 	 * and so on.
 	 * </p>
 	 * <p>
-	 * {@link #fold(Iterator, Object, Function2) fold} is similar to {@link #reduce(Iterator, Function2) reduce} but
+	 * {@link #fold(Iterator, Object, org.eclipse.xtext.xbase.lib.Functions.Function2) fold} is similar to {@link #reduce(Iterator, org.eclipse.xtext.xbase.lib.Functions.Function2) reduce} but
 	 * allows a {@code seed} value and the combinator {@code function} may be asymmetric. It takes {@code T and R} and
 	 * returns {@code R}.
 	 * <p>
