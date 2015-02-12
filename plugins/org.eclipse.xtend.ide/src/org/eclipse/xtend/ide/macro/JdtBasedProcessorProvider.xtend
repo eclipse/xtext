@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.macro
 
+import java.io.Closeable
+import java.io.IOException
 import java.net.URL
 import java.net.URLClassLoader
 import java.util.LinkedHashSet
 import java.util.Set
+import org.apache.log4j.Logger
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.IPath
+import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -20,14 +24,18 @@ import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.ResourceSetContext
+import org.eclipse.xtext.resource.XtextResourceSet
+
+import static org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider.*
 
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
+	
+	static val Logger LOG = Logger.getLogger(JdtBasedProcessorProvider) 
 
 	@FinalFieldsConstructor @Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
 		val ClassLoader classLoader
@@ -35,6 +43,23 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		override isAdapterForType(Object type) {
 			type == ProcessorClassloaderAdapter
 		}
+		
+		override unsetTarget(Notifier oldTarget) {
+			setTarget(null)
+		}
+		
+		override setTarget(Notifier newTarget) {
+			if (newTarget==null) {
+				if (classLoader instanceof Closeable) {
+					try {
+						(classLoader as Closeable).close
+					} catch (IOException e) {
+						LOG.error(e.message, e)
+					}
+				}
+			}
+		}
+		
 	}
 
 	override getProcessorInstance(JvmType type) {
