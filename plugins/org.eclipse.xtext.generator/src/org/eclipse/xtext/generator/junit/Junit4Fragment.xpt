@@ -20,7 +20,7 @@
 «fileHeader()»
 package «qualifiedTestName().toJavaPackage()»;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
