@@ -3,11 +3,10 @@ package org.eclipse.xtend.maven;
 import java.io.File;
 import java.io.IOException;
 
-import junit.framework.Assert;
-
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class XtendInstallDebugInfoMojoIT {
