@@ -57,7 +57,7 @@ import com.google.common.collect.Lists;
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List, Comparator)
 	 * @see #sortInplace(List)
-	 * @see #sortInplaceBy(List, Function1)
+	 * @see #sortInplaceBy(List, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static <T> List<T> sortInplace(List<T> list, Comparator<? super T> comparator) {
 		Collections.sort(list, comparator);

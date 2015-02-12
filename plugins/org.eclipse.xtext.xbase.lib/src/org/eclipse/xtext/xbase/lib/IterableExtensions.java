@@ -354,7 +354,7 @@ public class IterableExtensions {
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @return the string representation of the iterable's elements. Never <code>null</code>.
-	 * @see #join(Iterable, CharSequence, Function1)
+	 * @see #join(Iterable, CharSequence, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static String join(Iterable<?> iterable) {
 		return IteratorExtensions.join(iterable.iterator());
@@ -370,7 +370,7 @@ public class IterableExtensions {
 	 * @param separator
 	 *            the separator. May not be <code>null</code>.
 	 * @return the string representation of the iterable's elements. Never <code>null</code>.
-	 * @see #join(Iterable, CharSequence, Function1)
+	 * @see #join(Iterable, CharSequence, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static String join(Iterable<?> iterable, CharSequence separator) {
 		return IteratorExtensions.join(iterable.iterator(), separator);
@@ -507,15 +507,15 @@ public class IterableExtensions {
 	 * </p>
 	 * <p>
 	 * One of the function parameters is an element of the iterable, and the other is the result of previous application
-	 * of the function. The seed of the operation is explicitly passed to {@link #fold(Iterable, Object, Function2)
-	 * fold}. The first computed value is the result of the applied function for {@code seed} and the first element of
-	 * the iterable. This intermediate result together with the second element of the iterable produced the next result
-	 * and so on.
+	 * of the function. The seed of the operation is explicitly passed to
+	 * {@link #fold(Iterable, Object, org.eclipse.xtext.xbase.lib.Functions.Function2) fold}. The first computed value
+	 * is the result of the applied function for {@code seed} and the first element of the iterable. This intermediate
+	 * result together with the second element of the iterable produced the next result and so on.
 	 * </p>
 	 * <p>
-	 * {@link #fold(Iterable, Object, Function2) fold} is similar to {@link #reduce(Iterable, Function2) reduce} but
-	 * allows a {@code seed} value and the combinator {@code function} may be asymmetric. It takes {@code T and R} and
-	 * returns {@code R}.
+	 * {@link #fold(Iterable, Object, org.eclipse.xtext.xbase.lib.Functions.Function2) fold} is similar to
+	 * {@link #reduce(Iterable, org.eclipse.xtext.xbase.lib.Functions.Function2) reduce} but allows a {@code seed} value
+	 * and the combinator {@code function} may be asymmetric. It takes {@code T and R} and returns {@code R}.
 	 * <p>
 	 * If the iterable is empty, <code>seed</code> is returned.
 	 * </p>
@@ -635,7 +635,7 @@ public class IterableExtensions {
 	 * @return a sorted list as a shallow copy of the given iterable.
 	 * @see Collections#sort(List)
 	 * @see #sort(Iterable, Comparator)
-	 * @see #sortBy(Iterable, Function1)
+	 * @see #sortBy(Iterable, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 * @see ListExtensions#sortInplace(List)
 	 */
 	public static <T extends Comparable<? super T>> List<T> sort(Iterable<T> iterable) {
@@ -675,7 +675,7 @@ public class IterableExtensions {
 	 * @return a sorted list as a shallow copy of the given iterable.
 	 * @see Collections#sort(List, Comparator)
 	 * @see #sort(Iterable)
-	 * @see #sortBy(Iterable, Function1)
+	 * @see #sortBy(Iterable, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 * @see ListExtensions#sortInplace(List, Comparator)
 	 * @since 2.7
 	 */
@@ -694,7 +694,7 @@ public class IterableExtensions {
 	 * @return a sorted list as a shallow copy of the given iterable.
 	 * @see #sort(Iterable)
 	 * @see #sort(Iterable, Comparator)
-	 * @see ListExtensions#sortInplaceBy(List, Function1)
+	 * @see ListExtensions#sortInplaceBy(List, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable,
 			final Functions.Function1<? super T, C> key) {

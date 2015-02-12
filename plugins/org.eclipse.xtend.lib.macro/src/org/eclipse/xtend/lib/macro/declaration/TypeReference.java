@@ -196,4 +196,16 @@ public interface TypeReference extends Element {
 	 * @since 2.7
 	 */
 	public int hashCode();
+	
+	/**
+	 * A string representation for this type reference. If this reference is resolved, it will
+	 * return the simple name of this reference. Otherwise a technical information about the inferred type
+	 * reference.
+	 * 
+	 * @return a string representation
+	 * 
+	 * @since 2.8
+	 */
+	@Override
+	public String toString();
 }
