@@ -47,10 +47,6 @@
 	</macrodef>
 
 	<target name="zip_all_examples">
-		<zip_tutorial name="org.eclipse.xtext.example.tutorial" />
-		<zip_tutorial name="org.eclipse.xtext.example.tutorial.tests" />
-		<zip_tutorial name="org.eclipse.xtext.example.tutorial.ui" />
-		<zip_conference_tutorial conference="jax2012-xtext-tutorial"/>
 		<!-- run task "generate_self" to compose the list below -->
 		<zip_example name="org.eclipse.xtext.example.arithmetics" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.tests" />
