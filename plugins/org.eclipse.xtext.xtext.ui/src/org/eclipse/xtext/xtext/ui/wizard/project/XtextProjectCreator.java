@@ -52,8 +52,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature",//$NON-NLS-1$
-			XtextProjectHelper.NATURE_ID
-	};
+			XtextProjectHelper.NATURE_ID };
 
 	protected static final String[] BUILDERS = new String[] { JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
 			"org.eclipse.pde.SchemaBuilder", //$NON-NLS-1$
@@ -158,10 +157,10 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected void configureDslProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
-		List<String> requiredBundles = getDslProjectRequiredBundles();
 		factory.setProjectName(getXtextProjectInfo().getProjectName());
 		factory.addProjectNatures(getDslProjectNatures());
-		factory.addRequiredBundles(requiredBundles);
+		factory.addRequiredBundles(getDslProjectRequiredBundles());
+		factory.addDevelopmentTimeBundles(getDslProjectDevelopmentBundles());
 		factory.setLocation(getXtextProjectInfo().getDslProjectLocation());
 		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
 		factory.addContributor(createDslProjectContributor());
@@ -169,19 +168,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	/*
 	 * WARNING!!! Before changing here something, look at the commit history and read following bug reports.
-	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=339004
-	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=370411 - o.a.commons.logging
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=446253 - org.eclipse.equinox.common
 	 */
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.equinox.common;bundle-version=\"3.5.0\"", //$NON-NLS-1$
-				"org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
-				"org.apache.commons.logging;bundle-version=\"1.0.4\";resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe2.launch;resolution:=optional"); //$NON-NLS-1$
+				"org.eclipse.equinox.common;bundle-version=\"3.5.0\""); //$NON-NLS-1$
 
 		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
 		for (String bundleId : bundles) {
@@ -191,6 +182,16 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			requiredBundles.add(bundleId.trim());
 		}
 		return requiredBundles;
+	}
+
+	/* WARNING!!! Before changing here something, look at the commit history and read following bug reports.
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=339004 - o.a.commons.logging
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=370411 - org.apache.commons.logging & slf4j pack import
+	 */
+	protected List<String> getDslProjectDevelopmentBundles() {
+		return Lists.newArrayList("org.eclipse.xtext.xbase", "org.eclipse.xtext.generator",
+				"org.apache.commons.logging", "org.eclipse.emf.codegen.ecore", "org.eclipse.emf.mwe.utils",
+				"org.eclipse.emf.mwe2.launch", "org.eclipse.xtext.common.types", "org.objectweb.asm");
 	}
 
 	protected String[] getDslProjectNatures() {
