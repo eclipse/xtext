@@ -19,6 +19,9 @@ import org.eclipse.xtext.xbase.formatting2.SeparatorEntry;
 import org.eclipse.xtext.xbase.formatting2.SeparatorRegions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @FinalFieldsConstructor
 @Accessors
 @SuppressWarnings("all")

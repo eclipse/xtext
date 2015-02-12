@@ -697,6 +697,9 @@ class XbaseFormatter extends XtypeFormatter {
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @FinalFieldsConstructor class ArrayBracketsFormattingReplacer implements ITextReplacer {
 	@Accessors val ISemanticRegion region
 

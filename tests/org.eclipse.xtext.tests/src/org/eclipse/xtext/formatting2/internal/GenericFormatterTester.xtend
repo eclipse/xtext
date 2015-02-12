@@ -31,17 +31,27 @@ class GenericFormatterTester {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class FormatterTesterWithImpl extends FormatterTester {
 	override protected createFormatter(FormatterTestRequest req) {
 		(req as GenericFormatterTestRequest).formatter
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 class GenericFormatterTestRequest extends FormatterTestRequest {
 	@Accessors GenericFormatter<? extends EObject> formatter
 }
 
-@Accessors abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+@Accessors
+abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
 	def dispatch format(EObject obj, IFormattableDocument document) {
 		format(obj as T, request.textRegionAccess, document)
 	}

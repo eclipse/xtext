@@ -112,6 +112,9 @@ import org.eclipse.xtext.formatting2.internal.TextSegment
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Accessors abstract class Entry<T, R extends ITextSegment> {
 	protected Entry<T, R> next
 	protected Entry<T, R> previous
@@ -125,6 +128,9 @@ import org.eclipse.xtext.formatting2.internal.TextSegment
 	def abstract SeparatorEntry<T, R> getTrailingSeparator()
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @FinalFieldsConstructor @Accessors class ObjectEntry<T, R extends ITextSegment> extends Entry<T, R> {
 	val SeparatorRegions<T, R> list
 	T object
@@ -160,6 +166,9 @@ import org.eclipse.xtext.formatting2.internal.TextSegment
 
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Accessors class SeparatorEntry<T, R extends ITextSegment> extends Entry<T, R> {
 	R separator
 

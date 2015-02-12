@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.formatting2;
 
 import com.google.common.base.Objects;
@@ -24,6 +31,9 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @SuppressWarnings("all")
 public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
   private final RichString string;

@@ -14,6 +14,9 @@ import org.eclipse.xtext.xbase.formatting2.Entry;
 import org.eclipse.xtext.xbase.formatting2.ObjectEntry;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Accessors
 @SuppressWarnings("all")
 public class SeparatorEntry<T extends Object, R extends ITextSegment> extends Entry<T, R> {

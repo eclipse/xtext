@@ -36,6 +36,9 @@ import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 
 	@Inject extension XtendGrammarAccess

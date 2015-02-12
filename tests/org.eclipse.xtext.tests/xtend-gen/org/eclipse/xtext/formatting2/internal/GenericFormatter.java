@@ -16,6 +16,9 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.resource.XtextResource;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @Accessors
 @SuppressWarnings("all")
 public abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {

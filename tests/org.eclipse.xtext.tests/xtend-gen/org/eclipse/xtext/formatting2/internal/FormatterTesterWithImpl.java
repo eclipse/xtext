@@ -12,6 +12,9 @@ import org.eclipse.xtext.formatting2.internal.GenericFormatterTestRequest;
 import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
 import org.eclipse.xtext.junit4.formatter.FormatterTester;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class FormatterTesterWithImpl extends FormatterTester {
   @Override

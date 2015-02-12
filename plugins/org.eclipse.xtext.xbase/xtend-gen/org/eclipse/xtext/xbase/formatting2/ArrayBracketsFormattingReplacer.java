@@ -14,6 +14,9 @@ import org.eclipse.xtext.formatting2.ITextReplacerContext;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ArrayBracketsFormattingReplacer implements ITextReplacer {

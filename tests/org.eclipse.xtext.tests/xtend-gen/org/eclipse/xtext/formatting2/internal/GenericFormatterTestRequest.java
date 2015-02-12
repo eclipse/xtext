@@ -13,6 +13,9 @@ import org.eclipse.xtext.formatting2.internal.GenericFormatter;
 import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class GenericFormatterTestRequest extends FormatterTestRequest {
   @Accessors

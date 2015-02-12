@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.formatting2;
 
 import com.google.common.base.Objects;
@@ -48,6 +55,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  *  2. multi-line with text after opening ''': lines start with semantic whitespace
  *  3. multi-line with text before closing ''': no indentation
  *  4. multi-line with only whitespace after opening ''' and before closing ''': one level of extra indentation between ''' and '''
+ * 
+ * @author Moritz Eysholdt - Initial implementation and API
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")

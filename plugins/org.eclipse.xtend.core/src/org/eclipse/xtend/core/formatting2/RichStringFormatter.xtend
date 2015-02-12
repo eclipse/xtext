@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.formatting2
 
 import com.google.inject.Inject
@@ -35,6 +42,8 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
  *  2. multi-line with text after opening ''': lines start with semantic whitespace
  *  3. multi-line with text before closing ''': no indentation
  *  4. multi-line with only whitespace after opening ''' and before closing ''': one level of extra indentation between ''' and '''
+ * 
+ * @author Moritz Eysholdt - Initial implementation and API
  */
 @FinalFieldsConstructor class RichStringFormatter {
 
@@ -182,6 +191,9 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	private val RichString string
 	private val String document
@@ -401,6 +413,9 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Accessors
 class LineModel {
 	String leadingText
@@ -413,6 +428,9 @@ class LineModel {
 	'''
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Accessors class Line {
 	val int offset
 	val boolean leadingSemanticNewLine
@@ -426,6 +444,9 @@ class LineModel {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Data abstract class Chunk {
 	CharSequence text
 
@@ -434,12 +455,18 @@ class LineModel {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Data class TemplateWhitespace extends Chunk {
 	override toString() {
 		"T" + text.length
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Data class SemanticWhitespace extends Chunk {
 	int column
 
@@ -448,6 +475,9 @@ class LineModel {
 	}
 }
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Data class SemanitcText extends Chunk {
 	override toString() {
 		text.toString

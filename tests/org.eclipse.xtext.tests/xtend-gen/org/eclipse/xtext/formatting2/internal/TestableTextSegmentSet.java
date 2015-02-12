@@ -20,6 +20,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class TestableTextSegmentSet {

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.formatting2
 
 import com.google.inject.Singleton
@@ -5,6 +12,9 @@ import org.eclipse.xtext.preferences.BooleanKey
 import org.eclipse.xtext.xbase.formatting2.BlankLineKey
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys
 
+/**
+ * @author Moritz Eysholdt - Initial implementation and API
+ */
 @Singleton
 class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
 	public static val blankLinesAfterPackageDecl = new BlankLineKey("blank.lines.after.packagedecl", 1)
