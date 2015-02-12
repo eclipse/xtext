@@ -14,7 +14,7 @@
 <h2>Case Insensitive Languages</h2>
 <p>
 In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers options
-on some its <a href="030-generator.html#generator_fragment" title="Go to &quot;Generator Fragments&quot;">generator fragments</a> for this purpose. 
+on some of its <a href="030-generator.html#generator_fragment" title="Go to &quot;Generator Fragments&quot;">generator fragments</a> for this purpose. 
 </p>
 <p>
 For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
@@ -86,10 +86,99 @@ or if you are using <a href="050-heading-runtime.html#import_uri" title="Go to &
 <p class="code">
 fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
+</p>
+<a name="whitespace_aware_languages"></a>
+<h2>Whitespace-Aware Languages</h2>
+<p>
+Some language designers prefer to use indentation to structure code blocks instead of surrounding them with
+braces <span class="inlinecode">{&nbsp;...&nbsp;}</span>, which are really hard to type with certain kinds of keyboards.
+A well-known example of such a language is <a href="https://www.python.org">Python</a>.
+Another well-known example is the <em>Home Automation</em> language shipped with Xtext (since version 2.8),
+available through <em>File -&gt; New -&gt; Example -&gt; Xtext Examples -&gt; Xtext Home Automation Example</em>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Device</span>&nbsp;Window&nbsp;<span class="keyword">can</span>&nbsp;<span class="keyword">be</span>&nbsp;open,&nbsp;closed<br/>
+<br/>
+<span class="keyword">Device</span>&nbsp;Heater&nbsp;<span class="keyword">can</span>&nbsp;<span class="keyword">be</span>&nbsp;on,&nbsp;off,&nbsp;error<br/>
+<br/>
+<span class="keyword">Rule</span>&nbsp;<span class="string">&apos;Save&nbsp;energy&apos;</span>&nbsp;<span class="keyword">when</span>&nbsp;Window.open&nbsp;<span class="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fire(Heater.off)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">&apos;Another&nbsp;penny&nbsp;to&nbsp;the&nbsp;piggy&nbsp;bank!&apos;</span>)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The <span class="inlinecode"><span class="string">&apos;Save&nbsp;energy&apos;</span></span> rule contains a code block with two operations, which is indicated
+by the equal indentation of these operations. Nested blocks are also possible:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Rule</span>&nbsp;<span class="string">&apos;Report&nbsp;error&apos;</span>&nbsp;<span class="keyword">when</span>&nbsp;Heater.error&nbsp;<span class="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;String&nbsp;report<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">do</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread.sleep(500)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;report&nbsp;=&nbsp;HeaterDiagnostic.readError<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(report&nbsp;==&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(report)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The first step for including whitespace-aware blocks in your language is to use the
+<span class="inlinecode">parser.antlr.ex.rt.AntlrGeneratorFragment</span> and <span class="inlinecode">parser.antlr.ex.ca.ContentAssistParserGeneratorFragment</span>
+in the workflow as shown in the <a href="205-typical-language-configs.html#case_insensitive_languages" title="Go to &quot;Case Insensitive Languages&quot;">previous section</a>
+(with or without the <span class="inlinecode">ignoreCase</span> option).
+Then define <em>synthetic tokens</em> in the grammar by writing terminals of the form <span class="inlinecode"><span class="string">&apos;synthetic:&lt;terminal&nbsp;name&gt;&apos;</span></span>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">terminal</span>&nbsp;BEGIN:&nbsp;<span class="string">&apos;synthetic:BEGIN&apos;</span>;<br/>
+<span class="keyword">terminal</span>&nbsp;END:&nbsp;<span class="string">&apos;synthetic:END&apos;</span>;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits
+expressions from <a href="199-xtext-and-java.html#Xbase" title="Go to &quot;Xtext and Java&quot;">Xbase</a> and redefines the syntax of block expressions:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+XBlockExpression&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XExpression:&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{xbase::XBlockExpression}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(expressions+=XExpressionOrVarDeclaration&nbsp;<span class="string">&apos;;&apos;</span>?)*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;END;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+After running the workflow, a stub implementation of <span class="inlinecode">AbstractIndentationTokenSource</span>
+is generated in the subpackage <span class="inlinecode">parser.antlr</span>, e.g. <span class="inlinecode">RuleEngineTokenSource</span>.
+Here you can specify which terminal rule should be applied to your synthetic tokens.
+For the Home Automation language the <span class="inlinecode">WS</span> (whitespace) rule is selected,
+which brings the indentation awareness as seen above.
+</p>
+<p>
+In case of a whitespace-aware language, the <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> must be either adapted to
+produce whitespace that correctly reflects the document structure, or it must be deactivated.
+Otherwise automatic formatting might produce code with different semantics or even syntax errors. 
 </p>
 <a name="java_independent_languages"></a>
 <h2>Languages Independent of JDT</h2>

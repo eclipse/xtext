@@ -4,7 +4,7 @@ chapter:special_languages[Typical Language Configurations]
 section:case_insensitive_languages[Case Insensitive Languages]
 
 In some cases, e.g. if your e[SHIFT] key is broken, you might want to design a case insensitive language. Xtext offers options
-on some its ref:generator_fragment[generator fragments] for this purpose. 
+on some of its ref:generator_fragment[generator fragments] for this purpose. 
 
 For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
 
@@ -52,6 +52,69 @@ code[MWE2][fragment = scoping.ImportURIScopingFragment {
     ignoreCase = true
 }
 ]
+
+section:whitespace_aware_languages[Whitespace-Aware Languages]
+
+Some language designers prefer to use indentation to structure code blocks instead of surrounding them with
+braces code[Java][{ ... }], which are really hard to type with certain kinds of keyboards.
+A well-known example of such a language is link[https://www.python.org][Python].
+Another well-known example is the e[Home Automation] language shipped with Xtext (since version 2.8),
+available through e[File -> New -> Example -> Xtext Examples -> Xtext Home Automation Example].
+
+code[RuleEngine][
+Device Window can be open, closed
+
+Device Heater can be on, off, error
+
+Rule 'Save energy' when Window.open then
+    fire(Heater.off)
+    println('Another penny to the piggy bank!')
+]
+
+The code[RuleEngine]['Save energy'] rule contains a code block with two operations, which is indicated
+by the equal indentation of these operations. Nested blocks are also possible:
+
+code[RuleEngine][
+Rule 'Report error' when Heater.error then
+    var String report
+    do
+        Thread.sleep(500)
+        report = HeaterDiagnostic.readError
+    while (report == null)
+    println(report)
+]
+
+The first step for including whitespace-aware blocks in your language is to use the
+code[MWE2][parser.antlr.ex.rt.AntlrGeneratorFragment] and code[MWE2][parser.antlr.ex.ca.ContentAssistParserGeneratorFragment]
+in the workflow as shown in the ref:case_insensitive_languages[previous section]
+(with or without the code[MWE2][ignoreCase] option).
+Then define e[synthetic tokens] in the grammar by writing terminals of the form code[Xtext]['synthetic:<terminal name>']:
+
+code[Xtext][
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';
+]
+
+These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits
+expressions from ref:Xbase[Xbase] and redefines the syntax of block expressions:
+
+code[Xtext][
+XBlockExpression returns xbase::XExpression: 
+    {xbase::XBlockExpression}
+    BEGIN
+        (expressions+=XExpressionOrVarDeclaration ';'?)*
+    END;
+]
+
+After running the workflow, a stub implementation of code[Java][AbstractIndentationTokenSource]
+is generated in the subpackage code[Java][parser.antlr], e.g. code[Java][RuleEngineTokenSource].
+Here you can specify which terminal rule should be applied to your synthetic tokens.
+For the Home Automation language the code[Xtext][WS] (whitespace) rule is selected,
+which brings the indentation awareness as seen above.
+
+In case of a whitespace-aware language, the ref:formatting[formatter] must be either adapted to
+produce whitespace that correctly reflects the document structure, or it must be deactivated.
+Otherwise automatic formatting might produce code with different semantics or even syntax errors. 
 
 section:java_independent_languages[Languages Independent of JDT]
 
