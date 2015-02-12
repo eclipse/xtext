@@ -1298,60 +1298,60 @@ org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation -> or
 org.eclipse.xtend2.lib.WhitespaceMatcher -> org.eclipse.xtend2.lib.WhitespaceMatcher:
     18:18:boolean isWhitespace(char) -> isWhitespace
 org.eclipse.xtext.xbase.lib.ArrayExtensions -> org.eclipse.xtext.xbase.lib.ArrayExtensions:
-    33:34:void set(java.lang.Object[],int,java.lang.Object) -> set
-    46:46:java.lang.Object get(java.lang.Object[],int) -> get
-    61:61:java.lang.Object[] clone(java.lang.Object[]) -> clone
-    74:74:int length(java.lang.Object[]) -> length
-    88:88:int hashCode(java.lang.Object[]) -> hashCode
-    106:106:boolean equals(java.lang.Object[],java.lang.Object) -> equals
-    119:119:boolean get(boolean[],int) -> get
-    132:133:void set(boolean[],int,boolean) -> set
-    143:143:int length(boolean[]) -> length
-    157:157:int hashCode(boolean[]) -> hashCode
-    175:175:boolean equals(boolean[],java.lang.Object) -> equals
-    190:190:boolean[] clone(boolean[]) -> clone
-    203:203:double get(double[],int) -> get
-    216:217:void set(double[],int,double) -> set
-    227:227:int length(double[]) -> length
-    241:241:int hashCode(double[]) -> hashCode
-    259:259:boolean equals(double[],java.lang.Object) -> equals
-    274:274:double[] clone(double[]) -> clone
-    287:287:float get(float[],int) -> get
-    300:301:void set(float[],int,float) -> set
-    311:311:int length(float[]) -> length
-    325:325:int hashCode(float[]) -> hashCode
-    343:343:boolean equals(float[],java.lang.Object) -> equals
-    358:358:float[] clone(float[]) -> clone
-    371:371:long get(long[],int) -> get
-    384:385:void set(long[],int,long) -> set
-    395:395:int length(long[]) -> length
-    409:409:int hashCode(long[]) -> hashCode
-    427:427:boolean equals(long[],java.lang.Object) -> equals
-    442:442:long[] clone(long[]) -> clone
-    455:455:int get(int[],int) -> get
-    468:469:void set(int[],int,int) -> set
-    479:479:int length(int[]) -> length
-    493:493:int hashCode(int[]) -> hashCode
-    511:511:boolean equals(int[],java.lang.Object) -> equals
-    526:526:int[] clone(int[]) -> clone
-    539:539:char get(char[],int) -> get
-    552:553:void set(char[],int,char) -> set
-    563:563:int length(char[]) -> length
-    577:577:int hashCode(char[]) -> hashCode
-    595:595:boolean equals(char[],java.lang.Object) -> equals
-    610:610:char[] clone(char[]) -> clone
-    623:623:short get(short[],int) -> get
-    636:637:void set(short[],int,short) -> set
-    647:647:int length(short[]) -> length
-    661:661:int hashCode(short[]) -> hashCode
-    679:679:boolean equals(short[],java.lang.Object) -> equals
-    694:694:short[] clone(short[]) -> clone
-    707:707:byte get(byte[],int) -> get
-    720:721:void set(byte[],int,byte) -> set
-    731:731:int length(byte[]) -> length
-    745:745:int hashCode(byte[]) -> hashCode
-    763:763:boolean equals(byte[],java.lang.Object) -> equals
-    778:778:byte[] clone(byte[]) -> clone
+    34:35:java.lang.Object set(java.lang.Object[],int,java.lang.Object) -> set
+    48:48:java.lang.Object get(java.lang.Object[],int) -> get
+    63:63:java.lang.Object[] clone(java.lang.Object[]) -> clone
+    76:76:int length(java.lang.Object[]) -> length
+    90:90:int hashCode(java.lang.Object[]) -> hashCode
+    108:108:boolean equals(java.lang.Object[],java.lang.Object) -> equals
+    121:121:boolean get(boolean[],int) -> get
+    135:136:boolean set(boolean[],int,boolean) -> set
+    147:147:int length(boolean[]) -> length
+    161:161:int hashCode(boolean[]) -> hashCode
+    179:179:boolean equals(boolean[],java.lang.Object) -> equals
+    194:194:boolean[] clone(boolean[]) -> clone
+    207:207:double get(double[],int) -> get
+    221:222:double set(double[],int,double) -> set
+    233:233:int length(double[]) -> length
+    247:247:int hashCode(double[]) -> hashCode
+    265:265:boolean equals(double[],java.lang.Object) -> equals
+    280:280:double[] clone(double[]) -> clone
+    293:293:float get(float[],int) -> get
+    307:308:float set(float[],int,float) -> set
+    319:319:int length(float[]) -> length
+    333:333:int hashCode(float[]) -> hashCode
+    351:351:boolean equals(float[],java.lang.Object) -> equals
+    366:366:float[] clone(float[]) -> clone
+    379:379:long get(long[],int) -> get
+    393:394:long set(long[],int,long) -> set
+    405:405:int length(long[]) -> length
+    419:419:int hashCode(long[]) -> hashCode
+    437:437:boolean equals(long[],java.lang.Object) -> equals
+    452:452:long[] clone(long[]) -> clone
+    465:465:int get(int[],int) -> get
+    479:480:int set(int[],int,int) -> set
+    491:491:int length(int[]) -> length
+    505:505:int hashCode(int[]) -> hashCode
+    523:523:boolean equals(int[],java.lang.Object) -> equals
+    538:538:int[] clone(int[]) -> clone
+    551:551:char get(char[],int) -> get
+    565:566:char set(char[],int,char) -> set
+    577:577:int length(char[]) -> length
+    591:591:int hashCode(char[]) -> hashCode
+    609:609:boolean equals(char[],java.lang.Object) -> equals
+    624:624:char[] clone(char[]) -> clone
+    637:637:short get(short[],int) -> get
+    651:652:short set(short[],int,short) -> set
+    663:663:int length(short[]) -> length
+    677:677:int hashCode(short[]) -> hashCode
+    695:695:boolean equals(short[],java.lang.Object) -> equals
+    710:710:short[] clone(short[]) -> clone
+    723:723:byte get(byte[],int) -> get
+    737:738:byte set(byte[],int,byte) -> set
+    749:749:int length(byte[]) -> length
+    763:763:int hashCode(byte[]) -> hashCode
+    781:781:boolean equals(byte[],java.lang.Object) -> equals
+    796:796:byte[] clone(byte[]) -> clone
 org.eclipse.xtext.xbase.lib.ArrayLiterals -> org.eclipse.xtext.xbase.lib.ArrayLiterals:
     30:31:java.lang.Object[] newArrayOfSize(int) -> newArrayOfSize
     43:43:char[] newCharArrayOfSize(int) -> newCharArrayOfSize
@@ -2593,36 +2593,36 @@ org.eclipse.xtext.xbase.lib.util.ToStringBuilder -> org.eclipse.xtext.xbase.lib.
     boolean skipNulls -> skipNulls
     boolean showFieldNames -> showFieldNames
     java.util.ArrayList parts -> parts
-    127:128:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
-    136:137:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
-    145:146:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
-    155:163:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
-    172:180:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
-    189:198:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
-    204:220:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
-    230:230:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
-    238:238:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
-    242:244:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
-    248:250:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
-    254:257:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
-    264:307:java.lang.String toString() -> toString
-    311:376:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
-    379:415:void serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
-    418:422:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
-    427:437:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
-    202:202:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
+    128:129:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
+    137:138:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
+    146:147:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
+    156:165:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
+    174:183:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
+    192:202:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
+    208:224:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
+    234:234:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
+    242:242:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
+    246:248:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
+    252:254:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
+    258:261:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
+    269:312:java.lang.String toString() -> toString
+    316:381:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
+    384:420:void serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
+    423:427:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
+    432:442:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
+    206:206:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
-    159:160:void apply(java.lang.reflect.Field) -> apply
+    161:162:void apply(java.lang.reflect.Field) -> apply
     1:1:void apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
-    176:177:void apply(java.lang.reflect.Field) -> apply
+    179:180:void apply(java.lang.reflect.Field) -> apply
     1:1:void apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
     java.lang.String val$fieldName -> val$fieldName
-    193:194:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
+    197:198:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
     1:1:java.lang.Object apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder:
     java.lang.StringBuilder builder -> builder
@@ -2633,7 +2633,7 @@ org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder -
     65:66:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
     70:79:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
     83:86:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder newLine() -> newLine
-    90:90:java.lang.String toString() -> toString
+    91:91:java.lang.String toString() -> toString
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part:
     java.lang.String fieldName -> fieldName
     java.lang.Object value -> value
@@ -2644,10 +2644,10 @@ org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part -> org.eclipse.xtext.xbase
 org.eclipse.xtext.xbase.lib.util.ToStringContext -> org.eclipse.xtext.xbase.lib.util.ToStringContext:
     org.eclipse.xtext.xbase.lib.util.ToStringContext INSTANCE -> INSTANCE
     java.lang.ThreadLocal currentlyProcessed -> currentlyProcessed
-    29:31:boolean startProcessing(java.lang.Object) -> startProcessing
-    35:37:void endProcessing(java.lang.Object) -> endProcessing
+    30:32:boolean startProcessing(java.lang.Object) -> startProcessing
+    36:38:void endProcessing(java.lang.Object) -> endProcessing
 org.eclipse.xtext.xbase.lib.util.ToStringContext$1 -> org.eclipse.xtext.xbase.lib.util.ToStringContext$1:
-    24:24:java.util.IdentityHashMap initialValue() -> initialValue
+    25:25:java.util.IdentityHashMap initialValue() -> initialValue
     1:1:java.lang.Object initialValue() -> initialValue
 org.eclipse.xtext.xbase.lib.util.ToStringHelper -> org.eclipse.xtext.xbase.lib.util.ToStringHelper:
     41:41:java.lang.String toString(java.lang.Object) -> toString

@@ -100,7 +100,6 @@ public class XtendCompilerMojoIT {
 		Verifier verifier = newVerifier(ROOT + "/suppress_warnings_annotation");
 		System.out.println(verifier.getLogFileName());
 		verifier.setDebug(true);
-		verifier.setForkJvm(false);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
 		String outputdir = verifier.getBasedir() + "/";

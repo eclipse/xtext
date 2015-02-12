@@ -11,6 +11,9 @@
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 				<version>IT-SNAPSHOT</version>
+				<configuration>
+					<javaSourceVersion>1.5</javaSourceVersion>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
