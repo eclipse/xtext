@@ -684,6 +684,8 @@
 		<topic href="contents/205-typical-language-configs.html#special_languages" label="Typical Language Configurations" >
 			<topic href="contents/205-typical-language-configs.html#case_insensitive_languages" label="Case Insensitive Languages" >
 			</topic>
+			<topic href="contents/205-typical-language-configs.html#whitespace_aware_languages" label="Whitespace-Aware Languages" >
+			</topic>
 			<topic href="contents/205-typical-language-configs.html#java_independent_languages" label="Languages Independent of JDT" >
 			</topic>
 			<topic href="contents/205-typical-language-configs.html#expressions" label="Parsing Expressions with Xtext" >
