@@ -35,7 +35,7 @@ class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
    		val className = element.eResource.URI.trimFileExtension.lastSegment
 		acceptor.accept(element.toClass(className)) [
 			for (device : element.declarations.filter(Rule)) {
-				members += device.toMethod(ruleMethodName(device), typeRef(void)) [
+				members += device.toMethod(getRuleMethodName(device), typeRef(void)) [
 					static = true
 					body = device.thenPart
 				]
@@ -108,12 +108,13 @@ class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
 
 	}
 
-	private def ruleMethodName(Rule device) {
-		'execute' + device.description?.replaceAll('\\W', '_')
-	}
-
 	private def String getQualifiedJavaName(State state) {
 		(state.eContainer as Device).name + '.' + state.name
    	}
+
+	public static def getRuleMethodName(Rule rule) {
+		'execute' + rule.description?.replaceAll('\\W', '_')
+	}
+	
 }
 

@@ -68,7 +68,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
         Iterable<Rule> _filter = Iterables.<Rule>filter(_declarations, Rule.class);
         for (final Rule device : _filter) {
           EList<JvmMember> _members = it.getMembers();
-          String _ruleMethodName = RuleEngineJvmModelInferrer.this.ruleMethodName(device);
+          String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(device);
           JvmTypeReference _typeRef = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(void.class);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
             @Override
@@ -132,7 +132,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
                     _builder.append(") {");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t");
-                    String _ruleMethodName = RuleEngineJvmModelInferrer.this.ruleMethodName(rule);
+                    String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(rule);
                     _builder.append(_ruleMethodName, "\t");
                     _builder.append("();");
                     _builder.newLineIfNotEmpty();
@@ -319,21 +319,21 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
     }
   }
   
-  private String ruleMethodName(final Rule device) {
-    String _description = device.getDescription();
-    String _replaceAll = null;
-    if (_description!=null) {
-      _replaceAll=_description.replaceAll("\\W", "_");
-    }
-    return ("execute" + _replaceAll);
-  }
-  
   private String getQualifiedJavaName(final State state) {
     EObject _eContainer = state.eContainer();
     String _name = ((Device) _eContainer).getName();
     String _plus = (_name + ".");
     String _name_1 = state.getName();
     return (_plus + _name_1);
+  }
+  
+  public static String getRuleMethodName(final Rule rule) {
+    String _description = rule.getDescription();
+    String _replaceAll = null;
+    if (_description!=null) {
+      _replaceAll=_description.replaceAll("\\W", "_");
+    }
+    return ("execute" + _replaceAll);
   }
   
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
