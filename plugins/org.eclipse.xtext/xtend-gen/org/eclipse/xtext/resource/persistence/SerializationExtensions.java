@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
+import com.google.common.base.Objects;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
@@ -52,8 +53,12 @@ class SerializationExtensions {
   
   public static URI readURI(final ObjectInput in) {
     try {
-      String _readUTF = in.readUTF();
-      return URI.createURI(_readUTF);
+      final String stringRep = in.readUTF();
+      boolean _equals = Objects.equal(stringRep, "NULL");
+      if (_equals) {
+        return null;
+      }
+      return URI.createURI(stringRep);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -61,8 +66,13 @@ class SerializationExtensions {
   
   public static void writeURI(final ObjectOutput out, final URI uri) {
     try {
-      String _string = uri.toString();
-      out.writeUTF(_string);
+      boolean _equals = Objects.equal(uri, null);
+      if (_equals) {
+        out.writeUTF("NULL");
+      } else {
+        String _string = uri.toString();
+        out.writeUTF(_string);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
