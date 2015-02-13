@@ -10,7 +10,9 @@ package org.eclipse.xtext.example.homeautomation.validation
 import com.google.inject.Inject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.example.homeautomation.jvmmodel.RuleEngineJvmModelInferrer
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device
+import org.eclipse.xtext.example.homeautomation.ruleEngine.Model
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
@@ -30,9 +32,37 @@ class RuleEngineValidator extends AbstractRuleEngineValidator {
 	@Inject extension IJvmModelAssociations
 	
 	@Check
+	def checkUniqueDeclarations(Model model) {
+		val deviceNames = newHashSet
+		val ruleDescriptions = newHashSet
+		for (decl : model.declarations) {
+			if (decl instanceof Device) {
+				if (!deviceNames.add(decl.name)) {
+					error('Device names must be unique.', decl, DEVICE__NAME)
+				}
+			} else if (decl instanceof Rule) {
+				val methodName = RuleEngineJvmModelInferrer.getRuleMethodName(decl)
+				if (!ruleDescriptions.add(methodName)) {
+					error('Rule descriptions must be unique.', decl, RULE__DESCRIPTION)
+				}
+			}
+		}
+	}
+	
+	@Check
 	def checkStatesNotEmpty(Device device) {
 		if (device.states.empty) {
 			error('''The device "«device.name»" must have at least one state.''', device, DEVICE__NAME)
+		}
+	}
+	
+	@Check
+	def checkUniqueStates(Device device) {
+		val stateNames = newHashSet
+		for (state : device.states) {
+			if (!stateNames.add(state.name)) {
+				error('State names must be unique.', state, STATE__NAME)
+			}
 		}
 	}
 	
