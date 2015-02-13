@@ -21,7 +21,7 @@
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend|xtend.typesystem.emf)(\.source)?$" searchPathRef="xpand"/>
-  <rm:locator pattern="^org\.eclipse\.(?:xtext|xtend|xtend2)(?:\..+)?$" searchPathRef="xtext"/>
+  <rm:locator pattern="^org\.eclipse\.(?:xtext|xtend|xtend2)(?:\..+)?$"  resolutionFilter="(DEV.BUILD=true)"  searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.launch$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.language$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtext$" searchPathRef="mwe2-gen"/>

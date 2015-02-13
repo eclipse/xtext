@@ -29,8 +29,9 @@
 
 	<!-- Against which platform to build (Helios,Stable,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
-	<property name="WITH.MWE2" value="false" />
+	<property name="WITH.MWE2" value="true" />
 	<property name="SWTBOT" value="false" />
+	<property name="DEV.BUILD" value="false" />
 	<property name="JAVA8" value="false" />
 
 	<target name="run-buckminster-build" depends="common.cleanup">
@@ -58,9 +59,9 @@
 			build
 			#Xtext bootstrap
 			#junit --stderr --stdout --launch "org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xml"
-			
 			#Xtend tests
-			junit --stderr --stdout --launch "org.eclipse.xtend.tests.java8//org.eclipse.xtend.core.tests.java8/xtend.core.tests.java8.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results//org.eclipse.xtend.core.tests.java8/xtend.core.tests.java8.fast.launch"
+			#junit --stderr --stdout --launch "org.eclipse.xtend.tests.java8/xtend.core.tests.java8.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results//org.eclipse.xtend.core.tests.java8/xtend.core.tests.java8.fast.xml"
+			junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/xtext.xtext.ui.graph.tests.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/tests.fast.launch.xml"
 
 		</echo>
 		<echo message="build.properties: ${build.properties}" />
