@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
-import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 
 /**
@@ -45,9 +45,8 @@ class PortableURIs {
 	public static val PORTABLE_SCHEME = "portable"
 	
 	@Inject IGlobalScopeProvider globalScopeProvider
-//	@Inject LazyURIEncoder lazyURIencoder
 	@Inject EPackage.Registry packageRegistry
-	@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
+	@Inject ResourceDescriptionsProvider resourceDescriptionsProvider
 	
 	/**
 	 * @return whether the given string is a portable URI fragment
@@ -89,9 +88,12 @@ class PortableURIs {
 	 */
 	def URI toPortableURI(StorageAwareResource sourceResource, URI targetURI) {
 		val to = sourceResource.resourceSet.getResource(targetURI.trimFragment, false)?.getEObject(targetURI.fragment)
-		val result = toPortableURI(sourceResource, to);
-		if (result != null) {
-			return result
+		// if it points to some registered ecore, there's no resourceSet and the result is not portable 
+		if (to == null || to.eResource.resourceSet != null) {
+			val result = toPortableURI(sourceResource, to);
+			if (result != null) {
+				return result
+			}
 		}
 		return null
 	}
@@ -121,8 +123,8 @@ class PortableURIs {
 	 * @return a portable URI fragment, or <code>null</code> if the give EObject isn't itself or is not contained in an exported EObjectDescription
 	 */
 	protected def String getPortableURIFragment(EObject obj) {
-		val serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(EcoreUtil.getURI(obj))
-		val desc = serviceProvider?.resourceDescriptionManager?.getResourceDescription(obj.eResource)
+		val descriptions = resourceDescriptionsProvider.getResourceDescriptions(obj.eResource)
+		val desc = descriptions.getResourceDescription(obj.eResource.URI)
 		if (desc == null) {
 			return null
 		}
