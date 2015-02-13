@@ -11,6 +11,7 @@ import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
@@ -43,6 +44,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
@@ -65,14 +67,13 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
+import org.eclipse.xtext.common.types.util.DeprecationUtil
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
+
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
-import org.eclipse.xtext.common.types.util.DeprecationUtil
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
@@ -450,9 +451,17 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
 		checkMutable
-		val result = super.addMethod(name, initializer)
-		result.setAbstract(true)
-		return result;
+		checkJavaIdentifier(name, "name")
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
+		newMethod.visibility = JvmVisibility.PUBLIC
+		newMethod.simpleName = name
+		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
+		newMethod.setAbstract(true)
+		delegate.members.add(newMethod)
+		val mutableMethodDeclaration = compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration
+		initializer.apply(mutableMethodDeclaration)
+		return mutableMethodDeclaration
 	}
 	
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {

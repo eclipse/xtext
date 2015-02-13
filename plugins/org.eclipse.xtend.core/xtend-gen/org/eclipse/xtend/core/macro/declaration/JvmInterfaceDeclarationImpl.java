@@ -7,19 +7,28 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -77,9 +86,27 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
   @Override
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
-    final MutableMethodDeclaration result = super.addMethod(name, initializer);
-    result.setAbstract(true);
-    return result;
+    ConditionUtils.checkJavaIdentifier(name, "name");
+    boolean _notEquals = (!Objects.equal(initializer, null));
+    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
+    newMethod.setVisibility(JvmVisibility.PUBLIC);
+    newMethod.setSimpleName(name);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
+    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
+    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
+    newMethod.setReturnType(_jvmTypeReference);
+    newMethod.setAbstract(true);
+    JvmGenericType _delegate = this.getDelegate();
+    EList<JvmMember> _members = _delegate.getMembers();
+    _members.add(newMethod);
+    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+    MemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
+    final MutableMethodDeclaration mutableMethodDeclaration = ((MutableMethodDeclaration) _memberDeclaration);
+    initializer.apply(mutableMethodDeclaration);
+    return mutableMethodDeclaration;
   }
   
   @Override
