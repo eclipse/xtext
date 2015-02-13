@@ -32,7 +32,6 @@ public class JREContainerProvider {
 	public static final String PREFERRED_BREE = "JavaSE-1.6";
 	private static IVMInstall defaultVMInstall = null;
 	private static boolean defaultVMinitialized = false;
-	
 
 	/**
 	 * @since 2.6
@@ -55,7 +54,7 @@ public class JREContainerProvider {
 				}
 			}
 		}
-		return newPrefferedContainerPath();
+		return newPreferredContainerPath();
 	}
 
 	private static IVMInstall defaultVMInstall() {
@@ -67,14 +66,27 @@ public class JREContainerProvider {
 		return defaultVMInstall;
 	}
 
+	/**
+	 * @return JRE container path {@link IPath} for standard VM "J2SE-1.5"
+	 */
 	protected static IPath newJRE15ContainerPath() {
 		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "J2SE-1.5");
 	}
-	
+
 	/**
+	 * @deprecated use {@link #newPreferredContainerPath()} instead
 	 * @since 2.7
 	 */
+	@Deprecated
 	protected static IPath newPrefferedContainerPath() {
+		return newPreferredContainerPath();
+	}
+
+	/**
+	 * @since 2.8
+	 * @return JRE container path {@link IPath} for standard VM {@value #PREFERRED_BREE}
+	 */
+	protected static IPath newPreferredContainerPath() {
 		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, PREFERRED_BREE);
 	}
 
