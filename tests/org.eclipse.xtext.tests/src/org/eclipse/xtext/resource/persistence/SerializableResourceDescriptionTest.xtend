@@ -62,6 +62,11 @@ class SerializableResourceDescriptionTest {
 		objectOut.writeObject(before)
 		val in = new ObjectInputStream(new ByteArrayInputStream(bout.toByteArray)) 
 		val after = in.readObject as SerializableResourceDescription
+		
+		assertDescriptionsEqual(before, after)
+	}
+	
+	def void assertDescriptionsEqual(SerializableResourceDescription before, SerializableResourceDescription after) {
 		assertEquals(before.URI, after.URI)
 		assertEquals(before.importedNames, after.importedNames)
 
@@ -85,5 +90,65 @@ class SerializableResourceDescriptionTest {
 			assertEquals(beforeDesc.userData, afterDesc.userData)
 			assertEquals(beforeDesc.EObjectURI, afterDesc.EObjectURI)
 		}
+	}
+	
+	@Test def void testNullSafeSerialization() {
+		val uri = URI::createURI("file:/foo/bar.baz.foo")
+		val before = new SerializableResourceDescription => [
+			URI = uri 
+			references = #[
+				new SerializableReferenceDescription => [
+					sourceEObjectUri = uri.appendFragment('foo')
+					targetEObjectUri = null
+					containerEObjectURI = uri.appendFragment('baz')
+					EReference = EcorePackage.eINSTANCE.EAnnotation_Contents
+					indexInList = 1
+				],
+				new SerializableReferenceDescription => [
+					sourceEObjectUri = null
+					targetEObjectUri = uri.appendFragment('hubble2')
+					containerEObjectURI = uri.appendFragment('baz2')
+					EReference = EcorePackage.eINSTANCE.EAnnotation_Contents
+					indexInList = 2
+				],
+				new SerializableReferenceDescription => [
+					sourceEObjectUri = uri.appendFragment('foo')
+					targetEObjectUri = uri.appendFragment('hubble2')
+					containerEObjectURI = null
+					EReference = EcorePackage.eINSTANCE.EAnnotation_Contents
+					indexInList = 2
+				],
+				new SerializableReferenceDescription => [
+					sourceEObjectUri = uri.appendFragment('foo')
+					targetEObjectUri = null
+					containerEObjectURI = null
+					EReference = EcorePackage.eINSTANCE.EAnnotation_Contents
+					indexInList = 2
+				],
+				new SerializableReferenceDescription => [
+					sourceEObjectUri = null
+					targetEObjectUri = null
+					containerEObjectURI = null
+					EReference = EcorePackage.eINSTANCE.EAnnotation_Contents
+					indexInList = 2
+				]
+			]
+			descriptions = #[
+				new SerializableEObjectDescription => [
+					EObjectURI = uri.appendFragment('baz')
+					qualifiedName = QualifiedName.create('foo','baz')
+					EClass = EcorePackage.eINSTANCE.EAttribute
+					userData = newHashMap('myKey' -> 'myValue')
+				]
+			]
+			importedNames = #[QualifiedName.create('foo'), QualifiedName.create('foo','bar')]
+		]
+		
+		val bout = new ByteArrayOutputStream()
+		val objectOut = new ObjectOutputStream(bout)
+		objectOut.writeObject(before)
+		val in = new ObjectInputStream(new ByteArrayInputStream(bout.toByteArray)) 
+		val after = in.readObject as SerializableResourceDescription
+		assertDescriptionsEqual(before, after)
 	}
 }
