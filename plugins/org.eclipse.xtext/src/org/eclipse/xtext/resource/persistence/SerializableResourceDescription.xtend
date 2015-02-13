@@ -242,11 +242,19 @@ package class SerializationExtensions {
 	}
 	
 	def static URI readURI(ObjectInput in) {
-		return URI::createURI(in.readUTF)
+		val stringRep = in.readUTF
+		if (stringRep == "NULL") {
+			return null
+		}
+		return URI::createURI(stringRep)
 	}
 	
 	def static void writeURI(ObjectOutput out, URI uri) {
-		out.writeUTF(uri.toString)
+		if (uri == null) {
+			out.writeUTF("NULL")
+		} else {
+			out.writeUTF(uri.toString)
+		}
 	}
 	
 	def static QualifiedName readQualifiedName(ObjectInput in) {
