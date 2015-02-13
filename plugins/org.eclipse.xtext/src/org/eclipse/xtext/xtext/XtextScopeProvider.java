@@ -35,6 +35,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.GlobalResourceDescriptionProvider;
@@ -54,8 +55,11 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	@Inject
 	private GlobalResourceDescriptionProvider resourceDecriptionProvider;
 	
+	@Inject
+	private IGlobalScopeProvider globalScopeProvider;
+	
 	@Override
-	public IScope getScope(EObject context, EReference reference) {
+	public IScope getScope(final EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
 			if (context instanceof TypeRef) {
 				final TypeRef typeRef = (TypeRef) context;
@@ -79,6 +83,14 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 			}
 			return IScope.NULLSCOPE;
 			
+		}
+		if(reference == XtextPackage.eINSTANCE.getGrammar_UsedGrammars()){
+			return globalScopeProvider.getScope(context.eResource(), reference, new Predicate<IEObjectDescription>(){
+				@Override
+				public boolean apply(IEObjectDescription input) {
+					return input.getEObjectOrProxy() != context;
+				}
+			});
 		}
 		return createScope(context.eResource(), reference.getEReferenceType());
 	}
