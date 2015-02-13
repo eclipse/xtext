@@ -1,42 +1,37 @@
 package org.eclipse.xtext.generator;
 
 import java.util.concurrent.BlockingQueue;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.FileSystemAccessRequest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Anton Kosyakov
  * @since 2.7
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FileSystemAccessQueue extends AdapterImpl {
-  private BlockingQueue<FileSystemAccessRequest> requestQueue;
+  private final BlockingQueue<FileSystemAccessRequest> requestQueue;
   
-  public FileSystemAccessQueue(final BlockingQueue<FileSystemAccessRequest> requestQueue) {
-    this.requestQueue = requestQueue;
-  }
+  private final IProgressMonitor monitor;
   
   public void sendAsync(final URI uri, final Procedure0 procedure) {
-    FileSystemAccessRequest _fileSystemAccessRequest = new FileSystemAccessRequest();
-    final Procedure1<FileSystemAccessRequest> _function = new Procedure1<FileSystemAccessRequest>() {
-      @Override
-      public void apply(final FileSystemAccessRequest request) {
-        request.uri = uri;
-        request.procedure = procedure;
-      }
-    };
-    FileSystemAccessRequest _doubleArrow = ObjectExtensions.<FileSystemAccessRequest>operator_doubleArrow(_fileSystemAccessRequest, _function);
-    this.send(_doubleArrow);
+    FileSystemAccessRequest _fileSystemAccessRequest = new FileSystemAccessRequest(uri, procedure);
+    this.send(_fileSystemAccessRequest);
   }
   
   protected FileSystemAccessRequest send(final FileSystemAccessRequest request) {
     try {
+      boolean _isCanceled = this.monitor.isCanceled();
+      if (_isCanceled) {
+        throw new OperationCanceledException();
+      }
       this.requestQueue.put(request);
       return request;
     } catch (final Throwable _t) {
@@ -47,5 +42,11 @@ public class FileSystemAccessQueue extends AdapterImpl {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+  }
+  
+  public FileSystemAccessQueue(final BlockingQueue<FileSystemAccessRequest> requestQueue, final IProgressMonitor monitor) {
+    super();
+    this.requestQueue = requestQueue;
+    this.monitor = monitor;
   }
 }
