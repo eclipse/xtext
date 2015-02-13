@@ -30,7 +30,8 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -147,7 +148,7 @@ public class PortableURIs {
   private EPackage.Registry packageRegistry;
   
   @Inject
-  private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+  private ResourceDescriptionsProvider resourceDescriptionsProvider;
   
   /**
    * @return whether the given string is a portable URI fragment
@@ -201,10 +202,22 @@ public class PortableURIs {
       _eObject=_resource.getEObject(_fragment);
     }
     final EObject to = _eObject;
-    final URI result = this.toPortableURI(sourceResource, to);
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
-      return result;
+    boolean _or = false;
+    boolean _equals = Objects.equal(to, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      Resource _eResource = to.eResource();
+      ResourceSet _resourceSet_1 = _eResource.getResourceSet();
+      boolean _notEquals = (!Objects.equal(_resourceSet_1, null));
+      _or = _notEquals;
+    }
+    if (_or) {
+      final URI result = this.toPortableURI(sourceResource, to);
+      boolean _notEquals_1 = (!Objects.equal(result, null));
+      if (_notEquals_1) {
+        return result;
+      }
     }
     return null;
   }
@@ -245,18 +258,11 @@ public class PortableURIs {
    * @return a portable URI fragment, or <code>null</code> if the give EObject isn't itself or is not contained in an exported EObjectDescription
    */
   protected String getPortableURIFragment(final EObject obj) {
-    URI _uRI = EcoreUtil.getURI(obj);
-    final IResourceServiceProvider serviceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(_uRI);
-    IResourceDescription.Manager _resourceDescriptionManager = null;
-    if (serviceProvider!=null) {
-      _resourceDescriptionManager=serviceProvider.getResourceDescriptionManager();
-    }
-    IResourceDescription _resourceDescription = null;
-    if (_resourceDescriptionManager!=null) {
-      Resource _eResource = obj.eResource();
-      _resourceDescription=_resourceDescriptionManager.getResourceDescription(_eResource);
-    }
-    final IResourceDescription desc = _resourceDescription;
+    Resource _eResource = obj.eResource();
+    final IResourceDescriptions descriptions = this.resourceDescriptionsProvider.getResourceDescriptions(_eResource);
+    Resource _eResource_1 = obj.eResource();
+    URI _uRI = _eResource_1.getURI();
+    final IResourceDescription desc = descriptions.getResourceDescription(_uRI);
     boolean _equals = Objects.equal(desc, null);
     if (_equals) {
       return null;
