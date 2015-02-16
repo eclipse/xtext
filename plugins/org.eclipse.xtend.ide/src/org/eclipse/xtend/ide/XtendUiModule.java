@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
+import org.eclipse.xtend.core.validation.XtendResourceValidator;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
@@ -144,6 +145,7 @@ import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
@@ -576,5 +578,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
+	}
+	
+	public Class<? extends IResourceValidator> bindIResourceValidator() {
+		return XtendResourceValidator.class;
 	}
 }
