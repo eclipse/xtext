@@ -181,19 +181,20 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-
-			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation) && featureCall.isExtension()){
-				highlightFeatureCall(featureCall, acceptor, 
-						XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-			} else {
-				// Extensions without implicit first argument
-				XExpression implicitReceiver = featureCall.getImplicitReceiver();
-				if(implicitReceiver != null && implicitReceiver instanceof XAbstractFeatureCall){
-						if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
-							highlightFeatureCall(featureCall, acceptor, 
-									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-				}
-			}		
+			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation)) {
+				if(featureCall.isExtension()){
+					highlightFeatureCall(featureCall, acceptor, 
+							XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+				} else {
+					// Extensions without implicit first argument
+					XExpression implicitReceiver = featureCall.getImplicitReceiver();
+					if(implicitReceiver != null && implicitReceiver instanceof XAbstractFeatureCall){
+							if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
+								highlightFeatureCall(featureCall, acceptor, 
+										XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+				}	
+			}
 			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
 				highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 			}
