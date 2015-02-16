@@ -108,11 +108,15 @@ public class XtextDocument extends Document implements IXtextDocument {
 		internalModify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
-				// clean up resource set and resource
-				resource.getResourceSet().eSetDeliver(false);
-				resource.getResourceSet().eAdapters().clear();
-				resource.eSetDeliver(false);
-				resource.eAdapters().clear();
+				// the resource may already be null if the document was opened for a bogus
+				// storage / stream - NPE guard here
+				if (state != null) {
+					// clean up resource set and resource to release resources
+					state.getResourceSet().eSetDeliver(false);
+					state.getResourceSet().eAdapters().clear();
+					state.eSetDeliver(false);
+					state.eAdapters().clear();
+				}
 				resource = null;
 			}
 		});
