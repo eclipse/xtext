@@ -202,10 +202,17 @@ public class PortableURIs {
       _eObject=_resource.getEObject(_fragment);
     }
     final EObject to = _eObject;
-    Resource _eResource = to.eResource();
-    ResourceSet _resourceSet_1 = _eResource.getResourceSet();
-    boolean _notEquals = (!Objects.equal(_resourceSet_1, null));
-    if (_notEquals) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(to, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      Resource _eResource = to.eResource();
+      ResourceSet _resourceSet_1 = _eResource.getResourceSet();
+      boolean _notEquals = (!Objects.equal(_resourceSet_1, null));
+      _or = _notEquals;
+    }
+    if (_or) {
       final URI result = this.toPortableURI(sourceResource, to);
       boolean _notEquals_1 = (!Objects.equal(result, null));
       if (_notEquals_1) {
