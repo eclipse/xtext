@@ -636,6 +636,28 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("2"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
+	
+	@Test
+	public void testBug455188_5() throws Exception {
+		StringBuilder a = new StringBuilder();
+		a.append("import java.util.List ");
+		a.append("class Bar {");
+		a.append("	def operator_add(List<String> l, String e){}");
+		a.append("}");
+		
+		classDefString = a.toString() + classDefString;
+		
+		StringBuilder b = new StringBuilder();
+		
+		b.append("{");
+		b.append("	val List<String> l = #[]");
+		b.append(" l += ''");
+		b.append("} extension Bar = new Bar{} ");
+		String model = b.toString();
+
+		notExpectAbsolute(model.indexOf("+="), 1, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
 
 	protected void highlight(String functionBody) {
 		try {
