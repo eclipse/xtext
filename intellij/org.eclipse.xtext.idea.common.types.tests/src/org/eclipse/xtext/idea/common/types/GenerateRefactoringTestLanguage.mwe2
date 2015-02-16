@@ -39,7 +39,6 @@ Workflow {
 
 	component = Generator {
 		pathRtProject = runtimeProject
-		pathUiProject = runtimeProject
 		pathTestProject = runtimeProject
 		projectNameRt = projectName
 		language = auto-inject {
@@ -54,10 +53,6 @@ Workflow {
 			fragment = exporting.QualifiedNamesFragment {}
 			fragment = types.TypesGeneratorFragment {}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-				options = auto-inject {}
-			}
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 			fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
