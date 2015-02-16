@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -88,7 +89,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 			return globalScopeProvider.getScope(context.eResource(), reference, new Predicate<IEObjectDescription>(){
 				@Override
 				public boolean apply(IEObjectDescription input) {
-					return input.getEObjectOrProxy() != context;
+					return !input.getEObjectURI().equals(EcoreUtil.getURI(context));
 				}
 			});
 		}
