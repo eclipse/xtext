@@ -5,5 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.junit4"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtend.lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

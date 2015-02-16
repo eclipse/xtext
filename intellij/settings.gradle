@@ -10,4 +10,5 @@ include (
 	'org.eclipse.xtext.idea.example.entities',
 	'org.eclipse.xtext.idea.example.entities.ide',
 	'org.eclipse.xtext.idea.example.entities.idea',
+	'org.eclipse.xtext.idea.common.types.tests'
 )

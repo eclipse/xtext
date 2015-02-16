@@ -225,13 +225,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
-    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, true, (this.ideaProjectPath + "/META-INF"));
+    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
       StringConcatenation _builder = new StringConcatenation();
-      String _name = grammar.getName();
-      String _simpleName = this._ideaPluginClassNames.toSimpleName(_name);
-      _builder.append(_simpleName, "");
-      _builder.append(" Launch Intellij.launch");
+      _builder.append(this.ideaProjectName, "");
+      _builder.append(".launch");
       CharSequence _compileLaunchIntellij = this.compileLaunchIntellij(grammar);
       this.writeFile(output, IdeaPluginGenerator.PLUGIN, _builder.toString(), _compileLaunchIntellij);
       CharSequence _compilePluginXml = this.compilePluginXml(grammar);
@@ -1267,7 +1265,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("<idea-version since-build=\"131\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<depends optional=\"true\">org.eclipse.xtext.idea</depends>");
+    _builder.append("<depends>org.eclipse.xtext.idea</depends>");
     _builder.newLine();
     {
       boolean _and = false;
@@ -1279,7 +1277,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
       if (_and) {
         _builder.append("\t");
-        _builder.append("<depends optional=\"true\">org.eclipse.xtext.xbase.idea</depends>");
+        _builder.append("<depends>org.eclipse.xtext.xbase.idea</depends>");
         _builder.newLine();
       }
     }
@@ -1476,55 +1474,43 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("<launchConfiguration type=\"org.eclipse.jdt.launching.localJavaApplication\">");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<stringAttribute key=\"bad_container_name\" value=\"/");
-    _builder.append(this.ideaProjectName, "\t");
-    _builder.append("/");
-    String _name = grammar.getName();
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_name);
-    String _lowerCase = _simpleName.toLowerCase();
-    _builder.append(_lowerCase, "\t");
-    _builder.append("_launch_intellij.launch\"/>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("<listEntry value=\"/");
-    _builder.append(this.ideaProjectName, "\t\t");
+    _builder.append(this.ideaProjectName, "");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.append("</listAttribute>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("<listEntry value=\"4\"/>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("</listAttribute>");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"false\"/>");
+    _builder.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.JRE_CONTAINER\" value=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 [1.6.0_65-b14-462]\"/>");
+    _builder.append("<listAttribute key=\"org.eclipse.jdt.launching.CLASSPATH\">");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"com.intellij.idea.Main\"/>");
+    _builder.append("<listEntry value=\"&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6&quot; javaProject=&quot;");
+    _builder.append(this.ideaProjectName, "");
+    _builder.append("&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#10;\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("</listAttribute>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("<booleanAttribute key=\"org.eclipse.jdt.launching.DEFAULT_CLASSPATH\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"com.intellij.rt.execution.application.AppMain\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"com.intellij.idea.Main\"/>");
+    _builder.newLine();
     _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
-    _builder.append(this.ideaProjectName, "\t");
+    _builder.append(this.ideaProjectName, "");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx2g -XX:MaxPermSize=320m -Didea.plugins.path=${INTELLIJ_IDEA_PLUGINS} -Didea.home.path=${INTELLIJ_IDEA} -Didea.ProcessCanceledException=disabled -Dcompiler.process.debug.port=-1\"/>");
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m&#10;-Xms256m&#10;-XX:MaxPermSize=250m&#10;-ea&#10;-Xbootclasspath/a:../intellij-ce/lib/boot.jar&#10;-Didea.plugins.path=./sandbox/plugins&#10;-Didea.smooth.progress=false&#10;-Dapple.laf.useScreenMenuBar=true&#10;-Didea.platform.prefix=Idea&#10;-Didea.launcher.port=7532&#10;-Didea.launcher.bin.path=../intellij-ce/bin&#10;-Dfile.encoding=UTF-8&#10;-classpath ../intellij-ce/lib/idea_rt.jar:../intellij-ce/lib/idea.jar:../intellij-ce/lib/bootstrap.jar:../intellij-ce/lib/extensions.jar:../intellij-ce/lib/util.jar:../intellij-ce/lib/openapi.jar:../intellij-ce/lib/trove4j.jar:../intellij-ce/lib/jdom.jar:../intellij-ce/lib/log4j.jar\"/>");
     _builder.newLine();
     _builder.append("</launchConfiguration>");
     _builder.newLine();

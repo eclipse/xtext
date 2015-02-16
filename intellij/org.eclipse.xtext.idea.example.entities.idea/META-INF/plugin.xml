@@ -8,8 +8,8 @@
 	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>
-	<depends optional="true">org.eclipse.xtext.idea</depends>
-	<depends optional="true">org.eclipse.xtext.xbase.idea</depends>
+	<depends>org.eclipse.xtext.idea</depends>
+	<depends>org.eclipse.xtext.xbase.idea</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.example.entities.idea.server.EntitiesBuildProcessParametersProvider"/>

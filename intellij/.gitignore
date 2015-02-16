@@ -18,3 +18,4 @@ build/
 lib/
 !**/src/**/lib/
 !**/xtend-gen/**/lib/
+sandbox
