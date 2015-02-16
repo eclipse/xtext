@@ -58,7 +58,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			EclipseResourceFileSystemAccess2 access, 
 			IProgressMonitor progressMonitor) throws CoreException {
 		BlockingQueue<FileSystemAccessRequest> requestQueue = newBlockingQueue(QUEUE_CAPACITY);
-		FileSystemAccessQueue fileSystemAccessQueue = new FileSystemAccessQueue(requestQueue);
+		FileSystemAccessQueue fileSystemAccessQueue = new FileSystemAccessQueue(requestQueue, progressMonitor);
 		context.getResourceSet().eAdapters().add(fileSystemAccessQueue);
 		try {
 			SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 1);
@@ -84,7 +84,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			try {
 				while (!requestQueue.isEmpty() || !executorService.isTerminated()) {
 					if (subMonitor.isCanceled()) {
-						executorService.shutdownNow();
+						cancelProcessing(requestQueue, executorService);
 						throw new OperationCanceledException();
 					}
 	
@@ -96,15 +96,16 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 					}
 					if (request != null) {
 						try {
-							request.procedure.apply();
+							request.getProcedure().apply();
 						} catch (OperationCanceledException e) {
+							cancelProcessing(requestQueue, executorService);
 							throw e;
 						} catch (Exception e) {
 							Throwable cause = e;
 							if (cause instanceof CoreException) {
 								cause = cause.getCause();
 							}
-							exceptions.add(org.eclipse.xtext.xbase.lib.Pair.of(request.uri, cause));
+							exceptions.add(org.eclipse.xtext.xbase.lib.Pair.of(request.getUri(), cause));
 						}
 					}
 				}
@@ -119,6 +120,13 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		} finally {
 			context.getResourceSet().eAdapters().remove(fileSystemAccessQueue);
 		}
+	}
+
+	private void cancelProcessing(BlockingQueue<FileSystemAccessRequest> requestQueue, ExecutorService executorService) {
+		// make sure waiting put on the queue are processed by freeing space in the queue
+		requestQueue.clear();
+		// stop processing of resources immediately
+		executorService.shutdownNow();
 	}
 
 	protected Runnable createRunnable(
