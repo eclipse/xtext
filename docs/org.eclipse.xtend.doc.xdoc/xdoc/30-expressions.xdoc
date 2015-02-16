@@ -676,7 +676,7 @@ diamond operator on generic method and constructor calls.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:lambdas[Lambda Expressions]
 
-A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
+A lambda expression is basically a piece of code wrapped into an object to pass it around. As
 a Java developer it is best to think of a lambda expression as an anonymous class with a single method, i.e. 
 like in the following Java code :
 
@@ -692,10 +692,13 @@ code[Java][
 ]
 
 This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man's replacement
-for lambda expressions in Java. 
+for lambda expressions in Java. This has been improved with
+link[https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html][Java 8 lambda expressions],
+which are conceptually very similar to Xtend lambda expressions.
+Depending on the selected target language version, Xtend lambdas are translated differently to Java:
+Java lambdas are generated for Java 8 (since 2.8), while anonymous classes are generated for lower versions.
 
-Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
-code above can be written in Xtend like this:
+The code above can be written in Xtend like this:
 
 code[Xtend][
   val textField = new JTextField
@@ -705,7 +708,7 @@ code[Xtend][
 ]
 
 As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
-Also a lambda expression like a method declares parameters. The lambda above has one parameter called code[e] which is of
+Similarly to a method, a lambda expression may declare parameters. The lambda above has one parameter called code[e] which is of
 type code[ActionEvent]. You do not have to specify the type explicitly because it can be inferred from
 the context:
 
@@ -715,8 +718,10 @@ code[Xtend][
   \])
 ]
 
-Also you do not need to speficy the argument names. If you leave them out a single argument will be named code[Xtend][it], if the lambda has more arguments
-the names will be code[Xtend][$1,$2,...,$n] depending on the numnber of arguments of course. Here's an example with a single argument named code[it].
+You do not need to speficy the argument names. If you leave them out, a single argument is named code[Xtend][it].
+If the lambda has more arguments, the implicit names are code[Xtend][$1,$2,...,$n] depending on the number of arguments of course.
+Here's an example with a single argument named code[Xtend][it].
+In this case code[Xtend][actionCommand] is equivalent to code[Xtend][it.actionCommand].
 
 code[Xtend][
   textField.addActionListener(\[
@@ -783,8 +788,9 @@ section2:closureTypes[Typing]
 
 Lambdas are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
 type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only 
-one abstract method. This allows for using lambda expressions in many existing Java
-APIs directly.
+one abstract method. This allows for using lambda expressions in many existing Java APIs
+in a similar way as link[https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html#target-typing][Java 8 lambdas]
+can be used. 
 
 However, if you write a lambda expression without having any target type expectation, like in the following
 assignment:

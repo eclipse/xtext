@@ -19,7 +19,7 @@ ul[
     such as Android or GWT]
 ] 
 
-Unlike other JVM languages Xtend has ref:javaInteroperability[zero interoperability issues] with Java:
+Unlike other JVM languages Xtend has ref:types[zero interoperability issues] with Java:
 Everything you write interacts with Java exactly as expected. At the same time Xtend is much more concise, 
 readable and expressive. Xtend's small library is just a thin layer that provides useful 
 utilities and extensions on top of the Java Development Kit (JDK). 

@@ -694,15 +694,77 @@ section:interfaces[Interface Declaration]
 
 An interface declaration is very similar to the one in Java. An interface can declare fields, which are
 by default final static therefore must have an initial value. And of course methods can
-be declared. They are public by default. Interfaces can extend any number of other interfaces and can
+be declared, which are public by default. Interfaces can extend any number of other interfaces and can
 declare type parameters.
-
 Here's an example:
 code[Xtend][
   interface MyInterface<T> extends OtherInterface {
     val CONSTANT = 42
     def T doStuff(String ... varArg) throws SomeException
   }
+]
+
+Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods,
+called link[http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html][default methods],
+as well as static methods. This is also supported in Xtend (since 2.8):
+if Java 8 is selected as target language version, interfaces are allowed to declare methods
+with bodies like in the following example.
+code[Xtend][
+  interface MyInterface {
+    def doStuff() {
+        'This is an instance method returning a string.'
+    }
+    static def doGlobalStuff() {
+        'This is a static method returning a string.'
+    }
+  }
+]
+The behavior of non-abstract instance methods is equivalent to that of Java default methods.
+Since interfaces can extend multiple other interfaces, multiple-inheritance conflicts can occur
+when different implementations of a method are inherited:
+code[Xtend][
+  interface A {
+      def execute() {
+          return 1
+      }
+  }
+  
+  interface B {
+      def execute() {
+          return 2
+      }
+  }
+  
+  interface C extends A, B {
+  }
+  
+  class D implements A, B {
+  }
+]
+The interface code[Xtend][C] and the class code[Xtend][D] are both marked with an error due to the
+multiple inheritance of the method code[Xtend][execute()]. There are four ways to resolve the problem.
+ul[
+  item[Redeclare the method as abstract (not allowed for non-abstract classes):
+    code[Xtend][
+      override execute()
+    ]
+  ]
+  item[Override the implementation:
+    code[Xtend][
+      override execute() {
+          return 3
+      }
+    ]
+  ]
+  item[Refer to a supertype implementation:
+    code[Xtend][
+      override execute() {
+          A.super.execute()
+      }
+    ]
+  ]
+  item[Avoid the inheritance of multiple method implementations in the first place. This is the
+    recommended approach.]
 ]
 
 section:annotationTypeDeclaration[Annotation Type Declaration]
