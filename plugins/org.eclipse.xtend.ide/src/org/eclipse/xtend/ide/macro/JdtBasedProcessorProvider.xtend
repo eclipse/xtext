@@ -20,12 +20,12 @@ import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.ResourceSetContext
@@ -37,25 +37,34 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
 	static val Logger LOG = Logger.getLogger(JdtBasedProcessorProvider) 
 
-	@FinalFieldsConstructor @Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
-		val ClassLoader classLoader
+	@Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
+		var ClassLoader classLoader
+		
+		new(ClassLoader classLoader) {
+			this.classLoader = classLoader
+		}
 
 		override isAdapterForType(Object type) {
 			type == ProcessorClassloaderAdapter
 		}
 		
 		override unsetTarget(Notifier oldTarget) {
-			setTarget(null)
+			discard()
 		}
 		
 		override setTarget(Notifier newTarget) {
 			if (newTarget==null) {
-				if (classLoader instanceof Closeable) {
-					try {
-						(classLoader as Closeable).close
-					} catch (IOException e) {
-						LOG.error(e.message, e)
-					}
+				discard()
+			}
+		}
+		
+		def discard() {
+			if (classLoader instanceof Closeable) {
+				try {
+					(classLoader as Closeable).close
+					classLoader = null
+				} catch (IOException e) {
+					LOG.error(e.message, e)
 				}
 			}
 		}
@@ -76,17 +85,38 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	override getClassLoader(EObject ctx) {
 		val rs = ctx.eResource.resourceSet as XtextResourceSet
 		val isBuilder = ResourceSetContext.get(rs).isBuilder
+		val isEditor = ResourceSetContext.get(rs).isEditor
 		if (isBuilder) {
 			val adapter = rs.eAdapters.filter(ProcessorClassloaderAdapter).head
 			if (adapter != null)
 				return adapter.classLoader
+		}
+		if (isEditor) {
+			val adapter = ctx.editorResource.eAdapters.filter(ProcessorClassloaderAdapter).head
+			if (adapter != null) {
+				if (adapter.classLoader == null) {
+					// old adapter without classLoader (already closed)
+					// remove
+					ctx.editorResource.eAdapters.remove(adapter)				
+				} else {
+					return adapter.classLoader
+				}
+			}
 		}
 		val project = rs.classpathURIContext as IJavaProject
 		val classloader = createClassLoaderForJavaProject(project)
 		if (isBuilder) {
 			rs.eAdapters.add(new ProcessorClassloaderAdapter(classloader))
 		}
+		if (isEditor) {
+			ctx.editorResource.eAdapters += new ProcessorClassloaderAdapter(classloader)
+		}
 		return classloader
+	}
+	
+	private def Resource getEditorResource(EObject ctx) {
+		// in editor it is resource #1
+		ctx.eResource.resourceSet.resources.head
 	}
 
 	/**
