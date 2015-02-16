@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.8.0"/>
+                <message_argument value="2.7.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.8.0"/>
@@ -8,10 +14,188 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/resource/DerivedStateAwareResourceDescriptionManager.java" type="org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager">
-        <filter id="338849923">
+    <resource path="src/org/eclipse/xtext/GrammarToDot.java" type="org.eclipse.xtext.GrammarToDot">
+        <filter id="627060751">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager"/>
+                <message_argument value="GrammarElementTitleSwitch"/>
+                <message_argument value="GrammarToDot"/>
+                <message_argument value="aeSwitch"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/formatting/impl/MatcherNFAProvider.java" type="org.eclipse.xtext.formatting.impl.MatcherNFAProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFAProvider&lt;S, T&gt;"/>
+                <message_argument value="MatcherNFAProvider"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="NFABuilder&lt;S, T&gt;"/>
+                <message_argument value="MatcherNFAProvider"/>
+                <message_argument value="createBuilder()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/formatting/impl/MatcherNFAProvider.java" type="org.eclipse.xtext.formatting.impl.MatcherNFAProvider$MatcherNFABuilder">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractCachingNFABuilder&lt;S, T&gt;"/>
+                <message_argument value="MatcherNFABuilder"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="NFADirection"/>
+                <message_argument value="MatcherNFABuilder"/>
+                <message_argument value="getDirection()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/formatting/impl/MatcherState.java" type="org.eclipse.xtext.formatting.impl.MatcherState">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFAState&lt;S, T&gt;"/>
+                <message_argument value="MatcherState"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="NFABuilder&lt;S, T&gt;"/>
+                <message_argument value="MatcherState"/>
+                <message_argument value="MatcherState(AbstractElement, IGrammarNFAProviderNFABuilder&lt;MatcherState,MatcherTransition&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/formatting/impl/MatcherTransition.java" type="org.eclipse.xtext.formatting.impl.MatcherTransition">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFATransition&lt;S, T&gt;"/>
+                <message_argument value="MatcherTransition"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/generator/JavaIoFileSystemAccess.java" type="org.eclipse.xtext.generator.JavaIoFileSystemAccess">
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="TraceFileNameProvider"/>
+                <message_argument value="JavaIoFileSystemAccess"/>
+                <message_argument value="JavaIoFileSystemAccess(IResourceServiceProviderRegistry, IEncodingProvider, TraceFileNameProvider, TraceRegionSerializer)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="TraceRegionSerializer"/>
+                <message_argument value="JavaIoFileSystemAccess"/>
+                <message_argument value="JavaIoFileSystemAccess(IResourceServiceProviderRegistry, IEncodingProvider, TraceFileNameProvider, TraceRegionSerializer)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/parsetree/reconstr/impl/TreeConstState.java" type="org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFAState&lt;S, T&gt;"/>
+                <message_argument value="TreeConstState"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="NFABuilder&lt;S, T&gt;"/>
+                <message_argument value="TreeConstState"/>
+                <message_argument value="TreeConstState(AbstractElement, IGrammarNFAProviderNFABuilder&lt;TreeConstState,TreeConstTransition&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/parsetree/reconstr/impl/TreeConstTransition.java" type="org.eclipse.xtext.parsetree.reconstr.impl.TreeConstTransition">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFATransition&lt;S, T&gt;"/>
+                <message_argument value="TreeConstTransition"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/parsetree/reconstr/impl/TreeConstructionNFAProvider.java" type="org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractNFAProvider&lt;S, T&gt;"/>
+                <message_argument value="TreeConstructionNFAProvider"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="NFABuilder&lt;S, T&gt;"/>
+                <message_argument value="TreeConstructionNFAProvider"/>
+                <message_argument value="createBuilder()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/parsetree/reconstr/impl/TreeConstructionNFAProvider.java" type="org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider$TreeConstNFABuilder">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractCachingNFABuilder&lt;S, T&gt;"/>
+                <message_argument value="TreeConstNFABuilder"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="NFADirection"/>
+                <message_argument value="TreeConstNFABuilder"/>
+                <message_argument value="getDirection()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/DerivedStateAwareResource.java" type="org.eclipse.xtext.resource.DerivedStateAwareResource">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="StorageAwareResource"/>
+                <message_argument value="DerivedStateAwareResource"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/validation/IssueSeverities.java" type="org.eclipse.xtext.validation.IssueSeverities">
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="IPreferenceValues"/>
+                <message_argument value="IssueSeverities"/>
+                <message_argument value="IssueSeverities(IPreferenceValues, Map&lt;String,PreferenceKey&gt;, SeverityConverter)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/validation/IssueSeveritiesProvider.java" type="org.eclipse.xtext.validation.IssueSeveritiesProvider">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IPreferenceValuesProvider"/>
+                <message_argument value="IssueSeveritiesProvider"/>
+                <message_argument value="getValuesProvider()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessQueue.java" type="org.eclipse.xtext.generator.FileSystemAccessQueue">
+        <filter id="338722907">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessQueue"/>
+                <message_argument value="FileSystemAccessQueue(BlockingQueue&lt;FileSystemAccessRequest&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessRequest.java" type="org.eclipse.xtext.generator.FileSystemAccessRequest">
+        <filter id="338722907">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
+                <message_argument value="FileSystemAccessRequest()"/>
+            </message_arguments>
+        </filter>
+        <filter id="388018290">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
+                <message_argument value="procedure"/>
+            </message_arguments>
+        </filter>
+        <filter id="388018290">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
+                <message_argument value="uri"/>
             </message_arguments>
         </filter>
     </resource>
