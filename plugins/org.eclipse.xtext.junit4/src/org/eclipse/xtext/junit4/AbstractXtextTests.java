@@ -238,7 +238,14 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	}
 	
 	public final XtextResource getResourceAndExpect(InputStream in, int errors) throws Exception {
-		return getResourceAndExpect(in, URI.createURI("mytestmodel."+getCurrentFileExtension()), errors);
+		return getResourceAndExpect(in, getTestModelURI(), errors);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected URI getTestModelURI() {
+		return URI.createURI("mytestmodel."+getCurrentFileExtension());
 	}
 
 	public final XtextResource getResource(InputStream in, URI uri) throws Exception {

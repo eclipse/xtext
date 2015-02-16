@@ -7,21 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.contentassist;
 
+import java.util.Collections;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -30,6 +44,33 @@ import com.google.inject.Injector;
  */
 @SuppressWarnings("restriction")
 public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
+	
+	private static final String TEST_PROJECT = "TestProject";
+	private static final String MODEL_FILE_NAME = "mytestmodel";
+	private static IProject project;
+
+	@Before
+	public void doSetupProject() throws Exception{
+		if(project == null){
+			with(doGetSetup());
+			PluginProjectFactory projectFactory = getInjector().getInstance(PluginProjectFactory.class);
+			projectFactory.setProjectName(TEST_PROJECT);
+			projectFactory.addFolders(Collections.singletonList("src"));
+			projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
+					"org.eclipse.pde.SchemaBuilder");
+			projectFactory.addProjectNatures(
+					XtextProjectHelper.NATURE_ID, JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature");
+			projectFactory.addRequiredBundles(Lists.newArrayList("org.eclipse.xtext"));
+			project = projectFactory.createProject(new NullProgressMonitor(), null);
+			get(SyncUtil.class).waitForBuild(new NullProgressMonitor());
+		}
+	}
+	
+	@AfterClass
+	public static void doDeleteProject() throws CoreException {
+		if(project != null && project.exists())
+			project.delete(true, new NullProgressMonitor());
+	}
 	
 	@Override
 	public ISetup doGetSetup() {
@@ -54,7 +95,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.common.Terminals", ",");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals", ",");
     }
     
     /**
@@ -65,7 +106,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.common.Terminals", ",");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals", ",");
     }
     
     @Test public void testCompletionOnDatatypeReference_03() throws Exception {
@@ -73,7 +114,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.common.Terminals");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals");
     }
     
     @Test public void testCompletionOnSyntaxError_01() throws Exception {
@@ -106,7 +147,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     @Test public void testCompleteGrammarName_01() throws Exception {
     	newBuilder()
         .append("grammar ")
-        .assertCount(0);
+        .assertText(MODEL_FILE_NAME);
     }
     
     @Test public void testCompleteAfterGrammarName_01() throws Exception {
@@ -963,5 +1004,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     				"Fragment",
     				"EOF");
     }
+    
+	@Override
+	protected URI getTestModelURI() {
+		return URI.createURI("platform:/resource/" + TEST_PROJECT + "/src/"+ MODEL_FILE_NAME + "."+getCurrentFileExtension());
+	}
 
 }
