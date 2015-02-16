@@ -6,16 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Export-Package: org.eclipse.xtext.idea.common.types,
  org.eclipse.xtext.idea.common.types.idea,
  org.eclipse.xtext.idea.common.types.scoping,
- org.eclipse.xtext.idea.common.types.ui,
- org.eclipse.xtext.idea.common.types.ui.contentassist,
  org.eclipse.xtext.idea.common.types.refactoringTestLanguage,
  org.eclipse.xtext.idea.common.types.refactoringTestLanguage.impl,
  org.eclipse.xtext.idea.common.types.refactoringTestLanguage.util,
  org.eclipse.xtext.idea.common.types.services,
  org.eclipse.xtext.idea.common.types.parseTreeConstruction,
  org.eclipse.xtext.idea.common.types.parser.antlr,
- org.eclipse.xtext.idea.common.types.parser.antlr.internal,
- org.eclipse.xtext.idea.common.types.ui.contentassist.antlr
+ org.eclipse.xtext.idea.common.types.parser.antlr.internal
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase;resolution:=optional,
  org.eclipse.xtext.generator;resolution:=optional,
@@ -30,13 +27,12 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.antlr.runtime,
+ org.eclipse.xtext.common.types.tests,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.xtext.common.types.ui,
- org.eclipse.xtext.common.types.tests,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
+ org.eclipse.xtext.common.types.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j
-Bundle-Activator: org.eclipse.xtext.idea.common.types.ui.internal.RefactoringTestLanguageActivator
