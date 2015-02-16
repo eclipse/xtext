@@ -966,10 +966,8 @@ by providing a different instance.
 <p>
 An interface declaration is very similar to the one in Java. An interface can declare fields, which are
 by default final static therefore must have an initial value. And of course methods can
-be declared. They are public by default. Interfaces can extend any number of other interfaces and can
+be declared, which are public by default. Interfaces can extend any number of other interfaces and can
 declare type parameters.
-</p>
-<p>
 Here&apos;s an example:
 <div class="literallayout">
 <div class="incode">
@@ -981,6 +979,100 @@ Here&apos;s an example:
 </p>
 </div>
 </div>
+</p>
+<p>
+Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods,
+called <a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">default methods</a>,
+as well as static methods. This is also supported in Xtend (since 2.8):
+if Java 8 is selected as target language version, interfaces are allowed to declare methods
+with bodies like in the following example.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">interface</span>&nbsp;MyInterface&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;doStuff()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;This&nbsp;is&nbsp;an&nbsp;instance&nbsp;method&nbsp;returning&nbsp;a&nbsp;string.&apos;</span><br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">def</span>&nbsp;doGlobalStuff()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;This&nbsp;is&nbsp;a&nbsp;static&nbsp;method&nbsp;returning&nbsp;a&nbsp;string.&apos;</span><br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
+</p>
+</div>
+</div>
+
+The behavior of non-abstract instance methods is equivalent to that of Java default methods.
+Since interfaces can extend multiple other interfaces, multiple-inheritance conflicts can occur
+when different implementations of a method are inherited:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">interface</span>&nbsp;A&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;execute()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+<span class="keyword">interface</span>&nbsp;B&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;execute()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+<span class="keyword">interface</span>&nbsp;C&nbsp;<span class="keyword">extends</span>&nbsp;A,&nbsp;B&nbsp;{<br/>
+}<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;D&nbsp;<span class="keyword">implements</span>&nbsp;A,&nbsp;B&nbsp;{<br/>
+}<br/>
+</p>
+</div>
+</div>
+
+The interface <span class="inlinecode">C</span> and the class <span class="inlinecode">D</span> are both marked with an error due to the
+multiple inheritance of the method <span class="inlinecode">execute()</span>. There are four ways to resolve the problem.
+<ul>
+	<li>
+		Redeclare the method as abstract (not allowed for non-abstract classes):
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">override</span>&nbsp;execute()<br/>
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		Override the implementation:
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">override</span>&nbsp;execute()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;3<br/>
+		}<br/>
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		Refer to a supertype implementation:
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">override</span>&nbsp;execute()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;A.<span class="keyword">super</span>.execute()<br/>
+		}<br/>
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		Avoid the inheritance of multiple method implementations in the first place. This is the
+		    recommended approach.
+	</li>
+</ul>
 </p>
 <a name="annotationTypeDeclaration"></a>
 <h2>Annotation Type Declaration</h2>

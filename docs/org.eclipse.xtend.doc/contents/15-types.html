@@ -21,6 +21,21 @@ generic types just as you are used to from Java. The type system and its conform
 defined in  
 <a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html">the Java Language Specification</a>.
 </p>
+<p>
+Resembling and supporting every aspect of Java&apos;s type system ensures that there is no impedance mismatch between Java and Xtend.
+This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have
+to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles.
+As a bonus, if you know Java&apos;s type system and are familiar with Java&apos;s generic types, you already know the most complicated part
+of Xtend.
+</p>
+<p>
+The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version
+compatibility as specified for the Java compiler in the respective project.
+This can be changed in the global preferences or in the project properties on the <em>Xtend -&gt; Compiler</em> page (since 2.8).
+Depending on which Java language version is chosen, Xtend might generate different but equivalent code.
+For example, <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a> are translated to Java lambdas if the compiler is set to Java 8,
+while for lower Java versions anonymous classes are generated.
+</p>
 <a name="localTypeInference"></a>
 <h2>Type Inference</h2>
 <p>
@@ -28,6 +43,31 @@ One of the problems with Java is that you are forced to write type signatures ov
 and over again. That is why so many people do not like static typing. 
 But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is statically typed
 just like Java, you rarely have to write types down because they can be computed from the context.
+</p>
+<p>
+Consider the following Java variable declaration:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">final</span>&nbsp;LinkedList&lt;String&gt;&nbsp;list&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;LinkedList&lt;String&gt;();<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The type name written for the constructor call must be repeated to declare the variable type.
+In Xtend the variable type can be inferred from the initialization expression:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;list&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;LinkedList&lt;String&gt;<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="conversionRules"></a>
 <h2>Conversion Rules</h2>
@@ -64,19 +104,8 @@ Another very useful conversion applies to lambda expressions. A lambda expressio
 usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
 or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
 abstract method declaration, a lambda expression is automatically converted to that
-type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
+type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;">Lambda Expression Typing</a>
 for more details. 
-</p>
-<a name="javaInteroperability"></a>
-<h2>Interoperability with Java</h2>
-<p>
-Resembling and supporting every aspect of Java&apos;s type system ensures that there is no impedance mismatch between Java and Xtend.
-This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have
-to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles.
-</p>
-<p>
-As a bonus if you know Java&apos;s type system and are familiar with Java&apos;s generic types, you already know the most complicated part
-of Xtend.
 </p>
 </body>
 </html>

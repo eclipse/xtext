@@ -26,8 +26,6 @@
 			</topic>
 			<topic href="contents/15-types.html#conversionRules" label="Conversion Rules" >
 			</topic>
-			<topic href="contents/15-types.html#javaInteroperability" label="Interoperability with Java" >
-			</topic>
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#Xtend_Classes_Members" label="Classes and Members" >
 			<topic href="contents/20-classes-and-functions.html#packageDecl" label="Package Declaration" >

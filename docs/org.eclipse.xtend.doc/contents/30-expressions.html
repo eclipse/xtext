@@ -1307,7 +1307,7 @@ diamond operator on generic method and constructor calls.
 <a name="lambdas"></a>
 <h2>Lambda Expressions</h2>
 <p>
-A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
+A lambda expression is basically a piece of code wrapped into an object to pass it around. As
 a Java developer it is best to think of a lambda expression as an anonymous class with a single method, i.e. 
 like in the following Java code :
 </p>
@@ -1329,11 +1329,14 @@ textField.addActionListener(<span class="keyword">new</span>&nbsp;ActionListener
 </p>
 <p>
 This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man&apos;s replacement
-for lambda expressions in Java. 
+for lambda expressions in Java. This has been improved with
+<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Java 8 lambda expressions</a>,
+which are conceptually very similar to Xtend lambda expressions.
+Depending on the selected target language version, Xtend lambdas are translated differently to Java:
+Java lambdas are generated for Java 8 (since 2.8), while anonymous classes are generated for lower versions.
 </p>
 <p>
-Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
-code above can be written in Xtend like this:
+The code above can be written in Xtend like this:
 </p>
 <p>
 <div class="literallayout">
@@ -1349,7 +1352,7 @@ textField.addActionListener([&nbsp;ActionEvent&nbsp;e&nbsp;|<br/>
 </p>
 <p>
 As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
-Also a lambda expression like a method declares parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
+Similarly to a method, a lambda expression may declare parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
 type <span class="inlinecode">ActionEvent</span>. You do not have to specify the type explicitly because it can be inferred from
 the context:
 </p>
@@ -1365,8 +1368,10 @@ textField.addActionListener([&nbsp;e&nbsp;|<br/>
 </div>
 </p>
 <p>
-Also you do not need to speficy the argument names. If you leave them out a single argument will be named <span class="inlinecode"><span class="keyword">it</span></span>, if the lambda has more arguments
-the names will be <span class="inlinecode">$1,$2,...,$n</span> depending on the numnber of arguments of course. Here&apos;s an example with a single argument named <span class="inlinecode">it</span>.
+You do not need to speficy the argument names. If you leave them out, a single argument is named <span class="inlinecode"><span class="keyword">it</span></span>.
+If the lambda has more arguments, the implicit names are <span class="inlinecode">$1,$2,...,$n</span> depending on the number of arguments of course.
+Here&apos;s an example with a single argument named <span class="inlinecode"><span class="keyword">it</span></span>.
+In this case <span class="inlinecode">actionCommand</span> is equivalent to <span class="inlinecode"><span class="keyword">it</span>.actionCommand</span>.
 </p>
 <p>
 <div class="literallayout">
@@ -1470,8 +1475,9 @@ The variable <span class="inlinecode"><span class="keyword">this</span></span> r
 <p>
 Lambdas are expressions which produce <em>Function</em> objects. The type of a lambda expression generally depends on the target
 type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only 
-one abstract method. This allows for using lambda expressions in many existing Java
-APIs directly.
+one abstract method. This allows for using lambda expressions in many existing Java APIs
+in a similar way as <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html#target-typing">Java 8 lambdas</a>
+can be used. 
 </p>
 <p>
 However, if you write a lambda expression without having any target type expectation, like in the following
