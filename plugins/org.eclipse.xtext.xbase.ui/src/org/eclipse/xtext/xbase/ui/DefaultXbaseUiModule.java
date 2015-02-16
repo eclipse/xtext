@@ -11,6 +11,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
+import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.service.SingletonBinding;
@@ -27,7 +28,10 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
@@ -134,5 +138,13 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	
 	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
 		return ResourcesPlugin.getWorkspace().getRoot();
+	}
+	
+	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
+		return XbaseBuilderConfigurationBlock.class;
+	}
+	
+	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+		return EclipseGeneratorConfigProvider.class;
 	}
 }
