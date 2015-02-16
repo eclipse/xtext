@@ -17,11 +17,9 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
 /**
- * Whether the constructor or method causes any side-effects to
- * non-local state.
+ * The annotated constructor or method causes no externally visible side-effects.
  * 
- * On {@link Inline}d methods this is means the compiler cannot 
- * use the resulting Java expression as a statement. 
+ * On {@link Inline}d methods this means the compiler cannot use the resulting Java expression as a statement. 
  *  
  * @author Sven Efftinge - Initial contribution and API
  * 
