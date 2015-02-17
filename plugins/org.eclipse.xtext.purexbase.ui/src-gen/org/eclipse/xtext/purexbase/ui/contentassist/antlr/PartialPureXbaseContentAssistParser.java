@@ -12,8 +12,8 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
+/*
+ * Template CodetemplatesGeneratorFragment.xpt
  */
 public class PartialPureXbaseContentAssistParser extends PureXbaseParser implements IPartialEditingContentAssistParser {
 

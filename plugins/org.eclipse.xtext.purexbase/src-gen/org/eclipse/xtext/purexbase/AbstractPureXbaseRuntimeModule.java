@@ -13,7 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.purexbase.PureXbaseRuntimeModule}
  */
- @SuppressWarnings("all")
+@SuppressWarnings("all")
 public abstract class AbstractPureXbaseRuntimeModule extends org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule {
 
 	protected Properties properties = null;
