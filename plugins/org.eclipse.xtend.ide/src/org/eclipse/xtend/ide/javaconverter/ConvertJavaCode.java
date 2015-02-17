@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -76,6 +77,7 @@ public class ConvertJavaCode {
 	private @Inject @FormatterPreferences IPreferenceValuesProvider cfgProvider;
 	private @Inject IFormatter2 formatter;
 	private @Inject DontAskAgainDialogs dialogs;
+	private static final Logger LOG = Logger.getLogger(ConvertJavaCode.class);
 
 	public void runJavaConverter(final Set<ICompilationUnit> compilationUnits, Shell activeShell)
 			throws ExecutionException {
@@ -185,7 +187,7 @@ public class ConvertJavaCode {
 		}
 	}
 
-	private String formatXtendCode(IFile xtendFile, final String xtendCode) throws ExecutionException {
+	private String formatXtendCode(IFile xtendFile, final String xtendCode) {
 		try {
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
 			FormatterRequest request = new FormatterRequest();
@@ -195,7 +197,8 @@ public class ConvertJavaCode {
 			List<ITextReplacement> replacements = formatter.format(request);
 			String formatted = TextReplacements.apply(xtendCode, replacements);
 			return formatted;
-		} catch (ExecutionException e) {
+		} catch (Exception e) {
+			LOG.error("Formatting step canceled due to an exception.", e);
 			return null;
 		}
 	}
