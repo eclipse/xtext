@@ -114,6 +114,8 @@ public class FeatureLinkHelper {
 						return multiTypeComponent;
 					}
 				}
+			} else {
+				return declaratorReference;
 			}
 		} else if (receiverType.isSynonym() && linkedFeature instanceof JvmMember) {
 			List<LightweightTypeReference> components = receiverType.getMultiTypeComponents();
