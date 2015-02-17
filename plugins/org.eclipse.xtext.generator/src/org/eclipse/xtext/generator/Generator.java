@@ -212,7 +212,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean handleWarnings(Issues issues, CompositeGeneratorException e) {
 		for (Exception ex : e.getExceptions()) {
 			if (ex instanceof CompositeGeneratorException) {
-				handleWarnings(issues, (CompositeGeneratorException) ex);
+				if (!handleWarnings(issues, (CompositeGeneratorException) ex)) {
+					return false;
+				}
 			} else if (ex instanceof GeneratorWarning) {
 				issues.addWarning(this, "Warning: " + ex.getMessage(), null, null, null);
 			} else {
