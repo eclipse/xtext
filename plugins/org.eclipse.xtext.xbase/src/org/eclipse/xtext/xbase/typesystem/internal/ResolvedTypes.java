@@ -944,7 +944,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				return doGetDeclaredType(identifiable);
 			}
 		} else if (!shared.allReassignedTypes.contains(identifiable) && !shared.allTypes.contains(identifiable)) {
-			return doGetDeclaredType(identifiable);
+			int prevSize = shared.allReassignedTypes.size();
+			LightweightTypeReference result = doGetDeclaredType(identifiable);
+			// iff the declared type is a computed type and the type computation itself
+			// reassignes the type, try again to find it
+			// in other words: if a reassigned type was added while a declared type was converted
+			// to a lightweight type, check again if the identifiable is reassigned now
+			if (prevSize == shared.allReassignedTypes.size() || !shared.allReassignedTypes.contains(identifiable)) {
+				return result;
+			}
 		}
 		LightweightTypeReference result = doGetActualTypeNoDeclaration(identifiable, ignoreReassignedTypes);
 		if (result == null) {
