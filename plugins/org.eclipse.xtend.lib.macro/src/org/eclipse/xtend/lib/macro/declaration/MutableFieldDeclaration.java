@@ -82,32 +82,104 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	void setInitializer(StringConcatenationClient template);
 	
 	/**
-	 * Sets the 'initializer' expression of this field declaration.
+	 * sets the 'constant' value of this field.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
-	 * Marks this field as 'constant', 'static' and 'final'.
+	 * Also marks this field as 'static' and 'final'
 	 * 
-	 * <b>The given {@link CompilationStrategy} will be executed later during code generation, not immediately.</b>
-	 * 
-	 * @param initializer the compilation strategy, must not be <code>null</code>
-	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
+	 * @param value the constant value
 	 * 
 	 * @since 2.8
 	 */
-	void setConstantInitializer(CompilationStrategy initializer);
-	
+	void setConstantValueAsLong(long value);
+
 	/**
-	 * sets the 'initializer' expression of this field declaration.
+	 * sets the 'constant' value of this field.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
-	 * Marks this field as 'constant', 'static' and 'final'.
+	 * Also marks this field as 'static' and 'final'
 	 * 
-	 * <b>The given {@link StringConcatenationClient} will be executed later during code generation, not immediately.</b>
-	 * 
-	 * @param template the compilation template, must not be <code>null</code>
-	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
+	 * @param value the constant value
 	 * 
 	 * @since 2.8
 	 */
-	void setConstantInitializer(StringConcatenationClient template);
+	void setConstantValueAsInt(int value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsShort(short value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsByte(byte value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsDouble(double value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsFloat(float value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsChar(char value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsBoolean(boolean value);
+
+	/**
+	 * sets the 'constant' value of this field.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Also marks this field as 'static' and 'final'
+	 * 
+	 * @param value the constant value, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>value</code> is <code>null</code>
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantValueAsString(String value);
 	
 	/**
 	 * Indicate that this field is properly initialized by the given constructor.
