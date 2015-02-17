@@ -88,7 +88,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected IInformationControlCreator hoverControlCreator;
 	protected IInformationControlCreator presenterControlCreator;
 	
-	protected static final String LEADING_PADDING = "<div style='position: relative; left: 16;'>";
+	protected static final String LEADING_PADDING = "<div style='position: relative; left: 20;'>";
 	protected static final String TRAILING_PADDING = "</div>";
 
 	@Override
