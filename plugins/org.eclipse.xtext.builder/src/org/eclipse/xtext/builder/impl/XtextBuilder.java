@@ -85,8 +85,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
 			queuedBuildData.createCheckpoint();
-			if(isInterrupted())
-				handleCanceled();
+			if(isInterrupted()) {
+				throw new OperationCanceledException("Build has been interrupted");
+			}
 			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -146,10 +147,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=454716
 		if(!isInterrupted())
 			operationCanceledManager.propagateIfCancelException(t);
-		handleCanceled();
-	}
-
-	private void handleCanceled() {
 		buildLogger.log("Build interrupted.");
 		queuedBuildData.rollback();
 		doRememberLastBuiltState();
