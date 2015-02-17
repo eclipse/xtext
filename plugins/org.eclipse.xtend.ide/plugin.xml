@@ -1474,16 +1474,17 @@
                   style="push">
                <visibleWhen
                   checkEnabled="false">
-	               <with
-	                     variable="selection">
-	                  <iterate
-	                        ifEmpty="false"
-	                        operator="or">
-	                     <adapt
-	                           type="org.eclipse.jdt.core.ICompilationUnit">
-	                     </adapt>
-	                  </iterate>
-	               </with>
+	                     <with variable="selection">
+					         <iterate
+			                    ifEmpty="false"
+			                    operator="or">
+						         <or>
+						         	<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+						         	<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
+						            <adapt type="org.eclipse.jdt.core.ICompilationUnit"/>
+						         </or>
+					         </iterate>
+					      </with>
            		 </visibleWhen>
             </command>
        </menuContribution>

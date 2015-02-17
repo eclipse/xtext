@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.javaconverter;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,9 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
@@ -53,20 +57,36 @@ public class ConvertJavaCodeHandler extends AbstractHandler {
 			if (element instanceof IJavaElement) {
 				IJavaElement elem = (IJavaElement) element;
 				if (elem.exists()) {
-					switch (elem.getElementType()) {
-						case IJavaElement.TYPE:
-							if (elem.getParent().getElementType() == IJavaElement.COMPILATION_UNIT) {
-								result.add((ICompilationUnit) elem.getParent());
-							}
-							break;
-						case IJavaElement.COMPILATION_UNIT:
-							result.add((ICompilationUnit) elem);
-							break;
-					}
+					collectCompilationUnits(elem, result);
+
 				}
 			}
 		}
 		return result;
+	}
+
+	private void collectCompilationUnits(IJavaElement elem, Set<ICompilationUnit> result) {
+		try {
+			switch (elem.getElementType()) {
+				case IJavaElement.TYPE:
+					if (elem.getParent().getElementType() == IJavaElement.COMPILATION_UNIT) {
+						result.add((ICompilationUnit) elem.getParent());
+					}
+					break;
+				case IJavaElement.COMPILATION_UNIT:
+					result.add((ICompilationUnit) elem);
+					break;
+				case IJavaElement.PACKAGE_FRAGMENT:
+					Collections.addAll(result, ((IPackageFragment) elem).getCompilationUnits());
+					break;
+				case IJavaElement.PACKAGE_FRAGMENT_ROOT:
+					for (IJavaElement child : ((IPackageFragmentRoot) elem).getChildren()) {
+						collectCompilationUnits(child, result);
+					}
+					break;
+			}
+		} catch (JavaModelException e) {
+		}
 	}
 
 }
