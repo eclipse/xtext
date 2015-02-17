@@ -14,6 +14,7 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.Keyword
@@ -27,7 +28,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 @Singleton
-class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
 	
 	protected override getGrammarFileName(Grammar it) {
 		getGrammarFileName('')
@@ -37,17 +38,17 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		
 		options {
 			superClass=AbstractInternalAntlrParser;
-		«IF options.backtrack || options.memoize || options.k >= 0»
+			«IF options.backtrack || options.memoize || options.k >= 0»
 			«IF options.backtrack»
-			backtrack=true
+			backtrack=true;
 			«ENDIF»
 			«IF options.memoize»
-			memoize=true
+			memoize=true;
 			«ENDIF»
 			«IF options.k >= 0»
-			memoize=«options.k»
+			memoize=«options.k»;
 			«ENDIF»
-		«ENDIF»
+			«ENDIF»
 		}
 	''' 
 	
@@ -64,7 +65,7 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-		«IF !allParserRules.exists[!eAllContentsAsList.filter(UnorderedGroup).empty] && options.backtrack»
+		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
 		import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 		«ENDIF»
 		import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
@@ -153,14 +154,6 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		}
 	}
 		
-	protected def compileInitUnorderedGroups(ParserRule it, AntlrOptions options) '''
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-		«FOR group:eAllContentsAsList.filter(UnorderedGroup) SEPARATOR ', '»
-			grammarAccess.«group.gaRuleElementAccessor»
-		«ENDFOR»
-		);
-	'''
-		
 	protected def compileInitHiddenTokens(ParserRule it, AntlrOptions options) '''
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOR hidden:hiddenTokens SEPARATOR ', '»"«hidden.ruleName»"«ENDFOR»);
 	'''
@@ -169,7 +162,7 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		«IF definesHiddenTokens || definesUnorderedGroups(options)»
 		finally {
 			«IF definesHiddenTokens»myHiddenTokenState.restore();«ENDIF»
-			«IF definesUnorderedGroups(options)»myUnorderedGroupState.restore();«ENDIF»
+			«compileRestoreUnorderedGroups(options)»
 		}«ENDIF»'''
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
@@ -191,43 +184,6 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				'[EObject current=null]'
 			default:
 				throw new IllegalStateException("Unexpected rule: " + it)
-		}
-	}
-	
-	protected override String _dataTypeEbnf2(UnorderedGroup it, boolean supportActions) {
-		if (supportActions) {
-			val mandatoryContent = elements.filter[!optionalCardinality].size
-			'''
-				(
-					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
-					}
-					(
-						(
-				«FOR element:elements.indexed SEPARATOR '|'»
-							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
-									{
-										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
-									}
-			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
-									({true}?=>(«element.value.dataTypeEbnf2(supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
-									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
-									}
-								)
-							)
-				«ENDFOR»
-						)«IF mandatoryContent != 0»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
-					)
-				)
-					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
-					}
-			'''
-		} else {
-			super._dataTypeEbnf2(it, supportActions)
 		}
 	}
 	
@@ -278,43 +234,6 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 			super._dataTypeEbnf2(it, supportActions)
 	}
 	
-	protected override String _ebnf2(UnorderedGroup it, AntlrOptions options, boolean supportActions) {
-		if (supportActions) {
-			val mandatoryContent = elements.filter[!optionalCardinality].size
-			'''
-				(
-					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
-					}
-					(
-						(
-				«FOR element:elements.indexed SEPARATOR '|'»
-							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
-									{
-										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
-									}
-			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
-									({true}?=>(«element.value.ebnf(options, supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
-									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
-									}
-								)
-							)
-				«ENDFOR»
-						)«IF mandatoryContent != 0»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
-					)
-				)
-					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
-					}
-				'''
-		} else {
-			super._ebnf2(it, options, supportActions)	
-		}
-	}
-	
 	protected override String _ebnf2(Action it, AntlrOptions options, boolean supportActions) {
 		if (supportActions) '''
 			«IF options.backtrack»
@@ -341,6 +260,17 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				«newLeafNode(containingAssignment.localVar(it))»
 			}
 		'''
+		else '''
+			«localVar»=«super._ebnf2(it, options, supportActions)»
+			{
+				«newLeafNode(localVar)»
+			}
+		'''
+	}
+	
+	override protected _ebnf2(EnumLiteralDeclaration it, AntlrOptions options, boolean supportActions) {
+		if (!supportActions) 
+			super._ebnf2(it, options, supportActions)
 		else '''
 			«localVar»=«super._ebnf2(it, options, supportActions)»
 			{

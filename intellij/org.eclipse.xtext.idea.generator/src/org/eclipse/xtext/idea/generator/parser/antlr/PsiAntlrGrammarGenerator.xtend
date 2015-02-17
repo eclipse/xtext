@@ -24,9 +24,12 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.EnumLiteralDeclaration
+import org.eclipse.xtext.UnorderedGroup
 
 @Singleton
-class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
 	
 	@Inject
 	extension IdeaPluginClassNames
@@ -39,17 +42,17 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 
 		options {
 			superClass=AbstractPsiAntlrParser;
-		«IF options.backtrack || options.memoize || options.k >= 0»
+			«IF options.backtrack || options.memoize || options.k >= 0»
 			«IF options.backtrack»
-			backtrack=true
+			backtrack=true;
 			«ENDIF»
 			«IF options.memoize»
-			memoize=true
+			memoize=true;
 			«ENDIF»
 			«IF options.k >= 0»
-			memoize=«options.k»
+			memoize=«options.k»;
 			«ENDIF»
-		«ENDIF»
+			«ENDIF»
 		}
 	'''
 	
@@ -58,6 +61,10 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 		import «grammar.elementTypeProviderName»;
 		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
+		import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
+		«ENDIF»
+		import «gaFQName»;
 
 		import com.intellij.lang.PsiBuilder;
 	'''
@@ -73,10 +80,13 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		*/
 		
 		«ENDIF»
-		public «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
+		private «gaSimpleName» grammarAccess;
 		
-		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider) {
+		private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
+		
+		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider, «gaSimpleName» grammarAccess) {
 			super(builder, input, tokenTypeProvider);
+		    this.grammarAccess = grammarAccess;
 			this.elementTypeProvider = elementTypeProvider;
 		}
 		
@@ -94,12 +104,16 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		//Entry rule «entryRuleName»
-		«entryRuleName»:
+		«entryRuleName»«IF definesUnorderedGroups(options)»
+		@init {
+			«compileInitUnorderedGroups(options)»
+		}«ENDIF»:
 			{ «markComposite» }
 			«ruleName»
 			{ «doneComposite» }
 			EOF;
 		finally {
+			«compileRestoreUnorderedGroups(options)»
 		}
 		
 		«compileEBNF(options)»
@@ -172,7 +186,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	override protected _ebnf2(Keyword it, AntlrOptions options, boolean supportActions) {
 		if (!supportActions)
 			return super._ebnf2(it, options, supportActions)
-		else if (assigned) '''
+		else if(assigned) '''
 			{
 				«markLeaf»
 			}
@@ -181,6 +195,20 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				«doneLeaf(containingAssignment.localVar(it))»
 			}
 		'''
+		else '''
+			{
+				«markLeaf»
+			}
+			«localVar»=«super._ebnf2(it, options, supportActions)»
+			{
+				«doneLeaf(localVar)»
+			}
+		'''
+	}
+	
+	override protected _ebnf2(EnumLiteralDeclaration it, AntlrOptions options, boolean supportActions) {
+		if (!supportActions)
+			return super._ebnf2(it, options, supportActions)
 		else '''
 			{
 				«markLeaf»

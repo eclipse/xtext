@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.generator
 
-import com.google.common.collect.HashMultimap
+import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Inject
 import java.util.Arrays
 import java.util.List
@@ -315,18 +315,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 		import «grammar.elementTypeProviderName»;
 		import «grammar.psiInternalParserName»;
+		import «grammar.gaFQName»;
 		
 		import com.google.inject.Inject;
 		import com.intellij.lang.PsiBuilder;
 		
 		public class «grammar.psiParserName.toSimpleName» extends AbstractXtextPsiParser {
-			
+
+			@Inject 
+			private «grammar.gaSimpleName» grammarAccess;
+		
 			@Inject 
 			private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 		
 			@Override
 			protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider);
+				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
 			}
 		
 		}
@@ -786,10 +790,26 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 					tokenTypes[i] = new IndexedElementType(tokenNames[i], i, «grammar.languageName.toSimpleName».INSTANCE);
 				}
 			}
-			
+		
+			«IF grammar.allTerminalRules.exists[name == 'WS']»
 			private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);
+			«ELSE»
+			private static final TokenSet WHITESPACE_TOKENS = TokenSet.EMPTY;
+			«ENDIF»
+			«IF grammar.allTerminalRules.exists[name == 'SL_COMMENT'] && grammar.allTerminalRules.exists[name == 'ML_COMMENT']»
 			private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);
+			«ELSEIF grammar.allTerminalRules.exists[name == 'SL_COMMENT']»
+			private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT]);
+			«ELSEIF grammar.allTerminalRules.exists[name == 'ML_COMMENT']»
+			private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_ML_COMMENT]);
+			«ELSE»
+			private static final TokenSet COMMENT_TOKENS = TokenSet.EMPTY;
+			«ENDIF»
+			«IF grammar.allTerminalRules.exists[name == 'STRING']»
 			private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);
+			«ELSE»
+			private static final TokenSet STRING_TOKENS = TokenSet.EMPTY;
+			«ENDIF»
 		
 		    public int getAntlrType(IElementType iElementType) {
 		        return ((IndexedElementType)iElementType).getLocalIndex();
@@ -836,7 +856,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileParserDefinition(Grammar grammar) {
-		val namedGrammarElement = HashMultimap.<String, String>create
+		val namedGrammarElement = LinkedHashMultimap.<String, String>create
 		for (nameRuleCall : grammar.eAllContents.filter(RuleCall).filter [
 			assigned && containingAssignment.feature == 'name'
 		].toIterable) {
