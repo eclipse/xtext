@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -232,10 +233,15 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	private void convertMultiType(LightweightTypeReference expectation, CompoundTypeReference multiType, XExpression context,
 			ITreeAppendable b, Later expression) {
 		LightweightTypeReference castTo = null;
-		for(LightweightTypeReference candidate: multiType.getMultiTypeComponents()) {
-			if (isJavaConformant(expectation, candidate)) {
-				castTo = candidate;
-				break;
+		List<LightweightTypeReference> components = multiType.getMultiTypeComponents();
+		ITypeReferenceOwner owner = multiType.getOwner();
+		LightweightTypeReference commonType = owner.getServices().getTypeConformanceComputer().getCommonSuperType(components, owner);
+		if (!isJavaConformant(expectation, commonType)) {
+			for(LightweightTypeReference candidate: multiType.getMultiTypeComponents()) {
+				if (isJavaConformant(expectation, candidate)) {
+					castTo = candidate;
+					break;
+				}
 			}
 		}
 		if (castTo != null && mustInsertTypeCast(context, castTo)) {
