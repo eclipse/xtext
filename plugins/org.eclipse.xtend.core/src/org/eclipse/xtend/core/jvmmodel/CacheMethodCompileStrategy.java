@@ -93,7 +93,7 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		}
 		appendable.append(");");
 		// declare result variable
-		LightweightTypeReference returnType = resolvedTypes.getActualType(createExtensionInfo.getCreateExpression());
+		LightweightTypeReference returnType = resolvedTypes.getActualType(initializerMethod.getParameters().get(0));
 		if (returnType != null) {
 			appendable.newLine().append("final ").append(returnType);
 		} else {
@@ -119,8 +119,15 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		appendable.append(";");
 
 		// store the newly created object in the cache
-		appendable.newLine().append(cacheVarName).append(".put(").append(cacheKeyVarName).append(", ")
-				.append(resultVarName).append(");");
+		appendable.newLine().append(cacheVarName).append(".put(").append(cacheKeyVarName).append(", ");
+		LightweightTypeReference fieldType = resolvedTypes.getActualType(cacheField);
+		LightweightTypeReference declaredResultType = fieldType.getTypeArguments().get(1);
+		boolean castRequired = false;
+		if (!declaredResultType.isAssignableFrom(returnType)) {
+			castRequired = true;
+			appendable.append("(").append(declaredResultType).append(")");
+		}
+		appendable.append(resultVarName).append(");");
 
 		// close synchronize block
 		appendable.decreaseIndentation();
@@ -132,6 +139,9 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		appendable.append(");");
 		// return the result
 		appendable.newLine().append("return ");
+		if (castRequired) {
+			appendable.append("(").append(declaredResultType).append(")");
+		}
 		appendable.append(resultVarName).append(";");
 	}
 
