@@ -20,6 +20,8 @@ import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.parser.antlr.TokenSourceProvider
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper
+import com.google.inject.Provider
 
 abstract class AbstractXtextPsiParser implements PsiParser {
 
@@ -34,10 +36,16 @@ abstract class AbstractXtextPsiParser implements PsiParser {
 	@Inject
 	@Accessors(PROTECTED_GETTER)
 	TokenSourceProvider tokenSourceProvider
+	
+	@Inject
+	@Accessors(PROTECTED_GETTER)
+	Provider<IUnorderedGroupHelper> unorderedGroupHelperProvider
 
 	override parse(IElementType root, PsiBuilder builder) {
 		val parser = builder.createParser(builder.createTokenStream) => [
 			tokenTypeMap = tokenDefProvider.tokenDefMap
+			unorderedGroupHelper = unorderedGroupHelperProvider.get
+			unorderedGroupHelper.initializeWith(it)
 		]
 
 		var rootMarker = builder.mark

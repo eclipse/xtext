@@ -154,15 +154,16 @@ public class GrammarAccessExtensions {
         Iterable<RuleCall> _filter = Iterables.<RuleCall>filter(_flatten, RuleCall.class);
         final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
           @Override
-          public Boolean apply(final RuleCall it) {
-            return Boolean.valueOf((!Objects.equal(rule, null)));
+          public Boolean apply(final RuleCall ruleCall) {
+            AbstractRule _rule = ruleCall.getRule();
+            return Boolean.valueOf((!Objects.equal(_rule, null)));
           }
         };
         Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_filter, _function_1);
         final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
           @Override
-          public AbstractRule apply(final RuleCall it) {
-            return rule;
+          public AbstractRule apply(final RuleCall ruleCall) {
+            return ruleCall.getRule();
           }
         };
         Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(_filter_1, _function_2);
@@ -351,8 +352,8 @@ public class GrammarAccessExtensions {
   protected String _localVar(final AbstractElement it) {
     String _xblockexpression = null;
     {
-      ParserRule _containingParserRule = GrammarUtil.containingParserRule(it);
-      List<AbstractElement> _contentsAsList = this.contentsAsList(_containingParserRule);
+      final ParserRule rule = GrammarUtil.containingParserRule(it);
+      List<AbstractElement> _contentsAsList = this.contentsAsList(rule);
       final int index = _contentsAsList.indexOf(it);
       _xblockexpression = ("otherlv_" + Integer.valueOf(index));
     }

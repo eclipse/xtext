@@ -18,7 +18,7 @@ import com.intellij.psi.tree.TokenSet;
 			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, EntitiesLanguage.INSTANCE);
 		}
 	}
-	
+
 	private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);
 	private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);
 	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);

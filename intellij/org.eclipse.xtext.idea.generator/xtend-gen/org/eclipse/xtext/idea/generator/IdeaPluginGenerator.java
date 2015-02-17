@@ -8,8 +8,8 @@
 package org.eclipse.xtext.idea.generator;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,6 +30,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
@@ -894,6 +895,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_psiInternalParserName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    _builder.append("import ");
+    String _gaFQName = this._grammarAccess.gaFQName(grammar);
+    _builder.append(_gaFQName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import com.google.inject.Inject;");
     _builder.newLine();
@@ -906,7 +912,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractXtextPsiParser {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Inject ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private ");
+    String _gaSimpleName = this._grammarAccess.gaSimpleName(grammar);
+    _builder.append(_gaSimpleName, "\t");
+    _builder.append(" grammarAccess;");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@Inject ");
@@ -930,7 +945,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _psiInternalParserName_1 = this._ideaPluginClassNames.getPsiInternalParserName(grammar);
     String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_psiInternalParserName_1);
     _builder.append(_simpleName_2, "\t\t");
-    _builder.append("(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider);");
+    _builder.append("(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");
@@ -2321,17 +2336,112 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);");
-    _builder.newLine();
+    {
+      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(grammar);
+      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "WS"));
+        }
+      };
+      boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+      if (_exists) {
+        _builder.append("\t");
+        _builder.append("private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);");
+        _builder.newLine();
+      } else {
+        _builder.append("\t");
+        _builder.append("private static final TokenSet WHITESPACE_TOKENS = TokenSet.EMPTY;");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _and = false;
+      List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
+      final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
+        }
+      };
+      boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+      if (!_exists_1) {
+        _and = false;
+      } else {
+        List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
+        final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
+          @Override
+          public Boolean apply(final TerminalRule it) {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+          }
+        };
+        boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+        _and = _exists_2;
+      }
+      if (_and) {
+        _builder.append("\t");
+        _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);");
+        _builder.newLine();
+      } else {
+        List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
+        final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
+          @Override
+          public Boolean apply(final TerminalRule it) {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
+          }
+        };
+        boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+        if (_exists_3) {
+          _builder.append("\t");
+          _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT]);");
+          _builder.newLine();
+        } else {
+          List<TerminalRule> _allTerminalRules_4 = GrammarUtil.allTerminalRules(grammar);
+          final Function1<TerminalRule, Boolean> _function_4 = new Function1<TerminalRule, Boolean>() {
+            @Override
+            public Boolean apply(final TerminalRule it) {
+              String _name = it.getName();
+              return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+            }
+          };
+          boolean _exists_4 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_4, _function_4);
+          if (_exists_4) {
+            _builder.append("\t");
+            _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_ML_COMMENT]);");
+            _builder.newLine();
+          } else {
+            _builder.append("\t");
+            _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.EMPTY;");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    {
+      List<TerminalRule> _allTerminalRules_5 = GrammarUtil.allTerminalRules(grammar);
+      final Function1<TerminalRule, Boolean> _function_5 = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "STRING"));
+        }
+      };
+      boolean _exists_5 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_5, _function_5);
+      if (_exists_5) {
+        _builder.append("\t");
+        _builder.append("private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);");
+        _builder.newLine();
+      } else {
+        _builder.append("\t");
+        _builder.append("private static final TokenSet STRING_TOKENS = TokenSet.EMPTY;");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public int getAntlrType(IElementType iElementType) {");
@@ -2448,7 +2558,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      final HashMultimap<String, String> namedGrammarElement = HashMultimap.<String, String>create();
+      final LinkedHashMultimap<String, String> namedGrammarElement = LinkedHashMultimap.<String, String>create();
       TreeIterator<EObject> _eAllContents = grammar.eAllContents();
       Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
       final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {

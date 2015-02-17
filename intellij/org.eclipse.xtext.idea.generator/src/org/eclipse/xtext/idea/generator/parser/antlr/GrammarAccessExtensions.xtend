@@ -87,7 +87,7 @@ class GrammarAccessExtensions {
 		val allRules = grammar.allRules
 		allRules.indexOf(rule) == 0 || allRules.map [
 			eAllContentsAsList
-		].flatten.filter(RuleCall).filter[rule != null].map[rule].toList.contains(rule)
+		].flatten.filter(RuleCall).filter[ruleCall | ruleCall.rule != null].map[ruleCall | ruleCall.rule].toList.contains(rule)
 	}
 
 	def definesUnorderedGroups(ParserRule it, AntlrOptions options) {
@@ -149,7 +149,8 @@ class GrammarAccessExtensions {
 	}
 
 	dispatch def localVar(AbstractElement it) {
-		val index = containingParserRule.contentsAsList.indexOf(it)
+		val rule = containingParserRule
+		val index = rule.contentsAsList.indexOf(it)
 		'otherlv_' + index
 	}
 

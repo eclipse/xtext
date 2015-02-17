@@ -10,6 +10,7 @@ package org.eclipse.xtext.idea.parser;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -55,6 +57,10 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   @Accessors(AccessorType.PROTECTED_GETTER)
   private TokenSourceProvider tokenSourceProvider;
   
+  @Inject
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private Provider<IUnorderedGroupHelper> unorderedGroupHelperProvider;
+  
   @Override
   public ASTNode parse(final IElementType root, final PsiBuilder builder) {
     try {
@@ -67,6 +73,10 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
           public void apply(final AbstractPsiAntlrParser it) {
             Map<Integer, String> _tokenDefMap = AbstractXtextPsiParser.this.tokenDefProvider.getTokenDefMap();
             it.setTokenTypeMap(_tokenDefMap);
+            IUnorderedGroupHelper _get = AbstractXtextPsiParser.this.unorderedGroupHelperProvider.get();
+            it.setUnorderedGroupHelper(_get);
+            IUnorderedGroupHelper _unorderedGroupHelper = it.getUnorderedGroupHelper();
+            _unorderedGroupHelper.initializeWith(it);
           }
         };
         final AbstractPsiAntlrParser parser = ObjectExtensions.<AbstractPsiAntlrParser>operator_doubleArrow(_createParser, _function);
@@ -183,5 +193,10 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   @Pure
   protected TokenSourceProvider getTokenSourceProvider() {
     return this.tokenSourceProvider;
+  }
+  
+  @Pure
+  protected Provider<IUnorderedGroupHelper> getUnorderedGroupHelperProvider() {
+    return this.unorderedGroupHelperProvider;
   }
 }

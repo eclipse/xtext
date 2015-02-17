@@ -22,6 +22,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -192,9 +193,8 @@ public class DefaultAntlrGrammarGenerator {
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       final Function1<ParserRule, Boolean> _function = new Function1<ParserRule, Boolean>() {
         @Override
-        public Boolean apply(final ParserRule it) {
-          Grammar _grammar = GrammarUtil.getGrammar(it);
-          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(it, _grammar));
+        public Boolean apply(final ParserRule rule) {
+          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(rule, it));
         }
       };
       Iterable<ParserRule> _filter = IterableExtensions.<ParserRule>filter(_allParserRules, _function);
@@ -209,9 +209,8 @@ public class DefaultAntlrGrammarGenerator {
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
       final Function1<EnumRule, Boolean> _function_1 = new Function1<EnumRule, Boolean>() {
         @Override
-        public Boolean apply(final EnumRule it) {
-          Grammar _grammar = GrammarUtil.getGrammar(it);
-          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(it, _grammar));
+        public Boolean apply(final EnumRule rule) {
+          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(rule, it));
         }
       };
       Iterable<EnumRule> _filter_1 = IterableExtensions.<EnumRule>filter(_allEnumRules, _function_1);
@@ -623,6 +622,14 @@ public class DefaultAntlrGrammarGenerator {
     return this._grammarAccessExtensions.ruleName(_rule);
   }
   
+  protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
+    Keyword _literal = it.getLiteral();
+    String _value = _literal.getValue();
+    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+    String _plus = ("\'" + _antlrString);
+    return (_plus + "\'");
+  }
+  
   protected String _crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     throw new IllegalStateException(("crossrefEbnf is not supported for " + it));
   }
@@ -806,6 +813,8 @@ public class DefaultAntlrGrammarGenerator {
       return _ebnf2((Action)it, options, supportActions);
     } else if (it instanceof Assignment) {
       return _ebnf2((Assignment)it, options, supportActions);
+    } else if (it instanceof EnumLiteralDeclaration) {
+      return _ebnf2((EnumLiteralDeclaration)it, options, supportActions);
     } else if (it instanceof Keyword) {
       return _ebnf2((Keyword)it, options, supportActions);
     } else if (it instanceof RuleCall) {

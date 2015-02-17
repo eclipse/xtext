@@ -13,7 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule}
  */
- @SuppressWarnings("all")
+@SuppressWarnings("all")
 public abstract class AbstractEntitiesRuntimeModule extends org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule {
 
 	protected Properties properties = null;

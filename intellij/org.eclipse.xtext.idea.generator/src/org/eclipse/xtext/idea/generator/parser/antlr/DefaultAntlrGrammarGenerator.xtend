@@ -31,6 +31,7 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
+import org.eclipse.xtext.EnumLiteralDeclaration
 
 @Singleton
 class DefaultAntlrGrammarGenerator {
@@ -114,11 +115,11 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def compileRules(Grammar it, AntlrOptions options) '''
-		«FOR rule:allParserRules.filter[isCalled(grammar)]»
+		«FOR rule:allParserRules.filter[rule | rule.isCalled(it)]»
 
 			«rule.compileRule(it, options)»
 		«ENDFOR»
-		«FOR rule:allEnumRules.filter[isCalled(grammar)]»
+		«FOR rule:allEnumRules.filter[rule | rule.isCalled(it)]»
 
 			«rule.compileRule(it, options)»
 		«ENDFOR»
@@ -235,6 +236,10 @@ class DefaultAntlrGrammarGenerator {
 	
 	protected dispatch def String ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
 		rule.ruleName
+	}
+	
+	protected dispatch def String ebnf2(EnumLiteralDeclaration it, AntlrOptions options, boolean supportActions) {
+		"'" + literal.value.toAntlrString + "'"
 	}
 	
 	protected dispatch def String crossrefEbnf(AbstractElement it, CrossReference ref, boolean supportActions) {

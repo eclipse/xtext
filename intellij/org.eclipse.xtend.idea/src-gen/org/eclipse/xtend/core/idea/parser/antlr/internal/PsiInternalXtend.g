@@ -129,16 +129,20 @@ package org.eclipse.xtend.core.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
 
-public XtendElementTypeProvider elementTypeProvider;
+private XtendGrammarAccess grammarAccess;
 
-public PsiInternalXtendParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XtendElementTypeProvider elementTypeProvider) {
+private XtendElementTypeProvider elementTypeProvider;
+
+public PsiInternalXtendParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XtendElementTypeProvider elementTypeProvider, XtendGrammarAccess grammarAccess) {
 	super(builder, input, tokenTypeProvider);
+    this.grammarAccess = grammarAccess;
 	this.elementTypeProvider = elementTypeProvider;
 }
 
@@ -9755,35 +9759,6 @@ ruleNumber:
 			)?
 		)
 	)
-;
-
-//Entry rule entryRuleStaticQualifier
-entryRuleStaticQualifier:
-	{ markComposite(elementTypeProvider.getStaticQualifierElementType()); }
-	ruleStaticQualifier
-	{ doneComposite(); }
-	EOF;
-finally {
-}
-
-// Rule StaticQualifier
-ruleStaticQualifier:
-	(
-		{
-			markComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
-		}
-		ruleValidID
-		{
-			doneComposite();
-		}
-		{
-			markLeaf();
-		}
-		kw='::'
-		{
-			doneLeaf(kw, elementTypeProvider.getStaticQualifier_ColonColonKeyword_1ElementType());
-		}
-	)+
 ;
 
 //Entry rule entryRuleJvmTypeReference
