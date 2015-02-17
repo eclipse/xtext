@@ -82,6 +82,34 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	void setInitializer(StringConcatenationClient template);
 	
 	/**
+	 * Sets the 'initializer' expression of this field declaration.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Marks this field as 'constant', 'static' and 'final'.
+	 * 
+	 * <b>The given {@link CompilationStrategy} will be executed later during code generation, not immediately.</b>
+	 * 
+	 * @param initializer the compilation strategy, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantInitializer(CompilationStrategy initializer);
+	
+	/**
+	 * sets the 'initializer' expression of this field declaration.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * Marks this field as 'constant', 'static' and 'final'.
+	 * 
+	 * <b>The given {@link StringConcatenationClient} will be executed later during code generation, not immediately.</b>
+	 * 
+	 * @param template the compilation template, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
+	 * 
+	 * @since 2.8
+	 */
+	void setConstantInitializer(StringConcatenationClient template);
+	
+	/**
 	 * Indicate that this field is properly initialized by the given constructor.
 	 * @param constructorDeclaration a constructor that initializes this field
 	 * 
