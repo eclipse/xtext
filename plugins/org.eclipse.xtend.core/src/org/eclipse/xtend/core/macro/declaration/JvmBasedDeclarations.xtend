@@ -1195,24 +1195,6 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		compilationUnit.setCompilationTemplate(delegate, template)
 	}
 	
-	override setConstantInitializer(CompilationStrategy initializer) {
-		checkMutable
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
-		delegate.constant = true
-		delegate.final = true
-		delegate.static = true
-		compilationUnit.setCompilationStrategy(delegate, initializer)
-	}
-	
-	override setConstantInitializer(StringConcatenationClient template) {
-		checkMutable
-		Preconditions.checkArgument(template != null, "template cannot be null")
-		delegate.constant = true
-		delegate.final = true
-		delegate.static = true
-		compilationUnit.setCompilationTemplate(delegate, template)
-	}
-
 	override setFinal(boolean isFinal) {
 		checkMutable
 		delegate.setFinal(isFinal)
@@ -1237,6 +1219,60 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		checkMutable
 		Preconditions.checkArgument(type != null, "type cannot be null");
 		delegate.setType(compilationUnit.toJvmTypeReference(type))
+	}
+	
+	override setConstantValueAsBoolean(boolean value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»''')
+	}
+	
+	private def internalGenericSetConstantValue(Object value) {
+		checkMutable
+		Preconditions.checkArgument(value != null, "value cannot be null");
+		delegate.constant = true
+		delegate.final = true
+		delegate.static = true
+		delegate.constantValue = value
+	}
+	
+	override setConstantValueAsByte(byte value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»''')
+	}
+	
+	override setConstantValueAsInt(int value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»''')
+	}
+	
+	override setConstantValueAsShort(short value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»''')
+	}
+	
+	override setConstantValueAsLong(long value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»L''')
+	}
+	
+	override setConstantValueAsFloat(float value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»f''')
+	}
+	
+	override setConstantValueAsDouble(double value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«value»d''')
+	}
+	
+	override setConstantValueAsChar(char value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''«»'«value»'«»''')
+	}
+	
+	override setConstantValueAsString(String value) {
+		internalGenericSetConstantValue(value)
+		compilationUnit.setCompilationTemplate(delegate, '''"«value»"''')
 	}
 	
 }
