@@ -258,6 +258,12 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				String string = name + " - " + description.getName();
 				return new StyledString(string);
 			}
+		} else if(XtextPackage.Literals.GRAMMAR == description.getEClass()){
+			QualifiedName qualifiedName = description.getQualifiedName();
+			if(qualifiedName.getSegmentCount() >1) {
+				return new StyledString(qualifiedName.getLastSegment() + " - " + qualifiedName.toString());
+			}
+			return new StyledString(qualifiedName.toString());
 		}
 		return super.getStyledDisplayString(description);
 	}
