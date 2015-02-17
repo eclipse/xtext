@@ -24,6 +24,8 @@ import org.junit.Test
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import org.eclipse.core.runtime.NullProgressMonitor
+import com.google.common.io.CharStreams
+import java.io.InputStreamReader
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,11 +56,35 @@ class MoreActiveAnnotationsTest {
 			class MyAAProcessor extends AbstractClassProcessor {
 				
 				override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-					annotatedClass.addField('FOO') [
-						type = string
-						static = true
+					annotatedClass.addField('CONSTANT_INT') [
+						type = primitiveInt
 						visibility = Visibility.PUBLIC
-						constantInitializer = '«»''"all"'«»''
+						constantValueAsInt = 42
+					]
+					annotatedClass.addField('CONSTANT_LONG') [
+						type = primitiveLong
+						visibility = Visibility.PUBLIC
+						constantValueAsLong = 42
+					]
+					annotatedClass.addField('CONSTANT_FLOAT') [
+						type = primitiveFloat
+						visibility = Visibility.PUBLIC
+						constantValueAsFloat = 42.34f
+					]
+					annotatedClass.addField('CONSTANT_DOUBLE') [
+						type = primitiveDouble
+						visibility = Visibility.PUBLIC
+						constantValueAsDouble = 42.11d
+					]
+					annotatedClass.addField('CONSTANT_CHAR') [
+						type = primitiveChar
+						visibility = Visibility.PUBLIC
+						constantValueAsChar = '\n'
+					]
+					annotatedClass.addField('CONSTANT_STRING') [
+						type = string
+						visibility = Visibility.PUBLIC
+						constantValueAsString = "\n\t\\all"
 					]
 				}
 			}
@@ -72,7 +98,7 @@ class MoreActiveAnnotationsTest {
 		userProject.newSource("client/A.xtend", '''
 			package client
 			
-			@SuppressWarnings(client.sub.B.FOO)
+			@SuppressWarnings(client.sub.B.CONSTANT_STRING)
 			class A {
 			}
 		''')
@@ -88,6 +114,29 @@ class MoreActiveAnnotationsTest {
 		
 		cleanBuild
 		waitForBuild(new NullProgressMonitor)
+		val file = userProject.project.findMember("xtend-gen/client/sub/B.java") as IFile
+		val contents = CharStreams.toString(new InputStreamReader(file.contents))
+		assertEquals('''
+			package client.sub;
+			
+			import annotation.MyAA;
+			
+			@MyAA
+			@SuppressWarnings("all")
+			public class B {
+			  public final static int CONSTANT_INT = 42;
+			  
+			  public final static long CONSTANT_LONG = 42L;
+			  
+			  public final static float CONSTANT_FLOAT = 42.34f;
+			  
+			  public final static double CONSTANT_DOUBLE = 42.11d;
+			  
+			  public final static char CONSTANT_CHAR = '\n';
+			  
+			  public final static String CONSTANT_STRING = "\n\t\\all";
+			}
+		'''.toString, contents)
 		assertNoErrorsInWorkspace
 	}
 	
