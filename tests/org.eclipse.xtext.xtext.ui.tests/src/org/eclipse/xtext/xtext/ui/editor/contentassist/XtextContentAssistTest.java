@@ -30,7 +30,6 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -115,6 +114,12 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
 	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals");
+    }
+    
+    @Test public void testCompletionOnDatatypeReference_04() throws Exception {
+        newBuilder()
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals<|>")
+	        .assertProposalDisplayedAtCursor("Terminals - org.eclipse.xtext.common.Terminals");
     }
     
     @Test public void testCompletionOnSyntaxError_01() throws Exception {
