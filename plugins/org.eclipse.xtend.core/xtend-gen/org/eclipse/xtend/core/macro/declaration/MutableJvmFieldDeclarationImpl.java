@@ -28,6 +28,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
@@ -124,38 +125,6 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   @Override
-  public void setConstantInitializer(final CompilationStrategy initializer) {
-    this.checkMutable();
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
-    JvmField _delegate = this.getDelegate();
-    _delegate.setConstant(true);
-    JvmField _delegate_1 = this.getDelegate();
-    _delegate_1.setFinal(true);
-    JvmField _delegate_2 = this.getDelegate();
-    _delegate_2.setStatic(true);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmField _delegate_3 = this.getDelegate();
-    _compilationUnit.setCompilationStrategy(_delegate_3, initializer);
-  }
-  
-  @Override
-  public void setConstantInitializer(final StringConcatenationClient template) {
-    this.checkMutable();
-    boolean _notEquals = (!Objects.equal(template, null));
-    Preconditions.checkArgument(_notEquals, "template cannot be null");
-    JvmField _delegate = this.getDelegate();
-    _delegate.setConstant(true);
-    JvmField _delegate_1 = this.getDelegate();
-    _delegate_1.setFinal(true);
-    JvmField _delegate_2 = this.getDelegate();
-    _delegate_2.setStatic(true);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmField _delegate_3 = this.getDelegate();
-    _compilationUnit.setCompilationTemplate(_delegate_3, template);
-  }
-  
-  @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();
@@ -192,5 +161,155 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
     _delegate.setType(_jvmTypeReference);
+  }
+  
+  @Override
+  public void setConstantValueAsBoolean(final boolean value) {
+    this.internalGenericSetConstantValue(Boolean.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  private void internalGenericSetConstantValue(final Object value) {
+    this.checkMutable();
+    boolean _notEquals = (!Objects.equal(value, null));
+    Preconditions.checkArgument(_notEquals, "value cannot be null");
+    JvmField _delegate = this.getDelegate();
+    _delegate.setConstant(true);
+    JvmField _delegate_1 = this.getDelegate();
+    _delegate_1.setFinal(true);
+    JvmField _delegate_2 = this.getDelegate();
+    _delegate_2.setStatic(true);
+    JvmField _delegate_3 = this.getDelegate();
+    _delegate_3.setConstantValue(value);
+  }
+  
+  @Override
+  public void setConstantValueAsByte(final byte value) {
+    this.internalGenericSetConstantValue(Byte.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsInt(final int value) {
+    this.internalGenericSetConstantValue(Integer.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsShort(final short value) {
+    this.internalGenericSetConstantValue(Short.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsLong(final long value) {
+    this.internalGenericSetConstantValue(Long.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+        _builder.append("L");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsFloat(final float value) {
+    this.internalGenericSetConstantValue(Float.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+        _builder.append("f");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsDouble(final double value) {
+    this.internalGenericSetConstantValue(Double.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append(value, "");
+        _builder.append("d");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsChar(final char value) {
+    this.internalGenericSetConstantValue(Character.valueOf(value));
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("\'");
+        String _string = Character.toString(value);
+        String _convertToJavaString = Strings.convertToJavaString(_string);
+        _builder.append(_convertToJavaString, "");
+        _builder.append("\'");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
+  }
+  
+  @Override
+  public void setConstantValueAsString(final String value) {
+    this.internalGenericSetConstantValue(value);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("\"");
+        String _convertToJavaString = Strings.convertToJavaString(value);
+        _builder.append(_convertToJavaString, "");
+        _builder.append("\"");
+      }
+    };
+    _compilationUnit.setCompilationTemplate(_delegate, _client);
   }
 }
