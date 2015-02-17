@@ -21,16 +21,20 @@ package org.eclipse.xtext.xbase.annotations.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
 
-public XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
+private XbaseWithAnnotationsGrammarAccess grammarAccess;
 
-public PsiInternalXbaseWithAnnotationsParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XbaseWithAnnotationsElementTypeProvider elementTypeProvider) {
+private XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
+
+public PsiInternalXbaseWithAnnotationsParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XbaseWithAnnotationsElementTypeProvider elementTypeProvider, XbaseWithAnnotationsGrammarAccess grammarAccess) {
 	super(builder, input, tokenTypeProvider);
+    this.grammarAccess = grammarAccess;
 	this.elementTypeProvider = elementTypeProvider;
 }
 
@@ -5028,35 +5032,6 @@ ruleNumber:
 	)
 ;
 
-//Entry rule entryRuleStaticQualifier
-entryRuleStaticQualifier:
-	{ markComposite(elementTypeProvider.getStaticQualifierElementType()); }
-	ruleStaticQualifier
-	{ doneComposite(); }
-	EOF;
-finally {
-}
-
-// Rule StaticQualifier
-ruleStaticQualifier:
-	(
-		{
-			markComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
-		}
-		ruleValidID
-		{
-			doneComposite();
-		}
-		{
-			markLeaf();
-		}
-		kw='::'
-		{
-			doneLeaf(kw, elementTypeProvider.getStaticQualifier_ColonColonKeyword_1ElementType());
-		}
-	)+
-;
-
 //Entry rule entryRuleJvmTypeReference
 entryRuleJvmTypeReference:
 	{ markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
@@ -5626,56 +5601,6 @@ ruleJvmLowerBoundAnded:
 	)
 ;
 
-//Entry rule entryRuleJvmTypeParameter
-entryRuleJvmTypeParameter:
-	{ markComposite(elementTypeProvider.getJvmTypeParameterElementType()); }
-	ruleJvmTypeParameter
-	{ doneComposite(); }
-	EOF;
-finally {
-}
-
-// Rule JvmTypeParameter
-ruleJvmTypeParameter:
-	(
-		(
-			(
-				{
-					markComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
-				}
-				lv_name_0_0=ruleValidID
-				{
-					doneComposite();
-				}
-			)
-		)
-		(
-			(
-				(
-					{
-						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
-					}
-					lv_constraints_1_0=ruleJvmUpperBound
-					{
-						doneComposite();
-					}
-				)
-			)
-			(
-				(
-					{
-						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
-					}
-					lv_constraints_2_0=ruleJvmUpperBoundAnded
-					{
-						doneComposite();
-					}
-				)
-			)*
-		)?
-	)
-;
-
 //Entry rule entryRuleQualifiedNameWithWildcard
 entryRuleQualifiedNameWithWildcard:
 	{ markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
@@ -5730,30 +5655,6 @@ ruleValidID:
 	{
 		doneLeaf(this_ID_0, elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
 	}
-;
-
-//Entry rule entryRuleXImportSection
-entryRuleXImportSection:
-	{ markComposite(elementTypeProvider.getXImportSectionElementType()); }
-	ruleXImportSection
-	{ doneComposite(); }
-	EOF;
-finally {
-}
-
-// Rule XImportSection
-ruleXImportSection:
-	(
-		(
-			{
-				markComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
-			}
-			lv_importDeclarations_0_0=ruleXImportDeclaration
-			{
-				doneComposite();
-			}
-		)
-	)+
 ;
 
 //Entry rule entryRuleXImportDeclaration

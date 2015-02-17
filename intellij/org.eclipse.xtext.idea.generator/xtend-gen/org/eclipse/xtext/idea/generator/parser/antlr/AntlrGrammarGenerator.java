@@ -20,6 +20,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -29,15 +30,15 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.idea.generator.parser.antlr.DefaultAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.UnorderedGroupsAwareAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
   @Override
   protected String getGrammarFileName(final Grammar it) {
     return this._namingExtensions.getGrammarFileName(it, "");
@@ -73,14 +74,16 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         {
           boolean _isBacktrack_1 = options.isBacktrack();
           if (_isBacktrack_1) {
-            _builder.append("backtrack=true");
+            _builder.append("\t");
+            _builder.append("backtrack=true;");
             _builder.newLine();
           }
         }
         {
           boolean _isMemoize_1 = options.isMemoize();
           if (_isMemoize_1) {
-            _builder.append("memoize=true");
+            _builder.append("\t");
+            _builder.append("memoize=true;");
             _builder.newLine();
           }
         }
@@ -88,9 +91,11 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
           int _k_1 = options.getK();
           boolean _greaterEqualsThan_1 = (_k_1 >= 0);
           if (_greaterEqualsThan_1) {
+            _builder.append("\t");
             _builder.append("memoize=");
             int _k_2 = options.getK();
-            _builder.append(_k_2, "");
+            _builder.append(_k_2, "\t");
+            _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -133,17 +138,17 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     {
       boolean _and = false;
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, Boolean> _function = new Function1<ParserRule, Boolean>() {
+      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
         @Override
-        public Boolean apply(final ParserRule it) {
-          List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
-          boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-          return Boolean.valueOf((!_isEmpty));
+        public List<EObject> apply(final ParserRule it) {
+          return EcoreUtil2.eAllContentsAsList(it);
         }
       };
-      boolean _exists = IterableExtensions.<ParserRule>exists(_allParserRules, _function);
-      boolean _not_1 = (!_exists);
+      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
+      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
+      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
+      boolean _not_1 = (!_isEmpty_1);
       if (!_not_1) {
         _and = false;
       } else {
@@ -414,31 +419,6 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _switchResult;
   }
   
-  protected CharSequence compileInitUnorderedGroups(final ParserRule it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(");
-    _builder.newLine();
-    {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
-      boolean _hasElements = false;
-      for(final UnorderedGroup group : _filter) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        _builder.append("grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(group);
-        _builder.append(_gaRuleElementAccessor, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append(");");
-    _builder.newLine();
-    return _builder;
-  }
-  
   protected CharSequence compileInitHiddenTokens(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(");
@@ -485,12 +465,8 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        {
-          boolean _definesUnorderedGroups_1 = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-          if (_definesUnorderedGroups_1) {
-            _builder.append("myUnorderedGroupState.restore();");
-          }
-        }
+        CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
+        _builder.append(_compileRestoreUnorderedGroups, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
       }
@@ -550,154 +526,6 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       throw new IllegalStateException(("Unexpected rule: " + it));
     }
     return _switchResult;
-  }
-  
-  @Override
-  protected String _dataTypeEbnf2(final UnorderedGroup it, final boolean supportActions) {
-    String _xifexpression = null;
-    if (supportActions) {
-      String _xblockexpression = null;
-      {
-        EList<AbstractElement> _elements = it.getElements();
-        final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractElement it) {
-            boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-            return Boolean.valueOf((!_isOptionalCardinality));
-          }
-        };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("(");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("{ ");
-        _builder.newLine();
-        _builder.append("\t  ");
-        _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(it);
-        _builder.append(_gaRuleElementAccessor, "\t  ");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("(");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("(");
-        _builder.newLine();
-        {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
-          boolean _hasElements = false;
-          for(final Pair<Integer, AbstractElement> element : _indexed) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate("|", "");
-            }
-            _builder.append("(");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_1, "\t");
-            _builder.append(", ");
-            Integer _key = element.getKey();
-            _builder.append(_key, "\t");
-            _builder.append(")}?=>(");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
-            _builder.append(", ");
-            Integer _key_1 = element.getKey();
-            _builder.append(_key_1, "\t\t\t");
-            _builder.append(");");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t\t\t\t\t");
-            _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _dataTypeEbnf2 = this.dataTypeEbnf2(_value, supportActions);
-            _builder.append(_dataTypeEbnf2, "\t\t\t\t\t");
-            _builder.append("))");
-            {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
-              if (_isMultipleCardinality) {
-                _builder.append("+");
-              }
-            }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{ ");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
-            _builder.append(");");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append(")");
-            _builder.newLine();
-            _builder.append(")");
-            _builder.newLine();
-          }
-        }
-        _builder.append("\t\t");
-        _builder.append(")");
-        {
-          if ((mandatoryContent != 0)) {
-            _builder.append("+");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_4, "\t\t");
-            _builder.append(")}?");
-          } else {
-            _builder.append("*");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(")");
-        _builder.newLine();
-        _builder.append(")");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("{ ");
-        _builder.newLine();
-        _builder.append("\t  ");
-        _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(it);
-        _builder.append(_gaRuleElementAccessor_5, "\t  ");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _xblockexpression = _builder.toString();
-      }
-      _xifexpression = _xblockexpression;
-    } else {
-      _xifexpression = super._dataTypeEbnf2(it, supportActions);
-    }
-    return _xifexpression;
   }
   
   @Override
@@ -841,154 +669,6 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
   }
   
   @Override
-  protected String _ebnf2(final UnorderedGroup it, final AntlrOptions options, final boolean supportActions) {
-    String _xifexpression = null;
-    if (supportActions) {
-      String _xblockexpression = null;
-      {
-        EList<AbstractElement> _elements = it.getElements();
-        final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractElement it) {
-            boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-            return Boolean.valueOf((!_isOptionalCardinality));
-          }
-        };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("(");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("{ ");
-        _builder.newLine();
-        _builder.append("\t  ");
-        _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(it);
-        _builder.append(_gaRuleElementAccessor, "\t  ");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("(");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("(");
-        _builder.newLine();
-        {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
-          boolean _hasElements = false;
-          for(final Pair<Integer, AbstractElement> element : _indexed) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate("|", "");
-            }
-            _builder.append("(");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_1, "\t");
-            _builder.append(", ");
-            Integer _key = element.getKey();
-            _builder.append(_key, "\t");
-            _builder.append(")}?=>(");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
-            _builder.append(", ");
-            Integer _key_1 = element.getKey();
-            _builder.append(_key_1, "\t\t\t");
-            _builder.append(");");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t\t\t\t\t");
-            _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _ebnf = this.ebnf(_value, options, supportActions);
-            _builder.append(_ebnf, "\t\t\t\t\t");
-            _builder.append("))");
-            {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
-              if (_isMultipleCardinality) {
-                _builder.append("+");
-              }
-            }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{ ");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
-            _builder.append(");");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append(")");
-            _builder.newLine();
-            _builder.append(")");
-            _builder.newLine();
-          }
-        }
-        _builder.append("\t\t");
-        _builder.append(")");
-        {
-          if ((mandatoryContent != 0)) {
-            _builder.append("+");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(it);
-            _builder.append(_gaRuleElementAccessor_4, "\t\t");
-            _builder.append(")}?");
-          } else {
-            _builder.append("*");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(")");
-        _builder.newLine();
-        _builder.append(")");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("{ ");
-        _builder.newLine();
-        _builder.append("\t  ");
-        _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(it);
-        _builder.append(_gaRuleElementAccessor_5, "\t  ");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _xblockexpression = _builder.toString();
-      }
-      _xifexpression = _xblockexpression;
-    } else {
-      _xifexpression = super._ebnf2(it, options, supportActions);
-    }
-    return _xifexpression;
-  }
-  
-  @Override
   protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -1083,6 +763,33 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         _xifexpression_1 = _builder_1.toString();
       }
       _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  @Override
+  protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
+    String _xifexpression = null;
+    if ((!supportActions)) {
+      _xifexpression = super._ebnf2(it, options, supportActions);
+    } else {
+      StringConcatenation _builder = new StringConcatenation();
+      String _localVar = this._grammarAccessExtensions.localVar(it);
+      _builder.append(_localVar, "");
+      _builder.append("=");
+      String __ebnf2 = super._ebnf2(it, options, supportActions);
+      _builder.append(__ebnf2, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      String _localVar_1 = this._grammarAccessExtensions.localVar(it);
+      CharSequence _newLeafNode = this.newLeafNode(it, _localVar_1);
+      _builder.append(_newLeafNode, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xifexpression = _builder.toString();
     }
     return _xifexpression;
   }

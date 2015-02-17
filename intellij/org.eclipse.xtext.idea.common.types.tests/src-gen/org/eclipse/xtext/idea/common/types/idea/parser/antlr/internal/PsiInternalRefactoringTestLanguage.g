@@ -21,16 +21,20 @@ package org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
 
-public RefactoringTestLanguageElementTypeProvider elementTypeProvider;
+private RefactoringTestLanguageGrammarAccess grammarAccess;
 
-public PsiInternalRefactoringTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, RefactoringTestLanguageElementTypeProvider elementTypeProvider) {
+private RefactoringTestLanguageElementTypeProvider elementTypeProvider;
+
+public PsiInternalRefactoringTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, RefactoringTestLanguageElementTypeProvider elementTypeProvider, RefactoringTestLanguageGrammarAccess grammarAccess) {
 	super(builder, input, tokenTypeProvider);
+    this.grammarAccess = grammarAccess;
 	this.elementTypeProvider = elementTypeProvider;
 }
 

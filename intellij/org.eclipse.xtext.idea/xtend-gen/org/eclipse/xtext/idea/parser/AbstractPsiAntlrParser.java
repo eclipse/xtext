@@ -32,6 +32,7 @@ import org.eclipse.xtext.idea.parser.CompositeMarker;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -47,6 +48,9 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   @Accessors
   @Extension
   private ISyntaxErrorMessageProvider _iSyntaxErrorMessageProvider;
+  
+  @Accessors
+  private IUnorderedGroupHelper unorderedGroupHelper;
   
   private final PsiBuilder psiBuilder;
   
@@ -388,5 +392,14 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   public void set_iSyntaxErrorMessageProvider(final ISyntaxErrorMessageProvider _iSyntaxErrorMessageProvider) {
     this._iSyntaxErrorMessageProvider = _iSyntaxErrorMessageProvider;
+  }
+  
+  @Pure
+  public IUnorderedGroupHelper getUnorderedGroupHelper() {
+    return this.unorderedGroupHelper;
+  }
+  
+  public void setUnorderedGroupHelper(final IUnorderedGroupHelper unorderedGroupHelper) {
+    this.unorderedGroupHelper = unorderedGroupHelper;
   }
 }

@@ -13,7 +13,7 @@ public class SDomainBuildProcessParametersProvider extends BuildProcessParameter
 		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea.sdomain.idea")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
-			path + "/../../org.eclipse.xtext.idea.sdomain/bin"
+			path + "/../org.eclipse.xtext.idea.sdomain/bin"
 		);
 	}
 

@@ -25,6 +25,7 @@ import org.antlr.runtime.TokenStream
 import org.antlr.runtime.UnwantedTokenException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper
 
 abstract class AbstractPsiAntlrParser extends Parser {
 	
@@ -32,6 +33,9 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	
 	@Accessors
 	extension ISyntaxErrorMessageProvider
+	
+	@Accessors
+	IUnorderedGroupHelper unorderedGroupHelper
 
 	val PsiBuilder psiBuilder
 	
@@ -61,7 +65,7 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	}
 	
 	protected def String getFirstRuleName()
-	
+
 	def parse() throws RecognitionException {
 		parse(firstRuleName)
 	}

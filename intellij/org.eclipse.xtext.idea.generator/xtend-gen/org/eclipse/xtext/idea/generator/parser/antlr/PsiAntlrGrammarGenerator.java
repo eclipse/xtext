@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.generator.parser.antlr;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -16,6 +17,8 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -23,15 +26,18 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames;
-import org.eclipse.xtext.idea.generator.parser.antlr.DefaultAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.UnorderedGroupsAwareAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+public class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
   @Inject
   @Extension
   private IdeaPluginClassNames _ideaPluginClassNames;
@@ -71,14 +77,16 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         {
           boolean _isBacktrack_1 = options.isBacktrack();
           if (_isBacktrack_1) {
-            _builder.append("backtrack=true");
+            _builder.append("\t");
+            _builder.append("backtrack=true;");
             _builder.newLine();
           }
         }
         {
           boolean _isMemoize_1 = options.isMemoize();
           if (_isMemoize_1) {
-            _builder.append("memoize=true");
+            _builder.append("\t");
+            _builder.append("memoize=true;");
             _builder.newLine();
           }
         }
@@ -86,9 +94,11 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
           int _k_1 = options.getK();
           boolean _greaterEqualsThan_1 = (_k_1 >= 0);
           if (_greaterEqualsThan_1) {
+            _builder.append("\t");
             _builder.append("memoize=");
             int _k_2 = options.getK();
-            _builder.append(_k_2, "");
+            _builder.append(_k_2, "\t");
+            _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -113,6 +123,36 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.xtext.idea.parser.TokenTypeProvider;");
     _builder.newLine();
+    {
+      boolean _and = false;
+      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
+      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+        @Override
+        public List<EObject> apply(final ParserRule it) {
+          return EcoreUtil2.eAllContentsAsList(it);
+        }
+      };
+      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
+      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
+      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
+      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      boolean _not = (!_isEmpty);
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _isBacktrack = options.isBacktrack();
+        _and = _isBacktrack;
+      }
+      if (_and) {
+        _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
+        _builder.newLine();
+      }
+    }
+    _builder.append("import ");
+    String _gaFQName = this._grammarAccess.gaFQName(it);
+    _builder.append(_gaFQName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import com.intellij.lang.PsiBuilder;");
     _builder.newLine();
@@ -142,7 +182,13 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("public ");
+    _builder.append("private ");
+    String _gaSimpleName = this._grammarAccess.gaSimpleName(it);
+    _builder.append(_gaSimpleName, "");
+    _builder.append(" grammarAccess;");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("private ");
     Grammar _grammar = GrammarUtil.getGrammar(it);
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(_grammar);
     String _simpleName = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName);
@@ -160,10 +206,16 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(_grammar_2);
     String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
     _builder.append(_simpleName_2, "");
-    _builder.append(" elementTypeProvider) {");
+    _builder.append(" elementTypeProvider, ");
+    String _gaSimpleName_1 = this._grammarAccess.gaSimpleName(it);
+    _builder.append(_gaSimpleName_1, "");
+    _builder.append(" grammarAccess) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("super(builder, input, tokenTypeProvider);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("this.grammarAccess = grammarAccess;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("this.elementTypeProvider = elementTypeProvider;");
@@ -205,6 +257,19 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
     _builder.append(_entryRuleName_1, "");
+    {
+      boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
+      if (_definesUnorderedGroups) {
+        _builder.newLineIfNotEmpty();
+        _builder.append("@init {");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
+        _builder.append(_compileInitUnorderedGroups, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+      }
+    }
     _builder.append(":");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -228,6 +293,10 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.newLine();
     _builder.append("finally {");
     _builder.newLine();
+    _builder.append("\t");
+    CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
+    _builder.append(_compileRestoreUnorderedGroups, "\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
@@ -468,6 +537,41 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         _xifexpression_1 = _builder_1.toString();
       }
       _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  @Override
+  protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
+    String _xifexpression = null;
+    if ((!supportActions)) {
+      return super._ebnf2(it, options, supportActions);
+    } else {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      CharSequence _markLeaf = this.markLeaf(it);
+      _builder.append(_markLeaf, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      String _localVar = this._grammarAccessExtensions.localVar(it);
+      _builder.append(_localVar, "");
+      _builder.append("=");
+      String __ebnf2 = super._ebnf2(it, options, supportActions);
+      _builder.append(__ebnf2, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      String _localVar_1 = this._grammarAccessExtensions.localVar(it);
+      CharSequence _doneLeaf = this.doneLeaf(it, _localVar_1);
+      _builder.append(_doneLeaf, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xifexpression = _builder.toString();
     }
     return _xifexpression;
   }

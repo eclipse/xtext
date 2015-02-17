@@ -9,12 +9,11 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class XtendBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
-	@Override
 	public List<String> getClassPath() {
-		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.idea")).getPath().getPath();
+		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.core.idea")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
-			path + "/../../plugins/org.eclipse.xtend.core/bin"
+			path + "/../org.eclipse.xtend.core/bin"
 		);
 	}
 
