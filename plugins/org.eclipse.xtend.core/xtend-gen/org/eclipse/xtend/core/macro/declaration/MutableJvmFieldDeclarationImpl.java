@@ -124,6 +124,38 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   @Override
+  public void setConstantInitializer(final CompilationStrategy initializer) {
+    this.checkMutable();
+    boolean _notEquals = (!Objects.equal(initializer, null));
+    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    JvmField _delegate = this.getDelegate();
+    _delegate.setConstant(true);
+    JvmField _delegate_1 = this.getDelegate();
+    _delegate_1.setFinal(true);
+    JvmField _delegate_2 = this.getDelegate();
+    _delegate_2.setStatic(true);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate_3 = this.getDelegate();
+    _compilationUnit.setCompilationStrategy(_delegate_3, initializer);
+  }
+  
+  @Override
+  public void setConstantInitializer(final StringConcatenationClient template) {
+    this.checkMutable();
+    boolean _notEquals = (!Objects.equal(template, null));
+    Preconditions.checkArgument(_notEquals, "template cannot be null");
+    JvmField _delegate = this.getDelegate();
+    _delegate.setConstant(true);
+    JvmField _delegate_1 = this.getDelegate();
+    _delegate_1.setFinal(true);
+    JvmField _delegate_2 = this.getDelegate();
+    _delegate_2.setStatic(true);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate_3 = this.getDelegate();
+    _compilationUnit.setCompilationTemplate(_delegate_3, template);
+  }
+  
+  @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();

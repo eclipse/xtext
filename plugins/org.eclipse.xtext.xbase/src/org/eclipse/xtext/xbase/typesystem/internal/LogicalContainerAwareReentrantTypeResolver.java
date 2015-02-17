@@ -741,7 +741,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
 		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, field);
-		if (field.isStatic() && field.isFinal()) {
+		if (field.isStatic() && field.isFinal() && !field.isSetConstant()) {
 			final XExpression expression = state.getRootExpression();
 			childResolvedTypes.addDeferredLogic(new IAcceptor<IResolvedTypes>() {
 

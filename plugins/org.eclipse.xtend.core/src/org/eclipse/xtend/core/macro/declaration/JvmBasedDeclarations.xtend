@@ -1194,6 +1194,24 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		Preconditions.checkArgument(template != null, "template cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, template)
 	}
+	
+	override setConstantInitializer(CompilationStrategy initializer) {
+		checkMutable
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		delegate.constant = true
+		delegate.final = true
+		delegate.static = true
+		compilationUnit.setCompilationStrategy(delegate, initializer)
+	}
+	
+	override setConstantInitializer(StringConcatenationClient template) {
+		checkMutable
+		Preconditions.checkArgument(template != null, "template cannot be null")
+		delegate.constant = true
+		delegate.final = true
+		delegate.static = true
+		compilationUnit.setCompilationTemplate(delegate, template)
+	}
 
 	override setFinal(boolean isFinal) {
 		checkMutable
