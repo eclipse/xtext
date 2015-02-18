@@ -9,6 +9,11 @@ var backtrack = false
 var memoize = false
 var classSplitting = true
 
+var runtimeProjectName = "org.eclipse.xtext.testlanguages"
+var runtimeProjectPath = "../${runtimeProjectName}"
+var ideaProjectName = "org.eclipse.xtext.testlanguages.idea"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 var parser = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
   	options = auto-inject {
   		fieldsPerClass = "100"
@@ -72,4 +77,12 @@ LanguageConfig {
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
 
 	fragment = contentAssist.parser
+	
+    fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+    	options = auto-inject {
+  			fieldsPerClass = "100"
+  			methodsPerClass = "100"
+  		}
+    }
+	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }

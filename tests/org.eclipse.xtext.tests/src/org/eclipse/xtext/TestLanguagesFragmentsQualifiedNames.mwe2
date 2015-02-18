@@ -19,6 +19,11 @@ var backtrack = false
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
 
+var runtimeProjectName = "org.eclipse.xtext.tests"
+var runtimeProjectPath = "../${runtimeProjectName}"
+var ideaProjectName = "org.eclipse.xtext.core.idea.tests"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
@@ -31,4 +36,8 @@ CompositeGeneratorFragment {
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
 	fragment = serializer.SerializerFragment auto-inject {}
 	fragment = builder.BuilderIntegrationFragment {}
+    fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+    	options = auto-inject {}
+    }
+	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }
