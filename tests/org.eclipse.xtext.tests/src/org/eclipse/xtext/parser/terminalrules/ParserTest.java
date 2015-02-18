@@ -48,7 +48,7 @@ public class ParserTest extends AbstractXtextTests {
 	@Test public void testSetup() {
 		EPackage pack = TerminalRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
-		assertEquals(model.getEStructuralFeatures().size(), getClass().getDeclaredFields().length);
+		assertEquals(model.getEStructuralFeatures().size(), ParserTest.class.getDeclaredFields().length);
 	}
 	
 	private void doTest(String expected, String model, EStructuralFeature feature) throws Exception {
