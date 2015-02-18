@@ -36,7 +36,5 @@ CompositeGeneratorFragment {
     fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
     	options = auto-inject {}
     }
-	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-        fileExtensions = file.extensions
-    }
+	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }
