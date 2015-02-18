@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Deprecated
 @Data
 @SuppressWarnings("all")
 public class WhitespaceInfo extends LeafInfo {
