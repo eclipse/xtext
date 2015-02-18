@@ -367,6 +367,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	private boolean populateListsFromHints(List<LightweightBoundTypeArgument> allHints, List<LightweightBoundTypeArgument> inferredHints,
 			List<LightweightBoundTypeArgument> effectiveHints, List<LightweightBoundTypeArgument> inferredConstraintHints, EnumSet<VarianceInfo> varianceHints) {
 		boolean hasContraintHints = false;
+		List<LightweightBoundTypeArgument> expectationHints = null;
 		for(LightweightBoundTypeArgument hint: allHints) {
 			if (hint.getOrigin() instanceof VarianceInfo) {
 				varianceHints.add((VarianceInfo) hint.getOrigin());
@@ -378,10 +379,19 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
 					inferredHints.add(hint);
 				}
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED_EXPECTATION) {
+					if (expectationHints == null) {
+						expectationHints = Lists.newArrayListWithCapacity(2);
+					}
+					expectationHints.add(hint);
+				}
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
 					inferredConstraintHints.add(hint);
 				}
 			}
+		}
+		if (expectationHints != null) {
+			inferredHints.addAll(expectationHints);
 		}
 		return hasContraintHints;
 	}

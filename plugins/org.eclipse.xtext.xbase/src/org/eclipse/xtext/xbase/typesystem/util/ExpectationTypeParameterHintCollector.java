@@ -50,7 +50,7 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 						// we don't break the list traversal here since we want to do the paired outerVisit for all constraints
 						if (declarationMatches) {
 							if (hint.getActualVariance() == VarianceInfo.OUT && hint.getDeclaredVariance() == VarianceInfo.OUT && 
-									(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER)) {
+									(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_EXPECTATION || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER)) {
 								if (!declaration.isAssignableFrom(hint.getTypeReference())) {
 									declarationMatches = false;
 								}
@@ -141,7 +141,7 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 					// we don't break the list traversal here since we want to do the paired outerVisit for all constraints
 					if (declarationMatches) {
 						if (hint.getActualVariance() == VarianceInfo.OUT && hint.getDeclaredVariance() == VarianceInfo.OUT && 
-								(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER)) {
+								(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER || hint.getSource() == BoundTypeArgumentSource.INFERRED_EXPECTATION)) {
 							if (!declaration.isAssignableFrom(hint.getTypeReference())) {
 								declarationMatches = false;
 							}
