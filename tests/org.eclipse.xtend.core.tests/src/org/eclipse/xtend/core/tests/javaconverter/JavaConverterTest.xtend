@@ -33,7 +33,7 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
 	JavaConverter j2x
-	static boolean DUMP = true;
+	static boolean DUMP = false;
 
 	@Before def void setUp() {
 		j2x = javaConverterProvider.get()
@@ -1156,6 +1156,35 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			
 		}''')
 		assertNotNull(clazz)
+	}
+	
+	@Test def void testFinalVariableEmptyInitializer() throws Exception {
+		
+		var ConversionResult conversionResult = j2x.toXtend("Foo", '''
+		public class Foo {
+			
+			protected void doStuff() {
+				final List<String> values, values2=null, values3;
+				values = new ArrayList<String>();
+			}
+		}''')
+
+		var String xtendCode = conversionResult.getXtendCode()
+		assertFalse(xtendCode.isEmpty())
+		dump(xtendCode)
+		assertEquals(xtendCode,
+			'''
+			class Foo {
+				def protected void doStuff(){
+					val List<String> values/* FIXME empty initializer for final variable is not supported */ val List<String> values2=null val List<String> values3/* FIXME empty initializer for final variable is not supported */ 
+					values=new ArrayList<String>() 
+				}
+				
+			}'''.toString
+		)
+		assertEquals(2, Iterables.size(conversionResult.getProblems()))
+		assertEquals("Empty initializer for final variables is not supported. (start: 70, length: 6)",conversionResult.getProblems().get(0))
+		assertEquals("Empty initializer for final variables is not supported. (start: 92, length: 7)",conversionResult.getProblems().get(1))
 	}
 
 	@Test def void testIntegerBitwiseOperatorsCase() throws Exception {

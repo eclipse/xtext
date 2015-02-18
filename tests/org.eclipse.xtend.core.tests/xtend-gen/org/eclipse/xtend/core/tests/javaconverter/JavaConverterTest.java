@@ -47,7 +47,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   private JavaConverter j2x;
   
-  private static boolean DUMP = true;
+  private static boolean DUMP = false;
   
   @Before
   public void setUp() {
@@ -2148,6 +2148,62 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass clazz = this.toValidXtendClass(_builder.toString());
     Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testFinalVariableEmptyInitializer() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected void doStuff() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("final List<String> values, values2=null, values3;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("values = new ArrayList<String>();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    JavaConverter.ConversionResult conversionResult = this.j2x.toXtend("Foo", _builder.toString());
+    String xtendCode = conversionResult.getXtendCode();
+    boolean _isEmpty = xtendCode.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    this.dump(xtendCode);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def protected void doStuff(){");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val List<String> values/* FIXME empty initializer for final variable is not supported */ val List<String> values2=null val List<String> values3/* FIXME empty initializer for final variable is not supported */ ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("values=new ArrayList<String>() ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(xtendCode, _string);
+    Iterable<String> _problems = conversionResult.getProblems();
+    int _size = Iterables.size(_problems);
+    Assert.assertEquals(2, _size);
+    Iterable<String> _problems_1 = conversionResult.getProblems();
+    Object _get = ((Object[])Conversions.unwrapArray(_problems_1, Object.class))[0];
+    Assert.assertEquals("Empty initializer for final variables is not supported. (start: 70, length: 6)", _get);
+    Iterable<String> _problems_2 = conversionResult.getProblems();
+    Object _get_1 = ((Object[])Conversions.unwrapArray(_problems_2, Object.class))[1];
+    Assert.assertEquals("Empty initializer for final variables is not supported. (start: 92, length: 7)", _get_1);
   }
   
   @Test

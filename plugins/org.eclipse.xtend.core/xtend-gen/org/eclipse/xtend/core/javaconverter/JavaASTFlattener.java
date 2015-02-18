@@ -827,6 +827,17 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer("=");
       Expression _initializer_1 = it.getInitializer();
       _initializer_1.accept(this);
+    } else {
+      ASTNode _parent = it.getParent();
+      if ((_parent instanceof VariableDeclarationStatement)) {
+        ASTNode _parent_1 = it.getParent();
+        List _modifiers = ((VariableDeclarationStatement) _parent_1).modifiers();
+        boolean _isFinal = this._aSTFlattenerUtils.isFinal(_modifiers);
+        if (_isFinal) {
+          this.appendToBuffer("/* FIXME empty initializer for final variable is not supported */");
+          this.addProblem(it, "Empty initializer for final variables is not supported.");
+        }
+      }
     }
     return false;
   }
