@@ -6,6 +6,7 @@ import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+@Deprecated
 @Data
 @SuppressWarnings("all")
 public abstract class LeafInfo {

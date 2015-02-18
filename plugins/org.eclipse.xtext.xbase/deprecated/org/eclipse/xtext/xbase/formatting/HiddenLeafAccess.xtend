@@ -116,7 +116,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 	
 }
 
-
+@Deprecated
 @Data class HiddenLeafs {
 	int offset
 	List<LeafInfo> leafs = newArrayList
@@ -142,12 +142,14 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 	}
 }
 
+@Deprecated
 @Data abstract class LeafInfo {
 	HiddenLeafs container
 	ILeafNode node
 	int newLines
 }
 
+@Deprecated
 @Data class WhitespaceInfo extends LeafInfo {
 	int offset
 	
@@ -172,6 +174,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 	'''
 }
 
+@Deprecated
 @Data class CommentInfo extends LeafInfo {
 	boolean trailing // true if this comment is in the first line of its HiddenLeafs
 	
