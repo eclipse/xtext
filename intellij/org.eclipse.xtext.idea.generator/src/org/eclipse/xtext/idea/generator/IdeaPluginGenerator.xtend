@@ -8,10 +8,12 @@
 package org.eclipse.xtext.idea.generator
 
 import com.google.common.collect.LinkedHashMultimap
+import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.Arrays
 import java.util.List
 import java.util.Set
+import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.output.Outlet
 import org.eclipse.xpand2.output.Output
 import org.eclipse.xpand2.output.OutputImpl
@@ -24,6 +26,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
+import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
@@ -77,6 +80,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	@Inject
 	extension XtextIDEAGeneratorExtensions
+	
+	override generate(LanguageConfig config, XpandExecutionContext ctx) {
+		fileExtension = config.getFileExtensions(config.grammar).head
+		
+		Guice.createInjector(createModule(config.grammar)).injectMembers(this);
+		generate(config.grammar, new Xtend2ExecutionContext(ctx));
+	}
 	
 	override generate(Grammar grammar, Xtend2ExecutionContext ctx) {
 //		for (rule:grammar.rules) {
@@ -330,7 +340,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			@Override
 			protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, elementTypeProvider, grammarAccess);
 			}
 		
 		}
@@ -408,10 +418,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	def addLibrary(String library) {
 		libraries.add(library)
-	}
-	
-	def setFileExtensions(String fileExtensions) {
-		this.fileExtension = fileExtensions.split("\\s*,\\s*").head
 	}
 	
 	def void setEncoding(String encoding) {
@@ -776,6 +782,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 		import «grammar.languageName»;
+		import «grammar.psiInternalParserName»;
 		
 		import com.google.inject.Singleton;
 		import com.intellij.psi.tree.IElementType;
@@ -783,11 +790,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		@Singleton public class «grammar.tokenTypeProviderName.toSimpleName» implements TokenTypeProvider {
 		
-			private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+			private static final String[] TOKEN_NAMES = new «grammar.psiInternalParserName.toSimpleName»(null).getTokenNames();
+		
+			private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 			
 			static {
-				for (int i = 0; i < tokenNames.length; i++) {
-					tokenTypes[i] = new IndexedElementType(tokenNames[i], i, «grammar.languageName.toSimpleName».INSTANCE);
+				for (int i = 0; i < TOKEN_NAMES.length; i++) {
+					tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, «grammar.languageName.toSimpleName».INSTANCE);
 				}
 			}
 		
