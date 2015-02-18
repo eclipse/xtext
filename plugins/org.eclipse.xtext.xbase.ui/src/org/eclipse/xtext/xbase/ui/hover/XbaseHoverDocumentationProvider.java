@@ -768,7 +768,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	}
 
 	public Javadoc getJavaDoc() {
-		if (context == null && context.eResource() != null && context.eResource().getResourceSet() != null)
+		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null)
 			return null;
 		Object classpathURIContext = ((XtextResourceSet) context.eResource().getResourceSet()).getClasspathURIContext();
 		if (classpathURIContext instanceof IJavaProject) {
