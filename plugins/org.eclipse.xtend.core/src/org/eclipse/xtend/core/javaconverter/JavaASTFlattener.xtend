@@ -594,8 +594,8 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def appendTypeParameters(Iterable<TypeParameter> iterable) {
-		if(iterable.isEmpty)
-			return; //"diamond operator" java7
+		if (iterable.isEmpty)
+			return; // "diamond operator" java7
 		appendToBuffer("<")
 		visitAllSeparatedByComma(iterable)
 		appendToBuffer(">")
@@ -1636,11 +1636,10 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(SwitchCase node) {
 		appendLineWrapToBuffer
 		if (node.isDefault()) {
-			appendToBuffer("default :")
+			appendToBuffer("default ")
 		} else {
 			appendToBuffer("case ")
 			node.getExpression().accept(this)
-			appendToBuffer(":")
 		}
 		return false
 	}
@@ -1663,7 +1662,17 @@ class JavaASTFlattener extends ASTVisitor {
 			])
 		foldedCases.forEach [ switchCase, statements |
 			switchCase.accept(this)
-			val surround = statements.size > 0 && !(statements.get(0) instanceof Block)
+			val isLastCase = switchCase.equals(foldedCases.keySet.last)
+
+			if (statements.empty && !isLastCase) { // fall-through
+				appendToBuffer(',')
+			} else {
+				appendToBuffer(':')
+			}
+
+			val surround = (isLastCase && statements.empty) ||
+				(!statements.empty && !(statements.get(0) instanceof Block))
+				
 			if (surround) {
 				appendToBuffer("{")
 				increaseIndent
@@ -1675,6 +1684,7 @@ class JavaASTFlattener extends ASTVisitor {
 				appendLineWrapToBuffer
 				appendToBuffer("}")
 			}
+
 		]
 		decreaseIndent
 		appendLineWrapToBuffer
