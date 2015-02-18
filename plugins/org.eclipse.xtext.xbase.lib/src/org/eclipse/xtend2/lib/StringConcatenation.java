@@ -335,6 +335,16 @@ public class StringConcatenation implements CharSequence {
 		cachedToString = builder.toString();
 		return cachedToString;
 	}
+	
+	/**
+	 * Return the actual content of this sequence, including all trailing whitespace.
+	 * 
+	 * @return the actual content of this instance. Never <code>null</code>.
+	 * @since 2.8
+	 */
+	protected final List<String> getContent() {
+		return segments;
+	}
 
 	/**
 	 * Compute the significant content of this sequence. That is, trailing whitespace after the last line-break will be
