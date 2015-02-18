@@ -352,8 +352,8 @@ class JavaASTFlattener extends ASTVisitor {
 			return false;
 		}
 		if (isNotSupportedInnerType(it)) {
-			appendToBuffer('''/* FIXME None static inner classes are not supported.*/''')
-			addProblem("None static inner classes are not supported.")
+			appendToBuffer('''/* FIXME Non-static inner classes are not supported.*/''')
+			addProblem("Non-static inner classes are not supported.")
 		}
 
 		if (javadoc != null) {
@@ -540,7 +540,7 @@ class JavaASTFlattener extends ASTVisitor {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
 		fragments.forEach [ VariableDeclarationFragment frag |
 			if (hasAnnotations) {
-				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
+				appendToBuffer("/*FIXME Cannot add Annotation to Variable declaration. Java code: ")
 
 			// addProblem("Annotation on Variable declaration is not supported.")
 			}
@@ -629,7 +629,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (!typeParameters.isEmpty()) {
 			if (isConstructor) {
-				addProblem("Type parameters are not supported for constructors")
+				addProblem("Type parameters for constructors are not supported")
 			}
 			typeParameters.appendTypeParameters
 		}
@@ -1417,7 +1417,7 @@ class JavaASTFlattener extends ASTVisitor {
 		var at = node.getType()
 		var dims = at.getDimensions()
 		if (dims > 1) {
-			appendToBuffer('''/* FIXME Only one dimension arrays are supported. «node»*/''')
+			appendToBuffer('''/* FIXME Only one dimensional arrays are supported. «node»*/''')
 			node.addProblem("Only one dimension arrays are supported.")
 			return false
 		}
@@ -1466,7 +1466,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(BreakStatement node) {
-		appendToBuffer('''/* FIXME unsupported BreakStatement: ''')
+		appendToBuffer('''/* FIXME Unsupported BreakStatement: ''')
 		node.addProblem("Break statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
@@ -1539,13 +1539,13 @@ class JavaASTFlattener extends ASTVisitor {
 		appendModifieres(node, node.modifiers())
 		node.getName().accept(this)
 		if (!node.arguments().isEmpty()) {
-			node.addProblem("Enum constant may not have any arguments")
+			node.addProblem("Enum constant cannot have any arguments")
 			appendToBuffer("(")
 			visitAllSeparatedByComma(node.arguments())
 			appendToBuffer(")")
 		}
 		if (node.getAnonymousClassDeclaration() != null) {
-			node.addProblem("Enum constant may not have any anonymous class declarations")
+			node.addProblem("Enum constant cannot have any anonymous class declarations")
 			node.getAnonymousClassDeclaration().accept(this)
 		}
 		return false
@@ -1563,7 +1563,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getName().accept(this)
 		appendSpaceToBuffer
 		if (!node.superInterfaceTypes().isEmpty()) {
-			node.addProblem("Enum may not have a super type")
+			node.addProblem("Enum cannot have a supertype")
 			appendToBuffer("implements ")
 			node.superInterfaceTypes().visitAllSeparatedByComma
 			appendSpaceToBuffer
@@ -1574,7 +1574,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.enumConstants().visitAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
-			node.addProblem("Enum may not have any body declaration statements")
+			node.addProblem("Enum cannot have any body declaration statements")
 			appendToBuffer(";")
 			appendLineWrapToBuffer
 			node.bodyDeclarations().visitAll
@@ -1585,7 +1585,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(LabeledStatement node) {
-		node.addProblem("LabeledStatement are not supported")
+		node.addProblem("LabeledStatements are not supported")
 		appendToBuffer("/*")
 		node.getLabel().accept(this)
 		appendToBuffer(": */")
@@ -1702,8 +1702,8 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(TypeDeclarationStatement node) {
 		if (isNotSupportedInnerType(node)) {
-			appendToBuffer('''/*FIXME None static inner classes are not supported. */''')
-			node.addProblem("None static inner classes are not supported.")
+			appendToBuffer('''/*FIXME Non-static inner classes are not supported. */''')
+			node.addProblem("Non-static inner classes are not supported.")
 		}
 		node.getDeclaration().accept(this)
 		return false
