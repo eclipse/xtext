@@ -202,7 +202,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				protected void doAddHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 					typeParameter.acceptHint(
 							reference.getWrapperTypeIfPrimitive(),
-							BoundTypeArgumentSource.INFERRED,
+							BoundTypeArgumentSource.INFERRED_EXPECTATION,
 							getOrigin(),
 							getExpectedVariance(),
 							getActualVariance());
