@@ -8,17 +8,14 @@
 package org.eclipse.xtext.idea.parser;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EObject;
@@ -34,11 +31,8 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -137,7 +131,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
           if (_notEquals) {
             it.initCurrentLookAhead((lookAhead).intValue());
           }
-          HashSet<String> _initialHiddenTokens = AbstractXtextPsiParser.this.getInitialHiddenTokens();
+          Set<String> _initialHiddenTokens = AbstractXtextPsiParser.this.getInitialHiddenTokens();
           it.setInitialHiddenTokens(((String[])Conversions.unwrapArray(_initialHiddenTokens, String.class)));
         }
       };
@@ -151,34 +145,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
     return this.tokenSourceProvider.createTokenSource(_originalText);
   }
   
-  protected HashSet<String> getInitialHiddenTokens() {
-    HashSet<String> _xblockexpression = null;
-    {
-      HashSet<String> hiddenTokens = CollectionLiterals.<String>newHashSet();
-      TokenSet _whitespaceTokens = this.tokenTypeProvider.getWhitespaceTokens();
-      IElementType[] _types = _whitespaceTokens.getTypes();
-      final Function1<IElementType, String> _function = new Function1<IElementType, String>() {
-        @Override
-        public String apply(final IElementType it) {
-          return it.toString();
-        }
-      };
-      List<String> _map = ListExtensions.<IElementType, String>map(((List<IElementType>)Conversions.doWrapArray(_types)), _function);
-      Iterables.<String>addAll(hiddenTokens, _map);
-      TokenSet _commentTokens = this.tokenTypeProvider.getCommentTokens();
-      IElementType[] _types_1 = _commentTokens.getTypes();
-      final Function1<IElementType, String> _function_1 = new Function1<IElementType, String>() {
-        @Override
-        public String apply(final IElementType it) {
-          return it.toString();
-        }
-      };
-      List<String> _map_1 = ListExtensions.<IElementType, String>map(((List<IElementType>)Conversions.doWrapArray(_types_1)), _function_1);
-      Iterables.<String>addAll(hiddenTokens, _map_1);
-      _xblockexpression = hiddenTokens;
-    }
-    return _xblockexpression;
-  }
+  protected abstract Set<String> getInitialHiddenTokens();
   
   @Pure
   protected ITokenDefProvider getTokenDefProvider() {

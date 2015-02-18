@@ -899,6 +899,23 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    {
+      List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
+      boolean _isEmpty = _initialHiddenTokens.isEmpty();
+      if (_isEmpty) {
+        _builder.append("import static java.util.Collections.emptySet;");
+        _builder.newLine();
+        _builder.newLine();
+      } else {
+        _builder.append("import java.util.Arrays;");
+        _builder.newLine();
+        _builder.append("import java.util.HashSet;");
+        _builder.newLine();
+      }
+    }
+    _builder.append("import java.util.Set;");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("import org.antlr.runtime.TokenStream;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;");
@@ -932,6 +949,36 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractXtextPsiParser {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      List<String> _initialHiddenTokens_1 = this._grammarAccessExtensions.initialHiddenTokens(grammar);
+      boolean _isEmpty_1 = _initialHiddenTokens_1.isEmpty();
+      boolean _not = (!_isEmpty_1);
+      if (_not) {
+        _builder.append("\t");
+        _builder.append("private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList(");
+        {
+          List<String> _initialHiddenTokens_2 = this._grammarAccessExtensions.initialHiddenTokens(grammar);
+          boolean _hasElements = false;
+          for(final String hidden : _initialHiddenTokens_2) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "\t");
+            }
+            _builder.append("\"");
+            _builder.append(hidden, "\t");
+            _builder.append("\"");
+          }
+        }
+        _builder.append("));");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("\t");
+        _builder.append("private static final Set<String> INITIAL_HIDDEN_TOKENS = emptySet();");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@Inject ");
@@ -967,6 +1014,19 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName_2, "\t\t");
     _builder.append("(builder, tokenStream, elementTypeProvider, grammarAccess);");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected Set<String> getInitialHiddenTokens() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return INITIAL_HIDDEN_TOKENS;");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();

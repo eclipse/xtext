@@ -12,11 +12,21 @@ import com.google.inject.Provider;
 import com.intellij.lang.ASTFactory;
 import com.intellij.lang.LanguageASTFactory;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.mock.MockApplicationEx;
+import com.intellij.mock.MockEditorFactory;
+import com.intellij.mock.MockFileDocumentManagerImpl;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.EditorFactory;
+import com.intellij.openapi.editor.impl.DocumentImpl;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.ParsingTestCase;
+import com.intellij.testFramework.PlatformLiteFixture;
+import com.intellij.util.Function;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.picocontainer.MutablePicoContainer;
 
 @SuppressWarnings("all")
 public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
@@ -76,6 +87,25 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   protected void setUp() throws Exception {
     super.setUp();
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
+    MockApplicationEx _application = PlatformLiteFixture.getApplication();
+    final MutablePicoContainer appContainer = _application.getPicoContainer();
+    appContainer.unregisterComponent(EditorFactory.class);
+    appContainer.unregisterComponent(FileDocumentManager.class);
+    final MockEditorFactory editorFactory = new MockEditorFactory() {
+      @Override
+      public Document createDocument(final CharSequence text) {
+        return new DocumentImpl(text, true, false);
+      }
+    };
+    appContainer.registerComponentInstance(EditorFactory.class, editorFactory);
+    final Function<CharSequence, Document> _function = new Function<CharSequence, Document>() {
+      @Override
+      public Document fun(final CharSequence charSequence) {
+        return editorFactory.createDocument(charSequence);
+      }
+    };
+    MockFileDocumentManagerImpl _mockFileDocumentManagerImpl = new MockFileDocumentManagerImpl(_function, FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY);
+    appContainer.registerComponentInstance(FileDocumentManager.class, _mockFileDocumentManagerImpl);
   }
   
   @Override

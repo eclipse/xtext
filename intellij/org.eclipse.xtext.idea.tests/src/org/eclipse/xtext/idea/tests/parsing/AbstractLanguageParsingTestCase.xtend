@@ -11,6 +11,11 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.lang.LanguageASTFactory
 import com.intellij.lang.ParserDefinition
+import com.intellij.mock.MockEditorFactory
+import com.intellij.mock.MockFileDocumentManagerImpl
+import com.intellij.openapi.editor.EditorFactory
+import com.intellij.openapi.fileEditor.FileDocumentManager
+import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.CharsetToolkit
@@ -28,6 +33,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import com.intellij.openapi.editor.impl.DocumentImpl
 
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
 
@@ -60,6 +66,22 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	override protected setUp() throws Exception {
 		super.setUp()
 		addExplicitExtension(LanguageASTFactory.INSTANCE, myLanguage, astFactory)
+
+		val appContainer = application.picoContainer
+		appContainer.unregisterComponent(EditorFactory)
+		appContainer.unregisterComponent(FileDocumentManager)
+		
+		val editorFactory = new MockEditorFactory() {
+			
+			override createDocument(CharSequence text) {
+				new DocumentImpl(text, true, false)
+			}
+			
+		}
+		appContainer.registerComponentInstance(EditorFactory, editorFactory)
+		appContainer.registerComponentInstance(FileDocumentManager, new MockFileDocumentManagerImpl([charSequence |
+			editorFactory.createDocument(charSequence)
+		], FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY))
 	}
 
 	override protected tearDown() throws Exception {
@@ -143,7 +165,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 			load(new ByteArrayInputStream(myFile.text.bytes), null)
 		]
 	}
-	
+
 	override protected loadFile(String name) throws IOException {
 		FileUtil.loadFile(new File(myFullDataPath, name), CharsetToolkit.UTF8, true)
 	}

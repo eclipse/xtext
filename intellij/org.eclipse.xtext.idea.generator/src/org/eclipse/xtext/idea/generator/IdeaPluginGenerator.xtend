@@ -320,6 +320,15 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compilePsiParser(Grammar grammar) '''
 		package «grammar.psiParserName.toPackageName»;
 		
+		«IF grammar.initialHiddenTokens.empty»
+		import static java.util.Collections.emptySet;
+		
+		«ELSE»
+		import java.util.Arrays;
+		import java.util.HashSet;
+		«ENDIF»
+		import java.util.Set;
+		
 		import org.antlr.runtime.TokenStream;
 		import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
@@ -332,6 +341,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.psiParserName.toSimpleName» extends AbstractXtextPsiParser {
 
+			«IF !grammar.initialHiddenTokens.empty»
+			private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
+			«ELSE»
+			private static final Set<String> INITIAL_HIDDEN_TOKENS = emptySet();
+			«ENDIF»
+
 			@Inject 
 			private «grammar.gaSimpleName» grammarAccess;
 		
@@ -341,6 +356,11 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			@Override
 			protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
 				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, elementTypeProvider, grammarAccess);
+			}
+
+			@Override
+			protected Set<String> getInitialHiddenTokens() {
+				return INITIAL_HIDDEN_TOKENS;
 			}
 		
 		}

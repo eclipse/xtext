@@ -1,0 +1,3 @@
+org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.TerminalRulesTestLanguageFileImpl:a.terminalrulestestlanguage(0,8)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,8)
+    PsiElement(Model_SlCommentValueSL_COMMENTTerminalRuleCall_5_0_ELEMENT_TYPE)('// abc\r\n')(0,8)

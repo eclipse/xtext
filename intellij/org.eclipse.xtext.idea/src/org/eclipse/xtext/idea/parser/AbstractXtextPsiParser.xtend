@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.antlr.TokenSourceProvider
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper
 import com.google.inject.Provider
+import java.util.Set
 
 abstract class AbstractXtextPsiParser implements PsiParser {
 
@@ -87,11 +88,6 @@ abstract class AbstractXtextPsiParser implements PsiParser {
 		tokenSourceProvider.createTokenSource(builder.originalText)
 	}
 
-	protected def getInitialHiddenTokens() {
-		var hiddenTokens = newHashSet
-		hiddenTokens += tokenTypeProvider.whitespaceTokens.types.map[toString]
-		hiddenTokens += tokenTypeProvider.commentTokens.types.map[toString]
-		hiddenTokens
-	}
+	protected def Set<String> getInitialHiddenTokens()
 
 }
