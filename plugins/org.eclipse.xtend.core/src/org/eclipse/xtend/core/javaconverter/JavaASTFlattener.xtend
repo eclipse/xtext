@@ -515,6 +515,11 @@ class JavaASTFlattener extends ASTVisitor {
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			getInitializer.accept(this)
+		} else if (parent instanceof VariableDeclarationStatement) {
+			if ((parent as VariableDeclarationStatement).modifiers().isFinal) {
+				appendToBuffer("/* FIXME empty initializer for final variable is not supported */")
+				addProblem("Empty initializer for final variables is not supported.")
+			}
 		}
 		return false
 	}
@@ -541,8 +546,6 @@ class JavaASTFlattener extends ASTVisitor {
 		fragments.forEach [ VariableDeclarationFragment frag |
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
-
-			// addProblem("Annotation on Variable declaration is not supported.")
 			}
 			appendModifieres(modifiers(), [
 				if (hasAnnotations) {
