@@ -548,9 +548,9 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(it);
     if (_isNotSupportedInnerType) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/* FIXME None static inner classes are not supported.*/");
+      _builder.append("/* FIXME Non-static inner classes are not supported.*/");
       this.appendToBuffer(_builder.toString());
-      this.addProblem(it, "None static inner classes are not supported.");
+      this.addProblem(it, "Non-static inner classes are not supported.");
     }
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -863,7 +863,7 @@ public class JavaASTFlattener extends ASTVisitor {
       @Override
       public void apply(final VariableDeclarationFragment frag) {
         if (hasAnnotations) {
-          JavaASTFlattener.this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
+          JavaASTFlattener.this.appendToBuffer("/*FIXME Cannot add Annotation to Variable declaration. Java code: ");
         }
         List _modifiers = it.modifiers();
         final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
@@ -1015,7 +1015,7 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_not_1) {
       boolean _isConstructor_1 = it.isConstructor();
       if (_isConstructor_1) {
-        this.addProblem(it, "Type parameters are not supported for constructors");
+        this.addProblem(it, "Type parameters for constructors are not supported");
       }
       List _typeParameters_1 = it.typeParameters();
       this.appendTypeParameters(_typeParameters_1);
@@ -2365,7 +2365,7 @@ public class JavaASTFlattener extends ASTVisitor {
     int dims = at.getDimensions();
     if ((dims > 1)) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/* FIXME Only one dimension arrays are supported. ");
+      _builder.append("/* FIXME Only one dimensional arrays are supported. ");
       _builder.append(node, "");
       _builder.append("*/");
       this.appendToBuffer(_builder.toString());
@@ -2447,7 +2447,7 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final BreakStatement node) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/* FIXME unsupported BreakStatement: ");
+    _builder.append("/* FIXME Unsupported BreakStatement: ");
     this.appendToBuffer(_builder.toString());
     this.addProblem(node, "Break statement is not supported");
     SimpleName _label = node.getLabel();
@@ -2554,7 +2554,7 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _arguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.addProblem(node, "Enum constant may not have any arguments");
+      this.addProblem(node, "Enum constant cannot have any arguments");
       this.appendToBuffer("(");
       List _arguments_1 = node.arguments();
       this.visitAllSeparatedByComma(_arguments_1);
@@ -2563,7 +2563,7 @@ public class JavaASTFlattener extends ASTVisitor {
     AnonymousClassDeclaration _anonymousClassDeclaration = node.getAnonymousClassDeclaration();
     boolean _notEquals_1 = (!Objects.equal(_anonymousClassDeclaration, null));
     if (_notEquals_1) {
-      this.addProblem(node, "Enum constant may not have any anonymous class declarations");
+      this.addProblem(node, "Enum constant cannot have any anonymous class declarations");
       AnonymousClassDeclaration _anonymousClassDeclaration_1 = node.getAnonymousClassDeclaration();
       _anonymousClassDeclaration_1.accept(this);
     }
@@ -2594,7 +2594,7 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _superInterfaceTypes.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.addProblem(node, "Enum may not have a super type");
+      this.addProblem(node, "Enum cannot have a supertype");
       this.appendToBuffer("implements ");
       List _superInterfaceTypes_1 = node.superInterfaceTypes();
       this.visitAllSeparatedByComma(_superInterfaceTypes_1);
@@ -2609,7 +2609,7 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty_1 = _bodyDeclarations.isEmpty();
     boolean _not_1 = (!_isEmpty_1);
     if (_not_1) {
-      this.addProblem(node, "Enum may not have any body declaration statements");
+      this.addProblem(node, "Enum cannot have any body declaration statements");
       this.appendToBuffer(";");
       this.appendLineWrapToBuffer();
       List _bodyDeclarations_1 = node.bodyDeclarations();
@@ -2622,7 +2622,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final LabeledStatement node) {
-    this.addProblem(node, "LabeledStatement are not supported");
+    this.addProblem(node, "LabeledStatements are not supported");
     this.appendToBuffer("/*");
     SimpleName _label = node.getLabel();
     _label.accept(this);
@@ -2783,9 +2783,9 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(node);
     if (_isNotSupportedInnerType) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/*FIXME None static inner classes are not supported. */");
+      _builder.append("/*FIXME Non-static inner classes are not supported. */");
       this.appendToBuffer(_builder.toString());
-      this.addProblem(node, "None static inner classes are not supported.");
+      this.addProblem(node, "Non-static inner classes are not supported.");
     }
     AbstractTypeDeclaration _declaration = node.getDeclaration();
     _declaration.accept(this);
