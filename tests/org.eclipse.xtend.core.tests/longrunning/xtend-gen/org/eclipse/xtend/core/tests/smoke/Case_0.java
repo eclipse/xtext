@@ -2,6 +2,8 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import com.google.common.base.Objects;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -28,6 +30,8 @@ public class Case_0 {
         String _plus_1 = (_plus + _get);
         InputOutput.<String>println(_plus_1);
       }
+      final ArrayList<String> strings = null;
+      final Set<List<String>> x1 = CollectionLiterals.<List<String>>newHashSet(strings);
       String _xifexpression = null;
       boolean _isUpper = this.isUpper(a);
       if (_isUpper) {
@@ -47,6 +51,9 @@ public class Case_0 {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  public void accept(final Set<String> set) {
   }
   
   public boolean isUpper(final String s) {
