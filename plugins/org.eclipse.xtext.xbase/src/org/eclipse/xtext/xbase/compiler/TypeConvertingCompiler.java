@@ -314,6 +314,16 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				if (iterator.hasNext())
 					appendable.append(", ");
 			}
+			// workaround until we have proper target typing with cast expressions
+			// a lambda without explicit parameter list may be casted to something with fewer params
+			// thus we have to add additional params here
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=445487#c4
+			for(int i = params.size(); i < actualOperation.getParameters().size(); i++) {
+				if (i != 0) {
+					appendable.append(", ");
+				}
+				appendable.append("null");
+			}
 			appendable.append(");");
 		} finally {
 			appendable.closeScope();

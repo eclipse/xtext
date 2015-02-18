@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.junit.Test
@@ -17,9 +16,9 @@ import org.junit.Test
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class CompilerBug445487Test extends AbstractXtendCompilerTest {
+class CompilerBug445487Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug445487Test {
 	
-	@Test def test_01() {
+	@Test override test_01() {
 		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -41,7 +40,7 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_02() {
+	@Test override test_02() {
 		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -63,7 +62,7 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_03() {
+	@Test override test_03() {
 		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -85,7 +84,7 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_04() {
+	@Test override test_04() {
 		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -112,7 +111,7 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_05() {
+	@Test override test_05() {
 		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -133,6 +132,65 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			        return ((Function0<? extends Lexer>) ((Function0<InternalXtendLexer>) () -> {
 			          return new InternalXtendLexer(null);
 			        })).apply();
+			      }
+			  };
+			}
+		''')
+	}
+
+	@Test override test_06() {
+		assertCompilesTo('''
+			import com.google.inject.Provider
+			import org.antlr.runtime.Lexer
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+			class C {
+				Provider<Lexer> lexerProvider= [return new InternalXtendLexer(null)] as Provider<Lexer> 
+			}
+		''', '''
+			import com.google.inject.Provider;
+			import org.antlr.runtime.Lexer;
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private Provider<Lexer> lexerProvider = ((Provider<Lexer>) new Provider<Lexer>() {
+			      public Lexer get() {
+			        return ((Function1<Object, InternalXtendLexer>) (Object it) -> {
+			          return new InternalXtendLexer(null);
+			        }).apply(null);
+			      }
+			  });
+			}
+		''')
+	}
+	
+	@Test override test_07() {
+		assertCompilesTo('''
+			import com.google.inject.Provider
+			import org.antlr.runtime.Lexer
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+			class C {
+				Provider<Lexer> lexerProvider= [return new InternalXtendLexer(null)] as ()=>Lexer
+			}
+		''', '''
+			import com.google.inject.Provider;
+			import org.antlr.runtime.Lexer;
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+			      public Lexer get() {
+			        return ((Function0<? extends Lexer>) new Function0<Lexer>() {
+			            public Lexer apply() {
+			              return ((Function1<Object, InternalXtendLexer>) (Object it) -> {
+			                return new InternalXtendLexer(null);
+			              }).apply(null);
+			            }
+			        }).apply();
 			      }
 			  };
 			}
