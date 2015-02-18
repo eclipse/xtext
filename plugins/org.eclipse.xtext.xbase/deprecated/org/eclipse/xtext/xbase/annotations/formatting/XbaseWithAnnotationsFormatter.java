@@ -15,7 +15,11 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  * 
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
  * on how and when to use it 
+ * 
+ * @deprecated use {@link org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsFormatter}
+ *   instead.
  */
+@Deprecated
 public class XbaseWithAnnotationsFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
