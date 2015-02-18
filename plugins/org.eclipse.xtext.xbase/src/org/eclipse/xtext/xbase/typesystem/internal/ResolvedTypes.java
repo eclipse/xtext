@@ -1265,7 +1265,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				BoundTypeArgumentSource source = existingTypeArgument.getSource();
 				LightweightTypeReference existingTypeReference = existingTypeArgument.getTypeReference();
 				LightweightTypeReference boundTypeReference = boundTypeArgument.getTypeReference();
-				if (source == BoundTypeArgumentSource.INFERRED) {
+				if (source == BoundTypeArgumentSource.INFERRED || source == BoundTypeArgumentSource.INFERRED_EXPECTATION) {
 					if (existingTypeReference instanceof UnboundTypeReference) {
 						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeReference;
 						// resolve similar pending type arguments, too
