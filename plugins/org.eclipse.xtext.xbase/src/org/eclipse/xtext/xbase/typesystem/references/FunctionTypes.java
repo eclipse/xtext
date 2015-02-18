@@ -113,7 +113,7 @@ public class FunctionTypes {
 		List<LightweightBoundTypeArgument> hints = unboundTypeReference.getAllHints();
 		for(LightweightBoundTypeArgument hint: hints) {
 			LightweightTypeReference hintReference = hint.getTypeReference();
-			if (hintReference != null && hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+			if (hintReference != null && (hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_EXPECTATION)) {
 				List<JvmType> rawTypes = hintReference.getRawTypes();
 				JvmOperation result = findImplementingOperation(rawTypes);
 				if (result != null) {
