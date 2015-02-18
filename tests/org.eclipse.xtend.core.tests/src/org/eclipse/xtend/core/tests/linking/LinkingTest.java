@@ -91,6 +91,25 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testBug460191() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"    def Iterable<K> getFs(Iterable<I> l) {\n" + 
+				"        l.filter[true]\n" + 
+				"    }\n" + 
+				"    interface I {}\n" + 
+				"    interface K extends I {}\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
 	@Test public void testOverloadStaticInstance_01() throws Exception {
 		XtendFile file = file(
 				"class C {\n" + 

@@ -54,11 +54,21 @@ public enum BoundTypeArgumentSource {
 	/**
 	 * <pre>
 	 *  public &lt;T extends CharSequence&gt; T method() {
+	 *    acceptor(method(), method());
+	 *  }
+	 *  public &lt;T&gt; acceptor(T t, T t2) {}
+	 * </pre>
+	 */
+	EXPECTATION,
+	
+	/**
+	 * <pre>
+	 *  public &lt;T extends CharSequence&gt; T method() {
 	 *    String s = method();
 	 *  }
 	 * </pre>
 	 */
-	EXPECTATION,
+	INFERRED_EXPECTATION,
 	
 	/**
 	 * <pre>
