@@ -10,7 +10,7 @@ public final class InheritanceTestLanguageFileType extends LanguageFileType {
 	public static final InheritanceTestLanguageFileType INSTANCE = new InheritanceTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "inheritancetestlanguage";
 
 	private InheritanceTestLanguageFileType() {
 		super(InheritanceTestLanguageLanguage.INSTANCE);

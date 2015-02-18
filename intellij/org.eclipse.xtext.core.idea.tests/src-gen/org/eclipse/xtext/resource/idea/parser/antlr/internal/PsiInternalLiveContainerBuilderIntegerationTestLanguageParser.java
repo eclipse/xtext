@@ -45,30 +45,31 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageParser exten
 
 
 
-    private LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess;
+    	protected LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess;
 
-    private LiveContainerBuilderIntegerationTestLanguageElementTypeProvider elementTypeProvider;
+    	protected LiveContainerBuilderIntegerationTestLanguageElementTypeProvider elementTypeProvider;
 
-    public PsiInternalLiveContainerBuilderIntegerationTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, LiveContainerBuilderIntegerationTestLanguageElementTypeProvider elementTypeProvider, LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalLiveContainerBuilderIntegerationTestLanguageParser(PsiBuilder builder, TokenStream input, LiveContainerBuilderIntegerationTestLanguageElementTypeProvider elementTypeProvider, LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "Model";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "Model";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:49:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:50:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:49:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:50:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:50:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:51:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
@@ -96,19 +97,19 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageParser exten
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:58:1: ruleModel : ( (lv_name_0_0= RULE_ID ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:1: ruleModel : ( (lv_name_0_0= RULE_ID ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:58:10: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:10: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:3: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:4: lv_name_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:3: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:62:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf();

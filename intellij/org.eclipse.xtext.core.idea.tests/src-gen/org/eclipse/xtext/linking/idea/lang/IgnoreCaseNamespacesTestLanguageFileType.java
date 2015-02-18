@@ -10,7 +10,7 @@ public final class IgnoreCaseNamespacesTestLanguageFileType extends LanguageFile
 	public static final IgnoreCaseNamespacesTestLanguageFileType INSTANCE = new IgnoreCaseNamespacesTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ignorecasenamespacestestlanguage";
 
 	private IgnoreCaseNamespacesTestLanguageFileType() {
 		super(IgnoreCaseNamespacesTestLanguageLanguage.INSTANCE);

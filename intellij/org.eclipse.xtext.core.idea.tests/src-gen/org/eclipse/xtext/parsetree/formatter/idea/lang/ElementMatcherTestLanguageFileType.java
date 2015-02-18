@@ -10,7 +10,7 @@ public final class ElementMatcherTestLanguageFileType extends LanguageFileType {
 	public static final ElementMatcherTestLanguageFileType INSTANCE = new ElementMatcherTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "elementmatchertestlanguage";
 
 	private ElementMatcherTestLanguageFileType() {
 		super(ElementMatcherTestLanguageLanguage.INSTANCE);

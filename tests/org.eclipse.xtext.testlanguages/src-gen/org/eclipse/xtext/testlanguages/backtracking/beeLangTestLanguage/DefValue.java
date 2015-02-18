@@ -10,6 +10,7 @@ package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.DefValue#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.DefValue#getType <em>Type</em>}</li>
@@ -17,7 +18,6 @@ package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.DefValue#getValueExpr <em>Value Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.DefValue#isImmutable <em>Immutable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getDefValue()
  * @model

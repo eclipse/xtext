@@ -21,13 +21,13 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Provided
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ProvidedCapabilityImpl#getNameSpace <em>Name Space</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ProvidedCapabilityImpl#getCondExpr <em>Cond Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ProvidedCapabilityImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ProvidedCapabilityImpl#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -129,8 +129,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getNameSpace()
+  public String getNameSpace()
   {
     return nameSpace;
   }
@@ -140,8 +139,7 @@ public String getNameSpace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNameSpace(String newNameSpace)
+  public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
     nameSpace = newNameSpace;
@@ -154,8 +152,7 @@ public void setNameSpace(String newNameSpace)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getCondExpr()
+  public Expression getCondExpr()
   {
     return condExpr;
   }
@@ -182,8 +179,7 @@ public Expression getCondExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCondExpr(Expression newCondExpr)
+  public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
     {
@@ -204,8 +200,7 @@ public void setCondExpr(Expression newCondExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -215,8 +210,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -229,8 +223,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getVersion()
+  public String getVersion()
   {
     return version;
   }
@@ -240,8 +233,7 @@ public String getVersion()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVersion(String newVersion)
+  public void setVersion(String newVersion)
   {
     String oldVersion = version;
     version = newVersion;

@@ -10,7 +10,7 @@ public final class PartialParserTestLanguageFileType extends LanguageFileType {
 	public static final PartialParserTestLanguageFileType INSTANCE = new PartialParserTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "partialparsertestlanguage";
 
 	private PartialParserTestLanguageFileType() {
 		super(PartialParserTestLanguageLanguage.INSTANCE);

@@ -20,7 +20,7 @@ public class LazyLinkingTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalLazyLinkingTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalLazyLinkingTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

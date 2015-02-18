@@ -54,30 +54,31 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
       Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
     */
 
-    private Bug296889ExTestLanguageGrammarAccess grammarAccess;
+    	protected Bug296889ExTestLanguageGrammarAccess grammarAccess;
 
-    private Bug296889ExTestLanguageElementTypeProvider elementTypeProvider;
+    	protected Bug296889ExTestLanguageElementTypeProvider elementTypeProvider;
 
-    public PsiInternalBug296889ExTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, Bug296889ExTestLanguageElementTypeProvider elementTypeProvider, Bug296889ExTestLanguageGrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalBug296889ExTestLanguageParser(PsiBuilder builder, TokenStream input, Bug296889ExTestLanguageElementTypeProvider elementTypeProvider, Bug296889ExTestLanguageGrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "Model";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "Model";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:55:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:56:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:55:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:56:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:56:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:57:2: ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getModelElementType()); 
@@ -109,16 +110,16 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:64:1: ruleModel : ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:65:1: ruleModel : ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:64:10: ( ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:65:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:65:10: ( ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:66:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:65:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:66:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -137,10 +138,10 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:66:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:67:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:66:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:67:4: otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )*
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:67:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:68:4: otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -153,7 +154,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
                       				doneLeaf(otherlv_0, elementTypeProvider.getModel_ModelKeyword_0_0ElementType());
                       			
                     }
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:74:4: ( (lv_expressions_1_0= ruleExpression ) )*
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:75:4: ( (lv_expressions_1_0= ruleExpression ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -166,10 +167,10 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:75:5: (lv_expressions_1_0= ruleExpression )
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:76:5: (lv_expressions_1_0= ruleExpression )
                     	    {
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:75:5: (lv_expressions_1_0= ruleExpression )
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:76:6: lv_expressions_1_0= ruleExpression
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:76:5: (lv_expressions_1_0= ruleExpression )
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:77:6: lv_expressions_1_0= ruleExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -205,10 +206,10 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:87:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:88:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:87:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:88:4: otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )*
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:88:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:89:4: otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -221,7 +222,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
                       				doneLeaf(otherlv_2, elementTypeProvider.getModel_DataTypeKeyword_1_0ElementType());
                       			
                     }
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:95:4: ( (lv_values_3_0= ruleDataTypeExpression ) )*
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:96:4: ( (lv_values_3_0= ruleDataTypeExpression ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -234,10 +235,10 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:96:5: (lv_values_3_0= ruleDataTypeExpression )
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:97:5: (lv_values_3_0= ruleDataTypeExpression )
                     	    {
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:96:5: (lv_values_3_0= ruleDataTypeExpression )
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:97:6: lv_values_3_0= ruleDataTypeExpression
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:97:5: (lv_values_3_0= ruleDataTypeExpression )
+                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:98:6: lv_values_3_0= ruleDataTypeExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -291,11 +292,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:111:1: entryRuleExpression : ruleExpression EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:112:1: entryRuleExpression : ruleExpression EOF ;
     public final void entryRuleExpression() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:111:20: ( ruleExpression EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:112:2: ruleExpression EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:112:20: ( ruleExpression EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:113:2: ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getExpressionElementType()); 
@@ -327,13 +328,13 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:120:1: ruleExpression : ( rulePostop | rulePreop ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:121:1: ruleExpression : ( rulePostop | rulePreop ) ;
     public final void ruleExpression() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:120:15: ( ( rulePostop | rulePreop ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:121:2: ( rulePostop | rulePreop )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:121:15: ( ( rulePostop | rulePreop ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:122:2: ( rulePostop | rulePreop )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:121:2: ( rulePostop | rulePreop )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:122:2: ( rulePostop | rulePreop )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -352,7 +353,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:122:3: rulePostop
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:123:3: rulePostop
                     {
                     if ( state.backtracking==0 ) {
 
@@ -378,7 +379,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:133:3: rulePreop
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:134:3: rulePreop
                     {
                     if ( state.backtracking==0 ) {
 
@@ -422,11 +423,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRulePreop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:147:1: entryRulePreop : rulePreop EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:148:1: entryRulePreop : rulePreop EOF ;
     public final void entryRulePreop() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:147:15: ( rulePreop EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:148:2: rulePreop EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:148:15: ( rulePreop EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:149:2: rulePreop EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPreopElementType()); 
@@ -458,19 +459,19 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "rulePreop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:156:1: rulePreop : ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:157:1: rulePreop : ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
     public final void rulePreop() throws RecognitionException {
         Token lv_functionName_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:156:10: ( ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:157:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:157:10: ( ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:158:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:157:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:158:3: () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:158:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:159:3: () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:158:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:159:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:159:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:160:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -486,11 +487,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:167:3: ( (lv_functionName_1_0= '--' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:168:4: (lv_functionName_1_0= '--' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:168:3: ( (lv_functionName_1_0= '--' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:169:4: (lv_functionName_1_0= '--' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:168:4: (lv_functionName_1_0= '--' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:169:5: lv_functionName_1_0= '--'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:169:4: (lv_functionName_1_0= '--' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:170:5: lv_functionName_1_0= '--'
             {
             if ( state.backtracking==0 ) {
 
@@ -509,11 +510,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:178:3: ( (lv_expr_2_0= ruleVariable ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:179:4: (lv_expr_2_0= ruleVariable )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:179:3: ( (lv_expr_2_0= ruleVariable ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:180:4: (lv_expr_2_0= ruleVariable )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:179:4: (lv_expr_2_0= ruleVariable )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:180:5: lv_expr_2_0= ruleVariable
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:180:4: (lv_expr_2_0= ruleVariable )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:181:5: lv_expr_2_0= ruleVariable
             {
             if ( state.backtracking==0 ) {
 
@@ -555,11 +556,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRulePostop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:193:1: entryRulePostop : rulePostop EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:194:1: entryRulePostop : rulePostop EOF ;
     public final void entryRulePostop() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:193:16: ( rulePostop EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:194:2: rulePostop EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:194:16: ( rulePostop EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:195:2: rulePostop EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPostopElementType()); 
@@ -591,16 +592,16 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "rulePostop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:202:1: rulePostop : ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:203:1: rulePostop : ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) ;
     public final void rulePostop() throws RecognitionException {
         Token lv_functionName_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:202:11: ( ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:203:2: ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:203:11: ( ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:204:2: ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:203:2: ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:204:3: ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:204:2: ( ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:205:3: ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -622,7 +623,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
               			doneComposite();
               		
             }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:214:3: ( () ( (lv_functionName_2_0= '--' ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:3: ( () ( (lv_functionName_2_0= '--' ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -642,10 +643,10 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt5) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:4: () ( (lv_functionName_2_0= '--' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:4: () ( (lv_functionName_2_0= '--' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:4: ()
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:5: 
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:4: ()
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:217:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -661,11 +662,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:224:4: ( (lv_functionName_2_0= '--' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:5: (lv_functionName_2_0= '--' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:4: ( (lv_functionName_2_0= '--' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:5: (lv_functionName_2_0= '--' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:5: (lv_functionName_2_0= '--' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:6: lv_functionName_2_0= '--'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:5: (lv_functionName_2_0= '--' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:227:6: lv_functionName_2_0= '--'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -709,11 +710,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:240:1: entryRuleVariable : ruleVariable EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:241:1: entryRuleVariable : ruleVariable EOF ;
     public final void entryRuleVariable() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:240:18: ( ruleVariable EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:241:2: ruleVariable EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:241:18: ( ruleVariable EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:242:2: ruleVariable EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getVariableElementType()); 
@@ -745,19 +746,19 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:249:1: ruleVariable : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:250:1: ruleVariable : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleVariable() throws RecognitionException {
         Token lv_name_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:249:13: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:250:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:250:13: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:251:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:250:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:251:3: () ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:251:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:252:3: () ( (lv_name_1_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:251:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:252:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:252:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:253:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -773,11 +774,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:260:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:261:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:261:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:262:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:261:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:262:5: lv_name_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:262:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:263:5: lv_name_1_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -815,11 +816,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypeExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:275:1: entryRuleDataTypeExpression : ruleDataTypeExpression EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:276:1: entryRuleDataTypeExpression : ruleDataTypeExpression EOF ;
     public final void entryRuleDataTypeExpression() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:275:28: ( ruleDataTypeExpression EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:276:2: ruleDataTypeExpression EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:276:28: ( ruleDataTypeExpression EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:277:2: ruleDataTypeExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDataTypeExpressionElementType()); 
@@ -851,13 +852,13 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleDataTypeExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:284:1: ruleDataTypeExpression : ( ruleDataTypePostop | ruleDataTypePreop ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:285:1: ruleDataTypeExpression : ( ruleDataTypePostop | ruleDataTypePreop ) ;
     public final void ruleDataTypeExpression() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:284:23: ( ( ruleDataTypePostop | ruleDataTypePreop ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:285:2: ( ruleDataTypePostop | ruleDataTypePreop )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:285:23: ( ( ruleDataTypePostop | ruleDataTypePreop ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:286:2: ( ruleDataTypePostop | ruleDataTypePreop )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:285:2: ( ruleDataTypePostop | ruleDataTypePreop )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:286:2: ( ruleDataTypePostop | ruleDataTypePreop )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -876,7 +877,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:286:3: ruleDataTypePostop
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:287:3: ruleDataTypePostop
                     {
                     if ( state.backtracking==0 ) {
 
@@ -897,7 +898,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:294:3: ruleDataTypePreop
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:295:3: ruleDataTypePreop
                     {
                     if ( state.backtracking==0 ) {
 
@@ -936,11 +937,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypePreop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:305:1: entryRuleDataTypePreop : ruleDataTypePreop EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:306:1: entryRuleDataTypePreop : ruleDataTypePreop EOF ;
     public final void entryRuleDataTypePreop() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:305:23: ( ruleDataTypePreop EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:306:2: ruleDataTypePreop EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:306:23: ( ruleDataTypePreop EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:307:2: ruleDataTypePreop EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDataTypePreopElementType()); 
@@ -972,16 +973,16 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleDataTypePreop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:314:1: ruleDataTypePreop : (kw= '--' ruleDataTypeVariable ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:315:1: ruleDataTypePreop : (kw= '--' ruleDataTypeVariable ) ;
     public final void ruleDataTypePreop() throws RecognitionException {
         Token kw=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:314:18: ( (kw= '--' ruleDataTypeVariable ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:315:2: (kw= '--' ruleDataTypeVariable )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:315:18: ( (kw= '--' ruleDataTypeVariable ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:316:2: (kw= '--' ruleDataTypeVariable )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:315:2: (kw= '--' ruleDataTypeVariable )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:316:3: kw= '--' ruleDataTypeVariable
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:316:2: (kw= '--' ruleDataTypeVariable )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:317:3: kw= '--' ruleDataTypeVariable
             {
             if ( state.backtracking==0 ) {
 
@@ -1028,11 +1029,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypePostop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:334:1: entryRuleDataTypePostop : ruleDataTypePostop EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:335:1: entryRuleDataTypePostop : ruleDataTypePostop EOF ;
     public final void entryRuleDataTypePostop() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:334:24: ( ruleDataTypePostop EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:335:2: ruleDataTypePostop EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:335:24: ( ruleDataTypePostop EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:336:2: ruleDataTypePostop EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDataTypePostopElementType()); 
@@ -1064,16 +1065,16 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleDataTypePostop"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:343:1: ruleDataTypePostop : ( ruleDataTypeVariable (kw= '--' )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:344:1: ruleDataTypePostop : ( ruleDataTypeVariable (kw= '--' )? ) ;
     public final void ruleDataTypePostop() throws RecognitionException {
         Token kw=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:343:19: ( ( ruleDataTypeVariable (kw= '--' )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:344:2: ( ruleDataTypeVariable (kw= '--' )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:344:19: ( ( ruleDataTypeVariable (kw= '--' )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:345:2: ( ruleDataTypeVariable (kw= '--' )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:344:2: ( ruleDataTypeVariable (kw= '--' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:345:3: ruleDataTypeVariable (kw= '--' )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:345:2: ( ruleDataTypeVariable (kw= '--' )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:346:3: ruleDataTypeVariable (kw= '--' )?
             {
             if ( state.backtracking==0 ) {
 
@@ -1090,7 +1091,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
               			doneComposite();
               		
             }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:352:3: (kw= '--' )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:353:3: (kw= '--' )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1110,7 +1111,7 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:353:4: kw= '--'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:354:4: kw= '--'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1148,11 +1149,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypeVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:365:1: entryRuleDataTypeVariable : ruleDataTypeVariable EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:366:1: entryRuleDataTypeVariable : ruleDataTypeVariable EOF ;
     public final void entryRuleDataTypeVariable() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:365:26: ( ruleDataTypeVariable EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:366:2: ruleDataTypeVariable EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:366:26: ( ruleDataTypeVariable EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:367:2: ruleDataTypeVariable EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDataTypeVariableElementType()); 
@@ -1184,13 +1185,13 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleDataTypeVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:374:1: ruleDataTypeVariable : this_ID_0= RULE_ID ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:375:1: ruleDataTypeVariable : this_ID_0= RULE_ID ;
     public final void ruleDataTypeVariable() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:374:21: (this_ID_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:375:2: this_ID_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:375:21: (this_ID_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:376:2: this_ID_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1221,11 +1222,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
     public final void synpred5_PsiInternalBug296889ExTestLanguage_fragment() throws RecognitionException {   
         Token lv_functionName_2_0=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:4: ( () ( (lv_functionName_2_0= '--' ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:4: () ( (lv_functionName_2_0= '--' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:4: ( () ( (lv_functionName_2_0= '--' ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:4: () ( (lv_functionName_2_0= '--' ) )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:215:4: ()
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:5: 
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:216:4: ()
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:217:5: 
         {
         if ( state.backtracking==0 ) {
 
@@ -1235,11 +1236,11 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
 
         }
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:224:4: ( (lv_functionName_2_0= '--' ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:5: (lv_functionName_2_0= '--' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:4: ( (lv_functionName_2_0= '--' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:5: (lv_functionName_2_0= '--' )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:225:5: (lv_functionName_2_0= '--' )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:6: lv_functionName_2_0= '--'
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:226:5: (lv_functionName_2_0= '--' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:227:6: lv_functionName_2_0= '--'
         {
         if ( state.backtracking==0 ) {
 
@@ -1262,8 +1263,8 @@ public class PsiInternalBug296889ExTestLanguageParser extends AbstractPsiAntlrPa
     public final void synpred7_PsiInternalBug296889ExTestLanguage_fragment() throws RecognitionException {   
         Token kw=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:353:4: (kw= '--' )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:353:4: kw= '--'
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:354:4: (kw= '--' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug296889ExTestLanguage.g:354:4: kw= '--'
         {
         if ( state.backtracking==0 ) {
 

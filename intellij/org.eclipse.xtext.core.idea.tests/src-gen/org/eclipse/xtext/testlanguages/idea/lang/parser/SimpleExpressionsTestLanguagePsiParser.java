@@ -20,7 +20,7 @@ public class SimpleExpressionsTestLanguagePsiParser extends AbstractXtextPsiPars
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalSimpleExpressionsTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalSimpleExpressionsTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -20,7 +20,7 @@ public class TreeTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalTreeTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalTreeTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

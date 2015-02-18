@@ -20,7 +20,7 @@ public class ExBacktrackingBug325745TestLanguagePsiParser extends AbstractXtextP
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalExBacktrackingBug325745TestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalExBacktrackingBug325745TestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

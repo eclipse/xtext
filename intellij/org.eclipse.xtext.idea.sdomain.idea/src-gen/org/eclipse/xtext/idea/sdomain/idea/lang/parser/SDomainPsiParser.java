@@ -20,7 +20,7 @@ public class SDomainPsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalSDomainParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalSDomainParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -10,7 +10,7 @@ public final class Bug287184TestLanguageFileType extends LanguageFileType {
 	public static final Bug287184TestLanguageFileType INSTANCE = new Bug287184TestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "bug287184testlanguage";
 
 	private Bug287184TestLanguageFileType() {
 		super(Bug287184TestLanguageLanguage.INSTANCE);

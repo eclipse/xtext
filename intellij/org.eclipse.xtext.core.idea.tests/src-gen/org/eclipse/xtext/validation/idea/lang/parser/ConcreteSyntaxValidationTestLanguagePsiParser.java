@@ -20,7 +20,7 @@ public class ConcreteSyntaxValidationTestLanguagePsiParser extends AbstractXtext
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalConcreteSyntaxValidationTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalConcreteSyntaxValidationTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -10,11 +10,11 @@ package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.OrExpression#getLeftExpr <em>Left Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.OrExpression#getRightExpr <em>Right Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getOrExpression()
  * @model

@@ -4,6 +4,7 @@ import static org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiI
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429Language;
+import org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiInternalBug419429Parser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class Bug419429TokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalBug419429Parser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, Bug419429Language.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, Bug419429Language.INSTANCE);
 		}
 	}
 

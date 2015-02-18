@@ -4,6 +4,7 @@ import static org.eclipse.xtext.xbase.idea.parser.antlr.internal.PsiInternalXbas
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
+import org.eclipse.xtext.xbase.idea.parser.antlr.internal.PsiInternalXbaseParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class XbaseTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalXbaseParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, XbaseLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, XbaseLanguage.INSTANCE);
 		}
 	}
 

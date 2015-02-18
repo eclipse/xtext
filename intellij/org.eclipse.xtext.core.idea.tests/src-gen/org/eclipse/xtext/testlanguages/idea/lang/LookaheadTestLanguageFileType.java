@@ -10,7 +10,7 @@ public final class LookaheadTestLanguageFileType extends LanguageFileType {
 	public static final LookaheadTestLanguageFileType INSTANCE = new LookaheadTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "lookaheadtestlanguage";
 
 	private LookaheadTestLanguageFileType() {
 		super(LookaheadTestLanguageLanguage.INSTANCE);

@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private FowlerDslTestLanguageGrammarAccess grammarAccess;
+	protected FowlerDslTestLanguageGrammarAccess grammarAccess;
 
-private FowlerDslTestLanguageElementTypeProvider elementTypeProvider;
+	protected FowlerDslTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalFowlerDslTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, FowlerDslTestLanguageElementTypeProvider elementTypeProvider, FowlerDslTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalFowlerDslTestLanguageParser(PsiBuilder builder, TokenStream input, FowlerDslTestLanguageElementTypeProvider elementTypeProvider, FowlerDslTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Statemachine";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Statemachine";
+	}
 
 }
 

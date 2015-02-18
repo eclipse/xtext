@@ -4,6 +4,7 @@ import static org.eclipse.xtext.parsetree.formatter.idea.parser.antlr.internal.P
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parsetree.formatter.idea.lang.ElementMatcherTestLanguageLanguage;
+import org.eclipse.xtext.parsetree.formatter.idea.parser.antlr.internal.PsiInternalElementMatcherTestLanguageParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class ElementMatcherTestLanguageTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalElementMatcherTestLanguageParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, ElementMatcherTestLanguageLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, ElementMatcherTestLanguageLanguage.INSTANCE);
 		}
 	}
 

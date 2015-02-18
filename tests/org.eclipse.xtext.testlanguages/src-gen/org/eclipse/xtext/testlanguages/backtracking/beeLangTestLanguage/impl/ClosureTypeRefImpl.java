@@ -23,12 +23,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ClosureT
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#getParameterTypes <em>Parameter Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#isVarArgs <em>Var Args</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#getReturnType <em>Return Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -110,8 +110,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getParameterTypes()
+  public EList<String> getParameterTypes()
   {
     if (parameterTypes == null)
     {
@@ -125,8 +124,7 @@ public EList<String> getParameterTypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isVarArgs()
+  public boolean isVarArgs()
   {
     return varArgs;
   }
@@ -136,8 +134,7 @@ public boolean isVarArgs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVarArgs(boolean newVarArgs)
+  public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
     varArgs = newVarArgs;
@@ -150,8 +147,7 @@ public void setVarArgs(boolean newVarArgs)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getReturnType()
+  public String getReturnType()
   {
     return returnType;
   }
@@ -161,8 +157,7 @@ public String getReturnType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReturnType(String newReturnType)
+  public void setReturnType(String newReturnType)
   {
     String oldReturnType = returnType;
     returnType = newReturnType;

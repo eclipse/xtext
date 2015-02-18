@@ -10,7 +10,7 @@ public final class EnumAndReferenceTestLanguageFileType extends LanguageFileType
 	public static final EnumAndReferenceTestLanguageFileType INSTANCE = new EnumAndReferenceTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "enumandreferencetestlanguage";
 
 	private EnumAndReferenceTestLanguageFileType() {
 		super(EnumAndReferenceTestLanguageLanguage.INSTANCE);

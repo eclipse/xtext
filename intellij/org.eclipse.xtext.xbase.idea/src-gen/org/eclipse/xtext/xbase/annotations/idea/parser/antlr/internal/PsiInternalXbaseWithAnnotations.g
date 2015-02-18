@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private XbaseWithAnnotationsGrammarAccess grammarAccess;
+	protected XbaseWithAnnotationsGrammarAccess grammarAccess;
 
-private XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
+	protected XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
 
-public PsiInternalXbaseWithAnnotationsParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XbaseWithAnnotationsElementTypeProvider elementTypeProvider, XbaseWithAnnotationsGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalXbaseWithAnnotationsParser(PsiBuilder builder, TokenStream input, XbaseWithAnnotationsElementTypeProvider elementTypeProvider, XbaseWithAnnotationsGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "XAnnotation";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "XAnnotation";
+	}
 
 }
 

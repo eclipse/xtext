@@ -10,7 +10,7 @@ public final class ReferenceGrammarTestLanguageFileType extends LanguageFileType
 	public static final ReferenceGrammarTestLanguageFileType INSTANCE = new ReferenceGrammarTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "referencegrammartestlanguage";
 
 	private ReferenceGrammarTestLanguageFileType() {
 		super(ReferenceGrammarTestLanguageLanguage.INSTANCE);

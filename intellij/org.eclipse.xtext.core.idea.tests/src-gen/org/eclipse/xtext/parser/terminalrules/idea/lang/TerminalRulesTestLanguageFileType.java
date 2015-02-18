@@ -10,7 +10,7 @@ public final class TerminalRulesTestLanguageFileType extends LanguageFileType {
 	public static final TerminalRulesTestLanguageFileType INSTANCE = new TerminalRulesTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "terminalrulestestlanguage";
 
 	private TerminalRulesTestLanguageFileType() {
 		super(TerminalRulesTestLanguageLanguage.INSTANCE);

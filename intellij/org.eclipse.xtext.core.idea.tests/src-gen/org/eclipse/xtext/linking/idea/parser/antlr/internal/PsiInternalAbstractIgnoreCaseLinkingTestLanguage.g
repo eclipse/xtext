@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
+	protected AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
 
-private AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider elementTypeProvider;
+	protected AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider elementTypeProvider, AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser(PsiBuilder builder, TokenStream input, AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider elementTypeProvider, AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Model";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Model";
+	}
 
 }
 

@@ -21,11 +21,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallFunctionImpl#getFuncExpr <em>Func Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallFunctionImpl#getParameterList <em>Parameter List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -77,8 +77,7 @@ public class CallFunctionImpl extends ExpressionImpl implements CallFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getFuncExpr()
+  public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -105,8 +104,7 @@ public Expression getFuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFuncExpr(Expression newFuncExpr)
+  public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {
@@ -127,8 +125,7 @@ public void setFuncExpr(Expression newFuncExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterList getParameterList()
+  public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -155,8 +152,7 @@ public ParameterList getParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParameterList(ParameterList newParameterList)
+  public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

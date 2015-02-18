@@ -10,7 +10,7 @@ public final class CommentAssociationTestLanguageFileType extends LanguageFileTy
 	public static final CommentAssociationTestLanguageFileType INSTANCE = new CommentAssociationTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "commentassociationtestlanguage";
 
 	private CommentAssociationTestLanguageFileType() {
 		super(CommentAssociationTestLanguageLanguage.INSTANCE);

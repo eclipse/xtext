@@ -26,11 +26,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.WithExpr
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithExpressionImpl#getReferencedAdvice <em>Referenced Advice</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithExpressionImpl#getFuncExpr <em>Func Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -82,8 +82,7 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getReferencedAdvice()
+  public EList<String> getReferencedAdvice()
   {
     if (referencedAdvice == null)
     {
@@ -97,8 +96,7 @@ public EList<String> getReferencedAdvice()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getFuncExpr()
+  public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -125,8 +123,7 @@ public Expression getFuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFuncExpr(Expression newFuncExpr)
+  public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {

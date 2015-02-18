@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private IndentationAwareTestLanguageGrammarAccess grammarAccess;
+	protected IndentationAwareTestLanguageGrammarAccess grammarAccess;
 
-private IndentationAwareTestLanguageElementTypeProvider elementTypeProvider;
+	protected IndentationAwareTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalIndentationAwareTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, IndentationAwareTestLanguageElementTypeProvider elementTypeProvider, IndentationAwareTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalIndentationAwareTestLanguageParser(PsiBuilder builder, TokenStream input, IndentationAwareTestLanguageElementTypeProvider elementTypeProvider, IndentationAwareTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "NodeList";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "NodeList";
+	}
 
 }
 

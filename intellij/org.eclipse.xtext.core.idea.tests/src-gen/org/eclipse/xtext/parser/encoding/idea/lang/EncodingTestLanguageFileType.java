@@ -10,7 +10,7 @@ public final class EncodingTestLanguageFileType extends LanguageFileType {
 	public static final EncodingTestLanguageFileType INSTANCE = new EncodingTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "encodingtestlanguage";
 
 	private EncodingTestLanguageFileType() {
 		super(EncodingTestLanguageLanguage.INSTANCE);

@@ -4,6 +4,7 @@ import static org.eclipse.xtext.valueconverter.idea.parser.antlr.internal.PsiInt
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageLanguage;
+import org.eclipse.xtext.valueconverter.idea.parser.antlr.internal.PsiInternalQualifiedNameTestLanguageParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class QualifiedNameTestLanguageTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalQualifiedNameTestLanguageParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, QualifiedNameTestLanguageLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, QualifiedNameTestLanguageLanguage.INSTANCE);
 		}
 	}
 

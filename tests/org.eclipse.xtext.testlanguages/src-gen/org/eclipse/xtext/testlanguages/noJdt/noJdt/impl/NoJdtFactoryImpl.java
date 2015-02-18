@@ -76,8 +76,7 @@ public class NoJdtFactoryImpl extends EFactoryImpl implements NoJdtFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -88,8 +87,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Greeting createGreeting()
+  public Greeting createGreeting()
   {
     GreetingImpl greeting = new GreetingImpl();
     return greeting;
@@ -100,8 +98,7 @@ public Greeting createGreeting()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NoJdtPackage getNoJdtPackage()
+  public NoJdtPackage getNoJdtPackage()
   {
     return (NoJdtPackage)getEPackage();
   }

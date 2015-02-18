@@ -21,6 +21,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AliasedRequiredCapabilityImpl#getNameSpace <em>Name Space</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AliasedRequiredCapabilityImpl#getName <em>Name</em>}</li>
@@ -31,7 +32,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AliasedRequiredCapabilityImpl#getMax <em>Max</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AliasedRequiredCapabilityImpl#getVersionRange <em>Version Range</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -213,8 +213,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getNameSpace()
+  public String getNameSpace()
   {
     return nameSpace;
   }
@@ -224,8 +223,7 @@ public String getNameSpace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNameSpace(String newNameSpace)
+  public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
     nameSpace = newNameSpace;
@@ -238,8 +236,7 @@ public void setNameSpace(String newNameSpace)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -249,8 +246,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -263,8 +259,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getAlias()
+  public String getAlias()
   {
     return alias;
   }
@@ -274,8 +269,7 @@ public String getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(String newAlias)
+  public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -288,8 +282,7 @@ public void setAlias(String newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getCondExpr()
+  public Expression getCondExpr()
   {
     return condExpr;
   }
@@ -316,8 +309,7 @@ public Expression getCondExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCondExpr(Expression newCondExpr)
+  public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
     {
@@ -338,8 +330,7 @@ public void setCondExpr(Expression newCondExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isGreedy()
+  public boolean isGreedy()
   {
     return greedy;
   }
@@ -349,8 +340,7 @@ public boolean isGreedy()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGreedy(boolean newGreedy)
+  public void setGreedy(boolean newGreedy)
   {
     boolean oldGreedy = greedy;
     greedy = newGreedy;
@@ -363,8 +353,7 @@ public void setGreedy(boolean newGreedy)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getMin()
+  public int getMin()
   {
     return min;
   }
@@ -374,8 +363,7 @@ public int getMin()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMin(int newMin)
+  public void setMin(int newMin)
   {
     int oldMin = min;
     min = newMin;
@@ -388,8 +376,7 @@ public void setMin(int newMin)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getMax()
+  public int getMax()
   {
     return max;
   }
@@ -399,8 +386,7 @@ public int getMax()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMax(int newMax)
+  public void setMax(int newMax)
   {
     int oldMax = max;
     max = newMax;
@@ -413,8 +399,7 @@ public void setMax(int newMax)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getVersionRange()
+  public String getVersionRange()
   {
     return versionRange;
   }
@@ -424,8 +409,7 @@ public String getVersionRange()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVersionRange(String newVersionRange)
+  public void setVersionRange(String newVersionRange)
   {
     String oldVersionRange = versionRange;
     versionRange = newVersionRange;

@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
+	protected EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
 
-private EnumAndReferenceTestLanguageElementTypeProvider elementTypeProvider;
+	protected EnumAndReferenceTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalEnumAndReferenceTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, EnumAndReferenceTestLanguageElementTypeProvider elementTypeProvider, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalEnumAndReferenceTestLanguageParser(PsiBuilder builder, TokenStream input, EnumAndReferenceTestLanguageElementTypeProvider elementTypeProvider, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "EntityWithEnumAndReference";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "EntityWithEnumAndReference";
+	}
 
 }
 

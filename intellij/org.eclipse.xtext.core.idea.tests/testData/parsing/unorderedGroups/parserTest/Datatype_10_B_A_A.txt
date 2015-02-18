@@ -1,0 +1,17 @@
+org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroupsTestLanguageFileImpl:a.simpleunorderedgroupstestlanguage(0,18)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ELEMENT_TYPE)(0,18)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,18)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
+        <empty list>
+      PsiElement(Model_DatatypesKeyword_1_14_0_ELEMENT_TYPE)('datatypes')(0,9)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ValueUnorderedDatatypeParserRuleCall_1_14_1_0_ELEMENT_TYPE)(9,18)
+        PsiWhiteSpace(' ')(9,10)
+        PsiElement(UnorderedDatatype_DigitOneDigitZeroKeyword_9_0_ELEMENT_TYPE)('10')(10,12)
+        PsiWhiteSpace(' ')(12,13)
+        PsiElement(UnorderedDatatype_BKeyword_9_1_1_ELEMENT_TYPE)('b')(13,14)
+        PsiWhiteSpace(' ')(14,15)
+        PsiElement(UnorderedDatatype_AKeyword_9_1_0_ELEMENT_TYPE)('a')(15,16)
+        PsiWhiteSpace(' ')(16,17)
+        PsiElement(UnorderedDatatype_AKeyword_9_1_0_ELEMENT_TYPE)('a')(17,18)
+  PsiErrorElement:rule ruleUnorderedDatatype failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1())}?(18,18)
+    <empty list>

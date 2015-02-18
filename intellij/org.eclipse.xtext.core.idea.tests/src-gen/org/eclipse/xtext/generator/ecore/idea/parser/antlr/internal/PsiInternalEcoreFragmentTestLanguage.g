@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
+	protected EcoreFragmentTestLanguageGrammarAccess grammarAccess;
 
-private EcoreFragmentTestLanguageElementTypeProvider elementTypeProvider;
+	protected EcoreFragmentTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalEcoreFragmentTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, EcoreFragmentTestLanguageElementTypeProvider elementTypeProvider, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalEcoreFragmentTestLanguageParser(PsiBuilder builder, TokenStream input, EcoreFragmentTestLanguageElementTypeProvider elementTypeProvider, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Second";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Second";
+	}
 
 }
 

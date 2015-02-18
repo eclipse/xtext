@@ -20,7 +20,7 @@ public class LocationProviderTestLanguagePsiParser extends AbstractXtextPsiParse
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalLocationProviderTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalLocationProviderTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

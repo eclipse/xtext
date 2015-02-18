@@ -45,30 +45,31 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
 
 
 
-    private Bug419429GrammarAccess grammarAccess;
+    	protected Bug419429GrammarAccess grammarAccess;
 
-    private Bug419429ElementTypeProvider elementTypeProvider;
+    	protected Bug419429ElementTypeProvider elementTypeProvider;
 
-    public PsiInternalBug419429Parser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, Bug419429ElementTypeProvider elementTypeProvider, Bug419429GrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalBug419429Parser(PsiBuilder builder, TokenStream input, Bug419429ElementTypeProvider elementTypeProvider, Bug419429GrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "EReference";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "EReference";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleEReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:49:1: entryRuleEReference : ruleEReference EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:50:1: entryRuleEReference : ruleEReference EOF ;
     public final void entryRuleEReference() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:49:20: ( ruleEReference EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:50:2: ruleEReference EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:50:20: ( ruleEReference EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:51:2: ruleEReference EOF
             {
              markComposite(elementTypeProvider.getEReferenceElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleEReference_in_entryRuleEReference54);
@@ -96,19 +97,19 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleEReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:58:1: ruleEReference : ( (otherlv_0= RULE_ID ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:1: ruleEReference : ( (otherlv_0= RULE_ID ) ) ;
     public final void ruleEReference() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:58:15: ( ( (otherlv_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:15: ( ( (otherlv_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:2: ( (otherlv_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:3: (otherlv_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:4: otherlv_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:62:4: otherlv_0= RULE_ID
             {
 
             				markLeaf();

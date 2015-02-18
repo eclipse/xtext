@@ -23,11 +23,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.SimpleTy
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.SimpleTypeRefImpl#getRawType <em>Raw Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.SimpleTypeRefImpl#getActualArgumentsList <em>Actual Arguments List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -89,8 +89,7 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getRawType()
+  public String getRawType()
   {
     return rawType;
   }
@@ -100,8 +99,7 @@ public String getRawType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRawType(String newRawType)
+  public void setRawType(String newRawType)
   {
     String oldRawType = rawType;
     rawType = newRawType;
@@ -114,8 +112,7 @@ public void setRawType(String newRawType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getActualArgumentsList()
+  public EList<String> getActualArgumentsList()
   {
     if (actualArgumentsList == null)
     {

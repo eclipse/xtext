@@ -20,7 +20,7 @@ public class LiveContainerBuilderIntegerationTestLanguagePsiParser extends Abstr
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalLiveContainerBuilderIntegerationTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalLiveContainerBuilderIntegerationTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

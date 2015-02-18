@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private DummyTestLanguageGrammarAccess grammarAccess;
+	protected DummyTestLanguageGrammarAccess grammarAccess;
 
-private DummyTestLanguageElementTypeProvider elementTypeProvider;
+	protected DummyTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalDummyTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, DummyTestLanguageElementTypeProvider elementTypeProvider, DummyTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalDummyTestLanguageParser(PsiBuilder builder, TokenStream input, DummyTestLanguageElementTypeProvider elementTypeProvider, DummyTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Model";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Model";
+	}
 
 }
 

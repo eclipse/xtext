@@ -20,7 +20,7 @@ public class MultiValueFeatureTestLanguagePsiParser extends AbstractXtextPsiPars
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalMultiValueFeatureTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalMultiValueFeatureTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

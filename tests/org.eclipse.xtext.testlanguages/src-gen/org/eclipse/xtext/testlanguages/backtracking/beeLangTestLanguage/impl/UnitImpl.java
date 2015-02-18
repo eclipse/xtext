@@ -32,6 +32,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getName <em>Name</em>}</li>
@@ -44,7 +45,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getMetaRequiredCapabilities <em>Meta Required Capabilities</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -226,8 +226,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getDocumentation()
+  public String getDocumentation()
   {
     return documentation;
   }
@@ -237,8 +236,7 @@ public String getDocumentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDocumentation(String newDocumentation)
+  public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
     documentation = newDocumentation;
@@ -251,8 +249,7 @@ public void setDocumentation(String newDocumentation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -262,8 +259,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -276,8 +272,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getVersion()
+  public String getVersion()
   {
     return version;
   }
@@ -287,8 +282,7 @@ public String getVersion()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVersion(String newVersion)
+  public void setVersion(String newVersion)
   {
     String oldVersion = version;
     version = newVersion;
@@ -301,8 +295,7 @@ public void setVersion(String newVersion)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<SimpleTypeRef> getImplements()
+  public EList<SimpleTypeRef> getImplements()
   {
     if (implements_ == null)
     {
@@ -316,8 +309,7 @@ public EList<SimpleTypeRef> getImplements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getSourceLocation()
+  public String getSourceLocation()
   {
     return sourceLocation;
   }
@@ -327,8 +319,7 @@ public String getSourceLocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSourceLocation(String newSourceLocation)
+  public void setSourceLocation(String newSourceLocation)
   {
     String oldSourceLocation = sourceLocation;
     sourceLocation = newSourceLocation;
@@ -341,8 +332,7 @@ public void setSourceLocation(String newSourceLocation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOutputLocation()
+  public String getOutputLocation()
   {
     return outputLocation;
   }
@@ -352,8 +342,7 @@ public String getOutputLocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOutputLocation(String newOutputLocation)
+  public void setOutputLocation(String newOutputLocation)
   {
     String oldOutputLocation = outputLocation;
     outputLocation = newOutputLocation;
@@ -366,8 +355,7 @@ public void setOutputLocation(String newOutputLocation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ProvidedCapability> getProvidedCapabilities()
+  public EList<ProvidedCapability> getProvidedCapabilities()
   {
     if (providedCapabilities == null)
     {
@@ -381,8 +369,7 @@ public EList<ProvidedCapability> getProvidedCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AliasedRequiredCapability> getRequiredCapabilities()
+  public EList<AliasedRequiredCapability> getRequiredCapabilities()
   {
     if (requiredCapabilities == null)
     {
@@ -396,8 +383,7 @@ public EList<AliasedRequiredCapability> getRequiredCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<RequiredCapability> getMetaRequiredCapabilities()
+  public EList<RequiredCapability> getMetaRequiredCapabilities()
   {
     if (metaRequiredCapabilities == null)
     {
@@ -411,8 +397,7 @@ public EList<RequiredCapability> getMetaRequiredCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Function> getFunctions()
+  public EList<Function> getFunctions()
   {
     if (functions == null)
     {

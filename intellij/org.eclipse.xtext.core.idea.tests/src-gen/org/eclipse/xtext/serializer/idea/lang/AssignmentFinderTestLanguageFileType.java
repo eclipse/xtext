@@ -10,7 +10,7 @@ public final class AssignmentFinderTestLanguageFileType extends LanguageFileType
 	public static final AssignmentFinderTestLanguageFileType INSTANCE = new AssignmentFinderTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "assignmentfindertestlanguage";
 
 	private AssignmentFinderTestLanguageFileType() {
 		super(AssignmentFinderTestLanguageLanguage.INSTANCE);

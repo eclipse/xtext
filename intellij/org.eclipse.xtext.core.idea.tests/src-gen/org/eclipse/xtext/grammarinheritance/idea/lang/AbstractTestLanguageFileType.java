@@ -10,7 +10,7 @@ public final class AbstractTestLanguageFileType extends LanguageFileType {
 	public static final AbstractTestLanguageFileType INSTANCE = new AbstractTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "abstracttestlanguage";
 
 	private AbstractTestLanguageFileType() {
 		super(AbstractTestLanguageLanguage.INSTANCE);

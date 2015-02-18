@@ -10,7 +10,7 @@ public final class ExBacktrackingBug325745TestLanguageFileType extends LanguageF
 	public static final ExBacktrackingBug325745TestLanguageFileType INSTANCE = new ExBacktrackingBug325745TestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "exbacktrackingbug325745testlanguage";
 
 	private ExBacktrackingBug325745TestLanguageFileType() {
 		super(ExBacktrackingBug325745TestLanguageLanguage.INSTANCE);

@@ -226,8 +226,8 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -679,20 +679,6 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
         state.failed=false;
         return success;
     }
-    public final boolean synpred42_InternalSimpleBeeLangTestLanguage() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred42_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred21_InternalSimpleBeeLangTestLanguage() {
         state.backtracking++;
         int start = input.mark();
@@ -712,6 +698,20 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
         int start = input.mark();
         try {
             synpred26_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred42_InternalSimpleBeeLangTestLanguage() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred42_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

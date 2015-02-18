@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private MultiRuleEnumTestLanguageGrammarAccess grammarAccess;
+	protected MultiRuleEnumTestLanguageGrammarAccess grammarAccess;
 
-private MultiRuleEnumTestLanguageElementTypeProvider elementTypeProvider;
+	protected MultiRuleEnumTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalMultiRuleEnumTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, MultiRuleEnumTestLanguageElementTypeProvider elementTypeProvider, MultiRuleEnumTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalMultiRuleEnumTestLanguageParser(PsiBuilder builder, TokenStream input, MultiRuleEnumTestLanguageElementTypeProvider elementTypeProvider, MultiRuleEnumTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Model";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Model";
+	}
 
 }
 

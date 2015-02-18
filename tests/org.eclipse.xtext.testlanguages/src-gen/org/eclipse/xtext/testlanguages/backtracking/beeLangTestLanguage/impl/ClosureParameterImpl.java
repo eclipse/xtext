@@ -11,8 +11,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ClosureP
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Closure Parameter</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

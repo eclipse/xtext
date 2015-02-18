@@ -34,20 +34,21 @@ import com.intellij.lang.PsiBuilder;
   Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
 */
 
-private Bug289524ExTestLanguageGrammarAccess grammarAccess;
+	protected Bug289524ExTestLanguageGrammarAccess grammarAccess;
 
-private Bug289524ExTestLanguageElementTypeProvider elementTypeProvider;
+	protected Bug289524ExTestLanguageElementTypeProvider elementTypeProvider;
 
-public PsiInternalBug289524ExTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, Bug289524ExTestLanguageElementTypeProvider elementTypeProvider, Bug289524ExTestLanguageGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalBug289524ExTestLanguageParser(PsiBuilder builder, TokenStream input, Bug289524ExTestLanguageElementTypeProvider elementTypeProvider, Bug289524ExTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Model";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Model";
+	}
 
 }
 

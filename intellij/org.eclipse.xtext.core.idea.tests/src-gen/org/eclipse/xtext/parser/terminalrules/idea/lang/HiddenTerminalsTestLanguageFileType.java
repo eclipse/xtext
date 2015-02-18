@@ -10,7 +10,7 @@ public final class HiddenTerminalsTestLanguageFileType extends LanguageFileType 
 	public static final HiddenTerminalsTestLanguageFileType INSTANCE = new HiddenTerminalsTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "hiddenterminalstestlanguage";
 
 	private HiddenTerminalsTestLanguageFileType() {
 		super(HiddenTerminalsTestLanguageLanguage.INSTANCE);

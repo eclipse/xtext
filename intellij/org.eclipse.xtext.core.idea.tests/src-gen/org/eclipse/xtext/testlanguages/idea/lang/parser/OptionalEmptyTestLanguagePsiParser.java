@@ -20,7 +20,7 @@ public class OptionalEmptyTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalOptionalEmptyTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalOptionalEmptyTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

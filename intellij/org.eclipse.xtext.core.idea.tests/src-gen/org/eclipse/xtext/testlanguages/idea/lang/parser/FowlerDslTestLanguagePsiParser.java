@@ -20,7 +20,7 @@ public class FowlerDslTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalFowlerDslTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalFowlerDslTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

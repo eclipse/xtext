@@ -20,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.UnaryOpE
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnaryOpExpressionImpl#getFunctionName <em>Function Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnaryOpExpressionImpl#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -86,8 +86,7 @@ public class UnaryOpExpressionImpl extends ExpressionImpl implements UnaryOpExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getFunctionName()
+  public String getFunctionName()
   {
     return functionName;
   }
@@ -97,8 +96,7 @@ public String getFunctionName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFunctionName(String newFunctionName)
+  public void setFunctionName(String newFunctionName)
   {
     String oldFunctionName = functionName;
     functionName = newFunctionName;
@@ -111,8 +109,7 @@ public void setFunctionName(String newFunctionName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpr()
+  public Expression getExpr()
   {
     return expr;
   }
@@ -139,8 +136,7 @@ public Expression getExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpr(Expression newExpr)
+  public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {

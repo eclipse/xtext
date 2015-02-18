@@ -26,10 +26,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ParameterListImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,8 +71,7 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Parameter> getParameters()
+  public EList<Parameter> getParameters()
   {
     if (parameters == null)
     {

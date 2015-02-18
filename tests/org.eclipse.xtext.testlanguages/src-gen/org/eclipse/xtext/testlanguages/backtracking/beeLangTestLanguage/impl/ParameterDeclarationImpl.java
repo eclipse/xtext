@@ -21,11 +21,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ParameterDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ParameterDeclarationImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -87,8 +87,7 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getType()
+  public TypeRef getType()
   {
     return type;
   }
@@ -115,8 +114,7 @@ public TypeRef getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeRef newType)
+  public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -137,8 +135,7 @@ public void setType(TypeRef newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -148,8 +145,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

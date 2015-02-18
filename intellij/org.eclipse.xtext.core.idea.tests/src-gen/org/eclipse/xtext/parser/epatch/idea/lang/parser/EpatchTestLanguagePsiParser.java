@@ -20,7 +20,7 @@ public class EpatchTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalEpatchTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalEpatchTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

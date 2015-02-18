@@ -10,7 +10,7 @@ public final class BacktrackingLexerTestLanguageFileType extends LanguageFileTyp
 	public static final BacktrackingLexerTestLanguageFileType INSTANCE = new BacktrackingLexerTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "backtrackinglexertestlanguage";
 
 	private BacktrackingLexerTestLanguageFileType() {
 		super(BacktrackingLexerTestLanguageLanguage.INSTANCE);

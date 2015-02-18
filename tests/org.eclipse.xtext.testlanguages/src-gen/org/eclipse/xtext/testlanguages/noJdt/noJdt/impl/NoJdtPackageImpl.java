@@ -104,8 +104,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -115,8 +114,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Greetings()
+  public EReference getModel_Greetings()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getModel_Greetings()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGreeting()
+  public EClass getGreeting()
   {
     return greetingEClass;
   }
@@ -137,8 +134,7 @@ public EClass getGreeting()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGreeting_Name()
+  public EAttribute getGreeting_Name()
   {
     return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
   }
@@ -148,8 +144,7 @@ public EAttribute getGreeting_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGreeting_Other()
+  public EReference getGreeting_Other()
   {
     return (EReference)greetingEClass.getEStructuralFeatures().get(1);
   }
@@ -159,8 +154,7 @@ public EReference getGreeting_Other()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NoJdtFactory getNoJdtFactory()
+  public NoJdtFactory getNoJdtFactory()
   {
     return (NoJdtFactory)getEFactoryInstance();
   }

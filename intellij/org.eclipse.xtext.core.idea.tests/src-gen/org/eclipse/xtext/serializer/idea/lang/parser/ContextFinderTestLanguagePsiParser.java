@@ -20,7 +20,7 @@ public class ContextFinderTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalContextFinderTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalContextFinderTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

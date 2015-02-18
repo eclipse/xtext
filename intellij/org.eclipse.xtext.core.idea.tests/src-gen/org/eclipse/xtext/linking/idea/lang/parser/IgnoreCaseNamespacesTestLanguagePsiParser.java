@@ -20,7 +20,7 @@ public class IgnoreCaseNamespacesTestLanguagePsiParser extends AbstractXtextPsiP
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalIgnoreCaseNamespacesTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalIgnoreCaseNamespacesTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

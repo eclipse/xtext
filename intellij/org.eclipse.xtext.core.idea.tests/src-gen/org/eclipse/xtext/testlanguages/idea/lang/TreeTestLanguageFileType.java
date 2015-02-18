@@ -10,7 +10,7 @@ public final class TreeTestLanguageFileType extends LanguageFileType {
 	public static final TreeTestLanguageFileType INSTANCE = new TreeTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "treetestlanguage";
 
 	private TreeTestLanguageFileType() {
 		super(TreeTestLanguageLanguage.INSTANCE);

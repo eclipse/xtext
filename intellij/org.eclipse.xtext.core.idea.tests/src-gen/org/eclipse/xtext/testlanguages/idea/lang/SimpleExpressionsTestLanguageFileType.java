@@ -10,7 +10,7 @@ public final class SimpleExpressionsTestLanguageFileType extends LanguageFileTyp
 	public static final SimpleExpressionsTestLanguageFileType INSTANCE = new SimpleExpressionsTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "simpleexpressionstestlanguage";
 
 	private SimpleExpressionsTestLanguageFileType() {
 		super(SimpleExpressionsTestLanguageLanguage.INSTANCE);

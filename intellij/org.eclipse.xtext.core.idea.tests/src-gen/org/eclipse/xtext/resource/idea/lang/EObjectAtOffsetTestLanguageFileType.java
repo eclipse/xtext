@@ -10,7 +10,7 @@ public final class EObjectAtOffsetTestLanguageFileType extends LanguageFileType 
 	public static final EObjectAtOffsetTestLanguageFileType INSTANCE = new EObjectAtOffsetTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "eobjectatoffsettestlanguage";
 
 	private EObjectAtOffsetTestLanguageFileType() {
 		super(EObjectAtOffsetTestLanguageLanguage.INSTANCE);

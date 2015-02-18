@@ -20,7 +20,7 @@ public class UnicodeTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalUnicodeTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalUnicodeTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

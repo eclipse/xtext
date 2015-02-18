@@ -20,7 +20,7 @@ public class QualifiedNameTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalQualifiedNameTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalQualifiedNameTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

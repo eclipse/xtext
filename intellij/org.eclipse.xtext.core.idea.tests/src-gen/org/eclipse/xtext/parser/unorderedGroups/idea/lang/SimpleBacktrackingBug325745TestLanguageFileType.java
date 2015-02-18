@@ -10,7 +10,7 @@ public final class SimpleBacktrackingBug325745TestLanguageFileType extends Langu
 	public static final SimpleBacktrackingBug325745TestLanguageFileType INSTANCE = new SimpleBacktrackingBug325745TestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "simplebacktrackingbug325745testlanguage";
 
 	private SimpleBacktrackingBug325745TestLanguageFileType() {
 		super(SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE);

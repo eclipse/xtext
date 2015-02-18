@@ -30,6 +30,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getVisibility <em>Visibility</em>}</li>
@@ -41,7 +42,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getGuard <em>Guard</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getFuncExpr <em>Func Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -213,8 +213,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getDocumentation()
+  public String getDocumentation()
   {
     return documentation;
   }
@@ -224,8 +223,7 @@ public String getDocumentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDocumentation(String newDocumentation)
+  public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
     documentation = newDocumentation;
@@ -238,8 +236,7 @@ public void setDocumentation(String newDocumentation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getVisibility()
+  public String getVisibility()
   {
     return visibility;
   }
@@ -249,8 +246,7 @@ public String getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVisibility(String newVisibility)
+  public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
     visibility = newVisibility;
@@ -263,8 +259,7 @@ public void setVisibility(String newVisibility)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFinal()
+  public boolean isFinal()
   {
     return final_;
   }
@@ -274,8 +269,7 @@ public boolean isFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFinal(boolean newFinal)
+  public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -288,8 +282,7 @@ public void setFinal(boolean newFinal)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getReturnType()
+  public TypeRef getReturnType()
   {
     return returnType;
   }
@@ -316,8 +309,7 @@ public TypeRef getReturnType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReturnType(TypeRef newReturnType)
+  public void setReturnType(TypeRef newReturnType)
   {
     if (newReturnType != returnType)
     {
@@ -338,8 +330,7 @@ public void setReturnType(TypeRef newReturnType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -349,8 +340,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -363,8 +353,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ParameterDeclaration> getParameters()
+  public EList<ParameterDeclaration> getParameters()
   {
     if (parameters == null)
     {
@@ -378,8 +367,7 @@ public EList<ParameterDeclaration> getParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isVarArgs()
+  public boolean isVarArgs()
   {
     return varArgs;
   }
@@ -389,8 +377,7 @@ public boolean isVarArgs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVarArgs(boolean newVarArgs)
+  public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
     varArgs = newVarArgs;
@@ -403,8 +390,7 @@ public void setVarArgs(boolean newVarArgs)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GuardExpression getGuard()
+  public GuardExpression getGuard()
   {
     return guard;
   }
@@ -431,8 +417,7 @@ public GuardExpression getGuard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGuard(GuardExpression newGuard)
+  public void setGuard(GuardExpression newGuard)
   {
     if (newGuard != guard)
     {
@@ -453,8 +438,7 @@ public void setGuard(GuardExpression newGuard)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getFuncExpr()
+  public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -481,8 +465,7 @@ public Expression getFuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFuncExpr(Expression newFuncExpr)
+  public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {

@@ -4,6 +4,7 @@ import static org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.EcoreTerminalsTestLanguageLanguage;
+import org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalEcoreTerminalsTestLanguageParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class EcoreTerminalsTestLanguageTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalEcoreTerminalsTestLanguageParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, EcoreTerminalsTestLanguageLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, EcoreTerminalsTestLanguageLanguage.INSTANCE);
 		}
 	}
 

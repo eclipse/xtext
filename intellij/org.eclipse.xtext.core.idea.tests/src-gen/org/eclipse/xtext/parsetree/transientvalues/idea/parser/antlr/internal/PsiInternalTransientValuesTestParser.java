@@ -50,30 +50,31 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
 
-    private TransientValuesTestGrammarAccess grammarAccess;
+    	protected TransientValuesTestGrammarAccess grammarAccess;
 
-    private TransientValuesTestElementTypeProvider elementTypeProvider;
+    	protected TransientValuesTestElementTypeProvider elementTypeProvider;
 
-    public PsiInternalTransientValuesTestParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, TransientValuesTestElementTypeProvider elementTypeProvider, TransientValuesTestGrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalTransientValuesTestParser(PsiBuilder builder, TokenStream input, TransientValuesTestElementTypeProvider elementTypeProvider, TransientValuesTestGrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "Root";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "Root";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleRoot"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:49:1: entryRuleRoot : ruleRoot EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:50:1: entryRuleRoot : ruleRoot EOF ;
     public final void entryRuleRoot() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:49:14: ( ruleRoot EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:50:2: ruleRoot EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:50:14: ( ruleRoot EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:51:2: ruleRoot EOF
             {
              markComposite(elementTypeProvider.getRootElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleRoot_in_entryRuleRoot54);
@@ -101,16 +102,16 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleRoot"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:58:1: ruleRoot : (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:59:1: ruleRoot : (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) ) ;
     public final void ruleRoot() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:58:9: ( (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:59:2: (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:59:9: ( (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:60:2: (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:59:2: (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:60:3: otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:60:2: (otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:61:3: otherlv_0= 'test' ( ruleTestRequired | ruleTestOptional | ruleTestList )
             {
 
             			markLeaf();
@@ -119,7 +120,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             			doneLeaf(otherlv_0, elementTypeProvider.getRoot_TestKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:67:3: ( ruleTestRequired | ruleTestOptional | ruleTestList )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:68:3: ( ruleTestRequired | ruleTestOptional | ruleTestList )
             int alt1=3;
             switch ( input.LA(1) ) {
             case 12:
@@ -146,7 +147,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:68:4: ruleTestRequired
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:69:4: ruleTestRequired
                     {
 
                     				markComposite(elementTypeProvider.getRoot_TestRequiredParserRuleCall_1_0ElementType());
@@ -163,7 +164,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:76:4: ruleTestOptional
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:77:4: ruleTestOptional
                     {
 
                     				markComposite(elementTypeProvider.getRoot_TestOptionalParserRuleCall_1_1ElementType());
@@ -180,7 +181,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:84:4: ruleTestList
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:85:4: ruleTestList
                     {
 
                     				markComposite(elementTypeProvider.getRoot_TestListParserRuleCall_1_2ElementType());
@@ -218,11 +219,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleTestRequired"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:96:1: entryRuleTestRequired : ruleTestRequired EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:97:1: entryRuleTestRequired : ruleTestRequired EOF ;
     public final void entryRuleTestRequired() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:96:22: ( ruleTestRequired EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:97:2: ruleTestRequired EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:97:22: ( ruleTestRequired EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:98:2: ruleTestRequired EOF
             {
              markComposite(elementTypeProvider.getTestRequiredElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleTestRequired_in_entryRuleTestRequired174);
@@ -250,21 +251,21 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleTestRequired"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:105:1: ruleTestRequired : ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:106:1: ruleTestRequired : ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) ) ;
     public final void ruleTestRequired() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_required1_2_0=null;
         Token lv_required2_3_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:105:17: ( ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:106:2: ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:106:17: ( ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:107:2: ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:106:2: ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:107:3: () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:107:2: ( () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:108:3: () otherlv_1= 'required' ( (lv_required1_2_0= RULE_INT ) ) ( (lv_required2_3_0= RULE_INT ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:107:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:108:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:108:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:109:4: 
             {
 
             				precedeComposite(elementTypeProvider.getTestRequired_TestRequiredAction_0ElementType());
@@ -280,11 +281,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             			doneLeaf(otherlv_1, elementTypeProvider.getTestRequired_RequiredKeyword_1ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:120:3: ( (lv_required1_2_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:121:4: (lv_required1_2_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:121:3: ( (lv_required1_2_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:122:4: (lv_required1_2_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:121:4: (lv_required1_2_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:122:5: lv_required1_2_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:122:4: (lv_required1_2_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:123:5: lv_required1_2_0= RULE_INT
             {
 
             					markLeaf();
@@ -299,11 +300,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:131:3: ( (lv_required2_3_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:132:4: (lv_required2_3_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:132:3: ( (lv_required2_3_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:133:4: (lv_required2_3_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:132:4: (lv_required2_3_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:133:5: lv_required2_3_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:133:4: (lv_required2_3_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:134:5: lv_required2_3_0= RULE_INT
             {
 
             					markLeaf();
@@ -337,11 +338,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleTestOptional"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:146:1: entryRuleTestOptional : ruleTestOptional EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:147:1: entryRuleTestOptional : ruleTestOptional EOF ;
     public final void entryRuleTestOptional() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:146:22: ( ruleTestOptional EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:147:2: ruleTestOptional EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:147:22: ( ruleTestOptional EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:148:2: ruleTestOptional EOF
             {
              markComposite(elementTypeProvider.getTestOptionalElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleTestOptional_in_entryRuleTestOptional312);
@@ -369,7 +370,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleTestOptional"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:155:1: ruleTestOptional : ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:156:1: ruleTestOptional : ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? ) ;
     public final void ruleTestOptional() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_opt1_2_0=null;
@@ -377,14 +378,14 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
         Token lv_opt2_4_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:155:17: ( ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:156:2: ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:156:17: ( ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:157:2: ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:156:2: ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:157:3: () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:157:2: ( () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:158:3: () otherlv_1= 'optional' ( (lv_opt1_2_0= RULE_INT ) )? (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:157:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:158:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:158:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:159:4: 
             {
 
             				precedeComposite(elementTypeProvider.getTestOptional_TestOptionalAction_0ElementType());
@@ -400,7 +401,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             			doneLeaf(otherlv_1, elementTypeProvider.getTestOptional_OptionalKeyword_1ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:170:3: ( (lv_opt1_2_0= RULE_INT ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:171:3: ( (lv_opt1_2_0= RULE_INT ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -409,10 +410,10 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:171:4: (lv_opt1_2_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:172:4: (lv_opt1_2_0= RULE_INT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:171:4: (lv_opt1_2_0= RULE_INT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:172:5: lv_opt1_2_0= RULE_INT
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:172:4: (lv_opt1_2_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:173:5: lv_opt1_2_0= RULE_INT
                     {
 
                     					markLeaf();
@@ -430,7 +431,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:181:3: (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:182:3: (otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -439,7 +440,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:182:4: otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:183:4: otherlv_3= ':' ( (lv_opt2_4_0= RULE_INT ) )
                     {
 
                     				markLeaf();
@@ -448,11 +449,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
                     				doneLeaf(otherlv_3, elementTypeProvider.getTestOptional_ColonKeyword_3_0ElementType());
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:189:4: ( (lv_opt2_4_0= RULE_INT ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:190:5: (lv_opt2_4_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:190:4: ( (lv_opt2_4_0= RULE_INT ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:191:5: (lv_opt2_4_0= RULE_INT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:190:5: (lv_opt2_4_0= RULE_INT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:191:6: lv_opt2_4_0= RULE_INT
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:191:5: (lv_opt2_4_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:192:6: lv_opt2_4_0= RULE_INT
                     {
 
                     						markLeaf();
@@ -492,11 +493,11 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleTestList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:205:1: entryRuleTestList : ruleTestList EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:206:1: entryRuleTestList : ruleTestList EOF ;
     public final void entryRuleTestList() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:205:18: ( ruleTestList EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:206:2: ruleTestList EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:206:18: ( ruleTestList EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:207:2: ruleTestList EOF
             {
              markComposite(elementTypeProvider.getTestListElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleTestList_in_entryRuleTestList484);
@@ -524,20 +525,20 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleTestList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:214:1: ruleTestList : ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:215:1: ruleTestList : ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* ) ;
     public final void ruleTestList() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_item_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:214:13: ( ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:215:2: ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:215:13: ( ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:216:2: ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:215:2: ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:216:3: () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:216:2: ( () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:217:3: () otherlv_1= 'list' ( (lv_item_2_0= RULE_INT ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:216:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:217:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:217:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:218:4: 
             {
 
             				precedeComposite(elementTypeProvider.getTestList_TestListAction_0ElementType());
@@ -553,7 +554,7 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             			doneLeaf(otherlv_1, elementTypeProvider.getTestList_ListKeyword_1ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:229:3: ( (lv_item_2_0= RULE_INT ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:230:3: ( (lv_item_2_0= RULE_INT ) )*
             loop4:
             do {
                 int alt4=2;
@@ -566,10 +567,10 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:230:4: (lv_item_2_0= RULE_INT )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:231:4: (lv_item_2_0= RULE_INT )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:230:4: (lv_item_2_0= RULE_INT )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:231:5: lv_item_2_0= RULE_INT
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:231:4: (lv_item_2_0= RULE_INT )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/idea/parser/antlr/internal/PsiInternalTransientValuesTest.g:232:5: lv_item_2_0= RULE_INT
             	    {
 
             	    					markLeaf();

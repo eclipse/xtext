@@ -10,7 +10,7 @@ public final class MultiValueFeatureTestLanguageFileType extends LanguageFileTyp
 	public static final MultiValueFeatureTestLanguageFileType INSTANCE = new MultiValueFeatureTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "multivaluefeaturetestlanguage";
 
 	private MultiValueFeatureTestLanguageFileType() {
 		super(MultiValueFeatureTestLanguageLanguage.INSTANCE);

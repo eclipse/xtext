@@ -376,8 +376,7 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -387,8 +386,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Units()
+  public EReference getModel_Units()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -398,8 +396,7 @@ public EReference getModel_Units()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Functions()
+  public EReference getModel_Functions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -409,8 +406,7 @@ public EReference getModel_Functions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getUnit()
+  public EClass getUnit()
   {
     return unitEClass;
   }
@@ -420,8 +416,7 @@ public EClass getUnit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnit_Documentation()
+  public EAttribute getUnit_Documentation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
   }
@@ -431,8 +426,7 @@ public EAttribute getUnit_Documentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnit_Name()
+  public EAttribute getUnit_Name()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
   }
@@ -442,8 +436,7 @@ public EAttribute getUnit_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnit_Version()
+  public EAttribute getUnit_Version()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
   }
@@ -453,8 +446,7 @@ public EAttribute getUnit_Version()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnit_Implements()
+  public EReference getUnit_Implements()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(3);
   }
@@ -464,8 +456,7 @@ public EReference getUnit_Implements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnit_SourceLocation()
+  public EAttribute getUnit_SourceLocation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(4);
   }
@@ -475,8 +466,7 @@ public EAttribute getUnit_SourceLocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnit_OutputLocation()
+  public EAttribute getUnit_OutputLocation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(5);
   }
@@ -486,8 +476,7 @@ public EAttribute getUnit_OutputLocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnit_ProvidedCapabilities()
+  public EReference getUnit_ProvidedCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(6);
   }
@@ -497,8 +486,7 @@ public EReference getUnit_ProvidedCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnit_RequiredCapabilities()
+  public EReference getUnit_RequiredCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(7);
   }
@@ -508,8 +496,7 @@ public EReference getUnit_RequiredCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnit_MetaRequiredCapabilities()
+  public EReference getUnit_MetaRequiredCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(8);
   }
@@ -519,8 +506,7 @@ public EReference getUnit_MetaRequiredCapabilities()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnit_Functions()
+  public EReference getUnit_Functions()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(9);
   }
@@ -530,8 +516,7 @@ public EReference getUnit_Functions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getProvidedCapability()
+  public EClass getProvidedCapability()
   {
     return providedCapabilityEClass;
   }
@@ -541,8 +526,7 @@ public EClass getProvidedCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getProvidedCapability_NameSpace()
+  public EAttribute getProvidedCapability_NameSpace()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -552,8 +536,7 @@ public EAttribute getProvidedCapability_NameSpace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getProvidedCapability_CondExpr()
+  public EReference getProvidedCapability_CondExpr()
   {
     return (EReference)providedCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -563,8 +546,7 @@ public EReference getProvidedCapability_CondExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getProvidedCapability_Name()
+  public EAttribute getProvidedCapability_Name()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -574,8 +556,7 @@ public EAttribute getProvidedCapability_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getProvidedCapability_Version()
+  public EAttribute getProvidedCapability_Version()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -585,8 +566,7 @@ public EAttribute getProvidedCapability_Version()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAliasedRequiredCapability()
+  public EClass getAliasedRequiredCapability()
   {
     return aliasedRequiredCapabilityEClass;
   }
@@ -596,8 +576,7 @@ public EClass getAliasedRequiredCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_NameSpace()
+  public EAttribute getAliasedRequiredCapability_NameSpace()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -607,8 +586,7 @@ public EAttribute getAliasedRequiredCapability_NameSpace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_Name()
+  public EAttribute getAliasedRequiredCapability_Name()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -618,8 +596,7 @@ public EAttribute getAliasedRequiredCapability_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_Alias()
+  public EAttribute getAliasedRequiredCapability_Alias()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -629,8 +606,7 @@ public EAttribute getAliasedRequiredCapability_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAliasedRequiredCapability_CondExpr()
+  public EReference getAliasedRequiredCapability_CondExpr()
   {
     return (EReference)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -640,8 +616,7 @@ public EReference getAliasedRequiredCapability_CondExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_Greedy()
+  public EAttribute getAliasedRequiredCapability_Greedy()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(4);
   }
@@ -651,8 +626,7 @@ public EAttribute getAliasedRequiredCapability_Greedy()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_Min()
+  public EAttribute getAliasedRequiredCapability_Min()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(5);
   }
@@ -662,8 +636,7 @@ public EAttribute getAliasedRequiredCapability_Min()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_Max()
+  public EAttribute getAliasedRequiredCapability_Max()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(6);
   }
@@ -673,8 +646,7 @@ public EAttribute getAliasedRequiredCapability_Max()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAliasedRequiredCapability_VersionRange()
+  public EAttribute getAliasedRequiredCapability_VersionRange()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(7);
   }
@@ -684,8 +656,7 @@ public EAttribute getAliasedRequiredCapability_VersionRange()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRequiredCapability()
+  public EClass getRequiredCapability()
   {
     return requiredCapabilityEClass;
   }
@@ -695,8 +666,7 @@ public EClass getRequiredCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_NameSpace()
+  public EAttribute getRequiredCapability_NameSpace()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -706,8 +676,7 @@ public EAttribute getRequiredCapability_NameSpace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_Name()
+  public EAttribute getRequiredCapability_Name()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -717,8 +686,7 @@ public EAttribute getRequiredCapability_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRequiredCapability_CondExpr()
+  public EReference getRequiredCapability_CondExpr()
   {
     return (EReference)requiredCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -728,8 +696,7 @@ public EReference getRequiredCapability_CondExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_Greedy()
+  public EAttribute getRequiredCapability_Greedy()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -739,8 +706,7 @@ public EAttribute getRequiredCapability_Greedy()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_Min()
+  public EAttribute getRequiredCapability_Min()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(4);
   }
@@ -750,8 +716,7 @@ public EAttribute getRequiredCapability_Min()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_Max()
+  public EAttribute getRequiredCapability_Max()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(5);
   }
@@ -761,8 +726,7 @@ public EAttribute getRequiredCapability_Max()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRequiredCapability_VersionRange()
+  public EAttribute getRequiredCapability_VersionRange()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(6);
   }
@@ -772,8 +736,7 @@ public EAttribute getRequiredCapability_VersionRange()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameterList()
+  public EClass getParameterList()
   {
     return parameterListEClass;
   }
@@ -783,8 +746,7 @@ public EClass getParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParameterList_Parameters()
+  public EReference getParameterList_Parameters()
   {
     return (EReference)parameterListEClass.getEStructuralFeatures().get(0);
   }
@@ -794,8 +756,7 @@ public EReference getParameterList_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameter()
+  public EClass getParameter()
   {
     return parameterEClass;
   }
@@ -805,8 +766,7 @@ public EClass getParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParameter_Expr()
+  public EReference getParameter_Expr()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(0);
   }
@@ -816,8 +776,7 @@ public EReference getParameter_Expr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClosureParameter()
+  public EClass getClosureParameter()
   {
     return closureParameterEClass;
   }
@@ -827,8 +786,7 @@ public EClass getClosureParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameterDeclaration()
+  public EClass getParameterDeclaration()
   {
     return parameterDeclarationEClass;
   }
@@ -838,8 +796,7 @@ public EClass getParameterDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParameterDeclaration_Type()
+  public EReference getParameterDeclaration_Type()
   {
     return (EReference)parameterDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -849,8 +806,7 @@ public EReference getParameterDeclaration_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getParameterDeclaration_Name()
+  public EAttribute getParameterDeclaration_Name()
   {
     return (EAttribute)parameterDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -860,8 +816,7 @@ public EAttribute getParameterDeclaration_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFunction()
+  public EClass getFunction()
   {
     return functionEClass;
   }
@@ -871,8 +826,7 @@ public EClass getFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunction_Documentation()
+  public EAttribute getFunction_Documentation()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(0);
   }
@@ -882,8 +836,7 @@ public EAttribute getFunction_Documentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunction_Visibility()
+  public EAttribute getFunction_Visibility()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(1);
   }
@@ -893,8 +846,7 @@ public EAttribute getFunction_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunction_Final()
+  public EAttribute getFunction_Final()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(2);
   }
@@ -904,8 +856,7 @@ public EAttribute getFunction_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunction_ReturnType()
+  public EReference getFunction_ReturnType()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(3);
   }
@@ -915,8 +866,7 @@ public EReference getFunction_ReturnType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunction_Name()
+  public EAttribute getFunction_Name()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(4);
   }
@@ -926,8 +876,7 @@ public EAttribute getFunction_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunction_Parameters()
+  public EReference getFunction_Parameters()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(5);
   }
@@ -937,8 +886,7 @@ public EReference getFunction_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunction_VarArgs()
+  public EAttribute getFunction_VarArgs()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(6);
   }
@@ -948,8 +896,7 @@ public EAttribute getFunction_VarArgs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunction_Guard()
+  public EReference getFunction_Guard()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(7);
   }
@@ -959,8 +906,7 @@ public EReference getFunction_Guard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunction_FuncExpr()
+  public EReference getFunction_FuncExpr()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(8);
   }
@@ -970,8 +916,7 @@ public EReference getFunction_FuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGuardExpression()
+  public EClass getGuardExpression()
   {
     return guardExpressionEClass;
   }
@@ -981,8 +926,7 @@ public EClass getGuardExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGuardExpression_GuardExpr()
+  public EReference getGuardExpression_GuardExpr()
   {
     return (EReference)guardExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -992,8 +936,7 @@ public EReference getGuardExpression_GuardExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpression()
+  public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -1003,8 +946,7 @@ public EClass getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypeRef()
+  public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -1014,8 +956,7 @@ public EClass getTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimpleTypeRef()
+  public EClass getSimpleTypeRef()
   {
     return simpleTypeRefEClass;
   }
@@ -1025,8 +966,7 @@ public EClass getSimpleTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleTypeRef_RawType()
+  public EAttribute getSimpleTypeRef_RawType()
   {
     return (EAttribute)simpleTypeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1036,8 +976,7 @@ public EAttribute getSimpleTypeRef_RawType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleTypeRef_ActualArgumentsList()
+  public EAttribute getSimpleTypeRef_ActualArgumentsList()
   {
     return (EAttribute)simpleTypeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1047,8 +986,7 @@ public EAttribute getSimpleTypeRef_ActualArgumentsList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClosureTypeRef()
+  public EClass getClosureTypeRef()
   {
     return closureTypeRefEClass;
   }
@@ -1058,8 +996,7 @@ public EClass getClosureTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClosureTypeRef_ParameterTypes()
+  public EAttribute getClosureTypeRef_ParameterTypes()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1069,8 +1006,7 @@ public EAttribute getClosureTypeRef_ParameterTypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClosureTypeRef_VarArgs()
+  public EAttribute getClosureTypeRef_VarArgs()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1080,8 +1016,7 @@ public EAttribute getClosureTypeRef_VarArgs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClosureTypeRef_ReturnType()
+  public EAttribute getClosureTypeRef_ReturnType()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(2);
   }
@@ -1091,8 +1026,7 @@ public EAttribute getClosureTypeRef_ReturnType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWithExpression()
+  public EClass getWithExpression()
   {
     return withExpressionEClass;
   }
@@ -1102,8 +1036,7 @@ public EClass getWithExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getWithExpression_ReferencedAdvice()
+  public EAttribute getWithExpression_ReferencedAdvice()
   {
     return (EAttribute)withExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1113,8 +1046,7 @@ public EAttribute getWithExpression_ReferencedAdvice()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getWithExpression_FuncExpr()
+  public EReference getWithExpression_FuncExpr()
   {
     return (EReference)withExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1124,8 +1056,7 @@ public EReference getWithExpression_FuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWithContextExpression()
+  public EClass getWithContextExpression()
   {
     return withContextExpressionEClass;
   }
@@ -1135,8 +1066,7 @@ public EClass getWithContextExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getWithContextExpression_Expr()
+  public EReference getWithContextExpression_Expr()
   {
     return (EReference)withContextExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1146,8 +1076,7 @@ public EReference getWithContextExpression_Expr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getWithContextExpression_Alias()
+  public EAttribute getWithContextExpression_Alias()
   {
     return (EAttribute)withContextExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1157,8 +1086,7 @@ public EAttribute getWithContextExpression_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getWithContextExpression_ContextBlock()
+  public EReference getWithContextExpression_ContextBlock()
   {
     return (EReference)withContextExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1168,8 +1096,7 @@ public EReference getWithContextExpression_ContextBlock()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCallExpression()
+  public EClass getCallExpression()
   {
     return callExpressionEClass;
   }
@@ -1179,8 +1106,7 @@ public EClass getCallExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getValueLiteral()
+  public EClass getValueLiteral()
   {
     return valueLiteralEClass;
   }
@@ -1190,8 +1116,7 @@ public EClass getValueLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getValueLiteral_Value()
+  public EAttribute getValueLiteral_Value()
   {
     return (EAttribute)valueLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -1201,8 +1126,7 @@ public EAttribute getValueLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAssignmentExpression()
+  public EClass getAssignmentExpression()
   {
     return assignmentExpressionEClass;
   }
@@ -1212,8 +1136,7 @@ public EClass getAssignmentExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAssignmentExpression_LeftExpr()
+  public EReference getAssignmentExpression_LeftExpr()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1223,8 +1146,7 @@ public EReference getAssignmentExpression_LeftExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAssignmentExpression_FunctionName()
+  public EAttribute getAssignmentExpression_FunctionName()
   {
     return (EAttribute)assignmentExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1234,8 +1156,7 @@ public EAttribute getAssignmentExpression_FunctionName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAssignmentExpression_RightExpr()
+  public EReference getAssignmentExpression_RightExpr()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1245,8 +1166,7 @@ public EReference getAssignmentExpression_RightExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDefValue()
+  public EClass getDefValue()
   {
     return defValueEClass;
   }
@@ -1256,8 +1176,7 @@ public EClass getDefValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefValue_Final()
+  public EAttribute getDefValue_Final()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(0);
   }
@@ -1267,8 +1186,7 @@ public EAttribute getDefValue_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDefValue_Type()
+  public EReference getDefValue_Type()
   {
     return (EReference)defValueEClass.getEStructuralFeatures().get(1);
   }
@@ -1278,8 +1196,7 @@ public EReference getDefValue_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefValue_Name()
+  public EAttribute getDefValue_Name()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(2);
   }
@@ -1289,8 +1206,7 @@ public EAttribute getDefValue_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDefValue_ValueExpr()
+  public EReference getDefValue_ValueExpr()
   {
     return (EReference)defValueEClass.getEStructuralFeatures().get(3);
   }
@@ -1300,8 +1216,7 @@ public EReference getDefValue_ValueExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefValue_Immutable()
+  public EAttribute getDefValue_Immutable()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(4);
   }
@@ -1311,8 +1226,7 @@ public EAttribute getDefValue_Immutable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCachedExpression()
+  public EClass getCachedExpression()
   {
     return cachedExpressionEClass;
   }
@@ -1322,8 +1236,7 @@ public EClass getCachedExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCachedExpression_Expr()
+  public EReference getCachedExpression_Expr()
   {
     return (EReference)cachedExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1333,8 +1246,7 @@ public EReference getCachedExpression_Expr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOrExpression()
+  public EClass getOrExpression()
   {
     return orExpressionEClass;
   }
@@ -1344,8 +1256,7 @@ public EClass getOrExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOrExpression_LeftExpr()
+  public EReference getOrExpression_LeftExpr()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1355,8 +1266,7 @@ public EReference getOrExpression_LeftExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOrExpression_RightExpr()
+  public EReference getOrExpression_RightExpr()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1366,8 +1276,7 @@ public EReference getOrExpression_RightExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAndExpression()
+  public EClass getAndExpression()
   {
     return andExpressionEClass;
   }
@@ -1377,8 +1286,7 @@ public EClass getAndExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAndExpression_LeftExpr()
+  public EReference getAndExpression_LeftExpr()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1388,8 +1296,7 @@ public EReference getAndExpression_LeftExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAndExpression_RightExpr()
+  public EReference getAndExpression_RightExpr()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1399,8 +1306,7 @@ public EReference getAndExpression_RightExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBinaryOpExpression()
+  public EClass getBinaryOpExpression()
   {
     return binaryOpExpressionEClass;
   }
@@ -1410,8 +1316,7 @@ public EClass getBinaryOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBinaryOpExpression_LeftExpr()
+  public EReference getBinaryOpExpression_LeftExpr()
   {
     return (EReference)binaryOpExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1421,8 +1326,7 @@ public EReference getBinaryOpExpression_LeftExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBinaryOpExpression_FunctionName()
+  public EAttribute getBinaryOpExpression_FunctionName()
   {
     return (EAttribute)binaryOpExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1432,8 +1336,7 @@ public EAttribute getBinaryOpExpression_FunctionName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBinaryOpExpression_RightExpr()
+  public EReference getBinaryOpExpression_RightExpr()
   {
     return (EReference)binaryOpExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1443,8 +1346,7 @@ public EReference getBinaryOpExpression_RightExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getUnaryOpExpression()
+  public EClass getUnaryOpExpression()
   {
     return unaryOpExpressionEClass;
   }
@@ -1454,8 +1356,7 @@ public EClass getUnaryOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getUnaryOpExpression_FunctionName()
+  public EAttribute getUnaryOpExpression_FunctionName()
   {
     return (EAttribute)unaryOpExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1465,8 +1366,7 @@ public EAttribute getUnaryOpExpression_FunctionName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUnaryOpExpression_Expr()
+  public EReference getUnaryOpExpression_Expr()
   {
     return (EReference)unaryOpExpressionEClass.getEStructuralFeatures().get(1);
   }

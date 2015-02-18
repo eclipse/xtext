@@ -10,7 +10,7 @@ public final class AbstractIgnoreCaseLinkingTestLanguageFileType extends Languag
 	public static final AbstractIgnoreCaseLinkingTestLanguageFileType INSTANCE = new AbstractIgnoreCaseLinkingTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "abstractignorecaselinkingtestlanguage";
 
 	private AbstractIgnoreCaseLinkingTestLanguageFileType() {
 		super(AbstractIgnoreCaseLinkingTestLanguageLanguage.INSTANCE);

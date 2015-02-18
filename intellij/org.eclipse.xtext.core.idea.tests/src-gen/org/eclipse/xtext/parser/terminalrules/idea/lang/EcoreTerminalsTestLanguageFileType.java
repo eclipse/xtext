@@ -10,7 +10,7 @@ public final class EcoreTerminalsTestLanguageFileType extends LanguageFileType {
 	public static final EcoreTerminalsTestLanguageFileType INSTANCE = new EcoreTerminalsTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ecoreterminalstestlanguage";
 
 	private EcoreTerminalsTestLanguageFileType() {
 		super(EcoreTerminalsTestLanguageLanguage.INSTANCE);

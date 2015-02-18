@@ -20,7 +20,7 @@ public class RegionAccessTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalRegionAccessTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalRegionAccessTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -20,7 +20,7 @@ public class EcoreTerminalsTestLanguagePsiParser extends AbstractXtextPsiParser 
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalEcoreTerminalsTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalEcoreTerminalsTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

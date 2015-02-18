@@ -10,7 +10,7 @@ public final class DatatypeRulesTestLanguageFileType extends LanguageFileType {
 	public static final DatatypeRulesTestLanguageFileType INSTANCE = new DatatypeRulesTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "datatyperulestestlanguage";
 
 	private DatatypeRulesTestLanguageFileType() {
 		super(DatatypeRulesTestLanguageLanguage.INSTANCE);

@@ -20,7 +20,7 @@ public class AbstractIgnoreCaseLinkingTestLanguagePsiParser extends AbstractXtex
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

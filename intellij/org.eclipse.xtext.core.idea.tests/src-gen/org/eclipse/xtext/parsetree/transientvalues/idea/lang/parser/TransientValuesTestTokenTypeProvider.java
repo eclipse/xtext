@@ -4,6 +4,7 @@ import static org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.inte
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
+import org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.internal.PsiInternalTransientValuesTestParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class TransientValuesTestTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalTransientValuesTestParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, TransientValuesTestLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, TransientValuesTestLanguage.INSTANCE);
 		}
 	}
 

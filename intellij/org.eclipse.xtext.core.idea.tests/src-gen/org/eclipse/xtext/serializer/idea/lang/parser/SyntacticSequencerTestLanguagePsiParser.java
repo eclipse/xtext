@@ -20,7 +20,7 @@ public class SyntacticSequencerTestLanguagePsiParser extends AbstractXtextPsiPar
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalSyntacticSequencerTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalSyntacticSequencerTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

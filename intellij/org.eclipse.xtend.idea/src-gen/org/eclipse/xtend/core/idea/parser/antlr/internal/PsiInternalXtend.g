@@ -136,20 +136,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private XtendGrammarAccess grammarAccess;
+	protected XtendGrammarAccess grammarAccess;
 
-private XtendElementTypeProvider elementTypeProvider;
+	protected XtendElementTypeProvider elementTypeProvider;
 
-public PsiInternalXtendParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XtendElementTypeProvider elementTypeProvider, XtendGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalXtendParser(PsiBuilder builder, TokenStream input, XtendElementTypeProvider elementTypeProvider, XtendGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "File";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "File";
+	}
 
 }
 

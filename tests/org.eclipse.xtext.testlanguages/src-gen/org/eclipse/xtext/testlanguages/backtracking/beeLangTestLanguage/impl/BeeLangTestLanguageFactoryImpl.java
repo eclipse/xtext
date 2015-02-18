@@ -110,8 +110,7 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -122,8 +121,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Unit createUnit()
+  public Unit createUnit()
   {
     UnitImpl unit = new UnitImpl();
     return unit;
@@ -134,8 +132,7 @@ public Unit createUnit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ProvidedCapability createProvidedCapability()
+  public ProvidedCapability createProvidedCapability()
   {
     ProvidedCapabilityImpl providedCapability = new ProvidedCapabilityImpl();
     return providedCapability;
@@ -146,8 +143,7 @@ public ProvidedCapability createProvidedCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AliasedRequiredCapability createAliasedRequiredCapability()
+  public AliasedRequiredCapability createAliasedRequiredCapability()
   {
     AliasedRequiredCapabilityImpl aliasedRequiredCapability = new AliasedRequiredCapabilityImpl();
     return aliasedRequiredCapability;
@@ -158,8 +154,7 @@ public AliasedRequiredCapability createAliasedRequiredCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RequiredCapability createRequiredCapability()
+  public RequiredCapability createRequiredCapability()
   {
     RequiredCapabilityImpl requiredCapability = new RequiredCapabilityImpl();
     return requiredCapability;
@@ -170,8 +165,7 @@ public RequiredCapability createRequiredCapability()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterList createParameterList()
+  public ParameterList createParameterList()
   {
     ParameterListImpl parameterList = new ParameterListImpl();
     return parameterList;
@@ -182,8 +176,7 @@ public ParameterList createParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameter createParameter()
+  public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
@@ -194,8 +187,7 @@ public Parameter createParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClosureParameter createClosureParameter()
+  public ClosureParameter createClosureParameter()
   {
     ClosureParameterImpl closureParameter = new ClosureParameterImpl();
     return closureParameter;
@@ -206,8 +198,7 @@ public ClosureParameter createClosureParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterDeclaration createParameterDeclaration()
+  public ParameterDeclaration createParameterDeclaration()
   {
     ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
     return parameterDeclaration;
@@ -218,8 +209,7 @@ public ParameterDeclaration createParameterDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Function createFunction()
+  public Function createFunction()
   {
     FunctionImpl function = new FunctionImpl();
     return function;
@@ -230,8 +220,7 @@ public Function createFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GuardExpression createGuardExpression()
+  public GuardExpression createGuardExpression()
   {
     GuardExpressionImpl guardExpression = new GuardExpressionImpl();
     return guardExpression;
@@ -242,8 +231,7 @@ public GuardExpression createGuardExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression createExpression()
+  public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -254,8 +242,7 @@ public Expression createExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef createTypeRef()
+  public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
     return typeRef;
@@ -266,8 +253,7 @@ public TypeRef createTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleTypeRef createSimpleTypeRef()
+  public SimpleTypeRef createSimpleTypeRef()
   {
     SimpleTypeRefImpl simpleTypeRef = new SimpleTypeRefImpl();
     return simpleTypeRef;
@@ -278,8 +264,7 @@ public SimpleTypeRef createSimpleTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClosureTypeRef createClosureTypeRef()
+  public ClosureTypeRef createClosureTypeRef()
   {
     ClosureTypeRefImpl closureTypeRef = new ClosureTypeRefImpl();
     return closureTypeRef;
@@ -290,8 +275,7 @@ public ClosureTypeRef createClosureTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public WithExpression createWithExpression()
+  public WithExpression createWithExpression()
   {
     WithExpressionImpl withExpression = new WithExpressionImpl();
     return withExpression;
@@ -302,8 +286,7 @@ public WithExpression createWithExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public WithContextExpression createWithContextExpression()
+  public WithContextExpression createWithContextExpression()
   {
     WithContextExpressionImpl withContextExpression = new WithContextExpressionImpl();
     return withContextExpression;
@@ -314,8 +297,7 @@ public WithContextExpression createWithContextExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CallExpression createCallExpression()
+  public CallExpression createCallExpression()
   {
     CallExpressionImpl callExpression = new CallExpressionImpl();
     return callExpression;
@@ -326,8 +308,7 @@ public CallExpression createCallExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ValueLiteral createValueLiteral()
+  public ValueLiteral createValueLiteral()
   {
     ValueLiteralImpl valueLiteral = new ValueLiteralImpl();
     return valueLiteral;
@@ -338,8 +319,7 @@ public ValueLiteral createValueLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AssignmentExpression createAssignmentExpression()
+  public AssignmentExpression createAssignmentExpression()
   {
     AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
     return assignmentExpression;
@@ -350,8 +330,7 @@ public AssignmentExpression createAssignmentExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DefValue createDefValue()
+  public DefValue createDefValue()
   {
     DefValueImpl defValue = new DefValueImpl();
     return defValue;
@@ -362,8 +341,7 @@ public DefValue createDefValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CachedExpression createCachedExpression()
+  public CachedExpression createCachedExpression()
   {
     CachedExpressionImpl cachedExpression = new CachedExpressionImpl();
     return cachedExpression;
@@ -374,8 +352,7 @@ public CachedExpression createCachedExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OrExpression createOrExpression()
+  public OrExpression createOrExpression()
   {
     OrExpressionImpl orExpression = new OrExpressionImpl();
     return orExpression;
@@ -386,8 +363,7 @@ public OrExpression createOrExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AndExpression createAndExpression()
+  public AndExpression createAndExpression()
   {
     AndExpressionImpl andExpression = new AndExpressionImpl();
     return andExpression;
@@ -398,8 +374,7 @@ public AndExpression createAndExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BinaryOpExpression createBinaryOpExpression()
+  public BinaryOpExpression createBinaryOpExpression()
   {
     BinaryOpExpressionImpl binaryOpExpression = new BinaryOpExpressionImpl();
     return binaryOpExpression;
@@ -410,8 +385,7 @@ public BinaryOpExpression createBinaryOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnaryOpExpression createUnaryOpExpression()
+  public UnaryOpExpression createUnaryOpExpression()
   {
     UnaryOpExpressionImpl unaryOpExpression = new UnaryOpExpressionImpl();
     return unaryOpExpression;
@@ -422,8 +396,7 @@ public UnaryOpExpression createUnaryOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnaryPreOpExpression createUnaryPreOpExpression()
+  public UnaryPreOpExpression createUnaryPreOpExpression()
   {
     UnaryPreOpExpressionImpl unaryPreOpExpression = new UnaryPreOpExpressionImpl();
     return unaryPreOpExpression;
@@ -434,8 +407,7 @@ public UnaryPreOpExpression createUnaryPreOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnaryPostOpExpression createUnaryPostOpExpression()
+  public UnaryPostOpExpression createUnaryPostOpExpression()
   {
     UnaryPostOpExpressionImpl unaryPostOpExpression = new UnaryPostOpExpressionImpl();
     return unaryPostOpExpression;
@@ -446,8 +418,7 @@ public UnaryPostOpExpression createUnaryPostOpExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CallFeature createCallFeature()
+  public CallFeature createCallFeature()
   {
     CallFeatureImpl callFeature = new CallFeatureImpl();
     return callFeature;
@@ -458,8 +429,7 @@ public CallFeature createCallFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AtExpression createAtExpression()
+  public AtExpression createAtExpression()
   {
     AtExpressionImpl atExpression = new AtExpressionImpl();
     return atExpression;
@@ -470,8 +440,7 @@ public AtExpression createAtExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FeatureExpression createFeatureExpression()
+  public FeatureExpression createFeatureExpression()
   {
     FeatureExpressionImpl featureExpression = new FeatureExpressionImpl();
     return featureExpression;
@@ -482,8 +451,7 @@ public FeatureExpression createFeatureExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CallFunction createCallFunction()
+  public CallFunction createCallFunction()
   {
     CallFunctionImpl callFunction = new CallFunctionImpl();
     return callFunction;
@@ -494,8 +462,7 @@ public CallFunction createCallFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ChainedExpression createChainedExpression()
+  public ChainedExpression createChainedExpression()
   {
     ChainedExpressionImpl chainedExpression = new ChainedExpressionImpl();
     return chainedExpression;
@@ -506,8 +473,7 @@ public ChainedExpression createChainedExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public VariableExpression createVariableExpression()
+  public VariableExpression createVariableExpression()
   {
     VariableExpressionImpl variableExpression = new VariableExpressionImpl();
     return variableExpression;
@@ -518,8 +484,7 @@ public VariableExpression createVariableExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CallNamedFunction createCallNamedFunction()
+  public CallNamedFunction createCallNamedFunction()
   {
     CallNamedFunctionImpl callNamedFunction = new CallNamedFunctionImpl();
     return callNamedFunction;
@@ -530,8 +495,7 @@ public CallNamedFunction createCallNamedFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CreateExpression createCreateExpression()
+  public CreateExpression createCreateExpression()
   {
     CreateExpressionImpl createExpression = new CreateExpressionImpl();
     return createExpression;
@@ -542,8 +506,7 @@ public CreateExpression createCreateExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BeeLangTestLanguagePackage getBeeLangTestLanguagePackage()
+  public BeeLangTestLanguagePackage getBeeLangTestLanguagePackage()
   {
     return (BeeLangTestLanguagePackage)getEPackage();
   }

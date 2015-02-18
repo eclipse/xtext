@@ -103,7 +103,7 @@ final class GenerateXbase {
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, false, false));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, false, false));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -149,7 +149,7 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, true, true));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, true, true));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -193,7 +193,7 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, false, true));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, false, true));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 		}};
@@ -232,8 +232,7 @@ final class GenerateXbase {
 			String runtimeProjectName, 
 			String runtimeProjectPath,
 			String ideaProjectName, 
-			String ideaProjectPath, 
-			String fileExtensions,
+			String ideaProjectPath,
 			boolean deploayble,
 			boolean typesIntegrationRequired) {
 		IdeaPluginGenerator ideaPluginGenerator = new IdeaPluginGenerator();
@@ -243,7 +242,6 @@ final class GenerateXbase {
 		ideaPluginGenerator.setRuntimeProjectPath(runtimeProjectPath);
 		ideaPluginGenerator.setIdeaProjectName(ideaProjectName);
 		ideaPluginGenerator.setIdeaProjectPath(ideaProjectPath);
-		ideaPluginGenerator.setFileExtensions(fileExtensions);
 		return ideaPluginGenerator;
 	}
 

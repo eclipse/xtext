@@ -10,7 +10,7 @@ public final class IgnoreCaseImportsTestLanguageFileType extends LanguageFileTyp
 	public static final IgnoreCaseImportsTestLanguageFileType INSTANCE = new IgnoreCaseImportsTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ignorecaseimportstestlanguage";
 
 	private IgnoreCaseImportsTestLanguageFileType() {
 		super(IgnoreCaseImportsTestLanguageLanguage.INSTANCE);

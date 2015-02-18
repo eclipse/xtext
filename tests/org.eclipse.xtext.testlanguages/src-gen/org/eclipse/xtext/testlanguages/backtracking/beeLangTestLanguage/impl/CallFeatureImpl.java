@@ -21,12 +21,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallFeatureImpl#getFuncExpr <em>Func Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallFeatureImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallFeatureImpl#getParameterList <em>Parameter List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -98,8 +98,7 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getFuncExpr()
+  public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -126,8 +125,7 @@ public Expression getFuncExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFuncExpr(Expression newFuncExpr)
+  public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {
@@ -148,8 +146,7 @@ public void setFuncExpr(Expression newFuncExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -159,8 +156,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -173,8 +169,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterList getParameterList()
+  public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -201,8 +196,7 @@ public ParameterList getParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParameterList(ParameterList newParameterList)
+  public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

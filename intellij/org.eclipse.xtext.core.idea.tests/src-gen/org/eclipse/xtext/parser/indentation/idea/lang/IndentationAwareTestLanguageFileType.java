@@ -10,7 +10,7 @@ public final class IndentationAwareTestLanguageFileType extends LanguageFileType
 	public static final IndentationAwareTestLanguageFileType INSTANCE = new IndentationAwareTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "indentationawaretestlanguage";
 
 	private IndentationAwareTestLanguageFileType() {
 		super(IndentationAwareTestLanguageLanguage.INSTANCE);

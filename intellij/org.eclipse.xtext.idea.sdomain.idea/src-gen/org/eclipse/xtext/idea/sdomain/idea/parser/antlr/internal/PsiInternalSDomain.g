@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private SDomainGrammarAccess grammarAccess;
+	protected SDomainGrammarAccess grammarAccess;
 
-private SDomainElementTypeProvider elementTypeProvider;
+	protected SDomainElementTypeProvider elementTypeProvider;
 
-public PsiInternalSDomainParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, SDomainElementTypeProvider elementTypeProvider, SDomainGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalSDomainParser(PsiBuilder builder, TokenStream input, SDomainElementTypeProvider elementTypeProvider, SDomainGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "File";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "File";
+	}
 
 }
 

@@ -20,7 +20,7 @@ public class DatatypeRulesTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalDatatypeRulesTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalDatatypeRulesTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -20,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AtExpressionImpl#getObjExpr <em>Obj Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AtExpressionImpl#getIndexExpr <em>Index Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -76,8 +76,7 @@ public class AtExpressionImpl extends ExpressionImpl implements AtExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getObjExpr()
+  public Expression getObjExpr()
   {
     return objExpr;
   }
@@ -104,8 +103,7 @@ public Expression getObjExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setObjExpr(Expression newObjExpr)
+  public void setObjExpr(Expression newObjExpr)
   {
     if (newObjExpr != objExpr)
     {
@@ -126,8 +124,7 @@ public void setObjExpr(Expression newObjExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getIndexExpr()
+  public Expression getIndexExpr()
   {
     return indexExpr;
   }
@@ -154,8 +151,7 @@ public Expression getIndexExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIndexExpr(Expression newIndexExpr)
+  public void setIndexExpr(Expression newIndexExpr)
   {
     if (newIndexExpr != indexExpr)
     {

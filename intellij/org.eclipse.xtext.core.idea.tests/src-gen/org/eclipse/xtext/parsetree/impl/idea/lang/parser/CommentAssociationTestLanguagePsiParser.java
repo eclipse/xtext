@@ -20,7 +20,7 @@ public class CommentAssociationTestLanguagePsiParser extends AbstractXtextPsiPar
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalCommentAssociationTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalCommentAssociationTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -20,7 +20,7 @@ public class EObjectAtOffsetTestLanguagePsiParser extends AbstractXtextPsiParser
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalEObjectAtOffsetTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalEObjectAtOffsetTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

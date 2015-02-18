@@ -20,7 +20,7 @@ public class PartialParserTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalPartialParserTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalPartialParserTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -10,7 +10,7 @@ public final class ImportUriTestLanguageFileType extends LanguageFileType {
 	public static final ImportUriTestLanguageFileType INSTANCE = new ImportUriTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "importuritestlanguage";
 
 	private ImportUriTestLanguageFileType() {
 		super(ImportUriTestLanguageLanguage.INSTANCE);

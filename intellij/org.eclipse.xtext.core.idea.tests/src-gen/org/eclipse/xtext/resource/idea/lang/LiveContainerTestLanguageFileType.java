@@ -10,7 +10,7 @@ public final class LiveContainerTestLanguageFileType extends LanguageFileType {
 	public static final LiveContainerTestLanguageFileType INSTANCE = new LiveContainerTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "livecontainertestlanguage";
 
 	private LiveContainerTestLanguageFileType() {
 		super(LiveContainerTestLanguageLanguage.INSTANCE);

@@ -20,7 +20,7 @@ public class SubTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalSubTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalSubTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

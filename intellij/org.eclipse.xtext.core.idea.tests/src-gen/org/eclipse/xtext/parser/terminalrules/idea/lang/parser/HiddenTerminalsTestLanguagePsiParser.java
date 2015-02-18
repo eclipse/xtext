@@ -20,7 +20,7 @@ public class HiddenTerminalsTestLanguagePsiParser extends AbstractXtextPsiParser
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalHiddenTerminalsTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalHiddenTerminalsTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

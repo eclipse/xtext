@@ -20,7 +20,7 @@ public class UnassignedTextTestLanguagePsiParser extends AbstractXtextPsiParser 
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalUnassignedTextTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalUnassignedTextTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

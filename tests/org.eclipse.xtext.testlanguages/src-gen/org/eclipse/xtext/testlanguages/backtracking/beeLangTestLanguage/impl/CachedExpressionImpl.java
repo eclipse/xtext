@@ -20,10 +20,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CachedExpressionImpl#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -65,8 +65,7 @@ public class CachedExpressionImpl extends ExpressionImpl implements CachedExpres
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpr()
+  public Expression getExpr()
   {
     return expr;
   }
@@ -93,8 +92,7 @@ public Expression getExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpr(Expression newExpr)
+  public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {

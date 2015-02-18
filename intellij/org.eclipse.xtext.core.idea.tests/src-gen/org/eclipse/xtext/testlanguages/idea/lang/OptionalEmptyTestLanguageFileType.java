@@ -10,7 +10,7 @@ public final class OptionalEmptyTestLanguageFileType extends LanguageFileType {
 	public static final OptionalEmptyTestLanguageFileType INSTANCE = new OptionalEmptyTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "optionalemptytestlanguage";
 
 	private OptionalEmptyTestLanguageFileType() {
 		super(OptionalEmptyTestLanguageLanguage.INSTANCE);

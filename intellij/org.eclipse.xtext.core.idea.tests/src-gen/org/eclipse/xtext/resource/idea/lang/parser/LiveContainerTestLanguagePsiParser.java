@@ -20,7 +20,7 @@ public class LiveContainerTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalLiveContainerTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalLiveContainerTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

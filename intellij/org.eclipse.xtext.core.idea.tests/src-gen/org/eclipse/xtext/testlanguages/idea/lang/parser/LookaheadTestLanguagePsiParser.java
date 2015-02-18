@@ -20,7 +20,7 @@ public class LookaheadTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalLookaheadTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalLookaheadTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

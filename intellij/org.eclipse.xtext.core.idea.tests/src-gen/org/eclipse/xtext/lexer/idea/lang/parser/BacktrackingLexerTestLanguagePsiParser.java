@@ -20,7 +20,7 @@ public class BacktrackingLexerTestLanguagePsiParser extends AbstractXtextPsiPars
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalBacktrackingLexerTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalBacktrackingLexerTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

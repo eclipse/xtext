@@ -20,7 +20,7 @@ public class EcoreReferenceTestLanguagePsiParser extends AbstractXtextPsiParser 
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalEcoreReferenceTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalEcoreReferenceTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

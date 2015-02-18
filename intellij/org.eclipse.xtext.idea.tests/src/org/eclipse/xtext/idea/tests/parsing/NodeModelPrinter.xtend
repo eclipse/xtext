@@ -12,6 +12,7 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.Action
 
 class NodeModelPrinter {
 
@@ -53,6 +54,10 @@ class NodeModelPrinter {
 
 	protected dispatch def String printGrammarElement(Keyword grammarElement) '''
 		Keyword [«grammarElement.value»]
+	'''
+
+	protected dispatch def String printGrammarElement(Action action) '''
+		«action.class.simpleName» [«action.type.classifier.name»]
 	'''
 
 }

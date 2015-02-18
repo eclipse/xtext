@@ -10,7 +10,7 @@ public final class EcoreFragmentTestLanguageFileType extends LanguageFileType {
 	public static final EcoreFragmentTestLanguageFileType INSTANCE = new EcoreFragmentTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ecorefragmenttestlanguage";
 
 	private EcoreFragmentTestLanguageFileType() {
 		super(EcoreFragmentTestLanguageLanguage.INSTANCE);

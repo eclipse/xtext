@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private Bug385636GrammarAccess grammarAccess;
+	protected Bug385636GrammarAccess grammarAccess;
 
-private Bug385636ElementTypeProvider elementTypeProvider;
+	protected Bug385636ElementTypeProvider elementTypeProvider;
 
-public PsiInternalBug385636Parser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, Bug385636ElementTypeProvider elementTypeProvider, Bug385636GrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalBug385636Parser(PsiBuilder builder, TokenStream input, Bug385636ElementTypeProvider elementTypeProvider, Bug385636GrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Program";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Program";
+	}
 
 }
 

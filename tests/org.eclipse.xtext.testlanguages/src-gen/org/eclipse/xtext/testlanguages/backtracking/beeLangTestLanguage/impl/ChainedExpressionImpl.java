@@ -24,10 +24,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ChainedExpressionImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -69,8 +69,7 @@ public class ChainedExpressionImpl extends ExpressionImpl implements ChainedExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Expression> getExpressions()
+  public EList<Expression> getExpressions()
   {
     if (expressions == null)
     {

@@ -48,30 +48,31 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
 
 
-    private DummyTestLanguageGrammarAccess grammarAccess;
+    	protected DummyTestLanguageGrammarAccess grammarAccess;
 
-    private DummyTestLanguageElementTypeProvider elementTypeProvider;
+    	protected DummyTestLanguageElementTypeProvider elementTypeProvider;
 
-    public PsiInternalDummyTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, DummyTestLanguageElementTypeProvider elementTypeProvider, DummyTestLanguageGrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalDummyTestLanguageParser(PsiBuilder builder, TokenStream input, DummyTestLanguageElementTypeProvider elementTypeProvider, DummyTestLanguageGrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "Model";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "Model";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:49:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:50:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:49:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:50:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:50:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:51:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
@@ -99,13 +100,13 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:59:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )* ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:59:10: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:60:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:60:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -118,10 +119,10 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:61:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:61:4: lv_elements_0_0= ruleElement
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:61:3: (lv_elements_0_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:62:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType());
@@ -162,11 +163,11 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:74:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:73:17: ( ruleElement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:74:2: ruleElement EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:74:17: ( ruleElement EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:75:2: ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement115);
@@ -194,7 +195,7 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:82:1: ruleElement : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:83:1: ruleElement : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
     public final void ruleElement() throws RecognitionException {
         Token lv_optional_0_0=null;
         Token otherlv_1=null;
@@ -203,13 +204,13 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:82:12: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:83:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:83:12: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:84:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:83:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:84:3: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:84:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:85:3: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:84:3: ( (lv_optional_0_0= 'optional' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:85:3: ( (lv_optional_0_0= 'optional' ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -218,10 +219,10 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:85:4: (lv_optional_0_0= 'optional' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:86:4: (lv_optional_0_0= 'optional' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:85:4: (lv_optional_0_0= 'optional' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:86:5: lv_optional_0_0= 'optional'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:86:4: (lv_optional_0_0= 'optional' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:87:5: lv_optional_0_0= 'optional'
                     {
 
                     					markLeaf();
@@ -246,11 +247,11 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_1, elementTypeProvider.getElement_ElementKeyword_1ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:102:3: ( (lv_name_2_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:103:4: (lv_name_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:103:3: ( (lv_name_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:104:4: (lv_name_2_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:103:4: (lv_name_2_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:104:5: lv_name_2_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:104:4: (lv_name_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:105:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf();
@@ -265,7 +266,7 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:113:3: ( (lv_descriptions_3_0= RULE_STRING ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:114:3: ( (lv_descriptions_3_0= RULE_STRING ) )*
             loop3:
             do {
                 int alt3=2;
@@ -278,10 +279,10 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:114:4: (lv_descriptions_3_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:115:4: (lv_descriptions_3_0= RULE_STRING )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:114:4: (lv_descriptions_3_0= RULE_STRING )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:115:5: lv_descriptions_3_0= RULE_STRING
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:115:4: (lv_descriptions_3_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/dummy/idea/parser/antlr/internal/PsiInternalDummyTestLanguage.g:116:5: lv_descriptions_3_0= RULE_STRING
             	    {
 
             	    					markLeaf();

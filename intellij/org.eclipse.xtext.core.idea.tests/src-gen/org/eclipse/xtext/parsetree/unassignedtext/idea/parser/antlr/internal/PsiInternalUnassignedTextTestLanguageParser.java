@@ -54,30 +54,31 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
 
-    private UnassignedTextTestLanguageGrammarAccess grammarAccess;
+    	protected UnassignedTextTestLanguageGrammarAccess grammarAccess;
 
-    private UnassignedTextTestLanguageElementTypeProvider elementTypeProvider;
+    	protected UnassignedTextTestLanguageElementTypeProvider elementTypeProvider;
 
-    public PsiInternalUnassignedTextTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, UnassignedTextTestLanguageElementTypeProvider elementTypeProvider, UnassignedTextTestLanguageGrammarAccess grammarAccess) {
-    	super(builder, input, tokenTypeProvider);
-        this.grammarAccess = grammarAccess;
-    	this.elementTypeProvider = elementTypeProvider;
-    }
+    	public PsiInternalUnassignedTextTestLanguageParser(PsiBuilder builder, TokenStream input, UnassignedTextTestLanguageElementTypeProvider elementTypeProvider, UnassignedTextTestLanguageGrammarAccess grammarAccess) {
+    		this(input);
+    		setPsiBuilder(builder);
+        	this.grammarAccess = grammarAccess;
+    		this.elementTypeProvider = elementTypeProvider;
+    	}
 
-    @Override
-    protected String getFirstRuleName() {
-    	return "Model";
-    }
+    	@Override
+    	protected String getFirstRuleName() {
+    		return "Model";
+    	}
 
 
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:49:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:50:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:49:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:50:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:50:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:51:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
@@ -105,13 +106,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:58:1: ruleModel : ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:59:1: ruleModel : ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:58:10: ( ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:59:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:59:10: ( ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:60:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:59:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:60:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
             int alt1=5;
             switch ( input.LA(1) ) {
             case RULE_CASEINSENSITIVEKEYWORD:
@@ -148,7 +149,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:60:3: ruleCaseInsensitiveKeywordRule
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:61:3: ruleCaseInsensitiveKeywordRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_CaseInsensitiveKeywordRuleParserRuleCall_0ElementType());
@@ -165,7 +166,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:68:3: rulePluralRule
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:69:3: rulePluralRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_PluralRuleParserRuleCall_1ElementType());
@@ -182,7 +183,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:76:3: ruleMultiRule
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:77:3: ruleMultiRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_MultiRuleParserRuleCall_2ElementType());
@@ -199,7 +200,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 4 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:84:3: ruleDatatypeRule
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:85:3: ruleDatatypeRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_DatatypeRuleParserRuleCall_3ElementType());
@@ -216,7 +217,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 5 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:92:3: ruleCommonTerminalsRule
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:93:3: ruleCommonTerminalsRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_CommonTerminalsRuleParserRuleCall_4ElementType());
@@ -251,11 +252,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleCaseInsensitiveKeywordRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:103:1: entryRuleCaseInsensitiveKeywordRule : ruleCaseInsensitiveKeywordRule EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:104:1: entryRuleCaseInsensitiveKeywordRule : ruleCaseInsensitiveKeywordRule EOF ;
     public final void entryRuleCaseInsensitiveKeywordRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:103:36: ( ruleCaseInsensitiveKeywordRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:104:2: ruleCaseInsensitiveKeywordRule EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:104:36: ( ruleCaseInsensitiveKeywordRule EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:105:2: ruleCaseInsensitiveKeywordRule EOF
             {
              markComposite(elementTypeProvider.getCaseInsensitiveKeywordRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleCaseInsensitiveKeywordRule_in_entryRuleCaseInsensitiveKeywordRule181);
@@ -283,17 +284,17 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleCaseInsensitiveKeywordRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:112:1: ruleCaseInsensitiveKeywordRule : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:113:1: ruleCaseInsensitiveKeywordRule : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final void ruleCaseInsensitiveKeywordRule() throws RecognitionException {
         Token this_CaseInsensitiveKeyword_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:112:31: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:113:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:113:31: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:114:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:113:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:114:3: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:114:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:115:3: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
             {
 
             			markLeaf();
@@ -302,11 +303,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(this_CaseInsensitiveKeyword_0, elementTypeProvider.getCaseInsensitiveKeywordRule_CaseInsensitiveKeywordTerminalRuleCall_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:121:3: ( (lv_val_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:122:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:122:3: ( (lv_val_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:123:4: (lv_val_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:122:4: (lv_val_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:123:5: lv_val_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:123:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:124:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf();
@@ -340,11 +341,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRulePluralRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:136:1: entryRulePluralRule : rulePluralRule EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:137:1: entryRulePluralRule : rulePluralRule EOF ;
     public final void entryRulePluralRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:136:20: ( rulePluralRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:137:2: rulePluralRule EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:137:20: ( rulePluralRule EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:138:2: rulePluralRule EOF
             {
              markComposite(elementTypeProvider.getPluralRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_rulePluralRule_in_entryRulePluralRule268);
@@ -372,18 +373,18 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "rulePluralRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:145:1: rulePluralRule : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:146:1: rulePluralRule : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
     public final void rulePluralRule() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_count_1_0=null;
         Token this_Plural_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:145:15: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:146:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:146:15: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:147:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:146:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:147:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:147:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:148:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
             {
 
             			markLeaf();
@@ -392,11 +393,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0, elementTypeProvider.getPluralRule_ContentsKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:154:3: ( (lv_count_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:155:4: (lv_count_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:155:3: ( (lv_count_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:156:4: (lv_count_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:155:4: (lv_count_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:156:5: lv_count_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:156:4: (lv_count_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:157:5: lv_count_1_0= RULE_INT
             {
 
             					markLeaf();
@@ -437,11 +438,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleMultiRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:176:1: entryRuleMultiRule : ruleMultiRule EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:177:1: entryRuleMultiRule : ruleMultiRule EOF ;
     public final void entryRuleMultiRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:176:19: ( ruleMultiRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:177:2: ruleMultiRule EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:177:19: ( ruleMultiRule EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:178:2: ruleMultiRule EOF
             {
              markComposite(elementTypeProvider.getMultiRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleMultiRule_in_entryRuleMultiRule369);
@@ -469,7 +470,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleMultiRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:185:1: ruleMultiRule : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:186:1: ruleMultiRule : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
     public final void ruleMultiRule() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_1_0=null;
@@ -478,11 +479,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         Token this_Multi_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:185:14: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:186:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:186:14: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:187:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:186:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:187:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:187:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:188:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
             {
 
             			markLeaf();
@@ -491,11 +492,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0, elementTypeProvider.getMultiRule_MultiKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:194:3: ( (lv_val_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:195:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:195:3: ( (lv_val_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:196:4: (lv_val_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:195:4: (lv_val_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:196:5: lv_val_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:196:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:197:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf();
@@ -550,11 +551,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleDatatypeRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:230:1: entryRuleDatatypeRule : ruleDatatypeRule EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:231:1: entryRuleDatatypeRule : ruleDatatypeRule EOF ;
     public final void entryRuleDatatypeRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:230:22: ( ruleDatatypeRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:231:2: ruleDatatypeRule EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:231:22: ( ruleDatatypeRule EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:232:2: ruleDatatypeRule EOF
             {
              markComposite(elementTypeProvider.getDatatypeRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleDatatypeRule_in_entryRuleDatatypeRule498);
@@ -582,17 +583,17 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleDatatypeRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:239:1: ruleDatatypeRule : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:240:1: ruleDatatypeRule : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
     public final void ruleDatatypeRule() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:239:17: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:240:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:240:17: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:241:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:240:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:241:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:241:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:242:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
             {
 
             			markLeaf();
@@ -601,11 +602,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0, elementTypeProvider.getDatatypeRule_DatatypeKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:248:3: ( (lv_val_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:249:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:249:3: ( (lv_val_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:250:4: (lv_val_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:249:4: (lv_val_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:250:5: lv_val_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:250:4: (lv_val_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:251:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf();
@@ -650,11 +651,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:270:1: entryRuleDatatype : ruleDatatype EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:271:1: entryRuleDatatype : ruleDatatype EOF ;
     public final void entryRuleDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:270:18: ( ruleDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:271:2: ruleDatatype EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:271:18: ( ruleDatatype EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:272:2: ruleDatatype EOF
             {
              markComposite(elementTypeProvider.getDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleDatatype_in_entryRuleDatatype597);
@@ -682,16 +683,16 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:279:1: ruleDatatype : (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:280:1: ruleDatatype : (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) ;
     public final void ruleDatatype() throws RecognitionException {
         Token kw=null;
         Token this_INT_1=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:279:13: ( (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:280:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:280:13: ( (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:281:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:280:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:281:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 18:
@@ -718,7 +719,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:281:3: kw= 'str'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:282:3: kw= 'str'
                     {
 
                     			markLeaf();
@@ -731,7 +732,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:289:3: this_INT_1= RULE_INT
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:290:3: this_INT_1= RULE_INT
                     {
 
                     			markLeaf();
@@ -744,7 +745,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:297:3: ruleDatatype2
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:298:3: ruleDatatype2
                     {
 
                     			markComposite(elementTypeProvider.getDatatype_Datatype2ParserRuleCall_2ElementType());
@@ -779,11 +780,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleDatatype2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:308:1: entryRuleDatatype2 : ruleDatatype2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:309:1: entryRuleDatatype2 : ruleDatatype2 EOF ;
     public final void entryRuleDatatype2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:308:19: ( ruleDatatype2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:309:2: ruleDatatype2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:309:19: ( ruleDatatype2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:310:2: ruleDatatype2 EOF
             {
              markComposite(elementTypeProvider.getDatatype2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleDatatype2_in_entryRuleDatatype2688);
@@ -811,13 +812,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleDatatype2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:317:1: ruleDatatype2 : this_STRING_0= RULE_STRING ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:318:1: ruleDatatype2 : this_STRING_0= RULE_STRING ;
     public final void ruleDatatype2() throws RecognitionException {
         Token this_STRING_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:317:14: (this_STRING_0= RULE_STRING )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:318:2: this_STRING_0= RULE_STRING
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:318:14: (this_STRING_0= RULE_STRING )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:319:2: this_STRING_0= RULE_STRING
             {
 
             		markLeaf();
@@ -842,11 +843,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleCommonTerminalsRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:328:1: entryRuleCommonTerminalsRule : ruleCommonTerminalsRule EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:329:1: entryRuleCommonTerminalsRule : ruleCommonTerminalsRule EOF ;
     public final void entryRuleCommonTerminalsRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:328:29: ( ruleCommonTerminalsRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:329:2: ruleCommonTerminalsRule EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:329:29: ( ruleCommonTerminalsRule EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:330:2: ruleCommonTerminalsRule EOF
             {
              markComposite(elementTypeProvider.getCommonTerminalsRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleCommonTerminalsRule_in_entryRuleCommonTerminalsRule728);
@@ -874,7 +875,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "ruleCommonTerminalsRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:337:1: ruleCommonTerminalsRule : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:338:1: ruleCommonTerminalsRule : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
     public final void ruleCommonTerminalsRule() throws RecognitionException {
         Token otherlv_0=null;
         Token this_ID_1=null;
@@ -883,11 +884,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         Token lv_val_4_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:337:24: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:338:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:338:24: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:339:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:338:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:339:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:339:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:340:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
             {
 
             			markLeaf();
@@ -917,11 +918,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(this_STRING_3, elementTypeProvider.getCommonTerminalsRule_STRINGTerminalRuleCall_3ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:367:3: ( (lv_val_4_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:368:4: (lv_val_4_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:368:3: ( (lv_val_4_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:369:4: (lv_val_4_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:368:4: (lv_val_4_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:369:5: lv_val_4_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:369:4: (lv_val_4_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/idea/parser/antlr/internal/PsiInternalUnassignedTextTestLanguage.g:370:5: lv_val_4_0= RULE_ID
             {
 
             					markLeaf();

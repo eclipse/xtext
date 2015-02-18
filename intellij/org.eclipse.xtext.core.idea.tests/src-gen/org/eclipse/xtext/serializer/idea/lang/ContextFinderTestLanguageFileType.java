@@ -10,7 +10,7 @@ public final class ContextFinderTestLanguageFileType extends LanguageFileType {
 	public static final ContextFinderTestLanguageFileType INSTANCE = new ContextFinderTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "contextfindertestlanguage";
 
 	private ContextFinderTestLanguageFileType() {
 		super(ContextFinderTestLanguageLanguage.INSTANCE);

@@ -20,7 +20,7 @@ public class MultiGenMMTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalMultiGenMMTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalMultiGenMMTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

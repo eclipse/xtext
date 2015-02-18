@@ -10,7 +10,7 @@ public final class MultiGenMMTestLanguageFileType extends LanguageFileType {
 	public static final MultiGenMMTestLanguageFileType INSTANCE = new MultiGenMMTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "multigenmmtestlanguage";
 
 	private MultiGenMMTestLanguageFileType() {
 		super(MultiGenMMTestLanguageLanguage.INSTANCE);

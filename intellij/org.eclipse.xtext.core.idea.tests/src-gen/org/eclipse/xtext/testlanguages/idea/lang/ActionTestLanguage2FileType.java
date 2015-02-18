@@ -10,7 +10,7 @@ public final class ActionTestLanguage2FileType extends LanguageFileType {
 	public static final ActionTestLanguage2FileType INSTANCE = new ActionTestLanguage2FileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "actiontestlanguage2";
 
 	private ActionTestLanguage2FileType() {
 		super(ActionTestLanguage2Language.INSTANCE);

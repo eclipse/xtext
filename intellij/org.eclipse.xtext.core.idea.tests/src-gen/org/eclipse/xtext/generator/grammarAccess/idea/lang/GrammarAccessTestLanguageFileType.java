@@ -10,7 +10,7 @@ public final class GrammarAccessTestLanguageFileType extends LanguageFileType {
 	public static final GrammarAccessTestLanguageFileType INSTANCE = new GrammarAccessTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "grammaraccesstestlanguage";
 
 	private GrammarAccessTestLanguageFileType() {
 		super(GrammarAccessTestLanguageLanguage.INSTANCE);

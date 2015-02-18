@@ -20,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallNamedFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CallNamedFunctionImpl#getParameterList <em>Parameter List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -86,8 +86,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -97,8 +96,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,8 +109,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterList getParameterList()
+  public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -139,8 +136,7 @@ public ParameterList getParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParameterList(ParameterList newParameterList)
+  public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

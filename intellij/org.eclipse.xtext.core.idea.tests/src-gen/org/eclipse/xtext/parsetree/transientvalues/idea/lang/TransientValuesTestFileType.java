@@ -10,7 +10,7 @@ public final class TransientValuesTestFileType extends LanguageFileType {
 	public static final TransientValuesTestFileType INSTANCE = new TransientValuesTestFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "transientvaluestest";
 
 	private TransientValuesTestFileType() {
 		super(TransientValuesTestLanguage.INSTANCE);

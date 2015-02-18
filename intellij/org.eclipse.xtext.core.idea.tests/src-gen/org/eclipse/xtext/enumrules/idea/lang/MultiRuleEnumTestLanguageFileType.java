@@ -10,7 +10,7 @@ public final class MultiRuleEnumTestLanguageFileType extends LanguageFileType {
 	public static final MultiRuleEnumTestLanguageFileType INSTANCE = new MultiRuleEnumTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "multiruleenumtestlanguage";
 
 	private MultiRuleEnumTestLanguageFileType() {
 		super(MultiRuleEnumTestLanguageLanguage.INSTANCE);

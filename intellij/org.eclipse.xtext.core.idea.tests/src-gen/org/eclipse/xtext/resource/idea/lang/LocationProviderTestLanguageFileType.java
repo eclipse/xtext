@@ -10,7 +10,7 @@ public final class LocationProviderTestLanguageFileType extends LanguageFileType
 	public static final LocationProviderTestLanguageFileType INSTANCE = new LocationProviderTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "locationprovidertestlanguage";
 
 	private LocationProviderTestLanguageFileType() {
 		super(LocationProviderTestLanguageLanguage.INSTANCE);

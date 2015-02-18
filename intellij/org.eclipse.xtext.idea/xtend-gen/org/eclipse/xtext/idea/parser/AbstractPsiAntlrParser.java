@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.BitSet;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.MismatchedTokenException;
@@ -26,11 +27,11 @@ import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.UnwantedTokenException;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.parser.CompositeMarker;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -52,9 +53,8 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   @Accessors
   private IUnorderedGroupHelper unorderedGroupHelper;
   
-  private final PsiBuilder psiBuilder;
-  
-  private final TokenTypeProvider tokenTypeProvider;
+  @Accessors(AccessorType.PROTECTED_SETTER)
+  private PsiBuilder psiBuilder;
   
   private final LinkedList<PsiBuilder.Marker> leafMarkers = CollectionLiterals.<PsiBuilder.Marker>newLinkedList();
   
@@ -62,21 +62,12 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   private String currentError;
   
-  public AbstractPsiAntlrParser(final PsiBuilder builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider) {
-    this(builder, input, tokenTypeProvider, new RecognizerSharedState());
-  }
-  
-  public AbstractPsiAntlrParser(final PsiBuilder builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider, final RecognizerSharedState state) {
-    super(input, state);
-    this.psiBuilder = builder;
-    this.tokenTypeProvider = tokenTypeProvider;
+  public AbstractPsiAntlrParser(final TokenStream input) {
+    this(input, new RecognizerSharedState());
   }
   
   public AbstractPsiAntlrParser(final TokenStream input, final RecognizerSharedState state) {
     super(input, state);
-    this.psiBuilder = null;
-    this.tokenTypeProvider = null;
-    throw new UnsupportedOperationException();
   }
   
   protected abstract String getFirstRuleName();
@@ -310,43 +301,36 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     this.recover(_function);
   }
   
-  protected String recover(final Procedure0 recoverStrategy) {
-    String _xblockexpression = null;
-    {
-      final int startTokenIndex = this.psiBuilder.rawTokenIndex();
-      final PsiBuilder.Marker marker = this.psiBuilder.mark();
-      recoverStrategy.apply();
-      final int endTokenIndex = this.psiBuilder.rawTokenIndex();
-      marker.rollbackTo();
-      String _xifexpression = null;
-      if ((startTokenIndex != endTokenIndex)) {
-        String _xblockexpression_1 = null;
+  protected void recover(final Procedure0 recoverStrategy) {
+    final int startTokenIndex = this.psiBuilder.rawTokenIndex();
+    final PsiBuilder.Marker marker = this.psiBuilder.mark();
+    recoverStrategy.apply();
+    final int endTokenIndex = this.psiBuilder.rawTokenIndex();
+    marker.rollbackTo();
+    if ((startTokenIndex != endTokenIndex)) {
+      final int n = (endTokenIndex - startTokenIndex);
+      for (int i = 0; (i < n); i++) {
         {
-          final int n = ((endTokenIndex - startTokenIndex) - 1);
-          for (int i = 0; (i < n); i++) {
+          int _rawTokenIndex = this.psiBuilder.rawTokenIndex();
+          Token _get = this.input.get(_rawTokenIndex);
+          int _channel = _get.getChannel();
+          final boolean hidden = (_channel == BaseRecognizer.HIDDEN);
+          if (hidden) {
             this.psiBuilder.advanceLexer();
-          }
-          String _xifexpression_1 = null;
-          boolean _notEquals = (!Objects.equal(this.currentError, null));
-          if (_notEquals) {
-            String _xblockexpression_2 = null;
-            {
+          } else {
+            boolean _notEquals = (!Objects.equal(this.currentError, null));
+            if (_notEquals) {
               final PsiBuilder.Marker errorMarker = this.psiBuilder.mark();
               this.psiBuilder.advanceLexer();
               errorMarker.error(this.currentError);
-              _xblockexpression_2 = this.currentError = null;
+              this.currentError = null;
+            } else {
+              this.psiBuilder.advanceLexer();
             }
-            _xifexpression_1 = _xblockexpression_2;
-          } else {
-            this.psiBuilder.advanceLexer();
           }
-          _xblockexpression_1 = _xifexpression_1;
         }
-        _xifexpression = _xblockexpression_1;
       }
-      _xblockexpression = _xifexpression;
     }
-    return _xblockexpression;
   }
   
   @Override
@@ -401,5 +385,9 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   public void setUnorderedGroupHelper(final IUnorderedGroupHelper unorderedGroupHelper) {
     this.unorderedGroupHelper = unorderedGroupHelper;
+  }
+  
+  protected void setPsiBuilder(final PsiBuilder psiBuilder) {
+    this.psiBuilder = psiBuilder;
   }
 }

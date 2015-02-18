@@ -10,7 +10,7 @@ public final class ConcreteSyntaxValidationTestLanguageFileType extends Language
 	public static final ConcreteSyntaxValidationTestLanguageFileType INSTANCE = new ConcreteSyntaxValidationTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "concretesyntaxvalidationtestlanguage";
 
 	private ConcreteSyntaxValidationTestLanguageFileType() {
 		super(ConcreteSyntaxValidationTestLanguageLanguage.INSTANCE);

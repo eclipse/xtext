@@ -37,9 +37,8 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	@Accessors
 	IUnorderedGroupHelper unorderedGroupHelper
 
-	val PsiBuilder psiBuilder
-	
-	val TokenTypeProvider tokenTypeProvider
+	@Accessors(PROTECTED_SETTER)
+	PsiBuilder psiBuilder
 
 	val leafMarkers = <PsiBuilder.Marker>newLinkedList
 	
@@ -47,21 +46,12 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	
 	String currentError
 
-	new(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider) {
-		this(builder, input, tokenTypeProvider, new RecognizerSharedState)
-	}
-
-	new(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, RecognizerSharedState state) {
-		super(input, state)
-		this.psiBuilder = builder
-		this.tokenTypeProvider = tokenTypeProvider
+	new(TokenStream input) {
+		this(input, new RecognizerSharedState)
 	}
 
 	new(TokenStream input, RecognizerSharedState state) {
 		super(input, state)
-		psiBuilder = null
-		tokenTypeProvider = null
-		throw new UnsupportedOperationException
 	}
 	
 	protected def String getFirstRuleName()
@@ -229,17 +219,19 @@ abstract class AbstractPsiAntlrParser extends Parser {
 		val endTokenIndex = psiBuilder.rawTokenIndex
 		marker.rollbackTo
 		if (startTokenIndex != endTokenIndex) {
-			val n = endTokenIndex - startTokenIndex - 1
+			val n = endTokenIndex - startTokenIndex
 			for (var i = 0; i < n; i++) {
-				psiBuilder.advanceLexer
-			}
-			if (currentError != null) {
-				val errorMarker = psiBuilder.mark
-				psiBuilder.advanceLexer
-				errorMarker.error(currentError)
-				currentError = null
-			} else {
-				psiBuilder.advanceLexer
+				val hidden = input.get(psiBuilder.rawTokenIndex).channel == HIDDEN
+				if (hidden) {
+					psiBuilder.advanceLexer
+				} else if (currentError != null) {
+					val errorMarker = psiBuilder.mark
+					psiBuilder.advanceLexer
+					errorMarker.error(currentError)
+					currentError = null
+				} else {
+					psiBuilder.advanceLexer
+				}
 			}
 		}
 	}

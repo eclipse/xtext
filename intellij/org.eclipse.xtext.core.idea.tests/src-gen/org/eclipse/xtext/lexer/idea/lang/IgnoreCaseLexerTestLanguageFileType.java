@@ -10,7 +10,7 @@ public final class IgnoreCaseLexerTestLanguageFileType extends LanguageFileType 
 	public static final IgnoreCaseLexerTestLanguageFileType INSTANCE = new IgnoreCaseLexerTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ignorecaselexertestlanguage";
 
 	private IgnoreCaseLexerTestLanguageFileType() {
 		super(IgnoreCaseLexerTestLanguageLanguage.INSTANCE);

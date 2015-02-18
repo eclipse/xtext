@@ -20,12 +20,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.WithCont
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getContextBlock <em>Context Block</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -97,8 +97,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpr()
+  public Expression getExpr()
   {
     return expr;
   }
@@ -125,8 +124,7 @@ public Expression getExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpr(Expression newExpr)
+  public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {
@@ -147,8 +145,7 @@ public void setExpr(Expression newExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getAlias()
+  public String getAlias()
   {
     return alias;
   }
@@ -158,8 +155,7 @@ public String getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(String newAlias)
+  public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -172,8 +168,7 @@ public void setAlias(String newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getContextBlock()
+  public Expression getContextBlock()
   {
     return contextBlock;
   }
@@ -200,8 +195,7 @@ public Expression getContextBlock()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setContextBlock(Expression newContextBlock)
+  public void setContextBlock(Expression newContextBlock)
   {
     if (newContextBlock != contextBlock)
     {

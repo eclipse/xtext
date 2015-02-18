@@ -20,7 +20,7 @@ public class XbaseWithAnnotationsPsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalXbaseWithAnnotationsParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalXbaseWithAnnotationsParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

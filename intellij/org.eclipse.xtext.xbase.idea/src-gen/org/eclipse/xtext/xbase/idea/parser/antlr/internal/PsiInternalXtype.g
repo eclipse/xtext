@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private XtypeGrammarAccess grammarAccess;
+	protected XtypeGrammarAccess grammarAccess;
 
-private XtypeElementTypeProvider elementTypeProvider;
+	protected XtypeElementTypeProvider elementTypeProvider;
 
-public PsiInternalXtypeParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XtypeElementTypeProvider elementTypeProvider, XtypeGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalXtypeParser(PsiBuilder builder, TokenStream input, XtypeElementTypeProvider elementTypeProvider, XtypeGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "JvmTypeReference";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "JvmTypeReference";
+	}
 
 }
 

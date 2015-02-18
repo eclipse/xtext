@@ -28,20 +28,21 @@ import com.intellij.lang.PsiBuilder;
 
 @parser::members {
 
-private TransientValuesTestGrammarAccess grammarAccess;
+	protected TransientValuesTestGrammarAccess grammarAccess;
 
-private TransientValuesTestElementTypeProvider elementTypeProvider;
+	protected TransientValuesTestElementTypeProvider elementTypeProvider;
 
-public PsiInternalTransientValuesTestParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, TransientValuesTestElementTypeProvider elementTypeProvider, TransientValuesTestGrammarAccess grammarAccess) {
-	super(builder, input, tokenTypeProvider);
-    this.grammarAccess = grammarAccess;
-	this.elementTypeProvider = elementTypeProvider;
-}
+	public PsiInternalTransientValuesTestParser(PsiBuilder builder, TokenStream input, TransientValuesTestElementTypeProvider elementTypeProvider, TransientValuesTestGrammarAccess grammarAccess) {
+		this(input);
+		setPsiBuilder(builder);
+    	this.grammarAccess = grammarAccess;
+		this.elementTypeProvider = elementTypeProvider;
+	}
 
-@Override
-protected String getFirstRuleName() {
-	return "Root";
-}
+	@Override
+	protected String getFirstRuleName() {
+		return "Root";
+	}
 
 }
 

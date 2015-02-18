@@ -20,7 +20,7 @@ public class Bug317840TestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalBug317840TestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalBug317840TestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

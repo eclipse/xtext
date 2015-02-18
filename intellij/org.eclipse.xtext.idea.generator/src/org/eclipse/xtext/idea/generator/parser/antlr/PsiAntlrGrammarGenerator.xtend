@@ -14,19 +14,19 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
+import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames
 
-import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.EnumLiteralDeclaration
-import org.eclipse.xtext.UnorderedGroup
+import static extension org.eclipse.xtext.GrammarUtil.*
 
 @Singleton
 class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
@@ -80,20 +80,21 @@ class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator
 		*/
 		
 		«ENDIF»
-		private «gaSimpleName» grammarAccess;
+			protected «gaSimpleName» grammarAccess;
 		
-		private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
+			protected «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 		
-		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider, «gaSimpleName» grammarAccess) {
-			super(builder, input, tokenTypeProvider);
-		    this.grammarAccess = grammarAccess;
-			this.elementTypeProvider = elementTypeProvider;
-		}
+			public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider, «gaSimpleName» grammarAccess) {
+				this(input);
+				setPsiBuilder(builder);
+		    	this.grammarAccess = grammarAccess;
+				this.elementTypeProvider = elementTypeProvider;
+			}
 		
-		@Override
-		protected String getFirstRuleName() {
-			return "«allParserRules.head.name»";
-		}
+			@Override
+			protected String getFirstRuleName() {
+				return "«allParserRules.head.name»";
+			}
 		
 		}
 	'''

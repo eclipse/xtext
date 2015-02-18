@@ -10,7 +10,7 @@ public final class EnumRulesTestLanguageFileType extends LanguageFileType {
 	public static final EnumRulesTestLanguageFileType INSTANCE = new EnumRulesTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "enumrulestestlanguage";
 
 	private EnumRulesTestLanguageFileType() {
 		super(EnumRulesTestLanguageLanguage.INSTANCE);

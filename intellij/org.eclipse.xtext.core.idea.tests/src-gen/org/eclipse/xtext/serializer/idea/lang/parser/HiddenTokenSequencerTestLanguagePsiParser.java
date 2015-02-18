@@ -20,7 +20,7 @@ public class HiddenTokenSequencerTestLanguagePsiParser extends AbstractXtextPsiP
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalHiddenTokenSequencerTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalHiddenTokenSequencerTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

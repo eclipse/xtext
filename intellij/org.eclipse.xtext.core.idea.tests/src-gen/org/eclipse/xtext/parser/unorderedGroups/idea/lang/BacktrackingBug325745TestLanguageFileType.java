@@ -10,7 +10,7 @@ public final class BacktrackingBug325745TestLanguageFileType extends LanguageFil
 	public static final BacktrackingBug325745TestLanguageFileType INSTANCE = new BacktrackingBug325745TestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "backtrackingbug325745testlanguage";
 
 	private BacktrackingBug325745TestLanguageFileType() {
 		super(BacktrackingBug325745TestLanguageLanguage.INSTANCE);

@@ -10,7 +10,7 @@ public final class HiddenTokenSequencerTestLanguageFileType extends LanguageFile
 	public static final HiddenTokenSequencerTestLanguageFileType INSTANCE = new HiddenTokenSequencerTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "hiddentokensequencertestlanguage";
 
 	private HiddenTokenSequencerTestLanguageFileType() {
 		super(HiddenTokenSequencerTestLanguageLanguage.INSTANCE);

@@ -10,7 +10,7 @@ public final class EpatchTestLanguageFileType extends LanguageFileType {
 	public static final EpatchTestLanguageFileType INSTANCE = new EpatchTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "epatchtestlanguage";
 
 	private EpatchTestLanguageFileType() {
 		super(EpatchTestLanguageLanguage.INSTANCE);

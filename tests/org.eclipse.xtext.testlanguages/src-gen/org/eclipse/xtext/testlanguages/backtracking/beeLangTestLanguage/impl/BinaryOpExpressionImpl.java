@@ -20,12 +20,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.BinaryOpExpressionImpl#getLeftExpr <em>Left Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.BinaryOpExpressionImpl#getFunctionName <em>Function Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.BinaryOpExpressionImpl#getRightExpr <em>Right Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -97,8 +97,7 @@ public class BinaryOpExpressionImpl extends ExpressionImpl implements BinaryOpEx
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getLeftExpr()
+  public Expression getLeftExpr()
   {
     return leftExpr;
   }
@@ -125,8 +124,7 @@ public Expression getLeftExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLeftExpr(Expression newLeftExpr)
+  public void setLeftExpr(Expression newLeftExpr)
   {
     if (newLeftExpr != leftExpr)
     {
@@ -147,8 +145,7 @@ public void setLeftExpr(Expression newLeftExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getFunctionName()
+  public String getFunctionName()
   {
     return functionName;
   }
@@ -158,8 +155,7 @@ public String getFunctionName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFunctionName(String newFunctionName)
+  public void setFunctionName(String newFunctionName)
   {
     String oldFunctionName = functionName;
     functionName = newFunctionName;
@@ -172,8 +168,7 @@ public void setFunctionName(String newFunctionName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getRightExpr()
+  public Expression getRightExpr()
   {
     return rightExpr;
   }
@@ -200,8 +195,7 @@ public Expression getRightExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRightExpr(Expression newRightExpr)
+  public void setRightExpr(Expression newRightExpr)
   {
     if (newRightExpr != rightExpr)
     {

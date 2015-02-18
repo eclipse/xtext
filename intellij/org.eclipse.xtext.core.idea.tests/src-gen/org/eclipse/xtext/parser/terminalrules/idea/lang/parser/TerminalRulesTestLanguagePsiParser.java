@@ -20,7 +20,7 @@ public class TerminalRulesTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalTerminalRulesTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalTerminalRulesTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

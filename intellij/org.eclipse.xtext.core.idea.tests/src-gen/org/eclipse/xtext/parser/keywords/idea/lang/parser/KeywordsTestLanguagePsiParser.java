@@ -20,7 +20,7 @@ public class KeywordsTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalKeywordsTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalKeywordsTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -20,7 +20,7 @@ public class EnumRulesTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalEnumRulesTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalEnumRulesTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

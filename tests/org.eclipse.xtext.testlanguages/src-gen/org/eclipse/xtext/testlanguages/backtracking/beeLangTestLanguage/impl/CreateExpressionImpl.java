@@ -21,13 +21,13 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CreateExpressionImpl#getTypeExpr <em>Type Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CreateExpressionImpl#getParameterList <em>Parameter List</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CreateExpressionImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.CreateExpressionImpl#getContextBlock <em>Context Block</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -119,8 +119,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getTypeExpr()
+  public String getTypeExpr()
   {
     return typeExpr;
   }
@@ -130,8 +129,7 @@ public String getTypeExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTypeExpr(String newTypeExpr)
+  public void setTypeExpr(String newTypeExpr)
   {
     String oldTypeExpr = typeExpr;
     typeExpr = newTypeExpr;
@@ -144,8 +142,7 @@ public void setTypeExpr(String newTypeExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParameterList getParameterList()
+  public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -172,8 +169,7 @@ public ParameterList getParameterList()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParameterList(ParameterList newParameterList)
+  public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {
@@ -194,8 +190,7 @@ public void setParameterList(ParameterList newParameterList)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getAlias()
+  public String getAlias()
   {
     return alias;
   }
@@ -205,8 +200,7 @@ public String getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(String newAlias)
+  public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -219,8 +213,7 @@ public void setAlias(String newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getContextBlock()
+  public Expression getContextBlock()
   {
     return contextBlock;
   }
@@ -247,8 +240,7 @@ public Expression getContextBlock()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setContextBlock(Expression newContextBlock)
+  public void setContextBlock(Expression newContextBlock)
   {
     if (newContextBlock != contextBlock)
     {

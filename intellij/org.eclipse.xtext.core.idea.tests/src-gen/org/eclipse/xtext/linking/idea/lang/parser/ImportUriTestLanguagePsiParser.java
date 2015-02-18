@@ -20,7 +20,7 @@ public class ImportUriTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalImportUriTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalImportUriTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

@@ -10,7 +10,7 @@ public final class MetamodelRefTestLanguageFileType extends LanguageFileType {
 	public static final MetamodelRefTestLanguageFileType INSTANCE = new MetamodelRefTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "metamodelreftestlanguage";
 
 	private MetamodelRefTestLanguageFileType() {
 		super(MetamodelRefTestLanguageLanguage.INSTANCE);

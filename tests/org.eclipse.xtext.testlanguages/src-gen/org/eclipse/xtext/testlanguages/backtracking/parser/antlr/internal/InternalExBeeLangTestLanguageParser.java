@@ -234,8 +234,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalAntl
     public static final int Asterisk=53;
     public static final int Requires=10;
     public static final int RequiresMin=5;
-    public static final int RequiresMax=4;
     public static final int As=46;
+    public static final int RequiresMax=4;
     public static final int Cached=14;
     public static final int This=21;
     public static final int Greedy=15;

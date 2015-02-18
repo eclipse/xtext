@@ -10,7 +10,7 @@ public final class SequencerTestLanguageFileType extends LanguageFileType {
 	public static final SequencerTestLanguageFileType INSTANCE = new SequencerTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "sequencertestlanguage";
 
 	private SequencerTestLanguageFileType() {
 		super(SequencerTestLanguageLanguage.INSTANCE);

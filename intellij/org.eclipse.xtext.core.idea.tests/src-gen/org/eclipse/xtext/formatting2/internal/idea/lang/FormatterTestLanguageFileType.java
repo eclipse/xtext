@@ -10,7 +10,7 @@ public final class FormatterTestLanguageFileType extends LanguageFileType {
 	public static final FormatterTestLanguageFileType INSTANCE = new FormatterTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "formattertestlanguage";
 
 	private FormatterTestLanguageFileType() {
 		super(FormatterTestLanguageLanguage.INSTANCE);

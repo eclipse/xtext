@@ -10,7 +10,7 @@ public final class EcoreReferenceTestLanguageFileType extends LanguageFileType {
 	public static final EcoreReferenceTestLanguageFileType INSTANCE = new EcoreReferenceTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "ecorereferencetestlanguage";
 
 	private EcoreReferenceTestLanguageFileType() {
 		super(EcoreReferenceTestLanguageLanguage.INSTANCE);

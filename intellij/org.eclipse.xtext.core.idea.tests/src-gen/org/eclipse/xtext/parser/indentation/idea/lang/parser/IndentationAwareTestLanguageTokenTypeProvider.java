@@ -4,6 +4,7 @@ import static org.eclipse.xtext.parser.indentation.idea.parser.antlr.internal.Ps
 
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageLanguage;
+import org.eclipse.xtext.parser.indentation.idea.parser.antlr.internal.PsiInternalIndentationAwareTestLanguageParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
@@ -11,11 +12,13 @@ import com.intellij.psi.tree.TokenSet;
 
 @Singleton public class IndentationAwareTestLanguageTokenTypeProvider implements TokenTypeProvider {
 
-	private static final IElementType[] tokenTypes = new IElementType[tokenNames.length];
+	private static final String[] TOKEN_NAMES = new PsiInternalIndentationAwareTestLanguageParser(null).getTokenNames();
+
+	private static final IElementType[] tokenTypes = new IElementType[TOKEN_NAMES.length];
 	
 	static {
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenTypes[i] = new IndexedElementType(tokenNames[i], i, IndentationAwareTestLanguageLanguage.INSTANCE);
+		for (int i = 0; i < TOKEN_NAMES.length; i++) {
+			tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, IndentationAwareTestLanguageLanguage.INSTANCE);
 		}
 	}
 

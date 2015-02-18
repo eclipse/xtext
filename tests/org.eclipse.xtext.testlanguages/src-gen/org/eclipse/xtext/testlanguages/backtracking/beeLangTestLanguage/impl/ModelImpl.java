@@ -27,11 +27,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ModelImpl#getUnits <em>Units</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ModelImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -83,8 +83,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Unit> getUnits()
+  public EList<Unit> getUnits()
   {
     if (units == null)
     {
@@ -98,8 +97,7 @@ public EList<Unit> getUnits()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Function> getFunctions()
+  public EList<Function> getFunctions()
   {
     if (functions == null)
     {

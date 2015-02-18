@@ -10,7 +10,7 @@ public final class KeywordsTestLanguageFileType extends LanguageFileType {
 	public static final KeywordsTestLanguageFileType INSTANCE = new KeywordsTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "keywordstestlanguage";
 
 	private KeywordsTestLanguageFileType() {
 		super(KeywordsTestLanguageLanguage.INSTANCE);

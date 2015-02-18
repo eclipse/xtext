@@ -21,6 +21,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#getType <em>Type</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#getValueExpr <em>Value Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#isImmutable <em>Immutable</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -140,8 +140,7 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFinal()
+  public boolean isFinal()
   {
     return final_;
   }
@@ -151,8 +150,7 @@ public boolean isFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFinal(boolean newFinal)
+  public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -165,8 +163,7 @@ public void setFinal(boolean newFinal)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getType()
+  public TypeRef getType()
   {
     return type;
   }
@@ -193,8 +190,7 @@ public TypeRef getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeRef newType)
+  public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -215,8 +211,7 @@ public void setType(TypeRef newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -226,8 +221,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -240,8 +234,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getValueExpr()
+  public Expression getValueExpr()
   {
     return valueExpr;
   }
@@ -268,8 +261,7 @@ public Expression getValueExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValueExpr(Expression newValueExpr)
+  public void setValueExpr(Expression newValueExpr)
   {
     if (newValueExpr != valueExpr)
     {
@@ -290,8 +282,7 @@ public void setValueExpr(Expression newValueExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isImmutable()
+  public boolean isImmutable()
   {
     return immutable;
   }
@@ -301,8 +292,7 @@ public boolean isImmutable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setImmutable(boolean newImmutable)
+  public void setImmutable(boolean newImmutable)
   {
     boolean oldImmutable = immutable;
     immutable = newImmutable;

@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting#getOther <em>Other</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage#getGreeting()
  * @model

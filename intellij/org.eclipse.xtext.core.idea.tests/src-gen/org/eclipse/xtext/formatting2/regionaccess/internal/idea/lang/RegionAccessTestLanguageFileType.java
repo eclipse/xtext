@@ -10,7 +10,7 @@ public final class RegionAccessTestLanguageFileType extends LanguageFileType {
 	public static final RegionAccessTestLanguageFileType INSTANCE = new RegionAccessTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "regionaccesstestlanguage";
 
 	private RegionAccessTestLanguageFileType() {
 		super(RegionAccessTestLanguageLanguage.INSTANCE);

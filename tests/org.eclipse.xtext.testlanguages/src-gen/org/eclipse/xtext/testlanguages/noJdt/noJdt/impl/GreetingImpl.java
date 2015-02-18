@@ -19,11 +19,11 @@ import org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.noJdt.noJdt.impl.GreetingImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.noJdt.noJdt.impl.GreetingImpl#getOther <em>Other</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -85,8 +85,7 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -96,8 +95,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -110,8 +108,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Greeting getOther()
+  public Greeting getOther()
   {
     if (other != null && other.eIsProxy())
     {
@@ -141,8 +138,7 @@ public Greeting getOther()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOther(Greeting newOther)
+  public void setOther(Greeting newOther)
   {
     Greeting oldOther = other;
     other = newOther;

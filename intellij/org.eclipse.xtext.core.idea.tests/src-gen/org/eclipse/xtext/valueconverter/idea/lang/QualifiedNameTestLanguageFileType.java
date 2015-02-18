@@ -10,7 +10,7 @@ public final class QualifiedNameTestLanguageFileType extends LanguageFileType {
 	public static final QualifiedNameTestLanguageFileType INSTANCE = new QualifiedNameTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "qualifiednametestlanguage";
 
 	private QualifiedNameTestLanguageFileType() {
 		super(QualifiedNameTestLanguageLanguage.INSTANCE);

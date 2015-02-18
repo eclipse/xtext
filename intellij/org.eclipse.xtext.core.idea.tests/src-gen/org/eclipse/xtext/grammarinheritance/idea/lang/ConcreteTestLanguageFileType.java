@@ -10,7 +10,7 @@ public final class ConcreteTestLanguageFileType extends LanguageFileType {
 	public static final ConcreteTestLanguageFileType INSTANCE = new ConcreteTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "concretetestlanguage";
 
 	private ConcreteTestLanguageFileType() {
 		super(ConcreteTestLanguageLanguage.INSTANCE);

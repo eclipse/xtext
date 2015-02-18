@@ -21,10 +21,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.GuardExp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.GuardExpressionImpl#getGuardExpr <em>Guard Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -66,8 +66,7 @@ public class GuardExpressionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getGuardExpr()
+  public Expression getGuardExpr()
   {
     return guardExpr;
   }
@@ -94,8 +93,7 @@ public Expression getGuardExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGuardExpr(Expression newGuardExpr)
+  public void setGuardExpr(Expression newGuardExpr)
   {
     if (newGuardExpr != guardExpr)
     {

@@ -15,6 +15,11 @@ var generateDotDiagram = false
 var graphvizCommand = ""
 var emfRuntimeVersion = "2.9"
 
+var runtimeProjectName = "org.eclipse.xtext.tests"
+var runtimeProjectPath = "../${runtimeProjectName}"
+var ideaProjectName = "org.eclipse.xtext.core.idea.tests"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
@@ -25,4 +30,8 @@ CompositeGeneratorFragment {
 	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+    fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+    	options = auto-inject {}
+    }
+	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }

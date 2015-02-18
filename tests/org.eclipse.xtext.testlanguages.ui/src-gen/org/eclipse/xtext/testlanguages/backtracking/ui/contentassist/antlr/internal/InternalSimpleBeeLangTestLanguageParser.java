@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.xtext.testlanguages.backtracking.services.SimpleBeeLangTestLanguageGrammarAccess;
 
 
@@ -1124,8 +1124,8 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -1407,11 +1407,11 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
         state.failed=false;
         return success;
     }
-    public final boolean synpred115_InternalSimpleBeeLangTestLanguage() {
+    public final boolean synpred126_InternalSimpleBeeLangTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred115_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
+            synpred126_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1421,11 +1421,11 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
         state.failed=false;
         return success;
     }
-    public final boolean synpred126_InternalSimpleBeeLangTestLanguage() {
+    public final boolean synpred115_InternalSimpleBeeLangTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred126_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
+            synpred115_InternalSimpleBeeLangTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -2059,85 +2059,55 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA8_eotS =
         "\56\uffff";
     static final String DFA8_eofS =
-        "\3\uffff\1\4\4\uffff\2\4\12\uffff\2\4\1\uffff\1\4\15\uffff\2\4\7"+
-        "\uffff";
+        "\3\uffff\1\4\4\uffff\2\4\12\uffff\2\4\1\uffff\1\4\15\uffff\2\4\7\uffff";
     static final String DFA8_minS =
-        "\1\4\1\uffff\1\4\1\7\1\uffff\1\16\2\4\2\16\1\4\1\0\1\7\2\4\1\16"+
-        "\1\7\1\76\1\7\1\0\1\7\1\16\1\7\1\16\1\75\1\7\1\60\1\7\1\76\2\4\1"+
-        "\60\3\7\1\75\1\7\1\16\1\7\1\75\1\0\1\60\2\7\1\75\1\0";
+        "\1\4\1\uffff\1\4\1\7\1\uffff\1\16\2\4\2\16\1\4\1\0\1\7\2\4\1\16\1\7\1\76\1\7\1\0\1\7\1\16\1\7\1\16\1\75\1\7\1\60\1\7\1\76\2\4\1\60\3\7\1\75\1\7\1\16\1\7\1\75\1\0\1\60\2\7\1\75\1\0";
     static final String DFA8_maxS =
-        "\1\113\1\uffff\1\113\1\115\1\uffff\1\115\1\107\1\113\2\115\1\113"+
-        "\1\0\1\74\1\113\1\107\1\115\1\7\1\76\1\113\1\0\2\115\1\113\1\115"+
-        "\1\75\1\7\1\75\1\7\1\76\1\107\1\113\1\75\2\7\1\113\1\75\1\7\2\115"+
-        "\1\75\1\0\1\75\2\7\1\75\1\0";
+        "\1\113\1\uffff\1\113\1\115\1\uffff\1\115\1\107\1\113\2\115\1\113\1\0\1\74\1\113\1\107\1\115\1\7\1\76\1\113\1\0\2\115\1\113\1\115\1\75\1\7\1\75\1\7\1\76\1\107\1\113\1\75\2\7\1\113\1\75\1\7\2\115\1\75\1\0\1\75\2\7\1\75\1\0";
     static final String DFA8_acceptS =
         "\1\uffff\1\1\2\uffff\1\2\51\uffff";
     static final String DFA8_specialS =
         "\13\uffff\1\2\7\uffff\1\0\24\uffff\1\3\4\uffff\1\1}>";
     static final String[] DFA8_transitionS = {
-            "\1\4\2\uffff\1\3\5\uffff\1\4\16\uffff\1\1\2\uffff\1\4\3\uffff"+
-            "\12\4\17\uffff\1\2\2\uffff\1\4\5\uffff\1\4\1\uffff\1\4\1\1\2"+
-            "\uffff\1\1",
+            "\1\4\2\uffff\1\3\5\uffff\1\4\16\uffff\1\1\2\uffff\1\4\3\uffff\12\4\17\uffff\1\2\2\uffff\1\4\5\uffff\1\4\1\uffff\1\4\1\1\2\uffff\1\1",
             "",
-            "\1\4\2\uffff\1\5\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff"+
-            "\1\4\1\1\1\uffff\1\4\5\uffff\1\4\1\uffff\1\4\3\uffff\1\1",
-            "\1\1\6\uffff\16\4\1\6\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7"+
-            "\13\uffff\2\4\2\uffff\4\4\4\uffff\1\1\4\uffff\1\4",
+            "\1\4\2\uffff\1\5\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff\1\4\1\1\1\uffff\1\4\5\uffff\1\4\1\uffff\1\4\3\uffff\1\1",
+            "\1\1\6\uffff\16\4\1\6\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7\13\uffff\2\4\2\uffff\4\4\4\uffff\1\1\4\uffff\1\4",
             "",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\1\13\uffff\1\4\1\10"+
-            "\2\uffff\4\4\11\uffff\1\4",
-            "\1\4\2\uffff\1\11\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17"+
-            "\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
-            "\1\4\2\uffff\1\13\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff"+
-            "\12\4\17\uffff\1\12\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff"+
-            "\1\14",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\4\13\uffff\2\4\1\1"+
-            "\1\uffff\4\4\11\uffff\1\4",
-            "\15\4\1\16\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\15\13\uffff"+
-            "\2\4\2\uffff\4\4\11\uffff\1\4",
-            "\1\4\2\uffff\1\17\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17"+
-            "\uffff\1\4\1\21\1\uffff\1\4\5\uffff\1\4\1\uffff\1\4\3\uffff"+
-            "\1\20",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\1\13\uffff\1\4\1\10\2\uffff\4\4\11\uffff\1\4",
+            "\1\4\2\uffff\1\11\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
+            "\1\4\2\uffff\1\13\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff\12\4\17\uffff\1\12\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff\1\14",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\4\13\uffff\2\4\1\1\1\uffff\4\4\11\uffff\1\4",
+            "\15\4\1\16\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\15\13\uffff\2\4\2\uffff\4\4\11\uffff\1\4",
+            "\1\4\2\uffff\1\17\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff\1\4\1\21\1\uffff\1\4\5\uffff\1\4\1\uffff\1\4\3\uffff\1\20",
             "\1\uffff",
             "\1\23\64\uffff\1\22",
-            "\1\4\2\uffff\1\24\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff"+
-            "\12\4\17\uffff\1\4\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff"+
-            "\1\4",
-            "\1\4\2\uffff\1\25\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17"+
-            "\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\26\13\uffff\1\4\1"+
-            "\27\2\uffff\4\4\11\uffff\1\4",
+            "\1\4\2\uffff\1\24\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff\12\4\17\uffff\1\4\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff\1\4",
+            "\1\4\2\uffff\1\25\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\26\13\uffff\1\4\1\27\2\uffff\4\4\11\uffff\1\4",
             "\1\30",
             "\1\31",
             "\1\32\65\uffff\1\34\15\uffff\1\33",
             "\1\uffff",
-            "\1\4\6\uffff\15\4\1\35\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff"+
-            "\1\36\13\uffff\2\4\2\uffff\4\4\4\uffff\1\4\4\uffff\1\4",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7\13\uffff\2\4\2\uffff"+
-            "\4\4\4\uffff\1\1\4\uffff\1\4",
+            "\1\4\6\uffff\15\4\1\35\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\36\13\uffff\2\4\2\uffff\4\4\4\uffff\1\4\4\uffff\1\4",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7\13\uffff\2\4\2\uffff\4\4\4\uffff\1\1\4\uffff\1\4",
             "\1\37\103\uffff\1\40",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\4\13\uffff\2\4\1\31"+
-            "\1\uffff\4\4\11\uffff\1\4",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\4\13\uffff\2\4\1\31\1\uffff\4\4\11\uffff\1\4",
             "\1\21",
             "\1\41",
             "\1\42\14\uffff\1\34",
             "\1\43",
             "\1\44",
-            "\1\4\2\uffff\1\45\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17"+
-            "\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
-            "\1\4\2\uffff\1\46\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff"+
-            "\12\4\17\uffff\1\4\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff"+
-            "\1\4",
+            "\1\4\2\uffff\1\45\5\uffff\1\4\21\uffff\1\4\3\uffff\12\4\17\uffff\1\4\10\uffff\1\4\1\uffff\1\4",
+            "\1\4\2\uffff\1\46\5\uffff\1\4\16\uffff\1\4\2\uffff\1\4\3\uffff\12\4\17\uffff\1\4\2\uffff\1\4\5\uffff\1\4\1\uffff\2\4\2\uffff\1\4",
             "\1\26\14\uffff\1\21",
             "\1\47",
             "\1\50",
             "\1\51\103\uffff\1\52",
             "\1\34",
             "\1\53",
-            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7\13\uffff\2\4\2\uffff"+
-            "\4\4\4\uffff\1\1\4\uffff\1\4",
-            "\1\4\6\uffff\15\4\1\35\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff"+
-            "\1\36\13\uffff\2\4\2\uffff\4\4\4\uffff\1\4\4\uffff\1\4",
+            "\17\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\7\13\uffff\2\4\2\uffff\4\4\4\uffff\1\1\4\uffff\1\4",
+            "\1\4\6\uffff\15\4\1\35\1\4\1\uffff\5\4\1\uffff\2\4\12\uffff\1\36\13\uffff\2\4\2\uffff\4\4\4\uffff\1\4\4\uffff\1\4",
             "\1\21",
             "\1\uffff",
             "\1\42\14\uffff\1\34",
@@ -2264,27 +2234,18 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA14_specialS =
         "\14\uffff\1\0}>";
     static final String[] DFA14_transitionS = {
-            "\1\6\2\uffff\1\4\5\uffff\1\6\17\uffff\1\2\1\uffff\1\6\3\uffff"+
-            "\12\6\17\uffff\1\3\2\uffff\1\6\5\uffff\1\6\1\uffff\1\6\2\uffff"+
-            "\1\1\1\uffff\1\5",
+            "\1\6\2\uffff\1\4\5\uffff\1\6\17\uffff\1\2\1\uffff\1\6\3\uffff\12\6\17\uffff\1\3\2\uffff\1\6\5\uffff\1\6\1\uffff\1\6\2\uffff\1\1\1\uffff\1\5",
             "\1\2\25\uffff\1\2\36\uffff\1\2\17\uffff\1\5",
             "",
-            "\1\6\2\uffff\1\7\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17\uffff"+
-            "\1\6\1\2\1\uffff\1\6\5\uffff\1\6\1\uffff\1\6\3\uffff\1\2",
-            "\1\2\6\uffff\16\6\1\10\1\uffff\5\6\1\uffff\2\6\14\uffff\1\6"+
-            "\11\uffff\1\6\3\uffff\4\6\11\uffff\1\6",
+            "\1\6\2\uffff\1\7\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17\uffff\1\6\1\2\1\uffff\1\6\5\uffff\1\6\1\uffff\1\6\3\uffff\1\2",
+            "\1\2\6\uffff\16\6\1\10\1\uffff\5\6\1\uffff\2\6\14\uffff\1\6\11\uffff\1\6\3\uffff\4\6\11\uffff\1\6",
             "",
             "",
-            "\17\6\1\uffff\5\6\1\uffff\2\6\12\uffff\1\2\13\uffff\1\6\1\11"+
-            "\2\uffff\4\6\11\uffff\1\6",
-            "\1\6\2\uffff\1\12\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17"+
-            "\uffff\1\6\10\uffff\1\6\1\uffff\1\6",
-            "\17\6\1\uffff\5\6\1\uffff\2\6\14\uffff\1\6\11\uffff\1\6\1\uffff"+
-            "\1\2\1\uffff\4\6\11\uffff\1\6",
-            "\15\6\1\13\1\6\1\uffff\5\6\1\uffff\2\6\12\uffff\1\2\1\uffff"+
-            "\1\6\11\uffff\1\6\3\uffff\4\6\11\uffff\1\6",
-            "\1\6\2\uffff\1\14\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17"+
-            "\uffff\1\6\10\uffff\1\6\1\uffff\1\6",
+            "\17\6\1\uffff\5\6\1\uffff\2\6\12\uffff\1\2\13\uffff\1\6\1\11\2\uffff\4\6\11\uffff\1\6",
+            "\1\6\2\uffff\1\12\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17\uffff\1\6\10\uffff\1\6\1\uffff\1\6",
+            "\17\6\1\uffff\5\6\1\uffff\2\6\14\uffff\1\6\11\uffff\1\6\1\uffff\1\2\1\uffff\4\6\11\uffff\1\6",
+            "\15\6\1\13\1\6\1\uffff\5\6\1\uffff\2\6\12\uffff\1\2\1\uffff\1\6\11\uffff\1\6\3\uffff\4\6\11\uffff\1\6",
+            "\1\6\2\uffff\1\14\5\uffff\1\6\21\uffff\1\6\3\uffff\12\6\17\uffff\1\6\10\uffff\1\6\1\uffff\1\6",
             "\1\uffff"
     };
 
@@ -2356,13 +2317,11 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA26_maxS =
         "\1\107\1\0\2\uffff\1\0\10\uffff\1\0\5\uffff";
     static final String DFA26_acceptS =
-        "\2\uffff\1\2\1\4\1\uffff\1\5\6\uffff\1\6\1\uffff\1\1\1\3\1\7\1\10"+
-        "\1\11";
+        "\2\uffff\1\2\1\4\1\uffff\1\5\6\uffff\1\6\1\uffff\1\1\1\3\1\7\1\10\1\11";
     static final String DFA26_specialS =
         "\1\uffff\1\0\2\uffff\1\1\10\uffff\1\2\5\uffff}>";
     static final String[] DFA26_transitionS = {
-            "\1\3\2\uffff\1\1\5\uffff\1\5\30\uffff\6\5\1\4\17\uffff\1\14"+
-            "\10\uffff\1\15\1\uffff\1\2",
+            "\1\3\2\uffff\1\1\5\uffff\1\5\30\uffff\6\5\1\4\17\uffff\1\14\10\uffff\1\15\1\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -2483,13 +2442,9 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA31_acceptS =
         "\1\uffff\1\1\24\uffff\1\2";
     static final String DFA31_specialS =
-        "\3\uffff\1\0\1\1\1\uffff\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12"+
-        "\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\uffff}>";
+        "\3\uffff\1\0\1\1\1\uffff\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\uffff}>";
     static final String[] DFA31_transitionS = {
-            "\1\10\2\uffff\1\4\5\uffff\1\17\17\uffff\1\1\1\uffff\1\23\3\uffff"+
-            "\1\22\1\24\1\25\1\12\1\13\1\14\1\15\1\16\1\20\1\11\17\uffff"+
-            "\1\3\2\uffff\1\6\5\uffff\1\21\1\uffff\1\7\2\uffff\1\1\1\uffff"+
-            "\1\1",
+            "\1\10\2\uffff\1\4\5\uffff\1\17\17\uffff\1\1\1\uffff\1\23\3\uffff\1\22\1\24\1\25\1\12\1\13\1\14\1\15\1\16\1\20\1\11\17\uffff\1\3\2\uffff\1\6\5\uffff\1\21\1\uffff\1\7\2\uffff\1\1\1\uffff\1\1",
             "",
             "",
             "\1\uffff",
@@ -2841,9 +2796,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA67_specialS =
         "\2\uffff\1\7\1\10\1\3\1\0\1\1\1\6\1\5\1\4\1\2\1\uffff}>";
     static final String[] DFA67_transitionS = {
-            "\6\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\uffff\5\1\1\uffff"+
-            "\2\1\6\uffff\2\1\2\uffff\1\1\1\uffff\1\1\5\uffff\1\1\3\uffff"+
-            "\2\1\2\uffff\5\1\10\uffff\1\1",
+            "\6\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\uffff\5\1\1\uffff\2\1\6\uffff\2\1\2\uffff\1\1\1\uffff\1\1\5\uffff\1\1\3\uffff\2\1\2\uffff\5\1\10\uffff\1\1",
             "",
             "\1\uffff",
             "\1\uffff",
@@ -3049,8 +3002,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA81_specialS =
         "\1\uffff\1\0\44\uffff}>";
     static final String[] DFA81_transitionS = {
-            "\17\2\1\uffff\5\2\1\uffff\2\2\6\uffff\2\2\2\uffff\1\2\1\uffff"+
-            "\1\2\5\uffff\1\2\3\uffff\1\1\1\2\2\uffff\5\2\10\uffff\1\2",
+            "\17\2\1\uffff\5\2\1\uffff\2\2\6\uffff\2\2\2\uffff\1\2\1\uffff\1\2\5\uffff\1\2\3\uffff\1\1\1\2\2\uffff\5\2\10\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -3152,99 +3104,66 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA86_eotS =
         "\71\uffff";
     static final String DFA86_eofS =
-        "\4\uffff\1\5\7\uffff\1\5\3\uffff\1\5\16\uffff\2\5\4\uffff\1\5\12"+
-        "\uffff\2\5\7\uffff";
+        "\4\uffff\1\5\7\uffff\1\5\3\uffff\1\5\16\uffff\2\5\4\uffff\1\5\12\uffff\2\5\7\uffff";
     static final String DFA86_minS =
-        "\1\7\1\4\1\uffff\1\4\1\7\1\uffff\1\16\1\7\1\76\2\4\2\16\1\7\1\75"+
-        "\1\7\1\16\1\7\1\4\1\0\1\7\1\60\1\7\2\4\1\7\1\0\1\16\1\7\1\76\1\75"+
-        "\1\7\1\16\1\60\1\7\1\76\1\7\1\16\1\75\1\7\2\4\1\7\1\75\2\7\1\60"+
-        "\1\7\1\16\1\7\1\60\2\7\1\75\1\0\1\75\1\0";
+        "\1\7\1\4\1\uffff\1\4\1\7\1\uffff\1\16\1\7\1\76\2\4\2\16\1\7\1\75\1\7\1\16\1\7\1\4\1\0\1\7\1\60\1\7\2\4\1\7\1\0\1\16\1\7\1\76\1\75\1\7\1\16\1\60\1\7\1\76\1\7\1\16\1\75\1\7\2\4\1\7\1\75\2\7\1\60\1\7\1\16\1\7\1\60\2\7\1\75\1\0\1\75\1\0";
     static final String DFA86_maxS =
-        "\1\113\1\114\1\uffff\1\113\1\115\1\uffff\1\115\1\7\1\76\1\107\1"+
-        "\113\1\110\1\115\1\113\1\75\1\7\1\115\1\74\1\113\1\0\1\7\1\75\1"+
-        "\7\1\113\1\107\1\113\1\0\1\115\1\7\1\76\1\75\2\115\1\75\1\7\1\76"+
-        "\1\113\1\115\1\75\1\7\1\107\2\113\1\75\2\7\1\75\1\7\2\115\1\75\2"+
-        "\7\1\75\1\0\1\75\1\0";
+        "\1\113\1\114\1\uffff\1\113\1\115\1\uffff\1\115\1\7\1\76\1\107\1\113\1\110\1\115\1\113\1\75\1\7\1\115\1\74\1\113\1\0\1\7\1\75\1\7\1\113\1\107\1\113\1\0\1\115\1\7\1\76\1\75\2\115\1\75\1\7\1\76\1\113\1\115\1\75\1\7\1\107\2\113\1\75\2\7\1\75\1\7\2\115\1\75\2\7\1\75\1\0\1\75\1\0";
     static final String DFA86_acceptS =
         "\2\uffff\1\1\2\uffff\1\2\63\uffff";
     static final String DFA86_specialS =
         "\23\uffff\1\1\6\uffff\1\2\33\uffff\1\3\1\uffff\1\0}>";
     static final String[] DFA86_transitionS = {
             "\1\2\64\uffff\1\2\13\uffff\1\1\2\uffff\1\2",
-            "\1\5\2\uffff\1\4\5\uffff\1\5\17\uffff\1\5\1\uffff\1\5\3\uffff"+
-            "\12\5\17\uffff\1\3\2\uffff\1\5\5\uffff\1\5\1\uffff\1\5\2\uffff"+
-            "\1\5\1\uffff\1\5",
+            "\1\5\2\uffff\1\4\5\uffff\1\5\17\uffff\1\5\1\uffff\1\5\3\uffff\12\5\17\uffff\1\3\2\uffff\1\5\5\uffff\1\5\1\uffff\1\5\2\uffff\1\5\1\uffff\1\5",
             "",
-            "\1\5\2\uffff\1\6\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff"+
-            "\1\5\1\10\1\uffff\1\5\5\uffff\1\5\1\uffff\1\5\3\uffff\1\7",
-            "\1\13\6\uffff\16\5\1\11\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5"+
-            "\2\uffff\1\12\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\4\uffff\1"+
-            "\2\4\uffff\1\5",
+            "\1\5\2\uffff\1\6\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff\1\5\1\10\1\uffff\1\5\5\uffff\1\5\1\uffff\1\5\3\uffff\1\7",
+            "\1\13\6\uffff\16\5\1\11\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\12\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\4\uffff\1\2\4\uffff\1\5",
             "",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\15\13\uffff\1\5\1"+
-            "\14\2\uffff\4\5\11\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\15\13\uffff\1\5\1\14\2\uffff\4\5\11\uffff\1\5",
             "\1\16",
             "\1\17",
-            "\1\5\2\uffff\1\20\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17"+
-            "\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
-            "\1\5\2\uffff\1\23\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff"+
-            "\12\5\17\uffff\1\22\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff"+
-            "\1\21",
+            "\1\5\2\uffff\1\20\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
+            "\1\5\2\uffff\1\23\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff\12\5\17\uffff\1\22\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff\1\21",
             "\1\5\41\uffff\1\2\1\uffff\1\5\25\uffff\1\2",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\5\1\uffff"+
-            "\1\5\11\uffff\2\5\1\17\1\uffff\4\5\11\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\5\1\uffff\1\5\11\uffff\2\5\1\17\1\uffff\4\5\11\uffff\1\5",
             "\1\25\103\uffff\1\24",
             "\1\10",
             "\1\26",
-            "\15\5\1\30\1\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff"+
-            "\1\27\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\11\uffff\1\5",
+            "\15\5\1\30\1\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\27\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\11\uffff\1\5",
             "\1\32\64\uffff\1\31",
-            "\1\5\2\uffff\1\33\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17"+
-            "\uffff\1\5\1\35\1\uffff\1\5\5\uffff\1\5\1\uffff\1\5\3\uffff"+
-            "\1\34",
+            "\1\5\2\uffff\1\33\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff\1\5\1\35\1\uffff\1\5\5\uffff\1\5\1\uffff\1\5\3\uffff\1\34",
             "\1\uffff",
             "\1\36",
             "\1\15\14\uffff\1\10",
             "\1\13",
-            "\1\5\2\uffff\1\37\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff"+
-            "\12\5\17\uffff\1\5\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff"+
-            "\1\5",
-            "\1\5\2\uffff\1\40\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17"+
-            "\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
+            "\1\5\2\uffff\1\37\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff\12\5\17\uffff\1\5\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff\1\5",
+            "\1\5\2\uffff\1\40\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
             "\1\41\65\uffff\1\43\15\uffff\1\42",
             "\1\uffff",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\44\13\uffff\1\5\1"+
-            "\45\2\uffff\4\5\11\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\44\13\uffff\1\5\1\45\2\uffff\4\5\11\uffff\1\5",
             "\1\46",
             "\1\47",
             "\1\10",
-            "\1\5\6\uffff\15\5\1\50\1\5\1\uffff\5\5\1\uffff\2\5\12\uffff"+
-            "\1\51\13\uffff\2\5\2\uffff\4\5\4\uffff\1\5\4\uffff\1\5",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\12\1\uffff"+
-            "\1\5\11\uffff\2\5\2\uffff\4\5\4\uffff\1\2\4\uffff\1\5",
+            "\1\5\6\uffff\15\5\1\50\1\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\51\13\uffff\2\5\2\uffff\4\5\4\uffff\1\5\4\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\7\uffff\1\5\2\uffff\1\12\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\4\uffff\1\2\4\uffff\1\5",
             "\1\52\14\uffff\1\43",
             "\1\53",
             "\1\54",
             "\1\56\103\uffff\1\55",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\5\13\uffff\2\5\1\47"+
-            "\1\uffff\4\5\11\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\5\13\uffff\2\5\1\47\1\uffff\4\5\11\uffff\1\5",
             "\1\35",
             "\1\57",
-            "\1\5\2\uffff\1\60\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17"+
-            "\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
-            "\1\5\2\uffff\1\61\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff"+
-            "\12\5\17\uffff\1\5\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff"+
-            "\1\5",
+            "\1\5\2\uffff\1\60\5\uffff\1\5\21\uffff\1\5\3\uffff\12\5\17\uffff\1\5\10\uffff\1\5\1\uffff\1\5",
+            "\1\5\2\uffff\1\61\5\uffff\1\5\16\uffff\1\5\2\uffff\1\5\3\uffff\12\5\17\uffff\1\5\2\uffff\1\5\5\uffff\1\5\1\uffff\2\5\2\uffff\1\5",
             "\1\62\103\uffff\1\63",
             "\1\43",
             "\1\64",
             "\1\65",
             "\1\44\14\uffff\1\35",
             "\1\66",
-            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\12\1\uffff\1\5\11"+
-            "\uffff\2\5\2\uffff\4\5\4\uffff\1\2\4\uffff\1\5",
-            "\1\5\6\uffff\15\5\1\50\1\5\1\uffff\5\5\1\uffff\2\5\12\uffff"+
-            "\1\51\13\uffff\2\5\2\uffff\4\5\4\uffff\1\5\4\uffff\1\5",
+            "\17\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\12\1\uffff\1\5\11\uffff\2\5\2\uffff\4\5\4\uffff\1\2\4\uffff\1\5",
+            "\1\5\6\uffff\15\5\1\50\1\5\1\uffff\5\5\1\uffff\2\5\12\uffff\1\51\13\uffff\2\5\2\uffff\4\5\4\uffff\1\5\4\uffff\1\5",
             "\1\52\14\uffff\1\43",
             "\1\67",
             "\1\70",
@@ -3371,8 +3290,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA94_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA94_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -3470,8 +3388,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA95_specialS =
         "\3\uffff\1\0\10\uffff}>";
     static final String[] DFA95_transitionS = {
-            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\3\1\1\6\uffff\1\1\16"+
-            "\uffff\1\1",
+            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\3\1\1\6\uffff\1\1\16\uffff\1\1",
             "",
             "",
             "\1\uffff",
@@ -3557,8 +3474,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA96_specialS =
         "\4\uffff\1\0\7\uffff}>";
     static final String[] DFA96_transitionS = {
-            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\1\1\4\6\uffff\1\1\16"+
-            "\uffff\1\1",
+            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\1\1\4\6\uffff\1\1\16\uffff\1\1",
             "",
             "",
             "",
@@ -3644,8 +3560,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA97_specialS =
         "\4\uffff\1\0\7\uffff}>";
     static final String[] DFA97_transitionS = {
-            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\1\1\4\6\uffff\1\1\16"+
-            "\uffff\1\1",
+            "\2\1\36\uffff\2\1\4\uffff\1\1\5\uffff\1\1\1\4\6\uffff\1\1\16\uffff\1\1",
             "",
             "",
             "",
@@ -3731,8 +3646,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA98_specialS =
         "\5\uffff\1\0\1\1\1\2\1\3\3\uffff}>";
     static final String[] DFA98_transitionS = {
-            "\1\6\1\5\36\uffff\2\1\4\uffff\1\1\5\uffff\2\1\6\uffff\1\10\16"+
-            "\uffff\1\7",
+            "\1\6\1\5\36\uffff\2\1\4\uffff\1\1\5\uffff\2\1\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -3863,8 +3777,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA100_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA100_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -3962,8 +3875,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA101_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA101_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -4061,8 +3973,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA102_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA102_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -4160,8 +4071,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA103_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA103_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",
@@ -4259,8 +4169,7 @@ abstract class InternalSimpleBeeLangTestLanguageParser1 extends AbstractInternal
     static final String DFA104_specialS =
         "\1\0\11\uffff}>";
     static final String[] DFA104_transitionS = {
-            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff"+
-            "\1\10\16\uffff\1\7",
+            "\1\6\1\5\36\uffff\1\2\1\1\4\uffff\1\11\5\uffff\1\3\1\4\6\uffff\1\10\16\uffff\1\7",
             "",
             "",
             "",

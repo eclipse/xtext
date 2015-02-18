@@ -20,7 +20,7 @@ public class ActionTestLanguagePsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalActionTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalActionTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

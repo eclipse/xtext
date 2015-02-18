@@ -20,7 +20,7 @@ public class TransientValuesTestPsiParser extends AbstractXtextPsiParser {
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalTransientValuesTestParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalTransientValuesTestParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

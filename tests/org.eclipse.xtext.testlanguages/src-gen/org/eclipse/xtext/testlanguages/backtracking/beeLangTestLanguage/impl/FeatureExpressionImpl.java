@@ -20,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.FeatureE
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FeatureExpressionImpl#getObjExpr <em>Obj Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FeatureExpressionImpl#getFeatureName <em>Feature Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -86,8 +86,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getObjExpr()
+  public Expression getObjExpr()
   {
     return objExpr;
   }
@@ -114,8 +113,7 @@ public Expression getObjExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setObjExpr(Expression newObjExpr)
+  public void setObjExpr(Expression newObjExpr)
   {
     if (newObjExpr != objExpr)
     {
@@ -136,8 +134,7 @@ public void setObjExpr(Expression newObjExpr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getFeatureName()
+  public String getFeatureName()
   {
     return featureName;
   }
@@ -147,8 +144,7 @@ public String getFeatureName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFeatureName(String newFeatureName)
+  public void setFeatureName(String newFeatureName)
   {
     String oldFeatureName = featureName;
     featureName = newFeatureName;

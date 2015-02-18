@@ -10,7 +10,7 @@ public final class UnicodeTestLanguageFileType extends LanguageFileType {
 	public static final UnicodeTestLanguageFileType INSTANCE = new UnicodeTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "unicodetestlanguage";
 
 	private UnicodeTestLanguageFileType() {
 		super(UnicodeTestLanguageLanguage.INSTANCE);

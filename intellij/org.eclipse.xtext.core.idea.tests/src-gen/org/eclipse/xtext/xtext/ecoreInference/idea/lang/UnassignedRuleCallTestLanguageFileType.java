@@ -10,7 +10,7 @@ public final class UnassignedRuleCallTestLanguageFileType extends LanguageFileTy
 	public static final UnassignedRuleCallTestLanguageFileType INSTANCE = new UnassignedRuleCallTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "unassignedrulecalltestlanguage";
 
 	private UnassignedRuleCallTestLanguageFileType() {
 		super(UnassignedRuleCallTestLanguageLanguage.INSTANCE);

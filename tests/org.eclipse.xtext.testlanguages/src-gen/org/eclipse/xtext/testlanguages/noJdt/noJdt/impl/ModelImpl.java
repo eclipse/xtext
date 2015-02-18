@@ -26,10 +26,10 @@ import org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.noJdt.noJdt.impl.ModelImpl#getGreetings <em>Greetings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,8 +71,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Greeting> getGreetings()
+  public EList<Greeting> getGreetings()
   {
     if (greetings == null)
     {

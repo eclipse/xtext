@@ -21,10 +21,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Paramete
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ParameterImpl#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -66,8 +66,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpr()
+  public Expression getExpr()
   {
     return expr;
   }
@@ -94,8 +93,7 @@ public Expression getExpr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpr(Expression newExpr)
+  public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {

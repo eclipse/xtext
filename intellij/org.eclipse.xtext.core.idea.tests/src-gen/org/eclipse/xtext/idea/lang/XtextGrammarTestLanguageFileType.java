@@ -10,7 +10,7 @@ public final class XtextGrammarTestLanguageFileType extends LanguageFileType {
 	public static final XtextGrammarTestLanguageFileType INSTANCE = new XtextGrammarTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "xtextgrammartestlanguage";
 
 	private XtextGrammarTestLanguageFileType() {
 		super(XtextGrammarTestLanguageLanguage.INSTANCE);

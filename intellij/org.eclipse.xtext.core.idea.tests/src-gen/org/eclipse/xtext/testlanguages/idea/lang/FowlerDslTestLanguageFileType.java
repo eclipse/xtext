@@ -10,7 +10,7 @@ public final class FowlerDslTestLanguageFileType extends LanguageFileType {
 	public static final FowlerDslTestLanguageFileType INSTANCE = new FowlerDslTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "";
+	public static final String DEFAULT_EXTENSION = "fowlerdsltestlanguage";
 
 	private FowlerDslTestLanguageFileType() {
 		super(FowlerDslTestLanguageLanguage.INSTANCE);

@@ -20,7 +20,7 @@ public class AssignmentFinderTestLanguagePsiParser extends AbstractXtextPsiParse
 
 	@Override
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
-		return new PsiInternalAssignmentFinderTestLanguageParser(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider, grammarAccess);
+		return new PsiInternalAssignmentFinderTestLanguageParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
 
 }

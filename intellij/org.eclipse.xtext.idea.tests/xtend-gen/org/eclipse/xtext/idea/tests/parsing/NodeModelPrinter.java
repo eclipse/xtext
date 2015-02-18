@@ -9,11 +9,14 @@ package org.eclipse.xtext.idea.tests.parsing;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -138,6 +141,21 @@ public class NodeModelPrinter {
     return _builder.toString();
   }
   
+  protected String _printGrammarElement(final Action action) {
+    StringConcatenation _builder = new StringConcatenation();
+    Class<? extends Action> _class = action.getClass();
+    String _simpleName = _class.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(" [");
+    TypeRef _type = action.getType();
+    EClassifier _classifier = _type.getClassifier();
+    String _name = _classifier.getName();
+    _builder.append(_name, "");
+    _builder.append("]");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   public String print(final INode it) {
     if (it instanceof ICompositeNode) {
       return _print((ICompositeNode)it);
@@ -149,20 +167,22 @@ public class NodeModelPrinter {
     }
   }
   
-  protected String printGrammarElement(final Object grammarElement) {
-    if (grammarElement instanceof Keyword) {
-      return _printGrammarElement((Keyword)grammarElement);
-    } else if (grammarElement instanceof RuleCall) {
-      return _printGrammarElement((RuleCall)grammarElement);
-    } else if (grammarElement instanceof AbstractRule) {
-      return _printGrammarElement((AbstractRule)grammarElement);
-    } else if (grammarElement == null) {
+  protected String printGrammarElement(final Object action) {
+    if (action instanceof Action) {
+      return _printGrammarElement((Action)action);
+    } else if (action instanceof Keyword) {
+      return _printGrammarElement((Keyword)action);
+    } else if (action instanceof RuleCall) {
+      return _printGrammarElement((RuleCall)action);
+    } else if (action instanceof AbstractRule) {
+      return _printGrammarElement((AbstractRule)action);
+    } else if (action == null) {
       return _printGrammarElement((Void)null);
-    } else if (grammarElement != null) {
-      return _printGrammarElement(grammarElement);
+    } else if (action != null) {
+      return _printGrammarElement(action);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(grammarElement).toString());
+        Arrays.<Object>asList(action).toString());
     }
   }
 }
