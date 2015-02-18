@@ -2697,12 +2697,11 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendLineWrapToBuffer();
     boolean _isDefault = node.isDefault();
     if (_isDefault) {
-      this.appendToBuffer("default :");
+      this.appendToBuffer("default ");
     } else {
       this.appendToBuffer("case ");
       Expression _expression = node.getExpression();
       _expression.accept(this);
-      this.appendToBuffer(":");
     }
     return false;
   }
@@ -2738,15 +2737,43 @@ public class JavaASTFlattener extends ASTVisitor {
       @Override
       public void apply(final SwitchCase switchCase, final ArrayList<Statement> statements) {
         switchCase.accept(JavaASTFlattener.this);
+        Set<SwitchCase> _keySet = foldedCases.keySet();
+        SwitchCase _last = IterableExtensions.<SwitchCase>last(_keySet);
+        final boolean isLastCase = switchCase.equals(_last);
         boolean _and = false;
-        int _size = statements.size();
-        boolean _greaterThan = (_size > 0);
-        if (!_greaterThan) {
+        boolean _isEmpty = statements.isEmpty();
+        if (!_isEmpty) {
           _and = false;
         } else {
-          _and = (!(statements.get(0) instanceof Block));
+          _and = (!isLastCase);
         }
-        final boolean surround = _and;
+        if (_and) {
+          JavaASTFlattener.this.appendToBuffer(",");
+        } else {
+          JavaASTFlattener.this.appendToBuffer(":");
+        }
+        boolean _or = false;
+        boolean _and_1 = false;
+        if (!isLastCase) {
+          _and_1 = false;
+        } else {
+          boolean _isEmpty_1 = statements.isEmpty();
+          _and_1 = _isEmpty_1;
+        }
+        if (_and_1) {
+          _or = true;
+        } else {
+          boolean _and_2 = false;
+          boolean _isEmpty_2 = statements.isEmpty();
+          boolean _not = (!_isEmpty_2);
+          if (!_not) {
+            _and_2 = false;
+          } else {
+            _and_2 = (!(statements.get(0) instanceof Block));
+          }
+          _or = _and_2;
+        }
+        final boolean surround = _or;
         if (surround) {
           JavaASTFlattener.this.appendToBuffer("{");
           JavaASTFlattener.this.increaseIndent();

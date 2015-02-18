@@ -33,7 +33,7 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
 	JavaConverter j2x
-	static boolean DUMP = false;
+	static boolean DUMP = true;
 
 	@Before def void setUp() {
 		j2x = javaConverterProvider.get()
@@ -1097,6 +1097,39 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				}
 			}
 		}''')
+		assertNotNull(clazz)
+	}
+	
+	@Test def void testSwitchCase3() throws Exception {
+		var clazz = toValidXtendClass(
+			'''
+			public class Foo {
+				public void doStuff() {
+					switch (1) {
+						case 1:
+						case 2:
+							System.out.println();
+						case 3: {
+						}
+					}
+				public void doStuff2() {
+					switch (1) {
+						case 1:
+						case 2:
+							System.out.println();
+						case 3:
+					}
+				}
+				public void doStuff3() {
+					switch (1) {
+						case 1:
+						case 2:
+							System.out.println();
+						case 3:
+						default:
+					}
+				}
+			}''')
 		assertNotNull(clazz)
 	}
 

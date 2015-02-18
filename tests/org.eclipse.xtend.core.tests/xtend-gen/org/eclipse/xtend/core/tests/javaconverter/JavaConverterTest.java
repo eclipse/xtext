@@ -47,7 +47,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   private JavaConverter j2x;
   
-  private static boolean DUMP = false;
+  private static boolean DUMP = true;
   
   @Before
   public void setUp() {
@@ -1993,6 +1993,91 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testSwitchCase3() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doStuff() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch (1) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 1:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("System.out.println();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 3: {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doStuff2() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch (1) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 1:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("System.out.println();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 3:");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doStuff3() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch (1) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 1:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("System.out.println();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 3:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("default:");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
