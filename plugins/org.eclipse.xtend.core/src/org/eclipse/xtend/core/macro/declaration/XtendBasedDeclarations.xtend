@@ -126,7 +126,7 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 			val containerName = container.qualifiedName
 			if (containerName == null)
 				return null
-			return containerName + '.' + decl.name
+			return containerName + '$' + decl.name
 		}
 		return null
 	}

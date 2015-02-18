@@ -61,8 +61,14 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 		val namespaceAndName = getNameParts(qualifiedName)
 		val headerText = compilationUnit.fileHeaderProvider.getFileHeader(compilationUnit.xtendFile.eResource)
 		compilationUnit.jvmTypesBuilder.setFileHeader(newType, headerText)
+		val index = namespaceAndName.value.lastIndexOf('$')
+		val simpleParentTypeName = if(index > 0) namespaceAndName.value.substring(0, index) else null
 		if (namespaceAndName.key != null) {
-			val parentType = findType(namespaceAndName.key)
+			val parentType = if(index > 0) {
+				findType(namespaceAndName.key + "." + simpleParentTypeName)
+			} else {
+				findType(namespaceAndName.key)
+			}
 			if (parentType != null) {
 				parentType.members += newType
 				newType.static = true
@@ -73,7 +79,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 		} else {
 			acceptor.accept(newType) 
 		}
-		newType.simpleName = namespaceAndName.value
+		newType.simpleName = if(index > 0) namespaceAndName.value.substring(index+1) else namespaceAndName.value
 	}
 	
 	private def JvmDeclaredType findType(String string) {
