@@ -149,4 +149,69 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def test_06() {
+		assertCompilesTo('''
+			import com.google.inject.Provider
+			import org.antlr.runtime.Lexer
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+			class C {
+				Provider<Lexer> lexerProvider= [return new InternalXtendLexer(null)] as Provider<Lexer> 
+			}
+		''', '''
+			import com.google.inject.Provider;
+			import org.antlr.runtime.Lexer;
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private Provider<Lexer> lexerProvider = ((Provider<Lexer>) new Provider<Lexer>() {
+			      public Lexer get() {
+			        return new Function1<Object, InternalXtendLexer>() {
+			          public InternalXtendLexer apply(final Object it) {
+			            return new InternalXtendLexer(null);
+			          }
+			        }.apply(null);
+			      }
+			  });
+			}
+		''')
+	}
+	
+	@Test
+	def test_07() {
+		assertCompilesTo('''
+			import com.google.inject.Provider
+			import org.antlr.runtime.Lexer
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+			class C {
+				Provider<Lexer> lexerProvider= [return new InternalXtendLexer(null)] as ()=>Lexer
+			}
+		''', '''
+			import com.google.inject.Provider;
+			import org.antlr.runtime.Lexer;
+			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+			      public Lexer get() {
+			        return ((Function0<? extends Lexer>) new Function0<Lexer>() {
+			            public Lexer apply() {
+			              return new Function1<Object, InternalXtendLexer>() {
+			                public InternalXtendLexer apply(final Object it) {
+			                  return new InternalXtendLexer(null);
+			                }
+			              }.apply(null);
+			            }
+			        }).apply();
+			      }
+			  };
+			}
+		''')
+	}
+	
 }
