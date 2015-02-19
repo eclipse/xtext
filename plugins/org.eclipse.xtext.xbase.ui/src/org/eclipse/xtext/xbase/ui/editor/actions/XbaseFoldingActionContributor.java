@@ -67,7 +67,7 @@ public class XbaseFoldingActionContributor extends FoldingActionContributor {
 		@Override
 		public void update() {
 			ITextOperationTarget target = (ITextOperationTarget) getTextEditor().getAdapter(ITextOperationTarget.class);
-			boolean isEnabled = (target != null && target.canDoOperation(ProjectionViewer.TOGGLE));
+			boolean isEnabled = (target instanceof ProjectionViewer);
 			setEnabled(isEnabled);
 		}
 	}
