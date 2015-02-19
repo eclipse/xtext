@@ -229,9 +229,11 @@ class PsiToEcoreTransformationContext {
 		try {
 			if (operator == '+=') {
 				semanticModelBuilder.add(parent, feature, value, ruleName, node)
+			} else if (operator == '?=') {
+				semanticModelBuilder.set(parent, feature, true, ruleName, node)
 			} else {
 				semanticModelBuilder.set(parent, feature, value, ruleName, node)
-			}
+			}	
 		} catch (ValueConverterException vce) {
 			handleValueConverterException(vce)
 		}

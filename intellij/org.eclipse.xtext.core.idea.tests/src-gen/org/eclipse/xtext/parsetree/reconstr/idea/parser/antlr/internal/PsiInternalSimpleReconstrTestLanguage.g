@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.SimpleReconstrTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleOp:
 	ruleOp
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Op
-ruleOp:
+ruleOp@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
@@ -93,11 +96,12 @@ entryRuleTerm:
 	ruleTerm
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Term
-ruleTerm:
+ruleTerm@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -315,11 +319,12 @@ entryRuleAtom:
 	ruleAtom
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Atom
-ruleAtom:
+ruleAtom@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -339,11 +344,12 @@ entryRuleParens:
 	ruleParens
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parens
-ruleParens:
+ruleParens@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -386,11 +392,12 @@ entryRuleTwoNumbers:
 	ruleTwoNumbers
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoNumbers
-ruleTwoNumbers:
+ruleTwoNumbers@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -443,11 +450,12 @@ entryRuleManyStrings:
 	ruleManyStrings
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ManyStrings
-ruleManyStrings:
+ruleManyStrings@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -487,11 +495,12 @@ entryRuleType:
 	ruleType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Type
-ruleType:
+ruleType@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -538,11 +547,12 @@ entryRuleRef2:
 	ruleRef2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Ref2
-ruleRef2:
+ruleRef2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -589,11 +599,12 @@ entryRuleSpare:
 	ruleSpare
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Spare
-ruleSpare:
+ruleSpare@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -642,11 +653,12 @@ entryRuleBoolean:
 	ruleBoolean
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Boolean
-ruleBoolean:
+ruleBoolean@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -693,11 +705,12 @@ entryRuleTransient1:
 	ruleTransient1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Transient1
-ruleTransient1:
+ruleTransient1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -774,11 +787,12 @@ entryRuleConsumed1:
 	ruleConsumed1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Consumed1
-ruleConsumed1:
+ruleConsumed1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -861,11 +875,12 @@ entryRuleConsumed2:
 	ruleConsumed2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Consumed2
-ruleConsumed2:
+ruleConsumed2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -894,11 +909,12 @@ entryRuleLoop1:
 	ruleLoop1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Loop1
-ruleLoop1:
+ruleLoop1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -974,11 +990,12 @@ entryRuleLoop2:
 	ruleLoop2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Loop2
-ruleLoop2:
+ruleLoop2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1084,11 +1101,12 @@ entryRuleLoop3:
 	ruleLoop3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Loop3
-ruleLoop3:
+ruleLoop3@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1169,11 +1187,12 @@ entryRuleLoop4:
 	ruleLoop4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Loop4
-ruleLoop4:
+ruleLoop4@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1263,11 +1282,12 @@ entryRuleLoopBug285452:
 	ruleLoopBug285452
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LoopBug285452
-ruleLoopBug285452:
+ruleLoopBug285452@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1317,11 +1337,12 @@ entryRuleDuplicateBug284491:
 	ruleDuplicateBug284491
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DuplicateBug284491
-ruleDuplicateBug284491:
+ruleDuplicateBug284491@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1376,11 +1397,12 @@ entryRuleEmptyObjectBug284850:
 	ruleEmptyObjectBug284850
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EmptyObjectBug284850
-ruleEmptyObjectBug284850:
+ruleEmptyObjectBug284850@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1409,11 +1431,12 @@ entryRuleEmptyObjectItems:
 	ruleEmptyObjectItems
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EmptyObjectItems
-ruleEmptyObjectItems:
+ruleEmptyObjectItems@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1433,11 +1456,12 @@ entryRuleEmptyObjectItem:
 	ruleEmptyObjectItem
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EmptyObjectItem
-ruleEmptyObjectItem:
+ruleEmptyObjectItem@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1466,11 +1490,12 @@ entryRuleMultiInheritanceBug280439:
 	ruleMultiInheritanceBug280439
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiInheritanceBug280439
-ruleMultiInheritanceBug280439:
+ruleMultiInheritanceBug280439@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1499,11 +1524,12 @@ entryRuleConcreteMulti:
 	ruleConcreteMulti
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ConcreteMulti
-ruleConcreteMulti:
+ruleConcreteMulti@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1536,11 +1562,12 @@ entryRuleEObjectRef:
 	ruleEObjectRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EObjectRef
-ruleEObjectRef:
+ruleEObjectRef@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1587,11 +1614,12 @@ entryRuleEObjectElement:
 	ruleEObjectElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EObjectElement
-ruleEObjectElement:
+ruleEObjectElement@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1611,11 +1639,12 @@ entryRuleTypeBug305577_1:
 	ruleTypeBug305577_1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug305577_1
-ruleTypeBug305577_1:
+ruleTypeBug305577_1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1650,11 +1679,12 @@ entryRuleTypeBug305577_2:
 	ruleTypeBug305577_2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug305577_2
-ruleTypeBug305577_2:
+ruleTypeBug305577_2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1689,11 +1719,12 @@ entryRuleTypeBug1A:
 	ruleTypeBug1A
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug1A
-ruleTypeBug1A:
+ruleTypeBug1A@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1728,11 +1759,12 @@ entryRuleTypeBug1B:
 	ruleTypeBug1B
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug1B
-ruleTypeBug1B:
+ruleTypeBug1B@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1767,11 +1799,12 @@ entryRuleTypeBug2A:
 	ruleTypeBug2A
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug2A
-ruleTypeBug2A:
+ruleTypeBug2A@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1806,11 +1839,12 @@ entryRuleTypeBug2B:
 	ruleTypeBug2B
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeBug2B
-ruleTypeBug2B:
+ruleTypeBug2B@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1845,11 +1879,12 @@ entryRuleBug305171:
 	ruleBug305171
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bug305171
-ruleBug305171:
+ruleBug305171@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2002,11 +2037,12 @@ entryRuleBug310435Enum:
 	ruleBug310435Enum
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bug310435Enum
-ruleBug310435Enum:
+ruleBug310435Enum@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2067,11 +2103,12 @@ entryRuleBug310435Val:
 	ruleBug310435Val
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bug310435Val
-ruleBug310435Val:
+ruleBug310435Val@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2132,11 +2169,12 @@ entryRuleCrossRefNameTest:
 	ruleCrossRefNameTest
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CrossRefNameTest
-ruleCrossRefNameTest:
+ruleCrossRefNameTest@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2215,11 +2253,12 @@ entryRuleCrossRefNamed:
 	ruleCrossRefNamed
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CrossRefNamed
-ruleCrossRefNamed:
+ruleCrossRefNamed@init {
+}
+@after {
+}:
 	(
 		(
 			(

@@ -21,6 +21,8 @@ package org.eclipse.xtext.serializer.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.serializer.idea.lang.SyntacticSequencerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -222,11 +225,12 @@ entryRuleMandatoryKeywords:
 	ruleMandatoryKeywords
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MandatoryKeywords
-ruleMandatoryKeywords:
+ruleMandatoryKeywords@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -305,11 +309,12 @@ entryRuleExp0:
 	ruleExp0
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Exp0
-ruleExp0:
+ruleExp0@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -334,11 +339,12 @@ entryRuleAddition0:
 	ruleAddition0
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Addition0
-ruleAddition0:
+ruleAddition0@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition0_Prim0ParserRuleCall_0ElementType());
@@ -382,11 +388,12 @@ entryRulePrim0:
 	rulePrim0
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Prim0
-rulePrim0:
+rulePrim0@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -414,11 +421,12 @@ entryRuleExp1:
 	ruleExp1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Exp1
-ruleExp1:
+ruleExp1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -443,11 +451,12 @@ entryRuleAddition1:
 	ruleAddition1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Addition1
-ruleAddition1:
+ruleAddition1@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition1_Prim1ParserRuleCall_0ElementType());
@@ -491,11 +500,12 @@ entryRulePrim1:
 	rulePrim1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Prim1
-rulePrim1:
+rulePrim1@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -549,11 +559,12 @@ entryRuleExp2:
 	ruleExp2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Exp2
-ruleExp2:
+ruleExp2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -578,11 +589,12 @@ entryRuleAddition2:
 	ruleAddition2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Addition2
-ruleAddition2:
+ruleAddition2@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition2_Multiplication2ParserRuleCall_0ElementType());
@@ -626,11 +638,12 @@ entryRuleMultiplication2:
 	ruleMultiplication2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Multiplication2
-ruleMultiplication2:
+ruleMultiplication2@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getMultiplication2_Prim2ParserRuleCall_0ElementType());
@@ -674,11 +687,12 @@ entryRulePrim2:
 	rulePrim2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Prim2
-rulePrim2:
+rulePrim2@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -732,11 +746,12 @@ entryRuleDatatypeID:
 	ruleDatatypeID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DatatypeID
-ruleDatatypeID:
+ruleDatatypeID@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -752,11 +767,12 @@ entryRuleSingleCrossReference:
 	ruleSingleCrossReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleCrossReference
-ruleSingleCrossReference:
+ruleSingleCrossReference@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -875,11 +891,12 @@ entryRuleBooleanAlternative:
 	ruleBooleanAlternative
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BooleanAlternative
-ruleBooleanAlternative:
+ruleBooleanAlternative@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -908,11 +925,12 @@ entryRuleBooleanAlternativeLiteral:
 	ruleBooleanAlternativeLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BooleanAlternativeLiteral
-ruleBooleanAlternativeLiteral:
+ruleBooleanAlternativeLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -950,11 +968,12 @@ entryRuleUnassignedDatatype:
 	ruleUnassignedDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedDatatype
-ruleUnassignedDatatype:
+ruleUnassignedDatatype@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -990,11 +1009,12 @@ entryRuleKW1:
 	ruleKW1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule KW1
-ruleKW1:
+ruleKW1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1031,11 +1051,12 @@ entryRuleOptionalSingleTransition:
 	ruleOptionalSingleTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalSingleTransition
-ruleOptionalSingleTransition:
+ruleOptionalSingleTransition@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1073,11 +1094,12 @@ entryRuleOptionalManyTransition:
 	ruleOptionalManyTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalManyTransition
-ruleOptionalManyTransition:
+ruleOptionalManyTransition@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1115,11 +1137,12 @@ entryRuleMandatoryManyTransition:
 	ruleMandatoryManyTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MandatoryManyTransition
-ruleMandatoryManyTransition:
+ruleMandatoryManyTransition@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1157,11 +1180,12 @@ entryRuleAlternativeTransition:
 	ruleAlternativeTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AlternativeTransition
-ruleAlternativeTransition:
+ruleAlternativeTransition@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1207,11 +1231,12 @@ entryRuleBooleanDatatypeID:
 	ruleBooleanDatatypeID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BooleanDatatypeID
-ruleBooleanDatatypeID:
+ruleBooleanDatatypeID@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -1227,11 +1252,12 @@ entryRuleBooleanValues:
 	ruleBooleanValues
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BooleanValues
-ruleBooleanValues:
+ruleBooleanValues@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1288,11 +1314,12 @@ entryRuleLongAlternative:
 	ruleLongAlternative
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LongAlternative
-ruleLongAlternative:
+ruleLongAlternative@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

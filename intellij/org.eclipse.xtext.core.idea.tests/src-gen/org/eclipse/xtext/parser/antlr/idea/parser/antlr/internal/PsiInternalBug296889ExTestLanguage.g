@@ -22,6 +22,8 @@ package org.eclipse.xtext.parser.antlr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889ExTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -58,11 +60,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -114,11 +117,12 @@ entryRuleExpression:
 	ruleExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Expression
-ruleExpression:
+ruleExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -150,11 +154,12 @@ entryRulePreop:
 	rulePreop
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Preop
-rulePreop:
+rulePreop@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -196,11 +201,12 @@ entryRulePostop:
 	rulePostop
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Postop
-rulePostop:
+rulePostop@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -243,11 +249,12 @@ entryRuleVariable:
 	ruleVariable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Variable
-ruleVariable:
+ruleVariable@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -278,11 +285,12 @@ entryRuleDataTypeExpression:
 	ruleDataTypeExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataTypeExpression
-ruleDataTypeExpression:
+ruleDataTypeExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypeExpression_DataTypePostopParserRuleCall_0ElementType());
@@ -308,11 +316,12 @@ entryRuleDataTypePreop:
 	ruleDataTypePreop
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataTypePreop
-ruleDataTypePreop:
+ruleDataTypePreop@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -337,11 +346,12 @@ entryRuleDataTypePostop:
 	ruleDataTypePostop
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataTypePostop
-ruleDataTypePostop:
+ruleDataTypePostop@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypePostop_DataTypeVariableParserRuleCall_0ElementType());
@@ -368,11 +378,12 @@ entryRuleDataTypeVariable:
 	ruleDataTypeVariable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataTypeVariable
-ruleDataTypeVariable:
+ruleDataTypeVariable@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}

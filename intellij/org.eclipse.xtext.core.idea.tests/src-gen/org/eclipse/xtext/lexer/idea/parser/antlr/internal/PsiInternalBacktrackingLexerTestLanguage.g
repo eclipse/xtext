@@ -23,6 +23,8 @@ package org.eclipse.xtext.lexer.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -59,11 +61,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -140,11 +143,12 @@ entryRuleAb:
 	ruleAb
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Ab
-ruleAb:
+ruleAb@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -177,11 +181,12 @@ entryRuleXb:
 	ruleXb
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Xb
-ruleXb:
+ruleXb@init {
+}
+@after {
+}:
 	(
 		(
 			(

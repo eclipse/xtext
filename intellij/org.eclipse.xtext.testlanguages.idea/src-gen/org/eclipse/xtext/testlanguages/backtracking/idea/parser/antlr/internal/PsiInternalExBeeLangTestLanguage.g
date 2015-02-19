@@ -23,6 +23,8 @@ package org.eclipse.xtext.testlanguages.backtracking.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.testlanguages.backtracking.services.ExBeeLangTestLanguageGrammarAccess;
 
@@ -60,11 +62,12 @@ entryRuleDelegateModel:
 	ruleDelegateModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DelegateModel
-ruleDelegateModel:
+ruleDelegateModel@init {
+}
+@after {
+}:
 	{
 		/* */
 	}
@@ -83,11 +86,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -116,8 +120,7 @@ ruleModel:
 ;
 
 //Entry rule entryRuleUnit
-entryRuleUnit
-@init {
+entryRuleUnit@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getUnitAccess().getUnorderedGroup_7()
 	);
@@ -131,7 +134,14 @@ finally {
 }
 
 // Rule Unit
-ruleUnit:
+ruleUnit@init {
+	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+	grammarAccess.getUnitAccess().getUnorderedGroup_7()
+	);
+}
+@after {
+	myUnorderedGroupState.restore();
+}:
 	(
 		(
 			{
@@ -505,8 +515,7 @@ ruleUnit:
 ;
 
 //Entry rule entryRuleProvidedCapability
-entryRuleProvidedCapability
-@init {
+entryRuleProvidedCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1()
 	);
@@ -520,7 +529,14 @@ finally {
 }
 
 // Rule ProvidedCapability
-ruleProvidedCapability:
+ruleProvidedCapability@init {
+	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+	grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1()
+	);
+}
+@after {
+	myUnorderedGroupState.restore();
+}:
 	(
 		(
 			{
@@ -716,8 +732,7 @@ ruleProvidedCapability:
 ;
 
 //Entry rule entryRuleAliasedRequiredCapability
-entryRuleAliasedRequiredCapability
-@init {
+entryRuleAliasedRequiredCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1()
 	);
@@ -731,7 +746,14 @@ finally {
 }
 
 // Rule AliasedRequiredCapability
-ruleAliasedRequiredCapability:
+ruleAliasedRequiredCapability@init {
+	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+	grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1()
+	);
+}
+@after {
+	myUnorderedGroupState.restore();
+}:
 	(
 		(
 			(
@@ -1020,8 +1042,7 @@ ruleAliasedRequiredCapability:
 ;
 
 //Entry rule entryRuleRequiredCapability
-entryRuleRequiredCapability
-@init {
+entryRuleRequiredCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1()
 	);
@@ -1035,7 +1056,14 @@ finally {
 }
 
 // Rule RequiredCapability
-ruleRequiredCapability:
+ruleRequiredCapability@init {
+	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+	grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1()
+	);
+}
+@after {
+	myUnorderedGroupState.restore();
+}:
 	(
 		(
 			{
@@ -1313,16 +1341,24 @@ ruleRequiredCapability:
 ;
 
 //Entry rule entryRulePath
-entryRulePath:
+entryRulePath@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getPathElementType()); }
 	rulePath
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Path
-rulePath:
+rulePath@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -1384,11 +1420,12 @@ entryRuleParameterList:
 	ruleParameterList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParameterList
-ruleParameterList:
+ruleParameterList@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1430,11 +1467,12 @@ entryRuleFirstParameter:
 	ruleFirstParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FirstParameter
-ruleFirstParameter:
+ruleFirstParameter@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -1466,11 +1504,12 @@ entryRuleParameter:
 	ruleParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parameter
-ruleParameter:
+ruleParameter@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1490,11 +1529,12 @@ entryRuleClosureParameter:
 	ruleClosureParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ClosureParameter
-ruleClosureParameter:
+ruleClosureParameter@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1514,11 +1554,12 @@ entryRuleParameterDeclaration:
 	ruleParameterDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParameterDeclaration
-ruleParameterDeclaration:
+ruleParameterDeclaration@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1551,11 +1592,12 @@ entryRuleFunction:
 	ruleFunction
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Function
-ruleFunction:
+ruleFunction@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1796,11 +1838,12 @@ entryRuleGuardExpression:
 	ruleGuardExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule GuardExpression
-ruleGuardExpression:
+ruleGuardExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1850,11 +1893,12 @@ entryRuleAssignmentOperator:
 	ruleAssignmentOperator
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssignmentOperator
-ruleAssignmentOperator:
+ruleAssignmentOperator@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1912,11 +1956,12 @@ entryRuleRelationalOperator:
 	ruleRelationalOperator
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RelationalOperator
-ruleRelationalOperator:
+ruleRelationalOperator@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1998,11 +2043,12 @@ entryRuleTopLevelExpression:
 	ruleTopLevelExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TopLevelExpression
-ruleTopLevelExpression:
+ruleTopLevelExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2045,11 +2091,12 @@ entryRuleExpression:
 	ruleExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Expression
-ruleExpression:
+ruleExpression@init {
+}
+@after {
+}:
 	{
 		/* */
 	}
@@ -2068,11 +2115,12 @@ entryRuleAssignmentExpression:
 	ruleAssignmentExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssignmentExpression
-ruleAssignmentExpression:
+ruleAssignmentExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2126,11 +2174,12 @@ entryRuleVarDeclaration:
 	ruleVarDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule VarDeclaration
-ruleVarDeclaration:
+ruleVarDeclaration@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2215,11 +2264,12 @@ entryRuleValDeclaration:
 	ruleValDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValDeclaration
-ruleValDeclaration:
+ruleValDeclaration@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2301,11 +2351,12 @@ entryRuleTypeRef:
 	ruleTypeRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TypeRef
-ruleTypeRef:
+ruleTypeRef@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2337,11 +2388,12 @@ entryRuleSimpleTypeRef:
 	ruleSimpleTypeRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleTypeRef
-ruleSimpleTypeRef:
+ruleSimpleTypeRef@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -2410,11 +2462,12 @@ entryRuleClosureTypeRef:
 	ruleClosureTypeRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ClosureTypeRef
-ruleClosureTypeRef:
+ruleClosureTypeRef@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2548,11 +2601,12 @@ entryRuleCachedExpression:
 	ruleCachedExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CachedExpression
-ruleCachedExpression:
+ruleCachedExpression@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -2603,11 +2657,12 @@ entryRuleOrExpression:
 	ruleOrExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OrExpression
-ruleOrExpression:
+ruleOrExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2657,11 +2712,12 @@ entryRuleAndExpression:
 	ruleAndExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AndExpression
-ruleAndExpression:
+ruleAndExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2711,11 +2767,12 @@ entryRuleRelationalExpression:
 	ruleRelationalExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RelationalExpression
-ruleRelationalExpression:
+ruleRelationalExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2769,11 +2826,12 @@ entryRuleAdditiveExpression:
 	ruleAdditiveExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AdditiveExpression
-ruleAdditiveExpression:
+ruleAdditiveExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2837,11 +2895,12 @@ entryRuleMultiplicativeExpression:
 	ruleMultiplicativeExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiplicativeExpression
-ruleMultiplicativeExpression:
+ruleMultiplicativeExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2913,11 +2972,12 @@ entryRuleSetExpression:
 	ruleSetExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SetExpression
-ruleSetExpression:
+ruleSetExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -2971,11 +3031,12 @@ entryRuleUnaryOrInfixExpression:
 	ruleUnaryOrInfixExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnaryOrInfixExpression
-ruleUnaryOrInfixExpression:
+ruleUnaryOrInfixExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -3018,11 +3079,12 @@ entryRuleUnaryExpression:
 	ruleUnaryExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnaryExpression
-ruleUnaryExpression:
+ruleUnaryExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3074,11 +3136,12 @@ entryRulePreopExpression:
 	rulePreopExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PreopExpression
-rulePreopExpression:
+rulePreopExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3130,11 +3193,12 @@ entryRulePostopExpression:
 	rulePostopExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PostopExpression
-rulePostopExpression:
+rulePostopExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -3187,11 +3251,12 @@ entryRuleInfixExpression:
 	ruleInfixExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InfixExpression
-ruleInfixExpression:
+ruleInfixExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -3335,11 +3400,12 @@ entryRuleCallExpression:
 	ruleCallExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallExpression
-ruleCallExpression:
+ruleCallExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -3396,11 +3462,12 @@ entryRulePrimaryExpression:
 	rulePrimaryExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PrimaryExpression
-rulePrimaryExpression:
+rulePrimaryExpression@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -3509,11 +3576,12 @@ entryRuleWithExpression:
 	ruleWithExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule WithExpression
-ruleWithExpression:
+ruleWithExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -3614,11 +3682,12 @@ entryRuleWithContextExpression:
 	ruleWithContextExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule WithContextExpression
-ruleWithContextExpression:
+ruleWithContextExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -3685,11 +3754,12 @@ entryRuleBlockExpression:
 	ruleBlockExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BlockExpression
-ruleBlockExpression:
+ruleBlockExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3743,11 +3813,12 @@ entryRuleValue:
 	ruleValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Value
-ruleValue:
+ruleValue@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3778,11 +3849,12 @@ entryRuleKeywordVariables:
 	ruleKeywordVariables
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule KeywordVariables
-ruleKeywordVariables:
+ruleKeywordVariables@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3863,11 +3935,12 @@ entryRuleFeatureCall:
 	ruleFeatureCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FeatureCall
-ruleFeatureCall:
+ruleFeatureCall@init {
+}
+@after {
+}:
 	{
 		/* */
 	}
@@ -3886,11 +3959,12 @@ entryRuleOperationCall:
 	ruleOperationCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OperationCall
-ruleOperationCall:
+ruleOperationCall@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3946,11 +4020,12 @@ entryRuleConstructorCallExpression:
 	ruleConstructorCallExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ConstructorCallExpression
-ruleConstructorCallExpression:
+ruleConstructorCallExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4046,11 +4121,12 @@ entryRuleInitializationBlockExpression:
 	ruleInitializationBlockExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InitializationBlockExpression
-ruleInitializationBlockExpression:
+ruleInitializationBlockExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4102,11 +4178,12 @@ entryRuleInitializationExpression:
 	ruleInitializationExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InitializationExpression
-ruleInitializationExpression:
+ruleInitializationExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4159,11 +4236,12 @@ entryRuleFeatureOfThis:
 	ruleFeatureOfThis
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FeatureOfThis
-ruleFeatureOfThis:
+ruleFeatureOfThis@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4194,11 +4272,12 @@ entryRuleLiteral:
 	ruleLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Literal
-ruleLiteral:
+ruleLiteral@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -4230,11 +4309,12 @@ entryRuleLiteralFunction:
 	ruleLiteralFunction
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LiteralFunction
-ruleLiteralFunction:
+ruleLiteralFunction@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -4269,11 +4349,12 @@ entryRuleClosureExpression:
 	ruleClosureExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ClosureExpression
-ruleClosureExpression:
+ruleClosureExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4440,11 +4521,12 @@ entryRuleOneOrManyExpressions:
 	ruleOneOrManyExpressions
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OneOrManyExpressions
-ruleOneOrManyExpressions:
+ruleOneOrManyExpressions@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -4476,11 +4558,12 @@ entryRuleBlockExpressionWithoutBrackets:
 	ruleBlockExpressionWithoutBrackets
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BlockExpressionWithoutBrackets
-ruleBlockExpressionWithoutBrackets:
+ruleBlockExpressionWithoutBrackets@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4520,11 +4603,12 @@ entryRuleValueLiteral:
 	ruleValueLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValueLiteral
-ruleValueLiteral:
+ruleValueLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4544,11 +4628,12 @@ entryRuleParanthesizedExpression:
 	ruleParanthesizedExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParanthesizedExpression
-ruleParanthesizedExpression:
+ruleParanthesizedExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -4578,16 +4663,24 @@ ruleParanthesizedExpression:
 ;
 
 //Entry rule entryRuleQID
-entryRuleQID:
+entryRuleQID@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getQIDElementType()); }
 	ruleQID
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule QID
-ruleQID:
+ruleQID@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();

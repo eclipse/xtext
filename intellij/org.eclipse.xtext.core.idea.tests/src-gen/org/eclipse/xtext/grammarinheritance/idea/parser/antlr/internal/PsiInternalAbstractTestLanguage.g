@@ -21,6 +21,8 @@ package org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.grammarinheritance.idea.lang.AbstractTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleInheritedParserRule:
 	ruleInheritedParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InheritedParserRule
-ruleInheritedParserRule:
+ruleInheritedParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -85,11 +88,12 @@ entryRuleOverridableParserRule:
 	ruleOverridableParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OverridableParserRule
-ruleOverridableParserRule:
+ruleOverridableParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -118,11 +122,12 @@ entryRuleExtendableParserRule:
 	ruleExtendableParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule:
+ruleExtendableParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

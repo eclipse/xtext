@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.ComplexReconstrTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_OpParserRuleCall_0ElementType());
@@ -82,11 +85,12 @@ entryRuleOp:
 	ruleOp
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Op
-ruleOp:
+ruleOp@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
@@ -159,11 +163,12 @@ entryRuleTerm:
 	ruleTerm
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Term
-ruleTerm:
+ruleTerm@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -189,11 +194,12 @@ entryRuleAtom:
 	ruleAtom
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Atom
-ruleAtom:
+ruleAtom@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -213,11 +219,12 @@ entryRuleParens:
 	ruleParens
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parens
-ruleParens:
+ruleParens@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -260,11 +267,12 @@ entryRuleTrickyG:
 	ruleTrickyG
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TrickyG
-ruleTrickyG:
+ruleTrickyG@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -293,11 +301,12 @@ entryRuleTrickyG1:
 	ruleTrickyG1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TrickyG1
-ruleTrickyG1:
+ruleTrickyG1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -355,11 +364,12 @@ entryRuleTrickyG2:
 	ruleTrickyG2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TrickyG2
-ruleTrickyG2:
+ruleTrickyG2@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getTrickyG2_TrickyG1ParserRuleCall_0ElementType());

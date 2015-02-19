@@ -21,6 +21,8 @@ package org.eclipse.xtext.xbase.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xbase.idea.lang.XtypeElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleJvmTypeReference:
 	ruleJvmTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmTypeReference
-ruleJvmTypeReference:
+ruleJvmTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -107,11 +110,12 @@ entryRuleArrayBrackets:
 	ruleArrayBrackets
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ArrayBrackets
-ruleArrayBrackets:
+ruleArrayBrackets@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -136,11 +140,12 @@ entryRuleXFunctionTypeRef:
 	ruleXFunctionTypeRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XFunctionTypeRef
-ruleXFunctionTypeRef:
+ruleXFunctionTypeRef@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -218,11 +223,12 @@ entryRuleJvmParameterizedTypeReference:
 	ruleJvmParameterizedTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmParameterizedTypeReference
-ruleJvmParameterizedTypeReference:
+ruleJvmParameterizedTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -380,11 +386,12 @@ entryRuleJvmArgumentTypeReference:
 	ruleJvmArgumentTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmArgumentTypeReference
-ruleJvmArgumentTypeReference:
+ruleJvmArgumentTypeReference@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
@@ -410,11 +417,12 @@ entryRuleJvmWildcardTypeReference:
 	ruleJvmWildcardTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmWildcardTypeReference
-ruleJvmWildcardTypeReference:
+ruleJvmWildcardTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -489,11 +497,12 @@ entryRuleJvmUpperBound:
 	ruleJvmUpperBound
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmUpperBound
-ruleJvmUpperBound:
+ruleJvmUpperBound@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -522,11 +531,12 @@ entryRuleJvmUpperBoundAnded:
 	ruleJvmUpperBoundAnded
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmUpperBoundAnded
-ruleJvmUpperBoundAnded:
+ruleJvmUpperBoundAnded@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -555,11 +565,12 @@ entryRuleJvmLowerBound:
 	ruleJvmLowerBound
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmLowerBound
-ruleJvmLowerBound:
+ruleJvmLowerBound@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -588,11 +599,12 @@ entryRuleJvmLowerBoundAnded:
 	ruleJvmLowerBoundAnded
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmLowerBoundAnded
-ruleJvmLowerBoundAnded:
+ruleJvmLowerBoundAnded@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -621,11 +633,12 @@ entryRuleQualifiedName:
 	ruleQualifiedName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
@@ -659,11 +672,12 @@ entryRuleQualifiedNameWithWildcard:
 	ruleQualifiedNameWithWildcard
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameWithWildcard
-ruleQualifiedNameWithWildcard:
+ruleQualifiedNameWithWildcard@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
@@ -695,11 +709,12 @@ entryRuleValidID:
 	ruleValidID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValidID
-ruleValidID:
+ruleValidID@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -715,11 +730,12 @@ entryRuleXImportDeclaration:
 	ruleXImportDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XImportDeclaration
-ruleXImportDeclaration:
+ruleXImportDeclaration@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -832,11 +848,12 @@ entryRuleQualifiedNameInStaticImport:
 	ruleQualifiedNameInStaticImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameInStaticImport
-ruleQualifiedNameInStaticImport:
+ruleQualifiedNameInStaticImport@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());

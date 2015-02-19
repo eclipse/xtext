@@ -21,6 +21,8 @@ package org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleReferenceHolder:
 	ruleReferenceHolder
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ReferenceHolder
-ruleReferenceHolder:
+ruleReferenceHolder@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -113,11 +117,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

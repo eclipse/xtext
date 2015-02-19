@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.unorderedGroups.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.unorderedGroups.services.ExUnorderedGroupsTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleDelegateModel:
 	ruleDelegateModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DelegateModel
-ruleDelegateModel:
+ruleDelegateModel@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getDelegateModel_ModelParserRuleCallElementType());
 	}
@@ -72,11 +75,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1303,11 +1307,12 @@ entryRuleNestedModel:
 	ruleNestedModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedModel
-ruleNestedModel:
+ruleNestedModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1386,11 +1391,12 @@ entryRuleUnorderedDatatype:
 	ruleUnorderedDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedDatatype
-ruleUnorderedDatatype:
+ruleUnorderedDatatype@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2466,11 +2472,12 @@ entryRuleUnorderedSerialization:
 	ruleUnorderedSerialization
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedSerialization
-ruleUnorderedSerialization:
+ruleUnorderedSerialization@init {
+}
+@after {
+}:
 	(
 		(
 			{

@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
@@ -30,7 +29,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.idea.generator.parser.antlr.UnorderedGroupsAwareAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.AbstractActionAwareAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -38,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
+public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
   @Override
   protected String getGrammarFileName(final Grammar it) {
     return this._namingExtensions.getGrammarFileName(it, "");
@@ -312,6 +311,9 @@ public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGener
     _builder.newLineIfNotEmpty();
     String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
     _builder.append(_entryRuleName_1, "");
+    _builder.append(" returns ");
+    String _compileEntryReturns = this.compileEntryReturns(it, options);
+    _builder.append(_compileEntryReturns, "");
     CharSequence _compileEntryInit = this.compileEntryInit(it, options);
     _builder.append(_compileEntryInit, "");
     _builder.append(":");
@@ -352,49 +354,6 @@ public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGener
     return _builder.toString();
   }
   
-  protected CharSequence compileEntryInit(final ParserRule it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append(" ");
-    _builder.append("returns ");
-    String _compileEntryReturns = this.compileEntryReturns(it, options);
-    _builder.append(_compileEntryReturns, " ");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
-        _builder.append("@init {");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          boolean _isDefinesHiddenTokens_1 = it.isDefinesHiddenTokens();
-          if (_isDefinesHiddenTokens_1) {
-            CharSequence _compileInitHiddenTokens = this.compileInitHiddenTokens(it, options);
-            _builder.append(_compileInitHiddenTokens, "\t");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        {
-          boolean _definesUnorderedGroups_1 = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-          if (_definesUnorderedGroups_1) {
-            CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
-            _builder.append(_compileInitUnorderedGroups, "\t");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-      }
-    }
-    return _builder;
-  }
-  
   protected String compileEntryReturns(final ParserRule it, final AntlrOptions options) {
     String _switchResult = null;
     boolean _matched = false;
@@ -419,61 +378,6 @@ public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGener
     return _switchResult;
   }
   
-  protected CharSequence compileInitHiddenTokens(final ParserRule it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(");
-    {
-      EList<AbstractRule> _hiddenTokens = it.getHiddenTokens();
-      boolean _hasElements = false;
-      for(final AbstractRule hidden : _hiddenTokens) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        _builder.append("\"");
-        String _ruleName = this._grammarAccessExtensions.ruleName(hidden);
-        _builder.append(_ruleName, "");
-        _builder.append("\"");
-      }
-    }
-    _builder.append(");");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  protected CharSequence compileEntryFinally(final ParserRule it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
-        _builder.append("finally {");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          boolean _isDefinesHiddenTokens_1 = it.isDefinesHiddenTokens();
-          if (_isDefinesHiddenTokens_1) {
-            _builder.append("myHiddenTokenState.restore();");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
-        _builder.append(_compileRestoreUnorderedGroups, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-      }
-    }
-    return _builder;
-  }
-  
   @Override
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -487,6 +391,14 @@ public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGener
     _builder.append("\t");
     _builder.append("enterRule();");
     _builder.newLine();
+    _builder.append("\t");
+    CharSequence _compileInitHiddenTokens = this.compileInitHiddenTokens(it, options);
+    _builder.append(_compileInitHiddenTokens, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
+    _builder.append(_compileInitUnorderedGroups, "\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     _builder.append("@after {");
@@ -494,6 +406,14 @@ public class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGener
     _builder.append("\t");
     _builder.append("leaveRule();");
     _builder.newLine();
+    _builder.append("\t");
+    CharSequence _compileRestoreHiddenTokens = this.compileRestoreHiddenTokens(it, options);
+    _builder.append(_compileRestoreHiddenTokens, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
+    _builder.append(_compileRestoreUnorderedGroups, "\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     return _builder.toString();
   }

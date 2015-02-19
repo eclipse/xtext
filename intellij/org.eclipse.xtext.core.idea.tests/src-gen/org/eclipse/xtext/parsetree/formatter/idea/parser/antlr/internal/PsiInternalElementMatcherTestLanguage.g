@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.formatter.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.formatter.idea.lang.ElementMatcherTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_SimpleParserRuleCall_0ElementType());
@@ -130,11 +133,12 @@ entryRuleSimple:
 	ruleSimple
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Simple
-ruleSimple:
+ruleSimple@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -194,11 +198,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -232,11 +237,12 @@ entryRuleRuleCalls:
 	ruleRuleCalls
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCalls
-ruleRuleCalls:
+ruleRuleCalls@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -294,11 +300,12 @@ entryRuleRuleCallsSub:
 	ruleRuleCallsSub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallsSub
-ruleRuleCallsSub:
+ruleRuleCallsSub@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -318,11 +325,12 @@ entryRuleRuleCallsAss1:
 	ruleRuleCallsAss1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallsAss1
-ruleRuleCallsAss1:
+ruleRuleCallsAss1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -351,11 +359,12 @@ entryRuleRuleCallsAss2:
 	ruleRuleCallsAss2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallsAss2
-ruleRuleCallsAss2:
+ruleRuleCallsAss2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -384,11 +393,12 @@ entryRuleOptionalCalls:
 	ruleOptionalCalls
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalCalls
-ruleOptionalCalls:
+ruleOptionalCalls@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -434,11 +444,12 @@ entryRuleOptionalCallsSub1:
 	ruleOptionalCallsSub1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalCallsSub1
-ruleOptionalCallsSub1:
+ruleOptionalCallsSub1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -484,11 +495,12 @@ entryRuleOptionalCallsSub2:
 	ruleOptionalCallsSub2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalCallsSub2
-ruleOptionalCallsSub2:
+ruleOptionalCallsSub2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -517,11 +529,12 @@ entryRuleOptionalCallsSub3:
 	ruleOptionalCallsSub3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalCallsSub3
-ruleOptionalCallsSub3:
+ruleOptionalCallsSub3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -550,11 +563,12 @@ entryRuleRecursion:
 	ruleRecursion
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Recursion
-ruleRecursion:
+ruleRecursion@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -579,11 +593,12 @@ entryRuleRecursionSub:
 	ruleRecursionSub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RecursionSub
-ruleRecursionSub:
+ruleRecursionSub@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -650,11 +665,12 @@ entryRuleLoop:
 	ruleLoop
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Loop
-ruleLoop:
+ruleLoop@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -728,11 +744,12 @@ entryRuleExpression:
 	ruleExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Expression
-ruleExpression:
+ruleExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -757,11 +774,12 @@ entryRuleAdd:
 	ruleAdd
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Add
-ruleAdd:
+ruleAdd@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAdd_MultParserRuleCall_0ElementType());
@@ -805,11 +823,12 @@ entryRuleMult:
 	ruleMult
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Mult
-ruleMult:
+ruleMult@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getMult_PrimParserRuleCall_0ElementType());
@@ -853,11 +872,12 @@ entryRulePrim:
 	rulePrim
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Prim
-rulePrim:
+rulePrim@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1003,11 +1023,12 @@ entryRuleRuleCalls12:
 	ruleRuleCalls12
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCalls12
-ruleRuleCalls12:
+ruleRuleCalls12@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1054,11 +1075,12 @@ entryRuleConstructor:
 	ruleConstructor
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Constructor
-ruleConstructor:
+ruleConstructor@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1086,11 +1108,12 @@ entryRuleField:
 	ruleField
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Field
-ruleField:
+ruleField@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1115,11 +1138,12 @@ entryRuleParameter:
 	ruleParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parameter
-ruleParameter:
+ruleParameter@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1147,11 +1171,12 @@ entryRuleNestedStart:
 	ruleNestedStart
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedStart
-ruleNestedStart:
+ruleNestedStart@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getNestedStart_NestedStartSubParserRuleCall_0ElementType());
@@ -1180,11 +1205,12 @@ entryRuleNestedStartSub:
 	ruleNestedStartSub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedStartSub
-ruleNestedStartSub:
+ruleNestedStartSub@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

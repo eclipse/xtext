@@ -3,6 +3,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.OptionalEmptyTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -66,11 +68,11 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:50:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:50:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:51:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:52:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
@@ -89,8 +91,6 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
             recover(input,re);
         }
         finally {
-
-
         }
         return ;
     }
@@ -100,11 +100,13 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
     // $ANTLR start "ruleModel"
     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:59:1: ruleModel : ( (lv_child_0_0= ruleGreeting ) )? ;
     public final void ruleModel() throws RecognitionException {
+
+
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:59:10: ( ( (lv_child_0_0= ruleGreeting ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:60:2: ( (lv_child_0_0= ruleGreeting ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:62:2: ( ( (lv_child_0_0= ruleGreeting ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:63:2: ( (lv_child_0_0= ruleGreeting ) )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:60:2: ( (lv_child_0_0= ruleGreeting ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:63:2: ( (lv_child_0_0= ruleGreeting ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -113,15 +115,15 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:61:3: (lv_child_0_0= ruleGreeting )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:64:3: (lv_child_0_0= ruleGreeting )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:61:3: (lv_child_0_0= ruleGreeting )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:62:4: lv_child_0_0= ruleGreeting
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:64:3: (lv_child_0_0= ruleGreeting )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:65:4: lv_child_0_0= ruleGreeting
                     {
 
                     				markComposite(elementTypeProvider.getModel_ChildGreetingParserRuleCall_0ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_ruleModel89);
+                    pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_ruleModel94);
                     ruleGreeting();
 
                     state._fsp--;
@@ -141,6 +143,8 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
             }
 
+
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -154,20 +158,20 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleGreeting"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:74:1: entryRuleGreeting : ruleGreeting EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:77:1: entryRuleGreeting : ruleGreeting EOF ;
     public final void entryRuleGreeting() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:74:18: ( ruleGreeting EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:75:2: ruleGreeting EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:77:18: ( ruleGreeting EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:78:2: ruleGreeting EOF
             {
              markComposite(elementTypeProvider.getGreetingElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_entryRuleGreeting115);
+            pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_entryRuleGreeting120);
             ruleGreeting();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGreeting121); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGreeting126); 
 
             }
 
@@ -177,8 +181,6 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
             recover(input,re);
         }
         finally {
-
-
         }
         return ;
     }
@@ -186,35 +188,37 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleGreeting"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:83:1: ruleGreeting : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:84:1: ruleGreeting : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleGreeting() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
+
+
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:83:13: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:84:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:87:2: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:88:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:84:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:85:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:88:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:89:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleGreeting144); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleGreeting154); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getGreeting_HalloKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:92:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:93:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:96:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:93:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:94:5: lv_name_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalOptionalEmptyTestLanguage.g:98:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGreeting171); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGreeting181); 
 
             					doneLeaf(lv_name_1_0, elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType());
             				
@@ -229,6 +233,8 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
 
             }
+
+
 
         }
         catch (RecognitionException re) {
@@ -250,11 +256,11 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGreeting_in_ruleModel89 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting115 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleGreeting121 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleGreeting144 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting171 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGreeting_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting120 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGreeting126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleGreeting154 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting181 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

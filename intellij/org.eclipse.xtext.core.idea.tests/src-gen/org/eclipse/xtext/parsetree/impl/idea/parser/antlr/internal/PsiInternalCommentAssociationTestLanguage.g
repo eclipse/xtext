@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.impl.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

@@ -21,6 +21,8 @@ package org.eclipse.xtext.generator.ecore.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleSubMain:
 	ruleSubMain
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SubMain
-ruleSubMain:
+ruleSubMain@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -103,11 +106,12 @@ entryRuleAnotherSuperMain:
 	ruleAnotherSuperMain
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AnotherSuperMain
-ruleAnotherSuperMain:
+ruleAnotherSuperMain@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -136,11 +140,12 @@ entryRuleSuperMain:
 	ruleSuperMain
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SuperMain
-ruleSuperMain:
+ruleSuperMain@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

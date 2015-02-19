@@ -21,6 +21,8 @@ package org.eclipse.xtext.linking.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.services.Bug313089TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleFoo:
 	ruleFoo
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Foo
-ruleFoo:
+ruleFoo@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -114,11 +117,12 @@ entryRuleBar:
 	ruleBar
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bar
-ruleBar:
+ruleBar@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -146,11 +150,12 @@ entryRuleBaz:
 	ruleBaz
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Baz
-ruleBaz:
+ruleBaz@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

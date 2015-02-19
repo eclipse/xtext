@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.HiddenTerminalsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_WithoutHiddensParserRuleCall_0ElementType());
@@ -106,11 +109,12 @@ entryRuleWithoutHiddens:
 	ruleWithoutHiddens
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule WithoutHiddens
-ruleWithoutHiddens:
+ruleWithoutHiddens@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -163,16 +167,24 @@ ruleWithoutHiddens:
 ;
 
 //Entry rule entryRuleWithHiddens
-entryRuleWithHiddens:
+entryRuleWithHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}:
 	{ markComposite(elementTypeProvider.getWithHiddensElementType()); }
 	ruleWithHiddens
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule WithHiddens
-ruleWithHiddens:
+ruleWithHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -203,16 +215,24 @@ ruleWithHiddens:
 ;
 
 //Entry rule entryRuleOverridingHiddens
-entryRuleOverridingHiddens:
+entryRuleOverridingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}:
 	{ markComposite(elementTypeProvider.getOverridingHiddensElementType()); }
 	ruleOverridingHiddens
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule OverridingHiddens
-ruleOverridingHiddens:
+ruleOverridingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -268,16 +288,24 @@ ruleOverridingHiddens:
 ;
 
 //Entry rule entryRuleOverridingHiddensCall
-entryRuleOverridingHiddensCall:
+entryRuleOverridingHiddensCall@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getOverridingHiddensCallElementType()); }
 	ruleOverridingHiddensCall
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule OverridingHiddensCall
-ruleOverridingHiddensCall:
+ruleOverridingHiddensCall@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -312,16 +340,24 @@ ruleOverridingHiddensCall:
 ;
 
 //Entry rule entryRuleInheritingHiddens
-entryRuleInheritingHiddens:
+entryRuleInheritingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}:
 	{ markComposite(elementTypeProvider.getInheritingHiddensElementType()); }
 	ruleInheritingHiddens
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule InheritingHiddens
-ruleInheritingHiddens:
+ruleInheritingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -396,11 +432,12 @@ entryRuleDatatypeHiddens:
 	ruleDatatypeHiddens
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DatatypeHiddens
-ruleDatatypeHiddens:
+ruleDatatypeHiddens@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -424,16 +461,24 @@ ruleDatatypeHiddens:
 ;
 
 //Entry rule entryRuleDatatypeRule
-entryRuleDatatypeRule:
+entryRuleDatatypeRule@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}:
 	{ markComposite(elementTypeProvider.getDatatypeRuleElementType()); }
 	ruleDatatypeRule
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule DatatypeRule
-ruleDatatypeRule:
+ruleDatatypeRule@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -453,16 +498,24 @@ ruleDatatypeRule:
 ;
 
 //Entry rule entryRuleHidingHiddens
-entryRuleHidingHiddens:
+entryRuleHidingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getHidingHiddensElementType()); }
 	ruleHidingHiddens
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule HidingHiddens
-ruleHidingHiddens:
+ruleHidingHiddens@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -502,11 +555,12 @@ entryRuleInheritingHiddensCall:
 	ruleInheritingHiddensCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InheritingHiddensCall
-ruleInheritingHiddensCall:
+ruleInheritingHiddensCall@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

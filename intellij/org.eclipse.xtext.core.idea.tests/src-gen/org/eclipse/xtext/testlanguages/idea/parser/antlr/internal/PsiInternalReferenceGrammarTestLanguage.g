@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.ReferenceGrammarTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleSpielplatz:
 	ruleSpielplatz
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Spielplatz
-ruleSpielplatz:
+ruleSpielplatz@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -159,11 +162,12 @@ entryRuleKind:
 	ruleKind
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Kind
-ruleKind:
+ruleKind@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -217,11 +221,12 @@ entryRuleErwachsener:
 	ruleErwachsener
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Erwachsener
-ruleErwachsener:
+ruleErwachsener@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -275,11 +280,12 @@ entryRuleSpielzeug:
 	ruleSpielzeug
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Spielzeug
-ruleSpielzeug:
+ruleSpielzeug@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -333,11 +339,12 @@ entryRuleFarbe:
 	ruleFarbe
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Farbe
-ruleFarbe:
+ruleFarbe@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -383,11 +390,12 @@ entryRuleFamilie:
 	ruleFamilie
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Familie
-ruleFamilie:
+ruleFamilie@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

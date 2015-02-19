@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleStatemachine:
 	ruleStatemachine
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Statemachine
-ruleStatemachine:
+ruleStatemachine@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -128,11 +131,12 @@ entryRuleEvent:
 	ruleEvent
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Event
-ruleEvent:
+ruleEvent@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -176,11 +180,12 @@ entryRuleCommand:
 	ruleCommand
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Command
-ruleCommand:
+ruleCommand@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -213,11 +218,12 @@ entryRuleState:
 	ruleState
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule State
-ruleState:
+ruleState@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -298,11 +304,12 @@ entryRuleTransition:
 	ruleTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Transition
-ruleTransition:
+ruleTransition@init {
+}
+@after {
+}:
 	(
 		(
 			(

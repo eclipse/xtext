@@ -21,6 +21,8 @@ package org.eclipse.xtext.metamodelreferencing.tests.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.metamodelreferencing.tests.services.EcoreReferenceTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -100,11 +103,12 @@ entryRuleExtendsNsURIEObject:
 	ruleExtendsNsURIEObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtendsNsURIEObject
-ruleExtendsNsURIEObject:
+ruleExtendsNsURIEObject@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -337,11 +341,12 @@ entryRuleMyEAttribute:
 	ruleMyEAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MyEAttribute
-ruleMyEAttribute:
+ruleMyEAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -365,11 +370,12 @@ entryRuleEAttribute:
 	ruleEAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EAttribute
-ruleEAttribute:
+ruleEAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -393,11 +399,12 @@ entryRuleExtendsPluginEObject:
 	ruleExtendsPluginEObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtendsPluginEObject
-ruleExtendsPluginEObject:
+ruleExtendsPluginEObject@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -619,11 +626,12 @@ entryRuleExtendsResourceEObject:
 	ruleExtendsResourceEObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtendsResourceEObject
-ruleExtendsResourceEObject:
+ruleExtendsResourceEObject@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -845,11 +853,12 @@ entryRuleEObject:
 	ruleEObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EObject
-ruleEObject:
+ruleEObject@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -873,11 +882,12 @@ entryRuleValidID:
 	ruleValidID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValidID
-ruleValidID:
+ruleValidID@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}

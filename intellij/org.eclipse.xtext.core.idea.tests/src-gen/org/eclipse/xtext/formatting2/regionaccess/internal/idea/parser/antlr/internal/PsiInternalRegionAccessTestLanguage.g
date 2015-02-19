@@ -21,6 +21,8 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.idea.parser.antlr.in
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -107,11 +110,12 @@ entryRuleSimple:
 	ruleSimple
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Simple
-ruleSimple:
+ruleSimple@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -140,11 +144,12 @@ entryRuleDelegation:
 	ruleDelegation
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Delegation
-ruleDelegation:
+ruleDelegation@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -173,11 +178,12 @@ entryRuleUnassigned:
 	ruleUnassigned
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Unassigned
-ruleUnassigned:
+ruleUnassigned@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -202,11 +208,12 @@ entryRulePrefixedUnassigned:
 	rulePrefixedUnassigned
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PrefixedUnassigned
-rulePrefixedUnassigned:
+rulePrefixedUnassigned@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -235,11 +242,12 @@ entryRulePrefixedDelegate:
 	rulePrefixedDelegate
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PrefixedDelegate
-rulePrefixedDelegate:
+rulePrefixedDelegate@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -264,11 +272,12 @@ entryRuleDelegate:
 	ruleDelegate
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Delegate
-ruleDelegate:
+ruleDelegate@init {
+}
+@after {
+}:
 	(
 		(
 			{

@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.epatch.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleEPatch:
 	ruleEPatch
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EPatch
-ruleEPatch:
+ruleEPatch@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -132,11 +135,12 @@ entryRuleImport:
 	ruleImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Import
-ruleImport:
+ruleImport@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getImport_ModelImportParserRuleCall_0ElementType());
@@ -170,11 +174,12 @@ entryRuleModelImport:
 	ruleModelImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ModelImport
-ruleModelImport:
+ruleModelImport@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getModelImport_ResourceImportParserRuleCall_0ElementType());
@@ -200,11 +205,12 @@ entryRuleResourceImport:
 	ruleResourceImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ResourceImport
-ruleResourceImport:
+ruleResourceImport@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -251,11 +257,12 @@ entryRuleEPackageImport:
 	ruleEPackageImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EPackageImport
-ruleEPackageImport:
+ruleEPackageImport@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -302,11 +309,12 @@ entryRuleJavaImport:
 	ruleJavaImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JavaImport
-ruleJavaImport:
+ruleJavaImport@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -362,11 +370,12 @@ entryRuleExtensionImport:
 	ruleExtensionImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtensionImport
-ruleExtensionImport:
+ruleExtensionImport@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -422,11 +431,12 @@ entryRuleNamedResource:
 	ruleNamedResource
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NamedResource
-ruleNamedResource:
+ruleNamedResource@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -565,11 +575,12 @@ entryRuleObjectRef:
 	ruleObjectRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ObjectRef
-ruleObjectRef:
+ruleObjectRef@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -766,11 +777,12 @@ entryRuleBiSingleAssignment:
 	ruleBiSingleAssignment
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BiSingleAssignment
-ruleBiSingleAssignment:
+ruleBiSingleAssignment@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -835,11 +847,12 @@ entryRuleBiListAssignment:
 	ruleBiListAssignment
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BiListAssignment
-ruleBiListAssignment:
+ruleBiListAssignment@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -962,11 +975,12 @@ entryRuleMonoSingleAssignment:
 	ruleMonoSingleAssignment
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MonoSingleAssignment
-ruleMonoSingleAssignment:
+ruleMonoSingleAssignment@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1013,11 +1027,12 @@ entryRuleMonoListAssignment:
 	ruleMonoListAssignment
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MonoListAssignment
-ruleMonoListAssignment:
+ruleMonoListAssignment@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1100,11 +1115,12 @@ entryRuleAssignmentValue:
 	ruleAssignmentValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssignmentValue
-ruleAssignmentValue:
+ruleAssignmentValue@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1224,11 +1240,12 @@ entryRuleListAssignmentValue:
 	ruleListAssignmentValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ListAssignmentValue
-ruleListAssignmentValue:
+ruleListAssignmentValue@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1396,11 +1413,12 @@ entryRuleSingleAssignmentValue:
 	ruleSingleAssignmentValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleAssignmentValue
-ruleSingleAssignmentValue:
+ruleSingleAssignmentValue@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1532,11 +1550,12 @@ entryRuleCreatedObject:
 	ruleCreatedObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CreatedObject
-ruleCreatedObject:
+ruleCreatedObject@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1627,11 +1646,12 @@ entryRuleObjectNew:
 	ruleObjectNew
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ObjectNew
-ruleObjectNew:
+ruleObjectNew@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1671,11 +1691,12 @@ entryRuleObjectCopy:
 	ruleObjectCopy
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ObjectCopy
-ruleObjectCopy:
+ruleObjectCopy@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1715,11 +1736,12 @@ entryRuleMigration:
 	ruleMigration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Migration
-ruleMigration:
+ruleMigration@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1804,11 +1826,12 @@ entryRuleExecutable:
 	ruleExecutable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Executable
-ruleExecutable:
+ruleExecutable@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getExecutable_JavaExecutableParserRuleCall_0ElementType());
@@ -1834,11 +1857,12 @@ entryRuleJavaExecutable:
 	ruleJavaExecutable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JavaExecutable
-ruleJavaExecutable:
+ruleJavaExecutable@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1881,11 +1905,12 @@ entryRuleExpressionExecutable:
 	ruleExpressionExecutable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExpressionExecutable
-ruleExpressionExecutable:
+ruleExpressionExecutable@init {
+}
+@after {
+}:
 	(
 		(
 			{

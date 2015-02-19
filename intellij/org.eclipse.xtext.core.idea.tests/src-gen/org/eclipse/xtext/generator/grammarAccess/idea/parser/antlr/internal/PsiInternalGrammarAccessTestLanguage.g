@@ -21,6 +21,8 @@ package org.eclipse.xtext.generator.grammarAccess.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleType:
 	ruleType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Type
-ruleType:
+ruleType@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getType_ATypeParserRuleCall_0ElementType());
@@ -106,11 +110,12 @@ entryRuleAType:
 	ruleAType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AType
-ruleAType:
+ruleAType@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -134,11 +139,12 @@ entryRuleAnotherType:
 	ruleAnotherType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AnotherType
-ruleAnotherType:
+ruleAnotherType@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

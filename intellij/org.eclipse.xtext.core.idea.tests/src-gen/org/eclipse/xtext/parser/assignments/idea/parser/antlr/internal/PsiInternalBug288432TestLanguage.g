@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.assignments.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.assignments.idea.lang.Bug288432TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleBody:
 	ruleBody
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Body
-ruleBody:
+ruleBody@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -160,11 +163,12 @@ entryRuleFoo:
 	ruleFoo
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Foo
-ruleFoo:
+ruleFoo@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -184,11 +188,12 @@ entryRuleContent:
 	ruleContent
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Content
-ruleContent:
+ruleContent@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -220,11 +225,12 @@ entryRuleMyElement:
 	ruleMyElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MyElement
-ruleMyElement:
+ruleMyElement@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -263,11 +269,12 @@ entryRuleParameter:
 	ruleParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parameter
-ruleParameter:
+ruleParameter@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -300,11 +307,12 @@ entryRuleParameterRef:
 	ruleParameterRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParameterRef
-ruleParameterRef:
+ruleParameterRef@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -324,11 +332,12 @@ entryRuleMyInt:
 	ruleMyInt
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MyInt
-ruleMyInt:
+ruleMyInt@init {
+}
+@after {
+}:
 	(
 		(
 			{

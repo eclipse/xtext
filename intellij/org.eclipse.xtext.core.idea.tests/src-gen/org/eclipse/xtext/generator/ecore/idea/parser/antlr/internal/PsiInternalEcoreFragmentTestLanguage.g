@@ -21,6 +21,8 @@ package org.eclipse.xtext.generator.ecore.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleSecond:
 	ruleSecond
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Second
-ruleSecond:
+ruleSecond@init {
+}
+@after {
+}:
 	(
 		(
 			(

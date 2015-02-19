@@ -21,6 +21,8 @@ package org.eclipse.xtext.linking.lazy.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleType:
 	ruleType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Type
-ruleType:
+ruleType@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -221,11 +225,12 @@ entryRuleProperty:
 	ruleProperty
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Property
-ruleProperty:
+ruleProperty@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -265,11 +270,12 @@ entryRuleUnresolvedProxyProperty:
 	ruleUnresolvedProxyProperty
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnresolvedProxyProperty
-ruleUnresolvedProxyProperty:
+ruleUnresolvedProxyProperty@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

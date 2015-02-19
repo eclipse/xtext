@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleSomeContainer:
 	ruleSomeContainer
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SomeContainer
-ruleSomeContainer:
+ruleSomeContainer@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -124,11 +127,12 @@ entryRuleNested:
 	ruleNested
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Nested
-ruleNested:
+ruleNested@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -171,11 +175,12 @@ entryRuleContent:
 	ruleContent
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Content
-ruleContent:
+ruleContent@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getContent_ChildrenParserRuleCall_0ElementType());
@@ -201,11 +206,12 @@ entryRuleChildren:
 	ruleChildren
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Children
-ruleChildren:
+ruleChildren@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -268,11 +274,12 @@ entryRuleChild:
 	ruleChild
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Child
-ruleChild:
+ruleChild@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -322,11 +329,12 @@ entryRuleAbstractChildren:
 	ruleAbstractChildren
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractChildren
-ruleAbstractChildren:
+ruleAbstractChildren@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -369,11 +377,12 @@ entryRuleAbstractChild:
 	ruleAbstractChild
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractChild
-ruleAbstractChild:
+ruleAbstractChild@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractChild_FirstConcreteParserRuleCall_0ElementType());
@@ -399,11 +408,12 @@ entryRuleFirstConcrete:
 	ruleFirstConcrete
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FirstConcrete
-ruleFirstConcrete:
+ruleFirstConcrete@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -464,11 +474,12 @@ entryRuleSecondConcrete:
 	ruleSecondConcrete
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SecondConcrete
-ruleSecondConcrete:
+ruleSecondConcrete@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -536,11 +547,12 @@ entryRuleNamed:
 	ruleNamed
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Named
-ruleNamed:
+ruleNamed@init {
+}
+@after {
+}:
 	(
 		(
 			{

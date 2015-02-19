@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.terminalrules.services.UnicodeTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleAbstractString:
 	ruleAbstractString
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractString
-ruleAbstractString:
+ruleAbstractString@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractString_GStringParserRuleCall_0ElementType());
@@ -106,11 +110,12 @@ entryRuleGString:
 	ruleGString
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule GString
-ruleGString:
+ruleGString@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -130,11 +135,12 @@ entryRuleQuotedString:
 	ruleQuotedString
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QuotedString
-ruleQuotedString:
+ruleQuotedString@init {
+}
+@after {
+}:
 	(
 		(
 			{

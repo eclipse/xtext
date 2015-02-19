@@ -21,6 +21,8 @@ package org.eclipse.xtext.resource.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.resource.idea.lang.Bug385636ElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.resource.services.Bug385636GrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleProgram:
 	ruleProgram
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Program
-ruleProgram:
+ruleProgram@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -96,11 +99,12 @@ entryRuleDefineVariables:
 	ruleDefineVariables
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DefineVariables
-ruleDefineVariables:
+ruleDefineVariables@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -136,11 +140,12 @@ entryRuleDefineVariable:
 	ruleDefineVariable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DefineVariable
-ruleDefineVariable:
+ruleDefineVariable@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -169,11 +174,12 @@ entryRuleNVariableAccess:
 	ruleNVariableAccess
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NVariableAccess
-ruleNVariableAccess:
+ruleNVariableAccess@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -193,11 +199,12 @@ entryRuleStatement:
 	ruleStatement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Statement
-ruleStatement:
+ruleStatement@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getStatement_Expression_VariableNameParserRuleCall_0ElementType());
@@ -423,11 +430,12 @@ entryRuleExpression_VariableName:
 	ruleExpression_VariableName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Expression_VariableName
-ruleExpression_VariableName:
+ruleExpression_VariableName@init {
+}
+@after {
+}:
 	(
 		(
 			{

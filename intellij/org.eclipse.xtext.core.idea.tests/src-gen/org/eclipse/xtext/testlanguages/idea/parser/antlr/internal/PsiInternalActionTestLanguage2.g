@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguage2ElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguage2GrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleORing:
 	ruleORing
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ORing
-ruleORing:
+ruleORing@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getORing_ValueParserRuleCall_0ElementType());
@@ -100,11 +103,12 @@ entryRuleValue:
 	ruleValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Value
-ruleValue:
+ruleValue@init {
+}
+@after {
+}:
 	(
 		(
 			{

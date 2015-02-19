@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429ElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.bug419429.services.Bug419429GrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleEReference:
 	ruleEReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EReference
-ruleEReference:
+ruleEReference@init {
+}
+@after {
+}:
 	(
 		(
 			{

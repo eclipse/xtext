@@ -21,6 +21,8 @@ package org.eclipse.xtext.resource.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.resource.idea.lang.LocationProviderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -89,11 +92,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -162,11 +166,12 @@ entryRuleComponent:
 	ruleComponent
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Component
-ruleComponent:
+ruleComponent@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -242,11 +247,12 @@ entryRuleBus:
 	ruleBus
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bus
-ruleBus:
+ruleBus@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -286,11 +292,12 @@ entryRuleProcessor:
 	ruleProcessor
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Processor
-ruleProcessor:
+ruleProcessor@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -330,11 +337,12 @@ entryRuleMode:
 	ruleMode
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Mode
-ruleMode:
+ruleMode@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -370,11 +378,12 @@ entryRuleTransition:
 	ruleTransition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Transition
-ruleTransition:
+ruleTransition@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -439,11 +448,12 @@ entryRulePort:
 	rulePort
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Port
-rulePort:
+rulePort@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -479,11 +489,12 @@ entryRuleData:
 	ruleData
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Data
-ruleData:
+ruleData@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

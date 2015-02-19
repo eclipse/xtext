@@ -21,6 +21,8 @@ package org.eclipse.xtext.linking.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.idea.lang.Bug362902ElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.services.Bug362902GrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -96,11 +99,12 @@ entryRuleGreeting:
 	ruleGreeting
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Greeting
-ruleGreeting:
+ruleGreeting@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -136,11 +140,12 @@ entryRuleMyId:
 	ruleMyId
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MyId
-ruleMyId:
+ruleMyId@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}

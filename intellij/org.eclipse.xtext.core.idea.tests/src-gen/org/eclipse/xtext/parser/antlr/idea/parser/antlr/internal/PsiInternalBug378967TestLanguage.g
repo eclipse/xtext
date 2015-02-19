@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.antlr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug378967TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.services.Bug378967TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -150,11 +153,12 @@ entryRuleRule1:
 	ruleRule1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Rule1
-ruleRule1:
+ruleRule1@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -198,11 +202,12 @@ entryRuleRule2:
 	ruleRule2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Rule2
-ruleRule2:
+ruleRule2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -238,11 +243,12 @@ entryRuleRule3:
 	ruleRule3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Rule3
-ruleRule3:
+ruleRule3@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRule3_AfterParserRuleCall_0ElementType());
@@ -278,11 +284,12 @@ entryRuleRule4:
 	ruleRule4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Rule4
-ruleRule4:
+ruleRule4@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -326,11 +333,12 @@ entryRuleAfterObj:
 	ruleAfterObj
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AfterObj
-ruleAfterObj:
+ruleAfterObj@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -350,11 +358,12 @@ entryRuleSObj:
 	ruleSObj
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SObj
-ruleSObj:
+ruleSObj@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -374,11 +383,12 @@ entryRuleAfter:
 	ruleAfter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule After
-ruleAfter:
+ruleAfter@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -394,11 +404,12 @@ entryRuleS:
 	ruleS
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule S
-ruleS:
+ruleS@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}

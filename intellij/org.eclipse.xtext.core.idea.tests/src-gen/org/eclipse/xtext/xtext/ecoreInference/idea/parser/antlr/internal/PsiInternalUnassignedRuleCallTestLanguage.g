@@ -21,6 +21,8 @@ package org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -94,11 +97,12 @@ entryRuleModelFeatures:
 	ruleModelFeatures
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ModelFeatures
-ruleModelFeatures:
+ruleModelFeatures@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -141,11 +145,12 @@ entryRuleDataTypeRule:
 	ruleDataTypeRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataTypeRule
-ruleDataTypeRule:
+ruleDataTypeRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

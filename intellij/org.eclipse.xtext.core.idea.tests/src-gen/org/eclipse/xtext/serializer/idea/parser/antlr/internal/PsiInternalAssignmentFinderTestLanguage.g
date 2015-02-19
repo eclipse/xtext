@@ -21,6 +21,8 @@ package org.eclipse.xtext.serializer.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -276,11 +279,12 @@ entryRuleKeywordVal:
 	ruleKeywordVal
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule KeywordVal
-ruleKeywordVal:
+ruleKeywordVal@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -314,11 +318,12 @@ entryRuleTerminalVal:
 	ruleTerminalVal
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TerminalVal
-ruleTerminalVal:
+ruleTerminalVal@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -364,11 +369,12 @@ entryRuleEnumVal:
 	ruleEnumVal
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EnumVal
-ruleEnumVal:
+ruleEnumVal@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -402,11 +408,12 @@ entryRuleKeywordBool:
 	ruleKeywordBool
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule KeywordBool
-ruleKeywordBool:
+ruleKeywordBool@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -440,11 +447,12 @@ entryRuleTerminalBool:
 	ruleTerminalBool
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TerminalBool
-ruleTerminalBool:
+ruleTerminalBool@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -490,11 +498,12 @@ entryRuleEnumBool:
 	ruleEnumBool
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EnumBool
-ruleEnumBool:
+ruleEnumBool@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -528,11 +537,12 @@ entryRuleMixedBool:
 	ruleMixedBool
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MixedBool
-ruleMixedBool:
+ruleMixedBool@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -566,11 +576,12 @@ entryRuleBoolean:
 	ruleBoolean
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Boolean
-ruleBoolean:
+ruleBoolean@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -596,11 +607,12 @@ entryRuleMixedValue:
 	ruleMixedValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MixedValue
-ruleMixedValue:
+ruleMixedValue@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -634,11 +646,12 @@ entryRuleDatEnum:
 	ruleDatEnum
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DatEnum
-ruleDatEnum:
+ruleDatEnum@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -654,11 +667,12 @@ entryRuleContainmentRef:
 	ruleContainmentRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ContainmentRef
-ruleContainmentRef:
+ruleContainmentRef@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -692,11 +706,12 @@ entryRuleContainmentRef1:
 	ruleContainmentRef1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ContainmentRef1
-ruleContainmentRef1:
+ruleContainmentRef1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -725,11 +740,12 @@ entryRuleContainmentRef2:
 	ruleContainmentRef2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ContainmentRef2
-ruleContainmentRef2:
+ruleContainmentRef2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -758,11 +774,12 @@ entryRuleCrossRef:
 	ruleCrossRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CrossRef
-ruleCrossRef:
+ruleCrossRef@init {
+}
+@after {
+}:
 	(
 		(
 			(

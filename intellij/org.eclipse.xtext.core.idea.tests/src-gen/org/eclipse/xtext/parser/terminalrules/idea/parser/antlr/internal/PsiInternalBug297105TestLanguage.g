@@ -22,6 +22,8 @@ package org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -58,11 +60,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -82,11 +85,12 @@ entryRuleExpression:
 	ruleExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Expression
-ruleExpression:
+ruleExpression@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -126,11 +130,12 @@ entryRuleLiteral:
 	ruleLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Literal
-ruleLiteral:
+ruleLiteral@init {
+}
+@after {
+}:
 	(
 		{
 			/* */
@@ -162,11 +167,12 @@ entryRuleIntLiteral:
 	ruleIntLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule IntLiteral
-ruleIntLiteral:
+ruleIntLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -186,11 +192,12 @@ entryRuleRealLiteral:
 	ruleRealLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RealLiteral
-ruleRealLiteral:
+ruleRealLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -210,11 +217,12 @@ entryRuleIntValue:
 	ruleIntValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule IntValue
-ruleIntValue:
+ruleIntValue@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -230,11 +238,12 @@ entryRuleRealValue:
 	ruleRealValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RealValue
-ruleRealValue:
+ruleRealValue@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getRealValue_RealParserRuleCallElementType());
 	}
@@ -245,16 +254,24 @@ ruleRealValue:
 ;
 
 //Entry rule entryRuleReal
-entryRuleReal:
+entryRuleReal@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getRealElementType()); }
 	ruleReal
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Real
-ruleReal:
+ruleReal@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		(
 			{

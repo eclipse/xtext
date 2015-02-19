@@ -21,6 +21,8 @@ package org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleStart:
 	ruleStart
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Start
-ruleStart:
+ruleStart@init {
+}
+@after {
+}:
 	(
 		(
 			{

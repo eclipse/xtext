@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.indent.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleNodeList:
 	ruleNodeList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NodeList
-ruleNodeList:
+ruleNodeList@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -98,11 +101,12 @@ entryRuleNode:
 	ruleNode
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Node
-ruleNode:
+ruleNode@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -158,11 +162,12 @@ entryRuleString:
 	ruleString
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule String
-ruleString:
+ruleString@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

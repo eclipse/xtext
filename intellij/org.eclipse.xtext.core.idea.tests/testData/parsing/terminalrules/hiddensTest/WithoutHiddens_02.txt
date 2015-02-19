@@ -1,0 +1,7 @@
+org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.HiddenTerminalsTestLanguageFileImpl:a.hiddenterminalstestlanguage(0,16)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,16)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_WithoutHiddensParserRuleCall_0_ELEMENT_TYPE)(0,16)
+      PsiElement(WithoutHiddens_WithoutKeyword_0_ELEMENT_TYPE)('without')(0,7)
+      PsiElement(WithoutHiddens_SpacesWSTerminalRuleCall_1_0_ELEMENT_TYPE)(' ')(7,8)
+      PsiElement(WithoutHiddens_HiddensKeyword_2_ELEMENT_TYPE)('hiddens')(8,15)
+      PsiElement(WithoutHiddens_ValidSemicolonKeyword_4_0_ELEMENT_TYPE)(';')(15,16)

@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.assignments.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -172,11 +175,12 @@ entryRuleSingleValue:
 	ruleSingleValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleValue
-ruleSingleValue:
+ruleSingleValue@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -259,11 +263,12 @@ entryRuleMultiValue:
 	ruleMultiValue
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiValue
-ruleMultiValue:
+ruleMultiValue@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -346,11 +351,12 @@ entryRuleSingleDatatype:
 	ruleSingleDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleDatatype
-ruleSingleDatatype:
+ruleSingleDatatype@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -433,11 +439,12 @@ entryRuleMultiDatatype:
 	ruleMultiDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiDatatype
-ruleMultiDatatype:
+ruleMultiDatatype@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -520,11 +527,12 @@ entryRuleIdDatatype:
 	ruleIdDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule IdDatatype
-ruleIdDatatype:
+ruleIdDatatype@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -540,11 +548,12 @@ entryRuleStringDatatype:
 	ruleStringDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule StringDatatype
-ruleStringDatatype:
+ruleStringDatatype@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}

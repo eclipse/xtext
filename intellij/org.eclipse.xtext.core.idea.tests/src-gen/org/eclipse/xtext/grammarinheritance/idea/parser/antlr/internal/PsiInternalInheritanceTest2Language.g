@@ -21,6 +21,8 @@ package org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest2LanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -121,11 +124,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -154,11 +158,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

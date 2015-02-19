@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.formatter.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -107,11 +110,12 @@ entryRuleLine:
 	ruleLine
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Line
-ruleLine:
+ruleLine@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -211,11 +215,12 @@ entryRuleDecl:
 	ruleDecl
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Decl
-ruleDecl:
+ruleDecl@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -248,11 +253,12 @@ entryRuleAssign:
 	ruleAssign
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Assign
-ruleAssign:
+ruleAssign@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -342,11 +348,12 @@ entryRuleMeth:
 	ruleMeth
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Meth
-ruleMeth:
+ruleMeth@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -422,11 +429,12 @@ entryRuleParam:
 	ruleParam
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Param
-ruleParam:
+ruleParam@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -466,11 +474,12 @@ entryRuleSpace:
 	ruleSpace
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Space
-ruleSpace:
+ruleSpace@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -499,11 +508,12 @@ entryRuleTestLinewrap:
 	ruleTestLinewrap
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestLinewrap
-ruleTestLinewrap:
+ruleTestLinewrap@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -538,11 +548,12 @@ entryRuleTestLinewrapMinMax:
 	ruleTestLinewrapMinMax
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestLinewrapMinMax
-ruleTestLinewrapMinMax:
+ruleTestLinewrapMinMax@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -577,11 +588,12 @@ entryRuleTestIndentation:
 	ruleTestIndentation
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestIndentation
-ruleTestIndentation:
+ruleTestIndentation@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -651,11 +663,12 @@ entryRuleFqnObj:
 	ruleFqnObj
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FqnObj
-ruleFqnObj:
+ruleFqnObj@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -684,11 +697,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -722,11 +736,12 @@ entryRuleFqnRef:
 	ruleFqnRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FqnRef
-ruleFqnRef:
+ruleFqnRef@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -755,11 +770,12 @@ entryRuleEnumeration:
 	ruleEnumeration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Enumeration
-ruleEnumeration:
+ruleEnumeration@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -803,16 +819,24 @@ ruleEnumeration:
 ;
 
 //Entry rule entryRuleSuppressedHidden
-entryRuleSuppressedHidden:
+entryRuleSuppressedHidden@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getSuppressedHiddenElementType()); }
 	ruleSuppressedHidden
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule SuppressedHidden
-ruleSuppressedHidden:
+ruleSuppressedHidden@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		(
 			{
@@ -876,11 +900,12 @@ entryRuleSuppressedHiddenSub:
 	ruleSuppressedHiddenSub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SuppressedHiddenSub
-ruleSuppressedHiddenSub:
+ruleSuppressedHiddenSub@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getSuppressedHiddenSub_SuppressedHiddenSubSubParserRuleCall_0ElementType());
@@ -901,16 +926,24 @@ ruleSuppressedHiddenSub:
 ;
 
 //Entry rule entryRuleSuppressedHiddenSubSub
-entryRuleSuppressedHiddenSubSub:
+entryRuleSuppressedHiddenSubSub@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}:
 	{ markComposite(elementTypeProvider.getSuppressedHiddenSubSubElementType()); }
 	ruleSuppressedHiddenSubSub
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule SuppressedHiddenSubSub
-ruleSuppressedHiddenSubSub:
+ruleSuppressedHiddenSubSub@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -946,11 +979,12 @@ entryRuleSuppressedHiddenSubID:
 	ruleSuppressedHiddenSubID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SuppressedHiddenSubID
-ruleSuppressedHiddenSubID:
+ruleSuppressedHiddenSubID@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -970,11 +1004,12 @@ entryRuleDatatype1:
 	ruleDatatype1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype1
-ruleDatatype1:
+ruleDatatype1@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getDatatype1_FQNParserRuleCallElementType());
 	}
@@ -990,11 +1025,12 @@ entryRuleDatatype2:
 	ruleDatatype2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype2
-ruleDatatype2:
+ruleDatatype2@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getDatatype2_FQNParserRuleCallElementType());
 	}
@@ -1010,11 +1046,12 @@ entryRuleDatatype3:
 	ruleDatatype3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype3
-ruleDatatype3:
+ruleDatatype3@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getDatatype3_FQNParserRuleCallElementType());
 	}
@@ -1030,11 +1067,12 @@ entryRuleDatatypes:
 	ruleDatatypes
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatypes
-ruleDatatypes:
+ruleDatatypes@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1099,11 +1137,12 @@ entryRuleWrappingDataTypeTest:
 	ruleWrappingDataTypeTest
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule WrappingDataTypeTest
-ruleWrappingDataTypeTest:
+ruleWrappingDataTypeTest@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1139,11 +1178,12 @@ entryRuleWrappingDataType:
 	ruleWrappingDataType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule WrappingDataType
-ruleWrappingDataType:
+ruleWrappingDataType@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleEntryRule:
 	ruleEntryRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EntryRule
-ruleEntryRule:
+ruleEntryRule@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleAbstractRule:
 	ruleAbstractRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractRule
-ruleAbstractRule:
+ruleAbstractRule@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractRule_ChoiceRuleParserRuleCall_0ElementType());
@@ -106,11 +110,12 @@ entryRuleChoiceRule:
 	ruleChoiceRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ChoiceRule
-ruleChoiceRule:
+ruleChoiceRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -150,11 +155,12 @@ entryRuleReducibleRule:
 	ruleReducibleRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ReducibleRule
-ruleReducibleRule:
+ruleReducibleRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -198,11 +204,12 @@ entryRuleTerminalRule:
 	ruleTerminalRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TerminalRule
-ruleTerminalRule:
+ruleTerminalRule@init {
+}
+@after {
+}:
 	(
 		(
 			{

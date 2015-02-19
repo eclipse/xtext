@@ -21,6 +21,8 @@ package org.eclipse.xtext.linking.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.idea.lang.Bug289059TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -100,11 +103,12 @@ entryRuleUnassignedAction:
 	ruleUnassignedAction
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedAction
-ruleUnassignedAction:
+ruleUnassignedAction@init {
+}
+@after {
+}:
 	(
 		(
 			{

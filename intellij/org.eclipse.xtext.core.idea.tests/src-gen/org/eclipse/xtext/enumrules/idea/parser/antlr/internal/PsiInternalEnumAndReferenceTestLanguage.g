@@ -21,6 +21,8 @@ package org.eclipse.xtext.enumrules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.enumrules.idea.lang.EnumAndReferenceTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleEntityWithEnumAndReference:
 	ruleEntityWithEnumAndReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EntityWithEnumAndReference
-ruleEntityWithEnumAndReference:
+ruleEntityWithEnumAndReference@init {
+}
+@after {
+}:
 	(
 		(
 			(

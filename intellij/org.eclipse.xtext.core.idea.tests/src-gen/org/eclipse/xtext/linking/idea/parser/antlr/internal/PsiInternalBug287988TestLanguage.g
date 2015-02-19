@@ -21,6 +21,8 @@ package org.eclipse.xtext.linking.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.idea.lang.Bug287988TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -192,11 +195,12 @@ entryRuleBaseAttribute:
 	ruleBaseAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule BaseAttribute
-ruleBaseAttribute:
+ruleBaseAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -276,11 +280,12 @@ entryRuleAttribute:
 	ruleAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Attribute
-ruleAttribute:
+ruleAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -304,11 +309,12 @@ entryRuleMaster:
 	ruleMaster
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Master
-ruleMaster:
+ruleMaster@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -332,11 +338,12 @@ entryRuleActionAttribute:
 	ruleActionAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ActionAttribute
-ruleActionAttribute:
+ruleActionAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -432,11 +439,12 @@ entryRuleSimpleAttribute:
 	ruleSimpleAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleAttribute
-ruleSimpleAttribute:
+ruleSimpleAttribute@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -499,11 +507,12 @@ entryRuleRuleCallAttribute:
 	ruleRuleCallAttribute
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallAttribute
-ruleRuleCallAttribute:
+ruleRuleCallAttribute@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute_CallMeParserRuleCall_0ElementType());
@@ -539,11 +548,12 @@ entryRuleCallMe:
 	ruleCallMe
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallMe
-ruleCallMe:
+ruleCallMe@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -586,11 +596,12 @@ entryRuleRuleCallAttribute2:
 	ruleRuleCallAttribute2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallAttribute2
-ruleRuleCallAttribute2:
+ruleRuleCallAttribute2@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute2_CallMe2ParserRuleCall_0ElementType());
@@ -649,11 +660,12 @@ entryRuleCallMe2:
 	ruleCallMe2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallMe2
-ruleCallMe2:
+ruleCallMe2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -673,11 +685,12 @@ entryRuleRuleCallAttribute3:
 	ruleRuleCallAttribute3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RuleCallAttribute3
-ruleRuleCallAttribute3:
+ruleRuleCallAttribute3@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute3_CallMe3ParserRuleCall_0ElementType());
@@ -736,11 +749,12 @@ entryRuleCallMe3:
 	ruleCallMe3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallMe3
-ruleCallMe3:
+ruleCallMe3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -772,11 +786,12 @@ entryRuleCallMe4:
 	ruleCallMe4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallMe4
-ruleCallMe4:
+ruleCallMe4@init {
+}
+@after {
+}:
 	(
 		(
 			{

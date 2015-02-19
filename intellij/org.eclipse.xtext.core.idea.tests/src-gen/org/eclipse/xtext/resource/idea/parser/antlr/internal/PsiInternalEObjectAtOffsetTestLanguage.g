@@ -21,6 +21,8 @@ package org.eclipse.xtext.resource.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -90,11 +93,12 @@ entryRuleAbstractBar:
 	ruleAbstractBar
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractBar
-ruleAbstractBar:
+ruleAbstractBar@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -167,11 +171,12 @@ entryRuleBar:
 	ruleBar
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Bar
-ruleBar:
+ruleBar@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -231,11 +236,12 @@ entryRuleFoo:
 	ruleFoo
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Foo
-ruleFoo:
+ruleFoo@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -264,11 +270,12 @@ entryRuleQualifiedNameWithOtherDelim:
 	ruleQualifiedNameWithOtherDelim
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameWithOtherDelim
-ruleQualifiedNameWithOtherDelim:
+ruleQualifiedNameWithOtherDelim@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithOtherDelim_QualifiedNameParserRuleCall_0ElementType());
@@ -302,11 +309,12 @@ entryRuleQualifiedName:
 	ruleQualifiedName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

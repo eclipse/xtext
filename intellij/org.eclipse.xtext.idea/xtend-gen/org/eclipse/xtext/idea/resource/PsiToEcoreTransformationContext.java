@@ -395,7 +395,12 @@ public class PsiToEcoreTransformationContext {
       if (_equals) {
         this.semanticModelBuilder.add(parent, feature, value, ruleName, node);
       } else {
-        this.semanticModelBuilder.set(parent, feature, value, ruleName, node);
+        boolean _equals_1 = Objects.equal(operator, "?=");
+        if (_equals_1) {
+          this.semanticModelBuilder.set(parent, feature, Boolean.valueOf(true), ruleName, node);
+        } else {
+          this.semanticModelBuilder.set(parent, feature, value, ruleName, node);
+        }
       }
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {

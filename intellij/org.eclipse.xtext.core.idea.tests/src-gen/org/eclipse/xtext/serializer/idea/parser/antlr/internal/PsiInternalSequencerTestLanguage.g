@@ -21,6 +21,8 @@ package org.eclipse.xtext.serializer.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -450,11 +453,12 @@ entryRuleSimpleGroup:
 	ruleSimpleGroup
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleGroup
-ruleSimpleGroup:
+ruleSimpleGroup@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -494,11 +498,12 @@ entryRuleSimpleAlternative:
 	ruleSimpleAlternative
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleAlternative
-ruleSimpleAlternative:
+ruleSimpleAlternative@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -559,11 +564,12 @@ entryRuleSimpleMultiplicities:
 	ruleSimpleMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleMultiplicities
-ruleSimpleMultiplicities:
+ruleSimpleMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -646,11 +652,12 @@ entryRuleGroupMultiplicities:
 	ruleGroupMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule GroupMultiplicities
-ruleGroupMultiplicities:
+ruleGroupMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -772,11 +779,12 @@ entryRuleAlternativeMultiplicities:
 	ruleAlternativeMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AlternativeMultiplicities
-ruleAlternativeMultiplicities:
+ruleAlternativeMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -910,11 +918,12 @@ entryRuleList1:
 	ruleList1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List1
-ruleList1:
+ruleList1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -963,11 +972,12 @@ entryRuleList2:
 	ruleList2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List2
-ruleList2:
+ruleList2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1024,11 +1034,12 @@ entryRuleAltList1:
 	ruleAltList1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AltList1
-ruleAltList1:
+ruleAltList1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1136,11 +1147,12 @@ entryRuleAltList2:
 	ruleAltList2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AltList2
-ruleAltList2:
+ruleAltList2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1236,11 +1248,12 @@ entryRuleSingleKeywords:
 	ruleSingleKeywords
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleKeywords
-ruleSingleKeywords:
+ruleSingleKeywords@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1287,11 +1300,12 @@ entryRuleSingleKeywordsOrID:
 	ruleSingleKeywordsOrID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleKeywordsOrID
-ruleSingleKeywordsOrID:
+ruleSingleKeywordsOrID@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1346,11 +1360,12 @@ entryRuleSingleTerminals:
 	ruleSingleTerminals
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleTerminals
-ruleSingleTerminals:
+ruleSingleTerminals@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1389,11 +1404,12 @@ entryRuleSingleEnum:
 	ruleSingleEnum
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleEnum
-ruleSingleEnum:
+ruleSingleEnum@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1440,11 +1456,12 @@ entryRuleSingleCrossReference:
 	ruleSingleCrossReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleCrossReference
-ruleSingleCrossReference:
+ruleSingleCrossReference@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1528,11 +1545,12 @@ entryRuleSingleContainmentReference:
 	ruleSingleContainmentReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleContainmentReference
-ruleSingleContainmentReference:
+ruleSingleContainmentReference@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1579,11 +1597,12 @@ entryRuleSingleContainmentReferenceChild1:
 	ruleSingleContainmentReferenceChild1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleContainmentReferenceChild1
-ruleSingleContainmentReferenceChild1:
+ruleSingleContainmentReferenceChild1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1603,11 +1622,12 @@ entryRuleSingleContainmentReferenceChild2:
 	ruleSingleContainmentReferenceChild2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleContainmentReferenceChild2
-ruleSingleContainmentReferenceChild2:
+ruleSingleContainmentReferenceChild2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1627,11 +1647,12 @@ entryRuleSingleContainmentReferenceChild3:
 	ruleSingleContainmentReferenceChild3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleContainmentReferenceChild3
-ruleSingleContainmentReferenceChild3:
+ruleSingleContainmentReferenceChild3@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1651,11 +1672,12 @@ entryRuleMultiKeywords:
 	ruleMultiKeywords
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiKeywords
-ruleMultiKeywords:
+ruleMultiKeywords@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1702,11 +1724,12 @@ entryRuleMultiKeywordsOrID:
 	ruleMultiKeywordsOrID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiKeywordsOrID
-ruleMultiKeywordsOrID:
+ruleMultiKeywordsOrID@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1761,11 +1784,12 @@ entryRuleMultiTerminals:
 	ruleMultiTerminals
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiTerminals
-ruleMultiTerminals:
+ruleMultiTerminals@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1804,11 +1828,12 @@ entryRuleDependentAlternative1:
 	ruleDependentAlternative1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DependentAlternative1
-ruleDependentAlternative1:
+ruleDependentAlternative1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1864,11 +1889,12 @@ entryRuleDependentAlternative2:
 	ruleDependentAlternative2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DependentAlternative2
-ruleDependentAlternative2:
+ruleDependentAlternative2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1937,11 +1963,12 @@ entryRuleOptional:
 	ruleOptional
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Optional
-ruleOptional:
+ruleOptional@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1994,11 +2021,12 @@ entryRuleFloat:
 	ruleFloat
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Float
-ruleFloat:
+ruleFloat@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2029,11 +2057,12 @@ entryRuleUnorderedAlternative:
 	ruleUnorderedAlternative
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedAlternative
-ruleUnorderedAlternative:
+ruleUnorderedAlternative@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2106,11 +2135,12 @@ entryRuleUnorderedAlternativeVal:
 	ruleUnorderedAlternativeVal
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedAlternativeVal
-ruleUnorderedAlternativeVal:
+ruleUnorderedAlternativeVal@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2139,11 +2169,12 @@ entryRuleUnorderedAlternativeValDelegate:
 	ruleUnorderedAlternativeValDelegate
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedAlternativeValDelegate
-ruleUnorderedAlternativeValDelegate:
+ruleUnorderedAlternativeValDelegate@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getUnorderedAlternativeValDelegate_UnorderedAlternativeVal2ParserRuleCallElementType());
 	}
@@ -2159,11 +2190,12 @@ entryRuleUnorderedAlternativeVal2:
 	ruleUnorderedAlternativeVal2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedAlternativeVal2
-ruleUnorderedAlternativeVal2:
+ruleUnorderedAlternativeVal2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2192,11 +2224,12 @@ entryRuleUnorderedGroup:
 	ruleUnorderedGroup
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroup
-ruleUnorderedGroup:
+ruleUnorderedGroup@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2309,11 +2342,12 @@ entryRuleUnorderedGroupVal:
 	ruleUnorderedGroupVal
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroupVal
-ruleUnorderedGroupVal:
+ruleUnorderedGroupVal@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2342,11 +2376,12 @@ entryRuleUnorderedGroupValDelegate:
 	ruleUnorderedGroupValDelegate
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroupValDelegate
-ruleUnorderedGroupValDelegate:
+ruleUnorderedGroupValDelegate@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getUnorderedGroupValDelegate_UnorderedGroupVal2ParserRuleCallElementType());
 	}
@@ -2362,11 +2397,12 @@ entryRuleUnorderedGroupVal2:
 	ruleUnorderedGroupVal2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroupVal2
-ruleUnorderedGroupVal2:
+ruleUnorderedGroupVal2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2395,11 +2431,12 @@ entryRuleUnorderedGroupOptional:
 	ruleUnorderedGroupOptional
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroupOptional
-ruleUnorderedGroupOptional:
+ruleUnorderedGroupOptional@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2524,11 +2561,12 @@ entryRuleUnorderedGroupBoolean:
 	ruleUnorderedGroupBoolean
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnorderedGroupBoolean
-ruleUnorderedGroupBoolean:
+ruleUnorderedGroupBoolean@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2626,11 +2664,12 @@ entryRuleComplex1:
 	ruleComplex1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Complex1
-ruleComplex1:
+ruleComplex1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2779,11 +2818,12 @@ entryRuleOptionalDouble:
 	ruleOptionalDouble
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OptionalDouble
-ruleOptionalDouble:
+ruleOptionalDouble@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2836,11 +2876,12 @@ entryRuleDOUBLE:
 	ruleDOUBLE
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DOUBLE
-ruleDOUBLE:
+ruleDOUBLE@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2874,11 +2915,12 @@ entryRuleNullValueGenerated:
 	ruleNullValueGenerated
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NullValueGenerated
-ruleNullValueGenerated:
+ruleNullValueGenerated@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2907,11 +2949,12 @@ entryRuleNullValueInterpreted:
 	ruleNullValueInterpreted
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NullValueInterpreted
-ruleNullValueInterpreted:
+ruleNullValueInterpreted@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2951,11 +2994,12 @@ entryRuleNULL_STRING:
 	ruleNULL_STRING
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NULL_STRING
-ruleNULL_STRING:
+ruleNULL_STRING@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -2971,11 +3015,12 @@ entryRuleNullCrossRefGenerated:
 	ruleNullCrossRefGenerated
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NullCrossRefGenerated
-ruleNullCrossRefGenerated:
+ruleNullCrossRefGenerated@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -3004,11 +3049,12 @@ entryRuleNullCrossRefInterpreted:
 	ruleNullCrossRefInterpreted
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NullCrossRefInterpreted
-ruleNullCrossRefInterpreted:
+ruleNullCrossRefInterpreted@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

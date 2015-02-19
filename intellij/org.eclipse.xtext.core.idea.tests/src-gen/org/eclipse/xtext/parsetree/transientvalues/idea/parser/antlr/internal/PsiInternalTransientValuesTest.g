@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -99,11 +102,12 @@ entryRuleTestRequired:
 	ruleTestRequired
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestRequired
-ruleTestRequired:
+ruleTestRequired@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -149,11 +153,12 @@ entryRuleTestOptional:
 	ruleTestOptional
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestOptional
-ruleTestOptional:
+ruleTestOptional@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -208,11 +213,12 @@ entryRuleTestList:
 	ruleTestList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TestList
-ruleTestList:
+ruleTestList@init {
+}
+@after {
+}:
 	(
 		(
 			{

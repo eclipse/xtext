@@ -21,6 +21,8 @@ package org.eclipse.xtext.formatting2.internal.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRoot:
 	ruleRoot
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Root
-ruleRoot:
+ruleRoot@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_IDListParserRuleCall_0ElementType());
@@ -82,11 +85,12 @@ entryRuleIDList:
 	ruleIDList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule IDList
-ruleIDList:
+ruleIDList@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -121,11 +125,12 @@ entryRuleKWList:
 	ruleKWList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule KWList
-ruleKWList:
+ruleKWList@init {
+}
+@after {
+}:
 	(
 		(
 			{

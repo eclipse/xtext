@@ -21,6 +21,8 @@ package org.eclipse.xtext.valueconverter.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.valueconverter.idea.lang.Bug250313ElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -357,11 +360,12 @@ entryRuleDatatype:
 	ruleDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype
-ruleDatatype:
+ruleDatatype@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -393,11 +397,12 @@ entryRuleNestedDatatype:
 	ruleNestedDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedDatatype
-ruleNestedDatatype:
+ruleNestedDatatype@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -431,11 +436,12 @@ entryRuleChild:
 	ruleChild
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Child
-ruleChild:
+ruleChild@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType());
@@ -461,11 +467,12 @@ entryRuleChild1:
 	ruleChild1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Child1
-ruleChild1:
+ruleChild1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -485,11 +492,12 @@ entryRuleChild2:
 	ruleChild2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Child2
-ruleChild2:
+ruleChild2@init {
+}
+@after {
+}:
 	(
 		(
 			{

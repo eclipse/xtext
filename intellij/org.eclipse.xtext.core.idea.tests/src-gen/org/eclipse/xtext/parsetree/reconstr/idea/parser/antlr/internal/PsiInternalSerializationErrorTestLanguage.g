@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -90,11 +93,12 @@ entryRuleParenthesis:
 	ruleParenthesis
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parenthesis
-ruleParenthesis:
+ruleParenthesis@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -126,11 +130,12 @@ entryRuleTest:
 	ruleTest
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Test
-ruleTest:
+ruleTest@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getTest_TwoRequiredParserRuleCall_0ElementType());
@@ -164,11 +169,12 @@ entryRuleTwoRequired:
 	ruleTwoRequired
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoRequired
-ruleTwoRequired:
+ruleTwoRequired@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -208,11 +214,12 @@ entryRuleTwoOptions:
 	ruleTwoOptions
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoOptions
-ruleTwoOptions:
+ruleTwoOptions@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -273,11 +280,12 @@ entryRuleIndent:
 	ruleIndent
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Indent
-ruleIndent:
+ruleIndent@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

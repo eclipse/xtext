@@ -28,7 +28,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 @Singleton
-class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
+class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 	
 	protected override getGrammarFileName(Grammar it) {
 		getGrammarFileName('')
@@ -127,21 +127,13 @@ class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
 	
 	protected def String compileEntryRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		// Entry rule «entryRuleName»
-		«entryRuleName»«compileEntryInit(options)»:
+		«entryRuleName» returns «compileEntryReturns(options)»«compileEntryInit(options)»:
 			{ «newCompositeNode» }
 			iv_«ruleName»=«ruleName»
 			{ $current=$iv_«ruleName».current«IF datatypeRule».getText()«ENDIF»; }
 			EOF;
 		«compileEntryFinally(options)»
 	'''
-	
-	protected def compileEntryInit(ParserRule it, AntlrOptions options) '''
-		 returns «compileEntryReturns(options)»
-		«IF definesHiddenTokens || definesUnorderedGroups(options)»
-		@init {
-			«IF definesHiddenTokens»«compileInitHiddenTokens(options)»«ENDIF»
-			«IF definesUnorderedGroups(options)»«compileInitUnorderedGroups(options)»«ENDIF»
-		}«ENDIF»'''
 	
 	protected def compileEntryReturns(ParserRule it, AntlrOptions options) {
 		switch it {
@@ -153,25 +145,18 @@ class AntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
 				throw new IllegalStateException("Unexpected rule: " + it)
 		}
 	}
-		
-	protected def compileInitHiddenTokens(ParserRule it, AntlrOptions options) '''
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOR hidden:hiddenTokens SEPARATOR ', '»"«hidden.ruleName»"«ENDFOR»);
-	'''
-	
-	protected def compileEntryFinally(ParserRule it, AntlrOptions options) '''
-		«IF definesHiddenTokens || definesUnorderedGroups(options)»
-		finally {
-			«IF definesHiddenTokens»myHiddenTokenState.restore();«ENDIF»
-			«compileRestoreUnorderedGroups(options)»
-		}«ENDIF»'''
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
 		 returns «compileReturns(options)»
 		@init {
 			enterRule();
+			«compileInitHiddenTokens(options)»
+			«compileInitUnorderedGroups(options)»
 		}
 		@after {
 			leaveRule();
+			«compileRestoreHiddenTokens(options)»
+			«compileRestoreUnorderedGroups(options)»
 		}'''
 		
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {

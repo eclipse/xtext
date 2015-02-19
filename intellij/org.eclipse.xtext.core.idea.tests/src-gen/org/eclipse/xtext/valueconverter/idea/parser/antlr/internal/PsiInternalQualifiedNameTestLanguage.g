@@ -21,6 +21,8 @@ package org.eclipse.xtext.valueconverter.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -85,11 +88,12 @@ entryRuleQualifiedName:
 	ruleQualifiedName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

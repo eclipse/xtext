@@ -21,6 +21,8 @@ package org.eclipse.xtext.metamodelreferencing.tests.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MetamodelRefTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleFoo:
 	ruleFoo
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Foo
-ruleFoo:
+ruleFoo@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -89,11 +92,12 @@ entryRuleNameRef:
 	ruleNameRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NameRef
-ruleNameRef:
+ruleNameRef@init {
+}
+@after {
+}:
 	(
 		(
 			{

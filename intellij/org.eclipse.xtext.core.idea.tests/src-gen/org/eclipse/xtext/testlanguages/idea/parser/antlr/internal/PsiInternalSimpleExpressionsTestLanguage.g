@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.SimpleExpressionsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleSequence:
 	ruleSequence
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Sequence
-ruleSequence:
+ruleSequence@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getSequence_AdditionParserRuleCall_0ElementType());
@@ -93,11 +96,12 @@ entryRuleAddition:
 	ruleAddition
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Addition
-ruleAddition:
+ruleAddition@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition_MultiplicationParserRuleCall_0ElementType());
@@ -155,11 +159,12 @@ entryRuleMultiplication:
 	ruleMultiplication
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Multiplication
-ruleMultiplication:
+ruleMultiplication@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getMultiplication_TermParserRuleCall_0ElementType());
@@ -217,11 +222,12 @@ entryRuleTerm:
 	ruleTerm
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Term
-ruleTerm:
+ruleTerm@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -247,11 +253,12 @@ entryRuleAtom:
 	ruleAtom
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Atom
-ruleAtom:
+ruleAtom@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -271,11 +278,12 @@ entryRuleParens:
 	ruleParens
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Parens
-ruleParens:
+ruleParens@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

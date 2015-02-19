@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.datatyperules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleCompositeModel:
 	ruleCompositeModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CompositeModel
-ruleCompositeModel:
+ruleCompositeModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -189,11 +193,12 @@ entryRuleModelId:
 	ruleModelId
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ModelId
-ruleModelId:
+ruleModelId@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -225,11 +230,12 @@ entryRuleNestedModelId:
 	ruleNestedModelId
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedModelId
-ruleNestedModelId:
+ruleNestedModelId@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getNestedModelId_ModelIdParserRuleCall_0ElementType());
@@ -261,11 +267,12 @@ entryRuleFraction:
 	ruleFraction
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Fraction
-ruleFraction:
+ruleFraction@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -299,11 +306,12 @@ entryRuleVector:
 	ruleVector
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Vector
-ruleVector:
+ruleVector@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -342,11 +350,12 @@ entryRuleDots:
 	ruleDots
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Dots
-ruleDots:
+ruleDots@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -381,11 +390,12 @@ entryRuleDouble:
 	ruleDouble
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Double
-ruleDouble:
+ruleDouble@init {
+}
+@after {
+}:
 	(
 		(
 			{

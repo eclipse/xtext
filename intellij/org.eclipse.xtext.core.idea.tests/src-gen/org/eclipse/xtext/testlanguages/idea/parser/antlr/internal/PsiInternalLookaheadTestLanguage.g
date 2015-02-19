@@ -21,6 +21,8 @@ package org.eclipse.xtext.testlanguages.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.testlanguages.idea.lang.LookaheadTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleEntry:
 	ruleEntry
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Entry
-ruleEntry:
+ruleEntry@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleAlts:
 	ruleAlts
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Alts
-ruleAlts:
+ruleAlts@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getAlts_LookAhead0ParserRuleCall_0ElementType());
@@ -114,11 +118,12 @@ entryRuleLookAhead0:
 	ruleLookAhead0
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LookAhead0
-ruleLookAhead0:
+ruleLookAhead0@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -147,11 +152,12 @@ entryRuleLookAhead1:
 	ruleLookAhead1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LookAhead1
-ruleLookAhead1:
+ruleLookAhead1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -202,11 +208,12 @@ entryRuleLookAhead2:
 	ruleLookAhead2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LookAhead2
-ruleLookAhead2:
+ruleLookAhead2@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -249,11 +256,12 @@ entryRuleLookAhead3:
 	ruleLookAhead3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LookAhead3
-ruleLookAhead3:
+ruleLookAhead3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -300,11 +308,12 @@ entryRuleLookAhead4:
 	ruleLookAhead4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule LookAhead4
-ruleLookAhead4:
+ruleLookAhead4@init {
+}
+@after {
+}:
 	(
 		(
 			(

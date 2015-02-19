@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_DatatypeBug286557ParserRuleCall_0ElementType());
@@ -130,11 +133,12 @@ entryRuleDatatypeBug286557:
 	ruleDatatypeBug286557
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DatatypeBug286557
-ruleDatatypeBug286557:
+ruleDatatypeBug286557@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -190,11 +194,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -228,11 +233,12 @@ entryRuleEnumBug:
 	ruleEnumBug
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule EnumBug
-ruleEnumBug:
+ruleEnumBug@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -279,11 +285,12 @@ entryRuleCommentable:
 	ruleCommentable
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Commentable
-ruleCommentable:
+ruleCommentable@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -312,11 +319,12 @@ entryRuleCommentableItem:
 	ruleCommentableItem
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CommentableItem
-ruleCommentableItem:
+ruleCommentableItem@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -345,11 +353,12 @@ entryRuleValueList:
 	ruleValueList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValueList
-ruleValueList:
+ruleValueList@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -378,11 +387,12 @@ entryRuleRefList:
 	ruleRefList
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RefList
-ruleRefList:
+ruleRefList@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -429,11 +439,12 @@ entryRuleRefObj:
 	ruleRefObj
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RefObj
-ruleRefObj:
+ruleRefObj@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -453,11 +464,12 @@ entryRuleSingleRef:
 	ruleSingleRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SingleRef
-ruleSingleRef:
+ruleSingleRef@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -504,11 +516,12 @@ entryRuleAppendToFileEnd:
 	ruleAppendToFileEnd
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AppendToFileEnd
-ruleAppendToFileEnd:
+ruleAppendToFileEnd@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -537,11 +550,12 @@ entryRuleAppendToFileEndItem:
 	ruleAppendToFileEndItem
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AppendToFileEndItem
-ruleAppendToFileEndItem:
+ruleAppendToFileEndItem@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -577,11 +591,12 @@ entryRuleAction1:
 	ruleAction1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Action1
-ruleAction1:
+ruleAction1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -638,11 +653,12 @@ entryRuleAction1Sub1:
 	ruleAction1Sub1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Action1Sub1
-ruleAction1Sub1:
+ruleAction1Sub1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -666,11 +682,12 @@ entryRuleAction1Sub2:
 	ruleAction1Sub2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Action1Sub2
-ruleAction1Sub2:
+ruleAction1Sub2@init {
+}
+@after {
+}:
 	(
 		(
 			{

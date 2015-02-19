@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.assignments.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.assignments.idea.lang.Bug287184TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -106,11 +109,12 @@ entryRuleDetail:
 	ruleDetail
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Detail
-ruleDetail:
+ruleDetail@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -168,11 +172,12 @@ entryRuleAssociatedDetail:
 	ruleAssociatedDetail
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssociatedDetail
-ruleAssociatedDetail:
+ruleAssociatedDetail@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -208,11 +213,12 @@ entryRuleFQN:
 	ruleFQN
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FQN
-ruleFQN:
+ruleFQN@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

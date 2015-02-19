@@ -21,6 +21,8 @@ package org.eclipse.xtext.parsetree.unassignedtext.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_CaseInsensitiveKeywordRuleParserRuleCall_0ElementType());
@@ -106,11 +109,12 @@ entryRuleCaseInsensitiveKeywordRule:
 	ruleCaseInsensitiveKeywordRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CaseInsensitiveKeywordRule
-ruleCaseInsensitiveKeywordRule:
+ruleCaseInsensitiveKeywordRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -139,11 +143,12 @@ entryRulePluralRule:
 	rulePluralRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule PluralRule
-rulePluralRule:
+rulePluralRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -179,11 +184,12 @@ entryRuleMultiRule:
 	ruleMultiRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule MultiRule
-ruleMultiRule:
+ruleMultiRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -233,11 +239,12 @@ entryRuleDatatypeRule:
 	ruleDatatypeRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DatatypeRule
-ruleDatatypeRule:
+ruleDatatypeRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -273,11 +280,12 @@ entryRuleDatatype:
 	ruleDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype
-ruleDatatype:
+ruleDatatype@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -311,11 +319,12 @@ entryRuleDatatype2:
 	ruleDatatype2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype2
-ruleDatatype2:
+ruleDatatype2@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -331,11 +340,12 @@ entryRuleCommonTerminalsRule:
 	ruleCommonTerminalsRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CommonTerminalsRule
-ruleCommonTerminalsRule:
+ruleCommonTerminalsRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

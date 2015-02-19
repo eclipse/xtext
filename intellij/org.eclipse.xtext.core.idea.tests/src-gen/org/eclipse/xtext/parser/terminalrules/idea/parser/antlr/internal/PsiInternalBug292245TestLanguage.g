@@ -21,6 +21,8 @@ package org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug292245TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -47,16 +49,24 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		(
 			{
@@ -124,16 +134,24 @@ ruleModel:
 ;
 
 //Entry rule entryRuleError
-entryRuleError:
+entryRuleError@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getErrorElementType()); }
 	ruleError
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Error
-ruleError:
+ruleError@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -160,16 +178,24 @@ ruleError:
 ;
 
 //Entry rule entryRuleFix
-entryRuleFix:
+entryRuleFix@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getFixElementType()); }
 	ruleFix
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Fix
-ruleFix:
+ruleFix@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -203,16 +229,24 @@ ruleFix:
 ;
 
 //Entry rule entryRuleApostrophe
-entryRuleApostrophe:
+entryRuleApostrophe@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}:
 	{ markComposite(elementTypeProvider.getApostropheElementType()); }
 	ruleApostrophe
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Apostrophe
-ruleApostrophe:
+ruleApostrophe@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	{
 		markLeaf();
 	}
@@ -223,16 +257,24 @@ ruleApostrophe:
 ;
 
 //Entry rule entryRuleRehide
-entryRuleRehide:
+entryRuleRehide@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}:
 	{ markComposite(elementTypeProvider.getRehideElementType()); }
 	ruleRehide
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Rehide
-ruleRehide:
+ruleRehide@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -250,11 +292,12 @@ entryRuleGraphical:
 	ruleGraphical
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Graphical
-ruleGraphical:
+ruleGraphical@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

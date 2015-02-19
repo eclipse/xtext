@@ -1,11 +1,13 @@
 package org.eclipse.xtext.idea.generator.parser.antlr;
 
 import com.google.common.collect.Iterables;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
@@ -17,33 +19,148 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
-public class UnorderedGroupsAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
-  protected CharSequence compileInitUnorderedGroups(final ParserRule it, final AntlrOptions options) {
+public class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+  protected CharSequence compileEntryInit(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(");
-    _builder.newLine();
     {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
-      boolean _hasElements = false;
-      for(final UnorderedGroup group : _filter) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        _builder.append("grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(group);
-        _builder.append(_gaRuleElementAccessor, "");
+      boolean _or = false;
+      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
+      if (_isDefinesHiddenTokens) {
+        _or = true;
+      } else {
+        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
+        _or = _definesUnorderedGroups;
+      }
+      if (_or) {
+        _builder.append("@init {");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _compileInitHiddenTokens = this.compileInitHiddenTokens(it, options);
+        _builder.append(_compileInitHiddenTokens, "\t");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
+        _builder.append(_compileInitUnorderedGroups, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
       }
     }
-    _builder.append(");");
-    _builder.newLine();
     return _builder;
   }
   
-  protected CharSequence compileRestoreUnorderedGroups(final ParserRule it, final AntlrOptions options) {
+  protected CharSequence _compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
+    return "";
+  }
+  
+  protected CharSequence _compileInitHiddenTokens(final ParserRule it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
+      if (_isDefinesHiddenTokens) {
+        _builder.append("HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(");
+        {
+          EList<AbstractRule> _hiddenTokens = it.getHiddenTokens();
+          boolean _hasElements = false;
+          for(final AbstractRule hidden : _hiddenTokens) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            _builder.append("\"");
+            String _ruleName = this._grammarAccessExtensions.ruleName(hidden);
+            _builder.append(_ruleName, "");
+            _builder.append("\"");
+          }
+        }
+        _builder.append(");");
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence _compileInitUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
+    return "";
+  }
+  
+  protected CharSequence _compileInitUnorderedGroups(final ParserRule it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
+      if (_definesUnorderedGroups) {
+        _builder.newLineIfNotEmpty();
+        _builder.append("UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(");
+        _builder.newLine();
+        {
+          List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
+          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
+          boolean _hasElements = false;
+          for(final UnorderedGroup group : _filter) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            _builder.append("grammarAccess.");
+            String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(group);
+            _builder.append(_gaRuleElementAccessor, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append(");");
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence compileEntryFinally(final ParserRule it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _or = false;
+      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
+      if (_isDefinesHiddenTokens) {
+        _or = true;
+      } else {
+        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
+        _or = _definesUnorderedGroups;
+      }
+      if (_or) {
+        _builder.append("finally {");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _compileRestoreHiddenTokens = this.compileRestoreHiddenTokens(it, options);
+        _builder.append(_compileRestoreHiddenTokens, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
+        _builder.append(_compileRestoreUnorderedGroups, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence _compileRestoreHiddenTokens(final AbstractRule it, final AntlrOptions options) {
+    return "";
+  }
+  
+  protected CharSequence _compileRestoreHiddenTokens(final ParserRule it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
+      if (_isDefinesHiddenTokens) {
+        _builder.append("myHiddenTokenState.restore();");
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence _compileRestoreUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
+    return "";
+  }
+  
+  protected CharSequence _compileRestoreUnorderedGroups(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
@@ -348,5 +465,49 @@ public class UnorderedGroupsAwareAntlrGrammarGenerator extends DefaultAntlrGramm
       _xifexpression = super._ebnf2(it, options, supportActions);
     }
     return _xifexpression;
+  }
+  
+  protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
+    if (it instanceof ParserRule) {
+      return _compileInitHiddenTokens((ParserRule)it, options);
+    } else if (it != null) {
+      return _compileInitHiddenTokens(it, options);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, options).toString());
+    }
+  }
+  
+  protected CharSequence compileInitUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
+    if (it instanceof ParserRule) {
+      return _compileInitUnorderedGroups((ParserRule)it, options);
+    } else if (it != null) {
+      return _compileInitUnorderedGroups(it, options);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, options).toString());
+    }
+  }
+  
+  protected CharSequence compileRestoreHiddenTokens(final AbstractRule it, final AntlrOptions options) {
+    if (it instanceof ParserRule) {
+      return _compileRestoreHiddenTokens((ParserRule)it, options);
+    } else if (it != null) {
+      return _compileRestoreHiddenTokens(it, options);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, options).toString());
+    }
+  }
+  
+  protected CharSequence compileRestoreUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
+    if (it instanceof ParserRule) {
+      return _compileRestoreUnorderedGroups((ParserRule)it, options);
+    } else if (it != null) {
+      return _compileRestoreUnorderedGroups(it, options);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, options).toString());
+    }
   }
 }

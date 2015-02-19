@@ -21,6 +21,8 @@ package org.eclipse.xtext.serializer.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.serializer.services.ContextFinderTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -357,11 +360,12 @@ entryRuleModel2:
 	ruleModel2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model2
-ruleModel2:
+ruleModel2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -385,11 +389,12 @@ entryRuleAttributeExclusionTest1:
 	ruleAttributeExclusionTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AttributeExclusionTest1
-ruleAttributeExclusionTest1:
+ruleAttributeExclusionTest1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -418,11 +423,12 @@ entryRuleAttributeExclusionTest2:
 	ruleAttributeExclusionTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AttributeExclusionTest2
-ruleAttributeExclusionTest2:
+ruleAttributeExclusionTest2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -451,11 +457,12 @@ entryRuleNestedTypeTest1:
 	ruleNestedTypeTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeTest1
-ruleNestedTypeTest1:
+ruleNestedTypeTest1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -475,11 +482,12 @@ entryRuleNestedTypeTest2:
 	ruleNestedTypeTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeTest2
-ruleNestedTypeTest2:
+ruleNestedTypeTest2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -499,11 +507,12 @@ entryRuleNestedTypeChild1:
 	ruleNestedTypeChild1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeChild1
-ruleNestedTypeChild1:
+ruleNestedTypeChild1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -532,11 +541,12 @@ entryRuleNestedTypeChild2:
 	ruleNestedTypeChild2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeChild2
-ruleNestedTypeChild2:
+ruleNestedTypeChild2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -565,11 +575,12 @@ entryRuleNestedTypeRecursiveTest1:
 	ruleNestedTypeRecursiveTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeRecursiveTest1
-ruleNestedTypeRecursiveTest1:
+ruleNestedTypeRecursiveTest1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -608,11 +619,12 @@ entryRuleNestedTypeRecursiveTest2:
 	ruleNestedTypeRecursiveTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NestedTypeRecursiveTest2
-ruleNestedTypeRecursiveTest2:
+ruleNestedTypeRecursiveTest2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -651,11 +663,12 @@ entryRuleParentRefTest1:
 	ruleParentRefTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParentRefTest1
-ruleParentRefTest1:
+ruleParentRefTest1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -684,11 +697,12 @@ entryRuleParentRefTest2:
 	ruleParentRefTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParentRefTest2
-ruleParentRefTest2:
+ruleParentRefTest2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -717,11 +731,12 @@ entryRuleParentRefTestChild1:
 	ruleParentRefTestChild1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParentRefTestChild1
-ruleParentRefTestChild1:
+ruleParentRefTestChild1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -756,11 +771,12 @@ entryRuleParentRefTestChild2:
 	ruleParentRefTestChild2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ParentRefTestChild2
-ruleParentRefTestChild2:
+ruleParentRefTestChild2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -795,11 +811,12 @@ entryRuleQuantityExclusionTest1:
 	ruleQuantityExclusionTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QuantityExclusionTest1
-ruleQuantityExclusionTest1:
+ruleQuantityExclusionTest1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -839,11 +856,12 @@ entryRuleQuantityExclusionTest2:
 	ruleQuantityExclusionTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QuantityExclusionTest2
-ruleQuantityExclusionTest2:
+ruleQuantityExclusionTest2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -883,11 +901,12 @@ entryRuleValueExclusionTest1:
 	ruleValueExclusionTest1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValueExclusionTest1
-ruleValueExclusionTest1:
+ruleValueExclusionTest1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -907,11 +926,12 @@ entryRuleValueExclusionTest2:
 	ruleValueExclusionTest2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValueExclusionTest2
-ruleValueExclusionTest2:
+ruleValueExclusionTest2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -931,11 +951,12 @@ entryRuleNodeExclusion1:
 	ruleNodeExclusion1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NodeExclusion1
-ruleNodeExclusion1:
+ruleNodeExclusion1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -955,11 +976,12 @@ entryRuleNodeExclusion2:
 	ruleNodeExclusion2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NodeExclusion2
-ruleNodeExclusion2:
+ruleNodeExclusion2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -979,11 +1001,12 @@ entryRuleNodeExclusion1List:
 	ruleNodeExclusion1List
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NodeExclusion1List
-ruleNodeExclusion1List:
+ruleNodeExclusion1List@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1003,11 +1026,12 @@ entryRuleNodeExclusion2List:
 	ruleNodeExclusion2List
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule NodeExclusion2List
-ruleNodeExclusion2List:
+ruleNodeExclusion2List@init {
+}
+@after {
+}:
 	(
 		(
 			{

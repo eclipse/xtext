@@ -21,6 +21,8 @@ package org.eclipse.xtext.idea.sdomain.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.idea.sdomain.services.SDomainGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleFile:
 	ruleFile
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule File
-ruleFile:
+ruleFile@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -76,11 +79,12 @@ entryRuleImport:
 	ruleImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Import
-ruleImport:
+ruleImport@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -109,11 +113,12 @@ entryRuleQualifiedNameWithWildCard:
 	ruleQualifiedNameWithWildCard
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameWithWildCard
-ruleQualifiedNameWithWildCard:
+ruleQualifiedNameWithWildCard@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
@@ -140,11 +145,12 @@ entryRuleQualifiedName:
 	ruleQualifiedName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -178,11 +184,12 @@ entryRuleNamespace:
 	ruleNamespace
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Namespace
-ruleNamespace:
+ruleNamespace@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -229,11 +236,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType());
@@ -267,11 +275,12 @@ entryRuleType:
 	ruleType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Type
-ruleType:
+ruleType@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getType_EntityParserRuleCall_0ElementType());
@@ -297,11 +306,12 @@ entryRuleEntity:
 	ruleEntity
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Entity
-ruleEntity:
+ruleEntity@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -355,11 +365,12 @@ entryRuleDatatype:
 	ruleDatatype
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Datatype
-ruleDatatype:
+ruleDatatype@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -388,11 +399,12 @@ entryRuleProperty:
 	ruleProperty
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Property
-ruleProperty:
+ruleProperty@init {
+}
+@after {
+}:
 	(
 		(
 			(

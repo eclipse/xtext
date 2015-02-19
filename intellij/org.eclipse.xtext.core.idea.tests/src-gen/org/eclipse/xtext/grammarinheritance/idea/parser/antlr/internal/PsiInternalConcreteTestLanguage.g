@@ -21,6 +21,8 @@ package org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleRootRule:
 	ruleRootRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule RootRule
-ruleRootRule:
+ruleRootRule@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getRootRule_ConcreteParserRuleParserRuleCall_0ElementType());
@@ -98,11 +101,12 @@ entryRuleConcreteParserRule:
 	ruleConcreteParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ConcreteParserRule
-ruleConcreteParserRule:
+ruleConcreteParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -149,11 +153,12 @@ entryRuleOverridableParserRule:
 	ruleOverridableParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OverridableParserRule
-ruleOverridableParserRule:
+ruleOverridableParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -182,11 +187,12 @@ entryRuleCallOverridenParserRule:
 	ruleCallOverridenParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallOverridenParserRule
-ruleCallOverridenParserRule:
+ruleCallOverridenParserRule@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -206,11 +212,12 @@ entryRuleOverridableParserRule2:
 	ruleOverridableParserRule2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OverridableParserRule2
-ruleOverridableParserRule2:
+ruleOverridableParserRule2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -257,11 +264,12 @@ entryRuleExtendableParserRule:
 	ruleExtendableParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule:
+ruleExtendableParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getExtendableParserRule_Subrule1ParserRuleCall_0ElementType());
@@ -295,11 +303,12 @@ entryRuleSubrule1:
 	ruleSubrule1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Subrule1
-ruleSubrule1:
+ruleSubrule1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -339,11 +348,12 @@ entryRuleSubrule2:
 	ruleSubrule2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Subrule2
-ruleSubrule2:
+ruleSubrule2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -383,11 +393,12 @@ entryRuleSubrule3:
 	ruleSubrule3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Subrule3
-ruleSubrule3:
+ruleSubrule3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -427,11 +438,12 @@ entryRuleCallExtendedParserRule:
 	ruleCallExtendedParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule CallExtendedParserRule
-ruleCallExtendedParserRule:
+ruleCallExtendedParserRule@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -451,11 +463,12 @@ entryRuleInheritedParserRule:
 	ruleInheritedParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule InheritedParserRule
-ruleInheritedParserRule:
+ruleInheritedParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -484,11 +497,12 @@ entryRuleAbstractCallOverridenParserRule:
 	ruleAbstractCallOverridenParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractCallOverridenParserRule
-ruleAbstractCallOverridenParserRule:
+ruleAbstractCallOverridenParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -517,11 +531,12 @@ entryRuleAbstractCallExtendedParserRule:
 	ruleAbstractCallExtendedParserRule
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AbstractCallExtendedParserRule
-ruleAbstractCallExtendedParserRule:
+ruleAbstractCallExtendedParserRule@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

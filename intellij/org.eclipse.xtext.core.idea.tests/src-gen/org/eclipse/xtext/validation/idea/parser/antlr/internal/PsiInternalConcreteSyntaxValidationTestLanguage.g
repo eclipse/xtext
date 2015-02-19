@@ -21,6 +21,8 @@ package org.eclipse.xtext.validation.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -402,11 +405,12 @@ entryRuleSimpleGroup:
 	ruleSimpleGroup
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleGroup
-ruleSimpleGroup:
+ruleSimpleGroup@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -446,11 +450,12 @@ entryRuleSimpleAlternative:
 	ruleSimpleAlternative
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleAlternative
-ruleSimpleAlternative:
+ruleSimpleAlternative@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -511,11 +516,12 @@ entryRuleSimpleMultiplicities:
 	ruleSimpleMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleMultiplicities
-ruleSimpleMultiplicities:
+ruleSimpleMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -598,11 +604,12 @@ entryRuleGroupMultiplicities:
 	ruleGroupMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule GroupMultiplicities
-ruleGroupMultiplicities:
+ruleGroupMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -724,11 +731,12 @@ entryRuleAlternativeMultiplicities:
 	ruleAlternativeMultiplicities
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AlternativeMultiplicities
-ruleAlternativeMultiplicities:
+ruleAlternativeMultiplicities@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -862,11 +870,12 @@ entryRuleAssignedAction:
 	ruleAssignedAction
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssignedAction
-ruleAssignedAction:
+ruleAssignedAction@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -914,11 +923,12 @@ entryRuleAssignedActionSecond:
 	ruleAssignedActionSecond
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AssignedActionSecond
-ruleAssignedActionSecond:
+ruleAssignedActionSecond@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -965,11 +975,12 @@ entryRuleUnassignedAction1:
 	ruleUnassignedAction1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedAction1
-ruleUnassignedAction1:
+ruleUnassignedAction1@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1015,11 +1026,12 @@ entryRuleUnassignedAction2:
 	ruleUnassignedAction2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedAction2
-ruleUnassignedAction2:
+ruleUnassignedAction2@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1065,11 +1077,12 @@ entryRuleUnassignedAction3:
 	ruleUnassignedAction3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedAction3
-ruleUnassignedAction3:
+ruleUnassignedAction3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1142,11 +1155,12 @@ entryRuleUnassignedRuleCall1:
 	ruleUnassignedRuleCall1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedRuleCall1
-ruleUnassignedRuleCall1:
+ruleUnassignedRuleCall1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1182,11 +1196,12 @@ entryRuleUnassignedRuleCall1Sub:
 	ruleUnassignedRuleCall1Sub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedRuleCall1Sub
-ruleUnassignedRuleCall1Sub:
+ruleUnassignedRuleCall1Sub@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1206,11 +1221,12 @@ entryRuleUnassignedRuleCall2:
 	ruleUnassignedRuleCall2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedRuleCall2
-ruleUnassignedRuleCall2:
+ruleUnassignedRuleCall2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1246,11 +1262,12 @@ entryRuleUnassignedRuleCall2Sub:
 	ruleUnassignedRuleCall2Sub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule UnassignedRuleCall2Sub
-ruleUnassignedRuleCall2Sub:
+ruleUnassignedRuleCall2Sub@init {
+}
+@after {
+}:
 	(
 		{
 			precedeComposite(elementTypeProvider.getUnassignedRuleCall2Sub_UnassignedRuleCall2SubActionActionElementType());
@@ -1265,11 +1282,12 @@ entryRuleCombination1:
 	ruleCombination1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Combination1
-ruleCombination1:
+ruleCombination1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1352,11 +1370,12 @@ entryRuleCombination2:
 	ruleCombination2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Combination2
-ruleCombination2:
+ruleCombination2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1432,11 +1451,12 @@ entryRuleCombination3:
 	ruleCombination3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Combination3
-ruleCombination3:
+ruleCombination3@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1491,11 +1511,12 @@ entryRuleCombination4:
 	ruleCombination4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Combination4
-ruleCombination4:
+ruleCombination4@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1555,11 +1576,12 @@ entryRuleList1:
 	ruleList1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List1
-ruleList1:
+ruleList1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1608,11 +1630,12 @@ entryRuleList2:
 	ruleList2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List2
-ruleList2:
+ruleList2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1663,11 +1686,12 @@ entryRuleList3:
 	ruleList3
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List3
-ruleList3:
+ruleList3@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -1741,11 +1765,12 @@ entryRuleList4:
 	ruleList4
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List4
-ruleList4:
+ruleList4@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1812,11 +1837,12 @@ entryRuleList5:
 	ruleList5
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule List5
-ruleList5:
+ruleList5@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1899,11 +1925,12 @@ entryRuleAltList1:
 	ruleAltList1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AltList1
-ruleAltList1:
+ruleAltList1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2011,11 +2038,12 @@ entryRuleAltList2:
 	ruleAltList2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule AltList2
-ruleAltList2:
+ruleAltList2@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2111,11 +2139,12 @@ entryRuleTransientObject:
 	ruleTransientObject
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TransientObject
-ruleTransientObject:
+ruleTransientObject@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2157,11 +2186,12 @@ entryRuleTransientObjectSub:
 	ruleTransientObjectSub
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TransientObjectSub
-ruleTransientObjectSub:
+ruleTransientObjectSub@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -2194,11 +2224,12 @@ entryRuleTransientSerializeables1:
 	ruleTransientSerializeables1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TransientSerializeables1
-ruleTransientSerializeables1:
+ruleTransientSerializeables1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2264,11 +2295,12 @@ entryRuleStaticSimplification:
 	ruleStaticSimplification
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule StaticSimplification
-ruleStaticSimplification:
+ruleStaticSimplification@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2364,11 +2396,12 @@ entryRuleTwoVersion:
 	ruleTwoVersion
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoVersion
-ruleTwoVersion:
+ruleTwoVersion@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2403,11 +2436,12 @@ entryRuleTwoVersionNo1:
 	ruleTwoVersionNo1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoVersionNo1
-ruleTwoVersionNo1:
+ruleTwoVersionNo1@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -2489,11 +2523,12 @@ entryRuleTwoVersionNo2:
 	ruleTwoVersionNo2
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule TwoVersionNo2
-ruleTwoVersionNo2:
+ruleTwoVersionNo2@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -2622,11 +2657,12 @@ entryRuleHeuristic1:
 	ruleHeuristic1
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Heuristic1
-ruleHeuristic1:
+ruleHeuristic1@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();

@@ -21,6 +21,8 @@ package org.eclipse.xtext.xbase.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
@@ -52,11 +54,12 @@ entryRuleXExpression:
 	ruleXExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XExpression
-ruleXExpression:
+ruleXExpression@init {
+}
+@after {
+}:
 	{
 		markComposite(elementTypeProvider.getXExpression_XAssignmentParserRuleCallElementType());
 	}
@@ -72,11 +75,12 @@ entryRuleXAssignment:
 	ruleXAssignment
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XAssignment
-ruleXAssignment:
+ruleXAssignment@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -178,11 +182,12 @@ entryRuleOpSingleAssign:
 	ruleOpSingleAssign
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpSingleAssign
-ruleOpSingleAssign:
+ruleOpSingleAssign@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -198,11 +203,12 @@ entryRuleOpMultiAssign:
 	ruleOpMultiAssign
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpMultiAssign
-ruleOpMultiAssign:
+ruleOpMultiAssign@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -302,11 +308,12 @@ entryRuleXOrExpression:
 	ruleXOrExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XOrExpression
-ruleXOrExpression:
+ruleXOrExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXOrExpression_XAndExpressionParserRuleCall_0ElementType());
@@ -368,11 +375,12 @@ entryRuleOpOr:
 	ruleOpOr
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpOr
-ruleOpOr:
+ruleOpOr@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -388,11 +396,12 @@ entryRuleXAndExpression:
 	ruleXAndExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XAndExpression
-ruleXAndExpression:
+ruleXAndExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXAndExpression_XEqualityExpressionParserRuleCall_0ElementType());
@@ -454,11 +463,12 @@ entryRuleOpAnd:
 	ruleOpAnd
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpAnd
-ruleOpAnd:
+ruleOpAnd@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -474,11 +484,12 @@ entryRuleXEqualityExpression:
 	ruleXEqualityExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XEqualityExpression
-ruleXEqualityExpression:
+ruleXEqualityExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXEqualityExpression_XRelationalExpressionParserRuleCall_0ElementType());
@@ -540,11 +551,12 @@ entryRuleOpEquality:
 	ruleOpEquality
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpEquality
-ruleOpEquality:
+ruleOpEquality@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -586,11 +598,12 @@ entryRuleXRelationalExpression:
 	ruleXRelationalExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XRelationalExpression
-ruleXRelationalExpression:
+ruleXRelationalExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXRelationalExpression_XOtherOperatorExpressionParserRuleCall_0ElementType());
@@ -691,11 +704,12 @@ entryRuleOpCompare:
 	ruleOpCompare
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpCompare
-ruleOpCompare:
+ruleOpCompare@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -746,11 +760,12 @@ entryRuleXOtherOperatorExpression:
 	ruleXOtherOperatorExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XOtherOperatorExpression
-ruleXOtherOperatorExpression:
+ruleXOtherOperatorExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0ElementType());
@@ -812,11 +827,12 @@ entryRuleOpOther:
 	ruleOpOther
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpOther
-ruleOpOther:
+ruleOpOther@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -985,11 +1001,12 @@ entryRuleXAdditiveExpression:
 	ruleXAdditiveExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XAdditiveExpression
-ruleXAdditiveExpression:
+ruleXAdditiveExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0ElementType());
@@ -1051,11 +1068,12 @@ entryRuleOpAdd:
 	ruleOpAdd
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpAdd
-ruleOpAdd:
+ruleOpAdd@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1081,11 +1099,12 @@ entryRuleXMultiplicativeExpression:
 	ruleXMultiplicativeExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XMultiplicativeExpression
-ruleXMultiplicativeExpression:
+ruleXMultiplicativeExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXMultiplicativeExpression_XUnaryOperationParserRuleCall_0ElementType());
@@ -1147,11 +1166,12 @@ entryRuleOpMulti:
 	ruleOpMulti
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpMulti
-ruleOpMulti:
+ruleOpMulti@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1193,11 +1213,12 @@ entryRuleXUnaryOperation:
 	ruleXUnaryOperation
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XUnaryOperation
-ruleXUnaryOperation:
+ruleXUnaryOperation@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -1246,11 +1267,12 @@ entryRuleOpUnary:
 	ruleOpUnary
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpUnary
-ruleOpUnary:
+ruleOpUnary@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1284,11 +1306,12 @@ entryRuleXCastedExpression:
 	ruleXCastedExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XCastedExpression
-ruleXCastedExpression:
+ruleXCastedExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXCastedExpression_XPostfixOperationParserRuleCall_0ElementType());
@@ -1342,11 +1365,12 @@ entryRuleXPostfixOperation:
 	ruleXPostfixOperation
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XPostfixOperation
-ruleXPostfixOperation:
+ruleXPostfixOperation@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXPostfixOperation_XMemberFeatureCallParserRuleCall_0ElementType());
@@ -1395,11 +1419,12 @@ entryRuleOpPostfix:
 	ruleOpPostfix
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule OpPostfix
-ruleOpPostfix:
+ruleOpPostfix@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -1425,11 +1450,12 @@ entryRuleXMemberFeatureCall:
 	ruleXMemberFeatureCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XMemberFeatureCall
-ruleXMemberFeatureCall:
+ruleXMemberFeatureCall@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXMemberFeatureCall_XPrimaryExpressionParserRuleCall_0ElementType());
@@ -1768,11 +1794,12 @@ entryRuleXPrimaryExpression:
 	ruleXPrimaryExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XPrimaryExpression
-ruleXPrimaryExpression:
+ruleXPrimaryExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXPrimaryExpression_XConstructorCallParserRuleCall_0ElementType());
@@ -1926,11 +1953,12 @@ entryRuleXLiteral:
 	ruleXLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XLiteral
-ruleXLiteral:
+ruleXLiteral@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXLiteral_XCollectionLiteralParserRuleCall_0ElementType());
@@ -2004,11 +2032,12 @@ entryRuleXCollectionLiteral:
 	ruleXCollectionLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XCollectionLiteral
-ruleXCollectionLiteral:
+ruleXCollectionLiteral@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXCollectionLiteral_XSetLiteralParserRuleCall_0ElementType());
@@ -2034,11 +2063,12 @@ entryRuleXSetLiteral:
 	ruleXSetLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XSetLiteral
-ruleXSetLiteral:
+ruleXSetLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2109,11 +2139,12 @@ entryRuleXListLiteral:
 	ruleXListLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XListLiteral
-ruleXListLiteral:
+ruleXListLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2184,11 +2215,12 @@ entryRuleXClosure:
 	ruleXClosure
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XClosure
-ruleXClosure:
+ruleXClosure@init {
+}
+@after {
+}:
 	(
 		(
 			((
@@ -2311,11 +2343,12 @@ entryRuleXExpressionInClosure:
 	ruleXExpressionInClosure
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XExpressionInClosure
-ruleXExpressionInClosure:
+ruleXExpressionInClosure@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2354,11 +2387,12 @@ entryRuleXShortClosure:
 	ruleXShortClosure
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XShortClosure
-ruleXShortClosure:
+ruleXShortClosure@init {
+}
+@after {
+}:
 	(
 		(
 			((
@@ -2459,11 +2493,12 @@ entryRuleXParenthesizedExpression:
 	ruleXParenthesizedExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XParenthesizedExpression
-ruleXParenthesizedExpression:
+ruleXParenthesizedExpression@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -2495,11 +2530,12 @@ entryRuleXIfExpression:
 	ruleXIfExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XIfExpression
-ruleXIfExpression:
+ruleXIfExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2582,11 +2618,12 @@ entryRuleXSwitchExpression:
 	ruleXSwitchExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XSwitchExpression
-ruleXSwitchExpression:
+ruleXSwitchExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2768,11 +2805,12 @@ entryRuleXCasePart:
 	ruleXCasePart
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XCasePart
-ruleXCasePart:
+ruleXCasePart@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -2854,11 +2892,12 @@ entryRuleXForLoopExpression:
 	ruleXForLoopExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XForLoopExpression
-ruleXForLoopExpression:
+ruleXForLoopExpression@init {
+}
+@after {
+}:
 	(
 		(
 			((
@@ -2953,11 +2992,12 @@ entryRuleXBasicForLoopExpression:
 	ruleXBasicForLoopExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XBasicForLoopExpression
-ruleXBasicForLoopExpression:
+ruleXBasicForLoopExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3097,11 +3137,12 @@ entryRuleXWhileExpression:
 	ruleXWhileExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XWhileExpression
-ruleXWhileExpression:
+ruleXWhileExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3161,11 +3202,12 @@ entryRuleXDoWhileExpression:
 	ruleXDoWhileExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XDoWhileExpression
-ruleXDoWhileExpression:
+ruleXDoWhileExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3232,11 +3274,12 @@ entryRuleXBlockExpression:
 	ruleXBlockExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XBlockExpression
-ruleXBlockExpression:
+ruleXBlockExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3289,11 +3332,12 @@ entryRuleXExpressionOrVarDeclaration:
 	ruleXExpressionOrVarDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XExpressionOrVarDeclaration
-ruleXExpressionOrVarDeclaration:
+ruleXExpressionOrVarDeclaration@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType());
@@ -3319,11 +3363,12 @@ entryRuleXVariableDeclaration:
 	ruleXVariableDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XVariableDeclaration
-ruleXVariableDeclaration:
+ruleXVariableDeclaration@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3434,11 +3479,12 @@ entryRuleJvmFormalParameter:
 	ruleJvmFormalParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmFormalParameter
-ruleJvmFormalParameter:
+ruleJvmFormalParameter@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -3471,11 +3517,12 @@ entryRuleFullJvmFormalParameter:
 	ruleFullJvmFormalParameter
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FullJvmFormalParameter
-ruleFullJvmFormalParameter:
+ruleFullJvmFormalParameter@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -3508,11 +3555,12 @@ entryRuleXFeatureCall:
 	ruleXFeatureCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XFeatureCall
-ruleXFeatureCall:
+ruleXFeatureCall@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3700,11 +3748,12 @@ entryRuleFeatureCallID:
 	ruleFeatureCallID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule FeatureCallID
-ruleFeatureCallID:
+ruleFeatureCallID@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getFeatureCallID_ValidIDParserRuleCall_0ElementType());
@@ -3754,11 +3803,12 @@ entryRuleIdOrSuper:
 	ruleIdOrSuper
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule IdOrSuper
-ruleIdOrSuper:
+ruleIdOrSuper@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getIdOrSuper_FeatureCallIDParserRuleCall_0ElementType());
@@ -3784,11 +3834,12 @@ entryRuleXConstructorCall:
 	ruleXConstructorCall
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XConstructorCall
-ruleXConstructorCall:
+ruleXConstructorCall@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -3986,11 +4037,12 @@ entryRuleXBooleanLiteral:
 	ruleXBooleanLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XBooleanLiteral
-ruleXBooleanLiteral:
+ruleXBooleanLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4028,11 +4080,12 @@ entryRuleXNullLiteral:
 	ruleXNullLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XNullLiteral
-ruleXNullLiteral:
+ruleXNullLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4056,11 +4109,12 @@ entryRuleXNumberLiteral:
 	ruleXNumberLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XNumberLiteral
-ruleXNumberLiteral:
+ruleXNumberLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4088,11 +4142,12 @@ entryRuleXStringLiteral:
 	ruleXStringLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XStringLiteral
-ruleXStringLiteral:
+ruleXStringLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4120,11 +4175,12 @@ entryRuleXTypeLiteral:
 	ruleXTypeLiteral
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XTypeLiteral
-ruleXTypeLiteral:
+ruleXTypeLiteral@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4184,11 +4240,12 @@ entryRuleXThrowExpression:
 	ruleXThrowExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XThrowExpression
-ruleXThrowExpression:
+ruleXThrowExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4223,11 +4280,12 @@ entryRuleXReturnExpression:
 	ruleXReturnExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XReturnExpression
-ruleXReturnExpression:
+ruleXReturnExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4263,11 +4321,12 @@ entryRuleXTryCatchFinallyExpression:
 	ruleXTryCatchFinallyExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XTryCatchFinallyExpression
-ruleXTryCatchFinallyExpression:
+ruleXTryCatchFinallyExpression@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4362,11 +4421,12 @@ entryRuleXSynchronizedExpression:
 	ruleXSynchronizedExpression
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XSynchronizedExpression
-ruleXSynchronizedExpression:
+ruleXSynchronizedExpression@init {
+}
+@after {
+}:
 	(
 		(
 			((
@@ -4437,11 +4497,12 @@ entryRuleXCatchClause:
 	ruleXCatchClause
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XCatchClause
-ruleXCatchClause:
+ruleXCatchClause@init {
+}
+@after {
+}:
 	(
 		(
 			('catch')=>
@@ -4498,11 +4559,12 @@ entryRuleQualifiedName:
 	ruleQualifiedName
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
@@ -4534,16 +4596,24 @@ ruleQualifiedName:
 ;
 
 //Entry rule entryRuleNumber
-entryRuleNumber:
+entryRuleNumber@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ markComposite(elementTypeProvider.getNumberElementType()); }
 	ruleNumber
 	{ doneComposite(); }
 	EOF;
 finally {
+	myHiddenTokenState.restore();
 }
 
 // Rule Number
-ruleNumber:
+ruleNumber@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	myHiddenTokenState.restore();
+}:
 	(
 		{
 			markLeaf();
@@ -4607,11 +4677,12 @@ entryRuleJvmTypeReference:
 	ruleJvmTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmTypeReference
-ruleJvmTypeReference:
+ruleJvmTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4662,11 +4733,12 @@ entryRuleArrayBrackets:
 	ruleArrayBrackets
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ArrayBrackets
-ruleArrayBrackets:
+ruleArrayBrackets@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -4691,11 +4763,12 @@ entryRuleXFunctionTypeRef:
 	ruleXFunctionTypeRef
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XFunctionTypeRef
-ruleXFunctionTypeRef:
+ruleXFunctionTypeRef@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -4773,11 +4846,12 @@ entryRuleJvmParameterizedTypeReference:
 	ruleJvmParameterizedTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmParameterizedTypeReference
-ruleJvmParameterizedTypeReference:
+ruleJvmParameterizedTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -4935,11 +5009,12 @@ entryRuleJvmArgumentTypeReference:
 	ruleJvmArgumentTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmArgumentTypeReference
-ruleJvmArgumentTypeReference:
+ruleJvmArgumentTypeReference@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
@@ -4965,11 +5040,12 @@ entryRuleJvmWildcardTypeReference:
 	ruleJvmWildcardTypeReference
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmWildcardTypeReference
-ruleJvmWildcardTypeReference:
+ruleJvmWildcardTypeReference@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -5044,11 +5120,12 @@ entryRuleJvmUpperBound:
 	ruleJvmUpperBound
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmUpperBound
-ruleJvmUpperBound:
+ruleJvmUpperBound@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -5077,11 +5154,12 @@ entryRuleJvmUpperBoundAnded:
 	ruleJvmUpperBoundAnded
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmUpperBoundAnded
-ruleJvmUpperBoundAnded:
+ruleJvmUpperBoundAnded@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -5110,11 +5188,12 @@ entryRuleJvmLowerBound:
 	ruleJvmLowerBound
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmLowerBound
-ruleJvmLowerBound:
+ruleJvmLowerBound@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -5143,11 +5222,12 @@ entryRuleJvmLowerBoundAnded:
 	ruleJvmLowerBoundAnded
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule JvmLowerBoundAnded
-ruleJvmLowerBoundAnded:
+ruleJvmLowerBoundAnded@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -5176,11 +5256,12 @@ entryRuleQualifiedNameWithWildcard:
 	ruleQualifiedNameWithWildcard
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameWithWildcard
-ruleQualifiedNameWithWildcard:
+ruleQualifiedNameWithWildcard@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
@@ -5212,11 +5293,12 @@ entryRuleValidID:
 	ruleValidID
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule ValidID
-ruleValidID:
+ruleValidID@init {
+}
+@after {
+}:
 	{
 		markLeaf();
 	}
@@ -5232,11 +5314,12 @@ entryRuleXImportDeclaration:
 	ruleXImportDeclaration
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule XImportDeclaration
-ruleXImportDeclaration:
+ruleXImportDeclaration@init {
+}
+@after {
+}:
 	(
 		{
 			markLeaf();
@@ -5349,11 +5432,12 @@ entryRuleQualifiedNameInStaticImport:
 	ruleQualifiedNameInStaticImport
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule QualifiedNameInStaticImport
-ruleQualifiedNameInStaticImport:
+ruleQualifiedNameInStaticImport@init {
+}
+@after {
+}:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());

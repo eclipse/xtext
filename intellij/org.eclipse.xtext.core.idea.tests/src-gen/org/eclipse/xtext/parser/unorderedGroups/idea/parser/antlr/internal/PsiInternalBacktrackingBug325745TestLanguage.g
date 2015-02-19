@@ -22,6 +22,8 @@ package org.eclipse.xtext.parser.unorderedGroups.idea.parser.antlr.internal;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.unorderedGroups.services.BacktrackingBug325745TestLanguageGrammarAccess;
 
@@ -59,11 +61,12 @@ entryRuleModel:
 	ruleModel
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Model
-ruleModel:
+ruleModel@init {
+}
+@after {
+}:
 	(
 		(
 			{
@@ -94,11 +97,12 @@ entryRuleElement:
 	ruleElement
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule Element
-ruleElement:
+ruleElement@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -149,11 +153,12 @@ entryRuleDataType:
 	ruleDataType
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule DataType
-ruleDataType:
+ruleDataType@init {
+}
+@after {
+}:
 	(
 		(
 			(
@@ -190,8 +195,7 @@ ruleDataType:
 ;
 
 //Entry rule entryRuleExpression
-entryRuleExpression
-@init {
+entryRuleExpression@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
 	grammarAccess.getExpressionAccess().getUnorderedGroup_3()
@@ -206,7 +210,15 @@ finally {
 }
 
 // Rule Expression
-ruleExpression:
+ruleExpression@init {
+	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+	grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
+	grammarAccess.getExpressionAccess().getUnorderedGroup_3()
+	);
+}
+@after {
+	myUnorderedGroupState.restore();
+}:
 	(
 		(
 			{
@@ -361,11 +373,12 @@ entryRuleSimpleTerm:
 	ruleSimpleTerm
 	{ doneComposite(); }
 	EOF;
-finally {
-}
 
 // Rule SimpleTerm
-ruleSimpleTerm:
+ruleSimpleTerm@init {
+}
+@after {
+}:
 	(
 		(
 			(

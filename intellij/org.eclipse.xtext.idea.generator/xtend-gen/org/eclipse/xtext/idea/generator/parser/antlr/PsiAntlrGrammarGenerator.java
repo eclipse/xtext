@@ -29,7 +29,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames;
-import org.eclipse.xtext.idea.generator.parser.antlr.UnorderedGroupsAwareAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.AbstractActionAwareAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
+public class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
   @Inject
   @Extension
   private IdeaPluginClassNames _ideaPluginClassNames;
@@ -122,6 +122,10 @@ public class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGe
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.xtext.idea.parser.TokenTypeProvider;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
       boolean _and = false;
@@ -267,19 +271,8 @@ public class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGe
     _builder.newLineIfNotEmpty();
     String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
     _builder.append(_entryRuleName_1, "");
-    {
-      boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-      if (_definesUnorderedGroups) {
-        _builder.newLineIfNotEmpty();
-        _builder.append("@init {");
-        _builder.newLine();
-        _builder.append("\t");
-        CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
-        _builder.append(_compileInitUnorderedGroups, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-      }
-    }
+    CharSequence _compileEntryInit = this.compileEntryInit(it, options);
+    _builder.append(_compileEntryInit, "");
     _builder.append(":");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -301,19 +294,48 @@ public class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGe
     _builder.append("\t");
     _builder.append("EOF;");
     _builder.newLine();
-    _builder.append("finally {");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
-    _builder.append(_compileRestoreUnorderedGroups, "\t");
+    CharSequence _compileEntryFinally = this.compileEntryFinally(it, options);
+    _builder.append(_compileEntryFinally, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     String _compileEBNF = this.compileEBNF(it, options);
     _builder.append(_compileEBNF, "");
     _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  @Override
+  protected String compileInit(final AbstractRule it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((it instanceof ParserRule)) {
+        _builder.newLineIfNotEmpty();
+        _builder.append("@init {");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _compileInitHiddenTokens = this.compileInitHiddenTokens(it, options);
+        _builder.append(_compileInitHiddenTokens, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
+        _builder.append(_compileInitUnorderedGroups, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("@after {");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _compileRestoreHiddenTokens = this.compileRestoreHiddenTokens(it, options);
+        _builder.append(_compileRestoreHiddenTokens, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
+        _builder.append(_compileRestoreUnorderedGroups, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+      }
+    }
+    return _builder.toString();
   }
   
   @Override
