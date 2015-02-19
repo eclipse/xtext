@@ -37,6 +37,8 @@ import com.google.inject.Inject;
 
 /**
  * The default implementation of an {@link IOutlineTreeProvider}.
+ * If you would like to run your outline in Background, please have a look at {@link BackgroundOutlineTreeProvider}.
+ * Please note that this would have implications to you LabelProvider implementation. Please read the JavaDoc in the mentioned class carefully.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
