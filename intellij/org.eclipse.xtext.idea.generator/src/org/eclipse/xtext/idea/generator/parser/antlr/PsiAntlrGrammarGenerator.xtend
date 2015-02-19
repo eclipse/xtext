@@ -29,7 +29,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 @Singleton
-class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator {
+class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 	
 	@Inject
 	extension IdeaPluginClassNames
@@ -61,6 +61,8 @@ class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 		import «grammar.elementTypeProviderName»;
 		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
 		import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 		«ENDIF»
@@ -105,20 +107,25 @@ class PsiAntlrGrammarGenerator extends UnorderedGroupsAwareAntlrGrammarGenerator
 	
 	override protected _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		//Entry rule «entryRuleName»
-		«entryRuleName»«IF definesUnorderedGroups(options)»
-		@init {
-			«compileInitUnorderedGroups(options)»
-		}«ENDIF»:
+		«entryRuleName»«compileEntryInit(options)»:
 			{ «markComposite» }
 			«ruleName»
 			{ «doneComposite» }
 			EOF;
-		finally {
-			«compileRestoreUnorderedGroups(options)»
-		}
+		«compileEntryFinally(options)»
 		
 		«compileEBNF(options)»
 	'''
+	
+	override protected compileInit(AbstractRule it, AntlrOptions options) '''«IF it instanceof ParserRule»
+		@init {
+			«compileInitHiddenTokens(options)»
+			«compileInitUnorderedGroups(options)»
+		}
+		@after {
+			«compileRestoreHiddenTokens(options)»
+			«compileRestoreUnorderedGroups(options)»
+		}«ENDIF»'''
 	
 	override protected _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
