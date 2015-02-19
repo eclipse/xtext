@@ -337,7 +337,9 @@ public class StringConcatenation implements CharSequence {
 	}
 	
 	/**
-	 * Return the actual content of this sequence, including all trailing whitespace.
+	 * Return the actual content of this sequence, including all trailing whitespace. The return value is unsafe,
+	 * that is modification to this {@link StringConcatenation} will cause changes in a previously obtained
+	 * result and vice versa.
 	 * 
 	 * @return the actual content of this instance. Never <code>null</code>.
 	 * @since 2.8
