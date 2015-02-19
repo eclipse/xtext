@@ -22,6 +22,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	private AbstractTraceRegion current;
 	private int expectedOffset;
 	private int expectedLine;
+	private int lastOffset;
 	private LinkedList<Integer> traversalIndizes = Lists.newLinkedList();
 
 	public LeafIterator(AbstractTraceRegion root) {
@@ -32,6 +33,14 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	
 	@Override
 	protected AbstractTraceRegion computeNext() {
+		AbstractTraceRegion next = doComputeNext();
+		if(next != null) {
+			lastOffset = next.getMyOffset();
+		}
+		return next;
+	}
+	
+	protected AbstractTraceRegion doComputeNext() {
 		if (current.getMyOffset() == expectedOffset) {
 			return firstLeafOfCurrent();
 		} else {
@@ -56,9 +65,9 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 			}
 			if (idx < current.getNestedRegions().size() - 1) {
 				AbstractTraceRegion next = current.getNestedRegions().get(idx + 1);
-				if (next.getMyOffset() < expectedOffset) {
+				if (next.getMyOffset() < expectedOffset && next.getMyOffset() != lastOffset) {
 					return endOfData();
-				} else if (next.getMyOffset() == expectedOffset) {
+				} else if (next.getMyOffset() == expectedOffset || next.getMyOffset() == lastOffset) {
 					current = next;
 					traversalIndizes.add(idx + 1);
 					return firstLeafOfCurrent();
