@@ -35,6 +35,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
@@ -408,6 +409,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		if (left == null) {
 			return Collections.emptyList();
 		}
+		final URI pathToMatch = left.getAssociatedPath();
 		return new Iterable<AbstractTraceRegion>() {
 
 			@Override
@@ -422,7 +424,8 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 					{
 						while(first == null && allLeafs.hasNext()) {
 							AbstractTraceRegion next = allLeafs.next();
-							if (next.getMyOffset() == left.getMyOffset()) {
+							if (next.getMyOffset() == left.getMyOffset() && 
+									(Objects.equal(pathToMatch, next.getAssociatedPath()))) {
 								this.first = next;
 								break;
 							}
@@ -439,10 +442,14 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 						if (!allLeafs.hasNext())
 							return endOfData();
 						AbstractTraceRegion candidate = allLeafs.next();
+						if (!Objects.equal(candidate.getAssociatedPath(), pathToMatch)) {
+							return computeNext();
+						}
 						if (candidate.getMyOffset() >= end) {
 							return endOfData();
+						} else {
+							return candidate;
 						}
-						return candidate;
 					}
 				};
 				return result;
