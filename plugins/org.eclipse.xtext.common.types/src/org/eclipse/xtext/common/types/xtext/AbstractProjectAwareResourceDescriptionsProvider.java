@@ -47,24 +47,26 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 		IResourceDescriptions result = super.getResourceDescriptions(resourceSet);
 		if (compilerPhases.isIndexing(resourceSet)) {
 			// during indexing we don't want to see any local files
-			final String encodedProjectName = URI.encodeSegment(getProjectName(resourceSet), true);
-			Predicate<URI> predicate = new Predicate<URI>() {
-				@Override
-				public boolean apply(URI uri) {
-					if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
-						return false;
-					else 
-						return !uri.segment(1).equals(encodedProjectName);
+			String projectName = getProjectName(resourceSet);
+			if(projectName != null) {
+				final String encodedProjectName = URI.encodeSegment(projectName, true);
+				Predicate<URI> predicate = new Predicate<URI>() {
+					@Override
+					public boolean apply(URI uri) {
+						if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
+							return false;
+						else 
+							return !uri.segment(1).equals(encodedProjectName);
+					}
+				};
+				if (result instanceof IShadowedResourceDescriptions) {
+					return new ShadowedFilteringResourceDescriptions(result, predicate);
+				} else {
+					return new FilteringResourceDescriptions(result, predicate);
 				}
-			};
-			if (result instanceof IShadowedResourceDescriptions) {
-				return new ShadowedFilteringResourceDescriptions(result, predicate);
-			} else {
-				return new FilteringResourceDescriptions(result, predicate);
-			}
-		} else {
-			return result;
-		}
+			}	
+		} 
+		return result;
 	}
 	
 	protected abstract String getProjectName(ResourceSet resourceSet);
