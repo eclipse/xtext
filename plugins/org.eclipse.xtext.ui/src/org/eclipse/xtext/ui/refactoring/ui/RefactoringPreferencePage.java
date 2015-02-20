@@ -14,16 +14,15 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
+import org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class RefactoringPreferencePage extends LanguageRootPreferencePage {
+public class RefactoringPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		super.createFieldEditors();
 		Composite parent = getFieldEditorParent();
 		Group refactoringGroup = new Group(parent, SWT.SHADOW_IN);
 		refactoringGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
