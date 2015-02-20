@@ -49,7 +49,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 	}
 
 	@Test public void testParseSimpleLanguage() throws Exception {
-		IParseResult result = getParser().parse(new StringReader(model));
+		IParseResult result = parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
@@ -59,7 +59,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 	}
 
 	@Test public void testNodeModelOfSimpleLanguage() throws Exception {
-		IParseResult result = getParser().parse(new StringReader(model));
+		IParseResult result = parse(model);
 		List<ILeafNode> leafs = Lists.newArrayList(result.getRootNode().getLeafNodes());
 		assertEquals(23, leafs.size());
 		int i = 0;
@@ -86,6 +86,10 @@ public class DynamicChannelTest extends AbstractXtextTests {
 		checkLeaf(leafs.get(i++), ass, false);
 		checkLeaf(leafs.get(i++), id, false);
 		checkLeaf(leafs.get(i++), sc, false);
+	}
+
+	protected IParseResult parse(String model) {
+		return getParser().parse(new StringReader(model));
 	}
 
 	private void checkLeaf(ILeafNode leaf, String expected, boolean expectedHidden) {
