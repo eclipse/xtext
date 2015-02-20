@@ -16,7 +16,6 @@ import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	private @Inject ResetPromptDialogSettingsField resetPromptDialogSettings;
