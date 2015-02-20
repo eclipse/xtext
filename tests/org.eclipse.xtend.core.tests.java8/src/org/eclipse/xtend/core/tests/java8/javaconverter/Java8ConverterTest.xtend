@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.javaconverter
 
-import org.junit.Test
 import org.eclipse.xtend.core.tests.javaconverter.JavaConverterTest
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -25,5 +26,21 @@ class Java8ConverterTest extends JavaConverterTest {
 			List<String> x = new ArrayList<>();
 			return new ArrayList<>();
 		}'''.toXtendClassBodyDeclr)
+	}
+
+	/**
+	 * Need a possibility to set java compliance level on JavaConverter first
+	 */
+	@Test @Ignore def void testDefaultMethode() throws Exception {
+		val clazz = toValidXtendInterface('''
+		public interface XtendInterfaze {
+		  public default String foo() {
+		    return "- Hi, I\'m a default impl";
+		  }
+		  
+		  public abstract String baar();
+		}''')
+
+		assertNotNull(clazz)
 	}
 }
