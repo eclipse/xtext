@@ -27,68 +27,191 @@ public class Bug317840Test extends AbstractXtextTests {
 		with(Bug317840TestLanguageStandaloneSetup.class);
 	}
 	
-	@Test public void testCanParse_01() throws Exception {
+	@Test public void testCanParse_01_00() throws Exception {
 		getModel("element a");
+	}
+	
+	@Test public void testCanParse_01_01() throws Exception {
 		getModel("element a b");
+	}
+	
+	@Test public void testCanParse_01_02() throws Exception {
 		getModel("element a b c");
+	}
+	
+	@Test public void testCanParse_01_03() throws Exception {
 		getModel("element a b c d");
+	}
+	
+	@Test public void testCanParse_01_04() throws Exception {
 		getModel("element a b c d e");
+	}
+	
+	@Test public void testCanParse_01_05() throws Exception {
 		getModel("element a b c d e f");
+	}
+	
+	@Test public void testCanParse_01_06() throws Exception {
 		getModel("element a b c d e f g");
-		
+	}
+	
+	@Test public void testCanParse_01_07() throws Exception {
 		getModel2("element a");
+	}
+	
+	@Test public void testCanParse_01_08() throws Exception {
 		getModel2("element a b");
+	}
+	
+	@Test public void testCanParse_01_09() throws Exception {
 		getModel2("element a b c");
+	}
+	
+	@Test public void testCanParse_01_10() throws Exception {
 		getModel2("element a b c d");
+	}
+	
+	@Test public void testCanParse_01_11() throws Exception {
 		getModel2("element a b c d e");
+	}
+	
+	@Test public void testCanParse_01_12() throws Exception {
 		getModel2("element a b c d e f");
+	}
+	
+	@Test public void testCanParse_01_13() throws Exception {
 		getModel2("element a b c d e f g");
 	}
 	
-	@Test public void testCanParse_02() throws Exception {
+	@Test public void testCanParse_02_00() throws Exception {
 		getModel("element a.a");
+	}
+	
+	@Test public void testCanParse_02_01() throws Exception {
 		getModel("element a.a b.b");
+	}
+	
+	@Test public void testCanParse_02_02() throws Exception {
 		getModel("element a.a b.b c.c");
+	}
+	
+	@Test public void testCanParse_02_03() throws Exception {
 		getModel("element a.a b.b c.c d.d");
+	}
+	
+	@Test public void testCanParse_02_04() throws Exception {
 		getModel("element a.a b.b c.c d.d e.e");
+	}
+	
+	@Test public void testCanParse_02_05() throws Exception {
 		getModel("element a.a b.b c.c d.d e.e f.f");
+	}
+	
+	@Test public void testCanParse_02_06() throws Exception {
 		getModel("element a.a b.b c.c d.d e.e f.f g.g");
-		
+	}
+	
+	@Test public void testCanParse_02_07() throws Exception {
 		getModel2("element a.a");
+	}
+	
+	@Test public void testCanParse_02_08() throws Exception {
 		getModel2("element a.a b.b");
+	}
+	
+	@Test public void testCanParse_02_09() throws Exception {
 		getModel2("element a.a b.b c.c");
+	}
+	
+	@Test public void testCanParse_02_10() throws Exception {
 		getModel2("element a.a b.b c.c d.d");
+	}
+	
+	@Test public void testCanParse_02_11() throws Exception {
 		getModel2("element a.a b.b c.c d.d e.e");
+	}
+	
+	@Test public void testCanParse_02_12() throws Exception {
 		getModel2("element a.a b.b c.c d.d e.e f.f");
+	}
+	
+	@Test public void testCanParse_02_13() throws Exception {
 		getModel2("element a.a b.b c.c d.d e.e f.f g.g");
 	}
 	
-	@Test public void testCanParse_03() throws Exception {
+	@Test public void testCanParse_03_00() throws Exception {
 		getModel("element a.a ");
+	}
+	
+	@Test public void testCanParse_03_01() throws Exception {
 		getModel("element a.a b.b /* */");
+	}
+	
+	@Test public void testCanParse_03_02() throws Exception {
 		getModel("element a.a b.b c.c /* */ ");
+	}
+	
+	@Test public void testCanParse_03_03() throws Exception {
 		getModel("element a.a b.b c.c /* */ d.d");
+	}
+	
+	@Test public void testCanParse_03_04() throws Exception {
 		getModel("element a.a b.b c.c d.d /* */e.e");
+	}
+	
+	@Test public void testCanParse_03_05() throws Exception {
 		getModel("element a.a //\nb.b c.c d.d e.e f.f");
+	}
+	
+	@Test public void testCanParse_03_06() throws Exception {
 		getModel(" element a.a b.b c.c d.d e.e f.f g.g ");
-		
+	}
+	
+	@Test public void testCanParse_03_07() throws Exception {
 		getModel2("element a.a ");
+	}
+	
+	@Test public void testCanParse_03_08() throws Exception {
 		getModel2("element a.a b.b /* */");
+	}
+	
+	@Test public void testCanParse_03_09() throws Exception {
 		getModel2("element a.a b.b c.c /* */ ");
+	}
+	
+	@Test public void testCanParse_03_10() throws Exception {
 		getModel2("element a.a b.b c.c /* */ d.d");
+	}
+	
+	@Test public void testCanParse_03_11() throws Exception {
 		getModel2("element a.a b.b c.c d.d /* */e.e");
+	}
+	
+	@Test public void testCanParse_03_12() throws Exception {
 		getModel2("element a.a //\nb.b c.c d.d e.e f.f");
+	}
+	
+	@Test public void testCanParse_03_13() throws Exception {
 		getModel2(" element a.a b.b c.c d.d e.e f.f g.g ");
 	}
 	
-	@Test public void testCannotParse_01() throws Exception {
+	@Test public void testCannotParse_01_00() throws Exception {
 //		getModelAndExpect("element", 1);
 //		getModelAndExpect("element a .a", 1);
 //		getModelAndExpect("element element", 1);
 //		getModelAndExpect("element a.a .b", 1);
 		getModelAndExpect("element a. a", 1);
+	}
+	
+	@Test public void testCannotParse_01_01() throws Exception {
 		getModelAndExpect("element a /* */. ", 1);
+	}
+	
+	@Test public void testCannotParse_01_02() throws Exception {
 		getModelAndExpect("element a.", 1);
+	}
+	
+	@Test public void testCannotParse_01_03() throws Exception {
 		getModelAndExpect("element .a", 1);
 	}
 	

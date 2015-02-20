@@ -117,16 +117,6 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		«compileEBNF(options)»
 	'''
 	
-	override protected compileInit(AbstractRule it, AntlrOptions options) '''«IF it instanceof ParserRule»
-		@init {
-			«compileInitHiddenTokens(options)»
-			«compileInitUnorderedGroups(options)»
-		}
-		@after {
-			«compileRestoreHiddenTokens(options)»
-			«compileRestoreUnorderedGroups(options)»
-		}«ENDIF»'''
-	
 	override protected _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
 			{

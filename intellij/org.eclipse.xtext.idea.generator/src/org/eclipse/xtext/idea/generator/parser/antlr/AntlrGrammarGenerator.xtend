@@ -155,8 +155,6 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 		}
 		@after {
 			leaveRule();
-			«compileRestoreHiddenTokens(options)»
-			«compileRestoreUnorderedGroups(options)»
 		}'''
 		
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {
