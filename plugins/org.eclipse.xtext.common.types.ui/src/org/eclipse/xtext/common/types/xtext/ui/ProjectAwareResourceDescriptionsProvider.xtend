@@ -27,6 +27,6 @@ class ProjectAwareResourceDescriptionsProvider extends AbstractProjectAwareResou
 	
 	override protected getProjectName(ResourceSet resourceSet) {
 		val javaProject = projectProvider.getJavaProject(resourceSet)
-		return javaProject.elementName
+		return javaProject?.elementName
 	}
 }
