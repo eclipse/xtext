@@ -56,10 +56,7 @@ entryRuleRootRule:
 	EOF;
 
 // Rule RootRule
-ruleRootRule@init {
-}
-@after {
-}:
+ruleRootRule:
 	(
 		{
 			markComposite(elementTypeProvider.getRootRule_ConcreteParserRuleParserRuleCall_0ElementType());
@@ -103,10 +100,7 @@ entryRuleConcreteParserRule:
 	EOF;
 
 // Rule ConcreteParserRule
-ruleConcreteParserRule@init {
-}
-@after {
-}:
+ruleConcreteParserRule:
 	(
 		{
 			markLeaf();
@@ -155,10 +149,7 @@ entryRuleOverridableParserRule:
 	EOF;
 
 // Rule OverridableParserRule
-ruleOverridableParserRule@init {
-}
-@after {
-}:
+ruleOverridableParserRule:
 	(
 		{
 			markLeaf();
@@ -189,10 +180,7 @@ entryRuleCallOverridenParserRule:
 	EOF;
 
 // Rule CallOverridenParserRule
-ruleCallOverridenParserRule@init {
-}
-@after {
-}:
+ruleCallOverridenParserRule:
 	(
 		(
 			{
@@ -214,10 +202,7 @@ entryRuleOverridableParserRule2:
 	EOF;
 
 // Rule OverridableParserRule2
-ruleOverridableParserRule2@init {
-}
-@after {
-}:
+ruleOverridableParserRule2:
 	(
 		{
 			markLeaf();
@@ -266,10 +251,7 @@ entryRuleExtendableParserRule:
 	EOF;
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule@init {
-}
-@after {
-}:
+ruleExtendableParserRule:
 	(
 		{
 			markComposite(elementTypeProvider.getExtendableParserRule_Subrule1ParserRuleCall_0ElementType());
@@ -305,10 +287,7 @@ entryRuleSubrule1:
 	EOF;
 
 // Rule Subrule1
-ruleSubrule1@init {
-}
-@after {
-}:
+ruleSubrule1:
 	(
 		{
 			markLeaf();
@@ -350,10 +329,7 @@ entryRuleSubrule2:
 	EOF;
 
 // Rule Subrule2
-ruleSubrule2@init {
-}
-@after {
-}:
+ruleSubrule2:
 	(
 		{
 			markLeaf();
@@ -395,10 +371,7 @@ entryRuleSubrule3:
 	EOF;
 
 // Rule Subrule3
-ruleSubrule3@init {
-}
-@after {
-}:
+ruleSubrule3:
 	(
 		{
 			markLeaf();
@@ -440,10 +413,7 @@ entryRuleCallExtendedParserRule:
 	EOF;
 
 // Rule CallExtendedParserRule
-ruleCallExtendedParserRule@init {
-}
-@after {
-}:
+ruleCallExtendedParserRule:
 	(
 		(
 			{
@@ -465,10 +435,7 @@ entryRuleInheritedParserRule:
 	EOF;
 
 // Rule InheritedParserRule
-ruleInheritedParserRule@init {
-}
-@after {
-}:
+ruleInheritedParserRule:
 	(
 		{
 			markLeaf();
@@ -499,10 +466,7 @@ entryRuleAbstractCallOverridenParserRule:
 	EOF;
 
 // Rule AbstractCallOverridenParserRule
-ruleAbstractCallOverridenParserRule@init {
-}
-@after {
-}:
+ruleAbstractCallOverridenParserRule:
 	(
 		{
 			markLeaf();
@@ -533,10 +497,7 @@ entryRuleAbstractCallExtendedParserRule:
 	EOF;
 
 // Rule AbstractCallExtendedParserRule
-ruleAbstractCallExtendedParserRule@init {
-}
-@after {
-}:
+ruleAbstractCallExtendedParserRule:
 	(
 		{
 			markLeaf();

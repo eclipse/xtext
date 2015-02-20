@@ -31,6 +31,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     boolean _equals = Objects.equal(delegate, null);
     if (_equals) {
       context.addWarning(it, "Delegate is not declared");
+      return;
     }
     delegate.markAsRead();
     TypeReference _type = delegate.getType();

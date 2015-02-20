@@ -56,10 +56,7 @@ entryRuleMain:
 	EOF;
 
 // Rule Main
-ruleMain@init {
-}
-@after {
-}:
+ruleMain:
 	(
 		(
 			(
@@ -94,10 +91,7 @@ entryRuleImport:
 	EOF;
 
 // Rule Import
-ruleImport@init {
-}
-@after {
-}:
+ruleImport:
 	(
 		{
 			markLeaf();
@@ -128,10 +122,7 @@ entryRuleType:
 	EOF;
 
 // Rule Type
-ruleType@init {
-}
-@after {
-}:
+ruleType:
 	(
 		{
 			markLeaf();

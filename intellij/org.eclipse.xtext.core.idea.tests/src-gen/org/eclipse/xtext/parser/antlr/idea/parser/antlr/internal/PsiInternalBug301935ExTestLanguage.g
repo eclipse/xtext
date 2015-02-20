@@ -56,10 +56,7 @@ entryRuleDelegateModel:
 	EOF;
 
 // Rule DelegateModel
-ruleDelegateModel@init {
-}
-@after {
-}:
+ruleDelegateModel:
 	{
 		markComposite(elementTypeProvider.getDelegateModel_ModelParserRuleCallElementType());
 	}
@@ -77,10 +74,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -147,10 +141,7 @@ entryRuleNL:
 	EOF;
 
 // Rule NL
-ruleNL@init {
-}
-@after {
-}:
+ruleNL:
 	(
 		(
 			{

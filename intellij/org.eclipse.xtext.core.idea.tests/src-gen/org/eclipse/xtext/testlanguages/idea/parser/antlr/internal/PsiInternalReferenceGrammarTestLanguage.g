@@ -56,10 +56,7 @@ entryRuleSpielplatz:
 	EOF;
 
 // Rule Spielplatz
-ruleSpielplatz@init {
-}
-@after {
-}:
+ruleSpielplatz:
 	(
 		{
 			markLeaf();
@@ -164,10 +161,7 @@ entryRuleKind:
 	EOF;
 
 // Rule Kind
-ruleKind@init {
-}
-@after {
-}:
+ruleKind:
 	(
 		{
 			markLeaf();
@@ -223,10 +217,7 @@ entryRuleErwachsener:
 	EOF;
 
 // Rule Erwachsener
-ruleErwachsener@init {
-}
-@after {
-}:
+ruleErwachsener:
 	(
 		{
 			markLeaf();
@@ -282,10 +273,7 @@ entryRuleSpielzeug:
 	EOF;
 
 // Rule Spielzeug
-ruleSpielzeug@init {
-}
-@after {
-}:
+ruleSpielzeug:
 	(
 		{
 			markLeaf();
@@ -341,10 +329,7 @@ entryRuleFarbe:
 	EOF;
 
 // Rule Farbe
-ruleFarbe@init {
-}
-@after {
-}:
+ruleFarbe:
 	(
 		(
 			(
@@ -392,10 +377,7 @@ entryRuleFamilie:
 	EOF;
 
 // Rule Familie
-ruleFamilie@init {
-}
-@after {
-}:
+ruleFamilie:
 	(
 		{
 			markLeaf();

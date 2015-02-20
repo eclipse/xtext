@@ -56,10 +56,7 @@ entryRuleEReference:
 	EOF;
 
 // Rule EReference
-ruleEReference@init {
-}
-@after {
-}:
+ruleEReference:
 	(
 		(
 			{

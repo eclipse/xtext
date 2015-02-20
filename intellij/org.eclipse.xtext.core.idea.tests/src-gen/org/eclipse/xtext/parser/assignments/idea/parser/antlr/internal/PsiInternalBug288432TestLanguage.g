@@ -56,10 +56,7 @@ entryRuleBody:
 	EOF;
 
 // Rule Body
-ruleBody@init {
-}
-@after {
-}:
+ruleBody:
 	(
 		(
 			{
@@ -165,10 +162,7 @@ entryRuleFoo:
 	EOF;
 
 // Rule Foo
-ruleFoo@init {
-}
-@after {
-}:
+ruleFoo:
 	(
 		(
 			{
@@ -190,10 +184,7 @@ entryRuleContent:
 	EOF;
 
 // Rule Content
-ruleContent@init {
-}
-@after {
-}:
+ruleContent:
 	(
 		{
 			markLeaf();
@@ -227,10 +218,7 @@ entryRuleMyElement:
 	EOF;
 
 // Rule MyElement
-ruleMyElement@init {
-}
-@after {
-}:
+ruleMyElement:
 	(
 		{
 			markLeaf();
@@ -271,10 +259,7 @@ entryRuleParameter:
 	EOF;
 
 // Rule Parameter
-ruleParameter@init {
-}
-@after {
-}:
+ruleParameter:
 	(
 		(
 			(
@@ -309,10 +294,7 @@ entryRuleParameterRef:
 	EOF;
 
 // Rule ParameterRef
-ruleParameterRef@init {
-}
-@after {
-}:
+ruleParameterRef:
 	(
 		(
 			{
@@ -334,10 +316,7 @@ entryRuleMyInt:
 	EOF;
 
 // Rule MyInt
-ruleMyInt@init {
-}
-@after {
-}:
+ruleMyInt:
 	(
 		(
 			{

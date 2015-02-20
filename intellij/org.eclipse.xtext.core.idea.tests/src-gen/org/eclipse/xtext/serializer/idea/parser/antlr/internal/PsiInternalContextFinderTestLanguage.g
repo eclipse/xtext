@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -362,10 +359,7 @@ entryRuleModel2:
 	EOF;
 
 // Rule Model2
-ruleModel2@init {
-}
-@after {
-}:
+ruleModel2:
 	(
 		(
 			{
@@ -391,10 +385,7 @@ entryRuleAttributeExclusionTest1:
 	EOF;
 
 // Rule AttributeExclusionTest1
-ruleAttributeExclusionTest1@init {
-}
-@after {
-}:
+ruleAttributeExclusionTest1:
 	(
 		{
 			markLeaf();
@@ -425,10 +416,7 @@ entryRuleAttributeExclusionTest2:
 	EOF;
 
 // Rule AttributeExclusionTest2
-ruleAttributeExclusionTest2@init {
-}
-@after {
-}:
+ruleAttributeExclusionTest2:
 	(
 		{
 			markLeaf();
@@ -459,10 +447,7 @@ entryRuleNestedTypeTest1:
 	EOF;
 
 // Rule NestedTypeTest1
-ruleNestedTypeTest1@init {
-}
-@after {
-}:
+ruleNestedTypeTest1:
 	(
 		(
 			{
@@ -484,10 +469,7 @@ entryRuleNestedTypeTest2:
 	EOF;
 
 // Rule NestedTypeTest2
-ruleNestedTypeTest2@init {
-}
-@after {
-}:
+ruleNestedTypeTest2:
 	(
 		(
 			{
@@ -509,10 +491,7 @@ entryRuleNestedTypeChild1:
 	EOF;
 
 // Rule NestedTypeChild1
-ruleNestedTypeChild1@init {
-}
-@after {
-}:
+ruleNestedTypeChild1:
 	(
 		{
 			markLeaf();
@@ -543,10 +522,7 @@ entryRuleNestedTypeChild2:
 	EOF;
 
 // Rule NestedTypeChild2
-ruleNestedTypeChild2@init {
-}
-@after {
-}:
+ruleNestedTypeChild2:
 	(
 		{
 			markLeaf();
@@ -577,10 +553,7 @@ entryRuleNestedTypeRecursiveTest1:
 	EOF;
 
 // Rule NestedTypeRecursiveTest1
-ruleNestedTypeRecursiveTest1@init {
-}
-@after {
-}:
+ruleNestedTypeRecursiveTest1:
 	(
 		(
 			{
@@ -621,10 +594,7 @@ entryRuleNestedTypeRecursiveTest2:
 	EOF;
 
 // Rule NestedTypeRecursiveTest2
-ruleNestedTypeRecursiveTest2@init {
-}
-@after {
-}:
+ruleNestedTypeRecursiveTest2:
 	(
 		(
 			{
@@ -665,10 +635,7 @@ entryRuleParentRefTest1:
 	EOF;
 
 // Rule ParentRefTest1
-ruleParentRefTest1@init {
-}
-@after {
-}:
+ruleParentRefTest1:
 	(
 		{
 			markLeaf();
@@ -699,10 +666,7 @@ entryRuleParentRefTest2:
 	EOF;
 
 // Rule ParentRefTest2
-ruleParentRefTest2@init {
-}
-@after {
-}:
+ruleParentRefTest2:
 	(
 		{
 			markLeaf();
@@ -733,10 +697,7 @@ entryRuleParentRefTestChild1:
 	EOF;
 
 // Rule ParentRefTestChild1
-ruleParentRefTestChild1@init {
-}
-@after {
-}:
+ruleParentRefTestChild1:
 	(
 		(
 			{
@@ -773,10 +734,7 @@ entryRuleParentRefTestChild2:
 	EOF;
 
 // Rule ParentRefTestChild2
-ruleParentRefTestChild2@init {
-}
-@after {
-}:
+ruleParentRefTestChild2:
 	(
 		(
 			{
@@ -813,10 +771,7 @@ entryRuleQuantityExclusionTest1:
 	EOF;
 
 // Rule QuantityExclusionTest1
-ruleQuantityExclusionTest1@init {
-}
-@after {
-}:
+ruleQuantityExclusionTest1:
 	(
 		{
 			markLeaf();
@@ -858,10 +813,7 @@ entryRuleQuantityExclusionTest2:
 	EOF;
 
 // Rule QuantityExclusionTest2
-ruleQuantityExclusionTest2@init {
-}
-@after {
-}:
+ruleQuantityExclusionTest2:
 	(
 		{
 			markLeaf();
@@ -903,10 +855,7 @@ entryRuleValueExclusionTest1:
 	EOF;
 
 // Rule ValueExclusionTest1
-ruleValueExclusionTest1@init {
-}
-@after {
-}:
+ruleValueExclusionTest1:
 	(
 		(
 			{
@@ -928,10 +877,7 @@ entryRuleValueExclusionTest2:
 	EOF;
 
 // Rule ValueExclusionTest2
-ruleValueExclusionTest2@init {
-}
-@after {
-}:
+ruleValueExclusionTest2:
 	(
 		(
 			{
@@ -953,10 +899,7 @@ entryRuleNodeExclusion1:
 	EOF;
 
 // Rule NodeExclusion1
-ruleNodeExclusion1@init {
-}
-@after {
-}:
+ruleNodeExclusion1:
 	(
 		(
 			{
@@ -978,10 +921,7 @@ entryRuleNodeExclusion2:
 	EOF;
 
 // Rule NodeExclusion2
-ruleNodeExclusion2@init {
-}
-@after {
-}:
+ruleNodeExclusion2:
 	(
 		(
 			{
@@ -1003,10 +943,7 @@ entryRuleNodeExclusion1List:
 	EOF;
 
 // Rule NodeExclusion1List
-ruleNodeExclusion1List@init {
-}
-@after {
-}:
+ruleNodeExclusion1List:
 	(
 		(
 			{
@@ -1028,10 +965,7 @@ entryRuleNodeExclusion2List:
 	EOF;
 
 // Rule NodeExclusion2List
-ruleNodeExclusion2List@init {
-}
-@after {
-}:
+ruleNodeExclusion2List:
 	(
 		(
 			{

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markLeaf();
@@ -99,10 +96,7 @@ entryRuleModelFeatures:
 	EOF;
 
 // Rule ModelFeatures
-ruleModelFeatures@init {
-}
-@after {
-}:
+ruleModelFeatures:
 	(
 		{
 			markLeaf();
@@ -147,10 +141,7 @@ entryRuleDataTypeRule:
 	EOF;
 
 // Rule DataTypeRule
-ruleDataTypeRule@init {
-}
-@after {
-}:
+ruleDataTypeRule:
 	(
 		{
 			markLeaf();

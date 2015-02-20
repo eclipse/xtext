@@ -56,10 +56,7 @@ entryRuleStatemachine:
 	EOF;
 
 // Rule Statemachine
-ruleStatemachine@init {
-}
-@after {
-}:
+ruleStatemachine:
 	(
 		{
 			markLeaf();
@@ -133,10 +130,7 @@ entryRuleEvent:
 	EOF;
 
 // Rule Event
-ruleEvent@init {
-}
-@after {
-}:
+ruleEvent:
 	(
 		(
 			(
@@ -182,10 +176,7 @@ entryRuleCommand:
 	EOF;
 
 // Rule Command
-ruleCommand@init {
-}
-@after {
-}:
+ruleCommand:
 	(
 		(
 			(
@@ -220,10 +211,7 @@ entryRuleState:
 	EOF;
 
 // Rule State
-ruleState@init {
-}
-@after {
-}:
+ruleState:
 	(
 		{
 			markLeaf();
@@ -306,10 +294,7 @@ entryRuleTransition:
 	EOF;
 
 // Rule Transition
-ruleTransition@init {
-}
-@after {
-}:
+ruleTransition:
 	(
 		(
 			(

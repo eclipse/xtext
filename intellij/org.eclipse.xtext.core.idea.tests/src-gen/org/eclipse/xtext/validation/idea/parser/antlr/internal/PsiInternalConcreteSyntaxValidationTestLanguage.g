@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -407,10 +404,7 @@ entryRuleSimpleGroup:
 	EOF;
 
 // Rule SimpleGroup
-ruleSimpleGroup@init {
-}
-@after {
-}:
+ruleSimpleGroup:
 	(
 		{
 			markLeaf();
@@ -452,10 +446,7 @@ entryRuleSimpleAlternative:
 	EOF;
 
 // Rule SimpleAlternative
-ruleSimpleAlternative@init {
-}
-@after {
-}:
+ruleSimpleAlternative:
 	(
 		{
 			markLeaf();
@@ -518,10 +509,7 @@ entryRuleSimpleMultiplicities:
 	EOF;
 
 // Rule SimpleMultiplicities
-ruleSimpleMultiplicities@init {
-}
-@after {
-}:
+ruleSimpleMultiplicities:
 	(
 		{
 			markLeaf();
@@ -606,10 +594,7 @@ entryRuleGroupMultiplicities:
 	EOF;
 
 // Rule GroupMultiplicities
-ruleGroupMultiplicities@init {
-}
-@after {
-}:
+ruleGroupMultiplicities:
 	(
 		{
 			markLeaf();
@@ -733,10 +718,7 @@ entryRuleAlternativeMultiplicities:
 	EOF;
 
 // Rule AlternativeMultiplicities
-ruleAlternativeMultiplicities@init {
-}
-@after {
-}:
+ruleAlternativeMultiplicities:
 	(
 		{
 			markLeaf();
@@ -872,10 +854,7 @@ entryRuleAssignedAction:
 	EOF;
 
 // Rule AssignedAction
-ruleAssignedAction@init {
-}
-@after {
-}:
+ruleAssignedAction:
 	(
 		{
 			markLeaf();
@@ -925,10 +904,7 @@ entryRuleAssignedActionSecond:
 	EOF;
 
 // Rule AssignedActionSecond
-ruleAssignedActionSecond@init {
-}
-@after {
-}:
+ruleAssignedActionSecond:
 	(
 		{
 			markLeaf();
@@ -977,10 +953,7 @@ entryRuleUnassignedAction1:
 	EOF;
 
 // Rule UnassignedAction1
-ruleUnassignedAction1@init {
-}
-@after {
-}:
+ruleUnassignedAction1:
 	(
 		(
 			{
@@ -1028,10 +1001,7 @@ entryRuleUnassignedAction2:
 	EOF;
 
 // Rule UnassignedAction2
-ruleUnassignedAction2@init {
-}
-@after {
-}:
+ruleUnassignedAction2:
 	(
 		(
 			{
@@ -1079,10 +1049,7 @@ entryRuleUnassignedAction3:
 	EOF;
 
 // Rule UnassignedAction3
-ruleUnassignedAction3@init {
-}
-@after {
-}:
+ruleUnassignedAction3:
 	(
 		{
 			markLeaf();
@@ -1157,10 +1124,7 @@ entryRuleUnassignedRuleCall1:
 	EOF;
 
 // Rule UnassignedRuleCall1
-ruleUnassignedRuleCall1@init {
-}
-@after {
-}:
+ruleUnassignedRuleCall1:
 	(
 		{
 			markLeaf();
@@ -1198,10 +1162,7 @@ entryRuleUnassignedRuleCall1Sub:
 	EOF;
 
 // Rule UnassignedRuleCall1Sub
-ruleUnassignedRuleCall1Sub@init {
-}
-@after {
-}:
+ruleUnassignedRuleCall1Sub:
 	(
 		(
 			{
@@ -1223,10 +1184,7 @@ entryRuleUnassignedRuleCall2:
 	EOF;
 
 // Rule UnassignedRuleCall2
-ruleUnassignedRuleCall2@init {
-}
-@after {
-}:
+ruleUnassignedRuleCall2:
 	(
 		{
 			markLeaf();
@@ -1264,10 +1222,7 @@ entryRuleUnassignedRuleCall2Sub:
 	EOF;
 
 // Rule UnassignedRuleCall2Sub
-ruleUnassignedRuleCall2Sub@init {
-}
-@after {
-}:
+ruleUnassignedRuleCall2Sub:
 	(
 		{
 			precedeComposite(elementTypeProvider.getUnassignedRuleCall2Sub_UnassignedRuleCall2SubActionActionElementType());
@@ -1284,10 +1239,7 @@ entryRuleCombination1:
 	EOF;
 
 // Rule Combination1
-ruleCombination1@init {
-}
-@after {
-}:
+ruleCombination1:
 	(
 		{
 			markLeaf();
@@ -1372,10 +1324,7 @@ entryRuleCombination2:
 	EOF;
 
 // Rule Combination2
-ruleCombination2@init {
-}
-@after {
-}:
+ruleCombination2:
 	(
 		{
 			markLeaf();
@@ -1453,10 +1402,7 @@ entryRuleCombination3:
 	EOF;
 
 // Rule Combination3
-ruleCombination3@init {
-}
-@after {
-}:
+ruleCombination3:
 	(
 		{
 			markLeaf();
@@ -1513,10 +1459,7 @@ entryRuleCombination4:
 	EOF;
 
 // Rule Combination4
-ruleCombination4@init {
-}
-@after {
-}:
+ruleCombination4:
 	(
 		{
 			markLeaf();
@@ -1578,10 +1521,7 @@ entryRuleList1:
 	EOF;
 
 // Rule List1
-ruleList1@init {
-}
-@after {
-}:
+ruleList1:
 	(
 		{
 			markLeaf();
@@ -1632,10 +1572,7 @@ entryRuleList2:
 	EOF;
 
 // Rule List2
-ruleList2@init {
-}
-@after {
-}:
+ruleList2:
 	(
 		{
 			markLeaf();
@@ -1688,10 +1625,7 @@ entryRuleList3:
 	EOF;
 
 // Rule List3
-ruleList3@init {
-}
-@after {
-}:
+ruleList3:
 	(
 		(
 			{
@@ -1767,10 +1701,7 @@ entryRuleList4:
 	EOF;
 
 // Rule List4
-ruleList4@init {
-}
-@after {
-}:
+ruleList4:
 	(
 		{
 			markLeaf();
@@ -1839,10 +1770,7 @@ entryRuleList5:
 	EOF;
 
 // Rule List5
-ruleList5@init {
-}
-@after {
-}:
+ruleList5:
 	(
 		{
 			markLeaf();
@@ -1927,10 +1855,7 @@ entryRuleAltList1:
 	EOF;
 
 // Rule AltList1
-ruleAltList1@init {
-}
-@after {
-}:
+ruleAltList1:
 	(
 		{
 			markLeaf();
@@ -2040,10 +1965,7 @@ entryRuleAltList2:
 	EOF;
 
 // Rule AltList2
-ruleAltList2@init {
-}
-@after {
-}:
+ruleAltList2:
 	(
 		{
 			markLeaf();
@@ -2141,10 +2063,7 @@ entryRuleTransientObject:
 	EOF;
 
 // Rule TransientObject
-ruleTransientObject@init {
-}
-@after {
-}:
+ruleTransientObject:
 	(
 		{
 			markLeaf();
@@ -2188,10 +2107,7 @@ entryRuleTransientObjectSub:
 	EOF;
 
 // Rule TransientObjectSub
-ruleTransientObjectSub@init {
-}
-@after {
-}:
+ruleTransientObjectSub:
 	(
 		(
 			(
@@ -2226,10 +2142,7 @@ entryRuleTransientSerializeables1:
 	EOF;
 
 // Rule TransientSerializeables1
-ruleTransientSerializeables1@init {
-}
-@after {
-}:
+ruleTransientSerializeables1:
 	(
 		{
 			markLeaf();
@@ -2297,10 +2210,7 @@ entryRuleStaticSimplification:
 	EOF;
 
 // Rule StaticSimplification
-ruleStaticSimplification@init {
-}
-@after {
-}:
+ruleStaticSimplification:
 	(
 		{
 			markLeaf();
@@ -2398,10 +2308,7 @@ entryRuleTwoVersion:
 	EOF;
 
 // Rule TwoVersion
-ruleTwoVersion@init {
-}
-@after {
-}:
+ruleTwoVersion:
 	(
 		{
 			markLeaf();
@@ -2438,10 +2345,7 @@ entryRuleTwoVersionNo1:
 	EOF;
 
 // Rule TwoVersionNo1
-ruleTwoVersionNo1@init {
-}
-@after {
-}:
+ruleTwoVersionNo1:
 	(
 		(
 			(
@@ -2525,10 +2429,7 @@ entryRuleTwoVersionNo2:
 	EOF;
 
 // Rule TwoVersionNo2
-ruleTwoVersionNo2@init {
-}
-@after {
-}:
+ruleTwoVersionNo2:
 	(
 		(
 			(
@@ -2659,10 +2560,7 @@ entryRuleHeuristic1:
 	EOF;
 
 // Rule Heuristic1
-ruleHeuristic1@init {
-}
-@after {
-}:
+ruleHeuristic1:
 	(
 		{
 			markLeaf();

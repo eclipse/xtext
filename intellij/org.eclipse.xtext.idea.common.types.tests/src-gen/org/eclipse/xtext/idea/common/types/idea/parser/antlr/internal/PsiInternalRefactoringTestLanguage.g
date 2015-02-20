@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleReferenceHolder:
 	EOF;
 
 // Rule ReferenceHolder
-ruleReferenceHolder@init {
-}
-@after {
-}:
+ruleReferenceHolder:
 	(
 		(
 			(
@@ -119,10 +113,7 @@ entryRuleFQN:
 	EOF;
 
 // Rule FQN
-ruleFQN@init {
-}
-@after {
-}:
+ruleFQN:
 	(
 		{
 			markLeaf();

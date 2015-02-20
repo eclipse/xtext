@@ -110,13 +110,11 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
         Token otherlv_4=null;
         Token otherlv_6=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:62:2: ( ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:63:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:59:9: ( ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:60:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:63:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:60:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 11:
@@ -148,28 +146,28 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:64:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:61:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:64:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:65:4: otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:61:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:62:4: otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) )
                     {
 
                     				markLeaf();
                     			
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleRoot94); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleRoot85); 
 
                     				doneLeaf(otherlv_0, elementTypeProvider.getRoot_DigitOneKeyword_0_0ElementType());
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:72:4: ( (lv_element_1_0= ruleRule1 ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:73:5: (lv_element_1_0= ruleRule1 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:69:4: ( (lv_element_1_0= ruleRule1 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:70:5: (lv_element_1_0= ruleRule1 )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:73:5: (lv_element_1_0= ruleRule1 )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:74:6: lv_element_1_0= ruleRule1
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:70:5: (lv_element_1_0= ruleRule1 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:71:6: lv_element_1_0= ruleRule1
                     {
 
                     						markComposite(elementTypeProvider.getRoot_ElementRule1ParserRuleCall_0_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleRule1_in_ruleRoot126);
+                    pushFollow(FollowSets000.FOLLOW_ruleRule1_in_ruleRoot117);
                     ruleRule1();
 
                     state._fsp--;
@@ -190,28 +188,28 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:85:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:82:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:85:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:86:4: otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:82:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:83:4: otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) )
                     {
 
                     				markLeaf();
                     			
-                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot172); 
+                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot163); 
 
                     				doneLeaf(otherlv_2, elementTypeProvider.getRoot_DigitTwoKeyword_1_0ElementType());
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:93:4: ( (lv_element_3_0= ruleRule2 ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:94:5: (lv_element_3_0= ruleRule2 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:90:4: ( (lv_element_3_0= ruleRule2 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:91:5: (lv_element_3_0= ruleRule2 )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:94:5: (lv_element_3_0= ruleRule2 )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:95:6: lv_element_3_0= ruleRule2
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:91:5: (lv_element_3_0= ruleRule2 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:92:6: lv_element_3_0= ruleRule2
                     {
 
                     						markComposite(elementTypeProvider.getRoot_ElementRule2ParserRuleCall_1_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleRule2_in_ruleRoot204);
+                    pushFollow(FollowSets000.FOLLOW_ruleRule2_in_ruleRoot195);
                     ruleRule2();
 
                     state._fsp--;
@@ -232,28 +230,28 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:106:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:103:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:106:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:107:4: otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:103:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:104:4: otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) )
                     {
 
                     				markLeaf();
                     			
-                    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleRoot250); 
+                    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleRoot241); 
 
                     				doneLeaf(otherlv_4, elementTypeProvider.getRoot_DigitThreeKeyword_2_0ElementType());
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:114:4: ( (lv_element_5_0= ruleRule3 ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:115:5: (lv_element_5_0= ruleRule3 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:111:4: ( (lv_element_5_0= ruleRule3 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:112:5: (lv_element_5_0= ruleRule3 )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:115:5: (lv_element_5_0= ruleRule3 )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:116:6: lv_element_5_0= ruleRule3
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:112:5: (lv_element_5_0= ruleRule3 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:113:6: lv_element_5_0= ruleRule3
                     {
 
                     						markComposite(elementTypeProvider.getRoot_ElementRule3ParserRuleCall_2_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleRule3_in_ruleRoot282);
+                    pushFollow(FollowSets000.FOLLOW_ruleRule3_in_ruleRoot273);
                     ruleRule3();
 
                     state._fsp--;
@@ -274,28 +272,28 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 4 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:127:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:124:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:127:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:128:4: otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:124:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:125:4: otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) )
                     {
 
                     				markLeaf();
                     			
-                    otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleRoot328); 
+                    otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleRoot319); 
 
                     				doneLeaf(otherlv_6, elementTypeProvider.getRoot_DigitFourKeyword_3_0ElementType());
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:135:4: ( (lv_element_7_0= ruleRule4 ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:136:5: (lv_element_7_0= ruleRule4 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:132:4: ( (lv_element_7_0= ruleRule4 ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:133:5: (lv_element_7_0= ruleRule4 )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:136:5: (lv_element_7_0= ruleRule4 )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:137:6: lv_element_7_0= ruleRule4
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:133:5: (lv_element_7_0= ruleRule4 )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:134:6: lv_element_7_0= ruleRule4
                     {
 
                     						markComposite(elementTypeProvider.getRoot_ElementRule4ParserRuleCall_3_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleRule4_in_ruleRoot360);
+                    pushFollow(FollowSets000.FOLLOW_ruleRule4_in_ruleRoot351);
                     ruleRule4();
 
                     state._fsp--;
@@ -321,8 +319,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -336,20 +332,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleRule1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:151:1: entryRuleRule1 : ruleRule1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:148:1: entryRuleRule1 : ruleRule1 EOF ;
     public final void entryRuleRule1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:151:15: ( ruleRule1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:152:2: ruleRule1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:148:15: ( ruleRule1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:149:2: ruleRule1 EOF
             {
              markComposite(elementTypeProvider.getRule1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleRule1_in_entryRuleRule1398);
+            pushFollow(FollowSets000.FOLLOW_ruleRule1_in_entryRuleRule1389);
             ruleRule1();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule1404); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule1395); 
 
             }
 
@@ -366,29 +362,27 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleRule1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:158:1: ruleRule1 : ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:155:1: ruleRule1 : ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) ;
     public final void ruleRule1() throws RecognitionException {
         Token lv_value_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:161:2: ( ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:162:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:155:10: ( ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:156:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:162:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:163:3: ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:156:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:157:3: ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:163:3: ( (lv_type_0_0= ruleFirstEnum ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:164:4: (lv_type_0_0= ruleFirstEnum )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:157:3: ( (lv_type_0_0= ruleFirstEnum ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:158:4: (lv_type_0_0= ruleFirstEnum )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:164:4: (lv_type_0_0= ruleFirstEnum )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:165:5: lv_type_0_0= ruleFirstEnum
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:158:4: (lv_type_0_0= ruleFirstEnum )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:159:5: lv_type_0_0= ruleFirstEnum
             {
 
             					markComposite(elementTypeProvider.getRule1_TypeFirstEnumEnumRuleCall_0_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleFirstEnum_in_ruleRule1445);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstEnum_in_ruleRule1427);
             ruleFirstEnum();
 
             state._fsp--;
@@ -402,16 +396,16 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:174:3: ( (lv_value_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:175:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:168:3: ( (lv_value_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:169:4: (lv_value_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:175:4: (lv_value_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:176:5: lv_value_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:169:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:170:5: lv_value_1_0= RULE_INT
             {
 
             					markLeaf();
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule1483); 
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule1465); 
 
             					doneLeaf(lv_value_1_0, elementTypeProvider.getRule1_ValueINTTerminalRuleCall_1_0ElementType());
             				
@@ -421,16 +415,16 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:185:3: ( (lv_unit_2_0= ruleSecondEnum ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:186:4: (lv_unit_2_0= ruleSecondEnum )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:179:3: ( (lv_unit_2_0= ruleSecondEnum ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:180:4: (lv_unit_2_0= ruleSecondEnum )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:186:4: (lv_unit_2_0= ruleSecondEnum )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:187:5: lv_unit_2_0= ruleSecondEnum
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:180:4: (lv_unit_2_0= ruleSecondEnum )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:181:5: lv_unit_2_0= ruleSecondEnum
             {
 
             					markComposite(elementTypeProvider.getRule1_UnitSecondEnumEnumRuleCall_2_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleSecondEnum_in_ruleRule1521);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondEnum_in_ruleRule1503);
             ruleSecondEnum();
 
             state._fsp--;
@@ -450,8 +444,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -465,20 +457,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleRule2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:200:1: entryRuleRule2 : ruleRule2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:194:1: entryRuleRule2 : ruleRule2 EOF ;
     public final void entryRuleRule2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:200:15: ( ruleRule2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:201:2: ruleRule2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:194:15: ( ruleRule2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:195:2: ruleRule2 EOF
             {
              markComposite(elementTypeProvider.getRule2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleRule2_in_entryRuleRule2552);
+            pushFollow(FollowSets000.FOLLOW_ruleRule2_in_entryRuleRule2534);
             ruleRule2();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule2558); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule2540); 
 
             }
 
@@ -495,38 +487,36 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleRule2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:207:1: ruleRule2 : (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:201:1: ruleRule2 : (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) ;
     public final void ruleRule2() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_value_1_0=null;
         Token otherlv_2=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:210:2: ( (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:211:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:201:10: ( (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:202:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:211:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:212:3: otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:202:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:203:3: otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's'
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleRule2586); 
+            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleRule2559); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getRule2_AfterKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:219:3: ( (lv_value_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:220:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:210:3: ( (lv_value_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:211:4: (lv_value_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:220:4: (lv_value_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:221:5: lv_value_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:211:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:212:5: lv_value_1_0= RULE_INT
             {
 
             					markLeaf();
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule2613); 
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule2586); 
 
             					doneLeaf(lv_value_1_0, elementTypeProvider.getRule2_ValueINTTerminalRuleCall_1_0ElementType());
             				
@@ -539,7 +529,7 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             			markLeaf();
             		
-            otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleRule2638); 
+            otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleRule2611); 
 
             			doneLeaf(otherlv_2, elementTypeProvider.getRule2_SKeyword_2ElementType());
             		
@@ -548,8 +538,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -564,20 +552,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleRule3"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:241:1: entryRuleRule3 : ruleRule3 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:232:1: entryRuleRule3 : ruleRule3 EOF ;
     public final void entryRuleRule3() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:241:15: ( ruleRule3 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:242:2: ruleRule3 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:232:15: ( ruleRule3 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:233:2: ruleRule3 EOF
             {
              markComposite(elementTypeProvider.getRule3ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleRule3_in_entryRuleRule3658);
+            pushFollow(FollowSets000.FOLLOW_ruleRule3_in_entryRuleRule3631);
             ruleRule3();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule3664); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule3637); 
 
             }
 
@@ -594,23 +582,21 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleRule3"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:248:1: ruleRule3 : ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:239:1: ruleRule3 : ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) ;
     public final void ruleRule3() throws RecognitionException {
         Token lv_value_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:251:2: ( ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:252:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:239:10: ( ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:240:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:252:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:253:3: ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:240:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:241:3: ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS
             {
 
             			markComposite(elementTypeProvider.getRule3_AfterParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleAfter_in_ruleRule3690);
+            pushFollow(FollowSets000.FOLLOW_ruleAfter_in_ruleRule3654);
             ruleAfter();
 
             state._fsp--;
@@ -618,16 +604,16 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:260:3: ( (lv_value_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:261:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:248:3: ( (lv_value_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:249:4: (lv_value_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:261:4: (lv_value_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:262:5: lv_value_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:249:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:250:5: lv_value_1_0= RULE_INT
             {
 
             					markLeaf();
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule3717); 
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule3681); 
 
             					doneLeaf(lv_value_1_0, elementTypeProvider.getRule3_ValueINTTerminalRuleCall_1_0ElementType());
             				
@@ -640,7 +626,7 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             			markComposite(elementTypeProvider.getRule3_SParserRuleCall_2ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleS_in_ruleRule3740);
+            pushFollow(FollowSets000.FOLLOW_ruleS_in_ruleRule3704);
             ruleS();
 
             state._fsp--;
@@ -653,8 +639,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -669,20 +653,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleRule4"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:282:1: entryRuleRule4 : ruleRule4 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:270:1: entryRuleRule4 : ruleRule4 EOF ;
     public final void entryRuleRule4() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:282:15: ( ruleRule4 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:283:2: ruleRule4 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:270:15: ( ruleRule4 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:271:2: ruleRule4 EOF
             {
              markComposite(elementTypeProvider.getRule4ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleRule4_in_entryRuleRule4760);
+            pushFollow(FollowSets000.FOLLOW_ruleRule4_in_entryRuleRule4724);
             ruleRule4();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule4766); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRule4730); 
 
             }
 
@@ -699,29 +683,27 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleRule4"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:289:1: ruleRule4 : ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:277:1: ruleRule4 : ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) ;
     public final void ruleRule4() throws RecognitionException {
         Token lv_value_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:292:2: ( ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:293:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:277:10: ( ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:278:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:293:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:294:3: ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:278:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:279:3: ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:294:3: ( (lv_after_0_0= ruleAfterObj ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:295:4: (lv_after_0_0= ruleAfterObj )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:279:3: ( (lv_after_0_0= ruleAfterObj ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:280:4: (lv_after_0_0= ruleAfterObj )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:295:4: (lv_after_0_0= ruleAfterObj )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:296:5: lv_after_0_0= ruleAfterObj
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:280:4: (lv_after_0_0= ruleAfterObj )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:281:5: lv_after_0_0= ruleAfterObj
             {
 
             					markComposite(elementTypeProvider.getRule4_AfterAfterObjParserRuleCall_0_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleAfterObj_in_ruleRule4807);
+            pushFollow(FollowSets000.FOLLOW_ruleAfterObj_in_ruleRule4762);
             ruleAfterObj();
 
             state._fsp--;
@@ -735,16 +717,16 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:305:3: ( (lv_value_1_0= RULE_INT ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:306:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:290:3: ( (lv_value_1_0= RULE_INT ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:291:4: (lv_value_1_0= RULE_INT )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:306:4: (lv_value_1_0= RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:307:5: lv_value_1_0= RULE_INT
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:291:4: (lv_value_1_0= RULE_INT )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:292:5: lv_value_1_0= RULE_INT
             {
 
             					markLeaf();
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule4845); 
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRule4800); 
 
             					doneLeaf(lv_value_1_0, elementTypeProvider.getRule4_ValueINTTerminalRuleCall_1_0ElementType());
             				
@@ -754,16 +736,16 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:316:3: ( (lv_s_2_0= ruleSObj ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:317:4: (lv_s_2_0= ruleSObj )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:301:3: ( (lv_s_2_0= ruleSObj ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:302:4: (lv_s_2_0= ruleSObj )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:317:4: (lv_s_2_0= ruleSObj )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:318:5: lv_s_2_0= ruleSObj
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:302:4: (lv_s_2_0= ruleSObj )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:303:5: lv_s_2_0= ruleSObj
             {
 
             					markComposite(elementTypeProvider.getRule4_SSObjParserRuleCall_2_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleSObj_in_ruleRule4883);
+            pushFollow(FollowSets000.FOLLOW_ruleSObj_in_ruleRule4838);
             ruleSObj();
 
             state._fsp--;
@@ -783,8 +765,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -798,20 +778,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleAfterObj"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:331:1: entryRuleAfterObj : ruleAfterObj EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:316:1: entryRuleAfterObj : ruleAfterObj EOF ;
     public final void entryRuleAfterObj() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:331:18: ( ruleAfterObj EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:332:2: ruleAfterObj EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:316:18: ( ruleAfterObj EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:317:2: ruleAfterObj EOF
             {
              markComposite(elementTypeProvider.getAfterObjElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAfterObj_in_entryRuleAfterObj914);
+            pushFollow(FollowSets000.FOLLOW_ruleAfterObj_in_entryRuleAfterObj869);
             ruleAfterObj();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAfterObj920); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAfterObj875); 
 
             }
 
@@ -828,26 +808,24 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleAfterObj"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:338:1: ruleAfterObj : ( (lv_value_0_0= 'after' ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:323:1: ruleAfterObj : ( (lv_value_0_0= 'after' ) ) ;
     public final void ruleAfterObj() throws RecognitionException {
         Token lv_value_0_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:341:2: ( ( (lv_value_0_0= 'after' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:342:2: ( (lv_value_0_0= 'after' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:323:13: ( ( (lv_value_0_0= 'after' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:324:2: ( (lv_value_0_0= 'after' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:342:2: ( (lv_value_0_0= 'after' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:343:3: (lv_value_0_0= 'after' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:324:2: ( (lv_value_0_0= 'after' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:325:3: (lv_value_0_0= 'after' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:343:3: (lv_value_0_0= 'after' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:344:4: lv_value_0_0= 'after'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:325:3: (lv_value_0_0= 'after' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:326:4: lv_value_0_0= 'after'
             {
 
             				markLeaf();
             			
-            lv_value_0_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAfterObj954); 
+            lv_value_0_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAfterObj900); 
 
             				doneLeaf(lv_value_0_0, elementTypeProvider.getAfterObj_ValueAfterKeyword_0ElementType());
             			
@@ -859,8 +837,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -875,20 +851,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleSObj"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:356:1: entryRuleSObj : ruleSObj EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:338:1: entryRuleSObj : ruleSObj EOF ;
     public final void entryRuleSObj() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:356:14: ( ruleSObj EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:357:2: ruleSObj EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:338:14: ( ruleSObj EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:339:2: ruleSObj EOF
             {
              markComposite(elementTypeProvider.getSObjElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSObj_in_entryRuleSObj979);
+            pushFollow(FollowSets000.FOLLOW_ruleSObj_in_entryRuleSObj925);
             ruleSObj();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSObj985); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSObj931); 
 
             }
 
@@ -905,26 +881,24 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleSObj"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:363:1: ruleSObj : ( (lv_value_0_0= 's' ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:345:1: ruleSObj : ( (lv_value_0_0= 's' ) ) ;
     public final void ruleSObj() throws RecognitionException {
         Token lv_value_0_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:366:2: ( ( (lv_value_0_0= 's' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:367:2: ( (lv_value_0_0= 's' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:345:9: ( ( (lv_value_0_0= 's' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:346:2: ( (lv_value_0_0= 's' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:367:2: ( (lv_value_0_0= 's' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:368:3: (lv_value_0_0= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:346:2: ( (lv_value_0_0= 's' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:347:3: (lv_value_0_0= 's' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:368:3: (lv_value_0_0= 's' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:369:4: lv_value_0_0= 's'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:347:3: (lv_value_0_0= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:348:4: lv_value_0_0= 's'
             {
 
             				markLeaf();
             			
-            lv_value_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSObj1019); 
+            lv_value_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSObj956); 
 
             				doneLeaf(lv_value_0_0, elementTypeProvider.getSObj_ValueSKeyword_0ElementType());
             			
@@ -936,8 +910,6 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -952,20 +924,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleAfter"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:381:1: entryRuleAfter : ruleAfter EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:360:1: entryRuleAfter : ruleAfter EOF ;
     public final void entryRuleAfter() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:381:15: ( ruleAfter EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:382:2: ruleAfter EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:360:15: ( ruleAfter EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:361:2: ruleAfter EOF
             {
              markComposite(elementTypeProvider.getAfterElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAfter_in_entryRuleAfter1044);
+            pushFollow(FollowSets000.FOLLOW_ruleAfter_in_entryRuleAfter981);
             ruleAfter();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAfter1050); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAfter987); 
 
             }
 
@@ -982,27 +954,23 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleAfter"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:388:1: ruleAfter : kw= 'after' ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:367:1: ruleAfter : kw= 'after' ;
     public final void ruleAfter() throws RecognitionException {
         Token kw=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:391:2: (kw= 'after' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:392:2: kw= 'after'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:367:10: (kw= 'after' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:368:2: kw= 'after'
             {
 
             		markLeaf();
             	
-            kw=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAfter1073); 
+            kw=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAfter1001); 
 
             		doneLeaf(kw, elementTypeProvider.getAfter_AfterKeywordElementType());
             	
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -1017,20 +985,20 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleS"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:402:1: entryRuleS : ruleS EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:378:1: entryRuleS : ruleS EOF ;
     public final void entryRuleS() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:402:11: ( ruleS EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:403:2: ruleS EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:378:11: ( ruleS EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:379:2: ruleS EOF
             {
              markComposite(elementTypeProvider.getSElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleS_in_entryRuleS1089);
+            pushFollow(FollowSets000.FOLLOW_ruleS_in_entryRuleS1017);
             ruleS();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleS1095); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleS1023); 
 
             }
 
@@ -1047,27 +1015,23 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleS"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:409:1: ruleS : kw= 's' ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:385:1: ruleS : kw= 's' ;
     public final void ruleS() throws RecognitionException {
         Token kw=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:412:2: (kw= 's' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:413:2: kw= 's'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:385:6: (kw= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:386:2: kw= 's'
             {
 
             		markLeaf();
             	
-            kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleS1118); 
+            kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleS1037); 
 
             		doneLeaf(kw, elementTypeProvider.getS_SKeywordElementType());
             	
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -1082,21 +1046,21 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleFirstEnum"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:423:1: ruleFirstEnum : (enumLiteral_0= 'after' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:396:1: ruleFirstEnum : (enumLiteral_0= 'after' ) ;
     public final void ruleFirstEnum() throws RecognitionException {
         Token enumLiteral_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:423:14: ( (enumLiteral_0= 'after' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:424:2: (enumLiteral_0= 'after' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:396:14: ( (enumLiteral_0= 'after' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:397:2: (enumLiteral_0= 'after' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:424:2: (enumLiteral_0= 'after' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:425:3: enumLiteral_0= 'after'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:397:2: (enumLiteral_0= 'after' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:398:3: enumLiteral_0= 'after'
             {
 
             			markLeaf();
             		
-            enumLiteral_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleFirstEnum1141); 
+            enumLiteral_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleFirstEnum1060); 
 
             			doneLeaf(enumLiteral_0, elementTypeProvider.getFirstEnum_ValueEnumLiteralDeclarationElementType());
             		
@@ -1119,21 +1083,21 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleSecondEnum"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:436:1: ruleSecondEnum : (enumLiteral_0= 's' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:409:1: ruleSecondEnum : (enumLiteral_0= 's' ) ;
     public final void ruleSecondEnum() throws RecognitionException {
         Token enumLiteral_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:436:15: ( (enumLiteral_0= 's' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:437:2: (enumLiteral_0= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:409:15: ( (enumLiteral_0= 's' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:410:2: (enumLiteral_0= 's' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:437:2: (enumLiteral_0= 's' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:438:3: enumLiteral_0= 's'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:410:2: (enumLiteral_0= 's' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug378967TestLanguage.g:411:3: enumLiteral_0= 's'
             {
 
             			markLeaf();
             		
-            enumLiteral_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSecondEnum1168); 
+            enumLiteral_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSecondEnum1087); 
 
             			doneLeaf(enumLiteral_0, elementTypeProvider.getSecondEnum_ValueEnumLiteralDeclarationElementType());
             		
@@ -1163,48 +1127,48 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleRoot60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleRoot94 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleRule1_in_ruleRoot126 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleRoot172 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleRule2_in_ruleRoot204 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleRoot250 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleRule3_in_ruleRoot282 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleRoot328 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleRule4_in_ruleRoot360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRule1_in_entryRuleRule1398 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRule1404 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFirstEnum_in_ruleRule1445 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRule1483 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleSecondEnum_in_ruleRule1521 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRule2_in_entryRuleRule2552 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRule2558 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleRule2586 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRule2613 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleRule2638 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRule3_in_entryRuleRule3658 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRule3664 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAfter_in_ruleRule3690 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRule3717 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleS_in_ruleRule3740 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRule4_in_entryRuleRule4760 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRule4766 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAfterObj_in_ruleRule4807 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRule4845 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleSObj_in_ruleRule4883 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAfterObj_in_entryRuleAfterObj914 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAfterObj920 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleAfterObj954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSObj_in_entryRuleSObj979 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSObj985 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleSObj1019 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAfter_in_entryRuleAfter1044 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAfter1050 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleAfter1073 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleS_in_entryRuleS1089 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleS1095 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleS1118 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleFirstEnum1141 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleSecondEnum1168 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleRoot85 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleRule1_in_ruleRoot117 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleRoot163 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleRule2_in_ruleRoot195 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleRoot241 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleRule3_in_ruleRoot273 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleRoot319 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleRule4_in_ruleRoot351 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRule1_in_entryRuleRule1389 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRule1395 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFirstEnum_in_ruleRule1427 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRule1465 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_ruleSecondEnum_in_ruleRule1503 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRule2_in_entryRuleRule2534 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRule2540 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleRule2559 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRule2586 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleRule2611 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRule3_in_entryRuleRule3631 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRule3637 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAfter_in_ruleRule3654 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRule3681 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_ruleS_in_ruleRule3704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRule4_in_entryRuleRule4724 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRule4730 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAfterObj_in_ruleRule4762 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRule4800 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_ruleSObj_in_ruleRule4838 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAfterObj_in_entryRuleAfterObj869 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAfterObj875 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleAfterObj900 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSObj_in_entryRuleSObj925 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSObj931 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleSObj956 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAfter_in_entryRuleAfter981 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAfter987 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleAfter1001 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleS_in_entryRuleS1017 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleS1023 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleS1037 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleFirstEnum1060 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleSecondEnum1087 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

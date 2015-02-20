@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -197,10 +194,7 @@ entryRuleBaseAttribute:
 	EOF;
 
 // Rule BaseAttribute
-ruleBaseAttribute@init {
-}
-@after {
-}:
+ruleBaseAttribute:
 	(
 		(
 			{
@@ -282,10 +276,7 @@ entryRuleAttribute:
 	EOF;
 
 // Rule Attribute
-ruleAttribute@init {
-}
-@after {
-}:
+ruleAttribute:
 	(
 		(
 			{
@@ -311,10 +302,7 @@ entryRuleMaster:
 	EOF;
 
 // Rule Master
-ruleMaster@init {
-}
-@after {
-}:
+ruleMaster:
 	(
 		(
 			{
@@ -340,10 +328,7 @@ entryRuleActionAttribute:
 	EOF;
 
 // Rule ActionAttribute
-ruleActionAttribute@init {
-}
-@after {
-}:
+ruleActionAttribute:
 	(
 		(
 			(
@@ -441,10 +426,7 @@ entryRuleSimpleAttribute:
 	EOF;
 
 // Rule SimpleAttribute
-ruleSimpleAttribute@init {
-}
-@after {
-}:
+ruleSimpleAttribute:
 	(
 		(
 			(
@@ -509,10 +491,7 @@ entryRuleRuleCallAttribute:
 	EOF;
 
 // Rule RuleCallAttribute
-ruleRuleCallAttribute@init {
-}
-@after {
-}:
+ruleRuleCallAttribute:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute_CallMeParserRuleCall_0ElementType());
@@ -550,10 +529,7 @@ entryRuleCallMe:
 	EOF;
 
 // Rule CallMe
-ruleCallMe@init {
-}
-@after {
-}:
+ruleCallMe:
 	(
 		(
 			{
@@ -598,10 +574,7 @@ entryRuleRuleCallAttribute2:
 	EOF;
 
 // Rule RuleCallAttribute2
-ruleRuleCallAttribute2@init {
-}
-@after {
-}:
+ruleRuleCallAttribute2:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute2_CallMe2ParserRuleCall_0ElementType());
@@ -662,10 +635,7 @@ entryRuleCallMe2:
 	EOF;
 
 // Rule CallMe2
-ruleCallMe2@init {
-}
-@after {
-}:
+ruleCallMe2:
 	(
 		(
 			{
@@ -687,10 +657,7 @@ entryRuleRuleCallAttribute3:
 	EOF;
 
 // Rule RuleCallAttribute3
-ruleRuleCallAttribute3@init {
-}
-@after {
-}:
+ruleRuleCallAttribute3:
 	(
 		{
 			markComposite(elementTypeProvider.getRuleCallAttribute3_CallMe3ParserRuleCall_0ElementType());
@@ -751,10 +718,7 @@ entryRuleCallMe3:
 	EOF;
 
 // Rule CallMe3
-ruleCallMe3@init {
-}
-@after {
-}:
+ruleCallMe3:
 	(
 		{
 			markLeaf();
@@ -788,10 +752,7 @@ entryRuleCallMe4:
 	EOF;
 
 // Rule CallMe4
-ruleCallMe4@init {
-}
-@after {
-}:
+ruleCallMe4:
 	(
 		(
 			{

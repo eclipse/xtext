@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleDefinition:
 	EOF;
 
 // Rule Definition
-ruleDefinition@init {
-}
-@after {
-}:
+ruleDefinition:
 	(
 		{
 			markLeaf();
@@ -144,10 +138,7 @@ entryRuleChild:
 	EOF;
 
 // Rule Child
-ruleChild@init {
-}
-@after {
-}:
+ruleChild:
 	(
 		{
 			markLeaf();
@@ -196,10 +187,7 @@ entryRuleReference:
 	EOF;
 
 // Rule Reference
-ruleReference@init {
-}
-@after {
-}:
+ruleReference:
 	(
 		{
 			markLeaf();

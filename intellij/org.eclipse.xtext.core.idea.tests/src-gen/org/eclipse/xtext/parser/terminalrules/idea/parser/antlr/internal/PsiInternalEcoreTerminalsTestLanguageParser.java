@@ -106,13 +106,11 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
         Token otherlv_4=null;
         Token lv_dateValues_5_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:62:2: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:63:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:59:10: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:60:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:63:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:60:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             loop1:
             do {
                 int alt1=4;
@@ -137,28 +135,28 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:64:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:61:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:64:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:65:4: otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:61:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:62:4: otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) )
             	    {
 
             	    				markLeaf();
             	    			
-            	    otherlv_0=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleModel94); 
+            	    otherlv_0=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleModel85); 
 
             	    				doneLeaf(otherlv_0, elementTypeProvider.getModel_IntKeyword_0_0ElementType());
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:72:4: ( (lv_intValues_1_0= RULE_EINT ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:73:5: (lv_intValues_1_0= RULE_EINT )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:69:4: ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:70:5: (lv_intValues_1_0= RULE_EINT )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:73:5: (lv_intValues_1_0= RULE_EINT )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:74:6: lv_intValues_1_0= RULE_EINT
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:70:5: (lv_intValues_1_0= RULE_EINT )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:71:6: lv_intValues_1_0= RULE_EINT
             	    {
 
             	    						markLeaf();
             	    					
-            	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_RULE_EINT_in_ruleModel126); 
+            	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_RULE_EINT_in_ruleModel117); 
 
             	    						doneLeaf(lv_intValues_1_0, elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
             	    					
@@ -175,28 +173,28 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:85:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:82:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:85:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:86:4: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:82:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:83:4: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
             	    {
 
             	    				markLeaf();
             	    			
-            	    otherlv_2=(Token)match(input,9,FollowSets000.FOLLOW_9_in_ruleModel172); 
+            	    otherlv_2=(Token)match(input,9,FollowSets000.FOLLOW_9_in_ruleModel163); 
 
             	    				doneLeaf(otherlv_2, elementTypeProvider.getModel_DoubleKeyword_1_0ElementType());
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:93:4: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:94:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:90:4: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:91:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:94:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:95:6: lv_doubleValues_3_0= RULE_EDOUBLE
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:91:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:92:6: lv_doubleValues_3_0= RULE_EDOUBLE
             	    {
 
             	    						markLeaf();
             	    					
-            	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_RULE_EDOUBLE_in_ruleModel204); 
+            	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_RULE_EDOUBLE_in_ruleModel195); 
 
             	    						doneLeaf(lv_doubleValues_3_0, elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
             	    					
@@ -213,28 +211,28 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
             	    }
             	    break;
             	case 3 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:106:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:103:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:106:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:107:4: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:103:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:104:4: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
             	    {
 
             	    				markLeaf();
             	    			
-            	    otherlv_4=(Token)match(input,10,FollowSets000.FOLLOW_10_in_ruleModel250); 
+            	    otherlv_4=(Token)match(input,10,FollowSets000.FOLLOW_10_in_ruleModel241); 
 
             	    				doneLeaf(otherlv_4, elementTypeProvider.getModel_DateKeyword_2_0ElementType());
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:114:4: ( (lv_dateValues_5_0= RULE_EDATE ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:115:5: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:111:4: ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:112:5: (lv_dateValues_5_0= RULE_EDATE )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:115:5: (lv_dateValues_5_0= RULE_EDATE )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:116:6: lv_dateValues_5_0= RULE_EDATE
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:112:5: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalEcoreTerminalsTestLanguage.g:113:6: lv_dateValues_5_0= RULE_EDATE
             	    {
 
             	    						markLeaf();
             	    					
-            	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_RULE_EDATE_in_ruleModel282); 
+            	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_RULE_EDATE_in_ruleModel273); 
 
             	    						doneLeaf(lv_dateValues_5_0, elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
             	    					
@@ -259,8 +257,6 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -281,12 +277,12 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_8_in_ruleModel94 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_EINT_in_ruleModel126 = new BitSet(new long[]{0x0000000000000702L});
-        public static final BitSet FOLLOW_9_in_ruleModel172 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_EDOUBLE_in_ruleModel204 = new BitSet(new long[]{0x0000000000000702L});
-        public static final BitSet FOLLOW_10_in_ruleModel250 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_EDATE_in_ruleModel282 = new BitSet(new long[]{0x0000000000000702L});
+        public static final BitSet FOLLOW_8_in_ruleModel85 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_EINT_in_ruleModel117 = new BitSet(new long[]{0x0000000000000702L});
+        public static final BitSet FOLLOW_9_in_ruleModel163 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_EDOUBLE_in_ruleModel195 = new BitSet(new long[]{0x0000000000000702L});
+        public static final BitSet FOLLOW_10_in_ruleModel241 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_EDATE_in_ruleModel273 = new BitSet(new long[]{0x0000000000000702L});
     }
 
 

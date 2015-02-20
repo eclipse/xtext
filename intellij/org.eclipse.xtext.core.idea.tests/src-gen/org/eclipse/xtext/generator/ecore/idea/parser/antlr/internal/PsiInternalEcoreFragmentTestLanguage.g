@@ -56,10 +56,7 @@ entryRuleSecond:
 	EOF;
 
 // Rule Second
-ruleSecond@init {
-}
-@after {
-}:
+ruleSecond:
 	(
 		(
 			(

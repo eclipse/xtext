@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_IDListParserRuleCall_0ElementType());
@@ -87,10 +84,7 @@ entryRuleIDList:
 	EOF;
 
 // Rule IDList
-ruleIDList@init {
-}
-@after {
-}:
+ruleIDList:
 	(
 		(
 			{
@@ -127,10 +121,7 @@ entryRuleKWList:
 	EOF;
 
 // Rule KWList
-ruleKWList@init {
-}
-@after {
-}:
+ruleKWList:
 	(
 		(
 			{

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -455,10 +452,7 @@ entryRuleSimpleGroup:
 	EOF;
 
 // Rule SimpleGroup
-ruleSimpleGroup@init {
-}
-@after {
-}:
+ruleSimpleGroup:
 	(
 		{
 			markLeaf();
@@ -500,10 +494,7 @@ entryRuleSimpleAlternative:
 	EOF;
 
 // Rule SimpleAlternative
-ruleSimpleAlternative@init {
-}
-@after {
-}:
+ruleSimpleAlternative:
 	(
 		{
 			markLeaf();
@@ -566,10 +557,7 @@ entryRuleSimpleMultiplicities:
 	EOF;
 
 // Rule SimpleMultiplicities
-ruleSimpleMultiplicities@init {
-}
-@after {
-}:
+ruleSimpleMultiplicities:
 	(
 		{
 			markLeaf();
@@ -654,10 +642,7 @@ entryRuleGroupMultiplicities:
 	EOF;
 
 // Rule GroupMultiplicities
-ruleGroupMultiplicities@init {
-}
-@after {
-}:
+ruleGroupMultiplicities:
 	(
 		{
 			markLeaf();
@@ -781,10 +766,7 @@ entryRuleAlternativeMultiplicities:
 	EOF;
 
 // Rule AlternativeMultiplicities
-ruleAlternativeMultiplicities@init {
-}
-@after {
-}:
+ruleAlternativeMultiplicities:
 	(
 		{
 			markLeaf();
@@ -920,10 +902,7 @@ entryRuleList1:
 	EOF;
 
 // Rule List1
-ruleList1@init {
-}
-@after {
-}:
+ruleList1:
 	(
 		{
 			markLeaf();
@@ -974,10 +953,7 @@ entryRuleList2:
 	EOF;
 
 // Rule List2
-ruleList2@init {
-}
-@after {
-}:
+ruleList2:
 	(
 		{
 			markLeaf();
@@ -1036,10 +1012,7 @@ entryRuleAltList1:
 	EOF;
 
 // Rule AltList1
-ruleAltList1@init {
-}
-@after {
-}:
+ruleAltList1:
 	(
 		{
 			markLeaf();
@@ -1149,10 +1122,7 @@ entryRuleAltList2:
 	EOF;
 
 // Rule AltList2
-ruleAltList2@init {
-}
-@after {
-}:
+ruleAltList2:
 	(
 		{
 			markLeaf();
@@ -1250,10 +1220,7 @@ entryRuleSingleKeywords:
 	EOF;
 
 // Rule SingleKeywords
-ruleSingleKeywords@init {
-}
-@after {
-}:
+ruleSingleKeywords:
 	(
 		{
 			markLeaf();
@@ -1302,10 +1269,7 @@ entryRuleSingleKeywordsOrID:
 	EOF;
 
 // Rule SingleKeywordsOrID
-ruleSingleKeywordsOrID@init {
-}
-@after {
-}:
+ruleSingleKeywordsOrID:
 	(
 		{
 			markLeaf();
@@ -1362,10 +1326,7 @@ entryRuleSingleTerminals:
 	EOF;
 
 // Rule SingleTerminals
-ruleSingleTerminals@init {
-}
-@after {
-}:
+ruleSingleTerminals:
 	(
 		{
 			markLeaf();
@@ -1406,10 +1367,7 @@ entryRuleSingleEnum:
 	EOF;
 
 // Rule SingleEnum
-ruleSingleEnum@init {
-}
-@after {
-}:
+ruleSingleEnum:
 	(
 		{
 			markLeaf();
@@ -1458,10 +1416,7 @@ entryRuleSingleCrossReference:
 	EOF;
 
 // Rule SingleCrossReference
-ruleSingleCrossReference@init {
-}
-@after {
-}:
+ruleSingleCrossReference:
 	(
 		{
 			markLeaf();
@@ -1547,10 +1502,7 @@ entryRuleSingleContainmentReference:
 	EOF;
 
 // Rule SingleContainmentReference
-ruleSingleContainmentReference@init {
-}
-@after {
-}:
+ruleSingleContainmentReference:
 	(
 		{
 			markLeaf();
@@ -1599,10 +1551,7 @@ entryRuleSingleContainmentReferenceChild1:
 	EOF;
 
 // Rule SingleContainmentReferenceChild1
-ruleSingleContainmentReferenceChild1@init {
-}
-@after {
-}:
+ruleSingleContainmentReferenceChild1:
 	(
 		(
 			{
@@ -1624,10 +1573,7 @@ entryRuleSingleContainmentReferenceChild2:
 	EOF;
 
 // Rule SingleContainmentReferenceChild2
-ruleSingleContainmentReferenceChild2@init {
-}
-@after {
-}:
+ruleSingleContainmentReferenceChild2:
 	(
 		(
 			{
@@ -1649,10 +1595,7 @@ entryRuleSingleContainmentReferenceChild3:
 	EOF;
 
 // Rule SingleContainmentReferenceChild3
-ruleSingleContainmentReferenceChild3@init {
-}
-@after {
-}:
+ruleSingleContainmentReferenceChild3:
 	(
 		(
 			{
@@ -1674,10 +1617,7 @@ entryRuleMultiKeywords:
 	EOF;
 
 // Rule MultiKeywords
-ruleMultiKeywords@init {
-}
-@after {
-}:
+ruleMultiKeywords:
 	(
 		{
 			markLeaf();
@@ -1726,10 +1666,7 @@ entryRuleMultiKeywordsOrID:
 	EOF;
 
 // Rule MultiKeywordsOrID
-ruleMultiKeywordsOrID@init {
-}
-@after {
-}:
+ruleMultiKeywordsOrID:
 	(
 		{
 			markLeaf();
@@ -1786,10 +1723,7 @@ entryRuleMultiTerminals:
 	EOF;
 
 // Rule MultiTerminals
-ruleMultiTerminals@init {
-}
-@after {
-}:
+ruleMultiTerminals:
 	(
 		{
 			markLeaf();
@@ -1830,10 +1764,7 @@ entryRuleDependentAlternative1:
 	EOF;
 
 // Rule DependentAlternative1
-ruleDependentAlternative1@init {
-}
-@after {
-}:
+ruleDependentAlternative1:
 	(
 		{
 			markLeaf();
@@ -1891,10 +1822,7 @@ entryRuleDependentAlternative2:
 	EOF;
 
 // Rule DependentAlternative2
-ruleDependentAlternative2@init {
-}
-@after {
-}:
+ruleDependentAlternative2:
 	(
 		{
 			markLeaf();
@@ -1965,10 +1893,7 @@ entryRuleOptional:
 	EOF;
 
 // Rule Optional
-ruleOptional@init {
-}
-@after {
-}:
+ruleOptional:
 	(
 		{
 			markLeaf();
@@ -2023,10 +1948,7 @@ entryRuleFloat:
 	EOF;
 
 // Rule Float
-ruleFloat@init {
-}
-@after {
-}:
+ruleFloat:
 	(
 		{
 			markLeaf();
@@ -2059,10 +1981,7 @@ entryRuleUnorderedAlternative:
 	EOF;
 
 // Rule UnorderedAlternative
-ruleUnorderedAlternative@init {
-}
-@after {
-}:
+ruleUnorderedAlternative:
 	(
 		{
 			markLeaf();
@@ -2137,10 +2056,7 @@ entryRuleUnorderedAlternativeVal:
 	EOF;
 
 // Rule UnorderedAlternativeVal
-ruleUnorderedAlternativeVal@init {
-}
-@after {
-}:
+ruleUnorderedAlternativeVal:
 	(
 		{
 			markLeaf();
@@ -2171,10 +2087,7 @@ entryRuleUnorderedAlternativeValDelegate:
 	EOF;
 
 // Rule UnorderedAlternativeValDelegate
-ruleUnorderedAlternativeValDelegate@init {
-}
-@after {
-}:
+ruleUnorderedAlternativeValDelegate:
 	{
 		markComposite(elementTypeProvider.getUnorderedAlternativeValDelegate_UnorderedAlternativeVal2ParserRuleCallElementType());
 	}
@@ -2192,10 +2105,7 @@ entryRuleUnorderedAlternativeVal2:
 	EOF;
 
 // Rule UnorderedAlternativeVal2
-ruleUnorderedAlternativeVal2@init {
-}
-@after {
-}:
+ruleUnorderedAlternativeVal2:
 	(
 		{
 			markLeaf();
@@ -2226,10 +2136,7 @@ entryRuleUnorderedGroup:
 	EOF;
 
 // Rule UnorderedGroup
-ruleUnorderedGroup@init {
-}
-@after {
-}:
+ruleUnorderedGroup:
 	(
 		{
 			markLeaf();
@@ -2344,10 +2251,7 @@ entryRuleUnorderedGroupVal:
 	EOF;
 
 // Rule UnorderedGroupVal
-ruleUnorderedGroupVal@init {
-}
-@after {
-}:
+ruleUnorderedGroupVal:
 	(
 		{
 			markLeaf();
@@ -2378,10 +2282,7 @@ entryRuleUnorderedGroupValDelegate:
 	EOF;
 
 // Rule UnorderedGroupValDelegate
-ruleUnorderedGroupValDelegate@init {
-}
-@after {
-}:
+ruleUnorderedGroupValDelegate:
 	{
 		markComposite(elementTypeProvider.getUnorderedGroupValDelegate_UnorderedGroupVal2ParserRuleCallElementType());
 	}
@@ -2399,10 +2300,7 @@ entryRuleUnorderedGroupVal2:
 	EOF;
 
 // Rule UnorderedGroupVal2
-ruleUnorderedGroupVal2@init {
-}
-@after {
-}:
+ruleUnorderedGroupVal2:
 	(
 		{
 			markLeaf();
@@ -2433,10 +2331,7 @@ entryRuleUnorderedGroupOptional:
 	EOF;
 
 // Rule UnorderedGroupOptional
-ruleUnorderedGroupOptional@init {
-}
-@after {
-}:
+ruleUnorderedGroupOptional:
 	(
 		{
 			markLeaf();
@@ -2563,10 +2458,7 @@ entryRuleUnorderedGroupBoolean:
 	EOF;
 
 // Rule UnorderedGroupBoolean
-ruleUnorderedGroupBoolean@init {
-}
-@after {
-}:
+ruleUnorderedGroupBoolean:
 	(
 		{
 			markLeaf();
@@ -2666,10 +2558,7 @@ entryRuleComplex1:
 	EOF;
 
 // Rule Complex1
-ruleComplex1@init {
-}
-@after {
-}:
+ruleComplex1:
 	(
 		{
 			markLeaf();
@@ -2820,10 +2709,7 @@ entryRuleOptionalDouble:
 	EOF;
 
 // Rule OptionalDouble
-ruleOptionalDouble@init {
-}
-@after {
-}:
+ruleOptionalDouble:
 	(
 		{
 			markLeaf();
@@ -2878,10 +2764,7 @@ entryRuleDOUBLE:
 	EOF;
 
 // Rule DOUBLE
-ruleDOUBLE@init {
-}
-@after {
-}:
+ruleDOUBLE:
 	(
 		{
 			markLeaf();
@@ -2917,10 +2800,7 @@ entryRuleNullValueGenerated:
 	EOF;
 
 // Rule NullValueGenerated
-ruleNullValueGenerated@init {
-}
-@after {
-}:
+ruleNullValueGenerated:
 	(
 		{
 			markLeaf();
@@ -2951,10 +2831,7 @@ entryRuleNullValueInterpreted:
 	EOF;
 
 // Rule NullValueInterpreted
-ruleNullValueInterpreted@init {
-}
-@after {
-}:
+ruleNullValueInterpreted:
 	(
 		{
 			markLeaf();
@@ -2996,10 +2873,7 @@ entryRuleNULL_STRING:
 	EOF;
 
 // Rule NULL_STRING
-ruleNULL_STRING@init {
-}
-@after {
-}:
+ruleNULL_STRING:
 	{
 		markLeaf();
 	}
@@ -3017,10 +2891,7 @@ entryRuleNullCrossRefGenerated:
 	EOF;
 
 // Rule NullCrossRefGenerated
-ruleNullCrossRefGenerated@init {
-}
-@after {
-}:
+ruleNullCrossRefGenerated:
 	(
 		{
 			markLeaf();
@@ -3051,10 +2922,7 @@ entryRuleNullCrossRefInterpreted:
 	EOF;
 
 // Rule NullCrossRefInterpreted
-ruleNullCrossRefInterpreted@init {
-}
-@after {
-}:
+ruleNullCrossRefInterpreted:
 	(
 		{
 			markLeaf();

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -95,10 +92,7 @@ entryRuleParenthesis:
 	EOF;
 
 // Rule Parenthesis
-ruleParenthesis@init {
-}
-@after {
-}:
+ruleParenthesis:
 	(
 		{
 			markLeaf();
@@ -132,10 +126,7 @@ entryRuleTest:
 	EOF;
 
 // Rule Test
-ruleTest@init {
-}
-@after {
-}:
+ruleTest:
 	(
 		{
 			markComposite(elementTypeProvider.getTest_TwoRequiredParserRuleCall_0ElementType());
@@ -171,10 +162,7 @@ entryRuleTwoRequired:
 	EOF;
 
 // Rule TwoRequired
-ruleTwoRequired@init {
-}
-@after {
-}:
+ruleTwoRequired:
 	(
 		{
 			markLeaf();
@@ -216,10 +204,7 @@ entryRuleTwoOptions:
 	EOF;
 
 // Rule TwoOptions
-ruleTwoOptions@init {
-}
-@after {
-}:
+ruleTwoOptions:
 	(
 		{
 			markLeaf();
@@ -282,10 +267,7 @@ entryRuleIndent:
 	EOF;
 
 // Rule Indent
-ruleIndent@init {
-}
-@after {
-}:
+ruleIndent:
 	(
 		{
 			markLeaf();

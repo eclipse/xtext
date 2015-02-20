@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		{
 			markLeaf();
@@ -112,10 +109,7 @@ entryRuleSimple:
 	EOF;
 
 // Rule Simple
-ruleSimple@init {
-}
-@after {
-}:
+ruleSimple:
 	(
 		{
 			markLeaf();
@@ -146,10 +140,7 @@ entryRuleDelegation:
 	EOF;
 
 // Rule Delegation
-ruleDelegation@init {
-}
-@after {
-}:
+ruleDelegation:
 	(
 		{
 			markLeaf();
@@ -180,10 +171,7 @@ entryRuleUnassigned:
 	EOF;
 
 // Rule Unassigned
-ruleUnassigned@init {
-}
-@after {
-}:
+ruleUnassigned:
 	(
 		{
 			markLeaf();
@@ -210,10 +198,7 @@ entryRulePrefixedUnassigned:
 	EOF;
 
 // Rule PrefixedUnassigned
-rulePrefixedUnassigned@init {
-}
-@after {
-}:
+rulePrefixedUnassigned:
 	(
 		{
 			markLeaf();
@@ -244,10 +229,7 @@ entryRulePrefixedDelegate:
 	EOF;
 
 // Rule PrefixedDelegate
-rulePrefixedDelegate@init {
-}
-@after {
-}:
+rulePrefixedDelegate:
 	(
 		{
 			markLeaf();
@@ -274,10 +256,7 @@ entryRuleDelegate:
 	EOF;
 
 // Rule Delegate
-ruleDelegate@init {
-}
-@after {
-}:
+ruleDelegate:
 	(
 		(
 			{

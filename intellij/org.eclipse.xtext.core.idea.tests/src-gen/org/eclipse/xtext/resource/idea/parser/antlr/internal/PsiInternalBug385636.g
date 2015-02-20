@@ -56,10 +56,7 @@ entryRuleProgram:
 	EOF;
 
 // Rule Program
-ruleProgram@init {
-}
-@after {
-}:
+ruleProgram:
 	(
 		(
 			(
@@ -101,10 +98,7 @@ entryRuleDefineVariables:
 	EOF;
 
 // Rule DefineVariables
-ruleDefineVariables@init {
-}
-@after {
-}:
+ruleDefineVariables:
 	(
 		{
 			markLeaf();
@@ -142,10 +136,7 @@ entryRuleDefineVariable:
 	EOF;
 
 // Rule DefineVariable
-ruleDefineVariable@init {
-}
-@after {
-}:
+ruleDefineVariable:
 	(
 		{
 			markLeaf();
@@ -176,10 +167,7 @@ entryRuleNVariableAccess:
 	EOF;
 
 // Rule NVariableAccess
-ruleNVariableAccess@init {
-}
-@after {
-}:
+ruleNVariableAccess:
 	(
 		(
 			{
@@ -201,10 +189,7 @@ entryRuleStatement:
 	EOF;
 
 // Rule Statement
-ruleStatement@init {
-}
-@after {
-}:
+ruleStatement:
 	(
 		{
 			markComposite(elementTypeProvider.getStatement_Expression_VariableNameParserRuleCall_0ElementType());
@@ -432,10 +417,7 @@ entryRuleExpression_VariableName:
 	EOF;
 
 // Rule Expression_VariableName
-ruleExpression_VariableName@init {
-}
-@after {
-}:
+ruleExpression_VariableName:
 	(
 		(
 			{

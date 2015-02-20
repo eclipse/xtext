@@ -62,10 +62,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -105,10 +102,7 @@ entryRuleModelElement:
 	EOF;
 
 // Rule ModelElement
-ruleModelElement@init {
-}
-@after {
-}:
+ruleModelElement:
 	(
 		(
 			{
@@ -184,10 +178,7 @@ entryRuleContained:
 	EOF;
 
 // Rule Contained
-ruleContained@init {
-}
-@after {
-}:
+ruleContained:
 	(
 		{
 			markLeaf();

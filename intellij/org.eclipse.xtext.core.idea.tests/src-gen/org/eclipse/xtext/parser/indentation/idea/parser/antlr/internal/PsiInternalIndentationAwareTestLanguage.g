@@ -56,10 +56,7 @@ entryRuleTree:
 	EOF;
 
 // Rule Tree
-ruleTree@init {
-}
-@after {
-}:
+ruleTree:
 	(
 		(
 			{
@@ -89,10 +86,7 @@ entryRuleTreeNode:
 	EOF;
 
 // Rule TreeNode
-ruleTreeNode@init {
-}
-@after {
-}:
+ruleTreeNode:
 	(
 		(
 			(

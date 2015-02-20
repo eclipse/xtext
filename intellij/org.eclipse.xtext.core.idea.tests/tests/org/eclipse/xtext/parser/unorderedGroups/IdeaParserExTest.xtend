@@ -36,6 +36,7 @@ class IdeaParserExTest extends AbstractLanguageParsingTestCase {
 	
 }
 
+@Ignore
 @FinalFieldsConstructor
 class IdeaParserExTestDelegate extends ParserExTest {
 	

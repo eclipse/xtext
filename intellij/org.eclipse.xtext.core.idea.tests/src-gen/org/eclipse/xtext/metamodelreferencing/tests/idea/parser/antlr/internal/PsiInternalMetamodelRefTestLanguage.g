@@ -56,10 +56,7 @@ entryRuleFoo:
 	EOF;
 
 // Rule Foo
-ruleFoo@init {
-}
-@after {
-}:
+ruleFoo:
 	(
 		(
 			(
@@ -94,10 +91,7 @@ entryRuleNameRef:
 	EOF;
 
 // Rule NameRef
-ruleNameRef@init {
-}
-@after {
-}:
+ruleNameRef:
 	(
 		(
 			{

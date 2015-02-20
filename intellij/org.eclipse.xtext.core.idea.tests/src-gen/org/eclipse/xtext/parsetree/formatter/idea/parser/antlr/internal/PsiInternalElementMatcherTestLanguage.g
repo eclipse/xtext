@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_SimpleParserRuleCall_0ElementType());
@@ -135,10 +132,7 @@ entryRuleSimple:
 	EOF;
 
 // Rule Simple
-ruleSimple@init {
-}
-@after {
-}:
+ruleSimple:
 	(
 		{
 			markLeaf();
@@ -200,10 +194,7 @@ entryRuleFQN:
 	EOF;
 
 // Rule FQN
-ruleFQN@init {
-}
-@after {
-}:
+ruleFQN:
 	(
 		{
 			markLeaf();
@@ -239,10 +230,7 @@ entryRuleRuleCalls:
 	EOF;
 
 // Rule RuleCalls
-ruleRuleCalls@init {
-}
-@after {
-}:
+ruleRuleCalls:
 	(
 		{
 			markLeaf();
@@ -302,10 +290,7 @@ entryRuleRuleCallsSub:
 	EOF;
 
 // Rule RuleCallsSub
-ruleRuleCallsSub@init {
-}
-@after {
-}:
+ruleRuleCallsSub:
 	(
 		(
 			{
@@ -327,10 +312,7 @@ entryRuleRuleCallsAss1:
 	EOF;
 
 // Rule RuleCallsAss1
-ruleRuleCallsAss1@init {
-}
-@after {
-}:
+ruleRuleCallsAss1:
 	(
 		{
 			markLeaf();
@@ -361,10 +343,7 @@ entryRuleRuleCallsAss2:
 	EOF;
 
 // Rule RuleCallsAss2
-ruleRuleCallsAss2@init {
-}
-@after {
-}:
+ruleRuleCallsAss2:
 	(
 		{
 			markLeaf();
@@ -395,10 +374,7 @@ entryRuleOptionalCalls:
 	EOF;
 
 // Rule OptionalCalls
-ruleOptionalCalls@init {
-}
-@after {
-}:
+ruleOptionalCalls:
 	(
 		{
 			markLeaf();
@@ -446,10 +422,7 @@ entryRuleOptionalCallsSub1:
 	EOF;
 
 // Rule OptionalCallsSub1
-ruleOptionalCallsSub1@init {
-}
-@after {
-}:
+ruleOptionalCallsSub1:
 	(
 		(
 			{
@@ -497,10 +470,7 @@ entryRuleOptionalCallsSub2:
 	EOF;
 
 // Rule OptionalCallsSub2
-ruleOptionalCallsSub2@init {
-}
-@after {
-}:
+ruleOptionalCallsSub2:
 	(
 		{
 			markLeaf();
@@ -531,10 +501,7 @@ entryRuleOptionalCallsSub3:
 	EOF;
 
 // Rule OptionalCallsSub3
-ruleOptionalCallsSub3@init {
-}
-@after {
-}:
+ruleOptionalCallsSub3:
 	(
 		{
 			markLeaf();
@@ -565,10 +532,7 @@ entryRuleRecursion:
 	EOF;
 
 // Rule Recursion
-ruleRecursion@init {
-}
-@after {
-}:
+ruleRecursion:
 	(
 		{
 			markLeaf();
@@ -595,10 +559,7 @@ entryRuleRecursionSub:
 	EOF;
 
 // Rule RecursionSub
-ruleRecursionSub@init {
-}
-@after {
-}:
+ruleRecursionSub:
 	(
 		(
 			{
@@ -667,10 +628,7 @@ entryRuleLoop:
 	EOF;
 
 // Rule Loop
-ruleLoop@init {
-}
-@after {
-}:
+ruleLoop:
 	(
 		{
 			markLeaf();
@@ -746,10 +704,7 @@ entryRuleExpression:
 	EOF;
 
 // Rule Expression
-ruleExpression@init {
-}
-@after {
-}:
+ruleExpression:
 	(
 		{
 			markLeaf();
@@ -776,10 +731,7 @@ entryRuleAdd:
 	EOF;
 
 // Rule Add
-ruleAdd@init {
-}
-@after {
-}:
+ruleAdd:
 	(
 		{
 			markComposite(elementTypeProvider.getAdd_MultParserRuleCall_0ElementType());
@@ -825,10 +777,7 @@ entryRuleMult:
 	EOF;
 
 // Rule Mult
-ruleMult@init {
-}
-@after {
-}:
+ruleMult:
 	(
 		{
 			markComposite(elementTypeProvider.getMult_PrimParserRuleCall_0ElementType());
@@ -874,10 +823,7 @@ entryRulePrim:
 	EOF;
 
 // Rule Prim
-rulePrim@init {
-}
-@after {
-}:
+rulePrim:
 	(
 		(
 			(
@@ -1025,10 +971,7 @@ entryRuleRuleCalls12:
 	EOF;
 
 // Rule RuleCalls12
-ruleRuleCalls12@init {
-}
-@after {
-}:
+ruleRuleCalls12:
 	(
 		{
 			markLeaf();
@@ -1077,10 +1020,7 @@ entryRuleConstructor:
 	EOF;
 
 // Rule Constructor
-ruleConstructor@init {
-}
-@after {
-}:
+ruleConstructor:
 	(
 		(
 			{
@@ -1110,10 +1050,7 @@ entryRuleField:
 	EOF;
 
 // Rule Field
-ruleField@init {
-}
-@after {
-}:
+ruleField:
 	(
 		{
 			markLeaf();
@@ -1140,10 +1077,7 @@ entryRuleParameter:
 	EOF;
 
 // Rule Parameter
-ruleParameter@init {
-}
-@after {
-}:
+ruleParameter:
 	(
 		(
 			{
@@ -1173,10 +1107,7 @@ entryRuleNestedStart:
 	EOF;
 
 // Rule NestedStart
-ruleNestedStart@init {
-}
-@after {
-}:
+ruleNestedStart:
 	(
 		{
 			markComposite(elementTypeProvider.getNestedStart_NestedStartSubParserRuleCall_0ElementType());
@@ -1207,10 +1138,7 @@ entryRuleNestedStartSub:
 	EOF;
 
 // Rule NestedStartSub
-ruleNestedStartSub@init {
-}
-@after {
-}:
+ruleNestedStartSub:
 	(
 		{
 			markLeaf();

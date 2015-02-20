@@ -8,8 +8,11 @@
 package org.eclipse.xtext.idea.tests.parsing;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.XtextResource;
 
 @SuppressWarnings("all")
 public interface ModelChecker {
+  public abstract XtextResource checkResource(final String code, final boolean validate);
+  
   public abstract <T extends EObject> T checkModel(final String code, final boolean validate);
 }

@@ -141,6 +141,23 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   }
   
   @Override
+  public XtextResource checkResource(final String code, final boolean validate) {
+    try {
+      XtextResource _xblockexpression = null;
+      {
+        this.doCodeTest(code);
+        if (validate) {
+          this.validationHelper.assertNoErrors(this.actualResource);
+        }
+        _xblockexpression = this.actualResource;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
     try {
       T _xblockexpression = null;

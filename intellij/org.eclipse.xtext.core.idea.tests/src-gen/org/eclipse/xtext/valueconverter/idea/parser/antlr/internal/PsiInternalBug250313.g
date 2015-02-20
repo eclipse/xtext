@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -362,10 +359,7 @@ entryRuleDatatype:
 	EOF;
 
 // Rule Datatype
-ruleDatatype@init {
-}
-@after {
-}:
+ruleDatatype:
 	(
 		{
 			markLeaf();
@@ -399,10 +393,7 @@ entryRuleNestedDatatype:
 	EOF;
 
 // Rule NestedDatatype
-ruleNestedDatatype@init {
-}
-@after {
-}:
+ruleNestedDatatype:
 	(
 		{
 			markLeaf();
@@ -438,10 +429,7 @@ entryRuleChild:
 	EOF;
 
 // Rule Child
-ruleChild@init {
-}
-@after {
-}:
+ruleChild:
 	(
 		{
 			markComposite(elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType());
@@ -469,10 +457,7 @@ entryRuleChild1:
 	EOF;
 
 // Rule Child1
-ruleChild1@init {
-}
-@after {
-}:
+ruleChild1:
 	(
 		(
 			{
@@ -494,10 +479,7 @@ entryRuleChild2:
 	EOF;
 
 // Rule Child2
-ruleChild2@init {
-}
-@after {
-}:
+ruleChild2:
 	(
 		(
 			{

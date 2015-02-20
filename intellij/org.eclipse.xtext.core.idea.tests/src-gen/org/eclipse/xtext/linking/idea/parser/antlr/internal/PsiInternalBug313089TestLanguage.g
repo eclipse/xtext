@@ -56,10 +56,7 @@ entryRuleFoo:
 	EOF;
 
 // Rule Foo
-ruleFoo@init {
-}
-@after {
-}:
+ruleFoo:
 	(
 		(
 			(
@@ -119,10 +116,7 @@ entryRuleBar:
 	EOF;
 
 // Rule Bar
-ruleBar@init {
-}
-@after {
-}:
+ruleBar:
 	(
 		(
 			{
@@ -152,10 +146,7 @@ entryRuleBaz:
 	EOF;
 
 // Rule Baz
-ruleBaz@init {
-}
-@after {
-}:
+ruleBaz:
 	(
 		{
 			markLeaf();

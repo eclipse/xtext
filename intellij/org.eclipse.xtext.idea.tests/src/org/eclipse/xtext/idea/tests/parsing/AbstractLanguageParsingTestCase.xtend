@@ -114,6 +114,14 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	new(String dataPath, String fileExt, boolean lowercaseFirstLetter, ParserDefinition... definitions) {
 		super(dataPath, fileExt, lowercaseFirstLetter, definitions)
 	}
+	
+	override checkResource(String code, boolean validate) {
+		doCodeTest(code)
+		if (validate) {
+			validationHelper.assertNoErrors(actualResource)
+		}
+		actualResource
+	}
 
 	override <T extends EObject> checkModel(String code, boolean validate) {
 		doCodeTest(code)

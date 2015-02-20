@@ -56,10 +56,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		{
 			markLeaf();
@@ -90,10 +87,7 @@ entryRuleQualifiedName:
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName@init {
-}
-@after {
-}:
+ruleQualifiedName:
 	(
 		{
 			markLeaf();

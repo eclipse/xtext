@@ -62,10 +62,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -87,10 +84,7 @@ entryRuleExpression:
 	EOF;
 
 // Rule Expression
-ruleExpression@init {
-}
-@after {
-}:
+ruleExpression:
 	(
 		(
 			(
@@ -132,10 +126,7 @@ entryRuleLiteral:
 	EOF;
 
 // Rule Literal
-ruleLiteral@init {
-}
-@after {
-}:
+ruleLiteral:
 	(
 		{
 			/* */
@@ -169,10 +160,7 @@ entryRuleIntLiteral:
 	EOF;
 
 // Rule IntLiteral
-ruleIntLiteral@init {
-}
-@after {
-}:
+ruleIntLiteral:
 	(
 		(
 			{
@@ -194,10 +182,7 @@ entryRuleRealLiteral:
 	EOF;
 
 // Rule RealLiteral
-ruleRealLiteral@init {
-}
-@after {
-}:
+ruleRealLiteral:
 	(
 		(
 			{
@@ -219,10 +204,7 @@ entryRuleIntValue:
 	EOF;
 
 // Rule IntValue
-ruleIntValue@init {
-}
-@after {
-}:
+ruleIntValue:
 	{
 		markLeaf();
 	}
@@ -240,10 +222,7 @@ entryRuleRealValue:
 	EOF;
 
 // Rule RealValue
-ruleRealValue@init {
-}
-@after {
-}:
+ruleRealValue:
 	{
 		markComposite(elementTypeProvider.getRealValue_RealParserRuleCallElementType());
 	}
@@ -268,9 +247,6 @@ finally {
 // Rule Real
 ruleReal@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		(
@@ -308,6 +284,9 @@ ruleReal@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 RULE_EXT_INT : RULE_INT ('e'|'E') ('-'|'+') RULE_INT;
 

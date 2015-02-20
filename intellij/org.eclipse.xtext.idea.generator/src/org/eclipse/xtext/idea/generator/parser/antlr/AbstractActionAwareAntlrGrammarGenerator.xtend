@@ -10,6 +10,15 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 
 class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
+	override protected compileInit(AbstractRule it, AntlrOptions options) {
+		switch it {
+			ParserRule:
+				compileEntryInit(options).toString
+			default:
+				super.compileInit(it, options)
+		} 
+	}
+	
 	protected def compileEntryInit(ParserRule it, AntlrOptions options) '''
 		«IF definesHiddenTokens || definesUnorderedGroups(options)»
 		@init {
@@ -34,6 +43,15 @@ class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenera
 			grammarAccess.«group.gaRuleElementAccessor»
 		«ENDFOR»
 		);«ENDIF»'''
+		
+	override protected compileFinally(AbstractRule it, AntlrOptions options) {
+		switch it {
+			ParserRule:
+				compileEntryFinally(options).toString
+			default:
+				super.compileFinally(it, options)
+		}
+	}
 			
 	protected def compileEntryFinally(ParserRule it, AntlrOptions options) '''
 		«IF definesHiddenTokens || definesUnorderedGroups(options)»

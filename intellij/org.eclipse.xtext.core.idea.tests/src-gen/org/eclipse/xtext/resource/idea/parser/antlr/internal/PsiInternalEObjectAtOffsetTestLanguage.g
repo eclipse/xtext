@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -95,10 +92,7 @@ entryRuleAbstractBar:
 	EOF;
 
 // Rule AbstractBar
-ruleAbstractBar@init {
-}
-@after {
-}:
+ruleAbstractBar:
 	(
 		(
 			{
@@ -173,10 +167,7 @@ entryRuleBar:
 	EOF;
 
 // Rule Bar
-ruleBar@init {
-}
-@after {
-}:
+ruleBar:
 	(
 		{
 			markLeaf();
@@ -238,10 +229,7 @@ entryRuleFoo:
 	EOF;
 
 // Rule Foo
-ruleFoo@init {
-}
-@after {
-}:
+ruleFoo:
 	(
 		{
 			markLeaf();
@@ -272,10 +260,7 @@ entryRuleQualifiedNameWithOtherDelim:
 	EOF;
 
 // Rule QualifiedNameWithOtherDelim
-ruleQualifiedNameWithOtherDelim@init {
-}
-@after {
-}:
+ruleQualifiedNameWithOtherDelim:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithOtherDelim_QualifiedNameParserRuleCall_0ElementType());
@@ -311,10 +296,7 @@ entryRuleQualifiedName:
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName@init {
-}
-@after {
-}:
+ruleQualifiedName:
 	(
 		{
 			markLeaf();

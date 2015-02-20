@@ -56,10 +56,7 @@ entryRuleEntityWithEnumAndReference:
 	EOF;
 
 // Rule EntityWithEnumAndReference
-ruleEntityWithEnumAndReference@init {
-}
-@after {
-}:
+ruleEntityWithEnumAndReference:
 	(
 		(
 			(

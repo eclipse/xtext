@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -94,10 +91,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		{
 			markLeaf();
@@ -168,10 +162,7 @@ entryRuleComponent:
 	EOF;
 
 // Rule Component
-ruleComponent@init {
-}
-@after {
-}:
+ruleComponent:
 	(
 		(
 			{
@@ -249,10 +240,7 @@ entryRuleBus:
 	EOF;
 
 // Rule Bus
-ruleBus@init {
-}
-@after {
-}:
+ruleBus:
 	(
 		{
 			markLeaf();
@@ -294,10 +282,7 @@ entryRuleProcessor:
 	EOF;
 
 // Rule Processor
-ruleProcessor@init {
-}
-@after {
-}:
+ruleProcessor:
 	(
 		{
 			markLeaf();
@@ -339,10 +324,7 @@ entryRuleMode:
 	EOF;
 
 // Rule Mode
-ruleMode@init {
-}
-@after {
-}:
+ruleMode:
 	(
 		{
 			markLeaf();
@@ -380,10 +362,7 @@ entryRuleTransition:
 	EOF;
 
 // Rule Transition
-ruleTransition@init {
-}
-@after {
-}:
+ruleTransition:
 	(
 		(
 			(
@@ -450,10 +429,7 @@ entryRulePort:
 	EOF;
 
 // Rule Port
-rulePort@init {
-}
-@after {
-}:
+rulePort:
 	(
 		{
 			markLeaf();
@@ -491,10 +467,7 @@ entryRuleData:
 	EOF;
 
 // Rule Data
-ruleData@init {
-}
-@after {
-}:
+ruleData:
 	(
 		{
 			markLeaf();

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -94,10 +91,7 @@ entryRuleImport:
 	EOF;
 
 // Rule Import
-ruleImport@init {
-}
-@after {
-}:
+ruleImport:
 	(
 		(
 			{
@@ -119,10 +113,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		(
 			(

@@ -5,14 +5,14 @@ import com.google.inject.Injector;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.terminalrules.ParserTest;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.TerminalRulesTestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Ignore;
 
+@Ignore
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class IdeaParserTestDelegate extends ParserTest {
@@ -29,9 +29,7 @@ public class IdeaParserTestDelegate extends ParserTest {
   protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
     InputStreamReader _inputStreamReader = new InputStreamReader(in);
     String _string = CharStreams.toString(_inputStreamReader);
-    EObject _checkModel = this.modelChecker.<EObject>checkModel(_string, false);
-    Resource _eResource = _checkModel.eResource();
-    return ((XtextResource) _eResource);
+    return this.modelChecker.checkResource(_string, false);
   }
   
   public IdeaParserTestDelegate(final ModelChecker modelChecker) {

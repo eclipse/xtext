@@ -56,10 +56,7 @@ entryRuleCompositeModel:
 	EOF;
 
 // Rule CompositeModel
-ruleCompositeModel@init {
-}
-@after {
-}:
+ruleCompositeModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -195,10 +189,7 @@ entryRuleModelId:
 	EOF;
 
 // Rule ModelId
-ruleModelId@init {
-}
-@after {
-}:
+ruleModelId:
 	(
 		{
 			markLeaf();
@@ -232,10 +223,7 @@ entryRuleNestedModelId:
 	EOF;
 
 // Rule NestedModelId
-ruleNestedModelId@init {
-}
-@after {
-}:
+ruleNestedModelId:
 	(
 		{
 			markComposite(elementTypeProvider.getNestedModelId_ModelIdParserRuleCall_0ElementType());
@@ -269,10 +257,7 @@ entryRuleFraction:
 	EOF;
 
 // Rule Fraction
-ruleFraction@init {
-}
-@after {
-}:
+ruleFraction:
 	(
 		{
 			markLeaf();
@@ -308,10 +293,7 @@ entryRuleVector:
 	EOF;
 
 // Rule Vector
-ruleVector@init {
-}
-@after {
-}:
+ruleVector:
 	(
 		{
 			markLeaf();
@@ -352,10 +334,7 @@ entryRuleDots:
 	EOF;
 
 // Rule Dots
-ruleDots@init {
-}
-@after {
-}:
+ruleDots:
 	(
 		(
 			{
@@ -392,10 +371,7 @@ entryRuleDouble:
 	EOF;
 
 // Rule Double
-ruleDouble@init {
-}
-@after {
-}:
+ruleDouble:
 	(
 		(
 			{

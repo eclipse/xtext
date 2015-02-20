@@ -11,7 +11,7 @@ import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.terminalrules.idea.lang.HiddenTerminalsTestLanguageFileType
 import org.eclipse.xtext.parser.terminalrules.idea.lang.HiddenTerminalsTestLanguageLanguage
-import org.eclipse.xtext.resource.XtextResource
+import org.junit.Ignore
 
 @TestDecorator
 class IdeaHiddensTest extends AbstractLanguageParsingTestCase {
@@ -34,6 +34,7 @@ class IdeaHiddensTest extends AbstractLanguageParsingTestCase {
 	
 }
 
+@Ignore
 @FinalFieldsConstructor
 class IdeaHiddensTestDelegate extends HiddensTest {
 	
@@ -45,7 +46,7 @@ class IdeaHiddensTestDelegate extends HiddensTest {
 	}
 	
 	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
+		modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
 	}
 	
 }

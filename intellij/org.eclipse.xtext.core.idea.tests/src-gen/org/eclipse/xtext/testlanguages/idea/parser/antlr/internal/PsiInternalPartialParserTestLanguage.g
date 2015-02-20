@@ -56,10 +56,7 @@ entryRuleSomeContainer:
 	EOF;
 
 // Rule SomeContainer
-ruleSomeContainer@init {
-}
-@after {
-}:
+ruleSomeContainer:
 	(
 		{
 			markLeaf();
@@ -129,10 +126,7 @@ entryRuleNested:
 	EOF;
 
 // Rule Nested
-ruleNested@init {
-}
-@after {
-}:
+ruleNested:
 	(
 		{
 			markLeaf();
@@ -177,10 +171,7 @@ entryRuleContent:
 	EOF;
 
 // Rule Content
-ruleContent@init {
-}
-@after {
-}:
+ruleContent:
 	(
 		{
 			markComposite(elementTypeProvider.getContent_ChildrenParserRuleCall_0ElementType());
@@ -208,10 +199,7 @@ entryRuleChildren:
 	EOF;
 
 // Rule Children
-ruleChildren@init {
-}
-@after {
-}:
+ruleChildren:
 	(
 		{
 			markLeaf();
@@ -276,10 +264,7 @@ entryRuleChild:
 	EOF;
 
 // Rule Child
-ruleChild@init {
-}
-@after {
-}:
+ruleChild:
 	(
 		{
 			markLeaf();
@@ -331,10 +316,7 @@ entryRuleAbstractChildren:
 	EOF;
 
 // Rule AbstractChildren
-ruleAbstractChildren@init {
-}
-@after {
-}:
+ruleAbstractChildren:
 	(
 		{
 			markLeaf();
@@ -379,10 +361,7 @@ entryRuleAbstractChild:
 	EOF;
 
 // Rule AbstractChild
-ruleAbstractChild@init {
-}
-@after {
-}:
+ruleAbstractChild:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractChild_FirstConcreteParserRuleCall_0ElementType());
@@ -410,10 +389,7 @@ entryRuleFirstConcrete:
 	EOF;
 
 // Rule FirstConcrete
-ruleFirstConcrete@init {
-}
-@after {
-}:
+ruleFirstConcrete:
 	(
 		{
 			markLeaf();
@@ -476,10 +452,7 @@ entryRuleSecondConcrete:
 	EOF;
 
 // Rule SecondConcrete
-ruleSecondConcrete@init {
-}
-@after {
-}:
+ruleSecondConcrete:
 	(
 		{
 			markLeaf();
@@ -549,10 +522,7 @@ entryRuleNamed:
 	EOF;
 
 // Rule Named
-ruleNamed@init {
-}
-@after {
-}:
+ruleNamed:
 	(
 		(
 			{

@@ -105,13 +105,11 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
     // $ANTLR start "ruleEntry"
     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:59:1: ruleEntry : ( (lv_contents_0_0= ruleAlts ) )* ;
     public final void ruleEntry() throws RecognitionException {
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:62:2: ( ( (lv_contents_0_0= ruleAlts ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:63:2: ( (lv_contents_0_0= ruleAlts ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:59:10: ( ( (lv_contents_0_0= ruleAlts ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:60:2: ( (lv_contents_0_0= ruleAlts ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:63:2: ( (lv_contents_0_0= ruleAlts ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:60:2: ( (lv_contents_0_0= ruleAlts ) )*
             loop1:
             do {
                 int alt1=2;
@@ -124,15 +122,15 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:64:3: (lv_contents_0_0= ruleAlts )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:61:3: (lv_contents_0_0= ruleAlts )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:64:3: (lv_contents_0_0= ruleAlts )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:65:4: lv_contents_0_0= ruleAlts
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:61:3: (lv_contents_0_0= ruleAlts )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:62:4: lv_contents_0_0= ruleAlts
             	    {
 
             	    				markComposite(elementTypeProvider.getEntry_ContentsAltsParserRuleCall_0ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleAlts_in_ruleEntry94);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAlts_in_ruleEntry85);
             	    ruleAlts();
 
             	    state._fsp--;
@@ -155,8 +153,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -170,20 +166,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleAlts"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:77:1: entryRuleAlts : ruleAlts EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:74:1: entryRuleAlts : ruleAlts EOF ;
     public final void entryRuleAlts() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:77:14: ( ruleAlts EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:78:2: ruleAlts EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:74:14: ( ruleAlts EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:75:2: ruleAlts EOF
             {
              markComposite(elementTypeProvider.getAltsElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAlts_in_entryRuleAlts120);
+            pushFollow(FollowSets000.FOLLOW_ruleAlts_in_entryRuleAlts111);
             ruleAlts();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlts126); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlts117); 
 
             }
 
@@ -200,15 +196,13 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleAlts"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:84:1: ruleAlts : ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:81:1: ruleAlts : ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) ;
     public final void ruleAlts() throws RecognitionException {
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:87:2: ( ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:88:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:81:9: ( ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:82:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:88:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:82:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -252,12 +246,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:89:3: ruleLookAhead0
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:83:3: ruleLookAhead0
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead0ParserRuleCall_0ElementType());
                     		
-                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead0_in_ruleAlts152);
+                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead0_in_ruleAlts134);
                     ruleLookAhead0();
 
                     state._fsp--;
@@ -269,12 +263,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:97:3: ruleLookAhead1
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:91:3: ruleLookAhead1
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead1ParserRuleCall_1ElementType());
                     		
-                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead1_in_ruleAlts172);
+                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead1_in_ruleAlts154);
                     ruleLookAhead1();
 
                     state._fsp--;
@@ -286,12 +280,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:105:3: ruleLookAhead3
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:99:3: ruleLookAhead3
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead3ParserRuleCall_2ElementType());
                     		
-                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead3_in_ruleAlts192);
+                    pushFollow(FollowSets000.FOLLOW_ruleLookAhead3_in_ruleAlts174);
                     ruleLookAhead3();
 
                     state._fsp--;
@@ -308,8 +302,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -323,20 +315,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleLookAhead0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:116:1: entryRuleLookAhead0 : ruleLookAhead0 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:110:1: entryRuleLookAhead0 : ruleLookAhead0 EOF ;
     public final void entryRuleLookAhead0() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:116:20: ( ruleLookAhead0 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:117:2: ruleLookAhead0 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:110:20: ( ruleLookAhead0 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:111:2: ruleLookAhead0 EOF
             {
              markComposite(elementTypeProvider.getLookAhead0ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0212);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0194);
             ruleLookAhead0();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead0218); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead0200); 
 
             }
 
@@ -353,37 +345,35 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleLookAhead0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:123:1: ruleLookAhead0 : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:117:1: ruleLookAhead0 : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
     public final void ruleLookAhead0() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_x_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:126:2: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:127:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:117:15: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:118:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:127:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:128:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:118:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:119:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead0246); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead0219); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead0_BarKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:135:3: ( (lv_x_1_0= 'a' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:136:4: (lv_x_1_0= 'a' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:126:3: ( (lv_x_1_0= 'a' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:127:4: (lv_x_1_0= 'a' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:136:4: (lv_x_1_0= 'a' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:137:5: lv_x_1_0= 'a'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:127:4: (lv_x_1_0= 'a' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:128:5: lv_x_1_0= 'a'
             {
 
             					markLeaf();
             				
-            lv_x_1_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleLookAhead0273); 
+            lv_x_1_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleLookAhead0246); 
 
             					doneLeaf(lv_x_1_0, elementTypeProvider.getLookAhead0_XAKeyword_1_0ElementType());
             				
@@ -399,8 +389,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -414,20 +402,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleLookAhead1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:150:1: entryRuleLookAhead1 : ruleLookAhead1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:141:1: entryRuleLookAhead1 : ruleLookAhead1 EOF ;
     public final void entryRuleLookAhead1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:150:20: ( ruleLookAhead1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:151:2: ruleLookAhead1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:141:20: ( ruleLookAhead1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:142:2: ruleLookAhead1 EOF
             {
              markComposite(elementTypeProvider.getLookAhead1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1304);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1277);
             ruleLookAhead1();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead1310); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead1283); 
 
             }
 
@@ -444,38 +432,36 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleLookAhead1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:157:1: ruleLookAhead1 : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:148:1: ruleLookAhead1 : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
     public final void ruleLookAhead1() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_x_2_0=null;
         Token lv_z_3_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:160:2: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:161:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:148:15: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:149:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:161:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:162:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:149:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:150:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead1338); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead1302); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead1_FooKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:169:3: ( (lv_y_1_0= ruleLookAhead2 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:170:4: (lv_y_1_0= ruleLookAhead2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:157:3: ( (lv_y_1_0= ruleLookAhead2 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:158:4: (lv_y_1_0= ruleLookAhead2 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:170:4: (lv_y_1_0= ruleLookAhead2 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:171:5: lv_y_1_0= ruleLookAhead2
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:158:4: (lv_y_1_0= ruleLookAhead2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:159:5: lv_y_1_0= ruleLookAhead2
             {
 
             					markComposite(elementTypeProvider.getLookAhead1_YLookAhead2ParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead2_in_ruleLookAhead1365);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead2_in_ruleLookAhead1329);
             ruleLookAhead2();
 
             state._fsp--;
@@ -489,16 +475,16 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:180:3: ( (lv_x_2_0= 'b' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:181:4: (lv_x_2_0= 'b' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:168:3: ( (lv_x_2_0= 'b' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:169:4: (lv_x_2_0= 'b' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:181:4: (lv_x_2_0= 'b' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:182:5: lv_x_2_0= 'b'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:169:4: (lv_x_2_0= 'b' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:170:5: lv_x_2_0= 'b'
             {
 
             					markLeaf();
             				
-            lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLookAhead1403); 
+            lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLookAhead1367); 
 
             					doneLeaf(lv_x_2_0, elementTypeProvider.getLookAhead1_XBKeyword_2_0ElementType());
             				
@@ -508,16 +494,16 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:191:3: ( (lv_z_3_0= 'd' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:192:4: (lv_z_3_0= 'd' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:179:3: ( (lv_z_3_0= 'd' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:180:4: (lv_z_3_0= 'd' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:192:4: (lv_z_3_0= 'd' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:193:5: lv_z_3_0= 'd'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:180:4: (lv_z_3_0= 'd' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:181:5: lv_z_3_0= 'd'
             {
 
             					markLeaf();
             				
-            lv_z_3_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLookAhead1441); 
+            lv_z_3_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLookAhead1405); 
 
             					doneLeaf(lv_z_3_0, elementTypeProvider.getLookAhead1_ZDKeyword_3_0ElementType());
             				
@@ -533,8 +519,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -548,20 +532,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleLookAhead2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:206:1: entryRuleLookAhead2 : ruleLookAhead2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:194:1: entryRuleLookAhead2 : ruleLookAhead2 EOF ;
     public final void entryRuleLookAhead2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:206:20: ( ruleLookAhead2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:207:2: ruleLookAhead2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:194:20: ( ruleLookAhead2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:195:2: ruleLookAhead2 EOF
             {
              markComposite(elementTypeProvider.getLookAhead2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2472);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2436);
             ruleLookAhead2();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead2478); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead2442); 
 
             }
 
@@ -578,22 +562,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleLookAhead2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:213:1: ruleLookAhead2 : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:201:1: ruleLookAhead2 : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
     public final void ruleLookAhead2() throws RecognitionException {
         Token lv_z_0_0=null;
         Token lv_z_1_0=null;
         Token otherlv_2=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:216:2: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:217:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:201:15: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:202:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:217:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:218:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:202:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:203:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:218:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:203:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -611,18 +593,18 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:219:4: ( (lv_z_0_0= 'foo' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:204:4: ( (lv_z_0_0= 'foo' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:219:4: ( (lv_z_0_0= 'foo' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:220:5: (lv_z_0_0= 'foo' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:204:4: ( (lv_z_0_0= 'foo' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:205:5: (lv_z_0_0= 'foo' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:220:5: (lv_z_0_0= 'foo' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:221:6: lv_z_0_0= 'foo'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:205:5: (lv_z_0_0= 'foo' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:206:6: lv_z_0_0= 'foo'
                     {
 
                     						markLeaf();
                     					
-                    lv_z_0_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead2527); 
+                    lv_z_0_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead2482); 
 
                     						doneLeaf(lv_z_0_0, elementTypeProvider.getLookAhead2_ZFooKeyword_0_0_0ElementType());
                     					
@@ -636,18 +618,18 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:231:4: ( (lv_z_1_0= 'bar' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:216:4: ( (lv_z_1_0= 'bar' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:231:4: ( (lv_z_1_0= 'bar' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:232:5: (lv_z_1_0= 'bar' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:216:4: ( (lv_z_1_0= 'bar' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:217:5: (lv_z_1_0= 'bar' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:232:5: (lv_z_1_0= 'bar' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:233:6: lv_z_1_0= 'bar'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:217:5: (lv_z_1_0= 'bar' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:218:6: lv_z_1_0= 'bar'
                     {
 
                     						markLeaf();
                     					
-                    lv_z_1_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead2581); 
+                    lv_z_1_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead2536); 
 
                     						doneLeaf(lv_z_1_0, elementTypeProvider.getLookAhead2_ZBarKeyword_0_1_0ElementType());
                     					
@@ -666,7 +648,7 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             			markLeaf();
             		
-            otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLookAhead2613); 
+            otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLookAhead2568); 
 
             			doneLeaf(otherlv_2, elementTypeProvider.getLookAhead2_CKeyword_1ElementType());
             		
@@ -675,8 +657,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -691,20 +671,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleLookAhead3"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:254:1: entryRuleLookAhead3 : ruleLookAhead3 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:239:1: entryRuleLookAhead3 : ruleLookAhead3 EOF ;
     public final void entryRuleLookAhead3() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:254:20: ( ruleLookAhead3 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:255:2: ruleLookAhead3 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:239:20: ( ruleLookAhead3 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:240:2: ruleLookAhead3 EOF
             {
              markComposite(elementTypeProvider.getLookAhead3ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3633);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3588);
             ruleLookAhead3();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead3639); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead3594); 
 
             }
 
@@ -721,45 +701,43 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleLookAhead3"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:261:1: ruleLookAhead3 : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:246:1: ruleLookAhead3 : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
     public final void ruleLookAhead3() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_x_2_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:264:2: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:265:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:246:15: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:247:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:265:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:266:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:247:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:248:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead3667); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleLookAhead3613); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead3_FooKeyword_0ElementType());
             		
 
             			markLeaf();
             		
-            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead3681); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleLookAhead3627); 
 
             			doneLeaf(otherlv_1, elementTypeProvider.getLookAhead3_BarKeyword_1ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:280:3: ( (lv_x_2_0= 'b' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:281:4: (lv_x_2_0= 'b' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:262:3: ( (lv_x_2_0= 'b' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:263:4: (lv_x_2_0= 'b' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:281:4: (lv_x_2_0= 'b' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:282:5: lv_x_2_0= 'b'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:263:4: (lv_x_2_0= 'b' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:264:5: lv_x_2_0= 'b'
             {
 
             					markLeaf();
             				
-            lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLookAhead3708); 
+            lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLookAhead3654); 
 
             					doneLeaf(lv_x_2_0, elementTypeProvider.getLookAhead3_XBKeyword_2_0ElementType());
             				
@@ -769,16 +747,16 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:291:3: ( (lv_z_3_0= ruleLookAhead4 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:292:4: (lv_z_3_0= ruleLookAhead4 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:273:3: ( (lv_z_3_0= ruleLookAhead4 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:274:4: (lv_z_3_0= ruleLookAhead4 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:292:4: (lv_z_3_0= ruleLookAhead4 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:293:5: lv_z_3_0= ruleLookAhead4
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:274:4: (lv_z_3_0= ruleLookAhead4 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:275:5: lv_z_3_0= ruleLookAhead4
             {
 
             					markComposite(elementTypeProvider.getLookAhead3_ZLookAhead4ParserRuleCall_3_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead4_in_ruleLookAhead3746);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead4_in_ruleLookAhead3692);
             ruleLookAhead4();
 
             state._fsp--;
@@ -798,8 +776,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -813,20 +789,20 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleLookAhead4"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:306:1: entryRuleLookAhead4 : ruleLookAhead4 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:288:1: entryRuleLookAhead4 : ruleLookAhead4 EOF ;
     public final void entryRuleLookAhead4() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:306:20: ( ruleLookAhead4 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:307:2: ruleLookAhead4 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:288:20: ( ruleLookAhead4 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:289:2: ruleLookAhead4 EOF
             {
              markComposite(elementTypeProvider.getLookAhead4ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4777);
+            pushFollow(FollowSets000.FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4723);
             ruleLookAhead4();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead4783); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLookAhead4729); 
 
             }
 
@@ -843,18 +819,16 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleLookAhead4"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:313:1: ruleLookAhead4 : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:295:1: ruleLookAhead4 : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
     public final void ruleLookAhead4() throws RecognitionException {
         Token lv_x_0_0=null;
         Token lv_x_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:316:2: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:317:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:295:15: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:296:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:317:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:296:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -872,18 +846,18 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:318:3: ( (lv_x_0_0= 'c' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:297:3: ( (lv_x_0_0= 'c' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:318:3: ( (lv_x_0_0= 'c' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:319:4: (lv_x_0_0= 'c' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:297:3: ( (lv_x_0_0= 'c' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:298:4: (lv_x_0_0= 'c' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:319:4: (lv_x_0_0= 'c' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:320:5: lv_x_0_0= 'c'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:298:4: (lv_x_0_0= 'c' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:299:5: lv_x_0_0= 'c'
                     {
 
                     					markLeaf();
                     				
-                    lv_x_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLookAhead4824); 
+                    lv_x_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLookAhead4761); 
 
                     					doneLeaf(lv_x_0_0, elementTypeProvider.getLookAhead4_XCKeyword_0_0ElementType());
                     				
@@ -897,18 +871,18 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:330:3: ( (lv_x_1_0= 'd' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:309:3: ( (lv_x_1_0= 'd' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:330:3: ( (lv_x_1_0= 'd' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:331:4: (lv_x_1_0= 'd' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:309:3: ( (lv_x_1_0= 'd' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:310:4: (lv_x_1_0= 'd' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:331:4: (lv_x_1_0= 'd' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:332:5: lv_x_1_0= 'd'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:310:4: (lv_x_1_0= 'd' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalLookaheadTestLanguage.g:311:5: lv_x_1_0= 'd'
                     {
 
                     					markLeaf();
                     				
-                    lv_x_1_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLookAhead4870); 
+                    lv_x_1_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLookAhead4807); 
 
                     					doneLeaf(lv_x_1_0, elementTypeProvider.getLookAhead4_XDKeyword_1_0ElementType());
                     				
@@ -926,8 +900,6 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -949,37 +921,37 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleEntry_in_entryRuleEntry54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleEntry60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAlts_in_ruleEntry94 = new BitSet(new long[]{0x0000000000002802L});
-        public static final BitSet FOLLOW_ruleAlts_in_entryRuleAlts120 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAlts126 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead0_in_ruleAlts152 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead1_in_ruleAlts172 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead3_in_ruleAlts192 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0212 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead0218 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleLookAhead0246 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleLookAhead0273 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1304 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead1310 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleLookAhead1338 = new BitSet(new long[]{0x0000000000002800L});
-        public static final BitSet FOLLOW_ruleLookAhead2_in_ruleLookAhead1365 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleLookAhead1403 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleLookAhead1441 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2472 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead2478 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleLookAhead2527 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_11_in_ruleLookAhead2581 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleLookAhead2613 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3633 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead3639 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleLookAhead3667 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleLookAhead3681 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleLookAhead3708 = new BitSet(new long[]{0x0000000000018000L});
-        public static final BitSet FOLLOW_ruleLookAhead4_in_ruleLookAhead3746 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4777 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead4783 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleLookAhead4824 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleLookAhead4870 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAlts_in_ruleEntry85 = new BitSet(new long[]{0x0000000000002802L});
+        public static final BitSet FOLLOW_ruleAlts_in_entryRuleAlts111 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAlts117 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead0_in_ruleAlts134 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead1_in_ruleAlts154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead3_in_ruleAlts174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0194 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead0200 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleLookAhead0219 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleLookAhead0246 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1277 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead1283 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleLookAhead1302 = new BitSet(new long[]{0x0000000000002800L});
+        public static final BitSet FOLLOW_ruleLookAhead2_in_ruleLookAhead1329 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleLookAhead1367 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleLookAhead1405 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2436 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead2442 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleLookAhead2482 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_11_in_ruleLookAhead2536 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleLookAhead2568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3588 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead3594 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleLookAhead3613 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_11_in_ruleLookAhead3627 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleLookAhead3654 = new BitSet(new long[]{0x0000000000018000L});
+        public static final BitSet FOLLOW_ruleLookAhead4_in_ruleLookAhead3692 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4723 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead4729 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleLookAhead4761 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleLookAhead4807 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

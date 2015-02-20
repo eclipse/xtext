@@ -12,7 +12,9 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745ParserTest;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Ignore;
 
+@Ignore
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BacktrackingBug325745ParserTestDelegate extends BacktrackingBug325745ParserTest {

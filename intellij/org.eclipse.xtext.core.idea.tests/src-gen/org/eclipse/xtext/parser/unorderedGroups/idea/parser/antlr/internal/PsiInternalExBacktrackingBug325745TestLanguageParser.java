@@ -116,11 +116,9 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     // $ANTLR start "ruleDelegateModel"
     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:66:1: ruleDelegateModel : ruleModel ;
     public final void ruleDelegateModel() throws RecognitionException {
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:69:2: ( ruleModel )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:70:2: ruleModel
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:66:18: ( ruleModel )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:67:2: ruleModel
             {
             if ( state.backtracking==0 ) {
 
@@ -132,7 +130,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
               		markComposite(elementTypeProvider.getDelegateModel_ModelParserRuleCallElementType());
               	
             }
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_ruleDelegateModel90);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_ruleDelegateModel81);
             ruleModel();
 
             state._fsp--;
@@ -145,10 +143,6 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -162,16 +156,16 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:83:1: entryRuleModel : ruleModel EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:80:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:83:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:84:2: ruleModel EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:80:15: ( ruleModel EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:81:2: ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getModelElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel106);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel97);
             ruleModel();
 
             state._fsp--;
@@ -179,7 +173,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel112); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel103); if (state.failed) return ;
 
             }
 
@@ -196,19 +190,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:90:1: ruleModel : ( () ( (lv_fields_1_0= ruleElement ) )+ ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:87:1: ruleModel : ( () ( (lv_fields_1_0= ruleElement ) )+ ) ;
     public final void ruleModel() throws RecognitionException {
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:93:2: ( ( () ( (lv_fields_1_0= ruleElement ) )+ ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:94:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:87:10: ( ( () ( (lv_fields_1_0= ruleElement ) )+ ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:88:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:94:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:95:3: () ( (lv_fields_1_0= ruleElement ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:88:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:89:3: () ( (lv_fields_1_0= ruleElement ) )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:95:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:96:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:89:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:90:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -224,7 +216,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:104:3: ( (lv_fields_1_0= ruleElement ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:98:3: ( (lv_fields_1_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -238,17 +230,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:105:4: (lv_fields_1_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:99:4: (lv_fields_1_0= ruleElement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:105:4: (lv_fields_1_0= ruleElement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:106:5: lv_fields_1_0= ruleElement
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:99:4: (lv_fields_1_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:100:5: lv_fields_1_0= ruleElement
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markComposite(elementTypeProvider.getModel_FieldsElementParserRuleCall_1_0ElementType());
             	      				
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel171);
+            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel153);
             	    ruleElement();
 
             	    state._fsp--;
@@ -281,10 +273,6 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -298,16 +286,16 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "entryRuleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:119:1: entryRuleElement : ruleElement EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:113:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:119:17: ( ruleElement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:120:2: ruleElement EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:113:17: ( ruleElement EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:114:2: ruleElement EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getElementElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement203);
+            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement185);
             ruleElement();
 
             state._fsp--;
@@ -315,7 +303,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement209); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement191); if (state.failed) return ;
 
             }
 
@@ -332,32 +320,30 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "ruleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:126:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:120:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
     public final void ruleElement() throws RecognitionException {
         Token lv_name_0_0=null;
         Token otherlv_3=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:129:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:130:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:120:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:121:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:130:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:131:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:121:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:122:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:131:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:132:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:122:3: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:123:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:132:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:133:5: lv_name_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:123:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:124:5: lv_name_0_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement250); if (state.failed) return ;
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement223); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_name_0_0, elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
@@ -369,7 +355,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:142:3: ( (lv_dataType_1_0= ruleDataType ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:133:3: ( (lv_dataType_1_0= ruleDataType ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -382,17 +368,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:143:4: (lv_dataType_1_0= ruleDataType )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:134:4: (lv_dataType_1_0= ruleDataType )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:143:4: (lv_dataType_1_0= ruleDataType )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:144:5: lv_dataType_1_0= ruleDataType
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:134:4: (lv_dataType_1_0= ruleDataType )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:135:5: lv_dataType_1_0= ruleDataType
                     {
                     if ( state.backtracking==0 ) {
 
                       					markComposite(elementTypeProvider.getElement_DataTypeDataTypeParserRuleCall_1_0ElementType());
                       				
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleDataType_in_ruleElement288);
+                    pushFollow(FollowSets000.FOLLOW_ruleDataType_in_ruleElement261);
                     ruleDataType();
 
                     state._fsp--;
@@ -411,18 +397,18 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:153:3: ( (lv_expression_2_0= ruleExpression ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:154:4: (lv_expression_2_0= ruleExpression )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:144:3: ( (lv_expression_2_0= ruleExpression ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:145:4: (lv_expression_2_0= ruleExpression )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:154:4: (lv_expression_2_0= ruleExpression )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:155:5: lv_expression_2_0= ruleExpression
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:145:4: (lv_expression_2_0= ruleExpression )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:146:5: lv_expression_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
 
               					markComposite(elementTypeProvider.getElement_ExpressionExpressionParserRuleCall_2_0ElementType());
               				
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleElement327);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleElement300);
             ruleExpression();
 
             state._fsp--;
@@ -443,7 +429,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
               			markLeaf();
               		
             }
-            otherlv_3=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement352); if (state.failed) return ;
+            otherlv_3=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement325); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               			doneLeaf(otherlv_3, elementTypeProvider.getElement_FullStopKeyword_3ElementType());
@@ -455,10 +441,6 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -472,16 +454,16 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "entryRuleDataType"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:175:1: entryRuleDataType : ruleDataType EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:166:1: entryRuleDataType : ruleDataType EOF ;
     public final void entryRuleDataType() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:175:18: ( ruleDataType EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:176:2: ruleDataType EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:166:18: ( ruleDataType EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:167:2: ruleDataType EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDataTypeElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDataType_in_entryRuleDataType372);
+            pushFollow(FollowSets000.FOLLOW_ruleDataType_in_entryRuleDataType345);
             ruleDataType();
 
             state._fsp--;
@@ -489,7 +471,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataType378); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataType351); if (state.failed) return ;
 
             }
 
@@ -506,33 +488,31 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "ruleDataType"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:182:1: ruleDataType : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:173:1: ruleDataType : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
     public final void ruleDataType() throws RecognitionException {
         Token lv_baseType_0_0=null;
         Token otherlv_1=null;
         Token lv_defaultValue_2_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:185:2: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:186:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:173:13: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:174:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:186:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:187:3: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:174:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:175:3: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:187:3: ( (lv_baseType_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:188:4: (lv_baseType_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:175:3: ( (lv_baseType_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:176:4: (lv_baseType_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:188:4: (lv_baseType_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:189:5: lv_baseType_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:176:4: (lv_baseType_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:177:5: lv_baseType_0_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataType419); if (state.failed) return ;
+            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataType383); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_baseType_0_0, elementTypeProvider.getDataType_BaseTypeIDTerminalRuleCall_0_0ElementType());
@@ -544,7 +524,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:198:3: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:186:3: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -553,31 +533,31 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:199:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:187:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
                     {
                     if ( state.backtracking==0 ) {
 
                       				markLeaf();
                       			
                     }
-                    otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDataType450); if (state.failed) return ;
+                    otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDataType414); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       				doneLeaf(otherlv_1, elementTypeProvider.getDataType_ColonEqualsSignKeyword_1_0ElementType());
                       			
                     }
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:206:4: ( (lv_defaultValue_2_0= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:207:5: (lv_defaultValue_2_0= RULE_STRING )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:194:4: ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:195:5: (lv_defaultValue_2_0= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:207:5: (lv_defaultValue_2_0= RULE_STRING )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:208:6: lv_defaultValue_2_0= RULE_STRING
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:195:5: (lv_defaultValue_2_0= RULE_STRING )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:196:6: lv_defaultValue_2_0= RULE_STRING
                     {
                     if ( state.backtracking==0 ) {
 
                       						markLeaf();
                       					
                     }
-                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataType482); if (state.failed) return ;
+                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataType446); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_defaultValue_2_0, elementTypeProvider.getDataType_DefaultValueSTRINGTerminalRuleCall_1_1_0ElementType());
@@ -601,10 +581,6 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -618,7 +594,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:222:1: entryRuleExpression : ruleExpression EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:210:1: entryRuleExpression : ruleExpression EOF ;
     public final void entryRuleExpression() throws RecognitionException {
 
         	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
@@ -627,13 +603,13 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
         	);
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:227:2: ( ruleExpression EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:228:2: ruleExpression EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:215:2: ( ruleExpression EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:216:2: ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getExpressionElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression525);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression489);
             ruleExpression();
 
             state._fsp--;
@@ -641,7 +617,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression531); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression495); if (state.failed) return ;
 
             }
 
@@ -661,7 +637,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "ruleExpression"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:237:1: ruleExpression : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:225:1: ruleExpression : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
     public final void ruleExpression() throws RecognitionException {
         Token otherlv_2=null;
         Token lv_prefix_3_0=null;
@@ -677,14 +653,14 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
         	);
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:245:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:246:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:230:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:231:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:246:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:247:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:231:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:232:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:247:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:232:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:233:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -700,17 +676,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:256:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:257:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:241:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:242:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:257:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:258:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:242:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:243:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_1());
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:261:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:262:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:246:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:247:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:262:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:247:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -738,35 +714,35 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:263:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:263:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:264:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:249:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:264:107: ( ({...}? => (otherlv_2= '[' ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:265:6: ({...}? => (otherlv_2= '[' ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:249:107: ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:250:6: ({...}? => (otherlv_2= '[' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:9: ({...}? => (otherlv_2= '[' ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:10: {...}? => (otherlv_2= '[' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:9: ({...}? => (otherlv_2= '[' ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:10: {...}? => (otherlv_2= '[' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:19: (otherlv_2= '[' )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:20: otherlv_2= '['
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:19: (otherlv_2= '[' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:20: otherlv_2= '['
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      									markLeaf();
             	      								
             	    }
-            	    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression645); if (state.failed) return ;
+            	    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression604); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      									doneLeaf(otherlv_2, elementTypeProvider.getExpression_LeftSquareBracketKeyword_1_0ElementType());
@@ -789,38 +765,38 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:281:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:266:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:281:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:282:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:266:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:267:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:282:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:283:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:267:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:19: ( (lv_prefix_3_0= RULE_STRING ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:20: (lv_prefix_3_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:19: ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:20: (lv_prefix_3_0= RULE_STRING )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:20: (lv_prefix_3_0= RULE_STRING )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:287:10: lv_prefix_3_0= RULE_STRING
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:20: (lv_prefix_3_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:272:10: lv_prefix_3_0= RULE_STRING
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      										markLeaf();
             	      									
             	    }
-            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression743); if (state.failed) return ;
+            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression702); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      										doneLeaf(lv_prefix_3_0, elementTypeProvider.getExpression_PrefixSTRINGTerminalRuleCall_1_1_0ElementType());
@@ -861,7 +837,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:308:3: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:293:3: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
             loop7:
             do {
                 int alt7=2;
@@ -874,9 +850,9 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:309:4: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:294:4: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:309:4: (otherlv_4= '[' )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:294:4: (otherlv_4= '[' )?
             	    int alt5=2;
             	    int LA5_0 = input.LA(1);
 
@@ -885,14 +861,14 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             	    }
             	    switch (alt5) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:310:5: otherlv_4= '['
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:295:5: otherlv_4= '['
             	            {
             	            if ( state.backtracking==0 ) {
 
             	              					markLeaf();
             	              				
             	            }
-            	            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression845); if (state.failed) return ;
+            	            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression804); if (state.failed) return ;
             	            if ( state.backtracking==0 ) {
 
             	              					doneLeaf(otherlv_4, elementTypeProvider.getExpression_LeftSquareBracketKeyword_2_0ElementType());
@@ -904,18 +880,18 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:318:4: ( (lv_terms_5_0= ruleSimpleTerm ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:319:5: (lv_terms_5_0= ruleSimpleTerm )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:303:4: ( (lv_terms_5_0= ruleSimpleTerm ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:304:5: (lv_terms_5_0= ruleSimpleTerm )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:319:5: (lv_terms_5_0= ruleSimpleTerm )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:320:6: lv_terms_5_0= ruleSimpleTerm
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:304:5: (lv_terms_5_0= ruleSimpleTerm )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:305:6: lv_terms_5_0= ruleSimpleTerm
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      						markComposite(elementTypeProvider.getExpression_TermsSimpleTermParserRuleCall_2_1_0ElementType());
             	      					
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_ruleExpression884);
+            	    pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_ruleExpression843);
             	    ruleSimpleTerm();
 
             	    state._fsp--;
@@ -931,7 +907,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:329:4: (otherlv_6= ']' )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:314:4: (otherlv_6= ']' )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -944,14 +920,14 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:330:5: otherlv_6= ']'
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:315:5: otherlv_6= ']'
             	            {
             	            if ( state.backtracking==0 ) {
 
             	              					markLeaf();
             	              				
             	            }
-            	            otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression921); if (state.failed) return ;
+            	            otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression880); if (state.failed) return ;
             	            if ( state.backtracking==0 ) {
 
             	              					doneLeaf(otherlv_6, elementTypeProvider.getExpression_RightSquareBracketKeyword_2_2ElementType());
@@ -972,17 +948,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:339:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:340:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:324:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:340:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:341:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:326:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_3());
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:344:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:345:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:329:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:345:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -998,35 +974,35 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:347:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:347:107: ( ({...}? => (otherlv_8= ']' ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:348:6: ({...}? => (otherlv_8= ']' ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:332:107: ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:333:6: ({...}? => (otherlv_8= ']' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:9: ({...}? => (otherlv_8= ']' ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:10: {...}? => (otherlv_8= ']' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:9: ({...}? => (otherlv_8= ']' ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:10: {...}? => (otherlv_8= ']' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:19: (otherlv_8= ']' )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:20: otherlv_8= ']'
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:19: (otherlv_8= ']' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:20: otherlv_8= ']'
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      									markLeaf();
             	      								
             	    }
-            	    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression1012); if (state.failed) return ;
+            	    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression971); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      									doneLeaf(otherlv_8, elementTypeProvider.getExpression_RightSquareBracketKeyword_3_0ElementType());
@@ -1049,38 +1025,38 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:349:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:365:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:349:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:350:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:365:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:366:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:350:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return ;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:19: ( (lv_postfix_9_0= RULE_STRING ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:20: (lv_postfix_9_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:19: ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:20: (lv_postfix_9_0= RULE_STRING )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:20: (lv_postfix_9_0= RULE_STRING )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:370:10: lv_postfix_9_0= RULE_STRING
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:20: (lv_postfix_9_0= RULE_STRING )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:355:10: lv_postfix_9_0= RULE_STRING
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      										markLeaf();
             	      									
             	    }
-            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression1110); if (state.failed) return ;
+            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression1069); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      										doneLeaf(lv_postfix_9_0, elementTypeProvider.getExpression_PostfixSTRINGTerminalRuleCall_3_1_0ElementType());
@@ -1127,17 +1103,15 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-              	myUnorderedGroupState.restore();
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
         }
         finally {
+
+            	myUnorderedGroupState.restore();
+
         }
         return ;
     }
@@ -1145,16 +1119,16 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "entryRuleSimpleTerm"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:395:1: entryRuleSimpleTerm : ruleSimpleTerm EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:383:1: entryRuleSimpleTerm : ruleSimpleTerm EOF ;
     public final void entryRuleSimpleTerm() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:395:20: ( ruleSimpleTerm EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:396:2: ruleSimpleTerm EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:383:20: ( ruleSimpleTerm EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:384:2: ruleSimpleTerm EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getSimpleTermElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1205);
+            pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1168);
             ruleSimpleTerm();
 
             state._fsp--;
@@ -1162,7 +1136,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTerm1211); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTerm1174); if (state.failed) return ;
 
             }
 
@@ -1179,7 +1153,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
 
     // $ANTLR start "ruleSimpleTerm"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:402:1: ruleSimpleTerm : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:390:1: ruleSimpleTerm : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
     public final void ruleSimpleTerm() throws RecognitionException {
         Token lv_lineCount_0_0=null;
         Token otherlv_1=null;
@@ -1188,13 +1162,11 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
         Token lv_charSet_4_0=null;
         Token lv_refChar_5_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:405:2: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:406:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:390:15: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:391:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:406:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:391:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1213,23 +1185,23 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
             }
             switch (alt13) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:407:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:392:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:407:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:408:4: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:392:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:393:4: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:408:4: ( (lv_lineCount_0_0= RULE_INT ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:409:5: (lv_lineCount_0_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:393:4: ( (lv_lineCount_0_0= RULE_INT ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:394:5: (lv_lineCount_0_0= RULE_INT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:409:5: (lv_lineCount_0_0= RULE_INT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:410:6: lv_lineCount_0_0= RULE_INT
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:394:5: (lv_lineCount_0_0= RULE_INT )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:395:6: lv_lineCount_0_0= RULE_INT
                     {
                     if ( state.backtracking==0 ) {
 
                       						markLeaf();
                       					
                     }
-                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1260); if (state.failed) return ;
+                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1214); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_lineCount_0_0, elementTypeProvider.getSimpleTerm_LineCountINTTerminalRuleCall_0_0_0ElementType());
@@ -1241,7 +1213,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:419:4: (otherlv_1= '*' )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:404:4: (otherlv_1= '*' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1250,14 +1222,14 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:420:5: otherlv_1= '*'
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:405:5: otherlv_1= '*'
                             {
                             if ( state.backtracking==0 ) {
 
                               					markLeaf();
                               				
                             }
-                            otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSimpleTerm1297); if (state.failed) return ;
+                            otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSimpleTerm1251); if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
                               					doneLeaf(otherlv_1, elementTypeProvider.getSimpleTerm_AsteriskKeyword_0_1ElementType());
@@ -1269,7 +1241,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:428:4: ( (lv_charCount_2_0= RULE_INT ) )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:413:4: ( (lv_charCount_2_0= RULE_INT ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1282,17 +1254,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:429:5: (lv_charCount_2_0= RULE_INT )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:414:5: (lv_charCount_2_0= RULE_INT )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:429:5: (lv_charCount_2_0= RULE_INT )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:430:6: lv_charCount_2_0= RULE_INT
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:414:5: (lv_charCount_2_0= RULE_INT )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:415:6: lv_charCount_2_0= RULE_INT
                             {
                             if ( state.backtracking==0 ) {
 
                               						markLeaf();
                               					
                             }
-                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1336); if (state.failed) return ;
+                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1290); if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
                               						doneLeaf(lv_charCount_2_0, elementTypeProvider.getSimpleTerm_CharCountINTTerminalRuleCall_0_2_0ElementType());
@@ -1307,7 +1279,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:439:4: (otherlv_3= '!' )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:424:4: (otherlv_3= '!' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1316,14 +1288,14 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:440:5: otherlv_3= '!'
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:425:5: otherlv_3= '!'
                             {
                             if ( state.backtracking==0 ) {
 
                               					markLeaf();
                               				
                             }
-                            otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSimpleTerm1374); if (state.failed) return ;
+                            otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSimpleTerm1328); if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
                               					doneLeaf(otherlv_3, elementTypeProvider.getSimpleTerm_ExclamationMarkKeyword_0_3ElementType());
@@ -1335,7 +1307,7 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:448:4: ( (lv_charSet_4_0= RULE_ID ) )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:433:4: ( (lv_charSet_4_0= RULE_ID ) )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1348,17 +1320,17 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:449:5: (lv_charSet_4_0= RULE_ID )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:434:5: (lv_charSet_4_0= RULE_ID )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:449:5: (lv_charSet_4_0= RULE_ID )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:450:6: lv_charSet_4_0= RULE_ID
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:434:5: (lv_charSet_4_0= RULE_ID )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:435:6: lv_charSet_4_0= RULE_ID
                             {
                             if ( state.backtracking==0 ) {
 
                               						markLeaf();
                               					
                             }
-                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1413); if (state.failed) return ;
+                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1367); if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
                               						doneLeaf(lv_charSet_4_0, elementTypeProvider.getSimpleTerm_CharSetIDTerminalRuleCall_0_4_0ElementType());
@@ -1380,20 +1352,20 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:461:3: ( (lv_refChar_5_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:446:3: ( (lv_refChar_5_0= RULE_ID ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:461:3: ( (lv_refChar_5_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:462:4: (lv_refChar_5_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:446:3: ( (lv_refChar_5_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:447:4: (lv_refChar_5_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:462:4: (lv_refChar_5_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:463:5: lv_refChar_5_0= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:447:4: (lv_refChar_5_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:448:5: lv_refChar_5_0= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
                       					markLeaf();
                       				
                     }
-                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1467); if (state.failed) return ;
+                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1421); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       					doneLeaf(lv_refChar_5_0, elementTypeProvider.getSimpleTerm_RefCharIDTerminalRuleCall_1_0ElementType());
@@ -1414,10 +1386,6 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -1431,18 +1399,18 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
 
     // $ANTLR start synpred2_PsiInternalExBacktrackingBug325745TestLanguage
     public final void synpred2_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:143:4: ( (lv_dataType_1_0= ruleDataType ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:143:4: (lv_dataType_1_0= ruleDataType )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:134:4: ( (lv_dataType_1_0= ruleDataType ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:134:4: (lv_dataType_1_0= ruleDataType )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:143:4: (lv_dataType_1_0= ruleDataType )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:144:5: lv_dataType_1_0= ruleDataType
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:134:4: (lv_dataType_1_0= ruleDataType )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:135:5: lv_dataType_1_0= ruleDataType
         {
         if ( state.backtracking==0 ) {
 
           					markComposite(elementTypeProvider.getElement_DataTypeDataTypeParserRuleCall_1_0ElementType());
           				
         }
-        pushFollow(FollowSets000.FOLLOW_ruleDataType_in_synpred2_PsiInternalExBacktrackingBug325745TestLanguage288);
+        pushFollow(FollowSets000.FOLLOW_ruleDataType_in_synpred2_PsiInternalExBacktrackingBug325745TestLanguage261);
         ruleDataType();
 
         state._fsp--;
@@ -1459,36 +1427,36 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred4_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_2=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:263:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:263:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:263:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:264:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:248:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:249:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_PsiInternalExBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:264:107: ( ({...}? => (otherlv_2= '[' ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:265:6: ({...}? => (otherlv_2= '[' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:249:107: ( ({...}? => (otherlv_2= '[' ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:250:6: ({...}? => (otherlv_2= '[' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:9: ({...}? => (otherlv_2= '[' ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:10: {...}? => (otherlv_2= '[' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:9: ({...}? => (otherlv_2= '[' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:10: {...}? => (otherlv_2= '[' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_PsiInternalExBacktrackingBug325745TestLanguage", "true");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:19: (otherlv_2= '[' )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:20: otherlv_2= '['
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:19: (otherlv_2= '[' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:253:20: otherlv_2= '['
         {
         if ( state.backtracking==0 ) {
 
           									markLeaf();
           								
         }
-        otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_synpred4_PsiInternalExBacktrackingBug325745TestLanguage645); if (state.failed) return ;
+        otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_synpred4_PsiInternalExBacktrackingBug325745TestLanguage604); if (state.failed) return ;
 
         }
 
@@ -1510,39 +1478,39 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred5_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_prefix_3_0=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:281:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:281:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:266:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:266:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:281:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:282:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:266:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:267:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_PsiInternalExBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:282:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:283:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:267:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:268:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_PsiInternalExBacktrackingBug325745TestLanguage", "true");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:19: ( (lv_prefix_3_0= RULE_STRING ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:20: (lv_prefix_3_0= RULE_STRING )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:19: ( (lv_prefix_3_0= RULE_STRING ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:20: (lv_prefix_3_0= RULE_STRING )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:286:20: (lv_prefix_3_0= RULE_STRING )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:287:10: lv_prefix_3_0= RULE_STRING
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:271:20: (lv_prefix_3_0= RULE_STRING )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:272:10: lv_prefix_3_0= RULE_STRING
         {
         if ( state.backtracking==0 ) {
 
           										markLeaf();
           									
         }
-        lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred5_PsiInternalExBacktrackingBug325745TestLanguage743); if (state.failed) return ;
+        lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred5_PsiInternalExBacktrackingBug325745TestLanguage702); if (state.failed) return ;
 
         }
 
@@ -1567,15 +1535,15 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred7_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_6=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:330:5: (otherlv_6= ']' )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:330:5: otherlv_6= ']'
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:315:5: (otherlv_6= ']' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:315:5: otherlv_6= ']'
         {
         if ( state.backtracking==0 ) {
 
           					markLeaf();
           				
         }
-        otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred7_PsiInternalExBacktrackingBug325745TestLanguage921); if (state.failed) return ;
+        otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred7_PsiInternalExBacktrackingBug325745TestLanguage880); if (state.failed) return ;
 
         }
     }
@@ -1585,36 +1553,36 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred9_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_8=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:346:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:331:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:347:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_PsiInternalExBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:347:107: ( ({...}? => (otherlv_8= ']' ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:348:6: ({...}? => (otherlv_8= ']' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:332:107: ( ({...}? => (otherlv_8= ']' ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:333:6: ({...}? => (otherlv_8= ']' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:9: ({...}? => (otherlv_8= ']' ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:10: {...}? => (otherlv_8= ']' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:9: ({...}? => (otherlv_8= ']' ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:10: {...}? => (otherlv_8= ']' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_PsiInternalExBacktrackingBug325745TestLanguage", "true");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:19: (otherlv_8= ']' )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:20: otherlv_8= ']'
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:19: (otherlv_8= ']' )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:336:20: otherlv_8= ']'
         {
         if ( state.backtracking==0 ) {
 
           									markLeaf();
           								
         }
-        otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred9_PsiInternalExBacktrackingBug325745TestLanguage1012); if (state.failed) return ;
+        otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred9_PsiInternalExBacktrackingBug325745TestLanguage971); if (state.failed) return ;
 
         }
 
@@ -1636,39 +1604,39 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred10_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_postfix_9_0=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:364:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:349:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:349:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:365:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:349:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:350:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_PsiInternalExBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:365:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:366:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:350:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:351:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_PsiInternalExBacktrackingBug325745TestLanguage", "true");
         }
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:19: ( (lv_postfix_9_0= RULE_STRING ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:20: (lv_postfix_9_0= RULE_STRING )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:19: ( (lv_postfix_9_0= RULE_STRING ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:20: (lv_postfix_9_0= RULE_STRING )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:369:20: (lv_postfix_9_0= RULE_STRING )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:370:10: lv_postfix_9_0= RULE_STRING
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:354:20: (lv_postfix_9_0= RULE_STRING )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:355:10: lv_postfix_9_0= RULE_STRING
         {
         if ( state.backtracking==0 ) {
 
           										markLeaf();
           									
         }
-        lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred10_PsiInternalExBacktrackingBug325745TestLanguage1110); if (state.failed) return ;
+        lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred10_PsiInternalExBacktrackingBug325745TestLanguage1069); if (state.failed) return ;
 
         }
 
@@ -1693,18 +1661,18 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred12_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charCount_2_0=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:429:5: ( (lv_charCount_2_0= RULE_INT ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:429:5: (lv_charCount_2_0= RULE_INT )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:414:5: ( (lv_charCount_2_0= RULE_INT ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:414:5: (lv_charCount_2_0= RULE_INT )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:429:5: (lv_charCount_2_0= RULE_INT )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:430:6: lv_charCount_2_0= RULE_INT
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:414:5: (lv_charCount_2_0= RULE_INT )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:415:6: lv_charCount_2_0= RULE_INT
         {
         if ( state.backtracking==0 ) {
 
           						markLeaf();
           					
         }
-        lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred12_PsiInternalExBacktrackingBug325745TestLanguage1336); if (state.failed) return ;
+        lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred12_PsiInternalExBacktrackingBug325745TestLanguage1290); if (state.failed) return ;
 
         }
 
@@ -1717,18 +1685,18 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     public final void synpred14_PsiInternalExBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charSet_4_0=null;
 
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:449:5: ( (lv_charSet_4_0= RULE_ID ) )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:449:5: (lv_charSet_4_0= RULE_ID )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:434:5: ( (lv_charSet_4_0= RULE_ID ) )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:434:5: (lv_charSet_4_0= RULE_ID )
         {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:449:5: (lv_charSet_4_0= RULE_ID )
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:450:6: lv_charSet_4_0= RULE_ID
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:434:5: (lv_charSet_4_0= RULE_ID )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExBacktrackingBug325745TestLanguage.g:435:6: lv_charSet_4_0= RULE_ID
         {
         if ( state.backtracking==0 ) {
 
           						markLeaf();
           					
         }
-        lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred14_PsiInternalExBacktrackingBug325745TestLanguage1413); if (state.failed) return ;
+        lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred14_PsiInternalExBacktrackingBug325745TestLanguage1367); if (state.failed) return ;
 
         }
 
@@ -1859,46 +1827,46 @@ public class PsiInternalExBacktrackingBug325745TestLanguageParser extends Abstra
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleDelegateModel_in_entryRuleDelegateModel60 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDelegateModel66 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModel_in_ruleDelegateModel90 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel106 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel112 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleModel171 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement203 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement209 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement250 = new BitSet(new long[]{0x0000000000006870L});
-        public static final BitSet FOLLOW_ruleDataType_in_ruleElement288 = new BitSet(new long[]{0x0000000000006870L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleElement327 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleElement352 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataType_in_entryRuleDataType372 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDataType378 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleDataType419 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleDataType450 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataType482 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression525 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression531 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleExpression645 = new BitSet(new long[]{0x0000000000006072L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression743 = new BitSet(new long[]{0x0000000000006072L});
-        public static final BitSet FOLLOW_13_in_ruleExpression845 = new BitSet(new long[]{0x0000000000002050L});
-        public static final BitSet FOLLOW_ruleSimpleTerm_in_ruleExpression884 = new BitSet(new long[]{0x0000000000006072L});
-        public static final BitSet FOLLOW_14_in_ruleExpression921 = new BitSet(new long[]{0x0000000000006072L});
-        public static final BitSet FOLLOW_14_in_ruleExpression1012 = new BitSet(new long[]{0x0000000000004022L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression1110 = new BitSet(new long[]{0x0000000000004022L});
-        public static final BitSet FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1205 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTerm1211 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1260 = new BitSet(new long[]{0x0000000000018052L});
-        public static final BitSet FOLLOW_15_in_ruleSimpleTerm1297 = new BitSet(new long[]{0x0000000000010052L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1336 = new BitSet(new long[]{0x0000000000010012L});
-        public static final BitSet FOLLOW_16_in_ruleSimpleTerm1374 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1467 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataType_in_synpred2_PsiInternalExBacktrackingBug325745TestLanguage288 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_synpred4_PsiInternalExBacktrackingBug325745TestLanguage645 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_synpred5_PsiInternalExBacktrackingBug325745TestLanguage743 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_synpred7_PsiInternalExBacktrackingBug325745TestLanguage921 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_synpred9_PsiInternalExBacktrackingBug325745TestLanguage1012 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_synpred10_PsiInternalExBacktrackingBug325745TestLanguage1110 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred12_PsiInternalExBacktrackingBug325745TestLanguage1336 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred14_PsiInternalExBacktrackingBug325745TestLanguage1413 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModel_in_ruleDelegateModel81 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel97 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel103 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElement_in_ruleModel153 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement185 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleElement191 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleElement223 = new BitSet(new long[]{0x0000000000006870L});
+        public static final BitSet FOLLOW_ruleDataType_in_ruleElement261 = new BitSet(new long[]{0x0000000000006870L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleElement300 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_11_in_ruleElement325 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataType_in_entryRuleDataType345 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDataType351 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleDataType383 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_12_in_ruleDataType414 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataType446 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression489 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpression495 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleExpression604 = new BitSet(new long[]{0x0000000000006072L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression702 = new BitSet(new long[]{0x0000000000006072L});
+        public static final BitSet FOLLOW_13_in_ruleExpression804 = new BitSet(new long[]{0x0000000000002050L});
+        public static final BitSet FOLLOW_ruleSimpleTerm_in_ruleExpression843 = new BitSet(new long[]{0x0000000000006072L});
+        public static final BitSet FOLLOW_14_in_ruleExpression880 = new BitSet(new long[]{0x0000000000006072L});
+        public static final BitSet FOLLOW_14_in_ruleExpression971 = new BitSet(new long[]{0x0000000000004022L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression1069 = new BitSet(new long[]{0x0000000000004022L});
+        public static final BitSet FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1168 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTerm1174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1214 = new BitSet(new long[]{0x0000000000018052L});
+        public static final BitSet FOLLOW_15_in_ruleSimpleTerm1251 = new BitSet(new long[]{0x0000000000010052L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1290 = new BitSet(new long[]{0x0000000000010012L});
+        public static final BitSet FOLLOW_16_in_ruleSimpleTerm1328 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1367 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1421 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataType_in_synpred2_PsiInternalExBacktrackingBug325745TestLanguage261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_synpred4_PsiInternalExBacktrackingBug325745TestLanguage604 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_synpred5_PsiInternalExBacktrackingBug325745TestLanguage702 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_synpred7_PsiInternalExBacktrackingBug325745TestLanguage880 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_synpred9_PsiInternalExBacktrackingBug325745TestLanguage971 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_synpred10_PsiInternalExBacktrackingBug325745TestLanguage1069 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred12_PsiInternalExBacktrackingBug325745TestLanguage1290 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred14_PsiInternalExBacktrackingBug325745TestLanguage1367 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

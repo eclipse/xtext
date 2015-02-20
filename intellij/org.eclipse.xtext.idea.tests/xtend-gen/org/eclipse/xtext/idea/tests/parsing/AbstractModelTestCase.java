@@ -72,6 +72,20 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   }
   
   @Override
+  public XtextResource checkResource(final String code, final boolean validate) {
+    XtextResource _xblockexpression = null;
+    {
+      this.checkModel(code);
+      if (validate) {
+        XtextResource _actualResource = this.getActualResource();
+        this.validationHelper.assertNoErrors(_actualResource);
+      }
+      _xblockexpression = this.getActualResource();
+    }
+    return _xblockexpression;
+  }
+  
+  @Override
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
     T _xblockexpression = null;
     {

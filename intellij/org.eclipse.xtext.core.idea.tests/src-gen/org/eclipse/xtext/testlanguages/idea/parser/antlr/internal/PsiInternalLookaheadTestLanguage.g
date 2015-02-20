@@ -56,10 +56,7 @@ entryRuleEntry:
 	EOF;
 
 // Rule Entry
-ruleEntry@init {
-}
-@after {
-}:
+ruleEntry:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleAlts:
 	EOF;
 
 // Rule Alts
-ruleAlts@init {
-}
-@after {
-}:
+ruleAlts:
 	(
 		{
 			markComposite(elementTypeProvider.getAlts_LookAhead0ParserRuleCall_0ElementType());
@@ -120,10 +114,7 @@ entryRuleLookAhead0:
 	EOF;
 
 // Rule LookAhead0
-ruleLookAhead0@init {
-}
-@after {
-}:
+ruleLookAhead0:
 	(
 		{
 			markLeaf();
@@ -154,10 +145,7 @@ entryRuleLookAhead1:
 	EOF;
 
 // Rule LookAhead1
-ruleLookAhead1@init {
-}
-@after {
-}:
+ruleLookAhead1:
 	(
 		{
 			markLeaf();
@@ -210,10 +198,7 @@ entryRuleLookAhead2:
 	EOF;
 
 // Rule LookAhead2
-ruleLookAhead2@init {
-}
-@after {
-}:
+ruleLookAhead2:
 	(
 		(
 			(
@@ -258,10 +243,7 @@ entryRuleLookAhead3:
 	EOF;
 
 // Rule LookAhead3
-ruleLookAhead3@init {
-}
-@after {
-}:
+ruleLookAhead3:
 	(
 		{
 			markLeaf();
@@ -310,10 +292,7 @@ entryRuleLookAhead4:
 	EOF;
 
 // Rule LookAhead4
-ruleLookAhead4@init {
-}
-@after {
-}:
+ruleLookAhead4:
 	(
 		(
 			(

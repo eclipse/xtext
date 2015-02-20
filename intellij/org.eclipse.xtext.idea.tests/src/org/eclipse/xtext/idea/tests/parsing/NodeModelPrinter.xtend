@@ -8,11 +8,12 @@
 package org.eclipse.xtext.idea.tests.parsing
 
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
+import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.Action
 
 class NodeModelPrinter {
 
@@ -57,7 +58,11 @@ class NodeModelPrinter {
 	'''
 
 	protected dispatch def String printGrammarElement(Action action) '''
-		«action.class.simpleName» [«action.type.classifier.name»]
+		Action [«action.type.classifier.name»]
+	'''
+
+	protected dispatch def String printGrammarElement(CrossReference crossReference) '''
+		CrossReference [«crossReference.type.classifier.name»«IF crossReference.terminal != null» | «crossReference.terminal.printGrammarElement» «ENDIF»]
 	'''
 
 }

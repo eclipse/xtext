@@ -122,17 +122,15 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         Token lv_ys_4_0=null;
         Token lv_as_5_0=null;
 
-
-
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:69:2: ( ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:70:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:66:10: ( ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:67:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:70:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:71:3: ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:67:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:68:3: ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:71:3: ( (lv_enums_0_0= ruleEnumName ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:68:3: ( (lv_enums_0_0= ruleEnumName ) )*
             loop1:
             do {
                 int alt1=2;
@@ -145,17 +143,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:72:4: (lv_enums_0_0= ruleEnumName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:69:4: (lv_enums_0_0= ruleEnumName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:72:4: (lv_enums_0_0= ruleEnumName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:73:5: lv_enums_0_0= ruleEnumName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:69:4: (lv_enums_0_0= ruleEnumName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:70:5: lv_enums_0_0= ruleEnumName
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markComposite(elementTypeProvider.getModel_EnumsEnumNameEnumRuleCall_0_0ElementType());
             	      				
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleEnumName_in_ruleModel113);
+            	    pushFollow(FollowSets000.FOLLOW_ruleEnumName_in_ruleModel104);
             	    ruleEnumName();
 
             	    state._fsp--;
@@ -177,7 +175,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:82:3: ( (lv_ycs_1_0= RULE_YC ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:79:3: ( (lv_ycs_1_0= RULE_YC ) )*
             loop2:
             do {
                 int alt2=2;
@@ -190,17 +188,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:83:4: (lv_ycs_1_0= RULE_YC )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:80:4: (lv_ycs_1_0= RULE_YC )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:83:4: (lv_ycs_1_0= RULE_YC )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:84:5: lv_ycs_1_0= RULE_YC
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:80:4: (lv_ycs_1_0= RULE_YC )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:81:5: lv_ycs_1_0= RULE_YC
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf();
             	      				
             	    }
-            	    lv_ycs_1_0=(Token)match(input,RULE_YC,FollowSets000.FOLLOW_RULE_YC_in_ruleModel152); if (state.failed) return ;
+            	    lv_ycs_1_0=(Token)match(input,RULE_YC,FollowSets000.FOLLOW_RULE_YC_in_ruleModel143); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_ycs_1_0, elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
@@ -218,7 +216,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:93:3: ( (lv_abs_2_0= ruleAb ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:90:3: ( (lv_abs_2_0= ruleAb ) )*
             loop3:
             do {
                 int alt3=2;
@@ -237,17 +235,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:94:4: (lv_abs_2_0= ruleAb )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:91:4: (lv_abs_2_0= ruleAb )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:94:4: (lv_abs_2_0= ruleAb )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:95:5: lv_abs_2_0= ruleAb
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:91:4: (lv_abs_2_0= ruleAb )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:92:5: lv_abs_2_0= ruleAb
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markComposite(elementTypeProvider.getModel_AbsAbParserRuleCall_2_0ElementType());
             	      				
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleAb_in_ruleModel191);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAb_in_ruleModel182);
             	    ruleAb();
 
             	    state._fsp--;
@@ -269,7 +267,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:104:3: ( (lv_xbs_3_0= ruleXb ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:101:3: ( (lv_xbs_3_0= ruleXb ) )*
             loop4:
             do {
                 int alt4=2;
@@ -282,17 +280,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:105:4: (lv_xbs_3_0= ruleXb )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:102:4: (lv_xbs_3_0= ruleXb )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:105:4: (lv_xbs_3_0= ruleXb )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:106:5: lv_xbs_3_0= ruleXb
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:102:4: (lv_xbs_3_0= ruleXb )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:103:5: lv_xbs_3_0= ruleXb
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markComposite(elementTypeProvider.getModel_XbsXbParserRuleCall_3_0ElementType());
             	      				
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleXb_in_ruleModel230);
+            	    pushFollow(FollowSets000.FOLLOW_ruleXb_in_ruleModel221);
             	    ruleXb();
 
             	    state._fsp--;
@@ -314,7 +312,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:115:3: ( (lv_ys_4_0= RULE_CHARY ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:112:3: ( (lv_ys_4_0= RULE_CHARY ) )*
             loop5:
             do {
                 int alt5=2;
@@ -327,17 +325,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:116:4: (lv_ys_4_0= RULE_CHARY )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:113:4: (lv_ys_4_0= RULE_CHARY )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:116:4: (lv_ys_4_0= RULE_CHARY )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:117:5: lv_ys_4_0= RULE_CHARY
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:113:4: (lv_ys_4_0= RULE_CHARY )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:114:5: lv_ys_4_0= RULE_CHARY
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf();
             	      				
             	    }
-            	    lv_ys_4_0=(Token)match(input,RULE_CHARY,FollowSets000.FOLLOW_RULE_CHARY_in_ruleModel269); if (state.failed) return ;
+            	    lv_ys_4_0=(Token)match(input,RULE_CHARY,FollowSets000.FOLLOW_RULE_CHARY_in_ruleModel260); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_ys_4_0, elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
@@ -355,7 +353,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:126:3: ( (lv_as_5_0= RULE_CHARA ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:123:3: ( (lv_as_5_0= RULE_CHARA ) )*
             loop6:
             do {
                 int alt6=2;
@@ -368,17 +366,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt6) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:127:4: (lv_as_5_0= RULE_CHARA )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:124:4: (lv_as_5_0= RULE_CHARA )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:127:4: (lv_as_5_0= RULE_CHARA )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:128:5: lv_as_5_0= RULE_CHARA
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:124:4: (lv_as_5_0= RULE_CHARA )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:125:5: lv_as_5_0= RULE_CHARA
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf();
             	      				
             	    }
-            	    lv_as_5_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_RULE_CHARA_in_ruleModel308); if (state.failed) return ;
+            	    lv_as_5_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_RULE_CHARA_in_ruleModel299); if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_as_5_0, elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
@@ -402,10 +400,6 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -420,18 +414,18 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleAb"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:141:1: entryRuleAb : ruleAb EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:138:1: entryRuleAb : ruleAb EOF ;
     public final void entryRuleAb() throws RecognitionException {
         int entryRuleAb_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:141:12: ( ruleAb EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:142:2: ruleAb EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:138:12: ( ruleAb EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:139:2: ruleAb EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAbElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAb_in_entryRuleAb340);
+            pushFollow(FollowSets000.FOLLOW_ruleAb_in_entryRuleAb331);
             ruleAb();
 
             state._fsp--;
@@ -439,7 +433,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAb346); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAb337); if (state.failed) return ;
 
             }
 
@@ -457,34 +451,32 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "ruleAb"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:148:1: ruleAb : ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:145:1: ruleAb : ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
     public final void ruleAb() throws RecognitionException {
         int ruleAb_StartIndex = input.index();
         Token lv_x_0_0=null;
         Token lv_y_1_0=null;
 
-
-
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:151:2: ( ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:152:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:145:7: ( ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:146:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:152:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:153:3: ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:146:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:147:3: ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:153:3: ( (lv_x_0_0= RULE_CHARA ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:154:4: (lv_x_0_0= RULE_CHARA )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:147:3: ( (lv_x_0_0= RULE_CHARA ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:148:4: (lv_x_0_0= RULE_CHARA )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:154:4: (lv_x_0_0= RULE_CHARA )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:155:5: lv_x_0_0= RULE_CHARA
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:148:4: (lv_x_0_0= RULE_CHARA )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:149:5: lv_x_0_0= RULE_CHARA
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_x_0_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_RULE_CHARA_in_ruleAb387); if (state.failed) return ;
+            lv_x_0_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_RULE_CHARA_in_ruleAb369); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_x_0_0, elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
@@ -496,18 +488,18 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:164:3: ( (lv_y_1_0= RULE_CHARB ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:165:4: (lv_y_1_0= RULE_CHARB )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:158:3: ( (lv_y_1_0= RULE_CHARB ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:159:4: (lv_y_1_0= RULE_CHARB )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:165:4: (lv_y_1_0= RULE_CHARB )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:166:5: lv_y_1_0= RULE_CHARB
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:159:4: (lv_y_1_0= RULE_CHARB )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:160:5: lv_y_1_0= RULE_CHARB
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleAb425); if (state.failed) return ;
+            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleAb407); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_y_1_0, elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
@@ -525,10 +517,6 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -543,18 +531,18 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleXb"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:179:1: entryRuleXb : ruleXb EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:173:1: entryRuleXb : ruleXb EOF ;
     public final void entryRuleXb() throws RecognitionException {
         int entryRuleXb_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:179:12: ( ruleXb EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:180:2: ruleXb EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:173:12: ( ruleXb EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:174:2: ruleXb EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXbElementType()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleXb_in_entryRuleXb456);
+            pushFollow(FollowSets000.FOLLOW_ruleXb_in_entryRuleXb438);
             ruleXb();
 
             state._fsp--;
@@ -562,7 +550,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             if ( state.backtracking==0 ) {
                doneComposite(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleXb462); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleXb444); if (state.failed) return ;
 
             }
 
@@ -580,34 +568,32 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "ruleXb"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:186:1: ruleXb : ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:180:1: ruleXb : ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
     public final void ruleXb() throws RecognitionException {
         int ruleXb_StartIndex = input.index();
         Token lv_x_0_0=null;
         Token lv_y_1_0=null;
 
-
-
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:189:2: ( ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:190:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:180:7: ( ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:181:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:190:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:191:3: ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:181:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:182:3: ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:191:3: ( (lv_x_0_0= RULE_CHARX ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:192:4: (lv_x_0_0= RULE_CHARX )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:182:3: ( (lv_x_0_0= RULE_CHARX ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:183:4: (lv_x_0_0= RULE_CHARX )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:192:4: (lv_x_0_0= RULE_CHARX )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:193:5: lv_x_0_0= RULE_CHARX
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:183:4: (lv_x_0_0= RULE_CHARX )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:184:5: lv_x_0_0= RULE_CHARX
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_x_0_0=(Token)match(input,RULE_CHARX,FollowSets000.FOLLOW_RULE_CHARX_in_ruleXb503); if (state.failed) return ;
+            lv_x_0_0=(Token)match(input,RULE_CHARX,FollowSets000.FOLLOW_RULE_CHARX_in_ruleXb476); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_x_0_0, elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
@@ -619,18 +605,18 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:202:3: ( (lv_y_1_0= RULE_CHARB ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:203:4: (lv_y_1_0= RULE_CHARB )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:193:3: ( (lv_y_1_0= RULE_CHARB ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:194:4: (lv_y_1_0= RULE_CHARB )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:203:4: (lv_y_1_0= RULE_CHARB )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:204:5: lv_y_1_0= RULE_CHARB
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:194:4: (lv_y_1_0= RULE_CHARB )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:195:5: lv_y_1_0= RULE_CHARB
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf();
               				
             }
-            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleXb541); if (state.failed) return ;
+            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleXb514); if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_y_1_0, elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
@@ -648,10 +634,6 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            if ( state.backtracking==0 ) {
-
-
-            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -666,7 +648,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "ruleEnumName"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:217:1: ruleEnumName : ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:208:1: ruleEnumName : ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) ;
     public final void ruleEnumName() throws RecognitionException {
         int ruleEnumName_StartIndex = input.index();
         Token enumLiteral_0=null;
@@ -674,10 +656,10 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return ; }
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:217:13: ( ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:218:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:208:13: ( ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:209:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:218:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:209:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -696,17 +678,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:219:3: (enumLiteral_0= 'Abc' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:210:3: (enumLiteral_0= 'Abc' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:219:3: (enumLiteral_0= 'Abc' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:220:4: enumLiteral_0= 'Abc'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:210:3: (enumLiteral_0= 'Abc' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:211:4: enumLiteral_0= 'Abc'
                     {
                     if ( state.backtracking==0 ) {
 
                       				markLeaf();
                       			
                     }
-                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleEnumName585); if (state.failed) return ;
+                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleEnumName558); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       				doneLeaf(enumLiteral_0, elementTypeProvider.getEnumName_AbcEnumLiteralDeclaration_0ElementType());
@@ -719,17 +701,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:229:3: (enumLiteral_1= 'Efg' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:220:3: (enumLiteral_1= 'Efg' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:229:3: (enumLiteral_1= 'Efg' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:230:4: enumLiteral_1= 'Efg'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:220:3: (enumLiteral_1= 'Efg' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:221:4: enumLiteral_1= 'Efg'
                     {
                     if ( state.backtracking==0 ) {
 
                       				markLeaf();
                       			
                     }
-                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleEnumName618); if (state.failed) return ;
+                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleEnumName591); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
                       				doneLeaf(enumLiteral_1, elementTypeProvider.getEnumName_EfgEnumLiteralDeclaration_1ElementType());
@@ -768,22 +750,22 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel66 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEnumName_in_ruleModel113 = new BitSet(new long[]{0x0000000000003172L});
-        public static final BitSet FOLLOW_RULE_YC_in_ruleModel152 = new BitSet(new long[]{0x0000000000000172L});
-        public static final BitSet FOLLOW_ruleAb_in_ruleModel191 = new BitSet(new long[]{0x0000000000000162L});
-        public static final BitSet FOLLOW_ruleXb_in_ruleModel230 = new BitSet(new long[]{0x0000000000000162L});
-        public static final BitSet FOLLOW_RULE_CHARY_in_ruleModel269 = new BitSet(new long[]{0x0000000000000062L});
-        public static final BitSet FOLLOW_RULE_CHARA_in_ruleModel308 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_ruleAb_in_entryRuleAb340 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAb346 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb387 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb425 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleXb_in_entryRuleXb456 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleXb462 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb503 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb541 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleEnumName585 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleEnumName618 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumName_in_ruleModel104 = new BitSet(new long[]{0x0000000000003172L});
+        public static final BitSet FOLLOW_RULE_YC_in_ruleModel143 = new BitSet(new long[]{0x0000000000000172L});
+        public static final BitSet FOLLOW_ruleAb_in_ruleModel182 = new BitSet(new long[]{0x0000000000000162L});
+        public static final BitSet FOLLOW_ruleXb_in_ruleModel221 = new BitSet(new long[]{0x0000000000000162L});
+        public static final BitSet FOLLOW_RULE_CHARY_in_ruleModel260 = new BitSet(new long[]{0x0000000000000062L});
+        public static final BitSet FOLLOW_RULE_CHARA_in_ruleModel299 = new BitSet(new long[]{0x0000000000000042L});
+        public static final BitSet FOLLOW_ruleAb_in_entryRuleAb331 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAb337 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb369 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb407 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleXb_in_entryRuleXb438 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleXb444 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb476 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb514 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleEnumName558 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleEnumName591 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

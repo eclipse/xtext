@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_OpParserRuleCall_0ElementType());
@@ -87,10 +84,7 @@ entryRuleOp:
 	EOF;
 
 // Rule Op
-ruleOp@init {
-}
-@after {
-}:
+ruleOp:
 	(
 		{
 			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
@@ -165,10 +159,7 @@ entryRuleTerm:
 	EOF;
 
 // Rule Term
-ruleTerm@init {
-}
-@after {
-}:
+ruleTerm:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -196,10 +187,7 @@ entryRuleAtom:
 	EOF;
 
 // Rule Atom
-ruleAtom@init {
-}
-@after {
-}:
+ruleAtom:
 	(
 		(
 			{
@@ -221,10 +209,7 @@ entryRuleParens:
 	EOF;
 
 // Rule Parens
-ruleParens@init {
-}
-@after {
-}:
+ruleParens:
 	(
 		{
 			markLeaf();
@@ -269,10 +254,7 @@ entryRuleTrickyG:
 	EOF;
 
 // Rule TrickyG
-ruleTrickyG@init {
-}
-@after {
-}:
+ruleTrickyG:
 	(
 		{
 			markLeaf();
@@ -303,10 +285,7 @@ entryRuleTrickyG1:
 	EOF;
 
 // Rule TrickyG1
-ruleTrickyG1@init {
-}
-@after {
-}:
+ruleTrickyG1:
 	(
 		{
 			markLeaf();
@@ -366,10 +345,7 @@ entryRuleTrickyG2:
 	EOF;
 
 // Rule TrickyG2
-ruleTrickyG2@init {
-}
-@after {
-}:
+ruleTrickyG2:
 	(
 		{
 			markComposite(elementTypeProvider.getTrickyG2_TrickyG1ParserRuleCall_0ElementType());

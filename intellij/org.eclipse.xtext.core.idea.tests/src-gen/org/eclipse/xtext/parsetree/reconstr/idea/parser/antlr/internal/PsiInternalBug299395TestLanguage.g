@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -165,10 +162,7 @@ entryRuleSubModel:
 	EOF;
 
 // Rule SubModel
-ruleSubModel@init {
-}
-@after {
-}:
+ruleSubModel:
 	(
 		(
 			{

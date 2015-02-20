@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		{
 			markLeaf();
@@ -150,10 +144,7 @@ entryRuleNamed:
 	EOF;
 
 // Rule Named
-ruleNamed@init {
-}
-@after {
-}:
+ruleNamed:
 	(
 		(
 			{
@@ -182,9 +173,6 @@ finally {
 // Rule NAME
 ruleNAME@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -212,6 +200,9 @@ ruleNAME@init {
 		)*
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

@@ -56,10 +56,7 @@ entryRuleSubMain:
 	EOF;
 
 // Rule SubMain
-ruleSubMain@init {
-}
-@after {
-}:
+ruleSubMain:
 	(
 		{
 			markLeaf();
@@ -108,10 +105,7 @@ entryRuleAnotherSuperMain:
 	EOF;
 
 // Rule AnotherSuperMain
-ruleAnotherSuperMain@init {
-}
-@after {
-}:
+ruleAnotherSuperMain:
 	(
 		{
 			markLeaf();
@@ -142,10 +136,7 @@ entryRuleSuperMain:
 	EOF;
 
 // Rule SuperMain
-ruleSuperMain@init {
-}
-@after {
-}:
+ruleSuperMain:
 	(
 		{
 			markLeaf();

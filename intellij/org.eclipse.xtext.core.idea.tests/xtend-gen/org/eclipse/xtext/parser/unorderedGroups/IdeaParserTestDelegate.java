@@ -12,7 +12,9 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.ParserTest;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Ignore;
 
+@Ignore
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class IdeaParserTestDelegate extends ParserTest {

@@ -12,7 +12,9 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.BacktrackingParserTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage;
+import org.junit.Ignore;
 
+@Ignore
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class IdeaBacktrackingParserTestDelegate extends BacktrackingParserTest {

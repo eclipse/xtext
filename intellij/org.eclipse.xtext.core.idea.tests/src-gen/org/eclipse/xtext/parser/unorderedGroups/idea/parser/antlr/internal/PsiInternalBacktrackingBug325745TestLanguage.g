@@ -63,10 +63,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -99,10 +96,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		(
 			(
@@ -155,10 +149,7 @@ entryRuleDataType:
 	EOF;
 
 // Rule DataType
-ruleDataType@init {
-}
-@after {
-}:
+ruleDataType:
 	(
 		(
 			(
@@ -215,9 +206,6 @@ ruleExpression@init {
 	grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
 	grammarAccess.getExpressionAccess().getUnorderedGroup_3()
 	);
-}
-@after {
-	myUnorderedGroupState.restore();
 }:
 	(
 		(
@@ -366,6 +354,9 @@ ruleExpression@init {
 		)
 	)
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 //Entry rule entryRuleSimpleTerm
 entryRuleSimpleTerm:
@@ -375,10 +366,7 @@ entryRuleSimpleTerm:
 	EOF;
 
 // Rule SimpleTerm
-ruleSimpleTerm@init {
-}
-@after {
-}:
+ruleSimpleTerm:
 	(
 		(
 			(

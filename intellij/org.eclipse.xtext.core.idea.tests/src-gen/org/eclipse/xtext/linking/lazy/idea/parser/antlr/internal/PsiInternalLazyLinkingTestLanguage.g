@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleType:
 	EOF;
 
 // Rule Type
-ruleType@init {
-}
-@after {
-}:
+ruleType:
 	(
 		{
 			markLeaf();
@@ -227,10 +221,7 @@ entryRuleProperty:
 	EOF;
 
 // Rule Property
-ruleProperty@init {
-}
-@after {
-}:
+ruleProperty:
 	(
 		(
 			(
@@ -272,10 +263,7 @@ entryRuleUnresolvedProxyProperty:
 	EOF;
 
 // Rule UnresolvedProxyProperty
-ruleUnresolvedProxyProperty@init {
-}
-@after {
-}:
+ruleUnresolvedProxyProperty:
 	(
 		{
 			markLeaf();

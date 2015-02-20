@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	{
 		markComposite(elementTypeProvider.getModel_NodeRootParserRuleCallElementType());
 	}
@@ -77,10 +74,7 @@ entryRuleNodeRoot:
 	EOF;
 
 // Rule NodeRoot
-ruleNodeRoot@init {
-}
-@after {
-}:
+ruleNodeRoot:
 	(
 		{
 			markLeaf();
@@ -111,10 +105,7 @@ entryRuleNode:
 	EOF;
 
 // Rule Node
-ruleNode@init {
-}
-@after {
-}:
+ruleNode:
 	(
 		{
 			markLeaf();

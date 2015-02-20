@@ -113,25 +113,23 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
     public final void ruleProgram() throws RecognitionException {
         Token otherlv_2=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:62:2: ( ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:63:2: ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:59:12: ( ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:60:2: ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:63:2: ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:64:3: ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:60:2: ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:61:3: ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END'
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:64:3: ( (lv_define_0_0= ruleDefineVariables ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:65:4: (lv_define_0_0= ruleDefineVariables )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:61:3: ( (lv_define_0_0= ruleDefineVariables ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:62:4: (lv_define_0_0= ruleDefineVariables )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:65:4: (lv_define_0_0= ruleDefineVariables )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:66:5: lv_define_0_0= ruleDefineVariables
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:62:4: (lv_define_0_0= ruleDefineVariables )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:63:5: lv_define_0_0= ruleDefineVariables
             {
 
             					markComposite(elementTypeProvider.getProgram_DefineDefineVariablesParserRuleCall_0_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_ruleProgram101);
+            pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_ruleProgram92);
             ruleDefineVariables();
 
             state._fsp--;
@@ -145,7 +143,7 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:75:3: ( (lv_statements_1_0= ruleStatement ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:72:3: ( (lv_statements_1_0= ruleStatement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -158,15 +156,15 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:76:4: (lv_statements_1_0= ruleStatement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:73:4: (lv_statements_1_0= ruleStatement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:76:4: (lv_statements_1_0= ruleStatement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:77:5: lv_statements_1_0= ruleStatement
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:73:4: (lv_statements_1_0= ruleStatement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:74:5: lv_statements_1_0= ruleStatement
             	    {
 
             	    					markComposite(elementTypeProvider.getProgram_StatementsStatementParserRuleCall_1_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleStatement_in_ruleProgram139);
+            	    pushFollow(FollowSets000.FOLLOW_ruleStatement_in_ruleProgram130);
             	    ruleStatement();
 
             	    state._fsp--;
@@ -189,7 +187,7 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             			markLeaf();
             		
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleProgram165); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleProgram156); 
 
             			doneLeaf(otherlv_2, elementTypeProvider.getProgram_ENDKeyword_2ElementType());
             		
@@ -198,8 +196,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -214,20 +210,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleDefineVariables"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:97:1: entryRuleDefineVariables : ruleDefineVariables EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:94:1: entryRuleDefineVariables : ruleDefineVariables EOF ;
     public final void entryRuleDefineVariables() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:97:25: ( ruleDefineVariables EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:98:2: ruleDefineVariables EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:94:25: ( ruleDefineVariables EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:95:2: ruleDefineVariables EOF
             {
              markComposite(elementTypeProvider.getDefineVariablesElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_entryRuleDefineVariables185);
+            pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_entryRuleDefineVariables176);
             ruleDefineVariables();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariables191); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariables182); 
 
             }
 
@@ -244,28 +240,26 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleDefineVariables"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:104:1: ruleDefineVariables : (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:101:1: ruleDefineVariables : (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' ) ;
     public final void ruleDefineVariables() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:107:2: ( (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:108:2: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:101:20: ( (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:102:2: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:108:2: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:109:3: otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:102:2: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:103:3: otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES'
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDefineVariables219); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDefineVariables201); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getDefineVariables_VARIABLESKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:116:3: ( (lv_variables_1_0= ruleDefineVariable ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:110:3: ( (lv_variables_1_0= ruleDefineVariable ) )+
             int cnt2=0;
             loop2:
             do {
@@ -279,15 +273,15 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:117:4: (lv_variables_1_0= ruleDefineVariable )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:111:4: (lv_variables_1_0= ruleDefineVariable )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:117:4: (lv_variables_1_0= ruleDefineVariable )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:118:5: lv_variables_1_0= ruleDefineVariable
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:111:4: (lv_variables_1_0= ruleDefineVariable )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:112:5: lv_variables_1_0= ruleDefineVariable
             	    {
 
             	    					markComposite(elementTypeProvider.getDefineVariables_VariablesDefineVariableParserRuleCall_1_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_ruleDefineVariables246);
+            	    pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_ruleDefineVariables228);
             	    ruleDefineVariable();
 
             	    state._fsp--;
@@ -314,7 +308,7 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             			markLeaf();
             		
-            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDefineVariables272); 
+            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDefineVariables254); 
 
             			doneLeaf(otherlv_2, elementTypeProvider.getDefineVariables_ENDVARIABLESKeyword_2ElementType());
             		
@@ -323,8 +317,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -339,20 +331,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleDefineVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:138:1: entryRuleDefineVariable : ruleDefineVariable EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:132:1: entryRuleDefineVariable : ruleDefineVariable EOF ;
     public final void entryRuleDefineVariable() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:138:24: ( ruleDefineVariable EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:139:2: ruleDefineVariable EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:132:24: ( ruleDefineVariable EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:133:2: ruleDefineVariable EOF
             {
              markComposite(elementTypeProvider.getDefineVariableElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_entryRuleDefineVariable292);
+            pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_entryRuleDefineVariable274);
             ruleDefineVariable();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariable298); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariable280); 
 
             }
 
@@ -369,37 +361,35 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleDefineVariable"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:145:1: ruleDefineVariable : (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:139:1: ruleDefineVariable : (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleDefineVariable() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:148:2: ( (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:149:2: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:139:19: ( (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:140:2: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:149:2: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:150:3: otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:140:2: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:141:3: otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDefineVariable326); 
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDefineVariable299); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getDefineVariable_NAMEKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:157:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:158:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:148:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:149:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:158:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:159:5: lv_name_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:149:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:150:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDefineVariable353); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDefineVariable326); 
 
             					doneLeaf(lv_name_1_0, elementTypeProvider.getDefineVariable_NameIDTerminalRuleCall_1_0ElementType());
             				
@@ -415,8 +405,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -430,20 +418,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleNVariableAccess"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:172:1: entryRuleNVariableAccess : ruleNVariableAccess EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:163:1: entryRuleNVariableAccess : ruleNVariableAccess EOF ;
     public final void entryRuleNVariableAccess() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:172:25: ( ruleNVariableAccess EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:173:2: ruleNVariableAccess EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:163:25: ( ruleNVariableAccess EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:164:2: ruleNVariableAccess EOF
             {
              markComposite(elementTypeProvider.getNVariableAccessElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_entryRuleNVariableAccess384);
+            pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_entryRuleNVariableAccess357);
             ruleNVariableAccess();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNVariableAccess390); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNVariableAccess363); 
 
             }
 
@@ -460,26 +448,24 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleNVariableAccess"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:179:1: ruleNVariableAccess : ( (otherlv_0= RULE_ID ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:170:1: ruleNVariableAccess : ( (otherlv_0= RULE_ID ) ) ;
     public final void ruleNVariableAccess() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:182:2: ( ( (otherlv_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:183:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:170:20: ( ( (otherlv_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:171:2: ( (otherlv_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:183:2: ( (otherlv_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:184:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:171:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:172:3: (otherlv_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:184:3: (otherlv_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:185:4: otherlv_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:172:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:173:4: otherlv_0= RULE_ID
             {
 
             				markLeaf();
             			
-            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNVariableAccess424); 
+            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNVariableAccess388); 
 
             				doneLeaf(otherlv_0, elementTypeProvider.getNVariableAccess_VariableDefineVariableCrossReference_0ElementType());
             			
@@ -491,8 +477,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -507,20 +491,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleStatement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:197:1: entryRuleStatement : ruleStatement EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:185:1: entryRuleStatement : ruleStatement EOF ;
     public final void entryRuleStatement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:197:19: ( ruleStatement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:198:2: ruleStatement EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:185:19: ( ruleStatement EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:186:2: ruleStatement EOF
             {
              markComposite(elementTypeProvider.getStatementElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleStatement_in_entryRuleStatement449);
+            pushFollow(FollowSets000.FOLLOW_ruleStatement_in_entryRuleStatement413);
             ruleStatement();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStatement455); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStatement419); 
 
             }
 
@@ -537,7 +521,7 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:204:1: ruleStatement : ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:192:1: ruleStatement : ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* ) ;
     public final void ruleStatement() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_4=null;
@@ -549,19 +533,17 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
         Token otherlv_20=null;
         Token otherlv_21=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:207:2: ( ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:208:2: ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:192:14: ( ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:193:2: ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:208:2: ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:209:3: ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:193:2: ( ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:194:3: ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
             {
 
             			markComposite(elementTypeProvider.getStatement_Expression_VariableNameParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement481);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement436);
             ruleExpression_VariableName();
 
             state._fsp--;
@@ -569,27 +551,27 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:216:3: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:201:3: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
             loop3:
             do {
                 int alt3=8;
                 alt3 = dfa3.predict(input);
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:217:4: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:202:4: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:217:4: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:218:5: otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:202:4: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:203:5: otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) )
             	    {
 
             	    					markLeaf();
             	    				
-            	    otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleStatement508); 
+            	    otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleStatement463); 
 
             	    					doneLeaf(otherlv_1, elementTypeProvider.getStatement_C1Keyword_1_0_0ElementType());
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:225:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:226:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:210:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:211:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_Larger_EqualLeftAction_1_0_1ElementType());
@@ -598,16 +580,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:231:5: ( (lv_right_3_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:232:6: (lv_right_3_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:216:5: ( (lv_right_3_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:217:6: (lv_right_3_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:232:6: (lv_right_3_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:233:7: lv_right_3_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:217:6: (lv_right_3_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:218:7: lv_right_3_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_0_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement564);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement519);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -628,20 +610,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:244:4: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:229:4: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:244:4: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:245:5: otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:229:4: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:230:5: otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) )
             	    {
 
             	    					markLeaf();
             	    				
-            	    otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleStatement618); 
+            	    otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleStatement573); 
 
             	    					doneLeaf(otherlv_4, elementTypeProvider.getStatement_C2Keyword_1_1_0ElementType());
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:252:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:253:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:237:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:238:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_SmallerLeftAction_1_1_1ElementType());
@@ -650,16 +632,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:258:5: ( (lv_right_6_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:259:6: (lv_right_6_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:243:5: ( (lv_right_6_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:244:6: (lv_right_6_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:259:6: (lv_right_6_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:260:7: lv_right_6_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:244:6: (lv_right_6_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:245:7: lv_right_6_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_1_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement674);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement629);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -680,20 +662,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:271:4: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:256:4: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:271:4: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:272:5: otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:256:4: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:257:5: otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) )
             	    {
 
             	    					markLeaf();
             	    				
-            	    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleStatement728); 
+            	    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleStatement683); 
 
             	    					doneLeaf(otherlv_7, elementTypeProvider.getStatement_C3Keyword_1_2_0ElementType());
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:279:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:280:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:264:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:265:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_Smaller_EqualLeftAction_1_2_1ElementType());
@@ -702,16 +684,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:285:5: ( (lv_right_9_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:286:6: (lv_right_9_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:270:5: ( (lv_right_9_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:271:6: (lv_right_9_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:286:6: (lv_right_9_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:287:7: lv_right_9_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:271:6: (lv_right_9_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:272:7: lv_right_9_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_2_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement784);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement739);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -732,20 +714,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:298:4: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:283:4: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:298:4: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:299:5: otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:283:4: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:284:5: otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) )
             	    {
 
             	    					markLeaf();
             	    				
-            	    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleStatement838); 
+            	    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleStatement793); 
 
             	    					doneLeaf(otherlv_10, elementTypeProvider.getStatement_C4Keyword_1_3_0ElementType());
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:306:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:307:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:291:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:292:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_EqualLeftAction_1_3_1ElementType());
@@ -754,16 +736,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:312:5: ( (lv_right_12_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:313:6: (lv_right_12_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:297:5: ( (lv_right_12_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:298:6: (lv_right_12_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:313:6: (lv_right_12_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:314:7: lv_right_12_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:298:6: (lv_right_12_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:299:7: lv_right_12_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_3_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement894);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement849);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -784,20 +766,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:325:4: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:310:4: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:325:4: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:326:5: otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:310:4: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:311:5: otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) )
             	    {
 
             	    					markLeaf();
             	    				
-            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleStatement948); 
+            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleStatement903); 
 
             	    					doneLeaf(otherlv_13, elementTypeProvider.getStatement_C5Keyword_1_4_0ElementType());
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:333:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:334:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:318:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:319:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_Not_EqualLeftAction_1_4_1ElementType());
@@ -806,16 +788,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:339:5: ( (lv_right_15_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:340:6: (lv_right_15_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:324:5: ( (lv_right_15_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:325:6: (lv_right_15_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:340:6: (lv_right_15_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:341:7: lv_right_15_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:325:6: (lv_right_15_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:326:7: lv_right_15_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_4_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement1004);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement959);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -836,33 +818,33 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:352:4: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:337:4: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:352:4: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:353:5: (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:337:4: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:338:5: (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:353:5: (otherlv_16= 'C6' otherlv_17= 'C7' )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:354:6: otherlv_16= 'C6' otherlv_17= 'C7'
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:338:5: (otherlv_16= 'C6' otherlv_17= 'C7' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:339:6: otherlv_16= 'C6' otherlv_17= 'C7'
             	    {
 
             	    						markLeaf();
             	    					
-            	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement1066); 
+            	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement1021); 
 
             	    						doneLeaf(otherlv_16, elementTypeProvider.getStatement_C6Keyword_1_5_0_0ElementType());
             	    					
 
             	    						markLeaf();
             	    					
-            	    otherlv_17=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleStatement1089); 
+            	    otherlv_17=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleStatement1044); 
 
             	    						doneLeaf(otherlv_17, elementTypeProvider.getStatement_C7Keyword_1_5_0_1ElementType());
             	    					
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:369:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:370:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:354:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:355:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_Not_LessLeftAction_1_5_1ElementType());
@@ -871,16 +853,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:375:5: ( (lv_right_19_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:376:6: (lv_right_19_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:360:5: ( (lv_right_19_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:361:6: (lv_right_19_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:376:6: (lv_right_19_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:377:7: lv_right_19_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:361:6: (lv_right_19_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:362:7: lv_right_19_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_5_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement1152);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement1107);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -901,33 +883,33 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:388:4: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:373:4: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:388:4: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:389:5: (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:373:4: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:374:5: (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:389:5: (otherlv_20= 'C6' otherlv_21= 'C8' )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:390:6: otherlv_20= 'C6' otherlv_21= 'C8'
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:374:5: (otherlv_20= 'C6' otherlv_21= 'C8' )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:375:6: otherlv_20= 'C6' otherlv_21= 'C8'
             	    {
 
             	    						markLeaf();
             	    					
-            	    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement1214); 
+            	    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement1169); 
 
             	    						doneLeaf(otherlv_20, elementTypeProvider.getStatement_C6Keyword_1_6_0_0ElementType());
             	    					
 
             	    						markLeaf();
             	    					
-            	    otherlv_21=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleStatement1237); 
+            	    otherlv_21=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleStatement1192); 
 
             	    						doneLeaf(otherlv_21, elementTypeProvider.getStatement_C8Keyword_1_6_0_1ElementType());
             	    					
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:405:5: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:406:6: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:390:5: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:391:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getStatement_Expression_Not_GreaterLeftAction_1_6_1ElementType());
@@ -936,16 +918,16 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             	    }
 
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:411:5: ( (lv_right_23_0= ruleExpression_VariableName ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:412:6: (lv_right_23_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:396:5: ( (lv_right_23_0= ruleExpression_VariableName ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:397:6: (lv_right_23_0= ruleExpression_VariableName )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:412:6: (lv_right_23_0= ruleExpression_VariableName )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:413:7: lv_right_23_0= ruleExpression_VariableName
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:397:6: (lv_right_23_0= ruleExpression_VariableName )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:398:7: lv_right_23_0= ruleExpression_VariableName
             	    {
 
             	    							markComposite(elementTypeProvider.getStatement_RightExpression_VariableNameParserRuleCall_1_6_2_0ElementType());
             	    						
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement1300);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement1255);
             	    ruleExpression_VariableName();
 
             	    state._fsp--;
@@ -977,8 +959,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -992,20 +972,20 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleExpression_VariableName"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:428:1: entryRuleExpression_VariableName : ruleExpression_VariableName EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:413:1: entryRuleExpression_VariableName : ruleExpression_VariableName EOF ;
     public final void entryRuleExpression_VariableName() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:428:33: ( ruleExpression_VariableName EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:429:2: ruleExpression_VariableName EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:413:33: ( ruleExpression_VariableName EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:414:2: ruleExpression_VariableName EOF
             {
              markComposite(elementTypeProvider.getExpression_VariableNameElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_entryRuleExpression_VariableName1347);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_entryRuleExpression_VariableName1302);
             ruleExpression_VariableName();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression_VariableName1353); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression_VariableName1308); 
 
             }
 
@@ -1022,24 +1002,22 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleExpression_VariableName"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:435:1: ruleExpression_VariableName : ( (lv_variable_0_0= ruleNVariableAccess ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:420:1: ruleExpression_VariableName : ( (lv_variable_0_0= ruleNVariableAccess ) ) ;
     public final void ruleExpression_VariableName() throws RecognitionException {
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:438:2: ( ( (lv_variable_0_0= ruleNVariableAccess ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:439:2: ( (lv_variable_0_0= ruleNVariableAccess ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:420:28: ( ( (lv_variable_0_0= ruleNVariableAccess ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:421:2: ( (lv_variable_0_0= ruleNVariableAccess ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:439:2: ( (lv_variable_0_0= ruleNVariableAccess ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:440:3: (lv_variable_0_0= ruleNVariableAccess )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:421:2: ( (lv_variable_0_0= ruleNVariableAccess ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:422:3: (lv_variable_0_0= ruleNVariableAccess )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:440:3: (lv_variable_0_0= ruleNVariableAccess )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:441:4: lv_variable_0_0= ruleNVariableAccess
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:422:3: (lv_variable_0_0= ruleNVariableAccess )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalBug385636.g:423:4: lv_variable_0_0= ruleNVariableAccess
             {
 
             				markComposite(elementTypeProvider.getExpression_VariableName_VariableNVariableAccessParserRuleCall_0ElementType());
             			
-            pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_ruleExpression_VariableName1387);
+            pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_ruleExpression_VariableName1333);
             ruleNVariableAccess();
 
             state._fsp--;
@@ -1055,8 +1033,6 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -1128,7 +1104,7 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "()* loopback of 216:3: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*";
+            return "()* loopback of 201:3: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*";
         }
     }
  
@@ -1137,43 +1113,43 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleProgram_in_entryRuleProgram54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleProgram60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDefineVariables_in_ruleProgram101 = new BitSet(new long[]{0x0000000000000810L});
-        public static final BitSet FOLLOW_ruleStatement_in_ruleProgram139 = new BitSet(new long[]{0x0000000000000810L});
-        public static final BitSet FOLLOW_11_in_ruleProgram165 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDefineVariables_in_entryRuleDefineVariables185 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDefineVariables191 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleDefineVariables219 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_ruleDefineVariable_in_ruleDefineVariables246 = new BitSet(new long[]{0x0000000000006000L});
-        public static final BitSet FOLLOW_13_in_ruleDefineVariables272 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDefineVariable_in_entryRuleDefineVariable292 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDefineVariable298 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleDefineVariable326 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleDefineVariable353 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNVariableAccess_in_entryRuleNVariableAccess384 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNVariableAccess390 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleNVariableAccess424 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStatement_in_entryRuleStatement449 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStatement455 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement481 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_15_in_ruleStatement508 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement564 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_16_in_ruleStatement618 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement674 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_17_in_ruleStatement728 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement784 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_18_in_ruleStatement838 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement894 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_19_in_ruleStatement948 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement1004 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_20_in_ruleStatement1066 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_21_in_ruleStatement1089 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement1152 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_20_in_ruleStatement1214 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleStatement1237 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement1300 = new BitSet(new long[]{0x00000000001F8002L});
-        public static final BitSet FOLLOW_ruleExpression_VariableName_in_entryRuleExpression_VariableName1347 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression_VariableName1353 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNVariableAccess_in_ruleExpression_VariableName1387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDefineVariables_in_ruleProgram92 = new BitSet(new long[]{0x0000000000000810L});
+        public static final BitSet FOLLOW_ruleStatement_in_ruleProgram130 = new BitSet(new long[]{0x0000000000000810L});
+        public static final BitSet FOLLOW_11_in_ruleProgram156 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDefineVariables_in_entryRuleDefineVariables176 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDefineVariables182 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleDefineVariables201 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_ruleDefineVariable_in_ruleDefineVariables228 = new BitSet(new long[]{0x0000000000006000L});
+        public static final BitSet FOLLOW_13_in_ruleDefineVariables254 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDefineVariable_in_entryRuleDefineVariable274 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDefineVariable280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleDefineVariable299 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleDefineVariable326 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNVariableAccess_in_entryRuleNVariableAccess357 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNVariableAccess363 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleNVariableAccess388 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStatement_in_entryRuleStatement413 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStatement419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement436 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_15_in_ruleStatement463 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement519 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_16_in_ruleStatement573 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement629 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_17_in_ruleStatement683 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement739 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_18_in_ruleStatement793 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement849 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_19_in_ruleStatement903 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement959 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_20_in_ruleStatement1021 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_21_in_ruleStatement1044 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement1107 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_20_in_ruleStatement1169 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_ruleStatement1192 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_ruleStatement1255 = new BitSet(new long[]{0x00000000001F8002L});
+        public static final BitSet FOLLOW_ruleExpression_VariableName_in_entryRuleExpression_VariableName1302 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpression_VariableName1308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNVariableAccess_in_ruleExpression_VariableName1333 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

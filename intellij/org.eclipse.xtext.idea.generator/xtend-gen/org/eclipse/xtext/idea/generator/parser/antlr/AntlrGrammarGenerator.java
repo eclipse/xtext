@@ -406,14 +406,6 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
     _builder.append("\t");
     _builder.append("leaveRule();");
     _builder.newLine();
-    _builder.append("\t");
-    CharSequence _compileRestoreHiddenTokens = this.compileRestoreHiddenTokens(it, options);
-    _builder.append(_compileRestoreHiddenTokens, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
-    _builder.append(_compileRestoreUnorderedGroups, "\t");
-    _builder.newLineIfNotEmpty();
     _builder.append("}");
     return _builder.toString();
   }

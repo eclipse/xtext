@@ -63,9 +63,6 @@ finally {
 // Rule Model
 ruleModel@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		(
@@ -132,6 +129,9 @@ ruleModel@init {
 		)
 	)*
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleError
 entryRuleError@init {
@@ -148,9 +148,6 @@ finally {
 // Rule Error
 ruleError@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -176,6 +173,9 @@ ruleError@init {
 		}
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleFix
 entryRuleFix@init {
@@ -192,9 +192,6 @@ finally {
 // Rule Fix
 ruleFix@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -227,6 +224,9 @@ ruleFix@init {
 		}
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleApostrophe
 entryRuleApostrophe@init {
@@ -243,9 +243,6 @@ finally {
 // Rule Apostrophe
 ruleApostrophe@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	{
 		markLeaf();
@@ -255,6 +252,9 @@ ruleApostrophe@init {
 		doneLeaf(this_APOSTROPHE_CHAR_0, elementTypeProvider.getApostrophe_APOSTROPHE_CHARTerminalRuleCallElementType());
 	}
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleRehide
 entryRuleRehide@init {
@@ -271,9 +271,6 @@ finally {
 // Rule Rehide
 ruleRehide@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -285,6 +282,9 @@ ruleRehide@init {
 		}
 	)?
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleGraphical
 entryRuleGraphical:
@@ -294,10 +294,7 @@ entryRuleGraphical:
 	EOF;
 
 // Rule Graphical
-ruleGraphical@init {
-}
-@after {
-}:
+ruleGraphical:
 	(
 		{
 			markLeaf();

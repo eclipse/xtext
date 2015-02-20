@@ -56,10 +56,7 @@ entryRuleInheritedParserRule:
 	EOF;
 
 // Rule InheritedParserRule
-ruleInheritedParserRule@init {
-}
-@after {
-}:
+ruleInheritedParserRule:
 	(
 		{
 			markLeaf();
@@ -90,10 +87,7 @@ entryRuleOverridableParserRule:
 	EOF;
 
 // Rule OverridableParserRule
-ruleOverridableParserRule@init {
-}
-@after {
-}:
+ruleOverridableParserRule:
 	(
 		{
 			markLeaf();
@@ -124,10 +118,7 @@ entryRuleExtendableParserRule:
 	EOF;
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule@init {
-}
-@after {
-}:
+ruleExtendableParserRule:
 	(
 		{
 			markLeaf();

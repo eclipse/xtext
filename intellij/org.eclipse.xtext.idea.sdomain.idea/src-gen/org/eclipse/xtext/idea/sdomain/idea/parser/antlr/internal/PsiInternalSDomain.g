@@ -56,10 +56,7 @@ entryRuleFile:
 	EOF;
 
 // Rule File
-ruleFile@init {
-}
-@after {
-}:
+ruleFile:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleImport:
 	EOF;
 
 // Rule Import
-ruleImport@init {
-}
-@after {
-}:
+ruleImport:
 	(
 		{
 			markLeaf();
@@ -115,10 +109,7 @@ entryRuleQualifiedNameWithWildCard:
 	EOF;
 
 // Rule QualifiedNameWithWildCard
-ruleQualifiedNameWithWildCard@init {
-}
-@after {
-}:
+ruleQualifiedNameWithWildCard:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
@@ -147,10 +138,7 @@ entryRuleQualifiedName:
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName@init {
-}
-@after {
-}:
+ruleQualifiedName:
 	(
 		{
 			markLeaf();
@@ -186,10 +174,7 @@ entryRuleNamespace:
 	EOF;
 
 // Rule Namespace
-ruleNamespace@init {
-}
-@after {
-}:
+ruleNamespace:
 	(
 		(
 			(
@@ -238,10 +223,7 @@ entryRuleElement:
 	EOF;
 
 // Rule Element
-ruleElement@init {
-}
-@after {
-}:
+ruleElement:
 	(
 		{
 			markComposite(elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType());
@@ -277,10 +259,7 @@ entryRuleType:
 	EOF;
 
 // Rule Type
-ruleType@init {
-}
-@after {
-}:
+ruleType:
 	(
 		{
 			markComposite(elementTypeProvider.getType_EntityParserRuleCall_0ElementType());
@@ -308,10 +287,7 @@ entryRuleEntity:
 	EOF;
 
 // Rule Entity
-ruleEntity@init {
-}
-@after {
-}:
+ruleEntity:
 	(
 		{
 			markLeaf();
@@ -367,10 +343,7 @@ entryRuleDatatype:
 	EOF;
 
 // Rule Datatype
-ruleDatatype@init {
-}
-@after {
-}:
+ruleDatatype:
 	(
 		{
 			markLeaf();
@@ -401,10 +374,7 @@ entryRuleProperty:
 	EOF;
 
 // Rule Property
-ruleProperty@init {
-}
-@after {
-}:
+ruleProperty:
 	(
 		(
 			(

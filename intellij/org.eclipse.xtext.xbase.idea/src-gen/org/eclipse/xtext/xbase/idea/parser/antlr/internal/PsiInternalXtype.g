@@ -56,10 +56,7 @@ entryRuleJvmTypeReference:
 	EOF;
 
 // Rule JvmTypeReference
-ruleJvmTypeReference@init {
-}
-@after {
-}:
+ruleJvmTypeReference:
 	(
 		(
 			{
@@ -112,10 +109,7 @@ entryRuleArrayBrackets:
 	EOF;
 
 // Rule ArrayBrackets
-ruleArrayBrackets@init {
-}
-@after {
-}:
+ruleArrayBrackets:
 	(
 		{
 			markLeaf();
@@ -142,10 +136,7 @@ entryRuleXFunctionTypeRef:
 	EOF;
 
 // Rule XFunctionTypeRef
-ruleXFunctionTypeRef@init {
-}
-@after {
-}:
+ruleXFunctionTypeRef:
 	(
 		(
 			{
@@ -225,10 +216,7 @@ entryRuleJvmParameterizedTypeReference:
 	EOF;
 
 // Rule JvmParameterizedTypeReference
-ruleJvmParameterizedTypeReference@init {
-}
-@after {
-}:
+ruleJvmParameterizedTypeReference:
 	(
 		(
 			(
@@ -388,10 +376,7 @@ entryRuleJvmArgumentTypeReference:
 	EOF;
 
 // Rule JvmArgumentTypeReference
-ruleJvmArgumentTypeReference@init {
-}
-@after {
-}:
+ruleJvmArgumentTypeReference:
 	(
 		{
 			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
@@ -419,10 +404,7 @@ entryRuleJvmWildcardTypeReference:
 	EOF;
 
 // Rule JvmWildcardTypeReference
-ruleJvmWildcardTypeReference@init {
-}
-@after {
-}:
+ruleJvmWildcardTypeReference:
 	(
 		(
 			{
@@ -499,10 +481,7 @@ entryRuleJvmUpperBound:
 	EOF;
 
 // Rule JvmUpperBound
-ruleJvmUpperBound@init {
-}
-@after {
-}:
+ruleJvmUpperBound:
 	(
 		{
 			markLeaf();
@@ -533,10 +512,7 @@ entryRuleJvmUpperBoundAnded:
 	EOF;
 
 // Rule JvmUpperBoundAnded
-ruleJvmUpperBoundAnded@init {
-}
-@after {
-}:
+ruleJvmUpperBoundAnded:
 	(
 		{
 			markLeaf();
@@ -567,10 +543,7 @@ entryRuleJvmLowerBound:
 	EOF;
 
 // Rule JvmLowerBound
-ruleJvmLowerBound@init {
-}
-@after {
-}:
+ruleJvmLowerBound:
 	(
 		{
 			markLeaf();
@@ -601,10 +574,7 @@ entryRuleJvmLowerBoundAnded:
 	EOF;
 
 // Rule JvmLowerBoundAnded
-ruleJvmLowerBoundAnded@init {
-}
-@after {
-}:
+ruleJvmLowerBoundAnded:
 	(
 		{
 			markLeaf();
@@ -635,10 +605,7 @@ entryRuleQualifiedName:
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName@init {
-}
-@after {
-}:
+ruleQualifiedName:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
@@ -674,10 +641,7 @@ entryRuleQualifiedNameWithWildcard:
 	EOF;
 
 // Rule QualifiedNameWithWildcard
-ruleQualifiedNameWithWildcard@init {
-}
-@after {
-}:
+ruleQualifiedNameWithWildcard:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
@@ -711,10 +675,7 @@ entryRuleValidID:
 	EOF;
 
 // Rule ValidID
-ruleValidID@init {
-}
-@after {
-}:
+ruleValidID:
 	{
 		markLeaf();
 	}
@@ -732,10 +693,7 @@ entryRuleXImportDeclaration:
 	EOF;
 
 // Rule XImportDeclaration
-ruleXImportDeclaration@init {
-}
-@after {
-}:
+ruleXImportDeclaration:
 	(
 		{
 			markLeaf();
@@ -850,10 +808,7 @@ entryRuleQualifiedNameInStaticImport:
 	EOF;
 
 // Rule QualifiedNameInStaticImport
-ruleQualifiedNameInStaticImport@init {
-}
-@after {
-}:
+ruleQualifiedNameInStaticImport:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());

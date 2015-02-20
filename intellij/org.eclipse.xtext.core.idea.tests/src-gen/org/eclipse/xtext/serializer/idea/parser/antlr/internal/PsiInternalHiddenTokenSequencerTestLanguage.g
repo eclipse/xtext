@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleDomainModel:
 	EOF;
 
 // Rule DomainModel
-ruleDomainModel@init {
-}
-@after {
-}:
+ruleDomainModel:
 	(
 		{
 			markLeaf();
@@ -122,10 +116,7 @@ entryRuleEntity:
 	EOF;
 
 // Rule Entity
-ruleEntity@init {
-}
-@after {
-}:
+ruleEntity:
 	(
 		(
 			(

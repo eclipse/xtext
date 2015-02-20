@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -177,10 +174,7 @@ entryRuleSingleValue:
 	EOF;
 
 // Rule SingleValue
-ruleSingleValue@init {
-}
-@after {
-}:
+ruleSingleValue:
 	(
 		(
 			{
@@ -265,10 +259,7 @@ entryRuleMultiValue:
 	EOF;
 
 // Rule MultiValue
-ruleMultiValue@init {
-}
-@after {
-}:
+ruleMultiValue:
 	(
 		(
 			{
@@ -353,10 +344,7 @@ entryRuleSingleDatatype:
 	EOF;
 
 // Rule SingleDatatype
-ruleSingleDatatype@init {
-}
-@after {
-}:
+ruleSingleDatatype:
 	(
 		(
 			{
@@ -441,10 +429,7 @@ entryRuleMultiDatatype:
 	EOF;
 
 // Rule MultiDatatype
-ruleMultiDatatype@init {
-}
-@after {
-}:
+ruleMultiDatatype:
 	(
 		(
 			{
@@ -529,10 +514,7 @@ entryRuleIdDatatype:
 	EOF;
 
 // Rule IdDatatype
-ruleIdDatatype@init {
-}
-@after {
-}:
+ruleIdDatatype:
 	{
 		markLeaf();
 	}
@@ -550,10 +532,7 @@ entryRuleStringDatatype:
 	EOF;
 
 // Rule StringDatatype
-ruleStringDatatype@init {
-}
-@after {
-}:
+ruleStringDatatype:
 	{
 		markLeaf();
 	}

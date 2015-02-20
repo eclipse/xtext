@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_CaseInsensitiveKeywordRuleParserRuleCall_0ElementType());
@@ -111,10 +108,7 @@ entryRuleCaseInsensitiveKeywordRule:
 	EOF;
 
 // Rule CaseInsensitiveKeywordRule
-ruleCaseInsensitiveKeywordRule@init {
-}
-@after {
-}:
+ruleCaseInsensitiveKeywordRule:
 	(
 		{
 			markLeaf();
@@ -145,10 +139,7 @@ entryRulePluralRule:
 	EOF;
 
 // Rule PluralRule
-rulePluralRule@init {
-}
-@after {
-}:
+rulePluralRule:
 	(
 		{
 			markLeaf();
@@ -186,10 +177,7 @@ entryRuleMultiRule:
 	EOF;
 
 // Rule MultiRule
-ruleMultiRule@init {
-}
-@after {
-}:
+ruleMultiRule:
 	(
 		{
 			markLeaf();
@@ -241,10 +229,7 @@ entryRuleDatatypeRule:
 	EOF;
 
 // Rule DatatypeRule
-ruleDatatypeRule@init {
-}
-@after {
-}:
+ruleDatatypeRule:
 	(
 		{
 			markLeaf();
@@ -282,10 +267,7 @@ entryRuleDatatype:
 	EOF;
 
 // Rule Datatype
-ruleDatatype@init {
-}
-@after {
-}:
+ruleDatatype:
 	(
 		{
 			markLeaf();
@@ -321,10 +303,7 @@ entryRuleDatatype2:
 	EOF;
 
 // Rule Datatype2
-ruleDatatype2@init {
-}
-@after {
-}:
+ruleDatatype2:
 	{
 		markLeaf();
 	}
@@ -342,10 +321,7 @@ entryRuleCommonTerminalsRule:
 	EOF;
 
 // Rule CommonTerminalsRule
-ruleCommonTerminalsRule@init {
-}
-@after {
-}:
+ruleCommonTerminalsRule:
 	(
 		{
 			markLeaf();

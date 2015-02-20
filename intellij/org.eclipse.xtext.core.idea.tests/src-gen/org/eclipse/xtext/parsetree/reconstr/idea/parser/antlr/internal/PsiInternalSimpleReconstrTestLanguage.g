@@ -56,10 +56,7 @@ entryRuleOp:
 	EOF;
 
 // Rule Op
-ruleOp@init {
-}
-@after {
-}:
+ruleOp:
 	(
 		{
 			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
@@ -98,10 +95,7 @@ entryRuleTerm:
 	EOF;
 
 // Rule Term
-ruleTerm@init {
-}
-@after {
-}:
+ruleTerm:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -321,10 +315,7 @@ entryRuleAtom:
 	EOF;
 
 // Rule Atom
-ruleAtom@init {
-}
-@after {
-}:
+ruleAtom:
 	(
 		(
 			{
@@ -346,10 +337,7 @@ entryRuleParens:
 	EOF;
 
 // Rule Parens
-ruleParens@init {
-}
-@after {
-}:
+ruleParens:
 	(
 		{
 			markLeaf();
@@ -394,10 +382,7 @@ entryRuleTwoNumbers:
 	EOF;
 
 // Rule TwoNumbers
-ruleTwoNumbers@init {
-}
-@after {
-}:
+ruleTwoNumbers:
 	(
 		(
 			(
@@ -452,10 +437,7 @@ entryRuleManyStrings:
 	EOF;
 
 // Rule ManyStrings
-ruleManyStrings@init {
-}
-@after {
-}:
+ruleManyStrings:
 	(
 		{
 			markLeaf();
@@ -497,10 +479,7 @@ entryRuleType:
 	EOF;
 
 // Rule Type
-ruleType@init {
-}
-@after {
-}:
+ruleType:
 	(
 		{
 			markLeaf();
@@ -549,10 +528,7 @@ entryRuleRef2:
 	EOF;
 
 // Rule Ref2
-ruleRef2@init {
-}
-@after {
-}:
+ruleRef2:
 	(
 		{
 			markLeaf();
@@ -601,10 +577,7 @@ entryRuleSpare:
 	EOF;
 
 // Rule Spare
-ruleSpare@init {
-}
-@after {
-}:
+ruleSpare:
 	(
 		{
 			markLeaf();
@@ -655,10 +628,7 @@ entryRuleBoolean:
 	EOF;
 
 // Rule Boolean
-ruleBoolean@init {
-}
-@after {
-}:
+ruleBoolean:
 	(
 		{
 			markLeaf();
@@ -707,10 +677,7 @@ entryRuleTransient1:
 	EOF;
 
 // Rule Transient1
-ruleTransient1@init {
-}
-@after {
-}:
+ruleTransient1:
 	(
 		{
 			markLeaf();
@@ -789,10 +756,7 @@ entryRuleConsumed1:
 	EOF;
 
 // Rule Consumed1
-ruleConsumed1@init {
-}
-@after {
-}:
+ruleConsumed1:
 	(
 		{
 			markLeaf();
@@ -877,10 +841,7 @@ entryRuleConsumed2:
 	EOF;
 
 // Rule Consumed2
-ruleConsumed2@init {
-}
-@after {
-}:
+ruleConsumed2:
 	(
 		{
 			markLeaf();
@@ -911,10 +872,7 @@ entryRuleLoop1:
 	EOF;
 
 // Rule Loop1
-ruleLoop1@init {
-}
-@after {
-}:
+ruleLoop1:
 	(
 		(
 			{
@@ -992,10 +950,7 @@ entryRuleLoop2:
 	EOF;
 
 // Rule Loop2
-ruleLoop2@init {
-}
-@after {
-}:
+ruleLoop2:
 	(
 		{
 			markLeaf();
@@ -1103,10 +1058,7 @@ entryRuleLoop3:
 	EOF;
 
 // Rule Loop3
-ruleLoop3@init {
-}
-@after {
-}:
+ruleLoop3:
 	(
 		(
 			{
@@ -1189,10 +1141,7 @@ entryRuleLoop4:
 	EOF;
 
 // Rule Loop4
-ruleLoop4@init {
-}
-@after {
-}:
+ruleLoop4:
 	(
 		{
 			markLeaf();
@@ -1284,10 +1233,7 @@ entryRuleLoopBug285452:
 	EOF;
 
 // Rule LoopBug285452
-ruleLoopBug285452@init {
-}
-@after {
-}:
+ruleLoopBug285452:
 	(
 		{
 			markLeaf();
@@ -1339,10 +1285,7 @@ entryRuleDuplicateBug284491:
 	EOF;
 
 // Rule DuplicateBug284491
-ruleDuplicateBug284491@init {
-}
-@after {
-}:
+ruleDuplicateBug284491:
 	(
 		{
 			markLeaf();
@@ -1399,10 +1342,7 @@ entryRuleEmptyObjectBug284850:
 	EOF;
 
 // Rule EmptyObjectBug284850
-ruleEmptyObjectBug284850@init {
-}
-@after {
-}:
+ruleEmptyObjectBug284850:
 	(
 		{
 			markLeaf();
@@ -1433,10 +1373,7 @@ entryRuleEmptyObjectItems:
 	EOF;
 
 // Rule EmptyObjectItems
-ruleEmptyObjectItems@init {
-}
-@after {
-}:
+ruleEmptyObjectItems:
 	(
 		(
 			{
@@ -1458,10 +1395,7 @@ entryRuleEmptyObjectItem:
 	EOF;
 
 // Rule EmptyObjectItem
-ruleEmptyObjectItem@init {
-}
-@after {
-}:
+ruleEmptyObjectItem:
 	(
 		{
 			markLeaf();
@@ -1492,10 +1426,7 @@ entryRuleMultiInheritanceBug280439:
 	EOF;
 
 // Rule MultiInheritanceBug280439
-ruleMultiInheritanceBug280439@init {
-}
-@after {
-}:
+ruleMultiInheritanceBug280439:
 	(
 		{
 			markLeaf();
@@ -1526,10 +1457,7 @@ entryRuleConcreteMulti:
 	EOF;
 
 // Rule ConcreteMulti
-ruleConcreteMulti@init {
-}
-@after {
-}:
+ruleConcreteMulti:
 	(
 		(
 			(
@@ -1564,10 +1492,7 @@ entryRuleEObjectRef:
 	EOF;
 
 // Rule EObjectRef
-ruleEObjectRef@init {
-}
-@after {
-}:
+ruleEObjectRef:
 	(
 		{
 			markLeaf();
@@ -1616,10 +1541,7 @@ entryRuleEObjectElement:
 	EOF;
 
 // Rule EObjectElement
-ruleEObjectElement@init {
-}
-@after {
-}:
+ruleEObjectElement:
 	(
 		(
 			{
@@ -1641,10 +1563,7 @@ entryRuleTypeBug305577_1:
 	EOF;
 
 // Rule TypeBug305577_1
-ruleTypeBug305577_1@init {
-}
-@after {
-}:
+ruleTypeBug305577_1:
 	(
 		{
 			markLeaf();
@@ -1681,10 +1600,7 @@ entryRuleTypeBug305577_2:
 	EOF;
 
 // Rule TypeBug305577_2
-ruleTypeBug305577_2@init {
-}
-@after {
-}:
+ruleTypeBug305577_2:
 	(
 		{
 			markLeaf();
@@ -1721,10 +1637,7 @@ entryRuleTypeBug1A:
 	EOF;
 
 // Rule TypeBug1A
-ruleTypeBug1A@init {
-}
-@after {
-}:
+ruleTypeBug1A:
 	(
 		(
 			{
@@ -1761,10 +1674,7 @@ entryRuleTypeBug1B:
 	EOF;
 
 // Rule TypeBug1B
-ruleTypeBug1B@init {
-}
-@after {
-}:
+ruleTypeBug1B:
 	(
 		(
 			{
@@ -1801,10 +1711,7 @@ entryRuleTypeBug2A:
 	EOF;
 
 // Rule TypeBug2A
-ruleTypeBug2A@init {
-}
-@after {
-}:
+ruleTypeBug2A:
 	(
 		(
 			{
@@ -1841,10 +1748,7 @@ entryRuleTypeBug2B:
 	EOF;
 
 // Rule TypeBug2B
-ruleTypeBug2B@init {
-}
-@after {
-}:
+ruleTypeBug2B:
 	(
 		(
 			{
@@ -1881,10 +1785,7 @@ entryRuleBug305171:
 	EOF;
 
 // Rule Bug305171
-ruleBug305171@init {
-}
-@after {
-}:
+ruleBug305171:
 	(
 		{
 			markLeaf();
@@ -2039,10 +1940,7 @@ entryRuleBug310435Enum:
 	EOF;
 
 // Rule Bug310435Enum
-ruleBug310435Enum@init {
-}
-@after {
-}:
+ruleBug310435Enum:
 	(
 		{
 			markLeaf();
@@ -2105,10 +2003,7 @@ entryRuleBug310435Val:
 	EOF;
 
 // Rule Bug310435Val
-ruleBug310435Val@init {
-}
-@after {
-}:
+ruleBug310435Val:
 	(
 		{
 			markLeaf();
@@ -2171,10 +2066,7 @@ entryRuleCrossRefNameTest:
 	EOF;
 
 // Rule CrossRefNameTest
-ruleCrossRefNameTest@init {
-}
-@after {
-}:
+ruleCrossRefNameTest:
 	(
 		{
 			markLeaf();
@@ -2255,10 +2147,7 @@ entryRuleCrossRefNamed:
 	EOF;
 
 // Rule CrossRefNamed
-ruleCrossRefNamed@init {
-}
-@after {
-}:
+ruleCrossRefNamed:
 	(
 		(
 			(

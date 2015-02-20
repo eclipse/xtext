@@ -56,10 +56,7 @@ entryRuleSuperMain:
 	EOF;
 
 // Rule SuperMain
-ruleSuperMain@init {
-}
-@after {
-}:
+ruleSuperMain:
 	(
 		{
 			markLeaf();

@@ -56,10 +56,7 @@ entryRuleEPatch:
 	EOF;
 
 // Rule EPatch
-ruleEPatch@init {
-}
-@after {
-}:
+ruleEPatch:
 	(
 		{
 			markLeaf();
@@ -137,10 +134,7 @@ entryRuleImport:
 	EOF;
 
 // Rule Import
-ruleImport@init {
-}
-@after {
-}:
+ruleImport:
 	(
 		{
 			markComposite(elementTypeProvider.getImport_ModelImportParserRuleCall_0ElementType());
@@ -176,10 +170,7 @@ entryRuleModelImport:
 	EOF;
 
 // Rule ModelImport
-ruleModelImport@init {
-}
-@after {
-}:
+ruleModelImport:
 	(
 		{
 			markComposite(elementTypeProvider.getModelImport_ResourceImportParserRuleCall_0ElementType());
@@ -207,10 +198,7 @@ entryRuleResourceImport:
 	EOF;
 
 // Rule ResourceImport
-ruleResourceImport@init {
-}
-@after {
-}:
+ruleResourceImport:
 	(
 		{
 			markLeaf();
@@ -259,10 +247,7 @@ entryRuleEPackageImport:
 	EOF;
 
 // Rule EPackageImport
-ruleEPackageImport@init {
-}
-@after {
-}:
+ruleEPackageImport:
 	(
 		{
 			markLeaf();
@@ -311,10 +296,7 @@ entryRuleJavaImport:
 	EOF;
 
 // Rule JavaImport
-ruleJavaImport@init {
-}
-@after {
-}:
+ruleJavaImport:
 	(
 		{
 			markLeaf();
@@ -372,10 +354,7 @@ entryRuleExtensionImport:
 	EOF;
 
 // Rule ExtensionImport
-ruleExtensionImport@init {
-}
-@after {
-}:
+ruleExtensionImport:
 	(
 		{
 			markLeaf();
@@ -433,10 +412,7 @@ entryRuleNamedResource:
 	EOF;
 
 // Rule NamedResource
-ruleNamedResource@init {
-}
-@after {
-}:
+ruleNamedResource:
 	(
 		{
 			markLeaf();
@@ -577,10 +553,7 @@ entryRuleObjectRef:
 	EOF;
 
 // Rule ObjectRef
-ruleObjectRef@init {
-}
-@after {
-}:
+ruleObjectRef:
 	(
 		{
 			markLeaf();
@@ -779,10 +752,7 @@ entryRuleBiSingleAssignment:
 	EOF;
 
 // Rule BiSingleAssignment
-ruleBiSingleAssignment@init {
-}
-@after {
-}:
+ruleBiSingleAssignment:
 	(
 		(
 			(
@@ -849,10 +819,7 @@ entryRuleBiListAssignment:
 	EOF;
 
 // Rule BiListAssignment
-ruleBiListAssignment@init {
-}
-@after {
-}:
+ruleBiListAssignment:
 	(
 		(
 			(
@@ -977,10 +944,7 @@ entryRuleMonoSingleAssignment:
 	EOF;
 
 // Rule MonoSingleAssignment
-ruleMonoSingleAssignment@init {
-}
-@after {
-}:
+ruleMonoSingleAssignment:
 	(
 		(
 			(
@@ -1029,10 +993,7 @@ entryRuleMonoListAssignment:
 	EOF;
 
 // Rule MonoListAssignment
-ruleMonoListAssignment@init {
-}
-@after {
-}:
+ruleMonoListAssignment:
 	(
 		(
 			(
@@ -1117,10 +1078,7 @@ entryRuleAssignmentValue:
 	EOF;
 
 // Rule AssignmentValue
-ruleAssignmentValue@init {
-}
-@after {
-}:
+ruleAssignmentValue:
 	(
 		(
 			(
@@ -1242,10 +1200,7 @@ entryRuleListAssignmentValue:
 	EOF;
 
 // Rule ListAssignmentValue
-ruleListAssignmentValue@init {
-}
-@after {
-}:
+ruleListAssignmentValue:
 	(
 		(
 			(
@@ -1415,10 +1370,7 @@ entryRuleSingleAssignmentValue:
 	EOF;
 
 // Rule SingleAssignmentValue
-ruleSingleAssignmentValue@init {
-}
-@after {
-}:
+ruleSingleAssignmentValue:
 	(
 		(
 			(
@@ -1552,10 +1504,7 @@ entryRuleCreatedObject:
 	EOF;
 
 // Rule CreatedObject
-ruleCreatedObject@init {
-}
-@after {
-}:
+ruleCreatedObject:
 	(
 		(
 			{
@@ -1648,10 +1597,7 @@ entryRuleObjectNew:
 	EOF;
 
 // Rule ObjectNew
-ruleObjectNew@init {
-}
-@after {
-}:
+ruleObjectNew:
 	(
 		{
 			markLeaf();
@@ -1693,10 +1639,7 @@ entryRuleObjectCopy:
 	EOF;
 
 // Rule ObjectCopy
-ruleObjectCopy@init {
-}
-@after {
-}:
+ruleObjectCopy:
 	(
 		{
 			markLeaf();
@@ -1738,10 +1681,7 @@ entryRuleMigration:
 	EOF;
 
 // Rule Migration
-ruleMigration@init {
-}
-@after {
-}:
+ruleMigration:
 	(
 		(
 			{
@@ -1828,10 +1768,7 @@ entryRuleExecutable:
 	EOF;
 
 // Rule Executable
-ruleExecutable@init {
-}
-@after {
-}:
+ruleExecutable:
 	(
 		{
 			markComposite(elementTypeProvider.getExecutable_JavaExecutableParserRuleCall_0ElementType());
@@ -1859,10 +1796,7 @@ entryRuleJavaExecutable:
 	EOF;
 
 // Rule JavaExecutable
-ruleJavaExecutable@init {
-}
-@after {
-}:
+ruleJavaExecutable:
 	(
 		{
 			markLeaf();
@@ -1907,10 +1841,7 @@ entryRuleExpressionExecutable:
 	EOF;
 
 // Rule ExpressionExecutable
-ruleExpressionExecutable@init {
-}
-@after {
-}:
+ruleExpressionExecutable:
 	(
 		(
 			{

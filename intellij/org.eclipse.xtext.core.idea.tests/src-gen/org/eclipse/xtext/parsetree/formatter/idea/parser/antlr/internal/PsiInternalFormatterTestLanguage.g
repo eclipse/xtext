@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		{
 			markLeaf();
@@ -112,10 +109,7 @@ entryRuleLine:
 	EOF;
 
 // Rule Line
-ruleLine@init {
-}
-@after {
-}:
+ruleLine:
 	(
 		(
 			{
@@ -217,10 +211,7 @@ entryRuleDecl:
 	EOF;
 
 // Rule Decl
-ruleDecl@init {
-}
-@after {
-}:
+ruleDecl:
 	(
 		(
 			(
@@ -255,10 +246,7 @@ entryRuleAssign:
 	EOF;
 
 // Rule Assign
-ruleAssign@init {
-}
-@after {
-}:
+ruleAssign:
 	(
 		(
 			(
@@ -350,10 +338,7 @@ entryRuleMeth:
 	EOF;
 
 // Rule Meth
-ruleMeth@init {
-}
-@after {
-}:
+ruleMeth:
 	(
 		{
 			markLeaf();
@@ -431,10 +416,7 @@ entryRuleParam:
 	EOF;
 
 // Rule Param
-ruleParam@init {
-}
-@after {
-}:
+ruleParam:
 	(
 		(
 			(
@@ -476,10 +458,7 @@ entryRuleSpace:
 	EOF;
 
 // Rule Space
-ruleSpace@init {
-}
-@after {
-}:
+ruleSpace:
 	(
 		{
 			markLeaf();
@@ -510,10 +489,7 @@ entryRuleTestLinewrap:
 	EOF;
 
 // Rule TestLinewrap
-ruleTestLinewrap@init {
-}
-@after {
-}:
+ruleTestLinewrap:
 	(
 		(
 			{
@@ -550,10 +526,7 @@ entryRuleTestLinewrapMinMax:
 	EOF;
 
 // Rule TestLinewrapMinMax
-ruleTestLinewrapMinMax@init {
-}
-@after {
-}:
+ruleTestLinewrapMinMax:
 	(
 		(
 			{
@@ -590,10 +563,7 @@ entryRuleTestIndentation:
 	EOF;
 
 // Rule TestIndentation
-ruleTestIndentation@init {
-}
-@after {
-}:
+ruleTestIndentation:
 	(
 		(
 			{
@@ -665,10 +635,7 @@ entryRuleFqnObj:
 	EOF;
 
 // Rule FqnObj
-ruleFqnObj@init {
-}
-@after {
-}:
+ruleFqnObj:
 	(
 		{
 			markLeaf();
@@ -699,10 +666,7 @@ entryRuleFQN:
 	EOF;
 
 // Rule FQN
-ruleFQN@init {
-}
-@after {
-}:
+ruleFQN:
 	(
 		{
 			markLeaf();
@@ -738,10 +702,7 @@ entryRuleFqnRef:
 	EOF;
 
 // Rule FqnRef
-ruleFqnRef@init {
-}
-@after {
-}:
+ruleFqnRef:
 	(
 		{
 			markLeaf();
@@ -772,10 +733,7 @@ entryRuleEnumeration:
 	EOF;
 
 // Rule Enumeration
-ruleEnumeration@init {
-}
-@after {
-}:
+ruleEnumeration:
 	(
 		{
 			markLeaf();
@@ -833,9 +791,6 @@ finally {
 // Rule SuppressedHidden
 ruleSuppressedHidden@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		(
@@ -893,6 +848,9 @@ ruleSuppressedHidden@init {
 		}
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleSuppressedHiddenSub
 entryRuleSuppressedHiddenSub:
@@ -902,10 +860,7 @@ entryRuleSuppressedHiddenSub:
 	EOF;
 
 // Rule SuppressedHiddenSub
-ruleSuppressedHiddenSub@init {
-}
-@after {
-}:
+ruleSuppressedHiddenSub:
 	(
 		{
 			markComposite(elementTypeProvider.getSuppressedHiddenSub_SuppressedHiddenSubSubParserRuleCall_0ElementType());
@@ -940,9 +895,6 @@ finally {
 // Rule SuppressedHiddenSubSub
 ruleSuppressedHiddenSubSub@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -972,6 +924,9 @@ ruleSuppressedHiddenSubSub@init {
 		}
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleSuppressedHiddenSubID
 entryRuleSuppressedHiddenSubID:
@@ -981,10 +936,7 @@ entryRuleSuppressedHiddenSubID:
 	EOF;
 
 // Rule SuppressedHiddenSubID
-ruleSuppressedHiddenSubID@init {
-}
-@after {
-}:
+ruleSuppressedHiddenSubID:
 	(
 		(
 			{
@@ -1006,10 +958,7 @@ entryRuleDatatype1:
 	EOF;
 
 // Rule Datatype1
-ruleDatatype1@init {
-}
-@after {
-}:
+ruleDatatype1:
 	{
 		markComposite(elementTypeProvider.getDatatype1_FQNParserRuleCallElementType());
 	}
@@ -1027,10 +976,7 @@ entryRuleDatatype2:
 	EOF;
 
 // Rule Datatype2
-ruleDatatype2@init {
-}
-@after {
-}:
+ruleDatatype2:
 	{
 		markComposite(elementTypeProvider.getDatatype2_FQNParserRuleCallElementType());
 	}
@@ -1048,10 +994,7 @@ entryRuleDatatype3:
 	EOF;
 
 // Rule Datatype3
-ruleDatatype3@init {
-}
-@after {
-}:
+ruleDatatype3:
 	{
 		markComposite(elementTypeProvider.getDatatype3_FQNParserRuleCallElementType());
 	}
@@ -1069,10 +1012,7 @@ entryRuleDatatypes:
 	EOF;
 
 // Rule Datatypes
-ruleDatatypes@init {
-}
-@after {
-}:
+ruleDatatypes:
 	(
 		{
 			markLeaf();
@@ -1139,10 +1079,7 @@ entryRuleWrappingDataTypeTest:
 	EOF;
 
 // Rule WrappingDataTypeTest
-ruleWrappingDataTypeTest@init {
-}
-@after {
-}:
+ruleWrappingDataTypeTest:
 	(
 		{
 			markLeaf();
@@ -1180,10 +1117,7 @@ entryRuleWrappingDataType:
 	EOF;
 
 // Rule WrappingDataType
-ruleWrappingDataType@init {
-}
-@after {
-}:
+ruleWrappingDataType:
 	(
 		{
 			markLeaf();

@@ -12,6 +12,7 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageFileType
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageLanguage
 import org.eclipse.xtext.resource.XtextResource
+import org.junit.Ignore
 
 @TestDecorator
 class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsingTestCase {
@@ -34,6 +35,7 @@ class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsingTestCas
 	
 }
 
+@Ignore
 @FinalFieldsConstructor
 class BacktrackingBug325745ParserTestDelegate extends BacktrackingBug325745ParserTest {
 	

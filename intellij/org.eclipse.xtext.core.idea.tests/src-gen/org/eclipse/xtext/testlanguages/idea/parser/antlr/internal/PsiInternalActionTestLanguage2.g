@@ -56,10 +56,7 @@ entryRuleORing:
 	EOF;
 
 // Rule ORing
-ruleORing@init {
-}
-@after {
-}:
+ruleORing:
 	(
 		{
 			markComposite(elementTypeProvider.getORing_ValueParserRuleCall_0ElementType());
@@ -105,10 +102,7 @@ entryRuleValue:
 	EOF;
 
 // Rule Value
-ruleValue@init {
-}
-@after {
-}:
+ruleValue:
 	(
 		(
 			{

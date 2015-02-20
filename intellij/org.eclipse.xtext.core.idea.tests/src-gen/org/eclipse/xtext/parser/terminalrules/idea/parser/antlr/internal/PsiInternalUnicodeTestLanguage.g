@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleAbstractString:
 	EOF;
 
 // Rule AbstractString
-ruleAbstractString@init {
-}
-@after {
-}:
+ruleAbstractString:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractString_GStringParserRuleCall_0ElementType());
@@ -112,10 +106,7 @@ entryRuleGString:
 	EOF;
 
 // Rule GString
-ruleGString@init {
-}
-@after {
-}:
+ruleGString:
 	(
 		(
 			{
@@ -137,10 +128,7 @@ entryRuleQuotedString:
 	EOF;
 
 // Rule QuotedString
-ruleQuotedString@init {
-}
-@after {
-}:
+ruleQuotedString:
 	(
 		(
 			{

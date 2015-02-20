@@ -62,10 +62,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -119,10 +116,7 @@ entryRuleExpression:
 	EOF;
 
 // Rule Expression
-ruleExpression@init {
-}
-@after {
-}:
+ruleExpression:
 	(
 		{
 			/* */
@@ -156,10 +150,7 @@ entryRulePreop:
 	EOF;
 
 // Rule Preop
-rulePreop@init {
-}
-@after {
-}:
+rulePreop:
 	(
 		(
 			{
@@ -203,10 +194,7 @@ entryRulePostop:
 	EOF;
 
 // Rule Postop
-rulePostop@init {
-}
-@after {
-}:
+rulePostop:
 	(
 		{
 			/* */
@@ -251,10 +239,7 @@ entryRuleVariable:
 	EOF;
 
 // Rule Variable
-ruleVariable@init {
-}
-@after {
-}:
+ruleVariable:
 	(
 		(
 			{
@@ -287,10 +272,7 @@ entryRuleDataTypeExpression:
 	EOF;
 
 // Rule DataTypeExpression
-ruleDataTypeExpression@init {
-}
-@after {
-}:
+ruleDataTypeExpression:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypeExpression_DataTypePostopParserRuleCall_0ElementType());
@@ -318,10 +300,7 @@ entryRuleDataTypePreop:
 	EOF;
 
 // Rule DataTypePreop
-ruleDataTypePreop@init {
-}
-@after {
-}:
+ruleDataTypePreop:
 	(
 		{
 			markLeaf();
@@ -348,10 +327,7 @@ entryRuleDataTypePostop:
 	EOF;
 
 // Rule DataTypePostop
-ruleDataTypePostop@init {
-}
-@after {
-}:
+ruleDataTypePostop:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypePostop_DataTypeVariableParserRuleCall_0ElementType());
@@ -380,10 +356,7 @@ entryRuleDataTypeVariable:
 	EOF;
 
 // Rule DataTypeVariable
-ruleDataTypeVariable@init {
-}
-@after {
-}:
+ruleDataTypeVariable:
 	{
 		markLeaf();
 	}

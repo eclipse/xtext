@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -101,10 +98,7 @@ entryRuleGreeting:
 	EOF;
 
 // Rule Greeting
-ruleGreeting@init {
-}
-@after {
-}:
+ruleGreeting:
 	(
 		{
 			markLeaf();
@@ -142,10 +136,7 @@ entryRuleMyId:
 	EOF;
 
 // Rule MyId
-ruleMyId@init {
-}
-@after {
-}:
+ruleMyId:
 	{
 		markLeaf();
 	}

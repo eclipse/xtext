@@ -56,10 +56,7 @@ entryRuleNodeList:
 	EOF;
 
 // Rule NodeList
-ruleNodeList@init {
-}
-@after {
-}:
+ruleNodeList:
 	(
 		(
 			(
@@ -103,10 +100,7 @@ entryRuleNode:
 	EOF;
 
 // Rule Node
-ruleNode@init {
-}
-@after {
-}:
+ruleNode:
 	(
 		(
 			(
@@ -164,10 +158,7 @@ entryRuleString:
 	EOF;
 
 // Rule String
-ruleString@init {
-}
-@after {
-}:
+ruleString:
 	(
 		{
 			markLeaf();

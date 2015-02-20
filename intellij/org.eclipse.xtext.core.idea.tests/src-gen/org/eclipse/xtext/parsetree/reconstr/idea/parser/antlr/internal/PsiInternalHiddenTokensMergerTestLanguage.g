@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_DatatypeBug286557ParserRuleCall_0ElementType());
@@ -135,10 +132,7 @@ entryRuleDatatypeBug286557:
 	EOF;
 
 // Rule DatatypeBug286557
-ruleDatatypeBug286557@init {
-}
-@after {
-}:
+ruleDatatypeBug286557:
 	(
 		{
 			markLeaf();
@@ -196,10 +190,7 @@ entryRuleFQN:
 	EOF;
 
 // Rule FQN
-ruleFQN@init {
-}
-@after {
-}:
+ruleFQN:
 	(
 		{
 			markLeaf();
@@ -235,10 +226,7 @@ entryRuleEnumBug:
 	EOF;
 
 // Rule EnumBug
-ruleEnumBug@init {
-}
-@after {
-}:
+ruleEnumBug:
 	(
 		{
 			markLeaf();
@@ -287,10 +275,7 @@ entryRuleCommentable:
 	EOF;
 
 // Rule Commentable
-ruleCommentable@init {
-}
-@after {
-}:
+ruleCommentable:
 	(
 		{
 			markLeaf();
@@ -321,10 +306,7 @@ entryRuleCommentableItem:
 	EOF;
 
 // Rule CommentableItem
-ruleCommentableItem@init {
-}
-@after {
-}:
+ruleCommentableItem:
 	(
 		{
 			markLeaf();
@@ -355,10 +337,7 @@ entryRuleValueList:
 	EOF;
 
 // Rule ValueList
-ruleValueList@init {
-}
-@after {
-}:
+ruleValueList:
 	(
 		{
 			markLeaf();
@@ -389,10 +368,7 @@ entryRuleRefList:
 	EOF;
 
 // Rule RefList
-ruleRefList@init {
-}
-@after {
-}:
+ruleRefList:
 	(
 		{
 			markLeaf();
@@ -441,10 +417,7 @@ entryRuleRefObj:
 	EOF;
 
 // Rule RefObj
-ruleRefObj@init {
-}
-@after {
-}:
+ruleRefObj:
 	(
 		(
 			{
@@ -466,10 +439,7 @@ entryRuleSingleRef:
 	EOF;
 
 // Rule SingleRef
-ruleSingleRef@init {
-}
-@after {
-}:
+ruleSingleRef:
 	(
 		{
 			markLeaf();
@@ -518,10 +488,7 @@ entryRuleAppendToFileEnd:
 	EOF;
 
 // Rule AppendToFileEnd
-ruleAppendToFileEnd@init {
-}
-@after {
-}:
+ruleAppendToFileEnd:
 	(
 		{
 			markLeaf();
@@ -552,10 +519,7 @@ entryRuleAppendToFileEndItem:
 	EOF;
 
 // Rule AppendToFileEndItem
-ruleAppendToFileEndItem@init {
-}
-@after {
-}:
+ruleAppendToFileEndItem:
 	(
 		{
 			markLeaf();
@@ -593,10 +557,7 @@ entryRuleAction1:
 	EOF;
 
 // Rule Action1
-ruleAction1@init {
-}
-@after {
-}:
+ruleAction1:
 	(
 		{
 			markLeaf();
@@ -655,10 +616,7 @@ entryRuleAction1Sub1:
 	EOF;
 
 // Rule Action1Sub1
-ruleAction1Sub1@init {
-}
-@after {
-}:
+ruleAction1Sub1:
 	(
 		(
 			{
@@ -684,10 +642,7 @@ entryRuleAction1Sub2:
 	EOF;
 
 // Rule Action1Sub2
-ruleAction1Sub2@init {
-}
-@after {
-}:
+ruleAction1Sub2:
 	(
 		(
 			{

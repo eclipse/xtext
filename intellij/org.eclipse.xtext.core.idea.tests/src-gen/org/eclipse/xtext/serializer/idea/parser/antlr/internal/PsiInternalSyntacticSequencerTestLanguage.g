@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -227,10 +224,7 @@ entryRuleMandatoryKeywords:
 	EOF;
 
 // Rule MandatoryKeywords
-ruleMandatoryKeywords@init {
-}
-@after {
-}:
+ruleMandatoryKeywords:
 	(
 		{
 			markLeaf();
@@ -311,10 +305,7 @@ entryRuleExp0:
 	EOF;
 
 // Rule Exp0
-ruleExp0@init {
-}
-@after {
-}:
+ruleExp0:
 	(
 		{
 			markLeaf();
@@ -341,10 +332,7 @@ entryRuleAddition0:
 	EOF;
 
 // Rule Addition0
-ruleAddition0@init {
-}
-@after {
-}:
+ruleAddition0:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition0_Prim0ParserRuleCall_0ElementType());
@@ -390,10 +378,7 @@ entryRulePrim0:
 	EOF;
 
 // Rule Prim0
-rulePrim0@init {
-}
-@after {
-}:
+rulePrim0:
 	(
 		(
 			{
@@ -423,10 +408,7 @@ entryRuleExp1:
 	EOF;
 
 // Rule Exp1
-ruleExp1@init {
-}
-@after {
-}:
+ruleExp1:
 	(
 		{
 			markLeaf();
@@ -453,10 +435,7 @@ entryRuleAddition1:
 	EOF;
 
 // Rule Addition1
-ruleAddition1@init {
-}
-@after {
-}:
+ruleAddition1:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition1_Prim1ParserRuleCall_0ElementType());
@@ -502,10 +481,7 @@ entryRulePrim1:
 	EOF;
 
 // Rule Prim1
-rulePrim1@init {
-}
-@after {
-}:
+rulePrim1:
 	(
 		(
 			(
@@ -561,10 +537,7 @@ entryRuleExp2:
 	EOF;
 
 // Rule Exp2
-ruleExp2@init {
-}
-@after {
-}:
+ruleExp2:
 	(
 		{
 			markLeaf();
@@ -591,10 +564,7 @@ entryRuleAddition2:
 	EOF;
 
 // Rule Addition2
-ruleAddition2@init {
-}
-@after {
-}:
+ruleAddition2:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition2_Multiplication2ParserRuleCall_0ElementType());
@@ -640,10 +610,7 @@ entryRuleMultiplication2:
 	EOF;
 
 // Rule Multiplication2
-ruleMultiplication2@init {
-}
-@after {
-}:
+ruleMultiplication2:
 	(
 		{
 			markComposite(elementTypeProvider.getMultiplication2_Prim2ParserRuleCall_0ElementType());
@@ -689,10 +656,7 @@ entryRulePrim2:
 	EOF;
 
 // Rule Prim2
-rulePrim2@init {
-}
-@after {
-}:
+rulePrim2:
 	(
 		(
 			(
@@ -748,10 +712,7 @@ entryRuleDatatypeID:
 	EOF;
 
 // Rule DatatypeID
-ruleDatatypeID@init {
-}
-@after {
-}:
+ruleDatatypeID:
 	{
 		markLeaf();
 	}
@@ -769,10 +730,7 @@ entryRuleSingleCrossReference:
 	EOF;
 
 // Rule SingleCrossReference
-ruleSingleCrossReference@init {
-}
-@after {
-}:
+ruleSingleCrossReference:
 	(
 		{
 			markLeaf();
@@ -893,10 +851,7 @@ entryRuleBooleanAlternative:
 	EOF;
 
 // Rule BooleanAlternative
-ruleBooleanAlternative@init {
-}
-@after {
-}:
+ruleBooleanAlternative:
 	(
 		{
 			markLeaf();
@@ -927,10 +882,7 @@ entryRuleBooleanAlternativeLiteral:
 	EOF;
 
 // Rule BooleanAlternativeLiteral
-ruleBooleanAlternativeLiteral@init {
-}
-@after {
-}:
+ruleBooleanAlternativeLiteral:
 	(
 		(
 			{
@@ -970,10 +922,7 @@ entryRuleUnassignedDatatype:
 	EOF;
 
 // Rule UnassignedDatatype
-ruleUnassignedDatatype@init {
-}
-@after {
-}:
+ruleUnassignedDatatype:
 	(
 		{
 			markLeaf();
@@ -1011,10 +960,7 @@ entryRuleKW1:
 	EOF;
 
 // Rule KW1
-ruleKW1@init {
-}
-@after {
-}:
+ruleKW1:
 	(
 		{
 			markLeaf();
@@ -1053,10 +999,7 @@ entryRuleOptionalSingleTransition:
 	EOF;
 
 // Rule OptionalSingleTransition
-ruleOptionalSingleTransition@init {
-}
-@after {
-}:
+ruleOptionalSingleTransition:
 	(
 		{
 			markLeaf();
@@ -1096,10 +1039,7 @@ entryRuleOptionalManyTransition:
 	EOF;
 
 // Rule OptionalManyTransition
-ruleOptionalManyTransition@init {
-}
-@after {
-}:
+ruleOptionalManyTransition:
 	(
 		{
 			markLeaf();
@@ -1139,10 +1079,7 @@ entryRuleMandatoryManyTransition:
 	EOF;
 
 // Rule MandatoryManyTransition
-ruleMandatoryManyTransition@init {
-}
-@after {
-}:
+ruleMandatoryManyTransition:
 	(
 		{
 			markLeaf();
@@ -1182,10 +1119,7 @@ entryRuleAlternativeTransition:
 	EOF;
 
 // Rule AlternativeTransition
-ruleAlternativeTransition@init {
-}
-@after {
-}:
+ruleAlternativeTransition:
 	(
 		{
 			markLeaf();
@@ -1233,10 +1167,7 @@ entryRuleBooleanDatatypeID:
 	EOF;
 
 // Rule BooleanDatatypeID
-ruleBooleanDatatypeID@init {
-}
-@after {
-}:
+ruleBooleanDatatypeID:
 	{
 		markLeaf();
 	}
@@ -1254,10 +1185,7 @@ entryRuleBooleanValues:
 	EOF;
 
 // Rule BooleanValues
-ruleBooleanValues@init {
-}
-@after {
-}:
+ruleBooleanValues:
 	(
 		(
 			{
@@ -1316,10 +1244,7 @@ entryRuleLongAlternative:
 	EOF;
 
 // Rule LongAlternative
-ruleLongAlternative@init {
-}
-@after {
-}:
+ruleLongAlternative:
 	(
 		{
 			markLeaf();

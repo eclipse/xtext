@@ -12,8 +12,10 @@ import java.util.Arrays;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
@@ -143,14 +145,34 @@ public class NodeModelPrinter {
   
   protected String _printGrammarElement(final Action action) {
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends Action> _class = action.getClass();
-    String _simpleName = _class.getSimpleName();
-    _builder.append(_simpleName, "");
-    _builder.append(" [");
+    _builder.append("Action [");
     TypeRef _type = action.getType();
     EClassifier _classifier = _type.getClassifier();
     String _name = _classifier.getName();
     _builder.append(_name, "");
+    _builder.append("]");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _printGrammarElement(final CrossReference crossReference) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("CrossReference [");
+    TypeRef _type = crossReference.getType();
+    EClassifier _classifier = _type.getClassifier();
+    String _name = _classifier.getName();
+    _builder.append(_name, "");
+    {
+      AbstractElement _terminal = crossReference.getTerminal();
+      boolean _notEquals = (!Objects.equal(_terminal, null));
+      if (_notEquals) {
+        _builder.append(" | ");
+        AbstractElement _terminal_1 = crossReference.getTerminal();
+        String _printGrammarElement = this.printGrammarElement(_terminal_1);
+        _builder.append(_printGrammarElement, "");
+        _builder.append(" ");
+      }
+    }
     _builder.append("]");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -170,6 +192,8 @@ public class NodeModelPrinter {
   protected String printGrammarElement(final Object action) {
     if (action instanceof Action) {
       return _printGrammarElement((Action)action);
+    } else if (action instanceof CrossReference) {
+      return _printGrammarElement((CrossReference)action);
     } else if (action instanceof Keyword) {
       return _printGrammarElement((Keyword)action);
     } else if (action instanceof RuleCall) {

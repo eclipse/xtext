@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		(
 			{
@@ -155,10 +152,7 @@ entryRuleRule1:
 	EOF;
 
 // Rule Rule1
-ruleRule1@init {
-}
-@after {
-}:
+ruleRule1:
 	(
 		(
 			(
@@ -204,10 +198,7 @@ entryRuleRule2:
 	EOF;
 
 // Rule Rule2
-ruleRule2@init {
-}
-@after {
-}:
+ruleRule2:
 	(
 		{
 			markLeaf();
@@ -245,10 +236,7 @@ entryRuleRule3:
 	EOF;
 
 // Rule Rule3
-ruleRule3@init {
-}
-@after {
-}:
+ruleRule3:
 	(
 		{
 			markComposite(elementTypeProvider.getRule3_AfterParserRuleCall_0ElementType());
@@ -286,10 +274,7 @@ entryRuleRule4:
 	EOF;
 
 // Rule Rule4
-ruleRule4@init {
-}
-@after {
-}:
+ruleRule4:
 	(
 		(
 			(
@@ -335,10 +320,7 @@ entryRuleAfterObj:
 	EOF;
 
 // Rule AfterObj
-ruleAfterObj@init {
-}
-@after {
-}:
+ruleAfterObj:
 	(
 		(
 			{
@@ -360,10 +342,7 @@ entryRuleSObj:
 	EOF;
 
 // Rule SObj
-ruleSObj@init {
-}
-@after {
-}:
+ruleSObj:
 	(
 		(
 			{
@@ -385,10 +364,7 @@ entryRuleAfter:
 	EOF;
 
 // Rule After
-ruleAfter@init {
-}
-@after {
-}:
+ruleAfter:
 	{
 		markLeaf();
 	}
@@ -406,10 +382,7 @@ entryRuleS:
 	EOF;
 
 // Rule S
-ruleS@init {
-}
-@after {
-}:
+ruleS:
 	{
 		markLeaf();
 	}

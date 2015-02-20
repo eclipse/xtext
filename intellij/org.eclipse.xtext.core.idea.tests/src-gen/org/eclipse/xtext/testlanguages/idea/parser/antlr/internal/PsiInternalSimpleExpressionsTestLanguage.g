@@ -56,10 +56,7 @@ entryRuleSequence:
 	EOF;
 
 // Rule Sequence
-ruleSequence@init {
-}
-@after {
-}:
+ruleSequence:
 	(
 		{
 			markComposite(elementTypeProvider.getSequence_AdditionParserRuleCall_0ElementType());
@@ -98,10 +95,7 @@ entryRuleAddition:
 	EOF;
 
 // Rule Addition
-ruleAddition@init {
-}
-@after {
-}:
+ruleAddition:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition_MultiplicationParserRuleCall_0ElementType());
@@ -161,10 +155,7 @@ entryRuleMultiplication:
 	EOF;
 
 // Rule Multiplication
-ruleMultiplication@init {
-}
-@after {
-}:
+ruleMultiplication:
 	(
 		{
 			markComposite(elementTypeProvider.getMultiplication_TermParserRuleCall_0ElementType());
@@ -224,10 +215,7 @@ entryRuleTerm:
 	EOF;
 
 // Rule Term
-ruleTerm@init {
-}
-@after {
-}:
+ruleTerm:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
@@ -255,10 +243,7 @@ entryRuleAtom:
 	EOF;
 
 // Rule Atom
-ruleAtom@init {
-}
-@after {
-}:
+ruleAtom:
 	(
 		(
 			{
@@ -280,10 +265,7 @@ entryRuleParens:
 	EOF;
 
 // Rule Parens
-ruleParens@init {
-}
-@after {
-}:
+ruleParens:
 	(
 		{
 			markLeaf();

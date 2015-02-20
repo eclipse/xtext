@@ -22,6 +22,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 		val delegate = findDeclaredField('delegate')
 		if (delegate == null) {
 			addWarning("Delegate is not declared")
+			return
 		}
 		delegate.markAsRead
 		for (declaredMethod : delegate.type.allResolvedMethods.map[declaration].filter [

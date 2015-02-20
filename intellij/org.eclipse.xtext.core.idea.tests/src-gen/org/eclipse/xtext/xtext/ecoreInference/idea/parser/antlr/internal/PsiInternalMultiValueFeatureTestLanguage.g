@@ -56,10 +56,7 @@ entryRuleStart:
 	EOF;
 
 // Rule Start
-ruleStart@init {
-}
-@after {
-}:
+ruleStart:
 	(
 		(
 			{

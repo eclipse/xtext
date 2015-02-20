@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -281,10 +278,7 @@ entryRuleKeywordVal:
 	EOF;
 
 // Rule KeywordVal
-ruleKeywordVal@init {
-}
-@after {
-}:
+ruleKeywordVal:
 	(
 		(
 			(
@@ -320,10 +314,7 @@ entryRuleTerminalVal:
 	EOF;
 
 // Rule TerminalVal
-ruleTerminalVal@init {
-}
-@after {
-}:
+ruleTerminalVal:
 	(
 		(
 			(
@@ -371,10 +362,7 @@ entryRuleEnumVal:
 	EOF;
 
 // Rule EnumVal
-ruleEnumVal@init {
-}
-@after {
-}:
+ruleEnumVal:
 	(
 		(
 			(
@@ -410,10 +398,7 @@ entryRuleKeywordBool:
 	EOF;
 
 // Rule KeywordBool
-ruleKeywordBool@init {
-}
-@after {
-}:
+ruleKeywordBool:
 	(
 		(
 			(
@@ -449,10 +434,7 @@ entryRuleTerminalBool:
 	EOF;
 
 // Rule TerminalBool
-ruleTerminalBool@init {
-}
-@after {
-}:
+ruleTerminalBool:
 	(
 		(
 			(
@@ -500,10 +482,7 @@ entryRuleEnumBool:
 	EOF;
 
 // Rule EnumBool
-ruleEnumBool@init {
-}
-@after {
-}:
+ruleEnumBool:
 	(
 		(
 			(
@@ -539,10 +518,7 @@ entryRuleMixedBool:
 	EOF;
 
 // Rule MixedBool
-ruleMixedBool@init {
-}
-@after {
-}:
+ruleMixedBool:
 	(
 		(
 			(
@@ -578,10 +554,7 @@ entryRuleBoolean:
 	EOF;
 
 // Rule Boolean
-ruleBoolean@init {
-}
-@after {
-}:
+ruleBoolean:
 	(
 		{
 			markLeaf();
@@ -609,10 +582,7 @@ entryRuleMixedValue:
 	EOF;
 
 // Rule MixedValue
-ruleMixedValue@init {
-}
-@after {
-}:
+ruleMixedValue:
 	(
 		(
 			(
@@ -648,10 +618,7 @@ entryRuleDatEnum:
 	EOF;
 
 // Rule DatEnum
-ruleDatEnum@init {
-}
-@after {
-}:
+ruleDatEnum:
 	{
 		markLeaf();
 	}
@@ -669,10 +636,7 @@ entryRuleContainmentRef:
 	EOF;
 
 // Rule ContainmentRef
-ruleContainmentRef@init {
-}
-@after {
-}:
+ruleContainmentRef:
 	(
 		(
 			(
@@ -708,10 +672,7 @@ entryRuleContainmentRef1:
 	EOF;
 
 // Rule ContainmentRef1
-ruleContainmentRef1@init {
-}
-@after {
-}:
+ruleContainmentRef1:
 	(
 		{
 			markLeaf();
@@ -742,10 +703,7 @@ entryRuleContainmentRef2:
 	EOF;
 
 // Rule ContainmentRef2
-ruleContainmentRef2@init {
-}
-@after {
-}:
+ruleContainmentRef2:
 	(
 		{
 			markLeaf();
@@ -776,10 +734,7 @@ entryRuleCrossRef:
 	EOF;
 
 // Rule CrossRef
-ruleCrossRef@init {
-}
-@after {
-}:
+ruleCrossRef:
 	(
 		(
 			(

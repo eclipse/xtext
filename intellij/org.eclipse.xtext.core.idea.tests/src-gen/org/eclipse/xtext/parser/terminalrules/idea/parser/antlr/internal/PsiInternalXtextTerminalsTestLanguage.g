@@ -56,10 +56,7 @@ entryRuleGrammar:
 	EOF;
 
 // Rule Grammar
-ruleGrammar@init {
-}
-@after {
-}:
+ruleGrammar:
 	(
 		{
 			markLeaf();
@@ -212,10 +209,7 @@ entryRuleGrammarID:
 	EOF;
 
 // Rule GrammarID
-ruleGrammarID@init {
-}
-@after {
-}:
+ruleGrammarID:
 	(
 		{
 			markLeaf();
@@ -251,10 +245,7 @@ entryRuleAbstractRule:
 	EOF;
 
 // Rule AbstractRule
-ruleAbstractRule@init {
-}
-@after {
-}:
+ruleAbstractRule:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractRule_ParserRuleParserRuleCall_0ElementType());
@@ -290,10 +281,7 @@ entryRuleAbstractMetamodelDeclaration:
 	EOF;
 
 // Rule AbstractMetamodelDeclaration
-ruleAbstractMetamodelDeclaration@init {
-}
-@after {
-}:
+ruleAbstractMetamodelDeclaration:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractMetamodelDeclaration_GeneratedMetamodelParserRuleCall_0ElementType());
@@ -321,10 +309,7 @@ entryRuleGeneratedMetamodel:
 	EOF;
 
 // Rule GeneratedMetamodel
-ruleGeneratedMetamodel@init {
-}
-@after {
-}:
+ruleGeneratedMetamodel:
 	(
 		{
 			markLeaf();
@@ -386,10 +371,7 @@ entryRuleReferencedMetamodel:
 	EOF;
 
 // Rule ReferencedMetamodel
-ruleReferencedMetamodel@init {
-}
-@after {
-}:
+ruleReferencedMetamodel:
 	(
 		{
 			markLeaf();
@@ -440,10 +422,7 @@ entryRuleParserRule:
 	EOF;
 
 // Rule ParserRule
-ruleParserRule@init {
-}
-@after {
-}:
+ruleParserRule:
 	(
 		(
 			(
@@ -572,10 +551,7 @@ entryRuleTypeRef:
 	EOF;
 
 // Rule TypeRef
-ruleTypeRef@init {
-}
-@after {
-}:
+ruleTypeRef:
 	(
 		(
 			(
@@ -619,10 +595,7 @@ entryRuleAlternatives:
 	EOF;
 
 // Rule Alternatives
-ruleAlternatives@init {
-}
-@after {
-}:
+ruleAlternatives:
 	(
 		{
 			markComposite(elementTypeProvider.getAlternatives_GroupParserRuleCall_0ElementType());
@@ -670,10 +643,7 @@ entryRuleGroup:
 	EOF;
 
 // Rule Group
-ruleGroup@init {
-}
-@after {
-}:
+ruleGroup:
 	(
 		{
 			markComposite(elementTypeProvider.getGroup_AbstractTokenParserRuleCall_0ElementType());
@@ -712,10 +682,7 @@ entryRuleAbstractToken:
 	EOF;
 
 // Rule AbstractToken
-ruleAbstractToken@init {
-}
-@after {
-}:
+ruleAbstractToken:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractToken_AbstractTokenWithCardinalityParserRuleCall_0ElementType());
@@ -743,10 +710,7 @@ entryRuleAbstractTokenWithCardinality:
 	EOF;
 
 // Rule AbstractTokenWithCardinality
-ruleAbstractTokenWithCardinality@init {
-}
-@after {
-}:
+ruleAbstractTokenWithCardinality:
 	(
 		(
 			{
@@ -805,10 +769,7 @@ entryRuleAction:
 	EOF;
 
 // Rule Action
-ruleAction@init {
-}
-@after {
-}:
+ruleAction:
 	(
 		{
 			markLeaf();
@@ -894,10 +855,7 @@ entryRuleAbstractTerminal:
 	EOF;
 
 // Rule AbstractTerminal
-ruleAbstractTerminal@init {
-}
-@after {
-}:
+ruleAbstractTerminal:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractTerminal_KeywordParserRuleCall_0ElementType());
@@ -933,10 +891,7 @@ entryRuleKeyword:
 	EOF;
 
 // Rule Keyword
-ruleKeyword@init {
-}
-@after {
-}:
+ruleKeyword:
 	(
 		(
 			{
@@ -958,10 +913,7 @@ entryRuleRuleCall:
 	EOF;
 
 // Rule RuleCall
-ruleRuleCall@init {
-}
-@after {
-}:
+ruleRuleCall:
 	(
 		(
 			{
@@ -983,10 +935,7 @@ entryRuleAssignment:
 	EOF;
 
 // Rule Assignment
-ruleAssignment@init {
-}
-@after {
-}:
+ruleAssignment:
 	(
 		(
 			(
@@ -1050,10 +999,7 @@ entryRuleAssignableTerminal:
 	EOF;
 
 // Rule AssignableTerminal
-ruleAssignableTerminal@init {
-}
-@after {
-}:
+ruleAssignableTerminal:
 	(
 		{
 			markComposite(elementTypeProvider.getAssignableTerminal_KeywordParserRuleCall_0ElementType());
@@ -1097,10 +1043,7 @@ entryRuleParenthesizedAssignableElement:
 	EOF;
 
 // Rule ParenthesizedAssignableElement
-ruleParenthesizedAssignableElement@init {
-}
-@after {
-}:
+ruleParenthesizedAssignableElement:
 	(
 		{
 			markLeaf();
@@ -1134,10 +1077,7 @@ entryRuleAssignableAlternatives:
 	EOF;
 
 // Rule AssignableAlternatives
-ruleAssignableAlternatives@init {
-}
-@after {
-}:
+ruleAssignableAlternatives:
 	(
 		{
 			markComposite(elementTypeProvider.getAssignableAlternatives_AssignableTerminalParserRuleCall_0ElementType());
@@ -1185,10 +1125,7 @@ entryRuleCrossReference:
 	EOF;
 
 // Rule CrossReference
-ruleCrossReference@init {
-}
-@after {
-}:
+ruleCrossReference:
 	(
 		{
 			markLeaf();
@@ -1246,10 +1183,7 @@ entryRuleCrossReferenceableTerminal:
 	EOF;
 
 // Rule CrossReferenceableTerminal
-ruleCrossReferenceableTerminal@init {
-}
-@after {
-}:
+ruleCrossReferenceableTerminal:
 	(
 		{
 			markComposite(elementTypeProvider.getCrossReferenceableTerminal_KeywordParserRuleCall_0ElementType());
@@ -1277,10 +1211,7 @@ entryRuleParenthesizedElement:
 	EOF;
 
 // Rule ParenthesizedElement
-ruleParenthesizedElement@init {
-}
-@after {
-}:
+ruleParenthesizedElement:
 	(
 		{
 			markLeaf();
@@ -1314,10 +1245,7 @@ entryRuleTerminalRule:
 	EOF;
 
 // Rule TerminalRule
-ruleTerminalRule@init {
-}
-@after {
-}:
+ruleTerminalRule:
 	(
 		{
 			markLeaf();
@@ -1393,10 +1321,7 @@ entryRuleTerminalAlternatives:
 	EOF;
 
 // Rule TerminalAlternatives
-ruleTerminalAlternatives@init {
-}
-@after {
-}:
+ruleTerminalAlternatives:
 	(
 		{
 			markComposite(elementTypeProvider.getTerminalAlternatives_TerminalGroupParserRuleCall_0ElementType());
@@ -1444,10 +1369,7 @@ entryRuleTerminalGroup:
 	EOF;
 
 // Rule TerminalGroup
-ruleTerminalGroup@init {
-}
-@after {
-}:
+ruleTerminalGroup:
 	(
 		{
 			markComposite(elementTypeProvider.getTerminalGroup_TerminalTokenParserRuleCall_0ElementType());
@@ -1486,10 +1408,7 @@ entryRuleTerminalToken:
 	EOF;
 
 // Rule TerminalToken
-ruleTerminalToken@init {
-}
-@after {
-}:
+ruleTerminalToken:
 	(
 		{
 			markComposite(elementTypeProvider.getTerminalToken_TerminalTokenElementParserRuleCall_0ElementType());
@@ -1538,10 +1457,7 @@ entryRuleTerminalTokenElement:
 	EOF;
 
 // Rule TerminalTokenElement
-ruleTerminalTokenElement@init {
-}
-@after {
-}:
+ruleTerminalTokenElement:
 	(
 		{
 			markComposite(elementTypeProvider.getTerminalTokenElement_CharacterRangeParserRuleCall_0ElementType());
@@ -1593,10 +1509,7 @@ entryRuleParenthesizedTerminalElement:
 	EOF;
 
 // Rule ParenthesizedTerminalElement
-ruleParenthesizedTerminalElement@init {
-}
-@after {
-}:
+ruleParenthesizedTerminalElement:
 	(
 		{
 			markLeaf();
@@ -1630,10 +1543,7 @@ entryRuleAbstractNegatedToken:
 	EOF;
 
 // Rule AbstractNegatedToken
-ruleAbstractNegatedToken@init {
-}
-@after {
-}:
+ruleAbstractNegatedToken:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractNegatedToken_NegatedTokenParserRuleCall_0ElementType());
@@ -1661,10 +1571,7 @@ entryRuleNegatedToken:
 	EOF;
 
 // Rule NegatedToken
-ruleNegatedToken@init {
-}
-@after {
-}:
+ruleNegatedToken:
 	(
 		{
 			markLeaf();
@@ -1695,10 +1602,7 @@ entryRuleUntilToken:
 	EOF;
 
 // Rule UntilToken
-ruleUntilToken@init {
-}
-@after {
-}:
+ruleUntilToken:
 	(
 		{
 			markLeaf();
@@ -1729,10 +1633,7 @@ entryRuleWildcard:
 	EOF;
 
 // Rule Wildcard
-ruleWildcard@init {
-}
-@after {
-}:
+ruleWildcard:
 	(
 		(
 			{
@@ -1758,10 +1659,7 @@ entryRuleCharacterRange:
 	EOF;
 
 // Rule CharacterRange
-ruleCharacterRange@init {
-}
-@after {
-}:
+ruleCharacterRange:
 	(
 		{
 			markComposite(elementTypeProvider.getCharacterRange_KeywordParserRuleCall_0ElementType());
@@ -1807,10 +1705,7 @@ entryRuleEnumRule:
 	EOF;
 
 // Rule EnumRule
-ruleEnumRule@init {
-}
-@after {
-}:
+ruleEnumRule:
 	(
 		{
 			markLeaf();
@@ -1886,10 +1781,7 @@ entryRuleEnumLiterals:
 	EOF;
 
 // Rule EnumLiterals
-ruleEnumLiterals@init {
-}
-@after {
-}:
+ruleEnumLiterals:
 	(
 		{
 			markComposite(elementTypeProvider.getEnumLiterals_EnumLiteralDeclarationParserRuleCall_0ElementType());
@@ -1937,10 +1829,7 @@ entryRuleEnumLiteralDeclaration:
 	EOF;
 
 // Rule EnumLiteralDeclaration
-ruleEnumLiteralDeclaration@init {
-}
-@after {
-}:
+ruleEnumLiteralDeclaration:
 	(
 		(
 			(

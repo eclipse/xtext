@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -1288,10 +1285,7 @@ entryRuleNestedModel:
 	EOF;
 
 // Rule NestedModel
-ruleNestedModel@init {
-}
-@after {
-}:
+ruleNestedModel:
 	(
 		(
 			{
@@ -1372,10 +1366,7 @@ entryRuleUnorderedDatatype:
 	EOF;
 
 // Rule UnorderedDatatype
-ruleUnorderedDatatype@init {
-}
-@after {
-}:
+ruleUnorderedDatatype:
 	(
 		(
 			{
@@ -2453,10 +2444,7 @@ entryRuleUnorderedSerialization:
 	EOF;
 
 // Rule UnorderedSerialization
-ruleUnorderedSerialization@init {
-}
-@after {
-}:
+ruleUnorderedSerialization:
 	(
 		(
 			{

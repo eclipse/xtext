@@ -56,6 +56,14 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		model.addXbaseLibrary
 	}
+	
+	override checkResource(String code, boolean validate) {
+		checkModel(code)
+		if (validate) {
+			validationHelper.assertNoErrors(actualResource)
+		}
+		actualResource
+	}
 
 	override <T extends EObject> checkModel(String code, boolean validate) {
 		checkModel(code)

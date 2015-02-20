@@ -6,12 +6,13 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.idea.tests.TestDecorator
+import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage
-import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType
-import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
+import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage
+import org.junit.Ignore
 
 @TestDecorator
 class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase {
@@ -34,6 +35,7 @@ class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase {
 	
 }
 
+@Ignore
 @FinalFieldsConstructor
 class IdeaBacktrackingParserTestDelegate extends BacktrackingParserTest {
 	

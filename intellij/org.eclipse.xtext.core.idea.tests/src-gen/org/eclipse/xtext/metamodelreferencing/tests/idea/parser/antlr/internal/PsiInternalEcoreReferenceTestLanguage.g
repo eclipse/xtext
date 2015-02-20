@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -105,10 +102,7 @@ entryRuleExtendsNsURIEObject:
 	EOF;
 
 // Rule ExtendsNsURIEObject
-ruleExtendsNsURIEObject@init {
-}
-@after {
-}:
+ruleExtendsNsURIEObject:
 	(
 		{
 			markLeaf();
@@ -343,10 +337,7 @@ entryRuleMyEAttribute:
 	EOF;
 
 // Rule MyEAttribute
-ruleMyEAttribute@init {
-}
-@after {
-}:
+ruleMyEAttribute:
 	(
 		(
 			{
@@ -372,10 +363,7 @@ entryRuleEAttribute:
 	EOF;
 
 // Rule EAttribute
-ruleEAttribute@init {
-}
-@after {
-}:
+ruleEAttribute:
 	(
 		(
 			{
@@ -401,10 +389,7 @@ entryRuleExtendsPluginEObject:
 	EOF;
 
 // Rule ExtendsPluginEObject
-ruleExtendsPluginEObject@init {
-}
-@after {
-}:
+ruleExtendsPluginEObject:
 	(
 		{
 			markLeaf();
@@ -628,10 +613,7 @@ entryRuleExtendsResourceEObject:
 	EOF;
 
 // Rule ExtendsResourceEObject
-ruleExtendsResourceEObject@init {
-}
-@after {
-}:
+ruleExtendsResourceEObject:
 	(
 		{
 			markLeaf();
@@ -855,10 +837,7 @@ entryRuleEObject:
 	EOF;
 
 // Rule EObject
-ruleEObject@init {
-}
-@after {
-}:
+ruleEObject:
 	(
 		(
 			{
@@ -884,10 +863,7 @@ entryRuleValidID:
 	EOF;
 
 // Rule ValidID
-ruleValidID@init {
-}
-@after {
-}:
+ruleValidID:
 	{
 		markLeaf();
 	}

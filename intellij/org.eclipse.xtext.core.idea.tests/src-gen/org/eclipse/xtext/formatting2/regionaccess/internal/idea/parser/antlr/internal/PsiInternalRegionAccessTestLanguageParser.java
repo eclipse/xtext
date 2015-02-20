@@ -107,23 +107,21 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
     public final void ruleRoot() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:62:2: ( (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:63:2: (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:59:9: ( (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:60:2: (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:63:2: (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:64:3: otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:60:2: (otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:61:3: otherlv_0= 'test' ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleRoot88); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleRoot79); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getRoot_TestKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:71:3: ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:68:3: ( ruleSimple | ruleDelegation | ruleUnassigned | rulePrefixedUnassigned )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 12:
@@ -155,12 +153,12 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:72:4: ruleSimple
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:69:4: ruleSimple
                     {
 
                     				markComposite(elementTypeProvider.getRoot_SimpleParserRuleCall_1_0ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleSimple_in_ruleRoot106);
+                    pushFollow(FollowSets000.FOLLOW_ruleSimple_in_ruleRoot97);
                     ruleSimple();
 
                     state._fsp--;
@@ -172,12 +170,12 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:80:4: ruleDelegation
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:77:4: ruleDelegation
                     {
 
                     				markComposite(elementTypeProvider.getRoot_DelegationParserRuleCall_1_1ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleDelegation_in_ruleRoot130);
+                    pushFollow(FollowSets000.FOLLOW_ruleDelegation_in_ruleRoot121);
                     ruleDelegation();
 
                     state._fsp--;
@@ -189,12 +187,12 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:88:4: ruleUnassigned
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:85:4: ruleUnassigned
                     {
 
                     				markComposite(elementTypeProvider.getRoot_UnassignedParserRuleCall_1_2ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleUnassigned_in_ruleRoot154);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnassigned_in_ruleRoot145);
                     ruleUnassigned();
 
                     state._fsp--;
@@ -206,12 +204,12 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 4 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:96:4: rulePrefixedUnassigned
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:93:4: rulePrefixedUnassigned
                     {
 
                     				markComposite(elementTypeProvider.getRoot_PrefixedUnassignedParserRuleCall_1_3ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_rulePrefixedUnassigned_in_ruleRoot178);
+                    pushFollow(FollowSets000.FOLLOW_rulePrefixedUnassigned_in_ruleRoot169);
                     rulePrefixedUnassigned();
 
                     state._fsp--;
@@ -231,8 +229,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -246,20 +242,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleSimple"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:108:1: entryRuleSimple : ruleSimple EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:105:1: entryRuleSimple : ruleSimple EOF ;
     public final void entryRuleSimple() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:108:16: ( ruleSimple EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:109:2: ruleSimple EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:105:16: ( ruleSimple EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:106:2: ruleSimple EOF
             {
              markComposite(elementTypeProvider.getSimpleElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSimple_in_entryRuleSimple203);
+            pushFollow(FollowSets000.FOLLOW_ruleSimple_in_entryRuleSimple194);
             ruleSimple();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimple209); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimple200); 
 
             }
 
@@ -276,37 +272,35 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleSimple"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:115:1: ruleSimple : (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:112:1: ruleSimple : (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleSimple() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:118:2: ( (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:119:2: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:112:11: ( (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:113:2: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:119:2: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:120:3: otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:113:2: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:114:3: otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleSimple237); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleSimple219); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getSimple_DigitOneKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:127:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:128:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:121:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:122:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:128:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:129:5: lv_name_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:122:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:123:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimple264); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimple246); 
 
             					doneLeaf(lv_name_1_0, elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType());
             				
@@ -322,8 +316,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -337,20 +329,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleDelegation"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:142:1: entryRuleDelegation : ruleDelegation EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:136:1: entryRuleDelegation : ruleDelegation EOF ;
     public final void entryRuleDelegation() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:142:20: ( ruleDelegation EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:143:2: ruleDelegation EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:136:20: ( ruleDelegation EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:137:2: ruleDelegation EOF
             {
              markComposite(elementTypeProvider.getDelegationElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDelegation_in_entryRuleDelegation295);
+            pushFollow(FollowSets000.FOLLOW_ruleDelegation_in_entryRuleDelegation277);
             ruleDelegation();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDelegation301); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDelegation283); 
 
             }
 
@@ -367,36 +359,34 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleDelegation"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:149:1: ruleDelegation : (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:143:1: ruleDelegation : (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) ;
     public final void ruleDelegation() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:152:2: ( (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:153:2: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:143:15: ( (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:144:2: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:153:2: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:154:3: otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:144:2: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:145:3: otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDelegation329); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDelegation302); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getDelegation_DigitTwoKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:161:3: ( (lv_delegate_1_0= ruleDelegate ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:162:4: (lv_delegate_1_0= ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:152:3: ( (lv_delegate_1_0= ruleDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:153:4: (lv_delegate_1_0= ruleDelegate )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:162:4: (lv_delegate_1_0= ruleDelegate )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:163:5: lv_delegate_1_0= ruleDelegate
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:153:4: (lv_delegate_1_0= ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:154:5: lv_delegate_1_0= ruleDelegate
             {
 
             					markComposite(elementTypeProvider.getDelegation_DelegateDelegateParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_ruleDelegation356);
+            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_ruleDelegation329);
             ruleDelegate();
 
             state._fsp--;
@@ -416,8 +406,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -431,20 +419,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleUnassigned"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:176:1: entryRuleUnassigned : ruleUnassigned EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:167:1: entryRuleUnassigned : ruleUnassigned EOF ;
     public final void entryRuleUnassigned() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:176:20: ( ruleUnassigned EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:177:2: ruleUnassigned EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:167:20: ( ruleUnassigned EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:168:2: ruleUnassigned EOF
             {
              markComposite(elementTypeProvider.getUnassignedElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleUnassigned_in_entryRuleUnassigned387);
+            pushFollow(FollowSets000.FOLLOW_ruleUnassigned_in_entryRuleUnassigned360);
             ruleUnassigned();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassigned393); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassigned366); 
 
             }
 
@@ -461,30 +449,28 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleUnassigned"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:183:1: ruleUnassigned : (otherlv_0= '3' ruleDelegate ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:174:1: ruleUnassigned : (otherlv_0= '3' ruleDelegate ) ;
     public final void ruleUnassigned() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:186:2: ( (otherlv_0= '3' ruleDelegate ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:187:2: (otherlv_0= '3' ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:174:15: ( (otherlv_0= '3' ruleDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:175:2: (otherlv_0= '3' ruleDelegate )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:187:2: (otherlv_0= '3' ruleDelegate )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:188:3: otherlv_0= '3' ruleDelegate
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:175:2: (otherlv_0= '3' ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:176:3: otherlv_0= '3' ruleDelegate
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleUnassigned421); 
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleUnassigned385); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getUnassigned_DigitThreeKeyword_0ElementType());
             		
 
             			markComposite(elementTypeProvider.getUnassigned_DelegateParserRuleCall_1ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_ruleUnassigned433);
+            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_ruleUnassigned397);
             ruleDelegate();
 
             state._fsp--;
@@ -497,8 +483,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -513,20 +497,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRulePrefixedUnassigned"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:206:1: entryRulePrefixedUnassigned : rulePrefixedUnassigned EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:194:1: entryRulePrefixedUnassigned : rulePrefixedUnassigned EOF ;
     public final void entryRulePrefixedUnassigned() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:206:28: ( rulePrefixedUnassigned EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:207:2: rulePrefixedUnassigned EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:194:28: ( rulePrefixedUnassigned EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:195:2: rulePrefixedUnassigned EOF
             {
              markComposite(elementTypeProvider.getPrefixedUnassignedElementType()); 
-            pushFollow(FollowSets000.FOLLOW_rulePrefixedUnassigned_in_entryRulePrefixedUnassigned453);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixedUnassigned_in_entryRulePrefixedUnassigned417);
             rulePrefixedUnassigned();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedUnassigned459); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedUnassigned423); 
 
             }
 
@@ -543,36 +527,34 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePrefixedUnassigned"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:213:1: rulePrefixedUnassigned : (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:201:1: rulePrefixedUnassigned : (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) ;
     public final void rulePrefixedUnassigned() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:216:2: ( (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:217:2: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:201:23: ( (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:202:2: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:217:2: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:218:3: otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:202:2: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:203:3: otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) )
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_rulePrefixedUnassigned487); 
+            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_rulePrefixedUnassigned442); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getPrefixedUnassigned_DigitFourKeyword_0ElementType());
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:225:3: ( (lv_delegate_1_0= rulePrefixedDelegate ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:226:4: (lv_delegate_1_0= rulePrefixedDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:210:3: ( (lv_delegate_1_0= rulePrefixedDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:211:4: (lv_delegate_1_0= rulePrefixedDelegate )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:226:4: (lv_delegate_1_0= rulePrefixedDelegate )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:227:5: lv_delegate_1_0= rulePrefixedDelegate
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:211:4: (lv_delegate_1_0= rulePrefixedDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:212:5: lv_delegate_1_0= rulePrefixedDelegate
             {
 
             					markComposite(elementTypeProvider.getPrefixedUnassigned_DelegatePrefixedDelegateParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_rulePrefixedDelegate_in_rulePrefixedUnassigned514);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixedDelegate_in_rulePrefixedUnassigned469);
             rulePrefixedDelegate();
 
             state._fsp--;
@@ -592,8 +574,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-
-
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -607,20 +587,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRulePrefixedDelegate"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:240:1: entryRulePrefixedDelegate : rulePrefixedDelegate EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:225:1: entryRulePrefixedDelegate : rulePrefixedDelegate EOF ;
     public final void entryRulePrefixedDelegate() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:240:26: ( rulePrefixedDelegate EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:241:2: rulePrefixedDelegate EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:225:26: ( rulePrefixedDelegate EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:226:2: rulePrefixedDelegate EOF
             {
              markComposite(elementTypeProvider.getPrefixedDelegateElementType()); 
-            pushFollow(FollowSets000.FOLLOW_rulePrefixedDelegate_in_entryRulePrefixedDelegate545);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixedDelegate_in_entryRulePrefixedDelegate500);
             rulePrefixedDelegate();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedDelegate551); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedDelegate506); 
 
             }
 
@@ -637,30 +617,28 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePrefixedDelegate"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:247:1: rulePrefixedDelegate : (otherlv_0= 'prefix' ruleDelegate ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:232:1: rulePrefixedDelegate : (otherlv_0= 'prefix' ruleDelegate ) ;
     public final void rulePrefixedDelegate() throws RecognitionException {
         Token otherlv_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:250:2: ( (otherlv_0= 'prefix' ruleDelegate ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:251:2: (otherlv_0= 'prefix' ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:232:21: ( (otherlv_0= 'prefix' ruleDelegate ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:233:2: (otherlv_0= 'prefix' ruleDelegate )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:251:2: (otherlv_0= 'prefix' ruleDelegate )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:252:3: otherlv_0= 'prefix' ruleDelegate
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:233:2: (otherlv_0= 'prefix' ruleDelegate )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:234:3: otherlv_0= 'prefix' ruleDelegate
             {
 
             			markLeaf();
             		
-            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_rulePrefixedDelegate579); 
+            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_rulePrefixedDelegate525); 
 
             			doneLeaf(otherlv_0, elementTypeProvider.getPrefixedDelegate_PrefixKeyword_0ElementType());
             		
 
             			markComposite(elementTypeProvider.getPrefixedDelegate_DelegateParserRuleCall_1ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_rulePrefixedDelegate591);
+            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_rulePrefixedDelegate537);
             ruleDelegate();
 
             state._fsp--;
@@ -673,8 +651,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -689,20 +665,20 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleDelegate"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:270:1: entryRuleDelegate : ruleDelegate EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:252:1: entryRuleDelegate : ruleDelegate EOF ;
     public final void entryRuleDelegate() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:270:18: ( ruleDelegate EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:271:2: ruleDelegate EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:252:18: ( ruleDelegate EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:253:2: ruleDelegate EOF
             {
              markComposite(elementTypeProvider.getDelegateElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_entryRuleDelegate611);
+            pushFollow(FollowSets000.FOLLOW_ruleDelegate_in_entryRuleDelegate557);
             ruleDelegate();
 
             state._fsp--;
 
              doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDelegate617); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDelegate563); 
 
             }
 
@@ -719,26 +695,24 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleDelegate"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:277:1: ruleDelegate : ( (lv_name_0_0= RULE_ID ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:259:1: ruleDelegate : ( (lv_name_0_0= RULE_ID ) ) ;
     public final void ruleDelegate() throws RecognitionException {
         Token lv_name_0_0=null;
 
-
-
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:280:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:281:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:259:13: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:260:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:281:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:282:3: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:260:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:261:3: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:282:3: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:283:4: lv_name_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:261:3: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/idea/parser/antlr/internal/PsiInternalRegionAccessTestLanguage.g:262:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf();
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDelegate651); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDelegate588); 
 
             				doneLeaf(lv_name_0_0, elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType());
             			
@@ -750,8 +724,6 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
             }
-
-
 
         }
         catch (RecognitionException re) {
@@ -773,34 +745,34 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot54 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleRoot60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleRoot88 = new BitSet(new long[]{0x000000000000F000L});
-        public static final BitSet FOLLOW_ruleSimple_in_ruleRoot106 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDelegation_in_ruleRoot130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnassigned_in_ruleRoot154 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedUnassigned_in_ruleRoot178 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimple_in_entryRuleSimple203 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSimple209 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleSimple237 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimple264 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDelegation_in_entryRuleDelegation295 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDelegation301 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleDelegation329 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDelegate_in_ruleDelegation356 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnassigned_in_entryRuleUnassigned387 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnassigned393 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleUnassigned421 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDelegate_in_ruleUnassigned433 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedUnassigned_in_entryRulePrefixedUnassigned453 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedUnassigned459 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rulePrefixedUnassigned487 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_rulePrefixedDelegate_in_rulePrefixedUnassigned514 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedDelegate_in_entryRulePrefixedDelegate545 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedDelegate551 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rulePrefixedDelegate579 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDelegate_in_rulePrefixedDelegate591 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDelegate_in_entryRuleDelegate611 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDelegate617 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleDelegate651 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleRoot79 = new BitSet(new long[]{0x000000000000F000L});
+        public static final BitSet FOLLOW_ruleSimple_in_ruleRoot97 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDelegation_in_ruleRoot121 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnassigned_in_ruleRoot145 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedUnassigned_in_ruleRoot169 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimple_in_entryRuleSimple194 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSimple200 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleSimple219 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimple246 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDelegation_in_entryRuleDelegation277 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDelegation283 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleDelegation302 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleDelegate_in_ruleDelegation329 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnassigned_in_entryRuleUnassigned360 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnassigned366 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleUnassigned385 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleDelegate_in_ruleUnassigned397 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedUnassigned_in_entryRulePrefixedUnassigned417 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedUnassigned423 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rulePrefixedUnassigned442 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_rulePrefixedDelegate_in_rulePrefixedUnassigned469 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedDelegate_in_entryRulePrefixedDelegate500 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedDelegate506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rulePrefixedDelegate525 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleDelegate_in_rulePrefixedDelegate537 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDelegate_in_entryRuleDelegate557 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDelegate563 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleDelegate588 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

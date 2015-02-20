@@ -56,10 +56,7 @@ entryRuleRoot:
 	EOF;
 
 // Rule Root
-ruleRoot@init {
-}
-@after {
-}:
+ruleRoot:
 	(
 		{
 			markLeaf();
@@ -104,10 +101,7 @@ entryRuleTestRequired:
 	EOF;
 
 // Rule TestRequired
-ruleTestRequired@init {
-}
-@after {
-}:
+ruleTestRequired:
 	(
 		(
 			{
@@ -155,10 +149,7 @@ entryRuleTestOptional:
 	EOF;
 
 // Rule TestOptional
-ruleTestOptional@init {
-}
-@after {
-}:
+ruleTestOptional:
 	(
 		(
 			{
@@ -215,10 +206,7 @@ entryRuleTestList:
 	EOF;
 
 // Rule TestList
-ruleTestList@init {
-}
-@after {
-}:
+ruleTestList:
 	(
 		(
 			{

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_ChildParserRuleCall_0ElementType());
@@ -98,10 +95,7 @@ entryRuleChild:
 	EOF;
 
 // Rule Child
-ruleChild@init {
-}
-@after {
-}:
+ruleChild:
 	(
 		(
 			{

@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -105,10 +102,7 @@ entryRuleUnassignedAction:
 	EOF;
 
 // Rule UnassignedAction
-ruleUnassignedAction@init {
-}
-@after {
-}:
+ruleUnassignedAction:
 	(
 		(
 			{

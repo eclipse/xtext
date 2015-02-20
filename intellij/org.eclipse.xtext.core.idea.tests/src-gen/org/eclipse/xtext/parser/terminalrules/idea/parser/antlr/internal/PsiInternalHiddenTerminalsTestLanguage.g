@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_WithoutHiddensParserRuleCall_0ElementType());
@@ -111,10 +108,7 @@ entryRuleWithoutHiddens:
 	EOF;
 
 // Rule WithoutHiddens
-ruleWithoutHiddens@init {
-}
-@after {
-}:
+ruleWithoutHiddens:
 	(
 		{
 			markLeaf();
@@ -181,9 +175,6 @@ finally {
 // Rule WithHiddens
 ruleWithHiddens@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -213,6 +204,9 @@ ruleWithHiddens@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleOverridingHiddens
 entryRuleOverridingHiddens@init {
@@ -229,9 +223,6 @@ finally {
 // Rule OverridingHiddens
 ruleOverridingHiddens@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -286,6 +277,9 @@ ruleOverridingHiddens@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleOverridingHiddensCall
 entryRuleOverridingHiddensCall@init {
@@ -302,9 +296,6 @@ finally {
 // Rule OverridingHiddensCall
 ruleOverridingHiddensCall@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -338,6 +329,9 @@ ruleOverridingHiddensCall@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleInheritingHiddens
 entryRuleInheritingHiddens@init {
@@ -354,9 +348,6 @@ finally {
 // Rule InheritingHiddens
 ruleInheritingHiddens@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -425,6 +416,9 @@ ruleInheritingHiddens@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleDatatypeHiddens
 entryRuleDatatypeHiddens:
@@ -434,10 +428,7 @@ entryRuleDatatypeHiddens:
 	EOF;
 
 // Rule DatatypeHiddens
-ruleDatatypeHiddens@init {
-}
-@after {
-}:
+ruleDatatypeHiddens:
 	(
 		{
 			markLeaf();
@@ -475,9 +466,6 @@ finally {
 // Rule DatatypeRule
 ruleDatatypeRule@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -496,6 +484,9 @@ ruleDatatypeRule@init {
 		}
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleHidingHiddens
 entryRuleHidingHiddens@init {
@@ -512,9 +503,6 @@ finally {
 // Rule HidingHiddens
 ruleHidingHiddens@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -548,6 +536,9 @@ ruleHidingHiddens@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleInheritingHiddensCall
 entryRuleInheritingHiddensCall:
@@ -557,10 +548,7 @@ entryRuleInheritingHiddensCall:
 	EOF;
 
 // Rule InheritingHiddensCall
-ruleInheritingHiddensCall@init {
-}
-@after {
-}:
+ruleInheritingHiddensCall:
 	(
 		{
 			markLeaf();

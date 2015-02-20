@@ -56,10 +56,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleWord:
 	EOF;
 
 // Rule Word
-ruleWord@init {
-}
-@after {
-}:
+ruleWord:
 	(
 		(
 			{

@@ -305,40 +305,6 @@ public class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGen
   }
   
   @Override
-  protected String compileInit(final AbstractRule it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      if ((it instanceof ParserRule)) {
-        _builder.newLineIfNotEmpty();
-        _builder.append("@init {");
-        _builder.newLine();
-        _builder.append("\t");
-        CharSequence _compileInitHiddenTokens = this.compileInitHiddenTokens(it, options);
-        _builder.append(_compileInitHiddenTokens, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        CharSequence _compileInitUnorderedGroups = this.compileInitUnorderedGroups(it, options);
-        _builder.append(_compileInitUnorderedGroups, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("@after {");
-        _builder.newLine();
-        _builder.append("\t");
-        CharSequence _compileRestoreHiddenTokens = this.compileRestoreHiddenTokens(it, options);
-        _builder.append(_compileRestoreHiddenTokens, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        CharSequence _compileRestoreUnorderedGroups = this.compileRestoreUnorderedGroups(it, options);
-        _builder.append(_compileRestoreUnorderedGroups, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-      }
-    }
-    return _builder.toString();
-  }
-  
-  @Override
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {

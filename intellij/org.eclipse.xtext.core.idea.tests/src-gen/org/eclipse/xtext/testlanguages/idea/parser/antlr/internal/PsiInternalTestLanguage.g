@@ -56,10 +56,7 @@ entryRuleEntryRule:
 	EOF;
 
 // Rule EntryRule
-ruleEntryRule@init {
-}
-@after {
-}:
+ruleEntryRule:
 	(
 		(
 			{
@@ -81,10 +78,7 @@ entryRuleAbstractRule:
 	EOF;
 
 // Rule AbstractRule
-ruleAbstractRule@init {
-}
-@after {
-}:
+ruleAbstractRule:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractRule_ChoiceRuleParserRuleCall_0ElementType());
@@ -112,10 +106,7 @@ entryRuleChoiceRule:
 	EOF;
 
 // Rule ChoiceRule
-ruleChoiceRule@init {
-}
-@after {
-}:
+ruleChoiceRule:
 	(
 		{
 			markLeaf();
@@ -157,10 +148,7 @@ entryRuleReducibleRule:
 	EOF;
 
 // Rule ReducibleRule
-ruleReducibleRule@init {
-}
-@after {
-}:
+ruleReducibleRule:
 	(
 		{
 			markLeaf();
@@ -206,10 +194,7 @@ entryRuleTerminalRule:
 	EOF;
 
 // Rule TerminalRule
-ruleTerminalRule@init {
-}
-@after {
-}:
+ruleTerminalRule:
 	(
 		(
 			{

@@ -64,10 +64,7 @@ entryRuleDelegateModel:
 	EOF;
 
 // Rule DelegateModel
-ruleDelegateModel@init {
-}
-@after {
-}:
+ruleDelegateModel:
 	{
 		/* */
 	}
@@ -88,10 +85,7 @@ entryRuleModel:
 	EOF;
 
 // Rule Model
-ruleModel@init {
-}
-@after {
-}:
+ruleModel:
 	(
 		(
 			(
@@ -138,9 +132,6 @@ ruleUnit@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getUnitAccess().getUnorderedGroup_7()
 	);
-}
-@after {
-	myUnorderedGroupState.restore();
 }:
 	(
 		(
@@ -513,6 +504,9 @@ ruleUnit@init {
 		}
 	)
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 //Entry rule entryRuleProvidedCapability
 entryRuleProvidedCapability@init {
@@ -533,9 +527,6 @@ ruleProvidedCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1()
 	);
-}
-@after {
-	myUnorderedGroupState.restore();
 }:
 	(
 		(
@@ -730,6 +721,9 @@ ruleProvidedCapability@init {
 		)?
 	)
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 //Entry rule entryRuleAliasedRequiredCapability
 entryRuleAliasedRequiredCapability@init {
@@ -750,9 +744,6 @@ ruleAliasedRequiredCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1()
 	);
-}
-@after {
-	myUnorderedGroupState.restore();
 }:
 	(
 		(
@@ -1040,6 +1031,9 @@ ruleAliasedRequiredCapability@init {
 		)
 	)
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 //Entry rule entryRuleRequiredCapability
 entryRuleRequiredCapability@init {
@@ -1060,9 +1054,6 @@ ruleRequiredCapability@init {
 	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 	grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1()
 	);
-}
-@after {
-	myUnorderedGroupState.restore();
 }:
 	(
 		(
@@ -1339,6 +1330,9 @@ ruleRequiredCapability@init {
 		)
 	)
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 //Entry rule entryRulePath
 entryRulePath@init {
@@ -1355,9 +1349,6 @@ finally {
 // Rule Path
 rulePath@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -1413,6 +1404,9 @@ rulePath@init {
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 //Entry rule entryRuleParameterList
 entryRuleParameterList:
@@ -1422,10 +1416,7 @@ entryRuleParameterList:
 	EOF;
 
 // Rule ParameterList
-ruleParameterList@init {
-}
-@after {
-}:
+ruleParameterList:
 	(
 		(
 			(
@@ -1469,10 +1460,7 @@ entryRuleFirstParameter:
 	EOF;
 
 // Rule FirstParameter
-ruleFirstParameter@init {
-}
-@after {
-}:
+ruleFirstParameter:
 	(
 		{
 			/* */
@@ -1506,10 +1494,7 @@ entryRuleParameter:
 	EOF;
 
 // Rule Parameter
-ruleParameter@init {
-}
-@after {
-}:
+ruleParameter:
 	(
 		(
 			{
@@ -1531,10 +1516,7 @@ entryRuleClosureParameter:
 	EOF;
 
 // Rule ClosureParameter
-ruleClosureParameter@init {
-}
-@after {
-}:
+ruleClosureParameter:
 	(
 		(
 			{
@@ -1556,10 +1538,7 @@ entryRuleParameterDeclaration:
 	EOF;
 
 // Rule ParameterDeclaration
-ruleParameterDeclaration@init {
-}
-@after {
-}:
+ruleParameterDeclaration:
 	(
 		(
 			(
@@ -1594,10 +1573,7 @@ entryRuleFunction:
 	EOF;
 
 // Rule Function
-ruleFunction@init {
-}
-@after {
-}:
+ruleFunction:
 	(
 		(
 			(
@@ -1840,10 +1816,7 @@ entryRuleGuardExpression:
 	EOF;
 
 // Rule GuardExpression
-ruleGuardExpression@init {
-}
-@after {
-}:
+ruleGuardExpression:
 	(
 		(
 			{
@@ -1895,10 +1868,7 @@ entryRuleAssignmentOperator:
 	EOF;
 
 // Rule AssignmentOperator
-ruleAssignmentOperator@init {
-}
-@after {
-}:
+ruleAssignmentOperator:
 	(
 		{
 			markLeaf();
@@ -1958,10 +1928,7 @@ entryRuleRelationalOperator:
 	EOF;
 
 // Rule RelationalOperator
-ruleRelationalOperator@init {
-}
-@after {
-}:
+ruleRelationalOperator:
 	(
 		{
 			markLeaf();
@@ -2045,10 +2012,7 @@ entryRuleTopLevelExpression:
 	EOF;
 
 // Rule TopLevelExpression
-ruleTopLevelExpression@init {
-}
-@after {
-}:
+ruleTopLevelExpression:
 	(
 		{
 			/* */
@@ -2093,10 +2057,7 @@ entryRuleExpression:
 	EOF;
 
 // Rule Expression
-ruleExpression@init {
-}
-@after {
-}:
+ruleExpression:
 	{
 		/* */
 	}
@@ -2117,10 +2078,7 @@ entryRuleAssignmentExpression:
 	EOF;
 
 // Rule AssignmentExpression
-ruleAssignmentExpression@init {
-}
-@after {
-}:
+ruleAssignmentExpression:
 	(
 		{
 			/* */
@@ -2176,10 +2134,7 @@ entryRuleVarDeclaration:
 	EOF;
 
 // Rule VarDeclaration
-ruleVarDeclaration@init {
-}
-@after {
-}:
+ruleVarDeclaration:
 	(
 		(
 			{
@@ -2266,10 +2221,7 @@ entryRuleValDeclaration:
 	EOF;
 
 // Rule ValDeclaration
-ruleValDeclaration@init {
-}
-@after {
-}:
+ruleValDeclaration:
 	(
 		(
 			{
@@ -2353,10 +2305,7 @@ entryRuleTypeRef:
 	EOF;
 
 // Rule TypeRef
-ruleTypeRef@init {
-}
-@after {
-}:
+ruleTypeRef:
 	(
 		{
 			/* */
@@ -2390,10 +2339,7 @@ entryRuleSimpleTypeRef:
 	EOF;
 
 // Rule SimpleTypeRef
-ruleSimpleTypeRef@init {
-}
-@after {
-}:
+ruleSimpleTypeRef:
 	(
 		(
 			(
@@ -2464,10 +2410,7 @@ entryRuleClosureTypeRef:
 	EOF;
 
 // Rule ClosureTypeRef
-ruleClosureTypeRef@init {
-}
-@after {
-}:
+ruleClosureTypeRef:
 	(
 		{
 			markLeaf();
@@ -2603,10 +2546,7 @@ entryRuleCachedExpression:
 	EOF;
 
 // Rule CachedExpression
-ruleCachedExpression@init {
-}
-@after {
-}:
+ruleCachedExpression:
 	(
 		(
 			(
@@ -2659,10 +2599,7 @@ entryRuleOrExpression:
 	EOF;
 
 // Rule OrExpression
-ruleOrExpression@init {
-}
-@after {
-}:
+ruleOrExpression:
 	(
 		{
 			/* */
@@ -2714,10 +2651,7 @@ entryRuleAndExpression:
 	EOF;
 
 // Rule AndExpression
-ruleAndExpression@init {
-}
-@after {
-}:
+ruleAndExpression:
 	(
 		{
 			/* */
@@ -2769,10 +2703,7 @@ entryRuleRelationalExpression:
 	EOF;
 
 // Rule RelationalExpression
-ruleRelationalExpression@init {
-}
-@after {
-}:
+ruleRelationalExpression:
 	(
 		{
 			/* */
@@ -2828,10 +2759,7 @@ entryRuleAdditiveExpression:
 	EOF;
 
 // Rule AdditiveExpression
-ruleAdditiveExpression@init {
-}
-@after {
-}:
+ruleAdditiveExpression:
 	(
 		{
 			/* */
@@ -2897,10 +2825,7 @@ entryRuleMultiplicativeExpression:
 	EOF;
 
 // Rule MultiplicativeExpression
-ruleMultiplicativeExpression@init {
-}
-@after {
-}:
+ruleMultiplicativeExpression:
 	(
 		{
 			/* */
@@ -2974,10 +2899,7 @@ entryRuleSetExpression:
 	EOF;
 
 // Rule SetExpression
-ruleSetExpression@init {
-}
-@after {
-}:
+ruleSetExpression:
 	(
 		{
 			/* */
@@ -3033,10 +2955,7 @@ entryRuleUnaryOrInfixExpression:
 	EOF;
 
 // Rule UnaryOrInfixExpression
-ruleUnaryOrInfixExpression@init {
-}
-@after {
-}:
+ruleUnaryOrInfixExpression:
 	(
 		{
 			/* */
@@ -3081,10 +3000,7 @@ entryRuleUnaryExpression:
 	EOF;
 
 // Rule UnaryExpression
-ruleUnaryExpression@init {
-}
-@after {
-}:
+ruleUnaryExpression:
 	(
 		(
 			{
@@ -3138,10 +3054,7 @@ entryRulePreopExpression:
 	EOF;
 
 // Rule PreopExpression
-rulePreopExpression@init {
-}
-@after {
-}:
+rulePreopExpression:
 	(
 		(
 			{
@@ -3195,10 +3108,7 @@ entryRulePostopExpression:
 	EOF;
 
 // Rule PostopExpression
-rulePostopExpression@init {
-}
-@after {
-}:
+rulePostopExpression:
 	(
 		{
 			/* */
@@ -3253,10 +3163,7 @@ entryRuleInfixExpression:
 	EOF;
 
 // Rule InfixExpression
-ruleInfixExpression@init {
-}
-@after {
-}:
+ruleInfixExpression:
 	(
 		{
 			/* */
@@ -3402,10 +3309,7 @@ entryRuleCallExpression:
 	EOF;
 
 // Rule CallExpression
-ruleCallExpression@init {
-}
-@after {
-}:
+ruleCallExpression:
 	(
 		{
 			/* */
@@ -3464,10 +3368,7 @@ entryRulePrimaryExpression:
 	EOF;
 
 // Rule PrimaryExpression
-rulePrimaryExpression@init {
-}
-@after {
-}:
+rulePrimaryExpression:
 	(
 		{
 			/* */
@@ -3578,10 +3479,7 @@ entryRuleWithExpression:
 	EOF;
 
 // Rule WithExpression
-ruleWithExpression@init {
-}
-@after {
-}:
+ruleWithExpression:
 	(
 		{
 			markLeaf();
@@ -3684,10 +3582,7 @@ entryRuleWithContextExpression:
 	EOF;
 
 // Rule WithContextExpression
-ruleWithContextExpression@init {
-}
-@after {
-}:
+ruleWithContextExpression:
 	(
 		{
 			markLeaf();
@@ -3756,10 +3651,7 @@ entryRuleBlockExpression:
 	EOF;
 
 // Rule BlockExpression
-ruleBlockExpression@init {
-}
-@after {
-}:
+ruleBlockExpression:
 	(
 		(
 			{
@@ -3815,10 +3707,7 @@ entryRuleValue:
 	EOF;
 
 // Rule Value
-ruleValue@init {
-}
-@after {
-}:
+ruleValue:
 	(
 		(
 			{
@@ -3851,10 +3740,7 @@ entryRuleKeywordVariables:
 	EOF;
 
 // Rule KeywordVariables
-ruleKeywordVariables@init {
-}
-@after {
-}:
+ruleKeywordVariables:
 	(
 		(
 			{
@@ -3937,10 +3823,7 @@ entryRuleFeatureCall:
 	EOF;
 
 // Rule FeatureCall
-ruleFeatureCall@init {
-}
-@after {
-}:
+ruleFeatureCall:
 	{
 		/* */
 	}
@@ -3961,10 +3844,7 @@ entryRuleOperationCall:
 	EOF;
 
 // Rule OperationCall
-ruleOperationCall@init {
-}
-@after {
-}:
+ruleOperationCall:
 	(
 		(
 			{
@@ -4022,10 +3902,7 @@ entryRuleConstructorCallExpression:
 	EOF;
 
 // Rule ConstructorCallExpression
-ruleConstructorCallExpression@init {
-}
-@after {
-}:
+ruleConstructorCallExpression:
 	(
 		(
 			{
@@ -4123,10 +4000,7 @@ entryRuleInitializationBlockExpression:
 	EOF;
 
 // Rule InitializationBlockExpression
-ruleInitializationBlockExpression@init {
-}
-@after {
-}:
+ruleInitializationBlockExpression:
 	(
 		(
 			{
@@ -4180,10 +4054,7 @@ entryRuleInitializationExpression:
 	EOF;
 
 // Rule InitializationExpression
-ruleInitializationExpression@init {
-}
-@after {
-}:
+ruleInitializationExpression:
 	(
 		(
 			{
@@ -4238,10 +4109,7 @@ entryRuleFeatureOfThis:
 	EOF;
 
 // Rule FeatureOfThis
-ruleFeatureOfThis@init {
-}
-@after {
-}:
+ruleFeatureOfThis:
 	(
 		(
 			{
@@ -4274,10 +4142,7 @@ entryRuleLiteral:
 	EOF;
 
 // Rule Literal
-ruleLiteral@init {
-}
-@after {
-}:
+ruleLiteral:
 	(
 		{
 			/* */
@@ -4311,10 +4176,7 @@ entryRuleLiteralFunction:
 	EOF;
 
 // Rule LiteralFunction
-ruleLiteralFunction@init {
-}
-@after {
-}:
+ruleLiteralFunction:
 	(
 		{
 			markLeaf();
@@ -4351,10 +4213,7 @@ entryRuleClosureExpression:
 	EOF;
 
 // Rule ClosureExpression
-ruleClosureExpression@init {
-}
-@after {
-}:
+ruleClosureExpression:
 	(
 		(
 			{
@@ -4523,10 +4382,7 @@ entryRuleOneOrManyExpressions:
 	EOF;
 
 // Rule OneOrManyExpressions
-ruleOneOrManyExpressions@init {
-}
-@after {
-}:
+ruleOneOrManyExpressions:
 	(
 		{
 			/* */
@@ -4560,10 +4416,7 @@ entryRuleBlockExpressionWithoutBrackets:
 	EOF;
 
 // Rule BlockExpressionWithoutBrackets
-ruleBlockExpressionWithoutBrackets@init {
-}
-@after {
-}:
+ruleBlockExpressionWithoutBrackets:
 	(
 		(
 			{
@@ -4605,10 +4458,7 @@ entryRuleValueLiteral:
 	EOF;
 
 // Rule ValueLiteral
-ruleValueLiteral@init {
-}
-@after {
-}:
+ruleValueLiteral:
 	(
 		(
 			{
@@ -4630,10 +4480,7 @@ entryRuleParanthesizedExpression:
 	EOF;
 
 // Rule ParanthesizedExpression
-ruleParanthesizedExpression@init {
-}
-@after {
-}:
+ruleParanthesizedExpression:
 	(
 		{
 			markLeaf();
@@ -4677,9 +4524,6 @@ finally {
 // Rule QID
 ruleQID@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	myHiddenTokenState.restore();
 }:
 	(
 		{
@@ -4757,6 +4601,9 @@ ruleQID@init {
 		)*
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 RULE_DOCUMENTATION : '/**' ( options {greedy=false;} : . )*'*/';
 

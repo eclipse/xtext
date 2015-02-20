@@ -8,8 +8,11 @@
 package org.eclipse.xtext.idea.tests.parsing
 
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.resource.XtextResource
 
 interface ModelChecker {
+	
+	def XtextResource checkResource(String code, boolean validate)
 	
 	def <T extends EObject> T checkModel(String code, boolean validate)
 	
