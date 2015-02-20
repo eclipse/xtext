@@ -295,8 +295,10 @@ public class XtextLinker extends Linker {
 						if (unloader != null) {
 							resourcesToUnload.removeAll(referencedResources);
 							for (Resource resource : resourcesToUnload) {
-								for (EObject content : resource.getContents())
-									unloader.unloadRoot(content);
+								if(resource.getResourceSet() == set) {
+									for (EObject content : resource.getContents())
+										unloader.unloadRoot(content);
+								}
 							}
 						}
 						set.getResources().removeAll(resourcesToRemove);
@@ -317,7 +319,7 @@ public class XtextLinker extends Linker {
 					if (packResource != null) {
 						resourcesToRemove.add(packResource);
 						if (declaration instanceof ReferencedMetamodel) {
-							resourcesToUnload.add(packResource);
+								resourcesToUnload.add(packResource);
 						}
 						if (isPackageReferenced(resourceSet, pack, declarations)) {
 							referencedResources.add(packResource);
