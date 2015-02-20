@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.tests.java8.javaconverter;
 
 import org.eclipse.xtend.core.tests.javaconverter.JavaConverterTest;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -42,5 +44,33 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.append("}");
     String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(_builder_1);
     Assert.assertEquals(_string, _xtendClassBodyDeclr);
+  }
+  
+  /**
+   * Need a possibility to set java compliance level on JavaConverter first
+   */
+  @Test
+  @Ignore
+  public void testDefaultMethode() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public interface XtendInterfaze {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public default String foo() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return \"- Hi, I\\\'m a default impl\";");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public abstract String baar();");
+    _builder.newLine();
+    _builder.append("}");
+    final XtendInterface clazz = this.toValidXtendInterface(_builder.toString());
+    Assert.assertNotNull(clazz);
   }
 }

@@ -218,7 +218,18 @@ public class JavaASTFlattener extends ASTVisitor {
     final Function1<IExtendedModifier, Boolean> _function_2 = new Function1<IExtendedModifier, Boolean>() {
       @Override
       public Boolean apply(final IExtendedModifier it) {
-        return Boolean.valueOf(it.isModifier());
+        boolean _and = false;
+        boolean _isModifier = it.isModifier();
+        if (!_isModifier) {
+          _and = false;
+        } else {
+          Modifier.ModifierKeyword _keyword = ((Modifier) it).getKeyword();
+          String _string = _keyword.toString();
+          boolean _equals = "default".equals(_string);
+          boolean _not = (!_equals);
+          _and = _not;
+        }
+        return Boolean.valueOf(_and);
       }
     };
     Iterable<IExtendedModifier> _filter_1 = IterableExtensions.<IExtendedModifier>filter(ext, _function_2);

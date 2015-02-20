@@ -176,7 +176,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (callBack != null) {
 			callBack.apply(node)
 		}
-		ext.filter[IExtendedModifier it|isModifier].forEach(appender)
+		ext.filter[IExtendedModifier it|isModifier && !"default".equals((it as Modifier).keyword.toString)].forEach(appender)
 	}
 
 	def private appendSpaceToBuffer() {
