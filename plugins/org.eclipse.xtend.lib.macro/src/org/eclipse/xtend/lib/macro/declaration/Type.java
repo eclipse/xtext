@@ -17,7 +17,7 @@ import com.google.common.annotations.Beta;
 public interface Type extends NamedElement {
 	
 	/**
-	 * Returns the qualified name of this type declaration. Nested types use the '$' char as the
+	 * Returns the qualified name of this type declaration. Nested types use the '.' char as the
 	 * inner class delimiter.
 	 * @return the qualified name of this type declaration.
 	 */
