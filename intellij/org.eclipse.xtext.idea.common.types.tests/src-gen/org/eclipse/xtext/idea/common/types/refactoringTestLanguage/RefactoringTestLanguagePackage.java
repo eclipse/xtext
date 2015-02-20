@@ -38,7 +38,7 @@ public interface RefactoringTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring";
+  String eNS_URI = "http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring";
 
   /**
    * The package namespace name.

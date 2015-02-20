@@ -8,7 +8,7 @@
     editorPluginID="org.eclipse.xtext.idea.common.types.tests.editor" runtimeVersion="2.9"
     usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="RefactoringTestLanguage" basePackage="org.eclipse.xtext.idea.common.types"
-      disposableProviderFactory="true" fileExtensions="typesRefactoring" ecorePackage="RefactoringTestLanguage.ecore#/">
+      disposableProviderFactory="true" fileExtensions="ideaTypesRefactoring" ecorePackage="RefactoringTestLanguage.ecore#/">
     <genClasses ecoreClass="RefactoringTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RefactoringTestLanguage.ecore#//Model/referenceHolder"/>
     </genClasses>

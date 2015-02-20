@@ -10,7 +10,7 @@ public final class RefactoringTestLanguageFileType extends LanguageFileType {
 	public static final RefactoringTestLanguageFileType INSTANCE = new RefactoringTestLanguageFileType();
 	
 	@NonNls 
-	public static final String DEFAULT_EXTENSION = "typesRefactoring";
+	public static final String DEFAULT_EXTENSION = "ideaTypesRefactoring";
 
 	private RefactoringTestLanguageFileType() {
 		super(RefactoringTestLanguageLanguage.INSTANCE);

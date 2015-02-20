@@ -5,7 +5,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring" 
+       uri = "http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring" 
        class = "org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage"
        genModel = "org/eclipse/xtext/idea/common/types/RefactoringTestLanguage.genmodel" /> 
 	
@@ -222,13 +222,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.xtext.idea.common.types.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="typesRefactoring">
+			type="ideaTypesRefactoring">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.xtext.idea.common.types.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="typesRefactoring">
+            uriExtension="ideaTypesRefactoring">
         </resourceServiceProvider>
     </extension>
 
