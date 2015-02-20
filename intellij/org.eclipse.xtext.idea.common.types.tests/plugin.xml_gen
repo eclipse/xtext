@@ -5,7 +5,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring" 
+       uri = "http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring" 
        class = "org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage"
        genModel = "org/eclipse/xtext/idea/common/types/RefactoringTestLanguage.genmodel" /> 
 	

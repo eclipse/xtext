@@ -15,7 +15,7 @@ var backtrack = false
 var memoize = false
 var emfRuntimeVersion = "2.9"
 var grammarURI = "classpath:/org/eclipse/xtext/idea/common/types/RefactoringTestLanguage.xtext"
-var fileExtensions = "typesRefactoring"
+var fileExtensions = "ideaTypesRefactoring"
 var projectName = "org.eclipse.xtext.idea.common.types.tests"
 var runtimeProject = "../${projectName}"
 

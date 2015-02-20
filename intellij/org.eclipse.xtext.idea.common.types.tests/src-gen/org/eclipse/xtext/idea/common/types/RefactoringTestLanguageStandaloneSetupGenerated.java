@@ -30,14 +30,14 @@ public class RefactoringTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring", org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring", org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("typesRefactoring", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("typesRefactoring", serviceProvider);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ideaTypesRefactoring", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ideaTypesRefactoring", serviceProvider);
 		
 
 	}

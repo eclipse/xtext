@@ -7,7 +7,7 @@
 *******************************************************************************/
 grammar org.eclipse.xtext.idea.common.types.RefactoringTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate refactoringTestLanguage "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring"
+generate refactoringTestLanguage "http://www.eclipse.org/2011/xtext/idea/ui/common/types/xtext/ui/Refactoring"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 Model:
