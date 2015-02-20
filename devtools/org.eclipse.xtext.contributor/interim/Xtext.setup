@@ -275,6 +275,12 @@
       <requirement
           name="org.junit"
           versionRange="4.11.0"/>
+      <requirement
+          name="org.eclipse.jdt.java8patch.feature.group"
+          optional="true"/>
+      <requirement
+          name="org.eclipse.pde.java8patch.feature.group"
+          optional="true"/>
       <repositoryList
           name="Mars">
         <repository
@@ -325,6 +331,8 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.3-P-builds/"/>
       </repositoryList>
       <repositoryList
           name="Juno">
