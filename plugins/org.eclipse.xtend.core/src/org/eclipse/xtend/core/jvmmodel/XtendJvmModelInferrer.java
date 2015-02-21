@@ -584,6 +584,8 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		operation.setSimpleName(sourceName);
 		operation.setVisibility(visibility);
 		operation.setStatic(source.isStatic());
+		if (!operation.isAbstract() && !operation.isStatic() && container.isInterface())
+			operation.setDefault(true);
 		for (XtendParameter parameter : source.getParameters()) {
 			translateParameter(operation, parameter);
 		}

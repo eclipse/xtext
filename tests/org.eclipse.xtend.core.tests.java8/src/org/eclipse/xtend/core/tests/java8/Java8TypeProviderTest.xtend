@@ -17,6 +17,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtend.core.xtend.XtendFile
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -27,33 +29,36 @@ class Java8TypeProviderTest {
 	
 	@Inject IJvmTypeProvider.Factory typeProviderFactory;
 	
+	@Inject ParseHelper<XtendFile> parseHelper
+	
 	@Test def testDefaultJavaMethod() {
-		doTestMethods(JavaInterface)		
+		val typeProvider = typeProviderFactory.createTypeProvider
+		val intf = typeProvider.findTypeByName(JavaInterface.canonicalName) as JvmGenericType
+		doTestMethods(intf)		
 	}
 	@Test def testDefaultXtendMethod() {
-		doTestMethods(XtendInterface)
+		val file = parseHelper.parse('''
+			interface XtendInterface {
+				def void defaultMethod() {} 
+				static def void staticMethod() {}
+			}
+		''')
+		val intf = file.eResource.contents.last as JvmGenericType
+		doTestMethods(intf)
 	}
 
-	protected def doTestMethods(Class<?> type) {
-		val typeProvider = typeProviderFactory.createTypeProvider
-		val intf = typeProvider.findTypeByName(type.canonicalName)
-		assertTrue(intf instanceof JvmGenericType)
-		val staticMethod = (intf as JvmGenericType).members.filter(JvmOperation).filter[simpleName=='staticMethod'].head
+	protected def doTestMethods(JvmGenericType intf) {
+		val staticMethod = intf.members.filter(JvmOperation).filter[simpleName=='staticMethod'].head
 		assertNotNull(staticMethod)
 		assertFalse((staticMethod).abstract)
 		assertTrue((staticMethod).^static)
 		assertFalse((staticMethod).^default)
 
-		val defaultMethod = (intf as JvmGenericType).members.filter(JvmOperation).filter[simpleName=='defaultMethod'].head
+		val defaultMethod = intf.members.filter(JvmOperation).filter[simpleName=='defaultMethod'].head
 		assertNotNull(defaultMethod)
 		assertFalse((defaultMethod).abstract)
 		assertFalse((defaultMethod).^static)
-		// TODO fails, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=427298
-		//assertTrue((defaultMethod).^default)
+		assertTrue((defaultMethod).^default)
 	} 
 }
 
-interface XtendInterface {
-	def void defaultMethod() {} 
-	static def void staticMethod() {}
-}
