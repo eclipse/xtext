@@ -138,20 +138,21 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   
   private JvmDeclaredType findRecursively(final String string, final Iterable<? extends JvmDeclaredType> types) {
     for (final JvmDeclaredType type : types) {
-      String _identifier = type.getIdentifier();
-      boolean _startsWith = string.startsWith(_identifier);
-      if (_startsWith) {
-        String _identifier_1 = type.getIdentifier();
-        boolean _equals = Objects.equal(string, _identifier_1);
+      {
+        final String candidateQualifiedName = type.getQualifiedName('.');
+        boolean _equals = Objects.equal(string, candidateQualifiedName);
         if (_equals) {
           return type;
         }
-        EList<JvmMember> _members = type.getMembers();
-        Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
-        final JvmDeclaredType result = this.findRecursively(string, _filter);
-        boolean _notEquals = (!Objects.equal(result, null));
-        if (_notEquals) {
-          return result;
+        boolean _startsWith = string.startsWith(candidateQualifiedName);
+        if (_startsWith) {
+          EList<JvmMember> _members = type.getMembers();
+          Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
+          final JvmDeclaredType result = this.findRecursively(string, _filter);
+          boolean _notEquals = (!Objects.equal(result, null));
+          if (_notEquals) {
+            return result;
+          }
         }
       }
     }

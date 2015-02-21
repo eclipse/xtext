@@ -272,13 +272,25 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     try {
       IProject _project = it.getProject();
       final IFile result = _project.getFile(("src/" + fileName));
-      IContainer parent = result.getParent();
-      while ((!parent.exists())) {
-        ((IFolder) parent).create(true, false, null);
-      }
+      IContainer _parent = result.getParent();
+      this.createIfNotExistent(_parent);
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);
       return result;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void createIfNotExistent(final IContainer container) {
+    try {
+      boolean _exists = container.exists();
+      boolean _not = (!_exists);
+      if (_not) {
+        IContainer _parent = container.getParent();
+        this.createIfNotExistent(_parent);
+        ((IFolder) container).create(true, false, null);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

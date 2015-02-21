@@ -36,6 +36,7 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.eclipse.core.resources.IContainer
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -148,12 +149,16 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 
 	def IFile newSource(IJavaProject it, String fileName, String contents) {
 		val result = it.project.getFile("src/" + fileName)
-		var parent = result.parent
-		while (!parent.exists) {
-			(parent as IFolder).create(true, false, null)
-		}
+		createIfNotExistent(result.parent)
 		result.create(new StringInputStream(contents), true, null)
 		return result
+	}
+	
+	private def void createIfNotExistent(IContainer container) {
+		if (!container.exists) {
+			createIfNotExistent(container.parent)
+			(container as IFolder).create(true, false, null)
+		}
 	}
 
 	def void addExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {

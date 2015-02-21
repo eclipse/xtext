@@ -85,6 +85,104 @@ public abstract class AbstractReusableActiveAnnotationTests {
   private ILogicalContainerProvider logicalContainerProvider;
   
   @Test
+  public void testBug453273() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package annotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.ElementType");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.Target");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Target(ElementType.TYPE)");
+    _builder.newLine();
+    _builder.append("@Active(AddNestedTypesProcessor)");
+    _builder.newLine();
+    _builder.append("annotation AddNestedTypes {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class AddNestedTypesProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("override doRegisterGlobals(ClassDeclaration it, RegisterGlobalsContext registerGlobalsContext) {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("registerGlobalsContext.registerClass(qualifiedName + \".NestedType\")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("registerGlobalsContext.registerClass(qualifiedName + \".NestedType.NestedType2\")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("registerGlobalsContext.registerClass(packageName + \".OtherTopLevelClass\")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("registerGlobalsContext.registerClass(packageName + \".OtherTopLevelClass.NestedType\")");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def String getPackageName(ClassDeclaration it) {");
+    _builder.newLine();
+    _builder.append("   \t  ");
+    _builder.append("qualifiedName.substring(0,qualifiedName.lastIndexOf(\'.\'))");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("annotation/AddNestedTypes.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package my.client");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@annotation.AddNestedTypes");
+    _builder_1.newLine();
+    _builder_1.append("class TopLevelClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("my/client/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
+      public void apply(final CompilationUnitImpl it) {
+        XtendFile _xtendFile = it.getXtendFile();
+        AbstractReusableActiveAnnotationTests.this.validator.assertNoErrors(_xtendFile);
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        MutableClassDeclaration _findClass = _typeLookup.findClass("my.client.TopLevelClass");
+        Assert.assertNotNull(_findClass);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("my.client.TopLevelClass.NestedType");
+        Assert.assertNotNull(_findClass_1);
+        TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("my.client.TopLevelClass.NestedType.NestedType2");
+        Assert.assertNotNull(_findClass_2);
+        TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_3 = _typeLookup_3.findClass("my.client.OtherTopLevelClass");
+        Assert.assertNotNull(_findClass_3);
+        TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_4 = _typeLookup_4.findClass("my.client.OtherTopLevelClass.NestedType");
+        Assert.assertNotNull(_findClass_4);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testBug441081() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package bug441081");
