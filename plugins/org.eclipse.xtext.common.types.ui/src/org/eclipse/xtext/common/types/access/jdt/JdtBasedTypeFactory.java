@@ -1079,6 +1079,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			int length = qualifiedName.length();
 			InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
 			String[] subpath = subpath(path);
+			boolean intf = typeBinding.isInterface() && !typeBinding.isAnnotation();
 			for (IMethodBinding method : declaredMethods) {
 				if (!method.isSynthetic() && !"<clinit>".equals(method.getName())) {
 					if (method.isConstructor()) {
@@ -1087,6 +1088,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 						JvmOperation operation = createOperation(qualifiedName, handleIdentifier, subpath, method);
 						if (typeBinding.isAnnotation()) {
 							setDefaultValue(operation, method);
+						} else if (intf && !operation.isAbstract() && !operation.isStatic()) {
+							operation.setDefault(true);
 						}
 						members.addUnique(operation);
 					}
