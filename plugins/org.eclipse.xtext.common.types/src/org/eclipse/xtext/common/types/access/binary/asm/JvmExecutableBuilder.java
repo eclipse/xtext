@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -84,6 +85,11 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 			operation.setSynchronized((access & ACC_SYNCHRONIZED) != 0);
 			operation.setStrictFloatingPoint((access & ACC_STRICT) != 0);
 			operation.setNative((access & ACC_NATIVE) != 0);
+			if (declarator.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) declarator).isInterface()) {
+				if (!operation.isAbstract() && !operation.isStatic()) {
+					operation.setDefault(true);
+				}
+			}
 		}
 		proxies.setVisibility(access, result);
 		

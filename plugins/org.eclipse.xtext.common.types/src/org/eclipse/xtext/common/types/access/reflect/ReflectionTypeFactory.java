@@ -444,12 +444,15 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 		try {
 			Method[] declaredMethods = clazz.getDeclaredMethods();
 			if (declaredMethods.length != 0) {
+				boolean intf = clazz.isInterface() && !clazz.isAnnotation();
 				InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
 				for (Method method : declaredMethods) {
 					if (!method.isSynthetic()) {
 						JvmOperation operation = createOperation(method);
 						if (clazz.isAnnotation()) {
 							setDefaultValue(operation, method);
+						} else if (intf && !operation.isAbstract() && !operation.isStatic()) {
+							operation.setDefault(true);
 						}
 						members.addUnique(operation);
 					}

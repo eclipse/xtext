@@ -11,9 +11,12 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.java8.JavaInterface;
-import org.eclipse.xtend.core.tests.java8.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -21,6 +24,8 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -37,22 +42,45 @@ public class Java8TypeProviderTest {
   @Inject
   private IJvmTypeProvider.Factory typeProviderFactory;
   
+  @Inject
+  private ParseHelper<XtendFile> parseHelper;
+  
   @Test
   public void testDefaultJavaMethod() {
-    this.doTestMethods(JavaInterface.class);
+    final IJvmTypeProvider typeProvider = this.typeProviderFactory.createTypeProvider();
+    String _canonicalName = JavaInterface.class.getCanonicalName();
+    JvmType _findTypeByName = typeProvider.findTypeByName(_canonicalName);
+    final JvmGenericType intf = ((JvmGenericType) _findTypeByName);
+    this.doTestMethods(intf);
   }
   
   @Test
   public void testDefaultXtendMethod() {
-    this.doTestMethods(XtendInterface.class);
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface XtendInterface {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void defaultMethod() {} ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static def void staticMethod() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parseHelper.parse(_builder);
+      Resource _eResource = file.eResource();
+      EList<EObject> _contents = _eResource.getContents();
+      EObject _last = IterableExtensions.<EObject>last(_contents);
+      final JvmGenericType intf = ((JvmGenericType) _last);
+      this.doTestMethods(intf);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
-  protected void doTestMethods(final Class<?> type) {
-    final IJvmTypeProvider typeProvider = this.typeProviderFactory.createTypeProvider();
-    String _canonicalName = type.getCanonicalName();
-    final JvmType intf = typeProvider.findTypeByName(_canonicalName);
-    Assert.assertTrue((intf instanceof JvmGenericType));
-    EList<JvmMember> _members = ((JvmGenericType) intf).getMembers();
+  protected void doTestMethods(final JvmGenericType intf) {
+    EList<JvmMember> _members = intf.getMembers();
     Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
@@ -67,7 +95,7 @@ public class Java8TypeProviderTest {
     Assert.assertTrue(_isStatic);
     boolean _isDefault = staticMethod.isDefault();
     Assert.assertFalse(_isDefault);
-    EList<JvmMember> _members_1 = ((JvmGenericType) intf).getMembers();
+    EList<JvmMember> _members_1 = intf.getMembers();
     Iterable<JvmOperation> _filter_2 = Iterables.<JvmOperation>filter(_members_1, JvmOperation.class);
     final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
@@ -80,5 +108,7 @@ public class Java8TypeProviderTest {
     Assert.assertFalse(_isAbstract_1);
     boolean _isStatic_1 = defaultMethod.isStatic();
     Assert.assertFalse(_isStatic_1);
+    boolean _isDefault_1 = defaultMethod.isDefault();
+    Assert.assertTrue(_isDefault_1);
   }
 }

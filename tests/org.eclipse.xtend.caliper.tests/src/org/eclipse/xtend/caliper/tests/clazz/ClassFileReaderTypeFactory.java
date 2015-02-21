@@ -710,6 +710,7 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		IBinaryMethod[] declaredMethods = classFile.getMethods();
 		if (declaredMethods != null) {
 			InternalEList<JvmMember> members = (InternalEList<JvmMember>) result.getMembers();
+			boolean intf = result.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) result).isInterface();
 			for (int i = 0; i < declaredMethods.length; i++) {
 				IBinaryMethod method = declaredMethods[i];
 				if (!method.isClinit() && !method.isConstructor()) {
@@ -718,6 +719,8 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 						JvmOperation operation = createOperation(method, result, typeParameters);
 						if (result.eClass() == TypesPackage.Literals.JVM_ANNOTATION_TYPE) {
 							setDefaultValue(operation, method);
+						} else if (intf && !operation.isAbstract() && !operation.isStatic()) {
+							operation.setDefault(true);
 						}
 						members.addUnique(operation);
 					}

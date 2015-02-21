@@ -257,6 +257,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	protected def createMethods(JvmDeclaredType it, PsiClass psiClass, StringBuilder fqn) {
+		val intf = psiClass.isInterface && !psiClass.isAnnotationType
 		for (method : psiClass.methods) {
 			fqn.preserve [ |
 				val operation = if (method.constructor) {
@@ -264,6 +265,9 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 					} else {
 						method.createOperation(fqn) => [
 							setDefaultValue(method)
+							if (intf && !abstract && !static) {
+								setDefault(true)
+							}
 						]
 					}
 				members.addUnique(operation)

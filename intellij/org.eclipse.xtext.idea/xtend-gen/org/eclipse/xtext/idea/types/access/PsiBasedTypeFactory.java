@@ -487,6 +487,16 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected StringBuilder createMethods(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     StringBuilder _xblockexpression = null;
     {
+      boolean _and = false;
+      boolean _isInterface = psiClass.isInterface();
+      if (!_isInterface) {
+        _and = false;
+      } else {
+        boolean _isAnnotationType = psiClass.isAnnotationType();
+        boolean _not = (!_isAnnotationType);
+        _and = _not;
+      }
+      final boolean intf = _and;
       PsiMethod[] _methods = psiClass.getMethods();
       for (final PsiMethod method : _methods) {
         final Procedure0 _function = new Procedure0() {
@@ -502,6 +512,25 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
                 @Override
                 public void apply(final JvmOperation it) {
                   PsiBasedTypeFactory.this.setDefaultValue(it, method);
+                  boolean _and = false;
+                  boolean _and_1 = false;
+                  if (!intf) {
+                    _and_1 = false;
+                  } else {
+                    boolean _isAbstract = it.isAbstract();
+                    boolean _not = (!_isAbstract);
+                    _and_1 = _not;
+                  }
+                  if (!_and_1) {
+                    _and = false;
+                  } else {
+                    boolean _isStatic = it.isStatic();
+                    boolean _not_1 = (!_isStatic);
+                    _and = _not_1;
+                  }
+                  if (_and) {
+                    it.setDefault(true);
+                  }
                 }
               };
               _xifexpression = ObjectExtensions.<JvmOperation>operator_doubleArrow(_createOperation, _function);
