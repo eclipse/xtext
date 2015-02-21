@@ -82,10 +82,11 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	private def JvmDeclaredType findRecursively(String string, Iterable<? extends JvmDeclaredType> types) {
 		for (type : types) {
-			if (string.startsWith(type.identifier)) {
-				if (string == type.identifier) {
-					return type;
-				}
+			val candidateQualifiedName= type.getQualifiedName(".")
+			if (string == candidateQualifiedName) {
+				return type;
+			}
+			if (string.startsWith(candidateQualifiedName)) {
 				val result = findRecursively(string, type.members.filter(JvmDeclaredType))
 				if (result != null)
 					return result

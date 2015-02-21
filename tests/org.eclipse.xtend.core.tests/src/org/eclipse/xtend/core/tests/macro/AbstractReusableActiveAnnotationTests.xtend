@@ -35,6 +35,53 @@ abstract class AbstractReusableActiveAnnotationTests {
 	@Inject ValidationTestHelper validator
 	@Inject ILogicalContainerProvider logicalContainerProvider
 	
+	@Test def void testBug453273() {
+		assertProcessing(
+			'annotation/AddNestedTypes.xtend' -> '''
+				package annotation
+				
+				import java.lang.annotation.ElementType
+				import java.lang.annotation.Target
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				
+				@Target(ElementType.TYPE)
+				@Active(AddNestedTypesProcessor)
+				annotation AddNestedTypes {
+				}
+				
+				class AddNestedTypesProcessor extends AbstractClassProcessor {
+				   override doRegisterGlobals(ClassDeclaration it, RegisterGlobalsContext registerGlobalsContext) {
+				      registerGlobalsContext.registerClass(qualifiedName + ".NestedType")
+				      registerGlobalsContext.registerClass(qualifiedName + ".NestedType.NestedType2")
+				      registerGlobalsContext.registerClass(packageName + ".OtherTopLevelClass")
+				      registerGlobalsContext.registerClass(packageName + ".OtherTopLevelClass.NestedType")
+				   }
+				   
+				   def String getPackageName(ClassDeclaration it) {
+				   	  qualifiedName.substring(0,qualifiedName.lastIndexOf('.'))
+				   }
+				}
+			''',
+			'UserCode.xtend' -> '''
+				package my.client
+				
+				@annotation.AddNestedTypes
+				class TopLevelClass {
+				}
+			'''
+		) [
+			validator.assertNoErrors(xtendFile)
+			assertNotNull(typeLookup.findClass("my.client.TopLevelClass"))
+			assertNotNull(typeLookup.findClass("my.client.TopLevelClass.NestedType"))
+			assertNotNull(typeLookup.findClass("my.client.TopLevelClass.NestedType.NestedType2"))
+			assertNotNull(typeLookup.findClass("my.client.OtherTopLevelClass"))
+			assertNotNull(typeLookup.findClass("my.client.OtherTopLevelClass.NestedType"))
+		]
+	}
+	
 	@Test def void testBug441081() {
 		assertProcessing(
 			'bug441081/Bug441081.xtend' -> '''
