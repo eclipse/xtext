@@ -37,14 +37,17 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.ui.generator.ImplicitUiFragment;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -222,13 +225,19 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 					rs.getResources().remove(brokenResource);
 				}
 			}
-			Resource res = rs.getResource(loadedResourceUri, true);
-			if (res == null || res.getContents().isEmpty())
-				LOG.error("Error loading '" + loadedResource + "'");
-			else if (!res.getErrors().isEmpty())
-				LOG.error("Error loading '" + loadedResource + "':\n" + Joiner.on('\n').join(res.getErrors()));
+			rs.getResource(loadedResourceUri, true);
 		}
-		EcoreUtil.resolveAll(rs);
+		if (!rs.getResources().isEmpty()) {
+			installIndex(rs);
+			for(int i = 0, size = rs.getResources().size(); i<size; i++) {
+				Resource res = rs.getResources().get(i);
+				if (res.getContents().isEmpty())
+					LOG.error("Error loading '" + res.getURI() + "'");
+				else if (!res.getErrors().isEmpty())
+					LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()));	
+			}
+			EcoreUtil.resolveAll(rs);
+		}
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
@@ -241,6 +250,26 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		final Grammar grammar = (Grammar) resource.getContents().get(0);
 		validateGrammar(grammar);
 		this.grammar = grammar;
+	}
+	
+	private void installIndex(ResourceSet resourceSet) {
+		// Fill index
+		ResourceDescriptionsData index = new ResourceDescriptionsData(Collections.<IResourceDescription>emptyList());
+		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
+		for (Resource resource : resources) {
+			index(resource, resource.getURI(), index);
+		}
+		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
+	}
+
+	private void index(Resource resource, URI uri, ResourceDescriptionsData index) {
+		IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
+		if (serviceProvider != null) {
+			IResourceDescription resourceDescription = serviceProvider.getResourceDescriptionManager().getResourceDescription(resource);
+			if (resourceDescription != null) {
+				index.addDescription(uri, resourceDescription);
+			}
+		}
 	}
 	
 	/**
