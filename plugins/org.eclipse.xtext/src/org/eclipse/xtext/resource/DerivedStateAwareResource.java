@@ -59,6 +59,14 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public boolean isFullyInitialized() {
 		return fullyInitialized;
 	}
+	
+	/**
+	 * External means to mark a resource as fully initialized, e.g. if it was created programmatically.
+	 * @since 2.8
+	 */
+	public void setFullyInitialized(boolean fullyInitialized) {
+		this.fullyInitialized = fullyInitialized;
+	}
 
 	/**
 	 * <code>true</code> if this resource is currently running its {@link #derivedStateComputer}
