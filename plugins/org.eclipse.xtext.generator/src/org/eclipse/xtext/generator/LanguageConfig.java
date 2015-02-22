@@ -186,7 +186,8 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 				if(resourceServiceProvider == null) {
 					try {
 						Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-						genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(null);
+						Object instance = genModelSupport.newInstance();
+						genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(instance);
 					} catch (ClassNotFoundException e) {
 						LOG.error("Couldn't initialize GenModel support. Is it on the classpath?");
 						LOG.debug(e.getMessage(), e);
