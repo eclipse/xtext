@@ -1,0 +1,21 @@
+@GenModel(modelDirectory="./src-gen")
+
+package org.eclipse.xcoretest.other
+
+import org.eclipse.xcore.test.MyClass1
+import org.eclipse.xcoretest.MyClass2
+import org.eclipse.xcore.test.MyClass3
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.xbase.XExpression
+
+class MyOtherXcoreClazz {
+	contains MyClass2[] eObjs
+	refers JvmType types
+	contains XExpression value
+	
+	op void doSomething(MyClass2 myclazz2) {
+		MyClass1.log
+		MyClass3.log
+		myclazz2.doSomething()
+	}
+}
