@@ -4,7 +4,8 @@
 package org.eclipse.xtext.builder.tests.ui.contentassist;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class BuilderTestLanguageProposalProvider extends AbstractBuilderTestLanguageProposalProvider {
 

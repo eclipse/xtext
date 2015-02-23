@@ -8,7 +8,7 @@ package org.eclipse.xtext.testlanguages.noJdt.ui.labeling
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 class NoJdtTestLanguageDescriptionLabelProvider extends org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider {
 
