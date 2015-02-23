@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<div id="page">  
+	<div class="inner">
+		<div class="container">
+			<br/>
+				<div> 
+					<h3>Table of Contents</h3>
+					<ul>
+						{% for post in site.categories.releasenotes limit:10 %}
+							<li><p><a href="#{{ post.id }}">{{ post.title }} from {{ post.date | date: "%b %-d, %Y" }}</a></p>
+						{% endfor %}
+					</ul>
+				</div>
+				{% for post in site.categories.releasenotes limit:10 %}
+				  <section id="{{ post.id }}">
+				  	<h1><a href="{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a><small>&nbsp;&nbsp;{{ post.date | date: "%b %-d, %Y" }}</small></h1>
+				    <br/>
+				    {{ post.content }}
+				  </section>
+				{% endfor %}
+			
+		</div>
+  	</div>
+</div>

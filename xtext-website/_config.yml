@@ -1,0 +1,48 @@
+# Site settings
+title: Xtext - Language Development Framework
+email: xtext@itemis.com
+description: > # this means to ignore newlines until "baseurl:"
+  Xtext is a framework for development of programming languages and domain specific languages. It covers all 
+  aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown 
+  top-notch Eclipse IDE integration. It comes with great defaults for all these aspects which at the same time can 
+  be easily tailored to your individual needs.
+baseurl: "/xtext-website" # the subpath of your site, e.g. /blog/
+url: "http://xtext.org" # the base hostname & protocol for your site
+twitter_username: xtext
+github_username:  xtext-dev
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  #auto_ids:       true
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..4
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+  coderay:
+    coderay_wrap:              div
+    coderay_line_numbers:      inline
+    coderay_line_number_start: 1
+    coderay_tab_width:         4
+    coderay_bold_every:        10
+    coderay_css:               style
+
+src:
+  xtext: "https://github.com/eclipse/xtext/blob/v2.7.0"
+  mwe: "https://github.com/eclipse/mwe/blob/v2.7.0"
+  emf: "https://github.com/eclipse/emf/blob/R2_9_0"
+  gef: "https://github.com/eclipse/gef/blob/master"
+  sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"
+
+javadoc:
+  eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
+  java: "http://docs.oracle.com/javase/8/docs/api"
+  javaee: "http://docs.oracle.com/javaee/5/api"
+  guice: "https://google.github.io/guice/api-docs/latest/javadoc"
+  mongodb: "http://api.mongodb.org/java/2.6"
+
+edit-repo : "https://github.com/eclipse/xtext/edit/master/xtext-website/"
