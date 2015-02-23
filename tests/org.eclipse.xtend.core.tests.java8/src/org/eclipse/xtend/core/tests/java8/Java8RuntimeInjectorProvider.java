@@ -26,7 +26,12 @@ public class Java8RuntimeInjectorProvider extends RuntimeInjectorProvider {
 			
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtendRuntimeTestModule(), new JavaVersionModule(JavaVersion.JAVA8));
+				return Guice.createInjector(new XtendRuntimeTestModule() {
+					@Override
+					public ClassLoader bindClassLoaderToInstance() {
+						return Java8RuntimeInjectorProvider.class.getClassLoader();
+					}
+				}, new JavaVersionModule(JavaVersion.JAVA8));
 			}
 			
 		}.createInjectorAndDoEMFRegistration();
