@@ -7,7 +7,7 @@ package org.eclipse.xtext.testlanguages.noJdt.validation
 /**
  * Custom validation rules. 
  *
- * see http://www.eclipse.org/Xtext/documentation.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
  */
 class NoJdtTestLanguageValidator extends AbstractNoJdtTestLanguageValidator {
 
