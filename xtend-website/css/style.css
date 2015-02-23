@@ -1,4 +1,6 @@
 ---
+darkblue: "#005580"
+lightblue: "#c1e6ff"
 ---
 /*
 Shield Website Template
@@ -20,27 +22,32 @@ URL : http://uexel.com
 
 body { 
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 1.5em;
 	font-weight: 300;
 	color: #717576;
-	line-height: 1.5em;
 	background: url({{ site.baseurl }}/images/header_background.jpg) #010211;
 	background-repeat: no-repeat;
 /* 	background: url('{{ site.baseurl }}/images/noise.png') #005580; */
 }
 
 a {
-	color: inherit;
-	text-decoration:underline;
+	color: {{ page.darkblue }};
+	font-weight: 400;
 }
 
 p {
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 1.5em;
 }
 
 pre {
 	background-color: white;
 	padding : 5px;
+}
+
+li {
+	line-height: 1.4em;
 }
 
 .btn-primary {
@@ -214,6 +221,10 @@ td.code pre {
 	border: none;
 	overflow: hidden;
 	padding-top : 80pt;
+}
+
+#header_wrapper a {
+	color : {{ page.lightblue }};
 }
 
 @media (max-width: 767px) {
@@ -656,8 +667,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 .team {
-/* 	background: #f4f4f4; */
-	background: rgba(0, 0, 10, 0.4);
+ 	background: rgba(80, 80, 90, 0.5); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='white', endColorstr='#EBEBEB',GradientType=0 );
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -676,6 +686,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	font-size:24px;
 	margin-top:20px;
 	padding-top:0px;
+	color : white;
 }
 
 @media (max-width: 979px) {
@@ -773,9 +784,18 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
   }
 }
 
-.newsticker a {
+.newsticker {
+	text-decoration:none; 
+	font-style: italic; 
+	font-size:18pt;
+}
+
+.newsticker li {
 	text-decoration: italic;
 	font-size: 24;
+	list-style-type: none;
+	padding:20px;
+	display:none;
 }
 
 .anchor-in-div {
@@ -853,7 +873,6 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #nav-outline {
 	max-width: 200px;
 	list-style: none;
-	font-family: 'Lato', sans-serif;
 	margin:0;
 }
 
@@ -900,6 +919,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 .navbar .nav > li > a {
 	color: white;
+	font-size: 16px;
 	text-decoration: none;
 }
 
@@ -1041,7 +1061,7 @@ ul.list3 li {
 }
 
 #intro {
-	background-color: rgba(1,2,22,.6);
+	background-color: rgba(1,2,22,0.3);
 	padding-top: 10px;
 	color: #fff;
 	text-align: center;
