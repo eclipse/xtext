@@ -267,6 +267,10 @@ public abstract class AbstractTraceRegion {
 		}
 		return result;
 	}
+	
+	public static AbstractTraceRegion mergedFrom(List<AbstractTraceRegion> regions) {
+		return new TraceRegionMerger().mergeTraceRegions(regions);
+	}
 
 	public LocationData createLocationData(AbstractTraceRegion region, URI myPath) {
 		return new LocationData(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), myPath);
