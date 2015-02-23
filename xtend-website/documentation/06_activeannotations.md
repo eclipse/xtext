@@ -4,11 +4,11 @@ layout: documentation
 
 # Active Annotations {#active-annotations}
 
-**Active Annotations** allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires to write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With **Active Annotations** you no longer need to remember how the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) or the [Observer](http://en.wikipedia.org/wiki/Observer_pattern) pattern should be implemented. In Xtend you can implement the expansion of such patterns in a library and let the compiler do the heavy lifting for you.
+*Active annotations* allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires to write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With *active annotations* you no longer need to remember how the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) or the [Observer](http://en.wikipedia.org/wiki/Observer_pattern) pattern should be implemented. In Xtend you can implement the expansion of such patterns in a library and let the compiler do the heavy lifting for you.
 
-An **Active Annotation** is just an annotation declared either in Java or Xtend, which is itself annotated with [Active]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/Active.java). `@Active` takes a type literal as a parameter pointing to the processor.
+An *active annotation* is just an annotation declared either in Java or Xtend, which is itself annotated with [Active]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/Active.java). `@Active` takes a type literal as a parameter pointing to the processor.
 
-The IDE plugin comes with an example project, which you can easily materialize into your workspace. To do so use the new project wizard and in the category **Xtend Examples** choose the active annotation example. The examples contain three different annotations which we will use for further explanation.
+The IDE plugin comes with an example project, which you can easily materialize into your workspace. To do so use the new project wizard and in the category *Xtend Examples* choose the active annotation example. The examples contain three different annotations which we will use for further explanation.
 
 For instance, `@Extract` is an annotation which extracts an interface for a class. The annotation declaration looks like this:
 
@@ -60,7 +60,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 
 The [RegisterGlobalsContext]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java) provides all the services that are available during this compilation step. It is passed into the method `doRegisterGlobals()` along with a read-only representation of the annotated source elements. The AbstractClassProcessor in this example is invoked for all classes that are annotated with `@Extract`.
 
-The compiler calls [RegisterGlobalsParticipant]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java) once per compilation unit and provides access to all elements which are annotated with the **active annotation** this processor is registered for. Therefore the `ExtractProcessor` is invoked with a list of all classes that are defined in the same Xtend file for all the files that are being compiled.
+The compiler calls [RegisterGlobalsParticipant]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java) once per compilation unit and provides access to all elements which are annotated with the *active annotation* this processor is registered for. Therefore the `ExtractProcessor` is invoked with a list of all classes that are defined in the same Xtend file for all the files that are being compiled.
 
 ### Phase 2: Transformation {#active-annotations-transformation-phase}
 
@@ -177,7 +177,7 @@ A second alternative is to put expressions from the Xtend source into the contex
   }
 ```
 
-The processor for this **active annotation** could infer a synthetic initializer method and add a getter-method, which calls the initializer if the field is still `null`. Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method. The following code performs this transformation:
+The processor for this *active annotation* could infer a synthetic initializer method and add a getter-method, which calls the initializer if the field is still `null`. Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method. The following code performs this transformation:
 
 ```xtend
 override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
@@ -222,11 +222,11 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 }
 ```
 
-This ensures that the user is notified about invalid applications of the **active annotation**`@Lazy`.
+This ensures that the user is notified about invalid applications of the *active annotation* `@Lazy`.
 
 ## Class Path Setup and Testing {#active-annotation-classpath}
 
-An **active annotation** can not be used in the same project it is declared in, but has to reside on an upstream project. Alternatively it can be compiled and deployed in a jar. The annotation and the processor itself only rely on the interfaces defined in `org.eclipse.xtend.lib.macro` which is part of Xtend's small standard library.
+An *active annotation* can not be used in the same project it is declared in, but has to reside on an upstream project. Alternatively it can be compiled and deployed in a jar. The annotation and the processor itself only rely on the interfaces defined in `org.eclipse.xtend.lib.macro` which is part of Xtend's small standard library.
 
 Also note that the macro library as well as the processors are strictly speaking compile-time only dependencies. So if it matters, like e.g. on Android devices, you don't need to ship them at runtime.
 
@@ -321,7 +321,7 @@ This is a basic string comparison. It is a good way to start the development of 
 
 ### Wrap Up
 
-**Active Annotations** are a powerful and unique concept that allows to solve a large class of problems that previously had to be solved in cumbersome ways. IDE wizards, many code generators or manually writing boilerplate code are no longer state of the art. Active annotations basically **is** a means of code generation, but its simple integration with existing projects and the fast development turnarounds diminish the typical downsides of code generation.
+*Active Annotations* are a powerful and unique concept that allows to solve a large class of problems that previously had to be solved in cumbersome ways. IDE wizards, many code generators or manually writing boilerplate code are no longer state of the art. Active annotations basically *is* a means of code generation, but its simple integration with existing projects and the fast development turnarounds diminish the typical downsides of code generation.
 
 ## Existing Active Annotations
 

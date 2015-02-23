@@ -661,7 +661,7 @@ The variable `this` refers to the outer class. The lambda instance itself is ava
 
 ### Typing {#closure-types}
 
-Lambdas are expressions which produce **Function** objects. The type of a lambda expression generally depends on the target type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only one abstract method. This allows for using lambda expressions in many existing Java APIs in a similar way as [Java 8 lambdas](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html#target-typing) can be used. 
+Lambdas are expressions which produce *Function* objects. The type of a lambda expression generally depends on the target type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only one abstract method. This allows for using lambda expressions in many existing Java APIs in a similar way as [Java 8 lambdas](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html#target-typing) can be used. 
 
 However, if you write a lambda expression without having any target type expectation, like in the following assignment:
 
@@ -761,7 +761,7 @@ The main expression can also be a computed value instead of a field or variable.
 
 ### Type guards
 
-Instead of or in addition to the case guard you can specify a **type guard**. The case only matches if the switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match. If the switch value is a field, parameter or variable, it is automatically casted to the given type within the predicate and the case body.
+Instead of or in addition to the case guard you can specify a *type guard*. The case only matches if the switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match. If the switch value is a field, parameter or variable, it is automatically casted to the given type within the predicate and the case body.
 
 ```xtend
   def length(Object x) {
@@ -939,7 +939,7 @@ Templates allow for readable string concatenation. Templates are surrounded by t
 
 The terminals for interpolated expression are so called guillemets `«expression»`. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. `<%= expression %>` in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 
-If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to **CTRL+SHIFT+\<** and **CTRL+SHIFT+** for `«` and `»` respectively. On a Mac they are also available with **alt+q** (`«`) and **alt+Q** (`»`).
+If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+SHIFT+\<* and *CTRL+SHIFT+* for `«` and `»` respectively. On a Mac they are also available with *alt+Q* (`«`) and *alt+SHIFT+Q* (`»`).
 
 Let us have a look at an example of how a typical method with a template expressions looks like:
 
@@ -1103,7 +1103,7 @@ node Parent{
 
 |
 
-As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node **Leaf** which happens due to the first rule: Indentation is propagated to called templates.
+As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node *Leaf* which happens due to the first rule: Indentation is propagated to called templates.
 
 ---
 

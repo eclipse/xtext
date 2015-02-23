@@ -4,7 +4,7 @@ layout: documentation
 
 # The Movies Example {#movies-example}
 
-The movies example is included in the example project **Xtend Introductory Examples** (src/examples6/Movies.xtend) and is about reading a file with data about movies and doing some analysis on it.
+The movies example is included in the example project *Xtend Introductory Examples* (src/examples6/Movies.xtend) and is about reading a file with data about movies and doing some analysis on it.
 
 ## The Data
 
@@ -95,7 +95,7 @@ return new Movie (
 
 ## Answering Some Questions
 
-Now that we have parsed the text file into a `List<Movie>`, we are ready to execute some queries against it. We use **JUnit** to make the individual queries executable and to confirm their results.
+Now that we have parsed the text file into a `List<Movie>`, we are ready to execute some queries against it. We use *JUnit* to make the individual queries executable and to confirm their results.
 
 ### Question 1 : What Is The Number Of Action Movies?
 

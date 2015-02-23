@@ -114,7 +114,7 @@ A field can have an initializer. Final fields are declared using `val`, while `v
 
 The default visibility for fields is `private`. You can also declare it explicitly as being `public`, `protected`, `package` or `private`. 
 
-A specialty of Xtend are fields that provide **extension methods** which are covered in [their own section](04_xtend_classes_members.html#extension-methods).
+A specialty of Xtend are fields that provide *extension methods* which are covered in [their own section](04_xtend_classes_members.html#extension-methods).
 
 ## Methods {#methods}
 
