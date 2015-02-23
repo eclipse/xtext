@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.testlanguages.ui.quickfix
 /**
  * Custom quickfixes.
  *
- * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#quick-fixes
  */
 class XImportSectionTestLangQuickfixProvider extends org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider {
 

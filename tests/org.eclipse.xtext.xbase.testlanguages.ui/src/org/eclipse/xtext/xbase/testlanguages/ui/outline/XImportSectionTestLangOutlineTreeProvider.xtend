@@ -6,7 +6,7 @@ package org.eclipse.xtext.xbase.testlanguages.ui.outline
 /**
  * Customization of the default outline structure.
  *
- * see http://www.eclipse.org/Xtext/documentation.html#outline
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#outline
  */
 class XImportSectionTestLangOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
 	
