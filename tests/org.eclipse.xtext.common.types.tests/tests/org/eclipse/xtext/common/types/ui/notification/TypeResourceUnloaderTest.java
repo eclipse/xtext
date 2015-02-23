@@ -476,6 +476,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		if (this.event != null && subsequentEvents != null) {
 			subsequentEvents.add(event);
 		}
+		assertNotNull("Event should not be null!", event);
 		this.event = event;
 	}
 
