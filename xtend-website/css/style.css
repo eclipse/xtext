@@ -46,9 +46,17 @@ pre {
 	padding : 5px;
 }
 
+code.prettyprint ol {
+	margin:0;
+	list-style: decimal;
+	list-style-position: inside;
+}
+
 li {
 	line-height: 1.4em;
 }
+
+
 
 .btn-primary {
 /* 	background: url('{{ site.baseurl }}/images/noise.png') #74C0CF; */

@@ -12,7 +12,9 @@ $(document).ready(function() {
 	$('pre > code[class]').each(function() {
 		$(this).attr('class', $(this).attr('class').replace('language','lang'));
 		$(this).addClass('prettyprint')
-		$(this).addClass('linenums')
+		if ($(this).text().indexOf('\n') != $(this).text().lastIndexOf('\n')) {
+			$(this).addClass('linenums')
+		}
 	})
 	prettyPrint();
 
