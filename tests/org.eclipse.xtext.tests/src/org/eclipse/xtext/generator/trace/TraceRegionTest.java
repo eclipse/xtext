@@ -21,7 +21,6 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 
@@ -188,21 +187,6 @@ public class TraceRegionTest extends Assert {
 		AbstractTraceRegion third = new TraceRegion(2, 1, 2, 3, 3, 4, 0, 0, parent, null);
 		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertEquals(Arrays.asList(first, second, third).iterator(), iter);
-	}
-
-	@Test
-	public void testLeafIterator_DuplicateRegions() {
-		final TraceRegion grandParent = new TraceRegion(0, 3, 0, 3, 2, 3, 0, 0, null, URI.createURI("uri"));
-		final TraceRegion parent0 = new TraceRegion(0, 2, 0, 3, 2, 3, 0, 0, grandParent, URI.createURI("uri0"));
-		final TraceRegion child0 = new TraceRegion(0, 1, 0, 2, 2, 3, 0, 0, parent0, URI.createURI("uri0"));
-		final TraceRegion child1 = new TraceRegion(1, 1, 2, 3, 2, 3, 0, 0, parent0, URI.createURI("uri0"));
-		final TraceRegion parent1 = new TraceRegion(0, 2, 0, 3, 2, 3, 0, 0, null, URI.createURI("uri1"));
-		parent1.setParent(grandParent); 
-		final TraceRegion child2 = new TraceRegion(0, 1, 0, 2, 2, 3, 0, 0, parent1, URI.createURI("uri1"));
-		final TraceRegion child3 = new TraceRegion(1, 1, 2, 3, 2, 3, 0, 0, parent1, URI.createURI("uri1"));
-		final TraceRegion child4 = new TraceRegion(2, 1, 3, 3, 2, 3, 0, 0, grandParent, URI.createURI("uri2"));
-		Iterator<AbstractTraceRegion> iter = grandParent.leafIterator();
-		assertEquals(Arrays.asList(child0, child1, child2, child3, child4).iterator(), iter);
 	}
 
 	@Test
