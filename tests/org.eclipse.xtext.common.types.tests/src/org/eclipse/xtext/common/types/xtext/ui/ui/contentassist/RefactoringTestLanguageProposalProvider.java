@@ -4,8 +4,10 @@
 package org.eclipse.xtext.common.types.xtext.ui.ui.contentassist;
 
 import org.eclipse.xtext.common.types.xtext.ui.ui.contentassist.AbstractRefactoringTestLanguageProposalProvider;
+
 /**
- * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class RefactoringTestLanguageProposalProvider extends AbstractRefactoringTestLanguageProposalProvider {
 

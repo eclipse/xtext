@@ -34,9 +34,9 @@ package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
 import com.google.inject.Inject;
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
@@ -66,9 +66,9 @@ package «eObjectLabelProviderQualifiedName().toJavaPackage()»
 import com.google.inject.Inject
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
@@ -96,9 +96,9 @@ class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabel
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 
 /**
- * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
@@ -123,9 +123,9 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 //import org.eclipse.xtext.resource.IEObjectDescription
 
 /**
- * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 

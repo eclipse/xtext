@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.validation.XbaseJavaValidator
 /**
  * Custom validation rules. 
  *
- * see http://www.eclipse.org/Xtext/documentation.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
  */
 class PureXbaseValidator extends XbaseJavaValidator {
 
