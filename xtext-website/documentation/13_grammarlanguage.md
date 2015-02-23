@@ -107,7 +107,7 @@ grammar org.xtext.example.SecretCompartments
    with org.eclipse.xtext.common.Terminals
 ```
 
-The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be **SecretCompartments.xtext** and must be placed in a package **org.xtext.example** on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
+The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be *SecretCompartments.xtext* and must be placed in a package *org.xtext.example* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
 
 The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](13_grammarlanguage.html#grammar-mixins)).
 
@@ -121,7 +121,7 @@ The easiest way to get started is to let Xtext infer the Ecore model from your g
 
 `generate secrets 'http://www.eclipse.org/secretcompartment'`
 
-That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the **name** `secrets` and the **nsURI** `"http://www.eclipse.org/secretcompartment"`. Actually these are the mandatory properties that are necessary to create an empty [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java). Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](13_grammarlanguage.html#metamodel-inference). 
+That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the *name* `secrets` and the *nsURI* `"http://www.eclipse.org/secretcompartment"`. Actually these are the mandatory properties that are necessary to create an empty [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java). Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](13_grammarlanguage.html#metamodel-inference). 
 
 #### EPackage Import {#epackage-import}
 
@@ -183,7 +183,7 @@ bean = StandaloneSetup {
 }
 ```
 
-If you face problems with that approach, it may be necessary to explicitly load the referenced packages in the language configuration of the workflow. You may run into this as soon as you refer to elements from **Ecore.ecore** and want to generate the EMF classes from within the same workflow.
+If you face problems with that approach, it may be necessary to explicitly load the referenced packages in the language configuration of the workflow. You may run into this as soon as you refer to elements from *Ecore.ecore* and want to generate the EMF classes from within the same workflow.
 
 ```mwe2
 language = {
@@ -197,15 +197,15 @@ language = {
 
 ##### Using Resource URIs to Import Existing EPackages - Deprecated
 
-In order to import an existing Ecore model, you'll have to have the \*.ecore file describing the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) you want to use somewhere in your workspace. To refer to that file you make use of the **platform:/resource** scheme. Platform URIs are a special EMF concept which allow to reference elements in the workspace independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace concept as the logical root of each project. 
+In order to import an existing Ecore model, you'll have to have the \*.ecore file describing the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) you want to use somewhere in your workspace. To refer to that file you make use of the *platform:/resource* scheme. Platform URIs are a special EMF concept which allow to reference elements in the workspace independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace concept as the logical root of each project. 
 
-An import statement referring to an Ecore file by a **platform:/resource/**-URI looks like this: 
+An import statement referring to an Ecore file by a *platform:/resource/*-URI looks like this: 
 
 `import 'platform:/resource/my.project/model/SecretCompartments.ecore'`
 
 If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for [generating the Ecore classes]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java) with resource URIs that point to the [generator models](20_emf_integration.html#emf-codegen) of the referenced Ecore models.
 
-The **\*.genmodel** provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create a generator model for derived [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. 
+The *\*.genmodel* provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create a generator model for derived [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. 
 
 Example:
 
@@ -218,13 +218,13 @@ fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 
 ##### Using Class Path URIs to Import Existing EPackages - Deprecated
 
-We usually like to leverage Java's class path mechanism, because is is well understood and can be configured easily with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing **\*.ecore** file which is contained in a jar, you can make use of the **'classpath:'** URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model which is shipped as part of Xtext. 
+We usually like to leverage Java's class path mechanism, because is is well understood and can be configured easily with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing *\*.ecore* file which is contained in a jar, you can make use of the *'classpath:'* URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model which is shipped as part of Xtext. 
 
 Example:
 
 `import 'classpath:/model/JvmTypes.ecore' as types`
 
-As with platform resource URIs you'll also have to tell the generator where the corresponding **\*.genmodel** can be found:
+As with platform resource URIs you'll also have to tell the generator where the corresponding *\*.genmodel* can be found:
 
 ```mwe2
 fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
@@ -248,7 +248,7 @@ When referring to a type somewhere in the grammar you need to qualify the refere
 
 It is also supported to put multiple [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) imports into one alias. This is no problem as long as there are not any two [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) with the same name. In that case none of them can be referenced. It is even possible to `import` multiple and `generate` one Ecore model and declare all of them with same alias. If you do so, for a reference to an [EClassifier]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) first the imported [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) are scanned before it is assumed that a type needs to be generated into the inferred package. 
 
-Note that using this feature is not recommended, because it might cause problems that are hard to track down. For instance, a reference to **classA** would as well be linked to a newly created [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java), because the corresponding type in **http://www.eclipse.org/packContainingClassA** is spelled with a capital letter.
+Note that using this feature is not recommended, because it might cause problems that are hard to track down. For instance, a reference to *classA* would as well be linked to a newly created [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java), because the corresponding type in *http://www.eclipse.org/packContainingClassA* is spelled with a capital letter.
 
 ---
 
@@ -263,18 +263,18 @@ Basically parsing can be separated in the following phases.
 
 #### Terminal Rules
 
-In the first stage called **lexing**, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part or region of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as **token rules** or **lexer rules**. There is an informal naming convention that names of terminal rules are all upper-case.
+In the first stage called *lexing*, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part or region of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as *token rules* or *lexer rules*. There is an informal naming convention that names of terminal rules are all upper-case.
 
-In the secret compartments example there are no explicitly defined terminal rules, since it only uses the **ID** rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (cf. [Grammar Mixins](13_grammarlanguage.html#grammar-mixins)). Therein the **ID** rule is defined as follows:
+In the secret compartments example there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (cf. [Grammar Mixins](13_grammarlanguage.html#grammar-mixins)). Therein the *ID* rule is defined as follows:
 
 ```xtext
 terminal ID : 
   ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
 ```
 
-It says that a token **ID** starts with an optional **'^'** character (caret), followed by a letter `('a'..'z'|'A'..'Z')` or underscore `'_'` followed by any number of letters, underscores and numbers `('0'..'9')`. 
+It says that a token *ID* starts with an optional `'^'` character (caret), followed by a letter `('a'..'z'|'A'..'Z')` or underscore `'_'` followed by any number of letters, underscores and numbers `('0'..'9')`. 
 
-The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the **ID** rule's [ValueConverter](#value-converter). 
+The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the *ID* rule's [ValueConverter](#value-converter). 
 
 This is the simplified formal definition of terminal rules:
 
@@ -285,41 +285,41 @@ TerminalRule :
 ;
 ```
 
-Note that **the order of terminal rules is crucial for your grammar**, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
+Note that *the order of terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
 
 It's almost in any case recommended to use data type rules instead. Let's assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a [data type rule](13_grammarlanguage.html#datatype-rules), instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.
 
 ##### Return Types
 
-Each terminal rule returns an atomic value (an `Ecore EDataType`). By default, it's assumed that an instance of `ecore::EString`) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule **INT** is defined as:
+Each terminal rule returns an atomic value (an `Ecore EDataType`). By default, it's assumed that an instance of `ecore::EString`) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule *INT* is defined as:
 
 ```xtext
 terminal INT returns ecore::EInt : 
   ('0'..'9')+;
 ```
 
-This means that the terminal rule **INT** returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (cf. [value converters](#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret `'^'` from identifiers. Its implementation needs to be registered as a service (cf. [Service Framework](#dependency-injection)).
+This means that the terminal rule *INT* returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (cf. [value converters](#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret `'^'` from identifiers. Its implementation needs to be registered as a service (cf. [Service Framework](#dependency-injection)).
 
 #### Extended Backus-Naur Form Expressions
 
-Terminal rules are described using **Extended Backus-Naur Form**-like (EBNF) expressions. The different expressions are described in the following. Each of these expressions allows to define a cardinality. There are four different possible cardinalities:
+Terminal rules are described using *Extended Backus-Naur Form*-like (EBNF) expressions. The different expressions are described in the following. Each of these expressions allows to define a cardinality. There are four different possible cardinalities:
 
 1.  exactly one (the default, no operator)
-1.  one or none (operator **?**)
-1.  any (zero or more, operator **\***)
-1.  one or more (operator **+**)
+1.  one or none (operator `?`)
+1.  any (zero or more, operator `*`)
+1.  one or more (operator `+`)
 
 ##### Keywords / Characters {#keywords}
 
-Keywords are a kind of terminal rule literals. The **ID** rule in `org.eclipse.xtext.common.Terminals` for instance starts with a keyword:
+Keywords are a kind of terminal rule literals. The *ID* rule in `org.eclipse.xtext.common.Terminals` for instance starts with a keyword:
 
 `terminal ID : '^'? .... ;`
 
-The question mark sets the cardinality to **none or one** (i.e. optional) like explained above.
+The question mark sets the cardinality to *none or one* (i.e. optional) like explained above.
 
 Note that a keyword can have any length and contain arbitrary characters. 
 
-The following standard Java notations for special characters are allowed: **\n**, **\r**, **\t**, **\b**, **\f** and the quoted unicode character notation, such as **\u123**.
+The following standard Java notations for special characters are allowed: `\n`, `\r`, `\t`, `\b`, `\f` and the quoted unicode character notation, such as `\u123`.
 
 ##### Character Ranges
 
@@ -329,7 +329,7 @@ Example:
 
 `terminal INT returns ecore::EInt: ('0'..'9')+;`
 
-In this case an **INT** is comprised of one or more (note the `+` operator) characters between (and including) `'0'` and `'9'`.
+In this case an *INT* is comprised of one or more (note the `+` operator) characters between (and including) `'0'` and `'9'`.
 
 ##### Wildcard
 
@@ -337,7 +337,7 @@ If you want to allow any character you can simple write the wildcard operator `.
 
 `terminal FOO : 'f' . 'o';`
 
-The rule above would allow expressions like **foo**, **f0o** or even **f\_o**.
+The rule above would allow expressions like `foo`, `f0o` or even `f\_o`.
 
 ##### Until Token
 
@@ -437,11 +437,9 @@ The syntactic declaration for states in the state machine example starts with a 
 
 `name=ID`
 
-The left hand side refers to a feature **name** of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) **State** in this case). The right hand side can be a rule call, a keyword, a [cross-reference](13_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As **ID** returns an **EString** in this case, the feature **name** needs to be of type [EString]() as well.
+The left hand side refers to a feature *name* of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](13_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an *EString* in this case, the feature *name* needs to be of type [EString]() as well.
 
-**Assignment Operators**
-
-There are three different assignment operators, each with different semantics.
+**Assignment operators.** There are three different assignment operators, each with different semantics.
 
 1.  The simple equal sign `=` is the straight forward assignment, and used for features which take only one element.
 1.  The `+=` sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.
@@ -477,7 +475,7 @@ Transition :
 Event returns MyEvent : ....;
 ```
 
-Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by **CrossReferenceableTerminal**. This is the part describing the concrete text, from which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule with the name **ID** - if one can be found. The terminal is mandatory for languages that do not define a rule with the name **ID**.
+Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by *CrossReferenceableTerminal*. This is the part describing the concrete text, from which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule with the name *ID* - if one can be found. The terminal is mandatory for languages that do not define a rule with the name *ID*.
 
 Have a look at the [linking section](#linking) in order to understand how linking is done.
 
@@ -536,10 +534,10 @@ The object to be returned by a parser rule is usually created lazily on the firs
 
 With Actions however, the creation of returned [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) can be made explicit. Xtext supports two kinds of Actions:
 
-1.  **Simple** Actions, and
-1.  **Assigned** Actions.
+1.  *Simple* Actions, and
+1.  *Assigned* Actions.
 
-If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example **TypeB** must be a subtype of **TypeA**. An expression **A ident** should create an instance of **TypeA**, whereas **B ident** should instantiate **TypeB**.
+If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example *TypeB* must be a subtype of *TypeA*. An expression *A ident* should create an instance of *TypeA*, whereas *B ident* should instantiate *TypeB*.
 
 If you don't use actions, you'll have to define an alternative and delegate rules to guide the parser to the right types for the to-be-instantiated objects:
 
@@ -563,13 +561,13 @@ MyRule returns TypeA :
 ; 
 ```
 
-Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). The notation **{TypeB}** will create an instance of TypeB and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.
+Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). The notation *{TypeB}* will create an instance of TypeB and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.
 
 **Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you'll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning for the parser rules in question.**
 
 ##### Unassigned Rule Calls
 
-We previously explained that the [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) to be returned is created lazily when the first assignment occurs or as soon as a simple action is evaluated. There is another way to **find** the [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) to be returned. The concept is called **Unassigned Rule Call**.
+We previously explained that the [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) to be returned is created lazily when the first assignment occurs or as soon as a simple action is evaluated. There is another way to *find* the [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) to be returned. The concept is called *unassigned rule call*.
 
 Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. The return value of the called rule becomes the return value of the calling parser rule if it is not assigned to a feature. 
 
@@ -583,7 +581,7 @@ AbstractToken :
 ;
 ```
 
-As `AbstractToken` could possibly return an instance of **TokenA**, **TokenB** or **TokenC** its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.
+As `AbstractToken` could possibly return an instance of *TokenA*, *TokenB* or *TokenC* its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.
 
 Example:
 
@@ -595,7 +593,7 @@ AbstractToken :
 ;
 ```
 
-This way the **cardinality** is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an instance of type **TokenA**, **TokenB**, or **TokenC** which are all subtypes of **AbstractToken**. The rule in this example will never create an instance of **AbstractToken** directly but always return the instance that has been created by the invoked **TokenX** rule.
+This way the *cardinality* is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an instance of type *TokenA*, *TokenB*, or *TokenC* which are all subtypes of *AbstractToken*. The rule in this example will never create an instance of *AbstractToken* directly but always return the instance that has been created by the invoked *TokenX* rule.
 
 ##### Assigned Actions {#grammar-actions}
 
@@ -647,7 +645,7 @@ Operation {
 }
 ```
 
-Typically one would only want to have one instance of **IntLiteral** instead.
+Typically one would only want to have one instance of *IntLiteral* instead.
 
 This problem can be solved by using a combination of unassigned rule calls and assigned actions:
 
@@ -663,7 +661,7 @@ TerminalExpression returns Expression:
 ;
 ```
 
-In the example above `{Operation.left=current}` is a so called tree rewrite action, which creates a new instance of the stated [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) **Operation** and assigns the element currently to-be-returned (the `current` variable) to a feature of the newly created object. The example uses the feature **left** of the **Operation** instance to store the previously returned **Expression**. In Java these semantics could be expressed as:
+In the example above `{Operation.left=current}` is a so called tree rewrite action, which creates a new instance of the stated [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *Operation* and assigns the element currently to-be-returned (the `current` variable) to a feature of the newly created object. The example uses the feature *left* of the *Operation* instance to store the previously returned *Expression*. In Java these semantics could be expressed as:
 
 ```java
 Operation temp = new Operation();
@@ -689,7 +687,7 @@ Fullname:
 ;
 ```
 
-The sample rule **Person** defines multiline comments (`ML_COMMENT`), single-line comments (`SL_COMMENT`), and white space (`WS`) to be allowed between the **name** and the **age**. Because the rule **Fullname** does not introduce an own set of hidden terminals, it allows the same symbols to appear between **firstname** and **lastname** as the calling rule **Person**. Thus, the following input is perfectly valid for the given grammar snippet:
+The sample rule *Person* defines multiline comments (`ML_COMMENT`), single-line comments (`SL_COMMENT`), and white space (`WS`) to be allowed between the *name* and the *age*. Because the rule *Fullname* does not introduce an own set of hidden terminals, it allows the same symbols to appear between *firstname* and *lastname* as the calling rule *Person*. Thus, the following input is perfectly valid for the given grammar snippet:
 
 ```java
 John /* comment */ Smith // line comment
@@ -714,9 +712,9 @@ QualifiedName :
 ;
 ```
 
-In contrast to a terminal rule this is only valid in certain contexts, i.e. it won't conflict with the rule **ID**. If you had defined it as a terminal rule, it would possibly hide the simple **ID** rule.
+In contrast to a terminal rule this is only valid in certain contexts, i.e. it won't conflict with the rule *ID*. If you had defined it as a terminal rule, it would possibly hide the simple *ID* rule.
 
-In addition, by defining the **QualifiedName** as a data type rule, it is allowed to use hidden tokens (e.g. `/* comment */` between the segment IDs and dots (e.g. `foo/* comment */. bar . Baz`).
+In addition, by defining the *QualifiedName* as a data type rule, it is allowed to use hidden tokens (e.g. `/* comment */` between the segment IDs and dots (e.g. `foo/* comment */. bar . Baz`).
 
 Return types can be specified in the same way as for terminal rules:
 
@@ -734,7 +732,7 @@ Note that rules that do not call other parser rules and do neither contain any a
 
 Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters. The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.
 
-If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore](http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html) with **ADD**, **MOVE** and **REMOVE** you could write:
+If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore](http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html) with *ADD*, *MOVE* and *REMOVE* you could write:
 
 ```xtext
 enum ChangeKind :
@@ -760,7 +758,7 @@ with the input of
 
 `element Foo`
 
-the resulting value of the element **Foo** will hold the enum value with the internal representation of `0` (zero). When generating the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
+the resulting value of the element *Foo* will hold the enum value with the internal representation of `0` (zero). When generating the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 
 ```xtext
 enum Visibility: 
@@ -777,7 +775,7 @@ It's sometimes not easily possible to define an `LL(*)` grammar for a given lang
 *   Enable Backtracking: Xtext allows to enable backtracking for the ANTLR parser generator. This is usually not recommended since it influences error message strategies at runtime and shadows actually existing problems in the grammar.
 *   Syntactic Predicates: The grammar language enables users to guide the parser in case of ambiguities. This mechanism is achieved by syntactic predicates. Since they affect only a very small part of the grammar, syntactic predicates are the recommended approach to handle ANTLR error messages during the parser generation.
 
-The classical example for ambiguous language parts is the **Dangling Else Problem**. A conditional in a programming language usually looks like this:
+The classical example for ambiguous language parts is the *dangling else problem*. A conditional in a programming language usually looks like this:
 
 ```java
 if (isTrue()) 
@@ -826,7 +824,7 @@ Xtext uses Ecore's [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/sr
 Xtext creates
 
 *   an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java)    
-    *   for each generate-package declaration. After the directive `generate` a list of parameters follows. The **name** of the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) will be set to the first parameter, its **nsURI** to the second parameter. An optional alias as the third parameter allows to distinguish generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) later. Only one generated package declaration per alias is allowed.
+    *   for each generate-package declaration. After the directive `generate` a list of parameters follows. The *name* of the [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) will be set to the first parameter, its *nsURI* to the second parameter. An optional alias as the third parameter allows to distinguish generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) later. Only one generated package declaration per alias is allowed.
 *   an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java)    
     *   for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) will be generated.
     *   for each type defined in an action or a cross-reference.
@@ -861,7 +859,7 @@ While iterating the parser rules Xtext creates
     *   for each assignment with the `=` or `+=` operator in a parser rule calling a parser rule. The [EReference's]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) type will be the return type of the called parser rule.
     *   for each assigned action. The reference's type will be set to the return type of the current calling rule. 
 
-Each [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) or [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) takes its name from the assignment or action that caused it. Multiplicities will be **0..1** for assignments with the `=` operator and `0..*` for assignments with the `+=` operator. 
+Each [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) or [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) takes its name from the assignment or action that caused it. Multiplicities will be `0..1` for assignments with the `=` operator and `0..*` for assignments with the `+=` operator. 
 
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules that are never called, e.g.
 
@@ -872,7 +870,7 @@ CommonSuperType:
 
 ### Enum Literal Generation
 
-For each alternative defined in an enum rule, the transformer creates an enum literal, as long as no other literal with the same name can be found. The **literal** property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, an enum literal with equal **name** and **literal** attributes is inferred.
+For each alternative defined in an enum rule, the transformer creates an enum literal, as long as no other literal with the same name can be found. The *literal* property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, an enum literal with equal *name* and *literal* attributes is inferred.
 
 ```xtext
 enum MyGeneratedEnum:

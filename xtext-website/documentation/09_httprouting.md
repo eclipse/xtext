@@ -36,11 +36,11 @@ GET /guess/:theGuess
 
 ## Running the Example {#routing-running}
 
-The example project's name is **org.xtext.httprouting.examples** and includes a simple but runnable number guessing game. Just start the server (an embedded Jetty) by running `framework.StartServer` as a Java Application. Then point your browser to the URL [http://localhost:8080/guess](http://localhost:8080/guess).
+The example project's name is *org.xtext.httprouting.examples* and includes a simple but runnable number guessing game. Just start the server (an embedded Jetty) by running `framework.StartServer` as a Java Application. Then point your browser to the URL [http://localhost:8080/guess](http://localhost:8080/guess).
 
 ## Grammar {#routing-grammar}
 
-The Routing DSL extends **org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations** to make use of expressions predefined by [Xbase](17_xbase.html#xbase-expressions) plus support for Annotations. 
+The Routing DSL extends *org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations* to make use of expressions predefined by [Xbase](17_xbase.html#xbase-expressions) plus support for Annotations. 
 
 ```xtext
 grammar org.xtext.httprouting.Route 
@@ -82,11 +82,11 @@ Variable :
 	':' name=ID;
 ```
 
-There should not be any surprises if you know the grammar language: A **Model** consists of an **XImportSection** followed by any number of **Dependencies** and **Routes**. A **Route** starts with a **RequestType**, i.e. HTTP method, followed by a **URL** pattern. Then an optional when-clause can be specified followed by a mandatory do-clause.
+There should not be any surprises if you know the grammar language: A *Model* consists of an *XImportSection* followed by any number of *Dependencies* and *Routes*. A *Route* starts with a *RequestType*, i.e. HTTP method, followed by a *URL* pattern. Then an optional when-clause can be specified followed by a mandatory do-clause.
 
 ## Translation to Java {#routing-inferrer}
 
-In [RouteJvmModelInferrer]({{site.src.sevenlang}}/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend) you can see that a Java class extending the class [HttpServlet]({{site.javadoc.javaee}}/javax/servlet/http/HttpServlet.html) is derived. First the **Dependencies** are translated to Java fields. This is almost a one-to-one mapping.
+In [RouteJvmModelInferrer]({{site.src.sevenlang}}/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend) you can see that a Java class extending the class [HttpServlet]({{site.javadoc.javaee}}/javax/servlet/http/HttpServlet.html) is derived. First the *Dependencies* are translated to Java fields. This is almost a one-to-one mapping.
 
 ```xtend
 // translate the dependencies to fields annotated with @Inject
@@ -98,7 +98,7 @@ for (field : model.declarations.filter(Dependency)) {
 }
 ```
 
-Next up a field for the **URL** patterns is generated and a method for the used expressions, such giving them a proper scope and context.
+Next up a field for the *URL* patterns is generated and a method for the used expressions, such giving them a proper scope and context.
 
 ```xtend
 // declare fields for the URL regexp, a method for each when-part 

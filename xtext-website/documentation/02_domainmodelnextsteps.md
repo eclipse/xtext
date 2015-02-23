@@ -97,7 +97,7 @@ Feature:
 
 As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator with Eclipse.
 
-In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For each **Entity**, a Java class is generated and each **Feature** will lead to a private field in that class and public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.
+In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For each *Entity*, a Java class is generated and each *Feature* will lead to a private field in that class and public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.
 
 ```java
 package my.company.blog;
@@ -115,7 +115,7 @@ public class HasAuthor {
 }
 ```
 
-First of all, locate the file **DomainmodelGenerator.xtend** in the package **org.example.domainmodel.generator**. This Xtend class is used to generate code for your models in the standalone scenario and in the interactive Eclipse environment.
+First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.example.domainmodel.generator*. This Xtend class is used to generate code for your models in the standalone scenario and in the interactive Eclipse environment.
 
 ```xtend
 package org.example.domainmodel.generator
@@ -144,7 +144,7 @@ Let's make the implementation more meaningful and start writing the code generat
     }
     ```
 
-1.  Now let's answer the question, how we determine the file name of the Java class, that each **Entity** should yield. This information should be derived from the qualified name of the **Entity** since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) into the generator.     
+1.  Now let's answer the question, how we determine the file name of the Java class, that each *Entity* should yield. This information should be derived from the qualified name of the *Entity* since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) into the generator.     
     
     ```xtend
       @Inject extension IQualifiedNameProvider
@@ -173,7 +173,7 @@ Let's make the implementation more meaningful and start writing the code generat
     '''
     ```
 
-1.  This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail, if the **Entity** is not contained in a package. A small modification fixes this. The `package`-declaration has to be wrapped in an `IF` expression:     
+1.  This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail, if the *Entity* is not contained in a package. A small modification fixes this. The `package`-declaration has to be wrapped in an `IF` expression:     
     
     ```xtend
     def compile(Entity e) '''
@@ -186,7 +186,7 @@ Let's make the implementation more meaningful and start writing the code generat
     '''
     ```
 
-    Let's handle the **superType** of an **Entity** gracefully, too by using another `IF` expression:     
+    Let's handle the *superType* of an *Entity* gracefully, too by using another `IF` expression:     
     
     ```xtend
     def compile(Entity e) ''' 
@@ -200,7 +200,7 @@ Let's make the implementation more meaningful and start writing the code generat
     '''
     ```
 
-1.  Even though the template will compile the **Entities** without any complains, it still lacks support for the Java properties, that each of the declared features should yield. For that purpose, you have to create another Xtend function that compiles a single feature to the respective Java code.     
+1.  Even though the template will compile the *Entities* without any complains, it still lacks support for the Java properties, that each of the declared features should yield. For that purpose, you have to create another Xtend function that compiles a single feature to the respective Java code.     
     
     ```xtend
     def compile(Feature f) '''
@@ -233,7 +233,7 @@ Let's make the implementation more meaningful and start writing the code generat
     '''
     ```
 
-The final code generator looks pretty much like the following code snippet. Now you can give it a try! Launch a new Eclipse Application (**Run As -\> Eclipse Application** on the Xtext project) and create a **dmodel** file in a Java Project. Now simply create a new source folder **src-gen** in the that project and see how the compiler will pick up your sample **Entities** and generate Java code for them. 
+The final code generator looks pretty much like the following code snippet. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Now simply create a new source folder *src-gen* in the that project and see how the compiler will pick up your sample *Entities* and generate Java code for them. 
 
 ```xtend
 package org.example.domainmodel.generator
@@ -286,15 +286,15 @@ class DomainmodelGenerator implements IGenerator {
 }
 ```
 
-If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized into your workspace. Simply choose **New -\> Example -\> Xtend Examples -\> Xtend Introductory Examples** and have a look at Xtend's features. As a small exercise, you could implement support for the **many** attribute of a **Feature** or enforce naming conventions, e.g. field names should start with an underscore.
+If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized into your workspace. Simply choose *New &rarr; Example &rarr; Xtend Examples &rarr; Xtend Introductory Examples* and have a look at Xtend's features. As a small exercise, you could implement support for the *many* attribute of a *Feature* or enforce naming conventions, e.g. field names should start with an underscore.
 
 ## Unit Testing the Language {#tutorial-unit-tests}
 
 Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI tests for Junit4.
 
-This tutorial is about testing the parser and the linker for the **Domainmodel**. It leverages Xtend to write the test case.
+This tutorial is about testing the parser and the linker for the *Domainmodel*. It leverages Xtend to write the test case.
 
-1.  First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select **New -\> Xtend Class** from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the [XtextRunner]({{site.src.xtext}}/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java) and the language specific [IInjectorProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java). Both have to be provided by means of class annotations:     
+1.  First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select *New &rarr; Xtend Class* from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the [XtextRunner]({{site.src.xtext}}/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java) and the language specific [IInjectorProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java). Both have to be provided by means of class annotations:     
     
     ```xtend
       import org.eclipse.xtext.junit4.XtextRunner
@@ -306,7 +306,7 @@ This tutorial is about testing the parser and the linker for the **Domainmodel**
       }
     ```
 
-1.  The actual test case is pretty straight forward with Xtend. The utility class **org.eclipse.xtext.junit4.util.ParseHelper** allows to parse an arbitrary string into a **Domainmodel**. The model itself can be traversed and checked afterwards. A static import of [Assert]() leads to concise and readable test cases.     
+1.  The actual test case is pretty straight forward with Xtend. The utility class *org.eclipse.xtext.junit4.util.ParseHelper* allows to parse an arbitrary string into a *Domainmodel*. The model itself can be traversed and checked afterwards. A static import of [Assert]() leads to concise and readable test cases.     
     
     ```xtend
       import org.eclipse.xtext.junit4.util.ParseHelper
@@ -328,13 +328,13 @@ This tutorial is about testing the parser and the linker for the **Domainmodel**
       }
     ```
 
-1.  After saving the Xtend file, it is time to run the test. Select **Run As -\> JUnit Test** from the editor's context menu. 
+1.  After saving the Xtend file, it is time to run the test. Select *Run As &rarr; JUnit Test* from the editor's context menu. 
 
 ## Creating Custom Validation Rules {#tutorial-validation}
 
-One of the main advantages of DSLs is the possibility to statically validate domain specific constraints. This can be achieved by means of static analysis. Because this is a common use case, Xtext provides a dedicated hook for this kind of validation rules. In this lesson, we want to ensure that the name of an **Entity** starts with an upper-case letter and that all features have distinct names across the inheritance relationship of an **Entity**.
+One of the main advantages of DSLs is the possibility to statically validate domain specific constraints. This can be achieved by means of static analysis. Because this is a common use case, Xtext provides a dedicated hook for this kind of validation rules. In this lesson, we want to ensure that the name of an *Entity* starts with an upper-case letter and that all features have distinct names across the inheritance relationship of an *Entity*.
 
-Try to locate the class **DomainmodelValidator** in the package **org.eclipse.xtext.example.validation**. It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines of code:
+Try to locate the class *DomainmodelValidator* in the package *org.eclipse.xtext.example.validation*. It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines of code:
 
 ```xtend
 @Check
@@ -346,9 +346,9 @@ def void checkNameStartsWithCapital(Entity entity) {
 }
 ```
 
-Any name for the method will do. The important thing is the [Check]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java) annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the **Entity**.
+Any name for the method will do. The important thing is the [Check]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java) annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the *Entity*.
 
-The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the **Entity** and look for features with equal names.
+The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the *Entity* and look for features with equal names.
 
 ```xtend
 @Check

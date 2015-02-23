@@ -17,7 +17,7 @@ Guice is a great dependency injection container, which uses Java types and annot
 @Named("properties") Map<String,String> properties;
 ```
 
-A module is used to tell the framework what instance to inject into such injection points. For that, Guice comes with a fluent interface API written in Java and a couple of tricks (e.g. TypeLiteral) to make the configuration as readable and maintainable as possible.
+A module is used to tell the framework what instance to inject into such injection points. For that, Guice comes with a fluent interface API written in Java and a couple of tricks (e.g. *TypeLiteral*) to make the configuration as readable and maintainable as possible.
 
 You could for instance declare the following module:
 
@@ -35,7 +35,7 @@ public class MyModule implements Module {
 }
 ```
 
-The big advantage of using Java over an external text or XML file is that you can leverage the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. **TypeLiteral**) a lot in order to have an agreeable syntax. Also since the configuration is 'hidden' in a method implementation and not really declarative you cannot validate a Guice module at compile time.
+The big advantage of using Java over an external text or XML file is that you can leverage the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. *TypeLiteral*) a lot in order to have an agreeable syntax. Also since the configuration is 'hidden' in a method implementation and not really declarative you cannot validate a Guice module at compile time.
 
 The Guice DSL described in this section lets you describe the module above like this:
 
@@ -50,7 +50,7 @@ This not only uses the exact same syntax one uses in any injection points, but a
 
 ## Running the Example {#guice-running}
 
-In the example located in the project **org.xtext.guicemodules.examples** two modules are declared, one for a possible runtime scenario and one for a test scenario (yes, you sometimes want a module for tests).
+In the example located in the project *org.xtext.guicemodules.examples* two modules are declared, one for a possible runtime scenario and one for a test scenario (yes, you sometimes want a module for tests).
 
 ```guice
 import com.acme.*
@@ -67,7 +67,7 @@ com.acme.TestModule mixin RuntimeModule {
 }
 ```
 
-You can see the two modules in action by running `com.acme.Main` from the context menu as a **Java application** or as a **JUnit test**. 
+You can see the two modules in action by running `com.acme.Main` from the context menu as a *Java application* or as a *JUnit test*. 
 
 ## Grammar {#guice-grammar}
 

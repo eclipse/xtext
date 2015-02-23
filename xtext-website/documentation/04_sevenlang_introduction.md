@@ -14,7 +14,7 @@ Using the traditional Xtext grammar language you freely describe the syntax of y
 
 ## Map to Java
 
-Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that purpose you use a so-called **model inferrer**, a special API that allows you to create any number of Java classes, interfaces or members from your DSL. This hook not only defines how your language is translated to Java, but also defines the scope of the embedded expressions. The expressions from your language 'live' in the context you give them. If you want an expression to have access to certain local variables, just put it into a method with appropriate parameters or use instance fields if they work better.
+Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that purpose you use a so-called *model inferrer*, a special API that allows you to create any number of Java classes, interfaces or members from your DSL. This hook not only defines how your language is translated to Java, but also defines the scope of the embedded expressions. The expressions from your language 'live' in the context you give them. If you want an expression to have access to certain local variables, just put it into a method with appropriate parameters or use instance fields if they work better.
 
 While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code directly from the inferred model. The same way, Xbase already integrates your language with JDT to an extend that customizations beyond the JVM model inferrer will only be necessary for very special cases. You can naturally mix Java and DSL code in the same application without any barriers. 
 
@@ -42,20 +42,20 @@ To run any of the examples, you will need [Eclipse 3.6 or better](http://www.ecl
 
 If you prefer a simple all-inclusive installation, consider downloading the latest [Xtext distribution](http://www.eclipse.org/Xtext/download.html).
 
-Additional requirements are mentioned in the **Running the Example** section of each chapter.
+Additional requirements are mentioned in the *Running the Example* section of each chapter.
 
 ## Getting the Code {#installation}
 
-You can get the source code for all languages from the github repository at [github.com/xtext-dev/seven-languages-xtext](https://github.com/xtext-dev/seven-languages-xtext.git). The repository contains two folders **languages** and **examples**. Download the plug-ins from **languages** into the root workspace and the **examples** into the runtime workspace spawned from the root one using **Run \> Run Configurations... \> Eclipse Application \> Run (\<language\>)**.
+You can get the source code for all languages from the github repository at [github.com/xtext-dev/seven-languages-xtext](https://github.com/xtext-dev/seven-languages-xtext.git). The repository contains two folders *languages* and *examples*. Download the plug-ins from *languages* into the root workspace and the *examples* into the runtime workspace spawned from the root one using *Run &rarr; Run Configurations... &rarr; Eclipse Application &rarr; Run (\<language\>)*.
 
 Each language consists of several Eclipse projects 
 
 |:---|:---|
-|**org.xtext.\<language\>**|The base infrastructure|
-|**org.xtext.\<language\>.ui**|The editor based on Eclipse|
-|**org.xtext.\<language\>.tests**|Tests for the language|
-|**org.xtext.\<language\>.lib**|Runtime library|
-|**org.xtext.\<language\>.example**|Examples for using the language|
+|*org.xtext.\<language\>*|The base infrastructure|
+|*org.xtext.\<language\>.ui*|The editor based on Eclipse|
+|*org.xtext.\<language\>.tests*|Tests for the language|
+|*org.xtext.\<language\>.lib*|Runtime library|
+|*org.xtext.\<language\>.example*|Examples for using the language|
 
 Some of the languages do not include all of these plug-ins but the general structure is always the same.
 

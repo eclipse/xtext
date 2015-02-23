@@ -20,7 +20,7 @@ We have put most functionality of the language in the runtime library: Detecting
 
 ## Running the Example {#builddsl-running}
 
-In the runtime workspace, open the **BuildExample.build** in the editor. The example project comes with some sample java code to compile in the **example-project** folder. Choose **Run as \> Build Task** from the context menu of any task to execute it. 
+In the runtime workspace, open the *BuildExample.build* in the editor. The example project comes with some sample java code to compile in the *example-project* folder. Choose *Run as &rarr; Build Task* from the context menu of any task to execute it. 
 
 ## Grammar {#builddsl-grammar}
 
@@ -48,11 +48,11 @@ Task:
 	action=XBlockExpression;
 ```
 
-A **BuildFile** starts with a **package** declaration. The generated Java class will be located in this namespace. The next part is an **importSection**. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an **XImportSection** as in this example. The imports are followed by the **Declarations**. A **Declaration** can be a **Task** or a **Parameter**. A **Parameter** can declare a type and an initialization expression. **Tasks** define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a [XBlockExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java) from Xbase, thus everthing is possible within a task.
+A *BuildFile* starts with a *package* declaration. The generated Java class will be located in this namespace. The next part is an *importSection*. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an *XImportSection* as in this example. The imports are followed by the *Declarations*. A *Declaration* can be a *Task* or a *Parameter*. A *Parameter* can declare a type and an initialization expression. *Tasks* define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a [XBlockExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java) from Xbase, thus everthing is possible within a task.
 
 ## Translation to Java {#builddsl-inferrer}
 
-For each **BuildFile** we create a Java class that extends the library class [BuildScript]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend). We generate a main method allowing to execute the script as a Java application with command line parameters. The use of `System.exit` allows to return error codes to the caller. 
+For each *BuildFile* we create a Java class that extends the library class [BuildScript]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend). We generate a main method allowing to execute the script as a Java application with command line parameters. The use of `System.exit` allows to return error codes to the caller. 
 
 *   DSL:
     
@@ -109,7 +109,7 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 ...
 ```
 
-Each **Task** becomes a method in the Java class. A [DependsOn]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend) annotation communicates the dependencies to the runtime. The superclass will scan for such annotations and execute the dependencies in the right order.
+Each *Task* becomes a method in the Java class. A [DependsOn]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend) annotation communicates the dependencies to the runtime. The superclass will scan for such annotations and execute the dependencies in the right order.
 
 *   DSL:
     
@@ -139,7 +139,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) 
 ]
 ```
 
-Finally, we create a field with the [Param]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java) annotation from each **Parameter**. The superclass will make the so marked fields initializable from command line arguments. 
+Finally, we create a field with the [Param]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java) annotation from each *Parameter*. The superclass will make the so marked fields initializable from command line arguments. 
 
 *   DSL:
     
@@ -153,7 +153,7 @@ Finally, we create a field with the [Param]({{site.src.sevenlang}}/languages/org
     public String name = "World";
     ```
 
-The type can be skipped. If there is an initialization expression, the parameter's type is inferred from the initialization expression. If that one is missing, too, [String]({{site.javadoc.java}}/java/lang/String.html) is assumed. The Elvis-operator **?:** comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:
+The type can be skipped. If there is an initialization expression, the parameter's type is inferred from the initialization expression. If that one is missing, too, [String]({{site.javadoc.java}}/java/lang/String.html) is assumed. The Elvis-operator `?:` comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:
 
 ```xtend
 @Inject ITypeProvider typeProvider
@@ -165,7 +165,7 @@ val type = declaredParameter.type
 
 ## Validation {#builddsl-validation}
 
-When **Tasks** are depending on each other, cycles will break the computation of the execution order. There is a check for this constraint in the validator [BuildDSLValidator]({{site.src.sevenlang}}/languages/org.xtext.builddsl/src/org/xtext/builddsl/validation/BuildDSLValidator.xtend):
+When *Tasks* are depending on each other, cycles will break the computation of the execution order. There is a check for this constraint in the validator [BuildDSLValidator]({{site.src.sevenlang}}/languages/org.xtext.builddsl/src/org/xtext/builddsl/validation/BuildDSLValidator.xtend):
 
 ```xtend
 class BuildDSLValidator extends XbaseJavaValidator {
@@ -188,7 +188,7 @@ class BuildDSLValidator extends XbaseJavaValidator {
 
 ## Imports {#builddsl-imports}
 
-By using the **XImportSection** form Xbase, the language automatically supports the notion of **plain imports**, **static imports** and **static extension imports**. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the [Xtend primer](04_sevenlang_introduction.html#xtend_extension) for a more detailed description.
+By using the *XImportSection* form Xbase, the language automatically supports the notion of *plain imports*, *static imports* and *static extension imports*. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the [Xtend primer](04_sevenlang_introduction.html#xtend_extension) for a more detailed description.
 
 We ship some predefined extension classes to enhance the Java classes [File]({{site.javadoc.java}}/java/io/File.html) and [Class]({{site.javadoc.java}}/java/lang/Class.html). These are always put onto the extension scope by a customized [BuildDSLImplicitlyImportedFeatures]({{site.src.sevenlang}}/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend):
 

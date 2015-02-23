@@ -30,15 +30,15 @@ To avoid running out of memory when regenerating, make sure to run the workflow 
 
 `-Xmx512m -XX:MaxPermSize=128m`
 
-in the **VM Arguments** section of the **Arguments** tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](13_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
+in the *VM Arguments* section of the *Arguments* tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](13_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
 
 ## Referring to Java Elements using JVM Types {#jvmtypes}
 
 A common case when developing languages is the requirement to refer to existing concepts of other languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful to have access to the available types of the Java Virtual Machine as well. The JVM types Ecore model enables clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their fields and methods. Basically every information about the structural concepts of the Java type system is available via the JVM types. This includes annotations and their specific values and enumeration literals, too.
 
-The implementation will be selected transparently depending on how the client code is executed. If the environment is a plain stand-alone Java or OSGi environment, the **java.lang.reflect** API will be used to deduce the necessary data. On the contrary, the type-model will be created from the live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients behind the scenes via different implementations that are bound to specific interfaces by means of Google Guice. 
+The implementation will be selected transparently depending on how the client code is executed. If the environment is a plain stand-alone Java or OSGi environment, the *java.lang.reflect* API will be used to deduce the necessary data. On the contrary, the type-model will be created from the live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients behind the scenes via different implementations that are bound to specific interfaces by means of Google Guice. 
 
-Using the JVM types model is very simple. First of all, the grammar has to import the **JavaVMTypes** Ecore model. Thanks to content assist this is easy to spot in the list of proposals. 
+Using the JVM types model is very simple. First of all, the grammar has to import the *JavaVMTypes* Ecore model. Thanks to content assist this is easy to spot in the list of proposals. 
 
 ```xtext
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
@@ -59,7 +59,7 @@ After regenerating your language, it will be allowed to define a type `Date` tha
   datatype Date mapped-to java.util.Date
 ```
 
-These two steps will provide a nice integration into the Eclipse JDT. There is **Find References** on Java methods, fields and types that will reveal results in your language files. **Go To Declaration** works as expected and content assist will propose the list of available types. Even the **import** statements will also apply for Java types. 
+These two steps will provide a nice integration into the Eclipse JDT. There is *Find References* on Java methods, fields and types that will reveal results in your language files. *Go To Declaration* works as expected and content assist will propose the list of available types. Even the *import* statements will also apply for Java types. 
 
 ### Customization Points
 
@@ -75,14 +75,14 @@ The [ITypesProposalProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.common
 
 While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough to express neither the syntax nor the structure of such a type reference. 
 
-Xbase offers a parser rule **JvmTypeReference** which supports the full syntax of a Java type reference and instantiates a JVM element of type [JvmTypeReference]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java). So let us start by inheriting from Xbase:
+Xbase offers a parser rule *JvmTypeReference* which supports the full syntax of a Java type reference and instantiates a JVM element of type [JvmTypeReference]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java). So let us start by inheriting from Xbase:
 
 ```xtext
 grammar org.eclipse.xtext.example.Domainmodel 
    with org.eclipse.xtext.xbase.Xbase
 ```
 
-Because we can express all kinds of Java type references directly now, an indirection for **DataTypes** as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](02_domainmodelnextsteps.html) again, we have to replace all cross-references to **Types** by calls to the production rule **JvmTypeReference**. The rules **DataType**, **Type**, and **QualifiedName** become obsolete (the latter is already defined in Xbase), and the **Type** in **AbstractEntity** must be changed to **Entity**. As we now have all kinds of generic Java collections at hand, **Feature.many** is obsolete, too. The whole grammar now reads concisely:
+Because we can express all kinds of Java type references directly now, an indirection for *DataTypes* as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](02_domainmodelnextsteps.html) again, we have to replace all cross-references to *Types* by calls to the production rule *JvmTypeReference*. The rules *DataType*, *Type*, and *QualifiedName* become obsolete (the latter is already defined in Xbase), and the *Type* in *AbstractEntity* must be changed to *Entity*. As we now have all kinds of generic Java collections at hand, *Feature.many* is obsolete, too. The whole grammar now reads concisely:
 
 ```xtext
 grammar org.eclipse.xtext.example.Domainmodel with
@@ -184,7 +184,7 @@ class DomainmodelGenerator implements IGenerator {
 }
 ```
 
-Please note that when **org.eclipse.xtext.xbase.Xbase** is used the default binding for the interface [IGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java) is [JvmModelGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend). To use a custom one we have to bind our own implementation in **org.example.domainmodel.DomainmodelRuntimeModule** like this: 
+Please note that when *org.eclipse.xtext.xbase.Xbase* is used the default binding for the interface [IGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java) is [JvmModelGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend). To use a custom one we have to bind our own implementation in *org.example.domainmodel.DomainmodelRuntimeModule* like this: 
 
 ```java
 public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
@@ -196,7 +196,7 @@ public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDo
 
 ## Inferring a JVM Model {#xbase-inferred-type}
 
-In many cases, you will want your DSLs concepts to be usable as Java elements, e.g. an **Entity** will become a Java class and should be usable as such. In the domain model example, you can write 
+In many cases, you will want your DSLs concepts to be usable as Java elements, e.g. an *Entity* will become a Java class and should be usable as such. In the domain model example, you can write 
 
 ```domainexample
 entity Employee extends Person {
@@ -208,11 +208,11 @@ entity Person {
 ...
 ```
 
-You can use entities instead of Java types or even mix Java types as [List]() with entities such as **Person**. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let **Entity** inherit from [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This **inferred JVM model** is the representation of your concepts in the type system of Xbase. 
+You can use entities instead of Java types or even mix Java types as [List]() with entities such as *Person*. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let *Entity* inherit from [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This *inferred JVM model* is the representation of your concepts in the type system of Xbase. 
 
 The main component for the inferred JVM model is the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). It has a single method that takes the root model element as an argument and produces a number of [JvmDeclaredTypes]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java). As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) to create a hierarchy of JVM elements. The [builder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) in Xtend. It becomes even simpler if you inherit from the [AbstractModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) which traverses the input model and dispatches to its contents until you decide which elements to handle. 
 
-The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use `acceptor.accept(JvmDeclaredType, Procedure1<JvmDeclaredType>)` and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function **infer** for **Entities** to transform them into a [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java) in the first phase. In the second phase, we add a [JvmField]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java) and corresponding accessors for each **Property**. The final **DomainmodelJvmModelInferrer** looks like this:
+The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use `acceptor.accept(JvmDeclaredType, Procedure1<JvmDeclaredType>)` and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function *infer* for *Entities* to transform them into a [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java) in the first phase. In the second phase, we add a [JvmField]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java) and corresponding accessors for each *Property*. The final *DomainmodelJvmModelInferrer* looks like this:
 
 ```xtend
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
@@ -249,7 +249,7 @@ By default, the inferred model is [indexed](#global-scopes), so it can be cross 
 
 ## Using Xbase Expressions {#xbase-expressions}
 
-Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java, but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details on this expression language, please consult the [reference documentation](#xbase-language-ref-introduction) and the Xbase tutorial **(File \> New \> Example \> Xtext Examples \> Xbase Tutorial)**. 
+Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java, but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details on this expression language, please consult the [reference documentation](#xbase-language-ref-introduction) and the Xbase tutorial *(File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xbase Tutorial)*. 
 
 Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add behavior to your DSLs and make them executable. As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as part of a Java application. 
 
@@ -261,7 +261,7 @@ If you want to refer to [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 ```
 
-Now identify the location in your grammar where you want references to Java types and Xbase expressions to appear and call the appropriate rules of the super grammar. Adding Xbase expression to the domainmodel example leads to the additional concept **Operation**: An **Operation**'s parameters are **FullJvmFormalParameters**. The production rule for **FullJvmFormalParameters** expects both the name and the type here. That is reasonable since the type of parameters should not be inferred. The operation's return type is a **JvmTypeReference** and its **body** is an **XBlockExpression**. The final parser rule reads as:
+Now identify the location in your grammar where you want references to Java types and Xbase expressions to appear and call the appropriate rules of the super grammar. Adding Xbase expression to the domainmodel example leads to the additional concept *Operation*: An *Operation*'s parameters are *FullJvmFormalParameters*. The production rule for *FullJvmFormalParameters* expects both the name and the type here. That is reasonable since the type of parameters should not be inferred. The operation's return type is a *JvmTypeReference* and its *body* is an *XBlockExpression*. The final parser rule reads as:
 
 ```xtext
 Operation:
@@ -271,9 +271,9 @@ Operation:
     body=XBlockExpression;
 ```
 
-If you are unsure which entry point to choose for your expressions, consider the **XBlockExpression**.
+If you are unsure which entry point to choose for your expressions, consider the *XBlockExpression*.
 
-To integrate **Operations** in our models, we have to call this rule. We copy the previous **Feature** to a new rule **Property** and let **Feature** become the super type of **Property** and **Operation**:
+To integrate *Operations* in our models, we have to call this rule. We copy the previous *Feature* to a new rule *Property* and let *Feature* become the super type of *Property* and *Operation*:
 
 ```xtext
 Feature:
@@ -285,7 +285,7 @@ Property:
 ;
 ```
 
-Note: You will have to adapt the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) to these changes, i.e. rename **Feature** to **Property** and create a [JvmOperation]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) for each **Operation**. We leave that as an exercise :-) 
+Note: You will have to adapt the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) to these changes, i.e. rename *Feature* to *Property* and create a [JvmOperation]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) for each *Operation*. We leave that as an exercise :-) 
 
 If you are done with that, everything will work out of the box. Since each expression is now logically contained in an [operation]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java), all the scoping rules and visibility constraints are implied from that context. The framework will take care that the operation's parameters are visible inside the operation's body and that the declared return types are validated against the actual expression types.
 
@@ -295,7 +295,7 @@ There is yet another aspect of the JVM model that can be explored. Since all the
 
 Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it. Xbase ships with the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java) which makes this rather easy.
 
-An interpreter is essentially an external visitor, that recursively processes a model based on the model element's types. In the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java), the method **doEvaluate(XExpression, IEvaluationContext, CancelIndicator)** delegates to more specialised implementations e.g.
+An interpreter is essentially an external visitor, that recursively processes a model based on the model element's types. In the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java), the method *doEvaluate(XExpression, IEvaluationContext, CancelIndicator)* delegates to more specialised implementations e.g.
 
 ```java
 protected Object _doEvaluate(XBlockExpression literal,
@@ -303,7 +303,7 @@ protected Object _doEvaluate(XBlockExpression literal,
 							CancelIndicator indicator)
 ```
 
-The [IEvaluationContext]() keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be **fork**ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java):
+The [IEvaluationContext]() keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be *fork*ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java):
 
 ```java
 @Inject private XbaseInterpreter xbaseInterpreter;
@@ -329,7 +329,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development framework covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse. 
 
-Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, which is usually specified using so called **expressions**. Expressions are the heart of every programming language and are not easy to get right. On the other hand, expressions are well understood and many programming languages share a common set and understanding of expressions.
+Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, which is usually specified using so called *expressions*. Expressions are the heart of every programming language and are not easy to get right. On the other hand, expressions are well understood and many programming languages share a common set and understanding of expressions.
 
 That is why most people do not add support for expressions in their DSL but try to solve this differently. The most often used workaround is to define only the structural information in the DSL and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels and languages. Also, modifying the generated source code comes with a lot of additional problems. This has long time been the preferred solution since adding support for expressions (and a corresponding execution environment) for your language has been hard - even with Xtext.
 
@@ -353,11 +353,11 @@ Xbase comes with a small set of terminal rules, which can be overridden and henc
 
 #### Identifiers {#xbase-syntax-identifiers}
 
-Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases while having less ambiguities. They start with a letter **a**-**z**, **A**-**Z** or an underscore followed by more of these characters or any digit **0**-**9**. 
+Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases while having less ambiguities. They start with a letter *a*-*z*, *A*-*Z* or an underscore followed by more of these characters or any digit *0*-*9*. 
 
 ##### Escaped Identifiers {#xbase-syntax-escaped-identifiers}
 
-Identifiers must not have the same spelling as any reserved keyword. However, this limitation can be avoided by escaping identifiers with the prefix `^`. Escaped identifiers are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a keyword `service` in your language but want to call a Java property **service**. In such cases you can use the escaped identifier `^service` to reference the Java property.
+Identifiers must not have the same spelling as any reserved keyword. However, this limitation can be avoided by escaping identifiers with the prefix `^`. Escaped identifiers are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a keyword `service` in your language but want to call a Java property *service*. In such cases you can use the escaped identifier `^service` to reference the Java property.
 
 ##### Syntax
 
@@ -427,7 +427,7 @@ Basically all kinds of JVM types are available and referable.
 
 #### Simple Type References {#xbase-types-type-references}
 
-A simple type reference only consists of a **qualified name**. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
+A simple type reference only consists of a *qualified name*. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
 
 There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 
@@ -463,7 +463,7 @@ In other words, the return type of a Java method that returns an array of ints (
 
 #### Function Types {#xbase-types-function-types}
 
-Xbase introduces **lambda expressions**, and therefore an additional function type signature. On the JVM-Level a lambda expression (or more generally any function object) is just an instance of one of the types in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java), depending on the number of arguments. However, as lambda expressions are a very important language feature, a special sugared syntax for function types has been introduced. So instead of writing `Function1<String, Boolean>` one can write `(String)=>boolean`.
+Xbase introduces *lambda expressions*, and therefore an additional function type signature. On the JVM-Level a lambda expression (or more generally any function object) is just an instance of one of the types in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java), depending on the number of arguments. However, as lambda expressions are a very important language feature, a special sugared syntax for function types has been introduced. So instead of writing `Function1<String, Boolean>` one can write `(String)=>boolean`.
 
 For more information on lambda expressions see [](#xbase-expressions-lambda).
 
@@ -487,7 +487,7 @@ Some types in Xbase can be used synonymously even if they do not conform to each
 
 Because of type inference Xbase sometimes needs to compute the most common super type of a given set of types. 
 
-For a set **\[T1,T2,...Tn\]** of types the common super type is computed by using the linear type inheritance sequence of **T1** and is iterated until one type conforms to each **T2,..,Tn**. The linear type inheritance sequence of **T1** is computed by ordering all types which are part if the type hierarchy of **T1** by their specificity. A type **T1** is considered more specific than **T2** if **T1** is a subtype of **T2**. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. **CharSequence** has distance 2 to **StringBuilder** because the super type **AbstractStringBuilder** implements the interface, too. Even if **StringBuilder** implements **CharSequence** directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
+For a set *\[T1,T2,...Tn\]* of types the common super type is computed by using the linear type inheritance sequence of *T1* and is iterated until one type conforms to each *T2,..,Tn*. The linear type inheritance sequence of *T1* is computed by ordering all types which are part if the type hierarchy of *T1* by their specificity. A type *T1* is considered more specific than *T2* if *T1* is a subtype of *T2*. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. *CharSequence* has distance 2 to *StringBuilder* because the super type *AbstractStringBuilder* implements the interface, too. Even if *StringBuilder* implements *CharSequence* directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
 
 ---
 
@@ -547,7 +547,7 @@ A floating-point literal creates a `double` (suffix `D` or omitted), a `float` (
 
 ##### Boolean Literals {#xbase-expressions-boolean-literal}
 
-There are two boolean literals, `true` and `false` which correspond to their Java counterpart of type **boolean**. 
+There are two boolean literals, `true` and `false` which correspond to their Java counterpart of type *boolean*. 
 
 *   `true`
 *   `false`
@@ -682,7 +682,7 @@ The two postfix operators `++` and `--` use the following method mapping:
 
 ##### With Operator
 
-The **with** operator `=>` executes the [lambda expression](#xbase-expressions-lambda) with a single parameter on the right-hand side with a given argument on its left-hand side. The result is the left operand after applying the lambda expression. In combination with the [implicit parameter](#xbase-expressions-implicit-parameter)`it` this allows very convenient initialization of newly created objects. Example:
+The *with* operator `=>` executes the [lambda expression](#xbase-expressions-lambda) with a single parameter on the right-hand side with a given argument on its left-hand side. The result is the left operand after applying the lambda expression. In combination with the [implicit parameter](#xbase-expressions-implicit-parameter)`it` this allows very convenient initialization of newly created objects. Example:
 
 ```xbase
   val person = new Person => [
@@ -866,7 +866,7 @@ instead of
 
 ##### Function Mapping {#xbase-expressions-function-mapping}
 
-An Xbase lambda expression is a Java object of one of the **Function** interfaces that are part of the runtime library of Xbase. There is an interface for each number of parameters (up to six parameters). The names of the interfaces are 
+An Xbase lambda expression is a Java object of one of the *Function* interfaces that are part of the runtime library of Xbase. There is an interface for each number of parameters (up to six parameters). The names of the interfaces are 
 
 *   [Function0\<ReturnType\>]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for zero parameters, 
 *   [Function1\<Param1Type, ReturnType\>]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for one parameters, 
@@ -900,7 +900,7 @@ newArrayList( 'aaa', 'bb', 'c' ).sort [
 ]
 ```
 
-##### Implicit Parameter **it** {#xbase-expressions-implicit-parameter}
+##### Implicit Parameter *it* {#xbase-expressions-implicit-parameter}
 
 If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can be omitted. Use `it` to refer to the parameter inside the lambda expression's body. 
 
@@ -985,7 +985,7 @@ switch myString {
 
 ##### Type guards
 
-In addition to the case guards one can add a so called **Type Guard** which is syntactically just a [type reference](#xbase-types-type-references) preceding the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example: 
+In addition to the case guards one can add a so called *Type Guard* which is syntactically just a [type reference](#xbase-types-type-references) preceding the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example: 
 
 ```xbase
 var Object x = ...;
@@ -1000,7 +1000,7 @@ Only if the switch value passes a type guard, i.e. an `instanceof` test succeeds
 
 ##### Fall Through
 
-One can have multiple **type guards** and **cases** separated with a comma, to have all of them share the same **then-expression**.
+One can have multiple *type guards* and *cases* separated with a comma, to have all of them share the same *then-expression*.
 
 ```xtend
   def isMale(String salutation) {

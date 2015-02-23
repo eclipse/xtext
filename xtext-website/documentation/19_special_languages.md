@@ -6,7 +6,7 @@ layout: documentation
 
 ## Case Insensitive Languages {#case-insensitive-languages}
 
-In some cases, e.g. if your **SHIFT** key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](14_configuration.html#generator-fragment) for this purpose. 
+In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](14_configuration.html#generator-fragment) for this purpose. 
 
 For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
 
@@ -43,7 +43,7 @@ fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
 }
 ```
 
-For case insensitive element names, use the **ignoreCase** option in your scope fragment, i.e.
+For case insensitive element names, use the *ignoreCase* option in your scope fragment, i.e.
 
 ```mwe2
 fragment = scoping.ImportNamespacesScopingFragment {
@@ -61,7 +61,7 @@ fragment = scoping.ImportURIScopingFragment {
 
 ## Whitespace-Aware Languages {#whitespace-aware-languages}
 
-Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces `{ ... }`, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is [Python](https://www.python.org). Another well-known example is the **Home Automation** language shipped with Xtext (since version 2.8), available through **File -\> New -\> Example -\> Xtext Examples -\> Xtext Home Automation Example**.
+Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces `{ ... }`, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is [Python](https://www.python.org). Another well-known example is the *Home Automation* language shipped with Xtext (since version 2.8), available through *File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xtext Home Automation Example*.
 
 ```ruleengine
 Device Window can be open, closed
@@ -85,7 +85,7 @@ Rule 'Report error' when Heater.error then
     println(report)
 ```
 
-The first step for including whitespace-aware blocks in your language is to use the `parser.antlr.ex.rt.AntlrGeneratorFragment` and `parser.antlr.ex.ca.ContentAssistParserGeneratorFragment` in the workflow as shown in the [previous section](19_special_languages.html#case-insensitive-languages) (with or without the `ignoreCase` option). Then define **synthetic tokens** in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
+The first step for including whitespace-aware blocks in your language is to use the `parser.antlr.ex.rt.AntlrGeneratorFragment` and `parser.antlr.ex.ca.ContentAssistParserGeneratorFragment` in the workflow as shown in the [previous section](19_special_languages.html#case-insensitive-languages) (with or without the `ignoreCase` option). Then define *synthetic tokens* in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
 
 ```xtext
 terminal BEGIN: 'synthetic:BEGIN';
@@ -110,7 +110,7 @@ In case of a whitespace-aware language, the [formatter](#formatting) must be eit
 
 The following section describes how you make your language independent of Eclipse's Java Development Toolkit (JDT).
 
-In the **UIModule** of your language you have to overwrite two bindings. First, remove the bindings to components with support for the **'classpath:'** URI protocol, i.e. 
+In the *UIModule* of your language you have to overwrite two bindings. First, remove the bindings to components with support for the *'classpath:'* URI protocol, i.e. 
 
 ```java
 @Override
@@ -134,7 +134,7 @@ public Provider<IAllContainersState> provideIAllContainersState() {
 }
 ```
 
-The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated **IProjectCreator** in the **src/** folder of the **ui** project and apply the necessary changes there. First, remove the JDT project configuration by overriding **configureProject** with an empty body. 
+The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated *IProjectCreator* in the *src/* folder of the *ui* project and apply the necessary changes there. First, remove the JDT project configuration by overriding *configureProject* with an empty body. 
 
 The next thing is to redefine the project natures and builders that should be applied to you language projects.
 
@@ -156,7 +156,7 @@ protected String[] getBuilders() {
 }
 ```
 
-After that you have to bind the new **IProjectCreator**
+After that you have to bind the new *IProjectCreator*
 
 ```java
 @Override

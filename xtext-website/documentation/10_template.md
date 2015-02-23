@@ -20,7 +20,7 @@ We provide additional `FOR-ENDFOR` and `IF-ELSE-ENDIF` statements to iterate / b
 
 ## Running the Example {#templates-running}
 
-In the runtime workspace, run the **GenerateHtml** file as a Java application (**Run as... \> Java Application** from the context menu). This will execute the template **MyWebsite** and print the result to the console. 
+In the runtime workspace, run the *GenerateHtml* file as a Java application (*Run as... &rarr; Java Application* from the context menu). This will execute the template *MyWebsite* and print the result to the console. 
 
 ## Grammar {#templates-grammar}
 
@@ -79,13 +79,13 @@ RichStringElseIf returns xbase::XIfExpression:
 terminal TEXT : '»' (!'«')* (EOF|'«');
 ```
 
-It becomes quite straightforward once you have understood the escaping. Have a look at the last rule **TEXT** first: It says that a text starts with a closing French quote and ends with an opening quote or the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
+It becomes quite straightforward once you have understood the escaping. Have a look at the last rule *TEXT* first: It says that a text starts with a closing French quote and ends with an opening quote or the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
 
-A **TemplateFile** starts with a comment and switches to the expression mode for the preamble part consisting of the package declaration, the imports and the parameter declaration. The body is a **RichString**, which is an alternating sequence of **RichStringLiterals** and **RichStringPart**. The **RichStringLiterals** is essentially a text block (in inverted French quotes). The **RichStringPart** is either an Xbase expression, a **RichStringForLoop** or a **RichStringIf**. The latter inherit from the Xbase expressions with the same name to reuse as much of the Xbase infrastructure as possible. The rest should be easy.
+A *TemplateFile* starts with a comment and switches to the expression mode for the preamble part consisting of the package declaration, the imports and the parameter declaration. The body is a *RichString*, which is an alternating sequence of *RichStringLiterals* and *RichStringPart*. The *RichStringLiterals* is essentially a text block (in inverted French quotes). The *RichStringPart* is either an Xbase expression, a *RichStringForLoop* or a *RichStringIf*. The latter inherit from the Xbase expressions with the same name to reuse as much of the Xbase infrastructure as possible. The rest should be easy.
 
 ## Translation to Java {#templates-inferrer}
 
-Each **TemplateFile** is compiled to a Java class with a `generate` method that takes a lambda expression as a parameter. The lambda expression is called to initialize the template's properties, by handling the template itself as an argument. This comes along nicely, especially when called from Xtend.
+Each *TemplateFile* is compiled to a Java class with a `generate` method that takes a lambda expression as a parameter. The lambda expression is called to initialize the template's properties, by handling the template itself as an argument. This comes along nicely, especially when called from Xtend.
 
 *   DSL:
     
@@ -147,7 +147,7 @@ class TemplateJvmModelInferrer extends AbstractModelInferrer {
 ...
 ```
 
-Each **Parameter** becomes a Java property, i.e. a field with a getter and a setter. 
+Each *Parameter* becomes a Java property, i.e. a field with a getter and a setter. 
 
 *   DSL:
     
@@ -235,7 +235,7 @@ class TemplateCompiler extends XbaseCompiler {
 ...
 ```
 
-For a **RichString**, we declare a variable `_appendable` of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a **RichStringPart** which can be `null`, so we use the 'elvis operator' `?:` to insert an empty string in this case. 
+For a *RichString*, we declare a variable `_appendable` of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a *RichStringPart* which can be `null`, so we use the 'elvis operator' `?:` to insert an empty string in this case. 
 
 ```xtend
 RichString : {
@@ -254,7 +254,7 @@ RichString : {
 }
 ```
 
-As our **RichStringLiteral** inherits from [XStringLiteral]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java), it does not need any special treatment. The same holds for **RichStringIf** and **RichStringElseIif**. The **RichStringForLoop** requires special treatment, because as opposed to the [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) that always returns `null`, we want it to return a concatenation of its results. This looks like
+As our *RichStringLiteral* inherits from [XStringLiteral]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java), it does not need any special treatment. The same holds for *RichStringIf* and *RichStringElseIif*. The *RichStringForLoop* requires special treatment, because as opposed to the [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) that always returns `null`, we want it to return a concatenation of its results. This looks like
 
 ```xtend
 RichStringForLoop : {
@@ -295,7 +295,7 @@ As usual, we have to bind our [TemplateCompiler]({{site.src.sevenlang}}/language
 
 ## Type Computation {#templates-type-provider}
 
-The type system has to know how to determine the types of our new expressions. This is the job of the [TemplateTypeComputer]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend): **RichString** becomes a [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html). As opposed to its super type [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) a **RichStringForLoop** is of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) as well. The for-loop's body is expected to have a type, as the results must be concatenatable, which is different from Xbase's for-loop.
+The type system has to know how to determine the types of our new expressions. This is the job of the [TemplateTypeComputer]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend): *RichString* becomes a [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html). As opposed to its super type [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) a *RichStringForLoop* is of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) as well. The for-loop's body is expected to have a type, as the results must be concatenatable, which is different from Xbase's for-loop.
 
 ```xtend
 class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
@@ -316,7 +316,7 @@ Like the compiler, we have to bind this implementation in our [runtime module]({
 
 ## Value Converter {#templates-value-converter}
 
-The **RichStringLiterals** still have the French quotes around their values. As we do not want to see them in the output, we have implemented the [TemplateValueConverterService]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateValueConverterService.xtend) and bound it in the [runtime module]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java).
+The *RichStringLiterals* still have the French quotes around their values. As we do not want to see them in the output, we have implemented the [TemplateValueConverterService]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateValueConverterService.xtend) and bound it in the [runtime module]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java).
 
 ## Content Assist {#templates-content-assist}
 

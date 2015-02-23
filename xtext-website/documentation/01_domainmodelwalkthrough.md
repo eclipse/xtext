@@ -35,7 +35,7 @@ After you have installed Xtext on your machine, start Eclipse and set up a fresh
 
 In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
 
-**File -\> New -\> Project... -\> Xtext -\> Xtext project**
+*File &rarr; New &rarr; Project... &rarr; Xtext &rarr; Xtext project*
 
 Choose a meaningful project name, language name and file extension, e.g.
 
@@ -44,7 +44,7 @@ Choose a meaningful project name, language name and file extension, e.g.
 |**Language name:**|org.example.domainmodel.Domainmodel|
 |**DSL-File extension:**|dmodel|
 
-Click on **Finish** to create the projects. 
+Click on *Finish* to create the projects. 
 
 ![](images/30min_wizard.png)
 
@@ -59,7 +59,7 @@ After you have successfully finished the wizard, you will find three new project
 
 ## Write Your Own Grammar
 
-The wizard will automatically open the grammar file **Domainmodel.xtext** in the editor. As you can see that it already contains a simple **Hello World** grammar:
+The wizard will automatically open the grammar file *Domainmodel.xtext* in the editor. As you can see that it already contains a simple *Hello World* grammar:
 
 ```xtext
 grammar org.example.domainmodel.Domainmodel with
@@ -115,8 +115,8 @@ Let's have a more detailed look at what the different grammar rules mean:
     ;
     ```
 
-    It says that a **Domainmodel** contains an arbitrary number (`*`) of **Type**s which will be added (`+=`) to a feature called `elements`. 
-1.  The rule **Type** delegates to either the rule **DataType** or (`|`) the rule **Entity**.     
+    It says that a *Domainmodel* contains an arbitrary number (`*`) of *Type*s which will be added (`+=`) to a feature called `elements`. 
+1.  The rule *Type* delegates to either the rule *DataType* or (`|`) the rule *Entity*.     
     
     ```xtext
     Type:
@@ -124,7 +124,7 @@ Let's have a more detailed look at what the different grammar rules mean:
     ;
     ```
 
-1.  The rule **DataType** starts with a keyword `'datatype'`, followed by an identifier which is parsed by a rule called **ID**. The rule **ID** is defined in the super grammar **org.eclipse.xtext.common.Terminals** and parses a single word, a.k.a identifier. You can navigate to the declaration by using **F3** on the rule call. The value returned by the call to **ID** is assigned (`=`) to the feature **name**.     
+1.  The rule *DataType* starts with a keyword `'datatype'`, followed by an identifier which is parsed by a rule called *ID*. The rule *ID* is defined in the super grammar *org.eclipse.xtext.common.Terminals* and parses a single word, a.k.a identifier. You can navigate to the declaration by using *F3* on the rule call. The value returned by the call to *ID* is assigned (`=`) to the feature `name`.     
     
     ```xtext
     DataType:
@@ -132,7 +132,7 @@ Let's have a more detailed look at what the different grammar rules mean:
     ;
     ```
 
-1.  The rule **Entity** again starts with the definition of a keyword followed by a name.     
+1.  The rule *Entity* again starts with the definition of a keyword followed by a name.     
     
     ```xtext
     Entity :
@@ -142,8 +142,8 @@ Let's have a more detailed look at what the different grammar rules mean:
     ;
     ```
 
-    Next up there is the extends clause which is parenthesized and optional (`?`). Since the feature named **superType** is a cross reference (note the square brackets), the parser rule **Entity** is not called here, but only a single identifier (the **ID**-rule) is parsed. The actual **Entity** will be resolved during the linking phase. Finally between curly braces there can be any number of **Features**, which invokes the next rule. 
-1.  Last but not least, the rule **Feature** is defined as follows:     
+    Next up there is the extends clause which is parenthesized and optional (`?`). Since the feature named `superType` is a cross reference (note the square brackets), the parser rule *Entity* is not called here, but only a single identifier (the *ID*-rule) is parsed. The actual *Entity* will be resolved during the linking phase. Finally between curly braces there can be any number of *Features*, which invokes the next rule. 
+1.  Last but not least, the rule *Feature* is defined as follows:     
     
     ```xtext
     Feature:
@@ -151,15 +151,15 @@ Let's have a more detailed look at what the different grammar rules mean:
     ;
     ```
 
-    The keyword `many` is used to model a multi valued feature in the domain model DSL. The assignment operator (`?=`) implies that the feature **many** is of type **boolean**. You are already familiar with the other syntax elements in this parser rule. 
+    The keyword `many` is used to model a multi valued feature in the domain model DSL. The assignment operator (`?=`) implies that the feature `many` is of type *boolean*. You are already familiar with the other syntax elements in this parser rule. 
 
 This domain model grammar already uses the most important concepts of Xtext's grammar language. you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (`=`) where the multi value assignment used a plus-equals (`+=`). We have also seen the boolean assignment operator (`?=`). Furthermore we saw how a cross reference can be declared and learned about different cardinalities (`?` = optional, `*` = any number, `+` = at least once). Please consult the [Grammar Language Reference](13_grammarlanguage.html) for more details. Let's now have a look what you can do with such a language description.
 
 ## Generate Language Artifacts
 
-Now that we have the grammar in place and defined we need to execute the code generator that will derive the various language components. To do so, locate the file **GenerateDomainmodel.mwe2** file next to the grammar file in the package explorer view. From its context menu, choose
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the various language components. To do so, locate the file *GenerateDomainmodel.mwe2* file next to the grammar file in the package explorer view. From its context menu, choose
 
-**Run As -\> MWE2 Workflow**.
+*Run As &rarr; MWE2 Workflow*.
 
 This will trigger the Xtext language generator. It generates the parser and serializer and some additional infrastructure code. You will see its logging messages in the Console View. 
 
@@ -167,17 +167,17 @@ This will trigger the Xtext language generator. It generates the parser and seri
 
 ## Run the Generated IDE Plug-in {#run-generated-plugin}
 
-We are now able to test the IDE integration. If you select **Run -\> Run Configurations...** from the Eclipse menu, you can choose **Eclipse Application -\> Launch Runtime Eclipse**. This preconfigured launch shortcut already has appropriate memory settings and parameters set. Now you can hit **Run** to start a new Eclipse.
+We are now able to test the IDE integration. If you select *Run &rarr; Run Configurations...* from the Eclipse menu, you can choose *Eclipse Application &rarr; Launch Runtime Eclipse*. This preconfigured launch shortcut already has appropriate memory settings and parameters set. Now you can hit *Run* to start a new Eclipse.
 
 ![](images/30min_launchconfiguration.png)
 
-This will spawn a new Eclipse workbench with your newly developed plug-ins installed. In the new workbench, create a new project of your choice, e.g. **File -\> New -\> Project... -\> Java Project** and therein a new file with the file extension you chose in the beginning (**\*.dmodel**). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.
+This will spawn a new Eclipse workbench with your newly developed plug-ins installed. In the new workbench, create a new project of your choice, e.g. *File &rarr; New &rarr; Project... &rarr; Java Project* and therein a new file with the file extension you chose in the beginning (*\*.dmodel*). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.
 
 ![](images/30min_editor.png)
 
 ## Second Iteration: Adding Packages and Imports {#add-imports}
 
-After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of **Package**s in order to avoid name clashes and to better fit with the target environment (Java). A **Package** may contain **Types** and other packages. In order to allow fort names in references, we will also add a way to declare imports.
+After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of *Package*s in order to avoid name clashes and to better fit with the target environment (Java). A *Package* may contain *Types* and other packages. In order to allow fort names in references, we will also add a way to declare imports.
 
 In the end we want to be able to split the previously used model into to distinct files :
 
@@ -224,7 +224,7 @@ package my.company.blog {
 
 Let's start enhancing the grammar. 
 
-1.  Since a **Domainmodel** no longer contains types but packages, too, the entry rule has to be modified. Furthermore, a common super type for **Packages** and **Types** should be introduced: the **AbstractElement**.     
+1.  Since a *Domainmodel* no longer contains types but packages, too, the entry rule has to be modified. Furthermore, a common super type for *Packages* and *Types* should be introduced: the *AbstractElement*.     
     
     ```xtext
     Domainmodel:
@@ -236,7 +236,7 @@ Let's start enhancing the grammar.
     ;
     ```
 
-1.  A `PackageDeclaration` in turn looks pretty much as expected. It contains a number of **Imports** and **AbstractElements**. Since **Imports** should be allowed for the root-Domainmodel, too, we add them as an alternative to the rule `AbstractElement`.     
+1.  A `PackageDeclaration` in turn looks pretty much as expected. It contains a number of *Imports* and *AbstractElements*. Since *Imports* should be allowed for the root-Domainmodel, too, we add them as an alternative to the rule `AbstractElement`.     
     
     ```xtext
     PackageDeclaration:
@@ -254,8 +254,8 @@ Let's start enhancing the grammar.
     ;
     ```
 
-    The `QualifiedName` is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature **name** of a **Package** is still of type [String](). 
-1.  Imports can be defined in a very convenient way with Xtext. If you use the name **importedNamespace** in a parser rule, the framework will treat the value as an import. It even supports wildcard and handles them as expected:     
+    The `QualifiedName` is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature `name` of a *Package* is still of type [String](). 
+1.  Imports can be defined in a very convenient way with Xtext. If you use the name `importedNamespace` in a parser rule, the framework will treat the value as an import. It even supports wildcard and handles them as expected:     
     
     ```xtext
       Import:

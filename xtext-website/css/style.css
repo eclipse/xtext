@@ -40,6 +40,7 @@ li {
 }
 
 h1 {
+	margin-top: 20px;
 	margin-bottom: 10px;
 }
 
@@ -89,9 +90,14 @@ img {
 	height: auto;
 }
 
-strong {
+em {
 	font-weight: 500;
 	font-style: italic;
+	padding: 0 2px 0 0;
+}
+
+strong {
+	font-weight: bold;
 }
 
 code {

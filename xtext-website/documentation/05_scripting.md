@@ -34,7 +34,7 @@ Note that the core language infrastructure such as the parser, linker and compil
 
 ## Running the Example {#scripting-running}
 
-Make sure you have the projects **org.xtext.scripting** and **org.xtext.scripting.ui** in your workspace. Then start a new Eclipse by choosing **Run \> Run Configurations... \> Eclipse Application \> Run (org.xtext.scripting)**. Import the project **org.xtext.scripting.examples** into the newly spawned workspace using the **Import existing projects into workspace** wizard.
+Make sure you have the projects *org.xtext.scripting* and *org.xtext.scripting.ui* in your workspace. Then start a new Eclipse by choosing *Run &rarr; Run Configurations... &rarr; Eclipse Application &rarr; Run (org.xtext.scripting)*. Import the project *org.xtext.scripting.examples* into the newly spawned workspace using the *Import existing projects into workspace* wizard.
 
 ## Grammar {#scripting-grammar}
 
@@ -53,7 +53,7 @@ Script returns XBlockExpression:
 	(expressions+=XExpressionInsideBlock ';'?)*;
 ```
 
-The main rule **Script** is defined to produce an object of type `Script`, which is a subtype of `XBlockExpression`. A block expression simply contains any number of expressions. The rule `XExpressionInsideBlock` is defined in the Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not want to force anybody to write curly braces at the beginning and the end of a simple script.
+The main rule *Script* is defined to produce an object of type `Script`, which is a subtype of `XBlockExpression`. A block expression simply contains any number of expressions. The rule `XExpressionInsideBlock` is defined in the Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not want to force anybody to write curly braces at the beginning and the end of a simple script.
 
 ## Translation to Java {#scripting-inferrer}
 

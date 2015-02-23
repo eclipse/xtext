@@ -4,7 +4,7 @@ layout: documentation
 
 # DSL for MongoDB {#mongoDB}
 
-[MongoDB](http://www.mongodb.org) is a very popular document-based database management system. In mongoDB, database entries (AKA **documents**) have fields, which are essentially **(key, value)** pairs. MongoDB is schema free, i.e. there are no rules, which fields have to be defined and of what type they are. This allows for very flexible and heterogeneous data structures and is a perfect match with JSON. 
+[MongoDB](http://www.mongodb.org) is a very popular document-based database management system. In mongoDB, database entries (AKA *documents*) have fields, which are essentially *(key, value)* pairs. MongoDB is schema free, i.e. there are no rules, which fields have to be defined and of what type they are. This allows for very flexible and heterogeneous data structures and is a perfect match with JSON. 
 
 ![](images/mongobeans_screenshot.png)
 
@@ -14,7 +14,7 @@ With this language you can describe statically typed Java-facades for MongoDB do
 
 ## Overview {#mongo-solution}
 
-In this project, we have created a small DSL **mongoBeans** based on Xtext that allows to create basic entity classes. These are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of the language as a description how to map mongoDB documents to JavaBeans, in analogy to well known object relational mappers.
+In this project, we have created a small DSL *mongoBeans* based on Xtext that allows to create basic entity classes. These are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of the language as a description how to map mongoDB documents to JavaBeans, in analogy to well known object relational mappers.
 
 An example mongoBeans file looks like this: 
 
@@ -45,7 +45,7 @@ package org.musicdb {
 }
 ```
 
-For each **MongoBean** definition in a **MongoFile** file, we generate a Java class that wraps a [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html). The class provides statically typed getter and setter methods for all defined **MongoProperties**. In the implementation of these accessor methods we delegate to the wrapped [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and do all the casting and conversion work. For the `Artist` in the above example, this would look like
+For each *MongoBean* definition in a *MongoFile* file, we generate a Java class that wraps a [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html). The class provides statically typed getter and setter methods for all defined *MongoProperties*. In the implementation of these accessor methods we delegate to the wrapped [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and do all the casting and conversion work. For the `Artist` in the above example, this would look like
 
 ```java
 public class Artist implements IMongoBean {
@@ -63,7 +63,7 @@ public class Artist implements IMongoBean {
 }
 ```
 
-By using the generated Java code, the rest of the application can use a type-safe and JavaBeans conformant API to access the data model. In addition, **MongoBeans** can define **MongoOperations**, which are translated to Java methods. We can use **MongoProperties** as well as Java types inside the operations' bodies. 
+By using the generated Java code, the rest of the application can use a type-safe and JavaBeans conformant API to access the data model. In addition, *MongoBeans* can define *MongoOperations*, which are translated to Java methods. We can use *MongoProperties* as well as Java types inside the operations' bodies. 
 
 Client code could then look like this: 
 
@@ -87,7 +87,7 @@ dbCollection.save(john.getDBObject())
 
 In addition to the [common requirements](04_sevenlang_introduction.html#common-requirements), you need the [mongoDB implementation](http://www.mongodb.org/downloads) for your platform. We have included the mongoDB Java driver from [Eclipse Orbit](http://download.eclipse.org/tools/orbit/downloads/) in the code base. 
 
-Import the projects into an Eclipse workspace and run the launch configuration **Run (org.eclipse.xtext.mongobeans)**. Import the example plug-in into the new workspace and run `MusicDBXtendTest` as a JUnit test.
+Import the projects into an Eclipse workspace and run the launch configuration *Run (org.eclipse.xtext.mongobeans)*. Import the example plug-in into the new workspace and run `MusicDBXtendTest` as a JUnit test.
 
 ## Grammar {#mongo-grammar}
 
@@ -130,13 +130,13 @@ MongoOperation:
 	body=XBlockExpression;
 ```
 
-The language inherits from the `Xbase` grammar in order to allow Xbase expressions and references to Java elements. A **MongoFile** starts with an import section (see [Build DSL](06_builddsl.html#builddsl-imports) for details). The import section is followed by any number of **AbstractElements**, which can be **PackageDeclarations** or **MongoBeans**. Note that as opposed to Java, **PackageDeclarations** can be nested. **MongoBeans** define statically typed **MongoProperties**, which can be single-valued or multi-valued denoted by an `*` following the type name. The type of a **MongoProperty** can also be defined inline. **MongoBeans** can also define **MongoOperations**. The body of such an operation is an **XBlockExpression** from Xbase. 
+The language inherits from the `Xbase` grammar in order to allow Xbase expressions and references to Java elements. A *MongoFile* starts with an import section (see [Build DSL](06_builddsl.html#builddsl-imports) for details). The import section is followed by any number of *AbstractElements*, which can be *PackageDeclarations* or *MongoBeans*. Note that as opposed to Java, *PackageDeclarations* can be nested. *MongoBeans* define statically typed *MongoProperties*, which can be single-valued or multi-valued denoted by an `*` following the type name. The type of a *MongoProperty* can also be defined inline. *MongoBeans* can also define *MongoOperations*. The body of such an operation is an *XBlockExpression* from Xbase. 
 
 ## Translation to Java {#mongo-inferrer}
 
 The JVM model inference is implemented in the [MongoBeansJvmModelInferrer]({{site.src.sevenlang}}/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.xtend). As the generated code is quite rich, this is the most complex component of this language.
 
-For each **MongoBean**, we create a Java class implementing the interface [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend). This interface is the first type of a small runtime library that has to be on the classpath at runtime.
+For each *MongoBean*, we create a Java class implementing the interface [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend). This interface is the first type of a small runtime library that has to be on the classpath at runtime.
 
 *   DSL:
     
@@ -172,9 +172,9 @@ def dispatch void infer(MongoFile file,
 }
 ```
 
-First, it finds all elements of type **MongoBean** in the given **MongoFile**. For each of these, it creates a new Java class. Then the documentation is copied and the interface [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend) is added to the list of supertypes. This will also insert a Java import at the appropriate location. 
+First, it finds all elements of type *MongoBean* in the given *MongoFile*. For each of these, it creates a new Java class. Then the documentation is copied and the interface [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend) is added to the list of supertypes. This will also insert a Java import at the appropriate location. 
 
-Each **MongoBean** wraps a [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html), which is represented as a Java field with a getter. There are two constructors, one for a given [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and one that creates a new one. We have to store the class name in the DB object, if we want to be able to restore JavaBeans from query results.
+Each *MongoBean* wraps a [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html), which is represented as a Java field with a getter. There are two constructors, one for a given [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and one that creates a new one. We have to store the class name in the DB object, if we want to be able to restore JavaBeans from query results.
 
 *   DSL:
     
@@ -275,7 +275,7 @@ Next on our list are the getters and setters delegating to the `_dbObject`. We h
     ...
     ```
 
-The runtime helper class [WrappingUtil]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/WrappingUtil.xtend) does the conversion between [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend). For multi-valued **MongoProperties** we need getters only. If they have a primitive type, they can be handled by the Java-driver directly. Multi-valued **MongoBean** typed properties require a special [MongoBeanList]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/MongoBeanList.xtend) to automatically wrap/unwrap the elements. 
+The runtime helper class [WrappingUtil]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/WrappingUtil.xtend) does the conversion between [DBObject]({{site.javadoc.mongodb}}/com/mongodb/DBObject.html) and [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend). For multi-valued *MongoProperties* we need getters only. If they have a primitive type, they can be handled by the Java-driver directly. Multi-valued *MongoBean* typed properties require a special [MongoBeanList]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/MongoBeanList.xtend) to automatically wrap/unwrap the elements. 
 
 The corresponding inferrer code does not show anything particularly new so we skip most of it for brevity. To detect whether a type is an [IMongoBean]({{site.src.sevenlang}}/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend) or a primitive mongoDB type, we use the last helper class [MongoTypes]({{site.src.sevenlang}}/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoTypes.xtend). The following snippet shows the inference of the getter for multi-valued properties:
 
@@ -299,7 +299,7 @@ def protected addListAccessor(JvmDeclaredType inferredType,
  ...
 ```
 
-Last but not least, we infer Java methods for **MongoOperations**. 
+Last but not least, we infer Java methods for *MongoOperations*. 
 
 *   DSL:
     
@@ -321,7 +321,7 @@ Last but not least, we infer Java methods for **MongoOperations**.
     ...
     ```
 
-The inferrer code for this particular task is surprisingly simple, as we can directly associate the body of the **MongoOperation** to the generated Java method. The Xbase compiler will automatically transform that to Java. 
+The inferrer code for this particular task is surprisingly simple, as we can directly associate the body of the *MongoOperation* to the generated Java method. The Xbase compiler will automatically transform that to Java. 
 
 ```xtend
 def protected addMethod(JvmDeclaredType inferredType, 
@@ -339,7 +339,7 @@ def protected addMethod(JvmDeclaredType inferredType,
 
 ## Qualified Name Provider {#mongo-name-provider}
 
-By default, the qualified name of an element is calculated by joining all the simple names of its containers with a dot. In our example, the **MongoBean** `Track` would consequently be named `org.musicdb.Album.track.Track`. To ignore properties and beans on the path, we implemented our own [MongoQualifiedNameProvider]({{site.src.sevenlang}}/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.xtend). 
+By default, the qualified name of an element is calculated by joining all the simple names of its containers with a dot. In our example, the *MongoBean* `Track` would consequently be named `org.musicdb.Album.track.Track`. To ignore properties and beans on the path, we implemented our own [MongoQualifiedNameProvider]({{site.src.sevenlang}}/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.xtend). 
 
 ```xtend
 class MongoQualifiedNameProvider extends XbaseQualifiedNameProvider {

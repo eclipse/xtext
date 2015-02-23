@@ -8,7 +8,7 @@ Most of the tasks when migrating to Xtext 2.0 can be automated. Some changes wil
 
 The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.
 
-**Tip: You'll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.**
+*Hint: You'll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.*
 
 ## Take the Shortcut
 
@@ -18,11 +18,11 @@ If you haven't made too many customizations to the generated defaults and if you
 
 Before you start the migration to Xtext 2.0, you should make sure that no old plug-ins are in your target platform.
 
-**Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.**
+*Hint: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.*
 
 ### Update the Plug-in Dependencies and Import Statements
 
-You should update the version constraints of the plug-in dependencies in your manifest files from version **1.0.x** to **2.0** if you specified any concrete versions. Also the constraint of **org.antlr.runtime** must be updated from **\[3.0.0,3.0.2)** to **3.2.0**.
+You should update the version constraints of the plug-in dependencies in your manifest files from version *1.0.x* to *2.0* if you specified any concrete versions. Also the constraint of *org.antlr.runtime* must be updated from *\[3.0.0,3.0.2)* to *3.2.0*.
 
 The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. This fixes most of the problems in the manually written code. 
 
@@ -32,7 +32,7 @@ With Xtext 2.0 an object for dealing with qualified names has been introduced: [
 
 The [IQualifiedNameConverter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java) converts qualified names from/to their [String]() representation. This is also where you specify the separator and wildcard strings. If you already know the segments of a qualified name, you can also create it using `QualifiedName.create(String ...)`. 
 
-[QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) is the new type of the **name** properties in the [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java). So if you have customized indexing, e.g. implemented your own [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), you will have to create [qualified names]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) instead of [strings](). [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) are also used in other places such as [scoping](#scoping), [linking](#linking), [serialization](#serialization), [content assist](#content-assist)...
+[QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) is the new type of the *name* properties in the [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java). So if you have customized indexing, e.g. implemented your own [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), you will have to create [qualified names]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) instead of [strings](). [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) are also used in other places such as [scoping](#scoping), [linking](#linking), [serialization](#serialization), [content assist](#content-assist)...
 
 Furthermore, the method [IQualifiedNameProvider.getQualifiedName(EObject)]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) has been renamed to `getFullyQualifiedName(EObject)`.
 
@@ -42,17 +42,17 @@ In Xtext 1.0.x the interfaces [IResourceDescriptions]({{site.src.xtext}}/plugins
 
 The default indexing for Xtext resources as it is defined in [DefaultResourceDescriptionManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionManager.java) has changed. Only cross-references pointing to elements outside the current resource are indexed. Furthermore, the [DefaultResourceDescriptionManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionManager.java) can now be easier customized with an [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java). 
 
-For Ecore files only [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) and [EStructuralFeatures]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) are indexed, each with both, the **nsURI** and the **name** of the containing [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) in their qualified name.
+For Ecore files only [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) and [EStructuralFeatures]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) are indexed, each with both, the *nsURI* and the *name* of the containing [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) in their qualified name.
 
-There is a new interface to find references to Xtext elements: [IReferenceFinder]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java). It allows to distinguish searches in the local [Resource]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) from global index searches. Local searches will yield **all** local cross references independent of the indexing strategy.
+There is a new interface to find references to Xtext elements: [IReferenceFinder]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java). It allows to distinguish searches in the local [Resource]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) from global index searches. Local searches will yield *all* local cross references independent of the indexing strategy.
 
 ### Rewritten Node Model
 
 To reduce memory consumption, the node model has been redesigned in Xtext 2.0. We no longer use EMF, but a chained list of compressed nodes instead. 
 
-The package **org.eclipse.xtext.nodemodel** now contains the relevant interfaces to program against. The new interfaces follow the naming convention of other types in the framework. They are called [INode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java), [ICompositeNode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ICompositeNode.java) and [ILeafNode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ILeafNode.java). That way, most of the migration will be done by prefixing the old names with an **I** and use the organize imports tool. Please make sure not to program against concrete or abstract classes.
+The package *org.eclipse.xtext.nodemodel* now contains the relevant interfaces to program against. The new interfaces follow the naming convention of other types in the framework. They are called [INode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java), [ICompositeNode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ICompositeNode.java) and [ILeafNode]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ILeafNode.java). That way, most of the migration will be done by prefixing the old names with an *I* and use the organize imports tool. Please make sure not to program against concrete or abstract classes.
 
-If you used the node model a lot, you should have a closer look at the new APIs. The [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) API is no longer available on the nodes. Instead, you we offer a couple of [Iterables]() for traversing the tree. Where appropriate, helper methods of the former **ParseTreeUtil** and **NodeUtil** have become members of the nodes, e.g. `NodeUtil.getAllContents(AbstractNode)` has become [INode.getAsTreeIterable()]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java) The remaining methods have been converted and moved to the new [NodeModelUtils]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java).
+If you used the node model a lot, you should have a closer look at the new APIs. The [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) API is no longer available on the nodes. Instead, you we offer a couple of [Iterables]() for traversing the tree. Where appropriate, helper methods of the former *ParseTreeUtil* and *NodeUtil* have become members of the nodes, e.g. `NodeUtil.getAllContents(AbstractNode)` has become [INode.getAsTreeIterable()]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java) The remaining methods have been converted and moved to the new [NodeModelUtils]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java).
 
 ### New Outline
 
@@ -69,11 +69,11 @@ and add
 fragment = outline.OutlineTreeProviderFragment {}
 ```
 
-After generating a new class named **MyDslOutlineTreeProvider** is generated. The API changed completely. For that reason you should take a closer look at the [chapter on the outline](#outline). The old classes named **MyDslTransformer** and **MyDslOutlineNodeAdapterFactory** have become obsolete and should be removed after having migrated your code to the new API.
+After generating a new class named *MyDslOutlineTreeProvider* is generated. The API changed completely. For that reason you should take a closer look at the [chapter on the outline](#outline). The old classes named *MyDslTransformer* and *MyDslOutlineNodeAdapterFactory* have become obsolete and should be removed after having migrated your code to the new API.
 
 ### AutoEditStrategy
 
-In Xtext 1.0.x your AutoEditStrategy extends the class **DefaultAutoEditStrategy** which implements the interface [IAutoEditStrategy](). In Xtext 2.0 the [DefaultAutoEditStrategyProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java) should be extended instead. The only thing you have to do is to change the superclass from **DefaultAutoEditStrategy** to [DefaultAutoEditStrategyProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java). The interface [IEditStrategyAcceptor]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/AbstractEditStrategyProvider.java) changed from `accept(IAutoEditStrategy)` to `accept(IAutoEditStrategy, String)`. The last parameter represents the **contentType** of the document. Constants could be found in the [IDocument]() and in the [TerminalsTokenTypeToPartitionMapper]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/TerminalsTokenTypeToPartitionMapper.java). 
+In Xtext 1.0.x your AutoEditStrategy extends the class *DefaultAutoEditStrategy* which implements the interface [IAutoEditStrategy](). In Xtext 2.0 the [DefaultAutoEditStrategyProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java) should be extended instead. The only thing you have to do is to change the superclass from *DefaultAutoEditStrategy* to [DefaultAutoEditStrategyProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java). The interface [IEditStrategyAcceptor]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/AbstractEditStrategyProvider.java) changed from `accept(IAutoEditStrategy)` to `accept(IAutoEditStrategy, String)`. The last parameter represents the *contentType* of the document. Constants could be found in the [IDocument]() and in the [TerminalsTokenTypeToPartitionMapper]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/TerminalsTokenTypeToPartitionMapper.java). 
 
 As a example the configure method could look like this one: 
 
@@ -86,7 +86,7 @@ As a example the configure method could look like this one:
   }
 ```
 
-The last thing you have to do is to change the binding of the **IAutoEditStrategy** in the **MyDslUIModule** from
+The last thing you have to do is to change the binding of the *IAutoEditStrategy* in the *MyDslUIModule* from
 
 ```java
 public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy()
@@ -101,15 +101,15 @@ public Class<? extends AbstractEditStrategyProvider>
 
 ### Other Noteworthy API Changes
 
-The **src** folders are generated once, so existing code will not be overwritten but has to be updated manually.
+The *src* folders are generated once, so existing code will not be overwritten but has to be updated manually.
 
 You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems. 
 
 *   In the interface [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) the method `getScope(EObject,EReference)` has been removed. Use `getScope(Resource, EReference, Predicate<IEObjectDescription>)` instead. 
-*   The interface **IAntlrParser** has been removed. Use the [IParser]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java) instead.
+*   The interface *IAntlrParser* has been removed. Use the [IParser]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java) instead.
 *   The methods `error(..)` and `warning(..)` in the [AbstractDeclarativeValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java) used to accept integer constants representing the [EStructuralFeature]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) which caused the issues. These integer parameters were replaced by the feature itself, e.g. from `error(String, Integer)` to `error(String, EStructuralFeature)`. Use the generated [EPackage.Literals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) to access the [EStructuralFeatures]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java). 
-*   The enum **DiagnosticSeverity** has been renamed to [Severity]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/diagnostics/Severity.java).
-*   The class **TextLocation** has been replaced by the interface [ITextRegion]({{site.src.xtext}}/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/ITextRegion.java) with an immutable implementation [TextRegion]({{site.src.xtext}}/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java).
+*   The enum *DiagnosticSeverity* has been renamed to [Severity]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/diagnostics/Severity.java).
+*   The class *TextLocation* has been replaced by the interface [ITextRegion]({{site.src.xtext}}/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/ITextRegion.java) with an immutable implementation [TextRegion]({{site.src.xtext}}/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java).
 *   In Xtext 1.0.x the class [EObjectAtOffsetHelper]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java) provided several static methods to resolve elements. In Xtext 2.0 these methods aren't static anymore. For that reason you could create an instance of this class or let Guice do the job for you:     
     
     ```java

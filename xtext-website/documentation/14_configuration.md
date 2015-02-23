@@ -8,7 +8,7 @@ layout: documentation
 
 Xtext provides a lot of generic implementations for your language's infrastructure but also uses code generation to generate some of the components. Those generated components are for instance the parser, the serializer, the inferred Ecore model (if any) and a couple of convenient base classes for content assist, etc.
 
-The generator also contributes to shared project resources such as the **plugin.xml**, **MANIFEST.MF** and the [Guice modules](#guicemodules).
+The generator also contributes to shared project resources such as the *plugin.xml*, *MANIFEST.MF* and the [Guice modules](#guicemodules).
 
 Xtext's generator uses a special DSL called [MWE2 - the modeling workflow engine](18_mwe2.html) to configure the generator.
 
@@ -53,7 +53,7 @@ Person {
 }
 ```
 
-These couple of lines will, when interpreted by MWE2, result in an object tree consisting of three instances of **com.mycompany.Person**. The interpreter will basically do the same as the following **main** method: 
+These couple of lines will, when interpreted by MWE2, result in an object tree consisting of three instances of *com.mycompany.Person*. The interpreter will basically do the same as the following *main* method: 
 
 ```java
 package com.mycompany;
@@ -74,7 +74,7 @@ public class CreatePersons {
 
 ![](images/family_tree.png)
 
-And this is how it works: The root element is a plain Java class name. As the module is a sibling to the class **com.mycompany.Person** it is not necessary to use use fully qualified name. There are other packages implicitly imported into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered in depth in the appropriate [chapter](18_mwe2.html). The constructed objects are furthermore configured according to the declaration in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third person - the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have their respective **name** assigned via a reflective invocation of the **setName** method. If one wants to add another child to "Father", she can simply repeat the child assignment:
+And this is how it works: The root element is a plain Java class name. As the module is a sibling to the class *com.mycompany.Person* it is not necessary to use use fully qualified name. There are other packages implicitly imported into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered in depth in the appropriate [chapter](18_mwe2.html). The constructed objects are furthermore configured according to the declaration in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third person - the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have their respective *name* assigned via a reflective invocation of the *setName* method. If one wants to add another child to "Father", she can simply repeat the child assignment:
 
 ```mwe2
 child = com.mycompany.Person {
@@ -90,7 +90,7 @@ child = com.mycompany.Person {
 
 As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any dependency or limitation to MWE2 specific implementations.
 
-**Tip****Whenever you are in an \*.mwe2 file and wonder what kind of configuration the underlying component may accept:****Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java****implementation by means of F3 (Go To Declaration).**
+*Hint: Whenever you are in an \*.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).*
 
 This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 [reference documentation](18_mwe2.html) for additional information. We will now have a look at the component model used to configure the Language Generator.
 
@@ -157,7 +157,7 @@ Workflow {
 
 Here the root element is [Workflow]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java) and is part of the very slim runtime model shipped with MWE2. It accepts `bean`s and `component`s. A `var` declaration is a first class concept of MWE2's configuration language and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. Note that you can refer to the variables using the `${variable-name}` notation. 
 
-The method [Workflow.addBean(Object)]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java) does nothing but provides a means to apply global side-effects, which unfortunately is required sometimes. In this example we do a so called **EMF stand-alone setup**. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. it allows to populate EMF's singletons like the [Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java).
+The method [Workflow.addBean(Object)]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java) does nothing but provides a means to apply global side-effects, which unfortunately is required sometimes. In this example we do a so called *EMF stand-alone setup*. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. it allows to populate EMF's singletons like the [Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java).
 
 Following the `bean` assignment there are three `component` elements. The [Workflow.addComponent()]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java) method accepts instances of [IWorkflowComponent]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java), which is the primary concept of MWE2's workflow model. The language generator component itself is an instance of [IWorkflowComponent]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java) and can therefore be used within MWE2 workflows. 
 
@@ -227,7 +227,7 @@ public Class<? extends IScopeProvider> bindIScopeProvider() {
 }
 ```
 
-which would do the same as the code snippet above. It simply declares a binding from [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) to **MyConcreteScopeProvider**. That binding will make Guice instantiate and inject a new instance of **MyConcreteScopeProvider** whenever a dependency to [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) is declared.
+which would do the same as the code snippet above. It simply declares a binding from [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) to *MyConcreteScopeProvider*. That binding will make Guice instantiate and inject a new instance of *MyConcreteScopeProvider* whenever a dependency to [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) is declared.
 
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change the binding by returning a different target type or removing that binding completely by returning null.
 
@@ -252,9 +252,9 @@ public Class<? extends Provider<IScopeProvider>>
 }
 ```
 
-Note: Please forgive us the overuse of the term **provider**. The [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) is not a Guice [Provider]({{site.javadoc.guice}}/com/google/inject/Provider.html).
+Note: Please forgive us the overuse of the term *provider*. The [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) is not a Guice [Provider]({{site.javadoc.guice}}/com/google/inject/Provider.html).
 
-That binding tells Guice to instantiate **MyConcreteScopeProviderFactory** and invoke get() in order to obtain an instance of [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) for clients having declared a dependency to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful if some global state should be shared in the application:
+That binding tells Guice to instantiate *MyConcreteScopeProviderFactory* and invoke get() in order to obtain an instance of [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) for clients having declared a dependency to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful if some global state should be shared in the application:
 
 ```java
 public Provider<IScopeProvider> provideIScopeProvider() {
@@ -445,7 +445,7 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 
 You need to adjust the mwe file as well to be able to run it this way. There are three important adjustments you need to make:
 
-First you need to use a **platform:resource** `URI` instead of a **classpath** `URI` to point to your Xtext grammar file. This is because we don't have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example: 
+First you need to use a *platform:resource* `URI` instead of a *classpath* `URI` to point to your Xtext grammar file. This is because we don't have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example: 
 
 ```mwe2
   // grammarURI has to be platform:/resource as it is not on the classpath

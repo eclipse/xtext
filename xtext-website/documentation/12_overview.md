@@ -30,9 +30,9 @@ You may ask: Where does the money for Open-Source development come from? Well, w
 
 ## What is a Domain-Specific Language {#DSL}
 
-A **Domain-Specific Language (DSL)** is a small programming language, which focuses on a particular domain. Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can be solved or processed by computers somehow.
+A *Domain-Specific Language (DSL)* is a small programming language, which focuses on a particular domain. Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can be solved or processed by computers somehow.
 
-The opposite of a DSL is a so called **GPL**, a **General Purpose Language** such as Java or any other common programming language. With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
+The opposite of a DSL is a so called *GPL*, a *General Purpose Language* such as Java or any other common programming language. With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
 
 Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.
 
