@@ -572,13 +572,12 @@ tfoot td {
 }
 
 .inner {
-	padding: 10px 0px 0px 50px;
-	background: url({{ site.baseurl }}/images/pattern1.jpg) repeat #ebebeb;
+	padding: 10px 0px 0px 15px;
+	background-color: white;
 }
 
 .inner-footer {
-	padding: 10px 0px;
-	background: url({{ site.baseurl }}/images/pattern1.jpg) repeat #ebebeb;
+	padding: 10px 0px 0px 15px;
 }
 
 .logo {
@@ -849,6 +848,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	max-width: 200px;
 	list-style: none;
 	font-family: 'Lato', sans-serif;
+	margin:0;
 }
 
 #nav-outline ul {
