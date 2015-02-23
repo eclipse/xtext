@@ -6,8 +6,8 @@ package org.eclipse.xtext.ui.tests.scoping;
 /**
  * This class contains custom scoping description.
  * 
- * see : http://www.eclipse.org/Xtext/documentation.html#scoping
- * on how and when to use it 
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#scoping
+ * on how and when to use it.
  *
  */
 public class TestLanguageScopeProvider extends org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider {

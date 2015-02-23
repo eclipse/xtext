@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.testlanguages.validation.AbstractXImportSectionTe
 /**
  * Custom validation rules.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
  */
 @SuppressWarnings("all")
 public class XImportSectionTestLangValidator extends AbstractXImportSectionTestLangValidator {

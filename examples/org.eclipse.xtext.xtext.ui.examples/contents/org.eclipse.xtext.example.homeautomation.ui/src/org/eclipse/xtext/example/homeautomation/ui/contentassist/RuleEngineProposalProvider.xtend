@@ -14,7 +14,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 
 /**
- * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 class RuleEngineProposalProvider extends AbstractRuleEngineProposalProvider {
 	

@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 /**
  * Generates code from your model files on save.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
 public class StatemachineGenerator implements IGenerator {

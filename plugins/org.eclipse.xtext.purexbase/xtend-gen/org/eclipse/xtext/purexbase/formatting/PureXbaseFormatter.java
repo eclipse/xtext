@@ -18,8 +18,8 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 /**
  * This class contains custom formatting description.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
- * on how and when to use it
+ * See http://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#formatting
+ * on how and when to use it.
  */
 @SuppressWarnings("all")
 public class PureXbaseFormatter extends AbstractDeclarativeFormatter {
