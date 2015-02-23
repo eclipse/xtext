@@ -11,9 +11,6 @@ import static com.google.common.collect.Lists.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
@@ -37,8 +32,6 @@ import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
-import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -212,36 +205,9 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 										result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
 								}
 							}
-							if (!result.isEmpty()) {
-								if (result.size() > 1) {
-									ITextRegionWithLineInformation rootLocation = ITextRegionWithLineInformation.EMPTY_REGION;
-									ITextRegionWithLineInformation associated = ITextRegionWithLineInformation.EMPTY_REGION;
-									for(AbstractTraceRegion child: result) {
-										rootLocation = rootLocation.merge(new TextRegionWithLineInformation(child.getMyOffset(), child.getMyLength(), child.getMyLineNumber(), child.getMyEndLineNumber()));
-										ILocationData childAssociation = child.getMergedAssociatedLocation();
-										if (childAssociation != null)
-											associated = associated.merge(childAssociation);
-									}
-									AbstractTraceRegion root = new AbstractStatefulTraceRegion(rootLocation, new ArrayList<ILocationData>(), null) {};
-									Collections.sort(result, new Comparator<AbstractTraceRegion>() {
-										
-										@Override
-										public int compare(/* @Nullable */ AbstractTraceRegion o1, /* @Nullable */ AbstractTraceRegion o2) {
-											if (o1 == null || o2 == null)
-												throw new NullPointerException();
-											return o1.getMyOffset() - o2.getMyOffset();
-										}
-
-									});
-									for(AbstractTraceRegion child: result) {
-										child.setParent(root);
-									}
-									return root;
-								} else {
-									return result.get(0);
-								}
-							}
-							throw new TraceNotFoundException();
+							if (result.isEmpty()) 
+								throw new TraceNotFoundException();
+							return AbstractTraceRegion.mergedFrom(result);	
 						}
 					});
 					return result;
