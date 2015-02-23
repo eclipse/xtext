@@ -100,28 +100,28 @@ Now that we have parsed the text file into a `List<Movie>`, we are ready to exec
 ### Question 1 : What Is The Number Of Action Movies?
 
 ```xtend
-  @Test def numberOfActionMovies() {
-    assertEquals(828, 
-      movies.filter[ categories.contains('Action') ].size)
-  }
+@Test def numberOfActionMovies() {
+  assertEquals(828, 
+    movies.filter[ categories.contains('Action') ].size)
+}
 ```
 
 First the movies are `filter`ed. The lambda expression checks whether the current movie's categories contain the entry `'Action'`. Note that unlike the lambda we used to turn the lines in the file into movies, we have not declared a parameter name this time. We could have written 
 
 ```xtend
-  movies.filter[ movie | movie.categories.contains('Action') ].size
+movies.filter[ movie | movie.categories.contains('Action') ].size
 ```
 
 but since we left out the name and the vertical bar the variable is automatically named `it`. `it` is an [implicit variable](05_xtend_expressions.html#implicit-variables). It's uses are similar to the implicit variable `this`. We can write either
 
 ```xtend
-  movies.filter[ it.categories.contains('Action') ].size
+movies.filter[ it.categories.contains('Action') ].size
 ```
 
 or even more compact 
 
 ```xtend
-  movies.filter[ categories.contains('Action') ].size
+movies.filter[ categories.contains('Action') ].size
 ```
 
 Eventually we call `size` on the resulting iterable which is an extension method, too. It is defined in the utility class [IterableExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java).
@@ -129,10 +129,10 @@ Eventually we call `size` on the resulting iterable which is an extension method
 ### Question 2 : What Is The Year The Best Movie From The 80's Was Released?
 
 ```xtend
-  @Test def void yearOfBestMovieFrom80s() {
-    assertEquals(1989, 
-      movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].last.year)
-  }
+@Test def void yearOfBestMovieFrom80s() {
+  assertEquals(1989, 
+    movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].last.year)
+}
 ```
 
 Here we `filter` for all movies whose year is included in the range from 1980 to 1989 (the 80's). The `..` operator is again an extension defined in [IntegerExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java) and returns an instance of [IntegerRange]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java). Operator overloading is explained in [section](05_xtend_expressions.html#operators).
@@ -142,13 +142,13 @@ The resulting iterable is sorted ([`IterableExtensions.sortBy`]({{site.src.xtext
 We could have sorted descending and take the head of the list as well: 
 
 ```xtend
-  movies.filter[ (1980..1989).contains(year) ].sortBy[ -rating ].head.year
+movies.filter[ (1980..1989).contains(year) ].sortBy[ -rating ].head.year
 ```
 
 Another possible solution would be to reverse the order of the sorted list: 
 
 ```xtend
-  movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].reverseView.head.year
+movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].reverseView.head.year
 ```
 
 Note that first sorting and then taking the last or first is slightly more expensive than needed. We could have used the method `reduce` instead to find the best movie which would be more efficient. Maybe you want to try it on your own?
@@ -158,10 +158,10 @@ The calls to `movie.year` as well as `movie.categories` in the previous example 
 ### Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?
 
 ```xtend
-  @Test def void sumOfVotesOfTop2() {
-    val long sum = movies.sortBy[ -rating ].take(2).map[ numberOfVotes ].reduce[ a, b | a + b ]
-    assertEquals(47_229L, sum)
-  }
+@Test def void sumOfVotesOfTop2() {
+  val long sum = movies.sortBy[ -rating ].take(2).map[ numberOfVotes ].reduce[ a, b | a + b ]
+  assertEquals(47_229L, sum)
+}
 ```
 
 First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their `numberOfVotes` using the `map` function. Now we have a [`List<Long>`]({{site.javadoc.java}}/java/util/List.html) which can be reduced to a single [Long]({{site.javadoc.java}}/java/lang/Long.html) by adding the values.

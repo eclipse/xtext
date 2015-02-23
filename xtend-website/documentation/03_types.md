@@ -19,13 +19,13 @@ One of the problems with Java is that you are forced to write type signatures ov
 Consider the following Java variable declaration:
 
 ```java
-  final LinkedList<String> list = new LinkedList<String>();
+final LinkedList<String> list = new LinkedList<String>();
 ```
 
 The type name written for the constructor call must be repeated to declare the variable type. In Xtend the variable type can be inferred from the initialization expression:
 
 ```xtend
-  val list = new LinkedList<String>
+val list = new LinkedList<String>
 ```
 
 ## Conversion Rules {#conversion-rules}
@@ -35,10 +35,10 @@ In addition to Java's autoboxing to convert primitives to their corresponding wr
 Arrays are automatically converted to [`List<ComponentType>`]({{site.javadoc.java}}/java/util/List.html) and vice versa. That is you can write the following:
 
 ```xtend
-  def toList(String[] array) {
-    val List<String> asList = array
-    return asList
-  }
+def toList(String[] array) {
+  val List<String> asList = array
+  return asList
+}
 ```
 
 Subsequent changes to the array are reflected by the list and vice versa. Arrays of primitive types are converted to lists of their respective wrapper types.

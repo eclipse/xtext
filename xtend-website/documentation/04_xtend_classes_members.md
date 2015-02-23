@@ -9,21 +9,21 @@ At a first glance an Xtend file pretty much looks like a Java file. It starts wi
 Here is an examplary Xtend file: 
 
 ```xtend
-  package com.acme
+package com.acme
+
+import java.util.List
+
+class MyClass {
+  String name
   
-  import java.util.List
-  
-  class MyClass {
-    String name
-    
-    new(String name) {
-      this.name = name
-    }
-    
-    def String first(List<String> elements) {
-      elements.get(0)
-    }
+  new(String name) {
+    this.name = name
   }
+  
+  def String first(List<String> elements) {
+    elements.get(0)
+  }
+}
 ```
 
 ## Package Declaration {#package-decl}
@@ -46,9 +46,9 @@ Xtend also features static imports for importing static fields and methods. The 
 As in Java all classes from the `java.lang` package are implicitly imported. 
 
 ```xtend
-  import java.math.BigDecimal
-  import static java.util.Collections.sort
-  import static org.junit.Assert.*
+import java.math.BigDecimal
+import static java.util.Collections.sort
+import static org.junit.Assert.*
 ```
 
 Static methods can also be imported as `extension`s. See the section on [extension methods](04_xtend_classes_members.html#extension-methods) for details.
@@ -64,18 +64,18 @@ Xtend's approach to inheritance is conceptually the same as in Java. Single inhe
 The most simple class looks like this: 
 
 ```xtend
-  class MyClass {
-  }
+class MyClass {
+}
 ```
 
 A more advanced generic class declaration in Xtend: 
 
 ```xtend
-  class ArrayList<E> extends AbstractList<E>
-          implements List<E>, RandomAccess, 
-                     Cloneable, java.io.Serializable {
-    ...
-  }
+class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, 
+                   Cloneable, java.io.Serializable {
+  ...
+}
 ```
 
 ## Constructors {#constructors}
@@ -83,15 +83,15 @@ A more advanced generic class declaration in Xtend:
 An Xtend class can define any number of constructors. Unlike Java you do not have to repeat the name of the class over and over again, but use the keyword `new` to declare a constructor. Constructors can also delegate to other constructors using `this(args...)` in their first line. 
 
 ```xtend
-  class MyClass extends AnotherClass {
-    new(String s) {
-      super(s)
-    }
-    
-    new() {
-      this("default")
-    }
+class MyClass extends AnotherClass {
+  new(String s) {
+    super(s)
   }
+  
+  new() {
+    this("default")
+  }
+}
 ```
 
 The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a no-argument constructor, you have to explicitly call one using `super(args...)` as the first expression in the body of the constructor.
@@ -103,13 +103,13 @@ The default visibility of constructors is `public` but you can also specify an e
 A field can have an initializer. Final fields are declared using `val`, while `var` introduces a non-final field and can be omitted. Yet, if an initializer expression is present, the type of a field can be inferred if `val` or `var` was used to introduce the field. The keyword `final` is synonym to `val`. Fields marked as `static` will be compiled to static Java fields. 
 
 ```xtend
-  class MyClass {
-    int count = 1
-    static boolean debug = false
-    var name = 'Foo'          // type String is inferred 
-    val UNIVERSAL_ANSWER = 42 // final field with inferred type int
-    ...
-  }
+class MyClass {
+  int count = 1
+  static boolean debug = false
+  var name = 'Foo'          // type String is inferred 
+  val UNIVERSAL_ANSWER = 42 // final field with inferred type int
+  ...
+}
 ```
 
 The default visibility for fields is `private`. You can also declare it explicitly as being `public`, `protected`, `package` or `private`. 
@@ -121,9 +121,9 @@ A specialty of Xtend are fields that provide *extension methods* which are cover
 Xtend methods are declared within a class and are translated to a corresponding Java method with exactly the same signature. The only exceptions are dispatch methods, which are explained [later](04_xtend_classes_members.html#polymorphic-dispatch).
 
 ```xtend
-  def String first(List<String> elements) {
-    elements.get(0)
-  }
+def String first(List<String> elements) {
+  elements.get(0)
+}
 ```
 
 Method declarations start with the keyword `def`. The default visibility of a method is `public`. You can explicitly declare it as being `public`, `protected`, `package` or `private`.
@@ -131,17 +131,17 @@ Method declarations start with the keyword `def`. The default visibility of a me
 Xtend supports the `static` modifier for methods and can [infer](04_xtend_classes_members.html#inferred-return-types) the return type if it is not explicitly given: 
 
 ```xtend
-  def static createInstance() {
-    new MyClass('foo')
-  }
+def static createInstance() {
+  new MyClass('foo')
+}
 ```
 
 As in Java, vararg parameters are allowed and accessible as array values in the method body: 
 
 ```xtend
-  def printAll(String... strings) {
-    strings.forEach[ s | println(s) ]
-  }
+def printAll(String... strings) {
+  strings.forEach[ s | println(s) ]
+}
 ```
 
 It is possible to infer the return type of a method from its body. Recursive methods and abstract methods have to declare an explicit return type.
@@ -151,9 +151,9 @@ It is possible to infer the return type of a method from its body. Recursive met
 An abstract method in Xtend does not define a body and must be declared within an `abstract` class or an interface. Also specifying the return type is mandatory since it cannot be inferred. 
 
 ```xtend
-  abstract class MyAbstractClass() {
-    def String abstractMethod() // no body
-  }
+abstract class MyAbstractClass() {
+  def String abstractMethod() // no body
+}
 ```
 
 ### Overriding Methods
@@ -163,9 +163,9 @@ Methods can override other methods from the super class or implement interface m
 Example: 
 
 ```xtend
-  override String second(List<String> elements) {
-    elements.get(1)
-  }
+override String second(List<String> elements) {
+  elements.get(1)
+}
 ```
 
 ### Declared Exceptions {#declared-exceptions}
@@ -175,19 +175,19 @@ Xtend does not force you to catch or declare checked exceptions. Nevertheless, y
 If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by [Lombok](http://projectlombok.org/features/SneakyThrows.html)). 
 
 ```xtend
-  /*
-   * throws an Exception
-   */
-  def void throwException() throws Exception {
-     throw new Exception
-  }
-  
-  /*
-   * throws an Exception without declaring it
-   */
-  def void sneakyThrowException() {
-     throw new Exception
-  }
+/*
+ * throws an Exception
+ */
+def void throwException() throws Exception {
+   throw new Exception
+}
+
+/*
+ * throws an Exception without declaring it
+ */
+def void sneakyThrowException() {
+   throw new Exception
+}
 ```
 
 Optional validation of checked exception is supported, too, and can be configured on the respective Eclipse preference page for the Xtend Errors and Warnings.
@@ -199,17 +199,17 @@ If the return type of a method can be inferred from its body it does not have to
 That is the method 
 
 ```xtend
-  def String second(List<String> elements) {
-    elements.get(1)
-  }
+def String second(List<String> elements) {
+  elements.get(1)
+}
 ```
 
 could be declared like this: 
 
 ```xtend
-  def second(List<String> elements) {
-    elements.get(1)
-  }
+def second(List<String> elements) {
+  elements.get(1)
+}
 ```
 
 The return type is mandatory for abstract method declarations as well as for recursive implementations.
@@ -219,9 +219,9 @@ The return type is mandatory for abstract method declarations as well as for rec
 You can specify type parameters on methods. A parameterized variant of the method from the previous section, could look like this:
 
 ```xtend
-  def <T> second(List<T> elements) {
-    elements.get(1)
-  }
+def <T> second(List<T> elements) {
+  elements.get(1)
+}
 ```
 
 Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the [the Java Language Specification](http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4)
@@ -231,12 +231,12 @@ Type parameter bounds and constraints are supported and share the same syntax an
 Xtend supports operator overloading based on an operator-name-mapping as explained in [](05_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the following:
 
 ```xtend
-  class Money {
+class Money {
 	def + (Money other) { ... }
 	def - (Money other) { ... }
 	def * (BigDecimal times) { ... }
 	...
-  }
+}
 ```
 
 ### Dispatch Methods {#polymorphic-dispatch}
@@ -246,13 +246,13 @@ Generally, method resolution and binding is done statically at compile time as i
 A dispatch method is declared using the keyword `dispatch`. 
 
 ```xtend
-  def dispatch printType(Number x) { 
-    "it's a number" 
-  }
-  
-  def dispatch printType(Integer x) { 
-    "it's an int" 
-  }
+def dispatch printType(Number x) { 
+  "it's a number" 
+}
+
+def dispatch printType(Integer x) { 
+  "it's an int" 
+}
 ```
 
 For a set of visible dispatch methods in the current type hierarchy with the same name and the same number of arguments, the compiler infers a synthetic dispatcher method. This dispatcher uses the common super type of all declared arguments. The method name of the actual dispatch cases is prepended with an underscore and the visibility of these methods is reduced to protected if they have been defined as public methods. Client code always binds to the synthesized dispatcher method.
@@ -260,24 +260,24 @@ For a set of visible dispatch methods in the current type hierarchy with the sam
 For the two dispatch methods in the example above the following Java code would be generated: 
 
 ```java
-  protected String _printType(final Number x) {
-    return "it\'s a number";
+protected String _printType(final Number x) {
+  return "it\'s a number";
+}
+
+protected String _printType(final Integer x) {
+  return "it\'s an int";
+}
+
+public String printType(final Number x) {
+  if (x instanceof Integer) {
+    return _printType((Integer)x);
+  } else if (x != null) {
+    return _printType(x);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.<Object>asList(x).toString());
   }
-  
-  protected String _printType(final Integer x) {
-    return "it\'s an int";
-  }
-  
-  public String printType(final Number x) {
-    if (x instanceof Integer) {
-      return _printType((Integer)x);
-    } else if (x != null) {
-      return _printType(x);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
-    }
-  }
+}
 ```
 
 Note that the `instanceof` cascade is ordered such that more specific types are handled first.
@@ -285,63 +285,63 @@ Note that the `instanceof` cascade is ordered such that more specific types are 
 The default visibility of the dispatch cases is `protected`. If all dispatch methods explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too. Otherwise it is `public`. The comparison of the parameter types is performed from left to right. That is in the following example, the second method declaration is considered more specific since its first parameter type is the most specific:
 
 ```xtend
-  def dispatch printTypes(Number x, Integer y) { 
-    "it's some number and an int" 
-  }
-  
-  def dispatch printTypes(Integer x, Number y) { 
-    "it's an int and a number" 
-  }
+def dispatch printTypes(Number x, Integer y) { 
+  "it's some number and an int" 
+}
+
+def dispatch printTypes(Integer x, Number y) { 
+  "it's an int and a number" 
+}
 ```
 
 generates the following Java code : 
 
 ```java
-  public String printTypes(final Number x, final Number y) {
-    if (x instanceof Integer
-         && y != null) {
-      return _printTypes((Integer)x, y);
-    } else if (x != null
-         && y instanceof Integer) {
-      return _printTypes(x, (Integer)y);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x, y).toString());
-    }
+public String printTypes(final Number x, final Number y) {
+  if (x instanceof Integer
+       && y != null) {
+    return _printTypes((Integer)x, y);
+  } else if (x != null
+       && y instanceof Integer) {
+    return _printTypes(x, (Integer)y);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.<Object>asList(x, y).toString());
   }
+}
 ```
 
 The code is compiled in a way that a `null` reference is never a match. `null` values can be handled by dispatch cases that use the parameter type [Void]({{site.javadoc.java}}/java/lang/Void.html). 
 
 ```xtend
-  def dispatch printType(Number x) { 
-    "it's some number" 
-  }
-  
-  def dispatch printType(Integer x) { 
-    "it's an int" 
-  }
-  
-  def dispatch printType(Void x) { 
-    "it's null" 
-  }
+def dispatch printType(Number x) { 
+  "it's some number" 
+}
+
+def dispatch printType(Integer x) { 
+  "it's an int" 
+}
+
+def dispatch printType(Void x) { 
+  "it's null" 
+}
 ```
 
 This compiles to the following Java code: 
 
 ```java
-  public String printType(final Number x) {
-    if (x instanceof Integer) {
-      return _printType((Integer)x);
-    } else if (x != null) {
-      return _printType(x);
-    } else if (x == null) {
-      return _printType((Void)null);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
-    }
+public String printType(final Number x) {
+  if (x instanceof Integer) {
+    return _printType((Integer)x);
+  } else if (x != null) {
+    return _printType(x);
+  } else if (x == null) {
+    return _printType((Void)null);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.<Object>asList(x).toString());
   }
+}
 ```
 
 #### Dispatch Methods and Inheritance
@@ -351,48 +351,48 @@ All visible Java methods from all super types that are conformant to the compile
 For example, consider the following Java class : 
 
 ```java
-  public abstract class AbstractLabelProvider {
-     protected String _label(Object o) {
-        // some generic implementation
-     }
-  }
+public abstract class AbstractLabelProvider {
+   protected String _label(Object o) {
+      // some generic implementation
+   }
+}
 ```
 
 and the following Xtend class which extends the Java class : 
 
 ```xtend
-  class MyLabelProvider extends AbstractLabelProvider {
-     def dispatch label(Entity it)  {
-       name
-     }
-       
-     def dispatch label(Method it) { 
-       name+"("+params.join(",")+"):"+type
-     }
+class MyLabelProvider extends AbstractLabelProvider {
+   def dispatch label(Entity it)  {
+     name
+   }
      
-     def dispatch label(Field it) { 
-       name+type
-     }
-  }
+   def dispatch label(Method it) { 
+     name+"("+params.join(",")+"):"+type
+   }
+   
+   def dispatch label(Field it) { 
+     name+type
+   }
+}
 ```
 
 The resulting dispatch method in the generated Java class `MyLabelProvider` would then look like this: 
 
 ```java
-  public String label(final Object it) {
-    if (it instanceof Entity) {
-      return _label((Entity)it);
-    } else if (it instanceof Field) {
-      return _label((Field)it);
-    } else if (it instanceof Method) {
-      return _label((Method)it);
-    } else if (it != null) {
-      return super._label(it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
+public String label(final Object it) {
+  if (it instanceof Entity) {
+    return _label((Entity)it);
+  } else if (it instanceof Field) {
+    return _label((Field)it);
+  } else if (it instanceof Method) {
+    return _label((Method)it);
+  } else if (it != null) {
+    return super._label(it);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.<Object>asList(it).toString());
   }
+}
 ```
 
 #### Static Dispatch Methods
@@ -406,16 +406,16 @@ Create methods in Xtend allow to do graph transformation in one pass where it us
 Consider you want to create a copy of the following list of persons into a :
 
 ```
-	Fred Flintstone {
-		marriedTo Willma Flintstone
-		friendWith Barny Rubble
-	}
-	Willma Flintstone {
-		marriedTo Fred Flintstone
-	}
-	Barny Rubble {
-		friendWith Fred Flintstone
-	}
+Fred Flintstone {
+	marriedTo Willma Flintstone
+	friendWith Barny Rubble
+}
+Willma Flintstone {
+	marriedTo Fred Flintstone
+}
+Barny Rubble {
+	friendWith Fred Flintstone
+}
 ```
 
 A function like the following could do the trick :
@@ -465,16 +465,16 @@ In addition to the keyword `create` one specifies two expressions. The first exp
 Annotations are available on classes, fields, methods and parameters. They are prefixed with the `@` character and accept a number of key-value pairs or a default value for the annotation property named `value`. Annotation values that expect arrays can handle single values, too. Value arrays are enclosed in array literals `#['first', 'second']`. The semantics for annotations are exactly like defined in the [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se5.0/html/j3TOC.html). Here is an example:
 
 ```xtend
-  @TypeAnnotation("some value")
-  class MyClass {
-    @FieldAnnotation(value = @NestedAnnotation(true))
-    static val CONSTANT = 'a compile-time constant'
-    
-    @MethodAnnotation(constant = CONSTANT)
-    def String myMethod(@ParameterAnnotation String param) {
-      //...
-    }
+@TypeAnnotation("some value")
+class MyClass {
+  @FieldAnnotation(value = @NestedAnnotation(true))
+  static val CONSTANT = 'a compile-time constant'
+  
+  @MethodAnnotation(constant = CONSTANT)
+  def String myMethod(@ParameterAnnotation String param) {
+    //...
   }
+}
 ```
 
 In addition [Active Annotations](06_activeannotations.html) allow users to participate in compilation of Xtend code to Java source code.
@@ -484,7 +484,7 @@ In addition [Active Annotations](06_activeannotations.html) allow users to parti
 Extension methods allow to add new methods to existing types without modifying them. This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type's members. 
 
 ```xtend
-  "hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
+"hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
 ```
 
 Method calls in extension syntax often result in more readable code, as they are chained rather than nested. Another benefit of extensions is that you can add methods which are specific to a certain context or layer of your application.
@@ -492,13 +492,13 @@ Method calls in extension syntax often result in more readable code, as they are
 For instance, you might not want to put UI-specific methods and dependencies into your domain model classes. Therefore this functionality is often defined in static methods or methods in utility classes or service layers. That works, but the code is less readable and less object-oriented if you call methods like this. In Java you often see code like this:
 
 ```java
-  persistenceManager.save(myObject);
+persistenceManager.save(myObject);
 ```
 
 Without tying your entities to the persistenceManager, extension methods allow you to write
 
 ```xtend
-  myObject.save
+myObject.save
 ```
 
 There are different ways to make methods available as extensions, which are described in the following sections.
@@ -508,8 +508,8 @@ There are different ways to make methods available as extensions, which are desc
 The Xtend library puts a lot of very useful extension methods on existing types from the Java SDK without any further ado.
 
 ```xtend
-  "hello".toFirstUpper // calls StringExtensions.toFirstUpper(String)
-  listOfStrings.map[ toUpperCase ] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
+"hello".toFirstUpper // calls StringExtensions.toFirstUpper(String)
+listOfStrings.map[ toUpperCase ] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
 ```
 
 Have a look at the JavaDoc to learn about the available functionality:
@@ -528,15 +528,15 @@ Have a look at the JavaDoc to learn about the available functionality:
 All visible non-static methods of the current class and its super types are automatically available as extensions. For example 
 
 ```xtend
-  class MyClass {
-    def doSomething(Object obj) {
-      // do something with obj
-    }
-    
-    def extensionCall(Object obj) {
-      obj.doSomething()  // calls this.doSomething(obj)
-    }
+class MyClass {
+  def doSomething(Object obj) {
+    // do something with obj
   }
+  
+  def extensionCall(Object obj) {
+    obj.doSomething()  // calls this.doSomething(obj)
+  }
+}
 ```
 
 Local static methods have to be made available through an import like any other static method.
@@ -548,14 +548,14 @@ In Java, you would usually write a helper class with static methods to decorate 
 The following import declaration 
 
 ```xtend
-  import static extension java.util.Collections.singletonList
+import static extension java.util.Collections.singletonList
 ```
 
 allows us to use singletonList methods like this: 
 
 ```xtend
-  new MyClass().singletonList() 
-  // calls Collections.singletonList(new MyClass())
+new MyClass().singletonList() 
+// calls Collections.singletonList(new MyClass())
 ```
 
 ### Extension Provider {#extension-provider}
@@ -565,31 +565,31 @@ By adding the `extension` keyword to a field, a local variable or a parameter de
 Imagine you want to have some layer specific functionality on a class `Person`. Let us say you are in a servlet-like class and want to persist a `Person` using some persistence mechanism. Let us assume `Person` implements a common interface `Entity`. You could have the following interface 
 
 ```java
-  interface EntityPersistence {
-    public save(Entity e);
-    public update(Entity e);
-    public delete(Entity e);
-  }
+interface EntityPersistence {
+  public save(Entity e);
+  public update(Entity e);
+  public delete(Entity e);
+}
 ```
 
 And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this: 
 
 ```xtend
-  class MyServlet {
-    extension EntityPersistence ep = Factory.get(EntityPersistence)
-    ...
-    
-  }
+class MyServlet {
+  extension EntityPersistence ep = Factory.get(EntityPersistence)
+  ...
+  
+}
 ```
 
 You are able to save, update and delete any entity like this:
 
 ```xtend
-  val Person person = ...
-  person.save  // calls ep.save(person)
-  person.name = 'Horst'
-  person.update  // calls ep.update(person)
-  person.delete  // calls ep.delete(person)
+val Person person = ...
+person.save  // calls ep.save(person)
+person.name = 'Horst'
+person.update  // calls ep.update(person)
+person.delete  // calls ep.delete(person)
 ```
 
 Using the `extension` modifier on values has a significant advantage over static [extension imports](04_xtend_classes_members.html#extension-imports): Your code is not bound to the actual implementation of the extension method. You can simply exchange the component that provides the referenced extension with another implementation from outside, by providing a different instance.
@@ -599,45 +599,45 @@ Using the `extension` modifier on values has a significant advantage over static
 An interface declaration is very similar to the one in Java. An interface can declare fields, which are by default final static therefore must have an initial value. And of course methods can be declared, which are public by default. Interfaces can extend any number of other interfaces and can declare type parameters. Here's an example: 
 
 ```xtend
-  interface MyInterface<T> extends OtherInterface {
-    val CONSTANT = 42
-    def T doStuff(String ... varArg) throws SomeException
-  }
+interface MyInterface<T> extends OtherInterface {
+  val CONSTANT = 42
+  def T doStuff(String ... varArg) throws SomeException
+}
 ```
 
 Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods, called [default methods](http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html), as well as static methods. This is also supported in Xtend (since 2.8): if Java 8 is selected as target language version, interfaces are allowed to declare methods with bodies like in the following example. 
 
 ```xtend
-  interface MyInterface {
-    def doStuff() {
-        'This is an instance method returning a string.'
-    }
-    static def doGlobalStuff() {
-        'This is a static method returning a string.'
-    }
+interface MyInterface {
+  def doStuff() {
+      'This is an instance method returning a string.'
   }
+  static def doGlobalStuff() {
+      'This is a static method returning a string.'
+  }
+}
 ```
 
 The behavior of non-abstract instance methods is equivalent to that of Java default methods. Since interfaces can extend multiple other interfaces, multiple-inheritance conflicts can occur when different implementations of a method are inherited: 
 
 ```xtend
-  interface A {
-      def execute() {
-          return 1
-      }
-  }
-  
-  interface B {
-      def execute() {
-          return 2
-      }
-  }
-  
-  interface C extends A, B {
-  }
-  
-  class D implements A, B {
-  }
+interface A {
+    def execute() {
+        return 1
+    }
+}
+
+interface B {
+    def execute() {
+        return 2
+    }
+}
+
+interface C extends A, B {
+}
+
+class D implements A, B {
+}
 ```
 
 The interface `C` and the class `D` are both marked with an error due to the multiple inheritance of the method `execute()`. There are four ways to resolve the problem. 
@@ -645,23 +645,23 @@ The interface `C` and the class `D` are both marked with an error due to the mul
 *   Redeclare the method as abstract (not allowed for non-abstract classes):     
     
     ```xtend
-      override execute()
+    override execute()
     ```
 
 *   Override the implementation:     
     
     ```xtend
-      override execute() {
-          return 3
-      }
+    override execute() {
+        return 3
+    }
     ```
 
 *   Refer to a supertype implementation:     
     
     ```xtend
-      override execute() {
-          A.super.execute()
-      }
+    override execute() {
+        A.super.execute()
+    }
     ```
 
 *   Avoid the inheritance of multiple method implementations in the first place. This is the recommended approach.
@@ -671,11 +671,11 @@ The interface `C` and the class `D` are both marked with an error due to the mul
 Annotation types can also be declared. The are introduced by the keyword `annotation` and declare their values with a concise syntax:
 
 ```xtend
-  annotation MyAnnotation {
-    String[] value
-    boolean isTricky = false
-    int[] lotteryNumbers = #[ 42, 137 ]
-  }
+annotation MyAnnotation {
+  String[] value
+  boolean isTricky = false
+  int[] lotteryNumbers = #[ 42, 137 ]
+}
 ```
 
 ## Enum Type Declarations {#enum-type-declaration}
@@ -683,11 +683,11 @@ Annotation types can also be declared. The are introduced by the keyword `annota
 Enumeration types are declared like this:
 
 ```xtend
-  enum MyColor {
-    GREEN,
-    BLUE,
-    RED
-  }
+enum MyColor {
+  GREEN,
+  BLUE,
+  RED
+}
 ```
 
 ## Nested Type Declarations {#nested-type-declarations}

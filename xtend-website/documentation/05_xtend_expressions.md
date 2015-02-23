@@ -7,11 +7,11 @@ layout: documentation
 In Xtend everything is an expression and has a return type. Statements do not exist. That allows you to compose your code in interesting ways. For example, you can have a `try catch` expression on the right hand side of an assignment: 
 
 ```xtend
-  val data = try {
-      fileContentsToString('data.txt')
-    } catch (IOException e) {
-      'dummy data'
-    }
+val data = try {
+    fileContentsToString('data.txt')
+  } catch (IOException e) {
+    'dummy data'
+  }
 ```
 
 If `fileContentsToString()` throws an [IOException]({{site.javadoc.java}}/java/io/IOException.html), it is caught and the string `'dummy data'` is assigned to the value `data`. Expressions can appear as [initializers of fields](04_xtend_classes_members.html#fields), the body of constructors or methods and as values in annotations. A method body can either be a [block expression](05_xtend_expressions.html#blocks) or a [template expression](05_xtend_expressions.html#templates).
@@ -25,13 +25,13 @@ A literal denotes a fixed, unchangeable value. Literals for [strings](05_xtend_e
 A string literal is of type [String]({{site.javadoc.java}}/java/lang/String.html). String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common because the signal-to-noise ration is better, but generally you should use the terminals which are least likely to occur in the string value. Special characters can be quoted with a backslash or defined using unicode notation. Contrary to Java, strings can span multiple lines.
 
 ```xtend
-  'Hello World !'
-  "Hello World !"
-  'Hello "World" !'
-  "Hello \"World\" !"
-  "Hello 
-  
-    World !"
+'Hello World !'
+"Hello World !"
+'Hello "World" !'
+"Hello \"World\" !"
+"Hello 
+
+  World !"
 ```
 
 ### Character Literals {#character-literals}
@@ -39,7 +39,7 @@ A string literal is of type [String]({{site.javadoc.java}}/java/lang/String.html
 Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive `char` or the wrapper type [Character]({{site.javadoc.java}}/java/lang/Character.html) is expected, the compiler will treat the literal as such a value or instance.
 
 ```xtend
-  val char c = 'c'
+val char c = 'c'
 ```
 
 ### Number Literals {#number-literals}
@@ -47,24 +47,24 @@ Character literals use the same notation as String literals. If a single charact
 Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a [unary operator](05_xtend_expressions.html#operators) with one argument (the positive number literal). Second, as in Java 7, you can separate digits using `_` for better readability of large numbers. An integer literal creates an `int`, a `long` (suffix `L`) or a [BigInteger]({{site.javadoc.java}}/java/math/BigInteger.html) (suffix `BI`). There are no octal numbers
 
 ```xtend
-  42
-  1_234_567_890 
-  0xbeef    // hexadecimal
-  077       // decimal 77 (*NOT* octal)
-  -1  // an expression consisting of the unary - operator and an integer literal  
-  42L
-  0xbeef#L // hexadecimal, mind the '#'
-  0xbeef_beef_beef_beef_beef#BI // BigInteger
+42
+1_234_567_890 
+0xbeef    // hexadecimal
+077       // decimal 77 (*NOT* octal)
+-1  // an expression consisting of the unary - operator and an integer literal  
+42L
+0xbeef#L // hexadecimal, mind the '#'
+0xbeef_beef_beef_beef_beef#BI // BigInteger
 ```
 
 A floating-point literal creates a `double` (suffix `D` or none), a `float` (suffix `F`) or a [BigDecimal]({{site.javadoc.java}}/java/math/BigDecimal.html) (suffix `BD`). If you use a `.` you have to specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point literals. 
 
 ```xtend
-  42d     // double
-  0.42e2  // implicit double
-  0.42e2f // float
-  4.2f    // float
-  0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
+42d     // double
+0.42e2  // implicit double
+0.42e2f // float
+4.2f    // float
+0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
 ```
 
 ### Boolean Literals {#boolean-literal}
@@ -97,32 +97,32 @@ Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter c
 The methods in [CollectionLiterals]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java) are automatically imported so it's very easy and convenient to create instances of the various collection types the JDK offers.
 
 ```xtend
-  val myList = newArrayList('Hello', 'World')
-  val myMap = newLinkedHashMap('a' -> 1, 'b' -> 2) 
+val myList = newArrayList('Hello', 'World')
+val myMap = newLinkedHashMap('a' -> 1, 'b' -> 2) 
 ```
 
 In addition xtend supports collection literals to create immutable collections and arrays, depending on the target type. An immutable list can be created like this:
 
 ```xtend
-  val myList = #['Hello','World']
+val myList = #['Hello','World']
 ```
 
 If the target type is an array as in the following example an array is created instead without any conversion:
 
 ```xtend
-  val String[] myArray = #['Hello','World']
+val String[] myArray = #['Hello','World']
 ```
 
 An immutable set can be created using curly braces instead of the squared brackets:
 
 ```xtend
-  val mySet = #{'Hello','World'}
+val mySet = #{'Hello','World'}
 ```
 
 An immutable map is created like this: 
 
 ```xtend
-  val myMap = #{'a' -> 1 ,'b' ->2}
+val myMap = #{'a' -> 1 ,'b' ->2}
 ```
 
 ### Arrays {#arrays}
@@ -132,8 +132,8 @@ Java arrays can be created either using a [literal](05_xtend_expressions.html#co
 Example: 
 
 ```xtend
-  val String[] myArray = newArrayOfSize(400)
-  val int[] intArray = newIntArrayOfSize(400)
+val String[] myArray = newArrayOfSize(400)
+val int[] intArray = newIntArrayOfSize(400)
 ```
 
 Retrieving and setting values of arrays is done through the extension methods `get(int)` and `set(int, T)` which are specifically overloaded for arrays and are translated directly to the equivalent native Java code `myArray[int]`.
@@ -145,8 +145,8 @@ Furthermore arrays are automatically converted to lists (`java.util.List`) when 
 Example: 
 
 ```xtend
-  val int[] myArray = #[1,2,3]
-  val List<Integer> myList = myArray
+val int[] myArray = #[1,2,3]
+val List<Integer> myList = myArray
 ```
 
 ## Type Casts {#type-casts}
@@ -156,8 +156,8 @@ A type cast behaves exactly like casts in Java, but has a slightly more readable
 The conformance rules for casts are defined in the [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html#5.5). Here are some examples: 
 
 ```xtend
-  something as MyClass
-  42 as Integer
+something as MyClass
+42 as Integer
 ```
 
 Instead of a plain type cast it's also possible to use a [switch with a type guard](05_xtend_expressions.html#switch-expression) which performs both the casting and the instance-of check. [Dispatch methods](04_xtend_classes_members.html#polymorphic-dispatch) are another alternative to casts that offers the potential to enhance the number of expected and handled types in subclasses.
@@ -167,9 +167,9 @@ Instead of a plain type cast it's also possible to use a [switch with a type gua
 There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class [BigDecimalExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java) that defines operators for [BigDecimals]({{site.javadoc.java}}/java/math/BigDecimal.html). The following code is therefore perfectly valid: 
 
 ```xtend
-  val x = 2.71BD
-  val y = 3.14BD
-  val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
+val x = 2.71BD
+val y = 3.14BD
+val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 ```
 
 This is the complete list of all available operators and their corresponding method signatures:
@@ -246,15 +246,15 @@ Xtend offers operators for common types from the JDK.
 In Xtend the equals operators (`==`,`!=`) are bound to `Object.equals`. So you can write:
 
 ```xtend
-  if (name == 'Homer')
-  	println('Hi Homer')
+if (name == 'Homer')
+	println('Hi Homer')
 ```
 
 Java's identity equals semantic is mapped to the tripple-equals operators `===` and `!==` in Xtend.
 
 ```xtend
-  if (someObject === anotherObject)
-  	println('same objects')
+if (someObject === anotherObject)
+	println('same objects')
 ```
 
 #### Comparison Operators
@@ -262,16 +262,16 @@ Java's identity equals semantic is mapped to the tripple-equals operators `===` 
 In Xtend the usual comparison operators (`>`,`<`,`>=`, and `<=`) work as expected on the primitive numbers:
 
 ```xtend
-  if (42 > myNumber) {
-  	...
-  }
+if (42 > myNumber) {
+	...
+}
 ```
 
 In addition these operators are overloaded for all instances of `java.lang.Comparable`. So you can also write
 
 ```xtend
-  if (startTime < arrivalTime)
-  	println("You are too late!")
+if (startTime < arrivalTime)
+	println("You are too late!")
 ```
 
 #### Arithmetic Operators
@@ -279,9 +279,9 @@ In addition these operators are overloaded for all instances of `java.lang.Compa
 The arithmetic operators (`+`,`-`,`*`,`/`,`%`, and `**`) are not only available for the primitive types, but also for other reasonable types such as `BigDecimal` and `BigInteger`.
 
 ```xtend
-  val x = 2.71BD
-  val y = 3.14BD
-  val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
+val x = 2.71BD
+val y = 3.14BD
+val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 ```
 
 #### Elvis Operator
@@ -289,7 +289,7 @@ The arithmetic operators (`+`,`-`,`*`,`/`,`%`, and `**`) are not only available 
 In addition to [null-safe feature calls](05_xtend_expressions.html#null-safe-feature-calls) Xtend supports the elvis operator known from Groovy.
 
 ```xtend
-  val salutation = person.firstName ?: 'Sir/Madam' 
+val salutation = person.firstName ?: 'Sir/Madam' 
 ```
 
 The right hand side of the expression is only evaluated if the left side was `null`.
@@ -301,14 +301,14 @@ The with operator is very handy when you want to initialize objects or when you 
 Here's an example:
 
 ```xtend
-  val person = new Person => [
-  	firstName = 'Homer'
-  	lastName = 'Simpson'
-  	address = new Address => [
-  		street = '742 Evergreen Terrace'
-  		city = 'SpringField'
-  	]
-  ]
+val person = new Person => [
+	firstName = 'Homer'
+	lastName = 'Simpson'
+	address = new Address => [
+		street = '742 Evergreen Terrace'
+		city = 'SpringField'
+	]
+]
 ```
 
 #### Range Operators
@@ -316,36 +316,36 @@ Here's an example:
 There are three different range operators. The most useful ones are `..<` and `>..` which create exclusive ranges.
 
 ```xtend
-  // iterate the list forwards
-  for (i : 0 ..< list.size) {
-  	val element = list.get(i)
-  	...
-  }
+// iterate the list forwards
+for (i : 0 ..< list.size) {
+	val element = list.get(i)
+	...
+}
 ```
 
 ```xtend
-  // or backwards
-  for (i : list.size >.. 0) {
-  	val element = list.get(i)
-  	...
-  }
+// or backwards
+for (i : list.size >.. 0) {
+	val element = list.get(i)
+	...
+}
 ```
 
 In addition there is the inclusive range, which is nice if you know both ends well. In the movies example the range is used to check whether a movie was made in a certain decade:
 
 ```xtend
-  movies.filter[1980..1989.contains(year)]
+movies.filter[1980..1989.contains(year)]
 ```
 
 Please keep in mind that there are other means to iterator lists, too. For example, you may want to use the `forEach` extension
 
 ```xtend
-  list.forEach[ element, index |
-  	.. // if you need access to the current index
-  ]
-  list.reverseView.forEach[
-    .. // if you just need the element it in reverse order
-  ]
+list.forEach[ element, index |
+	.. // if you need access to the current index
+]
+list.reverseView.forEach[
+  .. // if you just need the element it in reverse order
+]
 ```
 
 #### Pair Operator
@@ -353,16 +353,16 @@ Please keep in mind that there are other means to iterator lists, too. For examp
 Sometimes you want to use a pair of two elements locally without introducing a new structure. In Xtend you can use the `->`-operator which returns an instance of `Pair<A,B>`:
 
 ```xtend
-	val nameAndAge = 'Homer' -> 42
+val nameAndAge = 'Homer' -> 42
 ```
 
 If you want to surface a such a pair of values on the interface of a method or field, it's generally a better idea to use a data class with a well defined name, instead:
 
 ```xtend
-	@Data class NameAndAge {
-		String name
-		int age
-	}
+@Data class NameAndAge {
+	String name
+	int age
+}
 ```
 
 ### Assignments {#assignments}
@@ -370,15 +370,15 @@ If you want to surface a such a pair of values on the interface of a method or f
 [Local variables](05_xtend_expressions.html#variable-declaration) can be assigned using the `=` operator. 
 
 ```xtend
-  var greeting = 'Hello'
-  if (isInformal)
-    greeting = 'Hi'
+var greeting = 'Hello'
+if (isInformal)
+  greeting = 'Hi'
 ```
 
 Of course, also non-final fields can be set using an assignment: 
 
 ```xtend
-  myObj.myField = 'foo'
+myObj.myField = 'foo'
 ```
 
 #### Setting Properties {#property-assignments}
@@ -386,7 +386,7 @@ Of course, also non-final fields can be set using an assignment:
 The lack of properties in Java leads to a lot of syntactic noise when working with data objects. As Xtend is designed to integrate with existing Java APIs it respects the Java Beans convention, hence you can call a setter using an assignment:
 
 ```xtend
-  myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")
+myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")
 ```
 
 The setter is only used if the field is not accessible from the given context. That is why the [@Property annotation](06_activeannotations.html#property-annotation) would rename the local field to `_myProperty`.
@@ -425,21 +425,21 @@ A block expression is surrounded by curly braces. The expressions in a block can
 Here are two examples:
 
 ```xtend
-  {
-    doSideEffect("foo")
-    result
-  }
+{
+  doSideEffect("foo")
+  result
+}
 ```
 
 ```xtend
-  {
-    var x = greeting;
-    if (x.equals("Hello ")) {
-      x + "World!" 
-    } else {
-      x
-    }
+{
+  var x = greeting;
+  if (x.equals("Hello ")) {
+    x + "World!" 
+  } else {
+    x
   }
+}
 ```
 
 ## Variable Declarations {#variable-declaration}
@@ -472,7 +472,7 @@ A local variable can be marked with the `extension` keyword to make its methods 
 The type of the variable itself can either be explicitly declared or it can be inferred from the initializer expression. Here is an example for an explicitly declared type: 
 
 ```xtend
-  var List<String> strings = new ArrayList
+var List<String> strings = new ArrayList
 ```
 
 In such cases, the type of the right hand expression must conform to the type of the expression on the left side.
@@ -480,7 +480,7 @@ In such cases, the type of the right hand expression must conform to the type of
 Alternatively the type can be inferred from the initializater: 
 
 ```xtend
-  var strings = new ArrayList<String> // -> msg is of type ArrayList<String>  
+var strings = new ArrayList<String> // -> msg is of type ArrayList<String>  
 ```
 
 ## Field Access and Method Invocations {#feature-calls}
@@ -492,7 +492,7 @@ A simple name can refer to a local field, variable or parameter. In addition it 
 If there is no field with the given name and also no method with the name and zero parameters accessible, a simple name binds to a corresponding Java-Bean getter method if available:
 
 ```xtend
-  myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)
+myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)
 ```
 
 ### Implicit Variables **this** and **it** {#implicit-variables}
@@ -500,20 +500,20 @@ If there is no field with the given name and also no method with the name and ze
 Like in Java the current instance of the class is bound to `this`. This allows for either qualified field access or method invocations like in:
 
 ```xtend
-  this.myField
+this.myField
 ```
 
 or it is possible to omit the receiver:
 
 ```xtend
-  myField
+myField
 ```
 
 You can use the variable name `it` to get the same behavior for any variable or parameter:
 
 ```xtend
-  val it = new Person
-  name = 'Horst' // translates to 'it.setName("Horst");'
+val it = new Person
+name = 'Horst' // translates to 'it.setName("Horst");'
 ```
 
 Another speciality of the variable `it` is that it is allowed to be shadowed. This is especially useful when used together with [lambda expressions](05_xtend_expressions.html#lambdas).
@@ -525,14 +525,14 @@ As `this` is bound to the surrounding object in Java, `it` can be used in finer-
 For accessing a static field or method you can use the recommended Java syntax or the more explicit double colon `::`. That means, the following epxressions are pairwise equivalent:
 
 ```xtend
-   MyClass.myField
-   MyClass::myField
+MyClass.myField
+MyClass::myField
 ```
 
 ```xtend
-   com.acme.MyClass.myMethod('foo')
-   com.acme.MyClass::myMethod('foo')
-   com::acme::MyClass::myMethod('foo')
+com.acme.MyClass.myMethod('foo')
+com.acme.MyClass::myMethod('foo')
+com::acme::MyClass::myMethod('foo')
 ```
 
 Alternatively you could import the method or field using a [static import](04_xtend_classes_members.html#imports).
@@ -544,13 +544,13 @@ Checking for `null` references can make code very unreadable. In many situations
 Instead of writing 
 
 ```java
-  if (myRef != null) myRef.doStuff()
+if (myRef != null) myRef.doStuff()
 ```
 
 one can write 
 
 ```xtend
-  myRef?.doStuff
+myRef?.doStuff
 ```
 
 Arguments that would be passed to the method are only evaluated if the method will be invoked at all.
@@ -562,8 +562,8 @@ For primitive types the default value is returned (e.g. 0 for int). This may not
 Constructor calls have the same syntax as in Java. The only difference is that empty parentheses are optional: 
 
 ```xtend
-  new String() == new String
-  new ArrayList<BigDecimal>() == new ArrayList<BigDecimal>
+new String() == new String
+new ArrayList<BigDecimal>() == new ArrayList<BigDecimal>
 ```
 
 If type arguments are omitted, they will be inferred from the current context similar to Java's diamond operator on generic method and constructor calls.
@@ -573,14 +573,14 @@ If type arguments are omitted, they will be inferred from the current context si
 A lambda expression is basically a piece of code wrapped into an object to pass it around. As a Java developer it is best to think of a lambda expression as an anonymous class with a single method, i.e. like in the following Java code :
 
 ```java
-  // Java Code!
-  final JTextField textField = new JTextField();
-  textField.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      textField.setText("Something happened!");
-    }
-  });
+// Java Code!
+final JTextField textField = new JTextField();
+textField.addActionListener(new ActionListener() {
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    textField.setText("Something happened!");
+  }
+});
 ```
 
 This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man's replacement for lambda expressions in Java. This has been improved with [Java 8 lambda expressions](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html), which are conceptually very similar to Xtend lambda expressions. Depending on the selected target language version, Xtend lambdas are translated differently to Java: Java lambdas are generated for Java 8 (since 2.8), while anonymous classes are generated for lower versions.
@@ -588,61 +588,61 @@ This kind of anonymous classes can be found everywhere in Java code and have alw
 The code above can be written in Xtend like this:
 
 ```xtend
-  val textField = new JTextField
-  textField.addActionListener([ ActionEvent e |
-    textField.text = "Something happened!"
-  ])
+val textField = new JTextField
+textField.addActionListener([ ActionEvent e |
+  textField.text = "Something happened!"
+])
 ```
 
 As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk). Similarly to a method, a lambda expression may declare parameters. The lambda above has one parameter called `e` which is of type `ActionEvent`. You do not have to specify the type explicitly because it can be inferred from the context:
 
 ```xtend
-  textField.addActionListener([ e |
-    textField.text = "The command '" + e.actionCommand + "' happened!"
-  ])
+textField.addActionListener([ e |
+  textField.text = "The command '" + e.actionCommand + "' happened!"
+])
 ```
 
 You do not need to speficy the argument names. If you leave them out, a single argument is named `it`. If the lambda has more arguments, the implicit names are `$1,$2,...,$n` depending on the number of arguments of course. Here's an example with a single argument named `it`. In this case `actionCommand` is equivalent to `it.actionCommand`.
 
 ```xtend
-  textField.addActionListener([
-    textField.text = "The command '" + actionCommand + "' happened!"
-  ])
+textField.addActionListener([
+  textField.text = "The command '" + actionCommand + "' happened!"
+])
 ```
 
 A lambda expression with zero arguments can be written with or without the bar. They are both the same.
 
 ```xtend
-  val Runnable aBar = [|
-    println("Hello I'm executed!")
-  ]
-  val Runnable noBar = [
-    println("Hello I'm executed!")
-  ]
+val Runnable aBar = [|
+  println("Hello I'm executed!")
+]
+val Runnable noBar = [
+  println("Hello I'm executed!")
+]
 ```
 
 When a method call's last parameter is a lambda it can be passed right after the parameter list. For instance if you want to sort some strings by their length, you could write :
 
 ```xtend
-  Collections.sort(someStrings) [ a, b |
-    a.length - b.length
-  ]
+Collections.sort(someStrings) [ a, b |
+  a.length - b.length
+]
 ```
 
 which is just the same as writing
 
 ```xtend
-  Collections.sort(someStrings, [ a, b |
-    a.length - b.length
-  ])
+Collections.sort(someStrings, [ a, b |
+  a.length - b.length
+])
 ```
 
 Since you can leave out empty parentheses for methods which get a lambda as their only argument, you can reduce the code above further down to:
 
 ```xtend
-  textField.addActionListener [
-    textField.text = "Something happened!"
-  ]
+textField.addActionListener [
+  textField.text = "Something happened!"
+]
 ```
 
 A lambda expression also captures the current scope. Any final local variables and all parameters that are visible at construction time can be referred to from within the lambda body. That is exactly what we did with the variable `textField` above.
@@ -650,13 +650,13 @@ A lambda expression also captures the current scope. Any final local variables a
 The variable `this` refers to the outer class. The lambda instance itself is available with the identifier `self`.
 
 ```xtend
-	val lineReader = new LineReader(r);
-	val AbstractIterator<String> lineIterator = [|
-		val result = lineReader.readLine 
-		if (result==null)
-			self.endOfData
-		return result
-	]
+val lineReader = new LineReader(r);
+val AbstractIterator<String> lineIterator = [|
+	val result = lineReader.readLine 
+	if (result==null)
+		self.endOfData
+	return result
+]
 ```
 
 ### Typing {#closure-types}
@@ -666,7 +666,7 @@ Lambdas are expressions which produce *Function* objects. The type of a lambda e
 However, if you write a lambda expression without having any target type expectation, like in the following assignment:
 
 ```xtend
-  val toUpperCaseFunction = [ String s | s.toUpperCase ] // inferred type is (String)=>String
+val toUpperCaseFunction = [ String s | s.toUpperCase ] // inferred type is (String)=>String
 ```
 
 The type will be one of the inner types found in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). It is a procedure if the return type is `void`, otherwise it is a function.
@@ -676,11 +676,11 @@ Xtend supports a shorthand syntax for function types. Instead of writing `Functi
 Example: 
 
 ```xtend
-  val (String)=>String stringToStringFunction = [ toUpperCase ]
-  // or
-  val Function1<? super String,? extends String> same = [ toUpperCase ]
-  // or
-  val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (String)=>String
+val (String)=>String stringToStringFunction = [ toUpperCase ]
+// or
+val Function1<? super String,? extends String> same = [ toUpperCase ]
+// or
+val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (String)=>String
 ```
 
 Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the [sneaky-throw technique](04_xtend_classes_members.html#declared-exceptions). Of course you can always [catch and handle](05_xtend_expressions.html#xtend-expressions-try-catch) them.
@@ -712,19 +712,19 @@ An if-expression is used to choose between two different values based on a predi
 An expression 
 
 ```xtend
-  if (p) e1 else e2
+if (p) e1 else e2
 ```
 
 results in either the value `e1` or `e2` depending on whether the predicate `p` evaluates to `true` or `false`. The else part is optional which is a shorthand for an else branch that returns the default value of the current type, e.g. for reference type this is equivalent to `else null`. That means 
 
 ```xtend
-  if (foo) x 
+if (foo) x 
 ```
 
 is a short hand for
 
 ```xtend
-  if (foo) x else null
+if (foo) x else null
 ```
 
 The type of an if expression is the common super type of the return types `T1` and `T2` of the two expression `e1` and `e2`.
@@ -740,11 +740,11 @@ While the if expression has the syntax of Java's if statement it behaves more li
 The switch expression is very different from Java's switch statement. The use of `switch` is not limited to certain values but can be used for any object reference. `Object.equals(Object)` is used to compare the value in the case with the one you are switching over. Given the following example: 
 
 ```xtend
-  switch myString {
-    case myString.length > 5 : "a long string."
-    case 'some' : "It's some string."
-    default : "It's another short string."
-  }
+switch myString {
+  case myString.length > 5 : "a long string."
+  case 'some' : "It's some string."
+  default : "It's another short string."
+}
 ```
 
 the main expression `myString` is evaluated first and then compared to each case sequentially. If the case expression is of type `boolean`, the case matches if the expression evaluates to `true`. If it is not of type `boolean` it is compared to the value of the main expression using `Object.equals(Object)`.
@@ -754,9 +754,9 @@ If a case is a match, that is it evaluates to `true` or the result equals the on
 The main expression can also be a computed value instead of a field or variable. If you want to reuse that value in the body of the switch expression, you can create a local value for that by using the following notation which is similar to the syntax in [`for` loops](05_xtend_expressions.html#for-loop).
 
 ```xtend
-  switch myString : someComputation() {
-    ..
-  }
+switch myString : someComputation() {
+  ..
+}
 ```
 
 ### Type guards
@@ -764,13 +764,13 @@ The main expression can also be a computed value instead of a field or variable.
 Instead of or in addition to the case guard you can specify a *type guard*. The case only matches if the switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match. If the switch value is a field, parameter or variable, it is automatically casted to the given type within the predicate and the case body.
 
 ```xtend
-  def length(Object x) {
-    switch x {
-      String case x.length > 0 : x.length // length is defined for String 
-      List<?> : x.size    // size is defined for List
-      default : -1
-    }
+def length(Object x) {
+  switch x {
+    String case x.length > 0 : x.length // length is defined for String 
+    List<?> : x.size    // size is defined for List
+    default : -1
   }
+}
 ```
 
 Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you might know from Java.
@@ -780,13 +780,13 @@ Switches with type guards are a safe and much more readable alternative to insta
 You can have multiple type guards and cases separated with a comma, to have all of them share the same then part.
 
 ```xtend
-  def isMale(String salutation) {
-    switch salutation {
-      case "Mr.", 
-      case "Sir" : true
-      default : false
-    }
+def isMale(String salutation) {
+  switch salutation {
+    case "Mr.", 
+    case "Sir" : true
+    default : false
   }
+}
 ```
 
 ## For Loop {#for-loop}
@@ -794,7 +794,7 @@ You can have multiple type guards and cases separated with a comma, to have all 
 The for loop 
 
 ```xtend
-  for (T1 variable : arrayOrIterable) expression
+for (T1 variable : arrayOrIterable) expression
 ```
 
 is used to execute a certain expression for each element of an array or an instance of [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html). The local `variable` is final, hence cannot be updated. 
@@ -802,12 +802,12 @@ is used to execute a certain expression for each element of an array or an insta
 The type of a for loop is `void`. The type of the local variable can be inferred from the iterable or array that is processed. 
 
 ```xtend
-  for (String s : myStrings) {
-    doSideEffect(s)
-  }
-  
-  for (s : myStrings)
-    doSideEffect(s)
+for (String s : myStrings) {
+  doSideEffect(s)
+}
+
+for (s : myStrings)
+  doSideEffect(s)
 ```
 
 ## Basic For Loop {#traditional-for-loop}
@@ -815,7 +815,7 @@ The type of a for loop is `void`. The type of the local variable can be inferred
 The traditional for loop 
 
 ```xtend
-  for (<init-expression> ;  <predicate> ; <update-expression>) body-expression
+for (<init-expression> ;  <predicate> ; <update-expression>) body-expression
 ```
 
 is very similar to the one known from Java, or even C. When executed, it first executes the `init-expression`, where local variables can be declared. Next the `predicate` is executed and if it evaluates to `true`, the `body-expression` is executed. On any subsequent iterations the `update-expressio` is executed instead of the init-expression. This happens until the `predicate` returns `false`.
@@ -823,9 +823,9 @@ is very similar to the one known from Java, or even C. When executed, it first e
 The type of a for loop is `void`.
 
 ```xtend
-  for (var i = 0 ; i < s.length ; i++) {
-    println(s.subString(0,i)
-  }
+for (var i = 0 ; i < s.length ; i++) {
+  println(s.subString(0,i)
+}
 ```
 
 ## While Loop {#while-expression}
@@ -833,18 +833,18 @@ The type of a for loop is `void`.
 A while loop 
 
 ```xtend
-  while (predicate) expression
+while (predicate) expression
 ```
 
 is used to execute a certain expression unless the predicate is evaluated to `false`. The type of a while loop is `void`.
 
 ```xtend
-  while (true) {
-    doSideEffect("foo")
-  }
-  
-  while ((i=i+1) < max) 
-    doSideEffect("foo")
+while (true) {
+  doSideEffect("foo")
+}
+
+while ((i=i+1) < max) 
+  doSideEffect("foo")
 ```
 
 ## Do-While Loop {#do-while-expression}
@@ -852,18 +852,18 @@ is used to execute a certain expression unless the predicate is evaluated to `fa
 A do-while loop 
 
 ```xtend
-  do expression while (predicate)
+do expression while (predicate)
 ```
 
 is used to execute a certain expression until the predicate is evaluated to `false`. The difference to the [while loop](05_xtend_expressions.html#while-expression) is that the execution starts by executing the block once before evaluating the predicate for the first time. The type of a do-while loop is `void`.
 
 ```xtend
-  do {
-    doSideEffect("foo");
-  } while (true)
-  
-  
-  do doSideEffect("foo") while ((i=i+1)<max)
+do {
+  doSideEffect("foo");
+} while (true)
+
+
+do doSideEffect("foo") while ((i=i+1)<max)
 ```
 
 ## Return Expression {#xtend-expressions-return}
@@ -873,11 +873,11 @@ A method or lambda expression automatically returns the value of its body expres
 The syntax is just like in Java:
 
 ```xtend
-  listOfStrings.map [ e | 
-    if (e==null) 
-      return "NULL"
-    e.toUpperCase
-  ]
+listOfStrings.map [ e | 
+  if (e==null) 
+    return "NULL"
+  e.toUpperCase
+]
 ```
 
 ## Throwing Exceptions {#xtend-expressions-throw}
@@ -886,10 +886,10 @@ Throwing [Throwable]({{site.javadoc.java}}/java/lang/Throwable.html)s up the cal
 
 ```xtend
 {
-  ...
-  if (myList.isEmpty)
-    throw new IllegalArgumentException("the list must not be empty")
-  ...
+...
+if (myList.isEmpty)
+  throw new IllegalArgumentException("the list must not be empty")
+...
 }
 ```
 
@@ -898,23 +898,23 @@ Throwing [Throwable]({{site.javadoc.java}}/java/lang/Throwable.html)s up the cal
 The try-catch-finally expression is used to handle exceptional situations. Checked exceptions are treated like runtime exceptions and only optionally validated. You can but do not have to catch them as they will be silently thrown (see the [section on declared exceptions](04_xtend_classes_members.html#declared-exceptions)).
 
 ```xtend
-  try {
-    throw new RuntimeException()
-  } catch (NullPointerException e) {
-    // handle e
-  } finally {
-    // do stuff
-  }
+try {
+  throw new RuntimeException()
+} catch (NullPointerException e) {
+  // handle e
+} finally {
+  // do stuff
+}
 ```
 
 For try-catch it is again beneficial that it is an expression, because you can write code like the following and do not have to rely on non-final variables:
 
 ```xtend
-  val name = try {
-      readFromFile
-    } catch (IOException e) {
-      "unknown"
-    }
+val name = try {
+    readFromFile
+  } catch (IOException e) {
+    "unknown"
+  }
 ```
 
 ## Synchronized {#xtend-expressions-synchronized}
@@ -922,15 +922,15 @@ For try-catch it is again beneficial that it is an expression, because you can w
 The synchonized expression does the same as it does in Java (see [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19)). The only difference is that in Xtend it is an expression and can therefore be used at more places.
 
 ```xtend
-  synchronized(lock) {
-    println("Hello")
-  }
+synchronized(lock) {
+  println("Hello")
+}
 ```
 
 ```xtend
-  val name = synchronized(lock) { 
-    doStuff() 
-  }
+val name = synchronized(lock) { 
+  doStuff() 
+}
 ```
 
 ## Template Expressions {#templates}
@@ -1066,7 +1066,7 @@ class Template {
 |
 
 ```
-        node NodeName {}
+node NodeName {}
 ```
 
 |

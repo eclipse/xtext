@@ -172,9 +172,9 @@ A template expression is used to implement the body. Although this code is execu
 A second alternative is to put expressions from the Xtend source into the context of a generated Java element. This allows to directly use the code that was written in the source file. An annotation `@Lazy` which turns fields into lazily initialized properties, may be used like this: 
 
 ```xtend
-  class MyClass {
-    @Lazy String myField = expensiveComputation()
-  }
+class MyClass {
+  @Lazy String myField = expensiveComputation()
+}
 ```
 
 The processor for this *active annotation* could infer a synthetic initializer method and add a getter-method, which calls the initializer if the field is still `null`. Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method. The following code performs this transformation:
@@ -332,21 +332,21 @@ Xtend comes with ready-to-use active annotations for common code patterns. They 
 If you want to add getter and or setter methods for your fields [`@Accessors`]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend) is your friend. Here's a basic example.
 
 ```xtend
-  @Accessors String name
+@Accessors String name
 ```
 
 will compile to the Java code
 
 ```java
-  private String name;
-  
-  public String getName() {
-    return this.name;
-  }
-  
-  public void setName(final String name) {
-    this.name = name;
-  }
+private String name;
+
+public String getName() {
+  return this.name;
+}
+
+public void setName(final String name) {
+  this.name = name;
+}
 ```
 
 So by default a public getter and a public setter method is created. The `@Accessors` can be configured to tell that you only want one or the other and to change the visibility. this is done by means of [AccessorType]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend) You can also use the annotation on class level to do the same for all fields.
@@ -429,10 +429,12 @@ The [`@Delegate`]({{site.src.xtext}}/plugins/org.eclipse.xtend.lib/src/org/eclip
 Let's start with a basic example:
 
 ```xtend
-class MyClass implements SomeInterface
+class MyClass implements SomeInterface {
 
   // generates all methods of List and delegates to this field
   @Delegate SomeSubTypeOfSumInterface myDelegate
+
+}
 ```
 
 It is not only possible to delegate to fields, but also to methods so you for instance could lazily create the delegate object or use a different one each time. If you use a method you can also declare additional parameters, that will tell you about the method that should be invoked.
