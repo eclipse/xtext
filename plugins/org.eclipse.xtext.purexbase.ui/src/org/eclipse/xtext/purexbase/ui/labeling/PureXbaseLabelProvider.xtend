@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 /**
  * Provides labels for a EObjects.
  * 
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ * See http://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 class PureXbaseLabelProvider extends XbaseLabelProvider {
 

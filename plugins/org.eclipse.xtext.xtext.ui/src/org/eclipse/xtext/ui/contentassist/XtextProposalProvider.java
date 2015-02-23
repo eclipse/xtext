@@ -82,9 +82,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
-/**
- * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
- */
 public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	@Inject

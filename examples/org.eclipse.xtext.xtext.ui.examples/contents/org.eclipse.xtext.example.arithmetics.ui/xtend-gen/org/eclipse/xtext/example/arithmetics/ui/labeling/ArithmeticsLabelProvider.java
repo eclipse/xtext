@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 /**
  * Provides labels for a EObjects.
  * 
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ * See http://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
  */
 @SuppressWarnings("all")
 public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {

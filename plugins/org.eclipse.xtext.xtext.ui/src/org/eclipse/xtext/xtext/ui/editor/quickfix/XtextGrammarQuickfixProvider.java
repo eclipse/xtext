@@ -90,7 +90,7 @@ import com.google.inject.Inject;
  */
 public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	
-	private static final String GRAMMAR_LANG_DOC = "https://www.eclipse.org/Xtext/documentation.html#grammarLanguage";
+	private static final String GRAMMAR_LANG_DOC = "https://www.eclipse.org/Xtext/documentation/13_grammarlanguage.html";
 
 	private String NULL_QUICKFIX_IMAGE = null;
 	

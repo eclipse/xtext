@@ -19,7 +19,7 @@ import static org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPacka
 /**
  * Custom validation rules. 
  *
- * see http://www.eclipse.org/Xtext/documentation.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
  */
 class ArithmeticsValidator extends AbstractArithmeticsValidator {
 

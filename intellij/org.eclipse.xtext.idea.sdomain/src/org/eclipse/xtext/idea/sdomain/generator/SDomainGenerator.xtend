@@ -10,7 +10,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 /**
  * Generates code from your model files on save.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
+ * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#code-generation
  */
 class SDomainGenerator implements IGenerator {
 	

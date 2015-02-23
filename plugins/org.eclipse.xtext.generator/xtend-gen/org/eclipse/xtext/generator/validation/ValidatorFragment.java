@@ -229,13 +229,13 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       _builder_1.append("/**");
       _builder_1.newLine();
       _builder_1.append(" ");
-      _builder_1.append("* Custom validation rules. ");
+      _builder_1.append("* This class contains custom validation rules. ");
       _builder_1.newLine();
       _builder_1.append(" ");
       _builder_1.append("*");
       _builder_1.newLine();
       _builder_1.append(" ");
-      _builder_1.append("* see http://www.eclipse.org/Xtext/documentation.html#validation");
+      _builder_1.append("* See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation");
       _builder_1.newLine();
       _builder_1.append(" ");
       _builder_1.append("*/");
