@@ -179,7 +179,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public void connect(IDocument document, boolean delayInitialization) {
+	public synchronized void connect(IDocument document, boolean delayInitialization) {
 		Assert.isNotNull(document);
 		Assert.isTrue(!document.containsPositionCategory(fPositionCategory));
 
@@ -244,7 +244,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public void disconnect() {
+	public synchronized void disconnect() {
 
 		Assert.isTrue(fDocument.containsPositionCategory(fPositionCategory));
 
@@ -264,7 +264,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public void documentAboutToBeChanged(DocumentEvent e) {
+	public synchronized void documentAboutToBeChanged(DocumentEvent e) {
 		if (fIsInitialized) {
 
 			Assert.isTrue(e.getDocument() == fDocument);
@@ -282,7 +282,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public final boolean documentChanged(DocumentEvent e) {
+	public synchronized final boolean documentChanged(DocumentEvent e) {
 		if (fIsInitialized) {
 			IRegion region = documentChanged2(e);
 			return (region != null);
@@ -354,7 +354,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public IRegion documentChanged2(DocumentEvent e) {
+	public synchronized IRegion documentChanged2(DocumentEvent e) {
 
 		if (!fIsInitialized)
 			return null;
@@ -545,7 +545,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public String getContentType(int offset) {
+	public synchronized String getContentType(int offset) {
 		checkInitialization();
 
 		TypedPosition p = findClosestPosition(offset);
@@ -564,7 +564,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public ITypedRegion getPartition(int offset) {
+	public synchronized ITypedRegion getPartition(int offset) {
 		checkInitialization();
 
 		try {
@@ -717,7 +717,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public ITypedRegion getPartition(int offset, boolean preferOpenPartitions) {
+	public synchronized ITypedRegion getPartition(int offset, boolean preferOpenPartitions) {
 		ITypedRegion region = getPartition(offset);
 		if (preferOpenPartitions) {
 			if (region.getOffset() == offset && !region.getType().equals(IDocument.DEFAULT_CONTENT_TYPE)) {
@@ -741,7 +741,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * @since 2.2
 	 */
 	@Override
-	public ITypedRegion[] computePartitioning(int offset, int length, boolean includeZeroLengthPartitions) {
+	public synchronized ITypedRegion[] computePartitioning(int offset, int length, boolean includeZeroLengthPartitions) {
 		checkInitialization();
 		List<ITypedRegion> list = new ArrayList<ITypedRegion>();
 
@@ -919,7 +919,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
-	protected final void flushRewriteSession() {
+	protected synchronized final void flushRewriteSession() {
 		fActiveRewriteSession = null;
 
 		// remove all position belonging to the partitioner position category
@@ -951,7 +951,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 *             if getting the positions from the document fails
 	 * @since 2.2
 	 */
-	protected final Position[] getPositions() throws BadPositionCategoryException {
+	protected synchronized final Position[] getPositions() throws BadPositionCategoryException {
 		if (fCachedPositions == null) {
 			fCachedPositions = fDocument.getPositions(fPositionCategory);
 		} else if (CHECK_CACHE_CONSISTENCY) {
