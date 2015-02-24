@@ -58,6 +58,59 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testRedeclaredMethodFromObject() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String toString()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C implements A {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertNoErrors(_file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRedeclaredMethodFromCustomClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class B {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C extends B {}");
+      _builder.newLine();
+      _builder.append("class D extends C implements A {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertNoErrors(_file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testConflictingDefaultMethods01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -303,7 +356,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
       this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
-        "The type E inherits multiple implementations of the method foo() from D and C.");
+        "The type E inherits multiple implementations of the method foo() from C and D.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -388,6 +441,66 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       XtendFile _file = this.file(_builder.toString());
       this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method foo() inherited from D conflicts with the method foo() inherited from C.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testConflictingDefaultMethods11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface I {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("interface J {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m();");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("interface J1 extends J {}");
+      _builder.newLine();
+      _builder.append("class E implements I, J1 {}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+        "The non-abstract method m() inherited from I conflicts with the method m() inherited from J.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMissingImplementation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("abstract class A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m();");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("abstract class B extends A {} ");
+      _builder.newLine();
+      _builder.append("interface I {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C extends B implements I {}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+        "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
