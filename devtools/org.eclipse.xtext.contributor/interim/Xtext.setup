@@ -638,37 +638,6 @@
       </targlet>
     </setupTask>
     <setupTask
-        xsi:type="setup.targlets:TargletTask">
-      <targlet
-          name="Xtext Xdoc">
-        <requirement
-            name="xtend.website.generator"/>
-        <requirement
-            name="xtext.website.generator"/>
-        <requirement
-            name="org.eclipse.xtext.doc.xdoc"/>
-        <requirement
-            name="org.eclipse.xtend.doc.xdoc"/>
-        <requirement
-            name="org.eclipse.xtend.bootstrapdoc"/>
-        <requirement
-            name="org.eclipse.xtext.xdoc.source"/>
-        <requirement
-            name="org.eclipse.xtext.xdoc.ui"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location}/docs"/>
-        <repositoryList
-            name="External">
-          <repository
-              url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/repository/"/>
-          <repository
-              url="https://dhuebner.ci.cloudbees.com/job/seven-languages-xtext/job/Seven-Languages/lastSuccessfulBuild/artifact/p2.repository/"/>
-        </repositoryList>
-      </targlet>
-    </setupTask>
-    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.location/maven}"/>
