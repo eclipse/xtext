@@ -12,6 +12,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.service.SingletonBinding;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
@@ -147,4 +149,9 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
 		return EclipseGeneratorConfigProvider.class;
 	}
+	
+	public Class<? extends BuilderPreferenceAccess.Initializer> bindBuilderPreferenceAccess$Initializer() {
+		return XbaseBuilderPreferenceAccess.Initializer.class;
+	}
+
 }
