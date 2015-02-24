@@ -41,6 +41,32 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def void testRedeclaredMethodFromObject() {
+		file('''
+			interface A {
+				override String toString()
+			}
+			class C implements A {
+			}
+		''').assertNoErrors
+	}
+	
+	@Test
+	def void testRedeclaredMethodFromCustomClass() {
+		file('''
+			interface A {
+				def void m()
+			}
+			class B {
+				def void m() {}
+			}
+			class C extends B {}
+			class D extends C implements A {
+			}
+		''').assertNoErrors
+	}
+	
+	@Test
 	def void testConflictingDefaultMethods01() {
 		file('''
 			interface A {
@@ -161,7 +187,7 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			}
 			class E implements A, B, D, C { }
 		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
-			"The type E inherits multiple implementations of the method foo() from D and C.")
+			"The type E inherits multiple implementations of the method foo() from C and D.")
 	}
 	
 	@Test
@@ -202,6 +228,36 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			class E implements B, C, A, D { }
 		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
 			"The non-abstract method foo() inherited from D conflicts with the method foo() inherited from C.")
+	}
+	
+	@Test
+	def void testConflictingDefaultMethods11() {
+		file('''
+			interface I {
+				def void m() {}
+			}
+			interface J {
+				def void m();
+			}
+			interface J1 extends J {}
+			class E implements I, J1 {}
+		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
+			"The non-abstract method m() inherited from I conflicts with the method m() inherited from J.")
+	}
+	
+	@Test
+	def void testMissingImplementation() {
+		file('''
+			abstract class A {
+				def void m();
+			}
+			abstract class B extends A {} 
+			interface I {
+				def void m() {}
+			}
+			class C extends B implements I {}
+		''').assertError(XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+			"The class C must be defined abstract because it does not implement m()")
 	}
 	
 	@Test
