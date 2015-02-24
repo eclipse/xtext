@@ -66,6 +66,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	private IDocument document;
 
 	private String originalContent;
+	
+	private NullPointerException exception = null;
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();
@@ -86,6 +88,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		originalContent = document.get();
 		firedElementChangedEvents = Lists.newArrayList();
 		subsequentEvents = Lists.newArrayList();
+		exception = null;
 	}
 	
 	@After
@@ -104,6 +107,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		event = null;
 		firedElementChangedEvents = null;
 		subsequentEvents = null;
+		exception = null;
 	}
 	
 	@Test public void testNullChange() throws BadLocationException, InterruptedException {
@@ -460,6 +464,9 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 				counter--;
 				Thread.sleep(15);
 			}
+			if(exception != null){
+				throw exception;
+			}
 		} finally {
 			JavaCore.removeElementChangedListener(this);
 		}
@@ -476,7 +483,9 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		if (this.event != null && subsequentEvents != null) {
 			subsequentEvents.add(event);
 		}
-		assertNotNull("Event should not be null!", event);
+		if(event == null){
+			exception = new NullPointerException();
+		}
 		this.event = event;
 	}
 
