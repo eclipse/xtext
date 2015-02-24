@@ -19,7 +19,7 @@
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::ex::common::Common»
 «EXTENSION org::eclipse::xtext::EcoreUtils»
 
-«DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
+«DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper, boolean hasIDE) FOR Grammar»
 «FILE helper.getContentAssistParserGrammarFileName(this).asPath()+".g" SRC_GEN_IDE-»
 «fileHeader()»
 parser grammar «helper.getContentAssistParserGrammarFileName(this).toSimpleName()»;
@@ -52,8 +52,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF hasIDE-»
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+«ENDIF-»
 import «gaFQName()»;
 
 }

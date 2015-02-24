@@ -130,25 +130,48 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		BindFactory binder = new BindFactory()
-			.addTypeToType(
-					"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
-					"org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory")
-			.addTypeToType(
-					"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser",
-					getParserClassName(grammar, getNaming()))
-			.addConfiguredBinding("ContentAssistLexerProvider",
+		BindFactory binder = new BindFactory();
+			if(getNaming().hasIde()){
+				binder.addTypeToType(
+						"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
+						"org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
+				binder.addTypeToType(
+						"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser",
+						getParserClassName(grammar, getNaming()));
+			} else {
+				binder.addTypeToType(
+						"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
+						"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory");
+				binder.addTypeToType(
+						"org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser",
+						getParserClassName(grammar, getNaming()));
+			}
+			binder.addConfiguredBinding("ContentAssistLexerProvider",
 					"binder.bind(" + getInternalLexerClassName(grammar, getNaming()) +".class)"+
-					".toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getInternalLexerClassName(grammar, getNaming()) + ".class))")
-			.addConfiguredBinding("ContentAssistLexer",
-					"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
-					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
-					")).to(" + getInternalLexerClassName(grammar, getNaming()) +".class)");
+					".toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getInternalLexerClassName(grammar, getNaming()) + ".class))");
+			if(getNaming().hasIde()){
+				binder.addConfiguredBinding("ContentAssistLexer",
+						"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
+						")).to(" + getInternalLexerClassName(grammar, getNaming()) +".class)");
+			} else {
+				binder.addConfiguredBinding("ContentAssistLexer",
+						"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
+						")).to(" + getInternalLexerClassName(grammar, getNaming()) +".class)");
+			}
 		if (partialParsing) {
-			binder.addTypeToType(
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory", 
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
+			if(getNaming().hasIde()){
+				binder.addTypeToType(
+					"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory", 
+					"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
+			} else {
+				binder.addTypeToType(
+					 "org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory", 
+					 "org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.PartialStatefulFactory");
+			}
 		}
 		return binder.getBindings();
 	}
@@ -160,7 +183,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return ImmutableList.of(getOptions(), partialParsing);
+		return ImmutableList.of(getOptions(), partialParsing, getNaming().hasIde());
 	}
 
 	public static String getParserClassName(Grammar g, Naming naming) {
