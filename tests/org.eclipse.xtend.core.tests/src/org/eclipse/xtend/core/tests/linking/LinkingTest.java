@@ -91,6 +91,143 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testBug460615_01() throws Exception {
+		XtendFile file = file(
+				"import static extension Ext.*\n"+
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    static private final String s = ''\n" + 
+				"}\n" +
+				"class Ext { public static val String s = '' }\n");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.s", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
+	@Test public void testBug460615_02() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    static private final String s = ''\n" + 
+				"    extension Ext\n" + 
+				"}\n" +
+				"class Ext { public val String s = '' }");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.s", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
+	@Test public void testBug460615_03() throws Exception {
+		XtendFile file = file(
+				"import static extension Ext2.*\n"+
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    extension Ext\n" + 
+				"}\n" +
+				"class Ext { public val String s = '' }\n" +
+				"class Ext2 { public static val String s = '' }\n");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("Ext.s", feature.getIdentifier());
+	}
+	
+	@Test public void testBug460615_04() throws Exception {
+		XtendFile file = file(
+				"import static extension Ext.*\n"+
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    static private def String s() {}\n" + 
+				"}\n" +
+				"class Ext { public static def String s() {} }\n");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.s()", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
+	@Test public void testBug460615_05() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    static private def String s() {}\n" + 
+				"    extension Ext\n" + 
+				"}\n" +
+				"class Ext { public def String s() {} }");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.s()", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
+	@Test public void testBug460615_06() throws Exception {
+		XtendFile file = file(
+				"import static extension Ext2.*\n"+
+				"class C {\n" + 
+				"    def m() {\n" + 
+				"        s\n" + 
+				"    }\n" + 
+				"    extension Ext\n" + 
+				"}\n" +
+				"class Ext { public def String s() {} }\n" +
+				"class Ext2 { public static def String s() {} }\n");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("Ext.s()", feature.getIdentifier());
+	}
+	
+	@Test public void testBug460191() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"    def Iterable<K> getFs(Iterable<I> l) {\n" + 
+				"        l.filter[true]\n" + 
+				"    }\n" + 
+				"    interface I {}\n" + 
+				"    interface K extends I {}\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
 	@Test public void testOverloadStaticInstance_01() throws Exception {
 		XtendFile file = file(
 				"class C {\n" + 
@@ -131,6 +268,26 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"class C {\n" + 
 				"  static class D {\n" +
 				"    def static void m(CharSequence c) { m('') }\n" +
+				"  }\n" +
+				"  def static void m(String s) {}\n" +
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendClass d = (XtendClass) c.getMembers().get(0);
+		XtendFunction m = (XtendFunction) d.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.m(java.lang.String)", feature.getIdentifier());
+	}
+	
+	@Test public void testStaticNestedClass_03() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"  static class D extends X {\n" +
+				"    def static void m() { m('') }\n" +
+				"  }\n" +
+				"  static class X {\n" +
+				"    def static void m(CharSequence c) {}\n" +
 				"  }\n" +
 				"  def static void m(String s) {}\n" +
 				"}");
