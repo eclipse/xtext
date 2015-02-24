@@ -81,8 +81,9 @@ h2 {
 }
 
 h2 small {
-	font-size: 10px;
+	font-size: 12px;
 	color: #717576;
+	margin-left: 10px;
 }
 
 h3 {
