@@ -17,6 +17,9 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 /**
+ * Copied and adapted from 
+ * <code>org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor</code>.
+ * 
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,9 +30,7 @@ public class TraceRegionMerger {
 
 	public AbstractTraceRegion mergeTraceRegions(List<AbstractTraceRegion> roots) {
 		leafRegions = newArrayList();
-		List<ILocationData> rootLocationData = newArrayList();
 		for (AbstractTraceRegion root: roots) {
-			rootLocationData.addAll(root.getAssociatedLocations());
 			for(Iterator<AbstractTraceRegion> iter = root.leafIterator(); iter.hasNext();)
 				leafRegions.add(clone(iter.next()));
 			
@@ -42,7 +43,7 @@ public class TraceRegionMerger {
 				lastLeaf.getMyOffset() + lastLeaf.getMyLength() - firstLeaf.getMyOffset(), 
 				firstLeaf.getMyLineNumber(), 
 				lastLeaf.getMyEndLineNumber(), 
-				rootLocationData, null);
+				Collections.<ILocationData>emptyList(), null);
 		for(AbstractTraceRegion leafRegion: leafRegions) 
 			leafRegion.setParent(mergedRoot);
 		return mergedRoot;
@@ -75,14 +76,14 @@ public class TraceRegionMerger {
 	}
 	
 	@SuppressWarnings("null")
-	private void doMergeLeafRegions(int listIdx, int exclusiveEndOffset, int exclusiveEndLine, List<ILocationData> locations) {
+	private void doMergeLeafRegions(int listIdx, int exclusiveEndOffset, int inclusiveEndLine, List<ILocationData> locations) {
 		int i = listIdx;
 		List<AbstractTraceRegion> newRegions = null;
 		AbstractTraceRegion prev = null;
 		while(i < leafRegions.size()) {
 			AbstractTraceRegion next = leafRegions.get(i);
 			if (next.getMyOffset() >= exclusiveEndOffset) {
-				newRegions = addPendingRegions(prev, exclusiveEndOffset, exclusiveEndLine, locations, newRegions);
+				newRegions = addPendingRegions(prev, exclusiveEndOffset, inclusiveEndLine, locations, newRegions);
 				partialSortRegions(listIdx, exclusiveEndOffset, i, newRegions);
 				return;
 			}
@@ -99,14 +100,15 @@ public class TraceRegionMerger {
 				next = replaceMerged(i, next, locations);
 			} else {
 				int oldLength = next.getMyLength();
-				next = replaceTruncated(i, next, exclusiveEndOffset - next.getMyOffset(), exclusiveEndLine);
+				int oldEndLine = next.getMyEndLineNumber();
+				next = replaceTruncated(i, next, exclusiveEndOffset - next.getMyOffset(), inclusiveEndLine);
 				if (newRegions == null)
 					newRegions = Lists.newArrayListWithExpectedSize(4);
 				newRegions.add(new TraceRegion(
 						next.getMyOffset() + next.getMyLength(), 
 						oldLength - next.getMyLength(), 
-						exclusiveEndLine, 
-						next.getMyEndLineNumber(), 
+						inclusiveEndLine, 
+						oldEndLine, 
 						next.getAssociatedLocations(), 
 						null));
 				next = replaceMerged(i, next, locations);
@@ -114,7 +116,7 @@ public class TraceRegionMerger {
 			i++;
 			prev = next;
 		}
-		newRegions = addPendingRegions(prev, exclusiveEndOffset, exclusiveEndLine, locations, newRegions);
+		newRegions = addPendingRegions(prev, exclusiveEndOffset, inclusiveEndLine, locations, newRegions);
 		partialSortRegions(listIdx, exclusiveEndOffset, i, newRegions);
 	}
 
