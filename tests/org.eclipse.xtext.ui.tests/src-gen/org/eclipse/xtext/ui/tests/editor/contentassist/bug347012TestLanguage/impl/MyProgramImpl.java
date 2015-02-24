@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyP
  * An implementation of the model object '<em><b>My Program</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class MyProgramImpl extends MinimalEObjectImpl.Container implements MyPro
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyPackage getPackage()
+  public MyPackage getPackage()
   {
     return package_;
   }
@@ -95,8 +93,7 @@ public MyPackage getPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPackage(MyPackage newPackage)
+  public void setPackage(MyPackage newPackage)
   {
     if (newPackage != package_)
     {

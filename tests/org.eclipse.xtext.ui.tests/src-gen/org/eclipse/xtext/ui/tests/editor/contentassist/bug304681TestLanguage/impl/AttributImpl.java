@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Con
  * An implementation of the model object '<em><b>Attribut</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -178,8 +177,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -189,8 +187,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -203,8 +200,7 @@ public void setType(String newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getShortDescription()
+  public String getShortDescription()
   {
     return shortDescription;
   }
@@ -214,8 +210,7 @@ public String getShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setShortDescription(String newShortDescription)
+  public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -228,8 +223,7 @@ public void setShortDescription(String newShortDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLongDescription()
+  public String getLongDescription()
   {
     return longDescription;
   }
@@ -239,8 +233,7 @@ public String getLongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLongDescription(String newLongDescription)
+  public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;
@@ -253,8 +246,7 @@ public void setLongDescription(String newLongDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ConstraintDefinition> getConstraintDefinitions()
+  public EList<ConstraintDefinition> getConstraintDefinitions()
   {
     if (constraintDefinitions == null)
     {
@@ -268,8 +260,7 @@ public EList<ConstraintDefinition> getConstraintDefinitions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isRequired()
+  public boolean isRequired()
   {
     return required;
   }
@@ -279,8 +270,7 @@ public boolean isRequired()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRequired(boolean newRequired)
+  public void setRequired(boolean newRequired)
   {
     boolean oldRequired = required;
     required = newRequired;
@@ -293,8 +283,7 @@ public void setRequired(boolean newRequired)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isTechnical()
+  public boolean isTechnical()
   {
     return technical;
   }
@@ -304,8 +293,7 @@ public boolean isTechnical()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTechnical(boolean newTechnical)
+  public void setTechnical(boolean newTechnical)
   {
     boolean oldTechnical = technical;
     technical = newTechnical;

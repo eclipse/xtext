@@ -272,8 +272,7 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGrammar()
+  public EClass getGrammar()
   {
     return grammarEClass;
   }
@@ -283,8 +282,7 @@ public EClass getGrammar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGrammar_Name()
+  public EAttribute getGrammar_Name()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(0);
   }
@@ -294,8 +292,7 @@ public EAttribute getGrammar_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGrammar_UsedGrammars()
+  public EReference getGrammar_UsedGrammars()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(1);
   }
@@ -305,8 +302,7 @@ public EReference getGrammar_UsedGrammars()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGrammar_DefinesHiddenTokens()
+  public EAttribute getGrammar_DefinesHiddenTokens()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
   }
@@ -316,8 +312,7 @@ public EAttribute getGrammar_DefinesHiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGrammar_HiddenTokens()
+  public EReference getGrammar_HiddenTokens()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(3);
   }
@@ -327,8 +322,7 @@ public EReference getGrammar_HiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGrammar_MetamodelDeclarations()
+  public EReference getGrammar_MetamodelDeclarations()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(4);
   }
@@ -338,8 +332,7 @@ public EReference getGrammar_MetamodelDeclarations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGrammar_Rules()
+  public EReference getGrammar_Rules()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(5);
   }
@@ -349,8 +342,7 @@ public EReference getGrammar_Rules()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractRule()
+  public EClass getAbstractRule()
   {
     return abstractRuleEClass;
   }
@@ -360,8 +352,7 @@ public EClass getAbstractRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAbstractRule_Name()
+  public EAttribute getAbstractRule_Name()
   {
     return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -371,8 +362,7 @@ public EAttribute getAbstractRule_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAbstractRule_Type()
+  public EReference getAbstractRule_Type()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
   }
@@ -382,8 +372,7 @@ public EReference getAbstractRule_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAbstractRule_Alternatives()
+  public EReference getAbstractRule_Alternatives()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(2);
   }
@@ -393,8 +382,7 @@ public EReference getAbstractRule_Alternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractMetamodelDeclaration()
+  public EClass getAbstractMetamodelDeclaration()
   {
     return abstractMetamodelDeclarationEClass;
   }
@@ -404,8 +392,7 @@ public EClass getAbstractMetamodelDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAbstractMetamodelDeclaration_EPackage()
+  public EReference getAbstractMetamodelDeclaration_EPackage()
   {
     return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -415,8 +402,7 @@ public EReference getAbstractMetamodelDeclaration_EPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAbstractMetamodelDeclaration_Alias()
+  public EAttribute getAbstractMetamodelDeclaration_Alias()
   {
     return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -426,8 +412,7 @@ public EAttribute getAbstractMetamodelDeclaration_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGeneratedMetamodel()
+  public EClass getGeneratedMetamodel()
   {
     return generatedMetamodelEClass;
   }
@@ -437,8 +422,7 @@ public EClass getGeneratedMetamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGeneratedMetamodel_Name()
+  public EAttribute getGeneratedMetamodel_Name()
   {
     return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(0);
   }
@@ -448,8 +432,7 @@ public EAttribute getGeneratedMetamodel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReferencedMetamodel()
+  public EClass getReferencedMetamodel()
   {
     return referencedMetamodelEClass;
   }
@@ -459,8 +442,7 @@ public EClass getReferencedMetamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParserRule()
+  public EClass getParserRule()
   {
     return parserRuleEClass;
   }
@@ -470,8 +452,7 @@ public EClass getParserRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getParserRule_DefinesHiddenTokens()
+  public EAttribute getParserRule_DefinesHiddenTokens()
   {
     return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -481,8 +462,7 @@ public EAttribute getParserRule_DefinesHiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParserRule_HiddenTokens()
+  public EReference getParserRule_HiddenTokens()
   {
     return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
   }
@@ -492,8 +472,7 @@ public EReference getParserRule_HiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypeRef()
+  public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -503,8 +482,7 @@ public EClass getTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTypeRef_Metamodel()
+  public EReference getTypeRef_Metamodel()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -514,8 +492,7 @@ public EReference getTypeRef_Metamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTypeRef_Classifier()
+  public EReference getTypeRef_Classifier()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -525,8 +502,7 @@ public EReference getTypeRef_Classifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractElement()
+  public EClass getAbstractElement()
   {
     return abstractElementEClass;
   }
@@ -536,8 +512,7 @@ public EClass getAbstractElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAbstractElement_Cardinality()
+  public EAttribute getAbstractElement_Cardinality()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
   }
@@ -547,8 +522,7 @@ public EAttribute getAbstractElement_Cardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAction()
+  public EClass getAction()
   {
     return actionEClass;
   }
@@ -558,8 +532,7 @@ public EClass getAction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAction_Type()
+  public EReference getAction_Type()
   {
     return (EReference)actionEClass.getEStructuralFeatures().get(0);
   }
@@ -569,8 +542,7 @@ public EReference getAction_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAction_Feature()
+  public EAttribute getAction_Feature()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
   }
@@ -580,8 +552,7 @@ public EAttribute getAction_Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAction_Operator()
+  public EAttribute getAction_Operator()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
   }
@@ -591,8 +562,7 @@ public EAttribute getAction_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getKeyword()
+  public EClass getKeyword()
   {
     return keywordEClass;
   }
@@ -602,8 +572,7 @@ public EClass getKeyword()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getKeyword_Value()
+  public EAttribute getKeyword_Value()
   {
     return (EAttribute)keywordEClass.getEStructuralFeatures().get(0);
   }
@@ -613,8 +582,7 @@ public EAttribute getKeyword_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRuleCall()
+  public EClass getRuleCall()
   {
     return ruleCallEClass;
   }
@@ -624,8 +592,7 @@ public EClass getRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRuleCall_Rule()
+  public EReference getRuleCall_Rule()
   {
     return (EReference)ruleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -635,8 +602,7 @@ public EReference getRuleCall_Rule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAssignment()
+  public EClass getAssignment()
   {
     return assignmentEClass;
   }
@@ -646,8 +612,7 @@ public EClass getAssignment()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAssignment_Feature()
+  public EAttribute getAssignment_Feature()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
   }
@@ -657,8 +622,7 @@ public EAttribute getAssignment_Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAssignment_Operator()
+  public EAttribute getAssignment_Operator()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
   }
@@ -668,8 +632,7 @@ public EAttribute getAssignment_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAssignment_Terminal()
+  public EReference getAssignment_Terminal()
   {
     return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
   }
@@ -679,8 +642,7 @@ public EReference getAssignment_Terminal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCrossReference()
+  public EClass getCrossReference()
   {
     return crossReferenceEClass;
   }
@@ -690,8 +652,7 @@ public EClass getCrossReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCrossReference_Type()
+  public EReference getCrossReference_Type()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -701,8 +662,7 @@ public EReference getCrossReference_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCrossReference_Terminal()
+  public EReference getCrossReference_Terminal()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(1);
   }
@@ -712,8 +672,7 @@ public EReference getCrossReference_Terminal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTerminalRule()
+  public EClass getTerminalRule()
   {
     return terminalRuleEClass;
   }
@@ -723,8 +682,7 @@ public EClass getTerminalRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractNegatedToken()
+  public EClass getAbstractNegatedToken()
   {
     return abstractNegatedTokenEClass;
   }
@@ -734,8 +692,7 @@ public EClass getAbstractNegatedToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAbstractNegatedToken_Terminal()
+  public EReference getAbstractNegatedToken_Terminal()
   {
     return (EReference)abstractNegatedTokenEClass.getEStructuralFeatures().get(0);
   }
@@ -745,8 +702,7 @@ public EReference getAbstractNegatedToken_Terminal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNegatedToken()
+  public EClass getNegatedToken()
   {
     return negatedTokenEClass;
   }
@@ -756,8 +712,7 @@ public EClass getNegatedToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getUntilToken()
+  public EClass getUntilToken()
   {
     return untilTokenEClass;
   }
@@ -767,8 +722,7 @@ public EClass getUntilToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWildcard()
+  public EClass getWildcard()
   {
     return wildcardEClass;
   }
@@ -778,8 +732,7 @@ public EClass getWildcard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getEnumRule()
+  public EClass getEnumRule()
   {
     return enumRuleEClass;
   }
@@ -789,8 +742,7 @@ public EClass getEnumRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getEnumLiteralDeclaration()
+  public EClass getEnumLiteralDeclaration()
   {
     return enumLiteralDeclarationEClass;
   }
@@ -800,8 +752,7 @@ public EClass getEnumLiteralDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getEnumLiteralDeclaration_EnumLiteral()
+  public EReference getEnumLiteralDeclaration_EnumLiteral()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -811,8 +762,7 @@ public EReference getEnumLiteralDeclaration_EnumLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getEnumLiteralDeclaration_Literal()
+  public EReference getEnumLiteralDeclaration_Literal()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -822,8 +772,7 @@ public EReference getEnumLiteralDeclaration_Literal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAlternatives()
+  public EClass getAlternatives()
   {
     return alternativesEClass;
   }
@@ -833,8 +782,7 @@ public EClass getAlternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAlternatives_Groups()
+  public EReference getAlternatives_Groups()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
   }
@@ -844,8 +792,7 @@ public EReference getAlternatives_Groups()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGroup()
+  public EClass getGroup()
   {
     return groupEClass;
   }
@@ -855,8 +802,7 @@ public EClass getGroup()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGroup_Tokens()
+  public EReference getGroup_Tokens()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
@@ -866,8 +812,7 @@ public EReference getGroup_Tokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCharacterRange()
+  public EClass getCharacterRange()
   {
     return characterRangeEClass;
   }
@@ -877,8 +822,7 @@ public EClass getCharacterRange()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCharacterRange_Left()
+  public EReference getCharacterRange_Left()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(0);
   }
@@ -888,8 +832,7 @@ public EReference getCharacterRange_Left()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCharacterRange_Right()
+  public EReference getCharacterRange_Right()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(1);
   }
@@ -899,8 +842,7 @@ public EReference getCharacterRange_Right()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public XtextUiTestFactory getXtextUiTestFactory()
+  public XtextUiTestFactory getXtextUiTestFactory()
   {
     return (XtextUiTestFactory)getEFactoryInstance();
   }

@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Chi
  * An implementation of the model object '<em><b>Child2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -116,8 +115,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -127,8 +125,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -141,8 +138,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isBool()
+  public boolean isBool()
   {
     return bool;
   }
@@ -152,8 +148,7 @@ public boolean isBool()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBool(boolean newBool)
+  public void setBool(boolean newBool)
   {
     boolean oldBool = bool;
     bool = newBool;
@@ -166,8 +161,7 @@ public void setBool(boolean newBool)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getString()
+  public String getString()
   {
     return string;
   }
@@ -177,8 +171,7 @@ public String getString()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setString(String newString)
+  public void setString(String newString)
   {
     String oldString = string;
     string = newString;

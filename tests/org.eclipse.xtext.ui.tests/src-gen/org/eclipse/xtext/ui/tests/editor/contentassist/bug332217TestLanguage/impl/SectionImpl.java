@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sec
  * An implementation of the model object '<em><b>Section</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -85,8 +84,7 @@ public class SectionImpl extends ViewContentElementImpl implements Section
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getTitle()
+  public ScalarExpression getTitle()
   {
     return title;
   }
@@ -113,8 +111,7 @@ public ScalarExpression getTitle()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTitle(ScalarExpression newTitle)
+  public void setTitle(ScalarExpression newTitle)
   {
     if (newTitle != title)
     {
@@ -135,8 +132,7 @@ public void setTitle(ScalarExpression newTitle)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Cell> getCells()
+  public EList<Cell> getCells()
   {
     if (cells == null)
     {

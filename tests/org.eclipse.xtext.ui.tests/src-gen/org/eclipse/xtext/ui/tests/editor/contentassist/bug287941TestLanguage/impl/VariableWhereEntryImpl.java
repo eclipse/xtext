@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Var
  * An implementation of the model object '<em><b>Variable Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -99,8 +98,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumericOperator getOperator()
+  public NumericOperator getOperator()
   {
     return operator;
   }
@@ -110,8 +108,7 @@ public NumericOperator getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(NumericOperator newOperator)
+  public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -124,8 +121,7 @@ public void setOperator(NumericOperator newOperator)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getRightAlias()
+  public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
     {
@@ -155,8 +151,7 @@ public FromEntry getRightAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRightAlias(FromEntry newRightAlias)
+  public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;
     rightAlias = newRightAlias;
@@ -169,8 +164,7 @@ public void setRightAlias(FromEntry newRightAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRightAttribute()
+  public EAttribute getRightAttribute()
   {
     if (rightAttribute != null && rightAttribute.eIsProxy())
     {
@@ -200,8 +194,7 @@ public EAttribute getRightAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRightAttribute(EAttribute newRightAttribute)
+  public void setRightAttribute(EAttribute newRightAttribute)
   {
     EAttribute oldRightAttribute = rightAttribute;
     rightAttribute = newRightAttribute;

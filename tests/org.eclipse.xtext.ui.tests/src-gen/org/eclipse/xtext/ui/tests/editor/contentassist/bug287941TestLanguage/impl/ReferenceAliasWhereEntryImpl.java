@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Ref
  * An implementation of the model object '<em><b>Reference Alias Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getAlias()
+  public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -119,8 +117,7 @@ public FromEntry getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(FromEntry newAlias)
+  public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -133,8 +130,7 @@ public void setAlias(FromEntry newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReference()
+  public EReference getReference()
   {
     if (reference != null && reference.eIsProxy())
     {
@@ -164,8 +160,7 @@ public EReference getReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReference(EReference newReference)
+  public void setReference(EReference newReference)
   {
     EReference oldReference = reference;
     reference = newReference;
@@ -178,8 +173,7 @@ public void setReference(EReference newReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getRightAlias()
+  public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
     {
@@ -209,8 +203,7 @@ public FromEntry getRightAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRightAlias(FromEntry newRightAlias)
+  public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;
     rightAlias = newRightAlias;

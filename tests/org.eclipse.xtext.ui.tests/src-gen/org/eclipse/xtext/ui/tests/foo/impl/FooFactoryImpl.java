@@ -76,8 +76,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public File createFile()
+  public File createFile()
   {
     FileImpl file = new FileImpl();
     return file;
@@ -88,8 +87,7 @@ public File createFile()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Stuff createStuff()
+  public Stuff createStuff()
   {
     StuffImpl stuff = new StuffImpl();
     return stuff;
@@ -100,8 +98,7 @@ public Stuff createStuff()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FooPackage getFooPackage()
+  public FooPackage getFooPackage()
   {
     return (FooPackage)getEPackage();
   }

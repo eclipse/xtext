@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Pre Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class PreExpImpl extends ExpressionImpl implements PreExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NameExp getName()
+  public NameExp getName()
   {
     return name;
   }
@@ -94,8 +92,7 @@ public NameExp getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(NameExp newName)
+  public void setName(NameExp newName)
   {
     if (newName != name)
     {

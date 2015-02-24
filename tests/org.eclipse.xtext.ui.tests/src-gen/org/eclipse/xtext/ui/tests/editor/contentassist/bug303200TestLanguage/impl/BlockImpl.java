@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Sta
  * An implementation of the model object '<em><b>Block</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class BlockImpl extends StatementImpl implements Block
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Statement> getDirectives()
+  public EList<Statement> getDirectives()
   {
     if (directives == null)
     {

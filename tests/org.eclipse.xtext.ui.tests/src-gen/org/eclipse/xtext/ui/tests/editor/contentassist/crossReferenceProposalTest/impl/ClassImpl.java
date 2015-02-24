@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTes
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -85,8 +84,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class getSuperClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
     {
@@ -116,8 +114,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class newSuperClass)
+  public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class oldSuperClass = superClass;
     superClass = newSuperClass;
@@ -130,8 +127,7 @@ public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossR
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -141,8 +137,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

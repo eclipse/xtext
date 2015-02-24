@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pro
  * An implementation of the model object '<em><b>Program</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ProgramDirective> getDirectives()
+  public EList<ProgramDirective> getDirectives()
   {
     if (directives == null)
     {

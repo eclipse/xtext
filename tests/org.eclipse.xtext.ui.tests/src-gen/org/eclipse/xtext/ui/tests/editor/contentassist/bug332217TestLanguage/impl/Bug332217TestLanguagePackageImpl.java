@@ -305,8 +305,7 @@ public class Bug332217TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -316,8 +315,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Elements()
+  public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -327,8 +325,7 @@ public EReference getModel_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPropertyPathPart()
+  public EClass getPropertyPathPart()
   {
     return propertyPathPartEClass;
   }
@@ -338,8 +335,7 @@ public EClass getPropertyPathPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPropertyPathPart_Name()
+  public EAttribute getPropertyPathPart_Name()
   {
     return (EAttribute)propertyPathPartEClass.getEStructuralFeatures().get(0);
   }
@@ -349,8 +345,7 @@ public EAttribute getPropertyPathPart_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypeDescription()
+  public EClass getTypeDescription()
   {
     return typeDescriptionEClass;
   }
@@ -360,8 +355,7 @@ public EClass getTypeDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTypeDescription_Type()
+  public EAttribute getTypeDescription_Type()
   {
     return (EAttribute)typeDescriptionEClass.getEStructuralFeatures().get(0);
   }
@@ -371,8 +365,7 @@ public EAttribute getTypeDescription_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTypeDescription_Many()
+  public EAttribute getTypeDescription_Many()
   {
     return (EAttribute)typeDescriptionEClass.getEStructuralFeatures().get(1);
   }
@@ -382,8 +375,7 @@ public EAttribute getTypeDescription_Many()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameter()
+  public EClass getParameter()
   {
     return parameterEClass;
   }
@@ -393,8 +385,7 @@ public EClass getParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParameter_Description()
+  public EReference getParameter_Description()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(0);
   }
@@ -404,8 +395,7 @@ public EReference getParameter_Description()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getObjectReference()
+  public EClass getObjectReference()
   {
     return objectReferenceEClass;
   }
@@ -415,8 +405,7 @@ public EClass getObjectReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getObjectReference_Object()
+  public EReference getObjectReference_Object()
   {
     return (EReference)objectReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -426,8 +415,7 @@ public EReference getObjectReference_Object()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getObjectReference_Tail()
+  public EReference getObjectReference_Tail()
   {
     return (EReference)objectReferenceEClass.getEStructuralFeatures().get(1);
   }
@@ -437,8 +425,7 @@ public EReference getObjectReference_Tail()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpression()
+  public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -448,8 +435,7 @@ public EClass getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getScalarExpression()
+  public EClass getScalarExpression()
   {
     return scalarExpressionEClass;
   }
@@ -459,8 +445,7 @@ public EClass getScalarExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionExpression()
+  public EClass getCollectionExpression()
   {
     return collectionExpressionEClass;
   }
@@ -470,8 +455,7 @@ public EClass getCollectionExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringLiteral()
+  public EClass getStringLiteral()
   {
     return stringLiteralEClass;
   }
@@ -481,8 +465,7 @@ public EClass getStringLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getStringLiteral_Value()
+  public EAttribute getStringLiteral_Value()
   {
     return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -492,8 +475,7 @@ public EAttribute getStringLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringFunction()
+  public EClass getStringFunction()
   {
     return stringFunctionEClass;
   }
@@ -503,8 +485,7 @@ public EClass getStringFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionLiteral()
+  public EClass getCollectionLiteral()
   {
     return collectionLiteralEClass;
   }
@@ -514,8 +495,7 @@ public EClass getCollectionLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCollectionLiteral_Items()
+  public EReference getCollectionLiteral_Items()
   {
     return (EReference)collectionLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -525,8 +505,7 @@ public EReference getCollectionLiteral_Items()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionFunction()
+  public EClass getCollectionFunction()
   {
     return collectionFunctionEClass;
   }
@@ -536,8 +515,7 @@ public EClass getCollectionFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTableView()
+  public EClass getTableView()
   {
     return tableViewEClass;
   }
@@ -547,8 +525,7 @@ public EClass getTableView()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTableView_Name()
+  public EAttribute getTableView_Name()
   {
     return (EAttribute)tableViewEClass.getEStructuralFeatures().get(0);
   }
@@ -558,8 +535,7 @@ public EAttribute getTableView_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTableView_Content()
+  public EReference getTableView_Content()
   {
     return (EReference)tableViewEClass.getEStructuralFeatures().get(1);
   }
@@ -569,8 +545,7 @@ public EReference getTableView_Content()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTableView_Title()
+  public EReference getTableView_Title()
   {
     return (EReference)tableViewEClass.getEStructuralFeatures().get(2);
   }
@@ -580,8 +555,7 @@ public EReference getTableView_Title()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTableView_TitleImage()
+  public EReference getTableView_TitleImage()
   {
     return (EReference)tableViewEClass.getEStructuralFeatures().get(3);
   }
@@ -591,8 +565,7 @@ public EReference getTableView_TitleImage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTableView_Style()
+  public EAttribute getTableView_Style()
   {
     return (EAttribute)tableViewEClass.getEStructuralFeatures().get(4);
   }
@@ -602,8 +575,7 @@ public EAttribute getTableView_Style()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTableView_Sections()
+  public EReference getTableView_Sections()
   {
     return (EReference)tableViewEClass.getEStructuralFeatures().get(5);
   }
@@ -613,8 +585,7 @@ public EReference getTableView_Sections()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getViewContentElement()
+  public EClass getViewContentElement()
   {
     return viewContentElementEClass;
   }
@@ -624,8 +595,7 @@ public EClass getViewContentElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getViewContentElement_Iterator()
+  public EReference getViewContentElement_Iterator()
   {
     return (EReference)viewContentElementEClass.getEStructuralFeatures().get(0);
   }
@@ -635,8 +605,7 @@ public EReference getViewContentElement_Iterator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSection()
+  public EClass getSection()
   {
     return sectionEClass;
   }
@@ -646,8 +615,7 @@ public EClass getSection()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSection_Title()
+  public EReference getSection_Title()
   {
     return (EReference)sectionEClass.getEStructuralFeatures().get(0);
   }
@@ -657,8 +625,7 @@ public EReference getSection_Title()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSection_Cells()
+  public EReference getSection_Cells()
   {
     return (EReference)sectionEClass.getEStructuralFeatures().get(1);
   }
@@ -668,8 +635,7 @@ public EReference getSection_Cells()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCell()
+  public EClass getCell()
   {
     return cellEClass;
   }
@@ -679,8 +645,7 @@ public EClass getCell()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCell_Type()
+  public EAttribute getCell_Type()
   {
     return (EAttribute)cellEClass.getEStructuralFeatures().get(0);
   }
@@ -690,8 +655,7 @@ public EAttribute getCell_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCell_Text()
+  public EReference getCell_Text()
   {
     return (EReference)cellEClass.getEStructuralFeatures().get(1);
   }
@@ -701,8 +665,7 @@ public EReference getCell_Text()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCell_Details()
+  public EReference getCell_Details()
   {
     return (EReference)cellEClass.getEStructuralFeatures().get(2);
   }
@@ -712,8 +675,7 @@ public EReference getCell_Details()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCell_Image()
+  public EReference getCell_Image()
   {
     return (EReference)cellEClass.getEStructuralFeatures().get(3);
   }
@@ -723,8 +685,7 @@ public EReference getCell_Image()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCell_Action()
+  public EReference getCell_Action()
   {
     return (EReference)cellEClass.getEStructuralFeatures().get(4);
   }
@@ -734,8 +695,7 @@ public EReference getCell_Action()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCell_Accessory()
+  public EAttribute getCell_Accessory()
   {
     return (EAttribute)cellEClass.getEStructuralFeatures().get(5);
   }
@@ -745,8 +705,7 @@ public EAttribute getCell_Accessory()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionIterator()
+  public EClass getCollectionIterator()
   {
     return collectionIteratorEClass;
   }
@@ -756,8 +715,7 @@ public EClass getCollectionIterator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCollectionIterator_Collection()
+  public EReference getCollectionIterator_Collection()
   {
     return (EReference)collectionIteratorEClass.getEStructuralFeatures().get(0);
   }
@@ -767,8 +725,7 @@ public EReference getCollectionIterator_Collection()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getViewAction()
+  public EClass getViewAction()
   {
     return viewActionEClass;
   }
@@ -778,8 +735,7 @@ public EClass getViewAction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSelector()
+  public EClass getSelector()
   {
     return selectorEClass;
   }
@@ -789,8 +745,7 @@ public EClass getSelector()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSelector_Name()
+  public EAttribute getSelector_Name()
   {
     return (EAttribute)selectorEClass.getEStructuralFeatures().get(0);
   }
@@ -800,8 +755,7 @@ public EAttribute getSelector_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExternalOpen()
+  public EClass getExternalOpen()
   {
     return externalOpenEClass;
   }
@@ -811,8 +765,7 @@ public EClass getExternalOpen()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getExternalOpen_Url()
+  public EReference getExternalOpen_Url()
   {
     return (EReference)externalOpenEClass.getEStructuralFeatures().get(0);
   }
@@ -822,8 +775,7 @@ public EReference getExternalOpen_Url()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringConcat()
+  public EClass getStringConcat()
   {
     return stringConcatEClass;
   }
@@ -833,8 +785,7 @@ public EClass getStringConcat()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringConcat_Values()
+  public EReference getStringConcat_Values()
   {
     return (EReference)stringConcatEClass.getEStructuralFeatures().get(0);
   }
@@ -844,8 +795,7 @@ public EReference getStringConcat_Values()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringReplace()
+  public EClass getStringReplace()
   {
     return stringReplaceEClass;
   }
@@ -855,8 +805,7 @@ public EClass getStringReplace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringReplace_Value()
+  public EReference getStringReplace_Value()
   {
     return (EReference)stringReplaceEClass.getEStructuralFeatures().get(0);
   }
@@ -866,8 +815,7 @@ public EReference getStringReplace_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringReplace_Match()
+  public EReference getStringReplace_Match()
   {
     return (EReference)stringReplaceEClass.getEStructuralFeatures().get(1);
   }
@@ -877,8 +825,7 @@ public EReference getStringReplace_Match()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringReplace_Replacement()
+  public EReference getStringReplace_Replacement()
   {
     return (EReference)stringReplaceEClass.getEStructuralFeatures().get(2);
   }
@@ -888,8 +835,7 @@ public EReference getStringReplace_Replacement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringUrlConform()
+  public EClass getStringUrlConform()
   {
     return stringUrlConformEClass;
   }
@@ -899,8 +845,7 @@ public EClass getStringUrlConform()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringUrlConform_Value()
+  public EReference getStringUrlConform_Value()
   {
     return (EReference)stringUrlConformEClass.getEStructuralFeatures().get(0);
   }
@@ -910,8 +855,7 @@ public EReference getStringUrlConform_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringSplit()
+  public EClass getStringSplit()
   {
     return stringSplitEClass;
   }
@@ -921,8 +865,7 @@ public EClass getStringSplit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringSplit_Value()
+  public EReference getStringSplit_Value()
   {
     return (EReference)stringSplitEClass.getEStructuralFeatures().get(0);
   }
@@ -932,8 +875,7 @@ public EReference getStringSplit_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStringSplit_Delimiter()
+  public EReference getStringSplit_Delimiter()
   {
     return (EReference)stringSplitEClass.getEStructuralFeatures().get(1);
   }
@@ -943,8 +885,7 @@ public EReference getStringSplit_Delimiter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getTableViewStyle()
+  public EEnum getTableViewStyle()
   {
     return tableViewStyleEEnum;
   }
@@ -954,8 +895,7 @@ public EEnum getTableViewStyle()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getCellType()
+  public EEnum getCellType()
   {
     return cellTypeEEnum;
   }
@@ -965,8 +905,7 @@ public EEnum getCellType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getCellAccessory()
+  public EEnum getCellAccessory()
   {
     return cellAccessoryEEnum;
   }
@@ -976,8 +915,7 @@ public EEnum getCellAccessory()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug332217TestLanguageFactory getBug332217TestLanguageFactory()
+  public Bug332217TestLanguageFactory getBug332217TestLanguageFactory()
   {
     return (Bug332217TestLanguageFactory)getEFactoryInstance();
   }

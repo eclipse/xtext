@@ -79,8 +79,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Start createStart()
+  public Start createStart()
   {
     StartImpl start = new StartImpl();
     return start;
@@ -91,8 +90,7 @@ public Start createStart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRule createAbstractRule()
+  public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
     return abstractRule;
@@ -103,8 +101,7 @@ public AbstractRule createAbstractRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FirstAbstractRuleChild createFirstAbstractRuleChild()
+  public FirstAbstractRuleChild createFirstAbstractRuleChild()
   {
     FirstAbstractRuleChildImpl firstAbstractRuleChild = new FirstAbstractRuleChildImpl();
     return firstAbstractRuleChild;
@@ -115,8 +112,7 @@ public FirstAbstractRuleChild createFirstAbstractRuleChild()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SecondAbstractRuleChild createSecondAbstractRuleChild()
+  public SecondAbstractRuleChild createSecondAbstractRuleChild()
   {
     SecondAbstractRuleChildImpl secondAbstractRuleChild = new SecondAbstractRuleChildImpl();
     return secondAbstractRuleChild;
@@ -127,8 +123,7 @@ public SecondAbstractRuleChild createSecondAbstractRuleChild()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRuleCall createAbstractRuleCall()
+  public AbstractRuleCall createAbstractRuleCall()
   {
     AbstractRuleCallImpl abstractRuleCall = new AbstractRuleCallImpl();
     return abstractRuleCall;
@@ -139,8 +134,7 @@ public AbstractRuleCall createAbstractRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
+  public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
   {
     return (ContentAssistTestLanguagePackage)getEPackage();
   }

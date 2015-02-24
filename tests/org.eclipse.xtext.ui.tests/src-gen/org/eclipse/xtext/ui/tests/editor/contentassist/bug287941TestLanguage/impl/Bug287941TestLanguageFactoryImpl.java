@@ -140,8 +140,7 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -152,8 +151,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Import createImport()
+  public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -164,8 +162,7 @@ public Import createImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MQLquery createMQLquery()
+  public MQLquery createMQLquery()
   {
     MQLqueryImpl mqLquery = new MQLqueryImpl();
     return mqLquery;
@@ -176,8 +173,7 @@ public MQLquery createMQLquery()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SelectEntry createSelectEntry()
+  public SelectEntry createSelectEntry()
   {
     SelectEntryImpl selectEntry = new SelectEntryImpl();
     return selectEntry;
@@ -188,8 +184,7 @@ public SelectEntry createSelectEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry createFromEntry()
+  public FromEntry createFromEntry()
   {
     FromEntryImpl fromEntry = new FromEntryImpl();
     return fromEntry;
@@ -200,8 +195,7 @@ public FromEntry createFromEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScopeClause createScopeClause()
+  public ScopeClause createScopeClause()
   {
     ScopeClauseImpl scopeClause = new ScopeClauseImpl();
     return scopeClause;
@@ -212,8 +206,7 @@ public ScopeClause createScopeClause()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Scope createScope()
+  public Scope createScope()
   {
     ScopeImpl scope = new ScopeImpl();
     return scope;
@@ -224,8 +217,7 @@ public Scope createScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ResourceScope createResourceScope()
+  public ResourceScope createResourceScope()
   {
     ResourceScopeImpl resourceScope = new ResourceScopeImpl();
     return resourceScope;
@@ -236,8 +228,7 @@ public ResourceScope createResourceScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ElementScope createElementScope()
+  public ElementScope createElementScope()
   {
     ElementScopeImpl elementScope = new ElementScopeImpl();
     return elementScope;
@@ -248,8 +239,7 @@ public ElementScope createElementScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public WhereEntry createWhereEntry()
+  public WhereEntry createWhereEntry()
   {
     WhereEntryImpl whereEntry = new WhereEntryImpl();
     return whereEntry;
@@ -260,8 +250,7 @@ public WhereEntry createWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AttributeWhereEntry createAttributeWhereEntry()
+  public AttributeWhereEntry createAttributeWhereEntry()
   {
     AttributeWhereEntryImpl attributeWhereEntry = new AttributeWhereEntryImpl();
     return attributeWhereEntry;
@@ -272,8 +261,7 @@ public AttributeWhereEntry createAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumericAttributeWhereEntry createNumericAttributeWhereEntry()
+  public NumericAttributeWhereEntry createNumericAttributeWhereEntry()
   {
     NumericAttributeWhereEntryImpl numericAttributeWhereEntry = new NumericAttributeWhereEntryImpl();
     return numericAttributeWhereEntry;
@@ -284,8 +272,7 @@ public NumericAttributeWhereEntry createNumericAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DoubleWhereEntry createDoubleWhereEntry()
+  public DoubleWhereEntry createDoubleWhereEntry()
   {
     DoubleWhereEntryImpl doubleWhereEntry = new DoubleWhereEntryImpl();
     return doubleWhereEntry;
@@ -296,8 +283,7 @@ public DoubleWhereEntry createDoubleWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LongWhereEntry createLongWhereEntry()
+  public LongWhereEntry createLongWhereEntry()
   {
     LongWhereEntryImpl longWhereEntry = new LongWhereEntryImpl();
     return longWhereEntry;
@@ -308,8 +294,7 @@ public LongWhereEntry createLongWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public VariableWhereEntry createVariableWhereEntry()
+  public VariableWhereEntry createVariableWhereEntry()
   {
     VariableWhereEntryImpl variableWhereEntry = new VariableWhereEntryImpl();
     return variableWhereEntry;
@@ -320,8 +305,7 @@ public VariableWhereEntry createVariableWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringAttributeWhereEntry createStringAttributeWhereEntry()
+  public StringAttributeWhereEntry createStringAttributeWhereEntry()
   {
     StringAttributeWhereEntryImpl stringAttributeWhereEntry = new StringAttributeWhereEntryImpl();
     return stringAttributeWhereEntry;
@@ -332,8 +316,7 @@ public StringAttributeWhereEntry createStringAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BooleanAttributeWhereEntry createBooleanAttributeWhereEntry()
+  public BooleanAttributeWhereEntry createBooleanAttributeWhereEntry()
   {
     BooleanAttributeWhereEntryImpl booleanAttributeWhereEntry = new BooleanAttributeWhereEntryImpl();
     return booleanAttributeWhereEntry;
@@ -344,8 +327,7 @@ public BooleanAttributeWhereEntry createBooleanAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NullWhereEntry createNullWhereEntry()
+  public NullWhereEntry createNullWhereEntry()
   {
     NullWhereEntryImpl nullWhereEntry = new NullWhereEntryImpl();
     return nullWhereEntry;
@@ -356,8 +338,7 @@ public NullWhereEntry createNullWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferenceAliasWhereEntry createReferenceAliasWhereEntry()
+  public ReferenceAliasWhereEntry createReferenceAliasWhereEntry()
   {
     ReferenceAliasWhereEntryImpl referenceAliasWhereEntry = new ReferenceAliasWhereEntryImpl();
     return referenceAliasWhereEntry;
@@ -368,8 +349,7 @@ public ReferenceAliasWhereEntry createReferenceAliasWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SubselectWhereEntry createSubselectWhereEntry()
+  public SubselectWhereEntry createSubselectWhereEntry()
   {
     SubselectWhereEntryImpl subselectWhereEntry = new SubselectWhereEntryImpl();
     return subselectWhereEntry;
@@ -380,8 +360,7 @@ public SubselectWhereEntry createSubselectWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AliasWhereEntry createAliasWhereEntry()
+  public AliasWhereEntry createAliasWhereEntry()
   {
     AliasWhereEntryImpl aliasWhereEntry = new AliasWhereEntryImpl();
     return aliasWhereEntry;
@@ -392,8 +371,7 @@ public AliasWhereEntry createAliasWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OrWhereEntry createOrWhereEntry()
+  public OrWhereEntry createOrWhereEntry()
   {
     OrWhereEntryImpl orWhereEntry = new OrWhereEntryImpl();
     return orWhereEntry;
@@ -404,8 +382,7 @@ public OrWhereEntry createOrWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AndWhereEntry createAndWhereEntry()
+  public AndWhereEntry createAndWhereEntry()
   {
     AndWhereEntryImpl andWhereEntry = new AndWhereEntryImpl();
     return andWhereEntry;
@@ -482,8 +459,7 @@ public AndWhereEntry createAndWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug287941TestLanguagePackage getBug287941TestLanguagePackage()
+  public Bug287941TestLanguagePackage getBug287941TestLanguagePackage()
   {
     return (Bug287941TestLanguagePackage)getEPackage();
   }

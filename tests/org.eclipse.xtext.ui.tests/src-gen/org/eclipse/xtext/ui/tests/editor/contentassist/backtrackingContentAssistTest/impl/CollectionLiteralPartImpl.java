@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Collection Literal Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class CollectionLiteralPartImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpression()
+  public Expression getExpression()
   {
     return expression;
   }
@@ -106,8 +104,7 @@ public Expression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(Expression newExpression)
+  public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {
@@ -128,8 +125,7 @@ public void setExpression(Expression newExpression)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getLastExpression()
+  public Expression getLastExpression()
   {
     return lastExpression;
   }
@@ -156,8 +152,7 @@ public Expression getLastExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLastExpression(Expression newLastExpression)
+  public void setLastExpression(Expression newLastExpression)
   {
     if (newLastExpression != lastExpression)
     {

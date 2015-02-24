@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Simple Property Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class SimplePropertyRefImpl extends PropertyRefImpl implements SimpleProp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getFeature()
+  public String getFeature()
   {
     return feature;
   }
@@ -84,8 +82,7 @@ public String getFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFeature(String newFeature)
+  public void setFeature(String newFeature)
   {
     String oldFeature = feature;
     feature = newFeature;

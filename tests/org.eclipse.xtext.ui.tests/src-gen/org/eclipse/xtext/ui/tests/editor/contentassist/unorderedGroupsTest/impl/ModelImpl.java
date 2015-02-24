@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -127,8 +126,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleModel getFirst()
+  public SimpleModel getFirst()
   {
     return first;
   }
@@ -155,8 +153,7 @@ public SimpleModel getFirst()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFirst(SimpleModel newFirst)
+  public void setFirst(SimpleModel newFirst)
   {
     if (newFirst != first)
     {
@@ -177,8 +174,7 @@ public void setFirst(SimpleModel newFirst)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MandatoryModel getSecond()
+  public MandatoryModel getSecond()
   {
     return second;
   }
@@ -205,8 +201,7 @@ public MandatoryModel getSecond()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSecond(MandatoryModel newSecond)
+  public void setSecond(MandatoryModel newSecond)
   {
     if (newSecond != second)
     {
@@ -227,8 +222,7 @@ public void setSecond(MandatoryModel newSecond)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LoopedModel getThrird()
+  public LoopedModel getThrird()
   {
     return thrird;
   }
@@ -255,8 +249,7 @@ public LoopedModel getThrird()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setThrird(LoopedModel newThrird)
+  public void setThrird(LoopedModel newThrird)
   {
     if (newThrird != thrird)
     {
@@ -277,8 +270,7 @@ public void setThrird(LoopedModel newThrird)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GroupLoopedModel getForth()
+  public GroupLoopedModel getForth()
   {
     return forth;
   }
@@ -305,8 +297,7 @@ public GroupLoopedModel getForth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setForth(GroupLoopedModel newForth)
+  public void setForth(GroupLoopedModel newForth)
   {
     if (newForth != forth)
     {
@@ -327,8 +318,7 @@ public void setForth(GroupLoopedModel newForth)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LoopedAlternativeModel getFifth()
+  public LoopedAlternativeModel getFifth()
   {
     return fifth;
   }
@@ -355,8 +345,7 @@ public LoopedAlternativeModel getFifth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFifth(LoopedAlternativeModel newFifth)
+  public void setFifth(LoopedAlternativeModel newFifth)
   {
     if (newFifth != fifth)
     {
@@ -377,8 +366,7 @@ public void setFifth(LoopedAlternativeModel newFifth)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681Model getModel()
+  public Bug304681Model getModel()
   {
     return model;
   }
@@ -405,8 +393,7 @@ public Bug304681Model getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setModel(Bug304681Model newModel)
+  public void setModel(Bug304681Model newModel)
   {
     if (newModel != model)
     {

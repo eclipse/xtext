@@ -80,8 +80,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -92,8 +91,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TConstant createTConstant()
+  public TConstant createTConstant()
   {
     TConstantImpl tConstant = new TConstantImpl();
     return tConstant;
@@ -104,8 +102,7 @@ public TConstant createTConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TStringConstant createTStringConstant()
+  public TStringConstant createTStringConstant()
   {
     TStringConstantImpl tStringConstant = new TStringConstantImpl();
     return tStringConstant;
@@ -116,8 +113,7 @@ public TStringConstant createTStringConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TIntegerConstant createTIntegerConstant()
+  public TIntegerConstant createTIntegerConstant()
   {
     TIntegerConstantImpl tIntegerConstant = new TIntegerConstantImpl();
     return tIntegerConstant;
@@ -128,8 +124,7 @@ public TIntegerConstant createTIntegerConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TBooleanConstant createTBooleanConstant()
+  public TBooleanConstant createTBooleanConstant()
   {
     TBooleanConstantImpl tBooleanConstant = new TBooleanConstantImpl();
     return tBooleanConstant;
@@ -140,8 +135,7 @@ public TBooleanConstant createTBooleanConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TAnnotation createTAnnotation()
+  public TAnnotation createTAnnotation()
   {
     TAnnotationImpl tAnnotation = new TAnnotationImpl();
     return tAnnotation;
@@ -152,8 +146,7 @@ public TAnnotation createTAnnotation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug288734TestLanguagePackage getBug288734TestLanguagePackage()
+  public Bug288734TestLanguagePackage getBug288734TestLanguagePackage()
   {
     return (Bug288734TestLanguagePackage)getEPackage();
   }

@@ -30,7 +30,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.Spielzeug;
  * An implementation of the model object '<em><b>Spielplatz</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -152,8 +151,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getGroesse()
+  public int getGroesse()
   {
     return groesse;
   }
@@ -163,8 +161,7 @@ public int getGroesse()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGroesse(int newGroesse)
+  public void setGroesse(int newGroesse)
   {
     int oldGroesse = groesse;
     groesse = newGroesse;
@@ -177,8 +174,7 @@ public void setGroesse(int newGroesse)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getBeschreibung()
+  public String getBeschreibung()
   {
     return beschreibung;
   }
@@ -188,8 +184,7 @@ public String getBeschreibung()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBeschreibung(String newBeschreibung)
+  public void setBeschreibung(String newBeschreibung)
   {
     String oldBeschreibung = beschreibung;
     beschreibung = newBeschreibung;
@@ -202,8 +197,7 @@ public void setBeschreibung(String newBeschreibung)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Kind> getKinder()
+  public EList<Kind> getKinder()
   {
     if (kinder == null)
     {
@@ -217,8 +211,7 @@ public EList<Kind> getKinder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Erwachsener> getErzieher()
+  public EList<Erwachsener> getErzieher()
   {
     if (erzieher == null)
     {
@@ -232,8 +225,7 @@ public EList<Erwachsener> getErzieher()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Spielzeug> getSpielzeuge()
+  public EList<Spielzeug> getSpielzeuge()
   {
     if (spielzeuge == null)
     {
@@ -247,8 +239,7 @@ public EList<Spielzeug> getSpielzeuge()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Familie> getFamilie()
+  public EList<Familie> getFamilie()
   {
     if (familie == null)
     {

@@ -75,8 +75,7 @@ public class KeywordsUiTestLanguageFactoryImpl extends EFactoryImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -87,8 +86,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public KeywordsUiTestLanguagePackage getKeywordsUiTestLanguagePackage()
+  public KeywordsUiTestLanguagePackage getKeywordsUiTestLanguagePackage()
   {
     return (KeywordsUiTestLanguagePackage)getEPackage();
   }

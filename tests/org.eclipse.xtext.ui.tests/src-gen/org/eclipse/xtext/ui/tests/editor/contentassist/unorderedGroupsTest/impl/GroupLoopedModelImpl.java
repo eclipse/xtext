@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Group Looped Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -135,8 +134,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getVisibility()
+  public EList<String> getVisibility()
   {
     if (visibility == null)
     {
@@ -150,8 +148,7 @@ public EList<String> getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getStatic()
+  public EList<String> getStatic()
   {
     if (static_ == null)
     {
@@ -165,8 +162,7 @@ public EList<String> getStatic()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getSynchronized()
+  public EList<String> getSynchronized()
   {
     if (synchronized_ == null)
     {
@@ -180,8 +176,7 @@ public EList<String> getSynchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getAbstract()
+  public EList<String> getAbstract()
   {
     if (abstract_ == null)
     {
@@ -195,8 +190,7 @@ public EList<String> getAbstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getFinal()
+  public EList<String> getFinal()
   {
     if (final_ == null)
     {
@@ -210,8 +204,7 @@ public EList<String> getFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -221,8 +214,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

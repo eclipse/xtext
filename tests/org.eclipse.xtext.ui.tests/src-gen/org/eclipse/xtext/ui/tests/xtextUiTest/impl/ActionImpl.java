@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -108,8 +107,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getType()
+  public TypeRef getType()
   {
     return type;
   }
@@ -136,8 +134,7 @@ public TypeRef getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeRef newType)
+  public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -158,8 +155,7 @@ public void setType(TypeRef newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getFeature()
+  public String getFeature()
   {
     return feature;
   }
@@ -169,8 +165,7 @@ public String getFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFeature(String newFeature)
+  public void setFeature(String newFeature)
   {
     String oldFeature = feature;
     feature = newFeature;
@@ -183,8 +178,7 @@ public void setFeature(String newFeature)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOperator()
+  public String getOperator()
   {
     return operator;
   }
@@ -194,8 +188,7 @@ public String getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(String newOperator)
+  public void setOperator(String newOperator)
   {
     String oldOperator = operator;
     operator = newOperator;

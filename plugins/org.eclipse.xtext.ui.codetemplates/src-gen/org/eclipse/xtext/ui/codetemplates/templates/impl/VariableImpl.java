@@ -23,13 +23,13 @@ import org.eclipse.xtext.ui.codetemplates.templates.Variable;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#isExpectingParameters <em>Expecting Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -131,8 +131,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -142,8 +141,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -156,8 +154,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -167,8 +164,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -181,8 +177,7 @@ public void setType(String newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isExpectingParameters()
+  public boolean isExpectingParameters()
   {
     return expectingParameters;
   }
@@ -192,8 +187,7 @@ public boolean isExpectingParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpectingParameters(boolean newExpectingParameters)
+  public void setExpectingParameters(boolean newExpectingParameters)
   {
     boolean oldExpectingParameters = expectingParameters;
     expectingParameters = newExpectingParameters;
@@ -206,8 +200,7 @@ public void setExpectingParameters(boolean newExpectingParameters)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getParameters()
+  public EList<String> getParameters()
   {
     if (parameters == null)
     {

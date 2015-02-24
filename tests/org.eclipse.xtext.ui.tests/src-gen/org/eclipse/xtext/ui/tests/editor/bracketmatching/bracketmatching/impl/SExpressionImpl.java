@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.SExpres
  * An implementation of the model object '<em><b>SExpression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class SExpressionImpl extends ExpressionImpl implements SExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Expression> getElement()
+  public EList<Expression> getElement()
   {
     if (element == null)
     {

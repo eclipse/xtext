@@ -2,7 +2,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.i
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -27,8 +27,8 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
     public static final int RULE_ML_COMMENT=7;
-    public static final int T__19=19;
     public static final int T__30=30;
+    public static final int T__19=19;
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_STRING=5;

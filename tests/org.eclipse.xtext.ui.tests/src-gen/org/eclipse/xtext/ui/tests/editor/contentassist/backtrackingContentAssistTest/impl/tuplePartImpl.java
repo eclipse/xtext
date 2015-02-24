@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>tuple Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class tuplePartImpl extends MinimalEObjectImpl.Container implements tuple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -99,8 +97,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -113,8 +110,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -141,8 +137,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {

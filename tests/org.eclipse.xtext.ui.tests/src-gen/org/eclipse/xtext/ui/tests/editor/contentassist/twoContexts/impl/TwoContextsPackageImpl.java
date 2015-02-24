@@ -104,8 +104,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMainModel()
+  public EClass getMainModel()
   {
     return mainModelEClass;
   }
@@ -115,8 +114,7 @@ public EClass getMainModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMainModel_Elements()
+  public EReference getMainModel_Elements()
   {
     return (EReference)mainModelEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getMainModel_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAnElement()
+  public EClass getAnElement()
   {
     return anElementEClass;
   }
@@ -137,8 +134,7 @@ public EClass getAnElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAnElement_Name()
+  public EAttribute getAnElement_Name()
   {
     return (EAttribute)anElementEClass.getEStructuralFeatures().get(0);
   }
@@ -148,8 +144,7 @@ public EAttribute getAnElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAnElement_Referred()
+  public EReference getAnElement_Referred()
   {
     return (EReference)anElementEClass.getEStructuralFeatures().get(1);
   }
@@ -159,8 +154,7 @@ public EReference getAnElement_Referred()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TwoContextsFactory getTwoContextsFactory()
+  public TwoContextsFactory getTwoContextsFactory()
   {
     return (TwoContextsFactory)getEFactoryInstance();
   }

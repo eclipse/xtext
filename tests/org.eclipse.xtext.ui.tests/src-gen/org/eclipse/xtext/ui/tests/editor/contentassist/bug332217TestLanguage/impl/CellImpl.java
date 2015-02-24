@@ -22,7 +22,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Vie
  * An implementation of the model object '<em><b>Cell</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -144,8 +143,7 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CellType getType()
+  public CellType getType()
   {
     return type;
   }
@@ -155,8 +153,7 @@ public CellType getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(CellType newType)
+  public void setType(CellType newType)
   {
     CellType oldType = type;
     type = newType == null ? TYPE_EDEFAULT : newType;
@@ -169,8 +166,7 @@ public void setType(CellType newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getText()
+  public ScalarExpression getText()
   {
     return text;
   }
@@ -197,8 +193,7 @@ public ScalarExpression getText()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setText(ScalarExpression newText)
+  public void setText(ScalarExpression newText)
   {
     if (newText != text)
     {
@@ -219,8 +214,7 @@ public void setText(ScalarExpression newText)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getDetails()
+  public ScalarExpression getDetails()
   {
     return details;
   }
@@ -247,8 +241,7 @@ public ScalarExpression getDetails()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDetails(ScalarExpression newDetails)
+  public void setDetails(ScalarExpression newDetails)
   {
     if (newDetails != details)
     {
@@ -269,8 +262,7 @@ public void setDetails(ScalarExpression newDetails)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getImage()
+  public ScalarExpression getImage()
   {
     return image;
   }
@@ -297,8 +289,7 @@ public ScalarExpression getImage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setImage(ScalarExpression newImage)
+  public void setImage(ScalarExpression newImage)
   {
     if (newImage != image)
     {
@@ -319,8 +310,7 @@ public void setImage(ScalarExpression newImage)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ViewAction getAction()
+  public ViewAction getAction()
   {
     return action;
   }
@@ -347,8 +337,7 @@ public ViewAction getAction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAction(ViewAction newAction)
+  public void setAction(ViewAction newAction)
   {
     if (newAction != action)
     {
@@ -369,8 +358,7 @@ public void setAction(ViewAction newAction)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CellAccessory getAccessory()
+  public CellAccessory getAccessory()
   {
     return accessory;
   }
@@ -380,8 +368,7 @@ public CellAccessory getAccessory()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAccessory(CellAccessory newAccessory)
+  public void setAccessory(CellAccessory newAccessory)
   {
     CellAccessory oldAccessory = accessory;
     accessory = newAccessory == null ? ACCESSORY_EDEFAULT : newAccessory;

@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Square Bracket Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -106,8 +105,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NameExp getName()
+  public NameExp getName()
   {
     return name;
   }
@@ -134,8 +132,7 @@ public NameExp getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(NameExp newName)
+  public void setName(NameExp newName)
   {
     if (newName != name)
     {
@@ -156,8 +153,7 @@ public void setName(NameExp newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Expression> getArguments()
+  public EList<Expression> getArguments()
   {
     if (arguments == null)
     {
@@ -171,8 +167,7 @@ public EList<Expression> getArguments()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isPre()
+  public boolean isPre()
   {
     return pre;
   }
@@ -182,8 +177,7 @@ public boolean isPre()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPre(boolean newPre)
+  public void setPre(boolean newPre)
   {
     boolean oldPre = pre;
     pre = newPre;

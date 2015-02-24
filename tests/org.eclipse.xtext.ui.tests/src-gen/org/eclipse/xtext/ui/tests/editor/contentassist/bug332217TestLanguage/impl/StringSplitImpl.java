@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Split</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -77,8 +76,7 @@ public class StringSplitImpl extends CollectionFunctionImpl implements StringSpl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getValue()
+  public ScalarExpression getValue()
   {
     return value;
   }
@@ -105,8 +103,7 @@ public ScalarExpression getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(ScalarExpression newValue)
+  public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)
     {
@@ -127,8 +124,7 @@ public void setValue(ScalarExpression newValue)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getDelimiter()
+  public ScalarExpression getDelimiter()
   {
     return delimiter;
   }
@@ -155,8 +151,7 @@ public ScalarExpression getDelimiter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDelimiter(ScalarExpression newDelimiter)
+  public void setDelimiter(ScalarExpression newDelimiter)
   {
     if (newDelimiter != delimiter)
     {

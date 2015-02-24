@@ -104,8 +104,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getState()
+  public EClass getState()
   {
     return stateEClass;
   }
@@ -115,8 +114,7 @@ public EClass getState()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getState_IsInitial()
+  public EAttribute getState_IsInitial()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EAttribute getState_IsInitial()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getState_IsFinal()
+  public EAttribute getState_IsFinal()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
   }
@@ -137,8 +134,7 @@ public EAttribute getState_IsFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getState_StateKind()
+  public EAttribute getState_StateKind()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
   }
@@ -148,8 +144,7 @@ public EAttribute getState_StateKind()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getState_StateName()
+  public EAttribute getState_StateName()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
   }
@@ -159,8 +154,7 @@ public EAttribute getState_StateName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getState_Label()
+  public EAttribute getState_Label()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(4);
   }
@@ -170,8 +164,7 @@ public EAttribute getState_Label()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getStateType()
+  public EEnum getStateType()
   {
     return stateTypeEEnum;
   }
@@ -181,8 +174,7 @@ public EEnum getStateType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug286935TestLanguageFactory getBug286935TestLanguageFactory()
+  public Bug286935TestLanguageFactory getBug286935TestLanguageFactory()
   {
     return (Bug286935TestLanguageFactory)getEFactoryInstance();
   }

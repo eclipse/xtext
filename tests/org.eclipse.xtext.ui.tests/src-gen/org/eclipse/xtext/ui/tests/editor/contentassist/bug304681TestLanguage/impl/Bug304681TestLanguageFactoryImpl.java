@@ -90,8 +90,7 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -102,8 +101,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageDefinition createPackageDefinition()
+  public PackageDefinition createPackageDefinition()
   {
     PackageDefinitionImpl packageDefinition = new PackageDefinitionImpl();
     return packageDefinition;
@@ -114,8 +112,7 @@ public PackageDefinition createPackageDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object createObject()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object createObject()
   {
     ObjectImpl object = new ObjectImpl();
     return object;
@@ -126,8 +123,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Obj
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Feature createFeature()
+  public Feature createFeature()
   {
     FeatureImpl feature = new FeatureImpl();
     return feature;
@@ -138,8 +134,7 @@ public Feature createFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute createAttribute()
+  public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -150,8 +145,7 @@ public Attribute createAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Reference createReference()
+  public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
@@ -162,8 +156,7 @@ public Reference createReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribut createAttribut()
+  public Attribut createAttribut()
   {
     AttributImpl attribut = new AttributImpl();
     return attribut;
@@ -174,8 +167,7 @@ public Attribut createAttribut()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ConstraintDefinition createConstraintDefinition()
+  public ConstraintDefinition createConstraintDefinition()
   {
     ConstraintDefinitionImpl constraintDefinition = new ConstraintDefinitionImpl();
     return constraintDefinition;
@@ -186,8 +178,7 @@ public ConstraintDefinition createConstraintDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681TestLanguagePackage getBug304681TestLanguagePackage()
+  public Bug304681TestLanguagePackage getBug304681TestLanguagePackage()
   {
     return (Bug304681TestLanguagePackage)getEPackage();
   }

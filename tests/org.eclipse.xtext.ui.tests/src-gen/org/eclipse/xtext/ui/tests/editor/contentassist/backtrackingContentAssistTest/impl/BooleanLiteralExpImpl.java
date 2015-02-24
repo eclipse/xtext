@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Boolean Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isIsTrue()
+  public boolean isIsTrue()
   {
     return isTrue;
   }
@@ -84,8 +82,7 @@ public boolean isIsTrue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIsTrue(boolean newIsTrue)
+  public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
     isTrue = newIsTrue;

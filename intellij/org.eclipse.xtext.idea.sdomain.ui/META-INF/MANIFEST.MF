@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.xtext.idea.sdomain;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.antlr.runtime,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare
+ org.eclipse.compare,
+ org.eclipse.xtext.ide
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.idea.sdomain.ui.contentassist,

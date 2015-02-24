@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Whe
  * An implementation of the model object '<em><b>Or Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class OrWhereEntryImpl extends WhereEntryImpl implements OrWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<WhereEntry> getEntries()
+  public EList<WhereEntry> getEntries()
   {
     if (entries == null)
     {

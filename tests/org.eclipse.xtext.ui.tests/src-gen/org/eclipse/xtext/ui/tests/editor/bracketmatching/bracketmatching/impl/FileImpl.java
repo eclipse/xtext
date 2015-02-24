@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.File;
  * An implementation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Expression> getExpression()
+  public EList<Expression> getExpression()
   {
     if (expression == null)
     {

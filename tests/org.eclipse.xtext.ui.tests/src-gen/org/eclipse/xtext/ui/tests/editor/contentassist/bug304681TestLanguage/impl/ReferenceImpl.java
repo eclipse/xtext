@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Ref
  * An implementation of the model object '<em><b>Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -127,8 +126,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getType()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -158,8 +156,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Obj
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newType)
+  public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newType)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object oldType = type;
     type = newType;
@@ -172,8 +169,7 @@ public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681Tes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isMany()
+  public boolean isMany()
   {
     return many;
   }
@@ -183,8 +179,7 @@ public boolean isMany()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMany(boolean newMany)
+  public void setMany(boolean newMany)
   {
     boolean oldMany = many;
     many = newMany;
@@ -197,8 +192,7 @@ public void setMany(boolean newMany)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getShortDescription()
+  public String getShortDescription()
   {
     return shortDescription;
   }
@@ -208,8 +202,7 @@ public String getShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setShortDescription(String newShortDescription)
+  public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -222,8 +215,7 @@ public void setShortDescription(String newShortDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLongDescription()
+  public String getLongDescription()
   {
     return longDescription;
   }
@@ -233,8 +225,7 @@ public String getLongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLongDescription(String newLongDescription)
+  public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;

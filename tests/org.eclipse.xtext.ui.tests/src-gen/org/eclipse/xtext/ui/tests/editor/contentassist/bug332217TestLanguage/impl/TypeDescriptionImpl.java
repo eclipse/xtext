@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Typ
  * An implementation of the model object '<em><b>Type Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class TypeDescriptionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -106,8 +104,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -120,8 +117,7 @@ public void setType(String newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isMany()
+  public boolean isMany()
   {
     return many;
   }
@@ -131,8 +127,7 @@ public boolean isMany()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMany(boolean newMany)
+  public void setMany(boolean newMany)
   {
     boolean oldMany = many;
     many = newMany;

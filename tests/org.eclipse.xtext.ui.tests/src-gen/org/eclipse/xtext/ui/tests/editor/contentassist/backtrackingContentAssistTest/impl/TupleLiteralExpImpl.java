@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Tuple Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class TupleLiteralExpImpl extends ExpressionImpl implements TupleLiteralE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<TupleLiteralPart> getPart()
+  public EList<TupleLiteralPart> getPart()
   {
     if (part == null)
     {

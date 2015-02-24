@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Ocl Message Arg</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class OclMessageArgImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -95,8 +93,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {

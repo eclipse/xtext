@@ -24,7 +24,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Mod
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -71,8 +70,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getClasses()
+  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getClasses()
   {
     if (classes == null)
     {

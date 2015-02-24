@@ -11,13 +11,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#isExpectingParameters <em>Expecting Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage#getVariable()
  * @model

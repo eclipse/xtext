@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Simple Classifier Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getClassifier()
+  public String getClassifier()
   {
     return classifier;
   }
@@ -84,8 +82,7 @@ public String getClassifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setClassifier(String newClassifier)
+  public void setClassifier(String newClassifier)
   {
     String oldClassifier = classifier;
     classifier = newClassifier;

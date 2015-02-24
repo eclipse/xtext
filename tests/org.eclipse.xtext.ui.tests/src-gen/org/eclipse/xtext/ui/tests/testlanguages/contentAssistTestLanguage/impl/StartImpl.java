@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.Start;
  * An implementation of the model object '<em><b>Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class StartImpl extends MinimalEObjectImpl.Container implements Start
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractRule> getRules()
+  public EList<AbstractRule> getRules()
   {
     if (rules == null)
     {

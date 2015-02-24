@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Qualified Operation Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -87,8 +86,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getNamespace()
+  public String getNamespace()
   {
     return namespace;
   }
@@ -98,8 +96,7 @@ public String getNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNamespace(String newNamespace)
+  public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
     namespace = newNamespace;
@@ -112,8 +109,7 @@ public void setNamespace(String newNamespace)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OperationRef getElement()
+  public OperationRef getElement()
   {
     return element;
   }
@@ -140,8 +136,7 @@ public OperationRef getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(OperationRef newElement)
+  public void setElement(OperationRef newElement)
   {
     if (newElement != element)
     {

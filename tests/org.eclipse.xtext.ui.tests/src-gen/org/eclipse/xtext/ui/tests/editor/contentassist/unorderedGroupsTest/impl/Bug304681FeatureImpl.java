@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Bug304681 Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class Bug304681FeatureImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -85,8 +83,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

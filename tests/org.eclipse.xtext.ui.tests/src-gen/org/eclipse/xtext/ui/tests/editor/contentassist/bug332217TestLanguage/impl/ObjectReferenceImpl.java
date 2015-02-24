@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Pro
  * An implementation of the model object '<em><b>Object Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -77,8 +76,7 @@ public class ObjectReferenceImpl extends ExpressionImpl implements ObjectReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyPathPart getObject()
+  public PropertyPathPart getObject()
   {
     if (object != null && object.eIsProxy())
     {
@@ -108,8 +106,7 @@ public PropertyPathPart getObject()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setObject(PropertyPathPart newObject)
+  public void setObject(PropertyPathPart newObject)
   {
     PropertyPathPart oldObject = object;
     object = newObject;
@@ -122,8 +119,7 @@ public void setObject(PropertyPathPart newObject)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ObjectReference getTail()
+  public ObjectReference getTail()
   {
     return tail;
   }
@@ -150,8 +146,7 @@ public ObjectReference getTail()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTail(ObjectReference newTail)
+  public void setTail(ObjectReference newTail)
   {
     if (newTail != tail)
     {

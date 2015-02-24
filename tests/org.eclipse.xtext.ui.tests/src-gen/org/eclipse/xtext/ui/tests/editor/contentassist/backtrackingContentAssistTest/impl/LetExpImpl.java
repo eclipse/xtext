@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Let Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -85,8 +84,7 @@ public class LetExpImpl extends ExpressionImpl implements LetExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<LetVariable> getVariable()
+  public EList<LetVariable> getVariable()
   {
     if (variable == null)
     {
@@ -100,8 +98,7 @@ public EList<LetVariable> getVariable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getIn()
+  public Expression getIn()
   {
     return in;
   }
@@ -128,8 +125,7 @@ public Expression getIn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIn(Expression newIn)
+  public void setIn(Expression newIn)
   {
     if (newIn != in)
     {

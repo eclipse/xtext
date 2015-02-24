@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Package Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class PackageDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageRef getPackage()
+  public PackageRef getPackage()
   {
     return package_;
   }
@@ -114,8 +112,7 @@ public PackageRef getPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPackage(PackageRef newPackage)
+  public void setPackage(PackageRef newPackage)
   {
     if (newPackage != package_)
     {
@@ -136,8 +133,7 @@ public void setPackage(PackageRef newPackage)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ContextDecl> getContexts()
+  public EList<ContextDecl> getContexts()
   {
     if (contexts == null)
     {

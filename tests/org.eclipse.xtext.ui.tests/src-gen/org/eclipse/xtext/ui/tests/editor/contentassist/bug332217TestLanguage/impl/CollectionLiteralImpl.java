@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sca
  * An implementation of the model object '<em><b>Collection Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class CollectionLiteralImpl extends ExpressionImpl implements CollectionL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ScalarExpression> getItems()
+  public EList<ScalarExpression> getItems()
   {
     if (items == null)
     {

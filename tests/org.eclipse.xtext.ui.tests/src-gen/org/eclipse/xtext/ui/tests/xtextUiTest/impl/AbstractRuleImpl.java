@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Abstract Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -100,8 +99,7 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -111,8 +109,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -125,8 +122,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getType()
+  public TypeRef getType()
   {
     return type;
   }
@@ -153,8 +149,7 @@ public TypeRef getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeRef newType)
+  public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -175,8 +170,7 @@ public void setType(TypeRef newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractElement getAlternatives()
+  public AbstractElement getAlternatives()
   {
     return alternatives;
   }
@@ -203,8 +197,7 @@ public AbstractElement getAlternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlternatives(AbstractElement newAlternatives)
+  public void setAlternatives(AbstractElement newAlternatives)
   {
     if (newAlternatives != alternatives)
     {

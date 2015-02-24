@@ -136,8 +136,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -147,8 +146,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypes()
+  public EClass getTypes()
   {
     return typesEClass;
   }
@@ -158,8 +156,7 @@ public EClass getTypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTypes_Types()
+  public EReference getTypes_Types()
   {
     return (EReference)typesEClass.getEStructuralFeatures().get(0);
   }
@@ -169,8 +166,7 @@ public EReference getTypes_Types()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getType()
+  public EClass getType()
   {
     return typeEClass;
   }
@@ -180,8 +176,7 @@ public EClass getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getType_Name()
+  public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -191,8 +186,7 @@ public EAttribute getType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimpleType()
+  public EClass getSimpleType()
   {
     return simpleTypeEClass;
   }
@@ -202,8 +196,7 @@ public EClass getSimpleType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCompositeType()
+  public EClass getCompositeType()
   {
     return compositeTypeEClass;
   }
@@ -213,8 +206,7 @@ public EClass getCompositeType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCompositeType_BaseType()
+  public EReference getCompositeType_BaseType()
   {
     return (EReference)compositeTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -224,8 +216,7 @@ public EReference getCompositeType_BaseType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCompositeTypeEntry()
+  public EClass getCompositeTypeEntry()
   {
     return compositeTypeEntryEClass;
   }
@@ -235,8 +226,7 @@ public EClass getCompositeTypeEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCompositeTypeEntry_DataType()
+  public EReference getCompositeTypeEntry_DataType()
   {
     return (EReference)compositeTypeEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -246,8 +236,7 @@ public EReference getCompositeTypeEntry_DataType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DatatypeRuleTestFactory getDatatypeRuleTestFactory()
+  public DatatypeRuleTestFactory getDatatypeRuleTestFactory()
   {
     return (DatatypeRuleTestFactory)getEFactoryInstance();
   }

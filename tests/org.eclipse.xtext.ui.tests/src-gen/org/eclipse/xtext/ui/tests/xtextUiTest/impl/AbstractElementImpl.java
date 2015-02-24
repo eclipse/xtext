@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Abstract Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getCardinality()
+  public String getCardinality()
   {
     return cardinality;
   }
@@ -85,8 +83,7 @@ public String getCardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCardinality(String newCardinality)
+  public void setCardinality(String newCardinality)
   {
     String oldCardinality = cardinality;
     cardinality = newCardinality;

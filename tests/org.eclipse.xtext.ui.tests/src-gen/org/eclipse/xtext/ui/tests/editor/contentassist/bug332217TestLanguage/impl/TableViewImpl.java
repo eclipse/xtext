@@ -30,7 +30,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Tab
  * An implementation of the model object '<em><b>Table View</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -152,8 +151,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -163,8 +161,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -177,8 +174,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameter getContent()
+  public Parameter getContent()
   {
     return content;
   }
@@ -205,8 +201,7 @@ public Parameter getContent()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setContent(Parameter newContent)
+  public void setContent(Parameter newContent)
   {
     if (newContent != content)
     {
@@ -227,8 +222,7 @@ public void setContent(Parameter newContent)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getTitle()
+  public ScalarExpression getTitle()
   {
     return title;
   }
@@ -255,8 +249,7 @@ public ScalarExpression getTitle()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTitle(ScalarExpression newTitle)
+  public void setTitle(ScalarExpression newTitle)
   {
     if (newTitle != title)
     {
@@ -277,8 +270,7 @@ public void setTitle(ScalarExpression newTitle)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getTitleImage()
+  public ScalarExpression getTitleImage()
   {
     return titleImage;
   }
@@ -305,8 +297,7 @@ public ScalarExpression getTitleImage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTitleImage(ScalarExpression newTitleImage)
+  public void setTitleImage(ScalarExpression newTitleImage)
   {
     if (newTitleImage != titleImage)
     {
@@ -327,8 +318,7 @@ public void setTitleImage(ScalarExpression newTitleImage)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TableViewStyle getStyle()
+  public TableViewStyle getStyle()
   {
     return style;
   }
@@ -338,8 +328,7 @@ public TableViewStyle getStyle()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStyle(TableViewStyle newStyle)
+  public void setStyle(TableViewStyle newStyle)
   {
     TableViewStyle oldStyle = style;
     style = newStyle == null ? STYLE_EDEFAULT : newStyle;
@@ -352,8 +341,7 @@ public void setStyle(TableViewStyle newStyle)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Section> getSections()
+  public EList<Section> getSections()
   {
     if (sections == null)
     {

@@ -151,8 +151,7 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -162,8 +161,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Definition()
+  public EReference getModel_Definition()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -173,8 +171,7 @@ public EReference getModel_Definition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPackageDefinition()
+  public EClass getPackageDefinition()
   {
     return packageDefinitionEClass;
   }
@@ -184,8 +181,7 @@ public EClass getPackageDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPackageDefinition_Namespace()
+  public EAttribute getPackageDefinition_Namespace()
   {
     return (EAttribute)packageDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -195,8 +191,7 @@ public EAttribute getPackageDefinition_Namespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPackageDefinition_Contents()
+  public EReference getPackageDefinition_Contents()
   {
     return (EReference)packageDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -206,8 +201,7 @@ public EReference getPackageDefinition_Contents()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getObject()
+  public EClass getObject()
   {
     return objectEClass;
   }
@@ -217,8 +211,7 @@ public EClass getObject()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_Enabled()
+  public EAttribute getObject_Enabled()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(0);
   }
@@ -228,8 +221,7 @@ public EAttribute getObject_Enabled()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_Abstract()
+  public EAttribute getObject_Abstract()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(1);
   }
@@ -239,8 +231,7 @@ public EAttribute getObject_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_Name()
+  public EAttribute getObject_Name()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(2);
   }
@@ -250,8 +241,7 @@ public EAttribute getObject_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getObject_Parent()
+  public EReference getObject_Parent()
   {
     return (EReference)objectEClass.getEStructuralFeatures().get(3);
   }
@@ -261,8 +251,7 @@ public EReference getObject_Parent()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_ShortDescription()
+  public EAttribute getObject_ShortDescription()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(4);
   }
@@ -272,8 +261,7 @@ public EAttribute getObject_ShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_LongDescription()
+  public EAttribute getObject_LongDescription()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(5);
   }
@@ -283,8 +271,7 @@ public EAttribute getObject_LongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_SerialVersionUID()
+  public EAttribute getObject_SerialVersionUID()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(6);
   }
@@ -294,8 +281,7 @@ public EAttribute getObject_SerialVersionUID()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getObject_Cloneable()
+  public EAttribute getObject_Cloneable()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(7);
   }
@@ -305,8 +291,7 @@ public EAttribute getObject_Cloneable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getObject_Features()
+  public EReference getObject_Features()
   {
     return (EReference)objectEClass.getEStructuralFeatures().get(8);
   }
@@ -316,8 +301,7 @@ public EReference getObject_Features()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFeature()
+  public EClass getFeature()
   {
     return featureEClass;
   }
@@ -327,8 +311,7 @@ public EClass getFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFeature_Name()
+  public EAttribute getFeature_Name()
   {
     return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
   }
@@ -338,8 +321,7 @@ public EAttribute getFeature_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -349,8 +331,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Type()
+  public EAttribute getAttribute_Type()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -360,8 +341,7 @@ public EAttribute getAttribute_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReference()
+  public EClass getReference()
   {
     return referenceEClass;
   }
@@ -371,8 +351,7 @@ public EClass getReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReference_Type()
+  public EReference getReference_Type()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
   }
@@ -382,8 +361,7 @@ public EReference getReference_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getReference_Many()
+  public EAttribute getReference_Many()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(1);
   }
@@ -393,8 +371,7 @@ public EAttribute getReference_Many()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getReference_ShortDescription()
+  public EAttribute getReference_ShortDescription()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(2);
   }
@@ -404,8 +381,7 @@ public EAttribute getReference_ShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getReference_LongDescription()
+  public EAttribute getReference_LongDescription()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(3);
   }
@@ -415,8 +391,7 @@ public EAttribute getReference_LongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribut()
+  public EClass getAttribut()
   {
     return attributEClass;
   }
@@ -426,8 +401,7 @@ public EClass getAttribut()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribut_Type()
+  public EAttribute getAttribut_Type()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(0);
   }
@@ -437,8 +411,7 @@ public EAttribute getAttribut_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribut_ShortDescription()
+  public EAttribute getAttribut_ShortDescription()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(1);
   }
@@ -448,8 +421,7 @@ public EAttribute getAttribut_ShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribut_LongDescription()
+  public EAttribute getAttribut_LongDescription()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(2);
   }
@@ -459,8 +431,7 @@ public EAttribute getAttribut_LongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttribut_ConstraintDefinitions()
+  public EReference getAttribut_ConstraintDefinitions()
   {
     return (EReference)attributEClass.getEStructuralFeatures().get(3);
   }
@@ -470,8 +441,7 @@ public EReference getAttribut_ConstraintDefinitions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribut_Required()
+  public EAttribute getAttribut_Required()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(4);
   }
@@ -481,8 +451,7 @@ public EAttribute getAttribut_Required()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribut_Technical()
+  public EAttribute getAttribut_Technical()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(5);
   }
@@ -492,8 +461,7 @@ public EAttribute getAttribut_Technical()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getConstraintDefinition()
+  public EClass getConstraintDefinition()
   {
     return constraintDefinitionEClass;
   }
@@ -503,8 +471,7 @@ public EClass getConstraintDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getConstraintDefinition_Type()
+  public EAttribute getConstraintDefinition_Type()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -514,8 +481,7 @@ public EAttribute getConstraintDefinition_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getConstraintDefinition_Parameters()
+  public EAttribute getConstraintDefinition_Parameters()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -525,8 +491,7 @@ public EAttribute getConstraintDefinition_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getConstraintDefinition_Message()
+  public EAttribute getConstraintDefinition_Message()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -536,8 +501,7 @@ public EAttribute getConstraintDefinition_Message()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681TestLanguageFactory getBug304681TestLanguageFactory()
+  public Bug304681TestLanguageFactory getBug304681TestLanguageFactory()
   {
     return (Bug304681TestLanguageFactory)getEFactoryInstance();
   }

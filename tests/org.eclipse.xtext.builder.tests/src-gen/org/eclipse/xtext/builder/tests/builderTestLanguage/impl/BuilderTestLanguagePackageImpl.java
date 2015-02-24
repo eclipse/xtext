@@ -120,8 +120,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNamedElement()
+  public EClass getNamedElement()
   {
     return namedElementEClass;
   }
@@ -131,8 +130,7 @@ public EClass getNamedElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getNamedElement_Name()
+  public EAttribute getNamedElement_Name()
   {
     return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
   }
@@ -142,8 +140,7 @@ public EAttribute getNamedElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNamespace()
+  public EClass getNamespace()
   {
     return namespaceEClass;
   }
@@ -153,8 +150,7 @@ public EClass getNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNamespace_Imports()
+  public EReference getNamespace_Imports()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(0);
   }
@@ -164,8 +160,7 @@ public EReference getNamespace_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNamespace_Elements()
+  public EReference getNamespace_Elements()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
   }
@@ -175,8 +170,7 @@ public EReference getNamespace_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -186,8 +180,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportedNamespace()
+  public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -197,8 +190,7 @@ public EAttribute getImport_ImportedNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElement()
+  public EClass getElement()
   {
     return elementEClass;
   }
@@ -208,8 +200,7 @@ public EClass getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_References()
+  public EReference getElement_References()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -219,8 +210,7 @@ public EReference getElement_References()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_OtherRefs()
+  public EReference getElement_OtherRefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -230,8 +220,7 @@ public EReference getElement_OtherRefs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
+  public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
   {
     return (BuilderTestLanguageFactory)getEFactoryInstance();
   }

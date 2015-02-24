@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Vis
  * An implementation of the model object '<em><b>Modifiers</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -137,8 +136,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFinal()
+  public boolean isFinal()
   {
     return final_;
   }
@@ -148,8 +146,7 @@ public boolean isFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFinal(boolean newFinal)
+  public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -162,8 +159,7 @@ public void setFinal(boolean newFinal)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isAbstract()
+  public boolean isAbstract()
   {
     return abstract_;
   }
@@ -173,8 +169,7 @@ public boolean isAbstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAbstract(boolean newAbstract)
+  public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -187,8 +182,7 @@ public void setAbstract(boolean newAbstract)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isExtern()
+  public boolean isExtern()
   {
     return extern;
   }
@@ -198,8 +192,7 @@ public boolean isExtern()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExtern(boolean newExtern)
+  public void setExtern(boolean newExtern)
   {
     boolean oldExtern = extern;
     extern = newExtern;
@@ -212,8 +205,7 @@ public void setExtern(boolean newExtern)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Visibility getVisibility()
+  public Visibility getVisibility()
   {
     return visibility;
   }
@@ -223,8 +215,7 @@ public Visibility getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVisibility(Visibility newVisibility)
+  public void setVisibility(Visibility newVisibility)
   {
     Visibility oldVisibility = visibility;
     visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;

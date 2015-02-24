@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Ide
  * An implementation of the model object '<em><b>Identifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class IdentifierImpl extends PrimaryExpressionImpl implements Identifier
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -84,8 +82,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

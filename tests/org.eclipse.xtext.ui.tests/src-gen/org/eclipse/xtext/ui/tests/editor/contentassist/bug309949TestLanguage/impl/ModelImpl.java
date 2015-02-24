@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Ope
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -106,8 +105,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error> getErrors()
+  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error> getErrors()
   {
     if (errors == null)
     {
@@ -121,8 +119,7 @@ public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLangua
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Operation> getOperations()
+  public EList<Operation> getOperations()
   {
     if (operations == null)
     {
@@ -136,8 +133,7 @@ public EList<Operation> getOperations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -147,8 +143,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

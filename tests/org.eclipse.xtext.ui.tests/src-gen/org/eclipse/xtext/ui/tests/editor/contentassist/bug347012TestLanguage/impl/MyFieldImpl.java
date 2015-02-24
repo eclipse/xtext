@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyF
  * An implementation of the model object '<em><b>My Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class MyFieldImpl extends MinimalEObjectImpl.Container implements MyField
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyAttributes getAttr()
+  public MyAttributes getAttr()
   {
     return attr;
   }
@@ -114,8 +112,7 @@ public MyAttributes getAttr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAttr(MyAttributes newAttr)
+  public void setAttr(MyAttributes newAttr)
   {
     if (newAttr != attr)
     {
@@ -136,8 +133,7 @@ public void setAttr(MyAttributes newAttr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<MyBinding> getBindings()
+  public EList<MyBinding> getBindings()
   {
     if (bindings == null)
     {

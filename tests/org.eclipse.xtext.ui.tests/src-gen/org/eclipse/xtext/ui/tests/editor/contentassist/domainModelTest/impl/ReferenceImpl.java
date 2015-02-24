@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Reference
  * An implementation of the model object '<em><b>Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -64,8 +63,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getType()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -95,8 +93,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class get
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newType)
+  public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newType)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class oldType = type;
     type = newType;

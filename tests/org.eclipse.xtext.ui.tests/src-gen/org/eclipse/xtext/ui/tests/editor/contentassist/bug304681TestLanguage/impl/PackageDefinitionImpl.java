@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Pac
  * An implementation of the model object '<em><b>Package Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -94,8 +93,7 @@ public class PackageDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getNamespace()
+  public String getNamespace()
   {
     return namespace;
   }
@@ -105,8 +103,7 @@ public String getNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNamespace(String newNamespace)
+  public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
     namespace = newNamespace;
@@ -119,8 +116,7 @@ public void setNamespace(String newNamespace)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object> getContents()
+  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object> getContents()
   {
     if (contents == null)
     {

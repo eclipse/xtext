@@ -137,8 +137,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -148,8 +147,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Element1()
+  public EReference getModel_Element1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -159,8 +157,7 @@ public EReference getModel_Element1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Element2()
+  public EReference getModel_Element2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -170,8 +167,7 @@ public EReference getModel_Element2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getScenario1()
+  public EClass getScenario1()
   {
     return scenario1EClass;
   }
@@ -181,8 +177,7 @@ public EClass getScenario1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getScenario1_Child()
+  public EReference getScenario1_Child()
   {
     return (EReference)scenario1EClass.getEStructuralFeatures().get(0);
   }
@@ -192,8 +187,7 @@ public EReference getScenario1_Child()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getChild1()
+  public EClass getChild1()
   {
     return child1EClass;
   }
@@ -203,8 +197,7 @@ public EClass getChild1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild1_Name()
+  public EAttribute getChild1_Name()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(0);
   }
@@ -214,8 +207,7 @@ public EAttribute getChild1_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild1_Bool()
+  public EAttribute getChild1_Bool()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(1);
   }
@@ -225,8 +217,7 @@ public EAttribute getChild1_Bool()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild1_EnumType()
+  public EAttribute getChild1_EnumType()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(2);
   }
@@ -236,8 +227,7 @@ public EAttribute getChild1_EnumType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getScenario2()
+  public EClass getScenario2()
   {
     return scenario2EClass;
   }
@@ -247,8 +237,7 @@ public EClass getScenario2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getScenario2_Child()
+  public EReference getScenario2_Child()
   {
     return (EReference)scenario2EClass.getEStructuralFeatures().get(0);
   }
@@ -258,8 +247,7 @@ public EReference getScenario2_Child()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getChild2()
+  public EClass getChild2()
   {
     return child2EClass;
   }
@@ -269,8 +257,7 @@ public EClass getChild2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild2_Name()
+  public EAttribute getChild2_Name()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(0);
   }
@@ -280,8 +267,7 @@ public EAttribute getChild2_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild2_Bool()
+  public EAttribute getChild2_Bool()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(1);
   }
@@ -291,8 +277,7 @@ public EAttribute getChild2_Bool()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getChild2_String()
+  public EAttribute getChild2_String()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(2);
   }
@@ -302,8 +287,7 @@ public EAttribute getChild2_String()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getEnumType()
+  public EEnum getEnumType()
   {
     return enumTypeEEnum;
   }
@@ -313,8 +297,7 @@ public EEnum getEnumType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug348427TestLanguageFactory getBug348427TestLanguageFactory()
+  public Bug348427TestLanguageFactory getBug348427TestLanguageFactory()
   {
     return (Bug348427TestLanguageFactory)getEFactoryInstance();
   }

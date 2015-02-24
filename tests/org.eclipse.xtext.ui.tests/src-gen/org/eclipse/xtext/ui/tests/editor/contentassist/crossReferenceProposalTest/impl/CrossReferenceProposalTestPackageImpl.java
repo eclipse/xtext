@@ -103,8 +103,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -114,8 +113,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Elements()
+  public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -125,8 +123,7 @@ public EReference getModel_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClass_()
+  public EClass getClass_()
   {
     return classEClass;
   }
@@ -136,8 +133,7 @@ public EClass getClass_()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_SuperClass()
+  public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(0);
   }
@@ -147,8 +143,7 @@ public EReference getClass_SuperClass()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Name()
+  public EAttribute getClass_Name()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(1);
   }
@@ -158,8 +153,7 @@ public EAttribute getClass_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CrossReferenceProposalTestFactory getCrossReferenceProposalTestFactory()
+  public CrossReferenceProposalTestFactory getCrossReferenceProposalTestFactory()
   {
     return (CrossReferenceProposalTestFactory)getEFactoryInstance();
   }

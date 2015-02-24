@@ -23,7 +23,6 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Element;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -81,8 +80,7 @@ public class ElementImpl extends NamedElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Element getReferences()
+  public Element getReferences()
   {
     if (references != null && references.eIsProxy())
     {
@@ -112,8 +110,7 @@ public Element getReferences()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReferences(Element newReferences)
+  public void setReferences(Element newReferences)
   {
     Element oldReferences = references;
     references = newReferences;
@@ -126,8 +123,7 @@ public void setReferences(Element newReferences)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Element> getOtherRefs()
+  public EList<Element> getOtherRefs()
   {
     if (otherRefs == null)
     {

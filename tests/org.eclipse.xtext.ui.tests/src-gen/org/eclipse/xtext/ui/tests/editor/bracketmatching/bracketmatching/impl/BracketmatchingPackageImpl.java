@@ -120,8 +120,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFile()
+  public EClass getFile()
   {
     return fileEClass;
   }
@@ -131,8 +130,7 @@ public EClass getFile()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFile_Expression()
+  public EReference getFile_Expression()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
   }
@@ -142,8 +140,7 @@ public EReference getFile_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpression()
+  public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -153,8 +150,7 @@ public EClass getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSExpression()
+  public EClass getSExpression()
   {
     return sExpressionEClass;
   }
@@ -164,8 +160,7 @@ public EClass getSExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSExpression_Element()
+  public EReference getSExpression_Element()
   {
     return (EReference)sExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -175,8 +170,7 @@ public EReference getSExpression_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAtom()
+  public EClass getAtom()
   {
     return atomEClass;
   }
@@ -186,8 +180,7 @@ public EClass getAtom()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAtom_Value()
+  public EAttribute getAtom_Value()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
   }
@@ -197,8 +190,7 @@ public EAttribute getAtom_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BracketmatchingFactory getBracketmatchingFactory()
+  public BracketmatchingFactory getBracketmatchingFactory()
   {
     return (BracketmatchingFactory)getEFactoryInstance();
   }

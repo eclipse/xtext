@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Element> getElements()
+  public EList<Element> getElements()
   {
     if (elements == null)
     {

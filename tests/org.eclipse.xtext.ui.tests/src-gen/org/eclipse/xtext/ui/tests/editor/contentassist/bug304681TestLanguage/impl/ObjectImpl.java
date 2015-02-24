@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Fea
  * An implementation of the model object '<em><b>Object</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -231,8 +230,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isEnabled()
+  public boolean isEnabled()
   {
     return enabled;
   }
@@ -242,8 +240,7 @@ public boolean isEnabled()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEnabled(boolean newEnabled)
+  public void setEnabled(boolean newEnabled)
   {
     boolean oldEnabled = enabled;
     enabled = newEnabled;
@@ -256,8 +253,7 @@ public void setEnabled(boolean newEnabled)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isAbstract()
+  public boolean isAbstract()
   {
     return abstract_;
   }
@@ -267,8 +263,7 @@ public boolean isAbstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAbstract(boolean newAbstract)
+  public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -281,8 +276,7 @@ public void setAbstract(boolean newAbstract)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -292,8 +286,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -306,8 +299,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getParent()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getParent()
   {
     if (parent != null && parent.eIsProxy())
     {
@@ -337,8 +329,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Obj
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParent(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newParent)
+  public void setParent(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newParent)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object oldParent = parent;
     parent = newParent;
@@ -351,8 +342,7 @@ public void setParent(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681T
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getShortDescription()
+  public String getShortDescription()
   {
     return shortDescription;
   }
@@ -362,8 +352,7 @@ public String getShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setShortDescription(String newShortDescription)
+  public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -376,8 +365,7 @@ public void setShortDescription(String newShortDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLongDescription()
+  public String getLongDescription()
   {
     return longDescription;
   }
@@ -387,8 +375,7 @@ public String getLongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLongDescription(String newLongDescription)
+  public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;
@@ -401,8 +388,7 @@ public void setLongDescription(String newLongDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getSerialVersionUID()
+  public int getSerialVersionUID()
   {
     return serialVersionUID;
   }
@@ -412,8 +398,7 @@ public int getSerialVersionUID()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSerialVersionUID(int newSerialVersionUID)
+  public void setSerialVersionUID(int newSerialVersionUID)
   {
     int oldSerialVersionUID = serialVersionUID;
     serialVersionUID = newSerialVersionUID;
@@ -426,8 +411,7 @@ public void setSerialVersionUID(int newSerialVersionUID)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isCloneable()
+  public boolean isCloneable()
   {
     return cloneable;
   }
@@ -437,8 +421,7 @@ public boolean isCloneable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCloneable(boolean newCloneable)
+  public void setCloneable(boolean newCloneable)
   {
     boolean oldCloneable = cloneable;
     cloneable = newCloneable;
@@ -451,8 +434,7 @@ public void setCloneable(boolean newCloneable)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Feature> getFeatures()
+  public EList<Feature> getFeatures()
   {
     if (features == null)
     {

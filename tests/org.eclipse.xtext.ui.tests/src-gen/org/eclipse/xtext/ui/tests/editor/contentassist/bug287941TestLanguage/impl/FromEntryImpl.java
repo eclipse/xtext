@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sco
  * An implementation of the model object '<em><b>From Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -120,8 +119,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getType()
+  public EClass getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -151,8 +149,7 @@ public EClass getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(EClass newType)
+  public void setType(EClass newType)
   {
     EClass oldType = type;
     type = newType;
@@ -165,8 +162,7 @@ public void setType(EClass newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isWithoutsubtypes()
+  public boolean isWithoutsubtypes()
   {
     return withoutsubtypes;
   }
@@ -176,8 +172,7 @@ public boolean isWithoutsubtypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setWithoutsubtypes(boolean newWithoutsubtypes)
+  public void setWithoutsubtypes(boolean newWithoutsubtypes)
   {
     boolean oldWithoutsubtypes = withoutsubtypes;
     withoutsubtypes = newWithoutsubtypes;
@@ -190,8 +185,7 @@ public void setWithoutsubtypes(boolean newWithoutsubtypes)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getAlias()
+  public String getAlias()
   {
     return alias;
   }
@@ -201,8 +195,7 @@ public String getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(String newAlias)
+  public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -215,8 +208,7 @@ public void setAlias(String newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScopeClause getScopeClause()
+  public ScopeClause getScopeClause()
   {
     return scopeClause;
   }
@@ -243,8 +235,7 @@ public ScopeClause getScopeClause()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setScopeClause(ScopeClause newScopeClause)
+  public void setScopeClause(ScopeClause newScopeClause)
   {
     if (newScopeClause != scopeClause)
     {

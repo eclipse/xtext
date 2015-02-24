@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Typ
  * An implementation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class ParameterImpl extends PropertyPathPartImpl implements Parameter
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeDescription getDescription()
+  public TypeDescription getDescription()
   {
     return description;
   }
@@ -94,8 +92,7 @@ public TypeDescription getDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDescription(TypeDescription newDescription)
+  public void setDescription(TypeDescription newDescription)
   {
     if (newDescription != description)
     {

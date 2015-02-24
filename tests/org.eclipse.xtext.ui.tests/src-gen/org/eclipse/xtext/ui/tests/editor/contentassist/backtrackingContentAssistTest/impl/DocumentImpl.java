@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Document</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -84,8 +83,7 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<PackageDeclaration> getPackages()
+  public EList<PackageDeclaration> getPackages()
   {
     if (packages == null)
     {
@@ -99,8 +97,7 @@ public EList<PackageDeclaration> getPackages()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ContextDecl> getContexts()
+  public EList<ContextDecl> getContexts()
   {
     if (contexts == null)
     {

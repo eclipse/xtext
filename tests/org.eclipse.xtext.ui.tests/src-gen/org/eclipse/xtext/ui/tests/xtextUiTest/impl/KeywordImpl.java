@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Keyword</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class KeywordImpl extends AbstractElementImpl implements Keyword
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -84,8 +82,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

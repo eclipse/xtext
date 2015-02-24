@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Vie
  * An implementation of the model object '<em><b>View Content Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class ViewContentElementImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionIterator getIterator()
+  public CollectionIterator getIterator()
   {
     return iterator;
   }
@@ -95,8 +93,7 @@ public CollectionIterator getIterator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIterator(CollectionIterator newIterator)
+  public void setIterator(CollectionIterator newIterator)
   {
     if (newIterator != iterator)
     {

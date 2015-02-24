@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TAn
  * An implementation of the model object '<em><b>TAnnotation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class TAnnotationImpl extends MinimalEObjectImpl.Container implements TAn
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getDescription()
+  public String getDescription()
   {
     return description;
   }
@@ -85,8 +83,7 @@ public String getDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDescription(String newDescription)
+  public void setDescription(String newDescription)
   {
     String oldDescription = description;
     description = newDescription;

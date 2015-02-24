@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Str
  * An implementation of the model object '<em><b>String Attribute Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringOperator getOperator()
+  public StringOperator getOperator()
   {
     return operator;
   }
@@ -106,8 +104,7 @@ public StringOperator getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(StringOperator newOperator)
+  public void setOperator(StringOperator newOperator)
   {
     StringOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -120,8 +117,7 @@ public void setOperator(StringOperator newOperator)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getPattern()
+  public String getPattern()
   {
     return pattern;
   }
@@ -131,8 +127,7 @@ public String getPattern()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPattern(String newPattern)
+  public void setPattern(String newPattern)
   {
     String oldPattern = pattern;
     pattern = newPattern;

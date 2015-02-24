@@ -84,8 +84,7 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -96,8 +95,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleModel createSimpleModel()
+  public SimpleModel createSimpleModel()
   {
     SimpleModelImpl simpleModel = new SimpleModelImpl();
     return simpleModel;
@@ -108,8 +106,7 @@ public SimpleModel createSimpleModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MandatoryModel createMandatoryModel()
+  public MandatoryModel createMandatoryModel()
   {
     MandatoryModelImpl mandatoryModel = new MandatoryModelImpl();
     return mandatoryModel;
@@ -120,8 +117,7 @@ public MandatoryModel createMandatoryModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LoopedModel createLoopedModel()
+  public LoopedModel createLoopedModel()
   {
     LoopedModelImpl loopedModel = new LoopedModelImpl();
     return loopedModel;
@@ -132,8 +128,7 @@ public LoopedModel createLoopedModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GroupLoopedModel createGroupLoopedModel()
+  public GroupLoopedModel createGroupLoopedModel()
   {
     GroupLoopedModelImpl groupLoopedModel = new GroupLoopedModelImpl();
     return groupLoopedModel;
@@ -144,8 +139,7 @@ public GroupLoopedModel createGroupLoopedModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LoopedAlternativeModel createLoopedAlternativeModel()
+  public LoopedAlternativeModel createLoopedAlternativeModel()
   {
     LoopedAlternativeModelImpl loopedAlternativeModel = new LoopedAlternativeModelImpl();
     return loopedAlternativeModel;
@@ -156,8 +150,7 @@ public LoopedAlternativeModel createLoopedAlternativeModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681Model createBug304681Model()
+  public Bug304681Model createBug304681Model()
   {
     Bug304681ModelImpl bug304681Model = new Bug304681ModelImpl();
     return bug304681Model;
@@ -168,8 +161,7 @@ public Bug304681Model createBug304681Model()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681Feature createBug304681Feature()
+  public Bug304681Feature createBug304681Feature()
   {
     Bug304681FeatureImpl bug304681Feature = new Bug304681FeatureImpl();
     return bug304681Feature;
@@ -180,8 +172,7 @@ public Bug304681Feature createBug304681Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681Attribute createBug304681Attribute()
+  public Bug304681Attribute createBug304681Attribute()
   {
     Bug304681AttributeImpl bug304681Attribute = new Bug304681AttributeImpl();
     return bug304681Attribute;
@@ -192,8 +183,7 @@ public Bug304681Attribute createBug304681Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug304681Reference createBug304681Reference()
+  public Bug304681Reference createBug304681Reference()
   {
     Bug304681ReferenceImpl bug304681Reference = new Bug304681ReferenceImpl();
     return bug304681Reference;
@@ -204,8 +194,7 @@ public Bug304681Reference createBug304681Reference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnorderedGroupsTestPackage getUnorderedGroupsTestPackage()
+  public UnorderedGroupsTestPackage getUnorderedGroupsTestPackage()
   {
     return (UnorderedGroupsTestPackage)getEPackage();
   }

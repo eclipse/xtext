@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sca
  * An implementation of the model object '<em><b>External Open</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class ExternalOpenImpl extends ViewActionImpl implements ExternalOpen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getUrl()
+  public ScalarExpression getUrl()
   {
     return url;
   }
@@ -94,8 +92,7 @@ public ScalarExpression getUrl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setUrl(ScalarExpression newUrl)
+  public void setUrl(ScalarExpression newUrl)
   {
     if (newUrl != url)
     {

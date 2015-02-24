@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Enu
  * An implementation of the model object '<em><b>Child1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -117,8 +116,7 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -128,8 +126,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -142,8 +139,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isBool()
+  public boolean isBool()
   {
     return bool;
   }
@@ -153,8 +149,7 @@ public boolean isBool()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBool(boolean newBool)
+  public void setBool(boolean newBool)
   {
     boolean oldBool = bool;
     bool = newBool;
@@ -167,8 +162,7 @@ public void setBool(boolean newBool)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EnumType getEnumType()
+  public EnumType getEnumType()
   {
     return enumType;
   }
@@ -178,8 +172,7 @@ public EnumType getEnumType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEnumType(EnumType newEnumType)
+  public void setEnumType(EnumType newEnumType)
   {
     EnumType oldEnumType = enumType;
     enumType = newEnumType == null ? ENUM_TYPE_EDEFAULT : newEnumType;

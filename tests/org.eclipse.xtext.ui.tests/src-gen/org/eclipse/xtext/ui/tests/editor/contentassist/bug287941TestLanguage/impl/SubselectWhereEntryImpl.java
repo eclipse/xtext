@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sub
  * An implementation of the model object '<em><b>Subselect Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -111,8 +110,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getAlias()
+  public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -142,8 +140,7 @@ public FromEntry getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(FromEntry newAlias)
+  public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -156,8 +153,7 @@ public void setAlias(FromEntry newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReference()
+  public EReference getReference()
   {
     if (reference != null && reference.eIsProxy())
     {
@@ -187,8 +183,7 @@ public EReference getReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReference(EReference newReference)
+  public void setReference(EReference newReference)
   {
     EReference oldReference = reference;
     reference = newReference;
@@ -201,8 +196,7 @@ public void setReference(EReference newReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isNotIn()
+  public boolean isNotIn()
   {
     return notIn;
   }
@@ -212,8 +206,7 @@ public boolean isNotIn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNotIn(boolean newNotIn)
+  public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
     notIn = newNotIn;
@@ -226,8 +219,7 @@ public void setNotIn(boolean newNotIn)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MQLquery getSubQuery()
+  public MQLquery getSubQuery()
   {
     return subQuery;
   }
@@ -254,8 +246,7 @@ public MQLquery getSubQuery()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSubQuery(MQLquery newSubQuery)
+  public void setSubQuery(MQLquery newSubQuery)
   {
     if (newSubQuery != subQuery)
     {

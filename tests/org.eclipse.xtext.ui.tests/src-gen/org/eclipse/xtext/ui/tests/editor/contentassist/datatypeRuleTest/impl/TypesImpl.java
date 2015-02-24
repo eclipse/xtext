@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.Types;
  * An implementation of the model object '<em><b>Types</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class TypesImpl extends ModelImpl implements Types
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Type> getTypes()
+  public EList<Type> getTypes()
   {
     if (types == null)
     {

@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTes
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<EObject> getAttribute()
+  public EList<EObject> getAttribute()
   {
     if (attribute == null)
     {

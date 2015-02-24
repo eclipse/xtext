@@ -13,20 +13,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSingleCodetemplateLexer extends Lexer {
     public static final int RULE_ID=16;
-    public static final int DollarSignLeftCurlyBracket=7;
-    public static final int RULE_STRING=17;
     public static final int DollarSign=9;
     public static final int RightParenthesis=11;
-    public static final int DollarSignDollarSign=6;
-    public static final int Templates=4;
     public static final int RULE_ANY_OTHER=19;
     public static final int LeftParenthesis=10;
     public static final int Colon=14;
-    public static final int RULE_WS=18;
     public static final int EOF=-1;
-    public static final int Comma=12;
     public static final int For=5;
     public static final int FullStop=13;
+    public static final int DollarSignLeftCurlyBracket=7;
+    public static final int RULE_STRING=17;
+    public static final int DollarSignDollarSign=6;
+    public static final int Templates=4;
+    public static final int RULE_WS=18;
+    public static final int Comma=12;
     public static final int GreaterThanSignGreaterThanSign=8;
     public static final int RightCurlyBracket=15;
 

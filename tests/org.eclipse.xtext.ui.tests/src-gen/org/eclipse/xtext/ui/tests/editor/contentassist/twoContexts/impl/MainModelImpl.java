@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPa
  * An implementation of the model object '<em><b>Main Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class MainModelImpl extends MinimalEObjectImpl.Container implements MainM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AnElement> getElements()
+  public EList<AnElement> getElements()
   {
     if (elements == null)
     {

@@ -90,8 +90,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -102,8 +101,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Import createImport()
+  public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -114,8 +112,7 @@ public Import createImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Type createType()
+  public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -126,8 +123,7 @@ public Type createType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DataType createDataType()
+  public DataType createDataType()
   {
     DataTypeImpl dataType = new DataTypeImpl();
     return dataType;
@@ -138,8 +134,7 @@ public DataType createDataType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class createClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class createClass()
   {
     ClassImpl class_ = new ClassImpl();
     return class_;
@@ -150,8 +145,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class cre
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Property createProperty()
+  public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
     return property;
@@ -162,8 +156,7 @@ public Property createProperty()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute createAttribute()
+  public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -174,8 +167,7 @@ public Attribute createAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Reference createReference()
+  public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
@@ -186,8 +178,7 @@ public Reference createReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DomainModelTestPackage getDomainModelTestPackage()
+  public DomainModelTestPackage getDomainModelTestPackage()
   {
     return (DomainModelTestPackage)getEPackage();
   }

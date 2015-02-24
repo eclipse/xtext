@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.Cop
  * An implementation of the model object '<em><b>Copy Field Name To Variable Stmt</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -116,8 +115,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getLine()
+  public int getLine()
   {
     return line;
   }
@@ -127,8 +125,7 @@ public int getLine()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLine(int newLine)
+  public void setLine(int newLine)
   {
     int oldLine = line;
     line = newLine;
@@ -141,8 +138,7 @@ public void setLine(int newLine)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getColumn()
+  public int getColumn()
   {
     return column;
   }
@@ -152,8 +148,7 @@ public int getColumn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setColumn(int newColumn)
+  public void setColumn(int newColumn)
   {
     int oldColumn = column;
     column = newColumn;
@@ -166,8 +161,7 @@ public void setColumn(int newColumn)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -177,8 +171,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * An implementation of the model object '<em><b>Familie</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -116,8 +115,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -127,8 +125,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -141,8 +138,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Erwachsener getMutter()
+  public Erwachsener getMutter()
   {
     if (mutter != null && mutter.eIsProxy())
     {
@@ -172,8 +168,7 @@ public Erwachsener getMutter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMutter(Erwachsener newMutter)
+  public void setMutter(Erwachsener newMutter)
   {
     Erwachsener oldMutter = mutter;
     mutter = newMutter;
@@ -186,8 +181,7 @@ public void setMutter(Erwachsener newMutter)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Erwachsener getVater()
+  public Erwachsener getVater()
   {
     if (vater != null && vater.eIsProxy())
     {
@@ -217,8 +211,7 @@ public Erwachsener getVater()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVater(Erwachsener newVater)
+  public void setVater(Erwachsener newVater)
   {
     Erwachsener oldVater = vater;
     vater = newVater;
@@ -231,8 +224,7 @@ public void setVater(Erwachsener newVater)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Kind> getKinder()
+  public EList<Kind> getKinder()
   {
     if (kinder == null)
     {

@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Lon
  * An implementation of the model object '<em><b>Long Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public long getValue()
+  public long getValue()
   {
     return value;
   }
@@ -84,8 +82,7 @@ public long getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(long newValue)
+  public void setValue(long newValue)
   {
     long oldValue = value;
     value = newValue;

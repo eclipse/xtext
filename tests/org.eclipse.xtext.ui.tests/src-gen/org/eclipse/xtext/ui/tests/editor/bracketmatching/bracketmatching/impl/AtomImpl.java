@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.Bracket
  * An implementation of the model object '<em><b>Atom</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class AtomImpl extends ExpressionImpl implements Atom
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -84,8 +82,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

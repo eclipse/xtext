@@ -13,7 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangRuntimeModule}
  */
- @SuppressWarnings("all")
+@SuppressWarnings("all")
 public abstract class AbstractXImportSectionTestLangRuntimeModule extends org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule {
 
 	protected Properties properties = null;

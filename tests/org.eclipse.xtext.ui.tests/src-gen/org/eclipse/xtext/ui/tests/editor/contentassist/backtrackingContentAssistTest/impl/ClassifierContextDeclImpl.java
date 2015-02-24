@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Classifier Context Decl</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -118,8 +117,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getSelfName()
+  public String getSelfName()
   {
     return selfName;
   }
@@ -129,8 +127,7 @@ public String getSelfName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSelfName(String newSelfName)
+  public void setSelfName(String newSelfName)
   {
     String oldSelfName = selfName;
     selfName = newSelfName;
@@ -143,8 +140,7 @@ public void setSelfName(String newSelfName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClassifierRef getClassifier()
+  public ClassifierRef getClassifier()
   {
     return classifier;
   }
@@ -171,8 +167,7 @@ public ClassifierRef getClassifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setClassifier(ClassifierRef newClassifier)
+  public void setClassifier(ClassifierRef newClassifier)
   {
     if (newClassifier != classifier)
     {
@@ -193,8 +188,7 @@ public void setClassifier(ClassifierRef newClassifier)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Invariant> getInvariants()
+  public EList<Invariant> getInvariants()
   {
     if (invariants == null)
     {
@@ -208,8 +202,7 @@ public EList<Invariant> getInvariants()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Definition> getDefinitions()
+  public EList<Definition> getDefinitions()
   {
     if (definitions == null)
     {

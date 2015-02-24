@@ -76,8 +76,7 @@ public class FoldingFactoryImpl extends EFactoryImpl implements FoldingFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FoldingModel createFoldingModel()
+  public FoldingModel createFoldingModel()
   {
     FoldingModelImpl foldingModel = new FoldingModelImpl();
     return foldingModel;
@@ -88,8 +87,7 @@ public FoldingModel createFoldingModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Element createElement()
+  public Element createElement()
   {
     ElementImpl element = new ElementImpl();
     return element;
@@ -100,8 +98,7 @@ public Element createElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FoldingPackage getFoldingPackage()
+  public FoldingPackage getFoldingPackage()
   {
     return (FoldingPackage)getEPackage();
   }

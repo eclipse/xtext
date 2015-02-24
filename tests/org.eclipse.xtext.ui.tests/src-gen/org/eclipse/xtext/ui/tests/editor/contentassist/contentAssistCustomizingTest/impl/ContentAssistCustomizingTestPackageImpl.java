@@ -112,8 +112,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -123,8 +122,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Types()
+  public EReference getModel_Types()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -134,8 +132,7 @@ public EReference getModel_Types()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getType()
+  public EClass getType()
   {
     return typeEClass;
   }
@@ -145,8 +142,7 @@ public EClass getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getType_Name()
+  public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -156,8 +152,7 @@ public EAttribute getType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getType_SuperType()
+  public EReference getType_SuperType()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
   }
@@ -167,8 +162,7 @@ public EReference getType_SuperType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypeRef()
+  public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -178,8 +172,7 @@ public EClass getTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTypeRef_Type()
+  public EReference getTypeRef_Type()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -189,8 +182,7 @@ public EReference getTypeRef_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistCustomizingTestFactory getContentAssistCustomizingTestFactory()
+  public ContentAssistCustomizingTestFactory getContentAssistCustomizingTestFactory()
   {
     return (ContentAssistCustomizingTestFactory)getEFactoryInstance();
   }

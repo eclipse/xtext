@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Ope
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -234,8 +233,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isAbstract()
+  public boolean isAbstract()
   {
     return abstract_;
   }
@@ -245,8 +243,7 @@ public boolean isAbstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAbstract(boolean newAbstract)
+  public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -259,8 +256,7 @@ public void setAbstract(boolean newAbstract)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isTransient()
+  public boolean isTransient()
   {
     return transient_;
   }
@@ -270,8 +266,7 @@ public boolean isTransient()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTransient(boolean newTransient)
+  public void setTransient(boolean newTransient)
   {
     boolean oldTransient = transient_;
     transient_ = newTransient;
@@ -284,8 +279,7 @@ public void setTransient(boolean newTransient)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -295,8 +289,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -309,8 +302,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class getSuperClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
     {
@@ -340,8 +332,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Cla
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class newSuperClass)
+  public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class oldSuperClass = superClass;
     superClass = newSuperClass;
@@ -354,8 +345,7 @@ public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.bug289
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getImplementedInterfaces()
+  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getImplementedInterfaces()
   {
     if (implementedInterfaces == null)
     {
@@ -369,8 +359,7 @@ public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLangua
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getClassNumber()
+  public int getClassNumber()
   {
     return classNumber;
   }
@@ -380,8 +369,7 @@ public int getClassNumber()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setClassNumber(int newClassNumber)
+  public void setClassNumber(int newClassNumber)
   {
     int oldClassNumber = classNumber;
     classNumber = newClassNumber;
@@ -394,8 +382,7 @@ public void setClassNumber(int newClassNumber)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getQuid()
+  public int getQuid()
   {
     return quid;
   }
@@ -405,8 +392,7 @@ public int getQuid()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setQuid(int newQuid)
+  public void setQuid(int newQuid)
   {
     int oldQuid = quid;
     quid = newQuid;
@@ -419,8 +405,7 @@ public void setQuid(int newQuid)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getDocumentation()
+  public String getDocumentation()
   {
     return documentation;
   }
@@ -430,8 +415,7 @@ public String getDocumentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDocumentation(String newDocumentation)
+  public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
     documentation = newDocumentation;
@@ -444,8 +428,7 @@ public void setDocumentation(String newDocumentation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Attribute> getAttributes()
+  public EList<Attribute> getAttributes()
   {
     if (attributes == null)
     {
@@ -459,8 +442,7 @@ public EList<Attribute> getAttributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Operation> getOperations()
+  public EList<Operation> getOperations()
   {
     if (operations == null)
     {

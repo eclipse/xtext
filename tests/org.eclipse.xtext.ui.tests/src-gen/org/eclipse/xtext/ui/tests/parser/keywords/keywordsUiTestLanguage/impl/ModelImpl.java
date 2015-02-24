@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -221,8 +220,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFirst()
+  public boolean isFirst()
   {
     return first;
   }
@@ -232,8 +230,7 @@ public boolean isFirst()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFirst(boolean newFirst)
+  public void setFirst(boolean newFirst)
   {
     boolean oldFirst = first;
     first = newFirst;
@@ -246,8 +243,7 @@ public void setFirst(boolean newFirst)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isSecond()
+  public boolean isSecond()
   {
     return second;
   }
@@ -257,8 +253,7 @@ public boolean isSecond()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSecond(boolean newSecond)
+  public void setSecond(boolean newSecond)
   {
     boolean oldSecond = second;
     second = newSecond;
@@ -271,8 +266,7 @@ public void setSecond(boolean newSecond)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isThird()
+  public boolean isThird()
   {
     return third;
   }
@@ -282,8 +276,7 @@ public boolean isThird()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setThird(boolean newThird)
+  public void setThird(boolean newThird)
   {
     boolean oldThird = third;
     third = newThird;
@@ -296,8 +289,7 @@ public void setThird(boolean newThird)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isForth()
+  public boolean isForth()
   {
     return forth;
   }
@@ -307,8 +299,7 @@ public boolean isForth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setForth(boolean newForth)
+  public void setForth(boolean newForth)
   {
     boolean oldForth = forth;
     forth = newForth;
@@ -321,8 +312,7 @@ public void setForth(boolean newForth)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFifth()
+  public boolean isFifth()
   {
     return fifth;
   }
@@ -332,8 +322,7 @@ public boolean isFifth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFifth(boolean newFifth)
+  public void setFifth(boolean newFifth)
   {
     boolean oldFifth = fifth;
     fifth = newFifth;
@@ -346,8 +335,7 @@ public void setFifth(boolean newFifth)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isSixth()
+  public boolean isSixth()
   {
     return sixth;
   }
@@ -357,8 +345,7 @@ public boolean isSixth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSixth(boolean newSixth)
+  public void setSixth(boolean newSixth)
   {
     boolean oldSixth = sixth;
     sixth = newSixth;
@@ -371,8 +358,7 @@ public void setSixth(boolean newSixth)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isSeventh()
+  public boolean isSeventh()
   {
     return seventh;
   }
@@ -382,8 +368,7 @@ public boolean isSeventh()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSeventh(boolean newSeventh)
+  public void setSeventh(boolean newSeventh)
   {
     boolean oldSeventh = seventh;
     seventh = newSeventh;
@@ -396,8 +381,7 @@ public void setSeventh(boolean newSeventh)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isEighth()
+  public boolean isEighth()
   {
     return eighth;
   }
@@ -407,8 +391,7 @@ public boolean isEighth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEighth(boolean newEighth)
+  public void setEighth(boolean newEighth)
   {
     boolean oldEighth = eighth;
     eighth = newEighth;

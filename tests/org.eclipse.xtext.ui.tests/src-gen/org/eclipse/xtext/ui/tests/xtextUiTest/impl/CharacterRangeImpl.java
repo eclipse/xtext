@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Character Range</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -77,8 +76,7 @@ public class CharacterRangeImpl extends AbstractElementImpl implements Character
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Keyword getLeft()
+  public Keyword getLeft()
   {
     return left;
   }
@@ -105,8 +103,7 @@ public Keyword getLeft()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLeft(Keyword newLeft)
+  public void setLeft(Keyword newLeft)
   {
     if (newLeft != left)
     {
@@ -127,8 +124,7 @@ public void setLeft(Keyword newLeft)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Keyword getRight()
+  public Keyword getRight()
   {
     return right;
   }
@@ -155,8 +151,7 @@ public Keyword getRight()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRight(Keyword newRight)
+  public void setRight(Keyword newRight)
   {
     if (newRight != right)
     {

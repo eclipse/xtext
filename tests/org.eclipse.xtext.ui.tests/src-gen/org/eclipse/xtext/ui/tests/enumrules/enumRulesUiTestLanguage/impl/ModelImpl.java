@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -98,8 +97,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ExistingEnum getExisting()
+  public ExistingEnum getExisting()
   {
     return existing;
   }
@@ -109,8 +107,7 @@ public ExistingEnum getExisting()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExisting(ExistingEnum newExisting)
+  public void setExisting(ExistingEnum newExisting)
   {
     ExistingEnum oldExisting = existing;
     existing = newExisting == null ? EXISTING_EDEFAULT : newExisting;
@@ -123,8 +120,7 @@ public void setExisting(ExistingEnum newExisting)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GeneratedEnum getGenerated()
+  public GeneratedEnum getGenerated()
   {
     return generated;
   }
@@ -134,8 +130,7 @@ public GeneratedEnum getGenerated()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGenerated(GeneratedEnum newGenerated)
+  public void setGenerated(GeneratedEnum newGenerated)
   {
     GeneratedEnum oldGenerated = generated;
     generated = newGenerated == null ? GENERATED_EDEFAULT : newGenerated;

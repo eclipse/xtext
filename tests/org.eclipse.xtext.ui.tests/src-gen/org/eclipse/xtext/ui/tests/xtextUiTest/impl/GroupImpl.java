@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class GroupImpl extends AbstractElementImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractElement> getTokens()
+  public EList<AbstractElement> getTokens()
   {
     if (tokens == null)
     {

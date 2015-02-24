@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Bug304681 Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -158,8 +157,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getShortDescription()
+  public String getShortDescription()
   {
     return shortDescription;
   }
@@ -169,8 +167,7 @@ public String getShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setShortDescription(String newShortDescription)
+  public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -183,8 +180,7 @@ public void setShortDescription(String newShortDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLongDescription()
+  public String getLongDescription()
   {
     return longDescription;
   }
@@ -194,8 +190,7 @@ public String getLongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLongDescription(String newLongDescription)
+  public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;
@@ -208,8 +203,7 @@ public void setLongDescription(String newLongDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getUid()
+  public String getUid()
   {
     return uid;
   }
@@ -219,8 +213,7 @@ public String getUid()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setUid(String newUid)
+  public void setUid(String newUid)
   {
     String oldUid = uid;
     uid = newUid;
@@ -233,8 +226,7 @@ public void setUid(String newUid)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFlag()
+  public boolean isFlag()
   {
     return flag;
   }
@@ -244,8 +236,7 @@ public boolean isFlag()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFlag(boolean newFlag)
+  public void setFlag(boolean newFlag)
   {
     boolean oldFlag = flag;
     flag = newFlag;
@@ -258,8 +249,7 @@ public void setFlag(boolean newFlag)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Bug304681Feature> getFeatures()
+  public EList<Bug304681Feature> getFeatures()
   {
     if (features == null)
     {

@@ -168,8 +168,7 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -179,8 +178,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_First()
+  public EReference getModel_First()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -190,8 +188,7 @@ public EReference getModel_First()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Second()
+  public EReference getModel_Second()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -201,8 +198,7 @@ public EReference getModel_Second()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Thrird()
+  public EReference getModel_Thrird()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -212,8 +208,7 @@ public EReference getModel_Thrird()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Forth()
+  public EReference getModel_Forth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
   }
@@ -223,8 +218,7 @@ public EReference getModel_Forth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Fifth()
+  public EReference getModel_Fifth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
   }
@@ -234,8 +228,7 @@ public EReference getModel_Fifth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Model()
+  public EReference getModel_Model()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
   }
@@ -245,8 +238,7 @@ public EReference getModel_Model()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimpleModel()
+  public EClass getSimpleModel()
   {
     return simpleModelEClass;
   }
@@ -256,8 +248,7 @@ public EClass getSimpleModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Visibility()
+  public EAttribute getSimpleModel_Visibility()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(0);
   }
@@ -267,8 +258,7 @@ public EAttribute getSimpleModel_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Static()
+  public EAttribute getSimpleModel_Static()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(1);
   }
@@ -278,8 +268,7 @@ public EAttribute getSimpleModel_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Synchronized()
+  public EAttribute getSimpleModel_Synchronized()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(2);
   }
@@ -289,8 +278,7 @@ public EAttribute getSimpleModel_Synchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Abstract()
+  public EAttribute getSimpleModel_Abstract()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(3);
   }
@@ -300,8 +288,7 @@ public EAttribute getSimpleModel_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Final()
+  public EAttribute getSimpleModel_Final()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(4);
   }
@@ -311,8 +298,7 @@ public EAttribute getSimpleModel_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleModel_Name()
+  public EAttribute getSimpleModel_Name()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(5);
   }
@@ -322,8 +308,7 @@ public EAttribute getSimpleModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMandatoryModel()
+  public EClass getMandatoryModel()
   {
     return mandatoryModelEClass;
   }
@@ -333,8 +318,7 @@ public EClass getMandatoryModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Visibility()
+  public EAttribute getMandatoryModel_Visibility()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(0);
   }
@@ -344,8 +328,7 @@ public EAttribute getMandatoryModel_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Static()
+  public EAttribute getMandatoryModel_Static()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(1);
   }
@@ -355,8 +338,7 @@ public EAttribute getMandatoryModel_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Synchronized()
+  public EAttribute getMandatoryModel_Synchronized()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(2);
   }
@@ -366,8 +348,7 @@ public EAttribute getMandatoryModel_Synchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Abstract()
+  public EAttribute getMandatoryModel_Abstract()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(3);
   }
@@ -377,8 +358,7 @@ public EAttribute getMandatoryModel_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Final()
+  public EAttribute getMandatoryModel_Final()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(4);
   }
@@ -388,8 +368,7 @@ public EAttribute getMandatoryModel_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMandatoryModel_Name()
+  public EAttribute getMandatoryModel_Name()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(5);
   }
@@ -399,8 +378,7 @@ public EAttribute getMandatoryModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getLoopedModel()
+  public EClass getLoopedModel()
   {
     return loopedModelEClass;
   }
@@ -410,8 +388,7 @@ public EClass getLoopedModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Visibility()
+  public EAttribute getLoopedModel_Visibility()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(0);
   }
@@ -421,8 +398,7 @@ public EAttribute getLoopedModel_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Static()
+  public EAttribute getLoopedModel_Static()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(1);
   }
@@ -432,8 +408,7 @@ public EAttribute getLoopedModel_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Synchronized()
+  public EAttribute getLoopedModel_Synchronized()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(2);
   }
@@ -443,8 +418,7 @@ public EAttribute getLoopedModel_Synchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Abstract()
+  public EAttribute getLoopedModel_Abstract()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(3);
   }
@@ -454,8 +428,7 @@ public EAttribute getLoopedModel_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Final()
+  public EAttribute getLoopedModel_Final()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(4);
   }
@@ -465,8 +438,7 @@ public EAttribute getLoopedModel_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedModel_Name()
+  public EAttribute getLoopedModel_Name()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(5);
   }
@@ -476,8 +448,7 @@ public EAttribute getLoopedModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGroupLoopedModel()
+  public EClass getGroupLoopedModel()
   {
     return groupLoopedModelEClass;
   }
@@ -487,8 +458,7 @@ public EClass getGroupLoopedModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Visibility()
+  public EAttribute getGroupLoopedModel_Visibility()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(0);
   }
@@ -498,8 +468,7 @@ public EAttribute getGroupLoopedModel_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Static()
+  public EAttribute getGroupLoopedModel_Static()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(1);
   }
@@ -509,8 +478,7 @@ public EAttribute getGroupLoopedModel_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Synchronized()
+  public EAttribute getGroupLoopedModel_Synchronized()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(2);
   }
@@ -520,8 +488,7 @@ public EAttribute getGroupLoopedModel_Synchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Abstract()
+  public EAttribute getGroupLoopedModel_Abstract()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(3);
   }
@@ -531,8 +498,7 @@ public EAttribute getGroupLoopedModel_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Final()
+  public EAttribute getGroupLoopedModel_Final()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(4);
   }
@@ -542,8 +508,7 @@ public EAttribute getGroupLoopedModel_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGroupLoopedModel_Name()
+  public EAttribute getGroupLoopedModel_Name()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(5);
   }
@@ -553,8 +518,7 @@ public EAttribute getGroupLoopedModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getLoopedAlternativeModel()
+  public EClass getLoopedAlternativeModel()
   {
     return loopedAlternativeModelEClass;
   }
@@ -564,8 +528,7 @@ public EClass getLoopedAlternativeModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Visibility()
+  public EAttribute getLoopedAlternativeModel_Visibility()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(0);
   }
@@ -575,8 +538,7 @@ public EAttribute getLoopedAlternativeModel_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Static()
+  public EAttribute getLoopedAlternativeModel_Static()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(1);
   }
@@ -586,8 +548,7 @@ public EAttribute getLoopedAlternativeModel_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Synchronized()
+  public EAttribute getLoopedAlternativeModel_Synchronized()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(2);
   }
@@ -597,8 +558,7 @@ public EAttribute getLoopedAlternativeModel_Synchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Abstract()
+  public EAttribute getLoopedAlternativeModel_Abstract()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(3);
   }
@@ -608,8 +568,7 @@ public EAttribute getLoopedAlternativeModel_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Final()
+  public EAttribute getLoopedAlternativeModel_Final()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(4);
   }
@@ -619,8 +578,7 @@ public EAttribute getLoopedAlternativeModel_Final()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLoopedAlternativeModel_Name()
+  public EAttribute getLoopedAlternativeModel_Name()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(5);
   }
@@ -630,8 +588,7 @@ public EAttribute getLoopedAlternativeModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBug304681Model()
+  public EClass getBug304681Model()
   {
     return bug304681ModelEClass;
   }
@@ -641,8 +598,7 @@ public EClass getBug304681Model()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBug304681Model_ShortDescription()
+  public EAttribute getBug304681Model_ShortDescription()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(0);
   }
@@ -652,8 +608,7 @@ public EAttribute getBug304681Model_ShortDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBug304681Model_LongDescription()
+  public EAttribute getBug304681Model_LongDescription()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(1);
   }
@@ -663,8 +618,7 @@ public EAttribute getBug304681Model_LongDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBug304681Model_Uid()
+  public EAttribute getBug304681Model_Uid()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(2);
   }
@@ -674,8 +628,7 @@ public EAttribute getBug304681Model_Uid()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBug304681Model_Flag()
+  public EAttribute getBug304681Model_Flag()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(3);
   }
@@ -685,8 +638,7 @@ public EAttribute getBug304681Model_Flag()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBug304681Model_Features()
+  public EReference getBug304681Model_Features()
   {
     return (EReference)bug304681ModelEClass.getEStructuralFeatures().get(4);
   }
@@ -696,8 +648,7 @@ public EReference getBug304681Model_Features()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBug304681Feature()
+  public EClass getBug304681Feature()
   {
     return bug304681FeatureEClass;
   }
@@ -707,8 +658,7 @@ public EClass getBug304681Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBug304681Feature_Name()
+  public EAttribute getBug304681Feature_Name()
   {
     return (EAttribute)bug304681FeatureEClass.getEStructuralFeatures().get(0);
   }
@@ -718,8 +668,7 @@ public EAttribute getBug304681Feature_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBug304681Attribute()
+  public EClass getBug304681Attribute()
   {
     return bug304681AttributeEClass;
   }
@@ -729,8 +678,7 @@ public EClass getBug304681Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBug304681Reference()
+  public EClass getBug304681Reference()
   {
     return bug304681ReferenceEClass;
   }
@@ -740,8 +688,7 @@ public EClass getBug304681Reference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnorderedGroupsTestFactory getUnorderedGroupsTestFactory()
+  public UnorderedGroupsTestFactory getUnorderedGroupsTestFactory()
   {
     return (UnorderedGroupsTestFactory)getEFactoryInstance();
   }

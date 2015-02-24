@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.Sta
  * An implementation of the model object '<em><b>State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -159,8 +158,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isIsInitial()
+  public boolean isIsInitial()
   {
     return isInitial;
   }
@@ -170,8 +168,7 @@ public boolean isIsInitial()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIsInitial(boolean newIsInitial)
+  public void setIsInitial(boolean newIsInitial)
   {
     boolean oldIsInitial = isInitial;
     isInitial = newIsInitial;
@@ -184,8 +181,7 @@ public void setIsInitial(boolean newIsInitial)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isIsFinal()
+  public boolean isIsFinal()
   {
     return isFinal;
   }
@@ -195,8 +191,7 @@ public boolean isIsFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIsFinal(boolean newIsFinal)
+  public void setIsFinal(boolean newIsFinal)
   {
     boolean oldIsFinal = isFinal;
     isFinal = newIsFinal;
@@ -209,8 +204,7 @@ public void setIsFinal(boolean newIsFinal)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StateType getStateKind()
+  public StateType getStateKind()
   {
     return stateKind;
   }
@@ -220,8 +214,7 @@ public StateType getStateKind()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStateKind(StateType newStateKind)
+  public void setStateKind(StateType newStateKind)
   {
     StateType oldStateKind = stateKind;
     stateKind = newStateKind == null ? STATE_KIND_EDEFAULT : newStateKind;
@@ -234,8 +227,7 @@ public void setStateKind(StateType newStateKind)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getStateName()
+  public String getStateName()
   {
     return stateName;
   }
@@ -245,8 +237,7 @@ public String getStateName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStateName(String newStateName)
+  public void setStateName(String newStateName)
   {
     String oldStateName = stateName;
     stateName = newStateName;
@@ -259,8 +250,7 @@ public void setStateName(String newStateName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLabel()
+  public String getLabel()
   {
     return label;
   }
@@ -270,8 +260,7 @@ public String getLabel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLabel(String newLabel)
+  public void setLabel(String newLabel)
   {
     String oldLabel = label;
     label = newLabel;

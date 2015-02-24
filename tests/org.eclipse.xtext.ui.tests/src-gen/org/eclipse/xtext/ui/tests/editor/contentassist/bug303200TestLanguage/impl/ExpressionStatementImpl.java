@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pos
  * An implementation of the model object '<em><b>Expression Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PostfixExpression getExpression()
+  public PostfixExpression getExpression()
   {
     return expression;
   }
@@ -94,8 +92,7 @@ public PostfixExpression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(PostfixExpression newExpression)
+  public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)
     {

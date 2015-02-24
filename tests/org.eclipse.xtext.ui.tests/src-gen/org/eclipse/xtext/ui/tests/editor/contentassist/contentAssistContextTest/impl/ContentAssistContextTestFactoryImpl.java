@@ -81,8 +81,7 @@ public class ContentAssistContextTestFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FirstLevel createFirstLevel()
+  public FirstLevel createFirstLevel()
   {
     FirstLevelImpl firstLevel = new FirstLevelImpl();
     return firstLevel;
@@ -93,8 +92,7 @@ public FirstLevel createFirstLevel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SecondLevelA createSecondLevelA()
+  public SecondLevelA createSecondLevelA()
   {
     SecondLevelAImpl secondLevelA = new SecondLevelAImpl();
     return secondLevelA;
@@ -105,8 +103,7 @@ public SecondLevelA createSecondLevelA()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SecondLevelB createSecondLevelB()
+  public SecondLevelB createSecondLevelB()
   {
     SecondLevelBImpl secondLevelB = new SecondLevelBImpl();
     return secondLevelB;
@@ -117,8 +114,7 @@ public SecondLevelB createSecondLevelB()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ThirdLevelA1 createThirdLevelA1()
+  public ThirdLevelA1 createThirdLevelA1()
   {
     ThirdLevelA1Impl thirdLevelA1 = new ThirdLevelA1Impl();
     return thirdLevelA1;
@@ -129,8 +125,7 @@ public ThirdLevelA1 createThirdLevelA1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ThirdLevelA2 createThirdLevelA2()
+  public ThirdLevelA2 createThirdLevelA2()
   {
     ThirdLevelA2Impl thirdLevelA2 = new ThirdLevelA2Impl();
     return thirdLevelA2;
@@ -141,8 +136,7 @@ public ThirdLevelA2 createThirdLevelA2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ThirdLevelB1 createThirdLevelB1()
+  public ThirdLevelB1 createThirdLevelB1()
   {
     ThirdLevelB1Impl thirdLevelB1 = new ThirdLevelB1Impl();
     return thirdLevelB1;
@@ -153,8 +147,7 @@ public ThirdLevelB1 createThirdLevelB1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ThirdLevelB2 createThirdLevelB2()
+  public ThirdLevelB2 createThirdLevelB2()
   {
     ThirdLevelB2Impl thirdLevelB2 = new ThirdLevelB2Impl();
     return thirdLevelB2;
@@ -165,8 +158,7 @@ public ThirdLevelB2 createThirdLevelB2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistContextTestPackage getContentAssistContextTestPackage()
+  public ContentAssistContextTestPackage getContentAssistContextTestPackage()
   {
     return (ContentAssistContextTestPackage)getEPackage();
   }

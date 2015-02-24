@@ -104,8 +104,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMain()
+  public EClass getMain()
   {
     return mainEClass;
   }
@@ -115,8 +114,7 @@ public EClass getMain()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMain_Elements()
+  public EReference getMain_Elements()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getMain_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElement()
+  public EClass getElement()
   {
     return elementEClass;
   }
@@ -137,8 +134,7 @@ public EClass getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElement_Doc()
+  public EAttribute getElement_Doc()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -148,8 +144,7 @@ public EAttribute getElement_Doc()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElement_Name()
+  public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -159,8 +154,7 @@ public EAttribute getElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_Contained()
+  public EReference getElement_Contained()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
@@ -170,8 +164,7 @@ public EReference getElement_Contained()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_Referenced()
+  public EReference getElement_Referenced()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(3);
   }
@@ -181,8 +174,7 @@ public EReference getElement_Referenced()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
+  public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
   {
     return (QuickfixCrossrefFactory)getEFactoryInstance();
   }

@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Dou
  * An implementation of the model object '<em><b>Double Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class DoubleWhereEntryImpl extends NumericAttributeWhereEntryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public double getValue()
+  public double getValue()
   {
     return value;
   }
@@ -84,8 +82,7 @@ public double getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(double newValue)
+  public void setValue(double newValue)
   {
     double oldValue = value;
     value = newValue;

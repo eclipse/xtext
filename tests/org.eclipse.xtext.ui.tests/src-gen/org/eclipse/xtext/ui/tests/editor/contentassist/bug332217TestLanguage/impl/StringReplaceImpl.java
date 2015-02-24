@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Replace</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getValue()
+  public ScalarExpression getValue()
   {
     return value;
   }
@@ -116,8 +114,7 @@ public ScalarExpression getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(ScalarExpression newValue)
+  public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)
     {
@@ -138,8 +135,7 @@ public void setValue(ScalarExpression newValue)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getMatch()
+  public ScalarExpression getMatch()
   {
     return match;
   }
@@ -166,8 +162,7 @@ public ScalarExpression getMatch()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMatch(ScalarExpression newMatch)
+  public void setMatch(ScalarExpression newMatch)
   {
     if (newMatch != match)
     {
@@ -188,8 +183,7 @@ public void setMatch(ScalarExpression newMatch)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getReplacement()
+  public ScalarExpression getReplacement()
   {
     return replacement;
   }
@@ -216,8 +210,7 @@ public ScalarExpression getReplacement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReplacement(ScalarExpression newReplacement)
+  public void setReplacement(ScalarExpression newReplacement)
   {
     if (newReplacement != replacement)
     {

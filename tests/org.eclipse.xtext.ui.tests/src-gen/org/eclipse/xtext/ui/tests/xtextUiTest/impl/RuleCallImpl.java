@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Rule Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -65,8 +64,7 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRule getRule()
+  public AbstractRule getRule()
   {
     if (rule != null && rule.eIsProxy())
     {
@@ -96,8 +94,7 @@ public AbstractRule getRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRule(AbstractRule newRule)
+  public void setRule(AbstractRule newRule)
   {
     AbstractRule oldRule = rule;
     rule = newRule;

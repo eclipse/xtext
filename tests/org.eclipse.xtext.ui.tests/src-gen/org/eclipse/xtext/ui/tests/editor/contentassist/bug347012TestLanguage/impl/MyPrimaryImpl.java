@@ -13,7 +13,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyP
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>My Primary</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

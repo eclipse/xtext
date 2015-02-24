@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Whe
  * An implementation of the model object '<em><b>MQ Lquery</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -96,8 +95,7 @@ public class MQLqueryImpl extends MinimalEObjectImpl.Container implements MQLque
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<SelectEntry> getSelectEntries()
+  public EList<SelectEntry> getSelectEntries()
   {
     if (selectEntries == null)
     {
@@ -111,8 +109,7 @@ public EList<SelectEntry> getSelectEntries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<FromEntry> getFromEntries()
+  public EList<FromEntry> getFromEntries()
   {
     if (fromEntries == null)
     {
@@ -126,8 +123,7 @@ public EList<FromEntry> getFromEntries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<WhereEntry> getWhereEntries()
+  public EList<WhereEntry> getWhereEntries()
   {
     if (whereEntries == null)
     {

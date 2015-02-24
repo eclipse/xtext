@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.linking.importUriUi.Type;
  * An implementation of the model object '<em><b>Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -97,8 +95,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,8 +108,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Type getExtends()
+  public Type getExtends()
   {
     if (extends_ != null && extends_.eIsProxy())
     {
@@ -142,8 +138,7 @@ public Type getExtends()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExtends(Type newExtends)
+  public void setExtends(Type newExtends)
   {
     Type oldExtends = extends_;
     extends_ = newExtends;

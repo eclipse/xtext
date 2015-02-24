@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pro
  * An implementation of the model object '<em><b>Postfix Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PostfixExpression getExpression()
+  public PostfixExpression getExpression()
   {
     return expression;
   }
@@ -106,8 +104,7 @@ public PostfixExpression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(PostfixExpression newExpression)
+  public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)
     {
@@ -128,8 +125,7 @@ public void setExpression(PostfixExpression newExpression)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyOperator getProperty()
+  public PropertyOperator getProperty()
   {
     return property;
   }
@@ -156,8 +152,7 @@ public PropertyOperator getProperty()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setProperty(PropertyOperator newProperty)
+  public void setProperty(PropertyOperator newProperty)
   {
     if (newProperty != property)
     {

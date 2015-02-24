@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Alternatives</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractElement> getGroups()
+  public EList<AbstractElement> getGroups()
   {
     if (groups == null)
     {

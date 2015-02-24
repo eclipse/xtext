@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Mod
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EObject getElement()
+  public EObject getElement()
   {
     return element;
   }
@@ -95,8 +93,7 @@ public EObject getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(EObject newElement)
+  public void setElement(EObject newElement)
   {
     if (newElement != element)
     {

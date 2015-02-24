@@ -76,8 +76,7 @@ public class QuickfixCrossrefFactoryImpl extends EFactoryImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Main createMain()
+  public Main createMain()
   {
     MainImpl main = new MainImpl();
     return main;
@@ -88,8 +87,7 @@ public Main createMain()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Element createElement()
+  public Element createElement()
   {
     ElementImpl element = new ElementImpl();
     return element;
@@ -100,8 +98,7 @@ public Element createElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QuickfixCrossrefPackage getQuickfixCrossrefPackage()
+  public QuickfixCrossrefPackage getQuickfixCrossrefPackage()
   {
     return (QuickfixCrossrefPackage)getEPackage();
   }

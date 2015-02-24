@@ -568,8 +568,7 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDocument()
+  public EClass getDocument()
   {
     return documentEClass;
   }
@@ -579,8 +578,7 @@ public EClass getDocument()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDocument_Packages()
+  public EReference getDocument_Packages()
   {
     return (EReference)documentEClass.getEStructuralFeatures().get(0);
   }
@@ -590,8 +588,7 @@ public EReference getDocument_Packages()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDocument_Contexts()
+  public EReference getDocument_Contexts()
   {
     return (EReference)documentEClass.getEStructuralFeatures().get(1);
   }
@@ -601,8 +598,7 @@ public EReference getDocument_Contexts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBody()
+  public EClass getBody()
   {
     return bodyEClass;
   }
@@ -612,8 +608,7 @@ public EClass getBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBody_ConstraintName()
+  public EAttribute getBody_ConstraintName()
   {
     return (EAttribute)bodyEClass.getEStructuralFeatures().get(0);
   }
@@ -623,8 +618,7 @@ public EAttribute getBody_ConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBody_Expression()
+  public EReference getBody_Expression()
   {
     return (EReference)bodyEClass.getEStructuralFeatures().get(1);
   }
@@ -634,8 +628,7 @@ public EReference getBody_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClassifierContextDecl()
+  public EClass getClassifierContextDecl()
   {
     return classifierContextDeclEClass;
   }
@@ -645,8 +638,7 @@ public EClass getClassifierContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClassifierContextDecl_SelfName()
+  public EAttribute getClassifierContextDecl_SelfName()
   {
     return (EAttribute)classifierContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -656,8 +648,7 @@ public EAttribute getClassifierContextDecl_SelfName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClassifierContextDecl_Classifier()
+  public EReference getClassifierContextDecl_Classifier()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -667,8 +658,7 @@ public EReference getClassifierContextDecl_Classifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClassifierContextDecl_Invariants()
+  public EReference getClassifierContextDecl_Invariants()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -678,8 +668,7 @@ public EReference getClassifierContextDecl_Invariants()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClassifierContextDecl_Definitions()
+  public EReference getClassifierContextDecl_Definitions()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -689,8 +678,7 @@ public EReference getClassifierContextDecl_Definitions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClassifierRef()
+  public EClass getClassifierRef()
   {
     return classifierRefEClass;
   }
@@ -700,8 +688,7 @@ public EClass getClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getContextDecl()
+  public EClass getContextDecl()
   {
     return contextDeclEClass;
   }
@@ -711,8 +698,7 @@ public EClass getContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDefinition()
+  public EClass getDefinition()
   {
     return definitionEClass;
   }
@@ -722,8 +708,7 @@ public EClass getDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefinition_Static()
+  public EAttribute getDefinition_Static()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
   }
@@ -733,8 +718,7 @@ public EAttribute getDefinition_Static()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefinition_ConstraintName()
+  public EAttribute getDefinition_ConstraintName()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(1);
   }
@@ -744,8 +728,7 @@ public EAttribute getDefinition_ConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDefinition_ConstrainedName()
+  public EAttribute getDefinition_ConstrainedName()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(2);
   }
@@ -755,8 +738,7 @@ public EAttribute getDefinition_ConstrainedName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDefinition_Parameters()
+  public EReference getDefinition_Parameters()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(3);
   }
@@ -766,8 +748,7 @@ public EReference getDefinition_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDefinition_Type()
+  public EReference getDefinition_Type()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(4);
   }
@@ -777,8 +758,7 @@ public EReference getDefinition_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDefinition_Expression()
+  public EReference getDefinition_Expression()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(5);
   }
@@ -788,8 +768,7 @@ public EReference getDefinition_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDer()
+  public EClass getDer()
   {
     return derEClass;
   }
@@ -799,8 +778,7 @@ public EClass getDer()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getDer_Expression()
+  public EReference getDer_Expression()
   {
     return (EReference)derEClass.getEStructuralFeatures().get(0);
   }
@@ -810,8 +788,7 @@ public EReference getDer_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getInit()
+  public EClass getInit()
   {
     return initEClass;
   }
@@ -821,8 +798,7 @@ public EClass getInit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getInit_Expression()
+  public EReference getInit_Expression()
   {
     return (EReference)initEClass.getEStructuralFeatures().get(0);
   }
@@ -832,8 +808,7 @@ public EReference getInit_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getInvariant()
+  public EClass getInvariant()
   {
     return invariantEClass;
   }
@@ -843,8 +818,7 @@ public EClass getInvariant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getInvariant_ConstraintName()
+  public EAttribute getInvariant_ConstraintName()
   {
     return (EAttribute)invariantEClass.getEStructuralFeatures().get(0);
   }
@@ -854,8 +828,7 @@ public EAttribute getInvariant_ConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getInvariant_Expression()
+  public EReference getInvariant_Expression()
   {
     return (EReference)invariantEClass.getEStructuralFeatures().get(1);
   }
@@ -865,8 +838,7 @@ public EReference getInvariant_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOperationContextDecl()
+  public EClass getOperationContextDecl()
   {
     return operationContextDeclEClass;
   }
@@ -876,8 +848,7 @@ public EClass getOperationContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Operation()
+  public EReference getOperationContextDecl_Operation()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -887,8 +858,7 @@ public EReference getOperationContextDecl_Operation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Parameters()
+  public EReference getOperationContextDecl_Parameters()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -898,8 +868,7 @@ public EReference getOperationContextDecl_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Type()
+  public EReference getOperationContextDecl_Type()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -909,8 +878,7 @@ public EReference getOperationContextDecl_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Pres()
+  public EReference getOperationContextDecl_Pres()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -920,8 +888,7 @@ public EReference getOperationContextDecl_Pres()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Posts()
+  public EReference getOperationContextDecl_Posts()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(4);
   }
@@ -931,8 +898,7 @@ public EReference getOperationContextDecl_Posts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperationContextDecl_Bodies()
+  public EReference getOperationContextDecl_Bodies()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(5);
   }
@@ -942,8 +908,7 @@ public EReference getOperationContextDecl_Bodies()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOperationRef()
+  public EClass getOperationRef()
   {
     return operationRefEClass;
   }
@@ -953,8 +918,7 @@ public EClass getOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPackageDeclaration()
+  public EClass getPackageDeclaration()
   {
     return packageDeclarationEClass;
   }
@@ -964,8 +928,7 @@ public EClass getPackageDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPackageDeclaration_Package()
+  public EReference getPackageDeclaration_Package()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -975,8 +938,7 @@ public EReference getPackageDeclaration_Package()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPackageDeclaration_Contexts()
+  public EReference getPackageDeclaration_Contexts()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -986,8 +948,7 @@ public EReference getPackageDeclaration_Contexts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPackageRef()
+  public EClass getPackageRef()
   {
     return packageRefEClass;
   }
@@ -997,8 +958,7 @@ public EClass getPackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameter()
+  public EClass getParameter()
   {
     return parameterEClass;
   }
@@ -1008,8 +968,7 @@ public EClass getParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getParameter_Name()
+  public EAttribute getParameter_Name()
   {
     return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
   }
@@ -1019,8 +978,7 @@ public EAttribute getParameter_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getParameter_Type()
+  public EReference getParameter_Type()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(1);
   }
@@ -1030,8 +988,7 @@ public EReference getParameter_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPost()
+  public EClass getPost()
   {
     return postEClass;
   }
@@ -1041,8 +998,7 @@ public EClass getPost()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPost_ConstraintName()
+  public EAttribute getPost_ConstraintName()
   {
     return (EAttribute)postEClass.getEStructuralFeatures().get(0);
   }
@@ -1052,8 +1008,7 @@ public EAttribute getPost_ConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPost_Expression()
+  public EReference getPost_Expression()
   {
     return (EReference)postEClass.getEStructuralFeatures().get(1);
   }
@@ -1063,8 +1018,7 @@ public EReference getPost_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPre()
+  public EClass getPre()
   {
     return preEClass;
   }
@@ -1074,8 +1028,7 @@ public EClass getPre()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPre_ConstraintName()
+  public EAttribute getPre_ConstraintName()
   {
     return (EAttribute)preEClass.getEStructuralFeatures().get(0);
   }
@@ -1085,8 +1038,7 @@ public EAttribute getPre_ConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPre_Expression()
+  public EReference getPre_Expression()
   {
     return (EReference)preEClass.getEStructuralFeatures().get(1);
   }
@@ -1096,8 +1048,7 @@ public EReference getPre_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPropertyContextDecl()
+  public EClass getPropertyContextDecl()
   {
     return propertyContextDeclEClass;
   }
@@ -1107,8 +1058,7 @@ public EClass getPropertyContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPropertyContextDecl_Property()
+  public EReference getPropertyContextDecl_Property()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -1118,8 +1068,7 @@ public EReference getPropertyContextDecl_Property()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPropertyContextDecl_Type()
+  public EReference getPropertyContextDecl_Type()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -1129,8 +1078,7 @@ public EReference getPropertyContextDecl_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPropertyContextDecl_Init()
+  public EReference getPropertyContextDecl_Init()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -1140,8 +1088,7 @@ public EReference getPropertyContextDecl_Init()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPropertyContextDecl_Der()
+  public EReference getPropertyContextDecl_Der()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -1151,8 +1098,7 @@ public EReference getPropertyContextDecl_Der()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPropertyRef()
+  public EClass getPropertyRef()
   {
     return propertyRefEClass;
   }
@@ -1162,8 +1108,7 @@ public EClass getPropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getQualifiedClassifierRef()
+  public EClass getQualifiedClassifierRef()
   {
     return qualifiedClassifierRefEClass;
   }
@@ -1173,8 +1118,7 @@ public EClass getQualifiedClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getQualifiedClassifierRef_Namespace()
+  public EAttribute getQualifiedClassifierRef_Namespace()
   {
     return (EAttribute)qualifiedClassifierRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1184,8 +1128,7 @@ public EAttribute getQualifiedClassifierRef_Namespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getQualifiedClassifierRef_Element()
+  public EReference getQualifiedClassifierRef_Element()
   {
     return (EReference)qualifiedClassifierRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1195,8 +1138,7 @@ public EReference getQualifiedClassifierRef_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getQualifiedOperationRef()
+  public EClass getQualifiedOperationRef()
   {
     return qualifiedOperationRefEClass;
   }
@@ -1206,8 +1148,7 @@ public EClass getQualifiedOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getQualifiedOperationRef_Namespace()
+  public EAttribute getQualifiedOperationRef_Namespace()
   {
     return (EAttribute)qualifiedOperationRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1217,8 +1158,7 @@ public EAttribute getQualifiedOperationRef_Namespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getQualifiedOperationRef_Element()
+  public EReference getQualifiedOperationRef_Element()
   {
     return (EReference)qualifiedOperationRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1228,8 +1168,7 @@ public EReference getQualifiedOperationRef_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getQualifiedPropertyRef()
+  public EClass getQualifiedPropertyRef()
   {
     return qualifiedPropertyRefEClass;
   }
@@ -1239,8 +1178,7 @@ public EClass getQualifiedPropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getQualifiedPropertyRef_Namespace()
+  public EAttribute getQualifiedPropertyRef_Namespace()
   {
     return (EAttribute)qualifiedPropertyRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1250,8 +1188,7 @@ public EAttribute getQualifiedPropertyRef_Namespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getQualifiedPropertyRef_Element()
+  public EReference getQualifiedPropertyRef_Element()
   {
     return (EReference)qualifiedPropertyRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1261,8 +1198,7 @@ public EReference getQualifiedPropertyRef_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getQualifiedPackageRef()
+  public EClass getQualifiedPackageRef()
   {
     return qualifiedPackageRefEClass;
   }
@@ -1272,8 +1208,7 @@ public EClass getQualifiedPackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getQualifiedPackageRef_Namespace()
+  public EAttribute getQualifiedPackageRef_Namespace()
   {
     return (EAttribute)qualifiedPackageRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1283,8 +1218,7 @@ public EAttribute getQualifiedPackageRef_Namespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getQualifiedPackageRef_Element()
+  public EReference getQualifiedPackageRef_Element()
   {
     return (EReference)qualifiedPackageRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1294,8 +1228,7 @@ public EReference getQualifiedPackageRef_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimpleClassifierRef()
+  public EClass getSimpleClassifierRef()
   {
     return simpleClassifierRefEClass;
   }
@@ -1305,8 +1238,7 @@ public EClass getSimpleClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleClassifierRef_Classifier()
+  public EAttribute getSimpleClassifierRef_Classifier()
   {
     return (EAttribute)simpleClassifierRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1316,8 +1248,7 @@ public EAttribute getSimpleClassifierRef_Classifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimpleOperationRef()
+  public EClass getSimpleOperationRef()
   {
     return simpleOperationRefEClass;
   }
@@ -1327,8 +1258,7 @@ public EClass getSimpleOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimpleOperationRef_Operation()
+  public EAttribute getSimpleOperationRef_Operation()
   {
     return (EAttribute)simpleOperationRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1338,8 +1268,7 @@ public EAttribute getSimpleOperationRef_Operation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimplePackageRef()
+  public EClass getSimplePackageRef()
   {
     return simplePackageRefEClass;
   }
@@ -1349,8 +1278,7 @@ public EClass getSimplePackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimplePackageRef_Package()
+  public EAttribute getSimplePackageRef_Package()
   {
     return (EAttribute)simplePackageRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1360,8 +1288,7 @@ public EAttribute getSimplePackageRef_Package()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSimplePropertyRef()
+  public EClass getSimplePropertyRef()
   {
     return simplePropertyRefEClass;
   }
@@ -1371,8 +1298,7 @@ public EClass getSimplePropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSimplePropertyRef_Feature()
+  public EAttribute getSimplePropertyRef_Feature()
   {
     return (EAttribute)simplePropertyRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1382,8 +1308,7 @@ public EAttribute getSimplePropertyRef_Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpression()
+  public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -1393,8 +1318,7 @@ public EClass getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNavigatingExp()
+  public EClass getNavigatingExp()
   {
     return navigatingExpEClass;
   }
@@ -1404,8 +1328,7 @@ public EClass getNavigatingExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOclMessageArg()
+  public EClass getOclMessageArg()
   {
     return oclMessageArgEClass;
   }
@@ -1415,8 +1338,7 @@ public EClass getOclMessageArg()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOclMessageArg_Type()
+  public EReference getOclMessageArg_Type()
   {
     return (EReference)oclMessageArgEClass.getEStructuralFeatures().get(0);
   }
@@ -1426,8 +1348,7 @@ public EReference getOclMessageArg_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPrimitiveType()
+  public EClass getPrimitiveType()
   {
     return primitiveTypeEClass;
   }
@@ -1437,8 +1358,7 @@ public EClass getPrimitiveType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPrimitiveType_Name()
+  public EAttribute getPrimitiveType_Name()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1448,8 +1368,7 @@ public EAttribute getPrimitiveType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTypeExp()
+  public EClass getTypeExp()
   {
     return typeExpEClass;
   }
@@ -1459,8 +1378,7 @@ public EClass getTypeExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionType()
+  public EClass getCollectionType()
   {
     return collectionTypeEClass;
   }
@@ -1470,8 +1388,7 @@ public EClass getCollectionType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCollectionType_TypeIdentifier()
+  public EAttribute getCollectionType_TypeIdentifier()
   {
     return (EAttribute)collectionTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1481,8 +1398,7 @@ public EAttribute getCollectionType_TypeIdentifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTupleType()
+  public EClass getTupleType()
   {
     return tupleTypeEClass;
   }
@@ -1492,8 +1408,7 @@ public EClass getTupleType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTupleType_Name()
+  public EAttribute getTupleType_Name()
   {
     return (EAttribute)tupleTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1503,8 +1418,7 @@ public EAttribute getTupleType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTupleType_Part()
+  public EReference getTupleType_Part()
   {
     return (EReference)tupleTypeEClass.getEStructuralFeatures().get(1);
   }
@@ -1514,8 +1428,7 @@ public EReference getTupleType_Part()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass gettuplePart()
+  public EClass gettuplePart()
   {
     return tuplePartEClass;
   }
@@ -1525,8 +1438,7 @@ public EClass gettuplePart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute gettuplePart_Name()
+  public EAttribute gettuplePart_Name()
   {
     return (EAttribute)tuplePartEClass.getEStructuralFeatures().get(0);
   }
@@ -1536,8 +1448,7 @@ public EAttribute gettuplePart_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference gettuplePart_Type()
+  public EReference gettuplePart_Type()
   {
     return (EReference)tuplePartEClass.getEStructuralFeatures().get(1);
   }
@@ -1547,8 +1458,7 @@ public EReference gettuplePart_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionLiteralExp()
+  public EClass getCollectionLiteralExp()
   {
     return collectionLiteralExpEClass;
   }
@@ -1558,8 +1468,7 @@ public EClass getCollectionLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCollectionLiteralExp_CollectionLiteralParts()
+  public EReference getCollectionLiteralExp_CollectionLiteralParts()
   {
     return (EReference)collectionLiteralExpEClass.getEStructuralFeatures().get(0);
   }
@@ -1569,8 +1478,7 @@ public EReference getCollectionLiteralExp_CollectionLiteralParts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCollectionLiteralPart()
+  public EClass getCollectionLiteralPart()
   {
     return collectionLiteralPartEClass;
   }
@@ -1580,8 +1488,7 @@ public EClass getCollectionLiteralPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCollectionLiteralPart_Expression()
+  public EReference getCollectionLiteralPart_Expression()
   {
     return (EReference)collectionLiteralPartEClass.getEStructuralFeatures().get(0);
   }
@@ -1591,8 +1498,7 @@ public EReference getCollectionLiteralPart_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCollectionLiteralPart_LastExpression()
+  public EReference getCollectionLiteralPart_LastExpression()
   {
     return (EReference)collectionLiteralPartEClass.getEStructuralFeatures().get(1);
   }
@@ -1602,8 +1508,7 @@ public EReference getCollectionLiteralPart_LastExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPrimitiveLiteralExp()
+  public EClass getPrimitiveLiteralExp()
   {
     return primitiveLiteralExpEClass;
   }
@@ -1613,8 +1518,7 @@ public EClass getPrimitiveLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTupleLiteralExp()
+  public EClass getTupleLiteralExp()
   {
     return tupleLiteralExpEClass;
   }
@@ -1624,8 +1528,7 @@ public EClass getTupleLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTupleLiteralExp_Part()
+  public EReference getTupleLiteralExp_Part()
   {
     return (EReference)tupleLiteralExpEClass.getEStructuralFeatures().get(0);
   }
@@ -1635,8 +1538,7 @@ public EReference getTupleLiteralExp_Part()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTupleLiteralPart()
+  public EClass getTupleLiteralPart()
   {
     return tupleLiteralPartEClass;
   }
@@ -1646,8 +1548,7 @@ public EClass getTupleLiteralPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTupleLiteralPart_Name()
+  public EAttribute getTupleLiteralPart_Name()
   {
     return (EAttribute)tupleLiteralPartEClass.getEStructuralFeatures().get(0);
   }
@@ -1657,8 +1558,7 @@ public EAttribute getTupleLiteralPart_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTupleLiteralPart_Type()
+  public EReference getTupleLiteralPart_Type()
   {
     return (EReference)tupleLiteralPartEClass.getEStructuralFeatures().get(1);
   }

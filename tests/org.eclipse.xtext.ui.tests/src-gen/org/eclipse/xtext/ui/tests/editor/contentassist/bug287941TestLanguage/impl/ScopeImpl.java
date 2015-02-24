@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sco
  * An implementation of the model object '<em><b>Scope</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getUris()
+  public EList<String> getUris()
   {
     if (uris == null)
     {

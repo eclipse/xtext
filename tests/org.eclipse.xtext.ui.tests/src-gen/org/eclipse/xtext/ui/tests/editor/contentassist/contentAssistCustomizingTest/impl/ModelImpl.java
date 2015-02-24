@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingT
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Type> getTypes()
+  public EList<Type> getTypes()
   {
     if (types == null)
     {

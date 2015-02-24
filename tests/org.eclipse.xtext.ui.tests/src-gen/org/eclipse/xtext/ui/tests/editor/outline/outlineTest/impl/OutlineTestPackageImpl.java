@@ -104,8 +104,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -115,8 +114,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Elements()
+  public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getModel_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElement()
+  public EClass getElement()
   {
     return elementEClass;
   }
@@ -137,8 +134,7 @@ public EClass getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElement_Name()
+  public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -148,8 +144,7 @@ public EAttribute getElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_Xrefs()
+  public EReference getElement_Xrefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -159,8 +154,7 @@ public EReference getElement_Xrefs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElement_Children()
+  public EReference getElement_Children()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
@@ -170,8 +164,7 @@ public EReference getElement_Children()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OutlineTestFactory getOutlineTestFactory()
+  public OutlineTestFactory getOutlineTestFactory()
   {
     return (OutlineTestFactory)getEFactoryInstance();
   }

@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * An implementation of the model object '<em><b>Person</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -106,8 +104,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -120,8 +117,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getAge()
+  public int getAge()
   {
     return age;
   }
@@ -131,8 +127,7 @@ public int getAge()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAge(int newAge)
+  public void setAge(int newAge)
   {
     int oldAge = age;
     age = newAge;

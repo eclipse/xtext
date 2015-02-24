@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Vis
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -96,8 +95,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Visibility getVisibility()
+  public Visibility getVisibility()
   {
     return visibility;
   }
@@ -107,8 +105,7 @@ public Visibility getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVisibility(Visibility newVisibility)
+  public void setVisibility(Visibility newVisibility)
   {
     Visibility oldVisibility = visibility;
     visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
@@ -121,8 +118,7 @@ public void setVisibility(Visibility newVisibility)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -132,8 +128,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

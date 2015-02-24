@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.FirstA
  * An implementation of the model object '<em><b>First Abstract Rule Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class FirstAbstractRuleChildImpl extends AbstractRuleImpl implements Firs
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractRule> getElements()
+  public EList<AbstractRule> getElements()
   {
     if (elements == null)
     {

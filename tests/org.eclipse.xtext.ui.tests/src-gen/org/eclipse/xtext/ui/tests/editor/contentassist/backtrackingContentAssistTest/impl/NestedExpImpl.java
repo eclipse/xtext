@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Nested Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class NestedExpImpl extends ExpressionImpl implements NestedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getSource()
+  public Expression getSource()
   {
     return source;
   }
@@ -94,8 +92,7 @@ public Expression getSource()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSource(Expression newSource)
+  public void setSource(Expression newSource)
   {
     if (newSource != source)
     {

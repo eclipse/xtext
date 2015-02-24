@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.ui.codetemplates.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractCodetemplatesUiModule extends DefaultUiModule {
+public abstract class AbstractCodetemplatesUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractCodetemplatesUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

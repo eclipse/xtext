@@ -78,8 +78,7 @@ public class BuilderTestLanguageFactoryImpl extends EFactoryImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NamedElement createNamedElement()
+  public NamedElement createNamedElement()
   {
     NamedElementImpl namedElement = new NamedElementImpl();
     return namedElement;
@@ -90,8 +89,7 @@ public NamedElement createNamedElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Namespace createNamespace()
+  public Namespace createNamespace()
   {
     NamespaceImpl namespace = new NamespaceImpl();
     return namespace;
@@ -102,8 +100,7 @@ public Namespace createNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Import createImport()
+  public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -114,8 +111,7 @@ public Import createImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Element createElement()
+  public Element createElement()
   {
     ElementImpl element = new ElementImpl();
     return element;
@@ -126,8 +122,7 @@ public Element createElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BuilderTestLanguagePackage getBuilderTestLanguagePackage()
+  public BuilderTestLanguagePackage getBuilderTestLanguagePackage()
   {
     return (BuilderTestLanguagePackage)getEPackage();
   }

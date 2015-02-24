@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -161,8 +160,7 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isStatic()
+  public boolean isStatic()
   {
     return static_;
   }
@@ -172,8 +170,7 @@ public boolean isStatic()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStatic(boolean newStatic)
+  public void setStatic(boolean newStatic)
   {
     boolean oldStatic = static_;
     static_ = newStatic;
@@ -186,8 +183,7 @@ public void setStatic(boolean newStatic)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getConstraintName()
+  public String getConstraintName()
   {
     return constraintName;
   }
@@ -197,8 +193,7 @@ public String getConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setConstraintName(String newConstraintName)
+  public void setConstraintName(String newConstraintName)
   {
     String oldConstraintName = constraintName;
     constraintName = newConstraintName;
@@ -211,8 +206,7 @@ public void setConstraintName(String newConstraintName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getConstrainedName()
+  public String getConstrainedName()
   {
     return constrainedName;
   }
@@ -222,8 +216,7 @@ public String getConstrainedName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setConstrainedName(String newConstrainedName)
+  public void setConstrainedName(String newConstrainedName)
   {
     String oldConstrainedName = constrainedName;
     constrainedName = newConstrainedName;
@@ -236,8 +229,7 @@ public void setConstrainedName(String newConstrainedName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Parameter> getParameters()
+  public EList<Parameter> getParameters()
   {
     if (parameters == null)
     {
@@ -251,8 +243,7 @@ public EList<Parameter> getParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -279,8 +270,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -301,8 +291,7 @@ public void setType(TypeExp newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpression()
+  public Expression getExpression()
   {
     return expression;
   }
@@ -329,8 +318,7 @@ public Expression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(Expression newExpression)
+  public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

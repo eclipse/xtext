@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainMod
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -65,8 +64,7 @@ public class AttributeImpl extends PropertyImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DataType getType()
+  public DataType getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -96,8 +94,7 @@ public DataType getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(DataType newType)
+  public void setType(DataType newType)
   {
     DataType oldType = type;
     type = newType;

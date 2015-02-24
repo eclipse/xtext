@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Root;
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Child> getChilds()
+  public EList<Child> getChilds()
   {
     if (childs == null)
     {

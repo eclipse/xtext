@@ -17,7 +17,6 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Import;
  * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getImportedNamespace()
+  public String getImportedNamespace()
   {
     return importedNamespace;
   }
@@ -85,8 +83,7 @@ public String getImportedNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setImportedNamespace(String newImportedNamespace)
+  public void setImportedNamespace(String newImportedNamespace)
   {
     String oldImportedNamespace = importedNamespace;
     importedNamespace = newImportedNamespace;

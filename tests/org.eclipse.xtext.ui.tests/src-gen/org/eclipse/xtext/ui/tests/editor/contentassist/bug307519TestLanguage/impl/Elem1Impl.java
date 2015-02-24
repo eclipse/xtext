@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Enu
  * An implementation of the model object '<em><b>Elem1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -75,8 +74,7 @@ public class Elem1Impl extends MinimalEObjectImpl.Container implements Elem1
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EnumT getValue()
+  public EnumT getValue()
   {
     return value;
   }
@@ -86,8 +84,7 @@ public EnumT getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(EnumT newValue)
+  public void setValue(EnumT newValue)
   {
     EnumT oldValue = value;
     value = newValue == null ? VALUE_EDEFAULT : newValue;

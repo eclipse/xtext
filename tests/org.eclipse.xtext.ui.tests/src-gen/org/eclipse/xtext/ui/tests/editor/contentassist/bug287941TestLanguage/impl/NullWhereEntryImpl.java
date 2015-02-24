@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Nul
  * An implementation of the model object '<em><b>Null Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -99,8 +98,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getAlias()
+  public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -130,8 +128,7 @@ public FromEntry getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(FromEntry newAlias)
+  public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -144,8 +141,7 @@ public void setAlias(FromEntry newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EStructuralFeature getFeature()
+  public EStructuralFeature getFeature()
   {
     if (feature != null && feature.eIsProxy())
     {
@@ -175,8 +171,7 @@ public EStructuralFeature getFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFeature(EStructuralFeature newFeature)
+  public void setFeature(EStructuralFeature newFeature)
   {
     EStructuralFeature oldFeature = feature;
     feature = newFeature;
@@ -189,8 +184,7 @@ public void setFeature(EStructuralFeature newFeature)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BooleanOperator getOperator()
+  public BooleanOperator getOperator()
   {
     return operator;
   }
@@ -200,8 +194,7 @@ public BooleanOperator getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(BooleanOperator newOperator)
+  public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

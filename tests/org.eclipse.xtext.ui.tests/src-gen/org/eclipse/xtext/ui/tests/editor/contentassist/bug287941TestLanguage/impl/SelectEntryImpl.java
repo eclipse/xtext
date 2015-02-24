@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sel
  * An implementation of the model object '<em><b>Select Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class SelectEntryImpl extends MinimalEObjectImpl.Container implements Sel
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getSelect()
+  public FromEntry getSelect()
   {
     if (select != null && select.eIsProxy())
     {
@@ -109,8 +107,7 @@ public FromEntry getSelect()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSelect(FromEntry newSelect)
+  public void setSelect(FromEntry newSelect)
   {
     FromEntry oldSelect = select;
     select = newSelect;
@@ -123,8 +120,7 @@ public void setSelect(FromEntry newSelect)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute()
+  public EAttribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
     {
@@ -154,8 +150,7 @@ public EAttribute getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAttribute(EAttribute newAttribute)
+  public void setAttribute(EAttribute newAttribute)
   {
     EAttribute oldAttribute = attribute;
     attribute = newAttribute;

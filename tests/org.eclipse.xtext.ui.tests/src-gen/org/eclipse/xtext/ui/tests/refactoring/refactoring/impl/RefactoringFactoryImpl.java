@@ -78,8 +78,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Main createMain()
+  public Main createMain()
   {
     MainImpl main = new MainImpl();
     return main;
@@ -90,8 +89,7 @@ public Main createMain()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractElement createAbstractElement()
+  public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
@@ -102,8 +100,7 @@ public AbstractElement createAbstractElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Import createImport()
+  public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -114,8 +111,7 @@ public Import createImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Element createElement()
+  public Element createElement()
   {
     ElementImpl element = new ElementImpl();
     return element;
@@ -126,8 +122,7 @@ public Element createElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RefactoringPackage getRefactoringPackage()
+  public RefactoringPackage getRefactoringPackage()
   {
     return (RefactoringPackage)getEPackage();
   }

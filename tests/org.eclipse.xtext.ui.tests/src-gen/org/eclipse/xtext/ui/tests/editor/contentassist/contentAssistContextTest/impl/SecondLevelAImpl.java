@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.
  * An implementation of the model object '<em><b>Second Level A</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -84,8 +83,7 @@ public class SecondLevelAImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ThirdLevelA1> getThirdLevelA1()
+  public EList<ThirdLevelA1> getThirdLevelA1()
   {
     if (thirdLevelA1 == null)
     {
@@ -99,8 +97,7 @@ public EList<ThirdLevelA1> getThirdLevelA1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ThirdLevelA2> getThirdLevelA2()
+  public EList<ThirdLevelA2> getThirdLevelA2()
   {
     if (thirdLevelA2 == null)
     {

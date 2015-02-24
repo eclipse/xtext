@@ -17,10 +17,10 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.LiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -72,8 +72,7 @@ public class LiteralImpl extends TemplatePartImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -83,8 +82,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

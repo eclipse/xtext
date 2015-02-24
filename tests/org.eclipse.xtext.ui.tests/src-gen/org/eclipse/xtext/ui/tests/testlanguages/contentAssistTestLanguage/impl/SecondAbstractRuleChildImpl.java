@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.Second
  * An implementation of the model object '<em><b>Second Abstract Rule Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class SecondAbstractRuleChildImpl extends AbstractRuleImpl implements Sec
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRuleCall getRule()
+  public AbstractRuleCall getRule()
   {
     return rule;
   }
@@ -94,8 +92,7 @@ public AbstractRuleCall getRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRule(AbstractRuleCall newRule)
+  public void setRule(AbstractRuleCall newRule)
   {
     if (newRule != rule)
     {
