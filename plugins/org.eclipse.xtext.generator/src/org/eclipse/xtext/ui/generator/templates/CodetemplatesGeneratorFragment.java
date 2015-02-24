@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.templates;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +16,8 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
+
+import com.google.common.collect.ImmutableList;
 
 /**
  * This generator fragment enables an advanced preference page for code templates.
@@ -46,7 +47,23 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
+		if(getNaming().hasIde()){
+			return new BindFactory()
+				.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration", 
+					"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()")
+				.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry", 
+					"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry()")
+				.addTypeToTypeEagerSingleton("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar",
+					"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")
+				.addTypeToType("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage", 
+					"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
+				.addTypeToType("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser",
+					getPartialContentAssistParser(grammar, getNaming()))
+				.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory", 
+						"org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory")
+				.getBindings();
+		} else {
+			return new BindFactory()
 			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration", 
 				"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()")
 			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry", 
@@ -55,16 +72,15 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 				"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")
 			.addTypeToType("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage", 
 				"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
-			.addTypeToType("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser",
+			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser",
 				getPartialContentAssistParser(grammar, getNaming()))
-			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory", 
-					"org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory")
-			.getBindings();
+			.getBindings();	
+		}
 	}
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(isSuppressRestriction());
+		return ImmutableList.<Object>of(isSuppressRestriction(), getNaming().hasIde());
 	}
 	
 	@Override

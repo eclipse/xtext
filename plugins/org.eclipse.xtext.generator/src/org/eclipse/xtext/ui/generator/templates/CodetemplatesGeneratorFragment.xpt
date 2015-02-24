@@ -16,18 +16,18 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE addToPluginXmlRt(boolean restriction) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(boolean restriction) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(boolean restriction) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate(boolean restriction) FOR Grammar»
-	«EXPAND PartialContentAssistParser(restriction)»
+«DEFINE generate(boolean restriction, boolean hasIDE) FOR Grammar»
+	«EXPAND PartialContentAssistParser(restriction, hasIDE)»
 «ENDDEFINE»
 
 
-«DEFINE PartialContentAssistParser(boolean restriction) FOR Grammar»
+«DEFINE PartialContentAssistParser(boolean restriction, boolean hasIDE) FOR Grammar»
 «FILE partialParser().asPath()+".java" SRC_GEN_IDE-»
 «fileHeader()»
 package «partialParser().toJavaPackage()»;
@@ -37,9 +37,15 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.AbstractRule;
+«IF hasIDE-»
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ELSE-»
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ENDIF-»
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /*
@@ -48,7 +54,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 «IF restriction-»
 @SuppressWarnings("restriction")
 «ENDIF-»
-«classAnnotations()»public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements IPartialEditingContentAssistParser {
+«classAnnotations()»public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements «IF hasIDE»IPartialEditingContentAssistParser«ELSE»IPartialContentAssistParser«ENDIF» {
 
 	private AbstractRule rule;
 
