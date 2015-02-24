@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pos
  * An implementation of the model object '<em><b>List Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class ListExpressionImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<PostfixExpression> getExpressions()
+  public EList<PostfixExpression> getExpressions()
   {
     if (expressions == null)
     {

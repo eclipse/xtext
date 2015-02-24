@@ -112,8 +112,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMain()
+  public EClass getMain()
   {
     return mainEClass;
   }
@@ -123,8 +122,7 @@ public EClass getMain()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMain_Imports()
+  public EReference getMain_Imports()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -134,8 +132,7 @@ public EReference getMain_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMain_Types()
+  public EReference getMain_Types()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(1);
   }
@@ -145,8 +142,7 @@ public EReference getMain_Types()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -156,8 +152,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportURI()
+  public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -167,8 +162,7 @@ public EAttribute getImport_ImportURI()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getType()
+  public EClass getType()
   {
     return typeEClass;
   }
@@ -178,8 +172,7 @@ public EClass getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getType_Name()
+  public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -189,8 +182,7 @@ public EAttribute getType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getType_Extends()
+  public EReference getType_Extends()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
   }
@@ -200,8 +192,7 @@ public EReference getType_Extends()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ImportUriUiFactory getImportUriUiFactory()
+  public ImportUriUiFactory getImportUriUiFactory()
   {
     return (ImportUriUiFactory)getEFactoryInstance();
   }

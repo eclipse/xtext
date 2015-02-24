@@ -121,8 +121,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -132,8 +131,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_E1()
+  public EReference getModel_E1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -143,8 +141,7 @@ public EReference getModel_E1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_E2()
+  public EReference getModel_E2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -154,8 +151,7 @@ public EReference getModel_E2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElem1()
+  public EClass getElem1()
   {
     return elem1EClass;
   }
@@ -165,8 +161,7 @@ public EClass getElem1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElem1_Value()
+  public EAttribute getElem1_Value()
   {
     return (EAttribute)elem1EClass.getEStructuralFeatures().get(0);
   }
@@ -176,8 +171,7 @@ public EAttribute getElem1_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElem2()
+  public EClass getElem2()
   {
     return elem2EClass;
   }
@@ -187,8 +181,7 @@ public EClass getElem2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElem2_Value()
+  public EAttribute getElem2_Value()
   {
     return (EAttribute)elem2EClass.getEStructuralFeatures().get(0);
   }
@@ -198,8 +191,7 @@ public EAttribute getElem2_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getEnumT()
+  public EEnum getEnumT()
   {
     return enumTEEnum;
   }
@@ -209,8 +201,7 @@ public EEnum getEnumT()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug307519TestLanguageFactory getBug307519TestLanguageFactory()
+  public Bug307519TestLanguageFactory getBug307519TestLanguageFactory()
   {
     return (Bug307519TestLanguageFactory)getEFactoryInstance();
   }

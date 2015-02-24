@@ -17,10 +17,10 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.DollarImpl#isEscaped <em>Escaped</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -72,8 +72,7 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isEscaped()
+  public boolean isEscaped()
   {
     return escaped;
   }
@@ -83,8 +82,7 @@ public boolean isEscaped()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEscaped(boolean newEscaped)
+  public void setEscaped(boolean newEscaped)
   {
     boolean oldEscaped = escaped;
     escaped = newEscaped;

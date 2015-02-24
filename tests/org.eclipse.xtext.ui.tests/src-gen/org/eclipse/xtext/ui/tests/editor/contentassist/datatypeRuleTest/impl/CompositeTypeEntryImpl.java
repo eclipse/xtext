@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.Type;
  * An implementation of the model object '<em><b>Composite Type Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class CompositeTypeEntryImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Type getDataType()
+  public Type getDataType()
   {
     if (dataType != null && dataType.eIsProxy())
     {
@@ -97,8 +95,7 @@ public Type getDataType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDataType(Type newDataType)
+  public void setDataType(Type newDataType)
   {
     Type oldDataType = dataType;
     dataType = newDataType;

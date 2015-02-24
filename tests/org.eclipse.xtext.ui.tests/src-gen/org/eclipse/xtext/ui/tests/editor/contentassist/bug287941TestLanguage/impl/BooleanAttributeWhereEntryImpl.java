@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug
  * An implementation of the model object '<em><b>Boolean Attribute Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BooleanOperator getOperator()
+  public BooleanOperator getOperator()
   {
     return operator;
   }
@@ -106,8 +104,7 @@ public BooleanOperator getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(BooleanOperator newOperator)
+  public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -120,8 +117,7 @@ public void setOperator(BooleanOperator newOperator)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isIsTrue()
+  public boolean isIsTrue()
   {
     return isTrue;
   }
@@ -131,8 +127,7 @@ public boolean isIsTrue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIsTrue(boolean newIsTrue)
+  public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
     isTrue = newIsTrue;

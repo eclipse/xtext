@@ -117,8 +117,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -129,8 +128,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Alternative createAlternative()
+  public Alternative createAlternative()
   {
     AlternativeImpl alternative = new AlternativeImpl();
     return alternative;
@@ -141,8 +139,7 @@ public Alternative createAlternative()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RecursiveClassDeclaration createRecursiveClassDeclaration()
+  public RecursiveClassDeclaration createRecursiveClassDeclaration()
   {
     RecursiveClassDeclarationImpl recursiveClassDeclaration = new RecursiveClassDeclarationImpl();
     return recursiveClassDeclaration;
@@ -153,8 +150,7 @@ public RecursiveClassDeclaration createRecursiveClassDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Modifiers createModifiers()
+  public Modifiers createModifiers()
   {
     ModifiersImpl modifiers = new ModifiersImpl();
     return modifiers;
@@ -165,8 +161,7 @@ public Modifiers createModifiers()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Unordered createUnordered()
+  public Unordered createUnordered()
   {
     UnorderedImpl unordered = new UnorderedImpl();
     return unordered;
@@ -177,8 +172,7 @@ public Unordered createUnordered()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleClassDeclaration createSimpleClassDeclaration()
+  public SimpleClassDeclaration createSimpleClassDeclaration()
   {
     SimpleClassDeclarationImpl simpleClassDeclaration = new SimpleClassDeclarationImpl();
     return simpleClassDeclaration;
@@ -189,8 +183,7 @@ public SimpleClassDeclaration createSimpleClassDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClassMember createClassMember()
+  public ClassMember createClassMember()
   {
     ClassMemberImpl classMember = new ClassMemberImpl();
     return classMember;
@@ -201,8 +194,7 @@ public ClassMember createClassMember()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnorderedModifiers createUnorderedModifiers()
+  public UnorderedModifiers createUnorderedModifiers()
   {
     UnorderedModifiersImpl unorderedModifiers = new UnorderedModifiersImpl();
     return unorderedModifiers;
@@ -235,8 +227,7 @@ public UnorderedModifiers createUnorderedModifiers()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug360834TestLanguagePackage getBug360834TestLanguagePackage()
+  public Bug360834TestLanguagePackage getBug360834TestLanguagePackage()
   {
     return (Bug360834TestLanguagePackage)getEPackage();
   }

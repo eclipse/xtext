@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Tuple Literal Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -100,8 +99,7 @@ public class TupleLiteralPartImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -111,8 +109,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -125,8 +122,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -153,8 +149,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -175,8 +170,7 @@ public void setType(TypeExp newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getInitExpression()
+  public Expression getInitExpression()
   {
     return initExpression;
   }
@@ -203,8 +197,7 @@ public Expression getInitExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setInitExpression(Expression newInitExpression)
+  public void setInitExpression(Expression newInitExpression)
   {
     if (newInitExpression != initExpression)
     {

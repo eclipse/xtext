@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sco
  * An implementation of the model object '<em><b>Scope Clause</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isNotIn()
+  public boolean isNotIn()
   {
     return notIn;
   }
@@ -99,8 +97,7 @@ public boolean isNotIn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNotIn(boolean newNotIn)
+  public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
     notIn = newNotIn;
@@ -113,8 +110,7 @@ public void setNotIn(boolean newNotIn)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Scope getScope()
+  public Scope getScope()
   {
     return scope;
   }
@@ -141,8 +137,7 @@ public Scope getScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setScope(Scope newScope)
+  public void setScope(Scope newScope)
   {
     if (newScope != scope)
     {

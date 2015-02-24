@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyA
  * An implementation of the model object '<em><b>My Attributes</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class MyAttributesImpl extends MinimalEObjectImpl.Container implements My
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<MyAttribute> getAttributes()
+  public EList<MyAttribute> getAttributes()
   {
     if (attributes == null)
     {

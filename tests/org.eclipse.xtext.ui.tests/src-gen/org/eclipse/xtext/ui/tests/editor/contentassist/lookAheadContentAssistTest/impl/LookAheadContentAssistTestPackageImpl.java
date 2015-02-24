@@ -112,8 +112,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -123,8 +122,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Attribute()
+  public EReference getModel_Attribute()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -134,8 +132,7 @@ public EReference getModel_Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -145,8 +142,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Value()
+  public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -156,8 +152,7 @@ public EAttribute getAttribute_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPair()
+  public EClass getPair()
   {
     return pairEClass;
   }
@@ -167,8 +162,7 @@ public EClass getPair()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPair_Name()
+  public EAttribute getPair_Name()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(0);
   }
@@ -178,8 +172,7 @@ public EAttribute getPair_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPair_Value()
+  public EAttribute getPair_Value()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(1);
   }
@@ -189,8 +182,7 @@ public EAttribute getPair_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LookAheadContentAssistTestFactory getLookAheadContentAssistTestFactory()
+  public LookAheadContentAssistTestFactory getLookAheadContentAssistTestFactory()
   {
     return (LookAheadContentAssistTestFactory)getEFactoryInstance();
   }

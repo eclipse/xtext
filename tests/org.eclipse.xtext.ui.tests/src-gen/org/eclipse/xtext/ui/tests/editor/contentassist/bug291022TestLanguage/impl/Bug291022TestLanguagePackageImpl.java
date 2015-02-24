@@ -120,8 +120,7 @@ public class Bug291022TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModelElement()
+  public EClass getModelElement()
   {
     return modelElementEClass;
   }
@@ -131,8 +130,7 @@ public EClass getModelElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModelElement_FirstReference()
+  public EReference getModelElement_FirstReference()
   {
     return (EReference)modelElementEClass.getEStructuralFeatures().get(0);
   }
@@ -142,8 +140,7 @@ public EReference getModelElement_FirstReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModelElement_Name()
+  public EAttribute getModelElement_Name()
   {
     return (EAttribute)modelElementEClass.getEStructuralFeatures().get(1);
   }
@@ -153,8 +150,7 @@ public EAttribute getModelElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModelElement_SecondReference()
+  public EReference getModelElement_SecondReference()
   {
     return (EReference)modelElementEClass.getEStructuralFeatures().get(2);
   }
@@ -164,8 +160,7 @@ public EReference getModelElement_SecondReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModelElement_Elements()
+  public EReference getModelElement_Elements()
   {
     return (EReference)modelElementEClass.getEStructuralFeatures().get(3);
   }
@@ -175,8 +170,7 @@ public EReference getModelElement_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModelAttribute()
+  public EClass getModelAttribute()
   {
     return modelAttributeEClass;
   }
@@ -186,8 +180,7 @@ public EClass getModelAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -197,8 +190,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttribute_Feature()
+  public EReference getAttribute_Feature()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -208,8 +200,7 @@ public EReference getAttribute_Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Value()
+  public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
   }
@@ -219,8 +210,7 @@ public EAttribute getAttribute_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRootModel()
+  public EClass getRootModel()
   {
     return rootModelEClass;
   }
@@ -230,8 +220,7 @@ public EClass getRootModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRootModel_Type()
+  public EReference getRootModel_Type()
   {
     return (EReference)rootModelEClass.getEStructuralFeatures().get(0);
   }
@@ -241,8 +230,7 @@ public EReference getRootModel_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug291022TestLanguageFactory getBug291022TestLanguageFactory()
+  public Bug291022TestLanguageFactory getBug291022TestLanguageFactory()
   {
     return (Bug291022TestLanguageFactory)getEFactoryInstance();
   }

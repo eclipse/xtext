@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Cross Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef getType()
+  public TypeRef getType()
   {
     return type;
   }
@@ -106,8 +104,7 @@ public TypeRef getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeRef newType)
+  public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -128,8 +125,7 @@ public void setType(TypeRef newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractElement getTerminal()
+  public AbstractElement getTerminal()
   {
     return terminal;
   }
@@ -156,8 +152,7 @@ public AbstractElement getTerminal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTerminal(AbstractElement newTerminal)
+  public void setTerminal(AbstractElement newTerminal)
   {
     if (newTerminal != terminal)
     {

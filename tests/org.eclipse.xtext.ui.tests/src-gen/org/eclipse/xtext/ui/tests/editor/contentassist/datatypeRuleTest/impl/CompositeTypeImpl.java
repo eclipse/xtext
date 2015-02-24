@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.Datatype
  * An implementation of the model object '<em><b>Composite Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class CompositeTypeImpl extends TypeImpl implements CompositeType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CompositeTypeEntry getBaseType()
+  public CompositeTypeEntry getBaseType()
   {
     return baseType;
   }
@@ -94,8 +92,7 @@ public CompositeTypeEntry getBaseType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBaseType(CompositeTypeEntry newBaseType)
+  public void setBaseType(CompositeTypeEntry newBaseType)
   {
     if (newBaseType != baseType)
     {

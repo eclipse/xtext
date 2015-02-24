@@ -81,8 +81,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Spielplatz createSpielplatz()
+  public Spielplatz createSpielplatz()
   {
     SpielplatzImpl spielplatz = new SpielplatzImpl();
     return spielplatz;
@@ -93,8 +92,7 @@ public Spielplatz createSpielplatz()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Person createPerson()
+  public Person createPerson()
   {
     PersonImpl person = new PersonImpl();
     return person;
@@ -105,8 +103,7 @@ public Person createPerson()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Kind createKind()
+  public Kind createKind()
   {
     KindImpl kind = new KindImpl();
     return kind;
@@ -117,8 +114,7 @@ public Kind createKind()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Erwachsener createErwachsener()
+  public Erwachsener createErwachsener()
   {
     ErwachsenerImpl erwachsener = new ErwachsenerImpl();
     return erwachsener;
@@ -129,8 +125,7 @@ public Erwachsener createErwachsener()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Spielzeug createSpielzeug()
+  public Spielzeug createSpielzeug()
   {
     SpielzeugImpl spielzeug = new SpielzeugImpl();
     return spielzeug;
@@ -141,8 +136,7 @@ public Spielzeug createSpielzeug()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Farbe createFarbe()
+  public Farbe createFarbe()
   {
     FarbeImpl farbe = new FarbeImpl();
     return farbe;
@@ -153,8 +147,7 @@ public Farbe createFarbe()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Familie createFamilie()
+  public Familie createFamilie()
   {
     FamilieImpl familie = new FamilieImpl();
     return familie;
@@ -165,8 +158,7 @@ public Familie createFamilie()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferenceGrammarUiPackage getReferenceGrammarUiPackage()
+  public ReferenceGrammarUiPackage getReferenceGrammarUiPackage()
   {
     return (ReferenceGrammarUiPackage)getEPackage();
   }

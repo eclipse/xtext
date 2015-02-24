@@ -11,7 +11,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Col
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Collection Function</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

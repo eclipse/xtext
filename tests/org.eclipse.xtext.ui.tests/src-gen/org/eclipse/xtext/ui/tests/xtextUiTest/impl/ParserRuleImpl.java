@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Parser Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -91,8 +90,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isDefinesHiddenTokens()
+  public boolean isDefinesHiddenTokens()
   {
     return definesHiddenTokens;
   }
@@ -102,8 +100,7 @@ public boolean isDefinesHiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
+  public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
   {
     boolean oldDefinesHiddenTokens = definesHiddenTokens;
     definesHiddenTokens = newDefinesHiddenTokens;
@@ -116,8 +113,7 @@ public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractRule> getHiddenTokens()
+  public EList<AbstractRule> getHiddenTokens()
   {
     if (hiddenTokens == null)
     {

@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Lis
  * An implementation of the model object '<em><b>Invocation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class InvocationImpl extends PostfixExpressionImpl implements Invocation
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ListExpression getArguments()
+  public ListExpression getArguments()
   {
     return arguments;
   }
@@ -94,8 +92,7 @@ public ListExpression getArguments()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setArguments(ListExpression newArguments)
+  public void setArguments(ListExpression newArguments)
   {
     if (newArguments != arguments)
     {

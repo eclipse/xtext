@@ -141,8 +141,7 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -153,8 +152,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyPathPart createPropertyPathPart()
+  public PropertyPathPart createPropertyPathPart()
   {
     PropertyPathPartImpl propertyPathPart = new PropertyPathPartImpl();
     return propertyPathPart;
@@ -165,8 +163,7 @@ public PropertyPathPart createPropertyPathPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeDescription createTypeDescription()
+  public TypeDescription createTypeDescription()
   {
     TypeDescriptionImpl typeDescription = new TypeDescriptionImpl();
     return typeDescription;
@@ -177,8 +174,7 @@ public TypeDescription createTypeDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameter createParameter()
+  public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
@@ -189,8 +185,7 @@ public Parameter createParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ObjectReference createObjectReference()
+  public ObjectReference createObjectReference()
   {
     ObjectReferenceImpl objectReference = new ObjectReferenceImpl();
     return objectReference;
@@ -201,8 +196,7 @@ public ObjectReference createObjectReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression createExpression()
+  public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -213,8 +207,7 @@ public Expression createExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression createScalarExpression()
+  public ScalarExpression createScalarExpression()
   {
     ScalarExpressionImpl scalarExpression = new ScalarExpressionImpl();
     return scalarExpression;
@@ -225,8 +218,7 @@ public ScalarExpression createScalarExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionExpression createCollectionExpression()
+  public CollectionExpression createCollectionExpression()
   {
     CollectionExpressionImpl collectionExpression = new CollectionExpressionImpl();
     return collectionExpression;
@@ -237,8 +229,7 @@ public CollectionExpression createCollectionExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringLiteral createStringLiteral()
+  public StringLiteral createStringLiteral()
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
     return stringLiteral;
@@ -249,8 +240,7 @@ public StringLiteral createStringLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringFunction createStringFunction()
+  public StringFunction createStringFunction()
   {
     StringFunctionImpl stringFunction = new StringFunctionImpl();
     return stringFunction;
@@ -261,8 +251,7 @@ public StringFunction createStringFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionLiteral createCollectionLiteral()
+  public CollectionLiteral createCollectionLiteral()
   {
     CollectionLiteralImpl collectionLiteral = new CollectionLiteralImpl();
     return collectionLiteral;
@@ -273,8 +262,7 @@ public CollectionLiteral createCollectionLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionFunction createCollectionFunction()
+  public CollectionFunction createCollectionFunction()
   {
     CollectionFunctionImpl collectionFunction = new CollectionFunctionImpl();
     return collectionFunction;
@@ -285,8 +273,7 @@ public CollectionFunction createCollectionFunction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TableView createTableView()
+  public TableView createTableView()
   {
     TableViewImpl tableView = new TableViewImpl();
     return tableView;
@@ -297,8 +284,7 @@ public TableView createTableView()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ViewContentElement createViewContentElement()
+  public ViewContentElement createViewContentElement()
   {
     ViewContentElementImpl viewContentElement = new ViewContentElementImpl();
     return viewContentElement;
@@ -309,8 +295,7 @@ public ViewContentElement createViewContentElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Section createSection()
+  public Section createSection()
   {
     SectionImpl section = new SectionImpl();
     return section;
@@ -321,8 +306,7 @@ public Section createSection()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Cell createCell()
+  public Cell createCell()
   {
     CellImpl cell = new CellImpl();
     return cell;
@@ -333,8 +317,7 @@ public Cell createCell()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionIterator createCollectionIterator()
+  public CollectionIterator createCollectionIterator()
   {
     CollectionIteratorImpl collectionIterator = new CollectionIteratorImpl();
     return collectionIterator;
@@ -345,8 +328,7 @@ public CollectionIterator createCollectionIterator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ViewAction createViewAction()
+  public ViewAction createViewAction()
   {
     ViewActionImpl viewAction = new ViewActionImpl();
     return viewAction;
@@ -357,8 +339,7 @@ public ViewAction createViewAction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Selector createSelector()
+  public Selector createSelector()
   {
     SelectorImpl selector = new SelectorImpl();
     return selector;
@@ -369,8 +350,7 @@ public Selector createSelector()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ExternalOpen createExternalOpen()
+  public ExternalOpen createExternalOpen()
   {
     ExternalOpenImpl externalOpen = new ExternalOpenImpl();
     return externalOpen;
@@ -381,8 +361,7 @@ public ExternalOpen createExternalOpen()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringConcat createStringConcat()
+  public StringConcat createStringConcat()
   {
     StringConcatImpl stringConcat = new StringConcatImpl();
     return stringConcat;
@@ -393,8 +372,7 @@ public StringConcat createStringConcat()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringReplace createStringReplace()
+  public StringReplace createStringReplace()
   {
     StringReplaceImpl stringReplace = new StringReplaceImpl();
     return stringReplace;
@@ -405,8 +383,7 @@ public StringReplace createStringReplace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringUrlConform createStringUrlConform()
+  public StringUrlConform createStringUrlConform()
   {
     StringUrlConformImpl stringUrlConform = new StringUrlConformImpl();
     return stringUrlConform;
@@ -417,8 +394,7 @@ public StringUrlConform createStringUrlConform()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringSplit createStringSplit()
+  public StringSplit createStringSplit()
   {
     StringSplitImpl stringSplit = new StringSplitImpl();
     return stringSplit;
@@ -495,8 +471,7 @@ public StringSplit createStringSplit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug332217TestLanguagePackage getBug332217TestLanguagePackage()
+  public Bug332217TestLanguagePackage getBug332217TestLanguagePackage()
   {
     return (Bug332217TestLanguagePackage)getEPackage();
   }

@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Init</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class InitImpl extends MinimalEObjectImpl.Container implements Init
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpression()
+  public Expression getExpression()
   {
     return expression;
   }
@@ -95,8 +93,7 @@ public Expression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(Expression newExpression)
+  public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

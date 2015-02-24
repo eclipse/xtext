@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Col
  * An implementation of the model object '<em><b>Collection Iterator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class CollectionIteratorImpl extends PropertyPathPartImpl implements Coll
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionExpression getCollection()
+  public CollectionExpression getCollection()
   {
     return collection;
   }
@@ -94,8 +92,7 @@ public CollectionExpression getCollection()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCollection(CollectionExpression newCollection)
+  public void setCollection(CollectionExpression newCollection)
   {
     if (newCollection != collection)
     {

@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Sce
  * An implementation of the model object '<em><b>Scenario1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class Scenario1Impl extends MinimalEObjectImpl.Container implements Scena
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Child1> getChild()
+  public EList<Child1> getChild()
   {
     if (child == null)
     {

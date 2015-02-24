@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Bug
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getIdent()
+  public String getIdent()
   {
     return ident;
   }
@@ -85,8 +83,7 @@ public String getIdent()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIdent(String newIdent)
+  public void setIdent(String newIdent)
   {
     String oldIdent = ident;
     ident = newIdent;

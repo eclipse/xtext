@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Fro
  * An implementation of the model object '<em><b>Attribute Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -77,8 +76,7 @@ public class AttributeWhereEntryImpl extends WhereEntryImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FromEntry getAlias()
+  public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -108,8 +106,7 @@ public FromEntry getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(FromEntry newAlias)
+  public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -122,8 +119,7 @@ public void setAlias(FromEntry newAlias)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute()
+  public EAttribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
     {
@@ -153,8 +149,7 @@ public EAttribute getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAttribute(EAttribute newAttribute)
+  public void setAttribute(EAttribute newAttribute)
   {
     EAttribute oldAttribute = attribute;
     attribute = newAttribute;

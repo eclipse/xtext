@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class AttributeImpl extends FeatureImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -84,8 +82,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;

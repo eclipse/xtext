@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Concat</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -70,8 +69,7 @@ public class StringConcatImpl extends StringFunctionImpl implements StringConcat
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ScalarExpression> getValues()
+  public EList<ScalarExpression> getValues()
   {
     if (values == null)
     {

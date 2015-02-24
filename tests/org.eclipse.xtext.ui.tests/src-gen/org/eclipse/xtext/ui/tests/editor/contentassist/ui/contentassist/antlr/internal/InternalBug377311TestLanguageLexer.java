@@ -2,7 +2,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.i
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug377311TestLanguageLexer extends Lexer {
     public static final int RULE_ID=7;
-    public static final int RULE_NEWLINE=6;
     public static final int RULE_STRING=4;
+    public static final int RULE_NEWLINE=6;
     public static final int T__12=12;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_INT=8;

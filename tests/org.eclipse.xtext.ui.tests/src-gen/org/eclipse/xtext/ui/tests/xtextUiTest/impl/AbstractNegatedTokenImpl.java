@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Abstract Negated Token</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class AbstractNegatedTokenImpl extends AbstractElementImpl implements Abs
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractElement getTerminal()
+  public AbstractElement getTerminal()
   {
     return terminal;
   }
@@ -94,8 +92,7 @@ public AbstractElement getTerminal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTerminal(AbstractElement newTerminal)
+  public void setTerminal(AbstractElement newTerminal)
   {
     if (newTerminal != terminal)
     {

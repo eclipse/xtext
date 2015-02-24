@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getId <em>Id</em>}</li>
@@ -31,7 +32,6 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getKeywordContext <em>Keyword Context</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -163,8 +163,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -174,8 +173,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -188,8 +186,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getId()
+  public String getId()
   {
     return id;
   }
@@ -199,8 +196,7 @@ public String getId()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setId(String newId)
+  public void setId(String newId)
   {
     String oldId = id;
     id = newId;
@@ -213,8 +209,7 @@ public void setId(String newId)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getDescription()
+  public String getDescription()
   {
     return description;
   }
@@ -224,8 +219,7 @@ public String getDescription()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDescription(String newDescription)
+  public void setDescription(String newDescription)
   {
     String oldDescription = description;
     description = newDescription;
@@ -238,8 +232,7 @@ public void setDescription(String newDescription)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRule getContext()
+  public AbstractRule getContext()
   {
     if (context != null && context.eIsProxy())
     {
@@ -269,8 +262,7 @@ public AbstractRule getContext()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setContext(AbstractRule newContext)
+  public void setContext(AbstractRule newContext)
   {
     AbstractRule oldContext = context;
     context = newContext;
@@ -283,8 +275,7 @@ public void setContext(AbstractRule newContext)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getKeywordContext()
+  public String getKeywordContext()
   {
     return keywordContext;
   }
@@ -294,8 +285,7 @@ public String getKeywordContext()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setKeywordContext(String newKeywordContext)
+  public void setKeywordContext(String newKeywordContext)
   {
     String oldKeywordContext = keywordContext;
     keywordContext = newKeywordContext;
@@ -308,8 +298,7 @@ public void setKeywordContext(String newKeywordContext)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TemplateBody getBody()
+  public TemplateBody getBody()
   {
     return body;
   }
@@ -336,8 +325,7 @@ public TemplateBody getBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBody(TemplateBody newBody)
+  public void setBody(TemplateBody newBody)
   {
     if (newBody != body)
     {

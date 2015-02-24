@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingT
  * An implementation of the model object '<em><b>Type Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Type getType()
+  public Type getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -97,8 +95,7 @@ public Type getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(Type newType)
+  public void setType(Type newType)
   {
     Type oldType = type;
     type = newType;

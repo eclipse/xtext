@@ -76,8 +76,7 @@ public class Bug381381TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -88,8 +87,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CopyFieldNameToVariableStmt createCopyFieldNameToVariableStmt()
+  public CopyFieldNameToVariableStmt createCopyFieldNameToVariableStmt()
   {
     CopyFieldNameToVariableStmtImpl copyFieldNameToVariableStmt = new CopyFieldNameToVariableStmtImpl();
     return copyFieldNameToVariableStmt;
@@ -100,8 +98,7 @@ public CopyFieldNameToVariableStmt createCopyFieldNameToVariableStmt()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug381381TestLanguagePackage getBug381381TestLanguagePackage()
+  public Bug381381TestLanguagePackage getBug381381TestLanguagePackage()
   {
     return (Bug381381TestLanguagePackage)getEPackage();
   }

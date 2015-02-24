@@ -24,7 +24,6 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Namespace;
  * An implementation of the model object '<em><b>Namespace</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -82,8 +81,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Import> getImports()
+  public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -97,8 +95,7 @@ public EList<Import> getImports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<NamedElement> getElements()
+  public EList<NamedElement> getElements()
   {
     if (elements == null)
     {

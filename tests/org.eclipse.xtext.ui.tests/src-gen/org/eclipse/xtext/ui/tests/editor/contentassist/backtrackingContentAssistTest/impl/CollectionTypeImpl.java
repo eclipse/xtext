@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Collection Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<CollectionLiteralPart> getCollectionLiteralParts()
+  public EList<CollectionLiteralPart> getCollectionLiteralParts()
   {
     if (collectionLiteralParts == null)
     {
@@ -110,8 +108,7 @@ public EList<CollectionLiteralPart> getCollectionLiteralParts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getTypeIdentifier()
+  public String getTypeIdentifier()
   {
     return typeIdentifier;
   }
@@ -121,8 +118,7 @@ public String getTypeIdentifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTypeIdentifier(String newTypeIdentifier)
+  public void setTypeIdentifier(String newTypeIdentifier)
   {
     String oldTypeIdentifier = typeIdentifier;
     typeIdentifier = newTypeIdentifier;

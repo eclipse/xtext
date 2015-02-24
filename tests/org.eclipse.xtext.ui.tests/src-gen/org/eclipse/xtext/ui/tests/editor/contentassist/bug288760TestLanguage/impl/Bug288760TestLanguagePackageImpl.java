@@ -104,8 +104,7 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWorkflowElement()
+  public EClass getWorkflowElement()
   {
     return workflowElementEClass;
   }
@@ -115,8 +114,7 @@ public EClass getWorkflowElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getWorkflowElement_Name()
+  public EAttribute getWorkflowElement_Name()
   {
     return (EAttribute)workflowElementEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EAttribute getWorkflowElement_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getWorkflowElement_Attributes()
+  public EReference getWorkflowElement_Attributes()
   {
     return (EReference)workflowElementEClass.getEStructuralFeatures().get(1);
   }
@@ -137,8 +134,7 @@ public EReference getWorkflowElement_Attributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getWorkflowElement_Children()
+  public EReference getWorkflowElement_Children()
   {
     return (EReference)workflowElementEClass.getEStructuralFeatures().get(2);
   }
@@ -148,8 +144,7 @@ public EReference getWorkflowElement_Children()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getWorkflowElement_End()
+  public EAttribute getWorkflowElement_End()
   {
     return (EAttribute)workflowElementEClass.getEStructuralFeatures().get(3);
   }
@@ -159,8 +154,7 @@ public EAttribute getWorkflowElement_End()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -170,8 +164,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Name()
+  public EAttribute getAttribute_Name()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -181,8 +174,7 @@ public EAttribute getAttribute_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Value()
+  public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
   }
@@ -192,8 +184,7 @@ public EAttribute getAttribute_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug288760TestLanguageFactory getBug288760TestLanguageFactory()
+  public Bug288760TestLanguageFactory getBug288760TestLanguageFactory()
   {
     return (Bug288760TestLanguageFactory)getEFactoryInstance();
   }

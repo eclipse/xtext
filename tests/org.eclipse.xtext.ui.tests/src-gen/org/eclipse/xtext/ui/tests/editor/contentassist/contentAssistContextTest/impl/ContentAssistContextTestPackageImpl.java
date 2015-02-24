@@ -144,8 +144,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFirstLevel()
+  public EClass getFirstLevel()
   {
     return firstLevelEClass;
   }
@@ -155,8 +154,7 @@ public EClass getFirstLevel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFirstLevel_SecondLevelA()
+  public EReference getFirstLevel_SecondLevelA()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(0);
   }
@@ -166,8 +164,7 @@ public EReference getFirstLevel_SecondLevelA()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFirstLevel_SecondLevelB()
+  public EReference getFirstLevel_SecondLevelB()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(1);
   }
@@ -177,8 +174,7 @@ public EReference getFirstLevel_SecondLevelB()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSecondLevelA()
+  public EClass getSecondLevelA()
   {
     return secondLevelAEClass;
   }
@@ -188,8 +184,7 @@ public EClass getSecondLevelA()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSecondLevelA_ThirdLevelA1()
+  public EReference getSecondLevelA_ThirdLevelA1()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(0);
   }
@@ -199,8 +194,7 @@ public EReference getSecondLevelA_ThirdLevelA1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSecondLevelA_ThirdLevelA2()
+  public EReference getSecondLevelA_ThirdLevelA2()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(1);
   }
@@ -210,8 +204,7 @@ public EReference getSecondLevelA_ThirdLevelA2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSecondLevelB()
+  public EClass getSecondLevelB()
   {
     return secondLevelBEClass;
   }
@@ -221,8 +214,7 @@ public EClass getSecondLevelB()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSecondLevelB_ThirdLevelB1()
+  public EReference getSecondLevelB_ThirdLevelB1()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(0);
   }
@@ -232,8 +224,7 @@ public EReference getSecondLevelB_ThirdLevelB1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSecondLevelB_ThirdLevelB2()
+  public EReference getSecondLevelB_ThirdLevelB2()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(1);
   }
@@ -243,8 +234,7 @@ public EReference getSecondLevelB_ThirdLevelB2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getThirdLevelA1()
+  public EClass getThirdLevelA1()
   {
     return thirdLevelA1EClass;
   }
@@ -254,8 +244,7 @@ public EClass getThirdLevelA1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getThirdLevelA1_Name()
+  public EAttribute getThirdLevelA1_Name()
   {
     return (EAttribute)thirdLevelA1EClass.getEStructuralFeatures().get(0);
   }
@@ -265,8 +254,7 @@ public EAttribute getThirdLevelA1_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getThirdLevelA2()
+  public EClass getThirdLevelA2()
   {
     return thirdLevelA2EClass;
   }
@@ -276,8 +264,7 @@ public EClass getThirdLevelA2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getThirdLevelA2_Name()
+  public EAttribute getThirdLevelA2_Name()
   {
     return (EAttribute)thirdLevelA2EClass.getEStructuralFeatures().get(0);
   }
@@ -287,8 +274,7 @@ public EAttribute getThirdLevelA2_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getThirdLevelB1()
+  public EClass getThirdLevelB1()
   {
     return thirdLevelB1EClass;
   }
@@ -298,8 +284,7 @@ public EClass getThirdLevelB1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getThirdLevelB1_Name()
+  public EAttribute getThirdLevelB1_Name()
   {
     return (EAttribute)thirdLevelB1EClass.getEStructuralFeatures().get(0);
   }
@@ -309,8 +294,7 @@ public EAttribute getThirdLevelB1_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getThirdLevelB2()
+  public EClass getThirdLevelB2()
   {
     return thirdLevelB2EClass;
   }
@@ -320,8 +304,7 @@ public EClass getThirdLevelB2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getThirdLevelB2_Name()
+  public EAttribute getThirdLevelB2_Name()
   {
     return (EAttribute)thirdLevelB2EClass.getEStructuralFeatures().get(0);
   }
@@ -331,8 +314,7 @@ public EAttribute getThirdLevelB2_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistContextTestFactory getContentAssistContextTestFactory()
+  public ContentAssistContextTestFactory getContentAssistContextTestFactory()
   {
     return (ContentAssistContextTestFactory)getEFactoryInstance();
   }

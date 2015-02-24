@@ -11,7 +11,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Enum Rule</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -150,8 +150,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCodetemplates()
+  public EClass getCodetemplates()
   {
     return codetemplatesEClass;
   }
@@ -161,8 +160,7 @@ public EClass getCodetemplates()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCodetemplates_Language()
+  public EReference getCodetemplates_Language()
   {
     return (EReference)codetemplatesEClass.getEStructuralFeatures().get(0);
   }
@@ -172,8 +170,7 @@ public EReference getCodetemplates_Language()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCodetemplates_Templates()
+  public EReference getCodetemplates_Templates()
   {
     return (EReference)codetemplatesEClass.getEStructuralFeatures().get(1);
   }
@@ -183,8 +180,7 @@ public EReference getCodetemplates_Templates()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCodetemplate()
+  public EClass getCodetemplate()
   {
     return codetemplateEClass;
   }
@@ -194,8 +190,7 @@ public EClass getCodetemplate()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCodetemplate_Name()
+  public EAttribute getCodetemplate_Name()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(0);
   }
@@ -205,8 +200,7 @@ public EAttribute getCodetemplate_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCodetemplate_Id()
+  public EAttribute getCodetemplate_Id()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(1);
   }
@@ -216,8 +210,7 @@ public EAttribute getCodetemplate_Id()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCodetemplate_Description()
+  public EAttribute getCodetemplate_Description()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(2);
   }
@@ -227,8 +220,7 @@ public EAttribute getCodetemplate_Description()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCodetemplate_Context()
+  public EReference getCodetemplate_Context()
   {
     return (EReference)codetemplateEClass.getEStructuralFeatures().get(3);
   }
@@ -238,8 +230,7 @@ public EReference getCodetemplate_Context()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCodetemplate_KeywordContext()
+  public EAttribute getCodetemplate_KeywordContext()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(4);
   }
@@ -249,8 +240,7 @@ public EAttribute getCodetemplate_KeywordContext()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getCodetemplate_Body()
+  public EReference getCodetemplate_Body()
   {
     return (EReference)codetemplateEClass.getEStructuralFeatures().get(5);
   }
@@ -260,8 +250,7 @@ public EReference getCodetemplate_Body()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTemplateBody()
+  public EClass getTemplateBody()
   {
     return templateBodyEClass;
   }
@@ -271,8 +260,7 @@ public EClass getTemplateBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTemplateBody_Parts()
+  public EReference getTemplateBody_Parts()
   {
     return (EReference)templateBodyEClass.getEStructuralFeatures().get(0);
   }
@@ -282,8 +270,7 @@ public EReference getTemplateBody_Parts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTemplatePart()
+  public EClass getTemplatePart()
   {
     return templatePartEClass;
   }
@@ -293,8 +280,7 @@ public EClass getTemplatePart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getVariable()
+  public EClass getVariable()
   {
     return variableEClass;
   }
@@ -304,8 +290,7 @@ public EClass getVariable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getVariable_Name()
+  public EAttribute getVariable_Name()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
   }
@@ -315,8 +300,7 @@ public EAttribute getVariable_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getVariable_Type()
+  public EAttribute getVariable_Type()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(1);
   }
@@ -326,8 +310,7 @@ public EAttribute getVariable_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getVariable_ExpectingParameters()
+  public EAttribute getVariable_ExpectingParameters()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(2);
   }
@@ -337,8 +320,7 @@ public EAttribute getVariable_ExpectingParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getVariable_Parameters()
+  public EAttribute getVariable_Parameters()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(3);
   }
@@ -348,8 +330,7 @@ public EAttribute getVariable_Parameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getLiteral()
+  public EClass getLiteral()
   {
     return literalEClass;
   }
@@ -359,8 +340,7 @@ public EClass getLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLiteral_Value()
+  public EAttribute getLiteral_Value()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(0);
   }
@@ -370,8 +350,7 @@ public EAttribute getLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDollar()
+  public EClass getDollar()
   {
     return dollarEClass;
   }
@@ -381,8 +360,7 @@ public EClass getDollar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDollar_Escaped()
+  public EAttribute getDollar_Escaped()
   {
     return (EAttribute)dollarEClass.getEStructuralFeatures().get(0);
   }
@@ -392,8 +370,7 @@ public EAttribute getDollar_Escaped()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TemplatesFactory getTemplatesFactory()
+  public TemplatesFactory getTemplatesFactory()
   {
     return (TemplatesFactory)getEFactoryInstance();
   }

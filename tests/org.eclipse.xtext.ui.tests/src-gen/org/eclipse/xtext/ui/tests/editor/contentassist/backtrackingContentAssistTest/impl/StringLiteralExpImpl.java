@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>String Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -65,8 +64,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getValues()
+  public EList<String> getValues()
   {
     if (values == null)
     {

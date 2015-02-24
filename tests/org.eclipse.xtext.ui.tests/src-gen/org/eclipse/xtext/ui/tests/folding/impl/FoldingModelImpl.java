@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.folding.FoldingPackage;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class FoldingModelImpl extends MinimalEObjectImpl.Container implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Element> getElements()
+  public EList<Element> getElements()
   {
     if (elements == null)
     {

@@ -112,8 +112,7 @@ public class Bug307519TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -124,8 +123,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Elem1 createElem1()
+  public Elem1 createElem1()
   {
     Elem1Impl elem1 = new Elem1Impl();
     return elem1;
@@ -136,8 +134,7 @@ public Elem1 createElem1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Elem2 createElem2()
+  public Elem2 createElem2()
   {
     Elem2Impl elem2 = new Elem2Impl();
     return elem2;
@@ -170,8 +167,7 @@ public Elem2 createElem2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug307519TestLanguagePackage getBug307519TestLanguagePackage()
+  public Bug307519TestLanguagePackage getBug307519TestLanguagePackage()
   {
     return (Bug307519TestLanguagePackage)getEPackage();
   }

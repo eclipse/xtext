@@ -134,8 +134,7 @@ public class BacktrackingContentAssistTestFactoryImpl extends EFactoryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Document createDocument()
+  public Document createDocument()
   {
     DocumentImpl document = new DocumentImpl();
     return document;
@@ -146,8 +145,7 @@ public Document createDocument()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Body createBody()
+  public Body createBody()
   {
     BodyImpl body = new BodyImpl();
     return body;
@@ -158,8 +156,7 @@ public Body createBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClassifierContextDecl createClassifierContextDecl()
+  public ClassifierContextDecl createClassifierContextDecl()
   {
     ClassifierContextDeclImpl classifierContextDecl = new ClassifierContextDeclImpl();
     return classifierContextDecl;
@@ -170,8 +167,7 @@ public ClassifierContextDecl createClassifierContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ClassifierRef createClassifierRef()
+  public ClassifierRef createClassifierRef()
   {
     ClassifierRefImpl classifierRef = new ClassifierRefImpl();
     return classifierRef;
@@ -182,8 +178,7 @@ public ClassifierRef createClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContextDecl createContextDecl()
+  public ContextDecl createContextDecl()
   {
     ContextDeclImpl contextDecl = new ContextDeclImpl();
     return contextDecl;
@@ -194,8 +189,7 @@ public ContextDecl createContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Definition createDefinition()
+  public Definition createDefinition()
   {
     DefinitionImpl definition = new DefinitionImpl();
     return definition;
@@ -206,8 +200,7 @@ public Definition createDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Der createDer()
+  public Der createDer()
   {
     DerImpl der = new DerImpl();
     return der;
@@ -218,8 +211,7 @@ public Der createDer()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Init createInit()
+  public Init createInit()
   {
     InitImpl init = new InitImpl();
     return init;
@@ -230,8 +222,7 @@ public Init createInit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Invariant createInvariant()
+  public Invariant createInvariant()
   {
     InvariantImpl invariant = new InvariantImpl();
     return invariant;
@@ -242,8 +233,7 @@ public Invariant createInvariant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OperationContextDecl createOperationContextDecl()
+  public OperationContextDecl createOperationContextDecl()
   {
     OperationContextDeclImpl operationContextDecl = new OperationContextDeclImpl();
     return operationContextDecl;
@@ -254,8 +244,7 @@ public OperationContextDecl createOperationContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OperationRef createOperationRef()
+  public OperationRef createOperationRef()
   {
     OperationRefImpl operationRef = new OperationRefImpl();
     return operationRef;
@@ -266,8 +255,7 @@ public OperationRef createOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageDeclaration createPackageDeclaration()
+  public PackageDeclaration createPackageDeclaration()
   {
     PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
     return packageDeclaration;
@@ -278,8 +266,7 @@ public PackageDeclaration createPackageDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageRef createPackageRef()
+  public PackageRef createPackageRef()
   {
     PackageRefImpl packageRef = new PackageRefImpl();
     return packageRef;
@@ -290,8 +277,7 @@ public PackageRef createPackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameter createParameter()
+  public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
@@ -302,8 +288,7 @@ public Parameter createParameter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Post createPost()
+  public Post createPost()
   {
     PostImpl post = new PostImpl();
     return post;
@@ -314,8 +299,7 @@ public Post createPost()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Pre createPre()
+  public Pre createPre()
   {
     PreImpl pre = new PreImpl();
     return pre;
@@ -326,8 +310,7 @@ public Pre createPre()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyContextDecl createPropertyContextDecl()
+  public PropertyContextDecl createPropertyContextDecl()
   {
     PropertyContextDeclImpl propertyContextDecl = new PropertyContextDeclImpl();
     return propertyContextDecl;
@@ -338,8 +321,7 @@ public PropertyContextDecl createPropertyContextDecl()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyRef createPropertyRef()
+  public PropertyRef createPropertyRef()
   {
     PropertyRefImpl propertyRef = new PropertyRefImpl();
     return propertyRef;
@@ -350,8 +332,7 @@ public PropertyRef createPropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QualifiedClassifierRef createQualifiedClassifierRef()
+  public QualifiedClassifierRef createQualifiedClassifierRef()
   {
     QualifiedClassifierRefImpl qualifiedClassifierRef = new QualifiedClassifierRefImpl();
     return qualifiedClassifierRef;
@@ -362,8 +343,7 @@ public QualifiedClassifierRef createQualifiedClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QualifiedOperationRef createQualifiedOperationRef()
+  public QualifiedOperationRef createQualifiedOperationRef()
   {
     QualifiedOperationRefImpl qualifiedOperationRef = new QualifiedOperationRefImpl();
     return qualifiedOperationRef;
@@ -374,8 +354,7 @@ public QualifiedOperationRef createQualifiedOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QualifiedPropertyRef createQualifiedPropertyRef()
+  public QualifiedPropertyRef createQualifiedPropertyRef()
   {
     QualifiedPropertyRefImpl qualifiedPropertyRef = new QualifiedPropertyRefImpl();
     return qualifiedPropertyRef;
@@ -386,8 +365,7 @@ public QualifiedPropertyRef createQualifiedPropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public QualifiedPackageRef createQualifiedPackageRef()
+  public QualifiedPackageRef createQualifiedPackageRef()
   {
     QualifiedPackageRefImpl qualifiedPackageRef = new QualifiedPackageRefImpl();
     return qualifiedPackageRef;
@@ -398,8 +376,7 @@ public QualifiedPackageRef createQualifiedPackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleClassifierRef createSimpleClassifierRef()
+  public SimpleClassifierRef createSimpleClassifierRef()
   {
     SimpleClassifierRefImpl simpleClassifierRef = new SimpleClassifierRefImpl();
     return simpleClassifierRef;
@@ -410,8 +387,7 @@ public SimpleClassifierRef createSimpleClassifierRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleOperationRef createSimpleOperationRef()
+  public SimpleOperationRef createSimpleOperationRef()
   {
     SimpleOperationRefImpl simpleOperationRef = new SimpleOperationRefImpl();
     return simpleOperationRef;
@@ -422,8 +398,7 @@ public SimpleOperationRef createSimpleOperationRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimplePackageRef createSimplePackageRef()
+  public SimplePackageRef createSimplePackageRef()
   {
     SimplePackageRefImpl simplePackageRef = new SimplePackageRefImpl();
     return simplePackageRef;
@@ -434,8 +409,7 @@ public SimplePackageRef createSimplePackageRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimplePropertyRef createSimplePropertyRef()
+  public SimplePropertyRef createSimplePropertyRef()
   {
     SimplePropertyRefImpl simplePropertyRef = new SimplePropertyRefImpl();
     return simplePropertyRef;
@@ -446,8 +420,7 @@ public SimplePropertyRef createSimplePropertyRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression createExpression()
+  public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -458,8 +431,7 @@ public Expression createExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NavigatingExp createNavigatingExp()
+  public NavigatingExp createNavigatingExp()
   {
     NavigatingExpImpl navigatingExp = new NavigatingExpImpl();
     return navigatingExp;
@@ -470,8 +442,7 @@ public NavigatingExp createNavigatingExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OclMessageArg createOclMessageArg()
+  public OclMessageArg createOclMessageArg()
   {
     OclMessageArgImpl oclMessageArg = new OclMessageArgImpl();
     return oclMessageArg;
@@ -482,8 +453,7 @@ public OclMessageArg createOclMessageArg()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PrimitiveType createPrimitiveType()
+  public PrimitiveType createPrimitiveType()
   {
     PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
     return primitiveType;
@@ -494,8 +464,7 @@ public PrimitiveType createPrimitiveType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp createTypeExp()
+  public TypeExp createTypeExp()
   {
     TypeExpImpl typeExp = new TypeExpImpl();
     return typeExp;
@@ -506,8 +475,7 @@ public TypeExp createTypeExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionType createCollectionType()
+  public CollectionType createCollectionType()
   {
     CollectionTypeImpl collectionType = new CollectionTypeImpl();
     return collectionType;
@@ -518,8 +486,7 @@ public CollectionType createCollectionType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TupleType createTupleType()
+  public TupleType createTupleType()
   {
     TupleTypeImpl tupleType = new TupleTypeImpl();
     return tupleType;
@@ -530,8 +497,7 @@ public TupleType createTupleType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public tuplePart createtuplePart()
+  public tuplePart createtuplePart()
   {
     tuplePartImpl tuplePart = new tuplePartImpl();
     return tuplePart;
@@ -542,8 +508,7 @@ public tuplePart createtuplePart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionLiteralExp createCollectionLiteralExp()
+  public CollectionLiteralExp createCollectionLiteralExp()
   {
     CollectionLiteralExpImpl collectionLiteralExp = new CollectionLiteralExpImpl();
     return collectionLiteralExp;
@@ -554,8 +519,7 @@ public CollectionLiteralExp createCollectionLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CollectionLiteralPart createCollectionLiteralPart()
+  public CollectionLiteralPart createCollectionLiteralPart()
   {
     CollectionLiteralPartImpl collectionLiteralPart = new CollectionLiteralPartImpl();
     return collectionLiteralPart;
@@ -566,8 +530,7 @@ public CollectionLiteralPart createCollectionLiteralPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PrimitiveLiteralExp createPrimitiveLiteralExp()
+  public PrimitiveLiteralExp createPrimitiveLiteralExp()
   {
     PrimitiveLiteralExpImpl primitiveLiteralExp = new PrimitiveLiteralExpImpl();
     return primitiveLiteralExp;
@@ -578,8 +541,7 @@ public PrimitiveLiteralExp createPrimitiveLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TupleLiteralExp createTupleLiteralExp()
+  public TupleLiteralExp createTupleLiteralExp()
   {
     TupleLiteralExpImpl tupleLiteralExp = new TupleLiteralExpImpl();
     return tupleLiteralExp;
@@ -590,8 +552,7 @@ public TupleLiteralExp createTupleLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TupleLiteralPart createTupleLiteralPart()
+  public TupleLiteralPart createTupleLiteralPart()
   {
     TupleLiteralPartImpl tupleLiteralPart = new TupleLiteralPartImpl();
     return tupleLiteralPart;
@@ -602,8 +563,7 @@ public TupleLiteralPart createTupleLiteralPart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumberLiteralExp createNumberLiteralExp()
+  public NumberLiteralExp createNumberLiteralExp()
   {
     NumberLiteralExpImpl numberLiteralExp = new NumberLiteralExpImpl();
     return numberLiteralExp;
@@ -614,8 +574,7 @@ public NumberLiteralExp createNumberLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringLiteralExp createStringLiteralExp()
+  public StringLiteralExp createStringLiteralExp()
   {
     StringLiteralExpImpl stringLiteralExp = new StringLiteralExpImpl();
     return stringLiteralExp;
@@ -626,8 +585,7 @@ public StringLiteralExp createStringLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BooleanLiteralExp createBooleanLiteralExp()
+  public BooleanLiteralExp createBooleanLiteralExp()
   {
     BooleanLiteralExpImpl booleanLiteralExp = new BooleanLiteralExpImpl();
     return booleanLiteralExp;
@@ -638,8 +596,7 @@ public BooleanLiteralExp createBooleanLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public InvalidLiteralExp createInvalidLiteralExp()
+  public InvalidLiteralExp createInvalidLiteralExp()
   {
     InvalidLiteralExpImpl invalidLiteralExp = new InvalidLiteralExpImpl();
     return invalidLiteralExp;
@@ -650,8 +607,7 @@ public InvalidLiteralExp createInvalidLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NullLiteralExp createNullLiteralExp()
+  public NullLiteralExp createNullLiteralExp()
   {
     NullLiteralExpImpl nullLiteralExp = new NullLiteralExpImpl();
     return nullLiteralExp;
@@ -662,8 +618,7 @@ public NullLiteralExp createNullLiteralExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public iteratorVariable createiteratorVariable()
+  public iteratorVariable createiteratorVariable()
   {
     iteratorVariableImpl iteratorVariable = new iteratorVariableImpl();
     return iteratorVariable;
@@ -674,8 +629,7 @@ public iteratorVariable createiteratorVariable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public iteratorAccumulator createiteratorAccumulator()
+  public iteratorAccumulator createiteratorAccumulator()
   {
     iteratorAccumulatorImpl iteratorAccumulator = new iteratorAccumulatorImpl();
     return iteratorAccumulator;
@@ -686,8 +640,7 @@ public iteratorAccumulator createiteratorAccumulator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RoundBracketExp createRoundBracketExp()
+  public RoundBracketExp createRoundBracketExp()
   {
     RoundBracketExpImpl roundBracketExp = new RoundBracketExpImpl();
     return roundBracketExp;
@@ -698,8 +651,7 @@ public RoundBracketExp createRoundBracketExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SquareBracketExp createSquareBracketExp()
+  public SquareBracketExp createSquareBracketExp()
   {
     SquareBracketExpImpl squareBracketExp = new SquareBracketExpImpl();
     return squareBracketExp;
@@ -710,8 +662,7 @@ public SquareBracketExp createSquareBracketExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PreExp createPreExp()
+  public PreExp createPreExp()
   {
     PreExpImpl preExp = new PreExpImpl();
     return preExp;
@@ -722,8 +673,7 @@ public PreExp createPreExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SelfExp createSelfExp()
+  public SelfExp createSelfExp()
   {
     SelfExpImpl selfExp = new SelfExpImpl();
     return selfExp;
@@ -734,8 +684,7 @@ public SelfExp createSelfExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NameExp createNameExp()
+  public NameExp createNameExp()
   {
     NameExpImpl nameExp = new NameExpImpl();
     return nameExp;
@@ -746,8 +695,7 @@ public NameExp createNameExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PathNameExp createPathNameExp()
+  public PathNameExp createPathNameExp()
   {
     PathNameExpImpl pathNameExp = new PathNameExpImpl();
     return pathNameExp;
@@ -758,8 +706,7 @@ public PathNameExp createPathNameExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleNameExp createSimpleNameExp()
+  public SimpleNameExp createSimpleNameExp()
   {
     SimpleNameExpImpl simpleNameExp = new SimpleNameExpImpl();
     return simpleNameExp;
@@ -770,8 +717,7 @@ public SimpleNameExp createSimpleNameExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public IfExp createIfExp()
+  public IfExp createIfExp()
   {
     IfExpImpl ifExp = new IfExpImpl();
     return ifExp;
@@ -782,8 +728,7 @@ public IfExp createIfExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LetExp createLetExp()
+  public LetExp createLetExp()
   {
     LetExpImpl letExp = new LetExpImpl();
     return letExp;
@@ -794,8 +739,7 @@ public LetExp createLetExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LetVariable createLetVariable()
+  public LetVariable createLetVariable()
   {
     LetVariableImpl letVariable = new LetVariableImpl();
     return letVariable;
@@ -806,8 +750,7 @@ public LetVariable createLetVariable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public InfixExp createInfixExp()
+  public InfixExp createInfixExp()
   {
     InfixExpImpl infixExp = new InfixExpImpl();
     return infixExp;
@@ -818,8 +761,7 @@ public InfixExp createInfixExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OclMessage createOclMessage()
+  public OclMessage createOclMessage()
   {
     OclMessageImpl oclMessage = new OclMessageImpl();
     return oclMessage;
@@ -830,8 +772,7 @@ public OclMessage createOclMessage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PrefixExp createPrefixExp()
+  public PrefixExp createPrefixExp()
   {
     PrefixExpImpl prefixExp = new PrefixExpImpl();
     return prefixExp;
@@ -842,8 +783,7 @@ public PrefixExp createPrefixExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NestedExp createNestedExp()
+  public NestedExp createNestedExp()
   {
     NestedExpImpl nestedExp = new NestedExpImpl();
     return nestedExp;
@@ -854,8 +794,7 @@ public NestedExp createNestedExp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BacktrackingContentAssistTestPackage getBacktrackingContentAssistTestPackage()
+  public BacktrackingContentAssistTestPackage getBacktrackingContentAssistTestPackage()
   {
     return (BacktrackingContentAssistTestPackage)getEPackage();
   }

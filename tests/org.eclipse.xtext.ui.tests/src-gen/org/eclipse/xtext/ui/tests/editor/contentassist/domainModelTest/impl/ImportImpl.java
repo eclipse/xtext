@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Import;
  * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getImportURI()
+  public String getImportURI()
   {
     return importURI;
   }
@@ -85,8 +83,7 @@ public String getImportURI()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setImportURI(String newImportURI)
+  public void setImportURI(String newImportURI)
   {
     String oldImportURI = importURI;
     importURI = newImportURI;

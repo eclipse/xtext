@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Pre</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class PreImpl extends MinimalEObjectImpl.Container implements Pre
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getConstraintName()
+  public String getConstraintName()
   {
     return constraintName;
   }
@@ -99,8 +97,7 @@ public String getConstraintName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setConstraintName(String newConstraintName)
+  public void setConstraintName(String newConstraintName)
   {
     String oldConstraintName = constraintName;
     constraintName = newConstraintName;
@@ -113,8 +110,7 @@ public void setConstraintName(String newConstraintName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpression()
+  public Expression getExpression()
   {
     return expression;
   }
@@ -141,8 +137,7 @@ public Expression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(Expression newExpression)
+  public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

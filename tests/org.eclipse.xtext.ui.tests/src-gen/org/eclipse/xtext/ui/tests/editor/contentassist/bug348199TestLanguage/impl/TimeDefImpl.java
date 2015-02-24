@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Tim
  * An implementation of the model object '<em><b>Time Def</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getDay()
+  public int getDay()
   {
     return day;
   }
@@ -85,8 +83,7 @@ public int getDay()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDay(int newDay)
+  public void setDay(int newDay)
   {
     int oldDay = day;
     day = newDay;

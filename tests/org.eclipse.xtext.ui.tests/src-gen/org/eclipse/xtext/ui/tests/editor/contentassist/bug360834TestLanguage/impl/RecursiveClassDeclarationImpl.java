@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Rec
  * An implementation of the model object '<em><b>Recursive Class Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -106,8 +105,7 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Modifiers getModifiers()
+  public Modifiers getModifiers()
   {
     return modifiers;
   }
@@ -134,8 +132,7 @@ public Modifiers getModifiers()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setModifiers(Modifiers newModifiers)
+  public void setModifiers(Modifiers newModifiers)
   {
     if (newModifiers != modifiers)
     {
@@ -156,8 +153,7 @@ public void setModifiers(Modifiers newModifiers)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -167,8 +163,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -181,8 +176,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<RecursiveClassDeclaration> getMembers()
+  public EList<RecursiveClassDeclaration> getMembers()
   {
     if (members == null)
     {

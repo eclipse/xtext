@@ -11,7 +11,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Erwachsener</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

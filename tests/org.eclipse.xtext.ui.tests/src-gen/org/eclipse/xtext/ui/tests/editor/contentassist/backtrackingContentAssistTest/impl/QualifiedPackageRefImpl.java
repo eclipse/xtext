@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Qualified Package Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -87,8 +86,7 @@ public class QualifiedPackageRefImpl extends PackageRefImpl implements Qualified
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getNamespace()
+  public String getNamespace()
   {
     return namespace;
   }
@@ -98,8 +96,7 @@ public String getNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNamespace(String newNamespace)
+  public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
     namespace = newNamespace;
@@ -112,8 +109,7 @@ public void setNamespace(String newNamespace)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageRef getElement()
+  public PackageRef getElement()
   {
     return element;
   }
@@ -140,8 +136,7 @@ public PackageRef getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(PackageRef newElement)
+  public void setElement(PackageRef newElement)
   {
     if (newElement != element)
     {

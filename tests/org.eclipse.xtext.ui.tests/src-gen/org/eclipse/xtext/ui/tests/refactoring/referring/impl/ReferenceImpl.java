@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
  * An implementation of the model object '<em><b>Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class ReferenceImpl extends MinimalEObjectImpl.Container implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EObject getReferenced()
+  public EObject getReferenced()
   {
     if (referenced != null && referenced.eIsProxy())
     {
@@ -97,8 +95,7 @@ public EObject getReferenced()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReferenced(EObject newReferenced)
+  public void setReferenced(EObject newReferenced)
   {
     EObject oldReferenced = referenced;
     referenced = newReferenced;

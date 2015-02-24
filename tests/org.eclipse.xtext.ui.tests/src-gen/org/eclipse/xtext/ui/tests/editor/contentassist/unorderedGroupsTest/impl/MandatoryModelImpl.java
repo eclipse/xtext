@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Mandatory Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -179,8 +178,7 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getVisibility()
+  public String getVisibility()
   {
     return visibility;
   }
@@ -190,8 +188,7 @@ public String getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVisibility(String newVisibility)
+  public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
     visibility = newVisibility;
@@ -204,8 +201,7 @@ public void setVisibility(String newVisibility)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isStatic()
+  public boolean isStatic()
   {
     return static_;
   }
@@ -215,8 +211,7 @@ public boolean isStatic()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStatic(boolean newStatic)
+  public void setStatic(boolean newStatic)
   {
     boolean oldStatic = static_;
     static_ = newStatic;
@@ -229,8 +224,7 @@ public void setStatic(boolean newStatic)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isSynchronized()
+  public boolean isSynchronized()
   {
     return synchronized_;
   }
@@ -240,8 +234,7 @@ public boolean isSynchronized()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSynchronized(boolean newSynchronized)
+  public void setSynchronized(boolean newSynchronized)
   {
     boolean oldSynchronized = synchronized_;
     synchronized_ = newSynchronized;
@@ -254,8 +247,7 @@ public void setSynchronized(boolean newSynchronized)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isAbstract()
+  public boolean isAbstract()
   {
     return abstract_;
   }
@@ -265,8 +257,7 @@ public boolean isAbstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAbstract(boolean newAbstract)
+  public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -279,8 +270,7 @@ public void setAbstract(boolean newAbstract)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFinal()
+  public boolean isFinal()
   {
     return final_;
   }
@@ -290,8 +280,7 @@ public boolean isFinal()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFinal(boolean newFinal)
+  public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -304,8 +293,7 @@ public void setFinal(boolean newFinal)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -315,8 +303,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;

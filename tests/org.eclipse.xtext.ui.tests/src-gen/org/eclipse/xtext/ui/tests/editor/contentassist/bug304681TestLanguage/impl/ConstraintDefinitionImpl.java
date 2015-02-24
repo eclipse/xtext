@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Con
  * An implementation of the model object '<em><b>Constraint Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -112,8 +111,7 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -123,8 +121,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -137,8 +134,7 @@ public void setType(String newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getParameters()
+  public EList<String> getParameters()
   {
     if (parameters == null)
     {
@@ -152,8 +148,7 @@ public EList<String> getParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getMessage()
+  public String getMessage()
   {
     return message;
   }
@@ -163,8 +158,7 @@ public String getMessage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMessage(String newMessage)
+  public void setMessage(String newMessage)
   {
     String oldMessage = message;
     message = newMessage;

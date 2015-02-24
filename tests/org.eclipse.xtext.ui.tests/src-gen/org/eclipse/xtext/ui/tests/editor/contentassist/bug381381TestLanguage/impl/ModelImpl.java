@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.Mod
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CopyFieldNameToVariableStmt getStmt()
+  public CopyFieldNameToVariableStmt getStmt()
   {
     return stmt;
   }
@@ -95,8 +93,7 @@ public CopyFieldNameToVariableStmt getStmt()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStmt(CopyFieldNameToVariableStmt newStmt)
+  public void setStmt(CopyFieldNameToVariableStmt newStmt)
   {
     if (newStmt != stmt)
     {

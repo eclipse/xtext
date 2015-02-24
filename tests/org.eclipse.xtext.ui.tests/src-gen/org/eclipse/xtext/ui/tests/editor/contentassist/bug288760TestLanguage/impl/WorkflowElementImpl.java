@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.Wor
  * An implementation of the model object '<em><b>Workflow Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -127,8 +126,7 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -138,8 +136,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -152,8 +149,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Attribute> getAttributes()
+  public EList<Attribute> getAttributes()
   {
     if (attributes == null)
     {
@@ -167,8 +163,7 @@ public EList<Attribute> getAttributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<WorkflowElement> getChildren()
+  public EList<WorkflowElement> getChildren()
   {
     if (children == null)
     {
@@ -182,8 +177,7 @@ public EList<WorkflowElement> getChildren()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getEnd()
+  public String getEnd()
   {
     return end;
   }
@@ -193,8 +187,7 @@ public String getEnd()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEnd(String newEnd)
+  public void setEnd(String newEnd)
   {
     String oldEnd = end;
     end = newEnd;

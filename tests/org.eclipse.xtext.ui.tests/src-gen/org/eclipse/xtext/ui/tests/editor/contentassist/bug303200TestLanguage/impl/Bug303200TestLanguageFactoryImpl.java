@@ -90,8 +90,7 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Program createProgram()
+  public Program createProgram()
   {
     ProgramImpl program = new ProgramImpl();
     return program;
@@ -102,8 +101,7 @@ public Program createProgram()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ProgramDirective createProgramDirective()
+  public ProgramDirective createProgramDirective()
   {
     ProgramDirectiveImpl programDirective = new ProgramDirectiveImpl();
     return programDirective;
@@ -114,8 +112,7 @@ public ProgramDirective createProgramDirective()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FunctionDefinition createFunctionDefinition()
+  public FunctionDefinition createFunctionDefinition()
   {
     FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
     return functionDefinition;
@@ -126,8 +123,7 @@ public FunctionDefinition createFunctionDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute createAttribute()
+  public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -138,8 +134,7 @@ public Attribute createAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameters createParameters()
+  public Parameters createParameters()
   {
     ParametersImpl parameters = new ParametersImpl();
     return parameters;
@@ -150,8 +145,7 @@ public Parameters createParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Block createBlock()
+  public Block createBlock()
   {
     BlockImpl block = new BlockImpl();
     return block;
@@ -162,8 +156,7 @@ public Block createBlock()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Statement createStatement()
+  public Statement createStatement()
   {
     StatementImpl statement = new StatementImpl();
     return statement;
@@ -174,8 +167,7 @@ public Statement createStatement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PostfixExpression createPostfixExpression()
+  public PostfixExpression createPostfixExpression()
   {
     PostfixExpressionImpl postfixExpression = new PostfixExpressionImpl();
     return postfixExpression;
@@ -186,8 +178,7 @@ public PostfixExpression createPostfixExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ListExpression createListExpression()
+  public ListExpression createListExpression()
   {
     ListExpressionImpl listExpression = new ListExpressionImpl();
     return listExpression;
@@ -198,8 +189,7 @@ public ListExpression createListExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyOperator createPropertyOperator()
+  public PropertyOperator createPropertyOperator()
   {
     PropertyOperatorImpl propertyOperator = new PropertyOperatorImpl();
     return propertyOperator;
@@ -210,8 +200,7 @@ public PropertyOperator createPropertyOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PrimaryExpression createPrimaryExpression()
+  public PrimaryExpression createPrimaryExpression()
   {
     PrimaryExpressionImpl primaryExpression = new PrimaryExpressionImpl();
     return primaryExpression;
@@ -222,8 +211,7 @@ public PrimaryExpression createPrimaryExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BracketAttribute createBracketAttribute()
+  public BracketAttribute createBracketAttribute()
   {
     BracketAttributeImpl bracketAttribute = new BracketAttributeImpl();
     return bracketAttribute;
@@ -234,8 +222,7 @@ public BracketAttribute createBracketAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ExpressionStatement createExpressionStatement()
+  public ExpressionStatement createExpressionStatement()
   {
     ExpressionStatementImpl expressionStatement = new ExpressionStatementImpl();
     return expressionStatement;
@@ -246,8 +233,7 @@ public ExpressionStatement createExpressionStatement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Invocation createInvocation()
+  public Invocation createInvocation()
   {
     InvocationImpl invocation = new InvocationImpl();
     return invocation;
@@ -258,8 +244,7 @@ public Invocation createInvocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Identifier createIdentifier()
+  public Identifier createIdentifier()
   {
     IdentifierImpl identifier = new IdentifierImpl();
     return identifier;
@@ -270,8 +255,7 @@ public Identifier createIdentifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public FunctionExpression createFunctionExpression()
+  public FunctionExpression createFunctionExpression()
   {
     FunctionExpressionImpl functionExpression = new FunctionExpressionImpl();
     return functionExpression;
@@ -282,8 +266,7 @@ public FunctionExpression createFunctionExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug303200TestLanguagePackage getBug303200TestLanguagePackage()
+  public Bug303200TestLanguagePackage getBug303200TestLanguagePackage()
   {
     return (Bug303200TestLanguagePackage)getEPackage();
   }

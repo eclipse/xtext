@@ -297,8 +297,7 @@ public enum NumericOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getValue()
+  public int getValue()
   {
     return value;
   }
@@ -308,8 +307,7 @@ public int getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -319,8 +317,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getLiteral()
+  public String getLiteral()
   {
     return literal;
   }

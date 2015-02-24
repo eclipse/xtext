@@ -119,8 +119,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -130,8 +129,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Errors()
+  public EReference getModel_Errors()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -141,8 +139,7 @@ public EReference getModel_Errors()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Operations()
+  public EReference getModel_Operations()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -152,8 +149,7 @@ public EReference getModel_Operations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Name()
+  public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -163,8 +159,7 @@ public EAttribute getModel_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getError()
+  public EClass getError()
   {
     return errorEClass;
   }
@@ -174,8 +169,7 @@ public EClass getError()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getError_Annotations()
+  public EReference getError_Annotations()
   {
     return (EReference)errorEClass.getEStructuralFeatures().get(0);
   }
@@ -185,8 +179,7 @@ public EReference getError_Annotations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getError_Name()
+  public EAttribute getError_Name()
   {
     return (EAttribute)errorEClass.getEStructuralFeatures().get(1);
   }
@@ -196,8 +189,7 @@ public EAttribute getError_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOperation()
+  public EClass getOperation()
   {
     return operationEClass;
   }
@@ -207,8 +199,7 @@ public EClass getOperation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOperation_Annotations()
+  public EReference getOperation_Annotations()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(0);
   }
@@ -218,8 +209,7 @@ public EReference getOperation_Annotations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getOperation_Name()
+  public EAttribute getOperation_Name()
   {
     return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
   }
@@ -229,8 +219,7 @@ public EAttribute getOperation_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAnnotation()
+  public EClass getAnnotation()
   {
     return annotationEClass;
   }
@@ -240,8 +229,7 @@ public EClass getAnnotation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAnnotation_Name()
+  public EAttribute getAnnotation_Name()
   {
     return (EAttribute)annotationEClass.getEStructuralFeatures().get(0);
   }
@@ -251,8 +239,7 @@ public EAttribute getAnnotation_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug309949TestLanguageFactory getBug309949TestLanguageFactory()
+  public Bug309949TestLanguageFactory getBug309949TestLanguageFactory()
   {
     return (Bug309949TestLanguageFactory)getEFactoryInstance();
   }

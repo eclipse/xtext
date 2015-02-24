@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Roo
  * An implementation of the model object '<em><b>Root Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -65,8 +64,7 @@ public class RootModelImpl extends ModelElementImpl implements RootModel
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ModelElement getType()
+  public ModelElement getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -96,8 +94,7 @@ public ModelElement getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(ModelElement newType)
+  public void setType(ModelElement newType)
   {
     ModelElement oldType = type;
     type = newType;

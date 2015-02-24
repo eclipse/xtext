@@ -118,8 +118,7 @@ public class Bug289187TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -130,8 +129,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class createClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class createClass()
   {
     ClassImpl class_ = new ClassImpl();
     return class_;
@@ -142,8 +140,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Cla
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute createAttribute()
+  public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -154,8 +151,7 @@ public Attribute createAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Operation createOperation()
+  public Operation createOperation()
   {
     OperationImpl operation = new OperationImpl();
     return operation;
@@ -188,8 +184,7 @@ public Operation createOperation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug289187TestLanguagePackage getBug289187TestLanguagePackage()
+  public Bug289187TestLanguagePackage getBug289187TestLanguagePackage()
   {
     return (Bug289187TestLanguagePackage)getEPackage();
   }

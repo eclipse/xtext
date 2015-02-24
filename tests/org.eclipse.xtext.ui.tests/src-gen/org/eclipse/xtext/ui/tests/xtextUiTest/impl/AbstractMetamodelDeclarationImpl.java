@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Abstract Metamodel Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -87,8 +86,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EPackage getEPackage()
+  public EPackage getEPackage()
   {
     if (ePackage != null && ePackage.eIsProxy())
     {
@@ -118,8 +116,7 @@ public EPackage getEPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEPackage(EPackage newEPackage)
+  public void setEPackage(EPackage newEPackage)
   {
     EPackage oldEPackage = ePackage;
     ePackage = newEPackage;
@@ -132,8 +129,7 @@ public void setEPackage(EPackage newEPackage)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getAlias()
+  public String getAlias()
   {
     return alias;
   }
@@ -143,8 +139,7 @@ public String getAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAlias(String newAlias)
+  public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;

@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Enum Literal Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class EnumLiteralDeclarationImpl extends AbstractElementImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnumLiteral getEnumLiteral()
+  public EEnumLiteral getEnumLiteral()
   {
     if (enumLiteral != null && enumLiteral.eIsProxy())
     {
@@ -109,8 +107,7 @@ public EEnumLiteral getEnumLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setEnumLiteral(EEnumLiteral newEnumLiteral)
+  public void setEnumLiteral(EEnumLiteral newEnumLiteral)
   {
     EEnumLiteral oldEnumLiteral = enumLiteral;
     enumLiteral = newEnumLiteral;
@@ -123,8 +120,7 @@ public void setEnumLiteral(EEnumLiteral newEnumLiteral)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Keyword getLiteral()
+  public Keyword getLiteral()
   {
     return literal;
   }
@@ -151,8 +147,7 @@ public Keyword getLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLiteral(Keyword newLiteral)
+  public void setLiteral(Keyword newLiteral)
   {
     if (newLiteral != literal)
     {

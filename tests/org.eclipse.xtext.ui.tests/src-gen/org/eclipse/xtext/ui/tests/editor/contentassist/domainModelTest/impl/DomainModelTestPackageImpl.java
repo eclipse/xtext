@@ -151,8 +151,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -162,8 +161,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Imports()
+  public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -173,8 +171,7 @@ public EReference getModel_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Elements()
+  public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -184,8 +181,7 @@ public EReference getModel_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -195,8 +191,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportURI()
+  public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -206,8 +201,7 @@ public EAttribute getImport_ImportURI()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getType()
+  public EClass getType()
   {
     return typeEClass;
   }
@@ -217,8 +211,7 @@ public EClass getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getType_Name()
+  public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -228,8 +221,7 @@ public EAttribute getType_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDataType()
+  public EClass getDataType()
   {
     return dataTypeEClass;
   }
@@ -239,8 +231,7 @@ public EClass getDataType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClass_()
+  public EClass getClass_()
   {
     return classEClass;
   }
@@ -250,8 +241,7 @@ public EClass getClass_()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_SuperClass()
+  public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(0);
   }
@@ -261,8 +251,7 @@ public EReference getClass_SuperClass()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_Properties()
+  public EReference getClass_Properties()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(1);
   }
@@ -272,8 +261,7 @@ public EReference getClass_Properties()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_SubClasses()
+  public EReference getClass_SubClasses()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(2);
   }
@@ -283,8 +271,7 @@ public EReference getClass_SubClasses()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getProperty()
+  public EClass getProperty()
   {
     return propertyEClass;
   }
@@ -294,8 +281,7 @@ public EClass getProperty()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getProperty_Name()
+  public EAttribute getProperty_Name()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
   }
@@ -305,8 +291,7 @@ public EAttribute getProperty_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -316,8 +301,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttribute_Type()
+  public EReference getAttribute_Type()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -327,8 +311,7 @@ public EReference getAttribute_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReference()
+  public EClass getReference()
   {
     return referenceEClass;
   }
@@ -338,8 +321,7 @@ public EClass getReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReference_Type()
+  public EReference getReference_Type()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
   }
@@ -349,8 +331,7 @@ public EReference getReference_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DomainModelTestFactory getDomainModelTestFactory()
+  public DomainModelTestFactory getDomainModelTestFactory()
   {
     return (DomainModelTestFactory)getEFactoryInstance();
   }

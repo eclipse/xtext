@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Num
  * An implementation of the model object '<em><b>Numeric Attribute Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumericOperator getOperator()
+  public NumericOperator getOperator()
   {
     return operator;
   }
@@ -85,8 +83,7 @@ public NumericOperator getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(NumericOperator newOperator)
+  public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

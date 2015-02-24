@@ -216,8 +216,7 @@ public class Bug303200TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getProgram()
+  public EClass getProgram()
   {
     return programEClass;
   }
@@ -227,8 +226,7 @@ public EClass getProgram()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getProgram_Directives()
+  public EReference getProgram_Directives()
   {
     return (EReference)programEClass.getEStructuralFeatures().get(0);
   }
@@ -238,8 +236,7 @@ public EReference getProgram_Directives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getProgramDirective()
+  public EClass getProgramDirective()
   {
     return programDirectiveEClass;
   }
@@ -249,8 +246,7 @@ public EClass getProgramDirective()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFunctionDefinition()
+  public EClass getFunctionDefinition()
   {
     return functionDefinitionEClass;
   }
@@ -260,8 +256,7 @@ public EClass getFunctionDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunctionDefinition_Attributes()
+  public EReference getFunctionDefinition_Attributes()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -271,8 +266,7 @@ public EReference getFunctionDefinition_Attributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFunctionDefinition_Name()
+  public EAttribute getFunctionDefinition_Name()
   {
     return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -282,8 +276,7 @@ public EAttribute getFunctionDefinition_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunctionDefinition_Params()
+  public EReference getFunctionDefinition_Params()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -293,8 +286,7 @@ public EReference getFunctionDefinition_Params()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunctionDefinition_Body()
+  public EReference getFunctionDefinition_Body()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(3);
   }
@@ -304,8 +296,7 @@ public EReference getFunctionDefinition_Body()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -315,8 +306,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Ident()
+  public EAttribute getAttribute_Ident()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -326,8 +316,7 @@ public EAttribute getAttribute_Ident()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getParameters()
+  public EClass getParameters()
   {
     return parametersEClass;
   }
@@ -337,8 +326,7 @@ public EClass getParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getParameters_Params()
+  public EAttribute getParameters_Params()
   {
     return (EAttribute)parametersEClass.getEStructuralFeatures().get(0);
   }
@@ -348,8 +336,7 @@ public EAttribute getParameters_Params()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBlock()
+  public EClass getBlock()
   {
     return blockEClass;
   }
@@ -359,8 +346,7 @@ public EClass getBlock()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBlock_Directives()
+  public EReference getBlock_Directives()
   {
     return (EReference)blockEClass.getEStructuralFeatures().get(0);
   }
@@ -370,8 +356,7 @@ public EReference getBlock_Directives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStatement()
+  public EClass getStatement()
   {
     return statementEClass;
   }
@@ -381,8 +366,7 @@ public EClass getStatement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPostfixExpression()
+  public EClass getPostfixExpression()
   {
     return postfixExpressionEClass;
   }
@@ -392,8 +376,7 @@ public EClass getPostfixExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPostfixExpression_Expression()
+  public EReference getPostfixExpression_Expression()
   {
     return (EReference)postfixExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -403,8 +386,7 @@ public EReference getPostfixExpression_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPostfixExpression_Property()
+  public EReference getPostfixExpression_Property()
   {
     return (EReference)postfixExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -414,8 +396,7 @@ public EReference getPostfixExpression_Property()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getListExpression()
+  public EClass getListExpression()
   {
     return listExpressionEClass;
   }
@@ -425,8 +406,7 @@ public EClass getListExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getListExpression_Expressions()
+  public EReference getListExpression_Expressions()
   {
     return (EReference)listExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -436,8 +416,7 @@ public EReference getListExpression_Expressions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPropertyOperator()
+  public EClass getPropertyOperator()
   {
     return propertyOperatorEClass;
   }
@@ -447,8 +426,7 @@ public EClass getPropertyOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPropertyOperator_Name()
+  public EAttribute getPropertyOperator_Name()
   {
     return (EAttribute)propertyOperatorEClass.getEStructuralFeatures().get(0);
   }
@@ -458,8 +436,7 @@ public EAttribute getPropertyOperator_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPropertyOperator_Expressions()
+  public EReference getPropertyOperator_Expressions()
   {
     return (EReference)propertyOperatorEClass.getEStructuralFeatures().get(1);
   }
@@ -469,8 +446,7 @@ public EReference getPropertyOperator_Expressions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPrimaryExpression()
+  public EClass getPrimaryExpression()
   {
     return primaryExpressionEClass;
   }
@@ -480,8 +456,7 @@ public EClass getPrimaryExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBracketAttribute()
+  public EClass getBracketAttribute()
   {
     return bracketAttributeEClass;
   }
@@ -491,8 +466,7 @@ public EClass getBracketAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getBracketAttribute_Expression()
+  public EReference getBracketAttribute_Expression()
   {
     return (EReference)bracketAttributeEClass.getEStructuralFeatures().get(0);
   }
@@ -502,8 +476,7 @@ public EReference getBracketAttribute_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpressionStatement()
+  public EClass getExpressionStatement()
   {
     return expressionStatementEClass;
   }
@@ -513,8 +486,7 @@ public EClass getExpressionStatement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getExpressionStatement_Expression()
+  public EReference getExpressionStatement_Expression()
   {
     return (EReference)expressionStatementEClass.getEStructuralFeatures().get(0);
   }
@@ -524,8 +496,7 @@ public EReference getExpressionStatement_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getInvocation()
+  public EClass getInvocation()
   {
     return invocationEClass;
   }
@@ -535,8 +506,7 @@ public EClass getInvocation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getInvocation_Arguments()
+  public EReference getInvocation_Arguments()
   {
     return (EReference)invocationEClass.getEStructuralFeatures().get(0);
   }
@@ -546,8 +516,7 @@ public EReference getInvocation_Arguments()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getIdentifier()
+  public EClass getIdentifier()
   {
     return identifierEClass;
   }
@@ -557,8 +526,7 @@ public EClass getIdentifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getIdentifier_Name()
+  public EAttribute getIdentifier_Name()
   {
     return (EAttribute)identifierEClass.getEStructuralFeatures().get(0);
   }
@@ -568,8 +536,7 @@ public EAttribute getIdentifier_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFunctionExpression()
+  public EClass getFunctionExpression()
   {
     return functionExpressionEClass;
   }
@@ -579,8 +546,7 @@ public EClass getFunctionExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunctionExpression_Params()
+  public EReference getFunctionExpression_Params()
   {
     return (EReference)functionExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -590,8 +556,7 @@ public EReference getFunctionExpression_Params()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFunctionExpression_Body()
+  public EReference getFunctionExpression_Body()
   {
     return (EReference)functionExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -601,8 +566,7 @@ public EReference getFunctionExpression_Body()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug303200TestLanguageFactory getBug303200TestLanguageFactory()
+  public Bug303200TestLanguageFactory getBug303200TestLanguageFactory()
   {
     return (Bug303200TestLanguageFactory)getEFactoryInstance();
   }

@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * An implementation of the model object '<em><b>Farbe</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -74,8 +73,7 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getWert()
+  public String getWert()
   {
     return wert;
   }
@@ -85,8 +83,7 @@ public String getWert()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setWert(String newWert)
+  public void setWert(String newWert)
   {
     String oldWert = wert;
     wert = newWert;

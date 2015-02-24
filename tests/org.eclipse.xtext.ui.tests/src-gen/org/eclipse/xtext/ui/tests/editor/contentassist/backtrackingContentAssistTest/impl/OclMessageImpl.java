@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Ocl Message</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -127,8 +126,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getSource()
+  public Expression getSource()
   {
     return source;
   }
@@ -155,8 +153,7 @@ public Expression getSource()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSource(Expression newSource)
+  public void setSource(Expression newSource)
   {
     if (newSource != source)
     {
@@ -177,8 +174,7 @@ public void setSource(Expression newSource)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOp()
+  public String getOp()
   {
     return op;
   }
@@ -188,8 +184,7 @@ public String getOp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOp(String newOp)
+  public void setOp(String newOp)
   {
     String oldOp = op;
     op = newOp;
@@ -202,8 +197,7 @@ public void setOp(String newOp)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getMessageName()
+  public String getMessageName()
   {
     return messageName;
   }
@@ -213,8 +207,7 @@ public String getMessageName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMessageName(String newMessageName)
+  public void setMessageName(String newMessageName)
   {
     String oldMessageName = messageName;
     messageName = newMessageName;
@@ -227,8 +220,7 @@ public void setMessageName(String newMessageName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<OclMessageArg> getArguments()
+  public EList<OclMessageArg> getArguments()
   {
     if (arguments == null)
     {

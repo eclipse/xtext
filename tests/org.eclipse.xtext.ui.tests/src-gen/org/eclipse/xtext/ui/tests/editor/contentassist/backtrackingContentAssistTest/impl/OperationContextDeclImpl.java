@@ -31,7 +31,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Operation Context Decl</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -133,8 +132,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OperationRef getOperation()
+  public OperationRef getOperation()
   {
     return operation;
   }
@@ -161,8 +159,7 @@ public OperationRef getOperation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperation(OperationRef newOperation)
+  public void setOperation(OperationRef newOperation)
   {
     if (newOperation != operation)
     {
@@ -183,8 +180,7 @@ public void setOperation(OperationRef newOperation)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Parameter> getParameters()
+  public EList<Parameter> getParameters()
   {
     if (parameters == null)
     {
@@ -198,8 +194,7 @@ public EList<Parameter> getParameters()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -226,8 +221,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -248,8 +242,7 @@ public void setType(TypeExp newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Pre> getPres()
+  public EList<Pre> getPres()
   {
     if (pres == null)
     {
@@ -263,8 +256,7 @@ public EList<Pre> getPres()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Post> getPosts()
+  public EList<Post> getPosts()
   {
     if (posts == null)
     {
@@ -278,8 +270,7 @@ public EList<Post> getPosts()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Body> getBodies()
+  public EList<Body> getBodies()
   {
     if (bodies == null)
     {

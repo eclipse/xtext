@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.foo.Stuff;
  * An implementation of the model object '<em><b>Stuff</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -97,8 +95,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,8 +108,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Stuff getRefs()
+  public Stuff getRefs()
   {
     if (refs != null && refs.eIsProxy())
     {
@@ -142,8 +138,7 @@ public Stuff getRefs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRefs(Stuff newRefs)
+  public void setRefs(Stuff newRefs)
   {
     Stuff oldRefs = refs;
     refs = newRefs;

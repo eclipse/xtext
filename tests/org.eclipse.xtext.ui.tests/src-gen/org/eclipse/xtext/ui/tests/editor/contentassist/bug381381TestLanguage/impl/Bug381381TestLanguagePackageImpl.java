@@ -104,8 +104,7 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -115,8 +114,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Stmt()
+  public EReference getModel_Stmt()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getModel_Stmt()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getCopyFieldNameToVariableStmt()
+  public EClass getCopyFieldNameToVariableStmt()
   {
     return copyFieldNameToVariableStmtEClass;
   }
@@ -137,8 +134,7 @@ public EClass getCopyFieldNameToVariableStmt()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCopyFieldNameToVariableStmt_Line()
+  public EAttribute getCopyFieldNameToVariableStmt_Line()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(0);
   }
@@ -148,8 +144,7 @@ public EAttribute getCopyFieldNameToVariableStmt_Line()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCopyFieldNameToVariableStmt_Column()
+  public EAttribute getCopyFieldNameToVariableStmt_Column()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(1);
   }
@@ -159,8 +154,7 @@ public EAttribute getCopyFieldNameToVariableStmt_Column()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getCopyFieldNameToVariableStmt_Name()
+  public EAttribute getCopyFieldNameToVariableStmt_Name()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(2);
   }
@@ -170,8 +164,7 @@ public EAttribute getCopyFieldNameToVariableStmt_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug381381TestLanguageFactory getBug381381TestLanguageFactory()
+  public Bug381381TestLanguageFactory getBug381381TestLanguageFactory()
   {
     return (Bug381381TestLanguageFactory)getEFactoryInstance();
   }

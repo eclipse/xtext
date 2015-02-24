@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Simple Operation Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOperation()
+  public String getOperation()
   {
     return operation;
   }
@@ -84,8 +82,7 @@ public String getOperation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperation(String newOperation)
+  public void setOperation(String newOperation)
   {
     String oldOperation = operation;
     operation = newOperation;

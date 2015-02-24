@@ -144,8 +144,7 @@ public class ReferenceGrammarUiPackageImpl extends EPackageImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSpielplatz()
+  public EClass getSpielplatz()
   {
     return spielplatzEClass;
   }
@@ -155,8 +154,7 @@ public EClass getSpielplatz()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSpielplatz_Groesse()
+  public EAttribute getSpielplatz_Groesse()
   {
     return (EAttribute)spielplatzEClass.getEStructuralFeatures().get(0);
   }
@@ -166,8 +164,7 @@ public EAttribute getSpielplatz_Groesse()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSpielplatz_Beschreibung()
+  public EAttribute getSpielplatz_Beschreibung()
   {
     return (EAttribute)spielplatzEClass.getEStructuralFeatures().get(1);
   }
@@ -177,8 +174,7 @@ public EAttribute getSpielplatz_Beschreibung()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSpielplatz_Kinder()
+  public EReference getSpielplatz_Kinder()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(2);
   }
@@ -188,8 +184,7 @@ public EReference getSpielplatz_Kinder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSpielplatz_Erzieher()
+  public EReference getSpielplatz_Erzieher()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(3);
   }
@@ -199,8 +194,7 @@ public EReference getSpielplatz_Erzieher()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSpielplatz_Spielzeuge()
+  public EReference getSpielplatz_Spielzeuge()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(4);
   }
@@ -210,8 +204,7 @@ public EReference getSpielplatz_Spielzeuge()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSpielplatz_Familie()
+  public EReference getSpielplatz_Familie()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(5);
   }
@@ -221,8 +214,7 @@ public EReference getSpielplatz_Familie()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPerson()
+  public EClass getPerson()
   {
     return personEClass;
   }
@@ -232,8 +224,7 @@ public EClass getPerson()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPerson_Name()
+  public EAttribute getPerson_Name()
   {
     return (EAttribute)personEClass.getEStructuralFeatures().get(0);
   }
@@ -243,8 +234,7 @@ public EAttribute getPerson_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getPerson_Age()
+  public EAttribute getPerson_Age()
   {
     return (EAttribute)personEClass.getEStructuralFeatures().get(1);
   }
@@ -254,8 +244,7 @@ public EAttribute getPerson_Age()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getKind()
+  public EClass getKind()
   {
     return kindEClass;
   }
@@ -265,8 +254,7 @@ public EClass getKind()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getErwachsener()
+  public EClass getErwachsener()
   {
     return erwachsenerEClass;
   }
@@ -276,8 +264,7 @@ public EClass getErwachsener()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSpielzeug()
+  public EClass getSpielzeug()
   {
     return spielzeugEClass;
   }
@@ -287,8 +274,7 @@ public EClass getSpielzeug()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSpielzeug_Name()
+  public EAttribute getSpielzeug_Name()
   {
     return (EAttribute)spielzeugEClass.getEStructuralFeatures().get(0);
   }
@@ -298,8 +284,7 @@ public EAttribute getSpielzeug_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSpielzeug_Farbe()
+  public EReference getSpielzeug_Farbe()
   {
     return (EReference)spielzeugEClass.getEStructuralFeatures().get(1);
   }
@@ -309,8 +294,7 @@ public EReference getSpielzeug_Farbe()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFarbe()
+  public EClass getFarbe()
   {
     return farbeEClass;
   }
@@ -320,8 +304,7 @@ public EClass getFarbe()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFarbe_Wert()
+  public EAttribute getFarbe_Wert()
   {
     return (EAttribute)farbeEClass.getEStructuralFeatures().get(0);
   }
@@ -331,8 +314,7 @@ public EAttribute getFarbe_Wert()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFamilie()
+  public EClass getFamilie()
   {
     return familieEClass;
   }
@@ -342,8 +324,7 @@ public EClass getFamilie()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFamilie_Name()
+  public EAttribute getFamilie_Name()
   {
     return (EAttribute)familieEClass.getEStructuralFeatures().get(0);
   }
@@ -353,8 +334,7 @@ public EAttribute getFamilie_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFamilie_Mutter()
+  public EReference getFamilie_Mutter()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(1);
   }
@@ -364,8 +344,7 @@ public EReference getFamilie_Mutter()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFamilie_Vater()
+  public EReference getFamilie_Vater()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(2);
   }
@@ -375,8 +354,7 @@ public EReference getFamilie_Vater()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFamilie_Kinder()
+  public EReference getFamilie_Kinder()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(3);
   }
@@ -386,8 +364,7 @@ public EReference getFamilie_Kinder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferenceGrammarUiFactory getReferenceGrammarUiFactory()
+  public ReferenceGrammarUiFactory getReferenceGrammarUiFactory()
   {
     return (ReferenceGrammarUiFactory)getEFactoryInstance();
   }

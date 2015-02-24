@@ -76,8 +76,7 @@ public class Bug377311FactoryImpl extends EFactoryImpl implements Bug377311Facto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Root createRoot()
+  public Root createRoot()
   {
     RootImpl root = new RootImpl();
     return root;
@@ -88,8 +87,7 @@ public Root createRoot()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Child createChild()
+  public Child createChild()
   {
     ChildImpl child = new ChildImpl();
     return child;
@@ -100,8 +98,7 @@ public Child createChild()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug377311Package getBug377311Package()
+  public Bug377311Package getBug377311Package()
   {
     return (Bug377311Package)getEPackage();
   }

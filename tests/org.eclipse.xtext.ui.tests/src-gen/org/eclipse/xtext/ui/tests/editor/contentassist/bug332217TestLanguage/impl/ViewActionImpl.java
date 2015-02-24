@@ -13,7 +13,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Vie
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>View Action</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

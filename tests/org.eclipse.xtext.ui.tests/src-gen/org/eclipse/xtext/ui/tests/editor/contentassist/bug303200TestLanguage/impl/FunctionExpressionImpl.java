@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Par
  * An implementation of the model object '<em><b>Function Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class FunctionExpressionImpl extends PrimaryExpressionImpl implements Fun
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Parameters getParams()
+  public Parameters getParams()
   {
     return params;
   }
@@ -106,8 +104,7 @@ public Parameters getParams()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setParams(Parameters newParams)
+  public void setParams(Parameters newParams)
   {
     if (newParams != params)
     {
@@ -128,8 +125,7 @@ public void setParams(Parameters newParams)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Block getBody()
+  public Block getBody()
   {
     return body;
   }
@@ -156,8 +152,7 @@ public Block getBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBody(Block newBody)
+  public void setBody(Block newBody)
   {
     if (newBody != body)
     {

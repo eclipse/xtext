@@ -30,11 +30,11 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplatesImpl#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplatesImpl#getTemplates <em>Templates</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -86,8 +86,7 @@ public class CodetemplatesImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Grammar getLanguage()
+  public Grammar getLanguage()
   {
     if (language != null && language.eIsProxy())
     {
@@ -117,8 +116,7 @@ public Grammar getLanguage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLanguage(Grammar newLanguage)
+  public void setLanguage(Grammar newLanguage)
   {
     Grammar oldLanguage = language;
     language = newLanguage;
@@ -131,8 +129,7 @@ public void setLanguage(Grammar newLanguage)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Codetemplate> getTemplates()
+  public EList<Codetemplate> getTemplates()
   {
     if (templates == null)
     {

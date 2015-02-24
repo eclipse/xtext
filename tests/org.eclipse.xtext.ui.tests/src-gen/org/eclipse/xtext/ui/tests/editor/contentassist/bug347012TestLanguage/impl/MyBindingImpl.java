@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyP
  * An implementation of the model object '<em><b>My Binding</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -109,8 +108,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -120,8 +118,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -134,8 +131,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getType()
+  public String getType()
   {
     return type;
   }
@@ -145,8 +141,7 @@ public String getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(String newType)
+  public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -159,8 +154,7 @@ public void setType(String newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyPrimary getExpression()
+  public MyPrimary getExpression()
   {
     return expression;
   }
@@ -187,8 +181,7 @@ public MyPrimary getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(MyPrimary newExpression)
+  public void setExpression(MyPrimary newExpression)
   {
     if (newExpression != expression)
     {

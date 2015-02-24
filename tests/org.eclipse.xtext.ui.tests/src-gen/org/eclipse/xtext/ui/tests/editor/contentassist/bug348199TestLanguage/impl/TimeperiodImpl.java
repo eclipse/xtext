@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Tim
  * An implementation of the model object '<em><b>Timeperiod</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<TimeDef> getTime()
+  public EList<TimeDef> getTime()
   {
     if (time == null)
     {
@@ -110,8 +108,7 @@ public EList<TimeDef> getTime()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getName()
+  public EList<String> getName()
   {
     if (name == null)
     {
@@ -125,8 +122,7 @@ public EList<String> getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<String> getAlias()
+  public EList<String> getAlias()
   {
     if (alias == null)
     {

@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyA
  * An implementation of the model object '<em><b>My Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -95,8 +94,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getPUBLIC()
+  public String getPUBLIC()
   {
     return public_;
   }
@@ -106,8 +104,7 @@ public String getPUBLIC()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPUBLIC(String newPUBLIC)
+  public void setPUBLIC(String newPUBLIC)
   {
     String oldPUBLIC = public_;
     public_ = newPUBLIC;
@@ -120,8 +117,7 @@ public void setPUBLIC(String newPUBLIC)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getPRIVATE()
+  public String getPRIVATE()
   {
     return private_;
   }
@@ -131,8 +127,7 @@ public String getPRIVATE()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPRIVATE(String newPRIVATE)
+  public void setPRIVATE(String newPRIVATE)
   {
     String oldPRIVATE = private_;
     private_ = newPRIVATE;

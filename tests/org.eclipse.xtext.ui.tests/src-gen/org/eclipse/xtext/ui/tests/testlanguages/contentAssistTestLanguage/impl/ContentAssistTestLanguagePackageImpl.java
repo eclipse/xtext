@@ -128,8 +128,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStart()
+  public EClass getStart()
   {
     return startEClass;
   }
@@ -139,8 +138,7 @@ public EClass getStart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getStart_Rules()
+  public EReference getStart_Rules()
   {
     return (EReference)startEClass.getEStructuralFeatures().get(0);
   }
@@ -150,8 +148,7 @@ public EReference getStart_Rules()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractRule()
+  public EClass getAbstractRule()
   {
     return abstractRuleEClass;
   }
@@ -161,8 +158,7 @@ public EClass getAbstractRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAbstractRule_Name()
+  public EAttribute getAbstractRule_Name()
   {
     return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -172,8 +168,7 @@ public EAttribute getAbstractRule_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFirstAbstractRuleChild()
+  public EClass getFirstAbstractRuleChild()
   {
     return firstAbstractRuleChildEClass;
   }
@@ -183,8 +178,7 @@ public EClass getFirstAbstractRuleChild()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFirstAbstractRuleChild_Elements()
+  public EReference getFirstAbstractRuleChild_Elements()
   {
     return (EReference)firstAbstractRuleChildEClass.getEStructuralFeatures().get(0);
   }
@@ -194,8 +188,7 @@ public EReference getFirstAbstractRuleChild_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSecondAbstractRuleChild()
+  public EClass getSecondAbstractRuleChild()
   {
     return secondAbstractRuleChildEClass;
   }
@@ -205,8 +198,7 @@ public EClass getSecondAbstractRuleChild()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSecondAbstractRuleChild_Rule()
+  public EReference getSecondAbstractRuleChild_Rule()
   {
     return (EReference)secondAbstractRuleChildEClass.getEStructuralFeatures().get(0);
   }
@@ -216,8 +208,7 @@ public EReference getSecondAbstractRuleChild_Rule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAbstractRuleCall()
+  public EClass getAbstractRuleCall()
   {
     return abstractRuleCallEClass;
   }
@@ -227,8 +218,7 @@ public EClass getAbstractRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAbstractRuleCall_Rule()
+  public EReference getAbstractRuleCall_Rule()
   {
     return (EReference)abstractRuleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -238,8 +228,7 @@ public EReference getAbstractRuleCall_Rule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
+  public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
   {
     return (ContentAssistTestLanguageFactory)getEFactoryInstance();
   }

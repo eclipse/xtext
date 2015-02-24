@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -105,8 +104,7 @@ public class ElementImpl extends AbstractElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -116,8 +114,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -130,8 +127,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Element> getContained()
+  public EList<Element> getContained()
   {
     if (contained == null)
     {
@@ -145,8 +141,7 @@ public EList<Element> getContained()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Element> getReferenced()
+  public EList<Element> getReferenced()
   {
     if (referenced == null)
     {

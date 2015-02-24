@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Rec
  * An implementation of the model object '<em><b>Alternative</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class AlternativeImpl extends MinimalEObjectImpl.Container implements Alt
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -99,8 +97,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -113,8 +110,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RecursiveClassDeclaration getRootDeclaration()
+  public RecursiveClassDeclaration getRootDeclaration()
   {
     return rootDeclaration;
   }
@@ -141,8 +137,7 @@ public RecursiveClassDeclaration getRootDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRootDeclaration(RecursiveClassDeclaration newRootDeclaration)
+  public void setRootDeclaration(RecursiveClassDeclaration newRootDeclaration)
   {
     if (newRootDeclaration != rootDeclaration)
     {

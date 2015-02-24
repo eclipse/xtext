@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Simple Name Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getElement()
+  public String getElement()
   {
     return element;
   }
@@ -84,8 +82,7 @@ public String getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(String newElement)
+  public void setElement(String newElement)
   {
     String oldElement = element;
     element = newElement;

@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Pac
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -67,8 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PackageDefinition getDefinition()
+  public PackageDefinition getDefinition()
   {
     return definition;
   }
@@ -95,8 +93,7 @@ public PackageDefinition getDefinition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDefinition(PackageDefinition newDefinition)
+  public void setDefinition(PackageDefinition newDefinition)
   {
     if (newDefinition != definition)
     {

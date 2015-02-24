@@ -11,7 +11,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TBo
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>TBoolean Constant</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

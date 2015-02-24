@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.linking.importUriUi.Type;
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -84,8 +83,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Import> getImports()
+  public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -99,8 +97,7 @@ public EList<Import> getImports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Type> getTypes()
+  public EList<Type> getTypes()
   {
     if (types == null)
     {

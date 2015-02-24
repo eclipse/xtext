@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Grammar</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -151,8 +150,7 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -162,8 +160,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -176,8 +173,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Grammar> getUsedGrammars()
+  public EList<Grammar> getUsedGrammars()
   {
     if (usedGrammars == null)
     {
@@ -191,8 +187,7 @@ public EList<Grammar> getUsedGrammars()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isDefinesHiddenTokens()
+  public boolean isDefinesHiddenTokens()
   {
     return definesHiddenTokens;
   }
@@ -202,8 +197,7 @@ public boolean isDefinesHiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
+  public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
   {
     boolean oldDefinesHiddenTokens = definesHiddenTokens;
     definesHiddenTokens = newDefinesHiddenTokens;
@@ -216,8 +210,7 @@ public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractRule> getHiddenTokens()
+  public EList<AbstractRule> getHiddenTokens()
   {
     if (hiddenTokens == null)
     {
@@ -231,8 +224,7 @@ public EList<AbstractRule> getHiddenTokens()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
+  public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
   {
     if (metamodelDeclarations == null)
     {
@@ -246,8 +238,7 @@ public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractRule> getRules()
+  public EList<AbstractRule> getRules()
   {
     if (rules == null)
     {

@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Mod
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class AttributeImpl extends ModelAttributeImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ModelElement getFeature()
+  public ModelElement getFeature()
   {
     if (feature != null && feature.eIsProxy())
     {
@@ -117,8 +115,7 @@ public ModelElement getFeature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFeature(ModelElement newFeature)
+  public void setFeature(ModelElement newFeature)
   {
     ModelElement oldFeature = feature;
     feature = newFeature;
@@ -131,8 +128,7 @@ public void setFeature(ModelElement newFeature)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -142,8 +138,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

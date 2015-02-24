@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Mod
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Import> getImports()
+  public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -101,8 +99,7 @@ public EList<Import> getImports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MQLquery getQuery()
+  public MQLquery getQuery()
   {
     return query;
   }
@@ -129,8 +126,7 @@ public MQLquery getQuery()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setQuery(MQLquery newQuery)
+  public void setQuery(MQLquery newQuery)
   {
     if (newQuery != query)
     {

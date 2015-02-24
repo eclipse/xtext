@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Round Bracket Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -130,8 +129,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NameExp getName()
+  public NameExp getName()
   {
     return name;
   }
@@ -158,8 +156,7 @@ public NameExp getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(NameExp newName)
+  public void setName(NameExp newName)
   {
     if (newName != name)
     {
@@ -180,8 +177,7 @@ public void setName(NameExp newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isPre()
+  public boolean isPre()
   {
     return pre;
   }
@@ -191,8 +187,7 @@ public boolean isPre()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPre(boolean newPre)
+  public void setPre(boolean newPre)
   {
     boolean oldPre = pre;
     pre = newPre;
@@ -205,8 +200,7 @@ public void setPre(boolean newPre)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public iteratorVariable getVariable1()
+  public iteratorVariable getVariable1()
   {
     return variable1;
   }
@@ -233,8 +227,7 @@ public iteratorVariable getVariable1()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVariable1(iteratorVariable newVariable1)
+  public void setVariable1(iteratorVariable newVariable1)
   {
     if (newVariable1 != variable1)
     {
@@ -255,8 +248,7 @@ public void setVariable1(iteratorVariable newVariable1)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EObject getVariable2()
+  public EObject getVariable2()
   {
     return variable2;
   }
@@ -283,8 +275,7 @@ public EObject getVariable2()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setVariable2(EObject newVariable2)
+  public void setVariable2(EObject newVariable2)
   {
     if (newVariable2 != variable2)
     {
@@ -305,8 +296,7 @@ public void setVariable2(EObject newVariable2)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Expression> getArguments()
+  public EList<Expression> getArguments()
   {
     if (arguments == null)
     {

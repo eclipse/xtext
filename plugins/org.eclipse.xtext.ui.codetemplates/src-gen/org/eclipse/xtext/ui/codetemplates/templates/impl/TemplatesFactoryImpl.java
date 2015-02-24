@@ -81,8 +81,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Codetemplates createCodetemplates()
+  public Codetemplates createCodetemplates()
   {
     CodetemplatesImpl codetemplates = new CodetemplatesImpl();
     return codetemplates;
@@ -93,8 +92,7 @@ public Codetemplates createCodetemplates()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Codetemplate createCodetemplate()
+  public Codetemplate createCodetemplate()
   {
     CodetemplateImpl codetemplate = new CodetemplateImpl();
     return codetemplate;
@@ -105,8 +103,7 @@ public Codetemplate createCodetemplate()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TemplateBody createTemplateBody()
+  public TemplateBody createTemplateBody()
   {
     TemplateBodyImpl templateBody = new TemplateBodyImpl();
     return templateBody;
@@ -117,8 +114,7 @@ public TemplateBody createTemplateBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TemplatePart createTemplatePart()
+  public TemplatePart createTemplatePart()
   {
     TemplatePartImpl templatePart = new TemplatePartImpl();
     return templatePart;
@@ -129,8 +125,7 @@ public TemplatePart createTemplatePart()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Variable createVariable()
+  public Variable createVariable()
   {
     VariableImpl variable = new VariableImpl();
     return variable;
@@ -141,8 +136,7 @@ public Variable createVariable()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Literal createLiteral()
+  public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
     return literal;
@@ -153,8 +147,7 @@ public Literal createLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Dollar createDollar()
+  public Dollar createDollar()
   {
     DollarImpl dollar = new DollarImpl();
     return dollar;
@@ -165,8 +158,7 @@ public Dollar createDollar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TemplatesPackage getTemplatesPackage()
+  public TemplatesPackage getTemplatesPackage()
   {
     return (TemplatesPackage)getEPackage();
   }

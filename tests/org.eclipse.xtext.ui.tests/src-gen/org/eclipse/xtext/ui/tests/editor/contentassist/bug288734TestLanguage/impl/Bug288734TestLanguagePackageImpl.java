@@ -136,8 +136,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -147,8 +146,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Constants()
+  public EReference getModel_Constants()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -158,8 +156,7 @@ public EReference getModel_Constants()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTConstant()
+  public EClass getTConstant()
   {
     return tConstantEClass;
   }
@@ -169,8 +166,7 @@ public EClass getTConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTConstant_Annotations()
+  public EReference getTConstant_Annotations()
   {
     return (EReference)tConstantEClass.getEStructuralFeatures().get(0);
   }
@@ -180,8 +176,7 @@ public EReference getTConstant_Annotations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTConstant_Name()
+  public EAttribute getTConstant_Name()
   {
     return (EAttribute)tConstantEClass.getEStructuralFeatures().get(1);
   }
@@ -191,8 +186,7 @@ public EAttribute getTConstant_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTStringConstant()
+  public EClass getTStringConstant()
   {
     return tStringConstantEClass;
   }
@@ -202,8 +196,7 @@ public EClass getTStringConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTIntegerConstant()
+  public EClass getTIntegerConstant()
   {
     return tIntegerConstantEClass;
   }
@@ -213,8 +206,7 @@ public EClass getTIntegerConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTBooleanConstant()
+  public EClass getTBooleanConstant()
   {
     return tBooleanConstantEClass;
   }
@@ -224,8 +216,7 @@ public EClass getTBooleanConstant()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTAnnotation()
+  public EClass getTAnnotation()
   {
     return tAnnotationEClass;
   }
@@ -235,8 +226,7 @@ public EClass getTAnnotation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTAnnotation_Description()
+  public EAttribute getTAnnotation_Description()
   {
     return (EAttribute)tAnnotationEClass.getEStructuralFeatures().get(0);
   }
@@ -246,8 +236,7 @@ public EAttribute getTAnnotation_Description()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug288734TestLanguageFactory getBug288734TestLanguageFactory()
+  public Bug288734TestLanguageFactory getBug288734TestLanguageFactory()
   {
     return (Bug288734TestLanguageFactory)getEFactoryInstance();
   }

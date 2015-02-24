@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.Conten
  * An implementation of the model object '<em><b>Abstract Rule Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class AbstractRuleCallImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRule getRule()
+  public AbstractRule getRule()
   {
     if (rule != null && rule.eIsProxy())
     {
@@ -97,8 +95,7 @@ public AbstractRule getRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRule(AbstractRule newRule)
+  public void setRule(AbstractRule newRule)
   {
     AbstractRule oldRule = rule;
     rule = newRule;

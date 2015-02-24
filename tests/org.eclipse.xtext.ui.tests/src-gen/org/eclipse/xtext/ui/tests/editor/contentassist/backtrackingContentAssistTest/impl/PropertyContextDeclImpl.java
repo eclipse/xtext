@@ -22,7 +22,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Property Context Decl</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -102,8 +101,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public PropertyRef getProperty()
+  public PropertyRef getProperty()
   {
     return property;
   }
@@ -130,8 +128,7 @@ public PropertyRef getProperty()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setProperty(PropertyRef newProperty)
+  public void setProperty(PropertyRef newProperty)
   {
     if (newProperty != property)
     {
@@ -152,8 +149,7 @@ public void setProperty(PropertyRef newProperty)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeExp getType()
+  public TypeExp getType()
   {
     return type;
   }
@@ -180,8 +176,7 @@ public TypeExp getType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setType(TypeExp newType)
+  public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -202,8 +197,7 @@ public void setType(TypeExp newType)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Init getInit()
+  public Init getInit()
   {
     return init;
   }
@@ -230,8 +224,7 @@ public Init getInit()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setInit(Init newInit)
+  public void setInit(Init newInit)
   {
     if (newInit != init)
     {
@@ -252,8 +245,7 @@ public void setInit(Init newInit)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Der getDer()
+  public Der getDer()
   {
     return der;
   }
@@ -280,8 +272,7 @@ public Der getDer()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDer(Der newDer)
+  public void setDer(Der newDer)
   {
     if (newDer != der)
     {

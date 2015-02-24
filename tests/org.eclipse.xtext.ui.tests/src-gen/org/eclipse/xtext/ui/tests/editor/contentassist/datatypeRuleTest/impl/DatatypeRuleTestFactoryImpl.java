@@ -80,8 +80,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -92,8 +91,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Types createTypes()
+  public Types createTypes()
   {
     TypesImpl types = new TypesImpl();
     return types;
@@ -104,8 +102,7 @@ public Types createTypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Type createType()
+  public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -116,8 +113,7 @@ public Type createType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleType createSimpleType()
+  public SimpleType createSimpleType()
   {
     SimpleTypeImpl simpleType = new SimpleTypeImpl();
     return simpleType;
@@ -128,8 +124,7 @@ public SimpleType createSimpleType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CompositeType createCompositeType()
+  public CompositeType createCompositeType()
   {
     CompositeTypeImpl compositeType = new CompositeTypeImpl();
     return compositeType;
@@ -140,8 +135,7 @@ public CompositeType createCompositeType()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CompositeTypeEntry createCompositeTypeEntry()
+  public CompositeTypeEntry createCompositeTypeEntry()
   {
     CompositeTypeEntryImpl compositeTypeEntry = new CompositeTypeEntryImpl();
     return compositeTypeEntry;
@@ -152,8 +146,7 @@ public CompositeTypeEntry createCompositeTypeEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public DatatypeRuleTestPackage getDatatypeRuleTestPackage()
+  public DatatypeRuleTestPackage getDatatypeRuleTestPackage()
   {
     return (DatatypeRuleTestPackage)getEPackage();
   }

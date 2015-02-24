@@ -95,8 +95,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -106,8 +105,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_First()
+  public EAttribute getModel_First()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -117,8 +115,7 @@ public EAttribute getModel_First()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Second()
+  public EAttribute getModel_Second()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -128,8 +125,7 @@ public EAttribute getModel_Second()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Third()
+  public EAttribute getModel_Third()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -139,8 +135,7 @@ public EAttribute getModel_Third()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Forth()
+  public EAttribute getModel_Forth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
   }
@@ -150,8 +145,7 @@ public EAttribute getModel_Forth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Fifth()
+  public EAttribute getModel_Fifth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
   }
@@ -161,8 +155,7 @@ public EAttribute getModel_Fifth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Sixth()
+  public EAttribute getModel_Sixth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
   }
@@ -172,8 +165,7 @@ public EAttribute getModel_Sixth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Seventh()
+  public EAttribute getModel_Seventh()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
   }
@@ -183,8 +175,7 @@ public EAttribute getModel_Seventh()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Eighth()
+  public EAttribute getModel_Eighth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
   }
@@ -194,8 +185,7 @@ public EAttribute getModel_Eighth()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public KeywordsUiTestLanguageFactory getKeywordsUiTestLanguageFactory()
+  public KeywordsUiTestLanguageFactory getKeywordsUiTestLanguageFactory()
   {
     return (KeywordsUiTestLanguageFactory)getEFactoryInstance();
   }

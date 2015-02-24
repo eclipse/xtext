@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Type Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -78,8 +77,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractMetamodelDeclaration getMetamodel()
+  public AbstractMetamodelDeclaration getMetamodel()
   {
     if (metamodel != null && metamodel.eIsProxy())
     {
@@ -109,8 +107,7 @@ public AbstractMetamodelDeclaration getMetamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMetamodel(AbstractMetamodelDeclaration newMetamodel)
+  public void setMetamodel(AbstractMetamodelDeclaration newMetamodel)
   {
     AbstractMetamodelDeclaration oldMetamodel = metamodel;
     metamodel = newMetamodel;
@@ -123,8 +120,7 @@ public void setMetamodel(AbstractMetamodelDeclaration newMetamodel)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClassifier getClassifier()
+  public EClassifier getClassifier()
   {
     if (classifier != null && classifier.eIsProxy())
     {
@@ -154,8 +150,7 @@ public EClassifier getClassifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setClassifier(EClassifier newClassifier)
+  public void setClassifier(EClassifier newClassifier)
   {
     EClassifier oldClassifier = classifier;
     classifier = newClassifier;

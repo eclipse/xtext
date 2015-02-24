@@ -78,8 +78,7 @@ public class CrossReferenceProposalTestFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -90,8 +89,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class createClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class createClass()
   {
     ClassImpl class_ = new ClassImpl();
     return class_;
@@ -102,8 +100,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CrossReferenceProposalTestPackage getCrossReferenceProposalTestPackage()
+  public CrossReferenceProposalTestPackage getCrossReferenceProposalTestPackage()
   {
     return (CrossReferenceProposalTestPackage)getEPackage();
   }

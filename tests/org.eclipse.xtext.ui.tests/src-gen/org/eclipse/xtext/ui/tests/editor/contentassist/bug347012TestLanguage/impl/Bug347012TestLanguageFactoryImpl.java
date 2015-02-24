@@ -84,8 +84,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyProgram createMyProgram()
+  public MyProgram createMyProgram()
   {
     MyProgramImpl myProgram = new MyProgramImpl();
     return myProgram;
@@ -96,8 +95,7 @@ public MyProgram createMyProgram()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Identifier createIdentifier()
+  public Identifier createIdentifier()
   {
     IdentifierImpl identifier = new IdentifierImpl();
     return identifier;
@@ -108,8 +106,7 @@ public Identifier createIdentifier()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Literal createLiteral()
+  public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
     return literal;
@@ -120,8 +117,7 @@ public Literal createLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyPrimary createMyPrimary()
+  public MyPrimary createMyPrimary()
   {
     MyPrimaryImpl myPrimary = new MyPrimaryImpl();
     return myPrimary;
@@ -132,8 +128,7 @@ public MyPrimary createMyPrimary()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyPackage createMyPackage()
+  public MyPackage createMyPackage()
   {
     MyPackageImpl myPackage = new MyPackageImpl();
     return myPackage;
@@ -144,8 +139,7 @@ public MyPackage createMyPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyClass createMyClass()
+  public MyClass createMyClass()
   {
     MyClassImpl myClass = new MyClassImpl();
     return myClass;
@@ -156,8 +150,7 @@ public MyClass createMyClass()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyAttribute createMyAttribute()
+  public MyAttribute createMyAttribute()
   {
     MyAttributeImpl myAttribute = new MyAttributeImpl();
     return myAttribute;
@@ -168,8 +161,7 @@ public MyAttribute createMyAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyAttributes createMyAttributes()
+  public MyAttributes createMyAttributes()
   {
     MyAttributesImpl myAttributes = new MyAttributesImpl();
     return myAttributes;
@@ -180,8 +172,7 @@ public MyAttributes createMyAttributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyField createMyField()
+  public MyField createMyField()
   {
     MyFieldImpl myField = new MyFieldImpl();
     return myField;
@@ -192,8 +183,7 @@ public MyField createMyField()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MyBinding createMyBinding()
+  public MyBinding createMyBinding()
   {
     MyBindingImpl myBinding = new MyBindingImpl();
     return myBinding;
@@ -204,8 +194,7 @@ public MyBinding createMyBinding()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug347012TestLanguagePackage getBug347012TestLanguagePackage()
+  public Bug347012TestLanguagePackage getBug347012TestLanguagePackage()
   {
     return (Bug347012TestLanguagePackage)getEPackage();
   }

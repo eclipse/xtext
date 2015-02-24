@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Url Conform</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -66,8 +65,7 @@ public class StringUrlConformImpl extends StringFunctionImpl implements StringUr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ScalarExpression getValue()
+  public ScalarExpression getValue()
   {
     return value;
   }
@@ -94,8 +92,7 @@ public ScalarExpression getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(ScalarExpression newValue)
+  public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)
     {

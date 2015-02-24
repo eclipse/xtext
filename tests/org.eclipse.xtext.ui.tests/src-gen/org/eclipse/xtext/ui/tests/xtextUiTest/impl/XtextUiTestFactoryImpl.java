@@ -97,8 +97,7 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Grammar createGrammar()
+  public Grammar createGrammar()
   {
     GrammarImpl grammar = new GrammarImpl();
     return grammar;
@@ -109,8 +108,7 @@ public Grammar createGrammar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractRule createAbstractRule()
+  public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
     return abstractRule;
@@ -121,8 +119,7 @@ public AbstractRule createAbstractRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
+  public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
   {
     AbstractMetamodelDeclarationImpl abstractMetamodelDeclaration = new AbstractMetamodelDeclarationImpl();
     return abstractMetamodelDeclaration;
@@ -133,8 +130,7 @@ public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GeneratedMetamodel createGeneratedMetamodel()
+  public GeneratedMetamodel createGeneratedMetamodel()
   {
     GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
     return generatedMetamodel;
@@ -145,8 +141,7 @@ public GeneratedMetamodel createGeneratedMetamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferencedMetamodel createReferencedMetamodel()
+  public ReferencedMetamodel createReferencedMetamodel()
   {
     ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
     return referencedMetamodel;
@@ -157,8 +152,7 @@ public ReferencedMetamodel createReferencedMetamodel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ParserRule createParserRule()
+  public ParserRule createParserRule()
   {
     ParserRuleImpl parserRule = new ParserRuleImpl();
     return parserRule;
@@ -169,8 +163,7 @@ public ParserRule createParserRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TypeRef createTypeRef()
+  public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
     return typeRef;
@@ -181,8 +174,7 @@ public TypeRef createTypeRef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractElement createAbstractElement()
+  public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
@@ -193,8 +185,7 @@ public AbstractElement createAbstractElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Action createAction()
+  public Action createAction()
   {
     ActionImpl action = new ActionImpl();
     return action;
@@ -205,8 +196,7 @@ public Action createAction()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Keyword createKeyword()
+  public Keyword createKeyword()
   {
     KeywordImpl keyword = new KeywordImpl();
     return keyword;
@@ -217,8 +207,7 @@ public Keyword createKeyword()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleCall createRuleCall()
+  public RuleCall createRuleCall()
   {
     RuleCallImpl ruleCall = new RuleCallImpl();
     return ruleCall;
@@ -229,8 +218,7 @@ public RuleCall createRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Assignment createAssignment()
+  public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
     return assignment;
@@ -241,8 +229,7 @@ public Assignment createAssignment()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CrossReference createCrossReference()
+  public CrossReference createCrossReference()
   {
     CrossReferenceImpl crossReference = new CrossReferenceImpl();
     return crossReference;
@@ -253,8 +240,7 @@ public CrossReference createCrossReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public TerminalRule createTerminalRule()
+  public TerminalRule createTerminalRule()
   {
     TerminalRuleImpl terminalRule = new TerminalRuleImpl();
     return terminalRule;
@@ -265,8 +251,7 @@ public TerminalRule createTerminalRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AbstractNegatedToken createAbstractNegatedToken()
+  public AbstractNegatedToken createAbstractNegatedToken()
   {
     AbstractNegatedTokenImpl abstractNegatedToken = new AbstractNegatedTokenImpl();
     return abstractNegatedToken;
@@ -277,8 +262,7 @@ public AbstractNegatedToken createAbstractNegatedToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NegatedToken createNegatedToken()
+  public NegatedToken createNegatedToken()
   {
     NegatedTokenImpl negatedToken = new NegatedTokenImpl();
     return negatedToken;
@@ -289,8 +273,7 @@ public NegatedToken createNegatedToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UntilToken createUntilToken()
+  public UntilToken createUntilToken()
   {
     UntilTokenImpl untilToken = new UntilTokenImpl();
     return untilToken;
@@ -301,8 +284,7 @@ public UntilToken createUntilToken()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Wildcard createWildcard()
+  public Wildcard createWildcard()
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
@@ -313,8 +295,7 @@ public Wildcard createWildcard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EnumRule createEnumRule()
+  public EnumRule createEnumRule()
   {
     EnumRuleImpl enumRule = new EnumRuleImpl();
     return enumRule;
@@ -325,8 +306,7 @@ public EnumRule createEnumRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EnumLiteralDeclaration createEnumLiteralDeclaration()
+  public EnumLiteralDeclaration createEnumLiteralDeclaration()
   {
     EnumLiteralDeclarationImpl enumLiteralDeclaration = new EnumLiteralDeclarationImpl();
     return enumLiteralDeclaration;
@@ -337,8 +317,7 @@ public EnumLiteralDeclaration createEnumLiteralDeclaration()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Alternatives createAlternatives()
+  public Alternatives createAlternatives()
   {
     AlternativesImpl alternatives = new AlternativesImpl();
     return alternatives;
@@ -349,8 +328,7 @@ public Alternatives createAlternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Group createGroup()
+  public Group createGroup()
   {
     GroupImpl group = new GroupImpl();
     return group;
@@ -361,8 +339,7 @@ public Group createGroup()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public CharacterRange createCharacterRange()
+  public CharacterRange createCharacterRange()
   {
     CharacterRangeImpl characterRange = new CharacterRangeImpl();
     return characterRange;
@@ -373,8 +350,7 @@ public CharacterRange createCharacterRange()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public XtextUiTestPackage getXtextUiTestPackage()
+  public XtextUiTestPackage getXtextUiTestPackage()
   {
     return (XtextUiTestPackage)getEPackage();
   }

@@ -104,8 +104,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTimeperiod()
+  public EClass getTimeperiod()
   {
     return timeperiodEClass;
   }
@@ -115,8 +114,7 @@ public EClass getTimeperiod()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getTimeperiod_Time()
+  public EReference getTimeperiod_Time()
   {
     return (EReference)timeperiodEClass.getEStructuralFeatures().get(0);
   }
@@ -126,8 +124,7 @@ public EReference getTimeperiod_Time()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTimeperiod_Name()
+  public EAttribute getTimeperiod_Name()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(1);
   }
@@ -137,8 +134,7 @@ public EAttribute getTimeperiod_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTimeperiod_Alias()
+  public EAttribute getTimeperiod_Alias()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(2);
   }
@@ -148,8 +144,7 @@ public EAttribute getTimeperiod_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getTimeDef()
+  public EClass getTimeDef()
   {
     return timeDefEClass;
   }
@@ -159,8 +154,7 @@ public EClass getTimeDef()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getTimeDef_Day()
+  public EAttribute getTimeDef_Day()
   {
     return (EAttribute)timeDefEClass.getEStructuralFeatures().get(0);
   }
@@ -170,8 +164,7 @@ public EAttribute getTimeDef_Day()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug348199TestLanguageFactory getBug348199TestLanguageFactory()
+  public Bug348199TestLanguageFactory getBug348199TestLanguageFactory()
   {
     return (Bug348199TestLanguageFactory)getEFactoryInstance();
   }

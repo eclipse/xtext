@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPa
  * An implementation of the model object '<em><b>An Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -86,8 +85,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -97,8 +95,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,8 +108,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AnElement getReferred()
+  public AnElement getReferred()
   {
     if (referred != null && referred.eIsProxy())
     {
@@ -142,8 +138,7 @@ public AnElement getReferred()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReferred(AnElement newReferred)
+  public void setReferred(AnElement newReferred)
   {
     AnElement oldReferred = referred;
     referred = newReferred;

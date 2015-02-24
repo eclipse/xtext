@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Mod
  * An implementation of the model object '<em><b>Model Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -116,8 +115,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ModelElement getFirstReference()
+  public ModelElement getFirstReference()
   {
     if (firstReference != null && firstReference.eIsProxy())
     {
@@ -147,8 +145,7 @@ public ModelElement getFirstReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFirstReference(ModelElement newFirstReference)
+  public void setFirstReference(ModelElement newFirstReference)
   {
     ModelElement oldFirstReference = firstReference;
     firstReference = newFirstReference;
@@ -161,8 +158,7 @@ public void setFirstReference(ModelElement newFirstReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -172,8 +168,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -186,8 +181,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ModelElement getSecondReference()
+  public ModelElement getSecondReference()
   {
     if (secondReference != null && secondReference.eIsProxy())
     {
@@ -217,8 +211,7 @@ public ModelElement getSecondReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSecondReference(ModelElement newSecondReference)
+  public void setSecondReference(ModelElement newSecondReference)
   {
     ModelElement oldSecondReference = secondReference;
     secondReference = newSecondReference;
@@ -231,8 +224,7 @@ public void setSecondReference(ModelElement newSecondReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ModelAttribute> getElements()
+  public EList<ModelAttribute> getElements()
   {
     if (elements == null)
     {

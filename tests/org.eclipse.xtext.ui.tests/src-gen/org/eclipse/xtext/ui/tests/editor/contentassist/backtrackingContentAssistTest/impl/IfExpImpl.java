@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>If Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class IfExpImpl extends ExpressionImpl implements IfExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getCondition()
+  public Expression getCondition()
   {
     return condition;
   }
@@ -116,8 +114,7 @@ public Expression getCondition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCondition(Expression newCondition)
+  public void setCondition(Expression newCondition)
   {
     if (newCondition != condition)
     {
@@ -138,8 +135,7 @@ public void setCondition(Expression newCondition)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getThenExpression()
+  public Expression getThenExpression()
   {
     return thenExpression;
   }
@@ -166,8 +162,7 @@ public Expression getThenExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setThenExpression(Expression newThenExpression)
+  public void setThenExpression(Expression newThenExpression)
   {
     if (newThenExpression != thenExpression)
     {
@@ -188,8 +183,7 @@ public void setThenExpression(Expression newThenExpression)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getElseExpression()
+  public Expression getElseExpression()
   {
     return elseExpression;
   }
@@ -216,8 +210,7 @@ public Expression getElseExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElseExpression(Expression newElseExpression)
+  public void setElseExpression(Expression newElseExpression)
   {
     if (newElseExpression != elseExpression)
     {

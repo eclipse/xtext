@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -72,8 +71,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AbstractElement> getElements()
+  public EList<AbstractElement> getElements()
   {
     if (elements == null)
     {

@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.Lit
  * An implementation of the model object '<em><b>Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -115,8 +114,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public double getNum()
+  public double getNum()
   {
     return num;
   }
@@ -126,8 +124,7 @@ public double getNum()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setNum(double newNum)
+  public void setNum(double newNum)
   {
     double oldNum = num;
     num = newNum;
@@ -140,8 +137,7 @@ public void setNum(double newNum)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getStr()
+  public String getStr()
   {
     return str;
   }
@@ -151,8 +147,7 @@ public String getStr()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setStr(String newStr)
+  public void setStr(String newStr)
   {
     String oldStr = str;
     str = newStr;
@@ -165,8 +160,7 @@ public void setStr(String newStr)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getBool()
+  public String getBool()
   {
     return bool;
   }
@@ -176,8 +170,7 @@ public String getBool()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBool(String newBool)
+  public void setBool(String newBool)
   {
     String oldBool = bool;
     bool = newBool;

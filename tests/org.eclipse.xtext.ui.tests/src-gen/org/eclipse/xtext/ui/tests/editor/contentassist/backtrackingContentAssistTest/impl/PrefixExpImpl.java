@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Prefix Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -87,8 +86,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOp()
+  public String getOp()
   {
     return op;
   }
@@ -98,8 +96,7 @@ public String getOp()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOp(String newOp)
+  public void setOp(String newOp)
   {
     String oldOp = op;
     op = newOp;
@@ -112,8 +109,7 @@ public void setOp(String newOp)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getSource()
+  public Expression getSource()
   {
     return source;
   }
@@ -140,8 +136,7 @@ public Expression getSource()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSource(Expression newSource)
+  public void setSource(Expression newSource)
   {
     if (newSource != source)
     {

@@ -77,8 +77,7 @@ public class LookAheadContentAssistTestFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -89,8 +88,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute createAttribute()
+  public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -101,8 +99,7 @@ public Attribute createAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Pair createPair()
+  public Pair createPair()
   {
     PairImpl pair = new PairImpl();
     return pair;
@@ -113,8 +110,7 @@ public Pair createPair()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public LookAheadContentAssistTestPackage getLookAheadContentAssistTestPackage()
+  public LookAheadContentAssistTestPackage getLookAheadContentAssistTestPackage()
   {
     return (LookAheadContentAssistTestPackage)getEPackage();
   }

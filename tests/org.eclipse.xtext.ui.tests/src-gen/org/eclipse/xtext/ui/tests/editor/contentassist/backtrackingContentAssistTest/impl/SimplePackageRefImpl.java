@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Simple Package Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -73,8 +72,7 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getPackage()
+  public String getPackage()
   {
     return package_;
   }
@@ -84,8 +82,7 @@ public String getPackage()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPackage(String newPackage)
+  public void setPackage(String newPackage)
   {
     String oldPackage = package_;
     package_ = newPackage;

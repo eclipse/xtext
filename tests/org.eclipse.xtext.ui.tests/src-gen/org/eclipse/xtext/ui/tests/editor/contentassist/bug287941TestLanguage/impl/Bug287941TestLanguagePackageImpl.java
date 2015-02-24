@@ -297,8 +297,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -308,8 +307,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Imports()
+  public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -319,8 +317,7 @@ public EReference getModel_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Query()
+  public EReference getModel_Query()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -330,8 +327,7 @@ public EReference getModel_Query()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -341,8 +337,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportURI()
+  public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -352,8 +347,7 @@ public EAttribute getImport_ImportURI()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMQLquery()
+  public EClass getMQLquery()
   {
     return mqLqueryEClass;
   }
@@ -363,8 +357,7 @@ public EClass getMQLquery()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMQLquery_SelectEntries()
+  public EReference getMQLquery_SelectEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(0);
   }
@@ -374,8 +367,7 @@ public EReference getMQLquery_SelectEntries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMQLquery_FromEntries()
+  public EReference getMQLquery_FromEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(1);
   }
@@ -385,8 +377,7 @@ public EReference getMQLquery_FromEntries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getMQLquery_WhereEntries()
+  public EReference getMQLquery_WhereEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(2);
   }
@@ -396,8 +387,7 @@ public EReference getMQLquery_WhereEntries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSelectEntry()
+  public EClass getSelectEntry()
   {
     return selectEntryEClass;
   }
@@ -407,8 +397,7 @@ public EClass getSelectEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSelectEntry_Select()
+  public EReference getSelectEntry_Select()
   {
     return (EReference)selectEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -418,8 +407,7 @@ public EReference getSelectEntry_Select()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSelectEntry_Attribute()
+  public EReference getSelectEntry_Attribute()
   {
     return (EReference)selectEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -429,8 +417,7 @@ public EReference getSelectEntry_Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getFromEntry()
+  public EClass getFromEntry()
   {
     return fromEntryEClass;
   }
@@ -440,8 +427,7 @@ public EClass getFromEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFromEntry_Type()
+  public EReference getFromEntry_Type()
   {
     return (EReference)fromEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -451,8 +437,7 @@ public EReference getFromEntry_Type()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFromEntry_Withoutsubtypes()
+  public EAttribute getFromEntry_Withoutsubtypes()
   {
     return (EAttribute)fromEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -462,8 +447,7 @@ public EAttribute getFromEntry_Withoutsubtypes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getFromEntry_Alias()
+  public EAttribute getFromEntry_Alias()
   {
     return (EAttribute)fromEntryEClass.getEStructuralFeatures().get(2);
   }
@@ -473,8 +457,7 @@ public EAttribute getFromEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getFromEntry_ScopeClause()
+  public EReference getFromEntry_ScopeClause()
   {
     return (EReference)fromEntryEClass.getEStructuralFeatures().get(3);
   }
@@ -484,8 +467,7 @@ public EReference getFromEntry_ScopeClause()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getScopeClause()
+  public EClass getScopeClause()
   {
     return scopeClauseEClass;
   }
@@ -495,8 +477,7 @@ public EClass getScopeClause()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getScopeClause_NotIn()
+  public EAttribute getScopeClause_NotIn()
   {
     return (EAttribute)scopeClauseEClass.getEStructuralFeatures().get(0);
   }
@@ -506,8 +487,7 @@ public EAttribute getScopeClause_NotIn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getScopeClause_Scope()
+  public EReference getScopeClause_Scope()
   {
     return (EReference)scopeClauseEClass.getEStructuralFeatures().get(1);
   }
@@ -517,8 +497,7 @@ public EReference getScopeClause_Scope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getScope()
+  public EClass getScope()
   {
     return scopeEClass;
   }
@@ -528,8 +507,7 @@ public EClass getScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getScope_Uris()
+  public EAttribute getScope_Uris()
   {
     return (EAttribute)scopeEClass.getEStructuralFeatures().get(0);
   }
@@ -539,8 +517,7 @@ public EAttribute getScope_Uris()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getResourceScope()
+  public EClass getResourceScope()
   {
     return resourceScopeEClass;
   }
@@ -550,8 +527,7 @@ public EClass getResourceScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElementScope()
+  public EClass getElementScope()
   {
     return elementScopeEClass;
   }
@@ -561,8 +537,7 @@ public EClass getElementScope()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWhereEntry()
+  public EClass getWhereEntry()
   {
     return whereEntryEClass;
   }
@@ -572,8 +547,7 @@ public EClass getWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttributeWhereEntry()
+  public EClass getAttributeWhereEntry()
   {
     return attributeWhereEntryEClass;
   }
@@ -583,8 +557,7 @@ public EClass getAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttributeWhereEntry_Alias()
+  public EReference getAttributeWhereEntry_Alias()
   {
     return (EReference)attributeWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -594,8 +567,7 @@ public EReference getAttributeWhereEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttributeWhereEntry_Attribute()
+  public EReference getAttributeWhereEntry_Attribute()
   {
     return (EReference)attributeWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -605,8 +577,7 @@ public EReference getAttributeWhereEntry_Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNumericAttributeWhereEntry()
+  public EClass getNumericAttributeWhereEntry()
   {
     return numericAttributeWhereEntryEClass;
   }
@@ -616,8 +587,7 @@ public EClass getNumericAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getNumericAttributeWhereEntry_Operator()
+  public EAttribute getNumericAttributeWhereEntry_Operator()
   {
     return (EAttribute)numericAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -627,8 +597,7 @@ public EAttribute getNumericAttributeWhereEntry_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getDoubleWhereEntry()
+  public EClass getDoubleWhereEntry()
   {
     return doubleWhereEntryEClass;
   }
@@ -638,8 +607,7 @@ public EClass getDoubleWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getDoubleWhereEntry_Value()
+  public EAttribute getDoubleWhereEntry_Value()
   {
     return (EAttribute)doubleWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -649,8 +617,7 @@ public EAttribute getDoubleWhereEntry_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getLongWhereEntry()
+  public EClass getLongWhereEntry()
   {
     return longWhereEntryEClass;
   }
@@ -660,8 +627,7 @@ public EClass getLongWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getLongWhereEntry_Value()
+  public EAttribute getLongWhereEntry_Value()
   {
     return (EAttribute)longWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -671,8 +637,7 @@ public EAttribute getLongWhereEntry_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getVariableWhereEntry()
+  public EClass getVariableWhereEntry()
   {
     return variableWhereEntryEClass;
   }
@@ -682,8 +647,7 @@ public EClass getVariableWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getVariableWhereEntry_Operator()
+  public EAttribute getVariableWhereEntry_Operator()
   {
     return (EAttribute)variableWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -693,8 +657,7 @@ public EAttribute getVariableWhereEntry_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getVariableWhereEntry_RightAlias()
+  public EReference getVariableWhereEntry_RightAlias()
   {
     return (EReference)variableWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -704,8 +667,7 @@ public EReference getVariableWhereEntry_RightAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getVariableWhereEntry_RightAttribute()
+  public EReference getVariableWhereEntry_RightAttribute()
   {
     return (EReference)variableWhereEntryEClass.getEStructuralFeatures().get(2);
   }
@@ -715,8 +677,7 @@ public EReference getVariableWhereEntry_RightAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringAttributeWhereEntry()
+  public EClass getStringAttributeWhereEntry()
   {
     return stringAttributeWhereEntryEClass;
   }
@@ -726,8 +687,7 @@ public EClass getStringAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getStringAttributeWhereEntry_Operator()
+  public EAttribute getStringAttributeWhereEntry_Operator()
   {
     return (EAttribute)stringAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -737,8 +697,7 @@ public EAttribute getStringAttributeWhereEntry_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getStringAttributeWhereEntry_Pattern()
+  public EAttribute getStringAttributeWhereEntry_Pattern()
   {
     return (EAttribute)stringAttributeWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -748,8 +707,7 @@ public EAttribute getStringAttributeWhereEntry_Pattern()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBooleanAttributeWhereEntry()
+  public EClass getBooleanAttributeWhereEntry()
   {
     return booleanAttributeWhereEntryEClass;
   }
@@ -759,8 +717,7 @@ public EClass getBooleanAttributeWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBooleanAttributeWhereEntry_Operator()
+  public EAttribute getBooleanAttributeWhereEntry_Operator()
   {
     return (EAttribute)booleanAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -770,8 +727,7 @@ public EAttribute getBooleanAttributeWhereEntry_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBooleanAttributeWhereEntry_IsTrue()
+  public EAttribute getBooleanAttributeWhereEntry_IsTrue()
   {
     return (EAttribute)booleanAttributeWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -781,8 +737,7 @@ public EAttribute getBooleanAttributeWhereEntry_IsTrue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNullWhereEntry()
+  public EClass getNullWhereEntry()
   {
     return nullWhereEntryEClass;
   }
@@ -792,8 +747,7 @@ public EClass getNullWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNullWhereEntry_Alias()
+  public EReference getNullWhereEntry_Alias()
   {
     return (EReference)nullWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -803,8 +757,7 @@ public EReference getNullWhereEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNullWhereEntry_Feature()
+  public EReference getNullWhereEntry_Feature()
   {
     return (EReference)nullWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -814,8 +767,7 @@ public EReference getNullWhereEntry_Feature()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getNullWhereEntry_Operator()
+  public EAttribute getNullWhereEntry_Operator()
   {
     return (EAttribute)nullWhereEntryEClass.getEStructuralFeatures().get(2);
   }
@@ -825,8 +777,7 @@ public EAttribute getNullWhereEntry_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReferenceAliasWhereEntry()
+  public EClass getReferenceAliasWhereEntry()
   {
     return referenceAliasWhereEntryEClass;
   }
@@ -836,8 +787,7 @@ public EClass getReferenceAliasWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceAliasWhereEntry_Alias()
+  public EReference getReferenceAliasWhereEntry_Alias()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -847,8 +797,7 @@ public EReference getReferenceAliasWhereEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceAliasWhereEntry_Reference()
+  public EReference getReferenceAliasWhereEntry_Reference()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -858,8 +807,7 @@ public EReference getReferenceAliasWhereEntry_Reference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceAliasWhereEntry_RightAlias()
+  public EReference getReferenceAliasWhereEntry_RightAlias()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(2);
   }
@@ -869,8 +817,7 @@ public EReference getReferenceAliasWhereEntry_RightAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSubselectWhereEntry()
+  public EClass getSubselectWhereEntry()
   {
     return subselectWhereEntryEClass;
   }
@@ -880,8 +827,7 @@ public EClass getSubselectWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSubselectWhereEntry_Alias()
+  public EReference getSubselectWhereEntry_Alias()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -891,8 +837,7 @@ public EReference getSubselectWhereEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSubselectWhereEntry_Reference()
+  public EReference getSubselectWhereEntry_Reference()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -902,8 +847,7 @@ public EReference getSubselectWhereEntry_Reference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getSubselectWhereEntry_NotIn()
+  public EAttribute getSubselectWhereEntry_NotIn()
   {
     return (EAttribute)subselectWhereEntryEClass.getEStructuralFeatures().get(2);
   }
@@ -913,8 +857,7 @@ public EAttribute getSubselectWhereEntry_NotIn()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getSubselectWhereEntry_SubQuery()
+  public EReference getSubselectWhereEntry_SubQuery()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(3);
   }
@@ -924,8 +867,7 @@ public EReference getSubselectWhereEntry_SubQuery()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAliasWhereEntry()
+  public EClass getAliasWhereEntry()
   {
     return aliasWhereEntryEClass;
   }
@@ -935,8 +877,7 @@ public EClass getAliasWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAliasWhereEntry_Alias()
+  public EReference getAliasWhereEntry_Alias()
   {
     return (EReference)aliasWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -946,8 +887,7 @@ public EReference getAliasWhereEntry_Alias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAliasWhereEntry_RightAlias()
+  public EReference getAliasWhereEntry_RightAlias()
   {
     return (EReference)aliasWhereEntryEClass.getEStructuralFeatures().get(1);
   }
@@ -957,8 +897,7 @@ public EReference getAliasWhereEntry_RightAlias()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOrWhereEntry()
+  public EClass getOrWhereEntry()
   {
     return orWhereEntryEClass;
   }
@@ -968,8 +907,7 @@ public EClass getOrWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOrWhereEntry_Entries()
+  public EReference getOrWhereEntry_Entries()
   {
     return (EReference)orWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -979,8 +917,7 @@ public EReference getOrWhereEntry_Entries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAndWhereEntry()
+  public EClass getAndWhereEntry()
   {
     return andWhereEntryEClass;
   }
@@ -990,8 +927,7 @@ public EClass getAndWhereEntry()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAndWhereEntry_Entries()
+  public EReference getAndWhereEntry_Entries()
   {
     return (EReference)andWhereEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -1001,8 +937,7 @@ public EReference getAndWhereEntry_Entries()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getNumericOperator()
+  public EEnum getNumericOperator()
   {
     return numericOperatorEEnum;
   }
@@ -1012,8 +947,7 @@ public EEnum getNumericOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getStringOperator()
+  public EEnum getStringOperator()
   {
     return stringOperatorEEnum;
   }
@@ -1023,8 +957,7 @@ public EEnum getStringOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getBooleanOperator()
+  public EEnum getBooleanOperator()
   {
     return booleanOperatorEEnum;
   }
@@ -1034,8 +967,7 @@ public EEnum getBooleanOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug287941TestLanguageFactory getBug287941TestLanguageFactory()
+  public Bug287941TestLanguageFactory getBug287941TestLanguageFactory()
   {
     return (Bug287941TestLanguageFactory)getEFactoryInstance();
   }

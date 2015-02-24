@@ -25,7 +25,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Property;
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -94,8 +93,7 @@ public class ClassImpl extends TypeImpl implements org.eclipse.xtext.ui.tests.ed
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getSuperClass()
+  public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
     {
@@ -125,8 +123,7 @@ public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class get
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newSuperClass)
+  public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class oldSuperClass = superClass;
     superClass = newSuperClass;
@@ -139,8 +136,7 @@ public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.domain
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Property> getProperties()
+  public EList<Property> getProperties()
   {
     if (properties == null)
     {
@@ -154,8 +150,7 @@ public EList<Property> getProperties()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class> getSubClasses()
+  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class> getSubClasses()
   {
     if (subClasses == null)
     {

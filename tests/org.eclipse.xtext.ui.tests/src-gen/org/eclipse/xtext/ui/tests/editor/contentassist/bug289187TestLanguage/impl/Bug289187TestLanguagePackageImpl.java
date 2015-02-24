@@ -128,8 +128,7 @@ public class Bug289187TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -139,8 +138,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Classes()
+  public EReference getModel_Classes()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -150,8 +148,7 @@ public EReference getModel_Classes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getClass_()
+  public EClass getClass_()
   {
     return classEClass;
   }
@@ -161,8 +158,7 @@ public EClass getClass_()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Abstract()
+  public EAttribute getClass_Abstract()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(0);
   }
@@ -172,8 +168,7 @@ public EAttribute getClass_Abstract()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Transient()
+  public EAttribute getClass_Transient()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(1);
   }
@@ -183,8 +178,7 @@ public EAttribute getClass_Transient()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Name()
+  public EAttribute getClass_Name()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(2);
   }
@@ -194,8 +188,7 @@ public EAttribute getClass_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_SuperClass()
+  public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(3);
   }
@@ -205,8 +198,7 @@ public EReference getClass_SuperClass()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_ImplementedInterfaces()
+  public EReference getClass_ImplementedInterfaces()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(4);
   }
@@ -216,8 +208,7 @@ public EReference getClass_ImplementedInterfaces()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_ClassNumber()
+  public EAttribute getClass_ClassNumber()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(5);
   }
@@ -227,8 +218,7 @@ public EAttribute getClass_ClassNumber()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Quid()
+  public EAttribute getClass_Quid()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(6);
   }
@@ -238,8 +228,7 @@ public EAttribute getClass_Quid()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getClass_Documentation()
+  public EAttribute getClass_Documentation()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(7);
   }
@@ -249,8 +238,7 @@ public EAttribute getClass_Documentation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_Attributes()
+  public EReference getClass_Attributes()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(8);
   }
@@ -260,8 +248,7 @@ public EReference getClass_Attributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getClass_Operations()
+  public EReference getClass_Operations()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(9);
   }
@@ -271,8 +258,7 @@ public EReference getClass_Operations()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttribute()
+  public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -282,8 +268,7 @@ public EClass getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Visibility()
+  public EAttribute getAttribute_Visibility()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -293,8 +278,7 @@ public EAttribute getAttribute_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAttribute_Name()
+  public EAttribute getAttribute_Name()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
   }
@@ -304,8 +288,7 @@ public EAttribute getAttribute_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOperation()
+  public EClass getOperation()
   {
     return operationEClass;
   }
@@ -315,8 +298,7 @@ public EClass getOperation()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getOperation_Visibility()
+  public EAttribute getOperation_Visibility()
   {
     return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
   }
@@ -326,8 +308,7 @@ public EAttribute getOperation_Visibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getOperation_Name()
+  public EAttribute getOperation_Name()
   {
     return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
   }
@@ -337,8 +318,7 @@ public EAttribute getOperation_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getVisibility()
+  public EEnum getVisibility()
   {
     return visibilityEEnum;
   }
@@ -348,8 +328,7 @@ public EEnum getVisibility()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Bug289187TestLanguageFactory getBug289187TestLanguageFactory()
+  public Bug289187TestLanguageFactory getBug289187TestLanguageFactory()
   {
     return (Bug289187TestLanguageFactory)getEFactoryInstance();
   }

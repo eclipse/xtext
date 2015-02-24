@@ -26,10 +26,10 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.TemplateBodyImpl#getParts <em>Parts</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,8 +71,7 @@ public class TemplateBodyImpl extends MinimalEObjectImpl.Container implements Te
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<TemplatePart> getParts()
+  public EList<TemplatePart> getParts()
   {
     if (parts == null)
     {

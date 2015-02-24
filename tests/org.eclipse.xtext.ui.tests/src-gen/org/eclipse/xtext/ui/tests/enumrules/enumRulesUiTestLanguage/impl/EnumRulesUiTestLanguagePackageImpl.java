@@ -109,8 +109,7 @@ public class EnumRulesUiTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -120,8 +119,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Existing()
+  public EAttribute getModel_Existing()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -131,8 +129,7 @@ public EAttribute getModel_Existing()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getModel_Generated()
+  public EAttribute getModel_Generated()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -142,8 +139,7 @@ public EAttribute getModel_Generated()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EEnum getGeneratedEnum()
+  public EEnum getGeneratedEnum()
   {
     return generatedEnumEEnum;
   }
@@ -153,8 +149,7 @@ public EEnum getGeneratedEnum()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EnumRulesUiTestLanguageFactory getEnumRulesUiTestLanguageFactory()
+  public EnumRulesUiTestLanguageFactory getEnumRulesUiTestLanguageFactory()
   {
     return (EnumRulesUiTestLanguageFactory)getEFactoryInstance();
   }

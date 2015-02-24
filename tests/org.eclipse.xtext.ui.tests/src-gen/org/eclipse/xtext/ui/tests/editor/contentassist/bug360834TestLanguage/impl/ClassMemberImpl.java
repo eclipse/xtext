@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Uno
  * An implementation of the model object '<em><b>Class Member</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -88,8 +87,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UnorderedModifiers getModifiers()
+  public UnorderedModifiers getModifiers()
   {
     return modifiers;
   }
@@ -116,8 +114,7 @@ public UnorderedModifiers getModifiers()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setModifiers(UnorderedModifiers newModifiers)
+  public void setModifiers(UnorderedModifiers newModifiers)
   {
     if (newModifiers != modifiers)
     {
@@ -138,8 +135,7 @@ public void setModifiers(UnorderedModifiers newModifiers)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -149,8 +145,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
