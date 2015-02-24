@@ -498,8 +498,18 @@ img.screenshot {
 /* .thumb .zoom:hover { */
 /* 	background: url(../images/videoOverlay.png) 0 -80px no-repeat transparent; */
 /* } */
+#zoo table {
+	margin : 0;
+}
+
+
 #team {
 	padding-top: 10px;
+}
+
+#team h3 {
+	margin-top: 5px;
+	color : #555;
 }
 
 a:hover .onhover-red {
