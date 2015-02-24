@@ -280,11 +280,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 
 	@Override
-	public void configureBuilderPreferenceStoreInitializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("builderPreferenceInitializer")).to(XbaseBuilderPreferenceAccess.Initializer.class);
-	}
-	
-	@Override
 	public Class<? extends ISingleLineCommentHelper> bindISingleLineCommentHelper() {
 		return SingleLineCommentHelper.class;
 	}
