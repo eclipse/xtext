@@ -107,7 +107,10 @@ public class AntlrFragmentHelper implements NamingAware {
 	}
 
 	public String getContentAssistLexerSuperClass(Grammar g) {
-		return "org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer";
+		if(naming.hasIde())
+			return "org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer";
+		else
+			return "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer";
 	}
 
 	public String getInternalContentAssistParserClassName(Grammar g) {

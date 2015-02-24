@@ -176,22 +176,44 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		if (highlighting)
-			return new BindFactory()
+		if (highlighting) {
+			if(naming.hasIde()){
+				return new BindFactory()
+					.addConfiguredBinding("HighlightingLexer",
+							"binder.bind(" + Lexer.class.getName() + ".class)"+
+							".annotatedWith(com.google.inject.name.Names.named(" +
+							"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+							")).to(" + lexerGrammar +".class)")
+					.getBindings();
+			} else {
+				return new BindFactory()
 				.addConfiguredBinding("HighlightingLexer",
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
-						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
 						")).to(" + lexerGrammar +".class)")
 				.getBindings();
-		if (contentAssist)
-			return new BindFactory()
+			}
+		}
+		if (contentAssist) {
+			if(naming.hasIde()){
+				return new BindFactory()
+					.addConfiguredBinding("ContentAssistLexer",
+							"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
+							".annotatedWith(com.google.inject.name.Names.named(" +
+							"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
+							")).to(" + lexerGrammar +".class)")
+					.getBindings();
+			} else {
+				return new BindFactory()
 				.addConfiguredBinding("ContentAssistLexer",
-						"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
+						"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
-						"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
+						"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
 						")).to(" + lexerGrammar +".class)")
 				.getBindings();
+			}
+		}
 		return Collections.emptySet();
 
 	}
