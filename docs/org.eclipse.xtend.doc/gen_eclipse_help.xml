@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+	 This ant script uses Jekyll to build a specialized version of the
+	 website for use as Eclipse help content.
+     ====================================================================== -->
+<project name="project" default="gen_eclipse_help">
+
+	<property name="website" location="../../xtend-website"/>
+	<property name="destination" location="contents"/>
+	<property name="ruby.version" value="2.2.0"/>
+	<property name="jekyll" location="${user.home}/.rvm/gems/ruby-${ruby.version}/bin/jekyll"/>
+	<property name="gen_toc" location="../gen_toc.jar"/>
+
+	<target name="gen_eclipse_help">
+		<!-- Prepare -->
+		<copy file="${website}/_layouts/documentation.html" tofile="${website}/_layouts/documentation-website.html" overwrite="true"/>
+		<copy file="${website}/_layouts/documentation-eclipse.html" tofile="${website}/_layouts/documentation.html" overwrite="true"/>
+		
+		<!-- Generate -->
+		<exec executable="bash" dir="${website}" searchpath="true" failonerror="true">
+			<arg value="-l"/>
+			<arg value="-c"/>
+			<arg value="${jekyll} build"/>
+		</exec>
+		<java jar="${gen_toc}" fork="true" failonerror="true">
+			<arg value="${website}/documentation"/>
+		</java>
+
+		<!-- Copy results to destination -->
+		<copy todir="${destination}" overwrite="true">
+			<fileset dir="${website}/_site/documentation">
+				<include name="**/*.html"/>
+				<include name="**/*.png"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.jpg"/>
+			</fileset>
+		</copy>
+
+		<!-- Clean up -->
+		<move file="${website}/_layouts/documentation-website.html" tofile="${website}/_layouts/documentation.html" overwrite="true"/>
+	</target>
+
+</project>
