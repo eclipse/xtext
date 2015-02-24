@@ -4,7 +4,7 @@ layout: documentation
 
 # Runtime Concepts {#runtime-concepts}
 
-Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using [dependency injection](14_configuration.html#dependency-injection). Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java)-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment. 
+Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using [dependency injection](32_configuration.html#dependency-injection). Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java)-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment. 
 
 ## Runtime Setup (ISetup) {#runtime-setup}
 
@@ -54,7 +54,7 @@ If you go with the default MWE workflow for your language and you haven't used X
 
 The [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java) API abstracts over the different file systems the code generator my run over. These are typically Eclipse's file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse, and `java.io.File` when the code generator is executed outside Eclipse, say in a headless build.
 
-A very simple implementation of a code generator for the [example statemachine language](13_grammarlanguage.html#statemachine) introduced earlier could be the following:
+A very simple implementation of a code generator for the [example statemachine language](31_grammarlanguage.html#statemachine) introduced earlier could be the following:
 
 ```xtend
 class StatemachineGenerator implements IGenerator {
@@ -145,7 +145,7 @@ To customize error messages please see [IConcreteSyntaxDiagnosticProvider]({{sit
 
 In addition to the afore mentioned kinds of validation, which are more or less done automatically, you can specify additional constraints specific for your Ecore model. We leverage existing [EMF API]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java) and have put some convenience stuff on top. Basically all you need to do is to make sure that an [EValidator]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java) is registered for your [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java). The [Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java) can only be filled programmatically. That means contrary to the [Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) and the [Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) there is no Equinox extension point to populate the validator registry.
 
-For Xtext we provide a [generator fragment](14_configuration.html#generator-fragment) for the convenient Java-based [EValidator]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java) API. Just add the following fragment to your generator configuration and you are good to go:
+For Xtext we provide a [generator fragment](32_configuration.html#generator-fragment) for the convenient Java-based [EValidator]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java) API. Just add the following fragment to your generator configuration and you are good to go:
 
 ```mwe2
 fragment = 
@@ -287,7 +287,7 @@ ReferringType :
 ;
 ```
 
-The [Ecore model inference](13_grammarlanguage.html#metamodel-inference) would create an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *ReferringType* with an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) *referencedObject* of type *Entity* with its containment property set to `false`. The referenced object would be identified either by a *STRING* and the surrounding information in the current context (see [scoping](#scoping)). If you do not use `generate` but `import` an existing Ecore model, the class *ReferringType* (or one of its super types) would need to have an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) of type *Entity* (or one of its super types) declared. Also the [EReference's]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) containment and container properties needs to be set to `false`. 
+The [Ecore model inference](31_grammarlanguage.html#metamodel-inference) would create an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *ReferringType* with an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) *referencedObject* of type *Entity* with its containment property set to `false`. The referenced object would be identified either by a *STRING* and the surrounding information in the current context (see [scoping](#scoping)). If you do not use `generate` but `import` an existing Ecore model, the class *ReferringType* (or one of its super types) would need to have an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) of type *Entity* (or one of its super types) declared. Also the [EReference's]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) containment and container properties needs to be set to `false`. 
 
 ### Default Runtime Behavior (Lazy Linking)
 
@@ -751,7 +751,7 @@ A serialized document represents the state of the semantic model. However, if th
 
 ### Parse Tree Constructor {#parse-tree-constructor}
 
-The parse tree constructor usually does not need to be customized since it is automatically derived from the [Xtext Grammar](13_grammarlanguage.html). However, it can be helpful to look into it to understand its error messages and its runtime performance.
+The parse tree constructor usually does not need to be customized since it is automatically derived from the [Xtext Grammar](31_grammarlanguage.html). However, it can be helpful to look into it to understand its error messages and its runtime performance.
 
 For serialization to succeed, the parse tree constructor must be able to *consume* every non-transient element of the to-be-serialized EMF model. To *consume* means, in this context, to write the element to the textual representation of the model. This can turn out to be a not-so-easy-to-fulfill requirement, since a grammar usually introduces implicit constraints to the EMF model as explained for the [concrete syntax validator](#concrete-syntax-validation).
 
@@ -1184,4 +1184,4 @@ This only applies to referencing dependencies to 'import'-ed Ecore models and la
 
 ---
 
-**[Next Chapter: IDE Concepts](16_ide_concepts.html)**
+**[Next Chapter: IDE Concepts](34_ide_concepts.html)**

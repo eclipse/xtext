@@ -10,11 +10,11 @@ Xtext provides a lot of generic implementations for your language's infrastructu
 
 The generator also contributes to shared project resources such as the *plugin.xml*, *MANIFEST.MF* and the [Guice modules](#guicemodules).
 
-Xtext's generator uses a special DSL called [MWE2 - the modeling workflow engine](18_mwe2.html) to configure the generator.
+Xtext's generator uses a special DSL called [MWE2 - the modeling workflow engine](36_mwe2.html) to configure the generator.
 
 ### A Short Introduction to MWE2 {#short-intro-to-mwe}
 
-MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter [MWE2](18_mwe2.html).
+MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter [MWE2](36_mwe2.html).
 
 Given the following simple Java class (POJO):
 
@@ -74,7 +74,7 @@ public class CreatePersons {
 
 ![](images/family_tree.png)
 
-And this is how it works: The root element is a plain Java class name. As the module is a sibling to the class *com.mycompany.Person* it is not necessary to use use fully qualified name. There are other packages implicitly imported into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered in depth in the appropriate [chapter](18_mwe2.html). The constructed objects are furthermore configured according to the declaration in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third person - the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have their respective *name* assigned via a reflective invocation of the *setName* method. If one wants to add another child to "Father", she can simply repeat the child assignment:
+And this is how it works: The root element is a plain Java class name. As the module is a sibling to the class *com.mycompany.Person* it is not necessary to use use fully qualified name. There are other packages implicitly imported into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered in depth in the appropriate [chapter](36_mwe2.html). The constructed objects are furthermore configured according to the declaration in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third person - the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have their respective *name* assigned via a reflective invocation of the *setName* method. If one wants to add another child to "Father", she can simply repeat the child assignment:
 
 ```mwe2
 child = com.mycompany.Person {
@@ -92,7 +92,7 @@ As you can see in the example above MWE2 can be used to instantiate arbitrary Ja
 
 *Hint: Whenever you are in an \*.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).*
 
-This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 [reference documentation](18_mwe2.html) for additional information. We will now have a look at the component model used to configure the Language Generator.
+This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 [reference documentation](36_mwe2.html) for additional information. We will now have a look at the component model used to configure the Language Generator.
 
 ### General Architecture
 
@@ -167,10 +167,10 @@ In the following table the most important standard generator fragments are liste
 
 |Class|Generated Artifacts|Related Documentation|
 |:---|:---|:---|
-|[EcoreGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java)|EMF code for generated models|[Model inference](13_grammarlanguage.html#metamodel-inference)|
+|[EcoreGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java)|EMF code for generated models|[Model inference](31_grammarlanguage.html#metamodel-inference)|
 |[XtextAntlrGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java)|ANTLR grammar, parser, lexer and related services||
 |[GrammarAccessFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java)|Access to the grammar||
-|[ResourceFactoryFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java)|EMF resource factory|[Xtext Resource](20_emf_integration.html#xtext-resource)|
+|[ResourceFactoryFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java)|EMF resource factory|[Xtext Resource](38_emf_integration.html#xtext-resource)|
 |[ParseTreeConstructorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java)|Model-to-text serialization|[Serialization](#serialization)|
 |[ImportNamespacesScopingFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java)|Index-based scoping|[Index-based namespace scoping](#index-based)|
 |[JavaValidatorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java)|Model validation|[Model validation](#custom-validation)|
@@ -294,7 +294,7 @@ public static void main(String[] args) {
 }
 ```
 
-In Xtext, you should never instantiate the injector of your language yourself. The sections [Runtime Setup](15_runtime_concepts.html#runtime-setup) and [Equinox Setup](15_runtime_concepts.html#equinox-setup) explain how to access it in different scenarios. 
+In Xtext, you should never instantiate the injector of your language yourself. The sections [Runtime Setup](33_runtime_concepts.html#runtime-setup) and [Equinox Setup](33_runtime_concepts.html#equinox-setup) explain how to access it in different scenarios. 
 
 These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on [the website of Google Guice](http://code.google.com/p/google-guice/). 
 
@@ -523,4 +523,4 @@ As the comments suggest, you may add multiple languages in the languages section
 
 ---
 
-**[Next Chapter: Runtime Concepts](15_runtime_concepts.html)**
+**[Next Chapter: Runtime Concepts](33_runtime_concepts.html)**

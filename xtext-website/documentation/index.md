@@ -2,56 +2,44 @@
 layout: documentation
 ---
 
-# 5 Minutes Tutorial {#first-five-minutes}
+# Overview {#Overview}
 
-In this chapter you will learn how to create a new Xtext project, generate a fully working language infrastructure and how to start a new Eclipse instance in order to test the editor. But before we get started, make sure you have Eclipse Xtext properly installed.
+## What is Xtext?
 
-## Creating A New Xtext Project {#new-project}
+No matter if you want to create a small textual domain-specific language (DSL) or you want to implement a full-blown general purpose programming language: with Xtext you can create your very own languages in a snap. If you already have an existing language but it lacks decent tool support, you can use Xtext to create a sophisticated Eclipse-based development environment providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework. 
 
-The first step is to create a new Xtext project by choosing *File &rarr; New &rarr; Project...*. The dialog offers a couple of different project types. Select *New Xtext Project* from the category *Xtext* and finish the wizard with the default settings. You will find 4 new projects in your workspace which are mostly empty. The Xtext grammar editor will be opened and show the definition of a very simple *Hello World* language.
+## How Does It Work?
 
-```xtext
-grammar org.xtext.example.mydsl.MyDsl with 
-                                      org.eclipse.xtext.common.Terminals
+Xtext provides you with a set of domain-specific languages and modern APIs to describe the different aspects of your programming language. Based on that information it gives you a full implementation of that language running on the JVM. The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment. They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation and last but not least a code generator or interpreter. These runtime components integrate with and are based on the Eclipse Modeling Framework (EMF), which effectively allows you to use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.
 
-generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored for your language. It already provides great default functionality for all aspects and again comes with DSLs and APIs that allow to configure or change the most common things very easily. And if that's not flexible enough there is Guice to replace the default behavior with your own implementations.
 
-Model:
-  greetings+=Greeting*;
-  
-Greeting:
-  'Hello' name=ID '!';
-```
+## Xtext is Highly Configurable
 
-The only thing this language does, is to allow to write down a list of greetings. The following would be proper input: 
+Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language as well as the IDE infrastructure. A central, external module is used to configure the DI container. As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the aspect that are common sweet spots for customization. But if you need something completely different, Google Guice gives you the power to exchange every little class in a non-invasive way.
 
-```mydsl
-Hello Xtext!
-Hello World!
-```
+## Who Uses Xtext?
 
-![](images/FiveMinTutorial_FreshProject.png)
+Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, embedded systems or Java enterprise software projects and game development. People use Xtext-based languages to drive code generators that target Java, C, C++, C#, Objective C, Python, or Ruby code. Although the language infrastructure itself runs on the JVM, you can compile Xtext languages to any existing platform. Xtext-based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, the Eclipse Webtools platform or Google's Protocol Buffers and the framework is also widely used in research projects. 
 
-## Generating The Language Infrastructure {#run-workflow}
+## Who is Behind Xtext?
 
-In order to test drive this language, you will have to generate the respective language infrastructure. Therefore, choose *Run As &rarr; Generate Xtext Artifacts* from the context menu of the grammar editor. A new Java process will be spawned and afterwards you will find a couple of new files in the projects that were created in the first step. What you see now is a runnable language infrastructure with a powerful Eclipse editor for a brain-dead language :-).
+Xtext is a professional Open-Source project. We, the main developers and the project lead, work for itemis, which is a well known consulting company specialized on model-based development. Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. Besides many other advantages this means that you don't have to fear any IP issues, because the Eclipse Foundation has their own lawyers who take care that no intellectual property is violated. 
 
-## Try The Editor {#testing-the-editor}
+You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. Don't hesitate to get in contact with us ([www.itemis.com](http://xtext.itemis.com)).
 
-Let's give the editor a try. If you select *Run As &rarr; Eclipse Application* from the project's context menu, you can create a new Eclipse Application. A new Eclipse instance will be launched and allows to test drive the editor.
+## What is a Domain-Specific Language {#DSL}
 
-![](images/FiveMinTutorial_LaunchConfig.png)
+A *Domain-Specific Language (DSL)* is a small programming language, which focuses on a particular domain. Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can be solved or processed by computers somehow.
 
-Before you can create a file for the sample language, you will have to create a sample project. Select *File &rarr; New &rarr; Project...* and choose a project type of your choice, e.g. *Java Project*, name it *Sample* and create a new file in the *src* folder of the project: From the context menu of the folder choose *New &rarr; File*, call it *Sample.mydsl* and hit *Finish*. The newly created editor will open for your language and ask you in a dialog, whether you want to add the Xtext nature to your project, which should be confirmed. You can now give the editor a try, e.g. use content assist (*Ctrl+Space*) to insert the keyword `Hello` and see how the input is validated immediately.
+The opposite of a DSL is a so called *GPL*, a *General Purpose Language* such as Java or any other common programming language. With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
 
-![](images/FiveMinTutorial_Editor.png)
+Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.
 
-## Conclusion {#five-minutes-conclusion}
+There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately, XML uses a fixed concrete syntax, which is very verbose and yet not adapted to be read by humans. Into the bargain, a generic syntax for everything is a compromise.
 
-In your first five minutes with Xtext, you have learned how to create a new set of projects. You have run Xtext's code generation in order to get a fully working language infrastructure, and finally learned how to test the generated editor.
-
-Next up you should go through the more comprehensive [Domain Model Example](01_domainmodelwalkthrough.html). It explains the different concepts of the Xtext grammar language and illustrates how to customize various aspects of the language. 
+Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may be as concise and suggestive as possible being a best match for your particular domain. The hard task of reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.
 
 ---
 
-**[Next Chapter: 15 Minutes Tutorial](01_domainmodelwalkthrough.html)**
+**[Next Chapter: 5 Minutes Tutorial](11_five_minutes.html)**

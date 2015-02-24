@@ -12,7 +12,7 @@ This is a little language that lets you dispatch incoming HTTP requests.
 
 For server-side web development one needs to match any incoming HTTP requests to some handling code. A request is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters, etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses annotations to match incoming URLs and other frameworks have their own external DSLs for that.
 
-The HTTP routing language explained in this section uses an approach very similar to the one from the [Play framework](http://playframework.org). You basically declare a list of URL patterns and explain what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare so called dependencies which are translated to fields annotated with `@Inject`. So this DSL plays nicely with dependency injection and especially with the [Guice modules DSL](08_guice.html).
+The HTTP routing language explained in this section uses an approach very similar to the one from the [Play framework](http://playframework.org). You basically declare a list of URL patterns and explain what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare so called dependencies which are translated to fields annotated with `@Inject`. So this DSL plays nicely with dependency injection and especially with the [Guice modules DSL](25_guice.html).
 
 ```routing
 inject GuessTheNumber controller
@@ -40,7 +40,7 @@ The example project's name is *org.xtext.httprouting.examples* and includes a si
 
 ## Grammar {#routing-grammar}
 
-The Routing DSL extends *org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations* to make use of expressions predefined by [Xbase](17_xbase.html#xbase-expressions) plus support for Annotations. 
+The Routing DSL extends *org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations* to make use of expressions predefined by [Xbase](35_xbase.html#xbase-expressions) plus support for Annotations. 
 
 ```xtext
 grammar org.xtext.httprouting.Route 
@@ -179,4 +179,4 @@ Just because of that code you can now refer to the local variables `request`, `r
 
 ---
 
-**[Next Chapter: Template Language](10_template.html)**
+**[Next Chapter: Template Language](27_template.html)**

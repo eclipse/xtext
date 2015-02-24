@@ -10,7 +10,7 @@ The scripting language allows writing code without any preludes such as package,
 
 ## Overview {#scripting-solution}
 
-As you can see the language is straightforward: All you can do is write expressions. The expressions you see are the same as in Xtend and they are defined in its own grammar (called Xbase). They are syntactically very close to Java, but feature advanced concepts like lambda expressions and operator overloading. They support local type inference so you do not have to write types everywhere like in Java, but the expressions are still statically typed. For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively covered in the respective [documentation section](17_xbase.html).
+As you can see the language is straightforward: All you can do is write expressions. The expressions you see are the same as in Xtend and they are defined in its own grammar (called Xbase). They are syntactically very close to Java, but feature advanced concepts like lambda expressions and operator overloading. They support local type inference so you do not have to write types everywhere like in Java, but the expressions are still statically typed. For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively covered in the respective [documentation section](35_xbase.html).
 
 A script is compiled to a Java class with one main method. That is the script
 
@@ -30,7 +30,7 @@ public class Application {
 }
 ```
 
-Note that the core language infrastructure such as the parser, linker and compiler does not depend on Eclipse, but the compilation is integrated with Eclipse for convenience reasons. All 7 languages can be parsed, compiled and executed without Eclipse. We could also make use of the interpreter, which might make more sense for a scripting language. How to use and integrate the interpreter is explained in the section describing the [Tortoise](11_tortoise.html) language.
+Note that the core language infrastructure such as the parser, linker and compiler does not depend on Eclipse, but the compilation is integrated with Eclipse for convenience reasons. All 7 languages can be parsed, compiled and executed without Eclipse. We could also make use of the interpreter, which might make more sense for a scripting language. How to use and integrate the interpreter is explained in the section describing the [Tortoise](28_tortoise.html) language.
 
 ## Running the Example {#scripting-running}
 
@@ -38,7 +38,7 @@ Make sure you have the projects *org.xtext.scripting* and *org.xtext.scripting.u
 
 ## Grammar {#scripting-grammar}
 
-To build a language with Xtext, you first have to define a grammar. As opposed to other parser generators, an Xtext grammar defines both, the lexical structure of the language and an object model (the AST or semantic model) that is build during parsing. For a more detailed description of the Xtext grammar language, please see the respective [documentation section](13_grammarlanguage.html).
+To build a language with Xtext, you first have to define a grammar. As opposed to other parser generators, an Xtext grammar defines both, the lexical structure of the language and an object model (the AST or semantic model) that is build during parsing. For a more detailed description of the Xtext grammar language, please see the respective [documentation section](31_grammarlanguage.html).
 
 The grammar for our DSL is rather simple. We inherit from `org.eclipse.xtext.xbase.Xbase` to get the syntax of the expressions. As we want to refer to the type [XBlockExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java), we have to import Xbase's Ecore model. The single type inferred from this grammar goes into the Ecore model `simpleExpressions`.
 
@@ -61,7 +61,7 @@ To make our language executable, we have to define how its concepts relate to Ja
 
 This hook is not only used to explain how to generate Java code, but also to give expressions a proper scope and to make your DSL constructs visible by other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other.
 
-The inferrer is written in Xtend, if you are not yet familiar with it, you should read at least the [Xtend Primer](04_sevenlang_introduction.html#xtend-primer) first.
+The inferrer is written in Xtend, if you are not yet familiar with it, you should read at least the [Xtend Primer](21_sevenlang_introduction.html#xtend-primer) first.
 
 The JVM model inferrer code for the scripting language looks like this: 
 
@@ -103,4 +103,4 @@ As you can imagine, this is a fairly powerful way to put things on the scope imp
 
 ---
 
-**[Next Chapter: Build Language](06_builddsl.html)**
+**[Next Chapter: Build Language](23_builddsl.html)**

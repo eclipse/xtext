@@ -153,7 +153,7 @@ Let's have a more detailed look at what the different grammar rules mean:
 
     The keyword `many` is used to model a multi valued feature in the domain model DSL. The assignment operator (`?=`) implies that the feature `many` is of type *boolean*. You are already familiar with the other syntax elements in this parser rule. 
 
-This domain model grammar already uses the most important concepts of Xtext's grammar language. you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (`=`) where the multi value assignment used a plus-equals (`+=`). We have also seen the boolean assignment operator (`?=`). Furthermore we saw how a cross reference can be declared and learned about different cardinalities (`?` = optional, `*` = any number, `+` = at least once). Please consult the [Grammar Language Reference](13_grammarlanguage.html) for more details. Let's now have a look what you can do with such a language description.
+This domain model grammar already uses the most important concepts of Xtext's grammar language. you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (`=`) where the multi value assignment used a plus-equals (`+=`). We have also seen the boolean assignment operator (`?=`). Furthermore we saw how a cross reference can be declared and learned about different cardinalities (`?` = optional, `*` = any number, `+` = at least once). Please consult the [Grammar Language Reference](31_grammarlanguage.html) for more details. Let's now have a look what you can do with such a language description.
 
 ## Generate Language Artifacts
 
@@ -347,4 +347,4 @@ You should regenerate the language infrastructure as described in the previous s
 
 ---
 
-**[Next Chapter: 15 Minutes Tutorial - Extended](02_domainmodelnextsteps.html)**
+**[Next Chapter: 15 Minutes Tutorial - Extended](13_domainmodelnextsteps.html)**

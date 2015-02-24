@@ -85,7 +85,7 @@ dbCollection.save(john.getDBObject())
 
 ## Running the Example {#mongo-running}
 
-In addition to the [common requirements](04_sevenlang_introduction.html#common-requirements), you need the [mongoDB implementation](http://www.mongodb.org/downloads) for your platform. We have included the mongoDB Java driver from [Eclipse Orbit](http://download.eclipse.org/tools/orbit/downloads/) in the code base. 
+In addition to the [common requirements](21_sevenlang_introduction.html#common-requirements), you need the [mongoDB implementation](http://www.mongodb.org/downloads) for your platform. We have included the mongoDB Java driver from [Eclipse Orbit](http://download.eclipse.org/tools/orbit/downloads/) in the code base. 
 
 Import the projects into an Eclipse workspace and run the launch configuration *Run (org.eclipse.xtext.mongobeans)*. Import the example plug-in into the new workspace and run `MusicDBXtendTest` as a JUnit test.
 
@@ -130,7 +130,7 @@ MongoOperation:
 	body=XBlockExpression;
 ```
 
-The language inherits from the `Xbase` grammar in order to allow Xbase expressions and references to Java elements. A *MongoFile* starts with an import section (see [Build DSL](06_builddsl.html#builddsl-imports) for details). The import section is followed by any number of *AbstractElements*, which can be *PackageDeclarations* or *MongoBeans*. Note that as opposed to Java, *PackageDeclarations* can be nested. *MongoBeans* define statically typed *MongoProperties*, which can be single-valued or multi-valued denoted by an `*` following the type name. The type of a *MongoProperty* can also be defined inline. *MongoBeans* can also define *MongoOperations*. The body of such an operation is an *XBlockExpression* from Xbase. 
+The language inherits from the `Xbase` grammar in order to allow Xbase expressions and references to Java elements. A *MongoFile* starts with an import section (see [Build DSL](23_builddsl.html#builddsl-imports) for details). The import section is followed by any number of *AbstractElements*, which can be *PackageDeclarations* or *MongoBeans*. Note that as opposed to Java, *PackageDeclarations* can be nested. *MongoBeans* define statically typed *MongoProperties*, which can be single-valued or multi-valued denoted by an `*` following the type name. The type of a *MongoProperty* can also be defined inline. *MongoBeans* can also define *MongoOperations*. The body of such an operation is an *XBlockExpression* from Xbase. 
 
 ## Translation to Java {#mongo-inferrer}
 
@@ -364,7 +364,7 @@ public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 }
 ```
 
-See [Dependency Injection](14_configuration.html#dependency-injection) to learn more about Xtext's dependency injection.
+See [Dependency Injection](32_configuration.html#dependency-injection) to learn more about Xtext's dependency injection.
 
 ## Validation {#mongo-validation}
 
@@ -453,4 +453,4 @@ class MongoBeansLabelProvider extends XbaseLabelProvider {
 
 ---
 
-**[Next Chapter: DSL for Guice](08_guice.html)**
+**[Next Chapter: DSL for Guice](25_guice.html)**

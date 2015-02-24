@@ -184,7 +184,7 @@ for (param : element.params) {
 }
 ```
 
-The body of the template is compiled into a big private `generate()` method. We skip the inferrer code here, as it is straightforward. But we had to extend the compiler to support rich strings and the new `FOR` loop our new control structures. This is described in the [next section](10_template.html#templates-compiler).
+The body of the template is compiled into a big private `generate()` method. We skip the inferrer code here, as it is straightforward. But we had to extend the compiler to support rich strings and the new `FOR` loop our new control structures. This is described in the [next section](27_template.html#templates-compiler).
 
 *   DSL:
     
@@ -338,8 +338,8 @@ public class TemplateProposalProvider
 
 ## Syntax Highlighting {#templates-highlighting}
 
-Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback, we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting styles in the [TemplateHighlightingConfiguration]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend) and apply them to the text in the [TemplateHighlightingCalculator]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend). As this is rather extensively covered in the [Xtext documentation](16_ide_concepts.html#highlighting), we skip a deeper explanation here. 
+Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback, we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting styles in the [TemplateHighlightingConfiguration]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend) and apply them to the text in the [TemplateHighlightingCalculator]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend). As this is rather extensively covered in the [Xtext documentation](34_ide_concepts.html#highlighting), we skip a deeper explanation here. 
 
 ---
 
-**[Next Chapter: Little Tortoise](11_tortoise.html)**
+**[Next Chapter: Little Tortoise](28_tortoise.html)**

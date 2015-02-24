@@ -6,7 +6,7 @@ layout: documentation
 
 ## Case Insensitive Languages {#case-insensitive-languages}
 
-In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](14_configuration.html#generator-fragment) for this purpose. 
+In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](32_configuration.html#generator-fragment) for this purpose. 
 
 For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
 
@@ -85,14 +85,14 @@ Rule 'Report error' when Heater.error then
     println(report)
 ```
 
-The first step for including whitespace-aware blocks in your language is to use the `parser.antlr.ex.rt.AntlrGeneratorFragment` and `parser.antlr.ex.ca.ContentAssistParserGeneratorFragment` in the workflow as shown in the [previous section](19_special_languages.html#case-insensitive-languages) (with or without the `ignoreCase` option). Then define *synthetic tokens* in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
+The first step for including whitespace-aware blocks in your language is to use the `parser.antlr.ex.rt.AntlrGeneratorFragment` and `parser.antlr.ex.ca.ContentAssistParserGeneratorFragment` in the workflow as shown in the [previous section](37_special_languages.html#case-insensitive-languages) (with or without the `ignoreCase` option). Then define *synthetic tokens* in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
 
 ```xtext
 terminal BEGIN: 'synthetic:BEGIN';
 terminal END: 'synthetic:END';
 ```
 
-These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits expressions from [Xbase](17_xbase.html) and redefines the syntax of block expressions:
+These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits expressions from [Xbase](35_xbase.html) and redefines the syntax of block expressions:
 
 ```xtext
 XBlockExpression returns xbase::XExpression: 
@@ -345,4 +345,4 @@ Sometimes it's more convenient to allow associativity on parser level, but forbi
 
 ---
 
-**[Next Chapter: Integration with EMF and Other EMF Editors](20_emf_integration.html)**
+**[Next Chapter: Integration with EMF and Other EMF Editors](38_emf_integration.html)**

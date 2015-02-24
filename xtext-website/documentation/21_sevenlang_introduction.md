@@ -18,17 +18,17 @@ Having the grammar defined, you now need to tell Xtext what your language concep
 
 While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code directly from the inferred model. The same way, Xbase already integrates your language with JDT to an extend that customizations beyond the JVM model inferrer will only be necessary for very special cases. You can naturally mix Java and DSL code in the same application without any barriers. 
 
-The inferred model also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other. You can for instance call [templates](10_template.html) directly from a [script](05_scripting.html) and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you create in the model inferrer.
+The inferred model also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other. You can for instance call [templates](27_template.html) directly from a [script](22_scripting.html) and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you create in the model inferrer.
 
 To illustrate the power and flexibility of these two abstractions, we have built seven example languages using them:
 
-*   [A simple scripting language](05_scripting.html)
-*   [A Grade-like build DSL](06_builddsl.html)
-*   [A DSL for statically-typed MongoDB documents](07_mongodb.html)
-*   [A Guice modules DSL](08_guice.html)
-*   [A Playframework-like HTTP routing language](09_httprouting.html)
-*   [A template language](10_template.html)
-*   [A Logo-like programming environment for educational purposes](11_tortoise.html)
+*   [A simple scripting language](22_scripting.html)
+*   [A Grade-like build DSL](23_builddsl.html)
+*   [A DSL for statically-typed MongoDB documents](24_mongodb.html)
+*   [A Guice modules DSL](25_guice.html)
+*   [A Playframework-like HTTP routing language](26_httprouting.html)
+*   [A template language](27_template.html)
+*   [A Logo-like programming environment for educational purposes](28_tortoise.html)
 
 Each language is very simple and focuses on the value a DSL can add to the respective viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution. Yet the languages are flexible and come with powerful core abstractions. We also covered different technical aspects of customizing to the language infrastructure. Some languages have special syntax coloring, others provide customized outline views or content assist. All aspects of a language are still fully customizable when using Xbase.
 
@@ -149,7 +149,7 @@ list.sortBy[ length ]
 
 <a name="xtend_templates"/> Also noteworthy is the template expression, which allows defining interpolated multi-line string literals. In addition, the template expressions has intelligent whitespace handling and supports a special `FOR` and `IF` construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.
 
-We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is an example from the [http routing language](09_httprouting.html):
+We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is an example from the [http routing language](26_httprouting.html):
 
 ```xtend
 '''
@@ -178,4 +178,4 @@ We most often use this expression in the examples to generate some synthetic Jav
 
 ---
 
-**[Next Chapter: Scripting Language](05_scripting.html)**
+**[Next Chapter: Scripting Language](22_scripting.html)**

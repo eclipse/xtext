@@ -188,7 +188,7 @@ class BuildDSLValidator extends XbaseJavaValidator {
 
 ## Imports {#builddsl-imports}
 
-By using the *XImportSection* form Xbase, the language automatically supports the notion of *plain imports*, *static imports* and *static extension imports*. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the [Xtend primer](04_sevenlang_introduction.html#xtend_extension) for a more detailed description.
+By using the *XImportSection* form Xbase, the language automatically supports the notion of *plain imports*, *static imports* and *static extension imports*. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the [Xtend primer](21_sevenlang_introduction.html#xtend_extension) for a more detailed description.
 
 We ship some predefined extension classes to enhance the Java classes [File]({{site.javadoc.java}}/java/io/File.html) and [Class]({{site.javadoc.java}}/java/lang/Class.html). These are always put onto the extension scope by a customized [BuildDSLImplicitlyImportedFeatures]({{site.src.sevenlang}}/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend):
 
@@ -238,7 +238,7 @@ As we expect a build language to deal with files and directories a lot, we have 
         "fileName.txt");
     ```
 
-The compiler replaces operators with method calls to methods named `operator_<operatorName>()`. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since [File]({{site.javadoc.java}}/java/io/File.html) as well as [String]({{site.javadoc.java}}/java/lang/String.html) are sealed types. To learn more about operators and operator overloading please consult the [Xbase documentation](17_xbase.html#xbase-expressions-operators).
+The compiler replaces operators with method calls to methods named `operator_<operatorName>()`. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since [File]({{site.javadoc.java}}/java/io/File.html) as well as [String]({{site.javadoc.java}}/java/lang/String.html) are sealed types. To learn more about operators and operator overloading please consult the [Xbase documentation](35_xbase.html#xbase-expressions-operators).
 
 ## Run as... Integration {#builddsl-launch}
 
@@ -246,4 +246,4 @@ To facilitate executing build scripts from within Java, we have extended Eclipse
 
 ---
 
-**[Next Chapter: DSL for MongoDB](07_mongodb.html)**
+**[Next Chapter: DSL for MongoDB](24_mongodb.html)**

@@ -109,11 +109,11 @@ grammar org.xtext.example.SecretCompartments
 
 The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be *SecretCompartments.xtext* and must be placed in a package *org.xtext.example* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
 
-The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](13_grammarlanguage.html#grammar-mixins)).
+The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](31_grammarlanguage.html#grammar-mixins)).
 
 ### EPackage Declarations {#package-declarations}
 
-Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are instances of EMF Ecore models. An Ecore model basically consists of an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) containing [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java), [EDataTypes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java) and [EEnums]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java) (see the [section on EMF](20_emf_integration.html#model-metamodel) for more details) and describes the structure of the instantiated objects. Xtext can infer Ecore models from a grammar (see [Ecore model inference](13_grammarlanguage.html#metamodel-inference)) but it is also possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and infer some others from a single grammar. This allows for easy reuse of existing abstractions while still having the advantage of short turnarounds with derived Ecore models. 
+Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are instances of EMF Ecore models. An Ecore model basically consists of an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) containing [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java), [EDataTypes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java) and [EEnums]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java) (see the [section on EMF](38_emf_integration.html#model-metamodel) for more details) and describes the structure of the instantiated objects. Xtext can infer Ecore models from a grammar (see [Ecore model inference](31_grammarlanguage.html#metamodel-inference)) but it is also possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and infer some others from a single grammar. This allows for easy reuse of existing abstractions while still having the advantage of short turnarounds with derived Ecore models. 
 
 #### EPackage Generation
 
@@ -121,7 +121,7 @@ The easiest way to get started is to let Xtext infer the Ecore model from your g
 
 `generate secrets 'http://www.eclipse.org/secretcompartment'`
 
-That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the *name* `secrets` and the *nsURI* `"http://www.eclipse.org/secretcompartment"`. Actually these are the mandatory properties that are necessary to create an empty [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java). Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](13_grammarlanguage.html#metamodel-inference). 
+That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the *name* `secrets` and the *nsURI* `"http://www.eclipse.org/secretcompartment"`. Actually these are the mandatory properties that are necessary to create an empty [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java). Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](31_grammarlanguage.html#metamodel-inference). 
 
 #### EPackage Import {#epackage-import}
 
@@ -203,7 +203,7 @@ An import statement referring to an Ecore file by a *platform:/resource/*-URI lo
 
 `import 'platform:/resource/my.project/model/SecretCompartments.ecore'`
 
-If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for [generating the Ecore classes]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java) with resource URIs that point to the [generator models](20_emf_integration.html#emf-codegen) of the referenced Ecore models.
+If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for [generating the Ecore classes]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java) with resource URIs that point to the [generator models](38_emf_integration.html#emf-codegen) of the referenced Ecore models.
 
 The *\*.genmodel* provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create a generator model for derived [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. 
 
@@ -265,7 +265,7 @@ Basically parsing can be separated in the following phases.
 
 In the first stage called *lexing*, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part or region of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as *token rules* or *lexer rules*. There is an informal naming convention that names of terminal rules are all upper-case.
 
-In the secret compartments example there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (cf. [Grammar Mixins](13_grammarlanguage.html#grammar-mixins)). Therein the *ID* rule is defined as follows:
+In the secret compartments example there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (cf. [Grammar Mixins](31_grammarlanguage.html#grammar-mixins)). Therein the *ID* rule is defined as follows:
 
 ```xtext
 terminal ID : 
@@ -287,7 +287,7 @@ TerminalRule :
 
 Note that *the order of terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
 
-It's almost in any case recommended to use data type rules instead. Let's assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a [data type rule](13_grammarlanguage.html#datatype-rules), instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.
+It's almost in any case recommended to use data type rules instead. Let's assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a [data type rule](31_grammarlanguage.html#datatype-rules), instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.
 
 ##### Return Types
 
@@ -397,7 +397,7 @@ The `EOF` (End Of File) token may be used to describe that the end of the input 
 
 `terminal UNCLOSED_STRING : '"' (!'"')* EOF;`
 
-The `EOF` token cannot be [negated](13_grammarlanguage.html#negated-tokens).
+The `EOF` token cannot be [negated](31_grammarlanguage.html#negated-tokens).
 
 ---
 
@@ -411,10 +411,10 @@ Not all the expressions that are available in terminal rules can be used in pars
 
 The elements that are available in parser rules as well as in terminal rules are
 
-1.  [Groups](13_grammarlanguage.html#groups), 
-1.  [Alternatives](13_grammarlanguage.html#alternatives), 
-1.  [Keywords](13_grammarlanguage.html#keywords) and 
-1.  [Rule Calls](13_grammarlanguage.html#rule-calls).
+1.  [Groups](31_grammarlanguage.html#groups), 
+1.  [Alternatives](31_grammarlanguage.html#alternatives), 
+1.  [Keywords](31_grammarlanguage.html#keywords) and 
+1.  [Rule Calls](31_grammarlanguage.html#rule-calls).
 
 In addition to these elements, there are some expressions used to direct how the AST is constructed. They are listed and explained in the following.
 
@@ -437,7 +437,7 @@ The syntactic declaration for states in the state machine example starts with a 
 
 `name=ID`
 
-The left hand side refers to a feature *name* of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](13_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an *EString* in this case, the feature *name* needs to be of type [EString]() as well.
+The left hand side refers to a feature *name* of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](31_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an *EString* in this case, the feature *name* needs to be of type [EString]() as well.
 
 **Assignment operators.** There are three different assignment operators, each with different semantics.
 
@@ -673,7 +673,7 @@ current = temp;
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 
-Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [reusing a single grammar](13_grammarlanguage.html#grammar-mixins) its definition of hidden tokens is reused, too. The grammar `org.eclipse.xtext.common.Terminals` comes with a reasonable default and hides all comments and white space from the parser rules.
+Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [reusing a single grammar](31_grammarlanguage.html#grammar-mixins) its definition of hidden tokens is reused, too. The grammar `org.eclipse.xtext.common.Terminals` comes with a reasonable default and hides all comments and white space from the parser rules.
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called transitively by the declaring rule uses the same hidden terminals as the calling rule, unless it defines hidden tokens itself.
 
@@ -695,7 +695,7 @@ John /* comment */ Smith // line comment
       42      ; // line comment
 ```
 
-A list of all default terminals like `WS` can be found in section [Grammar Mixins](13_grammarlanguage.html#grammar-mixins).
+A list of all default terminals like `WS` can be found in section [Grammar Mixins](31_grammarlanguage.html#grammar-mixins).
 
 ### Data Type Rules {#datatype-rules}
 
@@ -724,7 +724,7 @@ QualifiedName returns ecore::EString :
 ;
 ```
 
-Note that rules that do not call other parser rules and do neither contain any actions nor [assignments](13_grammarlanguage.html#assignments) are considered to be data type rules, and the data type [EString]() is implied if none has been explicitly declared.
+Note that rules that do not call other parser rules and do neither contain any actions nor [assignments](31_grammarlanguage.html#assignments) are considered to be data type rules, and the data type [EString]() is implied if none has been explicitly declared.
 
 [Value converters](#value-converter) are used to transform the parsed string to the actually returned data type value.
 
@@ -953,7 +953,7 @@ Workflow {
 //...
 ```
 
-You might also want to read about [EPackage imports](13_grammarlanguage.html#epackage-import) for the inheriting grammar.
+You might also want to read about [EPackage imports](31_grammarlanguage.html#epackage-import) for the inheriting grammar.
 
 ## Common Terminals
 
@@ -986,4 +986,4 @@ terminal ANY_OTHER:
 
 ---
 
-**[Next Chapter: Configuration](14_configuration.html)**
+**[Next Chapter: Configuration](32_configuration.html)**
