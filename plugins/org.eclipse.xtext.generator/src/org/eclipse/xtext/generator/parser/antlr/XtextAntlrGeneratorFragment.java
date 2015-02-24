@@ -101,19 +101,32 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper")
-			.addConfiguredBinding("HighlightingLexer",
-					"binder.bind(" + Lexer.class.getName() + ".class)"+
-					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
-					")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
-			.addConfiguredBinding("HighlightingTokenDefProvider",
-					"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
-					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
-					")).to(" + AntlrTokenDefProvider.class.getName() +".class)")
-			.getBindings();
+		BindFactory binder = new BindFactory();
+			binder.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper");
+			if(getNaming().hasIde()){
+				binder.addConfiguredBinding("HighlightingLexer",
+						"binder.bind(" + Lexer.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+						")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
+					   .addConfiguredBinding("HighlightingTokenDefProvider",
+						"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+						")).to(" + AntlrTokenDefProvider.class.getName() +".class)");
+			} else {
+				binder.addConfiguredBinding("HighlightingLexer",
+						"binder.bind(" + Lexer.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+						")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
+					   .addConfiguredBinding("HighlightingTokenDefProvider",
+						"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+						")).to(" + AntlrTokenDefProvider.class.getName() +".class)");
+			}
+			return binder.getBindings();
 	}
 
 	public static String getAntlrTokenFileProviderClassName(Grammar grammar, Naming naming) {
