@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Getting Started
 ---
 
 # Five simple steps to your JVM language {#jvm-domain-model}

@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Seven JVM Languages Built With Xbase
 ---
 
 # DSL for Guice {#guice}
@@ -149,7 +150,7 @@ accept(module.toClass(module.fullyQualifiedName))[
     if (!mixin.eIsProxy)
       members += mixin.toField( mixin.simpleName, 
         typeRef(mixin.fullyQualifiedName.toString)) [
-        initializer = '''new Â«mixin.nameÂ»()'''
+        initializer = '''new «mixin.name»()'''
       ]
   }
   
@@ -161,9 +162,9 @@ accept(module.toClass(module.fullyQualifiedName))[
     body = '''
       try {
         ...some other code
-        Â«FOR mix : module.mixinsÂ»
-          Â«mix.simpleNameÂ».configure(bind, usedKeys);
-        Â«ENDFORÂ»
+        «FOR mix : module.mixins»
+          «mix.simpleName».configure(bind, usedKeys);
+        «ENDFOR»
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -233,10 +234,10 @@ for (binding : module.bindings) {
 
 // and the following method
 def guiceKey(KeyAST it) '''
-  Key.get(new TypeLiteral<Â«type>(){}Â«
+  Key.get(new TypeLiteral<«type>(){}«
   IF annotation != null
-  Â», getClass().getDeclaredField("Â«syntheticNameÂ»").getAnnotations()[0]Â«
-  ENDIFÂ»)'''
+  », getClass().getDeclaredField("«syntheticName»").getAnnotations()[0]«
+  ENDIF»)'''
 ```
 
 That is basically it. The rest should hopefully be self-explanatory.

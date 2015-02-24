@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Reference Documentation
 ---
 
 # Expressions {#xtend-expressions}
@@ -495,7 +496,7 @@ If there is no field with the given name and also no method with the name and ze
 myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)
 ```
 
-### Implicit Variables **this** and **it** {#implicit-variables}
+### Implicit Variables this and it {#implicit-variables}
 
 Like in Java the current instance of the class is bound to `this`. This allows for either qualified field access or method invocations like in:
 
@@ -937,9 +938,9 @@ val name = synchronized(lock) {
 
 Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (`'''`). A template expression can span multiple lines and expressions can be nested which are evaluated and their `toString()` representation is automatically inserted at that position.
 
-The terminals for interpolated expression are so called guillemets `Â«expressionÂ»`. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. `<%= expression %>` in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
+The terminals for interpolated expression are so called guillemets `«expression»`. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. `<%= expression %>` in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 
-If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+\<* and *CTRL+\>* for `Â«` and `Â»` respectively. 
+If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+\<* and *CTRL+\>* for `«` and `»` respectively. 
 
 Let us have a look at an example of how a typical method with a template expressions looks like:
 
@@ -947,7 +948,7 @@ Let us have a look at an example of how a typical method with a template express
 def someHTML(String content) '''
   <html>
     <body>
-      Â«contentÂ»
+      «content»
     </body>
   </html>
 '''
@@ -962,12 +963,12 @@ def toText(Node n) {
   switch n {
     Contents : n.text
 
-    A : '''<a href="Â«n.hrefÂ»">Â«n.applyContentsÂ»</a>'''
+    A : '''<a href="«n.href»">«n.applyContents»</a>'''
 
     default : '''
-        <Â«n.tagNameÂ»>
-          Â«n.applyContentsÂ»
-        </Â«n.tagNameÂ»>
+        <«n.tagName»>
+          «n.applyContents»
+        </«n.tagName»>
     '''
   }
 }
@@ -981,11 +982,11 @@ There is a special `IF` to be used within templates:
 def someHTML(Paragraph p) '''
   <html>
     <body>
-      Â«IF p.headLine != nullÂ»
-        <h1>Â«p.headlineÂ»</h1>
-      Â«ENDIFÂ»
+      «IF p.headLine != null»
+        <h1>«p.headline»</h1>
+      «ENDIF»
       <p>
-        Â«p.textÂ»
+        «p.text»
       </p>
     </body>
   </html>
@@ -1000,14 +1001,14 @@ Also a `FOR` expression is available:
 def someHTML(List<Paragraph> paragraphs) '''
   <html>
     <body>
-      Â«FOR p : paragraphsÂ»
-        Â«IF p.headLine != nullÂ»
-          <h1>Â«p.headlineÂ»</h1>
-        Â«ENDIFÂ»
+      «FOR p : paragraphs»
+        «IF p.headLine != null»
+          <h1>«p.headline»</h1>
+        «ENDIF»
         <p>
-          Â«p.textÂ»
+          «p.text»
         </p>
-      Â«ENDFORÂ»
+      «ENDFOR»
     </body>
   </html>
 '''
@@ -1021,14 +1022,14 @@ Here is an example:
 def someHTML(List<Paragraph> paragraphs) '''
   <html>
     <body>
-      Â«FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div>' AFTER '</div>'Â»
-        Â«IF p.headLine != nullÂ»
-          <h1>Â«p.headlineÂ»</h1>
-        Â«ENDIFÂ»
+      «FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div>' AFTER '</div>'»
+        «IF p.headLine != null»
+          <h1>«p.headline»</h1>
+        «ENDIF»
         <p>
-          Â«p.textÂ»
+          «p.text»
         </p>
-      Â«ENDFORÂ»
+      «ENDFOR»
     </body>
   </html>
 '''
@@ -1058,7 +1059,7 @@ The behavior is best described with a set of examples. The following table assum
 ```xtend
 class Template {
   def print(Node n) '''
-    node Â«n.nameÂ» {}
+    node «n.name» {}
   '''
 }
 ```
@@ -1071,7 +1072,7 @@ node NodeName {}
 
 |
 
-The indentation before `node Â«n.nameÂ»` will be skipped as it is relative to the opening mark of the template string and thereby not considered to be relevant for the output but only for the readability of the template itself.
+The indentation before `node «n.name»` will be skipped as it is relative to the opening mark of the template string and thereby not considered to be relevant for the output but only for the readability of the template itself.
 
 |:---|:---|
 |
@@ -1079,10 +1080,10 @@ The indentation before `node Â«n.nameÂ»` will be skipped as it is relative to th
 ```xtend
 class Template {
   def print(Node n) '''
-    node Â«n.nameÂ» {
-      Â«IF hasChildrenÂ»
-        Â«n.children.map[print]Â»
-      Â«ENDIFÂ»
+    node «n.name» {
+      «IF hasChildren»
+        «n.children.map[print]»
+      «ENDIF»
     }
   '''
 }

@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Seven JVM Languages Built With Xbase
 ---
 
 # Template Language {#template}
@@ -12,7 +13,7 @@ The language allows web designers to do their job and lets developers put in the
 
 ## Overview {#templates-solution}
 
-A template language works in two modes: Plain text mode, where everything goes directly into the output and the expression mode, where expressions have to be evaluated and the result is inserted into the text. To switch between text mode and expression mode, we use the French quotes `Â«` and `Â»`. A document starts in text mode.
+A template language works in two modes: Plain text mode, where everything goes directly into the output and the expression mode, where expressions have to be evaluated and the result is inserted into the text. To switch between text mode and expression mode, we use the French quotes `«` and `»`. A document starts in text mode.
 
 The template will be compiled to a Java class with a `generate(params)` method. You can provide additional information like a package declaration, imports and parameters in the preamble inside a template at the beginning of the document.
 
@@ -34,7 +35,7 @@ generate template "http://www.xtext.org/template/Template"
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 
 TemplateFile:
-	'<!--''Â«' 
+	'<!--''«' 
 		('package' package=QualifiedName)? 
 		importSection=XImportSection? 
 		params+=Parameter* 
@@ -76,7 +77,7 @@ RichStringElseIf returns xbase::XIfExpression:
 		then=RichString
 	(else=RichStringElseIf | "ELSE" else=RichString)?;
 
-terminal TEXT : 'Â»' (!'Â«')* (EOF|'Â«');
+terminal TEXT : '»' (!'«')* (EOF|'«');
 ```
 
 It becomes quite straightforward once you have understood the escaping. Have a look at the last rule *TEXT* first: It says that a text starts with a closing French quote and ends with an opening quote or the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
@@ -90,9 +91,9 @@ Each *TemplateFile* is compiled to a Java class with a `generate` method that ta
 *   DSL:
     
     ```templates
-    <!--Â«
+    <!--«
       ...
-    Â»-->
+    »-->
     ```
 *   Java:
     
@@ -189,15 +190,15 @@ The body of the template is compiled into a big private `generate()` method. We 
 *   DSL:
     
     ```templates
-    Â»<!DOCTYPE html>
+    »<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="utf-8">
-      <title>Â«titleÂ»</title>
+      <title>«title»</title>
       <meta name="viewport" content="width=device-width, initial-sca...">
       <meta name="description"
-        content="Â«descriptionÂ»">
-      <meta name="author" content="Â«...
+        content="«description»">
+      <meta name="author" content="«...
     ```
 *   Java:
     
@@ -242,12 +243,12 @@ RichString : {
   val name = declareVariable(expr, '_appendable')
   newLine
   append('''
-    StringBuilder Â«nameÂ» = new StringBuilder();
+    StringBuilder «name» = new StringBuilder();
   ''')
   for (nestedExpression : expr.expressions) {
     nestedExpression.internalToJavaStatement(it, true)
     newLine
-    append('''Â«nameÂ».append(ObjectExtensions.operator_elvis(''')
+    append('''«name».append(ObjectExtensions.operator_elvis(''')
     nestedExpression.internalToJavaExpression(it)
     append(',""));')
   }
@@ -263,16 +264,16 @@ RichStringForLoop : {
   val name = declareVariable(expr, '_forLoopResult')
   newLine
   append('''
-    StringBuilder Â«nameÂ» = new StringBuilder();
+    StringBuilder «name» = new StringBuilder();
     for (final ''')
   serialize(paramType, expr, it);
-  append(''' Â«declareVariable(expr.declaredParam, 
-      makeJavaIdentifier(expr.declaredParam.name))Â» : ''')
+  append(''' «declareVariable(expr.declaredParam, 
+      makeJavaIdentifier(expr.declaredParam.name))» : ''')
   internalToJavaExpression(expr.forExpression, it)
   append(") {").increaseIndentation
     expr.eachExpression.internalToJavaStatement(it, true)
     newLine
-    append('''Â«nameÂ».append(''')
+    append('''«name».append(''')
     expr.eachExpression.internalToJavaExpression(it)
     append(');')
   decreaseIndentation.newLine.append("}")
@@ -330,7 +331,7 @@ public class TemplateProposalProvider
                             RuleCall ruleCall, 
                             ContentAssistContext context,
       ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(new CompletionProposal("Â«Â»", 
+    acceptor.accept(new CompletionProposal("«»", 
         context.getOffset(), 0, 1));
   }
 }

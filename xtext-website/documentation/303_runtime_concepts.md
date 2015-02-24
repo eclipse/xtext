@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Reference Documentation
 ---
 
 # Runtime Concepts {#runtime-concepts}
@@ -61,9 +62,9 @@ class StatemachineGenerator implements IGenerator {
 
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
     fsa.generateFile("relative/path/AllTheStates.txt", '''
-      Â«FOR state : resource.allContents.filter(State).toIterableÂ»
-        State Â«state.nameÂ»
-      Â«ENDFORÂ»
+      «FOR state : resource.allContents.filter(State).toIterable»
+        State «state.name»
+      «ENDFOR»
     ''')
   }
 }
@@ -289,7 +290,7 @@ ReferringType :
 
 The [Ecore model inference](301_grammarlanguage.html#metamodel-inference) would create an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *ReferringType* with an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) *referencedObject* of type *Entity* with its containment property set to `false`. The referenced object would be identified either by a *STRING* and the surrounding information in the current context (see [scoping](#scoping)). If you do not use `generate` but `import` an existing Ecore model, the class *ReferringType* (or one of its super types) would need to have an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) of type *Entity* (or one of its super types) declared. Also the [EReference's]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) containment and container properties needs to be set to `false`. 
 
-### Default Runtime Behavior (Lazy Linking)
+### Default Runtime Behavior (Lazy Linking) {#lazy-linking}
 
 Xtext uses lazy linking by default and we encourage users to stick to this because it provides many advantages. One of which is improved performance in all scenarios where you don't have to load the whole closure of all transitively referenced resources. Furthermore it automatically solves situations where one link relies on other links. Though cyclic linking dependencies are not supported by Xtext at all. 
 

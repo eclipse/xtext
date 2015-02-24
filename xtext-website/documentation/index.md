@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Xtext Documentation
 ---
 
 # Overview {#Overview}

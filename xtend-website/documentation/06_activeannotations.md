@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Reference Documentation
 ---
 
 # Active Annotations {#active-annotations}
@@ -134,9 +135,9 @@ class ExternalizedProcessor extends AbstractClassProcessor {
       val filePath = clazz.compilationUnit.filePath
       val file = filePath.targetFolder.append(clazz.qualifiedName.replace('.', '/') + ".properties")
       file.contents = '''
-        Â«FOR field : clazz.declaredFieldsÂ»
-          Â«field.simpleNameÂ» = Â«field.initializerAsStringÂ»
-        Â«ENDFORÂ»
+        «FOR field : clazz.declaredFields»
+          «field.simpleName» = «field.initializerAsString»
+        «ENDFOR»
       '''
     }
   }
@@ -158,9 +159,9 @@ The first option is to assign a compilation strategy and take care of the Java c
 observableType.addMethod('set' + fieldName.toFirstUpper) [
   addParameter(fieldName, fieldType)
   body = '''
-    Â«fieldTypeÂ» _oldValue = this.Â«fieldNameÂ»;
-    this.Â«fieldNameÂ» = Â«fieldNameÂ»;
-    _propertyChangeSupport.firePropertyChange("Â«fieldNameÂ»", _oldValue, Â«fieldNameÂ»);
+    «fieldType» _oldValue = this.«fieldName»;
+    this.«fieldName» = «fieldName»;
+    _propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
   '''
 ]
 ```
@@ -195,9 +196,9 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
   field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) [
     returnType = field.type
     body = ['''
-      if (Â«field.simpleNameÂ»==null)
-        Â«field.simpleNameÂ» = _initÂ«field.simpleNameÂ»();
-      return Â«field.simpleNameÂ»;
+      if («field.simpleName»==null)
+        «field.simpleName» = _init«field.simpleName»();
+      return «field.simpleName»;
     ''']
   ]
 }

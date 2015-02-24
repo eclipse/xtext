@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Seven JVM Languages Built With Xbase
 ---
 
 # Introduction {#sevenlang-introduction}
@@ -154,25 +155,25 @@ We most often use this expression in the examples to generate some synthetic Jav
 ```xtend
 '''
   String url =  request.getRequestURL().toString();
-  Â«FOR route : routesÂ»
+  «FOR route : routes»
     {
       //java.util.regex.Matcher will be imported in the generated Java file
-      Â«MatcherÂ» _matcher = _patternÂ«route.indexÂ».matcher(url);
+      «Matcher» _matcher = _pattern«route.index».matcher(url);
       if (_matcher.find()) {
-        Â«FOR variable : route.url.variablesÂ»
-            String Â«variable.nameÂ» = _matcher.group(Â«variable.index + 1Â»);
-        Â«ENDFORÂ»
-        Â«IF route.condition != nullÂ»
-          if (Â«route.nameOfRouteMethodÂ»Condition(request, response
-            Â«FOR v : route.url.variables 
+        «FOR variable : route.url.variables»
+            String «variable.name» = _matcher.group(«variable.index + 1»);
+        «ENDFOR»
+        «IF route.condition != null»
+          if («route.nameOfRouteMethod»Condition(request, response
+            «FOR v : route.url.variables 
              BEFORE ", " 
-             SEPARATOR ", "Â»Â«v.nameÂ»Â«ENDFORÂ»))
-        Â«ENDIFÂ»
-        Â«route.nameOfRouteMethodÂ»(request, response
-          Â«FOR v : route.url.variablesÂ», Â«v.nameÂ»Â«ENDFORÂ»);
+             SEPARATOR ", "»«v.name»«ENDFOR»))
+        «ENDIF»
+        «route.nameOfRouteMethod»(request, response
+          «FOR v : route.url.variables», «v.name»«ENDFOR»);
       }
     }
-  Â«ENDFORÂ»
+  «ENDFOR»
 '''
 ```
 
