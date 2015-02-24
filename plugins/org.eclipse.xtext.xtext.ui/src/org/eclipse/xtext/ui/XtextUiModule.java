@@ -3,18 +3,17 @@
  */
 package org.eclipse.xtext.ui;
 
+import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
-import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
-import org.eclipse.xtext.ide.editor.bracketmatching.XtextBracePairProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
-import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -85,13 +84,9 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextProjectCreator.class;
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	@Override
-	@SingletonBinding
-	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
-		return XtextBracePairProvider.class;
+	public ICharacterPairMatcher bindICharacterPairMatcher() {
+		return new DefaultCharacterPairMatcher(new char[] { ':', ';', '{', '}', '(', ')', '[', ']' });
 	}
 
 	@Override
