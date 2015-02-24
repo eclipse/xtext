@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
 
-«DEFINE parser(AntlrOptions options, boolean partialParsing) FOR Grammar»
+«DEFINE parser(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN_IDE-»
 «fileHeader()»
 package «getParserClassName().toJavaPackage()»;
@@ -28,15 +28,20 @@ import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import «getParserSuperClassName(partialParsing)»;
+import «getParserSuperClassName(partialParsing, hasIDE)»;
+«IF hasIDE-»
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ENDIF-»
 
 import com.google.inject.Inject;
 
 import «gaFQName()»;
 
-«classAnnotations()»public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
+«classAnnotations()»public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing, hasIDE).toSimpleName()» {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;
