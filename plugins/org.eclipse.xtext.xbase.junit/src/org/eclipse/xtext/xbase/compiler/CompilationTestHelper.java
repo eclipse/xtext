@@ -160,7 +160,6 @@ public class CompilationTestHelper {
 	
 	/**
 	 * Asserts that the expected code is generated for the given source.
-	 * Assumes that
 	 * 
 	 * @param source some valid source code written in the language under test
 	 * @param expected the expected Java source code.
