@@ -40,6 +40,7 @@ import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -76,6 +77,7 @@ import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -464,7 +466,20 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					new ISemanticModification() {
 						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {
-							((XtendFile) element).setPackage(isEmpty(expectedPackage) ? null : expectedPackage);
+							XtendFile file = (XtendFile) element;
+							String newPackageName = isEmpty(expectedPackage) ? null : expectedPackage;
+							String oldPackageName = file.getPackage();
+							for(EObject obj: file.eResource().getContents()) {
+								if (obj instanceof JvmDeclaredType) {
+									JvmDeclaredType type = (JvmDeclaredType) obj;
+									String typePackage = type.getPackageName();
+									if (Objects.equal(typePackage, oldPackageName) || typePackage != null && typePackage.startsWith(oldPackageName + ".")) {
+										type.internalSetIdentifier(null);
+										type.setPackageName(newPackageName);
+									}
+								}
+							}
+							file.setPackage(newPackageName);
 						}
 			});
 		}

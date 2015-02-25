@@ -73,6 +73,9 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 
 	@Override
 	public String toString(String value) {
+		if (value == null) {
+			throw new ValueConverterException("'null' is not a valid qualified name value", null, null);
+		}
 		String valueDelimiter = getValueNamespaceDelimiter();
 		List<String> segments = valueDelimiter.length() == 1 ? Strings.split(value, valueDelimiter.charAt(0)) : Strings.split(value, valueDelimiter);
 		int size = segments.size();
