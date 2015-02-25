@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Appendix
 ---
 
 # Migrating from Xtext 0.7.x to 1.0 {#migrating-from-0_7}

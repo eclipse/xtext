@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Getting Started
 ---
 
 # 15 Minutes Tutorial - Extended {#domainmodel-next-steps}
@@ -166,9 +167,9 @@ Let's make the implementation more meaningful and start writing the code generat
     
     ```xtend
     def compile(Entity e) '''
-      package Â«e.eContainer.fullyQualifiedNameÂ»;
+      package «e.eContainer.fullyQualifiedName»;
       
-      public class Â«e.nameÂ» {
+      public class «e.name» {
       }
     '''
     ```
@@ -177,11 +178,11 @@ Let's make the implementation more meaningful and start writing the code generat
     
     ```xtend
     def compile(Entity e) '''
-      Â«IF e.eContainer.fullyQualifiedName != nullÂ»
-        package Â«e.eContainer.fullyQualifiedNameÂ»;
-      Â«ENDIFÂ»
+      «IF e.eContainer.fullyQualifiedName != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
       
-      public class Â«e.nameÂ» {
+      public class «e.name» {
       }
     '''
     ```
@@ -190,12 +191,12 @@ Let's make the implementation more meaningful and start writing the code generat
     
     ```xtend
     def compile(Entity e) ''' 
-      Â«IF e.eContainer.fullyQualifiedName != nullÂ»
-        package Â«e.eContainer.fullyQualifiedNameÂ»;
-      Â«ENDIFÂ»
+      «IF e.eContainer.fullyQualifiedName != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
       
-      public class Â«e.nameÂ» Â«IF e.superType != null
-              Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
+      public class «e.name» «IF e.superType != null
+              »extends «e.superType.fullyQualifiedName» «ENDIF»{
       }
     '''
     ```
@@ -204,14 +205,14 @@ Let's make the implementation more meaningful and start writing the code generat
     
     ```xtend
     def compile(Feature f) '''
-      private Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ»;
+      private «f.type.fullyQualifiedName» «f.name»;
       
-      public Â«f.type.fullyQualifiedNameÂ» getÂ«f.name.toFirstUpperÂ»() {
-        return Â«f.nameÂ»;
+      public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
+        return «f.name»;
       }
       
-      public void setÂ«f.name.toFirstUpperÂ»(Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ») {
-        this.Â«f.nameÂ» = Â«f.nameÂ»;
+      public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
+        this.«f.name» = «f.name»;
       }
     '''
     ```
@@ -220,15 +221,15 @@ Let's make the implementation more meaningful and start writing the code generat
     
     ```xtend
     def compile(Entity e) ''' 
-      Â«IF e.eContainer.fullyQualifiedName != nullÂ»
-        package Â«e.eContainer.fullyQualifiedNameÂ»;
-      Â«ENDIFÂ»
+      «IF e.eContainer.fullyQualifiedName != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
       
-      public class Â«e.nameÂ» Â«IF e.superType != null
-              Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
-        Â«FOR f:e.featuresÂ»
-          Â«f.compileÂ»
-        Â«ENDFORÂ»
+      public class «e.name» «IF e.superType != null
+              »extends «e.superType.fullyQualifiedName» «ENDIF»{
+        «FOR f:e.features»
+          «f.compile»
+        «ENDFOR»
       }
     '''
     ```
@@ -260,27 +261,27 @@ class DomainmodelGenerator implements IGenerator {
   }
 
   def compile(Entity e) ''' 
-    Â«IF e.eContainer.fullyQualifiedName != nullÂ»
-      package Â«e.eContainer.fullyQualifiedNameÂ»;
-    Â«ENDIFÂ»
+    «IF e.eContainer.fullyQualifiedName != null»
+      package «e.eContainer.fullyQualifiedName»;
+    «ENDIF»
     
-    public class Â«e.nameÂ» Â«IF e.superType != null
-            Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
-      Â«FOR f:e.featuresÂ»
-        Â«f.compileÂ»
-      Â«ENDFORÂ»
+    public class «e.name» «IF e.superType != null
+            »extends «e.superType.fullyQualifiedName» «ENDIF»{
+      «FOR f:e.features»
+        «f.compile»
+      «ENDFOR»
     }
   '''
 
   def compile(Feature f) '''
-    private Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ»;
+    private «f.type.fullyQualifiedName» «f.name»;
     
-    public Â«f.type.fullyQualifiedNameÂ» getÂ«f.name.toFirstUpperÂ»() {
-      return Â«f.nameÂ»;
+    public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
+      return «f.name»;
     }
     
-    public void setÂ«f.name.toFirstUpperÂ»(Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ») {
-      this.Â«f.nameÂ» = Â«f.nameÂ»;
+    public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
+      this.«f.name» = «f.name»;
     }
   '''
 }

@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Getting Started
 ---
 
 # The Movies Example {#movies-example}
@@ -97,7 +98,7 @@ return new Movie (
 
 Now that we have parsed the text file into a `List<Movie>`, we are ready to execute some queries against it. We use *JUnit* to make the individual queries executable and to confirm their results.
 
-### Question 1 : What Is The Number Of Action Movies?
+### Question 1 : What Is The Number Of Action Movies? {#question1}
 
 ```xtend
 @Test def numberOfActionMovies() {
@@ -126,7 +127,7 @@ movies.filter[ categories.contains('Action') ].size
 
 Eventually we call `size` on the resulting iterable which is an extension method, too. It is defined in the utility class [IterableExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java).
 
-### Question 2 : What Is The Year The Best Movie From The 80's Was Released?
+### Question 2 : What Is The Year The Best Movie From The 80's Was Released? {#question2}
 
 ```xtend
 @Test def void yearOfBestMovieFrom80s() {
@@ -155,7 +156,7 @@ Note that first sorting and then taking the last or first is slightly more expen
 
 The calls to `movie.year` as well as `movie.categories` in the previous example in fact access the corresponding [getter methods](05_xtend_expressions.html#property-access).
 
-### Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?
+### Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies? {#question3}
 
 ```xtend
 @Test def void sumOfVotesOfTop2() {

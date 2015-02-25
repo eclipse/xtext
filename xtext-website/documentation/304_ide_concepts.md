@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Reference Documentation
 ---
 
 # IDE Concepts {#ide-concepts}

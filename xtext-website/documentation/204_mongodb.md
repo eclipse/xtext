@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Seven JVM Languages Built With Xbase
 ---
 
 # DSL for MongoDB {#mongoDB}
@@ -225,7 +226,7 @@ def protected addConstructors(JvmDeclaredType inferredType,
     documentation = '''...'''
     body = '''
       _dbObject = new com.mongodb.BasicDBObject();
-      _dbObject.put(JAVA_CLASS_KEY, "Â«inferredType.identifierÂ»");
+      _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
     '''
   ]
 }
@@ -403,7 +404,7 @@ class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
   def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
     acceptor.accept(issue, 
         'Rename to ' + issue.data.head, 
-        '''Rename property to Â«issue.data.headÂ».''', 
+        '''Rename property to «issue.data.head».''', 
         null) [
       xtextDocument.replace(issue.offset, issue.length, issue.data.head)
     ]

@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Getting Started
 ---
 
 # 15 Minutes Tutorial {#domain-model-walkthrough}

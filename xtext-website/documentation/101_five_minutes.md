@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Getting Started
 ---
 
 # 5 Minutes Tutorial {#first-five-minutes}

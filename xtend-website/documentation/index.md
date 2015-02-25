@@ -1,5 +1,6 @@
 ---
 layout: documentation
+part: Xtend User Guide
 ---
 
 # Introduction {#introduction}
