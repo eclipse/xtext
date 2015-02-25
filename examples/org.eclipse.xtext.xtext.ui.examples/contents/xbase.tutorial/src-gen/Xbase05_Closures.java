@@ -10,6 +10,7 @@ public class Xbase05_Closures {
     {
       final String x = "Hello ";
       final Function1<String, String> _function = new Function1<String, String>() {
+        @Override
         public String apply(final String e) {
           return (x + e);
         }
@@ -18,12 +19,14 @@ public class Xbase05_Closures {
       f.apply("World!");
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
       final Function1<String, String> _function_1 = new Function1<String, String>() {
+        @Override
         public String apply(final String e) {
           return e.toUpperCase();
         }
       };
       /* ListExtensions.<String, String>map(list, _function_1); */
       final Function1<String, String> _function_2 = new Function1<String, String>() {
+        @Override
         public String apply(final String e) {
           return e.toUpperCase();
         }
