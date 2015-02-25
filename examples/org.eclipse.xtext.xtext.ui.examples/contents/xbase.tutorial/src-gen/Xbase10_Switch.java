@@ -37,6 +37,7 @@ public class Xbase10_Switch {
       Rectangle _rectangle_1 = new Rectangle(6, 8);
       final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
       final Function1<Shape, String> _function = new Function1<Shape, String>() {
+        @Override
         public String apply(final Shape shape) {
           String _switchResult = null;
           boolean _matched = false;
