@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hyperlinking
 
-import org.eclipse.jface.preference.IPreferenceStore
+import java.lang.reflect.InvocationHandler
+import java.lang.reflect.Method
+import org.eclipse.jface.text.AbstractInformationControlManager
+import org.eclipse.jface.text.JFaceTextUtil
+import org.eclipse.jface.text.Region
 import org.eclipse.jface.text.hyperlink.IHyperlink
 import org.eclipse.jface.text.hyperlink.MultipleHyperlinkPresenter
-import org.eclipse.swt.graphics.RGB
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
-import org.eclipse.jface.text.Region
-import org.eclipse.jface.text.JFaceTextUtil
 
 /**
  * The MultipleHyperLinkPresenter only shows the hyper link text when more then one hyper link exists.
@@ -27,7 +29,8 @@ import org.eclipse.jface.text.JFaceTextUtil
  * 
  * @since 2.8
  */
-class SingleHoverShowingHyperlinkPresenter extends MultipleHyperlinkPresenter {
+@FinalFieldsConstructor
+class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
 	
 	extension ReflectExtensions reflect = new ReflectExtensions
 	
@@ -35,26 +38,27 @@ class SingleHoverShowingHyperlinkPresenter extends MultipleHyperlinkPresenter {
 	 * constant text needs to set into IHyperLink#getTypeLabel (which doesn't seem to be used otherwise)
 	 * if a hyperlink's label should be shown even if it's the only hyper link.
 	 */
-	public final static String SHOW_ALWAYS = "SHOW_ALWAYS"; 
+	public final static String SHOW_ALWAYS = "SHOW_ALWAYS" 
 	
-	new(RGB color) {
-		super(color)
-	}
+	val MultipleHyperlinkPresenter delegate
 	
-	new(IPreferenceStore store) {
-		super(store)
-	}
-
-	override showHyperlinks(IHyperlink[] activeHyperlinks) {
-		super.showHyperlinks(activeHyperlinks)
-		if (activeHyperlinks.length == 1 && activeHyperlinks.get(0).typeLabel!=null && activeHyperlinks.get(0).typeLabel.contains(SHOW_ALWAYS)) {
-			val int start= activeHyperlinks.get(0).getHyperlinkRegion().getOffset();
-			val int end= start + activeHyperlinks.get(0).getHyperlinkRegion().getLength();
-
-			this.set('fSubjectRegion', new Region(start, end - start))
-			this.set('fCursorOffset' , JFaceTextUtil.getOffsetForCursorLocation(this.get('fTextViewer')))
-			this.get('fManager').invoke('showInformation');
+	override invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		if (method.name.startsWith('showHyperlinks') && args.length >= 1 && args.get(0) instanceof IHyperlink[]) {
+			val result = method.invoke(delegate, args)
+			val activeHyperlinks = args.get(0) as IHyperlink[]
+			if (activeHyperlinks.length == 1) {
+				val singleHyperlink = activeHyperlinks.get(0)
+				if (SHOW_ALWAYS == singleHyperlink.typeLabel) {
+					val int start= singleHyperlink.getHyperlinkRegion().getOffset();
+					val int end= start + singleHyperlink.getHyperlinkRegion().getLength();
+					delegate.set('fSubjectRegion', new Region(start, end - start))
+					delegate.set('fCursorOffset' , JFaceTextUtil.getOffsetForCursorLocation(delegate.get('fTextViewer')))
+					(delegate.get('fManager') as AbstractInformationControlManager).showInformation
+				}
+			}
+			return result
 		}
+		return method.invoke(delegate, args)
 	}
 	
 }

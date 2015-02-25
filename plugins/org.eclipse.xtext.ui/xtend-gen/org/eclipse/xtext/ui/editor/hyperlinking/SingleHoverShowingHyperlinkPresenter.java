@@ -8,15 +8,16 @@
 package org.eclipse.xtext.ui.editor.hyperlinking;
 
 import com.google.common.base.Objects;
-import org.eclipse.jface.preference.IPreferenceStore;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import org.eclipse.jface.text.AbstractInformationControlManager;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.JFaceTextUtil;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.MultipleHyperlinkPresenter;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
@@ -32,8 +33,9 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
  * 
  * @since 2.8
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
-public class SingleHoverShowingHyperlinkPresenter extends MultipleHyperlinkPresenter {
+public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
   @Extension
   private ReflectExtensions reflect = new ReflectExtensions();
   
@@ -43,56 +45,59 @@ public class SingleHoverShowingHyperlinkPresenter extends MultipleHyperlinkPrese
    */
   public final static String SHOW_ALWAYS = "SHOW_ALWAYS";
   
-  public SingleHoverShowingHyperlinkPresenter(final RGB color) {
-    super(color);
-  }
-  
-  public SingleHoverShowingHyperlinkPresenter(final IPreferenceStore store) {
-    super(store);
-  }
+  private final MultipleHyperlinkPresenter delegate;
   
   @Override
-  public void showHyperlinks(final IHyperlink[] activeHyperlinks) {
-    try {
-      super.showHyperlinks(activeHyperlinks);
-      boolean _and = false;
-      boolean _and_1 = false;
-      int _length = activeHyperlinks.length;
-      boolean _equals = (_length == 1);
-      if (!_equals) {
-        _and_1 = false;
-      } else {
-        IHyperlink _get = activeHyperlinks[0];
-        String _typeLabel = _get.getTypeLabel();
-        boolean _notEquals = (!Objects.equal(_typeLabel, null));
-        _and_1 = _notEquals;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        IHyperlink _get_1 = activeHyperlinks[0];
-        String _typeLabel_1 = _get_1.getTypeLabel();
-        boolean _contains = _typeLabel_1.contains(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS);
-        _and = _contains;
-      }
-      if (_and) {
-        IHyperlink _get_2 = activeHyperlinks[0];
-        IRegion _hyperlinkRegion = _get_2.getHyperlinkRegion();
-        final int start = _hyperlinkRegion.getOffset();
-        IHyperlink _get_3 = activeHyperlinks[0];
-        IRegion _hyperlinkRegion_1 = _get_3.getHyperlinkRegion();
-        int _length_1 = _hyperlinkRegion_1.getLength();
-        final int end = (start + _length_1);
-        Region _region = new Region(start, (end - start));
-        this.reflect.set(this, "fSubjectRegion", _region);
-        ITextViewer _get_4 = this.reflect.<ITextViewer>get(this, "fTextViewer");
-        int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_4);
-        this.reflect.set(this, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
-        Object _get_5 = this.reflect.<Object>get(this, "fManager");
-        this.reflect.invoke(_get_5, "showInformation");
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    boolean _and = false;
+    boolean _and_1 = false;
+    String _name = method.getName();
+    boolean _startsWith = _name.startsWith("showHyperlinks");
+    if (!_startsWith) {
+      _and_1 = false;
+    } else {
+      int _length = args.length;
+      boolean _greaterEqualsThan = (_length >= 1);
+      _and_1 = _greaterEqualsThan;
     }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      Object _get = args[0];
+      _and = (_get instanceof IHyperlink[]);
+    }
+    if (_and) {
+      final Object result = method.invoke(this.delegate, args);
+      Object _get_1 = args[0];
+      final IHyperlink[] activeHyperlinks = ((IHyperlink[]) _get_1);
+      int _length_1 = activeHyperlinks.length;
+      boolean _equals = (_length_1 == 1);
+      if (_equals) {
+        final IHyperlink singleHyperlink = activeHyperlinks[0];
+        String _typeLabel = singleHyperlink.getTypeLabel();
+        boolean _equals_1 = Objects.equal(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS, _typeLabel);
+        if (_equals_1) {
+          IRegion _hyperlinkRegion = singleHyperlink.getHyperlinkRegion();
+          final int start = _hyperlinkRegion.getOffset();
+          IRegion _hyperlinkRegion_1 = singleHyperlink.getHyperlinkRegion();
+          int _length_2 = _hyperlinkRegion_1.getLength();
+          final int end = (start + _length_2);
+          Region _region = new Region(start, (end - start));
+          this.reflect.set(this.delegate, "fSubjectRegion", _region);
+          ITextViewer _get_2 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
+          int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_2);
+          this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
+          Object _get_3 = this.reflect.<Object>get(this.delegate, "fManager");
+          ((AbstractInformationControlManager) _get_3).showInformation();
+        }
+      }
+      return result;
+    }
+    return method.invoke(this.delegate, args);
+  }
+  
+  public SingleHoverShowingHyperlinkPresenter(final MultipleHyperlinkPresenter delegate) {
+    super();
+    this.delegate = delegate;
   }
 }

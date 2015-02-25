@@ -58,6 +58,26 @@ import com.google.inject.Inject;
  */
 public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements ISourceViewerAware {
 
+	/**
+	 * An acceptor that knows if it can accept more than one useful hyperlink.
+	 * 
+	 * @since 2.8
+	 */
+	protected static class XbaseHyperlinkAcceptor extends HyperlinkAcceptor {
+
+		private boolean canShowMany;
+
+		public XbaseHyperlinkAcceptor(List<IHyperlink> links, boolean canShowMany) {
+			super(links);
+			this.canShowMany = canShowMany;
+		}
+		
+		public boolean canShowMany() {
+			return canShowMany;
+		}
+		
+	}
+	
 	@Inject
 	private IBatchTypeResolver typeResolver;
 
@@ -86,7 +106,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 	@Override
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
 		List<IHyperlink> links = Lists.newArrayList();
-		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
+		IHyperlinkAcceptor acceptor = new XbaseHyperlinkAcceptor(links, createMultipleHyperlinks);
 		super.createHyperlinksByOffset(resource, offset, acceptor);
 		INode crossRefNode = getEObjectAtOffsetHelper().getCrossReferenceNode(resource, new TextRegion(offset, 0));
 		if (crossRefNode == null) {
@@ -117,23 +137,38 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 			}
 		}
 		super.createHyperlinksByOffset(resource, offset, acceptor);
-		if (element instanceof XVariableDeclaration) {
-			XVariableDeclaration variableDeclaration = (XVariableDeclaration) element;
-			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (isNameNode(element, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, node) && variableDeclaration.getType()==null) {
-				addOpenInferredTypeHyperLink(resource, variableDeclaration, node, acceptor);
+		if (canShowMany(acceptor)) {
+			if (element instanceof XVariableDeclaration) {
+				XVariableDeclaration variableDeclaration = (XVariableDeclaration) element;
+				ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+				if (isNameNode(element, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, node) && variableDeclaration.getType()==null) {
+					addOpenInferredTypeHyperlink(resource, variableDeclaration, node, acceptor);
+				}
 			}
-		}
-		if (element instanceof JvmFormalParameter) {
-			JvmFormalParameter param = (JvmFormalParameter) element;
-			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (isNameNode(element, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, node) && param.getParameterType()==null) {
-				addOpenInferredTypeHyperLink(resource, param, node, acceptor);
+			if (element instanceof JvmFormalParameter) {
+				JvmFormalParameter param = (JvmFormalParameter) element;
+				ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+				if (isNameNode(element, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, node) && param.getParameterType()==null) {
+					addOpenInferredTypeHyperlink(resource, param, node, acceptor);
+				}
 			}
 		}
 	}
 
-	protected void addOpenInferredTypeHyperLink(final XtextResource resource, JvmIdentifiableElement typedElement,
+	/**
+	 * Returns false if the acceptor can definitely not accept more than one hyperlink.
+	 * Otherwise or if in doubt, returns true.
+	 * 
+	 * Only handles {@link XbaseHyperlinkAcceptor XbaseHyperlinkAcceptors} well. All other cases will assume true.
+	 * @since 2.8
+	 */
+	protected boolean canShowMany(final IHyperlinkAcceptor acceptor) {
+		if (acceptor instanceof XbaseHyperlinkAcceptor)
+			return ((XbaseHyperlinkAcceptor)acceptor).canShowMany();
+		return true;
+	}
+
+	protected void addOpenInferredTypeHyperlink(final XtextResource resource, JvmIdentifiableElement typedElement,
 			ILeafNode node, final IHyperlinkAcceptor acceptor) {
 		IResolvedTypes resolveTypes = typeResolver.resolveTypes(resource);
 		final LightweightTypeReference type = resolveTypes.getActualType(typedElement);
