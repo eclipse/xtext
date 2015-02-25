@@ -679,14 +679,14 @@ public abstract class OptionsConfigurationBlock {
 	public String getIsProjectSpecificPropertyKey(String propertyPrefix) {
 		String key = IS_PROJECT_SPECIFIC;
 		if (propertyPrefix != null) {
-			key = isPrprojectSpecificPropertyKey(propertyPrefix);
+			key = isProjectSpecificPropertyKey(propertyPrefix);
 		} else {
 			logError("Project specific key is not qualified", null);
 		}
 		return key;
 	}
 
-	public static String isPrprojectSpecificPropertyKey(String propertyPrefix) {
+	public static String isProjectSpecificPropertyKey(String propertyPrefix) {
 		return propertyPrefix + "." + IS_PROJECT_SPECIFIC;
 	}
 }
