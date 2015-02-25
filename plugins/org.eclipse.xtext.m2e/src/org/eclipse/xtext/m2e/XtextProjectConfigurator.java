@@ -61,7 +61,7 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		if (language.getOutputConfigurations().isEmpty()) return;
 		
 		IEclipsePreferences languagePreferences = projectPreferences.getNode(language.name());
-		languagePreferences.putBoolean(OptionsConfigurationBlock.isPrprojectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
+		languagePreferences.putBoolean(OptionsConfigurationBlock.isProjectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
 		languagePreferences.putBoolean(PREF_AUTO_BUILDING, true);
 		for (OutputConfiguration outputConfiguration : language.getOutputConfigurations()) {
 			configureOutlet(languagePreferences, outputConfiguration, request);

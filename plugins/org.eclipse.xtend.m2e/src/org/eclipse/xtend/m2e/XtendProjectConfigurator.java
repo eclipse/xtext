@@ -60,7 +60,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		IEclipsePreferences languagePreferences = projectPreferences
 				.getNode("org.eclipse.xtend.core.Xtend");
 		languagePreferences.putBoolean(
-				OptionsConfigurationBlock.isPrprojectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
+				OptionsConfigurationBlock.isProjectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
 		languagePreferences.putBoolean(
 				getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE),
 				configuration.isInstallDslAsPrimarySource());
