@@ -20,12 +20,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.BadPositionCategoryException;
-import org.eclipse.jface.text.DefaultPositionUpdater;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IPositionUpdater;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.contentassist.ContentAssistEvent;
 import org.eclipse.jface.text.contentassist.ICompletionListener;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -106,8 +106,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	 */
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 		
-		private final IPositionUpdater templatePositionUpdater = new DefaultPositionUpdater(
-				XTEXT_TEMPLATE_POS_CATEGORY);
+		private final IPositionUpdater templatePositionUpdater = new TemplatePositionUpdater(XTEXT_TEMPLATE_POS_CATEGORY);
 
 		private volatile boolean sessionStarted = false;
 
