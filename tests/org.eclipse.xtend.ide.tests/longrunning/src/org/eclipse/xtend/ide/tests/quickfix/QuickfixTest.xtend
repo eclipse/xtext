@@ -87,7 +87,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			''')
 	}
 
-
 	@Test 
 	def void fixPackageName_0() {
 		create('test/Foo.xtend', '''
@@ -132,6 +131,111 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Change package declaration to ''")
 		.assertModelAfterQuickfix('''
 			class Foo {
+			}
+		''')
+	}
+	
+	@Test 
+	def void fixPackageName_3() {
+		create('test/Foo.xtend', '''
+			|import static C.D.*
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		// TODO formatting is wrong but this is currently expected
+		.assertModelAfterQuickfix('''
+			package test import static test.C.D.*
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
+			}
+		''')
+	}
+		
+	@Test 
+	def void fixPackageName_4() {
+		create('test/Foo.xtend', '''
+			package bar|
+			
+			import static bar.C.D.*
+			
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		.assertModelAfterQuickfix('''
+			package test
+			
+			import static test.C.D.*
+			
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
+			}
+		''')
+	}
+		
+	@Test 
+	def void fixPackageName_5() {
+		create('Foo.xtend', '''
+			package bar|
+			
+			import static bar.C.D.*
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to ''")
+		.assertModelAfterQuickfix('''
+			import static C.D.*
+			class Foo {
+				def void m() {
+					staticM
+				}
+			}
+			class C {
+				static class D {
+					static def void staticM() {}
+				}
 			}
 		''')
 	}
