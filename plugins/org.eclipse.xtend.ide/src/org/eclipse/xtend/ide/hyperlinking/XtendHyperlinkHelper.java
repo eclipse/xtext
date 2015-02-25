@@ -80,33 +80,35 @@ public class XtendHyperlinkHelper extends XbaseHyperLinkHelper {
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
-		final EObject element = getEObjectAtOffsetHelper().resolveElementAt(resource, offset);
-		if (element instanceof XtendField) {
-			XtendField member = (XtendField) element;
-			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (isNameNode(member, XtendPackage.Literals.XTEND_FIELD__NAME, node) && member.getType()==null) {
-				EObject jvmElement = associations.getPrimaryJvmElement(member);
-				if (jvmElement instanceof JvmIdentifiableElement) {
-					addOpenInferredTypeHyperLink(resource, (JvmIdentifiableElement) jvmElement, node, acceptor);
+		if (canShowMany(acceptor)) {
+			final EObject element = getEObjectAtOffsetHelper().resolveElementAt(resource, offset);
+			if (element instanceof XtendField) {
+				XtendField member = (XtendField) element;
+				ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+				if (isNameNode(member, XtendPackage.Literals.XTEND_FIELD__NAME, node) && member.getType()==null) {
+					EObject jvmElement = associations.getPrimaryJvmElement(member);
+					if (jvmElement instanceof JvmIdentifiableElement) {
+						addOpenInferredTypeHyperlink(resource, (JvmIdentifiableElement) jvmElement, node, acceptor);
+					}
 				}
 			}
-		}
-		if (element instanceof XtendFunction) {
-			XtendFunction member = (XtendFunction) element;
-			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (isNameNode(member, XtendPackage.Literals.XTEND_FUNCTION__NAME, node)) {
-				EObject jvmElement = associations.getPrimaryJvmElement(member);
-				if (jvmElement instanceof JvmIdentifiableElement) {
-					JvmIdentifiableElement identifiableElement = (JvmIdentifiableElement) jvmElement;
-					if (member.getReturnType()==null) {
-						addOpenInferredTypeHyperLink(resource, identifiableElement, node, acceptor);
-					}
-					IJavaElement javaElement = javaElementFinder.findExactElementFor(identifiableElement);
-					if (sourceViewer != null && javaElement != null 
-							&& (javaElement.getElementType() == IJavaElement.METHOD 
-							&& canBeOverridden((IMethod) javaElement))) {
-						Region region = new Region(node.getOffset(), node.getLength());
-						acceptor.accept(new XbaseImplementatorsHyperlink(javaElement, region, sourceViewer, implOpener));
+			if (element instanceof XtendFunction) {
+				XtendFunction member = (XtendFunction) element;
+				ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+				if (isNameNode(member, XtendPackage.Literals.XTEND_FUNCTION__NAME, node)) {
+					EObject jvmElement = associations.getPrimaryJvmElement(member);
+					if (jvmElement instanceof JvmIdentifiableElement) {
+						JvmIdentifiableElement identifiableElement = (JvmIdentifiableElement) jvmElement;
+						if (member.getReturnType()==null) {
+							addOpenInferredTypeHyperlink(resource, identifiableElement, node, acceptor);
+						}
+						IJavaElement javaElement = javaElementFinder.findExactElementFor(identifiableElement);
+						if (sourceViewer != null && javaElement != null 
+								&& (javaElement.getElementType() == IJavaElement.METHOD 
+								&& canBeOverridden((IMethod) javaElement))) {
+							Region region = new Region(node.getOffset(), node.getLength());
+							acceptor.accept(new XbaseImplementatorsHyperlink(javaElement, region, sourceViewer, implOpener));
+						}
 					}
 				}
 			}
