@@ -8,24 +8,17 @@
 package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import java.io.StringReader;
-import java.util.Collection;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  */
 public class FlexerBasedPartialXtendContentAssistParser extends PartialXtendContentAssistParser {
 
@@ -46,23 +39,10 @@ public class FlexerBasedPartialXtendContentAssistParser extends PartialXtendCont
 	protected TokenSource createLexer(CharStream stream) {
 		throw new UnsupportedOperationException();
 	}
-
+	
 	@Override
-	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
-		TokenSource tokenSource = flexerFactory.createTokenSource(new StringReader(input));
-		AbstractInternalContentAssistParser parser = createParser();
-		parser.setStrict(strict);
-		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
-		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
-		parser.setTokenStream(tokens);
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-		parser.setUnorderedGroupHelper(helper);
-		helper.initializeWith(parser);
-		tokens.setListener(parser);
-		try {
-			return Lists.newArrayList(getFollowElements(parser));
-		} catch(InfiniteRecursion infinite) {
-			return Lists.newArrayList(parser.getFollowElements());
-		}
+	protected TokenSource createTokenSource(String input) {
+		return flexerFactory.createTokenSource(new StringReader(input));
 	}
+	
 }
