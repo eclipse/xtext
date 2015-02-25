@@ -1064,7 +1064,7 @@ Variables declared outside a lambda expression using the `var` keyword are not a
 The type of a variable declaration expression is always `void`. The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression. Here is an example for an explicitly declared type: 
 
 ```xbase
-  var List<String> msg = new ArrayList<String>(); 
+  var List<String> strings = new ArrayList<String>(); 
 ```
 
 In such cases, the right hand expression's type must [conform](#xbase-types-conformance-rules) to the type on the left hand side. 
@@ -1072,7 +1072,7 @@ In such cases, the right hand expression's type must [conform](#xbase-types-conf
 Alternatively the type can be left out and will be inferred from the initialization expression: 
 
 ```xbase
-  var msg = new ArrayList<String> // -> type ArrayList<String>  
+  var strings = new ArrayList<String> // -> strings is of type ArrayList<String>  
 ```
 
 #### Blocks {#xbase-expressions-blocks}
