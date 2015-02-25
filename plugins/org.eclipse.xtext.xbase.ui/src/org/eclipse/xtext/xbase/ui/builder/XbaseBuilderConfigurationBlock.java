@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 
 import com.google.inject.Inject;
@@ -33,12 +34,16 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 	@Inject
 	private XbaseBuilderPreferenceAccess preferenceAccess;
 	
+	private Combo versionCombo;
+
+	private Button useComplianceButton;
+	
 	@Override
 	protected void createGeneralSectionItems(Composite composite) {
 		super.createGeneralSectionItems(composite);
 		
-		final Button useComplianceButton = addCheckBox(composite,
-				"Use language version from Java compiler source compatibility level",
+		useComplianceButton = addCheckBox(composite,
+				"Use source compatibility level from Java settings",
 				PREF_USE_COMPILER_SOURCE, BOOLEAN_VALUES, 0);
 		
 		int valueCount = JavaVersion.values().length;
@@ -49,21 +54,12 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 			values[i] = v.toString();
 			valueLabels[i] = v.getLabel();
 		}
-		final Combo versionCombo = addComboBox(composite, "Java language version of generated code:",
+		versionCombo = addComboBox(composite, "Source compatibility level of generated code:",
 				PREF_JAVA_VERSION, 0, values, valueLabels);
 		SelectionListener selectionListener = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				boolean useCompliance = useComplianceButton.getSelection();
-				versionCombo.setEnabled(!useCompliance);
-				if (useCompliance) {
-					String javaSourceOption = javaValue(JavaCore.COMPILER_SOURCE);
-					JavaVersion javaVersion = preferenceAccess.fromCompilerSourceLevel(javaSourceOption);
-					JavaVersion selectedVersion = JavaVersion.values()[versionCombo.getSelectionIndex()];
-					if (javaVersion != selectedVersion) {
-						versionCombo.select(javaVersion.ordinal());
-					}
-				}
+				updateVersionCombo();
 			}
 		};
 		selectionListener.widgetSelected(null);
@@ -89,6 +85,27 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 				commentText.setEnabled(generateGeneratedButton.getSelection());
 			}
 		});
+	}
+	
+	@Override
+	protected void updateCombo(Combo curr) {
+		if(curr == versionCombo)
+			updateVersionCombo();
+		else
+			super.updateCombo(curr);
+	}
+	
+	private void updateVersionCombo() {
+		boolean useCompliance = useComplianceButton.getSelection();
+		versionCombo.setEnabled(!useCompliance);
+		if (useCompliance) {
+			String javaSourceOption = javaValue(JavaCore.COMPILER_SOURCE);
+			JavaVersion javaVersion = preferenceAccess.fromCompilerSourceLevel(javaSourceOption);
+			JavaVersion selectedVersion = JavaVersion.values()[versionCombo.getSelectionIndex()];
+			if (javaVersion != selectedVersion) {
+				versionCombo.select(javaVersion.ordinal());
+			}
+		}
 	}
 
 	protected String javaValue(final String javaPreference) {
