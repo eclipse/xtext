@@ -939,7 +939,7 @@ Templates allow for readable string concatenation. Templates are surrounded by t
 
 The terminals for interpolated expression are so called guillemets `«expression»`. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. `<%= expression %>` in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 
-If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+SHIFT+\<* and *CTRL+SHIFT+* for `«` and `»` respectively. On a Mac they are also available with *alt+Q* (`«`) and *alt+SHIFT+Q* (`»`).
+If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+\<* and *CTRL+\>* for `«` and `»` respectively. 
 
 Let us have a look at an example of how a typical method with a template expressions looks like:
 
