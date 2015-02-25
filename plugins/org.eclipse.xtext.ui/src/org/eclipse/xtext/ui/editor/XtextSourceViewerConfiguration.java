@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.lang.reflect.Proxy;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IAutoEditStrategy;
@@ -21,6 +24,7 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlinkPresenter;
+import org.eclipse.jface.text.hyperlink.MultipleHyperlinkPresenter;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.information.InformationPresenter;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
@@ -30,7 +34,6 @@ import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -43,6 +46,7 @@ import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -65,7 +69,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject
 	private IHyperlinkDetector detector;
-
+	
 	@Inject
 	private Provider<IReconciler> reconcilerProvider;
 
@@ -206,10 +210,20 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Override
 	public IHyperlinkPresenter getHyperlinkPresenter(ISourceViewer sourceViewer) {
-		if (fPreferenceStore == null)
-			return new SingleHoverShowingHyperlinkPresenter(new RGB(0, 0, 255));
-
-		return new SingleHoverShowingHyperlinkPresenter(fPreferenceStore);
+		IHyperlinkPresenter base = super.getHyperlinkPresenter(sourceViewer);
+		try {
+			SingleHoverShowingHyperlinkPresenter wrapper = new SingleHoverShowingHyperlinkPresenter((MultipleHyperlinkPresenter) base);
+			Set<Class<?>> interfaces = Sets.newHashSet();
+			Class<?> c = base.getClass();
+			while(c != null) {
+				Collections.addAll(interfaces, c.getInterfaces());
+				c = c.getSuperclass();
+			}
+			IHyperlinkPresenter result = (IHyperlinkPresenter) Proxy.newProxyInstance(getClass().getClassLoader(), interfaces.toArray(new Class[0]), wrapper);	
+			return result;
+		} catch(Exception e) {
+			return base;
+		}
 	}
 
     @Override
