@@ -31,6 +31,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
+import com.google.common.escape.CharEscaperBuilder;
+import com.google.common.escape.Escaper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -130,7 +132,22 @@ public class KeywordHelper implements Adapter {
 
 	private String toAntlrTokenIdentifier(String s) {
 		String result = GrammarAccessUtil.toJavaIdentifier(s, Boolean.TRUE);
-		if (result.charAt(0) == '_') {
+		// Antlr doesn't allow umlauts in rule names
+		Escaper escaper = new CharEscaperBuilder()
+			.addEscape('ä', "ae")
+			.addEscape('ö', "Oe")
+			.addEscape('ü', "Ue")
+			.addEscape('Ä', "Ae")
+			.addEscape('Ö', "Oe")
+			.addEscape('Ü', "Ue").toEscaper();
+		result = escaper.escape(result);
+		if (
+				result.charAt(0) == '_' // rule names may not start with an underscore 
+			|| "System".equals(result) // the generated code contains System.err.printlns which is ambiguous with the generated field name
+			|| result.startsWith("DFA") // the generated code may have fields named DFA... - avoid (unlikely) conflicts
+			|| result.startsWith("FOLLOW") // same with FOLLOW_ field names
+			|| result.startsWith("Internal") && result.endsWith("Parser") // same with the name of the class itself
+			) { 
 			result = "KW_" + result;
 		}
 		return result;
