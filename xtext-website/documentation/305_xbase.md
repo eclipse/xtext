@@ -6,7 +6,7 @@ layout: documentation
 
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four stages: First, you will learn how to refer to existing Java elements from within your language. Then you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase expressions and execute it. 
 
-Throughout this chapter, we will step by step improve the [domain model example from the tutorial](13_domainmodelnextsteps.html). 
+Throughout this chapter, we will step by step improve the [domain model example from the tutorial](103_domainmodelnextsteps.html). 
 
 ## Plug-in Setup
 
@@ -30,7 +30,7 @@ To avoid running out of memory when regenerating, make sure to run the workflow 
 
 `-Xmx512m -XX:MaxPermSize=128m`
 
-in the *VM Arguments* section of the *Arguments* tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](31_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
+in the *VM Arguments* section of the *Arguments* tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](301_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
 
 ## Referring to Java Elements using JVM Types {#jvmtypes}
 
@@ -82,7 +82,7 @@ grammar org.eclipse.xtext.example.Domainmodel
    with org.eclipse.xtext.xbase.Xbase
 ```
 
-Because we can express all kinds of Java type references directly now, an indirection for *DataTypes* as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](13_domainmodelnextsteps.html) again, we have to replace all cross-references to *Types* by calls to the production rule *JvmTypeReference*. The rules *DataType*, *Type*, and *QualifiedName* become obsolete (the latter is already defined in Xbase), and the *Type* in *AbstractEntity* must be changed to *Entity*. As we now have all kinds of generic Java collections at hand, *Feature.many* is obsolete, too. The whole grammar now reads concisely:
+Because we can express all kinds of Java type references directly now, an indirection for *DataTypes* as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](103_domainmodelnextsteps.html) again, we have to replace all cross-references to *Types* by calls to the production rule *JvmTypeReference*. The rules *DataType*, *Type*, and *QualifiedName* become obsolete (the latter is already defined in Xbase), and the *Type* in *AbstractEntity* must be changed to *Entity*. As we now have all kinds of generic Java collections at hand, *Feature.many* is obsolete, too. The whole grammar now reads concisely:
 
 ```xtext
 grammar org.eclipse.xtext.example.Domainmodel with
@@ -1311,4 +1311,4 @@ html [
 
 ---
 
-**[Next Chapter: MWE2](36_mwe2.html)**
+**[Next Chapter: MWE2](306_mwe2.html)**

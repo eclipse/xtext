@@ -42,4 +42,4 @@ Xtext is a sophisticated framework that helps to implement your very own DSL wit
 
 ---
 
-**[Next Chapter: 5 Minutes Tutorial](11_five_minutes.html)**
+**[Next Chapter: 5 Minutes Tutorial](101_five_minutes.html)**

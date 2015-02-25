@@ -6,7 +6,7 @@ layout: documentation
 
 After you have developed you first own DSL, the question arises, how the behavior and the semantics of the language can be customized. Therefore a couple of mini-tutorials are available, that illustrate common use cases when crafting an own DSL.
 
-These lessons are independent from each other. Each of them will be based on the language that was build in the first [domain model tutorial](12_domainmodelwalkthrough.html).
+These lessons are independent from each other. Each of them will be based on the language that was build in the first [domain model tutorial](102_domainmodelwalkthrough.html).
 
 That is, the syntax and the grammar for the language look like this:
 
@@ -370,4 +370,4 @@ The sibling features, that are defined in the same entity, are automatically val
 
 ---
 
-**[Next Chapter: Five simple steps to your JVM language](14_jvmdomainmodel.html)**
+**[Next Chapter: Five simple steps to your JVM language](104_jvmdomainmodel.html)**

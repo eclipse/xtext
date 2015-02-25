@@ -131,13 +131,13 @@ After migrating, some of the new features in Xtext 2.0 will be automatically ava
 *   the compare view,
 *   rich hovers,
 *   the Xtext syntax graph,
-*   [support for syntactic predicates](31_grammarlanguage.html#syntactic-predicates),
+*   [support for syntactic predicates](301_grammarlanguage.html#syntactic-predicates),
 *   the generated debug grammar,
-*   [terminal fragments](31_grammarlanguage.html#terminal-fragment),
+*   [terminal fragments](301_grammarlanguage.html#terminal-fragment),
 *   document partitions and auto edit
 *   the redesigned [outline view](#outline),
 *   and the [quick fixes for the Xtext grammar language](#quick-fixes).
 
 ---
 
-**[Next Chapter: Migrating from Xtext 0.7.x to 1.0](42_migrating_from_0_7.html)**
+**[Next Chapter: Migrating from Xtext 0.7.x to 1.0](402_migrating_from_0_7.html)**

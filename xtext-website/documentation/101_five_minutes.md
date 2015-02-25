@@ -50,8 +50,8 @@ Before you can create a file for the sample language, you will have to create a 
 
 In your first five minutes with Xtext, you have learned how to create a new set of projects. You have run Xtext's code generation in order to get a fully working language infrastructure, and finally learned how to test the generated editor.
 
-Next up you should go through the more comprehensive [Domain Model Example](12_domainmodelwalkthrough.html). It explains the different concepts of the Xtext grammar language and illustrates how to customize various aspects of the language. 
+Next up you should go through the more comprehensive [Domain Model Example](102_domainmodelwalkthrough.html). It explains the different concepts of the Xtext grammar language and illustrates how to customize various aspects of the language. 
 
 ---
 
-**[Next Chapter: 15 Minutes Tutorial](12_domainmodelwalkthrough.html)**
+**[Next Chapter: 15 Minutes Tutorial](102_domainmodelwalkthrough.html)**

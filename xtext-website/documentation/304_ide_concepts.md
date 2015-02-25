@@ -4,7 +4,7 @@ layout: documentation
 
 # IDE Concepts {#ide-concepts}
 
-For the following part we will refer to the [state machine example](31_grammarlanguage.html#statemachine) to describe the different aspects of Xtext's UI features.
+For the following part we will refer to the [state machine example](301_grammarlanguage.html#statemachine) to describe the different aspects of Xtext's UI features.
 
 ## Label Provider {#label-provider}
 
@@ -597,7 +597,7 @@ To enable refactoring support make sure the [RefactorElementNameFragment]({{site
 fragment = refactoring.RefactorElementNameFragment {}
 ```
 
-The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](35_xbase.html) and an [inferred JVM model](#xbase-inferred-type) (i.e. the domain model example or Xtend). 
+The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](#xbase-inferred-type) (i.e. the domain model example or Xtend). 
 
 If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring should not need any customization. Give it a try. 
 
@@ -618,4 +618,4 @@ One refactoring can trigger another: When renaming a rule in an Xtext grammar, t
 
 ---
 
-**[Next Chapter: Xtext and Java](35_xbase.html)**
+**[Next Chapter: Xtext and Java](305_xbase.html)**

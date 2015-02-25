@@ -71,7 +71,7 @@ You can see the two modules in action by running `com.acme.Main` from the contex
 
 ## Grammar {#guice-grammar}
 
-The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism already described for the [scripting language](22_scripting.html#scripting-grammar). A module can 'mixin' any number of other modules, which allows to reuse existing modules but override keys with different bindings. The mixin feature is described as a cross reference to another `ModuleAST`. Cross references are covered in detail in the respective [documentation section](31_grammarlanguage.html#cross-references).
+The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism already described for the [scripting language](202_scripting.html#scripting-grammar). A module can 'mixin' any number of other modules, which allows to reuse existing modules but override keys with different bindings. The mixin feature is described as a cross reference to another `ModuleAST`. Cross references are covered in detail in the respective [documentation section](301_grammarlanguage.html#cross-references).
 
 The language allows binding keys to other keys and to instances. Other concepts like binding to providers is something you could do, but would not help in getting the idea across. Everybody is encouraged to fork this first prototype and build something really useful ;-)
 
@@ -264,4 +264,4 @@ It would be really cool to leverage the full information, which is available and
 
 ---
 
-**[Next Chapter: Http Routing Language](26_httprouting.html)**
+**[Next Chapter: Http Routing Language](206_httprouting.html)**
