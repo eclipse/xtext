@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -10,13 +10,13 @@
 
 <h1 id="types">Java Interoperability</h1>
 
-<p>Xtend, like Java, is a statically typed language. In fact it completely supports Java&#8217;s type system, including the primitive types like <code>int</code> or <code>boolean</code>, arrays and all the Java classes, interfaces, enums and annotations that reside on the class path. </p>
+<p>Xtend, like Java, is a statically typed language. In fact it completely supports Java’s type system, including the primitive types like <code>int</code> or <code>boolean</code>, arrays and all the Java classes, interfaces, enums and annotations that reside on the class path. </p>
 
 <p>Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as defined in <a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html">the Java Language Specification</a>.</p>
 
-<p>Resembling and supporting every aspect of Java&#8217;s type system ensures that there is no impedance mismatch between Java and Xtend. This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles. As a bonus, if you know Java&#8217;s type system and are familiar with Java&#8217;s generic types, you already know the most complicated part of Xtend.</p>
+<p>Resembling and supporting every aspect of Java’s type system ensures that there is no impedance mismatch between Java and Xtend. This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles. As a bonus, if you know Java’s type system and are familiar with Java’s generic types, you already know the most complicated part of Xtend.</p>
 
-<p>The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version compatibility as specified for the Java compiler in the respective project. This can be changed in the global preferences or in the project properties on the <em>Xtend &rarr; Compiler</em> page (since 2.8). Depending on which Java language version is chosen, Xtend might generate different but equivalent code. For example, <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> are translated to Java lambdas if the compiler is set to Java 8, while for lower Java versions anonymous classes are generated.</p>
+<p>The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version compatibility as specified for the Java compiler in the respective project. This can be changed in the global preferences or in the project properties on the <em>Xtend → Compiler</em> page (since 2.8). Depending on which Java language version is chosen, Xtend might generate different but equivalent code. For example, <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> are translated to Java lambdas if the compiler is set to Java 8, while for lower Java versions anonymous classes are generated.</p>
 
 <h2 id="local-type-inference">Type Inference</h2>
 
@@ -34,7 +34,7 @@
 
 <h2 id="conversion-rules">Conversion Rules</h2>
 
-<p>In addition to Java&#8217;s autoboxing to convert primitives to their corresponding wrapper types (e.g. <code>int</code> is automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html">Integer</a> when needed), there are additional conversion rules in Xtend.</p>
+<p>In addition to Java’s autoboxing to convert primitives to their corresponding wrapper types (e.g. <code>int</code> is automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html">Integer</a> when needed), there are additional conversion rules in Xtend.</p>
 
 <p>Arrays are automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List&lt;ComponentType&gt;</code></a> and vice versa. That is you can write the following:</p>
 
