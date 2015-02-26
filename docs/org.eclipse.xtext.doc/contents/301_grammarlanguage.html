@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 
 <h2 id="statemachine">A First Example</h2>
 
-<p>To get an idea of how it works we&#8217;ll start by implementing a <a href="http://martinfowler.com/bliki/SyntacticNoise.html">simple example</a> introduced by Martin Fowler. It&#8217;s mainly about describing state machines that are used as the (un)lock mechanism of secret compartments. People who have secret compartments control their access in a very old-school way, e.g. by opening a draw first and turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines could look like this:</p>
+<p>To get an idea of how it works we’ll start by implementing a <a href="http://martinfowler.com/bliki/SyntacticNoise.html">simple example</a> introduced by Martin Fowler. It’s mainly about describing state machines that are used as the (un)lock mechanism of secret compartments. People who have secret compartments control their access in a very old-school way, e.g. by opening a draw first and turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines could look like this:</p>
 
 <pre><code class="language-fowlerexample">events
   doorClosed  D1CL
@@ -96,7 +96,7 @@ Transition :
   event=[Event] '=&gt;' state=[State];
 </code></pre>
 
-<p>Martin Fowler uses this example throughout his book <a href="http://martinfowler.com/books/dsl.html">Domain Specific Languages</a> to implement external and internal DSLs using different technologies. Note that none of his implementations is nearly as readable and concise as the description in Xtext&#8217;s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is specific to the domain of language descriptions.</p>
+<p>Martin Fowler uses this example throughout his book <a href="http://martinfowler.com/books/dsl.html">Domain Specific Languages</a> to implement external and internal DSLs using different technologies. Note that none of his implementations is nearly as readable and concise as the description in Xtext’s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is specific to the domain of language descriptions.</p>
 
 <h2 id="syntax">The Syntax</h2>
 
@@ -110,7 +110,7 @@ Transition :
    with org.eclipse.xtext.common.Terminals
 </code></pre>
 
-<p>The first line declares the name of the language. Xtext leverages Java&#8217;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension <code>.xtext</code>. This means that the name has to be <em>SecretCompartments.xtext</em> and must be placed in a package <em>org.xtext.example</em> on your project&#8217;s class path. In other words, your <code>.xtext</code> file has to reside in a Java source folder to be valid.</p>
+<p>The first line declares the name of the language. Xtext leverages Java’s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension <code>.xtext</code>. This means that the name has to be <em>SecretCompartments.xtext</em> and must be placed in a package <em>org.xtext.example</em> on your project’s class path. In other words, your <code>.xtext</code> file has to reside in a Java source folder to be valid.</p>
 
 <p>The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called <a href="301_grammarlanguage.html#grammar-mixins">grammar mixin</a>).</p>
 
@@ -163,9 +163,9 @@ Transition :
 
 <p>You can use either platform URIs or class path URIs to list the required ecore files (see below for details on both URI schemes).</p>
 
-<p>Important note: EPackages have to refer to each other by means of platform-resource or platform-plugin URIs. Otherwise you&#8217;ll get validation errors in the grammar editor. However, it&#8217;ll provide quick fixes to update the ecore files accordingly. There is only one exception to the rule: If you refer to data types from the ecore package or directly to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>, the namespace URI is valid, too. This is due to special assignability rules for these types. If you craft the EPackage manually, you&#8217;ll usually face no problems due to these constraints since the reflective Ecore editor inserts platform URIs by default. The other cases and legacy packages (those that were tailored to match the restrictions of older Xtext versions) can be converted with the quick fixes in the grammar editor.</p>
+<p>Important note: EPackages have to refer to each other by means of platform-resource or platform-plugin URIs. Otherwise you’ll get validation errors in the grammar editor. However, it’ll provide quick fixes to update the ecore files accordingly. There is only one exception to the rule: If you refer to data types from the ecore package or directly to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>, the namespace URI is valid, too. This is due to special assignability rules for these types. If you craft the EPackage manually, you’ll usually face no problems due to these constraints since the reflective Ecore editor inserts platform URIs by default. The other cases and legacy packages (those that were tailored to match the restrictions of older Xtext versions) can be converted with the quick fixes in the grammar editor.</p>
 
-<p>If you used platform-plugin URIs in the ecore files and cannot use the generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> in the workflow, you&#8217;ll have to register URI mappings from platform-plugin to platform-resource.</p>
+<p>If you used platform-plugin URIs in the ecore files and cannot use the generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> in the workflow, you’ll have to register URI mappings from platform-plugin to platform-resource.</p>
 
 <pre><code class="language-mwe2">bean = StandaloneSetup {
   platformUri = "${runtimeProject}/../.."
@@ -196,15 +196,15 @@ Transition :
 
 <h5 id="using-resource-uris-to-import-existing-epackages---deprecated">Using Resource URIs to Import Existing EPackages - Deprecated</h5>
 
-<p>In order to import an existing Ecore model, you&#8217;ll have to have the *.ecore file describing the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> you want to use somewhere in your workspace. To refer to that file you make use of the <em>platform:/resource</em> scheme. Platform URIs are a special EMF concept which allow to reference elements in the workspace independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace concept as the logical root of each project. </p>
+<p>In order to import an existing Ecore model, you’ll have to have the *.ecore file describing the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> you want to use somewhere in your workspace. To refer to that file you make use of the <em>platform:/resource</em> scheme. Platform URIs are a special EMF concept which allow to reference elements in the workspace independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace concept as the logical root of each project. </p>
 
 <p>An import statement referring to an Ecore file by a <em>platform:/resource/</em>-URI looks like this: </p>
 
 <p><code>import 'platform:/resource/my.project/model/SecretCompartments.ecore'</code></p>
 
-<p>If you want to mix generated and imported Ecore models you&#8217;ll have to configure the generator fragment in your MWE file responsible for <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java">generating the Ecore classes</a> with resource URIs that point to the <a href="308_emf_integration.html#emf-codegen">generator models</a> of the referenced Ecore models.</p>
+<p>If you want to mix generated and imported Ecore models you’ll have to configure the generator fragment in your MWE file responsible for <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java">generating the Ecore classes</a> with resource URIs that point to the <a href="308_emf_integration.html#emf-codegen">generator models</a> of the referenced Ecore models.</p>
 
-<p>The <em>*.genmodel</em> provides all kind of generator configuration used by EMF&#8217;s code generator. Xtext will automatically create a generator model for derived <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a>, but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. </p>
+<p>The <em>*.genmodel</em> provides all kind of generator configuration used by EMF’s code generator. Xtext will automatically create a generator model for derived <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a>, but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. </p>
 
 <p>Example:</p>
 
@@ -216,13 +216,13 @@ Transition :
 
 <h5 id="using-class-path-uris-to-import-existing-epackages---deprecated">Using Class Path URIs to Import Existing EPackages - Deprecated</h5>
 
-<p>We usually like to leverage Java&#8217;s class path mechanism, because is is well understood and can be configured easily with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing <em>*.ecore</em> file which is contained in a jar, you can make use of the <em>&#8216;classpath:&#8217;</em> URI scheme we&#8217;ve introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model which is shipped as part of Xtext. </p>
+<p>We usually like to leverage Java’s class path mechanism, because is is well understood and can be configured easily with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing <em>*.ecore</em> file which is contained in a jar, you can make use of the <em>‘classpath:’</em> URI scheme we’ve introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model which is shipped as part of Xtext. </p>
 
 <p>Example:</p>
 
 <p><code>import 'classpath:/model/JvmTypes.ecore' as types</code></p>
 
-<p>As with platform resource URIs you&#8217;ll also have to tell the generator where the corresponding <em>*.genmodel</em> can be found:</p>
+<p>As with platform resource URIs you’ll also have to tell the generator where the corresponding <em>*.genmodel</em> can be found:</p>
 
 <pre><code class="language-mwe2">fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
   referencedGenModels =
@@ -240,7 +240,7 @@ Transition :
 import 'http://www.eclipse.org/anotherPackage' as another
 </code></pre>
 
-<p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example <code>another::SomeType</code>). We&#8217;ll see later where such type references occur.</p>
+<p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example <code>another::SomeType</code>). We’ll see later where such type references occur.</p>
 
 <p>It is also supported to put multiple <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> imports into one alias. This is no problem as long as there are not any two <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> with the same name. In that case none of them can be referenced. It is even possible to <code>import</code> multiple and <code>generate</code> one Ecore model and declare all of them with same alias. If you do so, for a reference to an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> first the imported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> are scanned before it is assumed that a type needs to be generated into the inferred package. </p>
 
@@ -271,7 +271,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>It says that a token <em>ID</em> starts with an optional <code>'^'</code> character (caret), followed by a letter <code>('a'..'z'|'A'..'Z')</code> or underscore <code>'_'</code> followed by any number of letters, underscores and numbers <code>('0'..'9')</code>. </p>
 
-<p>The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the <em>ID</em> rule&#8217;s <a href="#value-converter">ValueConverter</a>. </p>
+<p>The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the <em>ID</em> rule’s <a href="#value-converter">ValueConverter</a>. </p>
 
 <p>This is the simplified formal definition of terminal rules:</p>
 
@@ -283,11 +283,11 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>Note that <em>the order of terminal rules is crucial for your grammar</em>, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. </p>
 
-<p>It&#8217;s almost in any case recommended to use data type rules instead. Let&#8217;s assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a <a href="301_grammarlanguage.html#datatype-rules">data type rule</a>, instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.</p>
+<p>It’s almost in any case recommended to use data type rules instead. Let’s assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a <a href="301_grammarlanguage.html#datatype-rules">data type rule</a>, instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.</p>
 
 <h5 id="return-types">Return Types</h5>
 
-<p>Each terminal rule returns an atomic value (an <code>Ecore EDataType</code>). By default, it&#8217;s assumed that an instance of <code>ecore::EString</code>) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
+<p>Each terminal rule returns an atomic value (an <code>Ecore EDataType</code>). By default, it’s assumed that an instance of <code>ecore::EString</code>) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
 
 <pre><code class="language-xtext">terminal INT returns ecore::EInt : 
   ('0'..'9')+;
@@ -378,7 +378,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <h4 id="terminal-fragment">Terminal Fragments</h4>
 
-<p>Since terminal rules are used in a stateless context, it&#8217;s not easily possible to reuse parts of their definition. Fragments solve this problem. They allow the same EBNF elements as terminal rules do but may not be consumed by the lexer. Instead, they have to be used by other terminal rules. This allows to extract repeating parts of a definition:</p>
+<p>Since terminal rules are used in a stateless context, it’s not easily possible to reuse parts of their definition. Fragments solve this problem. They allow the same EBNF elements as terminal rules do but may not be consumed by the lexer. Instead, they have to be used by other terminal rules. This allows to extract repeating parts of a definition:</p>
 
 <pre><code class="language-xtext">terminal fragment ESCAPED_CHAR : '\\' ('n'|'t'|'r'|'\\');
 terminal STRING  : 
@@ -418,7 +418,7 @@ terminal STRING  :
 
 <h5 id="assignments">Assignments</h5>
 
-<p>Assignments are used to assign the consumed information to a feature of the currently produced object. The type of the current object, its <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type&#8217;s name equals the rule&#8217;s name. The type of the assigned feature is inferred from the right hand side of the assignment.</p>
+<p>Assignments are used to assign the consumed information to a feature of the currently produced object. The type of the current object, its <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type’s name equals the rule’s name. The type of the assigned feature is inferred from the right hand side of the assignment.</p>
 
 <p>Example:</p>
 
@@ -520,7 +520,7 @@ x 0 8 15
 
 <h5 id="simple-actions">Simple Actions</h5>
 
-<p>The object to be returned by a parser rule is usually created lazily on the first assignment. Its type is determined from the specified return type of the rule which may have been inferred from the rule&#8217;s name if no explicit return type is specified.</p>
+<p>The object to be returned by a parser rule is usually created lazily on the first assignment. Its type is determined from the specified return type of the rule which may have been inferred from the rule’s name if no explicit return type is specified.</p>
 
 <p>With Actions however, the creation of returned <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> can be made explicit. Xtext supports two kinds of Actions:</p>
 
@@ -531,7 +531,7 @@ x 0 8 15
 
 <p>If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example <em>TypeB</em> must be a subtype of <em>TypeA</em>. An expression <em>A ident</em> should create an instance of <em>TypeA</em>, whereas <em>B ident</em> should instantiate <em>TypeB</em>.</p>
 
-<p>If you don&#8217;t use actions, you&#8217;ll have to define an alternative and delegate rules to guide the parser to the right types for the to-be-instantiated objects:</p>
+<p>If you don’t use actions, you’ll have to define an alternative and delegate rules to guide the parser to the right types for the to-be-instantiated objects:</p>
 
 <pre><code class="language-xtext">MyRule returns TypeA :
   "A" name=ID |
@@ -553,7 +553,7 @@ MyOtherRule returns TypeB :
 
 <p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The notation <em>{TypeB}</em> will create an instance of TypeB and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.</p>
 
-<p><strong>Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you&#8217;ll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning for the parser rules in question.</strong></p>
+<p><strong>Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you’ll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning for the parser rules in question.</strong></p>
 
 <h5 id="unassigned-rule-calls">Unassigned Rule Calls</h5>
 
@@ -594,7 +594,7 @@ MyOtherRule returns TypeB :
 ;
 </code></pre>
 
-<p>Instead one has to rewrite such things by &#8220;left-factoring&#8221; it:</p>
+<p>Instead one has to rewrite such things by “left-factoring” it:</p>
 
 <pre><code class="language-xtext">Expression :
   TerminalExpression ('+' TerminalExpression)?
@@ -606,7 +606,7 @@ TerminalExpression :
 ;
 </code></pre>
 
-<p>In practice this is always the same pattern and therefore not too difficult. However, by simply applying the Xtext AST construction features we&#8217;ve covered so far, a grammar &#8230;</p>
+<p>In practice this is always the same pattern and therefore not too difficult. However, by simply applying the Xtext AST construction features we’ve covered so far, a grammar …</p>
 
 <pre><code class="language-xtext">Expression :
   {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?
@@ -618,7 +618,7 @@ TerminalExpression returns Expression:
 ;
 </code></pre>
 
-<p>&#8230; would result in unwanted elements in the AST. For instance the expression <code>(42)</code> would result in a tree like this:</p>
+<p>… would result in unwanted elements in the AST. For instance the expression <code>(42)</code> would result in a tree like this:</p>
 
 <pre><code class="language-mwe2">Operation {
   left=Operation {
@@ -686,14 +686,14 @@ Fullname:
   <li>allow for use of hidden tokens.</li>
 </ol>
 
-<p>Assuming you want to define a rule to consume Java-like qualified names (e.g. &#8220;foo.bar.Baz&#8221;) you could write:</p>
+<p>Assuming you want to define a rule to consume Java-like qualified names (e.g. “foo.bar.Baz”) you could write:</p>
 
 <pre><code class="language-xtext">QualifiedName :
   ID ('.' ID)*
 ;
 </code></pre>
 
-<p>In contrast to a terminal rule this is only valid in certain contexts, i.e. it won&#8217;t conflict with the rule <em>ID</em>. If you had defined it as a terminal rule, it would possibly hide the simple <em>ID</em> rule.</p>
+<p>In contrast to a terminal rule this is only valid in certain contexts, i.e. it won’t conflict with the rule <em>ID</em>. If you had defined it as a terminal rule, it would possibly hide the simple <em>ID</em> rule.</p>
 
 <p>In addition, by defining the <em>QualifiedName</em> as a data type rule, it is allowed to use hidden tokens (e.g. <code>/* comment */</code> between the segment IDs and dots (e.g. <code>foo/* comment */. bar . Baz</code>).</p>
 
@@ -747,7 +747,7 @@ Fullname:
 
 <h3 id="syntactic-predicates">Syntactic Predicates</h3>
 
-<p>It&#8217;s sometimes not easily possible to define an <code>LL(*)</code> grammar for a given language that parses all possible valid input files and still produces abstract syntax graphs that mimic the actual structure of the files. There are even cases that cannot be described with an unambiguous grammar. There are solutions that allow to deal with this problem:</p>
+<p>It’s sometimes not easily possible to define an <code>LL(*)</code> grammar for a given language that parses all possible valid input files and still produces abstract syntax graphs that mimic the actual structure of the files. There are even cases that cannot be described with an unambiguous grammar. There are solutions that allow to deal with this problem:</p>
 
 <ul>
   <li>Enable Backtracking: Xtext allows to enable backtracking for the ANTLR parser generator. This is usually not recommended since it influences error message strategies at runtime and shadows actually existing problems in the grammar.</li>
@@ -779,7 +779,7 @@ else
     (=&gt;'else' else=Expression)?
 </code></pre>
 
-<p>The parser understands the predicate basically like this: If you are at this particular decision point and you don&#8217;t know what to do, check whether the <code>else</code> keyword is present. Don&#8217;t try to choose the other option that would start with an <code>else</code> keyword, too.</p>
+<p>The parser understands the predicate basically like this: If you are at this particular decision point and you don’t know what to do, check whether the <code>else</code> keyword is present. Don’t try to choose the other option that would start with an <code>else</code> keyword, too.</p>
 
 <p>Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled.</p>
 
@@ -793,7 +793,7 @@ else
 
 <p>The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). </p>
 
-<p>Xtext uses Ecore&#8217;s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. By using the <code>generate</code> directive, one tells Xtext to derive an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> from the grammar. </p>
+<p>Xtext uses Ecore’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. By using the <code>generate</code> directive, one tells Xtext to derive an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> from the grammar. </p>
 
 <h3 id="type-and-package-generation">Type and Package Generation</h3>
 
@@ -854,15 +854,15 @@ else
     <p>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> in each current return type     </p>
 
     <ul>
-      <li>for each assignment with the <code>=</code> or <code>+=</code> operator in a parser rule calling a parser rule. The <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference&#8217;s</a> type will be the return type of the called parser rule.</li>
-      <li>for each assigned action. The reference&#8217;s type will be set to the return type of the current calling rule. </li>
+      <li>for each assignment with the <code>=</code> or <code>+=</code> operator in a parser rule calling a parser rule. The <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference’s</a> type will be the return type of the called parser rule.</li>
+      <li>for each assigned action. The reference’s type will be set to the return type of the current calling rule. </li>
     </ul>
   </li>
 </ul>
 
 <p>Each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> takes its name from the assignment or action that caused it. Multiplicities will be <code>0..1</code> for assignments with the <code>=</code> operator and <code>0..*</code> for assignments with the <code>+=</code> operator. </p>
 
-<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &#8220;artificial&#8221; parser rules that are never called, e.g.</p>
+<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of “artificial” parser rules that are never called, e.g.</p>
 
 <pre><code class="language-xtext">CommonSuperType:
   SubTypeA | SubTypeB | SubTypeC;

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -10,13 +10,13 @@
 
 <h1 id="ide-concepts">IDE Concepts</h1>
 
-<p>For the following part we will refer to the <a href="301_grammarlanguage.html#statemachine">state machine example</a> to describe the different aspects of Xtext&#8217;s UI features.</p>
+<p>For the following part we will refer to the <a href="301_grammarlanguage.html#statemachine">state machine example</a> to describe the different aspects of Xtext’s UI features.</p>
 
 <h2 id="label-provider">Label Provider</h2>
 
 <p>There are various places in the UI in which model elements have to be presented to the user: In the <a href="#outline">outline view</a>, in <a href="#hyperlinking">hyperlinks</a>, in <a href="#content-assist">content proposals</a>, find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of the <a href="">ILabelProvider</a> interface. </p>
 
-<p>An <a href="">ILabelProvider</a> has two methods: <code>getText(Object)</code> returns the text in an object&#8217;s label, while <code>getImage(Object)</code> returns the icon. In addition, the Eclipse UI framework offers the <a href="">IStyledLabelProvider</a>, which returns a <a href="">StyledString</a> (i.e. with custom fonts, colors etc.) in the <code>getStyledText(Object)</code> method.</p>
+<p>An <a href="">ILabelProvider</a> has two methods: <code>getText(Object)</code> returns the text in an object’s label, while <code>getImage(Object)</code> returns the icon. In addition, the Eclipse UI framework offers the <a href="">IStyledLabelProvider</a>, which returns a <a href="">StyledString</a> (i.e. with custom fonts, colors etc.) in the <code>getStyledText(Object)</code> method.</p>
 
 <p>Almost all label providers in the Xtext framework inherit from the base class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java">AbstractLabelProvider</a> which unifies both approaches. Subclasses can either return a styled string or a string in the <code>doGetText(Object)</code> method. The framework will automatically convert it to a styled text (with default styles) or to a plain text in the respective methods. </p>
 
@@ -26,7 +26,7 @@
 
 <h3 id="eobject-label-provider">Label Providers For EObjects</h3>
 
-<p>The EObject label provider refers to actually loaded and thereby available model elements. By default, Xtext binds the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">DefaultEObjectLabelProvider</a> to all use cases, but you can change the binding individually for the Outline, Content Assist or other places. For that purpose, there is a so called <em>binding annotation</em> for each use case. For example, to use a custom <em>MyContentAssistLabelProvider</em> to display elements in the content assist, you have to override <code>configureContentProposalLabelProvider(..)</code> in your language&#8217;s UI module:</p>
+<p>The EObject label provider refers to actually loaded and thereby available model elements. By default, Xtext binds the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">DefaultEObjectLabelProvider</a> to all use cases, but you can change the binding individually for the Outline, Content Assist or other places. For that purpose, there is a so called <em>binding annotation</em> for each use case. For example, to use a custom <em>MyContentAssistLabelProvider</em> to display elements in the content assist, you have to override <code>configureContentProposalLabelProvider(..)</code> in your language’s UI module:</p>
 
 <pre><code class="language-java">@Override
 public void configureContentProposalLabelProvider(Binder binder) {
@@ -75,7 +75,7 @@ public void configureContentProposalLabelProvider(Binder binder) {
 
 <p>Xtext maintains an index of all model elements to allow quick searching and linking without loading the referenced resource (see the chapter on <a href="#index-based">index-based scopes</a> for details). The elements from this index also appear in some UI contexts, e.g. in the <em>Find model elements</em> dialog or in the <em>Find references</em> view. For reasons of scalability, the UI should not automatically load resources, so we need another implementation of a label provider that works with the elements from the index, i.e. <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>, <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>, and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java">IReferenceDescription</a>.</p>
 
-<p>The default implementation of this service is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java">DefaultDescriptionLabelProvider</a>. It employs the same polymorphic dispatch mechanism as the <a href="#default-eobject-label-provider">DefaultEObjectLabelProvider</a>. The default text of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a> is its indexed name. The image is resolved by dispatching to <code>image(EClass)</code> with the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> of the described object. This is likely the only method you want to override. Instances of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> will be represented with their path and the icon registered for your language&#8217;s editor. </p>
+<p>The default implementation of this service is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java">DefaultDescriptionLabelProvider</a>. It employs the same polymorphic dispatch mechanism as the <a href="#default-eobject-label-provider">DefaultEObjectLabelProvider</a>. The default text of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a> is its indexed name. The image is resolved by dispatching to <code>image(EClass)</code> with the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> of the described object. This is likely the only method you want to override. Instances of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> will be represented with their path and the icon registered for your language’s editor. </p>
 
 <p>To have a custom description label provider, make sure it is bound in your UI module:</p>
 
@@ -137,15 +137,15 @@ public void complete_{RuleName}(
 
 <h2 id="quick-fixes">Quick Fixes</h2>
 
-<p>For validations written using the <a href="#custom-validation">AbstractDeclarativeValidator</a> it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying <em>cause</em> of the diagnostic must be known (i.e. what actual problem does the diagnostic represent), otherwise the fix doesn&#8217;t know what needs to be done. As we don&#8217;t want to deduce this from the diagnostic&#8217;s error message we associate a problem specific <em>code</em> with the diagnostic.</p>
+<p>For validations written using the <a href="#custom-validation">AbstractDeclarativeValidator</a> it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying <em>cause</em> of the diagnostic must be known (i.e. what actual problem does the diagnostic represent), otherwise the fix doesn’t know what needs to be done. As we don’t want to deduce this from the diagnostic’s error message we associate a problem specific <em>code</em> with the diagnostic.</p>
 
-<p>In the following example taken from the <em>DomainmodelJavaValidator</em> the diagnostic&#8217;s <em>code</em> is given by the third argument to the <code>warning()</code> method and it is a reference to the static <a href="">String</a> field <code>INVALID_TYPE_NAME</code> in the validator class.</p>
+<p>In the following example taken from the <em>DomainmodelJavaValidator</em> the diagnostic’s <em>code</em> is given by the third argument to the <code>warning()</code> method and it is a reference to the static <a href="">String</a> field <code>INVALID_TYPE_NAME</code> in the validator class.</p>
 
 <pre><code class="language-java">warning("Name should start with a capital", 
     DomainmodelPackage.TYPE__NAME, INVALID_TYPE_NAME, type.getName());
 </code></pre>
 
-<p>Now that the validation has a unique code identifying the problem we can register quick fixes for it. We start by adding the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java">QuickfixProviderFragment</a> to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> in our DSL&#8217;s UI project and new entries in the <em>plugin.xml_gen</em> file.</p>
+<p>Now that the validation has a unique code identifying the problem we can register quick fixes for it. We start by adding the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java">QuickfixProviderFragment</a> to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> in our DSL’s UI project and new entries in the <em>plugin.xml_gen</em> file.</p>
 
 <p>Continuing with the <code>INVALID_TYPE_NAME</code> problem from the domain model example we add a method with which the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em> for details):</p>
 
@@ -174,9 +174,9 @@ public void fixName(final Issue issue,
 
 <p>The first three parameters given to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java">IssueResolutionAcceptor</a> define the UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name. The additional data is available as <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java">Issue.getData()</a>. As it is persisted in markers, only strings are allowed. </p>
 
-<p>The actual model modification is implemented in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java">IModification</a>. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java">IModificationContext</a> provides access to the erroneous document. In this case, we&#8217;re using Eclipse&#8217;s <a href="">IDocument</a> API to replace a text region. </p>
+<p>The actual model modification is implemented in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java">IModification</a>. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java">IModificationContext</a> provides access to the erroneous document. In this case, we’re using Eclipse’s <a href="">IDocument</a> API to replace a text region. </p>
 
-<p>If you prefer to implement the quick fix in terms of the semantic model use a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java">ISemanticModification</a> instead. Its <code>apply(EObject, IModificationContext)</code> method will be invoked inside a modify-transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&#8217;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed. The following snippet shows a semantic quick fix for a similar problem.</p>
+<p>If you prefer to implement the quick fix in terms of the semantic model use a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java">ISemanticModification</a> instead. Its <code>apply(EObject, IModificationContext)</code> method will be invoked inside a modify-transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor’s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed. The following snippet shows a semantic quick fix for a similar problem.</p>
 
 <pre><code class="language-java">@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)
 public void fixFeatureName(final Issue issue, 
@@ -214,7 +214,7 @@ public void fixFeatureName(final Issue issue,
   <li>for each keyword (<code>{languageName}.kw_{keyword}</code>).</li>
 </ol>
 
-<p>If you don&#8217;t like these defaults you&#8217;ll have to subclass <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java">XtextTemplateContextTypeRegistry</a> and configure it via <a href="#guicemodules">Guice</a>. </p>
+<p>If you don’t like these defaults you’ll have to subclass <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java">XtextTemplateContextTypeRegistry</a> and configure it via <a href="#guicemodules">Guice</a>. </p>
 
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> to resolve special variable types in templates. Besides the standard template variables available in <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html">GlobalTemplateVariables</a> like <code>${user}</code>, <code>${date}</code>, <code>${time}</code>, <code>${cursor}</code>, etc., these <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> support the automatic resolving of cross references enumeration values. Both resolvers are explained in the following sections.</p>
 
@@ -226,7 +226,7 @@ public void fixFeatureName(final Issue issue,
 
 <p><code>${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</code></p>
 
-<p>Where &#8220;displayText&#8221; is the initial value that is shown in the editor. It is also the identifier for a place holder so that multiple place holders with the same name will be updated at once by the user using linked editing.</p>
+<p>Where “displayText” is the initial value that is shown in the editor. It is also the identifier for a place holder so that multiple place holders with the same name will be updated at once by the user using linked editing.</p>
 
 <p>This small example yields the text <em>event =&gt; state</em> and allows selecting any events and states using a drop down:</p>
 
@@ -299,7 +299,7 @@ parentModelElement)
 }
 </code></pre>
 
-<p>You can choose not to create any node in the <code>_createChildren()</code> method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn&#8217;t reveal any children if expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method <code>_isLeaf(modelElement)</code> with the appropriate argument type, e.g.</p>
+<p>You can choose not to create any node in the <code>_createChildren()</code> method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn’t reveal any children if expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method <code>_isLeaf(modelElement)</code> with the appropriate argument type, e.g.</p>
 
 <pre><code class="language-java">// feature nodes are leafs and not expandable
 protected boolean _isLeaf(Feature feature) {
@@ -448,21 +448,21 @@ public Class&lt;? extends IComparator&gt;
 
 <h2 id="hyperlinking">Hyperlinking</h2>
 
-<p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your grammar definition. You can either <em>CTRL-click</em> on any of these tokens or hit <em>F3</em> while the cursor position is at the token in question and this will take you to the referenced model element. As you&#8217;d expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.</p>
+<p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your grammar definition. You can either <em>CTRL-click</em> on any of these tokens or hit <em>F3</em> while the cursor position is at the token in question and this will take you to the referenced model element. As you’d expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.</p>
 
 <h3 id="location-provider">Location Provider</h3>
 
 <p>When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model element. Determining this text region is the responsibility of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a>. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java">default implementation</a> implements a best effort strategy which can be summarized as:</p>
 
 <ol>
-  <li>If the model element&#8217;s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">type</a> declares a feature <em>name</em> then return the region of the corresponding token(s). As a fallback also check for a feature <em>id</em>. </li>
-  <li>If the model element&#8217;s node model contains any top-level tokens corresponding to invocations of the rule <em>ID</em> in the grammar then return a region spanning all those tokens. </li>
+  <li>If the model element’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">type</a> declares a feature <em>name</em> then return the region of the corresponding token(s). As a fallback also check for a feature <em>id</em>. </li>
+  <li>If the model element’s node model contains any top-level tokens corresponding to invocations of the rule <em>ID</em> in the grammar then return a region spanning all those tokens. </li>
   <li>As a last resort return the region corresponding to the first keyword token of the referenced model element. </li>
 </ol>
 
 <p>The location service offers different methods to obtain the region of interest for special use cases. You can either obtain the complete region for an object or only the identifying string which is usually the name of the instance (see <code>getSignificantTextRegion(EObject)</code>). You can also query for the text region of a specific <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeature</a> by means of <code>getFullTextRegion(EObject, EStructuralFeature, int)</code>.</p>
 
-<p>As the default strategy is a best effort it may not always result in the selection you want. If that&#8217;s the case you can <a href="#guicemodules">override</a> the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> binding in the UI module as in the following example:</p>
+<p>As the default strategy is a best effort it may not always result in the selection you want. If that’s the case you can <a href="#guicemodules">override</a> the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> binding in the UI module as in the following example:</p>
 
 <pre><code class="language-java">public class MyDslUiModule extends AbstractMyDslUiModule {
   @Override
@@ -495,7 +495,7 @@ public Class&lt;? extends IComparator&gt;
 
 <p>The lexical highlighting can be customized by providing implementations of the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a> and the abstract class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java">AbstractTokenScanner</a>. The latter fulfills the interface <a href="">ITokenScanner</a> from the underlying JFace Framework, which may be implemented by clients directly.</p>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a> is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java">ITextAttributeProvider</a>, which in turn is the component that is used to obtain the actual settings for a style&#8217;s id. An implementation will usually be very similar to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java">DefaultHighlightingConfiguration</a> and read like this: </p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a> is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java">ITextAttributeProvider</a>, which in turn is the component that is used to obtain the actual settings for a style’s id. An implementation will usually be very similar to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java">DefaultHighlightingConfiguration</a> and read like this: </p>
 
 <pre><code class="language-java">public class DefaultHighlightingConfiguration 
     implements IHighlightingConfiguration {
@@ -526,7 +526,7 @@ public Class&lt;? extends IComparator&gt;
 
 <p>As for the lexical highlighting the interface to register the available styles is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a>. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java">ISemanticHighlightingCalculator</a> is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements. </p>
 
-<p>The framework will pass the current <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> and an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java">IHighlightedPositionAcceptor</a> to the calculator. It is ensured that the resource will not be altered externally until the called method <code>provideHighlightingFor()</code> returns. However, the resource may be <code>null</code> in case of errors in the model. The implementor&#8217;s task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:</p>
+<p>The framework will pass the current <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> and an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java">IHighlightedPositionAcceptor</a> to the calculator. It is ensured that the resource will not be altered externally until the called method <code>provideHighlightingFor()</code> returns. However, the resource may be <code>null</code> in case of errors in the model. The implementor’s task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:</p>
 
 <pre><code class="language-java">public void provideHighlightingFor(XtextResource resource, 
     IHighlightedPositionAcceptor acceptor) {
@@ -567,7 +567,7 @@ public Class&lt;? extends IComparator&gt;
 }
 </code></pre>
 
-<p>The implementor of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java">ISemanticHighlightingCalculator</a> should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext&#8217;s core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This speeds up the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.</p>
+<p>The implementor of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java">ISemanticHighlightingCalculator</a> should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext’s core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This speeds up the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.</p>
 
 <h2 id="refactoring">Rename Refactoring</h2>
 
@@ -586,7 +586,7 @@ public Class&lt;? extends IComparator&gt;
 fragment = refactoring.RefactorElementNameFragment {}
 </code></pre>
 
-<p>The fragment has an additional flag <code>useJdtRefactoring</code> which can be used to delegate to JDT&#8217;s refactoring infrastructure for languages using <a href="305_xbase.html">Xbase</a> and an <a href="#xbase-inferred-type">inferred JVM model</a> (i.e. the domain model example or Xtend). </p>
+<p>The fragment has an additional flag <code>useJdtRefactoring</code> which can be used to delegate to JDT’s refactoring infrastructure for languages using <a href="305_xbase.html">Xbase</a> and an <a href="#xbase-inferred-type">inferred JVM model</a> (i.e. the domain model example or Xtend). </p>
 
 <p>If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring should not need any customization. Give it a try. </p>
 
@@ -601,7 +601,7 @@ fragment = refactoring.RefactorElementNameFragment {}
 
 <p>As the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java">IRenameStrategy</a> is a stateful object, you have to bind a custom <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java">Provider</a> to create it.</p>
 
-<p>The second component you might want to customize is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java">IDependentElementsCalculator</a>. Dependent elements are those elements whose name change when the target element is renamed. For example, when you rename a Java class the qualified names of its inner classes change, too, thus references to these have to be updated as well. This calculation is performed by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java">IDependentElementsCalculator</a>. By default, all elements contained in the target element are added. This matches Xtext&#8217;s default strategy of qualified name computation.</p>
+<p>The second component you might want to customize is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java">IDependentElementsCalculator</a>. Dependent elements are those elements whose name change when the target element is renamed. For example, when you rename a Java class the qualified names of its inner classes change, too, thus references to these have to be updated as well. This calculation is performed by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java">IDependentElementsCalculator</a>. By default, all elements contained in the target element are added. This matches Xtext’s default strategy of qualified name computation.</p>
 
 <h3 id="rename-participants">Rename Participants</h3>
 

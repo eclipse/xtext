@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -71,7 +71,7 @@ end  // sub square
 
 <h2 id="tortoise-running">Running the Example</h2>
 
-<p>In the runtime Eclipse, open the <em>Tortoise View</em> (<em>Window &rarr; Show View &rarr; Other &rarr; Xtext &rarr; TortoiseView</em>). Then open one of the example files in <em>org.eclipse.xtext.tortoiseshell.examples</em>. The <em>Program</em> is interpreted on editor activation and on save. An additional toggle button <em>Step Mode</em> in the <em>Tortoise View</em> allows to execute the code live from the editor up to the caret&#8217;s current line.</p>
+<p>In the runtime Eclipse, open the <em>Tortoise View</em> (<em>Window → Show View → Other → Xtext → TortoiseView</em>). Then open one of the example files in <em>org.eclipse.xtext.tortoiseshell.examples</em>. The <em>Program</em> is interpreted on editor activation and on save. An additional toggle button <em>Step Mode</em> in the <em>Tortoise View</em> allows to execute the code live from the editor up to the caret’s current line.</p>
 
 <p><img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" /></p>
 
@@ -164,9 +164,9 @@ Executable:
   }
 </code></pre>
 
-<p>One thing you have to know about the Java inferrence is that when creating Java elements using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>, the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>. So to detect whether a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> is inferred, we check whether it has a source element. If so, we have to setup an execution context binding <code>this</code> and the parameters as local variables and then execute the method&#8217;s body using the interpreter. </p>
+<p>One thing you have to know about the Java inferrence is that when creating Java elements using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>, the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>. So to detect whether a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> is inferred, we check whether it has a source element. If so, we have to setup an execution context binding <code>this</code> and the parameters as local variables and then execute the method’s body using the interpreter. </p>
 
-<p>To start the interpretation we have to do almost the same: Setup the execution context and then evaluate the <em>Program&#8217;s</em> body. The respective code is </p>
+<p>To start the interpretation we have to do almost the same: Setup the execution context and then evaluate the <em>Program’s</em> body. The respective code is </p>
 
 <pre><code class="language-xtend">  override run(Tortoise tortoise, EObject program, int stopAtLine) {
     if(tortoise != null &amp;&amp; program != null) {

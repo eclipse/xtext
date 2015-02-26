@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
 
 <h2 id="templates-solution">Overview</h2>
 
-<p>A template language works in two modes: Plain text mode, where everything goes directly into the output and the expression mode, where expressions have to be evaluated and the result is inserted into the text. To switch between text mode and expression mode, we use the French quotes <code>«</code> and <code>»</code>. A document starts in text mode.</p>
+<p>A template language works in two modes: Plain text mode, where everything goes directly into the output and the expression mode, where expressions have to be evaluated and the result is inserted into the text. To switch between text mode and expression mode, we use the French quotes <code>Â«</code> and <code>Â»</code>. A document starts in text mode.</p>
 
 <p>The template will be compiled to a Java class with a <code>generate(params)</code> method. You can provide additional information like a package declaration, imports and parameters in the preamble inside a template at the beginning of the document.</p>
 
@@ -26,7 +26,7 @@
 
 <h2 id="templates-running">Running the Example</h2>
 
-<p>In the runtime workspace, run the <em>GenerateHtml</em> file as a Java application (<em>Run as&#8230; &rarr; Java Application</em> from the context menu). This will execute the template <em>MyWebsite</em> and print the result to the console. </p>
+<p>In the runtime workspace, run the <em>GenerateHtml</em> file as a Java application (<em>Run asâ€¦ â†’ Java Application</em> from the context menu). This will execute the template <em>MyWebsite</em> and print the result to the console. </p>
 
 <h2 id="templates-grammar">Grammar</h2>
 
@@ -39,7 +39,7 @@ generate template "http://www.xtext.org/template/Template"
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 
 TemplateFile:
-	'&lt;!--''«' 
+	'&lt;!--''Â«' 
 		('package' package=QualifiedName)? 
 		importSection=XImportSection? 
 		params+=Parameter* 
@@ -81,7 +81,7 @@ RichStringElseIf returns xbase::XIfExpression:
 		then=RichString
 	(else=RichStringElseIf | "ELSE" else=RichString)?;
 
-terminal TEXT : '»' (!'«')* (EOF|'«');
+terminal TEXT : 'Â»' (!'Â«')* (EOF|'Â«');
 </code></pre>
 
 <p>It becomes quite straightforward once you have understood the escaping. Have a look at the last rule <em>TEXT</em> first: It says that a text starts with a closing French quote and ends with an opening quote or the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. </p>
@@ -90,15 +90,15 @@ terminal TEXT : '»' (!'«')* (EOF|'«');
 
 <h2 id="templates-inferrer">Translation to Java</h2>
 
-<p>Each <em>TemplateFile</em> is compiled to a Java class with a <code>generate</code> method that takes a lambda expression as a parameter. The lambda expression is called to initialize the template&#8217;s properties, by handling the template itself as an argument. This comes along nicely, especially when called from Xtend.</p>
+<p>Each <em>TemplateFile</em> is compiled to a Java class with a <code>generate</code> method that takes a lambda expression as a parameter. The lambda expression is called to initialize the templateâ€™s properties, by handling the template itself as an argument. This comes along nicely, especially when called from Xtend.</p>
 
 <ul>
   <li>
     <p>DSL:</p>
 
-    <pre><code class="language-templates">&lt;!--«
+    <pre><code class="language-templates">&lt;!--Â«
   ...
-»--&gt;
+Â»--&gt;
 </code></pre>
   </li>
   <li>
@@ -180,7 +180,7 @@ public String getTitle() {
   </li>
 </ul>
 
-<p>In the inferrer, note that we derive the property&#8217;s type in three steps: Take the declared one, if there is none, derive it from the initializer and if even that fails, use <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> as default. </p>
+<p>In the inferrer, note that we derive the propertyâ€™s type in three steps: Take the declared one, if there is none, derive it from the initializer and if even that fails, use <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> as default. </p>
 
 <pre><code class="language-xtend">for (param : element.params) {
   val type = param.type 
@@ -201,15 +201,15 @@ public String getTitle() {
   <li>
     <p>DSL:</p>
 
-    <pre><code class="language-templates">»&lt;!DOCTYPE html&gt;
+    <pre><code class="language-templates">Â»&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;«title»&lt;/title&gt;
+  &lt;title&gt;Â«titleÂ»&lt;/title&gt;
   &lt;meta name="viewport" content="width=device-width, initial-sca..."&gt;
   &lt;meta name="description"
-    content="«description»"&gt;
-  &lt;meta name="author" content="«...
+    content="Â«descriptionÂ»"&gt;
+  &lt;meta name="author" content="Â«...
 </code></pre>
   </li>
   <li>
@@ -249,18 +249,18 @@ public String getTitle() {
 ...
 </code></pre>
 
-<p>For a <em>RichString</em>, we declare a variable <code>_appendable</code> of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a <em>RichStringPart</em> which can be <code>null</code>, so we use the &#8216;elvis operator&#8217; <code>?:</code> to insert an empty string in this case. </p>
+<p>For a <em>RichString</em>, we declare a variable <code>_appendable</code> of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a <em>RichStringPart</em> which can be <code>null</code>, so we use the â€˜elvis operatorâ€™ <code>?:</code> to insert an empty string in this case. </p>
 
 <pre><code class="language-xtend">RichString : {
   val name = declareVariable(expr, '_appendable')
   newLine
   append('''
-    StringBuilder «name» = new StringBuilder();
+    StringBuilder Â«nameÂ» = new StringBuilder();
   ''')
   for (nestedExpression : expr.expressions) {
     nestedExpression.internalToJavaStatement(it, true)
     newLine
-    append('''«name».append(ObjectExtensions.operator_elvis(''')
+    append('''Â«nameÂ».append(ObjectExtensions.operator_elvis(''')
     nestedExpression.internalToJavaExpression(it)
     append(',""));')
   }
@@ -275,16 +275,16 @@ public String getTitle() {
   val name = declareVariable(expr, '_forLoopResult')
   newLine
   append('''
-    StringBuilder «name» = new StringBuilder();
+    StringBuilder Â«nameÂ» = new StringBuilder();
     for (final ''')
   serialize(paramType, expr, it);
-  append(''' «declareVariable(expr.declaredParam, 
-      makeJavaIdentifier(expr.declaredParam.name))» : ''')
+  append(''' Â«declareVariable(expr.declaredParam, 
+      makeJavaIdentifier(expr.declaredParam.name))Â» : ''')
   internalToJavaExpression(expr.forExpression, it)
   append(") {").increaseIndentation
     expr.eachExpression.internalToJavaStatement(it, true)
     newLine
-    append('''«name».append(''')
+    append('''Â«nameÂ».append(''')
     expr.eachExpression.internalToJavaExpression(it)
     append(');')
   decreaseIndentation.newLine.append("}")
@@ -306,7 +306,7 @@ public String getTitle() {
 
 <h2 id="templates-type-provider">Type Computation</h2>
 
-<p>The type system has to know how to determine the types of our new expressions. This is the job of the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">TemplateTypeComputer</a>: <em>RichString</em> becomes a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>. As opposed to its super type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> a <em>RichStringForLoop</em> is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> as well. The for-loop&#8217;s body is expected to have a type, as the results must be concatenatable, which is different from Xbase&#8217;s for-loop.</p>
+<p>The type system has to know how to determine the types of our new expressions. This is the job of the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">TemplateTypeComputer</a>: <em>RichString</em> becomes a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>. As opposed to its super type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> a <em>RichStringForLoop</em> is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> as well. The for-loopâ€™s body is expected to have a type, as the results must be concatenatable, which is different from Xbaseâ€™s for-loop.</p>
 
 <pre><code class="language-xtend">class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
@@ -339,7 +339,7 @@ public String getTitle() {
                             RuleCall ruleCall, 
                             ContentAssistContext context,
       ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(new CompletionProposal("«»", 
+    acceptor.accept(new CompletionProposal("Â«Â»", 
         context.getOffset(), 0, 1));
   }
 }

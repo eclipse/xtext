@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -14,11 +14,11 @@
 
 <p>The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.</p>
 
-<p><em>Hint: You&#8217;ll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em></p>
+<p><em>Hint: You’ll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em></p>
 
 <h2 id="take-the-shortcut">Take the Shortcut</h2>
 
-<p>If you haven&#8217;t made too many customizations to the generated defaults and if you&#8217;re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!</p>
+<p>If you haven’t made too many customizations to the generated defaults and if you’re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!</p>
 
 <h2 id="migrating-step-by-step">Migrating Step By Step</h2>
 
@@ -38,7 +38,7 @@
 
 <p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java">IQualifiedNameConverter</a> converts qualified names from/to their <a href="">String</a> representation. This is also where you specify the separator and wildcard strings. If you already know the segments of a qualified name, you can also create it using <code>QualifiedName.create(String ...)</code>. </p>
 
-<p><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> is the new type of the <em>name</em> properties in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>. So if you have customized indexing, e.g. implemented your own <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a>, you will have to create <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">qualified names</a> instead of <a href="">strings</a>. <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescriptions</a> are also used in other places such as <a href="#scoping">scoping</a>, <a href="#linking">linking</a>, <a href="#serialization">serialization</a>, <a href="#content-assist">content assist</a>&#8230;</p>
+<p><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> is the new type of the <em>name</em> properties in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>. So if you have customized indexing, e.g. implemented your own <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a>, you will have to create <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">qualified names</a> instead of <a href="">strings</a>. <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescriptions</a> are also used in other places such as <a href="#scoping">scoping</a>, <a href="#linking">linking</a>, <a href="#serialization">serialization</a>, <a href="#content-assist">content assist</a>…</p>
 
 <p>Furthermore, the method <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider.getQualifiedName(EObject)</a> has been renamed to <code>getFullyQualifiedName(EObject)</code>.</p>
 
@@ -104,7 +104,7 @@ fragment = outline.OutlineNodeAdapterFactoryFragment{}
 
 <p>The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually.</p>
 
-<p>You will face a couple of compilation problems due to changes in the API. Here&#8217;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems. </p>
+<p>You will face a couple of compilation problems due to changes in the API. Here’s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems. </p>
 
 <ul>
   <li>In the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a> the method <code>getScope(EObject,EReference)</code> has been removed. Use <code>getScope(Resource, EReference, Predicate&lt;IEObjectDescription&gt;)</code> instead. </li>
@@ -113,7 +113,7 @@ fragment = outline.OutlineNodeAdapterFactoryFragment{}
   <li>The enum <em>DiagnosticSeverity</em> has been renamed to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/diagnostics/Severity.java">Severity</a>.</li>
   <li>The class <em>TextLocation</em> has been replaced by the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/ITextRegion.java">ITextRegion</a> with an immutable implementation <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java">TextRegion</a>.</li>
   <li>
-    <p>In Xtext 1.0.x the class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java">EObjectAtOffsetHelper</a> provided several static methods to resolve elements. In Xtext 2.0 these methods aren&#8217;t static anymore. For that reason you could create an instance of this class or let Guice do the job for you:     </p>
+    <p>In Xtext 1.0.x the class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java">EObjectAtOffsetHelper</a> provided several static methods to resolve elements. In Xtext 2.0 these methods aren’t static anymore. For that reason you could create an instance of this class or let Guice do the job for you:     </p>
 
     <pre><code class="language-java">  @Inject private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 </code></pre>

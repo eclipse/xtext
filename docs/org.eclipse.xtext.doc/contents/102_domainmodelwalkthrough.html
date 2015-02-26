@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@ entity Comment extends HasAuthor {
 
 <p>In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:</p>
 
-<p><em>File &rarr; New &rarr; Project&#8230; &rarr; Xtext &rarr; Xtext project</em></p>
+<p><em>File → New → Project… → Xtext → Xtext project</em></p>
 
 <p>Choose a meaningful project name, language name and file extension, e.g.</p>
 
@@ -102,7 +102,7 @@ Greeting:
   'Hello' name=ID '!';
 </code></pre>
 
-<p>Let&#8217;s now just replace that grammar definition with the one for our domain model language:</p>
+<p>Let’s now just replace that grammar definition with the one for our domain model language:</p>
 
 <pre><code class="language-xtext">grammar org.example.domainmodel.Domainmodel with
                                       org.eclipse.xtext.common.Terminals
@@ -132,7 +132,7 @@ Feature:
 ;
 </code></pre>
 
-<p>Let&#8217;s have a more detailed look at what the different grammar rules mean:</p>
+<p>Let’s have a more detailed look at what the different grammar rules mean:</p>
 
 <ol>
   <li>
@@ -185,13 +185,13 @@ Feature:
   </li>
 </ol>
 
-<p>This domain model grammar already uses the most important concepts of Xtext&#8217;s grammar language. you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (<code>=</code>) where the multi value assignment used a plus-equals (<code>+=</code>). We have also seen the boolean assignment operator (<code>?=</code>). Furthermore we saw how a cross reference can be declared and learned about different cardinalities (<code>?</code> = optional, <code>*</code> = any number, <code>+</code> = at least once). Please consult the <a href="301_grammarlanguage.html">Grammar Language Reference</a> for more details. Let&#8217;s now have a look what you can do with such a language description.</p>
+<p>This domain model grammar already uses the most important concepts of Xtext’s grammar language. you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (<code>=</code>) where the multi value assignment used a plus-equals (<code>+=</code>). We have also seen the boolean assignment operator (<code>?=</code>). Furthermore we saw how a cross reference can be declared and learned about different cardinalities (<code>?</code> = optional, <code>*</code> = any number, <code>+</code> = at least once). Please consult the <a href="301_grammarlanguage.html">Grammar Language Reference</a> for more details. Let’s now have a look what you can do with such a language description.</p>
 
 <h2 id="generate-language-artifacts">Generate Language Artifacts</h2>
 
 <p>Now that we have the grammar in place and defined we need to execute the code generator that will derive the various language components. To do so, locate the file <em>GenerateDomainmodel.mwe2</em> file next to the grammar file in the package explorer view. From its context menu, choose</p>
 
-<p><em>Run As &rarr; MWE2 Workflow</em>.</p>
+<p><em>Run As → MWE2 Workflow</em>.</p>
 
 <p>This will trigger the Xtext language generator. It generates the parser and serializer and some additional infrastructure code. You will see its logging messages in the Console View. </p>
 
@@ -199,11 +199,11 @@ Feature:
 
 <h2 id="run-generated-plugin">Run the Generated IDE Plug-in</h2>
 
-<p>We are now able to test the IDE integration. If you select <em>Run &rarr; Run Configurations&#8230;</em> from the Eclipse menu, you can choose <em>Eclipse Application &rarr; Launch Runtime Eclipse</em>. This preconfigured launch shortcut already has appropriate memory settings and parameters set. Now you can hit <em>Run</em> to start a new Eclipse.</p>
+<p>We are now able to test the IDE integration. If you select <em>Run → Run Configurations…</em> from the Eclipse menu, you can choose <em>Eclipse Application → Launch Runtime Eclipse</em>. This preconfigured launch shortcut already has appropriate memory settings and parameters set. Now you can hit <em>Run</em> to start a new Eclipse.</p>
 
 <p><img src="images/30min_launchconfiguration.png" alt="" /></p>
 
-<p>This will spawn a new Eclipse workbench with your newly developed plug-ins installed. In the new workbench, create a new project of your choice, e.g. <em>File &rarr; New &rarr; Project&#8230; &rarr; Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.</p>
+<p>This will spawn a new Eclipse workbench with your newly developed plug-ins installed. In the new workbench, create a new project of your choice, e.g. <em>File → New → Project… → Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.</p>
 
 <p><img src="images/30min_editor.png" alt="" /></p>
 
@@ -251,7 +251,7 @@ package my.company.blog {
 }
 </code></pre>
 
-<p>Let&#8217;s start enhancing the grammar. </p>
+<p>Let’s start enhancing the grammar. </p>
 
 <ol>
   <li>
@@ -320,7 +320,7 @@ Feature:
   </li>
 </ol>
 
-<p>That&#8217;s all for the grammar. It should now read as </p>
+<p>That’s all for the grammar. It should now read as </p>
 
 <pre><code class="language-xtext">grammar org.example.domainmodel.Domainmodel with
                                       org.eclipse.xtext.common.Terminals

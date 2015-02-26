@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -20,7 +20,7 @@
 
 <h2 id="map-to-java">Map to Java</h2>
 
-<p>Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that purpose you use a so-called <em>model inferrer</em>, a special API that allows you to create any number of Java classes, interfaces or members from your DSL. This hook not only defines how your language is translated to Java, but also defines the scope of the embedded expressions. The expressions from your language &#8216;live&#8217; in the context you give them. If you want an expression to have access to certain local variables, just put it into a method with appropriate parameters or use instance fields if they work better.</p>
+<p>Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that purpose you use a so-called <em>model inferrer</em>, a special API that allows you to create any number of Java classes, interfaces or members from your DSL. This hook not only defines how your language is translated to Java, but also defines the scope of the embedded expressions. The expressions from your language â€˜liveâ€™ in the context you give them. If you want an expression to have access to certain local variables, just put it into a method with appropriate parameters or use instance fields if they work better.</p>
 
 <p>While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code directly from the inferred model. The same way, Xbase already integrates your language with JDT to an extend that customizations beyond the JVM model inferrer will only be necessary for very special cases. You can naturally mix Java and DSL code in the same application without any barriers. </p>
 
@@ -54,7 +54,7 @@
 
 <h2 id="installation">Getting the Code</h2>
 
-<p>You can get the source code for all languages from the github repository at <a href="https://github.com/xtext-dev/seven-languages-xtext.git">github.com/xtext-dev/seven-languages-xtext</a>. The repository contains two folders <em>languages</em> and <em>examples</em>. Download the plug-ins from <em>languages</em> into the root workspace and the <em>examples</em> into the runtime workspace spawned from the root one using <em>Run &rarr; Run Configurations&#8230; &rarr; Eclipse Application &rarr; Run (&lt;language&gt;)</em>.</p>
+<p>You can get the source code for all languages from the github repository at <a href="https://github.com/xtext-dev/seven-languages-xtext.git">github.com/xtext-dev/seven-languages-xtext</a>. The repository contains two folders <em>languages</em> and <em>examples</em>. Download the plug-ins from <em>languages</em> into the root workspace and the <em>examples</em> into the runtime workspace spawned from the root one using <em>Run â†’ Run Configurationsâ€¦ â†’ Eclipse Application â†’ Run (&lt;language&gt;)</em>.</p>
 
 <p>Each language consists of several Eclipse projects </p>
 
@@ -104,7 +104,7 @@ foo.fooBars += foobar // instead of foo.getFooBars().add(foobar)
 
 <p><a name="xtend_methods"></a></p>
 
-<p>Methods are introduced with the keyword <code>def</code> or <code>override</code> if they override/implement a super type&#8217;s method. Methods are public if not specified otherwise. The value of the last expression is returned if no explicit return expression is used and the method&#8217;s return type is not <code>void</code>.</p>
+<p>Methods are introduced with the keyword <code>def</code> or <code>override</code> if they override/implement a super typeâ€™s method. Methods are public if not specified otherwise. The value of the last expression is returned if no explicit return expression is used and the methodâ€™s return type is not <code>void</code>.</p>
 
 <p><a name="xtend_variables"></a></p>
 
@@ -137,7 +137,7 @@ def bar(Baz baz)Â {
 val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')
 </code></pre>
 
-<p><a name="xtend_it"></a> In addition to Java&#8217;s <code>this</code>, you can define another implicit receiver variable named <code>it</code>. As with <code>this</code>, you can omit <code>it</code> in feature calls, i.e. </p>
+<p><a name="xtend_it"></a> In addition to Javaâ€™s <code>this</code>, you can define another implicit receiver variable named <code>it</code>. As with <code>this</code>, you can omit <code>it</code> in feature calls, i.e. </p>
 
 <pre><code class="language-xtend">class Foo {
   def foo(Bar it) {
@@ -174,25 +174,25 @@ list.sortBy[ length ]
 
 <pre><code class="language-xtend">'''
   String url =  request.getRequestURL().toString();
-  «FOR route : routes»
+  Â«FOR route : routesÂ»
     {
       //java.util.regex.Matcher will be imported in the generated Java file
-      «Matcher» _matcher = _pattern«route.index».matcher(url);
+      Â«MatcherÂ» _matcher = _patternÂ«route.indexÂ».matcher(url);
       if (_matcher.find()) {
-        «FOR variable : route.url.variables»
-            String «variable.name» = _matcher.group(«variable.index + 1»);
-        «ENDFOR»
-        «IF route.condition != null»
-          if («route.nameOfRouteMethod»Condition(request, response
-            «FOR v : route.url.variables 
+        Â«FOR variable : route.url.variablesÂ»
+            String Â«variable.nameÂ» = _matcher.group(Â«variable.index + 1Â»);
+        Â«ENDFORÂ»
+        Â«IF route.condition != nullÂ»
+          if (Â«route.nameOfRouteMethodÂ»Condition(request, response
+            Â«FOR v : route.url.variables 
              BEFORE ", " 
-             SEPARATOR ", "»«v.name»«ENDFOR»))
-        «ENDIF»
-        «route.nameOfRouteMethod»(request, response
-          «FOR v : route.url.variables», «v.name»«ENDFOR»);
+             SEPARATOR ", "Â»Â«v.nameÂ»Â«ENDFORÂ»))
+        Â«ENDIFÂ»
+        Â«route.nameOfRouteMethodÂ»(request, response
+          Â«FOR v : route.url.variablesÂ», Â«v.nameÂ»Â«ENDFORÂ»);
       }
     }
-  «ENDFOR»
+  Â«ENDFORÂ»
 '''
 </code></pre>
 

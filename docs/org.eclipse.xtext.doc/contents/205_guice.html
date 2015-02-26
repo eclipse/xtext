@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
 }
 </code></pre>
 
-<p>The big advantage of using Java over an external text or XML file is that you can leverage the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. <em>TypeLiteral</em>) a lot in order to have an agreeable syntax. Also since the configuration is &#8216;hidden&#8217; in a method implementation and not really declarative you cannot validate a Guice module at compile time.</p>
+<p>The big advantage of using Java over an external text or XML file is that you can leverage the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. <em>TypeLiteral</em>) a lot in order to have an agreeable syntax. Also since the configuration is â€˜hiddenâ€™ in a method implementation and not really declarative you cannot validate a Guice module at compile time.</p>
 
 <p>The Guice DSL described in this section lets you describe the module above like this:</p>
 
@@ -73,7 +73,7 @@ com.acme.TestModule mixin RuntimeModule {
 
 <h2 id="guice-grammar">Grammar</h2>
 
-<p>The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism already described for the <a href="202_scripting.html#scripting-grammar">scripting language</a>. A module can &#8216;mixin&#8217; any number of other modules, which allows to reuse existing modules but override keys with different bindings. The mixin feature is described as a cross reference to another <code>ModuleAST</code>. Cross references are covered in detail in the respective <a href="301_grammarlanguage.html#cross-references">documentation section</a>.</p>
+<p>The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism already described for the <a href="202_scripting.html#scripting-grammar">scripting language</a>. A module can â€˜mixinâ€™ any number of other modules, which allows to reuse existing modules but override keys with different bindings. The mixin feature is described as a cross reference to another <code>ModuleAST</code>. Cross references are covered in detail in the respective <a href="301_grammarlanguage.html#cross-references">documentation section</a>.</p>
 
 <p>The language allows binding keys to other keys and to instances. Other concepts like binding to providers is something you could do, but would not help in getting the idea across. Everybody is encouraged to fork this first prototype and build something really useful ;-)</p>
 
@@ -108,7 +108,7 @@ KeyAST:
 
 <h2 id="guice-inferrer">Translation to Java</h2>
 
-<p>A module is mapped to a single java class. The &#8216;mixin&#8217; modules are not translated to Java inheritance but to a delegation approach. Here is how a simple module declaration with a single mixed-in module is translated.</p>
+<p>A module is mapped to a single java class. The â€˜mixinâ€™ modules are not translated to Java inheritance but to a delegation approach. Here is how a simple module declaration with a single mixed-in module is translated.</p>
 
 <ul>
   <li>
@@ -142,7 +142,7 @@ KeyAST:
   </li>
 </ul>
 
-<p>As you can see, the language simply leverages the nice <code>equals</code>/<code>hashCode</code> implementation of Guice&#8217;s <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Key.html">Key</a> to implement the override semantics of mixed-in modules.</p>
+<p>As you can see, the language simply leverages the nice <code>equals</code>/<code>hashCode</code> implementation of Guiceâ€™s <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Key.html">Key</a> to implement the override semantics of mixed-in modules.</p>
 
 <p>The corresponding parts in <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.guicemodules/src/org/xtext/guicemodules/jvmmodel/GuiceModulesJvmModelInferrer.xtend">GuiceModulesJvmModelInferrer</a> are:</p>
 
@@ -153,7 +153,7 @@ KeyAST:
     if (!mixin.eIsProxy)
       members += mixin.toField( mixin.simpleName, 
         typeRef(mixin.fullyQualifiedName.toString)) [
-        initializer = '''new «mixin.name»()'''
+        initializer = '''new Â«mixin.nameÂ»()'''
       ]
   }
   
@@ -165,9 +165,9 @@ KeyAST:
     body = '''
       try {
         ...some other code
-        «FOR mix : module.mixins»
-          «mix.simpleName».configure(bind, usedKeys);
-        «ENDFOR»
+        Â«FOR mix : module.mixinsÂ»
+          Â«mix.simpleNameÂ».configure(bind, usedKeys);
+        Â«ENDFORÂ»
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -190,7 +190,7 @@ KeyAST:
 ...
 </code></pre>
 
-<p>In order to obtain instances of annotations as required by Guice&#8217;s <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a>, we declare dummy fields for annotated types and use reflection to get corresponding instances.</p>
+<p>In order to obtain instances of annotations as required by Guiceâ€™s <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a>, we declare dummy fields for annotated types and use reflection to get corresponding instances.</p>
 
 <ul>
   <li>
@@ -239,10 +239,10 @@ private String _from0;
 
 // and the following method
 def guiceKey(KeyAST it) '''
-  Key.get(new TypeLiteral&lt;«type&gt;(){}«
+  Key.get(new TypeLiteral&lt;Â«type&gt;(){}Â«
   IF annotation != null
-  », getClass().getDeclaredField("«syntheticName»").getAnnotations()[0]«
-  ENDIF»)'''
+  Â», getClass().getDeclaredField("Â«syntheticNameÂ»").getAnnotations()[0]Â«
+  ENDIFÂ»)'''
 </code></pre>
 
 <p>That is basically it. The rest should hopefully be self-explanatory.</p>
