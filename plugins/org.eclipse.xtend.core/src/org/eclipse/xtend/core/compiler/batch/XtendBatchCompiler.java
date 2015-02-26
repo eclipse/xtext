@@ -6,6 +6,7 @@ import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.io.CharArrayWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
@@ -120,8 +121,6 @@ public class XtendBatchCompiler {
 	@Inject
 	private IStubGenerator stubGenerator;
 
-	protected Writer outputWriter;
-	protected Writer errorWriter;
 	protected String sourcePath;
 	protected String classPath;
 	/**
@@ -198,60 +197,6 @@ public class XtendBatchCompiler {
 
 	public void setDeleteTempDirectory(boolean deletetempDirectory) {
 		this.deleteTempDirectory = deletetempDirectory;
-	}
-
-	public Writer getOutputWriter() {
-		if (outputWriter == null) {
-			outputWriter = new Writer() {
-				@Override
-				public void write(char[] data, int offset, int count) throws IOException {
-					String message = String.copyValueOf(data, offset, count);
-					if (!Strings.isEmpty(message.trim())) {
-						log.debug(message);
-					}
-				}
-
-				@Override
-				public void flush() throws IOException {
-				}
-
-				@Override
-				public void close() throws IOException {
-				}
-			};
-		}
-		return outputWriter;
-	}
-
-	public void setOutputWriter(Writer ouputWriter) {
-		this.outputWriter = ouputWriter;
-	}
-
-	public Writer getErrorWriter() {
-		if (errorWriter == null) {
-			errorWriter = new Writer() {
-				@Override
-				public void write(char[] data, int offset, int count) throws IOException {
-					String message = String.copyValueOf(data, offset, count);
-					if (!Strings.isEmpty(message.trim())) {
-						log.error(message);
-					}
-				}
-
-				@Override
-				public void flush() throws IOException {
-				}
-
-				@Override
-				public void close() throws IOException {
-				}
-			};
-		}
-		return errorWriter;
-	}
-
-	public void setErrorWriter(Writer errorWriter) {
-		this.errorWriter = errorWriter;
 	}
 
 	public void setClassPath(String classPath) {
@@ -653,8 +598,29 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("invoke batch compiler with '" + concat(" ", commandLine) + "'");
 		}
-		return BatchCompiler.compile(concat(" ", commandLine), new PrintWriter(getOutputWriter()), new PrintWriter(
-				getErrorWriter()), null);
+		PrintWriter outWriter = getStubCompilerOutputWriter();
+		return BatchCompiler.compile(concat(" ", commandLine), outWriter, outWriter, null);
+	}
+
+	private PrintWriter getStubCompilerOutputWriter() {
+		Writer debugWriter = new Writer() {
+			@Override
+			public void write(char[] data, int offset, int count) throws IOException {
+				String message = String.copyValueOf(data, offset, count);
+				if (!Strings.isEmpty(message.trim())) {
+					log.debug(message);
+				}
+			}
+
+			@Override
+			public void flush() throws IOException {
+			}
+
+			@Override
+			public void close() throws IOException {
+			}
+		};
+		return new PrintWriter(debugWriter);
 	}
 
 	protected List<Issue> validate(ResourceSet resourceSet) {
@@ -757,7 +723,7 @@ public class XtendBatchCompiler {
 		for (Issue issue : issues) {
 			StringBuilder issueBuilder = createIssueMessage(issue);
 			if (Severity.ERROR == issue.getSeverity()) {
-				new PrintWriter(getErrorWriter()).append(issueBuilder.toString());
+				log.error(issueBuilder.toString());
 			} else if (Severity.WARNING == issue.getSeverity()) {
 				log.warn(issueBuilder.toString());
 			}
@@ -890,5 +856,31 @@ public class XtendBatchCompiler {
 		}
 		return true;
 	}
+	
+	@Deprecated
+	protected Writer outputWriter;
+	@Deprecated
+	protected Writer errorWriter;
 
+	@Deprecated
+	public Writer getOutputWriter() {
+		log.warn("XtendBatchCompiler.getOutputWriter has been deprecated");
+		return new CharArrayWriter();
+	}
+
+	@Deprecated
+	public void setOutputWriter(Writer ouputWriter) {
+		log.warn("XtendBatchCompiler.setOutputWriter has been deprecated");
+	}
+
+	@Deprecated
+	public Writer getErrorWriter() {
+		log.warn("XtendBatchCompiler.getErrorWriter has been deprecated");
+		return new CharArrayWriter();
+	}
+
+	@Deprecated
+	public void setErrorWriter(Writer errorWriter) {
+		log.warn("XtendBatchCompiler.setErrorWriter has been deprecated");
+	}
 }
