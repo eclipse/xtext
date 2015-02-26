@@ -152,6 +152,13 @@ public class IssueCodes {
 	public static final String DUPLICATE_TYPE = ISSUE_CODE_PREFIX + "duplicate_type";
 	
 	public static final String INVALID_SUPER_CALL = ISSUE_CODE_PREFIX +  "invalid_super_call";
+	
+	/**
+	 * In default methods, we need to use qualified super calls. Disabled by default. Enable if your language
+	 * generates code with default methods.
+	 */
+	public static final String UNQUALIFIED_SUPER_CALL = ISSUE_CODE_PREFIX +  "unqualified_super_call";
+	
 	/**
 	 * An explicit invocation of an abstract method. This is only relevant when using <code>super</code>, e.g. calling
 	 * <code>super.foo()</code> when <code>foo()</code> is declared abstract in the super class.
