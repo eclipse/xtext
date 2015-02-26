@@ -297,7 +297,7 @@ Property:
 							CancelIndicator indicator)
 </code></pre>
 
-<p>The <a href="">IEvaluationContext</a> keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>:</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/IEvaluationContext.java">IEvaluationContext</a> keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>:</p>
 
 <pre><code class="language-java">@Inject private XbaseInterpreter xbaseInterpreter;
 
