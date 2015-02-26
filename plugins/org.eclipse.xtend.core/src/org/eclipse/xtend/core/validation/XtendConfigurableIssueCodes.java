@@ -23,7 +23,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 
-
 	@Override
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 		super.initialize(iAcceptor);
@@ -37,5 +36,10 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(create(IssueCodes.ORPHAN_ELMENT, SeverityConverter.SEVERITY_IGNORE));
 		// overwrite xbase default
 		iAcceptor.accept(create(org.eclipse.xtext.xbase.validation.IssueCodes.COPY_JAVA_PROBLEMS, SeverityConverter.SEVERITY_ERROR));
+	}
+	
+	@Override
+	protected String getUnqualifiedSuperCallSeverity() {
+		return SeverityConverter.SEVERITY_ERROR;
 	}
 }

@@ -82,6 +82,12 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(createDelegate(IssueCodes.DEPRECATED_MEMBER_REFERENCE, COMPILER_PB_DEPRECATION));
 		
 		iAcceptor.accept(create(IssueCodes.DUPLICATE_TYPE, SeverityConverter.SEVERITY_ERROR));
+		
+		iAcceptor.accept(create(IssueCodes.UNQUALIFIED_SUPER_CALL, getUnqualifiedSuperCallSeverity()));
+	}
+
+	protected String getUnqualifiedSuperCallSeverity() {
+		return SeverityConverter.SEVERITY_IGNORE;
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {

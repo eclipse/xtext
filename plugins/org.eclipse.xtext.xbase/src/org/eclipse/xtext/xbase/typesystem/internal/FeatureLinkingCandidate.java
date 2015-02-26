@@ -240,12 +240,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					if (!enclosingTypes.isEmpty())
 						declaringType = enclosingTypes.get(0);
 					if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isInterface()) {
-						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-								IssueCodes.INVALID_SUPER_CALL,
-								"Unqualified super reference is not allowed in interface context", getExpression(),
-								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-						result.accept(diagnostic);
-						return false;
+						if (!getState().isIgnored(IssueCodes.UNQUALIFIED_SUPER_CALL)) {
+							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(getState().getSeverity(IssueCodes.UNQUALIFIED_SUPER_CALL),
+									IssueCodes.UNQUALIFIED_SUPER_CALL,
+									"Unqualified super reference is not allowed in interface context", getExpression(),
+									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+							result.accept(diagnostic);
+							return false;
+						}
 					} else if (declaringType != null && declaringType != feature && declaringType.isLocal()) {
 						XClosure closure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
 						if (closure != null) {
