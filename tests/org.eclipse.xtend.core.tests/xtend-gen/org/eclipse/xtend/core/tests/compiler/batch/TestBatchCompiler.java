@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -45,6 +44,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -57,6 +57,9 @@ import org.junit.runner.RunWith;
 @IgnoredBySmokeTest
 @SuppressWarnings("all")
 public class TestBatchCompiler {
+  @Rule
+  public final LoggingTester loggingTester = new LoggingTester();
+  
   @Inject
   private XtendBatchCompiler batchCompiler;
   
@@ -161,15 +164,22 @@ public class TestBatchCompiler {
   
   @Test
   public void testInvalidConfiguration() {
-    final Runnable _function = new Runnable() {
+    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
+    this.batchCompiler.compile();
+    final List<LoggingTester.LogEntry> log = this.loggingTester.getLogEntries();
+    String _string = log.toString();
+    final Function1<LoggingTester.LogEntry, Boolean> _function = new Function1<LoggingTester.LogEntry, Boolean>() {
       @Override
-      public void run() {
-        TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-        TestBatchCompiler.this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
-        TestBatchCompiler.this.batchCompiler.compile();
+      public Boolean apply(final LoggingTester.LogEntry it) {
+        String _message = it.getMessage();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("cannot be a child of the configured source directory");
+        return Boolean.valueOf(_message.contains(_builder));
       }
     };
-    LoggingTester.countErrorLogging(XtendBatchCompiler.class, _function);
+    boolean _exists = IterableExtensions.<LoggingTester.LogEntry>exists(log, _function);
+    Assert.assertTrue(_string, _exists);
   }
   
   @Test
@@ -790,26 +800,19 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons1() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
-    final StringBuilder errorBuffer = new StringBuilder();
-    this.batchCompiler.setErrorWriter(new Writer() {
-      @Override
-      public void close() throws IOException {
-      }
-      
-      @Override
-      public void flush() throws IOException {
-      }
-      
-      @Override
-      public void write(final char[] cbuf, final int off, final int len) throws IOException {
-        errorBuffer.append(cbuf, off, len);
-      }
-    });
     boolean _compile = this.batchCompiler.compile();
     Assert.assertFalse(_compile);
-    final String errors = errorBuffer.toString();
-    boolean _contains = errors.contains("Problem during instantiation of mypackage.Processor");
-    Assert.assertTrue(errors, _contains);
+    final List<LoggingTester.LogEntry> log = this.loggingTester.getLogEntries();
+    String _string = log.toString();
+    final Function1<LoggingTester.LogEntry, Boolean> _function = new Function1<LoggingTester.LogEntry, Boolean>() {
+      @Override
+      public Boolean apply(final LoggingTester.LogEntry it) {
+        String _message = it.getMessage();
+        return Boolean.valueOf(_message.contains("Problem during instantiation of mypackage.Processor"));
+      }
+    };
+    boolean _exists = IterableExtensions.<LoggingTester.LogEntry>exists(log, _function);
+    Assert.assertTrue(_string, _exists);
   }
   
   @Test
