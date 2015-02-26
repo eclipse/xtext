@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.inject.Inject;
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 public class ContentAssistTestLanguageProposalProvider extends AbstractContentAssistTestLanguageProposalProvider {
