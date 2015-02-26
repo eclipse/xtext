@@ -19,11 +19,11 @@
   }
 </code></pre>
 
-<p>If <code>fileContentsToString()</code> throws an <a href="http://docs.oracle.com/javase/8/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="04_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="05_xtend_expressions.html#blocks">block expression</a> or a <a href="05_xtend_expressions.html#templates">template expression</a>.</p>
+<p>If <code>fileContentsToString()</code> throws an <a href="http://docs.oracle.com/javase/8/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="202_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="203_xtend_expressions.html#blocks">block expression</a> or a <a href="203_xtend_expressions.html#templates">template expression</a>.</p>
 
 <h2 id="xtend-expressions-literals">Literals</h2>
 
-<p>A literal denotes a fixed, unchangeable value. Literals for <a href="05_xtend_expressions.html#string-literals">strings</a>, <a href="05_xtend_expressions.html#number-literals">numbers</a>, <a href="05_xtend_expressions.html#boolean-literal">booleans</a>, <code>null</code> and <a href="05_xtend_expressions.html#type-literal">Java types</a> are supported as well as literals for unmodifiable collection types like lists, sets and maps or literals for arrays.</p>
+<p>A literal denotes a fixed, unchangeable value. Literals for <a href="203_xtend_expressions.html#string-literals">strings</a>, <a href="203_xtend_expressions.html#number-literals">numbers</a>, <a href="203_xtend_expressions.html#boolean-literal">booleans</a>, <code>null</code> and <a href="203_xtend_expressions.html#type-literal">Java types</a> are supported as well as literals for unmodifiable collection types like lists, sets and maps or literals for arrays.</p>
 
 <h3 id="string-literals">String Literals</h3>
 
@@ -47,7 +47,7 @@
 
 <h3 id="number-literals">Number Literals</h3>
 
-<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="05_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
+<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="203_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
 
 <pre><code class="language-xtend">42
 1_234_567_890 
@@ -127,7 +127,7 @@ val myMap = newLinkedHashMap('a' -&gt; 1, 'b' -&gt; 2)
 
 <h3 id="arrays">Arrays</h3>
 
-<p>Java arrays can be created either using a <a href="05_xtend_expressions.html#collection-literals">literal</a> as described in the previous section, or if it should be a new array with a fixed size, one of the methods from <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java">ArrayLiterals</a> can be used. The generic <code>newArrayOfSize(int)</code> method works for all reference types, while there is a specific factory method for each primitive type.</p>
+<p>Java arrays can be created either using a <a href="203_xtend_expressions.html#collection-literals">literal</a> as described in the previous section, or if it should be a new array with a fixed size, one of the methods from <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java">ArrayLiterals</a> can be used. The generic <code>newArrayOfSize(int)</code> method works for all reference types, while there is a specific factory method for each primitive type.</p>
 
 <p>Example: </p>
 
@@ -157,7 +157,7 @@ val List&lt;Integer&gt; myList = myArray
 42 as Integer
 </code></pre>
 
-<p>Instead of a plain type cast it&#8217;s also possible to use a <a href="05_xtend_expressions.html#switch-expression">switch with a type guard</a> which performs both the casting and the instance-of check. <a href="04_xtend_classes_members.html#polymorphic-dispatch">Dispatch methods</a> are another alternative to casts that offers the potential to enhance the number of expected and handled types in subclasses.</p>
+<p>Instead of a plain type cast it&#8217;s also possible to use a <a href="203_xtend_expressions.html#switch-expression">switch with a type guard</a> which performs both the casting and the instance-of check. <a href="202_xtend_classes_members.html#polymorphic-dispatch">Dispatch methods</a> are another alternative to casts that offers the potential to enhance the number of expected and handled types in subclasses.</p>
 
 <h2 id="operators">Infix Operators and Operator Overloading</h2>
 
@@ -414,7 +414,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 
 <h4 id="elvis-operator">Elvis Operator</h4>
 
-<p>In addition to <a href="05_xtend_expressions.html#null-safe-feature-calls">null-safe feature calls</a> Xtend supports the elvis operator known from Groovy.</p>
+<p>In addition to <a href="203_xtend_expressions.html#null-safe-feature-calls">null-safe feature calls</a> Xtend supports the elvis operator known from Groovy.</p>
 
 <pre><code class="language-xtend">val salutation = person.firstName ?: 'Sir/Madam' 
 </code></pre>
@@ -487,7 +487,7 @@ list.reverseView.forEach[
 
 <h3 id="assignments">Assignments</h3>
 
-<p><a href="05_xtend_expressions.html#variable-declaration">Local variables</a> can be assigned using the <code>=</code> operator. </p>
+<p><a href="203_xtend_expressions.html#variable-declaration">Local variables</a> can be assigned using the <code>=</code> operator. </p>
 
 <pre><code class="language-xtend">var greeting = 'Hello'
 if (isInformal)
@@ -506,7 +506,7 @@ if (isInformal)
 <pre><code class="language-xtend">myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")
 </code></pre>
 
-<p>The setter is only used if the field is not accessible from the given context. That is why the <a href="06_activeannotations.html#property-annotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.</p>
+<p>The setter is only used if the field is not accessible from the given context. That is why the <a href="204_activeannotations.html#property-annotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.</p>
 
 <p>The return type of an assignment is the type of the right hand side, in case it is a simple assignment. If it is translated to a setter method it yields whatever the setter method returns.</p>
 
@@ -552,7 +552,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h2 id="blocks">Blocks</h2>
 
-<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>. <a href="05_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block&#8217;s last expression.</p>
+<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block&#8217;s last expression.</p>
 
 <p>A block expression is surrounded by curly braces. The expressions in a block can be terminated by an optional semicolon.</p>
 
@@ -576,7 +576,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h2 id="variable-declaration">Variable Declarations</h2>
 
-<p>Variable declarations are only allowed within <a href="05_xtend_expressions.html#blocks">blocks</a>. They are visible from any subsequent expressions in the block. </p>
+<p>Variable declarations are only allowed within <a href="203_xtend_expressions.html#blocks">blocks</a>. They are visible from any subsequent expressions in the block. </p>
 
 <p>A variable declaration starting with the keyword <code>val</code> denotes a value, which is essentially a final, unsettable variable. The variable needs to be declared with the keyword <code>var</code>, which stands for &#8216;variable&#8217; if it should be allowed to reassign its value.</p>
 
@@ -592,11 +592,11 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 }
 </code></pre>
 
-<p>Shadowing variables from outer scopes is not allowed, the only exception is the <a href="05_xtend_expressions.html#implicit-variables">implicit variable</a><code>it</code>.</p>
+<p>Shadowing variables from outer scopes is not allowed, the only exception is the <a href="203_xtend_expressions.html#implicit-variables">implicit variable</a><code>it</code>.</p>
 
 <p>Variables declared outside of a lambda expression using the <code>var</code> keyword are not accessible from within the lambda expressions.</p>
 
-<p>A local variable can be marked with the <code>extension</code> keyword to make its methods available as extensions (<a href="04_xtend_classes_members.html#extension-provider">see extension provider</a>). </p>
+<p>A local variable can be marked with the <code>extension</code> keyword to make its methods available as extensions (<a href="202_xtend_classes_members.html#extension-provider">see extension provider</a>). </p>
 
 <h3 id="typing">Typing</h3>
 
@@ -641,9 +641,9 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 name = 'Horst' // translates to 'it.setName("Horst");'
 </code></pre>
 
-<p>Another speciality of the variable <code>it</code> is that it is allowed to be shadowed. This is especially useful when used together with <a href="05_xtend_expressions.html#lambdas">lambda expressions</a>.</p>
+<p>Another speciality of the variable <code>it</code> is that it is allowed to be shadowed. This is especially useful when used together with <a href="203_xtend_expressions.html#lambdas">lambda expressions</a>.</p>
 
-<p>As <code>this</code> is bound to the surrounding object in Java, <code>it</code> can be used in finer-grained constructs such as <a href="05_xtend_expressions.html#lambdas">lambda expressions</a>. That is why <code>it.myProperty</code> has higher precedence than <code>this.myProperty</code>.</p>
+<p>As <code>this</code> is bound to the surrounding object in Java, <code>it</code> can be used in finer-grained constructs such as <a href="203_xtend_expressions.html#lambdas">lambda expressions</a>. That is why <code>it.myProperty</code> has higher precedence than <code>this.myProperty</code>.</p>
 
 <h3 id="static-access">Static Access</h3>
 
@@ -658,7 +658,7 @@ com.acme.MyClass::myMethod('foo')
 com::acme::MyClass::myMethod('foo')
 </code></pre>
 
-<p>Alternatively you could import the method or field using a <a href="04_xtend_classes_members.html#imports">static import</a>.</p>
+<p>Alternatively you could import the method or field using a <a href="202_xtend_classes_members.html#imports">static import</a>.</p>
 
 <h3 id="null-safe-feature-calls">Null-Safe Feature Calls</h3>
 
@@ -792,7 +792,7 @@ val Function1&lt;? super String,? extends String&gt; same = [ toUpperCase ]
 val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (String)=&gt;String
 </code></pre>
 
-<p>Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the <a href="04_xtend_classes_members.html#declared-exceptions">sneaky-throw technique</a>. Of course you can always <a href="05_xtend_expressions.html#xtend-expressions-try-catch">catch and handle</a> them.</p>
+<p>Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the <a href="202_xtend_classes_members.html#declared-exceptions">sneaky-throw technique</a>. Of course you can always <a href="203_xtend_expressions.html#xtend-expressions-try-catch">catch and handle</a> them.</p>
 
 <h2 id="anonymous-classes">Anonymous Classes</h2>
 
@@ -854,7 +854,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 
 <p>If a case is a match, that is it evaluates to <code>true</code> or the result equals the one we are switching over, the case expression after the colon is evaluated and is the result of the whole switch expression.</p>
 
-<p>The main expression can also be a computed value instead of a field or variable. If you want to reuse that value in the body of the switch expression, you can create a local value for that by using the following notation which is similar to the syntax in <a href="05_xtend_expressions.html#for-loop"><code>for</code> loops</a>.</p>
+<p>The main expression can also be a computed value instead of a field or variable. If you want to reuse that value in the body of the switch expression, you can create a local value for that by using the following notation which is similar to the syntax in <a href="203_xtend_expressions.html#for-loop"><code>for</code> loops</a>.</p>
 
 <pre><code class="language-xtend">switch myString : someComputation() {
   ..
@@ -948,7 +948,7 @@ while ((i=i+1) &lt; max)
 <pre><code class="language-xtend">do expression while (predicate)
 </code></pre>
 
-<p>is used to execute a certain expression until the predicate is evaluated to <code>false</code>. The difference to the <a href="05_xtend_expressions.html#while-expression">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time. The type of a do-while loop is <code>void</code>.</p>
+<p>is used to execute a certain expression until the predicate is evaluated to <code>false</code>. The difference to the <a href="203_xtend_expressions.html#while-expression">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time. The type of a do-while loop is <code>void</code>.</p>
 
 <pre><code class="language-xtend">do {
   doSideEffect("foo");
@@ -960,7 +960,7 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)
 
 <h2 id="xtend-expressions-return">Return Expression</h2>
 
-<p>A method or lambda expression automatically returns the value of its body expression. If it is a <a href="05_xtend_expressions.html#blocks">block expression</a> this is the value of the last expression in it. However, sometimes you want to return early or make it explicit.</p>
+<p>A method or lambda expression automatically returns the value of its body expression. If it is a <a href="203_xtend_expressions.html#blocks">block expression</a> this is the value of the last expression in it. However, sometimes you want to return early or make it explicit.</p>
 
 <p>The syntax is just like in Java:</p>
 
@@ -985,7 +985,7 @@ if (myList.isEmpty)
 
 <h2 id="xtend-expressions-try-catch">Try, Catch, Finally</h2>
 
-<p>The try-catch-finally expression is used to handle exceptional situations. Checked exceptions are treated like runtime exceptions and only optionally validated. You can but do not have to catch them as they will be silently thrown (see the <a href="04_xtend_classes_members.html#declared-exceptions">section on declared exceptions</a>).</p>
+<p>The try-catch-finally expression is used to handle exceptional situations. Checked exceptions are treated like runtime exceptions and only optionally validated. You can but do not have to catch them as they will be silently thrown (see the <a href="202_xtend_classes_members.html#declared-exceptions">section on declared exceptions</a>).</p>
 
 <pre><code class="language-xtend">try {
   throw new RuntimeException()
@@ -1040,7 +1040,7 @@ if (myList.isEmpty)
 
 <p>As you can see, template expressions can be used as the body of a method. If an interpolation expression evaluates to <code>null</code> an empty string is added.</p>
 
-<p>Template expressions can occur everywhere. Here is an example showing it in conjunction with the powerful <a href="05_xtend_expressions.html#switch-expression">switch expression</a>:</p>
+<p>Template expressions can occur everywhere. Here is an example showing it in conjunction with the powerful <a href="203_xtend_expressions.html#switch-expression">switch expression</a>:</p>
 
 <pre><code class="language-xtend">def toText(Node n) {
   switch n {
@@ -1214,7 +1214,7 @@ if (myList.isEmpty)
 
 <hr />
 
-<p><strong><a href="06_activeannotations.html">Next Chapter: Active Annotations</a></strong></p>
+<p><strong><a href="204_activeannotations.html">Next Chapter: Active Annotations</a></strong></p>
 
 
 </body>

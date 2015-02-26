@@ -40,7 +40,7 @@
 }
 </code></pre>
 
-<p>A movie is a POJO with a strongly typed field for each column in the data sets. The <a href="06_activeannotations.html#data-annotation">@Data</a> annotation will turn the class into an immutable value class, that is it will get </p>
+<p>A movie is a POJO with a strongly typed field for each column in the data sets. The <a href="204_activeannotations.html#data-annotation">@Data</a> annotation will turn the class into an immutable value class, that is it will get </p>
 
 <ul>
   <li>a getter-method for each field,</li>
@@ -72,21 +72,21 @@ class Movies {
 }
 </code></pre>
 
-<p>A <a href="04_xtend_classes_members.html#fields">field&#8217;s type</a> can be inferred from the expression on the right hand-side. That is called local type inference and is supported everywhere in Xtend. We want the field to be final, so we declare it as a value using the keyword <code>val</code>.</p>
+<p>A <a href="202_xtend_classes_members.html#fields">field&#8217;s type</a> can be inferred from the expression on the right hand-side. That is called local type inference and is supported everywhere in Xtend. We want the field to be final, so we declare it as a value using the keyword <code>val</code>.</p>
 
-<p>The initialization on the right hand side first creates a new <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html">FileReader</a>. Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you will not find such a method. In fact <code>readLines()</code> is a static method from Google Guava&#8217;s <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html">CharStreams</a> which was imported as an <a href="04_xtend_classes_members.html#extension-imports">extension</a>. Extensions allow us to use this readable syntax.</p>
+<p>The initialization on the right hand side first creates a new <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html">FileReader</a>. Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you will not find such a method. In fact <code>readLines()</code> is a static method from Google Guava&#8217;s <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html">CharStreams</a> which was imported as an <a href="202_xtend_classes_members.html#extension-imports">extension</a>. Extensions allow us to use this readable syntax.</p>
 
 <pre><code class="language-xtend">import static extension com.google.common.io.CharStreams.*
 </code></pre>
 
 <p><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html"><code>CharStreams.readLines(Reader)</code></a> returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List&lt;String&gt;</code></a> on which we call another extension method <code>map</code>. This one is defined in the runtime library (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">ListExtensions.map(&#8230;)</a>) and is automatically imported and therefore available on all lists. The <code>map</code> extension expects a function as a parameter. It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.</p>
 
-<p>Function objects are created using <a href="05_xtend_expressions.html#lambdas">lambda expressions</a> (the code in squared brackets). Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using two whitespace characters as the separator. On the result of the split operation, the method <code>iterator()</code> is invoked. As you might know <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String.split(String)</a> returns a string array (<code>String[]</code>), which Xtend <a href="03_types.html#conversion-rules">auto-converts to a list</a> when we call <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html"><code>Iterable.iterator()</code></a> on it.</p>
+<p>Function objects are created using <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> (the code in squared brackets). Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using two whitespace characters as the separator. On the result of the split operation, the method <code>iterator()</code> is invoked. As you might know <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String.split(String)</a> returns a string array (<code>String[]</code>), which Xtend <a href="201_types.html#conversion-rules">auto-converts to a list</a> when we call <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html"><code>Iterable.iterator()</code></a> on it.</p>
 
 <pre><code class="language-xtend">val segments = line.split('  ').iterator
 </code></pre>
 
-<p>Now we use the iterator to create an instance of <code>Movie</code> for each String that it yields. The data type conversion (e.g. <code>String</code> to <code>int</code>) is done by calling <a href="05_xtend_expressions.html#static-access">static methods</a> from the wrapper types. The rest of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> is turned into a set of categories. Therefore, the extension method <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java"><code>IteratorExtensions.toSet(Iterator&lt;T&gt;)</code></a> is invoked on the iterator to consume its remaining values.</p>
+<p>Now we use the iterator to create an instance of <code>Movie</code> for each String that it yields. The data type conversion (e.g. <code>String</code> to <code>int</code>) is done by calling <a href="203_xtend_expressions.html#static-access">static methods</a> from the wrapper types. The rest of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> is turned into a set of categories. Therefore, the extension method <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java"><code>IteratorExtensions.toSet(Iterator&lt;T&gt;)</code></a> is invoked on the iterator to consume its remaining values.</p>
 
 <pre><code class="language-xtend">return new Movie (
   segments.next, 
@@ -114,7 +114,7 @@ class Movies {
 <pre><code class="language-xtend">movies.filter[ movie | movie.categories.contains('Action') ].size
 </code></pre>
 
-<p>but since we left out the name and the vertical bar the variable is automatically named <code>it</code>. <code>it</code> is an <a href="05_xtend_expressions.html#implicit-variables">implicit variable</a>. It&#8217;s uses are similar to the implicit variable <code>this</code>. We can write either</p>
+<p>but since we left out the name and the vertical bar the variable is automatically named <code>it</code>. <code>it</code> is an <a href="203_xtend_expressions.html#implicit-variables">implicit variable</a>. It&#8217;s uses are similar to the implicit variable <code>this</code>. We can write either</p>
 
 <pre><code class="language-xtend">movies.filter[ it.categories.contains('Action') ].size
 </code></pre>
@@ -134,7 +134,7 @@ class Movies {
 }
 </code></pre>
 
-<p>Here we <code>filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80&#8217;s). The <code>..</code> operator is again an extension defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a> and returns an instance of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java">IntegerRange</a>. Operator overloading is explained in <a href="05_xtend_expressions.html#operators">section</a>.</p>
+<p>Here we <code>filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80&#8217;s). The <code>..</code> operator is again an extension defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a> and returns an instance of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java">IntegerRange</a>. Operator overloading is explained in <a href="203_xtend_expressions.html#operators">section</a>.</p>
 
 <p>The resulting iterable is sorted (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java"><code>IterableExtensions.sortBy</code></a>) by the <code>rating</code> of the movies. Since it is sorted in ascending order, we take the last movie from the list and return its <code>year</code>. </p>
 
@@ -150,7 +150,7 @@ class Movies {
 
 <p>Note that first sorting and then taking the last or first is slightly more expensive than needed. We could have used the method <code>reduce</code> instead to find the best movie which would be more efficient. Maybe you want to try it on your own?</p>
 
-<p>The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding <a href="05_xtend_expressions.html#property-access">getter methods</a>.</p>
+<p>The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding <a href="203_xtend_expressions.html#property-access">getter methods</a>.</p>
 
 <h3 id="question3">Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?</h3>
 
@@ -166,7 +166,7 @@ class Movies {
 
 <hr />
 
-<p><strong><a href="03_types.html">Next Chapter: Java Interoperability</a></strong></p>
+<p><strong><a href="201_types.html">Next Chapter: Java Interoperability</a></strong></p>
 
 
 </body>

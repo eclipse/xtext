@@ -119,4 +119,4 @@ Now type in `println('Hello World')`, save and run the application. To do so use
 
 ![](images/run_as_java_application.png)
 
-[Click here for the next steps and more examples.](documentation/01_gettingstarted.html)
+[Click here for the next steps and more examples.](documentation/101_gettingstarted.html)

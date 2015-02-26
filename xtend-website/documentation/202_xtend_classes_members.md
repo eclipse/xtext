@@ -52,13 +52,13 @@ import static java.util.Collections.sort
 import static org.junit.Assert.*
 ```
 
-Static methods can also be imported as `extension`s. See the section on [extension methods](04_xtend_classes_members.html#extension-methods) for details.
+Static methods can also be imported as `extension`s. See the section on [extension methods](202_xtend_classes_members.html#extension-methods) for details.
 
 ## Class Declaration {#xtend-class-declaration}
 
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects: All Xtend types are `public` by default since that's the common case. Java's "package private" default visibility is declared by the more explicit keyword `package` in Xtend. In contrast to Java, Xtend supports multiple public top level class declarations per file. Each Xtend class is compiled to a separate top-level Java class.
 
-Abstract classes are defined using the `abstract` modifier as in Java. See also [abstract methods](04_xtend_classes_members.html#abstract-methods).
+Abstract classes are defined using the `abstract` modifier as in Java. See also [abstract methods](202_xtend_classes_members.html#abstract-methods).
 
 Xtend's approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, [Object]({{site.javadoc.java}}/java/lang/Object.html) is used. 
 
@@ -115,11 +115,11 @@ class MyClass {
 
 The default visibility for fields is `private`. You can also declare it explicitly as being `public`, `protected`, `package` or `private`. 
 
-A specialty of Xtend are fields that provide *extension methods* which are covered in [their own section](04_xtend_classes_members.html#extension-methods).
+A specialty of Xtend are fields that provide *extension methods* which are covered in [their own section](202_xtend_classes_members.html#extension-methods).
 
 ## Methods {#methods}
 
-Xtend methods are declared within a class and are translated to a corresponding Java method with exactly the same signature. The only exceptions are dispatch methods, which are explained [later](04_xtend_classes_members.html#polymorphic-dispatch).
+Xtend methods are declared within a class and are translated to a corresponding Java method with exactly the same signature. The only exceptions are dispatch methods, which are explained [later](202_xtend_classes_members.html#polymorphic-dispatch).
 
 ```xtend
 def String first(List<String> elements) {
@@ -129,7 +129,7 @@ def String first(List<String> elements) {
 
 Method declarations start with the keyword `def`. The default visibility of a method is `public`. You can explicitly declare it as being `public`, `protected`, `package` or `private`.
 
-Xtend supports the `static` modifier for methods and can [infer](04_xtend_classes_members.html#inferred-return-types) the return type if it is not explicitly given: 
+Xtend supports the `static` modifier for methods and can [infer](202_xtend_classes_members.html#inferred-return-types) the return type if it is not explicitly given: 
 
 ```xtend
 def static createInstance() {
@@ -229,7 +229,7 @@ Type parameter bounds and constraints are supported and share the same syntax an
 
 ### Operator Declarations {#operator-declaration}
 
-Xtend supports operator overloading based on an operator-name-mapping as explained in [](05_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the following:
+Xtend supports operator overloading based on an operator-name-mapping as explained in [](203_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the following:
 
 ```xtend
 class Money {
@@ -242,7 +242,7 @@ class Money {
 
 ### Dispatch Methods {#polymorphic-dispatch}
 
-Generally, method resolution and binding is done statically at compile time as in Java. Method calls are bound based on the static types of arguments. Sometimes this is not what you want. Especially in the context of [extension methods](04_xtend_classes_members.html#extension-methods) you would like to have polymorphic behavior.
+Generally, method resolution and binding is done statically at compile time as in Java. Method calls are bound based on the static types of arguments. Sometimes this is not what you want. Especially in the context of [extension methods](202_xtend_classes_members.html#extension-methods) you would like to have polymorphic behavior.
 
 A dispatch method is declared using the keyword `dispatch`. 
 
@@ -478,7 +478,7 @@ class MyClass {
 }
 ```
 
-In addition [Active Annotations](06_activeannotations.html) allow users to participate in compilation of Xtend code to Java source code.
+In addition [Active Annotations](204_activeannotations.html) allow users to participate in compilation of Xtend code to Java source code.
 
 ## Extension Methods {#extension-methods}
 
@@ -544,7 +544,7 @@ Local static methods have to be made available through an import like any other 
 
 ### Extension Imports {#extension-imports}
 
-In Java, you would usually write a helper class with static methods to decorate an existing class with additional behavior. In order to integrate such static helper classes, Xtend allows to put the keyword `extension` after the `static` keyword of a [static import](04_xtend_classes_members.html#imports) thus making all imported static functions available as extensions methods.
+In Java, you would usually write a helper class with static methods to decorate an existing class with additional behavior. In order to integrate such static helper classes, Xtend allows to put the keyword `extension` after the `static` keyword of a [static import](202_xtend_classes_members.html#imports) thus making all imported static functions available as extensions methods.
 
 The following import declaration 
 
@@ -593,7 +593,7 @@ person.update  // calls ep.update(person)
 person.delete  // calls ep.delete(person)
 ```
 
-Using the `extension` modifier on values has a significant advantage over static [extension imports](04_xtend_classes_members.html#extension-imports): Your code is not bound to the actual implementation of the extension method. You can simply exchange the component that provides the referenced extension with another implementation from outside, by providing a different instance.
+Using the `extension` modifier on values has a significant advantage over static [extension imports](202_xtend_classes_members.html#extension-imports): Your code is not bound to the actual implementation of the extension method. You can simply exchange the component that provides the referenced extension with another implementation from outside, by providing a different instance.
 
 ## Interface Declarations {#interfaces}
 
@@ -720,4 +720,4 @@ annotation MyAnnotation {
 
 ---
 
-**[Next Chapter: Expressions](05_xtend_expressions.html)**
+**[Next Chapter: Expressions](203_xtend_expressions.html)**

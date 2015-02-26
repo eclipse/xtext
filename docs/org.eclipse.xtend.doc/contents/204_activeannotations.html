@@ -27,10 +27,10 @@ annotation Extract {}
 <p>A processor class must implement one or more of the lifecycle call-back interfaces provided by the compiler. This interfaces are: </p>
 
 <ul>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">RegisterGlobalsParticipant</a> The first call back. Only called to register type names when a global symbol table (i.e. index) is created. See <a href="06_activeannotations.html#active-annotations-register-globals">Phase 1</a>.</li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">TransformationParticipant</a> This callback is often the most useful, as it allows to alter the translated Java structure by e.g. adding, removing or altering members See <a href="06_activeannotations.html#active-annotations-transformation-phase">Phase 2</a>.</li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/ValidationParticipant.java">ValidationParticipant</a> Although you can already do validation during transformation, you are only during this callback allowed to fully resolve any types. See <a href="06_activeannotations.html#active-annotations-validation-phase">Phase 3</a>.</li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java">CodeGenerationParticipant</a> If you want to generate some additional text, e.g. XML, this hook is for you. See <a href="06_activeannotations.html#active-annotations-code-generation">Phase 4</a>.</li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">RegisterGlobalsParticipant</a> The first call back. Only called to register type names when a global symbol table (i.e. index) is created. See <a href="204_activeannotations.html#active-annotations-register-globals">Phase 1</a>.</li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">TransformationParticipant</a> This callback is often the most useful, as it allows to alter the translated Java structure by e.g. adding, removing or altering members See <a href="204_activeannotations.html#active-annotations-transformation-phase">Phase 2</a>.</li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/ValidationParticipant.java">ValidationParticipant</a> Although you can already do validation during transformation, you are only during this callback allowed to fully resolve any types. See <a href="204_activeannotations.html#active-annotations-validation-phase">Phase 3</a>.</li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java">CodeGenerationParticipant</a> If you want to generate some additional text, e.g. XML, this hook is for you. See <a href="204_activeannotations.html#active-annotations-code-generation">Phase 4</a>.</li>
 </ul>
 
 <p>There are base classes that implment all callback interfaces. You should subclass one of those depending on your annotation target: </p>
@@ -111,7 +111,7 @@ annotation Extract {}
 }
 </code></pre>
 
-<p>In the first line, <code>findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase: The method is defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> which is used as an <a href="04_xtend_classes_members.html#extension-provider">extension provider</a>.</p>
+<p>In the first line, <code>findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase: The method is defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> which is used as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>.</p>
 
 <p>Next up the newly created interface is added to the existing list of implemented interfaces. </p>
 
@@ -211,7 +211,7 @@ annotation Extract {}
 
 <p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> inherits methods for exactly that purpose from the <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java">ProblemSupport</a> service.</p>
 
-<p>Since the <code>context</code> is declared as an <a href="04_xtend_classes_members.html#extension-provider">extension provider</a>, those methods can be used as extensions and it allows to implement the constraint check accordingly:</p>
+<p>Since the <code>context</code> is declared as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>, those methods can be used as extensions and it allows to implement the constraint check accordingly:</p>
 
 <pre><code class="language-xtend">override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
   if (field.type.primitive)

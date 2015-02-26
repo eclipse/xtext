@@ -11,7 +11,7 @@ Java generics are fully supported as well: You can define type parameters on met
 
 Resembling and supporting every aspect of Java's type system ensures that there is no impedance mismatch between Java and Xtend. This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles. As a bonus, if you know Java's type system and are familiar with Java's generic types, you already know the most complicated part of Xtend.
 
-The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version compatibility as specified for the Java compiler in the respective project. This can be changed in the global preferences or in the project properties on the *Xtend &rarr; Compiler* page (since 2.8). Depending on which Java language version is chosen, Xtend might generate different but equivalent code. For example, [lambda expressions](05_xtend_expressions.html#lambdas) are translated to Java lambdas if the compiler is set to Java 8, while for lower Java versions anonymous classes are generated.
+The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version compatibility as specified for the Java compiler in the respective project. This can be changed in the global preferences or in the project properties on the *Xtend &rarr; Compiler* page (since 2.8). Depending on which Java language version is chosen, Xtend might generate different but equivalent code. For example, [lambda expressions](203_xtend_expressions.html#lambdas) are translated to Java lambdas if the compiler is set to Java 8, while for lower Java versions anonymous classes are generated.
 
 ## Type Inference {#local-type-inference}
 
@@ -46,8 +46,8 @@ Subsequent changes to the array are reflected by the list and vice versa. Arrays
 
 The conversion works the other way round, too. In fact, all subtypes of [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html) are automatically converted to arrays on demand.
 
-Another very useful conversion applies to lambda expressions. A lambda expression usually is of one of the types declared in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). However, if the expected type is an interface or a class with a single abstract method declaration, a lambda expression is automatically converted to that type. This allows to use lambda expressions with many existing Java libraries. See [Lambda Expression Typing](05_xtend_expressions.html#closure-types) for more details. 
+Another very useful conversion applies to lambda expressions. A lambda expression usually is of one of the types declared in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). However, if the expected type is an interface or a class with a single abstract method declaration, a lambda expression is automatically converted to that type. This allows to use lambda expressions with many existing Java libraries. See [Lambda Expression Typing](203_xtend_expressions.html#closure-types) for more details. 
 
 ---
 
-**[Next Chapter: Classes and Members](04_xtend_classes_members.html)**
+**[Next Chapter: Classes and Members](202_xtend_classes_members.html)**
