@@ -476,32 +476,6 @@ However, we strongly encourage you to use dependency injection. Now that we know
 
 If you would like to see what's in the index, you could could use the 'Open Model Element' dialog from the navigation menu entry.
 
-#### Global Scopes Based On Explicit Imports (ImportURI Mechanism) {#import-uri}
-
-A simple and straight forward solution is to have explicit references to other resources in your file by explicitly listing paths or [URIs]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java) to all referenced resources in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy implementation of an [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) which is based on a naming convention and makes this semantics very easy to use. Talking of the introductory example and given you would want to add support for referencing external *States* and *Events* from within your state machine, all you had to do is add something like the following to the grammar definition:
-
-```xtext
-Statemachine :
-  (imports+=Import)* // allow imports
-  'events'
-     (events+=Event)+
-  'end'
-  ('resetEvents'
-     (resetEvents+=[Event])+
-  'end')?
-  'commands'
-     (commands+=Command)+
-  'end'
-  (states+=State)+;
-
-Import :
-  'import' importURI=STRING; // feature must be named importURI
-```
-
-This effectively allows import statements to be declared before the events section. In addition you will have to make sure that you have bound the [ImportUriGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java) for the type [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) by the means of [Guice](#dependency-injection). That implementation looks up any [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) named 'importURI' in your model and interprets their values as URIs that point to imported resources. That is it adds the corresponding resources to the current resource's resource set. In addition the scope provider uses the [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) of that imported resource to compute all the [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) returned by the [IScope]().
-
-Global scopes based on import URIs are available if you use the [ImportURIScopingFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java) in the workflow of your language. It will bind an [ImportUriGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java) that handles *importURI* features.
-
 #### Global Scopes Based On External Configuration (e.g. Class Path Based) {#index-based}
 
 Instead of explicitly referring to imported resources, the other possibility is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instances uses the notion of the class path to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important.
@@ -715,11 +689,21 @@ FowlerDslQualifiedNameProvider
 
 #### Importing Namespaces
 
-The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) looks up [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) with name 'importedNamespace' and interprets them as import statements. By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where
+The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) looks up [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) with name 'importedNamespace' and interprets them as import statements.
 
-`import java.util.Set;`
+```xtext
+Root:
+    imports+=Import*
+    childs+=Child*;
 
-makes it possible to refer to [java.util.Set]() by its simple name [Set](). Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:
+Import:
+    'import' importedNamespace=QualifiedName ('.*')?;
+
+QualifiedName:
+  ID ('.' ID)*;
+```
+
+By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where `import java.util.Set;` makes it possible to refer to [java.util.Set]() by its simple name [Set](). Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:
 
 ```domainexample
 package foo {
