@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractBacktrackingContentAssistTestLanguageProposalProvider;
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 public class BacktrackingContentAssistTestLanguageProposalProvider extends AbstractBacktrackingContentAssistTestLanguageProposalProvider {

@@ -9,7 +9,7 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.State
 /**
  * Provides labels for a EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class StatemachineLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider {
 

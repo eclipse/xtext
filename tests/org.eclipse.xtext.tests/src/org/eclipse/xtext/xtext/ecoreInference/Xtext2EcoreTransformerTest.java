@@ -49,7 +49,7 @@ import com.google.common.base.Joiner;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
- * @see https://www.eclipse.org/Xtext/documentation/13_grammarlanguage.html#metamodel-inference
+ * @see https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference
  */
 public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**

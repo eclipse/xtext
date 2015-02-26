@@ -6,7 +6,7 @@ package org.eclipse.xtext.testlanguages.noJdt.ui.contentassist
 import org.eclipse.xtext.testlanguages.noJdt.ui.contentassist.AbstractNoJdtTestLanguageProposalProvider
 
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class NoJdtTestLanguageProposalProvider extends AbstractNoJdtTestLanguageProposalProvider {
