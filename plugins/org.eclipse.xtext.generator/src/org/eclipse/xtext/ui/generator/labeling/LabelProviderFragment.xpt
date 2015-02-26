@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * Provides labels for EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
@@ -68,7 +68,7 @@ import com.google.inject.Inject
 /**
  * Provides labels for EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
@@ -98,7 +98,7 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
@@ -125,7 +125,7 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 

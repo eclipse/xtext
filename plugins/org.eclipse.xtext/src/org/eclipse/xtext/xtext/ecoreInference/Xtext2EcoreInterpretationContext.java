@@ -28,7 +28,7 @@ import com.google.common.collect.Sets;
 
 /**
  * Please refer to the
- * <a href="https://www.eclipse.org/Xtext/documentation/13_grammarlanguage.html#metamodel-inference">documentation</a>
+ * <a href="https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference">documentation</a>
  * for details.
  * 
  * @author Heiko Behrens - Initial contribution and API

@@ -235,7 +235,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       _builder_1.append("*");
       _builder_1.newLine();
       _builder_1.append(" ");
-      _builder_1.append("* See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation");
+      _builder_1.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation");
       _builder_1.newLine();
       _builder_1.append(" ");
       _builder_1.append("*/");

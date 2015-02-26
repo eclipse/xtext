@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * Customization of the default outline structure.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#outline
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 @SuppressWarnings("all")
 public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {

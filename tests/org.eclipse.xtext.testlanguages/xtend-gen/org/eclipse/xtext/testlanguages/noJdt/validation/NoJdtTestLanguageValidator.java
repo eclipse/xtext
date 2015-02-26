@@ -8,7 +8,7 @@ import org.eclipse.xtext.testlanguages.noJdt.validation.AbstractNoJdtTestLanguag
 /**
  * Custom validation rules.
  * 
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 @SuppressWarnings("all")
 public class NoJdtTestLanguageValidator extends AbstractNoJdtTestLanguageValidator {

@@ -12,7 +12,7 @@ import org.eclipse.xtext.validation.Issue
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
  */
 class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
 

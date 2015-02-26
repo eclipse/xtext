@@ -7,7 +7,7 @@ package org.eclipse.xtext.xbase.testlanguages.validation
 /**
  * Custom validation rules. 
  *
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class XImportSectionTestLangValidator extends AbstractXImportSectionTestLangValidator {
 

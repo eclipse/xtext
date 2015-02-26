@@ -14,7 +14,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGramma
 /**
  * This class contains custom formatting description.
  *
- * See http://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#formatting
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#formatting
  * on how and when to use it.
  *
  * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
