@@ -11,7 +11,7 @@ import org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting
 /**
  * Generates code from your model files on save.
  * 
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#code-generation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class NoJdtTestLanguageGenerator implements IGenerator {
 	
