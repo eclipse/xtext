@@ -56,7 +56,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		resource.resourceSet.URIConverter = converter
 		
 		file.eResource.resourceSet.resources += resource;
-		resource.load(in)
+		resource.loadFromStorage(in)
 		
 		// check contents
 		val jvmClass = resource.contents.get(1) as JvmGenericType
@@ -117,7 +117,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		resource.resourceSet.URIConverter = converter
 		
 		file.eResource.resourceSet.resources += resource;
-		resource.load(in)
+		resource.loadFromStorage(in)
 		
 		// check constant value was written
 		val jvmClass = resource.contents.get(1) as JvmGenericType

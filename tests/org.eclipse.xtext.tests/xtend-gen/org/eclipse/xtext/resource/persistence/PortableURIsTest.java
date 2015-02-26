@@ -129,7 +129,7 @@ public class PortableURIsTest extends AbstractXtextTests {
       URI _createURI_2 = URI.createURI("hubba:/bubba3.langatestlanguage");
       Resource _createResource_2 = resourceSet.createResource(_createURI_2);
       final StorageAwareResource resourceC = ((StorageAwareResource) _createResource_2);
-      resourceC.load(loadable);
+      resourceC.loadFromStorage(loadable);
       IResourceDescription _resourceDescription = resourceC.getResourceDescription();
       Iterable<IReferenceDescription> _referenceDescriptions = _resourceDescription.getReferenceDescriptions();
       final IReferenceDescription refDesc = IterableExtensions.<IReferenceDescription>head(_referenceDescriptions);

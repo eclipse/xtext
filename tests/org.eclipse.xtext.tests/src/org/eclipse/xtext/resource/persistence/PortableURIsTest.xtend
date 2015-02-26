@@ -69,7 +69,7 @@ class PortableURIsTest extends AbstractXtextTests {
 		val loadable = resourceA.resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
 		
 		val resourceC = resourceSet.createResource(URI.createURI("hubba:/bubba3.langatestlanguage")) as StorageAwareResource
-		resourceC.load(loadable)
+		resourceC.loadFromStorage(loadable)
 		
 		val refDesc = resourceC.resourceDescription.referenceDescriptions.head
 		assertSame((resourceB.contents.head as Main).types.head, resourceSet.getEObject(refDesc.targetEObjectUri, false))

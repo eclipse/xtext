@@ -106,7 +106,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       ResourceSet _resourceSet_2 = _eResource_2.getResourceSet();
       EList<Resource> _resources = _resourceSet_2.getResources();
       _resources.add(resource);
-      resource.load(in);
+      resource.loadFromStorage(in);
       EList<EObject> _contents = resource.getContents();
       EObject _get = _contents.get(1);
       final JvmGenericType jvmClass = ((JvmGenericType) _get);
@@ -242,7 +242,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       ResourceSet _resourceSet_2 = _eResource_2.getResourceSet();
       EList<Resource> _resources = _resourceSet_2.getResources();
       _resources.add(resource);
-      resource.load(in);
+      resource.loadFromStorage(in);
       EList<EObject> _contents = resource.getContents();
       EObject _get = _contents.get(1);
       final JvmGenericType jvmClass = ((JvmGenericType) _get);

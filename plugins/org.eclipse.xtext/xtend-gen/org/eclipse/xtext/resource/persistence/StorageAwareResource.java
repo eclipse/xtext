@@ -77,13 +77,13 @@ public class StorageAwareResource extends LazyLinkingResource {
         StorageAwareResource.LOG.debug(_plus_1);
       }
       final ResourceStorageLoadable in = this.resourceStorageFacade.getOrCreateResourceStorageLoadable(this);
-      this.load(in);
+      this.loadFromStorage(in);
     } else {
       super.load(options);
     }
   }
   
-  public void load(final ResourceStorageLoadable storageInputStream) {
+  public void loadFromStorage(final ResourceStorageLoadable storageInputStream) {
     boolean _equals = Objects.equal(storageInputStream, null);
     if (_equals) {
       throw new NullPointerException("storageInputStream");
