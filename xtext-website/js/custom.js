@@ -9,10 +9,13 @@ $(document).ready(function() {
 	pimp_up_documentation_menu();
 
 	// syntax coloring
-	$('pre > code').each(function() {
-		$(this).attr('class', $(this).attr('class').replace('language','lang'));
-		$(this).addClass('prettyprint')
-		$(this).addClass('linenums')
+	$('pre > code').filter(function() {
+			return !($(this).attr('class') === undefined);
+		}
+	).each(function() {
+			$(this).attr('class', $(this).attr('class').replace('language','lang'));
+			$(this).addClass('prettyprint')
+			$(this).addClass('linenums')
 	})
 	prettyPrint();
 
