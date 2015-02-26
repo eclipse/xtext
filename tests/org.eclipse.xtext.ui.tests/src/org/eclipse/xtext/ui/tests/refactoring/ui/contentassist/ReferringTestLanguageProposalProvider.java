@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.refactoring.ui.contentassist;
 
 import org.eclipse.xtext.ui.tests.refactoring.ui.contentassist.AbstractReferringTestLanguageProposalProvider;
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 public class ReferringTestLanguageProposalProvider extends AbstractReferringTestLanguageProposalProvider {

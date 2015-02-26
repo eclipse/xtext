@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractBug348427TestLanguageProposalProvider;
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 public class Bug348427TestLanguageProposalProvider extends AbstractBug348427TestLanguageProposalProvider {

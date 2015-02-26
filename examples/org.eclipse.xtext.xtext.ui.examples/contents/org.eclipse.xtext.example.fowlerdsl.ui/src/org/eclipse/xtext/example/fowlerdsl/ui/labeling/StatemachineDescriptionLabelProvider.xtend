@@ -8,7 +8,7 @@ package org.eclipse.xtext.example.fowlerdsl.ui.labeling
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class StatemachineDescriptionLabelProvider extends org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider {
 
