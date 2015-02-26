@@ -226,7 +226,7 @@ def protected addConstructors(JvmDeclaredType inferredType,
     documentation = '''...'''
     body = '''
       _dbObject = new com.mongodb.BasicDBObject();
-      _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+      _dbObject.put(JAVA_CLASS_KEY, "Â«inferredType.identifierÂ»");
     '''
   ]
 }
@@ -404,7 +404,7 @@ class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
   def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
     acceptor.accept(issue, 
         'Rename to ' + issue.data.head, 
-        '''Rename property to «issue.data.head».''', 
+        '''Rename property to Â«issue.data.headÂ».''', 
         null) [
       xtextDocument.replace(issue.offset, issue.length, issue.data.head)
     ]

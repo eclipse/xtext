@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -99,7 +99,7 @@
 
 <h3 id="collection-literals">Collection Literals</h3>
 
-<p>The methods in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java">CollectionLiterals</a> are automatically imported so it&#8217;s very easy and convenient to create instances of the various collection types the JDK offers.</p>
+<p>The methods in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java">CollectionLiterals</a> are automatically imported so itâ€™s very easy and convenient to create instances of the various collection types the JDK offers.</p>
 
 <pre><code class="language-xtend">val myList = newArrayList('Hello', 'World')
 val myMap = newLinkedHashMap('a' -&gt; 1, 'b' -&gt; 2) 
@@ -137,7 +137,7 @@ val int[] intArray = newIntArrayOfSize(400)
 
 <p>Retrieving and setting values of arrays is done through the extension methods <code>get(int)</code> and <code>set(int, T)</code> which are specifically overloaded for arrays and are translated directly to the equivalent native Java code <code>myArray[int]</code>.</p>
 
-<p>Also <code>length</code> is available as an extension method and is directly translated to Java&#8217;s equivalent <code>myArray.length</code>.</p>
+<p>Also <code>length</code> is available as an extension method and is directly translated to Javaâ€™s equivalent <code>myArray.length</code>.</p>
 
 <p>Furthermore arrays are automatically converted to lists (<code>java.util.List</code>) when needed. This works similar to how boxing and unboxing between primitives and their respective wrapper types work.</p>
 
@@ -157,7 +157,7 @@ val List&lt;Integer&gt; myList = myArray
 42 as Integer
 </code></pre>
 
-<p>Instead of a plain type cast it&#8217;s also possible to use a <a href="203_xtend_expressions.html#switch-expression">switch with a type guard</a> which performs both the casting and the instance-of check. <a href="202_xtend_classes_members.html#polymorphic-dispatch">Dispatch methods</a> are another alternative to casts that offers the potential to enhance the number of expected and handled types in subclasses.</p>
+<p>Instead of a plain type cast itâ€™s also possible to use a <a href="203_xtend_expressions.html#switch-expression">switch with a type guard</a> which performs both the casting and the instance-of check. <a href="202_xtend_classes_members.html#polymorphic-dispatch">Dispatch methods</a> are another alternative to casts that offers the potential to enhance the number of expected and handled types in subclasses.</p>
 
 <h2 id="operators">Infix Operators and Operator Overloading</h2>
 
@@ -181,24 +181,24 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_remove(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 || e2</code></td>
       <td><code>e1.operator_or(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 &amp;&amp; e2</code></td>
       <td><code>e1.operator_and(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 == e2</code></td>
@@ -217,8 +217,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_tripleNotEquals(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 &lt; e2</code></td>
@@ -237,8 +237,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_greaterEqualsThan(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 -&gt; e2</code></td>
@@ -289,8 +289,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_spaceship(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 + e2</code></td>
@@ -301,8 +301,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_minus(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>e1 * e2</code></td>
@@ -321,8 +321,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
       <td><code>e1.operator_power(e2)</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>Â </td>
+      <td>Â </td>
     </tr>
     <tr>
       <td><code>! e1</code></td>
@@ -382,7 +382,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 	println('Hi Homer')
 </code></pre>
 
-<p>Java&#8217;s identity equals semantic is mapped to the tripple-equals operators <code>===</code> and <code>!==</code> in Xtend.</p>
+<p>Javaâ€™s identity equals semantic is mapped to the tripple-equals operators <code>===</code> and <code>!==</code> in Xtend.</p>
 
 <pre><code class="language-xtend">if (someObject === anotherObject)
 	println('same objects')
@@ -425,7 +425,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 
 <p>The with operator is very handy when you want to initialize objects or when you want to use a particular instance a couple of time in subsequent lines of code. It simply passes the left hand side argument to the lambda on the right hand and returns the left hand after that.</p>
 
-<p>Here&#8217;s an example:</p>
+<p>Hereâ€™s an example:</p>
 
 <pre><code class="language-xtend">val person = new Person =&gt; [
 	firstName = 'Homer'
@@ -477,7 +477,7 @@ list.reverseView.forEach[
 <pre><code class="language-xtend">val nameAndAge = 'Homer' -&gt; 42
 </code></pre>
 
-<p>If you want to surface a such a pair of values on the interface of a method or field, it&#8217;s generally a better idea to use a data class with a well defined name, instead:</p>
+<p>If you want to surface a such a pair of values on the interface of a method or field, itâ€™s generally a better idea to use a data class with a well defined name, instead:</p>
 
 <pre><code class="language-xtend">@Data class NameAndAge {
 	String name
@@ -552,7 +552,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h2 id="blocks">Blocks</h2>
 
-<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block&#8217;s last expression.</p>
+<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a blockâ€™s last expression.</p>
 
 <p>A block expression is surrounded by curly braces. The expressions in a block can be terminated by an optional semicolon.</p>
 
@@ -578,7 +578,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <p>Variable declarations are only allowed within <a href="203_xtend_expressions.html#blocks">blocks</a>. They are visible from any subsequent expressions in the block. </p>
 
-<p>A variable declaration starting with the keyword <code>val</code> denotes a value, which is essentially a final, unsettable variable. The variable needs to be declared with the keyword <code>var</code>, which stands for &#8216;variable&#8217; if it should be allowed to reassign its value.</p>
+<p>A variable declaration starting with the keyword <code>val</code> denotes a value, which is essentially a final, unsettable variable. The variable needs to be declared with the keyword <code>var</code>, which stands for â€˜variableâ€™ if it should be allowed to reassign its value.</p>
 
 <p>A typical example for using <code>var</code> is a counter in a loop: </p>
 
@@ -686,7 +686,7 @@ com::acme::MyClass::myMethod('foo')
 new ArrayList&lt;BigDecimal&gt;() == new ArrayList&lt;BigDecimal&gt;
 </code></pre>
 
-<p>If type arguments are omitted, they will be inferred from the current context similar to Java&#8217;s diamond operator on generic method and constructor calls.</p>
+<p>If type arguments are omitted, they will be inferred from the current context similar to Javaâ€™s diamond operator on generic method and constructor calls.</p>
 
 <h2 id="lambdas">Lambda Expressions</h2>
 
@@ -702,7 +702,7 @@ textField.addActionListener(new ActionListener() {
 });
 </code></pre>
 
-<p>This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man&#8217;s replacement for lambda expressions in Java. This has been improved with <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Java 8 lambda expressions</a>, which are conceptually very similar to Xtend lambda expressions. Depending on the selected target language version, Xtend lambdas are translated differently to Java: Java lambdas are generated for Java 8 (since 2.8), while anonymous classes are generated for lower versions.</p>
+<p>This kind of anonymous classes can be found everywhere in Java code and have always been the poor-manâ€™s replacement for lambda expressions in Java. This has been improved with <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Java 8 lambda expressions</a>, which are conceptually very similar to Xtend lambda expressions. Depending on the selected target language version, Xtend lambdas are translated differently to Java: Java lambdas are generated for Java 8 (since 2.8), while anonymous classes are generated for lower versions.</p>
 
 <p>The code above can be written in Xtend like this:</p>
 
@@ -719,7 +719,7 @@ textField.addActionListener([ ActionEvent e |
 ])
 </code></pre>
 
-<p>You do not need to speficy the argument names. If you leave them out, a single argument is named <code>it</code>. If the lambda has more arguments, the implicit names are <code>$1,$2,...,$n</code> depending on the number of arguments of course. Here&#8217;s an example with a single argument named <code>it</code>. In this case <code>actionCommand</code> is equivalent to <code>it.actionCommand</code>.</p>
+<p>You do not need to speficy the argument names. If you leave them out, a single argument is named <code>it</code>. If the lambda has more arguments, the implicit names are <code>$1,$2,...,$n</code> depending on the number of arguments of course. Hereâ€™s an example with a single argument named <code>it</code>. In this case <code>actionCommand</code> is equivalent to <code>it.actionCommand</code>.</p>
 
 <pre><code class="language-xtend">textField.addActionListener([
   textField.text = "The command '" + actionCommand + "' happened!"
@@ -736,7 +736,7 @@ val Runnable noBar = [
 ]
 </code></pre>
 
-<p>When a method call&#8217;s last parameter is a lambda it can be passed right after the parameter list. For instance if you want to sort some strings by their length, you could write :</p>
+<p>When a method callâ€™s last parameter is a lambda it can be passed right after the parameter list. For instance if you want to sort some strings by their length, you could write :</p>
 
 <pre><code class="language-xtend">Collections.sort(someStrings) [ a, b |
   a.length - b.length
@@ -796,7 +796,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 
 <h2 id="anonymous-classes">Anonymous Classes</h2>
 
-<p>An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Sepcification</a>). Here&#8217;s an example:</p>
+<p>An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Sepcification</a>). Hereâ€™s an example:</p>
 
 <pre><code class="language-xtend">val tabListener = new ActionBar.TabListener() {
   override onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -834,14 +834,14 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 
 <p>The type of an if expression is the common super type of the return types <code>T1</code> and <code>T2</code> of the two expression <code>e1</code> and <code>e2</code>.</p>
 
-<p>While the if expression has the syntax of Java&#8217;s if statement it behaves more like Java&#8217;s ternary operator (<code>predicate ? thenPart : elsePart</code>), because it is an expression and returns a value. Consequently, you can use if expressions deeply nested within expressions:</p>
+<p>While the if expression has the syntax of Javaâ€™s if statement it behaves more like Javaâ€™s ternary operator (<code>predicate ? thenPart : elsePart</code>), because it is an expression and returns a value. Consequently, you can use if expressions deeply nested within expressions:</p>
 
 <pre><code class="language-xtend">  val name = if (firstName != null) firstName + ' ' + lastName else lastName
 </code></pre>
 
 <h2 id="switch-expression">Switch Expression</h2>
 
-<p>The switch expression is very different from Java&#8217;s switch statement. The use of <code>switch</code> is not limited to certain values but can be used for any object reference. <code>Object.equals(Object)</code> is used to compare the value in the case with the one you are switching over. Given the following example: </p>
+<p>The switch expression is very different from Javaâ€™s switch statement. The use of <code>switch</code> is not limited to certain values but can be used for any object reference. <code>Object.equals(Object)</code> is used to compare the value in the case with the one you are switching over. Given the following example: </p>
 
 <pre><code class="language-xtend">switch myString {
   case myString.length &gt; 5 : "a long string."
@@ -1023,16 +1023,16 @@ if (myList.isEmpty)
 
 <p>Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<code>'''</code>). A template expression can span multiple lines and expressions can be nested which are evaluated and their <code>toString()</code> representation is automatically inserted at that position.</p>
 
-<p>The terminals for interpolated expression are so called guillemets <code>«expression»</code>. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. <code>&lt;%= expression %&gt;</code> in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.</p>
+<p>The terminals for interpolated expression are so called guillemets <code>Â«expressionÂ»</code>. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. <code>&lt;%= expression %&gt;</code> in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.</p>
 
-<p>If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to <em>CTRL+&lt;</em> and <em>CTRL+&gt;</em> for <code>«</code> and <code>»</code> respectively. </p>
+<p>If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to <em>CTRL+&lt;</em> and <em>CTRL+&gt;</em> for <code>Â«</code> and <code>Â»</code> respectively. </p>
 
 <p>Let us have a look at an example of how a typical method with a template expressions looks like:</p>
 
 <pre><code class="language-xtend">def someHTML(String content) '''
   &lt;html&gt;
     &lt;body&gt;
-      «content»
+      Â«contentÂ»
     &lt;/body&gt;
   &lt;/html&gt;
 '''
@@ -1046,12 +1046,12 @@ if (myList.isEmpty)
   switch n {
     Contents : n.text
 
-    A : '''&lt;a href="«n.href»"&gt;«n.applyContents»&lt;/a&gt;'''
+    A : '''&lt;a href="Â«n.hrefÂ»"&gt;Â«n.applyContentsÂ»&lt;/a&gt;'''
 
     default : '''
-        &lt;«n.tagName»&gt;
-          «n.applyContents»
-        &lt;/«n.tagName»&gt;
+        &lt;Â«n.tagNameÂ»&gt;
+          Â«n.applyContentsÂ»
+        &lt;/Â«n.tagNameÂ»&gt;
     '''
   }
 }
@@ -1064,11 +1064,11 @@ if (myList.isEmpty)
 <pre><code class="language-xtend">def someHTML(Paragraph p) '''
   &lt;html&gt;
     &lt;body&gt;
-      «IF p.headLine != null»
-        &lt;h1&gt;«p.headline»&lt;/h1&gt;
-      «ENDIF»
+      Â«IF p.headLine != nullÂ»
+        &lt;h1&gt;Â«p.headlineÂ»&lt;/h1&gt;
+      Â«ENDIFÂ»
       &lt;p&gt;
-        «p.text»
+        Â«p.textÂ»
       &lt;/p&gt;
     &lt;/body&gt;
   &lt;/html&gt;
@@ -1082,14 +1082,14 @@ if (myList.isEmpty)
 <pre><code class="language-xtend">def someHTML(List&lt;Paragraph&gt; paragraphs) '''
   &lt;html&gt;
     &lt;body&gt;
-      «FOR p : paragraphs»
-        «IF p.headLine != null»
-          &lt;h1&gt;«p.headline»&lt;/h1&gt;
-        «ENDIF»
+      Â«FOR p : paragraphsÂ»
+        Â«IF p.headLine != nullÂ»
+          &lt;h1&gt;Â«p.headlineÂ»&lt;/h1&gt;
+        Â«ENDIFÂ»
         &lt;p&gt;
-          «p.text»
+          Â«p.textÂ»
         &lt;/p&gt;
-      «ENDFOR»
+      Â«ENDFORÂ»
     &lt;/body&gt;
   &lt;/html&gt;
 '''
@@ -1102,14 +1102,14 @@ if (myList.isEmpty)
 <pre><code class="language-xtend">def someHTML(List&lt;Paragraph&gt; paragraphs) '''
   &lt;html&gt;
     &lt;body&gt;
-      «FOR p : paragraphs BEFORE '&lt;div&gt;' SEPARATOR '&lt;/div&gt;&lt;div&gt;' AFTER '&lt;/div&gt;'»
-        «IF p.headLine != null»
-          &lt;h1&gt;«p.headline»&lt;/h1&gt;
-        «ENDIF»
+      Â«FOR p : paragraphs BEFORE '&lt;div&gt;' SEPARATOR '&lt;/div&gt;&lt;div&gt;' AFTER '&lt;/div&gt;'Â»
+        Â«IF p.headLine != nullÂ»
+          &lt;h1&gt;Â«p.headlineÂ»&lt;/h1&gt;
+        Â«ENDIFÂ»
         &lt;p&gt;
-          «p.text»
+          Â«p.textÂ»
         &lt;/p&gt;
-      «ENDFOR»
+      Â«ENDFORÂ»
     &lt;/body&gt;
   &lt;/html&gt;
 '''
@@ -1144,7 +1144,7 @@ if (myList.isEmpty)
 
 <pre><code class="language-xtend">class Template {
   def print(Node n) '''
-    node «n.name» {}
+    node Â«n.nameÂ» {}
   '''
 }
 </code></pre>
@@ -1166,7 +1166,7 @@ if (myList.isEmpty)
   </tbody>
 </table>
 
-<p>The indentation before <code>node «n.name»</code> will be skipped as it is relative to the opening mark of the template string and thereby not considered to be relevant for the output but only for the readability of the template itself.</p>
+<p>The indentation before <code>node Â«n.nameÂ»</code> will be skipped as it is relative to the opening mark of the template string and thereby not considered to be relevant for the output but only for the readability of the template itself.</p>
 
 <table>
   <tbody>
@@ -1177,10 +1177,10 @@ if (myList.isEmpty)
 
 <pre><code class="language-xtend">class Template {
   def print(Node n) '''
-    node «n.name» {
-      «IF hasChildren»
-        «n.children.map[print]»
-      «ENDIF»
+    node Â«n.nameÂ» {
+      Â«IF hasChildrenÂ»
+        Â«n.children.map[print]Â»
+      Â«ENDIFÂ»
     }
   '''
 }

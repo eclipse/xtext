@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -60,11 +60,11 @@ import static org.junit.Assert.*
 
 <h2 id="xtend-class-declaration">Class Declaration</h2>
 
-<p>The class declaration reuses a lot of Java&#8217;s syntax but still is a bit different in some aspects: All Xtend types are <code>public</code> by default since that&#8217;s the common case. Java&#8217;s &#8220;package private&#8221; default visibility is declared by the more explicit keyword <code>package</code> in Xtend. In contrast to Java, Xtend supports multiple public top level class declarations per file. Each Xtend class is compiled to a separate top-level Java class.</p>
+<p>The class declaration reuses a lot of Java’s syntax but still is a bit different in some aspects: All Xtend types are <code>public</code> by default since that’s the common case. Java’s “package private” default visibility is declared by the more explicit keyword <code>package</code> in Xtend. In contrast to Java, Xtend supports multiple public top level class declarations per file. Each Xtend class is compiled to a separate top-level Java class.</p>
 
 <p>Abstract classes are defined using the <code>abstract</code> modifier as in Java. See also <a href="202_xtend_classes_members.html#abstract-methods">abstract methods</a>.</p>
 
-<p>Xtend&#8217;s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> is used. </p>
+<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> is used. </p>
 
 <p>The most simple class looks like this: </p>
 
@@ -166,7 +166,7 @@ import static org.junit.Assert.*
 
 <h3 id="declared-exceptions">Declared Exceptions</h3>
 
-<p>Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare the exceptions thrown in a method&#8217;s body using the <code>throws</code> clause as in Java.</p>
+<p>Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare the exceptions thrown in a method’s body using the <code>throws</code> clause as in Java.</p>
 
 <p>If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). </p>
 
@@ -220,7 +220,7 @@ def void sneakyThrowException() {
 
 <h3 id="operator-declaration">Operator Declarations</h3>
 
-<p>Xtend supports operator overloading based on an operator-name-mapping as explained in [](203_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator&#8217;s name or by using the operator directly like in the following:</p>
+<p>Xtend supports operator overloading based on an operator-name-mapping as explained in [](203_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator’s name or by using the operator directly like in the following:</p>
 
 <pre><code class="language-xtend">class Money {
 	def + (Money other) { ... }
@@ -383,7 +383,7 @@ def dispatch printType(Void x) {
 
 <h3 id="create-methods">Create Methods</h3>
 
-<p>Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes. That means you don&#8217;t need to separate a translation from one graph to another in the typical two phases: tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using create methods and the built-in identity preservation will take care of the rest.</p>
+<p>Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes. That means you don’t need to separate a translation from one graph to another in the typical two phases: tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using create methods and the built-in identity preservation will take care of the rest.</p>
 
 <p>Consider you want to create a copy of the following list of persons into a :</p>
 
@@ -413,7 +413,7 @@ def copy(Person p) {
 }
 </code></pre>
 
-<p>The problem with that code is that we don&#8217;t track the origins of the created copies. This is the main problem with model transformations. The classic solution is to run the copying in two passes. First we create all instances and then we establish the links. Although it works it results in cluttered and non coherent code. Xtend&#8217;s create functions handle this problem by introducing identity perservation by tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual object and a second one to initialize it. </p>
+<p>The problem with that code is that we don’t track the origins of the created copies. This is the main problem with model transformations. The classic solution is to run the copying in two passes. First we create all instances and then we establish the links. Although it works it results in cluttered and non coherent code. Xtend’s create functions handle this problem by introducing identity perservation by tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual object and a second one to initialize it. </p>
 
 <pre><code class="language-xtend">def create result: new Person copy(Person p) {
 	result.name = p.name
@@ -458,7 +458,7 @@ class MyClass {
 
 <h2 id="extension-methods">Extension Methods</h2>
 
-<p>Extension methods allow to add new methods to existing types without modifying them. This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type&#8217;s members. </p>
+<p>Extension methods allow to add new methods to existing types without modifying them. This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type’s members. </p>
 
 <pre><code class="language-xtend">"hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
 </code></pre>
@@ -565,7 +565,7 @@ person.delete  // calls ep.delete(person)
 
 <h2 id="interfaces">Interface Declarations</h2>
 
-<p>An interface declaration is very similar to the one in Java. An interface can declare fields, which are by default final static therefore must have an initial value. And of course methods can be declared, which are public by default. Interfaces can extend any number of other interfaces and can declare type parameters. Here&#8217;s an example: </p>
+<p>An interface declaration is very similar to the one in Java. An interface can declare fields, which are by default final static therefore must have an initial value. And of course methods can be declared, which are public by default. Interfaces can extend any number of other interfaces and can declare type parameters. Here’s an example: </p>
 
 <pre><code class="language-xtend">interface MyInterface&lt;T&gt; extends OtherInterface {
   val CONSTANT = 42

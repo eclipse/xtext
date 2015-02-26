@@ -62,9 +62,9 @@ class StatemachineGenerator implements IGenerator {
 
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
     fsa.generateFile("relative/path/AllTheStates.txt", '''
-      «FOR state : resource.allContents.filter(State).toIterable»
-        State «state.name»
-      «ENDFOR»
+      Â«FOR state : resource.allContents.filter(State).toIterableÂ»
+        State Â«state.nameÂ»
+      Â«ENDFORÂ»
     ''')
   }
 }

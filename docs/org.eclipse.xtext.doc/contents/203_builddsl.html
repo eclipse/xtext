@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
 
 <h2 id="builddsl-running">Running the Example</h2>
 
-<p>In the runtime workspace, open the <em>BuildExample.build</em> in the editor. The example project comes with some sample java code to compile in the <em>example-project</em> folder. Choose <em>Run as &rarr; Build Task</em> from the context menu of any task to execute it. </p>
+<p>In the runtime workspace, open the <em>BuildExample.build</em> in the editor. The example project comes with some sample java code to compile in the <em>example-project</em> folder. Choose <em>Run as â†’ Build Task</em> from the context menu of any task to execute it. </p>
 
 <h2 id="builddsl-grammar">Grammar</h2>
 
@@ -106,7 +106,7 @@ public class SimpleBuild extends BuildScript {
         varArgs = true
         static = true
         body = '''
-          «scriptName» script = new «scriptName»();
+          Â«scriptNameÂ» script = new Â«scriptNameÂ»();
           if (script.showHelp(args)) {
             System.exit(HELP);
           }
@@ -168,7 +168,7 @@ public String name = "World";
   </li>
 </ul>
 
-<p>The type can be skipped. If there is an initialization expression, the parameter&#8217;s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
+<p>The type can be skipped. If there is an initialization expression, the parameterâ€™s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
 
 <pre><code class="language-xtend">@Inject ITypeProvider typeProvider
 ...
@@ -187,11 +187,11 @@ val type = declaredParameter.type
   def void checkNoRecursiveDependencies(Task task) {
     task.findDependentTasks [ cycle |
       if (cycle.size == 1) {
-        error('''The task '«task.name»' cannot depend on itself.''', 
+        error('''The task 'Â«task.nameÂ»' cannot depend on itself.''', 
             cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
       } else {
-        error('''There is a cyclic dependency that involves tasks «
-                cycle.map[name].join(", ")»''', 
+        error('''There is a cyclic dependency that involves tasks Â«
+                cycle.map[name].join(", ")Â»''', 
               cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
       }
     ]
@@ -255,9 +255,9 @@ final File theSameFile = FileExtensions.operator_divide(
 
 <p>The compiler replaces operators with method calls to methods named <code>operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
 
-<h2 id="builddsl-launch">Run as&#8230; Integration</h2>
+<h2 id="builddsl-launch">Run asâ€¦ Integration</h2>
 
-<p>To facilitate executing build scripts from within Java, we have extended Eclipse&#8217;s launch support. The respective classes are <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">BuildDSLLaunchDelegate</a>, <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">BuildDSLLaunchShortcut</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">BuildDSLLaunchTabGroup</a>. Describing all the details would be a bit lengthy but it is quite straightforward if you are familiar with the launching API. </p>
+<p>To facilitate executing build scripts from within Java, we have extended Eclipseâ€™s launch support. The respective classes are <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">BuildDSLLaunchDelegate</a>, <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">BuildDSLLaunchShortcut</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">BuildDSLLaunchTabGroup</a>. Describing all the details would be a bit lengthy but it is quite straightforward if you are familiar with the launching API. </p>
 
 <hr />
 

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -67,7 +67,7 @@ package org.musicdb {
 }
 </code></pre>
 
-<p>By using the generated Java code, the rest of the application can use a type-safe and JavaBeans conformant API to access the data model. In addition, <em>MongoBeans</em> can define <em>MongoOperations</em>, which are translated to Java methods. We can use <em>MongoProperties</em> as well as Java types inside the operations&#8217; bodies. </p>
+<p>By using the generated Java code, the rest of the application can use a type-safe and JavaBeans conformant API to access the data model. In addition, <em>MongoBeans</em> can define <em>MongoOperations</em>, which are translated to Java methods. We can use <em>MongoProperties</em> as well as Java types inside the operationsâ€™ bodies. </p>
 
 <p>Client code could then look like this: </p>
 
@@ -233,7 +233,7 @@ def protected addConstructors(JvmDeclaredType inferredType,
     documentation = '''...'''
     body = '''
       _dbObject = new com.mongodb.BasicDBObject();
-      _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+      _dbObject.put(JAVA_CLASS_KEY, "Â«inferredType.identifierÂ»");
     '''
   ]
 }
@@ -376,7 +376,7 @@ public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider(
 }
 </code></pre>
 
-<p>See <a href="302_configuration.html#dependency-injection">Dependency Injection</a> to learn more about Xtext&#8217;s dependency injection.</p>
+<p>See <a href="302_configuration.html#dependency-injection">Dependency Injection</a> to learn more about Xtextâ€™s dependency injection.</p>
 
 <h2 id="mongo-validation">Validation</h2>
 
@@ -413,7 +413,7 @@ public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider(
   def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
     acceptor.accept(issue, 
         'Rename to ' + issue.data.head, 
-        '''Rename property to «issue.data.head».''', 
+        '''Rename property to Â«issue.data.headÂ».''', 
         null) [
       xtextDocument.replace(issue.offset, issue.length, issue.data.head)
     ]

@@ -140,39 +140,39 @@ class DomainmodelGenerator implements IGenerator {
   }
   
   def compile(Entity it) '''
-    «val importManager = new ImportManager(true)» 
-    «val body = body(importManager)»
-    «IF eContainer != null»
-      package «eContainer.fullyQualifiedName»;
-    «ENDIF»
+    Â«val importManager = new ImportManager(true)Â» 
+    Â«val body = body(importManager)Â»
+    Â«IF eContainer != nullÂ»
+      package Â«eContainer.fullyQualifiedNameÂ»;
+    Â«ENDIFÂ»
     
-    «FOR i:importManager.imports»
-      import «i»;
-    «ENDFOR»
+    Â«FOR i:importManager.importsÂ»
+      import Â«iÂ»;
+    Â«ENDFORÂ»
     
-    «body»
+    Â«bodyÂ»
   '''
   
   def body(Entity it, ImportManager importManager) '''
-    public class «name» «IF superType != null»
-      extends «superType.shortName(importManager)» «ENDIF»{
-      «FOR f : features»
-        «f.compile(importManager)»
-      «ENDFOR»
+    public class Â«nameÂ» Â«IF superType != nullÂ»
+      extends Â«superType.shortName(importManager)Â» Â«ENDIFÂ»{
+      Â«FOR f : featuresÂ»
+        Â«f.compile(importManager)Â»
+      Â«ENDFORÂ»
     }
   '''
     
   def compile(Feature it, ImportManager importManager) '''
-    private «type.shortName(importManager)» «name»;
+    private Â«type.shortName(importManager)Â» Â«nameÂ»;
     
-    public «type.shortName(importManager)» 
-      get«name.toFirstUpper»() {
-      return «name»;
+    public Â«type.shortName(importManager)Â» 
+      getÂ«name.toFirstUpperÂ»() {
+      return Â«nameÂ»;
     }
     
-    public void set«name.toFirstUpper»(
-      «type.shortName(importManager)» «name») {
-      this.«name» = «name»;
+    public void setÂ«name.toFirstUpperÂ»(
+      Â«type.shortName(importManager)Â» Â«nameÂ») {
+      this.Â«nameÂ» = Â«nameÂ»;
     }
   '''
   

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title></title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
@@ -99,7 +99,7 @@ Feature:
 
 <h2 id="tutorial-code-generation">Writing a Code Generator With Xtend</h2>
 
-<p>As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the runtime project of your language. Let&#8217;s dive into Xtend and see how you can integrate your own code generator with Eclipse.</p>
+<p>As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the runtime project of your language. Letâ€™s dive into Xtend and see how you can integrate your own code generator with Eclipse.</p>
 
 <p>In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For each <em>Entity</em>, a Java class is generated and each <em>Feature</em> will lead to a private field in that class and public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.</p>
 
@@ -132,7 +132,7 @@ class DomainmodelGenerator implements IGenerator {
 }
 </code></pre>
 
-<p>Let&#8217;s make the implementation more meaningful and start writing the code generator. The strategy is to find all entities within a resource and trigger code generation for each one.</p>
+<p>Letâ€™s make the implementation more meaningful and start writing the code generator. The strategy is to find all entities within a resource and trigger code generation for each one.</p>
 
 <ol>
   <li>
@@ -148,7 +148,7 @@ class DomainmodelGenerator implements IGenerator {
 </code></pre>
   </li>
   <li>
-    <p>Now let&#8217;s answer the question, how we determine the file name of the Java class, that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.     </p>
+    <p>Now letâ€™s answer the question, how we determine the file name of the Java class, that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.     </p>
 
     <pre><code class="language-xtend">  @Inject extension IQualifiedNameProvider
 </code></pre>
@@ -168,9 +168,9 @@ class DomainmodelGenerator implements IGenerator {
     <p>The next step is to write the actual template code for an entity. For now, the function <code>Entity.compile</code> does not exist, but it is easy to create it:     </p>
 
     <pre><code class="language-xtend">def compile(Entity e) '''
-  package «e.eContainer.fullyQualifiedName»;
+  package Â«e.eContainer.fullyQualifiedNameÂ»;
       
-  public class «e.name» {
+  public class Â«e.nameÂ» {
   }
 '''
 </code></pre>
@@ -179,24 +179,24 @@ class DomainmodelGenerator implements IGenerator {
     <p>This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail, if the <em>Entity</em> is not contained in a package. A small modification fixes this. The <code>package</code>-declaration has to be wrapped in an <code>IF</code> expression:     </p>
 
     <pre><code class="language-xtend">def compile(Entity e) '''
-  «IF e.eContainer.fullyQualifiedName != null»
-    package «e.eContainer.fullyQualifiedName»;
-  «ENDIF»
+  Â«IF e.eContainer.fullyQualifiedName != nullÂ»
+    package Â«e.eContainer.fullyQualifiedNameÂ»;
+  Â«ENDIFÂ»
       
-  public class «e.name» {
+  public class Â«e.nameÂ» {
   }
 '''
 </code></pre>
 
-    <p>Let&#8217;s handle the <em>superType</em> of an <em>Entity</em> gracefully, too by using another <code>IF</code> expression:     </p>
+    <p>Letâ€™s handle the <em>superType</em> of an <em>Entity</em> gracefully, too by using another <code>IF</code> expression:     </p>
 
     <pre><code class="language-xtend">def compile(Entity e) ''' 
-  «IF e.eContainer.fullyQualifiedName != null»
-    package «e.eContainer.fullyQualifiedName»;
-  «ENDIF»
+  Â«IF e.eContainer.fullyQualifiedName != nullÂ»
+    package Â«e.eContainer.fullyQualifiedNameÂ»;
+  Â«ENDIFÂ»
       
-  public class «e.name» «IF e.superType != null
-          »extends «e.superType.fullyQualifiedName» «ENDIF»{
+  public class Â«e.nameÂ» Â«IF e.superType != null
+          Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
   }
 '''
 </code></pre>
@@ -205,14 +205,14 @@ class DomainmodelGenerator implements IGenerator {
     <p>Even though the template will compile the <em>Entities</em> without any complains, it still lacks support for the Java properties, that each of the declared features should yield. For that purpose, you have to create another Xtend function that compiles a single feature to the respective Java code.     </p>
 
     <pre><code class="language-xtend">def compile(Feature f) '''
-  private «f.type.fullyQualifiedName» «f.name»;
+  private Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ»;
       
-  public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
-    return «f.name»;
+  public Â«f.type.fullyQualifiedNameÂ» getÂ«f.name.toFirstUpperÂ»() {
+    return Â«f.nameÂ»;
   }
       
-  public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
-    this.«f.name» = «f.name»;
+  public void setÂ«f.name.toFirstUpperÂ»(Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ») {
+    this.Â«f.nameÂ» = Â«f.nameÂ»;
   }
 '''
 </code></pre>
@@ -220,22 +220,22 @@ class DomainmodelGenerator implements IGenerator {
     <p>As you can see, there is nothing fancy about this one. Last but not least, we have to make sure that the function is actually used.     </p>
 
     <pre><code class="language-xtend">def compile(Entity e) ''' 
-  «IF e.eContainer.fullyQualifiedName != null»
-    package «e.eContainer.fullyQualifiedName»;
-  «ENDIF»
+  Â«IF e.eContainer.fullyQualifiedName != nullÂ»
+    package Â«e.eContainer.fullyQualifiedNameÂ»;
+  Â«ENDIFÂ»
       
-  public class «e.name» «IF e.superType != null
-          »extends «e.superType.fullyQualifiedName» «ENDIF»{
-    «FOR f:e.features»
-      «f.compile»
-    «ENDFOR»
+  public class Â«e.nameÂ» Â«IF e.superType != null
+          Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
+    Â«FOR f:e.featuresÂ»
+      Â«f.compileÂ»
+    Â«ENDFORÂ»
   }
 '''
 </code></pre>
   </li>
 </ol>
 
-<p>The final code generator looks pretty much like the following code snippet. Now you can give it a try! Launch a new Eclipse Application (<em>Run As &rarr; Eclipse Application</em> on the Xtext project) and create a <em>dmodel</em> file in a Java Project. Now simply create a new source folder <em>src-gen</em> in the that project and see how the compiler will pick up your sample <em>Entities</em> and generate Java code for them. </p>
+<p>The final code generator looks pretty much like the following code snippet. Now you can give it a try! Launch a new Eclipse Application (<em>Run As â†’ Eclipse Application</em> on the Xtext project) and create a <em>dmodel</em> file in a Java Project. Now simply create a new source folder <em>src-gen</em> in the that project and see how the compiler will pick up your sample <em>Entities</em> and generate Java code for them. </p>
 
 <pre><code class="language-xtend">package org.example.domainmodel.generator
 
@@ -261,33 +261,33 @@ class DomainmodelGenerator implements IGenerator {
   }
 
   def compile(Entity e) ''' 
-    «IF e.eContainer.fullyQualifiedName != null»
-      package «e.eContainer.fullyQualifiedName»;
-    «ENDIF»
+    Â«IF e.eContainer.fullyQualifiedName != nullÂ»
+      package Â«e.eContainer.fullyQualifiedNameÂ»;
+    Â«ENDIFÂ»
     
-    public class «e.name» «IF e.superType != null
-            »extends «e.superType.fullyQualifiedName» «ENDIF»{
-      «FOR f:e.features»
-        «f.compile»
-      «ENDFOR»
+    public class Â«e.nameÂ» Â«IF e.superType != null
+            Â»extends Â«e.superType.fullyQualifiedNameÂ» Â«ENDIFÂ»{
+      Â«FOR f:e.featuresÂ»
+        Â«f.compileÂ»
+      Â«ENDFORÂ»
     }
   '''
 
   def compile(Feature f) '''
-    private «f.type.fullyQualifiedName» «f.name»;
+    private Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ»;
     
-    public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
-      return «f.name»;
+    public Â«f.type.fullyQualifiedNameÂ» getÂ«f.name.toFirstUpperÂ»() {
+      return Â«f.nameÂ»;
     }
     
-    public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
-      this.«f.name» = «f.name»;
+    public void setÂ«f.name.toFirstUpperÂ»(Â«f.type.fullyQualifiedNameÂ» Â«f.nameÂ») {
+      this.Â«f.nameÂ» = Â«f.nameÂ»;
     }
   '''
 }
 </code></pre>
 
-<p>If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized into your workspace. Simply choose <em>New &rarr; Example &rarr; Xtend Examples &rarr; Xtend Introductory Examples</em> and have a look at Xtend&#8217;s features. As a small exercise, you could implement support for the <em>many</em> attribute of a <em>Feature</em> or enforce naming conventions, e.g. field names should start with an underscore.</p>
+<p>If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized into your workspace. Simply choose <em>New â†’ Example â†’ Xtend Examples â†’ Xtend Introductory Examples</em> and have a look at Xtendâ€™s features. As a small exercise, you could implement support for the <em>many</em> attribute of a <em>Feature</em> or enforce naming conventions, e.g. field names should start with an underscore.</p>
 
 <h2 id="tutorial-unit-tests">Unit Testing the Language</h2>
 
@@ -297,7 +297,7 @@ class DomainmodelGenerator implements IGenerator {
 
 <ol>
   <li>
-    <p>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select <em>New &rarr; Xtend Class</em> from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:     </p>
+    <p>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select <em>New â†’ Xtend Class</em> from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:     </p>
 
     <pre><code class="language-xtend">  import org.eclipse.xtext.junit4.XtextRunner
   import org.example.domainmodel.DomainmodelInjectorProvider
@@ -331,7 +331,7 @@ class DomainmodelGenerator implements IGenerator {
 </code></pre>
   </li>
   <li>
-    <p>After saving the Xtend file, it is time to run the test. Select <em>Run As &rarr; JUnit Test</em> from the editor&#8217;s context menu. </p>
+    <p>After saving the Xtend file, it is time to run the test. Select <em>Run As â†’ JUnit Test</em> from the editorâ€™s context menu. </p>
   </li>
 </ol>
 

@@ -99,7 +99,7 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
         varArgs = true
         static = true
         body = '''
-          «scriptName» script = new «scriptName»();
+          Â«scriptNameÂ» script = new Â«scriptNameÂ»();
           if (script.showHelp(args)) {
             System.exit(HELP);
           }
@@ -175,11 +175,11 @@ class BuildDSLValidator extends XbaseJavaValidator {
   def void checkNoRecursiveDependencies(Task task) {
     task.findDependentTasks [ cycle |
       if (cycle.size == 1) {
-        error('''The task '«task.name»' cannot depend on itself.''', 
+        error('''The task 'Â«task.nameÂ»' cannot depend on itself.''', 
             cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
       } else {
-        error('''There is a cyclic dependency that involves tasks «
-                cycle.map[name].join(", ")»''', 
+        error('''There is a cyclic dependency that involves tasks Â«
+                cycle.map[name].join(", ")Â»''', 
               cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
       }
     ]

@@ -150,7 +150,7 @@ accept(module.toClass(module.fullyQualifiedName))[
     if (!mixin.eIsProxy)
       members += mixin.toField( mixin.simpleName, 
         typeRef(mixin.fullyQualifiedName.toString)) [
-        initializer = '''new «mixin.name»()'''
+        initializer = '''new Â«mixin.nameÂ»()'''
       ]
   }
   
@@ -162,9 +162,9 @@ accept(module.toClass(module.fullyQualifiedName))[
     body = '''
       try {
         ...some other code
-        «FOR mix : module.mixins»
-          «mix.simpleName».configure(bind, usedKeys);
-        «ENDFOR»
+        Â«FOR mix : module.mixinsÂ»
+          Â«mix.simpleNameÂ».configure(bind, usedKeys);
+        Â«ENDFORÂ»
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -234,10 +234,10 @@ for (binding : module.bindings) {
 
 // and the following method
 def guiceKey(KeyAST it) '''
-  Key.get(new TypeLiteral<«type>(){}«
+  Key.get(new TypeLiteral<Â«type>(){}Â«
   IF annotation != null
-  », getClass().getDeclaredField("«syntheticName»").getAnnotations()[0]«
-  ENDIF»)'''
+  Â», getClass().getDeclaredField("Â«syntheticNameÂ»").getAnnotations()[0]Â«
+  ENDIFÂ»)'''
 ```
 
 That is basically it. The rest should hopefully be self-explanatory.

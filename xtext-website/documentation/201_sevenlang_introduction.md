@@ -155,25 +155,25 @@ We most often use this expression in the examples to generate some synthetic Jav
 ```xtend
 '''
   String url =  request.getRequestURL().toString();
-  «FOR route : routes»
+  Â«FOR route : routesÂ»
     {
       //java.util.regex.Matcher will be imported in the generated Java file
-      «Matcher» _matcher = _pattern«route.index».matcher(url);
+      Â«MatcherÂ» _matcher = _patternÂ«route.indexÂ».matcher(url);
       if (_matcher.find()) {
-        «FOR variable : route.url.variables»
-            String «variable.name» = _matcher.group(«variable.index + 1»);
-        «ENDFOR»
-        «IF route.condition != null»
-          if («route.nameOfRouteMethod»Condition(request, response
-            «FOR v : route.url.variables 
+        Â«FOR variable : route.url.variablesÂ»
+            String Â«variable.nameÂ» = _matcher.group(Â«variable.index + 1Â»);
+        Â«ENDFORÂ»
+        Â«IF route.condition != nullÂ»
+          if (Â«route.nameOfRouteMethodÂ»Condition(request, response
+            Â«FOR v : route.url.variables 
              BEFORE ", " 
-             SEPARATOR ", "»«v.name»«ENDFOR»))
-        «ENDIF»
-        «route.nameOfRouteMethod»(request, response
-          «FOR v : route.url.variables», «v.name»«ENDFOR»);
+             SEPARATOR ", "Â»Â«v.nameÂ»Â«ENDFORÂ»))
+        Â«ENDIFÂ»
+        Â«route.nameOfRouteMethodÂ»(request, response
+          Â«FOR v : route.url.variablesÂ», Â«v.nameÂ»Â«ENDFORÂ»);
       }
     }
-  «ENDFOR»
+  Â«ENDFORÂ»
 '''
 ```
 
