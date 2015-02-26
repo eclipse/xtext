@@ -304,7 +304,7 @@ protected Object _doEvaluate(XBlockExpression literal,
 							CancelIndicator indicator)
 ```
 
-The [IEvaluationContext]() keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be *fork*ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java):
+The [IEvaluationContext]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/IEvaluationContext.java) keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be *fork*ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java):
 
 ```java
 @Inject private XbaseInterpreter xbaseInterpreter;
