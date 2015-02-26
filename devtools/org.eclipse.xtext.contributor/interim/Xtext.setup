@@ -557,11 +557,8 @@
           </operand>
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern=".*\.doc.*|.*\.bootstrapdoc"/>
+              pattern=".*\.doc|.*-website"/>
         </predicate>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern=".*\.website\.generator"/>
       </workingSet>
       <workingSet
           name="Idea">
@@ -643,6 +640,10 @@
           rootFolder="${git.clone.xtext.location/maven}"/>
       <sourceLocator
           rootFolder="${git.clone.xtext.location/intellij}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/xtext.website}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/xtend.website}"/>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
