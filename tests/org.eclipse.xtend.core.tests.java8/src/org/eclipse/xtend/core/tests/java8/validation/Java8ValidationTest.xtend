@@ -187,7 +187,7 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			}
 			class E implements A, B, D, C { }
 		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
-			"The type E inherits multiple implementations of the method foo() from C and D.")
+			"The type E inherits multiple implementations of the method foo() from D and C.")
 	}
 	
 	@Test
@@ -246,7 +246,7 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testMissingImplementation() {
+	def void testMissingImplementation_01() {
 		file('''
 			abstract class A {
 				def void m();
@@ -256,6 +256,37 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				def void m() {}
 			}
 			class C extends B implements I {}
+		''').assertError(XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+			"The class C must be defined abstract because it does not implement m()")
+	}
+	
+	@Test
+	def void testMissingImplementation_02() {
+		file('''
+			interface I {
+				def void m() {}
+			}
+			interface J extends I {
+				override void m()
+			} 
+			class C implements J {}
+		''').assertError(XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+			"The class C must be defined abstract because it does not implement m()")
+	}
+	
+	@Test
+	def void testMissingImplementation_03() {
+		file('''
+			interface I {
+				def void m() {}
+			}
+			interface J extends I {
+			}
+			interface K extends J {
+				override void m()
+			}
+			interface L extends J {}
+			class C implements I, K, L {}
 		''').assertError(XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
 			"The class C must be defined abstract because it does not implement m()")
 	}
@@ -320,6 +351,22 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				override foo() { }
 			}
 			class D implements C, A, B { }
+		''').assertNoErrors
+	}
+	
+	@Test
+	def void testResolvedConflict05() {
+		file('''
+			interface I {
+				def void m() {}
+			}
+			interface J extends I {
+			}
+			interface K extends J {
+				override void m() {}
+			}
+			interface L extends J {}
+			class C implements I, J, L {}
 		''').assertNoErrors
 	}
 	
