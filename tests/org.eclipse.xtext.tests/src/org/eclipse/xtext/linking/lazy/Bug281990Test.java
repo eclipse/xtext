@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -29,6 +30,8 @@ public class Bug281990Test extends AbstractXtextTests {
 			throw new AssertionError("Should never be thrown, because the call to ParentId will throw a CyclicLinkingException already.");
 		}
 	}
+	
+	private LoggingTester loggingTester = new LoggingTester();
 
 	@Override
 	public void setUp() throws Exception {
@@ -40,21 +43,23 @@ public class Bug281990Test extends AbstractXtextTests {
 			}
 		});
 		new LazyLinkingTestLanguageStandaloneSetup().register(getInjector());
+		loggingTester.before();
+	}
+	@Override
+	public void tearDown() throws Exception {
+		loggingTester.after();
 	}
 
 	@Test public void testRecursionErrorMessage() throws Exception {
-		int loggings = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
-			@Override
-			public void run() {
-				try {
-					EObject model = getModelAndExpect("type Foo extends Foo.bar { Foo foo; }", 2);
-					assertTrue(((Model)model).getTypes().get(0).getParentId().eIsProxy());
-					assertTrue(model.eResource().getErrors().get(0).getMessage().contains("Couldn't"));
-				} catch (Exception e) {
-					throw Exceptions.sneakyThrow(e);
-				}
-			}
-		});
-		assertEquals(1, loggings);
+		loggingTester.addSourceFilter(LazyLinkingResource.class);
+		loggingTester.setLevel(Level.ERROR);
+		try {
+			EObject model = getModelAndExpect("type Foo extends Foo.bar { Foo foo; }", 2);
+			assertTrue(((Model)model).getTypes().get(0).getParentId().eIsProxy());
+			assertTrue(model.eResource().getErrors().get(0).getMessage().contains("Couldn't"));
+		} catch (Exception e) {
+			throw Exceptions.sneakyThrow(e);
+		}
+		assertEquals(1, loggingTester.getLogEntries());
 	}
 }

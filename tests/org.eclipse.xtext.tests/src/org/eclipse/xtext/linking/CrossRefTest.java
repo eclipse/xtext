@@ -1,7 +1,10 @@
 package org.eclipse.xtext.linking;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -14,6 +17,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.junit4.logging.LoggingTester.LogEntry;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
@@ -36,12 +40,14 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class CrossRefTest extends AbstractXtextTests {
 	private ICrossReferenceSerializer crossRefSerializer;
 	private LangATestLanguageGrammarAccess grammar;
+	private LoggingTester loggingTester = new LoggingTester();
 	
 	public static class CrossRefLinkingService extends DefaultLinkingService {
 		
@@ -93,6 +99,13 @@ public class CrossRefTest extends AbstractXtextTests {
 		});
 		crossRefSerializer =  get(ICrossReferenceSerializer.class);
 		grammar = (LangATestLanguageGrammarAccess) get(IGrammarAccess.class);
+		loggingTester.before();
+	}
+	
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
+		loggingTester.after();
 	}
 
 	@Test public void testSimple() throws Exception {
@@ -146,45 +159,45 @@ public class CrossRefTest extends AbstractXtextTests {
 		final LazyLinkingTestLanguageGrammarAccess g =  (LazyLinkingTestLanguageGrammarAccess) get(IGrammarAccess.class);
 		
 		final XtextResource r = CrossRefTest.this.getResourceFromStringAndExpect("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }", 1);
-		int number = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
-			@Override
-			public void run() {
-				Model model = (Model) r.getContents().get(0);
-				assertEquals(2, model.getTypes().size());
-				
-				org.eclipse.xtext.linking.lazy.lazyLinking.Type type = model.getTypes().get(1);
-				assertEquals("TypeB", type.getName());
-				assertEquals(1, type.getProperties().size());
 		
-				Property prop = type.getProperties().get(0);
-				assertEquals("p1", prop.getName());
-				assertEquals(3, prop.getType().size());
+		loggingTester.addSourceFilter(LazyLinkingResource.class);
+		loggingTester.setLevel(Level.ERROR);
 		
-				org.eclipse.xtext.linking.lazy.lazyLinking.Type propType = prop.getType().get(0);
-				assertFalse(propType.eIsProxy());
-				String linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
-				assertEquals("TypeA", linkText);
+		Model model = (Model) r.getContents().get(0);
+		assertEquals(2, model.getTypes().size());
 		
-				propType = prop.getType().get(1);
-				assertTrue(propType.eIsProxy());
-				INode node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
-				linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, node);
-				assertEquals("TypeC", linkText);
-		
-				propType = prop.getType().get(2);
-				assertFalse(propType.eIsProxy());
-				node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
-				linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
-				assertEquals("TypeB", linkText);
-		
-				prop.eAdapters().remove(NodeModelUtils.getNode(prop));
-				propType = prop.getType().get(1);
-				assertTrue(propType.eIsProxy());
-				linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
-				assertNull(linkText);
-			}
-		});
-		assertEquals(2, number);
+		org.eclipse.xtext.linking.lazy.lazyLinking.Type type = model.getTypes().get(1);
+		assertEquals("TypeB", type.getName());
+		assertEquals(1, type.getProperties().size());
+
+		Property prop = type.getProperties().get(0);
+		assertEquals("p1", prop.getName());
+		assertEquals(3, prop.getType().size());
+
+		org.eclipse.xtext.linking.lazy.lazyLinking.Type propType = prop.getType().get(0);
+		assertFalse(propType.eIsProxy());
+		String linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
+		assertEquals("TypeA", linkText);
+
+		propType = prop.getType().get(1);
+		assertTrue(propType.eIsProxy());
+		INode node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
+		linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, node);
+		assertEquals("TypeC", linkText);
+
+		propType = prop.getType().get(2);
+		assertFalse(propType.eIsProxy());
+		node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
+		linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
+		assertEquals("TypeB", linkText);
+
+		prop.eAdapters().remove(NodeModelUtils.getNode(prop));
+		propType = prop.getType().get(1);
+		assertTrue(propType.eIsProxy());
+		linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
+		assertNull(linkText);
+		List<LogEntry> entries = loggingTester.getLogEntries();
+		assertEquals(2, entries.size());
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */

@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler.batch
 
+import com.google.common.base.Charsets
+import com.google.common.io.Files
 import com.google.inject.Inject
 import java.io.File
 import java.io.IOException
-import java.io.Writer
 import java.util.Set
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
@@ -25,13 +26,12 @@ import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
-import com.google.common.io.Files
-import com.google.common.base.Charsets
 
 /**
  * Batch compiler tests.
@@ -41,6 +41,8 @@ import com.google.common.base.Charsets
 @InjectWith(typeof(RuntimeInjectorProvider))
 @IgnoredBySmokeTest
 class TestBatchCompiler {
+	
+	@Rule public val loggingTester = new LoggingTester
 
 	@Inject
 	XtendBatchCompiler batchCompiler
@@ -97,11 +99,11 @@ class TestBatchCompiler {
 	}
 	
 	@Test def void testInvalidConfiguration() {
-		LoggingTester.countErrorLogging(XtendBatchCompiler) [
-			batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
-			batchCompiler.outputPath = XTEND_SRC_DIRECTORY+"/xtend-gen"
-			batchCompiler.compile	
-		]
+		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+		batchCompiler.outputPath = XTEND_SRC_DIRECTORY+"/xtend-gen"
+		batchCompiler.compile
+		val log = loggingTester.logEntries	
+		assertTrue(log.toString, log.exists[message.contains('''cannot be a child of the configured source directory''')])
 	}
 
 	@Test def void testWorkspaceConfig() {
@@ -353,22 +355,9 @@ class TestBatchCompiler {
 	@Test
 	def void testActiveAnnotatons1() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
-		val errorBuffer = new StringBuilder
-		batchCompiler.errorWriter = new Writer() {
-			override close() throws IOException {
-			}
-			
-			override flush() throws IOException {
-			}
-			
-			override write(char[] cbuf, int off, int len) throws IOException {
-				errorBuffer.append(cbuf, off, len)
-			}
-		}
-		// AA and client should not reside in the same project
 		assertFalse(batchCompiler.compile)
-		val errors = errorBuffer.toString
-		assertTrue(errors, errors.contains('Problem during instantiation of mypackage.Processor'))
+		val log = loggingTester.logEntries
+		assertTrue(log.toString, log.exists[message.contains('Problem during instantiation of mypackage.Processor')])
 	}
 
 	@Test
