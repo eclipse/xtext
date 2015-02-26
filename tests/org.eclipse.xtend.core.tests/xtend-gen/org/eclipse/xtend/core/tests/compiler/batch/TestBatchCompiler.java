@@ -13,12 +13,12 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Level;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -45,6 +45,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -57,6 +58,9 @@ import org.junit.runner.RunWith;
 @IgnoredBySmokeTest
 @SuppressWarnings("all")
 public class TestBatchCompiler {
+  @Rule
+  public final LoggingTester loggingTester = new LoggingTester(Level.ERROR, XtendBatchCompiler.class);
+  
   @Inject
   private XtendBatchCompiler batchCompiler;
   
@@ -161,15 +165,10 @@ public class TestBatchCompiler {
   
   @Test
   public void testInvalidConfiguration() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-        TestBatchCompiler.this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
-        TestBatchCompiler.this.batchCompiler.compile();
-      }
-    };
-    LoggingTester.countErrorLogging(XtendBatchCompiler.class, _function);
+    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
+    this.batchCompiler.compile();
+    this.loggingTester.assertLogEntry("xtend", "cannot be a child");
   }
   
   @Test
@@ -790,26 +789,9 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons1() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
-    final StringBuilder errorBuffer = new StringBuilder();
-    this.batchCompiler.setErrorWriter(new Writer() {
-      @Override
-      public void close() throws IOException {
-      }
-      
-      @Override
-      public void flush() throws IOException {
-      }
-      
-      @Override
-      public void write(final char[] cbuf, final int off, final int len) throws IOException {
-        errorBuffer.append(cbuf, off, len);
-      }
-    });
     boolean _compile = this.batchCompiler.compile();
     Assert.assertFalse(_compile);
-    final String errors = errorBuffer.toString();
-    boolean _contains = errors.contains("Problem during instantiation of mypackage.Processor");
-    Assert.assertTrue(errors, _contains);
+    this.loggingTester.assertLogEntry("Problem during instantiation of mypackage.Processor");
   }
   
   @Test

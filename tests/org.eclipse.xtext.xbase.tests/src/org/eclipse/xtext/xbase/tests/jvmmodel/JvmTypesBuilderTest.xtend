@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
+import org.junit.Rule
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -42,6 +43,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	extension JvmTypeReferenceBuilder
 	
 	XtextResourceSet resourceSet
+	
+	@Rule public val loggingTester = new LoggingTester
 	
 	@Inject def setJvmTypeReferenceBuilder(JvmTypeReferenceBuilder.Factory factory, XtextResourceSet resourceSet) {
 		this.resourceSet = resourceSet
@@ -259,56 +262,50 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_0() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
-				| expr.toClass(name, init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
+			| expr.toClass(name, init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	@Test
 	def void testInitializeSafely_1() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
-				| expr.toConstructor(init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
+			| expr.toConstructor(init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	@Test
 	def void testInitializeSafely_2() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
-				| expr.toField(name, null, init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
+			| expr.toField(name, null, init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	@Test
 	def void testInitializeSafely_3() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
-				| expr.toMethod(name, null, init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
+			| expr.toMethod(name, null, init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	@Test
 	def void testInitializeSafely_4() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
-				| expr.toAnnotationType(name, init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
+			| expr.toAnnotationType(name, init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	@Test
 	def void testInitializeSafely_5() {
-		expectErrorLogging(2) [
-			genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
-				| expr.toEnumerationType(name, init)
-			])
-		]
+		genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
+			| expr.toEnumerationType(name, init)
+		])
+		expectErrorLogging(2)
 	}
 	
 	def protected <T> genericTestInitializeSafely((EObject, String, (T)=>void)=>EObject create) {
@@ -319,26 +316,23 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertNotNull(element);
 	}
 	
-	def protected expectErrorLogging(Runnable block) {
-		expectErrorLogging(1,block) 
+	def protected expectErrorLogging() {
+		expectErrorLogging(1) 
 	}
 	
-	def protected expectErrorLogging(int numberOfloggings, Runnable block) {
-		val loggings = LoggingTester.countErrorLogging(JvmTypesBuilder, block)
-		assertEquals("Unexpected amount of error logging.",numberOfloggings, loggings) 
+	def protected expectErrorLogging(int numberOfloggings) {
+		loggingTester.assertNumberOfLogEntries(numberOfloggings)
 	}
 	
 	@Test def void testErrorLogging_01() throws Exception {
-		expectErrorLogging [
-			val source = typesFactory.createJvmGenericType
-			source.toClass("foo.bar")
-		]
+		val source = typesFactory.createJvmGenericType
+		source.toClass("foo.bar")
+		expectErrorLogging
 	}
 	
 	@Test def void testErrorLogging_02() throws Exception {
-		expectErrorLogging [
-			val source = typesFactory.createJvmGenericType
-			source.toClass("foo.bar")
-		]
+		val source = typesFactory.createJvmGenericType
+		source.toClass("foo.bar")
+		expectErrorLogging
 	}
 }

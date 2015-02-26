@@ -20,11 +20,14 @@ import org.junit.After
 import org.junit.Test
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractBatchTypeResolver
+import org.junit.Rule
+import org.apache.log4j.Level
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class XtendHoverInEditorTest extends AbstractXtendUITestCase {
+	@Rule public val loggingTester = new LoggingTester(Level.ERROR, AbstractBatchTypeResolver)
 	
 	@Inject extension WorkbenchTestHelper helper
 	
@@ -86,12 +89,10 @@ class XtendHoverInEditorTest extends AbstractXtendUITestCase {
 		waitForBuild(null)
 		
 		val editor = openEditor(fileBar)
-		val loggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver) [
-			val info = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
-			assertTrue(info.html,info.html.contains("Hello Foo"))
-			assertTrue(info.html,info.html.contains('SuppressWarnings</a>("foo")'))
-		]
-		assertEquals(0, loggings)
+		val info = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
+		assertTrue(info.html,info.html.contains("Hello Foo"))
+		assertTrue(info.html,info.html.contains('SuppressWarnings</a>("foo")'))
+		loggingTester.assertNoLogEntries
 		
 		// check dirty State
 		val fooEditor = openEditor(fileFoo)
@@ -105,13 +106,10 @@ class XtendHoverInEditorTest extends AbstractXtendUITestCase {
 		fooEditor.waitForReconciler
 		editor.waitForDirtyStateUpdater
 		editor.waitForReconciler
-		
-		val moreLoggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver) [
-			val info2 = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
-			assertFalse(info2.html.contains("Hello Foo"))
-			assertTrue(info2.html.contains("Hello BAZ"))
-			assertTrue(info2.html, info2.html.contains('SuppressWarnings</a>("bar")'))
-		]
-		assertEquals(0, moreLoggings)
+		val info2 = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
+		assertFalse(info2.html.contains("Hello Foo"))
+		assertTrue(info2.html.contains("Hello BAZ"))
+		assertTrue(info2.html, info2.html.contains('SuppressWarnings</a>("bar")'))
+		loggingTester.assertNoLogEntries
 	}
 }
