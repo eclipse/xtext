@@ -23,7 +23,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 /**
  * Custom validation rules.
  * 
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 @SuppressWarnings("all")
 public class ArithmeticsValidator extends AbstractArithmeticsValidator {

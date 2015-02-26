@@ -105,7 +105,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 				/**
 				 * This class contains custom validation rules. 
 				 *
-				 * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+				 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
 				 */
 				class «grammar.validatorName.toSimpleName» extends «abstractValidatorName.toSimpleName()» {
 

@@ -47,7 +47,7 @@ package «getValidatorName("").toJavaPackage()»;
 /**
  * This class contains custom validation rules. 
  *
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Abstract")» {
 

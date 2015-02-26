@@ -42,7 +42,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * See http://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 	private static final String UNKNOWN = "<unknown>";

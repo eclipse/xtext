@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.sdomain.ui.quickfix
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
  */
 class SDomainQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider {
 

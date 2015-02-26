@@ -46,7 +46,7 @@ import com.google.inject.Provider;
  * 
  * Imports are valid for all elements in the same container and their children.
  * 
- * See http://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#scoping for details.
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping for details.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein

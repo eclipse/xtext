@@ -8,7 +8,7 @@ import com.google.inject.Inject
 /**
  * Provides labels for a EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class SDomainLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider {
 

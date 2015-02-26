@@ -11,7 +11,7 @@ import org.eclipse.xtext.scoping.impl.FilteringScope
 /**
  * This class contains custom scoping description.
  * 
- * See http://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#scoping
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
  * on how and when to use it.
  */
 class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {

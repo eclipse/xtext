@@ -25,7 +25,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 /**
  * Custom validation rules. 
  *
- * See https://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#validation
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class RuleEngineValidator extends AbstractRuleEngineValidator {
 

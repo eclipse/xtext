@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 /**
  * This class contains custom formatting description.
  * 
- * See http://www.eclipse.org/Xtext/documentation/15_runtime_concepts.html#formatting
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#formatting
  * on how and when to use it.
  */
 @SuppressWarnings("all")

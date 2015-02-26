@@ -6,7 +6,7 @@ package org.eclipse.xtext.idea.example.entities.ui.outline
 /**
  * Customization of the default outline structure.
  *
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#outline
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 class EntitiesOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
 	

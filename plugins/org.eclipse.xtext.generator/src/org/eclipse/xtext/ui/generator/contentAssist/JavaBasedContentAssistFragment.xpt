@@ -87,7 +87,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 package «getProposalProvider().toJavaPackage()»;
 
 /**
- * See https://www.eclipse.org/Xtext/documentation/16_ide_concepts.html#content-assist
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
