@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +35,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.google.common.primitives.Ints;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -236,45 +234,8 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 				return notInterfaces;
 			}
 			
-			/**
-			 * Sorts the interfaces by the number of occurrences in the inheritance graph.
-			 * The resulting collection will return the interfaces with a lower number of
-			 * occurrences first. The order is stabilized by using the identifier of the
-			 * interface as a secondary sorting criteria.
-			 * 
-			 * Example:
-			 * 
-			 * <pre>
-			 * interface I {}
-			 * interface J extends I {}
-			 * class C implements I, J {}
-			 * </pre>
-			 * 
-			 * The class C implements the interface I twice: directly and transitively via J.
-			 * Thus I occurs twice in the inheritance graph. Therefore I is the last element
-			 * in the collection whereas J is the first element.
-			 */
-			public Collection<JvmType> getSortedInterfaces() {
-				// no need to sort if only one interface is implemented
-				Set<JvmType> distinctInterfaces = interfaces.elementSet();
-				switch(distinctInterfaces.size()) {
-					case 0: return Collections.emptySet();
-					case 1: return distinctInterfaces;
-				}
-				
-				// more than one interface: create a sorted list.
-				List<JvmType> result = Lists.newArrayList(distinctInterfaces);
-				Collections.sort(result, new Comparator<JvmType>() {
-					@Override
-					public int compare(JvmType o1, JvmType o2) {
-						int result = Ints.compare(interfaces.count(o1), interfaces.count(o2));
-						if (result == 0) {
-							result = o1.getIdentifier().compareTo(o2.getIdentifier());
-						}
-						return result;
-					}
-				});
-				return result;
+			public int consumeInterfaceOccurrence(JvmGenericType intf) {
+				return interfaces.remove(intf, 1);
 			}
 			
 		}
@@ -284,11 +245,68 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 				computeAllOperations((JvmDeclaredType) superClass, processedOperations);
 			}
 		}
-		for(JvmType superIntf: superTypes.getSortedInterfaces()) {
-			if (superIntf instanceof JvmDeclaredType) {
-				computeAllOperations((JvmDeclaredType) superIntf, processedOperations);
+		
+		class SuperInterfaceConsumer extends TypesSwitch<Boolean> {
+
+			private Set<JvmType> seen = Sets.newHashSet();
+			
+			@Override
+			public Boolean doSwitch(EObject theEObject) {
+				if (theEObject == null)
+					return Boolean.FALSE;
+				return super.doSwitch(theEObject);
 			}
+			
+			@Override
+			public Boolean defaultCase(EObject object) {
+				return Boolean.FALSE;
+			}
+			
+			@Override
+			public Boolean caseJvmTypeReference(JvmTypeReference object) {
+				return doSwitch(object.getType());
+			}
+			
+			@Override
+			public Boolean caseJvmDeclaredType(JvmDeclaredType object) {
+				if (seen.add(object)) {
+					for (JvmTypeReference superType : object.getSuperTypes()) {
+						doSwitch(superType);
+					}
+					return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+			
+			@Override
+			public Boolean caseJvmGenericType(JvmGenericType object) {
+				if (object.isInterface()) {
+					int was = superTypes.consumeInterfaceOccurrence(object);
+					if (was == 0) {
+						return Boolean.FALSE;
+					}
+					if (was == 1) {
+						computeAllOperations(object, processedOperations);
+					}
+					for (JvmTypeReference superType : object.getSuperTypes()) {
+						doSwitch(superType);
+					}
+					return was > 1;
+				} else if (seen.add(object)) {
+					for (JvmTypeReference superType : object.getSuperTypes()) {
+						doSwitch(superType);
+					}
+					return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+			
+			public void consume(JvmType rootType) {
+				doSwitch(rootType);
+			}
+			
 		}
+		new SuperInterfaceConsumer().consume(rootType);
 	}
 	
 	protected List<IResolvedOperation> computeDeclaredOperations() {
