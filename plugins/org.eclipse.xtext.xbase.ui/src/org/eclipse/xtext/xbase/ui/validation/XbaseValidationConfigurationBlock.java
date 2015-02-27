@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  * 
  */
-public abstract class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
+public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
 	@Inject
 	private ConfigurableIssueCodesProvider issueCodeProvider;
 
@@ -53,7 +53,7 @@ public abstract class XbaseValidationConfigurationBlock extends AbstractValidato
 		fillPotentialProgrammingProblemsSection(new ComboBoxBuilder(this, programmingProblems, defaultIndent));
 
 		Composite restrictedApi = createSection(
-				Messages.XbaseValidationConfigurationBlock_restricted_api_section_title, composite, nColumns);
+				Messages.XbaseValidationConfigurationBlock_re/Users/koehnlein/Documents/devel/xtext/git/org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.ui/src/org/eclipse/xtext/xbase/ui/validation/XbaseValidationConfigurationBlock.javastricted_api_section_title, composite, nColumns);
 		fillRestrictedApiSection(new ComboBoxBuilder(this, restrictedApi, defaultIndent));
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
