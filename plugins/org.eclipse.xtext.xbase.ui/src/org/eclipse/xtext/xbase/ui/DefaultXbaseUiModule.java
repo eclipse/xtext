@@ -124,7 +124,7 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
-
+	
 	@SingletonBinding(eager = true)
 	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
 		return ProjectAwareUniqueClassNameValidator.class;

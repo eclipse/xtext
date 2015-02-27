@@ -5,12 +5,10 @@ package org.eclipse.xtext.example.domainmodel.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider;
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
 import org.eclipse.xtext.example.domainmodel.ui.outline.FilterOperationsContribution;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -56,10 +54,4 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
 		return EclipseFileSystemSupportImpl.class;
 	}
-	
-	@Override
-	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
-		return EclipseResourceFileSystemAccess2.class;
-	}
-
 }
