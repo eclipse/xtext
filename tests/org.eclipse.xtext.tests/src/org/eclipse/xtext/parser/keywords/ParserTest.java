@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.keywords;
 
+import java.io.IOException;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -22,7 +24,6 @@ import org.junit.Test;
  */
 public class ParserTest extends AbstractXtextTests {
 
-	private ParserTestHelper helper;
 	private EStructuralFeature first;
 	private EStructuralFeature second;
 	private EStructuralFeature third;
@@ -36,7 +37,6 @@ public class ParserTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
-		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 		EPackage pack = KeywordsTestLanguagePackage.eINSTANCE;
 		EClass clazz = (EClass) pack.getEClassifier("Model");
 		first = clazz.getEStructuralFeature("first");
@@ -57,50 +57,54 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@Test public void testFooBar() throws Exception {
-		XtextResource resource = helper.getResourceFromString("foo\\bar");
+		XtextResource resource = parse("foo\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, first);
 	}
 
 	@Test public void testFoo() throws Exception {
-		XtextResource resource = helper.getResourceFromString("foo\\");
+		XtextResource resource = parse("foo\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, second);
 	}
 
 	@Test public void testBar() throws Exception {
-		XtextResource resource = helper.getResourceFromString("\\bar");
+		XtextResource resource = parse("\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, third);
 	}
 
 	@Test public void testBackslash() throws Exception {
-		XtextResource resource = helper.getResourceFromString("\\");
+		XtextResource resource = parse("\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, forth);
 	}
 
 	@Test public void testFifth() throws Exception {
-		XtextResource resource = helper.getResourceFromString("\"a\"");
+		XtextResource resource = parse("\"a\"");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, fifth);
 	}
 	
 	@Test public void testSixth() throws Exception {
-		XtextResource resource = helper.getResourceFromString("'b'");
+		XtextResource resource = parse("'b'");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, sixth);
 	}
 	
 	@Test public void testSeventh() throws Exception {
-		XtextResource resource = helper.getResourceFromString("'c'");
+		XtextResource resource = parse("'c'");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, seventh);
 	}
 	
 	@Test public void testEighth() throws Exception {
-		XtextResource resource = helper.getResourceFromString("\"d\"");
+		XtextResource resource = parse("\"d\"");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, eighth);
+	}
+
+	protected XtextResource parse(String model) throws IOException {
+		return new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension()).getResourceFromString(model);
 	}
 }

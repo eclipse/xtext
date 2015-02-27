@@ -17,6 +17,7 @@ import com.intellij.psi.impl.source.tree.LeafElement;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Provider;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -106,6 +107,9 @@ public class PsiToEcoreTransformationContext {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private DatatypeRuleToken datatypeRuleToken;
   
+  @Accessors
+  private Enumerator enumerator;
+  
   private INode lastConsumedNode;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -174,6 +178,10 @@ public class PsiToEcoreTransformationContext {
       }
       if (_and) {
         this.datatypeRuleToken.merge(childTransformationContext.datatypeRuleToken);
+      }
+      boolean _equals_1 = Objects.equal(this.enumerator, null);
+      if (_equals_1) {
+        this.enumerator = childTransformationContext.enumerator;
       }
       _xblockexpression = this;
     }
@@ -545,6 +553,15 @@ public class PsiToEcoreTransformationContext {
   @Pure
   public DatatypeRuleToken getDatatypeRuleToken() {
     return this.datatypeRuleToken;
+  }
+  
+  @Pure
+  public Enumerator getEnumerator() {
+    return this.enumerator;
+  }
+  
+  public void setEnumerator(final Enumerator enumerator) {
+    this.enumerator = enumerator;
   }
   
   @Pure

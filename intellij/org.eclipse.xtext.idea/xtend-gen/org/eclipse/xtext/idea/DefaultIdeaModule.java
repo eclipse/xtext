@@ -45,7 +45,7 @@ import org.eclipse.xtext.service.SingletonBinding;
  */
 @SuppressWarnings("all")
 public class DefaultIdeaModule extends AbstractGenericModule {
-  public Class<? extends Lexer> bindLexer() {
+  public Class<? extends Lexer> bindIdeaLexer() {
     return AntlrDelegatingIdeaLexer.class;
   }
   

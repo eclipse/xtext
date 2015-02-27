@@ -18,10 +18,12 @@ import org.junit.Assert
 
 import static extension org.eclipse.xtext.util.EmfFormatter.*
 import com.intellij.psi.PsiErrorElement
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class XtextResourceAsserts extends Assert {
 
 	@Inject
+	@Accessors(PUBLIC_GETTER)
 	extension NodeModelPrinter nodeModelPrinter
 
 	@Inject

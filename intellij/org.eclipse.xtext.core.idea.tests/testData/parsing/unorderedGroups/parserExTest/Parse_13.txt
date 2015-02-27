@@ -1,0 +1,8 @@
+org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTestLanguageFileImpl:a.exunorderedgroupstestlanguage(0,2)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ELEMENT_TYPE)(0,2)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,2)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
+        <empty list>
+      PsiElement(Model_DigitOneDigitThreeKeyword_1_12_0_ELEMENT_TYPE)('13')(0,2)
+  PsiErrorElement:mismatched input '<EOF>' expecting 'a'(2,2)
+    <empty list>

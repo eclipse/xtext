@@ -42,7 +42,7 @@ import org.eclipse.xtext.service.SingletonBinding
  */
 class DefaultIdeaModule extends AbstractGenericModule {
 
-	def Class<? extends Lexer> bindLexer() {
+	def Class<? extends Lexer> bindIdeaLexer() {
 		AntlrDelegatingIdeaLexer
 	}
 

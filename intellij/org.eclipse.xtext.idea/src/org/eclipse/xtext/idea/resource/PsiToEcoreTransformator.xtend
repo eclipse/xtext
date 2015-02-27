@@ -30,6 +30,8 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.util.ReplaceRegion
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.EnumLiteralDeclaration
+import org.eclipse.xtext.idea.lang.GrammarAwarePsiErrorElement
 
 class PsiToEcoreTransformator implements IParser {
 
@@ -77,13 +79,18 @@ class PsiToEcoreTransformator implements IParser {
 
 	protected dispatch def void transform(CompositeElement it,
 		extension PsiToEcoreTransformationContext transformationContext) {
-		if (it instanceof PsiErrorElement) {
-			transformChildren(transformationContext)
-			appendSyntaxError
-		} else {
-			val elementType = elementType
-			if (elementType instanceof IGrammarAwareElementType) {
-				transform(elementType.grammarElement, transformationContext)
+		switch it {
+			GrammarAwarePsiErrorElement:
+				grammarElement.ensureModelElementCreated
+			PsiErrorElement: {
+				transformChildren(transformationContext)
+				appendSyntaxError
+			}
+			default: {
+				val elementType = elementType
+				if (elementType instanceof IGrammarAwareElementType) {
+					transform(elementType.grammarElement, transformationContext)
+				}
 			}
 		}
 	}
@@ -91,6 +98,12 @@ class PsiToEcoreTransformator implements IParser {
 	protected def dispatch void transform(ASTNode it, EObject grammarElement,
 		extension PsiToEcoreTransformationContext transformationContext) {
 		throw new IllegalStateException('Unexpected grammar element: ' + grammarElement + ', for node: ' + it)
+	}
+	
+	protected def dispatch void transform(LeafElement it, EnumLiteralDeclaration enumLiteralDeclaration,
+		extension PsiToEcoreTransformationContext  transformationContext) {
+		transformationContext.enumerator = enumLiteralDeclaration.enumLiteral.instance
+		newLeafNode(enumLiteralDeclaration, enumLiteralDeclaration.literal.value)
 	}
 
 	protected def dispatch void transform(LeafElement it, Keyword keyword,
@@ -146,6 +159,12 @@ class PsiToEcoreTransformator implements IParser {
 		extension PsiToEcoreTransformationContext transformationContext) {
 		throw new IllegalStateException('Unexpected grammar element: ' + grammarElement + ', for node: ' + it)
 	}
+	
+	protected def dispatch void transformActionLeftElement(CompositeElement it, ParserRule parserRule,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		newCompositeNode
+		transformChildren(transformationContext)		
+	}
 
 	protected def dispatch void transformActionLeftElement(CompositeElement it, Action action,
 		extension PsiToEcoreTransformationContext transformationContext) {
@@ -186,7 +205,19 @@ class PsiToEcoreTransformator implements IParser {
 				childTransformationContext.merge
 				compress
 			}
-			EnumRule,
+			EnumRule: {
+				newCompositeNode
+				val childTransformationContext = transformationContext.branch
+				transformChildren(childTransformationContext).sync
+				if (ruleCall.ensureModelElementCreated) {
+					val enumerator = childTransformationContext.enumerator
+					if (enumerator != null) {
+						assign(enumerator, ruleCall, rule.name)
+					}
+				}
+				childTransformationContext.merge
+				compress
+			}
 			ParserRule: {
 				newCompositeNode
 				val childTransformationContext = transformationContext.branch

@@ -34,6 +34,10 @@ public class BaseXtextASTFactory extends DefaultASTFactoryImpl {
 			userDataElementType.getCreateCallback().onCreate(composite);
 			return composite;
 		}
+		if (type instanceof GrammarAwareErrorElementType) {
+			GrammarAwareErrorElementType grammarAwareErrorElementType = (GrammarAwareErrorElementType) type;
+			return new GrammarAwarePsiErrorElement(grammarAwareErrorElementType.getElementType());
+		}
 		return super.createComposite(type);
 	}
 

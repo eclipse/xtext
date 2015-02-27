@@ -17,18 +17,22 @@ import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
 import java.io.Reader;
 import java.util.Arrays;
+import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.idea.lang.GrammarAwarePsiErrorElement;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformationContext;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -100,20 +104,43 @@ public class PsiToEcoreTransformator implements IParser {
   }
   
   protected void _transform(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
-    if ((it instanceof PsiErrorElement)) {
-      this.transformChildren(it, transformationContext);
-      transformationContext.appendSyntaxError(((PsiErrorElement)it));
-    } else {
-      final IElementType elementType = it.getElementType();
-      if ((elementType instanceof IGrammarAwareElementType)) {
-        EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
-        this.transform(it, _grammarElement, transformationContext);
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof GrammarAwarePsiErrorElement) {
+        _matched=true;
+        EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
+        transformationContext.ensureModelElementCreated(_grammarElement);
+      }
+    }
+    if (!_matched) {
+      if (it instanceof PsiErrorElement) {
+        _matched=true;
+        this.transformChildren(it, transformationContext);
+        transformationContext.appendSyntaxError(((PsiErrorElement)it));
+      }
+    }
+    if (!_matched) {
+      {
+        final IElementType elementType = it.getElementType();
+        if ((elementType instanceof IGrammarAwareElementType)) {
+          EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+          this.transform(it, _grammarElement, transformationContext);
+        }
       }
     }
   }
   
   protected void _transform(final ASTNode it, final EObject grammarElement, @Extension final PsiToEcoreTransformationContext transformationContext) {
     throw new IllegalStateException(((("Unexpected grammar element: " + grammarElement) + ", for node: ") + it));
+  }
+  
+  protected void _transform(final LeafElement it, final EnumLiteralDeclaration enumLiteralDeclaration, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    EEnumLiteral _enumLiteral = enumLiteralDeclaration.getEnumLiteral();
+    Enumerator _instance = _enumLiteral.getInstance();
+    transformationContext.setEnumerator(_instance);
+    Keyword _literal = enumLiteralDeclaration.getLiteral();
+    String _value = _literal.getValue();
+    transformationContext.newLeafNode(it, enumLiteralDeclaration, _value);
   }
   
   protected void _transform(final LeafElement it, final Keyword keyword, @Extension final PsiToEcoreTransformationContext transformationContext) {
@@ -175,6 +202,11 @@ public class PsiToEcoreTransformator implements IParser {
     throw new IllegalStateException(((("Unexpected grammar element: " + grammarElement) + ", for node: ") + it));
   }
   
+  protected void _transformActionLeftElement(final CompositeElement it, final ParserRule parserRule, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    transformationContext.newCompositeNode(it);
+    this.transformChildren(it, transformationContext);
+  }
+  
   protected void _transformActionLeftElement(final CompositeElement it, final Action action, @Extension final PsiToEcoreTransformationContext transformationContext) {
     transformationContext.newCompositeNode(it);
     transformationContext.ensureModelElementCreated(action);
@@ -226,13 +258,26 @@ public class PsiToEcoreTransformator implements IParser {
     if (!_matched) {
       if (rule instanceof EnumRule) {
         _matched=true;
-      }
-      if (!_matched) {
-        if (rule instanceof ParserRule) {
-          _matched=true;
+        transformationContext.newCompositeNode(it);
+        final PsiToEcoreTransformationContext childTransformationContext = transformationContext.branch();
+        PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
+        transformationContext.sync(_transformChildren);
+        boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
+        if (_ensureModelElementCreated) {
+          final Enumerator enumerator = childTransformationContext.getEnumerator();
+          boolean _notEquals = (!Objects.equal(enumerator, null));
+          if (_notEquals) {
+            String _name = ((EnumRule)rule).getName();
+            transformationContext.assign(enumerator, ruleCall, _name);
+          }
         }
+        transformationContext.merge(childTransformationContext);
+        transformationContext.compress();
       }
-      if (_matched) {
+    }
+    if (!_matched) {
+      if (rule instanceof ParserRule) {
+        _matched=true;
         transformationContext.newCompositeNode(it);
         final PsiToEcoreTransformationContext childTransformationContext = transformationContext.branch();
         PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
@@ -242,7 +287,7 @@ public class PsiToEcoreTransformator implements IParser {
           final EObject child = childTransformationContext.getCurrent();
           boolean _notEquals = (!Objects.equal(child, null));
           if (_notEquals) {
-            String _name = rule.getName();
+            String _name = ((ParserRule)rule).getName();
             transformationContext.assign(child, ruleCall, _name);
           }
         }
@@ -340,6 +385,10 @@ public class PsiToEcoreTransformator implements IParser {
       _transform((LeafElement)it, (CrossReference)action, transformationContext);
       return;
     } else if (it instanceof LeafElement
+         && action instanceof EnumLiteralDeclaration) {
+      _transform((LeafElement)it, (EnumLiteralDeclaration)action, transformationContext);
+      return;
+    } else if (it instanceof LeafElement
          && action instanceof Keyword) {
       _transform((LeafElement)it, (Keyword)action, transformationContext);
       return;
@@ -373,6 +422,9 @@ public class PsiToEcoreTransformator implements IParser {
   protected void transformActionLeftElement(final CompositeElement it, final EObject action, final PsiToEcoreTransformationContext transformationContext) {
     if (action instanceof Action) {
       _transformActionLeftElement(it, (Action)action, transformationContext);
+      return;
+    } else if (action instanceof ParserRule) {
+      _transformActionLeftElement(it, (ParserRule)action, transformationContext);
       return;
     } else if (action instanceof RuleCall) {
       _transformActionLeftElement(it, (RuleCall)action, transformationContext);

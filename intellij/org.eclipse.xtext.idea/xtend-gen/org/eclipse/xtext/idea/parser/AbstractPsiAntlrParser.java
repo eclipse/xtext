@@ -30,6 +30,7 @@ import org.antlr.runtime.UnwantedTokenException;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.lang.GrammarAwareErrorElementType;
 import org.eclipse.xtext.idea.parser.CompositeMarker;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
@@ -209,6 +210,9 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     boolean _equals = Objects.equal(matchedToken, null);
     if (_equals) {
       this.drop();
+      PsiBuilder.Marker _mark = this.psiBuilder.mark();
+      GrammarAwareErrorElementType _grammarAwareErrorElementType = new GrammarAwareErrorElementType(elementType);
+      _mark.done(_grammarAwareErrorElementType);
       return;
     }
     final PsiBuilder.Marker marker = this.leafMarkers.pop();
