@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.junit4.logging.LoggingTester.LogCapture;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.scoping.IScope;
@@ -43,7 +45,7 @@ public class Bug281990Test extends AbstractXtextTests {
 	}
 
 	@Test public void testRecursionErrorMessage() throws Exception {
-		int loggings = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
+		LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, LazyLinkingResource.class, new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -55,6 +57,6 @@ public class Bug281990Test extends AbstractXtextTests {
 				}
 			}
 		});
-		assertEquals(1, loggings);
+		loggings.assertNumberOfLogEntries(1);
 	}
 }

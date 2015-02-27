@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
+import org.apache.log4j.Level
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -324,8 +325,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected expectErrorLogging(int numberOfloggings, Runnable block) {
-		val loggings = LoggingTester.countErrorLogging(JvmTypesBuilder, block)
-		assertEquals("Unexpected amount of error logging.",numberOfloggings, loggings) 
+		val loggings = LoggingTester.captureLogging(Level.ERROR, JvmTypesBuilder, block)
+		loggings.assertNumberOfLogEntries(numberOfloggings)
 	}
 	
 	@Test def void testErrorLogging_01() throws Exception {
