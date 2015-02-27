@@ -2,6 +2,7 @@ package org.eclipse.xtext.linking;
 
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -14,6 +15,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.junit4.logging.LoggingTester.LogCapture;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
@@ -146,7 +148,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		final LazyLinkingTestLanguageGrammarAccess g =  (LazyLinkingTestLanguageGrammarAccess) get(IGrammarAccess.class);
 		
 		final XtextResource r = CrossRefTest.this.getResourceFromStringAndExpect("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }", 1);
-		int number = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
+		LogCapture log = LoggingTester.captureLogging(Level.ERROR, LazyLinkingResource.class, new Runnable() {
 			@Override
 			public void run() {
 				Model model = (Model) r.getContents().get(0);
@@ -184,7 +186,7 @@ public class CrossRefTest extends AbstractXtextTests {
 				assertNull(linkText);
 			}
 		});
-		assertEquals(2, number);
+		log.assertNumberOfLogEntries(2);
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */
