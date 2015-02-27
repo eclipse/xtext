@@ -4,9 +4,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.parser.unorderedGroups.IdeaParserExTestDelegate;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestLanguageFileType;
-import org.junit.Ignore;
 
-@Ignore
 @TestDecorator
 @SuppressWarnings("all")
 public class IdeaParserExTest extends AbstractLanguageParsingTestCase {

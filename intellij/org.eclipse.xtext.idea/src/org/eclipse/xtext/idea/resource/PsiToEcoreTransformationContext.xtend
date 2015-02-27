@@ -13,6 +13,7 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
 import javax.inject.Provider
+import org.eclipse.emf.common.util.Enumerator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
@@ -67,6 +68,9 @@ class PsiToEcoreTransformationContext {
 
 	@Accessors(PUBLIC_GETTER)
 	DatatypeRuleToken datatypeRuleToken
+	
+	@Accessors
+	Enumerator enumerator
 
 	INode lastConsumedNode
 
@@ -111,6 +115,9 @@ class PsiToEcoreTransformationContext {
 		}
 		if (datatypeRuleToken != null && childTransformationContext.datatypeRuleToken != null) {
 			datatypeRuleToken.merge(childTransformationContext.datatypeRuleToken)
+		}
+		if (enumerator == null) {
+			enumerator = childTransformationContext.enumerator
 		}
 		this
 	}

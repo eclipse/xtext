@@ -26,6 +26,7 @@ import org.antlr.runtime.UnwantedTokenException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper
+import org.eclipse.xtext.idea.lang.GrammarAwareErrorElementType
 
 abstract class AbstractPsiAntlrParser extends Parser {
 	
@@ -136,6 +137,7 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	protected def void doneLeaf(Token matchedToken, IElementType elementType) {
 		if (matchedToken == null) {
 			drop
+			psiBuilder.mark.done(new GrammarAwareErrorElementType(elementType))
 			return
 		}
 		val marker = leafMarkers.pop

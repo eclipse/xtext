@@ -41,6 +41,7 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
 import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
@@ -85,6 +86,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   
   @Override
   protected void setUp() throws Exception {
+    NodeModelPrinter _nodeModelPrinter = this.xtextResourceAsserts.getNodeModelPrinter();
+    _nodeModelPrinter.setIgnoreSyntaxErrors(false);
     super.setUp();
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
     MockApplicationEx _application = PlatformLiteFixture.getApplication();

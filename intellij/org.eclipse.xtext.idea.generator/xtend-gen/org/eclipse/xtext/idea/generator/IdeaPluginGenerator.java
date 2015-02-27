@@ -132,6 +132,17 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
     String outlet_src_gen = _srcGenOutlet.getName();
     final BindFactory bindFactory = new BindFactory();
+    String _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
+    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider", _antlrTokenFileProvider);
+    String _psiInternalLexerName = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
+    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.Lexer", _psiInternalLexerName);
+    String _psiInternalLexerName_1 = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
+    String _plus = (((("binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)" + 
+      ".annotatedWith(com.google.inject.name.Names.named(") + 
+      "org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME") + 
+      ")).to(") + _psiInternalLexerName_1);
+    String _plus_1 = (_plus + ".class)");
+    bindFactory.addConfiguredBinding("RuntimeLexer", _plus_1);
     String _psiParserName = this._ideaPluginClassNames.getPsiParserName(grammar);
     bindFactory.addTypeToType("com.intellij.lang.PsiParser", _psiParserName);
     String _tokenTypeProviderName = this._ideaPluginClassNames.getTokenTypeProviderName(grammar);
@@ -222,27 +233,31 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_16 = this._ideaPluginClassNames.toJavaPath(_psiParserName_1);
     CharSequence _compilePsiParser = this.compilePsiParser(grammar);
     ctx.writeFile(outlet_src_gen, _javaPath_16, _compilePsiParser);
+    String _antlrTokenFileProvider_1 = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
+    String _javaPath_17 = this._ideaPluginClassNames.toJavaPath(_antlrTokenFileProvider_1);
+    CharSequence _compileAntlrTokenFileProvider = this.compileAntlrTokenFileProvider(grammar);
+    ctx.writeFile(outlet_src_gen, _javaPath_17, _compileAntlrTokenFileProvider);
     String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(grammar);
-    String _javaPath_17 = this._ideaPluginClassNames.toJavaPath(_pomDeclarationSearcherName);
+    String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_pomDeclarationSearcherName);
     CharSequence _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_17, _compilePomDeclarationSearcher);
+    ctx.writeFile(outlet_src_gen, _javaPath_18, _compilePomDeclarationSearcher);
     if (this.typesIntegrationRequired) {
       String _jvmTypesElementFinderName = this._ideaPluginClassNames.getJvmTypesElementFinderName(grammar);
-      String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_jvmTypesElementFinderName);
+      String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_jvmTypesElementFinderName);
       CharSequence _compileJvmTypesElementFinder = this.compileJvmTypesElementFinder(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_18, _compileJvmTypesElementFinder);
+      ctx.writeFile(outlet_src_gen, _javaPath_19, _compileJvmTypesElementFinder);
       String _jvmTypesShortNamesCacheName = this._ideaPluginClassNames.getJvmTypesShortNamesCacheName(grammar);
-      String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_jvmTypesShortNamesCacheName);
+      String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_jvmTypesShortNamesCacheName);
       CharSequence _compileJvmTypesShortNamesCache = this.compileJvmTypesShortNamesCache(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_19, _compileJvmTypesShortNamesCache);
+      ctx.writeFile(outlet_src_gen, _javaPath_20, _compileJvmTypesShortNamesCache);
       String _jvmElementsReferencesSearch = this._ideaPluginClassNames.getJvmElementsReferencesSearch(grammar);
-      String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_jvmElementsReferencesSearch);
+      String _javaPath_21 = this._ideaPluginClassNames.toJavaPath(_jvmElementsReferencesSearch);
       CharSequence _compileJvmElementsReferencesSearch = this.compileJvmElementsReferencesSearch(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_20, _compileJvmElementsReferencesSearch);
+      ctx.writeFile(outlet_src_gen, _javaPath_21, _compileJvmElementsReferencesSearch);
       String _callReferenceProcessorName = this._ideaPluginClassNames.getCallReferenceProcessorName(grammar);
-      String _javaPath_21 = this._ideaPluginClassNames.toJavaPath(_callReferenceProcessorName);
+      String _javaPath_22 = this._ideaPluginClassNames.toJavaPath(_callReferenceProcessorName);
       CharSequence _compileCallReferenceProcessor = this.compileCallReferenceProcessor(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_21, _compileCallReferenceProcessor);
+      ctx.writeFile(outlet_src_gen, _javaPath_22, _compileCallReferenceProcessor);
     }
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
@@ -1030,6 +1045,51 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileAntlrTokenFileProvider(final Grammar grammar) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_antlrTokenFileProvider);
+    _builder.append(_packageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import java.io.InputStream;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class ");
+    String _antlrTokenFileProvider_1 = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_antlrTokenFileProvider_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" implements IAntlrTokenFileProvider {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public InputStream getAntlrTokenFile() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ClassLoader classLoader = getClass().getClassLoader();");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("return classLoader.getResourceAsStream(\"");
+    String _tokens = this._ideaPluginClassNames.getTokens(grammar);
+    _builder.append(_tokens, "    \t");
+    _builder.append("\");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

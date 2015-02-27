@@ -36,6 +36,11 @@ public class IdeaParserExTestDelegate extends ParserExTest {
     return ((XtextResource) _eResource);
   }
   
+  @Override
+  protected boolean shouldTestSerializer(final XtextResource resource) {
+    return false;
+  }
+  
   public IdeaParserExTestDelegate(final ModelChecker modelChecker) {
     super();
     this.modelChecker = modelChecker;

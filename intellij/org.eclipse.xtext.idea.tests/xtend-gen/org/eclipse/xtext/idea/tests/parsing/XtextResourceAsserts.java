@@ -15,6 +15,8 @@ import com.intellij.psi.PsiErrorElement;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
@@ -29,11 +31,13 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class XtextResourceAsserts extends Assert {
   @Inject
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Extension
   private NodeModelPrinter nodeModelPrinter;
   
@@ -102,5 +106,10 @@ public class XtextResourceAsserts extends Assert {
       }
     };
     return IterableExtensions.<INode>exists(_asTreeIterable, _function);
+  }
+  
+  @Pure
+  public NodeModelPrinter getNodeModelPrinter() {
+    return this.nodeModelPrinter;
   }
 }

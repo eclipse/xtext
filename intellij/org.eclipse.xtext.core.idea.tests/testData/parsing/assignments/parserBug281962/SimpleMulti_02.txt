@@ -1,0 +1,8 @@
+org.eclipse.xtext.parser.assignments.idea.lang.psi.impl.AssignmentsTestLanguageFileImpl:a.assignmentstestlanguage(0,26)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,26)
+    PsiElement(Model_SimpleKeyword_0_0_ELEMENT_TYPE)('simple')(0,6)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_MultiMultiValueParserRuleCall_0_1_1_0_ELEMENT_TYPE)(6,26)
+      PsiWhiteSpace(' ')(6,7)
+      PsiElement(MultiValue_StringsKeyword_2_0_ELEMENT_TYPE)('strings')(7,14)
+      PsiWhiteSpace(' ')(14,15)
+      PsiElement(MultiValue_ValueSTRINGTerminalRuleCall_2_1_0_ELEMENT_TYPE)(''something'')(15,26)
