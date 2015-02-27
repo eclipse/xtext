@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  * 
  */
-public abstract class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
+public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
 	@Inject
 	private ConfigurableIssueCodesProvider issueCodeProvider;
 
