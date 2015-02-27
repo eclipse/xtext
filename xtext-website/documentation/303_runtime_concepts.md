@@ -375,10 +375,12 @@ If you want to define the Scope for the superElement cross-reference the followi
 ```java
 
   IScope getScope(EObject context, EReference reference) {
-      if(context instanceof Element && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
-        // Collect a list of candidates by going through the model.
-        // EcoreUtil2 provides useful functionality to do that.
-        // For example search for all elements within the root element's tree
+      // We want to define the Scope for the Element's superElement cross-reference
+      if(context instanceof Element
+          && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
+        // Collect a list of candidates by going through the model
+        // EcoreUtil2 provides useful functionality to do that
+        // For example searching for all elements within the root Object's tree
         EObject rootElement = EcoreUtil2.getRootContainer(context);
         List<Element> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
         // Scopes.scopeFor creates IEObjectDescriptions and puts them into an IScope instance
@@ -389,9 +391,9 @@ If you want to define the Scope for the superElement cross-reference the followi
   }
 ```
 
-There are different useful implementations for IScopes shipped with Xtext.
-The [MapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java) comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the [MultimapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java) should work for you. To filter some element out of an existing IScope the [FilteringScope]({{site.src.xtext}}/plugins/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java) is in some situations the right way to go. As Scopes can be nested we strongly recommend to use FilteringScope only for leaf Scopes without parent Scope.
-To come back to our example one possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a superElement of itself.
+There are different useful implementations for IScopes shipped with Xtext. We want to mention only some of them here.
+The [MapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java) comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the [MultimapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java) should work for you. To filter some element out of an existing Scope the [FilteringScope]({{site.src.xtext}}/plugins/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java) is in some situations the right way to go. As Scopes can be nested, we strongly recommend to use FilteringScope only for leaf Scopes without parent Scope.
+To come back to our example: One possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a superElement of itself.
 
 ```java
   IScope getScope(EObject context, EReference reference) {
