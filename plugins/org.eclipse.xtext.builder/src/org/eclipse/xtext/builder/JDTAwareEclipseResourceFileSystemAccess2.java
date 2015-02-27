@@ -16,6 +16,10 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
 /**
+ * A specialization of the EclipseResourceFileSystemAccess2 for languages that produce
+ * Java code. If code is written to a folder that is not yet a source folder, it will be
+ * automatically added as a source folder.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
@@ -53,4 +57,5 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 			jp.setRawClasspath(newClassPath, getMonitor());
 		}
 	}
+	
 }

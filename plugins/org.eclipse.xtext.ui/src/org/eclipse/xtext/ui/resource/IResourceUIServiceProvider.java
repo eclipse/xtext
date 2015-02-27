@@ -43,7 +43,7 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	
 	/**
 	 * The reference updater of the language.
-	 * @deprecated use {@link #get(Class) get(IReferenceUpdater.class)}  instead
+	 * @deprecated use {@link #get(Class) get(IReferenceUpdater.class)} instead
 	 */
 	@Deprecated
 	IReferenceUpdater getReferenceUpdater();

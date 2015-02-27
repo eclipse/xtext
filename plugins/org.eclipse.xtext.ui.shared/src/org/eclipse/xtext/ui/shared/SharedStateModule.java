@@ -17,6 +17,7 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.common.types.xtext.ui.JdtAwareProjectByResourceProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
@@ -171,5 +173,30 @@ public class SharedStateModule extends AbstractGenericModule {
 		}
 		
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void configureProjectByResourceProvider(Binder binder) {
+		if (Activator.isJavaEnabled()) {
+			binder.install(new ProjectByResourceProviderModule());
+		} else {
+			binder.bind(ProjectByResourceProvider.class);
+		}
+	}
+	
+	/*
+	 * Extracted to an own static class to get rid of the dependency to the JdtAwareProjectByResourceProvider
+	 * from the SharedStateModule
+	 */
+	private static class ProjectByResourceProviderModule extends AbstractModule {
+
+		@Override
+		protected void configure() {
+			bind(ProjectByResourceProvider.class).to(JdtAwareProjectByResourceProvider.class);
+		}
+		
+	}
+	
 
 }

@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.xtext.xbase.file.IWorkspaceConfig
-import com.google.inject.Singleton
 
 class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
 	

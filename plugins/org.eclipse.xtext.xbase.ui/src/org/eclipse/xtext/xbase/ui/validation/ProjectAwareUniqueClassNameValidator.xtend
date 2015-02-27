@@ -11,12 +11,14 @@ import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.jdt.core.IType
+import org.eclipse.jdt.core.JavaModelException
 import org.eclipse.jdt.core.compiler.CharOperation
 import org.eclipse.jdt.core.search.IJavaSearchConstants
 import org.eclipse.jdt.core.search.SearchPattern
@@ -33,11 +35,8 @@ import org.eclipse.xtext.generator.IDerivedResourceMarkers
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator
-import org.eclipse.jdt.core.JavaModelException
-import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtext.resource.ResourceSetContext
+import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
