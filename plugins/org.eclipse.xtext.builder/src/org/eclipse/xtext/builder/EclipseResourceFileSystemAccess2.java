@@ -32,16 +32,15 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -92,8 +91,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	private IWorkspace workspace;
 	
 	@Inject
-	private IJavaProjectProvider javaProjectProvider;
-
+	private ProjectByResourceProvider projectProvider;
+	
 	private Multimap<URI, IPath> sourceTraces;
 
 	/**
@@ -112,6 +111,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 
 	/**
 	 * @since 2.4
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	protected TraceMarkers getTraceMarkers() {
 		return traceMarkers;
@@ -134,21 +135,22 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			setProject((IProject) context);
 		} else if (context instanceof Resource) {
 			Resource resource = (Resource) context;
-			if (resource.getURI().isPlatformResource()) {
-				String projectName = URI.decode(resource.getURI().segment(1));
-				IProject project = workspace.getRoot().getProject(projectName);
-				if (project.exists() && project.isAccessible()) {
-					setProject(project);
-					return;
-				} 
+			IProject project = getProjectContext(resource);
+			if (project != null) {
+				setProject(project);
 			}
-			IJavaProject javaProject = javaProjectProvider.getJavaProject(resource.getResourceSet());
-			setProject(javaProject.getProject());
 		} else {
 			throw new IllegalArgumentException("Couldn't handle context "+context);
 		}
 	}
-	
+
+	/**
+	 * @since 2.8
+	 */
+	protected IProject getProjectContext(Resource resource) {
+		return projectProvider.getProjectContext(resource);
+	}
+
 	/**
 	 * @since 2.6
 	 */
