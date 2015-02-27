@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Level;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -168,7 +169,8 @@ public class TestBatchCompiler {
         TestBatchCompiler.this.batchCompiler.compile();
       }
     };
-    LoggingTester.countErrorLogging(XtendBatchCompiler.class, _function);
+    final LoggingTester.LogCapture log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
+    log.assertLogEntry("xtend", "cannot be a child");
   }
   
   @Test
@@ -796,8 +798,8 @@ public class TestBatchCompiler {
         Assert.assertFalse(_compile);
       }
     };
-    final int logs = LoggingTester.countErrorLogging(XtendBatchCompiler.class, _function);
-    Assert.assertEquals(1, logs);
+    final LoggingTester.LogCapture logs = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
+    logs.assertNumberOfLogEntries(1);
   }
   
   @Test

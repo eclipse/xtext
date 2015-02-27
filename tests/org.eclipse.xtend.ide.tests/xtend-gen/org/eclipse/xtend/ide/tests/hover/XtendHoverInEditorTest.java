@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.inject.Inject;
+import org.apache.log4j.Level;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.ITextHoverExtension2;
 import org.eclipse.jface.text.ITextViewer;
@@ -159,8 +160,8 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
           Assert.assertTrue(_html_2, _contains_1);
         }
       };
-      final int loggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver.class, _function);
-      Assert.assertEquals(0, loggings);
+      final LoggingTester.LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function);
+      loggings.assertNoLogEntries();
       final XtextEditor fooEditor = this.helper.openEditor(fileFoo);
       IXtextDocument _document = fooEditor.getDocument();
       StringConcatenation _builder_2 = new StringConcatenation();
@@ -199,8 +200,8 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
           Assert.assertTrue(_html_2, _contains_2);
         }
       };
-      final int moreLoggings = LoggingTester.countErrorLogging(AbstractBatchTypeResolver.class, _function_1);
-      Assert.assertEquals(0, moreLoggings);
+      final LoggingTester.LogCapture moreLoggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function_1);
+      moreLoggings.assertNoLogEntries();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

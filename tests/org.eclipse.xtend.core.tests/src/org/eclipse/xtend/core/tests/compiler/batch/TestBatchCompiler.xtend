@@ -31,6 +31,7 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
+import org.apache.log4j.Level
 
 /**
  * Batch compiler tests.
@@ -96,11 +97,12 @@ class TestBatchCompiler {
 	}
 	
 	@Test def void testInvalidConfiguration() {
-		LoggingTester.countErrorLogging(XtendBatchCompiler) [
+		val log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler) [
 			batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
 			batchCompiler.outputPath = XTEND_SRC_DIRECTORY+"/xtend-gen"
 			batchCompiler.compile	
 		]
+		log.assertLogEntry("xtend", "cannot be a child")
 	}
 
 	@Test def void testWorkspaceConfig() {
@@ -352,10 +354,10 @@ class TestBatchCompiler {
 	@Test
 	def void testActiveAnnotatons1() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
-		val logs = LoggingTester.countErrorLogging(XtendBatchCompiler)[
+		val logs = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler)[
 			assertFalse(batchCompiler.compile)
 		]
-		assertEquals(1, logs)
+		logs.assertNumberOfLogEntries(1)
 	}
 
 	@Test
