@@ -64,6 +64,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	extension XtextResourceAsserts xtextResourceAsserts
 
 	override protected setUp() throws Exception {
+		xtextResourceAsserts.nodeModelPrinter.ignoreSyntaxErrors = false
 		super.setUp()
 		addExplicitExtension(LanguageASTFactory.INSTANCE, myLanguage, astFactory)
 

@@ -1,0 +1,15 @@
+org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTestLanguageFileImpl:a.exunorderedgroupstestlanguage(0,20)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ELEMENT_TYPE)(0,20)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,20)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
+        <empty list>
+      PsiElement(Model_Bug302585Keyword_1_16_0_ELEMENT_TYPE)('bug302585')(0,9)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(NestedModel_NestedModelAction_0_ELEMENT_TYPE)(9,20)
+        org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_NestedModelNestedModelParserRuleCall_1_16_1_0_ELEMENT_TYPE)(9,9)
+          <empty list>
+        PsiWhiteSpace(' ')(9,10)
+        PsiElement(NestedModel_FirstAKeyword_1_0_0_ELEMENT_TYPE)('a')(10,11)
+        PsiWhiteSpace(' ')(11,12)
+        PsiElement(NestedModel_SecondBKeyword_1_1_0_ELEMENT_TYPE)('b')(12,13)
+        PsiWhiteSpace(' ')(13,14)
+        PsiElement(NestedModel_NestedKeyword_2_ELEMENT_TYPE)('nested')(14,20)

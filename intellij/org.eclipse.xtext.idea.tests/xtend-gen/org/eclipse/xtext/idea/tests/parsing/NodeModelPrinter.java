@@ -10,12 +10,15 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
@@ -24,9 +27,13 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class NodeModelPrinter {
+  @Accessors
+  private boolean ignoreSyntaxErrors = false;
+  
   protected String _print(final ICompositeNode it) {
     StringConcatenation _builder = new StringConcatenation();
     String _doPrint = this.doPrint(it);
@@ -60,8 +67,18 @@ public class NodeModelPrinter {
   
   protected String doPrint(final INode it) {
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends INode> _class = it.getClass();
-    _builder.append(_class, "");
+    {
+      if (this.ignoreSyntaxErrors) {
+        Class<? extends INode> _class = it.getClass();
+        String _name = _class.getName();
+        String _replaceFirst = _name.replaceFirst("AndSyntaxError", "");
+        String _replaceFirst_1 = _replaceFirst.replaceFirst("WithSyntaxError", "");
+        _builder.append(_replaceFirst_1, "");
+      } else {
+        Class<? extends INode> _class_1 = it.getClass();
+        _builder.append(_class_1, "");
+      }
+    }
     _builder.append(" ");
     ITextRegion _totalTextRegion = it.getTotalTextRegion();
     _builder.append(_totalTextRegion, "");
@@ -76,9 +93,9 @@ public class NodeModelPrinter {
       if (_hasDirectSemanticElement) {
         _builder.append("directSemanticElement: ");
         EObject _semanticElement = it.getSemanticElement();
-        Class<? extends EObject> _class_1 = _semanticElement.getClass();
-        String _name = _class_1.getName();
-        _builder.append(_name, "");
+        Class<? extends EObject> _class_2 = _semanticElement.getClass();
+        String _name_1 = _class_2.getName();
+        _builder.append(_name_1, "");
       }
     }
     _builder.newLineIfNotEmpty();
@@ -91,9 +108,15 @@ public class NodeModelPrinter {
     }
     _builder.newLineIfNotEmpty();
     {
-      SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-      boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-      if (_notEquals) {
+      boolean _and = false;
+      if (!(!this.ignoreSyntaxErrors)) {
+        _and = false;
+      } else {
+        SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
+        boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
+        _and = _notEquals;
+      }
+      if (_and) {
         _builder.append("syntaxErrorMessage: ");
         SyntaxErrorMessage _syntaxErrorMessage_1 = it.getSyntaxErrorMessage();
         _builder.append(_syntaxErrorMessage_1, "");
@@ -178,6 +201,27 @@ public class NodeModelPrinter {
     return _builder.toString();
   }
   
+  protected String _printGrammarElement(final EnumLiteralDeclaration it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("EnumLiteralDeclaration [");
+    EEnumLiteral _enumLiteral = it.getEnumLiteral();
+    String _literal = _enumLiteral.getLiteral();
+    _builder.append(_literal, "");
+    {
+      Keyword _literal_1 = it.getLiteral();
+      boolean _notEquals = (!Objects.equal(_literal_1, null));
+      if (_notEquals) {
+        _builder.append(" = ");
+        Keyword _literal_2 = it.getLiteral();
+        String _value = _literal_2.getValue();
+        _builder.append(_value, "");
+      }
+    }
+    _builder.append("]");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   public String print(final INode it) {
     if (it instanceof ICompositeNode) {
       return _print((ICompositeNode)it);
@@ -194,6 +238,8 @@ public class NodeModelPrinter {
       return _printGrammarElement((Action)action);
     } else if (action instanceof CrossReference) {
       return _printGrammarElement((CrossReference)action);
+    } else if (action instanceof EnumLiteralDeclaration) {
+      return _printGrammarElement((EnumLiteralDeclaration)action);
     } else if (action instanceof Keyword) {
       return _printGrammarElement((Keyword)action);
     } else if (action instanceof RuleCall) {
@@ -208,5 +254,14 @@ public class NodeModelPrinter {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(action).toString());
     }
+  }
+  
+  @Pure
+  public boolean isIgnoreSyntaxErrors() {
+    return this.ignoreSyntaxErrors;
+  }
+  
+  public void setIgnoreSyntaxErrors(final boolean ignoreSyntaxErrors) {
+    this.ignoreSyntaxErrors = ignoreSyntaxErrors;
   }
 }

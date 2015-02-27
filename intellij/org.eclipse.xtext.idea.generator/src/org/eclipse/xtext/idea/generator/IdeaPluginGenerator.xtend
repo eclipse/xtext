@@ -99,6 +99,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		var outlet_src_gen = ctx.srcGenOutlet.name
 		
 		val bindFactory = new BindFactory();
+		bindFactory.addTypeToType('org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider', grammar.antlrTokenFileProvider)
+		bindFactory.addTypeToType('org.eclipse.xtext.parser.antlr.Lexer', grammar.getPsiInternalLexerName)
+		bindFactory.addConfiguredBinding("RuntimeLexer",
+					"binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)"+
+					".annotatedWith(com.google.inject.name.Names.named(" +
+					"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
+					")).to(" + grammar.getPsiInternalLexerName + ".class)")
 		bindFactory.addTypeToType('com.intellij.lang.PsiParser', grammar.psiParserName)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
@@ -133,6 +140,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
 		ctx.writeFile(outlet_src_gen, grammar.elementDescriptionProviderName.toJavaPath, grammar.compileElementDescriptionProvider)
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
+		ctx.writeFile(outlet_src_gen, grammar.antlrTokenFileProvider.toJavaPath, grammar.compileAntlrTokenFileProvider)
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
 		if (typesIntegrationRequired) {
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
@@ -363,6 +371,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return INITIAL_HIDDEN_TOKENS;
 			}
 		
+		}
+	'''
+	
+	def compileAntlrTokenFileProvider(Grammar grammar) '''
+		package «grammar.antlrTokenFileProvider.toPackageName»;
+
+		import java.io.InputStream;
+		import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+		
+		public class «grammar.antlrTokenFileProvider.toSimpleName» implements IAntlrTokenFileProvider {
+			
+			@Override
+			public InputStream getAntlrTokenFile() {
+				ClassLoader classLoader = getClass().getClassLoader();
+		    	return classLoader.getResourceAsStream("«grammar.tokens»");
+			}
 		}
 	'''
 	

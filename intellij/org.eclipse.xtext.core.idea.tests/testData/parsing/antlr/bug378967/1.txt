@@ -1,0 +1,13 @@
+org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug378967TestLanguageFileImpl:a.bug378967testlanguage(0,9)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Root_ELEMENT_TYPE)(0,9)
+    PsiElement(Root_DigitOneKeyword_0_0_ELEMENT_TYPE)('1')(0,1)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Root_ElementRule1ParserRuleCall_0_1_0_ELEMENT_TYPE)(1,9)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Rule1_TypeFirstEnumEnumRuleCall_0_0_ELEMENT_TYPE)(1,7)
+        PsiWhiteSpace(' ')(1,2)
+        PsiElement(FirstEnum_ValueEnumLiteralDeclaration_ELEMENT_TYPE)('after')(2,7)
+      GrammarAwarePsiErrorElement:Rule1_ValueINTTerminalRuleCall_1_0_ELEMENT_TYPE(7,7)
+        <empty list>
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Rule1_UnitSecondEnumEnumRuleCall_2_0_ELEMENT_TYPE)(7,9)
+        PsiWhiteSpace(' ')(7,8)
+        PsiErrorElement:missing RULE_INT at 's'(8,9)
+          PsiElement(SecondEnum_ValueEnumLiteralDeclaration_ELEMENT_TYPE)('s')(8,9)

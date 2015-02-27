@@ -14,7 +14,6 @@ import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestL
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Ignore
 
-@Ignore
 @TestDecorator
 class IdeaParserExTest extends AbstractLanguageParsingTestCase {
 	
@@ -49,6 +48,10 @@ class IdeaParserExTestDelegate extends ParserExTest {
 	
 	override protected doGetResource(InputStream in, URI uri) throws Exception {
 		modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
+	}
+	
+	override protected shouldTestSerializer(XtextResource resource) {
+		false
 	}
 	
 }

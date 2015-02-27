@@ -8,6 +8,8 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroup
       PsiElement(Model_FirstAsListAKeyword_1_12_1_0_0_ELEMENT_TYPE)('a')(3,4)
       PsiWhiteSpace(' ')(4,5)
       PsiElement(Model_SecondAsListBKeyword_1_12_1_1_0_ELEMENT_TYPE)('b')(5,6)
+      GrammarAwarePsiErrorElement:Model_FirstAsListAKeyword_1_12_2_0_ELEMENT_TYPE(6,6)
+        <empty list>
       PsiWhiteSpace(' ')(6,7)
       PsiErrorElement:missing 'a' at 'b'(7,8)
         PsiElement(Model_SecondAsListBKeyword_1_12_3_0_ELEMENT_TYPE)('b')(7,8)

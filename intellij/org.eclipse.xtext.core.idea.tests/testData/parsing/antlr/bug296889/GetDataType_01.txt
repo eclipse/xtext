@@ -1,0 +1,8 @@
+org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889TestLanguageFileImpl:a.bug296889testlanguage(0,11)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,11)
+    PsiElement(Model_DataTypeKeyword_1_0_ELEMENT_TYPE)('DataType')(0,8)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ValuesDataTypeExpressionParserRuleCall_1_1_0_ELEMENT_TYPE)(8,11)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(DataTypeExpression_DataTypePostopParserRuleCall_0_ELEMENT_TYPE)(8,11)
+        org.eclipse.xtext.psi.impl.PsiEObjectImpl(DataTypePostop_DataTypeVariableParserRuleCall_0_ELEMENT_TYPE)(8,11)
+          PsiWhiteSpace(' ')(8,9)
+          PsiElement(DataTypeVariable_IDTerminalRuleCall_ELEMENT_TYPE)('ID')(9,11)

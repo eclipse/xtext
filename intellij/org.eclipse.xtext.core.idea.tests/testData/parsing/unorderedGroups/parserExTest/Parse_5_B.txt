@@ -1,0 +1,8 @@
+org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTestLanguageFileImpl:a.exunorderedgroupstestlanguage(0,3)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ELEMENT_TYPE)(0,3)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,3)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
+        <empty list>
+      PsiElement(Model_DigitFiveKeyword_1_4_0_ELEMENT_TYPE)('5')(0,1)
+      PsiWhiteSpace(' ')(1,2)
+      PsiElement(Model_SecondBKeyword_1_4_1_1_0_ELEMENT_TYPE)('b')(2,3)

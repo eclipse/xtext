@@ -18,6 +18,8 @@ org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:MissingTokenEr
             org.eclipse.xtext.psi.impl.PsiEObjectReference(Property_TypeTypeCrossReference_0_0_ELEMENT_TYPE)(22,26)
               PsiWhiteSpace(' ')(22,23)
               PsiElement(QualifiedName_IDTerminalRuleCall_0_ELEMENT_TYPE)('bar')(23,26)
+            GrammarAwarePsiErrorElement:Property_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE(26,26)
+              <empty list>
           PsiWhiteSpace('\n')(26,27)
           PsiErrorElement:missing RULE_ID at '}'(27,28)
             PsiElement(Entity_RightCurlyBracketKeyword_4_ELEMENT_TYPE)('}')(27,28)

@@ -21,11 +21,15 @@ class IdeaPluginClassNames {
 	}
 	
 	def String toJavaPath(String fullName) {
-		return fullName.replace('.','/')+'.java'
+		return fullName.toPath + '.java'
 	}
 	
 	def String toXtendPath(String fullName) {
-		return fullName.replace('.','/')+'.xtend'
+		return fullName.toPath + '.xtend'
+	}
+	
+	def String toPath(String fullName) {
+		fullName.replace('.','/')
 	}
 	
 	def getBasePackageName(Grammar grammar) {
@@ -88,6 +92,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.parser.'+it.name.toSimpleName+'PsiParser'
 	}
 	
+	def String getAntlrTokenFileProvider(Grammar it) {
+		basePackageName+'.lang.parser.antlr.'+it.name.toSimpleName+'AntlrTokenFileProvider'
+	}
+	
 	def String getPomDeclarationSearcherName(Grammar it) {
 		basePackageName+'.lang.pom.'+it.name.toSimpleName+'PomDeclarationSearcher'
 	}
@@ -124,6 +132,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.parser.antlr.internal.PsiInternal'+it.name.toSimpleName+'Parser'
 	}
 	
+	def String getTokens(Grammar it) {
+		(basePackageName + '.parser.antlr.internal.PsiInternal' + it.name.toSimpleName).toPath + '.tokens'
+	}
+	
 	def String getFileImplName(Grammar it) {
 		psiImplPackageName+'.'+it.name.toSimpleName+'FileImpl'
 	}
@@ -143,7 +155,6 @@ class IdeaPluginClassNames {
 	def String getAntlrLexerName(Grammar it) {
 		it.name.toPackageName+'.parser.antlr.internal.Internal'+it.name.toSimpleName+'Lexer'
 	}
-	
 	
 	def String getCompletionContributorSuperClass(Grammar it) {
 		usedGrammars.head?.completionContributor ?: 'org.eclipse.xtext.idea.completion.AbstractCompletionContributor'

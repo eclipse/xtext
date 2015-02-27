@@ -14,8 +14,13 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.EnumLiteralDeclaration
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class NodeModelPrinter {
+	
+	@Accessors
+	var boolean ignoreSyntaxErrors = false
 
 	def dispatch String print(ICompositeNode it) '''
 		«doPrint»
@@ -31,11 +36,11 @@ class NodeModelPrinter {
 	}
 
 	protected def String doPrint(INode it) '''
-		«class» «totalTextRegion»
+		«IF ignoreSyntaxErrors»«class.name.replaceFirst('AndSyntaxError', '').replaceFirst('WithSyntaxError', '')»«ELSE»«class»«ENDIF» «totalTextRegion»
 		grammarElements: «grammarElement.printGrammarElement»
 		«IF hasDirectSemanticElement»directSemanticElement: «semanticElement.class.name»«ENDIF»
 		«IF it instanceof ICompositeNode»lookAhead: «lookAhead»«ENDIF»
-		«IF syntaxErrorMessage != null»syntaxErrorMessage: «syntaxErrorMessage»«ENDIF»'''
+		«IF !ignoreSyntaxErrors && syntaxErrorMessage != null»syntaxErrorMessage: «syntaxErrorMessage»«ENDIF»'''
 
 	protected dispatch def String printGrammarElement(Void grammarElement) {
 		'null'
@@ -63,6 +68,10 @@ class NodeModelPrinter {
 
 	protected dispatch def String printGrammarElement(CrossReference crossReference) '''
 		CrossReference [«crossReference.type.classifier.name»«IF crossReference.terminal != null» | «crossReference.terminal.printGrammarElement» «ENDIF»]
+	'''
+
+	protected dispatch def String printGrammarElement(EnumLiteralDeclaration it) '''
+		EnumLiteralDeclaration [«enumLiteral.literal»«IF literal != null» = «literal.value»«ENDIF»]
 	'''
 
 }

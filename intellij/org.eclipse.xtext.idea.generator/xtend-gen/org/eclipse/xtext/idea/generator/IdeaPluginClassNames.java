@@ -23,13 +23,17 @@ public class IdeaPluginClassNames {
   }
   
   public String toJavaPath(final String fullName) {
-    String _replace = fullName.replace(".", "/");
-    return (_replace + ".java");
+    String _path = this.toPath(fullName);
+    return (_path + ".java");
   }
   
   public String toXtendPath(final String fullName) {
-    String _replace = fullName.replace(".", "/");
-    return (_replace + ".xtend");
+    String _path = this.toPath(fullName);
+    return (_path + ".xtend");
+  }
+  
+  public String toPath(final String fullName) {
+    return fullName.replace(".", "/");
   }
   
   public String getBasePackageName(final Grammar grammar) {
@@ -164,6 +168,15 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "PsiParser");
   }
   
+  public String getAntlrTokenFileProvider(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".lang.parser.antlr.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "AntlrTokenFileProvider");
+  }
+  
   public String getPomDeclarationSearcherName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.pom.");
@@ -251,6 +264,16 @@ public class IdeaPluginClassNames {
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Parser");
+  }
+  
+  public String getTokens(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".parser.antlr.internal.PsiInternal");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    String _path = this.toPath(_plus_1);
+    return (_path + ".tokens");
   }
   
   public String getFileImplName(final Grammar it) {
