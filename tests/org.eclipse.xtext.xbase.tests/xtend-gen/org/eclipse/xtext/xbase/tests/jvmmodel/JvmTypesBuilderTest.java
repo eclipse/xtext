@@ -6,6 +6,7 @@ import foo.TestAnnotation3;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -653,8 +654,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   }
   
   protected void expectErrorLogging(final int numberOfloggings, final Runnable block) {
-    final int loggings = LoggingTester.countErrorLogging(JvmTypesBuilder.class, block);
-    Assert.assertEquals("Unexpected amount of error logging.", numberOfloggings, loggings);
+    final LoggingTester.LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, JvmTypesBuilder.class, block);
+    loggings.assertNumberOfLogEntries(numberOfloggings);
   }
   
   @Test
