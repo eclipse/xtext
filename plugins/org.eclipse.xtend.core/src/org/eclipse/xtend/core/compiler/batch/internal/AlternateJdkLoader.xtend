@@ -5,24 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.compiler.batch
+package org.eclipse.xtend.core.compiler.batch.internal
 
 import com.google.common.collect.Maps
+import java.io.File
 import java.io.IOException
-import java.net.URL
 import java.net.URLClassLoader
 import java.util.concurrent.ConcurrentMap
 
-/**
- * @deprecated This was an accidently exposed implementation detail of the batch compiler
- * @since 2.7
- */
-@Deprecated
-class BootClassLoader extends URLClassLoader {
+class AlternateJdkLoader extends URLClassLoader {
 	private final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
 
-	new(URL[] urls) {
-		super(urls)
+	new(Iterable<File> files) {
+		super(files.map[toURL])
 	}
 
 	override protected loadClass(String name, boolean resolve) throws ClassNotFoundException {
