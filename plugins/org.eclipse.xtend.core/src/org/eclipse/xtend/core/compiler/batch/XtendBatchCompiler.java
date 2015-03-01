@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
+import org.eclipse.xtend.core.compiler.batch.internal.AlternateJdkLoader;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
@@ -681,19 +682,10 @@ public class XtendBatchCompiler {
 				return !Strings.isEmpty(input.trim());
 			}
 		});
-		Function<String, URL> toUrl = new Function<String, URL>() {
-			@Override
-			public URL apply(String from) {
-				try {
-					return new File(from).toURI().toURL();
-				} catch (MalformedURLException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
-		Iterable<URL> classPathUrls = Iterables.transform(classPathEntries, toUrl);
+		
+		Iterable<File> classpath = transform(classPathEntries, TO_FILE);
 		if (log.isDebugEnabled()) {
-			log.debug("classpath used for Xtend compilation : " + classPathUrls);
+			log.debug("classpath used for Xtend compilation : " + classpath);
 		}
 		ClassLoader parentClassLoader;
 		if (useCurrentClassLoaderAsParent) {
@@ -702,24 +694,42 @@ public class XtendBatchCompiler {
 			if (isEmpty(bootClassPath)) {
 				parentClassLoader = ClassLoader.getSystemClassLoader().getParent();
 			} else {
-				Iterable<URL> bootClassPathUrls = Iterables.transform(getBootClassPathEntries(), toUrl);
-				parentClassLoader = new BootClassLoader(toArray(bootClassPathUrls, URL.class));
+				Iterable<File> bootClassPathEntries = transform(getBootClassPathEntries(), TO_FILE);
+				parentClassLoader = new AlternateJdkLoader(bootClassPathEntries);
 			}
 		}
-		jvmTypesClassLoader = createClassLoader(classPathUrls, parentClassLoader);
+		jvmTypesClassLoader = createClassLoader(classpath, parentClassLoader);
 		new ClasspathTypeProvider(jvmTypesClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess, null);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(jvmTypesClassLoader);
 
 		// for annotation processing we need to have the compiler's classpath as a parent.
-		annotationProcessingClassLoader = createClassLoader(classPathUrls, currentClassLoader);
+		annotationProcessingClassLoader = createClassLoader(classpath, currentClassLoader);
 		annotationProcessorFactory.setClassLoader(annotationProcessingClassLoader);
 	}
+	
+	private static final Function<String, File> TO_FILE = new Function<String, File>() {
+		@Override
+		public File apply(String from) {
+			return new File(from);
+		}
+	};
+	
+	private static final Function<File, URL> TO_URL= new Function<File, URL>() {
+		@Override
+		public URL apply(File from) {
+			try {
+				return from.toURL();
+			} catch (MalformedURLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	};
 
 	/**
 	 * @since 2.8
 	 */
-	protected ClassLoader createClassLoader(Iterable<URL> classPathUrls, ClassLoader parentClassLoader) {
-		return new URLClassLoader(toArray(classPathUrls, URL.class), parentClassLoader);
+	protected ClassLoader createClassLoader(Iterable<File> jarsAndFolders, ClassLoader parentClassLoader) {
+		return new URLClassLoader(toArray(transform(jarsAndFolders, TO_URL), URL.class), parentClassLoader);
 	}
 
 	protected void reportIssues(Iterable<Issue> issues) {
