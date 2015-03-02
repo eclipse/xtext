@@ -257,7 +257,7 @@
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#local-scoping" label="Local Scoping">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#namespace-imports" label="Imported Namespace-Aware Scoping">
+				<topic href="contents/303_runtime_concepts.html#namespace-imports" label="Imported Namespace Aware Scoping">
 				</topic>
 			</topic>
 			<topic href="contents/303_runtime_concepts.html#value-converter" label="Value Converter">

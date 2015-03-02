@@ -304,7 +304,7 @@ A [simple implementation]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/e
 
 ## Scoping {#scoping}
 
-Using the scoping API one defines which elements are referable by a certain reference. For instance, using the introductory example (Fowler's state machine language) a transition contains two cross-references: One to a declared event and one to a declared state.
+Using the scoping API one defines which elements are referable by a given reference. For instance, using the introductory example (Fowler's state machine language) a transition contains two cross-references: one to a declared event and one to a declared state.
 
 Example:
 
@@ -325,7 +325,7 @@ Transition :
   event=[Event] '=>' state=[State];
 ```
 
-The grammar states that for the reference *event* only instances of the type *Event* are allowed and that for the EReference *state* only instances of type *State* can be referenced. However, this simple declaration doesn't say anything about where to find the states or events. That is the duty of scopes.
+The grammar declares that for the reference *event* only instances of the type *Event* are allowed and that for the EReference *state* only instances of type *State* can be referenced. However, this simple declaration doesn't say anything about where to find the states or events. That is the duty of scopes.
 
 An [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) is responsible for providing an [IScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java) for a given context [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) and [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java). The returned [IScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java) should contain all target candidates for the given object and cross-reference.
 
@@ -352,9 +352,9 @@ public interface IScopeProvider {
 }
 ```
 
-A single [IScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java) represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java), which is effectively an abstract description of a real [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). To create IEObjectDescriptions for your model elements the class [Scopes]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/Scopes.java) is very useful.
+A single [IScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java) represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java), which is effectively an abstract description of a real [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). In order to create IEObjectDescriptions for your model elements, the class [Scopes]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/Scopes.java) is very useful.
 
-To have a concret example let's deal with the following simple grammar.
+To have a concrete example, let's deal with the following simple grammar.
 
 ```xtext
 grammar org.xtext.example.mydsl.MyScopingDsl with
@@ -370,10 +370,9 @@ Element:
 
 ```
 
-If you want to define the Scope for the superElement cross-reference the following code is one way to go.
+If you want to define the scope for the superElement cross-reference, the following code is one way to go.
 
 ```java
-
   IScope getScope(EObject context, EReference reference) {
       // We want to define the Scope for the Element's superElement cross-reference
       if(context instanceof Element
@@ -392,12 +391,14 @@ If you want to define the Scope for the superElement cross-reference the followi
 ```
 
 There are different useful implementations for IScopes shipped with Xtext. We want to mention only some of them here.
-The [MapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java) comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the [MultimapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java) should work for you. To filter some element out of an existing Scope the [FilteringScope]({{site.src.xtext}}/plugins/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java) is in some situations the right way to go. As Scopes can be nested, we strongly recommend to use FilteringScope only for leaf Scopes without parent Scope.
-To come back to our example: One possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a superElement of itself.
+The [MapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java) comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the [MultimapBasedScope]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java) should work for you. For situations where some elements should be filtered out of an existing scope, the [FilteringScope]({{site.src.xtext}}/plugins/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java) is the right way to go. As scopes can be nested, we strongly recommend to use FilteringScope only for leaf scopes without nested scopes.
+
+Coming back to our example, one possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a super-element of itself.
 
 ```java
-  IScope getScope(EObject context, EReference reference) {
-      if(context instanceof Element && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
+  IScope getScope(final EObject context, EReference reference) {
+      if(context instanceof Element
+          && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
         EObject rootElement = EcoreUtil2.getRootContainer(context);
         List<Element> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
         IScope existingScope = Scopes.scopeFor(candidates);
@@ -417,27 +418,27 @@ To come back to our example: One possible scenario for the FilteringScope could 
 
 ### Global Scopes and Resource Descriptions {#global-scopes}
 
-In the state machine example we don't have references across model files. Neither is there a concept like a namespace which would make scoping a bit more complicated. Basically, every *State* and every *Event* declared in the same resource is visible by their name. However, in the real world things are most likely not that simple: What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross resource reference.
+In the state machine example we don't have references across model files. Neither is there a concept like a namespace which would make scoping a bit more complicated. Basically, every *State* and every *Event* declared in the same resource is visible by their name. However, in the real world things are most likely not that simple: What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross-resource reference.
 
 Defining what is visible from outside the current resource is the responsibility of global scopes. As the name suggests, global scopes are provided by instances of the [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java). The data structures (called index) used to store its elements are described in the next section.
 
 #### Resource and EObject Descriptions {#resource-descriptions}
 
-In order to make states and events of one file referable from another file you need to export them as part of a so called [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java).
+In order to make states and events of one file referable from another file, you need to export them as part of a so called [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java).
 
-A [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) contains information about the resource itself which primarily its [URI]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java), a list of exported [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java)s in the form of [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java)s as well as information about outgoing cross-references and qualified names it references. The cross references contain only resolved references, while the list of imported qualified names also contain those names, which couldn't be resolved. This information is leveraged by Xtext's indexing infrastructure in order to compute the transitive hull of dependent resources.
+A [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) contains information about the resource itself, which primarily its [URI]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java), a list of exported [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java)s in the form of [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java)s, as well as information about outgoing cross-references and qualified names it references. The cross-references contain only resolved references, while the list of imported qualified names also contains the names that couldn't be resolved. This information is leveraged by Xtext's indexing infrastructure in order to compute the transitive hull of dependent resources.
 
-For users and especially in the context of scoping the most important information is the list of exported [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). An [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) stores the [URI]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java) of the actual [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java), its [QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java), as well as its [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java). In addition one can export arbitrary information using the *user data* map. The following diagram gives an overview on the description classes and their relationships.
+For users, and especially in the context of scoping, the most important information is the list of exported [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). An [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) stores the [URI]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java) of the actual [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java), its [QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java), as well as its [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java). In addition one can export arbitrary information using the *user data* map. The following diagram gives an overview on the description classes and their relationships.
 
 ![The data model of Xtext's index](images/index_datamodel.png)
 
-A language is configured with default implementations of [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) and [DefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionStrategy.java) which are responsible to compute the list of exported [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java)s. The Manager iterates over the whole EMF model for each [Resource]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and asks the ResourceDescriptionStrategy to computed an IEObjectDescription for each [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). The ResourceDescriptionStrategy applies the `getQualifiedName(EObject obj)` from [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) on the object and if it has a qualified name an [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) is created and passed back to the Manager which adds it to the list of exported objects. If an EObject doesn't have a qualified name, the element is considered to be not referable from outside the resource and consequently not indexed. If you don't like this behavior, you can implement and bind your own implementation of [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java).
+A language is configured with default implementations of [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) and [DefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionStrategy.java), which are responsible to compute the list of exported [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java)s. The Manager iterates over the whole EMF model for each [Resource]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and asks the ResourceDescriptionStrategy to compute an IEObjectDescription for each [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). The ResourceDescriptionStrategy applies the `getQualifiedName(EObject obj)` from [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) on the object, and if it has a qualified name an [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) is created and passed back to the Manager which adds it to the list of exported objects. If an EObject doesn't have a qualified name, the element is considered to be not referable from outside the resource and consequently not indexed. If you don't like this behavior, you can implement and bind your own implementation of [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java).
 
-There are also two different default implementations of [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java). Both work by looking up an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) 'name'. The [SimpleNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java) simply returns the plain value, while the [DefaultDeclarativeQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java) concatenates the simple name with the qualified name of its parent exported [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). This effectively simulates the qualified name computation of most namespace-based languages (like e.g. Java).
+There are also two different default implementations of [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java). Both work by looking up an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) '*name*'. The [SimpleNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java) simply returns the plain value, while the [DefaultDeclarativeQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java) concatenates the simple name with the qualified name of its parent exported [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). This effectively simulates the qualified name computation of most namespace-based languages (like e.g. Java).
 
-As already mentioned, the default implementation strategy exports every model element that the IQualifiedNameProvider can provide a name for. This is a good starting point but when you models become bigger and you have a lot of them the index will become bigger and bigger. In most scenarios only a small part of you model should be visible from outside. For that reason only a small part of you model needs to be in the index. If you come to that point, please bind a custom implementation of [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) and create index representations only for those elements that you want to reference to from outside the resource they are contained in. From within the resource references to those filtered elements are still possible as long as they have a name. To wrap that up there are two ways to control which elements will go into the index. The first one is through the [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) but this implies that an element is not referable even within the same resource. The second one is though the [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) which does not imply that you cannot refer to the elment within the same resource.
+As already mentioned, the default implementation strategy exports every model element that the IQualifiedNameProvider can provide a name for. This is a good starting point, but when your models become bigger and you have a lot of them the index will become larger and larger. In most scenarios only a small part of your model should be visible from outside. For that reason only a small part of your model needs to be in the index. If you come to that point, please bind a custom implementation of [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) and create index representations only for those elements that you want to reference to from outside the resource they are contained in. From within the resource, references to those filtered elements are still possible as long as they have a name. In summary, there are two ways to control which elements will go into the index. The first one is through the [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java), but this implies that an element is not referable even within the same resource. The second one is though the [IDefaultResourceDescriptionStrategy]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java), which does not imply that you cannot refer to the elment within the same resource.
 
-Beside the exported elements the index contains [IReferenceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java)s that contain the information who is referencing who. They are created through the Manager and IDefaultResourceDescriptionStrategy, too. If there is a model element that references to an other model element, the IDefaultResourceDescriptionStrategy creates an IReferenceDescription that contains the URI of the referencing element (sourceEObjectUri) and the referenced one (targetEObjectURI). At the end this IReferenceDescriptions are very useful to find references and calculate affected resources.
+Beside the exported elements the index contains [IReferenceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java)s that contain the information who is referencing who. They are created through the Manager and IDefaultResourceDescriptionStrategy, too. If there is a model element that references another model element, the IDefaultResourceDescriptionStrategy creates an IReferenceDescription that contains the URI of the referencing element (sourceEObjectURI) and the referenced element (targetEObjectURI). At the end this IReferenceDescriptions are very useful to find references and calculate affected resources.
 
 As mentioned above, in order to calculate an [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) for a resource the framework asks the [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) which delegates to the IDefaultResourceDescriptionStrategy. To convert between a [QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) and its [String]() representation you can use the [IQualifiedNameConverter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java). Here is some Java code showing how to do that:
 
@@ -445,14 +446,13 @@ As mentioned above, in order to calculate an [IResourceDescription]({{site.src.x
 @Inject IQualifiedNameConverter converter;
 
 Manager manager = // obtain an instance of IResourceDescription.Manager
-IResourceDescription description =
-  manager.getResourceDescription(resource);
+IResourceDescription description = manager.getResourceDescription(resource);
 for (IEObjectDescription eod : description.getExportedObjects()) {
   System.out.println(converter.toString(eod.getQualifiedName()));
 }
 ```
 
-In order to obtain an [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) it is best to ask the corresponding [IResourceServiceProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). That is because each language might have a totally different implementation and as you might refer from your language to a different language you cannot reuse your language's [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java). One basically asks the [Registry]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java) (there is usually one global instance) for an [IResourceServiceProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java), which in turn provides an [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) along other useful services.
+In order to obtain a [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) it is best to ask the corresponding [IResourceServiceProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). That is because each language might have a totally different implementation, and as you might refer from your language to a different language you cannot reuse your language's [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java). One basically asks the [Registry]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java) (there is usually one global instance) for an [IResourceServiceProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java), which in turn provides a [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) along other useful services.
 
 If you are running in a Guice enabled scenario, the code looks like this:
 
@@ -474,23 +474,21 @@ private IResourceServiceProvider.Registry rspr =
   IResourceServiceProvider.Registry.INSTANCE;
 ```
 
-However, we strongly encourage you to use dependency injection. Now that we know how to export elements to be referable from other resources, we need to learn how those exported [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) can be made available to the referencing resources. That is the responsibility of [global scoping]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) which is described in the following chapter.
+However, we strongly encourage you to use [dependency injection](302_configuration.html#dependency-injection). Now that we know how to export elements to be referable from other resources, we need to learn how those exported [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) can be made available to the referencing resources. That is the responsibility of [global scoping]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) which is described in the following section.
 
-If you would like to see what's in the index, you could could use the 'Open Model Element' dialog from the navigation menu entry.
+If you would like to see what's in the index, you could use the 'Open Model Element' dialog from the navigation menu entry.
 
 #### Global Scopes Based On External Configuration (e.g. Class Path Based) {#index-based}
 
-Instead of explicitly referring to imported resources, the other possibility is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instances uses the notion of the class path to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important.
+Instead of explicitly referring to imported resources, another option is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instance uses the notion of the class path to define containers (jars and class folders) which contain referenceable elements. In the case of Java the order of such entries is also important.
 
-Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a [DefaultGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java) has to be bound to the [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) interface.
+To enable support for this kind of global scoping in Xtext, a [DefaultGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java) has to be bound to the [IGlobalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java) interface. By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: you can reuse the infrastructure without using Java and be independent from the JDT.
 
-By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: You can reuse the infrastructure without using Java and independent from the JDT.
-
-In order to know what is available in the "world" a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java). If you don't want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java), you'll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for the resolution of cross-references. In Xtext that information is provided by a so called [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java).
+In order to know what is available in the "world", a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java). If you don't want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java), you'll have to load all resources up front and either keep holding them in memory or remember all information which is needed for the resolution of cross-references. In Xtext that information is provided by a so called [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java).
 
 ##### About the Index, Containers and Their Manager {#containers}
 
-Xtext ships with an index which remembers all [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) and their [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes such that the infrastructure can be much simpler. In both situations the global index state is held by an implementation of [IResourceDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java) (Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, such that all linking happens to the latest maybe unsaved version of the resources. You will find the Guice configuration of the global index in the UI scenario in [SharedModule]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java).
+Xtext ships with an index which remembers all [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) and their [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes, hence the infrastructure can be much simpler. In both situations the global index state is held by an implementation of [IResourceDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java) (note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, such that all linking happens to the latest maybe unsaved version of the resources. You will find the Guice configuration of the global index in the UI scenario in [SharedModule]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java).
 
 The index is basically a flat list of instances of [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java). The index itself doesn't know about visibility constraints due to class path restriction. Rather than that, they are defined by the referencing language by means of so called [IContainers]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java): While Java might load a resource via [ClassLoader.loadResource()]({{site.javadoc.java}}/java/lang/ClassLoader.html) (i.e. using the class path mechanism), another language could load the same resource using the file system paths.
 
@@ -514,7 +512,7 @@ public void listVisibleResources(
 }
 ```
 
-Xtext ships two implementations of [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) which are as usual bound with Guice: The default binding is to [SimpleResourceDescriptionsBasedContainerManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.java), which assumes all [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) to be in a single common container. If you don't care about container support, you'll be fine with this one. Alternatively, you can bind [StateBasedContainerManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager.java) and an additional [IAllContainersState]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java) which keeps track of the set of available containers and their visibility relationships.
+Xtext ships two implementations of [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) which are usually bound with Guice: The default binding is to [SimpleResourceDescriptionsBasedContainerManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.java), which assumes all [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) to be in a single common container. If you don't care about container support, you'll be fine with this one. Alternatively, you can bind [StateBasedContainerManager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager.java) and an additional [IAllContainersState]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java) which keeps track of the set of available containers and their visibility relationships.
 
 Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, you can define containers based on Java projects and their class paths or based on plain Eclipse projects. Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only differ in the bound instance of [IAllContainersState]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java) of the referring language. These will be described in detail in the following sections.
 
@@ -551,11 +549,11 @@ in the UI module of the referencing language. The latter looks a bit more diffic
 
 ##### Eclipse Project-Based Containers {#project-based-containers}
 
-If the class path based mechanism doesn't work for your case, Xtext offers an alternative container manager based on plain Eclipse projects: Each project acts as a container and the project references *Properties &rarr; Project References* are the visible containers.
+If the class path based mechanism doesn't work for your case, Xtext offers an alternative container manager based on plain Eclipse projects: Each project acts as a container and the project references (*Properties &rarr; Project References*) are the visible containers.
 
 In this case, your runtime module should define
 
-```
+```java
 public Class<? extends IContainer.Manager> bindIContainer$Manager() {
   return StateBasedContainerManager.class;
 }
@@ -571,9 +569,9 @@ public Provider<IAllContainersState> provideIAllContainersState() {
 
 ##### ResourceSet-Based Containers {#resource-set-containers}
 
-If you need an [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) that is independent of Eclipse projects, you can use the [ResourceSetBasedAllContainersState]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java). This one can be configured with a mapping of container handles to resource URIs.
+If you need a [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) that is independent of Eclipse projects, you can use the [ResourceSetBasedAllContainersState]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java). This one can be configured with a mapping of container handles to resource URIs.
 
-It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end of the MWE2 workflow component [Reader]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java). This is responsible for reading in models in a workflow, e.g. for later code generation. The [Reader]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java) allows to either scan the whole class path or a set of paths for all models therein. When paths are given, each path entry becomes an [IContainer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) of its own. In the following snippet,
+It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end of the MWE2 workflow component [Reader]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java). This is responsible for reading in models in a workflow, e.g. for later code generation. The [Reader]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java) allows to either scan the whole class path or a set of paths for all models therein. When paths are given, each path entry becomes an [IContainer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java) of its own.
 
 ```java
 component = org.eclipse.xtext.mwe.Reader {
@@ -590,7 +588,7 @@ component = org.eclipse.xtext.mwe.Reader {
 
 ### Local Scoping {#local-scoping}
 
-We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not everything is available in any context and with a global name. Rather than that, each context can usually have a different scope. As already stated, scopes can be nested, i.e. a scope can in addition to its own elements contain elements of a parent scope. When parent and child scope contain different elements with the same name, the parent scope's element will usually be *shadowed* by the element from the child scope.
+We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not everything is available in all contexts and with a global name. Rather than that, each context can usually have a different scope. As already stated, scopes can be nested, i.e. a scope can contain elements of a parent scope in addition to its own elements. When parent and child scope contain different elements with the same name, the parent scope's element will usually be *shadowed* by the element from the child scope.
 
 To illustrate that, let's have a look at Java: Java defines multiple kinds of scopes (object scope, type scope, etc.). For Java one would create the scope hierarchy as commented in the following example:
 
@@ -644,37 +642,39 @@ IScope scope_<RefDeclaringEClass>_<Reference>(
 IScope scope_<TypeToReturn>(<ContextType> ctx, EReference ref)
 ```
 
-The former is used when evaluating the scope for a specific cross-reference and here *ContextReference* corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The *ref* parameter represents this cross-reference.
+The former is used when evaluating the scope for a specific cross-reference. Here `<Reference>` corresponds to the name of this reference and `<RefDeclaringEClass>` is the declaring type of the reference. The *ref* parameter represents this cross-reference.
 
-The latter method signature is used when computing the scope for a given element type and is applicable to all cross-references of that type. Here *TypeToReturn* is the name of that type.
+The latter method signature is used when computing the scope for a given element type and is applicable to all cross-references of that type. Here `<TypeToReturn>` is the name of that type.
 
-So if you for example have a state machine with a *Transition* object owned by its source *State* and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross-reference is declared by the *Transition* type and is called *target*):
+For example, if you have a state machine with a *Transition* object owned by its source *State* and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross-reference is declared by the *Transition* type and is called *target*):
 
-`IScope scope_Transition_target(Transition this, EReference ref)`
+```java
+IScope scope_Transition_target(Transition this, EReference ref)
+```
 
-If such a method does not exist, the implementation will try to find one for the context object's container. Thus in the example this would match a method with the same name but *State* as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the *State* objects could for instance be owned by a containing *StateMachine* object.
+If such a method does not exist, the implementation tries to find one for the context object's container. Thus in the example this would match a method with the same name but *State* as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. It may also make the method easier to implement, as the elements comprising the scope are quite often owned or referenced by a container of the context object. For instance, the *State* objects could be owned by a containing *StateMachine* object.
 
-If no method specific to the cross-reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature. Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
+If no method specific to the cross-reference in question has been found for any of the objects in the containment hierarchy, the implementation starts looking for methods matching the other signature. Again it first attempts to match the context object. Thus in the example the first matched signature would be:
 
-`IScope scope_State(Transition this, EReference ref)`
+```java
+IScope scope_State(Transition this, EReference ref)
+```
 
-If no such method exists, the implementation will again try to find a method matching the context object's container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:
+If no such method exists, the implementation again tries to find a method matching the context object's container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:
 
-`IScope scope_State(StateMachine this, EReference ref)`
+```java
+IScope scope_State(StateMachine this, EReference ref)
+```
 
 This scope can now be used for any cross-references of type *State* for context objects owned by the state machine.
 
-### Imported Namespace-Aware Scoping {#namespace-imports}
+### Imported Namespace Aware Scoping {#namespace-imports}
 
-The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both allow to have multiple nested packages within one file and you can put imports per namespace, so that imported names are only visible within that namespace. See the domain model example: its scope provider extends [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java).
+The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace support to your language, which is comparable and similar to namespaces in Scala and C#. Scala and C# both allow to have multiple nested packages within one file, and you can put imports per namespace, such that imported names are only visible within that namespace. See the domain model example: its scope provider extends [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java).
 
 #### [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java)
 
-The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) makes use of the so called [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) service. It computes [QualifiedNames]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) for [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). A qualified name consists of several segments
-
-The [default implementation]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java) uses a simple name look up composes the qualified name of the simple names of all containers and the object itself.
-
-It also allows to override the name computation declaratively. The following snippet shows how you could make *Transitions* in the state machine example referable by giving them a name. Don't forget to bind your implementation in your runtime module.
+The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) makes use of the so called [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) service. It computes [QualifiedNames]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) for [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). A qualified name consists of several segments. The [default implementation]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java) uses a simple name look-up composing the qualified name of the simple names of all containers and the object itself. It also allows to override the name computation declaratively. The following snippet shows how you could make *Transitions* in the state machine example referable by giving them a name. Don't forget to bind your implementation in your runtime module.
 
 ```java
 FowlerDslQualifiedNameProvider
@@ -691,7 +691,7 @@ FowlerDslQualifiedNameProvider
 
 #### Importing Namespaces
 
-The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) looks up [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) with name 'importedNamespace' and interprets them as import statements.
+The [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java) looks up [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) with name '*importedNamespace*' and interprets them as import statements.
 
 ```xtext
 Root:
@@ -705,7 +705,7 @@ QualifiedName:
   ID ('.' ID)*;
 ```
 
-By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where `import java.util.Set;` makes it possible to refer to [java.util.Set]() by its simple name [Set](). Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:
+By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where `import java.util.Set;` makes it possible to refer to [java.util.Set]({{site.javadoc.java}}/java/util/Set.html) by its simple name [Set]({{site.javadoc.java}}/java/util/Set.html). Contrary to Java, the import is not active for the whole file, but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:
 
 ```domainexample
 package foo {
@@ -728,7 +728,7 @@ package bar {
 }
 ```
 
-The following would as well be ok:
+The following would also be ok:
 
 ```domainexample
 package bar {
@@ -737,7 +737,7 @@ package bar {
 }
 ```
 
-See the JavaDocs and [this blog post](https://blogs.itemis.de/leipzig/archives/773) for details.
+See the [JavaDocs]({{site.javadoc.xtext}}/org/eclipse/xtext/scoping/impl/package-summary.html) and [this blog post](https://blogs.itemis.de/leipzig/archives/773) for details.
 
 ## Value Converter {#value-converter}
 
