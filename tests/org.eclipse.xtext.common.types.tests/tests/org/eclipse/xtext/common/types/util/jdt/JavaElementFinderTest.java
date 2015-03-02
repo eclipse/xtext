@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar;
@@ -95,22 +97,41 @@ public class JavaElementFinderTest extends Assert {
 	@Test public void testTypeParamEndsWithDollar_03() throws Exception {
 		doTestFindMethod(TypeParamEndsWithDollar.class, "function3", 1);
 	}
+	
+	@Test public void testParameterWithoutType_01() throws Exception {
+		JvmOperation operation = findOperation(Object.class, "equals", 1);
+		JvmFormalParameter parameter = operation.getParameters().get(0);
+		parameter.setParameterType(null);
+		IJavaElement foundElement = elementFinder.findExactElementFor(operation);
+		assertNull(foundElement);
+	}
+	
+	@Test public void testParameterWithoutType_02() throws Exception {
+		JvmOperation operation = findOperation(Object.class, "equals", 1);
+		JvmFormalParameter parameter = operation.getParameters().get(0);
+		parameter.setParameterType(TypesFactory.eINSTANCE.createJvmParameterizedTypeReference());
+		IJavaElement foundElement = elementFinder.findExactElementFor(operation);
+		assertNull(foundElement);
+	}
 
 	protected void doTestFindMethod(Class<?> declaringType, String methodName, int numberOfParameters) {
-		JvmGenericType type = (JvmGenericType) typeProvider.findTypeByName(declaringType.getCanonicalName());
-		JvmOperation foundOperation = null;
-		for(JvmOperation operation: type.getDeclaredOperations()) {
-			if (methodName.equals(operation.getSimpleName()) && operation.getParameters().size() == numberOfParameters) {
-				foundOperation = operation;
-				break;
-			}
-		}
+		JvmOperation foundOperation = findOperation(declaringType, methodName, numberOfParameters);
 		assertNotNull(foundOperation);
 		IJavaElement found = elementFinder.findElementFor(foundOperation);
 		assertEquals(IJavaElement.METHOD, found.getElementType());
 		assertEquals(methodName, found.getElementName());
 		IMethod foundMethod = (IMethod) found;
 		assertEquals(numberOfParameters, foundMethod.getNumberOfParameters());
+	}
+
+	protected JvmOperation findOperation(Class<?> declaringType, String methodName, int numberOfParameters) {
+		JvmGenericType type = (JvmGenericType) typeProvider.findTypeByName(declaringType.getCanonicalName());
+		for(JvmOperation operation: type.getDeclaredOperations()) {
+			if (methodName.equals(operation.getSimpleName()) && operation.getParameters().size() == numberOfParameters) {
+				return operation;
+			}
+		}
+		return null;
 	}
 	
 }
