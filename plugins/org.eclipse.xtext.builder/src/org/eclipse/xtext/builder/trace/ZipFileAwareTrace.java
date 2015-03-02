@@ -13,13 +13,12 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.internal.compiler.util.Util;
 import org.eclipse.jdt.internal.core.JavaModelManager;
@@ -28,6 +27,7 @@ import org.eclipse.jdt.internal.core.JavaModelManager;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ZipFileAwareTrace extends AbstractTrace {
+	private static final Logger log = Logger.getLogger(ZipFileAwareTrace.class);
 
 	private IProject project;
 	private URI uri;
@@ -70,20 +70,25 @@ public class ZipFileAwareTrace extends AbstractTrace {
 	}
 
 	@Override
-	protected InputStream getContents(URI uri, IProject project) throws CoreException {
+	protected InputStream getContents(URI uri, IProject project) {
 		// inspired by org.eclipse.jdt.internal.core.JarEntryFile.getContents()
 		JavaModelManager modelManager = JavaModelManager.getJavaModelManager();
-		ZipFile zipFile = modelManager.getZipFile(zipFilePath);
+		ZipFile zipFile = null;
 		try {
+			zipFile = modelManager.getZipFile(zipFilePath);
 			ZipEntry zipEntry = zipFile.getEntry(uri.toString());
 			if (zipEntry != null) {
 				byte[] contents = Util.getZipEntryByteContent(zipEntry, zipFile);
 				return new ByteArrayInputStream(contents);
 			}
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, "", e.getMessage(), e));
+			log.debug("Could not read zip file " + uri, e);
+		} catch (CoreException e) {
+			log.debug("Could not read zip file " + uri, e);
 		} finally {
-			modelManager.closeZipFile(zipFile);
+			if (zipFile != null) {
+				modelManager.closeZipFile(zipFile);
+			}
 		}
 		return null;
 	}
