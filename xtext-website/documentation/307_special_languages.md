@@ -105,7 +105,7 @@ XBlockExpression returns xbase::XExpression:
 
 After running the workflow, a stub implementation of `AbstractIndentationTokenSource` is generated in the subpackage `parser.antlr`, e.g. `RuleEngineTokenSource`. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the `WS` (whitespace) rule is selected, which brings the indentation awareness as seen above.
 
-In case of a whitespace-aware language, the [formatter](#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. 
+In case of a whitespace-aware language, the [formatter](303_runtime_concepts.html#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. 
 
 ## Languages Independent of JDT {#java-independent-languages}
 
