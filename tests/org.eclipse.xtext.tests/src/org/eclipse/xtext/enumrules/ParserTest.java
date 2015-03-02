@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.enumrules;
 
+import java.io.IOException;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
@@ -37,7 +40,7 @@ public class ParserTest extends AbstractEnumRulesTest {
 
 	@Test public void testParseSameName() throws Exception {
 		String modelAsString = "existing SameName";
-		Model model = (Model) helper.getModel(modelAsString);
+		Model model = (Model) parse(modelAsString);
 		assertNotNull(model);
 		assertEquals(ExistingEnum.SAME_NAME, model.getExisting());
 		assertEquals(EnumRulesTestLanguagePackage.Literals.GENERATED_ENUM.getDefaultValue(), model.getGenerated());
@@ -45,7 +48,7 @@ public class ParserTest extends AbstractEnumRulesTest {
 	
 	@Test public void testParseSameName2() throws Exception {
 		String modelAsString = "generated SameName";
-		Model model = (Model) helper.getModel(modelAsString);
+		Model model = (Model) parse(modelAsString);
 		assertNotNull(model);
 		assertEquals(GeneratedEnum.SAME_NAME, model.getGenerated());
 		assertEquals(EnumsPackage.Literals.EXISTING_ENUM.getDefaultValue(), model.getExisting());
@@ -53,7 +56,7 @@ public class ParserTest extends AbstractEnumRulesTest {
 	
 	@Test public void testParseOverridden() throws Exception {
 		String modelAsString = "existing overridden";
-		Model model = (Model) helper.getModel(modelAsString);
+		Model model = (Model) parse(modelAsString);
 		assertNotNull(model);
 		assertEquals(ExistingEnum.OVERRIDDEN_LITERAL, model.getExisting());
 		assertEquals(EnumRulesTestLanguagePackage.Literals.GENERATED_ENUM.getDefaultValue(), model.getGenerated());
@@ -61,7 +64,7 @@ public class ParserTest extends AbstractEnumRulesTest {
 	
 	@Test public void testParseDifferentName() throws Exception {
 		String modelAsString = "existing DifferentLiteral";
-		Model model = (Model) helper.getModel(modelAsString);
+		Model model = (Model) parse(modelAsString);
 		assertNotNull(model);
 		assertEquals(ExistingEnum.DIFFERENT_NAME, model.getExisting());
 		assertEquals(EnumRulesTestLanguagePackage.Literals.GENERATED_ENUM.getDefaultValue(), model.getGenerated());
@@ -69,9 +72,13 @@ public class ParserTest extends AbstractEnumRulesTest {
 	
 	@Test public void testParseDifferentName2() throws Exception {
 		String modelAsString = "generated DifferentLiteral";
-		Model model = (Model) helper.getModel(modelAsString);
+		Model model = (Model) parse(modelAsString);
 		assertNotNull(model);
 		assertEquals(GeneratedEnum.DIFFERENT_NAME, model.getGenerated());
 		assertEquals(EnumsPackage.Literals.EXISTING_ENUM.getDefaultValue(), model.getExisting());
+	}
+
+	protected EObject parse(String modelAsString) throws IOException {
+		return helper.getModel(modelAsString);
 	}
 }
