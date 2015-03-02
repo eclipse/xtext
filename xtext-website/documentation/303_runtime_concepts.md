@@ -890,9 +890,9 @@ Formatting is the process of rearranging the text in a document to improve the r
 
 ### New API in Xtext 2.8 {#formatting-new}
 
-The new formatting API is available since Xtext 2.8. It resolves the limitations of the first API wich was present since the first version of Xtext. Namely the new API allows to implement formatting not only based on the static structure of the grammar but it is possible to make decisions based on the current model structure. Things that are now possible include:
+The new formatting API is available since Xtext 2.8. It resolves the limitations of the first API which was present since the first version of Xtext. The new API allows to implement formatting not only based on the static structure of the grammar, but it is possible to make decisions based on the actual model structure. Things that are now possible include:
 
-*   Add a line break to long list of items but keep shot lists in one line
+*   Add line breaks to long lists of items but keep short lists in one line
 *   Arrange elements in a tabular layout
 *   Apply formatting to values of data type rules or comments
 *   Consider the existing whitespace information and implement an adaptive layout
@@ -918,9 +918,9 @@ def dispatch void format(PackageDeclaration p, extension IFormattableDocument do
 }
 ```
 
-The API is designed in a way that allows to describe the formatting in a declarative way by calling methods on the [IHiddenRegionFormatter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.java) which is made available inside invocations of `prepend`, `surround` or `append` to specify the formatting rules. This can be done in arbitrary order - the infrastructure will reorder all the configurations to execute them from top to bottom of the document. If the configuration based approach is not sufficient for a particular use case, the [document]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java) accepts also imperative logic that is associated with a given range. The [ITextReplacer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/ITextReplacer.java) that can be added directly to the document allows to perform all kinds of modifications to the text in the region that it is associated with.
+The API is designed in a way that allows to describe the formatting in a declarative way by calling methods on the [IHiddenRegionFormatter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.java) which is made available inside invocations of `prepend`, `surround` or `append` to specify the formatting rules. This can be done in arbitrary order &ndash; the infrastructure will reorder all the configurations to execute them from top to bottom of the document. If the configuration-based approach is not sufficient for a particular use case, the [document]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java) also accepts imperative logic that is associated with a given range. The [ITextReplacer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/ITextReplacer.java) that can be added directly to the document allows to perform all kinds of modifications to the text in the region that it is associated with.
 
-More detailed information about the API is available as JavaDoc on the `org.eclipse.xtext.formatting2` package.
+More detailed information about the API is available as [JavaDoc on the org.eclipse.xtext.formatting2 package]({{site.javadoc.xtext}}/org/eclipse/xtext/formatting2/package-summary.html).
 
 ### Before Xtext 2.8 {#formatting-old}
 

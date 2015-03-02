@@ -40,6 +40,7 @@ src:
   sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"
 
 javadoc:
+  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
   java: "http://docs.oracle.com/javase/8/docs/api"
   javaee: "http://docs.oracle.com/javaee/5/api"
