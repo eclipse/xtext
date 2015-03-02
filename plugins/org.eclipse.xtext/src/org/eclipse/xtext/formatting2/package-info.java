@@ -10,17 +10,19 @@
  * unformatted document into a formatted document. Purpose of this infrastructure is to make it convenient for
  * implementers to construct these text replacements.</p>
  * 
- * <p>To run the formatter, you'll need to construct a {@link org.eclipse.xtext.formatting2.FormatterRequest}, get an instance of {@link org.eclipse.xtext.formatting2.IFormatter2}
- * from your language's Guice Injector and call {@link org.eclipse.xtext.formatting2.IFormatter2#format(FormatterRequest)}. The result will be a list
- * of text replacements. Use {@link org.eclipse.xtext.formatting2.TextReplacements#apply(CharSequence, Iterable)} to apply the replacements to a
- * String/CharSequence, if desired.</p>
+ * <p>To run the formatter, you'll need to construct a {@link org.eclipse.xtext.formatting2.FormatterRequest},
+ * get an instance of {@link org.eclipse.xtext.formatting2.IFormatter2} from your language's Guice Injector,
+ * and call {@link org.eclipse.xtext.formatting2.IFormatter2#format(FormatterRequest)}. The result will be a list
+ * of text replacements. Use {@link org.eclipse.xtext.formatting2.TextReplacements#apply(CharSequence, Iterable)}
+ * to apply the replacements to a String/CharSequence, if desired.</p>
  * 
- * <p>To implement a formatter or to understand how to implement a formatter, see {@link org.eclipse.xtext.formatting2.AbstractFormatter2}.</p>
+ * <p>To implement a formatter or to understand how to implement a formatter, see
+ * {@link org.eclipse.xtext.formatting2.AbstractFormatter2}.</p>
  * 
  * @see org.eclipse.xtext.formatting2.IFormatter2 Use the IFormatter2 to invoke the formatter
  * @see org.eclipse.xtext.formatting2.AbstractFormatter2 Extend the AbstractFormatter2 to implement a formatter
  * @see org.eclipse.xtext.formatting2.FormatterRequest The FormatterRequest is a per-execution scoped configuration for the formatter.  
- *                         Per-language configuration is handled by the injector  
+ *                         Per-language configuration is handled by the injector
  *                         or {@link org.eclipse.xtext.formatting2.AbstractFormatter2}. 
  * 
  * @author Moritz Eysholdt - Initial contribution and API
