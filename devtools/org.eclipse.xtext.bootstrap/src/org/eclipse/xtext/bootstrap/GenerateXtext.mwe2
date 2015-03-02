@@ -17,6 +17,9 @@ var runtimeProject = "../../plugins/${runtimeProjectName}"
 var uiProject = "../../plugins/${uiProjectName}"
 var file.extensions = "xtext,xtext2"
 
+var ideaProjectName = "${runtimeProjectName}.lang.idea"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
@@ -61,6 +64,17 @@ Workflow {
 			}
 			fragment = refactoring.RefactorElementNameFragment {}
 			fragment = templates.CodetemplatesGeneratorFragment {} 
+    		
+    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+    			runtimeProjectName = runtimeProjectName
+    			runtimeProjectPath = runtimeProject
+	        }
+	        
+	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+				options = {
+					classSplitting = true
+				}
+			}
 		}
 	}
 
