@@ -5,26 +5,35 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.compiler.batch;
+package org.eclipse.xtend.core.compiler.batch.internal;
 
 import com.google.common.collect.Maps;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentMap;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-/**
- * @deprecated This was an accidently exposed implementation detail of the batch compiler
- * @since 2.7
- */
-@Deprecated
 @SuppressWarnings("all")
-public class BootClassLoader extends URLClassLoader {
+public class AlternateJdkLoader extends URLClassLoader {
   private final ConcurrentMap<String, Object> locks = Maps.<String, Object>newConcurrentMap();
   
-  public BootClassLoader(final URL[] urls) {
-    super(urls);
+  public AlternateJdkLoader(final Iterable<File> files) {
+    super(((URL[])Conversions.unwrapArray(IterableExtensions.<File, URL>map(files, new Function1<File, URL>() {
+      @Override
+      public URL apply(final File it) {
+        try {
+          return it.toURL();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    }), URL.class)));
   }
   
   @Override
