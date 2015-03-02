@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.testlanguages.idea"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.xtext.idea"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
