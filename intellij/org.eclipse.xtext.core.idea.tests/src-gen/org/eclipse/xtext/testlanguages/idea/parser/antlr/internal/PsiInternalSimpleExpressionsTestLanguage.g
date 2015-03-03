@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleSequence:
 	{ markComposite(elementTypeProvider.getSequenceElementType()); }
 	ruleSequence
-	{ doneComposite(); }
 	EOF;
 
 // Rule Sequence
@@ -91,7 +90,6 @@ ruleSequence:
 entryRuleAddition:
 	{ markComposite(elementTypeProvider.getAdditionElementType()); }
 	ruleAddition
-	{ doneComposite(); }
 	EOF;
 
 // Rule Addition
@@ -115,19 +113,19 @@ ruleAddition:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getAddition_OperatorPlusSignKeyword_1_1_0_0ElementType());
 						}
 						lv_operator_2_1='+'
 						{
-							doneLeaf(lv_operator_2_1, elementTypeProvider.getAddition_OperatorPlusSignKeyword_1_1_0_0ElementType());
+							doneLeaf(lv_operator_2_1);
 						}
 						    |
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getAddition_OperatorHyphenMinusKeyword_1_1_0_1ElementType());
 						}
 						lv_operator_2_2='-'
 						{
-							doneLeaf(lv_operator_2_2, elementTypeProvider.getAddition_OperatorHyphenMinusKeyword_1_1_0_1ElementType());
+							doneLeaf(lv_operator_2_2);
 						}
 					)
 				)
@@ -151,7 +149,6 @@ ruleAddition:
 entryRuleMultiplication:
 	{ markComposite(elementTypeProvider.getMultiplicationElementType()); }
 	ruleMultiplication
-	{ doneComposite(); }
 	EOF;
 
 // Rule Multiplication
@@ -175,19 +172,19 @@ ruleMultiplication:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getMultiplication_OperatorAsteriskKeyword_1_1_0_0ElementType());
 						}
 						lv_operator_2_1='*'
 						{
-							doneLeaf(lv_operator_2_1, elementTypeProvider.getMultiplication_OperatorAsteriskKeyword_1_1_0_0ElementType());
+							doneLeaf(lv_operator_2_1);
 						}
 						    |
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getMultiplication_OperatorSolidusKeyword_1_1_0_1ElementType());
 						}
 						lv_operator_2_2='/'
 						{
-							doneLeaf(lv_operator_2_2, elementTypeProvider.getMultiplication_OperatorSolidusKeyword_1_1_0_1ElementType());
+							doneLeaf(lv_operator_2_2);
 						}
 					)
 				)
@@ -211,7 +208,6 @@ ruleMultiplication:
 entryRuleTerm:
 	{ markComposite(elementTypeProvider.getTermElementType()); }
 	ruleTerm
-	{ doneComposite(); }
 	EOF;
 
 // Rule Term
@@ -239,7 +235,6 @@ ruleTerm:
 entryRuleAtom:
 	{ markComposite(elementTypeProvider.getAtomElementType()); }
 	ruleAtom
-	{ doneComposite(); }
 	EOF;
 
 // Rule Atom
@@ -247,11 +242,11 @@ ruleAtom:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)
@@ -261,18 +256,17 @@ ruleAtom:
 entryRuleParens:
 	{ markComposite(elementTypeProvider.getParensElementType()); }
 	ruleParens
-	{ doneComposite(); }
 	EOF;
 
 // Rule Parens
 ruleParens:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
 		}
 		otherlv_0='('
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getParens_AdditionParserRuleCall_1ElementType());
@@ -282,11 +276,11 @@ ruleParens:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParens_RightParenthesisKeyword_2ElementType());
 		}
 		otherlv_2=')'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getParens_RightParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;

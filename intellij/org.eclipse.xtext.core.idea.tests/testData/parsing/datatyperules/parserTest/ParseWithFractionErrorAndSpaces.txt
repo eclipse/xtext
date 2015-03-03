@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLanguageFileImpl:a.datatyperulestestlanguage(0,18)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)(0,17)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)(0,18)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ModelModelParserRuleCall_0_ELEMENT_TYPE)(0,17)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_IdNestedModelIdParserRuleCall_0_0_ELEMENT_TYPE)(0,7)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(NestedModelId_ModelIdParserRuleCall_0_ELEMENT_TYPE)(0,3)
@@ -21,4 +21,4 @@ org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLangu
         PsiElement(Fraction_INTTerminalRuleCall_1_1_ELEMENT_TYPE)('0')(14,15)
       PsiWhiteSpace(' ')(15,16)
       PsiElement(Model_SemicolonKeyword_5_ELEMENT_TYPE)(';')(16,17)
-  PsiWhiteSpace(' ')(17,18)
+    PsiWhiteSpace(' ')(17,18)

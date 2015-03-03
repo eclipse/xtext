@@ -52,36 +52,35 @@ import com.intellij.lang.PsiBuilder;
 entryRuleEPatch:
 	{ markComposite(elementTypeProvider.getEPatchElementType()); }
 	ruleEPatch
-	{ doneComposite(); }
 	EOF;
 
 // Rule EPatch
 ruleEPatch:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEPatch_EpatchKeyword_0ElementType());
 		}
 		otherlv_0='epatch'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getEPatch_EpatchKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEPatch_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getEPatch_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEPatch_LeftCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='{'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getEPatch_LeftCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -117,11 +116,11 @@ ruleEPatch:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEPatch_RightCurlyBracketKeyword_6ElementType());
 		}
 		otherlv_6='}'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getEPatch_RightCurlyBracketKeyword_6ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;
@@ -130,7 +129,6 @@ ruleEPatch:
 entryRuleImport:
 	{ markComposite(elementTypeProvider.getImportElementType()); }
 	ruleImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule Import
@@ -166,7 +164,6 @@ ruleImport:
 entryRuleModelImport:
 	{ markComposite(elementTypeProvider.getModelImportElementType()); }
 	ruleModelImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule ModelImport
@@ -194,45 +191,44 @@ ruleModelImport:
 entryRuleResourceImport:
 	{ markComposite(elementTypeProvider.getResourceImportElementType()); }
 	ruleResourceImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule ResourceImport
 ruleResourceImport:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getResourceImport_ImportKeyword_0ElementType());
 		}
 		otherlv_0='import'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getResourceImport_ImportKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getResourceImport_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getResourceImport_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getResourceImport_UriKeyword_2ElementType());
 		}
 		otherlv_2='uri'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getResourceImport_UriKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getResourceImport_UriSTRINGTerminalRuleCall_3_0ElementType());
 				}
 				lv_uri_3_0=RULE_STRING
 				{
-					doneLeaf(lv_uri_3_0, elementTypeProvider.getResourceImport_UriSTRINGTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_uri_3_0);
 				}
 			)
 		)
@@ -243,45 +239,44 @@ ruleResourceImport:
 entryRuleEPackageImport:
 	{ markComposite(elementTypeProvider.getEPackageImportElementType()); }
 	ruleEPackageImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule EPackageImport
 ruleEPackageImport:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEPackageImport_ImportKeyword_0ElementType());
 		}
 		otherlv_0='import'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getEPackageImport_ImportKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEPackageImport_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getEPackageImport_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEPackageImport_NsKeyword_2ElementType());
 		}
 		otherlv_2='ns'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getEPackageImport_NsKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEPackageImport_NsURISTRINGTerminalRuleCall_3_0ElementType());
 				}
 				lv_nsURI_3_0=RULE_STRING
 				{
-					doneLeaf(lv_nsURI_3_0, elementTypeProvider.getEPackageImport_NsURISTRINGTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_nsURI_3_0);
 				}
 			)
 		)
@@ -292,53 +287,52 @@ ruleEPackageImport:
 entryRuleJavaImport:
 	{ markComposite(elementTypeProvider.getJavaImportElementType()); }
 	ruleJavaImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule JavaImport
 ruleJavaImport:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJavaImport_ImportKeyword_0ElementType());
 		}
 		otherlv_0='import'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJavaImport_ImportKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJavaImport_JavaKeyword_1ElementType());
 		}
 		otherlv_1='java'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getJavaImport_JavaKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_path_2_0=RULE_ID
 				{
-					doneLeaf(lv_path_2_0, elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_path_2_0);
 				}
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getJavaImport_FullStopKeyword_3_0ElementType());
 			}
 			otherlv_3='.'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getJavaImport_FullStopKeyword_3_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_path_4_0=RULE_ID
 					{
-						doneLeaf(lv_path_4_0, elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_3_1_0ElementType());
+						doneLeaf(lv_path_4_0);
 					}
 				)
 			)
@@ -350,53 +344,52 @@ ruleJavaImport:
 entryRuleExtensionImport:
 	{ markComposite(elementTypeProvider.getExtensionImportElementType()); }
 	ruleExtensionImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExtensionImport
 ruleExtensionImport:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtensionImport_ImportKeyword_0ElementType());
 		}
 		otherlv_0='import'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExtensionImport_ImportKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtensionImport_ExtensionKeyword_1ElementType());
 		}
 		otherlv_1='extension'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getExtensionImport_ExtensionKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_path_2_0=RULE_ID
 				{
-					doneLeaf(lv_path_2_0, elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_path_2_0);
 				}
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExtensionImport_ColonColonKeyword_3_0ElementType());
 			}
 			otherlv_3='::'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getExtensionImport_ColonColonKeyword_3_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_path_4_0=RULE_ID
 					{
-						doneLeaf(lv_path_4_0, elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_3_1_0ElementType());
+						doneLeaf(lv_path_4_0);
 					}
 				)
 			)
@@ -408,61 +401,60 @@ ruleExtensionImport:
 entryRuleNamedResource:
 	{ markComposite(elementTypeProvider.getNamedResourceElementType()); }
 	ruleNamedResource
-	{ doneComposite(); }
 	EOF;
 
 // Rule NamedResource
 ruleNamedResource:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_ResourceKeyword_0ElementType());
 		}
 		otherlv_0='resource'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNamedResource_ResourceKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNamedResource_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getNamedResource_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_LeftCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='{'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getNamedResource_LeftCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_LeftKeyword_3ElementType());
 		}
 		otherlv_3='left'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getNamedResource_LeftKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNamedResource_UriKeyword_4_0_0ElementType());
 				}
 				otherlv_4='uri'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getNamedResource_UriKeyword_4_0_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getNamedResource_LeftUriSTRINGTerminalRuleCall_4_0_1_0ElementType());
 						}
 						lv_leftUri_5_0=RULE_STRING
 						{
-							doneLeaf(lv_leftUri_5_0, elementTypeProvider.getNamedResource_LeftUriSTRINGTerminalRuleCall_4_0_1_0ElementType());
+							doneLeaf(lv_leftUri_5_0);
 						}
 					)
 				)
@@ -481,36 +473,36 @@ ruleNamedResource:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_SemicolonKeyword_5ElementType());
 		}
 		otherlv_7=';'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getNamedResource_SemicolonKeyword_5ElementType());
+			doneLeaf(otherlv_7);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_RightKeyword_6ElementType());
 		}
 		otherlv_8='right'
 		{
-			doneLeaf(otherlv_8, elementTypeProvider.getNamedResource_RightKeyword_6ElementType());
+			doneLeaf(otherlv_8);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNamedResource_UriKeyword_7_0_0ElementType());
 				}
 				otherlv_9='uri'
 				{
-					doneLeaf(otherlv_9, elementTypeProvider.getNamedResource_UriKeyword_7_0_0ElementType());
+					doneLeaf(otherlv_9);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getNamedResource_RightUriSTRINGTerminalRuleCall_7_0_1_0ElementType());
 						}
 						lv_rightUri_10_0=RULE_STRING
 						{
-							doneLeaf(lv_rightUri_10_0, elementTypeProvider.getNamedResource_RightUriSTRINGTerminalRuleCall_7_0_1_0ElementType());
+							doneLeaf(lv_rightUri_10_0);
 						}
 					)
 				)
@@ -529,18 +521,18 @@ ruleNamedResource:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_SemicolonKeyword_8ElementType());
 		}
 		otherlv_12=';'
 		{
-			doneLeaf(otherlv_12, elementTypeProvider.getNamedResource_SemicolonKeyword_8ElementType());
+			doneLeaf(otherlv_12);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNamedResource_RightCurlyBracketKeyword_9ElementType());
 		}
 		otherlv_13='}'
 		{
-			doneLeaf(otherlv_13, elementTypeProvider.getNamedResource_RightCurlyBracketKeyword_9ElementType());
+			doneLeaf(otherlv_13);
 		}
 	)
 ;
@@ -549,27 +541,26 @@ ruleNamedResource:
 entryRuleObjectRef:
 	{ markComposite(elementTypeProvider.getObjectRefElementType()); }
 	ruleObjectRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule ObjectRef
 ruleObjectRef:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getObjectRef_ObjectKeyword_0ElementType());
 		}
 		otherlv_0='object'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getObjectRef_ObjectKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectRef_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getObjectRef_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)?
@@ -578,22 +569,22 @@ ruleObjectRef:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_LeftResNamedResourceCrossReference_2_0_0_0ElementType());
 						}
 						otherlv_2=RULE_ID
 						{
-							doneLeaf(otherlv_2, elementTypeProvider.getObjectRef_LeftResNamedResourceCrossReference_2_0_0_0ElementType());
+							doneLeaf(otherlv_2);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_0_1_0ElementType());
 						}
 						lv_leftFrag_3_0=RULE_FRAGMENT
 						{
-							doneLeaf(lv_leftFrag_3_0, elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_0_1_0ElementType());
+							doneLeaf(lv_leftFrag_3_0);
 						}
 					)
 				)
@@ -601,60 +592,60 @@ ruleObjectRef:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectRef_LeftKeyword_2_1_0ElementType());
 				}
 				otherlv_4='left'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getObjectRef_LeftKeyword_2_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_LeftResNamedResourceCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
 						{
-							doneLeaf(otherlv_5, elementTypeProvider.getObjectRef_LeftResNamedResourceCrossReference_2_1_1_0ElementType());
+							doneLeaf(otherlv_5);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_1_2_0ElementType());
 						}
 						lv_leftFrag_6_0=RULE_FRAGMENT
 						{
-							doneLeaf(lv_leftFrag_6_0, elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_1_2_0ElementType());
+							doneLeaf(lv_leftFrag_6_0);
 						}
 					)
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectRef_RightKeyword_2_1_3ElementType());
 				}
 				otherlv_7='right'
 				{
-					doneLeaf(otherlv_7, elementTypeProvider.getObjectRef_RightKeyword_2_1_3ElementType());
+					doneLeaf(otherlv_7);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_RightResNamedResourceCrossReference_2_1_4_0ElementType());
 						}
 						otherlv_8=RULE_ID
 						{
-							doneLeaf(otherlv_8, elementTypeProvider.getObjectRef_RightResNamedResourceCrossReference_2_1_4_0ElementType());
+							doneLeaf(otherlv_8);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getObjectRef_RightFragFRAGMENTTerminalRuleCall_2_1_5_0ElementType());
 						}
 						lv_rightFrag_9_0=RULE_FRAGMENT
 						{
-							doneLeaf(lv_rightFrag_9_0, elementTypeProvider.getObjectRef_RightFragFRAGMENTTerminalRuleCall_2_1_5_0ElementType());
+							doneLeaf(lv_rightFrag_9_0);
 						}
 					)
 				)
@@ -662,11 +653,11 @@ ruleObjectRef:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getObjectRef_LeftCurlyBracketKeyword_3_0ElementType());
 			}
 			otherlv_10='{'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getObjectRef_LeftCurlyBracketKeyword_3_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
@@ -695,11 +686,11 @@ ruleObjectRef:
 			)+
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectRef_LeftKeyword_3_2_0ElementType());
 				}
 				otherlv_13='left'
 				{
-					doneLeaf(otherlv_13, elementTypeProvider.getObjectRef_LeftKeyword_3_2_0ElementType());
+					doneLeaf(otherlv_13);
 				}
 				(
 					(
@@ -715,11 +706,11 @@ ruleObjectRef:
 			)?
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectRef_RightKeyword_3_3_0ElementType());
 				}
 				otherlv_15='right'
 				{
-					doneLeaf(otherlv_15, elementTypeProvider.getObjectRef_RightKeyword_3_3_0ElementType());
+					doneLeaf(otherlv_15);
 				}
 				(
 					(
@@ -734,11 +725,11 @@ ruleObjectRef:
 				)
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getObjectRef_RightCurlyBracketKeyword_3_4ElementType());
 			}
 			otherlv_17='}'
 			{
-				doneLeaf(otherlv_17, elementTypeProvider.getObjectRef_RightCurlyBracketKeyword_3_4ElementType());
+				doneLeaf(otherlv_17);
 			}
 		)?
 	)
@@ -748,7 +739,6 @@ ruleObjectRef:
 entryRuleBiSingleAssignment:
 	{ markComposite(elementTypeProvider.getBiSingleAssignmentElementType()); }
 	ruleBiSingleAssignment
-	{ doneComposite(); }
 	EOF;
 
 // Rule BiSingleAssignment
@@ -757,20 +747,20 @@ ruleBiSingleAssignment:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBiSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_feature_0_0=RULE_ID
 				{
-					doneLeaf(lv_feature_0_0, elementTypeProvider.getBiSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_feature_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiSingleAssignment_EqualsSignKeyword_1ElementType());
 		}
 		otherlv_1='='
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getBiSingleAssignment_EqualsSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -784,11 +774,11 @@ ruleBiSingleAssignment:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiSingleAssignment_VerticalLineKeyword_3ElementType());
 		}
 		otherlv_3='|'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getBiSingleAssignment_VerticalLineKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		(
 			(
@@ -802,11 +792,11 @@ ruleBiSingleAssignment:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiSingleAssignment_SemicolonKeyword_5ElementType());
 		}
 		otherlv_5=';'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getBiSingleAssignment_SemicolonKeyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;
@@ -815,7 +805,6 @@ ruleBiSingleAssignment:
 entryRuleBiListAssignment:
 	{ markComposite(elementTypeProvider.getBiListAssignmentElementType()); }
 	ruleBiListAssignment
-	{ doneComposite(); }
 	EOF;
 
 // Rule BiListAssignment
@@ -824,27 +813,27 @@ ruleBiListAssignment:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBiListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_feature_0_0=RULE_ID
 				{
-					doneLeaf(lv_feature_0_0, elementTypeProvider.getBiListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_feature_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiListAssignment_EqualsSignKeyword_1ElementType());
 		}
 		otherlv_1='='
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getBiListAssignment_EqualsSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiListAssignment_LeftSquareBracketKeyword_2ElementType());
 		}
 		otherlv_2='['
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getBiListAssignment_LeftSquareBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -860,11 +849,11 @@ ruleBiListAssignment:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBiListAssignment_CommaKeyword_3_1_0ElementType());
 				}
 				otherlv_4=','
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getBiListAssignment_CommaKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -880,11 +869,11 @@ ruleBiListAssignment:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiListAssignment_VerticalLineKeyword_4ElementType());
 		}
 		otherlv_6='|'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getBiListAssignment_VerticalLineKeyword_4ElementType());
+			doneLeaf(otherlv_6);
 		}
 		(
 			(
@@ -900,11 +889,11 @@ ruleBiListAssignment:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBiListAssignment_CommaKeyword_5_1_0ElementType());
 				}
 				otherlv_8=','
 				{
-					doneLeaf(otherlv_8, elementTypeProvider.getBiListAssignment_CommaKeyword_5_1_0ElementType());
+					doneLeaf(otherlv_8);
 				}
 				(
 					(
@@ -920,18 +909,18 @@ ruleBiListAssignment:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiListAssignment_RightSquareBracketKeyword_6ElementType());
 		}
 		otherlv_10=']'
 		{
-			doneLeaf(otherlv_10, elementTypeProvider.getBiListAssignment_RightSquareBracketKeyword_6ElementType());
+			doneLeaf(otherlv_10);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBiListAssignment_SemicolonKeyword_7ElementType());
 		}
 		otherlv_11=';'
 		{
-			doneLeaf(otherlv_11, elementTypeProvider.getBiListAssignment_SemicolonKeyword_7ElementType());
+			doneLeaf(otherlv_11);
 		}
 	)
 ;
@@ -940,7 +929,6 @@ ruleBiListAssignment:
 entryRuleMonoSingleAssignment:
 	{ markComposite(elementTypeProvider.getMonoSingleAssignmentElementType()); }
 	ruleMonoSingleAssignment
-	{ doneComposite(); }
 	EOF;
 
 // Rule MonoSingleAssignment
@@ -949,20 +937,20 @@ ruleMonoSingleAssignment:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMonoSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_feature_0_0=RULE_ID
 				{
-					doneLeaf(lv_feature_0_0, elementTypeProvider.getMonoSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_feature_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoSingleAssignment_EqualsSignKeyword_1ElementType());
 		}
 		otherlv_1='='
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getMonoSingleAssignment_EqualsSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -976,11 +964,11 @@ ruleMonoSingleAssignment:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoSingleAssignment_SemicolonKeyword_3ElementType());
 		}
 		otherlv_3=';'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getMonoSingleAssignment_SemicolonKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;
@@ -989,7 +977,6 @@ ruleMonoSingleAssignment:
 entryRuleMonoListAssignment:
 	{ markComposite(elementTypeProvider.getMonoListAssignmentElementType()); }
 	ruleMonoListAssignment
-	{ doneComposite(); }
 	EOF;
 
 // Rule MonoListAssignment
@@ -998,27 +985,27 @@ ruleMonoListAssignment:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMonoListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_feature_0_0=RULE_ID
 				{
-					doneLeaf(lv_feature_0_0, elementTypeProvider.getMonoListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_feature_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoListAssignment_EqualsSignKeyword_1ElementType());
 		}
 		otherlv_1='='
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getMonoListAssignment_EqualsSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoListAssignment_LeftSquareBracketKeyword_2ElementType());
 		}
 		otherlv_2='['
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getMonoListAssignment_LeftSquareBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -1034,11 +1021,11 @@ ruleMonoListAssignment:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMonoListAssignment_CommaKeyword_3_1_0ElementType());
 				}
 				otherlv_4=','
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getMonoListAssignment_CommaKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -1054,18 +1041,18 @@ ruleMonoListAssignment:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoListAssignment_RightSquareBracketKeyword_4ElementType());
 		}
 		otherlv_6=']'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getMonoListAssignment_RightSquareBracketKeyword_4ElementType());
+			doneLeaf(otherlv_6);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMonoListAssignment_SemicolonKeyword_5ElementType());
 		}
 		otherlv_7=';'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getMonoListAssignment_SemicolonKeyword_5ElementType());
+			doneLeaf(otherlv_7);
 		}
 	)
 ;
@@ -1074,7 +1061,6 @@ ruleMonoListAssignment:
 entryRuleAssignmentValue:
 	{ markComposite(elementTypeProvider.getAssignmentValueElementType()); }
 	ruleAssignmentValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule AssignmentValue
@@ -1083,11 +1069,11 @@ ruleAssignmentValue:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAssignmentValue_ValueSTRINGTerminalRuleCall_0_0ElementType());
 				}
 				lv_value_0_0=RULE_STRING
 				{
-					doneLeaf(lv_value_0_0, elementTypeProvider.getAssignmentValue_ValueSTRINGTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_value_0_0);
 				}
 			)
 		)
@@ -1096,58 +1082,58 @@ ruleAssignmentValue:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getAssignmentValue_RefObjectNamedObjectCrossReference_1_0_0ElementType());
 					}
 					otherlv_1=RULE_ID
 					{
-						doneLeaf(otherlv_1, elementTypeProvider.getAssignmentValue_RefObjectNamedObjectCrossReference_1_0_0ElementType());
+						doneLeaf(otherlv_1);
 					}
 				)
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAssignmentValue_FullStopKeyword_1_1_0ElementType());
 				}
 				otherlv_2='.'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getAssignmentValue_FullStopKeyword_1_1_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getAssignmentValue_RefFeatureIDTerminalRuleCall_1_1_1_0ElementType());
 						}
 						lv_refFeature_3_0=RULE_ID
 						{
-							doneLeaf(lv_refFeature_3_0, elementTypeProvider.getAssignmentValue_RefFeatureIDTerminalRuleCall_1_1_1_0ElementType());
+							doneLeaf(lv_refFeature_3_0);
 						}
 					)
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getAssignmentValue_LeftSquareBracketKeyword_1_1_2_0ElementType());
 					}
 					otherlv_4='['
 					{
-						doneLeaf(otherlv_4, elementTypeProvider.getAssignmentValue_LeftSquareBracketKeyword_1_1_2_0ElementType());
+						doneLeaf(otherlv_4);
 					}
 					(
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getAssignmentValue_RefIndexINTTerminalRuleCall_1_1_2_1_0ElementType());
 							}
 							lv_refIndex_5_0=RULE_INT
 							{
-								doneLeaf(lv_refIndex_5_0, elementTypeProvider.getAssignmentValue_RefIndexINTTerminalRuleCall_1_1_2_1_0ElementType());
+								doneLeaf(lv_refIndex_5_0);
 							}
 						)
 					)
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getAssignmentValue_RightSquareBracketKeyword_1_1_2_2ElementType());
 					}
 					otherlv_6=']'
 					{
-						doneLeaf(otherlv_6, elementTypeProvider.getAssignmentValue_RightSquareBracketKeyword_1_1_2_2ElementType());
+						doneLeaf(otherlv_6);
 					}
 				)?
 			)?
@@ -1169,22 +1155,22 @@ ruleAssignmentValue:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getAssignmentValue_ImportImportCrossReference_3_0_0ElementType());
 					}
 					otherlv_8=RULE_ID
 					{
-						doneLeaf(otherlv_8, elementTypeProvider.getAssignmentValue_ImportImportCrossReference_3_0_0ElementType());
+						doneLeaf(otherlv_8);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_impFrag_9_0=RULE_FRAGMENT
 					{
-						doneLeaf(lv_impFrag_9_0, elementTypeProvider.getAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_3_1_0ElementType());
+						doneLeaf(lv_impFrag_9_0);
 					}
 				)
 			)
@@ -1196,7 +1182,6 @@ ruleAssignmentValue:
 entryRuleListAssignmentValue:
 	{ markComposite(elementTypeProvider.getListAssignmentValueElementType()); }
 	ruleListAssignmentValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule ListAssignmentValue
@@ -1205,58 +1190,58 @@ ruleListAssignmentValue:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getListAssignmentValue_IndexINTTerminalRuleCall_0_0ElementType());
 				}
 				lv_index_0_0=RULE_INT
 				{
-					doneLeaf(lv_index_0_0, elementTypeProvider.getListAssignmentValue_IndexINTTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_index_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getListAssignmentValue_ColonKeyword_1ElementType());
 		}
 		otherlv_1=':'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getListAssignmentValue_ColonKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getListAssignmentValue_LeftSquareBracketKeyword_2_0_0ElementType());
 				}
 				otherlv_2='['
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getListAssignmentValue_LeftSquareBracketKeyword_2_0_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_0_1_0ElementType());
 						}
 						lv_refIndex_3_0=RULE_INT
 						{
-							doneLeaf(lv_refIndex_3_0, elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_0_1_0ElementType());
+							doneLeaf(lv_refIndex_3_0);
 						}
 					)
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getListAssignmentValue_RightSquareBracketKeyword_2_0_2ElementType());
 				}
 				otherlv_4=']'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getListAssignmentValue_RightSquareBracketKeyword_2_0_2ElementType());
+					doneLeaf(otherlv_4);
 				}
 			)
 			    |
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getListAssignmentValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
 					}
 					lv_value_5_0=RULE_STRING
 					{
-						doneLeaf(lv_value_5_0, elementTypeProvider.getListAssignmentValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
+						doneLeaf(lv_value_5_0);
 					}
 				)
 			)
@@ -1265,58 +1250,58 @@ ruleListAssignmentValue:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_RefObjectNamedObjectCrossReference_2_2_0_0ElementType());
 						}
 						otherlv_6=RULE_ID
 						{
-							doneLeaf(otherlv_6, elementTypeProvider.getListAssignmentValue_RefObjectNamedObjectCrossReference_2_2_0_0ElementType());
+							doneLeaf(otherlv_6);
 						}
 					)
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getListAssignmentValue_FullStopKeyword_2_2_1_0ElementType());
 					}
 					otherlv_7='.'
 					{
-						doneLeaf(otherlv_7, elementTypeProvider.getListAssignmentValue_FullStopKeyword_2_2_1_0ElementType());
+						doneLeaf(otherlv_7);
 					}
 					(
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getListAssignmentValue_RefFeatureIDTerminalRuleCall_2_2_1_1_0ElementType());
 							}
 							lv_refFeature_8_0=RULE_ID
 							{
-								doneLeaf(lv_refFeature_8_0, elementTypeProvider.getListAssignmentValue_RefFeatureIDTerminalRuleCall_2_2_1_1_0ElementType());
+								doneLeaf(lv_refFeature_8_0);
 							}
 						)
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_LeftSquareBracketKeyword_2_2_1_2_0ElementType());
 						}
 						otherlv_9='['
 						{
-							doneLeaf(otherlv_9, elementTypeProvider.getListAssignmentValue_LeftSquareBracketKeyword_2_2_1_2_0ElementType());
+							doneLeaf(otherlv_9);
 						}
 						(
 							(
 								{
-									markLeaf();
+									markLeaf(elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_2_1_2_1_0ElementType());
 								}
 								lv_refIndex_10_0=RULE_INT
 								{
-									doneLeaf(lv_refIndex_10_0, elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_2_1_2_1_0ElementType());
+									doneLeaf(lv_refIndex_10_0);
 								}
 							)
 						)
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_RightSquareBracketKeyword_2_2_1_2_2ElementType());
 						}
 						otherlv_11=']'
 						{
-							doneLeaf(otherlv_11, elementTypeProvider.getListAssignmentValue_RightSquareBracketKeyword_2_2_1_2_2ElementType());
+							doneLeaf(otherlv_11);
 						}
 					)?
 				)?
@@ -1338,22 +1323,22 @@ ruleListAssignmentValue:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_ImportImportCrossReference_2_4_0_0ElementType());
 						}
 						otherlv_13=RULE_ID
 						{
-							doneLeaf(otherlv_13, elementTypeProvider.getListAssignmentValue_ImportImportCrossReference_2_4_0_0ElementType());
+							doneLeaf(otherlv_13);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getListAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_2_4_1_0ElementType());
 						}
 						lv_impFrag_14_0=RULE_FRAGMENT
 						{
-							doneLeaf(lv_impFrag_14_0, elementTypeProvider.getListAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_2_4_1_0ElementType());
+							doneLeaf(lv_impFrag_14_0);
 						}
 					)
 				)
@@ -1366,7 +1351,6 @@ ruleListAssignmentValue:
 entryRuleSingleAssignmentValue:
 	{ markComposite(elementTypeProvider.getSingleAssignmentValueElementType()); }
 	ruleSingleAssignmentValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule SingleAssignmentValue
@@ -1375,11 +1359,11 @@ ruleSingleAssignmentValue:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSingleAssignmentValue_KeywordNullKeyword_0_0ElementType());
 				}
 				lv_keyword_0_0='null'
 				{
-					doneLeaf(lv_keyword_0_0, elementTypeProvider.getSingleAssignmentValue_KeywordNullKeyword_0_0ElementType());
+					doneLeaf(lv_keyword_0_0);
 				}
 			)
 		)
@@ -1387,11 +1371,11 @@ ruleSingleAssignmentValue:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSingleAssignmentValue_ValueSTRINGTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_STRING
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getSingleAssignmentValue_ValueSTRINGTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
@@ -1400,58 +1384,58 @@ ruleSingleAssignmentValue:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleAssignmentValue_RefObjectNamedObjectCrossReference_2_0_0ElementType());
 					}
 					otherlv_2=RULE_ID
 					{
-						doneLeaf(otherlv_2, elementTypeProvider.getSingleAssignmentValue_RefObjectNamedObjectCrossReference_2_0_0ElementType());
+						doneLeaf(otherlv_2);
 					}
 				)
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSingleAssignmentValue_FullStopKeyword_2_1_0ElementType());
 				}
 				otherlv_3='.'
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getSingleAssignmentValue_FullStopKeyword_2_1_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getSingleAssignmentValue_RefFeatureIDTerminalRuleCall_2_1_1_0ElementType());
 						}
 						lv_refFeature_4_0=RULE_ID
 						{
-							doneLeaf(lv_refFeature_4_0, elementTypeProvider.getSingleAssignmentValue_RefFeatureIDTerminalRuleCall_2_1_1_0ElementType());
+							doneLeaf(lv_refFeature_4_0);
 						}
 					)
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleAssignmentValue_LeftSquareBracketKeyword_2_1_2_0ElementType());
 					}
 					otherlv_5='['
 					{
-						doneLeaf(otherlv_5, elementTypeProvider.getSingleAssignmentValue_LeftSquareBracketKeyword_2_1_2_0ElementType());
+						doneLeaf(otherlv_5);
 					}
 					(
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getSingleAssignmentValue_RefIndexINTTerminalRuleCall_2_1_2_1_0ElementType());
 							}
 							lv_refIndex_6_0=RULE_INT
 							{
-								doneLeaf(lv_refIndex_6_0, elementTypeProvider.getSingleAssignmentValue_RefIndexINTTerminalRuleCall_2_1_2_1_0ElementType());
+								doneLeaf(lv_refIndex_6_0);
 							}
 						)
 					)
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleAssignmentValue_RightSquareBracketKeyword_2_1_2_2ElementType());
 					}
 					otherlv_7=']'
 					{
-						doneLeaf(otherlv_7, elementTypeProvider.getSingleAssignmentValue_RightSquareBracketKeyword_2_1_2_2ElementType());
+						doneLeaf(otherlv_7);
 					}
 				)?
 			)?
@@ -1473,22 +1457,22 @@ ruleSingleAssignmentValue:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleAssignmentValue_ImportImportCrossReference_4_0_0ElementType());
 					}
 					otherlv_9=RULE_ID
 					{
-						doneLeaf(otherlv_9, elementTypeProvider.getSingleAssignmentValue_ImportImportCrossReference_4_0_0ElementType());
+						doneLeaf(otherlv_9);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_4_1_0ElementType());
 					}
 					lv_impFrag_10_0=RULE_FRAGMENT
 					{
-						doneLeaf(lv_impFrag_10_0, elementTypeProvider.getSingleAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_4_1_0ElementType());
+						doneLeaf(lv_impFrag_10_0);
 					}
 				)
 			)
@@ -1500,7 +1484,6 @@ ruleSingleAssignmentValue:
 entryRuleCreatedObject:
 	{ markComposite(elementTypeProvider.getCreatedObjectElementType()); }
 	ruleCreatedObject
-	{ doneComposite(); }
 	EOF;
 
 // Rule CreatedObject
@@ -1526,21 +1509,21 @@ ruleCreatedObject:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getCreatedObject_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
 				{
-					doneLeaf(lv_name_2_0, elementTypeProvider.getCreatedObject_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_2_0);
 				}
 			)
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getCreatedObject_LeftCurlyBracketKeyword_2_0ElementType());
 			}
 			otherlv_3='{'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getCreatedObject_LeftCurlyBracketKeyword_2_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
@@ -1579,11 +1562,11 @@ ruleCreatedObject:
 				)
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getCreatedObject_RightCurlyBracketKeyword_2_3ElementType());
 			}
 			otherlv_7='}'
 			{
-				doneLeaf(otherlv_7, elementTypeProvider.getCreatedObject_RightCurlyBracketKeyword_2_3ElementType());
+				doneLeaf(otherlv_7);
 			}
 		)?
 	)
@@ -1593,38 +1576,37 @@ ruleCreatedObject:
 entryRuleObjectNew:
 	{ markComposite(elementTypeProvider.getObjectNewElementType()); }
 	ruleObjectNew
-	{ doneComposite(); }
 	EOF;
 
 // Rule ObjectNew
 ruleObjectNew:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getObjectNew_NewKeyword_0ElementType());
 		}
 		otherlv_0='new'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getObjectNew_NewKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectNew_ImportImportCrossReference_1_0ElementType());
 				}
 				otherlv_1=RULE_ID
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getObjectNew_ImportImportCrossReference_1_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectNew_ImpFragFRAGMENTTerminalRuleCall_2_0ElementType());
 				}
 				lv_impFrag_2_0=RULE_FRAGMENT
 				{
-					doneLeaf(lv_impFrag_2_0, elementTypeProvider.getObjectNew_ImpFragFRAGMENTTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_impFrag_2_0);
 				}
 			)
 		)
@@ -1635,38 +1617,37 @@ ruleObjectNew:
 entryRuleObjectCopy:
 	{ markComposite(elementTypeProvider.getObjectCopyElementType()); }
 	ruleObjectCopy
-	{ doneComposite(); }
 	EOF;
 
 // Rule ObjectCopy
 ruleObjectCopy:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getObjectCopy_CopyKeyword_0ElementType());
 		}
 		otherlv_0='copy'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getObjectCopy_CopyKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectCopy_ResourceNamedResourceCrossReference_1_0ElementType());
 				}
 				otherlv_1=RULE_ID
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getObjectCopy_ResourceNamedResourceCrossReference_1_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getObjectCopy_FragmentFRAGMENTTerminalRuleCall_2_0ElementType());
 				}
 				lv_fragment_2_0=RULE_FRAGMENT
 				{
-					doneLeaf(lv_fragment_2_0, elementTypeProvider.getObjectCopy_FragmentFRAGMENTTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_fragment_2_0);
 				}
 			)
 		)
@@ -1677,7 +1658,6 @@ ruleObjectCopy:
 entryRuleMigration:
 	{ markComposite(elementTypeProvider.getMigrationElementType()); }
 	ruleMigration
-	{ doneComposite(); }
 	EOF;
 
 // Rule Migration
@@ -1690,11 +1670,11 @@ ruleMigration:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMigration_MigrateKeyword_1ElementType());
 		}
 		otherlv_1='migrate'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getMigration_MigrateKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -1710,11 +1690,11 @@ ruleMigration:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMigration_AsKeyword_3_0_0ElementType());
 				}
 				otherlv_3='as'
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getMigration_AsKeyword_3_0_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 				(
 					(
@@ -1731,11 +1711,11 @@ ruleMigration:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMigration_EachKeyword_3_1_0ElementType());
 				}
 				otherlv_5='each'
 				{
-					doneLeaf(otherlv_5, elementTypeProvider.getMigration_EachKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_5);
 				}
 				(
 					(
@@ -1751,11 +1731,11 @@ ruleMigration:
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMigration_SemicolonKeyword_4ElementType());
 		}
 		otherlv_7=';'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getMigration_SemicolonKeyword_4ElementType());
+			doneLeaf(otherlv_7);
 		}
 	)
 ;
@@ -1764,7 +1744,6 @@ ruleMigration:
 entryRuleExecutable:
 	{ markComposite(elementTypeProvider.getExecutableElementType()); }
 	ruleExecutable
-	{ doneComposite(); }
 	EOF;
 
 // Rule Executable
@@ -1792,43 +1771,42 @@ ruleExecutable:
 entryRuleJavaExecutable:
 	{ markComposite(elementTypeProvider.getJavaExecutableElementType()); }
 	ruleJavaExecutable
-	{ doneComposite(); }
 	EOF;
 
 // Rule JavaExecutable
 ruleJavaExecutable:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJavaExecutable_JavaKeyword_0ElementType());
 		}
 		otherlv_0='java'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJavaExecutable_JavaKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getJavaExecutable_MethodIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_method_1_0=RULE_ID
 				{
-					doneLeaf(lv_method_1_0, elementTypeProvider.getJavaExecutable_MethodIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_method_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJavaExecutable_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getJavaExecutable_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJavaExecutable_RightParenthesisKeyword_3ElementType());
 		}
 		otherlv_3=')'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getJavaExecutable_RightParenthesisKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;
@@ -1837,7 +1815,6 @@ ruleJavaExecutable:
 entryRuleExpressionExecutable:
 	{ markComposite(elementTypeProvider.getExpressionExecutableElementType()); }
 	ruleExpressionExecutable
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExpressionExecutable
@@ -1845,11 +1822,11 @@ ruleExpressionExecutable:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExpressionExecutable_ExprstrSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_exprstr_0_0=RULE_STRING
 			{
-				doneLeaf(lv_exprstr_0_0, elementTypeProvider.getExpressionExecutable_ExprstrSTRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_exprstr_0_0);
 			}
 		)
 	)

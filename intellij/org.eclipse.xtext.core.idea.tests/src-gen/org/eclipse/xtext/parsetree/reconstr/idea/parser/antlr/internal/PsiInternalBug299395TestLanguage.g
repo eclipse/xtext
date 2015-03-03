@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -66,78 +65,78 @@ ruleModel:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_LeftCurlyBracketKeyword_1_0ElementType());
 			}
 			otherlv_1='{'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getModel_LeftCurlyBracketKeyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType());
 					}
 					lv_strings_2_0=RULE_STRING
 					{
-						doneLeaf(lv_strings_2_0, elementTypeProvider.getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType());
+						doneLeaf(lv_strings_2_0);
 					}
 				)
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_RightCurlyBracketKeyword_1_2ElementType());
 			}
 			otherlv_3='}'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getModel_RightCurlyBracketKeyword_1_2ElementType());
+				doneLeaf(otherlv_3);
 			}
 		)*
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_LeftSquareBracketKeyword_2_0ElementType());
 			}
 			otherlv_4='['
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_LeftSquareBracketKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getModel_KeysSTRINGTerminalRuleCall_2_1_0_0ElementType());
 						}
 						lv_keys_5_0=RULE_STRING
 						{
-							doneLeaf(lv_keys_5_0, elementTypeProvider.getModel_KeysSTRINGTerminalRuleCall_2_1_0_0ElementType());
+							doneLeaf(lv_keys_5_0);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType());
 						}
 						lv_values_6_0=RULE_STRING
 						{
-							doneLeaf(lv_values_6_0, elementTypeProvider.getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType());
+							doneLeaf(lv_values_6_0);
 						}
 					)
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_RightSquareBracketKeyword_2_2ElementType());
 			}
 			otherlv_7=']'
 			{
-				doneLeaf(otherlv_7, elementTypeProvider.getModel_RightSquareBracketKeyword_2_2ElementType());
+				doneLeaf(otherlv_7);
 			}
 		)*
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_SubModelKeyword_3_0ElementType());
 			}
 			otherlv_8='subModel'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getModel_SubModelKeyword_3_0ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
@@ -158,7 +157,6 @@ ruleModel:
 entryRuleSubModel:
 	{ markComposite(elementTypeProvider.getSubModelElementType()); }
 	ruleSubModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule SubModel
@@ -172,27 +170,27 @@ ruleSubModel:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSubModel_DigitOneKeyword_1_0ElementType());
 			}
 			otherlv_1='1'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getSubModel_DigitOneKeyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSubModel_DigitTwoKeyword_1_1ElementType());
 			}
 			otherlv_2='2'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getSubModel_DigitTwoKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType());
 					}
 					lv_strings_3_0=RULE_STRING
 					{
-						doneLeaf(lv_strings_3_0, elementTypeProvider.getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType());
+						doneLeaf(lv_strings_3_0);
 					}
 				)
 			)?

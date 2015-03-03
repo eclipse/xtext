@@ -52,36 +52,35 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
 ruleModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
 		}
 		otherlv_0='model'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModel_ModelKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_LeftCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='{'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getModel_LeftCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -95,11 +94,11 @@ ruleModel:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_RightCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_4='}'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getModel_RightCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 	)
 ;
@@ -108,27 +107,26 @@ ruleModel:
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
 ruleElement:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getElement_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)

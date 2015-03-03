@@ -52,36 +52,35 @@ import com.intellij.lang.PsiBuilder;
 entryRuleSomeContainer:
 	{ markComposite(elementTypeProvider.getSomeContainerElementType()); }
 	ruleSomeContainer
-	{ doneComposite(); }
 	EOF;
 
 // Rule SomeContainer
 ruleSomeContainer:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSomeContainer_ContainerKeyword_0ElementType());
 		}
 		otherlv_0='container'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSomeContainer_ContainerKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSomeContainer_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getSomeContainer_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSomeContainer_LeftCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='{'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getSomeContainer_LeftCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -109,11 +108,11 @@ ruleSomeContainer:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSomeContainer_RightCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_5='}'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getSomeContainer_RightCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;
@@ -122,25 +121,24 @@ ruleSomeContainer:
 entryRuleNested:
 	{ markComposite(elementTypeProvider.getNestedElementType()); }
 	ruleNested
-	{ doneComposite(); }
 	EOF;
 
 // Rule Nested
 ruleNested:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNested_NestedKeyword_0ElementType());
 		}
 		otherlv_0='nested'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNested_NestedKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNested_LeftCurlyBracketKeyword_1ElementType());
 		}
 		otherlv_1='{'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getNested_LeftCurlyBracketKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -154,11 +152,11 @@ ruleNested:
 			)
 		)+
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNested_RightCurlyBracketKeyword_3ElementType());
 		}
 		otherlv_3='}'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getNested_RightCurlyBracketKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;
@@ -167,7 +165,6 @@ ruleNested:
 entryRuleContent:
 	{ markComposite(elementTypeProvider.getContentElementType()); }
 	ruleContent
-	{ doneComposite(); }
 	EOF;
 
 // Rule Content
@@ -195,25 +192,24 @@ ruleContent:
 entryRuleChildren:
 	{ markComposite(elementTypeProvider.getChildrenElementType()); }
 	ruleChildren
-	{ doneComposite(); }
 	EOF;
 
 // Rule Children
 ruleChildren:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChildren_ChildrenKeyword_0ElementType());
 		}
 		otherlv_0='children'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getChildren_ChildrenKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChildren_LeftCurlyBracketKeyword_1ElementType());
 		}
 		otherlv_1='{'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getChildren_LeftCurlyBracketKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -228,11 +224,11 @@ ruleChildren:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getChildren_CommaKeyword_3_0ElementType());
 			}
 			otherlv_3=','
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getChildren_CommaKeyword_3_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
@@ -247,11 +243,11 @@ ruleChildren:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChildren_RightCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_5='}'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getChildren_RightCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;
@@ -260,32 +256,31 @@ ruleChildren:
 entryRuleChild:
 	{ markComposite(elementTypeProvider.getChildElementType()); }
 	ruleChild
-	{ doneComposite(); }
 	EOF;
 
 // Rule Child
 ruleChild:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChild_HyphenMinusGreaterThanSignKeyword_0ElementType());
 		}
 		otherlv_0='->'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getChild_HyphenMinusGreaterThanSignKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChild_CKeyword_1ElementType());
 		}
 		otherlv_1='C'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getChild_CKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChild_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getChild_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -299,11 +294,11 @@ ruleChild:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChild_RightParenthesisKeyword_4ElementType());
 		}
 		otherlv_4=')'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getChild_RightParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 	)
 ;
@@ -312,25 +307,24 @@ ruleChild:
 entryRuleAbstractChildren:
 	{ markComposite(elementTypeProvider.getAbstractChildrenElementType()); }
 	ruleAbstractChildren
-	{ doneComposite(); }
 	EOF;
 
 // Rule AbstractChildren
 ruleAbstractChildren:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAbstractChildren_AbstractChildrenKeyword_0ElementType());
 		}
 		otherlv_0='abstract children'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAbstractChildren_AbstractChildrenKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAbstractChildren_LeftCurlyBracketKeyword_1ElementType());
 		}
 		otherlv_1='{'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getAbstractChildren_LeftCurlyBracketKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -344,11 +338,11 @@ ruleAbstractChildren:
 			)
 		)+
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAbstractChildren_RightCurlyBracketKeyword_3ElementType());
 		}
 		otherlv_3='}'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getAbstractChildren_RightCurlyBracketKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;
@@ -357,7 +351,6 @@ ruleAbstractChildren:
 entryRuleAbstractChild:
 	{ markComposite(elementTypeProvider.getAbstractChildElementType()); }
 	ruleAbstractChild
-	{ doneComposite(); }
 	EOF;
 
 // Rule AbstractChild
@@ -385,32 +378,31 @@ ruleAbstractChild:
 entryRuleFirstConcrete:
 	{ markComposite(elementTypeProvider.getFirstConcreteElementType()); }
 	ruleFirstConcrete
-	{ doneComposite(); }
 	EOF;
 
 // Rule FirstConcrete
 ruleFirstConcrete:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFirstConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType());
 		}
 		otherlv_0='->'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getFirstConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFirstConcrete_FKeyword_1ElementType());
 		}
 		otherlv_1='F'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getFirstConcrete_FKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFirstConcrete_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getFirstConcrete_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -426,20 +418,20 @@ ruleFirstConcrete:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getFirstConcrete_ReferencedContainerSomeContainerCrossReference_4_0ElementType());
 				}
 				otherlv_4=RULE_ID
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getFirstConcrete_ReferencedContainerSomeContainerCrossReference_4_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFirstConcrete_RightParenthesisKeyword_5ElementType());
 		}
 		otherlv_5=')'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getFirstConcrete_RightParenthesisKeyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;
@@ -448,39 +440,38 @@ ruleFirstConcrete:
 entryRuleSecondConcrete:
 	{ markComposite(elementTypeProvider.getSecondConcreteElementType()); }
 	ruleSecondConcrete
-	{ doneComposite(); }
 	EOF;
 
 // Rule SecondConcrete
 ruleSecondConcrete:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType());
 		}
 		otherlv_0='->'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSecondConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondConcrete_FKeyword_1ElementType());
 		}
 		otherlv_1='F'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getSecondConcrete_FKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondConcrete_SKeyword_2ElementType());
 		}
 		otherlv_2='S'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getSecondConcrete_SKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondConcrete_LeftParenthesisKeyword_3ElementType());
 		}
 		otherlv_3='('
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getSecondConcrete_LeftParenthesisKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		(
 			(
@@ -496,20 +487,20 @@ ruleSecondConcrete:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSecondConcrete_ReferencedChildrenChildCrossReference_5_0ElementType());
 				}
 				otherlv_5=RULE_ID
 				{
-					doneLeaf(otherlv_5, elementTypeProvider.getSecondConcrete_ReferencedChildrenChildCrossReference_5_0ElementType());
+					doneLeaf(otherlv_5);
 				}
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondConcrete_RightParenthesisKeyword_6ElementType());
 		}
 		otherlv_6=')'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getSecondConcrete_RightParenthesisKeyword_6ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;
@@ -518,7 +509,6 @@ ruleSecondConcrete:
 entryRuleNamed:
 	{ markComposite(elementTypeProvider.getNamedElementType()); }
 	ruleNamed
-	{ doneComposite(); }
 	EOF;
 
 // Rule Named
@@ -526,11 +516,11 @@ ruleNamed:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)

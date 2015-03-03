@@ -9,5 +9,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroup
         PsiElement(UnorderedDatatype_DigitOneDigitOneKeyword_10_0_ELEMENT_TYPE)('11')(10,12)
         PsiWhiteSpace(' ')(12,13)
         PsiElement(UnorderedDatatype_BKeyword_10_1_1_ELEMENT_TYPE)('b')(13,14)
-  PsiErrorElement:rule ruleUnorderedDatatype failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1())}?(14,14)
-    <empty list>
+    PsiErrorElement:rule ruleUnorderedDatatype failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1())}?(14,14)
+      <empty list>

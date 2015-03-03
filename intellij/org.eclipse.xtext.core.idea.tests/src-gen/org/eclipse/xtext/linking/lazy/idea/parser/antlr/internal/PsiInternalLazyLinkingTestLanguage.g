@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,112 +73,111 @@ ruleModel:
 entryRuleType:
 	{ markComposite(elementTypeProvider.getTypeElementType()); }
 	ruleType
-	{ doneComposite(); }
 	EOF;
 
 // Rule Type
 ruleType:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getType_TypeKeyword_0ElementType());
 		}
 		otherlv_0='type'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getType_TypeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getType_ExtendsKeyword_2_0ElementType());
 			}
 			otherlv_2='extends'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getType_ExtendsKeyword_2_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType());
 					}
 					otherlv_3=RULE_ID
 					{
-						doneLeaf(otherlv_3, elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType());
+						doneLeaf(otherlv_3);
 					}
 				)
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getType_FullStopKeyword_2_2ElementType());
 			}
 			otherlv_4='.'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getType_FullStopKeyword_2_2ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_2_3_0ElementType());
 					}
 					otherlv_5=RULE_ID
 					{
-						doneLeaf(otherlv_5, elementTypeProvider.getType_ParentIdPropertyCrossReference_2_3_0ElementType());
+						doneLeaf(otherlv_5);
 					}
 				)
 			)
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getType_ForKeyword_3_0ElementType());
 			}
 			otherlv_6='for'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getType_ForKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_3_1_0ElementType());
 					}
 					otherlv_7=RULE_ID
 					{
-						doneLeaf(otherlv_7, elementTypeProvider.getType_ParentIdPropertyCrossReference_3_1_0ElementType());
+						doneLeaf(otherlv_7);
 					}
 				)
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getType_InKeyword_3_2ElementType());
 			}
 			otherlv_8='in'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getType_InKeyword_3_2ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_3_3_0ElementType());
 					}
 					otherlv_9=RULE_ID
 					{
-						doneLeaf(otherlv_9, elementTypeProvider.getType_ExtendsTypeCrossReference_3_3_0ElementType());
+						doneLeaf(otherlv_9);
 					}
 				)
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getType_LeftCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_10='{'
 		{
-			doneLeaf(otherlv_10, elementTypeProvider.getType_LeftCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_10);
 		}
 		(
 			(
@@ -204,11 +202,11 @@ ruleType:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getType_RightCurlyBracketKeyword_7ElementType());
 		}
 		otherlv_13='}'
 		{
-			doneLeaf(otherlv_13, elementTypeProvider.getType_RightCurlyBracketKeyword_7ElementType());
+			doneLeaf(otherlv_13);
 		}
 	)
 ;
@@ -217,7 +215,6 @@ ruleType:
 entryRuleProperty:
 	{ markComposite(elementTypeProvider.getPropertyElementType()); }
 	ruleProperty
-	{ doneComposite(); }
 	EOF;
 
 // Rule Property
@@ -226,31 +223,31 @@ ruleProperty:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
 				}
 				otherlv_0=RULE_ID
 				{
-					doneLeaf(otherlv_0, elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
+					doneLeaf(otherlv_0);
 				}
 			)
 		)+
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getProperty_SemicolonKeyword_2ElementType());
 		}
 		otherlv_2=';'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getProperty_SemicolonKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -259,47 +256,46 @@ ruleProperty:
 entryRuleUnresolvedProxyProperty:
 	{ markComposite(elementTypeProvider.getUnresolvedProxyPropertyElementType()); }
 	ruleUnresolvedProxyProperty
-	{ doneComposite(); }
 	EOF;
 
 // Rule UnresolvedProxyProperty
 ruleUnresolvedProxyProperty:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getUnresolvedProxyProperty_UnresolvedKeyword_0ElementType());
 		}
 		otherlv_0='unresolved'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getUnresolvedProxyProperty_UnresolvedKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_TypeTypeCrossReference_1_0ElementType());
 				}
 				otherlv_1=RULE_ID
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getUnresolvedProxyProperty_TypeTypeCrossReference_1_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 		)+
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
 				{
-					doneLeaf(lv_name_2_0, elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_name_2_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getUnresolvedProxyProperty_SemicolonKeyword_3ElementType());
 		}
 		otherlv_3=';'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getUnresolvedProxyProperty_SemicolonKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;

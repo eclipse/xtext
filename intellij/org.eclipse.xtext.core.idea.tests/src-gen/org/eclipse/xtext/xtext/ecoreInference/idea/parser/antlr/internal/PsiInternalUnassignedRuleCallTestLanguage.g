@@ -52,26 +52,25 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
 ruleModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
 		}
 		otherlv_0='model'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModel_ModelKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_INTTerminalRuleCall_1ElementType());
 			}
 			this_INT_1=RULE_INT
 			{
-				doneLeaf(this_INT_1, elementTypeProvider.getModel_INTTerminalRuleCall_1ElementType());
+				doneLeaf(this_INT_1);
 			}
 		)+
 		(
@@ -92,27 +91,26 @@ ruleModel:
 entryRuleModelFeatures:
 	{ markComposite(elementTypeProvider.getModelFeaturesElementType()); }
 	ruleModelFeatures
-	{ doneComposite(); }
 	EOF;
 
 // Rule ModelFeatures
 ruleModelFeatures:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModelFeatures_FeatureKeyword_0ElementType());
 		}
 		otherlv_0='feature'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModelFeatures_FeatureKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -124,11 +122,11 @@ ruleModelFeatures:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModelFeatures_SemicolonKeyword_3ElementType());
 		}
 		otherlv_3=';'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getModelFeatures_SemicolonKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 	)
 ;
@@ -137,40 +135,39 @@ ruleModelFeatures:
 entryRuleDataTypeRule:
 	{ markComposite(elementTypeProvider.getDataTypeRuleElementType()); }
 	ruleDataTypeRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule DataTypeRule
 ruleDataTypeRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_0ElementType());
 		}
 		this_INT_0=RULE_INT
 		{
-			doneLeaf(this_INT_0, elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_0ElementType());
+			doneLeaf(this_INT_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDataTypeRule_KeywordKeyword_1ElementType());
 		}
 		kw='keyword'
 		{
-			doneLeaf(kw, elementTypeProvider.getDataTypeRule_KeywordKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_2ElementType());
 		}
 		this_INT_2=RULE_INT
 		{
-			doneLeaf(this_INT_2, elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_2ElementType());
+			doneLeaf(this_INT_2);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDataTypeRule_STRINGTerminalRuleCall_3ElementType());
 			}
 			this_STRING_3=RULE_STRING
 			{
-				doneLeaf(this_STRING_3, elementTypeProvider.getDataTypeRule_STRINGTerminalRuleCall_3ElementType());
+				doneLeaf(this_STRING_3);
 			}
 		)?
 	)

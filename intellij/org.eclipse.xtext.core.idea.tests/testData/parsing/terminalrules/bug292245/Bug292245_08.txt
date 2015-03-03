@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug292245TestLanguageFileImpl:a.bug292245testlanguage(0,27)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,26)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,27)
     PsiElement(Model_TICKKeyword_2_0_ELEMENT_TYPE)('TICK')(0,4)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_TickApostropheParserRuleCall_2_1_0_ELEMENT_TYPE)(4,6)
       PsiWhiteSpace(' ')(4,5)
@@ -22,4 +22,4 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug292245TestLanguageF
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Error_GraphicalParserRuleCall_1_ELEMENT_TYPE)(24,25)
         PsiElement(Graphical_CHARTerminalRuleCall_0_ELEMENT_TYPE)('X')(24,25)
       PsiElement(Error_APOSTROPHE_CHARTerminalRuleCall_2_ELEMENT_TYPE)(''')(25,26)
-  PsiWhiteSpace(' ')(26,27)
+    PsiWhiteSpace(' ')(26,27)

@@ -1667,10 +1667,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:12: ( '0x' | '0X' )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1698,7 +1698,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:13: '0x'
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:13: '0x'
                     {
                     match("0x"); 
 
@@ -1706,7 +1706,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:18: '0X'
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:18: '0X'
                     {
                     match("0X"); 
 
@@ -1716,7 +1716,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1754,7 +1754,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1763,10 +1763,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1784,7 +1784,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1808,7 +1808,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5659:84: ( 'l' | 'L' )
+                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5579:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1847,11 +1847,11 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5661:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5661:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5581:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5581:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5661:21: ( '0' .. '9' | '_' )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5581:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1900,11 +1900,11 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1913,7 +1913,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1924,7 +1924,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:36: ( '+' | '-' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1957,7 +1957,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1969,7 +1969,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1993,7 +1993,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5663:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5583:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2026,10 +2026,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5665:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5665:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5585:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5585:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5665:11: ( '^' )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5585:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2038,7 +2038,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5665:11: '^'
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5585:11: '^'
                     {
                     match('^'); 
 
@@ -2056,7 +2056,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5665:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5585:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2105,10 +2105,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2126,10 +2126,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2145,7 +2145,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:21: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2153,7 +2153,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2173,7 +2173,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:44: ( '\"' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2182,7 +2182,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:44: '\"'
+                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:44: '\"'
                             {
                             match('\"'); 
 
@@ -2195,10 +2195,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2214,7 +2214,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:55: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2222,7 +2222,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2242,7 +2242,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:79: ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2251,7 +2251,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5667:79: '\\''
+                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5587:79: '\\''
                             {
                             match('\''); 
 
@@ -2282,12 +2282,12 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5669:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5669:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5589:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5589:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5669:24: ( options {greedy=false; } : . )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5589:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2312,7 +2312,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5669:52: .
+            	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5589:52: .
             	    {
             	    matchAny(); 
 
@@ -2342,12 +2342,12 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2360,7 +2360,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2380,7 +2380,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:40: ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2389,9 +2389,9 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:41: ( '\\r' )? '\\n'
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:41: ( '\\r' )?
+                    // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2400,7 +2400,7 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5671:41: '\\r'
+                            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5591:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2432,10 +2432,10 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5673:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5673:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5593:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5593:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5673:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5593:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2489,8 +2489,8 @@ public class PsiInternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5675:16: ( . )
-            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5675:18: .
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5595:16: ( . )
+            // ../../intellij/org.eclipse.xtext.xbase.idea/src-gen/org/eclipse/xtext/xbase/annotations/idea/parser/antlr/internal/PsiInternalXbaseWithAnnotations.g:5595:18: .
             {
             matchAny(); 
 

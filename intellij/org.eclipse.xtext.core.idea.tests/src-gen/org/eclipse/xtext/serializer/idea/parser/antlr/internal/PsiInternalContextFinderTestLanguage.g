@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,11 +59,11 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroKeyword_0_0ElementType());
 			}
 			otherlv_0='#0'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_NumberSignDigitZeroKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -81,11 +80,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitOneKeyword_1_0ElementType());
 			}
 			otherlv_2='#1'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_NumberSignDigitOneKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -112,11 +111,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitTwoKeyword_2_0ElementType());
 			}
 			otherlv_4='#2'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_NumberSignDigitTwoKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -143,11 +142,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitThreeKeyword_3_0ElementType());
 			}
 			otherlv_6='#3'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getModel_NumberSignDigitThreeKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
@@ -174,11 +173,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitFourKeyword_4_0ElementType());
 			}
 			otherlv_8='#4'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getModel_NumberSignDigitFourKeyword_4_0ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
@@ -205,11 +204,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitFiveKeyword_5_0ElementType());
 			}
 			otherlv_10='#5'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getModel_NumberSignDigitFiveKeyword_5_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
@@ -236,11 +235,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitSixKeyword_6_0ElementType());
 			}
 			otherlv_12='#6'
 			{
-				doneLeaf(otherlv_12, elementTypeProvider.getModel_NumberSignDigitSixKeyword_6_0ElementType());
+				doneLeaf(otherlv_12);
 			}
 			(
 				(
@@ -267,20 +266,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitSevenKeyword_7_0ElementType());
 			}
 			otherlv_14='#7'
 			{
-				doneLeaf(otherlv_14, elementTypeProvider.getModel_NumberSignDigitSevenKeyword_7_0ElementType());
+				doneLeaf(otherlv_14);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_7_1_0ElementType());
 					}
 					lv_name_15_0=RULE_STRING
 					{
-						doneLeaf(lv_name_15_0, elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_7_1_0ElementType());
+						doneLeaf(lv_name_15_0);
 					}
 				)
 			)
@@ -309,20 +308,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitEightKeyword_8_0ElementType());
 			}
 			otherlv_17='#8'
 			{
-				doneLeaf(otherlv_17, elementTypeProvider.getModel_NumberSignDigitEightKeyword_8_0ElementType());
+				doneLeaf(otherlv_17);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_8_1_0ElementType());
 					}
 					lv_name_18_0=RULE_STRING
 					{
-						doneLeaf(lv_name_18_0, elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_8_1_0ElementType());
+						doneLeaf(lv_name_18_0);
 					}
 				)
 			)
@@ -355,7 +354,6 @@ ruleModel:
 entryRuleModel2:
 	{ markComposite(elementTypeProvider.getModel2ElementType()); }
 	ruleModel2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model2
@@ -368,11 +366,11 @@ ruleModel2:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel2_ModelKeyword_1ElementType());
 		}
 		otherlv_1='model'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getModel2_ModelKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;
@@ -381,27 +379,26 @@ ruleModel2:
 entryRuleAttributeExclusionTest1:
 	{ markComposite(elementTypeProvider.getAttributeExclusionTest1ElementType()); }
 	ruleAttributeExclusionTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule AttributeExclusionTest1
 ruleAttributeExclusionTest1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAttributeExclusionTest1_Kw1Keyword_0ElementType());
 		}
 		otherlv_0='kw1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAttributeExclusionTest1_Kw1Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAttributeExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_attr1_1_0=RULE_ID
 				{
-					doneLeaf(lv_attr1_1_0, elementTypeProvider.getAttributeExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_attr1_1_0);
 				}
 			)
 		)
@@ -412,27 +409,26 @@ ruleAttributeExclusionTest1:
 entryRuleAttributeExclusionTest2:
 	{ markComposite(elementTypeProvider.getAttributeExclusionTest2ElementType()); }
 	ruleAttributeExclusionTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule AttributeExclusionTest2
 ruleAttributeExclusionTest2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAttributeExclusionTest2_Kw2Keyword_0ElementType());
 		}
 		otherlv_0='kw2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAttributeExclusionTest2_Kw2Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAttributeExclusionTest2_Attr2IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_attr2_1_0=RULE_ID
 				{
-					doneLeaf(lv_attr2_1_0, elementTypeProvider.getAttributeExclusionTest2_Attr2IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_attr2_1_0);
 				}
 			)
 		)
@@ -443,7 +439,6 @@ ruleAttributeExclusionTest2:
 entryRuleNestedTypeTest1:
 	{ markComposite(elementTypeProvider.getNestedTypeTest1ElementType()); }
 	ruleNestedTypeTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeTest1
@@ -465,7 +460,6 @@ ruleNestedTypeTest1:
 entryRuleNestedTypeTest2:
 	{ markComposite(elementTypeProvider.getNestedTypeTest2ElementType()); }
 	ruleNestedTypeTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeTest2
@@ -487,27 +481,26 @@ ruleNestedTypeTest2:
 entryRuleNestedTypeChild1:
 	{ markComposite(elementTypeProvider.getNestedTypeChild1ElementType()); }
 	ruleNestedTypeChild1
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeChild1
 ruleNestedTypeChild1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNestedTypeChild1_Kw1Keyword_0ElementType());
 		}
 		otherlv_0='kw1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNestedTypeChild1_Kw1Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNestedTypeChild1_ValIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_ID
 				{
-					doneLeaf(lv_val_1_0, elementTypeProvider.getNestedTypeChild1_ValIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val_1_0);
 				}
 			)
 		)
@@ -518,27 +511,26 @@ ruleNestedTypeChild1:
 entryRuleNestedTypeChild2:
 	{ markComposite(elementTypeProvider.getNestedTypeChild2ElementType()); }
 	ruleNestedTypeChild2
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeChild2
 ruleNestedTypeChild2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNestedTypeChild2_Kw2Keyword_0ElementType());
 		}
 		otherlv_0='kw2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNestedTypeChild2_Kw2Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNestedTypeChild2_ValIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_ID
 				{
-					doneLeaf(lv_val_1_0, elementTypeProvider.getNestedTypeChild2_ValIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val_1_0);
 				}
 			)
 		)
@@ -549,7 +541,6 @@ ruleNestedTypeChild2:
 entryRuleNestedTypeRecursiveTest1:
 	{ markComposite(elementTypeProvider.getNestedTypeRecursiveTest1ElementType()); }
 	ruleNestedTypeRecursiveTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeRecursiveTest1
@@ -562,11 +553,11 @@ ruleNestedTypeRecursiveTest1:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNestedTypeRecursiveTest1_Kw1Keyword_1ElementType());
 		}
 		otherlv_1='kw1'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getNestedTypeRecursiveTest1_Kw1Keyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -576,11 +567,11 @@ ruleNestedTypeRecursiveTest1:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNestedTypeRecursiveTest1_FullStopKeyword_2_1ElementType());
 			}
 			otherlv_3='.'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getNestedTypeRecursiveTest1_FullStopKeyword_2_1ElementType());
+				doneLeaf(otherlv_3);
 			}
 		)+
 	)
@@ -590,7 +581,6 @@ ruleNestedTypeRecursiveTest1:
 entryRuleNestedTypeRecursiveTest2:
 	{ markComposite(elementTypeProvider.getNestedTypeRecursiveTest2ElementType()); }
 	ruleNestedTypeRecursiveTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedTypeRecursiveTest2
@@ -603,11 +593,11 @@ ruleNestedTypeRecursiveTest2:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNestedTypeRecursiveTest2_Kw2Keyword_1ElementType());
 		}
 		otherlv_1='kw2'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getNestedTypeRecursiveTest2_Kw2Keyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -617,11 +607,11 @@ ruleNestedTypeRecursiveTest2:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNestedTypeRecursiveTest2_FullStopKeyword_2_1ElementType());
 			}
 			otherlv_3='.'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getNestedTypeRecursiveTest2_FullStopKeyword_2_1ElementType());
+				doneLeaf(otherlv_3);
 			}
 		)+
 	)
@@ -631,18 +621,17 @@ ruleNestedTypeRecursiveTest2:
 entryRuleParentRefTest1:
 	{ markComposite(elementTypeProvider.getParentRefTest1ElementType()); }
 	ruleParentRefTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule ParentRefTest1
 ruleParentRefTest1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParentRefTest1_Kw1Keyword_0ElementType());
 		}
 		otherlv_0='kw1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getParentRefTest1_Kw1Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -662,18 +651,17 @@ ruleParentRefTest1:
 entryRuleParentRefTest2:
 	{ markComposite(elementTypeProvider.getParentRefTest2ElementType()); }
 	ruleParentRefTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule ParentRefTest2
 ruleParentRefTest2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParentRefTest2_Kw2Keyword_0ElementType());
 		}
 		otherlv_0='kw2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getParentRefTest2_Kw2Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -693,7 +681,6 @@ ruleParentRefTest2:
 entryRuleParentRefTestChild1:
 	{ markComposite(elementTypeProvider.getParentRefTestChild1ElementType()); }
 	ruleParentRefTestChild1
-	{ doneComposite(); }
 	EOF;
 
 // Rule ParentRefTestChild1
@@ -706,11 +693,11 @@ ruleParentRefTestChild1:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParentRefTestChild1_FooKeyword_1ElementType());
 		}
 		otherlv_1='foo'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getParentRefTestChild1_FooKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -730,7 +717,6 @@ ruleParentRefTestChild1:
 entryRuleParentRefTestChild2:
 	{ markComposite(elementTypeProvider.getParentRefTestChild2ElementType()); }
 	ruleParentRefTestChild2
-	{ doneComposite(); }
 	EOF;
 
 // Rule ParentRefTestChild2
@@ -743,11 +729,11 @@ ruleParentRefTestChild2:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParentRefTestChild2_FooKeyword_1ElementType());
 		}
 		otherlv_1='foo'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getParentRefTestChild2_FooKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -767,38 +753,37 @@ ruleParentRefTestChild2:
 entryRuleQuantityExclusionTest1:
 	{ markComposite(elementTypeProvider.getQuantityExclusionTest1ElementType()); }
 	ruleQuantityExclusionTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule QuantityExclusionTest1
 ruleQuantityExclusionTest1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQuantityExclusionTest1_Kw1Keyword_0ElementType());
 		}
 		otherlv_0='kw1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getQuantityExclusionTest1_Kw1Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_attr1_1_0=RULE_ID
 				{
-					doneLeaf(lv_attr1_1_0, elementTypeProvider.getQuantityExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_attr1_1_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr2IDTerminalRuleCall_2_0ElementType());
 				}
 				lv_attr2_2_0=RULE_ID
 				{
-					doneLeaf(lv_attr2_2_0, elementTypeProvider.getQuantityExclusionTest1_Attr2IDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_attr2_2_0);
 				}
 			)
 		)?
@@ -809,38 +794,37 @@ ruleQuantityExclusionTest1:
 entryRuleQuantityExclusionTest2:
 	{ markComposite(elementTypeProvider.getQuantityExclusionTest2ElementType()); }
 	ruleQuantityExclusionTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule QuantityExclusionTest2
 ruleQuantityExclusionTest2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQuantityExclusionTest2_Kw2Keyword_0ElementType());
 		}
 		otherlv_0='kw2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getQuantityExclusionTest2_Kw2Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_attr1_1_0=RULE_ID
 				{
-					doneLeaf(lv_attr1_1_0, elementTypeProvider.getQuantityExclusionTest2_Attr1IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_attr1_1_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr2IDTerminalRuleCall_2_0ElementType());
 				}
 				lv_attr2_2_0=RULE_ID
 				{
-					doneLeaf(lv_attr2_2_0, elementTypeProvider.getQuantityExclusionTest2_Attr2IDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_attr2_2_0);
 				}
 			)
 		)
@@ -851,7 +835,6 @@ ruleQuantityExclusionTest2:
 entryRuleValueExclusionTest1:
 	{ markComposite(elementTypeProvider.getValueExclusionTest1ElementType()); }
 	ruleValueExclusionTest1
-	{ doneComposite(); }
 	EOF;
 
 // Rule ValueExclusionTest1
@@ -873,7 +856,6 @@ ruleValueExclusionTest1:
 entryRuleValueExclusionTest2:
 	{ markComposite(elementTypeProvider.getValueExclusionTest2ElementType()); }
 	ruleValueExclusionTest2
-	{ doneComposite(); }
 	EOF;
 
 // Rule ValueExclusionTest2
@@ -895,7 +877,6 @@ ruleValueExclusionTest2:
 entryRuleNodeExclusion1:
 	{ markComposite(elementTypeProvider.getNodeExclusion1ElementType()); }
 	ruleNodeExclusion1
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeExclusion1
@@ -903,11 +884,11 @@ ruleNodeExclusion1:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNodeExclusion1_RefModelCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_ID
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getNodeExclusion1_RefModelCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)
@@ -917,7 +898,6 @@ ruleNodeExclusion1:
 entryRuleNodeExclusion2:
 	{ markComposite(elementTypeProvider.getNodeExclusion2ElementType()); }
 	ruleNodeExclusion2
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeExclusion2
@@ -925,11 +905,11 @@ ruleNodeExclusion2:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNodeExclusion2_RefModelCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_STRING
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getNodeExclusion2_RefModelCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)
@@ -939,7 +919,6 @@ ruleNodeExclusion2:
 entryRuleNodeExclusion1List:
 	{ markComposite(elementTypeProvider.getNodeExclusion1ListElementType()); }
 	ruleNodeExclusion1List
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeExclusion1List
@@ -947,11 +926,11 @@ ruleNodeExclusion1List:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNodeExclusion1List_RefModelCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_ID
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getNodeExclusion1List_RefModelCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)+
@@ -961,7 +940,6 @@ ruleNodeExclusion1List:
 entryRuleNodeExclusion2List:
 	{ markComposite(elementTypeProvider.getNodeExclusion2ListElementType()); }
 	ruleNodeExclusion2List
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeExclusion2List
@@ -969,11 +947,11 @@ ruleNodeExclusion2List:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNodeExclusion2List_RefModelCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_STRING
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getNodeExclusion2List_RefModelCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)+
@@ -983,11 +961,11 @@ ruleNodeExclusion2List:
 ruleValueExclusionTestEn1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getValueExclusionTestEn1_Lit1EnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='lit1'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getValueExclusionTestEn1_Lit1EnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;
@@ -996,11 +974,11 @@ ruleValueExclusionTestEn1:
 ruleValueExclusionTestEn2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getValueExclusionTestEn2_Lit2EnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='lit2'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getValueExclusionTestEn2_Lit2EnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;

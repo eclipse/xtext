@@ -81,8 +81,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
 
             }
 
@@ -99,13 +98,13 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )+ ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )+ ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:10: ( ( (lv_elements_0_0= ruleElement ) )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:2: ( (lv_elements_0_0= ruleElement ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )+ )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:2: ( (lv_elements_0_0= ruleElement ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -119,15 +118,15 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:3: (lv_elements_0_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:3: (lv_elements_0_0= ruleElement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:62:4: lv_elements_0_0= ruleElement
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel85);
+            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel82);
             	    ruleElement();
 
             	    state._fsp--;
@@ -167,20 +166,19 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
 
     // $ANTLR start "entryRuleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:74:1: entryRuleElement : ruleElement EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:74:17: ( ruleElement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:75:2: ruleElement EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:73:17: ( ruleElement EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:74:2: ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement111);
+            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement108);
             ruleElement();
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement117); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement111); 
 
             }
 
@@ -197,7 +195,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
 
     // $ANTLR start "ruleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final void ruleElement() throws RecognitionException {
         Token lv_name_0_0=null;
         Token otherlv_1=null;
@@ -205,24 +203,24 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:83:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:83:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:84:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:84:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:85:5: lv_name_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:83:5: lv_name_0_0= RULE_ID
             {
 
-            					markLeaf();
+            					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement149); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement143); 
 
-            					doneLeaf(lv_name_0_0, elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
+            					doneLeaf(lv_name_0_0);
             				
 
             }
@@ -230,7 +228,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:94:3: ( (otherlv_1= RULE_ID ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:92:3: ( (otherlv_1= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -239,17 +237,17 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:95:4: (otherlv_1= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:93:4: (otherlv_1= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:95:4: (otherlv_1= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:96:5: otherlv_1= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:93:4: (otherlv_1= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:94:5: otherlv_1= RULE_ID
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType());
                     				
-                    otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement187); 
+                    otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement181); 
 
-                    					doneLeaf(otherlv_1, elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType());
+                    					doneLeaf(otherlv_1);
                     				
 
                     }
@@ -261,13 +259,13 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
             }
 
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getElement_LeftCurlyBracketKeyword_2ElementType());
             		
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement213); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement207); 
 
-            			doneLeaf(otherlv_2, elementTypeProvider.getElement_LeftCurlyBracketKeyword_2ElementType());
+            			doneLeaf(otherlv_2);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:112:3: ( (lv_elements_3_0= ruleElement ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:110:3: ( (lv_elements_3_0= ruleElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -280,15 +278,15 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:113:4: (lv_elements_3_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:111:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:113:4: (lv_elements_3_0= ruleElement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:114:5: lv_elements_3_0= ruleElement
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:111:4: (lv_elements_3_0= ruleElement )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:112:5: lv_elements_3_0= ruleElement
             	    {
 
             	    					markComposite(elementTypeProvider.getElement_ElementsElementParserRuleCall_3_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleElement240);
+            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleElement234);
             	    ruleElement();
 
             	    state._fsp--;
@@ -309,11 +307,11 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
             } while (true);
 
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getElement_RightCurlyBracketKeyword_4ElementType());
             		
-            otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement266); 
+            otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement260); 
 
-            			doneLeaf(otherlv_4, elementTypeProvider.getElement_RightCurlyBracketKeyword_4ElementType());
+            			doneLeaf(otherlv_4);
             		
 
             }
@@ -340,15 +338,15 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleModel85 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement111 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement117 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement149 = new BitSet(new long[]{0x0000000000000810L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement187 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleElement213 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleElement240 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_12_in_ruleElement266 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElement_in_ruleModel82 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement108 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleElement111 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleElement143 = new BitSet(new long[]{0x0000000000000810L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleElement181 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_11_in_ruleElement207 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_ruleElement_in_ruleElement234 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_12_in_ruleElement260 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

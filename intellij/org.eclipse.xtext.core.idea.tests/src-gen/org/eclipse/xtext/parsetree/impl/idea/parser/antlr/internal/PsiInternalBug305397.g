@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
@@ -89,29 +87,29 @@ ruleElement:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_AAKeyword_1_0ElementType());
 				}
 				lv_a_1_0='a'
 				{
-					doneLeaf(lv_a_1_0, elementTypeProvider.getElement_AAKeyword_1_0ElementType());
+					doneLeaf(lv_a_1_0);
 				}
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_ElementKeyword_2ElementType());
 		}
 		otherlv_2='element'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getElement_ElementKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType());
 				}
 				lv_name_3_0=RULE_ID
 				{
-					doneLeaf(lv_name_3_0, elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_name_3_0);
 				}
 			)
 		)?
@@ -127,11 +125,11 @@ ruleElement:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_EndKeyword_5ElementType());
 		}
 		otherlv_5='end'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getElement_EndKeyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;

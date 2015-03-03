@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
 ruleModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
 		}
 		otherlv_0='model'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModel_ModelKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -104,44 +103,43 @@ ruleModel:
 entryRuleDetail:
 	{ markComposite(elementTypeProvider.getDetailElementType()); }
 	ruleDetail
-	{ doneComposite(); }
 	EOF;
 
 // Rule Detail
 ruleDetail:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDetail_DetailKeyword_0ElementType());
 		}
 		otherlv_0='detail'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getDetail_DetailKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getDetail_VisibilityPrivateKeyword_1_0_0ElementType());
 					}
 					lv_visibility_1_1='private'
 					{
-						doneLeaf(lv_visibility_1_1, elementTypeProvider.getDetail_VisibilityPrivateKeyword_1_0_0ElementType());
+						doneLeaf(lv_visibility_1_1);
 					}
 					    |
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getDetail_VisibilityProtectedKeyword_1_0_1ElementType());
 					}
 					lv_visibility_1_2='protected'
 					{
-						doneLeaf(lv_visibility_1_2, elementTypeProvider.getDetail_VisibilityProtectedKeyword_1_0_1ElementType());
+						doneLeaf(lv_visibility_1_2);
 					}
 					    |
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getDetail_VisibilityPublicKeyword_1_0_2ElementType());
 					}
 					lv_visibility_1_3='public'
 					{
-						doneLeaf(lv_visibility_1_3, elementTypeProvider.getDetail_VisibilityPublicKeyword_1_0_2ElementType());
+						doneLeaf(lv_visibility_1_3);
 					}
 				)
 			)
@@ -164,18 +162,17 @@ ruleDetail:
 entryRuleAssociatedDetail:
 	{ markComposite(elementTypeProvider.getAssociatedDetailElementType()); }
 	ruleAssociatedDetail
-	{ doneComposite(); }
 	EOF;
 
 // Rule AssociatedDetail
 ruleAssociatedDetail:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAssociatedDetail_AssociatedKeyword_0ElementType());
 		}
 		otherlv_0='associated'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAssociatedDetail_AssociatedKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -189,11 +186,11 @@ ruleAssociatedDetail:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAssociatedDetail_SemicolonKeyword_2ElementType());
 		}
 		otherlv_2=';'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getAssociatedDetail_SemicolonKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -202,33 +199,32 @@ ruleAssociatedDetail:
 entryRuleFQN:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
 	ruleFQN
-	{ doneComposite(); }
 	EOF;
 
 // Rule FQN
 ruleFQN:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_FullStopKeyword_1_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getFQN_FullStopKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_1_1ElementType());
 			}
 			this_ID_2=RULE_ID
 			{
-				doneLeaf(this_ID_2, elementTypeProvider.getFQN_IDTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_ID_2);
 			}
 		)*
 	)

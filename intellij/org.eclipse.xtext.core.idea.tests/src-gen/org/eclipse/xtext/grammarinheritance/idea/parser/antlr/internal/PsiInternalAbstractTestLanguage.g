@@ -52,27 +52,26 @@ import com.intellij.lang.PsiBuilder;
 entryRuleInheritedParserRule:
 	{ markComposite(elementTypeProvider.getInheritedParserRuleElementType()); }
 	ruleInheritedParserRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule InheritedParserRule
 ruleInheritedParserRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritedParserRule_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getInheritedParserRule_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getInheritedParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getInheritedParserRule_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -83,27 +82,26 @@ ruleInheritedParserRule:
 entryRuleOverridableParserRule:
 	{ markComposite(elementTypeProvider.getOverridableParserRuleElementType()); }
 	ruleOverridableParserRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule OverridableParserRule
 ruleOverridableParserRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridableParserRule_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getOverridableParserRule_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOverridableParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getOverridableParserRule_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -114,27 +112,26 @@ ruleOverridableParserRule:
 entryRuleExtendableParserRule:
 	{ markComposite(elementTypeProvider.getExtendableParserRuleElementType()); }
 	ruleExtendableParserRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExtendableParserRule
 ruleExtendableParserRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtendableParserRule_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExtendableParserRule_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendableParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getExtendableParserRule_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)

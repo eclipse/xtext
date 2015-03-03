@@ -8,5 +8,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTes
       PsiElement(Model_FirstAsListAKeyword_1_6_1_0_0_ELEMENT_TYPE)('a')(2,3)
       PsiWhiteSpace(' ')(3,4)
       PsiElement(Model_FirstAsListAKeyword_1_6_1_0_0_ELEMENT_TYPE)('a')(4,5)
-  PsiErrorElement:rule ruleModel failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1())}?(5,5)
-    <empty list>
+    PsiErrorElement:rule ruleModel failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1())}?(5,5)
+      <empty list>

@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -98,18 +97,17 @@ ruleModel:
 entryRuleExtendsNsURIEObject:
 	{ markComposite(elementTypeProvider.getExtendsNsURIEObjectElementType()); }
 	ruleExtendsNsURIEObject
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExtendsNsURIEObject
 ruleExtendsNsURIEObject:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_0ElementType());
 		}
 		otherlv_0='ExtendsNsURIEObject'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -125,20 +123,20 @@ ruleExtendsNsURIEObject:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectKeyword_2_0_0ElementType());
 				}
 				otherlv_2='EObject'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getExtendsNsURIEObject_EObjectKeyword_2_0_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
 						otherlv_3=RULE_ID
 						{
-							doneLeaf(otherlv_3, elementTypeProvider.getExtendsNsURIEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
+							doneLeaf(otherlv_3);
 						}
 					)
 				)
@@ -146,20 +144,20 @@ ruleExtendsNsURIEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
 				}
 				otherlv_4='ExtendsNsURIEObject'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
 						{
-							doneLeaf(otherlv_5, elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
+							doneLeaf(otherlv_5);
 						}
 					)
 				)
@@ -167,20 +165,20 @@ ruleExtendsNsURIEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
 				}
 				otherlv_6='ExtendsPluginEObject'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getExtendsNsURIEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
 						otherlv_7=RULE_ID
 						{
-							doneLeaf(otherlv_7, elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
+							doneLeaf(otherlv_7);
 						}
 					)
 				)
@@ -188,20 +186,20 @@ ruleExtendsNsURIEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
 				}
 				otherlv_8='ExtendsResourceEObject'
 				{
-					doneLeaf(otherlv_8, elementTypeProvider.getExtendsNsURIEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
+					doneLeaf(otherlv_8);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
 						{
-							doneLeaf(otherlv_9, elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
+							doneLeaf(otherlv_9);
 						}
 					)
 				)
@@ -209,53 +207,53 @@ ruleExtendsNsURIEObject:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsPluginEObjectKeyword_3_0ElementType());
 			}
 			otherlv_10='ExtendsPluginEObject'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getExtendsNsURIEObject_ExtendsPluginEObjectKeyword_3_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EAttributeReferenceMyEAttributeCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
 					{
-						doneLeaf(otherlv_11, elementTypeProvider.getExtendsNsURIEObject_EAttributeReferenceMyEAttributeCrossReference_3_1_0ElementType());
+						doneLeaf(otherlv_11);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_2_0ElementType());
 					}
 					otherlv_12=RULE_ID
 					{
-						doneLeaf(otherlv_12, elementTypeProvider.getExtendsNsURIEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_2_0ElementType());
+						doneLeaf(otherlv_12);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_3_0ElementType());
 					}
 					otherlv_13=RULE_ID
 					{
-						doneLeaf(otherlv_13, elementTypeProvider.getExtendsNsURIEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_3_0ElementType());
+						doneLeaf(otherlv_13);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_4_0ElementType());
 					}
 					otherlv_14=RULE_ID
 					{
-						doneLeaf(otherlv_14, elementTypeProvider.getExtendsNsURIEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_4_0ElementType());
+						doneLeaf(otherlv_14);
 					}
 				)
 			)
@@ -333,7 +331,6 @@ ruleExtendsNsURIEObject:
 entryRuleMyEAttribute:
 	{ markComposite(elementTypeProvider.getMyEAttributeElementType()); }
 	ruleMyEAttribute
-	{ doneComposite(); }
 	EOF;
 
 // Rule MyEAttribute
@@ -346,11 +343,11 @@ ruleMyEAttribute:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMyEAttribute_MyEAttributeKeyword_1ElementType());
 		}
 		otherlv_1='MyEAttribute'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getMyEAttribute_MyEAttributeKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;
@@ -359,7 +356,6 @@ ruleMyEAttribute:
 entryRuleEAttribute:
 	{ markComposite(elementTypeProvider.getEAttributeElementType()); }
 	ruleEAttribute
-	{ doneComposite(); }
 	EOF;
 
 // Rule EAttribute
@@ -372,11 +368,11 @@ ruleEAttribute:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEAttribute_EAttributeKeyword_1ElementType());
 		}
 		otherlv_1='EAttribute'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getEAttribute_EAttributeKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;
@@ -385,18 +381,17 @@ ruleEAttribute:
 entryRuleExtendsPluginEObject:
 	{ markComposite(elementTypeProvider.getExtendsPluginEObjectElementType()); }
 	ruleExtendsPluginEObject
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExtendsPluginEObject
 ruleExtendsPluginEObject:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_0ElementType());
 		}
 		otherlv_0='ExtendsPluginEObject'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -412,20 +407,20 @@ ruleExtendsPluginEObject:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectKeyword_2_0_0ElementType());
 				}
 				otherlv_2='EObject'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getExtendsPluginEObject_EObjectKeyword_2_0_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
 						otherlv_3=RULE_ID
 						{
-							doneLeaf(otherlv_3, elementTypeProvider.getExtendsPluginEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
+							doneLeaf(otherlv_3);
 						}
 					)
 				)
@@ -433,20 +428,20 @@ ruleExtendsPluginEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
 				}
 				otherlv_4='ExtendsNsURIEObject'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getExtendsPluginEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
 						{
-							doneLeaf(otherlv_5, elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
+							doneLeaf(otherlv_5);
 						}
 					)
 				)
@@ -454,20 +449,20 @@ ruleExtendsPluginEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
 				}
 				otherlv_6='ExtendsPluginEObject'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
 						otherlv_7=RULE_ID
 						{
-							doneLeaf(otherlv_7, elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
+							doneLeaf(otherlv_7);
 						}
 					)
 				)
@@ -475,20 +470,20 @@ ruleExtendsPluginEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
 				}
 				otherlv_8='ExtendsResourceEObject'
 				{
-					doneLeaf(otherlv_8, elementTypeProvider.getExtendsPluginEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
+					doneLeaf(otherlv_8);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
 						{
-							doneLeaf(otherlv_9, elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
+							doneLeaf(otherlv_9);
 						}
 					)
 				)
@@ -496,42 +491,42 @@ ruleExtendsPluginEObject:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_3_0ElementType());
 			}
 			otherlv_10='ExtendsPluginEObject'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_3_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
 					{
-						doneLeaf(otherlv_11, elementTypeProvider.getExtendsPluginEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
+						doneLeaf(otherlv_11);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
 					}
 					otherlv_12=RULE_ID
 					{
-						doneLeaf(otherlv_12, elementTypeProvider.getExtendsPluginEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
+						doneLeaf(otherlv_12);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
 					}
 					otherlv_13=RULE_ID
 					{
-						doneLeaf(otherlv_13, elementTypeProvider.getExtendsPluginEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
+						doneLeaf(otherlv_13);
 					}
 				)
 			)
@@ -609,18 +604,17 @@ ruleExtendsPluginEObject:
 entryRuleExtendsResourceEObject:
 	{ markComposite(elementTypeProvider.getExtendsResourceEObjectElementType()); }
 	ruleExtendsResourceEObject
-	{ doneComposite(); }
 	EOF;
 
 // Rule ExtendsResourceEObject
 ruleExtendsResourceEObject:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_0ElementType());
 		}
 		otherlv_0='ExtendsResourceEObject'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -636,20 +630,20 @@ ruleExtendsResourceEObject:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectKeyword_2_0_0ElementType());
 				}
 				otherlv_2='EObject'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getExtendsResourceEObject_EObjectKeyword_2_0_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
 						otherlv_3=RULE_ID
 						{
-							doneLeaf(otherlv_3, elementTypeProvider.getExtendsResourceEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
+							doneLeaf(otherlv_3);
 						}
 					)
 				)
@@ -657,20 +651,20 @@ ruleExtendsResourceEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
 				}
 				otherlv_4='ExtendsNsURIEObject'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getExtendsResourceEObject_ExtendsNsURIEObjectKeyword_2_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
 						{
-							doneLeaf(otherlv_5, elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
+							doneLeaf(otherlv_5);
 						}
 					)
 				)
@@ -678,20 +672,20 @@ ruleExtendsResourceEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
 				}
 				otherlv_6='ExtendsPluginEObject'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getExtendsResourceEObject_ExtendsPluginEObjectKeyword_2_2_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
 						otherlv_7=RULE_ID
 						{
-							doneLeaf(otherlv_7, elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
+							doneLeaf(otherlv_7);
 						}
 					)
 				)
@@ -699,20 +693,20 @@ ruleExtendsResourceEObject:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
 				}
 				otherlv_8='ExtendsResourceEObject'
 				{
-					doneLeaf(otherlv_8, elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_2_3_0ElementType());
+					doneLeaf(otherlv_8);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
 						{
-							doneLeaf(otherlv_9, elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
+							doneLeaf(otherlv_9);
 						}
 					)
 				)
@@ -720,42 +714,42 @@ ruleExtendsResourceEObject:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_3_0ElementType());
 			}
 			otherlv_10='ExtendsResourceEObject'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_3_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
 					{
-						doneLeaf(otherlv_11, elementTypeProvider.getExtendsResourceEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
+						doneLeaf(otherlv_11);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
 					}
 					otherlv_12=RULE_ID
 					{
-						doneLeaf(otherlv_12, elementTypeProvider.getExtendsResourceEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
+						doneLeaf(otherlv_12);
 					}
 				)
 			)
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
 					}
 					otherlv_13=RULE_ID
 					{
-						doneLeaf(otherlv_13, elementTypeProvider.getExtendsResourceEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
+						doneLeaf(otherlv_13);
 					}
 				)
 			)
@@ -833,7 +827,6 @@ ruleExtendsResourceEObject:
 entryRuleEObject:
 	{ markComposite(elementTypeProvider.getEObjectElementType()); }
 	ruleEObject
-	{ doneComposite(); }
 	EOF;
 
 // Rule EObject
@@ -846,11 +839,11 @@ ruleEObject:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEObject_ObjectKeyword_1ElementType());
 		}
 		otherlv_1='object'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getEObject_ObjectKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;
@@ -859,17 +852,16 @@ ruleEObject:
 entryRuleValidID:
 	{ markComposite(elementTypeProvider.getValidIDElementType()); }
 	ruleValidID
-	{ doneComposite(); }
 	EOF;
 
 // Rule ValidID
 ruleValidID:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 

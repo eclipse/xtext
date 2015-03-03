@@ -27,7 +27,7 @@ class IssueAnnotatorTest extends LightToolingTest {
 	
 	def void testNoDuplicateSyntaxErrors() {
 		configureByText('''
-			{}<EOLError descr="missing EOF at '{'"></EOLError>''')
+			<error descr="missing EOF at '{'">{</error>}''')
 		checkHighlighting
 	}
 	

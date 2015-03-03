@@ -58,7 +58,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -66,11 +65,11 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_ModelKeyword_0_0ElementType());
 			}
 			otherlv_0='Model'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_ModelKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -87,11 +86,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DataTypeKeyword_1_0ElementType());
 			}
 			otherlv_2='DataType'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_DataTypeKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -112,7 +111,6 @@ ruleModel:
 entryRuleExpression:
 	{ markComposite(elementTypeProvider.getExpressionElementType()); }
 	ruleExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule Expression
@@ -146,7 +144,6 @@ ruleExpression:
 entryRulePreop:
 	{ markComposite(elementTypeProvider.getPreopElementType()); }
 	rulePreop
-	{ doneComposite(); }
 	EOF;
 
 // Rule Preop
@@ -164,11 +161,11 @@ rulePreop:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getPreop_FunctionNameHyphenMinusHyphenMinusKeyword_1_0ElementType());
 				}
 				lv_functionName_1_0='--'
 				{
-					doneLeaf(lv_functionName_1_0, elementTypeProvider.getPreop_FunctionNameHyphenMinusHyphenMinusKeyword_1_0ElementType());
+					doneLeaf(lv_functionName_1_0);
 				}
 			)
 		)
@@ -190,7 +187,6 @@ rulePreop:
 entryRulePostop:
 	{ markComposite(elementTypeProvider.getPostopElementType()); }
 	rulePostop
-	{ doneComposite(); }
 	EOF;
 
 // Rule Postop
@@ -219,11 +215,11 @@ rulePostop:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getPostop_FunctionNameHyphenMinusHyphenMinusKeyword_1_1_0ElementType());
 					}
 					lv_functionName_2_0='--'
 					{
-						doneLeaf(lv_functionName_2_0, elementTypeProvider.getPostop_FunctionNameHyphenMinusHyphenMinusKeyword_1_1_0ElementType());
+						doneLeaf(lv_functionName_2_0);
 					}
 				)
 			)
@@ -235,7 +231,6 @@ rulePostop:
 entryRuleVariable:
 	{ markComposite(elementTypeProvider.getVariableElementType()); }
 	ruleVariable
-	{ doneComposite(); }
 	EOF;
 
 // Rule Variable
@@ -253,11 +248,11 @@ ruleVariable:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -268,7 +263,6 @@ ruleVariable:
 entryRuleDataTypeExpression:
 	{ markComposite(elementTypeProvider.getDataTypeExpressionElementType()); }
 	ruleDataTypeExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule DataTypeExpression
@@ -296,18 +290,17 @@ ruleDataTypeExpression:
 entryRuleDataTypePreop:
 	{ markComposite(elementTypeProvider.getDataTypePreopElementType()); }
 	ruleDataTypePreop
-	{ doneComposite(); }
 	EOF;
 
 // Rule DataTypePreop
 ruleDataTypePreop:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDataTypePreop_HyphenMinusHyphenMinusKeyword_0ElementType());
 		}
 		kw='--'
 		{
-			doneLeaf(kw, elementTypeProvider.getDataTypePreop_HyphenMinusHyphenMinusKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		{
 			markComposite(elementTypeProvider.getDataTypePreop_DataTypeVariableParserRuleCall_1ElementType());
@@ -323,7 +316,6 @@ ruleDataTypePreop:
 entryRuleDataTypePostop:
 	{ markComposite(elementTypeProvider.getDataTypePostopElementType()); }
 	ruleDataTypePostop
-	{ doneComposite(); }
 	EOF;
 
 // Rule DataTypePostop
@@ -338,11 +330,11 @@ ruleDataTypePostop:
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDataTypePostop_HyphenMinusHyphenMinusKeyword_1ElementType());
 			}
 			kw='--'
 			{
-				doneLeaf(kw, elementTypeProvider.getDataTypePostop_HyphenMinusHyphenMinusKeyword_1ElementType());
+				doneLeaf(kw);
 			}
 		)?
 	)
@@ -352,17 +344,16 @@ ruleDataTypePostop:
 entryRuleDataTypeVariable:
 	{ markComposite(elementTypeProvider.getDataTypeVariableElementType()); }
 	ruleDataTypeVariable
-	{ doneComposite(); }
 	EOF;
 
 // Rule DataTypeVariable
 ruleDataTypeVariable:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getDataTypeVariable_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getDataTypeVariable_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 

@@ -13,5 +13,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTes
         PsiElement(UnorderedDatatype_AKeyword_12_1_0_ELEMENT_TYPE)('a')(15,16)
         PsiWhiteSpace(' ')(16,17)
         PsiElement(UnorderedDatatype_AKeyword_12_2_ELEMENT_TYPE)('a')(17,18)
-  PsiErrorElement:mismatched input '<EOF>' expecting 'b'(18,18)
-    <empty list>
+    PsiErrorElement:mismatched input '<EOF>' expecting 'b'(18,18)
+      <empty list>

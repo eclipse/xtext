@@ -86,8 +86,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot57); 
 
             }
 
@@ -104,13 +103,13 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleRoot"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:59:1: ruleRoot : ( ruleIDList | ruleKWList ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:58:1: ruleRoot : ( ruleIDList | ruleKWList ) ;
     public final void ruleRoot() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:59:9: ( ( ruleIDList | ruleKWList ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:60:2: ( ruleIDList | ruleKWList )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:58:9: ( ( ruleIDList | ruleKWList ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:59:2: ( ruleIDList | ruleKWList )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:60:2: ( ruleIDList | ruleKWList )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:59:2: ( ruleIDList | ruleKWList )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -128,12 +127,12 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:61:3: ruleIDList
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:60:3: ruleIDList
                     {
 
                     			markComposite(elementTypeProvider.getRoot_IDListParserRuleCall_0ElementType());
                     		
-                    pushFollow(FollowSets000.FOLLOW_ruleIDList_in_ruleRoot77);
+                    pushFollow(FollowSets000.FOLLOW_ruleIDList_in_ruleRoot74);
                     ruleIDList();
 
                     state._fsp--;
@@ -145,12 +144,12 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:69:3: ruleKWList
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:68:3: ruleKWList
                     {
 
                     			markComposite(elementTypeProvider.getRoot_KWListParserRuleCall_1ElementType());
                     		
-                    pushFollow(FollowSets000.FOLLOW_ruleKWList_in_ruleRoot97);
+                    pushFollow(FollowSets000.FOLLOW_ruleKWList_in_ruleRoot94);
                     ruleKWList();
 
                     state._fsp--;
@@ -180,20 +179,19 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleIDList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:80:1: entryRuleIDList : ruleIDList EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:79:1: entryRuleIDList : ruleIDList EOF ;
     public final void entryRuleIDList() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:80:16: ( ruleIDList EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:81:2: ruleIDList EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:79:16: ( ruleIDList EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:80:2: ruleIDList EOF
             {
              markComposite(elementTypeProvider.getIDListElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleIDList_in_entryRuleIDList117);
+            pushFollow(FollowSets000.FOLLOW_ruleIDList_in_entryRuleIDList114);
             ruleIDList();
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIDList123); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIDList117); 
 
             }
 
@@ -210,20 +208,20 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleIDList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:87:1: ruleIDList : ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:85:1: ruleIDList : ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* ) ;
     public final void ruleIDList() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_ids_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:87:11: ( ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:88:2: ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:85:11: ( ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:86:2: ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:88:2: ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:89:3: () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:86:2: ( () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:87:3: () otherlv_1= 'idlist' ( (lv_ids_2_0= RULE_ID ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:89:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:90:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:87:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:88:4: 
             {
 
             				precedeComposite(elementTypeProvider.getIDList_IDListAction_0ElementType());
@@ -233,13 +231,13 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
 
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getIDList_IdlistKeyword_1ElementType());
             		
-            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleIDList155); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleIDList149); 
 
-            			doneLeaf(otherlv_1, elementTypeProvider.getIDList_IdlistKeyword_1ElementType());
+            			doneLeaf(otherlv_1);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:102:3: ( (lv_ids_2_0= RULE_ID ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:100:3: ( (lv_ids_2_0= RULE_ID ) )*
             loop2:
             do {
                 int alt2=2;
@@ -252,17 +250,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:103:4: (lv_ids_2_0= RULE_ID )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:101:4: (lv_ids_2_0= RULE_ID )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:103:4: (lv_ids_2_0= RULE_ID )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:104:5: lv_ids_2_0= RULE_ID
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:101:4: (lv_ids_2_0= RULE_ID )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:102:5: lv_ids_2_0= RULE_ID
             	    {
 
-            	    					markLeaf();
+            	    					markLeaf(elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
             	    				
-            	    lv_ids_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIDList182); 
+            	    lv_ids_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIDList176); 
 
-            	    					doneLeaf(lv_ids_2_0, elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
+            	    					doneLeaf(lv_ids_2_0);
             	    				
 
             	    }
@@ -295,20 +293,19 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleKWList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:117:1: entryRuleKWList : ruleKWList EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:115:1: entryRuleKWList : ruleKWList EOF ;
     public final void entryRuleKWList() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:117:16: ( ruleKWList EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:118:2: ruleKWList EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:115:16: ( ruleKWList EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:116:2: ruleKWList EOF
             {
              markComposite(elementTypeProvider.getKWListElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleKWList_in_entryRuleKWList214);
+            pushFollow(FollowSets000.FOLLOW_ruleKWList_in_entryRuleKWList208);
             ruleKWList();
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKWList220); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKWList211); 
 
             }
 
@@ -325,7 +322,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleKWList"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:124:1: ruleKWList : ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:121:1: ruleKWList : ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? ) ;
     public final void ruleKWList() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_kw1_2_0=null;
@@ -335,14 +332,14 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
         Token lv_kw5_6_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:124:11: ( ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:125:2: ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:121:11: ( ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:122:2: ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:125:2: ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:126:3: () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:122:2: ( () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:123:3: () otherlv_1= 'kwlist' ( (lv_kw1_2_0= 'kw1' ) )? ( (lv_kw2_3_0= 'kw2' ) )? ( (lv_kw3_4_0= 'kw3' ) )? ( (lv_kw4_5_0= 'kw4' ) )? ( (lv_kw5_6_0= 'kw5' ) )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:126:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:127:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:123:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:124:4: 
             {
 
             				precedeComposite(elementTypeProvider.getKWList_KWListAction_0ElementType());
@@ -352,13 +349,13 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
 
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getKWList_KwlistKeyword_1ElementType());
             		
-            otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleKWList252); 
+            otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleKWList243); 
 
-            			doneLeaf(otherlv_1, elementTypeProvider.getKWList_KwlistKeyword_1ElementType());
+            			doneLeaf(otherlv_1);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:139:3: ( (lv_kw1_2_0= 'kw1' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:136:3: ( (lv_kw1_2_0= 'kw1' ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -367,17 +364,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:140:4: (lv_kw1_2_0= 'kw1' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:137:4: (lv_kw1_2_0= 'kw1' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:140:4: (lv_kw1_2_0= 'kw1' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:141:5: lv_kw1_2_0= 'kw1'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:137:4: (lv_kw1_2_0= 'kw1' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:138:5: lv_kw1_2_0= 'kw1'
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getKWList_Kw1Kw1Keyword_2_0ElementType());
                     				
-                    lv_kw1_2_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKWList279); 
+                    lv_kw1_2_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKWList270); 
 
-                    					doneLeaf(lv_kw1_2_0, elementTypeProvider.getKWList_Kw1Kw1Keyword_2_0ElementType());
+                    					doneLeaf(lv_kw1_2_0);
                     				
 
                     }
@@ -388,7 +385,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:150:3: ( (lv_kw2_3_0= 'kw2' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:147:3: ( (lv_kw2_3_0= 'kw2' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -397,17 +394,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:151:4: (lv_kw2_3_0= 'kw2' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:148:4: (lv_kw2_3_0= 'kw2' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:151:4: (lv_kw2_3_0= 'kw2' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:152:5: lv_kw2_3_0= 'kw2'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:148:4: (lv_kw2_3_0= 'kw2' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:149:5: lv_kw2_3_0= 'kw2'
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getKWList_Kw2Kw2Keyword_3_0ElementType());
                     				
-                    lv_kw2_3_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKWList318); 
+                    lv_kw2_3_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKWList309); 
 
-                    					doneLeaf(lv_kw2_3_0, elementTypeProvider.getKWList_Kw2Kw2Keyword_3_0ElementType());
+                    					doneLeaf(lv_kw2_3_0);
                     				
 
                     }
@@ -418,7 +415,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:161:3: ( (lv_kw3_4_0= 'kw3' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:158:3: ( (lv_kw3_4_0= 'kw3' ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -427,17 +424,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt5) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:162:4: (lv_kw3_4_0= 'kw3' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:159:4: (lv_kw3_4_0= 'kw3' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:162:4: (lv_kw3_4_0= 'kw3' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:163:5: lv_kw3_4_0= 'kw3'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:159:4: (lv_kw3_4_0= 'kw3' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:160:5: lv_kw3_4_0= 'kw3'
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getKWList_Kw3Kw3Keyword_4_0ElementType());
                     				
-                    lv_kw3_4_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleKWList357); 
+                    lv_kw3_4_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleKWList348); 
 
-                    					doneLeaf(lv_kw3_4_0, elementTypeProvider.getKWList_Kw3Kw3Keyword_4_0ElementType());
+                    					doneLeaf(lv_kw3_4_0);
                     				
 
                     }
@@ -448,7 +445,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:172:3: ( (lv_kw4_5_0= 'kw4' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:169:3: ( (lv_kw4_5_0= 'kw4' ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -457,17 +454,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:173:4: (lv_kw4_5_0= 'kw4' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:170:4: (lv_kw4_5_0= 'kw4' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:173:4: (lv_kw4_5_0= 'kw4' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:174:5: lv_kw4_5_0= 'kw4'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:170:4: (lv_kw4_5_0= 'kw4' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:171:5: lv_kw4_5_0= 'kw4'
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getKWList_Kw4Kw4Keyword_5_0ElementType());
                     				
-                    lv_kw4_5_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleKWList396); 
+                    lv_kw4_5_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleKWList387); 
 
-                    					doneLeaf(lv_kw4_5_0, elementTypeProvider.getKWList_Kw4Kw4Keyword_5_0ElementType());
+                    					doneLeaf(lv_kw4_5_0);
                     				
 
                     }
@@ -478,7 +475,7 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:183:3: ( (lv_kw5_6_0= 'kw5' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:180:3: ( (lv_kw5_6_0= 'kw5' ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -487,17 +484,17 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:184:4: (lv_kw5_6_0= 'kw5' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:181:4: (lv_kw5_6_0= 'kw5' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:184:4: (lv_kw5_6_0= 'kw5' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:185:5: lv_kw5_6_0= 'kw5'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:181:4: (lv_kw5_6_0= 'kw5' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:182:5: lv_kw5_6_0= 'kw5'
                     {
 
-                    					markLeaf();
+                    					markLeaf(elementTypeProvider.getKWList_Kw5Kw5Keyword_6_0ElementType());
                     				
-                    lv_kw5_6_0=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleKWList435); 
+                    lv_kw5_6_0=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleKWList426); 
 
-                    					doneLeaf(lv_kw5_6_0, elementTypeProvider.getKWList_Kw5Kw5Keyword_6_0ElementType());
+                    					doneLeaf(lv_kw5_6_0);
                     				
 
                     }
@@ -533,21 +530,21 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRoot60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIDList_in_ruleRoot77 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKWList_in_ruleRoot97 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIDList_in_entryRuleIDList117 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIDList123 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleIDList155 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleIDList182 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleKWList_in_entryRuleKWList214 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleKWList220 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleKWList252 = new BitSet(new long[]{0x000000000003E002L});
-        public static final BitSet FOLLOW_13_in_ruleKWList279 = new BitSet(new long[]{0x000000000003C002L});
-        public static final BitSet FOLLOW_14_in_ruleKWList318 = new BitSet(new long[]{0x0000000000038002L});
-        public static final BitSet FOLLOW_15_in_ruleKWList357 = new BitSet(new long[]{0x0000000000030002L});
-        public static final BitSet FOLLOW_16_in_ruleKWList396 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleKWList435 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRoot57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIDList_in_ruleRoot74 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKWList_in_ruleRoot94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIDList_in_entryRuleIDList114 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleIDList117 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleIDList149 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleIDList176 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleKWList_in_entryRuleKWList208 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKWList211 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleKWList243 = new BitSet(new long[]{0x000000000003E002L});
+        public static final BitSet FOLLOW_13_in_ruleKWList270 = new BitSet(new long[]{0x000000000003C002L});
+        public static final BitSet FOLLOW_14_in_ruleKWList309 = new BitSet(new long[]{0x0000000000038002L});
+        public static final BitSet FOLLOW_15_in_ruleKWList348 = new BitSet(new long[]{0x0000000000030002L});
+        public static final BitSet FOLLOW_16_in_ruleKWList387 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleKWList426 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

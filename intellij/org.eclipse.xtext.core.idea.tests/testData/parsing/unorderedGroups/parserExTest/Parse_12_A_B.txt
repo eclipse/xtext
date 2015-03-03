@@ -8,5 +8,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTes
       PsiElement(Model_FirstAsListAKeyword_1_11_1_0_0_ELEMENT_TYPE)('a')(3,4)
       PsiWhiteSpace(' ')(4,5)
       PsiElement(Model_SecondAsListBKeyword_1_11_1_1_0_ELEMENT_TYPE)('b')(5,6)
-  PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(6,6)
-    <empty list>
+    PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(6,6)
+      <empty list>

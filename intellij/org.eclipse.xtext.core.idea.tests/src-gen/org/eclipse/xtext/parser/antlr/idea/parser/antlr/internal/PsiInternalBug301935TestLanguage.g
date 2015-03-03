@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -61,29 +60,29 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_WSTerminalRuleCall_1ElementType());
 		}
 		this_WS_1=RULE_WS
 		{
-			doneLeaf(this_WS_1, elementTypeProvider.getModel_WSTerminalRuleCall_1ElementType());
+			doneLeaf(this_WS_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_ValueIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_value_2_0=RULE_ID
 				{
-					doneLeaf(lv_value_2_0, elementTypeProvider.getModel_ValueIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_value_2_0);
 				}
 			)
 		)
@@ -97,20 +96,20 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_Value2IDTerminalRuleCall_4_0ElementType());
 				}
 				lv_value2_4_0=RULE_ID
 				{
-					doneLeaf(lv_value2_4_0, elementTypeProvider.getModel_Value2IDTerminalRuleCall_4_0ElementType());
+					doneLeaf(lv_value2_4_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_WSTerminalRuleCall_5ElementType());
 		}
 		this_WS_5=RULE_WS
 		{
-			doneLeaf(this_WS_5, elementTypeProvider.getModel_WSTerminalRuleCall_5ElementType());
+			doneLeaf(this_WS_5);
 		}
 	)
 ;
@@ -119,7 +118,6 @@ ruleModel:
 entryRuleNL:
 	{ markComposite(elementTypeProvider.getNLElementType()); }
 	ruleNL
-	{ doneComposite(); }
 	EOF;
 
 // Rule NL
@@ -127,38 +125,38 @@ ruleNL:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNL_WSTerminalRuleCall_0ElementType());
 			}
 			this_WS_0=RULE_WS
 			{
-				doneLeaf(this_WS_0, elementTypeProvider.getNL_WSTerminalRuleCall_0ElementType());
+				doneLeaf(this_WS_0);
 			}
 		)*
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNL_CarriageReturnCrKeyword_1_0ElementType());
 				}
 				kw='\r'
 				{
-					doneLeaf(kw, elementTypeProvider.getNL_CarriageReturnCrKeyword_1_0ElementType());
+					doneLeaf(kw);
 				}
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNL_LineFeedLfKeyword_1_1ElementType());
 			}
 			kw='\n'
 			{
-				doneLeaf(kw, elementTypeProvider.getNL_LineFeedLfKeyword_1_1ElementType());
+				doneLeaf(kw);
 			}
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNL_WSTerminalRuleCall_2ElementType());
 			}
 			this_WS_3=RULE_WS
 			{
-				doneLeaf(this_WS_3, elementTypeProvider.getNL_WSTerminalRuleCall_2ElementType());
+				doneLeaf(this_WS_3);
 			}
 		)*
 	)

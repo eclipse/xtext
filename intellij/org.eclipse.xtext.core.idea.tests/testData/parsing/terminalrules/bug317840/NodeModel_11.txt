@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageFileImpl:a.bug317840testlanguage(0,12)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,11)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,12)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,11)
       PsiElement(Element_ElementKeyword_0_ELEMENT_TYPE)('element')(0,7)
       org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_FirstNamedParserRuleCall_1_0_ELEMENT_TYPE)(7,11)
@@ -8,4 +8,4 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageF
           PsiElement(NAME_IDTerminalRuleCall_0_ELEMENT_TYPE)('a')(8,9)
           PsiElement(NAME_FullStopKeyword_1_0_ELEMENT_TYPE)('.')(9,10)
           PsiElement(NAME_IDTerminalRuleCall_1_1_ELEMENT_TYPE)('a')(10,11)
-  PsiWhiteSpace(' ')(11,12)
+    PsiWhiteSpace(' ')(11,12)

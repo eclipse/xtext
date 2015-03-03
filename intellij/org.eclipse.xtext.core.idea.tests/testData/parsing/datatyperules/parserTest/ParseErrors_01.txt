@@ -11,5 +11,5 @@ org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLangu
           PsiElement(ModelId_IDTerminalRuleCall_0_ELEMENT_TYPE)('c')(4,5)
           PsiElement(ModelId_FullStopKeyword_1_ELEMENT_TYPE)('.')(5,6)
           PsiElement(ModelId_IDTerminalRuleCall_2_ELEMENT_TYPE)('d')(6,7)
-  PsiErrorElement:mismatched input '<EOF>' expecting ';'(7,7)
-    <empty list>
+    PsiErrorElement:mismatched input '<EOF>' expecting ';'(7,7)
+      <empty list>

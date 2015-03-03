@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleReferenceHolder:
 	{ markComposite(elementTypeProvider.getReferenceHolderElementType()); }
 	ruleReferenceHolder
-	{ doneComposite(); }
 	EOF;
 
 // Rule ReferenceHolder
@@ -83,11 +81,11 @@ ruleReferenceHolder:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
@@ -109,49 +107,48 @@ ruleReferenceHolder:
 entryRuleFQN:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
 	ruleFQN
-	{ doneComposite(); }
 	EOF;
 
 // Rule FQN
 ruleFQN:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_FullStopKeyword_1_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getFQN_FullStopKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_1_1ElementType());
 			}
 			this_ID_2=RULE_ID
 			{
-				doneLeaf(this_ID_2, elementTypeProvider.getFQN_IDTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_ID_2);
 			}
 		)*
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_DollarSignKeyword_2_0ElementType());
 			}
 			kw='$'
 			{
-				doneLeaf(kw, elementTypeProvider.getFQN_DollarSignKeyword_2_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_2_1ElementType());
 			}
 			this_ID_4=RULE_ID
 			{
-				doneLeaf(this_ID_4, elementTypeProvider.getFQN_IDTerminalRuleCall_2_1ElementType());
+				doneLeaf(this_ID_4);
 			}
 		)*
 	)

@@ -286,12 +286,6 @@ public class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGen
     _builder.append(_ruleName, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("{ ");
-    CharSequence _doneComposite = this.doneComposite(it);
-    _builder.append(_doneComposite, "\t");
-    _builder.append(" }");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.append("EOF;");
     _builder.newLine();
     CharSequence _compileEntryFinally = this.compileEntryFinally(it, options);
@@ -851,7 +845,10 @@ public class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGen
   
   protected CharSequence markLeaf(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("markLeaf();");
+    _builder.append("markLeaf(elementTypeProvider.get");
+    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
+    _builder.append(_grammarElementIdentifier, "");
+    _builder.append("ElementType());");
     return _builder;
   }
   
@@ -859,10 +856,7 @@ public class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGen
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("doneLeaf(");
     _builder.append(token, "");
-    _builder.append(", elementTypeProvider.get");
-    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
-    _builder.append(_grammarElementIdentifier, "");
-    _builder.append("ElementType());");
+    _builder.append(");");
     return _builder;
   }
   

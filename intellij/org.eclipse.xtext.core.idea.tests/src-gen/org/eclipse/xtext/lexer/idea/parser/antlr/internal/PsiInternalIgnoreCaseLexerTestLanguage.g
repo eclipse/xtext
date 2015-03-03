@@ -52,36 +52,35 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
 ruleModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_CaseKeyword_0ElementType());
 		}
 		otherlv_0='case'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModel_CaseKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_FooKeyword_1ElementType());
 			}
 			otherlv_1='foo'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getModel_FooKeyword_1ElementType());
+				doneLeaf(otherlv_1);
 			}
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType());
 				}
 				lv_value_2_0='CaSe'
 				{
-					doneLeaf(lv_value_2_0, elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType());
+					doneLeaf(lv_value_2_0);
 				}
 			)
 		)

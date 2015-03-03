@@ -1451,12 +1451,12 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOCUMENTATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4608:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4608:22: '/**' ( options {greedy=false; } : . )* '*/'
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4551:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4551:22: '/**' ( options {greedy=false; } : . )* '*/'
             {
             match("/**"); 
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4608:28: ( options {greedy=false; } : . )*
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4551:28: ( options {greedy=false; } : . )*
             loop1:
             do {
                 int alt1=2;
@@ -1481,7 +1481,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4608:56: .
+            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4551:56: .
             	    {
             	    matchAny(); 
 
@@ -1511,8 +1511,8 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4610:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4610:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4553:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4553:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
             match('0'); 
             if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -1524,7 +1524,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4610:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4553:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -1578,10 +1578,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4612:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4612:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4555:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4555:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4612:11: ( '^' )?
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4555:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1590,7 +1590,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4612:11: '^'
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4555:11: '^'
                     {
                     match('^'); 
 
@@ -1608,7 +1608,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4612:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4555:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -1657,10 +1657,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4614:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4614:12: ( '0' .. '9' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4557:10: ( ( '0' .. '9' )+ )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4557:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4614:12: ( '0' .. '9' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4557:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -1674,7 +1674,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4614:13: '0' .. '9'
+            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4557:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1706,10 +1706,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1746,7 +1746,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:21: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1754,7 +1754,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1779,10 +1779,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1798,7 +1798,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:54: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1806,7 +1806,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4616:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4559:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1849,12 +1849,12 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4618:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4618:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4561:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4561:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4618:24: ( options {greedy=false; } : . )*
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4561:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1879,7 +1879,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4618:52: .
+            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4561:52: .
             	    {
             	    matchAny(); 
 
@@ -1909,12 +1909,12 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1927,7 +1927,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1947,7 +1947,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:40: ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1956,9 +1956,9 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:41: ( '\\r' )? '\\n'
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:41: ( '\\r' )?
+                    // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1967,7 +1967,7 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4620:41: '\\r'
+                            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4563:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1999,10 +1999,10 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4622:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4622:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4565:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4565:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4622:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4565:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -2056,8 +2056,8 @@ public class PsiInternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4624:16: ( . )
-            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4624:18: .
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4567:16: ( . )
+            // ../../intellij/org.eclipse.xtext.testlanguages.idea/src-gen/org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalSimpleBeeLangTestLanguage.g:4567:18: .
             {
             matchAny(); 
 

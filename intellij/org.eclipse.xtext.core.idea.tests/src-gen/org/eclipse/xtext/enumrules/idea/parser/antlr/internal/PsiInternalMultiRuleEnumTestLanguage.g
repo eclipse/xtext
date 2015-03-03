@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
 ruleModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_SomeEnumKeyword_0ElementType());
 		}
 		otherlv_0='someEnum'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getModel_SomeEnumKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -106,31 +105,31 @@ ruleEnumRuleA:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleA_AEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='A'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getEnumRuleA_AEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleA_BEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='B'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getEnumRuleA_BEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleA_CEnumLiteralDeclaration_2ElementType());
 			}
 			enumLiteral_2='C'
 			{
-				doneLeaf(enumLiteral_2, elementTypeProvider.getEnumRuleA_CEnumLiteralDeclaration_2ElementType());
+				doneLeaf(enumLiteral_2);
 			}
 		)
 	)
@@ -141,31 +140,31 @@ ruleEnumRuleB:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleB_CEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='C'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getEnumRuleB_CEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleB_DEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='D'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getEnumRuleB_DEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleB_EEnumLiteralDeclaration_2ElementType());
 			}
 			enumLiteral_2='E'
 			{
-				doneLeaf(enumLiteral_2, elementTypeProvider.getEnumRuleB_EEnumLiteralDeclaration_2ElementType());
+				doneLeaf(enumLiteral_2);
 			}
 		)
 	)
@@ -176,31 +175,31 @@ ruleEnumRuleC:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleC_AEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='A'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getEnumRuleC_AEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleC_DEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='D'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getEnumRuleC_DEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumRuleC_BEnumLiteralDeclaration_2ElementType());
 			}
 			enumLiteral_2='B'
 			{
-				doneLeaf(enumLiteral_2, elementTypeProvider.getEnumRuleC_BEnumLiteralDeclaration_2ElementType());
+				doneLeaf(enumLiteral_2);
 			}
 		)
 	)

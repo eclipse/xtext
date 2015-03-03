@@ -9,5 +9,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroup
         PsiElement(UnorderedDatatype_DigitOneDigitThreeKeyword_12_0_ELEMENT_TYPE)('13')(10,12)
         PsiWhiteSpace(' ')(12,13)
         PsiElement(UnorderedDatatype_AKeyword_12_2_ELEMENT_TYPE)('a')(13,14)
-  PsiErrorElement:mismatched input '<EOF>' expecting 'b'(14,14)
-    <empty list>
+    PsiErrorElement:mismatched input '<EOF>' expecting 'b'(14,14)
+      <empty list>

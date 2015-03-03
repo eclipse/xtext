@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
@@ -83,49 +81,49 @@ ruleElement:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_OptionalOptionalKeyword_0_0ElementType());
 				}
 				lv_optional_0_0='optional'
 				{
-					doneLeaf(lv_optional_0_0, elementTypeProvider.getElement_OptionalOptionalKeyword_0_0ElementType());
+					doneLeaf(lv_optional_0_0);
 				}
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_ElementKeyword_1ElementType());
 		}
 		otherlv_1='element'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getElement_ElementKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
 				{
-					doneLeaf(lv_name_2_0, elementTypeProvider.getElement_NameIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_name_2_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_DescriptionsSTRINGTerminalRuleCall_3_0ElementType());
 				}
 				lv_descriptions_3_0=RULE_STRING
 				{
-					doneLeaf(lv_descriptions_3_0, elementTypeProvider.getElement_DescriptionsSTRINGTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_descriptions_3_0);
 				}
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_SemicolonKeyword_4ElementType());
 		}
 		otherlv_4=';'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getElement_SemicolonKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 	)
 ;

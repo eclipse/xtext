@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleNodeList:
 	{ markComposite(elementTypeProvider.getNodeListElementType()); }
 	ruleNodeList
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeList
@@ -71,11 +70,11 @@ ruleNodeList:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNodeList_NLTerminalRuleCall_1_0ElementType());
 			}
 			this_NL_1=RULE_NL
 			{
-				doneLeaf(this_NL_1, elementTypeProvider.getNodeList_NLTerminalRuleCall_1_0ElementType());
+				doneLeaf(this_NL_1);
 			}
 			(
 				(
@@ -96,7 +95,6 @@ ruleNodeList:
 entryRuleNode:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
 	ruleNode
-	{ doneComposite(); }
 	EOF;
 
 // Rule Node
@@ -115,18 +113,18 @@ ruleNode:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNode_NLTerminalRuleCall_1_0ElementType());
 			}
 			this_NL_1=RULE_NL
 			{
-				doneLeaf(this_NL_1, elementTypeProvider.getNode_NLTerminalRuleCall_1_0ElementType());
+				doneLeaf(this_NL_1);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNode_BEGINTerminalRuleCall_1_1ElementType());
 			}
 			this_BEGIN_2=RULE_BEGIN
 			{
-				doneLeaf(this_BEGIN_2, elementTypeProvider.getNode_BEGINTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_BEGIN_2);
 			}
 			(
 				(
@@ -140,11 +138,11 @@ ruleNode:
 				)
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNode_ENDTerminalRuleCall_1_3ElementType());
 			}
 			this_END_4=RULE_END
 			{
-				doneLeaf(this_END_4, elementTypeProvider.getNode_ENDTerminalRuleCall_1_3ElementType());
+				doneLeaf(this_END_4);
 			}
 		)?
 	)
@@ -154,18 +152,17 @@ ruleNode:
 entryRuleString:
 	{ markComposite(elementTypeProvider.getStringElementType()); }
 	ruleString
-	{ doneComposite(); }
 	EOF;
 
 // Rule String
 ruleString:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getString_OTHERTerminalRuleCallElementType());
 		}
 		this_OTHER_0=RULE_OTHER
 		{
-			doneLeaf(this_OTHER_0, elementTypeProvider.getString_OTHERTerminalRuleCallElementType());
+			doneLeaf(this_OTHER_0);
 		}
 	)+
 ;

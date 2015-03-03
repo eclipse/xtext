@@ -1,0 +1,4 @@
+org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:IncompleteMLComment.sdomain(0,18)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,18)
+    PsiErrorElement:mismatched character '<EOF>' expecting '*'(0,18)
+      PsiElement(<invalid>)('/**\nentity Foo {\n}')(0,18)

@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleSecond:
 	{ markComposite(elementTypeProvider.getSecondElementType()); }
 	ruleSecond
-	{ doneComposite(); }
 	EOF;
 
 // Rule Second
@@ -61,29 +60,29 @@ ruleSecond:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecond_FirstKeyword_1ElementType());
 		}
 		otherlv_1='first'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getSecond_FirstKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType());
 				}
 				otherlv_2=RULE_ID
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 			)
 		)

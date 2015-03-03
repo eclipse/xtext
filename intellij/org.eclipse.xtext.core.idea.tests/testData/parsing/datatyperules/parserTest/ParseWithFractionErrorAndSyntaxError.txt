@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLanguageFileImpl:a.datatyperulestestlanguage(0,13)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)(0,12)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)(0,13)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ModelModelParserRuleCall_0_ELEMENT_TYPE)(0,12)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_IdNestedModelIdParserRuleCall_0_0_ELEMENT_TYPE)(0,7)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(NestedModelId_ModelIdParserRuleCall_0_ELEMENT_TYPE)(0,3)
@@ -17,6 +17,6 @@ org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLangu
         PsiElement(Fraction_INTTerminalRuleCall_0_ELEMENT_TYPE)('1')(9,10)
         PsiElement(Fraction_SolidusKeyword_1_0_ELEMENT_TYPE)('/')(10,11)
         PsiElement(Fraction_INTTerminalRuleCall_1_1_ELEMENT_TYPE)('0')(11,12)
-  PsiWhiteSpace(' ')(12,13)
-  PsiErrorElement:mismatched input '<EOF>' expecting ';'(13,13)
-    <empty list>
+    PsiWhiteSpace(' ')(12,13)
+    PsiErrorElement:mismatched input '<EOF>' expecting ';'(13,13)
+      <empty list>

@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleRoot:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
 	ruleRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule Root
 ruleRoot:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getRoot_TestKeyword_0ElementType());
 		}
 		otherlv_0='test'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getRoot_TestKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -97,7 +96,6 @@ ruleRoot:
 entryRuleTestRequired:
 	{ markComposite(elementTypeProvider.getTestRequiredElementType()); }
 	ruleTestRequired
-	{ doneComposite(); }
 	EOF;
 
 // Rule TestRequired
@@ -110,31 +108,31 @@ ruleTestRequired:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getTestRequired_RequiredKeyword_1ElementType());
 		}
 		otherlv_1='required'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getTestRequired_RequiredKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTestRequired_Required1INTTerminalRuleCall_2_0ElementType());
 				}
 				lv_required1_2_0=RULE_INT
 				{
-					doneLeaf(lv_required1_2_0, elementTypeProvider.getTestRequired_Required1INTTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_required1_2_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTestRequired_Required2INTTerminalRuleCall_3_0ElementType());
 				}
 				lv_required2_3_0=RULE_INT
 				{
-					doneLeaf(lv_required2_3_0, elementTypeProvider.getTestRequired_Required2INTTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_required2_3_0);
 				}
 			)
 		)
@@ -145,7 +143,6 @@ ruleTestRequired:
 entryRuleTestOptional:
 	{ markComposite(elementTypeProvider.getTestOptionalElementType()); }
 	ruleTestOptional
-	{ doneComposite(); }
 	EOF;
 
 // Rule TestOptional
@@ -158,39 +155,39 @@ ruleTestOptional:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getTestOptional_OptionalKeyword_1ElementType());
 		}
 		otherlv_1='optional'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getTestOptional_OptionalKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTestOptional_Opt1INTTerminalRuleCall_2_0ElementType());
 				}
 				lv_opt1_2_0=RULE_INT
 				{
-					doneLeaf(lv_opt1_2_0, elementTypeProvider.getTestOptional_Opt1INTTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_opt1_2_0);
 				}
 			)
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getTestOptional_ColonKeyword_3_0ElementType());
 			}
 			otherlv_3=':'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getTestOptional_ColonKeyword_3_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getTestOptional_Opt2INTTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_opt2_4_0=RULE_INT
 					{
-						doneLeaf(lv_opt2_4_0, elementTypeProvider.getTestOptional_Opt2INTTerminalRuleCall_3_1_0ElementType());
+						doneLeaf(lv_opt2_4_0);
 					}
 				)
 			)
@@ -202,7 +199,6 @@ ruleTestOptional:
 entryRuleTestList:
 	{ markComposite(elementTypeProvider.getTestListElementType()); }
 	ruleTestList
-	{ doneComposite(); }
 	EOF;
 
 // Rule TestList
@@ -215,20 +211,20 @@ ruleTestList:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getTestList_ListKeyword_1ElementType());
 		}
 		otherlv_1='list'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getTestList_ListKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTestList_ItemINTTerminalRuleCall_2_0ElementType());
 				}
 				lv_item_2_0=RULE_INT
 				{
-					doneLeaf(lv_item_2_0, elementTypeProvider.getTestList_ItemINTTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_item_2_0);
 				}
 			)
 		)*

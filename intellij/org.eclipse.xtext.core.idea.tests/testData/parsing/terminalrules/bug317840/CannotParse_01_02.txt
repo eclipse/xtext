@@ -7,5 +7,5 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageF
           PsiWhiteSpace(' ')(7,8)
           PsiElement(NAME_IDTerminalRuleCall_0_ELEMENT_TYPE)('a')(8,9)
           PsiElement(NAME_FullStopKeyword_1_0_ELEMENT_TYPE)('.')(9,10)
-  PsiErrorElement:mismatched input '<EOF>' expecting RULE_ID(10,10)
-    <empty list>
+    PsiErrorElement:mismatched input '<EOF>' expecting RULE_ID(10,10)
+      <empty list>

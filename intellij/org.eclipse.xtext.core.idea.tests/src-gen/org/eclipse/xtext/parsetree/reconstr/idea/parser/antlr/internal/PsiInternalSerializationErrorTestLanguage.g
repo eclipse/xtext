@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -88,18 +87,17 @@ ruleModel:
 entryRuleParenthesis:
 	{ markComposite(elementTypeProvider.getParenthesisElementType()); }
 	ruleParenthesis
-	{ doneComposite(); }
 	EOF;
 
 // Rule Parenthesis
 ruleParenthesis:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParenthesis_LeftParenthesisKeyword_0ElementType());
 		}
 		otherlv_0='('
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getParenthesis_LeftParenthesisKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getParenthesis_TestParserRuleCall_1ElementType());
@@ -109,11 +107,11 @@ ruleParenthesis:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getParenthesis_RightParenthesisKeyword_2ElementType());
 		}
 		otherlv_2=')'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getParenthesis_RightParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -122,7 +120,6 @@ ruleParenthesis:
 entryRuleTest:
 	{ markComposite(elementTypeProvider.getTestElementType()); }
 	ruleTest
-	{ doneComposite(); }
 	EOF;
 
 // Rule Test
@@ -158,38 +155,37 @@ ruleTest:
 entryRuleTwoRequired:
 	{ markComposite(elementTypeProvider.getTwoRequiredElementType()); }
 	ruleTwoRequired
-	{ doneComposite(); }
 	EOF;
 
 // Rule TwoRequired
 ruleTwoRequired:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getTwoRequired_TworequiredKeyword_0ElementType());
 		}
 		otherlv_0='tworequired'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getTwoRequired_TworequiredKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_one_1_0=RULE_ID
 				{
-					doneLeaf(lv_one_1_0, elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_one_1_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_two_2_0=RULE_ID
 				{
-					doneLeaf(lv_two_2_0, elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_two_2_0);
 				}
 			)
 		)
@@ -200,36 +196,35 @@ ruleTwoRequired:
 entryRuleTwoOptions:
 	{ markComposite(elementTypeProvider.getTwoOptionsElementType()); }
 	ruleTwoOptions
-	{ doneComposite(); }
 	EOF;
 
 // Rule TwoOptions
 ruleTwoOptions:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getTwoOptions_TwooptionsKeyword_0ElementType());
 		}
 		otherlv_0='twooptions'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getTwoOptions_TwooptionsKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTwoOptions_OneKeyword_1_0_0ElementType());
 				}
 				otherlv_1='one'
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getTwoOptions_OneKeyword_1_0_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType());
 						}
 						lv_one_2_0=RULE_ID
 						{
-							doneLeaf(lv_one_2_0, elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType());
+							doneLeaf(lv_one_2_0);
 						}
 					)
 				)
@@ -237,20 +232,20 @@ ruleTwoOptions:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTwoOptions_TwoKeyword_1_1_0ElementType());
 				}
 				otherlv_3='two'
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getTwoOptions_TwoKeyword_1_1_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType());
 						}
 						lv_two_4_0=RULE_ID
 						{
-							doneLeaf(lv_two_4_0, elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType());
+							doneLeaf(lv_two_4_0);
 						}
 					)
 				)
@@ -263,18 +258,17 @@ ruleTwoOptions:
 entryRuleIndent:
 	{ markComposite(elementTypeProvider.getIndentElementType()); }
 	ruleIndent
-	{ doneComposite(); }
 	EOF;
 
 // Rule Indent
 ruleIndent:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getIndent_LeftCurlyBracketKeyword_0ElementType());
 		}
 		otherlv_0='{'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getIndent_LeftCurlyBracketKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -310,11 +304,11 @@ ruleIndent:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getIndent_RightCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_4='}'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getIndent_RightCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 	)
 ;

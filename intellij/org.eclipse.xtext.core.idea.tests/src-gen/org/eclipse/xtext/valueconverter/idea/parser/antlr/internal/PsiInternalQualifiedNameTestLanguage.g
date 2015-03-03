@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
 ruleElement:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_KeywordKeyword_0ElementType());
 		}
 		otherlv_0='keyword'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getElement_KeywordKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -83,49 +82,48 @@ ruleElement:
 entryRuleQualifiedName:
 	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
 	ruleQualifiedName
-	{ doneComposite(); }
 	EOF;
 
 // Rule QualifiedName
 ruleQualifiedName:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_1_1ElementType());
 			}
 			this_ID_2=RULE_ID
 			{
-				doneLeaf(this_ID_2, elementTypeProvider.getQualifiedName_IDTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_ID_2);
 			}
 		)*
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_2_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getQualifiedName_FullStopKeyword_2_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getQualifiedName_AsteriskKeyword_2_1ElementType());
 			}
 			kw='*'
 			{
-				doneLeaf(kw, elementTypeProvider.getQualifiedName_AsteriskKeyword_2_1ElementType());
+				doneLeaf(kw);
 			}
 		)?
 	)

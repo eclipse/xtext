@@ -10,5 +10,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTes
       PsiElement(Model_SecondAsListBKeyword_1_11_1_1_0_ELEMENT_TYPE)('b')(5,6)
       PsiWhiteSpace(' ')(6,7)
       PsiElement(Model_FirstAsListAKeyword_1_11_2_0_0_ELEMENT_TYPE)('a')(7,8)
-  PsiErrorElement:rule ruleModel failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2())}?(8,8)
-    <empty list>
+    PsiErrorElement:rule ruleModel failed predicate: {getUnorderedGroupHelper().canLeave(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2())}?(8,8)
+      <empty list>

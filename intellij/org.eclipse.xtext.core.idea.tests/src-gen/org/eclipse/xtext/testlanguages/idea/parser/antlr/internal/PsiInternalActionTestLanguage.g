@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -91,7 +90,6 @@ ruleModel:
 entryRuleChild:
 	{ markComposite(elementTypeProvider.getChildElementType()); }
 	ruleChild
-	{ doneComposite(); }
 	EOF;
 
 // Rule Child
@@ -99,11 +97,11 @@ ruleChild:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)

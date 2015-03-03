@@ -52,27 +52,26 @@ import com.intellij.lang.PsiBuilder;
 entryRuleSuperMain:
 	{ markComposite(elementTypeProvider.getSuperMainElementType()); }
 	ruleSuperMain
-	{ doneComposite(); }
 	EOF;
 
 // Rule SuperMain
 ruleSuperMain:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
 		}
 		otherlv_0='super'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)

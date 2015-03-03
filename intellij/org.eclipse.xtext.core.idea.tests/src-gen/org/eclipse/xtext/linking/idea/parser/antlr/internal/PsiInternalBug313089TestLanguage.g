@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleFoo:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
 	ruleFoo
-	{ doneComposite(); }
 	EOF;
 
 // Rule Foo
@@ -61,11 +60,11 @@ ruleFoo:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
@@ -97,11 +96,11 @@ ruleFoo:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getFoo_RefFooCrossReference_2_0ElementType());
 				}
 				otherlv_3=RULE_ID
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getFoo_RefFooCrossReference_2_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 			)
 		)
@@ -112,7 +111,6 @@ ruleFoo:
 entryRuleBar:
 	{ markComposite(elementTypeProvider.getBarElementType()); }
 	ruleBar
-	{ doneComposite(); }
 	EOF;
 
 // Rule Bar
@@ -127,11 +125,11 @@ ruleBar:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -142,27 +140,26 @@ ruleBar:
 entryRuleBaz:
 	{ markComposite(elementTypeProvider.getBazElementType()); }
 	ruleBaz
-	{ doneComposite(); }
 	EOF;
 
 // Rule Baz
 ruleBaz:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBaz_BazKeyword_0ElementType());
 		}
 		otherlv_0='baz'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getBaz_BazKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -174,20 +171,20 @@ ruleBaz:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getBaz_BazKeyword_2_1ElementType());
 			}
 			otherlv_3='baz'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getBaz_BazKeyword_2_1ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType());
 					}
 					lv_name_4_0=RULE_ID
 					{
-						doneLeaf(lv_name_4_0, elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType());
+						doneLeaf(lv_name_4_0);
 					}
 				)
 			)

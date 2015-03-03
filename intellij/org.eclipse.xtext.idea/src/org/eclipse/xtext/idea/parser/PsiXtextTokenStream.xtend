@@ -8,31 +8,60 @@
 package org.eclipse.xtext.idea.parser
 
 import com.intellij.lang.PsiBuilder
+import com.intellij.psi.tree.IElementType
 import java.util.List
 import java.util.Map
 import org.antlr.runtime.BaseRecognizer
+import org.antlr.runtime.Token
 import org.antlr.runtime.TokenSource
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.idea.lang.CreateElementType
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.parser.antlr.XtextTokenStream
 
-class PsiXtextTokenStream extends XtextTokenStream {
+class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 
 	boolean afterSeek
 
 	val PsiBuilder builder
 
-	val List<PsiBuilder.Marker> markers
+	val List<PsiTokenStreamState> states
 
 	val Map<Integer, Integer> psiToOriginalMarkers
+	
+	String errorMessage
+	
+	IElementType tokenType
 
 	new(PsiBuilder builder, TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource, tokenDefProvider)
 		this.builder = builder
 		this.afterSeek = false
-		this.markers = newArrayList
+		this.states = newArrayList
 		this.psiToOriginalMarkers = newHashMap
+	}
+	
+	override reportError(()=>String reporter) {
+		if (errorMessage == null) {
+			errorMessage = reporter.apply
+		}
+	}
+	
+	override remapToken(IElementType tokenType) {
+		val currentTokenType = this.tokenType
+		this.tokenType = tokenType
+		currentTokenType
+	}
+	
+	override void appendAllTokens() {
+		while(!builder.eof) {
+			consume
+		}
+		if (errorMessage != null) {
+			builder.error(errorMessage)
+			errorMessage = null
+		}
 	}
 
 	override consume() {
@@ -43,27 +72,47 @@ class PsiXtextTokenStream extends XtextTokenStream {
 			if (rawTokenIndex < p) {
 				val n = p - rawTokenIndex
 				for (var i = 0; i < n; i++) {
-					advanceLexer
+					advanceLexer(null)
 				}
 			}
 			super.consume
-			advanceLexer
+			advanceLexer(this.tokenType)
 		}
 	}
 	
-	protected def advanceLexer() {
+	protected def advanceLexer(IElementType tokenType) {
 		if (builder.eof) {
 			return
 		}
 		val token = get(builder.rawTokenIndex)
 		val hidden = token.channel == BaseRecognizer.HIDDEN
-		val tokenType = builder.tokenType
+		
+		val currentTokenType = if (tokenType == null) builder.tokenType else tokenType
 		builder.remapCurrentToken(
-			new CreateElementType(tokenType) [
+			new CreateElementType(currentTokenType) [
 				putUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY, hidden)
 			]
 		)
-		builder.advanceLexer
+		
+		val errorMessage = token.errorMessage
+		if (errorMessage != null) {
+			val errorMarker = builder.mark
+			builder.advanceLexer
+			errorMarker.error(errorMessage)
+		} else {
+			builder.advanceLexer
+		}
+	}
+	
+	protected def String getErrorMessage(Token token) {
+		if (token.channel != BaseRecognizer.HIDDEN && errorMessage != null) {
+			val result = errorMessage
+			errorMessage = null
+			return result
+		}
+		if (token.type == Token.INVALID_TOKEN_TYPE) {
+			return token.lexerErrorMessage
+		}
 	}
 
 	override mark() {
@@ -73,17 +122,20 @@ class PsiXtextTokenStream extends XtextTokenStream {
 	}
 
 	protected def markPsi() {
-		markers += builder.mark
+		states += new PsiTokenStreamState(errorMessage, tokenType, builder.mark)
 		lastPsiMarker
 	}
 
 	protected def getLastPsiMarker() {
-		markers.size - 1
+		states.size - 1
 	}
 
 	override release(int psiMarker) {
 		super.release(psiToOriginalMarkers.get(psiMarker))
-		markers.get(psiMarker).drop
+		val state = states.get(psiMarker)
+		this.tokenType = state.tokenType 
+		this.errorMessage = state.errorMessage
+		state.marker.drop
 	}
 
 	override rewind() {
@@ -96,7 +148,10 @@ class PsiXtextTokenStream extends XtextTokenStream {
 
 	override rewind(int psiMarker) {
 		super.rewind(psiToOriginalMarkers.get(psiMarker))
-		markers.get(psiMarker).rollbackTo
+		val state = states.get(psiMarker)
+		this.tokenType = state.tokenType 
+		this.errorMessage = state.errorMessage
+		state.marker.rollbackTo
 		afterSeek = false
 	}
 
@@ -105,4 +160,11 @@ class PsiXtextTokenStream extends XtextTokenStream {
 		afterSeek = true
 	}
 
+}
+
+@Data
+class PsiTokenStreamState {
+	String errorMessage
+	IElementType tokenType
+	PsiBuilder.Marker marker
 }

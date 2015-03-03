@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleRoot:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
 	ruleRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule Root
@@ -74,7 +73,6 @@ ruleRoot:
 entryRuleType:
 	{ markComposite(elementTypeProvider.getTypeElementType()); }
 	ruleType
-	{ doneComposite(); }
 	EOF;
 
 // Rule Type
@@ -102,18 +100,17 @@ ruleType:
 entryRuleAType:
 	{ markComposite(elementTypeProvider.getATypeElementType()); }
 	ruleAType
-	{ doneComposite(); }
 	EOF;
 
 // Rule AType
 ruleAType:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAType_FooKeyword_0ElementType());
 		}
 		otherlv_0='foo'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAType_FooKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -128,18 +125,17 @@ ruleAType:
 entryRuleAnotherType:
 	{ markComposite(elementTypeProvider.getAnotherTypeElementType()); }
 	ruleAnotherType
-	{ doneComposite(); }
 	EOF;
 
 // Rule AnotherType
 ruleAnotherType:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAnotherType_BarKeyword_0ElementType());
 		}
 		otherlv_0='bar'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAnotherType_BarKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{

@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleSubMain:
 	{ markComposite(elementTypeProvider.getSubMainElementType()); }
 	ruleSubMain
-	{ doneComposite(); }
 	EOF;
 
 // Rule SubMain
 ruleSubMain:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSubMain_LeftCurlyBracketKeyword_0ElementType());
 		}
 		otherlv_0='{'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSubMain_LeftCurlyBracketKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -77,11 +76,11 @@ ruleSubMain:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSubMain_RightCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='}'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getSubMain_RightCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -101,27 +100,26 @@ ruleSubMain:
 entryRuleAnotherSuperMain:
 	{ markComposite(elementTypeProvider.getAnotherSuperMainElementType()); }
 	ruleAnotherSuperMain
-	{ doneComposite(); }
 	EOF;
 
 // Rule AnotherSuperMain
 ruleAnotherSuperMain:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAnotherSuperMain_UpsKeyword_0ElementType());
 		}
 		otherlv_0='ups'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAnotherSuperMain_UpsKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -132,27 +130,26 @@ ruleAnotherSuperMain:
 entryRuleSuperMain:
 	{ markComposite(elementTypeProvider.getSuperMainElementType()); }
 	ruleSuperMain
-	{ doneComposite(); }
 	EOF;
 
 // Rule SuperMain
 ruleSuperMain:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
 		}
 		otherlv_0='super'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
