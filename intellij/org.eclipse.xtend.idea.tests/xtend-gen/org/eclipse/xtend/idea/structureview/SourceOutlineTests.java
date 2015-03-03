@@ -36,7 +36,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
     _builder.append("import java.lang.* class Foo {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("import declarations");
@@ -56,7 +56,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
     _builder.append("class Foo { def dispatch foo(String x) {\'\'} def dispatch foo(Object y) {\'\'} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -93,7 +93,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -154,7 +154,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -240,7 +240,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
       public void consume(final StructureViewComponent component) {
         component.setActionActive(AlphaSorter.ALPHA_SORTER_ID, true);
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Foo.xtend");
+        _builder.append("aaa.xtend");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("test");
