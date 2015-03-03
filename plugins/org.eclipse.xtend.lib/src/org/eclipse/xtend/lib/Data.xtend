@@ -1,5 +1,6 @@
 package org.eclipse.xtend.lib
 
+import java.lang.annotation.Documented
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor
@@ -13,7 +14,6 @@ import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
-import java.lang.annotation.Documented
 
 /**
  * This annotation is used by the Xtend compiler.
@@ -56,10 +56,10 @@ class DataProcessor extends AbstractClassProcessor {
 			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
-			addHashCode(dataFields, superConstructor !== null)
+			addHashCode(dataFields, hasSuperEquals)
 		}
 		if (!hasEquals) {
-			addEquals(dataFields, superConstructor !== null)
+			addEquals(dataFields, hasSuperEquals)
 		}
 		if (!hasToString) {
 			addDataToString
