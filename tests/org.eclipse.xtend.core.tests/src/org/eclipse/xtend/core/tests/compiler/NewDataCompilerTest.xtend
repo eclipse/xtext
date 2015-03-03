@@ -382,5 +382,17 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 		]
 	}
 	
-	
+	@Test def void testSuperClassWithoutEquals() {
+		'''
+			import org.eclipse.xtend.lib.annotations.Data
+			class Foo {
+			}
+			@Data class Bar extends Foo {
+				String bar = "Foo"
+			}
+		'''.compile[
+			assertFalse(getGeneratedCode("Bar"),getGeneratedCode("Bar").contains("super.equals"))
+			assertFalse(getGeneratedCode("Bar").contains("super.hashCode"))
+		]
+	}
 }

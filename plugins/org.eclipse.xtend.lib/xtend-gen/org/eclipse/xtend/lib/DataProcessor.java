@@ -13,7 +13,6 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -145,17 +144,15 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _not = (!_hasHashCode);
     if (_not) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
-      ResolvedConstructor _superConstructor = requiredArgsUtil.getSuperConstructor(it);
-      boolean _tripleNotEquals = (_superConstructor != null);
-      ehUtil.addHashCode(it, _dataFields_1, _tripleNotEquals);
+      boolean _hasSuperHashCode = ehUtil.hasSuperHashCode(it);
+      ehUtil.addHashCode(it, _dataFields_1, _hasSuperHashCode);
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
     boolean _not_1 = (!_hasEquals);
     if (_not_1) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
-      ResolvedConstructor _superConstructor_1 = requiredArgsUtil.getSuperConstructor(it);
-      boolean _tripleNotEquals_1 = (_superConstructor_1 != null);
-      ehUtil.addEquals(it, _dataFields_2, _tripleNotEquals_1);
+      boolean _hasSuperEquals = ehUtil.hasSuperEquals(it);
+      ehUtil.addEquals(it, _dataFields_2, _hasSuperEquals);
     }
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_2 = (!_hasToString);

@@ -1013,4 +1013,39 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testSuperClassWithoutEquals() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String bar = \"Foo\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          String _generatedCode_1 = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode_1.contains("super.equals");
+          Assert.assertFalse(_generatedCode, _contains);
+          String _generatedCode_2 = it.getGeneratedCode("Bar");
+          boolean _contains_1 = _generatedCode_2.contains("super.hashCode");
+          Assert.assertFalse(_contains_1);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
