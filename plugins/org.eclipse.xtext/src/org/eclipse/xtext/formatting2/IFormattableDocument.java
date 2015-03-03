@@ -50,16 +50,16 @@ import com.google.common.base.Predicate;
 public interface IFormattableDocument {
 
 	/**
-	 * Creates a delegate that allows to filter subsequent replacers based on the
-	 * given condition. Replacers are used if the predicate yields <code>true</code>.
+	 * Creates a new formattable document to which only replacers can be added for which the provided predicate yields
+	 * <code>true</code>.
 	 */
 	IFormattableDocument withReplacerFilter(Predicate<? super ITextReplacer> filter);
 
 	/**
-	 * Returns the region that is formatted. 
+	 * Returns the region this formattable document is responsible for.
 	 */
 	ITextSegment getRegion();
-	
+
 	/**
 	 * Returns the formatter that is being used.
 	 */
@@ -74,73 +74,79 @@ public interface IFormattableDocument {
 	 * Add a new replacer to the document.
 	 */
 	void addReplacer(ITextReplacer replacer);
-	
+
 	/**
 	 * Render the document.
+	 * 
+	 * This executes all contained replacers and returns the text replacements created by them.
 	 */
 	List<ITextReplacement> renderToTextReplacements();
 
 	/**
-	 * Append the given semantic region and obtain the formatting information for trailing
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it behind the given semanticRegion.
 	 * 
 	 * Returns the given semantic region.
 	 */
-	ISemanticRegion append(ISemanticRegion semanticRegion, Procedure1<? super IHiddenRegionFormatter> after);
+	ISemanticRegion append(ISemanticRegion appendAfter, Procedure1<? super IHiddenRegionFormatter> initializer);
 
 	/**
-	 * Append the given information and obtain the formatting information for trailing
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it behind the given semantic object.
 	 * 
 	 * Returns the given semantic object.
 	 */
-	<T extends EObject> T append(T semanticRegion, Procedure1<? super IHiddenRegionFormatter> after);
-	
+	<T extends EObject> T append(T appendAfter, Procedure1<? super IHiddenRegionFormatter> initializer);
+
 	/**
-	 * Append the given semantic region and obtain the formatting information for leading
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it before the given semanticRegion.
 	 * 
 	 * Returns the given semantic region.
 	 */
-	ISemanticRegion prepend(ISemanticRegion semanticRegion, Procedure1<? super IHiddenRegionFormatter> before);
+	ISemanticRegion prepend(ISemanticRegion prependBefore, Procedure1<? super IHiddenRegionFormatter> initializer);
 
 	/**
-	 * Append the given information and obtain the formatting information for leading
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it before the given semantic object.
 	 * 
 	 * Returns the given semantic object.
 	 */
-	<T extends EObject> T prepend(T semanticRegion, Procedure1<? super IHiddenRegionFormatter> before);
-	
+	<T extends EObject> T prepend(T prependBefore, Procedure1<? super IHiddenRegionFormatter> initializer);
+
 	/**
-	 * Append the given semantic region and obtain the formatting information for leading and trailing
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it before and after the given semantic
+	 * region.
 	 * 
 	 * Returns the given semantic region.
 	 */
 	ISemanticRegion surround(ISemanticRegion semanticRegion, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter);
 
 	/**
-	 * Append the given information and obtain the formatting information for leading and trailing
-	 * whitespace and comments from the given procedure.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it before and after the given semantic
+	 * object.
 	 * 
 	 * Returns the given semantic object.
 	 */
 	<T extends EObject> T surround(T owner, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter);
 
 	/**
-	 * Apply the formatting of the first sub formatter that succeeds to the given owner's region.
+	 * Apply the formatting of the first sub formatter that can successfully format the given owner's region.
+	 * 
+	 * A sub formatters execution is considered successful if it didn't throw an
+	 * {@link FormattingNotApplicableException}.
 	 */
 	void formatConditionally(EObject owner, ISubFormatter... formatters) throws FormattingNotApplicableException;
 
 	/**
-	 * Apply the formatting of the first sub formatter that succeeds to the given region.
+	 * Apply the formatting of the first sub formatter that can successfully format the given region.
+	 * 
+	 * A sub formatters execution is considered successful if it didn't throw an
+	 * {@link FormattingNotApplicableException}.
 	 */
 	void formatConditionally(int offset, int length, ISubFormatter... formatters)
 			throws FormattingNotApplicableException;
 
 	/**
-	 * Format the given hidden region with the initialized formatter.
+	 * Create a new {@link IHiddenRegionFormatting}, initialize it, and add it for the given hidden region.
+	 * 
+	 * Returns the given hidden region.
 	 */
 	IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<? super IHiddenRegionFormatter> init);
 

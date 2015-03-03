@@ -8,7 +8,11 @@
 package org.eclipse.xtext.formatting2;
 
 /**
- * Indicates that a condition formatting attempt failed.
+ * This exception can be thrown by a {@link ISubFormatter} to indicate that a conditional formatting attempt failed.
+ * Then, the next {@link ISubFormatter} tries to do the formatting.
+ * 
+ * @see IFormattableDocument#formatConditionally(org.eclipse.emf.ecore.EObject, ISubFormatter...)
+ * @see IFormattableDocument#formatConditionally(int, int, ISubFormatter...)
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */

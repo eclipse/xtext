@@ -36,13 +36,14 @@ public interface ITextReplacer {
 	};
 
 	/**
-	 * The replaced region.
+	 * The region this replace is responsible for.
+	 * 
+	 * All text replacements create by this replacer must be inside this region.
 	 */
 	ITextSegment getRegion();
 
 	/**
-	 * Creates the real replacements for this region. The given context
-	 * may be altered and returned afterwards.
+	 * Creates the real replacements for this region. The given context may be altered and returned afterwards.
 	 */
 	ITextReplacerContext createReplacements(ITextReplacerContext context);
 }

@@ -125,7 +125,7 @@ public interface IHiddenRegionFormatter {
 	void setNewLines(int minNewLines, int defaultNewLines, int maxNewLines);
 
 	/**
-	 * No space is added at this hidden region.
+	 * Format this hidden region with using no space (zero characters). 
 	 * Same as {@link #setSpace(String) setSpace("")}.
 	 */
 	void noSpace();
