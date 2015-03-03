@@ -8,10 +8,12 @@
 package org.eclipse.xtext.xbase.file
 
 import java.util.Collection
+import com.google.inject.ImplementedBy
 
 /**
  * Describes a workspace with contained projects.
  */
+@ImplementedBy(RuntimeWorkspaceConfigProvider)
 interface IWorkspaceConfig {
 	/**
 	 * Returns the root path in the file system.
