@@ -17,10 +17,10 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -51,9 +51,9 @@ public class JavaIoFileSystemTest {
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
         @Override
         public void apply(final JavaIOFileSystemSupport it) {
-          final Provider<IWorkspaceConfig> _function = new Provider<IWorkspaceConfig>() {
+          final Provider<WorkspaceConfig> _function = new Provider<WorkspaceConfig>() {
             @Override
-            public IWorkspaceConfig get() {
+            public WorkspaceConfig get() {
               String _absolutePath = tempDir.getAbsolutePath();
               SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
               final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {

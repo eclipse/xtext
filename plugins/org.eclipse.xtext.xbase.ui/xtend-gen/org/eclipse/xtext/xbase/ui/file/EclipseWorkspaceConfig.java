@@ -15,8 +15,8 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
 
 @Data
 @SuppressWarnings("all")
-public class EclipseWorkspaceConfig implements IWorkspaceConfig {
+public class EclipseWorkspaceConfig extends WorkspaceConfig {
   private final IWorkspaceRoot workspaceRoot;
   
   private final EclipseOutputConfigurationProvider configurationProvider;
@@ -80,7 +80,7 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   @Pure
   public int hashCode() {
     final int prime = 31;
-    int result = 1;
+    int result = super.hashCode();
     result = prime * result + ((this.workspaceRoot== null) ? 0 : this.workspaceRoot.hashCode());
     result = prime * result + ((this.configurationProvider== null) ? 0 : this.configurationProvider.hashCode());
     return result;
@@ -94,6 +94,8 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
     if (obj == null)
       return false;
     if (getClass() != obj.getClass())
+      return false;
+    if (!super.equals(obj))
       return false;
     EclipseWorkspaceConfig other = (EclipseWorkspaceConfig) obj;
     if (this.workspaceRoot == null) {
@@ -112,10 +114,10 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   @Override
   @Pure
   public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("workspaceRoot", this.workspaceRoot);
-    b.add("configurationProvider", this.configurationProvider);
-    return b.toString();
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
+    return result;
   }
   
   @Pure

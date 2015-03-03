@@ -17,8 +17,8 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -28,12 +28,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class FileLocationsImpl implements FileLocations {
   @Inject
   @Accessors
-  private Provider<IWorkspaceConfig> projectInformationProvider;
+  private Provider<WorkspaceConfig> projectInformationProvider;
   
   protected ProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
     final String string = _segments.get(0);
-    IWorkspaceConfig _get = this.projectInformationProvider.get();
+    WorkspaceConfig _get = this.projectInformationProvider.get();
     final ProjectConfig projectConfig = _get.getProject(string);
     boolean _equals = Objects.equal(projectConfig, null);
     if (_equals) {
@@ -78,11 +78,11 @@ public class FileLocationsImpl implements FileLocations {
   }
   
   @Pure
-  public Provider<IWorkspaceConfig> getProjectInformationProvider() {
+  public Provider<WorkspaceConfig> getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final Provider<IWorkspaceConfig> projectInformationProvider) {
+  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
 }

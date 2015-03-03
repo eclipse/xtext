@@ -17,9 +17,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 @Singleton
 @Accessors
-class RuntimeWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	File workspaceRoot = new File(".").absoluteFile.parentFile
-	IWorkspaceConfig workspaceConfig
+	WorkspaceConfig workspaceConfig
 	
 	override get() {
 		if (workspaceConfig == null) {

@@ -19,8 +19,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -88,7 +88,7 @@ public class EclipseWorkspaceConfigurationTest {
         }
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);
-      IWorkspaceConfig _get = provider.get();
+      WorkspaceConfig _get = provider.get();
       final ProjectConfig projectAConfig = _get.getProject("projectA");
       Path _path = new Path("/projectA/src/com/acme");
       final Path sourceBeforeInit = projectAConfig.getContainingSourceFolder(_path);

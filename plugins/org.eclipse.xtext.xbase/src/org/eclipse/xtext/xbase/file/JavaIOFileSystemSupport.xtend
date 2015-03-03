@@ -30,7 +30,7 @@ import org.eclipse.xtext.util.Files
  */
 class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	
-	@Inject @Accessors Provider<IWorkspaceConfig> projectInformationProvider
+	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
 	
 	override Iterable<? extends Path> getChildren(Path path) {
 		if (!path.exists) {
