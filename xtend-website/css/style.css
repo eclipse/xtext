@@ -71,6 +71,11 @@ h1 {
 	margin-bottom: 10px;
 }
 
+h1 small {
+	color: #717576;
+	margin-left: 12px;
+}
+
 h2 {
 	margin-top: 20px;
 	margin-bottom: 10px;
