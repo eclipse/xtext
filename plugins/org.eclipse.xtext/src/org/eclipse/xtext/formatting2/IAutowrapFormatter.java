@@ -16,7 +16,7 @@ package org.eclipse.xtext.formatting2;
  */
 public interface IAutowrapFormatter { // TODO: add region
 	/**
-	 * Called if the region is supposed to wrapped.
+	 * Called if the region is supposed to be wrapped.
 	 */
 	void format(IHiddenRegionFormatter wrapped, IFormattableDocument document);
 }
