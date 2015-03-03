@@ -1,0 +1,6 @@
+org.eclipse.xtext.enumrules.idea.lang.psi.impl.EnumRulesTestLanguageFileImpl:a.enumrulestestlanguage(0,25)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,25)
+    PsiElement(Model_ExistingKeyword_0_0_ELEMENT_TYPE)('existing')(0,8)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ExistingExistingEnumEnumRuleCall_0_1_0_ELEMENT_TYPE)(8,25)
+      PsiWhiteSpace(' ')(8,9)
+      PsiElement(ExistingEnum_DifferentNameEnumLiteralDeclaration_2_ELEMENT_TYPE)('DifferentLiteral')(9,25)

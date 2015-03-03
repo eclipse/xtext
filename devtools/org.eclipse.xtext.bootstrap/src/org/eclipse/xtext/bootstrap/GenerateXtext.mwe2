@@ -17,7 +17,7 @@ var runtimeProject = "../../plugins/${runtimeProjectName}"
 var uiProject = "../../plugins/${uiProjectName}"
 var file.extensions = "xtext,xtext2"
 
-var ideaProjectName = "${runtimeProjectName}.xtex.idea"
+var ideaProjectName = "${runtimeProjectName}.xtext.idea"
 var ideaProjectPath = "../../intellij/${ideaProjectName}"
 
 Workflow {
