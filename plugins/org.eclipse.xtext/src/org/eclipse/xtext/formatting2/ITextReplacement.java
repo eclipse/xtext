@@ -8,8 +8,7 @@
 package org.eclipse.xtext.formatting2;
 
 /**
- * A replacement describes which new text is to be inserted
- * at a given offset and length.
+ * A replacement describes which new text should substitute the text at the given offset and length.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8

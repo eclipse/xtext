@@ -27,10 +27,10 @@ import com.google.common.collect.Maps;
  * 
  * <p>A request carries information about:<p>
  * <ul>
- * <li> The {@link #textRegionAccess} which allows to obtain the to-be-formatted semantic model with text regions.</li>
+ * <li>The {@link #textRegionAccess} which allows to obtain the to-be-formatted semantic model with text regions.</li>
  * <li>{@link #preferences Preferences} with keys from e.g. {@link FormatterPreferenceKeys}.</li>
  * <li>{@link #regions} that describe how to restrict the text regions for which {@link ITextReplacement replacements} are produced.</li>
- * <li>An option to {@link #allowIdentityEdits()} which will disable to automated suppression of text replacements that do not cause changes.</li>
+ * <li>An option to {@link #allowIdentityEdits()} which will disable automated suppression of text replacements that do not cause changes.</li>
  * <li>A setting for green-field formatting ({@link #formatUndenfinedTokensOnly}): only format regions that have no whitespace information yet.</li>
  * </ul>
  * 
