@@ -12,7 +12,7 @@ import java.util.Collection
 /**
  * Describes a workspace with contained projects.
  */
-interface IWorkspaceConfig {
+abstract class WorkspaceConfig {
 	/**
 	 * Returns the root path in the file system.
 	 */

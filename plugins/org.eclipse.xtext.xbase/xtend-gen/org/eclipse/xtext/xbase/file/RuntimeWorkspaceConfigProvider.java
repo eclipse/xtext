@@ -12,9 +12,9 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.File;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -28,13 +28,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Singleton
 @Accessors
 @SuppressWarnings("all")
-public class RuntimeWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
   private File workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
   
-  private IWorkspaceConfig workspaceConfig;
+  private WorkspaceConfig workspaceConfig;
   
   @Override
-  public IWorkspaceConfig get() {
+  public WorkspaceConfig get() {
     boolean _equals = Objects.equal(this.workspaceConfig, null);
     if (_equals) {
       String _absolutePath = this.workspaceRoot.getAbsolutePath();
@@ -73,11 +73,11 @@ public class RuntimeWorkspaceConfigProvider implements Provider<IWorkspaceConfig
   }
   
   @Pure
-  public IWorkspaceConfig getWorkspaceConfig() {
+  public WorkspaceConfig getWorkspaceConfig() {
     return this.workspaceConfig;
   }
   
-  public void setWorkspaceConfig(final IWorkspaceConfig workspaceConfig) {
+  public void setWorkspaceConfig(final WorkspaceConfig workspaceConfig) {
     this.workspaceConfig = workspaceConfig;
   }
 }

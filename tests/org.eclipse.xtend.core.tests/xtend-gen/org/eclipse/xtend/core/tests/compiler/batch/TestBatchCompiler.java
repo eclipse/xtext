@@ -28,10 +28,10 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -178,7 +178,7 @@ public class TestBatchCompiler {
     try {
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("..");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -219,7 +219,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -285,7 +285,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("/tmp/ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -351,7 +351,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -417,7 +417,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -483,7 +483,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -553,7 +553,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("dir1/ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
@@ -639,7 +639,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath("ws/prj1");
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();

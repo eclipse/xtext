@@ -26,7 +26,7 @@ import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.idea.filesystem.IdeaFileSystemSupport;
 import org.eclipse.xtext.xbase.idea.filesystem.IdeaWorkspaceConfigProvider;
 
@@ -63,7 +63,7 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	}
 	
 	public void configureWorkspaceConfig(Binder binder) {
-		binder.bind(IWorkspaceConfig.class).toProvider(IdeaWorkspaceConfigProvider.class);
+		binder.bind(WorkspaceConfig.class).toProvider(IdeaWorkspaceConfigProvider.class);
 	}
 	
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {

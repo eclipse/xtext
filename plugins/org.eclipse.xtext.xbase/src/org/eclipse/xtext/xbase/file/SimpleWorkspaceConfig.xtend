@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.file
 
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Map
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * An implementation of the workspace config that can be configured by clients.
  */
 @Data
-class SimpleWorkspaceConfig implements IWorkspaceConfig {
+class SimpleWorkspaceConfig extends WorkspaceConfig {
 	String absoluteFileSystemPath
 	@Accessors(NONE)
 	Map<String, ProjectConfig> projects = newLinkedHashMap()

@@ -12,12 +12,12 @@ import com.google.inject.Provider;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfig;
 
 @SuppressWarnings("all")
-public class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
   @Accessors
   @Inject
   private IWorkspaceRoot workspaceRoot;
@@ -27,7 +27,7 @@ public class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig
   private EclipseOutputConfigurationProvider configurationProvider;
   
   @Override
-  public IWorkspaceConfig get() {
+  public WorkspaceConfig get() {
     final EclipseWorkspaceConfig result = new EclipseWorkspaceConfig(this.workspaceRoot, this.configurationProvider);
     return result;
   }

@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeId
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
@@ -135,7 +135,7 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	}
 	
 	public void configureWorkspaceConfigContribution(Binder binder) {
-		binder.bind(IWorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
+		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
 	}
 	
 	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {

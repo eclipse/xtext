@@ -14,20 +14,20 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class IdeaWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
   @Inject
   private IOutputConfigurationProvider outputConfigurations;
   
   @Override
-  public IWorkspaceConfig get() {
+  public WorkspaceConfig get() {
     SimpleWorkspaceConfig _xblockexpression = null;
     {
       ProjectManager _instance = ProjectManager.getInstance();

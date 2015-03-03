@@ -15,8 +15,8 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
 
 @Data
 @SuppressWarnings("all")
-public class EclipseWorkspaceConfig implements IWorkspaceConfig {
+public class EclipseWorkspaceConfig extends WorkspaceConfig {
   private final IWorkspaceRoot workspaceRoot;
   
   private final EclipseOutputConfigurationProvider configurationProvider;
@@ -112,10 +112,10 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   @Override
   @Pure
   public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("workspaceRoot", this.workspaceRoot);
-    b.add("configurationProvider", this.configurationProvider);
-    return b.toString();
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
+    return result;
   }
   
   @Pure

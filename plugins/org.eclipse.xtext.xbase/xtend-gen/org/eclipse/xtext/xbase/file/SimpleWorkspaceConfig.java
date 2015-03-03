@@ -13,8 +13,8 @@ import java.util.Map;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  */
 @Data
 @SuppressWarnings("all")
-public class SimpleWorkspaceConfig implements IWorkspaceConfig {
+public class SimpleWorkspaceConfig extends WorkspaceConfig {
   private final String absoluteFileSystemPath;
   
   @Accessors(AccessorType.NONE)
@@ -87,13 +87,14 @@ public class SimpleWorkspaceConfig implements IWorkspaceConfig {
   @Override
   @Pure
   public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("absoluteFileSystemPath", this.absoluteFileSystemPath);
-    b.add("projects", this.projects);
-    return b.toString();
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
+    return result;
   }
   
-  @Pure
+  @Override
+@Pure
   public String getAbsoluteFileSystemPath() {
     return this.absoluteFileSystemPath;
   }
