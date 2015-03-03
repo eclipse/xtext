@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.file.ProjectConfig;
  * Describes a workspace with contained projects.
  */
 @SuppressWarnings("all")
-public interface IWorkspaceConfig {
+public abstract class WorkspaceConfig {
   /**
    * Returns the root path in the file system.
    */

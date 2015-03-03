@@ -18,9 +18,9 @@ import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig
+import org.eclipse.xtext.xbase.file.WorkspaceConfig
 
-class IdeaWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 
 	@Inject
 	IOutputConfigurationProvider outputConfigurations
