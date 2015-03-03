@@ -13,17 +13,17 @@ import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.jdt.core.IClasspathEntry
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig
+import org.eclipse.xtext.xbase.file.WorkspaceConfig
 
-class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
+class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	
 	@Accessors @Inject IWorkspaceRoot workspaceRoot
 	
@@ -37,7 +37,7 @@ class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
 }
 
 @Data
-class EclipseWorkspaceConfig implements IWorkspaceConfig {
+class EclipseWorkspaceConfig extends WorkspaceConfig {
 	IWorkspaceRoot workspaceRoot
 	EclipseOutputConfigurationProvider configurationProvider
 	
