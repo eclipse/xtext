@@ -1,17 +1,17 @@
 package org.eclipse.xtend.lib.annotations
 
 import com.google.common.annotations.Beta
+import com.google.common.annotations.GwtCompatible
+import java.lang.annotation.Documented
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Modifier
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
-import org.eclipse.xtend.lib.macro.declaration.Modifier
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
-import java.lang.annotation.Documented
-import com.google.common.annotations.GwtCompatible
 
 /**
  * Turns this class into a read-only Data object. 
@@ -59,10 +59,10 @@ class DataProcessor extends AbstractClassProcessor {
 			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
-			addHashCode(dataFields, superConstructor !== null)
+			addHashCode(dataFields, hasSuperHashCode)
 		}
 		if (!hasEquals) {
-			addEquals(dataFields, superConstructor !== null)
+			addEquals(dataFields, hasSuperEquals)
 		}
 		if (!hasToString) {
 			if (superConstructor === null) {
