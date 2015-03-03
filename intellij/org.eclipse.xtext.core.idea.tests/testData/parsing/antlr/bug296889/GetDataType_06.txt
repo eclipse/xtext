@@ -13,5 +13,5 @@ org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889TestLanguageFileImpl:
         PsiElement(DataTypePreop_HyphenMinusHyphenMinusKeyword_0_ELEMENT_TYPE)('--')(14,16)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(DataTypePreop_DataTypeVariableParserRuleCall_1_ELEMENT_TYPE)(16,16)
           <empty list>
-  PsiErrorElement:mismatched input '<EOF>' expecting RULE_ID(16,16)
-    <empty list>
+    PsiErrorElement:mismatched input '<EOF>' expecting RULE_ID(16,16)
+      <empty list>

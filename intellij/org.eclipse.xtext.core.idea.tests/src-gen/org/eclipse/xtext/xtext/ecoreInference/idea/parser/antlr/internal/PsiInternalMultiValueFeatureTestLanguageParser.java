@@ -79,8 +79,7 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStart60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStart57); 
 
             }
 
@@ -97,15 +96,15 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "ruleStart"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:59:1: ruleStart : ( (lv_featureA_0_0= RULE_ID ) )+ ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:58:1: ruleStart : ( (lv_featureA_0_0= RULE_ID ) )+ ;
     public final void ruleStart() throws RecognitionException {
         Token lv_featureA_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:59:10: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:60:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:58:10: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:59:2: ( (lv_featureA_0_0= RULE_ID ) )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:60:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:59:2: ( (lv_featureA_0_0= RULE_ID ) )+
             int cnt1=0;
             loop1:
             do {
@@ -119,17 +118,17 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:61:3: (lv_featureA_0_0= RULE_ID )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:60:3: (lv_featureA_0_0= RULE_ID )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:61:3: (lv_featureA_0_0= RULE_ID )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:62:4: lv_featureA_0_0= RULE_ID
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:60:3: (lv_featureA_0_0= RULE_ID )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalMultiValueFeatureTestLanguage.g:61:4: lv_featureA_0_0= RULE_ID
             	    {
 
-            	    				markLeaf();
+            	    				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
             	    			
-            	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleStart85); 
+            	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleStart82); 
 
-            	    				doneLeaf(lv_featureA_0_0, elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
+            	    				doneLeaf(lv_featureA_0_0);
             	    			
 
             	    }
@@ -169,8 +168,8 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleStart_in_entryRuleStart54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStart60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleStart85 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStart57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleStart82 = new BitSet(new long[]{0x0000000000000012L});
     }
 
 

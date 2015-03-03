@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
@@ -94,11 +92,11 @@ ruleElement:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getElement_ValueValueTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_VALUE
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getElement_ValueValueTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)?
@@ -109,43 +107,42 @@ ruleElement:
 entryRuleVariable:
 	{ markComposite(elementTypeProvider.getVariableElementType()); }
 	ruleVariable
-	{ doneComposite(); }
 	EOF;
 
 // Rule Variable
 ruleVariable:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getVariable_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getVariable_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getVariable_FullStopKeyword_1_0_0ElementType());
 				}
 				kw='.'
 				{
-					doneLeaf(kw, elementTypeProvider.getVariable_FullStopKeyword_1_0_0ElementType());
+					doneLeaf(kw);
 				}
 				    |
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getVariable_HyphenMinusKeyword_1_0_1ElementType());
 				}
 				kw='-'
 				{
-					doneLeaf(kw, elementTypeProvider.getVariable_HyphenMinusKeyword_1_0_1ElementType());
+					doneLeaf(kw);
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getVariable_IDTerminalRuleCall_1_1ElementType());
 			}
 			this_ID_3=RULE_ID
 			{
-				doneLeaf(this_ID_3, elementTypeProvider.getVariable_IDTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_ID_3);
 			}
 		)*
 	)

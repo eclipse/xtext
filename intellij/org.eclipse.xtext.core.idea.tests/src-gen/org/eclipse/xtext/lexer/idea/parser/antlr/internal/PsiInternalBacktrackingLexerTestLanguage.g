@@ -59,7 +59,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -79,11 +78,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
 				}
 				lv_ycs_1_0=RULE_YC
 				{
-					doneLeaf(lv_ycs_1_0, elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_ycs_1_0);
 				}
 			)
 		)*
@@ -112,22 +111,22 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
 				}
 				lv_ys_4_0=RULE_CHARY
 				{
-					doneLeaf(lv_ys_4_0, elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
+					doneLeaf(lv_ys_4_0);
 				}
 			)
 		)*
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
 				}
 				lv_as_5_0=RULE_CHARA
 				{
-					doneLeaf(lv_as_5_0, elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
+					doneLeaf(lv_as_5_0);
 				}
 			)
 		)*
@@ -138,7 +137,6 @@ ruleModel:
 entryRuleAb:
 	{ markComposite(elementTypeProvider.getAbElementType()); }
 	ruleAb
-	{ doneComposite(); }
 	EOF;
 
 // Rule Ab
@@ -147,22 +145,22 @@ ruleAb:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
 				}
 				lv_x_0_0=RULE_CHARA
 				{
-					doneLeaf(lv_x_0_0, elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_x_0_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
 				}
 				lv_y_1_0=RULE_CHARB
 				{
-					doneLeaf(lv_y_1_0, elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_y_1_0);
 				}
 			)
 		)
@@ -173,7 +171,6 @@ ruleAb:
 entryRuleXb:
 	{ markComposite(elementTypeProvider.getXbElementType()); }
 	ruleXb
-	{ doneComposite(); }
 	EOF;
 
 // Rule Xb
@@ -182,22 +179,22 @@ ruleXb:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
 				}
 				lv_x_0_0=RULE_CHARX
 				{
-					doneLeaf(lv_x_0_0, elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_x_0_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
 				}
 				lv_y_1_0=RULE_CHARB
 				{
-					doneLeaf(lv_y_1_0, elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_y_1_0);
 				}
 			)
 		)
@@ -209,21 +206,21 @@ ruleEnumName:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumName_AbcEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='Abc'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getEnumName_AbcEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEnumName_EfgEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='Efg'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getEnumName_EfgEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 	)

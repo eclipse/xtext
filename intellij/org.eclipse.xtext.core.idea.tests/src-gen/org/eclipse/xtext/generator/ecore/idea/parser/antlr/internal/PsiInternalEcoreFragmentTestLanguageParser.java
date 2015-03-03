@@ -80,8 +80,7 @@ public class PsiInternalEcoreFragmentTestLanguageParser extends AbstractPsiAntlr
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecond60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecond57); 
 
             }
 
@@ -98,31 +97,31 @@ public class PsiInternalEcoreFragmentTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleSecond"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:59:1: ruleSecond : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:58:1: ruleSecond : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
     public final void ruleSecond() throws RecognitionException {
         Token lv_name_0_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:59:11: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:60:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:58:11: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:60:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:61:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:61:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:62:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:62:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:63:5: lv_name_0_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:62:5: lv_name_0_0= RULE_ID
             {
 
-            					markLeaf();
+            					markLeaf(elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond92); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond89); 
 
-            					doneLeaf(lv_name_0_0, elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
+            					doneLeaf(lv_name_0_0);
             				
 
             }
@@ -131,24 +130,24 @@ public class PsiInternalEcoreFragmentTestLanguageParser extends AbstractPsiAntlr
             }
 
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getSecond_FirstKeyword_1ElementType());
             		
-            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleSecond117); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleSecond114); 
 
-            			doneLeaf(otherlv_1, elementTypeProvider.getSecond_FirstKeyword_1ElementType());
+            			doneLeaf(otherlv_1);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:79:3: ( (otherlv_2= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:80:4: (otherlv_2= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:78:3: ( (otherlv_2= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:79:4: (otherlv_2= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:80:4: (otherlv_2= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:81:5: otherlv_2= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:79:4: (otherlv_2= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalEcoreFragmentTestLanguage.g:80:5: otherlv_2= RULE_ID
             {
 
-            					markLeaf();
+            					markLeaf(elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType());
             				
-            otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond144); 
+            otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond141); 
 
-            					doneLeaf(otherlv_2, elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType());
+            					doneLeaf(otherlv_2);
             				
 
             }
@@ -181,10 +180,10 @@ public class PsiInternalEcoreFragmentTestLanguageParser extends AbstractPsiAntlr
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleSecond_in_entryRuleSecond54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSecond60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond92 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleSecond117 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond144 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSecond57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond89 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_11_in_ruleSecond114 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond141 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

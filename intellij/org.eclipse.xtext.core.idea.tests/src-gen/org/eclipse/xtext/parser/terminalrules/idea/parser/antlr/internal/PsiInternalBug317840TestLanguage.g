@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,18 +73,17 @@ ruleModel:
 entryRuleElement:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
 	ruleElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule Element
 ruleElement:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getElement_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getElement_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -140,7 +138,6 @@ ruleElement:
 entryRuleNamed:
 	{ markComposite(elementTypeProvider.getNamedElementType()); }
 	ruleNamed
-	{ doneComposite(); }
 	EOF;
 
 // Rule Named
@@ -164,7 +161,6 @@ entryRuleNAME@init {
 }:
 	{ markComposite(elementTypeProvider.getNAMEElementType()); }
 	ruleNAME
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -176,26 +172,26 @@ ruleNAME@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNAME_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getNAME_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNAME_FullStopKeyword_1_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getNAME_FullStopKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNAME_IDTerminalRuleCall_1_1ElementType());
 			}
 			this_ID_2=RULE_ID
 			{
-				doneLeaf(this_ID_2, elementTypeProvider.getNAME_IDTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_ID_2);
 			}
 		)*
 	)

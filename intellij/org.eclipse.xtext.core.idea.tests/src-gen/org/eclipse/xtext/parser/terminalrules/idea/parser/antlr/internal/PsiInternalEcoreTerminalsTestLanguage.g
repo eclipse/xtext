@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,20 +59,20 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_IntKeyword_0_0ElementType());
 			}
 			otherlv_0='int'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_IntKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_intValues_1_0=RULE_EINT
 					{
-						doneLeaf(lv_intValues_1_0, elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
+						doneLeaf(lv_intValues_1_0);
 					}
 				)
 			)
@@ -81,20 +80,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DoubleKeyword_1_0ElementType());
 			}
 			otherlv_2='double'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_DoubleKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
 					}
 					lv_doubleValues_3_0=RULE_EDOUBLE
 					{
-						doneLeaf(lv_doubleValues_3_0, elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
+						doneLeaf(lv_doubleValues_3_0);
 					}
 				)
 			)
@@ -102,20 +101,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DateKeyword_2_0ElementType());
 			}
 			otherlv_4='date'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_DateKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
 					}
 					lv_dateValues_5_0=RULE_EDATE
 					{
-						doneLeaf(lv_dateValues_5_0, elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
+						doneLeaf(lv_dateValues_5_0);
 					}
 				)
 			)

@@ -81,8 +81,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
 
             }
 
@@ -99,7 +98,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:59:1: ruleModel : ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_foo_1_0=null;
@@ -109,10 +108,10 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
         Token lv_bar_5_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:59:10: ( ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:60:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:58:10: ( ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:59:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:60:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:59:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -130,30 +129,30 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:61:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:60:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:61:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:62:4: otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:60:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:61:4: otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_FooKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel85); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel82); 
 
-                    				doneLeaf(otherlv_0, elementTypeProvider.getModel_FooKeyword_0_0ElementType());
+                    				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:69:4: ( (lv_foo_1_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:70:5: (lv_foo_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:68:4: ( (lv_foo_1_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:69:5: (lv_foo_1_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:70:5: (lv_foo_1_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:71:6: lv_foo_1_0= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:69:5: (lv_foo_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:70:6: lv_foo_1_0= RULE_ID
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
                     					
-                    lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel117); 
+                    lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel114); 
 
-                    						doneLeaf(lv_foo_1_0, elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
+                    						doneLeaf(lv_foo_1_0);
                     					
 
                     }
@@ -161,7 +160,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:80:4: (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:79:4: (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -170,27 +169,27 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:81:5: otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:80:5: otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) )
                             {
 
-                            					markLeaf();
+                            					markLeaf(elementTypeProvider.getModel_BarKeyword_0_2_0ElementType());
                             				
-                            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel154); 
+                            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel151); 
 
-                            					doneLeaf(otherlv_2, elementTypeProvider.getModel_BarKeyword_0_2_0ElementType());
+                            					doneLeaf(otherlv_2);
                             				
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:88:5: ( (lv_bar_3_0= RULE_ID ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:89:6: (lv_bar_3_0= RULE_ID )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:87:5: ( (lv_bar_3_0= RULE_ID ) )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:88:6: (lv_bar_3_0= RULE_ID )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:89:6: (lv_bar_3_0= RULE_ID )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:90:7: lv_bar_3_0= RULE_ID
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:88:6: (lv_bar_3_0= RULE_ID )
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:89:7: lv_bar_3_0= RULE_ID
                             {
 
-                            							markLeaf();
+                            							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
                             						
-                            lv_bar_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel191); 
+                            lv_bar_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel188); 
 
-                            							doneLeaf(lv_bar_3_0, elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
+                            							doneLeaf(lv_bar_3_0);
                             						
 
                             }
@@ -211,30 +210,30 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:102:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:101:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:102:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:103:4: otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:101:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:102:4: otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_BarKeyword_1_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel246); 
+                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel243); 
 
-                    				doneLeaf(otherlv_4, elementTypeProvider.getModel_BarKeyword_1_0ElementType());
+                    				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:110:4: ( (lv_bar_5_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:111:5: (lv_bar_5_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:109:4: ( (lv_bar_5_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:110:5: (lv_bar_5_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:111:5: (lv_bar_5_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:112:6: lv_bar_5_0= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:110:5: (lv_bar_5_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalSerializationBug269362TestLanguage.g:111:6: lv_bar_5_0= RULE_ID
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
                     					
-                    lv_bar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel278); 
+                    lv_bar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel275); 
 
-                    						doneLeaf(lv_bar_5_0, elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
+                    						doneLeaf(lv_bar_5_0);
                     					
 
                     }
@@ -273,13 +272,13 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel85 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel117 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleModel154 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel191 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleModel246 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel278 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleModel82 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel114 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_12_in_ruleModel151 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel188 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleModel243 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel275 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

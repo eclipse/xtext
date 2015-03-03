@@ -79,8 +79,7 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEReference60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEReference57); 
 
             }
 
@@ -97,26 +96,26 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleEReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:1: ruleEReference : ( (otherlv_0= RULE_ID ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:58:1: ruleEReference : ( (otherlv_0= RULE_ID ) ) ;
     public final void ruleEReference() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:15: ( ( (otherlv_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:58:15: ( ( (otherlv_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:2: ( (otherlv_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:3: (otherlv_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:62:4: otherlv_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/bug419429/idea/parser/antlr/internal/PsiInternalBug419429.g:61:4: otherlv_0= RULE_ID
             {
 
-            				markLeaf();
+            				markLeaf(elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
             			
-            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEReference85); 
+            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEReference82); 
 
-            				doneLeaf(otherlv_0, elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
+            				doneLeaf(otherlv_0);
             			
 
             }
@@ -146,8 +145,8 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleEReference_in_entryRuleEReference54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEReference60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEReference85 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEReference57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleEReference82 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

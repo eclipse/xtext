@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleEntry:
 	{ markComposite(elementTypeProvider.getEntryElementType()); }
 	ruleEntry
-	{ doneComposite(); }
 	EOF;
 
 // Rule Entry
@@ -74,7 +73,6 @@ ruleEntry:
 entryRuleAlts:
 	{ markComposite(elementTypeProvider.getAltsElementType()); }
 	ruleAlts
-	{ doneComposite(); }
 	EOF;
 
 // Rule Alts
@@ -110,27 +108,26 @@ ruleAlts:
 entryRuleLookAhead0:
 	{ markComposite(elementTypeProvider.getLookAhead0ElementType()); }
 	ruleLookAhead0
-	{ doneComposite(); }
 	EOF;
 
 // Rule LookAhead0
 ruleLookAhead0:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLookAhead0_BarKeyword_0ElementType());
 		}
 		otherlv_0='bar'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead0_BarKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead0_XAKeyword_1_0ElementType());
 				}
 				lv_x_1_0='a'
 				{
-					doneLeaf(lv_x_1_0, elementTypeProvider.getLookAhead0_XAKeyword_1_0ElementType());
+					doneLeaf(lv_x_1_0);
 				}
 			)
 		)
@@ -141,18 +138,17 @@ ruleLookAhead0:
 entryRuleLookAhead1:
 	{ markComposite(elementTypeProvider.getLookAhead1ElementType()); }
 	ruleLookAhead1
-	{ doneComposite(); }
 	EOF;
 
 // Rule LookAhead1
 ruleLookAhead1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLookAhead1_FooKeyword_0ElementType());
 		}
 		otherlv_0='foo'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead1_FooKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -168,22 +164,22 @@ ruleLookAhead1:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead1_XBKeyword_2_0ElementType());
 				}
 				lv_x_2_0='b'
 				{
-					doneLeaf(lv_x_2_0, elementTypeProvider.getLookAhead1_XBKeyword_2_0ElementType());
+					doneLeaf(lv_x_2_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead1_ZDKeyword_3_0ElementType());
 				}
 				lv_z_3_0='d'
 				{
-					doneLeaf(lv_z_3_0, elementTypeProvider.getLookAhead1_ZDKeyword_3_0ElementType());
+					doneLeaf(lv_z_3_0);
 				}
 			)
 		)
@@ -194,7 +190,6 @@ ruleLookAhead1:
 entryRuleLookAhead2:
 	{ markComposite(elementTypeProvider.getLookAhead2ElementType()); }
 	ruleLookAhead2
-	{ doneComposite(); }
 	EOF;
 
 // Rule LookAhead2
@@ -204,11 +199,11 @@ ruleLookAhead2:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getLookAhead2_ZFooKeyword_0_0_0ElementType());
 					}
 					lv_z_0_0='foo'
 					{
-						doneLeaf(lv_z_0_0, elementTypeProvider.getLookAhead2_ZFooKeyword_0_0_0ElementType());
+						doneLeaf(lv_z_0_0);
 					}
 				)
 			)
@@ -216,21 +211,21 @@ ruleLookAhead2:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getLookAhead2_ZBarKeyword_0_1_0ElementType());
 					}
 					lv_z_1_0='bar'
 					{
-						doneLeaf(lv_z_1_0, elementTypeProvider.getLookAhead2_ZBarKeyword_0_1_0ElementType());
+						doneLeaf(lv_z_1_0);
 					}
 				)
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLookAhead2_CKeyword_1ElementType());
 		}
 		otherlv_2='c'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getLookAhead2_CKeyword_1ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -239,34 +234,33 @@ ruleLookAhead2:
 entryRuleLookAhead3:
 	{ markComposite(elementTypeProvider.getLookAhead3ElementType()); }
 	ruleLookAhead3
-	{ doneComposite(); }
 	EOF;
 
 // Rule LookAhead3
 ruleLookAhead3:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLookAhead3_FooKeyword_0ElementType());
 		}
 		otherlv_0='foo'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getLookAhead3_FooKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLookAhead3_BarKeyword_1ElementType());
 		}
 		otherlv_1='bar'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getLookAhead3_BarKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead3_XBKeyword_2_0ElementType());
 				}
 				lv_x_2_0='b'
 				{
-					doneLeaf(lv_x_2_0, elementTypeProvider.getLookAhead3_XBKeyword_2_0ElementType());
+					doneLeaf(lv_x_2_0);
 				}
 			)
 		)
@@ -288,7 +282,6 @@ ruleLookAhead3:
 entryRuleLookAhead4:
 	{ markComposite(elementTypeProvider.getLookAhead4ElementType()); }
 	ruleLookAhead4
-	{ doneComposite(); }
 	EOF;
 
 // Rule LookAhead4
@@ -297,11 +290,11 @@ ruleLookAhead4:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead4_XCKeyword_0_0ElementType());
 				}
 				lv_x_0_0='c'
 				{
-					doneLeaf(lv_x_0_0, elementTypeProvider.getLookAhead4_XCKeyword_0_0ElementType());
+					doneLeaf(lv_x_0_0);
 				}
 			)
 		)
@@ -309,11 +302,11 @@ ruleLookAhead4:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLookAhead4_XDKeyword_1_0ElementType());
 				}
 				lv_x_1_0='d'
 				{
-					doneLeaf(lv_x_1_0, elementTypeProvider.getLookAhead4_XDKeyword_1_0ElementType());
+					doneLeaf(lv_x_1_0);
 				}
 			)
 		)

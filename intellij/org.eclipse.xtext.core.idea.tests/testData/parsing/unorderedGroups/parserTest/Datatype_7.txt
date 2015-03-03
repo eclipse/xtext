@@ -7,5 +7,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroup
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ValueUnorderedDatatypeParserRuleCall_1_14_1_0_ELEMENT_TYPE)(9,11)
         PsiWhiteSpace(' ')(9,10)
         PsiElement(UnorderedDatatype_DigitSevenKeyword_6_0_ELEMENT_TYPE)('7')(10,11)
-  PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(11,11)
-    <empty list>
+    PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(11,11)
+      <empty list>

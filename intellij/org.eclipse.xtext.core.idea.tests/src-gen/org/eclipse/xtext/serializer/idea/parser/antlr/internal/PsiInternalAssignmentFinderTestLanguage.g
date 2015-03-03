@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,11 +59,11 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitZeroKeyword_0_0ElementType());
 			}
 			otherlv_0='#00'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_NumberSignDigitZeroDigitZeroKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -81,11 +80,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitOneKeyword_1_0ElementType());
 			}
 			otherlv_2='#01'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_NumberSignDigitZeroDigitOneKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -102,11 +101,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitTwoKeyword_2_0ElementType());
 			}
 			otherlv_4='#02'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_NumberSignDigitZeroDigitTwoKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -123,11 +122,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitThreeKeyword_3_0ElementType());
 			}
 			otherlv_6='#03'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getModel_NumberSignDigitZeroDigitThreeKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
@@ -144,11 +143,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitFourKeyword_4_0ElementType());
 			}
 			otherlv_8='#04'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getModel_NumberSignDigitZeroDigitFourKeyword_4_0ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
@@ -165,11 +164,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitFiveKeyword_5_0ElementType());
 			}
 			otherlv_10='#05'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getModel_NumberSignDigitZeroDigitFiveKeyword_5_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
@@ -186,11 +185,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitSixKeyword_6_0ElementType());
 			}
 			otherlv_12='#06'
 			{
-				doneLeaf(otherlv_12, elementTypeProvider.getModel_NumberSignDigitZeroDigitSixKeyword_6_0ElementType());
+				doneLeaf(otherlv_12);
 			}
 			(
 				(
@@ -207,11 +206,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitSevenKeyword_7_0ElementType());
 			}
 			otherlv_14='#07'
 			{
-				doneLeaf(otherlv_14, elementTypeProvider.getModel_NumberSignDigitZeroDigitSevenKeyword_7_0ElementType());
+				doneLeaf(otherlv_14);
 			}
 			(
 				(
@@ -228,11 +227,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitEightKeyword_8_0ElementType());
 			}
 			otherlv_16='#08'
 			{
-				doneLeaf(otherlv_16, elementTypeProvider.getModel_NumberSignDigitZeroDigitEightKeyword_8_0ElementType());
+				doneLeaf(otherlv_16);
 			}
 			(
 				(
@@ -249,11 +248,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroDigitNineKeyword_9_0ElementType());
 			}
 			otherlv_18='#09'
 			{
-				doneLeaf(otherlv_18, elementTypeProvider.getModel_NumberSignDigitZeroDigitNineKeyword_9_0ElementType());
+				doneLeaf(otherlv_18);
 			}
 			(
 				(
@@ -274,7 +273,6 @@ ruleModel:
 entryRuleKeywordVal:
 	{ markComposite(elementTypeProvider.getKeywordValElementType()); }
 	ruleKeywordVal
-	{ doneComposite(); }
 	EOF;
 
 // Rule KeywordVal
@@ -283,11 +281,11 @@ ruleKeywordVal:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKeywordVal_KwKw1Keyword_0_0ElementType());
 				}
 				lv_kw_0_0='kw1'
 				{
-					doneLeaf(lv_kw_0_0, elementTypeProvider.getKeywordVal_KwKw1Keyword_0_0ElementType());
+					doneLeaf(lv_kw_0_0);
 				}
 			)
 		)
@@ -295,11 +293,11 @@ ruleKeywordVal:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKeywordVal_KwKw2Keyword_1_0ElementType());
 				}
 				lv_kw_1_0='kw2'
 				{
-					doneLeaf(lv_kw_1_0, elementTypeProvider.getKeywordVal_KwKw2Keyword_1_0ElementType());
+					doneLeaf(lv_kw_1_0);
 				}
 			)
 		)
@@ -310,7 +308,6 @@ ruleKeywordVal:
 entryRuleTerminalVal:
 	{ markComposite(elementTypeProvider.getTerminalValElementType()); }
 	ruleTerminalVal
-	{ doneComposite(); }
 	EOF;
 
 // Rule TerminalVal
@@ -319,11 +316,11 @@ ruleTerminalVal:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalVal_TermTerminal1TerminalRuleCall_0_0ElementType());
 				}
 				lv_term_0_0=RULE_TERMINAL1
 				{
-					doneLeaf(lv_term_0_0, elementTypeProvider.getTerminalVal_TermTerminal1TerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_term_0_0);
 				}
 			)
 		)
@@ -331,11 +328,11 @@ ruleTerminalVal:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalVal_TermTerminal2TerminalRuleCall_1_0ElementType());
 				}
 				lv_term_1_0=RULE_TERMINAL2
 				{
-					doneLeaf(lv_term_1_0, elementTypeProvider.getTerminalVal_TermTerminal2TerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_term_1_0);
 				}
 			)
 		)
@@ -343,11 +340,11 @@ ruleTerminalVal:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalVal_TermFooKeyword_2_0ElementType());
 				}
 				lv_term_2_0='%foo'
 				{
-					doneLeaf(lv_term_2_0, elementTypeProvider.getTerminalVal_TermFooKeyword_2_0ElementType());
+					doneLeaf(lv_term_2_0);
 				}
 			)
 		)
@@ -358,7 +355,6 @@ ruleTerminalVal:
 entryRuleEnumVal:
 	{ markComposite(elementTypeProvider.getEnumValElementType()); }
 	ruleEnumVal
-	{ doneComposite(); }
 	EOF;
 
 // Rule EnumVal
@@ -394,7 +390,6 @@ ruleEnumVal:
 entryRuleKeywordBool:
 	{ markComposite(elementTypeProvider.getKeywordBoolElementType()); }
 	ruleKeywordBool
-	{ doneComposite(); }
 	EOF;
 
 // Rule KeywordBool
@@ -403,11 +398,11 @@ ruleKeywordBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKeywordBool_KwKw1Keyword_0_0ElementType());
 				}
 				lv_kw_0_0='kw1'
 				{
-					doneLeaf(lv_kw_0_0, elementTypeProvider.getKeywordBool_KwKw1Keyword_0_0ElementType());
+					doneLeaf(lv_kw_0_0);
 				}
 			)
 		)
@@ -415,11 +410,11 @@ ruleKeywordBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKeywordBool_KwKw2Keyword_1_0ElementType());
 				}
 				lv_kw_1_0='kw2'
 				{
-					doneLeaf(lv_kw_1_0, elementTypeProvider.getKeywordBool_KwKw2Keyword_1_0ElementType());
+					doneLeaf(lv_kw_1_0);
 				}
 			)
 		)
@@ -430,7 +425,6 @@ ruleKeywordBool:
 entryRuleTerminalBool:
 	{ markComposite(elementTypeProvider.getTerminalBoolElementType()); }
 	ruleTerminalBool
-	{ doneComposite(); }
 	EOF;
 
 // Rule TerminalBool
@@ -439,11 +433,11 @@ ruleTerminalBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalBool_TermTerminal1TerminalRuleCall_0_0ElementType());
 				}
 				lv_term_0_0=RULE_TERMINAL1
 				{
-					doneLeaf(lv_term_0_0, elementTypeProvider.getTerminalBool_TermTerminal1TerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_term_0_0);
 				}
 			)
 		)
@@ -451,11 +445,11 @@ ruleTerminalBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalBool_TermTerminal2TerminalRuleCall_1_0ElementType());
 				}
 				lv_term_1_0=RULE_TERMINAL2
 				{
-					doneLeaf(lv_term_1_0, elementTypeProvider.getTerminalBool_TermTerminal2TerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_term_1_0);
 				}
 			)
 		)
@@ -463,11 +457,11 @@ ruleTerminalBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTerminalBool_TermFooKeyword_2_0ElementType());
 				}
 				lv_term_2_0='%foo'
 				{
-					doneLeaf(lv_term_2_0, elementTypeProvider.getTerminalBool_TermFooKeyword_2_0ElementType());
+					doneLeaf(lv_term_2_0);
 				}
 			)
 		)
@@ -478,7 +472,6 @@ ruleTerminalBool:
 entryRuleEnumBool:
 	{ markComposite(elementTypeProvider.getEnumBoolElementType()); }
 	ruleEnumBool
-	{ doneComposite(); }
 	EOF;
 
 // Rule EnumBool
@@ -514,7 +507,6 @@ ruleEnumBool:
 entryRuleMixedBool:
 	{ markComposite(elementTypeProvider.getMixedBoolElementType()); }
 	ruleMixedBool
-	{ doneComposite(); }
 	EOF;
 
 // Rule MixedBool
@@ -523,11 +515,11 @@ ruleMixedBool:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMixedBool_ValKw1Keyword_0_0ElementType());
 				}
 				lv_val_0_0='kw1'
 				{
-					doneLeaf(lv_val_0_0, elementTypeProvider.getMixedBool_ValKw1Keyword_0_0ElementType());
+					doneLeaf(lv_val_0_0);
 				}
 			)
 		)
@@ -550,26 +542,25 @@ ruleMixedBool:
 entryRuleBoolean:
 	{ markComposite(elementTypeProvider.getBooleanElementType()); }
 	ruleBoolean
-	{ doneComposite(); }
 	EOF;
 
 // Rule Boolean
 ruleBoolean:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBoolean_TrueKeyword_0ElementType());
 		}
 		kw='true'
 		{
-			doneLeaf(kw, elementTypeProvider.getBoolean_TrueKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBoolean_FalseKeyword_1ElementType());
 		}
 		kw='false'
 		{
-			doneLeaf(kw, elementTypeProvider.getBoolean_FalseKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -578,7 +569,6 @@ ruleBoolean:
 entryRuleMixedValue:
 	{ markComposite(elementTypeProvider.getMixedValueElementType()); }
 	ruleMixedValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule MixedValue
@@ -614,17 +604,16 @@ ruleMixedValue:
 entryRuleDatEnum:
 	{ markComposite(elementTypeProvider.getDatEnumElementType()); }
 	ruleDatEnum
-	{ doneComposite(); }
 	EOF;
 
 // Rule DatEnum
 ruleDatEnum:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getDatEnum_Lit3KeywordElementType());
 	}
 	kw='lit3'
 	{
-		doneLeaf(kw, elementTypeProvider.getDatEnum_Lit3KeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -632,7 +621,6 @@ ruleDatEnum:
 entryRuleContainmentRef:
 	{ markComposite(elementTypeProvider.getContainmentRefElementType()); }
 	ruleContainmentRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule ContainmentRef
@@ -668,27 +656,26 @@ ruleContainmentRef:
 entryRuleContainmentRef1:
 	{ markComposite(elementTypeProvider.getContainmentRef1ElementType()); }
 	ruleContainmentRef1
-	{ doneComposite(); }
 	EOF;
 
 // Rule ContainmentRef1
 ruleContainmentRef1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getContainmentRef1_Kw1Keyword_0ElementType());
 		}
 		otherlv_0='kw1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getContainmentRef1_Kw1Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getContainmentRef1_Val1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val1_1_0=RULE_ID
 				{
-					doneLeaf(lv_val1_1_0, elementTypeProvider.getContainmentRef1_Val1IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val1_1_0);
 				}
 			)
 		)
@@ -699,27 +686,26 @@ ruleContainmentRef1:
 entryRuleContainmentRef2:
 	{ markComposite(elementTypeProvider.getContainmentRef2ElementType()); }
 	ruleContainmentRef2
-	{ doneComposite(); }
 	EOF;
 
 // Rule ContainmentRef2
 ruleContainmentRef2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getContainmentRef2_Kw2Keyword_0ElementType());
 		}
 		otherlv_0='kw2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getContainmentRef2_Kw2Keyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getContainmentRef2_Val2IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val2_1_0=RULE_ID
 				{
-					doneLeaf(lv_val2_1_0, elementTypeProvider.getContainmentRef2_Val2IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val2_1_0);
 				}
 			)
 		)
@@ -730,7 +716,6 @@ ruleContainmentRef2:
 entryRuleCrossRef:
 	{ markComposite(elementTypeProvider.getCrossRefElementType()); }
 	ruleCrossRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule CrossRef
@@ -740,19 +725,19 @@ ruleCrossRef:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getCrossRef_NameTerminal1TerminalRuleCall_0_0_0ElementType());
 					}
 					lv_name_0_1=RULE_TERMINAL1
 					{
-						doneLeaf(lv_name_0_1, elementTypeProvider.getCrossRef_NameTerminal1TerminalRuleCall_0_0_0ElementType());
+						doneLeaf(lv_name_0_1);
 					}
 					    |
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getCrossRef_NameTerminal2TerminalRuleCall_0_0_1ElementType());
 					}
 					lv_name_0_2=RULE_TERMINAL2
 					{
-						doneLeaf(lv_name_0_2, elementTypeProvider.getCrossRef_NameTerminal2TerminalRuleCall_0_0_1ElementType());
+						doneLeaf(lv_name_0_2);
 					}
 				)
 			)
@@ -761,11 +746,11 @@ ruleCrossRef:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getCrossRef_CrossRefCrossRefCrossReference_1_0_0ElementType());
 					}
 					otherlv_1=RULE_TERMINAL1
 					{
-						doneLeaf(otherlv_1, elementTypeProvider.getCrossRef_CrossRefCrossRefCrossReference_1_0_0ElementType());
+						doneLeaf(otherlv_1);
 					}
 				)
 			)
@@ -773,11 +758,11 @@ ruleCrossRef:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getCrossRef_CrossRefCrossRefCrossReference_1_1_0ElementType());
 					}
 					otherlv_2=RULE_TERMINAL2
 					{
-						doneLeaf(otherlv_2, elementTypeProvider.getCrossRef_CrossRefCrossRefCrossReference_1_1_0ElementType());
+						doneLeaf(otherlv_2);
 					}
 				)
 			)
@@ -789,11 +774,11 @@ ruleCrossRef:
 ruleEnum1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEnum1_Lit1EnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='lit1'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getEnum1_Lit1EnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;
@@ -802,11 +787,11 @@ ruleEnum1:
 ruleEnum2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEnum2_Lit2EnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='lit2'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getEnum2_Lit2EnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;

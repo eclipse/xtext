@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -70,11 +69,11 @@ ruleModel:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_FavouriteKeyword_1ElementType());
 		}
 		otherlv_1='favourite'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getModel_FavouriteKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -94,18 +93,17 @@ ruleModel:
 entryRuleGreeting:
 	{ markComposite(elementTypeProvider.getGreetingElementType()); }
 	ruleGreeting
-	{ doneComposite(); }
 	EOF;
 
 // Rule Greeting
 ruleGreeting:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getGreeting_HelloKeyword_0ElementType());
 		}
 		otherlv_0='Hello'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getGreeting_HelloKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -119,11 +117,11 @@ ruleGreeting:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getGreeting_ExclamationMarkKeyword_2ElementType());
 		}
 		otherlv_2='!'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getGreeting_ExclamationMarkKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -132,17 +130,16 @@ ruleGreeting:
 entryRuleMyId:
 	{ markComposite(elementTypeProvider.getMyIdElementType()); }
 	ruleMyId
-	{ doneComposite(); }
 	EOF;
 
 // Rule MyId
 ruleMyId:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getMyId_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getMyId_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 

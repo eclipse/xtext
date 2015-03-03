@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleNode:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
 	ruleNode
-	{ doneComposite(); }
 	EOF;
 
 // Rule Node
@@ -83,45 +81,45 @@ ruleNode:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getNode_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNode_LeftParenthesisKeyword_1ElementType());
 		}
 		otherlv_1='('
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getNode_LeftParenthesisKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNode_AttribSTRINGTerminalRuleCall_2_0ElementType());
 				}
 				lv_attrib_2_0=RULE_STRING
 				{
-					doneLeaf(lv_attrib_2_0, elementTypeProvider.getNode_AttribSTRINGTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_attrib_2_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNode_RightParenthesisKeyword_3ElementType());
 		}
 		otherlv_3=')'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getNode_RightParenthesisKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNode_LeftCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_4='{'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getNode_LeftCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
@@ -135,11 +133,11 @@ ruleNode:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNode_RightCurlyBracketSemicolonKeyword_6ElementType());
 		}
 		otherlv_6='};'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getNode_RightCurlyBracketSemicolonKeyword_6ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;

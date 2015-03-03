@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleRoot:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
 	ruleRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule Root
@@ -60,11 +59,11 @@ ruleRoot:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getRoot_DigitOneKeyword_0_0ElementType());
 			}
 			otherlv_0='1'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getRoot_DigitOneKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -81,11 +80,11 @@ ruleRoot:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getRoot_DigitTwoKeyword_1_0ElementType());
 			}
 			otherlv_2='2'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getRoot_DigitTwoKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -102,11 +101,11 @@ ruleRoot:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getRoot_DigitThreeKeyword_2_0ElementType());
 			}
 			otherlv_4='3'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getRoot_DigitThreeKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -123,11 +122,11 @@ ruleRoot:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getRoot_DigitFourKeyword_3_0ElementType());
 			}
 			otherlv_6='4'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getRoot_DigitFourKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
@@ -148,7 +147,6 @@ ruleRoot:
 entryRuleRule1:
 	{ markComposite(elementTypeProvider.getRule1ElementType()); }
 	ruleRule1
-	{ doneComposite(); }
 	EOF;
 
 // Rule Rule1
@@ -168,11 +166,11 @@ ruleRule1:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getRule1_ValueINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_INT
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getRule1_ValueINTTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
@@ -194,36 +192,35 @@ ruleRule1:
 entryRuleRule2:
 	{ markComposite(elementTypeProvider.getRule2ElementType()); }
 	ruleRule2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Rule2
 ruleRule2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getRule2_AfterKeyword_0ElementType());
 		}
 		otherlv_0='after'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getRule2_AfterKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getRule2_ValueINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_INT
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getRule2_ValueINTTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getRule2_SKeyword_2ElementType());
 		}
 		otherlv_2='s'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getRule2_SKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -232,7 +229,6 @@ ruleRule2:
 entryRuleRule3:
 	{ markComposite(elementTypeProvider.getRule3ElementType()); }
 	ruleRule3
-	{ doneComposite(); }
 	EOF;
 
 // Rule Rule3
@@ -248,11 +244,11 @@ ruleRule3:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getRule3_ValueINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_INT
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getRule3_ValueINTTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
@@ -270,7 +266,6 @@ ruleRule3:
 entryRuleRule4:
 	{ markComposite(elementTypeProvider.getRule4ElementType()); }
 	ruleRule4
-	{ doneComposite(); }
 	EOF;
 
 // Rule Rule4
@@ -290,11 +285,11 @@ ruleRule4:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getRule4_ValueINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_INT
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getRule4_ValueINTTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
@@ -316,7 +311,6 @@ ruleRule4:
 entryRuleAfterObj:
 	{ markComposite(elementTypeProvider.getAfterObjElementType()); }
 	ruleAfterObj
-	{ doneComposite(); }
 	EOF;
 
 // Rule AfterObj
@@ -324,11 +318,11 @@ ruleAfterObj:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAfterObj_ValueAfterKeyword_0ElementType());
 			}
 			lv_value_0_0='after'
 			{
-				doneLeaf(lv_value_0_0, elementTypeProvider.getAfterObj_ValueAfterKeyword_0ElementType());
+				doneLeaf(lv_value_0_0);
 			}
 		)
 	)
@@ -338,7 +332,6 @@ ruleAfterObj:
 entryRuleSObj:
 	{ markComposite(elementTypeProvider.getSObjElementType()); }
 	ruleSObj
-	{ doneComposite(); }
 	EOF;
 
 // Rule SObj
@@ -346,11 +339,11 @@ ruleSObj:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSObj_ValueSKeyword_0ElementType());
 			}
 			lv_value_0_0='s'
 			{
-				doneLeaf(lv_value_0_0, elementTypeProvider.getSObj_ValueSKeyword_0ElementType());
+				doneLeaf(lv_value_0_0);
 			}
 		)
 	)
@@ -360,17 +353,16 @@ ruleSObj:
 entryRuleAfter:
 	{ markComposite(elementTypeProvider.getAfterElementType()); }
 	ruleAfter
-	{ doneComposite(); }
 	EOF;
 
 // Rule After
 ruleAfter:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getAfter_AfterKeywordElementType());
 	}
 	kw='after'
 	{
-		doneLeaf(kw, elementTypeProvider.getAfter_AfterKeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -378,17 +370,16 @@ ruleAfter:
 entryRuleS:
 	{ markComposite(elementTypeProvider.getSElementType()); }
 	ruleS
-	{ doneComposite(); }
 	EOF;
 
 // Rule S
 ruleS:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getS_SKeywordElementType());
 	}
 	kw='s'
 	{
-		doneLeaf(kw, elementTypeProvider.getS_SKeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -396,11 +387,11 @@ ruleS:
 ruleFirstEnum:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFirstEnum_ValueEnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='after'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getFirstEnum_ValueEnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;
@@ -409,11 +400,11 @@ ruleFirstEnum:
 ruleSecondEnum:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSecondEnum_ValueEnumLiteralDeclarationElementType());
 		}
 		enumLiteral_0='s'
 		{
-			doneLeaf(enumLiteral_0, elementTypeProvider.getSecondEnum_ValueEnumLiteralDeclarationElementType());
+			doneLeaf(enumLiteral_0);
 		}
 	)
 ;

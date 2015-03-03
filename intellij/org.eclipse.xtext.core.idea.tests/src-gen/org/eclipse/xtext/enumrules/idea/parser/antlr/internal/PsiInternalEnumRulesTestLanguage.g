@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,11 +59,11 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_ExistingKeyword_0_0ElementType());
 			}
 			otherlv_0='existing'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_ExistingKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -79,11 +78,11 @@ ruleModel:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_GeneratedKeyword_0_2_0ElementType());
 				}
 				otherlv_2='generated'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getModel_GeneratedKeyword_0_2_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
@@ -101,11 +100,11 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_GeneratedKeyword_1_0ElementType());
 			}
 			otherlv_4='generated'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_GeneratedKeyword_1_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -127,31 +126,31 @@ ruleExistingEnum:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExistingEnum_SameNameEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='SameName'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getExistingEnum_SameNameEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='overridden'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getExistingEnum_DifferentNameEnumLiteralDeclaration_2ElementType());
 			}
 			enumLiteral_2='DifferentLiteral'
 			{
-				doneLeaf(enumLiteral_2, elementTypeProvider.getExistingEnum_DifferentNameEnumLiteralDeclaration_2ElementType());
+				doneLeaf(enumLiteral_2);
 			}
 		)
 	)
@@ -162,21 +161,21 @@ ruleGeneratedEnum:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getGeneratedEnum_SameNameEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='SameName'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getGeneratedEnum_SameNameEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getGeneratedEnum_DifferentNameEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='DifferentLiteral'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getGeneratedEnum_DifferentNameEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 	)

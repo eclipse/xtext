@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -220,79 +219,78 @@ ruleModel:
 entryRuleMandatoryKeywords:
 	{ markComposite(elementTypeProvider.getMandatoryKeywordsElementType()); }
 	ruleMandatoryKeywords
-	{ doneComposite(); }
 	EOF;
 
 // Rule MandatoryKeywords
 ruleMandatoryKeywords:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryKeywords_NumberSignDigitOneKeyword_0ElementType());
 		}
 		otherlv_0='#1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getMandatoryKeywords_NumberSignDigitOneKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val1_1_0=RULE_ID
 				{
-					doneLeaf(lv_val1_1_0, elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val1_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw1Keyword_2ElementType());
 		}
 		otherlv_2='kw1'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getMandatoryKeywords_Kw1Keyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
 				}
 				lv_val2_3_0=RULE_ID
 				{
-					doneLeaf(lv_val2_3_0, elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_val2_3_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw2Keyword_4ElementType());
 		}
 		otherlv_4='kw2'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getMandatoryKeywords_Kw2Keyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw3Keyword_5ElementType());
 		}
 		otherlv_5='kw3'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getMandatoryKeywords_Kw3Keyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
 				}
 				lv_val3_6_0=RULE_ID
 				{
-					doneLeaf(lv_val3_6_0, elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
+					doneLeaf(lv_val3_6_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw4Keyword_7ElementType());
 		}
 		otherlv_7='kw4'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getMandatoryKeywords_Kw4Keyword_7ElementType());
+			doneLeaf(otherlv_7);
 		}
 	)
 ;
@@ -301,18 +299,17 @@ ruleMandatoryKeywords:
 entryRuleExp0:
 	{ markComposite(elementTypeProvider.getExp0ElementType()); }
 	ruleExp0
-	{ doneComposite(); }
 	EOF;
 
 // Rule Exp0
 ruleExp0:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExp0_NumberSignDigitTwoKeyword_0ElementType());
 		}
 		otherlv_0='#2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExp0_NumberSignDigitTwoKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getExp0_Addition0ParserRuleCall_1ElementType());
@@ -328,7 +325,6 @@ ruleExp0:
 entryRuleAddition0:
 	{ markComposite(elementTypeProvider.getAddition0ElementType()); }
 	ruleAddition0
-	{ doneComposite(); }
 	EOF;
 
 // Rule Addition0
@@ -349,11 +345,11 @@ ruleAddition0:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAddition0_PlusSignKeyword_1_1ElementType());
 			}
 			otherlv_2='+'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getAddition0_PlusSignKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -374,7 +370,6 @@ ruleAddition0:
 entryRulePrim0:
 	{ markComposite(elementTypeProvider.getPrim0ElementType()); }
 	rulePrim0
-	{ doneComposite(); }
 	EOF;
 
 // Rule Prim0
@@ -389,11 +384,11 @@ rulePrim0:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -404,18 +399,17 @@ rulePrim0:
 entryRuleExp1:
 	{ markComposite(elementTypeProvider.getExp1ElementType()); }
 	ruleExp1
-	{ doneComposite(); }
 	EOF;
 
 // Rule Exp1
 ruleExp1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExp1_NumberSignDigitThreeKeyword_0ElementType());
 		}
 		otherlv_0='#3'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExp1_NumberSignDigitThreeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getExp1_Addition1ParserRuleCall_1ElementType());
@@ -431,7 +425,6 @@ ruleExp1:
 entryRuleAddition1:
 	{ markComposite(elementTypeProvider.getAddition1ElementType()); }
 	ruleAddition1
-	{ doneComposite(); }
 	EOF;
 
 // Rule Addition1
@@ -452,11 +445,11 @@ ruleAddition1:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAddition1_PlusSignKeyword_1_1ElementType());
 			}
 			otherlv_2='+'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getAddition1_PlusSignKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -477,7 +470,6 @@ ruleAddition1:
 entryRulePrim1:
 	{ markComposite(elementTypeProvider.getPrim1ElementType()); }
 	rulePrim1
-	{ doneComposite(); }
 	EOF;
 
 // Rule Prim1
@@ -493,11 +485,11 @@ rulePrim1:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_name_1_0=RULE_ID
 					{
-						doneLeaf(lv_name_1_0, elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
+						doneLeaf(lv_name_1_0);
 					}
 				)
 			)
@@ -505,11 +497,11 @@ rulePrim1:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getPrim1_LeftParenthesisKeyword_1_0ElementType());
 			}
 			otherlv_2='('
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getPrim1_LeftParenthesisKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			{
 				markComposite(elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType());
@@ -519,11 +511,11 @@ rulePrim1:
 				doneComposite();
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getPrim1_RightParenthesisKeyword_1_2ElementType());
 			}
 			otherlv_4=')'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getPrim1_RightParenthesisKeyword_1_2ElementType());
+				doneLeaf(otherlv_4);
 			}
 		)
 	)
@@ -533,18 +525,17 @@ rulePrim1:
 entryRuleExp2:
 	{ markComposite(elementTypeProvider.getExp2ElementType()); }
 	ruleExp2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Exp2
 ruleExp2:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExp2_NumberSignDigitFourKeyword_0ElementType());
 		}
 		otherlv_0='#4'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getExp2_NumberSignDigitFourKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getExp2_Addition2ParserRuleCall_1ElementType());
@@ -560,7 +551,6 @@ ruleExp2:
 entryRuleAddition2:
 	{ markComposite(elementTypeProvider.getAddition2ElementType()); }
 	ruleAddition2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Addition2
@@ -581,11 +571,11 @@ ruleAddition2:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAddition2_PlusSignKeyword_1_1ElementType());
 			}
 			otherlv_2='+'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getAddition2_PlusSignKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -606,7 +596,6 @@ ruleAddition2:
 entryRuleMultiplication2:
 	{ markComposite(elementTypeProvider.getMultiplication2ElementType()); }
 	ruleMultiplication2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Multiplication2
@@ -627,11 +616,11 @@ ruleMultiplication2:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getMultiplication2_AsteriskKeyword_1_1ElementType());
 			}
 			otherlv_2='*'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getMultiplication2_AsteriskKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -652,7 +641,6 @@ ruleMultiplication2:
 entryRulePrim2:
 	{ markComposite(elementTypeProvider.getPrim2ElementType()); }
 	rulePrim2
-	{ doneComposite(); }
 	EOF;
 
 // Rule Prim2
@@ -668,11 +656,11 @@ rulePrim2:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_name_1_0=RULE_ID
 					{
-						doneLeaf(lv_name_1_0, elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
+						doneLeaf(lv_name_1_0);
 					}
 				)
 			)
@@ -680,11 +668,11 @@ rulePrim2:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getPrim2_LeftParenthesisKeyword_1_0ElementType());
 			}
 			otherlv_2='('
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getPrim2_LeftParenthesisKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			{
 				markComposite(elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType());
@@ -694,11 +682,11 @@ rulePrim2:
 				doneComposite();
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getPrim2_RightParenthesisKeyword_1_2ElementType());
 			}
 			otherlv_4=')'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getPrim2_RightParenthesisKeyword_1_2ElementType());
+				doneLeaf(otherlv_4);
 			}
 		)
 	)
@@ -708,17 +696,16 @@ rulePrim2:
 entryRuleDatatypeID:
 	{ markComposite(elementTypeProvider.getDatatypeIDElementType()); }
 	ruleDatatypeID
-	{ doneComposite(); }
 	EOF;
 
 // Rule DatatypeID
 ruleDatatypeID:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getDatatypeID_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getDatatypeID_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 
@@ -726,67 +713,66 @@ ruleDatatypeID:
 entryRuleSingleCrossReference:
 	{ markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); }
 	ruleSingleCrossReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule SingleCrossReference
 ruleSingleCrossReference:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSingleCrossReference_NumberSignDigitFiveKeyword_0ElementType());
 		}
 		otherlv_0='#5'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSingleCrossReference_NumberSignDigitFiveKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
 					}
 					lv_name_1_1=RULE_TERMINAL_ID
 					{
-						doneLeaf(lv_name_1_1, elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
+						doneLeaf(lv_name_1_1);
 					}
 					    |
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
 					}
 					lv_name_1_2=RULE_ID
 					{
-						doneLeaf(lv_name_1_2, elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
+						doneLeaf(lv_name_1_2);
 					}
 				)
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSingleCrossReference_Kw1Keyword_2_0ElementType());
 			}
 			otherlv_2='kw1'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getSingleCrossReference_Kw1Keyword_2_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceCrossReference_2_1_0ElementType());
 					}
 					otherlv_3=RULE_TERMINAL_ID
 					{
-						doneLeaf(otherlv_3, elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceCrossReference_2_1_0ElementType());
+						doneLeaf(otherlv_3);
 					}
 				)
 			)
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSingleCrossReference_Kw2Keyword_3_0ElementType());
 			}
 			otherlv_4='kw2'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getSingleCrossReference_Kw2Keyword_3_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -802,40 +788,40 @@ ruleSingleCrossReference:
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSingleCrossReference_Kw3Keyword_4_0ElementType());
 			}
 			otherlv_6='kw3'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getSingleCrossReference_Kw3Keyword_4_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceCrossReference_4_1_0ElementType());
 					}
 					otherlv_7=RULE_ID
 					{
-						doneLeaf(otherlv_7, elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceCrossReference_4_1_0ElementType());
+						doneLeaf(otherlv_7);
 					}
 				)
 			)
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getSingleCrossReference_Kw4Keyword_5_0ElementType());
 			}
 			otherlv_8='kw4'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getSingleCrossReference_Kw4Keyword_5_0ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceCrossReference_5_1_0ElementType());
 					}
 					otherlv_9=RULE_ID
 					{
-						doneLeaf(otherlv_9, elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceCrossReference_5_1_0ElementType());
+						doneLeaf(otherlv_9);
 					}
 				)
 			)
@@ -847,18 +833,17 @@ ruleSingleCrossReference:
 entryRuleBooleanAlternative:
 	{ markComposite(elementTypeProvider.getBooleanAlternativeElementType()); }
 	ruleBooleanAlternative
-	{ doneComposite(); }
 	EOF;
 
 // Rule BooleanAlternative
 ruleBooleanAlternative:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBooleanAlternative_NumberSignDigitSixKeyword_0ElementType());
 		}
 		otherlv_0='#6'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getBooleanAlternative_NumberSignDigitSixKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -878,7 +863,6 @@ ruleBooleanAlternative:
 entryRuleBooleanAlternativeLiteral:
 	{ markComposite(elementTypeProvider.getBooleanAlternativeLiteralElementType()); }
 	ruleBooleanAlternativeLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule BooleanAlternativeLiteral
@@ -892,21 +876,21 @@ ruleBooleanAlternativeLiteral:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_Kw1Keyword_1_0ElementType());
 			}
 			otherlv_1='kw1'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getBooleanAlternativeLiteral_Kw1Keyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			    |
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_IsTrueKw2Keyword_1_1_0ElementType());
 					}
 					lv_isTrue_2_0='kw2'
 					{
-						doneLeaf(lv_isTrue_2_0, elementTypeProvider.getBooleanAlternativeLiteral_IsTrueKw2Keyword_1_1_0ElementType());
+						doneLeaf(lv_isTrue_2_0);
 					}
 				)
 			)
@@ -918,27 +902,26 @@ ruleBooleanAlternativeLiteral:
 entryRuleUnassignedDatatype:
 	{ markComposite(elementTypeProvider.getUnassignedDatatypeElementType()); }
 	ruleUnassignedDatatype
-	{ doneComposite(); }
 	EOF;
 
 // Rule UnassignedDatatype
 ruleUnassignedDatatype:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getUnassignedDatatype_NumberSignDigitSevenKeyword_0ElementType());
 		}
 		otherlv_0='#7'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getUnassignedDatatype_NumberSignDigitSevenKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_ID
 				{
-					doneLeaf(lv_val_1_0, elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_val_1_0);
 				}
 			)
 		)
@@ -956,35 +939,34 @@ ruleUnassignedDatatype:
 entryRuleKW1:
 	{ markComposite(elementTypeProvider.getKW1ElementType()); }
 	ruleKW1
-	{ doneComposite(); }
 	EOF;
 
 // Rule KW1
 ruleKW1:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getKW1_Kw1Keyword_0ElementType());
 		}
 		kw='kw1'
 		{
-			doneLeaf(kw, elementTypeProvider.getKW1_Kw1Keyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getKW1_MatchedKeyword_1_0ElementType());
 			}
 			kw='matched'
 			{
-				doneLeaf(kw, elementTypeProvider.getKW1_MatchedKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKW1_INTTerminalRuleCall_1_1ElementType());
 				}
 				this_INT_2=RULE_INT
 				{
-					doneLeaf(this_INT_2, elementTypeProvider.getKW1_INTTerminalRuleCall_1_1ElementType());
+					doneLeaf(this_INT_2);
 				}
 			)?
 		)
@@ -995,18 +977,17 @@ ruleKW1:
 entryRuleOptionalSingleTransition:
 	{ markComposite(elementTypeProvider.getOptionalSingleTransitionElementType()); }
 	ruleOptionalSingleTransition
-	{ doneComposite(); }
 	EOF;
 
 // Rule OptionalSingleTransition
 ruleOptionalSingleTransition:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOptionalSingleTransition_NumberSignDigitEightKeyword_0ElementType());
 		}
 		otherlv_0='#8'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getOptionalSingleTransition_NumberSignDigitEightKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -1020,11 +1001,11 @@ ruleOptionalSingleTransition:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_val_2_0=RULE_ID
 				{
-					doneLeaf(lv_val_2_0, elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_val_2_0);
 				}
 			)
 		)
@@ -1035,18 +1016,17 @@ ruleOptionalSingleTransition:
 entryRuleOptionalManyTransition:
 	{ markComposite(elementTypeProvider.getOptionalManyTransitionElementType()); }
 	ruleOptionalManyTransition
-	{ doneComposite(); }
 	EOF;
 
 // Rule OptionalManyTransition
 ruleOptionalManyTransition:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOptionalManyTransition_NumberSignDigitNineKeyword_0ElementType());
 		}
 		otherlv_0='#9'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getOptionalManyTransition_NumberSignDigitNineKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -1060,11 +1040,11 @@ ruleOptionalManyTransition:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_val_2_0=RULE_ID
 				{
-					doneLeaf(lv_val_2_0, elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_val_2_0);
 				}
 			)
 		)
@@ -1075,18 +1055,17 @@ ruleOptionalManyTransition:
 entryRuleMandatoryManyTransition:
 	{ markComposite(elementTypeProvider.getMandatoryManyTransitionElementType()); }
 	ruleMandatoryManyTransition
-	{ doneComposite(); }
 	EOF;
 
 // Rule MandatoryManyTransition
 ruleMandatoryManyTransition:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMandatoryManyTransition_NumberSignDigitOneDigitZeroKeyword_0ElementType());
 		}
 		otherlv_0='#10'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getMandatoryManyTransition_NumberSignDigitOneDigitZeroKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -1100,11 +1079,11 @@ ruleMandatoryManyTransition:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_val_2_0=RULE_ID
 				{
-					doneLeaf(lv_val_2_0, elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_val_2_0);
 				}
 			)
 		)
@@ -1115,18 +1094,17 @@ ruleMandatoryManyTransition:
 entryRuleAlternativeTransition:
 	{ markComposite(elementTypeProvider.getAlternativeTransitionElementType()); }
 	ruleAlternativeTransition
-	{ doneComposite(); }
 	EOF;
 
 // Rule AlternativeTransition
 ruleAlternativeTransition:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getAlternativeTransition_NumberSignDigitOneDigitOneKeyword_0ElementType());
 		}
 		otherlv_0='#11'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getAlternativeTransition_NumberSignDigitOneDigitOneKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -1138,21 +1116,21 @@ ruleAlternativeTransition:
 			}
 			    |
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getAlternativeTransition_Kw2Keyword_1_1ElementType());
 			}
 			otherlv_2='kw2'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getAlternativeTransition_Kw2Keyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_val_3_0=RULE_ID
 				{
-					doneLeaf(lv_val_3_0, elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_val_3_0);
 				}
 			)
 		)
@@ -1163,17 +1141,16 @@ ruleAlternativeTransition:
 entryRuleBooleanDatatypeID:
 	{ markComposite(elementTypeProvider.getBooleanDatatypeIDElementType()); }
 	ruleBooleanDatatypeID
-	{ doneComposite(); }
 	EOF;
 
 // Rule BooleanDatatypeID
 ruleBooleanDatatypeID:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getBooleanDatatypeID_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getBooleanDatatypeID_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 
@@ -1181,7 +1158,6 @@ ruleBooleanDatatypeID:
 entryRuleBooleanValues:
 	{ markComposite(elementTypeProvider.getBooleanValuesElementType()); }
 	ruleBooleanValues
-	{ doneComposite(); }
 	EOF;
 
 // Rule BooleanValues
@@ -1194,31 +1170,31 @@ ruleBooleanValues:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBooleanValues_NumberSignDigitOneDigitTwoKeyword_1ElementType());
 		}
 		otherlv_1='#12'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getBooleanValues_NumberSignDigitOneDigitTwoKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBooleanValues_Val1Kw1Keyword_2_0ElementType());
 				}
 				lv_val1_2_0='kw1'
 				{
-					doneLeaf(lv_val1_2_0, elementTypeProvider.getBooleanValues_Val1Kw1Keyword_2_0ElementType());
+					doneLeaf(lv_val1_2_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
 				}
 				lv_val2_3_0=RULE_BOOLEAN_TERMINAL_ID
 				{
-					doneLeaf(lv_val2_3_0, elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_val2_3_0);
 				}
 			)
 		)?
@@ -1240,47 +1216,46 @@ ruleBooleanValues:
 entryRuleLongAlternative:
 	{ markComposite(elementTypeProvider.getLongAlternativeElementType()); }
 	ruleLongAlternative
-	{ doneComposite(); }
 	EOF;
 
 // Rule LongAlternative
 ruleLongAlternative:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLongAlternative_NumberSignDigitOneDigitThreeKeyword_0ElementType());
 		}
 		otherlv_0='#13'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getLongAlternative_NumberSignDigitOneDigitThreeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_foo_1_0=RULE_ID
 				{
-					doneLeaf(lv_foo_1_0, elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_foo_1_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw1Keyword_2_0_0ElementType());
 				}
 				otherlv_2='kw1'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getLongAlternative_Kw1Keyword_2_0_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
 						}
 						lv_val1_3_0=RULE_ID
 						{
-							doneLeaf(lv_val1_3_0, elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
+							doneLeaf(lv_val1_3_0);
 						}
 					)
 				)?
@@ -1288,20 +1263,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw2Keyword_2_1_0ElementType());
 				}
 				otherlv_4='kw2'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getLongAlternative_Kw2Keyword_2_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
 						}
 						lv_val2_5_0=RULE_ID
 						{
-							doneLeaf(lv_val2_5_0, elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
+							doneLeaf(lv_val2_5_0);
 						}
 					)
 				)?
@@ -1309,20 +1284,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw3Keyword_2_2_0ElementType());
 				}
 				otherlv_6='kw3'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getLongAlternative_Kw3Keyword_2_2_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
 						}
 						lv_val3_7_0=RULE_ID
 						{
-							doneLeaf(lv_val3_7_0, elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
+							doneLeaf(lv_val3_7_0);
 						}
 					)
 				)?
@@ -1330,20 +1305,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw4Keyword_2_3_0ElementType());
 				}
 				otherlv_8='kw4'
 				{
-					doneLeaf(otherlv_8, elementTypeProvider.getLongAlternative_Kw4Keyword_2_3_0ElementType());
+					doneLeaf(otherlv_8);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
 						}
 						lv_val4_9_0=RULE_ID
 						{
-							doneLeaf(lv_val4_9_0, elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
+							doneLeaf(lv_val4_9_0);
 						}
 					)
 				)?
@@ -1351,20 +1326,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw5Keyword_2_4_0ElementType());
 				}
 				otherlv_10='kw5'
 				{
-					doneLeaf(otherlv_10, elementTypeProvider.getLongAlternative_Kw5Keyword_2_4_0ElementType());
+					doneLeaf(otherlv_10);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
 						}
 						lv_val5_11_0=RULE_ID
 						{
-							doneLeaf(lv_val5_11_0, elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
+							doneLeaf(lv_val5_11_0);
 						}
 					)
 				)?
@@ -1372,20 +1347,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw6Keyword_2_5_0ElementType());
 				}
 				otherlv_12='kw6'
 				{
-					doneLeaf(otherlv_12, elementTypeProvider.getLongAlternative_Kw6Keyword_2_5_0ElementType());
+					doneLeaf(otherlv_12);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
 						}
 						lv_val6_13_0=RULE_ID
 						{
-							doneLeaf(lv_val6_13_0, elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
+							doneLeaf(lv_val6_13_0);
 						}
 					)
 				)?
@@ -1393,20 +1368,20 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw7Keyword_2_6_0ElementType());
 				}
 				otherlv_14='kw7'
 				{
-					doneLeaf(otherlv_14, elementTypeProvider.getLongAlternative_Kw7Keyword_2_6_0ElementType());
+					doneLeaf(otherlv_14);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
 						}
 						lv_val7_15_0=RULE_ID
 						{
-							doneLeaf(lv_val7_15_0, elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
+							doneLeaf(lv_val7_15_0);
 						}
 					)
 				)?
@@ -1414,31 +1389,31 @@ ruleLongAlternative:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getLongAlternative_Kw8Keyword_2_7_0ElementType());
 				}
 				otherlv_16='kw8'
 				{
-					doneLeaf(otherlv_16, elementTypeProvider.getLongAlternative_Kw8Keyword_2_7_0ElementType());
+					doneLeaf(otherlv_16);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
 						}
 						lv_val8_17_0=RULE_ID
 						{
-							doneLeaf(lv_val8_17_0, elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
+							doneLeaf(lv_val8_17_0);
 						}
 					)
 				)?
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getLongAlternative_ExclamationMarkKeyword_3ElementType());
 		}
 		otherlv_18='!'
 		{
-			doneLeaf(otherlv_18, elementTypeProvider.getLongAlternative_ExclamationMarkKeyword_3ElementType());
+			doneLeaf(otherlv_18);
 		}
 	)
 ;

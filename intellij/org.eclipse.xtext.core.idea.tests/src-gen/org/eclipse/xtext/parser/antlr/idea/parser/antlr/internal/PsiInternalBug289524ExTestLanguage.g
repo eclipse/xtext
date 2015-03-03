@@ -58,7 +58,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,11 +73,11 @@ ruleModel:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_ModelKeyword_1ElementType());
 		}
 		otherlv_1='Model'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getModel_ModelKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -98,7 +97,6 @@ ruleModel:
 entryRuleModelElement:
 	{ markComposite(elementTypeProvider.getModelElementElementType()); }
 	ruleModelElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule ModelElement
@@ -128,39 +126,39 @@ ruleModelElement:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModelElement_ReferenceKeyword_1_1_0ElementType());
 				}
 				otherlv_2='reference'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getModelElement_ReferenceKeyword_1_1_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_1_0ElementType());
 						}
 						otherlv_3=RULE_ID
 						{
-							doneLeaf(otherlv_3, elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_1_0ElementType());
+							doneLeaf(otherlv_3);
 						}
 					)
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModelElement_DollarSignKeyword_1_1_2_0ElementType());
 					}
 					otherlv_4='$'
 					{
-						doneLeaf(otherlv_4, elementTypeProvider.getModelElement_DollarSignKeyword_1_1_2_0ElementType());
+						doneLeaf(otherlv_4);
 					}
 					(
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_2_1_0ElementType());
 							}
 							otherlv_5=RULE_ID
 							{
-								doneLeaf(otherlv_5, elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_2_1_0ElementType());
+								doneLeaf(otherlv_5);
 							}
 						)
 					)
@@ -174,27 +172,26 @@ ruleModelElement:
 entryRuleContained:
 	{ markComposite(elementTypeProvider.getContainedElementType()); }
 	ruleContained
-	{ doneComposite(); }
 	EOF;
 
 // Rule Contained
 ruleContained:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getContained_ContainmentKeyword_0ElementType());
 		}
 		otherlv_0='containment'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getContained_ContainmentKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getContained_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getContained_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)

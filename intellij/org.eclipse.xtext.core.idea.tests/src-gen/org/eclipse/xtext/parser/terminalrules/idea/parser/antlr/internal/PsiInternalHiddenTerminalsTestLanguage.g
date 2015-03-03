@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -104,56 +103,55 @@ ruleModel:
 entryRuleWithoutHiddens:
 	{ markComposite(elementTypeProvider.getWithoutHiddensElementType()); }
 	ruleWithoutHiddens
-	{ doneComposite(); }
 	EOF;
 
 // Rule WithoutHiddens
 ruleWithoutHiddens:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getWithoutHiddens_WithoutKeyword_0ElementType());
 		}
 		otherlv_0='without'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getWithoutHiddens_WithoutKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType());
 				}
 				lv_spaces_1_0=RULE_WS
 				{
-					doneLeaf(lv_spaces_1_0, elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_spaces_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getWithoutHiddens_HiddensKeyword_2ElementType());
 		}
 		otherlv_2='hiddens'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getWithoutHiddens_HiddensKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType());
 				}
 				lv_spaces_3_0=RULE_WS
 				{
-					doneLeaf(lv_spaces_3_0, elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType());
+					doneLeaf(lv_spaces_3_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getWithoutHiddens_ValidSemicolonKeyword_4_0ElementType());
 				}
 				lv_valid_4_0=';'
 				{
-					doneLeaf(lv_valid_4_0, elementTypeProvider.getWithoutHiddens_ValidSemicolonKeyword_4_0ElementType());
+					doneLeaf(lv_valid_4_0);
 				}
 			)
 		)
@@ -166,7 +164,6 @@ entryRuleWithHiddens@init {
 }:
 	{ markComposite(elementTypeProvider.getWithHiddensElementType()); }
 	ruleWithHiddens
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -178,27 +175,27 @@ ruleWithHiddens@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getWithHiddens_WithKeyword_0ElementType());
 		}
 		otherlv_0='with'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getWithHiddens_WithKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getWithHiddens_HiddensKeyword_1ElementType());
 		}
 		otherlv_1='hiddens'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getWithHiddens_HiddensKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getWithHiddens_ValidSemicolonKeyword_2_0ElementType());
 				}
 				lv_valid_2_0=';'
 				{
-					doneLeaf(lv_valid_2_0, elementTypeProvider.getWithHiddens_ValidSemicolonKeyword_2_0ElementType());
+					doneLeaf(lv_valid_2_0);
 				}
 			)
 		)
@@ -214,7 +211,6 @@ entryRuleOverridingHiddens@init {
 }:
 	{ markComposite(elementTypeProvider.getOverridingHiddensElementType()); }
 	ruleOverridingHiddens
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -226,25 +222,25 @@ ruleOverridingHiddens@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridingHiddens_OverridingKeyword_0ElementType());
 		}
 		otherlv_0='overriding'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getOverridingHiddens_OverridingKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridingHiddens_HiddensKeyword_1ElementType());
 		}
 		otherlv_1='hiddens'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getOverridingHiddens_HiddensKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridingHiddens_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getOverridingHiddens_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -258,20 +254,20 @@ ruleOverridingHiddens@init {
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridingHiddens_RightParenthesisKeyword_4ElementType());
 		}
 		otherlv_4=')'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getOverridingHiddens_RightParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOverridingHiddens_ValidSemicolonKeyword_5_0ElementType());
 				}
 				lv_valid_5_0=';'
 				{
-					doneLeaf(lv_valid_5_0, elementTypeProvider.getOverridingHiddens_ValidSemicolonKeyword_5_0ElementType());
+					doneLeaf(lv_valid_5_0);
 				}
 			)
 		)
@@ -287,7 +283,6 @@ entryRuleOverridingHiddensCall@init {
 }:
 	{ markComposite(elementTypeProvider.getOverridingHiddensCallElementType()); }
 	ruleOverridingHiddensCall
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -299,31 +294,31 @@ ruleOverridingHiddensCall@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOverridingHiddensCall_CallKeyword_0ElementType());
 		}
 		otherlv_0='call'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getOverridingHiddensCall_CallKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType());
 				}
 				lv_spaces_1_0=RULE_WS
 				{
-					doneLeaf(lv_spaces_1_0, elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_spaces_1_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOverridingHiddensCall_ValidSemicolonKeyword_2_0ElementType());
 				}
 				lv_valid_2_0=';'
 				{
-					doneLeaf(lv_valid_2_0, elementTypeProvider.getOverridingHiddensCall_ValidSemicolonKeyword_2_0ElementType());
+					doneLeaf(lv_valid_2_0);
 				}
 			)
 		)
@@ -339,7 +334,6 @@ entryRuleInheritingHiddens@init {
 }:
 	{ markComposite(elementTypeProvider.getInheritingHiddensElementType()); }
 	ruleInheritingHiddens
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -351,25 +345,25 @@ ruleInheritingHiddens@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritingHiddens_InheritingKeyword_0ElementType());
 		}
 		otherlv_0='inheriting'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getInheritingHiddens_InheritingKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritingHiddens_HiddensKeyword_1ElementType());
 		}
 		otherlv_1='hiddens'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getInheritingHiddens_HiddensKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritingHiddens_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getInheritingHiddens_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -397,20 +391,20 @@ ruleInheritingHiddens@init {
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritingHiddens_RightParenthesisKeyword_4ElementType());
 		}
 		otherlv_5=')'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getInheritingHiddens_RightParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_5);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getInheritingHiddens_ValidSemicolonKeyword_5_0ElementType());
 				}
 				lv_valid_6_0=';'
 				{
-					doneLeaf(lv_valid_6_0, elementTypeProvider.getInheritingHiddens_ValidSemicolonKeyword_5_0ElementType());
+					doneLeaf(lv_valid_6_0);
 				}
 			)
 		)
@@ -424,18 +418,17 @@ finally {
 entryRuleDatatypeHiddens:
 	{ markComposite(elementTypeProvider.getDatatypeHiddensElementType()); }
 	ruleDatatypeHiddens
-	{ doneComposite(); }
 	EOF;
 
 // Rule DatatypeHiddens
 ruleDatatypeHiddens:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDatatypeHiddens_DatatypeKeyword_0ElementType());
 		}
 		otherlv_0='datatype'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getDatatypeHiddens_DatatypeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -457,7 +450,6 @@ entryRuleDatatypeRule@init {
 }:
 	{ markComposite(elementTypeProvider.getDatatypeRuleElementType()); }
 	ruleDatatypeRule
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -469,18 +461,18 @@ ruleDatatypeRule@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDatatypeRule_RuleKeyword_0ElementType());
 		}
 		kw='rule'
 		{
-			doneLeaf(kw, elementTypeProvider.getDatatypeRule_RuleKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDatatypeRule_SemicolonKeyword_1ElementType());
 		}
 		kw=';'
 		{
-			doneLeaf(kw, elementTypeProvider.getDatatypeRule_SemicolonKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -494,7 +486,6 @@ entryRuleHidingHiddens@init {
 }:
 	{ markComposite(elementTypeProvider.getHidingHiddensElementType()); }
 	ruleHidingHiddens
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -506,20 +497,20 @@ ruleHidingHiddens@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getHidingHiddens_HidingKeyword_0ElementType());
 		}
 		otherlv_0='hiding'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getHidingHiddens_HidingKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType());
 				}
 				lv_space_1_0=RULE_WS
 				{
-					doneLeaf(lv_space_1_0, elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_space_1_0);
 				}
 			)
 		)
@@ -544,27 +535,26 @@ finally {
 entryRuleInheritingHiddensCall:
 	{ markComposite(elementTypeProvider.getInheritingHiddensCallElementType()); }
 	ruleInheritingHiddensCall
-	{ doneComposite(); }
 	EOF;
 
 // Rule InheritingHiddensCall
 ruleInheritingHiddensCall:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getInheritingHiddensCall_CallKeyword_0ElementType());
 		}
 		otherlv_0='call'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getInheritingHiddensCall_CallKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getInheritingHiddensCall_ValidSemicolonKeyword_1_0ElementType());
 				}
 				lv_valid_1_0=';'
 				{
-					doneLeaf(lv_valid_1_0, elementTypeProvider.getInheritingHiddensCall_ValidSemicolonKeyword_1_0ElementType());
+					doneLeaf(lv_valid_1_0);
 				}
 			)
 		)

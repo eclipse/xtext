@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleORing:
 	{ markComposite(elementTypeProvider.getORingElementType()); }
 	ruleORing
-	{ doneComposite(); }
 	EOF;
 
 // Rule ORing
@@ -73,11 +72,11 @@ ruleORing:
 				}
 			)
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getORing_VerticalLineKeyword_1_1ElementType());
 			}
 			otherlv_2='|'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getORing_VerticalLineKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -98,7 +97,6 @@ ruleORing:
 entryRuleValue:
 	{ markComposite(elementTypeProvider.getValueElementType()); }
 	ruleValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule Value
@@ -106,11 +104,11 @@ ruleValue:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getValue_ValueAKeyword_0ElementType());
 			}
 			lv_value_0_0='a'
 			{
-				doneLeaf(lv_value_0_0, elementTypeProvider.getValue_ValueAKeyword_0ElementType());
+				doneLeaf(lv_value_0_0);
 			}
 		)
 	)

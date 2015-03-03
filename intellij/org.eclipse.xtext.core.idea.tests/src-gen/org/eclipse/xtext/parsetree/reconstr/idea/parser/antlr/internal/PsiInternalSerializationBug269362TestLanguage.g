@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,39 +59,39 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_FooKeyword_0_0ElementType());
 			}
 			otherlv_0='foo'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_FooKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_foo_1_0=RULE_ID
 					{
-						doneLeaf(lv_foo_1_0, elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
+						doneLeaf(lv_foo_1_0);
 					}
 				)
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_BarKeyword_0_2_0ElementType());
 				}
 				otherlv_2='bar'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getModel_BarKeyword_0_2_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
 						}
 						lv_bar_3_0=RULE_ID
 						{
-							doneLeaf(lv_bar_3_0, elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
+							doneLeaf(lv_bar_3_0);
 						}
 					)
 				)
@@ -101,20 +100,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_BarKeyword_1_0ElementType());
 			}
 			otherlv_4='bar'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_BarKeyword_1_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
 					}
 					lv_bar_5_0=RULE_ID
 					{
-						doneLeaf(lv_bar_5_0, elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
+						doneLeaf(lv_bar_5_0);
 					}
 				)
 			)

@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleRoot:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
 	ruleRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule Root
@@ -80,7 +79,6 @@ ruleRoot:
 entryRuleIDList:
 	{ markComposite(elementTypeProvider.getIDListElementType()); }
 	ruleIDList
-	{ doneComposite(); }
 	EOF;
 
 // Rule IDList
@@ -93,20 +91,20 @@ ruleIDList:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getIDList_IdlistKeyword_1ElementType());
 		}
 		otherlv_1='idlist'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getIDList_IdlistKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_ids_2_0=RULE_ID
 				{
-					doneLeaf(lv_ids_2_0, elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_ids_2_0);
 				}
 			)
 		)*
@@ -117,7 +115,6 @@ ruleIDList:
 entryRuleKWList:
 	{ markComposite(elementTypeProvider.getKWListElementType()); }
 	ruleKWList
-	{ doneComposite(); }
 	EOF;
 
 // Rule KWList
@@ -130,64 +127,64 @@ ruleKWList:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getKWList_KwlistKeyword_1ElementType());
 		}
 		otherlv_1='kwlist'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getKWList_KwlistKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKWList_Kw1Kw1Keyword_2_0ElementType());
 				}
 				lv_kw1_2_0='kw1'
 				{
-					doneLeaf(lv_kw1_2_0, elementTypeProvider.getKWList_Kw1Kw1Keyword_2_0ElementType());
+					doneLeaf(lv_kw1_2_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKWList_Kw2Kw2Keyword_3_0ElementType());
 				}
 				lv_kw2_3_0='kw2'
 				{
-					doneLeaf(lv_kw2_3_0, elementTypeProvider.getKWList_Kw2Kw2Keyword_3_0ElementType());
+					doneLeaf(lv_kw2_3_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKWList_Kw3Kw3Keyword_4_0ElementType());
 				}
 				lv_kw3_4_0='kw3'
 				{
-					doneLeaf(lv_kw3_4_0, elementTypeProvider.getKWList_Kw3Kw3Keyword_4_0ElementType());
+					doneLeaf(lv_kw3_4_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKWList_Kw4Kw4Keyword_5_0ElementType());
 				}
 				lv_kw4_5_0='kw4'
 				{
-					doneLeaf(lv_kw4_5_0, elementTypeProvider.getKWList_Kw4Kw4Keyword_5_0ElementType());
+					doneLeaf(lv_kw4_5_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getKWList_Kw5Kw5Keyword_6_0ElementType());
 				}
 				lv_kw5_6_0='kw5'
 				{
-					doneLeaf(lv_kw5_6_0, elementTypeProvider.getKWList_Kw5Kw5Keyword_6_0ElementType());
+					doneLeaf(lv_kw5_6_0);
 				}
 			)
 		)?

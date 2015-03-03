@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleTree:
 	{ markComposite(elementTypeProvider.getTreeElementType()); }
 	ruleTree
-	{ doneComposite(); }
 	EOF;
 
 // Rule Tree
@@ -82,7 +81,6 @@ ruleTree:
 entryRuleTreeNode:
 	{ markComposite(elementTypeProvider.getTreeNodeElementType()); }
 	ruleTreeNode
-	{ doneComposite(); }
 	EOF;
 
 // Rule TreeNode
@@ -91,21 +89,21 @@ ruleTreeNode:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getTreeNode_INDENTTerminalRuleCall_1_0ElementType());
 			}
 			this_INDENT_1=RULE_INDENT
 			{
-				doneLeaf(this_INDENT_1, elementTypeProvider.getTreeNode_INDENTTerminalRuleCall_1_0ElementType());
+				doneLeaf(this_INDENT_1);
 			}
 			(
 				(
@@ -119,11 +117,11 @@ ruleTreeNode:
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getTreeNode_DEDENTTerminalRuleCall_1_2ElementType());
 			}
 			this_DEDENT_3=RULE_DEDENT
 			{
-				doneLeaf(this_DEDENT_3, elementTypeProvider.getTreeNode_DEDENTTerminalRuleCall_1_2ElementType());
+				doneLeaf(this_DEDENT_3);
 			}
 		)?
 	)

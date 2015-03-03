@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleCompositeModel:
 	{ markComposite(elementTypeProvider.getCompositeModelElementType()); }
 	ruleCompositeModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule CompositeModel
@@ -74,7 +73,6 @@ ruleCompositeModel:
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -93,11 +91,11 @@ ruleModel:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_ColonKeyword_1_0ElementType());
 			}
 			otherlv_1=':'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getModel_ColonKeyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			(
 				(
@@ -113,11 +111,11 @@ ruleModel:
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_NumberSignKeyword_2_0ElementType());
 			}
 			otherlv_3='#'
 			{
-				doneLeaf(otherlv_3, elementTypeProvider.getModel_NumberSignKeyword_2_0ElementType());
+				doneLeaf(otherlv_3);
 			}
 			(
 				(
@@ -133,11 +131,11 @@ ruleModel:
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_PlusSignKeyword_3_0ElementType());
 			}
 			otherlv_5='+'
 			{
-				doneLeaf(otherlv_5, elementTypeProvider.getModel_PlusSignKeyword_3_0ElementType());
+				doneLeaf(otherlv_5);
 			}
 			(
 				(
@@ -153,11 +151,11 @@ ruleModel:
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_AsteriskKeyword_4_0ElementType());
 			}
 			otherlv_7='*'
 			{
-				doneLeaf(otherlv_7, elementTypeProvider.getModel_AsteriskKeyword_4_0ElementType());
+				doneLeaf(otherlv_7);
 			}
 			(
 				(
@@ -172,11 +170,11 @@ ruleModel:
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_SemicolonKeyword_5ElementType());
 		}
 		otherlv_9=';'
 		{
-			doneLeaf(otherlv_9, elementTypeProvider.getModel_SemicolonKeyword_5ElementType());
+			doneLeaf(otherlv_9);
 		}
 	)
 ;
@@ -185,32 +183,31 @@ ruleModel:
 entryRuleModelId:
 	{ markComposite(elementTypeProvider.getModelIdElementType()); }
 	ruleModelId
-	{ doneComposite(); }
 	EOF;
 
 // Rule ModelId
 ruleModelId:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModelId_IDTerminalRuleCall_0ElementType());
 		}
 		this_ID_0=RULE_ID
 		{
-			doneLeaf(this_ID_0, elementTypeProvider.getModelId_IDTerminalRuleCall_0ElementType());
+			doneLeaf(this_ID_0);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModelId_FullStopKeyword_1ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getModelId_FullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModelId_IDTerminalRuleCall_2ElementType());
 		}
 		this_ID_2=RULE_ID
 		{
-			doneLeaf(this_ID_2, elementTypeProvider.getModelId_IDTerminalRuleCall_2ElementType());
+			doneLeaf(this_ID_2);
 		}
 	)
 ;
@@ -219,7 +216,6 @@ ruleModelId:
 entryRuleNestedModelId:
 	{ markComposite(elementTypeProvider.getNestedModelIdElementType()); }
 	ruleNestedModelId
-	{ doneComposite(); }
 	EOF;
 
 // Rule NestedModelId
@@ -233,11 +229,11 @@ ruleNestedModelId:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNestedModelId_FullStopKeyword_1ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getNestedModelId_FullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		{
 			markComposite(elementTypeProvider.getNestedModelId_ModelIdParserRuleCall_2ElementType());
@@ -253,33 +249,32 @@ ruleNestedModelId:
 entryRuleFraction:
 	{ markComposite(elementTypeProvider.getFractionElementType()); }
 	ruleFraction
-	{ doneComposite(); }
 	EOF;
 
 // Rule Fraction
 ruleFraction:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFraction_INTTerminalRuleCall_0ElementType());
 		}
 		this_INT_0=RULE_INT
 		{
-			doneLeaf(this_INT_0, elementTypeProvider.getFraction_INTTerminalRuleCall_0ElementType());
+			doneLeaf(this_INT_0);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFraction_SolidusKeyword_1_0ElementType());
 			}
 			kw='/'
 			{
-				doneLeaf(kw, elementTypeProvider.getFraction_SolidusKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFraction_INTTerminalRuleCall_1_1ElementType());
 			}
 			this_INT_2=RULE_INT
 			{
-				doneLeaf(this_INT_2, elementTypeProvider.getFraction_INTTerminalRuleCall_1_1ElementType());
+				doneLeaf(this_INT_2);
 			}
 		)?
 	)
@@ -289,39 +284,38 @@ ruleFraction:
 entryRuleVector:
 	{ markComposite(elementTypeProvider.getVectorElementType()); }
 	ruleVector
-	{ doneComposite(); }
 	EOF;
 
 // Rule Vector
 ruleVector:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getVector_LeftParenthesisKeyword_0ElementType());
 		}
 		kw='('
 		{
-			doneLeaf(kw, elementTypeProvider.getVector_LeftParenthesisKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getVector_INTTerminalRuleCall_1ElementType());
 		}
 		this_INT_1=RULE_INT
 		{
-			doneLeaf(this_INT_1, elementTypeProvider.getVector_INTTerminalRuleCall_1ElementType());
+			doneLeaf(this_INT_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getVector_INTTerminalRuleCall_2ElementType());
 		}
 		this_INT_2=RULE_INT
 		{
-			doneLeaf(this_INT_2, elementTypeProvider.getVector_INTTerminalRuleCall_2ElementType());
+			doneLeaf(this_INT_2);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getVector_RightParenthesisKeyword_3ElementType());
 		}
 		kw=')'
 		{
-			doneLeaf(kw, elementTypeProvider.getVector_RightParenthesisKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -330,7 +324,6 @@ ruleVector:
 entryRuleDots:
 	{ markComposite(elementTypeProvider.getDotsElementType()); }
 	ruleDots
-	{ doneComposite(); }
 	EOF;
 
 // Rule Dots
@@ -338,27 +331,27 @@ ruleDots:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDots_FullStopKeyword_0_0ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getDots_FullStopKeyword_0_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDots_FullStopKeyword_0_1ElementType());
 			}
 			kw='.'
 			{
-				doneLeaf(kw, elementTypeProvider.getDots_FullStopKeyword_0_1ElementType());
+				doneLeaf(kw);
 			}
 		)
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDots_FullStopFullStopKeyword_1ElementType());
 		}
 		kw='..'
 		{
-			doneLeaf(kw, elementTypeProvider.getDots_FullStopFullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -367,7 +360,6 @@ ruleDots:
 entryRuleDouble:
 	{ markComposite(elementTypeProvider.getDoubleElementType()); }
 	ruleDouble
-	{ doneComposite(); }
 	EOF;
 
 // Rule Double
@@ -375,59 +367,59 @@ ruleDouble:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDouble_HyphenMinusKeyword_0ElementType());
 			}
 			kw='-'
 			{
-				doneLeaf(kw, elementTypeProvider.getDouble_HyphenMinusKeyword_0ElementType());
+				doneLeaf(kw);
 			}
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDouble_INTTerminalRuleCall_1ElementType());
 			}
 			this_INT_1=RULE_INT
 			{
-				doneLeaf(this_INT_1, elementTypeProvider.getDouble_INTTerminalRuleCall_1ElementType());
+				doneLeaf(this_INT_1);
 			}
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDouble_FullStopKeyword_2ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getDouble_FullStopKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDouble_INTTerminalRuleCall_3ElementType());
 		}
 		this_INT_3=RULE_INT
 		{
-			doneLeaf(this_INT_3, elementTypeProvider.getDouble_INTTerminalRuleCall_3ElementType());
+			doneLeaf(this_INT_3);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDouble_EKeyword_4_0ElementType());
 			}
 			kw='E'
 			{
-				doneLeaf(kw, elementTypeProvider.getDouble_EKeyword_4_0ElementType());
+				doneLeaf(kw);
 			}
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getDouble_HyphenMinusKeyword_4_1ElementType());
 				}
 				kw='-'
 				{
-					doneLeaf(kw, elementTypeProvider.getDouble_HyphenMinusKeyword_4_1ElementType());
+					doneLeaf(kw);
 				}
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDouble_INTTerminalRuleCall_4_2ElementType());
 			}
 			this_INT_6=RULE_INT
 			{
-				doneLeaf(this_INT_6, elementTypeProvider.getDouble_INTTerminalRuleCall_4_2ElementType());
+				doneLeaf(this_INT_6);
 			}
 		)?
 	)

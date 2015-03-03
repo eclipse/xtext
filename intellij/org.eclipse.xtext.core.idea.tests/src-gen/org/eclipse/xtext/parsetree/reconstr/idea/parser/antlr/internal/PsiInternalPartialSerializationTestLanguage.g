@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -70,18 +69,17 @@ ruleModel:
 entryRuleNodeRoot:
 	{ markComposite(elementTypeProvider.getNodeRootElementType()); }
 	ruleNodeRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule NodeRoot
 ruleNodeRoot:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNodeRoot_NumberSignDigitOneKeyword_0ElementType());
 		}
 		otherlv_0='#1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNodeRoot_NumberSignDigitOneKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -101,37 +99,36 @@ ruleNodeRoot:
 entryRuleNode:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
 	ruleNode
-	{ doneComposite(); }
 	EOF;
 
 // Rule Node
 ruleNode:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNode_NodeKeyword_0ElementType());
 		}
 		otherlv_0='node'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getNode_NodeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNode_LeftParenthesisKeyword_2_0ElementType());
 			}
 			otherlv_2='('
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getNode_LeftParenthesisKeyword_2_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -145,11 +142,11 @@ ruleNode:
 				)
 			)+
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNode_RightParenthesisKeyword_2_2ElementType());
 			}
 			otherlv_4=')'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getNode_RightParenthesisKeyword_2_2ElementType());
+				doneLeaf(otherlv_4);
 			}
 		)?
 	)

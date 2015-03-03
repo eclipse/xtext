@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleStart:
 	{ markComposite(elementTypeProvider.getStartElementType()); }
 	ruleStart
-	{ doneComposite(); }
 	EOF;
 
 // Rule Start
@@ -60,11 +59,11 @@ ruleStart:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
 			}
 			lv_featureA_0_0=RULE_ID
 			{
-				doneLeaf(lv_featureA_0_0, elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
+				doneLeaf(lv_featureA_0_0);
 			}
 		)
 	)+

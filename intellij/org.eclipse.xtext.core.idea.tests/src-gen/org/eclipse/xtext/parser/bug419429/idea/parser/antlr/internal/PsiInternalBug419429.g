@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleEReference:
 	{ markComposite(elementTypeProvider.getEReferenceElementType()); }
 	ruleEReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule EReference
@@ -60,11 +59,11 @@ ruleEReference:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_ID
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)

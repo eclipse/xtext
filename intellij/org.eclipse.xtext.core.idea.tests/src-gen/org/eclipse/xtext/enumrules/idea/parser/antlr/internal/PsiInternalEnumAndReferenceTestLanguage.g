@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleEntityWithEnumAndReference:
 	{ markComposite(elementTypeProvider.getEntityWithEnumAndReferenceElementType()); }
 	ruleEntityWithEnumAndReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule EntityWithEnumAndReference
@@ -72,29 +71,29 @@ ruleEntityWithEnumAndReference:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getEntityWithEnumAndReference_ReferenceKeyword_2ElementType());
 		}
 		otherlv_2='reference'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getEntityWithEnumAndReference_ReferenceKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType());
 				}
 				otherlv_3=RULE_ID
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 			)
 		)
@@ -106,21 +105,21 @@ ruleKindOfKeyword:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getKindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0ElementType());
 			}
 			enumLiteral_0='kindOfKeyword'
 			{
-				doneLeaf(enumLiteral_0, elementTypeProvider.getKindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0ElementType());
+				doneLeaf(enumLiteral_0);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getKindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1ElementType());
 			}
 			enumLiteral_1='anotherEnumLiteral'
 			{
-				doneLeaf(enumLiteral_1, elementTypeProvider.getKindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1ElementType());
+				doneLeaf(enumLiteral_1);
 			}
 		)
 	)

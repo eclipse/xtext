@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleXExpression:
 	{ markComposite(elementTypeProvider.getXExpressionElementType()); }
 	ruleXExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XExpression
@@ -70,7 +69,6 @@ ruleXExpression:
 entryRuleXAssignment:
 	{ markComposite(elementTypeProvider.getXAssignmentElementType()); }
 	ruleXAssignment
-	{ doneComposite(); }
 	EOF;
 
 // Rule XAssignment
@@ -174,17 +172,16 @@ ruleXAssignment:
 entryRuleOpSingleAssign:
 	{ markComposite(elementTypeProvider.getOpSingleAssignElementType()); }
 	ruleOpSingleAssign
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpSingleAssign
 ruleOpSingleAssign:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getOpSingleAssign_EqualsSignKeywordElementType());
 	}
 	kw='='
 	{
-		doneLeaf(kw, elementTypeProvider.getOpSingleAssign_EqualsSignKeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -192,99 +189,98 @@ ruleOpSingleAssign:
 entryRuleOpMultiAssign:
 	{ markComposite(elementTypeProvider.getOpMultiAssignElementType()); }
 	ruleOpMultiAssign
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpMultiAssign
 ruleOpMultiAssign:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMultiAssign_PlusSignEqualsSignKeyword_0ElementType());
 		}
 		kw='+='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMultiAssign_PlusSignEqualsSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMultiAssign_HyphenMinusEqualsSignKeyword_1ElementType());
 		}
 		kw='-='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMultiAssign_HyphenMinusEqualsSignKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMultiAssign_AsteriskEqualsSignKeyword_2ElementType());
 		}
 		kw='*='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMultiAssign_AsteriskEqualsSignKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMultiAssign_SolidusEqualsSignKeyword_3ElementType());
 		}
 		kw='/='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMultiAssign_SolidusEqualsSignKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMultiAssign_PercentSignEqualsSignKeyword_4ElementType());
 		}
 		kw='%='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMultiAssign_PercentSignEqualsSignKeyword_4ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpMultiAssign_LessThanSignKeyword_5_0ElementType());
 			}
 			kw='<'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpMultiAssign_LessThanSignKeyword_5_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpMultiAssign_LessThanSignKeyword_5_1ElementType());
 			}
 			kw='<'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpMultiAssign_LessThanSignKeyword_5_1ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpMultiAssign_EqualsSignKeyword_5_2ElementType());
 			}
 			kw='='
 			{
-				doneLeaf(kw, elementTypeProvider.getOpMultiAssign_EqualsSignKeyword_5_2ElementType());
+				doneLeaf(kw);
 			}
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpMultiAssign_GreaterThanSignKeyword_6_0ElementType());
 			}
 			kw='>'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpMultiAssign_GreaterThanSignKeyword_6_0ElementType());
+				doneLeaf(kw);
 			}
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOpMultiAssign_GreaterThanSignKeyword_6_1ElementType());
 				}
 				kw='>'
 				{
-					doneLeaf(kw, elementTypeProvider.getOpMultiAssign_GreaterThanSignKeyword_6_1ElementType());
+					doneLeaf(kw);
 				}
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpMultiAssign_GreaterThanSignEqualsSignKeyword_6_2ElementType());
 			}
 			kw='>='
 			{
-				doneLeaf(kw, elementTypeProvider.getOpMultiAssign_GreaterThanSignEqualsSignKeyword_6_2ElementType());
+				doneLeaf(kw);
 			}
 		)
 	)
@@ -294,7 +290,6 @@ ruleOpMultiAssign:
 entryRuleXOrExpression:
 	{ markComposite(elementTypeProvider.getXOrExpressionElementType()); }
 	ruleXOrExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XOrExpression
@@ -358,17 +353,16 @@ ruleXOrExpression:
 entryRuleOpOr:
 	{ markComposite(elementTypeProvider.getOpOrElementType()); }
 	ruleOpOr
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpOr
 ruleOpOr:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getOpOr_VerticalLineVerticalLineKeywordElementType());
 	}
 	kw='||'
 	{
-		doneLeaf(kw, elementTypeProvider.getOpOr_VerticalLineVerticalLineKeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -376,7 +370,6 @@ ruleOpOr:
 entryRuleXAndExpression:
 	{ markComposite(elementTypeProvider.getXAndExpressionElementType()); }
 	ruleXAndExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XAndExpression
@@ -440,17 +433,16 @@ ruleXAndExpression:
 entryRuleOpAnd:
 	{ markComposite(elementTypeProvider.getOpAndElementType()); }
 	ruleOpAnd
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpAnd
 ruleOpAnd:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getOpAnd_AmpersandAmpersandKeywordElementType());
 	}
 	kw='&&'
 	{
-		doneLeaf(kw, elementTypeProvider.getOpAnd_AmpersandAmpersandKeywordElementType());
+		doneLeaf(kw);
 	}
 ;
 
@@ -458,7 +450,6 @@ ruleOpAnd:
 entryRuleXEqualityExpression:
 	{ markComposite(elementTypeProvider.getXEqualityExpressionElementType()); }
 	ruleXEqualityExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XEqualityExpression
@@ -522,42 +513,41 @@ ruleXEqualityExpression:
 entryRuleOpEquality:
 	{ markComposite(elementTypeProvider.getOpEqualityElementType()); }
 	ruleOpEquality
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpEquality
 ruleOpEquality:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpEquality_EqualsSignEqualsSignKeyword_0ElementType());
 		}
 		kw='=='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpEquality_EqualsSignEqualsSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpEquality_ExclamationMarkEqualsSignKeyword_1ElementType());
 		}
 		kw='!='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpEquality_ExclamationMarkEqualsSignKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpEquality_EqualsSignEqualsSignEqualsSignKeyword_2ElementType());
 		}
 		kw='==='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpEquality_EqualsSignEqualsSignEqualsSignKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpEquality_ExclamationMarkEqualsSignEqualsSignKeyword_3ElementType());
 		}
 		kw='!=='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpEquality_ExclamationMarkEqualsSignEqualsSignKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -566,7 +556,6 @@ ruleOpEquality:
 entryRuleXRelationalExpression:
 	{ markComposite(elementTypeProvider.getXRelationalExpressionElementType()); }
 	ruleXRelationalExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XRelationalExpression
@@ -596,11 +585,11 @@ ruleXRelationalExpression:
 							}
 						)
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXRelationalExpression_InstanceofKeyword_1_0_0_0_1ElementType());
 						}
 						otherlv_2='instanceof'
 						{
-							doneLeaf(otherlv_2, elementTypeProvider.getXRelationalExpression_InstanceofKeyword_1_0_0_0_1ElementType());
+							doneLeaf(otherlv_2);
 						}
 					)
 				)
@@ -669,51 +658,50 @@ ruleXRelationalExpression:
 entryRuleOpCompare:
 	{ markComposite(elementTypeProvider.getOpCompareElementType()); }
 	ruleOpCompare
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpCompare
 ruleOpCompare:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpCompare_GreaterThanSignEqualsSignKeyword_0ElementType());
 		}
 		kw='>='
 		{
-			doneLeaf(kw, elementTypeProvider.getOpCompare_GreaterThanSignEqualsSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpCompare_LessThanSignKeyword_1_0ElementType());
 			}
 			kw='<'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpCompare_LessThanSignKeyword_1_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpCompare_EqualsSignKeyword_1_1ElementType());
 			}
 			kw='='
 			{
-				doneLeaf(kw, elementTypeProvider.getOpCompare_EqualsSignKeyword_1_1ElementType());
+				doneLeaf(kw);
 			}
 		)
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpCompare_GreaterThanSignKeyword_2ElementType());
 		}
 		kw='>'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpCompare_GreaterThanSignKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpCompare_LessThanSignKeyword_3ElementType());
 		}
 		kw='<'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpCompare_LessThanSignKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -722,7 +710,6 @@ ruleOpCompare:
 entryRuleXOtherOperatorExpression:
 	{ markComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); }
 	ruleXOtherOperatorExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XOtherOperatorExpression
@@ -786,68 +773,67 @@ ruleXOtherOperatorExpression:
 entryRuleOpOther:
 	{ markComposite(elementTypeProvider.getOpOtherElementType()); }
 	ruleOpOther
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpOther
 ruleOpOther:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_HyphenMinusGreaterThanSignKeyword_0ElementType());
 		}
 		kw='->'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_HyphenMinusGreaterThanSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_FullStopFullStopLessThanSignKeyword_1ElementType());
 		}
 		kw='..<'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_FullStopFullStopLessThanSignKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpOther_GreaterThanSignKeyword_2_0ElementType());
 			}
 			kw='>'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpOther_GreaterThanSignKeyword_2_0ElementType());
+				doneLeaf(kw);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpOther_FullStopFullStopKeyword_2_1ElementType());
 			}
 			kw='..'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpOther_FullStopFullStopKeyword_2_1ElementType());
+				doneLeaf(kw);
 			}
 		)
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_FullStopFullStopKeyword_3ElementType());
 		}
 		kw='..'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_FullStopFullStopKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_EqualsSignGreaterThanSignKeyword_4ElementType());
 		}
 		kw='=>'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_EqualsSignGreaterThanSignKeyword_4ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_0ElementType());
 			}
 			kw='>'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_0ElementType());
+				doneLeaf(kw);
 			}
 			(
 				(
@@ -858,39 +844,39 @@ ruleOpOther:
 					)=>
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_0_0_0ElementType());
 						}
 						kw='>'
 						{
-							doneLeaf(kw, elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_0_0_0ElementType());
+							doneLeaf(kw);
 						}
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_0_0_1ElementType());
 						}
 						kw='>'
 						{
-							doneLeaf(kw, elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_0_0_1ElementType());
+							doneLeaf(kw);
 						}
 					)
 				)
 				    |
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_1ElementType());
 				}
 				kw='>'
 				{
-					doneLeaf(kw, elementTypeProvider.getOpOther_GreaterThanSignKeyword_5_1_1ElementType());
+					doneLeaf(kw);
 				}
 			)
 		)
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getOpOther_LessThanSignKeyword_6_0ElementType());
 			}
 			kw='<'
 			{
-				doneLeaf(kw, elementTypeProvider.getOpOther_LessThanSignKeyword_6_0ElementType());
+				doneLeaf(kw);
 			}
 			(
 				(
@@ -901,54 +887,54 @@ ruleOpOther:
 					)=>
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_0_0_0ElementType());
 						}
 						kw='<'
 						{
-							doneLeaf(kw, elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_0_0_0ElementType());
+							doneLeaf(kw);
 						}
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_0_0_1ElementType());
 						}
 						kw='<'
 						{
-							doneLeaf(kw, elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_0_0_1ElementType());
+							doneLeaf(kw);
 						}
 					)
 				)
 				    |
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_1ElementType());
 				}
 				kw='<'
 				{
-					doneLeaf(kw, elementTypeProvider.getOpOther_LessThanSignKeyword_6_1_1ElementType());
+					doneLeaf(kw);
 				}
 				    |
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getOpOther_EqualsSignGreaterThanSignKeyword_6_1_2ElementType());
 				}
 				kw='=>'
 				{
-					doneLeaf(kw, elementTypeProvider.getOpOther_EqualsSignGreaterThanSignKeyword_6_1_2ElementType());
+					doneLeaf(kw);
 				}
 			)
 		)
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_LessThanSignGreaterThanSignKeyword_7ElementType());
 		}
 		kw='<>'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_LessThanSignGreaterThanSignKeyword_7ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpOther_QuestionMarkColonKeyword_8ElementType());
 		}
 		kw='?:'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpOther_QuestionMarkColonKeyword_8ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -957,7 +943,6 @@ ruleOpOther:
 entryRuleXAdditiveExpression:
 	{ markComposite(elementTypeProvider.getXAdditiveExpressionElementType()); }
 	ruleXAdditiveExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XAdditiveExpression
@@ -1021,26 +1006,25 @@ ruleXAdditiveExpression:
 entryRuleOpAdd:
 	{ markComposite(elementTypeProvider.getOpAddElementType()); }
 	ruleOpAdd
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpAdd
 ruleOpAdd:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpAdd_PlusSignKeyword_0ElementType());
 		}
 		kw='+'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpAdd_PlusSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpAdd_HyphenMinusKeyword_1ElementType());
 		}
 		kw='-'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpAdd_HyphenMinusKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -1049,7 +1033,6 @@ ruleOpAdd:
 entryRuleXMultiplicativeExpression:
 	{ markComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); }
 	ruleXMultiplicativeExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XMultiplicativeExpression
@@ -1113,42 +1096,41 @@ ruleXMultiplicativeExpression:
 entryRuleOpMulti:
 	{ markComposite(elementTypeProvider.getOpMultiElementType()); }
 	ruleOpMulti
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpMulti
 ruleOpMulti:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMulti_AsteriskKeyword_0ElementType());
 		}
 		kw='*'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMulti_AsteriskKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMulti_AsteriskAsteriskKeyword_1ElementType());
 		}
 		kw='**'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMulti_AsteriskAsteriskKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMulti_SolidusKeyword_2ElementType());
 		}
 		kw='/'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMulti_SolidusKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpMulti_PercentSignKeyword_3ElementType());
 		}
 		kw='%'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpMulti_PercentSignKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -1157,7 +1139,6 @@ ruleOpMulti:
 entryRuleXUnaryOperation:
 	{ markComposite(elementTypeProvider.getXUnaryOperationElementType()); }
 	ruleXUnaryOperation
-	{ doneComposite(); }
 	EOF;
 
 // Rule XUnaryOperation
@@ -1208,34 +1189,33 @@ ruleXUnaryOperation:
 entryRuleOpUnary:
 	{ markComposite(elementTypeProvider.getOpUnaryElementType()); }
 	ruleOpUnary
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpUnary
 ruleOpUnary:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpUnary_ExclamationMarkKeyword_0ElementType());
 		}
 		kw='!'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpUnary_ExclamationMarkKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpUnary_HyphenMinusKeyword_1ElementType());
 		}
 		kw='-'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpUnary_HyphenMinusKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpUnary_PlusSignKeyword_2ElementType());
 		}
 		kw='+'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpUnary_PlusSignKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -1244,7 +1224,6 @@ ruleOpUnary:
 entryRuleXCastedExpression:
 	{ markComposite(elementTypeProvider.getXCastedExpressionElementType()); }
 	ruleXCastedExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XCastedExpression
@@ -1273,11 +1252,11 @@ ruleXCastedExpression:
 						}
 					)
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXCastedExpression_AsKeyword_1_0_0_1ElementType());
 					}
 					otherlv_2='as'
 					{
-						doneLeaf(otherlv_2, elementTypeProvider.getXCastedExpression_AsKeyword_1_0_0_1ElementType());
+						doneLeaf(otherlv_2);
 					}
 				)
 			)
@@ -1300,7 +1279,6 @@ ruleXCastedExpression:
 entryRuleXPostfixOperation:
 	{ markComposite(elementTypeProvider.getXPostfixOperationElementType()); }
 	ruleXPostfixOperation
-	{ doneComposite(); }
 	EOF;
 
 // Rule XPostfixOperation
@@ -1351,26 +1329,25 @@ ruleXPostfixOperation:
 entryRuleOpPostfix:
 	{ markComposite(elementTypeProvider.getOpPostfixElementType()); }
 	ruleOpPostfix
-	{ doneComposite(); }
 	EOF;
 
 // Rule OpPostfix
 ruleOpPostfix:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpPostfix_PlusSignPlusSignKeyword_0ElementType());
 		}
 		kw='++'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpPostfix_PlusSignPlusSignKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getOpPostfix_HyphenMinusHyphenMinusKeyword_1ElementType());
 		}
 		kw='--'
 		{
-			doneLeaf(kw, elementTypeProvider.getOpPostfix_HyphenMinusHyphenMinusKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -1379,7 +1356,6 @@ ruleOpPostfix:
 entryRuleXMemberFeatureCall:
 	{ markComposite(elementTypeProvider.getXMemberFeatureCallElementType()); }
 	ruleXMemberFeatureCall
-	{ doneComposite(); }
 	EOF;
 
 // Rule XMemberFeatureCall
@@ -1424,21 +1400,21 @@ ruleXMemberFeatureCall:
 						)
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getXMemberFeatureCall_FullStopKeyword_1_0_0_0_1_0ElementType());
 							}
 							otherlv_2='.'
 							{
-								doneLeaf(otherlv_2, elementTypeProvider.getXMemberFeatureCall_FullStopKeyword_1_0_0_0_1_0ElementType());
+								doneLeaf(otherlv_2);
 							}
 							    |
 							(
 								(
 									{
-										markLeaf();
+										markLeaf(elementTypeProvider.getXMemberFeatureCall_ExplicitStaticColonColonKeyword_1_0_0_0_1_1_0ElementType());
 									}
 									lv_explicitStatic_3_0='::'
 									{
-										doneLeaf(lv_explicitStatic_3_0, elementTypeProvider.getXMemberFeatureCall_ExplicitStaticColonColonKeyword_1_0_0_0_1_1_0ElementType());
+										doneLeaf(lv_explicitStatic_3_0);
 									}
 								)
 							)
@@ -1507,21 +1483,21 @@ ruleXMemberFeatureCall:
 						)
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getXMemberFeatureCall_FullStopKeyword_1_1_0_0_1_0ElementType());
 							}
 							otherlv_8='.'
 							{
-								doneLeaf(otherlv_8, elementTypeProvider.getXMemberFeatureCall_FullStopKeyword_1_1_0_0_1_0ElementType());
+								doneLeaf(otherlv_8);
 							}
 							    |
 							(
 								(
 									{
-										markLeaf();
+										markLeaf(elementTypeProvider.getXMemberFeatureCall_NullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0ElementType());
 									}
 									lv_nullSafe_9_0='?.'
 									{
-										doneLeaf(lv_nullSafe_9_0, elementTypeProvider.getXMemberFeatureCall_NullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0ElementType());
+										doneLeaf(lv_nullSafe_9_0);
 									}
 								)
 							)
@@ -1529,11 +1505,11 @@ ruleXMemberFeatureCall:
 							(
 								(
 									{
-										markLeaf();
+										markLeaf(elementTypeProvider.getXMemberFeatureCall_ExplicitStaticColonColonKeyword_1_1_0_0_1_2_0ElementType());
 									}
 									lv_explicitStatic_10_0='::'
 									{
-										doneLeaf(lv_explicitStatic_10_0, elementTypeProvider.getXMemberFeatureCall_ExplicitStaticColonColonKeyword_1_1_0_0_1_2_0ElementType());
+										doneLeaf(lv_explicitStatic_10_0);
 									}
 								)
 							)
@@ -1542,11 +1518,11 @@ ruleXMemberFeatureCall:
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXMemberFeatureCall_LessThanSignKeyword_1_1_1_0ElementType());
 					}
 					otherlv_11='<'
 					{
-						doneLeaf(otherlv_11, elementTypeProvider.getXMemberFeatureCall_LessThanSignKeyword_1_1_1_0ElementType());
+						doneLeaf(otherlv_11);
 					}
 					(
 						(
@@ -1561,11 +1537,11 @@ ruleXMemberFeatureCall:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXMemberFeatureCall_CommaKeyword_1_1_1_2_0ElementType());
 						}
 						otherlv_13=','
 						{
-							doneLeaf(otherlv_13, elementTypeProvider.getXMemberFeatureCall_CommaKeyword_1_1_1_2_0ElementType());
+							doneLeaf(otherlv_13);
 						}
 						(
 							(
@@ -1580,11 +1556,11 @@ ruleXMemberFeatureCall:
 						)
 					)*
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXMemberFeatureCall_GreaterThanSignKeyword_1_1_1_3ElementType());
 					}
 					otherlv_15='>'
 					{
-						doneLeaf(otherlv_15, elementTypeProvider.getXMemberFeatureCall_GreaterThanSignKeyword_1_1_1_3ElementType());
+						doneLeaf(otherlv_15);
 					}
 				)?
 				(
@@ -1606,11 +1582,11 @@ ruleXMemberFeatureCall:
 						)=>
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getXMemberFeatureCall_ExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0ElementType());
 							}
 							lv_explicitOperationCall_17_0='('
 							{
-								doneLeaf(lv_explicitOperationCall_17_0, elementTypeProvider.getXMemberFeatureCall_ExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0ElementType());
+								doneLeaf(lv_explicitOperationCall_17_0);
 							}
 						)
 					)
@@ -1666,11 +1642,11 @@ ruleXMemberFeatureCall:
 							)
 							(
 								{
-									markLeaf();
+									markLeaf(elementTypeProvider.getXMemberFeatureCall_CommaKeyword_1_1_3_1_1_1_0ElementType());
 								}
 								otherlv_20=','
 								{
-									doneLeaf(otherlv_20, elementTypeProvider.getXMemberFeatureCall_CommaKeyword_1_1_3_1_1_1_0ElementType());
+									doneLeaf(otherlv_20);
 								}
 								(
 									(
@@ -1687,11 +1663,11 @@ ruleXMemberFeatureCall:
 						)
 					)?
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXMemberFeatureCall_RightParenthesisKeyword_1_1_3_2ElementType());
 					}
 					otherlv_22=')'
 					{
-						doneLeaf(otherlv_22, elementTypeProvider.getXMemberFeatureCall_RightParenthesisKeyword_1_1_3_2ElementType());
+						doneLeaf(otherlv_22);
 					}
 				)?
 				(
@@ -1720,7 +1696,6 @@ ruleXMemberFeatureCall:
 entryRuleXPrimaryExpression:
 	{ markComposite(elementTypeProvider.getXPrimaryExpressionElementType()); }
 	ruleXPrimaryExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XPrimaryExpression
@@ -1876,7 +1851,6 @@ ruleXPrimaryExpression:
 entryRuleXLiteral:
 	{ markComposite(elementTypeProvider.getXLiteralElementType()); }
 	ruleXLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XLiteral
@@ -1952,7 +1926,6 @@ ruleXLiteral:
 entryRuleXCollectionLiteral:
 	{ markComposite(elementTypeProvider.getXCollectionLiteralElementType()); }
 	ruleXCollectionLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XCollectionLiteral
@@ -1980,7 +1953,6 @@ ruleXCollectionLiteral:
 entryRuleXSetLiteral:
 	{ markComposite(elementTypeProvider.getXSetLiteralElementType()); }
 	ruleXSetLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XSetLiteral
@@ -1993,18 +1965,18 @@ ruleXSetLiteral:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSetLiteral_NumberSignKeyword_1ElementType());
 		}
 		otherlv_1='#'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXSetLiteral_NumberSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSetLiteral_LeftCurlyBracketKeyword_2ElementType());
 		}
 		otherlv_2='{'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXSetLiteral_LeftCurlyBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -2020,11 +1992,11 @@ ruleXSetLiteral:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXSetLiteral_CommaKeyword_3_1_0ElementType());
 				}
 				otherlv_4=','
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getXSetLiteral_CommaKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -2040,11 +2012,11 @@ ruleXSetLiteral:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSetLiteral_RightCurlyBracketKeyword_4ElementType());
 		}
 		otherlv_6='}'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getXSetLiteral_RightCurlyBracketKeyword_4ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;
@@ -2053,7 +2025,6 @@ ruleXSetLiteral:
 entryRuleXListLiteral:
 	{ markComposite(elementTypeProvider.getXListLiteralElementType()); }
 	ruleXListLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XListLiteral
@@ -2066,18 +2037,18 @@ ruleXListLiteral:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXListLiteral_NumberSignKeyword_1ElementType());
 		}
 		otherlv_1='#'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXListLiteral_NumberSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXListLiteral_LeftSquareBracketKeyword_2ElementType());
 		}
 		otherlv_2='['
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXListLiteral_LeftSquareBracketKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -2093,11 +2064,11 @@ ruleXListLiteral:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXListLiteral_CommaKeyword_3_1_0ElementType());
 				}
 				otherlv_4=','
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getXListLiteral_CommaKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -2113,11 +2084,11 @@ ruleXListLiteral:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXListLiteral_RightSquareBracketKeyword_4ElementType());
 		}
 		otherlv_6=']'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getXListLiteral_RightSquareBracketKeyword_4ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;
@@ -2126,7 +2097,6 @@ ruleXListLiteral:
 entryRuleXClosure:
 	{ markComposite(elementTypeProvider.getXClosureElementType()); }
 	ruleXClosure
-	{ doneComposite(); }
 	EOF;
 
 // Rule XClosure
@@ -2147,11 +2117,11 @@ ruleXClosure:
 					}
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXClosure_LeftSquareBracketKeyword_0_0_1ElementType());
 				}
 				otherlv_1='['
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getXClosure_LeftSquareBracketKeyword_0_0_1ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 		)
@@ -2194,11 +2164,11 @@ ruleXClosure:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXClosure_CommaKeyword_1_0_0_1_0ElementType());
 						}
 						otherlv_3=','
 						{
-							doneLeaf(otherlv_3, elementTypeProvider.getXClosure_CommaKeyword_1_0_0_1_0ElementType());
+							doneLeaf(otherlv_3);
 						}
 						(
 							(
@@ -2216,11 +2186,11 @@ ruleXClosure:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXClosure_ExplicitSyntaxVerticalLineKeyword_1_0_1_0ElementType());
 						}
 						lv_explicitSyntax_5_0='|'
 						{
-							doneLeaf(lv_explicitSyntax_5_0, elementTypeProvider.getXClosure_ExplicitSyntaxVerticalLineKeyword_1_0_1_0ElementType());
+							doneLeaf(lv_explicitSyntax_5_0);
 						}
 					)
 				)
@@ -2238,11 +2208,11 @@ ruleXClosure:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXClosure_RightSquareBracketKeyword_3ElementType());
 		}
 		otherlv_7=']'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getXClosure_RightSquareBracketKeyword_3ElementType());
+			doneLeaf(otherlv_7);
 		}
 	)
 ;
@@ -2251,7 +2221,6 @@ ruleXClosure:
 entryRuleXExpressionInClosure:
 	{ markComposite(elementTypeProvider.getXExpressionInClosureElementType()); }
 	ruleXExpressionInClosure
-	{ doneComposite(); }
 	EOF;
 
 // Rule XExpressionInClosure
@@ -2277,11 +2246,11 @@ ruleXExpressionInClosure:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXExpressionInClosure_SemicolonKeyword_1_1ElementType());
 				}
 				otherlv_2=';'
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getXExpressionInClosure_SemicolonKeyword_1_1ElementType());
+					doneLeaf(otherlv_2);
 				}
 			)?
 		)*
@@ -2292,7 +2261,6 @@ ruleXExpressionInClosure:
 entryRuleXShortClosure:
 	{ markComposite(elementTypeProvider.getXShortClosureElementType()); }
 	ruleXShortClosure
-	{ doneComposite(); }
 	EOF;
 
 // Rule XShortClosure
@@ -2345,11 +2313,11 @@ ruleXShortClosure:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXShortClosure_CommaKeyword_0_0_1_1_0ElementType());
 						}
 						otherlv_2=','
 						{
-							doneLeaf(otherlv_2, elementTypeProvider.getXShortClosure_CommaKeyword_0_0_1_1_0ElementType());
+							doneLeaf(otherlv_2);
 						}
 						(
 							(
@@ -2367,11 +2335,11 @@ ruleXShortClosure:
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXShortClosure_ExplicitSyntaxVerticalLineKeyword_0_0_2_0ElementType());
 						}
 						lv_explicitSyntax_4_0='|'
 						{
-							doneLeaf(lv_explicitSyntax_4_0, elementTypeProvider.getXShortClosure_ExplicitSyntaxVerticalLineKeyword_0_0_2_0ElementType());
+							doneLeaf(lv_explicitSyntax_4_0);
 						}
 					)
 				)
@@ -2395,18 +2363,17 @@ ruleXShortClosure:
 entryRuleXParenthesizedExpression:
 	{ markComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); }
 	ruleXParenthesizedExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XParenthesizedExpression
 ruleXParenthesizedExpression:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXParenthesizedExpression_LeftParenthesisKeyword_0ElementType());
 		}
 		otherlv_0='('
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getXParenthesizedExpression_LeftParenthesisKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getXParenthesizedExpression_XExpressionParserRuleCall_1ElementType());
@@ -2416,11 +2383,11 @@ ruleXParenthesizedExpression:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXParenthesizedExpression_RightParenthesisKeyword_2ElementType());
 		}
 		otherlv_2=')'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXParenthesizedExpression_RightParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -2429,7 +2396,6 @@ ruleXParenthesizedExpression:
 entryRuleXIfExpression:
 	{ markComposite(elementTypeProvider.getXIfExpressionElementType()); }
 	ruleXIfExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XIfExpression
@@ -2442,18 +2408,18 @@ ruleXIfExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXIfExpression_IfKeyword_1ElementType());
 		}
 		otherlv_1='if'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXIfExpression_IfKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXIfExpression_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXIfExpression_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -2467,11 +2433,11 @@ ruleXIfExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXIfExpression_RightParenthesisKeyword_4ElementType());
 		}
 		otherlv_4=')'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getXIfExpression_RightParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
@@ -2488,11 +2454,11 @@ ruleXIfExpression:
 			(
 				('else')=>
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXIfExpression_ElseKeyword_6_0ElementType());
 				}
 				otherlv_6='else'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getXIfExpression_ElseKeyword_6_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 			)
 			(
@@ -2514,7 +2480,6 @@ ruleXIfExpression:
 entryRuleXSwitchExpression:
 	{ markComposite(elementTypeProvider.getXSwitchExpressionElementType()); }
 	ruleXSwitchExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XSwitchExpression
@@ -2527,11 +2492,11 @@ ruleXSwitchExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSwitchExpression_SwitchKeyword_1ElementType());
 		}
 		otherlv_1='switch'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXSwitchExpression_SwitchKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -2548,11 +2513,11 @@ ruleXSwitchExpression:
 					)=>
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXSwitchExpression_LeftParenthesisKeyword_2_0_0_0_0ElementType());
 						}
 						otherlv_2='('
 						{
-							doneLeaf(otherlv_2, elementTypeProvider.getXSwitchExpression_LeftParenthesisKeyword_2_0_0_0_0ElementType());
+							doneLeaf(otherlv_2);
 						}
 						(
 							(
@@ -2566,11 +2531,11 @@ ruleXSwitchExpression:
 							)
 						)
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXSwitchExpression_ColonKeyword_2_0_0_0_2ElementType());
 						}
 						otherlv_4=':'
 						{
-							doneLeaf(otherlv_4, elementTypeProvider.getXSwitchExpression_ColonKeyword_2_0_0_0_2ElementType());
+							doneLeaf(otherlv_4);
 						}
 					)
 				)
@@ -2586,11 +2551,11 @@ ruleXSwitchExpression:
 					)
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXSwitchExpression_RightParenthesisKeyword_2_0_2ElementType());
 				}
 				otherlv_6=')'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getXSwitchExpression_RightParenthesisKeyword_2_0_2ElementType());
+					doneLeaf(otherlv_6);
 				}
 			)
 			    |
@@ -2618,11 +2583,11 @@ ruleXSwitchExpression:
 							)
 						)
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXSwitchExpression_ColonKeyword_2_1_0_0_1ElementType());
 						}
 						otherlv_8=':'
 						{
-							doneLeaf(otherlv_8, elementTypeProvider.getXSwitchExpression_ColonKeyword_2_1_0_0_1ElementType());
+							doneLeaf(otherlv_8);
 						}
 					)
 				)?
@@ -2640,11 +2605,11 @@ ruleXSwitchExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSwitchExpression_LeftCurlyBracketKeyword_3ElementType());
 		}
 		otherlv_10='{'
 		{
-			doneLeaf(otherlv_10, elementTypeProvider.getXSwitchExpression_LeftCurlyBracketKeyword_3ElementType());
+			doneLeaf(otherlv_10);
 		}
 		(
 			(
@@ -2659,18 +2624,18 @@ ruleXSwitchExpression:
 		)*
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXSwitchExpression_DefaultKeyword_5_0ElementType());
 			}
 			otherlv_12='default'
 			{
-				doneLeaf(otherlv_12, elementTypeProvider.getXSwitchExpression_DefaultKeyword_5_0ElementType());
+				doneLeaf(otherlv_12);
 			}
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXSwitchExpression_ColonKeyword_5_1ElementType());
 			}
 			otherlv_13=':'
 			{
-				doneLeaf(otherlv_13, elementTypeProvider.getXSwitchExpression_ColonKeyword_5_1ElementType());
+				doneLeaf(otherlv_13);
 			}
 			(
 				(
@@ -2685,11 +2650,11 @@ ruleXSwitchExpression:
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSwitchExpression_RightCurlyBracketKeyword_6ElementType());
 		}
 		otherlv_15='}'
 		{
-			doneLeaf(otherlv_15, elementTypeProvider.getXSwitchExpression_RightCurlyBracketKeyword_6ElementType());
+			doneLeaf(otherlv_15);
 		}
 	)
 ;
@@ -2698,7 +2663,6 @@ ruleXSwitchExpression:
 entryRuleXCasePart:
 	{ markComposite(elementTypeProvider.getXCasePartElementType()); }
 	ruleXCasePart
-	{ doneComposite(); }
 	EOF;
 
 // Rule XCasePart
@@ -2723,11 +2687,11 @@ ruleXCasePart:
 		)?
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXCasePart_CaseKeyword_2_0ElementType());
 			}
 			otherlv_2='case'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getXCasePart_CaseKeyword_2_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -2744,11 +2708,11 @@ ruleXCasePart:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXCasePart_ColonKeyword_3_0_0ElementType());
 				}
 				otherlv_4=':'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getXCasePart_ColonKeyword_3_0_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -2766,11 +2730,11 @@ ruleXCasePart:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXCasePart_FallThroughCommaKeyword_3_1_0ElementType());
 					}
 					lv_fallThrough_6_0=','
 					{
-						doneLeaf(lv_fallThrough_6_0, elementTypeProvider.getXCasePart_FallThroughCommaKeyword_3_1_0ElementType());
+						doneLeaf(lv_fallThrough_6_0);
 					}
 				)
 			)
@@ -2782,7 +2746,6 @@ ruleXCasePart:
 entryRuleXForLoopExpression:
 	{ markComposite(elementTypeProvider.getXForLoopExpressionElementType()); }
 	ruleXForLoopExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XForLoopExpression
@@ -2810,18 +2773,18 @@ ruleXForLoopExpression:
 					}
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXForLoopExpression_ForKeyword_0_0_1ElementType());
 				}
 				otherlv_1='for'
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getXForLoopExpression_ForKeyword_0_0_1ElementType());
+					doneLeaf(otherlv_1);
 				}
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXForLoopExpression_LeftParenthesisKeyword_0_0_2ElementType());
 				}
 				otherlv_2='('
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getXForLoopExpression_LeftParenthesisKeyword_0_0_2ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
@@ -2835,11 +2798,11 @@ ruleXForLoopExpression:
 					)
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXForLoopExpression_ColonKeyword_0_0_4ElementType());
 				}
 				otherlv_4=':'
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getXForLoopExpression_ColonKeyword_0_0_4ElementType());
+					doneLeaf(otherlv_4);
 				}
 			)
 		)
@@ -2855,11 +2818,11 @@ ruleXForLoopExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXForLoopExpression_RightParenthesisKeyword_2ElementType());
 		}
 		otherlv_6=')'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getXForLoopExpression_RightParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_6);
 		}
 		(
 			(
@@ -2879,7 +2842,6 @@ ruleXForLoopExpression:
 entryRuleXBasicForLoopExpression:
 	{ markComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); }
 	ruleXBasicForLoopExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XBasicForLoopExpression
@@ -2892,18 +2854,18 @@ ruleXBasicForLoopExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBasicForLoopExpression_ForKeyword_1ElementType());
 		}
 		otherlv_1='for'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXBasicForLoopExpression_ForKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBasicForLoopExpression_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXBasicForLoopExpression_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -2919,11 +2881,11 @@ ruleXBasicForLoopExpression:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXBasicForLoopExpression_CommaKeyword_3_1_0ElementType());
 				}
 				otherlv_4=','
 				{
-					doneLeaf(otherlv_4, elementTypeProvider.getXBasicForLoopExpression_CommaKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_4);
 				}
 				(
 					(
@@ -2939,11 +2901,11 @@ ruleXBasicForLoopExpression:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBasicForLoopExpression_SemicolonKeyword_4ElementType());
 		}
 		otherlv_6=';'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getXBasicForLoopExpression_SemicolonKeyword_4ElementType());
+			doneLeaf(otherlv_6);
 		}
 		(
 			(
@@ -2957,11 +2919,11 @@ ruleXBasicForLoopExpression:
 			)
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBasicForLoopExpression_SemicolonKeyword_6ElementType());
 		}
 		otherlv_8=';'
 		{
-			doneLeaf(otherlv_8, elementTypeProvider.getXBasicForLoopExpression_SemicolonKeyword_6ElementType());
+			doneLeaf(otherlv_8);
 		}
 		(
 			(
@@ -2977,11 +2939,11 @@ ruleXBasicForLoopExpression:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXBasicForLoopExpression_CommaKeyword_7_1_0ElementType());
 				}
 				otherlv_10=','
 				{
-					doneLeaf(otherlv_10, elementTypeProvider.getXBasicForLoopExpression_CommaKeyword_7_1_0ElementType());
+					doneLeaf(otherlv_10);
 				}
 				(
 					(
@@ -2997,11 +2959,11 @@ ruleXBasicForLoopExpression:
 			)*
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBasicForLoopExpression_RightParenthesisKeyword_8ElementType());
 		}
 		otherlv_12=')'
 		{
-			doneLeaf(otherlv_12, elementTypeProvider.getXBasicForLoopExpression_RightParenthesisKeyword_8ElementType());
+			doneLeaf(otherlv_12);
 		}
 		(
 			(
@@ -3021,7 +2983,6 @@ ruleXBasicForLoopExpression:
 entryRuleXWhileExpression:
 	{ markComposite(elementTypeProvider.getXWhileExpressionElementType()); }
 	ruleXWhileExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XWhileExpression
@@ -3034,18 +2995,18 @@ ruleXWhileExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXWhileExpression_WhileKeyword_1ElementType());
 		}
 		otherlv_1='while'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXWhileExpression_WhileKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXWhileExpression_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXWhileExpression_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -3059,11 +3020,11 @@ ruleXWhileExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXWhileExpression_RightParenthesisKeyword_4ElementType());
 		}
 		otherlv_4=')'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getXWhileExpression_RightParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
@@ -3083,7 +3044,6 @@ ruleXWhileExpression:
 entryRuleXDoWhileExpression:
 	{ markComposite(elementTypeProvider.getXDoWhileExpressionElementType()); }
 	ruleXDoWhileExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XDoWhileExpression
@@ -3096,11 +3056,11 @@ ruleXDoWhileExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXDoWhileExpression_DoKeyword_1ElementType());
 		}
 		otherlv_1='do'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXDoWhileExpression_DoKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -3114,18 +3074,18 @@ ruleXDoWhileExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXDoWhileExpression_WhileKeyword_3ElementType());
 		}
 		otherlv_3='while'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getXDoWhileExpression_WhileKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXDoWhileExpression_LeftParenthesisKeyword_4ElementType());
 		}
 		otherlv_4='('
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getXDoWhileExpression_LeftParenthesisKeyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
@@ -3139,11 +3099,11 @@ ruleXDoWhileExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXDoWhileExpression_RightParenthesisKeyword_6ElementType());
 		}
 		otherlv_6=')'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getXDoWhileExpression_RightParenthesisKeyword_6ElementType());
+			doneLeaf(otherlv_6);
 		}
 	)
 ;
@@ -3152,7 +3112,6 @@ ruleXDoWhileExpression:
 entryRuleXBlockExpression:
 	{ markComposite(elementTypeProvider.getXBlockExpressionElementType()); }
 	ruleXBlockExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XBlockExpression
@@ -3165,11 +3124,11 @@ ruleXBlockExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBlockExpression_LeftCurlyBracketKeyword_1ElementType());
 		}
 		otherlv_1='{'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXBlockExpression_LeftCurlyBracketKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -3185,20 +3144,20 @@ ruleXBlockExpression:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXBlockExpression_SemicolonKeyword_2_1ElementType());
 				}
 				otherlv_3=';'
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getXBlockExpression_SemicolonKeyword_2_1ElementType());
+					doneLeaf(otherlv_3);
 				}
 			)?
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXBlockExpression_RightCurlyBracketKeyword_3ElementType());
 		}
 		otherlv_4='}'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getXBlockExpression_RightCurlyBracketKeyword_3ElementType());
+			doneLeaf(otherlv_4);
 		}
 	)
 ;
@@ -3207,7 +3166,6 @@ ruleXBlockExpression:
 entryRuleXExpressionOrVarDeclaration:
 	{ markComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); }
 	ruleXExpressionOrVarDeclaration
-	{ doneComposite(); }
 	EOF;
 
 // Rule XExpressionOrVarDeclaration
@@ -3235,7 +3193,6 @@ ruleXExpressionOrVarDeclaration:
 entryRuleXVariableDeclaration:
 	{ markComposite(elementTypeProvider.getXVariableDeclarationElementType()); }
 	ruleXVariableDeclaration
-	{ doneComposite(); }
 	EOF;
 
 // Rule XVariableDeclaration
@@ -3251,21 +3208,21 @@ ruleXVariableDeclaration:
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXVariableDeclaration_WriteableVarKeyword_1_0_0ElementType());
 					}
 					lv_writeable_1_0='var'
 					{
-						doneLeaf(lv_writeable_1_0, elementTypeProvider.getXVariableDeclaration_WriteableVarKeyword_1_0_0ElementType());
+						doneLeaf(lv_writeable_1_0);
 					}
 				)
 			)
 			    |
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXVariableDeclaration_ValKeyword_1_1ElementType());
 			}
 			otherlv_2='val'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getXVariableDeclaration_ValKeyword_1_1ElementType());
+				doneLeaf(otherlv_2);
 			}
 		)
 		(
@@ -3323,11 +3280,11 @@ ruleXVariableDeclaration:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXVariableDeclaration_EqualsSignKeyword_3_0ElementType());
 			}
 			otherlv_6='='
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getXVariableDeclaration_EqualsSignKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
@@ -3348,7 +3305,6 @@ ruleXVariableDeclaration:
 entryRuleJvmFormalParameter:
 	{ markComposite(elementTypeProvider.getJvmFormalParameterElementType()); }
 	ruleJvmFormalParameter
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmFormalParameter
@@ -3383,7 +3339,6 @@ ruleJvmFormalParameter:
 entryRuleFullJvmFormalParameter:
 	{ markComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); }
 	ruleFullJvmFormalParameter
-	{ doneComposite(); }
 	EOF;
 
 // Rule FullJvmFormalParameter
@@ -3418,7 +3373,6 @@ ruleFullJvmFormalParameter:
 entryRuleXFeatureCall:
 	{ markComposite(elementTypeProvider.getXFeatureCallElementType()); }
 	ruleXFeatureCall
-	{ doneComposite(); }
 	EOF;
 
 // Rule XFeatureCall
@@ -3432,11 +3386,11 @@ ruleXFeatureCall:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXFeatureCall_LessThanSignKeyword_1_0ElementType());
 			}
 			otherlv_1='<'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getXFeatureCall_LessThanSignKeyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			(
 				(
@@ -3451,11 +3405,11 @@ ruleXFeatureCall:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXFeatureCall_CommaKeyword_1_2_0ElementType());
 				}
 				otherlv_3=','
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getXFeatureCall_CommaKeyword_1_2_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 				(
 					(
@@ -3470,11 +3424,11 @@ ruleXFeatureCall:
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXFeatureCall_GreaterThanSignKeyword_1_3ElementType());
 			}
 			otherlv_5='>'
 			{
-				doneLeaf(otherlv_5, elementTypeProvider.getXFeatureCall_GreaterThanSignKeyword_1_3ElementType());
+				doneLeaf(otherlv_5);
 			}
 		)?
 		(
@@ -3496,11 +3450,11 @@ ruleXFeatureCall:
 				)=>
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXFeatureCall_ExplicitOperationCallLeftParenthesisKeyword_3_0_0ElementType());
 					}
 					lv_explicitOperationCall_7_0='('
 					{
-						doneLeaf(lv_explicitOperationCall_7_0, elementTypeProvider.getXFeatureCall_ExplicitOperationCallLeftParenthesisKeyword_3_0_0ElementType());
+						doneLeaf(lv_explicitOperationCall_7_0);
 					}
 				)
 			)
@@ -3556,11 +3510,11 @@ ruleXFeatureCall:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXFeatureCall_CommaKeyword_3_1_1_1_0ElementType());
 						}
 						otherlv_10=','
 						{
-							doneLeaf(otherlv_10, elementTypeProvider.getXFeatureCall_CommaKeyword_3_1_1_1_0ElementType());
+							doneLeaf(otherlv_10);
 						}
 						(
 							(
@@ -3577,11 +3531,11 @@ ruleXFeatureCall:
 				)
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXFeatureCall_RightParenthesisKeyword_3_2ElementType());
 			}
 			otherlv_12=')'
 			{
-				doneLeaf(otherlv_12, elementTypeProvider.getXFeatureCall_RightParenthesisKeyword_3_2ElementType());
+				doneLeaf(otherlv_12);
 			}
 		)?
 		(
@@ -3608,7 +3562,6 @@ ruleXFeatureCall:
 entryRuleFeatureCallID:
 	{ markComposite(elementTypeProvider.getFeatureCallIDElementType()); }
 	ruleFeatureCallID
-	{ doneComposite(); }
 	EOF;
 
 // Rule FeatureCallID
@@ -3623,35 +3576,35 @@ ruleFeatureCallID:
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFeatureCallID_ExtendsKeyword_1ElementType());
 		}
 		kw='extends'
 		{
-			doneLeaf(kw, elementTypeProvider.getFeatureCallID_ExtendsKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFeatureCallID_StaticKeyword_2ElementType());
 		}
 		kw='static'
 		{
-			doneLeaf(kw, elementTypeProvider.getFeatureCallID_StaticKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFeatureCallID_ImportKeyword_3ElementType());
 		}
 		kw='import'
 		{
-			doneLeaf(kw, elementTypeProvider.getFeatureCallID_ImportKeyword_3ElementType());
+			doneLeaf(kw);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFeatureCallID_ExtensionKeyword_4ElementType());
 		}
 		kw='extension'
 		{
-			doneLeaf(kw, elementTypeProvider.getFeatureCallID_ExtensionKeyword_4ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -3660,7 +3613,6 @@ ruleFeatureCallID:
 entryRuleIdOrSuper:
 	{ markComposite(elementTypeProvider.getIdOrSuperElementType()); }
 	ruleIdOrSuper
-	{ doneComposite(); }
 	EOF;
 
 // Rule IdOrSuper
@@ -3675,11 +3627,11 @@ ruleIdOrSuper:
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getIdOrSuper_SuperKeyword_1ElementType());
 		}
 		kw='super'
 		{
-			doneLeaf(kw, elementTypeProvider.getIdOrSuper_SuperKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -3688,7 +3640,6 @@ ruleIdOrSuper:
 entryRuleXConstructorCall:
 	{ markComposite(elementTypeProvider.getXConstructorCallElementType()); }
 	ruleXConstructorCall
-	{ doneComposite(); }
 	EOF;
 
 // Rule XConstructorCall
@@ -3701,11 +3652,11 @@ ruleXConstructorCall:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXConstructorCall_NewKeyword_1ElementType());
 		}
 		otherlv_1='new'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXConstructorCall_NewKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -3722,11 +3673,11 @@ ruleXConstructorCall:
 			(
 				('<')=>
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXConstructorCall_LessThanSignKeyword_3_0ElementType());
 				}
 				otherlv_3='<'
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getXConstructorCall_LessThanSignKeyword_3_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 			)
 			(
@@ -3742,11 +3693,11 @@ ruleXConstructorCall:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXConstructorCall_CommaKeyword_3_2_0ElementType());
 				}
 				otherlv_5=','
 				{
-					doneLeaf(otherlv_5, elementTypeProvider.getXConstructorCall_CommaKeyword_3_2_0ElementType());
+					doneLeaf(otherlv_5);
 				}
 				(
 					(
@@ -3761,11 +3712,11 @@ ruleXConstructorCall:
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXConstructorCall_GreaterThanSignKeyword_3_3ElementType());
 			}
 			otherlv_7='>'
 			{
-				doneLeaf(otherlv_7, elementTypeProvider.getXConstructorCall_GreaterThanSignKeyword_3_3ElementType());
+				doneLeaf(otherlv_7);
 			}
 		)?
 		(
@@ -3776,11 +3727,11 @@ ruleXConstructorCall:
 				)=>
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXConstructorCall_ExplicitConstructorCallLeftParenthesisKeyword_4_0_0ElementType());
 					}
 					lv_explicitConstructorCall_8_0='('
 					{
-						doneLeaf(lv_explicitConstructorCall_8_0, elementTypeProvider.getXConstructorCall_ExplicitConstructorCallLeftParenthesisKeyword_4_0_0ElementType());
+						doneLeaf(lv_explicitConstructorCall_8_0);
 					}
 				)
 			)
@@ -3836,11 +3787,11 @@ ruleXConstructorCall:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXConstructorCall_CommaKeyword_4_1_1_1_0ElementType());
 						}
 						otherlv_11=','
 						{
-							doneLeaf(otherlv_11, elementTypeProvider.getXConstructorCall_CommaKeyword_4_1_1_1_0ElementType());
+							doneLeaf(otherlv_11);
 						}
 						(
 							(
@@ -3857,11 +3808,11 @@ ruleXConstructorCall:
 				)
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXConstructorCall_RightParenthesisKeyword_4_2ElementType());
 			}
 			otherlv_13=')'
 			{
-				doneLeaf(otherlv_13, elementTypeProvider.getXConstructorCall_RightParenthesisKeyword_4_2ElementType());
+				doneLeaf(otherlv_13);
 			}
 		)?
 		(
@@ -3888,7 +3839,6 @@ ruleXConstructorCall:
 entryRuleXBooleanLiteral:
 	{ markComposite(elementTypeProvider.getXBooleanLiteralElementType()); }
 	ruleXBooleanLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XBooleanLiteral
@@ -3902,21 +3852,21 @@ ruleXBooleanLiteral:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXBooleanLiteral_FalseKeyword_1_0ElementType());
 			}
 			otherlv_1='false'
 			{
-				doneLeaf(otherlv_1, elementTypeProvider.getXBooleanLiteral_FalseKeyword_1_0ElementType());
+				doneLeaf(otherlv_1);
 			}
 			    |
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXBooleanLiteral_IsTrueTrueKeyword_1_1_0ElementType());
 					}
 					lv_isTrue_2_0='true'
 					{
-						doneLeaf(lv_isTrue_2_0, elementTypeProvider.getXBooleanLiteral_IsTrueTrueKeyword_1_1_0ElementType());
+						doneLeaf(lv_isTrue_2_0);
 					}
 				)
 			)
@@ -3928,7 +3878,6 @@ ruleXBooleanLiteral:
 entryRuleXNullLiteral:
 	{ markComposite(elementTypeProvider.getXNullLiteralElementType()); }
 	ruleXNullLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XNullLiteral
@@ -3941,11 +3890,11 @@ ruleXNullLiteral:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXNullLiteral_NullKeyword_1ElementType());
 		}
 		otherlv_1='null'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXNullLiteral_NullKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;
@@ -3954,7 +3903,6 @@ ruleXNullLiteral:
 entryRuleXNumberLiteral:
 	{ markComposite(elementTypeProvider.getXNumberLiteralElementType()); }
 	ruleXNumberLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XNumberLiteral
@@ -3984,7 +3932,6 @@ ruleXNumberLiteral:
 entryRuleXStringLiteral:
 	{ markComposite(elementTypeProvider.getXStringLiteralElementType()); }
 	ruleXStringLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XStringLiteral
@@ -3999,11 +3946,11 @@ ruleXStringLiteral:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXStringLiteral_ValueSTRINGTerminalRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=RULE_STRING
 				{
-					doneLeaf(lv_value_1_0, elementTypeProvider.getXStringLiteral_ValueSTRINGTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_value_1_0);
 				}
 			)
 		)
@@ -4014,7 +3961,6 @@ ruleXStringLiteral:
 entryRuleXTypeLiteral:
 	{ markComposite(elementTypeProvider.getXTypeLiteralElementType()); }
 	ruleXTypeLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule XTypeLiteral
@@ -4027,18 +3973,18 @@ ruleXTypeLiteral:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXTypeLiteral_TypeofKeyword_1ElementType());
 		}
 		otherlv_1='typeof'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXTypeLiteral_TypeofKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXTypeLiteral_LeftParenthesisKeyword_2ElementType());
 		}
 		otherlv_2='('
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getXTypeLiteral_LeftParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 		(
 			(
@@ -4063,11 +4009,11 @@ ruleXTypeLiteral:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXTypeLiteral_RightParenthesisKeyword_5ElementType());
 		}
 		otherlv_5=')'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getXTypeLiteral_RightParenthesisKeyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 	)
 ;
@@ -4076,7 +4022,6 @@ ruleXTypeLiteral:
 entryRuleXThrowExpression:
 	{ markComposite(elementTypeProvider.getXThrowExpressionElementType()); }
 	ruleXThrowExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XThrowExpression
@@ -4089,11 +4034,11 @@ ruleXThrowExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXThrowExpression_ThrowKeyword_1ElementType());
 		}
 		otherlv_1='throw'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXThrowExpression_ThrowKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -4113,7 +4058,6 @@ ruleXThrowExpression:
 entryRuleXReturnExpression:
 	{ markComposite(elementTypeProvider.getXReturnExpressionElementType()); }
 	ruleXReturnExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XReturnExpression
@@ -4126,11 +4070,11 @@ ruleXReturnExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXReturnExpression_ReturnKeyword_1ElementType());
 		}
 		otherlv_1='return'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXReturnExpression_ReturnKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			('extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING)=>
@@ -4151,7 +4095,6 @@ ruleXReturnExpression:
 entryRuleXTryCatchFinallyExpression:
 	{ markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); }
 	ruleXTryCatchFinallyExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XTryCatchFinallyExpression
@@ -4164,11 +4107,11 @@ ruleXTryCatchFinallyExpression:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_TryKeyword_1ElementType());
 		}
 		otherlv_1='try'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXTryCatchFinallyExpression_TryKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -4199,11 +4142,11 @@ ruleXTryCatchFinallyExpression:
 					(
 						('finally')=>
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_0_1_0ElementType());
 						}
 						otherlv_4='finally'
 						{
-							doneLeaf(otherlv_4, elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_0_1_0ElementType());
+							doneLeaf(otherlv_4);
 						}
 					)
 					(
@@ -4222,11 +4165,11 @@ ruleXTryCatchFinallyExpression:
 			    |
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_1_0ElementType());
 				}
 				otherlv_6='finally'
 				{
-					doneLeaf(otherlv_6, elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_1_0ElementType());
+					doneLeaf(otherlv_6);
 				}
 				(
 					(
@@ -4248,7 +4191,6 @@ ruleXTryCatchFinallyExpression:
 entryRuleXSynchronizedExpression:
 	{ markComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); }
 	ruleXSynchronizedExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule XSynchronizedExpression
@@ -4270,18 +4212,18 @@ ruleXSynchronizedExpression:
 					}
 				)
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXSynchronizedExpression_SynchronizedKeyword_0_0_1ElementType());
 				}
 				otherlv_1='synchronized'
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getXSynchronizedExpression_SynchronizedKeyword_0_0_1ElementType());
+					doneLeaf(otherlv_1);
 				}
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getXSynchronizedExpression_LeftParenthesisKeyword_0_0_2ElementType());
 				}
 				otherlv_2='('
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getXSynchronizedExpression_LeftParenthesisKeyword_0_0_2ElementType());
+					doneLeaf(otherlv_2);
 				}
 			)
 		)
@@ -4297,11 +4239,11 @@ ruleXSynchronizedExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXSynchronizedExpression_RightParenthesisKeyword_2ElementType());
 		}
 		otherlv_4=')'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getXSynchronizedExpression_RightParenthesisKeyword_2ElementType());
+			doneLeaf(otherlv_4);
 		}
 		(
 			(
@@ -4321,7 +4263,6 @@ ruleXSynchronizedExpression:
 entryRuleXCatchClause:
 	{ markComposite(elementTypeProvider.getXCatchClauseElementType()); }
 	ruleXCatchClause
-	{ doneComposite(); }
 	EOF;
 
 // Rule XCatchClause
@@ -4330,19 +4271,19 @@ ruleXCatchClause:
 		(
 			('catch')=>
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXCatchClause_CatchKeyword_0ElementType());
 			}
 			otherlv_0='catch'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getXCatchClause_CatchKeyword_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXCatchClause_LeftParenthesisKeyword_1ElementType());
 		}
 		otherlv_1='('
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getXCatchClause_LeftParenthesisKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -4356,11 +4297,11 @@ ruleXCatchClause:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXCatchClause_RightParenthesisKeyword_3ElementType());
 		}
 		otherlv_3=')'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getXCatchClause_RightParenthesisKeyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		(
 			(
@@ -4380,7 +4321,6 @@ ruleXCatchClause:
 entryRuleQualifiedName:
 	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
 	ruleQualifiedName
-	{ doneComposite(); }
 	EOF;
 
 // Rule QualifiedName
@@ -4397,11 +4337,11 @@ ruleQualifiedName:
 			(
 				('.')=>
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
 				}
 				kw='.'
 				{
-					doneLeaf(kw, elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
+					doneLeaf(kw);
 				}
 			)
 			{
@@ -4421,7 +4361,6 @@ entryRuleNumber@init {
 }:
 	{ markComposite(elementTypeProvider.getNumberElementType()); }
 	ruleNumber
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -4433,54 +4372,54 @@ ruleNumber@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getNumber_HEXTerminalRuleCall_0ElementType());
 		}
 		this_HEX_0=RULE_HEX
 		{
-			doneLeaf(this_HEX_0, elementTypeProvider.getNumber_HEXTerminalRuleCall_0ElementType());
+			doneLeaf(this_HEX_0);
 		}
 		    |
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNumber_INTTerminalRuleCall_1_0_0ElementType());
 				}
 				this_INT_1=RULE_INT
 				{
-					doneLeaf(this_INT_1, elementTypeProvider.getNumber_INTTerminalRuleCall_1_0_0ElementType());
+					doneLeaf(this_INT_1);
 				}
 				    |
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNumber_DECIMALTerminalRuleCall_1_0_1ElementType());
 				}
 				this_DECIMAL_2=RULE_DECIMAL
 				{
-					doneLeaf(this_DECIMAL_2, elementTypeProvider.getNumber_DECIMALTerminalRuleCall_1_0_1ElementType());
+					doneLeaf(this_DECIMAL_2);
 				}
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getNumber_FullStopKeyword_1_1_0ElementType());
 				}
 				kw='.'
 				{
-					doneLeaf(kw, elementTypeProvider.getNumber_FullStopKeyword_1_1_0ElementType());
+					doneLeaf(kw);
 				}
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getNumber_INTTerminalRuleCall_1_1_1_0ElementType());
 					}
 					this_INT_4=RULE_INT
 					{
-						doneLeaf(this_INT_4, elementTypeProvider.getNumber_INTTerminalRuleCall_1_1_1_0ElementType());
+						doneLeaf(this_INT_4);
 					}
 					    |
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getNumber_DECIMALTerminalRuleCall_1_1_1_1ElementType());
 					}
 					this_DECIMAL_5=RULE_DECIMAL
 					{
-						doneLeaf(this_DECIMAL_5, elementTypeProvider.getNumber_DECIMALTerminalRuleCall_1_1_1_1ElementType());
+						doneLeaf(this_DECIMAL_5);
 					}
 				)
 			)?
@@ -4495,7 +4434,6 @@ finally {
 entryRuleJvmTypeReference:
 	{ markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
 	ruleJvmTypeReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmTypeReference
@@ -4548,25 +4486,24 @@ ruleJvmTypeReference:
 entryRuleArrayBrackets:
 	{ markComposite(elementTypeProvider.getArrayBracketsElementType()); }
 	ruleArrayBrackets
-	{ doneComposite(); }
 	EOF;
 
 // Rule ArrayBrackets
 ruleArrayBrackets:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getArrayBrackets_LeftSquareBracketKeyword_0ElementType());
 		}
 		kw='['
 		{
-			doneLeaf(kw, elementTypeProvider.getArrayBrackets_LeftSquareBracketKeyword_0ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getArrayBrackets_RightSquareBracketKeyword_1ElementType());
 		}
 		kw=']'
 		{
-			doneLeaf(kw, elementTypeProvider.getArrayBrackets_RightSquareBracketKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -4575,7 +4512,6 @@ ruleArrayBrackets:
 entryRuleXFunctionTypeRef:
 	{ markComposite(elementTypeProvider.getXFunctionTypeRefElementType()); }
 	ruleXFunctionTypeRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule XFunctionTypeRef
@@ -4583,11 +4519,11 @@ ruleXFunctionTypeRef:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXFunctionTypeRef_LeftParenthesisKeyword_0_0ElementType());
 			}
 			otherlv_0='('
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getXFunctionTypeRef_LeftParenthesisKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -4603,11 +4539,11 @@ ruleXFunctionTypeRef:
 				)
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getXFunctionTypeRef_CommaKeyword_0_1_1_0ElementType());
 					}
 					otherlv_2=','
 					{
-						doneLeaf(otherlv_2, elementTypeProvider.getXFunctionTypeRef_CommaKeyword_0_1_1_0ElementType());
+						doneLeaf(otherlv_2);
 					}
 					(
 						(
@@ -4623,19 +4559,19 @@ ruleXFunctionTypeRef:
 				)*
 			)?
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXFunctionTypeRef_RightParenthesisKeyword_0_2ElementType());
 			}
 			otherlv_4=')'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getXFunctionTypeRef_RightParenthesisKeyword_0_2ElementType());
+				doneLeaf(otherlv_4);
 			}
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1ElementType());
 		}
 		otherlv_5='=>'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getXFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1ElementType());
+			doneLeaf(otherlv_5);
 		}
 		(
 			(
@@ -4655,7 +4591,6 @@ ruleXFunctionTypeRef:
 entryRuleJvmParameterizedTypeReference:
 	{ markComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); }
 	ruleJvmParameterizedTypeReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmParameterizedTypeReference
@@ -4676,11 +4611,11 @@ ruleJvmParameterizedTypeReference:
 			(
 				('<')=>
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_LessThanSignKeyword_1_0ElementType());
 				}
 				otherlv_1='<'
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getJvmParameterizedTypeReference_LessThanSignKeyword_1_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 			(
@@ -4696,11 +4631,11 @@ ruleJvmParameterizedTypeReference:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_CommaKeyword_1_2_0ElementType());
 				}
 				otherlv_3=','
 				{
-					doneLeaf(otherlv_3, elementTypeProvider.getJvmParameterizedTypeReference_CommaKeyword_1_2_0ElementType());
+					doneLeaf(otherlv_3);
 				}
 				(
 					(
@@ -4715,11 +4650,11 @@ ruleJvmParameterizedTypeReference:
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_GreaterThanSignKeyword_1_3ElementType());
 			}
 			otherlv_5='>'
 			{
-				doneLeaf(otherlv_5, elementTypeProvider.getJvmParameterizedTypeReference_GreaterThanSignKeyword_1_3ElementType());
+				doneLeaf(otherlv_5);
 			}
 			(
 				(
@@ -4737,11 +4672,11 @@ ruleJvmParameterizedTypeReference:
 							}
 						)
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_FullStopKeyword_1_4_0_0_1ElementType());
 						}
 						otherlv_7='.'
 						{
-							doneLeaf(otherlv_7, elementTypeProvider.getJvmParameterizedTypeReference_FullStopKeyword_1_4_0_0_1ElementType());
+							doneLeaf(otherlv_7);
 						}
 					)
 				)
@@ -4760,11 +4695,11 @@ ruleJvmParameterizedTypeReference:
 					(
 						('<')=>
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_LessThanSignKeyword_1_4_2_0ElementType());
 						}
 						otherlv_9='<'
 						{
-							doneLeaf(otherlv_9, elementTypeProvider.getJvmParameterizedTypeReference_LessThanSignKeyword_1_4_2_0ElementType());
+							doneLeaf(otherlv_9);
 						}
 					)
 					(
@@ -4780,11 +4715,11 @@ ruleJvmParameterizedTypeReference:
 					)
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_CommaKeyword_1_4_2_2_0ElementType());
 						}
 						otherlv_11=','
 						{
-							doneLeaf(otherlv_11, elementTypeProvider.getJvmParameterizedTypeReference_CommaKeyword_1_4_2_2_0ElementType());
+							doneLeaf(otherlv_11);
 						}
 						(
 							(
@@ -4799,11 +4734,11 @@ ruleJvmParameterizedTypeReference:
 						)
 					)*
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getJvmParameterizedTypeReference_GreaterThanSignKeyword_1_4_2_3ElementType());
 					}
 					otherlv_13='>'
 					{
-						doneLeaf(otherlv_13, elementTypeProvider.getJvmParameterizedTypeReference_GreaterThanSignKeyword_1_4_2_3ElementType());
+						doneLeaf(otherlv_13);
 					}
 				)?
 			)*
@@ -4815,7 +4750,6 @@ ruleJvmParameterizedTypeReference:
 entryRuleJvmArgumentTypeReference:
 	{ markComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); }
 	ruleJvmArgumentTypeReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmArgumentTypeReference
@@ -4843,7 +4777,6 @@ ruleJvmArgumentTypeReference:
 entryRuleJvmWildcardTypeReference:
 	{ markComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); }
 	ruleJvmWildcardTypeReference
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmWildcardTypeReference
@@ -4856,11 +4789,11 @@ ruleJvmWildcardTypeReference:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJvmWildcardTypeReference_QuestionMarkKeyword_1ElementType());
 		}
 		otherlv_1='?'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getJvmWildcardTypeReference_QuestionMarkKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -4920,18 +4853,17 @@ ruleJvmWildcardTypeReference:
 entryRuleJvmUpperBound:
 	{ markComposite(elementTypeProvider.getJvmUpperBoundElementType()); }
 	ruleJvmUpperBound
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmUpperBound
 ruleJvmUpperBound:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJvmUpperBound_ExtendsKeyword_0ElementType());
 		}
 		otherlv_0='extends'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJvmUpperBound_ExtendsKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -4951,18 +4883,17 @@ ruleJvmUpperBound:
 entryRuleJvmUpperBoundAnded:
 	{ markComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); }
 	ruleJvmUpperBoundAnded
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmUpperBoundAnded
 ruleJvmUpperBoundAnded:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJvmUpperBoundAnded_AmpersandKeyword_0ElementType());
 		}
 		otherlv_0='&'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJvmUpperBoundAnded_AmpersandKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -4982,18 +4913,17 @@ ruleJvmUpperBoundAnded:
 entryRuleJvmLowerBound:
 	{ markComposite(elementTypeProvider.getJvmLowerBoundElementType()); }
 	ruleJvmLowerBound
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmLowerBound
 ruleJvmLowerBound:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJvmLowerBound_SuperKeyword_0ElementType());
 		}
 		otherlv_0='super'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJvmLowerBound_SuperKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -5013,18 +4943,17 @@ ruleJvmLowerBound:
 entryRuleJvmLowerBoundAnded:
 	{ markComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); }
 	ruleJvmLowerBoundAnded
-	{ doneComposite(); }
 	EOF;
 
 // Rule JvmLowerBoundAnded
 ruleJvmLowerBoundAnded:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getJvmLowerBoundAnded_AmpersandKeyword_0ElementType());
 		}
 		otherlv_0='&'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getJvmLowerBoundAnded_AmpersandKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -5044,7 +4973,6 @@ ruleJvmLowerBoundAnded:
 entryRuleQualifiedNameWithWildcard:
 	{ markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
 	ruleQualifiedNameWithWildcard
-	{ doneComposite(); }
 	EOF;
 
 // Rule QualifiedNameWithWildcard
@@ -5058,18 +4986,18 @@ ruleQualifiedNameWithWildcard:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQualifiedNameWithWildcard_FullStopKeyword_1ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getQualifiedNameWithWildcard_FullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQualifiedNameWithWildcard_AsteriskKeyword_2ElementType());
 		}
 		kw='*'
 		{
-			doneLeaf(kw, elementTypeProvider.getQualifiedNameWithWildcard_AsteriskKeyword_2ElementType());
+			doneLeaf(kw);
 		}
 	)
 ;
@@ -5078,17 +5006,16 @@ ruleQualifiedNameWithWildcard:
 entryRuleValidID:
 	{ markComposite(elementTypeProvider.getValidIDElementType()); }
 	ruleValidID
-	{ doneComposite(); }
 	EOF;
 
 // Rule ValidID
 ruleValidID:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
 	}
 	this_ID_0=RULE_ID
 	{
-		doneLeaf(this_ID_0, elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
+		doneLeaf(this_ID_0);
 	}
 ;
 
@@ -5096,40 +5023,39 @@ ruleValidID:
 entryRuleXImportDeclaration:
 	{ markComposite(elementTypeProvider.getXImportDeclarationElementType()); }
 	ruleXImportDeclaration
-	{ doneComposite(); }
 	EOF;
 
 // Rule XImportDeclaration
 ruleXImportDeclaration:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getXImportDeclaration_ImportKeyword_0ElementType());
 		}
 		otherlv_0='import'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getXImportDeclaration_ImportKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXImportDeclaration_StaticStaticKeyword_1_0_0_0ElementType());
 						}
 						lv_static_1_0='static'
 						{
-							doneLeaf(lv_static_1_0, elementTypeProvider.getXImportDeclaration_StaticStaticKeyword_1_0_0_0ElementType());
+							doneLeaf(lv_static_1_0);
 						}
 					)
 				)
 				(
 					(
 						{
-							markLeaf();
+							markLeaf(elementTypeProvider.getXImportDeclaration_ExtensionExtensionKeyword_1_0_1_0ElementType());
 						}
 						lv_extension_2_0='extension'
 						{
-							doneLeaf(lv_extension_2_0, elementTypeProvider.getXImportDeclaration_ExtensionExtensionKeyword_1_0_1_0ElementType());
+							doneLeaf(lv_extension_2_0);
 						}
 					)
 				)?
@@ -5148,11 +5074,11 @@ ruleXImportDeclaration:
 					(
 						(
 							{
-								markLeaf();
+								markLeaf(elementTypeProvider.getXImportDeclaration_WildcardAsteriskKeyword_1_0_3_0_0ElementType());
 							}
 							lv_wildcard_4_0='*'
 							{
-								doneLeaf(lv_wildcard_4_0, elementTypeProvider.getXImportDeclaration_WildcardAsteriskKeyword_1_0_3_0_0ElementType());
+								doneLeaf(lv_wildcard_4_0);
 							}
 						)
 					)
@@ -5197,11 +5123,11 @@ ruleXImportDeclaration:
 		)
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getXImportDeclaration_SemicolonKeyword_2ElementType());
 			}
 			otherlv_8=';'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getXImportDeclaration_SemicolonKeyword_2ElementType());
+				doneLeaf(otherlv_8);
 			}
 		)?
 	)
@@ -5211,7 +5137,6 @@ ruleXImportDeclaration:
 entryRuleQualifiedNameInStaticImport:
 	{ markComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); }
 	ruleQualifiedNameInStaticImport
-	{ doneComposite(); }
 	EOF;
 
 // Rule QualifiedNameInStaticImport
@@ -5225,11 +5150,11 @@ ruleQualifiedNameInStaticImport:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getQualifiedNameInStaticImport_FullStopKeyword_1ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getQualifiedNameInStaticImport_FullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 	)+
 ;

@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageFileImpl:a.bug317840testlanguage(0,17)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,16)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,17)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,16)
       PsiElement(Element_ElementKeyword_0_ELEMENT_TYPE)('element')(0,7)
       org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_FirstNamedParserRuleCall_1_0_ELEMENT_TYPE)(7,9)
@@ -10,4 +10,4 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageF
       PsiComment(RULE_ML_COMMENT)('/* */')(10,15)
       PsiErrorElement:no viable alternative at input '.'(15,16)
         PsiElement('.')('.')(15,16)
-  PsiWhiteSpace(' ')(16,17)
+    PsiWhiteSpace(' ')(16,17)

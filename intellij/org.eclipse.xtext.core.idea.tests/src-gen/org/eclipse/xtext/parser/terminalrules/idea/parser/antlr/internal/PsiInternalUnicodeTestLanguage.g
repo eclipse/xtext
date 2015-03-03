@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleAbstractString:
 	{ markComposite(elementTypeProvider.getAbstractStringElementType()); }
 	ruleAbstractString
-	{ doneComposite(); }
 	EOF;
 
 // Rule AbstractString
@@ -102,7 +100,6 @@ ruleAbstractString:
 entryRuleGString:
 	{ markComposite(elementTypeProvider.getGStringElementType()); }
 	ruleGString
-	{ doneComposite(); }
 	EOF;
 
 // Rule GString
@@ -110,11 +107,11 @@ ruleGString:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_GERMAN_STRING
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)
@@ -124,7 +121,6 @@ ruleGString:
 entryRuleQuotedString:
 	{ markComposite(elementTypeProvider.getQuotedStringElementType()); }
 	ruleQuotedString
-	{ doneComposite(); }
 	EOF;
 
 // Rule QuotedString
@@ -132,11 +128,11 @@ ruleQuotedString:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_STRING
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)

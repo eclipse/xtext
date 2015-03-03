@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -65,64 +64,64 @@ ruleModel:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_DummyKeyword_1ElementType());
 		}
 		otherlv_1='dummy'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getModel_DummyKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
 				{
-					doneLeaf(lv_name_2_0, elementTypeProvider.getModel_NameIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_name_2_0);
 				}
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel__Keyword_3ElementType());
 		}
 		otherlv_3='_'
 		{
-			doneLeaf(otherlv_3, elementTypeProvider.getModel__Keyword_3ElementType());
+			doneLeaf(otherlv_3);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel__dummy_Keyword_4ElementType());
 		}
 		otherlv_4='_dummy_'
 		{
-			doneLeaf(otherlv_4, elementTypeProvider.getModel__dummy_Keyword_4ElementType());
+			doneLeaf(otherlv_4);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel___dummy__Keyword_5ElementType());
 		}
 		otherlv_5='__dummy__'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getModel___dummy__Keyword_5ElementType());
+			doneLeaf(otherlv_5);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel___dummy__Keyword_6ElementType());
 		}
 		otherlv_6='$__dummy__'
 		{
-			doneLeaf(otherlv_6, elementTypeProvider.getModel___dummy__Keyword_6ElementType());
+			doneLeaf(otherlv_6);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_DollarSignKeyword_7ElementType());
 		}
 		otherlv_7='$'
 		{
-			doneLeaf(otherlv_7, elementTypeProvider.getModel_DollarSignKeyword_7ElementType());
+			doneLeaf(otherlv_7);
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getModel_DollarSignKeyword_8ElementType());
 		}
 		otherlv_8='DollarSign'
 		{
-			doneLeaf(otherlv_8, elementTypeProvider.getModel_DollarSignKeyword_8ElementType());
+			doneLeaf(otherlv_8);
 		}
 	)
 ;

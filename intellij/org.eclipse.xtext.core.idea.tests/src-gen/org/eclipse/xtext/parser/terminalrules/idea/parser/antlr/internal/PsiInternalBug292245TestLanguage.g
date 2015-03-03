@@ -54,7 +54,6 @@ entryRuleModel@init {
 }:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -67,11 +66,11 @@ ruleModel@init {
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_FIXKeyword_0_0ElementType());
 			}
 			otherlv_0='FIX'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_FIXKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -88,11 +87,11 @@ ruleModel@init {
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_ERRORKeyword_1_0ElementType());
 			}
 			otherlv_2='ERROR'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_ERRORKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
@@ -109,11 +108,11 @@ ruleModel@init {
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_TICKKeyword_2_0ElementType());
 			}
 			otherlv_4='TICK'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_TICKKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
@@ -139,7 +138,6 @@ entryRuleError@init {
 }:
 	{ markComposite(elementTypeProvider.getErrorElementType()); }
 	ruleError
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -151,11 +149,11 @@ ruleError@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getError_APOSTROPHE_CHARTerminalRuleCall_0ElementType());
 		}
 		this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR
 		{
-			doneLeaf(this_APOSTROPHE_CHAR_0, elementTypeProvider.getError_APOSTROPHE_CHARTerminalRuleCall_0ElementType());
+			doneLeaf(this_APOSTROPHE_CHAR_0);
 		}
 		{
 			markComposite(elementTypeProvider.getError_GraphicalParserRuleCall_1ElementType());
@@ -165,11 +163,11 @@ ruleError@init {
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getError_APOSTROPHE_CHARTerminalRuleCall_2ElementType());
 		}
 		this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR
 		{
-			doneLeaf(this_APOSTROPHE_CHAR_2, elementTypeProvider.getError_APOSTROPHE_CHARTerminalRuleCall_2ElementType());
+			doneLeaf(this_APOSTROPHE_CHAR_2);
 		}
 	)
 ;
@@ -183,7 +181,6 @@ entryRuleFix@init {
 }:
 	{ markComposite(elementTypeProvider.getFixElementType()); }
 	ruleFix
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -195,11 +192,11 @@ ruleFix@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFix_APOSTROPHE_CHARTerminalRuleCall_0ElementType());
 		}
 		this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR
 		{
-			doneLeaf(this_APOSTROPHE_CHAR_0, elementTypeProvider.getFix_APOSTROPHE_CHARTerminalRuleCall_0ElementType());
+			doneLeaf(this_APOSTROPHE_CHAR_0);
 		}
 		{
 			markComposite(elementTypeProvider.getFix_GraphicalParserRuleCall_1ElementType());
@@ -209,11 +206,11 @@ ruleFix@init {
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getFix_APOSTROPHE_CHARTerminalRuleCall_2ElementType());
 		}
 		this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR
 		{
-			doneLeaf(this_APOSTROPHE_CHAR_2, elementTypeProvider.getFix_APOSTROPHE_CHARTerminalRuleCall_2ElementType());
+			doneLeaf(this_APOSTROPHE_CHAR_2);
 		}
 		{
 			markComposite(elementTypeProvider.getFix_RehideParserRuleCall_3ElementType());
@@ -234,7 +231,6 @@ entryRuleApostrophe@init {
 }:
 	{ markComposite(elementTypeProvider.getApostropheElementType()); }
 	ruleApostrophe
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -245,11 +241,11 @@ ruleApostrophe@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getApostrophe_APOSTROPHE_CHARTerminalRuleCallElementType());
 	}
 	this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR
 	{
-		doneLeaf(this_APOSTROPHE_CHAR_0, elementTypeProvider.getApostrophe_APOSTROPHE_CHARTerminalRuleCallElementType());
+		doneLeaf(this_APOSTROPHE_CHAR_0);
 	}
 ;
 finally {
@@ -262,7 +258,6 @@ entryRuleRehide@init {
 }:
 	{ markComposite(elementTypeProvider.getRehideElementType()); }
 	ruleRehide
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -274,11 +269,11 @@ ruleRehide@init {
 }:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getRehide_CircumflexAccentKeywordElementType());
 		}
 		kw='^'
 		{
-			doneLeaf(kw, elementTypeProvider.getRehide_CircumflexAccentKeywordElementType());
+			doneLeaf(kw);
 		}
 	)?
 ;
@@ -290,26 +285,25 @@ finally {
 entryRuleGraphical:
 	{ markComposite(elementTypeProvider.getGraphicalElementType()); }
 	ruleGraphical
-	{ doneComposite(); }
 	EOF;
 
 // Rule Graphical
 ruleGraphical:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getGraphical_CHARTerminalRuleCall_0ElementType());
 		}
 		this_CHAR_0=RULE_CHAR
 		{
-			doneLeaf(this_CHAR_0, elementTypeProvider.getGraphical_CHARTerminalRuleCall_0ElementType());
+			doneLeaf(this_CHAR_0);
 		}
 		    |
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getGraphical_WSTerminalRuleCall_1ElementType());
 		}
 		this_WS_1=RULE_WS
 		{
-			doneLeaf(this_WS_1, elementTypeProvider.getGraphical_WSTerminalRuleCall_1ElementType());
+			doneLeaf(this_WS_1);
 		}
 	)
 ;

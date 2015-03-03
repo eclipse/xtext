@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -61,11 +60,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_FirstFooBarKeyword_0_0ElementType());
 				}
 				lv_first_0_0='foo\\bar'
 				{
-					doneLeaf(lv_first_0_0, elementTypeProvider.getModel_FirstFooBarKeyword_0_0ElementType());
+					doneLeaf(lv_first_0_0);
 				}
 			)
 		)
@@ -73,11 +72,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_SecondFooKeyword_1_0ElementType());
 				}
 				lv_second_1_0='foo\\'
 				{
-					doneLeaf(lv_second_1_0, elementTypeProvider.getModel_SecondFooKeyword_1_0ElementType());
+					doneLeaf(lv_second_1_0);
 				}
 			)
 		)
@@ -85,11 +84,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_ThirdBarKeyword_2_0ElementType());
 				}
 				lv_third_2_0='\\bar'
 				{
-					doneLeaf(lv_third_2_0, elementTypeProvider.getModel_ThirdBarKeyword_2_0ElementType());
+					doneLeaf(lv_third_2_0);
 				}
 			)
 		)
@@ -97,11 +96,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_ForthReverseSolidusKeyword_3_0ElementType());
 				}
 				lv_forth_3_0='\\'
 				{
-					doneLeaf(lv_forth_3_0, elementTypeProvider.getModel_ForthReverseSolidusKeyword_3_0ElementType());
+					doneLeaf(lv_forth_3_0);
 				}
 			)
 		)
@@ -109,11 +108,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_FifthAKeyword_4_0ElementType());
 				}
 				lv_fifth_4_0='"a"'
 				{
-					doneLeaf(lv_fifth_4_0, elementTypeProvider.getModel_FifthAKeyword_4_0ElementType());
+					doneLeaf(lv_fifth_4_0);
 				}
 			)
 		)
@@ -121,11 +120,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_SixthBKeyword_5_0ElementType());
 				}
 				lv_sixth_5_0='\'b\''
 				{
-					doneLeaf(lv_sixth_5_0, elementTypeProvider.getModel_SixthBKeyword_5_0ElementType());
+					doneLeaf(lv_sixth_5_0);
 				}
 			)
 		)
@@ -133,11 +132,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_SeventhCKeyword_6_0ElementType());
 				}
 				lv_seventh_6_0='\'c\''
 				{
-					doneLeaf(lv_seventh_6_0, elementTypeProvider.getModel_SeventhCKeyword_6_0ElementType());
+					doneLeaf(lv_seventh_6_0);
 				}
 			)
 		)
@@ -145,11 +144,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_EighthDKeyword_7_0ElementType());
 				}
 				lv_eighth_7_0='"d"'
 				{
-					doneLeaf(lv_eighth_7_0, elementTypeProvider.getModel_EighthDKeyword_7_0ElementType());
+					doneLeaf(lv_eighth_7_0);
 				}
 			)
 		)

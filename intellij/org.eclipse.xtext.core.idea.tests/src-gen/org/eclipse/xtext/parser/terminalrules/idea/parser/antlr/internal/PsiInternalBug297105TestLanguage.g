@@ -58,7 +58,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -80,7 +79,6 @@ ruleModel:
 entryRuleExpression:
 	{ markComposite(elementTypeProvider.getExpressionElementType()); }
 	ruleExpression
-	{ doneComposite(); }
 	EOF;
 
 // Rule Expression
@@ -98,11 +96,11 @@ ruleExpression:
 			)
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getExpression_PlusSignKeyword_1ElementType());
 		}
 		otherlv_1='+'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getExpression_PlusSignKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 		(
 			(
@@ -122,7 +120,6 @@ ruleExpression:
 entryRuleLiteral:
 	{ markComposite(elementTypeProvider.getLiteralElementType()); }
 	ruleLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule Literal
@@ -156,7 +153,6 @@ ruleLiteral:
 entryRuleIntLiteral:
 	{ markComposite(elementTypeProvider.getIntLiteralElementType()); }
 	ruleIntLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule IntLiteral
@@ -178,7 +174,6 @@ ruleIntLiteral:
 entryRuleRealLiteral:
 	{ markComposite(elementTypeProvider.getRealLiteralElementType()); }
 	ruleRealLiteral
-	{ doneComposite(); }
 	EOF;
 
 // Rule RealLiteral
@@ -200,17 +195,16 @@ ruleRealLiteral:
 entryRuleIntValue:
 	{ markComposite(elementTypeProvider.getIntValueElementType()); }
 	ruleIntValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule IntValue
 ruleIntValue:
 	{
-		markLeaf();
+		markLeaf(elementTypeProvider.getIntValue_INTTerminalRuleCallElementType());
 	}
 	this_INT_0=RULE_INT
 	{
-		doneLeaf(this_INT_0, elementTypeProvider.getIntValue_INTTerminalRuleCallElementType());
+		doneLeaf(this_INT_0);
 	}
 ;
 
@@ -218,7 +212,6 @@ ruleIntValue:
 entryRuleRealValue:
 	{ markComposite(elementTypeProvider.getRealValueElementType()); }
 	ruleRealValue
-	{ doneComposite(); }
 	EOF;
 
 // Rule RealValue
@@ -238,7 +231,6 @@ entryRuleReal@init {
 }:
 	{ markComposite(elementTypeProvider.getRealElementType()); }
 	ruleReal
-	{ doneComposite(); }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
@@ -251,35 +243,35 @@ ruleReal@init {
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getReal_INTTerminalRuleCall_0ElementType());
 			}
 			this_INT_0=RULE_INT
 			{
-				doneLeaf(this_INT_0, elementTypeProvider.getReal_INTTerminalRuleCall_0ElementType());
+				doneLeaf(this_INT_0);
 			}
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getReal_FullStopKeyword_1ElementType());
 		}
 		kw='.'
 		{
-			doneLeaf(kw, elementTypeProvider.getReal_FullStopKeyword_1ElementType());
+			doneLeaf(kw);
 		}
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getReal_EXT_INTTerminalRuleCall_2_0ElementType());
 			}
 			this_EXT_INT_2=RULE_EXT_INT
 			{
-				doneLeaf(this_EXT_INT_2, elementTypeProvider.getReal_EXT_INTTerminalRuleCall_2_0ElementType());
+				doneLeaf(this_EXT_INT_2);
 			}
 			    |
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getReal_INTTerminalRuleCall_2_1ElementType());
 			}
 			this_INT_3=RULE_INT
 			{
-				doneLeaf(this_INT_3, elementTypeProvider.getReal_INTTerminalRuleCall_2_1ElementType());
+				doneLeaf(this_INT_3);
 			}
 		)
 	)

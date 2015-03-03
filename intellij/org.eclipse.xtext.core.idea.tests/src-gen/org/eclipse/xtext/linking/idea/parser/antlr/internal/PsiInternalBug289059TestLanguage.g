@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -61,11 +60,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
@@ -83,11 +82,11 @@ ruleModel:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getModel_ReferenceModelCrossReference_2_0ElementType());
 				}
 				otherlv_2=RULE_ID
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getModel_ReferenceModelCrossReference_2_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 			)
 		)?
@@ -98,7 +97,6 @@ ruleModel:
 entryRuleUnassignedAction:
 	{ markComposite(elementTypeProvider.getUnassignedActionElementType()); }
 	ruleUnassignedAction
-	{ doneComposite(); }
 	EOF;
 
 // Rule UnassignedAction
@@ -111,11 +109,11 @@ ruleUnassignedAction:
 			}
 		)
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getUnassignedAction_EnabledKeyword_1ElementType());
 		}
 		otherlv_1='enabled'
 		{
-			doneLeaf(otherlv_1, elementTypeProvider.getUnassignedAction_EnabledKeyword_1ElementType());
+			doneLeaf(otherlv_1);
 		}
 	)
 ;

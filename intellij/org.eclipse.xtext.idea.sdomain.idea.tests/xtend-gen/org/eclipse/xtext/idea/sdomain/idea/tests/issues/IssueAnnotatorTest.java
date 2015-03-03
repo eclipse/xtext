@@ -32,7 +32,7 @@ public class IssueAnnotatorTest extends LightToolingTest {
   
   public void testNoDuplicateSyntaxErrors() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("{}<EOLError descr=\"missing EOF at \'{\'\"></EOLError>");
+    _builder.append("<error descr=\"missing EOF at \'{\'\">{</error>}");
     this.configureByText(_builder.toString());
     this.myFixture.checkHighlighting();
   }

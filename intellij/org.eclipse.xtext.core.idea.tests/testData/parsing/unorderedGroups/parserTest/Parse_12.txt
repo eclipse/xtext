@@ -4,5 +4,5 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleUnorderedGroup
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
         <empty list>
       PsiElement(Model_DigitOneDigitTwoKeyword_1_11_0_ELEMENT_TYPE)('12')(0,2)
-  PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(2,2)
-    <empty list>
+    PsiErrorElement:required (...)+ loop did not match anything at input '<EOF>'(2,2)
+      <empty list>

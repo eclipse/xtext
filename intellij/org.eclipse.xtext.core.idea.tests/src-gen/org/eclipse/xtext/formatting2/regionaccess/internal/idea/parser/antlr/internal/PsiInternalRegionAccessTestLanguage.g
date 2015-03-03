@@ -52,18 +52,17 @@ import com.intellij.lang.PsiBuilder;
 entryRuleRoot:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
 	ruleRoot
-	{ doneComposite(); }
 	EOF;
 
 // Rule Root
 ruleRoot:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getRoot_TestKeyword_0ElementType());
 		}
 		otherlv_0='test'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getRoot_TestKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			{
@@ -105,27 +104,26 @@ ruleRoot:
 entryRuleSimple:
 	{ markComposite(elementTypeProvider.getSimpleElementType()); }
 	ruleSimple
-	{ doneComposite(); }
 	EOF;
 
 // Rule Simple
 ruleSimple:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getSimple_DigitOneKeyword_0ElementType());
 		}
 		otherlv_0='1'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getSimple_DigitOneKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
@@ -136,18 +134,17 @@ ruleSimple:
 entryRuleDelegation:
 	{ markComposite(elementTypeProvider.getDelegationElementType()); }
 	ruleDelegation
-	{ doneComposite(); }
 	EOF;
 
 // Rule Delegation
 ruleDelegation:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDelegation_DigitTwoKeyword_0ElementType());
 		}
 		otherlv_0='2'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getDelegation_DigitTwoKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -167,18 +164,17 @@ ruleDelegation:
 entryRuleUnassigned:
 	{ markComposite(elementTypeProvider.getUnassignedElementType()); }
 	ruleUnassigned
-	{ doneComposite(); }
 	EOF;
 
 // Rule Unassigned
 ruleUnassigned:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getUnassigned_DigitThreeKeyword_0ElementType());
 		}
 		otherlv_0='3'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getUnassigned_DigitThreeKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getUnassigned_DelegateParserRuleCall_1ElementType());
@@ -194,18 +190,17 @@ ruleUnassigned:
 entryRulePrefixedUnassigned:
 	{ markComposite(elementTypeProvider.getPrefixedUnassignedElementType()); }
 	rulePrefixedUnassigned
-	{ doneComposite(); }
 	EOF;
 
 // Rule PrefixedUnassigned
 rulePrefixedUnassigned:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getPrefixedUnassigned_DigitFourKeyword_0ElementType());
 		}
 		otherlv_0='4'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getPrefixedUnassigned_DigitFourKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -225,18 +220,17 @@ rulePrefixedUnassigned:
 entryRulePrefixedDelegate:
 	{ markComposite(elementTypeProvider.getPrefixedDelegateElementType()); }
 	rulePrefixedDelegate
-	{ doneComposite(); }
 	EOF;
 
 // Rule PrefixedDelegate
 rulePrefixedDelegate:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getPrefixedDelegate_PrefixKeyword_0ElementType());
 		}
 		otherlv_0='prefix'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getPrefixedDelegate_PrefixKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getPrefixedDelegate_DelegateParserRuleCall_1ElementType());
@@ -252,7 +246,6 @@ rulePrefixedDelegate:
 entryRuleDelegate:
 	{ markComposite(elementTypeProvider.getDelegateElementType()); }
 	ruleDelegate
-	{ doneComposite(); }
 	EOF;
 
 // Rule Delegate
@@ -260,11 +253,11 @@ ruleDelegate:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)

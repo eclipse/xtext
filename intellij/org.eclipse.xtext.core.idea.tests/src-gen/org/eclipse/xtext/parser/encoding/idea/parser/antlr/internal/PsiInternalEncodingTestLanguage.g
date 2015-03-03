@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,7 +73,6 @@ ruleModel:
 entryRuleWord:
 	{ markComposite(elementTypeProvider.getWordElementType()); }
 	ruleWord
-	{ doneComposite(); }
 	EOF;
 
 // Rule Word
@@ -82,11 +80,11 @@ ruleWord:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
 			}
 			lv_value_0_0=RULE_LEXEME
 			{
-				doneLeaf(lv_value_0_0, elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
+				doneLeaf(lv_value_0_0);
 			}
 		)
 	)

@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleFoo:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
 	ruleFoo
-	{ doneComposite(); }
 	EOF;
 
 // Rule Foo
@@ -61,11 +60,11 @@ ruleFoo:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
@@ -87,7 +86,6 @@ ruleFoo:
 entryRuleNameRef:
 	{ markComposite(elementTypeProvider.getNameRefElementType()); }
 	ruleNameRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule NameRef
@@ -95,11 +93,11 @@ ruleNameRef:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getNameRef_NameSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_STRING
 			{
-				doneLeaf(lv_name_0_0, elementTypeProvider.getNameRef_NameSTRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_name_0_0);
 			}
 		)
 	)

@@ -77,8 +77,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
 
             }
 
@@ -95,27 +94,27 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:59:1: ruleModel : (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:58:1: ruleModel : (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_value_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:59:10: ( (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:60:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:58:10: ( (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:59:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:60:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:61:3: otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:59:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:60:3: otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) )
             {
 
-            			markLeaf();
+            			markLeaf(elementTypeProvider.getModel_CaseKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,6,FollowSets000.FOLLOW_6_in_ruleModel79); 
+            otherlv_0=(Token)match(input,6,FollowSets000.FOLLOW_6_in_ruleModel76); 
 
-            			doneLeaf(otherlv_0, elementTypeProvider.getModel_CaseKeyword_0ElementType());
+            			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:68:3: (otherlv_1= 'foo' )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:67:3: (otherlv_1= 'foo' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -124,14 +123,14 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:69:4: otherlv_1= 'foo'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:68:4: otherlv_1= 'foo'
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_FooKeyword_1ElementType());
                     			
-                    otherlv_1=(Token)match(input,7,FollowSets000.FOLLOW_7_in_ruleModel99); 
+                    otherlv_1=(Token)match(input,7,FollowSets000.FOLLOW_7_in_ruleModel96); 
 
-                    				doneLeaf(otherlv_1, elementTypeProvider.getModel_FooKeyword_1ElementType());
+                    				doneLeaf(otherlv_1);
                     			
 
                     }
@@ -139,18 +138,18 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:77:3: ( (lv_value_2_0= 'CaSe' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:78:4: (lv_value_2_0= 'CaSe' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:76:3: ( (lv_value_2_0= 'CaSe' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:77:4: (lv_value_2_0= 'CaSe' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:78:4: (lv_value_2_0= 'CaSe' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:79:5: lv_value_2_0= 'CaSe'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:77:4: (lv_value_2_0= 'CaSe' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:78:5: lv_value_2_0= 'CaSe'
             {
 
-            					markLeaf();
+            					markLeaf(elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType());
             				
-            lv_value_2_0=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleModel132); 
+            lv_value_2_0=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleModel129); 
 
-            					doneLeaf(lv_value_2_0, elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType());
+            					doneLeaf(lv_value_2_0);
             				
 
             }
@@ -183,10 +182,10 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_6_in_ruleModel79 = new BitSet(new long[]{0x0000000000000180L});
-        public static final BitSet FOLLOW_7_in_ruleModel99 = new BitSet(new long[]{0x0000000000000100L});
-        public static final BitSet FOLLOW_8_in_ruleModel132 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_6_in_ruleModel76 = new BitSet(new long[]{0x0000000000000180L});
+        public static final BitSet FOLLOW_7_in_ruleModel96 = new BitSet(new long[]{0x0000000000000100L});
+        public static final BitSet FOLLOW_8_in_ruleModel129 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

@@ -88,8 +88,7 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
             state._fsp--;
 
-             doneComposite(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel60); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
 
             }
 
@@ -106,7 +105,7 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:59:1: ruleModel : ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:58:1: ruleModel : ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_value_1_0=null;
@@ -122,10 +121,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
         Token lv_value_11_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:59:10: ( ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:60:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:58:10: ( ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:59:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:60:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:59:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
             int alt1=6;
             switch ( input.LA(1) ) {
             case 11:
@@ -167,30 +166,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:61:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:60:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:61:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:62:4: otherlv_0= '1' ( (lv_value_1_0= '%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:60:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:61:4: otherlv_0= '1' ( (lv_value_1_0= '%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitOneKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel85); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel82); 
 
-                    				doneLeaf(otherlv_0, elementTypeProvider.getModel_DigitOneKeyword_0_0ElementType());
+                    				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:69:4: ( (lv_value_1_0= '%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:70:5: (lv_value_1_0= '%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:68:4: ( (lv_value_1_0= '%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:69:5: (lv_value_1_0= '%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:70:5: (lv_value_1_0= '%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:71:6: lv_value_1_0= '%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:69:5: (lv_value_1_0= '%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:70:6: lv_value_1_0= '%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_0_1_0ElementType());
                     					
-                    lv_value_1_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel117); 
+                    lv_value_1_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel114); 
 
-                    						doneLeaf(lv_value_1_0, elementTypeProvider.getModel_ValuePercentSignKeyword_0_1_0ElementType());
+                    						doneLeaf(lv_value_1_0);
                     					
 
                     }
@@ -205,30 +204,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:82:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:81:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:82:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:83:4: otherlv_2= '2' ( (lv_value_3_0= '%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:81:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:82:4: otherlv_2= '2' ( (lv_value_3_0= '%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitTwoKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel163); 
+                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel160); 
 
-                    				doneLeaf(otherlv_2, elementTypeProvider.getModel_DigitTwoKeyword_1_0ElementType());
+                    				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:90:4: ( (lv_value_3_0= '%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:91:5: (lv_value_3_0= '%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:89:4: ( (lv_value_3_0= '%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:90:5: (lv_value_3_0= '%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:91:5: (lv_value_3_0= '%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:92:6: lv_value_3_0= '%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:90:5: (lv_value_3_0= '%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:91:6: lv_value_3_0= '%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_1_1_0ElementType());
                     					
-                    lv_value_3_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel195); 
+                    lv_value_3_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel192); 
 
-                    						doneLeaf(lv_value_3_0, elementTypeProvider.getModel_ValuePercentSignKeyword_1_1_0ElementType());
+                    						doneLeaf(lv_value_3_0);
                     					
 
                     }
@@ -243,30 +242,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:103:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:102:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:103:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:104:4: otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:102:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:103:4: otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitThreeKeyword_2_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleModel241); 
+                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleModel238); 
 
-                    				doneLeaf(otherlv_4, elementTypeProvider.getModel_DigitThreeKeyword_2_0ElementType());
+                    				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:111:4: ( (lv_value_5_0= '\\\\%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:112:5: (lv_value_5_0= '\\\\%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:110:4: ( (lv_value_5_0= '\\\\%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:111:5: (lv_value_5_0= '\\\\%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:112:5: (lv_value_5_0= '\\\\%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:113:6: lv_value_5_0= '\\\\%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:111:5: (lv_value_5_0= '\\\\%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:112:6: lv_value_5_0= '\\\\%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType());
                     					
-                    lv_value_5_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel273); 
+                    lv_value_5_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel270); 
 
-                    						doneLeaf(lv_value_5_0, elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType());
+                    						doneLeaf(lv_value_5_0);
                     					
 
                     }
@@ -281,30 +280,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 4 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:124:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:123:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:124:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:125:4: otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:123:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:124:4: otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitFourKeyword_3_0ElementType());
                     			
-                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleModel319); 
+                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleModel316); 
 
-                    				doneLeaf(otherlv_6, elementTypeProvider.getModel_DigitFourKeyword_3_0ElementType());
+                    				doneLeaf(otherlv_6);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:132:4: ( (lv_value_7_0= '\\\\%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:133:5: (lv_value_7_0= '\\\\%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:131:4: ( (lv_value_7_0= '\\\\%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:132:5: (lv_value_7_0= '\\\\%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:133:5: (lv_value_7_0= '\\\\%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:134:6: lv_value_7_0= '\\\\%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:132:5: (lv_value_7_0= '\\\\%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:133:6: lv_value_7_0= '\\\\%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType());
                     					
-                    lv_value_7_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel351); 
+                    lv_value_7_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel348); 
 
-                    						doneLeaf(lv_value_7_0, elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType());
+                    						doneLeaf(lv_value_7_0);
                     					
 
                     }
@@ -319,30 +318,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 5 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:145:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:144:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:145:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:146:4: otherlv_8= '5' ( (lv_value_9_0= '%%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:144:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:145:4: otherlv_8= '5' ( (lv_value_9_0= '%%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitFiveKeyword_4_0ElementType());
                     			
-                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModel397); 
+                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModel394); 
 
-                    				doneLeaf(otherlv_8, elementTypeProvider.getModel_DigitFiveKeyword_4_0ElementType());
+                    				doneLeaf(otherlv_8);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:153:4: ( (lv_value_9_0= '%%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:154:5: (lv_value_9_0= '%%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:152:4: ( (lv_value_9_0= '%%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:153:5: (lv_value_9_0= '%%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:154:5: (lv_value_9_0= '%%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:155:6: lv_value_9_0= '%%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:153:5: (lv_value_9_0= '%%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:154:6: lv_value_9_0= '%%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType());
                     					
-                    lv_value_9_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModel429); 
+                    lv_value_9_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModel426); 
 
-                    						doneLeaf(lv_value_9_0, elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType());
+                    						doneLeaf(lv_value_9_0);
                     					
 
                     }
@@ -357,30 +356,30 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 6 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:166:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:165:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:166:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:167:4: otherlv_10= '6' ( (lv_value_11_0= '%%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:165:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:166:4: otherlv_10= '6' ( (lv_value_11_0= '%%' ) )
                     {
 
-                    				markLeaf();
+                    				markLeaf(elementTypeProvider.getModel_DigitSixKeyword_5_0ElementType());
                     			
-                    otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleModel475); 
+                    otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleModel472); 
 
-                    				doneLeaf(otherlv_10, elementTypeProvider.getModel_DigitSixKeyword_5_0ElementType());
+                    				doneLeaf(otherlv_10);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:174:4: ( (lv_value_11_0= '%%' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:175:5: (lv_value_11_0= '%%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:173:4: ( (lv_value_11_0= '%%' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:174:5: (lv_value_11_0= '%%' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:175:5: (lv_value_11_0= '%%' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:176:6: lv_value_11_0= '%%'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:174:5: (lv_value_11_0= '%%' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug289515TestLanguage.g:175:6: lv_value_11_0= '%%'
                     {
 
-                    						markLeaf();
+                    						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType());
                     					
-                    lv_value_11_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModel507); 
+                    lv_value_11_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModel504); 
 
-                    						doneLeaf(lv_value_11_0, elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType());
+                    						doneLeaf(lv_value_11_0);
                     					
 
                     }
@@ -419,19 +418,19 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel85 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleModel117 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleModel163 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleModel195 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleModel241 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleModel273 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleModel319 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleModel351 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleModel397 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleModel429 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleModel475 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleModel507 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleModel82 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleModel114 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleModel160 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleModel192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleModel238 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleModel270 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleModel316 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleModel348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleModel394 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleModel426 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleModel472 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleModel504 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

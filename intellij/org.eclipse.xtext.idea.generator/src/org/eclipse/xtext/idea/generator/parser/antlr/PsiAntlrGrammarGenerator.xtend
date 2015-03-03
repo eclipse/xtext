@@ -110,7 +110,6 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		«entryRuleName»«compileEntryInit(options)»:
 			{ «markComposite» }
 			«ruleName»
-			{ «doneComposite» }
 			EOF;
 		«compileEntryFinally(options)»
 		
@@ -316,9 +315,9 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		}
 	}
 	
-	def protected markLeaf(EObject it) '''markLeaf();'''
+	def protected markLeaf(EObject it) '''markLeaf(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
-	def protected doneLeaf(EObject it, String token) '''doneLeaf(«token», elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
+	def protected doneLeaf(EObject it, String token) '''doneLeaf(«token»);'''
 	
 	def protected markComposite(EObject it) '''markComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	

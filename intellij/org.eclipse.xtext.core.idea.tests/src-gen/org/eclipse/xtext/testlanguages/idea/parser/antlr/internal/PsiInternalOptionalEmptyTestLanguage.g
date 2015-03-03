@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,27 +73,26 @@ ruleModel:
 entryRuleGreeting:
 	{ markComposite(elementTypeProvider.getGreetingElementType()); }
 	ruleGreeting
-	{ doneComposite(); }
 	EOF;
 
 // Rule Greeting
 ruleGreeting:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getGreeting_HalloKeyword_0ElementType());
 		}
 		otherlv_0='hallo'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getGreeting_HalloKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
 				{
-					doneLeaf(lv_name_1_0, elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_name_1_0);
 				}
 			)
 		)

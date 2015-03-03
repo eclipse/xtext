@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleEntryRule:
 	{ markComposite(elementTypeProvider.getEntryRuleElementType()); }
 	ruleEntryRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule EntryRule
@@ -74,7 +73,6 @@ ruleEntryRule:
 entryRuleAbstractRule:
 	{ markComposite(elementTypeProvider.getAbstractRuleElementType()); }
 	ruleAbstractRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule AbstractRule
@@ -102,38 +100,37 @@ ruleAbstractRule:
 entryRuleChoiceRule:
 	{ markComposite(elementTypeProvider.getChoiceRuleElementType()); }
 	ruleChoiceRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule ChoiceRule
 ruleChoiceRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getChoiceRule_ChoiceKeyword_0ElementType());
 		}
 		otherlv_0='choice'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getChoiceRule_ChoiceKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getChoiceRule_OptionalKeywordOptionalKeyword_1_0ElementType());
 				}
 				lv_optionalKeyword_1_0='optional'
 				{
-					doneLeaf(lv_optionalKeyword_1_0, elementTypeProvider.getChoiceRule_OptionalKeywordOptionalKeyword_1_0ElementType());
+					doneLeaf(lv_optionalKeyword_1_0);
 				}
 			)
 		)?
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
 				{
-					doneLeaf(lv_name_2_0, elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType());
+					doneLeaf(lv_name_2_0);
 				}
 			)
 		)
@@ -144,18 +141,17 @@ ruleChoiceRule:
 entryRuleReducibleRule:
 	{ markComposite(elementTypeProvider.getReducibleRuleElementType()); }
 	ruleReducibleRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule ReducibleRule
 ruleReducibleRule:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getReducibleRule_ReducibleKeyword_0ElementType());
 		}
 		otherlv_0='reducible'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getReducibleRule_ReducibleKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getReducibleRule_TerminalRuleParserRuleCall_1ElementType());
@@ -190,7 +186,6 @@ ruleReducibleRule:
 entryRuleTerminalRule:
 	{ markComposite(elementTypeProvider.getTerminalRuleElementType()); }
 	ruleTerminalRule
-	{ doneComposite(); }
 	EOF;
 
 // Rule TerminalRule
@@ -198,11 +193,11 @@ ruleTerminalRule:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_stringFeature_0_0=RULE_STRING
 			{
-				doneLeaf(lv_stringFeature_0_0, elementTypeProvider.getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_stringFeature_0_0);
 			}
 		)
 	)

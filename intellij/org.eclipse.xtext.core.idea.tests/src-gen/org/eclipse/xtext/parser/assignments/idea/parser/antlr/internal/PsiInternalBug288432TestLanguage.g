@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleBody:
 	{ markComposite(elementTypeProvider.getBodyElementType()); }
 	ruleBody
-	{ doneComposite(); }
 	EOF;
 
 // Rule Body
@@ -60,11 +59,11 @@ ruleBody:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getBody_LeftParenthesisKeyword_0_0ElementType());
 			}
 			otherlv_0='('
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getBody_LeftParenthesisKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
@@ -79,11 +78,11 @@ ruleBody:
 			)
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getBody_CommaKeyword_0_2_0ElementType());
 				}
 				otherlv_2=','
 				{
-					doneLeaf(otherlv_2, elementTypeProvider.getBody_CommaKeyword_0_2_0ElementType());
+					doneLeaf(otherlv_2);
 				}
 				(
 					(
@@ -98,19 +97,19 @@ ruleBody:
 				)
 			)*
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getBody_RightParenthesisKeyword_0_3ElementType());
 			}
 			otherlv_4=')'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getBody_RightParenthesisKeyword_0_3ElementType());
+				doneLeaf(otherlv_4);
 			}
 		)?
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBody_BodyKeyword_1ElementType());
 		}
 		otherlv_5='body'
 		{
-			doneLeaf(otherlv_5, elementTypeProvider.getBody_BodyKeyword_1ElementType());
+			doneLeaf(otherlv_5);
 		}
 		(
 			(
@@ -145,11 +144,11 @@ ruleBody:
 			)
 		)+
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getBody_EndBodyKeyword_4ElementType());
 		}
 		otherlv_8='end body'
 		{
-			doneLeaf(otherlv_8, elementTypeProvider.getBody_EndBodyKeyword_4ElementType());
+			doneLeaf(otherlv_8);
 		}
 	)
 ;
@@ -158,7 +157,6 @@ ruleBody:
 entryRuleFoo:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
 	ruleFoo
-	{ doneComposite(); }
 	EOF;
 
 // Rule Foo
@@ -166,11 +164,11 @@ ruleFoo:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getFoo_FooValueSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_fooValue_0_0=RULE_STRING
 			{
-				doneLeaf(lv_fooValue_0_0, elementTypeProvider.getFoo_FooValueSTRINGTerminalRuleCall_0ElementType());
+				doneLeaf(lv_fooValue_0_0);
 			}
 		)
 	)
@@ -180,18 +178,17 @@ ruleFoo:
 entryRuleContent:
 	{ markComposite(elementTypeProvider.getContentElementType()); }
 	ruleContent
-	{ doneComposite(); }
 	EOF;
 
 // Rule Content
 ruleContent:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getContent_ContentKeyword_0ElementType());
 		}
 		otherlv_0='content'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getContent_ContentKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		{
 			markComposite(elementTypeProvider.getContent_MyElementParserRuleCall_1ElementType());
@@ -201,11 +198,11 @@ ruleContent:
 			doneComposite();
 		}
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getContent_EndContentKeyword_2ElementType());
 		}
 		otherlv_2='end content'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getContent_EndContentKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -214,18 +211,17 @@ ruleContent:
 entryRuleMyElement:
 	{ markComposite(elementTypeProvider.getMyElementElementType()); }
 	ruleMyElement
-	{ doneComposite(); }
 	EOF;
 
 // Rule MyElement
 ruleMyElement:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getMyElement_ElementKeyword_0ElementType());
 		}
 		otherlv_0='element'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getMyElement_ElementKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -255,7 +251,6 @@ ruleMyElement:
 entryRuleParameter:
 	{ markComposite(elementTypeProvider.getParameterElementType()); }
 	ruleParameter
-	{ doneComposite(); }
 	EOF;
 
 // Rule Parameter
@@ -264,22 +259,22 @@ ruleParameter:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getParameter_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getParameter_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getParameter_ValueParameterObjectCrossReference_1_0ElementType());
 				}
 				otherlv_1=RULE_ID
 				{
-					doneLeaf(otherlv_1, elementTypeProvider.getParameter_ValueParameterObjectCrossReference_1_0ElementType());
+					doneLeaf(otherlv_1);
 				}
 			)
 		)?
@@ -290,7 +285,6 @@ ruleParameter:
 entryRuleParameterRef:
 	{ markComposite(elementTypeProvider.getParameterRefElementType()); }
 	ruleParameterRef
-	{ doneComposite(); }
 	EOF;
 
 // Rule ParameterRef
@@ -298,11 +292,11 @@ ruleParameterRef:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getParameterRef_ParameterParameterCrossReference_0ElementType());
 			}
 			otherlv_0=RULE_ID
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getParameterRef_ParameterParameterCrossReference_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 		)
 	)
@@ -312,7 +306,6 @@ ruleParameterRef:
 entryRuleMyInt:
 	{ markComposite(elementTypeProvider.getMyIntElementType()); }
 	ruleMyInt
-	{ doneComposite(); }
 	EOF;
 
 // Rule MyInt
@@ -320,11 +313,11 @@ ruleMyInt:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getMyInt_IntINTTerminalRuleCall_0ElementType());
 			}
 			lv_int_0_0=RULE_INT
 			{
-				doneLeaf(lv_int_0_0, elementTypeProvider.getMyInt_IntINTTerminalRuleCall_0ElementType());
+				doneLeaf(lv_int_0_0);
 			}
 		)
 	)

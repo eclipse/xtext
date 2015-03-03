@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -60,20 +59,20 @@ ruleModel:
 	(
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitOneKeyword_0_0ElementType());
 			}
 			otherlv_0='1'
 			{
-				doneLeaf(otherlv_0, elementTypeProvider.getModel_DigitOneKeyword_0_0ElementType());
+				doneLeaf(otherlv_0);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_0_1_0ElementType());
 					}
 					lv_value_1_0='%'
 					{
-						doneLeaf(lv_value_1_0, elementTypeProvider.getModel_ValuePercentSignKeyword_0_1_0ElementType());
+						doneLeaf(lv_value_1_0);
 					}
 				)
 			)
@@ -81,20 +80,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitTwoKeyword_1_0ElementType());
 			}
 			otherlv_2='2'
 			{
-				doneLeaf(otherlv_2, elementTypeProvider.getModel_DigitTwoKeyword_1_0ElementType());
+				doneLeaf(otherlv_2);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_1_1_0ElementType());
 					}
 					lv_value_3_0='%'
 					{
-						doneLeaf(lv_value_3_0, elementTypeProvider.getModel_ValuePercentSignKeyword_1_1_0ElementType());
+						doneLeaf(lv_value_3_0);
 					}
 				)
 			)
@@ -102,20 +101,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitThreeKeyword_2_0ElementType());
 			}
 			otherlv_4='3'
 			{
-				doneLeaf(otherlv_4, elementTypeProvider.getModel_DigitThreeKeyword_2_0ElementType());
+				doneLeaf(otherlv_4);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType());
 					}
 					lv_value_5_0='\\%'
 					{
-						doneLeaf(lv_value_5_0, elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType());
+						doneLeaf(lv_value_5_0);
 					}
 				)
 			)
@@ -123,20 +122,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitFourKeyword_3_0ElementType());
 			}
 			otherlv_6='4'
 			{
-				doneLeaf(otherlv_6, elementTypeProvider.getModel_DigitFourKeyword_3_0ElementType());
+				doneLeaf(otherlv_6);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType());
 					}
 					lv_value_7_0='\\%'
 					{
-						doneLeaf(lv_value_7_0, elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType());
+						doneLeaf(lv_value_7_0);
 					}
 				)
 			)
@@ -144,20 +143,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitFiveKeyword_4_0ElementType());
 			}
 			otherlv_8='5'
 			{
-				doneLeaf(otherlv_8, elementTypeProvider.getModel_DigitFiveKeyword_4_0ElementType());
+				doneLeaf(otherlv_8);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType());
 					}
 					lv_value_9_0='%%'
 					{
-						doneLeaf(lv_value_9_0, elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType());
+						doneLeaf(lv_value_9_0);
 					}
 				)
 			)
@@ -165,20 +164,20 @@ ruleModel:
 		    |
 		(
 			{
-				markLeaf();
+				markLeaf(elementTypeProvider.getModel_DigitSixKeyword_5_0ElementType());
 			}
 			otherlv_10='6'
 			{
-				doneLeaf(otherlv_10, elementTypeProvider.getModel_DigitSixKeyword_5_0ElementType());
+				doneLeaf(otherlv_10);
 			}
 			(
 				(
 					{
-						markLeaf();
+						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType());
 					}
 					lv_value_11_0='%%'
 					{
-						doneLeaf(lv_value_11_0, elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType());
+						doneLeaf(lv_value_11_0);
 					}
 				)
 			)

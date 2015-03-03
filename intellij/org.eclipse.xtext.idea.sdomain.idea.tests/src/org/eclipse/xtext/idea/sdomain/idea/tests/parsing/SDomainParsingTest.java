@@ -69,4 +69,12 @@ public class SDomainParsingTest extends AbstractLanguageParsingTestCase {
 		doTest(true);
 	}
 	
+	public void testIncompleteSLComment() {
+		doTest(true);
+	}
+	
+	public void testIncompleteMLComment() {
+		doTest(true);
+	}
+	
 }

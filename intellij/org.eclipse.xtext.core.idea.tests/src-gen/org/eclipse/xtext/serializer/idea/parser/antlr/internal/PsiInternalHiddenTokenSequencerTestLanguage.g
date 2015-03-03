@@ -52,7 +52,6 @@ import com.intellij.lang.PsiBuilder;
 entryRuleModel:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule Model
@@ -74,18 +73,17 @@ ruleModel:
 entryRuleDomainModel:
 	{ markComposite(elementTypeProvider.getDomainModelElementType()); }
 	ruleDomainModel
-	{ doneComposite(); }
 	EOF;
 
 // Rule DomainModel
 ruleDomainModel:
 	(
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDomainModel_EntitiesKeyword_0ElementType());
 		}
 		otherlv_0='entities'
 		{
-			doneLeaf(otherlv_0, elementTypeProvider.getDomainModel_EntitiesKeyword_0ElementType());
+			doneLeaf(otherlv_0);
 		}
 		(
 			(
@@ -99,11 +97,11 @@ ruleDomainModel:
 			)
 		)*
 		{
-			markLeaf();
+			markLeaf(elementTypeProvider.getDomainModel_EndKeyword_2ElementType());
 		}
 		otherlv_2='end'
 		{
-			doneLeaf(otherlv_2, elementTypeProvider.getDomainModel_EndKeyword_2ElementType());
+			doneLeaf(otherlv_2);
 		}
 	)
 ;
@@ -112,7 +110,6 @@ ruleDomainModel:
 entryRuleEntity:
 	{ markComposite(elementTypeProvider.getEntityElementType()); }
 	ruleEntity
-	{ doneComposite(); }
 	EOF;
 
 // Rule Entity
@@ -121,22 +118,22 @@ ruleEntity:
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
 				{
-					doneLeaf(lv_name_0_0, elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType());
+					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			(
 				{
-					markLeaf();
+					markLeaf(elementTypeProvider.getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType());
 				}
 				lv_description_1_0=RULE_STRING
 				{
-					doneLeaf(lv_description_1_0, elementTypeProvider.getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType());
+					doneLeaf(lv_description_1_0);
 				}
 			)
 		)
