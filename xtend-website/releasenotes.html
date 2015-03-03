@@ -16,7 +16,7 @@ layout: default
 				{% for post in site.categories.releasenotes limit:10 %}
 				  <hr/>
 				  <section id="{{ post.id }}">
-				  	<h2>{{ post.title }}<small>&nbsp;&nbsp;{{ post.date | date: "%b %-d, %Y" }}</small></h2>
+				  	<h1>{{ post.title }}<small>&nbsp;&nbsp;{{ post.date | date: "%b %-d, %Y" }}</small></h1>
 				    <br/>
 				    {{ post.content }}
 				  </section>

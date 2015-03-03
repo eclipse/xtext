@@ -38,7 +38,7 @@ a {
 
 p {
 	font-size: 16px;
-	line-height: 1.5em;
+	line-height: 1.4em;
 }
 
 pre {
@@ -98,17 +98,17 @@ h3 {
 h4 {
 	margin-top: 14px;
 	margin-bottom: 2px;
-	font-size: 16px;
+	font-size: 17px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
 	color: #484848;
 }
 
 h5 {
-	font-size: 14px;
+	font-size: 15px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
-	color: #383838;
+	color: #717576;
 }
 
 img {
@@ -128,6 +128,7 @@ strong {
 
 code {
   color: #48484c;
+  font-size: 13px;
 }
 
 hr {
@@ -476,6 +477,20 @@ ul.textlist li {
 
 #sub_footer {
 	padding: 50px 0px;
+}
+
+/* Scroll to Top Button 
+-------------------------------------*/
+.scrollup {
+  width: 44px;
+  height: 44px;
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  display: none;
+  text-indent: -9999px;
+  outline: hidden;
+  background: url('{{ site.baseurl }}/images/icon_top.png') no-repeat;
 }
 
 .pricing {
@@ -1092,11 +1107,6 @@ ul.list3 li {
 	line-height: 1.3em;
 	font-style: normal;
 	word-spacing: 1px;
-}
-
-section {
-	padding-top: 100px;
-	margin-top: -100px;
 }
 
 .embedded-video {

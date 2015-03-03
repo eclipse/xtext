@@ -18,7 +18,7 @@ body {
 	font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
 	font-weight: 300;
 	line-height: 20px;
-	font-size: 14px;
+	font-size: 16px;
 	color: #717576;
 	background: url('{{ site.baseurl }}/images/header_background.jpg') #9e1f01;
 	background-repeat : no-repeat;
@@ -27,8 +27,8 @@ body {
 p {
 	font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
 	font-weight: 300;
-	line-height: 20px;
-	font-size: 14px;
+	line-height: 1.4em;
+	font-size: 16px;
 }
 
 li {
@@ -72,14 +72,14 @@ h3 {
 h4 {
 	margin-top: 14px;
 	margin-bottom: 2px;
-	font-size: 16px;
+	font-size: 17px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
 	color: #A22;
 }
 
 h5 {
-	font-size: 14px;
+	font-size: 15px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
 	color: #515556;
@@ -102,6 +102,7 @@ strong {
 
 code {
   color: #48484c;
+  font-size: 13px;
 }
 
 hr {
@@ -1096,10 +1097,6 @@ ul.list3 li {
 	line-height: 1.3em;
 	font-style: normal;
 	word-spacing: 1px;
-}
-
-section {
-	padding-top: 80px;
 }
 
 .languages .row {
