@@ -274,6 +274,11 @@ table tr:hover td {
 	border: none;
 	overflow: hidden;
 	min-height:60px;
+	margin-top: 40px;
+	margin-left: -20px;
+	margin-right: -20px;
+	background: url('/images/header_background.jpg') #9e1f01;
+	background-size:  cover;
 }
 
 .flexslider a {
@@ -294,8 +299,10 @@ table tr:hover td {
 
 @media (max-width: 767px) {
   #header_wrapper {
-		min-height:3px;
-	}
+  	 margin-top: -10px;
+	 min-height:3px;
+  }
+
 }
 
 
@@ -459,8 +466,14 @@ img.screenshot {
 }
 
 .introduction {
+	padding-top: 30px;
 	position: relative;
 	overflow: visible;
+}
+
+#intro-screenshot {
+	height: 460px; 
+	width: 580px;
 }
 
 .introduction .zoom {
@@ -470,8 +483,8 @@ img.screenshot {
 	opacity: 0.4;
 	outline: none;
 	position: absolute;
-	left: 220px;
-	top: 140px;
+	left: 170px;
+	top: 160px;
 }
 
 @media (min-width: 1200px) {
@@ -482,6 +495,11 @@ img.screenshot {
   }
 }
 @media (max-width: 979px) {
+  img#intro-screenshot {
+  	margin-top: 50px;
+  	margin-left: 20px;
+	height: 100%; 
+  }
   .introduction .zoom {
 	position: absolute;
 	left: 140px;
@@ -489,10 +507,16 @@ img.screenshot {
   }
 }
 @media (max-width: 767px) {
+  img#intro-screenshot {
+  	margin-top: 50px;
+  	margin-left: 20px;
+	max-height: 40%; 
+	max-width: 40%;
+  }
   .introduction .zoom {
 	position: absolute;
-	left: 220px;
-	top: 220px;
+	left: 300px;
+	top: 38%;
   }
 }
 
