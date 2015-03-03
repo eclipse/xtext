@@ -26,7 +26,7 @@ class JvmOutlineTests extends AbstractOutlineTests {
 	}
 
 	override protected getNestedTypesExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  Bar
 		   Baz
@@ -37,7 +37,7 @@ class JvmOutlineTests extends AbstractOutlineTests {
 	'''
 
 	override protected getTypeParameter1Expectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo<T extends Object>
 	'''
 
@@ -51,7 +51,7 @@ class JvmOutlineTests extends AbstractOutlineTests {
 				def dispatch bar(Object y) {''}
 			}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  _foo(String) : String
 			  _foo(Object) : String
@@ -63,19 +63,19 @@ class JvmOutlineTests extends AbstractOutlineTests {
 	}
 
 	override protected getOperatorDeclarationWithSymbolExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  operator_not(Object) : String
 	'''
 
 	override protected getOperatorDeclarationWithNameExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  operator_not(Object) : String
 	'''
 
 	override protected getDispatchMethodExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  _foo(Object) : String
 		  _foo(String) : String
@@ -83,14 +83,14 @@ class JvmOutlineTests extends AbstractOutlineTests {
 	'''
 
 	override protected getAnnotationTypeExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  bar() : int
 		  foo() : String
 	'''
 
 	override protected getCreateExtensionInfoExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  foo() : String
 		  _createCache_foo : HashMap<ArrayList<?>, String>
@@ -98,7 +98,7 @@ class JvmOutlineTests extends AbstractOutlineTests {
 	'''
 
 	override protected getCreateExtensionInfo_dispatchExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  _foo(Integer) : String
 		  _createCache_foo : HashMap<ArrayList<?>, String>

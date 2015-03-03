@@ -196,7 +196,8 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
         return Boolean.valueOf(modelElement.eIsSet(containmentRef));
       }
     };
-    return IterableExtensions.<EReference>exists(_eAllContainments, _function);
+    boolean _exists = IterableExtensions.<EReference>exists(_eAllContainments, _function);
+    return (!_exists);
   }
   
   public void buildChildren(final StructureViewTreeElement it) {

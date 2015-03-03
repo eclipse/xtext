@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
-import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -19,10 +18,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.Consumer;
-import com.intellij.util.ui.tree.TreeUtil;
-import javax.swing.JTree;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
@@ -42,7 +38,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -55,7 +51,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("package test class Foo {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("test");
@@ -71,7 +67,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo <T extends Object> {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo<T extends Object>");
@@ -89,7 +85,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getTypeParameter1Expectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo<T>");
@@ -102,7 +98,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { String bar }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -118,7 +114,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { new(int foo) {} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -134,7 +130,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def foo() {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -150,7 +146,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def foo(int bar) {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -166,7 +162,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def foo(int bar, java.lang.Object x) {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -182,7 +178,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def <T> foo() {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -198,7 +194,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def <T> foo() {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -214,7 +210,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo { def <T> Foo<T> foo() {null} }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -235,7 +231,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getOperatorDeclarationWithSymbolExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -256,7 +252,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getOperatorDeclarationWithNameExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -277,7 +273,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getDispatchMethodExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -299,7 +295,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("interface Foo { int bar def String foo() }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -318,7 +314,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("enum Foo { BAR, BAZ }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -342,7 +338,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getAnnotationTypeExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -361,7 +357,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -374,7 +370,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("@SuppressWarnings(\'foo\') interface Foo { }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -392,7 +388,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getCreateExtensionInfoExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -413,7 +409,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getCreateExtensionInfo_dispatchExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -440,7 +436,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected String getNestedTypesExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -471,7 +467,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     _builder.append("class Foo<T extends Object> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo<T extends Object>");
@@ -488,28 +484,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     this.testStructureView(_builder.toString(), _builder_1.toString());
   }
   
-  protected void testStructureView(final String model, final String expected) {
-    final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
-      @Override
-      public void consume(final StructureViewComponent component) {
-        AbstractOutlineTests.this.assertTreeStructure(component, expected);
-      }
-    };
-    this.testStructureView(model, _function);
-  }
-  
-  protected void assertTreeStructure(final StructureViewComponent component, final String expected) {
-    JTree _tree = component.getTree();
-    TreeUtil.expandAll(_tree);
-    AbstractTreeStructure _treeStructure = component.getTreeStructure();
-    PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
-  }
-  
-  protected void testStructureView(final String model, final Consumer<StructureViewComponent> consumer) {
-    this.myFixture.configureByText("Foo.xtend", model);
-    this.testStructureView(consumer);
-  }
-  
+  @Override
   public void testStructureView(final Consumer<StructureViewComponent> consumer) {
     try {
       PsiFile _file = this.myFixture.getFile();
