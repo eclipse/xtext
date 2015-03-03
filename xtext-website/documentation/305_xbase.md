@@ -466,7 +466,7 @@ In other words, the return type of a Java method that returns an array of ints (
 
 Xbase introduces *lambda expressions*, and therefore an additional function type signature. On the JVM-Level a lambda expression (or more generally any function object) is just an instance of one of the types in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java), depending on the number of arguments. However, as lambda expressions are a very important language feature, a special sugared syntax for function types has been introduced. So instead of writing `Function1<String, Boolean>` one can write `(String)=>boolean`.
 
-For more information on lambda expressions see [](#xbase-expressions-lambda).
+For more information on lambda expressions see [the corresponding section](#xbase-expressions-lambda).
 
 ##### Examples
 
