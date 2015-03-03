@@ -15,7 +15,7 @@ import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
  * Builds an outline tree structure for the given model element.
  * </p>
  * <p>
- * An implementation should delegate to {@link IXtendOutlineNodeBuilder} in order to builder platform specific outline nodes.
+ * An implementation should delegate to {@link IXtendOutlineNodeBuilder} in order to build platform specific outline nodes.
  * </p>
  * 
  * @author kosyakov - Initial contribution and API

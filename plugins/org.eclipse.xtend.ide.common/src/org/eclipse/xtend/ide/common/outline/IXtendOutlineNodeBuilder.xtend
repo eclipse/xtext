@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeature
  * Builds platform specific outline nodes. 
  * </p>
  * <p>
- * An implementation should not build children nodes. {@link IXtendOutlineTreeBuilder} is responsible for building an outline tree structure. 
+ * An implementation should not build child nodes. {@link IXtendOutlineTreeBuilder} is responsible for building an outline tree structure. 
  * </p>
  * 
  * @author kosyakov - Initial contribution and API
