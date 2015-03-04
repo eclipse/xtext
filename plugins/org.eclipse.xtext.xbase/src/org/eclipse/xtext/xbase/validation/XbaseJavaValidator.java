@@ -496,6 +496,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				if(typeReference instanceof JvmGenericArrayTypeReference)
 					error(String.format("The array type %s cannot be used as a type parameter bound", typeReference.getSimpleName()),
 							typeReference, null, INVALID_TYPE_PARAMETER_BOUNDS);
+				else if (typeReference.getType() instanceof JvmTypeParameter && typeParameter.getConstraints().size() > 1)
+					error(String.format("The type parameter %s cannot be used as a type parameter bound with additional bounds", typeReference.getSimpleName()),
+							typeReference, null, INVALID_TYPE_PARAMETER_BOUNDS);
 			}
 		}
 	}
