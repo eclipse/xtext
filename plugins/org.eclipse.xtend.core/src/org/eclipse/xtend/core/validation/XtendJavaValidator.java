@@ -1210,20 +1210,22 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkAbstract(XtendFunction function) {
+		XtendTypeDeclaration declarator = function.getDeclaringType();
 		if (function.getExpression() == null) {
-			if(function.getDeclaringType() instanceof XtendClass || function.getDeclaringType() instanceof AnonymousClass) {
-				XtendTypeDeclaration declarator = function.getDeclaringType();
+			if (declarator instanceof XtendClass || declarator.isAnonymous()) {
 				if (function.isDispatch()) {
-					error("The dispatch method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					error("The dispatch method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",
+							XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
 				if (function.getCreateExtensionInfo() != null) {
-					error("The 'create'-method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					error("The 'create'-method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",
+							XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
 				if (declarator.isAnonymous()) {
 					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " can only be defined by an abstract class.", 
-								XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT_IN_ANONYMOUS);
+							XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT_IN_ANONYMOUS);
 				} else if (!((XtendClass) declarator).isAbstract() && !function.isNative()) {
 					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " can only be defined by an abstract class.", 
 							XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
@@ -1232,18 +1234,18 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					error("The "+(function.isNative()?"native":"abstract")+" method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
-			} else if(function.eContainer() instanceof XtendInterface) {
-				XtendInterface declarator = (XtendInterface) function.eContainer();
+			} else if (declarator instanceof XtendInterface) {
 				if (function.getCreateExtensionInfo() != null) {
-					error("'Create'-method " + function.getName() + " is not permitted in an interface", XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					error("'Create'-method " + function.getName() + " is not permitted in an interface",
+							XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
-				if(function.getReturnType() == null && !function.isOverride()) {
+				if (function.getReturnType() == null && !function.isOverride()) {
 					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
 			}
-		} else if(function.getDeclaringType() instanceof XtendInterface) {
+		} else if (declarator instanceof XtendInterface) {
 			if (!getGeneratorConfig(function).getJavaSourceVersion().isAtLeast(JAVA8)) {
 				error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
 			}
