@@ -59,6 +59,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -242,7 +243,10 @@ public class ConvertJavaCode {
 					new Predicate<Issue>() {
 						@Override
 						public boolean apply(Issue issue) {
-							return issue.getSeverity() == Severity.ERROR;
+							String code = issue.getCode();
+							return issue.getSeverity() == Severity.ERROR
+									&& !(IssueCodes.DUPLICATE_TYPE.equals(code) || org.eclipse.xtend.core.validation.IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH
+											.equals(code));
 						}
 					}));
 			return issues.size() == 0;
