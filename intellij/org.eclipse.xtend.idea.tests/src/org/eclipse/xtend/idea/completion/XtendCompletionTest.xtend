@@ -32,4 +32,74 @@ class XtendCompletionTest extends LightXtendTest {
 			"package"
 		)
 	}
+	
+	def void testJvmParameterizedTypeReference_Type() {
+		"class Foo extends Array<caret>".complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testJvmParameterizedTypeReference_Type_02() {
+		'''
+		   class Foo {
+		   		def Array<caret> foo() {}
+		   }
+		'''.toString.complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testJvmParameterizedTypeReference_Type_03() {
+		"class Foo <caret> {".complete
+		assertLookupStrings(
+			"extends",
+			"implements"
+		)
+	}
+	
+	def void testXImportDeclaration_ImportedType() {
+		"import <caret>".complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testXImportDeclaration_ImportedType_02() {
+		"import java.util.Array<caret>".complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testXConstructorCall_Constructor() {
+		'''
+		   class Foo {
+		   		def foo() {
+		   			new <caret>
+		   		}
+		   }
+		   
+		   class Bar {}
+		   
+		   abstract class AbstractBar {}
+		   
+		   interface InterfaceBar {}
+		'''.toString.complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Bar"))
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("AbstractBar"))
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("InterfaceBar"))
+	}
+	
+	def void testXTypeLiteral_Type() {
+		'''
+		   class Foo {
+		   		def foo() {
+		   			typeof(<caret>
+		   		}
+		   }
+		'''.toString.complete
+		val lookupElementStrings = lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Foo"))
+	}
 }
