@@ -1,7 +1,9 @@
 ---
 layout: documentation
 part: Getting Started
----
+--
+
+Hello World!
 
 # 5 Minutes Tutorial {#first-five-minutes}
 
