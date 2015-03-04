@@ -101,13 +101,17 @@ import org.eclipse.xtext.formatting2.internal.TextSegment
 	}
 
 	override toString() {
-		val list = newArrayList()
-		var Entry<T, R> current = first.leadingSeparator
-		while (current != null) {
-			list += current.toString
-			current = current.next
+		if (first != null) {
+			val list = newArrayList()
+			var Entry<T, R> current = first.leadingSeparator
+			while (current != null) {
+				list += current.toString
+				current = current.next
+			}
+			list.join("\n")
+		} else {
+			"empty"
 		}
-		list.join("\n")
 	}
 
 }
