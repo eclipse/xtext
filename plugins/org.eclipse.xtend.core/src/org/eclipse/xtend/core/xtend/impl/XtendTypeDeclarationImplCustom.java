@@ -18,7 +18,7 @@ public class XtendTypeDeclarationImplCustom extends XtendTypeDeclarationImpl {
 
 	@Override 
 	public boolean isAnonymous() {
-		return name == null;
+		return false;
 	}
 	
 	@Override
