@@ -80,7 +80,7 @@ public class EclipseWorkspaceConfig extends WorkspaceConfig {
   @Pure
   public int hashCode() {
     final int prime = 31;
-    int result = 1;
+    int result = super.hashCode();
     result = prime * result + ((this.workspaceRoot== null) ? 0 : this.workspaceRoot.hashCode());
     result = prime * result + ((this.configurationProvider== null) ? 0 : this.configurationProvider.hashCode());
     return result;
@@ -94,6 +94,8 @@ public class EclipseWorkspaceConfig extends WorkspaceConfig {
     if (obj == null)
       return false;
     if (getClass() != obj.getClass())
+      return false;
+    if (!super.equals(obj))
       return false;
     EclipseWorkspaceConfig other = (EclipseWorkspaceConfig) obj;
     if (this.workspaceRoot == null) {

@@ -55,7 +55,7 @@ public class SimpleWorkspaceConfig extends WorkspaceConfig {
   @Pure
   public int hashCode() {
     final int prime = 31;
-    int result = 1;
+    int result = super.hashCode();
     result = prime * result + ((this.absoluteFileSystemPath== null) ? 0 : this.absoluteFileSystemPath.hashCode());
     result = prime * result + ((this.projects== null) ? 0 : this.projects.hashCode());
     return result;
@@ -69,6 +69,8 @@ public class SimpleWorkspaceConfig extends WorkspaceConfig {
     if (obj == null)
       return false;
     if (getClass() != obj.getClass())
+      return false;
+    if (!super.equals(obj))
       return false;
     SimpleWorkspaceConfig other = (SimpleWorkspaceConfig) obj;
     if (this.absoluteFileSystemPath == null) {
@@ -93,8 +95,7 @@ public class SimpleWorkspaceConfig extends WorkspaceConfig {
     return result;
   }
   
-  @Override
-@Pure
+  @Pure
   public String getAbsoluteFileSystemPath() {
     return this.absoluteFileSystemPath;
   }
