@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -1638,14 +1639,26 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return;
 		}
 		StringBuilder builder = new StringBuilder();
-		for (String expectedEnumerationLiteral : expectedEnumerationLiterals) {
-			if (builder.length() != 0) {
-				builder.append(", ");
+		if (expectedEnumerationLiterals.size() == 1)
+			builder.append("The enum constant ");
+		else
+			builder.append("The enum constants ");
+		ListIterator<String> enumLiteralIter = expectedEnumerationLiterals.listIterator();
+		while (enumLiteralIter.hasNext()) {
+			String expectedEnumerationLiteral = enumLiteralIter.next();
+			if (enumLiteralIter.previousIndex() > 0) {
+				if (enumLiteralIter.nextIndex() == expectedEnumerationLiterals.size())
+					builder.append(" and ");
+				else
+					builder.append(", ");
 			}
 			builder.append(expectedEnumerationLiteral);
 		}
-		builder.insert(0, "The enum constants ");
-		builder.append(" need a corresponding case labels in this enum switch on ").append(enumerationType.getQualifiedName());
+		if (expectedEnumerationLiterals.size() == 1)
+			builder.append(" needs a corresponding case label in this enum switch on ");
+		else
+			builder.append(" need corresponding case labels in this enum switch on ");
+		builder.append(enumerationType.getQualifiedName());
 		String message = builder.toString();
 		addIssue(message, switchExpression.getSwitch(), null, IssueCodes.INCOMPLETE_CASES_ON_ENUM, expectedEnumerationLiterals.toArray(new String[0]));
 	}
