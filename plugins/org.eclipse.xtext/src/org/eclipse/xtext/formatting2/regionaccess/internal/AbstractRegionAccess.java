@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -251,12 +252,12 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
 		if (tokens == null)
 			return Collections.emptyList();
-		Set<String> set = Sets.newHashSet(keywords);
+		Collection<String> kwSet = keywords.length <= 1 ? Arrays.asList(keywords) : Sets.newHashSet(keywords);
 		List<ISemanticRegion> result = Lists.newArrayList();
 		for (ISemanticRegion token : tokens.getTokens())
 			if (token.getGrammarElement() instanceof Keyword) {
 				Keyword kw = (Keyword) token.getGrammarElement();
-				if (set.contains(kw.getValue()))
+				if (kwSet.contains(kw.getValue()))
 					result.add(token);
 			}
 		return result;

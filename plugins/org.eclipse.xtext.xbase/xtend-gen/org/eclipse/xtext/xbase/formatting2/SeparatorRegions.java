@@ -149,20 +149,27 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
   
   @Override
   public String toString() {
-    String _xblockexpression = null;
-    {
-      final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
-      Entry<T, R> current = this.first.getLeadingSeparator();
-      while ((!Objects.equal(current, null))) {
-        {
-          String _string = current.toString();
-          list.add(_string);
-          current = current.next;
+    String _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(this.first, null));
+    if (_notEquals) {
+      String _xblockexpression = null;
+      {
+        final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
+        Entry<T, R> current = this.first.getLeadingSeparator();
+        while ((!Objects.equal(current, null))) {
+          {
+            String _string = current.toString();
+            list.add(_string);
+            current = current.next;
+          }
         }
+        _xblockexpression = IterableExtensions.join(list, "\n");
       }
-      _xblockexpression = IterableExtensions.join(list, "\n");
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = "empty";
     }
-    return _xblockexpression;
+    return _xifexpression;
   }
   
   public SeparatorRegions(final ITextSegment root) {
