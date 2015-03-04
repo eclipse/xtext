@@ -2455,6 +2455,27 @@ public class XbaseFormatterTest {
     this._xbaseFormatterTester.assertFormattedExpression(_function);
   }
   
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=461033
+   */
+  @Test
+  public void formatMemberFeatureCallParenthesized() {
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
+      public void apply(final FormatterTestRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("val s = (\"a\" + \"b\").substring(1)");
+        _builder.newLine();
+        it.setExpectation(_builder);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("val  s  =  (\"a\"  +  \"b\") . substring(1)");
+        _builder_1.newLine();
+        it.setToBeFormatted(_builder_1);
+      }
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
+  
   @Test
   public void formatBinaryExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
