@@ -22,12 +22,19 @@ import com.intellij.pom.java.LanguageLevel
 import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
+import static extension com.intellij.testFramework.PlatformTestUtil.*
+import static extension com.intellij.util.ui.tree.TreeUtil.*
+import com.intellij.ide.structureView.newStructureView.StructureViewComponent
+import com.intellij.util.Consumer
+
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
+	@Accessors
 	val LanguageFileType fileType
 	protected var extension JavaCodeInsightTestFixture myFixture
 
@@ -126,6 +133,26 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 	protected def getXtextFile() {
 		file as BaseXtextFile
+	}
+
+	protected def void testStructureView(String model, String expected) {
+		testStructureView(model) [ component |
+			component.assertTreeStructure(expected)
+		]
+	}
+
+	protected def assertTreeStructure(StructureViewComponent component, String expected) {
+		component.tree.expandAll
+		component.treeStructure.assertTreeStructureEquals(expected)
+	}
+
+	protected def void testStructureView(String model, Consumer<StructureViewComponent> consumer) {
+		configureByText(fileType, model)
+		testStructureView(consumer)
+	}
+	
+	protected def void testStructureView(Consumer<StructureViewComponent> consumer) {
+		myFixture.testStructureView(consumer)
 	}
 
 }

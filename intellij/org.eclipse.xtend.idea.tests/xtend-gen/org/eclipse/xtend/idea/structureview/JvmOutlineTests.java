@@ -42,7 +42,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getNestedTypesExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -71,7 +71,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getTypeParameter1Expectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo<T extends Object>");
@@ -99,7 +99,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
+    _builder_1.append("aaa.xtend");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("Foo");
@@ -128,7 +128,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getOperatorDeclarationWithSymbolExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -142,7 +142,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getOperatorDeclarationWithNameExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -156,7 +156,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getDispatchMethodExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -176,7 +176,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getAnnotationTypeExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -193,7 +193,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getCreateExtensionInfoExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");
@@ -213,7 +213,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
   protected String getCreateExtensionInfo_dispatchExpectation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Foo.xtend");
+    _builder.append("aaa.xtend");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Foo");

@@ -11,6 +11,8 @@ import com.google.common.base.Objects;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.ide.highlighter.HighlighterFactory;
+import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
+import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -32,10 +34,15 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightProjectDescriptor;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
+import com.intellij.util.Consumer;
+import com.intellij.util.ui.tree.TreeUtil;
 import java.util.List;
+import javax.swing.JTree;
 import junit.framework.TestCase;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
@@ -45,9 +52,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class LightToolingTest extends LightCodeInsightFixtureTestCase {
+  @Accessors
   private final LanguageFileType fileType;
   
   @Extension
@@ -195,5 +204,36 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   protected BaseXtextFile getXtextFile() {
     PsiFile _file = this.myFixture.getFile();
     return ((BaseXtextFile) _file);
+  }
+  
+  protected void testStructureView(final String model, final String expected) {
+    final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
+      @Override
+      public void consume(final StructureViewComponent component) {
+        LightToolingTest.this.assertTreeStructure(component, expected);
+      }
+    };
+    this.testStructureView(model, _function);
+  }
+  
+  protected void assertTreeStructure(final StructureViewComponent component, final String expected) {
+    JTree _tree = component.getTree();
+    TreeUtil.expandAll(_tree);
+    AbstractTreeStructure _treeStructure = component.getTreeStructure();
+    PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
+  }
+  
+  protected void testStructureView(final String model, final Consumer<StructureViewComponent> consumer) {
+    this.myFixture.configureByText(this.fileType, model);
+    this.testStructureView(consumer);
+  }
+  
+  protected void testStructureView(final Consumer<StructureViewComponent> consumer) {
+    this.myFixture.testStructureView(consumer);
+  }
+  
+  @Pure
+  public LanguageFileType getFileType() {
+    return this.fileType;
   }
 }

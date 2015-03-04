@@ -27,7 +27,7 @@ class SourceOutlineTests extends AbstractOutlineTests {
 		testStructureView('''
 			import java.lang.* class Foo {}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 import declarations
 			  java.lang.*
 			 Foo
@@ -39,7 +39,7 @@ class SourceOutlineTests extends AbstractOutlineTests {
 		testStructureView('''
 			class Foo { def dispatch foo(String x) {''} def dispatch foo(Object y) {''} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo(Object) : String
 			   foo(String) : String
@@ -57,7 +57,7 @@ class SourceOutlineTests extends AbstractOutlineTests {
 				def dispatch bar(Object y) {''}
 			}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo(Object) : String
 			   foo(String) : String
@@ -83,7 +83,7 @@ class SourceOutlineTests extends AbstractOutlineTests {
 				static String ss
 			}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  baz() : Object
 			  foo(Object) : String
@@ -120,7 +120,7 @@ class SourceOutlineTests extends AbstractOutlineTests {
 		''') [ component |
 			component.setActionActive(AlphaSorter.ALPHA_SORTER_ID, true)
 			component.assertTreeStructure('''
-				Foo.xtend
+				aaa.xtend
 				 test
 				 import declarations
 				  java.lang.*
