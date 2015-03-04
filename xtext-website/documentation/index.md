@@ -41,6 +41,7 @@ There are a couple of well-known examples of DSLs. For instance SQL is actually 
 
 Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may be as concise and suggestive as possible being a best match for your particular domain. The hard task of reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.
 
+
 ---
 
 **[Next Chapter: 5 Minutes Tutorial](101_five_minutes.html)**
