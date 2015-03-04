@@ -69,6 +69,9 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 							return iterator.hasNext();
 						} catch (OperationCanceledError e) {
 				    		throw e.getWrapped();
+				    	} catch (UnsupportedOperationException e) {
+				    		// FIXME specialize XtextPsiReference for Xtend instead of catching UnsupportedOperationException here 
+				    		return false;
 				    	} 
 					}
 
@@ -101,6 +104,7 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 		} catch (OperationCanceledError e) {
     		throw e.getWrapped();
     	} catch (UnsupportedOperationException e) {
+    		// FIXME specialize XtextPsiReference for Xtend instead of catching UnsupportedOperationException here 
     		return Collections.emptyList();
     	}
 	}

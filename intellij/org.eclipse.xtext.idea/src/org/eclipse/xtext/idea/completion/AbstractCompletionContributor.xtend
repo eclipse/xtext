@@ -36,6 +36,7 @@ import org.eclipse.xtext.util.TextRegion
 
 abstract class AbstractCompletionContributor extends CompletionContributor {
 	@Inject(optional = true) Provider<ContentAssistContextFactory> delegates
+	@Inject protected extension PatternExtensions
 	@Inject protected extension CompletionExtensions
 	ExecutorService pool = Executors.newFixedThreadPool(3)
 
