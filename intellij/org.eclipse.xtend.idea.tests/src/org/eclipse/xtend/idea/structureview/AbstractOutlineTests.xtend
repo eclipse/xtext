@@ -16,9 +16,6 @@ import com.intellij.util.Consumer
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.LightToolingTest
 
-import static extension com.intellij.testFramework.PlatformTestUtil.*
-import static extension com.intellij.util.ui.tree.TreeUtil.*
-
 /**
  * @author kosyakov - Initial contribution and API
  */
@@ -32,7 +29,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo {}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 		''')
 	}
@@ -41,7 +38,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			package test class Foo {}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 test
 			 Foo
 		''')
@@ -51,7 +48,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo <T extends Object> {}
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo<T extends Object>
 		''')
 	}
@@ -63,7 +60,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getTypeParameter1Expectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo<T>
 	'''
 
@@ -71,7 +68,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { String bar }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  bar : String
 		''')
@@ -81,7 +78,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { new(int foo) {} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  new(int)
 		''')
@@ -91,7 +88,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def foo() {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo() : Object
 		''')
@@ -101,7 +98,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def foo(int bar) {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo(int) : Object
 		''')
@@ -111,7 +108,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def foo(int bar, java.lang.Object x) {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo(int, Object) : Object
 		''')
@@ -121,7 +118,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def <T> foo() {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo() <T extends Object> : Object
 		''')
@@ -131,7 +128,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def <T> foo() {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo() <T extends Object> : Object
 		''')
@@ -141,7 +138,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo { def <T> Foo<T> foo() {null} }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  foo() <T extends Object> : Foo<T>
 		''')
@@ -154,7 +151,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getOperatorDeclarationWithSymbolExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  !(Object) : String (operator_not)
 	'''
@@ -166,7 +163,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getOperatorDeclarationWithNameExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  !(Object) : String (operator_not)
 	'''
@@ -178,7 +175,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getDispatchMethodExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  foo(Object) : String
 		   foo(Object) : String
@@ -189,7 +186,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			interface Foo { int bar def String foo() }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  bar : int
 			  foo() : String
@@ -200,7 +197,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			enum Foo { BAR, BAZ }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 			  BAR
 			  BAZ
@@ -214,7 +211,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getAnnotationTypeExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  bar : int
 		  foo : String
@@ -224,7 +221,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 		''')
 	}
@@ -233,7 +230,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			@SuppressWarnings('foo') interface Foo { }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo
 		''')
 	}
@@ -245,7 +242,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getCreateExtensionInfoExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  foo() : String
 	'''
@@ -257,7 +254,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getCreateExtensionInfo_dispatchExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  foo(Object) : String
 		   foo(Integer) : String
@@ -271,7 +268,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 	}
 
 	protected def String getNestedTypesExpectation() '''
-		Foo.xtend
+		aaa.xtend
 		 Foo
 		  foo : int
 		  Bar
@@ -285,7 +282,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		testStructureView('''
 			class Foo<T extends Object> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }
 		''', '''
-			Foo.xtend
+			aaa.xtend
 			 Foo<T extends Object>
 			  bar() : Foo<String>
 			   new Foo<String>() {...}
@@ -293,23 +290,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		''')
 	}
 
-	protected def void testStructureView(String model, String expected) {
-		testStructureView(model) [ component |
-			component.assertTreeStructure(expected)
-		]
-	}
-
-	protected def assertTreeStructure(StructureViewComponent component, String expected) {
-		component.tree.expandAll
-		component.treeStructure.assertTreeStructureEquals(expected)
-	}
-
-	protected def void testStructureView(String model, Consumer<StructureViewComponent> consumer) {
-		configureByText('Foo.xtend', model)
-		testStructureView(consumer)
-	}
-
-	def void testStructureView(Consumer<StructureViewComponent> consumer) {
+	override void testStructureView(Consumer<StructureViewComponent> consumer) {
 		val myFile = myFixture.file.virtualFile
 		if (!(myFile != null)) {
 			throw new AssertionError("configure first")
