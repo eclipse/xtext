@@ -7,13 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import java.util.Collection;
+import java.util.Set;
+
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Multimap;
 
 /**
  * A specialization of the EclipseResourceFileSystemAccess2 for languages that produce
@@ -58,4 +68,27 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 		}
 	}
 	
+	/**
+	 * Since sourceTraces are relative the URI has to be computed with the currentSource as context
+	 */
+	@Override
+	public void flushSourceTraces(String generatorName) throws CoreException {
+		Multimap<URI, IPath> sourceTraces = getSourceTraces();
+		if (sourceTraces != null) {
+			Set<URI> keys = sourceTraces.keySet();
+			String source = getCurrentSource();
+			IContainer container = Strings.isEmpty(source) ? getProject() : getProject().getFolder(source);
+			for (URI uri : keys) {
+				if (uri != null && source != null) {
+					Collection<IPath> paths = sourceTraces.get(uri);
+					IFile sourceFile = container.getFile(new Path(uri.toFileString()));
+					if (sourceFile.exists()) {
+						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
+						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);
+					}
+				}
+			}
+		}
+		resetSourceTraces();
+	}
 }
