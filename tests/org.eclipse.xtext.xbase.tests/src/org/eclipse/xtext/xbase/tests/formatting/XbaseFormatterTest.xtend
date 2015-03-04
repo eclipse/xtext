@@ -1292,6 +1292,20 @@ class XbaseFormatterTest {
 		]
 	}
 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=461033
+	 */
+	@Test def formatMemberFeatureCallParenthesized() {
+		assertFormattedExpression [
+			expectation = '''
+				val s = ("a" + "b").substring(1)
+			'''
+			toBeFormatted = '''
+				val  s  =  ("a"  +  "b") . substring(1)
+			'''
+		]
+	}
+
 	@Test def formatBinaryExpression1() {
 		assertFormattedExpression [
 			expectation = '''
