@@ -11,6 +11,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
+import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
+import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
+import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule;
@@ -123,6 +126,14 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
+	}
+	
+	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
+		return JDTAwareEclipseResourceFileSystemAccess2.class;
+	}
+	
+	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
+		return JDTAwareSourceFolderProvider.class;
 	}
 	
 	@SingletonBinding(eager = true)

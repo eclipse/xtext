@@ -7,21 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.builder;
 
-import java.util.Collection;
-import java.util.Set;
-
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.RuntimeIOException;
-import org.eclipse.xtext.util.Strings;
-
-import com.google.common.collect.Multimap;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -50,30 +42,5 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 		} else {
 			return super.getContainer(outputConfig);
 		}
-	}
-
-	/**
-	 * Since sourceTraces are relative the URI has to be computed with the currentSource as context
-	 */
-	//TODO this fixes relative URIs for Xtend only, but what about all other languages?
-	@Override
-	public void flushSourceTraces(String generatorName) throws CoreException {
-		Multimap<URI, IPath> sourceTraces = getSourceTraces();
-		if (sourceTraces != null) {
-			Set<URI> keys = sourceTraces.keySet();
-			String source = getCurrentSource();
-			IContainer container = Strings.isEmpty(source) ? getProject() : getProject().getFolder(source);
-			for (URI uri : keys) {
-				if (uri != null && source != null) {
-					Collection<IPath> paths = sourceTraces.get(uri);
-					IFile sourceFile = container.getFile(new Path(uri.toFileString()));
-					if (sourceFile.exists()) {
-						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
-						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);
-					}
-				}
-			}
-		}
-		resetSourceTraces();
 	}
 }
