@@ -1,8 +1,7 @@
 include (
 	'intellij-dependencies',
 	'org.eclipse.xtext.idea',
-	'org.eclipse.xtext.idea.builder', 
-	'org.eclipse.xtext.idea.generator', 
+	'org.eclipse.xtext.idea.builder',
 	'org.eclipse.xtext.xtext.idea',
 	'org.eclipse.xtext.xbase.idea',
 	'org.eclipse.xtend.idea',

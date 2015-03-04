@@ -1,10 +1,13 @@
 package org.eclipse.xtext.idea.build.incremental
 
+import com.google.inject.Injector
 import java.util.Map
-import org.eclipse.xtend.core.XtendStandaloneSetup
+import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
+import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.jetbrains.jps.service.JpsServiceManager
 
 class XtextLanguages {
 	
@@ -14,17 +17,23 @@ class XtextLanguages {
 		languageAccesses ?: (languageAccesses = createLanguageAccesses) 
 	}
 	
-	static def createLanguageAccesses() {
-		// TODO: add other languages
-		#{ 'xtend' -> createXtendLanguageAccess }
+	static def Map<String, LanguageAccess> createLanguageAccesses() {
+		val result = newHashMap
+		for (setup : JpsServiceManager.instance.getExtensions(ISetup)) {
+			val injector = setup.createInjectorAndDoEMFRegistration
+			val languageAccess = injector.createXtendLanguageAccess
+			for (fileExtension : injector.getInstance(FileExtensionProvider).fileExtensions) {
+				result.put(fileExtension, languageAccess)	
+			}
+		}
+		result
 	}
 
-	static def createXtendLanguageAccess() {
-		val injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration
+	static def createXtendLanguageAccess(Injector injector) {
 		val outputConfigurationProvider = injector.getInstance(IOutputConfigurationProvider)
 		val resourceServiceProvider = injector.getInstance(IResourceServiceProvider)
 		return new LanguageAccess(outputConfigurationProvider.outputConfigurations.toSet,
 			resourceServiceProvider, true)
 	}
-}
 
+}

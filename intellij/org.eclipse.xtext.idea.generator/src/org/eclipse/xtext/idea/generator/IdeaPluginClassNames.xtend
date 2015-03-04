@@ -40,6 +40,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.'+it.name.toSimpleName+'IdeaModule'
 	}
 	
+	def String getStandaloneSetup(Grammar it) {
+		name.toPackageName+'.'+it.name.toSimpleName+'StandaloneSetup'
+	}
+	
 	def String getStandaloneSetupIdea(Grammar it) {
 		basePackageName+'.'+it.name.toSimpleName+'StandaloneSetupIdea'
 	}

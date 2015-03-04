@@ -51,6 +51,16 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "IdeaModule");
   }
   
+  public String getStandaloneSetup(final Grammar it) {
+    String _name = it.getName();
+    String _packageName = this.toPackageName(_name);
+    String _plus = (_packageName + ".");
+    String _name_1 = it.getName();
+    String _simpleName = this.toSimpleName(_name_1);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "StandaloneSetup");
+  }
+  
   public String getStandaloneSetupIdea(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");

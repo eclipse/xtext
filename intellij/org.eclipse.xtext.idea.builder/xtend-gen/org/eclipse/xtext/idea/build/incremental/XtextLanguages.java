@@ -1,17 +1,18 @@
 package org.eclipse.xtext.idea.build.incremental;
 
 import com.google.inject.Injector;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
+import org.jetbrains.jps.service.JpsServiceManager;
 
 @SuppressWarnings("all")
 public class XtextLanguages {
@@ -29,14 +30,28 @@ public class XtextLanguages {
   }
   
   public static Map<String, LanguageAccess> createLanguageAccesses() {
-    LanguageAccess _createXtendLanguageAccess = XtextLanguages.createXtendLanguageAccess();
-    Pair<String, LanguageAccess> _mappedTo = Pair.<String, LanguageAccess>of("xtend", _createXtendLanguageAccess);
-    return Collections.<String, LanguageAccess>unmodifiableMap(CollectionLiterals.<String, LanguageAccess>newHashMap(_mappedTo));
+    HashMap<String, LanguageAccess> _xblockexpression = null;
+    {
+      final HashMap<String, LanguageAccess> result = CollectionLiterals.<String, LanguageAccess>newHashMap();
+      JpsServiceManager _instance = JpsServiceManager.getInstance();
+      Iterable<ISetup> _extensions = _instance.<ISetup>getExtensions(ISetup.class);
+      for (final ISetup setup : _extensions) {
+        {
+          final Injector injector = setup.createInjectorAndDoEMFRegistration();
+          final LanguageAccess languageAccess = XtextLanguages.createXtendLanguageAccess(injector);
+          FileExtensionProvider _instance_1 = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
+          Set<String> _fileExtensions = _instance_1.getFileExtensions();
+          for (final String fileExtension : _fileExtensions) {
+            result.put(fileExtension, languageAccess);
+          }
+        }
+      }
+      _xblockexpression = result;
+    }
+    return _xblockexpression;
   }
   
-  public static LanguageAccess createXtendLanguageAccess() {
-    XtendStandaloneSetup _xtendStandaloneSetup = new XtendStandaloneSetup();
-    final Injector injector = _xtendStandaloneSetup.createInjectorAndDoEMFRegistration();
+  public static LanguageAccess createXtendLanguageAccess(final Injector injector) {
     final IOutputConfigurationProvider outputConfigurationProvider = injector.<IOutputConfigurationProvider>getInstance(IOutputConfigurationProvider.class);
     final IResourceServiceProvider resourceServiceProvider = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
     Set<OutputConfiguration> _outputConfigurations = outputConfigurationProvider.getOutputConfigurations();

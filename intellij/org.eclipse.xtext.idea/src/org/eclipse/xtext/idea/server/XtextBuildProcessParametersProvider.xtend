@@ -15,12 +15,9 @@ import java.io.File
 class XtextBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
 	override getClassPath() {
-		val plugin = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea"))
-		val builderPluginFolder = plugin.path + "/../org.eclipse.xtext.idea.builder"
-		val result = newArrayList(builderPluginFolder + "/bin")
-		result += builderPluginFolder + '/../../plugins/org.eclipse.xtext.builder.standalone/bin'
-		result += new File(builderPluginFolder, 'lib').listFiles.filter[file && name.endsWith('.jar')].map[path]
-		result
+		val pluginId = PluginId.getId("org.eclipse.xtext.idea")
+		val plugin = PluginManager.getPlugin(pluginId)
+		new File(plugin.path, 'lib').listFiles.map[absolutePath]
 	}
 
 }
