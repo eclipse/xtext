@@ -2340,6 +2340,75 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testBug444972_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val java.lang.annotation.RetentionPolicy x = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val boolean b = switch x {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case x.name == \"\": false");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case SOURCE: true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("println(b)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XSWITCH_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug444972_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val java.lang.annotation.RetentionPolicy x = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val boolean b = switch x {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case SOURCE,");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case CLASS,");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case RUNTIME: true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("println(b)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testRedundantCases_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();

@@ -991,6 +991,33 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "equals", "false")
 	}
+	
+	@Test def void testBug444972_01(){
+		'''
+		{
+			val java.lang.annotation.RetentionPolicy x = null
+			val boolean b = switch x {
+				case x.name == "": false
+				case SOURCE: true
+			}
+			println(b)
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XSWITCH_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE)
+	}
+	
+	@Test def void testBug444972_02(){
+		'''
+		{
+			val java.lang.annotation.RetentionPolicy x = null
+			val boolean b = switch x {
+				case SOURCE,
+				case CLASS,
+				case RUNTIME: true
+			}
+			println(b)
+		}
+		'''.expression.assertNoIssues
+	}
 
 	@Test def void testRedundantCases_01() {
 		'''
