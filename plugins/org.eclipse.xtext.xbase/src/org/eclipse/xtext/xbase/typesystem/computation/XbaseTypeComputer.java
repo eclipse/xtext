@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -295,6 +298,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		return ifExpression.getThen();
 	}
 	
+	@SuppressWarnings("null")
 	protected void _computeTypes(XSwitchExpression object, ITypeComputationState state) {
 		ITypeComputationState switchExpressionState = getSwitchExpressionState(object, state); 
 		ITypeComputationResult computedType = switchExpressionState.computeTypes(object.getSwitch());
@@ -315,6 +319,10 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 
 		JvmType potentialEnumType = expressionType != null ? expressionType.getType() : null;
 		boolean isEnum = potentialEnumType instanceof JvmEnumerationType;
+		Set<JvmEnumerationLiteral> uncheckedEnumLiterals = null;
+		if (isEnum) {
+			uncheckedEnumLiterals = new HashSet<JvmEnumerationLiteral>(((JvmEnumerationType) potentialEnumType).getLiterals());
+		}
 		BranchExpressionProcessor branchExpressionProcessor = object.getDefault() == null ? new BranchExpressionProcessor(state, object) {
 				@Override
 				protected String getMessage() {
@@ -374,6 +382,15 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			caseState.withinScope(casePart);
 			if (casePart.getCase() != null) {
 				caseState.computeTypes(casePart.getCase());
+				if (uncheckedEnumLiterals != null && casePart.getCase() instanceof XAbstractFeatureCall) {
+					List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XAbstractFeatureCall) casePart.getCase());
+					if (candidates.size() == 1) {
+						JvmIdentifiableElement feature = candidates.get(0).getFeature();
+						if (feature instanceof JvmEnumerationLiteral) {
+							uncheckedEnumLiterals.remove(feature);
+						}
+					}
+				}
 			}
 			XExpression then = casePart.getThen();
 			if (then != null || (i == cases.size() - 1 && thenTypeReference != null)) {
@@ -397,11 +414,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		XExpression defaultCase = object.getDefault();
 		if (defaultCase != null) {
 			allCasePartsState.computeTypes(object.getDefault());
-		} else if (branchExpressionProcessor != null) {
+		} else if (branchExpressionProcessor != null && !(isEnum && uncheckedEnumLiterals.isEmpty())) {
 			branchExpressionProcessor.commit();
 		}
 	}
-
+	
 	protected ITypeComputationState getSwitchExpressionState(XSwitchExpression expr, ITypeComputationState state) {
 		JvmFormalParameter param = expr.getDeclaredParam();
 		if (param == null) {
