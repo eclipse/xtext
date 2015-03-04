@@ -39,6 +39,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.idea.completion.CompletionExtensions;
+import org.eclipse.xtext.idea.completion.PatternExtensions;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
@@ -124,6 +125,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   @Inject(optional = true)
   private Provider<ContentAssistContextFactory> delegates;
+  
+  @Inject
+  @Extension
+  protected PatternExtensions _patternExtensions;
   
   @Inject
   @Extension

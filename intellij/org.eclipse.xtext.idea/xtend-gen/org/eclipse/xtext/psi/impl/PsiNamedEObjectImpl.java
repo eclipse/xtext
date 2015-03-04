@@ -26,8 +26,10 @@ import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -141,7 +143,18 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
    * @return
    */
   protected ITextRegion getSignificantTextRegion() {
-    EObject _eObject = this.getEObject();
-    return this.locationInFileProvider.getSignificantTextRegion(_eObject);
+    ITextRegion _xtrycatchfinallyexpression = null;
+    try {
+      EObject _eObject = this.getEObject();
+      _xtrycatchfinallyexpression = this.locationInFileProvider.getSignificantTextRegion(_eObject);
+    } catch (final Throwable _t) {
+      if (_t instanceof OperationCanceledError) {
+        final OperationCanceledError e = (OperationCanceledError)_t;
+        throw e.getWrapped();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return _xtrycatchfinallyexpression;
   }
 }

@@ -19,6 +19,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.resource.ILocationInFileProvider
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.service.OperationCanceledError
 
 class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectImpl<T> implements PsiNamedEObject {
 
@@ -91,7 +92,11 @@ class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectIm
 	 * @return
 	 */
 	def protected getSignificantTextRegion() {
-		EObject.significantTextRegion
+		try {
+			EObject.significantTextRegion
+		} catch (OperationCanceledError e) {
+			throw e.wrapped
+		}
 	}
 
 }
