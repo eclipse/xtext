@@ -10,8 +10,6 @@ package org.eclipse.xtext.idea.generator
 import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
-import java.util.Arrays
-import java.util.List
 import java.util.Set
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.output.Outlet
@@ -35,6 +33,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.ISetup
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -125,6 +124,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src, grammar.standaloneSetupIdea.toJavaPath, grammar.compileStandaloneSetup)
 		ctx.writeFile(outlet_src, grammar.ideaModuleName.toJavaPath, grammar.compileIdeaModule)
 		ctx.writeFile(outlet_src, grammar.completionContributor.toXtendPath, grammar.compileCompletionContributor)
+		ctx.writeFile(outlet_src_gen, '''META-INF/services/«ISetup.name»''', grammar.compileServicesISetup)
 		ctx.writeFile(outlet_src_gen, grammar.abstractCompletionContributor.toJavaPath, grammar.compileAbstractCompletionContributor)
 		ctx.writeFile(outlet_src_gen, grammar.languageName.toJavaPath, grammar.compileLanguage)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
@@ -235,8 +235,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileBuildProcessParametersProvider(Grammar grammar) '''
 		package «grammar.buildProcessParametersProviderName.toPackageName»;
 
-		import «Arrays.name»;
-		import «List.name»;
+		import java.io.File;
+		import java.util.ArrayList;
+		import java.util.List;
 		
 		import com.intellij.compiler.server.BuildProcessParametersProvider;
 		import com.intellij.ide.plugins.PluginManager;
@@ -245,11 +246,24 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends BuildProcessParametersProvider {
 		
 			public List<String> getClassPath() {
-				String path = PluginManager.getPlugin(PluginId.getId("«grammar.basePackageName»")).getPath().getPath();
-				return Arrays.asList(
-					path + "/bin", 
-					path + "/«runtimeProjectPath»/bin"
-				);
+				PluginId pluginId = PluginId.getId("«ideaProjectName»");
+				File pluginFolder = PluginManager.getPlugin(pluginId).getPath();
+
+				List<String> result = new ArrayList<String>();
+
+				File libFolder = new File(pluginFolder, "lib");
+				if (libFolder.exists()) {
+					for (File file : libFolder.listFiles()) {
+						result.add(file.getAbsolutePath());
+					}
+				}
+
+				File classesFolder = new File(pluginFolder, "classes");
+				if (classesFolder.exists()) {
+					result.add(classesFolder.getAbsolutePath());
+				}
+
+				return result;
 			}
 		
 		}
@@ -1007,6 +1021,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 		
 		
+	'''
+	
+	def compileServicesISetup(Grammar grammar) '''
+		«grammar.standaloneSetup»
 	'''
 
 }
