@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.AbstractValidatorTester instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractValidatorTester {
 
 	protected Diagnostician diagnostician;

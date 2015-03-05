@@ -29,7 +29,10 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	protected final static int COLS = 5;

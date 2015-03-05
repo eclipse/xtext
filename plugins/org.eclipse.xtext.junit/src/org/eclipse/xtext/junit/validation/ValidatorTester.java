@@ -26,7 +26,10 @@ import com.google.inject.name.Names;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.ValidatorTester<T extends AbstractDeclarativeValidator> instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ValidatorTester<T extends AbstractDeclarativeValidator> extends AbstractValidatorTester {
 
 	protected T validator;

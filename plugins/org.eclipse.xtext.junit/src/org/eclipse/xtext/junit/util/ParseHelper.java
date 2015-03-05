@@ -27,7 +27,10 @@ import com.google.inject.Provider;
  * Some convenience methods for parsing (i.e. testing, etc.) 
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.util.ParseHelper<T extends EObject> instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ParseHelper<T extends EObject> {
 	
 	@Inject

@@ -59,7 +59,10 @@ import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.XtextRunner instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractXtextTests extends TestCase implements ResourceLoadHelper {
 
 	private Injector injector;

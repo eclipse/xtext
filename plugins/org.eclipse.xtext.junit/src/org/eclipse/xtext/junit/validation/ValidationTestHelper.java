@@ -28,7 +28,10 @@ import com.google.common.collect.Iterables;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.ValidationTestHelper instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ValidationTestHelper {
 
 	public List<Issue> validate(EObject model) {
