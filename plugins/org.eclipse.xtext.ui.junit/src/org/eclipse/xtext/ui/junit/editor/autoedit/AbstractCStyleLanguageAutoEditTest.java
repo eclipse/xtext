@@ -12,7 +12,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 
 	public void testParenthesis_1() throws Exception {

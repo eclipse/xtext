@@ -28,7 +28,10 @@ import org.eclipse.swt.graphics.Point;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.MockableTextViewer instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 @SuppressWarnings("deprecation")
 public class MockableTextViewer implements ITextViewer {
 

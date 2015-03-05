@@ -14,6 +14,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 
+/**
+ * @deprecated use org.eclipse.xtext.junit4.ui.util.PluginUtil instead. This class will be removed in Xtext 2.9.
+ */
+@Deprecated
 public class PluginUtil {
 
 	public static IPath findPathInPlugin(Plugin srcPlugin, String fileName)

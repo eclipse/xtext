@@ -20,7 +20,10 @@ import org.eclipse.ui.PlatformUI;
  * Abstract base class for test classes that need access to the workbench.
  * 
  * @author Peter Friese - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractWorkbenchTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractWorkbenchTest extends TestCase {
 
 	public AbstractWorkbenchTest() {

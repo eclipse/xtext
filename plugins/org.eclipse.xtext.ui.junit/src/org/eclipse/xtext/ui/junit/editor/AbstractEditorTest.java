@@ -22,7 +22,10 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractEditorTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 @SuppressWarnings("restriction")
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 

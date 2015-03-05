@@ -30,7 +30,10 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractDamagerRepairerTest extends TestCase implements IDocumentListener, ITokenScanner {
 
 	private IPresentationDamager damager;

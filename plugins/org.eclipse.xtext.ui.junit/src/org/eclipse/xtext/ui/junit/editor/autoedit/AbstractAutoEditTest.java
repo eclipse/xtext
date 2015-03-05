@@ -26,7 +26,10 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use AbstractAutoEditTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 
 	private List<IFile> files = Lists.newArrayList();
