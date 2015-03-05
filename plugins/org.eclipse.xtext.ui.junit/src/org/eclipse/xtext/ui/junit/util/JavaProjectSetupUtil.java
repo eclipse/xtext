@@ -43,7 +43,10 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 @SuppressWarnings("restriction")
 public class JavaProjectSetupUtil {
 

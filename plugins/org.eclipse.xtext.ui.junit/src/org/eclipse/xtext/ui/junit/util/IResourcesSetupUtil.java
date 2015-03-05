@@ -29,6 +29,10 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.util.StringInputStream;
 
+/**
+ * @deprecated use org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil instead. This class will be removed in Xtext 2.9.
+ */
+@Deprecated
 public class IResourcesSetupUtil {
 
 	public static IWorkspaceRoot root() {

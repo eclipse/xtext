@@ -49,7 +49,10 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;
