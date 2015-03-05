@@ -43,9 +43,11 @@ public class LocalClassAwareTypeNames extends HumanReadableTypeNames {
 	}
 	
 	public String getReadableName(XtendTypeDeclaration typeDeclaration) {
-		if (typeDeclaration.isAnonymous()) {
+		if (typeDeclaration instanceof AnonymousClass) {
 			JvmGenericType superType = anonymousClassUtil.getSuperType((AnonymousClass) typeDeclaration);
 			return "new " + superType.getSimpleName() + "(){}";
+		} else if (typeDeclaration.getName() == null) {
+			return "<unnamed>";
 		}
 		return typeDeclaration.getName();
 	}
