@@ -4,8 +4,8 @@ allprojects {
   ext.intellijLibs = file("${intellijHome}/lib")
 }
 
-def repositoryUrl = 'https://teamcity.jetbrains.com/repository/download/bt410/153679:id'
-def buildQualifier = '138.SNAPSHOT'
+def repositoryUrl = 'https://teamcity.jetbrains.com/repository/download/bt410/405441:id'
+def buildQualifier = '139.SNAPSHOT'
 def archiveName
 if (os.windows) {
   archiveName = "ideaIC-${buildQualifier}.win.zip"
