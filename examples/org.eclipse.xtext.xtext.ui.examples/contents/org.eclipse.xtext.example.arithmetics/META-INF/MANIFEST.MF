@@ -8,7 +8,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.util;visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
- org.eclipse.emf.common;bundle-version="2.10.2",
+ org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
