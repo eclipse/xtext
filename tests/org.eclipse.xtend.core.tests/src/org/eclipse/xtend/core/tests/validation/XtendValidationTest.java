@@ -2333,6 +2333,18 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test 
+	public void testInvalidTypeParameterConstraint_3() throws Exception {
+		XtendFile file = file("class Foo<T, U extends T & Appendable> {}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_TYPE_PARAMETER_BOUNDS);
+	}
+	
+	@Test 
+	public void testInvalidTypeParameterConstraint_4() throws Exception {
+		XtendFile file = file("class Foo<T, U extends Appendable & T> {}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_TYPE_PARAMETER_BOUNDS);
+	}
+	
+	@Test 
 	public void testTypeParameterForwardReference_0() throws Exception {
 		XtendFile file = file(
 				"class Foo<T extends T> {"
