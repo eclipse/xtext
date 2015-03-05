@@ -539,7 +539,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				<buildProcess.parametersProvider implementation="«grammar.buildProcessParametersProviderName»"/>
 				«IF typesIntegrationRequired»
 				
-				<java.elementFinder implementation="«grammar.jvmTypesElementFinderName»"/>
+				<java.elementFinder implementation="«grammar.jvmTypesElementFinderName»" order="first, before java"/>
 				<java.shortNamesCache implementation="«grammar.jvmTypesShortNamesCacheName»"/>
 				«ENDIF»
 		

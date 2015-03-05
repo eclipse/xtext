@@ -1478,7 +1478,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append("<java.elementFinder implementation=\"");
         String _jvmTypesElementFinderName = this._ideaPluginClassNames.getJvmTypesElementFinderName(grammar);
         _builder.append(_jvmTypesElementFinderName, "\t\t");
-        _builder.append("\"/>");
+        _builder.append("\" order=\"first, before java\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("<java.shortNamesCache implementation=\"");

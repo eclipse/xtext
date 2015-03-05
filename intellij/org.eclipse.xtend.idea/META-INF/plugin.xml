@@ -14,7 +14,7 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtend.core.idea.server.XtendBuildProcessParametersProvider"/>
 		
-		<java.elementFinder implementation="org.eclipse.xtend.core.idea.lang.types.psi.XtendJvmTypesElementFinder"/>
+		<java.elementFinder implementation="org.eclipse.xtend.core.idea.lang.types.psi.XtendJvmTypesElementFinder" order="first, before java"/>
 		<java.shortNamesCache implementation="org.eclipse.xtend.core.idea.lang.types.XtendJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>

@@ -13,7 +13,7 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.xbase.idea.server.XbaseBuildProcessParametersProvider"/>
 		
-		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder"/>
+		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder" order="first, before java"/>
 		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
