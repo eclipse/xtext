@@ -72,7 +72,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     @Pure
     public int hashCode() {
       final int prime = 31;
-      int result = super.hashCode();
+      int result = 1;
       result = prime * result + ((this.keyword== null) ? 0 : this.keyword.hashCode());
       return result;
     }
@@ -85,8 +85,6 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       if (obj == null)
         return false;
       if (getClass() != obj.getClass())
-        return false;
-      if (!super.equals(obj))
         return false;
       AbstractCompletionContributor.KeywordLookupElement other = (AbstractCompletionContributor.KeywordLookupElement) obj;
       if (this.keyword == null) {
