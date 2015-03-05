@@ -25,7 +25,10 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.3
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.serializer.AssertStructureAcceptor instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
 	protected Stack<RuleCall> stack = new Stack<RuleCall>();

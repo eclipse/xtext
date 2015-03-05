@@ -50,7 +50,10 @@ import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.serializer.SerializerTester instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class SerializerTester {
 	@Inject
 	protected ContextFinder contextFinder;

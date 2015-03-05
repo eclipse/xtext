@@ -28,7 +28,9 @@ import com.google.common.collect.Iterables;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.AssertableDiagnostics instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class AssertableDiagnostics {
 
 	public interface DiagnosticPredicate extends Predicate<Diagnostic> {

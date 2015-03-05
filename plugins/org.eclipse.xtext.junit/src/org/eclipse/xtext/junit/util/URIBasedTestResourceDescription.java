@@ -18,7 +18,10 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class URIBasedTestResourceDescription extends AbstractResourceDescription {
 
 	private URI uri;
