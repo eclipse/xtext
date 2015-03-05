@@ -334,7 +334,7 @@ public class LoggingTester {
     @Pure
     public int hashCode() {
       final int prime = 31;
-      int result = super.hashCode();
+      int result = 1;
       result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
       return result;
     }
@@ -347,8 +347,6 @@ public class LoggingTester {
       if (obj == null)
         return false;
       if (getClass() != obj.getClass())
-        return false;
-      if (!super.equals(obj))
         return false;
       LoggingTester.SourceFilter other = (LoggingTester.SourceFilter) obj;
       if (this.source == null) {

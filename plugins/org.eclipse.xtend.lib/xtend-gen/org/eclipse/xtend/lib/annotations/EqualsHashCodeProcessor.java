@@ -88,25 +88,57 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     public boolean hasSuperEquals(final ClassDeclaration cls) {
-      boolean _xifexpression = false;
-      TypeReference _newTypeReference = this.context.newTypeReference(cls);
-      TypeReference _object = this.context.getObject();
-      boolean _equals = _newTypeReference.equals(_object);
-      if (_equals) {
-        _xifexpression = false;
-      } else {
-        boolean _xifexpression_1 = false;
-        boolean _hasEquals = this.hasEquals(cls);
-        if (_hasEquals) {
-          _xifexpression_1 = true;
+      boolean _xblockexpression = false;
+      {
+        TypeReference _extendedClass = cls.getExtendedClass();
+        Type _type = _extendedClass.getType();
+        final ClassDeclaration superClass = ((ClassDeclaration) _type);
+        boolean _xifexpression = false;
+        TypeReference _newTypeReference = this.context.newTypeReference(superClass);
+        TypeReference _object = this.context.getObject();
+        boolean _equals = _newTypeReference.equals(_object);
+        if (_equals) {
+          _xifexpression = false;
         } else {
-          TypeReference _extendedClass = cls.getExtendedClass();
-          Type _type = _extendedClass.getType();
-          _xifexpression_1 = this.hasSuperEquals(((ClassDeclaration) _type));
+          boolean _xifexpression_1 = false;
+          boolean _hasEquals = this.hasEquals(superClass);
+          if (_hasEquals) {
+            _xifexpression_1 = true;
+          } else {
+            _xifexpression_1 = this.hasSuperEquals(superClass);
+          }
+          _xifexpression = _xifexpression_1;
         }
-        _xifexpression = _xifexpression_1;
+        _xblockexpression = _xifexpression;
       }
-      return _xifexpression;
+      return _xblockexpression;
+    }
+    
+    public boolean hasSuperHashCode(final ClassDeclaration cls) {
+      boolean _xblockexpression = false;
+      {
+        TypeReference _extendedClass = cls.getExtendedClass();
+        Type _type = _extendedClass.getType();
+        final ClassDeclaration superClass = ((ClassDeclaration) _type);
+        boolean _xifexpression = false;
+        TypeReference _newTypeReference = this.context.newTypeReference(superClass);
+        TypeReference _object = this.context.getObject();
+        boolean _equals = _newTypeReference.equals(_object);
+        if (_equals) {
+          _xifexpression = false;
+        } else {
+          boolean _xifexpression_1 = false;
+          boolean _hasHashCode = this.hasHashCode(superClass);
+          if (_hasHashCode) {
+            _xifexpression_1 = true;
+          } else {
+            _xifexpression_1 = this.hasSuperHashCode(superClass);
+          }
+          _xifexpression = _xifexpression_1;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return _xblockexpression;
     }
     
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
@@ -660,7 +692,6 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       if (_hasHashCode) {
         context.addWarning(it, "hashCode is already defined, this annotation has no effect");
       } else {
-        final boolean hasSuperEquals = util.hasSuperEquals(it);
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
           @Override
@@ -686,8 +717,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           }
         };
         final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(_declaredFields, _function);
-        util.addEquals(it, fields, hasSuperEquals);
-        util.addHashCode(it, fields, hasSuperEquals);
+        boolean _hasSuperEquals = util.hasSuperEquals(it);
+        util.addEquals(it, fields, _hasSuperEquals);
+        boolean _hasSuperHashCode = util.hasSuperHashCode(it);
+        util.addHashCode(it, fields, _hasSuperHashCode);
       }
     }
   }

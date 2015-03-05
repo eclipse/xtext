@@ -48,10 +48,9 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		} else if (hasHashCode) {
 			addWarning("hashCode is already defined, this annotation has no effect")
 		} else {
-			val hasSuperEquals = hasSuperEquals
 			val fields = declaredFields.filter[!static && !transient && thePrimaryGeneratedJavaElement]
 			addEquals(fields, hasSuperEquals)
-			addHashCode(fields, hasSuperEquals)
+			addHashCode(fields, hasSuperHashCode)
 		}
 	}
 
@@ -80,12 +79,24 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		}
 
 		def boolean hasSuperEquals(ClassDeclaration cls) {
-			if (cls.newTypeReference.equals(object))
+			val superClass = (cls.extendedClass.type as ClassDeclaration)
+			if (superClass.newTypeReference.equals(object)) {
 				false
-			else if (cls.hasEquals)
+			} else if (superClass.hasEquals) {
 				true
-			else
-				(cls.extendedClass.type as ClassDeclaration).hasSuperEquals
+			} else {
+				superClass.hasSuperEquals
+			}
+		}
+		def boolean hasSuperHashCode(ClassDeclaration cls) {
+			val superClass = (cls.extendedClass.type as ClassDeclaration)
+			if (superClass.newTypeReference.equals(object)) {
+				false
+			} else if (superClass.hasHashCode) {
+				true
+			} else {
+				superClass.hasSuperHashCode
+			}
 		}
 
 		def void addEquals(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
