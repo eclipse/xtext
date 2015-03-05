@@ -40,7 +40,6 @@ public class TaskMarkerContributor implements IMarkerContributor {
   @Inject
   private TaskMarkerTypeProvider typeProvider;
   
-  @Override
   public void updateMarkers(final IFile file, final Resource resource, final IProgressMonitor monitor) {
     try {
       final List<Task> tasks = this.taskFinder.findTasks(resource);
@@ -68,7 +67,6 @@ public class TaskMarkerContributor implements IMarkerContributor {
     }
   }
   
-  @Override
   public void deleteMarkers(final IFile file, final IProgressMonitor monitor) {
     try {
       file.deleteMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO);

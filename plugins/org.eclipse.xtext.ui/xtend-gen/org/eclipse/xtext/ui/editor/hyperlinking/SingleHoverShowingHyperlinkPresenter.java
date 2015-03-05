@@ -47,7 +47,6 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
   
   private final MultipleHyperlinkPresenter delegate;
   
-  @Override
   public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
     boolean _and = false;
     boolean _and_1 = false;

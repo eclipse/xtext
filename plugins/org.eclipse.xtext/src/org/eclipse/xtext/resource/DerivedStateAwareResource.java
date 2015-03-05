@@ -109,7 +109,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	/**
 	 * @since 2.8
 	 */
-	@Override
+	/*@Override only for emf 2.11. We build with 2.10.2 add Override for 2.9*/
 	protected List<EObject> getUnloadingContents() {
 		return new BasicEList.FastCompare<EObject>(doGetContents());
 	}
