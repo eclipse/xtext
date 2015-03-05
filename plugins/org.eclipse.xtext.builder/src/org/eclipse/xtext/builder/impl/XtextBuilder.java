@@ -76,7 +76,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+	protected IProject[] build(final int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		if (IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
 			forgetLastBuiltState();
 			return getProject().getReferencedProjects();
@@ -85,7 +85,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
 			queuedBuildData.createCheckpoint();
-			if(isInterrupted()) {
+			if(shouldCancelBuild(kind)) {
 				throw new OperationCanceledException("Build has been interrupted");
 			}
 			task.start();
@@ -99,9 +99,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					
 					@Override
 					public boolean isCanceled() {
-						if(isInterrupted()) 
+						boolean shouldCancelBuild = shouldCancelBuild(kind);
+						if (shouldCancelBuild)
 							buildLogger.log("interupted");
-						return isInterrupted() || super.isCanceled();
+						return shouldCancelBuild || super.isCanceled();
 					}
 				};
 			}
@@ -137,6 +138,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			task.stop();
 		}
 		return getProject().getReferencedProjects();
+	}
+
+	private boolean shouldCancelBuild(int buildKind) {
+		return buildKind == IncrementalProjectBuilder.AUTO_BUILD && isInterrupted();
 	}
 
 	private void handleCanceled(Throwable t) {
