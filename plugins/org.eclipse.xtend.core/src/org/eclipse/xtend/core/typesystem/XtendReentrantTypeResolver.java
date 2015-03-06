@@ -12,7 +12,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -84,6 +86,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -234,6 +237,26 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					if (inheritedParameterType != null)
 						return typeResolver.toJavaCompliantTypeReference(inheritedParameterType, session);
 					return typeResolver.getServices().getTypeReferences().getTypeForName(Object.class, operation);
+				}
+				// If all parameters are primitive, but different, we have to convert them to non-primitive
+				// so the generated 'instanceof' checks are still valid.
+				if (parameterTypes.size() > 1) {
+					Set<JvmType> uniqueParamTypes = Sets.newHashSetWithExpectedSize(parameterTypes.size());
+					boolean allPrimitive = true;
+					for (LightweightTypeReference paramType : parameterTypes) {
+						if (!paramType.isPrimitive()) {
+							allPrimitive = false;
+							break;
+						}
+						uniqueParamTypes.add(paramType.getType());
+					}
+					if (allPrimitive && uniqueParamTypes.size() > 1) {
+						ListIterator<LightweightTypeReference> paramTypeIter = parameterTypes.listIterator();
+						while (paramTypeIter.hasNext()) {
+							LightweightTypeReference paramType = paramTypeIter.next();
+							paramTypeIter.set(paramType.getWrapperTypeIfPrimitive());
+						}
+					}
 				}
 				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
 				if (parameterType == null) {

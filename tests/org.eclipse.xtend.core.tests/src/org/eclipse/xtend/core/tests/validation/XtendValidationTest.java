@@ -1060,6 +1060,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(function, XTEND_FUNCTION, SINGLE_DISPATCH_FUNCTION);
 	}
 
+	@Test public void testSamePrimitiveArg() throws Exception {
+		XtendClass clazz = clazz("class Foo { def dispatch foo(int x) { null } def dispatch foo(float x) { null } }");
+		helper.assertWarning(clazz, XTEND_FUNCTION, DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS);
+	}
+
 	@Test public void testDuplicateCaseFunction() throws Exception {
 		XtendFunction function = function("def dispatch foo(Integer s) { null } def dispatch foo(int s) { null }");
 		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_METHOD, "dispatch");
