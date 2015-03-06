@@ -434,7 +434,7 @@ terminal STRING  :
 
 <p><code>name=ID</code></p>
 
-<p>The left hand side refers to a feature <em>name</em> of the current object (which has the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, the feature <em>name</em> needs to be of type <a href="">EString</a> as well.</p>
+<p>The left hand side refers to a feature <em>name</em> of the current object (which has the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, the feature <em>name</em> needs to be of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> as well.</p>
 
 <p><strong>Assignment operators.</strong> There are three different assignment operators, each with different semantics.</p>
 
@@ -704,7 +704,7 @@ Fullname:
 ;
 </code></pre>
 
-<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="">EString</a> is implied if none has been explicitly declared.</p>
+<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
 
 <p><a href="#value-converter">Value converters</a> are used to transform the parsed string to the actually returned data type value.</p>
 

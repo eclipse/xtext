@@ -444,7 +444,7 @@ The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xt
 
 <p>Beside the exported elements the index contains <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java">IReferenceDescription</a>s that contain the information who is referencing who. They are created through the Manager and IDefaultResourceDescriptionStrategy, too. If there is a model element that references another model element, the IDefaultResourceDescriptionStrategy creates an IReferenceDescription that contains the URI of the referencing element (sourceEObjectURI) and the referenced element (targetEObjectURI). At the end this IReferenceDescriptions are very useful to find references and calculate affected resources.</p>
 
-<p>As mentioned above, in order to calculate an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> for a resource the framework asks the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> which delegates to the IDefaultResourceDescriptionStrategy. To convert between a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> and its <a href="">String</a> representation you can use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java">IQualifiedNameConverter</a>. Here is some Java code showing how to do that:</p>
+<p>As mentioned above, in order to calculate an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> for a resource the framework asks the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> which delegates to the IDefaultResourceDescriptionStrategy. To convert between a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> and its <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> representation you can use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java">IQualifiedNameConverter</a>. Here is some Java code showing how to do that:</p>
 
 <pre><code class="language-java">@Inject IQualifiedNameConverter converter;
 
@@ -520,7 +520,7 @@ public void listVisibleResources(
 
 <h5 id="jdt-based-containers">JDT-Based Container Manager</h5>
 
-<p>As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. It assumes so called <a href="">IPackageFragmentRoots</a> as containers. An <a href="">IPackageFragmentRoot</a> in JDT is the root of a tree of Java model elements. It usually refers to</p>
+<p>As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. It assumes so called <a href="http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html">IPackageFragmentRoots</a> as containers. An <a href="http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html">IPackageFragmentRoot</a> in JDT is the root of a tree of Java model elements. It usually refers to</p>
 
 <ul>
   <li>a source folder of a Java project,</li>
@@ -873,7 +873,7 @@ terminal Plural:
 
 <h3 id="token-stream">Token Stream</h3>
 
-<p>The <a href="#parse-tree-constructor">parse tree constructor</a> and the <a href="#formatting">formatter</a> use an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java">ITokenStream</a> for their output, and the latter for its input as well. This allows for chaining the two components. Token streams can be converted to a <a href="">String</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java">TokenStringBuffer</a> and to a <a href="">Writer</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java">WriterTokenStream</a>.</p>
+<p>The <a href="#parse-tree-constructor">parse tree constructor</a> and the <a href="#formatting">formatter</a> use an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java">ITokenStream</a> for their output, and the latter for its input as well. This allows for chaining the two components. Token streams can be converted to a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java">TokenStringBuffer</a> and to a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/Writer.html">Writer</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java">WriterTokenStream</a>.</p>
 
 <pre><code class="language-java">public interface ITokenStream {
 
@@ -1018,7 +1018,7 @@ terminal Plural:
 <p>After having explained how rules can be activated, this is what they can do:</p>
 
 <ul>
-  <li><code>setIndentationIncrement()</code> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java">IIndentationInformation</a>. The default implementation consults Eclipse’s <a href="">IPreferenceStore</a>.</li>
+  <li><code>setIndentationIncrement()</code> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java">IIndentationInformation</a>. The default implementation consults Eclipse’s <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html">IPreferenceStore</a>.</li>
   <li><code>setIndentationDecrement()</code> decrements indentation by one unit.</li>
   <li><code>setLinewrap()</code>: Inserts a line-wrap at this position.</li>
   <li><code>setLinewrap(int count)</code>: Inserts <em>count</em> numbers of line-wrap at this position.</li>
@@ -1176,7 +1176,7 @@ myXtextResource.save(options);
 
 <h3 id="writing-a-parser-test">Writing a parser test</h3>
 
-<p>The class <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of <a href="">Assert</a> leads to concise and readable test cases.</p>
+<p>The class <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases.</p>
 
 <pre><code class="language-xtend">  import org.eclipse.xtext.junit4.util.ParseHelper
   import static org.junit.Assert.*
