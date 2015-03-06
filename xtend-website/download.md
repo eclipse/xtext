@@ -73,7 +73,7 @@ Some users might not want Maven to be the leading system. For that case you can 
 
 ### Getting the Runtime Library via Maven
 
-The [runtime library](api/2.7.0/index.html) is available from Maven Central, too: [http://repo.maven.apache.org/maven2](http://repo.maven.apache.org/maven2).
+The [runtime library]({{site.javadoc.xtext}}) is available from Maven Central, too: [http://repo.maven.apache.org/maven2](http://repo.maven.apache.org/maven2).
 
 The XML for the dependency is:
 

@@ -11,5 +11,5 @@
 	<li><a href="204_activeannotations.html">Active Annotations</a></li>
 	<li>&nbsp;</li>
 	<li style="color : #333;">Additional Resources
-	<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8/">API Documentation (JavaDoc)</a>
+	<li><a href="{{site.javadoc.xtext}}">API Documentation (JavaDoc)</a>
 </ul>

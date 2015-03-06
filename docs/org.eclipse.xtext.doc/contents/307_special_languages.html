@@ -102,7 +102,7 @@ terminal END: 'synthetic:END';
 
 <p>After running the workflow, a stub implementation of <code>AbstractIndentationTokenSource</code> is generated in the subpackage <code>parser.antlr</code>, e.g. <code>RuleEngineTokenSource</code>. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the <code>WS</code> (whitespace) rule is selected, which brings the indentation awareness as seen above.</p>
 
-<p>In case of a whitespace-aware language, the <a href="#formatting">formatter</a> must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. </p>
+<p>In case of a whitespace-aware language, the <a href="303_runtime_concepts.html#formatting">formatter</a> must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. </p>
 
 <h2 id="java-independent-languages">Languages Independent of JDT</h2>
 

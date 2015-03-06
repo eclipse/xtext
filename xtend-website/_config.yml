@@ -36,5 +36,6 @@ src:
   xtext: "https://github.com/eclipse/xtext/blob/v2.7.0"
 
 javadoc:
+  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
   java: "http://docs.oracle.com/javase/8/docs/api"
   guava: "http://docs.guava-libraries.googlecode.com/git-history/release/javadoc"
