@@ -34,6 +34,7 @@ public final class IssueCodes {
 	public static final String DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE = "dispatch_functions_may_not_widen_inherited_signature";
 	public static final String SINGLE_DISPATCH_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
 	public static final String DISPATCH_PLAIN_FUNCTION_NAME_CLASH = ISSUE_CODE_PREFIX + "dispatch_plain_function_name_clash";
+	public static final String DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS = ISSUE_CODE_PREFIX + "dispatch_functions_different_primitive_args";
 	public static final String CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT = "create_functions_must_not_be_abstract";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";

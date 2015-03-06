@@ -18,9 +18,11 @@ import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -69,6 +71,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -1361,11 +1364,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 								function.getModifiers().indexOf("dispatch"), SINGLE_DISPATCH_FUNCTION);
 					} else {
 						Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
+						boolean[] allPrimitive = new boolean[signature.getArity()];
+						Arrays.fill(allPrimitive, true);
 						boolean isFirstLocalOperation = true;
 						JvmVisibility commonVisibility = null;
 						Boolean commonStatic = null;
 						for (JvmOperation jvmOperation : dispatchOperations) {
 							signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
+							for (int i = 0; i < jvmOperation.getParameters().size(); i++) {
+								JvmFormalParameter parameter = jvmOperation.getParameters().get(i);
+								if (!(parameter.getParameterType().getType() instanceof JvmPrimitiveType)) {
+									allPrimitive[i] = false;
+								}
+							}
 							if(jvmOperation.getDeclaringType() == type) {
 								if(expectStatic != null) {
 									if (expectStatic && !jvmOperation.isStatic()) {
@@ -1426,6 +1437,23 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 										XtendFunction function = associations.getXtendFunction(jvmOperation);
 										error("Duplicate dispatch methods. Primitives cannot overload their wrapper types in dispatch methods.",
 												function, null, DUPLICATE_METHOD);
+									}
+								}
+							}
+						}
+						for (int i = 0; i < allPrimitive.length; i++) {
+							if (allPrimitive[i]) {
+								Iterator<JvmOperation> operationIter = dispatchOperations.iterator();
+								JvmType paramType1 = operationIter.next().getParameters().get(i).getParameterType().getType();
+								while (operationIter.hasNext()) {
+									JvmType paramType2 = operationIter.next().getParameters().get(i).getParameterType().getType();
+									if (!paramType2.equals(paramType1)) {
+										for (JvmOperation jvmOperation : dispatchOperations) {
+											XtendFunction function = associations.getXtendFunction(jvmOperation);
+											addIssue("Dispatch methods have arguments with different primitive types.",
+													function, XTEND_EXECUTABLE__PARAMETERS, i, DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS);
+										}
+										break;
 									}
 								}
 							}
