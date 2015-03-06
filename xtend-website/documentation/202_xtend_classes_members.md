@@ -229,7 +229,7 @@ Type parameter bounds and constraints are supported and share the same syntax an
 
 ### Operator Declarations {#operator-declaration}
 
-Xtend supports operator overloading based on an operator-name-mapping as explained in [](203_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the following:
+Xtend supports operator overloading based on an operator-name-mapping as explained in the [section on operators](203_xtend_expressions.html#operators). To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the following:
 
 ```xtend
 class Money {

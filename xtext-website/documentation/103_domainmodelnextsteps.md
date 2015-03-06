@@ -307,7 +307,7 @@ This tutorial is about testing the parser and the linker for the *Domainmodel*. 
       }
     ```
 
-1.  The actual test case is pretty straight forward with Xtend. The utility class *org.eclipse.xtext.junit4.util.ParseHelper* allows to parse an arbitrary string into a *Domainmodel*. The model itself can be traversed and checked afterwards. A static import of [Assert]() leads to concise and readable test cases.     
+1.  The actual test case is pretty straight forward with Xtend. The utility class *org.eclipse.xtext.junit4.util.ParseHelper* allows to parse an arbitrary string into a *Domainmodel*. The model itself can be traversed and checked afterwards. A static import of [Assert]({{site.javadoc.junit}}/org/junit/Assert.html) leads to concise and readable test cases.     
     
     ```xtend
       import org.eclipse.xtext.junit4.util.ParseHelper

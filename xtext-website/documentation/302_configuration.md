@@ -283,7 +283,7 @@ public void configureIScopeProvider(Binder binder) {
 
 ### Obtaining an Injector
 
-In every application wired up with Guice there is usually one point where you initialize an [Injector]() using the modules declared. That injector is used to create the root instance of the whole application. In plain Java environments this is something that's done in the main method. It could look like this:
+In every application wired up with Guice there is usually one point where you initialize an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the modules declared. That injector is used to create the root instance of the whole application. In plain Java environments this is something that's done in the main method. It could look like this:
 
 ```java
 public static void main(String[] args) {

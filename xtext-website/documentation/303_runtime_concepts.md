@@ -440,7 +440,7 @@ As already mentioned, the default implementation strategy exports every model el
 
 Beside the exported elements the index contains [IReferenceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java)s that contain the information who is referencing who. They are created through the Manager and IDefaultResourceDescriptionStrategy, too. If there is a model element that references another model element, the IDefaultResourceDescriptionStrategy creates an IReferenceDescription that contains the URI of the referencing element (sourceEObjectURI) and the referenced element (targetEObjectURI). At the end this IReferenceDescriptions are very useful to find references and calculate affected resources.
 
-As mentioned above, in order to calculate an [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) for a resource the framework asks the [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) which delegates to the IDefaultResourceDescriptionStrategy. To convert between a [QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) and its [String]() representation you can use the [IQualifiedNameConverter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java). Here is some Java code showing how to do that:
+As mentioned above, in order to calculate an [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) for a resource the framework asks the [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) which delegates to the IDefaultResourceDescriptionStrategy. To convert between a [QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) and its [String]({{site.javadoc.java}}/java/lang/String.html) representation you can use the [IQualifiedNameConverter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java). Here is some Java code showing how to do that:
 
 ```java
 @Inject IQualifiedNameConverter converter;
@@ -520,7 +520,7 @@ Xtext offers a couple of strategies for managing containers: If you're running a
 
 ##### JDT-Based Container Manager {#jdt-based-containers}
 
-As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. It assumes so called [IPackageFragmentRoots]() as containers. An [IPackageFragmentRoot]() in JDT is the root of a tree of Java model elements. It usually refers to
+As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. It assumes so called [IPackageFragmentRoots]({{site.javadoc.eclipse-jdt}}/org/eclipse/jdt/core/IPackageFragmentRoot.html) as containers. An [IPackageFragmentRoot]({{site.javadoc.eclipse-jdt}}/org/eclipse/jdt/core/IPackageFragmentRoot.html) in JDT is the root of a tree of Java model elements. It usually refers to
 
 *   a source folder of a Java project,
 *   a referenced jar,
@@ -873,7 +873,7 @@ The strategy is as follows: If two tokens follow each other in the stream and th
 
 ### Token Stream {#token-stream}
 
-The [parse tree constructor](#parse-tree-constructor) and the [formatter](#formatting) use an [ITokenStream]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java) for their output, and the latter for its input as well. This allows for chaining the two components. Token streams can be converted to a [String]() using the [TokenStringBuffer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java) and to a [Writer]() using the [WriterTokenStream]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java).
+The [parse tree constructor](#parse-tree-constructor) and the [formatter](#formatting) use an [ITokenStream]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java) for their output, and the latter for its input as well. This allows for chaining the two components. Token streams can be converted to a [String]({{site.javadoc.java}}/java/lang/String.html) using the [TokenStringBuffer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java) and to a [Writer]({{site.javadoc.java}}/java/io/Writer.html) using the [WriterTokenStream]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java).
 
 ```java
 public interface ITokenStream {
@@ -1012,7 +1012,7 @@ The parameter *element* can be a grammar's [AbstractElement]({{site.src.xtext}}/
 
 After having explained how rules can be activated, this is what they can do:
 
-*   `setIndentationIncrement()` increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by [IIndentationInformation]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java). The default implementation consults Eclipse's [IPreferenceStore]().
+*   `setIndentationIncrement()` increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by [IIndentationInformation]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java). The default implementation consults Eclipse's [IPreferenceStore]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/preference/IPreferenceStore.html).
 *   `setIndentationDecrement()` decrements indentation by one unit.
 *   `setLinewrap()`: Inserts a line-wrap at this position.
 *   `setLinewrap(int count)`: Inserts *count* numbers of line-wrap at this position.
@@ -1173,7 +1173,7 @@ This configuration will make sure that you can use dependency injection in your 
 
 ### Writing a parser test
 
-The class *org.eclipse.xtext.junit4.util.ParseHelper* allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of [Assert]() leads to concise and readable test cases.
+The class *org.eclipse.xtext.junit4.util.ParseHelper* allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of [Assert]({{site.javadoc.junit}}/org/junit/Assert.html) leads to concise and readable test cases.
 
 ```xtend
   import org.eclipse.xtext.junit4.util.ParseHelper

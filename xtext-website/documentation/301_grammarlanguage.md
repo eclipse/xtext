@@ -438,7 +438,7 @@ The syntactic declaration for states in the state machine example starts with a 
 
 `name=ID`
 
-The left hand side refers to a feature *name* of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](301_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an *EString* in this case, the feature *name* needs to be of type [EString]() as well.
+The left hand side refers to a feature *name* of the current object (which has the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](301_grammarlanguage.html#cross-references) or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an *EString* in this case, the feature *name* needs to be of type [EString]({{site.javadoc.java}}/java/lang/String.html) as well.
 
 **Assignment operators.** There are three different assignment operators, each with different semantics.
 
@@ -725,7 +725,7 @@ QualifiedName returns ecore::EString :
 ;
 ```
 
-Note that rules that do not call other parser rules and do neither contain any actions nor [assignments](301_grammarlanguage.html#assignments) are considered to be data type rules, and the data type [EString]() is implied if none has been explicitly declared.
+Note that rules that do not call other parser rules and do neither contain any actions nor [assignments](301_grammarlanguage.html#assignments) are considered to be data type rules, and the data type [EString]({{site.javadoc.java}}/java/lang/String.html) is implied if none has been explicitly declared.
 
 [Value converters](#value-converter) are used to transform the parsed string to the actually returned data type value.
 

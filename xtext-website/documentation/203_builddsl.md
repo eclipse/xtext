@@ -220,7 +220,7 @@ public class BuildDSLRuntimeModule
 
 ## Operator Overloading {#builddsl-library}
 
-As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the [FileExtensions]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.java). We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to [File]():
+As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the [FileExtensions]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.java). We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to [File]({{site.javadoc.java}}/java/io/File.html):
 
 *   DSL:
     

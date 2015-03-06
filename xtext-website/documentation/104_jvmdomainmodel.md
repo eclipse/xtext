@@ -294,7 +294,7 @@ Let's go through the code to get an idea of what is going on. (Please also refer
                 boolean isPrelinkingPhase) {
     ```
 
-    Using the dispatch keyword makes sure that the method is called for instances of type *Entity* only. Have a look at [the Xtend documentation](http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch) on polymorphic dispatch to understand Xtend's dispatch functions. Extending [AbstractModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) makes sure we don't have to walk the syntax model on our own. 
+    Using the dispatch keyword makes sure that the method is called for instances of type *Entity* only. Have a look at [the Xtend documentation](http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch) on polymorphic dispatch to understand Xtend's dispatch functions. Extending [AbstractModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) makes sure we don't have to walk the syntax model on our own. 
 1.  ```xtend
         acceptor.accept(element.toClass(element.fullyQualifiedName)) [  
         ...
@@ -307,7 +307,7 @@ Let's go through the code to get an idea of what is going on. (Please also refer
         documentation = element.documentation
     ```
 
-    Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).setDocumentation([JvmIdentifiableElement]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java), String)*, and `element.documentation` is in fact calling the extension method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).getDocumentation([EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java))*. Xtend's extension methods are explained in detail on the [Xtend website](https://www.eclipse.org/xtend/documentation.html#extensionMethods). 
+    Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).setDocumentation([JvmIdentifiableElement]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java), String)*, and `element.documentation` is in fact calling the extension method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).getDocumentation([EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java))*. Xtend's extension methods are explained in detail on the [Xtend website](https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods). 
 1.  ```xtend
      if (element.superType != null)
         superTypes += entity.superType.cloneWithProxies

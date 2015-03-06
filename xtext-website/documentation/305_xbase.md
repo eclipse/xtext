@@ -54,7 +54,7 @@ DataType:
   'mapped-to' javaType=[jvmTypes::JvmType|QualifiedName];
 ```
 
-After regenerating your language, it will be allowed to define a type `Date` that maps to the [Date]() like this:
+After regenerating your language, it will be allowed to define a type `Date` that maps to the [Date]({{site.javadoc.java}}/java/util/Date.html) like this:
 
 ```javatypesexample
   datatype Date mapped-to java.util.Date
@@ -209,7 +209,7 @@ entity Person {
 ...
 ```
 
-You can use entities instead of Java types or even mix Java types as [List]() with entities such as *Person*. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let *Entity* inherit from [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This *inferred JVM model* is the representation of your concepts in the type system of Xbase. 
+You can use entities instead of Java types or even mix Java types as [List]({{site.javadoc.java}}/java/util/List.html) with entities such as *Person*. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let *Entity* inherit from [JvmGenericType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This *inferred JVM model* is the representation of your concepts in the type system of Xbase. 
 
 The main component for the inferred JVM model is the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). It has a single method that takes the root model element as an argument and produces a number of [JvmDeclaredTypes]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java). As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) to create a hierarchy of JVM elements. The [builder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) in Xtend. It becomes even simpler if you inherit from the [AbstractModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) which traverses the input model and dispatches to its contents until you decide which elements to handle. 
 
@@ -724,7 +724,7 @@ A feature call is used to access members of objects, such as fields and methods,
 
 ##### Property Access {#xbase-expressions-property-access}
 
-Feature calls are directly translated to their Java equivalent with the exception, that access to properties follows similar rules as described in [](#xbase-expressions-property-assignment). That is, for the expression
+Feature calls are directly translated to their Java equivalent with the exception, that access to properties follows similar rules as described in [the previous section](#xbase-expressions-property-assignment). That is, for the expression
 
 ```xbase
   myObj.myProperty

@@ -255,7 +255,7 @@ Let's start enhancing the grammar.
     ;
     ```
 
-    The `QualifiedName` is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature `name` of a *Package* is still of type [String](). 
+    The `QualifiedName` is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature `name` of a *Package* is still of type [String]({{site.javadoc.java}}/java/lang/String.html). 
 1.  Imports can be defined in a very convenient way with Xtext. If you use the name `importedNamespace` in a parser rule, the framework will treat the value as an import. It even supports wildcard and handles them as expected:     
     
     ```xtext
