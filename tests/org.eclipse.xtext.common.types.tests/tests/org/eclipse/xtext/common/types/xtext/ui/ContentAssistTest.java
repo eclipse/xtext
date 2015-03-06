@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;
@@ -70,15 +72,33 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		}
 		return true;
 	}
-
-	@Test public void testDefaultArrayList_01() throws Exception {
-		//TODO use our own types, since ArrayList has changed in Java7
-		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+	
+	protected boolean isJava6(){
+		return System.getProperty("java.version","1.6.0").startsWith("1.6")&&!JavaProjectSetupUtil.isJava7Default();
 	}
 	
-	@Test public void testDefaultArrayList_02() throws Exception {
-		//TODO use our own types, since ArrayList has changed in Java7
-		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+	@Test
+	public void testDefaultArrayList_01() throws Exception {
+		//FIXME use our own types, since ArrayList has changed in Java7 and Java8
+		ContentAssistProcessorTestBuilder builder = newBuilder().append("default ArrayLis");
+		if (isJava6()) {
+			builder.assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+		} else {
+			builder.assertText("java.util.ArrayList", "java.util.ArrayList.Itr", "java.util.ArrayList.ListItr",
+					"java.util.ArrayList.SubList", "com.google.common.collect.ArrayListMultimap");
+		}
+	}
+
+	@Test
+	public void testDefaultArrayList_02() throws Exception {
+		//FIXME use our own types, since ArrayList has changed in Java7 and Java8
+		ContentAssistProcessorTestBuilder builder = newBuilder().append("import java.util.* default ArrayLis");
+		if (isJava6()) {
+			builder.assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+		} else {
+			builder.assertText("ArrayList", "ArrayList.Itr", "ArrayList.ListItr", "ArrayList.SubList",
+					"com.google.common.collect.ArrayListMultimap");
+		}
 	}
 
 	@Test public void testCustomArrayList_01() throws Exception {
