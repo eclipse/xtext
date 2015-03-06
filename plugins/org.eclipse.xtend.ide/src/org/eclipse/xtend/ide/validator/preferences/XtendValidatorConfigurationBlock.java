@@ -37,7 +37,8 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
 		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:")
-				.addComboBox(SINGLE_DISPATCH_FUNCTION, "Single dispatch method:");
+				.addComboBox(SINGLE_DISPATCH_FUNCTION, "Single dispatch method:")
+				.addComboBox(DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS, "Dispatch method arguments with different primitive types:");
 	}
 
 	/**

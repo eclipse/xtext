@@ -284,5 +284,152 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def testSamePrimitiveArgs() {
+		assertCompilesTo('''
+			class C {
+				def dispatch m(StringBuffer sb, int x) {
+					null
+				}
+				def dispatch m(StringBuilder sb, int x) {
+					null
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected Object _m(final StringBuffer sb, final int x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final StringBuilder sb, final int x) {
+			    return null;
+			  }
+			  
+			  public Object m(final Object sb, final int x) {
+			    if (sb instanceof StringBuffer) {
+			      return _m((StringBuffer)sb, x);
+			    } else if (sb instanceof StringBuilder) {
+			      return _m((StringBuilder)sb, x);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(sb, x).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=365910
+	 */
+	@Test
+	def testDifferentPrimitiveArgs_01() {
+		assertCompilesTo('''
+			class C {
+				def dispatch m(int x) {
+					null
+				}
+				def dispatch m(long x) {
+					null
+				}
+				def dispatch m(float x) {
+					null
+				}
+				def dispatch m(double x) {
+					null
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected Object _m(final int x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final long x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final float x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final double x) {
+			    return null;
+			  }
+			  
+			  public Object m(final Number x) {
+			    if (x instanceof Double) {
+			      return _m((Double)x);
+			    } else if (x instanceof Float) {
+			      return _m((Float)x);
+			    } else if (x instanceof Integer) {
+			      return _m((Integer)x);
+			    } else if (x instanceof Long) {
+			      return _m((Long)x);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(x).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=365910
+	 */
+	@Test
+	def testDifferentPrimitiveArgs_02() {
+		assertCompilesTo('''
+			class C {
+				def dispatch m(int x) {
+					null
+				}
+				def dispatch m(char x) {
+					null
+				}
+				def dispatch m(boolean x) {
+					null
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected Object _m(final int x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final char x) {
+			    return null;
+			  }
+			  
+			  protected Object _m(final boolean x) {
+			    return null;
+			  }
+			  
+			  public Object m(final Object x) {
+			    if (x instanceof Integer) {
+			      return _m((Integer)x);
+			    } else if (x instanceof Boolean) {
+			      return _m((Boolean)x);
+			    } else if (x instanceof Character) {
+			      return _m((Character)x);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(x).toString());
+			    }
+			  }
+			}
+		''')
+	}
 		
 }
