@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;
@@ -74,7 +73,7 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	protected boolean isJava6(){
-		return System.getProperty("java.version","1.6.0").startsWith("1.6")&&!JavaProjectSetupUtil.isJava7Default();
+		return System.getProperty("java.version","1.6.0").startsWith("1.6");
 	}
 	
 	@Test
