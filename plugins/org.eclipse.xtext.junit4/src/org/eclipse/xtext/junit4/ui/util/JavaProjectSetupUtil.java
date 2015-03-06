@@ -305,8 +305,10 @@ public class JavaProjectSetupUtil {
 		}
 	}
 
-	
 	private static boolean isJava7Default = false;
+	public static boolean isJava7Default(){
+		return isJava7Default;
+	}
 	
 	public static void makeJava7Default() {
 		if (!isJava7Default) {
