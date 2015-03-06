@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.idea.types.access.PsiBasedTypeFactory;
 import org.eclipse.xtext.idea.types.access.PsiClassMirror;
 import org.eclipse.xtext.idea.types.access.StubURIHelper;
+import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -255,6 +256,9 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         _or = _notEquals;
       }
       if (_or) {
+        return null;
+      }
+      if ((psiClass instanceof JvmPsiClass)) {
         return null;
       }
       _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);

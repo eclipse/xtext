@@ -31,13 +31,16 @@ import com.intellij.psi.impl.source.tree.RecursiveTreeElementVisitor;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -162,9 +165,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   
   protected void assertToken(final String name, final IGrammarAwareElementType elementType) {
     EObject _grammarElement = elementType.getGrammarElement();
-    final RuleCall ruleCall = ((RuleCall) _grammarElement);
-    AbstractRule _rule = ruleCall.getRule();
-    final String ruleName = _rule.getName();
+    final String ruleName = this.getRuleName(_grammarElement);
     final TokenSource tokenSource = this.tokenSourceProvider.createTokenSource(name);
     Token token = tokenSource.nextToken();
     String _text = token.getText();
@@ -189,6 +190,39 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       _builder_1.append("\' is an invalid ");
       _builder_1.append(ruleName, "");
       throw new IncorrectOperationException(_builder_1.toString());
+    }
+  }
+  
+  protected String _getRuleName(final Void it) {
+    throw new IllegalStateException(("Unexpected grammar element: " + it));
+  }
+  
+  protected String _getRuleName(final EObject it) {
+    throw new IllegalStateException(("Unexpected grammar element: " + it));
+  }
+  
+  protected String _getRuleName(final RuleCall it) {
+    AbstractRule _rule = it.getRule();
+    return _rule.getName();
+  }
+  
+  protected String _getRuleName(final CrossReference it) {
+    AbstractElement _terminal = it.getTerminal();
+    return this.getRuleName(_terminal);
+  }
+  
+  protected String getRuleName(final EObject it) {
+    if (it instanceof CrossReference) {
+      return _getRuleName((CrossReference)it);
+    } else if (it instanceof RuleCall) {
+      return _getRuleName((RuleCall)it);
+    } else if (it != null) {
+      return _getRuleName(it);
+    } else if (it == null) {
+      return _getRuleName((Void)null);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
     }
   }
 }

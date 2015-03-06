@@ -448,10 +448,12 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	protected def getPackageName(PsiClass psiClass) {
-		val javaFile = psiClass.containingFile as PsiJavaFile
-		val psiPackageName = javaFile.getPackageName
-		if (!psiPackageName.empty) {
-			return psiPackageName
+		val javaFile = psiClass.containingFile
+		if(javaFile instanceof PsiJavaFile) {
+			val psiPackageName = javaFile.getPackageName
+			if (!psiPackageName.empty) {
+				return psiPackageName
+			}
 		}
 		return null
 	}

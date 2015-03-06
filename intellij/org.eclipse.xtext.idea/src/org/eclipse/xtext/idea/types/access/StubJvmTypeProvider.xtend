@@ -12,6 +12,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.impl.JavaPsiFacadeEx
 import com.intellij.psi.impl.compiled.SignatureParsing
+import com.intellij.psi.search.GlobalSearchScope
 import java.text.StringCharacterIterator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
@@ -25,15 +26,14 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
+import org.eclipse.xtext.idea.types.psi.JvmPsiClass
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
-import org.eclipse.xtext.resource.XtextResourceSet
-import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.psi.search.SearchScope
-import org.eclipse.xtext.service.OperationCanceledError
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
@@ -142,6 +142,9 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		val psiClass = JavaPsiFacadeEx.getInstanceEx(project).findClass(name, scope)
 		if (psiClass == null || psiClass.containingClass != null) {
+			return null
+		}
+		if (psiClass instanceof JvmPsiClass) {
 			return null
 		}
 		new PsiClassMirror(psiClass, psiClassFactory)

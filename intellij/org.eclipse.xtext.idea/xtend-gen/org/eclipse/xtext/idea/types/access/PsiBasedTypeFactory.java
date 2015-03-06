@@ -1061,13 +1061,14 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   }
   
   protected String getPackageName(final PsiClass psiClass) {
-    PsiFile _containingFile = psiClass.getContainingFile();
-    final PsiJavaFile javaFile = ((PsiJavaFile) _containingFile);
-    final String psiPackageName = javaFile.getPackageName();
-    boolean _isEmpty = psiPackageName.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      return psiPackageName;
+    final PsiFile javaFile = psiClass.getContainingFile();
+    if ((javaFile instanceof PsiJavaFile)) {
+      final String psiPackageName = ((PsiJavaFile)javaFile).getPackageName();
+      boolean _isEmpty = psiPackageName.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        return psiPackageName;
+      }
     }
     return null;
   }

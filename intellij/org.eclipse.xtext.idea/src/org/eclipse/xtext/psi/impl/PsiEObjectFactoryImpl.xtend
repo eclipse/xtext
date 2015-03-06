@@ -19,6 +19,8 @@ import com.intellij.psi.impl.source.DummyHolderFactory
 import com.intellij.psi.impl.source.tree.RecursiveTreeElementVisitor
 import com.intellij.psi.impl.source.tree.TreeElement
 import com.intellij.util.IncorrectOperationException
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.parser.antlr.TokenSourceProvider
@@ -77,8 +79,7 @@ class PsiEObjectFactoryImpl implements PsiEObjectFactory {
 	}
 
 	def protected void assertToken(String name, IGrammarAwareElementType elementType) {
-		val ruleCall = elementType.grammarElement as RuleCall
-		val ruleName = ruleCall.rule.name
+		val ruleName = elementType.grammarElement.ruleName
 		val tokenSource = name.createTokenSource
 		var token = tokenSource.nextToken
 		if (name != token.text) {
@@ -89,6 +90,22 @@ class PsiEObjectFactoryImpl implements PsiEObjectFactory {
 		if (ruleName != lexerRuleName) {
 			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»''')
 		}
+	}
+	
+	protected def dispatch String getRuleName(Void it) {
+		throw new IllegalStateException("Unexpected grammar element: "+ it)
+	}
+	
+	protected def dispatch String getRuleName(EObject it) {
+		throw new IllegalStateException("Unexpected grammar element: "+ it)
+	}
+	
+	protected def dispatch String getRuleName(RuleCall it) {
+		rule.name
+	}
+	
+	protected def dispatch String getRuleName(CrossReference it) {
+		terminal.ruleName
 	}
 	
 }
