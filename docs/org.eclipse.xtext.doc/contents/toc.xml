@@ -489,11 +489,11 @@
 			<topic href="contents/402_migrating_from_0_7.html#migrating-step-by-step" label="Migrating Step By Step">
 				<topic href="contents/402_migrating_from_0_7.html#update-the-plug-in-dependencies-and-import-statements" label="Update the Plug-in Dependencies and Import Statements">
 				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#rename-the-packages-in-the-dsl-ui-plug-in" label="Rename the Packages in the dsl.ui-Plug-in">
+				<topic href="contents/402_migrating_from_0_7.html#rename-the-packages-in-the-dslui-plug-in" label="Rename the Packages in the dsl.ui-Plug-in">
 				</topic>
 				<topic href="contents/402_migrating_from_0_7.html#update-the-workflow" label="Update the Workflow">
 				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#manifest-mf-and-plugin-xml" label="MANIFEST.MF and plugin.xml">
+				<topic href="contents/402_migrating_from_0_7.html#manifestmf-and-pluginxml" label="MANIFEST.MF and plugin.xml">
 				</topic>
 				<topic href="contents/402_migrating_from_0_7.html#noteworthy-api-changes" label="Noteworthy API Changes">
 				</topic>
