@@ -6,4 +6,5 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class IdeaExtension {
 	Object ideaHome
 	String ideaVersion
+	Object sandboxDir
 }

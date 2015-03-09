@@ -1,6 +1,5 @@
 package org.xtext.gradle.idea.tasks
 
-import groovy.lang.Closure
 import java.io.File
 import java.net.URL
 import java.nio.file.Files
@@ -11,13 +10,12 @@ import org.apache.http.util.EntityUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.CopySpec
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.internal.os.OperatingSystem
 
-import static org.xtext.gradle.idea.tasks.IdeaDownloadTask.*
+import static extension org.xtext.gradle.idea.tasks.GradleExtensions.*
 
 @Accessors
 class IdeaDownloadTask extends DefaultTask {
@@ -27,7 +25,7 @@ class IdeaDownloadTask extends DefaultTask {
 	@Input String ideaVersion
 
 	new() {
-		onlyIf[ideaHomeDir.list?.size < 3]
+		onlyIf[(ideaHomeDir.list.toList ?: #[]).size < 3]
 	}
 
 	@TaskAction
@@ -37,28 +35,22 @@ class IdeaDownloadTask extends DefaultTask {
 		if (!archiveFile.exists) {
 			Files.copy(new URL(buildInfo.archiveUrl).openStream, archiveFile.toPath)
 		}
-		project.copy(new Closure(null) {
-			
-			override getMaximumNumberOfParameters() {
-				1
+		val sourceArchiveFile = new File(ideaHomeDir, buildInfo.sourceArchiveName)
+		if (!sourceArchiveFile.exists) {
+			Files.copy(new URL(buildInfo.sourceArchiveUrl).openStream, sourceArchiveFile.toPath)
+		}
+		project.copy [
+			into(ideaHomeDir)
+			if (os.isLinux) {
+				from(project.tarTree(archiveFile))
+				eachFile[path = path.cutDirs(1)]
+			} else {
+				from(project.zipTree(archiveFile))
+				if (os.isMacOsX) {
+					eachFile[path = path.cutDirs(2)]
+				}
 			}
-			
-			override call(Object arguments) {
-				arguments as CopySpec => [
-					into(ideaHomeDir)
-					if (os.isLinux) {
-						from(project.tarTree(archiveFile))
-						eachFile[path = path.cutDirs(1)]
-					} else {
-						from(project.zipTree(archiveFile))
-						if (os.isMacOsX) {
-							eachFile[path = path.cutDirs(2)]
-						}
-					}
-				]
-			}
-
-		})
+		]
 	}
 
 	@OutputDirectory
@@ -90,9 +82,7 @@ class IdeaDownloadTask extends DefaultTask {
 		val archiveName = '''ideaIC-«buildNumber».«os.archiveExtension»'''
 
 		val contentBaseUrl = '''«buildUrl»/artifacts/content'''
-		val archiveUrl = '''«contentBaseUrl»/«archiveName»'''
-
-		new IdeaBuildInfo(ideaVersion, buildId, buildUrl, buildNumber, archiveName, archiveUrl)
+		new IdeaBuildInfo(ideaVersion, buildId, buildUrl, buildNumber, contentBaseUrl, archiveName)
 	}
 
 	def httpGet(String url, (String)=>String responseHandler) {
@@ -128,6 +118,18 @@ class IdeaDownloadTask extends DefaultTask {
 	String buildId
 	String buildUrl
 	String buildNumber
+	String contentBaseUrl
 	String archiveName
-	String archiveUrl
+
+	def String getArchiveUrl() {
+		'''«contentBaseUrl»/«archiveName»'''
+	}
+	
+	def String getSourceArchiveName() {
+		"sources.zip"
+	}
+
+	def String getSourceArchiveUrl() {
+		'''«contentBaseUrl»/«sourceArchiveName»'''
+	}
 }

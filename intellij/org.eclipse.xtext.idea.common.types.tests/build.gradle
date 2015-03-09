@@ -1,4 +1,6 @@
 dependencies {
-	provided project(':org.eclipse.xtext.idea')
-	provided project(':org.eclipse.xtext.xbase.idea')
+	ideaProvided project(':org.eclipse.xtext.idea.tests')
+	compile ("org.eclipse.xtend:org.eclipse.xtend.lib:${version}")
+	ideaProvided project(':org.eclipse.xtext.idea')
+	ideaProvided project(':org.eclipse.xtext.xbase.idea')
 }

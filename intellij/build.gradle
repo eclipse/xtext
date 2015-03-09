@@ -1,9 +1,4 @@
-import java.nio.file.Files
-
-apply from: 'prepareIntellij.gradle'
-
 allprojects {
-	apply plugin: 'base'
 	apply plugin: 'maven'
 	group = 'org.eclipse.xtext'
 	version = '2.8.0-SNAPSHOT'
@@ -19,42 +14,24 @@ allprojects {
 	}
 }
 
-configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
-	apply plugin: 'java'
+subprojects {
+	apply plugin: 'org.xtext.idea-dev'
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	
-	configurations {
-		provided
+	configurations.compile {
+		exclude module:'guava'
+		exclude module:'cglib'
+		exclude module:'log4j'
+		exclude module:'icu4j'
+		exclude group:'org.ow2.asm'
+		exclude module:'org.eclipse.jdt.core'
 	}
 	
-	sourceSets.main.compileClasspath += configurations.provided
+	sourceCompatibility = 1.6
 	
-	dependencies {
-		provided project(':intellij-dependencies')
-		provided "org.eclipse.xtext:org.eclipse.xtext.xtext:${version}"
-		provided "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
-		provided "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
-		provided "org.eclipse.xtend:org.eclipse.xtend.lib:${version}"
+	ideaDevelopment {
+		ideaHome = "${rootDir}/intellij-ce"
 	}
-	
-	sourceSets {
-		main {
-			java.srcDirs = ['src', 'xtend-gen', 'src-gen']
-			resources {
-				srcDirs = ['src', 'src-gen']
-				exclude '**/*.xtend'
-				exclude '**/*.xtext'
-				exclude '**/*.mwe2'
-			}
-		}
-	}
-	
-	jar {
-		metaInf {
-			from('META-INF')
-		}
-	}
-	
-	sourceCompatibility = 1.5
 }
 
 def intellijPluginProjects = [
@@ -65,27 +42,12 @@ def intellijPluginProjects = [
 	project(':org.eclipse.xtext.idea.example.entities.idea'),
 	project(':org.eclipse.xtend.idea')
 ]
+
 configure(intellijPluginProjects) {
-
-	configurations.compile {
-		exclude module:'guava'
-		exclude module:'cglib'
-		exclude module:'log4j'
-		exclude module:'icu4j'
-		exclude group:'org.ow2.asm'
-	}
-	
-	task assembleLibFolder(type: Copy) {
-		from configurations.runtime.allArtifacts.files
-		from configurations.runtime
-		into 'lib'
-	}
-	
-	assemble.dependsOn(assembleLibFolder)
-
+	apply plugin: 'org.xtext.idea-plugin'
 	task zip(dependsOn: jar, type: Zip) {
 		from configurations.runtime.allArtifacts.files
-		from configurations.runtime
+		from configurations.runtime - configurations.ideaProvided
 		into(project.name + '-' + project.version + '/lib')
 	}
 }
@@ -96,57 +58,3 @@ task createIntellijRepository(type: Copy) {
 	from intellijPluginProjects*.zip
 	into "$rootDir/build/intellijRepository"
 }
-
-def intellijPluginAndTestProjects = intellijPluginProjects + project(':org.eclipse.xtext.idea.common.types.tests')
-
-configure(intellijPluginAndTestProjects) {
-	ext.sandboxDirName = 'sandbox'
-	ext.sandboxDir = file(sandboxDirName)
-	ext.sandboxPluginsDir = file("${sandboxDir}/plugins")
-	ext.sandboxPluginDir = file("${sandboxPluginsDir}/${project.name}")
-	
-	task createSandbox {
-		onlyIf {!sandboxDir.exists()}
-		doLast {
-			sandboxPluginDir.mkdirs()
-
-			Files.createSymbolicLink(file("${sandboxPluginDir}/classes").toPath(), project.file('bin').toPath())
-			Files.createSymbolicLink(file("${sandboxPluginDir}/META-INF").toPath(), file("META-INF").toPath())
-			
-			File pluginLibDir = file("${sandboxPluginDir}/lib")
-			pluginLibDir.mkdirs();
-
-			configurations.runtime.allDependencies.withType(ExternalDependency) { dependency ->
-				copy {
-					from configurations.runtime.fileCollection(dependency)
-					into pluginLibDir
-				}
-			}
-
-			configurations.runtime.allDependencies.withType(ProjectDependency) {
-				Files.createSymbolicLink(file("${pluginLibDir}/${it.dependencyProject.name}").toPath(), it.dependencyProject.file('bin').toPath())
-			}
-
-			configurations.provided.allDependencies.withType(ProjectDependency).findAll{intellijPluginProjects.contains(it.dependencyProject)}.each {
-				Files.createSymbolicLink(file("${sandboxPluginsDir}/${it.dependencyProject.name}").toPath(), it.dependencyProject.sandboxPluginDir.toPath())
-			}
-		}
-	}
-
-	task cleanSandbox {
-		onlyIf {sandboxDir.exists()}
-		doLast {
-			ant.delete(includeEmptyDirs: true, removeNotFollowedSymlinks: true, verbose: true) {
-				fileset(dir: sandboxDir, followSymlinks: false, defaultExcludes: "no")
-			}
-			delete sandboxDir
-		}
-	}
-
-	task updateSandbox(dependsOn: [cleanSandbox, createSandbox])
-}
-
-// Stub tasks for intellij project
-task createSandbox {}
-task cleanSandbox {}
-task updateSandbox {}

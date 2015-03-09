@@ -1,0 +1,26 @@
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'xtend-gen', 'src-gen']
+			exclude (
+				'**/*.xtendbin',
+			)
+		}
+		resources {
+			srcDirs = ['src', 'src-gen']
+			exclude (
+				'**/*.xtend', 
+				'**/*.xtext', 
+				'**/*.mwe2',
+				'**/*._trace',
+				'**/*.xtendbin',
+			)
+		}
+	}
+}
+
+jar {
+	metaInf {
+		from('META-INF')
+	}
+}

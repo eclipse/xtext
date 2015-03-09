@@ -1,6 +1,5 @@
 dependencies {
-	compile project(':org.eclipse.xtext.idea.example.entities')
 	compile project(':org.eclipse.xtext.idea.example.entities.ide')
-	provided project(':org.eclipse.xtext.idea')
-	provided project(':org.eclipse.xtext.xbase.idea')
+	ideaProvided project(':org.eclipse.xtext.idea')
+	ideaProvided project(':org.eclipse.xtext.xbase.idea')
 }

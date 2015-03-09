@@ -1,7 +1,3 @@
-configurations.compile {
-	exclude module:'org.eclipse.jdt.core'
-}
-
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"

@@ -1,6 +1,7 @@
 include (
 	'intellij-dependencies',
 	'org.eclipse.xtext.idea',
+	'org.eclipse.xtext.idea.tests',
 	'org.eclipse.xtext.idea.builder',
 	'org.eclipse.xtext.xtext.idea',
 	'org.eclipse.xtext.xbase.idea',
@@ -9,6 +10,5 @@ include (
 	'org.eclipse.xtext.idea.sdomain.idea',
 	'org.eclipse.xtext.idea.example.entities',
 	'org.eclipse.xtext.idea.example.entities.ide',
-	'org.eclipse.xtext.idea.example.entities.idea',
-	'org.eclipse.xtext.idea.common.types.tests'
+	'org.eclipse.xtext.idea.example.entities.idea'
 )

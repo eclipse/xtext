@@ -1,4 +1,4 @@
 dependencies {
 	compile project(':org.eclipse.xtext.idea.sdomain')
-	provided project(':org.eclipse.xtext.idea')
+	ideaProvided project(':org.eclipse.xtext.idea')
 }
