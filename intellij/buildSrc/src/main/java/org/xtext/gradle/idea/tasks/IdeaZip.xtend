@@ -11,6 +11,7 @@ class IdeaZip extends Zip implements IdeaPluginSpec {
 	CopySpec metaInf
 
 	new() {
+		rootSpec.into(project.name)
 		classes = rootSpec.addChild.into("classes")
 		libraries = rootSpec.addChild.into("lib")
 		metaInf = rootSpec.addChild.into("META-INF")

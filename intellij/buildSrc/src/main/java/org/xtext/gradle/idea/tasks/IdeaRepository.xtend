@@ -13,7 +13,7 @@ class IdeaRepository extends Sync {
 	val files = <File>newArrayList
 	
 	new() {
-		mainSpec.eachFile[files.add(file)]
+		rootSpec.eachFile[files.add(file)]
 	}
 	
 	override protected copy() {
