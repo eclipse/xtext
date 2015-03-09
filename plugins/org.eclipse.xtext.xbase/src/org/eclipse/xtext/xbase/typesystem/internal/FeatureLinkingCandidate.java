@@ -19,10 +19,12 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -137,8 +139,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	 * <li>{@link #isInvalidStaticSyntax() syntax for static feature calls},</li>
 	 * <li>{@link #isStatic() static context for static members},</li>
 	 * <li>field accessed as a method, e.g. with parentheses,</li>
-	 * <li>attempt to access {@code this} in a static context,</li>
+	 * <li>usage of {@code this} or {@code super} in an invalid context,</li>
+	 * <li>direct invocation of an abstract method,</li>
 	 * <li>attempt to enclose a non-final local variable in a lambda expression,</li>
+	 * <li>reference to a private feature with a subclass instance,</li>
 	 * <li>{@link #isGetClassOnTypeLiteral() errorprone invocation of getClass()}.</li>
 	 * </ol>
 	 */
@@ -300,6 +304,29 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 						result.accept(diagnostic);
 						return false;
+					}
+				}
+			}
+			if (feature instanceof JvmMember) {
+				JvmMember member = (JvmMember) feature;
+				if (member.getVisibility() == JvmVisibility.PRIVATE) {
+					LightweightTypeReference receiverType = getReceiverType();
+					if (receiverType != null) {
+						if (receiverType.getType() != member.getDeclaringType()) {
+							List<JvmDeclaredType> enclosingTypes = getState().getFeatureScopeSession().getEnclosingTypes();
+							if (enclosingTypes.contains(member.getDeclaringType())) {
+								String message = String.format("Cannot access the private %s %s%s in a subclass context",
+										getFeatureTypeName(), member.getSimpleName(), getFeatureParameterTypesAsString());
+								String[] issueData = null;
+								// We can fix the issue by adding a type cast to the declaring type of the feature
+								issueData = new String[] { "subclass-context", member.getDeclaringType().getSimpleName() };
+								AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+										IssueCodes.FEATURE_NOT_VISIBLE, message, featureCall,
+										XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, issueData);
+								result.accept(diagnostic);
+								return false;
+							}
+						}
 					}
 				}
 			}
