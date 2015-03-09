@@ -18,7 +18,7 @@ import org.gradle.internal.os.OperatingSystem
 import static extension org.xtext.gradle.idea.tasks.GradleExtensions.*
 
 @Accessors
-class IdeaDownloadTask extends DefaultTask {
+class DownloadIdea extends DefaultTask {
 	static val os = OperatingSystem.current
 
 	Object ideaHome
