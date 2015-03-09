@@ -1145,6 +1145,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendClass);
 	}
 
+	@Test
+	public void testInaccessibleMethod14() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { private var int x def foo() { val o = new Foo { } o.x = 2 }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(1)).getExpression())
+				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "private", " x ");
+	}
+
+	@Test
+	public void testInaccessibleMethod15() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { private def void bar() {} def foo() { val o = new Foo { } o.bar }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(1)).getExpression())
+				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "private", "bar()");
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("def foo(int x, int x) {null}");
 		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "x");

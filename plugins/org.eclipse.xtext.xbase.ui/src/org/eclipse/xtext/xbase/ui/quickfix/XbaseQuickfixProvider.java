@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.ui.quickfix;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
@@ -10,6 +11,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -25,17 +28,21 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -152,6 +159,90 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				document.replace(replacement.getOffset(), replacement.getLength(), replacement.getText());
 			}
 		});
+	}
+	
+	@Fix(IssueCodes.FEATURE_NOT_VISIBLE)
+	public void fixInvisibleFeature(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData() != null && issue.getData().length >= 1 && "subclass-context".equals(issue.getData()[0])) {
+			String fixup;
+			if (issue.getData().length == 1)
+				fixup = "Add type cast.";
+			else
+				fixup = "Add cast to " + issue.getData()[1] + ".";
+			acceptor.accept(issue, fixup, fixup, null,
+					new ISemanticModification() {
+
+						@Override
+						public void apply(EObject element, IModificationContext context) throws Exception {
+							if (!(element instanceof XAbstractFeatureCall))
+								return;
+							XAbstractFeatureCall featureCall = (XAbstractFeatureCall) element;
+							if (!(featureCall.getFeature() instanceof JvmMember))
+								return;
+							JvmType declaringType = ((JvmMember) featureCall.getFeature()).getDeclaringType();
+							if (featureCall instanceof XMemberFeatureCall) {
+								addTypeCastToExplicitReceiver(featureCall, context, declaringType,
+										XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
+							} else if (featureCall instanceof XAssignment) {
+								addTypeCastToExplicitReceiver(featureCall, context, declaringType,
+										XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE);
+							} else if (featureCall instanceof XFeatureCall) {
+								addTypeCastToImplicitReceiver((XFeatureCall) featureCall, context, declaringType);
+							}
+						}
+
+					});
+		}
+	}
+
+	private void addTypeCastToExplicitReceiver(XAbstractFeatureCall featureCall, IModificationContext context,
+			JvmType declaringType, EReference structuralFeature) throws BadLocationException {
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(featureCall, structuralFeature);
+		if (nodes.isEmpty())
+			return;
+		INode firstNode = IterableExtensions.head(nodes);
+		INode lastNode = IterableExtensions.last(nodes);
+		int offset = firstNode.getOffset();
+		int length = lastNode.getEndOffset() - offset;
+		ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+				(XtextResource) featureCall.eResource(), offset, length);
+		appendable.append("(");
+		ListIterator<INode> nodeIter = nodes.listIterator();
+		while (nodeIter.hasNext()) {
+			String text = nodeIter.next().getText();
+			if (nodeIter.previousIndex() == 0)
+				appendable.append(Strings.removeLeadingWhitespace(text));
+			else if (nodeIter.nextIndex() == nodes.size())
+				appendable.append(Strings.trimTrailingLineBreak(text));
+			else
+				appendable.append(text);
+		}
+		appendable.append(" as ");
+		appendable.append(declaringType);
+		appendable.append(")");
+		appendable.commitChanges();
+	}
+	
+	private void addTypeCastToImplicitReceiver(XFeatureCall featureCall, IModificationContext context,
+			JvmType declaringType) throws BadLocationException {
+		String receiver;
+		if (featureCall.getImplicitReceiver() instanceof XAbstractFeatureCall)
+			receiver = ((XAbstractFeatureCall) featureCall.getImplicitReceiver()).getFeature().getSimpleName();
+		else return;
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(featureCall,
+				XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		if (nodes.isEmpty())
+			return;
+		INode firstNode = IterableExtensions.head(nodes);
+		int offset = firstNode.getOffset();
+		ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+				(XtextResource) featureCall.eResource(), offset, 0);
+		appendable.append("(");
+		appendable.append(receiver);
+		appendable.append(" as ");
+		appendable.append(declaringType);
+		appendable.append(").");
+		appendable.commitChanges();
 	}
 
 	@Fix(IssueCodes.REDUNDANT_CASE)
