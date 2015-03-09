@@ -16,16 +16,18 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.internal.os.OperatingSystem
 
 import static extension org.xtext.gradle.idea.tasks.GradleExtensions.*
+import org.gradle.api.file.FileCopyDetails
+import com.google.common.base.Splitter
 
 @Accessors
-class IdeaDownloadTask extends DefaultTask {
+class DownloadIdea extends DefaultTask {
 	static val os = OperatingSystem.current
 
 	Object ideaHome
 	@Input String ideaVersion
 
 	new() {
-		onlyIf[(ideaHomeDir.list.toList ?: #[]).size < 3]
+		onlyIf[(ideaHomeDir.list?.toList ?: #[]).size < 3]
 	}
 
 	@TaskAction
@@ -43,11 +45,11 @@ class IdeaDownloadTask extends DefaultTask {
 			into(ideaHomeDir)
 			if (os.isLinux) {
 				from(project.tarTree(archiveFile))
-				eachFile[path = path.cutDirs(1)]
+				eachFile[cutDirs(1)]
 			} else {
 				from(project.zipTree(archiveFile))
 				if (os.isMacOsX) {
-					eachFile[path = path.cutDirs(2)]
+					eachFile[cutDirs(2)]
 				}
 			}
 		]
@@ -107,9 +109,9 @@ class IdeaDownloadTask extends DefaultTask {
 		}
 	}
 
-	def cutDirs(String file, int levels) {
-		val canonicalPath = path.replaceAll("\\\\", "/")
-		canonicalPath.split('/').drop(levels).join("/")
+	def cutDirs(FileCopyDetails file, int levels) {
+		val segments = Splitter.on('/').omitEmptyStrings.split(file.path)
+		file.path = segments.drop(levels).join('/')
 	}
 }
 

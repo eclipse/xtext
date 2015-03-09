@@ -3,22 +3,32 @@ package org.xtext.gradle.idea
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginConvention
-import org.xtext.gradle.idea.tasks.AssembleSandboxTask
+import org.xtext.gradle.idea.tasks.AssembleSandbox
 import org.xtext.gradle.idea.tasks.IdeaExtension
+import org.xtext.gradle.idea.tasks.IdeaZip
 
 import static extension org.xtext.gradle.idea.tasks.GradleExtensions.*
+import org.gradle.api.Action
+import org.xtext.gradle.idea.tasks.IdeaPluginSpec
 
 class IdeaPluginPlugin implements Plugin<Project> {
 	override apply(Project project) {
-		project.pluginManager.apply(IdeaDevelopmentPlugin)
+		project.pluginManager.apply(IdeaComponentPlugin)
 		val idea = project.extensions.getByType(IdeaExtension)
-		val assembleSandboxTask = project.tasks.create("assembleSandbox", AssembleSandboxTask)
 		val mainSourceSet = project.convention.getPlugin(JavaPluginConvention).sourceSets.getByName("main")
-		assembleSandboxTask.classes.from(mainSourceSet.output)
 		val providedDependencies = project.configurations.getAt("ideaProvided")
 		val runtimeDependencies = project.configurations.getAt("runtime")
-		assembleSandboxTask.libraries.from(runtimeDependencies.minus(providedDependencies))
-		assembleSandboxTask.metaInf.from("META-INF")
+		
+		val Action<? super IdeaPluginSpec> archiveConfig = [
+			classes.from(mainSourceSet.output)
+			libraries.from(runtimeDependencies.minus(providedDependencies))
+			metaInf.from("META-INF")
+		]
+
+		project.tasks.create("ideaZip", IdeaZip, archiveConfig)
+
+		val assembleSandboxTask = project.tasks.create("assembleSandbox", AssembleSandbox, archiveConfig)
+
 		project.afterEvaluate [
 			assembleSandboxTask.destinationDir = project.file(idea.sandboxDir) / project.name
 		]
