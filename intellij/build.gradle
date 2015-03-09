@@ -1,5 +1,7 @@
 allprojects {
 	apply plugin: 'maven'
+	apply plugin: 'org.xtext.idea-dev'
+	
 	group = 'org.eclipse.xtext'
 	version = '2.8.0-SNAPSHOT'
 	
@@ -12,26 +14,27 @@ allprojects {
 			url "https://oss.sonatype.org/content/repositories/snapshots/"
 		}
 	}
+	
+	ideaDevelopment {
+		ideaHome = "${rootDir}/intellij-ce"
+	}
 }
 
+apply plugin: 'org.xtext.idea-repository'
+ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij'
+
 subprojects {
-	apply plugin: 'org.xtext.idea-dev'
+	apply plugin: 'org.xtext.idea-component'
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	
 	configurations.compile {
-		exclude module:'guava'
 		exclude module:'cglib'
-		exclude module:'log4j'
 		exclude module:'icu4j'
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 	}
 	
 	sourceCompatibility = 1.6
-	
-	ideaDevelopment {
-		ideaHome = "${rootDir}/intellij-ce"
-	}
 }
 
 def intellijPluginProjects = [
@@ -45,16 +48,4 @@ def intellijPluginProjects = [
 
 configure(intellijPluginProjects) {
 	apply plugin: 'org.xtext.idea-plugin'
-	task zip(dependsOn: jar, type: Zip) {
-		from configurations.runtime.allArtifacts.files
-		from configurations.runtime - configurations.ideaProvided
-		into(project.name + '-' + project.version + '/lib')
-	}
-}
-
-//TODO generate this automatically
-task createIntellijRepository(type: Copy) {
-	from "updatePlugins.xml"
-	from intellijPluginProjects*.zip
-	into "$rootDir/build/intellijRepository"
 }

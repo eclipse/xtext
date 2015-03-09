@@ -5,7 +5,7 @@ import org.gradle.api.file.CopySpec
 import org.gradle.api.tasks.Sync
 
 @Accessors
-class AssembleSandboxTask extends Sync {
+class AssembleSandbox extends Sync implements IdeaPluginSpec {
 	CopySpec classes
 	CopySpec libraries
 	CopySpec metaInf
