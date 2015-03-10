@@ -1264,29 +1264,30 @@ org.eclipse.xtend2.lib.StringConcatenation -> org.eclipse.xtend2.lib.StringConca
     299:301:void newLine() -> newLine
     308:324:void newLineIfNotEmpty() -> newLineIfNotEmpty
     328:336:java.lang.String toString() -> toString
-    347:358:java.util.List getSignificantContent() -> getSignificantContent
-    368:368:java.lang.String getLineDelimiter() -> getLineDelimiter
-    380:380:int length() -> length
-    392:392:char charAt(int) -> charAt
-    404:404:java.lang.CharSequence subSequence(int,int) -> subSequence
-    417:458:java.util.List splitLinesAndNewLines(java.lang.String) -> splitLinesAndNewLines
+    348:348:java.util.List getContent() -> getContent
+    359:370:java.util.List getSignificantContent() -> getSignificantContent
+    380:380:java.lang.String getLineDelimiter() -> getLineDelimiter
+    392:392:int length() -> length
+    404:404:char charAt(int) -> charAt
+    416:416:java.lang.CharSequence subSequence(int,int) -> subSequence
+    429:470:java.util.List splitLinesAndNewLines(java.lang.String) -> splitLinesAndNewLines
     62:62:java.util.ArrayList access$0(org.eclipse.xtend2.lib.StringConcatenation) -> access$0
 org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget -> org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget:
     java.lang.String indentation -> indentation
-    542:543:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
-    547:548:void append(java.lang.Object,java.lang.String) -> append
-    552:553:void append(java.lang.Object) -> append
+    554:555:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    559:560:void append(java.lang.Object,java.lang.String) -> append
+    564:565:void append(java.lang.Object) -> append
 org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget -> org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget:
     org.eclipse.xtend2.lib.StringConcatenation target -> target
     int offsetFixup -> offsetFixup
-    480:480:int length() -> length
-    485:485:char charAt(int) -> charAt
-    490:490:java.lang.CharSequence subSequence(int,int) -> subSequence
-    495:496:void newLineIfNotEmpty() -> newLineIfNotEmpty
-    500:501:void newLine() -> newLine
-    505:506:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
-    510:514:void append(java.lang.Object,java.lang.String) -> append
-    518:519:void append(java.lang.Object) -> append
+    492:492:int length() -> length
+    497:497:char charAt(int) -> charAt
+    502:502:java.lang.CharSequence subSequence(int,int) -> subSequence
+    507:508:void newLineIfNotEmpty() -> newLineIfNotEmpty
+    512:513:void newLine() -> newLine
+    517:518:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    522:526:void append(java.lang.Object,java.lang.String) -> append
+    530:531:void append(java.lang.Object) -> append
 org.eclipse.xtend2.lib.StringConcatenationClient -> org.eclipse.xtend2.lib.StringConcatenationClient:
     36:36:void appendTo(org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation) -> appendTo
 org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation -> org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation:
