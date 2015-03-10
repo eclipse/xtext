@@ -120,15 +120,11 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	protected Iterable<AbstractElement> findValidValueAssignments(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value) {
-		// keywords have precedence over everything else
-		for (AbstractElement ass : assignedElements)
-			if (ass instanceof Keyword && keywordSerializer.isValid(semanticObj, (Keyword) ass, value, null))
-				return Collections.singletonList(ass);
-
-		// now check the remaining assignments
 		List<AbstractElement> result = Lists.newArrayList();
-		for (AbstractElement ass : assignedElements)
-			if (ass instanceof RuleCall) {
+		for (AbstractElement ass : assignedElements) {
+			if (ass instanceof Keyword && keywordSerializer.isValid(semanticObj, (Keyword) ass, value, null))
+				result.add(ass);
+			else if (ass instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ass;
 				if (rc.getRule() instanceof EnumRule) {
 					if (enumLiteralSerializer.isValid(semanticObj, rc, value, null))
@@ -136,6 +132,7 @@ public class AssignmentFinder implements IAssignmentFinder {
 				} else if (valueSerializer.isValid(semanticObj, rc, value, null))
 					result.add(ass);
 			}
+		}
 		return result;
 	}
 
