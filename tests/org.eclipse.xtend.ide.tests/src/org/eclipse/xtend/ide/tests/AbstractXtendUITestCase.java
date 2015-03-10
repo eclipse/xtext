@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests;
 
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -44,12 +47,19 @@ public abstract class AbstractXtendUITestCase extends Assert {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
-	public Injector getInjector() {
+	public final Injector getInjector() {
 		return injector;
 	}
 	
-	public <T> T get(Class<T> clazz) {
+	public final <T> T get(Class<T> clazz) {
 		return getInjector().getInstance(clazz);
+	}
+	
+	protected void setJavaVersion(JavaVersion javaVersion) throws Exception {
+		IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
+		WorkbenchTestHelper.changeBree(javaProject, javaVersion);
+		WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
+		IResourcesSetupUtil.waitForAutoBuild();
 	}
 
 }

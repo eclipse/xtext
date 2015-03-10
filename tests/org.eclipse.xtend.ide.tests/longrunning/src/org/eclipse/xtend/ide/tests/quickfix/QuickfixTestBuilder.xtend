@@ -53,8 +53,8 @@ class QuickfixTestBuilder {
 		preferenceStore.setValue(issueCode, "error")
 	}
 	
-	def setTargetVersion(JavaVersion targetVersion) {
-		xbaseBuilderPreferenceAccess.setJavaVersion(null, targetVersion);
+	def setJavaVersion(JavaVersion javaVersion) {
+		xbaseBuilderPreferenceAccess.setJavaVersion(project, javaVersion);
 	}
 	
 	def create(String fileName, CharSequence model) {

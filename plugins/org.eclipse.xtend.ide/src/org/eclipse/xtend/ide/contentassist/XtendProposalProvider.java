@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -51,6 +52,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
@@ -76,6 +79,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
 
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
@@ -341,7 +347,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof XtendClass) {
+		if (isValidTypeForOverriding(model)) {
 			INode node = context.getCurrentNode();
 			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
 			if (!(eObject instanceof AnonymousClass)) {
@@ -358,7 +364,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 						}
 					}
 				}
-				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+				overrideAssist.createOverrideProposals((XtendTypeDeclaration) model, context, acceptor, getConflictHelper());
 			}
 		}
 		super.completeType_Members(model, assignment, context, acceptor);
@@ -367,11 +373,11 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof XtendClass) {
+		if (isValidTypeForOverriding(model)) {
 			INode node = context.getCurrentNode();
 			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
 			if (!(eObject instanceof AnonymousClass)) {
-				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+				overrideAssist.createOverrideProposals((XtendTypeDeclaration) model, context, acceptor, getConflictHelper());
 				return;
 			}
 		} else if (model instanceof XtendField) {
@@ -386,27 +392,33 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			 * If there's a field decl preceding the cursor position, the field will have a name. 
 			 */
 			XtendField field = (XtendField) model;
-			if (field.eContainer() instanceof XtendClass) {
-				overrideAssist.createOverrideProposals((XtendClass) field.eContainer(), context, acceptor, getConflictHelper());
+			if (isValidTypeForOverriding(field.eContainer())) {
+				overrideAssist.createOverrideProposals((XtendTypeDeclaration) field.eContainer(), context, acceptor, getConflictHelper());
 				return;
 			}
-		} else if (model instanceof XtendExecutable && context.getPrefix().length() == 0 && model.eContainer() instanceof XtendClass) {
-			overrideAssist.createOverrideProposals((XtendClass) model.eContainer(), context, acceptor, getConflictHelper());
+		} else if (model instanceof XtendExecutable && context.getPrefix().length() == 0
+				&& isValidTypeForOverriding(model.eContainer())) {
+			overrideAssist.createOverrideProposals((XtendTypeDeclaration) model.eContainer(), context, acceptor, getConflictHelper());
 			return;
 		} else if (model instanceof XExpression) {
 			XtendMember member = EcoreUtil2.getContainerOfType(model, XtendMember.class);
 			INode memberNode = NodeModelUtils.findActualNodeFor(member);
 			if (memberNode.getTotalEndOffset() <= context.getOffset()) {
-				if (member.eContainer() instanceof XtendClass) {
-					overrideAssist.createOverrideProposals((XtendClass) member.eContainer(), context, acceptor, getConflictHelper());
+				if (isValidTypeForOverriding(member.eContainer())) {
+					overrideAssist.createOverrideProposals((XtendTypeDeclaration) member.eContainer(), context, acceptor, getConflictHelper());
 					return;
 				}
 			}
 		}
 		INode node = context.getCurrentNode();
 		EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
-		if (eObject instanceof XtendClass)
+		if (isValidTypeForOverriding(eObject))
 			overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
+	}
+	
+	private boolean isValidTypeForOverriding(EObject model) {
+		return model instanceof XtendClass || model instanceof XtendInterface
+				&& generatorConfigProvider.get(model).getJavaSourceVersion().isAtLeast(JavaVersion.JAVA8);
 	}
 	
 	@Override
