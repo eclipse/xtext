@@ -266,6 +266,17 @@
 			<repository location="file://${sp:output}" />
 			<iu id="Default" />
 		</p2.remove.iu>
+		<antcall target="add.p2.index" />
+	</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+		Adds p2.index to our p2 repository
+          target: p2.modification
+          parameter:  site.p2.raw alias ${sp:raw.repository}                    
+          			  product output alias ${sp:output}                    
+         - - - - - - - - - - - - - - - - - -->
+	<target name="add.p2.index">
+		<copy todir="${sp:output}/" file="p2.index" />
 	</target>
 
 

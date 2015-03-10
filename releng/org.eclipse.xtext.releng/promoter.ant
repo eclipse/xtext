@@ -2,7 +2,7 @@
 <project name="Promoter / Publisher" default="publish.build">
 	<property name="promoter.properties.file.name" value="promote.properties" />
 	<property name="publisher.properties.file.name" value="publisher.properties" />
-
+	
 	<target name="-setup.promoter">
 		<property name="promoter.setup.directory" location="${sp:output}" />
 		<property name="promoter.properties.file" location="${promoter.setup.directory}/${promoter.properties.file.name}" />
@@ -228,13 +228,13 @@
 
 
 		<!-- setup composite.repository.base appropriate to the build type -->
-		<condition property="composite.repository.base" value="nightly/head">
+		<condition property="composite.repository.base" value="nightly/${scm.stream}">
 			<matches pattern="^N" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="milestones/head/${saved.build.id}">
+		<condition property="composite.repository.base" value="milestones/${scm.stream}/${saved.build.id}">
 			<matches pattern="^[IMS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/head/${saved.build.id}">
+		<condition property="composite.repository.base" value="releases/${version}/${saved.build.id}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 

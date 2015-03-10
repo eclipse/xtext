@@ -3,8 +3,8 @@
   <validationSets description="Luna Distro" label="Luna">
     <contributions href="../aggregator/xtext.b3aggrcon#/"/>
     <contributions href="../aggregator/common.b3aggrcon#/"/>
-    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.4/"/>
-    <validationRepositories location="http://download.eclipse.org/releases/luna/"/>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700"/>
+    <validationRepositories location="http://download.eclipse.org/releases/luna/201502271000/"/>
   </validationSets>
   <configurations/>
 </aggregator:Aggregation>
