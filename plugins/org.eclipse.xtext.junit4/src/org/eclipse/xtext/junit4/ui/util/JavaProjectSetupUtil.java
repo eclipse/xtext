@@ -42,6 +42,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.launching.StandardVMType;
 import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.IVMInstall2;
 import org.eclipse.jdt.launching.JavaRuntime;
@@ -286,7 +287,7 @@ public class JavaProjectSetupUtil {
 	}
 
 	/**
-	 * @deprecated {@link #addJreClasspathEntry(IJavaProject)} should be used insteaf of this method
+	 * @deprecated {@link #addJreClasspathEntry(IJavaProject)} should be used instead of this method
 	 */
 	@Deprecated
 	public static void addJre15ClasspathEntry(IJavaProject javaProject) throws JavaModelException {
@@ -303,6 +304,11 @@ public class JavaProjectSetupUtil {
 		if (existingJreContainerClasspathEntry == null) {
 			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry());
 		}
+	}
+	
+	public static void addJreClasspathEntry(IJavaProject javaProject, String bree) throws JavaModelException {
+		IPath jreContainerPath = JavaRuntime.newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, bree);
+		addToClasspath(javaProject, JavaCore.newContainerEntry(jreContainerPath));
 	}
 
 	private static boolean isJava7Default = false;
