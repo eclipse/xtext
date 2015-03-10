@@ -21,19 +21,18 @@
 «DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
 <!-- adding resource factories -->
 «FOREACH modelFileExtensions AS ext»
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
+	<extension point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="«executableExtensionFactory()»:org.eclipse.xtext.resource.IResourceFactory"
 			type="«ext»">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="«ext»">
-        </resourceServiceProvider>
-    </extension>
+		<resourceServiceProvider
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="«ext»">
+		</resourceServiceProvider>
+	</extension>
 «ENDFOREACH»
 «ENDDEFINE»
 

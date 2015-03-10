@@ -28,22 +28,22 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import «rules.first().type.classifier.javaTypeName(eResource().resourceSet)»
 
 /**
- * <p>Infers a JVM model from the source model.</p> 
+ * <p>Infers a JVM model from the source model.</p>
  *
- * <p>The JVM model should contain all elements that would appear in the Java code 
- * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     
+ * <p>The JVM model should contain all elements that would appear in the Java code
+ * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>
  */
 class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 
-    /**
-     * convenience API to build and initialize JVM types and their members.
-     */
+	/**
+	 * convenience API to build and initialize JVM types and their members.
+	 */
 	@Inject extension JvmTypesBuilder
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
 	 * given element's type that is contained in a resource.
-	 * 
+	 *
 	 * @param element
 	 *            the model to create one or more
 	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType declared
@@ -65,20 +65,20 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	 *            rely on linking using the index if isPreIndexingPhase is
 	 *            <code>true</code>.
 	 */
-   	def dispatch void infer(«rules.first().type.classifier.javaTypeName(eResource().resourceSet).toSimpleName()» element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		
-   		// An implementation for the initial hello world example could look like this:
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
-//   					body = '''
+	def dispatch void infer(«rules.first().type.classifier.javaTypeName(eResource().resourceSet).toSimpleName()» element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
+
+		// An implementation for the initial hello world example could look like this:
+//		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
+//			for (greeting : element.greetings) {
+//				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
+//					body = '''
 //							return "Hello «S()»greeting.name«E()»";
-//   					'''
-//   				]
-//   			}
-//   		]
-   	}
+//					'''
+//				]
+//			}
+//		]
+	}
 }
 
 «ENDFILE»
@@ -86,7 +86,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
-«ENDDEFINE» 
+«ENDDEFINE»
 
 
 «DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
@@ -94,52 +94,44 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 <!-- Type Hierarchy  -->
 	<extension
 		point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
 			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
 		</handler>
-		<handler 
+		<handler
 			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
 			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
 			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
 		</handler>
 		«IF usesXImportSection-»
 		<handler
-            class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
-            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
-           	<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+			commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+			<activeWhen>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
-        </handler>
-        «ENDIF-»
+		</handler>
+		«ENDIF-»
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		«IF usesXImportSection-»
-	    <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-             <command
-                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
-                 style="push"
-                 tooltip="Organize Imports">
-                <visibleWhen checkEnabled="false">
-                    <reference
-                        definitionId="«name».Editor.opened">
-                    </reference>
-                </visibleWhen>
-            </command>  
-        </menuContribution>
-        «ENDIF-»
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			 <command
+				commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+				style="push"
+				tooltip="Organize Imports">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		«ENDIF-»
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
@@ -166,17 +158,15 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	<!-- Call Hierachy -->
 	<extension
 		point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
@@ -191,97 +181,89 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	</extension>
 «ENDIF-»
 	<extension
-         point="org.eclipse.core.runtime.adapters">
-      <factory class="«executableExtensionFactory()»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
-         adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
-         <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
-      </factory> 
-   </extension>
-   <extension point="org.eclipse.ui.editorActions">
-      <editorContribution targetID="«name»" 
-                          id="«name».rulerActions">
-	     <action
-	             label="Not Used"
-	             class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-	             style="push"
-	             actionID="RulerDoubleClick"
-	             id="«name».doubleClickBreakpointAction"/>
-	  </editorContribution>
-   </extension>
-   <extension point="org.eclipse.ui.popupMenus">
-      <viewerContribution
-         targetID="«name».RulerContext"
-         id="«name».RulerPopupActions">
-         <action
-            label="Toggle Breakpoint"
-            class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-            menubarPath="debug"
-            id="«name».rulerContextMenu.toggleBreakpointAction">
-         </action>
-         <action
-            label="Not used"
-            class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
-            menubarPath="debug"
-            id="«name».rulerContextMenu.enableDisableBreakpointAction">
-         </action>
-         <action
-           label="Breakpoint Properties"
-           helpContextId="breakpoint_properties_action_context"
-           class="«executableExtensionFactory()»:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
-           menubarPath="group.properties"
-           id="«name».rulerContextMenu.openBreapointPropertiesAction">
-         </action>
-      </viewerContribution>
-   </extension>
-    <!-- Introduce Local Variable Refactoring -->
+		 point="org.eclipse.core.runtime.adapters">
+		<factory class="«executableExtensionFactory()»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+			adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+		</factory>
+	</extension>
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="«name»"
+			id="«name».rulerActions">
+			<action
+				label="Not Used"
+				class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				style="push"
+				actionID="RulerDoubleClick"
+				id="«name».doubleClickBreakpointAction"/>
+		</editorContribution>
+	</extension>
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution
+			targetID="«name».RulerContext"
+			id="«name».RulerPopupActions">
+			<action
+				label="Toggle Breakpoint"
+				class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				menubarPath="debug"
+				id="«name».rulerContextMenu.toggleBreakpointAction">
+			</action>
+			<action
+				label="Not used"
+				class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+				menubarPath="debug"
+				id="«name».rulerContextMenu.enableDisableBreakpointAction">
+			</action>
+			<action
+				label="Breakpoint Properties"
+				helpContextId="breakpoint_properties_action_context"
+				class="«executableExtensionFactory()»:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
+				menubarPath="group.properties"
+				id="«name».rulerContextMenu.openBreapointPropertiesAction">
+			</action>
+		</viewerContribution>
+	</extension>
+	<!-- Introduce Local Variable Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
 			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
 			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
 		</handler>
 	</extension>
-    <extension point="org.eclipse.ui.menus">
-         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
-               style="push">
-            <visibleWhen checkEnabled="false">
-               <reference
-                     definitionId="«name».Editor.opened">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-   </extension>  
-   <!-- Open implementation -->
-   <extension point="org.eclipse.ui.handlers">
-      <handler
-            class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
-            commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
-            <activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- Open implementation -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+			commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+			<activeWhen>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
-      </handler>
-   </extension>
- <extension point="org.eclipse.ui.menus">
-       <menuContribution
-            locationURI="menu:navigate?after=open.ext4">
-         <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
-		<visibleWhen checkEnabled="false">
-              <reference
-                 definitionId="«name».Editor.opened">
-              </reference>
-		</visibleWhen>
-         </command>
-      </menuContribution>
-   </extension>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="menu:navigate?after=open.ext4">
+			<command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			 </command>
+		</menuContribution>
+	</extension>
 «ENDDEFINE»
 
 

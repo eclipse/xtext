@@ -20,7 +20,7 @@
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
 «fileHeader()»
 package «getValidatorName("Abstract").toJavaPackage()»;
- 
+
 «annotationImports()-»
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 «ENDIF-»
 «classAnnotations()»public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName» {
 
-   	«EXPAND Common::getEPackages(packageQNames)-»
+	«EXPAND Common::getEPackages(packageQNames)-»
 
 }
 «ENDFILE»
@@ -45,7 +45,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 package «getValidatorName("").toJavaPackage()»;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
@@ -67,28 +67,25 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 
 
 «DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
-    <!-- marker definitions for «name» -->
-    <extension
-            id="«name.toSimpleName().toLowerCase()».check.fast"
-            name="«name.toSimpleName()» Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="«name.toSimpleName().toLowerCase()».check.normal"
-            name="«name.toSimpleName()» Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="«name.toSimpleName().toLowerCase()».check.expensive"
-            name="«name.toSimpleName()» Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
+	<!-- marker definitions for «name» -->
+	<extension point="org.eclipse.core.resources.markers"
+		id="«name.toSimpleName().toLowerCase()».check.fast"
+		name="«name.toSimpleName()» Problem">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.core.resources.markers"
+		id="«name.toSimpleName().toLowerCase()».check.normal"
+		name="«name.toSimpleName()» Problem">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.core.resources.markers"
+		id="«name.toSimpleName().toLowerCase()».check.expensive"
+		name="«name.toSimpleName()» Problem">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
 «ENDDEFINE»
 
 

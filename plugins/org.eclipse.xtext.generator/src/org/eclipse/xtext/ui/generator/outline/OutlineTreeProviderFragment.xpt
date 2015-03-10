@@ -35,13 +35,13 @@ package «qualifiedName().toJavaPackage()»;
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 public class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
-	
+
 }
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE xtendOutlineTreeProvider FOR Grammar»
- «FILE qualifiedName().asPath()+".xtend" SRC_UI -»
+«FILE qualifiedName().asPath()+".xtend" SRC_UI -»
 «fileHeader()»
 package «qualifiedName().toJavaPackage()»
 
@@ -51,7 +51,7 @@ package «qualifiedName().toJavaPackage()»
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
-	
+
 }
 «ENDFILE»
 «ENDDEFINE»

@@ -28,28 +28,28 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 
 /**
  * Generates an Xtend-based model validator.
- * 
+ *
  * @author Jan Koehnlein
  * @since 2.4
  */
 class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
 
 	@Inject extension Naming
-	
+
 	@Inject extension ValidatorNaming
-	
+
 	@Accessors boolean inheritImplementation = true
 
 	@Accessors boolean generateStub = true
 
 	@Inject Grammar grammar
-	
+
 	val composedChecks = <String>newArrayList
-	
+
 	def addComposedCheck(String composedCheckValidator) {
 		this.composedChecks.add(composedCheckValidator)
 	}
-	
+
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 			val bindFactory = new BindFactory()
 		if(generateStub) {
@@ -63,12 +63,12 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 		}
 		bindFactory.bindings
 	}
-	
+
 	override generate(Xtend2ExecutionContext ctx) {
 		ctx.writeFile(Generator.SRC_GEN, abstractValidatorName.asPath + ".java", '''
 			«fileHeader»
 			package «abstractValidatorName.packageName»;
-			
+
 			«annotationImports»
 			import java.util.ArrayList;
 			import java.util.List;
@@ -76,21 +76,21 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			«IF !composedChecks.isEmpty»
 			import org.eclipse.xtext.validation.ComposedChecks;
 			«ENDIF»
-			
+
 			«IF !composedChecks.isEmpty»
 			@ComposedChecks(validators= {«FOR validator: composedChecks SEPARATOR ", "»«validator».class«ENDFOR»})
 			«ENDIF»
 			«classAnnotations»public class «abstractValidatorName.toSimpleName» extends «getValidatorSuperClassName(isInheritImplementation)» {
-			
+
 				@Override
 				protected List<EPackage> getEPackages() {
-				    List<EPackage> result = new ArrayList<EPackage>(«IF isInheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
-				    «FOR e: generatedPackagesToValidate»
-				    result.add(«e.generatedEPackageName».eINSTANCE);
-				    «ENDFOR»
-				    «FOR e: registryPackagesToValidate»
-				    result.add(EPackage.Registry.INSTANCE.getEPackage("«e.nsURI»"));
-				   	«ENDFOR»
+					List<EPackage> result = new ArrayList<EPackage>(«IF isInheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
+					«FOR e: generatedPackagesToValidate»
+					result.add(«e.generatedEPackageName».eINSTANCE);
+					«ENDFOR»
+					«FOR e: registryPackagesToValidate»
+					result.add(EPackage.Registry.INSTANCE.getEPackage("«e.nsURI»"));
+					«ENDFOR»
 					return result;
 				}
 			}
@@ -99,11 +99,11 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			ctx.writeFile(Generator.SRC, grammar.validatorName.asPath + '.xtend', '''
 				«fileHeader»
 				package «grammar.validatorName.packageName»
-				
+
 				//import org.eclipse.xtext.validation.Check
-				
+
 				/**
-				 * This class contains custom validation rules. 
+				 * This class contains custom validation rules.
 				 *
 				 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
 				 */
@@ -114,7 +114,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 				//	@Check
 				//	def checkGreetingStartsWithCapital(Greeting greeting) {
 				//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-				//			warning('Name should start with a capital', 
+				//			warning('Name should start with a capital',
 				//					MyDslPackage.Literals.GREETING__NAME,
 				//					INVALID_NAME)
 				//		}
@@ -135,37 +135,34 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 		)
 		packages
 	}
-	
+
 	override getExportedPackagesRtList(Grammar grammar) {
 		return newArrayList(grammar.validatorName.packageName)
 	}
-	
+
 	override addToPluginXmlUi(Xtend2ExecutionContext ctx) {
 		ctx.append('''
 			«»
 				<!-- marker definitions for «grammar.name» -->
-				<extension
-				        id="«grammar.name.toSimpleName.toLowerCase».check.fast"
-				        name="«grammar.name.toSimpleName» Problem"
-				        point="org.eclipse.core.resources.markers">
-				    <super type="org.eclipse.xtext.ui.check.fast"/>
-				    <persistent value="true"/>
+				<extension point="org.eclipse.core.resources.markers"
+					id="«grammar.name.toSimpleName.toLowerCase».check.fast"
+					name="«grammar.name.toSimpleName» Problem">
+					<super type="org.eclipse.xtext.ui.check.fast"/>
+					<persistent value="true"/>
 				</extension>
-				<extension
-				        id="«grammar.name.toSimpleName.toLowerCase».check.normal"
-				        name="«grammar.name.toSimpleName» Problem"
-				        point="org.eclipse.core.resources.markers">
-				    <super type="org.eclipse.xtext.ui.check.normal"/>
-				    <persistent value="true"/>
+				<extension point="org.eclipse.core.resources.markers"
+					id="«grammar.name.toSimpleName.toLowerCase».check.normal"
+					name="«grammar.name.toSimpleName» Problem">
+					<super type="org.eclipse.xtext.ui.check.normal"/>
+					<persistent value="true"/>
 				</extension>
-				<extension
-				        id="«grammar.name.toSimpleName.toLowerCase».check.expensive"
-				        name="«grammar.name.toSimpleName» Problem"
-				        point="org.eclipse.core.resources.markers">
-				    <super type="org.eclipse.xtext.ui.check.expensive"/>
-				    <persistent value="true"/>
+				<extension point="org.eclipse.core.resources.markers"
+					id="«grammar.name.toSimpleName.toLowerCase».check.expensive"
+					name="«grammar.name.toSimpleName» Problem">
+					<super type="org.eclipse.xtext.ui.check.expensive"/>
+					<persistent value="true"/>
 				</extension>
 		''')
 	}
-	
+
 }

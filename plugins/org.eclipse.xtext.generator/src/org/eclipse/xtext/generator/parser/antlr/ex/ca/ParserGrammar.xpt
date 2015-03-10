@@ -39,7 +39,7 @@ options {
 }
 
 @header {
-package «helper.getContentAssistParserGrammarFileName(this).toJavaPackage()»; 
+package «helper.getContentAssistParserGrammarFileName(this).toJavaPackage()»;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -64,33 +64,33 @@ import «gaFQName()»;
 }
 
 @members {
- 
- 	private «gaSimpleName()» grammarAccess;
- 	
- 	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
- 	
- 	{
+
+	private «gaSimpleName()» grammarAccess;
+
+	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
+
+	{
 «FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw-»
 		tokenNameToValue.put("«this.getKeywordRuleName(kw)»", "'«kw.toJavaStringImpl().replaceAll("\\\\\\$", "\\\\u0024")»'");
 «ENDFOREACH-»
- 	}
- 	
-    public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
-    	this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected Grammar getGrammar() {
-    	return grammarAccess.getGrammar();
-    }
+	}
+
+	public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
 
 	@Override
-    protected String getValueForTokenName(String tokenName) {
-    	String result = tokenNameToValue.get(tokenName);
-    	if (result == null)
-    		result = tokenName;
-    	return result;
-    }
+	protected Grammar getGrammar() {
+		return grammarAccess.getGrammar();
+	}
+
+	@Override
+	protected String getValueForTokenName(String tokenName) {
+		String result = tokenNameToValue.get(tokenName);
+		if (result == null)
+			result = tokenName;
+		return result;
+	}
 }
 
 «EXPAND antlrRules(helper)»
@@ -109,7 +109,7 @@ import «gaFQName()»;
 «DEFINE rule(Grammar original) FOR ParserRule»
 «IF isCalled(original,this)»
 // Entry rule «entryRuleName()»
-«entryRuleName()» 
+«entryRuleName()»
 «IF definesHiddenTokens-»
 @init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
@@ -117,9 +117,9 @@ import «gaFQName()»;
 «ENDIF-»
 :
 { before(grammarAccess.«grammarElementAccess(this)»); }
-	 «ruleName()»
-{ after(grammarAccess.«grammarElementAccess(this)»); } 
-	 EOF 
+	«ruleName()»
+{ after(grammarAccess.«grammarElementAccess(this)»); }
+	EOF
 ;
 «IF definesHiddenTokens-»
 finally {
@@ -128,21 +128,21 @@ finally {
 «ENDIF-»
 
 // Rule «name»
-«ruleName()» 
-    @init {
-«IF definesHiddenTokens-»  
+«ruleName()»
+	@init {
+«IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
 «ENDIF-»
 		int stackSize = keepStackSize();
-    }
-    :
-    «EXPAND ebnf FOR this.alternatives»
+	}
+	:
+	«EXPAND ebnf FOR this.alternatives»
 ;
 finally {
 	restoreStackSize(stackSize);
 «IF definesHiddenTokens-»
 	myHiddenTokenState.restore();
-«ENDIF-» 
+«ENDIF-»
 }
 «ENDIF»
 «ENDDEFINE»
@@ -151,11 +151,11 @@ finally {
 «IF isCalled(original,this)»
 // Rule «name»
 «ruleName()»
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
-    «EXPAND ebnf FOR this.alternatives»
+	«EXPAND ebnf FOR this.alternatives»
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -166,9 +166,9 @@ finally {
 «DEFINE rule(Grammar original) FOR Alternatives»
 «IF isCalled(original, containingRule())-»
 rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
 	«EXPAND ebnf FOREACH elements SEPARATOR '\n    |'»
 ;
@@ -182,10 +182,10 @@ finally {
 «IF isCalled(original, containingRule())-»
 «LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
 rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
-    @init {
-    	int stackSize = keepStackSize();
+	@init {
+		int stackSize = keepStackSize();
 		getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor()»);
-    }
+	}
 :
 	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__0
 	«IF mandatoryContent!=0»
@@ -210,18 +210,18 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 	@init {
 		int stackSize = keepStackSize();
 		boolean selected = false;
-    }
+	}
 :
 		(
 «FOREACH elements AS element ITERATOR it»
-			( 
+			(
 				{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor()», «it.counter0»)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
-	 				}
-	 				{
-	 				  selected = true;
-	 				}
+					{
+						getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
+					}
+					{
+						selected = true;
+					}
 					(
 					«IF element.isMultipleCardinality()-»
 					(«ENDIF»
@@ -236,10 +236,10 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 						{ after(grammarAccess.«element.grammarElementAccess()»); }
 					)«ENDIF-»
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
-	 				}
- 				)
+					{
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
+					}
+				)
 			)  «IF !it.lastIteration»|«ENDIF»
 «ENDFOREACH»
 		)
@@ -253,14 +253,14 @@ finally {
 
 «DEFINE ruleImpl(int index) FOR UnorderedGroup»
 rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__«index»
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
 	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 «IF elements.size > index + 1-»
 	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__«index + 1»?
-«ENDIF-» 
+«ENDIF-»
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -274,9 +274,9 @@ finally {
 «DEFINE rule(Grammar original) FOR Assignment»
 «IF isCalled(original, containingRule())-»
 rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
 	«EXPAND assignmentEbnf FOR terminal»
 ;
@@ -294,23 +294,23 @@ finally {
 
 «DEFINE ruleImpl(Group group, int index) FOR List[AbstractElement]»
 rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
 	rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»__Impl
 «IF size > 1-»
 	rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index + 1»
-«ENDIF-» 
+«ENDIF-»
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
 rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»__Impl
-    @init {
+	@init {
 		int stackSize = keepStackSize();
-    }
+	}
 :
 «EXPAND ebnf FOR first()»
 ;
@@ -461,7 +461,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Keyword»
-	«getKeywordRuleName(value)» 
+	«getKeywordRuleName(value)»
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»

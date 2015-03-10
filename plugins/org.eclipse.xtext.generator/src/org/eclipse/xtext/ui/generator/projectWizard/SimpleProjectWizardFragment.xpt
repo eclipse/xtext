@@ -19,20 +19,19 @@
 	«EXPAND ProjectInfo::root»
 	«EXPAND NewProjectWizard::root»
 	«EXPAND NewProjectTemplate::root(modelFileExtension)»
-	«EXPAND ProjectCreator::root(generatorProjectName, templateEncoding, pluginProject)»	
+	«EXPAND ProjectCreator::root(generatorProjectName, templateEncoding, pluginProject)»
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.eclipse.xtext.projectwiz"
-            class="«executableExtensionFactory()»:«projectWizardClassName()»"
-            id="«projectWizardClassName()»"
-            name="«getName()» Project"
-            project="true">
-      </wizard>
-   </extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard
+			category="org.eclipse.xtext.projectwiz"
+			class="«executableExtensionFactory()»:«projectWizardClassName()»"
+			id="«projectWizardClassName()»"
+			name="«getName()» Project"
+			project="true">
+		</wizard>
+	</extension>
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlRt(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»«ENDDEFINE»

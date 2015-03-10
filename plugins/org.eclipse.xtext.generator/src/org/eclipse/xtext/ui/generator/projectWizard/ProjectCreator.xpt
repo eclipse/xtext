@@ -53,7 +53,7 @@ public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorS
 
 	@Inject
 	private Provider<ProjectFactory> projectFactoryProvider;
-	
+
 	@Override
 	protected ProjectFactory createProjectFactory() {
 		return projectFactoryProvider.get();
@@ -64,18 +64,18 @@ public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorS
 	protected «projectInfoClassName().toSimpleName()» getProjectInfo() {
 		return («projectInfoClassName().toSimpleName()») super.getProjectInfo();
 	}
-	
+
 	protected String getModelFolderName() {
 		return SRC_ROOT;
 	}
-	
+
 	@Override
 	protected List<String> getAllFolders() {
-        return SRC_FOLDER_LIST;
-    }
+		return SRC_FOLDER_LIST;
+	}
 «IF pluginProject-»
 
-    @Override
+	@Override
 	protected List<String> getRequiredBundles() {
 		List<String> result = Lists.newArrayList(super.getRequiredBundles());
 		result.add(DSL_GENERATOR_PROJECT_NAME);

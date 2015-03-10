@@ -42,19 +42,19 @@ import com.google.inject.Inject;
 import «gaFQName()»;
 
 «classAnnotations()»public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing, hasIDE).toSimpleName()» {
-	
+
 	@Inject
 	private «gaSimpleName()» grammarAccess;
-	
+
 	private Map<AbstractElement, String> nameMappings;
-	
+
 	@Override
 	protected «getInternalParserClassName()» createParser() {
 		«getInternalParserClassName()» result = new «getInternalParserClassName()»(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
-	
+
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -67,7 +67,7 @@ import «gaFQName()»;
 		}
 		return nameMappings.get(element);
 	}
-	
+
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
@@ -76,18 +76,18 @@ import «gaFQName()»;
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
-		}		
+		}
 	}
-	
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { «FOREACH initialHiddenTokens() AS hidden SEPARATOR ", "»"«hidden»"«ENDFOREACH-» };
 	}
-	
+
 	public «gaSimpleName()» getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
