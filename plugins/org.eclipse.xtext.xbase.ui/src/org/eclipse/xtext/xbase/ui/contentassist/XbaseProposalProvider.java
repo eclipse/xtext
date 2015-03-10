@@ -120,7 +120,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
-	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher; 
+	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
@@ -227,7 +227,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, createVisibilityFilter(context), acceptor);
 	}
 	
-	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context, 
+	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor){
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
@@ -240,13 +240,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
-		return new TypeMatchFilters.All(searchFor);
+		return TypeMatchFilters.and(TypeMatchFilters.isNotInternal(searchFor), TypeMatchFilters.isAcceptableByPreference());
 	}
 	
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		if (isKeywordWorthyToPropose(keyword, contentAssistContext)) { 
+		if (isKeywordWorthyToPropose(keyword, contentAssistContext)) {
 			super.completeKeyword(keyword, contentAssistContext, acceptor);
 		}
 	}
@@ -355,7 +355,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					ICompositeNode childNode = NodeModelUtils.getNode(child);
 					if (childNode.getEndOffset() <= context.getOffset()) {
 						createLocalVariableAndImplicitProposals(child, IExpressionScope.Anchor.AFTER, context, acceptor);
-						return;		
+						return;
 					}
 				}
 			}
@@ -532,7 +532,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					ICompositeNode childNode = NodeModelUtils.getNode(child);
 					if (childNode.getEndOffset() <= context.getOffset()) {
 						createLocalVariableAndImplicitProposals(child, IExpressionScope.Anchor.AFTER, context, acceptor);
-						return;		
+						return;
 					}
 				}
 			}
@@ -575,7 +575,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XMemberFeatureCall) {
 			createReceiverProposals(((XMemberFeatureCall) model).getMemberCallTarget(), (CrossReference) assignment.getTerminal(),
-					context, acceptor);	
+					context, acceptor);
 		} else if (model instanceof XAssignment) {
 			createReceiverProposals(((XAssignment) model).getAssignable(), (CrossReference) assignment.getTerminal(),
 					context, acceptor);
@@ -600,7 +600,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			}
 		}
 		
-//		long time = System.currentTimeMillis(); 
+//		long time = System.currentTimeMillis();
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
 		IResolvedTypes resolvedTypes = context != null ? typeResolver.resolveTypes(context) : typeResolver.resolveTypes(contentAssistContext.getResource());
 		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, anchor);
@@ -644,7 +644,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			if (currentModel instanceof XMemberFeatureCall && ((XMemberFeatureCall) currentModel).getMemberCallTarget() == receiver) {
 				scope = filterByConcreteSyntax(expressionScope.getFeatureScope((XAbstractFeatureCall) currentModel), crossReference);
 			} else {
-				scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);	
+				scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);
 			}
 		} else {
 			scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);
@@ -743,7 +743,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 								if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
 									return true;
 								String convertedAlternative = valueConverter != null ? valueConverter.toString(alternative) : getValueConverter().toString(alternative, ruleName);
-								if (!convertedAlternative.equals(alternative) && 
+								if (!convertedAlternative.equals(alternative) &&
 										delegateMatcher.isCandidateMatchingPrefix(convertedAlternative, prefix)) {
 									return true;
 								}
@@ -795,9 +795,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 									converter);
 						}
 					} else {
-						displayString = getStyledDisplayString(objectOrProxy, 
-								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
-								getQualifiedNameConverter().toString(myCandidate.getName())); 
+						displayString = getStyledDisplayString(objectOrProxy,
+								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+								getQualifiedNameConverter().toString(myCandidate.getName()));
 					}
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
@@ -882,11 +882,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					if(light.isFunctionType()) {
 						int numParameters = light.getAsFunctionTypeReference().getParameterTypes().size();
 						if(numParameters == 1) {
-							info.brackets = "[]"; 
+							info.brackets = "[]";
 							info.caretOffset = -1;
 							return info;
 						} else if(numParameters == 0) {
-					 		info.brackets = "[|]"; 
+					 		info.brackets = "[|]";
 							info.caretOffset = -1;
 							return info;
 						} else {
@@ -904,12 +904,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					 		return info;
 					 	}
 					}
-				} 
+				}
 			}
 			if (isExplicitOperationCall(jvmFeatureDescription)) {
 				info.brackets = "()";
 				info.selectionOffset = -1;
-			}		
+			}
 		}
 		return info;
 	}
@@ -927,7 +927,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected boolean isIdRule(final String ruleName) {
-		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName) || "FeatureCallID".equals(ruleName); 
+		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName) || "FeatureCallID".equals(ruleName);
 	}
 	
 	public boolean isExplicitOperationCall(IIdentifiableElementDescription desc) {
