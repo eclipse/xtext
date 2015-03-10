@@ -14,10 +14,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -94,11 +96,17 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		XOrExpressionElements opOr = grammarAccess.getXOrExpressionAccess();
 		XAssignmentElements opMultiAssign = grammarAccess.getXAssignmentAccess();
 		
-		IScope scope = scopeProvider.getScope(operation, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		JvmIdentifiableElement feature = operation.getFeature();
 		Set<String> operatorNames = Sets.newHashSet();
-		for (IEObjectDescription desc : scope.getElements(operation.getFeature()))
-			operatorNames.add(qualifiedNameConverter.toString(desc.getName()));
-				
+		if (feature.eIsProxy()) {
+			List<INode> ops = NodeModelUtils.findNodesForFeature(operation, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+			for (INode o : ops)
+				operatorNames.add(NodeModelUtils.getTokenText(o));
+		} else {
+			IScope scope = scopeProvider.getScope(operation, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+			for (IEObjectDescription desc : scope.getElements(feature))
+				operatorNames.add(qualifiedNameConverter.toString(desc.getName()));
+		}
 		ICompositeNode featureNode = (ICompositeNode) nodes.getNodeForSingelValue(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, operation.getFeature());
 		String featureToken;
 		
