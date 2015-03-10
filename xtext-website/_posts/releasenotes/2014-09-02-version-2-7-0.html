@@ -22,7 +22,7 @@ categories: releasenotes
      Resource clustering is now supported in the builder participant and standalone builder, reducing the memory footprint for large projects. There is a new parallel builder participant that can be used for even more performance gains.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtext_xcore_integration_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>
      Better Integration with Xcore
   </h2>
@@ -31,14 +31,14 @@ categories: releasenotes
   </p>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtext-xcore-wizard.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtext_debugging_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>Debugging</h2>
   <p>
      Breakpoints can now be toggled, enabled/disabled and inspected via the ruler context menu. Partial support for conditional breakpoints was added. Content assist in the condition editor will be added in version 2.8.
   </p>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtext-breakpoint-toggle.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtext_find_references_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>
      Find References improved
   </h2>
@@ -46,7 +46,7 @@ categories: releasenotes
      The find references API is now available in the runtime plugin and has undergone some performance improvements.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtext_cross_platform_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>
      Cross Plattform Improvements
   </h2>
@@ -54,12 +54,12 @@ categories: releasenotes
      All Xtext generator fragments now accept an explicit line delimiter, so heterogeneous teams get the same results when generating the language infrastructure.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h1>
      Xtend 2.7.0
   </h1>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_language_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>
      Language
   </h2>
@@ -81,7 +81,7 @@ Option&LT;T&GT;.Some
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtend-dead-code-analysis.png"/>
   <img>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_library_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h2>
      Library
   </h2>
@@ -111,10 +111,10 @@ class B implements I {
   <p>Other additions include <code>@ToString</code>, <code>@EqualsHashCode</code>, <code>@FinalFieldsConstructor</code> and a new <code>@Data</code> (the old one is now deprecated as well as <code>@Property</code>).</p>
   <p>The active annotation API integrates even deeper with the IDE. Every generated element can (and should) now declare its source element. This tracing information is used in places like the outline view. A separate validation phase has been added, so the end result after running all transformations can be validated. Also, changes to classes and even arbitrary resources that the annotation processor requested are detected and lead to automatic rebuilds.</p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_ide_features_2_7" style="padding-top: 68px; margin-top: -68px;">
 <h2>IDE Features</h2>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_debugging_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Debugging
   </h3>
@@ -127,7 +127,7 @@ class B implements I {
   </p>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtext-breakpoint-toggle.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_content_assist_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Content Assist
   </h3>
@@ -135,7 +135,7 @@ class B implements I {
      Content Assist has become a lot faster and more accurate at the same time. It will now also retain the "is"-prefix of boolean properties.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Performance Improvements
   </h3>
@@ -143,7 +143,7 @@ class B implements I {
      Performance has reached a new level with big improvements to Content Assist, parallel code generation and lots of fine tuning. Also, Xtend will now cancel jobs (like outline refreshing) when you start typing again, making the editor much more responsive.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_outline_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Outline with Java-Mode
   </h3>
@@ -153,7 +153,7 @@ class B implements I {
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtend-outline-normal.png"/>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtend-outline-jvm.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_organize_imports_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Organize imports on packages
   </h3>
@@ -162,7 +162,7 @@ class B implements I {
   </p>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtend-organize-imports.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_template_proposals_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Template proposals support import
   </h3>
@@ -171,7 +171,7 @@ class B implements I {
   </p>
   <img class="image_between_p" src="{{ site.baseurl }}/images/releasenotes/2_7_xtend-templates-import.png"/>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_open_return_type_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Open return type
   </h3>
@@ -179,7 +179,7 @@ class B implements I {
      Ever wondered what you can do with the type of a variable or the return type of a method? You can now CTRL-Click on feature calls and open the declaration of the return type of that call.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_show_java_errors_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>
      Show errors from derived Java files
   </h3>
@@ -187,7 +187,7 @@ class B implements I {
      By using black box Java code within active annotations the generated Java source could sometimes have errors while the Xtend code is fine. In those cases, the errors are now shown at the appropriate locations in Xtend as well.
   </p>
 </section>
-<section id="xtext_performance_2_7" style="padding-top: 68px; margin-top: -68px;">
+<section id="xtend_maved_2_7" style="padding-top: 68px; margin-top: -68px;">
   <h3>Maven and Java 8</h3>
   <p>
      The Xtend Maven plugin is now toolchain-aware. Using this, you can for instance run Maven on Java 8, but compile against a JDK 6.

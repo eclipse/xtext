@@ -52,7 +52,7 @@ fragment = scoping.ImportNamespacesScopingFragment {
 }
 ```
 
-or if you are using [importURI based global scopes](#import-uri)
+or if you are using *importURI* based global scopes
 
 ```mwe2
 fragment = scoping.ImportURIScopingFragment {

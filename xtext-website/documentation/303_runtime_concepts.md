@@ -17,7 +17,7 @@ The setup method returns an [Injector]({{site.javadoc.guice}}/com/google/inject/
 
 ## Setup within Eclipse-Equinox (OSGi) {#equinox-setup}
 
-Within Eclipse we have a generated *Activator*, which creates a Guice [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the [modules](#guicemodules). In addition an [IExecutableExtensionFactory]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtensionFactory.html) is generated for each language, which is used to create [IExecutableExtensions]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtension.html). This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.
+Within Eclipse we have a generated *Activator*, which creates a Guice [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the [modules](302_configuration.html#guicemodules). In addition an [IExecutableExtensionFactory]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtensionFactory.html) is generated for each language, which is used to create [IExecutableExtensions]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtension.html). This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.
 
 The only thing you have to do in order to use this factory is to prefix the class with the factory *MyDslExecutableExtensionFactory* name followed by a colon.
 
@@ -172,7 +172,7 @@ public class DomainmodelJavaValidator
 }
 ```
 
-You can also implement quick fixes for individual validation errors and warnings. See the [section on quick fixes](#quick-fixes) for details.
+You can also implement quick fixes for individual validation errors and warnings. See the [section on quick fixes](304_ide_concepts.html#quick-fixes) for details.
 
 ### Validating Manually
 
@@ -741,7 +741,7 @@ See the [JavaDocs]({{site.javadoc.xtext}}/org/eclipse/xtext/scoping/impl/package
 
 ## Value Converter {#value-converter}
 
-Value converters are registered to convert the parsed text into a data type instance and vice versa. The primary hook is the [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) and the concrete implementation can be registered via the runtime [Guice module](#guicemodules). Simply override the corresponding binding in your runtime module like shown in this example:
+Value converters are registered to convert the parsed text into a data type instance and vice versa. The primary hook is the [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) and the concrete implementation can be registered via the runtime [Guice module](302_configuration.html#guicemodules). Simply override the corresponding binding in your runtime module like shown in this example:
 
 ```java
 @Override
@@ -779,7 +779,7 @@ In Xtext, the process of serialization is split into the following steps:
 1.  [Merging existing white space](#hidden-token-merger) and line-wraps into the token stream.
 1.  Adding further needed white space or replacing all white space using a [formatter](#formatting).
 
-Serialization is invoked when calling [XtextResource.save(..)]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java). Furthermore, the [Serializer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java) provides resource-independent support for serialization. Another situation that triggers serialization is applying [quick fixes](#quick-fixes) with semantic modifications. Serialization is *not* called when a textual editors contents is saved to disk.
+Serialization is invoked when calling [XtextResource.save(..)]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java). Furthermore, the [Serializer]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java) provides resource-independent support for serialization. Another situation that triggers serialization is applying [quick fixes](304_ide_concepts.html#quick-fixes) with semantic modifications. Serialization is *not* called when a textual editors contents is saved to disk.
 
 ### The Contract {#serialization-contract}
 
@@ -1028,7 +1028,7 @@ Sometimes, if a grammar contains many similar elements for which the same format
 *   `findKeywords(String... keywords)` returns all keywords that equal one of the parameters.
 *   `findKeywordPairs(String leftKw, String rightKw)`: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially. Example: for `Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'``findKeywordPairs("(", ")")` returns three pairs.
 
-## Fragment Provider (Referencing Xtext Models From Other EMF Artifacts) {#fragmentProvider}
+## Fragment Provider (Referencing Xtext Models From Other EMF Artifacts) {#fragment-provider}
 
 Although inter-Xtext linking is not done by URIs, you may want to be able to reference your [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource and a second part that points to an object. Each [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) contained in a resource can be identified by a so called *fragment*.
 
