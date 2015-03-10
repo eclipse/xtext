@@ -981,6 +981,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
+	
+	@Test public void testInheritanceCycle_4() throws Exception {
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				+ "class Foo implements Bar { interface I {} }"
+				+ "interface Bar extends Foo.I {}").getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	@Test public void testInheritanceCycle_5() throws Exception {
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				+ "class Foo extends Bar { static class Baz {} }"
+				+ "class Bar extends Foo.Baz {}").getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
 
 	@Test public void testMultipleInheritance() throws Exception {
 		XtendFile file = file("package test "
