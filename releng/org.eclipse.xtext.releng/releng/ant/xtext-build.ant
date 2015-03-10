@@ -29,7 +29,7 @@
 
 	<!-- Against which platform to build (Helios,Stable,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
-	<property name="WITH.MWE2" value="true" />
+	<property name="WITH.MWE2" value="false" />
 	<property name="SWTBOT" value="false" />
 	<property name="DEV.BUILD" value="false" />
 	<property name="JAVA8" value="false" />
@@ -37,7 +37,7 @@
 	<target name="run-buckminster-build" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 		<antcall target="-buckminster-resolve" />
-		<antcall target="buckminster-zip-compile-bootstrap" />
+		<!--<antcall target="buckminster-zip-compile-bootstrap" />-->
 		<antcall target="buckminster-package" />
 	</target>
 
@@ -147,7 +147,7 @@
 	<target name="buckminster-package">
 		<property name="commands.file" location="${temp.commands.location}/package-cmd.txt" />
 		<echo file="${commands.file}" append="false">
-			perform "org.eclipse.xtext.releng#create.javadoc"
+			#perform "org.eclipse.xtext.releng#create.javadoc"
 			perform "org.eclipse.xtext.build#build"
 			perform "org.eclipse.xtext.releng#setup.promoter"
 		</echo>
