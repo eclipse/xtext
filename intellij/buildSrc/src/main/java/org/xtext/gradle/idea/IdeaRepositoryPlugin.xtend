@@ -33,12 +33,8 @@ class IdeaRepositoryPlugin implements Plugin<Project> {
 			subprojects.map[tasks.withType(AssembleSandbox)].flatten.forEach[runIdea.dependsOn(it)]
 			runIdea.sandboxDir = project.file(idea.sandboxDir)
 			runIdea.ideaHome = project.file(idea.ideaHome)
-			runIdea.classpath = ideaLibs
-			val os = OperatingSystem.current
-			if (os.isLinux || os.isWindows) {
-				val tools = project.files('''«System.getenv("JAVA_HOME")»/lib/tools.jar''')
-				runIdea.classpath = runIdea.classpath.plus(tools)
-			}
+			val tools = project.files('''«System.getenv("JAVA_HOME")»/lib/tools.jar''')
+			runIdea.classpath = ideaLibs.classpath.plus(tools)
 		]
 	}
 }
