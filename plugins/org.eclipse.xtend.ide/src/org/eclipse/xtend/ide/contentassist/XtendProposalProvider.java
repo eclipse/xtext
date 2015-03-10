@@ -133,33 +133,42 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		}
 	}
 	
-	@Override
-	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
-		XtendFile file = (XtendFile) context.getRootModel();
-		final char[] contextPackageName = Strings.emptyIfNull(file.getPackage()).toCharArray(); 
-		return new TypeMatchFilters.All(searchFor) {
-			@Override
-			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
-					char[][] enclosingTypeNames, String path) {
-				if (super.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
-					if ("org.eclipse.xtend.lib".equals(String.valueOf(packageName))) {
-						if ("Property".equals(String.valueOf(simpleTypeName))||"Data".equals(String.valueOf(simpleTypeName))) {
-							return false;
-						}
-					}
-					if (Flags.isPublic(modifiers)) {
-						return true;
-					}
-					if (Flags.isPrivate(modifiers)) {
+	private static class VisibilityFilter extends TypeMatchFilters.AbstractFilter {
+		private ContentAssistContext context;
+		public VisibilityFilter(ContentAssistContext context, int searchFor) {
+			super(searchFor);
+			this.context = context;
+		}
+		@Override
+		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
+				String path) {
+			if (TypeMatchFilters.isNotInternal(getSearchFor()).accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)
+				&& TypeMatchFilters.isAcceptableByPreference().accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+				XtendFile file = (XtendFile) context.getRootModel();
+				final char[] contextPackageName = Strings.emptyIfNull(file.getPackage()).toCharArray();
+
+				if ("org.eclipse.xtend.lib".equals(String.valueOf(packageName))) {
+					if ("Property".equals(String.valueOf(simpleTypeName))||"Data".equals(String.valueOf(simpleTypeName))) {
 						return false;
 					}
-					if (Arrays.equals(contextPackageName, packageName)) {
-						return true;
-					}
 				}
-				return false;
-			}
-		};
+				if (Flags.isPublic(modifiers)) {
+					return true;
+				}
+				if (Flags.isPrivate(modifiers)) {
+					return false;
+				}
+				if (Arrays.equals(contextPackageName, packageName)) {
+					return true;
+				}
+			} 
+			return false;
+		}
+	}
+
+	@Override
+	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
+		return new VisibilityFilter(context, searchFor);
 	}
 	
 	@Override
@@ -332,6 +341,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 							char[][] enclosingTypeNames, String path) {
 						if (TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames))
 							return false;
+						if (!TypeMatchFilters.isAcceptableByPreference().accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+							return false;
+						}
 						return !Flags.isFinal(modifiers);
 					}
 				}, acceptor);
@@ -387,9 +399,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			 *     toS<|>
 			 *   }
 			 * }
-			 * 
+			 *
 			 * At this cursor position, we get a field without a name and the type 'toS' as the context.
-			 * If there's a field decl preceding the cursor position, the field will have a name. 
+			 * If there's a field decl preceding the cursor position, the field will have a name.
 			 */
 			XtendField field = (XtendField) model;
 			if (isValidTypeForOverriding(field.eContainer())) {
@@ -434,9 +446,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			 *     toS<|>
 			 *   }
 			 * }
-			 * 
+			 *
 			 * At this cursor position, we get a field without a name and the type 'toS' as the context.
-			 * If there's a field decl preceding the cursor position, the field will have a name. 
+			 * If there's a field decl preceding the cursor position, the field will have a name.
 			 */
 			XtendField field = (XtendField) model;
 			if (field.eContainer() instanceof AnonymousClass) {
