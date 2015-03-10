@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -21,6 +22,9 @@ import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.junit.Rule;
 
 import com.google.common.collect.Lists;
@@ -36,6 +40,12 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	
+	@Inject
+	IPreferenceStoreAccess preferenceStoreAccess;
+	
+	@Inject
+	XbaseBuilderPreferenceAccess xbaseBuilderPreferenceAccess;
+	
 	@Rule
 	public Flaky.Rule testRule = new Flaky.Rule();
 	
@@ -43,6 +53,9 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
+		IPreferenceStore preferenceStore = preferenceStoreAccess.getWritablePreferenceStore(null);
+		preferenceStore.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE);
+		preferenceStore.setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION);
 		super.tearDown();
 	}
 	
@@ -90,6 +103,13 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
+	}
+	
+	@Override
+	protected void setJavaVersion(JavaVersion javaVersion) throws Exception {
+		// The content assist models have no access to the project settings, so set the global preferences
+		xbaseBuilderPreferenceAccess.setJavaVersion(null, javaVersion);
+		super.setJavaVersion(javaVersion);
 	}
 	
 }

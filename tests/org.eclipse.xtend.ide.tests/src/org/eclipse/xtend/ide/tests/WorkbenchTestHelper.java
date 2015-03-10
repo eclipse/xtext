@@ -262,23 +262,7 @@ public class WorkbenchTestHelper extends Assert {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
-		if (javaVersion == null) {
-			projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
-		} else {
-			switch (javaVersion) {
-				case JAVA8:
-					projectFactory.setBreeToUse("JavaSE-1.8");
-					break;
-				case JAVA7:
-					projectFactory.setBreeToUse("JavaSE-1.7");
-					break;
-				case JAVA6:
-					projectFactory.setBreeToUse("JavaSE-1.6");
-					break;
-				default:
-					projectFactory.setBreeToUse("J2SE-1.5");
-			}
-		}
+		projectFactory.setBreeToUse(getBree(javaVersion));
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
 				"org.eclipse.pde.SchemaBuilder");
@@ -295,23 +279,27 @@ public class WorkbenchTestHelper extends Assert {
 		return result;
 	}
 	
+	private static String getBree(JavaVersion javaVersion) {
+		if (javaVersion == null) {
+			return JREContainerProvider.PREFERRED_BREE;
+		} else {
+			switch (javaVersion) {
+				case JAVA8:
+					return "JavaSE-1.8";
+				case JAVA7:
+					return "JavaSE-1.7";
+				case JAVA6:
+					return "JavaSE-1.6";
+				default:
+					return "J2SE-1.5";
+			}
+		}
+	}
+	
 	public static void makeCompliantFor(IJavaProject javaProject, JavaVersion javaVersion) {
 		@SuppressWarnings("unchecked")
 		Map<String, String> options= javaProject.getOptions(false);
-		String jreLevel;
-		switch (javaVersion) {
-			case JAVA8:
-				jreLevel = "1.8";
-				break;
-			case JAVA7:
-				jreLevel = "1.7";
-				break;
-			case JAVA6:
-				jreLevel = "1.6";
-				break;
-			default:
-				jreLevel = JavaCore.VERSION_1_5;
-		}
+		String jreLevel = javaVersion.getQualifier();
 		options.put(JavaCore.COMPILER_COMPLIANCE, jreLevel);
 		options.put(JavaCore.COMPILER_SOURCE, jreLevel);
 		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, jreLevel);
@@ -323,6 +311,17 @@ public class WorkbenchTestHelper extends Assert {
 		options.put(JavaCore.COMPILER_SOURCE_FILE_ATTR, JavaCore.GENERATE);
 		options.put(JavaCore.COMPILER_CODEGEN_UNUSED_LOCAL, JavaCore.PRESERVE);
 		javaProject.setOptions(options);
+	}
+	
+	public static void changeBree(IJavaProject javaProject, JavaVersion javaVersion) throws Exception {
+		IFile manifest = javaProject.getProject().getFile("META-INF/MANIFEST.MF");
+		Manifest mf = new Manifest(manifest.getContents());
+		String bree = getBree(javaVersion);
+		mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree);
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		mf.write(stream);
+		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);
+		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree);
 	}
 	
 	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{

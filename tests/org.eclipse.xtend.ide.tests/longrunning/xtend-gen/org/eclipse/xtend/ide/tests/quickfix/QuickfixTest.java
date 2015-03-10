@@ -6689,29 +6689,33 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Test
   public void conflictingDefaultMethods() {
-    this.builder.setTargetVersion(JavaVersion.JAVA8);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("interface A {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void foo() { }");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("interface B {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void foo() { }");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("class |Foo implements A, B {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS);
-    _assertIssueCodes.assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
+    try {
+      this.setJavaVersion(JavaVersion.JAVA8);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo() { }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("interface B {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo() { }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class |Foo implements A, B {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+      QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS);
+      _assertIssueCodes.assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
