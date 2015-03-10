@@ -50,6 +50,74 @@ public class MoreActiveAnnotationsTest {
   }
   
   @Test
+  public void testBug461761() {
+    try {
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
+      final IJavaProject macroProject = JavaCore.create(_createPluginProject);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package annotation");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+      _builder.newLine();
+      _builder.append("import static extension com.google.common.io.Files.append");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(DItemMiniProcessor)");
+      _builder.newLine();
+      _builder.append("annotation DItemMini {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class DItemMiniProcessor extends AbstractClassProcessor {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("registerClass(annotatedClass.qualifiedName + \"Item\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.newSource(macroProject, "annotation/DItemMini.xtend", _builder.toString());
+      this.addExportedPackage(macroProject, "annotation");
+      IResourcesSetupUtil.waitForAutoBuild();
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
+      final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package client");
+      _builder_1.newLine();
+      _builder_1.append("@annotation.DItemMini");
+      _builder_1.newLine();
+      _builder_1.append("class UserCode{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("UserCodeItem item");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.newSource(userProject, "client/UserCode.xtend", _builder_1.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testStaticInitializers() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
