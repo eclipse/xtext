@@ -345,4 +345,30 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  >>Opt -> 'o'");
 		assertEquals(expected.toString(), actual);
 	}
+	
+	@Test
+	public void testUnassignedDatatypeRuleCall() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: {Model} 'kw1' ({Foo.child=current} Sub)*;\n");
+		grammar.append("Sub: 'kw2' 'kw3';\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Foo_Model:\n");
+		expected.append("  start -> {Foo.child=}\n");
+		expected.append("  Sub -> stop\n");
+		expected.append("  {Foo.child=} -> Sub\n");
+		expected.append("Foo_Model_Foo_2_0:\n");
+		expected.append("  start -> {Foo.child=}\n");
+		expected.append("  Sub -> stop\n");
+		expected.append("  {Foo.child=} -> Sub\n");
+		expected.append("Model_Model:\n");
+		expected.append("  start -> {Model}\n");
+		expected.append("  'kw1' -> stop\n");
+		expected.append("  {Model} -> 'kw1'\n");
+		expected.append("Model_Model_Foo_2_0:\n");
+		expected.append("  start -> {Model}\n");
+		expected.append("  'kw1' -> stop\n");
+		expected.append("  {Model} -> 'kw1'");
+		assertEquals(expected.toString(), actual);
+	}
 }
