@@ -37,6 +37,46 @@ class MoreActiveAnnotationsTest {
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
 	}
+	
+	@Test def void testBug461761() {
+		val macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject.newSource("annotation/DItemMini.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+			import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+			import static extension com.google.common.io.Files.append
+			
+			@Active(DItemMiniProcessor)
+			annotation DItemMini {
+			}
+			
+			class DItemMiniProcessor extends AbstractClassProcessor {
+			
+				override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+					registerClass(annotatedClass.qualifiedName + "Item")
+				}
+			
+			}
+		''')
+		macroProject.addExportedPackage("annotation")
+		waitForAutoBuild
+				
+		val userProject = JavaCore.create(
+			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		userProject.newSource("client/UserCode.xtend", '''
+			package client
+			@annotation.DItemMini
+			class UserCode{
+				UserCodeItem item
+			}
+		''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+	}
 
 	@Test def void testStaticInitializers() {
 		val macroProject = JavaCore.create(createPluginProject("macroProject"))

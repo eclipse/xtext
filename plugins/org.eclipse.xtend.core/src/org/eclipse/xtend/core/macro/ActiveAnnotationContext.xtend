@@ -37,6 +37,7 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import com.google.common.base.Throwables
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.emf.common.notify.Notification
+import org.apache.log4j.Logger
 
 /**
  * @author Sven Efftinge
@@ -162,6 +163,7 @@ class ActiveAnnotationContexts extends AdapterImpl {
  * @author Sven Efftinge
  */
 class ActiveAnnotationContextProvider {
+	static val logger = Logger.getLogger(ActiveAnnotationContextProvider)
 	
 	@Inject extension XAnnotationExtensions
 	@Inject extension ProcessorInstanceForJvmTypeProvider
@@ -193,7 +195,7 @@ class ActiveAnnotationContextProvider {
 						val msg = switch e {
 							ExceptionInInitializerError : e.exception.message
 							default : e.message
-						} 
+						}
 						file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
 							IssueCodes.PROCESSING_ERROR, '''Problem while loading annotation processor: «msg»''', value,
 							XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, null))
@@ -207,6 +209,7 @@ class ActiveAnnotationContextProvider {
 			switch e {
 				VirtualMachineError : throw e
 				LinkageError: throw e // e.g. java.lang.UnsupportedClassVersionError: activetest/Processor : Unsupported major.minor version 51.0
+				default : logger.warn("Error finding the elements to be processed by active annotations", e)
 			}
 			return ActiveAnnotationContexts.installNew(file.eResource)
 		} finally {
