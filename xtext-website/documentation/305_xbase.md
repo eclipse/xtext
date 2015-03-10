@@ -246,7 +246,7 @@ As Java elements and your concepts are now represented as JVM model elements, ot
 
 The Xbase framework will automatically switch between the JVM element or the DSL element when needed, e.g. when following hyperlinks. The component allowing to navigate between the source model and the JVM model is called [IJvmModelAssociations]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java), the read-only antagonist of the [IJvmModelAssociator]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java) that is used by the [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).
 
-By default, the inferred model is [indexed](#global-scopes), so it can be cross referenced from other models. 
+By default, the inferred model is [indexed](303_runtime_concepts.html#global-scopes), so it can be cross referenced from other models.
 
 ## Using Xbase Expressions {#xbase-expressions}
 

@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Java 5 compatible source code. You can use any existing Java library seamlessly.
   The compiled output is readable and pretty-printed, and tends to run as fast as
   the equivalent handwritten Java code.
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "/xtend" # the subpath of your site, e.g. /blog/
 url: "http://xtend-lang.org" # the base hostname & protocol for your site
 twitter_username: xtendlang
 github_username:  xtext
@@ -39,3 +39,5 @@ javadoc:
   xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
   java: "http://docs.oracle.com/javase/8/docs/api"
   guava: "http://docs.guava-libraries.googlecode.com/git-history/release/javadoc"
+
+edit-repo : "https://github.com/eclipse/xtext/edit/master/xtend-website/"

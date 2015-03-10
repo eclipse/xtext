@@ -71,7 +71,7 @@ You can a also customize error handling by overriding the methods `handleTextErr
 
 ### Label Providers For Index Entries {#description-label-provider}
 
-Xtext maintains an index of all model elements to allow quick searching and linking without loading the referenced resource (see the chapter on [index-based scopes](#index-based) for details). The elements from this index also appear in some UI contexts, e.g. in the *Find model elements* dialog or in the *Find references* view. For reasons of scalability, the UI should not automatically load resources, so we need another implementation of a label provider that works with the elements from the index, i.e. [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java), and [IReferenceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java).
+Xtext maintains an index of all model elements to allow quick searching and linking without loading the referenced resource (see the chapter on [index-based scopes](303_runtime_concepts.html#index-based) for details). The elements from this index also appear in some UI contexts, e.g. in the *Find model elements* dialog or in the *Find references* view. For reasons of scalability, the UI should not automatically load resources, so we need another implementation of a label provider that works with the elements from the index, i.e. [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java), and [IReferenceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java).
 
 The default implementation of this service is the [DefaultDescriptionLabelProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java). It employs the same polymorphic dispatch mechanism as the [DefaultEObjectLabelProvider](#default-eobject-label-provider). The default text of an [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) is its indexed name. The image is resolved by dispatching to `image(EClass)` with the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) of the described object. This is likely the only method you want to override. Instances of [IResourceDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) will be represented with their path and the icon registered for your language's editor. 
 
@@ -136,7 +136,7 @@ public void completeEvent_Code(
 
 ## Quick Fixes {#quick-fixes}
 
-For validations written using the [AbstractDeclarativeValidator](#custom-validation) it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying *cause* of the diagnostic must be known (i.e. what actual problem does the diagnostic represent), otherwise the fix doesn't know what needs to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem specific *code* with the diagnostic.
+For validations written using the [AbstractDeclarativeValidator](303_runtime_concepts.html#custom-validation) it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying *cause* of the diagnostic must be known (i.e. what actual problem does the diagnostic represent), otherwise the fix doesn't know what needs to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem specific *code* with the diagnostic.
 
 In the following example taken from the *DomainmodelJavaValidator* the diagnostic's *code* is given by the third argument to the `warning()` method and it is a reference to the static [String]({{site.javadoc.java}}/java/lang/String.html) field `INVALID_TYPE_NAME` in the validator class.
 
@@ -214,7 +214,7 @@ By default Xtext registers *context types* that follow certain patterns. A conte
 1.  for each rule (`{languageName}.{RuleName}`) and
 1.  for each keyword (`{languageName}.kw_{keyword}`).
 
-If you don't like these defaults you'll have to subclass [XtextTemplateContextTypeRegistry]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java) and configure it via [Guice](#guicemodules). 
+If you don't like these defaults you'll have to subclass [XtextTemplateContextTypeRegistry]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java) and configure it via [Guice](302_configuration.html#guicemodules). 
 
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) to resolve special variable types in templates. Besides the standard template variables available in [GlobalTemplateVariables]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/GlobalTemplateVariables.html) like `${user}`, `${date}`, `${time}`, `${cursor}`, etc., these [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) support the automatic resolving of cross references enumeration values. Both resolvers are explained in the following sections.
 
@@ -471,7 +471,7 @@ When navigating a hyperlink, Xtext will also select the text region correspondin
 
 The location service offers different methods to obtain the region of interest for special use cases. You can either obtain the complete region for an object or only the identifying string which is usually the name of the instance (see `getSignificantTextRegion(EObject)`). You can also query for the text region of a specific [EStructuralFeature]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) by means of `getFullTextRegion(EObject, EStructuralFeature, int)`.
 
-As the default strategy is a best effort it may not always result in the selection you want. If that's the case you can [override](#guicemodules) the [ILocationInFileProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java) binding in the UI module as in the following example:
+As the default strategy is a best effort it may not always result in the selection you want. If that's the case you can [override](302_configuration.html#guicemodules) the [ILocationInFileProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java) binding in the UI module as in the following example:
 
 ```java
 public class MyDslUiModule extends AbstractMyDslUiModule {
@@ -491,7 +491,7 @@ The hyperlinks are provided by the [HyperlinkHelper]({{site.src.xtext}}/plugins/
 
 ## Syntax Coloring {#highlighting}
 
-Besides the already mentioned advanced features like [content assist](#content-assist) and [code formatting](#formatting) the powerful editor for your DSL is capable to mark up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some unintrusive colors for large blocks of comments while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating markup does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.
+Besides the already mentioned advanced features like [content assist](#content-assist) and [code formatting](303_runtime_concepts.html#formatting) the powerful editor for your DSL is capable to mark up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some unintrusive colors for large blocks of comments while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating markup does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.
 
 ![](images/highlighting.png)
 
@@ -598,7 +598,7 @@ To enable refactoring support make sure the [RefactorElementNameFragment]({{site
 fragment = refactoring.RefactorElementNameFragment {}
 ```
 
-The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](#xbase-inferred-type) (i.e. the domain model example or Xtend). 
+The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](305_xbase.html#xbase-inferred-type) (i.e. the domain model example or Xtend). 
 
 If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring should not need any customization. Give it a try. 
 

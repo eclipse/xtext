@@ -234,7 +234,7 @@ fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 }
 ```
 
-See the section on [Referring Java Types](#jvmtypes) for a full explanation of this useful feature.
+See the section on [Referring Java Types](305_xbase.html#jvmtypes) for a full explanation of this useful feature.
 
 #### Ecore Model Aliases for EPackages
 
@@ -275,7 +275,7 @@ terminal ID :
 
 It says that a token *ID* starts with an optional `'^'` character (caret), followed by a letter `('a'..'z'|'A'..'Z')` or underscore `'_'` followed by any number of letters, underscores and numbers `('0'..'9')`. 
 
-The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the *ID* rule's [ValueConverter](#value-converter). 
+The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the *ID* rule's [ValueConverter](303_runtime_concepts.html#value-converter). 
 
 This is the simplified formal definition of terminal rules:
 
@@ -299,7 +299,7 @@ terminal INT returns ecore::EInt :
   ('0'..'9')+;
 ```
 
-This means that the terminal rule *INT* returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (cf. [value converters](#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret `'^'` from identifiers. Its implementation needs to be registered as a service (cf. [Service Framework](#dependency-injection)).
+This means that the terminal rule *INT* returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of [IValueConverterService]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (cf. [value converters](303_runtime_concepts.html#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret `'^'` from identifiers. Its implementation needs to be registered as a service (cf. [Service Framework](302_configuration.html#dependency-injection)).
 
 #### Extended Backus-Naur Form Expressions
 
@@ -478,7 +478,7 @@ Event returns MyEvent : ....;
 
 Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by *CrossReferenceableTerminal*. This is the part describing the concrete text, from which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule with the name *ID* - if one can be found. The terminal is mandatory for languages that do not define a rule with the name *ID*.
 
-Have a look at the [linking section](#linking) in order to understand how linking is done.
+Have a look at the [linking section](303_runtime_concepts.html#linking) in order to understand how linking is done.
 
 ##### Unordered Groups {#unordered-groups}
 
@@ -727,7 +727,7 @@ QualifiedName returns ecore::EString :
 
 Note that rules that do not call other parser rules and do neither contain any actions nor [assignments](301_grammarlanguage.html#assignments) are considered to be data type rules, and the data type [EString]({{site.javadoc.java}}/java/lang/String.html) is implied if none has been explicitly declared.
 
-[Value converters](#value-converter) are used to transform the parsed string to the actually returned data type value.
+[Value converters](303_runtime_concepts.html#value-converter) are used to transform the parsed string to the actually returned data type value.
 
 ### Enum Rules
 

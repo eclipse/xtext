@@ -107,7 +107,7 @@ The list of grammar fragments forms a chain of responsibility, that is they each
 
 There is usually no need to write your own generator fragments and only rarely you might want to extend an existing one.
 
-#### Configuration
+#### Configuration {#mwe-configuration}
 
 As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. In the following we see an exemplary language generator configuration written in MWE2 configuration code: 
 
@@ -172,14 +172,14 @@ In the following table the most important standard generator fragments are liste
 |[XtextAntlrGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java)|ANTLR grammar, parser, lexer and related services||
 |[GrammarAccessFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java)|Access to the grammar||
 |[ResourceFactoryFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java)|EMF resource factory|[Xtext Resource](308_emf_integration.html#xtext-resource)|
-|[ParseTreeConstructorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java)|Model-to-text serialization|[Serialization](#serialization)|
-|[ImportNamespacesScopingFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java)|Index-based scoping|[Index-based namespace scoping](#index-based)|
-|[JavaValidatorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java)|Model validation|[Model validation](#custom-validation)|
-|[FormatterFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java)|Code formatter|[Code formatter](#formatting)|
-|[LabelProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java)|Label provider|[Label provider](#label-provider)|
-|[OutlineTreeProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java)|Outline view configuration|[Outline](#outline)|
-|[JavaBasedContentAssistFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java)|Java-based content assist|[Content assist](#content-assist)|
-|[XtextAntlrUiGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java)|Content assist helper based on ANTLR|[Content assist](#content-assist)|
+|[ParseTreeConstructorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java)|Model-to-text serialization|[Serialization](303_runtime_concepts.html#serialization)|
+|[ImportNamespacesScopingFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java)|Index-based scoping|[Index-based namespace scoping](303_runtime_concepts.html#index-based)|
+|[JavaValidatorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java)|Model validation|[Model validation](303_runtime_concepts.html#custom-validation)|
+|[FormatterFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java)|Code formatter|[Code formatter](303_runtime_concepts.html#formatting)|
+|[LabelProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java)|Label provider|[Label provider](304_ide_concepts.html#label-provider)|
+|[OutlineTreeProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java)|Outline view configuration|[Outline](304_ide_concepts.html#outline)|
+|[JavaBasedContentAssistFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java)|Java-based content assist|[Content assist](304_ide_concepts.html#content-assist)|
+|[XtextAntlrUiGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java)|Content assist helper based on ANTLR|[Content assist](304_ide_concepts.html#content-assist)|
 
 ## Dependency Injection in Xtext with Google Guice {#dependency-injection}
 

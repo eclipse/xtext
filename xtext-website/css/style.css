@@ -277,7 +277,7 @@ table tr:hover td {
 	margin-top: 40px;
 	margin-left: -20px;
 	margin-right: -20px;
-	background: url('/images/header_background.jpg') #9e1f01;
+	background: url('{{ site.baseurl }}/images/header_background.jpg') #9e1f01;
 	background-size:  cover;
 }
 

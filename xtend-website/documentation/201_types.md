@@ -7,7 +7,7 @@ part: Reference Documentation
 
 Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types like `int` or `boolean`, arrays and all the Java classes, interfaces, enums and annotations that reside on the class path. 
 
-Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as defined in [the Java Language Specification](http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html).
+Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as defined in [the Java Language Specification](http://docs.oracle.com/javase/specs/jls/se6/html/conversions.html).
 
 Resembling and supporting every aspect of Java's type system ensures that there is no impedance mismatch between Java and Xtend. This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles. As a bonus, if you know Java's type system and are familiar with Java's generic types, you already know the most complicated part of Xtend.
 

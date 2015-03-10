@@ -267,6 +267,7 @@ td.code pre {
 	font-size: 16px;
 	font-weight: 300;
 	color: #fff;
+	text-shadow: 0px 1px 4px #000000;
 	text-align: left;
 	word-spacing: 3px;
 }

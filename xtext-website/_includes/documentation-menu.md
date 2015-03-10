@@ -53,5 +53,5 @@
 	</li>
 	<li>&nbsp;</li>
 	<li style="color : #333;">Additional Resources
-	<li><a href="{{site.javadoc.xtext}}">API Documentation (JavaDoc)</a>
+	<li><a href="{{site.javadoc.xtext}}/">API Documentation (JavaDoc)</a>
 </ul>

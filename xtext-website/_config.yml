@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown 
   top-notch Eclipse IDE integration. It comes with great defaults for all these aspects which at the same time can 
   be easily tailored to your individual needs.
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "/Xtext" # the subpath of your site, e.g. /blog/
 url: "http://xtext.org" # the base hostname & protocol for your site
 twitter_username: xtext
 github_username:  xtext-dev

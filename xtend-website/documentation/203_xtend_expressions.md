@@ -154,7 +154,7 @@ val List<Integer> myList = myArray
 
 A type cast behaves exactly like casts in Java, but has a slightly more readable syntax. Type casts bind stronger than any other operator but weaker than feature calls.
 
-The conformance rules for casts are defined in the [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html#5.5). Here are some examples: 
+The conformance rules for casts are defined in the [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se6/html/conversions.html#5.5). Here are some examples: 
 
 ```xtend
 something as MyClass

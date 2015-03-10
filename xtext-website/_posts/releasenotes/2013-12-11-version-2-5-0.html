@@ -14,7 +14,7 @@ categories: releasenotes
   <p>
     Xtext 2.5.0 comes with much improved support for integrating Xtext languages and the corresponding code generators in 
   continuous integration builds. All the needed jars are available on Maven central now and we have added a dedicated Maven compiler plug-in that 
-  simulates the incremental build in a headless Java Maven build (no Tycho needed!). Please read the <a href="documentation.html#continuousIntegration">new section in the documentation</a> for more 
+  simulates the incremental build in a headless Java Maven build (no Tycho needed!). Please read the <a href="{{site.baseurl}}/documentation/302_configuration.html#continuous-integration">new section in the documentation</a> for more 
   details on the new Maven support.
   </p>
 	<pre class="prettyprint xml linenums">
@@ -50,8 +50,6 @@ categories: releasenotes
   &lt;/dependencies&gt;
 &lt;/plugin&gt;	
 	</pre>
-	        </section>
-	        <section id="annotations_2_5" style="padding-top: 68px; margin-top: -68px;">
 	        </section>
 	        <section id="compilerchecks" style="padding-top: 68px; margin-top: -68px;">
 	          <h2>Enhancements for Xbase</h2>
@@ -100,7 +98,7 @@ class B extends A {
 			  <p>
 			    You have to make sure to use the library in version 2.5 along with the introduced compiler checks.
 			  </p>
-	          <h3 id="ambiguous_methods">Discouraged variable names</h3>
+	          <h3 id="discouraged_variable_names">Discouraged variable names</h3>
 	          <p>
 	            Some variable names are used implicitely by Xtend, for example the variable name 'self'.
 	            The compiler optionally reports if these names were picked manually.
