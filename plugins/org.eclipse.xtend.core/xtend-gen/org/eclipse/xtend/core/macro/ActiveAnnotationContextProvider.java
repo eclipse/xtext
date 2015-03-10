@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -53,6 +54,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
+  private final static Logger LOG = Logger.getLogger(ActiveAnnotationContextProvider.class);
+  
   @Inject
   @Extension
   private XAnnotationExtensions _xAnnotationExtensions;
@@ -164,6 +167,8 @@ public class ActiveAnnotationContextProvider {
               throw e;
             }
           }
+          String _message = e.getMessage();
+          ActiveAnnotationContextProvider.LOG.warn(_message, e);
           Resource _eResource_1 = file.eResource();
           return ActiveAnnotationContexts.installNew(_eResource_1);
         } else {

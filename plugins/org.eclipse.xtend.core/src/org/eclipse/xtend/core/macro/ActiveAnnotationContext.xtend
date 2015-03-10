@@ -37,6 +37,7 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import com.google.common.base.Throwables
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.emf.common.notify.Notification
+import org.apache.log4j.Logger
 
 /**
  * @author Sven Efftinge
@@ -163,6 +164,8 @@ class ActiveAnnotationContexts extends AdapterImpl {
  */
 class ActiveAnnotationContextProvider {
 	
+	private final static Logger LOG = Logger.getLogger(ActiveAnnotationContextProvider)
+	
 	@Inject extension XAnnotationExtensions
 	@Inject extension ProcessorInstanceForJvmTypeProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
@@ -208,6 +211,7 @@ class ActiveAnnotationContextProvider {
 				VirtualMachineError : throw e
 				LinkageError: throw e // e.g. java.lang.UnsupportedClassVersionError: activetest/Processor : Unsupported major.minor version 51.0
 			}
+			LOG.warn(e.message, e)
 			return ActiveAnnotationContexts.installNew(file.eResource)
 		} finally {
 			task.stop

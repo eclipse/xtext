@@ -108,17 +108,20 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			if(section != null) {
 				for (imp : section.importDeclarations) {
 					if(imp.static) {
-						val type = imp.findTypeByName(imp.importedTypeName)
-						switch type {
-							JvmGenericType: {
-								// add constant fields
-								type.collectAllVisibleFields(result)
-							}
-							JvmEnumerationType: {
-	
-								// add enum values
-								for (feature : type.literals) {
-									result.put(feature.simpleName, feature)
+						val typeName = imp.importedTypeName
+						if (typeName != null) {
+							val type = imp.findTypeByName(typeName)
+							switch type {
+								JvmGenericType: {
+									// add constant fields
+									type.collectAllVisibleFields(result)
+								}
+								JvmEnumerationType: {
+		
+									// add enum values
+									for (feature : type.literals) {
+										result.put(feature.simpleName, feature)
+									}
 								}
 							}
 						}
