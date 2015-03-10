@@ -591,11 +591,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if (((JvmGenericType) superClass.getType()).isFinal()) {
 					error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
 				}
-				JvmGenericType inferredType = associations.getInferredType(xtendClass);
-				if (inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
-					error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
-							XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
-				}
 				checkWildcardSupertype(xtendClass, superClass, XTEND_CLASS__EXTENDS, INSIGNIFICANT_INDEX);
 			}
 		}
@@ -605,6 +600,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
 			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
+		}
+		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		if (inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
+			error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
+					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 		}
 	}
 
@@ -660,8 +660,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	protected boolean hasCycleInHierarchy(JvmGenericType type, Set<JvmGenericType> processedSuperTypes) {
-		if (processedSuperTypes.contains(type))
-			return true;
+		JvmDeclaredType container = type;
+		do {
+			if (processedSuperTypes.contains(container))
+				return true;
+			container = container.getDeclaringType();
+		} while (container != null);
 		processedSuperTypes.add(type);
 		for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
 			if (superTypeRef.getType() instanceof JvmGenericType) {
