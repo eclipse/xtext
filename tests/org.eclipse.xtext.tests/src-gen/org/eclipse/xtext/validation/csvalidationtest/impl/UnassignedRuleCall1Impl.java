@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall1;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Unassigned Rule Call1</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

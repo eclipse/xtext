@@ -15,5 +15,6 @@ public class VisibilitySuperClass {
 	private String privateField;
 	protected String protectedField;
 	public String publicField;
+	String packagePrivateField;
 	
 }

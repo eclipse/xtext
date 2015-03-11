@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.AssignedAction#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.AssignedAction#getChild <em>Child</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.AssignedAction#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getAssignedAction()
  * @model

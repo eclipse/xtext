@@ -18,9 +18,17 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Using a grammar, the Serializer converts EMF models to text. This is inverse to the parser converting text into EMF
+ * models.
+ * 
+ * For reasons of backwards compatibility, this interface is still bound to
+ * {@link org.eclipse.xtext.parsetree.reconstr.Serializer}. It is recommended to bind it to
+ * {@link org.eclipse.xtext.serializer.impl.Serializer} in the runtime module of your language.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.0
  */
+@SuppressWarnings("deprecation")
 @ImplementedBy(Serializer.class)
 public interface ISerializer {
 	public String serialize(EObject obj);

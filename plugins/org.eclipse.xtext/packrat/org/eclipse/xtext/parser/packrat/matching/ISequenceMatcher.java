@@ -17,6 +17,7 @@ public interface ISequenceMatcher {
 	class Factory {
 		private static class NullSequenceMatcher implements ISequenceMatcher {
 			private static ISequenceMatcher INSTANCE = new NullSequenceMatcher();
+			@Override
 			public boolean matches(CharSequence input, int offset, int length) {
 				return false;
 			}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -26,11 +23,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.SimpleTy
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.SimpleTypeRefImpl#getRawType <em>Raw Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.SimpleTypeRefImpl#getActualArgumentsList <em>Actual Arguments List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

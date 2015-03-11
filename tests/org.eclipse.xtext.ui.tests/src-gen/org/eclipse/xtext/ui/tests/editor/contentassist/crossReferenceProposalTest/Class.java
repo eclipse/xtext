@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage#getClass_()
  * @model

@@ -44,20 +44,24 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 		return false;
 	}
 
+	@Override
 	public AbstractElement getLoopCenter() {
 		return loopCenter;
 	}
 
+	@Override
 	public int getPrecedence() {
 		INFAState<S, T> s = source;
 		int i = s.getOutgoing().indexOf(this);
 		return i > -1 ? i : s.getOutgoingAfterReturn().indexOf(this);
 	}
 
+	@Override
 	public S getSource() {
 		return source;
 	}
 
+	@Override
 	public S getTarget() {
 		return target;
 	}
@@ -67,6 +71,7 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 		return source.hashCode() + target.hashCode();
 	}
 
+	@Override
 	public boolean isRuleCall() {
 		return ruleCall;
 	}

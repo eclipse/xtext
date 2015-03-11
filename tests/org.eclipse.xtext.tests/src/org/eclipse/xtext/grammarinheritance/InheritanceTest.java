@@ -14,35 +14,43 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.grammarinheritance.foo.ConcreteParserRule;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 public class InheritanceTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return false;
+	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		EPackage aMetamodel = AmetamodelPackage.eINSTANCE;
 		EPackage.Registry.INSTANCE.put(aMetamodel.getNsURI(), aMetamodel);
 		with(new ConcreteTestLanguageStandaloneSetup());
 	}
 
-	public void testSimple() throws Exception {
-		EObject model = getModel("model 23.34 : element A element B");
-		assertEquals(23.34, invokeWithXtend("magicNumber", model));
-		assertWithXtend("'A'", "elements.get(0).name", model);
-		assertWithXtend("'B'", "elements.get(1).name", model);
+	@Test public void testSimple() throws Exception {
+		ConcreteParserRule model = (ConcreteParserRule) getModel("model 23.34 : element A element B");
+		assertEquals(23.34, model.getMagicNumber(), 0.0001);
+		assertEquals("A", model.getElements().get(0).getName());
+		assertEquals("B", model.getElements().get(1).getName());
 	}
 
-	public void testMetamodel() throws Exception {
+	@Test public void testMetamodel() throws Exception {
 		AbstractRule rule = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "OverridableParserRule2");
 		assertNotNull("rule", rule);
 		TypeRef ref = rule.getType();
@@ -53,6 +61,7 @@ public class InheritanceTest extends AbstractXtextTests {
 		assertEquals(2, clazz.getESuperTypes().size());
 		Set<String> expectedNames = new HashSet<String>(Arrays.asList(new String[]{"AType", "RootRule"}));
 		Iterator<String> iter = Iterables.transform(clazz.getESuperTypes(), new Function<EClass, String>(){
+			@Override
 			public String apply(EClass param) {
 				return param.getName();
 			}

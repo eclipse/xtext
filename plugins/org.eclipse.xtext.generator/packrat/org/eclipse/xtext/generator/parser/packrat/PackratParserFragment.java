@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.parser.packrat;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -34,8 +33,8 @@ public class PackratParserFragment extends AbstractGeneratorFragment {
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return new String[]{
-				GrammarUtil.getNamespace(grammar) + ".parser.packrat",
-				GrammarUtil.getNamespace(grammar) + ".parser.packrat.consumers",
+				getNaming().basePackageRuntime(grammar) + ".parser.packrat",
+				getNaming().basePackageRuntime(grammar) + ".parser.packrat.consumers",
 		};
 	}
 

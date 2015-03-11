@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Child#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Child#getLink <em>Link</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package#getChild()
  * @model

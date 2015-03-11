@@ -7,526 +7,113 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmLowerBound;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
+import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder;
+import org.eclipse.xtext.common.types.access.reflect.ReflectURIHelper;
+import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.objectweb.asm.Opcodes;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
+ * Internal implementation that allows to convert the bytes of Java top-level classes to {@link JvmType types}.
+ * 
+ * Clients are not supposed to use this class directly but the {@link IJvmTypeProvider} or {@link TypeReferences}
+ * instead. Those will take care of types that are requested more than once and therefore should return the very same
+ * {@link JvmType type} on subsequent queries.
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
+@SuppressWarnings("restriction")
+public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclaredType> {
 
-	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
-	private final ClassURIHelper uriHelper;
+	private final StoppedTask createTypeTask = Stopwatches.forTask("AsmTypeFactory.createType");
+	
+	private static final Logger logger = Logger.getLogger(DeclaredTypeFactory.class);
+
+	/**
+	 * The classLoader that is used to find the class files for nested types.
+	 */
+	private final ClassLoader classLoader;
+
+	/**
+	 * The reader may cache the read structure of the class files.
+	 */
+	private final ClassFileBytesAccess bytesAccess;
+	
+	private static final boolean ASM_AVAILABLE = isAsm5Available();
+	
+	private final boolean useASM;
 
 	@Inject
-	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
-		this.uriHelper = uriHelper;
+	public DeclaredTypeFactory(ClassFileBytesAccess bytesAccess, ClassLoader loader) {
+		this(bytesAccess, loader, ASM_AVAILABLE);
+	}
+	
+	public DeclaredTypeFactory(ClassFileBytesAccess bytesAccess, ClassLoader loader, boolean useASM) {
+		this.bytesAccess = bytesAccess;
+		this.classLoader = loader;
+		this.useASM = useASM;
 	}
 
-	public JvmDeclaredType createType(Class<?> clazz) {
-		if (clazz.isAnonymousClass() || clazz.isSynthetic())
-			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
-		if (clazz.isAnnotation())
-			return createAnnotationType(clazz);
-		if (clazz.isEnum())
-			return createEnumerationType(clazz);
-
-		JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
-		result.setInterface(clazz.isInterface());
-		setTypeModifiers(clazz, result);
-		setVisibility(clazz, result);
-		result.internalSetIdentifier(clazz.getName());
-		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
-			result.setPackageName(clazz.getPackage().getName());
-		createNestedTypes(clazz, result);
-		createMethods(clazz, result);
-		createConstructors(clazz, result);
-		createFields(clazz, result);
-		setSuperTypes(clazz, result);
-		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
-			result.getTypeParameters().add(createTypeParameter(variable, result));
-		}
-		createAnnotationValues(clazz, result);
-		return result;
-	}
-
-	private static final Object[] EMPTY_ARRAY = new Object[0];
-
-	protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
-		for (Annotation annotation : annotated.getDeclaredAnnotations()) {
-			createAnnotationReference(result, annotation);
-		}
-	}
-
-	protected JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, Annotation annotation) {
-		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		result.getAnnotations().add(annotationReference);
-		Class<? extends Annotation> type = annotation.annotationType();
-		annotationReference.setAnnotation(createAnnotationProxy(type));
-		for (Method method : type.getDeclaredMethods()) {
-			try {
-				Object value = method.invoke(annotation, EMPTY_ARRAY);
-				if (method.getReturnType().isArray()) {
-					JvmAnnotationValue annotationValue = createArrayAnnotationValue(value, method.getReturnType());
-					annotationReference.getValues().add(annotationValue);
-					annotationValue.setOperation(createMethodProxy(method));
-				} else {
-					JvmAnnotationValue annotationValue = createAnnotationValue(value, method.getReturnType());
-					annotationReference.getValues().add(annotationValue);
-					annotationValue.setOperation(createMethodProxy(method));
-				}
-			} catch (Exception e) {
-				log.error(e.getMessage(), e);
-			}
-		}
-		return annotationReference;
-	}
-
-	protected JvmEnumerationLiteral createEnumLiteralProxy(Enum<?> e) {
-		JvmEnumerationLiteral enumLiteralProxy = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
-		InternalEObject internalEObject = (InternalEObject) enumLiteralProxy;
-		Class<?> type = e.getDeclaringClass();
+	private static boolean isAsm5Available() {
 		try {
-			Field field = type.getDeclaredField(e.toString());
-			internalEObject.eSetProxyURI(uriHelper.getFullURI(field));
-		} catch (Exception exception) {
-			log.error(exception.getMessage(), exception);
-			return null;
+			if(Opcodes.class.getDeclaredField("ASM5") != null) 
+				return true;
+		} catch(NoClassDefFoundError e) {
+			logger.warn("--- xtext.common.types ---------------------------------------------------");
+			logger.warn("ASM library is not available. Falling back to java.lang.reflect API.");
+		} catch(NoSuchFieldException e) {
+			logger.warn("--- xtext.common.types ---------------------------------------------------");
+			logger.warn("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
-		return enumLiteralProxy;
+		logger.warn("Please note that no information about compile time constants is available.");
+		logger.warn("It's recommended to use org.objectweb.asm 5.0.1 or better.");
+		logger.warn("--------------------------------------------------------------------------");
+		return false;
 	}
 
-	protected JvmAnnotationValue createArrayAnnotationValue(Object value, Class<?> type) {
-		if (!type.isArray())
-			throw new IllegalArgumentException("type is not an array type: " + type.getCanonicalName());
-		Class<?> componentType = type.getComponentType();
-		JvmAnnotationValue result = createAnnotationValue(componentType);
-		int length = Array.getLength(value);
-		if (length > 0) {
-			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
-			if (componentType.isPrimitive() || String.class.equals(componentType)) {
-				for (int i = 0; i < length; i++) {
-					valuesAsList.add(Array.get(value, i));
-				}
-			} else if (componentType.equals(Class.class)) {
-				for (int i = 0; i < length; i++) {
-					Class<?> referencedClass = (Class<?>) Array.get(value, i);
-					valuesAsList.add(createTypeReference(referencedClass));
-				}
-			} else if (componentType.isAnnotation()) {
-				for (int i = 0; i < length; i++) {
-					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
-					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
-				}
-			} else if (componentType.isEnum()) {
-				for (int i = 0; i < length; i++) {
-					Enum<?> e = (Enum<?>) Array.get(value, i);
-					JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
-					valuesAsList.add(proxy);
-				}
+	/**
+	 * Creates a new {@link JvmDeclaredType type} from the given binary class..
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	@Override
+	public JvmDeclaredType createType(BinaryClass binaryClass) {
+		if (useASM) {
+			try {
+				createTypeTask.start();
+				return doCreateType(binaryClass);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			} finally {
+				createTypeTask.stop();
 			}
-			if (!componentType.isAnnotation())
-				result.eSet(result.eClass().getEStructuralFeature("values"), valuesAsList);
-		}
-		return result;
-	}
-
-	protected JvmAnnotationValue createAnnotationValue(Object value, Class<?> type) {
-		JvmAnnotationValue result = createAnnotationValue(type);
-		if (type.isPrimitive() || String.class.equals(type)) {
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
-		} else if (type.equals(Class.class)) {
-			Class<?> referencedClass = (Class<?>) value;
-			JvmTypeReference reference = createTypeReference(referencedClass);
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(reference));
-		} else if (type.isAnnotation()) {
-			Annotation nestedAnnotation = (Annotation) value;
-			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
-		} else if (type.isEnum()) {
-			Enum<?> e = (Enum<?>) value;
-			JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
-		}
-		return result;
-	}
-
-	protected JvmAnnotationValue createAnnotationValue(Class<?> type) {
-		if (String.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-		} else if (Class.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
-		} else if (type.isAnnotation()) {
-			return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
-		} else if (type.isEnum()) {
-			return TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
-		} else if (int.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-		} else if (boolean.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-		} else if (long.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
-		} else if (byte.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
-		} else if (short.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
-		} else if (float.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
-		} else if (double.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
-		} else if (char.class.equals(type)) {
-			return TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
-		} else
-			throw new IllegalArgumentException("Unexpected type: " + type.getCanonicalName());
-	}
-
-	protected JvmAnnotationType createAnnotationProxy(Class<? extends Annotation> type) {
-		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmAnnotationType();
-		URI uri = uriHelper.getFullURI(type);
-		proxy.eSetProxyURI(uri);
-		return (JvmAnnotationType) proxy;
-	}
-
-	protected JvmOperation createMethodProxy(Method method) {
-		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmOperation();
-		URI uri = uriHelper.getFullURI(method);
-		proxy.eSetProxyURI(uri);
-		return (JvmOperation) proxy;
-	}
-
-	protected void setTypeModifiers(Class<?> clazz, JvmDeclaredType result) {
-		result.setAbstract(Modifier.isAbstract(clazz.getModifiers()));
-		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
-		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
-	}
-
-	protected void createNestedTypes(Class<?> clazz, JvmDeclaredType result) {
-		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
-			if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
-				result.getMembers().add(createType(declaredClass));
-			}
-		}
-	}
-
-	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
-		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
-		result.internalSetIdentifier(clazz.getName());
-		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null)
-			result.setPackageName(clazz.getPackage().getName());
-		setVisibility(clazz, result);
-		setTypeModifiers(clazz, result);
-		createNestedTypes(clazz, result);
-		createMethods(clazz, result);
-		setSuperTypes(clazz, result);
-		createAnnotationValues(clazz, result);
-		return result;
-	}
-
-	protected void setSuperTypes(Class<?> clazz, JvmDeclaredType result) {
-		if (clazz.getGenericSuperclass() != null) {
-			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
-		}
-		for (Type type : clazz.getGenericInterfaces()) {
-			result.getSuperTypes().add(createTypeReference(type));
-		}
-		if (result.getSuperTypes().isEmpty() && !Object.class.equals(clazz)) {
-			result.getSuperTypes().add(createTypeReference(Object.class));
-		}
-	}
-
-	protected void createFields(Class<?> clazz, JvmDeclaredType result) {
-		for (Field field : clazz.getDeclaredFields()) {
-			if (!field.isSynthetic())
-				result.getMembers().add(createField(field));
-		}
-	}
-
-	protected void createConstructors(Class<?> clazz, JvmDeclaredType result) {
-		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-			if (!constructor.isSynthetic())
-				result.getMembers().add(createConstructor(constructor));
-		}
-	}
-
-	protected void createMethods(Class<?> clazz, JvmDeclaredType result) {
-		for (Method method : clazz.getDeclaredMethods()) {
-			if (!method.isSynthetic()) {
-				JvmOperation operation = createOperation(method);
-				if (clazz.isAnnotation()) {
-					setDefaultValue(operation, method);
-				}
-				result.getMembers().add(operation);
-			}
-		}
-	}
-
-	private void setDefaultValue(JvmOperation operation, Method method) {
-		Object defaultValue = method.getDefaultValue();
-		if (defaultValue != null) {
-			if (method.getReturnType().isArray()) {
-				JvmAnnotationValue annotationValue = createArrayAnnotationValue(defaultValue, method.getReturnType());
-				operation.setDefaultValue(annotationValue);
-				annotationValue.setOperation(operation);
-			} else {
-				JvmAnnotationValue annotationValue = createAnnotationValue(defaultValue, method.getReturnType());
-				operation.setDefaultValue(annotationValue);
-				annotationValue.setOperation(operation);
-			}
-		}
-	}
-
-	public JvmEnumerationType createEnumerationType(Class<?> clazz) {
-		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
-		result.internalSetIdentifier(clazz.getName());
-		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null)
-			result.setPackageName(clazz.getPackage().getName());
-		setVisibility(clazz, result);
-		setTypeModifiers(clazz, result);
-		createNestedTypes(clazz, result);
-		createMethods(clazz, result);
-		createFields(clazz, result);
-		createConstructors(clazz, result);
-		setSuperTypes(clazz, result);
-		createAnnotationValues(clazz, result);
-		return result;
-	}
-
-	protected void setVisibility(Class<?> clazz, org.eclipse.xtext.common.types.JvmMember result) {
-		if (Modifier.isPrivate(clazz.getModifiers()))
-			result.setVisibility(JvmVisibility.PRIVATE);
-		else if (Modifier.isProtected(clazz.getModifiers()))
-			result.setVisibility(JvmVisibility.PROTECTED);
-		else if (Modifier.isPublic(clazz.getModifiers()))
-			result.setVisibility(JvmVisibility.PUBLIC);
-	}
-
-	public org.eclipse.xtext.common.types.JvmTypeParameter createTypeParameter(TypeVariable<?> variable,
-			org.eclipse.xtext.common.types.JvmMember container) {
-		org.eclipse.xtext.common.types.JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
-		result.setName(variable.getName());
-		if (variable.getBounds().length != 0) {
-			for (Type bound : variable.getBounds()) {
-				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
-				upperBound.setTypeReference(createTypeReference(bound));
-				result.getConstraints().add(upperBound);
-			}
-		}
-		return result;
-	}
-
-	public JvmTypeReference createTypeReference(Type type) {
-		if (type instanceof GenericArrayType) {
-			GenericArrayType arrayType = (GenericArrayType) type;
-			Type componentType = arrayType.getGenericComponentType();
-			return createArrayTypeReference(componentType);
-		} else if (type instanceof ParameterizedType) {
-			ParameterizedType parameterizedType = (ParameterizedType) type;
-			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			result.setType(createProxy(parameterizedType.getRawType()));
-			for (int i = 0; i < parameterizedType.getActualTypeArguments().length; i++) {
-				JvmTypeReference argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
-						parameterizedType.getRawType(), i);
-				result.getArguments().add(argument);
-			}
-			return result;
-		} else if (type instanceof Class<?> && ((Class<?>) type).isArray()){
-			Class<?> arrayType = (Class<?>) type;
-			Type componentType = arrayType.getComponentType();
-			return createArrayTypeReference(componentType);
 		} else {
-			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			result.setType(createProxy(type));
-			return result;
-		}
-	}
-
-	protected JvmTypeReference createArrayTypeReference(Type componentType) {
-		JvmTypeReference componentTypeReference = createTypeReference(componentType);
-		if (componentTypeReference != null) {
-			JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-			JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
-			result.setType(resultArray);
-			resultArray.setComponentType(componentTypeReference);
-			return result;
-		} else {
-			return null;
-		}
-	}
-
-	public JvmTypeReference createTypeArgument(Type actualTypeArgument, Type rawType, int i) {
-		if (actualTypeArgument instanceof WildcardType) {
-			WildcardType wildcardType = (WildcardType) actualTypeArgument;
-			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
-			if (wildcardType.getUpperBounds().length != 0) {
-				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
-				for (Type boundType : wildcardType.getUpperBounds()) {
-					JvmTypeReference upperBoundType = createTypeReference(boundType);
-					upperBound.setTypeReference(upperBoundType);
-				}
-				result.getConstraints().add(upperBound);
+			try {
+				ReflectURIHelper uriHelper = new ReflectURIHelper();
+				ReflectionTypeFactory reflectionBased = new ReflectionTypeFactory(uriHelper);
+				Class<?> clazz = Class.forName(binaryClass.getName(), false, classLoader);
+				return reflectionBased.createType(clazz);
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
 			}
-			if (wildcardType.getLowerBounds().length != 0) {
-				JvmLowerBound lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
-				for (Type boundType : wildcardType.getLowerBounds()) {
-					JvmTypeReference lowerBoundType = createTypeReference(boundType);
-					lowerBound.setTypeReference(lowerBoundType);
-				}
-				result.getConstraints().add(lowerBound);
-			}
-			return result;
-		} else {
-			JvmTypeReference result = createTypeReference(actualTypeArgument);
-			return result;
 		}
 	}
 
-	public org.eclipse.xtext.common.types.JvmType createProxy(Type type) {
-		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
-		URI uri = uriHelper.getFullURI(type);
-		proxy.eSetProxyURI(uri);
-		return (org.eclipse.xtext.common.types.JvmType) proxy;
-	}
-
-	public org.eclipse.xtext.common.types.JvmField createField(Field field) {
-		JvmField result;
-		if (!field.isEnumConstant())
-			result = TypesFactory.eINSTANCE.createJvmField();
-		else
-			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
-		result.internalSetIdentifier(field.getDeclaringClass().getName() + "." + field.getName());
-		result.setSimpleName(field.getName());
-		result.setFinal(Modifier.isFinal(field.getModifiers()));
-		result.setStatic(Modifier.isStatic(field.getModifiers()));
-		setVisibility(result, field.getModifiers());
-		result.setType(createTypeReference(field.getGenericType()));
-		createAnnotationValues(field, result);
-		return result;
-	}
-
-	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
-		JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
-		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
-				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
-		result.setVarArgs(constructor.isVarArgs());
-		enhanceGenericDeclaration(result, constructor);
-		for (Type parameterType : constructor.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType));
-		}
-		createAnnotationValues(constructor, result);
-		return result;
-	}
-
-	public void setVisibility(org.eclipse.xtext.common.types.JvmMember result, int modifiers) {
-		if (Modifier.isPrivate(modifiers))
-			result.setVisibility(JvmVisibility.PRIVATE);
-		else if (Modifier.isProtected(modifiers))
-			result.setVisibility(JvmVisibility.PROTECTED);
-		else if (Modifier.isPublic(modifiers))
-			result.setVisibility(JvmVisibility.PUBLIC);
-		else
-			result.setVisibility(JvmVisibility.DEFAULT);
-	}
-
-	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
-			Annotation[][] annotations) {
-		StringBuilder fqName = new StringBuilder(48);
-		fqName.append(member.getDeclaringClass().getName());
-		fqName.append('.');
-		fqName.append(simpleName);
-		fqName.append('(');
-		for (int i = 0; i < parameterTypes.length; i++) {
-			if (i != 0)
-				fqName.append(',');
-			uriHelper.computeTypeName(parameterTypes[i], fqName);
-		}
-		fqName.append(')');
-		result.internalSetIdentifier(fqName.toString());
-		result.setSimpleName(simpleName);
-		setVisibility(result, member.getModifiers());
-		int i = 0;
-		for (Type parameterType : parameterTypes) {
-			result.getParameters().add(createFormalParameter(parameterType, "p" + i, result, annotations[i]));
-			i++;
-		}
-	}
-
-	public void enhanceGenericDeclaration(JvmExecutable result, GenericDeclaration declaration) {
-		for (TypeVariable<?> variable : declaration.getTypeParameters()) {
-			result.getTypeParameters().add(createTypeParameter(variable, result));
-		}
-	}
-
-	public JvmOperation createOperation(Method method) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(),
-				method.getParameterAnnotations());
-		result.setVarArgs(method.isVarArgs());
-		enhanceGenericDeclaration(result, method);
-		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
-		result.setFinal(Modifier.isFinal(method.getModifiers()));
-		result.setStatic(Modifier.isStatic(method.getModifiers()));
-		result.setReturnType(createTypeReference(method.getGenericReturnType()));
-		for (Type parameterType : method.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType));
-		}
-		createAnnotationValues(method, result);
-		return result;
-	}
-
-	public JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
-			org.eclipse.xtext.common.types.JvmMember container, Annotation[] annotations) {
-		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
-		result.setName(paramName);
-		result.setParameterType(createTypeReference(parameterType));
-		for (Annotation annotation : annotations) {
-			createAnnotationReference(result, annotation);
-		}
-		return result;
+	protected JvmDeclaredType doCreateType(BinaryClass binaryClass) {
+		JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(binaryClass, bytesAccess, classLoader);
+		return builder.buildType();
 	}
 
 }

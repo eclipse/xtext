@@ -11,9 +11,6 @@ package org.eclipse.xtext.util;
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * @param <S1>
- * @param <S2>
- * @param <S3>
  */
 public final class Triple<S1, S2, S3> extends Pair<S1, S2>{
 	

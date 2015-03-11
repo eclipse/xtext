@@ -7,70 +7,70 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractPrefixMatcherTest<Matcher extends PrefixMatcher> extends TestCase {
+public abstract class AbstractPrefixMatcherTest<Matcher extends PrefixMatcher> extends Assert {
 
 	protected Matcher matcher;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		matcher = createMatcher();
 	}
 
 	protected abstract Matcher createMatcher();
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		matcher = null;
-		super.tearDown();
 	}
 	
-	public void testEmptyPrefix() {
+	@Test public void testEmptyPrefix() {
 		assertTrue(matcher.isCandidateMatchingPrefix("name", ""));
 		assertTrue(matcher.isCandidateMatchingPrefix("", ""));
 	}
 	
-	public void testExactMatch() {
+	@Test public void testExactMatch() {
 		assertTrue(matcher.isCandidateMatchingPrefix("", ""));
 		assertTrue(matcher.isCandidateMatchingPrefix("Exact", "Exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("exact", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("eXact", "eXact"));
 	}
 	
-	public void testMisMatch() {
+	@Test public void testMisMatch() {
 		assertFalse(matcher.isCandidateMatchingPrefix("Exact", "Mismatch"));
 		assertFalse(matcher.isCandidateMatchingPrefix("Exact", "ExactMismatch"));
 	}
 	
-	public void testExactPrefix() {
+	@Test public void testExactPrefix() {
 		assertTrue(matcher.isCandidateMatchingPrefix("Match", ""));
 		assertTrue(matcher.isCandidateMatchingPrefix("ExactMatch", "Exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("eXactMatch", "eXact"));
 	}
 	
-	public void testLowerCaseMatch() {
+	@Test public void testLowerCaseMatch() {
 		assertTrue(matcher.isCandidateMatchingPrefix("Exact", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXACT", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("exact", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("eXact", "exact"));
 	}
 	
-	public void testLowerCasePrefix() {
+	@Test public void testLowerCasePrefix() {
 		assertTrue(matcher.isCandidateMatchingPrefix("ExactMatch", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exact"));
 		assertTrue(matcher.isCandidateMatchingPrefix("eXactMatch", "exact"));
 	}
 	
-	public void testUpperCasePrefix() {
+	@Test public void testUpperCasePrefix() {
 		assertTrue(matcher.isCandidateMatchingPrefix("ExactMatch", "EXACT"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXACT"));
 		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "EXACT"));

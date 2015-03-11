@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.backtrackingTestLanguage.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguage
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.AbImpl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.AbImpl#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

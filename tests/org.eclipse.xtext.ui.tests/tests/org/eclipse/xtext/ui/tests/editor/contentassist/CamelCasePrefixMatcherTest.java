@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher.CamelCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,20 +21,18 @@ public class CamelCasePrefixMatcherTest extends AbstractPrefixMatcherTest<Prefix
 		return new PrefixMatcher.CamelCase();
 	}
 
-	public void testCamelCasePrefix() {
+	@Test public void testCamelCasePrefix() {
 		assertTrue(matcher.isCandidateMatchingPrefix("ExactMatch", "ExMa"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXACT"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXM"));
+		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exM"));
+		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXACTm"));
+		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXaCT"));
+		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exMa"));
 	}
 	
-	public void testCamelCaseMisMatch() {
+	@Test public void testCamelCaseMisMatch() {
 		assertFalse(matcher.isCandidateMatchingPrefix("ExactMatch", "EXMa"));
 	}
 	
-	// Fix the implementation to assert the following test cases when inverted
-	public void testFixMe() {
-		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXaCT"));
-		assertFalse(matcher.isCandidateMatchingPrefix("exactMatch", "exM"));
-		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXACTm"));
-	}
 }

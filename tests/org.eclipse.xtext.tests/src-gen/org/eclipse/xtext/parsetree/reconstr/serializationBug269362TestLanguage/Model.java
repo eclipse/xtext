@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.Model#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.Model#getBar <em>Bar</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.SerializationBug269362TestLanguagePackage#getModel()
  * @model

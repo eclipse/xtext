@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalStatemachineLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int T__16=16;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -235,10 +235,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1391:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1391:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1390:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1390:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1391:11: ( '^' )?
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1390:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -247,7 +247,7 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1391:11: '^'
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1390:11: '^'
                     {
                     match('^'); 
 
@@ -265,7 +265,7 @@ public class InternalStatemachineLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1391:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1390:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -314,10 +314,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1393:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1393:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1392:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1392:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1393:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1392:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -331,7 +331,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1393:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1392:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -363,10 +363,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -384,10 +384,10 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -403,23 +403,15 @@ public class InternalStatemachineLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -444,10 +436,10 @@ public class InternalStatemachineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -463,23 +455,15 @@ public class InternalStatemachineLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1395:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1394:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -522,12 +506,12 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1397:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1397:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1396:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1396:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1397:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1396:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -552,7 +536,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1397:52: .
+            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1396:52: .
             	    {
             	    matchAny(); 
 
@@ -582,12 +566,12 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -600,7 +584,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -620,7 +604,7 @@ public class InternalStatemachineLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -629,9 +613,9 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -640,7 +624,7 @@ public class InternalStatemachineLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1399:41: '\\r'
+                            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1398:41: '\\r'
                             {
                             match('\r'); 
 
@@ -672,10 +656,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1401:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1401:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1400:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1400:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1401:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1400:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -729,8 +713,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1403:16: ( . )
-            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1403:18: .
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1402:16: ( . )
+            // ../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/fowlerdsl/ui/contentassist/antlr/internal/InternalStatemachine.g:1402:18: .
             {
             matchAny(); 
 
@@ -869,36 +853,19 @@ public class InternalStatemachineLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\5\23\2\uffff\2\20\2\uffff\3\20\2\uffff\2\23\1\uffff\4\23"+
-        "\10\uffff\1\23\1\47\5\23\1\uffff\7\23\1\64\1\23\1\66\2\23\1\uffff"+
-        "\1\23\1\uffff\2\23\1\74\1\23\1\76\1\uffff\1\23\1\uffff\1\23\1\101"+
-        "\1\uffff";
+        "\1\uffff\5\23\2\uffff\2\20\2\uffff\3\20\2\uffff\2\23\1\uffff\4\23\10\uffff\1\23\1\47\5\23\1\uffff\7\23\1\64\1\23\1\66\2\23\1\uffff\1\23\1\uffff\2\23\1\74\1\23\1\76\1\uffff\1\23\1\uffff\1\23\1\101\1\uffff";
     static final String DFA12_eofS =
         "\102\uffff";
     static final String DFA12_minS =
-        "\1\0\1\156\1\145\1\157\1\164\1\143\2\uffff\1\76\1\101\2\uffff\2"+
-        "\0\1\52\2\uffff\1\145\1\144\1\uffff\1\163\1\155\1\141\1\164\10\uffff"+
-        "\1\156\1\60\1\145\1\155\1\164\1\151\1\164\1\uffff\1\164\1\141\1"+
-        "\145\1\157\1\163\1\105\1\156\1\60\1\156\1\60\1\166\1\144\1\uffff"+
-        "\1\163\1\uffff\1\145\1\163\1\60\1\156\1\60\1\uffff\1\164\1\uffff"+
-        "\1\163\1\60\1\uffff";
+        "\1\0\1\156\1\145\1\157\1\164\1\143\2\uffff\1\76\1\101\2\uffff\2\0\1\52\2\uffff\1\145\1\144\1\uffff\1\163\1\155\1\141\1\164\10\uffff\1\156\1\60\1\145\1\155\1\164\1\151\1\164\1\uffff\1\164\1\141\1\145\1\157\1\163\1\105\1\156\1\60\1\156\1\60\1\166\1\144\1\uffff\1\163\1\uffff\1\145\1\163\1\60\1\156\1\60\1\uffff\1\164\1\uffff\1\163\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\166\1\145\1\157\1\164\1\143\2\uffff\1\76\1\172\2\uffff"+
-        "\2\uffff\1\57\2\uffff\1\145\1\144\1\uffff\1\163\1\155\1\141\1\164"+
-        "\10\uffff\1\156\1\172\1\145\1\155\1\164\1\151\1\164\1\uffff\1\164"+
-        "\1\141\1\145\1\157\1\163\1\105\1\156\1\172\1\156\1\172\1\166\1\144"+
-        "\1\uffff\1\163\1\uffff\1\145\1\163\1\172\1\156\1\172\1\uffff\1\164"+
-        "\1\uffff\1\163\1\172\1\uffff";
+        "\1\uffff\1\166\1\145\1\157\1\164\1\143\2\uffff\1\76\1\172\2\uffff\2\uffff\1\57\2\uffff\1\145\1\144\1\uffff\1\163\1\155\1\141\1\164\10\uffff\1\156\1\172\1\145\1\155\1\164\1\151\1\164\1\uffff\1\164\1\141\1\145\1\157\1\163\1\105\1\156\1\172\1\156\1\172\1\166\1\144\1\uffff\1\163\1\uffff\1\145\1\163\1\172\1\156\1\172\1\uffff\1\164\1\uffff\1\163\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\6\uffff\1\7\1\10\2\uffff\1\12\1\13\3\uffff\1\17\1\20\2\uffff\1"+
-        "\12\4\uffff\1\7\1\10\1\11\1\13\1\14\1\15\1\16\1\17\7\uffff\1\2\14"+
-        "\uffff\1\5\1\uffff\1\1\5\uffff\1\6\1\uffff\1\4\2\uffff\1\3";
+        "\6\uffff\1\7\1\10\2\uffff\1\12\1\13\3\uffff\1\17\1\20\2\uffff\1\12\4\uffff\1\7\1\10\1\11\1\13\1\14\1\15\1\16\1\17\7\uffff\1\2\14\uffff\1\5\1\uffff\1\1\5\uffff\1\6\1\uffff\1\4\2\uffff\1\3";
     static final String DFA12_specialS =
         "\1\1\13\uffff\1\2\1\0\64\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\20\2\17\2\20\1\17\22\20\1\17\1\20\1\14\4\20\1\15\7\20\1"+
-            "\16\12\13\3\20\1\10\3\20\32\12\3\20\1\11\1\12\1\20\1\5\1\12"+
-            "\1\3\1\12\1\1\14\12\1\2\1\4\7\12\1\6\1\20\1\7\uff82\20",
+            "\11\20\2\17\2\20\1\17\22\20\1\17\1\20\1\14\4\20\1\15\7\20\1\16\12\13\3\20\1\10\3\20\32\12\3\20\1\11\1\12\1\20\1\5\1\12\1\3\1\12\1\1\14\12\1\2\1\4\7\12\1\6\1\20\1\7\uff82\20",
             "\1\22\7\uffff\1\21",
             "\1\24",
             "\1\25",

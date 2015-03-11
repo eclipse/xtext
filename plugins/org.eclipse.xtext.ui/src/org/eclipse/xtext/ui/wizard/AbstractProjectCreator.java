@@ -41,6 +41,10 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	@Named("file.extensions")
 	private String fileExtension;
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public IFile getResult() {
 		return result;
 	}
@@ -49,6 +53,10 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 		this.result = result;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void setProjectInfo(IProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;
 	}
@@ -88,6 +96,7 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 		final String expectedExtension = getPrimaryModelFileExtension();
 		final IFile[] result = new IFile[1];
 		srcFolder.accept(new IResourceVisitor() {
+			@Override
 			public boolean visit(IResource resource) throws CoreException {
 				if (IResource.FILE == resource.getType() && expectedExtension.equals(resource.getFileExtension())) {
 					result[0] = (IFile) resource;

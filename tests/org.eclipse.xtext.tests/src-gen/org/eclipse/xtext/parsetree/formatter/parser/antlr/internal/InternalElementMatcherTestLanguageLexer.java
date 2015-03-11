@@ -12,41 +12,41 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalElementMatcherTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
-    public static final int T__12=12;
     public static final int RULE_ID=4;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int T__30=30;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int T__31=31;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__24=24;
-    public static final int T__37=37;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
+    public static final int T__33=33;
+    public static final int T__15=15;
     public static final int T__34=34;
     public static final int T__18=18;
-    public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__17=17;
+    public static final int T__36=36;
+    public static final int T__12=12;
+    public static final int T__37=37;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -752,10 +752,10 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -773,10 +773,10 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -792,23 +792,15 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -833,10 +825,10 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -852,23 +844,15 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalElementMatcherTestLanguage.g:1524:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1384,33 +1368,19 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\27\1\41\1\uffff\2\41\3\uffff\1\41\5\uffff\2\27\2\uffff"+
-        "\3\27\12\uffff\1\41\2\uffff\2\41\3\uffff\1\71\13\uffff\1\72\1\73"+
-        "\1\74\1\77\1\41\4\uffff\1\102\1\103\1\uffff\1\104\1\105\4\uffff";
+        "\1\uffff\1\27\1\41\1\uffff\2\41\3\uffff\1\41\5\uffff\2\27\2\uffff\3\27\12\uffff\1\41\2\uffff\2\41\3\uffff\1\71\13\uffff\1\72\1\73\1\74\1\77\1\41\4\uffff\1\102\1\103\1\uffff\1\104\1\105\4\uffff";
     static final String DFA12_eofS =
         "\106\uffff";
     static final String DFA12_minS =
-        "\1\0\1\61\1\167\1\uffff\1\165\1\163\3\uffff\1\162\5\uffff\1\76\1"+
-        "\101\2\uffff\2\0\1\52\12\uffff\1\61\2\uffff\1\142\1\163\3\uffff"+
-        "\1\60\13\uffff\4\60\1\61\4\uffff\2\60\1\uffff\2\60\4\uffff";
+        "\1\0\1\61\1\167\1\uffff\1\165\1\163\3\uffff\1\162\5\uffff\1\76\1\101\2\uffff\2\0\1\52\12\uffff\1\61\2\uffff\1\142\1\163\3\uffff\1\60\13\uffff\4\60\1\61\4\uffff\2\60\1\uffff\2\60\4\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\70\1\167\1\uffff\1\165\1\163\3\uffff\1\162\5\uffff\1"+
-        "\76\1\172\2\uffff\2\uffff\1\57\12\uffff\1\63\2\uffff\1\142\1\163"+
-        "\3\uffff\1\172\13\uffff\4\172\1\62\4\uffff\2\172\1\uffff\2\172\4"+
-        "\uffff";
+        "\1\uffff\1\70\1\167\1\uffff\1\165\1\163\3\uffff\1\162\5\uffff\1\76\1\172\2\uffff\2\uffff\1\57\12\uffff\1\63\2\uffff\1\142\1\163\3\uffff\1\172\13\uffff\4\172\1\62\4\uffff\2\172\1\uffff\2\172\4\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\3\2\uffff\1\14\1\15\1\16\1\uffff\1\22\1\23\1\24\1\25"+
-        "\1\26\2\uffff\1\34\1\35\3\uffff\1\41\1\42\1\1\1\4\1\10\1\13\1\17"+
-        "\1\21\1\30\1\33\1\uffff\1\34\1\3\2\uffff\1\14\1\15\1\16\1\uffff"+
-        "\1\22\1\23\1\24\1\25\1\26\1\27\1\35\1\36\1\37\1\40\1\41\5\uffff"+
-        "\1\20\1\2\1\31\1\32\2\uffff\1\5\2\uffff\1\11\1\12\1\6\1\7";
+        "\3\uffff\1\3\2\uffff\1\14\1\15\1\16\1\uffff\1\22\1\23\1\24\1\25\1\26\2\uffff\1\34\1\35\3\uffff\1\41\1\42\1\1\1\4\1\10\1\13\1\17\1\21\1\30\1\33\1\uffff\1\34\1\3\2\uffff\1\14\1\15\1\16\1\uffff\1\22\1\23\1\24\1\25\1\26\1\27\1\35\1\36\1\37\1\40\1\41\5\uffff\1\20\1\2\1\31\1\32\2\uffff\1\5\2\uffff\1\11\1\12\1\6\1\7";
     static final String DFA12_specialS =
-        "\1\0\22\uffff\1\1\1\2\61\uffff}>";
+        "\1\1\22\uffff\1\2\1\0\61\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\27\2\26\2\27\1\26\22\27\1\26\1\27\1\23\1\1\3\27\1\24\1\14"+
-            "\1\16\1\13\1\12\1\15\1\27\1\3\1\25\12\22\1\27\1\10\1\27\1\17"+
-            "\3\27\32\21\3\27\1\20\1\21\1\27\1\5\5\21\1\11\3\21\1\2\7\21"+
-            "\1\4\7\21\1\6\1\27\1\7\uff82\27",
+            "\11\27\2\26\2\27\1\26\22\27\1\26\1\27\1\23\1\1\3\27\1\24\1\14\1\16\1\13\1\12\1\15\1\27\1\3\1\25\12\22\1\27\1\10\1\27\1\17\3\27\32\21\3\27\1\20\1\21\1\27\1\5\5\21\1\11\3\21\1\2\7\21\1\4\7\21\1\6\1\27\1\7\uff82\27",
             "\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37",
             "\1\40",
             "",
@@ -1465,8 +1435,7 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
             "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
-            "\2\41\1\75\1\76\6\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32"+
-            "\41",
+            "\2\41\1\75\1\76\6\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\1\100\1\101",
             "",
             "",
@@ -1499,7 +1468,7 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -1520,6 +1489,16 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_20 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_20>='\u0000' && LA12_20<='\uFFFF')) ) {s = 48;}
+
+                        else s = 23;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1571,21 +1550,11 @@ public class InternalElementMatcherTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA12_19 = input.LA(1);
 
                         s = -1;
                         if ( ((LA12_19>='\u0000' && LA12_19<='\uFFFF')) ) {s = 48;}
-
-                        else s = 23;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_20 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_20>='\u0000' && LA12_20<='\uFFFF')) ) {s = 48;}
 
                         else s = 23;
 

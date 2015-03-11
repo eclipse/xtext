@@ -5,7 +5,8 @@ package org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist;
 
 import org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.AbstractOutlineTestLanguageProposalProvider;
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class OutlineTestLanguageProposalProvider extends AbstractOutlineTestLanguageProposalProvider {
 

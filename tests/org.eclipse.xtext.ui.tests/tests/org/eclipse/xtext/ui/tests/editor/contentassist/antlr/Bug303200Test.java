@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
 import java.util.Collection;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageStan
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug303200TestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.Bug303200TestLanguageParser;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -29,7 +30,7 @@ import com.google.inject.Injector;
 public class Bug303200Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new Bug303200TestLanguageStandaloneSetup() {
 			@Override
@@ -41,13 +42,13 @@ public class Bug303200Test extends AbstractXtextTests {
 		});
 	}
 	
-	public void testBug303200_01() throws Exception {
+	@Test public void testBug303200_01() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
 		Collection<FollowElement> followElements = parser.getFollowElements("function f() {", false);
 		assertEquals(4, followElements.size());
 	}
 	
-	public void testBug303200_02() throws Exception {
+	@Test public void testBug303200_02() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
 		Collection<FollowElement> elements = parser.getFollowElements("function f() {", false);
 		for (FollowElement element: elements) {
@@ -55,7 +56,7 @@ public class Bug303200Test extends AbstractXtextTests {
 		}
 	}
 	
-	public void testBug303200_03() throws Exception {
+	@Test public void testBug303200_03() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
 		Collection<FollowElement> followElements = Lists.newArrayList(parser.getFollowElements("function f() {} function f() {", false));
 		assertEquals(4, followElements.size());

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -23,10 +20,10 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SecondConcrete;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SecondConcreteImpl#getReferencedChildren <em>Referenced Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

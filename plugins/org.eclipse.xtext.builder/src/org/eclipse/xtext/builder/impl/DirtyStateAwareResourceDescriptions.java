@@ -19,9 +19,11 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
@@ -34,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions {
+public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions, IShadowedResourceDescriptions {
 
 	private final IDirtyStateManager dirtyStateManager;
 	private final IBuilderState globalDescriptions;
@@ -60,8 +62,13 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	}
 	
 	public void dirtyDescriptionsChanged(IResourceDescription.Event event) {
+		if (event instanceof CoarseGrainedChangeEvent) {
+			notifyListeners(event);
+			return;
+		}
 		ResourceDescriptionChangeEvent changeEvent = new ResourceDescriptionChangeEvent(
 				Iterables.transform(event.getDeltas(), new Function<IResourceDescription.Delta, IResourceDescription.Delta>() {
+					@Override
 					public IResourceDescription.Delta apply(IResourceDescription.Delta from) {
 						IResourceDescription.Delta result = from;
 						if (from.getNew() == null) {
@@ -71,7 +78,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 						}
 						return result;
 					}
-				}), this);
+				}));
 		notifyListeners(changeEvent);
 	}
 	
@@ -82,16 +89,18 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	public void globalDescriptionsChanged(IResourceDescription.Event event) {
 		ResourceDescriptionChangeEvent changeEvent = new ResourceDescriptionChangeEvent(
 				Iterables.filter(event.getDeltas(), new Predicate<IResourceDescription.Delta>() {
+					@Override
 					public boolean apply(Delta input) {
 						URI uri = input.getUri();
 						return !dirtyStateManager.hasContent(uri);
 					}
-				}), this);
+				}));
 		notifyListeners(changeEvent);
 	}
 
 	protected class DirtyStateListener implements IResourceDescription.Event.Listener {
 
+		@Override
 		public void descriptionsChanged(IResourceDescription.Event event) {
 			dirtyDescriptionsChanged(event);
 		}
@@ -100,14 +109,17 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	
 	protected class GlobalStateListener implements IResourceDescription.Event.Listener {
 
+		@Override
 		public void descriptionsChanged(IResourceDescription.Event event) {
 			globalDescriptionsChanged(event);
 		}
 		
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Iterables.transform(globalDescriptions.getAllResourceDescriptions(), new Function<IResourceDescription, IResourceDescription>() {
+			@Override
 			public IResourceDescription apply(IResourceDescription from) {
 				IResourceDescription dirty = dirtyStateManager.getDirtyResourceDescription(from.getURI());
 				if (dirty != null)
@@ -117,6 +129,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		});
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		IResourceDescription result = dirtyStateManager.getDirtyResourceDescription(uri);
 		if (result == null)
@@ -124,12 +137,15 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		return result;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return globalDescriptions.isEmpty();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Iterables.concat(Iterables.transform(getAllResourceDescriptions(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjects();
@@ -138,6 +154,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		}));
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		Iterable<IEObjectDescription> dirtyDescriptions = dirtyStateManager.getExportedObjects(type, name, ignoreCase);
 		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjects(type, name, ignoreCase);
@@ -147,6 +164,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	protected Iterable<IEObjectDescription> joinIterables(Iterable<IEObjectDescription> dirtyDescriptions,
 			Iterable<IEObjectDescription> persistentDescriptions) {
 		Iterable<IEObjectDescription> filteredPersistent = Iterables.filter(persistentDescriptions, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				URI resourceURI = input.getEObjectURI().trimFragment();
 				if (dirtyStateManager.hasContent(resourceURI))
@@ -157,16 +175,29 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		return Iterables.concat(dirtyDescriptions, filteredPersistent);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		Iterable<IEObjectDescription> dirtyDescriptions = dirtyStateManager.getExportedObjectsByType(type);
 		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjectsByType(type);
 		return joinIterables(dirtyDescriptions, persistentDescriptions);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		if (dirtyStateManager.hasContent(resourceURI))
 			return dirtyStateManager.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);
+	}
+
+	@Override
+	public boolean isShadowed(EClass type, QualifiedName name, boolean ignoreCase) {
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjects(type, name, ignoreCase);
+		for (IEObjectDescription desc : persistentDescriptions) {
+			if (dirtyStateManager.hasContent(desc.getEObjectURI().trimFragment())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

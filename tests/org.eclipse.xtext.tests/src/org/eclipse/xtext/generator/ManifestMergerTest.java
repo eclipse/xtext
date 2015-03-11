@@ -16,18 +16,19 @@ import java.util.LinkedHashSet;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import junit.framework.TestCase;
-
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Wrapper;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class ManifestMergerTest extends TestCase {
+public class ManifestMergerTest extends Assert {
 
-	public void testMergeRequiredBundles() throws Exception {
+	@Test public void testMergeRequiredBundles() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
@@ -38,7 +39,7 @@ public class ManifestMergerTest extends TestCase {
 		assertEquals(before + ",foo.bar.baz", after.replaceAll("\\s",""));
 	}
 
-	public void testMergeExportedPackages() throws Exception {
+	@Test public void testMergeExportedPackages() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
@@ -54,7 +55,7 @@ public class ManifestMergerTest extends TestCase {
 		assertFalse(manifest.isModified());
 	}
 
-	public void testNoLongLine() throws Exception {
+	@Test public void testNoLongLine() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
@@ -72,7 +73,7 @@ public class ManifestMergerTest extends TestCase {
 		assertEquals(result, ' ', result.charAt(idx + 2));
 	}
 
-	public void testSplit512Length() throws Exception {
+	@Test public void testSplit512Length() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
@@ -90,7 +91,7 @@ public class ManifestMergerTest extends TestCase {
 		}
 	}
 
-	public void testNoChanges() throws Exception {
+	@Test public void testNoChanges() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
@@ -101,7 +102,7 @@ public class ManifestMergerTest extends TestCase {
 		assertEquals(before + ",foo.bar.baz", after.replaceAll("\\s",""));
 	}
 
-	public void testMergeIntoCommaSeparatedList() throws Exception {
+	@Test public void testMergeIntoCommaSeparatedList() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo");
 		toMerge.add("bar");
@@ -122,7 +123,7 @@ public class ManifestMergerTest extends TestCase {
 		return s==null?null:s.replaceAll("\\s", "");
 	}
 
-	public void testMergeIntoCommaSeparatedListWithParams() throws Exception {
+	@Test public void testMergeIntoCommaSeparatedListWithParams() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo");
 		toMerge.add("bar");
@@ -134,7 +135,7 @@ public class ManifestMergerTest extends TestCase {
 				"bar;special=foo ,    x", toMerge, Wrapper.wrap(false))));
 	}
 	
-	public void testMergeIntoCommaSeparatedListWithCommaSeparatedParams() throws Exception {
+	@Test public void testMergeIntoCommaSeparatedListWithCommaSeparatedParams() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo");
 		toMerge.add("bar");
@@ -144,18 +145,25 @@ public class ManifestMergerTest extends TestCase {
 				"bar;x-friends=\"xxx,foo,bar,zzz\"", toMerge, Wrapper.wrap(false))));
 	}
 
-	public void testMergeIntoCommaSeparatedListInvalidParam() throws Exception {
+	@Test public void testMergeIntoCommaSeparatedListValidParam() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo;foo=version");
-		toMerge.add("bar");
-		toMerge.add("baz");
-		try {
-			assertEquals("bar;version=\"0.7.0\",foo,baz", MergeableManifest.mergeIntoCommaSeparatedList(
-					"bar;version=\"0.7.0\"", toMerge, Wrapper.wrap(false)));
-			fail("Exception expected");
-		} catch (IllegalArgumentException e) {
-			// expected
-		}
+		assertEquals("bar,foo;foo=version", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"bar", toMerge, Wrapper.wrap(false))));
+	}
+
+	@Test public void testMergeIntoCommaSeparatedListSkipWhenParamExists() throws Exception {
+		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
+		toMerge.add("foo;foo=other");
+		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"foo;version=\"0.7.0\"", toMerge, Wrapper.wrap(false))));
+	}
+
+	@Test public void testMergeIntoCommaSeparatedListAddParam() throws Exception {
+		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
+		toMerge.add("foo;version=\"0.7.0\"");
+		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"foo", toMerge, Wrapper.wrap(false))));
 	}
 
 }

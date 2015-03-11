@@ -12,36 +12,36 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__12=12;
     public static final int RULE_ID=4;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int T__30=30;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int T__31=31;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__24=24;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -649,10 +649,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -670,10 +670,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -689,23 +689,15 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -730,10 +722,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -749,23 +741,15 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:903:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1246,42 +1230,19 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\23\1\35\2\uffff\7\35\1\23\2\uffff\3\23\12\uffff\1\35"+
-        "\3\uffff\7\35\5\uffff\1\66\1\35\1\70\6\35\1\101\1\uffff\1\35\1\uffff"+
-        "\1\103\3\35\1\107\1\110\2\35\1\uffff\1\35\1\uffff\1\35\1\115\1\35"+
-        "\2\uffff\1\117\3\35\1\uffff\1\35\1\uffff\1\124\3\35\1\uffff\1\35"+
-        "\1\131\1\132\1\133\3\uffff";
+        "\1\uffff\1\23\1\35\2\uffff\7\35\1\23\2\uffff\3\23\12\uffff\1\35\3\uffff\7\35\5\uffff\1\66\1\35\1\70\6\35\1\101\1\uffff\1\35\1\uffff\1\103\3\35\1\107\1\110\2\35\1\uffff\1\35\1\uffff\1\35\1\115\1\35\2\uffff\1\117\3\35\1\uffff\1\35\1\uffff\1\124\3\35\1\uffff\1\35\1\131\1\132\1\133\3\uffff";
     static final String DFA12_eofS =
         "\134\uffff";
     static final String DFA12_minS =
-        "\1\0\1\61\1\145\2\uffff\1\167\1\164\1\154\1\156\1\165\1\162\1\142"+
-        "\1\101\2\uffff\2\0\1\52\12\uffff\1\146\3\uffff\1\61\1\145\1\141"+
-        "\1\144\1\142\1\162\1\152\5\uffff\1\60\1\165\1\60\1\155\1\163\1\143"+
-        "\1\61\1\141\1\145\1\60\1\uffff\1\154\1\uffff\1\60\1\141\1\163\1"+
-        "\154\2\60\1\171\1\143\1\uffff\1\164\1\uffff\1\164\1\60\1\141\2\uffff"+
-        "\1\60\1\164\1\123\1\157\1\uffff\1\163\1\uffff\1\60\1\145\1\162\1"+
-        "\163\1\uffff\1\164\3\60\3\uffff";
+        "\1\0\1\61\1\145\2\uffff\1\167\1\164\1\154\1\156\1\165\1\162\1\142\1\101\2\uffff\2\0\1\52\12\uffff\1\146\3\uffff\1\61\1\145\1\141\1\144\1\142\1\162\1\152\5\uffff\1\60\1\165\1\60\1\155\1\163\1\143\1\61\1\141\1\145\1\60\1\uffff\1\154\1\uffff\1\60\1\141\1\163\1\154\2\60\1\171\1\143\1\uffff\1\164\1\uffff\1\164\1\60\1\141\2\uffff\1\60\1\164\1\123\1\157\1\uffff\1\163\1\uffff\1\60\1\145\1\162\1\163\1\uffff\1\164\3\60\3\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\70\1\145\2\uffff\1\167\1\164\1\154\1\156\1\165\1\162"+
-        "\1\142\1\172\2\uffff\2\uffff\1\57\12\uffff\1\163\3\uffff\1\61\1"+
-        "\145\1\141\1\144\1\142\1\162\1\152\5\uffff\1\172\1\165\1\172\1\162"+
-        "\1\163\1\143\1\62\1\141\1\145\1\172\1\uffff\1\154\1\uffff\1\172"+
-        "\1\141\1\163\1\154\2\172\1\171\1\143\1\uffff\1\164\1\uffff\1\164"+
-        "\1\172\1\141\2\uffff\1\172\1\164\1\123\1\157\1\uffff\1\163\1\uffff"+
-        "\1\172\1\145\1\162\1\163\1\uffff\1\164\3\172\3\uffff";
+        "\1\uffff\1\70\1\145\2\uffff\1\167\1\164\1\154\1\156\1\165\1\162\1\142\1\172\2\uffff\2\uffff\1\57\12\uffff\1\163\3\uffff\1\61\1\145\1\141\1\144\1\142\1\162\1\152\5\uffff\1\172\1\165\1\172\1\162\1\163\1\143\1\62\1\141\1\145\1\172\1\uffff\1\154\1\uffff\1\172\1\141\1\163\1\154\2\172\1\171\1\143\1\uffff\1\164\1\uffff\1\164\1\172\1\141\2\uffff\1\172\1\164\1\123\1\157\1\uffff\1\163\1\uffff\1\172\1\145\1\162\1\163\1\uffff\1\164\3\172\3\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\3\1\4\10\uffff\1\27\1\30\3\uffff\1\34\1\35\1\1\1\5\1"+
-        "\7\1\11\1\12\1\14\1\15\1\20\1\uffff\1\27\1\3\1\4\7\uffff\1\30\1"+
-        "\31\1\32\1\33\1\34\12\uffff\1\2\1\uffff\1\6\10\uffff\1\13\1\uffff"+
-        "\1\10\3\uffff\1\21\1\22\4\uffff\1\16\1\uffff\1\23\4\uffff\1\24\4"+
-        "\uffff\1\26\1\17\1\25";
+        "\3\uffff\1\3\1\4\10\uffff\1\27\1\30\3\uffff\1\34\1\35\1\1\1\5\1\7\1\11\1\12\1\14\1\15\1\20\1\uffff\1\27\1\3\1\4\7\uffff\1\30\1\31\1\32\1\33\1\34\12\uffff\1\2\1\uffff\1\6\10\uffff\1\13\1\uffff\1\10\3\uffff\1\21\1\22\4\uffff\1\16\1\uffff\1\23\4\uffff\1\24\4\uffff\1\26\1\17\1\25";
     static final String DFA12_specialS =
-        "\1\2\16\uffff\1\0\1\1\113\uffff}>";
+        "\1\1\16\uffff\1\0\1\2\113\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\23\2\22\2\23\1\22\22\23\1\22\1\23\1\17\1\1\3\23\1\20\6\23"+
-            "\1\4\1\21\12\16\1\23\1\3\5\23\32\15\3\23\1\14\1\15\1\23\1\12"+
-            "\1\15\1\7\1\15\1\10\3\15\1\6\1\15\1\5\3\15\1\13\2\15\1\2\1\11"+
-            "\7\15\uff85\23",
+            "\11\23\2\22\2\23\1\22\22\23\1\22\1\23\1\17\1\1\3\23\1\20\6\23\1\4\1\21\12\16\1\23\1\3\5\23\32\15\3\23\1\14\1\15\1\23\1\12\1\15\1\7\1\15\1\10\3\15\1\6\1\15\1\5\3\15\1\13\2\15\1\2\1\11\7\15\uff85\23",
             "\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33",
             "\1\34",
             "",
@@ -1391,7 +1352,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -1422,16 +1383,6 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_16 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_16>='\u0000' && LA12_16<='\uFFFF')) ) {s = 40;}
-
-                        else s = 19;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1472,6 +1423,16 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 18;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||LA12_0==':'||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 19;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_16 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_16>='\u0000' && LA12_16<='\uFFFF')) ) {s = 40;}
+
+                        else s = 19;
 
                         if ( s>=0 ) return s;
                         break;

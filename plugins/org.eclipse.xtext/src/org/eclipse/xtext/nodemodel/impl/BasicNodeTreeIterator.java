@@ -31,6 +31,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		this.root = root;
 	}
 
+	@Override
 	public boolean hasNext() {
 		if (nextComputed)
 			return next != null;
@@ -41,21 +42,18 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		} else if (lastReturned != root && lastReturned.basicHasNextSibling()) {
 			next = lastReturned.basicGetNextSibling();
 		} else if (lastReturned != root) {
-			CompositeNode parent = lastReturned.basicGetParent();
-			while (next == null && parent != root && parent.basicGetParent() != null) {
-				if (parent.basicHasNextSibling()) {
+			for (CompositeNode parent = lastReturned.basicGetParent(); next == null && parent != root; parent = parent.basicGetParent()) {
+				if (parent.basicHasNextSibling())
 					next = parent.basicGetNextSibling();
-				} else {
-					parent = parent.basicGetParent();
-				}
 			}
 		}
 		nextComputed = true;
 		return next != null;
 	}
 
+	@Override
 	public AbstractNode next() {
-		if (!hasNext())
+		if (next == null && !hasNext())
 			throw new NoSuchElementException();
 		lastReturned = next;
 		afterAdvance();
@@ -70,6 +68,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		pruned = false;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		if (previousComputed)
 			return previous != null;
@@ -80,27 +79,25 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		} else if (lastReturned != root && lastReturned.basicHasPreviousSibling()) {
 			previous = lastReturned.basicGetPreviousSibling();
 		} else if (lastReturned != root) {
-			CompositeNode parent = lastReturned.basicGetParent();
-			while (previous == null && parent != root && parent.basicGetParent() != null) {
-				if (parent.basicHasPreviousSibling()) {
+			for (CompositeNode parent = lastReturned.basicGetParent(); previous == null && parent != root; parent = parent.basicGetParent()) {
+				if (parent.basicHasPreviousSibling())
 					previous = parent.basicGetPreviousSibling();
-				} else {
-					parent = parent.basicGetParent();
-				}
 			}
 		}
 		previousComputed = true;
 		return previous != null;
 	}
 
+	@Override
 	public AbstractNode previous() {
-		if (!hasPrevious())
+		if (previous == null && !hasPrevious())
 			throw new NoSuchElementException();
 		lastReturned = previous;
 		afterAdvance();
 		return lastReturned;
 	}
 	
+	@Override
 	public void prune() {
 		if (lastReturned == null)
 			throw new IllegalStateException("Cannot prune before #next or #previous");

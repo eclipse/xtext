@@ -19,10 +19,13 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public interface IParseResult {
 
+	/* @Nullable */
     EObject getRootASTElement();
 
+	/* @NonNull */
     ICompositeNode getRootNode();
     
+    /* @NonNull */
     Iterable<INode> getSyntaxErrors();
     
     boolean hasSyntaxErrors();

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.impl.ModelImpl#getExisting <em>Existing</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.impl.ModelImpl#getGenerated <em>Generated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

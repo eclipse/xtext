@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Helios" buildRoot="./Helios/" packedStrategy="SKIP">
+  <validationSets description="Helios TP" label="Helios">
+    <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
+    <contributions label="Helios">
+      <repositories location="http://download.eclipse.org/eclipse/updates/3.6/">
+        <bundles name="org.eclipse.pde.core" versionRange="[3.6.2,3.7.0)"/>
+        <bundles name="org.eclipse.pde.ui" versionRange="[3.6.1.v20110210_r362,3.7.0)"/>
+        <bundles name="org.eclipse.ui.cheatsheets"/>
+        <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
+        <bundles name="org.eclipse.pde.junit.runtime"/>
+        <features name="org.eclipse.jdt.feature.group" versionRange="[3.6.0,3.7.0)"/>
+        <features name="org.eclipse.platform.feature.group" versionRange="[3.6.0,3.7.0)"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/releases/helios">
+        <bundles name="org.eclipse.draw2d.feature.group"/>
+        <features name="org.eclipse.emf.compare.feature.group"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
+        <bundles name="org.eclipse.jdt.annotation"/>
+        <bundles name="org.junit4" versionRange="[4.8.1.v20120523-1257]"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4/1.4.1.20140328-1905/">
+        <bundles name="org.eclipse.m2e.core"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
+</aggregator:Aggregation>

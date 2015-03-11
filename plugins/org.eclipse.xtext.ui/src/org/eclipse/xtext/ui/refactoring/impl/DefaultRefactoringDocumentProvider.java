@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.DocumentChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IEditorPart;
@@ -29,16 +30,20 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
 
 /**
+ * Unifies the creation of {@link Change}s from {@link TextEdit}s on {@link IFile}s and {@link IDocument}s.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider {
+public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider, IChangeRedirector.Aware {
 
-	@Inject
+	@Inject(optional = true)
 	private IWorkbench workbench;
 
 	@Inject
@@ -47,43 +52,71 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
-	protected IFileEditorInput getEditorInput(URI resourceURI, RefactoringStatus status) {
-		try {
-			IFile file = projectUtil.findFileStorage(resourceURI, true);
-			return new FileEditorInput(file);
-		} catch (IllegalArgumentException e) {
-			status.addError("No suitable storage found for resource " + resourceURI.toString());
+	@Inject
+	private RefactoringPreferences preferences;
+	
+	private IChangeRedirector changeRedirector = IChangeRedirector.NULL;
+	
+	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
+		IFile file = projectUtil.findFileStorage(resourceURI, true);
+		if (file == null) {
+			status.add(ERROR, "No suitable storage found for resource {0}.", resourceURI);
 			return null;
 		}
+		return new FileEditorInput(file);
 	}
 
-	public IRefactoringDocument get(URI uri, final RefactoringStatus status) {
+	@Override
+	public IRefactoringDocument get(URI uri, final StatusWrapper status) {
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
-			IDocument openDocument = new DisplayRunnableWithResult<IDocument>() {
-				@Override
-				protected IDocument run() throws Exception {
-					IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-					IEditorPart editor = activePage.findEditor(fileEditorInput);
-					if (editor instanceof ITextEditor) {
-						if (editor instanceof ITextEditorExtension
-								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
-							status.addError("Editor " + fileEditorInput.getName() + " is read only");
-						return ((ITextEditor) editor).getDocumentProvider().getDocument(fileEditorInput);
+			IFile file = fileEditorInput.getFile();
+			IPath redirectedPath = changeRedirector.getRedirectedPath(file.getFullPath());
+			IFile redirectedFile = file.getWorkspace().getRoot().getFile(redirectedPath);
+			if(redirectedFile.equals(file)) {
+				ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
+					@Override
+					protected ITextEditor run() throws Exception {
+						IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+						IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+						IEditorPart editor = activePage.findEditor(fileEditorInput);
+						if (editor instanceof ITextEditor) {
+							if (editor instanceof ITextEditorExtension
+									&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
+								status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
+							return ((ITextEditor) editor);
+						}
+						return null;
 					}
-					return null;
+				}.syncExec();
+				if (editor != null) {
+					IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
+					if (document != null)
+						return new EditorDocument(resourceURI, editor, document, 
+							preferences.isSaveAllBeforeRefactoring() || !editor.isDirty());
 				}
-			}.syncExec();
-			if (openDocument != null) {
-				return new EditorDocument(resourceURI, openDocument);
+				return new FileDocument(resourceURI, file, getEncodingProvider(resourceURI));
 			} else {
-				return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
-						resourceURI, IEncodingProvider.class));
+				return new RedirectedFileDocument(resourceURI, file, redirectedFile, getEncodingProvider(resourceURI));
 			}
 		}
 		return null;
+	}
+
+	protected IEncodingProvider getEncodingProvider(URI resourceURI) {
+		return globalServiceProvider.findService(
+				resourceURI, IEncodingProvider.class);
+	}
+
+	@Override
+	public IChangeRedirector getChangeRedirector() {
+		return changeRedirector;
+	}
+	
+	@Override
+	public void setChangeRedirector(IChangeRedirector changeRedirector) {
+		this.changeRedirector  = changeRedirector;
 	}
 
 	public static abstract class AbstractRefactoringDocument implements IRefactoringDocument {
@@ -93,8 +126,10 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			this.resourceURI = resourceURI;
 		}
 
+		@Override
 		public abstract Change createChange(String name, TextEdit textEdit);
 
+		@Override
 		public URI getURI() {
 			return resourceURI;
 		}
@@ -113,22 +148,36 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	public static class EditorDocument extends AbstractRefactoringDocument {
 
 		private IDocument document;
+		
+		private ITextEditor editor;
 
-		public EditorDocument(URI resourceURI, IDocument document) {
+		private boolean doSave;
+
+		public EditorDocument(URI resourceURI, ITextEditor editor, IDocument document, boolean doSave) {
 			super(resourceURI);
+			this.editor = editor;
 			this.document = document;
+			this.doSave = doSave;
+		}
+
+		public ITextEditor getEditor() {
+			return editor;
 		}
 
 		public IDocument getDocument() {
 			return document;
 		}
+		
+		public boolean isDoSave() {
+			return doSave;
+		}
 
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
-			DocumentChange documentChange = new DocumentChange(getName(), document);
+			EditorDocumentChange documentChange = new EditorDocumentChange(getName(), editor, doSave);
 			documentChange.setEdit(textEdit);
 			documentChange.setTextType(getURI().fileExtension());
-			return new DisplayChangeWrapper(documentChange);
+			return documentChange;
 		}
 
 		protected String getName() {
@@ -142,6 +191,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return buffer.toString();
 		}
 
+		@Override
 		public String getOriginalContents() {
 			return document.get();
 		}
@@ -171,6 +221,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return textFileChange;
 		}
 
+		@Override
 		public String getOriginalContents() {
 			try {
 				InputStream inputStream = file.getContents();
@@ -180,8 +231,8 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 					InputStreamReader input = new InputStreamReader(inputStream, charset);
 					final char[] buffer = new char[4096];
 					StringBuilder output = new StringBuilder(4096);
-					int read; 
-					while((read = input.read(buffer, 0, buffer.length)) != -1) {
+					int read;
+					while ((read = input.read(buffer, 0, buffer.length)) != -1) {
 						output.append(buffer, 0, read);
 					}
 					return output.toString();
@@ -194,4 +245,25 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		}
 
 	}
+	
+	public static class RedirectedFileDocument extends FileDocument {
+
+		private IFile redirectedFile;
+
+		public RedirectedFileDocument(URI resourceURI, IFile file, IFile redirectedFile, 
+				IEncodingProvider encodingProvider) {
+			super(resourceURI, file, encodingProvider);
+			this.redirectedFile = redirectedFile;
+		}
+		
+		@Override
+		public Change createChange(String name, TextEdit textEdit) {
+			TextFileChange textFileChange = new TextFileChange(name, redirectedFile);
+			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
+			textFileChange.setEdit(textEdit);
+			textFileChange.setTextType(getURI().fileExtension());
+			return textFileChange;
+		}
+	}
+
 }

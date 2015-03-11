@@ -57,38 +57,47 @@ public abstract class AbstractParserConfiguration implements
 		this.backtracker = configuration.getBacktracker();
 	}
 
+	@Override
 	public ICharSequenceWithOffset getInput() {
 		return input;
 	}
 
+	@Override
 	public IMarkerFactory getMarkerFactory() {
 		return markerFactory;
 	}
 
+	@Override
 	public IParsedTokenAcceptor getTokenAcceptor() {
 		return tokenAcceptor;
 	}
 
+	@Override
 	public IHiddenTokenHandler getHiddenTokenHandler() {
 		return hiddenTokenHandler;
 	}
 
+	@Override
 	public IConsumerUtility getConsumerUtil() {
 		return consumerUtil;
 	}
 
+	@Override
 	public IBacktracker getBacktracker() {
 		return backtracker;
 	}
 
+	@Override
 	public KeywordConsumer createKeywordConsumer() {
 		return new KeywordConsumer(this);
 	}
 
+	@Override
 	public EnumLiteralConsumer createLiteralConsumer() {
 		return new EnumLiteralConsumer(this);
 	}
 
+	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
 		return EMPTY_HIDDENS;
 	}

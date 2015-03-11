@@ -11,14 +11,14 @@
 
 «IMPORT org::eclipse::xtext»
 
-«DEFINE generate FOR Grammar-»
-«EXPAND GrammarAccess::root-»
+«DEFINE generate(String lineDelimiter) FOR Grammar-»
+«EXPAND GrammarAccess::root(lineDelimiter)-»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String lineDelimiter) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String lineDelimiter) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String lineDelimiter) FOR Grammar»«ENDDEFINE»
 
 

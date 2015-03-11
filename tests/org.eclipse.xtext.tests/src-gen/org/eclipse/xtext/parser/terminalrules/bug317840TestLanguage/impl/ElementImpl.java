@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl;
 
@@ -31,13 +28,13 @@ import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Named;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.ElementImpl#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.ElementImpl#getSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.ElementImpl#getThird <em>Third</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.ElementImpl#getForth <em>Forth</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

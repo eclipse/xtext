@@ -13,21 +13,28 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.MockableSelectionProvider instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class MockableSelectionProvider implements ISelectionProvider {
 
+	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ISelection getSelection() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setSelection(ISelection selection) {
 		throw new UnsupportedOperationException();
 	}

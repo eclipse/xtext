@@ -12,14 +12,16 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 
 import com.google.inject.Inject;
 
 /**
+ * Serialize an EMF resource and delivers the resulting text as an {@link TextEdit} that replaces the old content.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
- * @since 2.0
  */
 public class EmfResourceChangeUtil {
 
@@ -31,8 +33,8 @@ public class EmfResourceChangeUtil {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
 		String newContent = new String(outputStream.toByteArray(), encodingProvider.getEncoding(resource.getURI()));
-		updateAcceptor.accept(resource.getURI(), new ReplaceEdit(0, document.getOriginalContents().length(),
-				newContent));
+		updateAcceptor.accept(resource.getURI(),
+				new ReplaceEdit(0, document.getOriginalContents().length(), newContent));
 	}
 
 }

@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist;
 
+import java.util.List;
+
+import org.eclipse.xtext.util.Strings;
+
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -34,10 +38,12 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 	
 	public static class DefaultLastSegmentFinder implements LastSegmentFinder {
 
+		@Override
 		public String getLastSegment(String fqn, char delimiter) {
 			if (fqn == null || fqn.length() == 0)
 				return null;
 			boolean lookForUppercase = true;
+			int lastDelimiterIndex = -1;
 			for(int i = 0; i < fqn.length(); i++) {
 				if (lookForUppercase) {
 					if (Character.isUpperCase(fqn.charAt(i))) {
@@ -45,7 +51,11 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 					}
 				} 
 				lookForUppercase = delimiter == fqn.charAt(i);
+				if (lookForUppercase)
+					lastDelimiterIndex = i;
 			}
+			if (lastDelimiterIndex>=0 && lastDelimiterIndex < fqn.length() - 1)
+				return fqn.substring(lastDelimiterIndex + 1);
 			return null;
 		}
 		
@@ -63,15 +73,15 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 				if (lastSegment != null && delegate.isCandidateMatchingPrefix(lastSegment, prefix))
 					return true;
 			} else {
-				String[] splitPrefix = prefix.split("\\.");
-				String[] splitName = name.split("\\.", splitPrefix.length);
-				if (splitName.length < splitPrefix.length) {
+				List<String> splitPrefix = Strings.split(prefix, '.');
+				if (splitPrefix.isEmpty())
+					return false;
+				List<String> splitName = Strings.split(name, '.');
+				if (splitName.size() < splitPrefix.size()) {
 					return false;
 				}
-				if (splitPrefix.length == 0)
-					return false;
-				for(int i = 0; i < splitPrefix.length ; i++) {
-					if (!delegate.isCandidateMatchingPrefix(splitName[i], splitPrefix[i]))
+				for(int i = 0; i < splitPrefix.size() ; i++) {
+					if (!delegate.isCandidateMatchingPrefix(splitName.get(i), splitPrefix.get(i)))
 						return false;
 				}
 				return true;

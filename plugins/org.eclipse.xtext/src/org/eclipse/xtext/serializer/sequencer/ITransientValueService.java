@@ -33,9 +33,9 @@ public interface ITransientValueService {
 		NO, PREFERABLY, YES
 	}
 
-	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature);
+	public ListTransient isListTransient(EObject semanticObject, EStructuralFeature feature);
 
-	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature);
+	public boolean isValueInListTransient(EObject semanticObject, int index, EStructuralFeature feature);
 
-	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature);
+	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature);
 }

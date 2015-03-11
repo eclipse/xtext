@@ -21,16 +21,16 @@
 
 «DEFINE file(String grammarFileName) FOR Grammar»
 «FILE getAntlrTokenFileProviderClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getAntlrTokenFileProviderClassName().toJavaPackage()»;
 
+«annotationImports()-»
 import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
-public class «getAntlrTokenFileProviderClassName().toSimpleName()» implements IAntlrTokenFileProvider {
+«classAnnotations()»public class «getAntlrTokenFileProviderClassName().toSimpleName()» implements IAntlrTokenFileProvider {
 	
+	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
     	return classLoader.getResourceAsStream("«grammarFileName.asPath()».tokens");

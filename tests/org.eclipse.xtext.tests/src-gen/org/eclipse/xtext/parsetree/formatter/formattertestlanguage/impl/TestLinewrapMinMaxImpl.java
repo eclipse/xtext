@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
@@ -27,10 +24,10 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapM
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl#getItems <em>Items</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

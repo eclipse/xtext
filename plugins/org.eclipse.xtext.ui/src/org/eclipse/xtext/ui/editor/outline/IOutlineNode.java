@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 
@@ -44,4 +46,16 @@ public interface IOutlineNode extends IAdaptable, IReadAccess<EObject> {
 	 */
 	ITextRegion getSignificantTextRegion();
 
+	/**
+	 * Allows to use {@link ImageDescriptor}s instead of {@link Image}s. This enables 
+	 * calculating the outline nodes in a background thread. 
+	 * 
+	 * @author Jan Koehnlein - Initial contribution and API
+	 * @since 2.4
+	 * @see BackgroundOutlineTreeProvider
+	 */
+	public interface Extension {
+
+		ImageDescriptor getImageDescriptor();
+	}
 }

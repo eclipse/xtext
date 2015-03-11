@@ -41,6 +41,7 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 		return action;
 	}
 	
+	@Override
 	public void contributeActions(XtextEditor editor) {
 		OccurrenceMarker occurrenceMarker = editor2marker.get(editor);
 		if(occurrenceMarker == null) {
@@ -55,6 +56,7 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 		}
 	}
 
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 		OccurrenceMarker occurrenceMarker = editor2marker.get(editor);
 		if(occurrenceMarker != null) {

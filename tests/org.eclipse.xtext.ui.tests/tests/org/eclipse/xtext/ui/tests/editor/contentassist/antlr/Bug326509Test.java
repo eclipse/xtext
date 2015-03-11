@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.BitSet;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Bug326509Test extends TestCase {
+public class Bug326509Test extends Assert {
 
 	public static class TestableParser extends AbstractInternalContentAssistParser {
 
@@ -42,12 +43,12 @@ public class Bug326509Test extends TestCase {
 	
 	private TestableParser testMe;
 	
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		testMe = new TestableParser();
 	}
 	
-	public void testBug326509() {
+	@Test public void testBug326509() {
 		for(int i = 0; i <= 200; i++) {
 			testMe.pushFollow(new BitSet());
 		}

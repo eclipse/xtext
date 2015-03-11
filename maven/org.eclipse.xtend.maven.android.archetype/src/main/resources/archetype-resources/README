@@ -1,0 +1,9 @@
+You need ANDROID_HOME set to use command line maven to build the project.
+
+To use this archetype in Eclipse you will need to have the following installed:
+* Eclipse m2e (maven integration)
+* Xtend Eclipse plugin
+* Android Eclipse plugin
+You may also need to clean the project after generating from the archetype in order for the .xtend file to be processed.
+
+To use the android support library (support-v4.jar and friends) see the instructions in pom.xml.

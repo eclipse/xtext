@@ -36,6 +36,14 @@
             extensions="«modelFileExtensions.toString(",")»">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+  «FOREACH modelFileExtensions AS modelFileExtension-»
+    <fileTypes
+            extension="«modelFileExtension»"
+            type="text">
+    </fileTypes>
+  «ENDFOREACH-» 
+  </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»

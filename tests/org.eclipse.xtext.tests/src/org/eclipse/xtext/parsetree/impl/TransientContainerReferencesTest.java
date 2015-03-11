@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.impl;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -16,13 +14,15 @@ import org.eclipse.xtext.parsetree.impl.crossContainment.CrossContainmentFactory
 import org.eclipse.xtext.parsetree.impl.crossContainment.CrossContainmentPackage;
 import org.eclipse.xtext.parsetree.impl.crossContainment.Element;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class TransientContainerReferencesTest extends TestCase {
+public class TransientContainerReferencesTest extends Assert {
 
-	public void testCrossResourceContainment() throws Exception {
+	@Test public void testCrossResourceContainment() throws Exception {
 		Element parent = CrossContainmentFactory.eINSTANCE.createElement();
 		Element child = CrossContainmentFactory.eINSTANCE.createElement();
 		parent.getContainment().add(child);

@@ -62,6 +62,10 @@ public class XtextPluginImages {
 
 	public static final String OBJ_FIXABLE_ERROR = NAME_PREFIX + "OBJ_FIXABLE_ERROR"; //$NON-NLS-1$
 	public static final String OBJ_FIXABLE_WARNING = NAME_PREFIX + "OBJ_FIXABLE_WARNING"; //$NON-NLS-1$
+	/**
+	 * @since 2.3
+	 */
+	public static final String OBJ_FIXABLE_INFO = NAME_PREFIX + "OBJ_FIXABLE_INFO"; //$NON-NLS-1$
 
 	/**
 	 * OBJ16
@@ -74,6 +78,10 @@ public class XtextPluginImages {
 
 	public static final ImageDescriptor DESC_FIXABLE_ERROR = create(PATH_OBJ, "quickfix_error_obj.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_FIXABLE_WARNING = create(PATH_OBJ, "quickfix_warning_obj.gif"); //$NON-NLS-1$
+	/**
+	 * @since 2.3
+	 */
+	public static final ImageDescriptor DESC_FIXABLE_INFO = create(PATH_OBJ, "quickfix_info_obj.gif"); //$NON-NLS-1$
 
 	/**
 	 * OVR16
@@ -140,16 +148,22 @@ public class XtextPluginImages {
 		
 		annotationImagesFixable.put(XtextEditor.ERROR_ANNOTATION_TYPE, get(OBJ_FIXABLE_ERROR));
 		annotationImagesFixable.put(XtextEditor.WARNING_ANNOTATION_TYPE, get(OBJ_FIXABLE_WARNING));
+		annotationImagesFixable.put(XtextEditor.INFO_ANNOTATION_TYPE, get(OBJ_FIXABLE_INFO));
 
 		ISharedImages sharedImages= PlatformUI.getWorkbench().getSharedImages();
 		Image error = sharedImages.getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
 		Image warning = sharedImages.getImage(ISharedImages.IMG_OBJS_WARN_TSK);
+		Image info = sharedImages.getImage(ISharedImages.IMG_OBJS_INFO_TSK);
 		annotationImagesNonFixable.put(XtextEditor.ERROR_ANNOTATION_TYPE, error);
 		annotationImagesNonFixable.put(XtextEditor.WARNING_ANNOTATION_TYPE, warning);
+		annotationImagesNonFixable.put(XtextEditor.INFO_ANNOTATION_TYPE, info);
 		
 		Display display = Display.getCurrent();
 		annotationImagesDeleted.put(XtextEditor.ERROR_ANNOTATION_TYPE, new Image(display, error, SWT.IMAGE_GRAY));
 		annotationImagesDeleted.put(XtextEditor.WARNING_ANNOTATION_TYPE, new Image(display, warning, SWT.IMAGE_GRAY));
+		annotationImagesDeleted.put(XtextEditor.INFO_ANNOTATION_TYPE, new Image(display, info, SWT.IMAGE_GRAY));
+		
+		imagesInitialized = true;
 	}	
 
 
@@ -162,6 +176,7 @@ public class XtextPluginImages {
 		manage(OBJ_CORRECTION_CHANGE, DESC_CORRECTION_CHANGE);
 		manage(OBJ_FIXABLE_ERROR, DESC_FIXABLE_ERROR);
 		manage(OBJ_FIXABLE_WARNING, DESC_FIXABLE_WARNING);
+		manage(OBJ_FIXABLE_INFO, DESC_FIXABLE_INFO);
 		
 		initializeImageMaps();
 	}

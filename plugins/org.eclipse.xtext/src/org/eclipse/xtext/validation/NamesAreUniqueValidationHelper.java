@@ -8,10 +8,13 @@
 package org.eclipse.xtext.validation;
 
 import java.util.Iterator;
+
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +23,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.service.OperationCanceledManager;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -30,6 +34,9 @@ import com.google.common.collect.Maps;
 public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidationHelper {
 
 	private ImmutableSet<EClass> clusterTypes = getClusterTypes();
+	
+	@Inject 
+	private OperationCanceledManager operationCanceledManager = new OperationCanceledManager();
 	
 	/**
 	 * <p>Initialize the set of clustering types. A type is considered to be clustering
@@ -42,6 +49,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 		return ImmutableSet.of(EcorePackage.Literals.EOBJECT);
 	}
 	
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, 
 			ValidationMessageAcceptor acceptor) {
 		checkUniqueNames(descriptions, null, acceptor);
@@ -54,6 +62,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	 * The cancel indicator will be queried everytime a description has been processed.
 	 * It should provide a fast answer about its canceled state.
 	 */
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, 
 			CancelIndicator cancelIndicator, 
 			ValidationMessageAcceptor acceptor) {
@@ -64,8 +73,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 		while(iter.hasNext()) {
 			IEObjectDescription description = iter.next();
 			checkDescriptionForDuplicatedName(description, clusterToNames, acceptor);
-			if (cancelIndicator != null && cancelIndicator.isCanceled())
-				return;
+			operationCanceledManager.checkCanceled(cancelIndicator);
 		}
 	}
 	

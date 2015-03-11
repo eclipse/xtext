@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class NullTokenDefProvider implements ITokenDefProvider {
 
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		return Collections.emptyMap();
 	}

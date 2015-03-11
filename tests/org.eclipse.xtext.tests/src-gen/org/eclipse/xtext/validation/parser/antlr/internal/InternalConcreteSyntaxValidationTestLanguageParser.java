@@ -24,57 +24,57 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'kw1'", "'kw2'", "'#3'", "'kw3'", "'#4'", "'#5'", "'kw4'", "'kw5'", "'#6'", "'#7'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'#14'", "'#15'", "'#16'", "'group'", "'#17'", "','", "'#18'", "'#19'", "'#20'", "'#21'", "'#22'", "'#23'", "'kw'", "'#24'", "'#25'", "'#26'", "'#27'", "'short'", "'one'", "'long'", "'extra'", "'two'", "'#28'", "'lit1'", "'lit2'"
     };
-    public static final int T__42=42;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__51=51;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__47=47;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__52=52;
-    public static final int T__46=46;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__44=44;
-    public static final int T__14=14;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__11=11;
     public static final int T__29=29;
-    public static final int T__45=45;
-    public static final int RULE_WS=9;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T__28=28;
+    public static final int T__27=27;
     public static final int T__26=26;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__41=41;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
+    public static final int T__19=19;
+    public static final int T__51=51;
+    public static final int T__16=16;
+    public static final int T__52=52;
+    public static final int T__15=15;
+    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int RULE_STRING=6;
+    public static final int T__32=32;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -5667,11 +5667,11 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             if ( (LA30_0==RULE_ID) ) {
                 int LA30_1 = input.LA(2);
 
-                if ( (LA30_1==EOF) ) {
-                    alt30=2;
-                }
-                else if ( (LA30_1==16||LA30_1==34) ) {
+                if ( (LA30_1==16||LA30_1==34) ) {
                     alt30=1;
+                }
+                else if ( (LA30_1==EOF) ) {
+                    alt30=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -7375,24 +7375,19 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
 
             if ( (LA42_0==RULE_ID) ) {
                 switch ( input.LA(2) ) {
-                case 46:
-                    {
-                    alt42=1;
-                    }
-                    break;
                 case RULE_ID:
                     {
-                    int LA42_3 = input.LA(3);
+                    int LA42_2 = input.LA(3);
 
-                    if ( (LA42_3==46) ) {
-                        alt42=1;
-                    }
-                    else if ( (LA42_3==48) ) {
+                    if ( (LA42_2==48) ) {
                         alt42=2;
+                    }
+                    else if ( (LA42_2==46) ) {
+                        alt42=1;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 42, 3, input);
+                            new NoViableAltException("", 42, 2, input);
 
                         throw nvae;
                     }
@@ -7401,6 +7396,11 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                 case 48:
                     {
                     alt42=2;
+                    }
+                    break;
+                case 46:
+                    {
+                    alt42=1;
                     }
                     break;
                 default:

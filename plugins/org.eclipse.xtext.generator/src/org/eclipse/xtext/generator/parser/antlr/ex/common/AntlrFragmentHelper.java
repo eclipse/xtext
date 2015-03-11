@@ -23,6 +23,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.NamingAware;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -33,12 +34,26 @@ import com.google.common.collect.Collections2;
  * extensions.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AntlrFragmentHelper {
+public class AntlrFragmentHelper implements NamingAware {
 
-	private final Naming naming;
+	private Naming naming;
 
 	public AntlrFragmentHelper(Naming naming) {
 		this.naming = naming;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public AntlrFragmentHelper() {
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public void registerNaming(Naming n) {
+		this.naming = n;
 	}
 
 	public String getAntlrTokenFileProviderClassName(Grammar grammar) {
@@ -51,6 +66,13 @@ public class AntlrFragmentHelper {
 
 	public String getParserClassName(Grammar g) {
 		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getName(g) + "Parser";
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String getTokenSourceClassName(Grammar g) {
+		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getName(g) + "TokenSource";
 	}
 
 	public String getInternalParserClassName(Grammar g) {
@@ -66,7 +88,14 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getContentAssistParserClassName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String getContentAssistTokenSourceClassName(Grammar g) {
+		return naming.basePackageIde(g) + ".parser.antlr." + GrammarUtil.getName(g) + "TokenSource";
 	}
 
 	public String getInternalContentAssistLexerClassName(Grammar g) {
@@ -78,7 +107,10 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getContentAssistLexerSuperClass(Grammar g) {
-		return "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer";
+		if(naming.hasIde())
+			return "org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer";
+		else
+			return "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer";
 	}
 
 	public String getInternalContentAssistParserClassName(Grammar g) {
@@ -86,11 +118,11 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getContentAssistLexerGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
+		return naming.basePackageIde(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
 
 	public String getContentAssistParserGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public Collection<? extends AbstractElement> getAllAlternatives(Grammar g) {
@@ -112,6 +144,7 @@ public class AntlrFragmentHelper {
 	public Collection<? extends AbstractElement> getAllPredicatedElements(Grammar g) {
 		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
 		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
+			@Override
 			public boolean apply(AbstractElement input) {
 				return input.isPredicated();
 			}

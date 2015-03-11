@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class XbaseExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.xbase.ui.internal.XtypeActivator.getInstance().getBundle();
+		return XtypeActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.xbase.ui.internal.XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
+		return XtypeActivator.getInstance().getInjector(XtypeActivator.ORG_ECLIPSE_XTEXT_XBASE_XBASE);
 	}
 	
 }

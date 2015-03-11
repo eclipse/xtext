@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Mod
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Model Attribute</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

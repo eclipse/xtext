@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -33,6 +30,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getVisibility <em>Visibility</em>}</li>
@@ -44,7 +42,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getGuard <em>Guard</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FunctionImpl#getFuncExpr <em>Func Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

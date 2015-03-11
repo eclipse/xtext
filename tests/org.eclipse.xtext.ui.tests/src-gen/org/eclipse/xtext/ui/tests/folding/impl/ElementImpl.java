@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.folding.impl;
 
@@ -30,11 +27,11 @@ import org.eclipse.xtext.ui.tests.folding.FoldingPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.folding.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.folding.impl.ElementImpl#getSubelements <em>Subelements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

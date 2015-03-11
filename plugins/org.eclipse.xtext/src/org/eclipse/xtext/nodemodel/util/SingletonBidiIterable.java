@@ -25,10 +25,12 @@ public class SingletonBidiIterable<T> implements BidiIterable<T> {
 		this.value = value;
 	}
 
+	@Override
 	public BidiIterator<T> iterator() {
 		return SingletonBidiIterator.<T>create(value);
 	}
 	
+	@Override
 	public BidiIterable<T> reverse() {
 		return this;
 	}

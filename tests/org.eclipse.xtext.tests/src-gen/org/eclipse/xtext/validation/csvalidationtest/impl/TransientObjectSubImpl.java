@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

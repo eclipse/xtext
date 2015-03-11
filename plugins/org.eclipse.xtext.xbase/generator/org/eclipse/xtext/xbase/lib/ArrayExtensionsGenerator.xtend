@@ -1,0 +1,173 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.lib
+
+import java.io.File
+import java.io.FileWriter
+import org.eclipse.xtext.util.Files
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+class ArrayExtensionsGenerator {
+	def startMarker() {
+		"// BEGIN generated code"
+	}
+
+	def endMarker() {
+		"// END generated code"
+	}
+
+	val primitiveTypes = newArrayList("boolean", "double", "float", "long", "int", "char", "short", "byte")
+
+	def static void main(String[] args) {
+		new ArrayExtensionsGenerator().generateFile();
+	}
+
+	def generateFile() {
+		val file = new File("../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayExtensions.java")
+		if (!file.exists)
+			throw new IllegalStateException("file "+file+" doesn't exist.");
+		
+		val content = Files.readFileIntoString(file.absolutePath)
+		if (content.indexOf(startMarker)==-1) {
+			throw new IllegalStateException("File "+file+" doesn't contain '// BEGIN generated code' marker.");
+		}
+		val newContent = '''
+			«content.substring(0, content.indexOf(startMarker)+startMarker.length)»
+				
+				«generateAllOperations()»
+			«content.substring(content.indexOf(endMarker))»
+		'''		
+		val writer = new FileWriter(file)
+		writer.append(newContent)
+		writer.close()
+		println("generation finished")
+	}
+
+	def generateAllOperations() '''
+		«generateLength('Object')»
+		
+		«generateHashCode('Object')»
+		
+		«generateEquals('Object')»
+		«FOR t : primitiveTypes»
+			
+			«generateGet(t)»
+			
+			«generateSet(t)»
+			
+			«generateLength(t)»
+			
+			«generateHashCode(t)»
+			
+			«generateEquals(t)»
+			
+			«generateClone(t)»
+		«ENDFOR»
+	'''
+	
+	def generateClone(String type) '''
+		/**
+		 * Clones the array. @see {@link Object#clone}
+		 * 
+		 * @param array
+		 *            the array
+		 * @return the cloned array
+		 * @since 2.5
+		 */
+		@Pure
+		@Inline("$1.clone()")
+		@GwtIncompatible("clone")
+		public static «type»[] clone(«type»[] array) {
+			return array.clone();
+		}
+	'''
+	
+	def generateEquals(String type) '''
+		/**
+		 * Returns whether the array and the given other object are identical.
+		 *
+		 * Delegates to {@link Object#equals(Object)}
+		 * 
+		 * @param array
+		 *            the array
+		 * @param other
+		 *            the other element to compare to
+		 * @return whether the two given argument are identical 
+		 * @since 2.5
+		 */
+		@Pure
+		@Inline("$1.equals($2)")
+		public static boolean equals(«type»[] array, Object other) {
+			return array.equals(other);
+		}
+	'''
+	
+	def generateHashCode(String type) '''
+		/**
+		 * Returns a hash code value for the given array.
+		 * 
+		 * @param array
+		 *            the array
+		 * @return the hash code
+		 * @since 2.5
+		 */
+		@Pure
+		@Inline("$1.hashCode()")
+		public static int hashCode(«type»[] array) {
+			return array.hashCode();
+		}
+	'''
+	
+	def generateLength(String type) '''
+		/**
+		 * @param array
+		 *            the array
+		 * @return the length of the given array
+		 */
+		@Pure
+		@Inline("$1.length")
+		public static int length(«type»[] array) {
+			return array.length;
+		}
+	'''
+	
+	def generateSet(String type) '''
+		/**
+		 * @param array
+		 *            the array
+		 * @param index
+		 *            the index the value should be set at
+		 * @param value
+		 *            the value to set at the given index
+		 * @return the new value
+		 */
+		@Inline("$1[$2] = $3")
+		public static «type» set(«type»[] array, int index, «type» value) {
+			array[index] = value;
+			return value;
+		}
+	'''
+	
+	def generateGet(String type) '''
+		/**
+		 * @param array
+		 *            the array
+		 * @param index
+		 *            the index
+		 * @return the value at the given index
+		 */
+		@Pure
+		@Inline("$1[$2]")
+		public static «type» get(«type»[] array, int index) {
+			return array[index];
+		}
+	'''
+	
+}

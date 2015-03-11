@@ -8,19 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class LexerSLComment extends TestCase {
-	public void testSlComment() {
+public class LexerSLComment extends Assert {
+	@Test public void testSlComment() {
 		String model = "//sl comment\na";
 		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();
 		lexer.setCharStream(new ANTLRStringStream(model));
@@ -34,7 +34,7 @@ public class LexerSLComment extends TestCase {
 	 * see BUG 234135: Comments on EOF not detected
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=234135
 	 */
-	public void testSlCommentEOF() {
+	@Test public void testSlCommentEOF() {
 		String model = "a\n//sl comment";
 		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();
 		lexer.setCharStream(new ANTLRStringStream(model));

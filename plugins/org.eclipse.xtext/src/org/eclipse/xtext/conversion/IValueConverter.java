@@ -20,9 +20,11 @@ import org.eclipse.xtext.nodemodel.INode;
 public interface IValueConverter<Type> {
 	
 	IValueConverter<? extends Object> NO_OP_CONVERTER = new IValueConverter<String>() {
+		@Override
 		public String toString(String value) {
 			return value;
 		}
+		@Override
 		public String toValue(String string, INode node) {
 			return string;
 		}

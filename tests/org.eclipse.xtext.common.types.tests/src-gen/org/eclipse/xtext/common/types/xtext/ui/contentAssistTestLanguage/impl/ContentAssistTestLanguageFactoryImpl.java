@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist"); 
+      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(ContentAssistTestLanguagePackage.eNS_URI);
       if (theContentAssistTestLanguageFactory != null)
       {
         return theContentAssistTestLanguageFactory;
@@ -69,6 +66,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
     {
       case ContentAssistTestLanguagePackage.MODEL: return createModel();
       case ContentAssistTestLanguagePackage.REFERENCE_HOLDER: return createReferenceHolder();
+      case ContentAssistTestLanguagePackage.GENERATE_DIRECTIVE: return createGenerateDirective();
       case ContentAssistTestLanguagePackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -80,7 +78,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -91,7 +90,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceHolder createReferenceHolder()
+  @Override
+public ReferenceHolder createReferenceHolder()
   {
     ReferenceHolderImpl referenceHolder = new ReferenceHolderImpl();
     return referenceHolder;
@@ -102,7 +102,20 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Import createImport()
+  @Override
+public GenerateDirective createGenerateDirective()
+  {
+    GenerateDirectiveImpl generateDirective = new GenerateDirectiveImpl();
+    return generateDirective;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -113,7 +126,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
+  @Override
+public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
   {
     return (ContentAssistTestLanguagePackage)getEPackage();
   }

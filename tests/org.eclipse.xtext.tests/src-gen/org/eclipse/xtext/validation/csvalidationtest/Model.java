@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest;
 
@@ -14,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX2 <em>X2</em>}</li>
@@ -44,7 +42,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX27 <em>X27</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX28 <em>X28</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel()
  * @model

@@ -14,16 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -37,7 +31,6 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.RelationalDependencyType;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
@@ -67,10 +60,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		public abstract void accept(EObject semanticObj, IConstraintElement constraint);
 
-		public abstract int maxValues(IConstraintElement constraint);
-
-		public abstract int minValues(IConstraintElement constraint);
-
 		@Override
 		public String toString() {
 			return toString("");
@@ -86,11 +75,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		protected Object value;
 
-		public AllocationValue(Object value, int index, INode node) {
+		protected boolean optional;
+
+		public AllocationValue(Object value, int index, boolean optional, INode node) {
 			super();
 			this.value = value;
-			this.node = node;
 			this.index = index;
+			this.optional = optional;
+			this.node = node;
 		}
 
 		@Override
@@ -104,16 +96,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		public Object getValue() {
 			return value;
-		}
-
-		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 1;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 1;
 		}
 
 		@Override
@@ -140,16 +122,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
 		public String toString(String prefix) {
 			String newPrefix = "  " + prefix;
 			return "Alt-Choice {\n" + newPrefix + child.toString(newPrefix) + "\n" + prefix + "}";
@@ -159,13 +131,9 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected abstract class Feature2Assignment {
 		public abstract IFeatureInfo getFeature();
 
-		public abstract int getQuantity(IConstraintElement assignment);
-
 		public abstract List<AllocationValue> getValuesFor(IConstraintElement assignment);
 
 		public abstract boolean isAmbiguous();
-
-		public abstract void setQuantity(IConstraintElement assignment, int quantity);
 
 		@Override
 		public String toString() {
@@ -201,16 +169,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		public List<Quantity> getChildren() {
 			return children;
-		}
-
-		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 0;
 		}
 
 		@Override
@@ -253,13 +211,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			if (isAmbiguous())
-				return UNDEF;
-			return UNDEF; // TODO: implement
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			return assignments.contains(assignment) ? values : Collections.<AllocationValue> emptyList();
 		}
@@ -273,10 +224,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return undefs > 1;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-			// TODO: implement			
-		}
 	}
 
 	protected class MVFeature2AssignmentUnambiguous extends Feature2Assignment {
@@ -297,11 +244,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			return assignment == this.assignment ? values.size() : UNDEF;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			return assignment == this.assignment ? values : Collections.<AllocationValue> emptyList();
 		}
@@ -311,22 +253,9 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return false;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-		}
-
 	}
 
-	//	protected class AssignedAllocationValue extends AllocationValue {
-	//		protected EStructuralFeature feature;
-	//
-	//		public AssignedAllocationValue(EStructuralFeature feature, Object value) {
-	//			super(value);
-	//			this.feature = feature;
-	//		}
-	//	}
-
-	protected class Quantity {
+	protected static class Quantity {
 
 		protected IConstraintElement constraintElement;
 
@@ -418,14 +347,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			if (isAmbiguous() || !assignments.contains(assignment))
-				return UNDEF;
-			Boolean en = enabled[assignment.getFeatureAssignmentID()];
-			return en != null && en ? 1 : 0;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			if (assignments.contains(assignment)) {
 				Boolean en = enabled[assignment.getFeatureAssignmentID()];
@@ -450,10 +371,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return undefined > 1;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-			this.enabled[assignment.getFeatureAssignmentID()] = quantity != 0;
-		}
 	}
 
 	protected class SVFeature2AssignmentUnambiguous extends SVFeature2Assignment {
@@ -471,11 +388,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			return 1;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			if (assignment == this.assignment)
 				return Collections.singletonList(value);
@@ -487,9 +399,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return false;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-		}
 	}
 
 	public final static int MAX = Integer.MAX_VALUE;
@@ -505,13 +414,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
 
 	@Inject
-	protected IContextFinder contextFinder;
-
-	@Inject
 	protected ICrossReferenceSerializer crossRefSerializer;
-
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
 
 	@Inject
 	protected IEnumLiteralSerializer enumLiteralSerializer;
@@ -525,77 +428,11 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	@Inject
 	protected IKeywordSerializer keywordSerializer;
 
-	//	@Inject
-	//	protected ISemanticNodeProvider nodeProvider;
-
 	@Inject
 	protected ITransientValueService transientValueService;
 
-	//	protected boolean disableInvalidAlternativeChoices(Quantity quant, Feature2Assignment[] values) {
-	//		if (quant.getConstraintElement().isMany())
-	//			return false;
-	//		switch (quant.getConstraintElement().getType()) {
-	//			case ALTERNATIVE:
-	//				if (quant.getAllocations().size() == 1) {
-	//					Quantity child = ((AlternativeAllocation) quant.getAllocations().get(0)).getChild();
-	//					return disableInvalidAlternativeChoices(child, values);
-	//				}
-	//				return;
-	//			case GROUP:
-	//				boolean changed = false;
-	//				for (Allocation alloc : quant.getAllocations())
-	//					for (Quantity child : ((GroupAllocation) alloc).getChildren())
-	//						changed = changed || disableInvalidAlternativeChoices(child, values);
-	//				return changed;
-	//			default:
-	//				return false;
-	//		}
-	//		return false;
-	//	}
-
 	@Inject
 	protected IValueSerializer valueSerializer;
-
-	//	protected List<Quantity> createIndependentlyDecideableQuantities(IConstraint constraint,
-	//			List<List<AllocationValue>> mandatory) {
-	//		List<List<IConstraintElement>> feature2assignment = constraint.getAssignmentsByFeature();
-	//		for (int featureID = 0; featureID < mandatory.size(); featureID++) {
-	//			List<AllocationValue> values = mandatory.get(featureID);
-	//			if (values != null) {
-	//				List<IConstraintElement> assignments = feature2assignment.get(featureID);
-	//				Iterable<Quantity> quantities = createIndependentlyDecideableQuantity(assignments, values);
-	//				if (quantities != null) {
-	//
-	//				}
-	//
-	//			}
-	//		}
-	//	}
-	//
-	//	protected void collectValues(EObject semanticObject, IConstraint constraint, List<List<AllocationValue>> mandatory,
-	//			List<List<AllocationValue>> optional) {
-	//		List<List<IConstraintElement>> feature2assignment = constraint.getAssignmentsByFeature();
-	//		for (int featureID = 0; featureID < feature2assignment.size(); featureID++)
-	//			if (feature2assignment.get(featureID) != null) {
-	//				EStructuralFeature feature = semanticObject.eClass().getEStructuralFeature(featureID);
-	//				if (feature.isMany()) {
-	//					List<AllocationValue> result = Lists.newArrayList();
-	//					Iterable<Object> values = transientValueService.getNonTransientValues(semanticObject, feature);
-	//					for (Object v : values)
-	//						result.add(new AssignedAllocationValue(feature, v));
-	//					mandatory.set(featureID, result);
-	//				} else {
-	//					if (!transientValueService.isTransient(semanticObject, feature)) {
-	//						Object value = semanticObject.eGet(feature);
-	//						AllocationValue alloc = new AssignedAllocationValue(feature, value);
-	//						if (transientValueService.isOptional(feature, feature))
-	//							optional.set(featureID, Lists.newArrayList(alloc));
-	//						else
-	//							mandatory.set(featureID, Lists.newArrayList(alloc));
-	//					}
-	//				}
-	//			}
-	//	}
 
 	protected void acceptAction(Action action, EObject semanticChild, ICompositeNode node) {
 		if (sequenceAcceptor.enterAssignedAction(action, semanticChild, node)) {
@@ -643,6 +480,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 						GrammarUtil.containingCrossReference(enumRC), target3, node3, errorAcceptor);
 				sequenceAcceptor.acceptAssignedCrossRefEnum(enumRC, token3, target3, index, node3);
 				return true;
+			case ASSIGNED_CROSSREF_KEYWORD:
+				Keyword kw0 = constr.getKeyword();
+				ILeafNode node0 = (ILeafNode) node;
+				EObject target0 = (EObject) value;
+				String token0 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(kw0), target0, node0, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefKeyword(kw0, token0, target0, index, node0);
+				return true;
 			case ASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall datatypeRC1 = constr.getRuleCall();
 				ICompositeNode node4 = (ICompositeNode) node;
@@ -666,20 +511,10 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				return true;
 			case ASSIGNED_KEYWORD:
 				Keyword keyword = constr.getKeyword();
-				String value3 = (String) value;
 				ILeafNode node7 = (ILeafNode) node;
-				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value3, node7,
+				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value, node7,
 						errorAcceptor);
-				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value3, index, node7);
-				return true;
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Keyword keyword1 = constr.getKeyword();
-				Boolean value4 = (Boolean) value;
-				ILeafNode node8 = (ILeafNode) node;
-				String token71 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword1, value4, node8,
-						errorAcceptor);
-				sequenceAcceptor
-						.acceptAssignedKeyword(keyword1, token71, value4 == null ? false : value4, index, node8);
+				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value, index, node7);
 				return true;
 			case ALTERNATIVE:
 			case GROUP:
@@ -688,31 +523,21 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return false;
 	}
 
-	protected void applydeterministicQuantities(IConstraint constraint, Feature2Assignment[] values) {
-		boolean changed;
-		do {
-			changed = false;
-			for (IConstraintElement assignment : constraint.getAssignments())
-				if (values[assignment.getAssignmentID()] != null && values[assignment.getAssignmentID()].isAmbiguous()) {
-					int min = getMin(values, assignment);
-					int max = getMax(values, assignment);
-					if (min == max && min != UNDEF) {
-						values[assignment.getAssignmentID()].setQuantity(assignment, min);
-						changed = true;
-						//						System.out.println("Setting quantity of " + assignment + " to " + min);
-					}
-				}
-		} while (changed);
-	}
-
-	//	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature,
-	//			INodesForEObjectProvider nodes) {
-	//		if (transientValueService.isValueTransient(semanticObject, feature.getFeature()) != ValueTransient.NO) {
-	//			Object value = semanticObject.eGet(feature.getFeature());
-	//			INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
-	//			return new AllocationValue(value, node);
-	//		}
-	//		return null;
+	//	protected void applydeterministicQuantities(IConstraint constraint, Feature2Assignment[] values) {
+	//		boolean changed;
+	//		do {
+	//			changed = false;
+	//			for (IConstraintElement assignment : constraint.getAssignments())
+	//				if (values[assignment.getAssignmentID()] != null && values[assignment.getAssignmentID()].isAmbiguous()) {
+	//					int min = getMin(values, assignment);
+	//					int max = getMax(values, assignment);
+	//					if (min == max && min != UNDEF) {
+	//						values[assignment.getAssignmentID()].setQuantity(assignment, min);
+	//						changed = true;
+	//						//						System.out.println("Setting quantity of " + assignment + " to " + min);
+	//					}
+	//				}
+	//		} while (changed);
 	//	}
 
 	protected boolean containsUnavailableFeature(Feature2Assignment[] values, IConstraintElement element,
@@ -734,12 +559,12 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[element.getAssignmentID()];
 				if (f2a == null)
 					return true;
@@ -752,6 +577,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return false;
 	}
 
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());
@@ -763,8 +589,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		Feature2Assignment[] values = createValues(semanticObject, constraint, nodes);
-		//				System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
-		applydeterministicQuantities(constraint, values);
+		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		//				System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		if (constraint.getBody() != null) {
 			Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(),
@@ -832,12 +657,12 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[constraint.getAssignmentID()];
 				if (f2a == null)
 					return Collections.emptyList();
@@ -868,7 +693,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
 					if (trans != ValueTransient.PREFERABLY || node != null) {
 						IConstraintElement ass = feature.getAssignments()[0];
-						AllocationValue alloc = new AllocationValue(value, -1, node);
+						AllocationValue alloc = new AllocationValue(value, -1, trans == ValueTransient.PREFERABLY, node);
 						result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass,
 								trans == ValueTransient.PREFERABLY, alloc);
 					}
@@ -885,7 +710,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				if (trans != ValueTransient.YES) {
 					Object value = semanticObject.eGet(feature.getFeature());
 					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
-					AllocationValue alloc = new AllocationValue(value, -1, node);
+					AllocationValue alloc = new AllocationValue(value, -1, trans == ValueTransient.PREFERABLY, node);
 					createValues(semanticObject, feature, trans == ValueTransient.PREFERABLY, alloc, result);
 				}
 			}
@@ -895,26 +720,22 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected void createValues(EObject semanticObj, IFeatureInfo feature, boolean optional, AllocationValue value,
 			Feature2Assignment[] target) {
-		//		if (feature.getAssignments().length == 1) {
-		//			IConstraintElement ass = feature.getAssignments()[0];
-		//			target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, value);
-		//			return;
-		//		}
-		List<IConstraintElement> validAssignments = null;
-		if (feature.isContentValidationNeeded()) {
-			validAssignments = findValidAssignments(semanticObj, feature.getAssignments(), value);
-			if (validAssignments.isEmpty())
-				return; // TODO: handle this error, no valid assignment has been found for the value.
-			else if (validAssignments.size() == 1) {
-				IConstraintElement ass = validAssignments.get(0);
-				target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, value);
-				return;
-			}
+		List<IConstraintElement> remainingAssignments = Lists.newArrayList();
+		for (IConstraintElement ass : feature.getAssignments())
+			if (!isExcludedByDependees(ass, target))
+				remainingAssignments.add(ass);
+		if (!remainingAssignments.isEmpty() && feature.isContentValidationNeeded())
+			remainingAssignments = findValidAssignments(semanticObj,
+					remainingAssignments.toArray(new IConstraintElement[remainingAssignments.size()]), value);
+		if (remainingAssignments.isEmpty())
+			return; // TODO: handle this error, no valid assignment has been found for the value.
+		else if (remainingAssignments.size() == 1) {
+			IConstraintElement ass = remainingAssignments.get(0);
+			target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, value);
+			return;
 		}
-		if (validAssignments == null)
-			validAssignments = Lists.newArrayList(feature.getAssignments());
-		SVFeature2AssignmentAmbiguous f2a = new SVFeature2AssignmentAmbiguous(validAssignments, optional, value);
-		for (IConstraintElement ass : validAssignments)
+		SVFeature2AssignmentAmbiguous f2a = new SVFeature2AssignmentAmbiguous(remainingAssignments, optional, value);
+		for (IConstraintElement ass : remainingAssignments)
 			target[ass.getAssignmentID()] = f2a;
 	}
 
@@ -994,38 +815,29 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			result.append(" => ");
 			Feature2Assignment value = values[ele.getAssignmentID()];
 			if (value != null) {
-				if (value.isAmbiguous()) {
-					result.append("[");
-					result.append(getMin(values, ele));
-					result.append(", ");
-					result.append(getMax(values, ele));
-					result.append("] ");
-
-				}
+				if (value.isAmbiguous())
+					result.append("ambiguous!");
 				result.append(Joiner.on(", ").join(values[ele.getAssignmentID()].getValuesFor(ele)));
 			}
 			result.append("\n");
 		}
 	}
 
-	protected List<IConstraintElement> findValidAssignments(EObject semanitcObj, IConstraintElement[] assignments,
+	@Inject
+	protected IAssignmentFinder assignmentFinder;
+
+	protected List<IConstraintElement> findValidAssignments(EObject semanticObj, IConstraintElement[] assignments,
 			AllocationValue value) {
-		EStructuralFeature feature = assignments[0].getFeature();
-		if (feature instanceof EAttribute) {
-			if (feature.getEType() instanceof EEnum)
-				return findValidAssignmentsForEnum(semanitcObj, assignments, value.getValue());
-			else
-				return findValidAssignmentsForDatatype(semanitcObj, assignments, value.getValue());
-		}
-		if (feature instanceof EReference) {
-			EReference ref = (EReference) feature;
-			if (ref.isContainment())
-				return findValidAssignmentsForContainmentRef(semanitcObj, assignments, (EObject) value.getValue());
-			else
-				return findValidAssignmentsForCrossRef(semanitcObj, assignments, (EObject) value.getValue(),
-						value.getNode());
-		}
-		throw new RuntimeException("unknown feature type");
+		List<AbstractElement> assignedElements = Lists.newArrayList();
+		for (IConstraintElement ass : assignments)
+			assignedElements.add(ass.getGrammarElement());
+		Set<AbstractElement> assignedElements2 = Sets.newHashSet(assignmentFinder.findAssignmentsByValue(semanticObj,
+				assignedElements, value.getValue(), value.getNode()));
+		List<IConstraintElement> result = Lists.newArrayList();
+		for (IConstraintElement ass : assignments)
+			if (assignedElements2.contains(ass.getGrammarElement()))
+				result.add(ass);
+		return result;
 	}
 
 	protected List<IConstraintElement> findValidAssignments(EObject semanticObj, List<IConstraintElement> assignments,
@@ -1042,239 +854,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return result;
 	}
 
-	protected List<IConstraintElement> findValidAssignmentsForContainmentRef(EObject semanitcObj,
-			IConstraintElement[] assignments, EObject value) {
-		Set<EObject> contexts = Sets.newHashSet();
-		for (IConstraintElement ass : assignments)
-			contexts.add(ass.getCallContext());
-		contexts = Sets.newHashSet(contextFinder.findContextsByContents(value, contexts));
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (IConstraintElement ass : assignments)
-			if (contexts.contains(ass.getCallContext()))
-				result.add(ass);
-		return result;
-	}
-
-	protected List<IConstraintElement> findValidAssignmentsForCrossRef(EObject semanitcObj,
-			IConstraintElement[] assignments, EObject value, INode node) {
-		Map<CrossReference, List<IConstraintElement>> candidates = Maps.newHashMap();
-		for (IConstraintElement ass : assignments) {
-			List<IConstraintElement> cand = candidates.get(ass.getCrossReference());
-			if (cand == null) {
-				if (EcoreUtil2.isAssignableFrom(ass.getCrossReferenceType(), value.eClass())
-						&& crossRefSerializer.isValid(semanitcObj, ass.getCrossReference(), value, node, null))
-					candidates.put(ass.getCrossReference(), Lists.newArrayList(ass));
-				else
-					candidates.put(ass.getCrossReference(), Collections.<IConstraintElement> emptyList());
-			} else if (cand != Collections.EMPTY_LIST)
-				cand.add(ass);
-		}
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (List<IConstraintElement> l : candidates.values())
-			result.addAll(l);
-		return result;
-	}
-
-	// keywords have precedence over everything else
-	protected List<IConstraintElement> findValidAssignmentsForDatatype(EObject semanticObj,
-			IConstraintElement[] assignments, Object value) {
-		// keywords have precedence over everything else
-		for (int i = 0; i < assignments.length; i++) {
-			Keyword kw = assignments[i].getKeyword();
-			if (kw != null && keywordSerializer.isValid(semanticObj, kw, value, null))
-				return Collections.singletonList(assignments[i]);
-		}
-
-		// now check the remaining assignments
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (int i = 0; i < assignments.length; i++) {
-			RuleCall rc = assignments[i].getRuleCall();
-			if (rc != null && valueSerializer.isValid(semanticObj, rc, value, null))
-				result.add(assignments[i]);
-		}
-		return result;
-	}
-
-	protected List<IConstraintElement> findValidAssignmentsForEnum(EObject semanticObj,
-			IConstraintElement[] assignments, Object value) {
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (IConstraintElement ass : assignments)
-			if (ass.getRuleCall() != null && ass.getRuleCall().getRule() instanceof EnumRule) {
-				if (enumLiteralSerializer.isValid(semanticObj, ass.getRuleCall(), value, null))
-					result.add(ass);
-			}
-		return result;
-
-	}
-
 	protected IConstraint getConstraint(EObject context, EClass type) {
 		return constraints.get(Tuples.create(context, type));
-	}
-
-	protected int getMax(Feature2Assignment[] values, IConstraintElement element) {
-		int result = element.isRoot() ? 1 : getMaxByParent(values, element.getContainer(), element, null);
-		return element.isMany() && result > 0 ? MAX : result;
-	}
-
-	/**
-	 * max occurrences of a child with this parent
-	 */
-	protected int getMaxByParent(Feature2Assignment[] values, IConstraintElement parent, IConstraintElement exclude,
-			IConstraintElement excludeAssignment) {
-		int result;
-		if (parent.isRoot())
-			result = parent.isMany() ? MAX : 1;
-		else {
-			result = getMaxByParent(values, parent.getContainer(), parent, excludeAssignment);
-			if (result == 0)
-				return 0;
-		}
-		switch (parent.getType()) {
-			case GROUP:
-				if (parent.isMany())
-					result = MAX;
-				for (IConstraintElement a : parent.getChildren())
-					if (a != exclude) {
-						int count = getMaxForChild(values, a);
-						if (count != UNDEF && (count < result))
-							result = count;
-					}
-				return result;
-			case ALTERNATIVE:
-				if (parent.isMany())
-					return MAX;
-				for (IConstraintElement a : parent.getChildren())
-					if (a != exclude) {
-						int count = getMinForChild(values, a);
-						if (count != UNDEF && count > 0)
-							return 0;
-					} else if (excludeAssignment != null && containsUnavailableFeature(values, a, excludeAssignment))
-						return 0;
-				return result;
-			default:
-				return 1;
-		}
-	}
-
-	/**
-	 * max occurrences of a parent with this child
-	 */
-	protected int getMaxForChild(Feature2Assignment[] values, IConstraintElement child) {
-		if (child.isOptional())
-			return MAX;
-		switch (child.getType()) {
-			case GROUP:
-				int count1 = MAX;
-				for (IConstraintElement a : child.getChildren()) {
-					int c = getMaxForChild(values, a);
-					if (c != UNDEF && c < count1)
-						count1 = c;
-				}
-				return count1;
-			case ALTERNATIVE:
-				int count2 = UNDEF;
-				for (IConstraintElement a : child.getChildren()) {
-					int c = getMaxForChild(values, a);
-					if (c == MAX)
-						return MAX;
-					if (c != UNDEF)
-						count2 = count2 == UNDEF ? c : count2 + c;
-				}
-				return count2;
-			case ASSIGNED_ACTION_CALL:
-			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-			case ASSIGNED_DATATYPE_RULE_CALL:
-			case ASSIGNED_ENUM_RULE_CALL:
-			case ASSIGNED_KEYWORD:
-			case ASSIGNED_PARSER_RULE_CALL:
-			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Feature2Assignment f2a = values[child.getAssignmentID()];
-				return f2a == null ? 0 : f2a.getQuantity(child);
-		}
-		return UNDEF;
-	}
-
-	protected int getMin(Feature2Assignment[] values, IConstraintElement assignment) {
-		if (assignment.isOptional())
-			return 0;
-		if (assignment.isRoot())
-			return 1;
-		return getMinByParent(values, assignment.getContainer(), assignment);
-	}
-
-	/**
-	 * min occurrences of a child within this parent
-	 */
-	protected int getMinByParent(Feature2Assignment[] values, IConstraintElement parent, IConstraintElement exclude) {
-		if (parent == null)
-			return 1;
-		switch (parent.getType()) {
-			case GROUP:
-				if (!parent.isManyRecursive(null) && !parent.isOptionalRecursive(null))
-					return 1;
-				int count1 = getMinByParent(values, parent.getContainer(), parent);
-				for (IConstraintElement a : parent.getChildren())
-					if (a != exclude) {
-						int c = getMinForChild(values, a);
-						if (c != UNDEF && c > count1)
-							count1 = c;
-					}
-				return count1;
-			case ALTERNATIVE:
-				if (parent.isOptional())
-					return 0;
-				boolean isUndef = false;
-				for (IConstraintElement a : parent.getChildren())
-					if (a != exclude) {
-						int count2 = getMinForChild(values, a);
-						if (count2 == UNDEF)
-							isUndef = true;
-						else if (count2 > 0)
-							return 0;
-					}
-				if (isUndef)
-					return UNDEF;
-				return getMinByParent(values, parent.getContainer(), parent);
-			default:
-				return UNDEF;
-		}
-	}
-
-	protected int getMinForChild(Feature2Assignment[] values, IConstraintElement child) {
-		int count = UNDEF;
-		switch (child.getType()) {
-			case GROUP:
-				for (IConstraintElement a : child.getChildren()) {
-					int c = getMinForChild(values, a);
-					if (c > count)
-						count = c;
-				}
-				break;
-			case ALTERNATIVE:
-				for (IConstraintElement a : child.getChildren()) {
-					int c = getMinForChild(values, a);
-					count = count == UNDEF ? c : c + count;
-				}
-				break;
-			case ASSIGNED_ACTION_CALL:
-			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-			case ASSIGNED_DATATYPE_RULE_CALL:
-			case ASSIGNED_ENUM_RULE_CALL:
-			case ASSIGNED_KEYWORD:
-			case ASSIGNED_PARSER_RULE_CALL:
-			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Feature2Assignment f2a = values[child.getAssignmentID()];
-				return f2a == null ? 0 : f2a.getQuantity(child);
-		}
-		if (child.isMany() && count > 1)
-			count = 1;
-		return count;
 	}
 
 	protected List<AllocationValue> getNonTransientValuesForMVFeature(EObject semanticObject, IFeatureInfo feature,
@@ -1286,7 +867,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				for (int i = 0; i < values1.size(); i++) {
 					Object value = values1.get(i);
 					INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, i, value);
-					allocs1.add(new AllocationValue(value, i, node));
+					allocs1.add(new AllocationValue(value, i, false, node));
 				}
 				return allocs1;
 			case SOME:
@@ -1296,7 +877,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					if (!transientValueService.isValueInListTransient(semanticObject, i, feature.getFeature())) {
 						Object value = values2.get(i);
 						INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, j++, value);
-						allocs2.add(new AllocationValue(value, i, node));
+						allocs2.add(new AllocationValue(value, i, false, node));
 					}
 				return allocs2;
 			case YES:
@@ -1306,7 +887,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected void initConstraints() {
 		if (constraintContexts == null) {
-			constraints = Maps.newHashMap();
+			constraints = Maps.newLinkedHashMap();
 			constraintContexts = grammarConstraintProvider.getConstraints(grammarAccess.getGrammar());
 			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.testLang.impl;
 
@@ -20,11 +17,11 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.ChoiceElementImpl#isOptionalKeyword <em>Optional Keyword</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.ChoiceElementImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

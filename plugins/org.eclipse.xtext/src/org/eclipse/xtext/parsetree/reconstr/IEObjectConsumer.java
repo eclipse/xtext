@@ -35,8 +35,8 @@ public interface IEObjectConsumer {
 	boolean isConsumedWithLastConsumtion(String feature);
 
 	/**
-	 * @param the
-	 *            type name as it is used within the grammar of the given language
+	 * @param classifier the
+	 *            type as it is used within the grammar of the given language
 	 * @return true if the delegate is a direct instance of the given type
 	 */
 	boolean isInstanceOf(EClassifier classifier);

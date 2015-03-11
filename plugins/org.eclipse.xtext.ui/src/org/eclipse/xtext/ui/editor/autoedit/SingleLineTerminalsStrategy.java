@@ -43,17 +43,29 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 	public static interface StrategyPredicate {
 		/**
 		 * @return whether the closing terminal should be inserted, based on the cursor position
-		 * @throws any
-		 *             thrown exceptions are catched and interpreted like return <code>true</code>
+		 * @throws BadLocationException
+		 *             exceptions are not thrown, thrown exceptions are catched and interpreted like return
+		 *             <code>true</code>
 		 */
 		boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException;
 	}
 
 	public static StrategyPredicate DEFAULT = new StrategyPredicate() {
+		@Override
 		public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
 			if (doc.getLength() <= offset)
 				return true;
-			boolean result = !Character.isJavaIdentifierStart(doc.getChar(offset));
+			char charAtOffset = doc.getChar(offset);
+			boolean result = !(
+					Character.isJavaIdentifierStart(charAtOffset)
+					|| Character.isDigit(charAtOffset)
+					|| charAtOffset == '!'
+					|| charAtOffset == '-'
+					|| charAtOffset == '('
+					|| charAtOffset == '{'
+					|| charAtOffset == '['
+					|| charAtOffset == '\''
+					|| charAtOffset == '\"');
 			return result;
 		}
 	};
@@ -61,7 +73,7 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 	private StrategyPredicate strategy;
 
 	public SingleLineTerminalsStrategy(String left, String right, StrategyPredicate strategy) {
-		super(left,right);
+		super(left, right);
 		this.strategy = strategy;
 	}
 
@@ -80,14 +92,14 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			int opening = count(getLeftTerminal(), documentContent);
 			int closing = count(getRightTerminal(), documentContent);
 			int occurences = opening + closing;
-			if (occurences % 2 == 0 && (command.text.length() - command.length + documentContent.length() >= getLeftTerminal().length())) {
+			if (occurences % 2 == 0) {
 				command.caretOffset = command.offset + command.text.length();
 				command.text = command.text + getRightTerminal();
 				command.shiftsCaret = false;
 			}
 		}
 	}
-
+	
 	protected boolean isInsertClosingTerminal(IDocument document, int i) {
 		try {
 			return strategy.isInsertClosingBracket(document, i);
@@ -126,7 +138,8 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			String documentContent = getDocumentContent(document, command);
 			int opening = count(getLeftTerminal(), documentContent);
 			int closing = count(getRightTerminal(), documentContent);
-			if (opening <= closing && getRightTerminal().equals(document.get(command.offset + command.length, command.text.length()))) {
+			if (opening <= closing
+					&& getRightTerminal().equals(document.get(command.offset + command.length, command.text.length()))) {
 				command.length += getRightTerminal().length();
 			}
 		}

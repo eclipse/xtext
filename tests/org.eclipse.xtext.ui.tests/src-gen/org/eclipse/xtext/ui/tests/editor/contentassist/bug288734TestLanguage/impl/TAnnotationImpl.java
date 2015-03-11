@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TAn
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.impl.TAnnotationImpl#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

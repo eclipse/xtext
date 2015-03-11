@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.dummy.dummyLang.impl;
 
@@ -27,12 +24,12 @@ import org.eclipse.xtext.dummy.dummyLang.Element;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.impl.ElementImpl#isOptional <em>Optional</em>}</li>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.impl.ElementImpl#getDescriptions <em>Descriptions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

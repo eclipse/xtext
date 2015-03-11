@@ -1,0 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.GenerateAllLanguages
+
+import org.eclipse.xtext.*
+
+Workflow {
+	component = @GenerateAllTestLanguages {}
+	component = @ui.tests.GenerateTestLanguages {}
+	component = @builder.tests.GenerateBuilderTestLanguages {}
+	component = @xtext.ui.GenerateTestLanguages {}
+	
+	// examples
+//	component = @example.arithmetics.Arithmetics {}
+//	component = @example.domainmodel.GenerateDomainmodelLanguage {}
+//	component = @example.fowlerdsl.GenerateStatemachine {}
+}

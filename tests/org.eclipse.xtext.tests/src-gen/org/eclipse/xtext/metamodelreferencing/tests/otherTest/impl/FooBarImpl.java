@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl.FooBarImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

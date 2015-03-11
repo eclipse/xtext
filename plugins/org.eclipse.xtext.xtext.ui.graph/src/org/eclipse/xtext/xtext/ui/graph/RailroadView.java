@@ -86,25 +86,26 @@ public class RailroadView extends ViewPart {
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
-		site.getWorkbenchWindow().getPartService().addPartListener(synchronizer);
+		synchronizer.start(site);
 	}
 
 	@Override
 	public void dispose() {
 		selectionLinker.deactivate();
-		getSite().getWorkbenchWindow().getPartService().removePartListener(synchronizer);
+		synchronizer.stop(getSite());
 		super.dispose();
 	}
 
 	public void setContents(final IFigure newContents) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (contents != null)
 					if(contents.getParent() == rootFigure)
 						rootFigure.remove(contents);
 				if (newContents != null)
 					rootFigure.add(newContents);
-				rootFigure.revalidate();
+				rootFigure.validate();
 				contents = newContents;
 				exportAction.setEnabled(newContents != null);
 			}

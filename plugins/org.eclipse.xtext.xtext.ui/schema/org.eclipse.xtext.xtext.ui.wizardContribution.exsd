@@ -69,6 +69,13 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="sortKey" type="string">
+            <annotation>
+               <documentation>
+                  used to sort the contributions.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

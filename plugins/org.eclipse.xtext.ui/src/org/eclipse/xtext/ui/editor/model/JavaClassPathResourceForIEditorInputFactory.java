@@ -28,6 +28,13 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 
 	@Inject
 	private IStorage2UriMapper storageToUriMapper;
+	
+	/**
+	 * @since 2.5
+	 */
+	public IStorage2UriMapper getStorageToUriMapper() {
+		return storageToUriMapper;
+	}
 
 	@Override
 	protected Resource createResource(IStorage storage) throws CoreException {
@@ -42,12 +49,31 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = createResource(resourceSet, uri);
-		resource.setValidationDisabled(true);
+		resource.setValidationDisabled(isValidationDisabled(uri, storage));
 		return resource;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Override
+	protected boolean isValidationDisabled(URI uri, IStorage storage) {
+		if (storage instanceof IJarEntryResource) {
+			return true;
+		}
+		return super.isValidationDisabled(uri, storage);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	protected boolean isValidationDisabled(IStorage storage) {
+		return isValidationDisabled(null, storage);
 	}
 
 	@Override
-	protected ResourceSet getResourceSet(IStorage storage) {
+	protected ResourceSet getResourceSet(/* @Nullable */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			if (root != null) {

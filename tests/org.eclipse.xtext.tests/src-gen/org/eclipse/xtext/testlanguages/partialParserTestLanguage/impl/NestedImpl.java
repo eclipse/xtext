@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.NestedImpl#getNested <em>Nested</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

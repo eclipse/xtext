@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.superPackage.impl;
 
@@ -33,7 +30,7 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
   {
     try
     {
-      SuperPackageFactory theSuperPackageFactory = (SuperPackageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/SuperTestLanguage"); 
+      SuperPackageFactory theSuperPackageFactory = (SuperPackageFactory)EPackage.Registry.INSTANCE.getEFactory(SuperPackagePackage.eNS_URI);
       if (theSuperPackageFactory != null)
       {
         return theSuperPackageFactory;

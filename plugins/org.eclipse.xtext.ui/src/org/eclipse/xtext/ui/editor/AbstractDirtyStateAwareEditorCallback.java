@@ -18,7 +18,9 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated since 2.7 the {@link DirtyStateEditorSupport} is directly served by the {@link XtextEditor}
  */
+@Deprecated
 public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEditorCallback, IDirtyStateEditorSupportClient {
 	
 	@Inject
@@ -26,12 +28,14 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 	
 	private XtextEditor currentEditor;
 	
+	@Override
 	public void afterCreatePartControl(final XtextEditor editor) {
 		if (this.currentEditor != editor)
 			throw new IllegalStateException("different instances of editor were given.");
 		editorSupport.initializeDirtyStateSupport(this);
 	}
 	
+	@Override
 	public void beforeDispose(XtextEditor editor) {
 		if (this.currentEditor != editor)
 			throw new IllegalStateException("different instances of editor were given.");
@@ -39,24 +43,28 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		this.currentEditor = null;
 	}
 	
+	@Override
 	public void afterSave(XtextEditor editor) {
 		if (this.currentEditor != editor)
 			throw new IllegalStateException("different instances of editor were given.");
 		editorSupport.markEditorClean(this);
 	}
 	
+	@Override
 	public boolean onValidateEditorInputState(XtextEditor editor) {
 		if (this.currentEditor != editor)
 			throw new IllegalStateException("different instances of editor were given.");
 		return editorSupport.isEditingPossible(this);
 	}
 	
+	@Override
 	public void beforeSetInput(XtextEditor editor) {
 		if (this.currentEditor != null) {
 			editorSupport.removeDirtyStateSupport(this);
 		}
 	}
 	
+	@Override
 	public void afterSetInput(XtextEditor editor) {
 		if (this.currentEditor != null) {
 			if (this.currentEditor != editor)
@@ -67,29 +75,33 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		}
 	}
 	
+	@Override
 	public boolean isDirty() {
 		return currentEditor.isDirty();
 	}
 	
+	@Override
 	public IXtextDocument getDocument() {
 		return currentEditor.getDocument();
 	}
 	
+	@Override
 	public void addVerifyListener(VerifyListener listener) {
 		ISourceViewer sourceViewer = currentEditor.getInternalSourceViewer();
 		StyledText widget = sourceViewer.getTextWidget();
 		widget.addVerifyListener(listener);
 	}
 
+	@Override
 	public Shell getShell() {
 		return currentEditor.getEditorSite().getShell();
 	}
 
+	@Override
 	public void removeVerifyListener(VerifyListener listener) {
 		ISourceViewer sourceViewer = currentEditor.getInternalSourceViewer();
 		StyledText widget = sourceViewer.getTextWidget();
 		if (widget != null)
 			widget.removeVerifyListener(listener);
 	}
-	
 }

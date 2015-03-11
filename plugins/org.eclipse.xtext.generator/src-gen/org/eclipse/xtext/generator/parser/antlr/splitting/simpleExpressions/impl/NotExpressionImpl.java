@@ -1,15 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
@@ -65,7 +65,8 @@ public class NotExpressionImpl extends ExpressionImpl implements NotExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return expression;
   }
@@ -92,7 +93,8 @@ public class NotExpressionImpl extends ExpressionImpl implements NotExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  @Override
+public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

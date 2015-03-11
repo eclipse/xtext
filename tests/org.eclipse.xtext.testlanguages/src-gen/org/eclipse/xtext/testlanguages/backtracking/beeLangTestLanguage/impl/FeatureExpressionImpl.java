@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.FeatureE
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FeatureExpressionImpl#getObjExpr <em>Obj Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.FeatureExpressionImpl#getFeatureName <em>Feature Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

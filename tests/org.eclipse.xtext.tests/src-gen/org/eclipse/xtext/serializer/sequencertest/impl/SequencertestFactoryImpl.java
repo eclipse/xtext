@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -17,6 +14,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DefEnum;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
@@ -27,7 +25,10 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -42,6 +43,16 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,7 +72,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     try
     {
-      SequencertestFactory theSequencertestFactory = (SequencertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage"); 
+      SequencertestFactory theSequencertestFactory = (SequencertestFactory)EPackage.Registry.INSTANCE.getEFactory(SequencertestPackage.eNS_URI);
       if (theSequencertestFactory != null)
       {
         return theSequencertestFactory;
@@ -121,6 +132,20 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.DEPENDENT_ALTERNATIVE2: return createDependentAlternative2();
       case SequencertestPackage.OPTIONAL: return createOptional();
       case SequencertestPackage.FLOAT: return createFloat();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE: return createUnorderedAlternative();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL: return createUnorderedAlternativeVal();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL_DELEGATE: return createUnorderedAlternativeValDelegate();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL2: return createUnorderedAlternativeVal2();
+      case SequencertestPackage.UNORDERED_GROUP: return createUnorderedGroup();
+      case SequencertestPackage.UNORDERED_GROUP_VAL: return createUnorderedGroupVal();
+      case SequencertestPackage.UNORDERED_GROUP_VAL_DELEGATE: return createUnorderedGroupValDelegate();
+      case SequencertestPackage.UNORDERED_GROUP_VAL2: return createUnorderedGroupVal2();
+      case SequencertestPackage.UNORDERED_GROUP_OPTIONAL: return createUnorderedGroupOptional();
+      case SequencertestPackage.UNORDERED_GROUP_BOOLEAN: return createUnorderedGroupBoolean();
+      case SequencertestPackage.COMPLEX1: return createComplex1();
+      case SequencertestPackage.OPTIONAL_DOUBLE: return createOptionalDouble();
+      case SequencertestPackage.NULL_VALUE: return createNullValue();
+      case SequencertestPackage.NULL_CROSS_REF: return createNullCrossRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -444,6 +469,160 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     FloatImpl float_ = new FloatImpl();
     return float_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternative createUnorderedAlternative()
+  {
+    UnorderedAlternativeImpl unorderedAlternative = new UnorderedAlternativeImpl();
+    return unorderedAlternative;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeVal createUnorderedAlternativeVal()
+  {
+    UnorderedAlternativeValImpl unorderedAlternativeVal = new UnorderedAlternativeValImpl();
+    return unorderedAlternativeVal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeValDelegate createUnorderedAlternativeValDelegate()
+  {
+    UnorderedAlternativeValDelegateImpl unorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateImpl();
+    return unorderedAlternativeValDelegate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeVal2 createUnorderedAlternativeVal2()
+  {
+    UnorderedAlternativeVal2Impl unorderedAlternativeVal2 = new UnorderedAlternativeVal2Impl();
+    return unorderedAlternativeVal2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroup createUnorderedGroup()
+  {
+    UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
+    return unorderedGroup;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupVal createUnorderedGroupVal()
+  {
+    UnorderedGroupValImpl unorderedGroupVal = new UnorderedGroupValImpl();
+    return unorderedGroupVal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupValDelegate createUnorderedGroupValDelegate()
+  {
+    UnorderedGroupValDelegateImpl unorderedGroupValDelegate = new UnorderedGroupValDelegateImpl();
+    return unorderedGroupValDelegate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupVal2 createUnorderedGroupVal2()
+  {
+    UnorderedGroupVal2Impl unorderedGroupVal2 = new UnorderedGroupVal2Impl();
+    return unorderedGroupVal2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupOptional createUnorderedGroupOptional()
+  {
+    UnorderedGroupOptionalImpl unorderedGroupOptional = new UnorderedGroupOptionalImpl();
+    return unorderedGroupOptional;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupBoolean createUnorderedGroupBoolean()
+  {
+    UnorderedGroupBooleanImpl unorderedGroupBoolean = new UnorderedGroupBooleanImpl();
+    return unorderedGroupBoolean;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Complex1 createComplex1()
+  {
+    Complex1Impl complex1 = new Complex1Impl();
+    return complex1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OptionalDouble createOptionalDouble()
+  {
+    OptionalDoubleImpl optionalDouble = new OptionalDoubleImpl();
+    return optionalDouble;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullValue createNullValue()
+  {
+    NullValueImpl nullValue = new NullValueImpl();
+    return nullValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullCrossRef createNullCrossRef()
+  {
+    NullCrossRefImpl nullCrossRef = new NullCrossRefImpl();
+    return nullCrossRef;
   }
 
   /**

@@ -27,11 +27,13 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 
 	private TableViewer viewer;
 
+	@Override
 	public void dispose() {
 		viewer = null;
 		matches = null;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = (TableViewer) viewer;
@@ -42,6 +44,7 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 		}
 	}
 
+	@Override
 	public void updateElement(int index) {
 		if (index < currentCount) {
 			reset();

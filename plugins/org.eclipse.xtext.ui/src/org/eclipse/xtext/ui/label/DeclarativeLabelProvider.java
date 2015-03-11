@@ -24,6 +24,7 @@ public class DeclarativeLabelProvider extends AbstractLabelProvider {
 	
 	private final PolymorphicDispatcher<Object> textDispatcher = new PolymorphicDispatcher<Object>("text", 1, 1,
 			Collections.singletonList(this), new ErrorHandler<Object>() {
+				@Override
 				public Object handle(Object[] params, Throwable e) {
 					return handleTextError(params, e);
 				}
@@ -31,6 +32,7 @@ public class DeclarativeLabelProvider extends AbstractLabelProvider {
 
 	private final PolymorphicDispatcher<Object> imageDispatcher = new PolymorphicDispatcher<Object>("image", 1, 1,
 			Collections.singletonList(this), new ErrorHandler<Object>() {
+			@Override
 			public Object handle(Object[] params, Throwable e) {
 				return handleImageError(params, e);
 			}

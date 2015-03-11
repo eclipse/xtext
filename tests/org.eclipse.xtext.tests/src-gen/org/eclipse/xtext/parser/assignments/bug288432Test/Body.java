@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug288432Test;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.Body#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.Body#getContent <em>Content</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.Body#getFoo <em>Foo</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.assignments.bug288432Test.Bug288432TestPackage#getBody()
  * @model

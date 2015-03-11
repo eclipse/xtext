@@ -25,11 +25,11 @@ import org.eclipse.xtext.Grammar;
 import com.google.common.base.Function;
 
 /**
+ * A simple composite generator fragment implementation. It delegates all callbacks to its contained fragments.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
- *         simple composite generator fragment implementation. delegating all callbacks to its contained fragments
  */
-public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAware {
+public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3, IGeneratorFragmentExtension4, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
@@ -57,101 +57,284 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 		addFragment(message);
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToPluginXmlRt(grammar, ctx);
 		}
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Override
+	public void addToPluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToPluginXmlRt(config, ctx);
+			} else {
+				fragment.addToPluginXmlRt(config.getGrammar(), ctx);
+			}
+		}
+	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToPluginXmlUi(grammar, ctx);
 		}
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Override
+	public void addToPluginXmlUi(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToPluginXmlUi(config, ctx);
+			} else {
+				fragment.addToPluginXmlUi(config.getGrammar(), ctx);
+			}
+		}
+	}
 
+	/**
+	 * @since 2.3
+	 * @deprecated 
+	 */
+	@Override
+	@Deprecated
+	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension) {
+				((IGeneratorFragmentExtension) fragment).addToPluginXmlTests(grammar, ctx);
+			}
+		}
+	}
+	
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToStandaloneSetup(grammar, ctx);
 		}
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Override
+	public void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToStandaloneSetup(config, ctx);
+			} else {
+				fragment.addToStandaloneSetup(config.getGrammar(), ctx);
+			}
+		}
+	}
 
-	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+	@Override
+	public void generate(Grammar grammar, XpandExecutionContext ctx) throws CompositeGeneratorException {
+		CompositeGeneratorException cgEx = new CompositeGeneratorException();
 		for (IGeneratorFragment fragment : fragments) {
 			try {
 				fragment.generate(grammar, ctx);
 			} catch (WorkflowInterruptedException e) {
 				throw e;
 			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
+				cgEx.addException(e);
 			}
+		}
+		if(cgEx.hasExceptions()) {
+			throw cgEx;
+		}
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Override
+	public void generate(LanguageConfig config, XpandExecutionContext ctx) throws CompositeGeneratorException {
+		CompositeGeneratorException cgEx = new CompositeGeneratorException();
+		for (IGeneratorFragment fragment : fragments) {
+			try {
+				if (fragment instanceof IGeneratorFragmentExtension2) {
+					((IGeneratorFragmentExtension2)fragment).generate(config, ctx);
+				} else {
+					fragment.generate(config.getGrammar(), ctx);
+				}
+			} catch (WorkflowInterruptedException e) {
+				throw e;
+			} catch (Exception e) {
+				cgEx.addException(e);
+			}
+		}
+		if(cgEx.hasExceptions()) {
+			throw cgEx;
 		}
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(final Grammar grammar) {
-		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
-
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesRt(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getImportedPackagesRt(final Grammar grammar) {
-		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getImportedPackagesRt(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(final Grammar grammar) {
-		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesUi(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getImportedPackagesUi(final Grammar grammar) {
-		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getImportedPackagesUi(grammar);
 			}
 		});
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getImportedPackagesTests(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension 
+						? ((IGeneratorFragmentExtension) param).getImportedPackagesTests(grammar)
+						: null;
+			}
+		});
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getExportedPackagesTests(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension 
+						? ((IGeneratorFragmentExtension) param).getExportedPackagesTests(grammar)
+						: null;
+			}
+		});
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String[] getImportedPackagesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension3 
+						? ((IGeneratorFragmentExtension3) param).getImportedPackagesIde(grammar)
+						: null;
+			}
+		});
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String[] getExportedPackagesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension3 
+						? ((IGeneratorFragmentExtension3) param).getExportedPackagesIde(grammar)
+						: null;
+			}
+		});
+	}
+	
+	@Override
 	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			@Override
 			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsRt(grammar);
 			}
 		});
 	}
-
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultRuntimeModuleClassName(Grammar grammar) {
+		String result = null;
+		for (IGeneratorFragment f : fragments) {
+			if (f instanceof IGeneratorFragmentExtension4) {
+				String candidate = ((IGeneratorFragmentExtension4) f).getDefaultRuntimeModuleClassName(grammar);
+				if (candidate != null) {
+					result = candidate;
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultUiModuleClassName(Grammar grammar) {
+		String result = null;
+		for (IGeneratorFragment f : fragments) {
+			if (f instanceof IGeneratorFragmentExtension4) {
+				String candidate = ((IGeneratorFragmentExtension4) f).getDefaultUiModuleClassName(grammar);
+				if (candidate != null) {
+					result = candidate;
+				}
+			}
+		}
+		return result;
+	}
+	
+	@Override
 	public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			@Override
 			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsUi(grammar);
 			}
 		});
 	}
 
-	private String[] internalGetExportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
+	private String[] collectAllStrings(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
-			String[] exportedPackages = func.apply(f);
-			if (exportedPackages != null)
-				all.addAll(Arrays.asList(exportedPackages));
-		}
-		return all.toArray(new String[all.size()]);
-	}
-
-	private String[] internalGetImportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
-		Set<String> all = new LinkedHashSet<String>();
-		for (IGeneratorFragment f : this.fragments) {
-			String[] importedPackages = func.apply(f);
-			if (importedPackages != null)
-				all.addAll(Arrays.asList(importedPackages));
+			String[] strings = func.apply(f);
+			if (strings != null)
+				all.addAll(Arrays.asList(strings));
 		}
 		return all.toArray(new String[all.size()]);
 	}
@@ -167,7 +350,13 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 							Binding binding = iterator.next();
 							if (binding.equals(entry)) {
 								if (binding.isFinal()) {
-									throw new IllegalStateException("Cannot override final binding '" + binding + "'");
+									if (entry.isFinal()) {
+										throw new IllegalStateException("Conflicting final bindings for '" + binding.getKey() + "' from fragments " +
+												""+binding.getContributedBy()+" and "+entry.getContributedBy());
+									} else {
+										LOG.warn("Cannot override final binding '" + binding + "'. " +
+												"Ignoring binding from fragment '"+module.getClass().getSimpleName() +"'");
+									}
 								} else {
 									if (LOG.isDebugEnabled()) {
 										LOG.debug("replacing binding : " + binding);
@@ -185,27 +374,58 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 		}
 		return bindings;
 	}
-
-	public String[] getRequiredBundlesRt(Grammar grammar) {
-		Set<String> all = new LinkedHashSet<String>();
-		for (IGeneratorFragment f : this.fragments) {
-			String[] requiredBundlesRt = f.getRequiredBundlesRt(grammar);
-			if (requiredBundlesRt != null)
-				all.addAll(Arrays.asList(requiredBundlesRt));
-		}
-		return all.toArray(new String[all.size()]);
+	
+	@Override
+	public String[] getRequiredBundlesRt(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
+			public String[] apply(IGeneratorFragment f) {
+				return f.getRequiredBundlesRt(grammar);
+			}
+		});
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String[] getRequiredBundlesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
+			public String[] apply(IGeneratorFragment f) {
+				return (f instanceof IGeneratorFragmentExtension3)
+						? ((IGeneratorFragmentExtension3)f).getRequiredBundlesIde(grammar)
+						: null;
+			}
+		});
 	}
 
-	public String[] getRequiredBundlesUi(Grammar grammar) {
-		Set<String> all = new LinkedHashSet<String>();
-		for (IGeneratorFragment f : this.fragments) {
-			String[] requiredBundlesUi = f.getRequiredBundlesUi(grammar);
-			if (requiredBundlesUi != null)
-				all.addAll(Arrays.asList(requiredBundlesUi));
-		}
-		return all.toArray(new String[all.size()]);
+	@Override
+	public String[] getRequiredBundlesUi(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
+			public String[] apply(IGeneratorFragment f) {
+				return f.getRequiredBundlesUi(grammar);
+			}
+		});
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getRequiredBundlesTests(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
+			public String[] apply(IGeneratorFragment f) {
+				return (f instanceof IGeneratorFragmentExtension)
+						? ((IGeneratorFragmentExtension)f).getRequiredBundlesTests(grammar)
+						: null;
+			}
+		});
+	}
+	
+	@Override
 	public void checkConfiguration(Issues issues) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.checkConfiguration(issues);
@@ -214,6 +434,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 
 	private Naming naming;
 
+	@Override
 	public void registerNaming(Naming n) {
 		this.naming = n;
 		for (IGeneratorFragment f : fragments) {

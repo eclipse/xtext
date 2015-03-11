@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
@@ -28,6 +29,7 @@ public class LazyLinkingTestLanguageScopeProvider extends AbstractDeclarativeSco
 	
 	public IScope scope_Property(Type t, EReference ref) {
 		return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(t.getExtends().getProperties(), new Function<Property, IEObjectDescription>(){
+			@Override
 			public IEObjectDescription apply(Property param) {
 				return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 			}

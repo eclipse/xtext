@@ -1,0 +1,11 @@
+IEclipsePreferences#org-eclipse-xtend-ide {
+	preferences:
+		'syntaxColorer.xtend.richText.color=23,198,163'
+		'syntaxColorer.xtend.richText.bgColor=80,80,80'
+/*		'syntaxColorer.xtend.richText.delimiter.color='*/
+		'syntaxColorer.xtend.insignificant.template.text.color=23,198,163'
+		'syntaxColorer.xtend.potential.line.break.color=23,198,163'
+		'syntaxColorer.xtend.template.line.break.color=23,198,163'
+		'syntaxColorer.xtend.template.line.bgColor=80,80,80'
+		'syntaxColorer.xtend.active.annotation.color=171,48,0'
+}

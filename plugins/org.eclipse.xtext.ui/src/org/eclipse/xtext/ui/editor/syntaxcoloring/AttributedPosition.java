@@ -22,30 +22,35 @@ public class AttributedPosition extends Position {
 
 	/**
 	 * Initialize the position with the given offset, length and foreground color.
-	 *
-	 * @param offset The position offset
-	 * @param length The position length
-	 * @param highlighting The position's highlighting
-	 * @param lock The lock object
+	 * 
+	 * @param offset
+	 *            The position offset
+	 * @param length
+	 *            The position length
+	 * @param attribute
+	 *            The highlighting TextAttribute
+	 * @param lock
+	 *            The lock object
 	 */
 	public AttributedPosition(int offset, int length, TextAttribute attribute, Object lock) {
 		super(offset, length);
-		this.attribute= attribute;
-		fLock= lock;
+		this.attribute = attribute;
+		fLock = lock;
 	}
 
 	/**
 	 * @return Returns a corresponding style range.
 	 */
 	public StyleRange createStyleRange() {
-		int len= getLength();
+		int len = getLength();
 
-		TextAttribute textAttribute= attribute;
-		int style= textAttribute.getStyle();
-		int fontStyle= style & (SWT.ITALIC | SWT.BOLD | SWT.NORMAL);
-		StyleRange styleRange= new StyleRange(getOffset(), len, textAttribute.getForeground(), textAttribute.getBackground(), fontStyle);
-		styleRange.strikeout= (style & TextAttribute.STRIKETHROUGH) != 0;
-		styleRange.underline= (style & TextAttribute.UNDERLINE) != 0;
+		TextAttribute textAttribute = attribute;
+		int style = textAttribute.getStyle();
+		int fontStyle = style & (SWT.ITALIC | SWT.BOLD | SWT.NORMAL);
+		StyleRange styleRange = new StyleRange(getOffset(), len, textAttribute.getForeground(),
+				textAttribute.getBackground(), fontStyle);
+		styleRange.strikeout = (style & TextAttribute.STRIKETHROUGH) != 0;
+		styleRange.underline = (style & TextAttribute.UNDERLINE) != 0;
 		styleRange.font = textAttribute.getFont();
 
 		return styleRange;
@@ -53,11 +58,14 @@ public class AttributedPosition extends Position {
 
 	/**
 	 * Uses reference equality for the highlighting.
-	 *
-	 * @param off The offset
-	 * @param len The length
-	 * @param highlighting The highlighting
-	 * @return <code>true</code> iff the given offset, length and highlighting are equal to the internal ones.
+	 * 
+	 * @param off
+	 *            The offset
+	 * @param len
+	 *            The length
+	 * @param other
+	 *            The highlighting TextAttribute to compare with
+	 * @return <code>true</code> if the given offset, length and highlighting are equal to the internal ones.
 	 */
 	public boolean isEqual(int off, int len, TextAttribute other) {
 		synchronized (fLock) {
@@ -67,9 +75,11 @@ public class AttributedPosition extends Position {
 
 	/**
 	 * Is this position contained in the given range (inclusive)? Synchronizes on position updater.
-	 *
-	 * @param off The range offset
-	 * @param len The range length
+	 * 
+	 * @param off
+	 *            The range offset
+	 * @param len
+	 *            The range length
 	 * @return <code>true</code> iff this position is not delete and contained in the given range.
 	 */
 	public boolean isContained(int off, int len) {
@@ -131,4 +141,5 @@ public class AttributedPosition extends Position {
 	public TextAttribute getHighlighting() {
 		return attribute;
 	}
+
 }

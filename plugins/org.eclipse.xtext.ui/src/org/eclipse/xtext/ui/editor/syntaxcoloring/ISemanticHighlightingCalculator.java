@@ -9,12 +9,15 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Clients should implement an <code>ISemanticHighlightingCalculator</code> to compute
  * the mapping from ranges in the input to the appropriate highlighting style.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(DefaultSemanticHighlightingCalculator.class)
 public interface ISemanticHighlightingCalculator {
 
 	/**

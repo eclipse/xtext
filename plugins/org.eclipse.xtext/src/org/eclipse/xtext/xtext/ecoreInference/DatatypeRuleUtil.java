@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -30,6 +31,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 
 /**
+ * Utility class to handle data type rules in the Ecore inference.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
@@ -43,8 +46,27 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		return new DatatypeRuleChecker().doSwitch(rule);
 	}
 
+	/**
+	 * The finder tries to identify if a given ParserRule is to-be-inferred
+	 * as a data-type rule.
+	 * 
+	 * A data type rule is a data type rule if it
+	 * <ol>
+	 * <li>declares an explicit return type which is an EDataType, or</li>
+	 * <li>only calls other data type rules or terminal rules, and</li>
+	 * <li>does not contain any assignments or actions, and</li>
+	 * <li>consumes input, e.g. in the call graph is at least one element with concrete syntax,
+	 *   which may be a keyword or a terminal rule</li>
+	 * </ol>
+	 * 
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
 	static class DatatypeRuleFinder extends DatatypeRuleUtil {
 
+		/**
+		 * This flag keeps track of potentially visited concrete
+		 * syntax elements in the call graph.
+		 */
 		private boolean indicatorFound;
 
 		@Override
@@ -71,9 +93,15 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				}
 				if (visitedRules.add(object)) {
 					Boolean result = object.getAlternatives() != null && doSwitch(object.getAlternatives());
-					if (result)
-						typeRef.setClassifier(EcorePackage.Literals.ESTRING);
-					visitedRules.remove(object);
+					if (result) {
+						EDataType dataType = GrammarUtil.findEString(GrammarUtil.getGrammar(object));
+						if (dataType != null)
+							typeRef.setClassifier(dataType);
+						else {
+							// nowhere imported - use the instance from the registry
+							typeRef.setClassifier(EcorePackage.Literals.ESTRING);
+						}
+					}
 					return result;
 				} else {
 					return getApproximatedResult(object);
@@ -82,15 +110,19 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 			if (!visitedRules.add(object))
 				return getApproximatedResult(object);
 			Boolean result = (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
-			visitedRules.remove(object);
 			return result; 
 		}
 
+		/**
+		 * If a rule is visited reentrant, it is is shallow-checked for syntax
+		 * elements that indicate a production rule rather than a data type rule.
+		 */
 		protected Boolean getApproximatedResult(ParserRule object) {
 			if (object.getAlternatives() == null)
 				return true;
 			Iterator<?> contents = EcoreUtil.getAllContents(object.getAlternatives(), true);
 			return !Iterators.filter(contents, new Predicate<Object>() {
+				@Override
 				public boolean apply(Object input) {
 					return input instanceof Assignment || input instanceof Action;
 				}
@@ -114,12 +146,19 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 			if (!visitedRules.add(object))
 				return true;
 			Boolean result = GrammarUtil.isDatatypeRule(object);
-			visitedRules.remove(object);
 			return result; 
 		}
 
 	}
 
+	/**
+	 * A set of visited rules. The visited rules will not be removed from this set
+	 * in order to save CPU cylces. This is valid since all rules that traversed
+	 * and did not yield 'false' are considered to be data type rule candidates.
+	 * If a rule yields false in the call graph, the traversal is immediately stopped
+	 * and 'false' is returned. This implies that rules which have been traversed are
+	 * potential data type rules if the traversal is still going on.
+	 */
 	protected final Set<AbstractRule> visitedRules;
 
 	protected DatatypeRuleUtil() {

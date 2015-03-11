@@ -1,0 +1,268 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="builddsl">Build Language</h1>
+
+<p>Build tools like Ant or <a href="http://www.gradle.org/">Gradle</a> decompose the build process into a set of tasks. A task can stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from the dependencies of the defined tasks.</p>
+
+<p><img src="images/builddsl_screenshot.png" alt="" /></p>
+
+<p>This build language combines the declarative approach of defining tasks and dependencies with the full power of a modern expression language. It is a bit similar to Ant but statically typed and with very good IDE support.</p>
+
+<h2 id="builddsl-solution">Overview</h2>
+
+<p>The above screenshot shows an exemplary build script. A script has a couple of parameters. The tasks define dependencies to other tasks. What happens if the task is executed is defined in a block within curly braces. </p>
+
+<p>A build script can be run from the command line, assigning values to the parameters in the syntax <code>myscript --&lt;paramName&gt; &lt;value&gt;</code>. </p>
+
+<p>We have put most functionality of the language in the runtime library: Detecting the order of execution, parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions to Xbase. This allows both us and future users to add new tasks as library methods instead of hard-coding them in the language.</p>
+
+<h2 id="builddsl-running">Running the Example</h2>
+
+<p>In the runtime workspace, open the <em>BuildExample.build</em> in the editor. The example project comes with some sample java code to compile in the <em>example-project</em> folder. Choose <em>Run as → Build Task</em> from the context menu of any task to execute it. </p>
+
+<h2 id="builddsl-grammar">Grammar</h2>
+
+<p>The grammar of the DSL is once again quite slim: </p>
+
+<pre><code class="language-xtext">grammar org.xtext.builddsl.BuildDSL with org.eclipse.xtext.xbase.Xbase
+
+generate build "http://www.xtext.org/builddsl"
+
+BuildFile:
+	("package" name=QualifiedName)?
+	importSection=XImportSection?
+	declarations+=Declaration*;
+
+Declaration:
+	Task | Parameter;
+
+Parameter:
+	'param' type=JvmTypeReference? name=ValidID ('=' init=XExpression)?;
+
+Task:
+	'task' name=ValidID 
+	('depends' depends+=[Task|ValidID] (',' depends+=[Task|ValidID])*)?
+	action=XBlockExpression;
+</code></pre>
+
+<p>A <em>BuildFile</em> starts with a <em>package</em> declaration. The generated Java class will be located in this namespace. The next part is an <em>importSection</em>. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an <em>XImportSection</em> as in this example. The imports are followed by the <em>Declarations</em>. A <em>Declaration</em> can be a <em>Task</em> or a <em>Parameter</em>. A <em>Parameter</em> can declare a type and an initialization expression. <em>Tasks</em> define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">XBlockExpression</a> from Xbase, thus everthing is possible within a task.</p>
+
+<h2 id="builddsl-inferrer">Translation to Java</h2>
+
+<p>For each <em>BuildFile</em> we create a Java class that extends the library class <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">BuildScript</a>. We generate a main method allowing to execute the script as a Java application with command line parameters. The use of <code>System.exit</code> allows to return error codes to the caller. </p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-builddsl">package sample
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">package sample;
+...
+public class SimpleBuild extends BuildScript {
+...
+  public static void main(final String... args) {
+    SimpleBuild script = new SimpleBuild();
+    if (script.showHelp(args)) {
+      System.exit(HELP);
+    }
+    System.exit(script.doBuild(args));
+  }
+...
+}
+</code></pre>
+  </li>
+</ul>
+
+<p>The respective inferrer code looks like this: </p>
+
+<pre><code class="language-xtend">class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
+
+  @Inject extension JvmTypesBuilder
+
+  def dispatch void infer(BuildFile file, 
+                          extension IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    val qualifiedName = file.javaClassName
+    val simpleName = Strings.lastToken(qualifiedName, ".")
+    accept(file.toClass(fqn))[
+      superTypes += typeRef(BuildScript)
+...      
+      val stringArray = typeRef(String).addArrayTypeDimension
+      members += file.toMethod("main", typeRef(void)) [
+        parameters += file.toParameter("args", stringArray)
+        varArgs = true
+        static = true
+        body = '''
+          «scriptName» script = new «scriptName»();
+          if (script.showHelp(args)) {
+            System.exit(HELP);
+          }
+          System.exit(script.doBuild(args));
+        '''
+      ]
+    ]
+...
+</code></pre>
+
+<p>Each <em>Task</em> becomes a method in the Java class. A <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend">DependsOn</a> annotation communicates the dependencies to the runtime. The superclass will scan for such annotations and execute the dependencies in the right order.</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-builddsl">task print depends prepare {
+  print(name)
+}
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">@DependsOn("prepare")
+protected void print() {
+  InputOutput.&lt;String&gt;print(this.name);
+}
+</code></pre>
+  </li>
+</ul>
+
+<p>The annotation part may be interesting, so here is the snippet from the inferrer: </p>
+
+<pre><code class="language-xtend">// a method for the actual task body
+members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) [
+  visibility = JvmVisibility.PROTECTED
+  annotations += annotationRef(DependsOn, task.depends.map[name])
+  body = task.action
+  ]
+]
+</code></pre>
+
+<p>Finally, we create a field with the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">Param</a> annotation from each <em>Parameter</em>. The superclass will make the so marked fields initializable from command line arguments. </p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-builddsl">param name = 'World'
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">@Param
+public String name = "World";
+</code></pre>
+  </li>
+</ul>
+
+<p>The type can be skipped. If there is an initialization expression, the parameter’s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
+
+<pre><code class="language-xtend">@Inject ITypeProvider typeProvider
+...
+val type = declaredParameter.type 
+	?: declaredParameter?.init?.inferredType
+	?: typeRef(String)
+</code></pre>
+
+<h2 id="builddsl-validation">Validation</h2>
+
+<p>When <em>Tasks</em> are depending on each other, cycles will break the computation of the execution order. There is a check for this constraint in the validator <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/validation/BuildDSLValidator.xtend">BuildDSLValidator</a>:</p>
+
+<pre><code class="language-xtend">class BuildDSLValidator extends XbaseJavaValidator {
+...
+  @Check
+  def void checkNoRecursiveDependencies(Task task) {
+    task.findDependentTasks [ cycle |
+      if (cycle.size == 1) {
+        error('''The task '«task.name»' cannot depend on itself.''', 
+            cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      } else {
+        error('''There is a cyclic dependency that involves tasks «
+                cycle.map[name].join(", ")»''', 
+              cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      }
+    ]
+  }
+...
+</code></pre>
+
+<h2 id="builddsl-imports">Imports</h2>
+
+<p>By using the <em>XImportSection</em> form Xbase, the language automatically supports the notion of <em>plain imports</em>, <em>static imports</em> and <em>static extension imports</em>. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the <a href="201_sevenlang_introduction.html#xtend_extension">Xtend primer</a> for a more detailed description.</p>
+
+<p>We ship some predefined extension classes to enhance the Java classes <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a> and <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a>. These are always put onto the extension scope by a customized <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend">BuildDSLImplicitlyImportedFeatures</a>:</p>
+
+<pre><code class="language-xtend">class BuildDSLImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
+	/**
+	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
+	 */
+	override protected getExtensionClasses() {
+		(super.getExtensionClasses() + #[FileExtensions, ClassExtensions])
+			.toList
+	}
+}
+</code></pre>
+
+<p>As always, such an implementation has to be bound in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/BuildDSLRuntimeModule.java">BuildDSLRuntimeModule</a>:</p>
+
+<pre><code class="language-java">public class BuildDSLRuntimeModule 
+    extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
+...
+  public Class&lt;? extends ImplicitlyImportedFeatures&gt; 
+      bindImplicitlyImportedFeatures() {
+    return BuildDSLImplicitlyImportedTypes.class;
+  }
+}
+</code></pre>
+
+<h2 id="builddsl-library">Operator Overloading</h2>
+
+<p>As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.java">FileExtensions</a>. We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a>:</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-builddsl">val dir = 'someDir'.file
+val file = dir / 'fileName.txt'
+val theSameFile = 'someDir' / 'fileName.txt'
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">final File dir = FileExtensions.file("someDir");
+final File file = FileExtensions.operator_divide(dir, "fileName.txt");
+final File theSameFile = FileExtensions.operator_divide(
+    "someDir", 
+    "fileName.txt");
+</code></pre>
+  </li>
+</ul>
+
+<p>The compiler replaces operators with method calls to methods named <code>operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
+
+<h2 id="builddsl-launch">Run as… Integration</h2>
+
+<p>To facilitate executing build scripts from within Java, we have extended Eclipse’s launch support. The respective classes are <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">BuildDSLLaunchDelegate</a>, <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">BuildDSLLaunchShortcut</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">BuildDSLLaunchTabGroup</a>. Describing all the details would be a bit lengthy but it is quite straightforward if you are familiar with the launching API. </p>
+
+<hr />
+
+<p><strong><a href="204_mongodb.html">Next Chapter: DSL for MongoDB</a></strong></p>
+
+
+</body>
+</html>

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.locationprovidertest;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Element#getSingleref <em>Singleref</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Element#getMultirefs <em>Multirefs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage#getElement()
  * @model

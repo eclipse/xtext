@@ -12,18 +12,17 @@ import static com.google.common.collect.Maps.*;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument.Provider;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -32,31 +31,35 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
+public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IChangeRedirector.Aware {
 
 	private IRefactoringDocument.Provider refactoringDocumentProvider; 
 	
 	@Inject
-	public RefactoringUpdateAcceptor(Provider refactoringDocumentProvider) {
+	public RefactoringUpdateAcceptor(IRefactoringDocument.Provider refactoringDocumentProvider) {
 		this.refactoringDocumentProvider = refactoringDocumentProvider;
 	}
 
-	private RefactoringStatus status = new RefactoringStatus();
+	@Inject
+	private StatusWrapper status;
 	
 	private Map<URI, IRefactoringDocument> uri2document = newHashMap();
-	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = HashMultimap.create();
-	private Multimap<IRefactoringDocument, Change> document2change = HashMultimap.create();
+	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = LinkedHashMultimap.create();
+	private Multimap<IRefactoringDocument, Change> document2change = LinkedHashMultimap.create();
 
+	@Override
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		IRefactoringDocument document = getDocument(resourceURI);
 		document2textEdits.put(document, textEdit);
 	}
 
+	@Override
 	public void accept(URI resourceURI, Change change) {
 		IRefactoringDocument document = getDocument(resourceURI);
 		document2change.put(document, change);
 	}
 	
+	@Override
 	public IRefactoringDocument getDocument(URI resourceURI) {
 		IRefactoringDocument document = uri2document.get(resourceURI);
 		if(document != null) 
@@ -66,17 +69,20 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 		return newDocument;
 	}
 
-	public RefactoringStatus getRefactoringStatus() {
+	@Override
+	public StatusWrapper getRefactoringStatus() {
 		return status;
 	}
 	
+	@Override
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, document2textEdits.keySet().size()
-				+ document2change.keySet().size());
 		if(document2change.isEmpty() && document2textEdits.isEmpty())
 			return null;
 		CompositeChange compositeChange = new CompositeChange(name);
 		for (IRefactoringDocument document : document2textEdits.keySet()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<TextEdit> textEdits = document2textEdits.get(document);
 			MultiTextEdit multiTextEdit = new MultiTextEdit();
 			for (TextEdit textEdit : textEdits) {
@@ -84,16 +90,30 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 			}
 			Change change = document.createChange(name, multiTextEdit);
 			compositeChange.add(change);
-			progress.worked(1);
 		}
 		for (IRefactoringDocument document : document2change.keySet()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<Change> documentChanges = document2change.get(document);
 			CompositeChange documentCompositeChange = new CompositeChange(name);
 			documentCompositeChange.addAll(Iterables.toArray(documentChanges, Change.class));
 			compositeChange.add(documentCompositeChange);
-			progress.worked(1);
 		}
 		return compositeChange;
 	}
 
+	@Override
+	public void setChangeRedirector(IChangeRedirector changeRedirector) {
+		if(refactoringDocumentProvider instanceof IChangeRedirector.Aware) 
+			((IChangeRedirector.Aware) refactoringDocumentProvider).setChangeRedirector(changeRedirector);
+	}
+
+	@Override
+	public IChangeRedirector getChangeRedirector() {
+		if(refactoringDocumentProvider instanceof IChangeRedirector.Aware) 
+			return ((IChangeRedirector.Aware) refactoringDocumentProvider).getChangeRedirector();
+		else 
+			return IChangeRedirector.NULL;
+	}
 }

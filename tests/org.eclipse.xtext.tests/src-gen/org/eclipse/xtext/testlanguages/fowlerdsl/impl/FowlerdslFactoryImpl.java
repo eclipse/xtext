@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 
@@ -33,7 +30,7 @@ public class FowlerdslFactoryImpl extends EFactoryImpl implements FowlerdslFacto
   {
     try
     {
-      FowlerdslFactory theFowlerdslFactory = (FowlerdslFactory)EPackage.Registry.INSTANCE.getEFactory("http://example.xtext.org/FowlerDslTestLanguage"); 
+      FowlerdslFactory theFowlerdslFactory = (FowlerdslFactory)EPackage.Registry.INSTANCE.getEFactory(FowlerdslPackage.eNS_URI);
       if (theFowlerdslFactory != null)
       {
         return theFowlerdslFactory;

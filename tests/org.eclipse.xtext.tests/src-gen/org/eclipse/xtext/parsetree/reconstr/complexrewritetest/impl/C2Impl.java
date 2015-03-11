@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -13,9 +10,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C1;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
+import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyC;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +20,10 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Complexrewritetes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C2Impl#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -40,7 +37,7 @@ public class C2Impl extends TrickyCImpl implements C2
    * @generated
    * @ordered
    */
-  protected C1 y;
+  protected TrickyC y;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,7 +65,7 @@ public class C2Impl extends TrickyCImpl implements C2
    * <!-- end-user-doc -->
    * @generated
    */
-  public C1 getY()
+  public TrickyC getY()
   {
     return y;
   }
@@ -78,9 +75,9 @@ public class C2Impl extends TrickyCImpl implements C2
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetY(C1 newY, NotificationChain msgs)
+  public NotificationChain basicSetY(TrickyC newY, NotificationChain msgs)
   {
-    C1 oldY = y;
+    TrickyC oldY = y;
     y = newY;
     if (eNotificationRequired())
     {
@@ -95,7 +92,7 @@ public class C2Impl extends TrickyCImpl implements C2
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setY(C1 newY)
+  public void setY(TrickyC newY)
   {
     if (newY != y)
     {
@@ -154,7 +151,7 @@ public class C2Impl extends TrickyCImpl implements C2
     switch (featureID)
     {
       case ComplexrewritetestPackage.C2__Y:
-        setY((C1)newValue);
+        setY((TrickyC)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,7 +168,7 @@ public class C2Impl extends TrickyCImpl implements C2
     switch (featureID)
     {
       case ComplexrewritetestPackage.C2__Y:
-        setY((C1)null);
+        setY((TrickyC)null);
         return;
     }
     super.eUnset(featureID);

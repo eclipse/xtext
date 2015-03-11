@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
@@ -13,6 +10,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -21,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
-import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 
 /**
@@ -30,27 +27,16 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentati
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getSub <em>Sub</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getItems <em>Items</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#isSemi <em>Semi</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class TestIndentationImpl extends RootImpl implements TestIndentation
 {
-  /**
-   * The cached value of the '{@link #getSub() <em>Sub</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSub()
-   * @generated
-   * @ordered
-   */
-  protected EList<TestIndentation> sub;
-
   /**
    * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -59,7 +45,7 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * @generated
    * @ordered
    */
-  protected EList<Line> items;
+  protected EList<EObject> items;
 
   /**
    * The default value of the '{@link #isSemi() <em>Semi</em>}' attribute.
@@ -107,25 +93,11 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TestIndentation> getSub()
-  {
-    if (sub == null)
-    {
-      sub = new EObjectContainmentEList<TestIndentation>(TestIndentation.class, this, FormattertestlanguagePackage.TEST_INDENTATION__SUB);
-    }
-    return sub;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Line> getItems()
+  public EList<EObject> getItems()
   {
     if (items == null)
     {
-      items = new EObjectContainmentEList<Line>(Line.class, this, FormattertestlanguagePackage.TEST_INDENTATION__ITEMS);
+      items = new EObjectContainmentEList<EObject>(EObject.class, this, FormattertestlanguagePackage.TEST_INDENTATION__ITEMS);
     }
     return items;
   }
@@ -163,8 +135,6 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
-        return ((InternalEList<?>)getSub()).basicRemove(otherEnd, msgs);
       case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
         return ((InternalEList<?>)getItems()).basicRemove(otherEnd, msgs);
     }
@@ -181,8 +151,6 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
-        return getSub();
       case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
         return getItems();
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
@@ -202,13 +170,9 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
-        getSub().clear();
-        getSub().addAll((Collection<? extends TestIndentation>)newValue);
-        return;
       case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
         getItems().clear();
-        getItems().addAll((Collection<? extends Line>)newValue);
+        getItems().addAll((Collection<? extends EObject>)newValue);
         return;
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
         setSemi((Boolean)newValue);
@@ -227,9 +191,6 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
-        getSub().clear();
-        return;
       case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
         getItems().clear();
         return;
@@ -250,8 +211,6 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
-        return sub != null && !sub.isEmpty();
       case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
         return items != null && !items.isEmpty();
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:

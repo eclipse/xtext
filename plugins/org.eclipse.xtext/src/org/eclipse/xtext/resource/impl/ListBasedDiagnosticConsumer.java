@@ -58,6 +58,7 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 	private Internal errors;
 	private Internal warnings;
 
+	@Override
 	public void consume(Diagnostic diagnostic, Severity severity) {
 		getInternal(severity).consume(diagnostic);
 	}
@@ -81,6 +82,7 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 		}
 	}
 
+	@Override
 	public boolean hasConsumedDiagnostics(Severity severity) {
 		if (severity == Severity.ERROR)
 			return errors != null;

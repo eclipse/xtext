@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.lexer.ignoreCaseTestLanguage.Model;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -18,56 +19,61 @@ import org.eclipse.xtext.resource.XtextResource;
 public class IgnoreCaseTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(IgnoreCaseLexerTestLanguageStandaloneSetup.class);
 	}
-	
-	public void testLowercase() throws Exception {
+
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
+
+	@Test public void testLowercase() throws Exception {
 		XtextResource resource = getResourceFromString("case case");
 		Model model = (Model) resource.getContents().get(0);
 		assertNotNull(model);
 		assertEquals("case", model.getValue());
 	}
 
-	public void testUppercase() throws Exception {
+	@Test public void testUppercase() throws Exception {
 		XtextResource resource = getResourceFromString("CASE CASE");
 		Model model = (Model) resource.getContents().get(0);
 		assertNotNull(model);
 		assertEquals("CASE", model.getValue());
 	}
 
-	public void testMixedCase() throws Exception {
+	@Test public void testMixedCase() throws Exception {
 		XtextResource resource = getResourceFromString("CaSe cAsE");
 		Model model = (Model) resource.getContents().get(0);
 		assertNotNull(model);
 		assertEquals("cAsE", model.getValue());
 	}
 
-	public void testSerializeLowercase() throws Exception {
+	@Test public void testSerializeLowercase() throws Exception {
 		Model model = getModel("case case");
 		String serialized = serialize(model);
 		assertEquals("case case", serialized);
 	}
-	
-	public void testSerializeUppercase() throws Exception {
+
+	@Test public void testSerializeUppercase() throws Exception {
 		Model model = getModel("CASE CASE");
 		String serialized = serialize(model);
 		assertEquals("CASE CASE", serialized);
 	}
-	
-	public void testSerializeMixedCase() throws Exception {
+
+	@Test public void testSerializeMixedCase() throws Exception {
 		Model model = getModel("CaSe CaSe");
 		String serialized = serialize(model);
 		assertEquals("CaSe CaSe", serialized);
 	}
-	
-	public void testSerializeInvertedMixedCase() throws Exception {
+
+	@Test public void testSerializeInvertedMixedCase() throws Exception {
 		Model model = getModel("cAsE cAsE");
 		String serialized = serialize(model);
 		assertEquals("cAsE cAsE", serialized);
 	}
-	
+
 	@Override
 	public Model getModel(String model) throws Exception {
 		return (Model) super.getModel(model);

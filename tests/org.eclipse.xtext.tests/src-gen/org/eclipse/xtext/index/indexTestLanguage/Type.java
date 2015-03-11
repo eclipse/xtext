@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.index.indexTestLanguage;
 
@@ -13,10 +10,10 @@ package org.eclipse.xtext.index.indexTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Type#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getType()
  * @model

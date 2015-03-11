@@ -12,6 +12,7 @@ package org.eclipse.xtext.mwe;
  */
 public class EquinoxClasspathEntriesProvider implements IClasspathEntriesProvider {
 
+	@Override
 	public Iterable<String> getAllPathes(ClassLoader classloader) {
 		
 		return null;

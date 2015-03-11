@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl;
 
@@ -25,12 +22,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.iteratorAccumulatorImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.iteratorAccumulatorImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.iteratorAccumulatorImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

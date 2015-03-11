@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
 
@@ -13,12 +10,12 @@ package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Assignment#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Assignment#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Assignment#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getAssignment()
  * @model

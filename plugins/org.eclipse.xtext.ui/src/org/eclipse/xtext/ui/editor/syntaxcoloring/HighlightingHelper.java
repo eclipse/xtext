@@ -55,15 +55,25 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	private IPreferenceStore preferenceStore;
 
+	@Override
 	public void install(XtextEditor editor, XtextSourceViewer sourceViewer) {
 		fEditor= editor;
-		fSourceViewer= sourceViewer;
 		if (fEditor != null) {
-			fConfiguration= editor.getXtextSourceViewerConfiguration();
+			install(editor.getXtextSourceViewerConfiguration(), sourceViewer) ;
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void install(XtextSourceViewerConfiguration configuration, XtextSourceViewer sourceViewer) {
+		fSourceViewer= sourceViewer;
+		fConfiguration= configuration;
+		if(sourceViewer != null && configuration != null){
 			fPresentationReconciler= (XtextPresentationReconciler) fConfiguration.getPresentationReconciler(sourceViewer);
 		} else {
-			fConfiguration= null;
-			fPresentationReconciler= null;
+			fPresentationReconciler = null;
+			fConfiguration = null;
 		}
 		preferenceStore = getPreferenceStoreAccessor().getPreferenceStore();
 		preferenceStore.addPropertyChangeListener(this);
@@ -77,12 +87,13 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 		fPresenter= getPresenterProvider().get();
 		fPresenter.install(fSourceViewer, fPresentationReconciler);
 
-		if (fEditor != null) {
+		if (fSourceViewer.getDocument() != null) {
 			fReconciler= reconcilerProvider.get();
 			fReconciler.install(fEditor, fSourceViewer, fPresenter);
 		}
 	}
 
+	@Override
 	public void uninstall() {
 		disable();
 		if (preferenceStore != null) {
@@ -142,10 +153,14 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 		return preferenceStoreAccessor;
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles")) {
-			textAttributeProvider.propertyChange(event);
-			fReconciler.refresh();
+		if (fReconciler != null && fEditor != null) {
+			if (event.getProperty().startsWith(PreferenceStoreAccessor.tokenTypeTag(fEditor.getLanguageName()))) {
+				textAttributeProvider.propertyChange(event);
+				fReconciler.refresh();
+			}
 		}
 	}
+
 }

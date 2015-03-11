@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  */
 public class JvmExecutableImplCustom extends JvmExecutableImpl {
 
+	private Runnable initializer;
+
 	@Override
 	public void internalSetIdentifier(String identifier) {
 		if (this.identifier != null && identifier == null) {
@@ -47,6 +49,18 @@ public class JvmExecutableImplCustom extends JvmExecutableImpl {
 			return builder.toString();
 		}
 		return null;
+	}
+	
+	public void runInitializer() {
+		if (initializer == null)
+			return;
+		Runnable init = initializer;
+		initializer = null;
+		init.run();
+	}
+
+	public void setParameterNameInitializer(Runnable initializer) {
+		this.initializer = initializer;
 	}
 	
 }

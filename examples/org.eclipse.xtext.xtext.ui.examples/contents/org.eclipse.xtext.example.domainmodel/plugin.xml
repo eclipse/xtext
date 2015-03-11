@@ -7,11 +7,8 @@
     <package 
        uri = "http://www.xtext.org/example/Domainmodel" 
        class = "org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"
-       genModel = "org/eclipse/xtext/example/domainmodel/Domainmodel.genmodel" /> 
+       genModel = "model/generated/Domainmodel.genmodel" /> 
 	
   </extension>
-
-
-
 
 </plugin>

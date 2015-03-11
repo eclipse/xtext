@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser;
 
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -18,12 +19,12 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 public class PartialParsingPointerReferenceTest extends AbstractPartialParsingPointerTest {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testReference() throws Exception {
+	@Test public void testReference() throws Exception {
 		String model = "spielplatz 17 { kind ( Dennis 6 ) kind ( Sven 7 ) }";
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, model.indexOf("Sven"), 4);
 		checkParseRegionPointers(parsingPointers, " kind ( Sven 7 )", "RuleCall", "Kind");

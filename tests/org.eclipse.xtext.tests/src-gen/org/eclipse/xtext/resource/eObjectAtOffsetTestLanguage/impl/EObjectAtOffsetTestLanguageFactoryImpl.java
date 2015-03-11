@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
   {
     try
     {
-      EObjectAtOffsetTestLanguageFactory theEObjectAtOffsetTestLanguageFactory = (EObjectAtOffsetTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/EObjectAtOffsetTestLanguage"); 
+      EObjectAtOffsetTestLanguageFactory theEObjectAtOffsetTestLanguageFactory = (EObjectAtOffsetTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(EObjectAtOffsetTestLanguagePackage.eNS_URI);
       if (theEObjectAtOffsetTestLanguageFactory != null)
       {
         return theEObjectAtOffsetTestLanguageFactory;

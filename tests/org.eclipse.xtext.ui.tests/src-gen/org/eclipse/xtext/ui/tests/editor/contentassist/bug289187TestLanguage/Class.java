@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class#isTransient <em>Transient</em>}</li>
@@ -28,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class#getOperations <em>Operations</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Bug289187TestLanguagePackage#getClass_()
  * @model

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.UnaryPos
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnaryPostOpExpressionImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnaryPostOpExpressionImpl#getFunctionName <em>Function Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -17,14 +17,15 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLangua
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -42,7 +44,8 @@ import com.google.inject.Injector;
  */
 public class Bug297909Test extends AbstractContentAssistProcessorTest {
 	
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -60,25 +63,25 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testGrammarAccessCannotResolveEClasses() {
-		Injector injector = getSetup().createInjectorAndDoEMFRegistration();
+	@Test public void testGrammarAccessCannotResolveEClasses() {
+		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		ContentAssistTestLanguageGrammarAccess grammarAccess = injector.getInstance(ContentAssistTestLanguageGrammarAccess.class);
 		AbstractRule firstRule = grammarAccess.getGrammar().getRules().get(0);
 		EClassifier classifier = firstRule.getType().getClassifier();
 		assertTrue(classifier.eIsProxy());
 	}
 
-	public void testExceptionOnContentAssist() throws Exception {
+	@Test public void testExceptionOnContentAssist() throws Exception {
 		try {
-			newBuilder(getSetup()).append("abstract rules firstRule ").assertCount(0);
+			newBuilder().append("abstract rules firstRule ").assertCount(0);
 			fail("Expected ParseException");
 		} catch(ParseException expected) {
 			assertTrue(expected.getMessage().contains("Make sure the EPackage has been registered"));
 		}
 	}
 	
-	public void testReconcileDocument() throws Exception {
-		Injector injector = getSetup().createInjectorAndDoEMFRegistration();
+	@Test public void testReconcileDocument() throws Exception {
+		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		XtextDocument document = injector.getInstance(XtextDocument.class);
 		document.setValidationJob(new Job("Job") {
 			@Override
@@ -87,16 +90,20 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 			}
 		});
 		XtextResource resource = injector.getInstance(XtextResource.class);
+		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
+		resourceSet.getResources().add(resource);
 		resource.load(new StringInputStream(""), Collections.singletonMap(XtextResource.OPTION_ENCODING, Charset.defaultCharset().name()));
 		document.setInput(resource);
 		document.set("abstract rules firstRule");
 		XtextDocumentReconcileStrategy strategy = injector.getInstance(XtextDocumentReconcileStrategy.class);
 		strategy.setDocument(document);
+		strategy.setResource(resource);
 		try {
-			strategy.reconcile(new Region(0, document.getLength()));
+			strategy.reconcile(new ReconcilerReplaceRegion(0, document.getLength(), document.get()));
 			fail("Expected ParseException");
 		} catch(ParseException expected) {
 			assertTrue(expected.getMessage().contains("Make sure the EPackage has been registered"));
 		}
 	}
+
 }

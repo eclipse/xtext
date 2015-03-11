@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage;
 
@@ -16,13 +13,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element#getSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element#getThird <em>Third</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element#getForth <em>Forth</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Bug317840TestLanguagePackage#getElement()
  * @model

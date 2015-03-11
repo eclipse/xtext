@@ -50,6 +50,7 @@ public class TokenScanner extends AbstractTokenScanner {
 		private Predicate<? super IRegion> overlapFilter;
 		private int regionOffset;
 		
+		@Override
 		public boolean hasNext() {
 			// we already know whether we have a next element
 			if (computedHasNext)
@@ -73,6 +74,7 @@ public class TokenScanner extends AbstractTokenScanner {
 			return hasNext;
 		}
 
+		@Override
 		public ILexerTokenRegion next() {
 			if (!computedHasNext) {
 				// compute hasNext on demand to make sure the internal state is valid
@@ -125,6 +127,7 @@ public class TokenScanner extends AbstractTokenScanner {
 		this.tokenIdMapper = tokenIdMapper;
 	}
 
+	@Override
 	public void setRange(IDocument document, final int offset, final int length) {
 		currentToken=null;
 		reentrantIterator.setRange(document, offset, length);
@@ -135,6 +138,7 @@ public class TokenScanner extends AbstractTokenScanner {
 		return doc.getTokens();
 	}
 
+	@Override
 	public IToken nextToken() {
 		if (!reentrantIterator.hasNext())
 			return Token.EOF;
@@ -148,10 +152,12 @@ public class TokenScanner extends AbstractTokenScanner {
 		return token;
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return currentToken.getOffset();
 	}
 
+	@Override
 	public int getTokenLength() {
 		return currentToken.getLength();
 	}

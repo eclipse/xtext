@@ -30,7 +30,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
- * Default implementation of the {@link IResourceDescription.Manager}. Customize by binding another
+ * Default implementation of the {@link org.eclipse.xtext.resource.IResourceDescription.Manager}. Customize by binding another
  * {@link IDefaultResourceDescriptionStrategy}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,14 +54,17 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
+	@Override
 	public IResourceDescription getResourceDescription(final Resource resource) {
 		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>() {
+			@Override
 			public IResourceDescription get() {
 				return internalGetResourceDescription(resource, strategy);
 			}
 		});
 	}
 	
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
@@ -86,8 +89,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return cache;
 	}
 	
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		if (!delta.haveEObjectDescriptionsChanged())
+		if (!hasChanges(delta, candidate))
 			return false;
 		Set<QualifiedName> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());
@@ -108,11 +112,12 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		}
 	}
 	
-    public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
+    @Override
+	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
         Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
         if (!outgoingReferences.isEmpty()) {
 	        for (IResourceDescription.Delta delta : deltas)
-	            if (delta.haveEObjectDescriptionsChanged() && outgoingReferences.contains(delta.getUri()))
+	            if (hasChanges(delta, candidate) && outgoingReferences.contains(delta.getUri()))
 	                return true;
         }
         // this is a tradeoff - we could either check whether a given delta uri is contained
@@ -124,7 +129,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         List<IContainer> containers = null;
         Collection<QualifiedName> importedNames = getImportedNames(candidate);
         for (IResourceDescription.Delta delta : deltas) {
-			if (delta.haveEObjectDescriptionsChanged()) {
+			if (hasChanges(delta, candidate)) {
 				// not a java resource - delta's resource should be contained in a visible container
 				// as long as we did not delete the resource
 				URI uri = delta.getUri();
@@ -145,6 +150,16 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         }
         return false;
     }
+
+	/**
+	 * Whether the given delta is considered to have changed from the candidate's perspective. By default this will just call
+	 * {@link org.eclipse.xtext.resource.IResourceDescription.Delta#haveEObjectDescriptionsChanged() Delta#haveEObjectDescriptionsChanged()}. 
+	 * But in some cases even "internal" changes (that are not visible in the EObjectDescriptions) could be interesting. 
+	 * @since 2.7
+	 */
+	protected boolean hasChanges(IResourceDescription.Delta delta, IResourceDescription candidate) {
+		return delta.haveEObjectDescriptionsChanged();
+	}
 
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
 		if (description != null) {

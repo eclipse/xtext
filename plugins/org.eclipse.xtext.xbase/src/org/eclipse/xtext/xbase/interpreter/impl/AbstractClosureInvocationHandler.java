@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
  */
 public abstract class AbstractClosureInvocationHandler implements InvocationHandler {
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		if (isEquals(method)) {
 			return proxy == args[0];
@@ -28,6 +29,9 @@ public abstract class AbstractClosureInvocationHandler implements InvocationHand
 		return doInvoke(method, args);
 	}
 
+	/**
+	 * @param proxy the proxy instance. May be used by inheritors.
+	 */
 	protected String proxyToString(Object proxy) {
 		return toString();
 	}

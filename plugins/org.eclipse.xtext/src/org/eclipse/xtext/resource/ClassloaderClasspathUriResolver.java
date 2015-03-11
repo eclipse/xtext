@@ -28,7 +28,8 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
      *      the classloader to be used, or an object whose classloader is used.
      *      If null, the context classloader of the current thread is used.
      */
-    public URI resolve(Object context, URI classpathUri) {
+    @Override
+	public URI resolve(Object context, URI classpathUri) {
     	Object myContext = context;
         if (myContext == null) {
             myContext = Thread.currentThread().getContextClassLoader();
@@ -57,7 +58,7 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
         }
         URL resource = classLoader.getResource(pathAsString);
         if (resource==null)
-        	throw new IllegalStateException("Couldn't find resource on classpath. URI was '"+classpathUri+"'");
+        	throw new FileNotFoundOnClasspathException("Couldn't find resource on classpath. URI was '"+classpathUri+"'");
         URI fileUri = URI.createURI(resource.toString(),true);
         return fileUri.appendFragment(classpathUri.fragment());
     }

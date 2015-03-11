@@ -8,48 +8,42 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Supplier;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseInjectorProvider.class)
 public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
-	// checked exceptions not supported by this implementation
-	@Override
-	public void testThrowExpression_01() {
-	}
+	@Inject
+	private Provider<XbaseCompiler> compilerProvider;
 	
-	static Injector injector = new XbaseStandaloneSetup() {
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new org.eclipse.xtext.xbase.XbaseRuntimeModule() {
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return AbstractXbaseTestCase.class.getClassLoader();
-				}
-			});
-		}
-	}.createInjectorAndDoEMFRegistration();
-
 	@Inject
 	private ParseHelper<XExpression> parseHelper;
 	
@@ -61,25 +55,42 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject
 	private TypeReferences typeReferences;
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		injector.injectMembers(this);
+	
+	@Inject
+	private CommonTypeComputationServices services;
+	
+	@Inject
+	private IResourceScopeCache cache;
+	
+	@Before
+	public void setUp() throws Exception {
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(Provider.class);
+		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
 	}
-
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
 		try {
 			assertEquals("Java code was " + compileToJavaCode, object, compile(string).apply());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(compileToJavaCode);
+			fail("Exception thrown " + e + ".Java code was " + compileToJavaCode);
+		}
+	}
+
+	@Override
+	protected void assertEvaluatesToArray(Object[] object, String string) {
+		final String compileToJavaCode = compileToJavaCode(string);
+		try {
+			Object result = compile(string).apply();
+			assertArrayEquals("Java code was " + compileToJavaCode, object, (Object[]) result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(compileToJavaCode);
@@ -98,6 +109,8 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 			}
 			compile.apply();
 			fail("expected exception " + class1.getCanonicalName() + ". Java code was " + compileToJavaCode(string));
+		} catch (AssertionError e) {
+			throw e;
 		} catch (Throwable e) {
 			if (!class1.isInstance(e))
 				e.printStackTrace();
@@ -116,16 +129,22 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	}
 	
 	protected String compileToJavaCode(String xtendCode) {
-		XExpression model;
-		IAppendable appandable = new StringBuilderBasedAppendable();
+		XExpression model = null;
+		ITreeAppendable appendable = new FakeTreeAppendable();
 		try {
 			model = expression(xtendCode, true);
-			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
-			compiler.compile(model, appandable, typeReferences.getTypeForName(Object.class, model));
+			XbaseCompiler compiler = compilerProvider.get();
+			JvmType objectType = typeReferences.findDeclaredType(Object.class, model);
+			StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
+			ParameterizedTypeReference objectRef = owner.newParameterizedTypeReference(objectType);
+			compiler.compile(model, appendable, objectRef);
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
+		} finally {
+			if (model != null)
+				cache.clear(model.eResource());
 		}
-		return appandable.toString();
+		return appendable.getContent();
 	}
 
 	protected XExpression expression(String string, boolean resolve) throws Exception {
@@ -135,5 +154,5 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		}
 		return result;
 	}
-
+	
 }

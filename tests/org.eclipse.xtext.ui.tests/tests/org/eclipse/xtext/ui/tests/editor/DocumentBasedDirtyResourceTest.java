@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,7 +46,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	private IResourceDescription description;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		uri = URI.createURI("scheme:/foobar.xtext");
@@ -64,7 +65,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		description = this;
 	}
 	
-	public void testConnect_01() {
+	@Test public void testConnect_01() {
 		try {
 			dirtyResource.connect(null);
 			fail("Expected IllegalArgumentException");
@@ -73,7 +74,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testConnect_02() {
+	@Test public void testConnect_02() {
 		dirtyResource.connect(this);
 		try {
 			dirtyResource.connect(getDummyDocument());
@@ -83,12 +84,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testConnect_03() {
+	@Test public void testConnect_03() {
 		dirtyResource.connect(this);
 		dirtyResource.connect(this); // no exception
 	}
 	
-	public void testDisconnect_01() {
+	@Test public void testDisconnect_01() {
 		try {
 			dirtyResource.connect(null);
 			fail("Expected IllegalArgumentException");
@@ -97,7 +98,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testDisconnect_02() {
+	@Test public void testDisconnect_02() {
 		try {
 			dirtyResource.disconnect(this);
 			fail("Expected IllegalStateException");
@@ -106,7 +107,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testDisconnect_03() {
+	@Test public void testDisconnect_03() {
 		dirtyResource.connect(this);
 		dirtyResource.disconnect(this);
 		try {
@@ -117,7 +118,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetContents_01() {
+	@Test public void testGetContents_01() {
 		try {
 			dirtyResource.getContents();
 			fail("Expected IllegalStateException");
@@ -126,19 +127,19 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetContents_02() {
+	@Test public void testGetContents_02() {
 		dirtyResource.connect(this);
 		assertSame(documentContent, dirtyResource.getContents());
 	}
 	
-	public void testGetContents_03() {
+	@Test public void testGetContents_03() {
 		dirtyResource.connect(this);
 		String expectedContent = documentContent;
 		documentContent = null;
 		assertSame(expectedContent, dirtyResource.getContents());
 	}
 	
-	public void testGetURI_01() {
+	@Test public void testGetURI_01() {
 		try {
 			dirtyResource.getURI();
 			fail("Expected IllegalStateException");
@@ -147,12 +148,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetURI_02() {
+	@Test public void testGetURI_02() {
 		dirtyResource.connect(this);
 		assertEquals(uri, dirtyResource.getURI());
 	}
 	
-	public void testGetDescription_01() {
+	@Test public void testGetDescription_01() {
 		try {
 			dirtyResource.getDescription();
 			fail("Expected IllegalStateException");
@@ -161,13 +162,13 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetDescription_02() {
+	@Test public void testGetDescription_02() {
 		dirtyResource.connect(this);
 		assertNotSame(this, dirtyResource.getDescription());
 		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
-	public void testGetDescription_03() {
+	@Test public void testGetDescription_03() {
 		dirtyResource.connect(this);
 		description = null;
 		assertNull(getResourceDescription(resource));
@@ -175,7 +176,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
-	public void testCopyState() {
+	@Test public void testCopyState() {
 		dirtyResource.connect(this);
 		assertSame(documentContent, dirtyResource.getContents());
 		documentContent = "modified";
@@ -196,51 +197,67 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 			throw new RuntimeException(e);
 		}
 	}
+	
+	@Override
+	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
+		return readOnly(work);
+	}
 
+	@Override
 	public IResourceDescription getResourceDescription(Resource resource) {
 		assertSame(this.resource, resource);
 		return description;
 	}
 	
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
 
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		fail("Unexpected invocation");
 		return false;
 	}
 	
+	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
 			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		fail("Unexpected invocation");
 		return false;
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return true;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		fail("Unexpected invocation");
 		return null;
@@ -251,6 +268,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return null;
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return Collections.emptyList();
 	}
@@ -261,6 +279,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 
 	protected IXtextDocument getDummyDocument() {
 		return (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[]{IXtextDocument.class}, new InvocationHandler() {
+			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 				return null;
 			}

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 
 import com.google.inject.Singleton;
 
@@ -25,21 +26,21 @@ public class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAt
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
 		if(PUNCTUATION.matcher(tokenName).matches()) {
-			return DefaultHighlightingConfiguration.PUNCTUATION_ID;
+			return HighlightingStyles.PUNCTUATION_ID;
 		}
 		if(QUOTED.matcher(tokenName).matches()) {
-			return DefaultHighlightingConfiguration.KEYWORD_ID;
+			return HighlightingStyles.KEYWORD_ID;
 		}
 		if("RULE_STRING".equals(tokenName)) {
-			return DefaultHighlightingConfiguration.STRING_ID;
+			return HighlightingStyles.STRING_ID;
 		}
 		if("RULE_INT".equals(tokenName)) {
-			return DefaultHighlightingConfiguration.NUMBER_ID;
+			return HighlightingStyles.NUMBER_ID;
 		}
 		if("RULE_ML_COMMENT".equals(tokenName) || "RULE_SL_COMMENT".equals(tokenName)) {
-			return DefaultHighlightingConfiguration.COMMENT_ID;
+			return HighlightingStyles.COMMENT_ID;
 		}
-		return DefaultHighlightingConfiguration.DEFAULT_ID;
+		return HighlightingStyles.DEFAULT_ID;
 	}
 	
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.valueconverter.bug250313.impl;
 
@@ -30,13 +27,13 @@ import org.eclipse.xtext.valueconverter.bug250313.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getMultiValue <em>Multi Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

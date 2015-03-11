@@ -25,18 +25,22 @@ public class EmptyBidiIterator<T> extends UnmodifiableIterator<T> implements Bid
 		return (BidiIterator<T>) INSTANCE;
 	}
 	
+	@Override
 	public boolean hasNext() {
 		return false;
 	}
 
+	@Override
 	public T next() {
 		throw new NoSuchElementException();
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return false;
 	}
 
+	@Override
 	public T previous() {
 		throw new NoSuchElementException();
 	}

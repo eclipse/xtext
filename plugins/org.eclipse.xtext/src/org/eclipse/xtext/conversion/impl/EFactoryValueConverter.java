@@ -26,10 +26,12 @@ public class EFactoryValueConverter implements IValueConverter<Object> {
 		this.dataType = dataType;
 	}
 
+	@Override
 	public String toString(Object value) {
 		return dataType.getEPackage().getEFactoryInstance().convertToString(dataType, value);
 	}
 
+	@Override
 	public Object toValue(String string, INode node) throws ValueConverterException {
 		try {
 			Object value = dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);

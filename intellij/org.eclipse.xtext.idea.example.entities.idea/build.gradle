@@ -1,0 +1,5 @@
+dependencies {
+	compile project(':org.eclipse.xtext.idea.example.entities.ide')
+	ideaProvided project(':org.eclipse.xtext.idea')
+	ideaProvided project(':org.eclipse.xtext.xbase.idea')
+}

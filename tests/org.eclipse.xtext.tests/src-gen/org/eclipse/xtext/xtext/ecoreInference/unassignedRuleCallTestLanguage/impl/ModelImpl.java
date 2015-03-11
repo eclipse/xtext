@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.impl;
 
@@ -24,10 +21,10 @@ import org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.Una
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.impl.ModelImpl#getModelFeatures <em>Model Features</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

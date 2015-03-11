@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -70,33 +72,6 @@ public abstract class JvmComponentTypeImpl extends JvmTypeImpl implements JvmCom
 	 */
 	public JvmArrayType getArrayType()
 	{
-		if (arrayType != null && arrayType.eIsProxy())
-		{
-			InternalEObject oldArrayType = (InternalEObject)arrayType;
-			arrayType = (JvmArrayType)eResolveProxy(oldArrayType);
-			if (arrayType != oldArrayType)
-			{
-				InternalEObject newArrayType = (InternalEObject)arrayType;
-				NotificationChain msgs = oldArrayType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, null, null);
-				if (newArrayType.eInternalContainer() == null)
-				{
-					msgs = newArrayType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, oldArrayType, arrayType));
-			}
-		}
-		return arrayType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmArrayType basicGetArrayType()
-	{
 		return arrayType;
 	}
 
@@ -128,14 +103,32 @@ public abstract class JvmComponentTypeImpl extends JvmTypeImpl implements JvmCom
 		{
 			NotificationChain msgs = null;
 			if (arrayType != null)
-				msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
+				msgs = ((InternalEObject)arrayType).eInverseRemove(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
 			if (newArrayType != null)
-				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
+				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
 			msgs = basicSetArrayType(newArrayType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, newArrayType, newArrayType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE:
+				if (arrayType != null)
+					msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
+				return basicSetArrayType((JvmArrayType)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -165,8 +158,7 @@ public abstract class JvmComponentTypeImpl extends JvmTypeImpl implements JvmCom
 		switch (featureID)
 		{
 			case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE:
-				if (resolve) return getArrayType();
-				return basicGetArrayType();
+				return getArrayType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

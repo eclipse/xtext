@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug287184Test.impl;
 
@@ -31,11 +28,11 @@ import org.eclipse.xtext.parser.assignments.bug287184Test.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug287184Test.impl.ModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug287184Test.impl.ModelImpl#getDetail <em>Detail</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

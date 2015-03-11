@@ -18,12 +18,17 @@ import org.eclipse.xtext.ui.editor.actions.IActionContributor;
  */
 public class FoldingActionContributor implements IActionContributor {
 
-	private FoldingActionGroup foldingActionGroup;
+	/**
+	 * @since 2.8
+	 */
+	protected FoldingActionGroup foldingActionGroup;
 
+	@Override
 	public void contributeActions(XtextEditor editor) {
 		foldingActionGroup = new FoldingActionGroup(editor, editor.getInternalSourceViewer());
 	}
 
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 		if(foldingActionGroup != null)
 			foldingActionGroup.dispose();

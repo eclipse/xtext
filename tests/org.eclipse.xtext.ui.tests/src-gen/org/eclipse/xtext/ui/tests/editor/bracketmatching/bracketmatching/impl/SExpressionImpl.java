@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl;
 
@@ -27,10 +24,10 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.SExpres
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl.SExpressionImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

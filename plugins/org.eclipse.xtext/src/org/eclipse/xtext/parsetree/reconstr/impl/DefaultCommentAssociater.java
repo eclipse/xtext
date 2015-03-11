@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
@@ -31,6 +32,7 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 	@Inject
 	protected TokenUtil tokenUtil;
 
+	@Override
 	public Map<ILeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<ICompositeNode> roots) {
 		Map<ILeafNode, EObject> mapping = new HashMap<ILeafNode, EObject>();
 		for (ICompositeNode rootNode : roots)
@@ -57,34 +59,34 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 			}
 		}
 		while (nodeIterator.hasNext()) {
-			Object o = nodeIterator.next();
-			if (o instanceof INode) {
-				INode node = (INode) o;
-				if (tokenUtil.isCommentNode(node)) {
-					currentComments.add((ILeafNode) node);
-				}
-				boolean isToken = tokenUtil.isToken(node);
-				if ((node instanceof ILeafNode || isToken) && node.getStartLine() != node.getEndLine() && currentEObject != null) {
+			INode node = nodeIterator.next();
+			if (tokenUtil.isCommentNode(node)) {
+				currentComments.add((ILeafNode) node);
+			}
+			boolean isToken = tokenUtil.isToken(node);
+			if ((node instanceof ILeafNode || isToken) && currentEObject != null) {
+				ITextRegionWithLineInformation textRegion = node.getTextRegionWithLineInformation();
+				if (textRegion.getLineNumber() != textRegion.getEndLineNumber()) {
 					// found a newline -> associating existing comments with currentEObject
 					addMapping(mapping, currentComments, currentEObject);
 					currentEObject = null;
 				}
-				if (isToken) {
-					Pair<List<ILeafNode>, List<ILeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
-							.getLeadingAndTrailingHiddenTokens(node);
-					for (ILeafNode leadingHiddenNode : leadingAndTrailingHiddenTokens.getFirst()) {
-						if (tokenUtil.isCommentNode(leadingHiddenNode)) {
-							currentComments.add(leadingHiddenNode);
-						}
+			}
+			if (isToken) {
+				Pair<List<ILeafNode>, List<ILeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
+						.getLeadingAndTrailingHiddenTokens(node);
+				for (ILeafNode leadingHiddenNode : leadingAndTrailingHiddenTokens.getFirst()) {
+					if (tokenUtil.isCommentNode(leadingHiddenNode)) {
+						currentComments.add(leadingHiddenNode);
 					}
-					nodeIterator.prune();
-					currentEObject = tokenUtil.getTokenOwner(node);
-					if (currentEObject != null) {
-						addMapping(mapping, currentComments, currentEObject);
-						if (node.getOffset() > rootNode.getOffset() + rootNode.getLength()) {
-							// found next EObject outside rootNode
-							break;
-						}
+				}
+				nodeIterator.prune();
+				currentEObject = tokenUtil.getTokenOwner(node);
+				if (currentEObject != null) {
+					addMapping(mapping, currentComments, currentEObject);
+					if (node.getOffset() > rootNode.getEndOffset()) {
+						// found next EObject outside rootNode
+						break;
 					}
 				}
 			}

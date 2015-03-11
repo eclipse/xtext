@@ -62,6 +62,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			this.workingMarkers = new ArrayList<Marker>(4);
 		}
 
+		@Override
 		public void commit() {
 			if (workingMarkers.isEmpty())
 				throw new IllegalStateException("Working marker may not be null");
@@ -77,6 +78,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			markedTokens.clear();
 		}
 
+		@Override
 		public void discard() {
 			for(AbstractParsedToken token: markedTokens) {
 				token.setSkipped(false);
@@ -93,10 +95,12 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			markedTokens.clear();
 		}
 
+		@Override
 		public boolean isSuccessful() {
 			return result;
 		}
 
+		@Override
 		public IBacktrackingResult skipPreviousToken() {
 			discardImpl();
 			init();
@@ -212,6 +216,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			}
 		}
 
+		@Override
 		public void visitMarker(Marker marker) {
 			throw new IllegalStateException("Marker may not be content of other markers.");
 		}
@@ -324,6 +329,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				}
 			}
 
+			@Override
 			public void visitMarker(Marker marker) {
 				throw new IllegalStateException("Marker may not be content of other markers.");
 			}
@@ -488,6 +494,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					replayToken = token;
 			}
 
+			@Override
 			public void visitMarker(Marker marker) {
 				throw new IllegalStateException("Marker may not be content of other markers.");
 			}
@@ -495,6 +502,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		}
 	}
 
+	@Override
 	public IBacktrackingResult skipPreviousToken() {
 		return new NestedBacktrackingResult().skipPreviousToken();
 	}

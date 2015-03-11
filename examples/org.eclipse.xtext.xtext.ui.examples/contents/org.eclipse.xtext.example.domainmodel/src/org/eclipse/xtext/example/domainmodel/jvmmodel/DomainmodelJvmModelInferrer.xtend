@@ -1,96 +1,70 @@
-/*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
-import org.eclipse.xtext.example.domainmodel.domainmodel.*
-import org.eclipse.xtext.example.domainmodel.*
-import org.eclipse.xtext.xbase.jvmmodel.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.common.types.*
-import org.eclipse.xtext.common.types.util.*
-import static org.eclipse.xtext.common.types.*
-import java.util.*
 import com.google.inject.Inject
-import static org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
+import org.eclipse.xtext.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
-class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
+class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
+	
+	@Inject extension JvmTypesBuilder
+	@Inject extension IQualifiedNameProvider
 
-	@Inject TypesFactory typesFactory
-	
-	@Inject extension IJvmModelAssociator jvmModelAssociator
-		
-	@Inject extension DomainmodelExtensions domainmodelExtensions
-
-	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
-		sourceObject.disassociate
-		transform( sourceObject ).toList
+	def dispatch infer(Entity entity, extension IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+		accept(entity.toClass( entity.fullyQualifiedName )) [
+			documentation = entity.documentation
+			if (entity.superType != null)
+				superTypes += entity.superType.cloneWithProxies
+			
+			// let's add a default constructor
+			members += entity.toConstructor []
+			
+			// and one which can be called with a lambda for initialization.
+			val procedureType = typeRef(Procedure1, typeRef(it)) /* Procedure<MyEntity> */ 
+			members += entity.toConstructor [
+				parameters += entity.toParameter("initializer", procedureType)
+				// here we implement the body using black box Java code.
+				body = '''
+					initializer.apply(this);
+				'''
+			]
+			
+			// now let's go over the features
+			for ( f : entity.features ) {
+				switch f {
+			
+					// for properties we create a field, a getter and a setter
+					Property : {
+						val field = f.toField(f.name, f.type)
+						members += field
+						members += f.toGetter(f.name, f.type)
+						members += f.toSetter(f.name, f.type)
+					}
+			
+					// operations are mapped to methods
+					Operation : {
+						members += f.toMethod(f.name, f.type ?: inferredType) [
+							documentation = f.documentation
+							for (p : f.params) {
+								parameters += p.toParameter(p.name, p.parameterType)
+							}
+							// here the body is implemented using a user expression.
+							// Note that by doing this we set the expression into the context of this method, 
+							// The parameters, 'this' and all the members of this method will be visible for the expression. 
+							body = f.body
+						]
+					}
+				}
+			}
+			
+			// finally we want to have a nice toString methods.
+			members += entity.toToStringMethod(it)
+		]
 	}
 	
-	def dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
-		model.elements.map(e | transform(e)).flatten
-	}
-	 
-	def dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
-		packageDecl.elements.map(e | transform(e)).flatten
-	}
-
-	def dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
-		val jvmClass = typesFactory.createJvmGenericType 
-		jvmClass.simpleName = entity.name
-		jvmClass.packageName = entity.packageName
-		entity.associatePrimary(jvmClass)
-		jvmClass.visibility = JvmVisibility::PUBLIC
-		if (entity.superType != null)
-			jvmClass.superTypes += cloneWithProxies(entity.superType)
-		for(f : entity.features) {
-			transform(f, jvmClass)
-		} 
-		newArrayList(jvmClass as JvmDeclaredType) 	 
-	}
-	
-	def dispatch Iterable<JvmDeclaredType> transform(Import importDecl) {
-		emptyList
-	}
-	
-	def dispatch void transform(Property property, JvmGenericType type) {
-		val jvmField = typesFactory.createJvmField
-		jvmField.simpleName = property.name
-		jvmField.type = cloneWithProxies(property.type)
-		jvmField.visibility = JvmVisibility::PRIVATE
-		type.members += jvmField
-		property.associatePrimary(jvmField)
-		
-		val jvmGetter = typesFactory.createJvmOperation
-		jvmGetter.simpleName = "get" + property.name.toFirstUpper
-		jvmGetter.returnType = cloneWithProxies(property.type)
-		jvmGetter.visibility = JvmVisibility::PUBLIC
-		type.members += jvmGetter
-		property.associatePrimary(jvmGetter)
-		
-		val jvmSetter = typesFactory.createJvmOperation
-		jvmSetter.simpleName = "set" + property.name.toFirstUpper
-		val parameter = typesFactory.createJvmFormalParameter
-		parameter.name = property.name.toFirstUpper
-		parameter.parameterType = cloneWithProxies(property.type)
-		jvmSetter.visibility = JvmVisibility::PUBLIC
-		jvmSetter.parameters += parameter
-		type.members += jvmSetter
-		property.associatePrimary(jvmSetter)
-	}
-	
-	def dispatch void transform(Operation operation, JvmGenericType type) {
-		val jvmOperation = typesFactory.createJvmOperation
-		jvmOperation.simpleName = operation.name
-		jvmOperation.returnType = cloneWithProxies(operation.type)
-		jvmOperation.parameters.addAll(operation.params.map(p|cloneWithProxies(p))) 
-		jvmOperation.visibility = JvmVisibility::PUBLIC
-		type.members += jvmOperation
-		operation.associatePrimary(jvmOperation)
-	}
-	 
 }

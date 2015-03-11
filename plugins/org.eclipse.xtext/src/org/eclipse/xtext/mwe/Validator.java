@@ -77,6 +77,8 @@ public class Validator {
 							case INFO:
 								issues.addInfo(issue.getMessage(), issue);
 								break;
+							case IGNORE:
+								break;
 						}
 					}
 				}
@@ -141,19 +143,23 @@ public class Validator {
 	protected Multimap<URI, MWEDiagnostic> groupByURI(MWEDiagnostic[] diagnostic) {
 		Multimap<URI, MWEDiagnostic> result = Multimaps.newMultimap(
 				Maps.<URI, Collection<MWEDiagnostic>> newLinkedHashMap(), new Supplier<Collection<MWEDiagnostic>>() {
+					@Override
 					public Collection<MWEDiagnostic> get() {
 						return Sets.newTreeSet(getDiagnosticComparator());
 					}
 				});
 		result.putAll(Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
+			@Override
 			public URI apply(MWEDiagnostic from) {
 				Issue issue = (Issue) from.getElement();
 				URI uriToProblem = issue.getUriToProblem();
-				return uriToProblem != null ? uriToProblem.trimFragment() : null;
+				return uriToProblem != null ? uriToProblem.trimFragment() : NullURI;
 			}
 		}));
 		return result;
 	}
+	
+	private final static URI NullURI = URI.createURI("no/uri");
 
 	public static class Disabled extends Validator {
 		@Override
@@ -167,6 +173,7 @@ public class Validator {
 	}
 
 	public static class MWEDiagnosticComparator implements Comparator<MWEDiagnostic> {
+		@Override
 		public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
 			Issue issue1 = (Issue) o1.getElement();
 			Issue issue2 = (Issue) o2.getElement();

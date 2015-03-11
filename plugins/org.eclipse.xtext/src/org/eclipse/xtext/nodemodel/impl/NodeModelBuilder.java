@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.AbstractList;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
@@ -19,32 +20,85 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Interner;
 import com.google.common.collect.Maps;
 
 /**
- * A statefull (!) builder that provides call back methods for clients who
+ * A stateful (!) builder that provides call back methods for clients who
  * want to create a node model and maintain its invariants. 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class NodeModelBuilder {
 
+	private static class ArrayInterner<T> implements Interner<T[]> {
+
+		private static class ArrayAsList<T> extends AbstractList<T> implements RandomAccess {
+			final T[] array;
+			private int hashCode = -1;
+
+			ArrayAsList(/* @Nullable */ T[] array) {
+				this.array = array;
+			}
+
+			@Override public int size() {
+				return array.length;
+			}
+
+			@Override /* @Nullable */ public T get(int index) {
+				return array[index];
+			}
+
+			@Override public int hashCode() {
+				if (hashCode == -1)
+					hashCode = Arrays.hashCode(array);
+				return hashCode;
+			}
+
+			@SuppressWarnings("rawtypes")
+			@Override public boolean equals(/* @Nullable */ Object o) {
+				if (this == o)
+					return true;
+				return o instanceof ArrayAsList && Arrays.equals(array, ((ArrayAsList) o).array);
+			}
+		}
+
+		private Map<ArrayAsList<T>, T[]> map = Maps.newHashMap();
+
+		@Override
+		public /* @Nullable */ T[] intern(/* @Nullable */ T[] sample) {
+			ArrayAsList<T> key = new ArrayAsList<T>(sample);
+			T[] canonical = map.get(key);
+			if (canonical == null) {
+				canonical = sample;
+				map.put(key, canonical);
+			}
+	        return canonical;
+		}
+	}
+
 	private EObject forcedGrammarElement;
-	
-	private Map<List<EObject>, EObject[]> cachedFoldedGrammarElements = Maps.newHashMap();
-	
+
+	private ArrayInterner<EObject> cachedFoldedGrammarElements = new ArrayInterner<EObject>();
+
 	private boolean compressRoot = true;
 	
 	public void addChild(ICompositeNode node, AbstractNode child) {
+		checkValidNewChild(child);
 		CompositeNode composite = (CompositeNode) node;
-		if (composite.basicGetFirstChild() == null) {
-			checkValidNewChild(child);
+		AbstractNode firstChild = composite.basicGetFirstChild();
+		if (firstChild == null) {
 			composite.basicSetFirstChild(child);
 			initializeFirstChildInvariant(composite, child);
 		} else {
-			addPrevious(composite.basicGetFirstChild(), child);
+			child.basicSetParent(composite);
+			AbstractNode nodePreviousSibling = firstChild.basicGetPreviousSibling();
+			child.basicSetPreviousSibling(nodePreviousSibling);
+			child.basicSetNextSibling(firstChild);
+			if (nodePreviousSibling != null) {
+				nodePreviousSibling.basicSetNextSibling(child);
+			}
+			firstChild.basicSetPreviousSibling(child);
 		}
 	}
 	
@@ -58,23 +112,24 @@ public class NodeModelBuilder {
 		AbstractNode castedExisting = (AbstractNode) existing;
 		newComposite.basicSetGrammarElement(grammarElement);
 		newComposite.basicSetLookAhead(lookahead);
-		newComposite.basicSetParent(castedExisting.basicGetParent());
-		if (newComposite.basicGetParent().basicGetFirstChild() == castedExisting) {
-			newComposite.basicGetParent().basicSetFirstChild(newComposite);
+		CompositeNode existingParent = castedExisting.basicGetParent();
+		newComposite.basicSetParent(existingParent);
+		if (existingParent.basicGetFirstChild() == castedExisting) {
+			existingParent.basicSetFirstChild(newComposite);
 		}
-		if (castedExisting.basicGetNextSibling() == castedExisting) {
+		AbstractNode existingNextSibling = castedExisting.basicGetNextSibling();
+		if (existingNextSibling == castedExisting) {
 			newComposite.basicSetNextSibling(newComposite);
 			newComposite.basicSetPreviousSibling(newComposite);
 		} else {
-			newComposite.basicSetNextSibling(castedExisting.basicGetNextSibling());
-			newComposite.basicGetNextSibling().basicSetPreviousSibling(newComposite);
-			newComposite.basicSetPreviousSibling(castedExisting.basicGetPreviousSibling());
-			newComposite.basicGetPreviousSibling().basicSetNextSibling(newComposite);
+			newComposite.basicSetNextSibling(existingNextSibling);
+			existingNextSibling.basicSetPreviousSibling(newComposite);
+			AbstractNode existingPreviousSibling = castedExisting.basicGetPreviousSibling();
+			newComposite.basicSetPreviousSibling(existingPreviousSibling);
+			existingPreviousSibling.basicSetNextSibling(newComposite);
 		}
 		newComposite.basicSetFirstChild(castedExisting);
-		castedExisting.basicSetParent(newComposite);
-		castedExisting.basicSetNextSibling(castedExisting);
-		castedExisting.basicSetPreviousSibling(castedExisting);
+		initializeFirstChildInvariant(newComposite, castedExisting);
 		return compressAndReturnParent(existing);
 	}
 
@@ -84,33 +139,11 @@ public class NodeModelBuilder {
 		child.basicSetPreviousSibling(child);
 	}
 
-	protected void checkValidNewChild(AbstractNode child) {
+	protected void checkValidNewChild(/* @Nullable */ AbstractNode child) {
 		if (child == null)
 			throw new IllegalArgumentException("child may not be null");
 		if (child.basicGetNextSibling() != null || child.basicGetPreviousSibling() != null)
-			throw new IllegalStateException("prev has already a next or prev");
-	}
-	
-	public void addPrevious(AbstractNode node, AbstractNode prev) {
-		checkValidNewChild(prev);
-		prev.basicSetPreviousSibling(node.basicGetPreviousSibling());
-		prev.basicSetParent(node.basicGetParent());
-		prev.basicSetNextSibling(node);
-		if (node.basicGetPreviousSibling() != null) {
-			node.basicGetPreviousSibling().basicSetNextSibling(prev);
-		}
-		node.basicSetPreviousSibling(prev);
-	}
-	
-	public void addNext(AbstractNode node, AbstractNode next) {
-		checkValidNewChild(next);
-		next.basicSetNextSibling(node.basicGetNextSibling());
-		next.basicSetParent(node.basicGetParent());
-		next.basicSetNextSibling(node);
-		if (node.basicGetNextSibling() != null) {
-			node.basicGetNextSibling().basicSetNextSibling(next);
-		}
-		node.basicSetNextSibling(next);
+			throw new IllegalStateException("child has already a next or prev");
 	}
 	
 	public ICompositeNode newCompositeNode(EObject grammarElement, int lookahead, ICompositeNode parent) {
@@ -132,7 +165,7 @@ public class NodeModelBuilder {
 		return result;
 	}
 
-	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, SyntaxErrorMessage errorMessage,
+	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, /* @Nullable */ SyntaxErrorMessage errorMessage,
 			ICompositeNode parent) {
 		LeafNode result = null;
 		if (errorMessage != null) {
@@ -170,18 +203,13 @@ public class NodeModelBuilder {
 				// it refers not to a syntax error or a semantic object
 				EObject myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
-				List<EObject> list = null;
+				EObject[] list = null;
 				if (childGrammarElement instanceof EObject) {
-					list = Lists.newArrayList(myGrammarElement, (EObject) childGrammarElement);
+					list = new EObject[] {myGrammarElement, (EObject) childGrammarElement};
 				} else {
-					list = Lists.asList(myGrammarElement, (EObject[]) childGrammarElement);
+					list = newEObjectArray(myGrammarElement, (EObject[]) childGrammarElement);
 				}
-				EObject[] newElements = cachedFoldedGrammarElements.get(list);
-				if (newElements == null) {
-					newElements = list.toArray(new EObject[list.size()]);
-					cachedFoldedGrammarElements.put(list, newElements);
-				}
-				casted.basicSetGrammarElement(newElements);
+				casted.basicSetGrammarElement(cachedFoldedGrammarElements.intern(list));
 				replaceChildren(firstChild, casted);
 			}
 		}
@@ -213,26 +241,45 @@ public class NodeModelBuilder {
 			RootNode root = (RootNode) result;
 			if (casted.basicGetFirstChild() != null) {
 				AbstractNode firstChild = casted.basicGetFirstChild();
-				root.basicSetFirstChild(firstChild);
-				firstChild.basicSetParent(root);
-				AbstractNode child = firstChild;
-				while(child.basicHasNextSibling()) {
-					child = child.basicGetNextSibling();
-					child.basicSetParent(root);
+				if (firstChild instanceof ILeafNode && !firstChild.basicHasNextSibling()) {
+					return result;
 				}
-				root.basicSetGrammarElement(casted.basicGetGrammarElement());
-				root.basicSetSemanticElement(casted.basicGetSemanticElement());
-				root.basicSetSyntaxErrorMessage(casted.getSyntaxErrorMessage());
-				root.basicSetLookAhead(casted.getLookAhead());
-				if (casted.getSemanticElement() != null) {
-					casted.getSemanticElement().eAdapters().remove(casted);
-					root.getSemanticElement().eAdapters().add(root);
-				}
+				replaceByRootNode(casted, root);
 			}
 		}
 		return result;
 	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void replaceByRootNode(CompositeNode oldNode, RootNode rootNode) {
+		AbstractNode firstChild = oldNode.basicGetFirstChild();
+		rootNode.basicSetFirstChild(firstChild);
+		firstChild.basicSetParent(rootNode);
+		AbstractNode child = firstChild;
+		while(child.basicHasNextSibling()) {
+			child = child.basicGetNextSibling();
+			child.basicSetParent(rootNode);
+		}
+		rootNode.basicSetGrammarElement(oldNode.basicGetGrammarElement());
+		rootNode.basicSetSemanticElement(oldNode.basicGetSemanticElement());
+		rootNode.basicSetSyntaxErrorMessage(oldNode.getSyntaxErrorMessage());
+		rootNode.basicSetLookAhead(oldNode.getLookAhead());
+		EObject semanticElement = oldNode.getSemanticElement();
+		if (semanticElement != null) {
+			semanticElement.eAdapters().remove(oldNode);
+			rootNode.getSemanticElement().eAdapters().add(rootNode);
+		}
+	}
 	
+	private /* @Nullable */ EObject[] newEObjectArray(/* @Nullable */ EObject first, EObject[] rest) {
+		EObject[] array = new EObject[rest.length + 1];
+		array[0] = first;
+		System.arraycopy(rest, 0, array, 1, rest.length);
+		return array;
+	}
+
 	public INode setSyntaxError(INode node, SyntaxErrorMessage errorMessage) {
 		if (node instanceof LeafNode) {
 			LeafNode oldNode = (LeafNode) node;
@@ -296,38 +343,42 @@ public class NodeModelBuilder {
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {
 		AbstractNode newNode = ((CompositeNode) newRootNode).basicGetFirstChild();
 		replaceWithoutChildren((AbstractNode) oldNode, newNode);
-		if (oldNode instanceof ICompositeNode) {
+		if (oldNode instanceof ICompositeNode && newNode instanceof CompositeNode) {
 			CompositeNode newCompositeNode = (CompositeNode) newNode;
 			newCompositeNode.basicSetLookAhead(((ICompositeNode) oldNode).getLookAhead());
 			// todo: unfold both nodes and compress afterwards
 		}
 		ICompositeNode root = newNode.getRootNode();
 		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) root).basicIterator();
-		Iterator<LeafNode> leafNodeIter = Iterators.filter(iterator, LeafNode.class);
 		int offset = 0;
-		while(leafNodeIter.hasNext()) {
-			LeafNode leafNode = leafNodeIter.next();
-			leafNode.basicSetTotalOffset(offset);
-			offset += leafNode.getTotalLength();
+		while(iterator.hasNext()) {
+			AbstractNode node = iterator.next();
+			if (node instanceof LeafNode) {
+				((LeafNode) node).basicSetTotalOffset(offset);
+				offset += node.getTotalLength();
+			}
 		}
 	}
 
 	protected void replaceWithoutChildren(AbstractNode oldNode, AbstractNode newNode) {
-		newNode.basicSetParent(oldNode.basicGetParent());
-		if ((oldNode.basicGetParent()).basicGetFirstChild() == oldNode) {
-			(newNode.basicGetParent()).basicSetFirstChild(newNode);
+		CompositeNode parent = oldNode.basicGetParent();
+		newNode.basicSetParent(parent);
+		if (parent.basicGetFirstChild() == oldNode) {
+			parent.basicSetFirstChild(newNode);
 		}
-		if (oldNode.basicGetNextSibling() == oldNode) {
+		AbstractNode nextSibling = oldNode.basicGetNextSibling();
+		if (nextSibling == oldNode) {
 			newNode.basicSetNextSibling(newNode);
 		} else {
-			newNode.basicSetNextSibling(oldNode.basicGetNextSibling());
-			newNode.basicGetNextSibling().basicSetPreviousSibling(newNode);
+			newNode.basicSetNextSibling(nextSibling);
+			nextSibling.basicSetPreviousSibling(newNode);
 		}
-		if (oldNode.getPreviousSibling() == oldNode) {
+		AbstractNode previousSibling = oldNode.basicGetPreviousSibling();
+		if (previousSibling == oldNode) {
 			newNode.basicSetPreviousSibling(newNode);
 		} else {
-			newNode.basicSetPreviousSibling(oldNode.basicGetPreviousSibling());
-			newNode.basicGetPreviousSibling().basicSetNextSibling(newNode);
+			newNode.basicSetPreviousSibling(previousSibling);
+			previousSibling.basicSetNextSibling(newNode);
 		}
 	}
 
@@ -338,6 +389,14 @@ public class NodeModelBuilder {
 	public void setForcedFirstGrammarElement(RuleCall ruleCall) {
 		this.forcedGrammarElement = ruleCall;
 		compressRoot = false;
+	}
+	
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected void setLookAhead(CompositeNode node, int lookAhead) {
+		node.basicSetLookAhead(lookAhead);
 	}
 
 }

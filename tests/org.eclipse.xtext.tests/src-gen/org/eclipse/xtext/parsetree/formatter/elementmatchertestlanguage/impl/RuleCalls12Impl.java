@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -31,11 +28,11 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCall
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl#getFields <em>Fields</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,30 +1,53 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.inject.Binder;
 import com.google.inject.Inject;
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
+import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
 import org.eclipse.xtext.generator.serializer.AbstractSyntacticSequencer;
-import org.eclipse.xtext.generator.serializer.Context2DotRenderer;
+import org.eclipse.xtext.generator.serializer.DebugGraphGenerator;
 import org.eclipse.xtext.generator.serializer.GrammarConstraints;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
-import org.eclipse.xtext.generator.serializer.SerializerFragmentState;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector;
+import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eyshold - Initial contribution and API
+ */
 @SuppressWarnings("all")
-public class SerializerFragment extends Xtend2GeneratorFragment {
-  
+public class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
   @Inject
   private AbstractSemanticSequencer abstractSemanticSequencer;
   
@@ -41,83 +64,185 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   private GrammarConstraints grammarConstraints;
   
   @Inject
-  private Context2DotRenderer dotRenderer;
+  private DebugGraphGenerator debugGraphGenerator;
   
-  private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
+  @Inject
+  private SerializerGenFileNames names;
   
-  public SerializerFragmentState state() {
-    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
-    SerializerFragmentState result;
-    synchronized (_createCache_state) {
-      if (_createCache_state.containsKey(_cacheKey)) {
-        return _createCache_state.get(_cacheKey);
-      }
-      SerializerFragmentState _serializerFragmentState = new SerializerFragmentState();
-      result = _serializerFragmentState;
-      _createCache_state.put(_cacheKey, result);
+  private boolean generateDebugData = false;
+  
+  private boolean srcGenOnly = false;
+  
+  /**
+   * @since 2.8
+   */
+  private boolean detectSyntheticTerminals = true;
+  
+  /**
+   * @since 2.8
+   */
+  @Accessors
+  private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
+  
+  @Accessors
+  private boolean generateXtendStub;
+  
+  @Override
+  protected void addLocalBindings(final Binder binder) {
+    AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
+    Named _named = Names.named("generateXtendStub");
+    LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
+    boolean _and = false;
+    if (!this.generateXtendStub) {
+      _and = false;
+    } else {
+      boolean _isGenerateStub = this.isGenerateStub();
+      _and = _isGenerateStub;
     }
-    return result;
+    _annotatedWith.toInstance(Boolean.valueOf(_and));
   }
   
   public boolean setGenerateDebugData(final boolean doGenerate) {
-    SerializerFragmentState _state = this.state();
-    boolean _generateDebugData = _state.generateDebugData = doGenerate;
-    return _generateDebugData;
+    return this.generateDebugData = doGenerate;
   }
   
+  public boolean setSrcGenOnly(final boolean srcGen) {
+    return this.srcGenOnly = srcGen;
+  }
+  
+  /**
+   * @since 2.8
+   */
+  public boolean isDetectSyntheticTerminals() {
+    return this.detectSyntheticTerminals;
+  }
+  
+  /**
+   * Set to false if synthetic terminal should be ignored. Synthetic terminals
+   * have the form {@code terminal ABC: 'synthetic:ABC';} in the grammar
+   * and require a customized {@link AbstractSplittingTokenSource token source}.
+   * 
+   * @see SyntheticTerminalAwareFragmentHelper
+   * @since 2.8
+   */
+  public void setDetectSyntheticTerminals(final boolean detectSyntheticTerminals) {
+    this.detectSyntheticTerminals = detectSyntheticTerminals;
+  }
+  
+  @Override
+  public void setGenerateStub(final boolean generateStub) {
+    this.srcGenOnly = (!generateStub);
+  }
+  
+  @Override
+  public boolean isGenerateStub() {
+    return (!this.srcGenOnly);
+  }
+  
+  @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
-    {
-      BindFactory _bindFactory = new BindFactory();
-      final BindFactory bf = _bindFactory;
-      String _name = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
-      String _qualifiedName = this.semanticSequencer.getQualifiedName();
-      bf.addTypeToType(_name, _qualifiedName);
-      String _name_1 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
-      String _qualifiedName_1 = this.syntacticSequencer.getQualifiedName();
-      bf.addTypeToType(_name_1, _qualifiedName_1);
-      String _name_2 = org.eclipse.xtext.serializer.ISerializer.class.getName();
-      String _name_3 = org.eclipse.xtext.serializer.impl.Serializer.class.getName();
-      bf.addTypeToType(_name_2, _name_3);
-      Set<Binding> _bindings = bf.getBindings();
-      return _bindings;
-    }
+    final BindFactory bf = new BindFactory();
+    String _name = ISemanticSequencer.class.getName();
+    SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
+    String _qualifiedName = _semanticSequencer.getQualifiedName();
+    bf.addTypeToType(_name, _qualifiedName);
+    String _name_1 = ISyntacticSequencer.class.getName();
+    SerializerGenFileNames.GenFileName _syntacticSequencer = this.names.getSyntacticSequencer();
+    String _qualifiedName_1 = _syntacticSequencer.getQualifiedName();
+    bf.addTypeToType(_name_1, _qualifiedName_1);
+    String _name_2 = ISerializer.class.getName();
+    String _name_3 = Serializer.class.getName();
+    bf.addTypeToType(_name_2, _name_3);
+    return bf.getBindings();
   }
   
+  @Override
   public void generate(final Xtend2ExecutionContext ctx) {
-    {
-      String _fileName = this.semanticSequencer.getFileName();
-      CharSequence _fileContents = this.semanticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC, _fileName, _fileContents);
-      String _fileName_1 = this.abstractSemanticSequencer.getFileName();
-      CharSequence _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
+    this.abstractSyntacticSequencer.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
+    this.abstractSyntacticSequencer.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
+    if (this.srcGenOnly) {
+      SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
+      String _fileName = _semanticSequencer.getFileName();
+      SerializerGenFileNames.GenFileName _semanticSequencer_1 = this.names.getSemanticSequencer();
+      CharSequence _fileContents = this.abstractSemanticSequencer.getFileContents(_semanticSequencer_1);
+      ctx.writeFile(Generator.SRC_GEN, _fileName, _fileContents);
+      SerializerGenFileNames.GenFileName _syntacticSequencer = this.names.getSyntacticSequencer();
+      String _fileName_1 = _syntacticSequencer.getFileName();
+      SerializerGenFileNames.GenFileName _syntacticSequencer_1 = this.names.getSyntacticSequencer();
+      CharSequence _fileContents_1 = this.abstractSyntacticSequencer.getFileContents(_syntacticSequencer_1);
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
-      String _fileName_2 = this.syntacticSequencer.getFileName();
-      CharSequence _fileContents_2 = this.syntacticSequencer.getFileContents();
+    } else {
+      this.syntacticSequencer.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
+      this.syntacticSequencer.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
+      SerializerGenFileNames.GenFileName _semanticSequencer_2 = this.names.getSemanticSequencer();
+      String _fileName_2 = _semanticSequencer_2.getFileName();
+      SerializerGenFileNames.GenFileName _semanticSequencer_3 = this.names.getSemanticSequencer();
+      CharSequence _fileContents_2 = this.semanticSequencer.getFileContents(_semanticSequencer_3);
       ctx.writeFile(Generator.SRC, _fileName_2, _fileContents_2);
-      String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
-      CharSequence _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC_GEN, _fileName_3, _fileContents_3);
-      SerializerFragmentState _state = this.state();
-      if (_state.generateDebugData) {
-        {
-          String _fileName_4 = this.grammarConstraints.getFileName();
-          CharSequence _fileContents_4 = this.grammarConstraints.getFileContents();
-          ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
-          SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
-          Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
-          for (Pair<String,String> obj : _render2Dot) {
-            String _key = obj.getKey();
-            String _value = obj.getValue();
-            ctx.writeFile(Generator.SRC_GEN, _key, _value);
-          }
-        }
+      SerializerGenFileNames.GenFileName _syntacticSequencer_2 = this.names.getSyntacticSequencer();
+      String _fileName_3 = _syntacticSequencer_2.getFileName();
+      SerializerGenFileNames.GenFileName _syntacticSequencer_3 = this.names.getSyntacticSequencer();
+      CharSequence _fileContents_3 = this.syntacticSequencer.getFileContents(_syntacticSequencer_3);
+      ctx.writeFile(Generator.SRC, _fileName_3, _fileContents_3);
+      SerializerGenFileNames.GenFileName _abstractSemanticSequencer = this.names.getAbstractSemanticSequencer();
+      String _fileName_4 = _abstractSemanticSequencer.getFileName();
+      SerializerGenFileNames.GenFileName _abstractSemanticSequencer_1 = this.names.getAbstractSemanticSequencer();
+      CharSequence _fileContents_4 = this.abstractSemanticSequencer.getFileContents(_abstractSemanticSequencer_1);
+      ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
+      SerializerGenFileNames.GenFileName _abstractSyntacticSequencer = this.names.getAbstractSyntacticSequencer();
+      String _fileName_5 = _abstractSyntacticSequencer.getFileName();
+      SerializerGenFileNames.GenFileName _abstractSyntacticSequencer_1 = this.names.getAbstractSyntacticSequencer();
+      CharSequence _fileContents_5 = this.abstractSyntacticSequencer.getFileContents(_abstractSyntacticSequencer_1);
+      ctx.writeFile(Generator.SRC_GEN, _fileName_5, _fileContents_5);
+    }
+    if (this.generateDebugData) {
+      SerializerGenFileNames.GenFileName _grammarConstraints = this.names.getGrammarConstraints();
+      String _fileName_6 = _grammarConstraints.getFileName();
+      SerializerGenFileNames.GenFileName _grammarConstraints_1 = this.names.getGrammarConstraints();
+      CharSequence _fileContents_6 = this.grammarConstraints.getFileContents(_grammarConstraints_1);
+      ctx.writeFile(Generator.SRC_GEN, _fileName_6, _fileContents_6);
+      Iterable<Pair<String, String>> _generateDebugGraphs = this.debugGraphGenerator.generateDebugGraphs();
+      for (final Pair<String, String> obj : _generateDebugGraphs) {
+        String _key = obj.getKey();
+        String _value = obj.getValue();
+        ctx.writeFile(Generator.SRC_GEN, _key, _value);
       }
     }
   }
   
+  @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
-    String _packageName = this.semanticSequencer.getPackageName();
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_packageName);
-    return _newArrayList;
+    SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
+    String _packageName = _semanticSequencer.getPackageName();
+    return CollectionLiterals.<String>newArrayList(_packageName);
+  }
+  
+  @Override
+  public String[] getRequiredBundlesRt(final Grammar grammar) {
+    List<String> _xifexpression = null;
+    if (this.generateXtendStub) {
+      _xifexpression = Collections.<String>singletonList("org.eclipse.xtext.xbase.lib");
+    } else {
+      _xifexpression = null;
+    }
+    return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
+  }
+  
+  @Pure
+  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
+    return this.syntheticTerminalDetector;
+  }
+  
+  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
+    this.syntheticTerminalDetector = syntheticTerminalDetector;
+  }
+  
+  @Pure
+  public boolean isGenerateXtendStub() {
+    return this.generateXtendStub;
+  }
+  
+  public void setGenerateXtendStub(final boolean generateXtendStub) {
+    this.generateXtendStub = generateXtendStub;
   }
 }

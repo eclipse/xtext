@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.ignoreCaseTestLanguage;
 
@@ -14,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.ignoreCaseTestLanguage.Model#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.lexer.ignoreCaseTestLanguage.IgnoreCaseTestLanguagePackage#getModel()
  * @model

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.outline.impl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -22,9 +23,23 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	
 	private IOutlineTreeStructureProvider treeProvider;
 
+	/**
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #DocumentRootNode(ImageDescriptor, Object, IXtextDocument, IOutlineTreeStructureProvider)} instead.
+	 */
 	public DocumentRootNode(Image image, Object text, IXtextDocument document,
 			IOutlineTreeStructureProvider treeProvider) {
 		super(null, image, text, false);
+		this.document = document;
+		this.treeProvider = treeProvider;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public DocumentRootNode(ImageDescriptor imageDescriptor, Object text, IXtextDocument document,
+			IOutlineTreeStructureProvider treeProvider) {
+		super(null, imageDescriptor, text, false);
 		this.document = document;
 		this.treeProvider = treeProvider;
 	}
@@ -42,6 +57,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	@Override
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		return document.readOnly(new IUnitOfWork<T, XtextResource>() {
+			@Override
 			public T exec(XtextResource resource) throws Exception {
 				if(resource != null && !resource.getContents().isEmpty()) {
 					work.exec(resource.getContents().get(0));

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import org.junit.Test;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -14,7 +16,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 public abstract class AbstractBug348427OptionalChildrenTest extends AbstractBug348427Test {
 
 	@Override
-	public void testExpectName() throws Exception {
+	@Test public void testExpectName() throws Exception {
 		newBuilder().assertText("Name", "next");
 	}
 	

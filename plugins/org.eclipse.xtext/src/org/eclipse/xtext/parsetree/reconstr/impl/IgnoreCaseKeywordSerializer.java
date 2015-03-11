@@ -15,6 +15,7 @@ import org.eclipse.xtext.Keyword;
  */
 public class IgnoreCaseKeywordSerializer extends AbstractKeywordSerializer {
 
+	@Override
 	public boolean isValid(EObject context, Keyword keyword, Object value, IErrorAcceptor errorAcceptor) {
 		if (value instanceof String)
 			return keyword.getValue().equalsIgnoreCase((String)value);

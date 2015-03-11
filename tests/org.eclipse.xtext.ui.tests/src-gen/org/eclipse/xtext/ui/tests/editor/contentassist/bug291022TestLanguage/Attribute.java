@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Attribute#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Attribute#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Bug291022TestLanguagePackage#getAttribute()
  * @model

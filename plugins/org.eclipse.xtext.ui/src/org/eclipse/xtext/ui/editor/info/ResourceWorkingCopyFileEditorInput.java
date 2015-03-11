@@ -65,6 +65,7 @@ public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 //			debug = new String(buffer);
 		}
 
+		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 //			System.out.println(method.getName());
 			if(method.getName().equals("getContents")) { //$NON-NLS-1$

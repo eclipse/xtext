@@ -21,6 +21,7 @@ public interface ICompletionProposalPostProcessor {
 
 	public class NullProcessor implements ICompletionProposalPostProcessor {
 
+		@Override
 		public ICompletionProposal[] postProcess(ICompletionProposal[] proposals) {
 			return proposals;
 		}

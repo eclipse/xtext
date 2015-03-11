@@ -32,6 +32,7 @@ public class TokenDefProvider implements ITokenDefProvider {
 
 			private int current = 4;
 			
+			@Override
 			public Integer apply(String from) {
 				Integer result = current;
 				current++;
@@ -42,6 +43,7 @@ public class TokenDefProvider implements ITokenDefProvider {
 		return new TokenDefProvider(index);
 	}
 	
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		return index;
 	}

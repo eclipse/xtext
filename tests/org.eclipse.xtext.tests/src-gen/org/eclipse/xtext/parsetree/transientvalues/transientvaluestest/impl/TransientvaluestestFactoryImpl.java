@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
@@ -33,7 +30,7 @@ public class TransientvaluestestFactoryImpl extends EFactoryImpl implements Tran
   {
     try
     {
-      TransientvaluestestFactory theTransientvaluestestFactory = (TransientvaluestestFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/transientvaluestest"); 
+      TransientvaluestestFactory theTransientvaluestestFactory = (TransientvaluestestFactory)EPackage.Registry.INSTANCE.getEFactory(TransientvaluestestPackage.eNS_URI);
       if (theTransientvaluestestFactory != null)
       {
         return theTransientvaluestestFactory;

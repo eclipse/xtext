@@ -13,7 +13,7 @@ package org.eclipse.xtext.parser.unorderedGroups;
 public class ParserExTest extends AbstractParserTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ExUnorderedGroupsTestLanguageStandaloneSetup.class);
 	}

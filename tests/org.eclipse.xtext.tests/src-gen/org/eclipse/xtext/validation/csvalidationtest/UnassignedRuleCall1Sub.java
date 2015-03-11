@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.validation.csvalidationtest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall1Sub#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall1Sub#getVal1 <em>Val1</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getUnassignedRuleCall1Sub()
  * @model

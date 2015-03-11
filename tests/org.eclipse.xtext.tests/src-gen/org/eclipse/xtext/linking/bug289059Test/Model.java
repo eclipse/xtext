@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug289059Test;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.Model#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.Model#getEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.Model#getReference <em>Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.bug289059Test.Bug289059TestPackage#getModel()
  * @model

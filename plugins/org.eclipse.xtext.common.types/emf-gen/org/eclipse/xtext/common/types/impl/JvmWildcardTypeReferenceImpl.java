@@ -1,13 +1,26 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
-import org.eclipse.emf.ecore.EClass;
+import java.util.Collection;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -16,12 +29,26 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * An implementation of the model object '<em><b>Jvm Wildcard Type Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl#getConstraints <em>Constraints</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
-public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl implements JvmWildcardTypeReference
+public class JvmWildcardTypeReferenceImpl extends JvmTypeReferenceImplCustom implements JvmWildcardTypeReference
 {
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeConstraint> constraints;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,11 +75,13 @@ public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmType getType()
+	public EList<JvmTypeConstraint> getConstraints()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (constraints == null)
+		{
+			constraints = new EObjectContainmentWithInverseEList<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
+		}
+		return constraints;
 	}
 
 	/**
@@ -60,11 +89,16 @@ public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIdentifier()
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -72,11 +106,15 @@ public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSimpleName()
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -84,11 +122,15 @@ public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getQualifiedName()
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				return getConstraints();
+		}
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -96,11 +138,89 @@ public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getQualifiedName(char innerClassDelimiter)
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends JvmTypeConstraint>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				getConstraints().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == JvmConstraintOwner.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS: return TypesPackage.JVM_CONSTRAINT_OWNER__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == JvmConstraintOwner.class)
+		{
+			switch (baseFeatureID)
+			{
+				case TypesPackage.JVM_CONSTRAINT_OWNER__CONSTRAINTS: return TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //JvmWildcardTypeReferenceImpl

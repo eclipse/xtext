@@ -29,4 +29,35 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 		return result;
 	}
 	
+	@Override
+	public boolean isExplicitOperationCallOrBuilderSyntax() {
+		return super.isExplicitOperationCall() || !getFeatureCallArguments().isEmpty();
+	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return getActualArguments(null, getFeatureCallArguments());
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		return getActualReceiver(null);
+	}
+
+	@Override
+	public boolean isExtension() {
+		return isExtension(null);
+	}
+	
+	@Override
+	public boolean isPackageFragment() {
+		ensureFeatureLinked();
+		return super.isPackageFragment();
+	}
+	
+	@Override
+	public boolean isTypeLiteral() {
+		ensureFeatureLinked();
+		return super.isTypeLiteral();
+	}
 }

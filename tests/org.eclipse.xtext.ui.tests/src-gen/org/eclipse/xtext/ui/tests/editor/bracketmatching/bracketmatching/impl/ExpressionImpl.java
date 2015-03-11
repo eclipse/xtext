@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.Express
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

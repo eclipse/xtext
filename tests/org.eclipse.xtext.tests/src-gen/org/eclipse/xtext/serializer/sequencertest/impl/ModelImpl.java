@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -18,13 +15,17 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
 import org.eclipse.xtext.serializer.sequencertest.Model;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -32,6 +33,10 @@ import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
 import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +44,7 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX2 <em>X2</em>}</li>
@@ -59,8 +65,17 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX22 <em>X22</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX23 <em>X23</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX24 <em>X24</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX25 <em>X25</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX26 <em>X26</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX27 <em>X27</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX28 <em>X28</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX29 <em>X29</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX30 <em>X30</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX31 <em>X31</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX32 <em>X32</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -255,6 +270,106 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected org.eclipse.xtext.serializer.sequencertest.Float x22;
+
+  /**
+   * The cached value of the '{@link #getX23() <em>X23</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX23()
+   * @generated
+   * @ordered
+   */
+  protected UnorderedAlternative x23;
+
+  /**
+   * The cached value of the '{@link #getX24() <em>X24</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX24()
+   * @generated
+   * @ordered
+   */
+  protected UnorderedGroup x24;
+
+  /**
+   * The cached value of the '{@link #getX25() <em>X25</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX25()
+   * @generated
+   * @ordered
+   */
+  protected UnorderedGroupOptional x25;
+
+  /**
+   * The cached value of the '{@link #getX26() <em>X26</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX26()
+   * @generated
+   * @ordered
+   */
+  protected UnorderedGroupBoolean x26;
+
+  /**
+   * The cached value of the '{@link #getX27() <em>X27</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX27()
+   * @generated
+   * @ordered
+   */
+  protected Complex1 x27;
+
+  /**
+   * The cached value of the '{@link #getX28() <em>X28</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX28()
+   * @generated
+   * @ordered
+   */
+  protected OptionalDouble x28;
+
+  /**
+   * The cached value of the '{@link #getX29() <em>X29</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX29()
+   * @generated
+   * @ordered
+   */
+  protected NullValue x29;
+
+  /**
+   * The cached value of the '{@link #getX30() <em>X30</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX30()
+   * @generated
+   * @ordered
+   */
+  protected NullValue x30;
+
+  /**
+   * The cached value of the '{@link #getX31() <em>X31</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX31()
+   * @generated
+   * @ordered
+   */
+  protected NullCrossRef x31;
+
+  /**
+   * The cached value of the '{@link #getX32() <em>X32</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX32()
+   * @generated
+   * @ordered
+   */
+  protected NullCrossRef x32;
 
   /**
    * <!-- begin-user-doc -->
@@ -1194,6 +1309,486 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public UnorderedAlternative getX23()
+  {
+    return x23;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX23(UnorderedAlternative newX23, NotificationChain msgs)
+  {
+    UnorderedAlternative oldX23 = x23;
+    x23 = newX23;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X23, oldX23, newX23);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX23(UnorderedAlternative newX23)
+  {
+    if (newX23 != x23)
+    {
+      NotificationChain msgs = null;
+      if (x23 != null)
+        msgs = ((InternalEObject)x23).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X23, null, msgs);
+      if (newX23 != null)
+        msgs = ((InternalEObject)newX23).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X23, null, msgs);
+      msgs = basicSetX23(newX23, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X23, newX23, newX23));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroup getX24()
+  {
+    return x24;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX24(UnorderedGroup newX24, NotificationChain msgs)
+  {
+    UnorderedGroup oldX24 = x24;
+    x24 = newX24;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X24, oldX24, newX24);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX24(UnorderedGroup newX24)
+  {
+    if (newX24 != x24)
+    {
+      NotificationChain msgs = null;
+      if (x24 != null)
+        msgs = ((InternalEObject)x24).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X24, null, msgs);
+      if (newX24 != null)
+        msgs = ((InternalEObject)newX24).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X24, null, msgs);
+      msgs = basicSetX24(newX24, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X24, newX24, newX24));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupOptional getX25()
+  {
+    return x25;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX25(UnorderedGroupOptional newX25, NotificationChain msgs)
+  {
+    UnorderedGroupOptional oldX25 = x25;
+    x25 = newX25;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X25, oldX25, newX25);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX25(UnorderedGroupOptional newX25)
+  {
+    if (newX25 != x25)
+    {
+      NotificationChain msgs = null;
+      if (x25 != null)
+        msgs = ((InternalEObject)x25).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X25, null, msgs);
+      if (newX25 != null)
+        msgs = ((InternalEObject)newX25).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X25, null, msgs);
+      msgs = basicSetX25(newX25, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X25, newX25, newX25));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupBoolean getX26()
+  {
+    return x26;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX26(UnorderedGroupBoolean newX26, NotificationChain msgs)
+  {
+    UnorderedGroupBoolean oldX26 = x26;
+    x26 = newX26;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X26, oldX26, newX26);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX26(UnorderedGroupBoolean newX26)
+  {
+    if (newX26 != x26)
+    {
+      NotificationChain msgs = null;
+      if (x26 != null)
+        msgs = ((InternalEObject)x26).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X26, null, msgs);
+      if (newX26 != null)
+        msgs = ((InternalEObject)newX26).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X26, null, msgs);
+      msgs = basicSetX26(newX26, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X26, newX26, newX26));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Complex1 getX27()
+  {
+    return x27;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX27(Complex1 newX27, NotificationChain msgs)
+  {
+    Complex1 oldX27 = x27;
+    x27 = newX27;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X27, oldX27, newX27);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX27(Complex1 newX27)
+  {
+    if (newX27 != x27)
+    {
+      NotificationChain msgs = null;
+      if (x27 != null)
+        msgs = ((InternalEObject)x27).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X27, null, msgs);
+      if (newX27 != null)
+        msgs = ((InternalEObject)newX27).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X27, null, msgs);
+      msgs = basicSetX27(newX27, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X27, newX27, newX27));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OptionalDouble getX28()
+  {
+    return x28;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX28(OptionalDouble newX28, NotificationChain msgs)
+  {
+    OptionalDouble oldX28 = x28;
+    x28 = newX28;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X28, oldX28, newX28);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX28(OptionalDouble newX28)
+  {
+    if (newX28 != x28)
+    {
+      NotificationChain msgs = null;
+      if (x28 != null)
+        msgs = ((InternalEObject)x28).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X28, null, msgs);
+      if (newX28 != null)
+        msgs = ((InternalEObject)newX28).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X28, null, msgs);
+      msgs = basicSetX28(newX28, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X28, newX28, newX28));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullValue getX29()
+  {
+    return x29;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX29(NullValue newX29, NotificationChain msgs)
+  {
+    NullValue oldX29 = x29;
+    x29 = newX29;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X29, oldX29, newX29);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX29(NullValue newX29)
+  {
+    if (newX29 != x29)
+    {
+      NotificationChain msgs = null;
+      if (x29 != null)
+        msgs = ((InternalEObject)x29).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X29, null, msgs);
+      if (newX29 != null)
+        msgs = ((InternalEObject)newX29).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X29, null, msgs);
+      msgs = basicSetX29(newX29, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X29, newX29, newX29));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullValue getX30()
+  {
+    return x30;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX30(NullValue newX30, NotificationChain msgs)
+  {
+    NullValue oldX30 = x30;
+    x30 = newX30;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X30, oldX30, newX30);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX30(NullValue newX30)
+  {
+    if (newX30 != x30)
+    {
+      NotificationChain msgs = null;
+      if (x30 != null)
+        msgs = ((InternalEObject)x30).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X30, null, msgs);
+      if (newX30 != null)
+        msgs = ((InternalEObject)newX30).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X30, null, msgs);
+      msgs = basicSetX30(newX30, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X30, newX30, newX30));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullCrossRef getX31()
+  {
+    return x31;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX31(NullCrossRef newX31, NotificationChain msgs)
+  {
+    NullCrossRef oldX31 = x31;
+    x31 = newX31;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X31, oldX31, newX31);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX31(NullCrossRef newX31)
+  {
+    if (newX31 != x31)
+    {
+      NotificationChain msgs = null;
+      if (x31 != null)
+        msgs = ((InternalEObject)x31).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X31, null, msgs);
+      if (newX31 != null)
+        msgs = ((InternalEObject)newX31).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X31, null, msgs);
+      msgs = basicSetX31(newX31, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X31, newX31, newX31));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullCrossRef getX32()
+  {
+    return x32;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX32(NullCrossRef newX32, NotificationChain msgs)
+  {
+    NullCrossRef oldX32 = x32;
+    x32 = newX32;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X32, oldX32, newX32);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX32(NullCrossRef newX32)
+  {
+    if (newX32 != x32)
+    {
+      NotificationChain msgs = null;
+      if (x32 != null)
+        msgs = ((InternalEObject)x32).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X32, null, msgs);
+      if (newX32 != null)
+        msgs = ((InternalEObject)newX32).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X32, null, msgs);
+      msgs = basicSetX32(newX32, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X32, newX32, newX32));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1237,6 +1832,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX21(null, msgs);
       case SequencertestPackage.MODEL__X22:
         return basicSetX22(null, msgs);
+      case SequencertestPackage.MODEL__X23:
+        return basicSetX23(null, msgs);
+      case SequencertestPackage.MODEL__X24:
+        return basicSetX24(null, msgs);
+      case SequencertestPackage.MODEL__X25:
+        return basicSetX25(null, msgs);
+      case SequencertestPackage.MODEL__X26:
+        return basicSetX26(null, msgs);
+      case SequencertestPackage.MODEL__X27:
+        return basicSetX27(null, msgs);
+      case SequencertestPackage.MODEL__X28:
+        return basicSetX28(null, msgs);
+      case SequencertestPackage.MODEL__X29:
+        return basicSetX29(null, msgs);
+      case SequencertestPackage.MODEL__X30:
+        return basicSetX30(null, msgs);
+      case SequencertestPackage.MODEL__X31:
+        return basicSetX31(null, msgs);
+      case SequencertestPackage.MODEL__X32:
+        return basicSetX32(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1289,6 +1904,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX21();
       case SequencertestPackage.MODEL__X22:
         return getX22();
+      case SequencertestPackage.MODEL__X23:
+        return getX23();
+      case SequencertestPackage.MODEL__X24:
+        return getX24();
+      case SequencertestPackage.MODEL__X25:
+        return getX25();
+      case SequencertestPackage.MODEL__X26:
+        return getX26();
+      case SequencertestPackage.MODEL__X27:
+        return getX27();
+      case SequencertestPackage.MODEL__X28:
+        return getX28();
+      case SequencertestPackage.MODEL__X29:
+        return getX29();
+      case SequencertestPackage.MODEL__X30:
+        return getX30();
+      case SequencertestPackage.MODEL__X31:
+        return getX31();
+      case SequencertestPackage.MODEL__X32:
+        return getX32();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1359,6 +1994,36 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SequencertestPackage.MODEL__X22:
         setX22((org.eclipse.xtext.serializer.sequencertest.Float)newValue);
+        return;
+      case SequencertestPackage.MODEL__X23:
+        setX23((UnorderedAlternative)newValue);
+        return;
+      case SequencertestPackage.MODEL__X24:
+        setX24((UnorderedGroup)newValue);
+        return;
+      case SequencertestPackage.MODEL__X25:
+        setX25((UnorderedGroupOptional)newValue);
+        return;
+      case SequencertestPackage.MODEL__X26:
+        setX26((UnorderedGroupBoolean)newValue);
+        return;
+      case SequencertestPackage.MODEL__X27:
+        setX27((Complex1)newValue);
+        return;
+      case SequencertestPackage.MODEL__X28:
+        setX28((OptionalDouble)newValue);
+        return;
+      case SequencertestPackage.MODEL__X29:
+        setX29((NullValue)newValue);
+        return;
+      case SequencertestPackage.MODEL__X30:
+        setX30((NullValue)newValue);
+        return;
+      case SequencertestPackage.MODEL__X31:
+        setX31((NullCrossRef)newValue);
+        return;
+      case SequencertestPackage.MODEL__X32:
+        setX32((NullCrossRef)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1431,6 +2096,36 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SequencertestPackage.MODEL__X22:
         setX22((org.eclipse.xtext.serializer.sequencertest.Float)null);
         return;
+      case SequencertestPackage.MODEL__X23:
+        setX23((UnorderedAlternative)null);
+        return;
+      case SequencertestPackage.MODEL__X24:
+        setX24((UnorderedGroup)null);
+        return;
+      case SequencertestPackage.MODEL__X25:
+        setX25((UnorderedGroupOptional)null);
+        return;
+      case SequencertestPackage.MODEL__X26:
+        setX26((UnorderedGroupBoolean)null);
+        return;
+      case SequencertestPackage.MODEL__X27:
+        setX27((Complex1)null);
+        return;
+      case SequencertestPackage.MODEL__X28:
+        setX28((OptionalDouble)null);
+        return;
+      case SequencertestPackage.MODEL__X29:
+        setX29((NullValue)null);
+        return;
+      case SequencertestPackage.MODEL__X30:
+        setX30((NullValue)null);
+        return;
+      case SequencertestPackage.MODEL__X31:
+        setX31((NullCrossRef)null);
+        return;
+      case SequencertestPackage.MODEL__X32:
+        setX32((NullCrossRef)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1483,6 +2178,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x21 != null;
       case SequencertestPackage.MODEL__X22:
         return x22 != null;
+      case SequencertestPackage.MODEL__X23:
+        return x23 != null;
+      case SequencertestPackage.MODEL__X24:
+        return x24 != null;
+      case SequencertestPackage.MODEL__X25:
+        return x25 != null;
+      case SequencertestPackage.MODEL__X26:
+        return x26 != null;
+      case SequencertestPackage.MODEL__X27:
+        return x27 != null;
+      case SequencertestPackage.MODEL__X28:
+        return x28 != null;
+      case SequencertestPackage.MODEL__X29:
+        return x29 != null;
+      case SequencertestPackage.MODEL__X30:
+        return x30 != null;
+      case SequencertestPackage.MODEL__X31:
+        return x31 != null;
+      case SequencertestPackage.MODEL__X32:
+        return x32 != null;
     }
     return super.eIsSet(featureID);
   }

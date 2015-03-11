@@ -8,9 +8,11 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -19,11 +21,15 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension,
+		IDirtyResource.ICurrentStateProvidingExtension, Provider<IResourceDescription>,
+		IDirtyResource.InitializationAware {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
 	private String content;
+	private URI normalizedUri;
+	private Provider<ResourceStorageLoadable> storageAwareResourceInputStreamProvider;
 	
 	public void connect(IXtextDocument document) {
 		if (document == null)
@@ -37,6 +43,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 			@Override
 			public void process(XtextResource resource) {
 				if (resource != null) {
+					DocumentBasedDirtyResource.this.normalizedUri = EcoreUtil2.getNormalizedURI(resource);
 					initiallyProcessResource(resource);
 				}
 			}
@@ -71,8 +78,10 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 	 * This allows for lazy resolution of proxies instead of eager copying.
 	 * @return the current resource description of the associated document. May be <code>null</code>.
 	 */
+	@Override
 	public IResourceDescription get() {
 		IResourceDescription result = document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>() {
+			@Override
 			public IResourceDescription exec(XtextResource resource) {
 				if (resource != null) {
 					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
@@ -89,47 +98,113 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 		return result;
 	}
 	
-	public synchronized void copyState(IResourceDescription original) {
-		description = new StatefulResourceDescription(original, this);
-		content = getUnderlyingDocument().get();
+	public void copyState(IResourceDescription original) {
+		StatefulResourceDescription copy = new StatefulResourceDescription(original, this);
+		synchronized(this) {
+			description = copy;
+			content = getUnderlyingDocument().get();
+		}
 	}
 	
 	public IXtextDocument getUnderlyingDocument() {
 		return document;
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public IResourceDescription getDescriptionIfInitialized() {
+		return description;
+	}
+	
+	@Override
 	public boolean isInitialized() {
 		return description != null;
 	}
 	
+	@Override
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
+		IResourceDescription description = this.description;
 		if (description == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is currently not initialized");
 		return description.getURI();
 	}
 	
+	@Override
 	public synchronized IResourceDescription getDescription() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
+		IResourceDescription description = this.description;
 		if (description == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is currently not initialized");
 		return description;
 	}
 
+	@Override
 	public synchronized String getContents() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is not connected to a document");
+		String content = this.content;
 		if (content == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is currently not mementoed");
 		return content;
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getContentsIfInitialized() {
+		return content;
+	}
+	
+	@Override
 	public String getActualContents() {
+		IXtextDocument document = this.document;
 		if (document == null)
 			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
 		return document.get();
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getActualContentsIfInitialized() {
+		IXtextDocument document = this.document;
+		if (document == null)
+			return null;
+		return document.get();
+	}
 
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public URI getNormalizedURI() {
+		return normalizedUri;
+	}
+	
+	/**
+	 * @since 2.8
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	@Override
+	public ResourceStorageLoadable getResourceStorageLoadable() {
+		Provider<ResourceStorageLoadable> provider = this.storageAwareResourceInputStreamProvider;
+		if (provider == null)
+			return null;
+		return provider.get();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setResourceStorageLoadableProvider(Provider<ResourceStorageLoadable> provider) {
+		this.storageAwareResourceInputStreamProvider = provider;
+	}
 }

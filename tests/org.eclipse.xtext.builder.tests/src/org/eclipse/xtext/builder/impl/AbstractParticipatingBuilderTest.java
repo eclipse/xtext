@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.impl;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
@@ -23,12 +22,11 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	private DelegatingBuilderParticipant participant;
 	
 	private boolean logging = false;
-	private int invocationCount = 0;
+	protected int invocationCount = 0;
 	private IBuildContext context;
-	private OperationCanceledException cancelWith;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IXtextBuilderParticipant instance = Activator.getInstance()
 				.getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage")
@@ -38,20 +36,18 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		participant.setDelegate(null);
 		participant = null;
 		reset();
 		super.tearDown();
 	}
 	
+	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (logging) {
 			invocationCount++;
 			this.context = context;
-		}
-		if (cancelWith != null) {
-			throw cancelWith;
 		}
 	}
 	
@@ -79,10 +75,6 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	public void reset() {
 		invocationCount = 0;
 		context = null;
-		cancelWith = null;
 	}
 
-	public void cancel(OperationCanceledException cancelWith) {
-		this.cancelWith = cancelWith;
-	}
 }

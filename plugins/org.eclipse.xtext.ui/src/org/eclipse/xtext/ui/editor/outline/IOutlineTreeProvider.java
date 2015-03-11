@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline;
 
+import java.util.List;
+
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * Creates outline nodes. Only called from within {@link org.eclipse.xtext.util.concurrent.IUnitOfWork}s where the
- * {@link Resource} can be read safely.
+ * {@link IXtextDocument} can be read safely.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -22,5 +26,36 @@ import com.google.inject.ImplementedBy;
 public interface IOutlineTreeProvider {
 
 	IOutlineNode createRoot(IXtextDocument document);
+
+	/**
+	 * For outline tree providers that support multiple modes, e.g. show elements from superclasses or not.
+	 * 
+	 * @author Jan Koehnlein - Initial contribution and API
+	 * @since 2.4
+	 */
+	interface ModeAware {
+		List<OutlineMode> getOutlineModes();
+		
+		OutlineMode getCurrentMode();
+
+		OutlineMode getNextMode();
+
+		void setCurrentMode(OutlineMode outlineMode);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	interface Cancelable {
+		IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator);
+	}
+
+	/**
+	 * For outline tree providers that can be executed in background jobs.
+	 * 
+	 * @since 2.8
+	 */
+	interface Background {
+	}
 	
 }

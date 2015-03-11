@@ -26,6 +26,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -75,6 +76,10 @@ public class SlotEntry implements ISlotEntry {
 		this.slot = slot;
 	}
 
+	/**
+	 * The delimiter to use for the names. When not set the dot (".") is used.
+	 * Must be set to an empty string ("") if no delimiter should be used.
+	 */
 	public void setNamespaceDelimiter(String namespaceDelimiter) {
 		this.namespaceDelimiter = namespaceDelimiter;
 	}
@@ -86,7 +91,8 @@ public class SlotEntry implements ISlotEntry {
 	public boolean isFirstOnly() {
 		return firstOnly;
 	}
-
+	
+	@Override
 	public void put(WorkflowContext ctx, IResourceDescriptions resourceDescriptions, ResourceSet resourceSet) {
 		Set<EClass> eClasses = findEClasses(resourceSet, nsURI, type);
 		List<EObject> elements = findEObjectsOfType(eClasses, resourceDescriptions, resourceSet);
@@ -120,11 +126,15 @@ public class SlotEntry implements ISlotEntry {
 		Set<EClass> result = Sets.newHashSet();
 		Set<String> keySet = getNsUris();
 		for (String string : keySet) {
-			EPackage ePackage = resourceSet.getPackageRegistry().getEPackage(string);
-			if (ePackage != null) {
-				EClassifier classifier = ePackage.getEClassifier(typeName2);
-				if (classifier instanceof EClass)
-					result.add((EClass) classifier);
+			try {
+				EPackage ePackage = resourceSet.getPackageRegistry().getEPackage(string);
+				if (ePackage != null) {
+					EClassifier classifier = ePackage.getEClassifier(typeName2);
+					if (classifier instanceof EClass)
+						result.add((EClass) classifier);
+				}
+			} catch(NoClassDefFoundError e) {
+				throw new NoClassDefFoundError("NoClassDefFoundError while loading ePackage: " + string + " - " + e.getMessage());
 			}
 		}
 		if (result.isEmpty()) {
@@ -145,9 +155,13 @@ public class SlotEntry implements ISlotEntry {
 			EClass eClass = iterator.next();
 			valid = valid || EcorePackage.Literals.EOBJECT == eClass || eClass.isSuperTypeOf(desc.getEClass());
 		}
-		if(name != null) {
-			QualifiedName qualifiedName = QualifiedName.create(name.split(Pattern.quote(getNamespaceDelimiter())));
-			return valid && (qualifiedName == null || qualifiedName.equals(desc.getName()));
+		if (name != null) {
+			if (Strings.isEmpty(namespaceDelimiter)) {
+				return valid && name.equals(desc.getName().toString());
+			} else {
+				QualifiedName qualifiedName = QualifiedName.create(name.split(Pattern.quote(getNamespaceDelimiter())));
+				return valid && (qualifiedName == null || qualifiedName.equals(desc.getName()));
+			}
 		} 
 		return valid;
 	}
@@ -156,6 +170,7 @@ public class SlotEntry implements ISlotEntry {
 		return resourceSet.getEObject(description.getEObjectURI(), true);
 	}
 
+	@Override
 	public void preInvoke() {
 		// TODO Auto-generated method stub
 		

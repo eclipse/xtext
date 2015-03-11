@@ -17,8 +17,9 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
@@ -31,7 +32,7 @@ public class TreeConstTest extends AbstractXtextTests {
 	private TreeConstructionNFAProvider nfa = new TreeConstructionNFAProvider();
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -67,44 +68,44 @@ public class TreeConstTest extends AbstractXtextTests {
 			fail("Types '" + refs + "' are not expected. Actual:" + actual2 + " Expected: " + Joiner.on(", ").join(expected));
 	}
 
-	public void testSingleAssignment() throws Exception {
+	@Test public void testSingleAssignment() throws Exception {
 		AbstractRule rule = parseRule("Model: name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Model");
 	}
 
-	public void testSingleAssignmentOrNull() throws Exception {
+	@Test public void testSingleAssignmentOrNull() throws Exception {
 		AbstractRule rule = parseRule("Model: 'foo' name=ID?;");
 		Group group = (Group) rule.getAlternatives();
 		assertTypes(nfa.getNFA(group).getTypes(), "Model", "null");
 		assertTypes(nfa.getNFA(group.getElements().get(0)).getTypesToCheck());
 	}
 
-	public void testSingleAction1() throws Exception {
+	@Test public void testSingleAction1() throws Exception {
 		AbstractRule rule = parseRule("Model: 'someKeyword' {Model};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Model");
 	}
 
-	public void testSingleAction2() throws Exception {
+	@Test public void testSingleAction2() throws Exception {
 		AbstractRule rule = parseRule("Model: 'someKeyword' {TypeRestriction};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "TypeRestriction");
 	}
 
-	public void testMultiAction1() throws Exception {
+	@Test public void testMultiAction1() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1} | 'b' {Type2};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type1", "Type2");
 	}
 
-	public void testMultiAction2() throws Exception {
+	@Test public void testMultiAction2() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1} | 'b' {Type2} | 'c';");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type1", "Type2", "null");
 	}
 
-	public void testMultiAction3() throws Exception {
+	@Test public void testMultiAction3() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1} | 'b' {Type2} | 'c' name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type1", "Type2", "Model");
 	}
 
-	public void testMultiAction4() throws Exception {
+	@Test public void testMultiAction4() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1} | 'b' {Type2} | 'c' | name=ID;");
 		Alternatives alt = (Alternatives) rule.getAlternatives();
 		assertTypes(nfa.getNFA(alt).getTypes(), "Type1", "Type2", "Model", "null");
@@ -114,52 +115,52 @@ public class TreeConstTest extends AbstractXtextTests {
 		assertTypes(nfa.getNFA(alt.getElements().get(3)).getTypesToCheck(), "Model");
 	}
 
-	public void testAssignedAction1() throws Exception {
+	@Test public void testAssignedAction1() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1.sub=current};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type1");
 	}
 
-	public void testAssignedAction2() throws Exception {
+	@Test public void testAssignedAction2() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1.sub=current} 'b' {Type2.sub=current};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type2");
 	}
 
-	public void testAssignedAction3() throws Exception {
+	@Test public void testAssignedAction3() throws Exception {
 		AbstractRule rule = parseRule("Model: 'a' {Type1.sub=current} | 'b' {Type2.sub=current};");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Type1", "Type2");
 	}
 
-	public void testAssignedRuleCall() throws Exception {
+	@Test public void testAssignedRuleCall() throws Exception {
 		AbstractRule rule = parseRule("Model: 'something' foo=Bar; Bar: name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Model");
 	}
 
-	public void testRuleCall1() throws Exception {
+	@Test public void testRuleCall1() throws Exception {
 		AbstractRule rule = parseRule("Model: Foo; Foo: name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Foo");
 	}
 
-	public void testRuleCall2() throws Exception {
+	@Test public void testRuleCall2() throws Exception {
 		AbstractRule rule = parseRule("Model: Foo | 'bar'; Foo: name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Foo", "null");
 	}
 
-	public void testRuleCall3() throws Exception {
+	@Test public void testRuleCall3() throws Exception {
 		AbstractRule rule = parseRule("Model: Foo | 'bar' name=ID | 'null'; Foo: name=ID;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Foo", "Model", "null");
 	}
 
-	public void testRuleCall4() throws Exception {
+	@Test public void testRuleCall4() throws Exception {
 		AbstractRule rule = parseRule("Model: Foo | Bar; Foo: name=ID; Bar: val=INT;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Foo", "Bar");
 	}
 
-	public void testRuleCall5() throws Exception {
+	@Test public void testRuleCall5() throws Exception {
 		AbstractRule rule = parseRule("Model: (Foo | Bar) v2=ID v1=ID; Foo: name=ID; Bar: val=INT;");
 		assertTypes(nfa.getNFA(rule.getAlternatives()).getTypes(), "Foo", "Bar");
 	}
 
-	public void testExpression1() throws Exception {
+	@Test public void testExpression1() throws Exception {
 		StringBuilder s = new StringBuilder();
 		s.append("Expression: Add; ");
 		s.append("Add returns Expression: Mult ({Add.left=current} '+' right=Mult)?; ");

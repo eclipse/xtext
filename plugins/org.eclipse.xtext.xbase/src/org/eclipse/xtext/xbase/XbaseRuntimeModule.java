@@ -7,10 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
-
 /**
- * Use this class to register components to be used within the IDE.
+ * Use this class to register components to be used without the IDE.
+ * 
+ * @noreference This class is not intended to be referenced by clients.
+ * @since 2.7
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
-	
+
+	@Override
+	public Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {
+		// this binding can be removed once 
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=453440
+		// is fixed. 
+		// without the binding, org.eclipse.xtext.xbase.tests.serializer.SerializerTest fails
+		return org.eclipse.xtext.xbase.formatting.XbaseFormatter.class;
+	}
 }

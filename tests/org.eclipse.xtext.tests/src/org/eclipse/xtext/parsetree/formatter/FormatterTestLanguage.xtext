@@ -31,13 +31,13 @@ Param:
 Space: "space" val=ID;
 	
 TestLinewrap:
-	"linewrap" items+=Line*;
+	{TestLinewrap} "linewrap" items+=Line*;
 	
 TestLinewrapMinMax:
-	"wrapminmax" items+=Line*;
+	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
 	
 TestIndentation:
-	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
+	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 	
 FqnObj:
 	"fqn" name=FQN;

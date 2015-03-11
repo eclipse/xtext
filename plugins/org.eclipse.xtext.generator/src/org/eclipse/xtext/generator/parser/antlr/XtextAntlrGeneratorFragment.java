@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import java.nio.charset.Charset;
 import java.util.Set;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
@@ -40,13 +41,17 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
 		String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN);
 		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
 		addAntlrParam("-fo");
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')));
-		getAntlrTool().runWithParams(absoluteGrammarFileName, getAntlrParams());
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName);
-		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
-		suppressWarnings(absoluteGrammarFileName);
+		getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, getAntlrParams());
+		Charset charset = Charset.forName(encoding);
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
+		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
+		suppressWarnings(absoluteGrammarFileName, charset);
+		normalizeLineDelimiters(absoluteGrammarFileName, charset);
+		normalizeTokens(absoluteGrammarFileName, charset);
 	}
 
 	@Override
@@ -96,19 +101,32 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper")
-			.addConfiguredBinding("HighlightingLexer",
-					"binder.bind(" + Lexer.class.getName() + ".class)"+
-					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
-					")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
-			.addConfiguredBinding("HighlightingTokenDefProvider",
-					"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
-					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
-					")).to(" + AntlrTokenDefProvider.class.getName() +".class)")
-			.getBindings();
+		BindFactory binder = new BindFactory();
+			binder.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper");
+			if(getNaming().hasIde()){
+				binder.addConfiguredBinding("HighlightingLexer",
+						"binder.bind(" + Lexer.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+						")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
+					   .addConfiguredBinding("HighlightingTokenDefProvider",
+						"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
+						")).to(" + AntlrTokenDefProvider.class.getName() +".class)");
+			} else {
+				binder.addConfiguredBinding("HighlightingLexer",
+						"binder.bind(" + Lexer.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+						")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
+					   .addConfiguredBinding("HighlightingTokenDefProvider",
+						"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
+						".annotatedWith(com.google.inject.name.Names.named(" +
+						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+						")).to(" + AntlrTokenDefProvider.class.getName() +".class)");
+			}
+			return binder.getBindings();
 	}
 
 	public static String getAntlrTokenFileProviderClassName(Grammar grammar, Naming naming) {

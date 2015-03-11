@@ -45,6 +45,7 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 		return node;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -26,12 +23,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ClosureT
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#getParameterTypes <em>Parameter Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#isVarArgs <em>Var Args</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.ClosureTypeRefImpl#getReturnType <em>Return Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

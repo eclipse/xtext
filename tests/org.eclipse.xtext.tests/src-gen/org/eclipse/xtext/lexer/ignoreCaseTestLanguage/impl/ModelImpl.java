@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.ignoreCaseTestLanguage.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.lexer.ignoreCaseTestLanguage.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.ignoreCaseTestLanguage.impl.ModelImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

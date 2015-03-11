@@ -24,7 +24,10 @@ public class DispatchingEObjectTextHover extends AbstractEObjectHover {
 	@Inject 
 	private IGlobalServiceProvider serviceProvider;
 
-	private IInformationControlCreatorProvider lastCreatorProvider;
+	/**
+	 * @since 2.6
+	 */
+	protected IInformationControlCreatorProvider lastCreatorProvider;
 
 	@Override
 	public Object getHoverInfo(EObject first, ITextViewer textViewer, IRegion hoverRegion) {

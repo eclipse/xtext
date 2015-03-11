@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -27,10 +24,10 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Minus;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.MinusImpl#getMinusOperands <em>Minus Operands</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

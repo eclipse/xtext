@@ -24,6 +24,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.BiMap;
@@ -72,6 +73,7 @@ public class KeywordHelper implements Adapter {
 
 	public final static Comparator<String> keywordComparator = new Comparator<String>() {
 
+		@Override
 		public int compare(String s1, String s2) {
 			// sortBy(e|e).sortBy(e|e.length*-1)
 			int result = s2.length() - s1.length();
@@ -94,11 +96,13 @@ public class KeywordHelper implements Adapter {
 				EcoreUtil.<EObject>getAllContents(parserRules), EcoreUtil.<EObject>getAllContents(enumRules));
 		Iterator<Keyword> filtered = Iterators.filter(iter, Keyword.class);
 		Iterator<String> transformed = Iterators.transform(filtered, new Function<Keyword, String>() {
+			@Override
 			public String apply(Keyword from) {
 				return from.getValue();
 			}
 		});
 		TreeSet<String> treeSet = Sets.newTreeSet(new Comparator<String>() {
+			@Override
 			public int compare(String o1, String o2) {
 				if (o1.length() == o2.length())
 					return o1.compareTo(o2);
@@ -107,13 +111,40 @@ public class KeywordHelper implements Adapter {
 		});
 		Iterators.addAll(treeSet, transformed);
 		BiMap<CharSequence, String> result = HashBiMap.create();
-		int i = 1;
 		for(String s: treeSet) {
 			CharSequence key = createKey(s);
-			if (!result.containsKey(key)) {
-				result.put(key, "KEYWORD_" + i);
-				i++;
+			String readableName = toAntlrTokenIdentifier(s);
+			if (result.containsValue(readableName)) {
+				int i = 1;
+				String next = readableName + "_" + i;
+				while(result.containsValue(next)) {
+					i++;
+					next = readableName + "_" + i;
+				}
+				readableName = next;
 			}
+			result.put(key, readableName);
+		}
+		return result;
+	}
+
+	private String toAntlrTokenIdentifier(String s) {
+		String result = GrammarAccessUtil.toJavaIdentifier(s, Boolean.TRUE);
+		// Antlr doesn't allow umlauts in rule names
+		result =result.replace("ä", "ae")
+			.replace("ö", "Oe")
+			.replace("ü", "Ue")
+			.replace("Ä", "Ae")
+			.replace("Ö", "Oe")
+			.replace("Ü", "Ue");
+		if (
+				result.charAt(0) == '_' // rule names may not start with an underscore 
+			|| "System".equals(result) // the generated code contains System.err.printlns which is ambiguous with the generated field name
+			|| result.startsWith("DFA") // the generated code may have fields named DFA... - avoid (unlikely) conflicts
+			|| result.startsWith("FOLLOW") // same with FOLLOW_ field names
+			|| result.startsWith("Internal") && result.endsWith("Parser") // same with the name of the class itself
+			) { 
+			result = "KW_" + result;
 		}
 		return result;
 	}
@@ -125,17 +156,21 @@ public class KeywordHelper implements Adapter {
 			return s;
 	}
 
+	@Override
 	public Notifier getTarget() {
 		return null;
 	}
 
+	@Override
 	public boolean isAdapterForType(Object type) {
 		return false;
 	}
 
+	@Override
 	public void notifyChanged(Notification notification) {
 	}
 
+	@Override
 	public void setTarget(Notifier newTarget) {
 	}
 

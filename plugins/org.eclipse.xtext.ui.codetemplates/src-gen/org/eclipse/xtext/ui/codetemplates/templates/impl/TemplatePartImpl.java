@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Template Part</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

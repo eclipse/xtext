@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.backtrackingTestLanguage;
 
@@ -97,6 +94,8 @@ public enum EnumName implements Enumerator
    * Returns the '<em><b>Enum Name</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param literal the literal.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumName get(String literal)
@@ -116,6 +115,8 @@ public enum EnumName implements Enumerator
    * Returns the '<em><b>Enum Name</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param name the name.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumName getByName(String name)
@@ -135,6 +136,8 @@ public enum EnumName implements Enumerator
    * Returns the '<em><b>Enum Name</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param value the integer value.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumName get(int value)

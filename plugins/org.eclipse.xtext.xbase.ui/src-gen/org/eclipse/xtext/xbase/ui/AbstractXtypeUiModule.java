@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.ui.XtypeUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractXtypeUiModule extends DefaultUiModule {
+public abstract class AbstractXtypeUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractXtypeUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -21,6 +20,11 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+	}
+
+	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	public Class<? extends org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
+		return org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment

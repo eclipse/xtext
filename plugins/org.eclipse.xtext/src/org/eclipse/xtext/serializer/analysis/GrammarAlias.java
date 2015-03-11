@@ -13,10 +13,12 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.util.formallang.GrammarFormatter;
-import org.eclipse.xtext.util.formallang.IGrammarAdapter;
-import org.eclipse.xtext.util.formallang.IGrammarFactory;
+import org.eclipse.xtext.util.formallang.Production;
+import org.eclipse.xtext.util.formallang.ProductionFactory;
+import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
+import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -50,9 +52,10 @@ public class GrammarAlias {
 
 		@Override
 		public String toString() {
-			GrammarFormatter<AbstractElementAlias, AbstractElement> formatter = GrammarFormatter.newFormatter(
-					new GrammarAliasAdapter(), new GrammarElementTitleSwitch().showAssignments().hideCardinality());
-			return formatter.format(this);
+			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().showAssignments().hideCardinality();
+			Function<Production<AbstractElementAlias, AbstractElement>, String> formatter2 = new ProductionFormatter<AbstractElementAlias, AbstractElement>()
+					.setTokenToString(t2s);
+			return formatter2.apply(new GrammarAliasAdapter(this));
 		}
 	}
 
@@ -61,13 +64,13 @@ public class GrammarAlias {
 
 		public AlternativeAlias(boolean many, boolean optional, AbstractElementAlias... children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
 		public AlternativeAlias(boolean many, boolean optional, Iterable<AbstractElementAlias> children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
@@ -119,53 +122,76 @@ public class GrammarAlias {
 
 	}
 
-	public static class GrammarAliasAdapter implements IGrammarAdapter<AbstractElementAlias, AbstractElement> {
+	public static class GrammarAliasAdapter implements Production<AbstractElementAlias, AbstractElement> {
 
+		protected AbstractElementAlias root;
+
+		public GrammarAliasAdapter(AbstractElementAlias root) {
+			super();
+			this.root = root;
+		}
+
+		@Override
 		public Iterable<AbstractElementAlias> getAlternativeChildren(AbstractElementAlias ele) {
 			return ele instanceof AlternativeAlias ? ((AlternativeAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public AbstractElementAlias getParent(AbstractElementAlias ele) {
 			return ele.getParent();
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias> getSequentialChildren(AbstractElementAlias ele) {
 			return ele instanceof GroupAlias ? ((GroupAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public AbstractElement getToken(AbstractElementAlias owner) {
 			return owner instanceof TokenAlias ? ((TokenAlias) owner).getToken() : null;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias> getUnorderedChildren(AbstractElementAlias ele) {
 			return ele instanceof UnorderedGroupAlias ? ((UnorderedGroupAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public boolean isMany(AbstractElementAlias ele) {
 			return ele.isMany();
 		}
 
+		@Override
 		public boolean isOptional(AbstractElementAlias ele) {
 			return ele.isOptional();
 		}
+
+		@Override
+		public AbstractElementAlias getRoot() {
+			return root;
+		}
 	}
 
-	public static class GrammarAliasFactory implements IGrammarFactory<AbstractElementAlias, AbstractElement> {
+	public static class GrammarAliasFactory implements ProductionFactory<AbstractElementAlias, AbstractElement> {
 
+		@Override
 		public AbstractElementAlias createForAlternativeChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new AlternativeAlias(many, optional, children);
 		}
 
+		@Override
 		public AbstractElementAlias createForSequentialChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new GroupAlias(many, optional, children);
 		}
 
+		@Override
 		public AbstractElementAlias createForToken(boolean many, boolean optional, AbstractElement token) {
 			return new TokenAlias(many, optional, token);
 		}
 
+		@Override
 		public AbstractElementAlias createForUnordertedChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new UnorderedGroupAlias(many, optional, children);
@@ -207,7 +233,7 @@ public class GrammarAlias {
 			if (obj == null || obj.getClass() != getClass())
 				return false;
 			TokenAlias other = (TokenAlias) obj;
-			return many == other.many && optional == other.optional && token.equals(other.token);
+			return many == other.many && optional == other.optional && Objects.equal(token, other.token);
 		}
 
 		public AbstractElement getToken() {
@@ -231,13 +257,13 @@ public class GrammarAlias {
 
 		public UnorderedGroupAlias(boolean many, boolean optional, AbstractElementAlias... children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
 		public UnorderedGroupAlias(boolean many, boolean optional, Iterable<AbstractElementAlias> children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 

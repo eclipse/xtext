@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationerror.impl;
 
@@ -33,7 +30,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
   {
     try
     {
-      SerializationerrorFactory theSerializationerrorFactory = (SerializationerrorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/serializationerror"); 
+      SerializationerrorFactory theSerializationerrorFactory = (SerializationerrorFactory)EPackage.Registry.INSTANCE.getEFactory(SerializationerrorPackage.eNS_URI);
       if (theSerializationerrorFactory != null)
       {
         return theSerializationerrorFactory;

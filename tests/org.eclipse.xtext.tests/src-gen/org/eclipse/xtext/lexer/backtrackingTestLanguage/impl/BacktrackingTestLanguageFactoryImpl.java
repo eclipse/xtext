@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.backtrackingTestLanguage.impl;
 
@@ -34,7 +31,7 @@ public class BacktrackingTestLanguageFactoryImpl extends EFactoryImpl implements
   {
     try
     {
-      BacktrackingTestLanguageFactory theBacktrackingTestLanguageFactory = (BacktrackingTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest"); 
+      BacktrackingTestLanguageFactory theBacktrackingTestLanguageFactory = (BacktrackingTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(BacktrackingTestLanguagePackage.eNS_URI);
       if (theBacktrackingTestLanguageFactory != null)
       {
         return theBacktrackingTestLanguageFactory;

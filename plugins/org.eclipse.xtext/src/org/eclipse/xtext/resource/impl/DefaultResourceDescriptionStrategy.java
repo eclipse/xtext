@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -24,12 +25,14 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * By default, all elements with a not null <code>name</code> feature and all cross-resource crossrefs are indexed.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescriptionStrategy {
 
 	private final static Logger LOG = Logger.getLogger(DefaultResourceDescriptionStrategy.class);
@@ -58,6 +61,7 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 		return uriEncoder;
 	}
 
+	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (getQualifiedNameProvider() == null)
 			return false;
@@ -67,11 +71,12 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 				acceptor.accept(EObjectDescription.create(qualifiedName, eObject));
 			}
 		} catch (Exception exc) {
-			LOG.error(exc.getMessage());
+			LOG.error(exc.getMessage(), exc);
 		}
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
 			IAcceptor<IReferenceDescription> acceptor) {
@@ -108,18 +113,25 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	}
 
 	protected boolean isIndexable(EReference eReference) {
-		return !eReference.isContainment() && !eReference.isDerived() && !eReference.isVolatile()
-				&& !eReference.isTransient();
+		return (!eReference.isContainment() || eReference.isResolveProxies()) 
+				&& !eReference.isDerived() 
+				&& !eReference.isVolatile()
+				&& !eReference.isTransient() 
+				&& (!eReference.isContainer() || eReference.isResolveProxies());
 	}
 
 	protected boolean isResolvedAndExternal(EObject from, EObject to) {
 		if (to == null)
 			return false;
-		if (!to.eIsProxy())
+		if (!to.eIsProxy()) {
+			if (to.eResource() == null) {
+				LOG.error("Reference from " + EcoreUtil.getURI(from) + " to " + to
+						+ " cannot be exported as the target is not contained in a resource.");
+				return false;
+			}
 			return from.eResource() != to.eResource();
-
+		}
 		return !getLazyURIEncoder()
 				.isCrossLinkFragment(from.eResource(), ((InternalEObject) to).eProxyURI().fragment());
 	}
-
 }

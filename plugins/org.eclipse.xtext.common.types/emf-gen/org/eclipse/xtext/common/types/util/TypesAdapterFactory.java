@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.util;
 
@@ -301,6 +303,41 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseJvmEnumAnnotationValue(JvmEnumAnnotationValue object)
 			{
 				return createJvmEnumAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmDelegateTypeReference(JvmDelegateTypeReference object)
+			{
+				return createJvmDelegateTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
+			{
+				return createJvmSpecializedTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmSynonymTypeReference(JvmSynonymTypeReference object)
+			{
+				return createJvmSynonymTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmUnknownTypeReference(JvmUnknownTypeReference object)
+			{
+				return createJvmUnknownTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmCompoundTypeReference(JvmCompoundTypeReference object)
+			{
+				return createJvmCompoundTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmCustomAnnotationValue(JvmCustomAnnotationValue object)
+			{
+				return createJvmCustomAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmInnerTypeReference(JvmInnerTypeReference object)
+			{
+				return createJvmInnerTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -995,6 +1032,111 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmEnumAnnotationValueAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmDelegateTypeReference <em>Jvm Delegate Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmDelegateTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference <em>Jvm Specialized Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmSpecializedTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmSynonymTypeReference <em>Jvm Synonym Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmSynonymTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmSynonymTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference <em>Jvm Unknown Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmUnknownTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference <em>Jvm Compound Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmCompoundTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue <em>Jvm Custom Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmCustomAnnotationValueAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmInnerTypeReference <em>Jvm Inner Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmInnerTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmInnerTypeReferenceAdapter()
 	{
 		return null;
 	}

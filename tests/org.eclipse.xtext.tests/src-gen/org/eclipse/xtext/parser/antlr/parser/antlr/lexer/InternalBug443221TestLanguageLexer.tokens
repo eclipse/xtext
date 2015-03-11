@@ -1,0 +1,14 @@
+DollarSign=9
+DollarSign_1=5
+Dummy=8
+KW__=10
+KW___dummy__=6
+KW___dummy___1=4
+KW__dummy_=7
+RULE_ANY_OTHER=17
+RULE_ID=11
+RULE_INT=12
+RULE_ML_COMMENT=14
+RULE_SL_COMMENT=15
+RULE_STRING=13
+RULE_WS=16

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationerror;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.parsetree.reconstr.serializationerror;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired#getOne <em>One</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired#getTwo <em>Two</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage#getTwoRequired()
  * @model

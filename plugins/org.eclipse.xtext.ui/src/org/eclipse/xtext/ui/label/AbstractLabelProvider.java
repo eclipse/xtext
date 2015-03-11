@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
 import com.google.inject.Inject;
 
@@ -24,12 +25,14 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider {
+public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider, ILabelProviderImageDescriptorExtension {
 
 	private ILabelProvider delegate;
 
 	@Inject
 	private IImageHelper imageHelper;
+	@Inject
+	private IImageDescriptorHelper imageDescriptorHelper;
 
 	protected AbstractLabelProvider() {
 	}
@@ -53,6 +56,31 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 			}
 		}
 		return convertToImage(getDefaultImage());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public ImageDescriptor getImageDescriptor(Object element) {
+		Object image = doGetImage(element);
+		ImageDescriptor imageDescriptor = convertToImageDescriptor(image);
+		return imageDescriptor;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected ImageDescriptor convertToImageDescriptor(Object imageDescription) {
+		if (imageDescription instanceof Image) {
+			final Image image = (Image) imageDescription;
+			return imageDescriptorHelper.getImageDescriptor(image);
+		} else if (imageDescription instanceof ImageDescriptor) {
+			return (ImageDescriptor) imageDescription;
+		} else if (imageDescription instanceof String) {
+			return imageDescriptorHelper.getImageDescriptor((String) imageDescription);
+		}
+		return null;
 	}
 
 	/**
@@ -88,6 +116,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	/**
 	 * Subclasses should rather override {@link #doGetText}.
 	 */
+	@Override
 	public StyledString getStyledText(Object element) {
 		StyledString styledText = convertToStyledString(doGetText(element));
 		if (styledText != null) {
@@ -115,7 +144,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected StyledString convertToStyledString(Object text) {
 		if (text instanceof StyledString) {
 			return (StyledString) text;
-		} else if (text instanceof String) {
+		} else if(text instanceof String){
 			return new StyledString((String) text);
 		}
 		return null;
@@ -142,7 +171,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected String convertToString(Object text) {
 		if (text instanceof StyledString) {
 			return ((StyledString) text).getString();
-		} else if (text instanceof String) {
+		} else if(text instanceof String){
 			return (String) text;
 		}
 		return null;

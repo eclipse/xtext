@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Empty Alternative Sub</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

@@ -7,22 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4;
 
-import java.util.Map;
-
+import org.eclipse.xtext.junit4.internal.InjectorProviders;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public class XtextRunner extends BlockJUnit4ClassRunner {
-	private static Map<Class<?>, IInjectorProvider> injectorProviderClassCache = Maps.newHashMap();
-
 	public XtextRunner(Class<?> klass) throws InitializationError {
 		super(klass);
 	}
@@ -41,13 +37,14 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 
 	@Override
 	protected Statement methodBlock(FrameworkMethod method) {
-		final Statement methodBlock = super.methodBlock(method);
-		if (getInjectorProvider() instanceof IRegistryConfigurator) {
+		IInjectorProvider injectorProvider = getOrCreateInjectorProvider();
+		if (injectorProvider instanceof IRegistryConfigurator) {
+			final IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
+			registryConfigurator.setupRegistry();
+			final Statement methodBlock = superMethodBlock(method);
 			return new Statement() {
 				@Override
 				public void evaluate() throws Throwable {
-					IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) getInjectorProvider();
-					registryConfigurator.setupRegistry();
 					try {
 						methodBlock.evaluate();
 					} finally {
@@ -55,30 +52,28 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 					}
 				}
 			};
+		}else{
+			return superMethodBlock(method);
 		}
-		return methodBlock;
 	}
 
-	protected IInjectorProvider getOrCreateInjectorProvider() throws Exception {
-		IInjectorProvider injectorProvider = getInjectorProvider();
-		if (injectorProvider == null) {
-			injectorProvider = createInjectorProvider();
-			injectorProviderClassCache.put(getTestClass().getJavaClass(), injectorProvider);
-		}
-		return injectorProvider;
+	/**
+	 * @since 2.7
+	 */
+	protected Statement superMethodBlock(FrameworkMethod method) {
+		return super.methodBlock(method);
+	}
+
+	protected IInjectorProvider getOrCreateInjectorProvider() {
+		return InjectorProviders.getOrCreateInjectorProvider(getTestClass());
 	}
 
 	protected IInjectorProvider getInjectorProvider() {
-		return injectorProviderClassCache.get(getTestClass().getJavaClass());
+		return InjectorProviders.getInjectorProvider(getTestClass());
 	}
 
-	protected IInjectorProvider createInjectorProvider() throws Exception {
-		IInjectorProvider injectorProvider = null;
-		InjectWith injectWith = getTestClass().getJavaClass().getAnnotation(InjectWith.class);
-		if (injectWith != null) {
-			injectorProvider = injectWith.value().newInstance();
-		}
-		return injectorProvider;
+	protected IInjectorProvider createInjectorProvider() {
+		return InjectorProviders.createInjectorProvider(getTestClass());
 	}
 
 }

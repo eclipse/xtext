@@ -26,20 +26,24 @@ public abstract class AbstractDiagnosticProducer implements IDiagnosticProducer 
 		this.consumer = consumer;
 	}
 
+	@Override
 	public void addDiagnostic(DiagnosticMessage message) {
 		consumer.consume(createDiagnostic(message), message.getSeverity());
 	}
 	
 	protected abstract Diagnostic createDiagnostic(DiagnosticMessage message);
 	
+	@Override
 	public void setNode(INode node) {
 		this.node = node;
 	}
 
+	@Override
 	public INode getNode() {
 		return node;
 	}
 
+	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
 		// nothing to do
 	}

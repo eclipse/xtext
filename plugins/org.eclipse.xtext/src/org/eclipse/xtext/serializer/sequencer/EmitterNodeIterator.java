@@ -26,7 +26,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 
 	protected NodeIterator iterator;
 	protected List<INode> next = Lists.newArrayList();
-	protected INode end;
+	protected int end;
 	protected boolean passAbsorber;
 	protected boolean allowHidden;
 
@@ -38,12 +38,19 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		if (fromNode != null) {
 			this.iterator = new NodeIterator(fromNode);
 			this.passAbsorber = passAbsorber;
-			this.end = toNode;
+			if (toNode != null) {
+				if (toNode.getOffset() < fromNode.getOffset())
+					this.end = toNode.getOffset() + toNode.getLength();
+				else
+					this.end = toNode.getOffset();
+			} else
+				this.end = Integer.MAX_VALUE;
 			this.allowHidden = allowHidden;
 			next();
 		}
 	}
 
+	@Override
 	public boolean hasNext() {
 		return !next.isEmpty();
 	}
@@ -62,10 +69,10 @@ public class EmitterNodeIterator implements Iterator<INode> {
 	}
 
 	protected boolean isAbsorber(INode node) {
-		return GrammarUtil.isAssigned(node.getGrammarElement())
-		/*|| GrammarUtil.isAssignedAction(node.getGrammarElement())*/;
+		return node.getGrammarElement() != null && GrammarUtil.isAssigned(node.getGrammarElement());
 	}
 
+	@Override
 	public INode next() {
 		INode result;
 		if (!next.isEmpty()) {
@@ -76,7 +83,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		if (next.isEmpty())
 			while (iterator.hasNext()) {
 				INode next = iterator.next();
-				if (end == next)
+				if (next.getOffset() >= end)
 					break;
 				if (include(next)) {
 					if (!passAbsorber && isAbsorber(next))
@@ -102,6 +109,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		return result;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

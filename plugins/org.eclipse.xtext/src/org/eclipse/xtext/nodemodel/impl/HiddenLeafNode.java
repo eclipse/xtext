@@ -9,6 +9,7 @@ package org.eclipse.xtext.nodemodel.impl;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Mark Christiaens - Serialization support
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class HiddenLeafNode extends LeafNode {
@@ -18,4 +19,8 @@ public class HiddenLeafNode extends LeafNode {
 		return true;
 	}
 	
+	@Override
+	NodeType getNodeId() {
+		return NodeType.HiddenLeafNode; 
+	}
 }

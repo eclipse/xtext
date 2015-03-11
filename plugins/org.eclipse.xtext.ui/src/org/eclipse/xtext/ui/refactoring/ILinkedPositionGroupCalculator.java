@@ -9,19 +9,22 @@ package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
+import org.eclipse.xtext.ui.refactoring.ui.DefaultLinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.SimpleLinkedPositionGroupCalculator;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Provider;
 
 /**
+ * Calculates the positions that should be synchronously edited by the linked editing mode. 
+ * 
  * @author Holger Schill - Initial contribution and API
  * @author Jan Koehnlein
  */
-@ImplementedBy(SimpleLinkedPositionGroupCalculator.class)
+@ImplementedBy(DefaultLinkedPositionGroupCalculator.class)
 public interface ILinkedPositionGroupCalculator {
 
-	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
+	Provider<LinkedPositionGroup> getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor);
 
 }

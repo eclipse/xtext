@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl;
 
@@ -31,11 +28,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.LetExpImpl#getIn <em>In</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.contentassist;
 
-import java.util.regex.Pattern;
+import java.util.List;
 
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -52,15 +53,15 @@ public class StaticQualifierPrefixMatcher extends PrefixMatcher {
 				if (lastSegment != null && delegate.isCandidateMatchingPrefix(lastSegment, prefix))
 					return true;
 			} else {
-				String[] splitPrefix = prefix.split(Pattern.quote(delimiter));
-				String[] splitName = name.split(Pattern.quote(delimiter), splitPrefix.length);
-				if (splitName.length < splitPrefix.length) {
+				List<String> splitPrefix = Strings.split(prefix, delimiter);
+				if (splitPrefix.isEmpty())
+					return false;
+				List<String> splitName = Strings.split(name, delimiter);
+				if (splitName.size() < splitPrefix.size()) {
 					return false;
 				}
-				if (splitPrefix.length == 0)
-					return false;
-				for(int i = 0; i < splitPrefix.length ; i++) {
-					if (!delegate.isCandidateMatchingPrefix(splitName[i], splitPrefix[i]))
+				for(int i = 0; i < splitPrefix.size(); i++) {
+					if (!delegate.isCandidateMatchingPrefix(splitName.get(i), splitPrefix.get(i)))
 						return false;
 				}
 				return true;

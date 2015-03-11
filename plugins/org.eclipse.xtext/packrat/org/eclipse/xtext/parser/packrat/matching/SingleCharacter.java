@@ -19,6 +19,7 @@ public class SingleCharacter implements ICharacterClass {
 		this.c = c;
 	}
 	
+	@Override
 	public boolean matches(char candidate) {
 		return candidate == c;
 	}

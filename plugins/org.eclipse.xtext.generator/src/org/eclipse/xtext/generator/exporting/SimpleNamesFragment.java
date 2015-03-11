@@ -35,7 +35,8 @@ public class SimpleNamesFragment extends DefaultGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator", "org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator.Null")
+		.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
+				"org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator")
 		.getBindings();
 	}
 }

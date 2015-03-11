@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl;
 
@@ -20,10 +17,10 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.Bracket
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl.AtomImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

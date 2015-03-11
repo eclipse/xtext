@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHid
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Suppressed Hidden Sub ID</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

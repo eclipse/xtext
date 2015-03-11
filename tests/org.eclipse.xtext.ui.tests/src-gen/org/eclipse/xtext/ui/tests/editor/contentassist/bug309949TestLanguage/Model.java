@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Model#getErrors <em>Errors</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Model#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Model#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Bug309949TestLanguagePackage#getModel()
  * @model

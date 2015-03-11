@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -17,7 +20,9 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
 
@@ -35,13 +40,13 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		public Integer length;
 	}
 	
+	@Override
 	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,	IAcceptor<Issue> acceptor) {
 		IssueImpl issue = new Issue.IssueImpl();
-		issue.setSyntaxError(true);
+		issue.setSyntaxError(diagnostic instanceof XtextSyntaxDiagnostic);
 		issue.setSeverity(severity);
 		issue.setLineNumber(diagnostic.getLine());
 		issue.setMessage(diagnostic.getMessage());
-		//		issue.setmarker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 
 		if (diagnostic instanceof org.eclipse.xtext.diagnostics.Diagnostic) {
 			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;
@@ -58,20 +63,15 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		acceptor.accept(issue);
 	}
 
+	@Override
 	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic,
 			IAcceptor<Issue> acceptor) {
-		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
+		Severity severity = getSeverity(diagnostic);
+		if (severity == null)
 			return;
 		IssueImpl issue = new Issue.IssueImpl();
-		issue.setSeverity(Severity.ERROR);
-		switch (diagnostic.getSeverity()) {
-			case org.eclipse.emf.common.util.Diagnostic.WARNING:
-				issue.setSeverity(Severity.WARNING);
-				break;
-			case org.eclipse.emf.common.util.Diagnostic.INFO:
-				issue.setSeverity(Severity.INFO);
-				break;
-		}
+		issue.setSeverity(severity);
+		
 		IssueLocation locationData = getLocationData(diagnostic);
 		if (locationData != null) {
 			issue.setLineNumber(locationData.lineNumber);
@@ -81,20 +81,79 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
-		if (diagnostic instanceof AbstractValidationDiagnostic) {
-			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
-			issue.setType(diagnosticImpl.getCheckType());
-			issue.setCode(diagnosticImpl.getIssueCode());
-			issue.setData(diagnosticImpl.getIssueData());
-		} else {
-			// default to FAST
-			issue.setType(CheckType.FAST);
-		}
+
+		issue.setCode(getIssueCode(diagnostic));
+		issue.setType(getIssueType(diagnostic));
+		issue.setData(getIssueData(diagnostic));
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		issue.setMessage(diagnostic.getMessage());
 		//		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		acceptor.accept(issue);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected CheckType getIssueType(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getCheckType();
+		} else {
+			// default to FAST
+			return CheckType.FAST;
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String[] getIssueData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getIssueData();
+		} else {
+			// replace any EObjects by their URIs
+			EObject causer = getCauser(diagnostic);
+			List<String> issueData = newArrayList();
+			for (Object object : diagnostic.getData()) {
+				if (object != causer && object instanceof EObject) {
+					EObject eObject = (EObject)object;
+					issueData.add(EcoreUtil.getURI(eObject).toString());
+				} else if (object instanceof String) {
+					issueData.add( (String) object);
+				}
+		    }
+			return issueData.toArray(new String[issueData.size()]);
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String getIssueCode(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getIssueCode();
+		} else {
+			return diagnostic.getSource() + "." + diagnostic.getCode();
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Severity getSeverity(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
+			return null;
+		switch (diagnostic.getSeverity()) {
+			case org.eclipse.emf.common.util.Diagnostic.WARNING:
+				return Severity.WARNING;
+			case org.eclipse.emf.common.util.Diagnostic.INFO:
+				return Severity.INFO;
+			default :
+				return Severity.ERROR;
+		}
 	}
 
 	protected EObject getCauser(org.eclipse.emf.common.util.Diagnostic diagnostic) {
@@ -119,10 +178,12 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			if (diagnostic instanceof RangeBasedDiagnostic) {
 				RangeBasedDiagnostic castedDiagnostic = (RangeBasedDiagnostic) diagnostic;
 				INode parserNode = NodeModelUtils.getNode(causer);
-				String completeText = parserNode.getRootNode().getText();
-				int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
 				IssueLocation result = new IssueLocation();
-				result.lineNumber = startLine;
+				if (parserNode != null) {
+					String completeText = parserNode.getRootNode().getText();
+					int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
+					result.lineNumber = startLine;
+				}
 				result.offset = castedDiagnostic.getOffset();
 				result.length = castedDiagnostic.getLength();
 				return result;
@@ -158,15 +219,26 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 					parserNode = nodes.get(index);
 			}
 			return getLocationForNode(parserNode);
+		} else if (obj.eContainer() != null) {
+			EObject container = obj.eContainer();
+			EStructuralFeature containingFeature = obj.eContainingFeature();
+			return getLocationData(container, containingFeature,
+					containingFeature.isMany() ? ((EList<?>) container.eGet(containingFeature)).indexOf(obj)
+							: ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
-		return null;
+		IssueLocation result = new IssueLocation();
+		result.lineNumber = 0;
+		result.offset = 0;
+		result.length = 0;
+		return result;
 	}
 
 	protected IssueLocation getLocationForNode(INode node) {
+		ITextRegionWithLineInformation nodeRegion = node.getTextRegionWithLineInformation();
 		IssueLocation result = new IssueLocation();
-		result.lineNumber = node.getStartLine();
-		result.offset = node.getOffset();
-		result.length = node.getLength();
+		result.lineNumber = nodeRegion.getLineNumber();
+		result.offset = nodeRegion.getOffset();
+		result.length = nodeRegion.getLength();
 		return result;
 	}
 

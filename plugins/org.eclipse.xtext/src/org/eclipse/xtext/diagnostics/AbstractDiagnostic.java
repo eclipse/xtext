@@ -23,22 +23,36 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	
 	public abstract String[] getData();
 
+	@Override
 	public int getLength() {
-		return getNode().getLength();
+		INode node = getNode();
+		if (node != null)
+			return node.getLength();
+		return 1;
 	}
 
+	@Override
 	public int getOffset() {
-		return getNode().getOffset();
+		INode node = getNode();
+		if (node != null)
+			return node.getOffset();
+		return 0;
 	}
 
+	@Override
 	public int getColumn() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public int getLine() {
-		return getNode().getStartLine();
+		INode node = getNode();
+		if (node != null)
+			return node.getStartLine();
+		return -1;
 	}
 
+	@Override
 	public String getLocation() {
 		return null;
 	}

@@ -23,32 +23,32 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NL", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'define'", "'timeperiod'", "'1'", "'{'", "'timeperiod_name'", "'otherelement'", "'}'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'july'", "'august'", "'september'"
     };
-    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
     public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=8;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int RULE_WS=7;
-    public static final int T__17=17;
-    public static final int RULE_NL=4;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_NL=4;
     public static final int RULE_SL_COMMENT=10;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__19=19;
+    public static final int RULE_STRING=8;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=7;
 
     // delegates
     // delegators
@@ -4809,12 +4809,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA9_maxS =
         "\1\4\1\22\3\uffff";
     static final String DFA9_acceptS =
-        "\2\uffff\1\1\1\2\1\3";
+        "\2\uffff\1\2\1\1\1\3";
     static final String DFA9_specialS =
         "\1\uffff\1\0\3\uffff}>";
     static final String[] DFA9_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\1\2\1\3\1\4",
+            "\1\1\13\uffff\1\3\1\2\1\4",
             "",
             "",
             ""
@@ -4863,11 +4863,11 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         int index9_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA9_1 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 2;}
+                        if ( LA9_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 2;}
 
                         else if ( (LA9_1==RULE_NL) ) {s = 1;}
 
-                        else if ( LA9_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+                        else if ( LA9_1 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
 
                         else if ( (LA9_1==18) ) {s = 4;}
 
@@ -4891,12 +4891,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA5_maxS =
         "\1\4\1\33\2\uffff";
     static final String DFA5_acceptS =
-        "\2\uffff\1\2\1\1";
+        "\2\uffff\1\1\1\2";
     static final String DFA5_specialS =
         "\4\uffff}>";
     static final String[] DFA5_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\3\2\10\uffff\1\3",
+            "\1\1\13\uffff\3\3\10\uffff\1\2",
             "",
             ""
     };
@@ -4943,12 +4943,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA8_maxS =
         "\1\4\1\34\2\uffff";
     static final String DFA8_acceptS =
-        "\2\uffff\1\2\1\1";
+        "\2\uffff\1\1\1\2";
     static final String DFA8_specialS =
         "\4\uffff}>";
     static final String[] DFA8_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\3\2\11\uffff\1\3",
+            "\1\1\13\uffff\3\3\11\uffff\1\2",
             "",
             ""
     };
@@ -5307,12 +5307,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA30_maxS =
         "\1\4\1\22\3\uffff";
     static final String DFA30_acceptS =
-        "\2\uffff\1\1\1\3\1\2";
+        "\2\uffff\1\3\1\2\1\1";
     static final String DFA30_specialS =
         "\5\uffff}>";
     static final String[] DFA30_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\1\2\1\4\1\3",
+            "\1\1\13\uffff\1\4\1\3\1\2",
             "",
             "",
             ""
@@ -5516,12 +5516,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA40_maxS =
         "\1\4\1\22\3\uffff";
     static final String DFA40_acceptS =
-        "\2\uffff\1\1\1\2\1\3";
+        "\2\uffff\1\2\1\1\1\3";
     static final String DFA40_specialS =
         "\5\uffff}>";
     static final String[] DFA40_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\1\2\1\3\1\4",
+            "\1\1\13\uffff\1\3\1\2\1\4",
             "",
             "",
             ""
@@ -5569,12 +5569,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA36_maxS =
         "\1\4\1\33\2\uffff";
     static final String DFA36_acceptS =
-        "\2\uffff\1\1\1\2";
+        "\2\uffff\1\2\1\1";
     static final String DFA36_specialS =
         "\4\uffff}>";
     static final String[] DFA36_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\3\3\10\uffff\1\2",
+            "\1\1\13\uffff\3\2\10\uffff\1\3",
             "",
             ""
     };
@@ -5621,12 +5621,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA39_maxS =
         "\1\4\1\34\2\uffff";
     static final String DFA39_acceptS =
-        "\2\uffff\1\1\1\2";
+        "\2\uffff\1\2\1\1";
     static final String DFA39_specialS =
         "\4\uffff}>";
     static final String[] DFA39_transitionS = {
             "\1\1",
-            "\1\1\13\uffff\3\3\11\uffff\1\2",
+            "\1\1\13\uffff\3\2\11\uffff\1\3",
             "",
             ""
     };

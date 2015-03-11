@@ -47,6 +47,14 @@ public class EmfStructureComparator {
 	
 	public boolean internalIsSameStructure(EObject left, EObject right) {
 		++counter;
+		if (left == null) {
+			errorMessage.append("left hand side was null").append('\n');
+			return false;
+		}
+		if (right == null) {
+			errorMessage.append("right hand side was null.").append('\n');
+			return false;
+		}
 		if (!isSameClass(left.eClass(), right.eClass())) {
 			errorMessage.append("Classes are not equal: " + left + " != " + right).append('\n');
 			return false;

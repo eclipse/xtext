@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl;
 
@@ -34,7 +31,7 @@ public class EnumRulesTestLanguageFactoryImpl extends EFactoryImpl implements En
   {
     try
     {
-      EnumRulesTestLanguageFactory theEnumRulesTestLanguageFactory = (EnumRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest"); 
+      EnumRulesTestLanguageFactory theEnumRulesTestLanguageFactory = (EnumRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(EnumRulesTestLanguagePackage.eNS_URI);
       if (theEnumRulesTestLanguageFactory != null)
       {
         return theEnumRulesTestLanguageFactory;

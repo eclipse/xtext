@@ -25,7 +25,6 @@ import com.google.common.base.Function;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator {
 
 	@Override
@@ -34,6 +33,7 @@ public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator 
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
 			return new Function<IEObjectDescription, ICompletionProposal>() {
 	
+				@Override
 				public ICompletionProposal apply(IEObjectDescription from) {
 					ICompletionProposal result = proposalFactory.apply(from);
 					if (result instanceof ConfigurableCompletionProposal) {

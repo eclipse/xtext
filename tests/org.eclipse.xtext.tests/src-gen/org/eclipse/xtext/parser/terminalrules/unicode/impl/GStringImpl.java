@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.unicode.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>GString</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

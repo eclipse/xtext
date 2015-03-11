@@ -40,7 +40,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class OccurrenceMarker {
-
+	
 	private ISelectionChangedListener selectionListener;
 
 	private boolean isMarkOccurrences;
@@ -71,6 +71,9 @@ public class OccurrenceMarker {
 		if (selection instanceof ITextSelection) {
 			markOccurrenceJob.cancel();
 			markOccurrenceJob.initialize(editor, (ITextSelection) selection, isMarkOccurrences);
+			if (!markOccurrenceJob.isSystem())
+				markOccurrenceJob.setSystem(true);
+			markOccurrenceJob.setPriority(Job.DECORATE);
 			markOccurrenceJob.schedule();
 		}
 	}
@@ -83,6 +86,7 @@ public class OccurrenceMarker {
 
 	protected ISelectionChangedListener createSelectionChangedListener() {
 		return new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				if (isMarkOccurrences)
 					doMarkOccurrences(event.getSelection());
@@ -120,6 +124,7 @@ public class OccurrenceMarker {
 						progress.newChild(1)) : Collections.<Annotation, Position>emptyMap();
 				if (!progress.isCanceled()) {
 					Display.getDefault().asyncExec(new Runnable() {
+						@Override
 						public void run() {
 							if (!progress.isCanceled()) {
 								final IAnnotationModel annotationModel = getAnnotationModel(editor);

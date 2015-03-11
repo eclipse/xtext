@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -26,10 +27,11 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperExtension;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -47,12 +49,17 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	@Inject
 	private PersistedStateProvider persister;
+	
+	@Inject
+	private IStorage2UriMapper storage2UriMapper;
 
 	private volatile boolean isLoaded = false;
 
 	public synchronized void load() {
 		if (!isLoaded) {
 			resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+			if(storage2UriMapper instanceof IStorage2UriMapperExtension)
+				((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
 			isLoaded = true;
 		}
 	}
@@ -70,21 +77,21 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		resourceDescriptionData = newData;
 	}
 
-	protected void updateMarkers(ResourceSet resourceSet, ImmutableList<IResourceDescription.Delta> deltas,
-			IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, 1);
-		markerUpdater.updateMarker(resourceSet, deltas, progress.newChild(1));
+	protected void updateMarkers(IResourceDescription.Delta delta, ResourceSet resourceSet, IProgressMonitor monitor) throws OperationCanceledException {
+		markerUpdater.updateMarkers(delta, resourceSet, monitor);
 	}
 
 	protected ResourceDescriptionsData getCopiedResourceDescriptionsData() {
 		return resourceDescriptionData.copy();
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		ensureLoaded();
 		return resourceDescriptionData.getAllResourceDescriptions();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		ensureLoaded();
 		return resourceDescriptionData.getResourceDescription(uri);
@@ -94,6 +101,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		this.persister = persister;
 	}
 
+	@Override
 	public synchronized ImmutableList<IResourceDescription.Delta> update(BuildData buildData, IProgressMonitor monitor) {
 		ensureLoaded();
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 1);
@@ -108,7 +116,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result, this);
+		final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result);
 		// update the reference
 		setResourceDescriptionsData(newData);
 		notifyListeners(event);
@@ -118,11 +126,14 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	protected abstract Collection<IResourceDescription.Delta> doUpdate(BuildData buildData,
 			ResourceDescriptionsData newData, IProgressMonitor monitor);
 
-	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
+	private static int MONITOR_CHUNK_SIZE_CLEAN = 50;
+	
+	@Override
+	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) throws OperationCanceledException {
 		ensureLoaded();
 		toBeRemoved = ensureNotNull(toBeRemoved);
 
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 2 );
 		subMonitor.subTask(Messages.AbstractBuilderState_0);
 		if (toBeRemoved.isEmpty())
 			return ImmutableList.of();
@@ -136,51 +147,71 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		for (IResourceDescription.Delta delta : deltas) {
 			newData.removeDescription(delta.getOld().getURI());
 		}
-		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
+		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas);
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		updateMarkers(null, event.getDeltas(), subMonitor.newChild(1));
+		int i = 0;
+		subMonitor.setWorkRemaining(toBeRemoved.size() / MONITOR_CHUNK_SIZE_CLEAN + 1);
+		for(IResourceDescription.Delta delta : event.getDeltas()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
+			updateMarkers(delta, null, subMonitor);
+			i++;
+			if (i % MONITOR_CHUNK_SIZE_CLEAN == 0)
+				subMonitor.worked(1);
+		}
 		// update the reference
 		setResourceDescriptionsData(newData);
 		notifyListeners(event);
 		return event.getDeltas();
 	}
 
-	protected Collection<IResourceDescription.Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_2, toBeRemoved.size());
+	protected Collection<IResourceDescription.Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) throws OperationCanceledException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_2, toBeRemoved.size() / MONITOR_CHUNK_SIZE_CLEAN + 1);
 		subMonitor.subTask(Messages.AbstractBuilderState_2);
-		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeRemoved);
-		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-		for (URI toDelete : toBeDeletedAsSet) {
+		Set<IResourceDescription.Delta> result = newLinkedHashSet();
+		int i = 0;
+		for (URI toDelete : toBeRemoved) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			IResourceDescription resourceDescription = getResourceDescription(toDelete);
 			if (resourceDescription != null) {
-				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+				result.add(new DefaultResourceDescriptionDelta(resourceDescription, null));
 			}
-			subMonitor.worked(1);
+			i++;
+			if (i % MONITOR_CHUNK_SIZE_CLEAN == 0)
+				subMonitor.worked(1);
 		}
-		return result.values();
+		return result;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects(type, name, ignoreCase);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByType(type);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByObject(object);
 	}
 
+	@Override
 	public boolean isEmpty() {
 		ensureLoaded();
 		return resourceDescriptionData.isEmpty();

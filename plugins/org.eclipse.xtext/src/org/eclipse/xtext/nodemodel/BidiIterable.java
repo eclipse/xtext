@@ -17,6 +17,7 @@ public interface BidiIterable<T> extends Iterable<T> {
 	 * Returns an iterator that can be used forwards and backwards.
 	 * @return an iterator. Never returns <code>null</code>.
 	 */
+	@Override
 	BidiIterator<T> iterator();
 	
 	/**

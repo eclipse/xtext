@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 
 import com.google.inject.ImplementedBy;
@@ -29,7 +28,7 @@ public interface IRefactoringDocument {
 
 	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
 	static interface Provider {
-		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
+		IRefactoringDocument get(URI resourceURI, StatusWrapper status);
 	}
 
 }

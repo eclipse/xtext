@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug287988Test.impl;
 
@@ -22,12 +19,12 @@ import org.eclipse.xtext.linking.bug287988Test.Bug287988TestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getTypeRef <em>Type Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

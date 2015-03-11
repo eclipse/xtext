@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.lookaheadLang.impl;
 
@@ -9,6 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -127,6 +125,9 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
 
     isInited = true;
 
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
+
     // Create package meta-data objects
     theLookaheadLangPackage.createPackageContents();
 
@@ -210,6 +211,16 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
   public EReference getLookAhead1_Y()
   {
     return (EReference)lookAhead1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLookAhead1_Z()
+  {
+    return (EAttribute)lookAhead1EClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -312,6 +323,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
 
     lookAhead1EClass = createEClass(LOOK_AHEAD1);
     createEReference(lookAhead1EClass, LOOK_AHEAD1__Y);
+    createEAttribute(lookAhead1EClass, LOOK_AHEAD1__Z);
 
     lookAhead2EClass = createEClass(LOOK_AHEAD2);
     createEAttribute(lookAhead2EClass, LOOK_AHEAD2__Z);
@@ -347,6 +359,9 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -361,21 +376,22 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     initEReference(getEntry_Contents(), this.getAlts(), null, "contents", null, 0, -1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(altsEClass, Alts.class, "Alts", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAlts_X(), ecorePackage.getEString(), "x", null, 0, 1, Alts.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAlts_X(), theEcorePackage.getEString(), "x", null, 0, 1, Alts.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead0EClass, LookAhead0.class, "LookAhead0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(lookAhead1EClass, LookAhead1.class, "LookAhead1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLookAhead1_Y(), this.getLookAhead2(), null, "y", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLookAhead1_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead2EClass, LookAhead2.class, "LookAhead2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLookAhead2_Z(), ecorePackage.getEString(), "z", null, 0, 1, LookAhead2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLookAhead2_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead3EClass, LookAhead3.class, "LookAhead3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLookAhead3_Z(), this.getLookAhead4(), null, "z", null, 0, 1, LookAhead3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead4EClass, LookAhead4.class, "LookAhead4", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLookAhead4_X(), ecorePackage.getEString(), "x", null, 0, 1, LookAhead4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLookAhead4_X(), theEcorePackage.getEString(), "x", null, 0, 1, LookAhead4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

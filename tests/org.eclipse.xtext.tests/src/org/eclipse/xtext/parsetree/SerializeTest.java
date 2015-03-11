@@ -1,23 +1,24 @@
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 public class SerializeTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testUncompleteComment() throws Exception {
+	@Test public void testUncompleteComment() throws Exception {
 	    String model ="a /* comment *";
 	    checkSerialize(model, 1);
 	}
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 	    String model = "/* foo */ x + y * ( /* stuff */ a /* end  */\n * b)";
         int x = model.length();
 		while (x>0) {

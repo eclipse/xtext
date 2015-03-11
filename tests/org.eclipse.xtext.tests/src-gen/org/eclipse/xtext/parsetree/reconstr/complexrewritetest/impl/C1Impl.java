@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -23,10 +20,10 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyC;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C1Impl#getX <em>X</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,0 +1,5 @@
+package org.eclipse.xtext.resource.idea;
+
+public class LiveContainerBuilderIntegerationTestLanguageIdeaModule extends AbstractLiveContainerBuilderIntegerationTestLanguageIdeaModule {
+
+}

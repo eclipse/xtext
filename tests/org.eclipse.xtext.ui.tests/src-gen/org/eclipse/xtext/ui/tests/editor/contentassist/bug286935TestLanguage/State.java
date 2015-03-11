@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage;
 
@@ -14,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.State#isIsInitial <em>Is Initial</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.State#isIsFinal <em>Is Final</em>}</li>
@@ -21,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.State#getStateName <em>State Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.State#getLabel <em>Label</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.Bug286935TestLanguagePackage#getState()
  * @model

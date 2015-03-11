@@ -8,11 +8,12 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -22,7 +23,8 @@ import com.google.inject.Injector;
  */
 public class Bug289187Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug289187TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug289187TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -32,10 +34,10 @@ public class Bug289187Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testBug289187_01() throws Exception {
-    	newBuilder(getBug289187TestLanguageSetup()).append(
+	@Test public void testBug289187_01() throws Exception {
+    	newBuilder().append(
     			"class Foo {\n" + 
     			"   PRIVATE ").assertText("attribute", "operation");
     }
-    
+
 }

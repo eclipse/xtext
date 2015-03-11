@@ -19,8 +19,9 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,66 +29,66 @@ import org.eclipse.xtext.resource.XtextResource;
 public class GrammarParserTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
-	public void testKeyword() throws Exception {
+	@Test public void testKeyword() throws Exception {
 		Keyword keyword = (Keyword) getModel("'keyword'");
 		assertNotNull(keyword);
 		assertEquals("keyword", keyword.getValue());
 	}
 	
-	public void testAlternatives() throws Exception {
+	@Test public void testAlternatives() throws Exception {
 		Alternatives alternatives = (Alternatives) getModel("'keyword'|'keyword'");
 		assertNotNull(alternatives);
 		assertEquals(2, alternatives.getElements().size());
 	}
 	
-	public void testGroup() throws Exception {
+	@Test public void testGroup() throws Exception {
 		Group group = (Group) getModel("'keyword' 'keyword'");
 		assertNotNull(group);
 		assertEquals(2, group.getElements().size());
 	}
 	
-	public void testRuleCall() throws Exception {
+	@Test public void testRuleCall() throws Exception {
 		RuleCall ruleCall = (RuleCall) getModel("STRING");
 		assertNotNull(ruleCall);
 		assertEquals("STRING", ruleCall.getRule().getName());
 	}
 	
-	public void testAction() throws Exception {
+	@Test public void testAction() throws Exception {
 		Action action = (Action) getModel("{ExplicitType}");
 		assertNotNull(action);
 		assertEquals("ExplicitType", action.getType().getClassifier().getName());
 	}
 	
-	public void testAssignment() throws Exception {
+	@Test public void testAssignment() throws Exception {
 		Assignment assignment = (Assignment) getModel("name=ID");
 		assertNotNull(assignment);
 		assertEquals("ID", ((RuleCall) assignment.getTerminal()).getRule().getName());
 	}
 	
-	public void testUnorderedGroup_01() throws Exception {
+	@Test public void testUnorderedGroup_01() throws Exception {
 		UnorderedGroup group = (UnorderedGroup) getModel("'keyword' & 'keyword'");
 		assertNotNull(group);
 		assertEquals(2, group.getElements().size());
 	}
 	
-	public void testUnorderedGroup_02() throws Exception {
+	@Test public void testUnorderedGroup_02() throws Exception {
 		UnorderedGroup group = (UnorderedGroup) getModel("'keyword' & 'keyword' & 'keyword'");
 		assertNotNull(group);
 		assertEquals(3, group.getElements().size());
 	}
 	
-	public void testPrecedencies_01() throws Exception {
+	@Test public void testPrecedencies_01() throws Exception {
 		Alternatives alternatives = (Alternatives) getModel("'keyword' | 'keyword' & 'keyword' | 'keyword'");
 		assertNotNull(alternatives);
 		assertEquals(3, alternatives.getElements().size());
 	}
 	
-	public void testPrecedencies_02() throws Exception {
+	@Test public void testPrecedencies_02() throws Exception {
 		UnorderedGroup group = (UnorderedGroup) getModel("('keyword' | 'keyword') & ('keyword' | 'keyword')");
 		assertNotNull(group);
 		assertEquals(2, group.getElements().size());
@@ -95,7 +96,7 @@ public class GrammarParserTest extends AbstractXtextTests {
 		assertTrue(group.getElements().get(1) instanceof Alternatives);
 	}
 	
-	public void testPrecedencies_03() throws Exception {
+	@Test public void testPrecedencies_03() throws Exception {
 		UnorderedGroup group = (UnorderedGroup) getModel("'keyword' 'keyword' & 'keyword' 'keyword'");
 		assertNotNull(group);
 		assertEquals(2, group.getElements().size());
@@ -103,7 +104,7 @@ public class GrammarParserTest extends AbstractXtextTests {
 		assertTrue(group.getElements().get(1) instanceof Group);
 	}
 	
-	public void testPrecedencies_04() throws Exception {
+	@Test public void testPrecedencies_04() throws Exception {
 		Group group = (Group) getModel("'keyword' ('keyword' & 'keyword') 'keyword'");
 		assertNotNull(group);
 		assertEquals(3, group.getElements().size());
@@ -112,7 +113,7 @@ public class GrammarParserTest extends AbstractXtextTests {
 		assertTrue(group.getElements().get(2) instanceof Keyword);
 	}
 	
-	public void testPrecedencies_05() throws Exception {
+	@Test public void testPrecedencies_05() throws Exception {
 		UnorderedGroup group = (UnorderedGroup) getModel("name=ID & 'keyword'");
 		assertNotNull(group);
 		assertEquals(2, group.getElements().size());
@@ -120,7 +121,7 @@ public class GrammarParserTest extends AbstractXtextTests {
 		assertTrue(group.getElements().get(1) instanceof Keyword);
 	}
 	
-	public void testNotAllowedInAssignment() throws Exception {
+	@Test public void testNotAllowedInAssignment() throws Exception {
 		getModelAndExpect("name=(ID & STRING)", 2);
 	}
 	

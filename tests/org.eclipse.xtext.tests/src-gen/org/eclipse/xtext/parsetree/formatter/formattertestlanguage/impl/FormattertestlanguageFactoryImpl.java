@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
@@ -34,7 +31,7 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     try
     {
-      FormattertestlanguageFactory theFormattertestlanguageFactory = (FormattertestlanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/formattertestlanguage"); 
+      FormattertestlanguageFactory theFormattertestlanguageFactory = (FormattertestlanguageFactory)EPackage.Registry.INSTANCE.getEFactory(FormattertestlanguagePackage.eNS_URI);
       if (theFormattertestlanguageFactory != null)
       {
         return theFormattertestlanguageFactory;

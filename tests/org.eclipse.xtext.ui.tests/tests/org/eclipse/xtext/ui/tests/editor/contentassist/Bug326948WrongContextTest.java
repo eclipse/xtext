@@ -14,6 +14,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ChainedE
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ValueLiteral;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,21 +44,22 @@ public class Bug326948WrongContextTest extends AbstractBug326948Test {
 		assertContextAsExpected(context);
 	}
 	
-	public void testCurrentModel_01() throws Exception {
-		newBuilder(getSetup())
+	@Test public void testCurrentModel_01() throws Exception {
+		newBuilder()
 			.append("function foo() { \"\".")
 			.computeCompletionProposals();
 	}
 	
-	public void testCurrentModel_02() throws Exception {
-		newBuilder(getSetup())
+	@Test public void testCurrentModel_02() throws Exception {
+		newBuilder()
 			.append("function foo() { \"\". ;")
 			.computeCompletionProposals(" ;");
 	}
 	
-	public void testCurrentModel_03() throws Exception {
-		newBuilder(getSetup())
+	@Test public void testCurrentModel_03() throws Exception {
+		newBuilder()
 			.append("function foo() { \"\". ; }")
 			.computeCompletionProposals(" ;");
 	}
+
 }

@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xtext.ui.refactoring;
 
 import static java.util.Collections.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
@@ -17,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.osgi.framework.internal.core.FrameworkProperties;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
@@ -41,8 +42,13 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 
 	/**
 	 * Option-flag to disable warnings in this participant
+	 * @deprecated use {{@link #setDisableWarning(boolean)} instead
 	 */
+	@Deprecated
 	public static final String ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION = "org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant.show.warning.option";
+
+
+	private static boolean isDisableWarning;
 
 	
 	@Inject
@@ -63,6 +69,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
 			if (returnType != null && returnType.getClassifier() != null
 					&& !Strings.isEmpty(returnType.getClassifier().getName())
+					&& equal(((ParserRule) originalTarget).getName(), returnType.getClassifier().getName())
 					&& returnType.getClassifier().eClass() != null && returnType.getClassifier().getEPackage() != null
 					&& !Strings.isEmpty(returnType.getClassifier().getEPackage().getNsURI())) {
 				String packageNsURI = returnType.getClassifier().getEPackage().getNsURI();
@@ -71,15 +78,13 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 				URI platformResourceURI = findPlatformResourceURI(classifierQualifiedName, EcorePackage.Literals.ECLASS);
 				if (platformResourceURI == null) {
 					if (returnType.getMetamodel() instanceof ReferencedMetamodel)
-						getStatus().addError("Return type " + returnType.getClassifier().getName() + " is not indexed");
+						getStatus().add(ERROR, "Return type '{0}' is not indexed.", returnType.getClassifier());
 				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
 					((InternalEObject) classifierProxy).eSetProxyURI(platformResourceURI);
-					String optionFlag = FrameworkProperties.getProperty(ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true");
-					if(optionFlag == null || "true".equalsIgnoreCase(optionFlag))
-						getStatus().addWarning(
-								"Renaming EClass '" + returnType.getClassifier().getName()
-										+ "' in ecore file. Please rerun the Ecore generator.");
+					if(!isDisableWarning)
+						getStatus().add(WARNING, 
+								"Renaming EClass '{0}' in ecore file. Please rerun the Ecore generator.", returnType.getClassifier());
 					
 					return singletonList(classifierProxy);
 				}
@@ -99,6 +104,14 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * For tests only: The warning dialog will block the test on the server 
+	 * @noref
+	 */
+	public static void setDisableWarning(boolean isDisableWarning) {
+		EcoreRefactoringParticipant.isDisableWarning = isDisableWarning;
 	}
 
 }

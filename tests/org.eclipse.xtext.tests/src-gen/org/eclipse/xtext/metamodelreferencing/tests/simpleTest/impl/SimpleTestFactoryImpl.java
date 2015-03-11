@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.simpleTest.impl;
 
@@ -33,7 +30,7 @@ public class SimpleTestFactoryImpl extends EFactoryImpl implements SimpleTestFac
   {
     try
     {
-      SimpleTestFactory theSimpleTestFactory = (SimpleTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/tests/SimpleTest"); 
+      SimpleTestFactory theSimpleTestFactory = (SimpleTestFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleTestPackage.eNS_URI);
       if (theSimpleTestFactory != null)
       {
         return theSimpleTestFactory;

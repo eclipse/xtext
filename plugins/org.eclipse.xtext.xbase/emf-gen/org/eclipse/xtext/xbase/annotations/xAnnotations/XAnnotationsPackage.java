@@ -1,11 +1,12 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.annotations.xAnnotations;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -23,6 +24,11 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
  * @model kind="package"
  * @generated
@@ -144,80 +150,6 @@ public interface XAnnotationsPackage extends EPackage
 	 */
 	int XANNOTATION_ELEMENT_VALUE_PAIR_FEATURE_COUNT = 2;
 
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValueBinaryOperationImpl <em>XAnnotation Element Value Binary Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValueBinaryOperationImpl
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationElementValueBinaryOperation()
-	 * @generated
-	 */
-	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>XAnnotation Element Value Binary Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl <em>XAnnotation Value Array</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationValueArray()
-	 * @generated
-	 */
-	int XANNOTATION_VALUE_ARRAY = 3;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_VALUE_ARRAY__VALUES = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>XAnnotation Value Array</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_VALUE_ARRAY_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation <em>XAnnotation</em>}'.
@@ -293,70 +225,6 @@ public interface XAnnotationsPackage extends EPackage
 	 * @generated
 	 */
 	EReference getXAnnotationElementValuePair_Element();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation <em>XAnnotation Element Value Binary Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XAnnotation Element Value Binary Operation</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation
-	 * @generated
-	 */
-	EClass getXAnnotationElementValueBinaryOperation();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getLeftOperand()
-	 * @see #getXAnnotationElementValueBinaryOperation()
-	 * @generated
-	 */
-	EReference getXAnnotationElementValueBinaryOperation_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getRightOperand()
-	 * @see #getXAnnotationElementValueBinaryOperation()
-	 * @generated
-	 */
-	EReference getXAnnotationElementValueBinaryOperation_RightOperand();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getOperator <em>Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operator</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation#getOperator()
-	 * @see #getXAnnotationElementValueBinaryOperation()
-	 * @generated
-	 */
-	EAttribute getXAnnotationElementValueBinaryOperation_Operator();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray <em>XAnnotation Value Array</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XAnnotation Value Array</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
-	 * @generated
-	 */
-	EClass getXAnnotationValueArray();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray#getValues <em>Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray#getValues()
-	 * @see #getXAnnotationValueArray()
-	 * @generated
-	 */
-	EReference getXAnnotationValueArray_Values();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -440,58 +308,6 @@ public interface XAnnotationsPackage extends EPackage
 		 * @generated
 		 */
 		EReference XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT = eINSTANCE.getXAnnotationElementValuePair_Element();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValueBinaryOperationImpl <em>XAnnotation Element Value Binary Operation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValueBinaryOperationImpl
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationElementValueBinaryOperation()
-		 * @generated
-		 */
-		EClass XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION = eINSTANCE.getXAnnotationElementValueBinaryOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND = eINSTANCE.getXAnnotationElementValueBinaryOperation_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND = eINSTANCE.getXAnnotationElementValueBinaryOperation_RightOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR = eINSTANCE.getXAnnotationElementValueBinaryOperation_Operator();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl <em>XAnnotation Value Array</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationValueArray()
-		 * @generated
-		 */
-		EClass XANNOTATION_VALUE_ARRAY = eINSTANCE.getXAnnotationValueArray();
-
-		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XANNOTATION_VALUE_ARRAY__VALUES = eINSTANCE.getXAnnotationValueArray_Values();
 
 	}
 

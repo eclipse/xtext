@@ -15,7 +15,7 @@ package org.eclipse.xtext.builder.builderState;
 public class BinaryResourceBasedPersisterTest extends AbstractEMFBasedPersisterTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		persister.setFactory(new BufferedBinaryResourceFactory());
 	}

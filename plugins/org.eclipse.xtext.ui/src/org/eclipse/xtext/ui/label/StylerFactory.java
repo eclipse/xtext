@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class StylerFactory {
 	/**
-	 * @see DefaultLabelProvider#createStyler(FontDescriptor, String, String)
+	 * @return {@link DefaultFontStyler}
 	 */
 	public Styler createStyler(String foregroundColorName, String backgroundColorName) {
 		return new DefaultFontStyler(null, foregroundColorName, backgroundColorName);

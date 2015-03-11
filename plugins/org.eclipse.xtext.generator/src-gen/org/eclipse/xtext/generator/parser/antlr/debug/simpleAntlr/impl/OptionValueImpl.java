@@ -1,14 +1,14 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 
@@ -94,7 +94,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getKey()
+  @Override
+public String getKey()
   {
     return key;
   }
@@ -104,7 +105,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setKey(String newKey)
+  @Override
+public void setKey(String newKey)
   {
     String oldKey = key;
     key = newKey;
@@ -117,7 +119,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  @Override
+public String getValue()
   {
     return value;
   }
@@ -127,7 +130,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  @Override
+public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

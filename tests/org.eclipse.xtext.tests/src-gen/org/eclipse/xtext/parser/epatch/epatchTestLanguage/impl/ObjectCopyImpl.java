@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -22,11 +19,11 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectCopy;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectCopyImpl#getResource <em>Resource</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectCopyImpl#getFragment <em>Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

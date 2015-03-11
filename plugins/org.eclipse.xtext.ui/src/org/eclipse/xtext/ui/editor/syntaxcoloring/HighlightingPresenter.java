@@ -62,6 +62,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 		/*
 		 * @see org.eclipse.jface.text.IPositionUpdater#update(org.eclipse.jface.text.DocumentEvent)
 		 */
+		@Override
 		public void update(DocumentEvent event) {
 
 			int eventOffset = event.getOffset();
@@ -366,6 +367,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 			return null;
 
 		Runnable runnable = new Runnable() {
+			@Override
 			public void run() {
 				updatePresentation(textPresentation, added, removed);
 			}
@@ -376,6 +378,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	public Runnable createSimpleUpdateRunnable() {
 		return new Runnable() {
 
+			@Override
 			public void run() {
 				if (fSourceViewer != null)
 					fSourceViewer.invalidateTextPresentation();
@@ -551,8 +554,9 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 * @param offset
 	 *            the offset
 	 * @return the index of the last position with an offset greater than the given offset
+	 * @since 2.5
 	 */
-	private int computeIndexAfterOffset(List<AttributedPosition> positions, int offset) {
+	protected int computeIndexAfterOffset(List<AttributedPosition> positions, int offset) {
 		int i = -1;
 		int j = positions.size();
 		while (j - i > 1) {
@@ -574,8 +578,37 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 * @param offset
 	 *            the offset
 	 * @return the index of the last position with an offset equal or greater than the given offset
+	 * @since 2.5 
 	 */
-	private int computeIndexAtOffset(List<AttributedPosition> positions, int offset) {
+	protected int computeIndexEndingAtOrEnclosingOffset(List<AttributedPosition> positions, int offset) {
+		int i = -1;
+		int j = positions.size();
+		while (j - i > 1) {
+			int k = (i + j) >> 1;
+			AttributedPosition position = positions.get(k);
+			int positionOffset = position.getOffset();
+			if (positionOffset <= offset && positionOffset + position.getLength() > offset) {
+				return k;
+			}
+			if (position.getOffset() >= offset)
+				j = k;
+			else
+				i = k;
+		}
+		return j;
+	}
+	
+	/**
+	 * Returns the index of the first position with an offset equal or greater than the given offset.
+	 * 
+	 * @param positions
+	 *            the positions, must be ordered by offset and must not overlap
+	 * @param offset
+	 *            the offset
+	 * @return the index of the last position with an offset equal or greater than the given offset
+	 * @since 2.5 
+	 */
+	protected int computeIndexAtOffset(List<AttributedPosition> positions, int offset) {
 		int i = -1;
 		int j = positions.size();
 		while (j - i > 1) {
@@ -592,9 +625,10 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	/*
 	 * @see org.eclipse.jface.text.ITextPresentationListener#applyTextPresentation(org.eclipse.jface.text.TextPresentation)
 	 */
+	@Override
 	public void applyTextPresentation(TextPresentation textPresentation) {
 		IRegion region = textPresentation.getExtent();
-		int i = computeIndexAtOffset(fPositions, region.getOffset());
+		int i = computeIndexEndingAtOrEnclosingOffset(fPositions, region.getOffset());
 		int n = computeIndexAtOffset(fPositions, region.getOffset() + region.getLength());
 		if (n - i > 2) {
 			List<StyleRange> ranges = new ArrayList<StyleRange>(n - i);
@@ -618,6 +652,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	/*
 	 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentAboutToBeChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 	 */
+	@Override
 	public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 		setCanceled(true);
 		releaseDocument(oldInput);
@@ -627,6 +662,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	/*
 	 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 	 */
+	@Override
 	public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 		manageDocument(newInput);
 	}
@@ -634,6 +670,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	/*
 	 * @see org.eclipse.jface.text.IDocumentListener#documentAboutToBeChanged(org.eclipse.jface.text.DocumentEvent)
 	 */
+	@Override
 	public void documentAboutToBeChanged(DocumentEvent event) {
 		setCanceled(true);
 	}
@@ -641,6 +678,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	/*
 	 * @see org.eclipse.jface.text.IDocumentListener#documentChanged(org.eclipse.jface.text.DocumentEvent)
 	 */
+	@Override
 	public void documentChanged(DocumentEvent event) {
 	}
 
@@ -706,7 +744,6 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 		fPresentationReconciler = backgroundPresentationReconciler;
 
 		fSourceViewer.prependTextPresentationListener(this);
-		fSourceViewer.addTextPresentationListener(this);
 		fSourceViewer.addTextInputListener(this);
 		manageDocument(fSourceViewer.getDocument());
 	}

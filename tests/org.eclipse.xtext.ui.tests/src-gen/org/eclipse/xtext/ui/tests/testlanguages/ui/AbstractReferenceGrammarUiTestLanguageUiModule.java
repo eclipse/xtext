@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.ui.tests.testlanguages.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractReferenceGrammarUiTestLanguageUiModule extends DefaultUiModule {
+public abstract class AbstractReferenceGrammarUiTestLanguageUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractReferenceGrammarUiTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

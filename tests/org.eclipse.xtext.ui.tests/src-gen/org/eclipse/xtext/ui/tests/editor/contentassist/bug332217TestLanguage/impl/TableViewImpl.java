@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl;
 
@@ -34,6 +31,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Tab
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TableViewImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TableViewImpl#getContent <em>Content</em>}</li>
@@ -42,7 +40,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Tab
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TableViewImpl#getStyle <em>Style</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TableViewImpl#getSections <em>Sections</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

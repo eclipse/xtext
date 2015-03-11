@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -36,17 +37,26 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 
 	@Inject
 	private RailroadView view;
-	
-	@Inject 
+
+	@Inject
 	private Xtext2RailroadTransformer transformer;
-	
-	@Inject 
+
+	@Inject
 	private RailroadSelectionLinker selectionLinker;
-	
+
 	private IXtextDocument lastActiveDocument;
 
-	private Font font;
+	public void start(IWorkbenchPartSite site) {
+		updateView(site.getPage().getActiveEditor());
+		site.getWorkbenchWindow().getPartService().addPartListener(this);
+	}
 
+	public void stop(IWorkbenchPartSite site) {
+		site.getWorkbenchWindow().getPartService().removePartListener(this);
+		lastActiveDocument = null;
+	}
+
+	@Override
 	public void partActivated(IWorkbenchPart part) {
 		updateView(part);
 	}
@@ -58,6 +68,7 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 			if (xtextDocument != lastActiveDocument) {
 				selectionLinker.setXtextEditor(xtextEditor);
 				final IFigure contents = xtextDocument.readOnly(new IUnitOfWork<IFigure, XtextResource>() {
+					@Override
 					public IFigure exec(XtextResource resource) throws Exception {
 						return createFigure(resource);
 					}
@@ -83,23 +94,34 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 		return null;
 	}
 
+	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partClosed(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partDeactivated(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partOpened(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void modelChanged(XtextResource resource) {
 		view.setContents(createFigure(resource));
 	}
 
+	/**
+	 * Deprecated because never used. Will be removed in 3.0.0
+	 * 
+	 * @return <code>null</code>
+	 */
+	@Deprecated
 	public Font getFont() {
-		return font;
+		return null;
 	}
 }

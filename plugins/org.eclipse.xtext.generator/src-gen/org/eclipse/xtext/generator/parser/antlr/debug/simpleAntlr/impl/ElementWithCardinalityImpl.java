@@ -1,15 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
@@ -86,7 +86,8 @@ public class ElementWithCardinalityImpl extends RuleElementImpl implements Eleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getElement()
+  @Override
+public RuleElement getElement()
   {
     return element;
   }
@@ -113,7 +114,8 @@ public class ElementWithCardinalityImpl extends RuleElementImpl implements Eleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(RuleElement newElement)
+  @Override
+public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {
@@ -134,7 +136,8 @@ public class ElementWithCardinalityImpl extends RuleElementImpl implements Eleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getCardinality()
+  @Override
+public String getCardinality()
   {
     return cardinality;
   }
@@ -144,7 +147,8 @@ public class ElementWithCardinalityImpl extends RuleElementImpl implements Eleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCardinality(String newCardinality)
+  @Override
+public void setCardinality(String newCardinality)
   {
     String oldCardinality = cardinality;
     cardinality = newCardinality;

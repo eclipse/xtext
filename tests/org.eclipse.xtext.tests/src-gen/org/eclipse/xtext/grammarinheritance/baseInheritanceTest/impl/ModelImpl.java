@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.baseInheritanceTest.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.baseInheritanceTest.impl.ModelImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

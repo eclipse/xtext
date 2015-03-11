@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractCrossReferenceProposalTestLanguageUiModule extends DefaultUiModule {
+public abstract class AbstractCrossReferenceProposalTestLanguageUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractCrossReferenceProposalTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

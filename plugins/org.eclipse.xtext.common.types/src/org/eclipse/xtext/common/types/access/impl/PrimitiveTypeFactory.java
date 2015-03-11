@@ -12,10 +12,14 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
+ * A type factory that creates the {@link JvmType} representations
+ * for Java primitive types.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveTypeFactory implements ITypeFactory<Class<?>> {
+public class PrimitiveTypeFactory implements ITypeFactory<Class<?>, JvmType> {
 
+	@Override
 	public JvmType createType(Class<?> clazz) {
 		if (Void.TYPE.equals(clazz))
 			return TypesFactory.eINSTANCE.createJvmVoid();

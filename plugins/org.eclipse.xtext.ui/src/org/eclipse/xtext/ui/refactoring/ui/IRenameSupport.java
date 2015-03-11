@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
-import com.google.inject.ImplementedBy;
 
 /**
+ * Common UI facade of JDT and Xtext rename refactorings.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameSupport {
 	
-	@ImplementedBy(DefaultRenameSupport.Factory.class)
 	interface Factory {
 		IRenameSupport create(Object context, String newName);
 	}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
@@ -33,7 +30,7 @@ public class QuickfixCrossrefFactoryImpl extends EFactoryImpl implements Quickfi
   {
     try
     {
-      QuickfixCrossrefFactory theQuickfixCrossrefFactory = (QuickfixCrossrefFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/quickfixCrossrefTestLanguage"); 
+      QuickfixCrossrefFactory theQuickfixCrossrefFactory = (QuickfixCrossrefFactory)EPackage.Registry.INSTANCE.getEFactory(QuickfixCrossrefPackage.eNS_URI);
       if (theQuickfixCrossrefFactory != null)
       {
         return theQuickfixCrossrefFactory;

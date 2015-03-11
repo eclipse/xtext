@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.unicode.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.unicode.impl.ModelImpl#getStrings <em>Strings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage;
 
@@ -42,6 +39,15 @@ public interface ContentAssistTestLanguageFactory extends EFactory
    * @generated
    */
   ReferenceHolder createReferenceHolder();
+
+  /**
+   * Returns a new object of class '<em>Generate Directive</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Generate Directive</em>'.
+   * @generated
+   */
+  GenerateDirective createGenerateDirective();
 
   /**
    * Returns a new object of class '<em>Import</em>'.

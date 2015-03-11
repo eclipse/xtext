@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,11 +24,11 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 
 	@Override
-	protected XExpression expression(String string) throws Exception {
+	protected XExpression expression(CharSequence string) throws Exception {
 		return super.expression(string, false);
 	}
 	
-	public void testAssignment_rhs_01() throws Exception {
+	@Test public void testAssignment_rhs_01() throws Exception {
 		String text = "a=b";
 		XAssignment assignment = (XAssignment) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XASSIGNMENT__VALUE);
@@ -36,7 +37,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("b", nodeText);
 	}
 	
-	public void testAssignment_rhs_02() throws Exception {
+	@Test public void testAssignment_rhs_02() throws Exception {
 		String text = "a=b+=c";
 		XAssignment assignment = (XAssignment) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XASSIGNMENT__VALUE);
@@ -45,7 +46,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("b+=c", nodeText);
 	}
 	
-	public void testAssignment_rhs_03() throws Exception {
+	@Test public void testAssignment_rhs_03() throws Exception {
 		String text = "a=b+=c";
 		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
@@ -54,7 +55,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("c", nodeText);
 	}
 	
-	public void testAssignment_rhs_04() throws Exception {
+	@Test public void testAssignment_rhs_04() throws Exception {
 		String text = "a=b+=c";
 		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND);
@@ -63,7 +64,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("b", nodeText);
 	}
 	
-	public void testAssignment_rhs_05() throws Exception {
+	@Test public void testAssignment_rhs_05() throws Exception {
 		String text = "a = b += c = d";
 		XAssignment assignment = (XAssignment) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XASSIGNMENT__VALUE);
@@ -72,7 +73,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals(" b += c = d", nodeText);
 	}
 	
-	public void testBinaryOperation_01() throws Exception {
+	@Test public void testBinaryOperation_01() throws Exception {
 		String text = "a+b+c+d";
 		XBinaryOperation operation = (XBinaryOperation) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(operation, XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND);
@@ -81,7 +82,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("a+b+c", nodeText);
 	}
 	
-	public void testBinaryOperation_02() throws Exception {
+	@Test public void testBinaryOperation_02() throws Exception {
 		String text = "a+b+c+d";
 		XBinaryOperation operation = (XBinaryOperation) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(operation, XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
@@ -90,7 +91,7 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 		assertEquals("d", nodeText);
 	}
 	
-	public void testBinaryOperation_03() throws Exception {
+	@Test public void testBinaryOperation_03() throws Exception {
 		String text = "a-b-c+d";
 		XBinaryOperation operation = (XBinaryOperation) expression(text);
 		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(operation, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);

@@ -23,9 +23,49 @@ public class ValueConverterWithValueException extends ValueConverterException {
 	
 	private final Object value;
 
+	private final int offset;
+
+	private final int length;
+
 	public ValueConverterWithValueException(String message, INode node, Object value, Exception cause) {
 		super(message, node, cause);
 		this.value = value;
+		this.offset = -1;
+		this.length = -1;
+	}
+	
+	/**
+	 * Creates a ranged value converter exception.
+	 * @since 2.7
+	 * @param offset the offset relative to the total offset of the node
+	 * @param length the length of the error 
+	 */
+	public ValueConverterWithValueException(String message, INode node, Object value, int offset, int length, Exception cause) {
+		super(message, node, cause);
+		this.value = value;
+		this.offset = offset;
+		this.length = length;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean hasRange() {
+		return offset != -1;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public int getOffset() {
+		return offset;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public int getLength() {
+		return length;
 	}
 
 	public Object getValue() {

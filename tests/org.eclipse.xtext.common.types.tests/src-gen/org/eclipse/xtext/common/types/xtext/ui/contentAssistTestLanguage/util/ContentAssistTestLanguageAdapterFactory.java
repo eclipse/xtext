@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.util;
 
@@ -88,6 +85,11 @@ public class ContentAssistTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createReferenceHolderAdapter();
       }
       @Override
+      public Adapter caseGenerateDirective(GenerateDirective object)
+      {
+        return createGenerateDirectiveAdapter();
+      }
+      @Override
       public Adapter caseImport(Import object)
       {
         return createImportAdapter();
@@ -140,6 +142,21 @@ public class ContentAssistTestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReferenceHolderAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective <em>Generate Directive</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective
+   * @generated
+   */
+  public Adapter createGenerateDirectiveAdapter()
   {
     return null;
   }

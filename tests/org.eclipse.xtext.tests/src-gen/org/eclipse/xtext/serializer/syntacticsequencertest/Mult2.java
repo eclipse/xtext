@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.serializer.syntacticsequencertest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Mult2#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Mult2#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getMult2()
  * @model

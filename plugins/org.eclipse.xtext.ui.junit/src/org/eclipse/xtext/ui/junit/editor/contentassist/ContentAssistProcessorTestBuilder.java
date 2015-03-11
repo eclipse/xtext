@@ -49,7 +49,10 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;
@@ -153,12 +156,10 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 			computeCompletionProposals = new ICompletionProposal[0];
 
 		Arrays.sort(expectedText);
-		String expectation = Strings.concat(", ", Arrays.asList(expectedText));
-		Assert.assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
-				+ currentModelToParse + "': expectation was:\n" + expectation
-				+ "\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
-				expectedText.length, computeCompletionProposals.length);
-
+		final String expectation = Strings.concat(", ", Arrays.asList(expectedText));
+		final String actual = Strings.concat(", ", toString(computeCompletionProposals));
+		
+		Assert.assertEquals(expectation, actual);
 		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
@@ -171,7 +172,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 				}
 			}
 			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
-					Strings.concat(", ", toString(computeCompletionProposals)),
+					actual,
 					Arrays.asList(expectedText).contains(proposedText));
 		}
 

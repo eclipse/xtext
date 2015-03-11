@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.locationprovidertest.impl;
 
@@ -28,12 +25,12 @@ import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPacka
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ElementImpl#getSingleref <em>Singleref</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ElementImpl#getMultirefs <em>Multirefs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

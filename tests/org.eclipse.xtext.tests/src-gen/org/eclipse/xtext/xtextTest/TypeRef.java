@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest;
 
@@ -15,11 +12,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.TypeRef#getMetamodel <em>Metamodel</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.TypeRef#getClassifier <em>Classifier</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getTypeRef()
  * @model

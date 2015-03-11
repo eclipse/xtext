@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl;
 
@@ -31,12 +28,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.SquareBracketExpImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.SquareBracketExpImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.SquareBracketExpImpl#isPre <em>Pre</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

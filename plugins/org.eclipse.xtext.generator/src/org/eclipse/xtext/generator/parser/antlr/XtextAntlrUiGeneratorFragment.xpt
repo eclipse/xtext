@@ -14,13 +14,13 @@
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(AntlrOptions options) FOR Grammar»
-	«EXPAND IContentAssistParser::parser»
-	«EXPAND AntlrContentAssistGrammar::grammar(options)»
+«DEFINE generate(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»
+	«EXPAND IContentAssistParser::parser(options, partialParsing, hasIDE)»
+	«EXPAND AntlrContentAssistGrammar::grammar(options, hasIDE)»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(AntlrOptions options) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(AntlrOptions options) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(AntlrOptions options) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»

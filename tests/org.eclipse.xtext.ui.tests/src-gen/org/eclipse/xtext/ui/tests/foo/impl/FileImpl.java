@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.foo.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.ui.tests.foo.Stuff;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.impl.FileImpl#getStuff <em>Stuff</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

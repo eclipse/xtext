@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -91,7 +93,7 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImplCusto
 	{
 		if (arguments == null)
 		{
-			arguments = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
+			arguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
 		}
 		return arguments;
 	}
@@ -101,7 +103,6 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImplCusto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())

@@ -23,6 +23,7 @@ public class ProjectionAwareProposalAcceptor implements ICompletionProposalAccep
 		this.evaluatedTemplate = projectionData;
 	}
 
+	@Override
 	public void accept(ICompletionProposal proposal) {
 		if (proposal != null) {
 			ConfigurableCompletionProposal configurableProposal = 
@@ -33,6 +34,7 @@ public class ProjectionAwareProposalAcceptor implements ICompletionProposalAccep
 		}
 	}
 
+	@Override
 	public boolean canAcceptMoreProposals() {
 		return acceptor.canAcceptMoreProposals();
 	}

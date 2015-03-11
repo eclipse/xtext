@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,109 +7,322 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.util.Strings.*;
 
-import java.util.Collection;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.builder.BuilderParticipant;
+import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
+import org.eclipse.xtext.builder.DerivedResourceMarkers;
+import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
+import org.eclipse.xtext.builder.tests.Activator;
+import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
+import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
-import com.google.common.collect.Lists;
+import com.google.inject.Injector;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class BuilderParticipantTest extends AbstractParticipatingBuilderTest {
+public class BuilderParticipantTest extends AbstractBuilderTest {
 
-	private Collection<IBuildContext> contexts;
-	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		contexts = Lists.newArrayList();
+		final Injector injector = getInjector();
+		IXtextBuilderParticipant instance = injector.getInstance(IXtextBuilderParticipant.class);
+		participant = injector.getInstance(BuilderParticipant.class);
+		preferenceStoreAccess = injector.getInstance(IPreferenceStoreAccess.class);
+		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
+		delegatingParticipant.setDelegate(participant);
 	}
 
-	@Override
-	public void reset() {
-		contexts.clear();
-		super.reset();
-	}
-	
-	@Override
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-		super.build(context, monitor);
-		if (isLogging()) {
-			contexts.add(context);
-		}
+	protected Injector getInjector() {
+		final Injector injector = Activator.getInstance().getInjector(
+				"org.eclipse.xtext.builder.tests.BuilderTestLanguage");
+		return injector;
 	}
 
-	protected void validateContext(IBuildContext context) {
-		IProject project = context.getBuiltProject();
-		String prefix = "platform:/resource/" + project.getName();
-		for(IResourceDescription.Delta delta: context.getDeltas()) {
-			assertTrue("Exptected uri '" + delta.getUri() + "' starts with '" + prefix + "'", 
-					delta.getUri().toString().startsWith(prefix));
-		}
+	private BuilderParticipant participant;
+	private IPreferenceStoreAccess preferenceStoreAccess;
+
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
+		participant = null;
 	}
-	
-	public void testParticipantInvoked() throws Exception {
-		startLogging();
+
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=345545
+	 */
+	@Test
+	public void deconfigureXtextNatureShouldDeleteMarkers() throws Exception {
+		final IJavaProject project = createJavaProject("removeXtextNatureShouldDeleteMarkers");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("ob ject Foo"), true, monitor());
+		waitForAutoBuild();
+		IMarker[] markers = project.getProject()
+				.findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals(1, markers.length);
+		assertEquals(MarkerTypes.FAST_VALIDATION, markers[0].getType());
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				XtextNature xtextNature = new XtextNature();
+				xtextNature.setProject(project.getProject());
+				xtextNature.deconfigure();
+			}
+		}.run(monitor());
+		waitForAutoBuild();
+		markers = project.getProject().findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals(0, markers.length);
+	}
+
+	@Test
+	public void testGenerateIntoProjectOutputDirectory() throws Exception {
+		IJavaProject project = createJavaProject("testGenerateIntoProjectOutputDirectory");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(),
+				"./");
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./Foo.txt");
+		assertTrue(generatedFile.exists());
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(),
+				".");
+		file = folder.getFile("Bar" + F_EXT);
+		file.create(new StringInputStream("object Bar"), true, monitor());
+		waitForAutoBuild();
+		generatedFile = project.getProject().getFile("./Bar.txt");
+		assertTrue(generatedFile.exists());
+	}
+
+	@Test
+	public void testCharsetIsHonored() throws Exception {
+		IJavaProject project = createJavaProject("testCharsetIsHonored");
+		project.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertEquals(getNonDefaultEncoding(), generatedFile.getCharset());
+	}
+
+	@Test
+	public void testGenerateIntoDifferentOutputFolders() throws Exception {
+		IJavaProject project = createJavaProject("testGenerateIntoDifferentOutputFolders");
+		addSourceFolder(project, "other-src");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IPreferenceStore preferences = preferenceStoreAccess.getWritablePreferenceStore(project.getProject());
+		preferences.setValue(getUseOutputPerSourceFolderKey(), "true");
+		preferences.setValue(getOutputForSourceFolderKey("other-src"), "other-gen");
+
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+
+		folder = project.getProject().getFolder("other-src");
+		file = folder.getFile("Bar" + F_EXT);
+		file.create(new StringInputStream("object Bar"), true, monitor());
+
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("src-gen/Foo.txt");
+		assertTrue(generatedFile.exists());
+		generatedFile = project.getProject().getFile("other-gen/Bar.txt");
+		assertTrue(generatedFile.exists());
+	}
+
+	@Test
+	public void testCleanUpDerivedResources() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
-		assertTrue(0 < getInvocationCount());
-		validateContexts();
-		reset();
-		
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertTrue(generatedFile.exists());
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(),
+				"./src2-gen");
+
+		DerivedResourceCleanerJob derivedResourceCleanerJob = getInjector()
+				.getInstance(DerivedResourceCleanerJob.class);
+		derivedResourceCleanerJob.setUser(true);
+		derivedResourceCleanerJob.initialize(project.getProject(), "src-gen");
+		derivedResourceCleanerJob.schedule();
+		waitForResourceCleanerJob();
+		generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertFalse(generatedFile.exists());
+		file.touch(monitor());
+		waitForAutoBuild();
+		generatedFile = project.getProject().getFile("./src2-gen/Foo.txt");
+		assertTrue(generatedFile.exists());
+	}
+
+	@Test
+	public void testDefaultConfiguration() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertTrue(generatedFile.exists());
+		assertTrue(generatedFile.isDerived());
+		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+		assertEquals("object Foo", fileToString(generatedFile).trim());
+		file.setContents(new StringInputStream("object Bar"), true, true, monitor());
+		waitForAutoBuild();
+		assertFalse(generatedFile.exists());
+		generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
+		assertTrue(generatedFile.exists());
+		assertTrue(generatedFile.isDerived());
+		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+		assertEquals("object Bar", fileToString(generatedFile).trim());
 		file.delete(true, monitor());
 		waitForAutoBuild();
-		assertEquals(1, getInvocationCount());
-		assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
-		validateContexts();
-		reset();
-		
-		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
-		assertSame(BuildType.CLEAN, getContext().getBuildType());
-		waitForAutoBuild();
-		assertEquals(2, getInvocationCount());
-		assertSame(BuildType.FULL, getContext().getBuildType());
-		validateContexts();
-		reset();
-		
-		project.getProject().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
-		assertSame(BuildType.FULL, getContext().getBuildType());
-		validateContexts();
-		reset();
+		assertFalse(generatedFile.exists());
 	}
-	
-	private void validateContexts() {
-		for(IBuildContext context: contexts) {
-			validateContext(context);
+
+	@Test
+	public void testClean() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertTrue(generatedFile.exists());
+		assertTrue(generatedFile.isDerived());
+		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+		assertEquals("object Foo", fileToString(generatedFile).trim());
+		cleanBuild();
+		assertFalse(generatedFile.exists());
+	}
+
+	@Test
+	public void testNoCleanUpNoDerived() throws Exception {
+		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
+			@Override
+			public Set<OutputConfiguration> getOutputConfigurations() {
+				final Set<OutputConfiguration> result = super.getOutputConfigurations();
+				OutputConfiguration configuration = result.iterator().next();
+				configuration.setCanClearOutputDirectory(false);
+				configuration.setCleanUpDerivedResources(false);
+				configuration.setSetDerivedProperty(false);
+				return result;
+			}
+		};
+		try {
+			BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+			initializer.setOutputConfigurationProvider(outputConfigurationProvider);
+			initializer.initialize(preferenceStoreAccess);
+
+			IJavaProject project = createJavaProject("foo");
+			addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+			IFolder folder = project.getProject().getFolder("src");
+			IFile file = folder.getFile("Foo" + F_EXT);
+			file.create(new StringInputStream("object Foo"), true, monitor());
+			waitForAutoBuild();
+			IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+			assertTrue(generatedFile.exists());
+			assertFalse(generatedFile.isDerived());
+			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+			assertEquals("object Foo", fileToString(generatedFile).trim());
+			file.setContents(new StringInputStream("object Bar"), true, true, monitor());
+			waitForAutoBuild();
+			assertTrue(generatedFile.exists());
+			generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
+			assertTrue(generatedFile.exists());
+			assertFalse(generatedFile.isDerived());
+			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+			assertEquals("object Bar", fileToString(generatedFile).trim());
+			file.delete(true, monitor());
+			waitForAutoBuild();
+			assertTrue(generatedFile.exists());
+			cleanBuild();
+			assertTrue(generatedFile.exists());
+		} finally {
+			BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+			initializer.setOutputConfigurationProvider(new OutputConfigurationProvider());
+			initializer.initialize(preferenceStoreAccess);
 		}
 	}
 
-	public void testTwoFilesInTwoReferencedProjects() throws Exception {
-		createTwoReferencedProjects();
-		IFile firstFile = createFile("first/src/first"+F_EXT, "object First ");
-		createFile("second/src/second"+F_EXT, "object Second references First");
+	@Test
+	public void testDisabled() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, false);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
-		startLogging();
-		firstFile.setContents(new StringInputStream("object Modified "), true, true, monitor());
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertFalse(generatedFile.exists());
+		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, true);
+		file.touch(monitor());
 		waitForAutoBuild();
-		validateContexts();
-		assertEquals(2, getInvocationCount());
+		assertTrue(generatedFile.exists());
+	}
+
+	@Test
+	public void testNoOutputFolderCreation() throws Exception {
+		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
+			@Override
+			public Set<OutputConfiguration> getOutputConfigurations() {
+				final Set<OutputConfiguration> result = super.getOutputConfigurations();
+				OutputConfiguration configuration = result.iterator().next();
+				configuration.setCreateOutputDirectory(false);
+				return result;
+			}
+		};
+		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
+		initializer.initialize(preferenceStoreAccess);
+
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		final IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertFalse(generatedFile.exists());
 	}
 
 	protected void createTwoReferencedProjects() throws CoreException {
@@ -117,11 +330,48 @@ public class BuilderParticipantTest extends AbstractParticipatingBuilderTest {
 		IJavaProject secondProject = createJavaProjectWithRootSrc("second");
 		addProjectReference(secondProject, firstProject);
 	}
-	
+
 	protected IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
 	}
-	
+
+	public static void waitForResourceCleanerJob() {
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(DerivedResourceCleanerJob.DERIVED_RESOURCE_CLEANER_JOB_FAMILY, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	protected String getDefaultOutputDirectoryKey() {
+		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + IFileSystemAccess.DEFAULT_OUTPUT
+				+ PreferenceConstants.SEPARATOR + OUTPUT_DIRECTORY;
+	}
+
+	protected String getNonDefaultEncoding() throws CoreException {
+		String defaultCharset = root().getDefaultCharset();
+		if (equal(defaultCharset, "UTF-8")) {
+			return "ISO-8859-1";
+		} else {
+			return "UTF-8";
+		}
+	}
+
+	protected String getUseOutputPerSourceFolderKey() {
+		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + IFileSystemAccess.DEFAULT_OUTPUT
+				+ PreferenceConstants.SEPARATOR + USE_OUTPUT_PER_SOURCE_FOLDER;
+	}
+
+	protected String getOutputForSourceFolderKey(String sourceFolder) {
+		return BuilderPreferenceAccess.getOutputForSourceFolderKey(new OutputConfiguration(
+				IFileSystemAccess.DEFAULT_OUTPUT), sourceFolder);
+	}
 }

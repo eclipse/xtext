@@ -23,7 +23,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
  * Utility for tests to avoid being based on and doing any side effects to the global registries from EMF.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.GlobalRegistries instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class GlobalRegistries {
 	
 	public static class GlobalStateMemento {

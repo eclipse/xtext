@@ -23,6 +23,7 @@ public class TemplatesTokenDefProvider implements ITokenDefProvider, IAntlrToken
 
 	private ImmutableMap<Integer, String> map;
 
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		if (map == null) {
 			AntlrTokenDefProvider provider = new AntlrTokenDefProvider();
@@ -32,6 +33,7 @@ public class TemplatesTokenDefProvider implements ITokenDefProvider, IAntlrToken
 		return map;
 	}
 
+	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
 		String resourcePath = getClass().getPackage().getName().replace('.', '/') + "/CodetemplatesHighlightingLexer.tokens";

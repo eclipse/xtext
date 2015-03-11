@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Indigo" buildRoot="./Indigo/" packedStrategy="SKIP">
+  <validationSets description="Indigo TP" label="Indigo">
+    <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
+    <contributions label="Indigo">
+      <repositories location="http://download.eclipse.org/eclipse/updates/3.7/">
+        <bundles name="org.eclipse.pde.core" versionRange="[3.7.1.v20120103_r372,3.8.0)"/>
+        <bundles name="org.eclipse.pde.ui" versionRange="[3.6.100.v20120103_r372,3.7.0)"/>
+        <bundles name="org.eclipse.ui.cheatsheets"/>
+        <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
+        <features name="org.eclipse.jdt.feature.group" versionRange="[3.7.0,3.8.0)"/>
+        <features name="org.eclipse.platform.feature.group" versionRange="[3.7.0,3.8.0)"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
+        <bundles name="org.junit4" versionRange="[4.8.1.v20120523-1257]"/>
+        <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
+        <bundles name="org.eclipse.jdt.annotation"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/releases/indigo/">
+        <bundles name="org.eclipse.draw2d.feature.group"/>
+        <bundles name="org.eclipse.m2e.core"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/releases">
+        <features name="org.eclipse.emf.compare.feature.group"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
+</aggregator:Aggregation>

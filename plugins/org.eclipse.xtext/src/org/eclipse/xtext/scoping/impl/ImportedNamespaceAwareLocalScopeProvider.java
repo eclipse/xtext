@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 
@@ -46,7 +46,7 @@ import com.google.inject.Provider;
  * 
  * Imports are valid for all elements in the same container and their children.
  * 
- * See http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping for details.
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping for details.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
@@ -79,6 +79,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		return qualifiedNameProvider;
 	}
 
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
@@ -119,6 +120,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 	protected List<ImportNormalizer> getImportedNamespaceResolvers(final EObject context, final boolean ignoreCase) {
 		return cache.get(Tuples.create(context, ignoreCase, "imports"), context.eResource(), new Provider<List<ImportNormalizer>>() {
+			@Override
 			public List<ImportNormalizer> get() {
 				return internalGetImportedNamespaceResolvers(context, ignoreCase);
 			}
@@ -127,16 +129,25 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
-		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
-				"importedNamespace");
 		EList<EObject> eContents = context.eContents();
 		for (EObject child : eContents) {
-			String value = importResolver.getValue(child);
+			String value = getImportedNamespace(child);
 			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
 			if (resolver != null)
 				importedNamespaceResolvers.add(resolver);
 		}
 		return importedNamespaceResolvers;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String getImportedNamespace(EObject object) {
+		EStructuralFeature feature = object.eClass().getEStructuralFeature("importedNamespace");
+		if (feature != null && String.class.equals(feature.getEType().getInstanceClass())) {
+			return (String) object.eGet(feature);
+		}
+		return null;
 	}
 
 	/**
@@ -159,10 +170,17 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		if (hasWildCard) {
 			if (importedNamespace.getSegmentCount() <= 1)
 				return null;
-			return new ImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
+			return doCreateImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
 		} else {
-			return new ImportNormalizer(importedNamespace, false, ignoreCase);
+			return doCreateImportNormalizer(importedNamespace, false, ignoreCase);
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard, boolean ignoreCase) {
+		return new ImportNormalizer(importedNamespace, wildcard, ignoreCase);
 	}
 
 	protected IScope getLocalElementsScope(IScope parent, final EObject context,
@@ -174,13 +192,13 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name!=null) {
-				ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 				result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 			}
 			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		if (name!=null) {
-			ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 			result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		return result;
@@ -200,6 +218,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 	protected ISelectable getAllDescriptions(final Resource resource) {
 		return cache.get("internalGetAllDescriptions", resource, new Provider<ISelectable>() {
+			@Override
 			public ISelectable get() {
 				return internalGetAllDescriptions(resource);
 			}
@@ -208,6 +227,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	
 	protected ISelectable internalGetAllDescriptions(final Resource resource) {
 		Iterable<EObject> allContents = new Iterable<EObject>(){
+			@Override
 			public Iterator<EObject> iterator() {
 				return EcoreUtil.getAllContents(resource, false);
 			}

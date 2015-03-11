@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.encoding.encodingTest.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.parser.encoding.encodingTest.Word;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.encoding.encodingTest.impl.ModelImpl#getWords <em>Words</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

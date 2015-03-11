@@ -7,90 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import static com.google.common.collect.Maps.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
+ * An extensible implementation of the {@link IResourceSetProvider}.
+ * It accepts a list of contributed {@link IResourceSetInitializer initializers}
+ * which may configure the newly created resource set in the context of the given
+ * {@link IProject project}.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class XtextResourceSetProvider implements IResourceSetProvider {
-
-	private final static Logger LOG = Logger.getLogger(XtextResourceSetProvider.class);
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 
-	public ResourceSet get(IProject project) {
-		XtextResourceSet set = resourceSetProvider.get();
-		IJavaProject javaProject = JavaCore.create(project);
-		if (javaProject != null && javaProject.exists()) {
-			set.getURIConverter().getURIMap().putAll(computePlatformURIMap(javaProject));
-			set.setClasspathURIContext(javaProject);
-			set.setClasspathUriResolver(new JdtClasspathUriResolver());
-		}
-		return set;
+	private ImmutableList<? extends IResourceSetInitializer> initializers = ImmutableList.of();
+
+	@Inject
+	private void setContributions(ISharedStateContributionRegistry contributionRegistry) {
+		initializers = contributionRegistry.getContributedInstances(IResourceSetInitializer.class);
 	}
 
-	protected Map<URI, URI> computePlatformURIMap(IJavaProject javaProject) {
-		HashMap<URI, URI> hashMap = newHashMap(EcorePlugin.computePlatformURIMap());
-		try {
-			if (!javaProject.exists())
-				return hashMap;
-			IClasspathEntry[] classpath = javaProject.getResolvedClasspath(true);
-			for (IClasspathEntry classPathEntry : classpath) {
-				IPath path = classPathEntry.getPath();
-				if (path != null && "jar".equals(path.getFileExtension())) {
-					try {
-						final File file = path.toFile();
-						if (file != null && file.exists()) {
-							JarFile jarFile = new JarFile(file);
-							Manifest manifest = jarFile.getManifest();
-							if (manifest != null) {
-								String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-								if (name != null) {
-									final int indexOf = name.indexOf(';');
-									if (indexOf > 0)
-										name = name.substring(0, indexOf);
-									if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
-										String p = "archive:" + file.toURI() + "!/";
-										URI uri = URI.createURI(p);
-										final URI key = URI.createPlatformResourceURI(name + "/", false);
-										hashMap.put(key, uri);
-									}
-								}
-							}
-						}
-					} catch (IOException e) {
-						LOG.error(e.getMessage(), e);
-					}
-				}
-			}
-		} catch (JavaModelException e) {
-			LOG.error(e.getMessage(), e);
+	@Override
+	public ResourceSet get(IProject project) {
+		XtextResourceSet set = resourceSetProvider.get();
+		for(int i = 0; i < initializers.size(); i++) {
+			initializers.get(i).initialize(set, project);
 		}
-		return hashMap;
+		return set;
 	}
 
 }

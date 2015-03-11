@@ -12,22 +12,22 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalKeywordsUiTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
-    public static final int T__16=16;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__14=14;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__11=11;
-    public static final int T__18=18;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -214,10 +214,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:335:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:335:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:334:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:334:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:335:11: ( '^' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:334:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -226,7 +226,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:335:11: '^'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:334:11: '^'
                     {
                     match('^'); 
 
@@ -244,7 +244,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:335:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:334:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -293,10 +293,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:337:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:337:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:336:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:336:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:337:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:336:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -310,7 +310,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:337:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:336:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -342,10 +342,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -363,10 +363,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -382,23 +382,15 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -423,10 +415,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -442,23 +434,15 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:339:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:338:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -501,12 +485,12 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:341:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:341:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:340:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:340:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:341:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:340:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -531,7 +515,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:341:52: .
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:340:52: .
             	    {
             	    matchAny(); 
 
@@ -561,12 +545,12 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -579,7 +563,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -599,7 +583,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -608,9 +592,9 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -619,7 +603,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:343:41: '\\r'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:342:41: '\\r'
                             {
                             match('\r'); 
 
@@ -651,10 +635,10 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:345:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:345:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:344:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:344:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:345:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:344:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -708,8 +692,8 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:347:16: ( . )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:347:18: .
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:346:16: ( . )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:346:18: .
             {
             matchAny(); 
 
@@ -841,26 +825,19 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\14\1\16\3\12\2\uffff\1\12\2\uffff\1\14\14\uffff\1\14"+
-        "\4\uffff\1\43\6\uffff";
+        "\1\uffff\1\14\1\16\3\12\2\uffff\1\12\2\uffff\1\14\14\uffff\1\14\4\uffff\1\43\6\uffff";
     static final String DFA12_eofS =
         "\44\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\1\142\2\0\1\101\2\uffff\1\52\2\uffff\1\157\3\uffff\2"+
-        "\0\1\uffff\2\0\4\uffff\1\134\4\uffff\1\142\6\uffff";
+        "\1\0\1\157\1\142\2\0\1\101\2\uffff\1\52\2\uffff\1\157\3\uffff\2\0\1\uffff\2\0\4\uffff\1\134\4\uffff\1\142\6\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\1\142\2\uffff\1\172\2\uffff\1\57\2\uffff\1\157\3"+
-        "\uffff\2\uffff\1\uffff\2\uffff\4\uffff\1\134\4\uffff\1\142\6\uffff";
+        "\1\uffff\1\157\1\142\2\uffff\1\172\2\uffff\1\57\2\uffff\1\157\3\uffff\2\uffff\1\uffff\2\uffff\4\uffff\1\134\4\uffff\1\142\6\uffff";
     static final String DFA12_acceptS =
-        "\6\uffff\1\11\1\12\1\uffff\1\16\1\17\1\uffff\1\11\1\3\1\4\2\uffff"+
-        "\1\13\2\uffff\1\12\1\14\1\15\1\16\1\uffff\1\5\1\10\1\6\1\7\1\uffff"+
-        "\1\5\1\10\1\6\1\7\1\1\1\2";
+        "\6\uffff\1\11\1\12\1\uffff\1\16\1\17\1\uffff\1\11\1\3\1\4\2\uffff\1\13\2\uffff\1\12\1\14\1\15\1\16\1\uffff\1\5\1\10\1\6\1\7\1\uffff\1\5\1\10\1\6\1\7\1\1\1\2";
     static final String DFA12_specialS =
-        "\1\5\2\uffff\1\1\1\4\12\uffff\1\0\1\6\1\uffff\1\2\1\3\20\uffff}>";
+        "\1\4\2\uffff\1\2\1\6\12\uffff\1\1\1\5\1\uffff\1\0\1\3\20\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\3\4\12\1\4\7\12\1\10"+
-            "\12\7\7\12\32\6\1\12\1\2\1\12\1\5\1\6\1\12\5\6\1\1\24\6\uff85"+
-            "\12",
+            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\3\4\12\1\4\7\12\1\10\12\7\7\12\32\6\1\12\1\2\1\12\1\5\1\6\1\12\5\6\1\1\24\6\uff85\12",
             "\1\13",
             "\1\15",
             "\141\21\1\17\2\21\1\20\uff9b\21",
@@ -914,7 +891,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -935,6 +912,16 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_18 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA12_18=='\'') ) {s = 27;}
+
+                        else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_15 = input.LA(1);
 
                         s = -1;
@@ -944,7 +931,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA12_3 = input.LA(1);
 
                         s = -1;
@@ -955,16 +942,6 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                         else if ( ((LA12_3>='\u0000' && LA12_3<='`')||(LA12_3>='b' && LA12_3<='c')||(LA12_3>='e' && LA12_3<='\uFFFF')) ) {s = 17;}
 
                         else s = 10;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_18 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA12_18=='\'') ) {s = 27;}
-
-                        else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFF')) ) {s = 17;}
 
                         if ( s>=0 ) return s;
                         break;
@@ -979,20 +956,6 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA12_4 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA12_4=='b') ) {s = 18;}
-
-                        else if ( (LA12_4=='c') ) {s = 19;}
-
-                        else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFF')) ) {s = 17;}
-
-                        else s = 10;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1018,13 +981,27 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 5 : 
                         int LA12_16 = input.LA(1);
 
                         s = -1;
                         if ( (LA12_16=='\"') ) {s = 26;}
 
                         else if ( ((LA12_16>='\u0000' && LA12_16<='!')||(LA12_16>='#' && LA12_16<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA12_4 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA12_4=='b') ) {s = 18;}
+
+                        else if ( (LA12_4=='c') ) {s = 19;}
+
+                        else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFF')) ) {s = 17;}
+
+                        else s = 10;
 
                         if ( s>=0 ) return s;
                         break;

@@ -11,6 +11,7 @@ package org.eclipse.xtext.scoping;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
@@ -30,7 +31,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 /**
- * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
+ * This class contains static utility functions to create and work on {@link IScope} and {@link IEObjectDescription}
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
@@ -39,6 +40,7 @@ public class Scopes {
 
 	public static Iterable<IEObjectDescription> selectCompatible(Iterable<IEObjectDescription> exportedObjects, final EClass clazz) {
 		return Iterables.filter(exportedObjects, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 			}
@@ -69,8 +71,8 @@ public class Scopes {
 	}
 
 	/**
-	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
-	 * the {@link EAttribute} 'name' to compute the {@link IScopedElement}'s name. If not existent the object is
+	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IEObjectDescription}s computing
+	 * the {@link EAttribute} 'name' to compute the {@link IEObjectDescription}'s name. If not existent the object is
 	 * filtered out.
 	 */
 	public static Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends EObject> elements) {
@@ -78,7 +80,7 @@ public class Scopes {
 	}
 
 	/**
-	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
+	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IEObjectDescription}s computing
 	 * the name of the elements using the passed {@link Function} If the passed function returns null the object is
 	 * filtered out.
 	 */
@@ -86,6 +88,7 @@ public class Scopes {
 			final Function<T, QualifiedName> nameComputation) {
 		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
 				new Function<T, IEObjectDescription>() {
+					@Override
 					public IEObjectDescription apply(T from) {
 						final QualifiedName qualifiedName = nameComputation.apply(from);
 						if (qualifiedName != null)
@@ -113,6 +116,7 @@ public class Scopes {
 	 */
 	public static Multimap<QualifiedName,IEObjectDescription> index(Iterable<IEObjectDescription> descriptions) {
 		return index(descriptions, new Function<IEObjectDescription, QualifiedName>() {
+			@Override
 			public QualifiedName apply(IEObjectDescription from) {
 				return from.getName().toLowerCase();
 			}

@@ -138,6 +138,7 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 				});
 			}
 			checkBoxBox.addDisposeListener(new DisposeListener() {
+				@Override
 				public void widgetDisposed(DisposeEvent event) {
 					checkBoxBox = null;
 					checkBoxButtons = null;
@@ -197,7 +198,6 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 	@Override
 	protected void doStore() {
 		if (result == null) {
-			getPreferenceStore().setToDefault(getPreferenceName());
 			return;
 		}
 		getPreferenceStore().setValue(getPreferenceName(), result);

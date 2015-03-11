@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Railroad Diagram Plugin
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.graph;singleton:=true
-Bundle-Version: 2.0.1.qualifier
+Bundle-Version: 2.8.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext.xtext.ui.graph.actions,
  org.eclipse.xtext.xtext.ui.graph.bundle,
@@ -13,14 +13,13 @@ Export-Package: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext.xtext.ui.graph.figures.layouts,
  org.eclipse.xtext.xtext.ui.graph.figures.primitives,
  org.eclipse.xtext.xtext.ui.graph.trafo
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
- org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.eclipse.ui;bundle-version="3.5.0",
- org.eclipse.xtext;bundle-version="1.0.0",
- org.eclipse.core.resources;bundle-version="3.5.0",
- com.google.collect;bundle-version="1.0.0",
- org.eclipse.xtext.ui.shared;bundle-version="1.0.0",
- org.eclipse.xtext.ui;bundle-version="1.0.0",
- org.eclipse.draw2d;bundle-version="3.5.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0",
+ org.eclipse.emf.ecore;bundle-version="2.10.2",
+ org.eclipse.ui;bundle-version="3.6.0",
+ org.eclipse.xtext,
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui,
+ org.eclipse.draw2d;bundle-version="3.5.2"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.xtext.ui.graph.bundle.Activator

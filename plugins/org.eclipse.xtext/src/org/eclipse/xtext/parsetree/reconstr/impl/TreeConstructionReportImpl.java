@@ -54,6 +54,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 		protected StringBuilder builder;
 
+		@Override
 		public void error(String message) {
 			if (builder == null)
 				builder = new StringBuilder();
@@ -96,10 +97,12 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 			this.deadend = deadend;
 		}
 
+		@Override
 		public EObject getEObject() {
 			return deadend.getEObjectConsumer().getEObject();
 		}
 
+		@Override
 		public String getLikelyErrorReasons() {
 			return getLikelyErrorReasons("");
 		}
@@ -132,6 +135,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	protected SortedSet<Pair<Integer, AbstractToken>> deadends = Sets
 			.newTreeSet(new Comparator<Pair<Integer, AbstractToken>>() {
+				@Override
 				public int compare(Pair<Integer, AbstractToken> o1, Pair<Integer, AbstractToken> o2) {
 					return o1.getFirst().compareTo(o2.getFirst());
 				}
@@ -277,6 +281,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		}
 	}
 
+	@Override
 	public List<TreeConstructionDiagnostic> getDiagnostics() {
 		if (isSuccess())
 			return null;
@@ -286,6 +291,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return result;
 	}
 
+	@Override
 	public ITextRegion getPreviousLocation() {
 		return previousLocation;
 	}
@@ -294,6 +300,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return success;
 	}
 
+	@Override
 	public boolean isSuccess() {
 		return success != null;
 	}

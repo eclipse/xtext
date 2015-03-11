@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Model#getFix <em>Fix</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Model#getError <em>Error</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Model#getTick <em>Tick</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Bug292245TestLanguagePackage#getModel()
  * @model

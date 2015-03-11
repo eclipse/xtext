@@ -7,11 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import org.apache.log4j.Level;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.junit4.logging.LoggingTester.LogCapture;
+import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,12 +28,12 @@ public class Bug281990Test extends AbstractXtextTests {
 	public static class RecursiveScopeProvider extends LazyLinkingTestLanguageScopeProvider {
 		public IScope scope_Type_extends(Type t, EReference ref) {
 			t.getParentId();
-			return IScope.NULLSCOPE;
+			throw new AssertionError("Should never be thrown, because the call to ParentId will throw a CyclicLinkingException already.");
 		}
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LazyLinkingTestLanguageRuntimeModule() {
 			@Override
@@ -37,12 +44,19 @@ public class Bug281990Test extends AbstractXtextTests {
 		new LazyLinkingTestLanguageStandaloneSetup().register(getInjector());
 	}
 
-	public void testRecursionErrorMessage() throws Exception {
-		try {
-			getModel("type Foo extends Foo.bar { Foo foo; }");
-			fail("Exception expected.");
-		} catch (AssertionError e) {
-			assertTrue(e.getMessage().startsWith("Cyclic"));
-		}
+	@Test public void testRecursionErrorMessage() throws Exception {
+		LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, LazyLinkingResource.class, new Runnable() {
+			@Override
+			public void run() {
+				try {
+					EObject model = getModelAndExpect("type Foo extends Foo.bar { Foo foo; }", 2);
+					assertTrue(((Model)model).getTypes().get(0).getParentId().eIsProxy());
+					assertTrue(model.eResource().getErrors().get(0).getMessage().contains("Couldn't"));
+				} catch (Exception e) {
+					throw Exceptions.sneakyThrow(e);
+				}
+			}
+		});
+		loggings.assertNumberOfLogEntries(1);
 	}
 }

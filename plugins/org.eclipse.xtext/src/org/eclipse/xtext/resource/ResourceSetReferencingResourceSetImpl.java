@@ -26,6 +26,7 @@ public class ResourceSetReferencingResourceSetImpl extends XtextResourceSet impl
 
 	private final List<ResourceSet> referencedResourceSets = new ArrayList<ResourceSet>();
 
+	@Override
 	public List<ResourceSet> getReferencedResourceSets() {
 		return referencedResourceSets;
 	}

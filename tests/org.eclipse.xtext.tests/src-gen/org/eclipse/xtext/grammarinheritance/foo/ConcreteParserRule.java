@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.foo;
 
@@ -16,11 +13,11 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.ConcreteParserRule#getMagicNumber <em>Magic Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.ConcreteParserRule#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.grammarinheritance.foo.FooPackage#getConcreteParserRule()
  * @model

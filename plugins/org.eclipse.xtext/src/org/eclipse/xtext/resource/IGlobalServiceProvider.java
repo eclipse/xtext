@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
@@ -42,6 +43,7 @@ public interface IGlobalServiceProvider {
 			this.thisLanguageServiceProvider = thisLanguageServiceProvider;
 		}
 
+		@Override
 		public <T> T findService(URI uri, Class<T> serviceClazz) {
 			if (thisLanguageServiceProvider.canHandle(uri))
 				return thisLanguageServiceProvider.get(serviceClazz);
@@ -52,12 +54,16 @@ public interface IGlobalServiceProvider {
 			return result;
 		}
 
+		@Override
 		public <T> T findService(EObject eObject, Class<T> serviceClazz) {
 			if (eObject.eIsProxy()) {
 				return findService(((InternalEObject)eObject).eProxyURI(),serviceClazz);
 			} else {
-				return findService(eObject.eResource().getURI(),serviceClazz);
+				Resource eResource = eObject.eResource();
+				if(eResource != null)
+					return findService(eResource.getURI(),serviceClazz);
 			}
+			return null;
 		}
 		
 	}

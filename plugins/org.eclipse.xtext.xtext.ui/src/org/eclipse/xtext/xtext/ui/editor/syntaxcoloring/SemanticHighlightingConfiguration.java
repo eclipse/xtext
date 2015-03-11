@@ -23,6 +23,7 @@ public class SemanticHighlightingConfiguration extends DefaultHighlightingConfig
 	public static final String DATA_TYPE_RULE_ID = "DataTypeIndicator"; //$NON-NLS-1$
 	public static final String UNUSED_VALUE_ID = "UnusedValue"; //$NON-NLS-1$
 	public static final String NEVER_CALLED_RULE_ID = "NeverCalledRule"; //$NON-NLS-1$
+	public static final String SPECIAL_ATTRIBUTE_ID = "SpecialFeature"; //$NON-NLS-1$
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -32,6 +33,7 @@ public class SemanticHighlightingConfiguration extends DefaultHighlightingConfig
 		acceptor.acceptDefaultHighlighting(DATA_TYPE_RULE_ID, Messages.SemanticHighlightingConfiguration_7, dataTypeRule());
 		acceptor.acceptDefaultHighlighting(UNUSED_VALUE_ID, Messages.SemanticHighlightingConfiguration_8, unusedValue());
 		acceptor.acceptDefaultHighlighting(NEVER_CALLED_RULE_ID, Messages.SemanticHighlightingConfiguration_9, unusedRule());
+		acceptor.acceptDefaultHighlighting(SPECIAL_ATTRIBUTE_ID, Messages.SemanticHighlightingConfiguration_10, specialAttribute());
 	}
 
 	public TextStyle typeReference() {
@@ -57,5 +59,13 @@ public class SemanticHighlightingConfiguration extends DefaultHighlightingConfig
 		textStyle.setColor(new RGB(128, 128, 128));
 		return textStyle;
 	}
+	
+	public TextStyle specialAttribute(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(171, 48, 0));
+		return textStyle;
+	}
+	
+
 	
 }

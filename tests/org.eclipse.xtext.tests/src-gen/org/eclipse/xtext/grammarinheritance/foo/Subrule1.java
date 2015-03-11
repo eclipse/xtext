@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.foo;
 
@@ -14,10 +11,10 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.Subrule1#getSub1 <em>Sub1</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.grammarinheritance.foo.FooPackage#getSubrule1()
  * @model

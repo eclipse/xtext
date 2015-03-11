@@ -15,6 +15,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractTransientValueService implements ITransientValueService {
+	@Override
 	public boolean isCheckElementsIndividually(EObject owner, EStructuralFeature feature) {
 		return false;
 	}

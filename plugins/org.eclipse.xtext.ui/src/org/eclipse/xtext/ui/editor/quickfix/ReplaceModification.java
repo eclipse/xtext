@@ -25,6 +25,7 @@ public class ReplaceModification implements IModification {
 		this.replacement = replacement;
 	}
 	
+	@Override
 	public void apply(IModificationContext context) throws BadLocationException {
 		context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), replacement);
 	}

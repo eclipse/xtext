@@ -1,0 +1,134 @@
+package org.eclipse.xtend.core.tests.macro;
+
+import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
+import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.IAcceptor;
+import org.junit.Assert;
+import org.junit.Test;
+
+@SuppressWarnings("all")
+public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
+  @Test
+  public void testTrimEmptyLines() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.core.tests.macro.ArtificialMethods");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@ArtificialMethods");
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
+      public void accept(final XtendCompilerTester.CompilationResult it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("import java.math.BigDecimal;");
+        _builder.newLine();
+        _builder.append("import java.util.ArrayList;");
+        _builder.newLine();
+        _builder.append("import java.util.List;");
+        _builder.newLine();
+        _builder.append("import org.eclipse.xtend.core.tests.macro.ArtificialMethods;");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("@ArtificialMethods");
+        _builder.newLine();
+        _builder.append("@SuppressWarnings(\"all\")");
+        _builder.newLine();
+        _builder.append("public class A {");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_1() {");
+        _builder.newLine();
+        _builder.append("    \t\t\t\t");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_2() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_3() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_4() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("int foo = 42;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_5() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("int foo = 42;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_6() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("int foo = 42;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("public void blank_7() {");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("List<? extends Object> list = new ArrayList<BigDecimal>();");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _generatedCode = it.getGeneratedCode("A");
+        Assert.assertEquals(_string, _generatedCode);
+      }
+    };
+    this._xtendCompilerTester.compile(_builder, _function);
+  }
+}

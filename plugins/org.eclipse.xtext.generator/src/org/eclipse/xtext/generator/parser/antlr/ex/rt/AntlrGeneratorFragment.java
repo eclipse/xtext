@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -56,6 +57,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		KeywordHelper helper = new KeywordHelper(grammar, getOptions().isIgnoreCase());
 		super.generate(grammar, ctx);
 		final String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN);
 		final String lexerBaseFileName = srcGenPath+"/"+getFragmentHelper().getLexerGrammarFileName(grammar).replace('.', '/');
 		String libPath = lexerBaseFileName;
 		libPath = libPath.substring(0, libPath.lastIndexOf('/'));
@@ -65,16 +67,18 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		addAntlrParam(absoluteParserFileName.substring(0, absoluteParserFileName.lastIndexOf('/')));
 		String[] lexerAntlrParams = getAntlrParams();
 		lexerAntlrParams[lexerAntlrParams.length - 1] = absoluteLexerFileName.substring(0, absoluteLexerFileName.lastIndexOf('/'));
-		getAntlrTool().runWithParams(absoluteLexerFileName, lexerAntlrParams);
-		cleanupLexerTokensFile(lexerBaseFileName);
+		getAntlrTool().runWithEncodingAndParams(absoluteLexerFileName, encoding, lexerAntlrParams);
+		cleanupLexerTokensFile(lexerBaseFileName, helper, encoding);
 		addAntlrParam("-lib");
 		addAntlrParam(libPath);
-		getAntlrTool().runWithParams(absoluteParserFileName, getAntlrParams());
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName);
-		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName);
-		suppressWarnings(absoluteLexerFileName, absoluteParserFileName);
-
-		MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName);
+		getAntlrTool().runWithEncodingAndParams(absoluteParserFileName, encoding, getAntlrParams());
+		Charset charset = Charset.forName(encoding);
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName, charset);
+		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName, charset);
+		suppressWarnings(absoluteLexerFileName, absoluteParserFileName, charset);
+		normalizeLineDelimiters(absoluteLexerFileName, absoluteParserFileName, charset);
+		normalizeTokens(absoluteParserFileName, charset);
+		MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName, helper, charset);
 		for(Map.Entry<Integer, String> entry: provider.getTokenDefMap().entrySet()) {
 			String value = entry.getValue();
 			if(helper.isKeywordRule(value)) {
@@ -86,17 +90,30 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 			}
 		}
 		try {
-			provider.writeTokenFile(new PrintWriter(new File(srcGenPath+"/"+getFragmentHelper().getParserGrammarFileName(grammar).replace('.', '/') + ".tokens")));
+			provider.writeTokenFile(new PrintWriter(new File(srcGenPath+"/"+getFragmentHelper().getParserGrammarFileName(grammar).replace('.', '/') + ".tokens"), encoding));
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		normalizeTokens(absoluteLexerFileName, charset);
 		helper.discardHelper(grammar);
 	}
-
+	
+	/**
+	 * @deprecated use {@link #createLexerTokensProvider(String, Charset)} instead
+	 */
+	@Deprecated
 	protected MutableTokenDefProvider createLexerTokensProvider(final String lexerBaseFileName) {
-		MutableTokenDefProvider provider = new MutableTokenDefProvider();
+		return createLexerTokensProvider(lexerBaseFileName, null, Charset.defaultCharset());
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected MutableTokenDefProvider createLexerTokensProvider(final String lexerBaseFileName, KeywordHelper helper, Charset encoding) {
+		MutableTokenDefProvider provider = new MutableTokenDefProvider(helper, encoding);
 		provider.setAntlrTokenFileProvider(new IAntlrTokenFileProvider() {
+			@Override
 			public InputStream getAntlrTokenFile() {
 				try {
 					return new FileInputStream(lexerBaseFileName + ".tokens");
@@ -108,10 +125,14 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		});
 		return provider;
 	}
-
+	
+	/**
+	 * @deprecated use {@link #cleanupLexerTokensFile(String, KeywordHelper, String)} instead.
+	 */
+	@Deprecated
 	protected void cleanupLexerTokensFile(String lexerBaseFileName) {
 		if (getOptions().isBacktrackLexer()) {
-			MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName);
+			MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName, null, Charset.defaultCharset());
 			Iterator<Entry<Integer, String>> entries = provider.getTokenDefMap().entrySet().iterator();
 			while(entries.hasNext()) {
 				String value = entries.next().getValue();
@@ -119,7 +140,28 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 					entries.remove();
 			}
 			try {
-				provider.writeTokenFile(new PrintWriter(new File(lexerBaseFileName + ".tokens")));
+				provider.writeTokenFile(new PrintWriter(new File(lexerBaseFileName + ".tokens"), Charset.defaultCharset().name()));
+			}
+			catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void cleanupLexerTokensFile(String lexerBaseFileName, KeywordHelper helper, String encoding) {
+		if (getOptions().isBacktrackLexer()) {
+			MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName, helper, Charset.forName(encoding));
+			Iterator<Entry<Integer, String>> entries = provider.getTokenDefMap().entrySet().iterator();
+			while(entries.hasNext()) {
+				String value = entries.next().getValue();
+				if (!helper.isKeywordRule(value) && !value.startsWith("RULE_"))
+					entries.remove();
+			}
+			try {
+				provider.writeTokenFile(new PrintWriter(new File(lexerBaseFileName + ".tokens"), encoding));
 			}
 			catch (IOException e) {
 				throw new RuntimeException(e);

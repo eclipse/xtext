@@ -32,14 +32,17 @@ public class URIBasedTestResourceDescription extends AbstractResourceDescription
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}

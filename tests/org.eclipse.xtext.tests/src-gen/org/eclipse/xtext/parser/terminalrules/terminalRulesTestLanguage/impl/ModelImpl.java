@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl;
 
@@ -21,6 +18,7 @@ import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Terminal
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getIdValue <em>Id Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getIntValue <em>Int Value</em>}</li>
@@ -31,7 +29,6 @@ import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Terminal
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getWsValue <em>Ws Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getAnyValue <em>Any Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

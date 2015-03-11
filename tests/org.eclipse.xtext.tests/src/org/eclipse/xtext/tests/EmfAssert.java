@@ -7,15 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.tests;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import junit.framework.ComparisonFailure;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +22,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.junit.ComparisonFailure;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -32,18 +31,18 @@ public class EmfAssert {
 
 	static final Pattern SPACE = Pattern.compile("[\\s\\n\\r]+");
 
-	public static void assertTokensEqual(String msg, String expected,
-			String actual) {
-		if (expected == null) {
+	public static void assertTokensEqual(String msg, String expectedP,
+			String actualP) {
+		if (expectedP == null) {
 			fail("expected is null");
 			return;
 		}
-		if (actual == null) {
+		if (actualP == null) {
 			fail("actual is null");
 			return;
 		}
-		expected = expected.trim();
-		actual = actual.trim();
+		String expected = expectedP.trim();
+		String actual = actualP.trim();
 		Matcher expM = SPACE.matcher(expected);
 		Matcher actM = SPACE.matcher(actual);
 		int expS = 0, actS = 0;

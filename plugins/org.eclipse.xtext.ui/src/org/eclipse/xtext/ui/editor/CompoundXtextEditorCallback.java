@@ -43,6 +43,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		}
 	}
 
+	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {
@@ -53,6 +54,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		}
 	}
 
+	@Override
 	public void afterSave(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {
@@ -63,6 +65,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		}
 	}
 
+	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {
@@ -73,6 +76,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		}
 	}
 
+	@Override
 	public boolean onValidateEditorInputState(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {
@@ -86,6 +90,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		return true;
 	}
 
+	@Override
 	public void beforeSetInput(XtextEditor xtextEditor) {
 		for (int i = editorCallbacks.size() - 1; i >= 0; i--) {
 			try {
@@ -96,6 +101,7 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		}
 	}
 
+	@Override
 	public void afterSetInput(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {
@@ -105,5 +111,4 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 			}
 		}
 	}
-
 }

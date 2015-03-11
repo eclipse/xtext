@@ -7,40 +7,54 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
+public class DefaultResourceUIServiceProvider implements IResourceServiceProviderExtension, IResourceUIServiceProvider, IResourceUIServiceProviderExtension {
 
 	private IResourceServiceProvider delegate;
+	
+	@Inject
+	private IJdtHelper jdtHelper;
+	
+	@Inject
+	private IStorage2UriMapper storage2UriMapper;
 
 	@Inject
 	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public Manager getContainerManager() {
 		return delegate.getContainerManager();
 	}
 
+	@Override
 	public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
 		return delegate.getResourceDescriptionManager();
 	}
 
+	@Override
 	public IResourceValidator getResourceValidator() {
 		return delegate.getResourceValidator();
 	}
@@ -49,6 +63,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@ResourceServiceDescriptionLabelProvider
 	private ILabelProvider descriptionLabelProvider;
 
+	@Override
 	public ILabelProvider getLabelProvider() {
 		return descriptionLabelProvider;
 	}
@@ -57,17 +72,58 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		this.descriptionLabelProvider = descriptionLabelProvider;
 	}
 
+	@Override
 	public boolean canHandle(URI uri) {
-		return delegate.canHandle(uri);
+		boolean result = delegate.canHandle(uri);
+		return result;
 	}
 
+	/**
+	 * Compute whether the given storage is interesting in the context of Xtext.
+	 * By default, it will delegate to {@link #canHandle(URI)} and perform a subsequent
+	 * check to filter storages from Java target folders.
+	 * @return <code>true</code> if the <code>uri / storage</code> pair should be processed.
+	 */
+	@Override
 	public boolean canHandle(URI uri, IStorage storage) {
-		return delegate.canHandle(uri);
+		if (delegate.canHandle(uri)) {
+			if (isJavaCoreAvailable()) {
+				return !isJavaTargetFolder(storage);
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public boolean canBuild(URI uri, IStorage storage) {
+		return canHandle(uri, storage);
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isJavaCoreAvailable() {
+		return jdtHelper.isJavaCoreAvailable();
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isJavaTargetFolder(IStorage storage) {
+		if (storage instanceof IResource) {
+			return jdtHelper.isFromOutputPath((IResource) storage);
+		}
+		return false;
 	}
 
 	@Inject 
 	private IEncodingProvider encodingProvider;
 	
+	@Override
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
@@ -76,22 +132,43 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@LanguageSpecific
 	private IURIEditorOpener uriEditorOpener;
 
+	@Override
 	public IURIEditorOpener getURIEditorOpener() {
 		return uriEditorOpener;
 	}
 	
 	/**
-	 * @deprecation use <code>get(IReferenceUpdater.class)</code> instead
+	 * @deprecated use <code>get(IReferenceUpdater.class)</code> instead
 	 */
+	@Override
 	@Deprecated
 	public IReferenceUpdater getReferenceUpdater() {
 		return get(IReferenceUpdater.class);
 	}
 	
-	@Inject
-	private Injector injector;
-	
+	@Override
 	public <T> T get(Class<T> t) {
-		return injector.getInstance(t);
+		return delegate.get(t);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public boolean isReadOnly(URI uri) {
+		if (delegate instanceof IResourceServiceProviderExtension) {
+			if (((IResourceServiceProviderExtension) delegate).isReadOnly(uri))
+				return true;
+		}
+		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri);
+		for (Pair<IStorage, IProject> pair : storages) {
+			IStorage storage = pair.getFirst();
+			if (storage instanceof IFile) {
+				return storage.isReadOnly();
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -7,51 +7,52 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-
-import java.io.InputStream;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockTest implements IJavaProjectProvider {
+public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockTest {
 
 	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition,
-					String... expectedText) throws Exception {
-				append("\n}");
-				return super.assertTextAtCursorPosition(cursorPosition, expectedText);
-			}
-		};
-		return builder.appendNl("{");
+	protected String getPrefix() {
+		return "{";
+	}
+	
+	@Override
+	protected String getSuffix() {
+		return "\n}";
 	}
 	
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";
 
 	private IProject demandCreateProject;
+	
+	private static IProject staticProject;
+	
+	@BeforeClass
+	public static void createTestProject() throws Exception {
+		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
+		doInitFeatures(JavaCore.create(staticProject));
+	}
+	
+	@AfterClass
+	public static void deleteTestProject() throws Exception {
+		deleteProject(staticProject);
+	}
 	
 	@Override
 	protected Injector getInjector() {
@@ -59,7 +60,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
@@ -70,12 +71,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 		return false;
 	}
 	
-	protected void initializeTypeProvider(XtextResource result) {
-		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-	}
-	
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
@@ -89,29 +85,4 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 		return javaProject;
 	}
 	
-	@Override
-	public XtextResource getResourceFor(InputStream stream) {
-		XtextResource result = super.getResourceFor(stream);
-		initializeTypeProvider(result);
-		return result;
-	}
-	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(ContentAssistInBlockTest.class)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
-				
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
 }

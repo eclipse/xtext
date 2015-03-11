@@ -8,21 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo;
+import org.junit.Test;
 
 public class MetamodelRefTest extends AbstractXtextTests {
 
     @Override
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         with(new MetamodelRefTestLanguageStandaloneSetup());
     }
 
-    public void testStuff() throws Exception {
-        Object parse = getModelAndExpect("foo bar", 1);
-        assertWithXtend("'org::eclipse::xtext::metamodelreferencing::tests::anotherSimpleTest::impl::FooImpl'", 
-        		"metaType.name", parse);
-        assertWithXtend("'org::eclipse::xtext::impl::RuleCallImpl'", "nameRefs.first().metaType.name", parse);
+    @Test public void testStuff() throws Exception {
+        Foo parse = (Foo) getModelAndExpect("foo bar", 1);
+        assertEquals(1, parse.getNameRefs().size());
     }
 
 }

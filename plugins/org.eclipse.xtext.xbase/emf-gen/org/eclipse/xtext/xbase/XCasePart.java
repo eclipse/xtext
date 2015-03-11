@@ -1,11 +1,14 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -13,20 +16,27 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * A representation of the model object '<em><b>XCase Part</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getCase <em>Case</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getTypeGuard <em>Type Guard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XCasePart#isFallThrough <em>Fall Through</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXCasePart()
  * @model
  * @generated
  */
-public interface XCasePart extends JvmIdentifiableElement
+public interface XCasePart extends EObject
 {
 	/**
 	 * Returns the value of the '<em><b>Case</b></em>' containment reference.
@@ -105,5 +115,31 @@ public interface XCasePart extends JvmIdentifiableElement
 	 * @generated
 	 */
 	void setTypeGuard(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Fall Through</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Fall Through</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Fall Through</em>' attribute.
+	 * @see #setFallThrough(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXCasePart_FallThrough()
+	 * @model
+	 * @generated
+	 */
+	boolean isFallThrough();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XCasePart#isFallThrough <em>Fall Through</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Fall Through</em>' attribute.
+	 * @see #isFallThrough()
+	 * @generated
+	 */
+	void setFallThrough(boolean value);
 
 } // XCasePart

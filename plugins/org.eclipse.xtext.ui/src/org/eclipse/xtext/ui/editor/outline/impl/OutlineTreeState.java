@@ -45,6 +45,7 @@ public class OutlineTreeState {
 	protected Set<IOutlineNode> getExpandedNodes(final TreeViewer treeViewer) {
 		final Set<IOutlineNode> expandedNodes = Sets.newHashSet();
 		DisplayRunHelper.runSyncInDisplayThread(new Runnable() {
+			@Override
 			public void run() {
 				if (!treeViewer.getTree().isDisposed()) {
 					Object[] expandedElements = treeViewer.getExpandedElements();
@@ -62,6 +63,7 @@ public class OutlineTreeState {
 
 	protected Set<IOutlineNode> getSelectedNodes(final TreeViewer treeViewer) {
 		DisplayRunHelper.runSyncInDisplayThread(new Runnable() {
+			@Override
 			public void run() {
 				selectedNodes = Sets.newHashSet();
 				ISelection selection = treeViewer.getSelection();

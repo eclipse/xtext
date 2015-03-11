@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest;
 
@@ -18,11 +15,11 @@ import org.eclipse.xtext.RuleCall;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo#getNameRefs <em>Name Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage#getFoo()
  * @model

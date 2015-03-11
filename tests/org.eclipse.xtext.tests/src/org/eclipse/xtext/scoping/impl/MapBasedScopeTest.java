@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 
@@ -25,14 +26,14 @@ public class MapBasedScopeTest extends AbstractScopeTest {
 	}
 	
 	@Override
-	public void testByNameWithDuplicate_01() {
+	@Test public void testByNameWithDuplicate_01() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB_as_A, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionA), scope.getElements(descriptionA.getName()));
 		assertEqualElements(Collections.singleton(descriptionB), scope.getElements(descriptionB.getName()));
 	}
 	
 	@Override
-	public void testByNameWithDuplicate_02() {
+	@Test public void testByNameWithDuplicate_02() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionB_as_A), scope.getElements(descriptionA.getName()));
 		assertEqualElements(Collections.singleton(descriptionB), scope.getElements(descriptionB.getName()));

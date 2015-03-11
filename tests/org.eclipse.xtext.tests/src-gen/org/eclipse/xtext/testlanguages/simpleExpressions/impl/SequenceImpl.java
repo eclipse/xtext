@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.impl;
 
@@ -19,7 +16,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.testlanguages.simpleExpressions.Expression;
 import org.eclipse.xtext.testlanguages.simpleExpressions.Sequence;
 import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage;
 
@@ -29,10 +25,10 @@ import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackag
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.impl.SequenceImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -46,7 +42,7 @@ public class SequenceImpl extends MinimalEObjectImpl.Container implements Sequen
    * @generated
    * @ordered
    */
-  protected EList<Expression> expressions;
+  protected EList<Sequence> expressions;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,11 +70,11 @@ public class SequenceImpl extends MinimalEObjectImpl.Container implements Sequen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Expression> getExpressions()
+  public EList<Sequence> getExpressions()
   {
     if (expressions == null)
     {
-      expressions = new EObjectContainmentEList<Expression>(Expression.class, this, SimpleExpressionsPackage.SEQUENCE__EXPRESSIONS);
+      expressions = new EObjectContainmentEList<Sequence>(Sequence.class, this, SimpleExpressionsPackage.SEQUENCE__EXPRESSIONS);
     }
     return expressions;
   }
@@ -128,7 +124,7 @@ public class SequenceImpl extends MinimalEObjectImpl.Container implements Sequen
     {
       case SimpleExpressionsPackage.SEQUENCE__EXPRESSIONS:
         getExpressions().clear();
-        getExpressions().addAll((Collection<? extends Expression>)newValue);
+        getExpressions().addAll((Collection<? extends Sequence>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

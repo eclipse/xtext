@@ -27,11 +27,13 @@ public interface ISemanticNodeProvider {
 	}
 
 	public class NullNodesForEObjectProvider implements INodesForEObjectProvider {
+		@Override
 		public INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexAmongNonTransient,
 				Object value) {
 			return null;
 		}
 
+		@Override
 		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
 			return null;
 		}
@@ -39,6 +41,6 @@ public interface ISemanticNodeProvider {
 
 	public INodesForEObjectProvider NULL_NODES_PROVIDER = new NullNodesForEObjectProvider();
 
-	INodesForEObjectProvider getNodesForSemanticObject(EObject semanitcObject, ICompositeNode suggestedComposite);
+	INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject, ICompositeNode suggestedComposite);
 
 }

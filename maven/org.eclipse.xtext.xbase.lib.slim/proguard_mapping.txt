@@ -1,0 +1,2653 @@
+com.google.common.base.Function -> org.eclipse.xtext.xbase.lib.internal.a:
+    java.lang.Object apply(java.lang.Object) -> apply
+com.google.common.base.Joiner -> org.eclipse.xtext.xbase.lib.internal.b:
+    java.lang.String separator -> separator
+    71:71:com.google.common.base.Joiner on(java.lang.String) -> on
+    121:129:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
+    169:169:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.lang.Iterable) -> appendTo
+    181:185:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
+    226:226:java.lang.String join(java.lang.Iterable) -> join
+    236:236:java.lang.String join(java.util.Iterator) -> join
+    261:262:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
+    329:329:com.google.common.base.Joiner$MapJoiner withKeyValueSeparator(java.lang.String) -> withKeyValueSeparator
+    535:536:java.lang.CharSequence toString(java.lang.Object) -> toString
+    66:66:java.lang.String access$100(com.google.common.base.Joiner) -> access$100
+com.google.common.base.Joiner$1 -> org.eclipse.xtext.xbase.lib.internal.b$1:
+    java.lang.String val$nullText -> val$nullText
+    com.google.common.base.Joiner this$0 -> this$0
+    265:265:java.lang.CharSequence toString(java.lang.Object) -> toString
+    270:271:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
+com.google.common.base.Joiner$MapJoiner -> org.eclipse.xtext.xbase.lib.internal.b$a:
+    com.google.common.base.Joiner joiner -> joiner
+    java.lang.String keyValueSeparator -> keyValueSeparator
+    373:373:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Map) -> appendTo
+    422:436:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
+    465:465:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.lang.Iterable) -> appendTo
+    478:482:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
+com.google.common.base.Objects -> org.eclipse.xtext.xbase.lib.internal.c:
+    55:55:boolean equal(java.lang.Object,java.lang.Object) -> equal
+com.google.common.base.Preconditions -> org.eclipse.xtext.xbase.lib.internal.d:
+    75:78:void checkArgument(boolean) -> checkArgument
+    90:93:void checkArgument(boolean,java.lang.Object) -> checkArgument
+    116:119:void checkArgument(boolean,java.lang.String,java.lang.Object[]) -> checkArgument
+    129:132:void checkState(boolean) -> checkState
+    144:147:void checkState(boolean,java.lang.Object) -> checkState
+    184:187:java.lang.Object checkNotNull(java.lang.Object) -> checkNotNull
+    201:204:java.lang.Object checkNotNull(java.lang.Object,java.lang.Object) -> checkNotNull
+    226:230:java.lang.Object checkNotNull(java.lang.Object,java.lang.String,java.lang.Object[]) -> checkNotNull
+    276:276:int checkElementIndex(int,int) -> checkElementIndex
+    295:298:int checkElementIndex(int,int,java.lang.String) -> checkElementIndex
+    302:307:java.lang.String badElementIndex(int,int,java.lang.String) -> badElementIndex
+    325:325:int checkPositionIndex(int,int) -> checkPositionIndex
+    344:347:int checkPositionIndex(int,int,java.lang.String) -> checkPositionIndex
+    351:356:java.lang.String badPositionIndex(int,int,java.lang.String) -> badPositionIndex
+    376:379:void checkPositionIndexes(int,int,int) -> checkPositionIndexes
+    382:389:java.lang.String badPositionIndexes(int,int,int) -> badPositionIndexes
+    406:434:java.lang.String format(java.lang.String,java.lang.Object[]) -> format
+com.google.common.base.Predicate -> org.eclipse.xtext.xbase.lib.internal.e:
+    boolean apply(java.lang.Object) -> apply
+com.google.common.base.Predicates -> org.eclipse.xtext.xbase.lib.internal.f:
+    com.google.common.base.Joiner COMMA_JOINER -> COMMA_JOINER
+    85:85:com.google.common.base.Predicate notNull() -> notNull
+    129:129:com.google.common.base.Predicate and(com.google.common.base.Predicate,com.google.common.base.Predicate) -> and
+    193:193:com.google.common.base.Predicate instanceOf(java.lang.Class) -> instanceOf
+    647:647:java.util.List asList(com.google.common.base.Predicate,com.google.common.base.Predicate) -> asList
+    48:48:com.google.common.base.Joiner access$800() -> access$800
+com.google.common.base.Predicates$1 -> org.eclipse.xtext.xbase.lib.internal.f$1:
+com.google.common.base.Predicates$AndPredicate -> org.eclipse.xtext.xbase.lib.internal.f$a:
+    java.util.List components -> components
+    342:347:boolean apply(java.lang.Object) -> apply
+    353:353:int hashCode() -> hashCode
+    358:362:boolean equals(java.lang.Object) -> equals
+    367:367:java.lang.String toString() -> toString
+com.google.common.base.Predicates$InstanceOfPredicate -> org.eclipse.xtext.xbase.lib.internal.f$b:
+    java.lang.Class clazz -> clazz
+    458:458:boolean apply(java.lang.Object) -> apply
+    463:463:int hashCode() -> hashCode
+    468:472:boolean equals(java.lang.Object) -> equals
+    477:477:java.lang.String toString() -> toString
+com.google.common.base.Predicates$ObjectPredicate -> org.eclipse.xtext.xbase.lib.internal.f$c:
+    com.google.common.base.Predicates$ObjectPredicate ALWAYS_TRUE -> ALWAYS_TRUE
+    com.google.common.base.Predicates$ObjectPredicate ALWAYS_FALSE -> ALWAYS_FALSE
+    com.google.common.base.Predicates$ObjectPredicate IS_NULL -> IS_NULL
+    com.google.common.base.Predicates$ObjectPredicate NOT_NULL -> NOT_NULL
+    com.google.common.base.Predicates$ObjectPredicate[] $VALUES -> $VALUES
+    292:292:com.google.common.base.Predicate withNarrowedType() -> withNarrowedType
+com.google.common.base.Predicates$ObjectPredicate$1 -> org.eclipse.xtext.xbase.lib.internal.f$c$1:
+    270:270:boolean apply(java.lang.Object) -> apply
+com.google.common.base.Predicates$ObjectPredicate$2 -> org.eclipse.xtext.xbase.lib.internal.f$c$2:
+    275:275:boolean apply(java.lang.Object) -> apply
+com.google.common.base.Predicates$ObjectPredicate$3 -> org.eclipse.xtext.xbase.lib.internal.f$c$3:
+    280:280:boolean apply(java.lang.Object) -> apply
+com.google.common.base.Predicates$ObjectPredicate$4 -> org.eclipse.xtext.xbase.lib.internal.f$c$4:
+    285:285:boolean apply(java.lang.Object) -> apply
+com.google.common.base.Strings -> org.eclipse.xtext.xbase.lib.internal.g:
+    155:178:java.lang.String repeat(java.lang.String,int) -> repeat
+com.google.common.collect.AbstractIndexedListIterator -> org.eclipse.xtext.xbase.lib.internal.h:
+    int size -> size
+    int position -> position
+    java.lang.Object get(int) -> get
+    74:74:boolean hasNext() -> hasNext
+    78:81:java.lang.Object next() -> next
+    85:85:int nextIndex() -> nextIndex
+    89:89:boolean hasPrevious() -> hasPrevious
+    93:96:java.lang.Object previous() -> previous
+    100:100:int previousIndex() -> previousIndex
+com.google.common.collect.AbstractIterator -> org.eclipse.xtext.xbase.lib.internal.i:
+    com.google.common.collect.AbstractIterator$State state -> state
+    java.lang.Object next -> next
+    java.lang.Object computeNext() -> computeNext
+    124:125:java.lang.Object endOfData() -> endOfData
+    129:137:boolean hasNext() -> hasNext
+    141:147:boolean tryToComputeNext() -> tryToComputeNext
+    151:155:java.lang.Object next() -> next
+    166:169:java.lang.Object peek() -> peek
+com.google.common.collect.AbstractIterator$1 -> org.eclipse.xtext.xbase.lib.internal.i$1:
+    int[] $SwitchMap$com$google$common$collect$AbstractIterator$State -> $SwitchMap$com$google$common$collect$AbstractIterator$State
+com.google.common.collect.AbstractIterator$State -> org.eclipse.xtext.xbase.lib.internal.i$a:
+    com.google.common.collect.AbstractIterator$State READY -> READY
+    com.google.common.collect.AbstractIterator$State NOT_READY -> NOT_READY
+    com.google.common.collect.AbstractIterator$State DONE -> DONE
+    com.google.common.collect.AbstractIterator$State FAILED -> FAILED
+    com.google.common.collect.AbstractIterator$State[] $VALUES -> $VALUES
+    70:70:com.google.common.collect.AbstractIterator$State[] values() -> values
+com.google.common.collect.AbstractMapEntry -> org.eclipse.xtext.xbase.lib.internal.j:
+    java.lang.Object getKey() -> getKey
+    java.lang.Object getValue() -> getValue
+    40:40:java.lang.Object setValue(java.lang.Object) -> setValue
+    45:50:boolean equals(java.lang.Object) -> equals
+    55:57:int hashCode() -> hashCode
+    65:65:java.lang.String toString() -> toString
+com.google.common.collect.BiMap -> org.eclipse.xtext.xbase.lib.internal.k:
+    com.google.common.collect.BiMap inverse() -> inverse
+com.google.common.collect.Collections2 -> org.eclipse.xtext.xbase.lib.internal.l:
+    com.google.common.base.Joiner STANDARD_JOINER -> STANDARD_JOINER
+    324:330:boolean containsAllImpl(java.util.Collection,java.util.Collection) -> containsAllImpl
+    337:343:java.lang.String toStringImpl(java.util.Collection) -> toStringImpl
+    350:351:java.lang.StringBuilder newStringBuilderForCollection(int) -> newStringBuilderForCollection
+    358:358:java.util.Collection cast(java.lang.Iterable) -> cast
+com.google.common.collect.Collections2$1 -> org.eclipse.xtext.xbase.lib.internal.l$1:
+    java.util.Collection val$collection -> val$collection
+    340:340:java.lang.Object apply(java.lang.Object) -> apply
+com.google.common.collect.Collections2$FilteredCollection -> org.eclipse.xtext.xbase.lib.internal.l$a:
+    java.util.Collection unfiltered -> unfiltered
+    com.google.common.base.Predicate predicate -> predicate
+    141:142:boolean add(java.lang.Object) -> add
+    146:149:boolean addAll(java.util.Collection) -> addAll
+    153:154:void clear() -> clear
+    164:175:boolean contains(java.lang.Object) -> contains
+    180:185:boolean containsAll(java.util.Collection) -> containsAll
+    189:189:boolean isEmpty() -> isEmpty
+    193:193:java.util.Iterator iterator() -> iterator
+    204:211:boolean remove(java.lang.Object) -> remove
+    216:223:boolean removeAll(java.util.Collection) -> removeAll
+    227:235:boolean retainAll(java.util.Collection) -> retainAll
+    239:239:int size() -> size
+    244:244:java.lang.Object[] toArray() -> toArray
+    248:248:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    253:253:java.lang.String toString() -> toString
+com.google.common.collect.Collections2$FilteredCollection$1 -> org.eclipse.xtext.xbase.lib.internal.l$a$1:
+    java.util.Collection val$collection -> val$collection
+    com.google.common.collect.Collections2$FilteredCollection this$0 -> this$0
+    220:220:boolean apply(java.lang.Object) -> apply
+com.google.common.collect.Collections2$FilteredCollection$2 -> org.eclipse.xtext.xbase.lib.internal.l$a$2:
+    java.util.Collection val$collection -> val$collection
+    com.google.common.collect.Collections2$FilteredCollection this$0 -> this$0
+    232:232:boolean apply(java.lang.Object) -> apply
+com.google.common.collect.EmptyImmutableBiMap -> org.eclipse.xtext.xbase.lib.internal.m:
+    com.google.common.collect.EmptyImmutableBiMap INSTANCE -> INSTANCE
+    38:38:com.google.common.collect.ImmutableBiMap inverse() -> inverse
+    42:42:int size() -> size
+    47:47:boolean isEmpty() -> isEmpty
+    52:52:java.lang.Object get(java.lang.Object) -> get
+    57:57:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    62:62:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    67:67:com.google.common.collect.ImmutableSet keySet() -> keySet
+    72:72:boolean isPartialView() -> isPartialView
+    28:28:com.google.common.collect.BiMap inverse() -> inverse
+    28:28:java.util.Set entrySet() -> entrySet
+    28:28:java.util.Set keySet() -> keySet
+com.google.common.collect.EmptyImmutableList -> org.eclipse.xtext.xbase.lib.internal.n:
+    com.google.common.collect.EmptyImmutableList INSTANCE -> INSTANCE
+    42:42:int size() -> size
+    47:47:boolean isEmpty() -> isEmpty
+    52:52:boolean isPartialView() -> isPartialView
+    57:57:boolean contains(java.lang.Object) -> contains
+    62:62:boolean containsAll(java.util.Collection) -> containsAll
+    67:67:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    72:72:java.lang.Object[] toArray() -> toArray
+    77:80:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    85:86:java.lang.Object get(int) -> get
+    91:91:int indexOf(java.lang.Object) -> indexOf
+    96:96:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    101:102:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    107:107:com.google.common.collect.ImmutableList reverse() -> reverse
+    112:112:com.google.common.collect.UnmodifiableListIterator listIterator() -> listIterator
+    117:118:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    123:127:boolean equals(java.lang.Object) -> equals
+    132:132:int hashCode() -> hashCode
+    137:137:java.lang.String toString() -> toString
+    35:35:java.util.List subList(int,int) -> subList
+    35:35:java.util.ListIterator listIterator(int) -> listIterator
+    35:35:java.util.ListIterator listIterator() -> listIterator
+    35:35:java.util.Iterator iterator() -> iterator
+com.google.common.collect.EmptyImmutableSet -> org.eclipse.xtext.xbase.lib.internal.o:
+    com.google.common.collect.EmptyImmutableSet INSTANCE -> INSTANCE
+    38:38:int size() -> size
+    43:43:boolean isEmpty() -> isEmpty
+    48:48:boolean contains(java.lang.Object) -> contains
+    53:53:boolean containsAll(java.util.Collection) -> containsAll
+    58:58:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    63:63:boolean isPartialView() -> isPartialView
+    68:68:java.lang.Object[] toArray() -> toArray
+    73:73:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    78:78:com.google.common.collect.ImmutableList asList() -> asList
+    83:87:boolean equals(java.lang.Object) -> equals
+    92:92:int hashCode() -> hashCode
+    97:97:boolean isHashCodeFast() -> isHashCodeFast
+    102:102:java.lang.String toString() -> toString
+    31:31:java.util.Iterator iterator() -> iterator
+com.google.common.collect.EmptyImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.p:
+    com.google.common.collect.ImmutableSortedSet keySet -> keySet
+    47:47:java.lang.Object get(java.lang.Object) -> get
+    52:52:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
+    57:57:int size() -> size
+    62:62:boolean isEmpty() -> isEmpty
+    67:67:com.google.common.collect.ImmutableCollection values() -> values
+    72:72:java.lang.String toString() -> toString
+    77:77:boolean isPartialView() -> isPartialView
+    82:82:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    87:87:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    92:93:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
+    98:99:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
+    31:31:java.util.Set entrySet() -> entrySet
+    31:31:java.util.Collection values() -> values
+    31:31:java.util.Set keySet() -> keySet
+    31:31:com.google.common.collect.ImmutableSet keySet() -> keySet
+com.google.common.collect.EmptyImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.q:
+    43:43:int size() -> size
+    48:48:boolean isEmpty() -> isEmpty
+    53:53:boolean contains(java.lang.Object) -> contains
+    58:58:boolean containsAll(java.util.Collection) -> containsAll
+    63:63:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    69:69:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
+    74:74:boolean isPartialView() -> isPartialView
+    79:79:com.google.common.collect.ImmutableList asList() -> asList
+    84:84:java.lang.Object[] toArray() -> toArray
+    89:89:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    94:98:boolean equals(java.lang.Object) -> equals
+    103:103:int hashCode() -> hashCode
+    108:108:java.lang.String toString() -> toString
+    113:113:java.lang.Object first() -> first
+    118:118:java.lang.Object last() -> last
+    123:123:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
+    129:129:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
+    134:134:com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
+    139:139:int indexOf(java.lang.Object) -> indexOf
+    34:34:java.util.Iterator iterator() -> iterator
+com.google.common.collect.FluentIterable -> org.eclipse.xtext.xbase.lib.internal.r:
+    java.lang.Iterable iterable -> iterable
+    118:118:java.lang.String toString() -> toString
+com.google.common.collect.ForwardingCollection -> org.eclipse.xtext.xbase.lib.internal.s:
+    java.util.Collection delegate() -> delegate
+    58:58:java.util.Iterator iterator() -> iterator
+    62:62:int size() -> size
+    66:66:boolean removeAll(java.util.Collection) -> removeAll
+    70:70:boolean isEmpty() -> isEmpty
+    74:74:boolean contains(java.lang.Object) -> contains
+    78:78:boolean add(java.lang.Object) -> add
+    82:82:boolean remove(java.lang.Object) -> remove
+    86:86:boolean containsAll(java.util.Collection) -> containsAll
+    90:90:boolean addAll(java.util.Collection) -> addAll
+    94:94:boolean retainAll(java.util.Collection) -> retainAll
+    98:99:void clear() -> clear
+    102:102:java.lang.Object[] toArray() -> toArray
+    106:106:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    47:47:java.lang.Object delegate() -> delegate
+com.google.common.collect.ForwardingMapEntry -> org.eclipse.xtext.xbase.lib.internal.t:
+    java.util.Map$Entry delegate() -> delegate
+    65:65:java.lang.Object getKey() -> getKey
+    69:69:java.lang.Object getValue() -> getValue
+    73:73:java.lang.Object setValue(java.lang.Object) -> setValue
+    78:78:boolean equals(java.lang.Object) -> equals
+    83:83:int hashCode() -> hashCode
+    54:54:java.lang.Object delegate() -> delegate
+com.google.common.collect.ForwardingObject -> org.eclipse.xtext.xbase.lib.internal.u:
+    java.lang.Object delegate() -> delegate
+    73:73:java.lang.String toString() -> toString
+com.google.common.collect.ForwardingSet -> org.eclipse.xtext.xbase.lib.internal.v:
+    java.util.Set delegate() -> delegate
+    60:60:boolean equals(java.lang.Object) -> equals
+    65:65:int hashCode() -> hashCode
+    48:48:java.util.Collection delegate() -> delegate
+    48:48:java.lang.Object delegate() -> delegate
+com.google.common.collect.Hashing -> org.eclipse.xtext.xbase.lib.internal.w:
+    int MAX_TABLE_SIZE -> MAX_TABLE_SIZE
+    45:45:int smear(int) -> smear
+    53:60:int closedTableSize(int,double) -> closedTableSize
+com.google.common.collect.ImmutableAsList -> org.eclipse.xtext.xbase.lib.internal.x:
+    com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    42:42:boolean contains(java.lang.Object) -> contains
+    46:46:int size() -> size
+    51:51:boolean isEmpty() -> isEmpty
+    56:56:boolean isPartialView() -> isPartialView
+com.google.common.collect.ImmutableBiMap -> org.eclipse.xtext.xbase.lib.internal.y:
+    52:52:com.google.common.collect.ImmutableBiMap of() -> of
+    59:61:com.google.common.collect.ImmutableBiMap of(java.lang.Object,java.lang.Object) -> of
+    com.google.common.collect.ImmutableBiMap inverse() -> inverse
+    232:232:com.google.common.collect.ImmutableSet values() -> values
+    43:43:com.google.common.collect.ImmutableCollection values() -> values
+    43:43:java.util.Collection values() -> values
+    43:43:com.google.common.collect.BiMap inverse() -> inverse
+com.google.common.collect.ImmutableCollection -> org.eclipse.xtext.xbase.lib.internal.z:
+    com.google.common.collect.ImmutableCollection EMPTY_IMMUTABLE_COLLECTION -> EMPTY_IMMUTABLE_COLLECTION
+    com.google.common.collect.ImmutableList asList -> asList
+    com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    56:56:java.lang.Object[] toArray() -> toArray
+    60:60:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    64:64:boolean contains(java.lang.Object) -> contains
+    68:68:boolean containsAll(java.util.Collection) -> containsAll
+    72:72:boolean isEmpty() -> isEmpty
+    77:77:java.lang.String toString() -> toString
+    88:88:boolean add(java.lang.Object) -> add
+    99:99:boolean remove(java.lang.Object) -> remove
+    110:110:boolean addAll(java.util.Collection) -> addAll
+    121:121:boolean removeAll(java.util.Collection) -> removeAll
+    132:132:boolean retainAll(java.util.Collection) -> retainAll
+    143:143:void clear() -> clear
+    158:159:com.google.common.collect.ImmutableList asList() -> asList
+    163:169:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    boolean isPartialView() -> isPartialView
+    41:41:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableCollection$1 -> org.eclipse.xtext.xbase.lib.internal.z$1:
+com.google.common.collect.ImmutableCollection$Builder -> org.eclipse.xtext.xbase.lib.internal.z$a:
+    291:303:int expandedCapacity(int,int) -> expandedCapacity
+com.google.common.collect.ImmutableCollection$EmptyImmutableCollection -> org.eclipse.xtext.xbase.lib.internal.z$b:
+    java.lang.Object[] EMPTY_ARRAY -> EMPTY_ARRAY
+    178:178:int size() -> size
+    183:183:boolean isEmpty() -> isEmpty
+    188:188:boolean contains(java.lang.Object) -> contains
+    193:193:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    200:200:java.lang.Object[] toArray() -> toArray
+    205:208:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    213:213:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    218:218:boolean isPartialView() -> isPartialView
+    175:175:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableEntry -> org.eclipse.xtext.xbase.lib.internal.aa:
+    java.lang.Object key -> key
+    java.lang.Object value -> value
+    41:41:java.lang.Object getKey() -> getKey
+    47:47:java.lang.Object getValue() -> getValue
+    52:52:java.lang.Object setValue(java.lang.Object) -> setValue
+com.google.common.collect.ImmutableEnumMap -> org.eclipse.xtext.xbase.lib.internal.ab:
+    java.util.EnumMap delegate -> delegate
+    39:47:com.google.common.collect.ImmutableMap asImmutable(java.util.EnumMap) -> asImmutable
+    60:60:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    84:84:int size() -> size
+    89:89:boolean containsKey(java.lang.Object) -> containsKey
+    94:94:java.lang.Object get(java.lang.Object) -> get
+    99:99:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    126:126:boolean isPartialView() -> isPartialView
+    37:37:java.util.EnumMap access$000(com.google.common.collect.ImmutableEnumMap) -> access$000
+com.google.common.collect.ImmutableEnumMap$1 -> org.eclipse.xtext.xbase.lib.internal.ab$1:
+    com.google.common.collect.ImmutableEnumMap this$0 -> this$0
+    64:64:boolean contains(java.lang.Object) -> contains
+    68:68:int size() -> size
+    73:73:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    78:78:boolean isPartialView() -> isPartialView
+    60:60:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableEnumMap$2 -> org.eclipse.xtext.xbase.lib.internal.ab$2:
+    com.google.common.collect.ImmutableEnumMap this$0 -> this$0
+    103:103:com.google.common.collect.ImmutableMap map() -> map
+    108:108:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    99:99:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableEnumMap$2$1 -> org.eclipse.xtext.xbase.lib.internal.ab$2$1:
+    java.util.Iterator backingIterator -> backingIterator
+    com.google.common.collect.ImmutableEnumMap$2 this$1 -> this$1
+    112:112:boolean hasNext() -> hasNext
+    116:117:java.util.Map$Entry next() -> next
+    108:108:java.lang.Object next() -> next
+com.google.common.collect.ImmutableEnumSet -> org.eclipse.xtext.xbase.lib.internal.ac:
+    java.util.EnumSet delegate -> delegate
+    int hashCode -> hashCode
+    36:42:com.google.common.collect.ImmutableSet asImmutable(java.util.EnumSet) -> asImmutable
+    62:62:boolean isPartialView() -> isPartialView
+    67:67:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    71:71:int size() -> size
+    76:76:boolean contains(java.lang.Object) -> contains
+    81:81:boolean containsAll(java.util.Collection) -> containsAll
+    86:86:boolean isEmpty() -> isEmpty
+    91:91:java.lang.Object[] toArray() -> toArray
+    96:96:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    101:101:boolean equals(java.lang.Object) -> equals
+    108:109:int hashCode() -> hashCode
+    114:114:java.lang.String toString() -> toString
+    31:31:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableList -> org.eclipse.xtext.xbase.lib.internal.ad:
+    75:75:com.google.common.collect.ImmutableList of() -> of
+    87:87:com.google.common.collect.ImmutableList of(java.lang.Object) -> of
+    243:249:com.google.common.collect.ImmutableList copyOf(java.util.Collection) -> copyOf
+    277:283:com.google.common.collect.ImmutableList copyOf(java.lang.Object[]) -> copyOf
+    293:302:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[]) -> asImmutableList
+    307:307:com.google.common.collect.ImmutableList copyFromCollection(java.util.Collection) -> copyFromCollection
+    312:315:com.google.common.collect.ImmutableList construct(java.lang.Object[]) -> construct
+    324:324:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    328:328:com.google.common.collect.UnmodifiableListIterator listIterator() -> listIterator
+    332:332:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    342:342:int indexOf(java.lang.Object) -> indexOf
+    346:346:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    351:351:boolean contains(java.lang.Object) -> contains
+    364:372:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    382:382:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
+    423:423:boolean addAll(int,java.util.Collection) -> addAll
+    434:434:java.lang.Object set(int,java.lang.Object) -> set
+    445:445:void add(int,java.lang.Object) -> add
+    456:456:java.lang.Object remove(int) -> remove
+    466:466:com.google.common.collect.ImmutableList asList() -> asList
+    478:478:com.google.common.collect.ImmutableList reverse() -> reverse
+    584:584:boolean equals(java.lang.Object) -> equals
+    589:589:int hashCode() -> hashCode
+    624:624:com.google.common.collect.ImmutableList$Builder builder() -> builder
+    62:62:java.util.Iterator iterator() -> iterator
+    62:62:java.util.List subList(int,int) -> subList
+    62:62:java.util.ListIterator listIterator(int) -> listIterator
+    62:62:java.util.ListIterator listIterator() -> listIterator
+com.google.common.collect.ImmutableList$1 -> org.eclipse.xtext.xbase.lib.internal.ad$1:
+    com.google.common.collect.ImmutableList this$0 -> this$0
+    336:336:java.lang.Object get(int) -> get
+com.google.common.collect.ImmutableList$Builder -> org.eclipse.xtext.xbase.lib.internal.ad$a:
+    java.lang.Object[] contents -> contents
+    int size -> size
+    666:670:com.google.common.collect.ImmutableList$Builder ensureCapacity(int) -> ensureCapacity
+    682:685:com.google.common.collect.ImmutableList$Builder add(java.lang.Object) -> add
+    745:758:com.google.common.collect.ImmutableList build() -> build
+com.google.common.collect.ImmutableList$ReverseImmutableList -> org.eclipse.xtext.xbase.lib.internal.ad$b:
+    com.google.common.collect.ImmutableList forwardList -> forwardList
+    int size -> size
+    491:491:int reverseIndex(int) -> reverseIndex
+    495:495:int reversePosition(int) -> reversePosition
+    500:500:com.google.common.collect.ImmutableList reverse() -> reverse
+    505:505:boolean contains(java.lang.Object) -> contains
+    510:510:boolean containsAll(java.util.Collection) -> containsAll
+    515:516:int indexOf(java.lang.Object) -> indexOf
+    521:522:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    527:528:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    532:533:java.lang.Object get(int) -> get
+    538:540:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    568:568:int size() -> size
+    573:573:boolean isEmpty() -> isEmpty
+    578:578:boolean isPartialView() -> isPartialView
+    481:481:java.util.List subList(int,int) -> subList
+    481:481:java.util.ListIterator listIterator(int) -> listIterator
+    481:481:java.util.ListIterator listIterator() -> listIterator
+    481:481:java.util.Iterator iterator() -> iterator
+    481:481:int access$000(com.google.common.collect.ImmutableList$ReverseImmutableList,int) -> access$000
+com.google.common.collect.ImmutableList$ReverseImmutableList$1 -> org.eclipse.xtext.xbase.lib.internal.ad$b$1:
+    com.google.common.collect.UnmodifiableListIterator val$forward -> val$forward
+    com.google.common.collect.ImmutableList$ReverseImmutableList this$0 -> this$0
+    542:542:boolean hasNext() -> hasNext
+    546:546:boolean hasPrevious() -> hasPrevious
+    550:550:java.lang.Object next() -> next
+    554:554:int nextIndex() -> nextIndex
+    558:558:java.lang.Object previous() -> previous
+    562:562:int previousIndex() -> previousIndex
+com.google.common.collect.ImmutableList$SubList -> org.eclipse.xtext.xbase.lib.internal.ad$c:
+    int offset -> offset
+    int length -> length
+    com.google.common.collect.ImmutableList this$0 -> this$0
+    395:395:int size() -> size
+    399:400:java.lang.Object get(int) -> get
+    405:406:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    411:411:boolean isPartialView() -> isPartialView
+    385:385:java.util.List subList(int,int) -> subList
+    385:385:java.util.ListIterator listIterator(int) -> listIterator
+    385:385:java.util.ListIterator listIterator() -> listIterator
+    385:385:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableMap -> org.eclipse.xtext.xbase.lib.internal.ae:
+    com.google.common.collect.ImmutableSet entrySet -> entrySet
+    com.google.common.collect.ImmutableSet keySet -> keySet
+    com.google.common.collect.ImmutableCollection values -> values
+    72:72:com.google.common.collect.ImmutableMap of() -> of
+    82:82:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object) -> of
+    131:131:com.google.common.collect.ImmutableMap$Builder builder() -> builder
+    142:144:java.util.Map$Entry entryOf(java.lang.Object,java.lang.Object) -> entryOf
+    265:302:com.google.common.collect.ImmutableMap copyOf(java.util.Map) -> copyOf
+    316:316:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
+    327:327:java.lang.Object remove(java.lang.Object) -> remove
+    338:338:void putAll(java.util.Map) -> putAll
+    349:349:void clear() -> clear
+    353:353:boolean isEmpty() -> isEmpty
+    357:357:boolean containsKey(java.lang.Object) -> containsKey
+    361:361:boolean containsValue(java.lang.Object) -> containsValue
+    java.lang.Object get(java.lang.Object) -> get
+    376:377:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    390:391:com.google.common.collect.ImmutableSet keySet() -> keySet
+    395:395:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    406:407:com.google.common.collect.ImmutableCollection values() -> values
+    491:491:boolean equals(java.lang.Object) -> equals
+    boolean isPartialView() -> isPartialView
+    500:500:int hashCode() -> hashCode
+    505:505:java.lang.String toString() -> toString
+    62:62:java.util.Set entrySet() -> entrySet
+    62:62:java.util.Collection values() -> values
+    62:62:java.util.Set keySet() -> keySet
+com.google.common.collect.ImmutableMap$Builder -> org.eclipse.xtext.xbase.lib.internal.ae$a:
+    java.util.ArrayList entries -> entries
+    181:182:com.google.common.collect.ImmutableMap$Builder put(java.lang.Object,java.lang.Object) -> put
+    235:235:com.google.common.collect.ImmutableMap build() -> build
+    239:247:com.google.common.collect.ImmutableMap fromEntryList(java.util.List) -> fromEntryList
+com.google.common.collect.ImmutableMapEntrySet -> org.eclipse.xtext.xbase.lib.internal.af:
+    com.google.common.collect.ImmutableMap map() -> map
+    40:40:int size() -> size
+    45:50:boolean contains(java.lang.Object) -> contains
+    55:55:boolean isPartialView() -> isPartialView
+com.google.common.collect.ImmutableMapKeySet -> org.eclipse.xtext.xbase.lib.internal.ag:
+    com.google.common.collect.ImmutableMap map -> map
+    42:42:int size() -> size
+    47:47:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    52:52:boolean contains(java.lang.Object) -> contains
+    57:58:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    74:74:boolean isPartialView() -> isPartialView
+    33:33:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableMapKeySet$1 -> org.eclipse.xtext.xbase.lib.internal.ag$1:
+    com.google.common.collect.ImmutableList val$entryList -> val$entryList
+    com.google.common.collect.ImmutableMapKeySet this$0 -> this$0
+    61:61:java.lang.Object get(int) -> get
+    66:66:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+com.google.common.collect.ImmutableMapValues -> org.eclipse.xtext.xbase.lib.internal.ah:
+    com.google.common.collect.ImmutableMap map -> map
+    40:40:int size() -> size
+    45:45:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    50:50:boolean contains(java.lang.Object) -> contains
+    55:55:boolean isPartialView() -> isPartialView
+    60:61:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    31:31:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableMapValues$1 -> org.eclipse.xtext.xbase.lib.internal.ah$1:
+    com.google.common.collect.ImmutableList val$entryList -> val$entryList
+    com.google.common.collect.ImmutableMapValues this$0 -> this$0
+    64:64:java.lang.Object get(int) -> get
+    69:69:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+com.google.common.collect.ImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ai:
+    int CUTOFF -> CUTOFF
+    84:84:com.google.common.collect.ImmutableSet of() -> of
+    94:94:com.google.common.collect.ImmutableSet of(java.lang.Object) -> of
+    178:224:com.google.common.collect.ImmutableSet construct(int,java.lang.Object[]) -> construct
+    248:259:int chooseTableSize(int) -> chooseTableSize
+    273:279:com.google.common.collect.ImmutableSet copyOf(java.lang.Object[]) -> copyOf
+    357:371:com.google.common.collect.ImmutableSet copyOf(java.util.Collection) -> copyOf
+    375:387:com.google.common.collect.ImmutableSet copyFromCollection(java.util.Collection) -> copyFromCollection
+    395:395:boolean isHashCodeFast() -> isHashCodeFast
+    400:407:boolean equals(java.lang.Object) -> equals
+    412:412:int hashCode() -> hashCode
+    com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    72:72:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableSet$ArrayImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ai$a:
+    java.lang.Object[] elements -> elements
+    429:429:int size() -> size
+    434:434:boolean isEmpty() -> isEmpty
+    439:439:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    444:444:java.lang.Object[] toArray() -> toArray
+    449:449:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    454:468:boolean containsAll(java.util.Collection) -> containsAll
+    473:473:boolean isPartialView() -> isPartialView
+    478:478:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    420:420:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableSortedAsList -> org.eclipse.xtext.xbase.lib.internal.aj:
+    39:39:com.google.common.collect.ImmutableSortedSet delegateCollection() -> delegateCollection
+    43:43:java.util.Comparator comparator() -> comparator
+    52:59:int indexOf(java.lang.Object) -> indexOf
+    65:65:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    71:71:boolean contains(java.lang.Object) -> contains
+    82:82:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
+    30:30:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+com.google.common.collect.ImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.ak:
+    java.util.Comparator NATURAL_ORDER -> NATURAL_ORDER
+    com.google.common.collect.ImmutableSortedMap NATURAL_EMPTY_MAP -> NATURAL_EMPTY_MAP
+    71:74:com.google.common.collect.ImmutableSortedMap emptyMap(java.util.Comparator) -> emptyMap
+    80:91:com.google.common.collect.ImmutableSortedMap fromSortedEntries(java.util.Comparator,java.util.Collection) -> fromSortedEntries
+    97:100:com.google.common.collect.ImmutableSortedMap from(com.google.common.collect.ImmutableSortedSet,com.google.common.collect.ImmutableList) -> from
+    111:111:com.google.common.collect.ImmutableSortedMap of() -> of
+    225:231:com.google.common.collect.ImmutableSortedMap copyOfSorted(java.util.SortedMap) -> copyOfSorted
+    236:272:com.google.common.collect.ImmutableSortedMap copyOfInternal(java.util.Map,java.util.Comparator) -> copyOfInternal
+    277:285:void sortEntries(java.util.List,java.util.Comparator) -> sortEntries
+    289:295:void validateEntries(java.util.List,java.util.Comparator) -> validateEntries
+    418:418:int size() -> size
+    423:423:boolean containsValue(java.lang.Object) -> containsValue
+    428:428:boolean isPartialView() -> isPartialView
+    437:437:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    com.google.common.collect.ImmutableSortedSet keySet() -> keySet
+    com.google.common.collect.ImmutableCollection values() -> values
+    461:461:java.util.Comparator comparator() -> comparator
+    465:465:java.lang.Object firstKey() -> firstKey
+    469:469:java.lang.Object lastKey() -> lastKey
+    484:484:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object) -> headMap
+    com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
+    517:517:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    538:542:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,boolean,java.lang.Object,boolean) -> subMap
+    557:557:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object) -> tailMap
+    com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
+    58:58:com.google.common.collect.ImmutableSet keySet() -> keySet
+    58:58:java.util.Set entrySet() -> entrySet
+    58:58:java.util.Collection values() -> values
+    58:58:java.util.Set keySet() -> keySet
+    58:58:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+    58:58:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    58:58:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+com.google.common.collect.ImmutableSortedMap$1 -> org.eclipse.xtext.xbase.lib.internal.ak$1:
+    java.util.Comparator val$comparator -> val$comparator
+    280:280:int compare(java.util.Map$Entry,java.util.Map$Entry) -> compare
+    277:277:int compare(java.lang.Object,java.lang.Object) -> compare
+com.google.common.collect.ImmutableSortedMapFauxverideShim -> org.eclipse.xtext.xbase.lib.internal.al:
+com.google.common.collect.ImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.am:
+    java.util.Comparator NATURAL_ORDER -> NATURAL_ORDER
+    com.google.common.collect.ImmutableSortedSet NATURAL_EMPTY_SET -> NATURAL_EMPTY_SET
+    java.util.Comparator comparator -> comparator
+    105:105:com.google.common.collect.ImmutableSortedSet emptySet() -> emptySet
+    109:112:com.google.common.collect.ImmutableSortedSet emptySet(java.util.Comparator) -> emptySet
+    387:392:com.google.common.collect.ImmutableSortedSet copyOfSorted(java.util.SortedSet) -> copyOfSorted
+    581:581:int unsafeCompare(java.lang.Object,java.lang.Object) -> unsafeCompare
+    589:590:int unsafeCompare(java.util.Comparator,java.lang.Object,java.lang.Object) -> unsafeCompare
+    608:608:java.util.Comparator comparator() -> comparator
+    com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    628:628:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object) -> headSet
+    636:636:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object,boolean) -> headSet
+    654:654:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    663:666:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,boolean,java.lang.Object,boolean) -> subSet
+    682:682:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object) -> tailSet
+    690:690:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object,boolean) -> tailSet
+    com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
+    com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
+    com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
+    737:737:java.lang.Object first() -> first
+    741:741:java.lang.Object last() -> last
+    com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
+    int indexOf(java.lang.Object) -> indexOf
+    92:92:java.util.Iterator iterator() -> iterator
+    92:92:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
+    92:92:java.util.SortedSet headSet(java.lang.Object) -> headSet
+    92:92:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+com.google.common.collect.ImmutableSortedSetFauxverideShim -> org.eclipse.xtext.xbase.lib.internal.an:
+com.google.common.collect.Iterables -> org.eclipse.xtext.xbase.lib.internal.ao:
+    107:107:int size(java.lang.Iterable) -> size
+    135:135:boolean removeAll(java.lang.Iterable,java.util.Collection) -> removeAll
+    171:174:boolean removeIf(java.lang.Iterable,com.google.common.base.Predicate) -> removeIf
+    181:201:boolean removeIfFromRandomAccessList(java.util.List,com.google.common.base.Predicate) -> removeIfFromRandomAccessList
+    216:225:void slowRemoveIfForRemainingElements(java.util.List,com.google.common.base.Predicate,int,int) -> slowRemoveIfForRemainingElements
+    235:242:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
+    250:250:java.lang.String toString(java.lang.Iterable) -> toString
+    261:261:java.lang.Object getOnlyElement(java.lang.Iterable) -> getOnlyElement
+    286:288:java.lang.Object[] toArray(java.lang.Iterable,java.lang.Class) -> toArray
+    308:308:java.util.Collection toCollection(java.lang.Iterable) -> toCollection
+    319:323:boolean addAll(java.util.Collection,java.lang.Iterable) -> addAll
+    407:409:java.lang.Iterable concat(java.lang.Iterable,java.lang.Iterable) -> concat
+    475:476:java.lang.Iterable concat(java.lang.Iterable) -> concat
+    489:490:com.google.common.collect.UnmodifiableIterator iterators(java.lang.Iterable) -> iterators
+    567:569:java.lang.Iterable filter(java.lang.Iterable,com.google.common.base.Predicate) -> filter
+    590:592:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
+    685:687:java.lang.Iterable transform(java.lang.Iterable,com.google.common.base.Function) -> transform
+    62:62:com.google.common.collect.UnmodifiableIterator access$100(java.lang.Iterable) -> access$100
+com.google.common.collect.Iterables$2 -> org.eclipse.xtext.xbase.lib.internal.ao$1:
+    java.lang.Iterable val$inputs -> val$inputs
+    479:479:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Iterables$3 -> org.eclipse.xtext.xbase.lib.internal.ao$2:
+    java.util.Iterator val$iterableIterator -> val$iterableIterator
+    493:493:boolean hasNext() -> hasNext
+    497:497:java.util.Iterator next() -> next
+    490:490:java.lang.Object next() -> next
+com.google.common.collect.Iterables$6 -> org.eclipse.xtext.xbase.lib.internal.ao$3:
+    java.lang.Iterable val$unfiltered -> val$unfiltered
+    com.google.common.base.Predicate val$predicate -> val$predicate
+    572:572:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Iterables$7 -> org.eclipse.xtext.xbase.lib.internal.ao$4:
+    java.lang.Iterable val$unfiltered -> val$unfiltered
+    java.lang.Class val$type -> val$type
+    595:595:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Iterables$8 -> org.eclipse.xtext.xbase.lib.internal.ao$5:
+    java.lang.Iterable val$fromIterable -> val$fromIterable
+    com.google.common.base.Function val$function -> val$function
+    690:690:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Iterators -> org.eclipse.xtext.xbase.lib.internal.ap:
+    com.google.common.collect.UnmodifiableListIterator EMPTY_LIST_ITERATOR -> EMPTY_LIST_ITERATOR
+    java.util.Iterator EMPTY_MODIFIABLE_ITERATOR -> EMPTY_MODIFIABLE_ITERATOR
+    103:103:com.google.common.collect.UnmodifiableIterator emptyIterator() -> emptyIterator
+    115:115:com.google.common.collect.UnmodifiableListIterator emptyListIterator() -> emptyListIterator
+    146:150:com.google.common.collect.UnmodifiableIterator unmodifiableIterator(java.util.Iterator) -> unmodifiableIterator
+    179:184:int size(java.util.Iterator) -> size
+    191:204:boolean contains(java.util.Iterator,java.lang.Object) -> contains
+    217:225:boolean removeAll(java.util.Iterator,java.util.Collection) -> removeAll
+    240:248:boolean removeIf(java.util.Iterator,com.google.common.base.Predicate) -> removeIf
+    283:293:boolean elementsEqual(java.util.Iterator,java.util.Iterator) -> elementsEqual
+    302:302:java.lang.String toString(java.util.Iterator) -> toString
+    314:329:java.lang.Object getOnlyElement(java.util.Iterator) -> getOnlyElement
+    368:373:boolean addAll(java.util.Collection,java.util.Iterator) -> addAll
+    476:478:java.util.Iterator concat(java.util.Iterator,java.util.Iterator) -> concat
+    562:563:java.util.Iterator concat(java.util.Iterator) -> concat
+    673:675:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,com.google.common.base.Predicate) -> filter
+    703:703:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,java.lang.Class) -> filter
+    711:718:boolean any(java.util.Iterator,com.google.common.base.Predicate) -> any
+    827:828:java.util.Iterator transform(java.util.Iterator,com.google.common.base.Function) -> transform
+    1080:1091:com.google.common.collect.UnmodifiableListIterator forArray(java.lang.Object[],int,int,int) -> forArray
+    1106:1106:com.google.common.collect.UnmodifiableIterator singletonIterator(java.lang.Object) -> singletonIterator
+    1353:1353:java.util.ListIterator cast(java.util.Iterator) -> cast
+com.google.common.collect.Iterators$1 -> org.eclipse.xtext.xbase.lib.internal.ap$1:
+    72:72:boolean hasNext() -> hasNext
+    76:76:java.lang.Object next() -> next
+    80:80:boolean hasPrevious() -> hasPrevious
+    84:84:java.lang.Object previous() -> previous
+    88:88:int nextIndex() -> nextIndex
+    92:92:int previousIndex() -> previousIndex
+com.google.common.collect.Iterators$12 -> org.eclipse.xtext.xbase.lib.internal.ap$2:
+    java.lang.Object[] val$array -> val$array
+    int val$offset -> val$offset
+    1094:1094:java.lang.Object get(int) -> get
+com.google.common.collect.Iterators$13 -> org.eclipse.xtext.xbase.lib.internal.ap$3:
+    boolean done -> done
+    java.lang.Object val$value -> val$value
+    1110:1110:boolean hasNext() -> hasNext
+    1114:1118:java.lang.Object next() -> next
+com.google.common.collect.Iterators$2 -> org.eclipse.xtext.xbase.lib.internal.ap$4:
+    120:120:boolean hasNext() -> hasNext
+    124:124:java.lang.Object next() -> next
+    128:128:void remove() -> remove
+com.google.common.collect.Iterators$3 -> org.eclipse.xtext.xbase.lib.internal.ap$5:
+    java.util.Iterator val$iterator -> val$iterator
+    153:153:boolean hasNext() -> hasNext
+    157:157:java.lang.Object next() -> next
+com.google.common.collect.Iterators$5 -> org.eclipse.xtext.xbase.lib.internal.ap$6:
+    java.util.Iterator current -> current
+    java.util.Iterator removeFrom -> removeFrom
+    java.util.Iterator val$inputs -> val$inputs
+    576:579:boolean hasNext() -> hasNext
+    583:587:java.lang.Object next() -> next
+    591:594:void remove() -> remove
+com.google.common.collect.Iterators$7 -> org.eclipse.xtext.xbase.lib.internal.ap$7:
+    java.util.Iterator val$unfiltered -> val$unfiltered
+    com.google.common.base.Predicate val$predicate -> val$predicate
+    678:684:java.lang.Object computeNext() -> computeNext
+com.google.common.collect.Iterators$8 -> org.eclipse.xtext.xbase.lib.internal.ap$8:
+    com.google.common.base.Function val$function -> val$function
+    832:832:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Lists -> org.eclipse.xtext.xbase.lib.internal.aq:
+    80:80:java.util.ArrayList newArrayList() -> newArrayList
+    96:101:java.util.ArrayList newArrayList(java.lang.Object[]) -> newArrayList
+    106:109:int computeArrayListCapacity(int) -> computeArrayListCapacity
+    124:126:java.util.ArrayList newArrayList(java.lang.Iterable) -> newArrayList
+    142:147:java.util.ArrayList newArrayList(java.util.Iterator) -> newArrayList
+    208:208:java.util.LinkedList newLinkedList() -> newLinkedList
+    219:223:java.util.LinkedList newLinkedList(java.lang.Iterable) -> newLinkedList
+    512:512:java.util.List transform(java.util.List,com.google.common.base.Function) -> transform
+    872:877:java.util.List reverse(java.util.List) -> reverse
+    1048:1055:int hashCodeImpl(java.util.List) -> hashCodeImpl
+    1062:1071:boolean equalsImpl(java.util.List,java.lang.Object) -> equalsImpl
+    1091:1097:int indexOfImpl(java.util.List,java.lang.Object) -> indexOfImpl
+    1104:1110:int lastIndexOfImpl(java.util.List,java.lang.Object) -> lastIndexOfImpl
+com.google.common.collect.Lists$RandomAccessReverseList -> org.eclipse.xtext.xbase.lib.internal.aq$a:
+com.google.common.collect.Lists$ReverseList -> org.eclipse.xtext.xbase.lib.internal.aq$b:
+    java.util.List forwardList -> forwardList
+    889:889:java.util.List getForwardList() -> getForwardList
+    893:895:int reverseIndex(int) -> reverseIndex
+    899:901:int reversePosition(int) -> reversePosition
+    906:907:void add(int,java.lang.Object) -> add
+    911:912:void clear() -> clear
+    916:916:java.lang.Object remove(int) -> remove
+    921:922:void removeRange(int,int) -> removeRange
+    926:926:java.lang.Object set(int,java.lang.Object) -> set
+    931:931:java.lang.Object get(int) -> get
+    936:936:boolean isEmpty() -> isEmpty
+    941:941:int size() -> size
+    946:946:boolean contains(java.lang.Object) -> contains
+    951:951:boolean containsAll(java.util.Collection) -> containsAll
+    956:957:java.util.List subList(int,int) -> subList
+    962:963:int indexOf(java.lang.Object) -> indexOf
+    968:969:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    974:974:java.util.Iterator iterator() -> iterator
+    979:981:java.util.ListIterator listIterator(int) -> listIterator
+    881:881:int access$000(com.google.common.collect.Lists$ReverseList,int) -> access$000
+com.google.common.collect.Lists$ReverseList$1 -> org.eclipse.xtext.xbase.lib.internal.aq$b$1:
+    boolean canRemove -> canRemove
+    boolean canSet -> canSet
+    java.util.ListIterator val$forwardIterator -> val$forwardIterator
+    com.google.common.collect.Lists$ReverseList this$0 -> this$0
+    987:990:void add(java.lang.Object) -> add
+    993:993:boolean hasNext() -> hasNext
+    997:997:boolean hasPrevious() -> hasPrevious
+    1001:1005:java.lang.Object next() -> next
+    1009:1009:int nextIndex() -> nextIndex
+    1013:1017:java.lang.Object previous() -> previous
+    1021:1021:int previousIndex() -> previousIndex
+    1025:1028:void remove() -> remove
+    1031:1033:void set(java.lang.Object) -> set
+com.google.common.collect.Lists$TransformingRandomAccessList -> org.eclipse.xtext.xbase.lib.internal.aq$c:
+    java.util.List fromList -> fromList
+    com.google.common.base.Function function -> function
+    580:581:void clear() -> clear
+    585:585:java.lang.Object get(int) -> get
+    590:590:boolean isEmpty() -> isEmpty
+    595:595:java.lang.Object remove(int) -> remove
+    600:600:int size() -> size
+com.google.common.collect.Lists$TransformingSequentialList -> org.eclipse.xtext.xbase.lib.internal.aq$d:
+    java.util.List fromList -> fromList
+    com.google.common.base.Function function -> function
+    538:539:void clear() -> clear
+    543:543:int size() -> size
+    548:548:java.util.ListIterator listIterator(int) -> listIterator
+com.google.common.collect.Lists$TransformingSequentialList$1 -> org.eclipse.xtext.xbase.lib.internal.aq$d$1:
+    com.google.common.collect.Lists$TransformingSequentialList this$0 -> this$0
+    552:552:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Maps -> org.eclipse.xtext.xbase.lib.internal.ar:
+    com.google.common.base.Joiner$MapJoiner STANDARD_JOINER -> STANDARD_JOINER
+    159:159:java.util.HashMap newHashMapWithExpectedSize(int) -> newHashMapWithExpectedSize
+    168:175:int capacity(int) -> capacity
+    206:206:java.util.LinkedHashMap newLinkedHashMap() -> newLinkedHashMap
+    288:288:java.util.TreeMap newTreeMap(java.util.Comparator) -> newTreeMap
+    1009:1009:java.util.Map$Entry immutableEntry(java.lang.Object,java.lang.Object) -> immutableEntry
+    1270:1270:java.util.Map transformValues(java.util.Map,com.google.common.base.Function) -> transformValues
+    1319:1320:com.google.common.collect.Maps$EntryTransformer asEntryTransformer(com.google.common.base.Function) -> asEntryTransformer
+    1381:1384:java.util.Map transformEntries(java.util.Map,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
+    1441:1441:java.util.SortedMap transformEntries(java.util.SortedMap,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
+    1888:1894:java.util.Map filterEntries(java.util.Map,com.google.common.base.Predicate) -> filterEntries
+    1932:1933:java.util.SortedMap filterEntries(java.util.SortedMap,com.google.common.base.Predicate) -> filterEntries
+    1967:1969:com.google.common.collect.BiMap filterEntries(com.google.common.collect.BiMap,com.google.common.base.Predicate) -> filterEntries
+    1980:1981:java.util.Map filterFiltered(com.google.common.collect.Maps$AbstractFilteredMap,com.google.common.base.Predicate) -> filterFiltered
+    2137:2138:java.util.SortedMap filterFiltered(com.google.common.collect.Maps$FilteredEntrySortedMap,com.google.common.base.Predicate) -> filterFiltered
+    2192:2193:com.google.common.collect.BiMap filterFiltered(com.google.common.collect.Maps$FilteredEntryBiMap,com.google.common.base.Predicate) -> filterFiltered
+    2560:2567:boolean equalsImpl(java.util.Map,java.lang.Object) -> equalsImpl
+    2574:2576:java.lang.String toStringImpl(java.util.Map) -> toStringImpl
+    2599:2599:boolean containsValueImpl(java.util.Map,java.lang.Object) -> containsValueImpl
+    2661:2661:java.util.Iterator valueIterator(java.util.Iterator) -> valueIterator
+    2672:2672:com.google.common.collect.UnmodifiableIterator valueIterator(com.google.common.collect.UnmodifiableIterator) -> valueIterator
+com.google.common.collect.Maps$1 -> org.eclipse.xtext.xbase.lib.internal.ar$1:
+    com.google.common.base.Function val$function -> val$function
+    784:784:java.util.Map$Entry transform(java.lang.Object) -> transform
+    781:781:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Maps$5 -> org.eclipse.xtext.xbase.lib.internal.ar$2:
+    com.google.common.base.Function val$function -> val$function
+    1323:1323:java.lang.Object transformEntry(java.lang.Object,java.lang.Object) -> transformEntry
+com.google.common.collect.Maps$7 -> org.eclipse.xtext.xbase.lib.internal.ar$3:
+    2665:2665:java.lang.Object transform(java.util.Map$Entry) -> transform
+    2661:2661:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Maps$8 -> org.eclipse.xtext.xbase.lib.internal.ar$4:
+    com.google.common.collect.UnmodifiableIterator val$entryIterator -> val$entryIterator
+    2675:2675:boolean hasNext() -> hasNext
+    2679:2679:java.lang.Object next() -> next
+com.google.common.collect.Maps$AbstractFilteredMap -> org.eclipse.xtext.xbase.lib.internal.ar$a:
+    java.util.Map unfiltered -> unfiltered
+    com.google.common.base.Predicate predicate -> predicate
+    java.util.Collection values -> values
+    1997:1998:boolean apply(java.lang.Object,java.lang.Object) -> apply
+    2003:2004:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
+    2009:2013:void putAll(java.util.Map) -> putAll
+    2017:2017:boolean containsKey(java.lang.Object) -> containsKey
+    2022:2023:java.lang.Object get(java.lang.Object) -> get
+    2028:2028:boolean isEmpty() -> isEmpty
+    2033:2033:java.lang.Object remove(java.lang.Object) -> remove
+    2040:2041:java.util.Collection values() -> values
+com.google.common.collect.Maps$AbstractFilteredMap$Values -> org.eclipse.xtext.xbase.lib.internal.ar$a$a:
+    com.google.common.collect.Maps$AbstractFilteredMap this$0 -> this$0
+    2047:2048:java.util.Iterator iterator() -> iterator
+    2062:2062:int size() -> size
+    2067:2068:void clear() -> clear
+    2072:2072:boolean isEmpty() -> isEmpty
+    2077:2085:boolean remove(java.lang.Object) -> remove
+    2090:2100:boolean removeAll(java.util.Collection) -> removeAll
+    2105:2115:boolean retainAll(java.util.Collection) -> retainAll
+    2121:2121:java.lang.Object[] toArray() -> toArray
+    2126:2126:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+com.google.common.collect.Maps$AbstractFilteredMap$Values$1 -> org.eclipse.xtext.xbase.lib.internal.ar$a$a$1:
+    java.util.Iterator val$entryIterator -> val$entryIterator
+    com.google.common.collect.Maps$AbstractFilteredMap$Values this$1 -> this$1
+    2051:2051:boolean hasNext() -> hasNext
+    2055:2055:java.lang.Object next() -> next
+com.google.common.collect.Maps$EntrySet -> org.eclipse.xtext.xbase.lib.internal.ar$b:
+    java.util.Map map() -> map
+    2763:2763:int size() -> size
+    2768:2769:void clear() -> clear
+    2773:2779:boolean contains(java.lang.Object) -> contains
+    2784:2784:boolean isEmpty() -> isEmpty
+    2789:2793:boolean remove(java.lang.Object) -> remove
+    2799:2806:boolean removeAll(java.util.Collection) -> removeAll
+    2813:2823:boolean retainAll(java.util.Collection) -> retainAll
+com.google.common.collect.Maps$EntryTransformer -> org.eclipse.xtext.xbase.lib.internal.ar$c:
+    java.lang.Object transformEntry(java.lang.Object,java.lang.Object) -> transformEntry
+com.google.common.collect.Maps$FilteredEntryBiMap -> org.eclipse.xtext.xbase.lib.internal.ar$d:
+    com.google.common.collect.BiMap inverse -> inverse
+    2201:2201:com.google.common.base.Predicate inversePredicate(com.google.common.base.Predicate) -> inversePredicate
+    2222:2222:com.google.common.collect.BiMap unfiltered() -> unfiltered
+    2231:2231:com.google.common.collect.BiMap inverse() -> inverse
+    2236:2236:java.util.Set values() -> values
+    2196:2196:java.util.Collection values() -> values
+com.google.common.collect.Maps$FilteredEntryBiMap$1 -> org.eclipse.xtext.xbase.lib.internal.ar$d$1:
+    com.google.common.base.Predicate val$forwardPredicate -> val$forwardPredicate
+    2204:2204:boolean apply(java.util.Map$Entry) -> apply
+    2201:2201:boolean apply(java.lang.Object) -> apply
+com.google.common.collect.Maps$FilteredEntryMap -> org.eclipse.xtext.xbase.lib.internal.ar$e:
+    java.util.Set filteredEntrySet -> filteredEntrySet
+    java.util.Set entrySet -> entrySet
+    java.util.Set keySet -> keySet
+    2291:2292:java.util.Set entrySet() -> entrySet
+    2333:2334:java.util.Set keySet() -> keySet
+    2338:2338:java.util.Set createKeySet() -> createKeySet
+com.google.common.collect.Maps$FilteredEntryMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.ar$e$a:
+    com.google.common.collect.Maps$FilteredEntryMap this$0 -> this$0
+    2298:2298:java.util.Set delegate() -> delegate
+    2303:2304:java.util.Iterator iterator() -> iterator
+    2295:2295:java.util.Collection delegate() -> delegate
+    2295:2295:java.lang.Object delegate() -> delegate
+com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$a$1:
+    java.util.Iterator val$iterator -> val$iterator
+    com.google.common.collect.Maps$FilteredEntryMap$EntrySet this$1 -> this$1
+    2307:2307:boolean hasNext() -> hasNext
+    2311:2312:java.util.Map$Entry next() -> next
+    2304:2304:java.lang.Object next() -> next
+com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$a$1$1:
+    java.util.Map$Entry val$entry -> val$entry
+    com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1 this$2 -> this$2
+    2315:2315:java.util.Map$Entry delegate() -> delegate
+    2320:2321:java.lang.Object setValue(java.lang.Object) -> setValue
+    2312:2312:java.lang.Object delegate() -> delegate
+com.google.common.collect.Maps$FilteredEntryMap$KeySet -> org.eclipse.xtext.xbase.lib.internal.ar$e$b:
+    com.google.common.collect.Maps$FilteredEntryMap this$0 -> this$0
+    2344:2345:java.util.Iterator iterator() -> iterator
+    2359:2359:int size() -> size
+    2364:2365:void clear() -> clear
+    2369:2369:boolean contains(java.lang.Object) -> contains
+    2374:2378:boolean remove(java.lang.Object) -> remove
+    2383:2393:boolean retainAll(java.util.Collection) -> retainAll
+    2399:2399:java.lang.Object[] toArray() -> toArray
+    2404:2404:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+com.google.common.collect.Maps$FilteredEntryMap$KeySet$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$b$1:
+    java.util.Iterator val$iterator -> val$iterator
+    com.google.common.collect.Maps$FilteredEntryMap$KeySet this$1 -> this$1
+    2348:2348:boolean hasNext() -> hasNext
+    2352:2352:java.lang.Object next() -> next
+com.google.common.collect.Maps$FilteredEntrySortedMap -> org.eclipse.xtext.xbase.lib.internal.ar$f:
+    2149:2149:java.util.SortedMap sortedMap() -> sortedMap
+    2153:2153:java.util.Comparator comparator() -> comparator
+    2158:2158:java.lang.Object firstKey() -> firstKey
+    2162:2170:java.lang.Object lastKey() -> lastKey
+    2174:2174:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    2178:2178:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    2182:2182:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+com.google.common.collect.Maps$TransformedEntriesMap -> org.eclipse.xtext.xbase.lib.internal.ar$g:
+    java.util.Map fromMap -> fromMap
+    com.google.common.collect.Maps$EntryTransformer transformer -> transformer
+    java.util.Set entrySet -> entrySet
+    java.util.Collection values -> values
+    1487:1487:int size() -> size
+    1492:1492:boolean containsKey(java.lang.Object) -> containsKey
+    1499:1500:java.lang.Object get(java.lang.Object) -> get
+    1508:1508:java.lang.Object remove(java.lang.Object) -> remove
+    1514:1515:void clear() -> clear
+    1519:1519:java.util.Set keySet() -> keySet
+    1526:1558:java.util.Set entrySet() -> entrySet
+    1565:1574:java.util.Collection values() -> values
+com.google.common.collect.Maps$TransformedEntriesMap$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1:
+    com.google.common.collect.Maps$TransformedEntriesMap this$0 -> this$0
+    1531:1531:java.util.Map map() -> map
+    1536:1536:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Maps$TransformedEntriesMap$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1$1:
+    com.google.common.collect.Maps$TransformedEntriesMap$1 this$1 -> this$1
+    1541:1541:java.util.Map$Entry transform(java.util.Map$Entry) -> transform
+    1537:1537:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Maps$TransformedEntriesMap$1$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1$1$1:
+    java.util.Map$Entry val$entry -> val$entry
+    com.google.common.collect.Maps$TransformedEntriesMap$1$1 this$2 -> this$2
+    1545:1545:java.lang.Object getKey() -> getKey
+    1550:1550:java.lang.Object getValue() -> getValue
+com.google.common.collect.Maps$TransformedEntriesMap$2 -> org.eclipse.xtext.xbase.lib.internal.ar$g$2:
+    com.google.common.collect.Maps$TransformedEntriesMap this$0 -> this$0
+    1570:1570:java.util.Map map() -> map
+com.google.common.collect.Maps$TransformedEntriesSortedMap -> org.eclipse.xtext.xbase.lib.internal.ar$h:
+    1582:1582:java.util.SortedMap fromMap() -> fromMap
+    1591:1591:java.util.Comparator comparator() -> comparator
+    1595:1595:java.lang.Object firstKey() -> firstKey
+    1599:1599:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    1603:1603:java.lang.Object lastKey() -> lastKey
+    1607:1607:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    1611:1611:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+com.google.common.collect.Maps$Values -> org.eclipse.xtext.xbase.lib.internal.ar$i:
+    java.util.Map map() -> map
+    2689:2689:java.util.Iterator iterator() -> iterator
+    2695:2703:boolean remove(java.lang.Object) -> remove
+    2710:2718:boolean removeAll(java.util.Collection) -> removeAll
+    2725:2733:boolean retainAll(java.util.Collection) -> retainAll
+    2739:2739:int size() -> size
+    2744:2744:boolean isEmpty() -> isEmpty
+    2749:2749:boolean contains(java.lang.Object) -> contains
+    2754:2755:void clear() -> clear
+com.google.common.collect.Multiset -> org.eclipse.xtext.xbase.lib.internal.as:
+    java.util.Set elementSet() -> elementSet
+com.google.common.collect.NaturalOrdering -> org.eclipse.xtext.xbase.lib.internal.at:
+    com.google.common.collect.NaturalOrdering INSTANCE -> INSTANCE
+    36:42:int compare(java.lang.Comparable,java.lang.Comparable) -> compare
+    71:71:java.lang.String toString() -> toString
+    28:28:int compare(java.lang.Object,java.lang.Object) -> compare
+com.google.common.collect.ObjectArrays -> org.eclipse.xtext.xbase.lib.internal.au:
+    java.lang.Object[] EMPTY_ARRAY -> EMPTY_ARRAY
+    48:48:java.lang.Object[] newArray(java.lang.Class,int) -> newArray
+    59:59:java.lang.Object[] newArray(java.lang.Object[],int) -> newArray
+    110:112:java.lang.Object[] arraysCopyOf(java.lang.Object[],int) -> arraysCopyOf
+    140:148:java.lang.Object[] toArrayImpl(java.util.Collection,java.lang.Object[]) -> toArrayImpl
+    166:166:java.lang.Object[] toArrayImpl(java.util.Collection) -> toArrayImpl
+    170:174:java.lang.Object[] fillArray(java.lang.Iterable,java.lang.Object[]) -> fillArray
+    189:192:java.lang.Object checkElementNotNull(java.lang.Object,int) -> checkElementNotNull
+com.google.common.collect.Ordering -> org.eclipse.xtext.xbase.lib.internal.av:
+    90:90:com.google.common.collect.Ordering natural() -> natural
+com.google.common.collect.Platform -> org.eclipse.xtext.xbase.lib.internal.aw:
+    46:52:java.lang.Object[] newArray(java.lang.Object[],int) -> newArray
+com.google.common.collect.RegularImmutableAsList -> org.eclipse.xtext.xbase.lib.internal.ax:
+    com.google.common.collect.ImmutableCollection delegate -> delegate
+    com.google.common.collect.ImmutableList delegateList -> delegateList
+    45:45:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    56:56:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    61:61:java.lang.Object[] toArray() -> toArray
+    66:66:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    71:71:int indexOf(java.lang.Object) -> indexOf
+    76:76:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    81:81:boolean equals(java.lang.Object) -> equals
+    86:86:int hashCode() -> hashCode
+    90:90:java.lang.Object get(int) -> get
+    27:27:java.util.ListIterator listIterator(int) -> listIterator
+com.google.common.collect.RegularImmutableList -> org.eclipse.xtext.xbase.lib.internal.ay:
+    int offset -> offset
+    int size -> size
+    java.lang.Object[] array -> array
+    50:50:int size() -> size
+    55:55:boolean isEmpty() -> isEmpty
+    60:60:boolean isPartialView() -> isPartialView
+    65:67:java.lang.Object[] toArray() -> toArray
+    72:78:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    85:86:java.lang.Object get(int) -> get
+    91:91:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
+    99:99:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    104:131:boolean equals(java.lang.Object) -> equals
+    136:141:java.lang.String toString() -> toString
+    31:31:java.util.ListIterator listIterator(int) -> listIterator
+com.google.common.collect.RegularImmutableMap -> org.eclipse.xtext.xbase.lib.internal.az:
+    com.google.common.collect.RegularImmutableMap$LinkedEntry[] entries -> entries
+    com.google.common.collect.RegularImmutableMap$LinkedEntry[] table -> table
+    int mask -> mask
+    88:88:com.google.common.collect.RegularImmutableMap$LinkedEntry[] createEntryArray(int) -> createEntryArray
+    93:93:com.google.common.collect.RegularImmutableMap$LinkedEntry newLinkedEntry(java.lang.Object,java.lang.Object,com.google.common.collect.RegularImmutableMap$LinkedEntry) -> newLinkedEntry
+    142:159:java.lang.Object get(java.lang.Object) -> get
+    163:163:int size() -> size
+    168:168:boolean isEmpty() -> isEmpty
+    173:181:boolean containsValue(java.lang.Object) -> containsValue
+    186:186:boolean isPartialView() -> isPartialView
+    191:191:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    34:34:com.google.common.collect.RegularImmutableMap$LinkedEntry[] access$100(com.google.common.collect.RegularImmutableMap) -> access$100
+com.google.common.collect.RegularImmutableMap$1 -> org.eclipse.xtext.xbase.lib.internal.az$1:
+com.google.common.collect.RegularImmutableMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.az$a:
+    com.google.common.collect.RegularImmutableMap this$0 -> this$0
+    199:199:com.google.common.collect.ImmutableMap map() -> map
+    204:204:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    209:209:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    194:194:java.util.Iterator iterator() -> iterator
+com.google.common.collect.RegularImmutableMap$LinkedEntry -> org.eclipse.xtext.xbase.lib.internal.az$b:
+    com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
+com.google.common.collect.RegularImmutableMap$NonTerminalEntry -> org.eclipse.xtext.xbase.lib.internal.az$c:
+    com.google.common.collect.RegularImmutableMap$LinkedEntry next -> next
+    117:117:com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
+com.google.common.collect.RegularImmutableMap$TerminalEntry -> org.eclipse.xtext.xbase.lib.internal.az$d:
+    136:136:com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
+com.google.common.collect.RegularImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ba:
+    java.lang.Object[] table -> table
+    int mask -> mask
+    int hashCode -> hashCode
+    48:57:boolean contains(java.lang.Object) -> contains
+    64:64:int hashCode() -> hashCode
+    69:69:boolean isHashCodeFast() -> isHashCodeFast
+com.google.common.collect.RegularImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.bb:
+    com.google.common.collect.RegularImmutableSortedSet keySet -> keySet
+    com.google.common.collect.ImmutableList valueList -> valueList
+    49:49:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    84:84:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
+    89:89:com.google.common.collect.ImmutableCollection values() -> values
+    94:95:java.lang.Object get(java.lang.Object) -> get
+    99:104:com.google.common.collect.ImmutableSortedMap getSubMap(int,int) -> getSubMap
+    110:110:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
+    115:115:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
+    29:29:java.util.Collection values() -> values
+    29:29:java.util.Set keySet() -> keySet
+    29:29:com.google.common.collect.ImmutableSet keySet() -> keySet
+    31:31:com.google.common.collect.ImmutableList access$100(com.google.common.collect.RegularImmutableSortedMap) -> access$100
+com.google.common.collect.RegularImmutableSortedMap$1 -> org.eclipse.xtext.xbase.lib.internal.bb$1:
+com.google.common.collect.RegularImmutableSortedMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.bb$a:
+    com.google.common.collect.RegularImmutableSortedMap this$0 -> this$0
+    56:56:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    61:61:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    78:78:com.google.common.collect.ImmutableMap map() -> map
+    52:52:java.util.Iterator iterator() -> iterator
+com.google.common.collect.RegularImmutableSortedMap$EntrySet$1 -> org.eclipse.xtext.xbase.lib.internal.bb$a$1:
+    com.google.common.collect.ImmutableList keyList -> keyList
+    com.google.common.collect.RegularImmutableSortedMap$EntrySet this$1 -> this$1
+    66:66:java.util.Map$Entry get(int) -> get
+    71:71:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    61:61:java.lang.Object get(int) -> get
+com.google.common.collect.RegularImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.bc:
+    com.google.common.collect.ImmutableList elements -> elements
+    60:60:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    66:66:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
+    71:71:boolean isEmpty() -> isEmpty
+    75:75:int size() -> size
+    80:82:boolean contains(java.lang.Object) -> contains
+    92:129:boolean containsAll(java.util.Collection) -> containsAll
+    133:133:int unsafeBinarySearch(java.lang.Object) -> unsafeBinarySearch
+    138:138:boolean isPartialView() -> isPartialView
+    143:143:java.lang.Object[] toArray() -> toArray
+    148:148:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    153:183:boolean equals(java.lang.Object) -> equals
+    188:188:java.lang.Object first() -> first
+    193:193:java.lang.Object last() -> last
+    222:222:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
+    226:226:int headIndex(java.lang.Object,boolean) -> headIndex
+    233:233:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
+    238:238:com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
+    242:242:int tailIndex(java.lang.Object,boolean) -> tailIndex
+    251:251:java.util.Comparator unsafeComparator() -> unsafeComparator
+    255:261:com.google.common.collect.ImmutableSortedSet getSubSet(int,int) -> getSubSet
+    267:277:int indexOf(java.lang.Object) -> indexOf
+    282:282:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    46:46:java.util.Iterator iterator() -> iterator
+com.google.common.collect.Sets -> org.eclipse.xtext.xbase.lib.internal.bd:
+    163:163:java.util.HashSet newHashSet() -> newHashSet
+    181:183:java.util.HashSet newHashSet(java.lang.Object[]) -> newHashSet
+    200:200:java.util.HashSet newHashSetWithExpectedSize(int) -> newHashSetWithExpectedSize
+    217:217:java.util.HashSet newHashSet(java.lang.Iterable) -> newHashSet
+    235:239:java.util.HashSet newHashSet(java.util.Iterator) -> newHashSet
+    253:253:java.util.LinkedHashSet newLinkedHashSet() -> newLinkedHashSet
+    286:293:java.util.LinkedHashSet newLinkedHashSet(java.lang.Iterable) -> newLinkedHashSet
+    831:842:java.util.Set filter(java.util.Set,com.google.common.base.Predicate) -> filter
+    891:899:java.util.SortedSet filter(java.util.SortedSet,com.google.common.base.Predicate) -> filter
+    1283:1290:int hashCodeImpl(java.util.Set) -> hashCodeImpl
+    1297:1311:boolean equalsImpl(java.util.Set,java.lang.Object) -> equalsImpl
+    1318:1322:boolean removeAllImpl(java.util.Set,java.util.Iterator) -> removeAllImpl
+    1326:1348:boolean removeAllImpl(java.util.Set,java.util.Collection) -> removeAllImpl
+com.google.common.collect.Sets$FilteredSet -> org.eclipse.xtext.xbase.lib.internal.bd$a:
+    852:852:boolean equals(java.lang.Object) -> equals
+    857:857:int hashCode() -> hashCode
+com.google.common.collect.Sets$FilteredSortedSet -> org.eclipse.xtext.xbase.lib.internal.bd$b:
+    909:909:java.util.Comparator comparator() -> comparator
+    913:913:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    918:918:java.util.SortedSet headSet(java.lang.Object) -> headSet
+    922:922:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
+    926:926:java.lang.Object first() -> first
+    930:937:java.lang.Object last() -> last
+com.google.common.collect.Sets$ImprovedAbstractSet -> org.eclipse.xtext.xbase.lib.internal.bd$c:
+    75:75:boolean removeAll(java.util.Collection) -> removeAll
+    80:80:boolean retainAll(java.util.Collection) -> retainAll
+com.google.common.collect.SingletonImmutableBiMap -> org.eclipse.xtext.xbase.lib.internal.be:
+    java.lang.Object singleKey -> singleKey
+    java.lang.Object singleValue -> singleValue
+    com.google.common.collect.ImmutableBiMap inverse -> inverse
+    54:54:java.lang.Object get(java.lang.Object) -> get
+    58:58:int size() -> size
+    62:62:boolean containsKey(java.lang.Object) -> containsKey
+    67:67:boolean containsValue(java.lang.Object) -> containsValue
+    72:72:boolean isPartialView() -> isPartialView
+    77:77:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    82:82:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    90:94:com.google.common.collect.ImmutableBiMap inverse() -> inverse
+    29:29:com.google.common.collect.BiMap inverse() -> inverse
+com.google.common.collect.SingletonImmutableList -> org.eclipse.xtext.xbase.lib.internal.bf:
+    java.lang.Object element -> element
+    45:46:java.lang.Object get(int) -> get
+    51:51:int indexOf(java.lang.Object) -> indexOf
+    56:56:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    61:61:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    65:65:int size() -> size
+    70:71:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    76:76:com.google.common.collect.ImmutableList reverse() -> reverse
+    81:81:boolean contains(java.lang.Object) -> contains
+    86:93:boolean equals(java.lang.Object) -> equals
+    100:100:int hashCode() -> hashCode
+    105:106:java.lang.String toString() -> toString
+    112:112:boolean isEmpty() -> isEmpty
+    117:117:boolean isPartialView() -> isPartialView
+    122:122:java.lang.Object[] toArray() -> toArray
+    127:135:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    33:33:java.util.List subList(int,int) -> subList
+    33:33:java.util.Iterator iterator() -> iterator
+com.google.common.collect.SingletonImmutableSet -> org.eclipse.xtext.xbase.lib.internal.bg:
+    java.lang.Object element -> element
+    int cachedHashCode -> cachedHashCode
+    58:58:int size() -> size
+    63:63:boolean isEmpty() -> isEmpty
+    68:68:boolean contains(java.lang.Object) -> contains
+    73:73:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    78:78:boolean isPartialView() -> isPartialView
+    83:83:java.lang.Object[] toArray() -> toArray
+    88:96:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    101:108:boolean equals(java.lang.Object) -> equals
+    114:118:int hashCode() -> hashCode
+    123:123:boolean isHashCodeFast() -> isHashCodeFast
+    128:129:java.lang.String toString() -> toString
+    32:32:java.util.Iterator iterator() -> iterator
+com.google.common.collect.SortedIterable -> org.eclipse.xtext.xbase.lib.internal.bh:
+    java.util.Comparator comparator() -> comparator
+com.google.common.collect.SortedIterables -> org.eclipse.xtext.xbase.lib.internal.bi:
+    38:48:boolean hasSameComparator(java.util.Comparator,java.lang.Iterable) -> hasSameComparator
+    54:58:java.util.Comparator comparator(java.util.SortedSet) -> comparator
+com.google.common.collect.SortedLists -> org.eclipse.xtext.xbase.lib.internal.bj:
+    256:281:int binarySearch(java.util.List,java.lang.Object,java.util.Comparator,com.google.common.collect.SortedLists$KeyPresentBehavior,com.google.common.collect.SortedLists$KeyAbsentBehavior) -> binarySearch
+com.google.common.collect.SortedLists$1 -> org.eclipse.xtext.xbase.lib.internal.bj$1:
+com.google.common.collect.SortedLists$KeyAbsentBehavior -> org.eclipse.xtext.xbase.lib.internal.bj$a:
+    com.google.common.collect.SortedLists$KeyAbsentBehavior NEXT_LOWER -> NEXT_LOWER
+    com.google.common.collect.SortedLists$KeyAbsentBehavior NEXT_HIGHER -> NEXT_HIGHER
+    com.google.common.collect.SortedLists$KeyAbsentBehavior INVERTED_INSERTION_INDEX -> INVERTED_INSERTION_INDEX
+    com.google.common.collect.SortedLists$KeyAbsentBehavior[] $VALUES -> $VALUES
+    int resultIndex(int) -> resultIndex
+com.google.common.collect.SortedLists$KeyAbsentBehavior$1 -> org.eclipse.xtext.xbase.lib.internal.bj$a$1:
+    154:154:int resultIndex(int) -> resultIndex
+com.google.common.collect.SortedLists$KeyAbsentBehavior$2 -> org.eclipse.xtext.xbase.lib.internal.bj$a$2:
+    165:165:int resultIndex(int) -> resultIndex
+com.google.common.collect.SortedLists$KeyAbsentBehavior$3 -> org.eclipse.xtext.xbase.lib.internal.bj$a$3:
+    184:184:int resultIndex(int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior -> org.eclipse.xtext.xbase.lib.internal.bj$b:
+    com.google.common.collect.SortedLists$KeyPresentBehavior ANY_PRESENT -> ANY_PRESENT
+    com.google.common.collect.SortedLists$KeyPresentBehavior LAST_PRESENT -> LAST_PRESENT
+    com.google.common.collect.SortedLists$KeyPresentBehavior FIRST_PRESENT -> FIRST_PRESENT
+    com.google.common.collect.SortedLists$KeyPresentBehavior FIRST_AFTER -> FIRST_AFTER
+    com.google.common.collect.SortedLists$KeyPresentBehavior LAST_BEFORE -> LAST_BEFORE
+    com.google.common.collect.SortedLists$KeyPresentBehavior[] $VALUES -> $VALUES
+    int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior$1 -> org.eclipse.xtext.xbase.lib.internal.bj$b$1:
+    59:59:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior$2 -> org.eclipse.xtext.xbase.lib.internal.bj$b$2:
+    72:84:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior$3 -> org.eclipse.xtext.xbase.lib.internal.bj$b$3:
+    97:110:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior$4 -> org.eclipse.xtext.xbase.lib.internal.bj$b$4:
+    122:122:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.SortedLists$KeyPresentBehavior$5 -> org.eclipse.xtext.xbase.lib.internal.bj$b$5:
+    134:134:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+com.google.common.collect.TransformedIterator -> org.eclipse.xtext.xbase.lib.internal.bk:
+    java.util.Iterator backingIterator -> backingIterator
+    java.lang.Object transform(java.lang.Object) -> transform
+    43:43:boolean hasNext() -> hasNext
+    47:47:java.lang.Object next() -> next
+    51:52:void remove() -> remove
+com.google.common.collect.TransformedListIterator -> org.eclipse.xtext.xbase.lib.internal.bl:
+    39:39:java.util.ListIterator backingIterator() -> backingIterator
+    43:43:boolean hasPrevious() -> hasPrevious
+    47:47:java.lang.Object previous() -> previous
+    51:51:int nextIndex() -> nextIndex
+    55:55:int previousIndex() -> previousIndex
+    59:59:void set(java.lang.Object) -> set
+    63:63:void add(java.lang.Object) -> add
+com.google.common.collect.UnmodifiableIterator -> org.eclipse.xtext.xbase.lib.internal.bm:
+    42:42:void remove() -> remove
+com.google.common.collect.UnmodifiableListIterator -> org.eclipse.xtext.xbase.lib.internal.bn:
+    44:44:void add(java.lang.Object) -> add
+    55:55:void set(java.lang.Object) -> set
+com.google.common.primitives.Booleans -> org.eclipse.xtext.xbase.lib.internal.bo:
+    73:73:int compare(boolean,boolean) -> compare
+com.google.common.primitives.Ints -> org.eclipse.xtext.xbase.lib.internal.bp:
+    101:107:int saturatedCast(long) -> saturatedCast
+org.eclipse.xtend2.lib.DefaultLineDelimiter -> org.eclipse.xtend2.lib.DefaultLineDelimiter:
+    17:17:java.lang.String get() -> get
+org.eclipse.xtend2.lib.StringConcatenation -> org.eclipse.xtend2.lib.StringConcatenation:
+    java.lang.String DEFAULT_LINE_DELIMITER -> DEFAULT_LINE_DELIMITER
+    java.util.ArrayList segments -> segments
+    java.lang.String cachedToString -> cachedToString
+    java.lang.String lineDelimiter -> lineDelimiter
+    108:109:void append(java.lang.Object) -> append
+    121:136:void append(java.lang.Object,int) -> append
+    148:149:void append(java.lang.Object,java.lang.String) -> append
+    163:181:void append(java.lang.Object,java.lang.String,int) -> append
+    193:193:java.lang.String getStringRepresentation(java.lang.Object) -> getStringRepresentation
+    208:218:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    234:246:void appendSegments(java.lang.String,int,java.util.List,java.lang.String) -> appendSegments
+    261:277:void appendSegments(int,java.util.List,java.lang.String) -> appendSegments
+    290:293:void appendSegments(int,java.util.List) -> appendSegments
+    299:301:void newLine() -> newLine
+    308:324:void newLineIfNotEmpty() -> newLineIfNotEmpty
+    328:336:java.lang.String toString() -> toString
+    347:358:java.util.List getSignificantContent() -> getSignificantContent
+    368:368:java.lang.String getLineDelimiter() -> getLineDelimiter
+    380:380:int length() -> length
+    392:392:char charAt(int) -> charAt
+    404:404:java.lang.CharSequence subSequence(int,int) -> subSequence
+    417:458:java.util.List splitLinesAndNewLines(java.lang.String) -> splitLinesAndNewLines
+    62:62:java.util.ArrayList access$0(org.eclipse.xtend2.lib.StringConcatenation) -> access$0
+org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget -> org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget:
+    java.lang.String indentation -> indentation
+    542:543:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    547:548:void append(java.lang.Object,java.lang.String) -> append
+    552:553:void append(java.lang.Object) -> append
+org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget -> org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget:
+    org.eclipse.xtend2.lib.StringConcatenation target -> target
+    int offsetFixup -> offsetFixup
+    480:480:int length() -> length
+    485:485:char charAt(int) -> charAt
+    490:490:java.lang.CharSequence subSequence(int,int) -> subSequence
+    495:496:void newLineIfNotEmpty() -> newLineIfNotEmpty
+    500:501:void newLine() -> newLine
+    505:506:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    510:514:void append(java.lang.Object,java.lang.String) -> append
+    518:519:void append(java.lang.Object) -> append
+org.eclipse.xtend2.lib.StringConcatenationClient -> org.eclipse.xtend2.lib.StringConcatenationClient:
+    36:36:void appendTo(org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation) -> appendTo
+org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation -> org.eclipse.xtend2.lib.StringConcatenationClient$TargetStringConcatenation:
+    void newLineIfNotEmpty() -> newLineIfNotEmpty
+    void newLine() -> newLine
+    void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    void append(java.lang.Object,java.lang.String) -> append
+    void append(java.lang.Object) -> append
+org.eclipse.xtend2.lib.WhitespaceMatcher -> org.eclipse.xtend2.lib.WhitespaceMatcher:
+    18:18:boolean isWhitespace(char) -> isWhitespace
+org.eclipse.xtext.xbase.lib.ArrayExtensions -> org.eclipse.xtext.xbase.lib.ArrayExtensions:
+    34:35:java.lang.Object set(java.lang.Object[],int,java.lang.Object) -> set
+    48:48:java.lang.Object get(java.lang.Object[],int) -> get
+    63:63:java.lang.Object[] clone(java.lang.Object[]) -> clone
+    76:76:int length(java.lang.Object[]) -> length
+    90:90:int hashCode(java.lang.Object[]) -> hashCode
+    108:108:boolean equals(java.lang.Object[],java.lang.Object) -> equals
+    121:121:boolean get(boolean[],int) -> get
+    135:136:boolean set(boolean[],int,boolean) -> set
+    147:147:int length(boolean[]) -> length
+    161:161:int hashCode(boolean[]) -> hashCode
+    179:179:boolean equals(boolean[],java.lang.Object) -> equals
+    194:194:boolean[] clone(boolean[]) -> clone
+    207:207:double get(double[],int) -> get
+    221:222:double set(double[],int,double) -> set
+    233:233:int length(double[]) -> length
+    247:247:int hashCode(double[]) -> hashCode
+    265:265:boolean equals(double[],java.lang.Object) -> equals
+    280:280:double[] clone(double[]) -> clone
+    293:293:float get(float[],int) -> get
+    307:308:float set(float[],int,float) -> set
+    319:319:int length(float[]) -> length
+    333:333:int hashCode(float[]) -> hashCode
+    351:351:boolean equals(float[],java.lang.Object) -> equals
+    366:366:float[] clone(float[]) -> clone
+    379:379:long get(long[],int) -> get
+    393:394:long set(long[],int,long) -> set
+    405:405:int length(long[]) -> length
+    419:419:int hashCode(long[]) -> hashCode
+    437:437:boolean equals(long[],java.lang.Object) -> equals
+    452:452:long[] clone(long[]) -> clone
+    465:465:int get(int[],int) -> get
+    479:480:int set(int[],int,int) -> set
+    491:491:int length(int[]) -> length
+    505:505:int hashCode(int[]) -> hashCode
+    523:523:boolean equals(int[],java.lang.Object) -> equals
+    538:538:int[] clone(int[]) -> clone
+    551:551:char get(char[],int) -> get
+    565:566:char set(char[],int,char) -> set
+    577:577:int length(char[]) -> length
+    591:591:int hashCode(char[]) -> hashCode
+    609:609:boolean equals(char[],java.lang.Object) -> equals
+    624:624:char[] clone(char[]) -> clone
+    637:637:short get(short[],int) -> get
+    651:652:short set(short[],int,short) -> set
+    663:663:int length(short[]) -> length
+    677:677:int hashCode(short[]) -> hashCode
+    695:695:boolean equals(short[],java.lang.Object) -> equals
+    710:710:short[] clone(short[]) -> clone
+    723:723:byte get(byte[],int) -> get
+    737:738:byte set(byte[],int,byte) -> set
+    749:749:int length(byte[]) -> length
+    763:763:int hashCode(byte[]) -> hashCode
+    781:781:boolean equals(byte[],java.lang.Object) -> equals
+    796:796:byte[] clone(byte[]) -> clone
+org.eclipse.xtext.xbase.lib.ArrayLiterals -> org.eclipse.xtext.xbase.lib.ArrayLiterals:
+    30:31:java.lang.Object[] newArrayOfSize(int) -> newArrayOfSize
+    43:43:char[] newCharArrayOfSize(int) -> newCharArrayOfSize
+    55:55:int[] newIntArrayOfSize(int) -> newIntArrayOfSize
+    67:67:boolean[] newBooleanArrayOfSize(int) -> newBooleanArrayOfSize
+    79:79:short[] newShortArrayOfSize(int) -> newShortArrayOfSize
+    91:91:long[] newLongArrayOfSize(int) -> newLongArrayOfSize
+    103:103:float[] newFloatArrayOfSize(int) -> newFloatArrayOfSize
+    115:115:double[] newDoubleArrayOfSize(int) -> newDoubleArrayOfSize
+    127:127:byte[] newByteArrayOfSize(int) -> newByteArrayOfSize
+org.eclipse.xtext.xbase.lib.BigDecimalExtensions -> org.eclipse.xtext.xbase.lib.BigDecimalExtensions:
+    35:35:java.math.BigDecimal operator_minus(java.math.BigDecimal) -> operator_minus
+    52:52:java.math.BigDecimal operator_plus(java.math.BigDecimal,java.math.BigDecimal) -> operator_plus
+    69:69:java.math.BigDecimal operator_minus(java.math.BigDecimal,java.math.BigDecimal) -> operator_minus
+    86:86:java.math.BigDecimal operator_power(java.math.BigDecimal,int) -> operator_power
+    103:103:java.math.BigDecimal operator_multiply(java.math.BigDecimal,java.math.BigDecimal) -> operator_multiply
+    120:120:java.math.BigDecimal operator_divide(java.math.BigDecimal,java.math.BigDecimal) -> operator_divide
+org.eclipse.xtext.xbase.lib.BigIntegerExtensions -> org.eclipse.xtext.xbase.lib.BigIntegerExtensions:
+    34:34:java.math.BigInteger operator_minus(java.math.BigInteger) -> operator_minus
+    51:51:java.math.BigInteger operator_plus(java.math.BigInteger,java.math.BigInteger) -> operator_plus
+    68:68:java.math.BigInteger operator_minus(java.math.BigInteger,java.math.BigInteger) -> operator_minus
+    85:85:java.math.BigInteger operator_power(java.math.BigInteger,int) -> operator_power
+    102:102:java.math.BigInteger operator_multiply(java.math.BigInteger,java.math.BigInteger) -> operator_multiply
+    119:119:java.math.BigInteger operator_divide(java.math.BigInteger,java.math.BigInteger) -> operator_divide
+    136:136:java.math.BigInteger operator_modulo(java.math.BigInteger,java.math.BigInteger) -> operator_modulo
+org.eclipse.xtext.xbase.lib.BooleanExtensions -> org.eclipse.xtext.xbase.lib.BooleanExtensions:
+    33:33:boolean operator_and(boolean,boolean) -> operator_and
+    48:48:boolean operator_or(boolean,boolean) -> operator_or
+    61:61:boolean operator_not(boolean) -> operator_not
+    76:76:boolean operator_equals(boolean,boolean) -> operator_equals
+    91:91:boolean operator_notEquals(boolean,boolean) -> operator_notEquals
+    106:106:boolean xor(boolean,boolean) -> xor
+    123:123:boolean operator_lessThan(boolean,boolean) -> operator_lessThan
+    140:140:boolean operator_lessEqualsThan(boolean,boolean) -> operator_lessEqualsThan
+    157:157:boolean operator_greaterThan(boolean,boolean) -> operator_greaterThan
+    174:174:boolean operator_greaterEqualsThan(boolean,boolean) -> operator_greaterEqualsThan
+org.eclipse.xtext.xbase.lib.ByteExtensions -> org.eclipse.xtext.xbase.lib.ByteExtensions:
+    31:31:int operator_minus(byte) -> operator_minus
+    43:43:byte operator_minusMinus(byte) -> operator_minusMinus
+    55:55:java.lang.Byte operator_minusMinus(java.lang.Byte) -> operator_minusMinus
+    67:67:byte operator_plusPlus(byte) -> operator_plusPlus
+    79:79:java.lang.Byte operator_plusPlus(java.lang.Byte) -> operator_plusPlus
+    92:92:double operator_plus(byte,double) -> operator_plus
+    106:106:double operator_minus(byte,double) -> operator_minus
+    120:120:double operator_multiply(byte,double) -> operator_multiply
+    134:134:double operator_divide(byte,double) -> operator_divide
+    148:148:double operator_modulo(byte,double) -> operator_modulo
+    162:162:boolean operator_lessThan(byte,double) -> operator_lessThan
+    176:176:boolean operator_lessEqualsThan(byte,double) -> operator_lessEqualsThan
+    190:190:boolean operator_greaterThan(byte,double) -> operator_greaterThan
+    204:204:boolean operator_greaterEqualsThan(byte,double) -> operator_greaterEqualsThan
+    218:218:boolean operator_equals(byte,double) -> operator_equals
+    232:232:boolean operator_notEquals(byte,double) -> operator_notEquals
+    246:246:double operator_power(byte,double) -> operator_power
+    261:261:boolean operator_tripleEquals(byte,double) -> operator_tripleEquals
+    276:276:boolean operator_tripleNotEquals(byte,double) -> operator_tripleNotEquals
+    290:290:float operator_plus(byte,float) -> operator_plus
+    304:304:float operator_minus(byte,float) -> operator_minus
+    318:318:float operator_multiply(byte,float) -> operator_multiply
+    332:332:float operator_divide(byte,float) -> operator_divide
+    346:346:float operator_modulo(byte,float) -> operator_modulo
+    360:360:boolean operator_lessThan(byte,float) -> operator_lessThan
+    374:374:boolean operator_lessEqualsThan(byte,float) -> operator_lessEqualsThan
+    388:388:boolean operator_greaterThan(byte,float) -> operator_greaterThan
+    402:402:boolean operator_greaterEqualsThan(byte,float) -> operator_greaterEqualsThan
+    416:416:boolean operator_equals(byte,float) -> operator_equals
+    430:430:boolean operator_notEquals(byte,float) -> operator_notEquals
+    444:444:double operator_power(byte,float) -> operator_power
+    459:459:boolean operator_tripleEquals(byte,float) -> operator_tripleEquals
+    474:474:boolean operator_tripleNotEquals(byte,float) -> operator_tripleNotEquals
+    488:488:long operator_plus(byte,long) -> operator_plus
+    502:502:long operator_minus(byte,long) -> operator_minus
+    516:516:long operator_multiply(byte,long) -> operator_multiply
+    530:530:long operator_divide(byte,long) -> operator_divide
+    544:544:long operator_modulo(byte,long) -> operator_modulo
+    558:558:boolean operator_lessThan(byte,long) -> operator_lessThan
+    572:572:boolean operator_lessEqualsThan(byte,long) -> operator_lessEqualsThan
+    586:586:boolean operator_greaterThan(byte,long) -> operator_greaterThan
+    600:600:boolean operator_greaterEqualsThan(byte,long) -> operator_greaterEqualsThan
+    614:614:boolean operator_equals(byte,long) -> operator_equals
+    628:628:boolean operator_notEquals(byte,long) -> operator_notEquals
+    642:642:double operator_power(byte,long) -> operator_power
+    657:657:boolean operator_tripleEquals(byte,long) -> operator_tripleEquals
+    672:672:boolean operator_tripleNotEquals(byte,long) -> operator_tripleNotEquals
+    686:686:int operator_plus(byte,int) -> operator_plus
+    700:700:int operator_minus(byte,int) -> operator_minus
+    714:714:int operator_multiply(byte,int) -> operator_multiply
+    728:728:int operator_divide(byte,int) -> operator_divide
+    742:742:int operator_modulo(byte,int) -> operator_modulo
+    756:756:boolean operator_lessThan(byte,int) -> operator_lessThan
+    770:770:boolean operator_lessEqualsThan(byte,int) -> operator_lessEqualsThan
+    784:784:boolean operator_greaterThan(byte,int) -> operator_greaterThan
+    798:798:boolean operator_greaterEqualsThan(byte,int) -> operator_greaterEqualsThan
+    812:812:boolean operator_equals(byte,int) -> operator_equals
+    826:826:boolean operator_notEquals(byte,int) -> operator_notEquals
+    840:840:double operator_power(byte,int) -> operator_power
+    855:855:boolean operator_tripleEquals(byte,int) -> operator_tripleEquals
+    870:870:boolean operator_tripleNotEquals(byte,int) -> operator_tripleNotEquals
+    884:884:int operator_plus(byte,char) -> operator_plus
+    898:898:int operator_minus(byte,char) -> operator_minus
+    912:912:int operator_multiply(byte,char) -> operator_multiply
+    926:926:int operator_divide(byte,char) -> operator_divide
+    940:940:int operator_modulo(byte,char) -> operator_modulo
+    954:954:boolean operator_lessThan(byte,char) -> operator_lessThan
+    968:968:boolean operator_lessEqualsThan(byte,char) -> operator_lessEqualsThan
+    982:982:boolean operator_greaterThan(byte,char) -> operator_greaterThan
+    996:996:boolean operator_greaterEqualsThan(byte,char) -> operator_greaterEqualsThan
+    1010:1010:boolean operator_equals(byte,char) -> operator_equals
+    1024:1024:boolean operator_notEquals(byte,char) -> operator_notEquals
+    1038:1038:double operator_power(byte,char) -> operator_power
+    1053:1053:boolean operator_tripleEquals(byte,char) -> operator_tripleEquals
+    1068:1068:boolean operator_tripleNotEquals(byte,char) -> operator_tripleNotEquals
+    1082:1082:int operator_plus(byte,short) -> operator_plus
+    1096:1096:int operator_minus(byte,short) -> operator_minus
+    1110:1110:int operator_multiply(byte,short) -> operator_multiply
+    1124:1124:int operator_divide(byte,short) -> operator_divide
+    1138:1138:int operator_modulo(byte,short) -> operator_modulo
+    1152:1152:boolean operator_lessThan(byte,short) -> operator_lessThan
+    1166:1166:boolean operator_lessEqualsThan(byte,short) -> operator_lessEqualsThan
+    1180:1180:boolean operator_greaterThan(byte,short) -> operator_greaterThan
+    1194:1194:boolean operator_greaterEqualsThan(byte,short) -> operator_greaterEqualsThan
+    1208:1208:boolean operator_equals(byte,short) -> operator_equals
+    1222:1222:boolean operator_notEquals(byte,short) -> operator_notEquals
+    1236:1236:double operator_power(byte,short) -> operator_power
+    1251:1251:boolean operator_tripleEquals(byte,short) -> operator_tripleEquals
+    1266:1266:boolean operator_tripleNotEquals(byte,short) -> operator_tripleNotEquals
+    1280:1280:int operator_plus(byte,byte) -> operator_plus
+    1294:1294:int operator_minus(byte,byte) -> operator_minus
+    1308:1308:int operator_multiply(byte,byte) -> operator_multiply
+    1322:1322:int operator_divide(byte,byte) -> operator_divide
+    1336:1336:int operator_modulo(byte,byte) -> operator_modulo
+    1350:1350:boolean operator_lessThan(byte,byte) -> operator_lessThan
+    1364:1364:boolean operator_lessEqualsThan(byte,byte) -> operator_lessEqualsThan
+    1378:1378:boolean operator_greaterThan(byte,byte) -> operator_greaterThan
+    1392:1392:boolean operator_greaterEqualsThan(byte,byte) -> operator_greaterEqualsThan
+    1406:1406:boolean operator_equals(byte,byte) -> operator_equals
+    1420:1420:boolean operator_notEquals(byte,byte) -> operator_notEquals
+    1434:1434:double operator_power(byte,byte) -> operator_power
+    1449:1449:boolean operator_tripleEquals(byte,byte) -> operator_tripleEquals
+    1464:1464:boolean operator_tripleNotEquals(byte,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.CharacterExtensions -> org.eclipse.xtext.xbase.lib.CharacterExtensions:
+    31:31:int operator_minus(char) -> operator_minus
+    43:43:char operator_minusMinus(char) -> operator_minusMinus
+    55:55:java.lang.Character operator_minusMinus(java.lang.Character) -> operator_minusMinus
+    67:67:char operator_plusPlus(char) -> operator_plusPlus
+    79:79:java.lang.Character operator_plusPlus(java.lang.Character) -> operator_plusPlus
+    92:92:double operator_plus(char,double) -> operator_plus
+    106:106:double operator_minus(char,double) -> operator_minus
+    120:120:double operator_multiply(char,double) -> operator_multiply
+    134:134:double operator_divide(char,double) -> operator_divide
+    148:148:double operator_modulo(char,double) -> operator_modulo
+    162:162:boolean operator_lessThan(char,double) -> operator_lessThan
+    176:176:boolean operator_lessEqualsThan(char,double) -> operator_lessEqualsThan
+    190:190:boolean operator_greaterThan(char,double) -> operator_greaterThan
+    204:204:boolean operator_greaterEqualsThan(char,double) -> operator_greaterEqualsThan
+    218:218:boolean operator_equals(char,double) -> operator_equals
+    232:232:boolean operator_notEquals(char,double) -> operator_notEquals
+    246:246:double operator_power(char,double) -> operator_power
+    261:261:boolean operator_tripleEquals(char,double) -> operator_tripleEquals
+    276:276:boolean operator_tripleNotEquals(char,double) -> operator_tripleNotEquals
+    290:290:float operator_plus(char,float) -> operator_plus
+    304:304:float operator_minus(char,float) -> operator_minus
+    318:318:float operator_multiply(char,float) -> operator_multiply
+    332:332:float operator_divide(char,float) -> operator_divide
+    346:346:float operator_modulo(char,float) -> operator_modulo
+    360:360:boolean operator_lessThan(char,float) -> operator_lessThan
+    374:374:boolean operator_lessEqualsThan(char,float) -> operator_lessEqualsThan
+    388:388:boolean operator_greaterThan(char,float) -> operator_greaterThan
+    402:402:boolean operator_greaterEqualsThan(char,float) -> operator_greaterEqualsThan
+    416:416:boolean operator_equals(char,float) -> operator_equals
+    430:430:boolean operator_notEquals(char,float) -> operator_notEquals
+    444:444:double operator_power(char,float) -> operator_power
+    459:459:boolean operator_tripleEquals(char,float) -> operator_tripleEquals
+    474:474:boolean operator_tripleNotEquals(char,float) -> operator_tripleNotEquals
+    488:488:long operator_plus(char,long) -> operator_plus
+    502:502:long operator_minus(char,long) -> operator_minus
+    516:516:long operator_multiply(char,long) -> operator_multiply
+    530:530:long operator_divide(char,long) -> operator_divide
+    544:544:long operator_modulo(char,long) -> operator_modulo
+    558:558:boolean operator_lessThan(char,long) -> operator_lessThan
+    572:572:boolean operator_lessEqualsThan(char,long) -> operator_lessEqualsThan
+    586:586:boolean operator_greaterThan(char,long) -> operator_greaterThan
+    600:600:boolean operator_greaterEqualsThan(char,long) -> operator_greaterEqualsThan
+    614:614:boolean operator_equals(char,long) -> operator_equals
+    628:628:boolean operator_notEquals(char,long) -> operator_notEquals
+    642:642:double operator_power(char,long) -> operator_power
+    657:657:boolean operator_tripleEquals(char,long) -> operator_tripleEquals
+    672:672:boolean operator_tripleNotEquals(char,long) -> operator_tripleNotEquals
+    686:686:int operator_plus(char,int) -> operator_plus
+    700:700:int operator_minus(char,int) -> operator_minus
+    714:714:int operator_multiply(char,int) -> operator_multiply
+    728:728:int operator_divide(char,int) -> operator_divide
+    742:742:int operator_modulo(char,int) -> operator_modulo
+    756:756:boolean operator_lessThan(char,int) -> operator_lessThan
+    770:770:boolean operator_lessEqualsThan(char,int) -> operator_lessEqualsThan
+    784:784:boolean operator_greaterThan(char,int) -> operator_greaterThan
+    798:798:boolean operator_greaterEqualsThan(char,int) -> operator_greaterEqualsThan
+    812:812:boolean operator_equals(char,int) -> operator_equals
+    826:826:boolean operator_notEquals(char,int) -> operator_notEquals
+    840:840:double operator_power(char,int) -> operator_power
+    855:855:boolean operator_tripleEquals(char,int) -> operator_tripleEquals
+    870:870:boolean operator_tripleNotEquals(char,int) -> operator_tripleNotEquals
+    884:884:int operator_plus(char,char) -> operator_plus
+    898:898:int operator_minus(char,char) -> operator_minus
+    912:912:int operator_multiply(char,char) -> operator_multiply
+    926:926:int operator_divide(char,char) -> operator_divide
+    940:940:int operator_modulo(char,char) -> operator_modulo
+    954:954:boolean operator_lessThan(char,char) -> operator_lessThan
+    968:968:boolean operator_lessEqualsThan(char,char) -> operator_lessEqualsThan
+    982:982:boolean operator_greaterThan(char,char) -> operator_greaterThan
+    996:996:boolean operator_greaterEqualsThan(char,char) -> operator_greaterEqualsThan
+    1010:1010:boolean operator_equals(char,char) -> operator_equals
+    1024:1024:boolean operator_notEquals(char,char) -> operator_notEquals
+    1038:1038:double operator_power(char,char) -> operator_power
+    1053:1053:boolean operator_tripleEquals(char,char) -> operator_tripleEquals
+    1068:1068:boolean operator_tripleNotEquals(char,char) -> operator_tripleNotEquals
+    1082:1082:int operator_plus(char,short) -> operator_plus
+    1096:1096:int operator_minus(char,short) -> operator_minus
+    1110:1110:int operator_multiply(char,short) -> operator_multiply
+    1124:1124:int operator_divide(char,short) -> operator_divide
+    1138:1138:int operator_modulo(char,short) -> operator_modulo
+    1152:1152:boolean operator_lessThan(char,short) -> operator_lessThan
+    1166:1166:boolean operator_lessEqualsThan(char,short) -> operator_lessEqualsThan
+    1180:1180:boolean operator_greaterThan(char,short) -> operator_greaterThan
+    1194:1194:boolean operator_greaterEqualsThan(char,short) -> operator_greaterEqualsThan
+    1208:1208:boolean operator_equals(char,short) -> operator_equals
+    1222:1222:boolean operator_notEquals(char,short) -> operator_notEquals
+    1236:1236:double operator_power(char,short) -> operator_power
+    1251:1251:boolean operator_tripleEquals(char,short) -> operator_tripleEquals
+    1266:1266:boolean operator_tripleNotEquals(char,short) -> operator_tripleNotEquals
+    1280:1280:int operator_plus(char,byte) -> operator_plus
+    1294:1294:int operator_minus(char,byte) -> operator_minus
+    1308:1308:int operator_multiply(char,byte) -> operator_multiply
+    1322:1322:int operator_divide(char,byte) -> operator_divide
+    1336:1336:int operator_modulo(char,byte) -> operator_modulo
+    1350:1350:boolean operator_lessThan(char,byte) -> operator_lessThan
+    1364:1364:boolean operator_lessEqualsThan(char,byte) -> operator_lessEqualsThan
+    1378:1378:boolean operator_greaterThan(char,byte) -> operator_greaterThan
+    1392:1392:boolean operator_greaterEqualsThan(char,byte) -> operator_greaterEqualsThan
+    1406:1406:boolean operator_equals(char,byte) -> operator_equals
+    1420:1420:boolean operator_notEquals(char,byte) -> operator_notEquals
+    1434:1434:double operator_power(char,byte) -> operator_power
+    1449:1449:boolean operator_tripleEquals(char,byte) -> operator_tripleEquals
+    1464:1464:boolean operator_tripleNotEquals(char,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.CollectionExtensions -> org.eclipse.xtext.xbase.lib.CollectionExtensions:
+    50:50:boolean operator_add(java.util.Collection,java.lang.Object) -> operator_add
+    67:67:boolean operator_add(java.util.Collection,java.lang.Iterable) -> operator_add
+    84:84:boolean operator_remove(java.util.Collection,java.lang.Object) -> operator_remove
+    102:102:boolean operator_remove(java.util.Collection,java.util.Collection) -> operator_remove
+    115:115:java.util.List unmodifiableView(java.util.List) -> unmodifiableView
+    128:128:java.util.Collection unmodifiableView(java.util.Collection) -> unmodifiableView
+    141:141:java.util.Set unmodifiableView(java.util.Set) -> unmodifiableView
+    154:154:java.util.SortedSet unmodifiableView(java.util.SortedSet) -> unmodifiableView
+    167:167:java.util.Map unmodifiableView(java.util.Map) -> unmodifiableView
+    180:180:java.util.SortedMap unmodifiableView(java.util.SortedMap) -> unmodifiableView
+    192:192:java.util.List immutableCopy(java.util.List) -> immutableCopy
+    204:204:java.util.Set immutableCopy(java.util.Set) -> immutableCopy
+    216:216:java.util.SortedSet immutableCopy(java.util.SortedSet) -> immutableCopy
+    228:228:java.util.Map immutableCopy(java.util.Map) -> immutableCopy
+    240:240:java.util.SortedMap immutableCopy(java.util.SortedMap) -> immutableCopy
+    254:254:boolean addAll(java.util.Collection,java.lang.Object[]) -> addAll
+    269:269:boolean addAll(java.util.Collection,java.lang.Iterable) -> addAll
+    284:284:boolean removeAll(java.util.Collection,java.lang.Object[]) -> removeAll
+    300:300:boolean removeAll(java.util.Collection,java.util.Collection) -> removeAll
+    315:315:boolean removeAll(java.util.Collection,java.lang.Iterable) -> removeAll
+org.eclipse.xtext.xbase.lib.CollectionLiterals -> org.eclipse.xtext.xbase.lib.CollectionLiterals:
+    48:48:java.util.List emptyList() -> emptyList
+    59:59:java.util.Set emptySet() -> emptySet
+    70:70:java.util.Map emptyMap() -> emptyMap
+    85:85:java.util.List newImmutableList(java.lang.Object[]) -> newImmutableList
+    101:101:java.util.Set newImmutableSet(java.lang.Object[]) -> newImmutableSet
+    119:125:java.util.Map newImmutableMap(org.eclipse.xtext.xbase.lib.Pair[]) -> newImmutableMap
+    138:138:java.util.ArrayList newArrayList(java.lang.Object[]) -> newArrayList
+    151:153:java.util.LinkedList newLinkedList(java.lang.Object[]) -> newLinkedList
+    166:166:java.util.HashSet newHashSet(java.lang.Object[]) -> newHashSet
+    179:181:java.util.LinkedHashSet newLinkedHashSet(java.lang.Object[]) -> newLinkedHashSet
+    197:200:java.util.TreeSet newTreeSet(java.util.Comparator,java.lang.Object[]) -> newTreeSet
+    216:218:java.util.HashMap newHashMap(org.eclipse.xtext.xbase.lib.Pair[]) -> newHashMap
+    234:236:java.util.LinkedHashMap newLinkedHashMap(org.eclipse.xtext.xbase.lib.Pair[]) -> newLinkedHashMap
+    255:257:java.util.TreeMap newTreeMap(java.util.Comparator,org.eclipse.xtext.xbase.lib.Pair[]) -> newTreeMap
+    261:266:void putAll(java.util.Map,org.eclipse.xtext.xbase.lib.Pair[]) -> putAll
+org.eclipse.xtext.xbase.lib.ComparableExtensions -> org.eclipse.xtext.xbase.lib.ComparableExtensions:
+    31:31:boolean operator_lessThan(java.lang.Comparable,java.lang.Object) -> operator_lessThan
+    45:45:boolean operator_greaterThan(java.lang.Comparable,java.lang.Object) -> operator_greaterThan
+    59:59:boolean operator_lessEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_lessEqualsThan
+    73:73:boolean operator_greaterEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_greaterEqualsThan
+    88:88:int operator_spaceship(java.lang.Comparable,java.lang.Object) -> operator_spaceship
+org.eclipse.xtext.xbase.lib.Conversions -> org.eclipse.xtext.xbase.lib.Conversions:
+    41:52:java.lang.Object doWrapArray(java.lang.Object) -> doWrapArray
+    67:67:java.lang.Object unwrapArray(java.lang.Object) -> unwrapArray
+    85:115:java.lang.Object unwrapArray(java.lang.Object,java.lang.Class) -> unwrapArray
+    130:136:java.lang.Object checkComponentType(java.lang.Object,java.lang.Class) -> checkComponentType
+org.eclipse.xtext.xbase.lib.Conversions$WrappedArray -> org.eclipse.xtext.xbase.lib.Conversions$WrappedArray:
+    java.lang.Object[] array -> array
+    158:158:org.eclipse.xtext.xbase.lib.Conversions$WrappedArray create(java.lang.Object[]) -> create
+    184:184:java.lang.Object get(int) -> get
+    203:206:java.lang.Object set(int,java.lang.Object) -> set
+    217:217:int size() -> size
+    222:222:java.lang.Object[] toArray() -> toArray
+    233:234:java.lang.Object[] internalToArray() -> internalToArray
+org.eclipse.xtext.xbase.lib.Conversions$WrappedPrimitiveArray -> org.eclipse.xtext.xbase.lib.Conversions$WrappedPrimitiveArray:
+    java.lang.Object array -> array
+    int size -> size
+    255:255:org.eclipse.xtext.xbase.lib.Conversions$WrappedPrimitiveArray create(java.lang.Object) -> create
+    284:286:java.lang.Object get(int) -> get
+    305:310:java.lang.Object set(int,java.lang.Object) -> set
+    321:323:int size() -> size
+    334:335:java.lang.Object internalToArray() -> internalToArray
+org.eclipse.xtext.xbase.lib.DoubleExtensions -> org.eclipse.xtext.xbase.lib.DoubleExtensions:
+    32:32:double operator_minus(java.lang.Double) -> operator_minus
+    48:48:double operator_plus(java.lang.Double,java.lang.Number) -> operator_plus
+    64:64:double operator_minus(java.lang.Double,java.lang.Number) -> operator_minus
+    80:80:double operator_power(java.lang.Double,java.lang.Number) -> operator_power
+    95:95:double operator_multiply(java.lang.Double,java.lang.Number) -> operator_multiply
+    113:113:double operator_divide(java.lang.Double,java.lang.Number) -> operator_divide
+    127:127:double operator_minus(double) -> operator_minus
+    139:139:double operator_minusMinus(double) -> operator_minusMinus
+    151:151:java.lang.Double operator_minusMinus(java.lang.Double) -> operator_minusMinus
+    163:163:double operator_plusPlus(double) -> operator_plusPlus
+    175:175:java.lang.Double operator_plusPlus(java.lang.Double) -> operator_plusPlus
+    188:188:double operator_plus(double,double) -> operator_plus
+    202:202:double operator_minus(double,double) -> operator_minus
+    216:216:double operator_multiply(double,double) -> operator_multiply
+    230:230:double operator_divide(double,double) -> operator_divide
+    244:244:double operator_modulo(double,double) -> operator_modulo
+    258:258:boolean operator_lessThan(double,double) -> operator_lessThan
+    272:272:boolean operator_lessEqualsThan(double,double) -> operator_lessEqualsThan
+    286:286:boolean operator_greaterThan(double,double) -> operator_greaterThan
+    300:300:boolean operator_greaterEqualsThan(double,double) -> operator_greaterEqualsThan
+    314:314:boolean operator_equals(double,double) -> operator_equals
+    328:328:boolean operator_notEquals(double,double) -> operator_notEquals
+    342:342:double operator_power(double,double) -> operator_power
+    357:357:boolean operator_tripleEquals(double,double) -> operator_tripleEquals
+    372:372:boolean operator_tripleNotEquals(double,double) -> operator_tripleNotEquals
+    386:386:double operator_plus(double,float) -> operator_plus
+    400:400:double operator_minus(double,float) -> operator_minus
+    414:414:double operator_multiply(double,float) -> operator_multiply
+    428:428:double operator_divide(double,float) -> operator_divide
+    442:442:double operator_modulo(double,float) -> operator_modulo
+    456:456:boolean operator_lessThan(double,float) -> operator_lessThan
+    470:470:boolean operator_lessEqualsThan(double,float) -> operator_lessEqualsThan
+    484:484:boolean operator_greaterThan(double,float) -> operator_greaterThan
+    498:498:boolean operator_greaterEqualsThan(double,float) -> operator_greaterEqualsThan
+    512:512:boolean operator_equals(double,float) -> operator_equals
+    526:526:boolean operator_notEquals(double,float) -> operator_notEquals
+    540:540:double operator_power(double,float) -> operator_power
+    555:555:boolean operator_tripleEquals(double,float) -> operator_tripleEquals
+    570:570:boolean operator_tripleNotEquals(double,float) -> operator_tripleNotEquals
+    584:584:double operator_plus(double,long) -> operator_plus
+    598:598:double operator_minus(double,long) -> operator_minus
+    612:612:double operator_multiply(double,long) -> operator_multiply
+    626:626:double operator_divide(double,long) -> operator_divide
+    640:640:double operator_modulo(double,long) -> operator_modulo
+    654:654:boolean operator_lessThan(double,long) -> operator_lessThan
+    668:668:boolean operator_lessEqualsThan(double,long) -> operator_lessEqualsThan
+    682:682:boolean operator_greaterThan(double,long) -> operator_greaterThan
+    696:696:boolean operator_greaterEqualsThan(double,long) -> operator_greaterEqualsThan
+    710:710:boolean operator_equals(double,long) -> operator_equals
+    724:724:boolean operator_notEquals(double,long) -> operator_notEquals
+    738:738:double operator_power(double,long) -> operator_power
+    753:753:boolean operator_tripleEquals(double,long) -> operator_tripleEquals
+    768:768:boolean operator_tripleNotEquals(double,long) -> operator_tripleNotEquals
+    782:782:double operator_plus(double,int) -> operator_plus
+    796:796:double operator_minus(double,int) -> operator_minus
+    810:810:double operator_multiply(double,int) -> operator_multiply
+    824:824:double operator_divide(double,int) -> operator_divide
+    838:838:double operator_modulo(double,int) -> operator_modulo
+    852:852:boolean operator_lessThan(double,int) -> operator_lessThan
+    866:866:boolean operator_lessEqualsThan(double,int) -> operator_lessEqualsThan
+    880:880:boolean operator_greaterThan(double,int) -> operator_greaterThan
+    894:894:boolean operator_greaterEqualsThan(double,int) -> operator_greaterEqualsThan
+    908:908:boolean operator_equals(double,int) -> operator_equals
+    922:922:boolean operator_notEquals(double,int) -> operator_notEquals
+    936:936:double operator_power(double,int) -> operator_power
+    951:951:boolean operator_tripleEquals(double,int) -> operator_tripleEquals
+    966:966:boolean operator_tripleNotEquals(double,int) -> operator_tripleNotEquals
+    980:980:double operator_plus(double,char) -> operator_plus
+    994:994:double operator_minus(double,char) -> operator_minus
+    1008:1008:double operator_multiply(double,char) -> operator_multiply
+    1022:1022:double operator_divide(double,char) -> operator_divide
+    1036:1036:double operator_modulo(double,char) -> operator_modulo
+    1050:1050:boolean operator_lessThan(double,char) -> operator_lessThan
+    1064:1064:boolean operator_lessEqualsThan(double,char) -> operator_lessEqualsThan
+    1078:1078:boolean operator_greaterThan(double,char) -> operator_greaterThan
+    1092:1092:boolean operator_greaterEqualsThan(double,char) -> operator_greaterEqualsThan
+    1106:1106:boolean operator_equals(double,char) -> operator_equals
+    1120:1120:boolean operator_notEquals(double,char) -> operator_notEquals
+    1134:1134:double operator_power(double,char) -> operator_power
+    1149:1149:boolean operator_tripleEquals(double,char) -> operator_tripleEquals
+    1164:1164:boolean operator_tripleNotEquals(double,char) -> operator_tripleNotEquals
+    1178:1178:double operator_plus(double,short) -> operator_plus
+    1192:1192:double operator_minus(double,short) -> operator_minus
+    1206:1206:double operator_multiply(double,short) -> operator_multiply
+    1220:1220:double operator_divide(double,short) -> operator_divide
+    1234:1234:double operator_modulo(double,short) -> operator_modulo
+    1248:1248:boolean operator_lessThan(double,short) -> operator_lessThan
+    1262:1262:boolean operator_lessEqualsThan(double,short) -> operator_lessEqualsThan
+    1276:1276:boolean operator_greaterThan(double,short) -> operator_greaterThan
+    1290:1290:boolean operator_greaterEqualsThan(double,short) -> operator_greaterEqualsThan
+    1304:1304:boolean operator_equals(double,short) -> operator_equals
+    1318:1318:boolean operator_notEquals(double,short) -> operator_notEquals
+    1332:1332:double operator_power(double,short) -> operator_power
+    1347:1347:boolean operator_tripleEquals(double,short) -> operator_tripleEquals
+    1362:1362:boolean operator_tripleNotEquals(double,short) -> operator_tripleNotEquals
+    1376:1376:double operator_plus(double,byte) -> operator_plus
+    1390:1390:double operator_minus(double,byte) -> operator_minus
+    1404:1404:double operator_multiply(double,byte) -> operator_multiply
+    1418:1418:double operator_divide(double,byte) -> operator_divide
+    1432:1432:double operator_modulo(double,byte) -> operator_modulo
+    1446:1446:boolean operator_lessThan(double,byte) -> operator_lessThan
+    1460:1460:boolean operator_lessEqualsThan(double,byte) -> operator_lessEqualsThan
+    1474:1474:boolean operator_greaterThan(double,byte) -> operator_greaterThan
+    1488:1488:boolean operator_greaterEqualsThan(double,byte) -> operator_greaterEqualsThan
+    1502:1502:boolean operator_equals(double,byte) -> operator_equals
+    1516:1516:boolean operator_notEquals(double,byte) -> operator_notEquals
+    1530:1530:double operator_power(double,byte) -> operator_power
+    1545:1545:boolean operator_tripleEquals(double,byte) -> operator_tripleEquals
+    1560:1560:boolean operator_tripleNotEquals(double,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.Exceptions -> org.eclipse.xtext.xbase.lib.Exceptions:
+    36:39:java.lang.RuntimeException sneakyThrow(java.lang.Throwable) -> sneakyThrow
+    44:44:void sneakyThrow0(java.lang.Throwable) -> sneakyThrow0
+org.eclipse.xtext.xbase.lib.ExclusiveRange -> org.eclipse.xtext.xbase.lib.ExclusiveRange:
+    int first -> first
+    int last -> last
+    int step -> step
+    java.util.ListIterator EMPTY_LIST_ITERATOR -> EMPTY_LIST_ITERATOR
+    109:109:java.util.ListIterator iterator() -> iterator
+    141:141:int size() -> size
+    152:152:boolean isEmpty() -> isEmpty
+    165:170:boolean contains(int) -> contains
+    1:1:java.util.Iterator iterator() -> iterator
+    51:51:int access$1(org.eclipse.xtext.xbase.lib.ExclusiveRange) -> access$1
+    53:53:int access$2(org.eclipse.xtext.xbase.lib.ExclusiveRange) -> access$2
+    52:52:int access$3(org.eclipse.xtext.xbase.lib.ExclusiveRange) -> access$3
+org.eclipse.xtext.xbase.lib.ExclusiveRange$1 -> org.eclipse.xtext.xbase.lib.ExclusiveRange$1:
+    59:59:boolean hasNext() -> hasNext
+    64:64:java.lang.Integer next() -> next
+    69:69:boolean hasPrevious() -> hasPrevious
+    74:74:java.lang.Integer previous() -> previous
+    79:79:int nextIndex() -> nextIndex
+    84:84:int previousIndex() -> previousIndex
+    89:89:void remove() -> remove
+    94:94:void set(java.lang.Integer) -> set
+    99:99:void add(java.lang.Integer) -> add
+    1:1:java.lang.Object next() -> next
+    1:1:java.lang.Object previous() -> previous
+    1:1:void add(java.lang.Object) -> add
+    1:1:void set(java.lang.Object) -> set
+org.eclipse.xtext.xbase.lib.ExclusiveRange$RangeIterator -> org.eclipse.xtext.xbase.lib.ExclusiveRange$RangeIterator:
+    int next -> next
+    int nextIndex -> nextIndex
+    org.eclipse.xtext.xbase.lib.ExclusiveRange this$0 -> this$0
+    180:183:boolean hasNext() -> hasNext
+    188:194:java.lang.Integer next() -> next
+    199:199:boolean hasPrevious() -> hasPrevious
+    204:208:java.lang.Integer previous() -> previous
+    213:213:int nextIndex() -> nextIndex
+    218:218:int previousIndex() -> previousIndex
+    223:223:void remove() -> remove
+    228:228:void set(java.lang.Integer) -> set
+    233:233:void add(java.lang.Integer) -> add
+    1:1:java.lang.Object next() -> next
+    1:1:java.lang.Object previous() -> previous
+    1:1:void add(java.lang.Object) -> add
+    1:1:void set(java.lang.Object) -> set
+org.eclipse.xtext.xbase.lib.Extension -> org.eclipse.xtext.xbase.lib.Extension:
+org.eclipse.xtext.xbase.lib.FloatExtensions -> org.eclipse.xtext.xbase.lib.FloatExtensions:
+    31:31:float operator_minus(float) -> operator_minus
+    43:43:float operator_minusMinus(float) -> operator_minusMinus
+    55:55:java.lang.Float operator_minusMinus(java.lang.Float) -> operator_minusMinus
+    67:67:float operator_plusPlus(float) -> operator_plusPlus
+    79:79:java.lang.Float operator_plusPlus(java.lang.Float) -> operator_plusPlus
+    92:92:double operator_plus(float,double) -> operator_plus
+    106:106:double operator_minus(float,double) -> operator_minus
+    120:120:double operator_multiply(float,double) -> operator_multiply
+    134:134:double operator_divide(float,double) -> operator_divide
+    148:148:double operator_modulo(float,double) -> operator_modulo
+    162:162:boolean operator_lessThan(float,double) -> operator_lessThan
+    176:176:boolean operator_lessEqualsThan(float,double) -> operator_lessEqualsThan
+    190:190:boolean operator_greaterThan(float,double) -> operator_greaterThan
+    204:204:boolean operator_greaterEqualsThan(float,double) -> operator_greaterEqualsThan
+    218:218:boolean operator_equals(float,double) -> operator_equals
+    232:232:boolean operator_notEquals(float,double) -> operator_notEquals
+    246:246:double operator_power(float,double) -> operator_power
+    261:261:boolean operator_tripleEquals(float,double) -> operator_tripleEquals
+    276:276:boolean operator_tripleNotEquals(float,double) -> operator_tripleNotEquals
+    290:290:float operator_plus(float,float) -> operator_plus
+    304:304:float operator_minus(float,float) -> operator_minus
+    318:318:float operator_multiply(float,float) -> operator_multiply
+    332:332:float operator_divide(float,float) -> operator_divide
+    346:346:float operator_modulo(float,float) -> operator_modulo
+    360:360:boolean operator_lessThan(float,float) -> operator_lessThan
+    374:374:boolean operator_lessEqualsThan(float,float) -> operator_lessEqualsThan
+    388:388:boolean operator_greaterThan(float,float) -> operator_greaterThan
+    402:402:boolean operator_greaterEqualsThan(float,float) -> operator_greaterEqualsThan
+    416:416:boolean operator_equals(float,float) -> operator_equals
+    430:430:boolean operator_notEquals(float,float) -> operator_notEquals
+    444:444:double operator_power(float,float) -> operator_power
+    459:459:boolean operator_tripleEquals(float,float) -> operator_tripleEquals
+    474:474:boolean operator_tripleNotEquals(float,float) -> operator_tripleNotEquals
+    488:488:float operator_plus(float,long) -> operator_plus
+    502:502:float operator_minus(float,long) -> operator_minus
+    516:516:float operator_multiply(float,long) -> operator_multiply
+    530:530:float operator_divide(float,long) -> operator_divide
+    544:544:float operator_modulo(float,long) -> operator_modulo
+    558:558:boolean operator_lessThan(float,long) -> operator_lessThan
+    572:572:boolean operator_lessEqualsThan(float,long) -> operator_lessEqualsThan
+    586:586:boolean operator_greaterThan(float,long) -> operator_greaterThan
+    600:600:boolean operator_greaterEqualsThan(float,long) -> operator_greaterEqualsThan
+    614:614:boolean operator_equals(float,long) -> operator_equals
+    628:628:boolean operator_notEquals(float,long) -> operator_notEquals
+    642:642:double operator_power(float,long) -> operator_power
+    657:657:boolean operator_tripleEquals(float,long) -> operator_tripleEquals
+    672:672:boolean operator_tripleNotEquals(float,long) -> operator_tripleNotEquals
+    686:686:float operator_plus(float,int) -> operator_plus
+    700:700:float operator_minus(float,int) -> operator_minus
+    714:714:float operator_multiply(float,int) -> operator_multiply
+    728:728:float operator_divide(float,int) -> operator_divide
+    742:742:float operator_modulo(float,int) -> operator_modulo
+    756:756:boolean operator_lessThan(float,int) -> operator_lessThan
+    770:770:boolean operator_lessEqualsThan(float,int) -> operator_lessEqualsThan
+    784:784:boolean operator_greaterThan(float,int) -> operator_greaterThan
+    798:798:boolean operator_greaterEqualsThan(float,int) -> operator_greaterEqualsThan
+    812:812:boolean operator_equals(float,int) -> operator_equals
+    826:826:boolean operator_notEquals(float,int) -> operator_notEquals
+    840:840:double operator_power(float,int) -> operator_power
+    855:855:boolean operator_tripleEquals(float,int) -> operator_tripleEquals
+    870:870:boolean operator_tripleNotEquals(float,int) -> operator_tripleNotEquals
+    884:884:float operator_plus(float,char) -> operator_plus
+    898:898:float operator_minus(float,char) -> operator_minus
+    912:912:float operator_multiply(float,char) -> operator_multiply
+    926:926:float operator_divide(float,char) -> operator_divide
+    940:940:float operator_modulo(float,char) -> operator_modulo
+    954:954:boolean operator_lessThan(float,char) -> operator_lessThan
+    968:968:boolean operator_lessEqualsThan(float,char) -> operator_lessEqualsThan
+    982:982:boolean operator_greaterThan(float,char) -> operator_greaterThan
+    996:996:boolean operator_greaterEqualsThan(float,char) -> operator_greaterEqualsThan
+    1010:1010:boolean operator_equals(float,char) -> operator_equals
+    1024:1024:boolean operator_notEquals(float,char) -> operator_notEquals
+    1038:1038:double operator_power(float,char) -> operator_power
+    1053:1053:boolean operator_tripleEquals(float,char) -> operator_tripleEquals
+    1068:1068:boolean operator_tripleNotEquals(float,char) -> operator_tripleNotEquals
+    1082:1082:float operator_plus(float,short) -> operator_plus
+    1096:1096:float operator_minus(float,short) -> operator_minus
+    1110:1110:float operator_multiply(float,short) -> operator_multiply
+    1124:1124:float operator_divide(float,short) -> operator_divide
+    1138:1138:float operator_modulo(float,short) -> operator_modulo
+    1152:1152:boolean operator_lessThan(float,short) -> operator_lessThan
+    1166:1166:boolean operator_lessEqualsThan(float,short) -> operator_lessEqualsThan
+    1180:1180:boolean operator_greaterThan(float,short) -> operator_greaterThan
+    1194:1194:boolean operator_greaterEqualsThan(float,short) -> operator_greaterEqualsThan
+    1208:1208:boolean operator_equals(float,short) -> operator_equals
+    1222:1222:boolean operator_notEquals(float,short) -> operator_notEquals
+    1236:1236:double operator_power(float,short) -> operator_power
+    1251:1251:boolean operator_tripleEquals(float,short) -> operator_tripleEquals
+    1266:1266:boolean operator_tripleNotEquals(float,short) -> operator_tripleNotEquals
+    1280:1280:float operator_plus(float,byte) -> operator_plus
+    1294:1294:float operator_minus(float,byte) -> operator_minus
+    1308:1308:float operator_multiply(float,byte) -> operator_multiply
+    1322:1322:float operator_divide(float,byte) -> operator_divide
+    1336:1336:float operator_modulo(float,byte) -> operator_modulo
+    1350:1350:boolean operator_lessThan(float,byte) -> operator_lessThan
+    1364:1364:boolean operator_lessEqualsThan(float,byte) -> operator_lessEqualsThan
+    1378:1378:boolean operator_greaterThan(float,byte) -> operator_greaterThan
+    1392:1392:boolean operator_greaterEqualsThan(float,byte) -> operator_greaterEqualsThan
+    1406:1406:boolean operator_equals(float,byte) -> operator_equals
+    1420:1420:boolean operator_notEquals(float,byte) -> operator_notEquals
+    1434:1434:double operator_power(float,byte) -> operator_power
+    1449:1449:boolean operator_tripleEquals(float,byte) -> operator_tripleEquals
+    1464:1464:boolean operator_tripleNotEquals(float,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.FunctionExtensions -> org.eclipse.xtext.xbase.lib.FunctionExtensions:
+    39:41:org.eclipse.xtext.xbase.lib.Functions$Function0 curry(org.eclipse.xtext.xbase.lib.Functions$Function1,java.lang.Object) -> curry
+    61:63:org.eclipse.xtext.xbase.lib.Functions$Function1 curry(org.eclipse.xtext.xbase.lib.Functions$Function2,java.lang.Object) -> curry
+    83:85:org.eclipse.xtext.xbase.lib.Functions$Function2 curry(org.eclipse.xtext.xbase.lib.Functions$Function3,java.lang.Object) -> curry
+    105:107:org.eclipse.xtext.xbase.lib.Functions$Function3 curry(org.eclipse.xtext.xbase.lib.Functions$Function4,java.lang.Object) -> curry
+    127:129:org.eclipse.xtext.xbase.lib.Functions$Function4 curry(org.eclipse.xtext.xbase.lib.Functions$Function5,java.lang.Object) -> curry
+    149:151:org.eclipse.xtext.xbase.lib.Functions$Function5 curry(org.eclipse.xtext.xbase.lib.Functions$Function6,java.lang.Object) -> curry
+org.eclipse.xtext.xbase.lib.FunctionExtensions$1 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$1:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    44:44:java.lang.Object apply() -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$2 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$2:
+    org.eclipse.xtext.xbase.lib.Functions$Function2 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    66:66:java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$3 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$3:
+    org.eclipse.xtext.xbase.lib.Functions$Function3 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    88:88:java.lang.Object apply(java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$4 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$4:
+    org.eclipse.xtext.xbase.lib.Functions$Function4 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    110:110:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$5 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$5:
+    org.eclipse.xtext.xbase.lib.Functions$Function5 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    132:132:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$6 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$6:
+    org.eclipse.xtext.xbase.lib.Functions$Function6 val$function -> val$function
+    java.lang.Object val$argument -> val$argument
+    154:154:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions -> org.eclipse.xtext.xbase.lib.Functions:
+org.eclipse.xtext.xbase.lib.Functions$Function0 -> org.eclipse.xtext.xbase.lib.Functions$Function0:
+    java.lang.Object apply() -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function1 -> org.eclipse.xtext.xbase.lib.Functions$Function1:
+    java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function2 -> org.eclipse.xtext.xbase.lib.Functions$Function2:
+    java.lang.Object apply(java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function3 -> org.eclipse.xtext.xbase.lib.Functions$Function3:
+    java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function4 -> org.eclipse.xtext.xbase.lib.Functions$Function4:
+    java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function5 -> org.eclipse.xtext.xbase.lib.Functions$Function5:
+    java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Functions$Function6 -> org.eclipse.xtext.xbase.lib.Functions$Function6:
+    java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.HardcodedInInterpreterException -> org.eclipse.xtext.xbase.lib.HardcodedInInterpreterException:
+    long serialVersionUID -> serialVersionUID
+org.eclipse.xtext.xbase.lib.Inline -> org.eclipse.xtext.xbase.lib.Inline:
+    java.lang.String value() -> value
+    java.lang.Class[] imported() -> imported
+    boolean statementExpression() -> statementExpression
+    boolean constantExpression() -> constantExpression
+org.eclipse.xtext.xbase.lib.InputOutput -> org.eclipse.xtext.xbase.lib.InputOutput:
+    24:25:void println() -> println
+    35:36:java.lang.Object println(java.lang.Object) -> println
+    48:49:java.lang.Object print(java.lang.Object) -> print
+org.eclipse.xtext.xbase.lib.IntegerExtensions -> org.eclipse.xtext.xbase.lib.IntegerExtensions:
+    34:34:org.eclipse.xtext.xbase.lib.IntegerRange operator_upTo(int,int) -> operator_upTo
+    49:49:org.eclipse.xtext.xbase.lib.ExclusiveRange operator_doubleDotLessThan(int,int) -> operator_doubleDotLessThan
+    64:64:org.eclipse.xtext.xbase.lib.ExclusiveRange operator_greaterThanDoubleDot(int,int) -> operator_greaterThanDoubleDot
+    79:79:int bitwiseOr(int,int) -> bitwiseOr
+    94:94:int bitwiseXor(int,int) -> bitwiseXor
+    109:109:int bitwiseAnd(int,int) -> bitwiseAnd
+    122:122:int bitwiseNot(int) -> bitwiseNot
+    140:140:int shiftLeft(int,int) -> shiftLeft
+    157:157:int operator_doubleLessThan(int,int) -> operator_doubleLessThan
+    175:175:int shiftRight(int,int) -> shiftRight
+    192:192:int operator_doubleGreaterThan(int,int) -> operator_doubleGreaterThan
+    210:210:int shiftRightUnsigned(int,int) -> shiftRightUnsigned
+    227:227:int operator_tripleGreaterThan(int,int) -> operator_tripleGreaterThan
+    241:241:int operator_minus(int) -> operator_minus
+    253:253:int operator_minusMinus(int) -> operator_minusMinus
+    265:265:java.lang.Integer operator_minusMinus(java.lang.Integer) -> operator_minusMinus
+    277:277:int operator_plusPlus(int) -> operator_plusPlus
+    289:289:java.lang.Integer operator_plusPlus(java.lang.Integer) -> operator_plusPlus
+    302:302:double operator_plus(int,double) -> operator_plus
+    316:316:double operator_minus(int,double) -> operator_minus
+    330:330:double operator_multiply(int,double) -> operator_multiply
+    344:344:double operator_divide(int,double) -> operator_divide
+    358:358:double operator_modulo(int,double) -> operator_modulo
+    372:372:boolean operator_lessThan(int,double) -> operator_lessThan
+    386:386:boolean operator_lessEqualsThan(int,double) -> operator_lessEqualsThan
+    400:400:boolean operator_greaterThan(int,double) -> operator_greaterThan
+    414:414:boolean operator_greaterEqualsThan(int,double) -> operator_greaterEqualsThan
+    428:428:boolean operator_equals(int,double) -> operator_equals
+    442:442:boolean operator_notEquals(int,double) -> operator_notEquals
+    456:456:double operator_power(int,double) -> operator_power
+    471:471:boolean operator_tripleEquals(int,double) -> operator_tripleEquals
+    486:486:boolean operator_tripleNotEquals(int,double) -> operator_tripleNotEquals
+    500:500:float operator_plus(int,float) -> operator_plus
+    514:514:float operator_minus(int,float) -> operator_minus
+    528:528:float operator_multiply(int,float) -> operator_multiply
+    542:542:float operator_divide(int,float) -> operator_divide
+    556:556:float operator_modulo(int,float) -> operator_modulo
+    570:570:boolean operator_lessThan(int,float) -> operator_lessThan
+    584:584:boolean operator_lessEqualsThan(int,float) -> operator_lessEqualsThan
+    598:598:boolean operator_greaterThan(int,float) -> operator_greaterThan
+    612:612:boolean operator_greaterEqualsThan(int,float) -> operator_greaterEqualsThan
+    626:626:boolean operator_equals(int,float) -> operator_equals
+    640:640:boolean operator_notEquals(int,float) -> operator_notEquals
+    654:654:double operator_power(int,float) -> operator_power
+    669:669:boolean operator_tripleEquals(int,float) -> operator_tripleEquals
+    684:684:boolean operator_tripleNotEquals(int,float) -> operator_tripleNotEquals
+    698:698:long operator_plus(int,long) -> operator_plus
+    712:712:long operator_minus(int,long) -> operator_minus
+    726:726:long operator_multiply(int,long) -> operator_multiply
+    740:740:long operator_divide(int,long) -> operator_divide
+    754:754:long operator_modulo(int,long) -> operator_modulo
+    768:768:boolean operator_lessThan(int,long) -> operator_lessThan
+    782:782:boolean operator_lessEqualsThan(int,long) -> operator_lessEqualsThan
+    796:796:boolean operator_greaterThan(int,long) -> operator_greaterThan
+    810:810:boolean operator_greaterEqualsThan(int,long) -> operator_greaterEqualsThan
+    824:824:boolean operator_equals(int,long) -> operator_equals
+    838:838:boolean operator_notEquals(int,long) -> operator_notEquals
+    852:852:double operator_power(int,long) -> operator_power
+    867:867:boolean operator_tripleEquals(int,long) -> operator_tripleEquals
+    882:882:boolean operator_tripleNotEquals(int,long) -> operator_tripleNotEquals
+    896:896:int operator_plus(int,int) -> operator_plus
+    910:910:int operator_minus(int,int) -> operator_minus
+    924:924:int operator_multiply(int,int) -> operator_multiply
+    938:938:int operator_divide(int,int) -> operator_divide
+    952:952:int operator_modulo(int,int) -> operator_modulo
+    966:966:boolean operator_lessThan(int,int) -> operator_lessThan
+    980:980:boolean operator_lessEqualsThan(int,int) -> operator_lessEqualsThan
+    994:994:boolean operator_greaterThan(int,int) -> operator_greaterThan
+    1008:1008:boolean operator_greaterEqualsThan(int,int) -> operator_greaterEqualsThan
+    1022:1022:boolean operator_equals(int,int) -> operator_equals
+    1036:1036:boolean operator_notEquals(int,int) -> operator_notEquals
+    1050:1050:double operator_power(int,int) -> operator_power
+    1065:1065:boolean operator_tripleEquals(int,int) -> operator_tripleEquals
+    1080:1080:boolean operator_tripleNotEquals(int,int) -> operator_tripleNotEquals
+    1094:1094:int operator_plus(int,char) -> operator_plus
+    1108:1108:int operator_minus(int,char) -> operator_minus
+    1122:1122:int operator_multiply(int,char) -> operator_multiply
+    1136:1136:int operator_divide(int,char) -> operator_divide
+    1150:1150:int operator_modulo(int,char) -> operator_modulo
+    1164:1164:boolean operator_lessThan(int,char) -> operator_lessThan
+    1178:1178:boolean operator_lessEqualsThan(int,char) -> operator_lessEqualsThan
+    1192:1192:boolean operator_greaterThan(int,char) -> operator_greaterThan
+    1206:1206:boolean operator_greaterEqualsThan(int,char) -> operator_greaterEqualsThan
+    1220:1220:boolean operator_equals(int,char) -> operator_equals
+    1234:1234:boolean operator_notEquals(int,char) -> operator_notEquals
+    1248:1248:double operator_power(int,char) -> operator_power
+    1263:1263:boolean operator_tripleEquals(int,char) -> operator_tripleEquals
+    1278:1278:boolean operator_tripleNotEquals(int,char) -> operator_tripleNotEquals
+    1292:1292:int operator_plus(int,short) -> operator_plus
+    1306:1306:int operator_minus(int,short) -> operator_minus
+    1320:1320:int operator_multiply(int,short) -> operator_multiply
+    1334:1334:int operator_divide(int,short) -> operator_divide
+    1348:1348:int operator_modulo(int,short) -> operator_modulo
+    1362:1362:boolean operator_lessThan(int,short) -> operator_lessThan
+    1376:1376:boolean operator_lessEqualsThan(int,short) -> operator_lessEqualsThan
+    1390:1390:boolean operator_greaterThan(int,short) -> operator_greaterThan
+    1404:1404:boolean operator_greaterEqualsThan(int,short) -> operator_greaterEqualsThan
+    1418:1418:boolean operator_equals(int,short) -> operator_equals
+    1432:1432:boolean operator_notEquals(int,short) -> operator_notEquals
+    1446:1446:double operator_power(int,short) -> operator_power
+    1461:1461:boolean operator_tripleEquals(int,short) -> operator_tripleEquals
+    1476:1476:boolean operator_tripleNotEquals(int,short) -> operator_tripleNotEquals
+    1490:1490:int operator_plus(int,byte) -> operator_plus
+    1504:1504:int operator_minus(int,byte) -> operator_minus
+    1518:1518:int operator_multiply(int,byte) -> operator_multiply
+    1532:1532:int operator_divide(int,byte) -> operator_divide
+    1546:1546:int operator_modulo(int,byte) -> operator_modulo
+    1560:1560:boolean operator_lessThan(int,byte) -> operator_lessThan
+    1574:1574:boolean operator_lessEqualsThan(int,byte) -> operator_lessEqualsThan
+    1588:1588:boolean operator_greaterThan(int,byte) -> operator_greaterThan
+    1602:1602:boolean operator_greaterEqualsThan(int,byte) -> operator_greaterEqualsThan
+    1616:1616:boolean operator_equals(int,byte) -> operator_equals
+    1630:1630:boolean operator_notEquals(int,byte) -> operator_notEquals
+    1644:1644:double operator_power(int,byte) -> operator_power
+    1659:1659:boolean operator_tripleEquals(int,byte) -> operator_tripleEquals
+    1674:1674:boolean operator_tripleNotEquals(int,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.IntegerRange -> org.eclipse.xtext.xbase.lib.IntegerRange:
+    int start -> start
+    int end -> end
+    int step -> step
+    36:36:java.util.ListIterator iterator() -> iterator
+    79:79:int getStart() -> getStart
+    87:87:int getStep() -> getStep
+    95:95:int getEnd() -> getEnd
+    105:105:int getSize() -> getSize
+    115:115:org.eclipse.xtext.xbase.lib.IntegerRange withStep(int) -> withStep
+    128:131:boolean contains(int) -> contains
+    1:1:java.util.Iterator iterator() -> iterator
+    26:26:int access$1(org.eclipse.xtext.xbase.lib.IntegerRange) -> access$1
+    28:28:int access$2(org.eclipse.xtext.xbase.lib.IntegerRange) -> access$2
+    27:27:int access$3(org.eclipse.xtext.xbase.lib.IntegerRange) -> access$3
+org.eclipse.xtext.xbase.lib.IntegerRange$RangeIterator -> org.eclipse.xtext.xbase.lib.IntegerRange$RangeIterator:
+    int next -> next
+    int nextIndex -> nextIndex
+    org.eclipse.xtext.xbase.lib.IntegerRange this$0 -> this$0
+    144:147:boolean hasNext() -> hasNext
+    152:158:java.lang.Integer next() -> next
+    163:163:boolean hasPrevious() -> hasPrevious
+    168:172:java.lang.Integer previous() -> previous
+    177:177:int nextIndex() -> nextIndex
+    182:182:int previousIndex() -> previousIndex
+    187:187:void remove() -> remove
+    192:192:void set(java.lang.Integer) -> set
+    197:197:void add(java.lang.Integer) -> add
+    1:1:java.lang.Object next() -> next
+    1:1:java.lang.Object previous() -> previous
+    1:1:void add(java.lang.Object) -> add
+    1:1:void set(java.lang.Object) -> set
+org.eclipse.xtext.xbase.lib.IterableExtensions -> org.eclipse.xtext.xbase.lib.IterableExtensions:
+    65:65:java.lang.Iterable operator_plus(java.lang.Iterable,java.lang.Iterable) -> operator_plus
+    80:80:java.lang.Object findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findFirst
+    95:107:java.lang.Object findLast(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findLast
+    119:119:java.lang.Object head(java.lang.Iterable) -> head
+    131:131:java.lang.Iterable tail(java.lang.Iterable) -> tail
+    142:153:java.lang.Object last(java.lang.Iterable) -> last
+    169:176:java.lang.Iterable take(java.lang.Iterable,int) -> take
+    197:204:java.lang.Iterable drop(java.lang.Iterable,int) -> drop
+    222:222:boolean exists(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> exists
+    237:237:boolean forall(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> forall
+    253:253:java.lang.Iterable filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> filter
+    273:273:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
+    285:285:java.lang.Iterable filterNull(java.lang.Iterable) -> filterNull
+    304:304:java.lang.Iterable map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> map
+    321:321:java.lang.Iterable flatten(java.lang.Iterable) -> flatten
+    333:334:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> forEach
+    348:349:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure2) -> forEach
+    360:360:java.lang.String join(java.lang.Iterable) -> join
+    376:376:java.lang.String join(java.lang.Iterable,java.lang.CharSequence) -> join
+    396:396:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    420:420:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    435:435:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
+    446:446:boolean isNullOrEmpty(java.lang.Iterable) -> isNullOrEmpty
+    458:460:boolean isEmpty(java.lang.Iterable) -> isEmpty
+    471:471:int size(java.lang.Iterable) -> size
+    500:500:java.lang.Object reduce(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function2) -> reduce
+    536:536:java.lang.Object fold(java.lang.Iterable,java.lang.Object,org.eclipse.xtext.xbase.lib.Functions$Function2) -> fold
+    551:555:java.util.List toList(java.lang.Iterable) -> toList
+    570:574:java.util.Set toSet(java.lang.Iterable) -> toSet
+    590:590:java.util.Map toInvertedMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toInvertedMap
+    606:606:java.util.Map toMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toMap
+    626:626:java.util.Map groupBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> groupBy
+    642:642:java.util.List sort(java.lang.Iterable) -> sort
+    663:663:java.util.List sort(java.lang.Iterable,java.util.Comparator) -> sort
+    683:683:java.util.List sortWith(java.lang.Iterable,java.util.Comparator) -> sortWith
+    701:701:java.util.List sortBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortBy
+    720:724:java.lang.Iterable takeWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> takeWhile
+    745:749:java.lang.Iterable dropWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> dropWhile
+    772:774:java.lang.Iterable indexed(java.lang.Iterable) -> indexed
+    794:794:java.lang.Comparable min(java.lang.Iterable) -> min
+    812:812:java.lang.Object minBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> minBy
+    829:829:java.lang.Object min(java.lang.Iterable,java.util.Comparator) -> min
+    844:844:java.lang.Comparable max(java.lang.Iterable) -> max
+    862:862:java.lang.Object maxBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> maxBy
+    879:879:java.lang.Object max(java.lang.Iterable,java.util.Comparator) -> max
+org.eclipse.xtext.xbase.lib.IterableExtensions$1 -> org.eclipse.xtext.xbase.lib.IterableExtensions$1:
+    java.lang.Iterable val$iterable -> val$iterable
+    int val$count -> val$count
+    179:179:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IterableExtensions$2 -> org.eclipse.xtext.xbase.lib.IterableExtensions$2:
+    java.lang.Iterable val$iterable -> val$iterable
+    int val$count -> val$count
+    207:207:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IterableExtensions$3 -> org.eclipse.xtext.xbase.lib.IterableExtensions$3:
+    java.lang.Iterable val$iterable -> val$iterable
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
+    727:727:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IterableExtensions$4 -> org.eclipse.xtext.xbase.lib.IterableExtensions$4:
+    java.lang.Iterable val$iterable -> val$iterable
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
+    752:752:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IterableExtensions$5 -> org.eclipse.xtext.xbase.lib.IterableExtensions$5:
+    java.lang.Iterable val$iterable -> val$iterable
+    777:777:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IteratorExtensions -> org.eclipse.xtext.xbase.lib.IteratorExtensions:
+    53:55:java.lang.Iterable toIterable(java.util.Iterator) -> toIterable
+    83:83:java.util.Iterator operator_plus(java.util.Iterator,java.util.Iterator) -> operator_plus
+    98:105:java.lang.Object findFirst(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findFirst
+    120:128:java.lang.Object findLast(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findLast
+    139:141:java.lang.Object head(java.util.Iterator) -> head
+    153:153:java.util.Iterator tail(java.util.Iterator) -> tail
+    164:168:java.lang.Object last(java.util.Iterator) -> last
+    184:191:java.util.Iterator take(java.util.Iterator,int) -> take
+    219:226:java.util.Iterator drop(java.util.Iterator,int) -> drop
+    254:260:boolean exists(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> exists
+    275:281:boolean forall(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> forall
+    297:297:java.util.Iterator filter(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> filter
+    317:317:java.util.Iterator filter(java.util.Iterator,java.lang.Class) -> filter
+    330:330:java.util.Iterator filterNull(java.util.Iterator) -> filterNull
+    348:348:java.util.Iterator map(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> map
+    360:365:void forEach(java.util.Iterator,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> forEach
+    378:386:void forEach(java.util.Iterator,org.eclipse.xtext.xbase.lib.Procedures$Procedure2) -> forEach
+    398:398:java.lang.String join(java.util.Iterator) -> join
+    414:414:java.lang.String join(java.util.Iterator,java.lang.CharSequence) -> join
+    434:446:java.lang.String join(java.util.Iterator,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    470:485:java.lang.String join(java.util.Iterator,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    500:500:boolean elementsEqual(java.util.Iterator,java.util.Iterator) -> elementsEqual
+    515:515:boolean elementsEqual(java.util.Iterator,java.lang.Iterable) -> elementsEqual
+    526:526:boolean isNullOrEmpty(java.util.Iterator) -> isNullOrEmpty
+    538:538:boolean isEmpty(java.util.Iterator) -> isEmpty
+    550:550:int size(java.util.Iterator) -> size
+    579:588:java.lang.Object reduce(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function2) -> reduce
+    625:629:java.lang.Object fold(java.util.Iterator,java.lang.Object,org.eclipse.xtext.xbase.lib.Functions$Function2) -> fold
+    640:640:java.util.List toList(java.util.Iterator) -> toList
+    652:652:java.util.Set toSet(java.util.Iterator) -> toSet
+    669:674:java.util.Map toInvertedMap(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toInvertedMap
+    690:697:java.util.Map toMap(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toMap
+    717:730:java.util.Map groupBy(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> groupBy
+    746:750:java.util.Iterator takeWhile(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> takeWhile
+    778:782:java.util.Iterator dropWhile(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> dropWhile
+    821:823:java.util.Iterator indexed(java.util.Iterator) -> indexed
+    851:851:java.lang.Comparable min(java.util.Iterator) -> min
+    868:870:java.lang.Object minBy(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> minBy
+    887:894:java.lang.Object min(java.util.Iterator,java.util.Comparator) -> min
+    909:909:java.lang.Comparable max(java.util.Iterator) -> max
+    926:928:java.lang.Object maxBy(java.util.Iterator,org.eclipse.xtext.xbase.lib.Functions$Function1) -> maxBy
+    945:952:java.lang.Object max(java.util.Iterator,java.util.Comparator) -> max
+org.eclipse.xtext.xbase.lib.IteratorExtensions$1 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$1:
+    java.util.Iterator val$iterator -> val$iterator
+    58:58:java.util.Iterator iterator() -> iterator
+org.eclipse.xtext.xbase.lib.IteratorExtensions$2 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$2:
+    int remaining -> remaining
+    java.util.Iterator val$iterator -> val$iterator
+    197:202:java.lang.Object computeNext() -> computeNext
+org.eclipse.xtext.xbase.lib.IteratorExtensions$3 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$3:
+    java.util.Iterator val$iterator -> val$iterator
+    237:239:java.lang.Object computeNext() -> computeNext
+org.eclipse.xtext.xbase.lib.IteratorExtensions$4 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$4:
+    java.util.Iterator val$iterator -> val$iterator
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
+    753:759:java.lang.Object computeNext() -> computeNext
+org.eclipse.xtext.xbase.lib.IteratorExtensions$5 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$5:
+    boolean headFound -> headFound
+    java.util.Iterator val$iterator -> val$iterator
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
+    787:799:java.lang.Object computeNext() -> computeNext
+org.eclipse.xtext.xbase.lib.IteratorExtensions$6 -> org.eclipse.xtext.xbase.lib.IteratorExtensions$6:
+    int i -> i
+    java.util.Iterator val$iterator -> val$iterator
+    827:833:org.eclipse.xtext.xbase.lib.Pair computeNext() -> computeNext
+    1:1:java.lang.Object computeNext() -> computeNext
+org.eclipse.xtext.xbase.lib.ListExtensions -> org.eclipse.xtext.xbase.lib.ListExtensions:
+    45:46:java.util.List sortInplace(java.util.List) -> sortInplace
+    63:64:java.util.List sortInplace(java.util.List,java.util.Comparator) -> sortInplace
+    80:83:java.util.List sortInplaceBy(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortInplaceBy
+    96:96:java.util.List reverseView(java.util.List) -> reverseView
+    109:110:java.util.List reverse(java.util.List) -> reverse
+    128:128:java.util.List map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1) -> map
+org.eclipse.xtext.xbase.lib.LongExtensions -> org.eclipse.xtext.xbase.lib.LongExtensions:
+    33:33:long bitwiseOr(long,long) -> bitwiseOr
+    48:48:long bitwiseXor(long,long) -> bitwiseXor
+    63:63:long bitwiseAnd(long,long) -> bitwiseAnd
+    76:76:long bitwiseNot(long) -> bitwiseNot
+    94:94:long shiftLeft(long,int) -> shiftLeft
+    110:110:long operator_doubleLessThan(long,int) -> operator_doubleLessThan
+    128:128:long shiftRight(long,int) -> shiftRight
+    144:144:long operator_doubleGreaterThan(long,int) -> operator_doubleGreaterThan
+    162:162:long shiftRightUnsigned(long,int) -> shiftRightUnsigned
+    178:178:long operator_tripleGreaterThan(long,int) -> operator_tripleGreaterThan
+    192:192:long operator_minus(long) -> operator_minus
+    204:204:long operator_minusMinus(long) -> operator_minusMinus
+    216:216:java.lang.Long operator_minusMinus(java.lang.Long) -> operator_minusMinus
+    228:228:long operator_plusPlus(long) -> operator_plusPlus
+    240:240:java.lang.Long operator_plusPlus(java.lang.Long) -> operator_plusPlus
+    253:253:double operator_plus(long,double) -> operator_plus
+    267:267:double operator_minus(long,double) -> operator_minus
+    281:281:double operator_multiply(long,double) -> operator_multiply
+    295:295:double operator_divide(long,double) -> operator_divide
+    309:309:double operator_modulo(long,double) -> operator_modulo
+    323:323:boolean operator_lessThan(long,double) -> operator_lessThan
+    337:337:boolean operator_lessEqualsThan(long,double) -> operator_lessEqualsThan
+    351:351:boolean operator_greaterThan(long,double) -> operator_greaterThan
+    365:365:boolean operator_greaterEqualsThan(long,double) -> operator_greaterEqualsThan
+    379:379:boolean operator_equals(long,double) -> operator_equals
+    393:393:boolean operator_notEquals(long,double) -> operator_notEquals
+    407:407:double operator_power(long,double) -> operator_power
+    422:422:boolean operator_tripleEquals(long,double) -> operator_tripleEquals
+    437:437:boolean operator_tripleNotEquals(long,double) -> operator_tripleNotEquals
+    451:451:float operator_plus(long,float) -> operator_plus
+    465:465:float operator_minus(long,float) -> operator_minus
+    479:479:float operator_multiply(long,float) -> operator_multiply
+    493:493:float operator_divide(long,float) -> operator_divide
+    507:507:float operator_modulo(long,float) -> operator_modulo
+    521:521:boolean operator_lessThan(long,float) -> operator_lessThan
+    535:535:boolean operator_lessEqualsThan(long,float) -> operator_lessEqualsThan
+    549:549:boolean operator_greaterThan(long,float) -> operator_greaterThan
+    563:563:boolean operator_greaterEqualsThan(long,float) -> operator_greaterEqualsThan
+    577:577:boolean operator_equals(long,float) -> operator_equals
+    591:591:boolean operator_notEquals(long,float) -> operator_notEquals
+    605:605:double operator_power(long,float) -> operator_power
+    620:620:boolean operator_tripleEquals(long,float) -> operator_tripleEquals
+    635:635:boolean operator_tripleNotEquals(long,float) -> operator_tripleNotEquals
+    649:649:long operator_plus(long,long) -> operator_plus
+    663:663:long operator_minus(long,long) -> operator_minus
+    677:677:long operator_multiply(long,long) -> operator_multiply
+    691:691:long operator_divide(long,long) -> operator_divide
+    705:705:long operator_modulo(long,long) -> operator_modulo
+    719:719:boolean operator_lessThan(long,long) -> operator_lessThan
+    733:733:boolean operator_lessEqualsThan(long,long) -> operator_lessEqualsThan
+    747:747:boolean operator_greaterThan(long,long) -> operator_greaterThan
+    761:761:boolean operator_greaterEqualsThan(long,long) -> operator_greaterEqualsThan
+    775:775:boolean operator_equals(long,long) -> operator_equals
+    789:789:boolean operator_notEquals(long,long) -> operator_notEquals
+    803:803:double operator_power(long,long) -> operator_power
+    818:818:boolean operator_tripleEquals(long,long) -> operator_tripleEquals
+    833:833:boolean operator_tripleNotEquals(long,long) -> operator_tripleNotEquals
+    847:847:long operator_plus(long,int) -> operator_plus
+    861:861:long operator_minus(long,int) -> operator_minus
+    875:875:long operator_multiply(long,int) -> operator_multiply
+    889:889:long operator_divide(long,int) -> operator_divide
+    903:903:long operator_modulo(long,int) -> operator_modulo
+    917:917:boolean operator_lessThan(long,int) -> operator_lessThan
+    931:931:boolean operator_lessEqualsThan(long,int) -> operator_lessEqualsThan
+    945:945:boolean operator_greaterThan(long,int) -> operator_greaterThan
+    959:959:boolean operator_greaterEqualsThan(long,int) -> operator_greaterEqualsThan
+    973:973:boolean operator_equals(long,int) -> operator_equals
+    987:987:boolean operator_notEquals(long,int) -> operator_notEquals
+    1001:1001:double operator_power(long,int) -> operator_power
+    1016:1016:boolean operator_tripleEquals(long,int) -> operator_tripleEquals
+    1031:1031:boolean operator_tripleNotEquals(long,int) -> operator_tripleNotEquals
+    1045:1045:long operator_plus(long,char) -> operator_plus
+    1059:1059:long operator_minus(long,char) -> operator_minus
+    1073:1073:long operator_multiply(long,char) -> operator_multiply
+    1087:1087:long operator_divide(long,char) -> operator_divide
+    1101:1101:long operator_modulo(long,char) -> operator_modulo
+    1115:1115:boolean operator_lessThan(long,char) -> operator_lessThan
+    1129:1129:boolean operator_lessEqualsThan(long,char) -> operator_lessEqualsThan
+    1143:1143:boolean operator_greaterThan(long,char) -> operator_greaterThan
+    1157:1157:boolean operator_greaterEqualsThan(long,char) -> operator_greaterEqualsThan
+    1171:1171:boolean operator_equals(long,char) -> operator_equals
+    1185:1185:boolean operator_notEquals(long,char) -> operator_notEquals
+    1199:1199:double operator_power(long,char) -> operator_power
+    1214:1214:boolean operator_tripleEquals(long,char) -> operator_tripleEquals
+    1229:1229:boolean operator_tripleNotEquals(long,char) -> operator_tripleNotEquals
+    1243:1243:long operator_plus(long,short) -> operator_plus
+    1257:1257:long operator_minus(long,short) -> operator_minus
+    1271:1271:long operator_multiply(long,short) -> operator_multiply
+    1285:1285:long operator_divide(long,short) -> operator_divide
+    1299:1299:long operator_modulo(long,short) -> operator_modulo
+    1313:1313:boolean operator_lessThan(long,short) -> operator_lessThan
+    1327:1327:boolean operator_lessEqualsThan(long,short) -> operator_lessEqualsThan
+    1341:1341:boolean operator_greaterThan(long,short) -> operator_greaterThan
+    1355:1355:boolean operator_greaterEqualsThan(long,short) -> operator_greaterEqualsThan
+    1369:1369:boolean operator_equals(long,short) -> operator_equals
+    1383:1383:boolean operator_notEquals(long,short) -> operator_notEquals
+    1397:1397:double operator_power(long,short) -> operator_power
+    1412:1412:boolean operator_tripleEquals(long,short) -> operator_tripleEquals
+    1427:1427:boolean operator_tripleNotEquals(long,short) -> operator_tripleNotEquals
+    1441:1441:long operator_plus(long,byte) -> operator_plus
+    1455:1455:long operator_minus(long,byte) -> operator_minus
+    1469:1469:long operator_multiply(long,byte) -> operator_multiply
+    1483:1483:long operator_divide(long,byte) -> operator_divide
+    1497:1497:long operator_modulo(long,byte) -> operator_modulo
+    1511:1511:boolean operator_lessThan(long,byte) -> operator_lessThan
+    1525:1525:boolean operator_lessEqualsThan(long,byte) -> operator_lessEqualsThan
+    1539:1539:boolean operator_greaterThan(long,byte) -> operator_greaterThan
+    1553:1553:boolean operator_greaterEqualsThan(long,byte) -> operator_greaterEqualsThan
+    1567:1567:boolean operator_equals(long,byte) -> operator_equals
+    1581:1581:boolean operator_notEquals(long,byte) -> operator_notEquals
+    1595:1595:double operator_power(long,byte) -> operator_power
+    1610:1610:boolean operator_tripleEquals(long,byte) -> operator_tripleEquals
+    1625:1625:boolean operator_tripleNotEquals(long,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.MapExtensions -> org.eclipse.xtext.xbase.lib.MapExtensions:
+    38:43:void forEach(java.util.Map,org.eclipse.xtext.xbase.lib.Procedures$Procedure2) -> forEach
+    56:64:void forEach(java.util.Map,org.eclipse.xtext.xbase.lib.Procedures$Procedure3) -> forEach
+    84:86:java.util.Map filter(java.util.Map,org.eclipse.xtext.xbase.lib.Functions$Function2) -> filter
+    110:110:java.util.Map mapValues(java.util.Map,org.eclipse.xtext.xbase.lib.Functions$Function1) -> mapValues
+org.eclipse.xtext.xbase.lib.MapExtensions$1 -> org.eclipse.xtext.xbase.lib.MapExtensions$1:
+    org.eclipse.xtext.xbase.lib.Functions$Function2 val$predicate -> val$predicate
+    89:90:boolean apply(java.util.Map$Entry) -> apply
+    1:1:boolean apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.ObjectExtensions -> org.eclipse.xtext.xbase.lib.ObjectExtensions:
+    33:33:boolean operator_notEquals(java.lang.Object,java.lang.Object) -> operator_notEquals
+    49:49:boolean operator_equals(java.lang.Object,java.lang.Object) -> operator_equals
+    66:66:boolean identityEquals(java.lang.Object,java.lang.Object) -> identityEquals
+    83:83:boolean operator_tripleEquals(java.lang.Object,java.lang.Object) -> operator_tripleEquals
+    100:100:boolean operator_tripleNotEquals(java.lang.Object,java.lang.Object) -> operator_tripleNotEquals
+    116:116:org.eclipse.xtext.xbase.lib.Pair operator_mappedTo(java.lang.Object,java.lang.Object) -> operator_mappedTo
+    139:140:java.lang.Object operator_doubleArrow(java.lang.Object,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> operator_doubleArrow
+    156:156:java.lang.String operator_plus(java.lang.Object,java.lang.String) -> operator_plus
+    179:181:java.lang.Object operator_elvis(java.lang.Object,java.lang.Object) -> operator_elvis
+org.eclipse.xtext.xbase.lib.Pair -> org.eclipse.xtext.xbase.lib.Pair:
+    java.lang.Object k -> k
+    java.lang.Object v -> v
+    41:41:org.eclipse.xtext.xbase.lib.Pair of(java.lang.Object,java.lang.Object) -> of
+    66:66:java.lang.Object getKey() -> getKey
+    76:76:java.lang.Object getValue() -> getValue
+    81:86:boolean equals(java.lang.Object) -> equals
+    91:91:int hashCode() -> hashCode
+    96:96:java.lang.String toString() -> toString
+org.eclipse.xtext.xbase.lib.ProcedureExtensions -> org.eclipse.xtext.xbase.lib.ProcedureExtensions:
+    39:41:org.eclipse.xtext.xbase.lib.Procedures$Procedure0 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure1,java.lang.Object) -> curry
+    60:62:org.eclipse.xtext.xbase.lib.Procedures$Procedure1 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure2,java.lang.Object) -> curry
+    81:83:org.eclipse.xtext.xbase.lib.Procedures$Procedure2 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure3,java.lang.Object) -> curry
+    103:105:org.eclipse.xtext.xbase.lib.Procedures$Procedure3 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure4,java.lang.Object) -> curry
+    125:127:org.eclipse.xtext.xbase.lib.Procedures$Procedure4 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure5,java.lang.Object) -> curry
+    147:149:org.eclipse.xtext.xbase.lib.Procedures$Procedure5 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure6,java.lang.Object) -> curry
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$1 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$1:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure1 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    44:45:void apply() -> apply
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$2 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$2:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure2 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    65:66:void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$3 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$3:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure3 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    86:87:void apply(java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$4 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$4:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure4 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    108:109:void apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$5 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$5:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure5 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    130:131:void apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.ProcedureExtensions$6 -> org.eclipse.xtext.xbase.lib.ProcedureExtensions$6:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure6 val$procedure -> val$procedure
+    java.lang.Object val$argument -> val$argument
+    152:153:void apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures -> org.eclipse.xtext.xbase.lib.Procedures:
+org.eclipse.xtext.xbase.lib.Procedures$Procedure0 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure0:
+    void apply() -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure1 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure1:
+    void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure2 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure2:
+    void apply(java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure3 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure3:
+    void apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure4 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure4:
+    void apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure5 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure5:
+    void apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Procedures$Procedure6 -> org.eclipse.xtext.xbase.lib.Procedures$Procedure6:
+    void apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.Pure -> org.eclipse.xtext.xbase.lib.Pure:
+org.eclipse.xtext.xbase.lib.ReassignFirstArgument -> org.eclipse.xtext.xbase.lib.ReassignFirstArgument:
+org.eclipse.xtext.xbase.lib.ShortExtensions -> org.eclipse.xtext.xbase.lib.ShortExtensions:
+    31:31:int operator_minus(short) -> operator_minus
+    43:43:short operator_minusMinus(short) -> operator_minusMinus
+    55:55:java.lang.Short operator_minusMinus(java.lang.Short) -> operator_minusMinus
+    67:67:short operator_plusPlus(short) -> operator_plusPlus
+    79:79:java.lang.Short operator_plusPlus(java.lang.Short) -> operator_plusPlus
+    92:92:double operator_plus(short,double) -> operator_plus
+    106:106:double operator_minus(short,double) -> operator_minus
+    120:120:double operator_multiply(short,double) -> operator_multiply
+    134:134:double operator_divide(short,double) -> operator_divide
+    148:148:double operator_modulo(short,double) -> operator_modulo
+    162:162:boolean operator_lessThan(short,double) -> operator_lessThan
+    176:176:boolean operator_lessEqualsThan(short,double) -> operator_lessEqualsThan
+    190:190:boolean operator_greaterThan(short,double) -> operator_greaterThan
+    204:204:boolean operator_greaterEqualsThan(short,double) -> operator_greaterEqualsThan
+    218:218:boolean operator_equals(short,double) -> operator_equals
+    232:232:boolean operator_notEquals(short,double) -> operator_notEquals
+    246:246:double operator_power(short,double) -> operator_power
+    261:261:boolean operator_tripleEquals(short,double) -> operator_tripleEquals
+    276:276:boolean operator_tripleNotEquals(short,double) -> operator_tripleNotEquals
+    290:290:float operator_plus(short,float) -> operator_plus
+    304:304:float operator_minus(short,float) -> operator_minus
+    318:318:float operator_multiply(short,float) -> operator_multiply
+    332:332:float operator_divide(short,float) -> operator_divide
+    346:346:float operator_modulo(short,float) -> operator_modulo
+    360:360:boolean operator_lessThan(short,float) -> operator_lessThan
+    374:374:boolean operator_lessEqualsThan(short,float) -> operator_lessEqualsThan
+    388:388:boolean operator_greaterThan(short,float) -> operator_greaterThan
+    402:402:boolean operator_greaterEqualsThan(short,float) -> operator_greaterEqualsThan
+    416:416:boolean operator_equals(short,float) -> operator_equals
+    430:430:boolean operator_notEquals(short,float) -> operator_notEquals
+    444:444:double operator_power(short,float) -> operator_power
+    459:459:boolean operator_tripleEquals(short,float) -> operator_tripleEquals
+    474:474:boolean operator_tripleNotEquals(short,float) -> operator_tripleNotEquals
+    488:488:long operator_plus(short,long) -> operator_plus
+    502:502:long operator_minus(short,long) -> operator_minus
+    516:516:long operator_multiply(short,long) -> operator_multiply
+    530:530:long operator_divide(short,long) -> operator_divide
+    544:544:long operator_modulo(short,long) -> operator_modulo
+    558:558:boolean operator_lessThan(short,long) -> operator_lessThan
+    572:572:boolean operator_lessEqualsThan(short,long) -> operator_lessEqualsThan
+    586:586:boolean operator_greaterThan(short,long) -> operator_greaterThan
+    600:600:boolean operator_greaterEqualsThan(short,long) -> operator_greaterEqualsThan
+    614:614:boolean operator_equals(short,long) -> operator_equals
+    628:628:boolean operator_notEquals(short,long) -> operator_notEquals
+    642:642:double operator_power(short,long) -> operator_power
+    657:657:boolean operator_tripleEquals(short,long) -> operator_tripleEquals
+    672:672:boolean operator_tripleNotEquals(short,long) -> operator_tripleNotEquals
+    686:686:int operator_plus(short,int) -> operator_plus
+    700:700:int operator_minus(short,int) -> operator_minus
+    714:714:int operator_multiply(short,int) -> operator_multiply
+    728:728:int operator_divide(short,int) -> operator_divide
+    742:742:int operator_modulo(short,int) -> operator_modulo
+    756:756:boolean operator_lessThan(short,int) -> operator_lessThan
+    770:770:boolean operator_lessEqualsThan(short,int) -> operator_lessEqualsThan
+    784:784:boolean operator_greaterThan(short,int) -> operator_greaterThan
+    798:798:boolean operator_greaterEqualsThan(short,int) -> operator_greaterEqualsThan
+    812:812:boolean operator_equals(short,int) -> operator_equals
+    826:826:boolean operator_notEquals(short,int) -> operator_notEquals
+    840:840:double operator_power(short,int) -> operator_power
+    855:855:boolean operator_tripleEquals(short,int) -> operator_tripleEquals
+    870:870:boolean operator_tripleNotEquals(short,int) -> operator_tripleNotEquals
+    884:884:int operator_plus(short,char) -> operator_plus
+    898:898:int operator_minus(short,char) -> operator_minus
+    912:912:int operator_multiply(short,char) -> operator_multiply
+    926:926:int operator_divide(short,char) -> operator_divide
+    940:940:int operator_modulo(short,char) -> operator_modulo
+    954:954:boolean operator_lessThan(short,char) -> operator_lessThan
+    968:968:boolean operator_lessEqualsThan(short,char) -> operator_lessEqualsThan
+    982:982:boolean operator_greaterThan(short,char) -> operator_greaterThan
+    996:996:boolean operator_greaterEqualsThan(short,char) -> operator_greaterEqualsThan
+    1010:1010:boolean operator_equals(short,char) -> operator_equals
+    1024:1024:boolean operator_notEquals(short,char) -> operator_notEquals
+    1038:1038:double operator_power(short,char) -> operator_power
+    1053:1053:boolean operator_tripleEquals(short,char) -> operator_tripleEquals
+    1068:1068:boolean operator_tripleNotEquals(short,char) -> operator_tripleNotEquals
+    1082:1082:int operator_plus(short,short) -> operator_plus
+    1096:1096:int operator_minus(short,short) -> operator_minus
+    1110:1110:int operator_multiply(short,short) -> operator_multiply
+    1124:1124:int operator_divide(short,short) -> operator_divide
+    1138:1138:int operator_modulo(short,short) -> operator_modulo
+    1152:1152:boolean operator_lessThan(short,short) -> operator_lessThan
+    1166:1166:boolean operator_lessEqualsThan(short,short) -> operator_lessEqualsThan
+    1180:1180:boolean operator_greaterThan(short,short) -> operator_greaterThan
+    1194:1194:boolean operator_greaterEqualsThan(short,short) -> operator_greaterEqualsThan
+    1208:1208:boolean operator_equals(short,short) -> operator_equals
+    1222:1222:boolean operator_notEquals(short,short) -> operator_notEquals
+    1236:1236:double operator_power(short,short) -> operator_power
+    1251:1251:boolean operator_tripleEquals(short,short) -> operator_tripleEquals
+    1266:1266:boolean operator_tripleNotEquals(short,short) -> operator_tripleNotEquals
+    1280:1280:int operator_plus(short,byte) -> operator_plus
+    1294:1294:int operator_minus(short,byte) -> operator_minus
+    1308:1308:int operator_multiply(short,byte) -> operator_multiply
+    1322:1322:int operator_divide(short,byte) -> operator_divide
+    1336:1336:int operator_modulo(short,byte) -> operator_modulo
+    1350:1350:boolean operator_lessThan(short,byte) -> operator_lessThan
+    1364:1364:boolean operator_lessEqualsThan(short,byte) -> operator_lessEqualsThan
+    1378:1378:boolean operator_greaterThan(short,byte) -> operator_greaterThan
+    1392:1392:boolean operator_greaterEqualsThan(short,byte) -> operator_greaterEqualsThan
+    1406:1406:boolean operator_equals(short,byte) -> operator_equals
+    1420:1420:boolean operator_notEquals(short,byte) -> operator_notEquals
+    1434:1434:double operator_power(short,byte) -> operator_power
+    1449:1449:boolean operator_tripleEquals(short,byte) -> operator_tripleEquals
+    1464:1464:boolean operator_tripleNotEquals(short,byte) -> operator_tripleNotEquals
+org.eclipse.xtext.xbase.lib.StringExtensions -> org.eclipse.xtext.xbase.lib.StringExtensions:
+    33:33:java.lang.String operator_plus(java.lang.String,java.lang.Object) -> operator_plus
+    50:50:java.lang.String operator_plus(java.lang.String,java.lang.String) -> operator_plus
+    62:62:boolean isNullOrEmpty(java.lang.String) -> isNullOrEmpty
+    76:82:java.lang.String toFirstUpper(java.lang.String) -> toFirstUpper
+    96:102:java.lang.String toFirstLower(java.lang.String) -> toFirstLower
+org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate -> org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 delegate -> delegate
+    41:42:boolean apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.internal.FunctionDelegate -> org.eclipse.xtext.xbase.lib.internal.FunctionDelegate:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 delegate -> delegate
+    42:43:java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.internal.KeyComparator -> org.eclipse.xtext.xbase.lib.internal.KeyComparator:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 keyFunction -> keyFunction
+    41:48:int compare(java.lang.Object,java.lang.Object) -> compare
+org.eclipse.xtext.xbase.lib.internal.ToStringHelper -> org.eclipse.xtext.xbase.lib.internal.ToStringHelper:
+org.eclipse.xtext.xbase.lib.slim.Fake -> org.eclipse.xtext.xbase.lib.slim.Fake:
+org.eclipse.xtext.xbase.lib.util.ReflectExtensions -> org.eclipse.xtext.xbase.lib.util.ReflectExtensions:
+    39:46:void set(java.lang.Object,java.lang.String,java.lang.Object) -> set
+    63:70:java.lang.Object get(java.lang.Object,java.lang.String) -> get
+    74:85:java.lang.reflect.Field getDeclaredField(java.lang.Class,java.lang.String) -> getDeclaredField
+    105:131:java.lang.Object invoke(java.lang.Object,java.lang.String,java.lang.Object[]) -> invoke
+    135:147:boolean isCompatible(java.lang.reflect.Method,java.lang.String,java.lang.Object[]) -> isCompatible
+    151:161:java.lang.Class wrapperTypeFor(java.lang.Class) -> wrapperTypeFor
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder:
+    org.eclipse.xtext.xbase.lib.util.ToStringContext _toStringContext -> _toStringContext
+    java.lang.Object instance -> instance
+    java.lang.String typeName -> typeName
+    boolean multiLine -> multiLine
+    boolean skipNulls -> skipNulls
+    boolean showFieldNames -> showFieldNames
+    java.util.ArrayList parts -> parts
+    128:129:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
+    137:138:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
+    146:147:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
+    156:165:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
+    174:183:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
+    192:202:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
+    208:224:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
+    234:234:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
+    242:242:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
+    246:248:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
+    252:254:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
+    258:261:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
+    269:312:java.lang.String toString() -> toString
+    316:381:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
+    384:420:void serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
+    423:427:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
+    432:442:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
+    206:206:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    161:162:void apply(java.lang.reflect.Field) -> apply
+    1:1:void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    179:180:void apply(java.lang.reflect.Field) -> apply
+    1:1:void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    java.lang.String val$fieldName -> val$fieldName
+    197:198:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
+    1:1:java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder:
+    java.lang.StringBuilder builder -> builder
+    java.lang.String indentationString -> indentationString
+    java.lang.String newLineString -> newLineString
+    int indentation -> indentation
+    60:61:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder increaseIndent() -> increaseIndent
+    65:66:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
+    70:79:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
+    83:86:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder newLine() -> newLine
+    91:91:java.lang.String toString() -> toString
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part:
+    java.lang.String fieldName -> fieldName
+    java.lang.Object value -> value
+    47:47:void access$1(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part,java.lang.Object) -> access$1
+    45:45:void access$2(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part,java.lang.String) -> access$2
+    47:47:java.lang.Object access$3(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part) -> access$3
+    45:45:java.lang.String access$4(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part) -> access$4
+org.eclipse.xtext.xbase.lib.util.ToStringContext -> org.eclipse.xtext.xbase.lib.util.ToStringContext:
+    org.eclipse.xtext.xbase.lib.util.ToStringContext INSTANCE -> INSTANCE
+    java.lang.ThreadLocal currentlyProcessed -> currentlyProcessed
+    30:32:boolean startProcessing(java.lang.Object) -> startProcessing
+    36:38:void endProcessing(java.lang.Object) -> endProcessing
+org.eclipse.xtext.xbase.lib.util.ToStringContext$1 -> org.eclipse.xtext.xbase.lib.util.ToStringContext$1:
+    25:25:java.util.IdentityHashMap initialValue() -> initialValue
+    1:1:java.lang.Object initialValue() -> initialValue
+org.eclipse.xtext.xbase.lib.util.ToStringHelper -> org.eclipse.xtext.xbase.lib.util.ToStringHelper:
+    41:41:java.lang.String toString(java.lang.Object) -> toString

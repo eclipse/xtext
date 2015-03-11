@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions;
 
@@ -13,10 +10,10 @@ package org.eclipse.xtext.testlanguages.simpleExpressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.Atom#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage#getAtom()
  * @model

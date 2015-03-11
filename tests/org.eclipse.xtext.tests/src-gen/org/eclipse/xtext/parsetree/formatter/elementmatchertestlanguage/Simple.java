@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage;
 
@@ -13,12 +10,12 @@ package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getOptional <em>Optional</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getDatatype <em>Datatype</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage#getSimple()
  * @model

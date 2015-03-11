@@ -11,6 +11,8 @@ package org.eclipse.xtext.ui.editor.folding;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import com.ibm.icu.text.MessageFormat;
+
 /**
  * Class that gives access to the folding messages resource bundle.
  * 
@@ -63,6 +65,6 @@ public class FoldingMessages {
 	 * @return the string
 	 */
 	public static String getFormattedString(String key, Object arg) {
-		return getFormattedString(key, new Object[] { arg });
+		return MessageFormat.format(key, new Object[] { arg });
 	}
 }

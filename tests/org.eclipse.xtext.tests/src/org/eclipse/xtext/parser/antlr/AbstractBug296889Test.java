@@ -7,69 +7,70 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractBug296889Test extends AbstractXtextTests {
 	
-	public void testGetModel_01() throws Exception {
+	@Test public void testGetModel_01() throws Exception {
 		String model = "Model ID";
 		getModel(model);
 	}
 	
-	public void testGetModel_02() throws Exception {
+	@Test public void testGetModel_02() throws Exception {
 		String model = "Model ID ID";
 		getModel(model);
 	}
 
-	public void testGetModel_03() throws Exception {
+	@Test public void testGetModel_03() throws Exception {
 		String model = "Model ID-- ID";
 		getModel(model);
 	}
 	
-	public void testGetModel_04() throws Exception {
+	@Test public void testGetModel_04() throws Exception {
 		String model = "Model ID-- --ID";
 		getModel(model);
 	}
 	
-	public void testGetModel_05() throws Exception {
+	@Test public void testGetModel_05() throws Exception {
 		String model = "Model --ID ID ID--";
 		getModel(model);
 	}
 	
-	public void testGetModel_06() throws Exception {
+	@Test public void testGetModel_06() throws Exception {
 		String model = "Model ID-- --";
 		getModelAndExpect(model, 1);
 	}
 	
-	public void testGetDataType_01() throws Exception {
+	@Test public void testGetDataType_01() throws Exception {
 		String model = "DataType ID";
 		getModel(model);
 	}
 	
-	public void testGetDataType_02() throws Exception {
+	@Test public void testGetDataType_02() throws Exception {
 		String model = "DataType ID ID";
 		getModel(model);
 	}
 
-	public void testGetDataType_03() throws Exception {
+	@Test public void testGetDataType_03() throws Exception {
 		String model = "DataType ID-- ID";
 		getModel(model);
 	}
 	
-	public void testGetDataType_04() throws Exception {
+	@Test public void testGetDataType_04() throws Exception {
 		String model = "DataType ID-- --ID";
 		getModel(model);
 	}
 	
-	public void testGetDataType_05() throws Exception {
+	@Test public void testGetDataType_05() throws Exception {
 		String model = "DataType --ID ID ID--";
 		getModel(model);
 	}
 	
-	public void testGetDataType_06() throws Exception {
+	@Test public void testGetDataType_06() throws Exception {
 		String model = "DataType ID-- --";
 		getModelAndExpect(model, 1);
 	}

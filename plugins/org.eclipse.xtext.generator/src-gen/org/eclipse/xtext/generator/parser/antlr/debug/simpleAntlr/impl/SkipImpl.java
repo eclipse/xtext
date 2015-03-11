@@ -1,11 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip;
 

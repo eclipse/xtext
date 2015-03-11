@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.locationprovidertest;
 
@@ -42,6 +39,69 @@ public interface LocationprovidertestFactory extends EFactory
    * @generated
    */
   Element createElement();
+
+  /**
+   * Returns a new object of class '<em>Component</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Component</em>'.
+   * @generated
+   */
+  Component createComponent();
+
+  /**
+   * Returns a new object of class '<em>Bus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bus</em>'.
+   * @generated
+   */
+  Bus createBus();
+
+  /**
+   * Returns a new object of class '<em>Processor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Processor</em>'.
+   * @generated
+   */
+  Processor createProcessor();
+
+  /**
+   * Returns a new object of class '<em>Mode</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mode</em>'.
+   * @generated
+   */
+  Mode createMode();
+
+  /**
+   * Returns a new object of class '<em>Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition</em>'.
+   * @generated
+   */
+  Transition createTransition();
+
+  /**
+   * Returns a new object of class '<em>Port</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Port</em>'.
+   * @generated
+   */
+  Port createPort();
+
+  /**
+   * Returns a new object of class '<em>Data</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Data</em>'.
+   * @generated
+   */
+  Data createData();
 
   /**
    * Returns the package supported by this factory.

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage#getDatatypeBug286557()
  * @model

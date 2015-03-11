@@ -15,8 +15,9 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
+import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
+import com.google.inject.Injector;
 
 /**
  * An {@link IResourceServiceProvider} for non-Xtext resources. 
@@ -27,9 +28,10 @@ import com.google.inject.internal.Nullable;
 public class GenericResourceServiceProvider implements IResourceServiceProvider {
 
 	@Inject
-	@Nullable
+	/* @Nullable */
 	private IContainer.Manager containerManager;
 	
+	@Override
 	public IContainer.Manager getContainerManager() {
 		return containerManager;
 	}
@@ -37,14 +39,16 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
 
+	@Override
 	public IResourceDescription.Manager getResourceDescriptionManager() {
 		return resourceDescriptionManager;
 	}
 
 	@Inject
-	@Nullable
+	/* @Nullable */
 	private IResourceValidator resourceValidator = IResourceValidator.NULL;
 
+	@Override
 	public IResourceValidator getResourceValidator() {
 		return resourceValidator;
 	}
@@ -52,6 +56,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
 	
+	@Override
 	public boolean canHandle(URI uri) {
 		return fileExtensionProvider.isValid(uri.fileExtension());
 	}
@@ -59,11 +64,20 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private IEncodingProvider encodingProvider;
 	
+	@Override
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
 	
+	@Inject
+	private Injector injector;
+	
+	@Override
 	public <T> T get(Class<T> t) {
-		return null;
+		try {
+			return injector.getInstance(t);
+		} catch (ConfigurationException e) {
+			return null;
+		}
 	}
 }

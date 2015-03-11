@@ -16,8 +16,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  * This interface is implemented by components of the framework that need to collect all default configurations.
  * It is not intended to be implemented by clients, although it is easily possible.
  * 
- * @see ILexicalHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
- * @see ISemanticHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
+ * @see IHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -31,8 +30,7 @@ public interface IHighlightingConfigurationAcceptor {
 	 * @param name the human readable name of the style.
 	 * @param style the default style with the given id and name.
 	 * @throws IllegalStateException when an id has been used twice.
-	 * @see ILexicalHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
-	 * @see ISemanticHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
+	 * @see IHighlightingConfiguration#configure(IHighlightingConfigurationAcceptor)
 	 */
 	void acceptDefaultHighlighting(String id, String name, TextStyle style);
 	

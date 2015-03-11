@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import static org.easymock.EasyMock.*;
-
 import java.io.InputStream;
 import java.util.List;
 
@@ -17,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -33,23 +32,50 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.tests.TestErrorAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
+import org.junit.Test;
+
+import com.google.common.base.Joiner;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
- * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
+ * @see https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference
  */
 public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
+	/**
+	 * @author Dennis Hübner - Initial contribution and API
+	 */
+	private final class MockedXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
+		private int called = 0;
+		private GeneratedMetamodel testMetamodel;
 
-	private ErrorAcceptor errorAcceptorMock;
+		public MockedXtext2EcorePostProcessor(GeneratedMetamodel testMetamodel) {
+			this.testMetamodel = testMetamodel;
+		}
+
+		@Override
+		public void process(GeneratedMetamodel metamodel) {
+			if (testMetamodel.equals(metamodel)) {
+				called++;
+			}
+		}
+
+		public int proccessMethCalled() {
+			return called;
+		}
+	}
+
+	private TestErrorAcceptor errorAcceptorMock;
 
 	public static class MyErrorAcceptor implements ErrorAcceptor {
 
@@ -61,6 +87,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			this.second = second;
 		}
 
+		@Override
 		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 			first.acceptError(errorCode, message, element);
 			second.acceptError(errorCode, message, element);
@@ -69,14 +96,14 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		errorAcceptorMock = createMock(ErrorAcceptor.class);
+		errorAcceptorMock = new TestErrorAcceptor();
 		with(XtextStandaloneSetup.class);
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		errorAcceptorMock = null;
 		super.tearDown();
 	}
@@ -89,7 +116,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertNotNull(result);
 		return result;
 	}
-	
+
 	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
 		return getEPackageFromGrammar(xtextGrammar, 0);
 	}
@@ -120,9 +147,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	}
 
 	private List<EPackage> getEPackagesFromGrammar(String xtextGrammar, int expectedErrors) throws Exception {
-		replay(errorAcceptorMock);
+		errorAcceptorMock.replay();
 		Grammar grammar = (Grammar) getModelAndExpect(xtextGrammar, expectedErrors);
-		verify(errorAcceptorMock);
+		errorAcceptorMock.verify();
 		List<EPackage> metamodels = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar);
 		assertNotNull(metamodels);
 		return metamodels;
@@ -159,9 +186,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		return reference;
 	}
 
+	@Test
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
-		final String xtextGrammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' MyRule: myFeature=INT;";
+		final String xtextGrammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' MyRule: myFeature=INT;";
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
 		transformer.removeGeneratedPackages();
@@ -182,9 +210,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertNotNull(parentInfos.getInfo(referenced, "EInt"));
 	}
 
+	@Test
 	public void testRuleWithoutExplicitReturnType() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' MyRule: myFeature=INT;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' MyRule: myFeature=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EList<EClassifier> classifiers = ePackage.getEClassifiers();
 		assertEquals(1, classifiers.size());
@@ -192,18 +221,20 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals("MyRule", implicitlyDefinedMetatype.getName());
 	}
 
+	@Test
 	public void testRulesWithExplicitReturnType() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA returns TypeA: featureA=INT; RuleB returns TypeB: featureB= INT;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA returns TypeA: featureA=INT; RuleB returns TypeB: featureB= INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		assertNotNull(ePackage.getEClassifier("TypeA"));
 		assertNotNull(ePackage.getEClassifier("TypeB"));
 	}
 
+	@Test
 	public void testSimpleHierarchy() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB; RuleB: featureB= INT;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB; RuleB: featureB= INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -216,17 +247,14 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(ruleA, superClass);
 	}
 
+	@Test
 	public void testDiamondHierarchy() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' " +
-				"Model: name=ID value=SubNamed1 otherValue=SubNamed2 thirdValue=SubNamed3;" +
-				"Named: SubNamed1 | SubNamed2 | SubNamed3;" +
-				"SubNamed1: ConcreteNamed1 | ConcreteNamed2;" +
-				"SubNamed2: ConcreteNamed2 | ConcreteNamed3;" +
-				"SubNamed3: ConcreteNamed1 | ConcreteNamed3;" +
-				"ConcreteNamed1: name=ID bar=ID foo=ID a=ID;" +
-				"ConcreteNamed2: name=ID bar=ID zonk=ID b=ID;" +
-				"ConcreteNamed3: name=ID foo=ID zonk=ID c=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test' "
+				+ "Model: name=ID value=SubNamed1 otherValue=SubNamed2 thirdValue=SubNamed3;"
+				+ "Named: SubNamed1 | SubNamed2 | SubNamed3;" + "SubNamed1: ConcreteNamed1 | ConcreteNamed2;"
+				+ "SubNamed2: ConcreteNamed2 | ConcreteNamed3;" + "SubNamed3: ConcreteNamed1 | ConcreteNamed3;"
+				+ "ConcreteNamed1: name=ID bar=ID foo=ID a=ID;" + "ConcreteNamed2: name=ID bar=ID zonk=ID b=ID;"
+				+ "ConcreteNamed3: name=ID foo=ID zonk=ID c=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(8, ePackage.getEClassifiers().size());
 		EClassifier classifier = ePackage.getEClassifier("Named");
@@ -279,9 +307,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals("concreteNamed3", 1, concreteNamed3.getEStructuralFeatures().size());
 	}
 
+	@Test
 	public void testSingleFeatures() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: featureA=INT;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: featureA=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -290,9 +319,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleA, 0, "featureA", "EInt");
 	}
 
+	@Test
 	public void testCommonTerminalsFeatureTypes() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: featureA=ID featureB=INT featureC=STRING;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: featureA=ID featureB=INT featureC=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -303,9 +333,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleA, 2, "featureC", "EString");
 	}
 
+	@Test
 	public void testCardinalityOfFeatures() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: featureA?=ID featureB=INT featureC+=STRING;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: featureA?=ID featureB=INT featureC+=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -316,9 +347,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleA, 2, "featureC", "EString", 0, -1);
 	}
 
+	@Test
 	public void testOptionalAssignmentsInGroup() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: (featureA?='abstract' featureB+=INT)?;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: (featureA?='abstract' featureB+=INT)?;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -328,9 +360,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleA, 1, "featureB", "EInt", 0, -1);
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOptionalRuleCall() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -345,9 +378,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceMandatoryRuleCall() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -362,9 +396,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleB, 1, "featureB", "EString");
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOfMandatoryAlternativeRuleCalls() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -391,9 +426,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleC, 1, "featureC2", "EString");
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOfOptionalOptionalRuleCalls() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -420,10 +456,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleC, 1, "featureC2", "EString");
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOfNestedRuleCalls() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
-		grammar += " RuleA: ((RuleB|RuleC featureC1=ID)? featureBC=ID | (RuleC|RuleD featureD1=ID) featureCD=ID) featureA=ID;";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA: ((RuleB|RuleC featureC1=ID) featureBC=ID | (RuleC|RuleD featureD1=ID) featureCD=ID) featureA=ID;";
 		grammar += " RuleB: featureB2=ID;";
 		grammar += " RuleC: featureC2=ID;";
 		grammar += " RuleD: featureD2=ID;";
@@ -448,8 +484,51 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(ruleA, ruleD.getESuperTypes().get(0));
 
 		// test all features are separated
+		assertEquals(1, ruleA.getEAttributes().size());
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
+		assertEquals(2, ruleB.getEAttributes().size());
+		assertAttributeConfiguration(ruleB, 0, "featureBC", "EString");
+		assertAttributeConfiguration(ruleB, 1, "featureB2", "EString");
+		assertEquals(4, ruleC.getEAttributes().size());
+		assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
+		assertAttributeConfiguration(ruleC, 1, "featureBC", "EString");
+		assertAttributeConfiguration(ruleC, 2, "featureCD", "EString");
+		assertAttributeConfiguration(ruleC, 3, "featureC2", "EString");
+		assertEquals(3, ruleD.getEAttributes().size());
+		assertAttributeConfiguration(ruleD, 0, "featureD1", "EString");
+		assertAttributeConfiguration(ruleD, 1, "featureCD", "EString");
+		assertAttributeConfiguration(ruleD, 2, "featureD2", "EString");
+	}
+
+	@Test
+	public void testFeaturesAndInheritanceOfNestedRuleCalls_02() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA: ((RuleB|RuleC featureC1=ID)? featureABC=ID | (RuleC|RuleD featureD1=ID) featureCD=ID) featureA=ID;";
+		grammar += " RuleB: featureB2=ID;";
+		grammar += " RuleC: featureC2=ID;";
+		grammar += " RuleD: featureD2=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
+		assertNotNull(ruleD);
+
+		// test inheritance
+		assertTrue(ruleA.getESuperTypes().isEmpty());
+		assertEquals(1, ruleB.getESuperTypes().size());
+		assertEquals(ruleA, ruleB.getESuperTypes().get(0));
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertEquals(ruleA, ruleC.getESuperTypes().get(0));
+		assertEquals(1, ruleD.getESuperTypes().size());
+		assertEquals(ruleA, ruleD.getESuperTypes().get(0));
+
 		assertEquals(2, ruleA.getEAttributes().size());
-		assertAttributeConfiguration(ruleA, 0, "featureBC", "EString");
+		assertAttributeConfiguration(ruleA, 0, "featureABC", "EString");
 		assertAttributeConfiguration(ruleA, 1, "featureA", "EString");
 		assertEquals(1, ruleB.getEAttributes().size());
 		assertAttributeConfiguration(ruleB, 0, "featureB2", "EString");
@@ -463,9 +542,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleD, 2, "featureD2", "EString");
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOfActions01() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: ({Add.a=current} '+'|{Sub.a=current} '-') featureAS=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: ({Add.a=current} '+'|{Sub.a=current} '-') featureAS=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -495,6 +575,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(0, sub.getEReferences().size());
 	}
 
+	@Test
 	public void testFeaturesAndInheritanceOfActions02() throws Exception {
 		String grammar = "";
 		grammar += "grammar org.eclipse.xtext.testlanguages.ActionTestLanguage with org.eclipse.xtext.common.Terminals ";
@@ -530,9 +611,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertSame(type, thing.getESuperTypes().get(0));
 	}
 
+	@Test
 	public void testAssignedRuleCall() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -549,11 +631,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
 	}
 
+	@Test
 	public void testAssignedCrossReference() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' " +
-				"RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; " +
-				"RuleB returns TypeB: featureB=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test' "
+				+ "RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; " + "RuleB returns TypeB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -570,9 +651,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(typeB, 0, "featureB", "EString");
 	}
 
+	@Test
 	public void testAssignedParenthesizedElement() throws Exception {
-		String grammar = " grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = " grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += " RuleA: featureA1?=(RuleB) refA1=(RuleB) refA2=(RuleB|RuleC) refA3+=(RuleB|RuleC|RuleD) refA4=(RuleB|RuleD) featureA2+=('a'|'b');";
 		grammar += " RuleB returns TypeB: RuleC? featureB=ID;";
 		grammar += " RuleC: featureC=ID;";
@@ -602,9 +683,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", true, 0, 1);
 	}
 
+	@Test
 	public void testAssignedKeyword() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -614,12 +696,14 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(ruleA, 1, "featureB", "EString", 0, 1);
 	}
 
+	@Test
 	public void testImportWithoutAlias() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
 		getEPackageFromGrammar(grammar);
 	}
 
+	@Test
 	public void testGenerateTwoModels() throws Exception {
 		String grammar = "";
 		grammar += " grammar test with org.eclipse.xtext.common.Terminals";
@@ -644,6 +728,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertNotNull(typeB);
 	}
 
+	@Test
 	public void testUseSameModelAlias() throws Exception {
 		String grammar = "";
 		grammar += " grammar test with org.eclipse.xtext.common.Terminals";
@@ -652,57 +737,64 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
 		grammar += " RuleB returns target::TypeB: featureB=ID;";
 
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(TransformationErrorCode.AliasForMetamodelAlreadyExists,
+				TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
+		errorAcceptorMock.acceptError(TransformationErrorCode.UnknownMetaModelAlias, TestErrorAcceptor.ANY_STRING,
+				TestErrorAcceptor.ANY_EOBJECT);
+		errorAcceptorMock.acceptError(TransformationErrorCode.UnknownMetaModelAlias, TestErrorAcceptor.ANY_STRING,
+				TestErrorAcceptor.ANY_EOBJECT);
 
 		List<EPackage> ePackages = getEPackagesFromGrammar(grammar, 5);
 		assertEquals(0, ePackages.size());
 	}
 
+	@Test
 	public void testModifyingSealedModel() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals " +
-				"generate test 'http://test' " +
-				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				"RuleA returns ecore::SomeNewTypeA: feature=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals " + "generate test 'http://test' "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ "RuleA returns ecore::SomeNewTypeA: feature=ID;";
+		errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
+				TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
 		EPackage result = getEPackageFromGrammar(grammar, 2);
 		assertTrue(result.getEClassifiers().isEmpty());
 	}
 
+	@Test
 	public void testImportingUnknownModel() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals " +
-				"generate test 'http://test' " +
-				"import 'unknown-scheme://www.unknownModel' as unknownModel " +
-				"RuleA: feature=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals " + "generate test 'http://test' "
+				+ "import 'unknown-scheme://www.unknownModel' as unknownModel " + "RuleA: feature=ID;";
 		getEPackageFromGrammar(grammar, 1);
 	}
 
+	@Test
 	public void testMoreThanOneRuleCall() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
-				(EObject) anyObject());
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
+		errorAcceptorMock.acceptError(TransformationErrorCode.MoreThanOneTypeChangeInOneRule,
+				TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
 		getEPackageFromGrammar(grammar, 1);
 	}
 
+	@Test
 	public void testRuleCallAndAction() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB {TypeC.B = current}; RuleB: featureB=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB {TypeC.B = current}; RuleB: featureB=ID;";
 		getEPackageFromGrammar(grammar);
 	}
 
+	@Test
 	public void testRuleCallActionAndRuleCall() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
-				(EObject) anyObject());
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
+		errorAcceptorMock.acceptError(TransformationErrorCode.MoreThanOneTypeChangeInOneRule,
+				TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
 		getEPackageFromGrammar(grammar, 1);
 	}
 
+	@Test
 	public void testAddingFeatureTwice() throws Exception {
-		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
@@ -712,14 +804,15 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(typeA, 0, "featureA", "EString");
 	}
 
+	@Test
 	public void testAddingDifferentFeaturesWithSameName01() throws Exception {
 		// simple datatypes do not have a common compatible type
-		final String grammar = "" + " grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'" + " RuleA returns TypeA: featureA=ID;"
+		final String grammar = "" + " grammar test with org.eclipse.xtext.common.Terminals"
+				+ " generate test 'http://test'" + " RuleA returns TypeA: featureA=ID;"
 				+ " RuleB returns TypeA: featureA=INT;";
 
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoCompatibleFeatureTypeAvailable), (String) anyObject(),
-				(EObject) anyObject());
+		errorAcceptorMock.acceptError(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
+				TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
 		EPackage ePackage = getEPackageFromGrammar(grammar, 1);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
@@ -729,9 +822,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertAttributeConfiguration(typeA, 0, "featureA", "EString");
 	}
 
+	@Test
 	public void testAddingDifferentFeaturesWithSameName02() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += " RuleA returns TypeA: featureA=RuleD;";
 		grammar += " RuleB returns TypeA: featureA=RuleC;";
 		grammar += " RuleC: RuleD;";
@@ -750,10 +843,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertReferenceConfiguration(typeA, 0, "featureA", "RuleC", true, 0, 1);
 	}
 
+	@Test
 	public void testAddingDifferentFeaturesWithSameName03() throws Exception {
 		// independent rules are combined as EObject
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += " RuleA returns TypeA: featureA1=ID featureA2=RuleD featureA3=RuleC;";
 		grammar += " RuleB returns TypeA: featureA2=RuleC featureA4=INT;";
 		grammar += " RuleC: featureC=INT;";
@@ -777,9 +870,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertReferenceConfiguration(typeA, 1, "featureA3", "RuleC", true, 0, 1);
 	}
 
+	@Test
 	public void testUplift01() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += " RuleA: (RuleB|RuleC) featureA=ID;";
 		grammar += " RuleB: featureB=INT;";
 		grammar += " RuleC: (featureA=ID)?;";
@@ -802,32 +895,31 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(0, ruleC.getEAttributes().size());
 	}
 
+	@Test
 	public void testCallOfUndeclaredRule() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoSuchRuleAvailable), (String) anyObject(),
-				(EObject) anyObject());
+		errorAcceptorMock.acceptError(TransformationErrorCode.NoSuchRuleAvailable, TestErrorAcceptor.ANY_STRING,
+				TestErrorAcceptor.ANY_EOBJECT);
 		EPackage ePackage = getEPackageFromGrammar(grammar, 1);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		assertEquals("RuleA", ePackage.getEClassifiers().get(0).getName());
 	}
 
+	@Test
 	public void testExpressionLikeLangauge() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
-		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;" +
-				"Atom returns Ex :   Number |  '(' Ex ')';" +
-				"Number : value=INT;";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;"
+				+ "Atom returns Ex :   Number |  '(' Ex ')';" + "Number : value=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
-//		logger.debug(EmfFormater.objToStr(ePackage));
-		assertEquals(0,classifier.getEStructuralFeatures().size());
+		//		logger.debug(EmfFormater.objToStr(ePackage));
+		assertEquals(0, classifier.getEStructuralFeatures().size());
 	}
 
+	@Test
 	public void testClassNameEString() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
 		grammar += "Start returns EString: id=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("EString");
@@ -839,42 +931,39 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
 	}
 
+	@Test
 	public void testNoException_01() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				"generate test 'http://test'\n" +
-				"CompositeModel: (model+=Model)+;\n" +
-				"Model: id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ';'\n" +
-				"ModelId returns ecore::EString: ID '.' ID;\n" +
-				"NestedModelId : ModelId '.' ModelId;\n" +
-				"Fraction returns EBigDecimal: INT ('/' INT)?;\n" +
-				"Vector : '(' INT I";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " + "generate test 'http://test'\n"
+				+ "CompositeModel: (model+=Model)+;\n"
+				+ "Model: id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ';'\n"
+				+ "ModelId returns ecore::EString: ID '.' ID;\n" + "NestedModelId : ModelId '.' ModelId;\n"
+				+ "Fraction returns EBigDecimal: INT ('/' INT)?;\n" + "Vector : '(' INT I";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 8);
-		for(Diagnostic d: resource.getErrors()) {
+		for (Diagnostic d : resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
 
+	@Test
 	public void testNoException_02() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'\n" +
-				"Model: (children+=Element)*;\n" +
-				"Element returns Type: Item ( { Item.items+=current } items+=Item );\n" +
-				"Item returns Type:	{ T";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'\n"
+				+ "Model: (children+=Element)*;\n"
+				+ "Element returns Type: Item ( { Item.items+=current } items+=Item );\n" + "Item returns Type:	{ T";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
-		for(Diagnostic d: resource.getErrors()) {
+		for (Diagnostic d : resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
 
+	@Test
 	public void testNoException_03() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				"generate test 'http://test'\n" +
-				"CompositeModel: (type+=EClassifier)+;\n" +
-				"EClassifier returns ecore::EClassifier: EDataType | EClass;\n" +
-				"EClass returns ecore::EClass: 'class' name=ID;\n" +
-				"EDataType returns ecore::EDataType: 'dt' name=ID;";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " + "generate test 'http://test'\n"
+				+ "CompositeModel: (type+=EClassifier)+;\n"
+				+ "EClassifier returns ecore::EClassifier: EDataType | EClass;\n"
+				+ "EClass returns ecore::EClass: 'class' name=ID;\n"
+				+ "EDataType returns ecore::EDataType: 'dt' name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
 	}
@@ -882,18 +971,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266440
 	 */
+	@Test
 	public void testBug_266440() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				" generate bugreport 'http://bugreport/266440'\n" +
-				"CompositeModel: (type+=EClassifier)+;\n" +
-				"EClassifier: EDataType | EClass;\n" +
-				"EClass: 'class' name=ID;\n" +
-				"EDataType: 'dt' name=ID;";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ " generate bugreport 'http://bugreport/266440'\n" + "CompositeModel: (type+=EClassifier)+;\n"
+				+ "EClassifier: EDataType | EClass;\n" + "EClass: 'class' name=ID;\n" + "EDataType: 'dt' name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
 		Grammar parsedGrammar = (Grammar) resource.getContents().get(0);
-		for(AbstractRule rule: parsedGrammar.getRules()) {
+		for (AbstractRule rule : parsedGrammar.getRules()) {
 			EClassifier classifier = rule.getType().getClassifier();
 			EPackage pack = classifier.getEPackage();
 			assertEquals("bugreport", pack.getName());
@@ -903,377 +990,332 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266807
 	 */
+	@Test
 	public void testBug_266807() throws Exception {
 		with(new XtextStandaloneSetup());
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) rs.createResource(
-				URI.createURI("classpath:/"+getClass().getPackage().getName().replace('.', '/')+"/Test.xtext"), 
+				URI.createURI("classpath:/" + getClass().getPackage().getName().replace('.', '/') + "/Test.xtext"),
 				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		resource.load(null);
-		for(Diagnostic d: resource.getErrors()) {
+		for (Diagnostic d : resource.getErrors()) {
 			fail(d.getMessage());
 		}
 	}
-	
+
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
 	 */
+	@Test
 	public void testBug_272566_1() throws Exception {
 		with(new XtextStandaloneSetup());
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
-				"generate test 'http://test'\n" +
-				"Model:\n" +
-				"   test=Test\n" +
-				";\n" +
-				"\n" +
-				"Test:\n" +
-				"   \"keyword\" WS name=ID\n" +
-				";";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" + "generate test 'http://test'\n"
+				+ "Model:\n" + "   test=Test\n" + ";\n" + "\n" + "Test:\n" + "   \"keyword\" WS name=ID\n" + ";";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
-	
+
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
 	 */
+	@Test
 	public void testBug_272566_2() throws Exception {
 		with(new XtextStandaloneSetup());
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
-				"generate test 'http://test'\n" +
-				"Model:\n" +
-				"   test=Test\n" +
-				";\n" +
-				"\n" +
-				"Test:\n" +
-				"   \"keyword\" FooBar name=ID\n" +
-				";\n" +
-				"FooBar:\n" +
-				"	'zonk' WS WS INT WS" +
-				";";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" + "generate test 'http://test'\n"
+				+ "Model:\n" + "   test=Test\n" + ";\n" + "\n" + "Test:\n" + "   \"keyword\" FooBar name=ID\n" + ";\n"
+				+ "FooBar:\n" + "	'zonk' WS WS INT WS" + ";";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
-	
+
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
 	 */
+	@Test
 	public void testBug_272566_3() throws Exception {
 		with(new XtextStandaloneSetup());
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
-				"generate test 'http://test'\n" +
-				"Model:\n" +
-				"   test=Test\n" +
-				";\n" +
-				"\n" +
-				"Test:\n" +
-				"   \"keyword\" MyEnum name=ID\n" +
-				";\n" +
-				"enum MyEnum:\n" +
-				"	A | B" +
-				";";
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" + "generate test 'http://test'\n"
+				+ "Model:\n" + "   test=Test\n" + ";\n" + "\n" + "Test:\n" + "   \"keyword\" MyEnum name=ID\n" + ";\n"
+				+ "enum MyEnum:\n" + "	A | B" + ";";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		for(Diagnostic d: resource.getErrors()) {
+		for (Diagnostic d : resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
-	
+
+	@Test
 	public void testInheritFromEObject_01() throws Exception {
-		String grammar =
-				" grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				" import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore' as test " +
-				" A returns ecore::EObject: B | C; " +
-				" B returns test::Optional: 'b' optionalString=STRING; " +
-				" C returns test::Mandatory: 'c' mandatoryString=STRING; ";
+		String grammar = " grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ " import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore' as test "
+				+ " A returns ecore::EObject: B | C; " + " B returns test::Optional: 'b' optionalString=STRING; "
+				+ " C returns test::Mandatory: 'c' mandatoryString=STRING; ";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
 	}
-	
+
+	@Test
 	public void testInheritFromEObject_02() throws Exception {
-		String grammar =
-				" grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				" Object returns ecore::EObject: {ecore::EInt}; ";
+		String grammar = " grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ " Object returns ecore::EObject: {ecore::EInt}; ";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 
+	@Test
 	public void testInheritFromEObject_03() throws Exception {
-		String grammar =
-				" grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				" Object returns ecore::EObject: {ecore::EAnnotation}; ";
+		String grammar = " grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ " Object returns ecore::EObject: {ecore::EAnnotation}; ";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
 	}
 
+	@Test
 	public void testPostProcessorHook() throws Exception {
-		final String xtextGrammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				" generate test 'http://test' MyRule: myFeature=INT;";
+		final String xtextGrammar = "grammar test with org.eclipse.xtext.common.Terminals"
+				+ " import 'http://www.eclipse.org/emf/2002/Ecore' as ecore "
+				+ " generate test 'http://test' MyRule: myFeature=INT;";
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
-		IXtext2EcorePostProcessor postProcessor = createMock(IXtext2EcorePostProcessor.class);
-		transformer.setPostProcessor(postProcessor);
 		GeneratedMetamodel testMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(1);
 
-		postProcessor.process(testMetamodel);
-		replay(postProcessor);
+		MockedXtext2EcorePostProcessor postProcessor = new MockedXtext2EcorePostProcessor(testMetamodel);
+		transformer.setPostProcessor(postProcessor);
+
 		transformer.transform();
 
-		verify(postProcessor);
+		assertEquals("process mthde called once", 1, postProcessor.proccessMethCalled());
 	}
-	
+
+	@Test
 	public void testBug_280413_01() throws Exception {
-		final String grammar =
-			"grammar test with org.eclipse.xtext.common.Terminals\n" +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
-			"EClass returns ecore::EClass: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n"
+				+ "EClass returns ecore::EClass: name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
-	
+
+	@Test
 	public void testBug_280413_02() throws Exception {
-		final String grammar =
-			"grammar test with org.eclipse.xtext.common.Terminals\n" +
-			"generate test 'http://test'\n" +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
-			"EClass returns ecore::EClass: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "generate test 'http://test'\n" + "import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n"
+				+ "EClass returns ecore::EClass: name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
-	
+
+	@Test
 	public void testBug_280413_03() throws Exception {
-		final String grammar =
-			"grammar test with org.eclipse.xtext.Xtext\n" +
-			"generate test 'http://test'\n" +
-			"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
-			"ParserRule returns xtext::ParserRule: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.Xtext\n" + "generate test 'http://test'\n"
+				+ "import 'http://www.eclipse.org/2008/Xtext' as xtext\n"
+				+ "ParserRule returns xtext::ParserRule: name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
-	
+
+	@Test
 	public void testBug_280413_04() throws Exception {
-		final String grammar =
-			"grammar test with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
-			"generate test 'http://test'\n" +
-			"import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n" +
-			"Atom returns mm::Atom: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n"
+				+ "generate test 'http://test'\n"
+				+ "import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n"
+				+ "Atom returns mm::Atom: name=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		TransformationDiagnostic diagnostic = (TransformationDiagnostic) resource.getErrors().get(0);
 		assertEquals(grammar.indexOf("mm::Atom"), diagnostic.getOffset());
 		assertEquals("mm::Atom".length(), diagnostic.getLength());
 	}
-	
+
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=280393
 	 */
+	@Test
 	public void testBug_280393() throws Exception {
-		final String grammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n" + 
-				"\n" + 
-				"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" + 
-				"generate bar \"http://www.Bar.foo\"\n" + 
-				"\n" + 
-				"Foo returns ecore::EClass : \n" + 
-				"	Bar | eSuperTypes+=[ecore::EClass];\n" + 
-				"\n" + 
-				"Bar :\n" + 
-				" 	'bar' eSuperTypes+=[ecore::EAttribute];";
-		
+		final String grammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n" + "\n"
+				+ "import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n"
+				+ "generate bar \"http://www.Bar.foo\"\n" + "\n" + "Foo returns ecore::EClass : \n"
+				+ "	Bar | eSuperTypes+=[ecore::EClass];\n" + "\n" + "Bar :\n"
+				+ " 	'bar' eSuperTypes+=[ecore::EAttribute];";
+
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_285140_01() throws Exception {
-		final String grammar = "grammar org.sublang with org.eclipse.xtext.testlanguages.ActionTestLanguage\n" + 
-		"\n" + 
-		"import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n" + 
-		"generate sub \"http://www.sublang.org\"\n" + 
-		"\n" + 
-		"Model returns actionLang::Model:\n" + 
-		"	Child ({actionLang::Parent.left=current} right=Child)?;";
+		final String grammar = "grammar org.sublang with org.eclipse.xtext.testlanguages.ActionTestLanguage\n" + "\n"
+				+ "import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n"
+				+ "generate sub \"http://www.sublang.org\"\n" + "\n" + "Model returns actionLang::Model:\n"
+				+ "	Child ({actionLang::Parent.left=current} right=Child)?;";
 
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_285140_02() throws Exception {
-		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n" + 
-		"\n" + 
-		"import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n" + 
-		"\n" + 
-		"Model returns actionLang::Model:\n" + 
-		"	Child ({actionLang::Parent.left=current} right=Child)?;";
+		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n"
+				+ "\n"
+				+ "import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n"
+				+ "\n"
+				+ "Model returns actionLang::Model:\n" + "	Child ({actionLang::Parent.left=current} right=Child)?;";
 
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_285140_03() throws Exception {
-		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n" + 
-		"\n" + 
-		"import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n" + 
-		"\n" + 
-		"Model returns actionLang::Child:\n" + 
-		"	Child name=ID;";
+		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n"
+				+ "\n"
+				+ "import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n"
+				+ "\n"
+				+ "Model returns actionLang::Child:\n" + "	Child name=ID;";
 
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_285140_04() throws Exception {
-		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n" + 
-		"\n" + 
-		"import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n" + 
-		"\n" + 
-		"Child returns actionLang::Child:\n" + 
-		"	Child unknown=ID;";
+		final String grammar = "grammar org.sublang with org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage\n"
+				+ "\n"
+				+ "import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n"
+				+ "\n"
+				+ "Child returns actionLang::Child:\n" + "	Child unknown=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_286285_01() throws Exception {
-		final String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" + 
-			"generate lang \"http://www.language.org\"\n" + 
-			"Model:\n" + 
-			"	Class | ID;\n" +
-			"Class: name = ID;\n";
+		final String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n"
+				+ "generate lang \"http://www.language.org\"\n" + "Model:\n" + "	Class | ID;\n" + "Class: name = ID;\n";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_287550_01() throws Exception {
-		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
-			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
-			"Model: Left | Right;\n" + 
-			"Left: Delegate;\n" + 
-			"Right returns Model: Delegate '=';\n" + 
-			"Delegate returns Left: value=ID;";
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\"\n" + "Model: Left | Right;\n"
+				+ "Left: Delegate;\n" + "Right returns Model: Delegate '=';\n" + "Delegate returns Left: value=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_287698_01() throws Exception {
-		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
-		"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
-		"Model returns Namespace: {Model} elements+=NamespaceElement;\n" + 
-		"NamespaceElement: Type | Namespace ;\n" + 
-		"Type: 'type' name=ID ';';\n" + 
-		"Namespace: 'namespace' name=ID '{' elements+=Type '}';\n";
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\"\n"
+				+ "Model returns Namespace: {Model} elements+=NamespaceElement;\n"
+				+ "NamespaceElement: Type | Namespace ;\n" + "Type: 'type' name=ID ';';\n"
+				+ "Namespace: 'namespace' name=ID '{' elements+=Type '}';\n";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug_287698_02() throws Exception {
-		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
-		"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
-		"Model returns Namespace: {Model} elements+=(Namespace | Something); \n" + 
-		"Root: Type | NamespaceElement;\n" + 
-		"Type: 'type' name=ID ';';\n" + 
-		"NamespaceElement: Namespace | Something;\n" + 
-		"Namespace: 'namespace' name=ID '{' elements+=SubSomething '}';\n" + 
-		"Something: ReturnModel | SubSomething;\n" + 
-		"SubSomething: 'something' name=ID ';';\n" + 
-		"ReturnModel returns Model: name=ID;";
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\"\n"
+				+ "Model returns Namespace: {Model} elements+=(Namespace | Something); \n"
+				+ "Root: Type | NamespaceElement;\n" + "Type: 'type' name=ID ';';\n"
+				+ "NamespaceElement: Namespace | Something;\n"
+				+ "Namespace: 'namespace' name=ID '{' elements+=SubSomething '}';\n"
+				+ "Something: ReturnModel | SubSomething;\n" + "SubSomething: 'something' name=ID ';';\n"
+				+ "ReturnModel returns Model: name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_01() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EClass: name=ID eSuperTypes+=EClass;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EClass: name=ID eSuperTypes+=EClass;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_02() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EClass: name=ID eSuperTypes+=[EClass];";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EClass: name=ID eSuperTypes+=[EClass];";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_03() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EReference: name=ID eType=[EClass];";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EReference: name=ID eType=[EClass];";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_04() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EReference: name=ID eType=EClass;\n" +
-			"EClass: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EReference: name=ID eType=EClass;\n"
+				+ "EClass: name=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_05() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EReference: name=ID eContainingClass=[EClass];";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EReference: name=ID eContainingClass=[EClass];";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testContainmentVsReference_06() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals " +
-			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
-			"EReference: name=ID eContainingClass=EClass;\n" +
-			"EClass: name=ID;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals "
+				+ "import 'http://www.eclipse.org/emf/2002/Ecore' " + "EReference: name=ID eContainingClass=EClass;\n"
+				+ "EClass: name=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug296496_01() throws Exception {
-		final String grammar = 
-			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
-			"import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n" + 
-			"ExistingType:\n" + 
-			"  enumFeature=ExistingEnum stringFeature=ExistingEnum;\n" + 
-			"enum ExistingEnum:\n" + 
-			"  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
+		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n" + "ExistingType:\n"
+				+ "  enumFeature=ExistingEnum stringFeature=ExistingEnum;\n" + "enum ExistingEnum:\n"
+				+ "  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
-	
+
+	@Test
 	public void testBug296496_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
-			"import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n" + 
-			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" + 
-			"CreatedType:\n" + 
-			"  enumFeature=ExistingEnum otherEnumFeature=ExistingEnum;\n" + 
-			"enum ExistingEnum:\n" + 
-			"  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
+		final String grammarAsString = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\"\n" + "CreatedType:\n"
+				+ "  enumFeature=ExistingEnum otherEnumFeature=ExistingEnum;\n" + "enum ExistingEnum:\n"
+				+ "  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 0);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(1);
 		assertEquals("myDsl", generatedMetamodel.getName());
 		EClass createdType = (EClass) generatedMetamodel.getEPackage().getEClassifier("CreatedType");
-		assertEquals(createdType.getEStructuralFeature("enumFeature").getEType(), createdType.getEStructuralFeature("otherEnumFeature").getEType());
+		assertEquals(createdType.getEStructuralFeature("enumFeature").getEType(),
+				createdType.getEStructuralFeature("otherEnumFeature").getEType());
 	}
-	
+
+	@Test
 	public void testBug310122() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
-			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
-			"Model: Sub1 | name=ID 'somekeyword';\n" + 
-			"Sub1 returns Model: '(' Model ')';"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\"\n" + "Model: Sub1 | name=ID 'somekeyword';\n"
+				+ "Sub1 returns Model: '(' Model ')';";
 		XtextResource resource = getResourceFromString(grammarAsString);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(0);
@@ -1281,202 +1323,723 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(1, generatedMetamodel.getEPackage().getEClassifiers().size());
 		EClass createdModel = (EClass) generatedMetamodel.getEPackage().getEClassifier("Model");
 		assertEquals(EcorePackage.Literals.ESTRING, createdModel.getEStructuralFeature("name").getEType());
-		for(AbstractRule rule: grammar.getRules()) {
+		for (AbstractRule rule : grammar.getRules()) {
 			assertEquals(createdModel, rule.getType().getClassifier());
 		}
 	}
-	
+
+	@Test
 	public void testOverrideTerminalFragment_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"terminal fragment ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "terminal fragment ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalFragment_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"terminal ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "terminal ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalFragment_03() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalFragment_04() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"enum ESCAPED_CHAR: A | B;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "enum ESCAPED_CHAR: A | B;";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalRule_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"terminal fragment ID: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "terminal fragment ID: 'a'..'z'+;";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalRule_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"terminal ID: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "terminal ID: 'a'..'z'+;";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalRule_03() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"ID: 'a' | 'z';"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "ID: 'a' | 'z';";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideTerminalRule_04() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
-			"enum ID: A | B;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n"
+				+ "enum ID: A | B;";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideDatatypeRule_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
-			"terminal fragment ModelId: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n"
+				+ "terminal fragment ModelId: 'a'..'z'+;";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideDatatypeRule_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
-			"terminal ModelId: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n"
+				+ "terminal ModelId: 'a'..'z'+;";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideDatatypeRule_03() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
-			"ModelId: 'a' | 'z';"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n"
+				+ "ModelId: 'a' | 'z';";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideDatatypeRule_04() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.xtext.ecoreInference.DataTypeRuleWithEnumResultTestLanguage\n" +
-			"import 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest'\n" + 
-			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
-			"enum ExistingEnumAsDT returns ExistingEnum: SameName;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.xtext.ecoreInference.DataTypeRuleWithEnumResultTestLanguage\n"
+				+ "import 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest'\n"
+				+ "import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n"
+				+ "enum ExistingEnumAsDT returns ExistingEnum: SameName;";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideEnumRule_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
-			"terminal fragment ExistingEnum: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n"
+				+ "terminal fragment ExistingEnum: 'a'..'z'+;";
 		getResourceFromStringAndExpect(grammarAsString, 1);
 	}
-	
+
+	@Test
 	public void testOverrideEnumRule_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
-			"terminal ExistingEnum returns ExistingEnum: 'a'..'z'+;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n"
+				+ "terminal ExistingEnum returns ExistingEnum: 'a'..'z'+;";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideEnumRule_03() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
-			"ExistingEnum returns ExistingEnum: 'a' | 'z';"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n"
+				+ "ExistingEnum returns ExistingEnum: 'a' | 'z';";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testOverrideEnumRule_04() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
-			"enum ExistingEnum: SameName;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" + "enum ExistingEnum: SameName;";
 		getResourceFromString(grammarAsString);
 	}
-	
+
+	@Test
 	public void testMultiInheritance_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n" +
-			"Array returns mydsl::Array: componentType=ComponentType componentType=DeclaredType;\n" +
-			"DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"+ 
-			"ComponentType returns types::JvmComponentType: 'ignore';\n"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n"
+				+ "Array returns mydsl::Array: componentType=ComponentType componentType=DeclaredType;\n"
+				+ "DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"
+				+ "ComponentType returns types::JvmComponentType: 'ignore';\n";
 		XtextResource resource = getResourceFromString(grammarAsString);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		EClass array = (EClass) grammar.getRules().get(0).getType().getClassifier();
 		assertEquals("JvmComponentType", array.getEStructuralFeature("componentType").getEType().getName());
 	}
-	
+
+	@Test
 	public void testMultiInheritance_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n" +
-			"Array returns mydsl::Array: componentType=DeclaredType componentType=ComponentType;\n" +
-			"DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"+ 
-			"ComponentType returns types::JvmComponentType: 'ignore';\n"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n"
+				+ "Array returns mydsl::Array: componentType=DeclaredType componentType=ComponentType;\n"
+				+ "DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"
+				+ "ComponentType returns types::JvmComponentType: 'ignore';\n";
 		XtextResource resource = getResourceFromString(grammarAsString);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		EClass array = (EClass) grammar.getRules().get(0).getType().getClassifier();
 		assertEquals("JvmComponentType", array.getEStructuralFeature("componentType").getEType().getName());
 	}
-	
+
+	@Test
 	public void testBug316610_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=Array;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "DeclaredType returns types::JvmDeclaredType: superTypes+=DeclaredType;";
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
 	}
-	
+
+	@Test
 	public void testBug316610_02() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=STRING;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "Array returns types::JvmGenericArrayTypeReference: componentType=STRING;";
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
 	}
-	
+
+	@Test
 	public void testBug316610_03() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType+=TypeRef;\n" +
-			"TypeRef returns types::JvmTypeReference: 'void';"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "DeclaredType returns types::JvmDeclaredType: superTypes=[types::JvmTypeReference];";
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("cardinality"));
 	}
-	
+
+	@Test
 	public void testBug316610_04() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
-			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=[types::JvmTypeReference];"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n"
+				+ "import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n"
+				+ "DeclaredType returns types::JvmDeclaredType: superTypes+=[types::JvmTypeReference];";
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
 	}
-	
+
+	@Test
 	public void testBug346035_01() throws Exception {
-		final String grammarAsString = 
-			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
-			"import 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore' as xbase\n" + 
-			"generate myDsl 'uri'\n" + 
-			"Model: elements+=Element*;\n" + 
-			"Element returns xbase::XExpression : {Element} 'Hello';\n" + 
-			"terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;"; 
+		final String grammarAsString = "grammar test with org.eclipse.xtext.common.Terminals\n"
+				+ "import 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore' as xbase\n"
+				+ "generate myDsl 'uri'\n" + "Model: elements+=Element*;\n"
+				+ "Element returns xbase::XExpression : {Element} 'Hello';\n"
+				+ "terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;";
 		getResourceFromString(grammarAsString);
+	}
+
+	@Test
+	public void testBug346685_a01() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a02() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y') name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertNotNull(typeC.getEStructuralFeature("name"));
+		assertEquals(2, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertNotNull(typeD.getEStructuralFeature("name"));
+		assertEquals(2, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a03() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} name+=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a04() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y') name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} name+=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a05() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB? ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a06() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB? ({TypeC.x=current} 'x' | {TypeD.x=current} 'y') name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertNotNull(typeC.getEStructuralFeature("name"));
+		assertEquals(2, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertNotNull(typeD.getEStructuralFeature("name"));
+		assertEquals(2, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a07() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB? ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} name+=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a08() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB? ({TypeC.x=current} 'x' | {TypeD.x=current} 'y') name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} name+=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a09() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y' | 'z')? name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_a10() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y' | 'z') name+=STRING;";
+		grammar += " RuleB returns TypeB: {TypeB} 'ignore';";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		assertNotNull(typeA.getEStructuralFeature("name"));
+		assertEquals(1, typeA.getEStructuralFeatures().size());
+
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("TypeC");
+		assertNotNull(typeC);
+		assertNotNull(typeC.getEStructuralFeature("x"));
+		assertEquals(1, typeC.getEStructuralFeatures().size());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("TypeD");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("x"));
+		assertEquals(1, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_b01() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " Model: A ({D.a = current} b = B)? c=C? ;\n";
+		grammar += " A: {A} 'a';\n";
+		grammar += " B: {B} 'c';\n";
+		grammar += " C: {C} 'b';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(5, ePackage.getEClassifiers().size());
+
+		EClass typeModel = (EClass) ePackage.getEClassifier("Model");
+		assertNotNull(typeModel);
+		assertNotNull(typeModel.getEStructuralFeature("c"));
+		assertEquals(1, typeModel.getEStructuralFeatures().size());
+
+		EClass typeA = (EClass) ePackage.getEClassifier("A");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+		assertEquals(1, typeA.getESuperTypes().size());
+		assertSame(typeModel, typeA.getESuperTypes().get(0));
+
+		EClass typeB = (EClass) ePackage.getEClassifier("B");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("C");
+		assertNotNull(typeC);
+		assertTrue(typeC.getEStructuralFeatures().isEmpty());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("D");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("a"));
+		assertNotNull(typeD.getEStructuralFeature("b"));
+		assertEquals(2, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_b02() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " Model: A ({D.a = current} b = B) c=C? ;\n";
+		grammar += " A: {A} 'a';\n";
+		grammar += " B: {B} 'c';\n";
+		grammar += " C: {C} 'b';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(5, ePackage.getEClassifiers().size());
+
+		EClass typeModel = (EClass) ePackage.getEClassifier("Model");
+		assertNotNull(typeModel);
+		assertTrue(typeModel.getEStructuralFeatures().isEmpty());
+
+		EClass typeA = (EClass) ePackage.getEClassifier("A");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+		assertEquals(1, typeA.getESuperTypes().size());
+		assertSame(typeModel, typeA.getESuperTypes().get(0));
+
+		EClass typeB = (EClass) ePackage.getEClassifier("B");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("C");
+		assertNotNull(typeC);
+		assertTrue(typeC.getEStructuralFeatures().isEmpty());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("D");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("a"));
+		assertNotNull(typeD.getEStructuralFeature("b"));
+		assertNotNull(typeD.getEStructuralFeature("c"));
+		assertEquals(3, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_b03() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " Model: A? ({D.a = current} b = B)? c=C? ;\n";
+		grammar += " A: {A} 'a';\n";
+		grammar += " B: {B} 'c';\n";
+		grammar += " C: {C} 'b';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(5, ePackage.getEClassifiers().size());
+
+		EClass typeModel = (EClass) ePackage.getEClassifier("Model");
+		assertNotNull(typeModel);
+		assertNotNull(typeModel.getEStructuralFeature("c"));
+		assertEquals(1, typeModel.getEStructuralFeatures().size());
+
+		EClass typeA = (EClass) ePackage.getEClassifier("A");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+		assertEquals(1, typeA.getESuperTypes().size());
+		assertSame(typeModel, typeA.getESuperTypes().get(0));
+
+		EClass typeB = (EClass) ePackage.getEClassifier("B");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("C");
+		assertNotNull(typeC);
+		assertTrue(typeC.getEStructuralFeatures().isEmpty());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("D");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("a"));
+		assertNotNull(typeD.getEStructuralFeature("b"));
+		assertEquals(2, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testBug346685_b04() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" + " generate test 'http://test'";
+		grammar += " Model: A? ({D.a = current} b = B) c=C? ;\n";
+		grammar += " A: {A} 'a';\n";
+		grammar += " B: {B} 'c';\n";
+		grammar += " C: {C} 'b';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+
+		assertEquals(5, ePackage.getEClassifiers().size());
+
+		EClass typeModel = (EClass) ePackage.getEClassifier("Model");
+		assertNotNull(typeModel);
+		assertTrue(typeModel.getEStructuralFeatures().isEmpty());
+
+		EClass typeA = (EClass) ePackage.getEClassifier("A");
+		assertNotNull(typeA);
+		assertTrue(typeA.getEStructuralFeatures().isEmpty());
+		assertEquals(1, typeA.getESuperTypes().size());
+		assertSame(typeModel, typeA.getESuperTypes().get(0));
+
+		EClass typeB = (EClass) ePackage.getEClassifier("B");
+		assertNotNull(typeB);
+		assertTrue(typeB.getEStructuralFeatures().isEmpty());
+
+		EClass typeC = (EClass) ePackage.getEClassifier("C");
+		assertNotNull(typeC);
+		assertTrue(typeC.getEStructuralFeatures().isEmpty());
+
+		EClass typeD = (EClass) ePackage.getEClassifier("D");
+		assertNotNull(typeD);
+		assertNotNull(typeD.getEStructuralFeature("a"));
+		assertNotNull(typeD.getEStructuralFeature("b"));
+		assertNotNull(typeD.getEStructuralFeature("c"));
+		assertEquals(3, typeD.getEStructuralFeatures().size());
+	}
+
+	@Test
+	public void testEcoreReference_01() throws Exception {
+		EcoreSupportStandaloneSetup.setup();
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet.setClasspathURIContext(getClass());
+		resourceSet
+				.getURIConverter()
+				.getURIMap()
+				.put(URI.createURI("platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"),
+						URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"));
+		assertFalse(resourceSet
+				.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true)
+				.getContents().isEmpty());
+		assertFalse(resourceSet
+				.getResource(
+						URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"),
+						true).getContents().isEmpty());
+		assertFalse(resourceSet
+				.getResource(
+						URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"),
+						true).getContents().isEmpty());
+		assertFalse(resourceSet
+				.getResource(
+						URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"),
+						true).getContents().isEmpty());
+		XtextResource resource = (XtextResource) resourceSet.getResource(URI
+				.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"),
+				true);
+		assertTrue(Joiner.on("\n").join(resource.getErrors()), resource.getErrors().isEmpty());
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=413171
+	@Test
+	public void testBug413171_01() throws Exception {
+		Grammar grammar = (Grammar) getModel(readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_01.xtext.txt"));
+		AbstractRule parserRule = grammar.getRules().get(2);
+		EClassifier classifier = parserRule.getType().getClassifier();
+		assertTrue(parserRule.getName(), classifier instanceof EDataType);
+	}
+	
+	@Test
+	public void testBug413171_02() throws Exception {
+		Grammar grammar = (Grammar) getModel(readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_02.xtext.txt"));
+		AbstractRule parserRule = grammar.getRules().get(2);
+		EClassifier classifier = parserRule.getType().getClassifier();
+		assertTrue(parserRule.getName(), classifier instanceof EDataType);
+	}
+	
+	@Test
+	public void testBug390326() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: A ({B.a = current} b = A)*;\n";
+		grammar += " A: value=ID;\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazz = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature feature = clazz.getEStructuralFeature("a");
+		assertEquals("Model", feature.getEType().getName());
+	}
+	
+	@Test
+	public void testBug390326_02() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: A ({B.a = current} b = A {C.a=current} c = A)*;\n";
+		grammar += " C returns A: value='c';\n";
+		grammar += " A: value='a';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazzB = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature feature = clazzB.getEStructuralFeature("a");
+		assertEquals("Model", feature.getEType().getName());
+		
+		EClass clazzC = (EClass) ePackage.getEClassifier("C");
+		EStructuralFeature featureC_A = clazzC.getEStructuralFeature("a");
+		assertEquals("B", featureC_A.getEType().getName());
+	}
+	
+	@Test
+	public void testBug390326_03() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: Value (({A.a = current} 'a' )|\n";
+		grammar += "               ({B.a = current} 'b' ))*;\n";
+		grammar += " Value: value='a';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazzA = (EClass) ePackage.getEClassifier("A");
+		EStructuralFeature featureA_a = clazzA.getEStructuralFeature("a");
+		assertEquals("Model", featureA_a.getEType().getName());
+		
+		EClass clazzB = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature featureB_a = clazzB.getEStructuralFeature("a");
+		assertEquals("Model", featureB_a.getEType().getName());
 	}
 }

@@ -12,6 +12,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.internal.text.TableOwnerDrawSupport;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -22,7 +23,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.events.KeyAdapter;
@@ -50,13 +50,14 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Knut Wannheden
  */
-@SuppressWarnings("restriction")
 public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
 
 	private String initialPatternText;
 
+	private String initialTypeText;
+	
 	private Label messageLabel;
 
 	private Label searchStatusLabel;
@@ -73,7 +74,9 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	private final ILabelProvider labelProvider;
 
 	private boolean enableStyledLabels;
-	
+
+	private boolean editableTypePattern = true;
+
 	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider) {
 		super(parent);
 		this.searchEngine = searchEngine;
@@ -84,12 +87,15 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		// super class needs an IStructuredContentProvider so we register this dummy and 
 		// register the lazy one later
 		setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				return null;
 			}
@@ -123,6 +129,21 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		return initialPatternText;
 	}
 
+	/**
+	 * @since 2.6
+	 */
+	public void setInitialTypePattern(String text) {
+		setInitialTypePattern(text, true);
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public void setInitialTypePattern(String text, boolean editable) {
+		this.initialTypeText = text;
+		this.editableTypePattern = editable;
+	}
+	
 	@Override
 	public int open() {
 		if (getInitialPattern() == null) {
@@ -156,6 +177,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 			final IStyledLabelProvider styledLabelProvider = (IStyledLabelProvider) labelProvider;
 			TableOwnerDrawSupport.install(table);
 			Listener listener= new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					handleSetData(event);
 				}
@@ -178,6 +200,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
 		getTableViewer().setContentProvider(contentProvider);
 		getTableViewer().addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
 				if (selection instanceof IStructuredSelection) {
@@ -232,6 +255,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
 		ModifyListener textModifyListener = new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				applyFilter();
 			}
@@ -269,6 +293,11 @@ public class XtextEObjectSearchDialog extends ListDialog {
 			}
 		});
 
+		if (initialTypeText != null)
+			typeSearchControl.setText(initialTypeText);
+		
+		typeSearchControl.setEditable(editableTypePattern);
+		
 		return label;
 	}
 
@@ -294,11 +323,14 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	public void updateMatches(final Collection<IEObjectDescription> matches, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (getShell() != null) {
 					if (getTableViewer() != null) {
 						getTableViewer().setItemCount(matches.size());
 						getTableViewer().setInput(matches);
+						if (getTableViewer().getSelection().isEmpty() && matches.size() > 0) 
+							getTableViewer().getTable().select(0);
 					}
 					searchStatusLabel
 							.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$

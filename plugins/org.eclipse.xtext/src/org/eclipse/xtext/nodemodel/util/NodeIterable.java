@@ -15,10 +15,12 @@ public class NodeIterable implements BidiIterable<INode> {
 		this.startWith = startWith;
 	}
 
+	@Override
 	public BidiIterator<INode> iterator() {
 		return new NodeIterator(startWith);
 	}
 	
+	@Override
 	public BidiIterable<INode> reverse() {
 		return new ReversedBidiIterable<INode>(this);
 	}

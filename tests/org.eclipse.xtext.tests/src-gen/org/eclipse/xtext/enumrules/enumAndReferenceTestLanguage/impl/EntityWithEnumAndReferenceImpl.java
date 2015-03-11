@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl;
 
@@ -23,12 +20,12 @@ import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.KindOfKeyword;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

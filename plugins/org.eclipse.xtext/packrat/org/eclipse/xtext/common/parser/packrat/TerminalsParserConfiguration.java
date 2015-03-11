@@ -34,13 +34,16 @@ public class TerminalsParserConfiguration extends AbstractParserConfiguration {
 		this.grammarAccess = grammarAccess;
 	}
 
+	@Override
 	public INonTerminalConsumer getRootConsumer() {
 		return null;
 	} 
 
+	@Override
 	public void createNonTerminalConsumers() {
 	}
 	
+	@Override
 	public void createTerminalConsumers() {
 		idConsumer = new TerminalsIDConsumer(this);
 		intConsumer = new TerminalsINTConsumer(this);
@@ -51,6 +54,7 @@ public class TerminalsParserConfiguration extends AbstractParserConfiguration {
 		anyOtherConsumer = new TerminalsANY_OTHERConsumer(this);
 	}
 	
+	@Override
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");

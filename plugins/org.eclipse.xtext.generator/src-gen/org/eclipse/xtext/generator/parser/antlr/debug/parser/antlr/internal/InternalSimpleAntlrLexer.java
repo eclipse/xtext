@@ -1,17 +1,14 @@
 package org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.internal;
 
-// Hack: Use our own Lexer superclass by means of import.
+// Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.antlr.runtime.BaseRecognizer;
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.DFA;
-import org.antlr.runtime.EarlyExitException;
-import org.antlr.runtime.IntStream;
-import org.antlr.runtime.MismatchedSetException;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.RecognizerSharedState;
 import org.eclipse.xtext.parser.antlr.Lexer;
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSimpleAntlrLexer extends Lexer {
@@ -46,7 +43,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
     // delegates
     // delegators
 
-    public InternalSimpleAntlrLexer() {;}
+    public InternalSimpleAntlrLexer() {;} 
     public InternalSimpleAntlrLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
@@ -64,7 +61,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:11:7: ( 'grammar' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:11:9: 'grammar'
             {
-            match("grammar");
+            match("grammar"); 
 
 
             }
@@ -85,7 +82,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:12:7: ( ';' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:12:9: ';'
             {
-            match(';');
+            match(';'); 
 
             }
 
@@ -105,7 +102,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:13:7: ( 'options' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:13:9: 'options'
             {
-            match("options");
+            match("options"); 
 
 
             }
@@ -126,7 +123,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:14:7: ( '{' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:14:9: '{'
             {
-            match('{');
+            match('{'); 
 
             }
 
@@ -146,7 +143,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:15:7: ( '}' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:15:9: '}'
             {
-            match('}');
+            match('}'); 
 
             }
 
@@ -166,7 +163,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:16:7: ( '=' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:16:9: '='
             {
-            match('=');
+            match('='); 
 
             }
 
@@ -186,7 +183,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:17:7: ( 'fragment' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:17:9: 'fragment'
             {
-            match("fragment");
+            match("fragment"); 
 
 
             }
@@ -207,7 +204,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:18:7: ( ':' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:18:9: ':'
             {
-            match(':');
+            match(':'); 
 
             }
 
@@ -227,7 +224,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:19:7: ( '|' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:19:9: '|'
             {
-            match('|');
+            match('|'); 
 
             }
 
@@ -247,7 +244,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:20:7: ( '+' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:20:9: '+'
             {
-            match('+');
+            match('+'); 
 
             }
 
@@ -267,7 +264,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:21:7: ( '*' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:21:9: '*'
             {
-            match('*');
+            match('*'); 
 
             }
 
@@ -287,7 +284,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:22:7: ( '?' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:22:9: '?'
             {
-            match('?');
+            match('?'); 
 
             }
 
@@ -307,7 +304,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:23:7: ( '~' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:23:9: '~'
             {
-            match('~');
+            match('~'); 
 
             }
 
@@ -327,7 +324,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:24:7: ( '..' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:24:9: '..'
             {
-            match("..");
+            match(".."); 
 
 
             }
@@ -348,7 +345,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:25:7: ( '(' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:25:9: '('
             {
-            match('(');
+            match('('); 
 
             }
 
@@ -368,7 +365,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:26:7: ( ')' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:26:9: ')'
             {
-            match(')');
+            match(')'); 
 
             }
 
@@ -388,7 +385,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:27:7: ( '=>' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:27:9: '=>'
             {
-            match("=>");
+            match("=>"); 
 
 
             }
@@ -409,7 +406,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:28:7: ( '{skip();}' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:28:9: '{skip();}'
             {
-            match("{skip();}");
+            match("{skip();}"); 
 
 
             }
@@ -430,7 +427,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:29:7: ( '.' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:29:9: '.'
             {
-            match('.');
+            match('.'); 
 
             }
 
@@ -461,7 +458,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                 case 1 :
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1231:11: '^'
                     {
-                    match('^');
+                    match('^'); 
 
                     }
                     break;
@@ -545,7 +542,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1233:13: '0' .. '9'
             	    {
-            	    matchRange('0','9');
+            	    matchRange('0','9'); 
 
             	    }
             	    break;
@@ -575,10 +572,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -596,10 +593,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
-                    match('\"');
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    match('\"'); 
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -615,23 +612,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:21: '\\\\' .
                     	    {
-                    	    match('\\');
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    match('\\'); 
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -651,15 +640,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\"');
+                    match('\"'); 
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
-                    match('\'');
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    match('\''); 
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -675,23 +664,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:54: '\\\\' .
                     	    {
-                    	    match('\\');
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    match('\\'); 
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -711,7 +692,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\'');
+                    match('\''); 
 
                     }
                     break;
@@ -737,7 +718,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1237:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1237:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("/*");
+            match("/*"); 
 
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1237:24: ( options {greedy=false; } : . )*
             loop7:
@@ -766,7 +747,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1237:52: .
             	    {
-            	    matchAny();
+            	    matchAny(); 
 
             	    }
             	    break;
@@ -776,7 +757,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                 }
             } while (true);
 
-            match("*/");
+            match("*/"); 
 
 
             }
@@ -797,7 +778,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1239:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1239:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
-            match("//");
+            match("//"); 
 
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1239:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
@@ -854,14 +835,14 @@ public class InternalSimpleAntlrLexer extends Lexer {
                         case 1 :
                             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1239:41: '\\r'
                             {
-                            match('\r');
+                            match('\r'); 
 
                             }
                             break;
 
                     }
 
-                    match('\n');
+                    match('\n'); 
 
                     }
                     break;
@@ -944,7 +925,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1243:16: ( . )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1243:18: .
             {
-            matchAny();
+            matchAny(); 
 
             }
 
@@ -964,182 +945,182 @@ public class InternalSimpleAntlrLexer extends Lexer {
             case 1 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:10: T__11
                 {
-                mT__11();
+                mT__11(); 
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:16: T__12
                 {
-                mT__12();
+                mT__12(); 
 
                 }
                 break;
             case 3 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:22: T__13
                 {
-                mT__13();
+                mT__13(); 
 
                 }
                 break;
             case 4 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:28: T__14
                 {
-                mT__14();
+                mT__14(); 
 
                 }
                 break;
             case 5 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:34: T__15
                 {
-                mT__15();
+                mT__15(); 
 
                 }
                 break;
             case 6 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:40: T__16
                 {
-                mT__16();
+                mT__16(); 
 
                 }
                 break;
             case 7 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:46: T__17
                 {
-                mT__17();
+                mT__17(); 
 
                 }
                 break;
             case 8 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:52: T__18
                 {
-                mT__18();
+                mT__18(); 
 
                 }
                 break;
             case 9 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:58: T__19
                 {
-                mT__19();
+                mT__19(); 
 
                 }
                 break;
             case 10 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:64: T__20
                 {
-                mT__20();
+                mT__20(); 
 
                 }
                 break;
             case 11 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:70: T__21
                 {
-                mT__21();
+                mT__21(); 
 
                 }
                 break;
             case 12 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:76: T__22
                 {
-                mT__22();
+                mT__22(); 
 
                 }
                 break;
             case 13 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:82: T__23
                 {
-                mT__23();
+                mT__23(); 
 
                 }
                 break;
             case 14 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:88: T__24
                 {
-                mT__24();
+                mT__24(); 
 
                 }
                 break;
             case 15 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:94: T__25
                 {
-                mT__25();
+                mT__25(); 
 
                 }
                 break;
             case 16 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:100: T__26
                 {
-                mT__26();
+                mT__26(); 
 
                 }
                 break;
             case 17 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:106: T__27
                 {
-                mT__27();
+                mT__27(); 
 
                 }
                 break;
             case 18 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:112: T__28
                 {
-                mT__28();
+                mT__28(); 
 
                 }
                 break;
             case 19 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:118: T__29
                 {
-                mT__29();
+                mT__29(); 
 
                 }
                 break;
             case 20 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:124: RULE_ID
                 {
-                mRULE_ID();
+                mRULE_ID(); 
 
                 }
                 break;
             case 21 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:132: RULE_INT
                 {
-                mRULE_INT();
+                mRULE_INT(); 
 
                 }
                 break;
             case 22 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:141: RULE_STRING
                 {
-                mRULE_STRING();
+                mRULE_STRING(); 
 
                 }
                 break;
             case 23 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:153: RULE_ML_COMMENT
                 {
-                mRULE_ML_COMMENT();
+                mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 24 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:169: RULE_SL_COMMENT
                 {
-                mRULE_SL_COMMENT();
+                mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 25 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:185: RULE_WS
                 {
-                mRULE_WS();
+                mRULE_WS(); 
 
                 }
                 break;
             case 26 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:193: RULE_ANY_OTHER
                 {
-                mRULE_ANY_OTHER();
+                mRULE_ANY_OTHER(); 
 
                 }
                 break;
@@ -1151,34 +1132,19 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\32\1\uffff\1\32\1\36\1\uffff\1\41\1\32\6\uffff\1\52\2"+
-        "\uffff\1\30\2\uffff\3\30\2\uffff\1\32\2\uffff\1\32\5\uffff\1\32"+
-        "\17\uffff\14\32\1\101\1\102\1\32\2\uffff\1\104\1\uffff";
+        "\1\uffff\1\32\1\uffff\1\32\1\36\1\uffff\1\41\1\32\6\uffff\1\52\2\uffff\1\30\2\uffff\3\30\2\uffff\1\32\2\uffff\1\32\5\uffff\1\32\17\uffff\14\32\1\101\1\102\1\32\2\uffff\1\104\1\uffff";
     static final String DFA12_eofS =
         "\105\uffff";
     static final String DFA12_minS =
-        "\1\0\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2"+
-        "\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\141\2\uffff\1\164\5\uffff"+
-        "\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156"+
-        "\1\145\1\162\1\163\1\156\2\60\1\164\2\uffff\1\60\1\uffff";
+        "\1\0\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\141\2\uffff\1\164\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156\1\145\1\162\1\163\1\156\2\60\1\164\2\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1"+
-        "\56\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\141\2\uffff\1\164"+
-        "\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141"+
-        "\1\156\1\145\1\162\1\163\1\156\2\172\1\164\2\uffff\1\172\1\uffff";
+        "\1\uffff\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\141\2\uffff\1\164\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156\1\145\1\162\1\163\1\156\2\172\1\164\2\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\2\uffff\1\5\2\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1"+
-        "\uffff\1\17\1\20\1\uffff\1\24\1\25\3\uffff\1\31\1\32\1\uffff\1\24"+
-        "\1\2\1\uffff\1\22\1\4\1\5\1\21\1\6\1\uffff\1\10\1\11\1\12\1\13\1"+
-        "\14\1\15\1\16\1\23\1\17\1\20\1\25\1\26\1\27\1\30\1\31\17\uffff\1"+
-        "\1\1\3\1\uffff\1\7";
+        "\2\uffff\1\2\2\uffff\1\5\2\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1\uffff\1\17\1\20\1\uffff\1\24\1\25\3\uffff\1\31\1\32\1\uffff\1\24\1\2\1\uffff\1\22\1\4\1\5\1\21\1\6\1\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\23\1\17\1\20\1\25\1\26\1\27\1\30\1\31\17\uffff\1\1\1\3\1\uffff\1\7";
     static final String DFA12_specialS =
         "\1\0\23\uffff\1\2\1\1\57\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\30\2\27\2\30\1\27\22\30\1\27\1\30\1\24\4\30\1\25\1\17\1"+
-            "\20\1\13\1\12\2\30\1\16\1\26\12\23\1\10\1\2\1\30\1\6\1\30\1"+
-            "\14\1\30\32\22\3\30\1\21\1\22\1\30\5\22\1\7\1\1\7\22\1\3\13"+
-            "\22\1\4\1\11\1\5\1\15\uff81\30",
+            "\11\30\2\27\2\30\1\27\22\30\1\27\1\30\1\24\4\30\1\25\1\17\1\20\1\13\1\12\2\30\1\16\1\26\12\23\1\10\1\2\1\30\1\6\1\30\1\14\1\30\32\22\3\30\1\21\1\22\1\30\5\22\1\7\1\1\7\22\1\3\13\22\1\4\1\11\1\5\1\15\uff81\30",
             "\1\31",
             "",
             "\1\34",
@@ -1285,7 +1251,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
-                    case 0 :
+                    case 0 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1339,7 +1305,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 :
+                    case 1 : 
                         int LA12_21 = input.LA(1);
 
                         s = -1;
@@ -1349,7 +1315,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 :
+                    case 2 : 
                         int LA12_20 = input.LA(1);
 
                         s = -1;
@@ -1366,6 +1332,6 @@ public class InternalSimpleAntlrLexer extends Lexer {
             throw nvae;
         }
     }
-
+ 
 
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug288432Test.impl;
 
@@ -22,10 +19,10 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.ParameterRefImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -18,6 +18,7 @@ public class CharacterAlternatives implements ICharacterClass {
 		this.classes = classes;
 	}
 	
+	@Override
 	public boolean matches(char candidate) {
 		for (ICharacterClass characterClass: classes) {
 			if (characterClass.matches(candidate))

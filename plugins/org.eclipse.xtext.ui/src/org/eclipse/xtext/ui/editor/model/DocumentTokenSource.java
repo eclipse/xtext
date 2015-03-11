@@ -15,11 +15,12 @@ import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.ui.LexerUIBindings;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
@@ -28,6 +29,16 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
+ * For languages with lexers without backtracking. For these we can start lexing from the 
+ * first damaged token instead of from the beginning. This is a lot faster especially when 
+ * editing the trunk of big files.
+ *  
+ * As opposed to the original {@link BacktrackingLexerDocumentTokenSource}, the damaged region
+ * returned by this class always includes the token touching the region the event refers to,
+ * i.e. the first token overlapping wit the region or the token that ends with the beginning
+ * of the region.  
+ *   
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
@@ -95,14 +106,17 @@ public class DocumentTokenSource {
 			this.offset = offset;
 		}
 
+		@Override
 		public int getLength() {
 			return token.getLength();
 		}
 
+		@Override
 		public int getOffset() {
 			return offset;
 		}
 
+		@Override
 		public int getLexerTokenType() {
 			return token.getAntlrTokenType();
 		}
@@ -117,6 +131,7 @@ public class DocumentTokenSource {
 			this.tokens = tokens;
 		}
 
+		@Override
 		public Iterator<ILexerTokenRegion> iterator() {
 			return new AbstractIterator<ILexerTokenRegion>() {
 
@@ -154,6 +169,27 @@ public class DocumentTokenSource {
 		}
 	}
 
+	/**
+	 * @author Jan Koehnlein
+	 * @since 2.4
+	 */
+	protected static class RepairEntryData {
+		final int offset;
+		final int index;
+		final CommonToken newToken;
+		final TokenSource tokenSource;
+		
+		public RepairEntryData(int offset, int index, CommonToken newToken, TokenSource lexer) {
+			super();
+			this.offset = offset;
+			this.index = index;
+			this.newToken = newToken;
+			this.tokenSource = lexer;
+		}
+	}
+	
+	private static final Logger logger = Logger.getLogger(DocumentTokenSource.class);
+	
 	private boolean checkInvariant = false;
 	private List<TokenInfo> internalModifyableTokenInfos = Collections.emptyList();
 	private List<TokenInfo> tokenInfos = Collections.emptyList();
@@ -161,7 +197,7 @@ public class DocumentTokenSource {
 	private DocumentEvent previousEvent;
 
 	@Inject
-	@Named(LexerUIBindings.HIGHLIGHTING)
+	@Named(LexerIdeBindings.HIGHLIGHTING)
 	private Provider<Lexer> lexer;
 
 	public Iterable<ILexerTokenRegion> getTokenInfos() {
@@ -180,10 +216,17 @@ public class DocumentTokenSource {
 		this.internalModifyableTokenInfos = infos;
 		this.tokenInfos = Collections.unmodifiableList(Lists.newArrayList(infos));
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected List<TokenInfo> getInternalModifyableTokenInfos() {
+		return internalModifyableTokenInfos;
+	}
 
 	protected List<TokenInfo> createTokenInfos(String string) {
 		List<TokenInfo> result = Lists.newArrayListWithExpectedSize(string.length() / 3);
-		TokenSource source = createLexer(string);
+		TokenSource source = createTokenSource(string);
 		CommonToken token = (CommonToken) source.nextToken();
 		while (token != Token.EOF_TOKEN) {
 			TokenInfo info = createTokenInfo(token);
@@ -233,33 +276,14 @@ public class DocumentTokenSource {
 			return new Region(0, e.getDocument().getLength());
 		}
 		try {
-			int tokenStartsAt = 0;
-			int tokenInfoIdx = 0;
-			int regionOffset = 0;
-			int regionLength = e.fDocument.getLength();
-
-			TokenSource source = createLexer(e.fDocument.get());
-			CommonToken token = (CommonToken) source.nextToken();
-			// find start idx
-			while (true) {
-				if (token == Token.EOF_TOKEN) {
-					internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
-					break;
-				}
-				if (tokenInfoIdx >= internalModifyableTokenInfos.size())
-					break;
-				TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
-				if (tokenInfo.type != token.getType()
-						|| token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
-					break;
-				if (tokenStartsAt + tokenInfo.length > e.fOffset)
-					break;
-				tokenStartsAt += tokenInfo.length;
-				tokenInfoIdx++;
-				token = (CommonToken) source.nextToken();
-			}
-			regionLength -= tokenStartsAt;
-			regionOffset = tokenStartsAt;
+			RepairEntryData repairEntryData = getRepairEntryData(e);
+			int tokenStartsAt = repairEntryData.offset;
+			int tokenInfoIdx = repairEntryData.index;
+			CommonToken token = repairEntryData.newToken;
+			if (token == Token.EOF_TOKEN) 
+				internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
+			int regionOffset = tokenStartsAt;
+			int regionLength = e.fDocument.getLength()- tokenStartsAt;
 
 			int lengthDiff = e.fText.length() - e.fLength;
 			// compute region length
@@ -284,23 +308,73 @@ public class DocumentTokenSource {
 						break;
 				}
 				internalModifyableTokenInfos.add(tokenInfoIdx++, createTokenInfo(token));
-				token = (CommonToken) source.nextToken();
+				token = (CommonToken) repairEntryData.tokenSource.nextToken();
 			}
 			internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
 			// add subsequent tokens
 			if (tokenInfoIdx >= internalModifyableTokenInfos.size()) {
 				while (token != Token.EOF_TOKEN) {
 					internalModifyableTokenInfos.add(createTokenInfo(token));
-					token = (CommonToken) source.nextToken();
+					token = (CommonToken) repairEntryData.tokenSource.nextToken();
 				}
 			}
 			return new Region(regionOffset, regionLength);
+		} catch(Exception exc) {
+			logger.error("Error computing damaged region", exc);
+			internalModifyableTokenInfos = createTokenInfos(e.fDocument.get());
+			return new Region(0, e.fDocument.getLength());
 		} finally {
 			setTokens(internalModifyableTokenInfos);
 		}
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected RepairEntryData getRepairEntryData(DocumentEvent e) throws Exception {
+		int tokenStartsAt = 0;
+		int tokenInfoIdx = 0;
+		for(tokenInfoIdx = 0; tokenInfoIdx< getInternalModifyableTokenInfos().size(); ++tokenInfoIdx) {
+			TokenInfo oldToken = getInternalModifyableTokenInfos().get(tokenInfoIdx);
+			if(tokenStartsAt <= e.getOffset() && tokenStartsAt + oldToken.getLength() >= e.getOffset())
+				break;
+			tokenStartsAt += oldToken.getLength();
+		}
+		final TokenSource delegate = createTokenSource(e.fDocument.get(tokenStartsAt, e.fDocument.getLength() - tokenStartsAt));
+		final int offset = tokenStartsAt;
+		TokenSource source = new TokenSource() {
+			@Override
+			public Token nextToken() {
+				CommonToken commonToken = (CommonToken) delegate.nextToken();
+				commonToken.setText(commonToken.getText());
+				commonToken.setStartIndex(commonToken.getStartIndex()+offset);
+				commonToken.setStopIndex(commonToken.getStopIndex()+offset);
+				return commonToken;
+			}
+
+			@Override
+			public String getSourceName() {
+				return delegate.getSourceName();
+			}
+		};
+		final CommonToken token = (CommonToken) source.nextToken();
+		return new RepairEntryData(offset, tokenInfoIdx, token, source);
+	}
+	
+	/**
+	 * @deprecated use {@link #createTokenSource(String)} instead.
+	 */
+	@Deprecated
 	protected Lexer createLexer(String string) {
+		Lexer l = lexer.get();
+		l.setCharStream(new ANTLRStringStream(string));
+		return l;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected TokenSource createTokenSource(String string) {
 		Lexer l = lexer.get();
 		l.setCharStream(new ANTLRStringStream(string));
 		return l;

@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -26,6 +28,7 @@ public interface JvmComponentType extends JvmType
 {
 	/**
 	 * Returns the value of the '<em><b>Array Type</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Array Type</em>' containment reference isn't clear,
@@ -35,7 +38,8 @@ public interface JvmComponentType extends JvmType
 	 * @return the value of the '<em>Array Type</em>' containment reference.
 	 * @see #setArrayType(JvmArrayType)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmComponentType_ArrayType()
-	 * @model containment="true" resolveProxies="true"
+	 * @see org.eclipse.xtext.common.types.JvmArrayType#getComponentType
+	 * @model opposite="componentType" containment="true"
 	 * @generated
 	 */
 	JvmArrayType getArrayType();

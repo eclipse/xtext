@@ -13,14 +13,17 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Resolves a template variable to <code>EClass classes</code> which are visible in the current scope, and are
@@ -30,11 +33,15 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVariableResolver {
 	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private IGlobalScopeProvider globalScopeProvider;
 	
 	public CrossReferenceTemplateVariableResolver() {
 		super("CrossReference",  //$NON-NLS-1$
@@ -51,14 +58,23 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 		}
 		String[] classReferencePair = new String[] { abbreviatedCrossReference.substring(0, dotIndex),
 				abbreviatedCrossReference.substring(dotIndex + 1) };
-		EReference reference = getReference(classReferencePair[0], classReferencePair[1], getGrammar(castedContext));
+		Grammar grammar = getGrammar(castedContext);
+		if (grammar == null) {
+			return Collections.emptyList();
+		}
+		EReference reference = getReference(classReferencePair[0], classReferencePair[1], grammar);
 		if (reference == null) {
-			log.error("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1] //$NON-NLS-1$ //$NON-NLS-2$
+			log.debug("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1] //$NON-NLS-1$ //$NON-NLS-2$
 					+ "' could not be resolved."); //$NON-NLS-1$
 			return Collections.emptyList();
 		}
-		IScope scope = castedContext.getScopeProvider().getScope(
-				castedContext.getContentAssistContext().getCurrentModel(), reference);
+		IScope scope = null;
+		EObject currentModel = castedContext.getContentAssistContext().getCurrentModel();
+		if (currentModel == null) {
+			scope = globalScopeProvider.getScope(castedContext.getContentAssistContext().getResource(), reference, null);
+		} else {
+			scope = castedContext.getScopeProvider().getScope(currentModel, reference);
+		}
 		Iterable<IEObjectDescription> linkingCandidates = queryScope(scope);
 
 		List<String> names = new ArrayList<String>();

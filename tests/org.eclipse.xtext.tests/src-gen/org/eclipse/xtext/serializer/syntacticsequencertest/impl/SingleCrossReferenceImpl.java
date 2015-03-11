@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest.impl;
 
@@ -22,6 +19,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef1 <em>Ref1</em>}</li>
@@ -29,7 +27,6 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef3 <em>Ref3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef4 <em>Ref4</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -9,10 +9,12 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 
 import java.util.List;
 
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
-import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -35,15 +37,20 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeContentProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -76,7 +83,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 			return hasUnfilteredChild(treeViewer, element);
 		}
 
-		private boolean hasUnfilteredChild(TreeViewer viewer, Object element) {
+		/**
+		 * @since 2.1 protected
+		 */
+		protected boolean hasUnfilteredChild(TreeViewer viewer, Object element) {
 			Object[] children = ((ITreeContentProvider) viewer.getContentProvider()).getChildren(element);
 			for (int i = 0; i < children.length; i++)
 				if (select(viewer, element, children[i]))
@@ -94,6 +104,21 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	@Inject
 	private OutlineNodeContentProvider contentProvider;
 
+	@Inject
+	private OutlineFilterAndSorter.IComparator comparator;
+
+	@Inject
+	private QuickOutlineFilterAndSorter filterAndSorter;
+
+	@Inject
+	private PrefixMatcher prefixMatcher;
+
+	@Inject
+	private OutlineNodeElementOpener elementOpener;
+
+	@Inject
+	private IQuickOutlineContribution.Composite contributions;
+
 	private int TREESTYLE = SWT.V_SCROLL | SWT.H_SCROLL;
 
 	private TreeViewer treeViewer;
@@ -104,15 +129,16 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	private Text filterText;
 
-	private StringMatcher stringMatcher;
+	private PrefixMatcherOutlineAdapter prefixMatcherOutlineAdapter;
+
+	private KeyStroke invokingKeystroke;
 
 	public QuickOutlinePopup() {
 		this(null);
 	}
 
 	public QuickOutlinePopup(Shell parent) {
-		super(parent, PopupDialog.HOVER_SHELLSTYLE | SWT.RESIZE, true, true, true, true, true, null,
-				Messages.QuickOutlinePopup_pressESC);
+		super(parent, SWT.RESIZE, true, false, true, true, true, null, Messages.QuickOutlinePopup_pressESC);
 	}
 
 	@Override
@@ -124,13 +150,21 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		treeViewer = createTreeViewer(parent, TREESTYLE);
+		scheduleRefresh();
 
 		final Tree tree = treeViewer.getTree();
 		tree.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.character == 0x1B) // ESC
+				if (e.character == 0x1B) { // ESC
 					dispose();
+				} else {
+					if (e.keyCode == invokingKeystroke.getNaturalKey()
+							&& e.stateMask == invokingKeystroke.getModifierKeys()) {
+						changeOutlineMode();
+						e.doit = false;
+					}
+				}
 			}
 		});
 
@@ -142,9 +176,21 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		});
 
 		installFilter();
+		setInfoText();
 
 		addDisposeListener(this);
 		return treeViewer.getControl();
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	protected void setInfoText() {
+		if (treeProvider instanceof IOutlineTreeProvider.ModeAware)
+			setInfoText("Press " + invokingKeystroke + " to "
+					+ ((IOutlineTreeProvider.ModeAware) treeProvider).getNextMode().getDescription());
+		else
+			setInfoText(Messages.QuickOutlinePopup_pressESC);
 	}
 
 	protected TreeViewer createTreeViewer(Composite parent, int style) {
@@ -157,23 +203,34 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		treeViewer.addFilter(new NamePatternFilter());
 
 		treeViewer.setContentProvider(contentProvider);
+		filterAndSorter.setComparator(comparator);
+		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setLabelProvider(labelProvider);
-		treeViewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-		IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
-			public IOutlineNode exec(XtextResource state) throws Exception {
-				IOutlineNode rootNode = treeProvider.createRoot(document);
-				createChildrenRecursively(rootNode.getChildren());
-				return rootNode;
-			}
-			
-			protected void createChildrenRecursively(List<IOutlineNode> nodes) {
-				for(IOutlineNode node:nodes) {
-					createChildrenRecursively(node.getChildren());
-				}
-			}
-		});
-		treeViewer.setInput(rootNode);
+		treeViewer.setAutoExpandLevel(2);
 		return treeViewer;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public void scheduleRefresh() {
+		if (getTreeViewer() != null) {
+			IOutlineNode rootNode = document.priorityReadOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
+				@Override
+				public IOutlineNode exec(XtextResource state) throws Exception {
+					IOutlineNode rootNode = treeProvider.createRoot(document);
+					createChildrenRecursively(rootNode.getChildren());
+					return rootNode;
+				}
+
+				protected void createChildrenRecursively(List<IOutlineNode> nodes) {
+					for (IOutlineNode node : nodes) {
+						createChildrenRecursively(node.getChildren());
+					}
+				}
+			});
+			getTreeViewer().setInput(rootNode);
+		}
 	}
 
 	protected Text createFilterText(Composite parent) {
@@ -196,9 +253,14 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 					treeViewer.getTree().setFocus();
 				if (e.character == 0x1B) // ESC
 					dispose();
+				if (e.keyCode == invokingKeystroke.getNaturalKey()
+						&& e.stateMask == invokingKeystroke.getModifierKeys()) {
+					changeOutlineMode();
+					e.doit = false;
+				}
+
 			}
 		});
-
 		return filterText;
 	}
 
@@ -207,35 +269,34 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		return filterText;
 	}
 
-	private void installFilter() {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected void installFilter() {
 		filterText.setText(""); //$NON-NLS-1$
 
 		filterText.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				String text = ((Text) e.widget).getText();
-				int length = text.length();
-				if (length > 0 && text.charAt(length - 1) != '*') {
-					text = text + '*';
-				}
 				setMatcherString(text, true);
 			}
 		});
 	}
 
 	protected StringMatcher getMatcher() {
-		return stringMatcher;
+		return prefixMatcherOutlineAdapter;
 	}
 
 	protected boolean hasMatcher() {
-		return stringMatcher != null;
+		return prefixMatcherOutlineAdapter != null;
 	}
 
 	protected void setMatcherString(String pattern, boolean update) {
 		if (pattern.length() == 0) {
-			stringMatcher = null;
+			prefixMatcherOutlineAdapter = null;
 		} else {
-			boolean ignoreCase = pattern.toLowerCase().equals(pattern);
-			stringMatcher = new StringMatcher(pattern, ignoreCase);
+			prefixMatcherOutlineAdapter = new PrefixMatcherOutlineAdapter(pattern, prefixMatcher);
 		}
 
 		if (update)
@@ -286,14 +347,15 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		return ((IStructuredSelection) treeViewer.getSelection()).getFirstElement();
 	}
 
-	private void gotoSelectedElement() {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected void gotoSelectedElement() {
 		Object selectedElement = getSelectedElement();
 		if (selectedElement != null) {
 			dispose();
 			if (selectedElement instanceof IOutlineNode) {
-				final IOutlineNode outlineNode = (IOutlineNode) selectedElement;
-				xtextEditor.selectAndReveal(outlineNode.getSignificantTextRegion().getOffset(), outlineNode
-						.getSignificantTextRegion().getLength());
+				elementOpener.open((IOutlineNode) selectedElement, xtextEditor.getInternalSourceViewer());
 			}
 		}
 	}
@@ -310,17 +372,15 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		getShell().removeDisposeListener(listener);
 	}
 
+	@Override
 	public void widgetDisposed(DisposeEvent event) {
 		treeViewer = null;
 		filterText = null;
 	}
 
 	public void setInput(IXtextDocument document) {
-		if (treeViewer != null) {
-			treeViewer.setInput(document);
-		} else {
-			this.document = document;
-		}
+		this.document = document;
+		scheduleRefresh();
 	}
 
 	@Override
@@ -346,5 +406,45 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	public void setEditor(XtextEditor xtextEditor) {
 		this.xtextEditor = xtextEditor;
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	public void setEvent(Event event) {
+		this.invokingKeystroke = KeyStroke.getInstance(event.stateMask, event.keyCode);
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	protected void changeOutlineMode() {
+		if (treeProvider instanceof IOutlineTreeProvider.ModeAware) {
+			IOutlineTreeProvider.ModeAware modeTreeProvider = (IOutlineTreeProvider.ModeAware) treeProvider;
+			OutlineMode nextMode = modeTreeProvider.getNextMode();
+			modeTreeProvider.setCurrentMode(nextMode);
+			setInfoText();
+			setInput(document);
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public TreeViewer getTreeViewer() {
+		return treeViewer;
+	}
+
+	@Override
+	public boolean close() {
+		contributions.deregister(this);
+		return super.close();
+	}
+
+	@Override
+	protected void fillDialogMenu(IMenuManager dialogMenu) {
+		super.fillDialogMenu(dialogMenu);
+		dialogMenu.add(new Separator("XtextContributions"));
+		contributions.register(this, dialogMenu);
 	}
 }

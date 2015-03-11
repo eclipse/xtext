@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

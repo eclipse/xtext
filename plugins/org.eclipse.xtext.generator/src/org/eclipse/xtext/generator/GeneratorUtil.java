@@ -29,6 +29,7 @@ public class GeneratorUtil {
 		log.info("Cleaning folder " + f.getPath());
 		Files.cleanFolder(f, new FileFilter() {
 			private final Collection<String> excludes = new HashSet<String>(Arrays.asList(defaultExcludes));
+			@Override
 			public boolean accept(File pathname) {
 				return !excludes.contains(pathname.getName());
 			}

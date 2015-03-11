@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
@@ -15,16 +17,24 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * A representation of the model object '<em><b>XConstructor Call</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isValidFeature <em>Valid Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall()
  * @model
@@ -130,5 +140,57 @@ public interface XConstructorCall extends XExpression
 	 * @generated
 	 */
 	boolean isValidFeature();
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Constructor Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Constructor Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Constructor Call</em>' attribute.
+	 * @see #setExplicitConstructorCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_ExplicitConstructorCall()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitConstructorCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Constructor Call</em>' attribute.
+	 * @see #isExplicitConstructorCall()
+	 * @generated
+	 */
+	void setExplicitConstructorCall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Anonymous Class Constructor Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Anonymous Class Constructor Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Anonymous Class Constructor Call</em>' attribute.
+	 * @see #setAnonymousClassConstructorCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_AnonymousClassConstructorCall()
+	 * @model transient="true"
+	 * @generated
+	 */
+	boolean isAnonymousClassConstructorCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Anonymous Class Constructor Call</em>' attribute.
+	 * @see #isAnonymousClassConstructorCall()
+	 * @generated
+	 */
+	void setAnonymousClassConstructorCall(boolean value);
 
 } // XConstructorCall

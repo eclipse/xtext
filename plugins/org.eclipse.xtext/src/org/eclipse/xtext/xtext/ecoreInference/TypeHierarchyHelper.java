@@ -224,7 +224,7 @@ public class TypeHierarchyHelper {
 					EStructuralFeature declared = iter.next();
 					EStructuralFeature existing = allFeatures.get(declared.getName());
 					if (existing != null) {
-						EClassifier compatibleType = EcoreUtil2.getCompatibleType(declared.getEType(), existing.getEType());
+						EClassifier compatibleType = EcoreUtil2.getCompatibleType(declared.getEType(), existing.getEType(), grammar);
 						if (compatibleType != null) {
 							iter.remove();
 							existing.setEType(compatibleType);

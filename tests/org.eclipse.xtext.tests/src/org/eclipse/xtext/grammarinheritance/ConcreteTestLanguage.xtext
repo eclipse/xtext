@@ -9,7 +9,7 @@ grammar org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage with org.eclip
 
 generate foo "http://holla"
 
-import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
+import "http://www.eclipse.org/xtext/tests/grammarinheritance" as mm
 
 RootRule:
 	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule | OverridableParserRule2;

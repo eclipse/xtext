@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.eclipse.emf.common.util.WrappedException;
 
 /**
@@ -23,4 +26,29 @@ public class Exceptions {
 			throw new WrappedException((Exception) e);
 		throw new RuntimeException(e);
 	}
+
+	/**
+	 * Invoke {@code Throwable#addSuppressed(Throwable)} reflectively if it is available.
+	 * 
+	 * It is not available on JRE < 1.7
+	 * 
+	 * @since 2.8
+	 */
+	public static void addSuppressed(Throwable owner, Throwable add) {
+		try {
+			Method method = owner.getClass().getMethod("addSuppressed", Throwable.class);
+			method.invoke(owner, add);
+		} catch (NoSuchMethodException e) {
+			// ignore, will happen for JRE < 1.7
+		} catch (SecurityException e) {
+			throwUncheckedException(e);
+		} catch (IllegalAccessException e) {
+			throwUncheckedException(e);
+		} catch (IllegalArgumentException e) {
+			throwUncheckedException(e);
+		} catch (InvocationTargetException e) {
+			throwUncheckedException(e);
+		}
+	}
+
 }

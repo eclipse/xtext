@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest;
 
@@ -14,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX2 <em>X2</em>}</li>
@@ -34,8 +32,17 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX22 <em>X22</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX26 <em>X26</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX27 <em>X27</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX28 <em>X28</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX29 <em>X29</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel()
  * @model
@@ -536,5 +543,265 @@ public interface Model extends EObject
    * @generated
    */
   void setX22(org.eclipse.xtext.serializer.sequencertest.Float value);
+
+  /**
+   * Returns the value of the '<em><b>X23</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X23</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X23</em>' containment reference.
+   * @see #setX23(UnorderedAlternative)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X23()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedAlternative getX23();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X23</em>' containment reference.
+   * @see #getX23()
+   * @generated
+   */
+  void setX23(UnorderedAlternative value);
+
+  /**
+   * Returns the value of the '<em><b>X24</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X24</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X24</em>' containment reference.
+   * @see #setX24(UnorderedGroup)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X24()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroup getX24();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X24</em>' containment reference.
+   * @see #getX24()
+   * @generated
+   */
+  void setX24(UnorderedGroup value);
+
+  /**
+   * Returns the value of the '<em><b>X25</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X25</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X25</em>' containment reference.
+   * @see #setX25(UnorderedGroupOptional)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X25()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroupOptional getX25();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X25</em>' containment reference.
+   * @see #getX25()
+   * @generated
+   */
+  void setX25(UnorderedGroupOptional value);
+
+  /**
+   * Returns the value of the '<em><b>X26</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X26</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X26</em>' containment reference.
+   * @see #setX26(UnorderedGroupBoolean)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X26()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroupBoolean getX26();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX26 <em>X26</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X26</em>' containment reference.
+   * @see #getX26()
+   * @generated
+   */
+  void setX26(UnorderedGroupBoolean value);
+
+  /**
+   * Returns the value of the '<em><b>X27</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X27</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X27</em>' containment reference.
+   * @see #setX27(Complex1)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X27()
+   * @model containment="true"
+   * @generated
+   */
+  Complex1 getX27();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX27 <em>X27</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X27</em>' containment reference.
+   * @see #getX27()
+   * @generated
+   */
+  void setX27(Complex1 value);
+
+  /**
+   * Returns the value of the '<em><b>X28</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X28</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X28</em>' containment reference.
+   * @see #setX28(OptionalDouble)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X28()
+   * @model containment="true"
+   * @generated
+   */
+  OptionalDouble getX28();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX28 <em>X28</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X28</em>' containment reference.
+   * @see #getX28()
+   * @generated
+   */
+  void setX28(OptionalDouble value);
+
+  /**
+   * Returns the value of the '<em><b>X29</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X29</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X29</em>' containment reference.
+   * @see #setX29(NullValue)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X29()
+   * @model containment="true"
+   * @generated
+   */
+  NullValue getX29();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX29 <em>X29</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X29</em>' containment reference.
+   * @see #getX29()
+   * @generated
+   */
+  void setX29(NullValue value);
+
+  /**
+   * Returns the value of the '<em><b>X30</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X30</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X30</em>' containment reference.
+   * @see #setX30(NullValue)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X30()
+   * @model containment="true"
+   * @generated
+   */
+  NullValue getX30();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X30</em>' containment reference.
+   * @see #getX30()
+   * @generated
+   */
+  void setX30(NullValue value);
+
+  /**
+   * Returns the value of the '<em><b>X31</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X31</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X31</em>' containment reference.
+   * @see #setX31(NullCrossRef)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X31()
+   * @model containment="true"
+   * @generated
+   */
+  NullCrossRef getX31();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X31</em>' containment reference.
+   * @see #getX31()
+   * @generated
+   */
+  void setX31(NullCrossRef value);
+
+  /**
+   * Returns the value of the '<em><b>X32</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X32</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X32</em>' containment reference.
+   * @see #setX32(NullCrossRef)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X32()
+   * @model containment="true"
+   * @generated
+   */
+  NullCrossRef getX32();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X32</em>' containment reference.
+   * @see #getX32()
+   * @generated
+   */
+  void setX32(NullCrossRef value);
 
 } // Model

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
@@ -17,20 +16,23 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
+ * Sorts reference descriptions by project and by resource to allow efficient processing later on.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceDescriptionSorter {
 
 	@Inject
-	private IWorkspace workspace;
+	private ProjectUtil projectUtil;
 
 	public Multimap<IProject, IReferenceDescription> sortByProject(Iterable<IReferenceDescription> referenceDescriptions) {
 		Multimap<IProject, IReferenceDescription> referencesByProject = HashMultimap.create();
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
-			URI sourceEObjectUri = referenceDescription.getSourceEObjectUri();
-			String projectName = sourceEObjectUri.segment(1);
-			IProject project = workspace.getRoot().getProject(projectName);
-			referencesByProject.put(project, referenceDescription);
+			URI sourceResourceUri = referenceDescription.getSourceEObjectUri().trimFragment();
+			IProject project = projectUtil.getProject(sourceResourceUri);
+			if(project != null) {
+				referencesByProject.put(project, referenceDescription);
+			}
 		}
 		return referencesByProject;
 	}

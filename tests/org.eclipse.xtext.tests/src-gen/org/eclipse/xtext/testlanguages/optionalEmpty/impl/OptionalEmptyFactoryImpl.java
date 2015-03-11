@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.optionalEmpty.impl;
 
@@ -33,7 +30,7 @@ public class OptionalEmptyFactoryImpl extends EFactoryImpl implements OptionalEm
   {
     try
     {
-      OptionalEmptyFactory theOptionalEmptyFactory = (OptionalEmptyFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty"); 
+      OptionalEmptyFactory theOptionalEmptyFactory = (OptionalEmptyFactory)EPackage.Registry.INSTANCE.getEFactory(OptionalEmptyPackage.eNS_URI);
       if (theOptionalEmptyFactory != null)
       {
         return theOptionalEmptyFactory;

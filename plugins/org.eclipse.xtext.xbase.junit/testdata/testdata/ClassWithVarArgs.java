@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class ClassWithVarArgs {
 
 	private boolean varArgConstructor;
@@ -65,4 +66,29 @@ public class ClassWithVarArgs {
 	public boolean isDefaultConstructor() {
 		return defaultConstructor;
 	}
+	
+	public String logInfo(String msg) {
+		return String.format("logInfo(%s)", msg);
+	}
+
+	public String logInfo(String msg, Object... args) {
+		return String.format("logInfo(%s, args...)", msg);
+	}
+	
+	public String logInfo2(String msg) {
+		return String.format("logInfo2(%s)", msg);
+	}
+
+	public String logInfo2(String msg, String param1) {
+		return String.format("logInfo2(%s, %s)", msg, param1);
+	}
+	
+	public String logInfo2(String msg, String param1, String param2) {
+		return String.format("logInfo2(%s, %s, %s)", msg, param1, param2);
+	}
+	
+	public String logInfo2(String msg, Object... args) {
+		return String.format("logInfo2(%s, args...)", msg);
+	}
+	
 }

@@ -20,4 +20,14 @@
 
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2013/tmf/xtext/NoJdtTestLanguage" 
+       class = "org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage"
+       genModel = "org/eclipse/xtext/testlanguages/noJdt/NoJdtTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+
 </plugin>

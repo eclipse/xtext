@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.junit.Assert;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,15 +45,18 @@ public class ValidationTestHelper {
 			return features.isEmpty();
 		}
 
+		@Override
 		public void add(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			Assert.assertTrue(diagnostic.getData().get(0) instanceof EObject);
 			features.add((EStructuralFeature) diagnostic.getData().get(1));
 		}
 
+		@Override
 		public void addAll(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void merge(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			throw new UnsupportedOperationException();
 		}
@@ -100,7 +102,6 @@ public class ValidationTestHelper {
 			}
 		}
 		
-		@SuppressWarnings("unused")
 		@Check
 		private void foo(EClass x) {
 			error("fooString", EcorePackage.Literals.ECLASS__ABSTRACT);

@@ -51,28 +51,34 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 			this.delegate = delegate;
 		}
 
+		@Override
 		public Map<ISyntaxConstraint, Integer> getAssignmentQuantities() {
 			return assignmentQuants;
 		}
 
+		@Override
 		public Integer getAssignmentQuantity(ISyntaxConstraint assignement) {
 			Integer i = assignmentQuants.get(assignement);
 			return i == null || i < 0 ? -1 : i;
 		}
 
+		@Override
 		public EObject getEObject() {
 			return delegate;
 		}
 
+		@Override
 		public Map<EStructuralFeature, Integer> getFeatureQuantities() {
 			return featureQuants;
 		}
 
+		@Override
 		public Integer getFeatureQuantity(EStructuralFeature feat) {
 			Integer i = featureQuants.get(feat);
 			return i == null || i < 0 ? -1 : i;
 		}
 
+		@Override
 		public Map<EStructuralFeature, Collection<ISyntaxConstraint>> groupByFeature() {
 			Multimap<EStructuralFeature, ISyntaxConstraint> map = HashMultimap.create();
 			for (ISyntaxConstraint e : assignmentQuants.keySet())
@@ -157,6 +163,7 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 		return new Quantities(obj);
 	}
 
+	@Override
 	public IQuantities getAssignmentQuantities(EObject obj, ISyntaxConstraint rule,
 			List<IConcreteSyntaxDiagnostic> acceptor) {
 		Multimap<EStructuralFeature, ISyntaxConstraint> assignments = HashMultimap.create();
@@ -206,6 +213,7 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 		// TODO: implement an algorithm to handle multipleAssignments. For details, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454 
 	}
 
+	@Override
 	public int getFeatureQuantity(EObject obj, EStructuralFeature feat) {
 		if (feat.isMany()) {
 			int count = 0, max = ((List<?>) obj.eGet(feat)).size();

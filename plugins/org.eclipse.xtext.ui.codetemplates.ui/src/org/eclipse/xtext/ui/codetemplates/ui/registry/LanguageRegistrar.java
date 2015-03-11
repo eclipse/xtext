@@ -11,7 +11,7 @@ import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
 import com.google.inject.Inject;
@@ -35,7 +35,7 @@ public class LanguageRegistrar {
 	private ContextTypeIdHelper helper;
 
 	@Inject
-	private Provider<PartialContentAssistContextFactory> contentAssistContextFactory;
+	private Provider<IPartialEditingContentAssistContextFactory> contentAssistContextFactory;
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;

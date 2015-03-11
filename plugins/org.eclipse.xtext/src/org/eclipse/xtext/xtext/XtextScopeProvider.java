@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.GlobalResourceDescriptionProvider;
@@ -54,7 +56,11 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	@Inject
 	private GlobalResourceDescriptionProvider resourceDecriptionProvider;
 	
-	public IScope getScope(EObject context, EReference reference) {
+	@Inject
+	private IGlobalScopeProvider globalScopeProvider;
+	
+	@Override
+	public IScope getScope(final EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
 			if (context instanceof TypeRef) {
 				final TypeRef typeRef = (TypeRef) context;
@@ -79,11 +85,20 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 			return IScope.NULLSCOPE;
 			
 		}
+		if(reference == XtextPackage.eINSTANCE.getGrammar_UsedGrammars()){
+			return globalScopeProvider.getScope(context.eResource(), reference, new Predicate<IEObjectDescription>(){
+				@Override
+				public boolean apply(IEObjectDescription input) {
+					return !input.getEObjectURI().equals(EcoreUtil.getURI(context));
+				}
+			});
+		}
 		return createScope(context.eResource(), reference.getEReferenceType());
 	}
 
 	protected IScope createEnumLiteralsScope(EEnum eEnum) {
 		return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
+							@Override
 							public IEObjectDescription apply(EEnumLiteral param) {
 								return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 							}
@@ -93,6 +108,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	protected IScope createClassifierScope(Iterable<EClassifier> classifiers) {
 		return new SimpleScope(
 				IScope.NULLSCOPE,Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
+					@Override
 					public IEObjectDescription apply(EClassifier param) {
 						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 					}
@@ -124,6 +140,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
 			return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(grammar.getMetamodelDeclarations(),
 							new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
+								@Override
 								public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
 									String name = from.getAlias() != null ? from.getAlias() : "";
 									return EObjectDescription.create(QualifiedName.create(name), from);
@@ -160,10 +177,12 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	protected IScope createEPackageScope(final Grammar grammar, IScope parent) {
 		return new SimpleScope(parent,Iterables.transform(Iterables.filter(grammar.getMetamodelDeclarations(),
 				new Predicate<AbstractMetamodelDeclaration>() {
+					@Override
 					public boolean apply(AbstractMetamodelDeclaration input) {
 						return input.getEPackage() != null;
 					}
 				}), new Function<AbstractMetamodelDeclaration, IEObjectDescription>() {
+			@Override
 			public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
 				return EObjectDescription.create(QualifiedName.create(from.getEPackage().getNsURI()), from.getEPackage());
 			}
@@ -173,6 +192,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	protected IScope createEPackageScope(final Grammar grammar) {
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
 		IScope current = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
+			@Override
 			public IEObjectDescription apply(String from) {
 				InternalEObject proxyPackage = (InternalEObject) EcoreFactory.eINSTANCE.createEPackage();
 				proxyPackage.eSetProxyURI(URI.createURI(from));

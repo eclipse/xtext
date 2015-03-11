@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.TextInvocationContext;
+import org.eclipse.swt.custom.StyledText;
 
 /**
  * Adds the option to suppress the selection of the error region to the
@@ -20,6 +21,7 @@ import org.eclipse.jface.text.source.TextInvocationContext;
 public class QuickAssistInvocationContext extends TextInvocationContext {
 
 	private final boolean suppressSelection;
+	private boolean wasCancelled = false;
 
 	public QuickAssistInvocationContext(ISourceViewer sourceViewer, int offset, int length, boolean suppressSelection) {
 		super(sourceViewer, offset, length);
@@ -28,6 +30,29 @@ public class QuickAssistInvocationContext extends TextInvocationContext {
 
 	public boolean isSuppressSelection() {
 		return suppressSelection;
+	}
+	
+	/**
+	 * May be called from all threads.
+	 * @since 2.8
+	 */
+	public boolean isMarkedCancelled() {
+		return wasCancelled;
+	}
+	
+	/**
+	 * May only be called from Display thread.
+	 * @since 2.8
+	 */
+	public boolean isCancelled() {
+		if (wasCancelled) {
+			return true;
+		}
+		StyledText textWidget = getSourceViewer().getTextWidget();
+		if (!textWidget.isFocusControl()) {
+			return wasCancelled = true;
+		}
+		return false;
 	}
 
 }

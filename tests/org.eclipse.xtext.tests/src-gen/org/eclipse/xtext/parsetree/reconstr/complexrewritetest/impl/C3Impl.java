@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -13,9 +10,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
+import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyC;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +20,10 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Complexrewritetes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C3Impl#getZ <em>Z</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -40,7 +37,7 @@ public class C3Impl extends TrickyCImpl implements C3
    * @generated
    * @ordered
    */
-  protected C2 z;
+  protected TrickyC z;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,7 +65,7 @@ public class C3Impl extends TrickyCImpl implements C3
    * <!-- end-user-doc -->
    * @generated
    */
-  public C2 getZ()
+  public TrickyC getZ()
   {
     return z;
   }
@@ -78,9 +75,9 @@ public class C3Impl extends TrickyCImpl implements C3
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetZ(C2 newZ, NotificationChain msgs)
+  public NotificationChain basicSetZ(TrickyC newZ, NotificationChain msgs)
   {
-    C2 oldZ = z;
+    TrickyC oldZ = z;
     z = newZ;
     if (eNotificationRequired())
     {
@@ -95,7 +92,7 @@ public class C3Impl extends TrickyCImpl implements C3
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setZ(C2 newZ)
+  public void setZ(TrickyC newZ)
   {
     if (newZ != z)
     {
@@ -154,7 +151,7 @@ public class C3Impl extends TrickyCImpl implements C3
     switch (featureID)
     {
       case ComplexrewritetestPackage.C3__Z:
-        setZ((C2)newValue);
+        setZ((TrickyC)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,7 +168,7 @@ public class C3Impl extends TrickyCImpl implements C3
     switch (featureID)
     {
       case ComplexrewritetestPackage.C3__Z:
-        setZ((C2)null);
+        setZ((TrickyC)null);
         return;
     }
     super.eUnset(featureID);

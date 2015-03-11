@@ -2,11 +2,12 @@ package org.eclipse.xtext.util;
 
 import java.util.HashSet;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class TuplesTest extends TestCase {
+public class TuplesTest extends Assert {
 	
-	public void testPair() throws Exception {
+	@Test public void testPair() throws Exception {
 		Pair<String, String> p1 = Tuples.create("foo", "bar");
 		Pair<String, String> p2 = Tuples.create("foo", null);
 		Pair<String, String> p3 = Tuples.create(null, "bar");
@@ -26,7 +27,7 @@ public class TuplesTest extends TestCase {
 		assertTrue(set.add(Tuples.create((String) null,(String) null)));
 	}
 	
-	public void testTriple() throws Exception {
+	@Test public void testTriple() throws Exception {
 		assertFalse(Tuples.create("foo", "bar", "stuff").equals(Tuples.create("foo", "bar")));
 		assertFalse(Tuples.create("foo", "bar").equals(Tuples.create("foo", "bar", "stuff")));
 		

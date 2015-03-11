@@ -204,11 +204,13 @@ public abstract class GraphvizDotBuilder {
 	protected String id(Object cls) {
 		if (cls == null)
 			return null;
+		// Math.abs(Integer.MIN_VALUE) returns Integer.MIN_VALUE
+		long safeAbsInt = Math.abs(Long.valueOf(cls.hashCode()));
 		if (cls instanceof EPackage)
-			return "cluster" + Math.abs(cls.hashCode());
+			return "cluster" + safeAbsInt;
 		if (cls instanceof EObject)
-			return ((EObject) cls).eClass().getName().toLowerCase() + Math.abs(cls.hashCode());
-		return cls.getClass().getSimpleName().toLowerCase() + Math.abs(cls.hashCode());
+			return ((EObject) cls).eClass().getName().toLowerCase() + safeAbsInt;
+		return cls.getClass().getSimpleName().toLowerCase() + safeAbsInt;
 	}
 
 }

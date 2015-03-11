@@ -7,23 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -34,44 +28,45 @@ import com.google.common.collect.Sets;
  */
 public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTests {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(GrammarConstraintProviderAssignedActionTest.class);
 
-	private static class ActionFilter2Dot extends GrammarToDot {
-		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
-
-		@Override
-		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
-			Node n = super.drawAbstractElementTree(ele, d);
-			ActionFilterState nfas = nfaProvider.getNFA(ele);
-
-			for (ActionFilterTransition t : nfas.getOutgoing())
-				d.add(drawFollowerEdge(ele, t, false));
-			for (ActionFilterTransition t : nfas.getOutgoingAfterReturn())
-				d.add(drawFollowerEdge(ele, t, true));
-
-			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
-				n.setStyle("dotted");
-			if (nfas.isEndState())
-				n.put("peripheries", "2");
-			return n;
-		}
-
-		protected Edge drawFollowerEdge(AbstractElement ele, ActionFilterTransition t, boolean isParent) {
-			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
-			e.setLabel(String.valueOf(t.getPrecedence()));
-			e.setStyle("dotted");
-			if (isParent)
-				e.put("arrowtail", "odot");
-			if (t.isRuleCall())
-				e.put("arrowhead", "onormalonormal");
-			else
-				e.put("arrowhead", "onormal");
-			return e;
-		}
-	}
+	//	private static class ActionFilter2Dot extends GrammarToDot {
+	//		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
+	//
+	//		@Override
+	//		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
+	//			Node n = super.drawAbstractElementTree(ele, d);
+	//			ActionFilterState nfas = nfaProvider.getNFA(ele);
+	//
+	//			for (ActionFilterTransition t : nfas.getOutgoing())
+	//				d.add(drawFollowerEdge(ele, t, false));
+	//			for (ActionFilterTransition t : nfas.getOutgoingAfterReturn())
+	//				d.add(drawFollowerEdge(ele, t, true));
+	//
+	//			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
+	//				n.setStyle("dotted");
+	//			if (nfas.isEndState())
+	//				n.put("peripheries", "2");
+	//			return n;
+	//		}
+	//
+	//		protected Edge drawFollowerEdge(AbstractElement ele, ActionFilterTransition t, boolean isParent) {
+	//			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
+	//			e.setLabel(String.valueOf(t.getPrecedence()));
+	//			e.setStyle("dotted");
+	//			if (isParent)
+	//				e.put("arrowtail", "odot");
+	//			if (t.isRuleCall())
+	//				e.put("arrowhead", "onormalonormal");
+	//			else
+	//				e.put("arrowhead", "onormal");
+	//			return e;
+	//		}
+	//	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -84,12 +79,12 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
-		try {
-			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
-		} catch (IOException e) {
-			if (log.isDebugEnabled())
-				log.debug(e.getMessage(), e);
-		}
+		//		try {
+		//			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
+		//		} catch (IOException e) {
+		//			if (log.isDebugEnabled())
+		//				log.debug(e.getMessage(), e);
+		//		}
 
 		List<IConstraintContext> ctxts = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
@@ -103,15 +98,16 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		return Joiner.on("\n").join(result);
 	}
 
+	@Test
 	public void testXtext() {
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
-		try {
-			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-		} catch (IOException e) {
-			if (log.isDebugEnabled())
-				log.debug(e.getMessage(), e);
-		}
+		//		try {
+		//			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
+		//		} catch (IOException e) {
+		//			if (log.isDebugEnabled())
+		//				log.debug(e.getMessage(), e);
+		//		}
 		List<String> result = Lists.newArrayList();
 		Set<IConstraint> visited = Sets.newHashSet();
 		for (IConstraintContext ctx : ctxts) {
@@ -120,9 +116,10 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 				if (visited.add(c))
 					result.add("  " + c.toString());
 		}
-		System.out.println(Joiner.on("\n").join(result));
+		//		System.out.println(Joiner.on("\n").join(result));
 	}
 
+	@Test
 	public void testAssignedActionMandatory1() throws Exception {
 		String actual = getParserRule("Rule: Foo {Bar.left=current} '+' right=ID; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -134,6 +131,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedActionMandatory2() throws Exception {
 		String actual = getParserRule("Rule: val=ID {Bar.left=current} '+' right=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -144,6 +142,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedActionOptional() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)?; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -155,6 +154,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedActionOptionalMany() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)*; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -166,6 +166,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedActionManadatoryMany() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)+; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -177,6 +178,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
@@ -191,6 +193,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Add.left=current} '+' right=Multiplication)*;\n");
@@ -209,6 +212,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.children+=current} ('+' children+=Prim)+)?;\n");
@@ -223,6 +227,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression4() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Add.addCh+=current} ('+' addCh+=Multiplication)+)?;\n");
@@ -241,6 +246,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression5() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Bin.left+=current} op='+' right=Multiplication)*;\n");
@@ -248,16 +254,17 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Addition: Addition_Bin | Prim_Val;\n");
-		expected.append("  Addition_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim));\n");
+		expected.append("Addition: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("  Addition_Multiplication_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim));\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
-		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Prim: Addition_Bin | Prim_Val;");
+		expected.append("Addition_Bin_1_0: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Multiplication_Bin | Prim_Val;");
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testExpression6() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Assignment returns Expr: Addition ({Bin.left+=current} op='=' right=Addition)*;\n");
@@ -266,22 +273,23 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Assignment ')';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Assignment: Addition_Bin | Prim_Val;\n");
-		expected.append("  Addition_Bin returns Bin: (\n");
+		expected.append("Assignment: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("  Addition_Assignment_Multiplication_Bin returns Bin: (\n");
 		expected.append("    (left+=Addition_Bin_1_0 op='+' right=Multiplication) | \n");
 		expected.append("    (left+=Multiplication_Bin_1_0 op='*' right=Prim) | \n");
 		expected.append("    (left+=Assignment_Bin_1_0 op='=' right=Addition)\n");
 		expected.append(");\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
-		expected.append("Assignment_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Addition: Addition_Bin | Prim_Val;\n");
-		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Prim: Addition_Bin | Prim_Val;");
+		expected.append("Assignment_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Addition: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Addition_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Assignment_Multiplication_Bin | Prim_Val;");
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testActionSequence1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID {A.a1=current} a2=ID {B.b1=current} b2=ID {C.c1=current} c2=ID;\n");
@@ -298,6 +306,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testActionSequence2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID {A.a1=current} a2=ID {A.a1=current} a2=ID {A.a1=current} a2=ID;\n");
@@ -314,6 +323,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testActionSequence3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID)?)?)?;\n");
@@ -330,6 +340,33 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
+	public void testActionSequence4() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: {A1} ({A2.left=current})+;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_A2;\n");
+		expected.append("  Rule_A2 returns A2: left=Rule_A2_1;\n");
+		expected.append("Rule_A2_1: Rule_A2 | Rule_A2_1_A1;\n");
+		expected.append("  Rule_A2_1_A1 returns A1: {A1};");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testActionSequence5() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: INT? {Bar} 'bar' ({FooBar.bar=current} 'act')?;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Bar | Rule_FooBar;\n");
+		expected.append("  Rule_Bar returns Bar: {Bar};\n");
+		expected.append("  Rule_FooBar returns FooBar: bar=Rule_FooBar_3_0;\n");
+		expected.append("Rule_FooBar_3_0: Rule_Bar;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
 	public void testActionAlternative1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: root=ID (val1=ID | {A.a1=current} a2=ID | {B.b1=current} b2=ID | {C.c1=current} c2=ID);\n");
@@ -362,6 +399,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 			')')?
 		)*;
 	 */
+	@Test
 	public void testActionAlternative2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: Bar ({Foo.f1=current} f2=ID f3=ID? f4=ID)*; Bar: bar=ID;\n");
@@ -375,6 +413,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testActionAlternative3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: {Foo} foo=ID ({Bar.bar=current} bar2=ID | {Baz.baz=current} baz2=ID);");
@@ -389,20 +428,60 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testActionSingleAndAssigned() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: {Act1} act1=ID | Foo ({Act2.left=current} act2=ID)?;\n");
 		grammar.append("Foo: foo=ID {Act1.f1=current} act1=ID val=ID;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model: Model_Act1 | Model_Act2;\n");
-		expected.append("  Model_Act1 returns Act1: (act1=ID | (f1=Foo_Act1_1 act1=ID val=ID));\n");
+		expected.append("Model: Foo_Model_Act1 | Model_Act2;\n");
+		expected.append("  Foo_Model_Act1 returns Act1: (act1=ID | (f1=Foo_Act1_1 act1=ID val=ID));\n");
 		expected.append("  Model_Act2 returns Act2: (left=Model_Act2_1_1_0 act2=ID);\n");
 		expected.append("Model_Act2_1_1_0: Foo_Act1;\n");
 		expected.append("  Foo_Act1 returns Act1: (f1=Foo_Act1_1 act1=ID val=ID);\n");
 		expected.append("Foo: Foo_Act1;\n");
 		expected.append("Foo_Act1_1: Foo_Act1_1_Foo;\n");
 		expected.append("  Foo_Act1_1_Foo returns Foo: foo=ID;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testActionSameTypeInMultipleRules1() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Expr returns Expr: Abs | ({Op} op=('+' | '-') rhs=Abs);\n");
+		grammar.append("Abs returns Expr: Prim | ({Op} op='ABS' rhs=Prim);\n");
+		grammar.append("Prim returns Expr: '(' Expr ')' | {NumberLiteral} value=INT;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Expr: Abs_Expr_Op | Prim_NumberLiteral;\n");
+		expected.append("  Abs_Expr_Op returns Op: ((op='ABS' rhs=Prim) | ((op='+' | op='-') rhs=Abs));\n");
+		expected.append("  Prim_NumberLiteral returns NumberLiteral: value=INT;\n");
+		expected.append("Abs: Abs_Expr_Op | Prim_NumberLiteral;\n");
+		expected.append("Prim: Abs_Expr_Op | Prim_NumberLiteral;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testActionSameTypeInMultipleRules2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Ex1 returns Ex: Ex2 (({o.l=current} o='a' r=Ex2)+ | {o.l=current} o='b' r=Ex2)?;\n");
+		grammar.append("Ex2 returns Ex: Ex3 ({o.l=current} o='c' r=Ex3)*;\n");
+		grammar.append("Ex3 returns Ex: name=ID ({o.l=current} o='d' name=ID)*;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Ex1: Ex1_Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("  Ex1_Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2) | (l=Ex1_o_1_1_0 o='b' r=Ex2));\n");
+		expected.append("  Ex3_Ex returns Ex: name=ID;\n");
+		expected.append("Ex1_o_1_0_0: Ex1_Ex2_Ex3_o_1_0_0_o | Ex3_Ex;\n");
+		expected.append("  Ex1_Ex2_Ex3_o_1_0_0_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2));\n");
+		expected.append("Ex1_o_1_1_0: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("  Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID));\n");
+		expected.append("Ex2: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("Ex2_o_1_0: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("Ex3: Ex3_Ex | Ex3_o;\n");
+		expected.append("  Ex3_o returns o: (l=Ex3_o_1_0 o='d' name=ID);\n");
+		expected.append("Ex3_o_1_0: Ex3_Ex | Ex3_o;");
 		assertEquals(expected.toString(), actual);
 	}
 }

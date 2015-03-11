@@ -9,7 +9,9 @@ package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -17,13 +19,13 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class ParserTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Ecore2XtextTestStandaloneSetup.class);
 		Ecore2xtextPackage.eINSTANCE.getNsURI(); // register EPackage
 	}
 	
-	public void testSimpleExample() throws Exception {
+	@Test public void testSimpleExample() throws Exception {
 		EObject model = getModel("Root INT {classes { Concrete0 foo, Concrete1 bar } }");
 		assertTrue(model instanceof Root);
 		assertEquals("INT", model.eResource().getURIFragment(model));
@@ -34,5 +36,10 @@ public class ParserTest extends AbstractXtextTests {
 		assertEquals("foo", classes.get(0).getName());
 		assertTrue(classes.get(1) instanceof Concrete1);
 		assertEquals("bar", classes.get(1).getName());
+	}
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
 	}
 }

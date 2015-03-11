@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -49,6 +51,13 @@ public class GrammarUtil {
 
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static String getClasspathRelativePathToBinGrammar(Grammar grammar) {
+		return getLanguageId(grammar).replace('.', '/') + ".xtextbin";
 	}
 
 	public static String getLanguageId(Grammar g) {
@@ -411,15 +420,13 @@ public class GrammarUtil {
 
 	// TODO replace me by compiled grammar model
 	public static EReference getReference(CrossReference ref, EClass referenceOwner) {
-		final List<EReference> references = referenceOwner.getEAllReferences();
 		final String feature = GrammarUtil.containingAssignment(ref).getFeature();
-		for (EReference reference : references) {
-			if (!reference.isContainment() && reference.getName().equals(feature))
-				return reference;
-		}
+		EStructuralFeature result = referenceOwner.getEStructuralFeature(feature);
+		if (result instanceof EReference && !((EReference) result).isContainment())
+			return (EReference) result;
 		return null;
 	}
-
+	
 	// TODO replace me by compiled grammar model
 	public static EReference getReference(CrossReference crossRef) {
 		EClassifier referenceOwner = findCurrentType(crossRef);
@@ -434,18 +441,72 @@ public class GrammarUtil {
 
 	public static Collection<EPackage> allEPackagesToValidate(final Grammar _this) {
 		Iterable<TypeRef> allTypeRefs = concat(transform(allParserRules(_this), new Function<ParserRule, Iterable<TypeRef>>() {
+			@Override
 			public Iterable<TypeRef> apply(ParserRule from) {
 				return EcoreUtil2.eAllOfType(from, TypeRef.class);
 			}
 		}));
 		return newLinkedHashSet(transform(filter(allTypeRefs, new Predicate<TypeRef>() {
+			@Override
 			public boolean apply(TypeRef input) {
 				return !(input.eContainer() instanceof CrossReference) && input.getClassifier() instanceof EClass;
 			}
 		}), new Function<TypeRef, EPackage>() {
+			@Override
 			public EPackage apply(TypeRef from) {
 				return from.getClassifier().getEPackage();
 			}
 		}));
+	}
+	
+	/**
+	 * Find the datatype for EString which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EDataType findEString(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.ESTRING.getName());
+		if (result instanceof EDataType)
+			return (EDataType) result;
+		return null;
+	}
+	
+	/**
+	 * Find the datatype for EBoolean which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EDataType findEBoolean(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.EBOOLEAN.getName());
+		if (result instanceof EDataType)
+			return (EDataType) result;
+		return null;
+	}
+	
+	/**
+	 * Find the class for EObject which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EClass findEObject(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.EOBJECT.getName());
+		if (result instanceof EClass)
+			return (EClass) result;
+		return null;
+	}
+	
+	private static EClassifier findEClassifierByName(Grammar grammar, String nsURI, String name) {
+		if (grammar != null) {
+			for(AbstractMetamodelDeclaration declaration: allMetamodelDeclarations(grammar)) {
+				if (declaration instanceof ReferencedMetamodel) {
+					EPackage referencedPackage = declaration.getEPackage();
+					if (referencedPackage != null && !referencedPackage.eIsProxy()) {
+						if (nsURI.equals(referencedPackage.getNsURI())) {
+							EClassifier result = referencedPackage.getEClassifier(name);
+							if (result != null)
+								return result;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

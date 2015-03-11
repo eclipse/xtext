@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.outline.outlineTest.impl;
 
@@ -33,7 +30,7 @@ public class OutlineTestFactoryImpl extends EFactoryImpl implements OutlineTestF
   {
     try
     {
-      OutlineTestFactory theOutlineTestFactory = (OutlineTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/outline/OutlineTest"); 
+      OutlineTestFactory theOutlineTestFactory = (OutlineTestFactory)EPackage.Registry.INSTANCE.getEFactory(OutlineTestPackage.eNS_URI);
       if (theOutlineTestFactory != null)
       {
         return theOutlineTestFactory;

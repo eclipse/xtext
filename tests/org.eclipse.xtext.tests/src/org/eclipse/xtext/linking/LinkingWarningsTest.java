@@ -10,8 +10,9 @@ package org.eclipse.xtext.linking;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -20,11 +21,16 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingDiagnosticMessageProvider {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	private final String expected = "Expected Message";
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LangATestLanguageStandaloneSetup() {
 			@Override
@@ -39,17 +45,18 @@ public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingD
 		});
 	}
 	
+	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		return new DiagnosticMessage(expected, Severity.WARNING, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 
-	public void testNoErrors() throws Exception {
+	@Test public void testNoErrors() throws Exception {
 		XtextResource resource = getResourceFromString(" type A extends B \n type B extends A");
 		assertTrue(resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().isEmpty());
 	}
 
-	public void testLinkingProblemAsWarning() throws Exception {
+	@Test public void testLinkingProblemAsWarning() throws Exception {
 		String modelAsText = "type A extends B \n type B extends C";
 		XtextResource resource = getResourceFromStringAndExpect(modelAsText, 0);
 		assertTrue(resource.getErrors().isEmpty());
@@ -60,7 +67,7 @@ public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingD
 		assertEquals(expected, warning.getMessage());
 	}
 	
-	public void testFixedLinkingProblem() throws Exception {
+	@Test public void testFixedLinkingProblem() throws Exception {
 		String modelAsText = "type A extends B \n type B extends C";
 		XtextResource resource = getResourceFromStringAndExpect(modelAsText, 0);
 		assertTrue(resource.getErrors().isEmpty());

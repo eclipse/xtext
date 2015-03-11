@@ -15,10 +15,14 @@ package org.eclipse.xtext.ui.editor.folding;
 public interface IFoldingRegionAcceptor<AdditionalParam> {
 
 	void accept(int offset, int length);
-	
+
 	/**
-	 * @param contentStart the start of the significant content relative to the offset.
-	 * @param param used to compute the significant region.
+	 * @param offset
+	 *            of the significant content
+	 * @param length
+	 *            of the significant content
+	 * @param param
+	 *            used to compute the significant region.
 	 */
 	void accept(int offset, int length, AdditionalParam param);
 

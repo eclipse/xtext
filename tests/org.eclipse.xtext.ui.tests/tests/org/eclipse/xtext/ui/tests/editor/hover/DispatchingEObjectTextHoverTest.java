@@ -16,12 +16,13 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.junit.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -37,7 +38,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 	private MockHover hover;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		modelAsText = "stuff mystuff stuff yourstuff refs mystuff // Comment";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
@@ -47,7 +48,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 	}
@@ -57,7 +58,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 		return "org.eclipse.xtext.ui.tests.TestLanguage";
 	}
 
-	public void testNames () {	
+	@Test public void testNames () {	
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 5));
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 5));
 		assertEquals(new Region (6,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 6));
@@ -65,7 +66,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 13));
 	}
 
-	public void testCrossReferences () {
+	@Test public void testCrossReferences () {
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 34));
 		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 35));
 		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 41));

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
@@ -22,13 +19,13 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl#isPrecStar <em>Prec Star</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl#getPrec <em>Prec</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl#isScaleStar <em>Scale Star</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl#getScale <em>Scale</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

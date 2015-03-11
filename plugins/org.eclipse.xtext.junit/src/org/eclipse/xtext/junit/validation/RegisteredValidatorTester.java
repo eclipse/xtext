@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.RegisteredValidatorTester instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class RegisteredValidatorTester extends AbstractValidatorTester {
 	public static AssertableDiagnostics validateObj(EObject obj) {
 		return new RegisteredValidatorTester().validate(obj);

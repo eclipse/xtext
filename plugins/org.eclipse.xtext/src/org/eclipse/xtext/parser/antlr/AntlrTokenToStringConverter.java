@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
  */
 public class AntlrTokenToStringConverter implements ITokenToStringConverter {
 
+	@Override
 	public Object getTokenAsStringIfPossible(Object tokenOrValue) {
 		Object value = tokenOrValue;
 		if (value instanceof DatatypeRuleToken) {

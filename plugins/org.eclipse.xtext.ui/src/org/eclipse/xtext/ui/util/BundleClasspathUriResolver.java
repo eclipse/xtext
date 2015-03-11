@@ -22,7 +22,8 @@ import org.osgi.framework.Bundle;
 
 public class BundleClasspathUriResolver implements IClasspathUriResolver {
 
-    public URI resolve(Object context, URI classpathUri) {
+    @Override
+	public URI resolve(Object context, URI classpathUri) {
         if (context instanceof Plugin) {
             context = ((Plugin) context).getBundle();
         }

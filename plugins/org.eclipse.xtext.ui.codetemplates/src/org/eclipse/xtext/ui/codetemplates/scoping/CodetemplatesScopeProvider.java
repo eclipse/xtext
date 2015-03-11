@@ -23,15 +23,15 @@ import com.google.common.collect.Sets;
 /**
  * This class contains custom scoping description.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
+ * on how and when to use it.
  *
  */
 public class CodetemplatesScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	public IScope scope_Codetemplate_context(Codetemplate template, EReference reference) {
 		Codetemplates root = EcoreUtil2.getContainerOfType(template, Codetemplates.class);
-		if (root.getLanguage() != null) {
+		if (root != null && root.getLanguage() != null) {
 			Grammar grammar = root.getLanguage();
 			if (!grammar.eIsProxy()) {
 				LinkedHashSet<AbstractRule> usedRules = Sets.newLinkedHashSet();

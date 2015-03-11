@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipse.org/xtext/codetemplate/Codetemplates" 
        class = "org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage"
-       genModel = "org/eclipse/xtext/ui/codetemplates/Codetemplates.genmodel" /> 
+       genModel = "model/generated/Codetemplates.genmodel" /> 
 	
   </extension>
 

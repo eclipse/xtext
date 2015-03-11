@@ -14,7 +14,6 @@ import java.net.URL;
 
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
-
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
@@ -32,6 +31,7 @@ public class OpenBrowserUtil {
 
 	public static void open(final URL url, Display display) {
 		display.syncExec(new Runnable() {
+			@Override
 			public void run() {
 				internalOpen(url, false);
 			}
@@ -40,6 +40,7 @@ public class OpenBrowserUtil {
 
 	public static void openExternal(final URL url, Display display) {
 		display.syncExec(new Runnable() {
+			@Override
 			public void run() {
 				internalOpen(url, true);
 			}
@@ -48,6 +49,7 @@ public class OpenBrowserUtil {
 
 	private static void internalOpen(final URL url, final boolean useExternalBrowser) {
 		BusyIndicator.showWhile(null, new Runnable() {
+			@Override
 			public void run() {
 				URL helpSystemUrl= PlatformUI.getWorkbench().getHelpSystem().resolve(url.toExternalForm(), true);
 				try {

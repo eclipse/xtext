@@ -1,0 +1,3 @@
+dependencies {
+	compile "org.eclipse.xtext:org.eclipse.xtext:${version}"
+}

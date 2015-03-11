@@ -12,81 +12,81 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBeeLangTestLanguageLexer extends Lexer {
-    public static final int T__42=42;
-    public static final int T__28=28;
-    public static final int T__57=57;
-    public static final int T__23=23;
-    public static final int T__51=51;
-    public static final int T__13=13;
-    public static final int T__47=47;
-    public static final int T__69=69;
-    public static final int RULE_STRING=7;
-    public static final int T__73=73;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__65=65;
-    public static final int RULE_HEX=8;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__74=74;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__46=46;
-    public static final int T__52=52;
     public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=6;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=9;
-    public static final int T__35=35;
+    public static final int T__69=69;
     public static final int RULE_ID=5;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__64=64;
-    public static final int T__44=44;
     public static final int T__66=66;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__77=77;
-    public static final int T__45=45;
+    public static final int T__67=67;
     public static final int T__29=29;
-    public static final int T__55=55;
-    public static final int T__63=63;
-    public static final int RULE_WS=11;
-    public static final int T__43=43;
-    public static final int T__75=75;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int T__76=76;
-    public static final int RULE_DOCUMENTATION=4;
+    public static final int T__64=64;
+    public static final int T__28=28;
+    public static final int T__65=65;
+    public static final int T__27=27;
+    public static final int T__62=62;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=12;
+    public static final int T__63=63;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=10;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int T__61=61;
+    public static final int EOF=-1;
     public static final int T__60=60;
-    public static final int T__41=41;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int RULE_HEX=8;
+    public static final int T__58=58;
+    public static final int T__16=16;
+    public static final int T__51=51;
+    public static final int T__15=15;
+    public static final int T__52=52;
+    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__59=59;
+    public static final int RULE_INT=6;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=10;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=7;
+    public static final int T__33=33;
     public static final int T__71=71;
+    public static final int T__34=34;
+    public static final int T__72=72;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__70=70;
+    public static final int RULE_DOCUMENTATION=4;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__76=76;
+    public static final int RULE_WS=11;
+    public static final int T__75=75;
+    public static final int T__74=74;
+    public static final int T__73=73;
+    public static final int T__77=77;
 
     // delegates
     // delegators
@@ -1706,10 +1706,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1746,23 +1746,15 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1787,10 +1779,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1806,23 +1798,15 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2618,81 +2602,19 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\1\uffff\3\60\2\uffff\1\60\2\uffff\4\60\1\uffff\4\60\1\110\1\60"+
-        "\1\uffff\1\115\1\uffff\1\121\1\124\1\127\1\131\1\133\1\56\1\136"+
-        "\1\140\1\142\1\60\1\146\1\56\2\uffff\2\60\1\155\1\56\2\uffff\2\56"+
-        "\2\uffff\1\60\1\uffff\4\60\2\uffff\1\60\2\uffff\4\60\1\uffff\4\60"+
-        "\1\177\1\60\4\uffff\2\60\1\uffff\1\u0086\2\uffff\1\u0088\15\uffff"+
-        "\1\u008a\5\uffff\2\60\5\uffff\2\60\4\uffff\2\60\1\u0091\1\u0092"+
-        "\6\60\1\u009a\3\60\1\u009e\1\uffff\1\60\2\uffff\2\60\6\uffff\4\60"+
-        "\1\u00a9\1\60\2\uffff\7\60\1\uffff\1\u00b2\1\u00b3\1\u00b4\1\uffff"+
-        "\1\60\1\u0082\2\uffff\5\60\1\u00bc\1\uffff\2\60\1\u00bf\5\60\3\uffff"+
-        "\1\60\1\u00c6\1\u00c7\4\60\1\uffff\2\60\1\uffff\1\u00ce\1\u00cf"+
-        "\3\60\1\u00d3\2\uffff\1\60\1\u00d5\2\60\1\u00d8\1\60\2\uffff\3\60"+
-        "\1\uffff\1\60\1\uffff\1\u00de\1\u00df\1\uffff\1\60\1\u00e1\1\60"+
-        "\1\u00e4\1\u00e5\2\uffff\1\60\1\uffff\1\60\3\uffff\1\u00e9\1\u00ea"+
-        "\5\uffff";
+        "\1\uffff\3\60\2\uffff\1\60\2\uffff\4\60\1\uffff\4\60\1\110\1\60\1\uffff\1\115\1\uffff\1\121\1\124\1\127\1\131\1\133\1\56\1\136\1\140\1\142\1\60\1\146\1\56\2\uffff\2\60\1\155\1\56\2\uffff\2\56\2\uffff\1\60\1\uffff\4\60\2\uffff\1\60\2\uffff\4\60\1\uffff\4\60\1\177\1\60\4\uffff\2\60\1\uffff\1\u0086\2\uffff\1\u0088\15\uffff\1\u008a\5\uffff\2\60\5\uffff\2\60\4\uffff\2\60\1\u0091\1\u0092\6\60\1\u009a\3\60\1\u009e\1\uffff\1\60\2\uffff\2\60\6\uffff\4\60\1\u00a9\1\60\2\uffff\7\60\1\uffff\1\u00b2\1\u00b3\1\u00b4\1\uffff\1\60\1\u0082\2\uffff\5\60\1\u00bc\1\uffff\2\60\1\u00bf\5\60\3\uffff\1\60\1\u00c6\1\u00c7\4\60\1\uffff\2\60\1\uffff\1\u00ce\1\u00cf\3\60\1\u00d3\2\uffff\1\60\1\u00d5\2\60\1\u00d8\1\60\2\uffff\3\60\1\uffff\1\60\1\uffff\1\u00de\1\u00df\1\uffff\1\60\1\u00e1\1\60\1\u00e4\1\u00e5\2\uffff\1\60\1\uffff\1\60\3\uffff\1\u00e9\1\u00ea\5\uffff";
     static final String DFA14_eofS =
         "\u00ed\uffff";
     static final String DFA14_minS =
-        "\1\0\1\156\1\141\1\155\2\uffff\1\157\2\uffff\1\165\1\162\1\145\1"+
-        "\156\1\uffff\1\150\1\141\1\163\1\162\1\52\1\151\1\uffff\1\56\1\uffff"+
-        "\1\75\1\53\1\55\6\75\1\141\1\174\1\46\2\uffff\1\165\1\150\1\130"+
-        "\1\101\2\uffff\2\0\2\uffff\1\151\1\uffff\1\162\1\154\2\160\2\uffff"+
-        "\1\165\2\uffff\1\164\1\157\1\161\1\166\1\uffff\1\145\1\164\1\155"+
-        "\1\167\1\60\1\145\1\uffff\1\0\2\uffff\2\156\1\uffff\1\56\2\uffff"+
-        "\1\75\15\uffff\1\75\5\uffff\1\143\1\156\5\uffff\2\151\4\uffff\1"+
-        "\164\1\163\2\60\1\154\1\165\1\162\2\160\1\165\1\60\1\156\1\150\1"+
-        "\145\1\60\1\uffff\1\145\1\0\1\uffff\1\141\1\143\6\uffff\1\150\1"+
-        "\164\1\154\1\163\1\60\1\151\2\uffff\1\145\1\164\1\143\1\165\1\151"+
-        "\1\145\1\151\1\uffff\3\60\1\uffff\1\144\3\0\1\154\1\164\2\145\1"+
-        "\144\1\60\1\uffff\1\157\1\155\1\60\1\145\1\164\1\144\2\162\3\uffff"+
-        "\1\171\1\0\1\60\1\151\1\144\1\170\1\145\1\uffff\1\156\1\145\1\uffff"+
-        "\2\60\1\145\1\164\1\145\1\60\2\uffff\1\157\1\60\1\164\1\162\1\60"+
-        "\1\156\2\uffff\1\163\1\151\1\163\1\uffff\1\156\1\uffff\2\60\1\uffff"+
-        "\1\164\1\60\1\145\1\55\1\60\2\uffff\1\163\1\uffff\1\163\1\155\2"+
-        "\uffff\2\60\1\141\4\uffff";
+        "\1\0\1\156\1\141\1\155\2\uffff\1\157\2\uffff\1\165\1\162\1\145\1\156\1\uffff\1\150\1\141\1\163\1\162\1\52\1\151\1\uffff\1\56\1\uffff\1\75\1\53\1\55\6\75\1\141\1\174\1\46\2\uffff\1\165\1\150\1\130\1\101\2\uffff\2\0\2\uffff\1\151\1\uffff\1\162\1\154\2\160\2\uffff\1\165\2\uffff\1\164\1\157\1\161\1\166\1\uffff\1\145\1\164\1\155\1\167\1\60\1\145\1\uffff\1\0\2\uffff\2\156\1\uffff\1\56\2\uffff\1\75\15\uffff\1\75\5\uffff\1\143\1\156\5\uffff\2\151\4\uffff\1\164\1\163\2\60\1\154\1\165\1\162\2\160\1\165\1\60\1\156\1\150\1\145\1\60\1\uffff\1\145\1\0\1\uffff\1\141\1\143\6\uffff\1\150\1\164\1\154\1\163\1\60\1\151\2\uffff\1\145\1\164\1\143\1\165\1\151\1\145\1\151\1\uffff\3\60\1\uffff\1\144\3\0\1\154\1\164\2\145\1\144\1\60\1\uffff\1\157\1\155\1\60\1\145\1\164\1\144\2\162\3\uffff\1\171\1\0\1\60\1\151\1\144\1\170\1\145\1\uffff\1\156\1\145\1\uffff\2\60\1\145\1\164\1\145\1\60\2\uffff\1\157\1\60\1\164\1\162\1\60\1\156\2\uffff\1\163\1\151\1\163\1\uffff\1\156\1\uffff\2\60\1\uffff\1\164\1\60\1\145\1\55\1\60\2\uffff\1\163\1\uffff\1\163\1\155\2\uffff\2\60\1\141\4\uffff";
     static final String DFA14_maxS =
-        "\1\uffff\1\156\1\145\1\156\2\uffff\1\157\2\uffff\1\165\1\162\1\145"+
-        "\1\156\1\uffff\1\151\1\145\1\163\1\162\1\75\1\165\1\uffff\1\56\1"+
-        "\uffff\1\76\10\75\1\157\1\174\1\46\2\uffff\1\165\1\150\1\170\1\172"+
-        "\2\uffff\2\uffff\2\uffff\1\151\1\uffff\2\162\2\160\2\uffff\1\165"+
-        "\2\uffff\1\164\1\157\1\161\1\166\1\uffff\1\145\1\164\1\155\1\167"+
-        "\1\172\1\145\1\uffff\1\uffff\2\uffff\2\156\1\uffff\1\56\2\uffff"+
-        "\1\75\15\uffff\1\75\5\uffff\1\143\1\156\5\uffff\2\151\4\uffff\1"+
-        "\164\1\163\2\172\1\154\1\165\1\162\1\160\1\166\1\165\1\172\1\156"+
-        "\1\150\1\145\1\172\1\uffff\1\145\1\uffff\1\uffff\1\141\1\143\6\uffff"+
-        "\1\150\1\164\1\154\1\163\1\172\1\151\2\uffff\1\145\1\164\1\143\1"+
-        "\165\1\151\1\145\1\151\1\uffff\3\172\1\uffff\1\144\3\uffff\1\154"+
-        "\1\164\2\145\1\144\1\172\1\uffff\1\157\1\155\1\172\1\145\1\164\1"+
-        "\144\2\162\3\uffff\1\171\1\uffff\1\172\1\151\1\144\1\170\1\145\1"+
-        "\uffff\1\156\1\145\1\uffff\2\172\1\145\1\164\1\145\1\172\2\uffff"+
-        "\1\157\1\172\1\164\1\162\1\172\1\156\2\uffff\1\163\1\151\1\163\1"+
-        "\uffff\1\156\1\uffff\2\172\1\uffff\1\164\1\172\1\145\2\172\2\uffff"+
-        "\1\163\1\uffff\1\163\1\155\2\uffff\2\172\1\151\4\uffff";
+        "\1\uffff\1\156\1\145\1\156\2\uffff\1\157\2\uffff\1\165\1\162\1\145\1\156\1\uffff\1\151\1\145\1\163\1\162\1\75\1\165\1\uffff\1\56\1\uffff\1\76\10\75\1\157\1\174\1\46\2\uffff\1\165\1\150\1\170\1\172\2\uffff\2\uffff\2\uffff\1\151\1\uffff\2\162\2\160\2\uffff\1\165\2\uffff\1\164\1\157\1\161\1\166\1\uffff\1\145\1\164\1\155\1\167\1\172\1\145\1\uffff\1\uffff\2\uffff\2\156\1\uffff\1\56\2\uffff\1\75\15\uffff\1\75\5\uffff\1\143\1\156\5\uffff\2\151\4\uffff\1\164\1\163\2\172\1\154\1\165\1\162\1\160\1\166\1\165\1\172\1\156\1\150\1\145\1\172\1\uffff\1\145\1\uffff\1\uffff\1\141\1\143\6\uffff\1\150\1\164\1\154\1\163\1\172\1\151\2\uffff\1\145\1\164\1\143\1\165\1\151\1\145\1\151\1\uffff\3\172\1\uffff\1\144\3\uffff\1\154\1\164\2\145\1\144\1\172\1\uffff\1\157\1\155\1\172\1\145\1\164\1\144\2\162\3\uffff\1\171\1\uffff\1\172\1\151\1\144\1\170\1\145\1\uffff\1\156\1\145\1\uffff\2\172\1\145\1\164\1\145\1\172\2\uffff\1\157\1\172\1\164\1\162\1\172\1\156\2\uffff\1\163\1\151\1\163\1\uffff\1\156\1\uffff\2\172\1\uffff\1\164\1\172\1\145\2\172\2\uffff\1\163\1\uffff\1\163\1\155\2\uffff\2\172\1\151\4\uffff";
     static final String DFA14_acceptS =
-        "\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff\1\27\1\uffff"+
-        "\1\31\14\uffff\1\70\1\71\4\uffff\1\104\1\105\2\uffff\1\111\1\112"+
-        "\1\uffff\1\104\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff"+
-        "\1\36\1\uffff\1\110\1\24\2\uffff\1\27\1\uffff\1\67\1\31\1\uffff"+
-        "\1\53\1\32\1\33\1\65\1\57\1\34\1\66\1\60\1\35\1\61\1\37\1\62\1\40"+
-        "\1\uffff\1\64\1\45\1\47\1\46\1\50\2\uffff\1\55\1\101\1\56\1\70\1"+
-        "\71\2\uffff\1\103\1\105\1\106\1\111\17\uffff\1\20\2\uffff\1\107"+
-        "\2\uffff\1\30\1\63\1\42\1\41\1\44\1\43\6\uffff\1\51\1\52\7\uffff"+
-        "\1\14\3\uffff\1\100\12\uffff\1\1\10\uffff\1\16\1\72\1\17\7\uffff"+
-        "\1\77\2\uffff\1\74\6\uffff\1\102\1\25\6\uffff\1\6\1\11\3\uffff\1"+
-        "\21\1\uffff\1\54\2\uffff\1\2\5\uffff\1\73\1\76\1\uffff\1\12\2\uffff"+
-        "\1\13\1\26\3\uffff\1\3\1\75\1\22\1\23";
+        "\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff\1\27\1\uffff\1\31\14\uffff\1\70\1\71\4\uffff\1\104\1\105\2\uffff\1\111\1\112\1\uffff\1\104\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff\1\36\1\uffff\1\110\1\24\2\uffff\1\27\1\uffff\1\67\1\31\1\uffff\1\53\1\32\1\33\1\65\1\57\1\34\1\66\1\60\1\35\1\61\1\37\1\62\1\40\1\uffff\1\64\1\45\1\47\1\46\1\50\2\uffff\1\55\1\101\1\56\1\70\1\71\2\uffff\1\103\1\105\1\106\1\111\17\uffff\1\20\2\uffff\1\107\2\uffff\1\30\1\63\1\42\1\41\1\44\1\43\6\uffff\1\51\1\52\7\uffff\1\14\3\uffff\1\100\12\uffff\1\1\10\uffff\1\16\1\72\1\17\7\uffff\1\77\2\uffff\1\74\6\uffff\1\102\1\25\6\uffff\1\6\1\11\3\uffff\1\21\1\uffff\1\54\2\uffff\1\2\5\uffff\1\73\1\76\1\uffff\1\12\2\uffff\1\13\1\26\3\uffff\1\3\1\75\1\22\1\23";
     static final String DFA14_specialS =
-        "\1\0\52\uffff\1\10\1\3\31\uffff\1\7\72\uffff\1\2\36\uffff\1\5\1"+
-        "\6\1\4\23\uffff\1\1\66\uffff}>";
+        "\1\2\52\uffff\1\5\1\4\31\uffff\1\3\72\uffff\1\7\36\uffff\1\10\1\6\1\1\23\uffff\1\0\66\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\11\56\2\55\2\56\1\55\22\56\1\55\1\35\1\53\2\56\1\33\1\42\1"+
-            "\54\1\24\1\26\1\32\1\30\1\4\1\31\1\25\1\22\1\47\11\52\1\7\1"+
-            "\10\1\37\1\27\1\36\2\56\32\51\1\43\1\56\1\44\1\50\1\51\1\56"+
-            "\1\20\1\45\1\40\1\51\1\14\1\23\1\21\1\51\1\3\4\51\1\17\1\11"+
-            "\1\12\1\51\1\13\1\6\1\46\1\1\1\2\1\16\3\51\1\5\1\41\1\15\1\34"+
-            "\uff81\56",
+            "\11\56\2\55\2\56\1\55\22\56\1\55\1\35\1\53\2\56\1\33\1\42\1\54\1\24\1\26\1\32\1\30\1\4\1\31\1\25\1\22\1\47\11\52\1\7\1\10\1\37\1\27\1\36\2\56\32\51\1\43\1\56\1\44\1\50\1\51\1\56\1\20\1\45\1\40\1\51\1\14\1\23\1\21\1\51\1\3\4\51\1\17\1\11\1\12\1\51\1\13\1\6\1\46\1\1\1\2\1\16\3\51\1\5\1\41\1\15\1\34\uff81\56",
             "\1\57",
             "\1\62\3\uffff\1\61",
             "\1\63\1\64",
@@ -2912,8 +2834,7 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
             "\1\u00e0",
             "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
             "\1\u00e2",
-            "\1\u00e3\2\uffff\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32"+
-            "\60",
+            "\1\u00e3\2\uffff\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
             "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
             "",
             "",
@@ -2948,7 +2869,7 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA14 extends DFA {
+    static class DFA14 extends DFA {
 
         public DFA14(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -2969,6 +2890,28 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA14_182 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_182=='*') ) {s = 161;}
+
+                        else if ( ((LA14_182>='\u0000' && LA14_182<=')')||(LA14_182>='+' && LA14_182<='\uFFFF')) ) {s = 162;}
+
+                        else s = 198;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA14_162 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_162=='*') ) {s = 161;}
+
+                        else if ( ((LA14_162>='\u0000' && LA14_162<=')')||(LA14_162>='+' && LA14_162<='\uFFFF')) ) {s = 162;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -3066,31 +3009,17 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
-                        int LA14_182 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_182=='*') ) {s = 161;}
-
-                        else if ( ((LA14_182>='\u0000' && LA14_182<=')')||(LA14_182>='+' && LA14_182<='\uFFFF')) ) {s = 162;}
-
-                        else s = 198;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA14_129 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_129=='/') ) {s = 160;}
-
-                        else if ( (LA14_129=='*') ) {s = 161;}
-
-                        else if ( ((LA14_129>='\u0000' && LA14_129<=')')||(LA14_129>='+' && LA14_129<='.')||(LA14_129>='0' && LA14_129<='\uFFFF')) ) {s = 162;}
-
-                        if ( s>=0 ) return s;
-                        break;
                     case 3 : 
+                        int LA14_70 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_70=='*') ) {s = 129;}
+
+                        else if ( ((LA14_70>='\u0000' && LA14_70<=')')||(LA14_70>='+' && LA14_70<='\uFFFF')) ) {s = 130;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA14_44 = input.LA(1);
 
                         s = -1;
@@ -3100,25 +3029,13 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
-                        int LA14_162 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_162=='*') ) {s = 161;}
-
-                        else if ( ((LA14_162>='\u0000' && LA14_162<=')')||(LA14_162>='+' && LA14_162<='\uFFFF')) ) {s = 162;}
-
-                        if ( s>=0 ) return s;
-                        break;
                     case 5 : 
-                        int LA14_160 = input.LA(1);
+                        int LA14_43 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_160=='*') ) {s = 161;}
+                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
 
-                        else if ( ((LA14_160>='\u0000' && LA14_160<=')')||(LA14_160>='+' && LA14_160<='\uFFFF')) ) {s = 162;}
-
-                        else s = 130;
+                        else s = 46;
 
                         if ( s>=0 ) return s;
                         break;
@@ -3135,22 +3052,26 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA14_70 = input.LA(1);
+                        int LA14_129 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_70=='*') ) {s = 129;}
+                        if ( (LA14_129=='/') ) {s = 160;}
 
-                        else if ( ((LA14_70>='\u0000' && LA14_70<=')')||(LA14_70>='+' && LA14_70<='\uFFFF')) ) {s = 130;}
+                        else if ( (LA14_129=='*') ) {s = 161;}
+
+                        else if ( ((LA14_129>='\u0000' && LA14_129<=')')||(LA14_129>='+' && LA14_129<='.')||(LA14_129>='0' && LA14_129<='\uFFFF')) ) {s = 162;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA14_43 = input.LA(1);
+                        int LA14_160 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
+                        if ( (LA14_160=='*') ) {s = 161;}
 
-                        else s = 46;
+                        else if ( ((LA14_160>='\u0000' && LA14_160<=')')||(LA14_160>='+' && LA14_160<='\uFFFF')) ) {s = 162;}
+
+                        else s = 130;
 
                         if ( s>=0 ) return s;
                         break;

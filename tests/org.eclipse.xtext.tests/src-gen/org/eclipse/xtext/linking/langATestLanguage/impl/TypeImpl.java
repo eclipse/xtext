@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.langATestLanguage.impl;
 
@@ -28,12 +25,12 @@ import org.eclipse.xtext.linking.langATestLanguage.Type;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.impl.TypeImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.impl.TypeImpl#getImplements <em>Implements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl;
 
@@ -26,12 +23,12 @@ import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.SingleValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl.ModelImpl#getSingle <em>Single</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl.ModelImpl#getMulti <em>Multi</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl.ModelImpl#getObject <em>Object</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

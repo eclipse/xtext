@@ -19,6 +19,7 @@ public abstract class DisplayRunnable {
 		if (Display.getCurrent() == null) {
 			final Wrapper<Exception> exceptionWrapper = new Wrapper<Exception>();
 			Display.getDefault().syncExec(new Runnable() {
+				@Override
 				public void run() {
 					try {
 						DisplayRunnable.this.run();

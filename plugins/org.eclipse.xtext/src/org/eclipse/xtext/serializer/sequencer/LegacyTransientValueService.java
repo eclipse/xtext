@@ -22,28 +22,28 @@ public class LegacyTransientValueService extends TransientValueService {
 	protected ITransientValueService legacy;
 
 	@Override
-	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (legacy.isCheckElementsIndividually(semanitcObject, feature))
+	public ListTransient isListTransient(EObject semanticObject, EStructuralFeature feature) {
+		if (legacy.isCheckElementsIndividually(semanticObject, feature))
 			return ListTransient.SOME;
-		if (legacy.isTransient(semanitcObject, feature, -1))
+		if (legacy.isTransient(semanticObject, feature, -1))
 			return ListTransient.YES;
 		else
 			return ListTransient.NO;
 	}
 
 	@Override
-	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature) {
-		return legacy.isTransient(semanitcObject, feature, index);
+	public boolean isValueInListTransient(EObject semanticObject, int index, EStructuralFeature feature) {
+		return legacy.isTransient(semanticObject, feature, index);
 	}
 
 	@Override
-	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature) {
+	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {
 		if (feature.isTransient())
 			return ValueTransient.YES;
-		boolean isSet = semanitcObject.eIsSet(feature);
+		boolean isSet = semanticObject.eIsSet(feature);
 		if (defaultValueIsSerializeable(feature) && !isSet)
 			return ValueTransient.PREFERABLY;
-		if (legacy.isTransient(semanitcObject, feature, 0))
+		if (legacy.isTransient(semanticObject, feature, 0))
 			return ValueTransient.YES;
 		return isSet ? ValueTransient.NO : ValueTransient.YES;
 	}

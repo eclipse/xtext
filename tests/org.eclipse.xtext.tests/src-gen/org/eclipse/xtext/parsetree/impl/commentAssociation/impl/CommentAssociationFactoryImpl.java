@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.impl.commentAssociation.impl;
 
@@ -33,7 +30,7 @@ public class CommentAssociationFactoryImpl extends EFactoryImpl implements Comme
   {
     try
     {
-      CommentAssociationFactory theCommentAssociationFactory = (CommentAssociationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/tests/CommentAssociation"); 
+      CommentAssociationFactory theCommentAssociationFactory = (CommentAssociationFactory)EPackage.Registry.INSTANCE.getEFactory(CommentAssociationPackage.eNS_URI);
       if (theCommentAssociationFactory != null)
       {
         return theCommentAssociationFactory;

@@ -56,6 +56,8 @@ public class ImportNormalizer {
 	}
 
 	public QualifiedName resolve(QualifiedName relativeName) {
+		if (relativeName.isEmpty())
+			return null;
 		if (hasWildCard) {
 			return importedNamespacePrefix.append(relativeName);
 		} else {
@@ -103,6 +105,27 @@ public class ImportNormalizer {
 			return other.importedNamespacePrefix.equals(importedNamespacePrefix);
 		}
 		return false;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public QualifiedName getImportedNamespacePrefix() {
+		return importedNamespacePrefix;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public boolean hasWildCard() {
+		return hasWildCard;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public boolean isIgnoreCase() {
+		return ignoreCase;
 	}
 	
 }

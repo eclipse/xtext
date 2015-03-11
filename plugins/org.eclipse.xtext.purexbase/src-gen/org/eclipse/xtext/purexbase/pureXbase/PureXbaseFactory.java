@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.purexbase.pureXbase;
 
@@ -33,24 +30,6 @@ public interface PureXbaseFactory extends EFactory
    * @generated
    */
   Model createModel();
-
-  /**
-   * Returns a new object of class '<em>Import</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import</em>'.
-   * @generated
-   */
-  Import createImport();
-
-  /**
-   * Returns a new object of class '<em>Special Block Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Special Block Expression</em>'.
-   * @generated
-   */
-  SpecialBlockExpression createSpecialBlockExpression();
 
   /**
    * Returns the package supported by this factory.

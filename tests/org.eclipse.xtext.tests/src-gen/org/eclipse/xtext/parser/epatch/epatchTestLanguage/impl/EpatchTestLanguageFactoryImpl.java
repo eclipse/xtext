@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
   {
     try
     {
-      EpatchTestLanguageFactory theEpatchTestLanguageFactory = (EpatchTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage"); 
+      EpatchTestLanguageFactory theEpatchTestLanguageFactory = (EpatchTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(EpatchTestLanguagePackage.eNS_URI);
       if (theEpatchTestLanguageFactory != null)
       {
         return theEpatchTestLanguageFactory;

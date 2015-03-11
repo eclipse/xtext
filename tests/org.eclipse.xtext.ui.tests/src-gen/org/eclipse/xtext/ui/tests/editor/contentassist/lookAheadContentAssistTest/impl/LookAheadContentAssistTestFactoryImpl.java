@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.impl;
 
@@ -33,7 +30,7 @@ public class LookAheadContentAssistTestFactoryImpl extends EFactoryImpl implemen
   {
     try
     {
-      LookAheadContentAssistTestFactory theLookAheadContentAssistTestFactory = (LookAheadContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest"); 
+      LookAheadContentAssistTestFactory theLookAheadContentAssistTestFactory = (LookAheadContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory(LookAheadContentAssistTestPackage.eNS_URI);
       if (theLookAheadContentAssistTestFactory != null)
       {
         return theLookAheadContentAssistTestFactory;

@@ -20,7 +20,7 @@ public interface IUnitOfWork<R,P> {
 	/**
 	 * @param state - The state, which is synchronized while this method is executed
 	 * <b>Do not return any references to something contained in this resource</b>
-	 * @return
+	 * @return computed value R
 	 * @throws Exception
 	 */
 	R exec(P state) throws Exception;
@@ -29,9 +29,10 @@ public interface IUnitOfWork<R,P> {
 	/**
 	 * convenience class for side-effect only units
 	 * 
-	 * @param <T>
+	 * @param <T> the state type
 	 */
 	public static abstract class Void<T> implements IUnitOfWork<Object,T> {
+		@Override
 		public final Object exec(T state) throws Exception {
 			process(state);
 			return null;

@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
+
 /**
  *
  * @author Heiko Behrens - Initial contribution and API
@@ -67,7 +69,9 @@ public class AntlrLexerSplitter {
 			produceMethods();
 		}
 		copyTail();
-		return stringBuilder.toString();
+		String result = stringBuilder.toString();
+		result = new LexerSpecialStateTransitionSplitter(false).transform(result);
+		return result;
 	}
 
 	public void produceMethods() {

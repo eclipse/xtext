@@ -42,6 +42,7 @@ public abstract class MethodBasedModule implements Module {
 		return owner;
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public void configure(Binder binder) {
 		Type key = getKeyType();

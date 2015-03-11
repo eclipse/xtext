@@ -1,13 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
 
@@ -72,7 +72,8 @@ public class NumberLiteralImpl extends ExpressionImpl implements NumberLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getValue()
+  @Override
+public int getValue()
   {
     return value;
   }
@@ -82,7 +83,8 @@ public class NumberLiteralImpl extends ExpressionImpl implements NumberLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(int newValue)
+  @Override
+public void setValue(int newValue)
   {
     int oldValue = value;
     value = newValue;

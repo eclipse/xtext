@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
 
@@ -149,6 +146,8 @@ public enum EnumBugEnum implements Enumerator
    * Returns the '<em><b>Enum Bug Enum</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param literal the literal.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBugEnum get(String literal)
@@ -168,6 +167,8 @@ public enum EnumBugEnum implements Enumerator
    * Returns the '<em><b>Enum Bug Enum</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param name the name.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBugEnum getByName(String name)
@@ -187,6 +188,8 @@ public enum EnumBugEnum implements Enumerator
    * Returns the '<em><b>Enum Bug Enum</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param value the integer value.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBugEnum get(int value)

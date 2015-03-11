@@ -4,8 +4,10 @@
 package org.eclipse.xtext.testlanguages.backtracking.ui.contentassist;
 
 import org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.AbstractExBeeLangTestLanguageProposalProvider;
+
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class ExBeeLangTestLanguageProposalProvider extends AbstractExBeeLangTestLanguageProposalProvider {
 

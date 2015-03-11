@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.templates;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -16,6 +17,8 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * This generator fragment enables an advanced preference page for code templates.
  * 
@@ -24,9 +27,43 @@ import org.eclipse.xtext.generator.Naming;
  */
 public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	
+	private boolean suppressRestriction = false;
+
+	/**
+	 * Set this flag to <code>false</code> if you don't want to add the 
+	 * {@code @SuppressWarnings("restriction")} to the generated PartialContentAssistParser.  
+	 * @since 2.7
+	 */
+	public void setSuppressRestriction(boolean suppressRestriction) {
+		this.suppressRestriction = suppressRestriction;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean isSuppressRestriction() {
+		return suppressRestriction;
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
+		if(getNaming().hasIde()){
+			return new BindFactory()
+				.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration", 
+					"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()")
+				.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry", 
+					"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry()")
+				.addTypeToTypeEagerSingleton("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar",
+					"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")
+				.addTypeToType("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage", 
+					"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
+				.addTypeToType("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser",
+					getPartialContentAssistParser(grammar, getNaming()))
+				.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory", 
+						"org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory")
+				.getBindings();
+		} else {
+			return new BindFactory()
 			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration", 
 				"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()")
 			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry", 
@@ -37,7 +74,13 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 				"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
 			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser",
 				getPartialContentAssistParser(grammar, getNaming()))
-			.getBindings();
+			.getBindings();	
+		}
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return ImmutableList.<Object>of(isSuppressRestriction(), getNaming().hasIde());
 	}
 	
 	@Override
@@ -46,11 +89,11 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	}
 	
 	public static String getPartialContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".contentassist.antlr.Partial" + GrammarUtil.getName(grammar) + "ContentAssistParser";
+		return naming.basePackageIde(grammar) + ".contentassist.antlr.Partial" + GrammarUtil.getName(grammar) + "ContentAssistParser";
 	}
 	
 	public static String getContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".contentassist.antlr." + GrammarUtil.getName(grammar) + "Parser";
+		return naming.basePackageIde(grammar) + ".contentassist.antlr." + GrammarUtil.getName(grammar) + "Parser";
 	}
 	
 }

@@ -69,7 +69,7 @@
 	  </example>
    </extension>
    
-	<!-- ========= org.eclipse.xtext.example.arithmetics ========= 
+	<!-- ========= org.eclipse.xtext.example.arithmetics ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
 			name="%ArithmeticsExample_name" 
@@ -96,7 +96,36 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests.zip" description="The test bundle for the language"/>
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 	  </example>
-   </extension>-->
+   </extension>
+
+	<!-- ========= org.eclipse.xtext.example.homeautomation ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" 
+			name="%HomeAutomationExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%HomeAutomationExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" 
+			name="%HomeAutomationExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%HomeAutomationExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation" contentURI="contents/org.eclipse.xtext.example.homeautomation.zip" description="Contains the parser, serializer, linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation.tests" contentURI="contents/org.eclipse.xtext.example.homeautomation.tests.zip" description="The test bundle for the language"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation.ui" contentURI="contents/org.eclipse.xtext.example.homeautomation.ui.zip" description="Contains Eclipse IDE integration (i.e. editor)"/>
+	  </example>
+	</extension>
    
    <!-- ========= org.eclipse.xtext.example.xbase.tutorial ========= -->
 	<extension point="org.eclipse.ui.newWizards">
@@ -121,33 +150,38 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtext.examples.NewXbaseTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/org.eclipse.xtext.example.xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
 	  </example>
    </extension>
-   <!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
-			name="%XtendTutorial_name" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+   
+   <!-- ========= org.eclipse.xtext.example.tutorial ========= -->
+<!--	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewTutorialExampleWizard" 
+			name="%XtextTutorial_name" 
+			class="org.eclipse.xtext.xtext.ui.examples.ExternalEditorAwareExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>%XtendTutorial_description</description>
+			<description>%XtextTutorial_description</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
-			name="%XtendTutorial_name" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+		<wizard	id="org.eclipse.xtext.examples.NewTutorialExampleWizard" 
+			name="%XtextTutorial_name" 
+			class="org.eclipse.xtext.xtext.ui.examples.ExternalEditorAwareExampleInstallerWizard" 
 			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>%XtendTutorial_description</description>
+			<description>%XtextTutorial_description</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.eclipse.xtext.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.xtend.tutorial" contentURI="contents/org.eclipse.xtext.example.xtend.tutorial.zip" description="A hands-on tutorial on Xtend."/>
+	   <example wizardID="org.eclipse.xtext.examples.NewTutorialExampleWizard" pageImage="icons/genproject.gif">
+		 <fileToOpen location="org.eclipse.xtext.example.tutorial/src/org/eclipse/xtext/example/tutorial/Tutorial.xtext"/>
+		 <fileToOpen location="org.eclipse.xtext.example.tutorial/Tutorial.pdf"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial" contentURI="contents/org.eclipse.xtext.example.tutorial.zip" description="The tutorial description, a scaffolded grammar and solutions"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.tests" contentURI="contents/org.eclipse.xtext.example.tutorial.tests.zip" description="A test suite and some utilities to test drive the APIs."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.ui" contentURI="contents/org.eclipse.xtext.example.tutorial.ui.zip" description="A smart editor for the language."/>
 	  </example>
-   </extension>
+	</extension> -->  
 </plugin>

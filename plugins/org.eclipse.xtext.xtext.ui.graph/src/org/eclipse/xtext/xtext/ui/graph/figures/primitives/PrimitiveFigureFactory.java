@@ -74,6 +74,7 @@ public class PrimitiveFigureFactory {
 				font = Display.getCurrent().getSystemFont();
 			} else {
 				Display.getDefault().syncExec(new Runnable() {
+					@Override
 					public void run() {
 						font = Display.getCurrent().getSystemFont();
 					}

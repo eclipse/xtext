@@ -18,13 +18,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.LazyStringInputStream;
+
+import com.google.common.base.Charsets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ExternalContentSupport implements IExternalContentSupport {
 	
+	@Override
 	public void configureResourceSet(ResourceSet resourceSet, IExternalContentProvider contentProvider) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
@@ -52,37 +55,46 @@ public class ExternalContentSupport implements IExternalContentSupport {
 			this.contentProvider = contentProvider;
 		}
 
+		@Override
 		public boolean canHandle(URI uri) {
 			return delegate.canHandle(uri);
 		}
 
+		@Override
 		public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
 			return delegate.contentDescription(uri, options);
 		}
 
+		@Override
 		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
-			if (contentProvider.hasContent(uri)) {
-				return new StringInputStream(contentProvider.getContent(uri));
+			String content = contentProvider.getContent(uri);
+			if (content != null) {
+				return new LazyStringInputStream(content, Charsets.UTF_8);
 			}
 			return delegate.createInputStream(uri, options);
 		}
 
+		@Override
 		public OutputStream createOutputStream(URI uri, Map<?, ?> options) throws IOException {
 			return delegate.createOutputStream(uri, options);
 		}
 
+		@Override
 		public void delete(URI uri, Map<?, ?> options) throws IOException {
 			delegate.delete(uri, options);
 		}
 
+		@Override
 		public boolean exists(URI uri, Map<?, ?> options) {
 			return contentProvider.hasContent(uri) || delegate.exists(uri, options);
 		}
 
+		@Override
 		public Map<String, ?> getAttributes(URI uri, Map<?, ?> options) {
 			return delegate.getAttributes(uri, options);
 		}
 
+		@Override
 		public void setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
 			delegate.setAttributes(uri, attributes, options);
 		}

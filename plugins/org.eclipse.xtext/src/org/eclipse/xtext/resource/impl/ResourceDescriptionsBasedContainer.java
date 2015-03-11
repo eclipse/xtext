@@ -41,6 +41,8 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	 * A cache for the contained descriptions.
 	 */
 	private Map<URI, IResourceDescription> uriToDescription;
+	
+	private boolean uriToDescriptionCacheEnabled = true;
 
 	public ResourceDescriptionsBasedContainer(IResourceDescriptions descriptions) {
 		this.descriptions = descriptions;
@@ -53,6 +55,7 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return null;
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return getUriToDescription().values();
 	}
@@ -70,12 +73,7 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	}
 
 	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
-		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				URI resourceURI = input.getEObjectURI().trimFragment();
-				return hasResourceDescription(resourceURI);
-			}
-		});
+		return unfiltered;
 	}
 	
 	@Override
@@ -83,7 +81,23 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return getUriToDescription().size();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public void setUriToDescriptionCacheEnabled(boolean enabled) {
+		this.uriToDescriptionCacheEnabled = enabled;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public boolean isUriToDescriptionCacheEnabled() {
+		return this.uriToDescriptionCacheEnabled;
+	}
+	
 	protected Map<URI, IResourceDescription> getUriToDescription() {
+		if (!uriToDescriptionCacheEnabled)
+			return doGetUriToDescription();
 		Map<URI, IResourceDescription> result = uriToDescription;
 		if (result == null) {
 			result = doGetUriToDescription();
@@ -103,6 +117,7 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	
 	private class DelegatingPredicate implements Predicate<IResourceDescription> {
 
+		@Override
 		public boolean apply(IResourceDescription input) {
 			return contains(input);
 		}
@@ -122,11 +137,16 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return descriptions;
 	}
 
+	@Override
 	public void descriptionsChanged(IResourceDescription.Event event) {
 		if (uriToDescription != null) {
 			for(IResourceDescription.Delta delta: event.getDeltas()) {
-				if (uriToDescription.containsKey(delta.getUri())) {
-					uriToDescription.put(delta.getUri(), delta.getNew());
+				URI uri = delta.getUri();
+				if (hasResourceDescription(uri) || uriToDescription.get(uri) != null) {
+					if (delta.getNew() != null)
+						uriToDescription.put(uri, delta.getNew());
+					else
+						uriToDescription.remove(uri);
 				}
 			}
 		}

@@ -21,7 +21,7 @@ public class DescriptionUtils {
 
 	/**
 	 * Collect the URIs of resources, that are referenced by the given description.
-	 * @returns the list of referenced URIs. Never <code>null</code>.
+	 * @return the list of referenced URIs. Never <code>null</code>.
 	 */
 	public Set<URI> collectOutgoingReferences(IResourceDescription description) {
 		URI resourceURI = description.getURI();

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.bug299395;
 
@@ -16,13 +13,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getStrings <em>Strings</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getValues <em>Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getSubModel <em>Sub Model</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package#getModel()
  * @model

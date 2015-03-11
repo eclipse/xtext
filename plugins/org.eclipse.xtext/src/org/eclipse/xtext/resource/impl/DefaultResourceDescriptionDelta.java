@@ -7,15 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.util.Arrays;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,16 +40,19 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		this._new = _new;
 	}
 
+	@Override
 	public IResourceDescription getNew() {
 		return _new;
 	}
 
+	@Override
 	public IResourceDescription getOld() {
 		return old;
 	}
 
 	private Boolean hasChanges;
 
+	@Override
 	public boolean haveEObjectDescriptionsChanged() {
 		if (hasChanges == null) {
 			hasChanges = internalHasChanges();
@@ -62,9 +64,9 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		if (_new == null || old == null)
 			return true;
 
-		Collection<IEObjectDescription> oldEObjects = Lists.newArrayList(old.getExportedObjects());
-		Collection<IEObjectDescription> newEObjects = Lists.newArrayList(_new.getExportedObjects());
-		if (oldEObjects.size() != newEObjects.size())
+		Iterable<IEObjectDescription> oldEObjects = old.getExportedObjects();
+		Iterable<IEObjectDescription> newEObjects = _new.getExportedObjects();
+		if (Iterables.size(oldEObjects) != Iterables.size(newEObjects))
 			return true;
 
 		Iterator<IEObjectDescription> iterator1 = oldEObjects.iterator();
@@ -76,30 +78,35 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		return false;
 	}
 
-	protected boolean equals(IEObjectDescription next, IEObjectDescription next2) {
-		if (next == next2)
+	protected boolean equals(IEObjectDescription oldObj, IEObjectDescription newObj) {
+		if (oldObj == newObj)
 			return true;
-		if (next.getEClass() != next2.getEClass())
+		if (oldObj.getEClass() != newObj.getEClass())
 			return false;
-		if (next.getName() != null && !next.getName().equals(next2.getName()))
+		if (oldObj.getName() != null && !oldObj.getName().equals(newObj.getName()))
 			return false;
-		if (!next.getEObjectURI().equals(next2.getEObjectURI()))
+		if (!oldObj.getEObjectURI().equals(newObj.getEObjectURI()))
 			return false;
-		if (!Arrays.equals(next.getUserDataKeys(), next2.getUserDataKeys()))
+		String[] oldKeys = oldObj.getUserDataKeys();
+		String[] newKeys = newObj.getUserDataKeys();
+		if (oldKeys.length != newKeys.length)
 			return false;
-		for (String key : next.getUserDataKeys()) {
-			String userData = next.getUserData(key);
-			String userData2 = next2.getUserData(key);
-			if (userData == null) {
-				if (userData2 != null)
+		for (String key : oldKeys) {
+			if (!Arrays.contains(newKeys, key))
+				return false;
+			String oldValue = oldObj.getUserData(key);
+			String newValue = newObj.getUserData(key);
+			if (oldValue == null) {
+				if (newValue != null)
 					return false;
-			} else if (!userData.equals(userData2)) {
+			} else if (!oldValue.equals(newValue)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
+	@Override
 	public URI getUri() {
 		return old == null ? _new.getURI() : old.getURI();
 	}

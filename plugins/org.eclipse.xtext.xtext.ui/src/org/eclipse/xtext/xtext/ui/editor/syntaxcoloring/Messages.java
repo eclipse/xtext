@@ -19,6 +19,7 @@ public class Messages extends NLS {
 	public static String SemanticHighlightingConfiguration_7;
 	public static String SemanticHighlightingConfiguration_8;
 	public static String SemanticHighlightingConfiguration_9;
+	public static String SemanticHighlightingConfiguration_10;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

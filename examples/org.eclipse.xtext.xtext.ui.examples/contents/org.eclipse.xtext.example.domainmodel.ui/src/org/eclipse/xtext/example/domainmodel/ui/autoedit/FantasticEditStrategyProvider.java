@@ -23,6 +23,8 @@ public class FantasticEditStrategyProvider extends DefaultAutoEditStrategyProvid
 	private final class Surprise implements IAutoEditStrategy {
 		
 		private String contents;
+		
+		@Override
 		public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 			try {
 				if (command.text.equals("t") && document.get(command.offset-4, 4).equals("Xtex")) {

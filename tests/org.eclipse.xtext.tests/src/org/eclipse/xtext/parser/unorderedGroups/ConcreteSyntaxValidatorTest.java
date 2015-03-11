@@ -9,10 +9,14 @@ package org.eclipse.xtext.parser.unorderedGroups;
 
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
+import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
 import org.eclipse.xtext.validation.AbstractConcreteSyntaxValidationTest;
+import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +27,7 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 	private UnorderedSerialization toBeValidated;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(UnorderedGroupsTestLanguageStandaloneSetup.class);
 		validator = get(ConcreteSyntaxValidator.class);
@@ -39,112 +43,114 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		return validator;
 	}
 
-	public void testNoValueAssigned() {
+	@Test public void testNoValueAssigned() {
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A() {
+	@Test public void testValidate_1_A() {
 		toBeValidated.setFirst(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_B() {
+	@Test public void testValidate_1_B() {
 		toBeValidated.setSecond(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_C() {
+	@Test public void testValidate_1_C() {
 		toBeValidated.setThird(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_D() {
+	@Test public void testValidate_1_D() {
 		toBeValidated.setForth(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_B() {
+	@Test public void testValidate_1_A_B() {
 		toBeValidated.setFirst(true);
 		toBeValidated.setSecond(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_C() {
+	@Test public void testValidate_1_A_C() {
 		toBeValidated.setFirst(true);
 		toBeValidated.setThird(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_D() {
+	@Test public void testValidate_1_A_D() {
 		toBeValidated.setFirst(true);
 		toBeValidated.setForth(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_B_C() {
+	@Test public void testValidate_1_A_B_C() {
 		toBeValidated.setFirst(true);
 		toBeValidated.setSecond(true);
 		toBeValidated.setThird(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_B_D() {
+	@Test public void testValidate_1_A_B_D() {
 		toBeValidated.setFirst(true);
 		toBeValidated.setSecond(true);
 		toBeValidated.setForth(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_A_B_C_D() {
+	@Test public void testValidate_1_A_B_C_D() {
 		toBeValidated.setFirst(true);
-		toBeValidated.setSecond(true);
-		toBeValidated.setThird(true);
-		toBeValidated.setForth(true);
-		validate(toBeValidated).assertOK();
-	}
-
-	public void testValidate_1_B_C_D() {
 		toBeValidated.setSecond(true);
 		toBeValidated.setThird(true);
 		toBeValidated.setForth(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_1_B_C() {
+	@Test public void testValidate_1_B_C_D() {
 		toBeValidated.setSecond(true);
-		toBeValidated.setThird(true);
-		validate(toBeValidated).assertOK();
-	}
-
-	public void testValidate_1_B_D() {
-		toBeValidated.setSecond(true);
-		toBeValidated.setForth(true);
-		validate(toBeValidated).assertOK();
-	}
-
-	public void testValidate_1_C_D() {
 		toBeValidated.setThird(true);
 		toBeValidated.setForth(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_2_A_B() {
+	@Test public void testValidate_1_B_C() {
+		toBeValidated.setSecond(true);
+		toBeValidated.setThird(true);
+		validate(toBeValidated).assertOK();
+	}
+
+	@Test public void testValidate_1_B_D() {
+		toBeValidated.setSecond(true);
+		toBeValidated.setForth(true);
+		validate(toBeValidated).assertOK();
+	}
+
+	@Test public void testValidate_1_C_D() {
+		toBeValidated.setThird(true);
+		toBeValidated.setForth(true);
+		validate(toBeValidated).assertOK();
+	}
+
+	@Test public void testValidate_2_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getSecondAsList().add("b");
 		validate(toBeValidated).assertOK();
 	}
 
-// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454
-//	public void testValidate_2_A_A_B() {
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getSecondAsList().add("b");
-//		validate(toBeValidated).assertAll(
-//				err(pack.getUnorderedSerialization_FirstAsList(), ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
-//				err(pack.getUnorderedSerialization_SecondAsList(), ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
-//	}
+	@Test
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454")
+	public void testValidate_2_A_A_B() {
+		UnorderedGroupsTestLanguagePackage pack = UnorderedGroupsTestLanguagePackage.eINSTANCE;
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getSecondAsList().add("b");
+		validate(toBeValidated).assertAll(
+				err(pack.getUnorderedSerialization_FirstAsList(), IConcreteSyntaxDiagnosticProvider.ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
+				err(pack.getUnorderedSerialization_SecondAsList(), IConcreteSyntaxDiagnosticProvider.ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
+	}
 
-	public void testValidate_2_A_B_A_B() {
+	@Test public void testValidate_2_A_B_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getSecondAsList().add("b");
@@ -152,7 +158,7 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_2_A_B_A_B_A_B() {
+	@Test public void testValidate_2_A_B_A_B_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");
@@ -162,20 +168,20 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_3_A_B() {
+	@Test public void testValidate_3_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.setSecond(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_3_A_A_B() {
+	@Test public void testValidate_3_A_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.setSecond(true);
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_3_A_A_A_B() {
+	@Test public void testValidate_3_A_A_A_B() {
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");
 		toBeValidated.getFirstAsList().add("a");

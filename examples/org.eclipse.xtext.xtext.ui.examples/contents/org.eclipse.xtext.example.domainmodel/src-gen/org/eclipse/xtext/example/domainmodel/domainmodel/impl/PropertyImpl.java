@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.domainmodel.domainmodel.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

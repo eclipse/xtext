@@ -13,6 +13,7 @@ import static com.google.common.collect.Sets.*;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -21,6 +22,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,9 +43,13 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
+ * @deprecated use {@link BuilderParticipant} instead
  */
+@Deprecated
 public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticipant {
 
+	private final static Logger logger = Logger.getLogger(JavaProjectBasedBuilderParticipant.class);
+	
 	@Inject
 	private IGenerator generator;
 
@@ -58,6 +64,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 
 	private Map<URI, Set<String>> sourceTargetMap = newHashMap();
 
+	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		final IProject builtProject = context.getBuiltProject();
 		IJavaProject javaProject = JavaCore.create(builtProject);
@@ -69,12 +76,16 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 		if (!isValidOutputFolder(javaProject, srcGenFolder))
 			return;
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			final Set<String> oldFiles = newHashSet();
 			if (sourceTargetMap.containsKey(delta.getUri())) {
 				oldFiles.addAll(sourceTargetMap.get(delta.getUri()));
 			}
 			final Set<String> newFiles = newHashSet();
 			IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder, new IAcceptor<String>() {
+				@Override
 				public void accept(String fileName) {
 					oldFiles.remove(fileName);
 					newFiles.add(fileName);
@@ -83,7 +94,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			if (delta.getNew() == null) {
 				handleDeletion(delta, context, fileSystemAccess);
 			} else {
-				handleChangedContents(delta, context, fileSystemAccess);
+				try {
+					handleChangedContents(delta, context, fileSystemAccess);
+				} catch (Exception e) {
+					logger.error("Error during compilation of '"+delta.getUri()+"'.", e);
+				}
 			}
 			for (String removeFile : oldFiles) {
 				fileSystemAccess.deleteFile(removeFile);

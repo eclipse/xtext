@@ -7,13 +7,48 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 
+	@Override
+	public EObject eResolveProxy(InternalEObject proxy) {
+		URI proxyURI = proxy.eProxyURI();
+		if (proxyURI != null && URIHelperConstants.PROTOCOL.equals(proxyURI.scheme())) {
+			if ("Objects".equals(proxyURI.segment(0))) {
+				Resource resource = eResource();
+				if (resource instanceof TypeResource) {
+					EObject result = ((TypeResource) resource).resolveJavaObjectURIProxy(proxy, this);
+					return result;
+				}
+			}
+		}
+		return super.eResolveProxy(proxy);
+	}
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitTypeReference(this, parameter);
+		return result;
+	}
+	
 	@Override
 	public String getIdentifier() {
 		JvmType type = getType();
@@ -31,7 +66,7 @@ public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 	}
 	
 	@Override
-	public final String getQualifiedName() {
+	public String getQualifiedName() {
 		return getQualifiedName('$');
 	}
 	

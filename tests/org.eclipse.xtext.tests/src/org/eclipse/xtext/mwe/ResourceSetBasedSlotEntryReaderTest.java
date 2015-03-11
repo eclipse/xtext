@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -24,7 +25,7 @@ public class ResourceSetBasedSlotEntryReaderTest extends AbstractReaderTest {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testLoadAll() throws Exception {
+	@Test public void testLoadAll() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -39,7 +40,7 @@ public class ResourceSetBasedSlotEntryReaderTest extends AbstractReaderTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testLoadFileElements() throws Exception {
+	@Test public void testLoadFileElements() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));

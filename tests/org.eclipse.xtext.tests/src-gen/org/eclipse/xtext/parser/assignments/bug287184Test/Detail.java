@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug287184Test;
 
@@ -13,10 +10,10 @@ package org.eclipse.xtext.parser.assignments.bug287184Test;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getVisibility <em>Visibility</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.assignments.bug287184Test.Bug287184TestPackage#getDetail()
  * @model

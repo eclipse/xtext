@@ -7,6 +7,7 @@ import com.google.inject.Injector;
 
 public class RailroadInjectorProvider implements IInjectorProvider {
 
+	@Override
 	public Injector getInjector() {
 		return Activator.getDefault().getInjector();
 	}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 
@@ -34,6 +31,7 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielplatzImpl#getGroesse <em>Groesse</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielplatzImpl#getBeschreibung <em>Beschreibung</em>}</li>
@@ -42,7 +40,6 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug;
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielplatzImpl#getSpielzeuge <em>Spielzeuge</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielplatzImpl#getFamilie <em>Familie</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

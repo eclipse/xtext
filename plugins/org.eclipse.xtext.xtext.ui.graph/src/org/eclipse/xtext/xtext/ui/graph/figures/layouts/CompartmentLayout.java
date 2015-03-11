@@ -21,6 +21,7 @@ public class CompartmentLayout extends AbstractLayout {
 	public CompartmentLayout() {
 	}
 
+	@Override
 	public void layout(IFigure container) {
 		if (container instanceof CompartmentSegment) {
 			CompartmentSegment compartment = (CompartmentSegment) container;

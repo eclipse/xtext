@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.antlr.runtime.Token;
+import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.LexerUIBindings;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -26,7 +26,7 @@ public abstract class TokenTypeToStringMapper {
 	private String[] mappedValues;
 	
 	@Inject
-	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
+	public void setTokenDefProvider(@Named(LexerIdeBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		initIds(tokenDefProvider.getTokenDefMap());
 	}
 
@@ -42,7 +42,7 @@ public abstract class TokenTypeToStringMapper {
 	
 	protected String getMappedValue(int tokenType) {
 		if (tokenType == Token.INVALID_TOKEN_TYPE)
-			return DefaultHighlightingConfiguration.INVALID_TOKEN_ID;
+			return HighlightingStyles.INVALID_TOKEN_ID;
 		return mappedValues[tokenType-Token.MIN_TOKEN_TYPE];
 	}
 }

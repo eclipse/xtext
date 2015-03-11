@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -20,10 +17,10 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ModelImport;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ModelImportImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

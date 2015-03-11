@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.index.indexTestLanguage;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Namespace#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Namespace#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getNamespace()
  * @model

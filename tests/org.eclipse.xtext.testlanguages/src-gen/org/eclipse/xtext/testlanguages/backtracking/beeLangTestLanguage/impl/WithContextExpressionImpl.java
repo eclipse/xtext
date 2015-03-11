@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -23,12 +20,12 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.WithCont
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.WithContextExpressionImpl#getContextBlock <em>Context Block</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

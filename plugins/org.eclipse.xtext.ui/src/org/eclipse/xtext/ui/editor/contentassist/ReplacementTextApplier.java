@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.
  */
 public abstract class ReplacementTextApplier implements IReplacementTextApplier {
 
+	@Override
 	public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
 		String replacementString = getActualReplacementString(proposal);
 		proposal.setCursorPosition(replacementString.length());

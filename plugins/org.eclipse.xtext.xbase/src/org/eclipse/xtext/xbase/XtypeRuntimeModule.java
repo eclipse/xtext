@@ -11,6 +11,8 @@ package org.eclipse.xtext.xbase;
 
 /**
  * Use this class to register components to be used within the IDE.
+ * 
+ * @since 2.7
  */
 public class XtypeRuntimeModule extends org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule {
 	

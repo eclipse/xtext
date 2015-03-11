@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplates;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.evaluator.EvaluatedTemplate;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.projectedEditing.ProjectionAwareProposalAcceptor;
 import org.eclipse.xtext.ui.codetemplates.ui.projectedEditing.TemporaryResourceProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
@@ -42,10 +42,10 @@ import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariab
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
-import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
@@ -56,7 +56,8 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposalProvider implements ModeAware {
 	
@@ -74,14 +75,17 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 	private static final int NESTED = 2;
 	private static final int NORMAL = 1;
 	
+	@Override
 	public void reset() {
 		mode = 2;
 	}
 	
+	@Override
 	public void nextMode() {
 		mode = (mode % 3) + 1;
 	}
 	
+	@Override
 	public String getNextCategory() {
 		switch(mode) {
 			case 1: return "target language proposals";
@@ -90,6 +94,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 		}
 	}
 	
+	@Override
 	public boolean isLastMode() {
 		return mode == 2;
 	}
@@ -309,7 +314,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 						data.language, data.rule, evaluatedTemplate.getMappedString(), new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
-						PartialContentAssistContextFactory delegateFactory = languageRegistry.getPartialContentAssistContextFactory(data.language);
+						IPartialEditingContentAssistContextFactory delegateFactory = languageRegistry.getPartialContentAssistContextFactory(data.language);
 						delegateFactory.initializeFor(data.rule);
 						String mappedInput = evaluatedTemplate.getMappedString();
 						int mappedOffset = Math.min(mappedInput.length(), evaluatedTemplate.getMappedOffset(context.getOffset()));
@@ -330,19 +335,21 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 		Codetemplate template = EcoreUtil2.getContainerOfType(model, Codetemplate.class);
 		if (template != null) {
 			Codetemplates templates = EcoreUtil2.getContainerOfType(template, Codetemplates.class);
-			Grammar language = templates.getLanguage();
-			if (language != null && !language.eIsProxy()) {
-				Set<String> keywords = GrammarUtil.getAllKeywords(language);
-				for(String keyword: keywords) {
-					String proposalText = keyword;
-					proposalText = getValueConverter().toString(proposalText, ((RuleCall)assignment.getTerminal()).getRule().getName());
-					StyledString displayText = new StyledString(proposalText).append(" - Keyword", StyledString.QUALIFIER_STYLER);
-					ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
-					getPriorityHelper().adjustCrossReferencePriority(proposal, context.getPrefix());
-					if (proposal instanceof ConfigurableCompletionProposal) {
-						((ConfigurableCompletionProposal) proposal).setPriority(((ConfigurableCompletionProposal) proposal).getPriority() - 1);
+			if (templates != null) {
+				Grammar language = templates.getLanguage();
+				if (language != null && !language.eIsProxy()) {
+					Set<String> keywords = GrammarUtil.getAllKeywords(language);
+					for(String keyword: keywords) {
+						String proposalText = keyword;
+						proposalText = getValueConverter().toString(proposalText, ((RuleCall)assignment.getTerminal()).getRule().getName());
+						StyledString displayText = new StyledString(proposalText).append(" - Keyword", StyledString.QUALIFIER_STYLER);
+						ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+						getPriorityHelper().adjustCrossReferencePriority(proposal, context.getPrefix());
+						if (proposal instanceof ConfigurableCompletionProposal) {
+							((ConfigurableCompletionProposal) proposal).setPriority(((ConfigurableCompletionProposal) proposal).getPriority() - 1);
+						}
+						acceptor.accept(proposal);
 					}
-					acceptor.accept(proposal);
 				}
 			}
 		}
@@ -523,6 +530,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 			return Boolean.TRUE;
 		}
 
+		@Override
 		public void accept(AbstractElement element) {
 			doSwitch(element);
 		}

@@ -9,8 +9,10 @@
 
 package org.eclipse.xtext;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
+import org.eclipse.xtext.xtextTest.Assignment;
+import org.eclipse.xtext.xtextTest.Grammar;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -19,15 +21,15 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class XtextGrammarTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
 
-	public void testInstantiate() throws Exception {
-		EObject grammar = getModelAndExpect("grammar foo generate foo 'bar' Foo : name=ID;", 2);
-		assertWithXtend("'Foo'","rules.first().name",grammar);
-		assertWithXtend("'name'","rules.first().alternatives.feature",grammar);
+	@Test public void testInstantiate() throws Exception {
+		Grammar grammar = (Grammar) getModelAndExpect("grammar foo generate foo 'bar' Foo : name=ID;", 2);
+		assertEquals("Foo", grammar.getRules().get(0).getName());
+		assertEquals("name", ((Assignment) grammar.getRules().get(0).getAlternatives()).getFeature());
 	}
 
 }

@@ -43,6 +43,7 @@ public class UnorderedGroupToken extends CompoundParsedToken implements IFurther
 //		return alternative;
 //	}
 
+	@Override
 	public UnorderedGroupToken getToken() {
 		return this;
 	}
@@ -53,6 +54,7 @@ public class UnorderedGroupToken extends CompoundParsedToken implements IFurther
 		return (Source<UnorderedGroupToken>) super.getSource();
 	}
 
+	@Override
 	public boolean canParseFurther() {
 		return false; // alternative < totalAlternatives - 1;
 	}

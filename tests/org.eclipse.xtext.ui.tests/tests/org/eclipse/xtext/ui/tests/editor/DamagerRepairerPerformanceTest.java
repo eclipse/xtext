@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
@@ -21,32 +18,34 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.resource.OutdatedStateManager;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow
  */
-public class DamagerRepairerPerformanceTest extends TestCase implements ITokenScanner {
+public class DamagerRepairerPerformanceTest extends Assert implements ITokenScanner {
 
-	private IPresentationDamager xtextDamager;
-	private IPresentationDamager fastDamager;
+	private static final int MAX = 5000;
+	private IPresentationDamager damager;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		xtextDamager = createXtextRegionDamager();
-		fastDamager = createFastRegionDamager();
+	@Before
+	public void setUp() throws Exception {
+		damager = createRegionDamager();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
-		xtextDamager = null;
-		fastDamager = null;
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
+		damager = null;
 	}
 	
 	protected class Tester implements IDocumentListener {
@@ -65,31 +64,38 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 		protected Document createDocument(String before) {
 			DocumentTokenSource source = new DocumentTokenSource();
 			source.setLexer(new Provider<Lexer>() {
-				@SuppressWarnings("restriction")
+				@Override
 				public Lexer get() {
 					return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 				}
 			});
-			XtextDocument document = new XtextDocument(source, null);
+			XtextDocument document = new XtextDocument(source, null, new OutdatedStateManager(), new OperationCanceledManager());
 			document.set(before);
 			return document;
 		}
 		
-		protected void appendAndCheck(String text, int offsetFix) throws BadLocationException {
+		protected void appendAndCheck(String text) throws BadLocationException {
 			int offset = doc.getLength();
 			doc.replace(offset, 0, text);
-			assertEquals(Math.max(0, offset + offsetFix), Math.min(doc.getLength(), text.length() - offsetFix));
+			assertEquals(Math.max(0, offset - 1), Math.min(doc.getLength(), text.length() + 1));
 		}
 		
-		protected void prependAndCheck(String text, int lengthFix) throws BadLocationException {
+		protected void insertAndCheck(String text, int offset) throws BadLocationException {
+			doc.replace(offset, 0, text);
+			assertEquals(Math.max(0, offset - 1), Math.min(doc.getLength(), text.length() + 1));
+		}
+		
+		protected void prependAndCheck(String text) throws BadLocationException {
 			doc.replace(0, 0, text);
-			assertEquals(0, Math.min(text.length() + lengthFix, doc.getLength()));
+			assertEquals(0, Math.min(text.length(), doc.getLength()));
 		}
 		
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			lastRegion = damager.getDamageRegion(new TypedRegion(0,event.getDocument().getLength(), IDocument.DEFAULT_CONTENT_TYPE), event, false);
 		}
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
 		
@@ -99,55 +105,71 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 		}
 	}
 	
-	public void testAppendWithFastDamagerRepairer() throws BadLocationException {
-		doTestAppend(fastDamager, 0);
-	}
-	
-	public void testAppendWithXtextDamagerRepairer() throws BadLocationException {
-		doTestAppend(xtextDamager, 0);
-	}
-	
-	public void testPrependWithFastDamagerRepairer() throws BadLocationException {
-		doTestPrepend(fastDamager, 0);
-	}
-	
-	public void testPrependWithXtextDamagerRepairer() throws BadLocationException {
-		doTestPrepend(xtextDamager, 0);
-	}
-	
-	protected void doTestAppend(IPresentationDamager damager, int offsetFix) throws BadLocationException {
+	@Test public void testAppend() throws BadLocationException {
 		Tester tester = new Tester(damager);
-		for(int i = 0; i < 2000; i++) {
-			tester.appendAndCheck("abc ", offsetFix);
+		for(int i = 0; i < MAX; i++) {
+			tester.appendAndCheck("abc ");
 		}
 	}
 	
-	protected void doTestPrepend(IPresentationDamager damager, int lengthFix) throws BadLocationException {
+	@Test public void testAppend2() throws BadLocationException {
 		Tester tester = new Tester(damager);
-		for(int i = 0; i < 2000; i++) {
-			tester.prependAndCheck("abc ", lengthFix);
+		for(int i = 0; i < MAX; i++) {
+			tester.appendAndCheck("abc ");
 		}
 	}
 	
-	protected IPresentationDamager createXtextRegionDamager() {
+	@Test public void testInsert() throws BadLocationException {
+		Tester tester = new Tester(damager);
+		tester.insertAndCheck("abc ", 0);
+		int offset = tester.doc.getLength();
+		for(int i = 0; i < MAX; i++) {
+			tester.insertAndCheck("abc ", offset);
+		}
+	}
+	
+	@Test public void testInsert2() throws BadLocationException {
+		Tester tester = new Tester(damager);
+		tester.insertAndCheck("abc ", 0);
+		int offset = tester.doc.getLength();
+		for(int i = 0; i < MAX; i++) {
+			tester.insertAndCheck("abc ", offset);
+		}
+	}
+	
+	@Test public void testPrepend() throws BadLocationException {
+		Tester tester = new Tester(damager);
+		for(int i = 0; i < MAX; i++) {
+			tester.prependAndCheck("abc ");
+		}
+	}
+	
+	@Test public void testPrepend2() throws BadLocationException {
+		Tester tester = new Tester(damager);
+		for(int i = 0; i < MAX; i++) {
+			tester.prependAndCheck("abc ");
+		}
+	}
+	
+	protected IPresentationDamager createRegionDamager() {
 		return new PresentationDamager();
 	}
 	
-	protected IPresentationDamager createFastRegionDamager() {
-		return new PresentationDamager();
-	}
-	
+	@Override
 	public void setRange(IDocument document, int offset, int length) {
 	}
 
+	@Override
 	public IToken nextToken() {
 		return null;
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return 0;
 	}
 
+	@Override
 	public int getTokenLength() {
 		return 0;
 	}

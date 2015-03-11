@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.xtextTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.CrossReference#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.CrossReference#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getCrossReference()
  * @model

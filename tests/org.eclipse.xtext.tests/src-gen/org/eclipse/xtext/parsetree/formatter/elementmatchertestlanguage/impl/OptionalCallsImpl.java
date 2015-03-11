@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Optional
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl#getOpt1 <em>Opt1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

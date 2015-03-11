@@ -1,0 +1,32 @@
+/*
+ * Xbase supports Java's while and do .. while as well as the new form 
+ * of the for loop. In Xbase these constructs are expressions not 
+ * statements. Anyway, they always result in 'null' and are of type 
+ * 'void'. 
+ */
+val list = newArrayList('foo','bar','baz')
+val result = new java.util.ArrayList<String>()
+
+for (x : list.reverse) {
+	result += x.toUpperCase
+}
+result
+// [BAZ, BAR, FOO] (ArrayList<String>)
+
+var i = 0
+while(i<list.size) {
+	result += 'whiled-'+list.get(i)
+	i = i+1
+}
+result
+// [BAZ, BAR, FOO, whiled-baz, whiled-bar, whiled-foo] (ArrayList<String>)
+
+
+
+
+
+
+
+
+
+	

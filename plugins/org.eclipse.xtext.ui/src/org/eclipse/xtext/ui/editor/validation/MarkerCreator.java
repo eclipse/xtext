@@ -10,13 +10,21 @@ package org.eclipse.xtext.ui.editor.validation;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class MarkerCreator {
+	
+	private static final String FIXABLE_KEY = "FIXABLE_KEY";
+	
+	@Inject(optional=true)
+	private IssueResolutionProvider resolutionProvider;
 	
 	public void createMarker(Issue issue, IResource resource, String markerType) throws CoreException {
 		IMarker marker = resource.createMarker(markerType);
@@ -45,6 +53,9 @@ public class MarkerCreator {
 		if(issue.getData() != null && issue.getData().length > 0) {
 			marker.setAttribute(Issue.DATA_KEY, Strings.pack(issue.getData()));
 		}
+		if (resolutionProvider != null && resolutionProvider.hasResolutionFor(issue.getCode())) {
+			marker.setAttribute(FIXABLE_KEY, true);
+		}
 	}
 
 	private Object getSeverity(Issue issue) {
@@ -55,7 +66,8 @@ public class MarkerCreator {
 				return IMarker.SEVERITY_WARNING;
 			case INFO : 
 				return IMarker.SEVERITY_INFO;
+			default:
+				throw new IllegalArgumentException(String.valueOf(issue.getSeverity()));
 		}
-		throw new IllegalArgumentException();
 	}
 }

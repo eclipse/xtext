@@ -1,13 +1,10 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.domainmodel.domainmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,11 +13,11 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.Feature#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.Feature#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getFeature()
  * @model
@@ -63,12 +60,12 @@ public interface Feature extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(JvmParameterizedTypeReference)
+   * @see #setType(JvmTypeReference)
    * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getFeature_Type()
    * @model containment="true"
    * @generated
    */
-  JvmParameterizedTypeReference getType();
+  JvmTypeReference getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.domainmodel.domainmodel.Feature#getType <em>Type</em>}' containment reference.
@@ -78,6 +75,6 @@ public interface Feature extends EObject
    * @see #getType()
    * @generated
    */
-  void setType(JvmParameterizedTypeReference value);
+  void setType(JvmTypeReference value);
 
 } // Feature

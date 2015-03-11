@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -27,11 +24,11 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl#getVal <em>Val</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl#isFlag <em>Flag</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

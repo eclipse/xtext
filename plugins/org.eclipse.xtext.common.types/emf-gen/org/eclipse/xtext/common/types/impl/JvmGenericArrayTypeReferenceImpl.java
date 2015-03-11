@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -25,7 +27,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl#getComponentType <em>Component Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,14 +36,14 @@ import org.eclipse.xtext.common.types.TypesPackage;
 public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom implements JvmGenericArrayTypeReference
 {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getComponentType() <em>Component Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getComponentType()
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmArrayType type;
+	protected JvmTypeReference componentType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,27 +71,9 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public JvmArrayType getType()
+	public JvmTypeReference getComponentType()
 	{
-		if (type != null && type.eIsProxy())
-		{
-			InternalEObject oldType = (InternalEObject)type;
-			type = (JvmArrayType)eResolveProxy(oldType);
-			if (type != oldType)
-			{
-				InternalEObject newType = (InternalEObject)type;
-				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, null);
-				if (newType.eInternalContainer() == null)
-				{
-					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, oldType, type));
-			}
-		}
-		return type;
+		return componentType;
 	}
 
 	/**
@@ -97,23 +81,13 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmArrayType basicGetType()
+	public NotificationChain basicSetComponentType(JvmTypeReference newComponentType, NotificationChain msgs)
 	{
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetType(JvmArrayType newType, NotificationChain msgs)
-	{
-		JvmArrayType oldType = type;
-		type = newType;
+		JvmTypeReference oldComponentType = componentType;
+		componentType = newComponentType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE, oldComponentType, newComponentType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -124,32 +98,20 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(JvmArrayType newType)
+	public void setComponentType(JvmTypeReference newComponentType)
 	{
-		if (newType != type)
+		if (newComponentType != componentType)
 		{
 			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
+			if (componentType != null)
+				msgs = ((InternalEObject)componentType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE, null, msgs);
+			if (newComponentType != null)
+				msgs = ((InternalEObject)newComponentType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE, null, msgs);
+			msgs = basicSetComponentType(newComponentType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, newType, newType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference getComponentType()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE, newComponentType, newComponentType));
 	}
 
 	/**
@@ -169,13 +131,25 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmArrayType getType()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				return basicSetType(null, msgs);
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
+				return basicSetComponentType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -190,9 +164,8 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
+				return getComponentType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,8 +180,8 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				setType((JvmArrayType)newValue);
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
+				setComponentType((JvmTypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -224,8 +197,8 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				setType((JvmArrayType)null);
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
+				setComponentType((JvmTypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -241,8 +214,8 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				return type != null;
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
+				return componentType != null;
 		}
 		return super.eIsSet(featureID);
 	}

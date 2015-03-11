@@ -1,0 +1,152 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="migrating-from-1_0_x">Migrating from Xtext 1.0.x to 2.0</h1>
+
+<p>Most of the tasks when migrating to Xtext 2.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully verify that your implementation is still working with Xtext 2.0. A reliable test-suite helps a lot. </p>
+
+<p>The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.</p>
+
+<p><em>Hint: You’ll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em></p>
+
+<h2 id="take-the-shortcut">Take the Shortcut</h2>
+
+<p>If you haven’t made too many customizations to the generated defaults and if you’re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!</p>
+
+<h2 id="migrating-step-by-step">Migrating Step By Step</h2>
+
+<p>Before you start the migration to Xtext 2.0, you should make sure that no old plug-ins are in your target platform.</p>
+
+<p><em>Hint: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.</em></p>
+
+<h3 id="update-the-plug-in-dependencies-and-import-statements">Update the Plug-in Dependencies and Import Statements</h3>
+
+<p>You should update the version constraints of the plug-in dependencies in your manifest files from version <em>1.0.x</em> to <em>2.0</em> if you specified any concrete versions. Also the constraint of <em>org.antlr.runtime</em> must be updated from <em>[3.0.0,3.0.2)</em> to <em>3.2.0</em>.</p>
+
+<p>The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. This fixes most of the problems in the manually written code. </p>
+
+<h3 id="introduction-of-the-qualified-name">Introduction of the Qualified Name</h3>
+
+<p>With Xtext 2.0 an object for dealing with qualified names has been introduced: <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a>. The qualified name is now split into segments which can be queried. The lower-case version of the qualified name is cached so that the performance of case insensitive languages is improved. The signature of the methods used by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java">DefaultDeclarativeQualifiedNameProvider</a> changed to <code>QualifiedName qualifiedName(Object)</code>. </p>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java">IQualifiedNameConverter</a> converts qualified names from/to their <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> representation. This is also where you specify the separator and wildcard strings. If you already know the segments of a qualified name, you can also create it using <code>QualifiedName.create(String ...)</code>. </p>
+
+<p><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> is the new type of the <em>name</em> properties in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>. So if you have customized indexing, e.g. implemented your own <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a>, you will have to create <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">qualified names</a> instead of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">strings</a>. <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescriptions</a> are also used in other places such as <a href="#scoping">scoping</a>, <a href="#linking">linking</a>, <a href="#serialization">serialization</a>, <a href="#content-assist">content assist</a>…</p>
+
+<p>Furthermore, the method <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider.getQualifiedName(EObject)</a> has been renamed to <code>getFullyQualifiedName(EObject)</code>.</p>
+
+<h3 id="changes-in-the-index-and-in-find-references">Changes in the index and in find references</h3>
+
+<p>In Xtext 1.0.x the interfaces <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">IResourceDescriptions</a>, <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> and <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/resources/IContainer.html">IContainer</a> have several methods to query them for contained elements. In Xtext 2.0 there is a common interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ISelectable.java">ISelectable</a> for this use case which is extended by the interfaces mentioned above. For further details have a look at the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ISelectable.java">ISelectable</a>.</p>
+
+<p>The default indexing for Xtext resources as it is defined in <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionManager.java">DefaultResourceDescriptionManager</a> has changed. Only cross-references pointing to elements outside the current resource are indexed. Furthermore, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionManager.java">DefaultResourceDescriptionManager</a> can now be easier customized with an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java">IDefaultResourceDescriptionStrategy</a>. </p>
+
+<p>For Ecore files only <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a>, <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> and <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeatures</a> are indexed, each with both, the <em>nsURI</em> and the <em>name</em> of the containing <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> in their qualified name.</p>
+
+<p>There is a new interface to find references to Xtext elements: <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java">IReferenceFinder</a>. It allows to distinguish searches in the local <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource</a> from global index searches. Local searches will yield <em>all</em> local cross references independent of the indexing strategy.</p>
+
+<h3 id="rewritten-node-model">Rewritten Node Model</h3>
+
+<p>To reduce memory consumption, the node model has been redesigned in Xtext 2.0. We no longer use EMF, but a chained list of compressed nodes instead. </p>
+
+<p>The package <em>org.eclipse.xtext.nodemodel</em> now contains the relevant interfaces to program against. The new interfaces follow the naming convention of other types in the framework. They are called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java">INode</a>, <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ICompositeNode.java">ICompositeNode</a> and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/ILeafNode.java">ILeafNode</a>. That way, most of the migration will be done by prefixing the old names with an <em>I</em> and use the organize imports tool. Please make sure not to program against concrete or abstract classes.</p>
+
+<p>If you used the node model a lot, you should have a closer look at the new APIs. The <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> API is no longer available on the nodes. Instead, you we offer a couple of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterables</a> for traversing the tree. Where appropriate, helper methods of the former <em>ParseTreeUtil</em> and <em>NodeUtil</em> have become members of the nodes, e.g. <code>NodeUtil.getAllContents(AbstractNode)</code> has become <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/INode.java">INode.getAsTreeIterable()</a> The remaining methods have been converted and moved to the new <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java">NodeModelUtils</a>.</p>
+
+<h3 id="new-outline">New Outline</h3>
+
+<p>The outline view has been completely re-implemented. To use the new one remove the following fragments from your workflow </p>
+
+<pre><code class="language-mwe2">fragment = outline.TransformerFragment{}
+fragment = outline.OutlineNodeAdapterFactoryFragment{}
+</code></pre>
+
+<p>and add </p>
+
+<pre><code class="language-mwe2">fragment = outline.OutlineTreeProviderFragment {}
+</code></pre>
+
+<p>After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely. For that reason you should take a closer look at the <a href="#outline">chapter on the outline</a>. The old classes named <em>MyDslTransformer</em> and <em>MyDslOutlineNodeAdapterFactory</em> have become obsolete and should be removed after having migrated your code to the new API.</p>
+
+<h3 id="autoeditstrategy">AutoEditStrategy</h3>
+
+<p>In Xtext 1.0.x your AutoEditStrategy extends the class <em>DefaultAutoEditStrategy</em> which implements the interface <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/IAutoEditStrategy.html">IAutoEditStrategy</a>. In Xtext 2.0 the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java">DefaultAutoEditStrategyProvider</a> should be extended instead. The only thing you have to do is to change the superclass from <em>DefaultAutoEditStrategy</em> to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java">DefaultAutoEditStrategyProvider</a>. The interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/AbstractEditStrategyProvider.java">IEditStrategyAcceptor</a> changed from <code>accept(IAutoEditStrategy)</code> to <code>accept(IAutoEditStrategy, String)</code>. The last parameter represents the <em>contentType</em> of the document. Constants could be found in the <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/IDocument.html">IDocument</a> and in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/TerminalsTokenTypeToPartitionMapper.java">TerminalsTokenTypeToPartitionMapper</a>. </p>
+
+<p>As a example the configure method could look like this one: </p>
+
+<pre><code class="language-java">  @Override
+  protected void configure(IEditStrategyAcceptor acceptor) {
+    super.configure(acceptor);
+    acceptor.accept(new YourAutoEditStrategy(),
+            IDocument.DEFAULT_CONTENT_TYPE);
+  }
+</code></pre>
+
+<p>The last thing you have to do is to change the binding of the <em>IAutoEditStrategy</em> in the <em>MyDslUIModule</em> from</p>
+
+<pre><code class="language-java">public Class&lt;? extends IAutoEditStrategy&gt; bindIAutoEditStrategy()
+</code></pre>
+
+<p>to </p>
+
+<pre><code class="language-java">public Class&lt;? extends AbstractEditStrategyProvider&gt; 
+  bindAbstractEditStrategyProvider() { .. }
+</code></pre>
+
+<h3 id="other-noteworthy-api-changes">Other Noteworthy API Changes</h3>
+
+<p>The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually.</p>
+
+<p>You will face a couple of compilation problems due to changes in the API. Here’s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems. </p>
+
+<ul>
+  <li>In the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a> the method <code>getScope(EObject,EReference)</code> has been removed. Use <code>getScope(Resource, EReference, Predicate&lt;IEObjectDescription&gt;)</code> instead. </li>
+  <li>The interface <em>IAntlrParser</em> has been removed. Use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java">IParser</a> instead.</li>
+  <li>The methods <code>error(..)</code> and <code>warning(..)</code> in the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a> used to accept integer constants representing the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeature</a> which caused the issues. These integer parameters were replaced by the feature itself, e.g. from <code>error(String, Integer)</code> to <code>error(String, EStructuralFeature)</code>. Use the generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Literals</a> to access the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeatures</a>. </li>
+  <li>The enum <em>DiagnosticSeverity</em> has been renamed to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/diagnostics/Severity.java">Severity</a>.</li>
+  <li>The class <em>TextLocation</em> has been replaced by the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/ITextRegion.java">ITextRegion</a> with an immutable implementation <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java">TextRegion</a>.</li>
+  <li>
+    <p>In Xtext 1.0.x the class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java">EObjectAtOffsetHelper</a> provided several static methods to resolve elements. In Xtext 2.0 these methods aren’t static anymore. For that reason you could create an instance of this class or let Guice do the job for you:     </p>
+
+    <pre><code class="language-java">  @Inject private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+</code></pre>
+  </li>
+  <li>The method <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java">EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</a> changed to <code>resolveElementAt(XtextResource, int)</code>. You have to use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> to compute the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java">TextRegion</a>.</li>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> now offers methods <code>getSignificantTextRegion()</code> and <code>getFullTextRegion()</code> to make the distinction between the name and the full region of an element. The old <code>getLocation()</code> method was removed. </li>
+</ul>
+
+<p>If you experience further problems, please refer to the <a href="http://www.eclipse.org/forums/index.php?t=thread&amp;frm_id=27">newsgroup</a>.</p>
+
+<h2 id="now-go-for-then-new-features">Now go for then new features</h2>
+
+<p>After migrating, some of the new features in Xtext 2.0 will be automatically available. Others require further configuration. We recommend exploring </p>
+
+<ul>
+  <li>Xbase,</li>
+  <li>the new Xtend,</li>
+  <li>rename refactorings</li>
+  <li>the compare view,</li>
+  <li>rich hovers,</li>
+  <li>the Xtext syntax graph,</li>
+  <li><a href="301_grammarlanguage.html#syntactic-predicates">support for syntactic predicates</a>,</li>
+  <li>the generated debug grammar,</li>
+  <li><a href="301_grammarlanguage.html#terminal-fragment">terminal fragments</a>,</li>
+  <li>document partitions and auto edit</li>
+  <li>the redesigned <a href="#outline">outline view</a>,</li>
+  <li>and the <a href="#quick-fixes">quick fixes for the Xtext grammar language</a>.</li>
+</ul>
+
+<hr />
+
+<p><strong><a href="402_migrating_from_0_7.html">Next Chapter: Migrating from Xtext 0.7.x to 1.0</a></strong></p>
+
+
+</body>
+</html>

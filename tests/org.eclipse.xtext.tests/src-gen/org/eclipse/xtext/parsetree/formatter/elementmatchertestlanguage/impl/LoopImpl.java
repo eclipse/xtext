@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -22,13 +19,13 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl#getNames <em>Names</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl#getGr <em>Gr</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl#getInts <em>Ints</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl#getStrings <em>Strings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

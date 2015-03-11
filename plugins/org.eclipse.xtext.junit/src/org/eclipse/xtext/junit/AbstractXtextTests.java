@@ -31,6 +31,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit.serializer.SerializerTester;
 import org.eclipse.xtext.junit.util.ResourceLoadHelper;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -58,9 +59,10 @@ import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.XtextRunner instead. This class will be removed in Xtext 2.9.
  */
-@SuppressWarnings("restriction")
+@Deprecated
 public abstract class AbstractXtextTests extends TestCase implements ResourceLoadHelper {
 
 	private Injector injector;
@@ -95,21 +97,25 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 	 */
 	protected void with(Module ... modules) throws Exception {
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
-		injector = Guice.createInjector(modules);
+		setInjector(Guice.createInjector(modules));
 	}
 
 	protected void with(Class<? extends ISetup> setupClazz) throws Exception {
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		ISetup instance = setupClazz.newInstance();
-		injector = instance.createInjectorAndDoEMFRegistration();
+		setInjector(instance.createInjectorAndDoEMFRegistration());
 	}
 
 	public void with(ISetup setup) throws Exception {
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
-		injector = setup.createInjectorAndDoEMFRegistration();
+		setInjector(setup.createInjectorAndDoEMFRegistration());
 	}
 	
-	public Injector getInjector() {
+	protected void setInjector(Injector injector) {
+		this.injector = injector;
+	}
+	
+	final public Injector getInjector() {
 		if (injector==null)
 			throw new IllegalStateException("No injector set. Did you forget to call something like 'with(new YourStadaloneSetup())'?");
 		return injector;
@@ -223,6 +229,7 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 		return instance.split(",")[0];
 	}
 	
+	@Override
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			return getResourceAndExpect(stream, AbstractXtextTests.UNKNOWN_EXPECTATION);
@@ -260,8 +267,21 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 
 		for(Diagnostic d: resource.getWarnings())
 			System.out.println("Resource Warning: "+d);
+				
+		if (expectedErrors == 0 && resource.getContents().size() > 0 && shouldTestSerializer(resource)) {
+			SerializerTester tester = get(SerializerTester.class);
+			EObject obj = resource.getContents().get(0);
+			tester.assertSerializeWithNodeModel(obj);
+			tester.assertSerializeWithoutNodeModel(obj);
+		}
 
 		return resource;
+	}
+
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return !("org.eclipse.xtext.Xtext".equals(resource.getLanguageName()) 
+				// TODO: fix serializer issues in refactoring tests
+				|| "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage".equals(resource.getLanguageName()));
 	}
 
 	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
@@ -369,19 +389,24 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 						"Is your filesystem case insensitive? Please verify the spelling.");
 
 			InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
-			if (resourceAsStream == null) {
-				fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
-			} else {
-				byte[] buffer = new byte[2048];
-				int bytesRead = 0;
-				StringBuffer b = new StringBuffer();
-				do {
-					bytesRead = resourceAsStream.read(buffer);
-					if (bytesRead != -1)
-						b.append(new String(buffer, 0, bytesRead));
-				} while (bytesRead != -1);
-				String model = b.toString();
-				return model;
+			try {
+				if (resourceAsStream == null) {
+					fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+				} else {
+						byte[] buffer = new byte[2048];
+						int bytesRead = 0;
+						StringBuffer b = new StringBuffer();
+						do {
+							bytesRead = resourceAsStream.read(buffer);
+							if (bytesRead != -1)
+								b.append(new String(buffer, 0, bytesRead));
+						} while (bytesRead != -1);
+						String model = b.toString();
+						return model;
+				}
+			} finally {
+				if (resourceAsStream != null)
+					resourceAsStream.close();
 			}
 		}
 		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");

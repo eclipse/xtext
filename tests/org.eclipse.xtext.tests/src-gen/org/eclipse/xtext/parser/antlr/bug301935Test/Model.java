@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug301935Test;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.Model#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.Model#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.Model#getValue2 <em>Value2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.antlr.bug301935Test.Bug301935TestPackage#getModel()
  * @model

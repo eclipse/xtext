@@ -15,12 +15,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.eclipse.xtext.util.formallang.ProductionStringFactory;
+import org.eclipse.xtext.util.formallang.Nfa;
+import org.eclipse.xtext.util.formallang.NfaToProduction;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -34,8 +41,19 @@ import com.google.inject.Inject;
  */
 public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnosticProvider {
 
+	/**
+	 * @author meysholdt - Initial contribution and API
+	 */
+	private final class GetGrammarEle implements Function<ISemState, AbstractElement> {
+		@Override
+		public AbstractElement apply(ISemState from) {
+			return from.getAssignedGrammarElement();
+		}
+	}
+
 	public static class NamedElement2Name implements Function<ENamedElement, String> {
 
+		@Override
 		public String apply(ENamedElement from) {
 			return from == null ? "null" : from.getName();
 		}
@@ -53,10 +71,13 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	@Inject
 	protected IContextFinder contextFinder;
 
+	@Override
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
-		return new SerializationDiagnostic(semanticObject, "foo bar");
+		String msg = "A value for feature '" + feature.getName() + "' is missing but required.";
+		return new SerializationDiagnostic(FEATURE_VALUE_MISSING, semanticObject, msg);
 	}
 
+	@Override
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
 		Set<EObject> contexts = Sets.newHashSet(contextFinder.findContextsByContentsAndContainer(semanticObject, null));
 		List<EClass> validTypes = getValidTypes(context);
@@ -79,7 +100,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 			msg.append("Other valid contexts for type '" + semanticType + "': "
 					+ Joiner.on(", ").join(Iterables.transform(otherValidCtxs, context2Name)));
 		msg.append("The context '" + contextName + "' is valid for types: " + validTypeNames + "\n");
-		return new SerializationDiagnostic(semanticObject, msg.toString());
+		return new SerializationDiagnostic(INVALID_CONTEXT_OR_TYPE, semanticObject, msg.toString());
 	}
 
 	protected List<EObject> getValidContexts(EClass clazz) {
@@ -102,6 +123,19 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 				return result;
 			}
 		return Collections.emptyList();
+	}
+
+	@Override
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject,
+			EObject context, Nfa<ISemState> nfa) {
+		GrammarElementTitleSwitch ele2str = new GrammarElementTitleSwitch().showAssignments().setValueForNull(null);
+		ProductionStringFactory<AbstractElement> grammarFactory = new ProductionStringFactory<AbstractElement>(ele2str);
+		String grammar = new NfaToProduction().nfaToGrammar(nfa, new GetGrammarEle(), grammarFactory);
+		StringBuilder msg = new StringBuilder();
+		msg.append("Could not serialize EObject via backtracking.\n");
+		msg.append("Constraint: " + grammar + "\n");
+		msg.append(semanticObject.getValuesString());
+		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject.getEObject(), context, msg.toString());
 	}
 
 }

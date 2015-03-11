@@ -15,6 +15,7 @@ public interface CancelIndicator {
 	boolean isCanceled();
 	
 	public final static CancelIndicator NullImpl = new CancelIndicator() {
+		@Override
 		public boolean isCanceled() {
 			return false;
 		}

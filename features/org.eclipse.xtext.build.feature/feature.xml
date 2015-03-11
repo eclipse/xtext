@@ -2,9 +2,11 @@
 <feature
       id="org.eclipse.xtext.build"
       label="Xtext Update Site"
-      version="2.0.0.qualifier"
+      version="2.8.0.qualifier"
       provider-name="%providerName"
-      image="eclipse_update_120.jpg">
+      image="eclipse_update_120.jpg"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -18,12 +20,88 @@ are made available under the terms of the Eclipse Public License
 v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
-	
-   <license url="%licenseURL">
-      %license
-   </license>
+
+   <includes
+         id="org.eclipse.xtext.license"
+         version="0.0.0"/>
+
    <includes
          id="org.eclipse.xtext.sdk"
          version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtend.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.gwt"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.redist"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtend.gwt"
+         version="0.0.0"/>
+
+  
+   <plugin
+         id="com.google.guava"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="javax.inject"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.inject"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.objectweb.asm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+ 
+   <plugin
+         id="com.google.inject.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.objectweb.asm.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+ 
+
+   <plugin
+         id="javax.inject.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+
+   <plugin
+         id="com.google.guava.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

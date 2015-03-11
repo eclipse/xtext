@@ -1,0 +1,496 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="mwe2">MWE2</h1>
+
+<p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards compatible implementation of the Modeling Workflow Engine (MWE). It is a declarative, externally configurable generator engine. Users can describe arbitrary object compositions by means of a simple, concise syntax that allows to declare object instances, attribute values and references. One use case - that’s where the name had its origins - is the definition of workflows. Such a workflow consists usually of a number of components that interact with each other. There are components to read EMF resources, to perform operations (transformations) on them and to write them back or to generate any number of other artifacts out of the information. Workflows are typically executed in a single JVM. However there are no constraints the prevent implementors to provide components that spawn multiple threads or new processes.</p>
+
+<h2 id="mwe2-exampe">Examples</h2>
+
+<p>Let’s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first example is a simple <code>HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an Ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last example uses the life-cycle methods of the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> to print the execution time of the workflow.</p>
+
+<h3 id="mwe2-hello-world">The Simplest Workflow</h3>
+
+<p>The arguably shortest MWE2 module may look like the following snippet:</p>
+
+<pre><code class="language-mwe2">module HelloWorld 
+
+SayHello {
+  message = "Hello World!"
+}
+</code></pre>
+
+<p>It configures a very simple workflow component with a message that should be printed to <code>System.out</code> when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That’s why the module <code>HelloWorld</code> has to be placed into the default package of a Java source folder. The second element in the module is the class-name <code>SayHello</code> which introduces the root element of the module. The interpreter will create an instance of the given type and configure it as declared between the curly braces. E.g. the assignment <code>message = "Hello World!"</code> in the module will be interpreted as an invocation of the <code>setMessage(String)</code> on the instantiated object. As one can easily imagine, the implementation of the class <code>SayHello</code> looks straight forward:</p>
+
+<pre><code class="language-java">import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
+import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
+
+public class SayHello implements IWorkflowComponent {
+
+  private String message = "Hello World!";
+  public void setMessage(String message) {
+    this.message = message;
+  }
+  public String getMessage() {
+    return message;
+  }
+
+  public void invoke(IWorkflowContext ctx) {
+    System.out.println(getMessage());
+  }
+
+  public void postInvoke() {}
+  public void preInvoke() {}
+}
+</code></pre>
+
+<p>It looks like a simple POJO and that’s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">Mwe2Runner</a>, the component <code>SayHello</code> must be nested in a root workflow:</p>
+
+<pre><code class="language-mwe2">module HelloWorld 
+
+Workflow {
+  component = SayHello {
+    message = "Hello World!"
+  }
+}
+</code></pre>
+
+<p>The package <code>org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick <em>Run As .. → MWE2 Workflow</em> in the console as </p>
+
+<p><code>Hello World!</code></p>
+
+<h3 id="mwe2-simple-transformation">A Simple Transformation</h3>
+
+<p>The following workflow solves the exemplary task to rename every <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> in an <em>*.ecore</em> file. It consists of three components that read, modify and write the model file:</p>
+
+<pre><code class="language-mwe2">module Renamer
+Workflow {
+  component = ResourceReader {
+        uri = "model.ecore"
+  }
+  component = RenamingTransformer {}
+  component = ResourceWriter {
+        uri = "uppercaseModel.ecore"
+  }
+}
+</code></pre>
+
+<p>The implementation of these components is surprisingly simple. It is easily possible to create own components even for minor operations to automate a process.</p>
+
+<p>The <code>ResourceReader</code> simply reads the file with the given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> and stores it in a so called <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.</p>
+
+<pre><code class="language-java">public class ResourceReader extends WorkflowComponentWithSlot {
+  private String uri;
+  public void invoke(IWorkflowContext ctx) {
+    ResourceSet resourceSet = new ResourceSetImpl();
+    URI fileURI = URI.createFileURI(uri); 
+    Resource resource = resourceSet.getResource(fileURI, true);
+    ctx.put(getSlot(), resource);
+  }
+  
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+  public String getUri() {
+    return uri;
+  }
+}
+</code></pre>
+
+<p>The actual transformer takes the model from the slot and modifies it. It simply iterates the content of the resource, identifies each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> and sets its name. </p>
+
+<pre><code class="language-java">public class RenamingTransformer extends WorkflowComponentWithSlot {
+  private boolean toLowerCase = false;
+  public void invoke(IWorkflowContext ctx) {
+    Resource resource = (Resource) ctx.get(getSlot());
+    EcoreUtil.resolveAll(resource);
+    Iterator&lt;Object&gt; contents = EcoreUtil.getAllContents(resource, true);
+    Iterator&lt;EClassifier&gt; iter = 
+        Iterators.filter(contents, EClassifier.class);
+    while(iter.hasNext()) {
+      EClassifier classifier = (EClassifier) iter.next();
+      classifier.setName(isToLowerCase() 
+          ? classifier.getName().toLowerCase()
+          : classifier.getName().toUpperCase());
+    }
+  }
+
+  public void setToLowerCase(boolean toLowerCase) {
+    this.toLowerCase = toLowerCase;
+  }
+  public boolean isToLowerCase() {
+    return toLowerCase;
+  }
+}
+</code></pre>
+
+<p>After the model has been modified it should be written to a new file. That’s what the <code>ResourceWriter</code> does. It actually takes the resource from the given <em>slot</em> and saves it with the configured <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>:</p>
+
+<pre><code class="language-java">public class ResourceWriter extends WorkflowComponentWithSlot {
+  private String uri;
+  public void invoke(IWorkflowContext ctx) {
+    Resource resource = (Resource) ctx.get(getSlot());
+    URI uri = URI.createFileURI(getUri());
+    uri = resource.getResourceSet().getURIConverter().normalize(uri);
+    resource.setURI(uri);
+    try {
+      resource.save(null);
+    } catch (IOException e) {
+      throw new WrappedException(e);
+    }
+  }
+
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+  public String getUri() {
+    return uri;
+  }
+}
+</code></pre>
+
+<p>Last but not least, the common super type for those components looks like this:</p>
+
+<pre><code class="language-java">public abstract class WorkflowComponentWithSlot 
+      implements IWorkflowComponent {
+  private String slot = "model";
+  public void setSlot(String slot) {
+    this.slot = slot;
+  }
+  public String getSlot() {
+    return slot;
+  }
+  
+  public void postInvoke() {}
+  public void preInvoke() {}
+}
+</code></pre>
+
+<p>Each of the mentioned implementations is rather simple and can be done in a couple of minutes. Many tedious tasks that developers face in their daily work can be addressed by a chain of rather simple components. MWE2 can be used to automate these tasks with minimum effort.</p>
+
+<h3 id="mwe2-stopwatch">A Stop-Watch</h3>
+
+<p>The last example demonstrates how to combine the MWE2 concepts to create a simple stop-watch that allows to measure the execution time of a set of components. The idea is to add the very same stop-watch twice as a component to a workflow. It will measure the time from the first pre-invoke to the last post-invoke event and print the elapsed milliseconds to the console.</p>
+
+<pre><code class="language-java">public class StopWatch implements IWorkflowComponent {
+  private long start;
+  private boolean shouldStop = false;
+  public void invoke(IWorkflowContext ctx) {}
+
+  public void postInvoke() {
+    if (shouldStop) {
+      long elapsed = System.currentTimeMillis() - start;
+      System.out.println("Time elapsed: " + elapsed + " ms");
+    }
+    shouldStop = true;
+  }
+
+  public void preInvoke() {
+    start = System.currentTimeMillis();
+  }
+}
+</code></pre>
+
+<p>Clients who want to leverage this kind of stop-watch may use the following pattern. The instance of the class <code>StopWatch</code> has to be added as the first component and the last component to a workflow. Every component in-between will be measured. In this case, it is another workflow that does not need know about this decoration. The idea is to use a local identifier for the instantiated <code>StopWatch</code> and reuse this one at the end to receive the post-invoke life-cycle event twice. </p>
+
+<pre><code class="language-mwe2">module MeasuredWorkflow
+
+Workflow {
+  component = StopWatch: stopWatch {}
+  component = @OtherWorkflow {}
+  component = stopWatch
+}
+</code></pre>
+
+<h2 id="mwe2-language-reference">Language Reference</h2>
+
+<p>MWE2 has a few well defined concepts which can be combined to assemble arbitrary object graphs in a compact and declarative manner.</p>
+
+<ul>
+  <li>A MWE2 file defines a <code>module</code> which exposes its root <code>component</code> as reusable artifact.</li>
+  <li><code>Properties</code> can be used to extract reusable, configurable parts of the workflow.</li>
+  <li>Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <code>setABC(..)</code> and <code>addXYZ(..)</code> methods are used to configure them.</li>
+</ul>
+
+<p>Let’s consider the follow short example module and <code>SampleClass</code> to explain these concepts.</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+import java.util.*
+
+SampleClass {
+  singleValue = 'a string'
+  multiValue = ArrayList {}
+  child = {}
+} 
+</code></pre>
+
+<pre><code class="language-java">package com.mycompany;
+
+import java.util.List;
+
+public class SampleClass {
+  public void setSingleValue(String value) {..}
+  public void addMultiValue(List&lt;?&gt; value) {..}
+  public void addChild(SampleClass value) {..}
+}
+</code></pre>
+
+<h3 id="mwe2-java-references">Mapping to Java Classes</h3>
+
+<p>The module <code>com.mycompany.Example</code> defines a root component of type <code>com.mycompany.SampleClass</code>. It is possible to use the simple class-name because MWE2 uses the very same visibility rules as the Java compiler. Classes that are in the same package as the module can be referenced by their simple name. The same rule applies for classes from the <code>java.lang</code> package. For convenience reasons is the package <code>org.eclipse.emf.mwe2.runtime.workflow</code> implicitly imported as well as it exposes some library workflow components. However, the imports are more flexible then in Java since MWE2-imports can be relative, e.g. the <code>import java.*</code> resolves the reference <code>util.ArrayList</code> to <code>java.util.ArrayList</code>. </p>
+
+<p>The root instance of type <code>SampleClass</code> has to be configured after it has been created. Therefore the method <code>setSingleValue</code> will be called at first. The given parameter is <code>'a string'</code>. The method is identified by its name which starts with <code>set</code>. To allow to assign multi-value properties, MWE provides access to methods called <code>add*</code> as well. </p>
+
+<p>If the right side of the assignment in the workflow file does not define a class explicitly, its type is inferred from the method parameter. The line <code>child = {}</code> is equivalent to <code>child = SampleClass {}</code> and creates a new instance of <code>SampleClass</code>.</p>
+
+<p>MWE2 ships with nice tool support. The editor will provide content assist for the allowed types and highlight incompatible assignments. The available properties for Java classes will be proposed as well.</p>
+
+<h3 id="mwe2-module">Module</h3>
+
+<p>As MWE2 modules have a fully qualified name, it is possible to refer to them from other modules. The type of the module is derived from the type of its root component. The <code>com.mycompany.Example</code> can be assigned at any place where a <code>com.mycompany.SampleClass</code> is expected.</p>
+
+<p>Let’s create a second module <code>com.mycompany.Second</code> like this:</p>
+
+<pre><code class="language-mwe2">module com.mycompany.sub.Second
+
+import com.mycompany.*
+
+SampleClass {
+  child = @Example {}
+} 
+</code></pre>
+
+<p>The <code>child</code> value will be assigned to an instance of <code>SampleClass</code> that is configured as in the first example workflow. This enables nice composition and a very focused, reusable component design. </p>
+
+<p>As the same rules apply in MWE2 like in Java, the module <code>com.mycompany.sub.Second</code> has to be defined in a file called <em>Second.mwe2</em> in the package <code>com.mycompany.sub</code>. The import semantic for other modules is the same as for classes. The import statement allows to refer to <code>com.mycompany.Example</code> with a shortened name.</p>
+
+<h3 id="mwe2-properties">Properties</h3>
+
+<p>MWE2 allows to extract arbitrary information into properties to ensure that these pieces are not cluttered around the workflow and to allow for easier external customization. The exemplary component definition was only changed slightly by introducing a property <code>value</code>.</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+var value = 'a string'
+
+SampleClass {
+  singleValue = value
+}
+</code></pre>
+
+<p>The type of the property will be derived from the default value similar to the mechanism that is already known from <code>set</code>- and <code>add</code>-methods. If no default value is given, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> will be assumed. However, properties are not limited to strings. The second built in type is boolean via the familiar literals <code>true</code> and <code>false</code>. More flexibility is available via actual component literals.</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+var childInstance = SampleClass {
+                      singleValue = "child"
+                    }
+
+SampleClass {
+  child = childInstance
+}
+</code></pre>
+
+<p>If one wants to define string properties that are actual reusable parts for other properties, she may use defined variables inside other literals like this: </p>
+
+<pre><code class="language-mwe2">var aString = "part"
+var anotherString = "reuse the ${part} here"
+</code></pre>
+
+<p>This is especially useful for file paths in workflows as one would usually want to define some common root directories only once in the workflow and reuse this fragment across certain other file locations.</p>
+
+<h3 id="mwe2-mandatory">Mandatory Properties</h3>
+
+<p>It is not always feasible to define default values for properties. That is where mandatory properties come into play. Modules define their interface not only via their fully qualified name and the type of the root component but also by means of the defined properties. </p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+var optional = 'a string'
+var mandatory
+
+SampleClass {
+  singleValue = optional
+  child = {
+    singleValue = mandatory
+  }
+}
+</code></pre>
+
+<p>This version of the example module exposes two externally assignable properties. The second one has no default value assigned and is thereby considered to be mandatory. The mandatory value must be assigned if we reuse <code>org.mycompany.Example</code> in another module like this:</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Second
+
+var newMandatory
+
+@Example {
+  mandatory = "mandatoryValue"
+  optional = newMandatory
+} 
+</code></pre>
+
+<p>Note that it is even possible to reuse another module as the root component of a new module. In this case we set the mandatory property of <code>Example</code> to a specific constant value while the previously optional value is now redefined as mandatory by means of a new property without a default value.</p>
+
+<p>It is not only possible to define mandatory properties for MWE2 modules but for classes as well. Therefore MWE2 ships with the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a> annotation. If a <code>set</code>- or <code>add</code>-method is marked as <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a>, the module validation will fail if no value was assigned to that feature.</p>
+
+<h3 id="mwe2-named-components">Named Components</h3>
+
+<p>Properties are not the only way to define something that can be reused. It is possible to assign a name to any instantiated component whether it’s created from a class literal or from another component. This allows to refer to previously created and configured instances. Named instances can come handy for notification and call-back mechanisms or more general in terms of defined life-cycle events. </p>
+
+<p>If we wanted to assign the created instance to a property of itself, we could use the following syntax:</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+SampleClass : self {
+  child = self
+}
+</code></pre>
+
+<p>A named component can be referenced immediately after its creation but it is not possible to use forward references in a MWE2 file.</p>
+
+<h3 id="mwe2-auto-inject">Auto Injection</h3>
+
+<p>Existing modules or classes often expose a set of properties that will be assigned to features of its root component or set- and add- methods respectively. In many cases its quite hard to come up with yet another name for the very same concept which leads to the situation where the properties itself have the very same name as the component’s feature. To avoid the overall repetition of assignments, MWE2 offers the possibility to use the <code>auto-inject</code> modifier on the component literal:</p>
+
+<pre><code class="language-mwe2">module com.mycompany.Example
+
+var child = SampleClass {}
+
+SampleClass auto-inject {
+}
+</code></pre>
+
+<p>This example will implicitly assign the value of the property <code>child</code> to the feature <code>child</code> of the root component. This is especially useful for highly configurable workflows that expose dozens of optional parameters each of which can be assigned to one or more components.</p>
+
+<p>The <code>auto-inject</code> modifier can be used for a subset of the available features as well. It will suppressed for the explicitly set values of a component. </p>
+
+<h2 id="mwe2-syntax-reference">Syntax Reference</h2>
+
+<p>The following chapter serves as a reference for the concrete syntax of MWE2. The building blocks of a module will be described in a few words.</p>
+
+<p>MWE2 is not sensitive to white space and allows to define line-comments and block comments everywhere. The syntax is the same as one is used to from the Java language:</p>
+
+<pre><code class="language-mwe2">// This is a comment
+/* 
+  This is another one.
+*/
+</code></pre>
+
+<p>Every name in MWE2 can be a fully qualified identifier and must follow the Java conventions. However, in contrast to Java identifiers it is not allowed to use German umlauts or Unicode escape sequences in identifiers. A valid ID-segment in MWE2 starts with a letter or an underscore and is followed by any number of letters, numbers or underscores. An identifier is composed from one or more segments which are delimited by a ‘.’ dot.</p>
+
+<pre><code class="language-xtext">Name: ID ('.' ID)*;
+ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
+</code></pre>
+
+<p>MWE2 does not use a semicolon as a statement delimiter at any place.</p>
+
+<h3 id="mwe2-module-syntax">Module</h3>
+
+<p><img src="images/mwe2/module.png" alt="" /></p>
+
+<p>A <code>module</code> consists of four parts. The very first statement in a <em>*.mwe2</em> file is the module declaration. The name of the module must follow the naming convention for Java classes. That MWE2 file’s name must therefore be the same as the last segment of the module-name and it has to be placed in the appropriate package of a Java source path.</p>
+
+<p>It is allowed to define any number of import statements in a module. Imports are either suffixed by a wildcard or they import a concrete class or module. MWE2 can handle relative imports in case one uses the wildcard notation:</p>
+
+<pre><code class="language-xtext">'import' name '.*'?   
+</code></pre>
+
+<h3 id="mwe2-property-syntax">Property</h3>
+
+<p>The list of declared properties follows the optional import section. It is allowed to define modules without any properties. </p>
+
+<p><img src="images/mwe2/property.png" alt="" /></p>
+
+<p>Each declared property is locally visible in the module. It furthermore defines an assignable feature of the module in case one refers to it from another module. Properties may either have a default value or they are considered to be <em>mandatory</em>. If the type of property is omitted it will be inferred from the default value. The default type of a property is <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. That is, if no default value is available, the property is <em>mandatory</em> and of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>.</p>
+
+<p>There are four types of values available in MWE2. One may either define a string, boolean or component literal or a reference to a previously defined property. </p>
+
+<h3 id="mwe2-component-syntax">Component</h3>
+
+<p>The building block of a module is the root component. It defines the externally visible type of the module and may either be created from a Java type or from another module.</p>
+
+<p><img src="images/mwe2/component.png" alt="" /></p>
+
+<p>The type of the component can be derived in many cases except for the root component. That’s why it’s optional in the component literal. If no type is given, it will be inferred from the left side of the assignment. The assigned feature can either be a declared property of the module or a <code>set</code>- or <code>add</code>-method of a Java class.</p>
+
+<p>Components can be named to make them referable in subsequent assignments. Following the <code>':'</code> keyword, one can define an identifier for the instantiated component. The identifier is locally visible in the module and any assignment that is defined after the named component can refer to this identifier and thereby exactly point to the instantiated object.</p>
+
+<p>The next option for a component is <code>auto-inject</code>. If this modifier is set on a component, any available feature of the component that has the same name as a property or previously created named component will be automatically assigned.</p>
+
+<p>The core of a component is the list of assignments between the curly braces. An arbitrary number of values can be set on the component by means of feature-to-value pairs. </p>
+
+<p><img src="images/mwe2/assignment.png" alt="" /></p>
+
+<p>The available constructs on the right hand side of the assignment are the same as for default values for properties. </p>
+
+<h3 id="mwe2-string-literals-syntax">String Literals</h3>
+
+<p>String values are likely to be the most used literals in MWE2. There is a convenient syntax for string concatenation available due to the high relevance in a descriptive object composition and configuration language. MWE2 strings are multi-line strings and can be composed of several parts.</p>
+
+<pre><code class="language-mwe2">var aString = 'a value'
+var anotherString = 'It is possible to embed ${aString} into
+ a multi-line string'
+</code></pre>
+
+<p>This is especially convenient for path-substitution if one defines e.g. a common root directory and wants to specify other paths relative to the base. </p>
+
+<p>There are two different delimiters available for strings. Users are free to either use single- or double-quotes to start and end strings. If a certain string contains a lot of single-quotes one would better choose double-quotes as delimiter and vice versa. There is no semantic difference between both notations.</p>
+
+<p>The escape character in MWE2 is the back-slash <code>"\\"</code>. It can be used to write line-breaks or tabular characters explicitly and to escape the beginning of substitution variables <code>${</code> and the quotes itself. Allowed escape sequences are:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code>\n</code></td>
+      <td>line break</td>
+    </tr>
+    <tr>
+      <td><code>\r</code></td>
+      <td>carriage return</td>
+    </tr>
+    <tr>
+      <td><code>\t</code></td>
+      <td>tabular character</td>
+    </tr>
+    <tr>
+      <td><code>\'</code></td>
+      <td>single-quote (can be omitted in double-quoted strings)</td>
+    </tr>
+    <tr>
+      <td><code>\"</code></td>
+      <td>double-quote (can be omitted in single-quoted strings)</td>
+    </tr>
+    <tr>
+      <td><code>\${</code></td>
+      <td>escape the substitution variable start ${</td>
+    </tr>
+    <tr>
+      <td><code>\\</code></td>
+      <td>the back-slash itself</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Other escape sequence are illegal in MWE2 strings.</p>
+
+<h3 id="mwe2-boolean-literals">Boolean Literals</h3>
+
+<p>MWE2 has native support for the boolean type. The literals are <code>true</code> and <code>false</code>.</p>
+
+<h3 id="mwe2-references">References</h3>
+
+<p>Each assigned value in MWE2 either as default for properties or in a component assignment can be a reference to a previously declared property or named component. The can be referenced intuitively by their name.</p>
+
+<hr />
+
+<p><strong><a href="307_special_languages.html">Next Chapter: Typical Language Configurations</a></strong></p>
+
+
+</body>
+</html>

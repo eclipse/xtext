@@ -32,6 +32,7 @@ public interface IReferableElementsUnloader {
 
 	final class NullUnloader implements IReferableElementsUnloader {
 
+		@Override
 		public void unloadRoot(EObject root) {
 			// do nothing
 		}
@@ -40,6 +41,7 @@ public interface IReferableElementsUnloader {
 
 	class GenericUnloader implements IReferableElementsUnloader {
 
+		@Override
 		public void unloadRoot(EObject root) {
 			// Content adapters should be removed the same way as they are added: top-down. 
 			// Fragments are recursive, so we need them to be calculated before proxifying the container.
@@ -47,6 +49,7 @@ public interface IReferableElementsUnloader {
 			// => first calculate all fragments, then proxify elements starting form root.
 			List<Pair<EObject, URI>> elementsToUnload = newArrayList();
 			elementsToUnload.add(Tuples.create(root, EcoreUtil.getURI(root)));
+			root.eAdapters().clear();
 			for (Iterator<EObject> i = EcoreUtil.getAllProperContents(root, false); i.hasNext();) {
 				EObject element = i.next();
 				elementsToUnload.add(Tuples.create(element, EcoreUtil.getURI(element)));

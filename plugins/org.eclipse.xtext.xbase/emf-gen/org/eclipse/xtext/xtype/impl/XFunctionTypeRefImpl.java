@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -20,9 +22,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl;
+import org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImplCustom;
 
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -33,15 +36,17 @@ import org.eclipse.xtext.xtype.XtypePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#isInstanceContext <em>Instance Context</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl implements XFunctionTypeRef
+public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom implements XFunctionTypeRef
 {
 	/**
 	 * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' containment reference list.
@@ -62,6 +67,36 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * @ordered
 	 */
 	protected JvmTypeReference returnType;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmType type;
+
+	/**
+	 * The default value of the '{@link #isInstanceContext() <em>Instance Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstanceContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INSTANCE_CONTEXT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInstanceContext() <em>Instance Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstanceContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean instanceContext = INSTANCE_CONTEXT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +186,72 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmType getType()
+	{
+		if (type != null && type.eIsProxy())
+		{
+			InternalEObject oldType = (InternalEObject)type;
+			type = (JvmType)eResolveProxy(oldType);
+			if (type != oldType)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtypePackage.XFUNCTION_TYPE_REF__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmType basicGetType()
+	{
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(JvmType newType)
+	{
+		JvmType oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInstanceContext()
+	{
+		return instanceContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstanceContext(boolean newInstanceContext)
+	{
+		boolean oldInstanceContext = instanceContext;
+		instanceContext = newInstanceContext;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT, oldInstanceContext, instanceContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -178,6 +279,11 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 				return getParamTypes();
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				return getReturnType();
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				return isInstanceContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +306,12 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				setReturnType((JvmTypeReference)newValue);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				setType((JvmType)newValue);
+				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				setInstanceContext((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -220,6 +332,12 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				setReturnType((JvmTypeReference)null);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				setType((JvmType)null);
+				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				setInstanceContext(INSTANCE_CONTEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -238,8 +356,29 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 				return paramTypes != null && !paramTypes.isEmpty();
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				return returnType != null;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				return type != null;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				return instanceContext != INSTANCE_CONTEXT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (instanceContext: ");
+		result.append(instanceContext);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XFunctionTypeRefImpl

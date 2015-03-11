@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337;
 
@@ -13,10 +10,10 @@ package org.eclipse.xtext.linking.lazy.bug311337;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.NestedRef#getLeft <em>Left</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package#getNestedRef()
  * @model

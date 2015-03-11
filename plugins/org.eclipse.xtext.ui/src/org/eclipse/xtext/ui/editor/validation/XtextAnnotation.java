@@ -75,10 +75,12 @@ public class XtextAnnotation extends Annotation implements IAnnotationPresentati
 		this.isQuickfixable = isQuickfixable;
 	}
 
+	@Override
 	public int getLayer() {
 		return layer;
 	}
 
+	@Override
 	public void paint(GC gc, Canvas canvas, Rectangle bounds) {
 		Image image = getImages().get(getType());
 		if(image != null)

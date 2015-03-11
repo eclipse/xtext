@@ -10,14 +10,22 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(DefaultAntlrTokenToAttributeIdMapper.class)
 public abstract class AbstractAntlrTokenToAttributeIdMapper extends TokenTypeToStringMapper {
+	
+	@Inject(optional = true)
+	org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper mapper;
 
 	public String getId(int tokenType) {
+		if (mapper != null) {
+			return mapper.getId(tokenType);
+		}
 		return getMappedValue(tokenType);
 	}
+
 }

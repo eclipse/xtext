@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
 
@@ -40,7 +37,7 @@ public enum EnumBug310435Enum implements Enumerator
    * @generated
    * @ordered
    */
-  LIT2(0, "lit2", "lit2");
+  LIT2(1, "lit2", "lit2");
 
   /**
    * The '<em><b>Lit1</b></em>' literal value.
@@ -70,7 +67,7 @@ public enum EnumBug310435Enum implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int LIT2_VALUE = 0;
+  public static final int LIT2_VALUE = 1;
 
   /**
    * An array of all the '<em><b>Enum Bug310435 Enum</b></em>' enumerators.
@@ -97,6 +94,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param literal the literal.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum get(String literal)
@@ -116,6 +115,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param name the name.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum getByName(String name)
@@ -135,6 +136,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param value the integer value.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum get(int value)
@@ -142,6 +145,7 @@ public enum EnumBug310435Enum implements Enumerator
     switch (value)
     {
       case LIT1_VALUE: return LIT1;
+      case LIT2_VALUE: return LIT2;
     }
     return null;
   }

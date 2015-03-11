@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug313089.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.linking.bug313089.Bug313089Package;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.BarImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

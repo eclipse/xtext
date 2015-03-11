@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.unicode.impl;
 
@@ -33,7 +30,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
   {
     try
     {
-      UnicodeFactory theUnicodeFactory = (UnicodeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/tests/parser/terminalrules/Unicode"); 
+      UnicodeFactory theUnicodeFactory = (UnicodeFactory)EPackage.Registry.INSTANCE.getEFactory(UnicodePackage.eNS_URI);
       if (theUnicodeFactory != null)
       {
         return theUnicodeFactory;

@@ -16,12 +16,10 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Singleton
 public class OutlineFilterAndSorter {
 
 	public static interface IComparator extends Comparator<IOutlineNode> {
@@ -43,8 +41,10 @@ public class OutlineFilterAndSorter {
 			filteredNodes = nodes;
 		} else {
 			filteredNodes = Iterables.filter(nodes, new Predicate<IOutlineNode>() {
+				@Override
 				public boolean apply(final IOutlineNode node) {
 					return Iterables.all(enabledFilters, new Predicate<IFilter>() {
+						@Override
 						public boolean apply(IFilter filter) {
 							return filter.apply(node);
 						}
@@ -53,13 +53,21 @@ public class OutlineFilterAndSorter {
 			});
 		}
 		IOutlineNode[] nodesAsArray = Iterables.toArray(filteredNodes, IOutlineNode.class);
-		if (comparator != null && comparator.isEnabled())
+		if (comparator != null && isSortingEnabled())
 			Arrays.sort(nodesAsArray, comparator);
 		return nodesAsArray;
 	}
 
+	/**
+	 * @since 2.2
+	 */
+	protected boolean isSortingEnabled() {
+		return comparator.isEnabled();
+	}
+
 	protected Iterable<IFilter> getEnabledFilters() {
 		return Iterables.filter(filters, new Predicate<IFilter>() {
+			@Override
 			public boolean apply(IFilter filter) {
 				return filter.isEnabled();
 			}
@@ -69,7 +77,7 @@ public class OutlineFilterAndSorter {
 	public void setComparator(IComparator comparator) {
 		this.comparator = comparator;
 	}
-
+	
 	public boolean addFilter(IFilter filter) {
 		return filters.add(filter);
 	}

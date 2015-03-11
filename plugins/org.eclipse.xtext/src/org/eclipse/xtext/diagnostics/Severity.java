@@ -18,6 +18,10 @@ public enum Severity {
 	/**
 	 * Severity INFO is not supported for resource diagnostics.
 	 */
-	INFO
+	INFO,
+	/**
+	 * @since 2.4
+	 */
+	IGNORE
 	
 }

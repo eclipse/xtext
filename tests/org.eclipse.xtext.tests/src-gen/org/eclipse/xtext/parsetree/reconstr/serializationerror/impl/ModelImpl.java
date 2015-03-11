@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationerror.impl;
 
@@ -24,10 +21,10 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.Test;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.ModelImpl#getTest <em>Test</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

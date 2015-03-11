@@ -12,27 +12,29 @@ package org.eclipse.xtext.resource;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Before;
+import org.junit.Test;
 
 
-public class ClassloaderClasspathUriResolverTest extends TestCase {
+public class ClassloaderClasspathUriResolverTest extends AbstractXtextTests {
 	private ClassloaderClasspathUriResolver _resolver;
 
 	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		_resolver = new ClassloaderClasspathUriResolver();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new XMIResourceFactoryImpl());
 	}
 
-	public void testClasspathUriForFile() {
+	@Test public void testClasspathUriForFile() {
 		URI classpathUri = URI
 				.createURI("classpath:/org/eclipse/xtext/resource/mydsl.ecore");
 		URL rootURL = getClass().getClassLoader().getResource(
@@ -41,7 +43,7 @@ public class ClassloaderClasspathUriResolverTest extends TestCase {
 		normalizeUriAndLoadResource(classpathUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileWithFragment() {
+	@Test public void testClasspathUriForFileWithFragment() {
 		URI classpathUri = URI
 				.createURI("classpath:/org/eclipse/xtext/resource/mydsl.ecore#/");
 		URL rootURL = getClass().getClassLoader().getResource(
@@ -50,7 +52,7 @@ public class ClassloaderClasspathUriResolverTest extends TestCase {
 		normalizeUriAndLoadResource(classpathUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileInJar() {
+	@Test public void testClasspathUriForFileInJar() {
 		URI classpathUri = URI.createURI("classpath:/model/simple.ecore");
 		URL rootURL = getClass().getClassLoader().getResource(
 				"model/simple.ecore");
@@ -58,7 +60,7 @@ public class ClassloaderClasspathUriResolverTest extends TestCase {
 		normalizeUriAndLoadResource(classpathUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileInJarWithFragment() {
+	@Test public void testClasspathUriForFileInJarWithFragment() {
 		URI classpathUri = URI.createURI("classpath:/model/simple.ecore#/");
 		URL rootURL = getClass().getClassLoader().getResource(
 				"model/simple.ecore");
@@ -76,7 +78,7 @@ public class ClassloaderClasspathUriResolverTest extends TestCase {
 		assertTrue("Resource not loaded", resource.isLoaded());
 	}
 
-	public void testBug293760() throws Exception {
+	@Test public void testBug293760() throws Exception {
 		ClassloaderClasspathUriResolver resolver = new ClassloaderClasspathUriResolver();
 		URL resource = getClass().getResource("mydsl.ecore");
 		URL url = new URL(resource.toString().replace("mydsl.ecore", "some folder/"));

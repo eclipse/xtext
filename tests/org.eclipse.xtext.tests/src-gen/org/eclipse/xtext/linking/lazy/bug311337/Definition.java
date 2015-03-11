@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Definition#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Definition#getChild <em>Child</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Definition#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package#getDefinition()
  * @model

@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -33,6 +33,7 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.junit.Test;
 
 import com.google.inject.Provider;
 
@@ -56,7 +57,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	private EReference reference;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
@@ -66,12 +67,14 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 		globalScopeProvider.setCache(IResourceScopeCache.NullImpl.INSTANCE);
 		final ResourceDescriptionsProvider provider = new ResourceDescriptionsProvider();
 		provider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
+			@Override
 			public IResourceDescriptions get() {
 				return new IResourceDescriptions.NullImpl();
 			}
 		});
 		globalScopeProvider.setResourceDescriptionsProvider(provider);
 		globalScopeProvider.setLoadOnDemandDescriptions(new Provider<LoadOnDemandResourceDescriptions>() {
+			@Override
 			public LoadOnDemandResourceDescriptions get() {
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
 			}
@@ -104,6 +107,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	/**
 	 * We try to emulate a changed scope after a partial parsing so we mock the ScopeService.
 	 */
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (doFakeScope && context == this.context && reference == this.reference)
 			return IScope.NULLSCOPE;
@@ -115,7 +119,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testPartialLinking() {
+	@Test public void testPartialLinking() {
 		int idx = modelAsText.indexOf("Bommel2 2");
 		resource.update(idx + 1, 1, "o");
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
@@ -123,7 +127,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testPartialLinkingTwice() {
+	@Test public void testPartialLinkingTwice() {
 		int idx = modelAsText.indexOf("Bommel2 2");
 		resource.update(idx + 1, 1, "o");
 		resource.update(idx + 1, 1, "o");
@@ -132,7 +136,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testPartialLinkingFakedScope() {
+	@Test public void testPartialLinkingFakedScope() {
 		replaceLinker(resource);
 		assertTrue(resource.getErrors().isEmpty());
 		int idx = modelAsText.indexOf("Bommel2 2");
@@ -145,7 +149,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testLinking() {
+	@Test public void testLinking() {
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
 		assertEquals(1, content.size());
 	}

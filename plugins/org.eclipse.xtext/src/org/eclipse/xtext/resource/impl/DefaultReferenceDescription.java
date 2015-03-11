@@ -25,29 +25,48 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 	private URI containerEObjectURI;
 
 	public DefaultReferenceDescription(EObject from, EObject to, EReference eReference, int i, URI containerEObjectURI) {
-		this.sourceEObjectUri = EcoreUtil2.getNormalizedURI(from);
-		this.targetEObjectUri = EcoreUtil2.getNormalizedURI(to);
+		this.sourceEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(from);
+		this.targetEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(to);
 		this.eReference = eReference;
 		this.indexInList = i;
 		this.containerEObjectURI = containerEObjectURI;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public DefaultReferenceDescription(URI sourceEObjectUri, URI targetEObjectUri, EReference eReference,
+			int indexInList, URI containerEObjectURI) {
+		super();
+		this.sourceEObjectUri = sourceEObjectUri;
+		this.targetEObjectUri = targetEObjectUri;
+		this.eReference = eReference;
+		this.indexInList = indexInList;
+		this.containerEObjectURI = containerEObjectURI;
+	}
+
+
+	@Override
 	public int getIndexInList() {
 		return indexInList;
 	}
 
+	@Override
 	public URI getSourceEObjectUri() {
 		return sourceEObjectUri;
 	}
 
+	@Override
 	public URI getTargetEObjectUri() {
 		return targetEObjectUri;
 	}
 
+	@Override
 	public EReference getEReference() {
 		return eReference;
 	}
 
+	@Override
 	public URI getContainerEObjectURI() {
 		return containerEObjectURI;
 	}

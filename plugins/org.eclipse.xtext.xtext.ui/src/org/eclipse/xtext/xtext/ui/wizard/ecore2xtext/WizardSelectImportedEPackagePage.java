@@ -36,6 +36,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -54,12 +55,16 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private TableViewer importedEPackagesViewer;
 
-	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection) {
+	private final IJdtHelper jdtHelper;
+
+	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection, IJdtHelper jdtHelper) {
 		super(pageName);
+		this.jdtHelper = jdtHelper;
 		setTitle(Messages.WizardSelectImportedEPackagePage_WindowTitle);
 		setDescription(Messages.WizardSelectImportedEPackagePage_Description);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
@@ -69,12 +74,15 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		importedEPackagesViewer = new TableViewer(composite, SWT.BORDER);
 		importedEPackagesViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3));
 		importedEPackagesViewer.setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				return Iterables.toArray(ePackageInfos, EPackageInfo.class);
 			}
@@ -99,7 +107,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				addEPackageInfos(new EPackageChooser(getShell()).open());
+				addEPackageInfos(new EPackageChooser(getShell(), jdtHelper).open());
 			}
 		});
 		Button defaultButton = new Button(composite, SWT.PUSH);
@@ -162,21 +170,26 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			}
 		});
 		rootElementComboViewer.setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				Iterable<EClass> eClasses = Iterables.filter(Iterables.concat(Iterables.transform(ePackageInfos,
 						new Function<EPackageInfo, List<EClassifier>>() {
+							@Override
 							public List<EClassifier> apply(EPackageInfo from) {
 								return from.getEPackage().getEClassifiers();
 							}
 						})), EClass.class);
 				List<EClass> result = Lists.newArrayList(eClasses);
 				Collections.sort(result, new Comparator<EClass>() {
+					@Override
 					public int compare(EClass o1, EClass o2) {
 						return o1.getName().compareTo(o2.getName());
 					}

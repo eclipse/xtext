@@ -12,8 +12,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -27,10 +27,12 @@ import com.google.common.base.Function;
 import com.google.common.collect.Sets;
 
 /**
+ * Please refer to the
+ * <a href="https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference">documentation</a>
+ * for details.
+ * 
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
- *
- * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
 public class Xtext2EcoreInterpretationContext {
 
@@ -40,7 +42,7 @@ public class Xtext2EcoreInterpretationContext {
 
 	private final Collection<EClassifierInfo> currentTypes = Sets.newLinkedHashSet();
 
-	boolean isRuleCallAllowed = true;
+	private boolean isRuleCallAllowed = true;
 
 	private Xtext2EcoreInterpretationContext(EClassifierInfos classifierInfos) {
 		super();
@@ -76,7 +78,8 @@ public class Xtext2EcoreInterpretationContext {
 		EClassifierInfo featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
-			featureTypeInfo = getEClassifierInfoOrThrowException(EcorePackage.Literals.EBOOLEAN, assignment);
+			EDataType eBoolean = GrammarUtil.findEBoolean(GrammarUtil.getGrammar(assignment));
+			featureTypeInfo = getEClassifierInfoOrThrowException(eBoolean, assignment);
 			isMultivalue = false;
 		}
 		else {
@@ -127,7 +130,7 @@ public class Xtext2EcoreInterpretationContext {
 		if (result == null) {
 			final ICompositeNode node = NodeModelUtils.getNode(terminal);
 			if (node != null) {
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.getText() + "'.", terminal);
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.getText().trim() + "'.", terminal);
 			}
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
 		}
@@ -138,8 +141,11 @@ public class Xtext2EcoreInterpretationContext {
 			throws TransformationException {
 		final EClassifierInfo featureTypeInfo = eClassifierInfos.getInfoOrNull(type);
 		if (featureTypeInfo == null) {
-			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
-					parserElement);
+			String typeName = "null";
+			if (type != null)
+				typeName = type.getName();
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, 
+					"Cannot resolve type " + typeName, parserElement);
 		}
 		return featureTypeInfo;
 	}

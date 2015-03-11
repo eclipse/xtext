@@ -12,7 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.formallang.IGrammarAdapter;
+import org.eclipse.xtext.util.formallang.Production;
 
 import com.google.inject.ImplementedBy;
 
@@ -43,10 +43,10 @@ public interface IGrammarConstraintProvider {
 		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL, //
 		ASSIGNED_CROSSREF_ENUM_RULE_CALL, //
 		ASSIGNED_CROSSREF_TERMINAL_RULE_CALL, //
+		ASSIGNED_CROSSREF_KEYWORD, //
 		ASSIGNED_DATATYPE_RULE_CALL, //
 		ASSIGNED_ENUM_RULE_CALL, //
 		ASSIGNED_KEYWORD, //
-		ASSIGNED_BOOLEAN_KEYWORD, //
 		ASSIGNED_PARSER_RULE_CALL, //
 		ASSIGNED_TERMINAL_RULE_CALL, //
 		GROUP,
@@ -97,6 +97,8 @@ public interface IGrammarConstraintProvider {
 		 */
 		String getName();
 
+		String getSimpleName();
+
 		/**
 		 * @return This constraint only applies to EObjects of this type.
 		 */
@@ -129,46 +131,66 @@ public interface IGrammarConstraintProvider {
 		String getName();
 	}
 
+	public class ConstraintElementProduction implements Production<IConstraintElement, AbstractElement> {
+
+		protected IConstraint root;
+
+		public ConstraintElementProduction(IConstraint root) {
+			super();
+			this.root = root;
+		}
+
+		@Override
+		public Iterable<IConstraintElement> getAlternativeChildren(IConstraintElement ele) {
+			if (ele.getType() == ConstraintElementType.ALTERNATIVE)
+				return ele.getChildren();
+			return null;
+		}
+
+		@Override
+		public Iterable<IConstraintElement> getSequentialChildren(IConstraintElement ele) {
+			if (ele.getType() == ConstraintElementType.GROUP)
+				return ele.getChildren();
+			return null;
+		}
+
+		@Override
+		public AbstractElement getToken(IConstraintElement ele) {
+			if (ele.getType() != ConstraintElementType.ALTERNATIVE && ele.getType() != ConstraintElementType.GROUP)
+				return ele.getGrammarElement();
+			return null;
+		}
+
+		@Override
+		public Iterable<IConstraintElement> getUnorderedChildren(IConstraintElement ele) {
+			return null;
+		}
+
+		@Override
+		public boolean isMany(IConstraintElement ele) {
+			return ele.isMany();
+		}
+
+		@Override
+		public boolean isOptional(IConstraintElement ele) {
+			return ele.isOptional();
+		}
+
+		@Override
+		public IConstraintElement getParent(IConstraintElement ele) {
+			return ele.getContainer();
+		}
+
+		@Override
+		public IConstraintElement getRoot() {
+			return root.getBody();
+		}
+	}
+
 	/**
 	 * IConstraintElements form a tree that is in fact a view on the grammar's AbstractElements.
 	 */
 	public interface IConstraintElement {
-
-		static IGrammarAdapter<IConstraintElement, AbstractElement> ADAPTER = new IGrammarAdapter<IConstraintElement, AbstractElement>() {
-			public Iterable<IConstraintElement> getAlternativeChildren(IConstraintElement ele) {
-				if (ele.getType() == ConstraintElementType.ALTERNATIVE)
-					return ele.getChildren();
-				return null;
-			}
-
-			public Iterable<IConstraintElement> getSequentialChildren(IConstraintElement ele) {
-				if (ele.getType() == ConstraintElementType.GROUP)
-					return ele.getChildren();
-				return null;
-			}
-
-			public AbstractElement getToken(IConstraintElement ele) {
-				if (ele.getType() != ConstraintElementType.ALTERNATIVE && ele.getType() != ConstraintElementType.GROUP)
-					return ele.getGrammarElement();
-				return null;
-			}
-
-			public Iterable<IConstraintElement> getUnorderedChildren(IConstraintElement ele) {
-				return null;
-			}
-
-			public boolean isMany(IConstraintElement ele) {
-				return ele.isMany();
-			}
-
-			public boolean isOptional(IConstraintElement ele) {
-				return ele.isOptional();
-			}
-
-			public IConstraintElement getParent(IConstraintElement ele) {
-				return ele.getContainer();
-			}
-		};
 
 		// valid for *_ACTION_CALL
 		Action getAction();
@@ -241,6 +263,8 @@ public interface IGrammarConstraintProvider {
 	public interface IFeatureInfo {
 
 		IConstraintElement[] getAssignments();
+
+		List<EObject> getCalledContexts();
 
 		IConstraint getContainingConstraint();
 

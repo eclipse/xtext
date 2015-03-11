@@ -21,7 +21,8 @@ public class Regions {
 	 * Returns a predicate  which returns <code>true</code> if the passed range and the region passed to the predicate overlap. Returns <code>false</code> if one of the
 	 * arguments is <code>null</code>. Based on {@link TextUtilities#overlaps(IRegion, IRegion)}
 	 *
-	 * @param the region
+	 * @param  offset range offset
+	 * @param  length range length
 	 * @return the predicate
 	 */
 	public static Predicate<? super IRegion> overlaps(final int offset, final int length) {
@@ -32,11 +33,12 @@ public class Regions {
 	 * Returns a predicate  which returns <code>true</code> if the passed region and the one passed to the predicate overlap. Returns <code>false</code> if one of the
 	 * arguments is <code>null</code>. Based on {@link TextUtilities#overlaps(IRegion, IRegion)}
 	 *
-	 * @param the region
+	 * @param region to work with
 	 * @return the predicate
 	 */
 	public static Predicate<? super IRegion> overlaps(final IRegion region) {
 		return new Predicate<IRegion>() {
+			@Override
 			public boolean apply(IRegion input) {
 				return TextUtilities.overlaps(region, input);
 			}

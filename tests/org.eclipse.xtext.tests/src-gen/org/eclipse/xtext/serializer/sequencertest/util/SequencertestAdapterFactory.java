@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.util;
 
@@ -15,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
@@ -24,7 +22,10 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -38,6 +39,16 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -231,6 +242,76 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseFloat(org.eclipse.xtext.serializer.sequencertest.Float object)
       {
         return createFloatAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternative(UnorderedAlternative object)
+      {
+        return createUnorderedAlternativeAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeVal(UnorderedAlternativeVal object)
+      {
+        return createUnorderedAlternativeValAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeValDelegate(UnorderedAlternativeValDelegate object)
+      {
+        return createUnorderedAlternativeValDelegateAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeVal2(UnorderedAlternativeVal2 object)
+      {
+        return createUnorderedAlternativeVal2Adapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroup(UnorderedGroup object)
+      {
+        return createUnorderedGroupAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupVal(UnorderedGroupVal object)
+      {
+        return createUnorderedGroupValAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupValDelegate(UnorderedGroupValDelegate object)
+      {
+        return createUnorderedGroupValDelegateAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupVal2(UnorderedGroupVal2 object)
+      {
+        return createUnorderedGroupVal2Adapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupOptional(UnorderedGroupOptional object)
+      {
+        return createUnorderedGroupOptionalAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupBoolean(UnorderedGroupBoolean object)
+      {
+        return createUnorderedGroupBooleanAdapter();
+      }
+      @Override
+      public Adapter caseComplex1(Complex1 object)
+      {
+        return createComplex1Adapter();
+      }
+      @Override
+      public Adapter caseOptionalDouble(OptionalDouble object)
+      {
+        return createOptionalDoubleAdapter();
+      }
+      @Override
+      public Adapter caseNullValue(NullValue object)
+      {
+        return createNullValueAdapter();
+      }
+      @Override
+      public Adapter caseNullCrossRef(NullCrossRef object)
+      {
+        return createNullCrossRefAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -640,6 +721,216 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFloatAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative <em>Unordered Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal <em>Unordered Alternative Val</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeValAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate <em>Unordered Alternative Val Delegate</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeValDelegateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2 <em>Unordered Alternative Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeVal2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup
+   * @generated
+   */
+  public Adapter createUnorderedGroupAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal <em>Unordered Group Val</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal
+   * @generated
+   */
+  public Adapter createUnorderedGroupValAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate <em>Unordered Group Val Delegate</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate
+   * @generated
+   */
+  public Adapter createUnorderedGroupValDelegateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2 <em>Unordered Group Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2
+   * @generated
+   */
+  public Adapter createUnorderedGroupVal2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional <em>Unordered Group Optional</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional
+   * @generated
+   */
+  public Adapter createUnorderedGroupOptionalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean <em>Unordered Group Boolean</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean
+   * @generated
+   */
+  public Adapter createUnorderedGroupBooleanAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.Complex1 <em>Complex1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1
+   * @generated
+   */
+  public Adapter createComplex1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble <em>Optional Double</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.OptionalDouble
+   * @generated
+   */
+  public Adapter createOptionalDoubleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.NullValue <em>Null Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullValue
+   * @generated
+   */
+  public Adapter createNullValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef <em>Null Cross Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullCrossRef
+   * @generated
+   */
+  public Adapter createNullCrossRefAdapter()
   {
     return null;
   }

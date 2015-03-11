@@ -72,13 +72,13 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 			}
 			if (left.equals(right)) {
 				String partitionContent = document.get(partition.getOffset(), partition.getLength());
-				if (count(left, partitionContent) % 2 == 1)
+				if (count(left, partitionContent) % 2 != 0)
 					return;
 				IRegion currentLine = document.getLineInformationOfOffset(command.offset);
 				if (partition.getOffset() == command.offset && 
 						partition.getOffset() + partition.getLength() > currentLine.getOffset() + currentLine.getLength()) {
 					String trailingLine = document.get(command.offset, currentLine.getLength() - (command.offset - currentLine.getOffset()));
-					if (count(left, trailingLine) % 2 == 1)
+					if (count(left, trailingLine) % 2 != 0)
 						return;
 				}
 			}

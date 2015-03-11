@@ -1,0 +1,4 @@
+<YYINITIAL> {DECIMAL_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+<YYINITIAL> {COMMENT_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+
+

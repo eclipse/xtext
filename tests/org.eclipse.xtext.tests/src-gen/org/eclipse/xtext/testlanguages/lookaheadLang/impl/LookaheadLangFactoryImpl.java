@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.lookaheadLang.impl;
 
@@ -33,7 +30,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
   {
     try
     {
-      LookaheadLangFactory theLookaheadLangFactory = (LookaheadLangFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/LookaheadLang"); 
+      LookaheadLangFactory theLookaheadLangFactory = (LookaheadLangFactory)EPackage.Registry.INSTANCE.getEFactory(LookaheadLangPackage.eNS_URI);
       if (theLookaheadLangFactory != null)
       {
         return theLookaheadLangFactory;

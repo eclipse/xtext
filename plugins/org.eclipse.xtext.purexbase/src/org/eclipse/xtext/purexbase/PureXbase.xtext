@@ -4,17 +4,11 @@ generate pureXbase "http://www.eclipse.org/xtext/purexbase/PureXbase"
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 Model:
-	block=SpecialBlockExpression;
+	importSection=XImportSection? block=SpecialBlockExpression;
 	
 SpecialBlockExpression returns xbase::XBlockExpression:
-	{SpecialBlockExpression}
-	((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*
-;
+	{xbase::XBlockExpression}
+	(expressions+=XExpressionOrVarDeclaration ';'?)*;
 
-Import :
-	'import' importedNamespace=QualifiedNameWithWildCard
-;
-
-QualifiedNameWithWildCard : 
-	QualifiedName ('.*')?
-;
+FeatureCallID:
+	ValidID;

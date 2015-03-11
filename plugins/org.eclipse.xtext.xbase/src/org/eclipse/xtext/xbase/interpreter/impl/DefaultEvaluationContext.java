@@ -30,12 +30,14 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 		this.parent = parent;
 	}
 
+	@Override
 	public Object getValue(QualifiedName qualifiedName) {
 		if (values != null && values.containsKey(qualifiedName))
 			return values.get(qualifiedName);
 		return parent.getValue(qualifiedName);
 	}
 
+	@Override
 	public void newValue(QualifiedName qualifiedName, Object value) {
 		if (values == null)
 			values = Maps.newHashMap();
@@ -44,6 +46,7 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 		values.put(qualifiedName, value);
 	}
 	
+	@Override
 	public void assignValue(QualifiedName qualifiedName, Object value) {
 		if (values == null || !values.containsKey(qualifiedName))
 			parent.assignValue(qualifiedName, value);
@@ -51,6 +54,7 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 			values.put(qualifiedName, value);
 	}
 
+	@Override
 	public IEvaluationContext fork() {
 		return new DefaultEvaluationContext(this);
 	}

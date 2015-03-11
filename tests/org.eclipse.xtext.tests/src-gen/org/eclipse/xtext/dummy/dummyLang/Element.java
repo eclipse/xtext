@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.dummy.dummyLang;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.Element#isOptional <em>Optional</em>}</li>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.dummy.dummyLang.Element#getDescriptions <em>Descriptions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.dummy.dummyLang.DummyLangPackage#getElement()
  * @model

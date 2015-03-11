@@ -16,40 +16,49 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(boolean restriction, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate FOR Grammar»
-	«EXPAND PartialContentAssistParser»
+«DEFINE generate(boolean restriction, boolean hasIDE) FOR Grammar»
+	«EXPAND PartialContentAssistParser(restriction, hasIDE)»
 «ENDDEFINE»
 
 
-«DEFINE PartialContentAssistParser FOR Grammar»
-«FILE partialParser().asPath()+".java" SRC_GEN_UI-»
-/*
- «fileHeader()»
- */
+«DEFINE PartialContentAssistParser(boolean restriction, boolean hasIDE) FOR Grammar»
+«FILE partialParser().asPath()+".java" SRC_GEN_IDE-»
+«fileHeader()»
 package «partialParser().toJavaPackage()»;
 
+«annotationImports()-»
 import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.AbstractRule;
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ELSE-»
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ENDIF-»
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
+/*
+ * Template CodetemplatesGeneratorFragment.xpt
  */
-public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements IPartialContentAssistParser {
+«IF restriction-»
+@SuppressWarnings("restriction")
+«ENDIF-»
+«classAnnotations()»public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements «IF hasIDE»IPartialEditingContentAssistParser«ELSE»IPartialContentAssistParser«ENDIF» {
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

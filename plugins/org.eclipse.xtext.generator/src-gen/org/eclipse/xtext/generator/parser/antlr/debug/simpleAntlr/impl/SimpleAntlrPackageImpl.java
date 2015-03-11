@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
@@ -9,7 +6,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
@@ -178,7 +177,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   *
+   * 
    * <p>This method is used to initialize {@link SimpleAntlrPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -206,7 +205,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     // Mark meta-data to indicate it can't be changed
     theSimpleAntlrPackage.freeze();
 
-
+  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimpleAntlrPackage.eNS_URI, theSimpleAntlrPackage);
     return theSimpleAntlrPackage;
@@ -217,7 +216,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAntlrGrammar()
+  @Override
+public EClass getAntlrGrammar()
   {
     return antlrGrammarEClass;
   }
@@ -227,7 +227,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAntlrGrammar_Name()
+  @Override
+public EAttribute getAntlrGrammar_Name()
   {
     return (EAttribute)antlrGrammarEClass.getEStructuralFeatures().get(0);
   }
@@ -237,7 +238,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAntlrGrammar_Options()
+  @Override
+public EReference getAntlrGrammar_Options()
   {
     return (EReference)antlrGrammarEClass.getEStructuralFeatures().get(1);
   }
@@ -247,7 +249,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAntlrGrammar_Rules()
+  @Override
+public EReference getAntlrGrammar_Rules()
   {
     return (EReference)antlrGrammarEClass.getEStructuralFeatures().get(2);
   }
@@ -257,7 +260,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOptions()
+  @Override
+public EClass getOptions()
   {
     return optionsEClass;
   }
@@ -267,7 +271,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOptions_OptionValues()
+  @Override
+public EReference getOptions_OptionValues()
   {
     return (EReference)optionsEClass.getEStructuralFeatures().get(0);
   }
@@ -277,7 +282,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOptionValue()
+  @Override
+public EClass getOptionValue()
   {
     return optionValueEClass;
   }
@@ -287,7 +293,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOptionValue_Key()
+  @Override
+public EAttribute getOptionValue_Key()
   {
     return (EAttribute)optionValueEClass.getEStructuralFeatures().get(0);
   }
@@ -297,7 +304,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOptionValue_Value()
+  @Override
+public EAttribute getOptionValue_Value()
   {
     return (EAttribute)optionValueEClass.getEStructuralFeatures().get(1);
   }
@@ -307,7 +315,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRule()
+  @Override
+public EClass getRule()
   {
     return ruleEClass;
   }
@@ -317,7 +326,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRule_Fragment()
+  @Override
+public EAttribute getRule_Fragment()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
   }
@@ -327,7 +337,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRule_Name()
+  @Override
+public EAttribute getRule_Name()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
   }
@@ -337,7 +348,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRule_Body()
+  @Override
+public EReference getRule_Body()
   {
     return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
@@ -347,7 +359,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleElement()
+  @Override
+public EClass getRuleElement()
   {
     return ruleElementEClass;
   }
@@ -357,7 +370,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPredicated()
+  @Override
+public EClass getPredicated()
   {
     return predicatedEClass;
   }
@@ -367,7 +381,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPredicated_Predicate()
+  @Override
+public EReference getPredicated_Predicate()
   {
     return (EReference)predicatedEClass.getEStructuralFeatures().get(0);
   }
@@ -377,7 +392,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPredicated_Element()
+  @Override
+public EReference getPredicated_Element()
   {
     return (EReference)predicatedEClass.getEStructuralFeatures().get(1);
   }
@@ -387,7 +403,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleOptions()
+  @Override
+public EClass getRuleOptions()
   {
     return ruleOptionsEClass;
   }
@@ -397,7 +414,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRuleOptions_Options()
+  @Override
+public EReference getRuleOptions_Options()
   {
     return (EReference)ruleOptionsEClass.getEStructuralFeatures().get(0);
   }
@@ -407,7 +425,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRuleOptions_Element()
+  @Override
+public EReference getRuleOptions_Element()
   {
     return (EReference)ruleOptionsEClass.getEStructuralFeatures().get(1);
   }
@@ -417,7 +436,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleCall()
+  @Override
+public EClass getRuleCall()
   {
     return ruleCallEClass;
   }
@@ -427,7 +447,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRuleCall_Rule()
+  @Override
+public EAttribute getRuleCall_Rule()
   {
     return (EAttribute)ruleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -437,7 +458,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getKeyword()
+  @Override
+public EClass getKeyword()
   {
     return keywordEClass;
   }
@@ -447,7 +469,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getKeyword_Value()
+  @Override
+public EAttribute getKeyword_Value()
   {
     return (EAttribute)keywordEClass.getEStructuralFeatures().get(0);
   }
@@ -457,7 +480,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWildcard()
+  @Override
+public EClass getWildcard()
   {
     return wildcardEClass;
   }
@@ -467,7 +491,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAlternatives()
+  @Override
+public EClass getAlternatives()
   {
     return alternativesEClass;
   }
@@ -477,7 +502,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAlternatives_Groups()
+  @Override
+public EReference getAlternatives_Groups()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
   }
@@ -487,7 +513,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGroup()
+  @Override
+public EClass getGroup()
   {
     return groupEClass;
   }
@@ -497,7 +524,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGroup_Elements()
+  @Override
+public EReference getGroup_Elements()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
@@ -507,7 +535,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElementWithCardinality()
+  @Override
+public EClass getElementWithCardinality()
   {
     return elementWithCardinalityEClass;
   }
@@ -517,7 +546,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElementWithCardinality_Element()
+  @Override
+public EReference getElementWithCardinality_Element()
   {
     return (EReference)elementWithCardinalityEClass.getEStructuralFeatures().get(0);
   }
@@ -527,7 +557,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElementWithCardinality_Cardinality()
+  @Override
+public EAttribute getElementWithCardinality_Cardinality()
   {
     return (EAttribute)elementWithCardinalityEClass.getEStructuralFeatures().get(1);
   }
@@ -537,7 +568,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNegatedElement()
+  @Override
+public EClass getNegatedElement()
   {
     return negatedElementEClass;
   }
@@ -547,7 +579,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNegatedElement_Element()
+  @Override
+public EReference getNegatedElement_Element()
   {
     return (EReference)negatedElementEClass.getEStructuralFeatures().get(0);
   }
@@ -557,7 +590,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUntilElement()
+  @Override
+public EClass getUntilElement()
   {
     return untilElementEClass;
   }
@@ -567,7 +601,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUntilElement_Left()
+  @Override
+public EReference getUntilElement_Left()
   {
     return (EReference)untilElementEClass.getEStructuralFeatures().get(0);
   }
@@ -577,7 +612,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUntilElement_Right()
+  @Override
+public EReference getUntilElement_Right()
   {
     return (EReference)untilElementEClass.getEStructuralFeatures().get(1);
   }
@@ -587,7 +623,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSkip()
+  @Override
+public EClass getSkip()
   {
     return skipEClass;
   }
@@ -597,7 +634,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleAntlrFactory getSimpleAntlrFactory()
+  @Override
+public SimpleAntlrFactory getSimpleAntlrFactory()
   {
     return (SimpleAntlrFactory)getEFactoryInstance();
   }

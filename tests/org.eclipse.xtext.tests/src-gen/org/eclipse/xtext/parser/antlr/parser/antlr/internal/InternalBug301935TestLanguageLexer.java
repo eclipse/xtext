@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug301935TestLanguageLexer extends Lexer {
-    public static final int T__7=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=5;
-    public static final int T__8=8;
-    public static final int EOF=-1;
     public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_WS=5;
+    public static final int EOF=-1;
+    public static final int T__8=8;
+    public static final int T__7=7;
 
     // delegates
     // delegators
@@ -288,8 +288,7 @@ public class InternalBug301935TestLanguageLexer extends Lexer {
     static final String DFA4_specialS =
         "\1\0\12\uffff}>";
     static final String[] DFA4_transitionS = {
-            "\11\6\1\5\1\2\2\6\1\1\22\6\1\5\40\6\32\4\3\6\1\3\1\4\1\6\32"+
-            "\4\uff85\6",
+            "\11\6\1\5\1\2\2\6\1\1\22\6\1\5\40\6\32\4\3\6\1\3\1\4\1\6\32\4\uff85\6",
             "",
             "",
             "\32\11\4\uffff\1\11\1\uffff\32\11",
@@ -318,7 +317,7 @@ public class InternalBug301935TestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA4 extends DFA {
+    static class DFA4 extends DFA {
 
         public DFA4(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

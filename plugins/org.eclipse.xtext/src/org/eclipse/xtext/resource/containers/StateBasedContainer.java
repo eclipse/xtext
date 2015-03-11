@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource.containers;
 
 import static java.util.Collections.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
@@ -37,6 +40,23 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	public StateBasedContainer(IResourceDescriptions descriptions, IContainerState state) {
 		super(descriptions);
 		this.state = state;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			private Collection<URI> contents = null;
+
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				if(contents == null) {
+					contents = state.getContents();
+				}
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				final boolean contains = contents.contains(resourceURI);
+				return contains;
+			}
+		});
 	}
 
 	@Override
@@ -105,6 +125,14 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		if (state.getContents().isEmpty())
 			return emptyList();
 		return super.getExportedObjects(type, qualifiedName, ignoreCase);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public String toString() {
+		return "["+getClass().getSimpleName()+"] "+ state;
 	}
 
 }

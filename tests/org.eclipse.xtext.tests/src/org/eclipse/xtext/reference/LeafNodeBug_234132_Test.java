@@ -8,17 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class LeafNodeBug_234132_Test extends AbstractXtextTests {
 	
-    public void testLeafNodeBug() throws Exception {
+    @Test public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
         ICompositeNode rootNode = getRootNodeAndExpect(model, 1);

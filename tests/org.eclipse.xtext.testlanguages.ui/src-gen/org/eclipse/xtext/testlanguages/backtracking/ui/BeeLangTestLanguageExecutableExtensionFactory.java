@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class BeeLangTestLanguageExecutableExtensionFactory extends AbstractGuice
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator.getInstance().getBundle();
+		return BeeLangTestLanguageActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator.getInstance().getInjector("org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage");
+		return BeeLangTestLanguageActivator.getInstance().getInjector(BeeLangTestLanguageActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE);
 	}
 	
 }

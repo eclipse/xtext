@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.foo;
 
@@ -14,10 +11,10 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AModel;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.CallOverridenParserRule#getCall <em>Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.grammarinheritance.foo.FooPackage#getCallOverridenParserRule()
  * @model

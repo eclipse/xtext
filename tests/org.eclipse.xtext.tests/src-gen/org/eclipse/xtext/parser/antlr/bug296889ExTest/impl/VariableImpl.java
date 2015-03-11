@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug296889ExTest.impl;
 
@@ -20,10 +17,10 @@ import org.eclipse.xtext.parser.antlr.bug296889ExTest.Variable;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889ExTest.impl.VariableImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

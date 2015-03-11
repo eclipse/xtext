@@ -55,6 +55,9 @@ public class Calculator {
 		return e.getValue();
 	}
 	
+	/**
+	 * @param values the currently known values by name 
+	 */
 	protected BigDecimal internalEvaluate(FunctionCall e, ImmutableMap<String,BigDecimal> values) {
 		if (e.getFunc() instanceof DeclaredParameter) {
 			return values.get(e.getFunc().getName());

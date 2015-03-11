@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest;
 
@@ -258,6 +255,132 @@ public interface SequencertestFactory extends EFactory
    * @generated
    */
   Float createFloat();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative</em>'.
+   * @generated
+   */
+  UnorderedAlternative createUnorderedAlternative();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val</em>'.
+   * @generated
+   */
+  UnorderedAlternativeVal createUnorderedAlternativeVal();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val Delegate</em>'.
+   * @generated
+   */
+  UnorderedAlternativeValDelegate createUnorderedAlternativeValDelegate();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val2</em>'.
+   * @generated
+   */
+  UnorderedAlternativeVal2 createUnorderedAlternativeVal2();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group</em>'.
+   * @generated
+   */
+  UnorderedGroup createUnorderedGroup();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val</em>'.
+   * @generated
+   */
+  UnorderedGroupVal createUnorderedGroupVal();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val Delegate</em>'.
+   * @generated
+   */
+  UnorderedGroupValDelegate createUnorderedGroupValDelegate();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val2</em>'.
+   * @generated
+   */
+  UnorderedGroupVal2 createUnorderedGroupVal2();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Optional</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Optional</em>'.
+   * @generated
+   */
+  UnorderedGroupOptional createUnorderedGroupOptional();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Boolean</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Boolean</em>'.
+   * @generated
+   */
+  UnorderedGroupBoolean createUnorderedGroupBoolean();
+
+  /**
+   * Returns a new object of class '<em>Complex1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Complex1</em>'.
+   * @generated
+   */
+  Complex1 createComplex1();
+
+  /**
+   * Returns a new object of class '<em>Optional Double</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Optional Double</em>'.
+   * @generated
+   */
+  OptionalDouble createOptionalDouble();
+
+  /**
+   * Returns a new object of class '<em>Null Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Null Value</em>'.
+   * @generated
+   */
+  NullValue createNullValue();
+
+  /**
+   * Returns a new object of class '<em>Null Cross Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Null Cross Ref</em>'.
+   * @generated
+   */
+  NullCrossRef createNullCrossRef();
 
   /**
    * Returns the package supported by this factory.

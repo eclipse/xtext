@@ -16,42 +16,96 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE addToPluginXmlRt(Boolean generatorStub, Boolean mwe, Boolean javaMain) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(Boolean generatorStub, Boolean mwe, Boolean javaMain, Boolean xtendMain) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(Boolean generatorStub, Boolean mwe, Boolean javaMain) FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean generatorStub, Boolean mwe, Boolean javaMain, boolean xtendMain, List[String] fileExtensions) FOR Grammar»
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="«fileExtensions.toString(',')»"
+            >
       </participant>
    </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="«name»"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="«name».compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="«name»"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="«name».compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="«name».OpenGeneratedCode"
+				style="push">
+					<visibleWhen checkEnabled="false">
+						<reference definitionId="«name».Editor.opened" />
+					</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+				<activeWhen>
+					<reference definitionId="«name».Editor.opened" />
+				</activeWhen>
+		</handler>
+	</extension>
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(Boolean generatorStub, Boolean mwe, Boolean javaMain) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(Boolean generatorStub, Boolean mwe, Boolean javaMain, Boolean xtendMain) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate(Boolean generatorStub, Boolean mwe, Boolean javaMain) FOR Grammar»
+«DEFINE generate(Boolean generatorStub, Boolean mwe, Boolean javaMain, boolean xtendMain) FOR Grammar»
 «IF generatorStub»
 «FILE generatorName().asPath()+".xtend" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «generatorName().toJavaPackage()»
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
 
+/**
+ * Generates code from your model files on save.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
+ */
 class «generatorName().toSimpleName()» implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		//TODO implment me
+//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
+//			resource.allContents
+//				.filter(typeof(Greeting))
+//				.map[name]
+//				.join(', '))
 	}
 }
 «ENDFILE»
 «ENDIF»
 
 «IF mwe»
-«FILE generatorName().asPath()+"MWE.mwe2" SRC»
+«FILE generatorName().asPath()+"MWE.mwe2" SRC-»
 module «generatorName()»MWE
 
 import org.eclipse.emf.mwe.utils.*
@@ -87,10 +141,8 @@ Workflow {
 «ENDIF»
 
 «IF javaMain»
-«FILE generatorName().toJavaPackage().asPath()+"/Main.java" SRC»
-/*
- «fileHeader()»
- */
+«FILE generatorName().toJavaPackage().asPath()+"/Main.java" SRC-»
+«fileHeader()»
 package «generatorName().toJavaPackage()»;
 
 import java.util.List;
@@ -116,7 +168,7 @@ public class Main {
 			System.err.println("Aborting: no path to EMF resource provided!");
 			return;
 		}
-		Injector injector = new «setupImpl()»().createInjectorAndDoEMFRegistration();
+		Injector injector = new «setup()»().createInjectorAndDoEMFRegistration();
 		Main main = injector.getInstance(Main.class);
 		main.runGenerator(args[0]);
 	}
@@ -152,6 +204,65 @@ public class Main {
 		generator.doGenerate(resource, fileAccess);
 		
 		System.out.println("Code generation finished.");
+	}
+}
+«ENDFILE»
+«ENDIF»
+
+«IF xtendMain»
+«FILE generatorName().toJavaPackage().asPath()+"/Main.xtend" SRC-»
+«fileHeader()»
+package «generatorName().toJavaPackage()»
+
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
+
+import com.google.inject.Inject
+import com.google.inject.Provider
+
+class Main {
+	
+	def static main(String[] args) {
+		if (args.empty) {
+			System::err.println('Aborting: no path to EMF resource provided!')
+			return
+		}
+		val injector = new «setup()»().createInjectorAndDoEMFRegistration
+		val main = injector.getInstance(typeof(Main))
+		main.runGenerator(args.get(0))
+	}
+	
+	@Inject Provider<ResourceSet> resourceSetProvider
+	
+	@Inject IResourceValidator validator
+	
+	@Inject IGenerator generator
+	
+	@Inject JavaIoFileSystemAccess fileAccess
+
+	def protected runGenerator(String string) {
+		// load the resource
+		val set = resourceSetProvider.get
+		val resource = set.getResource(URI::createURI(string), true)
+		
+		// validate the resource
+		val issues = validator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
+		if (!issues.isEmpty()) {
+			for (issue : issues) {
+				System::err.println(issue)
+			}
+			return
+		}
+		
+		// configure and start the generator
+		fileAccess.setOutputPath('src-gen/')
+		generator.doGenerate(resource, fileAccess)
+		System::out.println('Code generation finished.')
 	}
 }
 «ENDFILE»

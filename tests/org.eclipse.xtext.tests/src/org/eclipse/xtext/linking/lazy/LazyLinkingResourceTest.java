@@ -36,7 +36,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -54,6 +54,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -66,7 +67,7 @@ import com.google.inject.Injector;
  */
 public class LazyLinkingResourceTest extends AbstractXtextTests {
 
-    public void testEObjectReference() throws Exception {
+    @Test public void testEObjectReference() throws Exception {
         final EAnnotation source = EcoreFactory.eINSTANCE.createEAnnotation();
         final EObject referencedObject = XtextFactory.eINSTANCE.createGrammar();
 
@@ -90,7 +91,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
+            @Override
+			public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Lists.newArrayList(referencedObject);
             }
@@ -99,7 +101,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
         assertEquals(referencedObject, res.getEObject("foo"));
     }
     
-    public void testWarningInsteadOfError() throws Exception {
+    @Test public void testWarningInsteadOfError() throws Exception {
     	final EAnnotation source = EcoreFactory.eINSTANCE.createEAnnotation();
         LazyLinkingResource res = new LazyLinkingResource();
         res.setEncoder(new LazyURIEncoder() {
@@ -115,7 +117,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
+            @Override
+			public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Collections.emptyList();
             }
@@ -159,7 +162,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	}
     };
     
-    public void testResolveLazyCrossReferences() throws Exception {
+    @Test public void testResolveLazyCrossReferences() throws Exception {
     	with(testLangaugeSetup());
     	ResourceSetImpl rs = new ResourceSetImpl();
 		final Resource res1 = rs.createResource(URI.createURI("file1.indextestlanguage"));
@@ -179,6 +182,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		res1.eAdapters().add(notificationAlert);
 		
 		Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
+			@Override
 			public boolean apply(EObject input) {
 				return input instanceof Entity;
 			}
@@ -195,7 +199,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 	}
     
-    public void testResolveLazyCrossReferences_01() throws Exception {
+    @Test public void testResolveLazyCrossReferences_01() throws Exception {
     	with(testLangaugeSetup());
     	ResourceSetImpl rs = new ResourceSetImpl();
     	final Resource res1 = rs.createResource(URI.createURI("file1.indextestlanguage"));
@@ -215,7 +219,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     			+ "}"), null);
     	res1.eAdapters().add(notificationAlert);
     	Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
-    		public boolean apply(EObject input) {
+    		@Override
+			public boolean apply(EObject input) {
     			return input instanceof Entity;
     		}
     	});
@@ -250,7 +255,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	};
 	}
 
-	public void testResolveLazyCrossReferences_02() throws Exception {
+	@Test public void testResolveLazyCrossReferences_02() throws Exception {
 		with(lazyLinkingTestLangaugeSetup());
 		ResourceSetImpl rs = new ResourceSetImpl();
 		final Resource res1 = rs.createResource(URI.createURI("file1.lazylinkingtestlanguage"));

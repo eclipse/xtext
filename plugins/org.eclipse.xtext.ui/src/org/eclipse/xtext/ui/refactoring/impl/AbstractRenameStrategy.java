@@ -14,58 +14,66 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 
 /**
+ * Base class for all {@link IRenameStrategy} implementations. Performs the declaration updates on a semantic EMF model.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractRenameStrategy implements IRenameStrategy {
+public abstract class AbstractRenameStrategy implements DefaultRenameStrategyProvider.IInitializable {
 
 	private String originalName;
 	private URI targetElementOriginalURI;
 	private URI targetElementNewURI;
 	private EAttribute nameAttribute;
-
-	protected AbstractRenameStrategy(EObject targetElement, EAttribute nameAttribute) {
-		this.nameAttribute = nameAttribute;
+	
+	@Override
+	public boolean initialize(EObject targetElement, IRenameElementContext context) {
+		this.nameAttribute = getNameAttribute(targetElement);
+		if(nameAttribute == null)
+			return false;
 		this.targetElementOriginalURI = EcoreUtil.getURI(targetElement);
 		this.originalName = targetElement.eGet(nameAttribute).toString();
-		if (Strings.isEmpty(originalName))
-			throw new RefactoringStatusException("Target element does not have a name", false);
+		return !Strings.isEmpty(originalName);
 	}
 
+	
+	@Override
 	public String getOriginalName() {
 		return originalName;
 	}
 
+	@Override
 	public RefactoringStatus validateNewName(String newName) {
-		//TODO: Validate if name is valid in the meaning of the DataTypeRule / Terminal
-		RefactoringStatus newRefactoringStatus = new RefactoringStatus();
-		if (Strings.equal(newName, originalName))
-			newRefactoringStatus.addWarning("Name should be different");
-		return newRefactoringStatus;
+		RefactoringStatus status = new RefactoringStatus();
+		return status;
 	}
 
+	@Override
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		EObject renamedElement = setName(targetElementOriginalURI, newName, resourceSet);
 		targetElementNewURI = EcoreUtil.getURI(renamedElement);
 	}
 
+	@Override
 	public void revertDeclarationChange(ResourceSet resourceSet) {
-		if(targetElementNewURI == null)
+		if (targetElementNewURI == null)
 			return;
 		setName(targetElementNewURI, originalName, resourceSet);
 	}
-	
+
 	protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
 		EObject targetElement = resourceSet.getEObject(targetElementURI, false);
-		if(targetElement == null) {
-			throw new RefactoringStatusException("Target element not loaded.", true);
+		if (targetElement == null) {
+			throw new RefactoringException("Target element not loaded.");
 		}
-		targetElement.eSet(getNameAttribute(), newName);
+		targetElement.eSet(nameAttribute, newName);
 		return targetElement;
 	}
-	
+
 	protected URI getTargetElementOriginalURI() {
 		return targetElementOriginalURI;
 	}
@@ -74,6 +82,10 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		return targetElementNewURI;
 	}
 
+	protected EAttribute getNameAttribute(EObject targetElement) {
+		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(targetElement);
+	}
+	
 	protected EAttribute getNameAttribute() {
 		return nameAttribute;
 	}

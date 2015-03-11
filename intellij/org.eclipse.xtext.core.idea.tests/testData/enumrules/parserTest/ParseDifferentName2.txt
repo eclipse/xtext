@@ -1,0 +1,6 @@
+org.eclipse.xtext.enumrules.idea.lang.psi.impl.EnumRulesTestLanguageFileImpl:a.enumrulestestlanguage(0,26)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,26)
+    PsiElement(Model_GeneratedKeyword_1_0_ELEMENT_TYPE)('generated')(0,9)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_GeneratedGeneratedEnumEnumRuleCall_1_1_0_ELEMENT_TYPE)(9,26)
+      PsiWhiteSpace(' ')(9,10)
+      PsiElement(GeneratedEnum_DifferentNameEnumLiteralDeclaration_1_ELEMENT_TYPE)('DifferentLiteral')(10,26)

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<setup:ComponentExtension setup:toolVersion="8" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:setup="http://www.eclipse.org/CDO/releng/setup/1.0">
+  <dependencies id="org.eclipse.xtext.compatibility.galileo"/>
+  <dependencies id="org.eclipse.xtext.language-generator"/>
+</setup:ComponentExtension>

@@ -45,6 +45,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		this.converterService = converterService;
 	}
 
+	@Override
 	public EObject create(EClassifier classifier) {
 		if (classifier == null)
 			throw new NullPointerException("Classifier may not be null.");
@@ -58,6 +59,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
+	@Override
 	public void set(EObject object, String feature, Object value, String ruleName, INode node) throws ValueConverterException {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
@@ -71,6 +73,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			final Object tokenValue = e.getValue();
 			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
 			object.eSet(structuralFeature, tokenValue);
+			throw e;
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
@@ -95,6 +98,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		return tokenOrValue;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public void add(EObject object, String feature, Object value, String ruleName, INode node) throws ValueConverterException {
 		if (value == null)

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.lazyLinking.impl;
 
@@ -28,11 +25,11 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

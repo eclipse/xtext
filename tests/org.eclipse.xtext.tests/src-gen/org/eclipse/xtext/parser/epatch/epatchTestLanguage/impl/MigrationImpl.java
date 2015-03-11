@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -24,12 +21,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Migration;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getAsOp <em>As Op</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getEachOp <em>Each Op</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

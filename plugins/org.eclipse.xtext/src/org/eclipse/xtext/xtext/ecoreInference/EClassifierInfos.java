@@ -15,10 +15,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
@@ -125,6 +127,8 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfo getInfoOrNull(EClassifier eClassifier) {
+		if (eClassifier == null)
+			return null;
 		for (EClassifierInfo info : infoMap.values()) {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;
@@ -146,7 +150,7 @@ public class EClassifierInfos {
 					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + infoA + ", "
 							+ infoB + ")");
 
-		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier());
+		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier(), grammar);
 
 		return getInfoOrNull(compatibleType);
 	}
@@ -175,8 +179,7 @@ public class EClassifierInfos {
 		final EClassifierInfo compatibleType = getCompatibleTypeOf(types);
 		if (compatibleType != null)
 			return compatibleType.getEClassifier();
-
-		return EcorePackage.Literals.EOBJECT;
+		return GrammarUtil.findEObject(grammar);
 	}
 
 	public List<EClassInfo> getAllEClassInfos() {
@@ -190,7 +193,21 @@ public class EClassifierInfos {
 
 	public List<EClassInfo> getSuperTypeInfos(EClassInfo subTypeInfo) throws UnexpectedClassInfoException {
 		List<EClassInfo> result = new ArrayList<EClassInfo>();
-		for (EClass superType : subTypeInfo.getEClass().getESuperTypes()) {
+		List<EClass> superTypes = subTypeInfo.getEClass().getESuperTypes();
+		for (int i = 0; i < superTypes.size(); i++) {
+			EClass superType = superTypes.get(i);
+			if (superType.eIsProxy()) {
+				URI proxyURI = EcoreUtil.getURI(superType);
+				if (proxyURI.isPlatformResource()) {
+					String platformString = proxyURI.toPlatformString(true);
+					URI platformPluginURI = URI.createPlatformPluginURI(platformString, true).appendFragment(proxyURI.fragment());
+					EObject secondAttempt = subTypeInfo.getEClass().eResource().getResourceSet().getEObject(platformPluginURI, true);
+					if (secondAttempt instanceof EClass) {
+						superType = (EClass) secondAttempt;
+						superTypes.set(i, superType);
+					}
+				}
+			}
 			EClassifierInfo info = getInfoOrNull(superType);
 			if (info != null) {
 				if (info instanceof EClassInfo) {

@@ -55,11 +55,13 @@ import com.google.inject.Provider;
  */
 public class DefaultMergeViewer extends TextMergeViewer {
 	private final static IUnitOfWork<Boolean, XtextResource> TEST_EXISTING_XTEXT_RESOURCE = new IUnitOfWork<Boolean, XtextResource>() {
+		@Override
 		public Boolean exec(XtextResource xtextResource) throws Exception {
 			return xtextResource != null;
 		}
 	};
 	private static final IResourceProvider NULL_RESOURCE_PROVIDER = new IResourceProvider() {
+		@Override
 		public IResource getResource() {
 			return null;
 		}

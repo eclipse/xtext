@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Elementm
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl#isKw1 <em>Kw1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

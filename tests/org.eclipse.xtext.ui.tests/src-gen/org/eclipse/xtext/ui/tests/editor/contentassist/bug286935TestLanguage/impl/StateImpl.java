@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.impl;
 
@@ -22,6 +19,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.Sta
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.impl.StateImpl#isIsInitial <em>Is Initial</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.impl.StateImpl#isIsFinal <em>Is Final</em>}</li>
@@ -29,7 +27,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.Sta
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.impl.StateImpl#getStateName <em>State Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.impl.StateImpl#getLabel <em>Label</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

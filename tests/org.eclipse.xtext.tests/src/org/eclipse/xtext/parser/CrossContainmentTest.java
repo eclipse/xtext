@@ -12,12 +12,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.partialParsingTestUtil.CrossResourceContainerManyChildren;
 import org.eclipse.xtext.parser.partialParsingTestUtil.CrossResourceContainerOneChild;
 import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilFactory;
 import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilPackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,13 +26,13 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public class CrossContainmentTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		PartialParsingTestUtilPackage.eINSTANCE.eAdapters(); // initialize
 	}
 	
-	public void testCrossContainment_01() {
+	@Test public void testCrossContainment_01() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());
 		Resource resource = resourceSet.createResource(URI.createFileURI("container.xmi"));
@@ -47,7 +48,7 @@ public class CrossContainmentTest extends AbstractXtextTests {
 		assertSame(resource, container.eResource());
 	}
 	
-	public void testCrossContainment_02() {
+	@Test public void testCrossContainment_02() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());
 		Resource resource = resourceSet.createResource(URI.createFileURI("container.xmi"));

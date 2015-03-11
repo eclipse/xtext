@@ -21,7 +21,7 @@ public interface ISyntacticSequenceAcceptor extends ISemanticSequenceAcceptor {
 
 	void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node);
 
-	void acceptUnassignedKeyword(Keyword keyword, ILeafNode node);
+	void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node);
 
 	void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node);
 }

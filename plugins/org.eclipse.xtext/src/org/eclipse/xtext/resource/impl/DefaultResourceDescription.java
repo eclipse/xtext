@@ -60,7 +60,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	}
 
 	/**
-	 * For testing. Uses a {@link IResourceScopeCache.NullImpl}.
+	 * For testing. Uses a {@link org.eclipse.xtext.util.IResourceScopeCache.NullImpl}.
 	 */
 	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		this(resource, strategy, new IResourceScopeCache.NullImpl());
@@ -78,6 +78,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		}
 		final List<IEObjectDescription> exportedEObjects = newArrayList();
 		IAcceptor<IEObjectDescription> acceptor = new IAcceptor<IEObjectDescription>() {
+			@Override
 			public void accept(IEObjectDescription eObjectDescription) {
 				exportedEObjects.add(eObjectDescription);
 			}
@@ -91,6 +92,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return exportedEObjects;
 	}
 
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(getResource());
@@ -105,15 +107,18 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return resource;
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
 
-	private String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
+	private static final String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
 			+ "#getReferenceDescriptions";
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return cache.get(REFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<IReferenceDescription>>(){
+			@Override
 			public List<IReferenceDescription> get() {
 				return computeReferenceDescriptions();
 			}});
@@ -122,6 +127,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	protected List<IReferenceDescription> computeReferenceDescriptions() {
 		final List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
 		IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+			@Override
 			public void accept(IReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
 			}
@@ -140,7 +146,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	protected Map<EObject, IEObjectDescription> createEObject2ExportedEObjectsMap(
 			Iterable<IEObjectDescription> exportedObjects) {
-		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
+		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newIdentityHashMap();
 		for (IEObjectDescription eObjectDescription : exportedObjects) {
 			uri2exportedEObjects.put(eObjectDescription.getEObjectOrProxy(), eObjectDescription);
 		}
@@ -160,11 +166,12 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return null;
 	}
 
-	private String EOBJECT_LOOKUP_CACHE_KEY = DefaultReferenceDescription.class.getName() + "#getLookUp";
+	private static final String EOBJECT_LOOKUP_CACHE_KEY = DefaultReferenceDescription.class.getName() + "#getLookUp";
 
 	@Override
 	protected EObjectDescriptionLookUp getLookUp() {
 		return cache.get(EOBJECT_LOOKUP_CACHE_KEY, getResource(), new Provider<EObjectDescriptionLookUp>() {
+			@Override
 			public EObjectDescriptionLookUp get() {
 				if(lookup != null) 
 					lookup.setExportedObjects(computeExportedObjects());
@@ -173,5 +180,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				return lookup;
 			}
 		});
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + getClass().getSimpleName() + " uri=" + getURI() + "]";
 	}
 }

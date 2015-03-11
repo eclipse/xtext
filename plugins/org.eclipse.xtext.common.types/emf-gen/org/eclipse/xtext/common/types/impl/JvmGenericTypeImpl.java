@@ -1,11 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
-
-import java.lang.Iterable;
 
 import java.util.Collection;
 
@@ -22,11 +22,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -38,6 +36,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +76,46 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	protected boolean interface_ = INTERFACE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isStrictFloatingPoint() <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STRICT_FLOATING_POINT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStrictFloatingPoint() <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean strictFloatingPoint = STRICT_FLOATING_POINT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAnonymous() <em>Anonymous</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymous()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ANONYMOUS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAnonymous() <em>Anonymous</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymous()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean anonymous = ANONYMOUS_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -105,7 +145,7 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
+			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
 	}
@@ -138,11 +178,9 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmTypeReference> getExtendedInterfaces()
+	public boolean isStrictFloatingPoint()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return strictFloatingPoint;
 	}
 
 	/**
@@ -150,11 +188,12 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference getExtendedClass()
+	public void setStrictFloatingPoint(boolean newStrictFloatingPoint)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		boolean oldStrictFloatingPoint = strictFloatingPoint;
+		strictFloatingPoint = newStrictFloatingPoint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT, oldStrictFloatingPoint, strictFloatingPoint));
 	}
 
 	/**
@@ -162,11 +201,9 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isInstantiateable()
+	public boolean isAnonymous()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return anonymous;
 	}
 
 	/**
@@ -174,11 +211,12 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmConstructor> getDeclaredConstructors()
+	public void setAnonymous(boolean newAnonymous)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		boolean oldAnonymous = anonymous;
+		anonymous = newAnonymous;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS, oldAnonymous, anonymous));
 	}
 
 	/**
@@ -228,6 +266,10 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return getTypeParameters();
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				return isInterface();
+			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
+				return isStrictFloatingPoint();
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				return isAnonymous();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,6 +292,12 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				setInterface((Boolean)newValue);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
+				setStrictFloatingPoint((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				setAnonymous((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -270,6 +318,12 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				setInterface(INTERFACE_EDEFAULT);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
+				setStrictFloatingPoint(STRICT_FLOATING_POINT_EDEFAULT);
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				setAnonymous(ANONYMOUS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -288,6 +342,10 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return typeParameters != null && !typeParameters.isEmpty();
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				return interface_ != INTERFACE_EDEFAULT;
+			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
+				return strictFloatingPoint != STRICT_FLOATING_POINT_EDEFAULT;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				return anonymous != ANONYMOUS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -343,6 +401,10 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (interface: ");
 		result.append(interface_);
+		result.append(", strictFloatingPoint: ");
+		result.append(strictFloatingPoint);
+		result.append(", anonymous: ");
+		result.append(anonymous);
 		result.append(')');
 		return result.toString();
 	}

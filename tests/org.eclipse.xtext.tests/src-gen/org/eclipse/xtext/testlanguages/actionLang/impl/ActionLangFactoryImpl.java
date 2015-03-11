@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.actionLang.impl;
 
@@ -33,7 +30,7 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
   {
     try
     {
-      ActionLangFactory theActionLangFactory = (ActionLangFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/ActionLang"); 
+      ActionLangFactory theActionLangFactory = (ActionLangFactory)EPackage.Registry.INSTANCE.getEFactory(ActionLangPackage.eNS_URI);
       if (theActionLangFactory != null)
       {
         return theActionLangFactory;

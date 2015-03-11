@@ -22,10 +22,12 @@ public class EmptyBidiIterable<T> implements BidiIterable<T> {
 		return (EmptyBidiIterable<T>) INSTANCE;
 	}
 
+	@Override
 	public BidiIterator<T> iterator() {
 		return EmptyBidiIterator.instance();
 	}
 	
+	@Override
 	public BidiIterable<T> reverse() {
 		return null;
 	}

@@ -10,40 +10,56 @@ package org.eclipse.xtext.ui.refactoring;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Customizable strategy for the text based rename refactoring of a given {@link EObject}. 
+ * Customizable strategy for the text based rename refactoring of a given {@link EObject}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameStrategy {
 
 	String getOriginalName();
-	
+
 	RefactoringStatus validateNewName(String newName);
 
 	/**
 	 * Applies the declaration change to the semantic model in the given resource set.
 	 */
 	void applyDeclarationChange(String newName, ResourceSet resourceSet);
-	
+
 	/**
 	 * Reverts the declaration change to the semantic model in the given resource set.
 	 */
 	void revertDeclarationChange(ResourceSet resourceSet);
-	
+
 	/**
 	 * Creates the document updates and reports them to the updateAcceptor
-	 * @since 2.0
 	 */
 	void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor);
 
-	@ImplementedBy(DefaultRenameStrategy.Provider.class)
+	@ImplementedBy(DefaultRenameStrategyProvider.class)
 	interface Provider {
-		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext);
+		/**
+		 * @return an {@link IRenameStrategy} to rename the given target object 
+		 * 	or null if the element should be skipped (e.g. XtendConstructor)
+		 * @throws NoSuchStrategyException with a reason when refactoring is forbidden. 
+		 */
+		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException;
+		
+		/**
+		 * @since 2.4
+		 */
+		class NoSuchStrategyException extends Exception {
+			private static final long serialVersionUID = 5167954119728880001L;
+
+			public NoSuchStrategyException(String message) {
+				super(message);
+			}
+		}
 	}
+	
 }

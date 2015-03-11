@@ -20,7 +20,7 @@
     <template name="Operation" description="template for an Operation"
         id="org.eclipse.xtext.example.domainmodel.Domainmodel.Operation"
         context="org.eclipse.xtext.example.domainmodel.Domainmodel.Operation"
-        enabled="true">${visibility:Enum('Visibility')} op ${name} (${paramType1} ${paramName1}) : ${returnType} {
+        enabled="true">op ${name} (${paramType1} ${paramName1}) : ${returnType} {
 	${cursor}
 }</template>
 </templates>

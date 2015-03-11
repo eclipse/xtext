@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -15,7 +16,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		treeViewer.setExpandedElements(new Object[] { modelNode, oneNode });
 		treeViewer.setSelection(new StructuredSelection(fourNode));
@@ -23,7 +24,7 @@ public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchT
 		assertExpanded(treeViewer, modelNode, oneNode);
 	}
 
-	public void testChangeOtherNode() throws Exception {
+	@Test public void testChangeOtherNode() throws Exception {
 		outlinePage.resetSyncer();
 		document.replace(modelAsText.indexOf("two"), 3, "T");
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);
@@ -31,7 +32,7 @@ public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchT
 		assertExpanded(treeViewer, modelNode, oneNode);
 	}
 	
-	public void testChangeSelection() throws Exception {
+	@Test public void testChangeSelection() throws Exception {
 		outlinePage.resetSyncer();
 		document.replace(modelAsText.indexOf("four"), 4, "F");
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);
@@ -39,7 +40,7 @@ public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchT
 		assertExpanded(treeViewer, modelNode, oneNode);
 	}
 	
-	public void testInsertBefore() throws Exception {
+	@Test public void testInsertBefore() throws Exception {
 		outlinePage.resetSyncer();
 		document.replace(modelAsText.indexOf("four"), 0, "threeAndHalf{} ");
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);
@@ -47,7 +48,7 @@ public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchT
 		assertExpanded(treeViewer, modelNode, oneNode);
 	}
 	
-	public void testAppend() throws Exception {
+	@Test public void testAppend() throws Exception {
 		outlinePage.resetSyncer();
 		document.replace(document.getLength(), 0, " five{}");
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);

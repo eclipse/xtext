@@ -23,6 +23,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public IMarker mark() {
 		if (log.isDebugEnabled()) {
 			log.debug("mark()");
@@ -42,6 +43,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			this.delegate = delegate;
 		}
 
+		@Override
 		public void rollback() {
 			if (log.isDebugEnabled()) {
 				log.debug("rollback(" + delegate + ")");
@@ -49,6 +51,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			delegate.rollback();
 		}
 
+		@Override
 		public void commit() {
 			if (log.isDebugEnabled()) {
 				log.debug("commit(" + delegate + ")");
@@ -56,6 +59,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			delegate.commit();
 		}
 
+		@Override
 		public void flush() {
 			if (log.isDebugEnabled()) {
 				log.debug("flush(" + delegate + ")");
@@ -63,6 +67,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			delegate.flush();
 		}
 		
+		@Override
 		public IMarker fork() {
 			if (log.isDebugEnabled()) {
 				log.debug("fork(" + delegate + ")");
@@ -70,6 +75,7 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			return new DebuggingMarker(delegate.fork());
 		}
 
+		@Override
 		public IMarker join(IMarker forkedMarker) {
 			IMarker join = forkedMarker instanceof DebuggingMarker ? ((DebuggingMarker)forkedMarker).delegate : forkedMarker;
 			if (log.isDebugEnabled()) {

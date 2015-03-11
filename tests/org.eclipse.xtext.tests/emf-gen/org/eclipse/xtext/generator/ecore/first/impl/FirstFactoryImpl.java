@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.first.impl;
 
@@ -33,7 +30,7 @@ public class FirstFactoryImpl extends EFactoryImpl implements FirstFactory
   {
     try
     {
-      FirstFactory theFirstFactory = (FirstFactory)EPackage.Registry.INSTANCE.getEFactory("http://first"); 
+      FirstFactory theFirstFactory = (FirstFactory)EPackage.Registry.INSTANCE.getEFactory(FirstPackage.eNS_URI);
       if (theFirstFactory != null)
       {
         return theFirstFactory;

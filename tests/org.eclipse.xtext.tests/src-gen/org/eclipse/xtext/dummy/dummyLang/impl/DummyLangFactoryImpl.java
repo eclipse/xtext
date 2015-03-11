@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.dummy.dummyLang.impl;
 
@@ -33,7 +30,7 @@ public class DummyLangFactoryImpl extends EFactoryImpl implements DummyLangFacto
   {
     try
     {
-      DummyLangFactory theDummyLangFactory = (DummyLangFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/DummyLang"); 
+      DummyLangFactory theDummyLangFactory = (DummyLangFactory)EPackage.Registry.INSTANCE.getEFactory(DummyLangPackage.eNS_URI);
       if (theDummyLangFactory != null)
       {
         return theDummyLangFactory;

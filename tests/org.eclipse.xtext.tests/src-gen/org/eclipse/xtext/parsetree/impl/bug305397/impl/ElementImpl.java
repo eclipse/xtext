@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.impl.bug305397.impl;
 
@@ -30,12 +27,12 @@ import org.eclipse.xtext.parsetree.impl.bug305397.Element;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.bug305397.impl.ElementImpl#isA <em>A</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.bug305397.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.bug305397.impl.ElementImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

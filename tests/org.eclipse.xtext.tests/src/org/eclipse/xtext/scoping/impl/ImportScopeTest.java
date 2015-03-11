@@ -27,13 +27,13 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ImportScopeTest extends TestCase {
+public class ImportScopeTest extends Assert {
 	
 	/**
 	 * subclassed just to make protected members accessible from within this OSGi bundle
@@ -61,7 +61,7 @@ public class ImportScopeTest extends TestCase {
 		
 	}
 	
-	public void testGetAllWithDuplicates() throws Exception {
+	@Test public void testGetAllWithDuplicates() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EATTRIBUTE);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -70,7 +70,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(4,size(scope.getAllElements()));
 	}
 	
-	public void testImports_01() throws Exception {
+	@Test public void testImports_01() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -87,7 +87,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testRelativeImports_01() throws Exception {
+	@Test public void testRelativeImports_01() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE);
 		IScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -109,7 +109,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDuplicatesNotVisible_01() throws Exception {
+	@Test public void testDuplicatesNotVisible_01() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -123,7 +123,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDuplicatesNotVisible_01_IgnoreCase() throws Exception {
+	@Test public void testDuplicatesNotVisible_01_IgnoreCase() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","Foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -137,7 +137,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDuplicatesNotVisible_02_IgnoreCase() throws Exception {
+	@Test public void testDuplicatesNotVisible_02_IgnoreCase() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","Foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -151,7 +151,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDuplicatesNotVisible_02() throws Exception {
+	@Test public void testDuplicatesNotVisible_02() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -164,7 +164,7 @@ public class ImportScopeTest extends TestCase {
 		assertNotNull(scope.getSingleElement(QualifiedName.create("de","foo")));
 	}
 	
-	public void testDuplicatesNotVisible_03_IgnoreCase() throws Exception {
+	@Test public void testDuplicatesNotVisible_03_IgnoreCase() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -177,7 +177,7 @@ public class ImportScopeTest extends TestCase {
 		assertNotNull(scope.getSingleElement(QualifiedName.create("de","Foo")));
 	}
 	
-	public void testDuplicatesNotVisible_04_IgnoreCase() throws Exception {
+	@Test public void testDuplicatesNotVisible_04_IgnoreCase() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -190,7 +190,7 @@ public class ImportScopeTest extends TestCase {
 		assertNotNull(scope.getSingleElement(QualifiedName.create("de","Foo")));
 	}
 	
-	public void testDuplicatesNotVisible_05() throws Exception {
+	@Test public void testDuplicatesNotVisible_05() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com", "Foo"), EcorePackage.Literals.EANNOTATION, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1), false);
 		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true, false);
@@ -203,7 +203,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDuplicatesNotVisible_05_IgnoreCase() throws Exception {
+	@Test public void testDuplicatesNotVisible_05_IgnoreCase() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","Foo"), EcorePackage.Literals.EANNOTATION, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1), true);
 		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("COM"), true, true);
@@ -216,7 +216,7 @@ public class ImportScopeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testMultipleElementsByName_00() throws Exception {
+	@Test public void testMultipleElementsByName_00() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -229,7 +229,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(2,size(elements));
 	}
 	
-	public void testMultipleElementsByName_01() throws Exception {
+	@Test public void testMultipleElementsByName_01() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -242,7 +242,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(2,size(elements));
 	}
 	
-	public void testGetAllLocalElements_00() throws Exception {
+	@Test public void testGetAllLocalElements_00() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -254,7 +254,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(2,size(elements));
 	}
 	
-	public void testGetAllLocalElements_01() throws Exception {
+	@Test public void testGetAllLocalElements_01() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -266,7 +266,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(2,size(elements));
 	}
 	
-	public void testAllAliasedElements_00() throws Exception {
+	@Test public void testAllAliasedElements_00() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		final ArrayList<IEObjectDescription> newArrayList = newArrayList(desc1,desc2);
@@ -280,7 +280,7 @@ public class ImportScopeTest extends TestCase {
 		assertSame(desc2,((AliasedEObjectDescription)iterator.next()).getAliasedEObjectDescription());
 	}
 	
-	public void testAllAliasedElements_01() throws Exception {
+	@Test public void testAllAliasedElements_01() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		final ArrayList<IEObjectDescription> newArrayList = newArrayList(desc1,desc2);
@@ -294,7 +294,7 @@ public class ImportScopeTest extends TestCase {
 		assertSame(desc2,((AliasedEObjectDescription)iterator.next()).getAliasedEObjectDescription());
 	}
 	
-	public void testAllAliasedElements_02() throws Exception {
+	@Test public void testAllAliasedElements_02() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		final ArrayList<IEObjectDescription> newArrayList = newArrayList(desc1,desc2);
@@ -305,7 +305,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(0,size(elements));
 	}
 	
-	public void testAllAliasedElements_03() throws Exception {
+	@Test public void testAllAliasedElements_03() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		final ArrayList<IEObjectDescription> newArrayList = newArrayList(desc1,desc2);
@@ -316,7 +316,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(0,size(elements));
 	}
 	
-	public void testAllAliasedElements_04() throws Exception {
+	@Test public void testAllAliasedElements_04() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","bar"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc3 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
@@ -329,7 +329,7 @@ public class ImportScopeTest extends TestCase {
 		assertSame(desc2,((AliasedEObjectDescription)elements.iterator().next()).getAliasedEObjectDescription());
 	}
 	
-	public void testAllAliasedElements_05() throws Exception {
+	@Test public void testAllAliasedElements_05() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","bar"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc3 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
@@ -342,7 +342,7 @@ public class ImportScopeTest extends TestCase {
 		assertSame(desc2,((AliasedEObjectDescription)elements.iterator().next()).getAliasedEObjectDescription());
 	}
 	
-	public void testGetByEObject_00() throws Exception {
+	@Test public void testGetByEObject_00() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -354,7 +354,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals("com.foo",iterable.iterator().next().getName().toString());
 	}
 	
-	public void testGetByEObject_01() throws Exception {
+	@Test public void testGetByEObject_01() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
@@ -384,7 +384,7 @@ public class ImportScopeTest extends TestCase {
 		}
 	}
 	
-	public void testGetByEObject_02() throws Exception {
+	@Test public void testGetByEObject_02() throws Exception {
 		final IEObjectDescription desc1 = new ProxyReturningDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new ProxyReturningDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
@@ -394,7 +394,7 @@ public class ImportScopeTest extends TestCase {
 		assertEquals("foo", description.getName().toString());
 	}
 	
-	public void testGetByEObject_03() throws Exception {
+	@Test public void testGetByEObject_03() throws Exception {
 		final IEObjectDescription desc1 = new ProxyReturningDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new ProxyReturningDescription(QualifiedName.create("de","bar"), EcorePackage.Literals.EATTRIBUTE, null);
 		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);

@@ -25,6 +25,7 @@ public class LanguageResourceHelper implements ILanguageResourceHelper {
 		return fileExtensions.split(",");
 	}
 	
+	@Override
 	public boolean isLanguageResource(IResource resource) {
 		String fileExtension = resource.getFullPath().getFileExtension();
 		for (String ext : getFileExtensions()) {

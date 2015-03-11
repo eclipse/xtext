@@ -77,7 +77,6 @@ public abstract class AbstractPluginProjectCreator extends AbstractProjectCreato
 			"org.eclipse.xtend.typesystem.emf",
 			"org.eclipse.xpand", 
 			"de.itemis.xtext.antlr;resolution:=optional",
-			"org.eclipse.xtend.util.stdlib",
 			"org.eclipse.emf.mwe2.launch;resolution:=optional");
 	}
 }

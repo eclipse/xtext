@@ -29,6 +29,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	@Inject
 	private IAllContainersState.Provider stateProvider;
 	
+	@Override
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
@@ -44,6 +45,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
+	@Override
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
@@ -63,13 +65,19 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
-	private IAllContainersState getState(IResourceDescriptions resourceDescriptions) {
+	/**
+	 * @since 2.3
+	 */
+	protected IAllContainersState getState(IResourceDescriptions resourceDescriptions) {
 		return stateProvider.get(resourceDescriptions);
 	}
 
-	protected IContainer createContainer(final String handle, final IResourceDescriptions resourceDescriptions) {
-		IContainerState containerState = new ContainerState(handle, getState(resourceDescriptions));
+	protected IContainer createContainer(String handle, IResourceDescriptions resourceDescriptions) {
+		IAllContainersState state = getState(resourceDescriptions);
+		IContainerState containerState = new ContainerState(handle, state);
 		StateBasedContainer result = new StateBasedContainer(resourceDescriptions, containerState);
+		if (state instanceof FlatResourceSetBasedAllContainersState)
+			result.setUriToDescriptionCacheEnabled(false);
 		return result;
 	}
 

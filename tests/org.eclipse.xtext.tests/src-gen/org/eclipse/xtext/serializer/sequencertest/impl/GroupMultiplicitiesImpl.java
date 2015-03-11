@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -27,6 +24,7 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.GroupMultiplicitiesImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.GroupMultiplicitiesImpl#getVal2 <em>Val2</em>}</li>
@@ -36,7 +34,6 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.GroupMultiplicitiesImpl#getVal6 <em>Val6</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.GroupMultiplicitiesImpl#getVal7 <em>Val7</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

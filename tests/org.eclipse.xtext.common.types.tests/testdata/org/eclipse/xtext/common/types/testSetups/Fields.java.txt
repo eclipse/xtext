@@ -25,6 +25,10 @@ public class Fields<T> extends TestScenario {
 	
 	protected static String protectedStaticString;
 	
+	volatile int volatileInt;
+
+	transient int transientInt;
+	
 	public static class Inner extends TestScenario {
 		
 		public Fields<String> innerFields;

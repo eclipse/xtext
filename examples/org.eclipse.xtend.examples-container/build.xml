@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     May 25, 2010 10:34:57 AM                                                        
+
+	 This ant script creates a zip file for each of Xtext's example projects. 
+	 If the examples would not be zipped the resulting file namens would be too long to be 
+	 handled my MS Windows. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=301858
+                   
+     Moritz Eysholdt                                                                
+     ====================================================================== -->
+<project name="project" default="zip_all_examples">
+
+	<property name="source" location="contents" />
+	<property name="target_xtend" location="../org.eclipse.xtend.examples/contents" />
+
+	<macrodef name="zip_example">
+		<attribute name="name" default="default" />
+		<attribute name="target" default="${target_xtend}" />
+		<attribute name="excludes" default="bin,bin/**,**/*._trace,.antlr-generator*.jar,component.def" />
+		<sequential>
+			<delete file="@{target}/@{name}.zip" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="@{excludes}"  />
+		</sequential>
+	</macrodef>
+
+	<target name="zip_all_examples">
+		<!-- run task "generate_self" to compose this list -->
+		<zip_example name="xtend-examples"/>
+		<zip_example name="xtend-euler"/>
+		<zip_example name="xtend-annotation-examples" excludes="**/*._trace,.antlr-generator*.jar"/>
+		<zip_example name="xtend-annotation-examples-client"/>
+	</target>
+
+	<target name="generate_self">
+		<exec executable="bash">
+			<arg value="-c" />
+			<arg value="for i in `ls ${source}`; do echo &quot;&lt;zip_example name=\&quot;$i\&quot; /&gt;&quot;; done" />
+		</exec>
+	</target>
+
+</project>

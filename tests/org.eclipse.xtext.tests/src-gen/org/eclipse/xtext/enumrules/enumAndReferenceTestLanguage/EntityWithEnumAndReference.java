@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage#getEntityWithEnumAndReference()
  * @model

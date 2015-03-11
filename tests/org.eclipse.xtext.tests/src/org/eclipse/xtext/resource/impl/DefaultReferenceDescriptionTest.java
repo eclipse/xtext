@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
@@ -41,6 +41,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -50,7 +51,7 @@ import com.google.common.collect.Lists;
  */
 public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 	
-	public void testgetReferenceDescriptions() throws Exception {
+	@Test public void testgetReferenceDescriptions() throws Exception {
 		with(new LangATestLanguageStandaloneSetup());
 		XtextResource targetResource = getResource("type C", "bar.langatestlanguage");
 		EObject typeC = targetResource.getContents().get(0).eContents().get(0);
@@ -69,7 +70,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(LangATestLanguagePackage.Literals.TYPE__EXTENDS,refDesc.getEReference());
 	}
 	
-	public void testgetReferenceDescriptionForMultiValue() throws Exception {
+	@Test public void testgetReferenceDescriptionForMultiValue() throws Exception {
 		with(new LangATestLanguageStandaloneSetup());
 		XtextResource targetResource = getResource("type C type D", "bar.langatestlanguage");
 		EObject typeC = targetResource.getContents().get(0).eContents().get(0);
@@ -95,7 +96,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(LangATestLanguagePackage.Literals.TYPE__IMPLEMENTS,refDesc2.getEReference());
 	}
 	
-	public void testSpecialReferences() {
+	@Test public void testSpecialReferences() {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName("test");
 		ePackage.setNsPrefix("test");
@@ -105,11 +106,6 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		eClass.setName("Test");
 		eClass.getESuperTypes().add(EcorePackage.Literals.EPACKAGE);
 		ePackage.getEClassifiers().add(eClass);
-
-		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
-		nameAttribute.setName("name");
-		nameAttribute.setEType(EcorePackage.Literals.ESTRING);
-		eClass.getEStructuralFeatures().add(nameAttribute);
 
 		EReference eReference1 = EcoreFactory.eINSTANCE.createEReference();
 		eReference1.setContainment(false);
@@ -145,14 +141,14 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		eClass.getEStructuralFeatures().add(eReference5);
 
 		EObject object = ePackage.getEFactoryInstance().create(eClass);
-		object.eSet(nameAttribute, "testname");
-		object.eSet(eReference1, EcorePackage.Literals.EPACKAGE);
+		object.eSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME, "testname");
+		object.eSet(eReference1, EcorePackage.eINSTANCE);
 		object.eSet(eReference2, ePackage.getEFactoryInstance().create(eClass));
-		object.eSet(eReference3, EcorePackage.Literals.EPACKAGE);
-		object.eSet(eReference4, EcorePackage.Literals.EPACKAGE);
-		object.eSet(eReference5, EcorePackage.Literals.EPACKAGE);
+		object.eSet(eReference3, EcorePackage.eINSTANCE);
+		object.eSet(eReference4, EcorePackage.eINSTANCE);
+		object.eSet(eReference5, EcorePackage.eINSTANCE);
 
-		Resource testResource = new XMIResourceImpl(URI.createFileURI("test.ecore"));
+		Resource testResource = new XMIResourceImpl(URI.createPlatformResourceURI("test.ecore", true));
 		testResource.getContents().add(object);
 		IResourceDescription resourceDescription = createResourceDescription(testResource);
 		assertEquals("Only one external reference expected", 1, size(resourceDescription.getReferenceDescriptions()));
@@ -160,13 +156,77 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(-1, referenceDescription.getIndexInList());
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getSourceEObjectUri());
 		assertEquals(eReference1, referenceDescription.getEReference());
-		assertEquals(EcoreUtil.getURI(EcorePackage.Literals.EPACKAGE), referenceDescription.getTargetEObjectUri());
+		assertEquals(EcoreUtil.getURI(EcorePackage.eINSTANCE), referenceDescription.getTargetEObjectUri());
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getContainerEObjectURI());
 	}
 	
+	@Test public void testCrossResourceContainment() {
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName("test");
+		ePackage.setNsPrefix("test");
+		ePackage.setNsURI("test");
+
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName("Test");
+		ePackage.getEClassifiers().add(eClass);
+		
+		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+		nameAttribute.setName("name");
+		nameAttribute.setID(true);
+		nameAttribute.setEType(EcorePackage.Literals.ESTRING);
+		eClass.getEStructuralFeatures().add(nameAttribute);
+
+		EReference containmentRef = EcoreFactory.eINSTANCE.createEReference();
+		containmentRef.setContainment(true);
+		containmentRef.setName("crossResourceContainment");
+		containmentRef.setEType(eClass);
+		containmentRef.setResolveProxies(true);
+		eClass.getEStructuralFeatures().add(containmentRef);
+		
+		EReference containerRef = EcoreFactory.eINSTANCE.createEReference();
+		containerRef.setName("containerRef");
+		containerRef.setEType(eClass);
+		containerRef.setResolveProxies(true);
+		containerRef.setEOpposite(containmentRef);
+		containmentRef.setEOpposite(containerRef);
+		eClass.getEStructuralFeatures().add(containerRef);
+
+		EObject container = ePackage.getEFactoryInstance().create(eClass);
+		EObject child = ePackage.getEFactoryInstance().create(eClass);
+		
+		Resource containerResource = new XMIResourceImpl(URI.createPlatformResourceURI("container.ecore", true));
+		Resource childResource = new XMIResourceImpl(URI.createPlatformResourceURI("child.ecore", true));
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResources().add(containerResource);
+		resourceSet.getResources().add(childResource);
+		
+		containerResource.getContents().add(container);
+		childResource.getContents().add(child);
+		
+		container.eSet(containmentRef, child);
+		assertTrue(container.eResource() != child.eResource());
+		
+		{ 
+			IResourceDescription containerDescription = createResourceDescription(containerResource);
+			IReferenceDescription onlyContainerElement = Iterables.getOnlyElement(containerDescription.getReferenceDescriptions());
+			assertEquals(-1, onlyContainerElement.getIndexInList());
+			assertEquals(EcoreUtil.getURI(container), onlyContainerElement.getSourceEObjectUri());
+			assertEquals(containmentRef, onlyContainerElement.getEReference());
+			assertEquals(EcoreUtil.getURI(child), onlyContainerElement.getTargetEObjectUri());
+		}
+		{
+			IResourceDescription childDescription = createResourceDescription(childResource);
+			IReferenceDescription onlyChildElement = Iterables.getOnlyElement(childDescription.getReferenceDescriptions());
+			assertEquals(-1, onlyChildElement.getIndexInList());
+			assertEquals(EcoreUtil.getURI(child), onlyChildElement.getSourceEObjectUri());
+			assertEquals(containerRef, onlyChildElement.getEReference());
+			assertEquals(EcoreUtil.getURI(container), onlyChildElement.getTargetEObjectUri());
+		}
+	}
+	
 	/** @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=330812 */
-	public void testLazyLinkingProxyReferences() {
-		URI resourceUri = URI.createFileURI("test.ecore");
+	@Test public void testLazyLinkingProxyReferences() {
+		URI resourceUri = URI.createPlatformResourceURI("test.ecore", true);
 		LazyURIEncoder lazyURIEncoder = new LazyURIEncoder();
 
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -230,6 +290,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 	protected IResourceDescription createResourceDescription(Resource testResource) {
 		DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				String name = SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
 				return (name != null) ? QualifiedName.create(name) : null;
@@ -239,6 +300,5 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		IResourceDescription resourceDescription = new DefaultResourceDescription(testResource, strategy);
 		return resourceDescription;
 	}
-
 
 }

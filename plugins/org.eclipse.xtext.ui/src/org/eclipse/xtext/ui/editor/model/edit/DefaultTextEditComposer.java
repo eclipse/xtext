@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.model.edit;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -98,6 +100,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		resourceChanged = false;
 	}
 
+	@Override
 	public void beginRecording(Resource newResource) {
 		reset();
 
@@ -111,11 +114,16 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			resourceSize = 0;
 		} else {
 			final EObject root = resource.getContents().get(0);
-			resourceSize = NodeModelUtils.getNode(root).getTotalLength();
+			ICompositeNode rootNode = NodeModelUtils.getNode(root);
+			if (rootNode == null) {
+				throw new IllegalStateException("Cannot find root node in resource " + resource.getURI());
+			}
+			resourceSize = rootNode.getTotalLength();
 		}
 		recording = true;
 	}
 
+	@Override
 	public TextEdit endRecording() {
 		recording = false;
 		TextEdit textEdit = getTextEdit();
@@ -124,6 +132,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		return textEdit;
 	}
 
+	@Override
 	public TextEdit getTextEdit() {
 		TextEdit result = null;
 
@@ -152,11 +161,16 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	protected List<TextEdit> getObjectEdits() {
 		final Collection<EObject> modifiedObjects = getModifiedObjects();
 		Collection<EObject> topLevelObjects = EcoreUtil.filterDescendants(modifiedObjects);
-		Iterable<EObject> containedModifiedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return input.eResource() == resource;
-			}
-		});
+		Iterable<EObject> containedModifiedObjects = Collections.emptyList();
+		if (!resource.getContents().isEmpty()) {
+			final EObject root = resource.getContents().get(0);
+			containedModifiedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
+				@Override
+				public boolean apply(EObject input) {
+					return EcoreUtil.isAncestor(root, input);
+				}
+			});
+		}
 		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedModifiedObjects));
 		for (EObject modifiedObject : containedModifiedObjects) {
 			ReplaceRegion replaceRegion = serializer.serializeReplacement(modifiedObject, getSaveOptions());
@@ -171,7 +185,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	}
 
 	/**
-	 * @Deprecated use {@link #setSerializer(ISerializer)} instead.
+	 * @deprecated use {@link #setSerializer(ISerializer)} instead.
 	 */
 	@Deprecated
 	public void setSerializerUtil(ISerializer serializer) {

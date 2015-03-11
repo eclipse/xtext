@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Mult2Impl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Mult2Impl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

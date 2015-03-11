@@ -11,13 +11,17 @@ package org.eclipse.xtext.ui.editor.handler;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
+import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -33,14 +37,23 @@ public class ValidateActionHandler extends AbstractHandler {
 	private IResourceValidator resourceValidator;
 	@Inject 
 	private MarkerCreator markerCreator;
+	@Inject
+	private MarkerTypeProvider markerTypeProvider;
+	@Inject
+	private IssueResolutionProvider issueResolutionProvider;
 	
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
-			MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(xtextEditor.getResource(),
-					markerCreator);
-			IXtextDocument xtextDocument = XtextDocumentUtil.get(xtextEditor);
-			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument, markerIssueProcessor,
+			IValidationIssueProcessor issueProcessor;
+			IXtextDocument xtextDocument = xtextEditor.getDocument();
+			IResource resource = xtextEditor.getResource();
+			if(resource != null)
+				issueProcessor = new MarkerIssueProcessor(resource, markerCreator, markerTypeProvider);
+			else
+				issueProcessor = new AnnotationIssueProcessor(xtextDocument, xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
+			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument, issueProcessor,
 					CheckMode.ALL);
 			validationJob.schedule();
 		}

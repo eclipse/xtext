@@ -14,8 +14,9 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
-var generateDotDiagram = true
+//var generateDotDiagram = true
 //var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 
 Workflow {
@@ -27,7 +28,7 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/reconstr"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -27,11 +24,11 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyB;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.naming.QualifiedName;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ImportNormalizerTest extends TestCase {
+public class ImportNormalizerTest extends Assert {
 
-	public void testNull() throws Exception {
+	@Test public void testNull() throws Exception {
 		try {
 			new ImportNormalizer(null, true, false);
 			fail("Expected exception");
@@ -25,7 +25,7 @@ public class ImportNormalizerTest extends TestCase {
 		}
 	}
 	
-	public void testResolve() throws Exception {
+	@Test public void testResolve() throws Exception {
 		QualifiedName xtextRelativeName = QualifiedName.create("xtext");
 		QualifiedName ytextRelativeName = QualifiedName.create("ytext");
 		QualifiedName xytextRelativeName = QualifiedName.create("xtext","ytext");
@@ -45,7 +45,7 @@ public class ImportNormalizerTest extends TestCase {
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));
 	}
 	
-	public void testResolveIgnoreCase() throws Exception {
+	@Test public void testResolveIgnoreCase() throws Exception {
 		QualifiedName xtextRelativeName = QualifiedName.create("xtext");
 		QualifiedName ytextRelativeName = QualifiedName.create("ytext");
 		QualifiedName xytextRelativeName = QualifiedName.create("xtext","ytext");
@@ -65,7 +65,7 @@ public class ImportNormalizerTest extends TestCase {
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));
 	}
 	
-	public void testDeresolve() throws Exception {
+	@Test public void testDeresolve() throws Exception {
 		QualifiedName namespace = QualifiedName.create("org", "eclipse", "xtext");
 		QualifiedName xtextFQN = namespace.append("Xtext");
 		QualifiedName ytextFQN = namespace.skipLast(1).append("ytext");
@@ -87,7 +87,7 @@ public class ImportNormalizerTest extends TestCase {
 		assertEquals(QualifiedName.create("ytext"), wildCardImportNormalizer.deresolve(xytextFQN));
 	}
 	
-	public void testDeresolveIgnoreCase() throws Exception {
+	@Test public void testDeresolveIgnoreCase() throws Exception {
 		QualifiedName namespace = QualifiedName.create("org", "eclipse", "xtext");
 		QualifiedName xtextFQN = namespace.append("Xtext");
 		QualifiedName ytextFQN = namespace.skipLast(1).append("ytext");

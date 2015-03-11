@@ -16,7 +16,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PartialContentAssistContextFactory extends ParserBasedContentAssistContextFactory {
+public class PartialContentAssistContextFactory extends ParserBasedContentAssistContextFactory implements IPartialEditingContentAssistContextFactory {
 
 	private AbstractRule rule;
 
@@ -24,6 +24,7 @@ public class PartialContentAssistContextFactory extends ParserBasedContentAssist
 	public void setPartialParser(final IPartialContentAssistParser partialContentAssistParser) {
 		final Provider<StatefulFactory> delegate = super.getStatefulFactoryProvider();
 		super.setStatefulFactoryProvider(new Provider<StatefulFactory>() {
+			@Override
 			public StatefulFactory get() {
 				StatefulFactory result = delegate.get();
 				result.setParser(partialContentAssistParser);
@@ -35,6 +36,7 @@ public class PartialContentAssistContextFactory extends ParserBasedContentAssist
 		});
 	}
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

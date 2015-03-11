@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.builder.tests.builderTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class BuilderTestLanguageFactoryImpl extends EFactoryImpl implements Buil
   {
     try
     {
-      BuilderTestLanguageFactory theBuilderTestLanguageFactory = (BuilderTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/builderTestLanguage"); 
+      BuilderTestLanguageFactory theBuilderTestLanguageFactory = (BuilderTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(BuilderTestLanguagePackage.eNS_URI);
       if (theBuilderTestLanguageFactory != null)
       {
         return theBuilderTestLanguageFactory;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest.impl;
 
@@ -33,7 +30,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
   {
     try
     {
-      XtextTestFactory theXtextTestFactory = (XtextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Test/XtextTest"); 
+      XtextTestFactory theXtextTestFactory = (XtextTestFactory)EPackage.Registry.INSTANCE.getEFactory(XtextTestPackage.eNS_URI);
       if (theXtextTestFactory != null)
       {
         return theXtextTestFactory;

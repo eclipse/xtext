@@ -73,7 +73,7 @@ import com.google.inject.Inject;
 /**
  * Hover which shows annotation and quick fixes. 
  * 
- * Clone from JDTs {@link org.eclipse.jdt.internal.ui.text.java.hover.AbstractAnnotationHover}. 
+ * Clone from JDTs  org.eclipse.jdt.internal.ui.text.java.hover.AbstractAnnotationHover. 
  *
  * @author Christoph Kulla
  */
@@ -177,6 +177,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			//replaced by IInformationControlExtension2#setInput
 		}
 		
+		@Override
 		public void setInput(Object input) {
 			Assert.isLegal(input instanceof AnnotationInfo);
 			fInput= (AnnotationInfo)input;
@@ -184,6 +185,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			deferredCreateContent();
 		}
 
+		@Override
 		public boolean hasContents() {
 			return fInput != null;
 		}
@@ -302,6 +304,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			gridData.heightHint= 16;
 			canvas.setLayoutData(gridData);
 			canvas.addPaintListener(new PaintListener() {
+				@Override
 				public void paintControl(PaintEvent e) {
 					e.gc.setFont(null);
 					fMarkerAnnotationAccess.paint(annotation, e.gc, canvas, new Rectangle(0, 0, 16, 16));
@@ -401,6 +404,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 				final int index= i;
 				final Link link= links[index];
 				link.addKeyListener(new KeyListener() {
+					@Override
 					public void keyPressed(KeyEvent e) {
 						switch (e.keyCode) {
 							case SWT.ARROW_DOWN:
@@ -418,11 +422,13 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 						}
 					}
 
+					@Override
 					public void keyReleased(KeyEvent e) {
 					}
 				});
 
 				link.addFocusListener(new FocusListener() {
+					@Override
 					public void focusGained(FocusEvent e) {
 						int currentPosition= scrolledComposite.getOrigin().y;
 						int hight= scrolledComposite.getSize().y;
@@ -438,6 +444,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 						}
 					}
 
+					@Override
 					public void focusLost(FocusEvent e) {
 					}
 				});
@@ -463,12 +470,15 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 
 				proposalImage.addMouseListener(new MouseListener() {
 
+					@Override
 					public void mouseDoubleClick(MouseEvent e) {
 					}
 
+					@Override
 					public void mouseDown(MouseEvent e) {
 					}
 
+					@Override
 					public void mouseUp(MouseEvent e) {
 						if (e.button == 1) {
 							apply(proposal, fInput.viewer, fInput.position.offset, isMultiFix);
@@ -588,6 +598,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			this.invocationContext = invocationContext;
 		}
 
+		@Override
 		public void run() {
 			proposals = quickAssistProcessor.computeQuickAssistProposals(invocationContext);
 		}
@@ -684,12 +695,15 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			for (Annotation annotation : annotations) {
 				if (annotation.getText() != null) {
 					Position position = getAnnotationModel().getPosition(annotation);
-					final IQuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
+					final QuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
 					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
 					// Note: the resolutions have to be retrieved from the UI thread, otherwise
 					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
 					// cause an exception
 					Display.getDefault().syncExec(runnable);
+					if (invocationContext.isMarkedCancelled()) {
+						return null;
+					}
 					result = new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);
 					recentAnnotationInfo = result;
 					return result;

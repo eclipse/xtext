@@ -12,57 +12,57 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
-    public static final int T__42=42;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__51=51;
-    public static final int T__13=13;
-    public static final int T__47=47;
-    public static final int RULE_STRING=6;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__46=46;
-    public static final int T__52=52;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__44=44;
-    public static final int T__14=14;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__11=11;
     public static final int T__29=29;
-    public static final int T__45=45;
-    public static final int RULE_WS=9;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
+    public static final int T__28=28;
+    public static final int T__27=27;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__41=41;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int T__21=21;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__20=20;
+    public static final int EOF=-1;
+    public static final int T__19=19;
+    public static final int T__16=16;
+    public static final int T__51=51;
+    public static final int T__52=52;
+    public static final int T__15=15;
+    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=6;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -1112,10 +1112,10 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1133,10 +1133,10 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1152,23 +1152,15 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1193,10 +1185,10 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1212,23 +1204,15 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3574:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1856,38 +1840,19 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\21\2\34\1\uffff\5\34\1\21\2\uffff\3\21\2\uffff\1\64\1"+
-        "\76\7\uffff\1\104\1\uffff\1\34\1\uffff\6\34\32\uffff\1\114\1\115"+
-        "\1\116\1\117\1\120\1\uffff\2\34\1\123\3\34\1\130\5\uffff\2\34\1"+
-        "\uffff\1\133\1\134\1\135\1\34\1\uffff\1\137\1\140\3\uffff\1\141"+
-        "\3\uffff";
+        "\1\uffff\1\21\2\34\1\uffff\5\34\1\21\2\uffff\3\21\2\uffff\1\64\1\76\7\uffff\1\104\1\uffff\1\34\1\uffff\6\34\32\uffff\1\114\1\115\1\116\1\117\1\120\1\uffff\2\34\1\123\3\34\1\130\5\uffff\2\34\1\uffff\1\133\1\134\1\135\1\34\1\uffff\1\137\1\140\3\uffff\1\141\3\uffff";
     static final String DFA12_eofS =
         "\142\uffff";
     static final String DFA12_minS =
-        "\1\0\1\61\1\167\1\162\1\uffff\1\150\1\156\1\151\1\170\1\167\1\101"+
-        "\2\uffff\2\0\1\52\2\uffff\2\60\7\uffff\1\60\1\uffff\1\157\1\uffff"+
-        "\1\157\1\145\1\156\2\164\1\157\32\uffff\5\60\1\uffff\1\165\1\162"+
-        "\1\60\1\147\1\61\1\162\1\60\5\uffff\1\160\1\164\1\uffff\3\60\1\141"+
-        "\1\uffff\2\60\3\uffff\1\60\3\uffff";
+        "\1\0\1\61\1\167\1\162\1\uffff\1\150\1\156\1\151\1\170\1\167\1\101\2\uffff\2\0\1\52\2\uffff\2\60\7\uffff\1\60\1\uffff\1\157\1\uffff\1\157\1\145\1\156\2\164\1\157\32\uffff\5\60\1\uffff\1\165\1\162\1\60\1\147\1\61\1\162\1\60\5\uffff\1\160\1\164\1\uffff\3\60\1\141\1\uffff\2\60\3\uffff\1\60\3\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\71\1\167\1\162\1\uffff\1\150\1\156\1\157\1\170\1\167"+
-        "\1\172\2\uffff\2\uffff\1\57\2\uffff\1\71\1\70\7\uffff\1\172\1\uffff"+
-        "\1\157\1\uffff\1\157\1\145\1\156\2\164\1\157\32\uffff\5\172\1\uffff"+
-        "\1\165\1\162\1\172\1\147\1\62\1\162\1\172\5\uffff\1\160\1\164\1"+
-        "\uffff\3\172\1\141\1\uffff\2\172\3\uffff\1\172\3\uffff";
+        "\1\uffff\1\71\1\167\1\162\1\uffff\1\150\1\156\1\157\1\170\1\167\1\172\2\uffff\2\uffff\1\57\2\uffff\1\71\1\70\7\uffff\1\172\1\uffff\1\157\1\uffff\1\157\1\145\1\156\2\164\1\157\32\uffff\5\172\1\uffff\1\165\1\162\1\172\1\147\1\62\1\162\1\172\5\uffff\1\160\1\164\1\uffff\3\172\1\141\1\uffff\2\172\3\uffff\1\172\3\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\30\6\uffff\1\54\1\55\3\uffff\1\61\1\62\2\uffff\1\5\1"+
-        "\7\1\10\1\13\1\14\1\15\1\16\1\uffff\1\54\1\uffff\1\30\6\uffff\1"+
-        "\55\1\56\1\57\1\60\1\61\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\27"+
-        "\1\31\1\32\1\1\1\33\1\34\1\35\1\36\1\40\1\41\1\42\1\43\1\51\1\2"+
-        "\5\uffff\1\37\7\uffff\1\3\1\4\1\6\1\11\1\12\2\uffff\1\45\4\uffff"+
-        "\1\50\2\uffff\1\46\1\52\1\53\1\uffff\1\26\1\44\1\47";
+        "\4\uffff\1\30\6\uffff\1\54\1\55\3\uffff\1\61\1\62\2\uffff\1\5\1\7\1\10\1\13\1\14\1\15\1\16\1\uffff\1\54\1\uffff\1\30\6\uffff\1\55\1\56\1\57\1\60\1\61\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\27\1\31\1\32\1\1\1\33\1\34\1\35\1\36\1\40\1\41\1\42\1\43\1\51\1\2\5\uffff\1\37\7\uffff\1\3\1\4\1\6\1\11\1\12\2\uffff\1\45\4\uffff\1\50\2\uffff\1\46\1\52\1\53\1\uffff\1\26\1\44\1\47";
     static final String DFA12_specialS =
-        "\1\0\14\uffff\1\1\1\2\123\uffff}>";
+        "\1\2\14\uffff\1\1\1\0\123\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\1\1\3\21\1\16\4\21"+
-            "\1\4\2\21\1\17\12\14\7\21\32\13\3\21\1\12\1\13\1\21\4\13\1\10"+
-            "\1\13\1\3\3\13\1\2\1\7\2\13\1\6\3\13\1\5\1\11\6\13\uff85\21",
+            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\1\1\3\21\1\16\4\21\1\4\2\21\1\17\12\14\7\21\32\13\3\21\1\12\1\13\1\21\4\13\1\10\1\13\1\3\3\13\1\2\1\7\2\13\1\6\3\13\1\5\1\11\6\13\uff85\21",
             "\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32",
             "\1\33",
             "\1\35",
@@ -1914,8 +1879,7 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\1\34\1\77\1\100\1\101\1\102\1\103\4\34\7\uffff\32\34\4\uffff"+
-            "\1\34\1\uffff\32\34",
+            "\1\34\1\77\1\100\1\101\1\102\1\103\4\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "",
             "\1\105",
             "",
@@ -2004,7 +1968,7 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -2025,6 +1989,26 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_14 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 38;}
+
+                        else s = 17;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_13 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 38;}
+
+                        else s = 17;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -2061,26 +2045,6 @@ public class InternalConcreteSyntaxValidationTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 16;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||(LA12_0>='-' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 17;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_13 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 38;}
-
-                        else s = 17;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_14 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 38;}
-
-                        else s = 17;
 
                         if ( s>=0 ) return s;
                         break;

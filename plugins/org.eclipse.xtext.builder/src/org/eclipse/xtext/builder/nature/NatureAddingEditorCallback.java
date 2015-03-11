@@ -9,36 +9,45 @@ package org.eclipse.xtext.builder.nature;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.editor.AbstractDirtyStateAwareEditorCallback;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.util.DontAskAgainDialogs;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
-	
+public class NatureAddingEditorCallback extends IXtextEditorCallback.NullImpl {
+	private static final String ADD_XTEXT_NATURE = "add_xtext_nature";
 	@Inject
 	private ToggleXtextNatureAction toggleNature;
 
+	private @Inject DontAskAgainDialogs dialogs;
+
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
-		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
-		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible() && !resource.getProject().isHidden()) {
+		if (resource != null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible()
+				&& !resource.getProject().isHidden()) {
 			String title = Messages.NatureAddingEditorCallback_MessageDialog_Title;
-			String message = Messages.NatureAddingEditorCallback_MessageDialog_Msg0 + resource.getProject().getName() + Messages.NatureAddingEditorCallback_MessageDialog_Msg1;
-			Image image = null;
-			MessageDialog dialog = new MessageDialog(editor.getEditorSite().getShell(), title, image, message, MessageDialog.QUESTION, 
-					new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL, IDialogConstants.CANCEL_LABEL }, 0);
-			int open = dialog.open();
-			if (open==0) {
+			String message = Messages.NatureAddingEditorCallback_MessageDialog_Msg0 + resource.getProject().getName()
+					+ Messages.NatureAddingEditorCallback_MessageDialog_Msg1;
+			boolean addNature = false;
+			if (MessageDialogWithToggle.PROMPT.equals(dialogs.getUserDecision(ADD_XTEXT_NATURE))) {
+				int userAnswer = dialogs.askUser(message, title, ADD_XTEXT_NATURE, editor.getEditorSite().getShell());
+				if (userAnswer == IDialogConstants.YES_ID) {
+					addNature = true;
+				} else if (userAnswer == IDialogConstants.CANCEL_ID) {
+					return;
+				}
+			} else if (MessageDialogWithToggle.ALWAYS.equals(dialogs.getUserDecision(ADD_XTEXT_NATURE))) {
+				addNature = true;
+			}
+			if (addNature) {
 				toggleNature.toggleNature(resource.getProject());
 			}
 		}
 	}
-
 }

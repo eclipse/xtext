@@ -8,11 +8,12 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug291022TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -22,7 +23,8 @@ import com.google.inject.Injector;
  */
 public class Bug291022Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug291022TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug291022TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -32,16 +34,16 @@ public class Bug291022Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 
-	public void testBug291022_01() throws Exception {
-		newBuilder(getBug291022TestLanguageSetup()).append(
+	@Test public void testBug291022_01() throws Exception {
+		newBuilder().append(
 				"rootModelElement {\n" +
 				"  rootModelElement modelElement {" +
 				"  }\n" + 
 				"}").assertTextAtCursorPosition("modelElement {", "rootModelElement", ":", "=", ";", "{");
 	}
 	
-	public void testBug291022_02() throws Exception {
-		newBuilder(getBug291022TestLanguageSetup()).append(
+	@Test public void testBug291022_02() throws Exception {
+		newBuilder().append(
 				"rootModelElement {\n" +
 				"  rootModelElement : modelElement {" +
 				"    modelElement findMe {" +
@@ -49,4 +51,5 @@ public class Bug291022Test extends AbstractContentAssistProcessorTest {
 				"  }\n" + 
 				"}").assertTextAtCursorPosition("findMe", "modelElement", ":", "=", ";", "{");
 	}
+
 }

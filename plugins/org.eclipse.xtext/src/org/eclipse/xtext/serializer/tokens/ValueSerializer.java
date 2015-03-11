@@ -10,11 +10,11 @@ package org.eclipse.xtext.serializer.tokens;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
-import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
 
 import com.google.inject.Inject;
 
@@ -32,16 +32,7 @@ public class ValueSerializer implements IValueSerializer {
 	@Inject
 	protected TokenUtil tokenUtil;
 
-	//	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node) {
-	//		if (ruleCall != node.getGrammarElement())
-	//			return false;
-	//		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
-	//		if (GrammarUtil.isSingleAssignment(ass))
-	//			return true;
-	//		Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
-	//		return converted != null && converted.equals(value);
-	//	}
-
+	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, Acceptor errors) {
 		try {
 			String str = converter.toString(value, ruleCall.getRule().getName());
@@ -57,29 +48,10 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
-	protected String serialize(INode node) {
-		if (node instanceof ILeafNode)
-			return ((ILeafNode) node).getText();
-		else {
-			StringBuilder builder = new StringBuilder(node.getLength());
-			boolean hiddenSeen = false;
-			for (ILeafNode leaf : node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					if (hiddenSeen && builder.length() > 0)
-						builder.append(' ');
-					builder.append(leaf.getText());
-					hiddenSeen = false;
-				} else {
-					hiddenSeen = true;
-				}
-			}
-			return builder.toString();
-		}
-	}
-
+	@Override
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node, Acceptor errors) {
 		if (node != null) {
-			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
+			Object converted = converter.toValue(NodeModelUtils.getTokenText(node), ruleCall.getRule().getName(), node);
 			if (converted != null && converted.equals(value))
 				return tokenUtil.serializeNode(node);
 		}

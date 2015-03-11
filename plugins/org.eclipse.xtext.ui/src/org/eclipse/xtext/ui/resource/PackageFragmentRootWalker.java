@@ -28,19 +28,19 @@ public abstract class PackageFragmentRootWalker<T> {
 		
 		private List<Object> parents;
 
-		private TraversalState(IPackageFragmentRoot start) {
-			parents = Lists.<Object>newArrayList(start);
+		TraversalState(Object obj) {
+			parents = Lists.<Object>newArrayList(obj);
 		}
 		
 		public List<?> getParents() {
 			return Collections.unmodifiableList(parents);
 		}
 		
-		private void pop() {
+		void pop() {
 			parents.remove(parents.size() - 1);
 		}
 		
-		private void push(Object obj) {
+		void push(Object obj) {
 			parents.add(obj);
 		}
 		
@@ -48,22 +48,24 @@ public abstract class PackageFragmentRootWalker<T> {
 	
 	public T traverse(IPackageFragmentRoot root, boolean stopOnFirstResult) throws JavaModelException {
 		T result = null;
-		TraversalState state = new TraversalState(root);
-		Object[] resources = root.getNonJavaResources();
-		for (Object object : resources) {
-			if (object instanceof IJarEntryResource) {
-				result = traverse((IJarEntryResource) object, stopOnFirstResult, state);
-				if (stopOnFirstResult && result!=null)
-					return result;
+		if (root.exists()) {
+			Object[] resources = root.getNonJavaResources();
+			TraversalState state = new TraversalState(root);
+			for (Object object : resources) {
+				if (object instanceof IJarEntryResource) {
+					result = traverse((IJarEntryResource) object, stopOnFirstResult, state);
+					if (stopOnFirstResult && result != null)
+						return result;
+				}
 			}
-		}
-		
-		IJavaElement[] children = root.getChildren();
-		for (IJavaElement javaElement : children) {
-			if (javaElement instanceof IPackageFragment) {
-				result = traverse((IPackageFragment) javaElement, stopOnFirstResult, state);
-				if (stopOnFirstResult && result!=null)
-					return result;
+
+			IJavaElement[] children = root.getChildren();
+			for (IJavaElement javaElement : children) {
+				if (javaElement instanceof IPackageFragment) {
+					result = traverse((IPackageFragment) javaElement, stopOnFirstResult, state);
+					if (stopOnFirstResult && result != null)
+						return result;
+				}
 			}
 		}
 		return result;

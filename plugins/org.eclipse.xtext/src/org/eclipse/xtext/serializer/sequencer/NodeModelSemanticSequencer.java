@@ -5,63 +5,54 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.nodemodel.BidiIterator;
-import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
+import org.eclipse.xtext.util.Triple;
+
+import com.google.inject.Inject;
 
 public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 
+	@Inject
+	protected IValueConverterService valueConverter;
+
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
-		BidiTreeIterator<INode> ti = NodeModelUtils.findActualNodeFor(semanticObject).getAsTreeIterable().iterator();
-		while (ti.hasNext()) {
-			INode node = ti.next();
-			if (node instanceof ILeafNode && ((ILeafNode) node).isHidden())
-				continue;
-			EObject ge = node.getGrammarElement();
-			if (ge instanceof RuleCall) {
-				RuleCall rc = (RuleCall) ge;
-				if (rc.getRule() == context || GrammarUtil.containedAssignments(rc) == null)
-					continue;
+		SemanticNodeIterator ni = new SemanticNodeIterator(semanticObject);
+		while (ni.hasNext()) {
+			Triple<INode, AbstractElement, EObject> node = ni.next();
+			if (node.getSecond() instanceof RuleCall) {
+				RuleCall rc = (RuleCall) node.getSecond();
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
-					acceptSemantic(semanticObject, rc, node.getSemanticElement(), node);
-				else
-					acceptSemantic(semanticObject, rc, NodeModelUtils.getTokenText(node), node);
-				if (node.getSemanticElement() != semanticObject) {
-					ti.prune();
-					continue;
+					acceptSemantic(semanticObject, rc, node.getThird(), node.getFirst());
+				else if (GrammarUtil.containingCrossReference(node.getSecond()) != null) {
+					EStructuralFeature feature = FeatureFinderUtil
+							.getFeature(node.getSecond(), semanticObject.eClass());
+					acceptSemantic(semanticObject, rc, semanticObject.eGet(feature), node.getFirst());
+				} else {
+					String strVal = NodeModelUtils.getTokenText(node.getFirst());
+					Object val = valueConverter.toValue(strVal, rc.getRule().getName(), node.getFirst());
+					acceptSemantic(semanticObject, rc, val, node.getFirst());
 				}
-			} else if (ge instanceof Keyword) {
-				Keyword kw = (Keyword) ge;
-				if (GrammarUtil.containingAssignment(kw) != null)
-					acceptSemantic(semanticObject, kw, node.getText(), node);
-			} else if (ge instanceof Action) {
-				Action a = (Action) ge;
-				if (a.getFeature() != null)
-					acceptSemantic(semanticObject, a, node.getSemanticElement(), node);
-				if (node.getSemanticElement() != semanticObject) {
-					ti.prune();
-					continue;
-				}
-			} else if (ge instanceof CrossReference) {
-				CrossReference cr = (CrossReference) ge;
-				RuleCall rc = (RuleCall) cr.getTerminal();
-				EReference ref = GrammarUtil.getReference(cr);
-				acceptSemantic(semanticObject, rc, node.getSemanticElement().eGet(ref), node);
+			} else if (node.getSecond() instanceof Keyword)
+				acceptSemantic(semanticObject, node.getSecond(), node.getFirst().getText(), node.getFirst());
+			else if (node.getSecond() instanceof Action) {
+				acceptSemantic(semanticObject, node.getSecond(), semanticObject, node.getFirst());
 			}
 		}
 	}
@@ -113,12 +104,13 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
-					if (rc.getRule().getType().getClassifier() instanceof EClass)
+					if (rc.getRule().getType().getClassifier() instanceof EClass) {
 						if (sequenceAcceptor.enterAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node)) {
 							createSequence(rc.getRule(), (EObject) value);
 							sequenceAcceptor.leaveAssignedParserRuleCall(rc, (EObject) value);
-						} else
-							sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
+						}
+					} else
+						sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof TerminalRule) {
@@ -143,21 +135,23 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 
 	private INode findContextNode(EObject semanticObject) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
-		BidiIterator<INode> nodes = node.getAsTreeIterable().iterator();
-		while (nodes.hasNext()) {
-			INode next = nodes.next();
-			if (next.getGrammarElement() instanceof RuleCall)
-				return next;
-			if (next.getGrammarElement() instanceof ParserRule
-					&& ((ParserRule) next.getGrammarElement()).getType().getClassifier() instanceof EClass)
-				return next;
+		if (node != null) {
+			BidiIterator<INode> nodes = node.getAsTreeIterable().iterator();
+			while (nodes.hasNext()) {
+				INode next = nodes.next();
+				if (next.getGrammarElement() instanceof RuleCall)
+					return next;
+				if (next.getGrammarElement() instanceof ParserRule
+						&& ((ParserRule) next.getGrammarElement()).getType().getClassifier() instanceof EClass)
+					return next;
+			}
 		}
 		throw new RuntimeException("no context found");
 	}
 
-	public Iterable<EObject> findContexts(EObject semanitcObject, boolean consultContainer,
+	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer,
 			Iterable<EObject> contextCandidates) {
-		EObject ctx = findContextNode(semanitcObject).getGrammarElement();
+		EObject ctx = findContextNode(semanticObject).getGrammarElement();
 		if (ctx instanceof RuleCall)
 			return Collections.singletonList((EObject) (((RuleCall) ctx).getRule()));
 		return Collections.singletonList(ctx);

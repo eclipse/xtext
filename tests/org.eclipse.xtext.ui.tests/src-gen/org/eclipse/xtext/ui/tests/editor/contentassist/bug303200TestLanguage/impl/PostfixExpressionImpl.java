@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl;
 
@@ -16,7 +13,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Bug303200TestLanguagePackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PostfixExpression;
-import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PrimaryExpression;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PropertyOperator;
 
 /**
@@ -25,11 +21,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pro
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl.PostfixExpressionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl.PostfixExpressionImpl#getProperty <em>Property</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -43,7 +39,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected PrimaryExpression expression;
+  protected PostfixExpression expression;
 
   /**
    * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
@@ -81,7 +77,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public PrimaryExpression getExpression()
+  public PostfixExpression getExpression()
   {
     return expression;
   }
@@ -91,9 +87,9 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(PrimaryExpression newExpression, NotificationChain msgs)
+  public NotificationChain basicSetExpression(PostfixExpression newExpression, NotificationChain msgs)
   {
-    PrimaryExpression oldExpression = expression;
+    PostfixExpression oldExpression = expression;
     expression = newExpression;
     if (eNotificationRequired())
     {
@@ -108,7 +104,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(PrimaryExpression newExpression)
+  public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)
     {
@@ -219,7 +215,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case Bug303200TestLanguagePackage.POSTFIX_EXPRESSION__EXPRESSION:
-        setExpression((PrimaryExpression)newValue);
+        setExpression((PostfixExpression)newValue);
         return;
       case Bug303200TestLanguagePackage.POSTFIX_EXPRESSION__PROPERTY:
         setProperty((PropertyOperator)newValue);
@@ -239,7 +235,7 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case Bug303200TestLanguagePackage.POSTFIX_EXPRESSION__EXPRESSION:
-        setExpression((PrimaryExpression)null);
+        setExpression((PostfixExpression)null);
         return;
       case Bug303200TestLanguagePackage.POSTFIX_EXPRESSION__PROPERTY:
         setProperty((PropertyOperator)null);

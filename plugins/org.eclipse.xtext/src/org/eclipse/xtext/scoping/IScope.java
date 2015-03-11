@@ -100,22 +100,27 @@ public interface IScope {
 	 */
 	public final static IScope NULLSCOPE = new IScope() {
 
+		@Override
 		public IEObjectDescription getSingleElement(QualifiedName name) {
 			return null;
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public IEObjectDescription getSingleElement(EObject object) {
 			return null;
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getElements(EObject object) {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getAllElements() {
 			return Collections.emptyList();
 		}

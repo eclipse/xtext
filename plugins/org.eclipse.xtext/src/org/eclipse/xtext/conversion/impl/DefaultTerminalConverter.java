@@ -43,6 +43,7 @@ public class DefaultTerminalConverter extends AbstractLexerBasedConverter<Object
 		this.dataType = dataType;
 	}
 
+	@Override
 	public Object toValue(String string, INode node) throws ValueConverterException {
 		try {
 			return dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);

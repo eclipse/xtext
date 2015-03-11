@@ -6,14 +6,13 @@ package org.eclipse.xtext.common.types.xtext.ui.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.common.types.xtext.ui.services.ContentAssistTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class ContentAssistTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class ContentAssistTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
@@ -33,7 +32,8 @@ protected class ThisRootNode extends RootToken {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
 			case 1: return new ReferenceHolder_Alternatives(this, this, 1, inst);
-			case 2: return new Import_Group(this, this, 2, inst);
+			case 2: return new GenerateDirective_Group(this, this, 2, inst);
+			case 3: return new Import_Group(this, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	imports+=Import* referenceHolder=ReferenceHolder;
+ * 	imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?;
  *
  **/
 
-// imports+=Import* referenceHolder=ReferenceHolder
+// imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -62,8 +62,10 @@ protected class Model_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ReferenceHolderAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
+			case 0: return new Model_ReferenceHolderAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_GenerateDirectiveAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_ImportsAssignment_0(lastRuleCallOrigin, this, 2, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 3, inst);
 		}	
 	}
 
@@ -122,35 +124,35 @@ protected class Model_ImportsAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// referenceHolder=ReferenceHolder
-protected class Model_ReferenceHolderAssignment_1 extends AssignmentToken  {
+// generateDirective=GenerateDirective?
+protected class Model_GenerateDirectiveAssignment_1 extends AssignmentToken  {
 	
-	public Model_ReferenceHolderAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_GenerateDirectiveAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getReferenceHolderAssignment_1();
+		return grammarAccess.getModelAccess().getGenerateDirectiveAssignment_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReferenceHolder_Alternatives(this, this, 0, inst);
+			case 0: return new GenerateDirective_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("referenceHolder",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("referenceHolder");
+		if((value = eObjectConsumer.getConsumable("generateDirective",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("generateDirective");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getReferenceHolderRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getGenerateDirectiveRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_1_0(); 
+				element = grammarAccess.getModelAccess().getGenerateDirectiveGenerateDirectiveParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -164,6 +166,53 @@ protected class Model_ReferenceHolderAssignment_1 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new Model_ImportsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+// referenceHolder=ReferenceHolder?
+protected class Model_ReferenceHolderAssignment_2 extends AssignmentToken  {
+	
+	public Model_ReferenceHolderAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getReferenceHolderAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ReferenceHolder_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("referenceHolder",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("referenceHolder");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getReferenceHolderRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_GenerateDirectiveAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_ImportsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 2, consumed);
 		}	
 	}	
 }
@@ -459,6 +508,101 @@ protected class ReferenceHolder_SubtypeReferenceAssignment_2_1 extends Assignmen
 /************ end Rule ReferenceHolder ****************/
 
 
+/************ begin Rule GenerateDirective ****************
+ *
+ * GenerateDirective:
+ * 	"generate" typeName=QN;
+ *
+ **/
+
+// "generate" typeName=QN
+protected class GenerateDirective_Group extends GroupToken {
+	
+	public GenerateDirective_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getGenerateDirectiveAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new GenerateDirective_TypeNameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getGenerateDirectiveRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "generate"
+protected class GenerateDirective_GenerateKeyword_0 extends KeywordToken  {
+	
+	public GenerateDirective_GenerateKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGenerateDirectiveAccess().getGenerateKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// typeName=QN
+protected class GenerateDirective_TypeNameAssignment_1 extends AssignmentToken  {
+	
+	public GenerateDirective_TypeNameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGenerateDirectiveAccess().getTypeNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new GenerateDirective_GenerateKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("typeName",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("typeName");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getGenerateDirectiveAccess().getTypeNameQNParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getGenerateDirectiveAccess().getTypeNameQNParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule GenerateDirective ****************/
+
+
 /************ begin Rule Import ****************
  *
  * Import:
@@ -552,6 +696,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Import ****************/
+
 
 
 

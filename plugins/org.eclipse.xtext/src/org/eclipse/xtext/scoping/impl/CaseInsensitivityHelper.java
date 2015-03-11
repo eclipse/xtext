@@ -24,6 +24,7 @@ public class CaseInsensitivityHelper implements ICaseInsensitivityHelper {
 	@IgnoreCaseLinking
 	private boolean isIgnoreCase = false;
 	
+	@Override
 	public boolean isIgnoreCase(EReference reference) {
 		return isIgnoreCase;
 	}

@@ -1,13 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 
@@ -72,7 +72,8 @@ public class RuleCallImpl extends RuleElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getRule()
+  @Override
+public String getRule()
   {
     return rule;
   }
@@ -82,7 +83,8 @@ public class RuleCallImpl extends RuleElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRule(String newRule)
+  @Override
+public void setRule(String newRule)
   {
     String oldRule = rule;
     rule = newRule;

@@ -54,10 +54,12 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 		return lookUp.getCommand() == keyCode || lookUp.getCtrl() == keyCode;
 	}
 	
+	@Override
 	public void verifyKey(VerifyEvent event) {
 		skipNext = shouldSkipNext(event.keyCode);
 	}
 
+	@Override
 	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 		if (skipNext)
 			return;
@@ -99,6 +101,7 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, document.getLength());
 		Iterable<ITypedRegion> partitionsOfCurrentType = Iterables.filter(Arrays.asList(partitions),
 				new Predicate<ITypedRegion>() {
+					@Override
 					public boolean apply(ITypedRegion input) {
 						return input.getType().equals(partition.getType());
 					}

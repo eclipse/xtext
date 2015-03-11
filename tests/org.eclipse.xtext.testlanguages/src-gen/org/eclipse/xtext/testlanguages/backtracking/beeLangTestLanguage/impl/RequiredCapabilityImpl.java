@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -24,6 +21,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Required
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.RequiredCapabilityImpl#getNameSpace <em>Name Space</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.RequiredCapabilityImpl#getName <em>Name</em>}</li>
@@ -33,7 +31,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Required
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.RequiredCapabilityImpl#getMax <em>Max</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.RequiredCapabilityImpl#getVersionRange <em>Version Range</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

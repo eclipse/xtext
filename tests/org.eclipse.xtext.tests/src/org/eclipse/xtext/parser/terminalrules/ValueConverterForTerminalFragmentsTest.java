@@ -11,8 +11,9 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,12 +21,12 @@ import org.eclipse.xtext.nodemodel.INode;
 public class ValueConverterForTerminalFragmentsTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(TerminalRulesTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testExceptionWhenRegistered() {
+	@Test public void testExceptionWhenRegistered() {
 		IValueConverterService converters = get(ConverterForFragment.class);
 		try {
 			converters.toValue("foo", "STRING", null);

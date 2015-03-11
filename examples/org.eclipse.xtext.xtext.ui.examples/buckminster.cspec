@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.xtext.ui.examples-container" componentType="buckminster" version="1.0.0.qualifier">
+	<cs:actions>
+		<cs:public name="zip.examples.content" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="build.xml" />
+				<cs:property key="targets" value="zip_all_examples" />
+			</cs:actorProperties>
+		</cs:public>
+	</cs:actions>
+</cs:cspec>

@@ -21,6 +21,7 @@ public abstract class AbstractNFAProvider<S, T> implements
 
 	protected abstract NFABuilder<S, T> createBuilder();
 
+	@Override
 	public S getNFA(AbstractElement element) {
 		return builder.getState(element);
 	}

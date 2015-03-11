@@ -12,44 +12,44 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEpatchTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__35=35;
-    public static final int T__12=12;
-    public static final int RULE_ID=4;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=5;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__29=29;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int RULE_WS=10;
-    public static final int T__17=17;
-    public static final int T__31=31;
     public static final int T__40=40;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
+    public static final int RULE_ID=4;
+    public static final int T__29=29;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__24=24;
-    public static final int T__38=38;
-    public static final int T__37=37;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T__25=25;
-    public static final int RULE_FRAGMENT=6;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_FRAGMENT=6;
+    public static final int T__19=19;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=5;
+    public static final int T__16=16;
+    public static final int T__33=33;
+    public static final int T__15=15;
     public static final int T__34=34;
     public static final int T__18=18;
-    public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__17=17;
+    public static final int T__36=36;
+    public static final int T__12=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__14=14;
+    public static final int T__39=39;
+    public static final int T__13=13;
+    public static final int RULE_INT=7;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -852,10 +852,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -873,10 +873,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -892,23 +892,15 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -933,10 +925,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -952,23 +944,15 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1505,57 +1489,19 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
     protected DFA13 dfa13 = new DFA13(this);
     static final String DFA13_eotS =
-        "\1\uffff\1\44\2\uffff\4\44\1\uffff\1\57\2\44\1\uffff\1\44\5\uffff"+
-        "\3\44\2\uffff\2\40\2\uffff\3\40\2\uffff\3\44\3\uffff\2\44\1\112"+
-        "\3\44\3\uffff\3\44\1\uffff\1\44\5\uffff\2\44\1\124\10\uffff\4\44"+
-        "\1\131\1\uffff\1\44\1\133\7\44\1\uffff\2\44\1\145\1\44\1\uffff\1"+
-        "\147\1\uffff\1\150\2\44\1\153\1\44\1\155\3\44\1\uffff\1\44\2\uffff"+
-        "\1\44\1\163\1\uffff\1\44\1\uffff\1\44\1\166\1\44\1\170\1\44\1\uffff"+
-        "\1\172\1\44\1\uffff\1\44\1\uffff\1\44\1\uffff\1\176\1\44\1\u0080"+
-        "\1\uffff\1\u0081\2\uffff";
+        "\1\uffff\1\44\2\uffff\4\44\1\uffff\1\57\2\44\1\uffff\1\44\5\uffff\3\44\2\uffff\2\40\2\uffff\3\40\2\uffff\3\44\3\uffff\2\44\1\112\3\44\3\uffff\3\44\1\uffff\1\44\5\uffff\2\44\1\124\10\uffff\4\44\1\131\1\uffff\1\44\1\133\7\44\1\uffff\2\44\1\145\1\44\1\uffff\1\147\1\uffff\1\150\2\44\1\153\1\44\1\155\3\44\1\uffff\1\44\2\uffff\1\44\1\163\1\uffff\1\44\1\uffff\1\44\1\166\1\44\1\170\1\44\1\uffff\1\172\1\44\1\uffff\1\44\1\uffff\1\44\1\uffff\1\176\1\44\1\u0080\1\uffff\1\u0081\2\uffff";
     static final String DFA13_eofS =
         "\u0082\uffff";
     static final String DFA13_minS =
-        "\1\0\1\141\2\uffff\1\155\1\162\1\145\1\141\1\uffff\1\72\2\145\1"+
-        "\uffff\1\142\5\uffff\1\157\1\151\1\163\2\uffff\1\56\1\101\2\uffff"+
-        "\2\0\1\52\2\uffff\1\141\1\164\1\143\3\uffff\1\160\1\151\1\60\1\154"+
-        "\1\167\1\166\3\uffff\1\163\1\147\1\146\1\uffff\1\152\5\uffff\1\160"+
-        "\1\147\1\60\10\uffff\1\164\1\145\1\150\1\157\1\60\1\uffff\1\154"+
-        "\1\60\1\141\1\157\1\150\1\164\1\145\1\171\1\162\1\uffff\1\143\1"+
-        "\156\1\60\1\162\1\uffff\1\60\1\uffff\1\60\1\165\1\164\1\60\1\143"+
-        "\1\60\1\141\1\150\1\163\1\uffff\1\164\2\uffff\1\162\1\60\1\uffff"+
-        "\1\164\1\uffff\1\164\1\60\1\151\1\60\1\143\1\uffff\1\60\1\145\1"+
-        "\uffff\1\157\1\uffff\1\145\1\uffff\1\60\1\156\1\60\1\uffff\1\60"+
-        "\2\uffff";
+        "\1\0\1\141\2\uffff\1\155\1\162\1\145\1\141\1\uffff\1\72\2\145\1\uffff\1\142\5\uffff\1\157\1\151\1\163\2\uffff\1\56\1\101\2\uffff\2\0\1\52\2\uffff\1\141\1\164\1\143\3\uffff\1\160\1\151\1\60\1\154\1\167\1\166\3\uffff\1\163\1\147\1\146\1\uffff\1\152\5\uffff\1\160\1\147\1\60\10\uffff\1\164\1\145\1\150\1\157\1\60\1\uffff\1\154\1\60\1\141\1\157\1\150\1\164\1\145\1\171\1\162\1\uffff\1\143\1\156\1\60\1\162\1\uffff\1\60\1\uffff\1\60\1\165\1\164\1\60\1\143\1\60\1\141\1\150\1\163\1\uffff\1\164\2\uffff\1\162\1\60\1\uffff\1\164\1\uffff\1\164\1\60\1\151\1\60\1\143\1\uffff\1\60\1\145\1\uffff\1\157\1\uffff\1\145\1\uffff\1\60\1\156\1\60\1\uffff\1\60\2\uffff";
     static final String DFA13_maxS =
-        "\1\uffff\1\170\2\uffff\1\155\1\162\1\165\1\141\1\uffff\1\72\1\151"+
-        "\1\145\1\uffff\1\142\5\uffff\1\157\1\151\1\163\2\uffff\1\175\1\172"+
-        "\2\uffff\2\uffff\1\57\2\uffff\1\141\1\164\1\143\3\uffff\1\160\1"+
-        "\151\1\172\1\154\1\167\1\166\3\uffff\1\163\1\147\1\146\1\uffff\1"+
-        "\152\5\uffff\1\160\1\147\1\172\10\uffff\1\164\1\145\1\150\1\157"+
-        "\1\172\1\uffff\1\154\1\172\1\141\1\157\1\150\1\164\1\145\1\171\1"+
-        "\162\1\uffff\1\143\1\156\1\172\1\162\1\uffff\1\172\1\uffff\1\172"+
-        "\1\165\1\164\1\172\1\143\1\172\1\141\1\150\1\163\1\uffff\1\164\2"+
-        "\uffff\1\162\1\172\1\uffff\1\164\1\uffff\1\164\1\172\1\151\1\172"+
-        "\1\143\1\uffff\1\172\1\145\1\uffff\1\157\1\uffff\1\145\1\uffff\1"+
-        "\172\1\156\1\172\1\uffff\1\172\2\uffff";
+        "\1\uffff\1\170\2\uffff\1\155\1\162\1\165\1\141\1\uffff\1\72\1\151\1\145\1\uffff\1\142\5\uffff\1\157\1\151\1\163\2\uffff\1\175\1\172\2\uffff\2\uffff\1\57\2\uffff\1\141\1\164\1\143\3\uffff\1\160\1\151\1\172\1\154\1\167\1\166\3\uffff\1\163\1\147\1\146\1\uffff\1\152\5\uffff\1\160\1\147\1\172\10\uffff\1\164\1\145\1\150\1\157\1\172\1\uffff\1\154\1\172\1\141\1\157\1\150\1\164\1\145\1\171\1\162\1\uffff\1\143\1\156\1\172\1\162\1\uffff\1\172\1\uffff\1\172\1\165\1\164\1\172\1\143\1\172\1\141\1\150\1\163\1\uffff\1\164\2\uffff\1\162\1\172\1\uffff\1\164\1\uffff\1\164\1\172\1\151\1\172\1\143\1\uffff\1\172\1\145\1\uffff\1\157\1\uffff\1\145\1\uffff\1\172\1\156\1\172\1\uffff\1\172\2\uffff";
     static final String DFA13_acceptS =
-        "\2\uffff\1\2\1\3\4\uffff\1\10\3\uffff\1\15\1\uffff\1\20\1\21\1\22"+
-        "\1\23\1\24\3\uffff\1\34\1\35\2\uffff\1\37\1\40\3\uffff\1\44\1\45"+
-        "\3\uffff\1\37\1\2\1\3\6\uffff\1\10\1\12\1\25\3\uffff\1\15\1\uffff"+
-        "\1\20\1\21\1\22\1\23\1\24\3\uffff\1\34\1\35\1\36\1\40\1\41\1\42"+
-        "\1\43\1\44\5\uffff\1\6\11\uffff\1\32\4\uffff\1\5\1\uffff\1\27\11"+
-        "\uffff\1\33\1\uffff\1\26\1\7\2\uffff\1\14\1\uffff\1\30\5\uffff\1"+
-        "\16\2\uffff\1\1\1\uffff\1\4\1\uffff\1\17\3\uffff\1\31\1\uffff\1"+
-        "\13\1\11";
+        "\2\uffff\1\2\1\3\4\uffff\1\10\3\uffff\1\15\1\uffff\1\20\1\21\1\22\1\23\1\24\3\uffff\1\34\1\35\2\uffff\1\37\1\40\3\uffff\1\44\1\45\3\uffff\1\37\1\2\1\3\6\uffff\1\10\1\12\1\25\3\uffff\1\15\1\uffff\1\20\1\21\1\22\1\23\1\24\3\uffff\1\34\1\35\1\36\1\40\1\41\1\42\1\43\1\44\5\uffff\1\6\11\uffff\1\32\4\uffff\1\5\1\uffff\1\27\11\uffff\1\33\1\uffff\1\26\1\7\2\uffff\1\14\1\uffff\1\30\5\uffff\1\16\2\uffff\1\1\1\uffff\1\4\1\uffff\1\17\3\uffff\1\31\1\uffff\1\13\1\11";
     static final String DFA13_specialS =
-        "\1\1\33\uffff\1\0\1\2\144\uffff}>";
+        "\1\2\33\uffff\1\1\1\0\144\uffff}>";
     static final String[] DFA13_transitionS = {
-            "\11\40\2\37\2\40\1\37\22\40\1\37\1\40\1\34\1\30\3\40\1\35\1"+
-            "\26\1\27\2\40\1\21\1\40\1\10\1\36\12\33\1\11\1\14\1\40\1\16"+
-            "\3\40\32\32\1\20\1\40\1\22\1\31\1\32\1\40\1\25\1\32\1\23\1\32"+
-            "\1\1\3\32\1\4\1\7\1\32\1\13\1\24\1\6\1\15\2\32\1\12\2\32\1\5"+
-            "\5\32\1\2\1\17\1\3\uff82\40",
+            "\11\40\2\37\2\40\1\37\22\40\1\37\1\40\1\34\1\30\3\40\1\35\1\26\1\27\2\40\1\21\1\40\1\10\1\36\12\33\1\11\1\14\1\40\1\16\3\40\32\32\1\20\1\40\1\22\1\31\1\32\1\40\1\25\1\32\1\23\1\32\1\1\3\32\1\4\1\7\1\32\1\13\1\24\1\6\1\15\2\32\1\12\2\32\1\5\5\32\1\2\1\17\1\3\uff82\40",
             "\1\43\16\uffff\1\41\7\uffff\1\42",
             "",
             "",
@@ -1579,8 +1525,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
             "\1\74",
             "",
             "",
-            "\14\77\6\uffff\34\77\1\uffff\1\77\1\uffff\1\77\1\uffff\33\77"+
-            "\1\uffff\1\77",
+            "\14\77\6\uffff\34\77\1\uffff\1\77\1\uffff\1\77\1\uffff\33\77\1\uffff\1\77",
             "\32\44\4\uffff\1\44\1\uffff\32\44",
             "",
             "",
@@ -1704,7 +1649,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA13 extends DFA {
+    static class DFA13 extends DFA {
 
         public DFA13(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -1725,6 +1670,16 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA13_29 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA13_29>='\u0000' && LA13_29<='\uFFFF')) ) {s = 65;}
+
+                        else s = 32;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA13_28 = input.LA(1);
 
                         s = -1;
@@ -1734,7 +1689,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA13_0 = input.LA(1);
 
                         s = -1;
@@ -1801,16 +1756,6 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                         else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {s = 31;}
 
                         else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||(LA13_0>='$' && LA13_0<='&')||(LA13_0>='*' && LA13_0<='+')||LA13_0=='-'||LA13_0=='<'||(LA13_0>='>' && LA13_0<='@')||LA13_0=='\\'||LA13_0=='`'||(LA13_0>='~' && LA13_0<='\uFFFF')) ) {s = 32;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA13_29 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA13_29>='\u0000' && LA13_29<='\uFFFF')) ) {s = 65;}
-
-                        else s = 32;
 
                         if ( s>=0 ) return s;
                         break;

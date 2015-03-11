@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -27,6 +24,7 @@ import org.eclipse.xtext.validation.csvalidationtest.TwoVersion;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl#getShared1 <em>Shared1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl#getShared2 <em>Shared2</em>}</li>
@@ -37,7 +35,6 @@ import org.eclipse.xtext.validation.csvalidationtest.TwoVersion;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl#getExtra3 <em>Extra3</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl#getExtra4 <em>Extra4</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

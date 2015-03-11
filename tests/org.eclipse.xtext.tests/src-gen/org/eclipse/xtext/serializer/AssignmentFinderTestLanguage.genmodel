@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="AssignmentFinderTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="AssignmentFinderTest" basePackage="org.eclipse.xtext.serializer"
+      disposableProviderFactory="true" ecorePackage="AssignmentFinderTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="AssignmentFinderTestLanguage.ecore#//TestEnum">
+      <genEnumLiterals ecoreEnumLiteral="AssignmentFinderTestLanguage.ecore#//TestEnum/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="AssignmentFinderTestLanguage.ecore#//TestEnum/lit2"/>
+      <genEnumLiterals ecoreEnumLiteral="AssignmentFinderTestLanguage.ecore#//TestEnum/lit3"/>
+    </genEnums>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/keywordVal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/terminalVal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/enumVal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/keywordBool"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/terminalBool"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/enumBool"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/mixedBool"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/mixedValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/containmentRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//Model/crossRef"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//KeywordVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//KeywordVal/kw"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//TerminalVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//TerminalVal/term"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//EnumVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//EnumVal/en"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//KeywordBool">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//KeywordBool/kw"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//TerminalBool">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//TerminalBool/term"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//EnumBool">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//EnumBool/en"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//MixedBool">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//MixedBool/val"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//MixedValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//MixedValue/val"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//ContainmentRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//ContainmentRef/ctx"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//ContainmentRefN">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//ContainmentRefN/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//ContainmentRefN/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="AssignmentFinderTestLanguage.ecore#//CrossRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentFinderTestLanguage.ecore#//CrossRef/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AssignmentFinderTestLanguage.ecore#//CrossRef/crossRef"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

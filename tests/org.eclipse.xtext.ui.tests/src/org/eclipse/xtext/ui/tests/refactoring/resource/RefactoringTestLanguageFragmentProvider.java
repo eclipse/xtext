@@ -13,23 +13,36 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class RefactoringTestLanguageFragmentProvider implements IFragmentProvider {
 
+	private boolean useNames = false;
+
+	public void setUseNames(boolean useNames) {
+		this.useNames = useNames;
+	}
+
+	@Override
 	public String getFragment(EObject obj, Fallback fallback) {
-		if (obj instanceof Element)
+		if (useNames && obj instanceof Element)
 			return ((Element) obj).getName();
 		else
 			return fallback.getFragment(obj);
 	}
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
-		for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {
-			EObject obj = i.next();
-			if (obj instanceof Element && fragment.equals(((Element) obj).getName()))
-				return obj;
+		if (useNames) {
+			for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {
+				EObject obj = i.next();
+				if (obj instanceof Element && fragment.equals(((Element) obj).getName()))
+					return obj;
+			}
 		}
 		return fallback.getEObject(fragment);
 	}

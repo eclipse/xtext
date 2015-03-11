@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecoreReference" nsURI="http://www.eclipse.org/2011/tmf/xtext/ecoreReference"
+    nsPrefix="ecoreReference">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MyNamedElement_01" eSuperTypes="../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore#//ExtendsNsURIEObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MyNamedElement_02" eSuperTypes="../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore#//ExtendsResourceEObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MyNamedElement_03" eSuperTypes="../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject"/>
+</ecore:EPackage>

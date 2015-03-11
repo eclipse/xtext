@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.foo;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.Stuff#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.Stuff#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.foo.FooPackage#getStuff()
  * @model

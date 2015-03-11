@@ -28,6 +28,7 @@ public interface IConcreteSyntaxValidator {
 			this.chain = chain;
 		}
 
+		@Override
 		public void accept(IConcreteSyntaxDiagnostic diag) {
 			chain.add(diag);
 		}
@@ -42,6 +43,7 @@ public interface IConcreteSyntaxValidator {
 			this.chain = chain;
 		}
 
+		@Override
 		public void accept(IConcreteSyntaxDiagnostic diag) {
 			chain.add(diag);
 		}

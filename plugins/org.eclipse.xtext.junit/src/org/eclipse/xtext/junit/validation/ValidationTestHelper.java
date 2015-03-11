@@ -28,7 +28,10 @@ import com.google.common.collect.Iterables;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.ValidationTestHelper instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ValidationTestHelper {
 
 	public List<Issue> validate(EObject model) {
@@ -46,6 +49,7 @@ public class ValidationTestHelper {
 	public void assertNoErrors(final EObject model) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return Severity.ERROR == input.getSeverity();
 			}
@@ -57,6 +61,7 @@ public class ValidationTestHelper {
 	public void assertNoError(final EObject model, final String issuecode) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return issuecode.equals(input.getCode());
 			}
@@ -74,6 +79,7 @@ public class ValidationTestHelper {
 			final String... messageParts) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
 					EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);

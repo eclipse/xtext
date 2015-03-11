@@ -27,7 +27,6 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 
 	private TreeViewer treeViewer;
 
-	@Inject 
 	private OutlineFilterAndSorter outlineFilterAndSorter;
 	
 	@Inject 
@@ -40,7 +39,7 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		if(!treeViewer.getTree().isDisposed())
+		if(treeViewer != null && !treeViewer.getTree().isDisposed())
 			treeViewer.refresh();
 	}
 
@@ -48,6 +47,7 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 		@Inject 
 		private IPreferenceStoreAccess preferenceStoreAccess;
 		
+		@Override
 		public int compare(IOutlineNode o1, IOutlineNode o2) {
 			int category1 = getCategory(o1);
 			int category2 = getCategory(o2);
@@ -56,6 +56,7 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 			return o1.getText().toString().compareTo(o2.getText().toString());
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return preferenceStoreAccess.getPreferenceStore().getBoolean(PREFERENCE_KEY);
 		}
@@ -77,7 +78,15 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 	@Override
 	public void register(OutlinePage outlinePage) {
 		super.register(outlinePage);
+		outlineFilterAndSorter = outlinePage.getFilterAndSorter();
 		this.treeViewer = outlinePage.getTreeViewer();
 		outlineFilterAndSorter.setComparator(comparator);
+	}
+	
+	@Override
+	public void deregister(OutlinePage outlinePage) {
+		outlineFilterAndSorter = null;
+		treeViewer = null;
+		super.deregister(outlinePage);
 	}
 }

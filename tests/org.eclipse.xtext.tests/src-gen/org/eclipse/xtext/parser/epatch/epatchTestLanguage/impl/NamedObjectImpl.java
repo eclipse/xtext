@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -32,12 +29,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedObject;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getLeftMig <em>Left Mig</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

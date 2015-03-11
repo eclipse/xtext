@@ -60,38 +60,47 @@ public interface IContainer extends ISelectable {
 	 */
 	static IContainer NULL_CONTAINER = new IContainer() {
 
+		@Override
 		public boolean isEmpty() {
 			return true;
 		}
 		
+		@Override
 		public int getResourceDescriptionCount() {
 			return 0;
 		}
 		
+		@Override
 		public boolean hasResourceDescription(URI uri) {
 			return false;
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 			return emptySet();
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 			return emptySet();
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			return emptySet();
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 			return emptySet();
 		}
 		
+		@Override
 		public Iterable<IResourceDescription> getResourceDescriptions() {
 			return emptySet();
 		}
 
+		@Override
 		public IResourceDescription getResourceDescription(URI uri) {
 			return null;
 		}

@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
 
@@ -18,12 +20,15 @@ import com.google.inject.Inject;
 public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;
-
+	protected final TypeResourceServices services;
+	
 	@Inject
-	public ClasspathTypeProviderFactory(ClassLoader classLoader) {
+	public ClasspathTypeProviderFactory(ClassLoader classLoader, TypeResourceServices services) {
 		this.classLoader = classLoader;
+		this.services = services;
 	}
 	
+	@Override
 	public ClasspathTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
@@ -32,11 +37,28 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ClasspathTypeProvider(classLoader, resourceSet);
+		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess(), services);
 	}
 	
-	public ClassLoader getClassLoader() {
+	public ClassLoader getClassLoader(ResourceSet resourceSet) {
+		if (resourceSet instanceof XtextResourceSet) {
+			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
+			Object ctx = xtextResourceSet.getClasspathURIContext();
+			if (ctx != null) {
+		        if (ctx instanceof Class<?>) {
+		            return ((Class<?>)ctx).getClassLoader();
+		        }
+		        if (!(ctx instanceof ClassLoader)) {
+		        	return ctx.getClass().getClassLoader();
+		        }
+		        return (ClassLoader) ctx;
+			}
+		}
 		return classLoader;
+	}
+	
+	boolean isDefaultClassLoader(ClassLoader loader) {
+		return classLoader == loader;
 	}
 	
 	@Override
@@ -45,8 +67,8 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 	
 	@Override
-	public ClasspathTypeProvider findTypeProvider(ResourceSet resourceSet) {
-		return (ClasspathTypeProvider) super.findTypeProvider(resourceSet);
+	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
+		return super.findTypeProvider(resourceSet);
 	}
 	
 }

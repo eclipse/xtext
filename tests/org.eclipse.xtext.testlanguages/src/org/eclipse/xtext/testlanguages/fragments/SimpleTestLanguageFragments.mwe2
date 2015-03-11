@@ -8,20 +8,34 @@ var grammarURI
 var backtrack = false
 var memoize = false
 var classSplitting = true
-var parser = parser.antlr.XtextAntlrGeneratorFragment {
-  	options = auto-inject {}
+
+var runtimeProjectName = "org.eclipse.xtext.testlanguages"
+var runtimeProjectPath = "../${runtimeProjectName}"
+var ideaProjectName = "org.eclipse.xtext.testlanguages.idea"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
+var parser = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+  	options = auto-inject {
+  		fieldsPerClass = "100"
+  		methodsPerClass = "100"
+  	}
 }
-var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment {
-	options = auto-inject {}
+var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+	options = auto-inject {
+  		fieldsPerClass = "100"
+  		methodsPerClass = "100"
+  	}
 }
 
 LanguageConfig {
 	uri = grammarURI
 	// Java API to access grammar elements (required by several other fragments)
-	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 	// generates Java API for the generated EPackages 
-	fragment = ecore.EcoreGeneratorFragment {}
+	fragment = ecore.EcoreGeneratorFragment auto-inject {
+		emfRuntimeVersion = "2.9"
+	}
 
 	// the serialization component
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -63,4 +77,12 @@ LanguageConfig {
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
 
 	fragment = contentAssist.parser
+	
+    fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+    	options = auto-inject {
+  			fieldsPerClass = "100"
+  			methodsPerClass = "100"
+  		}
+    }
+	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.actionLang.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.testlanguages.actionLang.Parent;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

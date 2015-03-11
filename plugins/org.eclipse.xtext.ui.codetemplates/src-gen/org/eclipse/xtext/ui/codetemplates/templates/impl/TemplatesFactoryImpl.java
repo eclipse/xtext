@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -33,7 +30,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
   {
     try
     {
-      TemplatesFactory theTemplatesFactory = (TemplatesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/codetemplate/Codetemplates"); 
+      TemplatesFactory theTemplatesFactory = (TemplatesFactory)EPackage.Registry.INSTANCE.getEFactory(TemplatesPackage.eNS_URI);
       if (theTemplatesFactory != null)
       {
         return theTemplatesFactory;

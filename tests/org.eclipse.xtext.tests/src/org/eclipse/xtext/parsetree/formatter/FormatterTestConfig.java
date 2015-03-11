@@ -16,21 +16,21 @@ public class FormatterTestConfig extends AbstractDeclarativeFormatter {
 		c.setWrappedLineIndentation(1);
 		
 		// TestLinewrap
-		c.setLinewrap().after(f.getTestLinewrapAccess().getLinewrapKeyword_0());
+		c.setLinewrap().after(f.getTestLinewrapAccess().getLinewrapKeyword_1());
 
 		// Line
 		c.setLinewrap().after(f.getLineAccess().getSemicolonKeyword_1());
 		c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
 
 		// TestIndentation
-		c.setIndentationIncrement().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
-		c.setIndentationDecrement().before(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
-		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
-		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
-		c.setLinewrap().after(f.getTestIndentationAccess().getSemiAssignment_4());
-		c.setNoLinewrap().between(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3(),
-				f.getTestIndentationAccess().getSemiAssignment_4());
-		c.setNoSpace().before(f.getTestIndentationAccess().getSemiAssignment_4());
+		c.setIndentationIncrement().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_2());
+		c.setIndentationDecrement().before(f.getTestIndentationAccess().getRightCurlyBracketKeyword_4());
+		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_2());
+		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_4());
+		c.setLinewrap().after(f.getTestIndentationAccess().getSemiAssignment_5());
+		c.setNoLinewrap().between(f.getTestIndentationAccess().getRightCurlyBracketKeyword_4(),
+				f.getTestIndentationAccess().getSemiAssignment_5());
+		c.setNoSpace().before(f.getTestIndentationAccess().getSemiAssignment_5());
 
 		// Assign
 		c.setNoSpace().around(f.getAssignAccess().getOpAssignment_1());
@@ -52,7 +52,7 @@ public class FormatterTestConfig extends AbstractDeclarativeFormatter {
 		c.setSpace("     ").after(f.getSpaceAccess().getSpaceKeyword_0());
 
 		// TestLinewrapMinMax
-		c.setLinewrap(2, 3, 5).after(f.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_0());
+		c.setLinewrap(2, 3, 5).after(f.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_1());
 
 		// FqnObj
 		c.setLinewrap().before(f.getFqnObjAccess().getNameFQNParserRuleCall_1_0());

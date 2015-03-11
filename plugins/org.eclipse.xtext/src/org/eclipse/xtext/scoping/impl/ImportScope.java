@@ -62,7 +62,7 @@ public class ImportScope extends AbstractScope {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + normalizers + getAllLocalElements() + " -> " + getParent();
+		return getClass().getSimpleName() + normalizers + " imports from " + importFrom + " for type "+type.getName();
 	}
 
 	@Override
@@ -75,6 +75,7 @@ public class ImportScope extends AbstractScope {
 			elements.add(qn);
 		}
 		return concat(aliased, filter(globalElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return !elements.contains(getIgnoreCaseAwareQualifiedName(input));
 			}
@@ -97,6 +98,7 @@ public class ImportScope extends AbstractScope {
 		final Iterable<IEObjectDescription> aliasedElements = getAliasedElements(candidates);
 		// make sure that the element is returned when asked by name.
 		return filter(aliasedElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				IEObjectDescription description = getSingleLocalElementByName(input.getName());
 				if (description==null)
@@ -144,7 +146,7 @@ public class ImportScope extends AbstractScope {
 	@Override
 	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		List<IEObjectDescription> result = newArrayList();
-		ImportNormalizer foundForNormalizer = null;
+		QualifiedName resolvedQualifiedName = null;
 		ISelectable importFrom = getImportFrom();
 		for (ImportNormalizer normalizer : normalizers) {
 			final QualifiedName resolvedName = normalizer.resolve(name);
@@ -152,10 +154,13 @@ public class ImportScope extends AbstractScope {
 				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName,
 						isIgnoreCase());
 				for (IEObjectDescription resolvedElement : resolvedElements) {
-					if (foundForNormalizer == null)
-						foundForNormalizer = normalizer;
-					else if (foundForNormalizer != normalizer)
-						return emptyList();
+					if (resolvedQualifiedName == null)
+						resolvedQualifiedName = resolvedName;
+					else if (!resolvedQualifiedName.equals(resolvedName)) {
+						if (result.get(0).getEObjectOrProxy() != resolvedElement.getEObjectOrProxy()) {
+							return emptyList();
+						}
+					}
 					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
 					if (alias == null)
 						throw new IllegalStateException("Couldn't deresolve " + resolvedElement.getName()

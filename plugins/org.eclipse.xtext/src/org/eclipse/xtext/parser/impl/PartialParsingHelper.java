@@ -17,6 +17,7 @@ import java.util.ListIterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -61,30 +64,37 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	
 	@Inject
 	private NodeModelBuilder nodeModelBuilder = new NodeModelBuilder();
+	
+	@Inject(optional=true)
+	private TokenRegionProvider tokenRegionProvider;
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
+	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion changedRegion) {
 		if (parser == null)
 			throw new NullPointerException("parser may not be null");
-		if (previousParseResult == null || previousParseResult.getRootNode() == null) {
+		if (previousParseResult == null) {
 			throw new NullPointerException("previousParseResult and previousParseResult.rootNode may not be null");
 		}
 		ICompositeNode oldRootNode = previousParseResult.getRootNode();
-		if (replaceRegion.getEndOffset() > oldRootNode.getTotalLength()) {
-			log.error("Invalid " + replaceRegion + " originalLength=" + oldRootNode.getTotalLength());
-			return fullyReparse(parser, previousParseResult, replaceRegion);
+		if (changedRegion.getEndOffset() > oldRootNode.getTotalLength()) {
+			log.error("Invalid " + changedRegion + " originalLength=" + oldRootNode.getTotalLength());
+			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		if (replaceRegion.getOffset() >= oldRootNode.getTotalLength() && replaceRegion.getText().trim().length() == 0) {
-			return fullyReparse(parser, previousParseResult, replaceRegion);
+		if (changedRegion.getOffset() >= oldRootNode.getTotalLength() && changedRegion.getText().trim().length() == 0) {
+			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		
+		ReplaceRegion replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, changedRegion), changedRegion);
+		if (isNullEdit(oldRootNode, replaceRegion)) {
+			return previousParseResult;
+		}
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(previousParseResult, replaceRegion.getOffset(), replaceRegion.getLength());
 		List<ICompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
 		ICompositeNode oldCompositeNode = null;
 		String reparseRegion = "";
 		for (int i = validReplaceRootNodes.size() - 1; i >= 0; --i) {
 			oldCompositeNode = validReplaceRootNodes.get(i);
-			if (!(oldCompositeNode instanceof SyntheticCompositeNode)) {
+			if (!(oldCompositeNode instanceof SyntheticCompositeNode) && !isRangePartOfExceedingLookAhead((CompositeNode) oldCompositeNode, replaceRegion)) {
 				boolean replaceAtEnd = oldCompositeNode.getTotalEndOffset() == replaceRegion.getEndOffset();
 				reparseRegion = insertChangeIntoReplaceRegion(oldCompositeNode, replaceRegion);
 				if (!"".equals(reparseRegion)) {
@@ -142,11 +152,17 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			EStructuralFeature feature = oldSemanticElement.eContainingFeature();
 			if (feature == null)
 				return fullyReparse(parser, previousParseResult, replaceRegion);
+			oldSemanticParentElement = oldSemanticElement.eContainer();
 			if (feature.isMany()) {
 				List featureValueList = (List) oldSemanticParentElement.eGet(feature);
 				int index = featureValueList.indexOf(oldSemanticElement);
 				unloadSemanticObject(oldSemanticElement);
-				featureValueList.set(index, newParseResult.getRootASTElement());
+				EObject newSemanticObject = newParseResult.getRootASTElement();
+				if (newSemanticObject != null) {
+					featureValueList.set(index, newParseResult.getRootASTElement());
+				} else {
+					featureValueList.remove(index);
+				}
 			} else {
 				unloadSemanticObject(oldSemanticElement);
 				oldSemanticParentElement.eSet(feature, newParseResult.getRootASTElement());
@@ -163,6 +179,38 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());
 		} 
 		return newParseResult;
+	}
+	
+	private boolean isRangePartOfExceedingLookAhead(CompositeNode node, ReplaceRegion replaceRegion) {
+		TreeIterator<AbstractNode> iterator = node.basicIterator();
+		int lookAhead = node.getLookAhead();
+		if (lookAhead == 0) {
+			return false;
+		}
+		while(iterator.hasNext()) {
+			AbstractNode child = iterator.next();
+			if (child instanceof CompositeNode) {
+				if (child.getTotalOffset() < replaceRegion.getEndOffset())
+					lookAhead = Math.max(((CompositeNode) child).getLookAhead(), lookAhead);
+			} else if (!((ILeafNode) child).isHidden()) {
+				lookAhead--;
+				if (lookAhead == 0) {
+					if (child.getTotalOffset() >= replaceRegion.getEndOffset())
+						return false;
+				}
+			}
+		}
+		return lookAhead > 0;
+	}
+	
+	private boolean isNullEdit(INode oldRootNode, ReplaceRegion replaceRegion) {
+		if (replaceRegion.getLength() == replaceRegion.getText().length()) {
+			String replacedText = oldRootNode.getText().substring(replaceRegion.getOffset(), replaceRegion.getEndOffset());
+			if (replaceRegion.getText().equals(replacedText)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected IParseResult fullyReparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
@@ -235,6 +283,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
 			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
 				return true;
+			else if (isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement()))
+				return true;
 		}
 		if (candidate.getGrammarElement() instanceof Action) {
 			return true;
@@ -254,6 +304,23 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		return false;
 	}
 
+
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isInvalidDueToPredicates(AbstractElement element) {
+//		if(element.isPredicated()) 
+//			return true;
+//		else if(element instanceof RuleCall) {
+//			AbstractRule rule = ((RuleCall) element).getRule();
+//			if(rule.getAlternatives() instanceof Group) {
+//				boolean result = isInvalidDueToPredicates(((Group) rule.getAlternatives()).getElements().get(0));
+//				return result;
+//			}
+//		}
+		return false;
+	}
+	
 	protected boolean isInvalidLastChildNode(ICompositeNode candidate, INode lastChild) {
 		if (lastChild != null && lastChild.getSyntaxErrorMessage() != null) {
 			EObject lastChildGrammarElement = lastChild.getGrammarElement();
@@ -454,7 +521,13 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		List<ICompositeNode> result = new ArrayList<ICompositeNode>();
 		boolean mustSkipNext = false;
 		ICompositeNode previous = null;
-		for (ICompositeNode node : nodesEnclosingRegion) {
+		/*
+		 * set to 'true' as soon as the lookahead of an enclosing
+		 * exceeds the given range
+		 */
+		boolean done = false;  
+		for (int i = 0; i < nodesEnclosingRegion.size() && !done; i++) {
+			ICompositeNode node = nodesEnclosingRegion.get(i);
 			if (node.getGrammarElement() != null) {
 				if (!mustSkipNext) {
 					boolean process = true;
@@ -466,7 +539,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 					EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(node);
 					if (semanticElement != null) {
 						ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(semanticElement);
-						if (actualNode.getTotalOffset() < node.getTotalOffset() || actualNode.getTotalEndOffset() > node.getTotalEndOffset())
+						if (actualNode != null && (actualNode.getTotalOffset() < node.getTotalOffset() || actualNode.getTotalEndOffset() > node.getTotalEndOffset()))
 							process = false;
 					}
 					if (process) {
@@ -486,9 +559,15 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 												mustSkipNext = true;
 											}
 											break;
+										} else {
+											// lookahead ends left of the range, don't dive into child nodes
+											done = true;
 										}
 									}
 								}
+							}
+							if (remainingLookAhead != 0) {
+								done = true;
 							}
 						} else {
 							result.add(node);
@@ -516,6 +595,13 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setTokenRegionProvider(TokenRegionProvider tokenRegionProvider) {
+		this.tokenRegionProvider = tokenRegionProvider;
 	}
 
 }

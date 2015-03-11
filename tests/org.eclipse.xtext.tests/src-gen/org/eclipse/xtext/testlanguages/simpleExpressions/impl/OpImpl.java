@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.impl;
 
@@ -30,11 +27,11 @@ import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackag
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.impl.OpImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.impl.OpImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.*;
+
+import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.validation.csvalidationtest.AltList1;
 import org.eclipse.xtext.validation.csvalidationtest.AltList2;
 import org.eclipse.xtext.validation.csvalidationtest.AlternativeMultiplicities;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.validation.csvalidationtest.Combination4;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestFactory;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
 import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.Heuristic1;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
 import org.eclipse.xtext.validation.csvalidationtest.List3;
@@ -48,6 +51,10 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
 import org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author meysholdt - Initial contribution and API
@@ -55,7 +62,7 @@ import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidationTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ConcreteSyntaxValidationTestLanguageStandaloneSetup.class);
 		validator = getInjector().getInstance(ConcreteSyntaxValidator.class);
@@ -75,14 +82,14 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		return getModel(model).eContents().get(0);
 	}
 
-	public void testSimpleGroup1() throws Exception {
+	@Test public void testSimpleGroup1() throws Exception {
 		SimpleGroup m = (SimpleGroup) getModel2("#1 abc def");
 		validate(m).assertOK();
 		m.setVal2(null);
 		validate(m).assertAll(err(p.getSimpleGroup_Val2(), ERROR_VALUE_REQUIRED, 1, 1, ""));
 	}
 
-	public void testSimpleAlternative1() throws Exception {
+	@Test public void testSimpleAlternative1() throws Exception {
 		SimpleAlternative m = (SimpleAlternative) getModel2("#2 kw1 abc");
 		validate(m).assertOK();
 		m.setVal2("def2");
@@ -90,7 +97,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getSimpleAlternative_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val1|val2)"));
 	}
 
-	public void testSimpleMultiplicities1() throws Exception {
+	@Test public void testSimpleMultiplicities1() throws Exception {
 		SimpleMultiplicities m = (SimpleMultiplicities) getModel2("#3 abc kw1 def kw2 fgh ijk kw3 lmn opq");
 		validate(m).assertOK();
 		m.setVal2(null);
@@ -98,92 +105,92 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		m.getVal4().clear();
 		validate(m).assertOK();
 
-		SimpleMultiplicities copy = EcoreUtil2.clone(m);
+		SimpleMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		validate(copy).assertAll(err(p.getSimpleMultiplicities_Val1(), ERROR_VALUE_REQUIRED, 1, null, ""));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal3().clear();
 		validate(copy).assertAll(err(p.getSimpleMultiplicities_Val3(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
 
-	public void testGroupMultiplicities1() throws Exception {
+	@Test public void testGroupMultiplicities1() throws Exception {
 		GroupMultiplicities m = (GroupMultiplicities) getModel2("#4 abc kw1 def def kw2 fgh ijk kw3 lmn opq");
 		validate(m).assertOK();
 
-		GroupMultiplicities copy = EcoreUtil2.clone(m);
+		GroupMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		copy.getVal6().clear();
 		copy.getVal7().clear();
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 val3)?"),
 				err(p.getGroupMultiplicities_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 val3)?"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal4().clear();
 		copy.getVal5().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"),
 				err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().add("sdlasjdk");
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 2, null, "(val4 val5)+"),
 				err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_MANY, null, 1, "(val4 val5)+"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal6().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val6(), ERROR_LIST_TOO_FEW, 1, 1, "(val6 val7)*"),
 				err(p.getGroupMultiplicities_Val7(), ERROR_LIST_TOO_MANY, 0, 0, "(val6 val7)*"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal7().add("test");
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val6(), ERROR_LIST_TOO_FEW, 2, null, "(val6 val7)*"),
 				err(p.getGroupMultiplicities_Val7(), ERROR_LIST_TOO_MANY, 1, 1, "(val6 val7)*"));
 
 	}
 
-	public void testAlternativeMultiplicities1() throws Exception {
+	@Test public void testAlternativeMultiplicities1() throws Exception {
 		AlternativeMultiplicities m = (AlternativeMultiplicities) getModel2("#5 abc kw2 kw3 fgh kw3 xxx kw4 ijk lmn opq");
 		validate(m).assertOK();
 
-		AlternativeMultiplicities copy = EcoreUtil2.clone(m);
+		AlternativeMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		copy.getVal6().clear();
 		copy.getVal7().clear();
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3("lalal");
 		validate(copy).assertAll(
 				err(p.getAlternativeMultiplicities_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|val3)?"),
 				err(p.getAlternativeMultiplicities_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|val3)?"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().clear();
 		validate(copy).assertAll(
 				err(p.getAlternativeMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 1, null, "(val4|val5)+"),
 				err(p.getAlternativeMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4|val5)+"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal4().add("sdfg");
 		copy.getVal4().add("dfdf");
 		validate(copy).assertOK();
 	}
 
-	public void testAssignedAction1() throws Exception {
+	@Test public void testAssignedAction1() throws Exception {
 		AssignedAction m = (AssignedAction) getModel2("#6 id1 id2 id3");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -192,7 +199,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testAssignedAction2() throws Exception {
+	@Test public void testAssignedAction2() throws Exception {
 		AssignedAction m = (AssignedAction) getModel2("#7 id1 kw1 id3");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -201,21 +208,21 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testUnassignedAction1() throws Exception {
+	@Test public void testUnassignedAction1() throws Exception {
 		UnassignedAction1 m = (UnassignedAction1) getModel2("#8 id1");
 		validate(m).assertOK();
 		m.setVal1(null);
 		validate(m).assertAll(err(p.getUnassignedAction1_Val1(), ERROR_VALUE_REQUIRED, 1, null, ""));
 	}
 
-	public void testUnassignedAction2() throws Exception {
+	@Test public void testUnassignedAction2() throws Exception {
 		UnassignedAction2Sub m = (UnassignedAction2Sub) getModel2("#9 id1");
 		validate(m).assertOK();
 		m.setVal1(null);
 		validate(m).assertAll(err(p.getUnassignedAction2Sub_Val1(), ERROR_VALUE_REQUIRED, 1, 1, ""));
 	}
 
-	public void testUnassignedAction3() throws Exception {
+	@Test public void testUnassignedAction3() throws Exception {
 		UnassignedAction3 m = (UnassignedAction3) getModel2("#10 kw1 id1 id2");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -226,7 +233,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(ua).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testUnassignedRuleCall1() throws Exception {
+	@Test public void testUnassignedRuleCall1() throws Exception {
 		UnassignedRuleCall1Sub m = (UnassignedRuleCall1Sub) getModel2("#11 id1 id2");
 		validate(m).assertOK();
 
@@ -237,7 +244,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m1).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testUnassignedRuleCall2() throws Exception {
+	@Test public void testUnassignedRuleCall2() throws Exception {
 		UnassignedRuleCall2SubAction a = f.createUnassignedRuleCall2SubAction();
 		a.setVal2("foo");
 		validate(a).assertOK();
@@ -250,196 +257,196 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(c).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testCombination1() throws Exception {
+	@Test public void testCombination1() throws Exception {
 		Combination1 copy, m = (Combination1) getModel2("#13 id1 kw1 id2 kw2 id3");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getCombination1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 (val3|val4))?"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3(null);
 		validate(copy).assertAll(err(p.getCombination1_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val3(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val4(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"));
 	}
 
-	public void testCombination2() throws Exception {
+	@Test public void testCombination2() throws Exception {
 		Combination2 copy, m = (Combination2) getModel2("#14 id1 id31 id41 id32 id42");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal3().add("foo");
 		validate(copy).assertAll(err(p.getCombination2_Val3(), ERROR_LIST_TOO_MANY, 2, 2, "(val2|(val3 val4)*)"),
 				err(p.getCombination2_Val4(), ERROR_LIST_TOO_FEW, 3, 3, "(val2|(val3 val4)*)"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2("foo");
 		validate(copy).assertAll(err(p.getCombination2_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|(val3 val4)*)"),
 				err(p.getCombination2_Val3(), ERROR_LIST_TOO_MANY, null, 0, "(val2|(val3 val4)*)"),
 				err(p.getCombination2_Val4(), ERROR_LIST_TOO_MANY, null, 0, "(val2|(val3 val4)*)"));
 	}
 
-	public void testCombination3() throws Exception {
+	@Test public void testCombination3() throws Exception {
 		Combination3 copy, m = (Combination3) getModel2("#15 'string' id1 1234");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		copy.setVal2(0);
 		validate(copy).assertOK();
 	}
 
-	public void testCombination4() throws Exception {
+	@Test public void testCombination4() throws Exception {
 		Combination4 copy, m = (Combination4) getModel2("#16 group id11 id12 id13 group id21 id22 id23");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().add("xxx");
 		validate(copy).assertAll(err(p.getCombination4_Val1(), ERROR_LIST_TOO_MANY, null, 2, "(val1 val2 val3)+"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().remove(0);
 		validate(copy).assertAll(err(p.getCombination4_Val2(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"),
 				err(p.getCombination4_Val3(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"));
 	}
 
-	public void testList1() throws Exception {
+	@Test public void testList1() throws Exception {
 		List1 copy, m = (List1) getModel2("#17 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList1_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
 
-	public void testList2() throws Exception {
+	@Test public void testList2() throws Exception {
 		List2 copy, m = (List2) getModel2("#18 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertOK();
 	}
 
-	public void testList3() throws Exception {
+	@Test public void testList3() throws Exception {
 		List3 copy, m = (List3) getModel2("#19 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1+|val2)"),
 				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val1+|val2)"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.setVal2("lala");
 		validate(copy).assertOK();
 	}
 
-	public void testList4() throws Exception {
+	@Test public void testList4() throws Exception {
 		List4 copy, m = (List4) getModel2("#20 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList4_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getList4_Val2(), ERROR_VALUE_REQUIRED, 1, null, ""));
 	}
 
-	public void testList5() throws Exception {
+	@Test public void testList5() throws Exception {
 		List5 copy, m = (List5) getModel2("#21 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1+ val2)|val3)"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getList5_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1+ val2)|val3)"));
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3("foo");
 		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1+ val2)|val3)"),
 				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"),
 				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"));
 	}
 
-	public void testAltList1() throws Exception {
+	@Test public void testAltList1() throws Exception {
 		AltList1 copy, m = (AltList1) getModel2("#22 id1 id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal4("foo");
 		validate(copy).assertOK();
 	}
 
-	public void testAltList2() throws Exception {
+	@Test public void testAltList2() throws Exception {
 		AltList2 copy, m = (AltList2) getModel2("#23 id1 id2");
 		validate(m).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = EcoreUtil2.clone(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		copy.getVal1().add("foo");
@@ -447,7 +454,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testTransientObject() {
+	@Test public void testTransientObject() {
 		TransientObject to = new TransientObjectImpl() {
 			@Override
 			public boolean eIsSet(int featureID) {
@@ -476,7 +483,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(to).assertOK();
 	}
 
-	public void testTransientSerializeables1() throws Exception {
+	@Test public void testTransientSerializeables1() throws Exception {
 		TransientSerializeables1 m = f.createTransientSerializeables1();
 		validate(m).assertOK();
 
@@ -511,7 +518,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getTransientSerializeables1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 int1)?"));
 	}
 
-	public void testStaticSimplification() {
+	@Test public void testStaticSimplification() {
 		StaticSimplification m = f.createStaticSimplification();
 		validate(m).assertOK();
 
@@ -551,7 +558,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testTwoVersion() {
+	@Test public void testTwoVersion() {
 		TwoVersion m = f.createTwoVersion();
 		validate(m).assertAll(
 				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
@@ -640,68 +647,70 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 						"((shared1? shared2 shared3* version1?)|((extra2 extra3)|extra4)?)"));
 	}
 	
-	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454
-	//	private List<String> strings(int count) {
-	//		List<String> result = Lists.newArrayList();
-	//		for (int i = 0; i < count; i++)
-	//			result.add("foo" + i);
-	//		return result;
-	//	}
-	//
-	//	public void testHeuristic1() {
-	//		Heuristic1 m = f.createHeuristic1();
-	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		validate(m).assertOK();
-	//
-	//		m = f.createHeuristic1();
-	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		validate(m).assertOK();
-	//
-	//		m = f.createHeuristic1();
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		validate(m).assertOK();
-	//
-	//		m = f.createHeuristic1();
-	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo"));
-	//		m.getC().addAll(Lists.newArrayList("foo", "foo"));
-	//		validate(m).assertOK();
-	//
-	//		m = f.createHeuristic1();
-	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-	//		m.getB().addAll(Lists.newArrayList("foo", "foo"));
-	//		m.getC().addAll(Lists.newArrayList("foo", "foo"));
-	//		m.getA().addAll(Lists.newArrayList("foo"));
-	//		m.getC().addAll(Lists.newArrayList("foo"));
-	//		validate(m).assertOK();
-	//
-	//	}
-	//
-	//	public void testHeuristic1Large1() {
-	//		Heuristic1 m = f.createHeuristic1();
-	//		m.getA().addAll(strings(42));
-	//		m.getB().addAll(strings(42));
-	//		m.getB().addAll(strings(37));
-	//		m.getC().addAll(strings(37));
-	//		m.getA().addAll(strings(111));
-	//		m.getC().addAll(strings(111));
-	//		validate(m).assertOK();
-	//	}
-	//
-	//	public void testHeuristic1Large2() {
-	//		Heuristic1 m = f.createHeuristic1();
-	//		m.getA().addAll(strings(42));
-	//		m.getB().addAll(strings(42));
-	//		m.getB().addAll(strings(37));
-	//		m.getC().addAll(strings(37));
-	//		m.getA().addAll(strings(111));
-	//		m.getC().addAll(strings(111));
-	//		m.getC().addAll(Lists.newArrayList("foo"));
-	//		validate(m).assertAll(errorCode(ERROR_LIST_TOO_MANY), errorCode(ERROR_LIST_TOO_FEW));
-	//	}
+	private List<String> strings(int count) {
+		List<String> result = Lists.newArrayList();
+		for (int i = 0; i < count; i++)
+			result.add("foo" + i);
+		return result;
+	}
+
+	@Test
+	public void testHeuristic1() {
+		Heuristic1 m = f.createHeuristic1();
+		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		validate(m).assertOK();
+
+		m = f.createHeuristic1();
+		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		validate(m).assertOK();
+
+		m = f.createHeuristic1();
+		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		validate(m).assertOK();
+
+		m = f.createHeuristic1();
+		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getB().addAll(Lists.newArrayList("foo", "foo"));
+		m.getC().addAll(Lists.newArrayList("foo", "foo"));
+		validate(m).assertOK();
+
+		m = f.createHeuristic1();
+		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+		m.getB().addAll(Lists.newArrayList("foo", "foo"));
+		m.getC().addAll(Lists.newArrayList("foo", "foo"));
+		m.getA().addAll(Lists.newArrayList("foo"));
+		m.getC().addAll(Lists.newArrayList("foo"));
+		validate(m).assertOK();
+	}
+
+	@Test
+	public void testHeuristic1Large1() {
+		Heuristic1 m = f.createHeuristic1();
+		m.getA().addAll(strings(42));
+		m.getB().addAll(strings(42));
+		m.getB().addAll(strings(37));
+		m.getC().addAll(strings(37));
+		m.getA().addAll(strings(111));
+		m.getC().addAll(strings(111));
+		validate(m).assertOK();
+	}
+
+	@Test
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454")
+	public void testHeuristic1Large2() {
+		Heuristic1 m = f.createHeuristic1();
+		m.getA().addAll(strings(42));
+		m.getB().addAll(strings(42));
+		m.getB().addAll(strings(37));
+		m.getC().addAll(strings(37));
+		m.getA().addAll(strings(111));
+		m.getC().addAll(strings(111));
+		m.getC().addAll(Lists.newArrayList("foo"));
+		validate(m).assertAll(errorCode(ERROR_LIST_TOO_MANY), errorCode(ERROR_LIST_TOO_FEW));
+	}
 }

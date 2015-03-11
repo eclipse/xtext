@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -40,7 +42,7 @@ public interface JvmTypeParameterDeclarator extends EObject
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeParameterDeclarator_TypeParameters()
 	 * @see org.eclipse.xtext.common.types.JvmTypeParameter#getDeclarator
-	 * @model opposite="declarator" containment="true" resolveProxies="true"
+	 * @model opposite="declarator" containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeParameter> getTypeParameters();

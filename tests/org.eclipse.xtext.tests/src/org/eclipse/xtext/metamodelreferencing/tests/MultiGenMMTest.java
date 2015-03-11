@@ -8,24 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.metamodelreferencing.tests.simpleTest.Foo;
+import org.junit.Test;
 
 public class MultiGenMMTest extends AbstractXtextTests {
 
     @Override
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         with(new XtextStandaloneSetup());
         
         with(new MultiGenMMTestLanguageStandaloneSetup());
     }
 
-    public void testStuff() throws Exception {
-        EObject parse = getModel("foo 'bar'");
-        assertWithXtend("'org::eclipse::xtext::metamodelreferencing::tests::simpleTest::impl::FooImpl'", "metaType.name", parse);
-        assertWithXtend("'org::eclipse::xtext::metamodelreferencing::tests::otherTest::impl::FooBarImpl'", "nameRefs.first().metaType.name", parse);
+    @Test public void testStuff() throws Exception {
+        Foo parse = (Foo) getModel("foo 'bar'");
+        assertEquals(1, parse.getNameRefs().size());
     }
 
 }

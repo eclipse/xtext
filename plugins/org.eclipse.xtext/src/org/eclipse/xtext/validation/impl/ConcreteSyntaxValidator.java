@@ -97,6 +97,7 @@ public class ConcreteSyntaxValidator implements IConcreteSyntaxValidator {
 		return false;
 	}
 
+	@Override
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		if (isEObjectTransient(obj))
 			return true;
@@ -141,6 +142,7 @@ public class ConcreteSyntaxValidator implements IConcreteSyntaxValidator {
 		return diag;
 	}
 
+	@Override
 	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		boolean r = true;
 		r &= validateObject(obj, acceptor, context);

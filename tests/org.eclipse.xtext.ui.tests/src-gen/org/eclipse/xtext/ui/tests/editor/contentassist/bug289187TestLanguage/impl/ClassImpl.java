@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl;
 
@@ -32,6 +29,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Ope
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl.ClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl.ClassImpl#isTransient <em>Transient</em>}</li>
@@ -44,7 +42,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Ope
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl.ClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl.ClassImpl#getOperations <em>Operations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

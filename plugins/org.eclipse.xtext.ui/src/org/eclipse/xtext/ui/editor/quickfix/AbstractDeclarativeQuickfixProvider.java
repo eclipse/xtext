@@ -33,6 +33,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 
 	protected Predicate<Method> getFixMethodPredicate(final String issueCode) {
 		return new Predicate<Method>() {
+			@Override
 			public boolean apply(Method input) {
 				Fix annotation = input.getAnnotation(Fix.class);
 				boolean result = annotation != null && issueCode.equals(annotation.value())
@@ -67,6 +68,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		return Lists.newArrayList(collectMethods(getClass(), issue.getCode()));
 	}
 
+	@Override
 	public boolean hasResolutionFor(final String issueCode) {
 		if (issueCode == null)
 			return false;
@@ -75,6 +77,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		return methods.iterator().hasNext();
 	}
 
+	@Override
 	public List<IssueResolution> getResolutions(final Issue issue) {
 		List<Method> fixMethods = getFixMethods(issue);
 		return getResolutions(issue, fixMethods);

@@ -23,16 +23,42 @@ public interface IImageHelper {
 	
 	Image getImage(ImageDescriptor imageDescriptor);
 	
-	class NullImageHelper implements IImageHelper {
+	class NullImageHelper implements IImageHelper, IImageDescriptorHelper {
 
+		@Override
 		public Image getImage(String name) {
 			return null;
 		}
 
+		@Override
 		public Image getImage(ImageDescriptor imageDescriptor) {
 			return null;
 		}
-		
+
+		/**
+		 * @since 2.4
+		 */
+		@Override
+		public ImageDescriptor getImageDescriptor(String name) {
+			return null;
+		}
+
+		/**
+		 * @since 2.4
+		 */
+		@Override
+		public ImageDescriptor getImageDescriptor(Image image) {
+			return null;
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@ImplementedBy(IImageHelper.NullImageHelper.class)
+	public interface IImageDescriptorHelper {
+		ImageDescriptor getImageDescriptor(String name);
+		ImageDescriptor getImageDescriptor(Image image);
 	}
 
 }

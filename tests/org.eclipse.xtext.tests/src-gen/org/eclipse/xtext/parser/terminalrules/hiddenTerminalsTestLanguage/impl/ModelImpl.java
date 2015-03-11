@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.ModelImpl#isValid <em>Valid</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

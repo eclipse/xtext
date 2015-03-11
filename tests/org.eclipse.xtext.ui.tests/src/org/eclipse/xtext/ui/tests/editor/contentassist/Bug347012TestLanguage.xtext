@@ -1,0 +1,76 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage
+ 	hidden(WS)
+
+generate bug347012TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2011/bug347012TestLanguage"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+MyProgram:
+	{MyProgram} LT* package=MyPackage LT*;
+
+Identifier:
+	name=ID;
+
+FQN:
+	ID (LT* '.' LT* ID)*;
+
+VirtualSemi:
+	';' | LT;
+
+Literal:
+	num=NUMBER | str=STRING | bool='true' | bool='false';
+
+MyPrimary:
+	Literal | Identifier;
+
+MyPackage:
+	'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
+
+MyClass:
+	'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
+
+MyAttribute:
+	PUBLIC='public' | PRIVATE='private';
+
+MyAttributes:
+	{MyAttributes} (attributes+=MyAttribute)*;
+
+MyField:
+	attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
+
+MyBinding:
+	name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
+
+	// terminal rules
+terminal ID:
+	idPlainChar (idPlainChar | digit)*;
+
+terminal LT:
+	'\r' '\n' | '\r' | '\n';
+
+terminal WS:
+	(' ' | '\t')+;
+
+terminal STRING:
+	'"' ('\\' escape | !('\\' | '"'))* '"';
+
+terminal NUMBER returns ecore::EDouble:
+	digit+ ('.' digit+)? | '.' digit+;
+
+terminal fragment digit:
+	'0'..'9';
+
+terminal fragment hex:
+	digit | 'A'..'F' | 'a'..'f';
+
+terminal fragment escape:
+	('b' | 't' | 'n' | 'f' | 'v' | 'r' | '"' | "'" | '\\' | 'u' hex hex hex hex);
+
+terminal fragment idPlainChar:
+	'$' | 'A'..'Z' | '_' | 'a'..'z';

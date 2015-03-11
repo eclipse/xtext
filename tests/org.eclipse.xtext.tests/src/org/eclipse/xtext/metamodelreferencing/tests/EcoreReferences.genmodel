@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/emf-gen"
+    modelPluginID="org.eclipse.xtext.tests" redirection="" forceOverwrite="true" modelName="EcoreReferences"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>EcorePerNsURI.ecore</foreignModel>
+  <foreignModel>EcorePerPlatformPlugin.ecore</foreignModel>
+  <foreignModel>EcorePerPlatformResource.ecore</foreignModel>
+  <genPackages prefix="EcorePerNsURI" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
+      disposableProviderFactory="true" ecorePackage="EcorePerNsURI.ecore#/">
+    <genClasses ecoreClass="EcorePerNsURI.ecore#//ExtendsNsURIEObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcorePerNsURI.ecore#//ExtendsNsURIEObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eObjectReference1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eAttributeReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eObjectReference2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eObjectReference3"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eObjectReference4"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EcorePerNsURI.ecore#//ExtendsNsURIEObject/eObjectContainment"/>
+    </genClasses>
+    <genClasses ecoreClass="EcorePerNsURI.ecore#//MyEAttribute"/>
+  </genPackages>
+  <genPackages prefix="EcorePerPlatformPlugin" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
+      disposableProviderFactory="true" ecorePackage="EcorePerPlatformPlugin.ecore#/">
+    <genClasses ecoreClass="EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/eObjectReference1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/eObjectReference2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/eObjectReference3"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/eObjectReference4"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject/eObjectContainment"/>
+    </genClasses>
+    <genClasses ecoreClass="EcorePerPlatformPlugin.ecore#//ExtendsEAttribute"/>
+  </genPackages>
+  <genPackages prefix="EcorePerPlatformResource" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
+      disposableProviderFactory="true" ecorePackage="EcorePerPlatformResource.ecore#/">
+    <genClasses ecoreClass="EcorePerPlatformResource.ecore#//ExtendsResourceEObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcorePerPlatformResource.ecore#//ExtendsResourceEObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformResource.ecore#//ExtendsResourceEObject/eObjectReference1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformResource.ecore#//ExtendsResourceEObject/eObjectReference2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformResource.ecore#//ExtendsResourceEObject/eObjectReference3"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcorePerPlatformResource.ecore#//ExtendsResourceEObject/eObjectReference4"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EcorePerPlatformResource.ecore#//ExtendsResourceEObject/eObjectContainment"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

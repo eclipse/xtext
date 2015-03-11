@@ -23,6 +23,11 @@ import com.google.inject.ImplementedBy;
 
 @ImplementedBy(SyntacticSequencerDiagnosticProvider.class)
 public interface ISyntacticSequencerDiagnosticProvider {
+	
+	String 	INVALID_FOLLOWING_ABSORBER = "invalid following absorber",
+			UNEXPECTED_STACK_TRACE = "unexpected stack trace",
+			UNEXPECTED_EMITTER_DIAGNOSTIC = "unexepcted emitter diagnostic";
+	
 	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to);
 

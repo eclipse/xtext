@@ -7,13 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
+
 /**
  * This is an extension library for {@link String strings}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class StringExtensions {
+@GwtCompatible public class StringExtensions {
 
+	/**
+	 * The binary <code>+</code> operator that concatenates a string and the string
+	 * reprentation of an object.
+	 * 
+	 * @param a
+	 *            a string.
+	 * @param b
+	 *            an object.
+	 * @return <code>a + b</code>
+	 */
+	@Pure /* not guaranteed, since toString() is invoked */
+	@Inline(value="($1 + $2)", constantExpression=true)
+	public static String operator_plus(String a, Object b) {
+		return a + b;
+	}
+	
 	/**
 	 * The binary <code>+</code> operator that concatenates two strings.
 	 * 
@@ -22,8 +41,12 @@ public class StringExtensions {
 	 * @param b
 	 *            another string.
 	 * @return <code>a + b</code>
+	 * 
+	 * @since 2.5
 	 */
-	public static String operator_plus(String a, Object b) {
+	@Pure /* not guaranteed, since toString() is invoked */
+	@Inline(value="($1 + $2)", constantExpression=true)
+	public static String operator_plus(String a, String b) {
 		return a + b;
 	}
 
@@ -34,6 +57,7 @@ public class StringExtensions {
 	 *            the string
 	 * @return <code>true</code> if {@code s} is <code>null</code> or equal to the empty {@link String} <code>""</code>
 	 */
+	@Pure
 	public static boolean isNullOrEmpty(String s) {
 		return s == null || s.length() == 0;
 	}
@@ -47,6 +71,7 @@ public class StringExtensions {
 	 * @return the {@link String} {@code s} with an upper case first character or <code>null</code> if the input
 	 *         {@link String} {@code s} was <code>null</code>.
 	 */
+	@Pure
 	public static String toFirstUpper(String s) {
 		if (s == null || s.length() == 0)
 			return s;
@@ -66,6 +91,7 @@ public class StringExtensions {
 	 * @return the {@link String} {@code s} with an lower case first character or <code>null</code> if the input
 	 *         {@link String} {@code s} was <code>null</code>.
 	 */
+	@Pure
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0)
 			return s;

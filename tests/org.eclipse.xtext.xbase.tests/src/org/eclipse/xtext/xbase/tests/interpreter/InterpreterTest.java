@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.NullEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -23,22 +24,24 @@ public class InterpreterTest extends AbstractXbaseTestCase {
 	
 	@Inject XbaseInterpreter interpreter;
 	
-	public void testCancelIndication() throws Exception {
+	@Test public void testCancelIndication() throws Exception {
 		XExpression expression = expression("'string'", true);
 		assertNull(interpreter.evaluate(expression, new NullEvaluationContext(), new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return true;
 			}
 		}));
 		assertEquals("string", interpreter.evaluate(expression, new NullEvaluationContext(), null).getResult());
 		assertEquals("string", interpreter.evaluate(expression, new NullEvaluationContext(), new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return false;
 			}
 		}).getResult());
 	}
 	
-	public void testInfiniteLoopInJava() throws Exception {
+	@Test public void testInfiniteLoopInJava() throws Exception {
 		XExpression expression = expression(
 				"try " +
 				"  new testdata.ClosureClient().infiniteApply(|{null})" +
@@ -46,6 +49,7 @@ public class InterpreterTest extends AbstractXbaseTestCase {
 				"  'literal' ", true);
 		assertNull(interpreter.evaluate(expression, new DefaultEvaluationContext(), new CancelIndicator() {
 			private int i = 0;
+			@Override
 			public boolean isCanceled() {
 				if (i == 500)
 					return true;

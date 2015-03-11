@@ -12,8 +12,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.antlr.runtime.Token;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
@@ -25,7 +26,7 @@ public class Bug313508Test extends AbstractXtextTests {
 	private Map<Integer, String> map;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(BacktrackingLexerTestLanguageStandaloneSetup.class);
 		ITokenDefProvider tokenDefProvider = get(ITokenDefProvider.class);
@@ -33,16 +34,16 @@ public class Bug313508Test extends AbstractXtextTests {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		map = null;
 		super.tearDown();
 	}
 	
-	public void testSize() {
+	@Test public void testSize() {
 		assertEquals(8 /* terminal rules */ + 2 /* keywords */, map.size());
 	}
 	
-	public void testKeys() {
+	@Test public void testKeys() {
 		Set<Integer> expected = Sets.newHashSet(
 				Token.MIN_TOKEN_TYPE + 0,
 				Token.MIN_TOKEN_TYPE + 1,
@@ -58,7 +59,7 @@ public class Bug313508Test extends AbstractXtextTests {
 		assertEquals(expected, map.keySet());
 	}
 	
-	public void testValues() {
+	@Test public void testValues() {
 		Collection<String> tokens = map.values();
 		assertTrue(tokens.contains("'Abc'"));
 		assertTrue(tokens.contains("'Efg'"));

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl;
 
@@ -33,7 +30,7 @@ public class ContentAssistCustomizingTestFactoryImpl extends EFactoryImpl implem
   {
     try
     {
-      ContentAssistCustomizingTestFactory theContentAssistCustomizingTestFactory = (ContentAssistCustomizingTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2010/contentAssistCustomizingTest"); 
+      ContentAssistCustomizingTestFactory theContentAssistCustomizingTestFactory = (ContentAssistCustomizingTestFactory)EPackage.Registry.INSTANCE.getEFactory(ContentAssistCustomizingTestPackage.eNS_URI);
       if (theContentAssistCustomizingTestFactory != null)
       {
         return theContentAssistCustomizingTestFactory;

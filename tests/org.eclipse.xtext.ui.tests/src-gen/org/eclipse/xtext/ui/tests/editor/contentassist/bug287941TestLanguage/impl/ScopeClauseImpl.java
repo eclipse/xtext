@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sco
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ScopeClauseImpl#isNotIn <em>Not In</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ScopeClauseImpl#getScope <em>Scope</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

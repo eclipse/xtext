@@ -10,20 +10,21 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
-public class ChainedIteratorTest extends TestCase {
+public class ChainedIteratorTest extends Assert {
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		Iterator<String> iter = Iterators.concat(iter("a","b"), iter("c"), iter("d"));
 		assertEquals("abcd", Joiner.on("").join(Lists.newArrayList(iter)));
 	}
 	
-	public void testSecondArgNull() throws Exception {
+	@Test public void testSecondArgNull() throws Exception {
 		try {
 			Iterators.concat(iter("a","b"), null, null);
 			fail("NPE expected.");
@@ -32,7 +33,7 @@ public class ChainedIteratorTest extends TestCase {
 		}
 	}
 	
-	public void testFirstArgNull() throws Exception {
+	@Test public void testFirstArgNull() throws Exception {
 		try {
 			Iterators.concat(null, iter("a","b"));
 			fail("nullpointer exception expected");

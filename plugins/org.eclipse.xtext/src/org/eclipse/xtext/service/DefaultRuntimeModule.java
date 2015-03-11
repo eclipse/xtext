@@ -21,15 +21,16 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
@@ -51,9 +52,10 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.sequencer.GenericSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
@@ -111,15 +113,16 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultNodeModelFormatter.class;
 	}
 
+	@SuppressWarnings("deprecation")
 	public Class<? extends ISerializer> bindISerializer() {
-		return Serializer.class;
+		return org.eclipse.xtext.parsetree.reconstr.Serializer.class;
 	}
 	
 	/**
 	 * @since 2.0
 	 */
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
-		return GenericSemanticSequencer.class;
+		return BacktrackingSemanticSequencer.class;
 	}
 
 	public Class<? extends IConcreteSyntaxValidator> bindConcreteSyntaxValidator() {
@@ -138,6 +141,13 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return SimpleLocalScopeProvider.class;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public void configureSerializerIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class).to(IScopeProvider.class);
+	}
+	
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(IScopeProvider.class);
 	}
@@ -150,10 +160,6 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 	}
 
-	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return SimpleNameProvider.class;
 	}
@@ -201,6 +207,13 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public void configureRuntimeEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(IEncodingProvider.Runtime.class);
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public Class<? extends IEncodingProvider.Runtime> bindRuntimeEncodingProvider() {
+		return EclipseProjectPropertiesEncodingProvider.class;
+	}
 
 	public Class<? extends Provider<IEncodingProvider>> provideIEncodingProvider() {
 		return IEncodingProviderDispatcher.class;
@@ -208,14 +221,23 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	static class IEncodingProviderDispatcher extends DispatchingProvider<IEncodingProvider>{}
 	
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
+	}
+	
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
-	/**
-	 * @since 2.0
-	 */
+	/** @since 2.0 */
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
-		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(GenericSemanticSequencer.class);
+		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void configureUseIndexFragmentsForLazyLinking(com.google.inject.Binder binder) {
+		binder.bind(Boolean.TYPE).annotatedWith(Names.named(LazyURIEncoder.USE_INDEXED_FRAGMENTS_BINDING)).toInstance(Boolean.TRUE);
 	}
 }

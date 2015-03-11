@@ -18,6 +18,7 @@ import org.eclipse.xtext.linking.bug287988Test.Model;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,7 +28,7 @@ public class Bug287988WithEagerLinkingTest extends Bug287988Test {
 	private ResourceFactoryImpl factory;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		factory = new ResourceFactoryImpl(){
 			@Override
@@ -54,7 +55,7 @@ public class Bug287988WithEagerLinkingTest extends Bug287988Test {
 	}
 	
 	@Override
-	public void testAction_03() throws Exception {
+	@Test public void testAction_03() throws Exception {
 		String modelAsString = "actions master mytype attr1; attribute ref attr3 attr2;";
 		Model model = (Model) getModelAndExpect(modelAsString, 1);
 		assertEquals(2, model.getAttributes().size());

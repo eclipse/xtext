@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -15,8 +12,6 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Float</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

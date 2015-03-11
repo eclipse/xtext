@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -22,11 +19,11 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectNew;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectNewImpl#getImport <em>Import</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectNewImpl#getImpFrag <em>Imp Frag</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

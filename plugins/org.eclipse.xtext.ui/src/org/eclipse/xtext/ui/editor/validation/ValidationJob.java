@@ -15,12 +15,13 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -33,7 +34,6 @@ import com.google.common.collect.ImmutableMap;
  * @author Michael Clay
  */
 public class ValidationJob extends Job {
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
 	public static final Object XTEXT_VALIDATION_FAMILY = new Object();
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
@@ -61,7 +61,15 @@ public class ValidationJob extends Job {
 	protected IStatus run(final IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		List<Issue> issues = createIssues(monitor);
+		List<Issue> issues = null;
+		try {
+			issues = createIssues(monitor);
+		} catch (OperationCanceledException canceled) {
+			return Status.CANCEL_STATUS;
+		} catch (Exception e) {
+			log.error("Error running validator", e);
+			return Status.OK_STATUS;
+		}
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		this.validationIssueProcessor.processIssues(issues, monitor);
@@ -72,13 +80,15 @@ public class ValidationJob extends Job {
 
 	public List<Issue> createIssues(final IProgressMonitor monitor) {
 		final List<Issue> issues = xtextDocument
-				.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
-					public List<Issue> exec(XtextResource resource) throws Exception {
-						if (resource == null)
+				.readOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
+					@Override
+					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
+						if (resource == null || resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
+							@Override
 							public boolean isCanceled() {
-								return monitor.isCanceled();
+								return outerIndicator.isCanceled() || monitor.isCanceled();
 							}
 						});
 					}

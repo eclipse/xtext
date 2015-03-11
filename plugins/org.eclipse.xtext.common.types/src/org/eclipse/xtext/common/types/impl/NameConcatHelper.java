@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -24,7 +25,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 class NameConcatHelper {
 
 	enum NameType {
-		ID, QUALIFIED, SIMPLE
+		ID, QUALIFIED, SIMPLE, TO_STRING
 	}
 	
 	static void appendConstraintsName(StringBuilder result, List<JvmTypeConstraint> constraints, char innerClassDelimiter, NameType nameType) {
@@ -48,6 +49,7 @@ class NameConcatHelper {
 					case ID: result.append(constraint.getIdentifier()); break;
 					case QUALIFIED: result.append(constraint.getQualifiedName(innerClassDelimiter)); break;
 					case SIMPLE: result.append(constraint.getSimpleName()); break;
+					case TO_STRING: result.append(constraint.toString()); break;
 				}
 			}
 		}
@@ -55,10 +57,15 @@ class NameConcatHelper {
 
 	static String computeFor(JvmWildcardTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS)) {
-			if (typeReference.getConstraints().size() == 1 && nameType != NameType.ID) {
+			if (typeReference.getConstraints().size() == 1) {
 				JvmTypeConstraint onlyConstraint = typeReference.getConstraints().get(0);
-				if (onlyConstraint instanceof JvmUpperBound && 
-						Object.class.getCanonicalName().equals(onlyConstraint.getTypeReference().getIdentifier())) {
+				if (nameType != NameType.ID && nameType != NameType.TO_STRING) {
+					JvmTypeReference reference = onlyConstraint.getTypeReference();
+					if (reference == null || (onlyConstraint instanceof JvmUpperBound && 
+							Object.class.getCanonicalName().equals(onlyConstraint.getTypeReference().getIdentifier()))) {
+						return "?";
+					}
+				} else if (nameType == NameType.ID && onlyConstraint.getTypeReference() == null) {
 					return "?";
 				}
 			}
@@ -73,21 +80,49 @@ class NameConcatHelper {
 	static String computeFor(JvmParameterizedTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)) {
 			StringBuilder mutableResult = new StringBuilder(64);
-			JvmType type = typeReference.getType();
-			switch(nameType) {
-				case ID: mutableResult.append(type.getIdentifier()); break;
-				case QUALIFIED: mutableResult.append(type.getQualifiedName(innerClassDelimiter)); break;
-				case SIMPLE: mutableResult.append(type.getSimpleName()); break;
-			}
-			if (typeReference.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS)) {
-				mutableResult.append("<");
-				appendArguments(mutableResult, typeReference.getArguments(), innerClassDelimiter, nameType);
-				mutableResult.append(">");
-				return mutableResult.toString();
-			}
+			computeFor(typeReference, innerClassDelimiter, nameType, mutableResult);
 			return mutableResult.toString();
 		}
 		return null;
+	}
+
+	private static void computeFor(JvmParameterizedTypeReference typeReference, char innerClassDelimiter,
+			NameType nameType, StringBuilder result) {
+		if (typeReference.eClass() == TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE) {
+			JvmParameterizedTypeReference outer = ((JvmInnerTypeReference) typeReference).getOuter();
+			if (outer != null) {
+				computeFor(outer, innerClassDelimiter, nameType, result);
+				if (result.length() != 0) {
+					JvmType type = typeReference.getType();
+					result.append(innerClassDelimiter);
+					result.append(type.getSimpleName());
+				} else {
+					appendType(typeReference, innerClassDelimiter, nameType, result);	
+				}
+			} else {
+				appendType(typeReference, innerClassDelimiter, nameType, result);
+			}
+		} else {
+			appendType(typeReference, innerClassDelimiter, nameType, result);
+		}
+		if (typeReference.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS)) {
+			result.append("<");
+			appendArguments(result, typeReference.getArguments(), innerClassDelimiter, nameType);
+			result.append(">");
+		}
+	}
+
+	private static void appendType(JvmParameterizedTypeReference typeReference, char innerClassDelimiter,
+			NameType nameType, StringBuilder result) {
+		JvmType type = typeReference.getType();
+		if (type != null) {
+			switch(nameType) {
+				case ID: result.append(type.getIdentifier()); break;
+				case QUALIFIED: result.append(type.getQualifiedName(innerClassDelimiter)); break;
+				case SIMPLE: result.append(type.getSimpleName()); break;
+				case TO_STRING: result.append(type.getIdentifier()); break;
+			}
+		}
 	}
 
 	static void appendArguments(StringBuilder result, List<JvmTypeReference> arguments, char innerClassDelimiter, NameType nameType) {
@@ -96,11 +131,12 @@ class NameConcatHelper {
 		int wasLength = result.length();
 		for (JvmTypeReference argument : arguments) {
 			if (result.length() != wasLength)
-				result.append(",");
+				result.append(", ");
 			switch(nameType) {
 				case ID: result.append(argument.getIdentifier()); break;
 				case QUALIFIED: result.append(argument.getQualifiedName(innerClassDelimiter)); break;
 				case SIMPLE: result.append(argument.getSimpleName()); break;
+				case TO_STRING: result.append(argument.toString()); break;
 			}
 		}
 	}

@@ -51,4 +51,9 @@ class NameBasedEObjectDescriptionBuilder {
 		return new NameBasedEObjectDescriptionBuilder(next, exported);
 	}
 	
+	public NameBasedEObjectDescriptionBuilder nestType(String simpleName) {
+		String newLastSegment = baseName.getLastSegment() + "$" + simpleName;
+		QualifiedName next = baseName.skipLast(1).append(newLastSegment);
+		return new NameBasedEObjectDescriptionBuilder(next, exported);
+	}
 }

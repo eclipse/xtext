@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.generator.serializer.JavaFile;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class JavaFileTest extends TestCase {
+public class JavaFileTest extends Assert {
 
-	public void testMain() {
+	@Test public void testMain() {
 		JavaFile file = new JavaFile("foo");
 		assertEquals("Foo", file.imported("foo.Foo"));
 		assertEquals("bar.Foo", file.imported("bar.Foo"));

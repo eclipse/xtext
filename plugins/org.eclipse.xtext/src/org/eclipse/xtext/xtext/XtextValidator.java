@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +21,7 @@ import java.util.TreeSet;
 
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -31,6 +34,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreValidator;
@@ -58,8 +62,15 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -76,7 +87,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -87,14 +97,11 @@ import com.google.inject.Inject;
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
 
-	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
-	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
-	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
-	public static final String INVALID_HIDDEN_TOKEN = "org.eclipse.xtext.grammar.InvalidHiddenToken";
-	public static final String INVALID_HIDDEN_TOKEN_FRAGMENT = "org.eclipse.xtext.grammar.InvalidHiddenTokenFragment";
-
 	@Inject
 	private IValueConverterService valueConverter;
+	
+	@Inject
+	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
 	private KeywordInspector keywordHidesTerminalInspector;
 	
@@ -143,7 +150,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkGrammarName(Grammar g) {
 		String[] split = g.getName().split("\\.");
 		if (split.length == 1)
-			warning("You should use a namespace.", XtextPackage.Literals.GRAMMAR__NAME);
+			error("You must use a namespace.", XtextPackage.Literals.GRAMMAR__NAME);
 		for (int i = 0; i < split.length - 1; i++) {
 			String nsEle = split[i];
 			if (Character.isUpperCase(nsEle.charAt(0)))
@@ -197,18 +204,21 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkGeneratedMetamodel(GeneratedMetamodel metamodel) {
 		if (metamodel.getName() != null && metamodel.getName().length() != 0)
 			if (Character.isUpperCase(metamodel.getName().charAt(0)))
-				warning(
-						"Metamodel names should start with a lower case letter.",
+				addIssue("Metamodel names should start with a lower case letter.",
+						metamodel,
 						XtextPackage.Literals.GENERATED_METAMODEL__NAME,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 						INVALID_METAMODEL_NAME,
 						metamodel.getName());
 	}
 	
 	@Check
 	public void checkGeneratedPackage(GeneratedMetamodel metamodel) {
-		Diagnostician diagnostician = (Diagnostician) getContext().get(EValidator.class);
-		checkGeneratedPackage(metamodel, diagnostician, getContext());
+		Map<Object, Object> context = getContext();
+		if (context != null) {
+			Diagnostician diagnostician = (Diagnostician) context.get(EValidator.class);
+			if (diagnostician != null)
+				checkGeneratedPackage(metamodel, diagnostician, context);
+		}
 	}
 
 	public void checkGeneratedPackage(GeneratedMetamodel metamodel, Diagnostician diagnostician, Map<?,?> params) {
@@ -391,30 +401,132 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (metamodel.getEPackage() == null)
 			return;
 		String nsURI = metamodel.getEPackage().getNsURI();
-		List<GeneratedMetamodel> allGeneratedMetamodels = new ArrayList<GeneratedMetamodel>();
-		Grammar grammar = GrammarUtil.getGrammar(metamodel);
-		Set<Grammar> visited = Sets.newHashSet();
-		for (Grammar usedGrammar : grammar.getUsedGrammars())
-			Iterables.addAll(allGeneratedMetamodels, getAllGeneratedMetamodels(usedGrammar, visited));
-		if (allGeneratedMetamodels.isEmpty())
+		List<GeneratedMetamodel> allGeneratedMetamodels = getInheritedGeneratedMetamodels(metamodel);
+		String text = getUsedUri(metamodel);
+		for (GeneratedMetamodel generatedMetamodel : allGeneratedMetamodels) {
+			EPackage generatedPackage = generatedMetamodel.getEPackage();
+			if (generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {
+				if (!text.equals(nsURI)) {
+					addIssue("Metamodels that have been generated by a super grammar must be referenced by nsURI: " + nsURI,
+							metamodel,
+							XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+							INVALID_PACKAGE_REFERENCE_INHERITED,
+							nsURI);
+					return;
+				}
+				return;
+			}
+		}
+		checkExternalPackage(metamodel, text);
+	}
+
+	protected void checkExternalPackage(ReferencedMetamodel metamodelReference, String importURI) {
+		EPackage referencedPackage = metamodelReference.getEPackage();
+		if (referencedPackage.eIsProxy() || isRuntime(metamodelReference))
 			return;
+		if (isRegisteredPackage(referencedPackage)) {
+			addIssue("The imported package is not on the classpath of this project which may lead to follow-up errors.",
+					metamodelReference,
+					XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+					INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH,
+					importURI);
+			return;
+		}
+		if (!importURI.equals(referencedPackage.getNsURI())) {
+			IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(metamodelReference.eResource());
+			Iterable<IEObjectDescription> packagesInIndex = descriptions.getExportedObjects(
+					EcorePackage.Literals.EPACKAGE, 
+					QualifiedName.create(referencedPackage.getNsURI()), 
+					false);
+			if (!Iterables.isEmpty(packagesInIndex)) {
+				addIssue("Packages should be imported by their namespace URI.",
+						metamodelReference,
+						XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+						INVALID_PACKAGE_REFERENCE_EXTERNAL,
+						referencedPackage.getNsURI());
+			} else if (!ClasspathUriUtil.isClasspathUri(URI.createURI(importURI))) {
+				addIssue("The imported package is not on the classpath of this project which may lead to follow-up errors.",
+						metamodelReference,
+						XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+						INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH,
+						importURI);
+				return;
+			} else {
+				return;
+			}
+		}
+		Map<EObject, Collection<Setting>> allReferences = EcoreUtil.CrossReferencer.find(Collections.singletonList(referencedPackage));
+		Set<Object> allReferencedInstances = Sets.newHashSet();
+		for(Setting setting: Iterables.concat(allReferences.values())) {
+			Object referenced = setting.get(true);
+			if (allReferencedInstances.add(referenced) && referenced instanceof EObject) {
+				EPackage transitive = EcoreUtil2.getContainerOfType((EObject)referenced, EPackage.class);
+				if (isRegisteredPackage(transitive)) {
+					if (referenced instanceof EDataType)
+						continue;
+					if (referenced == EcorePackage.Literals.EOBJECT)
+						continue;
+					IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(metamodelReference.eResource());
+					Iterable<IEObjectDescription> packagesInIndex = descriptions.getExportedObjects(EcorePackage.Literals.EPACKAGE, QualifiedName.create(importURI), false);
+					if (!Iterables.isEmpty(packagesInIndex)) {
+						if (setting.getEObject().eResource().getURI().isPlatformResource())
+							addIssue("The imported package refers to elements in the package registry instead of using the instances from the workspace",
+									metamodelReference,
+									XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+									INVALID_PACKAGE_REFERENCE_EXTERNAL,
+									referencedPackage.getNsURI());
+						else
+							addIssue("The imported package refers to elements in the package registry instead of using the instances from the workspace", 
+									metamodelReference,
+									XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+									INVALID_PACKAGE_REFERENCE_EXTERNAL);
+						return;
+					} else {
+						addIssue("The imported package refers to elements that are not on the classpath of this project. The package '" + transitive.getNsURI() + "' was loaded from the registry.",
+								metamodelReference,
+								XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+								INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH,
+								referencedPackage.getNsURI());
+						return;
+					}
+				}
+			}
+		}
+	}
+
+	private boolean isRuntime(ReferencedMetamodel metamodelReference) {
+		ResourceSet resourceSet = metamodelReference.eResource().getResourceSet();
+		if (resourceSet instanceof XtextResourceSet) {
+			Object context = ((XtextResourceSet) resourceSet).getClasspathURIContext();
+			boolean result = context == null || context instanceof Class || context instanceof ClassLoader;
+			return result;
+		}
+		return false;
+	}
+
+	protected boolean isRegisteredPackage(EPackage ePackage) {
+		return ePackage != null && (ePackage.eResource() == null || ePackage.getNsURI().equals(ePackage.eResource().getURI().toString()));
+	}
+
+	protected String getUsedUri(ReferencedMetamodel metamodel) {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(metamodel,
 				XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		if (nodes.size() != 1)
 			throw new IllegalArgumentException();
 		String text = nodes.get(0).getText();
 		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0));
-		for (GeneratedMetamodel generatedMetamodel : allGeneratedMetamodels) {
-			EPackage generatedPackage = generatedMetamodel.getEPackage();
-			if (generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {
-				// TODO provide a quickfix
-				if (!text.equals(nsURI)) {
-					error(
-							"Metamodels that have been generated by a super grammar must be referenced by nsURI: " + nsURI, 
-							XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
-				}
-			}
-		}
+		return text;
+	}
+	
+	protected List<GeneratedMetamodel> getInheritedGeneratedMetamodels(ReferencedMetamodel metamodel) {
+		List<GeneratedMetamodel> allGeneratedMetamodels = new ArrayList<GeneratedMetamodel>();
+		Grammar grammar = GrammarUtil.getGrammar(metamodel);
+		Set<Grammar> visited = Sets.newHashSet();
+		for (Grammar usedGrammar : grammar.getUsedGrammars())
+			Iterables.addAll(allGeneratedMetamodels, getAllGeneratedMetamodels(usedGrammar, visited));
+		if (allGeneratedMetamodels.isEmpty())
+			return Collections.emptyList();
+		return allGeneratedMetamodels;
 	}
 
 	private Iterable<GeneratedMetamodel> getAllGeneratedMetamodels(Grammar grammar, Set<Grammar> visited) {
@@ -435,6 +547,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
 		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(),
 				new Function<AbstractMetamodelDeclaration, String>() {
+					@Override
 					public String apply(AbstractMetamodelDeclaration param) {
 						if (param.getEPackage() != null)
 							return param.getEPackage().getNsURI();
@@ -442,6 +555,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					}
 				});
 		int count = Iterables.size(Iterables.filter(nsUris, new Predicate<String>() {
+			@Override
 			public boolean apply(String param) {
 				return declaration.getEPackage().getNsURI().equals(param);
 			}
@@ -451,98 +565,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					"EPackage with ns-uri '" + declaration.getEPackage().getNsURI() + "' is used twice.",
 					XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		}
-	}
-
-	@Check
-	public void checkPackageImport(Grammar grammar) {
-		Map<String, ReferencedMetamodel> nsUriToImportedMetamodel = Maps.newHashMap();
-		for(AbstractMetamodelDeclaration metamodel: grammar.getMetamodelDeclarations()) {
-			if (metamodel instanceof ReferencedMetamodel) {
-				if (metamodel.getEPackage() != null && !metamodel.getEPackage().eIsProxy()) {
-					// nested EPackages
-					nsUriToImportedMetamodel.put(metamodel.getEPackage().getNsURI(), (ReferencedMetamodel) metamodel);
-				}
-			}
-		}
-		if (nsUriToImportedMetamodel.isEmpty())
-			return;
-		for(AbstractMetamodelDeclaration declaration: GrammarUtil.allMetamodelDeclarations(grammar)) {
-			if (declaration instanceof GeneratedMetamodel) { // checked by another validation rule
-				if (declaration.eContainer() != grammar) {
-					nsUriToImportedMetamodel.remove(declaration.getEPackage().getNsURI());
-				}
-			} else {
-				if (declaration.getEPackage() != null && !declaration.getEPackage().eIsProxy()) {
-					EPackage pack = declaration.getEPackage();
-					if (declaration.eContainer() != grammar) {
-						if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
-							if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
-								String location = pack.getNsURI();
-								if (pack.eResource() != null)
-									location = pack.eResource().getURI().toString();
-								error("The package '" + pack.getNsURI() + "' was imported more than once from a different location: '" +
-											location, 
-										nsUriToImportedMetamodel.get(pack.getNsURI()),
-										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
-										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-								nsUriToImportedMetamodel.remove(pack.getNsURI());
-							}
-						}
-					}
-					Set<EPackage> referencedEPackages = findReferencedPackages(pack);
-					for(EPackage referencedEPackage: referencedEPackages) {
-						if (referencedEPackage.eResource() != null && nsUriToImportedMetamodel.containsKey(referencedEPackage.getNsURI())) {
-							if (nsUriToImportedMetamodel.get(referencedEPackage.getNsURI()).getEPackage() != referencedEPackage) {
-								error("The referenced package '" + referencedEPackage.getNsURI() + "' was imported from a different location. Here: '" +
-										referencedEPackage.eResource().getURI(), 
-										nsUriToImportedMetamodel.get(pack.getNsURI()),
-										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
-										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	protected Set<EPackage> findReferencedPackages(EPackage pack) {
-		Collection<Collection<Setting>> externalCrossReferences = EcoreUtil.ExternalCrossReferencer.find(pack).values();
-		Set<EPackage> referencedEPackages = Sets.newLinkedHashSet();
-		for(Setting setting: Iterables.concat(externalCrossReferences)) {
-			if (setting.getEStructuralFeature().isMany()) {
-				List<?> referenced = (List<?>) setting.get(true);
-				for(Object object: referenced) {
-					if (object instanceof EObject) {
-						EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)object, EPackage.class);
-						if (referencedPack != null) {
-							if (object instanceof EDataType) {
-								if (referencedPack != EcorePackage.eINSTANCE) {
-									referencedEPackages.add(referencedPack);	
-								}
-							} else {
-								referencedEPackages.add(referencedPack);
-							}
-						}
-					}
-				}
-			} else {
-				Object referenced = setting.get(true);
-				if (referenced instanceof EObject) {
-					EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)referenced, EPackage.class);
-					if (referencedPack != null) {
-						if (referenced instanceof EDataType) {
-							if (referencedPack != EcorePackage.eINSTANCE) {
-								referencedEPackages.add(referencedPack);	
-							}
-						} else {
-							referencedEPackages.add(referencedPack);
-						}
-					}
-				}
-			}
-		}
-		return referencedEPackages;
 	}
 
 	@Check
@@ -559,7 +581,10 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public boolean checkCrossReferenceTerminal(RuleCall call) {
 		if (call.getRule() != null && call.getRule().getType() != null) {
 			EClassifier type = call.getRule().getType().getClassifier();
-			if (type != null && EcorePackage.Literals.ESTRING != type) {
+			EDataType dataType = GrammarUtil.findEString(GrammarUtil.getGrammar(call));
+			if (dataType == null)
+				dataType = EcorePackage.Literals.ESTRING;
+			if (type != null && dataType != type) {
 				error(
 						"The rule '" + call.getRule().getName() + "' is not valid for a cross reference since it does not return "+
 						"an EString. You'll have to wrap it in a data type rule.", 
@@ -861,6 +886,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 				@Override
 				public Boolean caseRuleCall(RuleCall object) {
+					if (object.getRule() == null)
+						return assignedActionAllowed;
 					assignedActionAllowed = assignedActionAllowed || doSwitch(object.getRule())
 							&& !GrammarUtil.isOptionalCardinality(object);
 					return assignedActionAllowed;
@@ -914,9 +941,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			}
 			if (otherDecl.getEnumLiteral() == decl.getEnumLiteral()) {
 				if (!decl.getEnumLiteral().getLiteral().equals(decl.getLiteral().getValue()))
-					warning("Enum literal '" + decl.getEnumLiteral().getName()
+					addIssue("Enum literal '" + decl.getEnumLiteral().getName()
 							+ "' has already been defined with literal '" + decl.getEnumLiteral().getLiteral() + "'.",
-							XtextPackage.Literals.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
+							decl,
+							XtextPackage.Literals.ENUM_LITERAL_DECLARATION__ENUM_LITERAL,
+							DUPLICATE_ENUM_LITERAL);
 				return;
 			}
 		}
@@ -925,10 +954,9 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkEnumLiteralIsValid(EnumLiteralDeclaration decl) {
 		if ("".equals(decl.getLiteral().getValue()))
-			error(
-					"Enum literal must not be an empty string.", 
+			addIssue("Enum literal must not be an empty string.",
+					decl,
 					XtextPackage.Literals.ENUM_LITERAL_DECLARATION__LITERAL,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					EMPTY_ENUM_LITERAL,
 					decl.getEnumLiteral().getName());
 	}
@@ -952,6 +980,16 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 	
 	@Check
+	public void checkKeywordNotEmpty(final Keyword keyword) {
+		if (keyword.getValue().length()==0 && !(keyword.eContainer() instanceof EnumLiteralDeclaration)) {
+			addIssue("A keyword cannot be empty.", 
+					keyword, 
+					null,
+					EMPTY_KEYWORD);
+		}
+	}
+	
+	@Check
 	public void checkKeywordHidesTerminalRule(final Keyword keyword) {
 		if (keywordHidesTerminalInspector == null)
 			keywordHidesTerminalInspector = new KeywordInspector(this);
@@ -967,11 +1005,9 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkActionInUnorderedGroup(final Action action) {
 		if (EcoreUtil2.getContainerOfType(action, UnorderedGroup.class) != null)
-			error(
-					"Actions may not be used in unordered groups.", 
+			addIssue("Actions may not be used in unordered groups.", 
 					action, 
 					null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					INVALID_ACTION_USAGE);
 	}
 	
@@ -1037,16 +1073,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			AbstractRule hiddenToken = hiddenTokens.get(i);
 			if (hiddenToken instanceof TerminalRule) {
 				if (((TerminalRule) hiddenToken).isFragment())
-					error(
-							"Cannot use terminal fragments as hidden tokens.", 
+					addIssue("Cannot use terminal fragments as hidden tokens.", 
 							owner, 
 							reference,
 							i,
 							INVALID_HIDDEN_TOKEN_FRAGMENT, 
 							String.valueOf(i));
 			} else {
-				error(
-						"Only terminal rules may be used as hidden tokens.", 
+				addIssue("Only terminal rules may be used as hidden tokens.", 
 						owner, 
 						reference,
 						i,
@@ -1062,4 +1096,32 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		inspector.inspect(grammar);
 	}
 	
+	@Check
+	public void checkTerminalRuleNamingConventions(TerminalRule terminalRule){
+		if(!terminalRule.getName().equals(terminalRule.getName().toUpperCase()))
+			addIssue("TerminalRule must be written in uppercase.", terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(),
+					INVALID_TERMINALRULE_NAME, terminalRule.getName());
+	}
+	
+	@Check
+	public void checkOppositeReferenceUsed(Assignment assignment) {
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(BIDIRECTIONAL_REFERENCE);
+		if (severity == null || severity == Severity.IGNORE) {
+			// Don't perform any check if the result is ignored
+			return;
+		}
+		EClassifier classifier = GrammarUtil.findCurrentType(assignment);
+		if (classifier instanceof EClass) {
+			EStructuralFeature feature = ((EClass) classifier).getEStructuralFeature(assignment.getFeature());
+			if (feature instanceof EReference) {
+				EReference reference = (EReference) feature;
+				if (reference.getEOpposite() != null && !(reference.isContainment() || reference.isContainer())) {
+					addIssue("The feature '" + assignment.getFeature() + "' is a bidirectional reference."
+							+ " This may cause problems in the linking process.",
+							assignment, XtextPackage.eINSTANCE.getAssignment_Feature(), BIDIRECTIONAL_REFERENCE);
+				}
+			}
+		}
+	}
+
 }

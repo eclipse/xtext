@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.contentassist;
 import java.util.Arrays;
 
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ContextInformationValidator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -61,12 +60,13 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	@Named(value=ERROR_MESSAGE)
 	private String errorMessage = null;
 	
+	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if (contentProposalProvider == null)
 			return null;
 		
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
-		ICompletionProposal[] result = document.readOnly(createCompletionProposalComputer(viewer, offset));
+		ICompletionProposal[] result = document.priorityReadOnly(createCompletionProposalComputer(viewer, offset));
 		Arrays.sort(result, completionProposalComparator);
 		result = completionProposalPostProcessor.postProcess(result);
 		return result;
@@ -76,34 +76,39 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		return new CompletionProposalComputer(this, viewer, offset);
 	}
 
+	@Override
 	public IContextInformation[] computeContextInformation(final ITextViewer viewer, final int offset) {
 		if (contextInformationProvider == null)
 			return null;
 		
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
-		return document.readOnly(createContextInformationComputer(viewer, offset));
+		return document.priorityReadOnly(createContextInformationComputer(viewer, offset));
 	}
 
 	protected ContextInformationComputer createContextInformationComputer(final ITextViewer viewer, final int offset) {
 		return new ContextInformationComputer(this, viewer, offset);
 	}
 
+	@Override
 	public char[] getCompletionProposalAutoActivationCharacters() {
 		if (completionProposalAutoActivationCharacters != null)
 			return completionProposalAutoActivationCharacters.toCharArray();
 		return null;
 	}
 
+	@Override
 	public char[] getContextInformationAutoActivationCharacters() {
 		if (contextInformationAutoActivationCharacters != null)
 			return contextInformationAutoActivationCharacters.toCharArray();
 		return null;
 	}
 
+	@Override
 	public IContextInformationValidator getContextInformationValidator() {
-		return new ContextInformationValidator(this);
+		return new SmartInformationAwareContextInformationValidator(this);
 	}
 
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -116,6 +121,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		this.contextFactory = contextFactory;
 	}
 
+	@Override
 	public ContentAssistContext.Factory getContextFactory() {
 		return contextFactory;
 	}
@@ -132,6 +138,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		this.contentProposalProvider = contentProposalProvider;
 	}
 
+	@Override
 	public IContentProposalProvider getContentProposalProvider() {
 		return contentProposalProvider;
 	}
@@ -140,22 +147,27 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		this.templateProposalProvider = templateProposalProvider;
 	}
 
+	@Override
 	public ITemplateProposalProvider getTemplateProposalProvider() {
 		return templateProposalProvider;
 	}
 
+	@Override
 	public IContextInformationProvider getContextInformationProvider() {
 		return contextInformationProvider;
 	}
 	
+	@Override
 	public ICompletionProposalAcceptor decorateAcceptor(ICompletionProposalAcceptor acceptor) {
 		return acceptor;
 	}
 	
+	@Override
 	public ITemplateAcceptor decorateAcceptor(ITemplateAcceptor acceptor) {
 		return acceptor;
 	}
 
+	@Override
 	public IContextInformationAcceptor decorateAcceptor(IContextInformationAcceptor acceptor) {
 		return acceptor;
 	}
@@ -166,6 +178,13 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 
 	public ICompletionProposalPostProcessor getCompletionProposalPostProcessor() {
 		return completionProposalPostProcessor;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public ICompletionProposalComparator getCompletionProposalComparator() {
+		return completionProposalComparator;
 	}
 
 }

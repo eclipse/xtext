@@ -20,32 +20,44 @@ import com.google.inject.Provider;
  */
 public class AccessibleCodetemplatesActivator extends CodetemplatesActivator {
 
-	private Provider<TemplatesLanguageConfiguration> configurationProvider;
-	private Provider<LanguageRegistry> languageRegistry;
+	private TemplatesLanguageConfiguration configuration;
+
+	private LanguageRegistry languageRegistry = createLanguageRegistry();
 
 	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		Injector templatesInjector = getInjector("org.eclipse.xtext.ui.codetemplates.Codetemplates");
-		languageRegistry = templatesInjector.getProvider(LanguageRegistry.class);
-		Injector singleTemplateInjector = getInjector("org.eclipse.xtext.ui.codetemplates.SingleCodetemplate");
-		configurationProvider = singleTemplateInjector.getProvider(TemplatesLanguageConfiguration.class);
-	}
-	
-	@Override
 	public void stop(BundleContext context) throws Exception {
-		configurationProvider = null;
+		configuration = null;
 		super.stop(context);
 	}
-	
+
+	protected TemplatesLanguageConfiguration getTemplatesLanguageConfigurationInstance() {
+		if (configuration == null) {
+			Injector singleTemplateInjector = getInjector("org.eclipse.xtext.ui.codetemplates.SingleCodetemplate");
+			configuration = singleTemplateInjector.getInstance(TemplatesLanguageConfiguration.class);
+		}
+		return configuration;
+	}
+
 	public static Provider<TemplatesLanguageConfiguration> getTemplatesLanguageConfigurationProvider() {
-		AccessibleCodetemplatesActivator instance = (AccessibleCodetemplatesActivator) getInstance();
-		return instance.configurationProvider;
+		return new Provider<TemplatesLanguageConfiguration>() {
+			@Override
+			public TemplatesLanguageConfiguration get() {
+				return ((AccessibleCodetemplatesActivator) getInstance()).getTemplatesLanguageConfigurationInstance();
+			}
+		};
 	}
-	
+
+	protected LanguageRegistry createLanguageRegistry() {
+		return new LanguageRegistry();
+	}
+
 	public static Provider<LanguageRegistry> getLanguageRegistry() {
-		AccessibleCodetemplatesActivator instance = (AccessibleCodetemplatesActivator) getInstance();
-		return instance.languageRegistry;
+		return new Provider<LanguageRegistry>() {
+			@Override
+			public LanguageRegistry get() {
+				return ((AccessibleCodetemplatesActivator) getInstance()).languageRegistry;
+			}
+		};
 	}
-	
+
 }

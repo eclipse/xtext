@@ -43,6 +43,7 @@ public class ResourceLoadingSlotEntry implements ISlotEntry {
 		this.uris.add(Pattern.compile(uri));
 	}
 
+	@Override
 	public void put(WorkflowContext ctx, IResourceDescriptions descriptions, ResourceSet resourceSet) {
 		EList<Resource> resources = resourceSet.getResources();
 		List<Resource> result = newArrayList();
@@ -63,6 +64,7 @@ public class ResourceLoadingSlotEntry implements ISlotEntry {
 		return false;
 	}
 
+	@Override
 	public void preInvoke() {
 		if (slot==null)
 			throw new IllegalStateException("'slot' has not been configured");

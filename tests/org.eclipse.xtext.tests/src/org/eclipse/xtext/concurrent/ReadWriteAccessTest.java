@@ -14,20 +14,20 @@ import java.util.List;
 
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class ReadWriteAccessTest extends TestCase {
+public class ReadWriteAccessTest extends Assert {
 
 	public static class Foo {
 		public String val = "foo";
 	}
 
-	public void testModifyAndRead() throws Exception {
+	@Test public void testModifyAndRead() throws Exception {
 		final Foo foo = new Foo();
 		final AbstractReadWriteAcces<Foo> access = new AbstractReadWriteAcces<Foo>() {
 			@Override
@@ -37,6 +37,7 @@ public class ReadWriteAccessTest extends TestCase {
 		};
 		final List<Throwable> exceptions = new ArrayList<Throwable>();
 		UncaughtExceptionHandler eh = new UncaughtExceptionHandler(){
+			@Override
 			public void uncaughtException(Thread t, Throwable e) {
 				exceptions.add(e);
 			}
@@ -64,8 +65,10 @@ public class ReadWriteAccessTest extends TestCase {
 
 	private Runnable changer(final AbstractReadWriteAcces<Foo> access, final int n) {
 		return new Runnable() {
+			@Override
 			public void run() {
 				access.modify(new IUnitOfWork<Object, Foo>() {
+					@Override
 					public Object exec(Foo state) throws Exception {
 						state.val = "foo-" + n;
 						return null;
@@ -77,10 +80,12 @@ public class ReadWriteAccessTest extends TestCase {
 
 	private Runnable reader(final AbstractReadWriteAcces<Foo> access) {
 		return new Runnable() {
+			@Override
 			public void run() {
 				access.readOnly(new IUnitOfWork<Object, Foo>() {
 					
 					// iterate 20 times { checking the state remains, wait 50 ms}
+					@Override
 					public Object exec(Foo state) throws Exception {
 						String val = state.val;
 						for (int i = 0; i < 10; i++) {

@@ -1,15 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
@@ -97,7 +97,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getLeft()
+  @Override
+public Expression getLeft()
   {
     return left;
   }
@@ -124,7 +125,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeft(Expression newLeft)
+  @Override
+public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
     {
@@ -145,7 +147,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOperator()
+  @Override
+public String getOperator()
   {
     return operator;
   }
@@ -155,7 +158,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(String newOperator)
+  @Override
+public void setOperator(String newOperator)
   {
     String oldOperator = operator;
     operator = newOperator;
@@ -168,7 +172,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getRight()
+  @Override
+public Expression getRight()
   {
     return right;
   }
@@ -195,7 +200,8 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRight(Expression newRight)
+  @Override
+public void setRight(Expression newRight)
   {
     if (newRight != right)
     {

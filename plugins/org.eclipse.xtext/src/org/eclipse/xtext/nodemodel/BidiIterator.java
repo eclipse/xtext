@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * <p>A bidirectional iterator. It can be used in both directions and even alternating.</p>

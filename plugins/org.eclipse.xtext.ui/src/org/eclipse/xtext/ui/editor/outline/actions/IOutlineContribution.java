@@ -14,6 +14,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.util.List;
 
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
@@ -23,7 +24,6 @@ import com.google.inject.Binding;
 import com.google.inject.BindingAnnotation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 /**
@@ -50,7 +50,6 @@ public interface IOutlineContribution extends IPreferenceStoreInitializer {
 
 	void deregister(OutlinePage outlinePage);
 	
-	@Singleton
 	class Composite implements IOutlineContribution {
 		
 		private List<IOutlineContribution> contributions;
@@ -65,16 +64,22 @@ public interface IOutlineContribution extends IPreferenceStoreInitializer {
 			}
 		}
 		
+		@Override
 		public void register(OutlinePage outlinePage) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.register(outlinePage);
+			TreeViewer treeViewer = outlinePage.getTreeViewer();
+			if(!treeViewer.getTree().isDisposed()) 
+				treeViewer.refresh();
 		}
 		
+		@Override
 		public void deregister(OutlinePage outlinePage) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.deregister(outlinePage);
 		}
 		
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.initialize(access);

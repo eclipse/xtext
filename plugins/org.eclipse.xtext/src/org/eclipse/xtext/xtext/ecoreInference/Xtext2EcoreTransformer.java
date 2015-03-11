@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +29,6 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -51,7 +52,6 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -59,6 +59,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.GrammarResource;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -94,6 +95,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public static class NullErrorAcceptor implements ErrorAcceptor {
+		@Override
 		public void acceptError(TransformationErrorCode errorCode, String arg0, EObject arg1) {
 			// do nothing
 		}
@@ -119,8 +121,13 @@ public class Xtext2EcoreTransformer {
 		Iterables.addAll(result, Iterables.filter(Iterables.transform(
 				Iterables.filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class),
 				new Function<AbstractMetamodelDeclaration, EPackage>() {
+					@Override
 					public EPackage apply(AbstractMetamodelDeclaration param) {
-						return param.getEPackage();
+						EPackage pack = (EPackage) param.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
+						if (pack != null && !pack.eIsProxy()) {
+							return pack;
+						}
+						return null;
 					}
 				}), Predicates.notNull()));
 		return getPackagesSortedByName(result);
@@ -149,15 +156,16 @@ public class Xtext2EcoreTransformer {
 
 	public void removeGeneratedPackages() {
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-		final Iterator<Resource> resourceIter = resourceSet.getResources().iterator();
+		final List<Resource> resources = resourceSet.getResources();
 		final Collection<EPackage> packages = getGeneratedPackages();
-		// TODO check against grammar
-		while (resourceIter.hasNext()) {
-			Resource r = resourceIter.next();
-			CONTENT: for (EObject content : r.getContents()) {
-				if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
-					clearPackage(r, (EPackage) content);
-					break CONTENT;
+		for(int i = 0; i < resources.size(); i++) {
+			Resource r = resources.get(i);
+			if (!(r instanceof GrammarResource)) {
+				CONTENT: for (EObject content : r.getContents()) {
+					if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
+						clearPackage(r, (EPackage) content);
+						break CONTENT;
+					}
 				}
 			}
 		}
@@ -179,6 +187,7 @@ public class Xtext2EcoreTransformer {
 	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
 		final ArrayList<EPackage> result = new ArrayList<EPackage>(packages);
 		Collections.sort(result, new Comparator<EPackage>() {
+			@Override
 			public int compare(EPackage o1, EPackage o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
@@ -344,9 +353,10 @@ public class Xtext2EcoreTransformer {
 							EEnumLiteral existing = returnType.getEEnumLiteral(text);
 							if (existing == null) {
 								literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
+								int index = returnType.getELiterals().size();
 								returnType.getELiterals().add(literal);
 								literal.setName(text);
-								literal.setValue(decls.indexOf(decl));
+								literal.setValue(index);
 								if (decl.getLiteral() != null) {
 									literal.setLiteral(decl.getLiteral().getValue());
 								} else {
@@ -376,17 +386,28 @@ public class Xtext2EcoreTransformer {
 	private Xtext2EcoreInterpretationContext deriveFeatures(final Xtext2EcoreInterpretationContext context,
 			AbstractElement element) {
 		XtextSwitch<Xtext2EcoreInterpretationContext> visitor = new XtextSwitch<Xtext2EcoreInterpretationContext>() {
+			
+			/*
+			 * Used for Alternatives and UnorderedGroups
+			 */
 			@Override
-			public Xtext2EcoreInterpretationContext caseAlternatives(Alternatives object) {
+			public Xtext2EcoreInterpretationContext caseCompoundElement(CompoundElement object) {
 				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
 				for (AbstractElement group : object.getElements()) {
 					contexts.add(deriveFeatures(context, group));
 				}
-				if (!GrammarUtil.isOptionalCardinality(object))
-					return context.mergeSpawnedContexts(contexts);
-				return context;
+				Xtext2EcoreInterpretationContext result = context;
+				if (!contexts.isEmpty()) {
+					if (GrammarUtil.isOptionalCardinality(object)) {
+						contexts.add(0, result);
+					} else {
+						result = contexts.get(0);
+					}
+					result = result.mergeSpawnedContexts(contexts);
+				}
+				return result;
 			}
-
+			
 			@Override
 			public Xtext2EcoreInterpretationContext caseAssignment(Assignment object) {
 				try {
@@ -399,20 +420,34 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public Xtext2EcoreInterpretationContext caseGroup(Group object) {
-				return deriveFeatures(context.spawnContextForGroup(), object.getElements());
+				Xtext2EcoreInterpretationContext result = deriveFeatures(context.spawnContextForGroup(), object.getElements());
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					result = deriveFeatures(result.spawnContextForGroup(), object.getElements());
+				}
+				if (GrammarUtil.isOptionalCardinality(object)) {
+					result = result.mergeSpawnedContexts(Arrays.asList(context, result));
+				}
+				return result;
 			}
 			
 			@Override
-			public Xtext2EcoreInterpretationContext caseUnorderedGroup(UnorderedGroup object) {
-				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
-				for (AbstractElement element : object.getElements()) {
-					contexts.add(deriveFeatures(context, element));
+			public Xtext2EcoreInterpretationContext caseAlternatives(Alternatives object) {
+				List<Xtext2EcoreInterpretationContext> contexts = newArrayList();
+				if (GrammarUtil.isOptionalCardinality(object)) {
+					contexts.add(context);
 				}
-				if (!GrammarUtil.isOptionalCardinality(object))
-					return context.mergeSpawnedContexts(contexts);
-				return context;
+				for (AbstractElement alternative : object.getElements()) {
+					contexts.add(deriveFeatures(context.spawnContextForGroup(), alternative));
+				}
+				Xtext2EcoreInterpretationContext result = context.mergeSpawnedContexts(contexts);
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					for (AbstractElement alternative : object.getElements()) {
+						deriveFeatures(result.spawnContextForGroup(), alternative);
+					}
+				}
+				return result;
 			}
-
+			
 			@Override
 			public Xtext2EcoreInterpretationContext caseRuleCall(RuleCall object) {
 				if (!GrammarUtil.isOptionalCardinality(object)) {
@@ -439,9 +474,10 @@ public class Xtext2EcoreTransformer {
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2EcoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
-					if (object.getFeature() != null)
+					if (object.getFeature() != null) {
 						ctx.addFeature(object.getFeature(), currentCompatibleType,
 								GrammarUtil.isMultipleAssignment(object), true, object);
+					}
 					return ctx;
 				}
 				catch (TransformationException e) {
@@ -449,7 +485,7 @@ public class Xtext2EcoreTransformer {
 				}
 				return context;
 			}
-
+			
 			@Override
 			public Xtext2EcoreInterpretationContext defaultCase(EObject object) {
 				return context;
@@ -507,24 +543,9 @@ public class Xtext2EcoreTransformer {
 		if (rule.getType() != null && rule.getType().getClassifier() != null)
 			return rule.getType().getClassifier();
 		if (rule instanceof TerminalRule || rule instanceof ParserRule && DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
-			if (isEcorePackageUsed(grammar, Sets.<Grammar>newLinkedHashSet()))
-				return EcorePackage.Literals.ESTRING;
+			return GrammarUtil.findEString(grammar);
 		}
 		return null;
-	}
-
-	private static boolean isEcorePackageUsed(Grammar grammar, Set<Grammar> checkedGrammars) {
-		if (!checkedGrammars.add(grammar))
-			return false;
-		for (AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
-			if (EcorePackage.eINSTANCE.equals(decl.getEPackage()))
-				return true;
-		}
-		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
-			if (isEcorePackageUsed(usedGrammar, checkedGrammars))
-				return true;
-		}
-		return false;
 	}
 
 	TypeRef getTypeRef(EClassifier classifier) {
@@ -789,12 +810,11 @@ public class Xtext2EcoreTransformer {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated, getGeneratedEPackageURIs());
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated, getGeneratedEPackageURIs(), GrammarUtil.getGrammar(metaModel));
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
-				// TODO: Enums
 				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, generated);
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
@@ -804,6 +824,7 @@ public class Xtext2EcoreTransformer {
 	private Set<String> getGeneratedEPackageURIs() {
 		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		return Sets.newLinkedHashSet(Iterables.transform(list, new Function<GeneratedMetamodel, String>() {
+			@Override
 			public String apply(GeneratedMetamodel from) {
 				return from.getEPackage()!=null?from.getEPackage().getNsURI() : null;
 			}
@@ -845,7 +866,8 @@ public class Xtext2EcoreTransformer {
 		if (info == null) {
 			// we assumend EString for terminal rules and datatype rules, so
 			// we have to do a look up in super grammar
-			if (typeRef.getClassifier() == EcorePackage.Literals.ESTRING) {
+			EDataType dataType = GrammarUtil.findEString(GrammarUtil.getGrammar(typeRef));
+			if (dataType != null && typeRef.getClassifier() == dataType) {
 				info = eClassifierInfos.getInfoOrNull(typeRef);
 				if (info != null)
 					return info;
@@ -893,7 +915,7 @@ public class Xtext2EcoreTransformer {
 
 			EClassifierInfo result;
 			if (classifier instanceof EClass)
-				result = EClassifierInfo.createEClassInfo((EClass) classifier, true, getGeneratedEPackageURIs());
+				result = EClassifierInfo.createEClassInfo((EClass) classifier, true, getGeneratedEPackageURIs(), GrammarUtil.getGrammar(typeRef));
 			else // datatype or enum
 				result = EClassifierInfo.createEDataTypeInfo((EDataType) classifier, true);
 

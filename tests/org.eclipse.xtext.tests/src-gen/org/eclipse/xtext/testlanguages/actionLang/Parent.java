@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.actionLang;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.testlanguages.actionLang;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.Parent#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.Parent#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage#getParent()
  * @model

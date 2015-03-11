@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.Grammar#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.Grammar#getUsedGrammars <em>Used Grammars</em>}</li>
@@ -24,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.xtextTest.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.Grammar#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getGrammar()
  * @model

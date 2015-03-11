@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl.ClassImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

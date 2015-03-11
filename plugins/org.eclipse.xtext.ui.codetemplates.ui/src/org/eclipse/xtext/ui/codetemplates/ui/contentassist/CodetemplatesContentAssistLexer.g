@@ -17,33 +17,33 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 }
 
 
-KEYWORD_14 : {!literal || templateVariable}?=>'templates';
+Templates : {!literal || templateVariable}?=>'templates';
 
-KEYWORD_12 : '\\<<';
+ReverseSolidusLessThanSignLessThanSign : '\\<<';
 
-KEYWORD_13 : {!literal || templateVariable}?=>'for';
+For : {!literal || templateVariable}?=>'for';
 
-KEYWORD_8 : '$$';
+DollarSignDollarSign : '$$';
 
-KEYWORD_9 : '${' {templateVariable = true;};
+DollarSignLeftCurlyBracket : '${' {templateVariable = true;};
 
-KEYWORD_10 : '<<' { if (literal) literal = false; };
+LessThanSignLessThanSign : '<<' { if (literal) literal = false; };
 
-KEYWORD_11 : {!literal || templateVariable}?=>'>>' { if (!literal) literal = true; };
+GreaterThanSignGreaterThanSign : {!literal || templateVariable}?=>'>>' { if (!literal) literal = true; };
 
-KEYWORD_1 : '$';
+DollarSign : '$';
 
-KEYWORD_2 : {!literal || templateVariable}?=>'(';
+LeftParenthesis : {!literal || templateVariable}?=>'(';
 
-KEYWORD_3 : {!literal || templateVariable}?=>')';
+RightParenthesis : {!literal || templateVariable}?=>')';
 
-KEYWORD_4 : {!literal || templateVariable}?=>',';
+Comma : {!literal || templateVariable}?=>',';
 
-KEYWORD_5 : {!literal || templateVariable}?=>'.';
+FullStop : {!literal || templateVariable}?=>'.';
 
-KEYWORD_6 : {!literal || templateVariable}?=>':';
+Colon : {!literal || templateVariable}?=>':';
 
-KEYWORD_7 : {!literal || templateVariable}?=>'}' {templateVariable = false;};
+RightCurlyBracket : {!literal || templateVariable}?=>'}' {templateVariable = false;};
 
 
 

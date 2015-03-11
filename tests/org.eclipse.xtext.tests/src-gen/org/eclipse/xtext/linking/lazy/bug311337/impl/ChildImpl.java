@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.linking.lazy.bug311337.Definition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ChildImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ChildImpl#getLink <em>Link</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

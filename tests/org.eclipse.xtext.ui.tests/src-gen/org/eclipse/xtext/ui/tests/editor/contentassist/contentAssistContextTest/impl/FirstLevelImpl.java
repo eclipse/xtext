@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl;
 
@@ -30,11 +27,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl.FirstLevelImpl#getSecondLevelA <em>Second Level A</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl.FirstLevelImpl#getSecondLevelB <em>Second Level B</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

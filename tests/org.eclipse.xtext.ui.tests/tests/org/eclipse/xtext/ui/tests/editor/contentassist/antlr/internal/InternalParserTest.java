@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStrea
 import org.eclipse.xtext.ui.tests.editor.contentassist.antlr.AbstractParserTest;
 import org.eclipse.xtext.ui.tests.ui.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer;
 import org.eclipse.xtext.ui.tests.ui.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageParser;
+import org.junit.Test;
 
 
 /**
@@ -36,7 +37,7 @@ public class InternalParserTest extends AbstractParserTest {
 		return result;
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		String input = "";
 		InternalXtextGrammarUiTestLanguageParser parser = createParser(input);
 		assertNotNull(parser);

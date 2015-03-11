@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PostfixExpression#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PostfixExpression#getProperty <em>Property</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Bug303200TestLanguagePackage#getPostfixExpression()
  * @model
@@ -35,12 +32,12 @@ public interface PostfixExpression extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expression</em>' containment reference.
-   * @see #setExpression(PrimaryExpression)
+   * @see #setExpression(PostfixExpression)
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Bug303200TestLanguagePackage#getPostfixExpression_Expression()
    * @model containment="true"
    * @generated
    */
-  PrimaryExpression getExpression();
+  PostfixExpression getExpression();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.PostfixExpression#getExpression <em>Expression</em>}' containment reference.
@@ -50,7 +47,7 @@ public interface PostfixExpression extends EObject
    * @see #getExpression()
    * @generated
    */
-  void setExpression(PrimaryExpression value);
+  void setExpression(PostfixExpression value);
 
   /**
    * Returns the value of the '<em><b>Property</b></em>' containment reference.

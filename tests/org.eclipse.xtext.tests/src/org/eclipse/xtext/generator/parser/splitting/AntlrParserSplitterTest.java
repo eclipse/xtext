@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import org.eclipse.xtext.generator.parser.AbstractAntlrSplitterTest;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter.ExtractedClass;
+import org.junit.Test;
 
 
 /**
@@ -41,7 +42,7 @@ public class AntlrParserSplitterTest extends AbstractAntlrSplitterTest {
 	
 	String DECL_AND_REF = DECLARATIONS + REFERENCES;
 	
-	public void testDeclaration() throws Exception {
+	@Test public void testDeclaration() throws Exception {
 		
 		Matcher m = AntlrParserSplitter.DECLARATION_PATTERN.matcher(DECL_AND_REF);
 		assertTrue(m.find());
@@ -53,7 +54,7 @@ public class AntlrParserSplitterTest extends AbstractAntlrSplitterTest {
 		assertFalse(m.find());
 	}
 	
-	public void testReference() throws Exception {
+	@Test public void testReference() throws Exception {
 		Matcher m = AntlrParserSplitter.REFERENCE_PATTERN.matcher(DECL_AND_REF);
 		assertTrue(m.find());
 		assertEquals("FOLLOW_ruleModel_in_entryRuleModel60", m.group(1));
@@ -67,7 +68,7 @@ public class AntlrParserSplitterTest extends AbstractAntlrSplitterTest {
 		assertFalse(m.find());
 	}
 	
-	public void testTransformer() throws Exception {
+	@Test public void testTransformer() throws Exception {
 		AntlrParserSplitter splitter = new AntlrParserSplitter(REFERENCES + DECLARATIONS);
 		String actual = splitter.transform();
 		assertNotNull(actual);
@@ -78,7 +79,7 @@ public class AntlrParserSplitterTest extends AbstractAntlrSplitterTest {
 //		System.out.println(ec.getContent());
 	}
 	
-	public void testRealworld() throws Exception {
+	@Test public void testRealworld() throws Exception {
 		String _class = readFileIntoString("org/eclipse/xtext/generator/parser/InternalParserExample.java.txt");
 		AntlrParserSplitter splitter = new AntlrParserSplitter(_class);
 		String newClass = splitter.transform();

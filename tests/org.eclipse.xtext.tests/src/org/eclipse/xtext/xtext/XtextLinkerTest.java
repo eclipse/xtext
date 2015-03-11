@@ -9,11 +9,13 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,19 +25,19 @@ public class XtextLinkerTest extends AbstractXtextTests {
 
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 	}
 	
-	public void testGeneratedPackageRemovedProperly() throws Exception {
+	@Test public void testGeneratedPackageRemovedProperly() throws Exception {
 		String testGrammar = "grammar foo.Bar generate foo 'bar'  Model : name=ID;";
 		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("name"), 4, "foo");
 		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("generate foo") + 11, 1, "x");
 		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
 	}
 
-	public void testImportedPackageRemovedProperly() throws Exception {
+	@Test public void testImportedPackageRemovedProperly() throws Exception {
 		String testGrammar = "grammar foo.Bar import 'classpath:/org/eclipse/xtext/xtext/Foo.ecore' as foo Model returns foo::Model: name=ID;";
 		// package import not influenced by parser rule change
 		checkPackageRemovalAfterGrammarChange(false, testGrammar, testGrammar.indexOf("name"), 4, "foo");
@@ -43,6 +45,13 @@ public class XtextLinkerTest extends AbstractXtextTests {
 		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
 	}
 
+	@Test public void testRegisteredPackageNotUnloaded() throws Exception {
+		String testGrammar = "grammar foo.Bar import 'http://www.eclipse.org/emf/2002/Ecore' EClass: 'foo';"; 
+		checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, testGrammar.indexOf("'foo'"), 4, "foo");
+		checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, testGrammar.indexOf("import ") + 11, 1, "x");
+		checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
+	}
+	
 	private void checkPackageRemovalAfterGrammarChange(boolean isRemoved, String originalGrammar, int offset, int length, String replacement) throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(originalGrammar, 1);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
@@ -60,4 +69,15 @@ public class XtextLinkerTest extends AbstractXtextTests {
 		ePackage = generatedMetamodel.getEPackage();
 		assertEquals(resource.getResourceSet(), ePackage.eResource().getResourceSet());
 	}
+	
+	private void checkRegisteredPackageNotUnloadedAfterGrammarChange(String originalGrammar, int offset, int length, String replacement) throws Exception {
+		XtextResource resource = getResourceFromString(originalGrammar);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		AbstractMetamodelDeclaration  generatedMetamodel =  grammar.getMetamodelDeclarations().get(0);
+		EPackage ePackage = generatedMetamodel.getEPackage();
+		assertNull(((InternalEObject) ePackage).eProxyURI());
+		resource.update(offset, length, replacement);
+		assertNull(((InternalEObject) ePackage).eProxyURI());		
+	}
+
 }

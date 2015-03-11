@@ -67,6 +67,7 @@ public class UriBasedReader extends AbstractReader {
 		resourceSet.setClasspathURIContext(class1);
 		setResourceSetProvider(new Provider<ResourceSet>() {
 			
+			@Override
 			public ResourceSet get() {
 				return resourceSet;
 			}

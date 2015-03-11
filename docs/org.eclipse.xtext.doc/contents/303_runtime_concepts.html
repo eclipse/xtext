@@ -1,0 +1,1243 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="runtime-concepts">Runtime Concepts</h1>
+
+<p>Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using <a href="302_configuration.html#dependency-injection">dependency injection</a>. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a>-implementations in normal mode and uses Eclipse’s extension mechanism when it should be configured in an OSGi environment.</p>
+
+<h2 id="runtime-setup">Runtime Setup (ISetup)</h2>
+
+<p>For each language there is an implementation of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> generated. It implements a method called <code>createInjectorAndDoEMFRegistration()</code>, which can be called to do the initialization of the language infrastructure.</p>
+
+<p><strong>Caveat:</strong> The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> class is intended to be used for runtime and for unit testing, only. if you use it in a Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.</p>
+
+<p>The setup method returns an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a>, which can further be used to obtain a parser, etc. It also registers the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Factory</a> and generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to the respective global registries provided by EMF. So basically after having run the setup and you can start using EMF API to load and store models of your language.</p>
+
+<h2 id="equinox-setup">Setup within Eclipse-Equinox (OSGi)</h2>
+
+<p>Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the <a href="#guicemodules">modules</a>. In addition an <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html">IExecutableExtensionFactory</a> is generated for each language, which is used to create <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html">IExecutableExtensions</a>. This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.</p>
+
+<p>The only thing you have to do in order to use this factory is to prefix the class with the factory <em>MyDslExecutableExtensionFactory</em> name followed by a colon.</p>
+
+<pre><code class="language-xml">&lt;extension point="org.eclipse.ui.editors"&gt;
+  &lt;editor
+    class="&lt;MyDsl&gt;ExecutableExtensionFactory:
+      org.eclipse.xtext.ui.editor.XtextEditor"
+    contributorClass=
+      "org.eclipse.ui.editors.text.TextEditorActionContributor"
+    default="true"
+    extensions="mydsl"
+    id="org.eclipse.xtext.example.MyDsl"
+    name="MyDsl Editor"&gt;
+  &lt;/editor&gt;
+&lt;/extension&gt;
+</code></pre>
+
+<h2 id="logging">Logging</h2>
+
+<p>Xtext uses Apache’s log4j for logging. It is configured using files named <em>log4j.properties</em>, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a <em>log4j.properties</em> in place and make sure that it is not overridden by other <em>log4j.properties</em> in previous class path entries.</p>
+
+<p>In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make sure that there is not any second fragment contributing a <em>log4j.properties</em> file.</p>
+
+<h2 id="code-generation">Code Generation / Compilation</h2>
+
+<p>Once you have a language you probably want to do something with it. There are two options, you can either write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files. In this section we’re going to show how to implement a code generator for an Xtext-based language.</p>
+
+<h3 id="igenerator">IGenerator</h3>
+
+<p>If you go with the default MWE workflow for your language and you haven’t used Xbase, than you’ll be provided with a callback stub that implements <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a>. It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The two parameters passed in to this method are:</p>
+
+<ul>
+  <li>The resource to be processed</li>
+  <li>An instance of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java">IFileSystemAccess</a></li>
+</ul>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java">IFileSystemAccess</a> API abstracts over the different file systems the code generator my run over. These are typically Eclipse’s file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse, and <code>java.io.File</code> when the code generator is executed outside Eclipse, say in a headless build.</p>
+
+<p>A very simple implementation of a code generator for the <a href="301_grammarlanguage.html#statemachine">example statemachine language</a> introduced earlier could be the following:</p>
+
+<pre><code class="language-xtend">class StatemachineGenerator implements IGenerator {
+
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    fsa.generateFile("relative/path/AllTheStates.txt", '''
+      «FOR state : resource.allContents.filter(State).toIterable»
+        State «state.name»
+      «ENDFOR»
+    ''')
+  }
+}
+</code></pre>
+
+<p>We use Xtend for implementing code generators as it is much better suited for that task then Java (or any other language on the planet :-)). Please refer to the <a href="http://www.xtend-lang.org">Xtend documentation</a> for further details. For Java developers it’s extremely easy to learn, as the basics are similar and you only need to learn the additional powerful concepts.</p>
+
+<h3 id="output-configurations">Output Configurations</h3>
+
+<p>You don’t want to deal with platform or even installation dependent paths in your code generator, rather you want to be able to configure the code generator with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.</p>
+
+<p>By default every language will have a single outlet, which points to <code>&lt;project-root&gt;/src-gen/</code>. The files that go here are treated as fully derived and will be erased by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java">IOutputConfigurationProvider</a>. It’s straight forward to understand and the default implementation gives you a good idea about how to implement it.</p>
+
+<p>With this implementation you lay out the basic defaults which can be changed by users on a workspace or per project level using the preferences.</p>
+
+<h2 id="validation">Validation</h2>
+
+<p>Static analysis or validation is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful if they get informative feedback as they type. In Xtext there are basically three different kinds of validation.</p>
+
+<h3 id="automatic-validation">Automatic Validation</h3>
+
+<p>Some implementation aspects (e.g. the grammar, scoping) of a language have an impact on what is required for a document or semantic model to be valid. Xtext automatically takes care of this.</p>
+
+<h4 id="syntactical-validation">Lexer/Parser: Syntactical Validation</h4>
+
+<p>The syntactical correctness of any textual input is validated automatically by the parser. The error messages are generated by the underlying parser technology. One can use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java">ISyntaxErrorMessageProvider</a>-API to customize this messages. Any syntax errors can be retrieved from the Resource using the common EMF API:</p>
+
+<ul>
+  <li><a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java"><code>Resource.getErrors()</code></a></li>
+  <li><a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java"><code>Resource.getWarnings()</code></a></li>
+</ul>
+
+<h4 id="linking-validation">Linker: Cross-link Validation</h4>
+
+<p>Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see <a href="#linking">linking</a>), any broken links are resolved lazily as well. If you want to validate whether all links are valid, you will have to navigate through the model so that all installed EMF proxies get resolved. This is done automatically in the editor.</p>
+
+<p>Similar to syntax errors, any unresolvable cross-links will be reported and can be obtained through:</p>
+
+<ul>
+  <li><a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java"><code>Resource.getErrors()</code></a></li>
+  <li><a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java"><code>Resource.getWarnings()</code></a></li>
+</ul>
+
+<h4 id="concrete-syntax-validation">Serializer: Concrete Syntax Validation</h4>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java">IConcreteSyntaxValidator</a> validates all constraints that are implied by a grammar. Meeting these constraints for a model is mandatory to be serialized.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-xtext">MyRule:
+  ({MySubRule} "sub")? (strVal+=ID intVal+=INT)*;
+</code></pre>
+
+<p>This implies several constraints:</p>
+
+<ol>
+  <li>Types: only instances of <em>MyRule</em> and <em>MySubRule</em> are allowed for this rule. Subtypes are prohibited, since the parser never instantiates unknown subtypes.</li>
+  <li>Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeatures</a> besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have <a href="#transient-values">non-transient values</a>.</li>
+  <li>Quantities: The following condition must be true: <code>strVal.size() == intVal.size()</code>.</li>
+  <li>Values: It must be possible to <a href="#value-converter">convert all values</a> to valid tokens for terminal rule <em>STRING</em>. The same is true for <em>intVal</em> and <em>INT</em>.</li>
+</ol>
+
+<p>The typical use case for the concrete syntax validator is validation in non-Xtext-editors that, however, use an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified “manually” (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide <a href="#parse-tree-constructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself is <em>not</em> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.</p>
+
+<p>There are some limitations to the concrete syntax validator which result from the fact that it treats the grammar as declarative, which is something the parser doesn’t always do.</p>
+
+<ul>
+  <li>Grammar rules containing assigned actions (e.g. <code>{MyType.myFeature=current}</code> are ignored. Unassigned actions (e.g. <code>{MyType}</code>), however, are supported.</li>
+  <li>Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule calls are ignored.</li>
+  <li>Orders within list-features can not be validated. e.g. <code>Rule: (foo+=R1 foo+=R2)*</code> implies that <em>foo</em> is expected to contain instances of <em>R1</em> and <em>R2</em> in an alternating order.</li>
+</ul>
+
+<p>To use concrete syntax validation you can let Guice inject an instance of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java">IConcreteSyntaxValidator</a> and use it directly. Furthermore, there is an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java">adapter</a> which allows to use the concrete syntax validator as an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">EValidator</a>. You can, for example, enable it in your runtime module, by adding:</p>
+
+<pre><code class="language-java">@SingletonBinding(eager = true)
+public Class&lt;? extends ConcreteSyntaxEValidator&gt;
+      bindConcreteSyntaxEValidator() {
+  return ConcreteSyntaxEValidator.class;
+}
+</code></pre>
+
+<p>To customize error messages please see <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxDiagnosticProvider.java">IConcreteSyntaxDiagnosticProvider</a> and subclass <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxDiagnosticProvider.java">ConcreteSyntaxDiagnosticProvider</a>.</p>
+
+<h3 id="custom-validation">Custom Validation</h3>
+
+<p>In addition to the afore mentioned kinds of validation, which are more or less done automatically, you can specify additional constraints specific for your Ecore model. We leverage existing <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">EMF API</a> and have put some convenience stuff on top. Basically all you need to do is to make sure that an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">EValidator</a> is registered for your <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a>. The <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">Registry</a> can only be filled programmatically. That means contrary to the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">Registry</a> and the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Registry</a> there is no Equinox extension point to populate the validator registry.</p>
+
+<p>For Xtext we provide a <a href="302_configuration.html#generator-fragment">generator fragment</a> for the convenient Java-based <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">EValidator</a> API. Just add the following fragment to your generator configuration and you are good to go:</p>
+
+<pre><code class="language-mwe2">fragment =
+  org.eclipse.xtext.generator.validation.JavaValidatorFragment {}
+</code></pre>
+
+<p>The generator will provide you with two Java classes. An abstract class generated to <em>src-gen/</em> which extends the library class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a>. This one just registers the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> for which this validator introduces constraints. The other class is a subclass of that abstract class and is generated to the <em>src/</em> folder in order to be edited by you. That is where you put the constraints in.</p>
+
+<p>The purpose of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a> is to allow you to write constraints in a declarative way - as the class name already suggests. That is instead of writing exhaustive if-else constructs or extending the generated EMF switch you just have to add the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation to any method and it will be invoked automatically when validation takes place. Moreover you can state for what type the respective constraint method is, just by declaring a typed parameter. This also lets you avoid any type casts. In addition to the reflective invocation of validation methods the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a> provides a couple of convenient assertions.</p>
+
+<p>All in all this is very similar to how JUnit 4 works. Here is an example:</p>
+
+<pre><code class="language-java">public class DomainmodelJavaValidator
+  extends AbstractDomainmodelJavaValidator {
+
+  @Check
+  public void checkTypeNameStartsWithCapital(Type type) {
+    if (!Character.isUpperCase(type.getName().charAt(0)))
+      warning("Name should start with a capital",
+        DomainmodelPackage.TYPE__NAME);
+  }
+}
+</code></pre>
+
+<p>You can also implement quick fixes for individual validation errors and warnings. See the <a href="#quick-fixes">section on quick fixes</a> for details.</p>
+
+<h3 id="validating-manually">Validating Manually</h3>
+
+<p>As noted above, Xtext uses EMF’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">EValidator</a> API to register validators. You can run the validators on your model programmatically using EMF’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/util/Diagnostician.java">Diagnostician</a>, e.g.</p>
+
+<pre><code class="language-java">EObject myModel = myResource.getContents().get(0);
+Diagnostic diagnostic = Diagnostician.INSTANCE.validate(myModel);
+switch (diagnostic.getSeverity()) {
+  case Diagnostic.ERROR:
+    System.err.println("Model has errors: ",diagnostic);
+    break;
+  case Diagnostic.WARNING:
+    System.err.println("Model has warnings: ",diagnostic);
+}
+</code></pre>
+
+<h3 id="test-validators">Test Validators</h3>
+
+<p>If you have implemented your validators by extending <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a>, there are helper classes which assist you when testing your validators.</p>
+
+<p>Testing validators typically works as follows:</p>
+
+<ol>
+  <li>The test creates some models which intentionally violate some constraints.</li>
+  <li>The test runs some chosen <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a> from the validator.</li>
+  <li>The test asserts whether the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a> have raised the expected warnings and errors.</li>
+</ol>
+
+<p>To create models, you can either use EMF’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java">ResourceSet</a> to load models from your hard disk or you can utilize the <em>MyDslFactory</em> that EMF generates for each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a>, to construct the tested model elements manually. While the first option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.</p>
+
+<p>To run the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a> and ensure they raise the intended errors and warnings, you can utilize <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/ValidatorTester.java">ValidatorTester</a> as shown by the following example:</p>
+
+<p>Validator:</p>
+
+<pre><code class="language-java">public class MyLanguageValidator extends AbstractDeclarativeValidator {
+  @Check
+  public void checkFooElement(FooElement element) {
+    if(element.getBarAttribute().contains("foo"))
+      error("Only Foos allowed", element,
+        MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE, 101);
+  }
+}
+</code></pre>
+
+<p>JUnit-Test:</p>
+
+<pre><code class="language-java">public class MyLanguageValidatorTest extends AbstractXtextTests {
+
+  private ValidatorTester&lt;MyLanguageValidator&gt; tester;
+
+  @Override
+  public void setUp() {
+    with(MyLanguageStandaloneSetup.class);
+    MyLanguageValidator validator = get(MyLanguageValidator.class);
+    tester = new ValidatorTester&lt;TestingValidator&gt;(validator);
+  }
+
+  public void testError() {
+    FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+    model.setBarAttribute("barbarbarbarfoo");
+
+    tester.validator().checkFooElement(model);
+    tester.diagnose().assertError(101);
+  }
+
+  public void testError2() {
+    FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+    model.setBarAttribute("barbarbarbarfoo");
+
+    tester.validate(model).assertError(101);
+  }
+}
+</code></pre>
+
+<p>This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit whatsoever, JUnit 4 and other testing frameworks will work as well. JUnit runs the <code>setUp()</code>-method before each test case and thereby helps to create some common state. In this example, the validator is instantiated by means of Google Guice. As we inherit from the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/AbstractXtextTests.java">AbstractXtextTests</a> there are a plenty of useful methods available and the state of the global EMF singletons will be restored in the method <code>tearDown()</code>. Afterwards, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/ValidatorTester.java">ValidatorTester</a> is created and parameterized with the actual validator. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (<code>tester.validator()</code>) as well as to the utility classes which assert diagnostics created by the validator (<code>tester.diagnose()</code>). Please be aware that you have to call <code>validator()</code> before you can call <code>diagnose()</code>. However, you can call <code>validator()</code> multiple times in a row.</p>
+
+<p>While <code>validator()</code> allows to call the validator’s <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a> directly, <code>validate(model)</code> leaves it to the framework to call the applicable <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a>. However, to avoid side-effects between tests, it is recommended to call the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">@Check-methods</a> directly.</p>
+
+<p><code>diagnose()</code> and <code>validate(model)</code> return an object of type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java">AssertableDiagnostics</a> which provides several <em>assert</em>-methods to verify whether the expected diagnostics are present:</p>
+
+<ul>
+  <li><code>assertError(int code)</code>: There must be one diagnostic with severity ERROR and the supplied error code.</li>
+  <li><code>assertErrorContains(String messageFragment)</code>: There must be one diagnostic with severity ERROR and its message must contain <em>messageFragment</em>.</li>
+  <li><code>assertError(int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.</li>
+  <li><code>assertWarning(...)</code>: This method is available for the same combination of parameters as <code>assertError()</code>.</li>
+  <li><code>assertOK()</code>: Expects that no diagnostics (errors, warnings etc.) have been raised.</li>
+  <li><code>assertDiagnostics(int severity, int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.</li>
+  <li><code>assertAll(DiagnosticPredicate... predicates)</code>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java">AssertableDiagnostics</a> contains static <code>error()</code> and <code>warning()</code> methods which help to create the needed <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java">DiagnosticPredicate</a>. Example: <code>assertAll(error(123), warning("some part of the message"))</code>.</li>
+  <li><code>assertAny(DiagnosticPredicate predicate)</code>: Asserts that a diagnostic exists which matches the predicate.</li>
+</ul>
+
+<h2 id="linking">Linking</h2>
+
+<p>The linking feature allows for specification of cross-references within an Xtext grammar. The following things are needed for the linking:</p>
+
+<ol>
+  <li>declaration of a cross-link in the grammar (at least in the Ecore model)</li>
+  <li>specification of linking semantics (usually provided via the <a href="#scoping">scoping API</a>)</li>
+</ol>
+
+<h3 id="declaration-of-cross-links">Declaration of Cross-links</h3>
+
+<p>In the grammar a cross-reference is specified using square brackets.</p>
+
+<pre><code class="language-xtext">CrossReference :
+  '[' type=ReferencedEClass ('|' terminal=CrossReferenceTerminal)? ']'
+;
+</code></pre>
+
+<p>Example:</p>
+
+<pre><code class="language-xtext">ReferringType :
+  'ref' referencedObject=[Entity|STRING]
+;
+</code></pre>
+
+<p>The <a href="301_grammarlanguage.html#metamodel-inference">Ecore model inference</a> would create an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>ReferringType</em> with an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> <em>referencedObject</em> of type <em>Entity</em> with its containment property set to <code>false</code>. The referenced object would be identified either by a <em>STRING</em> and the surrounding information in the current context (see <a href="#scoping">scoping</a>). If you do not use <code>generate</code> but <code>import</code> an existing Ecore model, the class <em>ReferringType</em> (or one of its super types) would need to have an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> of type <em>Entity</em> (or one of its super types) declared. Also the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference’s</a> containment and container properties needs to be set to <code>false</code>.</p>
+
+<h3 id="lazy-linking">Default Runtime Behavior (Lazy Linking)</h3>
+
+<p>Xtext uses lazy linking by default and we encourage users to stick to this because it provides many advantages. One of which is improved performance in all scenarios where you don’t have to load the whole closure of all transitively referenced resources. Furthermore it automatically solves situations where one link relies on other links. Though cyclic linking dependencies are not supported by Xtext at all.</p>
+
+<p>When parsing a given input string, say</p>
+
+<p><code>ref Entity01</code></p>
+
+<p>the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java">LazyLinker</a> first creates an EMF proxy and assigns it to the corresponding <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a>. In EMF a proxy is described by a <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>, which points to the real <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. In the case of lazy linking the stored <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> comprises of the context information given at parse time, which is the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> containing the cross-reference, the actual <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a>, the index (in case it’s a multi-valued cross-reference) and the string which represented the cross-link in the concrete syntax. The latter usually corresponds to the name of the referenced <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. In EMF a <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> consists of information about the resource the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> is contained in as well as a so called fragment part, which is used to find the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> within that resource. When an EMF proxy is resolved, the current <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java">ResourceSet</a> is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> based on the fragment in the URI. The actual cross-reference resolution is done by <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java">LazyLinkingResource.getEObject(String)</a> which receives the fragment and delegates to the implementation of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java">ILinkingService</a>. The default implementation in turn delegates to the <a href="#scoping">scoping API</a>.</p>
+
+<p>A <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java">simple implementation</a> of the linking service is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the <a href="#scoping">scoping API</a>.</p>
+
+<h2 id="scoping">Scoping</h2>
+
+<p>Using the scoping API one defines which elements are referable by a given reference. For instance, using the introductory example (Fowler’s state machine language) a transition contains two cross-references: one to a declared event and one to a declared state.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-fowlerexample">events
+  nothingImportant  MYEV
+end
+
+state idle
+  nothingImportant =&gt; idle
+end
+</code></pre>
+
+<p>The grammar rule for transitions looks like this:</p>
+
+<pre><code class="language-xtext">Transition :
+  event=[Event] '=&gt;' state=[State];
+</code></pre>
+
+<p>The grammar declares that for the reference <em>event</em> only instances of the type <em>Event</em> are allowed and that for the EReference <em>state</em> only instances of type <em>State</em> can be referenced. However, this simple declaration doesn’t say anything about where to find the states or events. That is the duty of scopes.</p>
+
+<p>An <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> is responsible for providing an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java">IScope</a> for a given context <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> and <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a>. The returned <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java">IScope</a> should contain all target candidates for the given object and cross-reference.</p>
+
+<pre><code class="language-java">public interface IScopeProvider {
+
+  /**
+   * Returns a scope for the given context. The scope
+   * provides access to the compatible visible EObjects
+   * for a given reference.
+   *
+   * @param context the element from which an element shall be
+   *        referenced
+   * @param reference the reference to be used to filter the
+   *        elements.
+   * @return {@link IScope} representing the inner most
+   *         {@link IScope} for the passed context and reference.
+   *         Note for implementors: The result may not be
+   *         &lt;code&gt;null&lt;/code&gt;. Return
+   *         &lt;code&gt;IScope.NULLSCOPE&lt;/code&gt; instead.
+   */
+  IScope getScope(EObject context, EReference reference);
+
+}
+</code></pre>
+
+<p>A single <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java">IScope</a> represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>, which is effectively an abstract description of a real <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. In order to create IEObjectDescriptions for your model elements, the class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/Scopes.java">Scopes</a> is very useful.</p>
+
+<p>To have a concrete example, let’s deal with the following simple grammar.</p>
+
+<pre><code class="language-xtext">grammar org.xtext.example.mydsl.MyScopingDsl with
+                                      org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyScopingDsl"
+
+Root:
+    elements+=Element;
+
+Element:
+    'element' name=ID ('extends' superElement=[Element])?;
+
+</code></pre>
+
+<p>If you want to define the scope for the superElement cross-reference, the following code is one way to go.</p>
+
+<pre><code class="language-java">  IScope getScope(EObject context, EReference reference) {
+      // We want to define the Scope for the Element's superElement cross-reference
+      if(context instanceof Element
+          &amp;&amp; reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
+        // Collect a list of candidates by going through the model
+        // EcoreUtil2 provides useful functionality to do that
+        // For example searching for all elements within the root Object's tree
+        EObject rootElement = EcoreUtil2.getRootContainer(context);
+        List&lt;Element&gt; candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
+        // Scopes.scopeFor creates IEObjectDescriptions and puts them into an IScope instance
+        IScope scope = Scopes.scopeFor(candidates);
+        return scope;
+      }
+      return super.getScope(context, reference);
+  }
+</code></pre>
+
+<p>There are different useful implementations for IScopes shipped with Xtext. We want to mention only some of them here.<br />
+The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java">MapBasedScope</a> comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java">MultimapBasedScope</a> should work for you. For situations where some elements should be filtered out of an existing scope, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java">FilteringScope</a> is the right way to go. As scopes can be nested, we strongly recommend to use FilteringScope only for leaf scopes without nested scopes.</p>
+
+<p>Coming back to our example, one possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a super-element of itself.</p>
+
+<pre><code class="language-java">  IScope getScope(final EObject context, EReference reference) {
+      if(context instanceof Element
+          &amp;&amp; reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT){
+        EObject rootElement = EcoreUtil2.getRootContainer(context);
+        List&lt;Element&gt; candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
+        IScope existingScope = Scopes.scopeFor(candidates);
+        // Scope that filters out the context element from the candidates list
+        IScope filteredScope = new FilteringScope(existingScope,
+                                                  new Predicate&lt;IEObjectDescription&gt;() {
+            public boolean apply(IEObjectDescription input) {
+              return input.getEObjectOrProxy() != context;
+            }
+        });
+        return filteredScope;
+      }
+      return super.getScope(context, reference);
+  }
+
+</code></pre>
+
+<h3 id="global-scopes">Global Scopes and Resource Descriptions</h3>
+
+<p>In the state machine example we don’t have references across model files. Neither is there a concept like a namespace which would make scoping a bit more complicated. Basically, every <em>State</em> and every <em>Event</em> declared in the same resource is visible by their name. However, in the real world things are most likely not that simple: What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross-resource reference.</p>
+
+<p>Defining what is visible from outside the current resource is the responsibility of global scopes. As the name suggests, global scopes are provided by instances of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a>. The data structures (called index) used to store its elements are described in the next section.</p>
+
+<h4 id="resource-descriptions">Resource and EObject Descriptions</h4>
+
+<p>In order to make states and events of one file referable from another file, you need to export them as part of a so called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>.</p>
+
+<p>A <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> contains information about the resource itself, which primarily its <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>, a list of exported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>s in the form of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>s, as well as information about outgoing cross-references and qualified names it references. The cross-references contain only resolved references, while the list of imported qualified names also contains the names that couldn’t be resolved. This information is leveraged by Xtext’s indexing infrastructure in order to compute the transitive hull of dependent resources.</p>
+
+<p>For users, and especially in the context of scoping, the most important information is the list of exported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a>. An <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a> stores the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> of the actual <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>, its <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a>, as well as its <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>. In addition one can export arbitrary information using the <em>user data</em> map. The following diagram gives an overview on the description classes and their relationships.</p>
+
+<p><img src="images/index_datamodel.png" alt="The data model of Xtext's index" /></p>
+
+<p>A language is configured with default implementations of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/DefaultResourceDescriptionStrategy.java">DefaultResourceDescriptionStrategy</a>, which are responsible to compute the list of exported <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>s. The Manager iterates over the whole EMF model for each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource</a> and asks the ResourceDescriptionStrategy to compute an IEObjectDescription for each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The ResourceDescriptionStrategy applies the <code>getQualifiedName(EObject obj)</code> from <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> on the object, and if it has a qualified name an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a> is created and passed back to the Manager which adds it to the list of exported objects. If an EObject doesn’t have a qualified name, the element is considered to be not referable from outside the resource and consequently not indexed. If you don’t like this behavior, you can implement and bind your own implementation of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java">IDefaultResourceDescriptionStrategy</a>.</p>
+
+<p>There are also two different default implementations of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a>. Both work by looking up an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> ‘<em>name</em>’. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java">SimpleNameProvider</a> simply returns the plain value, while the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java">DefaultDeclarativeQualifiedNameProvider</a> concatenates the simple name with the qualified name of its parent exported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. This effectively simulates the qualified name computation of most namespace-based languages (like e.g. Java).</p>
+
+<p>As already mentioned, the default implementation strategy exports every model element that the IQualifiedNameProvider can provide a name for. This is a good starting point, but when your models become bigger and you have a lot of them the index will become larger and larger. In most scenarios only a small part of your model should be visible from outside. For that reason only a small part of your model needs to be in the index. If you come to that point, please bind a custom implementation of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java">IDefaultResourceDescriptionStrategy</a> and create index representations only for those elements that you want to reference to from outside the resource they are contained in. From within the resource, references to those filtered elements are still possible as long as they have a name. In summary, there are two ways to control which elements will go into the index. The first one is through the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a>, but this implies that an element is not referable even within the same resource. The second one is though the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java">IDefaultResourceDescriptionStrategy</a>, which does not imply that you cannot refer to the elment within the same resource.</p>
+
+<p>Beside the exported elements the index contains <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java">IReferenceDescription</a>s that contain the information who is referencing who. They are created through the Manager and IDefaultResourceDescriptionStrategy, too. If there is a model element that references another model element, the IDefaultResourceDescriptionStrategy creates an IReferenceDescription that contains the URI of the referencing element (sourceEObjectURI) and the referenced element (targetEObjectURI). At the end this IReferenceDescriptions are very useful to find references and calculate affected resources.</p>
+
+<p>As mentioned above, in order to calculate an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> for a resource the framework asks the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> which delegates to the IDefaultResourceDescriptionStrategy. To convert between a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedName</a> and its <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> representation you can use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java">IQualifiedNameConverter</a>. Here is some Java code showing how to do that:</p>
+
+<pre><code class="language-java">@Inject IQualifiedNameConverter converter;
+
+Manager manager = // obtain an instance of IResourceDescription.Manager
+IResourceDescription description = manager.getResourceDescription(resource);
+for (IEObjectDescription eod : description.getExportedObjects()) {
+  System.out.println(converter.toString(eod.getQualifiedName()));
+}
+</code></pre>
+
+<p>In order to obtain a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> it is best to ask the corresponding <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">IResourceServiceProvider</a>. That is because each language might have a totally different implementation, and as you might refer from your language to a different language you cannot reuse your language’s <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a>. One basically asks the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">Registry</a> (there is usually one global instance) for an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">IResourceServiceProvider</a>, which in turn provides a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">Manager</a> along other useful services.</p>
+
+<p>If you are running in a Guice enabled scenario, the code looks like this:</p>
+
+<pre><code class="language-java">@Inject
+private IResourceServiceProvider.Registry rspr;
+
+private IResourceDescription.Manager getManager(Resource res) {
+  IResourceServiceProvider resourceServiceProvider =
+    rspr.getResourceServiceProvider(res.getURI());
+  return resourceServiceProvider.getResourceDescriptionManager();
+}
+</code></pre>
+
+<p>If you don’t run in a Guice enabled context you will likely have to directly access the singleton:</p>
+
+<pre><code class="language-java">private IResourceServiceProvider.Registry rspr =
+  IResourceServiceProvider.Registry.INSTANCE;
+</code></pre>
+
+<p>However, we strongly encourage you to use <a href="302_configuration.html#dependency-injection">dependency injection</a>. Now that we know how to export elements to be referable from other resources, we need to learn how those exported <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescriptions</a> can be made available to the referencing resources. That is the responsibility of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">global scoping</a> which is described in the following section.</p>
+
+<p>If you would like to see what’s in the index, you could use the ‘Open Model Element’ dialog from the navigation menu entry.</p>
+
+<h4 id="index-based">Global Scopes Based On External Configuration (e.g. Class Path Based)</h4>
+
+<p>Instead of explicitly referring to imported resources, another option is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instance uses the notion of the class path to define containers (jars and class folders) which contain referenceable elements. In the case of Java the order of such entries is also important.</p>
+
+<p>To enable support for this kind of global scoping in Xtext, a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java">DefaultGlobalScopeProvider</a> has to be bound to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a> interface. By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: you can reuse the infrastructure without using Java and be independent from the JDT.</p>
+
+<p>In order to know what is available in the “world”, a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a>. If you don’t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a>, you’ll have to load all resources up front and either keep holding them in memory or remember all information which is needed for the resolution of cross-references. In Xtext that information is provided by a so called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>.</p>
+
+<h5 id="containers">About the Index, Containers and Their Manager</h5>
+
+<p>Xtext ships with an index which remembers all <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> and their <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a> objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes, hence the infrastructure can be much simpler. In both situations the global index state is held by an implementation of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">IResourceDescriptions</a> (note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, such that all linking happens to the latest maybe unsaved version of the resources. You will find the Guice configuration of the global index in the UI scenario in <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java">SharedModule</a>.</p>
+
+<p>The index is basically a flat list of instances of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>. The index itself doesn’t know about visibility constraints due to class path restriction. Rather than that, they are defined by the referencing language by means of so called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainers</a>: While Java might load a resource via <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html">ClassLoader.loadResource()</a> (i.e. using the class path mechanism), another language could load the same resource using the file system paths.</p>
+
+<p>Consequently, the information which container a resource belongs to depends on the referencing context. Therefore an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">IResourceServiceProvider</a> provides another interesting service, which is called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">Manager</a>. For a given <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">Manager</a> provides you with the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer</a> as well as with a list of all <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainers</a> which are visible from there. Note that the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">index</a> is globally shared between all languages while the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">Manager</a> which adds the semantics of containers, can be very different depending on the language. The following method lists all resources visible from a given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource</a>:</p>
+
+<pre><code class="language-java">@Inject
+IContainer.Manager manager;
+
+public void listVisibleResources(
+        Resource myResource, IResourceDescriptions index) {
+  IResourceDescription descr =
+        index.getResourceDescription(myResource.getURI());
+  for(IContainer visibleContainer:
+        manager.getVisibleContainers(descr, index)) {
+    for(IResourceDescription visibleResourceDesc:
+            visibleContainer.getResourceDescriptions()) {
+      System.out.println(visibleResourceDesc.getURI());
+    }
+  }
+}
+</code></pre>
+
+<p>Xtext ships two implementations of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">Manager</a> which are usually bound with Guice: The default binding is to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.java">SimpleResourceDescriptionsBasedContainerManager</a>, which assumes all <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a> to be in a single common container. If you don’t care about container support, you’ll be fine with this one. Alternatively, you can bind <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager.java">StateBasedContainerManager</a> and an additional <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java">IAllContainersState</a> which keeps track of the set of available containers and their visibility relationships.</p>
+
+<p>Xtext offers a couple of strategies for managing containers: If you’re running an Eclipse workbench, you can define containers based on Java projects and their class paths or based on plain Eclipse projects. Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only differ in the bound instance of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java">IAllContainersState</a> of the referring language. These will be described in detail in the following sections.</p>
+
+<p><img src="images/index_container.png" alt="IContainer Management" /></p>
+
+<h5 id="jdt-based-containers">JDT-Based Container Manager</h5>
+
+<p>As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. It assumes so called <a href="http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html">IPackageFragmentRoots</a> as containers. An <a href="http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html">IPackageFragmentRoot</a> in JDT is the root of a tree of Java model elements. It usually refers to</p>
+
+<ul>
+  <li>a source folder of a Java project,</li>
+  <li>a referenced jar,</li>
+  <li>a class path entry of a referenced Java project, or</li>
+  <li>the exported packages of a required PDE plug-in.</li>
+</ul>
+
+<p>So for an element to be referable, its resource must be on the class path of the caller’s Java project and it must be exported (as described above).</p>
+
+<p>As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed something up, make sure you bind</p>
+
+<pre><code class="language-java">public Class&lt;? extends IContainer.Manager&gt; bindIContainer$Manager() {
+  return StateBasedContainerManager.class;
+}
+</code></pre>
+
+<p>in the runtime module and</p>
+
+<pre><code class="language-java">public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
+  return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+}
+</code></pre>
+
+<p>in the UI module of the referencing language. The latter looks a bit more difficult than a common binding, as we have to bind a global singleton to a Guice provider. A <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.java">StrictJavaProjectsState</a> requires all elements to be on the class path, while the default <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/JavaProjectsState.java">JavaProjectsState</a> also allows models in non-source folders.</p>
+
+<h5 id="project-based-containers">Eclipse Project-Based Containers</h5>
+
+<p>If the class path based mechanism doesn’t work for your case, Xtext offers an alternative container manager based on plain Eclipse projects: Each project acts as a container and the project references (<em>Properties → Project References</em>) are the visible containers.</p>
+
+<p>In this case, your runtime module should define</p>
+
+<pre><code class="language-java">public Class&lt;? extends IContainer.Manager&gt; bindIContainer$Manager() {
+  return StateBasedContainerManager.class;
+}
+</code></pre>
+
+<p>and the UI module should bind</p>
+
+<pre><code class="language-java">public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
+  return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
+}
+</code></pre>
+
+<h5 id="resource-set-containers">ResourceSet-Based Containers</h5>
+
+<p>If you need a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">Manager</a> that is independent of Eclipse projects, you can use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java">ResourceSetBasedAllContainersState</a>. This one can be configured with a mapping of container handles to resource URIs.</p>
+
+<p>It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end of the MWE2 workflow component <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java">Reader</a>. This is responsible for reading in models in a workflow, e.g. for later code generation. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java">Reader</a> allows to either scan the whole class path or a set of paths for all models therein. When paths are given, each path entry becomes an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer</a> of its own.</p>
+
+<pre><code class="language-java">component = org.eclipse.xtext.mwe.Reader {
+  // lookup all resources on the class path
+  // useJavaClassPath = true
+
+  // or define search scope explicitly
+  path = "src/models"
+  path = "src/further-models"
+
+  ...
+}
+</code></pre>
+
+<h3 id="local-scoping">Local Scoping</h3>
+
+<p>We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not everything is available in all contexts and with a global name. Rather than that, each context can usually have a different scope. As already stated, scopes can be nested, i.e. a scope can contain elements of a parent scope in addition to its own elements. When parent and child scope contain different elements with the same name, the parent scope’s element will usually be <em>shadowed</em> by the element from the child scope.</p>
+
+<p>To illustrate that, let’s have a look at Java: Java defines multiple kinds of scopes (object scope, type scope, etc.). For Java one would create the scope hierarchy as commented in the following example:</p>
+
+<pre><code class="language-java">// file contents scope
+import static my.Constants.STATIC;
+
+public class ScopeExample { // class body scope
+  private Object field = STATIC;
+
+  private void method(String param) { // method body scope
+    String localVar = "bar";
+    innerBlock: { // block scope
+      String innerScopeVar = "foo";
+      Object field = innerScopeVar;
+      // the scope hierarchy at this point would look like this:
+      //  blockScope{field,innerScopeVar}-&gt;
+      //  methodScope{localVar, param}-&gt;
+      //  classScope{field}-&gt; ('field' is shadowed)
+      //  fileScope{STATIC}-&gt;
+      //  classpathScope{
+      //      'all qualified names of accessible static fields'} -&gt;
+      //  NULLSCOPE{}
+      //
+    }
+    field.add(localVar);
+  }
+}
+</code></pre>
+
+<p>In fact the class path scope should also reflect the order of class path entries. For instance:</p>
+
+<pre><code class="language-java">classpathScope{stuff from bin/}
+-&gt; classpathScope{stuff from foo.jar/}
+-&gt; ...
+-&gt; classpathScope{stuff from JRE System Library}
+-&gt; NULLSCOPE{}
+</code></pre>
+
+<p>Please find the motivation behind this and some additional details in <a href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html">this blog post</a> .</p>
+
+<h4 id="declarative-scoping">Declarative Scoping</h4>
+
+<p>If you have to define scopes for certain contexts, the base class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java">AbstractDeclarativeScopeProvider</a> allows to do that in a declarative way. It looks up methods which have either of the following two signatures:</p>
+
+<pre><code class="language-java">IScope scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(
+    &lt;ContextType&gt; ctx, EReference ref)
+
+IScope scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt; ctx, EReference ref)
+</code></pre>
+
+<p>The former is used when evaluating the scope for a specific cross-reference. Here <code>&lt;Reference&gt;</code> corresponds to the name of this reference and <code>&lt;RefDeclaringEClass&gt;</code> is the declaring type of the reference. The <em>ref</em> parameter represents this cross-reference.</p>
+
+<p>The latter method signature is used when computing the scope for a given element type and is applicable to all cross-references of that type. Here <code>&lt;TypeToReturn&gt;</code> is the name of that type.</p>
+
+<p>For example, if you have a state machine with a <em>Transition</em> object owned by its source <em>State</em> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross-reference is declared by the <em>Transition</em> type and is called <em>target</em>):</p>
+
+<pre><code class="language-java">IScope scope_Transition_target(Transition this, EReference ref)
+</code></pre>
+
+<p>If such a method does not exist, the implementation tries to find one for the context object’s container. Thus in the example this would match a method with the same name but <em>State</em> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. It may also make the method easier to implement, as the elements comprising the scope are quite often owned or referenced by a container of the context object. For instance, the <em>State</em> objects could be owned by a containing <em>StateMachine</em> object.</p>
+
+<p>If no method specific to the cross-reference in question has been found for any of the objects in the containment hierarchy, the implementation starts looking for methods matching the other signature. Again it first attempts to match the context object. Thus in the example the first matched signature would be:</p>
+
+<pre><code class="language-java">IScope scope_State(Transition this, EReference ref)
+</code></pre>
+
+<p>If no such method exists, the implementation again tries to find a method matching the context object’s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p>
+
+<pre><code class="language-java">IScope scope_State(StateMachine this, EReference ref)
+</code></pre>
+
+<p>This scope can now be used for any cross-references of type <em>State</em> for context objects owned by the state machine.</p>
+
+<h3 id="namespace-imports">Imported Namespace Aware Scoping</h3>
+
+<p>The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace support to your language, which is comparable and similar to namespaces in Scala and C#. Scala and C# both allow to have multiple nested packages within one file, and you can put imports per namespace, such that imported names are only visible within that namespace. See the domain model example: its scope provider extends <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">ImportedNamespaceAwareLocalScopeProvider</a>.</p>
+
+<h4 id="iqualifiednameproviderhttpsgithubcomeclipsextextblobv280pluginsorgeclipsextextsrcorgeclipsextextnamingiqualifiednameproviderjava"><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a></h4>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">ImportedNamespaceAwareLocalScopeProvider</a> makes use of the so called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> service. It computes <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">QualifiedNames</a> for <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a>. A qualified name consists of several segments. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java">default implementation</a> uses a simple name look-up composing the qualified name of the simple names of all containers and the object itself. It also allows to override the name computation declaratively. The following snippet shows how you could make <em>Transitions</em> in the state machine example referable by giving them a name. Don’t forget to bind your implementation in your runtime module.</p>
+
+<pre><code class="language-java">FowlerDslQualifiedNameProvider
+      extends DefaultDeclarativeQualifiedNameProvider {
+  public QualifiedName qualifiedName(Transition t) {
+    if(t.getEvent() == null || !(t.eContainer() instanceof State))
+      return null;
+    else
+      return QualifiedName.create((State)t.eContainer()).getName(),
+        t.getEvent().getName());
+  }
+}
+</code></pre>
+
+<h4 id="importing-namespaces">Importing Namespaces</h4>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">ImportedNamespaceAwareLocalScopeProvider</a> looks up <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> with name ‘<em>importedNamespace</em>’ and interprets them as import statements.</p>
+
+<pre><code class="language-xtext">Root:
+    imports+=Import*
+    childs+=Child*;
+
+Import:
+    'import' importedNamespace=QualifiedName ('.*')?;
+
+QualifiedName:
+  ID ('.' ID)*;
+</code></pre>
+
+<p>By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where <code>import java.util.Set;</code> makes it possible to refer to <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Set.html">java.util.Set</a> by its simple name <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Set.html">Set</a>. Contrary to Java, the import is not active for the whole file, but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:</p>
+
+<pre><code class="language-domainexample">package foo {
+  import bar.Foo
+  entity Bar extends Foo {
+  }
+}
+
+package bar {
+  entity Foo {}
+}
+</code></pre>
+
+<p>Of course the declared elements within a package are as well referable by their simple name:</p>
+
+<pre><code class="language-domainexample">package bar {
+  entity Bar extends Foo {}
+  entity Foo {}
+}
+</code></pre>
+
+<p>The following would also be ok:</p>
+
+<pre><code class="language-domainexample">package bar {
+  entity Bar extends bar.Foo {}
+  entity Foo {}
+}
+</code></pre>
+
+<p>See the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8/org/eclipse/xtext/scoping/impl/package-summary.html">JavaDocs</a> and <a href="https://blogs.itemis.de/leipzig/archives/773">this blog post</a> for details.</p>
+
+<h2 id="value-converter">Value Converter</h2>
+
+<p>Value converters are registered to convert the parsed text into a data type instance and vice versa. The primary hook is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">IValueConverterService</a> and the concrete implementation can be registered via the runtime <a href="#guicemodules">Guice module</a>. Simply override the corresponding binding in your runtime module like shown in this example:</p>
+
+<pre><code class="language-java">@Override
+public Class&lt;? extends IValueConverterService&gt;
+    bindIValueConverterService() {
+    return MySpecialValueConverterService.class;
+}
+</code></pre>
+
+<p>The most simple way to register additional value converters is to make use of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java">AbstractDeclarativeValueConverterService</a>, which allows to declaratively register an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java">IValueConverter</a> by means of an annotated method.</p>
+
+<pre><code class="language-java">@ValueConverter(rule = "MyRuleName")
+public IValueConverter&lt;MyDataType&gt; getMyRuleNameConverter() {
+  return new MyValueConverterImplementation();
+}
+</code></pre>
+
+<p>If you use the common terminals grammar <code>org.eclipse.xtext.common.Terminals</code> you should extend the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/services/DefaultTerminalConverters.java">DefaultTerminalConverters</a> and override or add value converters by adding the respective methods. In addition to the explicitly defined converters in the default implementation, a delegating converter is registered for each available <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>. The delegating converter reuses the functionality of the corresponding EMF <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EFactory.java">EFactory</a>.</p>
+
+<p>Many languages introduce a concept for qualified names, i.e. names composed of namespaces separated by a delimiter. Since this is such a common use case, Xtext provides an extensible converter implementation for qualified names. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/QualifiedNameValueConverter.java">QualifiedNameValueConverter</a> handles comments and white space gracefully and is capable to use the appropriate value converter for each segment of a qualified name. This allows for individually quoted segments. The domainmodel example shows how to use it.</p>
+
+<p>The protocol of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java">IValueConverter</a> allows to throw a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java">ValueConverterException</a> if something went wrong. The exception is propagated as a syntax error by the parser or as a validation problem by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxValidator.java">ConcreteSyntaxValidator</a> if the value cannot be converted to a valid string. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractLexerBasedConverter.java">AbstractLexerBasedConverter</a> is useful when implementing a custom value converter. If the converter needs to know about the rule that it currently works with, it may implement the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java">RuleSpecific</a>. The framework will set the rule such as the implementation may use it afterwards.</p>
+
+<h2 id="serialization">Serialization</h2>
+
+<p>Serialization is the process of transforming an EMF model into its textual representation. Thereby, serialization complements parsing and lexing.</p>
+
+<p>In Xtext, the process of serialization is split into the following steps:</p>
+
+<ol>
+  <li>Validating the semantic model. This is optional, enabled by default, done by the <a href="#concrete-syntax-validation">concrete syntax validator</a> and can be turned off in the <a href="#save-options">save options</a>.</li>
+  <li>Matching the model elements with the grammar rules and creating a stream of tokens. This is done by the <a href="#parse-tree-constructor">parse tree constructor</a>.</li>
+  <li>Associating comments with semantic objects. This is done by the <a href="#comment-associater">comment associator</a>.</li>
+  <li>Associating existing nodes from the node model with tokens from the token stream.</li>
+  <li><a href="#hidden-token-merger">Merging existing white space</a> and line-wraps into the token stream.</li>
+  <li>Adding further needed white space or replacing all white space using a <a href="#formatting">formatter</a>.</li>
+</ol>
+
+<p>Serialization is invoked when calling <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource.save(..)</a>. Furthermore, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java">Serializer</a> provides resource-independent support for serialization. Another situation that triggers serialization is applying <a href="#quick-fixes">quick fixes</a> with semantic modifications. Serialization is <em>not</em> called when a textual editors contents is saved to disk.</p>
+
+<h3 id="serialization-contract">The Contract</h3>
+
+<p>The contract of serialization says that a model which is saved (serialized) to its textual representation and then loaded (parsed) again yields a new model that is equal to the original model. Please be aware that this does <em>not</em> imply that loading a textual representation and serializing it back produces identical textual representations. However, the serialization algorithm tries to restore as much information as possible. That is, if the parsed model was not modified in-memory, the serialized output will usually be equal to the previous input. Unfortunately, this cannot be ensured for each and every case. A use case where is is hardly possible, is shown in the following example:</p>
+
+<pre><code class="language-xtext">MyRule:
+  (xval+=ID | yval+=INT)*;
+</code></pre>
+
+<p>The given <em>MyRule</em> reads <em>ID</em>- and <em>INT</em>-elements which may occur in an arbitrary order in the textual representation. However, when serializing the model all <em>ID</em>-elements will be written first and then all <em>INT</em>-elements. If the order is important it can be preserved by storing all elements in the same list - which may require wrapping the <em>ID</em>- and <em>INT</em>-elements into other objects.</p>
+
+<h3 id="roles-of-the-semantic-model-and-the-node-model-during-serialization">Roles of the Semantic Model and the Node Model During Serialization</h3>
+
+<p>A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer</p>
+
+<ul>
+  <li>preserves <a href="#hidden-token-merger">existing white spaces</a> from the node model.</li>
+  <li>preserves <a href="#comment-associater">existing comments</a> from the node model.</li>
+  <li>preserves the representation of cross-references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescriptions</a> for the same object), the serializer tries to keep the name that was used in the input file.</li>
+  <li>preserves the representation of values: For values handled by the <a href="#value-converter">value converter</a>, the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.</li>
+</ul>
+
+<h3 id="parse-tree-constructor">Parse Tree Constructor</h3>
+
+<p>The parse tree constructor usually does not need to be customized since it is automatically derived from the <a href="301_grammarlanguage.html">Xtext Grammar</a>. However, it can be helpful to look into it to understand its error messages and its runtime performance.</p>
+
+<p>For serialization to succeed, the parse tree constructor must be able to <em>consume</em> every non-transient element of the to-be-serialized EMF model. To <em>consume</em> means, in this context, to write the element to the textual representation of the model. This can turn out to be a not-so-easy-to-fulfill requirement, since a grammar usually introduces implicit constraints to the EMF model as explained for the <a href="#concrete-syntax-validation">concrete syntax validator</a>.</p>
+
+<p>If a model can not be serialized, an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/XtextSerializationException.java">XtextSerializationException</a> is thrown. Possible reasons are listed below:</p>
+
+<ul>
+  <li>A model element can not be consumed. This can have the following reasons/solutions:
+    <ul>
+      <li>The model element should not be stored in the model.</li>
+      <li>The grammar needs an assignment which would consume the model element.</li>
+      <li>The <a href="#transient-values">transient value service</a> can be used to indicate that this model element should not be consumed.</li>
+    </ul>
+  </li>
+  <li>An assignment in the grammar has no corresponding model element. The default transient value service considers a model element to be transient if it is <em>unset</em> or <em>equals</em> its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:
+    <ul>
+      <li>A model element should be added to the model.</li>
+      <li>The assignment in the grammar should be made optional.</li>
+    </ul>
+  </li>
+  <li>The type of the model element differs from the type in the grammar. The type of the model element must be identical to the return type of the grammar rule or the action’s type. Subtypes are not allowed.</li>
+  <li><a href="#value-converter">Value conversion</a> fails. The value converter can indicate that a value is not serializable by throwing a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java">ValueConverterException</a>.</li>
+  <li>An enum literal is not allowed at this position. This can happen if the referenced enum rule only lists a subset of the literals of the actual enumeration.</li>
+</ul>
+
+<p>To understand error messages and performance issues of the parse tree constructor it is important to know that it implements a backtracking algorithm. This basically means that the grammar is used to specify the structure of a tree in which one path (from the root node to a leaf node) is a valid serialization of a specific model. The parse tree constructor’s task is to find this path - with the condition that all model elements are consumed while walking this path. The parse tree constructor’s strategy is to take the most promising branch first (the one that would consume the most model elements). If the branch leads to a dead end (for example, if a model element needs to be consumed that is not present in the model), the parse tree constructor goes back the path until a different branch can be taken. This behavior has two consequences:</p>
+
+<ul>
+  <li>In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the longest paths, a fragment of their serialization and the reason why the path could not be continued at this point. The developer has to judge on his own which reason is the actual error.</li>
+  <li>For reasons of performance, it is critical that the parse tree constructor takes the most promising branch first and detects wrong branches early. One way to achieve this is to avoid having many rules which return the same type and which are called from within the same alternative in the grammar.</li>
+</ul>
+
+<h3 id="save-options">Options</h3>
+
+<p><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/SaveOptions.java">SaveOptions</a> can be passed to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource.save(options)</a> and to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java">Serializer.serialize(..)</a>. Available options are:</p>
+
+<ul>
+  <li><strong>Formatting.</strong> Default: <code>false</code>. If enabled, it is the <a href="#formatting">formatters</a> job to determine all white space information during serialization. If disabled, the formatter only defines white space information for the places in which no white space information can be preserved from the node model. E.g. When new model elements are inserted or there is no node model.</li>
+  <li><strong>Validating.</strong> Default: <code>true</code>: Run the <a href="#concrete-syntax-validation">concrete syntax validator</a> before serializing the model.</li>
+</ul>
+
+<h3 id="comment-associater">Preserving Comments from the Node Model</h3>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICommentAssociater.java">ICommentAssociater</a> associates comments with semantic objects. This is important in case an element in the semantic model is moved to a different position and the model is serialized, one expects the comments to be moved to the new position in the document as well.</p>
+
+<p>Which comment belongs to which semantic object is surely a very subjective issue. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.java">default implementation</a> behaves as follows, but can be customized:</p>
+
+<ul>
+  <li>If there is a semantic token before a comment and in the same line, the comment is associated with this token’s semantic object.</li>
+  <li>In all other cases, the comment is associated with the semantic object of the next following object.</li>
+</ul>
+
+<h3 id="transient-values">Transient Values</h3>
+
+<p>Transient values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java">ITransientValueService</a>, or serialization will fail. The default implementation marks all model elements transient, which are <code>eStructuralFeature.isTransient()</code> or not <code>eObject.eIsSet(eStructuralFeature)</code>. By default, EMF returns <code>false</code> for <code>eIsSet(..)</code> if the value equals the default value.</p>
+
+<h3 id="unassigned-text">Unassigned Text</h3>
+
+<p>If there are calls of data type rules or terminal rules that do not reside in an assignment, the serializer by default doesn’t know which value to use for serialization.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-xtext">PluralRule:
+  'contents:' count=INT Plural;
+
+terminal Plural:
+  'item' | 'items';
+</code></pre>
+
+<p>Valid models for this example are <code>contents 1 item</code> or `contents 5 items. However, it is not stored in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact that the rule call <em>Plural</em> is unassigned. However, the <a href="#parse-tree-constructor">parse tree constructor</a> needs to decide which value to write during serialization. This decision can be be made by customizing the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java">IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</a>.</p>
+
+<h3 id="cross-reference-serializer">Cross-Reference Serializer</h3>
+
+<p>The cross-reference serializer specifies which values are to be written to the textual representation for cross-references. This behavior can be customized by implementing <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java">ICrossReferenceSerializer</a>. The default implementation delegates to various other services such as the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> or the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java">LinkingHelper</a> each of which may be the better place for customization.</p>
+
+<h3 id="hidden-token-merger">Merge White Space</h3>
+
+<p>After the <a href="#parse-tree-constructor">parse tree constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, and the <a href="#comment-associater">comment associator</a> has done its work, existing white space form the node model is merged into the stream.</p>
+
+<p>The strategy is as follows: If two tokens follow each other in the stream and the corresponding nodes in the node model follow each other as well, then the white space information in between is kept. In all other cases it is up to the <a href="#formatting">formatter</a> to calculate new white space information.</p>
+
+<h3 id="token-stream">Token Stream</h3>
+
+<p>The <a href="#parse-tree-constructor">parse tree constructor</a> and the <a href="#formatting">formatter</a> use an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java">ITokenStream</a> for their output, and the latter for its input as well. This allows for chaining the two components. Token streams can be converted to a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java">TokenStringBuffer</a> and to a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/Writer.html">Writer</a> using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java">WriterTokenStream</a>.</p>
+
+<pre><code class="language-java">public interface ITokenStream {
+
+  void flush() throws IOException;
+  void writeHidden(EObject grammarElement, String value);
+  void writeSemantic(EObject grammarElement, String value);
+}
+</code></pre>
+
+<h2 id="formatting">Formatting (Pretty Printing)</h2>
+
+<p>Formatting is the process of rearranging the text in a document to improve the readability without changing the semantic value of the document. Therefore, a formatter is responsible for arranging line-wraps, indentation, whitespace, etc. in a text to emphasize its structure. A formatter is not supposed to alter a document in a way that impacts the semantic model.</p>
+
+<h3 id="formatting-new">New API in Xtext 2.8</h3>
+
+<p>The new formatting API is available since Xtext 2.8. It resolves the limitations of the first API which was present since the first version of Xtext. The new API allows to implement formatting not only based on the static structure of the grammar, but it is possible to make decisions based on the actual model structure. Things that are now possible include:</p>
+
+<ul>
+  <li>Add line breaks to long lists of items but keep short lists in one line</li>
+  <li>Arrange elements in a tabular layout</li>
+  <li>Apply formatting to values of data type rules or comments</li>
+  <li>Consider the existing whitespace information and implement an adaptive layout</li>
+  <li>Provide user configurable preferences for the formatting settings</li>
+</ul>
+
+<p>The actual formatting is done by constructing a list of text replacements. A text replacement describes a new text which should replace an existing part of the document. This is described by offset and length. Applying the text replacements turns the unformatted document into a formatted document.</p>
+
+<p>To invoke the formatter programmatically, you need to instantiate a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/FormatterRequest.java">request</a> and pass it to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormatter2.java">formatter</a>. The formatter will return a list of text replacements. The document modification itself can be performed by a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/TextReplacements.java">utility</a> that is part of the formatting API.</p>
+
+<p>Implementors of a formatter should extend <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/AbstractFormatter2.java">AbstractFormatter2</a> and add dispatch method for the model elements that should be formatted. The format routine has to be invoked recursively if the children of an object should be formatted, too.</p>
+
+<p>The following example illustrates that pattern. An instance of package declaration is passed to the format method along with the current <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java">formattable document</a>. In this scenario, the package name is surrounded by a single space, the curly brace is followed by a new line and increased indentation etc. All elements within that package should be formatted, too, thus <code>format(..)</code> is invoked on these as well.</p>
+
+<pre><code class="language-xtend">def dispatch void format(PackageDeclaration p, extension IFormattableDocument doc) {
+  p.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+  p.regionForKeyword("{").append[newLine; increaseIndentation]
+  for (AbstractElement element : p.elements) {
+    format(element, doc);
+    element.append[setNewLines(1, 1, 2)]
+  }
+  p.regionForKeyword("}").prepend[decreaseIndentation]
+}
+</code></pre>
+
+<p>The API is designed in a way that allows to describe the formatting in a declarative way by calling methods on the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.java">IHiddenRegionFormatter</a> which is made available inside invocations of <code>prepend</code>, <code>surround</code> or <code>append</code> to specify the formatting rules. This can be done in arbitrary order – the infrastructure will reorder all the configurations to execute them from top to bottom of the document. If the configuration-based approach is not sufficient for a particular use case, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java">document</a> also accepts imperative logic that is associated with a given range. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/ITextReplacer.java">ITextReplacer</a> that can be added directly to the document allows to perform all kinds of modifications to the text in the region that it is associated with.</p>
+
+<p>More detailed information about the API is available as <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8/org/eclipse/xtext/formatting2/package-summary.html">JavaDoc on the org.eclipse.xtext.formatting2 package</a>.</p>
+
+<h3 id="formatting-old">Before Xtext 2.8</h3>
+
+<p><strong>The API in <code>org.eclipse.xtext.formatting</code> is available since the early days of Xtext and still present in Xtext 2.8. However, it will be deprecated and eventually be removed because of the limitations that it imposes due to its declarative and static approach. New formatting implementations should be based on the new API in <code>org.eclipse.xtext.formatting2</code>.</strong></p>
+
+<p>A formatter can be implemented via the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">IFormatter</a> service. Technically speaking, a formatter is a <a href="#token-stream">Token Stream</a> which inserts/removes/modifies hidden tokens (white space, line-breaks, comments).</p>
+
+<p>The formatter is invoked during the <a href="#serialization">serialization phase</a> and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).</p>
+
+<p>Xtext ships with two formatters:</p>
+
+<ul>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java">OneWhitespaceFormatter</a> simply writes one white space between all tokens.</li>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java">AbstractDeclarativeFormatter</a> allows advanced configuration using a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java">FormattingConfig</a>. Both are explained below.</li>
+</ul>
+
+<p>A declarative formatter can be implemented by subclassing <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java">AbstractDeclarativeFormatter</a>, as shown in the following example:</p>
+
+<pre><code class="language-java">public class ExampleFormatter extends AbstractDeclarativeFormatter {
+
+  @Override
+  protected void configureFormatting(FormattingConfig c) {
+    ExampleLanguageGrammarAccess f = getGrammarAccess();
+
+    c.setAutoLinewrap(120);
+
+    // find common keywords an specify formatting for them
+    for (Pair&lt;Keyword, Keyword&gt; pair : f.findKeywordPairs("(", ")")) {
+      c.setNoSpace().after(pair.getFirst());
+      c.setNoSpace().before(pair.getSecond());
+    }
+    for (Keyword comma : f.findKeywords(",")) {
+      c.setNoSpace().before(comma);
+    }
+
+    // formatting for grammar rule Line
+    c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());
+    c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
+
+    // formatting for grammar rule TestIndentation
+    c.setIndentationIncrement().after(
+        f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+    c.setIndentationDecrement().before(
+        f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+    c.setLinewrap().after(
+        f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+    c.setLinewrap().after(
+        f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+
+    // formatting for grammar rule Param
+    c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());
+    c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());
+
+    // formatting for Comments
+    cfg.setLinewrap(0, 1, 2).before(g.getSL_COMMENTRule());
+    cfg.setLinewrap(0, 1, 2).before(g.getML_COMMENTRule());
+    cfg.setLinewrap(0, 1, 1).after(g.getML_COMMENTRule());
+  }
+}
+</code></pre>
+
+<p>The formatter has to implement the method <code>configureFormatting(...)</code> which declaratively sets up a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java">FormattingConfig</a>.</p>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java">FormattingConfig</a> consist of general settings and a set of formatting instructions:</p>
+
+<h4 id="general-formattingconfig-settings">General FormattingConfig Settings</h4>
+
+<p><code>setAutoLinewrap(int)</code> defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions <code>setNoLinewrap().???()</code>, <code>setNoSpace().???()</code> and <code>setSpace(space).???()</code> suppress this behavior locally. The default is 80.</p>
+
+<h4 id="formattingconfig-instructions">FormattingConfig Instructions</h4>
+
+<p>Per default, the declarative formatter inserts one white space between two tokens. Instructions can be used to specify a different behavior. They consist of two parts: <em>When</em> to apply the instruction and <em>what</em> to do.</p>
+
+<p>To understand <em>when</em> an instruction is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The instructions are matched against these grammar elements. The following matching criteria exist:</p>
+
+<ul>
+  <li><code>after(element)</code>: The instruction is applied after the grammar element has been matched. For example, if your grammar uses the keyword <code>";"</code> to end lines, this can instruct the formatter to insert a line break after the semicolon.</li>
+  <li><code>before(element)</code>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword <code>","</code>, you can instruct the formatter to suppress the white space before the comma.</li>
+  <li><code>around(element)</code>: This is the same as <code>before(element)</code> combined with <code>after(element)</code>.</li>
+  <li><code>between(left, right)</code>: This matches if <em>left</em> directly follows <em>right</em> in the document. There may be no other tokens in between <em>left</em> and <em>right</em>.</li>
+  <li><code>bounds(left, right)</code>: This is the same as <code>after(left)</code> combined with <code>before(right)</code>.</li>
+  <li><code>range(start, end)</code>: The rule is enabled when <em>start</em> is matched, and disabled when <em>end</em> is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> and <em>end</em>.</li>
+</ul>
+
+<p>The term <em>tokens</em> is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, data type rule or cross-reference. In the terminology of the lexer a data type rule can match a composition of multiple tokens.</p>
+
+<p>The parameter <em>element</em> can be a grammar’s <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/AbstractElement.java">AbstractElement</a> or a grammar’s <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/AbstractRule.java">AbstractRule</a>. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of <code>before(element)</code>, <code>after(element)</code>, etc. for rule calls and parser rules is identical to when the parser would “pass” this part of the grammar. The stack of called rules is taken into account. The following abstract elements can <em>not</em> have assigned formatting instructions:</p>
+
+<ul>
+  <li>Actions. E.g. <code>{MyAction}</code> or <code>{MyAction.myFeature=current}</code>.</li>
+  <li>Grammar elements nested in data type rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format these tokens, please implement a <a href="#value-converter">ValueConverter</a>.</li>
+  <li>Grammar elements nested in <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CrossReference.java">CrossReference</a>.</li>
+</ul>
+
+<p>After having explained how rules can be activated, this is what they can do:</p>
+
+<ul>
+  <li><code>setIndentationIncrement()</code> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java">IIndentationInformation</a>. The default implementation consults Eclipse’s <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html">IPreferenceStore</a>.</li>
+  <li><code>setIndentationDecrement()</code> decrements indentation by one unit.</li>
+  <li><code>setLinewrap()</code>: Inserts a line-wrap at this position.</li>
+  <li><code>setLinewrap(int count)</code>: Inserts <em>count</em> numbers of line-wrap at this position.</li>
+  <li><code>setLinewrap(int min, int def, int max)</code>: If the amount of line-wraps that have been at this position before formatting can be determined (i.e. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: <code>setLinewrap(0, 0, 1)</code> will preserve existing line-wraps, but won’t allow more than one line-wrap between two tokens.</li>
+  <li><code>setNoLinewrap()</code>: Suppresses automatic line wrap, which may occur when the line’s length exceeds the defined limit.</li>
+  <li><code>setSpace(String space)</code>: Inserts the string <em>space</em> at this position. If you use this to insert something else than white space, tabs or newlines, a small puppy will die somewhere in this world.</li>
+  <li><code>setNoSpace()</code>: Suppresses the white space between tokens at this position. Be aware that between some tokens a white space is required to maintain a valid concrete syntax.</li>
+</ul>
+
+<h4 id="grammar-element-finders">Grammar Element Finders</h4>
+
+<p>Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java">IGrammarAccess</a> provides convenience methods for this. The find methods are available for the grammar and for each parser rule.</p>
+
+<ul>
+  <li><code>findKeywords(String... keywords)</code> returns all keywords that equal one of the parameters.</li>
+  <li><code>findKeywordPairs(String leftKw, String rightKw)</code>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially. Example: for <code>Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'</code><code>findKeywordPairs("(", ")")</code> returns three pairs.</li>
+</ul>
+
+<h2 id="fragmentProvider">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h2>
+
+<p>Although inter-Xtext linking is not done by URIs, you may want to be able to reference your <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource and a second part that points to an object. Each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> contained in a resource can be identified by a so called <em>fragment</em>.</p>
+
+<p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
+
+<p>The generic resource shipped with EMF provides a generic path-like computation of fragments. These fragment paths are unique by default and do not have to be serialized. On the other hand, they can be easily broken by reordering the elements in a resource.</p>
+
+<p>With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs are usually binary and technical, so you don’t want to deal with them in human readable representations.</p>
+
+<p>However with a textual concrete syntax we want to be able to compute fragments out of the human readable information. We don’t want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic paths in order to refer to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a>.</p>
+
+<p>Therefore one can contribute an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">IFragmentProvider</a> per language. It has two methods: <code>getFragment(EObject, Fallback)</code> to calculate the fragment of an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> and <code>getEObject(Resource, String, Fallback)</code> to go the opposite direction. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">Fallback</a> interface allows to delegate to the default strategy - which usually uses the fragment paths described above.</p>
+
+<p>The following snippet shows how to use qualified names as fragments:</p>
+
+<pre><code class="language-java">public QualifiedNameFragmentProvider implements IFragmentProvider {
+
+  @Inject
+  private IQualifiedNameProvider qualifiedNameProvider;
+
+  public String getFragment(EObject obj, Fallback fallback) {
+    String qName = qualifiedNameProvider.getQualifiedName(obj);
+    return qName != null ? qName : fallback.getFragment(obj);
+  }
+
+  public EObject getEObject(Resource resource,
+                            String fragment,
+                            Fallback fallback) {
+    if (fragment != null) {
+      Iterator&lt;EObject&gt; i = EcoreUtil.getAllContents(resource, false);
+      while(i.hasNext()) {
+        EObject eObject = i.next();
+        String candidateFragment = (eObject.eIsProxy())
+            ? ((InternalEObject) eObject).eProxyURI().fragment()
+            : getFragment(eObject, fallback);
+        if (fragment.equals(candidateFragment))
+          return eObject;
+      }
+    }
+    return fallback.getEObject(fragment);
+  }
+}
+</code></pre>
+
+<p>For performance reasons it is usually a good idea to navigate the resource based on the fragment information instead of traversing it completely. If you know that your fragment is computed from qualified names and your model contains something like <em>NamedElements</em>, you should split your fragment into those parts and query the root elements, the children of the best match and so on.</p>
+
+<p>Furthermore it’s a good idea to have some kind of conflict resolution strategy to be able to distinguish between equally named elements that actually are different, e.g. properties may have the very same qualified name as entities.</p>
+
+<h2 id="encoding">Encoding in Xtext</h2>
+
+<p>Encoding, aka <em>character set</em>, describes the way characters are encoded into bytes and vice versa. Famous standard encodings are <em>UTF-8</em> or <em>ISO-8859-1</em>. The list of available encodings can be determined by calling <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html">Charset.availableCharsets()</a>. There is also a list of encodings and their canonical Java names in the <a href="http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html">API docs</a>.</p>
+
+<p>Unfortunately, each platform and/or spoken language tends to define its own native encoding, e.g. <em>Cp1258</em> on Windows in Vietnamese or <em>MacIceland</em> on Mac OS X in Icelandic.</p>
+
+<p>In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored in the hidden file <em>.settings/org.eclipse.core.resources.prefs</em> in each project. If a resource does not have an explicit encoding, it inherits the one from its parent recursively. Eclipse chooses the native platform encoding as the default for the workspace root. You can change the default workspace encoding in the Eclipse preferences <em>Preferences → Workspace → Default text encoding</em>. If you develop on different platforms, you should consider choosing an explicit common encoding for your text or code files, especially if you use special characters.</p>
+
+<p>While Eclipse allows to define and inspect the encoding of a file, your file system usually doesn’t. Given an arbitrary text file there is no general strategy to tell how it was encoded. If you deploy an Eclipse project as a jar (even a plug-in), any encoding information not stored in the file itself is lost, too. Some languages define the encoding of a file explicitly, as in the first processing instruction of an XML file. Most languages don’t. Others imply a fixed encoding or offer enhanced syntax for character literals, e.g. the unicode escape sequences <em>\uXXXX</em> in Java.</p>
+
+<p>As Xtext is about textual modeling, it allows to tweak the encoding in various places.</p>
+
+<h3 id="encoding-at-language-design-time">Encoding at Language Design Time</h3>
+
+<p>The plug-ins created by the <em>New Xtext Project</em> wizard are by default encoded in the workspace’s standard encoding. The same holds for all files that Xtext generates in there. If you want to change that, e.g. because your grammar uses/allows special characters, you should manually set the encoding in the properties of these projects after their creation. Do this before adding special characters to your grammar or at least make sure the grammar reads correctly after the encoding change. To tell the Xtext generator to generate files in the same encoding, set the encoding property in the workflow next to your grammar, e.g.</p>
+
+<pre><code class="language-mwe2">Generator {
+  encoding ="UTF-8"
+  ...
+</code></pre>
+
+<h3 id="encoding-at-language-runtime">Encoding at Language Runtime</h3>
+
+<p>As each language could handle the encoding problem differently, Xtext offers a service here. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java">IEncodingProvider</a> has a single method <code>getEncoding(URI)</code> to define the encoding of the resource with the given URI. Users can implement their own strategy but keep in mind that this is not intended to be a long running method. If the encoding is stored within the model file itself, it should be extractable in an easy way, like from the first line in an XML file. The default implementation returns the default Java character set in the runtime scenario.</p>
+
+<p>In the UI scenario, when there is a workspace, users will expect the encoding of the model files to be settable the same way as for other files in the workspace. The default implementation of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java">IEncodingProvider</a> in the UI scenario therefore returns the file’s workspace encoding for files in the workspace and delegates to the runtime implementation for all other resources, e.g. models in a jar or from a deployed plug-in. Keep in mind that you are going to loose the workspace encoding information as soon as you leave this workspace, e.g. deploy your project.</p>
+
+<p>Unless you want to enforce a uniform encoding for all models of your language, we advise to override the runtime service only. It is bound in the runtime module using the binding annotation <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java">@Runtime</a>:</p>
+
+<pre><code class="language-java">@Override
+public void configureRuntimeEncodingProvider(Binder binder) {
+    binder.bind(IEncodingProvider.class)
+          .annotatedWith(DispatchingProvider.Runtime.class)
+          .to(MyEncodingProvider.class);
+}
+</code></pre>
+
+<p>For the uniform encoding, bind the plain <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java">IEncodingProvider</a> to the same implementation in both modules:</p>
+
+<pre><code class="language-java">@Override
+public Class&lt;? extends IEncodingProvider&gt; bindIEncodingProvider() {
+    return MyEncodingProvider.class;
+}
+</code></pre>
+
+<h3 id="encoding-of-an-xtextresource">Encoding of an XtextResource</h3>
+
+<p>An <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> uses the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java">IEncodingProvider</a> of your language by default. You can override that by passing an option on load and save, e.g.</p>
+
+<pre><code class="language-java">Map&lt;?,?&gt; options = new HashMap();
+options.put(XtextResource.OPTION_ENCODING, "UTF-8");
+myXtextResource.load(options);
+
+options.put(XtextResource.OPTION_ENCODING, "ISO-8859-1");
+myXtextResource.save(options);
+</code></pre>
+
+<h3 id="encoding-in-new-model-projects">Encoding in New Model Projects</h3>
+
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java">SimpleProjectWizardFragment</a> generates a wizard that clients of your language can use to create model projects. This wizard expects its templates to be in the encoding of the Generator that created it (see above). As for every new project wizard, its output will be encoded in the default encoding of the target workspace. If your language enforces a special encoding that ignores the workspace settings, you’ll have to make sure that your wizard uses the right encoding by yourself.</p>
+
+<h3 id="encoding-of-xtext-source-code">Encoding of Xtext Source Code</h3>
+
+<p>The source code of the Xtext framework itself is completely encoded in <em>ISO 8859-1</em>, which is necessary to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard coded into the Xtext generator code. You are likely never going to change that.</p>
+
+<h2 id="testing">Unit Testing the Language</h2>
+
+<p>Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI tests for Junit4.</p>
+
+<p>The following is about testing the parser and the linker for the <em>Domainmodel</em> language from the tutorial. It leverages Xtend to write the test case.</p>
+
+<h3 id="creating-a-simple-test-class">Creating a simple test class</h3>
+
+<p>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select <em>New → Xtend Class</em> from the context menu. Provide a meaningful name and enter the package before you hit finish.</p>
+
+<p>The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:</p>
+
+<pre><code class="language-xtend">  import org.eclipse.xtext.junit4.XtextRunner
+  import org.example.domainmodel.DomainmodelInjectorProvider
+
+  @InjectWith(DomainmodelInjectorProvider)
+  @RunWith(XtextRunner)
+  class ParserTest {
+  }
+</code></pre>
+
+<p>This configuration will make sure that you can use dependency injection in your test class, and that the global EMF registries are properly populated and cleaned up before respectively after each test.</p>
+
+<h3 id="writing-a-parser-test">Writing a parser test</h3>
+
+<p>The class <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases.</p>
+
+<pre><code class="language-xtend">  import org.eclipse.xtext.junit4.util.ParseHelper
+  import static org.junit.Assert.*
+
+  ...
+
+  @Inject
+  ParseHelper&lt;Domainmodel&gt; parser
+
+  @Test
+  def void parseDomainmodel() {
+    val model = parser.parse('''
+      entity MyEntity {
+        parent: MyEntity
+      }
+    ''')
+    val entity = model.elements.head as Entity
+    assertSame(entity, entity.features.head.type)
+  }
+</code></pre>
+
+<h3 id="how-to-write-tests-that-includes-multiple-different-languages">How to write tests that includes multiple different languages</h3>
+
+<p>If in addition to the main language your tests require using other languages for references from/to your main language, you’ll have to parse and load dependant resources into the same ResourceSet first for cross reference resolution to work.</p>
+
+<p>As your main language’s default generated <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a> (e.g. DomainmodelInjectorProvider) does not know about any other such dependant languages, they must be initialized explicitly. The recommended pattern for this is to create a new subclass of the generated <em>MyLanguageInjectorProvider</em> in your <em>*.test</em> project and make sure the dependenant language is intizialized properly. You can and then use this new injector provider instead of the original one in your test’s <em>@InjectWith</em>:</p>
+
+<pre><code class="language-xtend">  class MyLanguageWithDependenciesInjectorProvider extends MyLanguageInjectorProvider {
+    override internalCreateInjector() {
+      MyOtherLangLanguageStandaloneSetup.doSetup
+      return super.internalCreateInjector
+    }
+  }
+
+  @RunWith(XtextRunner)
+  @InjectWith(MyLanguageWithDependenciesInjectorProvider)
+  class YourTest {
+    ...
+  }
+</code></pre>
+
+<p>You should not put injector creation for referenced languages in your standalone setup. Note that for the headless code generation use case, the Maven plug-in is configured with multiple setups, so usually there is no problem there.</p>
+
+<p>You may also need to initialize ‘import’-ed ecore models that are not generated by your Xtext language. This should be done by using an explicit <em>MyModelPackage.eINSTANCE.getName();</em> in the <em>doSetup()</em> method of your respective language’s StandaloneSetup class. Note that it is strongly recommended to follow this pattern instead of just using <em>@Before</em> methods in your *Test class, as due to internal technical reasons that won’t work anymore as soon as you have more than just one <em>@Test</em>.</p>
+
+<pre><code class="language-xtend">  class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerated {
+
+    def static void doSetup() {
+      MyPackageImpl.init
+      new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
+    }
+
+  }
+</code></pre>
+
+<p>This only applies to referencing dependencies to ‘import’-ed Ecore models and languages based on them which may be used in the test. The inherited dependencies from mixed-in grammars are automatically listed in the generated super class already, and nothing needs to be done for those.</p>
+
+<hr />
+
+<p><strong><a href="304_ide_concepts.html">Next Chapter: IDE Concepts</a></strong></p>
+
+
+</body>
+</html>

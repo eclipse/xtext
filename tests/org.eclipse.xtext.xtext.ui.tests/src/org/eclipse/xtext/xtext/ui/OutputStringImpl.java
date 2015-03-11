@@ -23,32 +23,39 @@ public class OutputStringImpl implements Output {
 		currentBuffer = new StringBuffer();
 	}
 
+	@Override
 	public void addOutlet(Outlet outlet) {
 		// ignore
 	}
 
+	@Override
 	public Outlet getOutlet(String name) {
 		// ignore
 		return null;
 	}
 
+	@Override
 	public void closeFile() {
 		// ignore
 	}
 
+	@Override
 	public void openFile(String path, String outletName) {
 		// ignore
 	}
 
+	@Override
 	public SyntaxElement popStatement() {
 		// ignore
 		return null;
 	}
 
+	@Override
 	public void pushStatement(SyntaxElement stmt, XpandExecutionContext ctx) {
 		// ignore
 	}
 
+	@Override
 	public void write(String bytes) {
 		currentBuffer.append(bytes);
 	}

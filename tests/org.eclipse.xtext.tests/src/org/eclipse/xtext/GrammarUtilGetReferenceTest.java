@@ -8,7 +8,8 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,12 +17,12 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
-	public void testGetReference_01() throws Exception {
+	@Test public void testGetReference_01() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: model=[Model];";
@@ -33,7 +34,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("Model", reference.getEContainingClass().getName());
 	}
 	
-	public void testGetReference_02() throws Exception {
+	@Test public void testGetReference_02() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel} model=[Model];";
@@ -47,7 +48,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("SubModel", reference.getEContainingClass().getName());
 	}
 	
-	public void testGetReference_03() throws Exception {
+	@Test public void testGetReference_03() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel1} model=[Model] | {SubModel2} model=[Model];";
@@ -62,7 +63,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("Model", reference.getEContainingClass().getName());
 	}
 	
-	public void testGetReference_04() throws Exception {
+	@Test public void testGetReference_04() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel1} model=[Model] | {SubModel2} model=[Model];";
@@ -77,7 +78,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("Model", reference.getEContainingClass().getName());
 	}
 	
-	public void testGetReference_05() throws Exception {
+	@Test public void testGetReference_05() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel1} model1=[Model] | {SubModel2} model2=[Model];";
@@ -92,7 +93,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("SubModel1", reference.getEContainingClass().getName());
 	}
 
-	public void testGetReference_06() throws Exception {
+	@Test public void testGetReference_06() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel1} model1=[Model] | {SubModel2} model2=[Model];";
@@ -107,7 +108,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("SubModel2", reference.getEContainingClass().getName());
 	}
 	
-	public void testGetReference_07() throws Exception {
+	@Test public void testGetReference_07() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: model1=[Model] & model2=[Model|STRING];";
@@ -121,7 +122,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("Model", reference.getEContainingClass().getName());
 	}
 
-	public void testGetReference_08() throws Exception {
+	@Test public void testGetReference_08() throws Exception {
 		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
 			"Model: {SubModel} (model1=[Model] & model2=[Model|STRING]);";

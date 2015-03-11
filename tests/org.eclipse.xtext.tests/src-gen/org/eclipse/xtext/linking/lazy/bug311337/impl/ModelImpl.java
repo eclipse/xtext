@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.linking.lazy.bug311337.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ModelImpl#getDef <em>Def</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

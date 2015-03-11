@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.fowlerdsl.statemachine.impl;
 
@@ -33,12 +30,12 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.Transition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StateImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StateImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StateImpl#getTransitions <em>Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

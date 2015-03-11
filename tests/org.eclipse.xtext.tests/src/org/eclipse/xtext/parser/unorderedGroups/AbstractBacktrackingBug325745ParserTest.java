@@ -7,50 +7,58 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractBacktrackingBug325745ParserTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return false;
+	}
 
-	public void testValid_01() throws Exception {
+	@Test public void testValid_01() throws Exception {
 		getModel("foo '+' 1 c.");
 	}
 	
-	public void testValid_02() throws Exception {
+	@Test public void testValid_02() throws Exception {
 		getModel("foo 1 1c.");
 	}
 	
-	public void testValid_03() throws Exception {
+	@Test public void testValid_03() throws Exception {
 		getModel("foo [ 1c.");
 	}
 	
-	public void testValid_04() throws Exception {
+	@Test public void testValid_04() throws Exception {
 		getModel("foo '-' 1c ].");
 	}
 	
-	public void testValid_05() throws Exception {
+	@Test public void testValid_05() throws Exception {
 		getModel("foo '-' [ 1c ].");
 	}
 	
-	public void testValid_06() throws Exception {
+	@Test public void testValid_06() throws Exception {
 		getModel("foo [ '-' 1c ].");
 	}
 	
-	public void testValid_07() throws Exception {
+	@Test public void testValid_07() throws Exception {
 		getModel("foo 1!c 'a' ].");
 	}
 	
-	public void testValid_08() throws Exception {
+	@Test public void testValid_08() throws Exception {
 		getModel("foo 1*c 'a'.");
 	}
 	
-	public void testValid_09() throws Exception {
+	@Test public void testValid_09() throws Exception {
 		getModel("foo 1*!c ] 'a'.");
 	}
 	
-	public void testValid_10() throws Exception {
+	@Test public void testValid_10() throws Exception {
 		getModel("foo 1!.bar 2*c ] 'a'.");
 	}
 }

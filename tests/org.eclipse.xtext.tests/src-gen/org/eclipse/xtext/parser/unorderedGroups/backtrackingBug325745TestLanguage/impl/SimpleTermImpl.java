@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl;
 
@@ -21,13 +18,13 @@ import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguag
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.SimpleTermImpl#getLineCount <em>Line Count</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.SimpleTermImpl#getCharCount <em>Char Count</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.SimpleTermImpl#getCharSet <em>Char Set</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.SimpleTermImpl#getRefChar <em>Ref Char</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

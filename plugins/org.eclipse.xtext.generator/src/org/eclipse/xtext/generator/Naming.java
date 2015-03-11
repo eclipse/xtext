@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * Utility class providing names and the like for general artifacts used in all Xtext projects There's a
+ * Utility class providing names and the like for general artifacts used in all Xtext projects. There's a
  * corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -24,6 +24,88 @@ public class Naming {
 	private String uiBasePackage;
 	private String pathTestProject;
 	private String activatorName;
+	private String grammarId;
+	private String projectNameRt;
+	private String projectNameUi;
+	private String projectNameIde;
+	private String ideBasePackage;
+	private String lineDelimiter = Strings.newLine();
+	private String fileHeader;
+	private boolean hasUI;
+	private boolean hasIde;
+	private String classAnnotations;
+	private String annotationImports;
+	
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setGrammarId(String grammarId) {
+		this.grammarId = grammarId;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setProjectNameRt(String projectNameRt) {
+		this.projectNameRt = projectNameRt;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String getProjectNameRt() {
+		return projectNameRt;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setProjectNameUi(String projectNameUi) {
+		this.projectNameUi = projectNameUi;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String getProjectNameUi() {
+		return projectNameUi;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String getProjectNameIde() {
+		return projectNameIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setProjectNameIde(String projectNameIde) {
+		this.projectNameIde = projectNameIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setIdeBasePackage(String ideBasePackage) {
+		this.ideBasePackage = ideBasePackage;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
 
 	public void setUiBasePackage(String uiBasePackage) {
 		this.uiBasePackage = uiBasePackage;
@@ -98,7 +180,22 @@ public class Naming {
 	}
 
 	public String basePackageUi(Grammar g) {
+		// for backward compatibility reasons, the uiBasePackage is only used, if also the grammarId has been explicitly set.
+		if (!Strings.isEmpty(uiBasePackage) && (grammarId!=null && grammarId.equals(g.getName())))
+			return this.uiBasePackage;
 		return getNamespace(g) + ".ui";
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String basePackageIde(Grammar g) {
+		if (!hasIde() && hasUI()) {
+			return basePackageUi(g);
+		}
+		if (!Strings.isEmpty(ideBasePackage))
+			return this.ideBasePackage;
+		return getNamespace(g) + ".ide";
 	}
 	
 	/**
@@ -114,5 +211,75 @@ public class Naming {
 	public String toPackageName(String name) {
 		return Strings.skipLastToken(name, ".");
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String fileHeader() {
+		return fileHeader;
+	}
 
+	/**
+	 * @since 2.8
+	 */
+	public void setFileHeader(String fileHeader) {
+		this.fileHeader = fileHeader;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public boolean hasUI() {
+		return hasUI;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setHasUI(boolean hasUI) {
+		this.hasUI = hasUI;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public boolean hasIde() {
+		return hasIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setHasIde(boolean hasIde) {
+		this.hasIde = hasIde;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String classAnnotations() {
+		return classAnnotations;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setClassAnnotations(String classAnnotations) {
+		this.classAnnotations = classAnnotations;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String annotationImports() {
+		return annotationImports;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setAnnotationImports(String annotationImports) {
+		this.annotationImports = annotationImports;
+	}
+	
 }

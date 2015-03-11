@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions;
 
@@ -16,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.Sequence#getExpressions <em>Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage#getSequence()
  * @model
@@ -29,7 +26,7 @@ public interface Sequence extends EObject
 {
   /**
    * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.testlanguages.simpleExpressions.Expression}.
+   * The list contents are of type {@link org.eclipse.xtext.testlanguages.simpleExpressions.Sequence}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
@@ -41,6 +38,6 @@ public interface Sequence extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Expression> getExpressions();
+  EList<Sequence> getExpressions();
 
 } // Sequence

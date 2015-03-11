@@ -55,36 +55,40 @@ public abstract class AbstractTerminalsEditStrategy extends AbstractEditStrategy
 	}
 
 	/**
-	 * finds the first start terminal which is not closed before the cursor position.
+	 * finds the first stop terminal which has not been started after the cursor position.
 	 */
 	protected IRegion findStopTerminal(IDocument document, int offset) throws BadLocationException {
+		String documentText = document.get();
 		int stopOffset = offset;
 		int startOffset = offset;
 		while (true) {
-			IRegion stop = util.searchInSamePartition(getRightTerminal(), document, stopOffset);
-			if (stop==null)
+			IRegion stop = util.searchInSamePartition(getRightTerminal(), documentText, document, stopOffset);
+			if (stop == null) {
 				return null;
-			IRegion start = util.searchInSamePartition(getLeftTerminal(), document, startOffset);
-			if (start==null || start.getOffset()>stop.getOffset()) {
+			}
+			IRegion start = util.searchInSamePartition(getLeftTerminal(), documentText, document, startOffset);
+			if (start == null || start.getOffset() > stop.getOffset()) {
 				return stop;
 			}
-			stopOffset = util.findNextOffSetInPartition(document, stopOffset, stop.getOffset()+stop.getLength());
-			startOffset = util.findNextOffSetInPartition(document, startOffset, start.getOffset()+start.getLength());
+			stopOffset = util.findNextOffSetInPartition(document, stopOffset, stop.getOffset() + stop.getLength());
+			startOffset = util.findNextOffSetInPartition(document, startOffset, start.getOffset() + start.getLength());
 		}
 	}
 
 	/**
-	 * finds the first stop terminal which has not been started after the cursor position.
+	 * finds the first start terminal which is not closed before the cursor position.
 	 */
 	protected IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException {
+		String documentText = document.get();
 		int stopOffset = offset;
 		int startOffset = offset;
-		while(true) {
-			IRegion start = util.searchBackwardsInSamePartition(getLeftTerminal(), document, startOffset);
-			if (start==null)
+		while (true) {
+			IRegion start = util.searchBackwardsInSamePartition(getLeftTerminal(), documentText, document, startOffset);
+			if (start == null) {
 				return null;
-			IRegion stop = util.searchBackwardsInSamePartition(getRightTerminal(), document, stopOffset);
-			if (stop == null || stop.getOffset()<start.getOffset())
+			}
+			IRegion stop = util.searchBackwardsInSamePartition(getRightTerminal(), documentText, document, stopOffset);
+			if (stop == null || stop.getOffset() < start.getOffset())
 				return start;
 			stopOffset = stop.getOffset();
 			startOffset = start.getOffset();

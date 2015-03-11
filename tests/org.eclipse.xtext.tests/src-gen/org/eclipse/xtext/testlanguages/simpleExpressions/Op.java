@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.Op#getValues <em>Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.Op#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage#getOp()
  * @model

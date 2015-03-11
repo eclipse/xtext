@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.second.impl;
 
@@ -33,7 +30,7 @@ public class SecondFactoryImpl extends EFactoryImpl implements SecondFactory
   {
     try
     {
-      SecondFactory theSecondFactory = (SecondFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage"); 
+      SecondFactory theSecondFactory = (SecondFactory)EPackage.Registry.INSTANCE.getEFactory(SecondPackage.eNS_URI);
       if (theSecondFactory != null)
       {
         return theSecondFactory;

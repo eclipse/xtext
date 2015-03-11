@@ -1,0 +1,3 @@
+org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.TerminalRulesTestLanguageFileImpl:a.terminalrulestestlanguage(0,11)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,11)
+    PsiElement(Model_RichStringValueRICH_STRINGTerminalRuleCall_3_0_ELEMENT_TYPE)(''''ab cd'''')(0,11)

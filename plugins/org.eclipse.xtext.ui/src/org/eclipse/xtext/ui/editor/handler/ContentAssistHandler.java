@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  */
 public class ContentAssistHandler extends AbstractHandler {
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// Due to an Handler ExtensionPoint declaration, we have an XtextEditor as Active
 		// Editor so can just cast to an ITextEditor

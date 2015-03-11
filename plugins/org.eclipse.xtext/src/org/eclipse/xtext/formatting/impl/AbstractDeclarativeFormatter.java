@@ -13,10 +13,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementPattern;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
@@ -43,13 +48,11 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 	@Inject
 	private IHiddenTokenHelper hiddenTokenHelper;
 
-	@Inject(optional = true)
-	private IIndentationInformation indentInfo = new IIndentationInformation() {
-		public String getIndentString() {
-			return "\t";
-		}
-	};
+	@Inject
+	private IWhitespaceInformationProvider whitespaceInformationProvider;
 
+	private URI contextResourceURI;
+	
 	@Inject
 	private IElementMatcherProvider matcherProvider;
 
@@ -60,10 +63,22 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 		return new FormattingConfigBasedStream(out, indent, getConfig(), createMatcher(), hiddenTokenHelper,
 				preserveWhitespaces);
 	}
-
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public ITokenStream createFormatterStream(EObject context, String indent, ITokenStream out, boolean preserveWhitespaces) {
+		if(context != null && context.eResource() != null && context.eResource().getURI() != null) {
+			contextResourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(context).trimFragment();
+		}
+		return new FormattingConfigBasedStream(out, indent, getConfig(), createMatcher(), hiddenTokenHelper,
+				preserveWhitespaces);
+	}
+	
 	@SuppressWarnings("deprecation")
 	protected FormattingConfig createFormattingConfig() {
-		FormattingConfig cfg = new FormattingConfig(grammarAccess, hiddenTokenHelper, indentInfo);
+		FormattingConfig cfg = new FormattingConfig2(grammarAccess, hiddenTokenHelper, getIndentInfo(), getLineSeparatorInfo());
 		cfg.setWhitespaceRule(getWSRule());
 		return cfg;
 	}
@@ -89,9 +104,16 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 	}
 
 	protected IIndentationInformation getIndentInfo() {
-		return indentInfo;
+		return whitespaceInformationProvider.getIndentationInformation(contextResourceURI);
 	}
-
+	
+	/**
+	 * @since 2.3
+	 */
+	protected ILineSeparatorInformation getLineSeparatorInfo() {
+		return whitespaceInformationProvider.getLineSeparatorInformation(contextResourceURI);
+	}
+	
 	protected IElementMatcherProvider getMatcherProvider() {
 		return matcherProvider;
 	}

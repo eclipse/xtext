@@ -5,10 +5,12 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesProposalConflictHelper;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
@@ -20,9 +22,14 @@ import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
 import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.shared.Access;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -35,46 +42,67 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 	public CodetemplatesUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
+
 	@Override
 	public void configureHighlightingTokenDefProvider(Binder binder) {
-		binder.bind(ITokenDefProvider.class).annotatedWith(Names.named(LexerUIBindings.HIGHLIGHTING)).to(TemplatesTokenDefProvider.class);
+		binder.bind(ITokenDefProvider.class).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+				.to(TemplatesTokenDefProvider.class);
 	}
-	
+
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return TokenToAttributeMapper.class;
 	}
-	
+
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return TemplatesHighlightingConfiguration.class;
 	}
-	
+
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return SyntheticResourceAwareScopeProvider.class;
 	}
-	
-	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlighter.class;
 	}
-	
-	@SingletonBinding(eager=true)	
+
+	@SingletonBinding(eager = true)
 	public Class<? extends CodetemplatesJavaValidator> bindTemplatesJavaValidator() {
 		return TemplateValidator.class;
 	}
-	
+
 	@Override
 	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
 		return RepeatedContentAssistProcessor.class;
 	}
 	
+	public Class<? extends ITraceForStorageProvider> bindITraceInformation() {
+		return ITraceForStorageProvider.Null.class;
+	}
+
 	@Override
 	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
 		return CodetemplatesProposalConflictHelper.class;
 	}
-	
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return ResourceForIEditorInputFactory.class;
+	}
+
+	@Override
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		return SimpleResourceSetProvider.class;
+	}
+
+	@Override
+	public Provider<IAllContainersState> provideIAllContainersState() {
+		return Access.getWorkspaceProjectsState();
+	}
+
 	@Override
 	public Provider<TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return new Provider<TemplatesLanguageConfiguration>() {
+			@Override
 			public TemplatesLanguageConfiguration get() {
 				return AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider().get();
 			}

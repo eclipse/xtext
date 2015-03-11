@@ -2,27 +2,21 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.fowlerdsl
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Version: 2.8.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.xtext.ui.codetemplates;resolution:=optional,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.common,
+ org.eclipse.emf.ecore;bundle-version="2.10.2",
+ org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime,
- org.eclipse.xtext.common.types
-Import-Package: org.apache.log4j,
- org.apache.commons.logging,
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xtend2.lib
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+ org.eclipse.equinox.common
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.example.fowlerdsl.services,
  org.eclipse.xtext.example.fowlerdsl.statemachine,
@@ -31,4 +25,8 @@ Export-Package: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.example.fowlerdsl.serializer,
  org.eclipse.xtext.example.fowlerdsl.parser.antlr,
  org.eclipse.xtext.example.fowlerdsl.parser.antlr.internal,
- org.eclipse.xtext.example.fowlerdsl.validation
+ org.eclipse.xtext.example.fowlerdsl.validation,
+ org.eclipse.xtext.example.fowlerdsl.scoping,
+ org.eclipse.xtext.example.fowlerdsl.generator,
+ org.eclipse.xtext.example.fowlerdsl.formatting
+

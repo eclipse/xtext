@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug296889ExTest;
 
@@ -16,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889ExTest.Model#getExpressions <em>Expressions</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889ExTest.Model#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.antlr.bug296889ExTest.Bug296889ExTestPackage#getModel()
  * @model

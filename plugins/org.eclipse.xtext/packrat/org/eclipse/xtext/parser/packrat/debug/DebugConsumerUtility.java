@@ -31,6 +31,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public void consumeAction(Action action, boolean isMany) {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeAction(type = " + action.getType().getClassifier().getName() + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")");
@@ -38,6 +39,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		delegate.consumeAction(action, isMany);
 	}
 
+	@Override
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,
 			ICharacterClass notFollowedBy, boolean optional) {
 		if (log.isDebugEnabled()) {
@@ -55,6 +57,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		return result;
 	}
 
+	@Override
 	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
 			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement, boolean optional) throws Exception {
 		if (log.isDebugEnabled()) {
@@ -73,6 +76,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		return result;
 	}
 
+	@Override
 	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,
 			AbstractElement grammarElement, ISequenceMatcher notMatching, boolean optional) {
 		if (log.isDebugEnabled()) {
@@ -91,6 +95,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		return result;
 	}
 
+	@Override
 	public int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy) {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeEnum(enum = '" + literal.getEnumLiteral().getName() + "', " +

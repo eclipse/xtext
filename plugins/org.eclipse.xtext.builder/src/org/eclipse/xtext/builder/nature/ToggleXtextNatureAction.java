@@ -30,6 +30,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 
 	private ISelection selection;
 
+	@Override
 	public void run(IAction action) {
 		if (selection instanceof IStructuredSelection) {
 			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
@@ -47,10 +48,12 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 		}
 	}
 
+	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
 	}
 
+	@Override
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
 
@@ -78,7 +81,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (CoreException e) {
-			log.error(e);
+			log.error("Error toggling Xtext nature", e);
 		}
 	}
 

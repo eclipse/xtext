@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl;
 
@@ -30,13 +27,13 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.FamilieImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.FamilieImpl#getMutter <em>Mutter</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.FamilieImpl#getVater <em>Vater</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.FamilieImpl#getKinder <em>Kinder</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

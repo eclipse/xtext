@@ -8,6 +8,7 @@
 package testdata;
 
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -31,6 +32,18 @@ public class ClosureClient {
 	}
 	
 	public <P,T> T invoke1(Functions.Function1<P, T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
+	public <P,T> T invoke1WithExtends(Functions.Function1<P, ? extends T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
+	public <P,T> T invoke1WithSuper(Functions.Function1<? super P,T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
+	public <P,T> T invoke1WithSuperAndExtends(Functions.Function1<? super P,? extends T> fun, P p1) {
 		return fun.apply(p1);
 	}
 	
@@ -62,13 +75,65 @@ public class ClosureClient {
 		return predicate.apply(value);
 	}
 	
+	public void useRunnable(Runnable runnable) {
+		runnable.run();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String useProcedureForCharSequence(Procedures.Procedure1<CharSequence> proc) {
+		proc.apply(null);
+		return "done";
+	}
+	
+	public Runnable asRunnable(final Procedures.Procedure0 procedure) {
+		return new Runnable() {
+			@Override
+			public void run() {
+				procedure.apply();
+			}
+		};
+	}
+	
+	public Procedures.Procedure0 asProcedure(final Runnable runnable) {
+		return new Procedures.Procedure0() {
+			@Override
+			public void apply() {
+				runnable.run();
+			}
+		};
+	}
+	
 	public <Obj> Functions.Function1<Obj, Obj> getIdentityFunction() {
 		return new Functions.Function1<Obj, Obj>() {
+			@Override
 			public Obj apply(Obj p) {
 				return p;
 			}
 			
 		};
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String concatStrings(Functions.Function0<String>... functions) {
+		StringBuilder result = new StringBuilder("varArgs:");
+		for(Functions.Function0<String> function: functions) {
+			result.append(function.apply());
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String concatStrings(Functions.Function0<String> function1, Functions.Function0<String> function2) {
+		StringBuilder result = new StringBuilder("twoArgs:");
+		result.append(function1.apply());
+		result.append(function2.apply());
+		return result.toString();
 	}
 	
 }

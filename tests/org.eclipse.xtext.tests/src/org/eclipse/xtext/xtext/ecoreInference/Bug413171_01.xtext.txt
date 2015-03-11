@@ -1,0 +1,358 @@
+grammar urmel.Gosub hidden(WS, NEWLINE, ML_COMMENT, SL_COMMENT)
+
+generate gosub "http://www.Gosub.urmel"
+											
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+
+SourceFile:
+	package = PackageClause SEMICOLON
+	(ImportDecl SEMICOLON)*
+	(TopLevelDecl SEMICOLON)*
+;
+	
+PackageClause:
+	'package' name = IDENTIFIER
+;
+
+
+ImportDecl:
+	'import' ImportSpec | ( LPAREN (ImportSpec (SEMICOLON ImportSpec)* SEMICOLON?)? RPAREN)
+;
+
+ImportSpec:
+	('.' | IDENTIFIER)? STRING_LITERAL
+;
+
+TopLevelDecl:
+	FunctionDecl | MethodDecl | Declaration
+;
+
+FunctionDecl:
+	'func' IDENTIFIER Signature Block
+;
+
+MethodDecl:
+	'func' Receiver IDENTIFIER Signature Block
+;
+
+Receiver:
+	LPAREN IDENTIFIER? IDENTIFIER RPAREN
+;
+
+Declaration:
+	ConstDecl | VarDecl | TypeDecl
+;
+
+ConstDecl:
+	'const' ConstSpecs
+;
+
+VarDecl:
+	'var' VarSpecs
+;
+
+ConstSpecs:
+	ConstSpec | ( LPAREN (ConstSpec (SEMICOLON ConstSpec)* SEMICOLON?)? RPAREN)	
+;
+
+VarSpecs:
+	VarSpec | ( LPAREN (VarSpec (SEMICOLON VarSpec)* SEMICOLON?)? RPAREN)	
+;
+
+ConstSpec:
+	IdentifierList Type? '=' ExpressionList
+;
+
+VarSpec:
+	IdentifierList (Type ('=' ExpressionList)? | '=' ExpressionList)
+;
+
+TypeDecl:
+	'type' (TypeSpec | (LPAREN (TypeSpec SEMICOLON)* SEMICOLON? RPAREN))
+;
+
+TypeSpec:
+	IDENTIFIER 'immutable'? Type
+;
+
+Type:
+	IdentOrQualident | TypeLiteral
+;
+
+TypeLiteral:
+	ArrayType  | StructType | InterfaceType | FunctionType
+;
+
+ArrayType:
+	LBRACKET RBRACKET Type
+;
+
+StructType:
+	'struct' LBRACE (FieldDecl (SEMICOLON FieldDecl)* SEMICOLON?)? RBRACE
+;
+
+InterfaceType:
+	'interface' LBRACE (MethodSpec (SEMICOLON MethodSpec)* SEMICOLON?)? RBRACE
+;
+
+FunctionType:
+	'func' Signature
+;
+
+FieldDecl:
+	IdentifierList Type | IdentOrQualident
+;
+
+MethodSpec:
+	IDENTIFIER Signature | IdentOrQualident
+;
+
+Signature:
+	Parameters =>Result?
+;
+
+Parameters:
+	LPAREN (ParameterList ','?) ? RPAREN
+;
+
+ParameterList:
+	ParameterDecl (',' ParameterDecl)*
+;
+
+ParameterDecl:
+	=>(IdentifierList Type) | Type
+;
+
+Result:
+	Parameters | Type
+;
+
+IdentifierList:
+	IDENTIFIER (',' IDENTIFIER)*
+;
+
+IdentOrQualident:
+	IDENTIFIER =>('.' IDENTIFIER)?
+;
+
+Expression:
+	CondAndExpr ('||' CondAndExpr)*
+;
+
+R_Expression:
+	R_CondAndExpr ('||' R_CondAndExpr)*
+;
+
+CondAndExpr:
+	RelExpr ('&&' RelExpr)*
+;
+
+R_CondAndExpr:
+	R_RelExpr ('&&' R_RelExpr)*
+;
+
+RelExpr:
+	AddExpr (RelOp AddExpr)?
+;
+
+R_RelExpr:
+	R_AddExpr (RelOp R_AddExpr)?
+;
+
+AddExpr:
+	MultExpr (AddOp MultExpr)*
+;
+
+R_AddExpr:
+	R_MultExpr (AddOp R_MultExpr)*
+;
+
+MultExpr:
+	UnaryExpr (MultOp UnaryExpr)*
+;
+
+R_MultExpr:
+	R_UnaryExpr (MultOp R_UnaryExpr)*
+;
+
+UnaryExpr:
+	UnaryOp UnaryExpr | PrimaryExpr
+;
+
+R_UnaryExpr:
+	UnaryOp R_UnaryExpr | R_PrimaryExpr
+;
+
+PrimaryExpr:
+	PrimaryPrefix (PrimarySuffix)*
+;
+
+R_PrimaryExpr:
+	R_PrimaryPrefix (PrimarySuffix)*
+;
+
+PrimaryPrefix:
+	IDENTIFIER | TypeLiteral | Literal | LPAREN Expression RPAREN | =>CompositeLit
+;
+
+R_PrimaryPrefix:
+	IDENTIFIER | TypeLiteral | Literal | LPAREN Expression RPAREN
+;
+
+CompositeLit:
+	Type LiteralValue
+;
+
+PrimarySuffix:
+	LBRACKET Expression RBRACKET | '.' IDENTIFIER | '.'  LPAREN (Type | 'type') RPAREN | Arguments
+;
+
+Arguments:
+	LPAREN (ExpressionList '...'? ','?)? RPAREN
+;
+
+ExpressionList:
+	Expression (',' Expression)*	
+;
+
+R_ExpressionList:
+	R_Expression (',' R_Expression)*	
+;
+
+Literal:
+	INTEGER_LITERAL | CHARACTER_LITERAL | STRING_LITERAL
+;
+
+RelOp:
+	'<' | '>' | '==' | '!=' | '<=' | '>='
+	;
+
+AddOp:
+	'+' | '-' | '|' | '^'
+	;
+	
+MultOp:
+	'*' | '/' | '%' | '<<' | '>>' | '&' | '&^'
+	;
+
+UnaryOp:
+	'+' | '-' | '!' | '^'
+	;
+
+AssignOp:
+	'=' | '+=' | '-=' | '|=' | '^=' | '*=' | '/=' | '%=' | '<<=' | '>>=' | '&=' | '&^='
+;
+
+
+LiteralValue:
+	LBRACE (ElementList ','?)? RBRACE
+;
+
+ElementList:
+	Element (',' Element)*
+;
+
+Element:
+	Expression (COLON Value)? | LiteralValue
+;
+
+Value:
+	Expression | LiteralValue
+;
+
+Block:
+	LBRACE (Statement (SEMICOLON Statement)* SEMICOLON?)? RBRACE
+;
+
+Statement:
+	LabeledStmt | Block | Declaration | R_SimpleStmt | BreakStmt | ContinueStmt | ReturnStmt | IfStmt | ForStmt
+;
+
+LabeledStmt:
+	IDENTIFIER COLON Statement
+;
+
+BreakStmt:
+	'break' IDENTIFIER?
+;
+
+ContinueStmt:
+	'continue' IDENTIFIER?
+;
+
+ReturnStmt:
+	'return' ExpressionList?
+;
+
+IfStmt:
+	'if' =>(R_SimpleStmt SEMICOLON)? R_Expression Block ('else' (IfStmt | Block) )?
+;
+
+ForStmt:
+	'for' ( ForClause | RangeClause | Expression )? Block
+;
+	
+ForClause:
+	=>(R_SimpleStmt? SEMICOLON) Expression? SEMICOLON R_SimpleStmt?
+;
+
+RangeClause:
+	=>(Expression (',' Expression)? ( "=" | ":=" )) 'range' Expression
+;
+
+SwitchStmt:
+	'switch' =>(R_SimpleStmt SEMICOLON )? SwitchGuard? LBRACE (CaseClause (SEMICOLON+ CaseClause)* SEMICOLON*)? RBRACE
+;
+
+SwitchGuard:
+	=>(IDENTIFIER ":=")? Expression
+;
+
+CaseClause:
+	(Case COLON)+  Statement? (SEMICOLON+ Statement)*  
+;
+
+Case:
+	'case' ExpressionList | "default"
+;
+
+
+R_SimpleStmt:
+	=>R_ExpressionStmt | =>R_ShortVarDecl | R_Assignment
+;
+
+R_ExpressionStmt:
+	R_Expression (INCR | DECR)?
+;
+
+R_ShortVarDecl:
+	IdentifierList ':=' R_ExpressionList
+;
+
+R_Assignment:
+	R_ExpressionList AssignOp R_ExpressionList
+;
+
+
+terminal NEWLINE	: '\n';
+terminal SEMICOLON	: ';';
+terminal COLON		: ':';
+terminal INCR		: '++';
+terminal DECR		: '--';
+terminal LPAREN		: '(';
+terminal LBRACE		: '{';
+terminal LBRACKET	: '[';
+terminal RPAREN		: ')';
+terminal RBRACE		: '}';
+terminal RBRACKET	: ']';
+
+terminal WS			: (' '|'\t'|'\r')+;
+terminal ML_COMMENT	: '/*' -> '*/';
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal IDENTIFIER  		: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+terminal CHARACTER_LITERAL : '\'' !('\'' | '\\' | '\n' | '\r') '\'';
+terminal INTEGER_LITERAL returns ecore::EInt: ('0'..'9')+;
+terminal STRING_LITERAL	: '"' (!'"')* '"';

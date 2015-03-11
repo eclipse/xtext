@@ -9,10 +9,11 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import java.util.Date;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguageFactory;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.junit.Test;
 
 import com.ibm.icu.text.SimpleDateFormat;
 
@@ -22,12 +23,12 @@ import com.ibm.icu.text.SimpleDateFormat;
 public class DefaultTerminalConverterTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(EcoreTerminalsTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testSerializeAndReparse() throws Exception {
+	@Test public void testSerializeAndReparse() throws Exception {
 		int intValue=34786482;
 		double doubleValue=2.32E-17;
 		Date dateValue = new SimpleDateFormat("YYYY-MM-DD").parse("2010-05-25");
@@ -40,7 +41,7 @@ public class DefaultTerminalConverterTest extends AbstractXtextTests {
 		
 		Model reparsedModel = (Model) getModel(modelAsString);
 		assertEquals(intValue, (int) reparsedModel.getIntValues().get(0));
-		assertEquals(doubleValue, reparsedModel.getDoubleValues().get(0));
+		assertEquals(doubleValue, reparsedModel.getDoubleValues().get(0), 0.00001);
 		assertEquals(dateValue, reparsedModel.getDateValues().get(0));
 		
 		try {

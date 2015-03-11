@@ -12,19 +12,14 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.base.Predicate;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 public class JvmModelReferenceFilter implements Predicate<IReferenceDescription> {
-	private URI excludedSourceURI;
 
-	public JvmModelReferenceFilter(URI excludedSourceURI) {
-		this.excludedSourceURI = excludedSourceURI;
-	}
-
-	public URI getExcludedSourceURI() {
-		return excludedSourceURI;
-	}
-	
+	@Override
 	public boolean apply(IReferenceDescription input) {
-		return !isInferredJvmElement(input.getSourceEObjectUri()) && (excludedSourceURI == null || !excludedSourceURI.equals(input.getSourceEObjectUri()));
+		return !isInferredJvmElement(input.getSourceEObjectUri());
 	}
 
 	protected boolean isInferredJvmElement(URI elementURI) {

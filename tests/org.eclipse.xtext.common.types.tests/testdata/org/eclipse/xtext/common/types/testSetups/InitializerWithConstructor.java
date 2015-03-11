@@ -17,11 +17,13 @@ public class InitializerWithConstructor extends TestScenario {
 	}
 	
 	static {
+		@SuppressWarnings("unused")
 		int i = 0;
 		i++;
 	}
 	
 	{
+		@SuppressWarnings("unused")
 		int i = 0;
 		i++;
 	}

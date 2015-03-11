@@ -12,18 +12,16 @@ import java.util.List;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 
 import com.google.inject.Inject;
 
 /**
  * A listener that will notify the state change broker about reconcile operations
  * on java types. It converts the {@link ElementChangedEvent notifications} of the JDT
- * to {@link IResourceDescription.Event events} for the Xtext protocol.
+ * to {@link org.eclipse.xtext.resource.IResourceDescription.Event events} for the Xtext protocol.
  * As this will only notify  
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,13 +30,15 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 
 	private final DeltaConverter deltaConverter;
 
+	/**
+	 * @since 2.5
+	 */
 	@Inject
-	public TypeResourceUnloader(IStateChangeEventBroker stateChangeEventBroker, DeltaConverter deltaConverter) {
+	public TypeResourceUnloader(DeltaConverter deltaConverter) {
 		this.deltaConverter = deltaConverter;
-		addListener(stateChangeEventBroker);
-		JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_RECONCILE);
 	}
 	
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		IResourceDescription.Event resourceDescriptionEvent = getAsResourceDescriptionChange(event.getDelta());
 		if (resourceDescriptionEvent != null)
@@ -49,7 +49,7 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 		List<IResourceDescription.Delta> deltas = deltaConverter.convert(delta);
 		if (deltas == null || deltas.isEmpty())
 			return null;
-		return new ResourceDescriptionChangeEvent(deltas, this);
+		return new ResourceDescriptionChangeEvent(deltas);
 	}
 	
 }

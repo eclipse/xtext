@@ -1,0 +1,358 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="template">Template Language</h1>
+
+<p>This is a little template language specialized in generating HTML documents.</p>
+
+<p><img src="images/template_screenshot.png" alt="" /></p>
+
+<p>The language allows web designers to do their job and lets developers put in the dynamic parts. The syntax and terminals are chosen to be readable and allow rendering the templates in the browser as well as in any HTML 5 compatible WYSIWYG editors. Still, when opened in the DSL editor you get the fully featured, statically typed Eclipse editor.</p>
+
+<h2 id="templates-solution">Overview</h2>
+
+<p>A template language works in two modes: Plain text mode, where everything goes directly into the output and the expression mode, where expressions have to be evaluated and the result is inserted into the text. To switch between text mode and expression mode, we use the French quotes <code>«</code> and <code>»</code>. A document starts in text mode.</p>
+
+<p>The template will be compiled to a Java class with a <code>generate(params)</code> method. You can provide additional information like a package declaration, imports and parameters in the preamble inside a template at the beginning of the document.</p>
+
+<p>We provide additional <code>FOR-ENDFOR</code> and <code>IF-ELSE-ENDIF</code> statements to iterate / branch over fixed text blocks. To distinguish them from the Xbase expressions with the same names, they are in uppercase.</p>
+
+<h2 id="templates-running">Running the Example</h2>
+
+<p>In the runtime workspace, run the <em>GenerateHtml</em> file as a Java application (<em>Run as… → Java Application</em> from the context menu). This will execute the template <em>MyWebsite</em> and print the result to the console. </p>
+
+<h2 id="templates-grammar">Grammar</h2>
+
+<p>This is the grammar of the templates DSL: </p>
+
+<pre><code class="language-xtext">grammar org.xtext.template.Template 
+   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+
+generate template "http://www.xtext.org/template/Template"
+import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
+
+TemplateFile:
+	'&lt;!--''«' 
+		('package' package=QualifiedName)? 
+		importSection=XImportSection? 
+		params+=Parameter* 
+		body=RichString;
+
+Parameter:
+	annotations+=XAnnotation* 
+	'param' type=JvmTypeReference? name=ID ('=' defaultexp=XExpression)?;
+
+RichString returns xbase::XBlockExpression:
+	{RichString}  
+	expressions+=RichStringLiteral 
+	(expressions+=RichStringPart expressions+=RichStringLiteral)*;
+
+RichStringLiteral returns xbase::XStringLiteral:
+	{RichStringLiteral} value=TEXT;
+
+RichStringPart returns xbase::XExpression:
+	XExpressionInsideBlock |
+	RichStringForLoop |
+	RichStringIf;
+
+RichStringForLoop returns xbase::XForLoopExpression:
+	{RichStringForLoop}
+	"FOR" declaredParam=JvmFormalParameter ':' forExpression=XExpression
+		eachExpression=RichString
+	"ENDFOR";
+
+RichStringIf returns xbase::XIfExpression:
+	{RichStringIf}
+	"IF" if=XExpression
+		then=RichString
+	(else=RichStringElseIf | "ELSE" else=RichString)?
+	"ENDIF";
+	
+RichStringElseIf returns xbase::XIfExpression:
+	{RichStringIf}
+	"ELSEIF"if=XExpression
+		then=RichString
+	(else=RichStringElseIf | "ELSE" else=RichString)?;
+
+terminal TEXT : '»' (!'«')* (EOF|'«');
+</code></pre>
+
+<p>It becomes quite straightforward once you have understood the escaping. Have a look at the last rule <em>TEXT</em> first: It says that a text starts with a closing French quote and ends with an opening quote or the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. </p>
+
+<p>A <em>TemplateFile</em> starts with a comment and switches to the expression mode for the preamble part consisting of the package declaration, the imports and the parameter declaration. The body is a <em>RichString</em>, which is an alternating sequence of <em>RichStringLiterals</em> and <em>RichStringPart</em>. The <em>RichStringLiterals</em> is essentially a text block (in inverted French quotes). The <em>RichStringPart</em> is either an Xbase expression, a <em>RichStringForLoop</em> or a <em>RichStringIf</em>. The latter inherit from the Xbase expressions with the same name to reuse as much of the Xbase infrastructure as possible. The rest should be easy.</p>
+
+<h2 id="templates-inferrer">Translation to Java</h2>
+
+<p>Each <em>TemplateFile</em> is compiled to a Java class with a <code>generate</code> method that takes a lambda expression as a parameter. The lambda expression is called to initialize the template’s properties, by handling the template itself as an argument. This comes along nicely, especially when called from Xtend.</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-templates">&lt;!--«
+  ...
+»--&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">public class MyWebsite {
+...
+  public String generate(final Procedure1&lt;MyWebsite&gt; init) {
+    if (init != null)
+      init.apply(this);
+    String result = generate().toString();
+    // remove leading --&gt;
+    result = result.replaceAll("^--&gt;\\r?\\n","");
+    // trim multi-newline to single newline
+    result = result.replaceAll("\\r?\\n\\s*\\r\\n?", System.getProperty("line.separator"));
+    return result;
+        
+  }
+}
+</code></pre>
+  </li>
+</ul>
+
+<p>The corresponding code in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateJvmModelInferrer.java">TemplateJvmModelInferrer</a> is:</p>
+
+<pre><code class="language-xtend">class TemplateJvmModelInferrer extends AbstractModelInferrer {
+...
+     def dispatch void infer(TemplateFile element, 
+                             IJvmDeclaredTypeAcceptor acceptor, 
+                             boolean isPreIndexingPhase) {
+       val simpleName = element.eResource.URI.trimFileExtension.lastSegment
+       val qualifiedName = if(element.getPackage != null) 
+           element.getPackage + "." + simpleName
+         else 
+           simpleName
+    val javaClass = element.toClass(qualifiedName)
+       acceptor.accept(javaClass)[
+...
+      // generate a method accepting an initializer lambda expression
+      members += element.toMethod("generate", typeRef(String)) [
+        parameters += element.toParameter(
+          "init", typeRef(Procedures.Procedure1, typeRef(javaClass))
+        )
+        body = '''
+          if (init != null)
+            init.apply(this);
+          String result = generate().toString();
+          // remove leading --&gt;
+          result = result.replaceAll("^--&gt;\\r?\\n","");
+          // trim multi-newline to single newline
+          result = result.replaceAll("\\r?\\n\\s*\\r?\\n",System.getProperty("line.separator"));
+          return result;
+        '''
+...
+</code></pre>
+
+<p>Each <em>Parameter</em> becomes a Java property, i.e. a field with a getter and a setter. </p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-templates">param title = "No Title"
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">private String title = "No Title";
+    
+public void setTitle(final String title) {
+  this.title = title;
+}
+    
+public String getTitle() {
+  return this.title;
+}
+</code></pre>
+  </li>
+</ul>
+
+<p>In the inferrer, note that we derive the property’s type in three steps: Take the declared one, if there is none, derive it from the initializer and if even that fails, use <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> as default. </p>
+
+<pre><code class="language-xtend">for (param : element.params) {
+  val type = param.type 
+    ?: param.defaultexp?.inferredType 
+    ?: typeRef(String)
+  members += param.toField(param.name, type) [
+    if (param.defaultexp != null)
+      initializer = param.defaultexp
+  ]
+  members += param.toSetter(param.name, type)
+  members += param.toGetter(param.name, type)
+}
+</code></pre>
+
+<p>The body of the template is compiled into a big private <code>generate()</code> method. We skip the inferrer code here, as it is straightforward. But we had to extend the compiler to support rich strings and the new <code>FOR</code> loop our new control structures. This is described in the <a href="207_template.html#templates-compiler">next section</a>.</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-templates">»&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;«title»&lt;/title&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-sca..."&gt;
+  &lt;meta name="description"
+    content="«description»"&gt;
+  &lt;meta name="author" content="«...
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">private CharSequence generate() {
+  StringBuilder _appendable = new StringBuilder();
+  _appendable.append(ObjectExtensions.operator_elvis(
+    "--&gt;\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"en\"&gt;\n&lt;head&gt;\n\t&lt;meta...",
+    ""));
+  _appendable.append(ObjectExtensions.operator_elvis(
+    this.title,""));
+  // appends galore
+...
+</code></pre>
+  </li>
+</ul>
+
+<h2 id="templates-compiler">Extending the Compiler</h2>
+
+<p>We have added additional expressions to Xbase, so we have to tell the compiler how to translate them to Java. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> has a method <code>doInternalToJavaStatement</code> that dispatches the compilation with regard to the type of the current expression. This is where we have to hook in with our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a>:</p>
+
+<pre><code class="language-xtend">class TemplateCompiler extends XbaseCompiler {
+  
+  override protected doInternalToJavaStatement(XExpression expr, 
+                                               ITreeAppendable it, 
+                                               boolean isReferenced) {
+    switch expr {
+      RichString : {
+...   }
+      RichStringForLoop : {
+...   }
+      default :
+        super.doInternalToJavaStatement(expr, it, isReferenced)
+    }
+  }
+...
+</code></pre>
+
+<p>For a <em>RichString</em>, we declare a variable <code>_appendable</code> of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a <em>RichStringPart</em> which can be <code>null</code>, so we use the ‘elvis operator’ <code>?:</code> to insert an empty string in this case. </p>
+
+<pre><code class="language-xtend">RichString : {
+  val name = declareVariable(expr, '_appendable')
+  newLine
+  append('''
+    StringBuilder «name» = new StringBuilder();
+  ''')
+  for (nestedExpression : expr.expressions) {
+    nestedExpression.internalToJavaStatement(it, true)
+    newLine
+    append('''«name».append(ObjectExtensions.operator_elvis(''')
+    nestedExpression.internalToJavaExpression(it)
+    append(',""));')
+  }
+}
+</code></pre>
+
+<p>As our <em>RichStringLiteral</em> inherits from <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java">XStringLiteral</a>, it does not need any special treatment. The same holds for <em>RichStringIf</em> and <em>RichStringElseIif</em>. The <em>RichStringForLoop</em> requires special treatment, because as opposed to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> that always returns <code>null</code>, we want it to return a concatenation of its results. This looks like</p>
+
+<pre><code class="language-xtend">RichStringForLoop : {
+  expr.forExpression.internalToJavaStatement(it, true)
+  val paramType = typeProvider.getTypeForIdentifiable(expr.declaredParam)
+  val name = declareVariable(expr, '_forLoopResult')
+  newLine
+  append('''
+    StringBuilder «name» = new StringBuilder();
+    for (final ''')
+  serialize(paramType, expr, it);
+  append(''' «declareVariable(expr.declaredParam, 
+      makeJavaIdentifier(expr.declaredParam.name))» : ''')
+  internalToJavaExpression(expr.forExpression, it)
+  append(") {").increaseIndentation
+    expr.eachExpression.internalToJavaStatement(it, true)
+    newLine
+    append('''«name».append(''')
+    expr.eachExpression.internalToJavaExpression(it)
+    append(');')
+  decreaseIndentation.newLine.append("}")
+}
+</code></pre>
+
+<p>The compiler now knows how to handle the new expressions in a statement context. In addition, we have to teach it to compile them in an expression context. This is what the second method does:</p>
+
+<pre><code class="language-xtend">override protected internalToConvertedExpression(XExpression obj, 
+                                                 ITreeAppendable it) {
+  if (hasName(obj))
+    append(getName(obj))
+  else 
+    super.internalToConvertedExpression(obj, it) 
+}
+</code></pre>
+
+<p>As usual, we have to bind our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a> in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">TemplateRuntimeModule</a> in order to be picked up as the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> in the context of our language.</p>
+
+<h2 id="templates-type-provider">Type Computation</h2>
+
+<p>The type system has to know how to determine the types of our new expressions. This is the job of the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">TemplateTypeComputer</a>: <em>RichString</em> becomes a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>. As opposed to its super type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> a <em>RichStringForLoop</em> is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> as well. The for-loop’s body is expected to have a type, as the results must be concatenatable, which is different from Xbase’s for-loop.</p>
+
+<pre><code class="language-xtend">class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
+	
+	def dispatch computeTypes(RichString expression, ITypeComputationState state) {
+		super._computeTypes(expression as XBlockExpression, state)
+		state.acceptActualType(getTypeForName(StringBuilder, state))
+	}
+	 
+	def dispatch computeTypes(RichStringForLoop expression, ITypeComputationState state) {
+		super._computeTypes(expression as XForLoopExpression, state)
+		state.acceptActualType(getTypeForName(StringBuilder, state))
+	}
+}
+</code></pre>
+
+<p>Like the compiler, we have to bind this implementation in our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">runtime module</a> as well.</p>
+
+<h2 id="templates-value-converter">Value Converter</h2>
+
+<p>The <em>RichStringLiterals</em> still have the French quotes around their values. As we do not want to see them in the output, we have implemented the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateValueConverterService.xtend">TemplateValueConverterService</a> and bound it in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">runtime module</a>.</p>
+
+<h2 id="templates-content-assist">Content Assist</h2>
+
+<p>The French quotes are not easy to type on every keyboard. We have adapted content assist to insert them when the cursor is inside a TEXT terminal:</p>
+
+<pre><code class="language-java">public class TemplateProposalProvider 
+    extends AbstractTemplateProposalProvider {
+  @Override
+  public void complete_TEXT(EObject model, 
+                            RuleCall ruleCall, 
+                            ContentAssistContext context,
+      ICompletionProposalAcceptor acceptor) {
+    acceptor.accept(new CompletionProposal("«»", 
+        context.getOffset(), 0, 1));
+  }
+}
+</code></pre>
+
+<h2 id="templates-highlighting">Syntax Highlighting</h2>
+
+<p>Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback, we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting styles in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend">TemplateHighlightingConfiguration</a> and apply them to the text in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend">TemplateHighlightingCalculator</a>. As this is rather extensively covered in the <a href="304_ide_concepts.html#highlighting">Xtext documentation</a>, we skip a deeper explanation here. </p>
+
+<hr />
+
+<p><strong><a href="208_tortoise.html">Next Chapter: Little Tortoise</a></strong></p>
+
+
+</body>
+</html>

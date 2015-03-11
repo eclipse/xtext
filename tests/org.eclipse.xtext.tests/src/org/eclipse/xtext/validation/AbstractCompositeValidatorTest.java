@@ -23,9 +23,10 @@ import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFactory;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -40,7 +41,7 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 	private Second second;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(createStandaloneSetup());
 		registry = get(EValidator.Registry.class);
@@ -51,7 +52,7 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		registry = null;
 		pack = null;
 		first = null;
@@ -99,11 +100,11 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertNotNull("registry", registry);
 	}
 	
-	public void testFirstAndSecond() {
+	@Test public void testFirstAndSecond() {
 		EValidator validator = registry.getEValidator(pack);
 		assertNotNull(validator);
 		assertTrue(validator instanceof CompositeEValidator);
@@ -116,7 +117,7 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		assertTrue(contents.contains(equalitySupport));
 	}
 	
-	public void testBug_279962() {
+	@Test public void testBug_279962() {
 		EValidator validator = registry.getEValidator(pack);
 		assertTrue(validator instanceof CompositeEValidator);
 		CompositeEValidator composite = (CompositeEValidator) validator;

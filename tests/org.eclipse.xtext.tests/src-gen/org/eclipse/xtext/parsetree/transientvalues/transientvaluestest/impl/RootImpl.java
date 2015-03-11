@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Transient
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

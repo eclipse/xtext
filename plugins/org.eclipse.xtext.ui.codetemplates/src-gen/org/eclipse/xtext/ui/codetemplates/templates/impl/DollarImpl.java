@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -20,10 +17,10 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.DollarImpl#isEscaped <em>Escaped</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

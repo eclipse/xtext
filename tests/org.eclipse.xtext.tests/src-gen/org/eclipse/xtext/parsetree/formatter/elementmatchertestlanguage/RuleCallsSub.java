@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage;
 
@@ -13,13 +10,13 @@ package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall1 <em>Call1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall2 <em>Call2</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getSub <em>Sub</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage#getRuleCallsSub()
  * @model

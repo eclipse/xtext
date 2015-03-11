@@ -34,6 +34,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 		super(configuration.getInput(), configuration.getTokenAcceptor());
 	}
 
+	@Override
 	public final int consume(final String feature, final boolean isMany, final boolean isBoolean,
 			final AbstractElement element, final ISequenceMatcher notMatching, final boolean optional) {
 		final int prevMarker = mark();
@@ -46,6 +47,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 		}
 		getTokenAcceptor().accept(createParsedToken(feature, isMany, isBoolean, element, notMatching, optional, prevMarker,
 				new IParsedTokenSource(){
+					@Override
 					public int parseAgain(ParsedToken token) throws Exception {
 						return consume(feature, isMany, isBoolean, element, notMatching, optional);
 					}
@@ -67,6 +69,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 				source, optional);
 	}
 
+	@Override
 	public final int consume() {
 		int prevOffset = getInput().getOffset();
 		final int result = doConsume();
@@ -76,6 +79,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 		return result;
 	}
 
+	@Override
 	public final int consume(ISequenceMatcher notMatching) {
 		int prevOffset = getInput().getOffset();
 		final int result = doConsume();
@@ -202,10 +206,12 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 
 	protected abstract String getRuleName();
 
+	@Override
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
 
+	@Override
 	public boolean isHidden() {
 		return hidden;
 	}

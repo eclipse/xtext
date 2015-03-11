@@ -1,0 +1,7 @@
+<module>
+  <inherits name="org.eclipse.xtend.lib.Lib" />
+  <source path="">
+    <include name="TestEntryPoint.java" />
+  </source>
+  <entry-point class="org.eclipse.xtend.lib.test.TestEntryPoint" />
+</module>

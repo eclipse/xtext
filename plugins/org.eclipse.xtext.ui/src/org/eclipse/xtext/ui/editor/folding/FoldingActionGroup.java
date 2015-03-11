@@ -20,6 +20,7 @@ import org.eclipse.ui.editors.text.IFoldingCommandIds;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
 import org.eclipse.ui.texteditor.ResourceAction;
+import org.eclipse.ui.texteditor.TextEditorAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
@@ -42,6 +43,7 @@ public class FoldingActionGroup extends ActionGroup {
 			super(bundle, prefix, IAction.AS_PUSH_BUTTON);
 		}
 
+		@Override
 		public void update() {
 			setEnabled(FoldingActionGroup.this.isEnabled() && viewer.isProjectionMode());
 		}
@@ -49,7 +51,7 @@ public class FoldingActionGroup extends ActionGroup {
 	}
 
 	private ProjectionViewer viewer;
-	private final TextOperationAction toggle;
+	private final TextEditorAction toggle;
 	private final TextOperationAction expand;
 	private final TextOperationAction collapse;
 	private final TextOperationAction expandAll;
@@ -83,10 +85,12 @@ public class FoldingActionGroup extends ActionGroup {
 
 		projectionListener = new IProjectionListener() {
 
+			@Override
 			public void projectionEnabled() {
 				update();
 			}
 
+			@Override
 			public void projectionDisabled() {
 				update();
 			}
@@ -94,9 +98,8 @@ public class FoldingActionGroup extends ActionGroup {
 
 		this.viewer.addProjectionListener(projectionListener);
 
-		toggle = new TextOperationAction(FoldingMessages.getResourceBundle(),
-				"Projection.Toggle.", editor, ProjectionViewer.TOGGLE, true); //$NON-NLS-1$
-		toggle.setChecked(true);
+		toggle = createToggleFoldingAction(editor);
+		toggle.setChecked(this.viewer.isProjectionMode());
 		toggle.setActionDefinitionId(IFoldingCommandIds.FOLDING_TOGGLE);
 		editor.setAction("FoldingToggle", toggle); //$NON-NLS-1$
 
@@ -130,8 +133,17 @@ public class FoldingActionGroup extends ActionGroup {
 			}
 		};
 		restoreDefaults.setActionDefinitionId(IFoldingCommandIds.FOLDING_RESTORE);
+		restoreDefaults.update();
 		editor.setAction("FoldingRestore", restoreDefaults); //$NON-NLS-1$
 
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected TextEditorAction createToggleFoldingAction(ITextEditor editor) {
+		return new TextOperationAction(FoldingMessages.getResourceBundle(), "Projection.Toggle.", editor,
+				ProjectionViewer.TOGGLE, true);
 	}
 
 	/**

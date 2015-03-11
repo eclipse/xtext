@@ -22,11 +22,12 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class ProposalConflictHelper implements IProposalConflictHelper {
 	
+	@Override
 	public boolean existsConflict(String proposal, ContentAssistContext context) {
 		// hidden node between lastCompleteNode and currentNode?
 		INode lastCompleteNode = context.getLastCompleteNode();
 		Region replaceRegion = context.getReplaceRegion();
-		int nodeEnd = lastCompleteNode.getOffset() + lastCompleteNode.getLength();
+		int nodeEnd = lastCompleteNode.getEndOffset();
 		if (nodeEnd < replaceRegion.getOffset())
 			return false;
 		

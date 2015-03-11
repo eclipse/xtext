@@ -1,10 +1,17 @@
-#Wed Aug 12 21:14:13 CEST 2009
 compilers.f.unresolved-features=1
 compilers.f.unresolved-plugins=1
 compilers.incompatible-environment=1
 compilers.p.build=1
+compilers.p.build.bin.includes=1
+compilers.p.build.encodings=2
+compilers.p.build.java.compiler=2
+compilers.p.build.java.compliance=2
+compilers.p.build.missing.output=2
+compilers.p.build.output.library=1
+compilers.p.build.source.library=1
+compilers.p.build.src.includes=1
 compilers.p.deprecated=1
-compilers.p.discouraged-class=1
+compilers.p.discouraged-class=2
 compilers.p.internal=1
 compilers.p.missing-packages=2
 compilers.p.missing-version-export-package=2

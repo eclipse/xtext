@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getValue <em>Value</em>}</li>
@@ -23,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDots <em>Dots</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDouble <em>Double</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage#getModel()
  * @model

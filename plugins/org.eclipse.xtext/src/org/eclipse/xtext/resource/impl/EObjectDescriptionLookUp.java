@@ -39,25 +39,30 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		setExportedObjects(allDescriptions);
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return allDescriptions.isEmpty();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
 		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
 			}
 		});
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
-		final URI uri = EcoreUtil2.getNormalizedURI(object);
+		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
 					return true;
@@ -69,6 +74,7 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		});
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, boolean ignoreCase) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
@@ -78,11 +84,13 @@ public class EObjectDescriptionLookUp implements ISelectable {
 			return Collections.emptyList();
 		Predicate<IEObjectDescription> predicate = ignoreCase 
 			?	new Predicate<IEObjectDescription>() {
+					@Override
 					public boolean apply(IEObjectDescription input) {
 						return EcoreUtil2.isAssignableFrom(type, input.getEClass());
 					}
 				}
 			:	new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(type, input.getEClass());
 				}
@@ -90,6 +98,7 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		return Iterables.filter(values, predicate);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return allDescriptions;
 	}

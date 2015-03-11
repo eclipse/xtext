@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337.impl;
 
@@ -32,12 +29,12 @@ import org.eclipse.xtext.linking.lazy.bug311337.Reference;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.DefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.DefinitionImpl#getChild <em>Child</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.DefinitionImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

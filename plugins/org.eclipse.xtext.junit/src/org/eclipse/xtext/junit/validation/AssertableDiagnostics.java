@@ -28,7 +28,9 @@ import com.google.common.collect.Iterables;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  * 
+ * @deprecated use org.eclipse.xtext.junit4.validation.AssertableDiagnostics instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class AssertableDiagnostics {
 
 	public interface DiagnosticPredicate extends Predicate<Diagnostic> {
@@ -44,16 +46,19 @@ public class AssertableDiagnostics {
 			iteratorStack.add(root.getChildren().iterator());
 		}
 
+		@Override
 		public boolean hasNext() {
 			while (iteratorStack.size() > 0 && !iteratorStack.get(iteratorStack.size() - 1).hasNext())
 				iteratorStack.remove(iteratorStack.size() - 1);
 			return iteratorStack.size() != 0;
 		}
 
+		@Override
 		public Iterator<Diagnostic> iterator() {
 			return this;
 		}
 
+		@Override
 		public Diagnostic next() {
 			Diagnostic d = iteratorStack.get(iteratorStack.size() - 1).next();
 			if (d.getChildren().size() > 0)
@@ -61,13 +66,17 @@ public class AssertableDiagnostics {
 			return d;
 		}
 
+		@Override
 		public void remove() {
 			throw new RuntimeException("operation not supported");
 		}
 
 	}
 
-	protected static class Pred implements DiagnosticPredicate {
+	/**
+	 * @since 2.3
+	 */
+	public static class Pred implements DiagnosticPredicate {
 		protected String issueCode;
 		protected String msg;
 		protected Integer severity;
@@ -81,6 +90,7 @@ public class AssertableDiagnostics {
 			this.msg = msg;
 		}
 
+		@Override
 		public boolean apply(Diagnostic d) {
 			if (severity != null && d.getSeverity() != severity)
 				return false;
@@ -109,15 +119,15 @@ public class AssertableDiagnostics {
 		}
 	}
 
-	public static Pred diagnostic(int severity, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, String issueCode, String messageFragment) {
 		return new Pred(severity, null, issueCode, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String messageFragment) {
 		return new Pred(severity, code, null, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String issueCode, String messageFragment) {
 		return new Pred(severity, code, issueCode, messageFragment);
 	}
 

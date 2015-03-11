@@ -17,10 +17,12 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor
  */
 public class KeywordSerializer implements IKeywordSerializer {
 
+	@Override
 	public boolean isValid(EObject context, Keyword keyword, Object value, Acceptor errorAcceptor) {
 		return keyword.getValue().equals(value);
 	}
 
+	@Override
 	public String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, INode node,
 			Acceptor errorAcceptor) {
 		if (node != null && node.getGrammarElement() == keyword)

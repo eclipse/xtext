@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -26,6 +23,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getId <em>Id</em>}</li>
@@ -34,7 +32,6 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getKeywordContext <em>Keyword Context</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplateImpl#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

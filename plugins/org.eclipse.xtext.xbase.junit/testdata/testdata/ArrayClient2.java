@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package testdata;
 
 public class ArrayClient2<T> {
@@ -16,7 +23,7 @@ public class ArrayClient2<T> {
         return internal[index] = value;
     }
 
-    public <X> ArrayClient2<X> access(X[] val) {
+    public static <X> ArrayClient2<X> access(X[] val) {
         return new ArrayClient2<X>(val);
     }
 

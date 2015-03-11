@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug313089.impl;
 
@@ -25,13 +22,13 @@ import org.eclipse.xtext.linking.bug313089.Foo;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.FooImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.FooImpl#getBar <em>Bar</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.FooImpl#getBaz <em>Baz</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.FooImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

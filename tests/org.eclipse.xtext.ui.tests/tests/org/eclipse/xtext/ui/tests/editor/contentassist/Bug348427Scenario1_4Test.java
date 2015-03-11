@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -16,5 +17,5 @@ public class Bug348427Scenario1_4Test extends AbstractBug348427OptionalChildrenT
 	protected String getScenario() {
 		return "1.4";
 	}
-	
+
 }

@@ -132,10 +132,15 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 						collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 					break;
 			}
-		} else if (element instanceof Alternatives)
-			for (AbstractElement e : ((Alternatives) element).getElements())
+		} else if (element instanceof Alternatives) {
+			boolean hasOptional = false;
+			for (AbstractElement e : ((Alternatives) element).getElements()) {
+				hasOptional |= GrammarUtil.isOptionalCardinality(e);
 				addOutgoing(e, visited, isRuleCall, loopCenter);
-		else if (element instanceof Assignment)
+			}
+			if (hasOptional)
+				collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
+		} else if (element instanceof Assignment)
 			addOutgoing(((Assignment) element).getTerminal(), visited, isRuleCall, loopCenter);
 		else if (element instanceof CrossReference)
 			addOutgoing(((CrossReference) element).getTerminal(), visited, isRuleCall, loopCenter);
@@ -213,6 +218,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return builder.filter(ele);
 	}
 
+	@Override
 	public List<T> getAllIncoming() {
 		for (Adapter a : element.eResource().eAdapters())
 			if (a instanceof IsInitializedMarker && ((IsInitializedMarker) a).builder == builder)
@@ -228,6 +234,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return getIncoming();
 	}
 
+	@Override
 	public List<T> getAllOutgoing() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();
@@ -237,10 +244,12 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return result;
 	}
 
+	@Override
 	public NFABuilder<S, T> getBuilder() {
 		return builder;
 	}
 
+	@Override
 	public AbstractElement getGrammarElement() {
 		return element;
 	}
@@ -251,6 +260,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return allIncoming;
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<T> getIncommingWithoutRuleCalls() {
 		List<T> result = Lists.newArrayList();
@@ -259,12 +269,14 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return result;
 	}
 
+	@Override
 	public List<T> getOutgoing() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();
 		return outgoingRuleCalls.isEmpty() ? outgoing : outgoingRuleCalls;
 	}
 
+	@Override
 	public List<T> getOutgoingAfterReturn() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();
@@ -274,18 +286,21 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	/**
 	 * @since 2.0
 	 */
+	@Override
 	public boolean hasOutgoingRuleCall() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();
 		return !outgoingRuleCalls.isEmpty();
 	}
 
+	@Override
 	public boolean isEndState() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();
 		return endState;
 	}
 
+	@Override
 	public boolean isStartState() {
 		return element.eContainer() instanceof AbstractRule;
 	}

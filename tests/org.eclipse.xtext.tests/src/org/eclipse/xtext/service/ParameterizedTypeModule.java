@@ -19,21 +19,26 @@ public class ParameterizedTypeModule extends AbstractGenericModule {
 	public final X PROVIDE_X = new X();
 
 	static class X implements Comparable<X>, Iterator<X>, Iterable<X> {
+		@Override
 		public int compareTo(X o) {
 			return 0;
 		}
 
+		@Override
 		public boolean hasNext() {
 			return false;
 		}
 
+		@Override
 		public X next() {
 			return null;
 		}
 
+		@Override
 		public void remove() {
 		}
 
+		@Override
 		public Iterator<X> iterator() {
 			return null;
 		}
@@ -49,6 +54,7 @@ public class ParameterizedTypeModule extends AbstractGenericModule {
 	
 	public Provider<Iterable<X>> provideParameterizedType2() {
 		return new Provider<Iterable<X>>(){
+			@Override
 			public Iterable<X> get() {
 				return PROVIDE_X;
 			}

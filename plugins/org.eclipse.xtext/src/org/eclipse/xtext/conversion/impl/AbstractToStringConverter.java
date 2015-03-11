@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
+import org.eclipse.xtext.conversion.IValueConverter;
+
 /**
- * Abstract implementation of a {@link ValueConverter}, that does not fail on
+ * Abstract implementation of a {@link IValueConverter}, that does not fail on
  * <code>null</code>-Values and uses a simple {@link Object#toString()} to obtain
  * the {@link String} representation.
  */

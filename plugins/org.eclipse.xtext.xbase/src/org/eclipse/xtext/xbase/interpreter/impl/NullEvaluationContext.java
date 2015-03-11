@@ -15,18 +15,22 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
  */
 public class NullEvaluationContext implements IEvaluationContext {
 
+	@Override
 	public Object getValue(QualifiedName qualifiedName) {
 		return null;
 	}
 
+	@Override
 	public void newValue(QualifiedName qualifiedName, Object value) {
 		throw new IllegalStateException("Cannot create new value in null context.");
 	}
 
+	@Override
 	public void assignValue(QualifiedName qualifiedName, Object value) {
 		throw new IllegalStateException("Cannot assign a value in null context.");
 	}
 
+	@Override
 	public IEvaluationContext fork() {
 		throw new IllegalStateException("Cannot fork a null context.");
 	}

@@ -40,9 +40,11 @@ public class EcoreQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
+	@Override
 	public QualifiedName getFullyQualifiedName(final EObject obj) {
 		return cache.get(Tuples.pair(obj, getCacheKey()), obj.eResource(), new Provider<QualifiedName>() {
 
+			@Override
 			public QualifiedName get() {
 				EObject temp = obj;
 				String name = nameDispatcher.invoke(temp);

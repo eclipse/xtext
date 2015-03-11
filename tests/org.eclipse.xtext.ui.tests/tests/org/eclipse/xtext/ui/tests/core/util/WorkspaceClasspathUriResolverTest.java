@@ -3,23 +3,25 @@ package org.eclipse.xtext.ui.tests.core.util;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.junit.util.PluginUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.util.WorkspaceClasspathUriResolver;
+import org.junit.Before;
+import org.junit.Test;
 
 public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
 	private IJavaProject _javaProject;
 	private IClasspathUriResolver _resolver;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		_resolver = new WorkspaceClasspathUriResolver();
 	}
 
-	public void testClasspathUriForFileInWorkspace() throws Exception {
+	@Test public void testClasspathUriForFileInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
 		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
@@ -30,7 +32,7 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileInWorkspaceWithFragment() throws Exception {
+	@Test public void testClasspathUriForFileInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
 		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
@@ -41,7 +43,7 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileInJarInWorkspace() throws Exception {
+	@Test public void testClasspathUriForFileInJarInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
 		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
@@ -53,7 +55,7 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 
-	public void testClasspathUriForFileInJarInWorkspaceWithFragment() throws Exception {
+	@Test public void testClasspathUriForFileInJarInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
 		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"

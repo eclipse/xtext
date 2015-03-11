@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -19,11 +21,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -36,8 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getAnnotation <em>Annotation</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getExplicitValues <em>Explicit Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,14 +55,14 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	protected JvmAnnotationType annotation;
 
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getExplicitValues() <em>Explicit Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValues()
+	 * @see #getExplicitValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmAnnotationValue> values;
+	protected EList<JvmAnnotationValue> explicitValues;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,55 +133,13 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmAnnotationTarget getTarget()
+	public EList<JvmAnnotationValue> getExplicitValues()
 	{
-		if (eContainerFeatureID() != TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET) return null;
-		return (JvmAnnotationTarget)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmAnnotationTarget basicGetTarget()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET) return null;
-		return (JvmAnnotationTarget)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTarget(JvmAnnotationTarget newTarget, NotificationChain msgs)
-	{
-		msgs = eBasicSetContainer((InternalEObject)newTarget, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTarget(JvmAnnotationTarget newTarget)
-	{
-		if (newTarget != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET && newTarget != null))
+		if (explicitValues == null)
 		{
-			if (EcoreUtil.isAncestor(this, newTarget))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS, JvmAnnotationTarget.class, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
+			explicitValues = new EObjectContainmentEList<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET, newTarget, newTarget));
+		return explicitValues;
 	}
 
 	/**
@@ -192,29 +149,9 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	 */
 	public EList<JvmAnnotationValue> getValues()
 	{
-		if (values == null)
-		{
-			values = new EObjectContainmentEList.Resolving<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
-		}
-		return values;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTarget((JvmAnnotationTarget)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -227,28 +164,10 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				return basicSetTarget(null, msgs);
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return ((InternalEList<?>)getExplicitValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-	{
-		switch (eContainerFeatureID())
-		{
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS, JvmAnnotationTarget.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -264,11 +183,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				if (resolve) return getAnnotation();
 				return basicGetAnnotation();
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return getValues();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return getExplicitValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,12 +203,9 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				setAnnotation((JvmAnnotationType)newValue);
 				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				setTarget((JvmAnnotationTarget)newValue);
-				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				getValues().clear();
-				getValues().addAll((Collection<? extends JvmAnnotationValue>)newValue);
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				getExplicitValues().clear();
+				getExplicitValues().addAll((Collection<? extends JvmAnnotationValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -311,11 +224,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				setAnnotation((JvmAnnotationType)null);
 				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				setTarget((JvmAnnotationTarget)null);
-				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				getValues().clear();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				getExplicitValues().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -333,10 +243,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 		{
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				return annotation != null;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				return basicGetTarget() != null;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return values != null && !values.isEmpty();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return explicitValues != null && !explicitValues.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

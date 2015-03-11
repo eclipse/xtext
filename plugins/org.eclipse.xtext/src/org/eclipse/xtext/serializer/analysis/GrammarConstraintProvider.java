@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -39,7 +40,7 @@ import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilte
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.formallang.GrammarFormatter;
+import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -71,16 +72,19 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			constraints.add(constraint);
 		}
 
+		@Override
 		public List<IConstraint> getConstraints() {
 			return constraints;
 		}
 
+		@Override
 		public String getName() {
 			return name;
 		}
 
 		protected void initConstraints() {
 			Collections.sort(constraints, new Comparator<IConstraint>() {
+				@Override
 				public int compare(IConstraint o1, IConstraint o2) {
 					return o1.getName().compareTo(o2.getName());
 				}
@@ -92,6 +96,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		@Override
 		public String toString() {
 			Iterable<String> constraintNames = Iterables.transform(constraints, new Function<IConstraint, String>() {
+				@Override
 				public String apply(IConstraint from) {
 					return from.getName();
 				}
@@ -125,10 +130,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.action = action;
 		}
 
+		@Override
 		public EClass getCommonType() {
 			return (EClass) action.getType().getClassifier();
 		}
 
+		@Override
 		public EObject getContext() {
 			return action;
 		}
@@ -170,10 +177,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 				case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 				case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+				case ASSIGNED_CROSSREF_KEYWORD:
 				case ASSIGNED_DATATYPE_RULE_CALL:
 				case ASSIGNED_ENUM_RULE_CALL:
 				case ASSIGNED_KEYWORD:
-				case ASSIGNED_BOOLEAN_KEYWORD:
 				case ASSIGNED_PARSER_RULE_CALL:
 				case ASSIGNED_TERMINAL_RULE_CALL:
 					EClass type = ele.getContainingConstraint().getType();
@@ -198,6 +205,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			}
 		}
 
+		@Override
 		public int compareTo(IConstraint o) {
 			return getName().compareTo(o.getName());
 		}
@@ -207,13 +215,22 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (!(obj instanceof Constraint))
 				return false;
 			Constraint c = (Constraint) obj;
-			return type == c.type && ((body == null && c.body == null) || body.equals(c.body));
+			if (type != null && c.type != null) {
+				if (!type.getName().equals(c.type.getName()))
+					return false;
+				if (!type.getEPackage().getNsURI().equals(c.type.getEPackage().getNsURI()))
+					return false;
+			} else if (type != null || c.type != null)
+				return false;
+			return (body == null && c.body == null) || (body != null && body.equals(c.body));
 		}
 
+		@Override
 		public IConstraintElement[] getAssignments() {
 			return assignments;
 		}
 
+		@Override
 		public IConstraintElement getBody() {
 			return body;
 		}
@@ -222,16 +239,37 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return Tuples.create(body.getContext(), type);
 		}
 
+		@Override
 		public IConstraintElement[] getElements() {
 			return elements;
 		}
 
+		@Override
 		public IFeatureInfo[] getFeatures() {
 			return features;
 		}
 
 		protected abstract EObject getMostSpecificContext();
 
+		protected Collection<EObject> getAllContext() {
+			Set<EObject> result = Sets.newLinkedHashSet();
+			result.add(getMostSpecificContext());
+			collectContexts(body, result);
+			return result;
+		}
+
+		protected void collectContexts(ConstraintElement ele, Set<EObject> result) {
+			if (ele != null) {
+				EObject context = ele.getContext();
+				if (context != null)
+					result.add(context);
+				if (ele.getChildren() != null)
+					for (IConstraintElement child : ele.getChildren())
+						collectContexts((ConstraintElement) child, result);
+			}
+		}
+
+		@Override
 		public Iterable<IFeatureInfo> getMultiAssignementFeatures() {
 			List<IFeatureInfo> result = Lists.newArrayList();
 			for (IFeatureInfo info : features)
@@ -240,10 +278,17 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return result;
 		}
 
+		@Override
 		public String getName() {
+			return name + "_" + (type == null ? "null" : type.getName());
+		}
+
+		@Override
+		public String getSimpleName() {
 			return name;
 		}
 
+		@Override
 		public Iterable<IFeatureInfo> getSingleAssignementFeatures() {
 			List<IFeatureInfo> result = Lists.newArrayList();
 			for (IFeatureInfo info : features)
@@ -252,13 +297,19 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return result;
 		}
 
+		@Override
 		public EClass getType() {
 			return type;
 		}
 
 		@Override
 		public int hashCode() {
-			return (type == null ? 0 : type.hashCode()) + (body == null ? 0 : (7 * body.hashCode()));
+			int result = body == null ? 0 : body.hashCode();
+			if (type != null) {
+				result += 7 * type.getName().hashCode();
+				result += 13 * type.getEPackage().getNsURI().hashCode();
+			}
+			return result;
 		}
 
 		protected void initLists() {
@@ -314,6 +365,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected AbstractElement element;
 
+		protected URI elementURI;
+
 		protected int elementId = -1;
 
 		protected int featureAssignmentId = -1;
@@ -336,8 +389,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		protected ConstraintElement(EObject context, ConstraintElementType type, AbstractElement element) {
-			this(context, type, element, GrammarUtil.isMultipleCardinality(element), GrammarUtil
-					.isOptionalCardinality(element));
+			this(context, type, element, type != ConstraintElementType.ASSIGNED_ACTION_CALL
+					&& GrammarUtil.isMultipleCardinality(element), type != ConstraintElementType.ASSIGNED_ACTION_CALL
+					&& GrammarUtil.isOptionalCardinality(element));
 		}
 
 		protected ConstraintElement(EObject context, ConstraintElementType type, AbstractElement element, boolean many,
@@ -445,18 +499,20 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (!(obj instanceof ConstraintElement))
 				return false;
 			ConstraintElement ce = (ConstraintElement) obj;
-			if (element == ce.element) {
-				if (children == null && ce.children == null)
-					return true;
-				else if (getType() == ConstraintElementType.ALTERNATIVE && children.size() == ce.children.size()) {
+			switch (type) {
+				case ALTERNATIVE: {
+					if (children == null || ce.children == null || children.size() != ce.children.size())
+						return false;
 					for (IConstraintElement child : children)
 						if (!ce.containsChild(child))
 							return false;
 					return true;
-				} else
+				}
+				case GROUP:
 					return children.equals(ce.children);
+				default:
+					return getElementURI().equals(ce.getElementURI());
 			}
-			return false;
 		}
 
 		protected IConstraintElement findCommonContainer(List<IConstraintElement> elements) {
@@ -481,10 +537,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return result;
 		}
 
+		@Override
 		public Action getAction() {
 			return element instanceof Action ? (Action) element : null;
 		}
 
+		@Override
 		public int getAssignmentID() {
 			return this.assignmentId;
 		}
@@ -498,6 +556,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return null;
 		}
 
+		@Override
 		public EObject getCallContext() {
 			switch (type) {
 				case ASSIGNED_ACTION_CALL:
@@ -509,14 +568,17 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			}
 		}
 
+		@Override
 		public String getCardinality() {
 			return isMany() ? (isOptional() ? "*" : "+") : (isOptional() ? "?" : "");
 		}
 
+		@Override
 		public List<IConstraintElement> getChildren() {
 			return children;
 		}
 
+		@Override
 		public List<IConstraintElement> getContainedAssignments() {
 			if (containedAssignments == null) {
 				containedAssignments = Lists.newArrayList();
@@ -529,10 +591,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return containedAssignments;
 		}
 
+		@Override
 		public IConstraintElement getContainer() {
 			return container;
 		}
 
+		@Override
 		public IConstraint getContainingConstraint() {
 			if (containingConstraint == null)
 				containingConstraint = getContainer().getContainingConstraint();
@@ -543,12 +607,14 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return context;
 		}
 
+		@Override
 		public CrossReference getCrossReference() {
 			if (element == null)
 				return null;
 			return GrammarUtil.containingCrossReference(element);
 		}
 
+		@Override
 		public EClass getCrossReferenceType() {
 			if (element == null)
 				return null;
@@ -558,6 +624,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return (EClass) cr.getType().getClassifier();
 		}
 
+		@Override
 		public List<Pair<IConstraintElement, RelationalDependencyType>> getDependingAssignment() {
 			if (assignmentId < 0)
 				return null;
@@ -568,18 +635,22 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return dependingAssignments;
 		}
 
+		@Override
 		public int getElementID() {
 			return elementId;
 		}
 
+		@Override
 		public EStructuralFeature getFeature() {
 			return getFeatureInfo().getFeature();
 		}
 
+		@Override
 		public int getFeatureAssignmentID() {
 			return featureAssignmentId;
 		}
 
+		@Override
 		public IFeatureInfo getFeatureInfo() {
 			return featureInfo;
 		}
@@ -598,30 +669,55 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		//			this.children.add(0, child);
 		//		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return element;
 		}
 
+		@Override
 		public Keyword getKeyword() {
 			return element instanceof Keyword ? (Keyword) element : null;
 		}
 
+		@Override
 		public RuleCall getRuleCall() {
 			return element instanceof RuleCall ? (RuleCall) element : null;
 		}
 
+		@Override
 		public ConstraintElementType getType() {
 			return type;
 		}
 
-		@Override
-		public int hashCode() {
-			int result = element != null ? element.hashCode() : 0;
-			//			if (children != null)
-			//				result += 7 * children.hashCode();
-			return result;
+		protected URI getElementURI() {
+			if (elementURI == null)
+				elementURI = element == null ? URI.createURI("null") : EcoreUtil.getURI(element);
+			return elementURI;
 		}
 
+		@Override
+		public int hashCode() {
+			switch (type) {
+				case ALTERNATIVE: {
+					// has code must be independent of children's order
+					int result = 0;
+					for (IConstraintElement child : children)
+						result += child.hashCode();
+					return result;
+				}
+				case GROUP: {
+					// has code must depend of children's order
+					int result = 0;
+					for (int i = 0; i < children.size(); i++)
+						result += children.get(i).hashCode() + i;
+					return result;
+				}
+				default:
+					return getElementURI().hashCode();
+			}
+		}
+
+		@Override
 		public boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments) {
 			if (assignments.size() < 2)
 				return false;
@@ -630,30 +726,35 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					&& !isOptionalRecursive(commonContainer) && !isManyRecursive(commonContainer);
 		}
 
+		@Override
 		public boolean isMany() {
 			return many;
 		}
 
+		@Override
 		public boolean isManyRecursive(IConstraintElement root) {
-			return isMany() || (getContainer() != root && getContainer().isMany());
+			return isMany() || (container != null && container != root && container.isManyRecursive(root));
 		}
 
+		@Override
 		public boolean isOptional() {
 			return optional && !typeMatch;
 		}
 
+		@Override
 		public boolean isOptionalRecursive(IConstraintElement root) {
 			if (isOptional())
 				return true;
 			if (getContainer() != root) {
 				if (getContainer().getType() == ConstraintElementType.ALTERNATIVE)
 					return true;
-				if (getContainer().isOptional())
+				if (getContainer().isOptionalRecursive(root))
 					return true;
 			}
 			return false;
 		}
 
+		@Override
 		public boolean isRoot() {
 			return container == null;
 		}
@@ -717,10 +818,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				return "TYPEMATCH";
 			if (type == null)
 				return "error(type is null)";
-			GrammarFormatter<IConstraintElement, AbstractElement> formatter = GrammarFormatter.newFormatter(
-					IConstraintElement.ADAPTER, new GrammarElementTitleSwitch().hideCardinality()
-							.showActionsAsRuleCalls().showAssignments());
-			return formatter.format(this, true);
+			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().hideCardinality().showActionsAsRuleCalls()
+					.showAssignments();
+			ProductionFormatter<IConstraintElement, AbstractElement> formatter = new ProductionFormatter<IConstraintElement, AbstractElement>();
+			formatter.setTokenToString(t2s);
+			return formatter.format(new ConstraintElementProduction(getContainingConstraint()), this, true);
 		}
 
 		protected void typeMatch() {
@@ -753,14 +855,17 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return assignments.length;
 		}
 
+		@Override
 		public IConstraintElement[] getAssignments() {
 			return assignments;
 		}
 
+		@Override
 		public IConstraint getContainingConstraint() {
 			return constraint;
 		}
 
+		@Override
 		public List<Pair<IFeatureInfo, RelationalDependencyType>> getDependingFeatures() {
 			if (dependingFeatures == null) {
 				dependingFeatures = Lists.newArrayList();
@@ -770,10 +875,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return dependingFeatures;
 		}
 
+		@Override
 		public EStructuralFeature getFeature() {
 			return feature;
 		}
 
+		@Override
 		public int getLowerBound() {
 			int result = 0;
 			for (IConstraintElement ass : getAssignments())
@@ -795,6 +902,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return r;
 		}
 
+		@Override
 		public int getUpperBound() {
 			for (IConstraintElement ass : getAssignments())
 				if (ass.isManyRecursive(null))
@@ -802,17 +910,27 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return getAssignmentCount(); // TODO: consider assignments excluding each other
 		}
 
+		@Override
 		public boolean isContentValidationNeeded() {
 			if (contentValidationNeeded != null)
 				return contentValidationNeeded;
-			if (assignments.length < 2)
-				return contentValidationNeeded = false;
-			IConstraintElement first = assignments[0];
-			for (int i = 1; i < assignments.length; i++)
-				if (first.getCrossReferenceType() != assignments[i].getCrossReferenceType()
-						|| !EcoreUtil.equals(first.getGrammarElement(), assignments[i].getGrammarElement()))
-					return contentValidationNeeded = true;
-			return contentValidationNeeded = false;
+			contentValidationNeeded = false;
+			if (assignments.length >= 2) {
+				IConstraintElement first = assignments[0];
+				if (first.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL)
+					contentValidationNeeded = true;
+				else
+					for (int i = 1; i < assignments.length; i++) {
+						IConstraintElement a = assignments[i];
+						if (a.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL
+								|| first.getCrossReferenceType() != a.getCrossReferenceType()
+								|| !EcoreUtil.equals(first.getGrammarElement(), a.getGrammarElement())) {
+							contentValidationNeeded = true;
+							break;
+						}
+					}
+			}
+			return contentValidationNeeded;
 		}
 
 		@Override
@@ -833,6 +951,16 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return b.toString();
 		}
 
+		@Override
+		public List<EObject> getCalledContexts() {
+			List<EObject> result = Lists.newArrayList();
+			for (IConstraintElement ass : getAssignments()) {
+				EObject ctx = ass.getCallContext();
+				if (ctx != null)
+					result.add(ctx);
+			}
+			return result;
+		}
 	}
 
 	protected static class ParserRuleConstraintContext extends AbstractConstraintContext {
@@ -844,10 +972,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.rule = rule;
 		}
 
+		@Override
 		public EClass getCommonType() {
 			return (EClass) rule.getType().getClassifier();
 		}
 
+		@Override
 		public EObject getContext() {
 			return rule;
 		}
@@ -1045,7 +1175,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		List<ConstraintElement> followers = Lists.newArrayList();
 		boolean allInvalid = true, containsOne = false, typematch = false;
 		for (ActionFilterTransition t : state.getAllOutgoing())
-			if (!t.isRuleCall() && t.getTarget() != state) {
+			if (!t.isRuleCall() /* && t.getTarget() != state */) {
 				containsOne = true;
 				ConstraintElement f = createConstraintElement(context, t.getTarget(), requiredType, true, visited);
 				if (f == TYPEMATCH) {
@@ -1113,7 +1243,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 	}
 
-	protected void filterDuplicateConstraintsAndSetNames(List<IConstraintContext> contexts) {
+	protected void filterDuplicateConstraintsAndSetNames(Grammar grammar, List<IConstraintContext> contexts) {
 		Map<IConstraint, List<IConstraint>> equalConstraints = Maps.newHashMap();
 		for (IConstraintContext context : contexts)
 			for (IConstraint constraint : context.getConstraints()) {
@@ -1124,6 +1254,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			}
 		Map<IConstraint, IConstraint> allConstraints = Maps.newIdentityHashMap();
 		for (Collection<IConstraint> equal : equalConstraints.values()) {
+			//			Collection<IConstraint> equal = filterConstraintsFromSubGrammars(grammar, allEqual);
 			IConstraint representative = findRepresentativeConstraint(equal);
 			((Constraint) representative).setName(findBestConstraintName(equal));
 			for (IConstraint constraint : equal)
@@ -1153,27 +1284,96 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return result;
 	}
 
-	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
-		// strategy 1: if there is a parser rule context, use it for a name
-		for (IConstraint c : equalConstraints)
-			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule) {
-				String type = c.getType() != null ? c.getType().getName() : "null";
-				return context2Name.getContextName((ParserRule) ((Constraint) c).getMostSpecificContext()) + "_" + type;
-			}
-
-		// strategy 2: use the names of all actions
-		List<String> actions = Lists.newArrayList();
-		for (IConstraint c : equalConstraints)
-			actions.add(context2Name.getUniqueActionName((Action) ((ConstraintElement) c.getBody()).getContext()));
-		Set<ParserRule> visited = Sets.newHashSet();
-		List<String> rules = Lists.newArrayList();
-		for (IConstraint c : equalConstraints) {
-			ParserRule pr = GrammarUtil.containingParserRule(((ConstraintElement) c.getBody()).getContext());
-			if (visited.add(pr))
-				rules.add(pr.getName());
+	protected Map<Grammar, Integer> getInheritanceDistance(Grammar grammar) {
+		Map<Grammar, Integer> result = Maps.newHashMap();
+		Grammar current = grammar;
+		int distance = 0;
+		while (current != null) {
+			result.put(current, distance);
+			current = current.getUsedGrammars().isEmpty() ? null : current.getUsedGrammars().get(0);
+			distance++;
 		}
-		return Joiner.on("_").join(rules) + "_" + Joiner.on('_').join(actions) + "_"
-				+ equalConstraints.iterator().next().getType().getName();
+		return result;
+	}
+
+	//	protected Collection<IConstraint> filterConstraintsFromSubGrammars(Grammar grammar,
+	//			Collection<IConstraint> constraints) {
+	//		if (constraints.size() <= 1)
+	//			return constraints;
+	//		Map<Grammar, Integer> inheritanceDistance = getInheritanceDistance(grammar);
+	//		int maxDistance = 0;
+	//		for (IConstraint c : constraints)
+	//			maxDistance = Math.max(maxDistance, inheritanceDistance.get(c.getDeclaringGrammar()));
+	//		Collection<IConstraint> filteredConstraints = Lists.newArrayList();
+	//		for (IConstraint c : constraints) {
+	//			if (inheritanceDistance.get(c.getDeclaringGrammar()) == maxDistance)
+	//				filteredConstraints.add(c);
+	//		}
+	//		return filteredConstraints;
+	//	}
+
+	protected void collectElements(IConstraintElement ele, List<AbstractElement> result) {
+		if (ele.getGrammarElement() != null)
+			result.add(ele.getGrammarElement());
+		if (ele.getChildren() != null)
+			for (IConstraintElement e : ele.getChildren())
+				collectElements(e, result);
+	}
+
+	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
+		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
+		Set<Action> relevantActions = Sets.newLinkedHashSet();
+		Set<ParserRule> contextRules = Sets.newLinkedHashSet();
+		for (IConstraint c : equalConstraints)
+			for (EObject ctx : ((Constraint) c).getAllContext())
+				if (ctx instanceof ParserRule)
+					contextRules.add((ParserRule) ctx);
+		List<AbstractElement> ele = Lists.newArrayList();
+		IConstraint first = equalConstraints.iterator().next();
+		if (first.getBody() != null)
+			collectElements(first.getBody(), ele);
+		for (AbstractElement e : ele)
+			relevantRules.add(GrammarUtil.containingParserRule(e));
+		for (IConstraint c : equalConstraints)
+			for (EObject ctx : ((Constraint) c).getAllContext())
+				if (ctx instanceof Action) {
+					Action action = (Action) ctx;
+					ParserRule rule = GrammarUtil.containingParserRule(action);
+					if (!contextRules.contains(rule)) {
+						relevantActions.add(action);
+						relevantRules.add(rule);
+					}
+				}
+		if (relevantRules.isEmpty()) {
+			EClass type = first.getType();
+			if (type != null) {
+				for (ParserRule context : contextRules)
+					for (Action a : GrammarUtil.containedActions(context))
+						if (a.getType().getClassifier() == type) {
+							relevantRules.add(context);
+						}
+				if (relevantRules.isEmpty())
+					for (ParserRule context : contextRules)
+						if (context.getType().getClassifier() == type) {
+							relevantRules.add(context);
+						}
+			}
+			if (relevantRules.isEmpty())
+				relevantRules.addAll(contextRules);
+		}
+		List<String> actions = Lists.newArrayList();
+		List<String> rules = Lists.newArrayList();
+		for (Action a : relevantActions)
+			actions.add(context2Name.getUniqueActionName(a));
+		for (ParserRule a : relevantRules)
+			rules.add(context2Name.getContextName(a));
+		Collections.sort(rules);
+		String result = Joiner.on("_").join(rules);
+		if (!actions.isEmpty()) {
+			Collections.sort(actions);
+			result += "_" + Joiner.on('_').join(actions);
+		}
+		return result;
 	}
 
 	protected IConstraint findRepresentativeConstraint(Collection<IConstraint> equalConstraints) {
@@ -1184,7 +1384,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected ConstraintElementType getConstraintElementType(AbstractElement ele) {
-		Assignment ass;
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null)
 				return ConstraintElementType.ASSIGNED_ACTION_CALL;
@@ -1201,8 +1400,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_CROSSREF_TERMINAL_RULE_CALL;
 				if (rc.getRule() instanceof EnumRule)
 					return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
-			}
-		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
+			} else if (ele instanceof Keyword)
+				return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
+		} else if (GrammarUtil.containingAssignment(ele) != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
@@ -1216,10 +1416,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_ENUM_RULE_CALL;
 
 			} else if (ele instanceof Keyword) {
-				if (GrammarUtil.isBooleanAssignment(ass))
-					return ConstraintElementType.ASSIGNED_BOOLEAN_KEYWORD;
-				else
-					return ConstraintElementType.ASSIGNED_KEYWORD;
+				return ConstraintElementType.ASSIGNED_KEYWORD;
 			}
 		}
 		throw new RuntimeException("Unknown Grammar Element: " + EmfFormatter.objPath(ele));
@@ -1235,7 +1432,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				Constraint constraint = new ActionConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
-				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newHashSet());
+				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newLinkedHashSet());
 				if (ce == TYPEMATCH) {
 					Constraint constraint = new ActionConstraint(context, type, null, this);
 					result.addConstraint(constraint);
@@ -1250,6 +1447,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return result;
 	}
 
+	@Override
 	public List<IConstraintContext> getConstraints(Grammar context) {
 		List<IConstraintContext> result = cache.get(context);
 		if (result == null) {
@@ -1261,7 +1459,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 						if (action.getFeature() != null)
 							result.add(getConstraints(action));
 				}
-			filterDuplicateConstraintsAndSetNames(result);
+			filterDuplicateConstraintsAndSetNames(context, result);
 			cache.put(context, result);
 		}
 		return result;
@@ -1276,7 +1474,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				Constraint constraint = new RuleConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
-				ConstraintElement ce = createConstraintElement(context, type, Sets.newHashSet());
+				ConstraintElement ce = createConstraintElement(context, type, Sets.newLinkedHashSet());
 				if (ce == TYPEMATCH) {
 					Constraint constraint = new RuleConstraint(context, type, null, this);
 					result.addConstraint(constraint);

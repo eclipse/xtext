@@ -1,0 +1,215 @@
+H6.CaptionFigColumn {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 3.000000pt;
+	margin-bottom: 11.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	font-size: 9.000000pt;
+	font-weight: medium;
+	font-style: Italic;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Arial";
+}
+
+P.Note {
+	display: block;
+	text-align: left;
+	text-indent: 0pt;
+	margin-top: 19.500000pt;
+	margin-bottom: 19.500000pt;
+	margin-right: 0.000000pt;
+	margin-left: 30pt;
+	font-size: 11.000000pt;
+	font-weight: medium;
+	font-style: Italic;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Arial";
+}
+
+EM.UILabel {
+	font-weight: Bold;
+	font-style: Regular;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+
+.image {
+	text-align:center;
+}
+
+a.srcLink {
+	text-decoration: none;
+	color: #7f7f7f !important;
+}
+
+abbr {
+	border-bottom: 1px dotted;
+}
+
+EM.CodeName {
+	font-weight: Bold;
+	font-style: Regular;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier New";
+}
+
+SPAN.NoWrap {
+	white-space: nowrap;
+}
+
+/* following font face declarations need to be removed for DBCS */
+body,h1,h2,h3,h4,h5,h6,p,table,td,caption,th,ul,ol,dl,li,dd,dt {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000
+}
+
+pre {
+	font-family: Courier, monospace
+}
+
+/* end font face declarations */
+	/* following font size declarations should be OK for DBCS */
+body,h1,h2,h3,h4,h5,h6,p,table,td,caption,th,ul,ol,dl,li,dd,dt {
+	font-size: 10pt;
+}
+
+pre {
+	font-size: 10pt
+}
+
+h1 {
+	font-size: 18pt;
+	margin-top: 5;
+	margin-bottom: 1
+}
+
+h2 {
+	font-size: 14pt;
+	margin-top: 25;
+	margin-bottom: 3
+}
+
+h3 {
+	font-size: 11pt;
+	margin-top: 20;
+	margin-bottom: 3
+}
+
+h4 {
+	font-size: 10pt;
+	margin-top: 20;
+	margin-bottom: 3;
+	font-style: italic
+}
+
+p {
+	margin-top: 10px;
+	margin-bottom: 10px
+}
+
+pre {
+	margin-left: 6;
+	font-size: 9pt
+}
+
+a:hover {
+	color: #000080
+}
+
+a:visited {
+	text-decoration: underline
+}
+
+.image {
+	text-align:center;
+}
+
+a.jdoc {
+	border-bottom: .1em dotted;
+	text-decoration: none;
+	font-weight: normal;
+	color: #000000 !important;
+}
+
+a.srcLink {
+	text-decoration: none;
+	color: #7f7f7f !important;
+}
+
+abbr {
+	border-bottom: 1px dotted;
+}
+
+ul {
+	margin-top: 0;
+	margin-bottom: 10
+}
+
+li {
+	margin-top: 0;
+	margin-bottom: 0
+}
+
+li p {
+	margin-top: 0;
+	margin-bottom: 0
+}
+
+ol {
+	margin-top: 0;
+	margin-bottom: 10
+}
+
+dl {
+	margin-top: 0;
+	margin-bottom: 10
+}
+
+dt {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold
+}
+
+dd {
+	margin-top: 0;
+	margin-bottom: 0
+}
+
+strong {
+	font-weight: bold
+}
+
+em {
+	font-style: italic
+}
+
+var {
+	font-style: italic
+}
+
+div.revision {
+	border-left-style: solid;
+	border-left-width: thin;
+	border-left-color: #7B68EE;
+	padding-left: 5
+}
+
+th {
+	font-weight: bold
+}
+
+xxtd{
+	border-top:2px solid black;
+}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.index.indexTestLanguage.impl;
 
@@ -30,11 +27,11 @@ import org.eclipse.xtext.index.indexTestLanguage.Namespace;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

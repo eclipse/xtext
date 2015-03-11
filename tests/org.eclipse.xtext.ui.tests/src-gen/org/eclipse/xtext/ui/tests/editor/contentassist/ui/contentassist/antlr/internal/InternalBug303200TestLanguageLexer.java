@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug303200TestLanguageLexer extends Lexer {
-    public static final int T__7=7;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
-    public static final int RULE_WS=6;
-    public static final int T__8=8;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int T__16=16;
-    public static final int T__10=10;
-    public static final int RULE_LT=4;
-    public static final int T__9=9;
-    public static final int T__14=14;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__10=10;
+    public static final int RULE_WS=6;
+    public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int T__7=7;
+    public static final int RULE_LT=4;
 
     // delegates
     // delegators
@@ -246,10 +246,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -303,10 +303,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:9: ( ( ' ' | '\\t' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:11: ( ' ' | '\\t' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:9: ( ( ' ' | '\\t' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:11: ( ' ' | '\\t' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -360,8 +360,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3218:9: ( ( '\\r' | '\\n' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3218:11: ( '\\r' | '\\n' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3217:9: ( ( '\\r' | '\\n' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3217:11: ( '\\r' | '\\n' )
             {
             if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
                 input.consume();
@@ -491,20 +491,15 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
     static final String DFA3_eofS =
         "\26\uffff";
     static final String DFA3_minS =
-        "\1\11\1\uffff\1\165\13\uffff\1\156\1\143\1\164\1\151\1\157\1\156"+
-        "\1\101\1\uffff";
+        "\1\11\1\uffff\1\165\13\uffff\1\156\1\143\1\164\1\151\1\157\1\156\1\101\1\uffff";
     static final String DFA3_maxS =
-        "\1\175\1\uffff\1\165\13\uffff\1\156\1\143\1\164\1\151\1\157\1\156"+
-        "\1\172\1\uffff";
+        "\1\175\1\uffff\1\165\13\uffff\1\156\1\143\1\164\1\151\1\157\1\156\1\172\1\uffff";
     static final String DFA3_acceptS =
-        "\1\uffff\1\1\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-        "\1\15\7\uffff\1\2";
+        "\1\uffff\1\1\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\7\uffff\1\2";
     static final String DFA3_specialS =
         "\26\uffff}>";
     static final String[] DFA3_transitionS = {
-            "\1\14\1\15\2\uffff\1\15\22\uffff\1\14\7\uffff\1\5\1\6\2\uffff"+
-            "\1\7\1\uffff\1\12\14\uffff\1\1\5\uffff\32\13\1\3\1\uffff\1\4"+
-            "\3\uffff\5\13\1\2\24\13\1\10\1\uffff\1\11",
+            "\1\14\1\15\2\uffff\1\15\22\uffff\1\14\7\uffff\1\5\1\6\2\uffff\1\7\1\uffff\1\12\14\uffff\1\1\5\uffff\32\13\1\3\1\uffff\1\4\3\uffff\5\13\1\2\24\13\1\10\1\uffff\1\11",
             "",
             "\1\16",
             "",

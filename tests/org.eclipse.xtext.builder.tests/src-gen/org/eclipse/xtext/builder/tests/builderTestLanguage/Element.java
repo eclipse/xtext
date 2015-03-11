@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.builder.tests.builderTestLanguage;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getReferences <em>References</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getOtherRefs <em>Other Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage#getElement()
  * @model

@@ -1,13 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.annotations.xAnnotations;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -16,14 +18,20 @@ import org.eclipse.xtext.xbase.XExpression;
  * A representation of the model object '<em><b>XAnnotation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getElementValuePairs <em>Element Value Pairs</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType <em>Annotation Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation()
  * @model
@@ -56,12 +64,12 @@ public interface XAnnotation extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotation Type</em>' reference.
-	 * @see #setAnnotationType(JvmAnnotationType)
+	 * @see #setAnnotationType(JvmType)
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation_AnnotationType()
 	 * @model
 	 * @generated
 	 */
-	JvmAnnotationType getAnnotationType();
+	JvmType getAnnotationType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType <em>Annotation Type</em>}' reference.
@@ -71,7 +79,7 @@ public interface XAnnotation extends XExpression
 	 * @see #getAnnotationType()
 	 * @generated
 	 */
-	void setAnnotationType(JvmAnnotationType value);
+	void setAnnotationType(JvmType value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

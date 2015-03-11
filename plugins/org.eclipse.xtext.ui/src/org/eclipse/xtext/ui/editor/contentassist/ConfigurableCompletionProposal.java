@@ -7,10 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist;
 
+import static com.google.common.collect.Maps.*;
+
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -18,6 +24,7 @@ import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
@@ -45,8 +52,17 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
  * @author Christoph Kulla - Added support for hovers
+ * @author Holger Schill - Resolve proxies against context for hover
  */
-public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension3, ICompletionProposalExtension4, ICompletionProposalExtension5, ICompletionProposalExtension6 {
+public class ConfigurableCompletionProposal implements 
+		Comparable<ConfigurableCompletionProposal>, 
+		ICompletionProposal,
+		ICompletionProposalExtension,
+		ICompletionProposalExtension2, 
+		ICompletionProposalExtension3, 
+		ICompletionProposalExtension4, 
+		ICompletionProposalExtension5, 
+		ICompletionProposalExtension6 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
@@ -72,6 +88,28 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	private IReplacementTextApplier textApplier;
 	
 	private IEObjectHover hover;
+	
+	private Map<String,Object> additionalData;
+	
+	/**
+	 * Used to store arbitrary data as a protocol between two or more clients unknown to this class.
+	 * 
+	 * @since 2.4
+	 */
+	public void setAdditionalData(String key, Object additionalData) {
+		if (this.additionalData == null)
+			this.additionalData = newHashMap();
+		this.additionalData.put(key, additionalData);
+	}
+	
+	/**
+	 * Used to store arbitrary data as a protocol between two or more clients unknown to this class.
+	 * 
+	 * @since 2.4
+	 */
+	public Object getAdditionalData(String key) {
+		return additionalData != null ? additionalData.get(key) : null;
+	}
 	
 	public interface IReplacementTextApplier {
 		void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException;
@@ -122,7 +160,9 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/*
 	 * @see ICompletionProposal#apply(IDocument)
 	 */
+	@Override
 	public void apply(IDocument document) {
+		String original = document.get();
 		try {
 			if (getTextApplier() == null) {
 				document.replace(getReplacementOffset(), getReplacementLength(), getReplacementString());
@@ -131,14 +171,16 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			}
 			if (linkedMode)
 				setUpLinkedMode(document);
-		} catch (BadLocationException x) {
-			// ignore
+		} catch (Exception exc) {
+			log.error("Error applying completion proposal", exc);
+			document.set(original);
 		}
 	}
-
+	
 	/*
 	 * @see ICompletionProposal#getSelection(IDocument)
 	 */
+	@Override
 	public Point getSelection(IDocument document) {
 		if (!linkedMode && getSelectionLength() == 0)
 			return new Point(getReplacementOffset() + getCursorPosition(), 0);
@@ -148,6 +190,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/*
 	 * @see ICompletionProposal#getContextInformation()
 	 */
+	@Override
 	public IContextInformation getContextInformation() {
 		return contextInformation;
 	}
@@ -155,6 +198,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/*
 	 * @see ICompletionProposal#getImage()
 	 */
+	@Override
 	public Image getImage() {
 		return image;
 	}
@@ -162,6 +206,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/*
 	 * @see ICompletionProposal#getDisplayString()
 	 */
+	@Override
 	public String getDisplayString() {
 		if (displayString != null) {
 			return getStyledDisplayString().getString();
@@ -172,12 +217,14 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/*
 	 * @see ICompletionProposalExtension6#getStyledDisplayString()
 	 */
+	@Override
 	public StyledString getStyledDisplayString() {
 		return displayString;
 	}
 	/*
 	 * @see ICompletionProposal#getAdditionalProposalInfo()
 	 */
+	@Override
 	public String getAdditionalProposalInfo() {
 		if (additionalProposalInfo != null) {
 			return additionalProposalInfo.toString();
@@ -211,10 +258,13 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	private boolean linkedMode;
 	private ITextViewer viewer;
 	private char[] exitChars;
+	private char[] triggerChars;
 	private PrefixMatcher matcher;
 	private int replaceContextLength;
 	private int priority;
+	private Resource contextResource;
 	
+	@Override
 	public boolean isAutoInsertable() {
 		return autoInsertable;
 	}
@@ -274,6 +324,12 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	public void setAdditionalProposalInfo(Object additionalProposalInfo) {
 		this.additionalProposalInfo = additionalProposalInfo;
 	}
+	/**
+	 * @since 2.4
+	 */
+	public void setProposalContextResource(Resource contextResource){
+		this.contextResource = contextResource;
+	}
 
 	public int getSelectionStart() {
 		return selectionStart;
@@ -297,6 +353,14 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.exitChars = exitChars;
 	}
 	
+	/**
+	 * @since 2.2
+	 */
+	protected boolean isLinkedMode() {
+		return linkedMode;
+	}
+	
+	@Override
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		boolean replaceRight = (stateMask & SWT.CTRL) != 0;
@@ -304,6 +368,48 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			setReplacementLength(getReplaceContextLength());
 		}
 		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public void apply(IDocument document, char trigger, int offset) {
+		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
+		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public boolean isValidFor(IDocument document, int offset) {
+		return validate(document, offset, null);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public int getContextInformationPosition() {
+		if (getContextInformation() == null)
+			return -1;
+		return getReplacementOffset() + getCursorPosition();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public char[] getTriggerCharacters() {
+		return triggerChars;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setTriggerCharacters(char[] triggerChars) {
+		this.triggerChars = triggerChars;
 	}
 	
 	private Point rememberedSelection;
@@ -321,6 +427,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			viewer.setSelectedRange(rememberedSelection.x, rememberedSelection.y);
 	}
 
+	@Override
 	public void selected(ITextViewer viewer, boolean smartToggle) {
 		if (smartToggle)
 			updateSelection(viewer);
@@ -330,11 +437,13 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		}
 	}
 
+	@Override
 	public void unselected(ITextViewer viewer) {
 		restoreSelection(viewer);
 		rememberedSelection= null;
 	}
 
+	@Override
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
 		if (event != null) {
 			int oldReplaceContextLength = getReplaceContextLength();
@@ -371,10 +480,16 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.priority = priority;
 	}
 
+	/**
+	 * Returns the priority of the proposal. The bigger the returned int value, the 
+	 * higher is the precedence of the proposal. Proposals with higher priority will
+	 * be listed above proposals with lower priority.
+	 */
 	public int getPriority() {
 		return priority;
 	}
 	
+	@Override
 	public int compareTo(ConfigurableCompletionProposal other) {
 		if (priority < other.getPriority())
 			return 1;
@@ -390,7 +505,6 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * <code>getCursorPosition() + 1</code>.
 	 *
 	 * @param document the document
-	 * @param closingCharacter the exit character
 	 */
 	protected void setUpLinkedMode(IDocument document) {
 		try {
@@ -432,6 +546,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		/*
 		 * @see org.eclipse.jdt.internal.ui.text.link.LinkedPositionUI.ExitPolicy#doExit(org.eclipse.jdt.internal.ui.text.link.LinkedPositionManager, org.eclipse.swt.events.VerifyEvent, int, int)
 		 */
+		@Override
 		public ExitFlags doExit(LinkedModeModel environment, VerifyEvent event, int offset, int length) {
 			if (event.character == '\0')
 				return null;
@@ -451,6 +566,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 
 	}
 
+	@Override
 	public IInformationControlCreator getInformationControlCreator() {
 		if (hover!=null && hover instanceof ITextHoverExtension) {
 			return ((ITextHoverExtension) hover).getHoverControlCreator();
@@ -458,10 +574,12 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		return null;
 	}
 
+	@Override
 	public CharSequence getPrefixCompletionText(IDocument document, int completionOffset) {
 		return getReplacementString();
 	}
 
+	@Override
 	public int getPrefixCompletionStart(IDocument document, int completionOffset) {
 		return getReplacementOffset();
 	}
@@ -470,6 +588,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.hover = hover;
 	}
 
+	@Override
 	public Object getAdditionalProposalInfo(IProgressMonitor monitor) {
 		if (hover!=null) {
 			EObject eObject = null;
@@ -483,6 +602,12 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 				}
 			}
 			if (eObject != null) {
+				if(eObject.eIsProxy()){
+					eObject = EcoreUtil.resolve(eObject, contextResource);
+				}
+				if (monitor.isCanceled()) {
+					return null;
+				}
 				return hover.getHoverInfo(eObject, viewer, null);
 			}
 		}
@@ -491,6 +616,6 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	
 	@Override
 	public String toString() {
-		return "Proposal: " + getDisplayString().toString();
+		return "Proposal: " + getDisplayString();
 	}
 }

@@ -8,8 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import static com.google.common.collect.Lists.*;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -33,12 +37,14 @@ import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -46,10 +52,32 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  */
 public class LazyLinkingResource extends XtextResource {
+	
+	/**
+	 * @since 2.7
+	 */
+	@SuppressWarnings("serial")
+	public static final class CyclicLinkingException extends AssertionError {
 
-	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
+		private Triple<EObject, EReference, INode> triple;
+
+		private CyclicLinkingException(Object detailMessage, Triple<EObject,EReference,INode> triple) {
+			super(detailMessage);
+			this.triple = triple;
+		}
+		
+	}
+
+	private static Logger log = Logger.getLogger(LazyLinkingResource.class);
+	
+	/**
+	 * The cache key for a Set of uri fragments that cannot be resolved. 
+	 * @since 2.4
+	 */
+	public static final String UNRESOLVEABLE_PROXIES_KEY = "UNRESOLVEABLE_PROXIES";
 
 	@Inject
 	private ILinkingService linkingService;
@@ -59,6 +87,9 @@ public class LazyLinkingResource extends XtextResource {
 
 	@Inject
 	private ILinkingDiagnosticMessageProvider diagnosticMessageProvider;
+	
+	@Inject
+	private ILinkingDiagnosticMessageProvider.Extended linkingDiagnosticMessageProvider;
 
 	@Inject
 	private LinkingHelper linkingHelper;
@@ -79,36 +110,55 @@ public class LazyLinkingResource extends XtextResource {
 			EcoreUtil.resolveAll(this);
 	}
 
-	private LinkedHashSet<Triple<EObject, EReference, INode>> resolving = Sets.newLinkedHashSet();
+	/**
+	 * @since 2.4
+	 */
+	protected LinkedHashSet<Triple<EObject, EReference, INode>> resolving = Sets.newLinkedHashSet();
 
 	/**
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
 	 * This resource might still contain resolvable proxies after this method has been called.
 	 * 
-	 * @param a {@link CancelIndicator} can be used to stop the resolution.
+	 * @param mon a {@link CancelIndicator} can be used to stop the resolution.
 	 */
 	public void resolveLazyCrossReferences(final CancelIndicator mon) {
 		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
 		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
 		while (iterator.hasNext()) {
 			if (monitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			InternalEObject source = (InternalEObject) iterator.next();
 			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
 					.getEAllStructuralFeatures()).crossReferences();
 			if (eStructuralFeatures != null) {
 				for (EStructuralFeature crossRef : eStructuralFeatures) {
 					if (monitor.isCanceled())
-						return;
+						throw new OperationCanceledException();
 					resolveLazyCrossReference(source, crossRef);
 				}
 			}
 		}
 	}
 
+	/**
+	 * If the given {@code crossRef} may hold lazy linking proxies, they are attempted to be resolved. 
+	 * @since 2.4
+	 * @see #isPotentialLazyCrossReference(EStructuralFeature)
+	 * @see #doResolveLazyCrossReference(InternalEObject, EStructuralFeature)
+	 */
 	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
-		if (crossRef.isDerived())
-			return;
+		if (isPotentialLazyCrossReference(crossRef)) {
+			doResolveLazyCrossReference(source, crossRef);
+		}
+	}
+
+	/**
+	 * Ensures that all the lazy proxy values that are referenced by {@code crossRef} are replaced
+	 * by non-lazy proxies or resolved instances.
+	 * 
+	 * @since 2.4
+	 */
+	protected void doResolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
 			InternalEList<EObject> list = (InternalEList<EObject>) source.eGet(crossRef);
@@ -116,15 +166,17 @@ public class LazyLinkingResource extends XtextResource {
 				EObject proxy = list.basicGet(i);
 				if (proxy.eIsProxy()) {
 					URI proxyURI = ((InternalEObject) proxy).eProxyURI();
-					final String fragment = proxyURI.fragment();
-					if (getEncoder().isCrossLinkFragment(this, fragment)) {
-						EObject target = getEObject(fragment);
-						if (target != null) {
-							try {
-								source.eSetDeliver(false);
-								list.setUnique(i, target);
-							} finally {
-								source.eSetDeliver(true);
+					if (getURI().equals(proxyURI.trimFragment())) {
+						final String fragment = proxyURI.fragment();
+						if (getEncoder().isCrossLinkFragment(this, fragment)) {
+							EObject target = getEObject(fragment);
+							if (target != null) {
+								try {
+									source.eSetDeliver(false);
+									list.setUnique(i, target);
+								} finally {
+									source.eSetDeliver(true);
+								}
 							}
 						}
 					}
@@ -134,15 +186,17 @@ public class LazyLinkingResource extends XtextResource {
 			EObject proxy = (EObject) source.eGet(crossRef, false);
 			if (proxy != null && proxy.eIsProxy()) {
 				URI proxyURI = ((InternalEObject) proxy).eProxyURI();
-				final String fragment = proxyURI.fragment();
-				if (getEncoder().isCrossLinkFragment(this, fragment)) {
-					EObject target = getEObject(fragment);
-					if (target != null) {
-						try {
-							source.eSetDeliver(false);
-							source.eSet(crossRef, target);
-						} finally {
-							source.eSetDeliver(true);
+				if (getURI().equals(proxyURI.trimFragment())) {
+					final String fragment = proxyURI.fragment();
+					if (getEncoder().isCrossLinkFragment(this, fragment)) {
+						EObject target = getEObject(fragment);
+						if (target != null) {
+							try {
+								source.eSetDeliver(false);
+								source.eSet(crossRef, target);
+							} finally {
+								source.eSetDeliver(true);
+							}
 						}
 					}
 				}
@@ -150,50 +204,28 @@ public class LazyLinkingResource extends XtextResource {
 		}
 	}
 
+	/**
+	 * Return <code>true</code> if the given feature may hold a proxy that has to be resolved.
+	 * 
+	 * This is supposed to be an internal hook which allows to resolve proxies even in cases
+	 * where EMF prohibits proxies, e.g. in case of opposite references.
+	 * 
+	 * @since 2.4
+	 */
+	protected boolean isPotentialLazyCrossReference(EStructuralFeature feature) {
+		return !feature.isDerived() && !feature.isTransient() 
+				&& feature instanceof EReference && ((EReference)feature).isResolveProxies();
+	}
+
 	@Override
 	public synchronized EObject getEObject(String uriFragment) {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-				try {
-					if (!resolving.add(triple))
-						return handleCyclicResolution(triple);
-					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
-							new Provider<Set<String>>() {
-								public Set<String> get() {
-									return Sets.newHashSet();
-								}
-							});
-					if (unresolveableProxies.contains(uriFragment))
-						return null;
-					EReference reference = triple.getSecond();
-					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
-							triple.getThird());
-					if (linkedObjects.isEmpty()) {
-						unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-					if (linkedObjects.size() > 1)
-						throw new IllegalStateException("linkingService returned more than one object for fragment "
-								+ uriFragment);
-					EObject result = linkedObjects.get(0);
-					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-						log.error("An element of type " + result.getClass().getName()
-								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
-								+ "." + reference.getName());
-						unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-					// remove previously added error markers, since everything should be fine now
-					removeDiagnostic(triple);
-					return result;
-				} finally {
-					resolving.remove(triple);
-				}
+				return getEObject(uriFragment, triple);
 			}
 		} catch (RuntimeException e) {
+			operationCanceledManager.propagateAsErrorIfCancelException(e);
 			getErrors().add(new ExceptionDiagnostic(e));
 			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
@@ -203,9 +235,74 @@ public class LazyLinkingResource extends XtextResource {
 		return super.getEObject(uriFragment);
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
+		if (!resolving.add(triple))
+			return handleCyclicResolution(triple);
+		try {
+			Set<String> unresolveableProxies = getUnresolvableURIFragments();
+			if (unresolveableProxies.contains(uriFragment))
+				return null;
+			EReference reference = triple.getSecond();
+			try {
+				List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
+						triple.getFirst(), 
+						reference,
+						triple.getThird());
+	
+				if (linkedObjects.isEmpty()) {
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				}
+				if (linkedObjects.size() > 1)
+					throw new IllegalStateException("linkingService returned more than one object for fragment "
+							+ uriFragment);
+				EObject result = linkedObjects.get(0);
+				if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+					log.error("An element of type " + result.getClass().getName()
+							+ " is not assignable to the reference " + reference.getEContainingClass().getName()
+							+ "." + reference.getName());
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				}
+				// remove previously added error markers, since everything should be fine now
+				unresolveableProxies.remove(uriFragment);
+				removeDiagnostic(triple);
+				return result;
+			} catch (CyclicLinkingException e) {
+				if (e.triple.equals(triple)) {
+					log.error(e.getMessage(), e);
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				} else {
+					throw e;
+				}
+			}
+		} catch (IllegalNodeException ex) {
+			createAndAddDiagnostic(triple, ex);
+			return null;
+		} finally {
+			resolving.remove(triple);
+		}
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isUnresolveableProxyCacheable(Triple<EObject, EReference, INode> triple) {
+		return true;
+	}
+
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
-		throw new AssertionError("Cyclic resolution of lazy links : "
-				+ getReferences(triple, resolving));
+		throw new CyclicLinkingException("Cyclic resolution of lazy links : " + getReferences(triple, resolving) + " in resource '"+getURI()+"'.", triple);
 	}
 
 	protected String getReferences(Triple<EObject, EReference, INode> triple,
@@ -236,14 +333,17 @@ public class LazyLinkingResource extends XtextResource {
 			this.linkingHelper = helper;
 		}
 
+		@Override
 		public EObject getContext() {
 			return triple.getFirst();
 		}
 
+		@Override
 		public EReference getReference() {
 			return triple.getSecond();
 		}
 
+		@Override
 		public String getLinkText() {
 			return linkingHelper.getCrossRefNodeAsString(triple.getThird(), true);
 		}
@@ -261,8 +361,27 @@ public class LazyLinkingResource extends XtextResource {
 				list.add(diagnostic);
 		}
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple, IllegalNodeException ex) {
+		if (isValidationDisabled())
+			return;
+		ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticMessageContext(triple);
+		DiagnosticMessage message = linkingDiagnosticMessageProvider.getIllegalNodeMessage(context, ex);
+		if (message != null) {
+			List<Diagnostic> list = getDiagnosticList(message);
+			Diagnostic diagnostic = createDiagnostic(triple, message);
+			if (!list.contains(diagnostic))
+				list.add(diagnostic);
+		}
+	}
 
 	protected void removeDiagnostic(Triple<EObject, EReference, INode> triple) {
+		// return early if there's nothing to remove
+		if (getErrors().isEmpty() && getWarnings().isEmpty())
+			return;
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		List<Diagnostic> list = getDiagnosticList(message);
 		if (!list.isEmpty()) {
@@ -278,7 +397,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected List<Diagnostic> getDiagnosticList(DiagnosticMessage message) throws AssertionError {
-		if(message != null) {
+		if (message != null) {
 			switch (message.getSeverity()) {
 				case ERROR:
 					return getErrors();
@@ -340,4 +459,74 @@ public class LazyLinkingResource extends XtextResource {
 	public void setLinkingHelper(LinkingHelper linkingHelper) {
 		this.linkingHelper = linkingHelper;
 	}
+
+	/**
+	 * Marks the given proxy as unresolvable. Further attempts to resolve it by means of {@link #getEObject(String)}
+	 * will yield <code>null</code>.
+	 * @since 2.4
+	 */
+	public void markUnresolvable(EObject referenced) {
+		if (!referenced.eIsProxy()) {
+			throw new IllegalArgumentException("Cannot mark an instance as unresolvable if it is already resolved");
+		}
+		URI proxyURI = ((InternalEObject)referenced).eProxyURI();
+		getUnresolvableURIFragments().add(proxyURI.fragment());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Set<String> getUnresolvableURIFragments() {
+		Set<String> unresolveableProxies = getCache().get(UNRESOLVEABLE_PROXIES_KEY, this,
+				new Provider<Set<String>>() {
+					@Override
+					public Set<String> get() {
+						return Sets.newHashSet();
+					}
+				});
+		return unresolveableProxies;
+	}
+	
+	private ArrayList<Triple<EObject, EReference, INode>> proxyInformation = newArrayList();
+	
+	/**
+	 * @since 2.7
+	 */
+	public int addLazyProxyInformation(EObject obj, EReference ref, INode node) {
+		int index = proxyInformation.size();
+		proxyInformation.add(Tuples.create(obj, ref, node));
+		return index;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean hasLazyProxyInformation(int idx) {
+		return proxyInformation.get(idx) != null;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public Triple<EObject,EReference,INode> getLazyProxyInformation(int idx) {
+		if (!hasLazyProxyInformation(idx)) {
+			throw new IllegalArgumentException("No proxy information for index '"+idx+"' available.");
+		}
+		return proxyInformation.get(idx);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public Triple<EObject,EReference,INode> removeLazyProxyInformation(int idx) {
+		return proxyInformation.set(idx, null);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void clearLazyProxyInformation() {
+		proxyInformation = newArrayListWithCapacity(proxyInformation.size());
+	}
+	
 }

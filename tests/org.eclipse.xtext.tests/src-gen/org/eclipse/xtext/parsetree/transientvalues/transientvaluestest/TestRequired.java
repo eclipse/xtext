@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TestRequired#getRequired1 <em>Required1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TestRequired#getRequired2 <em>Required2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage#getTestRequired()
  * @model

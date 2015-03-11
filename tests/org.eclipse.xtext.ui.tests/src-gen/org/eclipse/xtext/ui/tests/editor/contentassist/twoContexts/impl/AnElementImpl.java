@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl;
 
@@ -22,11 +19,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPa
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl.AnElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl.AnElementImpl#getReferred <em>Referred</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

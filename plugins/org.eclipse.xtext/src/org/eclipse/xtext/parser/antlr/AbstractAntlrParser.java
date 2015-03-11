@@ -111,6 +111,7 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	
 	protected abstract AbstractInternalAntlrParser createParser(XtextTokenStream stream);
 
+	@Override
 	public IParseResult parse(ParserRule rule, Reader reader) {
 		try {
 			IParseResult parseResult = parse(rule.getName(), new ANTLRReaderStream(reader));
@@ -120,6 +121,7 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 		}
 	}
 	
+	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		try {
 			NodeModelBuilder builder = nodeModelBuilder.get();
@@ -189,6 +191,13 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 
 	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected NodeModelBuilder createNodeModelBuilder() {
+		return nodeModelBuilder.get();
 	}
 
 }

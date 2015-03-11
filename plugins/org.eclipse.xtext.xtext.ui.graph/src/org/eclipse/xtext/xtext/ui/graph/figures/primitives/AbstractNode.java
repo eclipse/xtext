@@ -60,6 +60,7 @@ public abstract class AbstractNode extends CrossPoint implements IEObjectReferer
 		label.setFont(f);
 	}
 
+	@Override
 	public void setSelected(boolean isSelected) {
 		if (isSelected != this.isSelected) {
 			if (isSelected)
@@ -79,10 +80,12 @@ public abstract class AbstractNode extends CrossPoint implements IEObjectReferer
 		return ColorConstants.buttonLightest;
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		return grammarElementURI;
 	}
 
+	@Override
 	public Region getTextRegion() {
 		return textRegion;
 	}

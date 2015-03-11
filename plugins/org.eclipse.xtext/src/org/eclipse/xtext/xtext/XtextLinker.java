@@ -33,6 +33,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
@@ -176,14 +177,27 @@ public class XtextLinker extends Linker {
 		return transformer;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		if (model instanceof Grammar) {
+		discardGeneratedPackages(model);
+		clearAllReferences(model);
+		super.beforeModelLinked(model, diagnosticsConsumer);
+		cache.getOrCreate(model.eResource()).ignoreNotifications();
+	}
+	
+	@Override
+	protected boolean isClearAllReferencesRequired(Resource resource) {
+		return false;
+	}
+
+	void discardGeneratedPackages(EObject root) {
+		if (root instanceof Grammar) {
 			// unload generated metamodels as they will be recreated during linking 
-			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) model).getMetamodelDeclarations()) {
+			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) root).getMetamodelDeclarations()) {
 				if (metamodelDeclaration instanceof GeneratedMetamodel) {
-					EPackage ePackage = ((GeneratedMetamodel) metamodelDeclaration).getEPackage();
-					if (ePackage != null) {
+					EPackage ePackage = (EPackage) metamodelDeclaration.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
+					if (ePackage != null && !ePackage.eIsProxy()) {
 						Resource resource = ePackage.eResource();
 						if (resource != null && resource.getResourceSet() != null) {
 							if (unloader != null) {
@@ -197,14 +211,12 @@ public class XtextLinker extends Linker {
 				}
 			}
 		}
-		super.beforeModelLinked(model, diagnosticsConsumer);
-		cache.getOrCreate(model.eResource()).setIgnoreNotifications(true);
 	}
 	
 	@Override
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		super.afterModelLinked(model, diagnosticsConsumer);
-		cache.getOrCreate(model.eResource()).setIgnoreNotifications(false);
+		cache.getOrCreate(model.eResource()).listenToNotifications();
 	}
 
 	@Override
@@ -264,53 +276,55 @@ public class XtextLinker extends Linker {
 					case Notification.REMOVE:
 					case Notification.SET:
 						Object oldValue = msg.getOldValue();
+						Collection<Resource> resourcesToRemove = Sets.newHashSet();
+						Collection<Resource> resourcesToUnload = Sets.newHashSet();
 						Collection<Resource> referencedResources = Sets.newHashSet(notifyingResource);
-						Collection<Resource> resourcesToRemove = new HashSet<Resource>();
 						if (oldValue instanceof Grammar) {
-							for (AbstractMetamodelDeclaration declaration : ((Grammar) oldValue)
-									.getMetamodelDeclarations()) {
-								EPackage pack = declaration.getEPackage();
-								if (pack != null && pack.eResource() != null) {
-									resourcesToRemove.add(pack.eResource());
-									if (isPackageReferenced(set, pack, ((Grammar) oldValue).getMetamodelDeclarations())) {
-										referencedResources.add(pack.eResource());
-									}
-								}
-							}
+							processMetamodelDeclarations(((Grammar) oldValue).getMetamodelDeclarations(), set, resourcesToRemove,
+									resourcesToUnload, referencedResources);
 						} else if (oldValue instanceof AbstractMetamodelDeclaration) {
-							EPackage pack = ((AbstractMetamodelDeclaration) oldValue).getEPackage();
-							if (pack != null && pack.eResource() != null) {
-								resourcesToRemove.add(pack.eResource());
-								if (isPackageReferenced(set, pack, Collections
-										.singletonList((AbstractMetamodelDeclaration) oldValue))) {
-									referencedResources.add(pack.eResource());
-								}
-							}
+							processMetamodelDeclarations(Collections
+									.singletonList((AbstractMetamodelDeclaration) oldValue), set, resourcesToRemove, resourcesToUnload, referencedResources);
 						} else if (oldValue instanceof Collection<?>) {
 							if (XtextPackage.Literals.GRAMMAR__METAMODEL_DECLARATIONS == msg.getFeature()) {
 								Collection<AbstractMetamodelDeclaration> metamodelDeclarations = (Collection<AbstractMetamodelDeclaration>) oldValue;
-								for (AbstractMetamodelDeclaration declaration : metamodelDeclarations) {
-									EPackage pack = declaration.getEPackage();
-									if (pack != null && pack.eResource() != null) {
-										resourcesToRemove.add(pack.eResource());
-										if (isPackageReferenced(set, pack, metamodelDeclarations)) {
-											referencedResources.add(pack.eResource());
-										}
-									}
-								}
+								processMetamodelDeclarations(metamodelDeclarations, set, resourcesToRemove, resourcesToUnload, referencedResources);
 							}
 						}
 						resourcesToRemove.removeAll(referencedResources);
 						if (unloader != null) {
-							for (Resource resource : resourcesToRemove) {
-								for (EObject content : resource.getContents())
-									unloader.unloadRoot(content);
+							resourcesToUnload.removeAll(referencedResources);
+							for (Resource resource : resourcesToUnload) {
+								if(resource.getResourceSet() == set) {
+									for (EObject content : resource.getContents())
+										unloader.unloadRoot(content);
+								}
 							}
 						}
 						set.getResources().removeAll(resourcesToRemove);
 						break;
 					default:
 						break;
+				}
+			}
+		}
+
+		private void processMetamodelDeclarations(Collection<AbstractMetamodelDeclaration> declarations, ResourceSet resourceSet,
+				Collection<Resource> resourcesToRemove, Collection<Resource> resourcesToUnload,
+				Collection<Resource> referencedResources) {
+			for (AbstractMetamodelDeclaration declaration : declarations) {
+				EPackage pack = (EPackage) declaration.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
+				if (pack != null && !pack.eIsProxy()) {
+					Resource packResource = pack.eResource();
+					if (packResource != null) {
+						resourcesToRemove.add(packResource);
+						if (declaration instanceof ReferencedMetamodel) {
+								resourcesToUnload.add(packResource);
+						}
+						if (isPackageReferenced(resourceSet, pack, declarations)) {
+							referencedResources.add(packResource);
+						}
+					}
 				}
 			}
 		}

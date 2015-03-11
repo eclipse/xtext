@@ -15,24 +15,22 @@ import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
 public class LanguageRegistry {
 
 	protected static class Language {
 		private Provider<TemplateBodyHighlighter> templateBodyHighlighter;
 		private ContextTypeRegistry contextTypeRegistry;
 		private ContextTypeIdHelper helper;
-		private Provider<PartialContentAssistContextFactory> partialContentAssistContextFactory;
+		private Provider<IPartialEditingContentAssistContextFactory> partialContentAssistContextFactory;
 		private String primaryFileExtension;
 	}
 	
@@ -42,7 +40,7 @@ public class LanguageRegistry {
 			Provider<TemplateBodyHighlighter> highlighter, 
 			ContextTypeRegistry registry, 
 			ContextTypeIdHelper helper,
-			Provider<PartialContentAssistContextFactory> partialContentAssistContextFactory,
+			Provider<IPartialEditingContentAssistContextFactory> partialContentAssistContextFactory,
 			String primaryFileExtension) {
 		Language language = new Language();
 		language.contextTypeRegistry = registry;
@@ -60,7 +58,7 @@ public class LanguageRegistry {
 		return language.templateBodyHighlighter.get();
 	}
 	
-	public PartialContentAssistContextFactory getPartialContentAssistContextFactory(Grammar grammar) {
+	public IPartialEditingContentAssistContextFactory getPartialContentAssistContextFactory(Grammar grammar) {
 		Language language = registeredLanguages.get(grammar.getName());
 		if (language == null)
 			return null;

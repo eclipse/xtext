@@ -56,7 +56,7 @@ public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
 		EObject eObject = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 		if (eObject instanceof Entity) {
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, DomainmodelPackage.Literals.ENTITY__NAME);
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
 			if (!nodes.isEmpty()) {
 				INode node = nodes.get(0);
 				if (node.getOffset() <= offset && node.getOffset() + node.getLength() > offset) {

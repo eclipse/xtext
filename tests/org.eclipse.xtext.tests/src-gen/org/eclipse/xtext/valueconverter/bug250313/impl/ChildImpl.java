@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.valueconverter.bug250313.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.valueconverter.bug250313.Child;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ChildImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

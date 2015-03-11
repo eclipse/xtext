@@ -1,9 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmType;
 
@@ -12,12 +16,19 @@ import org.eclipse.xtext.common.types.JvmType;
  * A representation of the model object '<em><b>XType Literal</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XTypeLiteral#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XTypeLiteral#getArrayDimensions <em>Array Dimensions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXTypeLiteral()
  * @model
@@ -50,5 +61,21 @@ public interface XTypeLiteral extends XExpression
 	 * @generated
 	 */
 	void setType(JvmType value);
+
+	/**
+	 * Returns the value of the '<em><b>Array Dimensions</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Array Dimensions</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Array Dimensions</em>' attribute list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXTypeLiteral_ArrayDimensions()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getArrayDimensions();
 
 } // XTypeLiteral

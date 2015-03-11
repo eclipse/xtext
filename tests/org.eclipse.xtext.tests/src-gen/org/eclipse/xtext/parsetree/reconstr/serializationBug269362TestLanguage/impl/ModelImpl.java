@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.S
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl.ModelImpl#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl.ModelImpl#getBar <em>Bar</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

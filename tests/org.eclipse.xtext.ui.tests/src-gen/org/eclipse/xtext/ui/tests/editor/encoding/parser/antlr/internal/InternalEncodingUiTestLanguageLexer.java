@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEncodingUiTestLanguageLexer extends Lexer {
-    public static final int RULE_ANY_OTHER=6;
     public static final int RULE_WS=5;
-    public static final int RULE_LEXEME=4;
     public static final int EOF=-1;
+    public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_LEXEME=4;
 
     // delegates
     // delegators

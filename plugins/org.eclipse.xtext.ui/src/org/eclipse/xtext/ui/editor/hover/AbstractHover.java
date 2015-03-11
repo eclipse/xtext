@@ -32,6 +32,7 @@ public abstract class AbstractHover implements ITextHover, ITextHoverExtension, 
 
 	protected ISourceViewer sourceViewer;
 
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		this.sourceViewer = sourceViewer;		
 	}
@@ -44,6 +45,7 @@ public abstract class AbstractHover implements ITextHover, ITextHoverExtension, 
 	/**
 	 *@deprecated Use {@link #getHoverInfo2(ITextViewer, IRegion)} instead
 	 */
+	@Override
 	@Deprecated
 	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
 		Object o = getHoverInfo2(textViewer, hoverRegion);
@@ -57,6 +59,7 @@ public abstract class AbstractHover implements ITextHover, ITextHoverExtension, 
 	}
 
 
+	@Override
 	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
 		final Point selection = textViewer.getSelectedRange();
 		if (selection.x <= offset && offset < selection.x + selection.y)
@@ -68,8 +71,10 @@ public abstract class AbstractHover implements ITextHover, ITextHoverExtension, 
 	 * @see ITextHoverExtension#getHoverControlCreator()
 	 * @since 3.0
 	 */
+	@Override
 	public IInformationControlCreator getHoverControlCreator() {
 		return new IInformationControlCreator() {
+			@Override
 			public IInformationControl createInformationControl(Shell parent) {
 				return new DefaultInformationControl(parent, EditorsUI.getTooltipAffordanceString());
 			}

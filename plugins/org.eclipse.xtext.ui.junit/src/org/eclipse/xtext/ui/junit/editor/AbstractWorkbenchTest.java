@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.junit.editor;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.swt.widgets.Display;
@@ -21,7 +20,10 @@ import org.eclipse.ui.PlatformUI;
  * Abstract base class for test classes that need access to the workbench.
  * 
  * @author Peter Friese - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractWorkbenchTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractWorkbenchTest extends TestCase {
 
 	public AbstractWorkbenchTest() {
@@ -34,17 +36,10 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		closeWelcomePage();
-		closeEditors();
-		cleanWorkspace();
-		waitForAutoBuild();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception {
-		closeEditors();
-		cleanWorkspace();
-		waitForAutoBuild();
 		super.tearDown();
 	}
 	

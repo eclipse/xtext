@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 
@@ -21,12 +18,12 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#isResetting <em>Resetting</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#getCode <em>Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

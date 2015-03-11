@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.folding.impl;
 
@@ -33,7 +30,7 @@ public class FoldingFactoryImpl extends EFactoryImpl implements FoldingFactory
   {
     try
     {
-      FoldingFactory theFoldingFactory = (FoldingFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/Xtext/Tests/FoldingTestLanguage"); 
+      FoldingFactory theFoldingFactory = (FoldingFactory)EPackage.Registry.INSTANCE.getEFactory(FoldingPackage.eNS_URI);
       if (theFoldingFactory != null)
       {
         return theFoldingFactory;

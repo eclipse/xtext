@@ -1,0 +1,3 @@
+dependencies {
+	compile project(':org.eclipse.xtext.idea.example.entities')
+}

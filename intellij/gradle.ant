@@ -1,0 +1,17 @@
+<project default="launch-gradle">
+	<property name="task" value="tasks" />
+	<!-- ================================= 
+          target: launch-gradle              
+         ================================= -->
+	<target name="launch-gradle" description="launches gradle executable">
+		<exec executable="./gradlew" osfamily="unix">
+			<arg line="${task}" />
+		</exec>
+		<exec executable="cmd" osfamily="windows">
+            <arg value="/c"/>
+            <arg value="gradlew.bat"/>
+            <arg value="${task}"/>
+		</exec>
+	</target>
+
+</project>

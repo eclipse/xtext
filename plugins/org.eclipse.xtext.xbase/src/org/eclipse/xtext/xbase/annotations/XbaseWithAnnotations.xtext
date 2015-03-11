@@ -7,48 +7,37 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations with org.eclipse.xtext.xbase.Xbase
 
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
-import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
-import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/xbase/Xtype" as xtype
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/Xtext/Xbase/XAnnotations"
 
 XAnnotation :
 	{XAnnotation}
 	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('
 		(
 			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* 
-		|	value=XAnnotationElementValue
+		|	value=XAnnotationElementValueOrCommaList
 		)?
 	')')?
 ;
 
 XAnnotationElementValuePair :
-	element=[types::JvmOperation|ValidID] '=' value=XAnnotationElementValue	
+	=>(element=[types::JvmOperation|ValidID] '=') value=XAnnotationElementValue	
 ;
 
-XAnnotationElementValueStringConcatenation returns xbase::XExpression :
-	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand = current} operator='+' rightOperand=XAnnotationElementValue)*
+XAnnotationElementValueOrCommaList returns xbase::XExpression:
+	  =>({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression )*)? ']'
+	| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression )+)?
 ;
 
 XAnnotationElementValue returns xbase::XExpression :
+	  =>({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression )*)? ']'
+	| XAnnotationOrExpression
+;
+
+XAnnotationOrExpression returns xbase::XExpression:
 	XAnnotation |
-	XAnnotationValueArray |
-	XStringLiteral |
-	XBooleanLiteral |
-	XIntLiteral |
-	XTypeLiteral |
-	XAnnotationValueFieldReference |
-	'(' XAnnotationElementValueStringConcatenation ')'
-;
-
-XAnnotationValueFieldReference returns xbase::XExpression :
-	{xbase::XFeatureCall} 
-	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
-	feature=[types::JvmIdentifiableElement|IdOrSuper] 
-;
-
-XAnnotationValueArray returns xbase::XExpression :
-	{XAnnotationValueArray} 
-	'{' values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)* '}'
+	XExpression
 ;
 

@@ -11,7 +11,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.IgnoreCaseIDValueConverter;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,35 +22,35 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 	private IgnoreCaseIDValueConverter idConverter;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		idConverter = get(IgnoreCaseIDValueConverter.class);
 		idConverter.setRule(GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "ID"));
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		String s = "abc";
 		String value = idConverter.toValue(s, null);
 		assertEquals("abc", value);
 		assertEquals(s, idConverter.toString(value));
 	}
 	
-	public void testEscaped_01() throws Exception {
+	@Test public void testEscaped_01() throws Exception {
 		String s = "grammar";
 		String value = idConverter.toString(s);
 		assertEquals("^grammar", value);
 		assertEquals(s, idConverter.toValue(value, null));
 	}
 	
-	public void testEscaped_02() throws Exception {
+	@Test public void testEscaped_02() throws Exception {
 		String s = "GRAMMAR";
 		String value = idConverter.toString(s);
 		assertEquals("^GRAMMAR", value);
 		assertEquals(s, idConverter.toValue(value, null));
 	}
 
-	public void testNull() throws Exception {
+	@Test public void testNull() throws Exception {
 		try {
 			idConverter.toString(null);
 			fail("Null value not detected.");
@@ -59,7 +60,7 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testEmpty() throws Exception {
+	@Test public void testEmpty() throws Exception {
 		try {
 			idConverter.toString("");
 			fail("Empty value not detected.");
@@ -69,7 +70,7 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testInvalidChar1() throws Exception {
+	@Test public void testInvalidChar1() throws Exception {
 		try {
 			idConverter.toString("^foo");
 			fail("invalid char not detected..");
@@ -79,7 +80,7 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testInvalidChar2() throws Exception {
+	@Test public void testInvalidChar2() throws Exception {
 		try {
 			idConverter.toString("foo%bar[]");
 			fail("Empty value not detected.");
@@ -89,7 +90,7 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testInvalidChar3() throws Exception {
+	@Test public void testInvalidChar3() throws Exception {
 		try {
 			idConverter.toString("0foo");
 			fail("Empty value not detected.");

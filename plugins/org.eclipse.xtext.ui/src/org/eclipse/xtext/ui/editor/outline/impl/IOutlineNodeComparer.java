@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import java.util.List;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 import com.google.inject.ImplementedBy;
@@ -24,12 +25,15 @@ public interface IOutlineNodeComparer {
 	boolean equals(IOutlineNode node1, IOutlineNode node2);
 
 	class Default implements IOutlineNodeComparer {
+		@Override
 		public boolean equals(IOutlineNode node1, IOutlineNode node2) {
 			if (node1 == null || node2 == null)
 				return node1 == null && node2 == null;
 			return node1.getClass() == node2.getClass() && equals(node1.getParent(), node2.getParent())
 					&& equalsNullSafe(node1.getText().toString(), node2.getText().toString())
-					&& equalsNullSafe(node1.getImage(), node2.getImage()) && isEquivalentIndex(node1, node2);
+					&& equalsNullSafe(node1.getImage(), node2.getImage()) 
+					&& equalsNullSafe(getImageDescriptor(node1), getImageDescriptor(node2)) 
+					&& isEquivalentIndex(node1, node2);
 		}
 
 		protected boolean isEquivalentIndex(IOutlineNode node1, IOutlineNode node2) {
@@ -49,6 +53,15 @@ public interface IOutlineNodeComparer {
 					return true;
 			}
 			return false;
+		}
+		
+		/**
+		 * @since 2.4
+		 */
+		protected ImageDescriptor getImageDescriptor(IOutlineNode node) {
+			return (node instanceof IOutlineNode.Extension) 
+					? ((IOutlineNode.Extension)node).getImageDescriptor()
+					: null;
 		}
 
 		protected boolean equalsNullSafe(Object o1, Object o2) {

@@ -61,6 +61,7 @@ public class XtextTemplateContextType extends TemplateContextType implements Com
 		return getId().hashCode();
 	}
 
+	@Override
 	public int compareTo(TemplateContextType templateContextType) {
 		int result = getName().compareTo(templateContextType.getName());
 		if (result == 0) {

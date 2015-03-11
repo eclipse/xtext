@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
   {
     try
     {
-      Bug291022TestLanguageFactory theBug291022TestLanguageFactory = (Bug291022TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/bug291022TestLanguage"); 
+      Bug291022TestLanguageFactory theBug291022TestLanguageFactory = (Bug291022TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(Bug291022TestLanguagePackage.eNS_URI);
       if (theBug291022TestLanguageFactory != null)
       {
         return theBug291022TestLanguageFactory;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.fowlerdsl.statemachine;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.State#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.State#getActions <em>Actions</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.State#getTransitions <em>Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage#getState()
  * @model

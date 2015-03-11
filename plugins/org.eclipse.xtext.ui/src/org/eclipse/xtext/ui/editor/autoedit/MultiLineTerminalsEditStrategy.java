@@ -33,43 +33,57 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		private IIndentationInformation indentationInformation;
 		
 		public MultiLineTerminalsEditStrategy newInstance(String leftTerminal, String indentationString, String rightTerminal) {
-			indentationString = indentationString == null ? indentationInformation.getIndentString()
-					: indentationString;
-			MultiLineTerminalsEditStrategy strategy = new MultiLineTerminalsEditStrategy(leftTerminal, indentationString, rightTerminal);
-			injector.injectMembers(strategy);
+			return newInstance(leftTerminal, indentationString, rightTerminal, true);
+		}
+		
+		/**	
+		 * @since 2.4	
+		 * */	
+		public MultiLineTerminalsEditStrategy newInstance(String leftTerminal, String indentationString, String rightTerminal, boolean nested) {	
+			indentationString = indentationString == null ? indentationInformation.getIndentString() : indentationString;
+			MultiLineTerminalsEditStrategy strategy = new MultiLineTerminalsEditStrategy(leftTerminal, indentationString, rightTerminal, nested);
+			injector.injectMembers(strategy);	
 			return strategy;
 		}
 	}
 
 	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(MultiLineTerminalsEditStrategy.class);
+	
+	/**	
+	 * <p>Whether the pair of terminals can be nested or not.</p>
+	 * */
+	private final boolean nested;
 
 	private String indentationString;
-
+	
 	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal) {
+		this(leftTerminal, indentationString, rightTerminal, true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal, boolean nested) {
 		super(leftTerminal,rightTerminal);
+		this.nested = nested;
 		this.indentationString = indentationString;
 	}
 
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
-		if (command.length != 0)
-			return;
-		String originalText = command.text;
-		String[] lineDelimiters = document.getLegalLineDelimiters();
-		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
-		if (delimiterIndex != -1) {
+		if (isLineDelimiter(document, command)) {
 			IRegion startTerminal = findStartTerminal(document, command.offset);
 			if (startTerminal == null)
 				return;
 			IRegion stopTerminal = findStopTerminal(document, command.offset);
 			// check whether this is our stop terminal
-			if (stopTerminal != null) {
+			if (stopTerminal != null && nested) {
 				IRegion previousStart = startTerminal;
 				IRegion previousStop = stopTerminal;
 				while(stopTerminal != null && previousStart != null && previousStop != null) {
-					previousStart = findStartTerminal(document, previousStart.getOffset() - 1);
+					previousStart = findStartTerminal(document, previousStart.getOffset());
 					if (previousStart != null) {
 						previousStop = findStopTerminal(document, previousStop.getOffset() + 1);
 						if (previousStop == null) {
@@ -79,7 +93,9 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				}
 			}
 			if (util.isSameLine(document, startTerminal.getOffset(), command.offset)) {
-				if (stopTerminal != null && stopTerminal.getLength() < getRightTerminal().length())
+				if (stopTerminal != null 
+						&& stopTerminal.getLength() < getRightTerminal().length() 
+						&& util.isSameLine(document, stopTerminal.getOffset(), command.offset))
 					stopTerminal = null;
 				CommandInfo newC = handleCursorInFirstLine(document, command, startTerminal, stopTerminal);
 				if (newC != null)
@@ -104,6 +120,16 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		}
 	}
 
+	private boolean isLineDelimiter(IDocument document, DocumentCommand command) {
+		if (command.length != 0) {
+			return false;
+		}
+		String originalText = command.text;
+		String[] lineDelimiters = document.getLegalLineDelimiters();
+		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
+		return delimiterIndex != -1 && originalText.trim().length() == 0;
+	}
+
 	/**
 	 * Expects the cursor to be in the same line as the start terminal
 	 * puts any text between start terminal and cursor into a separate newline before the cursor.
@@ -115,8 +141,6 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			IRegion stopTerminal) throws BadLocationException {
 		CommandInfo newC = new CommandInfo();
 		newC.isChange = true;
-		int afterStartTerminal = startTerminal.getOffset() + startTerminal.getLength();
-		String string = document.get(afterStartTerminal, command.offset - afterStartTerminal);
 		newC.offset = command.offset;
 		newC.text += command.text + indentationString;
 		newC.cursorOffset = command.offset + newC.text.length();
@@ -124,7 +148,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			newC.text += command.text + getRightTerminal();
 		}
 		if (stopTerminal != null && stopTerminal.getOffset() >= command.offset && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
-			string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
+			String string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
 			if (string.trim().length() > 0)
 				newC.text += string.trim();
 			newC.text += command.text;

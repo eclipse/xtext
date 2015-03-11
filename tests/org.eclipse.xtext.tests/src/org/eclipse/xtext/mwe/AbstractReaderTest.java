@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
@@ -25,16 +24,15 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-
-import com.google.common.base.Predicate;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractReaderTest extends AbstractXtextTests {
 
-	public void testLoadMatchNone() throws Exception {
+	@Test public void testLoadMatchNone() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -45,6 +43,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		reader.addLoad(entry);
 		
 		reader.setUriFilter(new UriFilter() {
+			@Override
 			public boolean matches(URI uri) {
 				return false;
 			}
@@ -56,7 +55,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertTrue(slotContent.isEmpty());
 	}
 	
-	public void testLoadMatchAll() throws Exception {
+	@Test public void testLoadMatchAll() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -67,6 +66,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		reader.addLoad(entry);
 		
 		reader.setUriFilter(new UriFilter() {
+			@Override
 			public boolean matches(URI uri) {
 				return true;
 			}
@@ -86,7 +86,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testLoadByType() throws Exception {
+	@Test public void testLoadByType() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -102,7 +102,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testLoadBySuperType() throws Exception {
+	@Test public void testLoadBySuperType() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -117,7 +117,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertEquals(3, entities.size());
 	}
 	
-	public void testLoadByType_FirstOnly() throws Exception {
+	@Test public void testLoadByType_FirstOnly() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -133,7 +133,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testLoadByType_withNsURI() throws Exception {
+	@Test public void testLoadByType_withNsURI() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -149,7 +149,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertEquals(2, entities.size());
 	}
 
-	public void testLoadByType_withUnkownNsURI() throws Exception {
+	@Test public void testLoadByType_withUnkownNsURI() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -170,15 +170,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 
 	protected abstract SlotEntry createSlotEntry();
 	
-	protected Predicate<EObject> getPredicate(final String uriContains) {
-		return new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return input.eResource().getURI().toString().contains("%20"+uriContains);
-			}
-		};
-	}
-
-	public void testParseClassPath() throws Exception {
+	@Test public void testParseClassPath() throws Exception {
 		Reader reader = getReader();
 		assertEquals(0, reader.getPathes().size());
 		reader.setUseJavaClassPath(true);
@@ -210,18 +202,19 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		return fileURI2.resolve(fileURI).toFileString();
 	}
 	
-	public Object get(Object obj, String path) {
+	public Object get(final Object obj, String path) {
 		String[] split = path.split("\\.");
+		Object retVal = obj;
 		for (String string : split) {
 			try {
-				Field field = findField(obj.getClass(),string);
+				Field field = findField(retVal.getClass(),string);
 				field.setAccessible(true);
-				obj = field.get(obj);
+				retVal = field.get(retVal);
 			} catch (Exception e) {
 				return null;
 			}
 		}
-		return obj;
+		return retVal;
 	}
 
 	protected Field findField(Class<? extends Object> class1, String string) {

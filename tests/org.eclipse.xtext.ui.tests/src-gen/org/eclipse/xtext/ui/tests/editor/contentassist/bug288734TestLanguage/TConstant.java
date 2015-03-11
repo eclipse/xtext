@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage;
 
@@ -16,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TConstant#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TConstant#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.Bug288734TestLanguagePackage#getTConstant()
  * @model

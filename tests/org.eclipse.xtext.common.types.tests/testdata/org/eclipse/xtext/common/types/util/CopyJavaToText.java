@@ -27,9 +27,11 @@ public class CopyJavaToText implements IWorkflowComponent {
 
 	private String path;
 	
+	@Override
 	public void preInvoke() {
 	}
 
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 		try {
 			File directory = new File(path);
@@ -75,6 +77,7 @@ public class CopyJavaToText implements IWorkflowComponent {
 		}
 	}
 
+	@Override
 	public void postInvoke() {
 	}
 

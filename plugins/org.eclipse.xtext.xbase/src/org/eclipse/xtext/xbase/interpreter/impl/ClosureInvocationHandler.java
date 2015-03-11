@@ -46,6 +46,8 @@ public class ClosureInvocationHandler extends AbstractClosureInvocationHandler {
 		IEvaluationResult result = interpreter.evaluate(closure.getExpression(), forkedContext, indicator);
 		if (indicator.isCanceled())
 			throw new InterpreterCanceledException();
+		if (result.getException() != null)
+			throw result.getException();
 		return result.getResult();
 	}
 

@@ -7,28 +7,38 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.util.HashMap;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassFinder {
-	
-	private final ClassLoader classLoader;
-	private final ClassNameUtil classNameUtil;
-	
-	public ClassFinder(ClassLoader classLoader) {
-		this.classLoader = classLoader;
-		this.classNameUtil = new ClassNameUtil();
+public class ClassFinder extends AbstractClassFinder<Class<?>> {
+
+	private static final Class<?> NULL_CLASS;
+
+	static {
+		class Null {
+		}
+		NULL_CLASS = Null.class;
 	}
 
-	public Class<?> forName(String name) throws ClassNotFoundException {
-		try {
-			return Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
-		} catch(ClassNotFoundException e) {
-			Class<?> result = Primitives.forName(name);
-			if (result == null)
-				throw e;
-			return result;
+	@SuppressWarnings("serial")
+	private static class Cache extends HashMap<String, Class<?>> {
+		public Cache() {
+			super(500);
+			for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
+				put(primitiveType.getName(), primitiveType);
+			}
 		}
 	}
-	
+
+	public ClassFinder(ClassLoader classLoader) {
+		super(classLoader, NULL_CLASS, new Cache());
+	}
+
+	@Override
+	protected Class<?> forName(String name, ClassLoader classLoader) throws ClassNotFoundException {
+		return Class.forName(name, false, classLoader);
+	}
+
 }

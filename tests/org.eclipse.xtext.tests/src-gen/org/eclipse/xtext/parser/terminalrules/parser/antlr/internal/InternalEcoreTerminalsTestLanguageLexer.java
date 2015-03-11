@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
-    public static final int RULE_WS=7;
+    public static final int RULE_EINT=4;
     public static final int RULE_EDATE=6;
-    public static final int T__8=8;
+    public static final int RULE_WS=7;
     public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
     public static final int T__10=10;
     public static final int RULE_EDOUBLE=5;
-    public static final int T__9=9;
-    public static final int RULE_EINT=4;
 
     // delegates
     // delegators
@@ -595,8 +595,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
     static final String DFA12_specialS =
         "\16\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\2\6\2\uffff\1\6\22\uffff\1\6\14\uffff\1\5\1\3\1\uffff\12\4"+
-            "\52\uffff\1\2\4\uffff\1\1",
+            "\2\6\2\uffff\1\6\22\uffff\1\6\14\uffff\1\5\1\3\1\uffff\12\4\52\uffff\1\2\4\uffff\1\1",
             "",
             "\1\10\15\uffff\1\7",
             "",

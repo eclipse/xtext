@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest;
 
@@ -13,10 +10,10 @@ package org.eclipse.xtext.parsetree.reconstr.complexrewritetest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3#getZ <em>Z</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getC3()
  * @model
@@ -33,12 +30,12 @@ public interface C3 extends TrickyC
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Z</em>' containment reference.
-   * @see #setZ(C2)
+   * @see #setZ(TrickyC)
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getC3_Z()
    * @model containment="true"
    * @generated
    */
-  C2 getZ();
+  TrickyC getZ();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3#getZ <em>Z</em>}' containment reference.
@@ -48,6 +45,6 @@ public interface C3 extends TrickyC
    * @see #getZ()
    * @generated
    */
-  void setZ(C2 value);
+  void setZ(TrickyC value);
 
 } // C3

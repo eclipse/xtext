@@ -9,6 +9,7 @@ package org.eclipse.xtext.validation;
 
 import java.util.Map;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -32,7 +33,7 @@ public class CancelableDiagnostician extends Diagnostician {
 	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (isCanceled(context))
-			return true;
+			throw new OperationCanceledException();
 		return super.validate(eObject, diagnostics, context);
 	}
 
@@ -44,7 +45,7 @@ public class CancelableDiagnostician extends Diagnostician {
 	@Override
 	protected boolean doValidateContents(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (isCanceled(context))
-			return true;
+			throw new OperationCanceledException();
 		return super.doValidateContents(eObject, diagnostics, context);
 	}
 

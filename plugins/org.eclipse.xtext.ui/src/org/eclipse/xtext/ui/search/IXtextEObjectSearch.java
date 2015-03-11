@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.search;
 import java.util.Collection;
 
 import org.eclipse.ui.dialogs.SearchPattern;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -33,9 +32,7 @@ public interface IXtextEObjectSearch {
 		@Inject
 		private IResourceDescriptions resourceDescriptions;
 
-		@Inject
-		private IQualifiedNameConverter qualifiedNameConverter;
-		
+		@Override
 		public Iterable<IEObjectDescription> findMatches(final String searchPattern, final String typeSearchPattern) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, typeSearchPattern));
 		}
@@ -49,6 +46,7 @@ public interface IXtextEObjectSearch {
 			typeSearchPattern.setPattern(typeStringPattern);
 			final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allFilters();
 			return new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					if (isNameMatches(searchPattern, input, namespaceDelimiters)
 							&& typeSearchPattern.matches(input.getEClass().getName())) {
@@ -65,7 +63,7 @@ public interface IXtextEObjectSearch {
 		}
 
 		protected boolean isNameMatches(SearchPattern searchPattern, IEObjectDescription eObjectDescription, Collection<String> namespaceDelimiters) {
-			String qualifiedName = qualifiedNameConverter.toString(eObjectDescription.getQualifiedName());
+			String qualifiedName = eObjectDescription.getQualifiedName().toString();
 			if (qualifiedName!=null) {
 				if(searchPattern.matches(qualifiedName)) {
 					return true;
@@ -83,6 +81,7 @@ public interface IXtextEObjectSearch {
 		protected Iterable<IEObjectDescription> getSearchScope() {
 			return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
 					new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+						@Override
 						public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 							return from.getExportedObjects();
 						}

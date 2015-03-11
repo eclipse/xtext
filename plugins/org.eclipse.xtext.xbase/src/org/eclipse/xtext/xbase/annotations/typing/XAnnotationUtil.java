@@ -57,7 +57,7 @@ public class XAnnotationUtil {
 		for (JvmAnnotationReference annoRef : annotations) {
 			if (Target.class.getName().equals(annoRef.getAnnotation().getIdentifier())) {
 				EList<JvmAnnotationValue> values = annoRef.getValues();
-				JvmAnnotationValue value = values.get(0);
+				JvmAnnotationValue value = values.isEmpty() ? null : values.get(0);
 				if (value instanceof JvmEnumAnnotationValue) {
 					Set<ElementType> result = newHashSet();
 					for (JvmEnumerationLiteral elementType : ((JvmEnumAnnotationValue) value).getValues()) {

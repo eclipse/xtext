@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates;
 
@@ -16,6 +13,7 @@ import org.eclipse.xtext.AbstractRule;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplate#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplate#getId <em>Id</em>}</li>
@@ -24,7 +22,6 @@ import org.eclipse.xtext.AbstractRule;
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplate#getKeywordContext <em>Keyword Context</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplate#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage#getCodetemplate()
  * @model

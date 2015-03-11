@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates;
 
@@ -18,11 +15,11 @@ import org.eclipse.xtext.Grammar;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplates#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Codetemplates#getTemplates <em>Templates</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage#getCodetemplates()
  * @model

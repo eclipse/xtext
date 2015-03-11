@@ -34,6 +34,15 @@ public class ArrayClient {
 		values[1] = first;
 	}
 	
+	public <T> T[] swap(T[] values) {
+		if (values.length != 2)
+			throw new IllegalArgumentException("length must be 2");
+		T first = values[0];
+		values[0] = values[1];
+		values[1] = first;
+		return values;
+	}
+	
 	public void inplaceAdd10(int[] values) {
 		for(int i = 0; i < values.length; i++) {
 			values[i] = values[i] + 10;

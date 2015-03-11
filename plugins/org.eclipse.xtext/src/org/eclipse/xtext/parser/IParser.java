@@ -33,18 +33,22 @@ public interface IParser {
 	
 	static class NullImpl implements IParser {
 
+		@Override
 		public IParseResult parse(Reader reader) {
 			return null;
 		}
 
+		@Override
 		public IParseResult parse(ParserRule rule, Reader reader) {
 			return null;
 		}
 		
+		@Override
 		public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 			return null;
 		}
 
+		@Override
 		public IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 			return null;
 		}

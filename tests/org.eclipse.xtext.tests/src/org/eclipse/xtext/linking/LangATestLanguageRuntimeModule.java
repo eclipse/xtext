@@ -3,6 +3,13 @@ Generated with Xtext
 */
 package org.eclipse.xtext.linking;
 
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+
 import com.google.inject.Binder;
 
 /**
@@ -16,5 +23,17 @@ public class LangATestLanguageRuntimeModule extends AbstractLangATestLanguageRun
 		
 		// extend configuration here
 	}
+
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return StorageAwareResource.class;
+	}
 	
+	public Class<? extends IResourceStorageFacade> bindIResourceStorageFacade() {
+		return ResourceStorageFacade.class;
+	}
+	
+	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
+		return JavaIoFileSystemAccess.class;
+	}
 }

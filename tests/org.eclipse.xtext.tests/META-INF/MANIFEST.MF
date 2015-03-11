@@ -1,26 +1,40 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Generator Tests
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.tests;singleton:=true
-Bundle-Version: 2.0.1.qualifier
-Bundle-Vendor: Eclipse.org
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
- org.eclipse.xtext.generator;bundle-version="2.0.0",
- org.junit,
- org.easymock;bundle-version="2.3.0",
- org.eclipse.xtext.junit;bundle-version="2.0.0",
+Bundle-Version: 2.8.0.qualifier
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.generator,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0",
- org.eclipse.xtext.util;bundle-version="2.0.0",
- org.eclipse.emf.ecore,
- org.eclipse.emf.common,
- com.ibm.icu,
- org.eclipse.xtext.ecore;bundle-version="2.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.testlanguages;bundle-version="2.0.0",
- org.antlr.runtime
-Bundle-ClassPath: lib/simple.jar,.
-Import-Package: org.apache.log4j
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore;bundle-version="2.10.2",
+ org.eclipse.emf.common;bundle-version="2.10.1",
+ org.eclipse.xtext.ecore,
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.testlanguages,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.junit4,
+ org.hamcrest.core;bundle-version="1.1.0",
+ org.eclipse.core.runtime;bundle-version="3.6.0",
+ org.eclipse.xtend.lib,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtext.idea.generator;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/simple.jar,
+ .
+Import-Package: com.ibm.icu.text;version="4.0.0",
+ org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0",
+ org.junit.rules;version="4.7.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
 Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.generator.ecore.services,
  org.eclipse.xtext.generator.ecore.superPackage,
@@ -401,5 +415,44 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.util,
- org.eclipse.xtext.parser.antlr.parser.antlr.lexer
+ org.eclipse.xtext.parser.antlr.parser.antlr.lexer,
+ org.eclipse.xtext.resource.locationprovidertest,
+ org.eclipse.xtext.resource.locationprovidertest.impl,
+ org.eclipse.xtext.resource.locationprovidertest.util,
+ org.eclipse.xtext.resource.serializer,
+ org.eclipse.xtext.metamodelreferencing.tests.ecoreReference,
+ org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl,
+ org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.util,
+ org.eclipse.xtext.metamodelreferencing.tests.serializer,
+ org.eclipse.xtext.linking.serializer,
+ org.eclipse.xtext.linking.scoping,
+ org.eclipse.xtext.linking.lazy.serializer,
+ org.eclipse.xtext.linking.bug362902,
+ org.eclipse.xtext.linking.bug362902.impl,
+ org.eclipse.xtext.linking.bug362902.util,
+ org.eclipse.xtext.parser.antlr.serializer,
+ org.eclipse.xtext.parser.antlr.bug378967Test,
+ org.eclipse.xtext.parser.antlr.bug378967Test.impl,
+ org.eclipse.xtext.parser.antlr.bug378967Test.util,
+ org.eclipse.xtext.resource.liveContainerTestLanguage,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.util,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.util,
+ org.eclipse.xtext.resource.bug385636,
+ org.eclipse.xtext.resource.bug385636.impl,
+ org.eclipse.xtext.resource.bug385636.util,
+ org.eclipse.xtext.parsetree.formatter.serializer,
+ org.eclipse.xtext.parser.indentation.parser.antlr,
+ org.eclipse.xtext.parser.indentation.parser.antlr.internal,
+ org.eclipse.xtext.parser.indentation.parser.antlr.lexer,
+ org.eclipse.xtext.parser.indentation,
+ org.eclipse.xtext.parser.indentation.services,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.impl,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.util,
+ org.eclipse.xtext.parser.indentation.parseTreeConstruction,
+ org.eclipse.xtext.parser.indentation.serializer,
+ org.eclipse.xtext.parser.unorderedGroups.serializer
 

@@ -43,7 +43,10 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 @SuppressWarnings("restriction")
 public class JavaProjectSetupUtil {
 
@@ -154,9 +157,6 @@ public class JavaProjectSetupUtil {
 
 	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
-			if (project.isOpen()) {
-				project.close(null);
-			}
 			project.delete(true, true, null);
 		}
 	}
@@ -284,6 +284,7 @@ public class JavaProjectSetupUtil {
 			FileNotFoundException {
 		File tempFile = File.createTempFile(nameWithoutJarSuffix, ".jar");
 		tempFile.createNewFile();
+		tempFile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(tempFile);
 		int i = -1;
 		while ((i = data.read()) != -1)

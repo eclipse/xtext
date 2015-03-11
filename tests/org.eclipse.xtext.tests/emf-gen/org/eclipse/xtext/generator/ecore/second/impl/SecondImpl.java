@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.second.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.generator.ecore.second.SecondPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.impl.SecondImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.impl.SecondImpl#getFirst <em>First</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

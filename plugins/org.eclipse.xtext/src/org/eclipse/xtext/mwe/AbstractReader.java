@@ -49,6 +49,9 @@ public abstract class AbstractReader extends AbstractWorkflowComponent2 {
 
 	private List<Injector> injectors = Lists.newArrayList();
 
+	/**
+	 * Register a language setup. Only the first registered setup is used to inject the resource set.
+	 */
 	public void addRegister(ISetup setup) {
 		injectors.add(setup.createInjectorAndDoEMFRegistration());
 	}

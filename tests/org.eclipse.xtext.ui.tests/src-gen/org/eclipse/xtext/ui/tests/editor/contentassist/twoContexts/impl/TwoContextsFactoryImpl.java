@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl;
 
@@ -33,7 +30,7 @@ public class TwoContextsFactoryImpl extends EFactoryImpl implements TwoContextsF
   {
     try
     {
-      TwoContextsFactory theTwoContextsFactory = (TwoContextsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/twoContexts"); 
+      TwoContextsFactory theTwoContextsFactory = (TwoContextsFactory)EPackage.Registry.INSTANCE.getEFactory(TwoContextsPackage.eNS_URI);
       if (theTwoContextsFactory != null)
       {
         return theTwoContextsFactory;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug288432Test.impl;
 
@@ -33,12 +30,12 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterObject;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.BodyImpl#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.BodyImpl#getContent <em>Content</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.BodyImpl#getFoo <em>Foo</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,0 +1,37 @@
+grammar org.eclipse.xtext.idea.sdomain.SDomain with org.eclipse.xtext.common.Terminals
+
+generate sDomain "http://www.xtext.org/idea/sdomain/SDomain"
+
+File :
+	(elements+=Element)*;
+	
+Import:
+	'import' importedNamespace=QualifiedNameWithWildCard;
+	
+QualifiedNameWithWildCard :
+	QualifiedName '.*'?;
+	
+QualifiedName :
+	ID ('.' ID)*;
+	
+Namespace :
+	name=QualifiedName '{'
+		(elements+=Element)*
+	'}';
+	
+Element :
+	Namespace | Type | Import;
+	
+Type :
+	Entity | Datatype;
+	
+Entity :
+	'entity' name=ID '{'
+		(properties+=Property)*
+	'}';
+	
+Datatype :
+	'datatype' name=ID;
+	
+Property :
+	type=[Type|QualifiedName] name=ID; 

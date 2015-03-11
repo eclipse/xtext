@@ -16,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobManager;
@@ -34,6 +35,7 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
@@ -44,10 +46,13 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class RenameRefactoringExecuter {
-	
+
 	@Inject
 	private IWorkspace workspace;
 	
+	@Inject
+	private SyncUtil syncUtil;
+
 	private static final Logger LOG = Logger.getLogger(RenameRefactoringExecuter.class);
 
 	protected boolean isApplicable(Shell parent, ProcessorBasedRefactoring refactoring) {
@@ -66,6 +71,7 @@ public class RenameRefactoringExecuter {
 	public void execute(IEditorPart editor, ProcessorBasedRefactoring refactoring) throws InterruptedException {
 		Assert.isTrue(Display.getCurrent() != null);
 		IWorkbenchWindow window = editor.getSite().getWorkbenchWindow();
+		IWorkbench workbench = window.getWorkbench();
 		Shell shell = editor.getSite().getShell();
 		if (!isApplicable(shell, refactoring))
 			return;
@@ -74,6 +80,7 @@ public class RenameRefactoringExecuter {
 		try {
 			try {
 				Runnable r = new Runnable() {
+					@Override
 					public void run() {
 						manager.beginRule(rule, null);
 					}
@@ -84,7 +91,8 @@ public class RenameRefactoringExecuter {
 				// Do nothing
 				return;
 			}
-			CheckConditionsAndCreateChangeRunnable checkConditionsRunnable = new CheckConditionsAndCreateChangeRunnable(shell, refactoring);
+			CheckConditionsAndCreateChangeRunnable checkConditionsRunnable = new CheckConditionsAndCreateChangeRunnable(
+					shell, refactoring);
 			refactoring.setValidationContext(shell);
 			window.run(false, true, new WorkbenchRunnableAdapter(checkConditionsRunnable, rule, true));
 			PerformChangeOperation performChangeOperation = checkConditionsRunnable.getPerformChangeOperation();
@@ -96,16 +104,20 @@ public class RenameRefactoringExecuter {
 							shell,
 							refactoring.getName(),
 							Messages.format("Cannot execute refactoring",
-									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); //$NON-NLS-1$
+									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); 
 					return;
 				}
 			}
+		} catch (OperationCanceledException e) {
+			throw new InterruptedException();
 		} catch (InvocationTargetException e) {
 			LOG.error(e.getMessage(), e);
 		} finally {
 			manager.endRule(rule);
 			refactoring.setValidationContext(null);
 		}
+		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
+		syncUtil.reconcileAllEditors(workbench, false, new NullProgressMonitor());
 	}
 
 	private void showFatalErrorMessage(Shell parent, String message) {
@@ -124,6 +136,7 @@ public class RenameRefactoringExecuter {
 			this.refactoring = refactoring;
 		}
 
+		@Override
 		public void run(IProgressMonitor pm) throws CoreException {
 			try {
 				pm.beginTask("", 11);
@@ -133,6 +146,7 @@ public class RenameRefactoringExecuter {
 				if (status.getSeverity() >= RefactoringStatus.WARNING) {
 					final boolean[] canceled = { false };
 					shell.getDisplay().syncExec(new Runnable() {
+						@Override
 						public void run() {
 							canceled[0] = showStatusDialog(status);
 						}

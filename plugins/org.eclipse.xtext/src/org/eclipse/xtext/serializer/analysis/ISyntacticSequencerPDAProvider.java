@@ -18,8 +18,11 @@ import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
+import org.eclipse.xtext.util.formallang.Nfa;
+import org.eclipse.xtext.util.formallang.NfaUtil;
+import org.eclipse.xtext.util.formallang.Pda;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
@@ -29,45 +32,50 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SyntacticSequencerPDAProvider.class)
 public interface ISyntacticSequencerPDAProvider {
 
+	public class GetGrammarElement implements Function<ISynState, AbstractElement> {
+		@Override
+		public AbstractElement apply(ISynState from) {
+			return from.getGrammarElement();
+		}
+	}
+
 	public interface ISynAbsorberState extends ISynState {
+		List<ISynAbsorberState> getOutAbsorbers();
+
 		List<ISynTransition> getOutTransitions();
 
 		Map<AbstractElement, ISynTransition> getOutTransitionsByElement();
-
-		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallEnter();
-
-		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit();
 	}
 
 	public interface ISynEmitterState extends ISynState, ISynNavigable {
 	}
 
 	public interface ISynFollowerOwner {
-		List<ISynState> getFollowers();
+		EObject getContext();
 
 		EClass getEClass();
 
-		EObject getContext();
+		List<ISynState> getFollowers();
 	}
 
 	public interface ISynNavigable extends ISynFollowerOwner {
-		ISynAbsorberState getTarget();
-
-		ITokenPdaAdapter<ISynState, RuleCall, AbstractElement> getPathToTarget();
+		Pda<ISynState, RuleCall> getPathToTarget();
 
 		List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack);
 
-		List<ISynState> getShortestStackpruningPathTo(AbstractElement ele, RuleCallStack stack);
-
 		List<ISynState> getShortestPathToAbsorber(RuleCallStack stack);
 
+		List<ISynState> getShortestStackpruningPathTo(AbstractElement ele, RuleCallStack stack);
+
 		List<ISynState> getShortestStackpruningPathToAbsorber(RuleCallStack stack);
+
+		ISynAbsorberState getTarget();
+
+		boolean hasEmitters();
 
 		boolean involvesUnassignedTokenRuleCalls();
 
 		boolean isSyntacticallyAmbiguous();
-
-		boolean hasEmitters();
 	}
 
 	public interface ISynState extends ISynFollowerOwner {
@@ -75,18 +83,67 @@ public interface ISyntacticSequencerPDAProvider {
 		AbstractElement getGrammarElement();
 
 		SynStateType getType();
+
+		String toString(Function<AbstractElement, String> elementFormatter);
 	}
 
 	public interface ISynTransition extends ISynNavigable {
 
-		ISynAbsorberState getSource();
+		Nfa<ISynState> getAmbiguousNfa();
 
 		AbstractElementAlias getAmbiguousSyntax();
+
+		List<AbstractElementAlias> getAmbiguousSyntaxes();
+
+		ISynAbsorberState getSource();
+	}
+
+	public class SynAbsorberNfaAdapter implements Nfa<ISynAbsorberState> {
+
+		protected ISynAbsorberState start;
+		protected ISynAbsorberState stop;
+
+		public SynAbsorberNfaAdapter(ISynAbsorberState start) {
+			super();
+			this.start = start;
+			this.stop = new NfaUtil().find(this, new Predicate<ISynAbsorberState>() {
+				@Override
+				public boolean apply(ISynAbsorberState input) {
+					return input.getType().isStop();
+				}
+			});
+		}
+
+		@Override
+		public Iterable<ISynAbsorberState> getFollowers(ISynAbsorberState node) {
+			return node.getOutAbsorbers();
+		}
+
+		@Override
+		public ISynAbsorberState getStart() {
+			return start;
+		}
+
+		@Override
+		public ISynAbsorberState getStop() {
+			return stop;
+		}
+
 	}
 
 	public class SynPredicates {
+		public static Predicate<ISynState> absorber() {
+			return new Predicate<ISynState>() {
+				@Override
+				public boolean apply(ISynState input) {
+					return input instanceof ISynAbsorberState;
+				}
+			};
+		}
+
 		public static Predicate<ISynState> absorber(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input instanceof ISynAbsorberState;
 				}
@@ -95,6 +152,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> element(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele;
 				}
@@ -103,6 +161,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> emitter(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input instanceof ISynEmitterState;
 				}
@@ -111,6 +170,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallEnter(final RuleCall ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input.getType().isRuleCallEnter();
 				}
@@ -119,6 +179,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExit(final RuleCall ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input.getType().isRuleCallExit();
 				}
@@ -127,6 +188,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExits() {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getType().isRuleCallExit();
 				}
@@ -135,16 +197,9 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExitsOrAbsorber() {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getType().isRuleCallExit() || input instanceof ISynAbsorberState;
-				}
-			};
-		}
-
-		public static Predicate<ISynState> absorber() {
-			return new Predicate<ISynState>() {
-				public boolean apply(ISynState input) {
-					return input instanceof ISynAbsorberState;
 				}
 			};
 		}

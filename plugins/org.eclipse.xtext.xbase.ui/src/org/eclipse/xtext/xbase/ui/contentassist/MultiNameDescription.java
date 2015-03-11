@@ -47,18 +47,22 @@ public class MultiNameDescription extends AbstractEObjectDescription {
 		otherNames.add(name);
 	}
 
+	@Override
 	public QualifiedName getName() {
 		return delegate.getName();
 	}
 	
+	@Override
 	public QualifiedName getQualifiedName() {
 		return delegate.getQualifiedName();
 	}
 
+	@Override
 	public EObject getEObjectOrProxy() {
 		return delegate.getEObjectOrProxy();
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		return delegate.getEObjectURI();
 	}
@@ -73,8 +77,14 @@ public class MultiNameDescription extends AbstractEObjectDescription {
 		return delegate.getUserDataKeys();
 	}
 
+	@Override
 	public EClass getEClass() {
 		return delegate.getEClass();
+	}
+	
+	@Override
+	public String toString() {
+		return otherNames.toString() + delegate;
 	}
 	
 }

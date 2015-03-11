@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -35,6 +32,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getName <em>Name</em>}</li>
@@ -47,7 +45,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getMetaRequiredCapabilities <em>Meta Required Capabilities</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.UnitImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

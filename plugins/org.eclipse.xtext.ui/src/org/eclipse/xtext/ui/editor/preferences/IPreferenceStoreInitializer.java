@@ -22,10 +22,9 @@ import com.google.inject.TypeLiteral;
  */
 public interface IPreferenceStoreInitializer {
 	/**
-	 * 
+	 * Initialize preference values with the given {@link IPreferenceStoreAccess}
 	 */
 	public void initialize(IPreferenceStoreAccess access);
-	
 	
 	/**
 	 * a composite initialize calling all registered {@link IPreferenceStoreInitializer}s
@@ -39,6 +38,7 @@ public interface IPreferenceStoreInitializer {
 			this.injector = injector;
 		}
 		
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			List<Binding<IPreferenceStoreInitializer>> list = injector.findBindingsByType(TypeLiteral
 					.get(IPreferenceStoreInitializer.class));

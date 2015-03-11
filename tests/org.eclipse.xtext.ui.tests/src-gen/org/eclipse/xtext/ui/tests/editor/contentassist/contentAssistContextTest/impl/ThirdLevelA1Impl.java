@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl.ThirdLevelA1Impl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractMetamodelDeclarationImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractMetamodelDeclarationImpl#getAlias <em>Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

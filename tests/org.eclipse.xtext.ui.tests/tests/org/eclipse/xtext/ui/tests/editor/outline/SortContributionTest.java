@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -17,17 +18,17 @@ import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 public class SortContributionTest extends AbstractOutlineWorkbenchTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		setSorting(preferenceStore.getDefaultBoolean(SortOutlineContribution.PREFERENCE_KEY));
 	}
 
-	public void testNoSort() throws Exception {
+	@Test public void testNoSort() throws Exception {
 		setSorting(false);
 		outlinePage.resetSyncer();
 		treeViewer.expandAll();
@@ -46,7 +47,7 @@ public class SortContributionTest extends AbstractOutlineWorkbenchTest {
 		assertSame(threeNode, secondLevelItems[1]);
 	}
 
-	public void testSort() throws Exception {
+	@Test public void testSort() throws Exception {
 		setSorting(true);
 		outlinePage.resetSyncer();
 		treeViewer.expandAll();
@@ -66,7 +67,7 @@ public class SortContributionTest extends AbstractOutlineWorkbenchTest {
 		assertSame(twoNode, secondLevelItems[1]);
 	}
 
-	public void testSortingPreservesSelectionAndExpansion() throws Exception {
+	@Test public void testSortingPreservesSelectionAndExpansion() throws Exception {
 		setSorting(false);
 		outlinePage.resetSyncer();
 		treeViewer.setExpandedElements(new Object[] { modelNode });

@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
+
 /**
  * This is an extension library for {@link Comparable comparables}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ComparableExtensions {
+@GwtCompatible public class ComparableExtensions {
 
 	/**
 	 * The comparison operator <code>less than</code>.
@@ -23,6 +26,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) < 0</code>
 	 */
+	@Inline("($1.compareTo($2) < 0)")
 	public static <C> boolean operator_lessThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) < 0;
 	}
@@ -36,6 +40,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) > 0</code>
 	 */
+	@Inline("($1.compareTo($2) > 0)")
 	public static <C> boolean operator_greaterThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) > 0;
 	}
@@ -49,6 +54,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) <= 0</code>
 	 */
+	@Inline("($1.compareTo($2) <= 0)")
 	public static <C> boolean operator_lessEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) <= 0;
 	}
@@ -62,7 +68,23 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) >= 0</code>
 	 */
+	@Inline("($1.compareTo($2) >= 0)")
 	public static <C> boolean operator_greaterEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) >= 0;
+	}
+	
+	/**
+	 * The spaceship operator <code>&lt;=&gt;</code>.
+	 * 
+	 * @param left
+	 *            a comparable
+	 * @param right
+	 *            the value to compare with
+	 * @return <code>left.compareTo(right)</code>
+	 * @since 2.4
+	 */
+	@Inline("($1.compareTo($2))")
+	public static <C> int operator_spaceship(Comparable<? super C> left, C right) {
+		return left.compareTo(right);
 	}
 }

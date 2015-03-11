@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -17,10 +18,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,20 +32,49 @@ import com.google.inject.Singleton;
 @Singleton
 public class LazyURIEncoder {
 	
-	private static final String XTEXT_LINK = "xtextLink_";
-	private static final String SEP = "::";
+	/**
+	 * @since 2.3
+	 * 
+	 * deprecated use {@link #isCrossLinkFragment(Resource, String)} instead
+	 * 
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	public static final String XTEXT_LINK = "|";
+	/**
+	 * @since 2.3
+	 * 
+	 */
+	public static final String SEP = "::";
+	
+	/**
+	 * @since 2.7
+	 */
+	public final static String USE_INDEXED_FRAGMENTS_BINDING = "org.eclipse.xtext.linking.lazy.LazyURIEncoder.isUseIndexFragment";
+			
+	@Inject(optional=true) @Named(value=USE_INDEXED_FRAGMENTS_BINDING)
+	private boolean isUseIndexFragment = false;
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean isUseIndexFragment(Resource context) {
+		return isUseIndexFragment && context instanceof LazyLinkingResource;
+	}
 
 	/**
 	 * encodes the given three parameters into a string, so that they can be
 	 * retrieved from a resource using {@link #decode(Resource, String)}
 	 * 
-	 * @param obj
-	 * @param ref
-	 * @param node
-	 * @return
+	 * @param obj the feature holder
+	 * @param ref the cross reference
+	 * @param node the node that provided the value for the reference
+	 * @return a portable string that may be used as a {@link URI#fragment() fragment}
 	 */
 	public String encode(EObject obj, EReference ref, INode node) {
-		StringBuilder fragment = new StringBuilder(20).append(XTEXT_LINK).append(SEP);
+		if (isUseIndexFragment(obj.eResource())) {
+			return getIndexFragment(obj, ref, node);
+		}
+		StringBuilder fragment = new StringBuilder(4).append(XTEXT_LINK).append(SEP);
 		appendShortFragment(obj, fragment);
 		fragment.append(SEP);
 		fragment.append(toShortExternalForm(obj.eClass(), ref)).append(SEP);
@@ -49,6 +82,19 @@ public class LazyURIEncoder {
 		return fragment.toString();
 	}
 	
+	/**
+	 * @since 2.7
+	 */
+	protected String getIndexFragment(EObject obj, EReference ref, INode node) {
+		Resource resource = obj.eResource();
+		if (!(resource instanceof LazyLinkingResource)) {
+			throw new IllegalStateException("Context object must be contained in a LazyLinkingResource : "+obj.eResource());
+		}
+		LazyLinkingResource lazyResource = (LazyLinkingResource) resource;
+		int idx = lazyResource.addLazyProxyInformation(obj,ref,node);
+		return XTEXT_LINK + idx;
+	}
+
 	public void appendShortFragment(EObject obj, StringBuilder target) {
 		EReference containmentFeature = obj.eContainmentFeature();
 		if (containmentFeature == null) {
@@ -71,32 +117,62 @@ public class LazyURIEncoder {
 	/**
 	 * decodes the uriFragment
 	 * 
-	 * @param res
-	 * @param uriFragment
-	 * @return
+	 * @param res the resource that contains the feature holder
+	 * @param uriFragment the fragment that should be decoded
+	 * @return the decoded information
+	 * @see LazyURIEncoder#encode(EObject, EReference, INode)
 	 */
 	public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
-		String[] split = uriFragment.split(SEP);
-		EObject source = resolveShortFragment(res, split[1]);
-		EReference ref = fromShortExternalForm(source.eClass(), split[2]);
+		if (isUseIndexFragment(res)) {
+			return getLazyProxyInformation(res, uriFragment);
+		}
+		List<String> split = Strings.split(uriFragment, SEP);
+		EObject source = resolveShortFragment(res, split.get(1));
+		EReference ref = fromShortExternalForm(source.eClass(), split.get(2));
 		INode compositeNode = NodeModelUtils.getNode(source);
 		if (compositeNode==null)
 			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
-		INode textNode = getNode(compositeNode, split[3]);
+		INode textNode = getNode(compositeNode, split.get(3));
 		return Tuples.create(source, ref, textNode);
 	}
 	
+	/**
+	 * @since 2.7
+	 */
+	protected Triple<EObject, EReference, INode> getLazyProxyInformation(Resource res, String uriFragment) {
+		if (!(res instanceof LazyLinkingResource)) {
+			throw new IllegalArgumentException("Given resource not a LazyLinkingResource");
+		}
+		int idx = getIndex(uriFragment);
+		LazyLinkingResource lazyResource = (LazyLinkingResource) res;
+		return lazyResource.getLazyProxyInformation(idx);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public int getIndex(String uriFragment) {
+		int idx = -1;
+		try {
+			String string = uriFragment.substring(XTEXT_LINK.length());
+			idx = Integer.parseInt(string); 
+		} catch (RuntimeException e) {
+			throw new IllegalArgumentException("Couldn't parse index from fragment '"+uriFragment+"'", e);
+		}
+		return idx;
+	}
+
 	public EObject resolveShortFragment(Resource res, String shortFragment) {
-		String[] split = shortFragment.split("\\.");
-		int contentsIdx = Integer.parseInt(split[0]);
+		List<String> split = Strings.split(shortFragment, '.');
+		int contentsIdx = Integer.parseInt(split.get(0));
 		EObject result = res.getContents().get(contentsIdx);
 		int splitIdx = 1;
-		while(splitIdx < split.length) {
-			int featureId = Integer.parseInt(split[splitIdx++]);
+		while(splitIdx < split.size()) {
+			int featureId = Integer.parseInt(split.get(splitIdx++));
 			EReference reference = (EReference) result.eClass().getEStructuralFeature(featureId);
 			if (reference.isMany()) {
 				List<?> list = (List<?>) result.eGet(reference);
-				int listIdx = Integer.parseInt(split[splitIdx++]);
+				int listIdx = Integer.parseInt(split.get(splitIdx++));
 				result = (EObject) list.get(listIdx);
 			} else {
 				result = (EObject) result.eGet(reference);
@@ -112,14 +188,17 @@ public class LazyURIEncoder {
 
 	/**
 	 * ONLY public to be testable
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public void getRelativePath(StringBuilder result, INode parserNode, INode node) {
 		if (parserNode == node)
 			return;
 		if (isAncestor(parserNode, node)) {
-			getRelativePath(result, parserNode, node.getParent());
+			ICompositeNode parent = node.getParent();
+			getRelativePath(result, parserNode, parent);
 			int idx = 0;
-			INode child = node.getParent().getFirstChild();
+			INode child = parent.getFirstChild();
 			while(child != node && child.hasNextSibling()) {
 				idx++;
 				child = child.getNextSibling();
@@ -132,22 +211,34 @@ public class LazyURIEncoder {
 	}
 	
 	protected boolean isAncestor(INode parent, INode child) {
-		if (child.equals(parent))
-			return true;
-		INode node = child;
-		while (node.getParent() != null) {
-			if (node.getParent().equals(parent))
+		for (INode node = child; node != null; node = node.getParent()) {
+			if (node.equals(parent)) {
 				return true;
-			node = node.getParent();
+			}
 		}
 		return false;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public INode getNode(EObject object, String fragment) {
+		if (isUseIndexFragment(object.eResource())) {
+			return decode(object.eResource(), fragment).getThird();
+		}
+		INode compositeNode = NodeModelUtils.getNode(object);
+		if (compositeNode == null)
+			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
+		List<String> split = Strings.split(fragment, LazyURIEncoder.SEP);
+		INode node = getNode(compositeNode, split.get(3));
+		return node;
 	}
 
 	/**
 	 * ONLY public to be testable
 	 */
 	public INode getNode(final INode node, String path) {
-		final String[] split = path.split("/");
+		final List<String> split = Strings.split(path, '/');
 		INode result = node;
 		for (String string : split) {
 			String trimmed = string.trim();

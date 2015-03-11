@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtend.core" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="version will be generated during buckminster build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.8.0"/>
+                <message_argument value="org.eclipse.xtext.common.types"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"/>
+                <message_argument value="complianceLevel"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="XtendFile"/>
+                <message_argument value="XtendBatchCompiler"/>
+                <message_argument value="getXtendFile(Resource)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/IXtendJvmAssociations.java" type="org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations$Impl">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="JvmModelAssociator"/>
+                <message_argument value="Impl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/XtendJvmModelInferrer.java" type="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer">
+        <filter comment="Xtend may implement interfaces from Xbase" id="574664731">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer.infer(EObject, IJvmDeclaredTypeAcceptor, boolean)"/>
+                <message_argument value="IJvmDeclaredTypeAcceptor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="NodeModelBuilder"/>
+                <message_argument value="XtendNodeModelBuilder"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

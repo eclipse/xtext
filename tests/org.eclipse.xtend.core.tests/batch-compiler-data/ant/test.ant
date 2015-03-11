@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="XtendCompilerTest" default="compile">
+
+	<property name="dest.dir" location="${ant.file}/../xtend-gen" />
+	<property name="deps.dir" value="/Applications/eclipse/plugins" />
+
+	<!-- only important, when running in ide -->
+	<path id="compiled.xtend">
+		<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+	</path>
+
+	<!-- add newest (sorted by name) version -->
+	<resources id="keep.dirs.res_id">
+		<last count="1">
+			<sort>
+				<fileset dir="${deps.dir}" includes="org.eclipse.xtend.core_*.jar" />
+				<name />
+			</sort>
+		</last>
+	</resources>
+	
+	<pathconvert property="xtext-version" pathsep="," refid="keep.dirs.res_id">
+		<chainedmapper>
+			<flattenmapper />
+			<regexpmapper from="^.*_(.*).jar$$" to="\1" />
+		</chainedmapper>
+	</pathconvert>
+
+	<!-- pathref 'xtend.deps' will be  modified programmmaticaly, when tests are started-->
+	<path id="xtend.deps">
+		<fileset dir="${deps.dir}">
+			<include name="org.apache.log4j*.jar" />
+			<include name="org.eclipse.emf.ecore_*.jar" />
+			<include name="org.eclipse.emf.ecore*.jar" />
+			<include name="org.eclipse.emf.common_*.jar" />
+			<include name="org.eclipse.emf.codegen_*.jar" />
+			<include name="com.google.guava_*.jar" />
+			<include name="com.google.inject_*.jar" />
+			<include name="javax.injec*.jar" />
+			<include name="org.eclipse.equinox.common*.jar" />
+			<include name="org.eclipse.jdt.core*.jar" />
+			<include name="org.antlr*.jar" />
+			<include name="org.eclipse.xtext_${xtext-version}.jar" />
+			<include name="org.eclipse.xtext.common.types_${xtext-version}.jar" />
+			<include name="org.eclipse.xtext.util_${xtext-version}.jar" />
+			<include name="org.eclipse.xtext.smap_${xtext-version}.jar" />
+			<include name="org.eclipse.xtext.xbase*${xtext-version}.jar" />
+			<include name="org.eclipse.xtend.lib_${xtext-version}.jar" />
+			<include name="org.eclipse.xtend.lib.macro_${xtext-version}.jar" />
+			<include name="org.eclipse.xtend.core_${xtext-version}.jar" />
+			<include name="org.objectweb.asm*.jar" />
+			<exclude name="*.source*.jar" />
+			<exclude name="*.gwt*.jar" />
+		</fileset>
+		<path refid="compiled.xtend"/>
+	</path>
+
+
+	<target name="compiler.init" depends="clean">
+		<taskdef name="xtendc" classname="org.eclipse.xtend.core.compiler.batch.XtendCompilerAntTask">
+			<classpath>
+				<path refid="xtend.deps" />
+			</classpath>
+		</taskdef>
+	</target>
+
+	<target name="compile" depends="compiler.init">
+		<echo>Xtext version: ${xtext-version}</echo>
+		<echo>Deps dir: ${deps.dir}</echo>
+		<xtendc destdir="${dest.dir}" srcdir="../test data/test">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+		
+	</target>
+
+	<target name="compile.srdir.not.a.dir" depends="compiler.init">
+		<xtendc destdir="${dest.dir}" srcdir="../test data/test/B.xtend">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.missing.srcdir" depends="compiler.init">
+		<xtendc destdir="${dest.dir}">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.missing.destdir" depends="compiler.init">
+		<xtendc srcdir="../test data/test">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.multisrc" depends="compiler.init">
+		<xtendc destdir="./xtend-gen">
+			<srcdir>
+				<pathelement path="../test data/test" />
+				<pathelement path="../bug396747/test" />
+				<pathelement path="../ant/test" />
+			</srcdir>
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="clean">
+		<delete failonerror="false" quiet="true" includeemptydirs="true">
+			<fileset dir="${dest.dir}" />
+		</delete>
+
+	</target>
+
+</project>

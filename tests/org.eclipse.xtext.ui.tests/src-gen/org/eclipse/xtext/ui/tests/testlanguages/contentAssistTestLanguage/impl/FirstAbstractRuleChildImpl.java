@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.impl;
 
@@ -27,10 +24,10 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.FirstA
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.impl.FirstAbstractRuleChildImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

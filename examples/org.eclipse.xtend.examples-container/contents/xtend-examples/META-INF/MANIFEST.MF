@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtend Tutorial
+Bundle-SymbolicName: xtend-examples
+Bundle-Version: 2.8.0.qualifier
+Bundle-Vendor: Eclipse Tools Project
+Require-Bundle: org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.junit;bundle-version="4.5.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -11,21 +11,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DomainModelTestLanguageParser;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -41,7 +38,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 	private String expectedClassName;
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		expectedClass = null;
 		expectedClassName = null;
 		super.tearDown();
@@ -56,16 +53,6 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 						return MockedProposals.class;
-					}
-					
-					@Override
-					public Class<? extends Factory> bindContentAssistContext$Factory() {
-						return ParserBasedContentAssistContextFactory.class;
-					}
-
-					@Override
-					public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-						return DomainModelTestLanguageParser.class;
 					}
 					
 					@SuppressWarnings("unused")
@@ -86,7 +73,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testBug283857_01() throws Exception {
+	@Test public void testBug283857_01() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
     	newBuilder(getSetup()).append("class Name {\n" + 
     			"attr \n" + 
@@ -95,7 +82,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
     			"").assertTextAtCursorPosition("attr ", 5, "Name");
 	}
 	
-	public void testBug283857_02() throws Exception {
+	@Test public void testBug283857_02() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.MODEL;
     	newBuilder(getSetup()).append("class Name {\n" + 
     			"attr \n" + 
@@ -104,7 +91,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
     			"").assertTextAtCursorPosition(0, "class", "datatype", "import");
     }
 	
-	public void testBug283857_03() throws Exception {
+	@Test public void testBug283857_03() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
     	newBuilder(getSetup()).append("class Name {\n" + 
     			"attr \n" + 
@@ -113,12 +100,12 @@ public class CurrentModelBugTest extends AbstractXtextTests {
     			"").assertTextAtCursorPosition(6, "Name");
     }
 	
-	public void testBug283857_04() throws Exception {
+	@Test public void testBug283857_04() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.MODEL;
     	newBuilder(getSetup()).append("class ").assertText("Name");
     }
 	
-	public void testBug283857_05() throws Exception {
+	@Test public void testBug283857_05() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.MODEL;
     	newBuilder(getSetup()).append("class Name {\n" + 
     			"attr Name: \n" + 
@@ -127,7 +114,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
     			"").assertText("class", "datatype");
     }
 	
-	public void testBug284381_01() throws Exception {
+	@Test public void testBug284381_01() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "myClass";
 		newBuilder(getSetup()).append("class myClass {\n" + 
@@ -146,7 +133,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 				"").assertTextAtCursorPosition(" // ContentAssistContext.getCurrentModel() == myClass -> OK", "attr", "ref", "class", "}");
 	}
 	
-	public void testBug284381_02() throws Exception {
+	@Test public void testBug284381_02() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "mySubClass1";
 		newBuilder(getSetup()).append("class myClass {\n" + 
@@ -165,7 +152,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 				"").assertTextAtCursorPosition(" // ContentAssistContext.getCurrentModel() == mySubClass1 -> OK", "attr", "ref", "class", "}");
 	}
 	
-	public void testBug284381_03() throws Exception {
+	@Test public void testBug284381_03() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "myClass";
 		newBuilder(getSetup()).append("class myClass {\n" + 
@@ -184,7 +171,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 				"").assertTextAtCursorPosition(" // ContentAssistContext.getCurrentModel() ==  mySubClass1 -> expected myClass", "class", "}");
 	}
 	
-	public void testBug284381_04() throws Exception {
+	@Test public void testBug284381_04() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "myClass";
 		newBuilder(getSetup()).append("class myClass {\n" + 
@@ -203,7 +190,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 				"").assertTextAtCursorPosition(" // ContentAssistContext.getCurrentModel() ==  mySubClass2 -> expected myClass", "class", "}");
 	}
 	
-	public void testBug284381_05() throws Exception {
+	@Test public void testBug284381_05() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "mySubClass1";
 		newBuilder(getSetup()).append("class myClass {\n" + 
@@ -222,7 +209,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 				"").assertTextAtCursorPosition(" class mySubClass1", 7, "Name");
 	}
 	
-	public void testBug284381_06() throws Exception {
+	@Test public void testBug284381_06() throws Exception {
 		expectedClass = DomainModelTestPackage.Literals.CLASS;
 		expectedClassName = "myClass";
 		newBuilder(getSetup()).append("class myClass {\n" + 

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -35,6 +36,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -49,8 +54,15 @@ public class EPackageChooser {
 	
 	private final Shell shell;
 
+	private final IJdtHelper jdtHelper;
+
+	public EPackageChooser(Shell shell, IJdtHelper jdtHelper) {
+		this.shell = shell;
+		this.jdtHelper = jdtHelper;
+	}
+	
 	protected List<EPackageInfo> createEPackageInfosFromGenModel(URI genModelURI) {
-		ResourceSet resourceSet = createResourceSet();
+		ResourceSet resourceSet = createResourceSet(genModelURI);
 		Resource resource = resourceSet.getResource(genModelURI, true);
 		List<EPackageInfo> ePackageInfos = Lists.newArrayList();
 		for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {
@@ -74,18 +86,23 @@ public class EPackageChooser {
 		return ePackageInfos;
 	}
 
-	private ResourceSet createResourceSet() {
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
+	private ResourceSet createResourceSet(URI genModelUri) {
+		ResourceSetImpl resourceSet;
+		if (genModelUri.fileExtension().equals("xcore")) {
+			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
+					.getResourceServiceProvider(genModelUri);
+			IStorage2UriMapper storage2UriMapper = resourceServiceProvider.get(IStorage2UriMapper.class);
+			IProject project = storage2UriMapper.getStorages(genModelUri).iterator().next().getSecond();
+			resourceSet = (ResourceSetImpl) resourceServiceProvider.get(IResourceSetProvider.class).get(project);
+		} else {
+			resourceSet = new ResourceSetImpl();
+		}
 		Resource ecorePackageResource = EcorePackage.eINSTANCE.eResource();
 		Map<URI, Resource> uriResourceMap = Maps.newHashMap();
 		uriResourceMap.put(URI.createPlatformResourceURI(PATH_TO_ECORE_ECORE, true), ecorePackageResource);
 		uriResourceMap.put(URI.createPlatformPluginURI(PATH_TO_ECORE_ECORE, true), ecorePackageResource);
 		resourceSet.setURIResourceMap(uriResourceMap);
 		return resourceSet;
-	}
-
-	public EPackageChooser(Shell shell) {
-		this.shell = shell;
 	}
 
 	private static class LabelProvider extends org.eclipse.jface.viewers.LabelProvider {
@@ -111,6 +128,7 @@ public class EPackageChooser {
 
 		private Iterable<Object> content;
 
+		@Override
 		public Object[] getElements(Object inputElement) {
 			if (content != null) {
 				return Iterables.toArray(content, Object.class);
@@ -119,10 +137,12 @@ public class EPackageChooser {
 			}
 		}
 
+		@Override
 		public void dispose() {
 			content = null;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput instanceof Iterable<?>) {
@@ -155,13 +175,18 @@ public class EPackageChooser {
 		final List<IResource> filteredResources = Lists.newArrayList();
 		try {
 			ResourcesPlugin.getWorkspace().getRoot().accept(new IResourceVisitor() {
+				@Override
 				public boolean visit(IResource resource) throws CoreException {
 					if (resource instanceof IFile) {
-						if ("genmodel".equals(((IFile) resource).getFileExtension())) {
+						String fileExtension = ((IFile) resource).getFileExtension();
+						if ("genmodel".equals(fileExtension) || "xcore".equals(fileExtension)) {
 							filteredResources.add(resource);
 						}
 					}
-					return !resource.isDerived();
+					if (jdtHelper.isJavaCoreAvailable()) {
+						return !jdtHelper.isFromOutputPath(resource);
+					}
+					return true;
 				}
 			});
 		} catch (CoreException e) {

@@ -12,7 +12,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 
 	public void testParenthesis_1() throws Exception {
@@ -203,6 +206,14 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		XtextEditor editor = openEditor("|'test'");
 		pressKey(editor, '\'');
 		assertState("'|''test'", editor);
+		pressKey(editor, '\'');
+		assertState("''|'test'", editor);
+		pressKey(editor, '\'');
+		assertState("'''|''test'", editor);
+	}
+	
+	public void testSingleQuotedStringLiteral_15() throws Exception {
+		XtextEditor editor = openEditor("'|''test'");
 		pressKey(editor, '\'');
 		assertState("''|'test'", editor);
 		pressKey(editor, '\'');
@@ -664,5 +675,11 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		XtextEditor editor = openEditor("[{}|]");
 		pressKey(editor, '\n');
 		assertState("[{}\n\t|\n]", editor);
+	}
+	
+	public void testBug358555() throws Exception {
+		XtextEditor editor = openEditor("/* | /**/");
+		pressKey(editor, '\n');
+		assertState("/* \n * | /**/", editor);
 	}
 }

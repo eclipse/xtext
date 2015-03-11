@@ -16,22 +16,27 @@ public class ReversedBidiIterator<T> implements BidiIterator<T> {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return delegate.hasPrevious();
 	}
 
+	@Override
 	public T next() {
 		return delegate.previous();
 	}
 
+	@Override
 	public void remove() {
 		delegate.remove();
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return delegate.hasNext();
 	}
 
+	@Override
 	public T previous() {
 		return delegate.next();
 	}

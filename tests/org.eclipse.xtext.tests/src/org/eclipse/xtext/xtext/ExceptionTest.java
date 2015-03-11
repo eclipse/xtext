@@ -10,7 +10,8 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -20,12 +21,12 @@ import com.google.common.collect.Iterables;
 public class ExceptionTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testNoStackOverflow() throws Exception {
+	@Test public void testNoStackOverflow() throws Exception {
 		String model = "grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"import 'http://www.eclipse.org/2008/Xtext'	as xtext\n" +
 			"generate test 'http://eclipse.org/xtext/tests/SimpleTest'\n" +
@@ -38,7 +39,7 @@ public class ExceptionTest extends AbstractXtextTests {
 		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());
 	}
 
-	public void testGeneratedMetamodelWithoutURI() throws Exception {
+	@Test public void testGeneratedMetamodelWithoutURI() throws Exception {
 		String model =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 	        "generate test \n" +
@@ -49,7 +50,7 @@ public class ExceptionTest extends AbstractXtextTests {
 		assertNoException(model, 3);
 	}
 
-	public void testFirstAssignmentWithoutLeftSide() throws Exception {
+	@Test public void testFirstAssignmentWithoutLeftSide() throws Exception {
 		String model =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
             "generate test \"test\"\n" +
@@ -57,7 +58,7 @@ public class ExceptionTest extends AbstractXtextTests {
 		assertNoException(model, 1);
 	}
 	
-	public void testBug_270773() throws Exception {
+	@Test public void testBug_270773() throws Exception {
 		String model =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +

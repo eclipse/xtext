@@ -1,15 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
@@ -76,7 +76,8 @@ public class PredicatedImpl extends RuleElementImpl implements Predicated
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getPredicate()
+  @Override
+public RuleElement getPredicate()
   {
     return predicate;
   }
@@ -103,7 +104,8 @@ public class PredicatedImpl extends RuleElementImpl implements Predicated
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPredicate(RuleElement newPredicate)
+  @Override
+public void setPredicate(RuleElement newPredicate)
   {
     if (newPredicate != predicate)
     {
@@ -124,7 +126,8 @@ public class PredicatedImpl extends RuleElementImpl implements Predicated
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getElement()
+  @Override
+public RuleElement getElement()
   {
     return element;
   }
@@ -151,7 +154,8 @@ public class PredicatedImpl extends RuleElementImpl implements Predicated
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(RuleElement newElement)
+  @Override
+public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {

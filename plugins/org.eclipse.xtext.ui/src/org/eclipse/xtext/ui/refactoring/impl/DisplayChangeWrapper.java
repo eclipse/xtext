@@ -29,169 +29,279 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DisplayChangeWrapper extends TextEditBasedChange {
+public class DisplayChangeWrapper {
 
-	private Change delegate;
-
-	public DisplayChangeWrapper(TextEditBasedChange delegate) {
-		this((Change) delegate);
+	public static Change wrap(Change delegate) {
+		if(delegate instanceof TextEditBasedChange) {
+			return new TextEditBased((TextEditBasedChange) delegate);
+		} else {
+			return new Generic(delegate);
+		}
 	}
-
-	protected DisplayChangeWrapper(Change delegate) {
-		super(delegate.getName());
-		this.delegate = delegate;
+	
+	public static interface Wrapper {
+		Change getDelegate();
 	}
-
-	public Change getDelegate() {
-		return delegate;
+	
+	public static class Generic extends Change implements Wrapper {
+		
+		private Change delegate;
+	
+		protected Generic(Change delegate) {
+			this.delegate = delegate;
+		}
+	
+		@Override
+		public Change getDelegate() {
+			return delegate;
+		}
+	
+		@Override
+		public ChangeDescriptor getDescriptor() {
+			return delegate.getDescriptor();
+		}
+	
+		@Override
+		public String getName() {
+			return delegate.getName();
+		}
+	
+		@Override
+		public void setEnabled(boolean enabled) {
+			delegate.setEnabled(enabled);
+		}
+	
+		@Override
+		public Change getParent() {
+			return delegate.getParent();
+		}
+	
+		@Override
+		public void dispose() {
+			delegate.dispose();
+		}
+	
+		@Override
+		public boolean equals(Object obj) {
+			return delegate.equals(obj);
+		}
+	
+		@Override
+		public Object getModifiedElement() {
+			return delegate.getModifiedElement();
+		}
+	
+		@Override
+		public Object[] getAffectedObjects() {
+			return delegate.getAffectedObjects();
+		}
+	
+		@SuppressWarnings("rawtypes")
+		@Override
+		public Object getAdapter(Class adapter) {
+			return delegate.getAdapter(adapter);
+		}
+	
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+	
+		@Override
+		public boolean isEnabled() {
+			return delegate.isEnabled();
+		}
+	
+		@Override
+		public void initializeValidationData(IProgressMonitor pm) {
+			delegate.initializeValidationData(pm);
+		}
+	
+		@Override
+		public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
+			return delegate.isValid(pm);
+		}
+	
+		@Override
+		public Change perform(final IProgressMonitor pm) throws CoreException {
+			Change undoChange = new DisplayRunnableWithResult<Change>() {
+				@Override
+				protected Change run() throws Exception {
+					Change result = delegate.perform(pm);
+					return result;
+				}
+			}.syncExec();
+			Change undoWrap = DisplayChangeWrapper.wrap(undoChange);
+			return undoWrap;
+		}
+	
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
 	}
+	
+	/**
+	 * No interfaces in LTK :-(
+	 * 
+	 * @author koehnlein - Initial contribution and API
+	 */
+	public static class TextEditBased extends TextEditBasedChange implements Wrapper {
 
-	@Override
-	public ChangeDescriptor getDescriptor() {
-		return delegate.getDescriptor();
+		private TextEditBasedChange delegate;
+
+		protected TextEditBased(TextEditBasedChange delegate) {
+			super(delegate.getName());
+			this.delegate = delegate;
+		}
+
+		@Override
+		public TextEditBasedChange getDelegate() {
+			return delegate;
+		}
+		
+		@Override
+		public ChangeDescriptor getDescriptor() {
+			return delegate.getDescriptor();
+		}
+
+		@Override
+		public String getName() {
+			return delegate.getName();
+		}
+
+		@Override
+		public void setEnabled(boolean enabled) {
+			delegate.setEnabled(enabled);
+		}
+
+		@Override
+		public Change getParent() {
+			return delegate.getParent();
+		}
+
+		@Override
+		public void dispose() {
+			delegate.dispose();
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return delegate.equals(obj);
+		}
+
+		@Override
+		public Object getModifiedElement() {
+			return delegate.getModifiedElement();
+		}
+
+		@Override
+		public Object[] getAffectedObjects() {
+			return delegate.getAffectedObjects();
+		}
+
+		@SuppressWarnings("rawtypes")
+		@Override
+		public Object getAdapter(Class adapter) {
+			return delegate.getAdapter(adapter);
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return delegate.isEnabled();
+		}
+
+		@Override
+		public void initializeValidationData(IProgressMonitor pm) {
+			delegate.initializeValidationData(pm);
+		}
+
+		@Override
+		public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
+			return delegate.isValid(pm);
+		}
+
+		@Override
+		public Change perform(final IProgressMonitor pm) throws CoreException {
+			Change undoChange = new DisplayRunnableWithResult<Change>() {
+				@Override
+				protected Change run() throws Exception {
+					Change result = delegate.perform(pm);
+					return result;
+				}
+			}.syncExec();
+			Change undoWrap = DisplayChangeWrapper.wrap(undoChange);
+			return undoWrap;
+		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
+
+		@Override
+		public void addChangeGroup(TextEditBasedChangeGroup group) {
+			delegate.addChangeGroup(group);
+		}
+
+		@Override
+		public void addTextEditGroup(TextEditGroup group) {
+			delegate.addTextEditGroup(group);
+		}
+
+		@SuppressWarnings("rawtypes")
+		@Override
+		public boolean hasOneGroupCategory(List groupCategories) {
+			return delegate.hasOneGroupCategory(groupCategories);
+		}
+
+		@Override
+		public String getCurrentContent(IProgressMonitor pm) throws CoreException {
+			return delegate.getCurrentContent(pm);
+		}
+
+		@Override
+		public String getCurrentContent(IRegion region, boolean expandRegionToFullLine, int surroundingLines,
+				IProgressMonitor pm) throws CoreException {
+			return delegate.getCurrentContent(region, expandRegionToFullLine, surroundingLines, pm);
+		}
+
+		@Override
+		public boolean getKeepPreviewEdits() {
+			return delegate.getKeepPreviewEdits();
+		}
+
+		@Override
+		public String getPreviewContent(TextEditBasedChangeGroup[] changeGroups, IRegion region,
+				boolean expandRegionToFullLine, int surroundingLines, IProgressMonitor pm) throws CoreException {
+			return delegate.getPreviewContent(changeGroups, region, expandRegionToFullLine,
+					surroundingLines, pm);
+		}
+
+		@Override
+		public String getPreviewContent(IProgressMonitor pm) throws CoreException {
+			return delegate.getPreviewContent(pm);
+		}
+
+		@Override
+		public String getTextType() {
+			return delegate.getTextType();
+		}
+
+		@Override
+		public void setKeepPreviewEdits(boolean keep) {
+			delegate.setKeepPreviewEdits(keep);
+		}
+
+		@Override
+		public void setTextType(String type) {
+			delegate.setTextType(type);
+		}
+
 	}
-
-	@Override
-	public String getName() {
-		return delegate.getName();
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {
-		delegate.setEnabled(enabled);
-	}
-
-	@Override
-	public Change getParent() {
-		return delegate.getParent();
-	}
-
-	@Override
-	public void dispose() {
-		delegate.dispose();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return delegate.equals(obj);
-	}
-
-	@Override
-	public Object getModifiedElement() {
-		return delegate.getModifiedElement();
-	}
-
-	@Override
-	public Object[] getAffectedObjects() {
-		return delegate.getAffectedObjects();
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Object getAdapter(Class adapter) {
-		return delegate.getAdapter(adapter);
-	}
-
-	@Override
-	public int hashCode() {
-		return delegate.hashCode();
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return delegate.isEnabled();
-	}
-
-	@Override
-	public void initializeValidationData(IProgressMonitor pm) {
-		delegate.initializeValidationData(pm);
-	}
-
-	@Override
-	public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return delegate.isValid(pm);
-	}
-
-	@Override
-	public Change perform(final IProgressMonitor pm) throws CoreException {
-		Change undoChange = new DisplayRunnableWithResult<Change>() {
-			@Override
-			protected Change run() throws Exception {
-				return delegate.perform(pm);
-			}
-		}.syncExec();
-		return new DisplayChangeWrapper(undoChange);
-	}
-
-	@Override
-	public String toString() {
-		return delegate.toString();
-	}
-
-	@Override
-	public void addChangeGroup(TextEditBasedChangeGroup group) {
-		getTextEditBasedChangeDelegate().addChangeGroup(group);
-	}
-
-	@Override
-	public void addTextEditGroup(TextEditGroup group) {
-		getTextEditBasedChangeDelegate().addTextEditGroup(group);
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean hasOneGroupCategory(List groupCategories) {
-		return getTextEditBasedChangeDelegate().hasOneGroupCategory(groupCategories);
-	}
-
-	@Override
-	public String getCurrentContent(IProgressMonitor pm) throws CoreException {
-		return getTextEditBasedChangeDelegate().getCurrentContent(pm);
-	}
-
-	@Override
-	public String getCurrentContent(IRegion region, boolean expandRegionToFullLine, int surroundingLines,
-			IProgressMonitor pm) throws CoreException {
-		return getTextEditBasedChangeDelegate().getCurrentContent(region, expandRegionToFullLine, surroundingLines, pm);
-	}
-
-	@Override
-	public boolean getKeepPreviewEdits() {
-		return getTextEditBasedChangeDelegate().getKeepPreviewEdits();
-	}
-
-	@Override
-	public String getPreviewContent(TextEditBasedChangeGroup[] changeGroups, IRegion region,
-			boolean expandRegionToFullLine, int surroundingLines, IProgressMonitor pm) throws CoreException {
-		return getTextEditBasedChangeDelegate().getPreviewContent(changeGroups, region, expandRegionToFullLine,
-				surroundingLines, pm);
-	}
-
-	@Override
-	public String getPreviewContent(IProgressMonitor pm) throws CoreException {
-		return getTextEditBasedChangeDelegate().getPreviewContent(pm);
-	}
-
-	@Override
-	public String getTextType() {
-		return getTextEditBasedChangeDelegate().getTextType();
-	}
-
-	@Override
-	public void setKeepPreviewEdits(boolean keep) {
-		getTextEditBasedChangeDelegate().setKeepPreviewEdits(keep);
-	}
-
-	@Override
-	public void setTextType(String type) {
-		getTextEditBasedChangeDelegate().setTextType(type);
-	}
-
-	protected TextEditBasedChange getTextEditBasedChangeDelegate() {
-		if (!(delegate instanceof TextEditBasedChange))
-			throw new RuntimeException(
-					"Delegate change is not a TextEditBasedChange but is expected to be one. This should never happen ;-)");
-		return (TextEditBasedChange) delegate;
-	}
-
 }

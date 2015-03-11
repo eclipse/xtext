@@ -17,4 +17,16 @@ public class PreferenceConstants {
 
 	public static final char SEPARATOR = '.';
 	public static final String EDITOR_NODE_NAME = "editor";
+	
+	/**
+	 * copied from org.eclipse.jdt.ui.PreferenceConstants
+	 * 
+	 * A named preference that controls whether the 'sub-word navigation' feature is
+	 * enabled.
+	 * <p>
+	 * Value is of type <code>Boolean</code>.
+	 * </p>
+	 * @since 2.4
+	 */
+	public final static String EDITOR_SUB_WORD_NAVIGATION= "subWordNavigation"; //$NON-NLS-1$
 }

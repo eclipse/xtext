@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.backtrackingTestLanguage.impl;
 
@@ -32,6 +29,7 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.Xb;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.ModelImpl#getEnums <em>Enums</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.ModelImpl#getYcs <em>Ycs</em>}</li>
@@ -40,7 +38,6 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.Xb;
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.ModelImpl#getYs <em>Ys</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.ModelImpl#getAs <em>As</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover.html;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +43,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -60,14 +61,13 @@ import com.ibm.icu.text.MessageFormat;
  * @author Christoph Kulla - Initial contribution and API
  * @author Sven Efftinge
  */
-@SuppressWarnings("restriction")
 public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
 	private ILabelProvider labelProvider;
 
-	@Inject
-	private IEObjectDocumentationProvider decoratedProvider;
+	@Inject 
+	private IEObjectHoverDocumentationProvider decoratedProvider;
 	
 	@Inject
 	private IQualifiedNameProvider nameProvider;
@@ -79,8 +79,8 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		buffer.append (getFirstLine(o));
 		String documentation = getDocumentation(o);
 		if (documentation!=null && documentation.length()>0) {
-			buffer.append ("<p>");
-			buffer.append (documentation);
+			buffer.append("<p>");
+			buffer.append(documentation);
 			buffer.append("</p>");
 		}
 		return buffer.toString();
@@ -100,7 +100,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	}
 
 	protected boolean hasHover(EObject o) {
-		return nameProvider.getFullyQualifiedName(o)!=null;
+		return nameProvider.getFullyQualifiedName(o) !=null;
 	}
 
 	protected String getDocumentation(EObject o) {
@@ -108,11 +108,16 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	}
 
 	protected String getFirstLine(EObject o) {
-		return o.eClass().getName()+ " <b>"+getLabel(o)+"</b>";
+		String label = getLabel(o);
+		return o.eClass().getName()+ ((label != null) ? " <b>"+label+"</b>" : "");
 	}
 	
 	protected String getLabel (EObject o) {
-		return getLabelProvider().getText(o);
+		String text = getLabelProvider().getText(o);
+		if(!isEmpty(text))
+			return HTMLPrinter.convertToHTMLContent(text);
+		else
+			return null;
 	}
 	
 	protected ILabelProvider getLabelProvider () {
@@ -143,10 +148,10 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	private IInformationControlCreator presenterControlCreator;
 
-	private static final class BackAction extends Action {
-		private final BrowserInformationControl fInfoControl;
+	protected static final class BackAction extends Action {
+		private final IXtextBrowserInformationControl fInfoControl;
 
-		public BackAction(BrowserInformationControl infoControl) {
+		public BackAction(IXtextBrowserInformationControl infoControl) {
 			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_Back);
 			ISharedImages images = PlatformUI.getWorkbench().getSharedImages();
@@ -180,10 +185,10 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		}
 	}
 
-	private static final class ForwardAction extends Action {
-		private final BrowserInformationControl fInfoControl;
+	protected static final class ForwardAction extends Action {
+		private final IXtextBrowserInformationControl fInfoControl;
 
-		public ForwardAction(BrowserInformationControl infoControl) {
+		public ForwardAction(IXtextBrowserInformationControl infoControl) {
 			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_Forward);
 			ISharedImages images = PlatformUI.getWorkbench().getSharedImages();
@@ -247,11 +252,12 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	/**
 	 * Action that opens the current hover input element.
+	 * @since 2.3
 	 */
-	private final class OpenDeclarationAction extends Action {
-		private final BrowserInformationControl fInfoControl;
+	protected class OpenDeclarationAction extends Action {
+		private final IXtextBrowserInformationControl fInfoControl;
 
-		public OpenDeclarationAction(BrowserInformationControl infoControl) {
+		public OpenDeclarationAction(IXtextBrowserInformationControl infoControl) {
 			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_OpenDeclaration);
 			setImageDescriptor(XtextPluginImages.DESC_OPEN_DECLARATION);
@@ -278,9 +284,21 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		return o.eResource().getURI().appendFragment(o.eResource().getURIFragment(o));
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
 	protected void addLinkListener(final BrowserInformationControl control) {
+		addLinkListener(new XtextBrowserInformationControlAdapter(control));
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void addLinkListener(final IXtextBrowserInformationControl control) {
 		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
+			@Override
 			public void handleXtextdocViewLink(URI linkTarget) {
 				// TODO: enable when XtextDoc view available
 				//				control.notifyDelayedInputChange(null);
@@ -294,6 +312,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				//				}
 			}
 
+			@Override
 			public void handleInlineXtextdocLink(URI linkTarget) {
 				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null,
 						(XtextBrowserInformationControlInput) control.getInput());
@@ -303,6 +322,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 					control.setInput(hoverInfo);
 			}
 
+			@Override
 			public void handleDeclarationLink(URI linkTarget) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
@@ -310,6 +330,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 					uriEditorOpener.open(linkTarget, true);
 			}
 
+			@Override
 			public boolean handleExternalLink(URL url, Display display) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
@@ -319,6 +340,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				return true;
 			}
 
+			@Override
 			public void handleTextSet() {
 			}
 
@@ -330,36 +352,45 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		}));
 	}
 
-	public final class PresenterControlCreator extends AbstractReusableInformationControlCreator {
+	public class PresenterControlCreator extends AbstractReusableInformationControlCreator {
 
-		/*
-		 * @see org.eclipse.jdt.internal.ui.text.java.hover.AbstractReusableInformationControlCreator#doCreateInformationControl(org.eclipse.swt.widgets.Shell)
-		 */
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
 			if (BrowserInformationControl.isAvailable(parent)) {
 				ToolBarManager tbm = new ToolBarManager(SWT.FLAT);
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: mPreferenceConstants.APPEARANCE_JAVADOC_FONT;
-				BrowserInformationControl iControl = new BrowserInformationControl(parent, font, tbm);
-
-				final BackAction backAction = new BackAction(iControl);
+				IXtextBrowserInformationControl control = new XtextBrowserInformationControl(parent, font, tbm);
+				configureControl(control, tbm, font);
+				return control;
+			} else {
+				return new DefaultInformationControl(parent,true);
+			}
+		}
+		
+		/**
+		 * @since 2.3
+		 */
+		protected void configureControl(final IXtextBrowserInformationControl control, ToolBarManager tbm, String font){
+				final BackAction backAction = new BackAction(control);
 				backAction.setEnabled(false);
 				tbm.add(backAction);
-				final ForwardAction forwardAction = new ForwardAction(iControl);
+				final ForwardAction forwardAction = new ForwardAction(control);
 				tbm.add(forwardAction);
 				forwardAction.setEnabled(false);
 
 				//				final ShowInJavadocViewAction showInJavadocViewAction= new ShowInJavadocViewAction(iControl);
 				//				tbm.add(showInJavadocViewAction);
-				final OpenDeclarationAction openDeclarationAction = new OpenDeclarationAction(iControl);
+				final OpenDeclarationAction openDeclarationAction = new OpenDeclarationAction(control);
 				tbm.add(openDeclarationAction);
 
 				//				final SimpleSelectionProvider selectionProvider= new SimpleSelectionProvider();
 
 				IInputChangedListener inputChangeListener = new IInputChangedListener() {
+					@Override
 					public void inputChanged(Object newInput) {
 						backAction.update();
 						forwardAction.update();
+				
 						if (newInput == null) {
 							//							selectionProvider.setSelection(new StructuredSelection());
 						} else if (newInput instanceof XtextBrowserInformationControlInput) {
@@ -372,18 +403,13 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 						}
 					}
 				};
-				iControl.addInputChangeListener(inputChangeListener);
+				control.addInputChangeListener(inputChangeListener);
 				tbm.update(true);
-				addLinkListener(iControl);
-				return iControl;
-
-			} else {
-				return new DefaultInformationControl(parent, true);
-			}
+				addLinkListener(control);
 		}
 	}
 
-	public final class HoverControlCreator extends AbstractReusableInformationControlCreator {
+	public class HoverControlCreator extends AbstractReusableInformationControlCreator {
 
 		private final IInformationControlCreator fInformationPresenterControlCreator;
 
@@ -399,7 +425,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			String tooltipAffordanceString = EditorsUI.getTooltipAffordanceString();
 			if (BrowserInformationControl.isAvailable(parent)) {
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: PreferenceConstants.APPEARANCE_JAVADOC_FONT;
-				BrowserInformationControl iControl = new BrowserInformationControl(parent, font,
+				IXtextBrowserInformationControl iControl = new XtextBrowserInformationControl(parent, font,
 						tooltipAffordanceString) {
 					/*
 					 * @see org.eclipse.jface.text.IInformationControlExtension5#getInformationPresenterControlCreator()
@@ -462,7 +488,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	 * @return the style sheet, or <code>null</code> if unable to load
 	 */
 	protected String loadStyleSheet() {
-		URL styleSheetURL = Activator.getDefault().getBundle().getEntry(styleSheetFileName); //$NON-NLS-1$
+		URL styleSheetURL = Activator.getDefault().getBundle().getEntry(styleSheetFileName); 
 		if (styleSheetURL != null) {
 			BufferedReader reader = null;
 			try {
@@ -488,15 +514,23 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		return null;
 	}
 
+	@Override
 	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
-		return new IInformationControlCreatorProvider() {
+		return new IInformationControlCreatorProvider2() {
 
+			@Override
 			public IInformationControlCreator getHoverControlCreator() {
 				return DefaultEObjectHoverProvider.this.getHoverControlCreator();
 			}
 
+			@Override
 			public Object getInfo() {
 				return getHoverInfo(object, region, null);
+			}
+
+			@Override
+			public IInformationControlCreator getInformationPresenterControlCreator() {
+				return DefaultEObjectHoverProvider.this.getInformationPresenterControlCreator();
 			}};
 	}
 

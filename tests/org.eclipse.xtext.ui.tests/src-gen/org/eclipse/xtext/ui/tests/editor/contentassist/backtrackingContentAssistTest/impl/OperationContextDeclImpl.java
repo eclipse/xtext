@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl;
 
@@ -35,6 +32,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.OperationContextDeclImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.OperationContextDeclImpl#getParameters <em>Parameters</em>}</li>
@@ -43,7 +41,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.OperationContextDeclImpl#getPosts <em>Posts</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.OperationContextDeclImpl#getBodies <em>Bodies</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

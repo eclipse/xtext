@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -24,8 +25,9 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/linking"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
+		pathTestProject = runtimeProject
 		projectNameRt = projectName
 		
 		language = {
@@ -52,6 +54,10 @@ Workflow {
 				fragment = scoping.ImportNamespacesScopingFragment {
 				}
 			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/Bug362902.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
@@ -82,6 +88,7 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			fragment = generator.junit.Junit4Fragment {}
 			fragment = @TestLanguagesFragments {}
 		}
 	}

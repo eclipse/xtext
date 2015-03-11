@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.refactoring.refactoring.impl;
 
@@ -30,12 +27,12 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.impl.ElementImpl#getContained <em>Contained</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.impl.ElementImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

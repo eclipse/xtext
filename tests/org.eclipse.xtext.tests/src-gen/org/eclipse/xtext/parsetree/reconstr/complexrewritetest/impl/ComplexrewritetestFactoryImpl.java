@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -33,7 +30,7 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
   {
     try
     {
-      ComplexrewritetestFactory theComplexrewritetestFactory = (ComplexrewritetestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/complexrewritetest"); 
+      ComplexrewritetestFactory theComplexrewritetestFactory = (ComplexrewritetestFactory)EPackage.Registry.INSTANCE.getEFactory(ComplexrewritetestPackage.eNS_URI);
       if (theComplexrewritetestFactory != null)
       {
         return theComplexrewritetestFactory;

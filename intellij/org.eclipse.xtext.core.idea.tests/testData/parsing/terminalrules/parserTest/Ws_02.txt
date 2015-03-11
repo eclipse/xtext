@@ -1,0 +1,3 @@
+org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.TerminalRulesTestLanguageFileImpl:a.terminalrulestestlanguage(0,1)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,1)
+    PsiElement(Model_WsValueWSTerminalRuleCall_6_0_ELEMENT_TYPE)('\t')(0,1)

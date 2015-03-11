@@ -9,10 +9,11 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.bug302128.Model;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author svenefftinge - Initial contribution and API
@@ -21,7 +22,7 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class Bug302128Test extends AbstractXtextTests {
 
-	public void testTheBug2() throws Exception {
+	@Test public void testTheBug2() throws Exception {
 		with(new Bug302128TestLanguageStandaloneSetup());
 		String text = "VARIABLE += value.val value2.val\n" 
 				+ "VARIABLE2 += value3.val value4.val\n\n"

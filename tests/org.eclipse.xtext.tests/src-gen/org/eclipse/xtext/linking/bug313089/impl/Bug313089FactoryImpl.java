@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug313089.impl;
 
@@ -33,7 +30,7 @@ public class Bug313089FactoryImpl extends EFactoryImpl implements Bug313089Facto
   {
     try
     {
-      Bug313089Factory theBug313089Factory = (Bug313089Factory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/test/Bug313089TestLanguage"); 
+      Bug313089Factory theBug313089Factory = (Bug313089Factory)EPackage.Registry.INSTANCE.getEFactory(Bug313089Package.eNS_URI);
       if (theBug313089Factory != null)
       {
         return theBug313089Factory;

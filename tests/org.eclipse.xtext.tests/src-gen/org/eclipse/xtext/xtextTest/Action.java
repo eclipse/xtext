@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest;
 
@@ -13,12 +10,12 @@ package org.eclipse.xtext.xtextTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.Action#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.Action#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.Action#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getAction()
  * @model

@@ -1,0 +1,4 @@
+import 
+entity Foo2 {
+    Bar bar
+}

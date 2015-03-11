@@ -72,6 +72,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return this;
 	}
 
+	@Override
 	public void rollback() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before rollback.");
@@ -80,6 +81,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		forget();
 	}
 
+	@Override
 	public void flush() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before flush.");
@@ -95,6 +97,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		lastOffset = input.getOffset();
 	}
 
+	@Override
 	public void commit() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before commit.");
@@ -111,6 +114,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		this.parent = null; // prevent accidental change
 	}
 
+	@Override
 	public Marker fork() {
 		lastOffset = input.getOffset();
 		input.setOffset(getOffset());
@@ -125,6 +129,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return result;
 	}
 
+	@Override
 	public IMarker join(IMarker forkedMarker) {
 		if (!(forkedMarker instanceof Marker))
 			throw new IllegalArgumentException("forkedMarker is not supported: " + forkedMarker);
@@ -179,6 +184,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		}
 	}
 
+	@Override
 	public void accept(AbstractParsedToken token) {
 		if (danglingChildCount != 0)
 			throw new IllegalStateException("cannot accept tokens if there exist any dangling children.");
@@ -201,6 +207,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return input;
 	}
 
+	@Override
 	public IBacktrackingResult skipPreviousToken() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before backtracking.");

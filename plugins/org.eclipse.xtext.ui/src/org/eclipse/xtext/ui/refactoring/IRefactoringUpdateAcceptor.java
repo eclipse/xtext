@@ -10,15 +10,15 @@ package org.eclipse.xtext.ui.refactoring;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringUpdateAcceptor;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Aggregates document updates as {@link Change Changes} or {@link TextEdits}. Clients can report issues to the
+ * Aggregates document updates as {@link Change Changes} or {@link TextEdit}s. Clients can report issues to the
  * refactoring status.
  * 
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,7 +30,7 @@ public interface IRefactoringUpdateAcceptor {
 
 	void accept(URI resourceURI, Change change);
 
-	RefactoringStatus getRefactoringStatus();
+	StatusWrapper getRefactoringStatus();
 	
 	IRefactoringDocument getDocument(URI resourceURI);
 	

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -22,9 +21,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 public class TransientValueService implements ITransientValueService {
 
 	protected boolean defaultValueIsSerializeable(EStructuralFeature feature) {
-		// TODO: this needs a generic implementation
 		if (feature instanceof EAttribute) {
-			return feature.getEType() == EcorePackage.eINSTANCE.getEInt() || feature.getEType() instanceof EEnum;
+			if (feature.getEType() == EcorePackage.eINSTANCE.getEString() && feature.getDefaultValue() == null)
+				return false;
+			return true;
 		}
 		return false;
 	}
@@ -39,20 +39,23 @@ public class TransientValueService implements ITransientValueService {
 		return false;
 	}
 
-	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (feature.isTransient() || isContainerReferenceInSameResource(semanitcObject, feature))
+	@Override
+	public ListTransient isListTransient(EObject semanticObject, EStructuralFeature feature) {
+		if (feature.isTransient() || isContainerReferenceInSameResource(semanticObject, feature))
 			return ListTransient.YES;
 		else
 			return ListTransient.NO;
 	}
 
-	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature) {
+	@Override
+	public boolean isValueInListTransient(EObject semanticObject, int index, EStructuralFeature feature) {
 		return false;
 	}
 
-	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (feature.isTransient() || !semanitcObject.eIsSet(feature)
-				|| isContainerReferenceInSameResource(semanitcObject, feature)) {
+	@Override
+	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {
+		if (feature.isTransient() || !semanticObject.eIsSet(feature)
+				|| isContainerReferenceInSameResource(semanticObject, feature)) {
 			if (defaultValueIsSerializeable(feature))
 				return ValueTransient.PREFERABLY;
 			else

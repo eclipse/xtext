@@ -69,6 +69,8 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 	protected boolean hasQuickFixableAnnotationInCurrentLine() {
 		try {
 			AbstractMarkerAnnotationModel annotationModel = getAnnotationModel();
+      if (annotationModel == null)
+        return false;
 			int line = ruler.getLineOfLastMouseButtonActivity();
 			IDocument document = getDocument();
 			IRegion region = document.getLineInformation(line);
@@ -82,7 +84,7 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 						return true;
 				} else if (element instanceof MarkerAnnotation) {
 					MarkerAnnotation annotation = (MarkerAnnotation) element;
-					if (annotation.isQuickFixable())
+					if (annotation.isQuickFixableStateSet() && annotation.isQuickFixable())
 						return true;
 				}
 			}

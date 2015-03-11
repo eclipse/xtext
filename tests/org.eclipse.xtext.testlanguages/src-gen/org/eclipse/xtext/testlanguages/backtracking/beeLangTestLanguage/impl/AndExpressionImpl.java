@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Expressi
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AndExpressionImpl#getLeftExpr <em>Left Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.AndExpressionImpl#getRightExpr <em>Right Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

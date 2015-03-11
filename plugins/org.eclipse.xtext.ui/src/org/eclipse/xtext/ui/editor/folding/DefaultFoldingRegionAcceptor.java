@@ -16,12 +16,13 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Michael Clay - Initial contribution and API
  * @author Sebastian Zarnekow - Introduced FoldedPosition
  */
-public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITextRegion> {
+public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExtension<ITextRegion> {
 	private static final Logger log = Logger.getLogger(DefaultFoldingRegionAcceptor.class);
 	private Collection<FoldedPosition> result;
 	private IXtextDocument xtextDocument;
@@ -31,16 +32,45 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITex
 		this.xtextDocument = document;
 	}
 
-	public void accept(int offset, int length, ITextRegion significantRegion) {
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public void accept(int offset, int length, boolean initiallyFolded, ITextRegion significantRegion) {
 		IRegion position = getLineRegion(offset, length);
-		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion);
+		try {
+			if (xtextDocument != null && significantRegion != null) {
+				int firstLine = xtextDocument.getLineOfOffset(significantRegion.getOffset());
+				int lastLine = xtextDocument.getLineOfOffset(significantRegion.getOffset()+significantRegion.getLength());
+				if (firstLine != lastLine) {
+					int endOffset = xtextDocument.getLineOffset(firstLine)+xtextDocument.getLineLength(firstLine);
+					significantRegion = new TextRegion(significantRegion.getOffset(), endOffset - significantRegion.getOffset());
+				}
+			}
+		} catch (BadLocationException e) {
+		}
+		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion, initiallyFolded);
 		if (foldingRegion != null) {
 			result.add(foldingRegion);
 		}
 	}
 	
+	@Override
+	public void accept(int offset, int length, ITextRegion significantRegion) {
+		accept(offset, length, false, significantRegion);
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public void accept(int offset, int length, boolean initiallyFolded) {
+		accept(offset, length, initiallyFolded, null);
+	}
+	
+	@Override
 	public void accept(int offset, int length) {
-		accept(offset, length, null);
+		accept(offset, length, false, null);
 	}
 
 	protected IRegion getLineRegion(int offset, int length) {
@@ -54,17 +84,29 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITex
 				position = new Region(start, end - start);
 			}
 		} catch (BadLocationException e) {
-			log.error(e.getMessage(), e);
+			if (log.isInfoEnabled())
+				log.info(e.getMessage(), e);
 		}
 		return position;
 	}
 
+	/**
+	 * @deprecated use {@link #newFoldedPosition(IRegion, ITextRegion, boolean)}
+	 */
+	@Deprecated
 	protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion) {
+		return newFoldedPosition(region, significantRegion, false);
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion, boolean initiallyFolded) {
 		if (region == null)
 			return null;
 		if (significantRegion != null)
-			return new DefaultFoldedPosition(region.getOffset(), region.getLength(), significantRegion.getOffset() - region.getOffset(), significantRegion.getLength());
-		return new DefaultFoldedPosition(region.getOffset(), region.getLength(), DefaultFoldedPosition.UNSET, DefaultFoldedPosition.UNSET);
+			return new DefaultFoldedPosition(region.getOffset(), region.getLength(), significantRegion.getOffset() - region.getOffset(), significantRegion.getLength(), initiallyFolded);
+		return new DefaultFoldedPosition(region.getOffset(), region.getLength(), DefaultFoldedPosition.UNSET, DefaultFoldedPosition.UNSET, initiallyFolded);
 	}
 
 }

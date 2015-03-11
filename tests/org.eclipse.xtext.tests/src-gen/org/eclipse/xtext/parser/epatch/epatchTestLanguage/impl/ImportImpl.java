@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Import;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

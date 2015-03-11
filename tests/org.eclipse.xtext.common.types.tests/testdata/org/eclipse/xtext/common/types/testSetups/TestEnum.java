@@ -13,13 +13,22 @@ package org.eclipse.xtext.common.types.testSetups;
  */
 public enum TestEnum {
 
-	FirstValue("Zonk"),
+	FirstValue("Zonk") {
+		@Override
+		public String toString() {
+			return super.toString().toLowerCase();
+		}
+	},
 	SecondValue("Bla");
 	
 	String string;
 	
 	TestEnum(String string) {
 		this.string = string;
+	}
+	
+	public enum Nested {
+		SINGLETON {};
 	}
 
 }

@@ -30,22 +30,27 @@ public class BuildContext implements IBuildContext {
 		this.deltas = deltas;
 	}
 
+	@Override
 	public IProject getBuiltProject() {
 		return builder.getProject();
 	}
 
+	@Override
 	public List<IResourceDescription.Delta> getDeltas() {
 		return deltas;
 	}
 
+	@Override
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
 	
+	@Override
 	public void needRebuild() {
 		builder.needRebuild();
 	}
 	
+	@Override
 	public BuildType getBuildType() {
 		return type;
 	}

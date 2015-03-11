@@ -15,13 +15,14 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 
-@SuppressWarnings("restriction")
 public class MockRefactoringDocument implements IRefactoringDocument {
 
 	public static class Provider implements IRefactoringDocument.Provider {
 
-		public IRefactoringDocument get(URI resourceURI, RefactoringStatus status) {
+		@Override
+		public IRefactoringDocument get(URI resourceURI, StatusWrapper status) {
 			return new MockRefactoringDocument(resourceURI, "");
 		}
 		
@@ -39,14 +40,17 @@ public class MockRefactoringDocument implements IRefactoringDocument {
 		this(null, null);
 	}
 
+	@Override
 	public Change createChange(String name, TextEdit textEdit) {
 		return new MockChange(name, textEdit);
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
 
+	@Override
 	public String getOriginalContents() {
 		return content;
 	}

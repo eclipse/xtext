@@ -37,6 +37,7 @@ public class DefaultSingleLineCommentHelper implements ISingleLineCommentHelper 
 	
 	private String[] result;
 	
+	@Override
 	public String[] getDefaultPrefixes(ISourceViewer sourceViewer, String contentType) {
 		if (result != null)
 			return result;

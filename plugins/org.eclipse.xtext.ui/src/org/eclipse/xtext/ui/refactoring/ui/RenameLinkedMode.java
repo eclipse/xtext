@@ -32,9 +32,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.link.EditorLinkedModeUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -43,9 +43,6 @@ import com.google.inject.Inject;
 public class RenameLinkedMode {
 
 	private static final Logger LOG = Logger.getLogger(RenameLinkedMode.class);
-
-	@Inject
-	private ILinkedPositionGroupCalculator linkedPositionGroupCalculator;
 
 	@Inject
 	private RenameRefactoringController controller;
@@ -60,50 +57,45 @@ public class RenameLinkedMode {
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
 
-
-	public void start(IRenameElementContext renameElementContext, IProgressMonitor monitor) {
+	public boolean start(IRenameElementContext renameElementContext, Provider<LinkedPositionGroup> provider, IProgressMonitor monitor) {
 		if (renameElementContext == null)
 			throw new IllegalArgumentException("RenameElementContext is null");
-		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext, monitor);
+		this.linkedPositionGroup = provider.get();
 		if (linkedPositionGroup == null || linkedPositionGroup.isEmpty())
-			throw new IllegalStateException("Calculation of linked editing positions failed");
+			return false;
 		this.editor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		this.focusEditingSupport = new FocusEditingSupport();
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 		IDocument document = viewer.getDocument();
 		originalSelection = viewer.getSelectedRange();
-		for (LinkedPosition linkedPosition : linkedPositionGroup.getPositions()) {
-			if (linkedPosition.includes(originalSelection.x + originalSelection.y)) {
-				currentPosition = linkedPosition;
-				originalName = getCurrentName();
-				viewer.setSelectedRange(currentPosition.offset, currentPosition.length);
-			}
-		}
-		if (currentPosition == null) {
-			throw new IllegalStateException("Current selection is not within any linked editing position");
-		}
-
+		currentPosition = linkedPositionGroup.getPositions()[0];
+		originalName = getCurrentName();
 		try {
 			linkedModeModel = new LinkedModeModel();
 			linkedModeModel.addGroup(linkedPositionGroup);
 			linkedModeModel.forceInstall();
 			linkedModeModel.addLinkingListener(new EditorSynchronizer());
 			LinkedModeUI ui = new EditorLinkedModeUI(linkedModeModel, viewer);
-			ui.setExitPosition(viewer, currentPosition.getOffset(), 0, Integer.MAX_VALUE);
 			ui.setExitPolicy(new ExitPolicy(document));
+			if (currentPosition.includes(originalSelection.x))
+				ui.setExitPosition(viewer, originalSelection.x, 0, Integer.MAX_VALUE);
 			ui.enter();
+			if (currentPosition.includes(originalSelection.x)
+					&& currentPosition.includes(originalSelection.x + originalSelection.y))
+				viewer.setSelectedRange(originalSelection.x, originalSelection.y);
 			if (viewer instanceof IEditingSupportRegistry) {
 				IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
 				registry.register(focusEditingSupport);
 			}
 			openPopup();
+			return true;
 		} catch (BadLocationException e) {
 			throw new WrappedException(e);
 		}
 	}
 
 	protected void openPopup() {
-		popup = new RenameRefactoringPopup(editor, controller);
+		popup = new RenameRefactoringPopup(editor, controller, this);
 		popup.open();
 	}
 
@@ -111,7 +103,7 @@ public class RenameLinkedMode {
 		String currentName = getCurrentName();
 		return !isEmpty(currentName) && !equal(originalName, currentName);
 	}
-	
+
 	public String getCurrentName() {
 		if (currentPosition != null)
 			try {
@@ -165,6 +157,7 @@ public class RenameLinkedMode {
 	}
 
 	protected class EditorSynchronizer implements ILinkedModeListener {
+		@Override
 		public void left(LinkedModeModel model, int flags) {
 			//boolean isValidNewName = updateNewName();
 			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0) {// && isValidNewName) {
@@ -177,14 +170,17 @@ public class RenameLinkedMode {
 			}
 		}
 
+		@Override
 		public void suspend(LinkedModeModel model) {
 		}
 
+		@Override
 		public void resume(LinkedModeModel model, int flags) {
 		}
 	}
 
 	protected class FocusEditingSupport implements IEditingSupport {
+		@Override
 		public boolean ownsFocusShell() {
 			if (popup == null)
 				return false;
@@ -199,6 +195,7 @@ public class RenameLinkedMode {
 			return false;
 		}
 
+		@Override
 		public boolean isOriginator(DocumentEvent event, IRegion subjectRegion) {
 			return false; // leave on external modification outside positions
 		}
@@ -211,6 +208,7 @@ public class RenameLinkedMode {
 			this.document = document;
 		}
 
+		@Override
 		public ExitFlags doExit(LinkedModeModel model, VerifyEvent event, int offset, int length) {
 			showPreview = (event.stateMask & SWT.CTRL) != 0 && (event.character == SWT.CR || event.character == SWT.LF);
 			if (length == 0 && (event.character == SWT.BS || event.character == SWT.DEL)) {

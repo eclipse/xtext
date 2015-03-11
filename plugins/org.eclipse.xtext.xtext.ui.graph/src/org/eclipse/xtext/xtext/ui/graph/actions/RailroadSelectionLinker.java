@@ -52,6 +52,7 @@ public class RailroadSelectionLinker implements IPropertyChangeListener {
 	private RailroadViewPreferences preferences;
 
 	private ISelectionChangedListener diagramSelectionChangeListener = new ISelectionChangedListener() {
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (view.getControl().isFocusControl())
 				diagramSelectionChanged(event);
@@ -59,6 +60,7 @@ public class RailroadSelectionLinker implements IPropertyChangeListener {
 	};
 
 	private ISelectionChangedListener textSelectionChangeListener = new ISelectionChangedListener() {
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (preferences.isLinkWithEditor() && view.getSite().getPage().getActivePart() != view)
 				textSelectionChanged(event);
@@ -103,6 +105,7 @@ public class RailroadSelectionLinker implements IPropertyChangeListener {
 				// enqueue to make sure the diagram is updated before
 				if (isActivateEditor && isSelectElement) {
 					Display.getDefault().asyncExec(new Runnable() {
+						@Override
 						public void run() {
 							uriEditorOpener.open(grammarElementURI, isSelectElement);
 						}
@@ -167,6 +170,7 @@ public class RailroadSelectionLinker implements IPropertyChangeListener {
 		return currentBestFigure;
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getProperty().equals(RailroadViewPreferences.LINK_WITH_EDITOR_KEY)
 				&& event.getNewValue() == Boolean.TRUE) {

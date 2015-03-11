@@ -11,9 +11,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import org.eclipse.xtext.util.ReflectionUtil;
+
 import com.google.inject.Provider;
 import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.internal.MoreTypes;
 
 public class ProviderModule extends MethodBasedModule {
 
@@ -43,6 +44,6 @@ public class ProviderModule extends MethodBasedModule {
 	}
 
 	protected boolean isInstanceOf(Type keyType, Class<?> class1) {
-		return class1.isAssignableFrom(MoreTypes.getRawType(keyType));
+		return class1.isAssignableFrom(ReflectionUtil.getRawType(keyType));
 	}
 }

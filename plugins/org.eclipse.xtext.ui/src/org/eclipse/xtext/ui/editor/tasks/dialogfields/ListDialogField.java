@@ -432,10 +432,12 @@ public class ListDialogField extends DialogField {
 			assertCompositeNotNull(parent);
 
 			SelectionListener listener = new SelectionListener() {
+				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
 					doButtonSelected(e);
 				}
 
+				@Override
 				public void widgetSelected(SelectionEvent e) {
 					doButtonSelected(e);
 				}
@@ -795,6 +797,7 @@ public class ListDialogField extends DialogField {
 		if (isOkToUse(fTableControl)) {
 			Display d = fTableControl.getDisplay();
 			d.asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					if (isOkToUse(fTableControl)) {
 						selectElements(selection);
@@ -921,19 +924,23 @@ public class ListDialogField extends DialogField {
 
 		// ------- ITableContentProvider Interface ------------
 
+		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			// will never happen
 		}
 
+		@Override
 		public void dispose() {
 		}
 
+		@Override
 		public Object[] getElements(Object obj) {
 			return fElements.toArray();
 		}
 
 		// ------- ISelectionChangedListener Interface ------------
 
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			doListSelected(event);
 		}
@@ -945,6 +952,7 @@ public class ListDialogField extends DialogField {
 		 * org.eclipse.jface.viewers.IDoubleClickListener#doubleClick(org.eclipse
 		 * .jface.viewers.DoubleClickEvent)
 		 */
+		@Override
 		public void doubleClick(DoubleClickEvent event) {
 			doDoubleClick(event);
 		}

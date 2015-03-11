@@ -60,6 +60,7 @@ public class Bug287941TestLanguageRuntimeModule extends AbstractBug287941TestLan
 					_this.getFromEntries(),
 					new Function<FromEntry, IEObjectDescription>() {
 
+						@Override
 						public IEObjectDescription apply(FromEntry from) {
 							return EObjectDescription.create(QualifiedName.create(from.getAlias()), from);
 						}
@@ -84,6 +85,7 @@ public class Bug287941TestLanguageRuntimeModule extends AbstractBug287941TestLan
 					Predicate<IEObjectDescription> actualFilter = Predicates.and(
 							filter == null ? Predicates.<IEObjectDescription>alwaysTrue() : filter,
 							new Predicate<IEObjectDescription>() {
+								@Override
 								public boolean apply(IEObjectDescription input) {
 									return input.getName().startsWith(pack.getName());
 								}
@@ -100,6 +102,7 @@ public class Bug287941TestLanguageRuntimeModule extends AbstractBug287941TestLan
 						protected java.lang.Iterable<IEObjectDescription> getAllLocalElements() {
 							Iterable<IEObjectDescription> result = super.getAllLocalElements();
 							result = Iterables.transform(result, new Function<IEObjectDescription, IEObjectDescription>() {
+								@Override
 								public IEObjectDescription apply(IEObjectDescription from) {
 									return new AliasedEObjectDescription(from.getName().skipFirst(pack.getName().getSegmentCount()), from);
 								}

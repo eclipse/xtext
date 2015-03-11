@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.PersonImpl#getAge <em>Age</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,11 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
-
-import java.lang.Iterable;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,12 +16,15 @@ import java.lang.Iterable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator
 {
@@ -52,35 +55,59 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	void setInterface(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Strict Floating Point</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Strict Floating Point</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmTypeReference>"
+	 * @return the value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #setStrictFloatingPoint(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_StrictFloatingPoint()
+	 * @model
 	 * @generated
+	 * @since 2.4
 	 */
-	Iterable<JvmTypeReference> getExtendedInterfaces();
+	boolean isStrictFloatingPoint();
 
 	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @param value the new value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #isStrictFloatingPoint()
 	 * @generated
+	 * @since 2.4
 	 */
-	JvmTypeReference getExtendedClass();
+	void setStrictFloatingPoint(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Anonymous</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Anonymous</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Anonymous</em>' attribute.
+	 * @see #setAnonymous(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_Anonymous()
+	 * @model
 	 * @generated
+	 * @since 2.6
 	 */
-	boolean isInstantiateable();
+	boolean isAnonymous();
 
 	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmConstructor>" required="true"
+	 * @param value the new value of the '<em>Anonymous</em>' attribute.
+	 * @see #isAnonymous()
 	 * @generated
+	 * @since 2.6
 	 */
-	Iterable<JvmConstructor> getDeclaredConstructors();
+	void setAnonymous(boolean value);
 
 } // JvmGenericType

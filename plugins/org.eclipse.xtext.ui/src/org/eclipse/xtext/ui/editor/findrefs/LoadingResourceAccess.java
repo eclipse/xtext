@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.3
  */
 public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 
@@ -32,6 +33,7 @@ public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAcc
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 	
+	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(targetURI.trimFragment());
 		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
@@ -41,6 +43,7 @@ public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAcc
 			if (project != null) {
 				ResourceSet resourceSet = resourceSetProvider.get(project);
 				if(resourceSet != null)
+					resourceSet.getResource(targetURI, true);
 					try {
 						return work.exec(resourceSet);
 					} catch (Exception e) {

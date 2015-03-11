@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.index.indexTestLanguage.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

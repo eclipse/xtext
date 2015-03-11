@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
@@ -9,13 +6,18 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
@@ -104,7 +106,8 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -114,7 +117,8 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -127,7 +131,8 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  public Options getOptions()
+  @Override
+public Options getOptions()
   {
     return options;
   }
@@ -154,7 +159,8 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOptions(Options newOptions)
+  @Override
+public void setOptions(Options newOptions)
   {
     if (newOptions != options)
     {
@@ -175,7 +181,8 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Rule> getRules()
+  @Override
+public EList<Rule> getRules()
   {
     if (rules == null)
     {

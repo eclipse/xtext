@@ -2,16 +2,20 @@ package org.eclipse.xtext.generator.serializer;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAContext;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 public class SyntacticSequencerPDA2ExtendedDot extends GraphvizDotBuilder {
+
+	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
 	public SyntacticSequencerPDA2ExtendedDot(ISyntacticSequencerPDAProvider pdaProvider) {
@@ -21,28 +25,29 @@ public class SyntacticSequencerPDA2ExtendedDot extends GraphvizDotBuilder {
 
 	public SyntacticSequencerPDA2ExtendedDot() {
 		super();
-		this.pdaProvider = new SyntacticSequencerPDAProvider();
 	}
 
-	//	public static void drawGrammar(ISyntacticSequencerPDAProvider provider, String path, Grammar grammar) {
+	//	public static void drawGrammar(IContextProvider contexts, ISyntacticSequencerPDAProvider provider, String path,
+	//			Grammar grammar) {
 	//		try {
-	//			for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-	//				new SyntacticSequencerPDA2ExtendedDot(provider).draw(pr, path + "-" + pr.getName() + "-PDA.pdf", "-T pdf");
-	//			for (Action a : GrammarUtil.containedActions(grammar))
-	//				if (a.getFeature() != null)
-	//					new SyntacticSequencerPDA2ExtendedDot(provider)
-	//							.draw(a, path + "-" + GrammarUtil.containingRule(a).getName() + "_"
-	//									+ a.getType().getClassifier().getName() + "_" + a.getFeature() + "-PDA.pdf",
-	//									"-T pdf");
+	//			for (EObject ctx : contexts.getAllContexts(grammar))
+	//				for (EClass type : contexts.getTypesForContext(ctx))
+	//					new SyntacticSequencerPDA2ExtendedDot(provider).draw(new SequencerPDAContext(ctx, type), path + "-"
+	//							+ new Context2NameFunction().apply(ctx) + "_" + (type == null ? "null" : type.getName())
+	//							+ "-PDA.pdf", "-T pdf");
 	//		} catch (IOException e) {
+	//			e.printStackTrace();
 	//		}
 	//	}
 
 	@Override
 	protected Props drawObject(Object obj) {
-		if (obj instanceof SequencerPDAContext) {
-			SequencerPDAContext ctx = (SequencerPDAContext) obj;
-			return drawGrammar(pdaProvider.getPDA(ctx.getContext(), ctx.getType()));
+		if (obj instanceof Pair<?, ?>) {
+			@SuppressWarnings("unchecked")
+			Pair<EObject, EClass> ctx = (Pair<EObject, EClass>) obj;
+			return drawGrammar(pdaProvider.getPDA(ctx.getKey(), ctx.getValue()));
+		} else if (obj instanceof ISynState) {
+			return drawGrammar((ISynState) obj);
 		}
 		return null;
 	}

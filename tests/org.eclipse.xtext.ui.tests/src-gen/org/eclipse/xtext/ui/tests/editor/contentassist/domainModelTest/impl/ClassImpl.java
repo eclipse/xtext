@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl;
 
@@ -29,12 +26,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Property;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl.ClassImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl.ClassImpl#getSubClasses <em>Sub Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

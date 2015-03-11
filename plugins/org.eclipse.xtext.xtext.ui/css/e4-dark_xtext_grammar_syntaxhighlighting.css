@@ -1,0 +1,10 @@
+IEclipsePreferences#org-eclipse-xtext-xtext-ui {
+	preferences:
+		'syntaxColorer.TypeReference.color=102,225,248'
+		'syntaxColorer.TypeReference.style=2' /* SWT.ITALICS */
+		'syntaxColorer.RuleDeclaration.color=18,144,195'
+		'syntaxColorer.DataTypeIndicator.color=141,218,248'
+		'syntaxColorer.UnusedValue.color=128,128,128'
+		'syntaxColorer.NeverCalledRule.color=128,128,128'
+		'syntaxColorer.SpecialFeature.color=171,48,0'
+}

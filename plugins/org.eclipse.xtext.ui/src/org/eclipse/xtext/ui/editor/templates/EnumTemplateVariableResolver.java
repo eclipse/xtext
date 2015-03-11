@@ -1,11 +1,16 @@
 package org.eclipse.xtext.ui.editor.templates;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jface.text.templates.TemplateVariable;
+import org.eclipse.xtext.Grammar;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 
 /**
  * Resolves a template variable to <code>EEnumLiteral literals</code> which are
@@ -14,6 +19,7 @@ import org.eclipse.jface.text.templates.TemplateVariable;
  * 
  * @author Michael Clay - Initial contribution and API
  */
+@Singleton
 public class EnumTemplateVariableResolver extends
 		AbstractTemplateVariableResolver {
 
@@ -27,13 +33,19 @@ public class EnumTemplateVariableResolver extends
 			XtextTemplateContext castedContext) {
 		String enumerationName = (String) variable.getVariableType()
 				.getParams().iterator().next();
-		EEnum enumeration = (EEnum) getEClassifierForGrammar(enumerationName,
-				getGrammar(castedContext));
-		List<String> literals = new ArrayList<String>();
-		for (EEnumLiteral enumLiteral : enumeration.getELiterals()) {
-			literals.add(enumLiteral.getLiteral());
+		Grammar grammar = getGrammar(castedContext);
+		if (grammar == null)
+			return Collections.emptyList();
+		EEnum enumeration = (EEnum) getEClassifierForGrammar(enumerationName, grammar);
+		if (enumeration == null) {
+			return Collections.emptyList();
 		}
-		return literals;
+		return Lists.transform(enumeration.getELiterals(), new Function<EEnumLiteral, String>() {
+			@Override
+			public String apply(EEnumLiteral enumLiteral) {
+				return enumLiteral.getLiteral();
+			}
+		});
 	}
 
 }

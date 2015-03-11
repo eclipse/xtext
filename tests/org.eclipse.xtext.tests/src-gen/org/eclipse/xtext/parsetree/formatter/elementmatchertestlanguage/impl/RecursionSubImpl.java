@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -30,12 +27,12 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Recursio
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl#getSub <em>Sub</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl#getVals <em>Vals</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl#isSemi <em>Semi</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

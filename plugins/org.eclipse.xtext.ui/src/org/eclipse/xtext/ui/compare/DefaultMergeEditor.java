@@ -96,7 +96,7 @@ public class DefaultMergeEditor extends XtextEditor {
 		try {
 			method = AbstractTextEditor.class.getDeclaredMethod("setActionActivation", new Class[] { boolean.class }); //$NON-NLS-1$
 			method.setAccessible(true);
-			method.invoke(this, new Object[] { new Boolean(state) });
+			method.invoke(this, new Object[] { Boolean.valueOf(state) });
 		} catch (Exception exception) {
 			throw new WrappedException(exception);
 		}

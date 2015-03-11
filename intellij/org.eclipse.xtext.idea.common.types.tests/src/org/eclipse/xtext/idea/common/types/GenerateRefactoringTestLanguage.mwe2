@@ -1,0 +1,66 @@
+module org.eclipse.xtext.common.types.xtext.ui.GenerateRefactoringTestLanguage
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var referencedGenModels = ""
+var genModel = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+var emfRuntimeVersion = "2.9"
+var grammarURI = "classpath:/org/eclipse/xtext/idea/common/types/RefactoringTestLanguage.xtext"
+var fileExtensions = "ideaTypesRefactoring"
+var projectName = "org.eclipse.xtext.idea.common.types.tests"
+var runtimeProject = "../${projectName}"
+
+var ideaProjectName = projectName
+var ideaProjectPath = runtimeProject
+
+Workflow {
+	bean = StandaloneSetup {
+		scanClassPath = true
+		platformUri = "${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/model/generated"
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathTestProject = runtimeProject
+		projectNameRt = projectName
+		language = auto-inject {
+			uri = grammarURI
+			fragment = ecore.EcoreGeneratorFragment auto-inject {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = fileExtensions
+			}
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
+			fragment = types.TypesGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+				options = auto-inject {}
+			}
+			fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+				runtimeProjectName = projectName
+				runtimeProjectPath = runtimeProject
+				typesIntegrationRequired = true
+			}
+			fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+		}
+	}
+}

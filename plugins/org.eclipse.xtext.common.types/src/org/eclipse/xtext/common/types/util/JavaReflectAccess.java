@@ -39,12 +39,15 @@ public class JavaReflectAccess {
 	private final static Logger log = Logger.getLogger(JavaReflectAccess.class);
 
 	private ClassLoader classLoader = getClass().getClassLoader();
-	
+
 	private ClassFinder classFinder;
 
-	@Inject(optional=true)
-	public void setClassLoader(ClassLoader classlaoder) {
-		this.classLoader = classlaoder;
+	@Inject(optional = true)
+	public void setClassLoader(ClassLoader classLoader) {
+		if (classLoader != this.classLoader) {
+			this.classLoader = classLoader;
+			classFinder = null;
+		}
 	}
 
 	/**
@@ -79,15 +82,15 @@ public class JavaReflectAccess {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return the {@link Constructor} corresponding to the given {@link JvmConstructor} or <code>null</code>.
 	 */
-	public Constructor<?> getConstructor(JvmConstructor operation) {
-		Class<?> declaringType = getRawType(operation.getDeclaringType());
+	public Constructor<?> getConstructor(JvmConstructor constructor) {
+		Class<?> declaringType = getRawType(constructor.getDeclaringType());
 		if (declaringType == null)
 			return null;
-		Class<?>[] paramTypes = getParamTypes(operation);
+		Class<?>[] paramTypes = getParamTypes(constructor);
 		try {
 			return declaringType.getDeclaredConstructor(paramTypes);
 		} catch (Exception e) {
@@ -96,7 +99,7 @@ public class JavaReflectAccess {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return the {@link Class} corresponding to the given {@link JvmType} or <code>null</code>.
 	 */
@@ -105,7 +108,7 @@ public class JavaReflectAccess {
 			throw new IllegalStateException("Cannot resolve proxy: " + EcoreUtil.getURI(type));
 		}
 		if (type instanceof JvmArrayType) {
-			JvmType componentType = ((JvmArrayType) type).getComponentType().getType();
+			JvmType componentType = ((JvmArrayType) type).getComponentType();
 			Class<?> componentClass = getRawType(componentType);
 			try {
 				return getClassFinder().forName(componentClass.getName() + "[]");
@@ -153,5 +156,5 @@ public class JavaReflectAccess {
 			classFinder = new ClassFinder(classLoader);
 		return classFinder;
 	}
-	
+
 }

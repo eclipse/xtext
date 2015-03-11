@@ -28,18 +28,22 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public QualifiedName getName() {
 		return alias;
 	}
 	
+	@Override
 	public QualifiedName getQualifiedName() {
 		return delegate.getQualifiedName();
 	}
 
+	@Override
 	public EObject getEObjectOrProxy() {
 		return delegate.getEObjectOrProxy();
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		return delegate.getEObjectURI();
 	}
@@ -54,6 +58,7 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 		return delegate.getUserDataKeys();
 	}
 
+	@Override
 	public EClass getEClass() {
 		return delegate.getEClass();
 	}

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.xtextUiTest.impl;
 
@@ -27,11 +24,11 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.ParserRuleImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.ParserRuleImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

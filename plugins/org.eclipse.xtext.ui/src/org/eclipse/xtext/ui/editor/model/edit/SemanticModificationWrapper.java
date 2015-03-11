@@ -27,6 +27,7 @@ public class SemanticModificationWrapper implements IModification {
 		this.uriToProblem = uriToProblem;
 	}
 
+	@Override
 	public void apply(final IModificationContext context) {
 		context.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override

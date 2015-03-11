@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Literal;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl.ExpressionImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl.ExpressionImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

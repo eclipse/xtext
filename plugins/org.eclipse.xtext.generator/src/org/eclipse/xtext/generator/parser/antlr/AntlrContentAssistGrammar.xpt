@@ -17,11 +17,9 @@
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
 «EXTENSION org::eclipse::xtext::EcoreUtils»
 
-«DEFINE grammar(AntlrOptions options) FOR Grammar»
-«FILE getGrammarFileName().asPath()+".g" SRC_GEN_UI-»
-/*
+«DEFINE grammar(AntlrOptions options, boolean hasIDE) FOR Grammar»
+«FILE getGrammarFileName().asPath()+".g" SRC_GEN_IDE-»
 «fileHeader()»
-*/
 grammar «getGrammarFileName().toSimpleName()»;
 
 options {
@@ -42,7 +40,11 @@ package «getGrammarFileName().toJavaPackage()»;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+«ELSE-»
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+«ENDIF-»
 }
 
 @parser::header {
@@ -52,13 +54,17 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
+«ELSE-»
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+«ENDIF-»
 import «gaFQName()»;
 
 }
@@ -223,7 +229,7 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 					)
 					(
 						{ before(grammarAccess.«element.grammarElementAccess()»); }
-						(«EXPAND ebnf2 FOR element»)*
+						((«EXPAND ebnf2 FOR element»)=>«EXPAND ebnf2 FOR element»)*
 						{ after(grammarAccess.«element.grammarElementAccess()»); }
 					)«ENDIF-»
 					)

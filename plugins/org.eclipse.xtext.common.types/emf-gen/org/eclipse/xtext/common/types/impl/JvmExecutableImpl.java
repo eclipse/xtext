@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -126,7 +128,7 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_EXECUTABLE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
+			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_EXECUTABLE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
 	}
@@ -140,7 +142,7 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 	{
 		if (parameters == null)
 		{
-			parameters = new EObjectContainmentEList.Resolving<JvmFormalParameter>(JvmFormalParameter.class, this, TypesPackage.JVM_EXECUTABLE__PARAMETERS);
+			parameters = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, TypesPackage.JVM_EXECUTABLE__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -154,7 +156,7 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 	{
 		if (exceptions == null)
 		{
-			exceptions = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_EXECUTABLE__EXCEPTIONS);
+			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_EXECUTABLE__EXCEPTIONS);
 		}
 		return exceptions;
 	}

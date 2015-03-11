@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.builderState;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -22,8 +23,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.internal.Activator;
@@ -54,15 +57,24 @@ public class EMFBasedPersister implements PersistedStateProvider {
 
 	private IPath cachedPath;
 	
+	@Override
 	public Iterable<IResourceDescription> load() {
+		File location = getBuilderStateLocation();
 		try {
-			File location = getBuilderStateLocation();
 			if (location != null && location.exists()) {
 				try {
 					Resource resource = createResource();
 					if (resource != null) {
-						resource.load(null);
-						EcoreUtil.resolveAll(resource);
+						try {
+							resource.load(null);
+						} catch (IOException exception) {
+							if (exception.getMessage().contains("Invalid signature")) {
+								resource.unload();
+								resource.load(Collections.singletonMap(XMLResource.OPTION_BINARY, Boolean.FALSE));
+							} else {
+								throw exception;
+							}
+						}
 						return loadFromResource(resource);
 					}
 					if (workspace != null && workspace.isAutoBuilding()) {
@@ -77,29 +89,13 @@ public class EMFBasedPersister implements PersistedStateProvider {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while loading persistable builder state.", e);
-			log.error("Triggering a full build.");
+			log.error("Error while loading persistable builder state from '"+location+"'. Triggering a full build.", e);
 			scheduleRecoveryBuild();
 			throw new WrappedException(e);
 		} finally {
 			try {
 				if (workspace != null) {
-					workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
-	
-						public void saving(ISaveContext context) throws CoreException {
-							if (context.getKind() == ISaveContext.FULL_SAVE)
-								save(builderState.getAllResourceDescriptions());
-						}
-	
-						public void rollback(ISaveContext context) {
-						}
-	
-						public void prepareToSave(ISaveContext context) throws CoreException {
-						}
-	
-						public void doneSaving(ISaveContext context) {
-						}
-					});
+					addSaveParticipant();
 				}
 			} catch (CoreException e) {
 				log.error("Error adding builder state save participant", e);
@@ -108,8 +104,31 @@ public class EMFBasedPersister implements PersistedStateProvider {
 		return Collections.emptySet();
 	}
 
+	@SuppressWarnings("all")
+	protected void addSaveParticipant() throws CoreException {
+		workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
+
+			public void saving(ISaveContext context) throws CoreException {
+				if (context.getKind() == ISaveContext.FULL_SAVE)
+					save(builderState.getAllResourceDescriptions());
+			}
+
+			public void rollback(ISaveContext context) {
+			}
+
+			public void prepareToSave(ISaveContext context) throws CoreException {
+			}
+
+			public void doneSaving(ISaveContext context) {
+			}
+		});
+	}
+
 	public Iterable<IResourceDescription> loadFromResource(Resource resource) {
-		return Iterables.filter(resource.getContents(), IResourceDescription.class);
+		List<IResourceDescription> result = Lists.newArrayList(
+				Iterables.filter(resource.getContents(), IResourceDescription.class));
+		resource.getContents().clear();
+		return result;
 	}
 
 	public void save(Iterable<IResourceDescription> descriptions) {
@@ -161,9 +180,68 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	}
 
 	public Resource.Factory getFactory() {
-		if (factory == null)
-			factory = new XMIResourceFactoryImpl();
+		if (factory == null) {
+			factory = new XMIResourceFactoryImpl() {
+				@Override
+				public Resource createResource(URI uri) {
+					ResourceDescriptionResource resourceDescriptionResource = new ResourceDescriptionResource(uri);
+					NoOpURIHandler uriHandler = new NoOpURIHandler();
+					resourceDescriptionResource.getDefaultSaveOptions().put(XMLResource.OPTION_BINARY, Boolean.TRUE);
+					resourceDescriptionResource.getDefaultSaveOptions().put(BinaryResourceImpl.OPTION_VERSION, BinaryResourceImpl.BinaryIO.Version.VERSION_1_1);
+					resourceDescriptionResource.getDefaultSaveOptions().put(BinaryResourceImpl.OPTION_INTERNAL_BUFFER_CAPACITY, 10000);
+					resourceDescriptionResource.getDefaultSaveOptions().put(BinaryResourceImpl.OPTION_STYLE_DATA_CONVERTER, Boolean.TRUE);
+					resourceDescriptionResource.getDefaultSaveOptions().put(XMLResource.OPTION_URI_HANDLER, uriHandler);
+
+					resourceDescriptionResource.getDefaultLoadOptions().put(XMLResource.OPTION_BINARY, Boolean.TRUE);
+					resourceDescriptionResource.getDefaultLoadOptions().put(BinaryResourceImpl.OPTION_INTERNAL_BUFFER_CAPACITY, 10000);
+					resourceDescriptionResource.getDefaultLoadOptions().put(BinaryResourceImpl.OPTION_EAGER_PROXY_RESOLUTION, Boolean.TRUE);
+					resourceDescriptionResource.getDefaultLoadOptions().put(XMLResource.OPTION_URI_HANDLER, uriHandler);
+					return resourceDescriptionResource;
+				}
+			};
+		}
 		return factory;
+	}
+
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	private static class NoOpURIHandler implements XMLResource.URIHandler {
+		@Override
+		public void setBaseURI(URI uri) {
+		}
+	
+		@Override
+		public URI resolve(URI uri) {
+			return uri;
+		}
+	
+		@Override
+		public URI deresolve(URI uri) {
+			return uri;
+		}
+	}
+
+	private static class ResourceDescriptionResource extends XMIResourceImpl {
+
+		public ResourceDescriptionResource(URI uri) {
+			super(uri);
+		}
+
+		@Override
+		public void attached(EObject eObject) {
+			// Ignore.
+		}
+		
+		@Override
+		public void detached(EObject eObject) {
+			// Ignore.
+		}
+
+		@Override
+		protected boolean useIDs() {
+			return false;
+		}
 	}
 
 	protected void scheduleRecoveryBuild() {

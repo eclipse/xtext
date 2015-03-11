@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.impl;
 
@@ -24,10 +21,10 @@ import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.Star
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.impl.StartImpl#getFeatureA <em>Feature A</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

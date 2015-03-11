@@ -12,6 +12,9 @@ import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+
+import com.google.inject.Inject;
 
 /**
  * Provides a common base class for xtext <code>TemplateVariableResolver</code>.
@@ -21,6 +24,9 @@ import org.eclipse.xtext.GrammarUtil;
 public abstract class AbstractTemplateVariableResolver extends
 		TemplateVariableResolver {
 
+	@Inject(optional = true)
+	private IGrammarAccess grammarAccess;
+	
 	public AbstractTemplateVariableResolver() {
 		super();
 	}
@@ -69,6 +75,8 @@ public abstract class AbstractTemplateVariableResolver extends
 	protected Grammar getGrammar(XtextTemplateContext xtextTemplateContext) {
 		EObject grammarElement = xtextTemplateContext.getContentAssistContext()
 				.getRootNode().getGrammarElement();
+		if (grammarElement == null && grammarAccess != null)
+			return grammarAccess.getGrammar();
 		return (Grammar) EcoreUtil.getRootContainer(grammarElement);
 	}
 

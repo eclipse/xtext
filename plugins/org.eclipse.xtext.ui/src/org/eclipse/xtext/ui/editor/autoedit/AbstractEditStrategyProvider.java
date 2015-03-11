@@ -26,6 +26,7 @@ public abstract class AbstractEditStrategyProvider {
 	public List<IAutoEditStrategy> getStrategies(final ISourceViewer sourceViewer,final String contentType) {
 		final List<IAutoEditStrategy> strategies = Lists.newArrayList();
 		configure(new IEditStrategyAcceptor() {
+			@Override
 			public void accept(IAutoEditStrategy strategy, String type) {
 				if (type == null || contentType.equals(type)) {
 					if (strategy instanceof ISourceViewerAware) {

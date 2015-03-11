@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.impl.commentAssociation;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.commentAssociation.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.commentAssociation.Element#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage#getElement()
  * @model

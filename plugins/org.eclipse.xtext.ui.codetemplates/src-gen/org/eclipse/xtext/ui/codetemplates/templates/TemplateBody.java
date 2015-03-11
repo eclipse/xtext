@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates;
 
@@ -16,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.TemplateBody#getParts <em>Parts</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage#getTemplateBody()
  * @model

@@ -20,19 +20,28 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 
 import com.google.common.collect.Lists;
 
 /**
  * The NodeModelUtils are a collection of useful methods when dealing with the node model directly. They encapsulate the
  * default construction semantics of the node model as it is created by the parser.
+ * 
+ * This API is quite low level and internal functionality of the framework relies on the implemened contracts.
+ * Clients should rather use the language specific APIs that provide almost the same functionality, e.g.
+ * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to to access the region
+ * of a {@link EObject semantic object}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -42,12 +51,25 @@ public class NodeModelUtils {
 	 * Find the leaf node at the given offset. May return <code>null</code> if the given offset is not valid for the
 	 * node (sub-)tree.
 	 * 
+	 * A node matches the <code>leafNodeOffset</code> if it fulfills the following condition:
+	 * <pre>
+	 *  node.totalOffset <= leafNodeOffset &&
+	 *  node.totalEndOffset > leafNodeOffset 
+	 * </pre>
+	 * 
+	 * @param node the container node. May not be <code>null</code>.
+	 * @param leafNodeOffset the offset that is covered by the searched node.
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
-	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
-		int offset = node.getTotalOffset();
-		int length = node.getTotalLength();
-		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
+	/* @Nullable */
+	public static ILeafNode findLeafNodeAtOffset(/* @NonNull */ INode node, int leafNodeOffset) {
+		INode localNode = node;
+		while(!(localNode instanceof AbstractNode)) {
+			localNode = localNode.getParent();
+		}
+		int offset = localNode.getTotalOffset();
+		int length = localNode.getTotalLength();
+		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) localNode).basicIterator();
 		if (leafNodeOffset > (offset + length) / 2) {
 			while (iterator.hasPrevious()) {
 				AbstractNode previous = iterator.previous();
@@ -91,10 +113,12 @@ public class NodeModelUtils {
 	/**
 	 * Returns the node that is directly associated with the given object by means of an EMF-Adapter.
 	 * 
+	 * @param object the semantic object whose direct node should be provided.
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
-	public static ICompositeNode getNode(EObject object) {
+	/* @Nullable */
+	public static ICompositeNode getNode(/* @Nullable */ EObject object) {
 		if (object == null)
 			return null;
 		List<Adapter> adapters = object.eAdapters();
@@ -111,6 +135,7 @@ public class NodeModelUtils {
 	 * 
 	 * @return the list of nodes that were used to assign values to the given feature for the given object.
 	 */
+	/* @NonNull */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
 		ICompositeNode node = findActualNodeFor(semanticObject);
 		if (node != null) {
@@ -165,15 +190,30 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
-	 * actions} and {@link RuleCall unassigned rule calls}.
+	 * <p>Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
+	 * actions} and {@link RuleCall unassigned rule calls}. The returned node will include unassigned surrounding leafs,
+	 * e.g. if you use something like {@code Parenthesized expressions} redundant parentheses will be part of the returned node.</p>
+	 * <p>Consider the following simple expression (a number literal): 
+	 * <pre>
+	 *   ((1))
+	 * </pre>
+	 * Assuming it was parsed from a grammar like this:
+	 * <pre>
+	 * Expression: Number | Parentheses;
+	 * Parentheses: '(' Expression ')';
+	 * Number: value=INT
+	 * </pre>
+	 * The actual node for the only semantic object that was produced from the input {@code ((1))} is the root node 
+	 * even though the minimal node would be the one with the text {@code 1}.
 	 * 
+	 * @param semanticObject the semantic object whose node should be provided.
 	 * @return the node that covers all assigned values of the given object.
 	 */
-	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
+	/* @Nullable */
+	public static ICompositeNode findActualNodeFor(/* @Nullable */ EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
-			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
 				node = node.getParent();
 			}
 		}
@@ -187,26 +227,43 @@ public class NodeModelUtils {
 	 * 
 	 * @return the semantic object that is really associated with the actual container node of the given node.
 	 */
-	public static EObject findActualSemanticObjectFor(INode node) {
+	/* @Nullable */
+	public static EObject findActualSemanticObjectFor(/* @Nullable */ INode node) {
 		if (node == null)
 			return null;
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		EObject grammarElement = node.getGrammarElement();
+		ICompositeNode parent = node.getParent();
 		if (grammarElement == null)
-			return findActualSemanticObjectFor(node.getParent());
+			return findActualSemanticObjectFor(parent);
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
-			return findActualSemanticObjectFor(node.getParent());
+			if (parent.hasDirectSemanticElement())
+				return findActualSemanticObjectFor(parent);
+			INode sibling = parent.getFirstChild();
+			while(sibling != node) {
+				EObject siblingGrammarElement = sibling.getGrammarElement();
+				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
+					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement)) {
+						return findActualSemanticObjectFor(sibling);
+					}
+					if (siblingGrammarElement.eClass() == XtextPackage.Literals.ACTION) {
+						return findActualSemanticObjectFor(sibling);
+					}
+				}
+				sibling = sibling.getNextSibling();
+			}
 		} else {
 			EObject result = findActualSemanticObjectInChildren(node, grammarElement);
 			if (result != null)
 				return result;
 		}
-		return findActualSemanticObjectFor(node.getParent());
+		return findActualSemanticObjectFor(parent);
 	}
 
-	private static EObject findActualSemanticObjectInChildren(INode node, EObject grammarElement) {
+	/* @Nullable */
+	private static EObject findActualSemanticObjectInChildren(/* @NonNull */ INode node, /* @Nullable */ EObject grammarElement) {
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		AbstractRule rule = null;
@@ -264,7 +321,10 @@ public class NodeModelUtils {
 			result.append(prefix);
 		}
 		if (node instanceof ICompositeNode) {
-			result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			if (node.getGrammarElement() != null)
+				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
+			else
+				result.append("(unknown)");
 			String newPrefix = prefix + "  ";
 			result.append(" {");
 			BidiIterator<INode> children = ((ICompositeNode) node).getChildren().iterator();
@@ -275,13 +335,22 @@ public class NodeModelUtils {
 			result.append("\n");
 			result.append(prefix);
 			result.append("}");
+			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+			if (error != null)
+				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
 		} else if (node instanceof ILeafNode) {
 			if (((ILeafNode) node).isHidden())
 				result.append("hidden ");
-			result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			if (node.getGrammarElement() != null)
+				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
+			else
+				result.append("(unknown)");
 			result.append(" => '");
 			result.append(node.getText());
 			result.append("'");
+			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+			if (error != null)
+				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
 		} else if (node == null) {
 			result.append("(null)");
 		} else {

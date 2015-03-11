@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Typ
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TypeDescriptionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.TypeDescriptionImpl#isMany <em>Many</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

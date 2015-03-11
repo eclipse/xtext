@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest;
 
@@ -16,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.SecondLevelB#getThirdLevelB1 <em>Third Level B1</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.SecondLevelB#getThirdLevelB2 <em>Third Level B2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ContentAssistContextTestPackage#getSecondLevelB()
  * @model

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.bug313089;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.Baz#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.Baz#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.bug313089.Bug313089Package#getBaz()
  * @model

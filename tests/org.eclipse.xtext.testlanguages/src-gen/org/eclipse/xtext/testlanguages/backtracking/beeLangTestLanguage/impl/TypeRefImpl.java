@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Type Ref</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

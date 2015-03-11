@@ -1,15 +1,15 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;
@@ -76,7 +76,8 @@ public class UntilElementImpl extends RuleElementImpl implements UntilElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getLeft()
+  @Override
+public RuleElement getLeft()
   {
     return left;
   }
@@ -103,7 +104,8 @@ public class UntilElementImpl extends RuleElementImpl implements UntilElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeft(RuleElement newLeft)
+  @Override
+public void setLeft(RuleElement newLeft)
   {
     if (newLeft != left)
     {
@@ -124,7 +126,8 @@ public class UntilElementImpl extends RuleElementImpl implements UntilElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getRight()
+  @Override
+public RuleElement getRight()
   {
     return right;
   }
@@ -151,7 +154,8 @@ public class UntilElementImpl extends RuleElementImpl implements UntilElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRight(RuleElement newRight)
+  @Override
+public void setRight(RuleElement newRight)
   {
     if (newRight != right)
     {

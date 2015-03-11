@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl;
 
@@ -21,11 +18,11 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl#isSecond <em>Second</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -12,7 +12,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 //import org.eclipse.xtext.generator.parser.TerminalRuleToLexerBody;
 
@@ -27,7 +28,7 @@ public class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
 	private TerminalRule workaroundString;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo\n" +
@@ -41,13 +42,13 @@ public class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
 		workaroundString = (TerminalRule) GrammarUtil.findRuleForName(grammar, "WORKAROUND_STRING");
 	}
 	
-	public void testToLexerBody_01() {
+	@Test public void testToLexerBody_01() {
 		String ada = TerminalRuleToLexerBody.toLexerBody(adaString);
 		String expectation = "'\"' (~('\"')|'\"\"')* '\"'"; // '"' (~('"')|'""')* '"'
 		assertEquals(expectation, ada);
 	}
 
-	public void testToLexerBody_02() {
+	@Test public void testToLexerBody_02() {
 		String workaround = TerminalRuleToLexerBody.toLexerBody(workaroundString);
 		String expectation = "'\"' (~('\"')|'\"' '\"')* '\"'"; // '"' (~('"')|'"' '"')* '"'
 		assertEquals(expectation, workaround);

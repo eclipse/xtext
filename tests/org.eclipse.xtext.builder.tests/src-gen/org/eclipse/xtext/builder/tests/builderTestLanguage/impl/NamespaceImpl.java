@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.builder.tests.builderTestLanguage.impl;
 
@@ -28,11 +25,11 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Namespace;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamespaceImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamespaceImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.simpleTest.impl;
 
@@ -32,11 +29,11 @@ import org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.simpleTest.impl.FooImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.simpleTest.impl.FooImpl#getNameRefs <em>Name Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

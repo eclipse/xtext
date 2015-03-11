@@ -1,11 +1,14 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -33,7 +36,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	{
 		try
 		{
-			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/xbase/Xtype"); 
+			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory(XtypePackage.eNS_URI);
 			if (theXtypeFactory != null)
 			{
 				return theXtypeFactory;
@@ -68,8 +71,41 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 		switch (eClass.getClassifierID())
 		{
 			case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
+			case XtypePackage.XCOMPUTED_TYPE_REFERENCE: return createXComputedTypeReference();
+			case XtypePackage.XIMPORT_SECTION: return createXImportSection();
+			case XtypePackage.XIMPORT_DECLARATION: return createXImportDeclaration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue)
+	{
+		switch (eDataType.getClassifierID())
+		{
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue)
+	{
+		switch (eDataType.getClassifierID())
+		{
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -82,6 +118,39 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	{
 		XFunctionTypeRefImplCustom xFunctionTypeRef = new XFunctionTypeRefImplCustom();
 		return xFunctionTypeRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XComputedTypeReference createXComputedTypeReference()
+	{
+		XComputedTypeReferenceImplCustom xComputedTypeReference = new XComputedTypeReferenceImplCustom();
+		return xComputedTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XImportSection createXImportSection()
+	{
+		XImportSectionImpl xImportSection = new XImportSectionImpl();
+		return xImportSection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XImportDeclaration createXImportDeclaration()
+	{
+		XImportDeclarationImplCustom xImportDeclaration = new XImportDeclarationImplCustom();
+		return xImportDeclaration;
 	}
 
 	/**

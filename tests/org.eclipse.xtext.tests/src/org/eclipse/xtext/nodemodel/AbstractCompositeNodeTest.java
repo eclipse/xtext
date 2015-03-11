@@ -7,18 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractCompositeNodeTest extends TestCase {
+public abstract class AbstractCompositeNodeTest extends Assert {
 
 	private NodeModelBuilder mutator;
 
@@ -32,19 +34,17 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		mutator.addChild(composite, leaf);
 	}
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		this.mutator = new NodeModelBuilder();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		this.mutator = null;
-		super.tearDown();
 	}
 	
-	public void testAddChild_00() {
+	@Test public void testAddChild_00() {
 		ICompositeNode composite = createCompositeNode();
 		LeafNode first = new LeafNode();
 		addChild(composite, first);
@@ -54,7 +54,7 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		assertSame(first, first.basicGetPreviousSibling());
 	}
 
-	public void testAddChild_01() {
+	@Test public void testAddChild_01() {
 		ICompositeNode composite = createCompositeNode();
 		LeafNode first = new LeafNode();
 		LeafNode second = new LeafNode();
@@ -69,7 +69,7 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		assertSame(composite, second.getParent());
 	}
 	
-	public void testAddChild_02() {
+	@Test public void testAddChild_02() {
 		ICompositeNode composite = createCompositeNode();
 		LeafNode first = new LeafNode();
 		LeafNode second = new LeafNode();
@@ -89,7 +89,7 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		assertSame(composite, third.getParent());
 	}
 	
-	public void testActsAsAdapter() {
+	@Test public void testActsAsAdapter() {
 		EObject object = EcoreFactory.eINSTANCE.createEObject();
 		ICompositeNode composite = createCompositeNode();
 		object.eAdapters().add((Adapter) composite);

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage;
 
@@ -14,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.Model#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.Model#isSecond <em>Second</em>}</li>
@@ -24,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.Model#isSeventh <em>Seventh</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.Model#isEighth <em>Eighth</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.KeywordsUiTestLanguagePackage#getModel()
  * @model

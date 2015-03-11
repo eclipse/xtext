@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.impl;
 
@@ -20,10 +17,10 @@ import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.impl.BarImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

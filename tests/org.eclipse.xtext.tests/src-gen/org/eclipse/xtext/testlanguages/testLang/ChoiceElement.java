@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.testLang;
 
@@ -13,11 +10,11 @@ package org.eclipse.xtext.testlanguages.testLang;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.ChoiceElement#isOptionalKeyword <em>Optional Keyword</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.ChoiceElement#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.testLang.TestLangPackage#getChoiceElement()
  * @model

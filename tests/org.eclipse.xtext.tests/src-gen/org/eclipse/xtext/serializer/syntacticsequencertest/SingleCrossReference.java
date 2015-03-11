@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest;
 
@@ -14,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef1 <em>Ref1</em>}</li>
@@ -21,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef3 <em>Ref3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef4 <em>Ref4</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getSingleCrossReference()
  * @model

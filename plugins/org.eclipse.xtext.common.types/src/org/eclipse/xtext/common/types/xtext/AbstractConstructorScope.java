@@ -10,13 +10,13 @@ package org.eclipse.xtext.common.types.xtext;
 import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -46,9 +46,18 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmConstructor) {
-			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
-					getQualifiedNameConverter().toQualifiedName(((JvmIdentifiableElement) object).getQualifiedName()), object));
-			return result;
+			JvmConstructor constructor = ((JvmConstructor) object);
+			String qualifiedNameWithDots = constructor.getQualifiedName('.');
+			String qualifiedNameWithDollar = constructor.getQualifiedName();
+			if (qualifiedNameWithDollar.equals(qualifiedNameWithDots)) {
+				final Set<IEObjectDescription> result = singleton(
+						EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(qualifiedNameWithDots), object));
+				return result;
+			} else {
+				return Arrays.asList(
+						EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(qualifiedNameWithDots), object),
+						EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(qualifiedNameWithDollar), object));
+			}
 		}
 		return emptySet();
 	}
@@ -67,11 +76,13 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 			return emptySet();
 		}
 		Iterable<JvmConstructor> constructors = new Iterable<JvmConstructor>() {
+			@Override
 			public Iterator<JvmConstructor> iterator() {
 				return castedType.getDeclaredConstructors().iterator();
 			}
 		};
 		return transform(constructors, new Function<JvmConstructor,IEObjectDescription>(){
+			@Override
 			public IEObjectDescription apply(JvmConstructor from) {
 				return EObjectDescription.create(name, from);
 			}

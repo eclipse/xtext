@@ -28,7 +28,7 @@ public class SampleFilterContribution extends AbstractFilterOutlineContribution 
 	@Override
 	protected boolean apply(IOutlineNode node) {
 		String text = node.getText().toString();
-		return text.startsWith("<") || text.length() < 4;
+		return text.equals("test") || text.length() < 4;
 	}
 
 	@Override

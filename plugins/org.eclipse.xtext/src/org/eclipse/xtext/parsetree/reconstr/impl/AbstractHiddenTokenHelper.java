@@ -16,6 +16,7 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
  */
 public abstract class AbstractHiddenTokenHelper implements IHiddenTokenHelper {
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public AbstractRule getWhitespaceRuleFor(ParserRule context, String whitespace) {
 		return getWhitespaceRuleFor(whitespace);

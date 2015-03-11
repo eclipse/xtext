@@ -23,44 +23,44 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_FRAGMENT", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'epatch'", "'{'", "'}'", "'import'", "'uri'", "'ns'", "'java'", "'.'", "'extension'", "'::'", "'resource'", "'left'", "';'", "'right'", "'object'", "'='", "'|'", "'['", "','", "']'", "':'", "'null'", "'new'", "'copy'", "'migrate'", "'as'", "'each'", "'('", "')'"
     };
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=5;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__29=29;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int RULE_WS=10;
-    public static final int T__17=17;
-    public static final int T__31=31;
     public static final int T__40=40;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
+    public static final int T__29=29;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__24=24;
-    public static final int T__37=37;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
     public static final int RULE_SL_COMMENT=9;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_FRAGMENT=6;
+    public static final int T__30=30;
+    public static final int T__19=19;
+    public static final int T__31=31;
+    public static final int RULE_STRING=5;
+    public static final int T__32=32;
+    public static final int T__33=33;
+    public static final int T__16=16;
     public static final int T__34=34;
-    public static final int T__18=18;
     public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__18=18;
+    public static final int T__36=36;
+    public static final int T__17=17;
+    public static final int T__37=37;
+    public static final int T__12=12;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=7;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -426,9 +426,9 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             if ( (LA4_0==15) ) {
                 switch ( input.LA(2) ) {
-                case 20:
+                case RULE_ID:
                     {
-                    alt4=3;
+                    alt4=1;
                     }
                     break;
                 case 18:
@@ -436,9 +436,9 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     alt4=2;
                     }
                     break;
-                case RULE_ID:
+                case 20:
                     {
-                    alt4=1;
+                    alt4=3;
                     }
                     break;
                 default:
@@ -3152,11 +3152,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 {
                 int LA24_2 = input.LA(2);
 
-                if ( (LA24_2==RULE_FRAGMENT) ) {
-                    alt24=4;
-                }
-                else if ( (LA24_2==EOF||LA24_2==19||(LA24_2>=30 && LA24_2<=31)) ) {
+                if ( (LA24_2==EOF||LA24_2==19||(LA24_2>=30 && LA24_2<=31)) ) {
                     alt24=2;
+                }
+                else if ( (LA24_2==RULE_FRAGMENT) ) {
+                    alt24=4;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4006,11 +4006,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 {
                 int LA30_3 = input.LA(2);
 
-                if ( (LA30_3==RULE_FRAGMENT) ) {
-                    alt30=5;
-                }
-                else if ( (LA30_3==EOF||LA30_3==19||LA30_3==24||LA30_3==28) ) {
+                if ( (LA30_3==EOF||LA30_3==19||LA30_3==24||LA30_3==28) ) {
                     alt30=3;
+                }
+                else if ( (LA30_3==RULE_FRAGMENT) ) {
+                    alt30=5;
                 }
                 else {
                     NoViableAltException nvae =

@@ -36,7 +36,8 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 	}
 
 	public boolean isSpacesForTab() {
-		return storeAccess.getPreferenceStore().getBoolean(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_SPACES_FOR_TABS);
+		return storeAccess.getPreferenceStore().getBoolean(
+				AbstractDecoratedTextEditorPreferenceConstants.EDITOR_SPACES_FOR_TABS);
 	}
 
 	// note: the maximum length allowed in the eclipse preferences dialog is 16
@@ -44,6 +45,7 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 
 	private String indentString = null;
 
+	@Override
 	public synchronized String getIndentString() {
 		if (indentString == null) {
 			indentString = isSpacesForTab() ? WS.substring(0, Math.min(getTabWidth(), WS.length())) : "\t";
@@ -51,8 +53,13 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 		return indentString;
 	}
 
+	@Override
 	public synchronized void propertyChange(PropertyChangeEvent event) {
-		indentString = null;
+		String property = event.getProperty();
+		if (AbstractDecoratedTextEditorPreferenceConstants.EDITOR_TAB_WIDTH.equals(property)
+				|| AbstractDecoratedTextEditorPreferenceConstants.EDITOR_SPACES_FOR_TABS.equals(property)) {
+			indentString = null;
+		}
 	}
 
 }

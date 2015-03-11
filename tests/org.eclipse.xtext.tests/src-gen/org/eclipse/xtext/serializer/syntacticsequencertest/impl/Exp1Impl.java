@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Exp1</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

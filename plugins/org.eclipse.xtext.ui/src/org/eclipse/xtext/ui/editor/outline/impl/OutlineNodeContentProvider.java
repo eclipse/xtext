@@ -12,8 +12,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
-import com.google.inject.Inject;
-
 /**
  * The JFace/SWT content provider. The tree of visible IOutlineNodes has already been pre-computed.
  * 
@@ -21,29 +19,40 @@ import com.google.inject.Inject;
  */
 public class OutlineNodeContentProvider implements ITreeContentProvider {
 
-	@Inject
 	private OutlineFilterAndSorter filterSorter;
 
+	/**
+	 * @since 2.2
+	 */
+	public void setFilterAndSorter(OutlineFilterAndSorter filterSorter) {
+		this.filterSorter = filterSorter;
+	}
 	
+	@Override
 	public void dispose() {
 	}
 
+	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		Assert.isLegal(newInput == null || newInput instanceof IOutlineNode);
 	}
 
+	@Override
 	public Object[] getElements(Object inputElement) {
 		return getChildren(inputElement);
 	}
 
+	@Override
 	public Object[] getChildren(Object parentElement) {
 		return filterSorter.filterAndSort(asOutlineNode(parentElement).getChildren());
 	}
 
+	@Override
 	public Object getParent(Object element) {
 		return asOutlineNode(element).getParent();
 	}
 
+	@Override
 	public boolean hasChildren(Object element) {
 		return asOutlineNode(element).hasChildren();
 	}

@@ -27,6 +27,7 @@ public abstract class AbstractGenericModule implements Module {
 
 	private static Logger LOGGER = Logger.getLogger(AbstractGenericModule.class);
 
+	@Override
 	public void configure(Binder binder) {
 		Module compound = getBindings();
 		compound.configure(binder);

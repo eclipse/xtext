@@ -23,10 +23,12 @@ public class DefaultEvaluationResult implements IEvaluationResult {
 		this.throwable = throwable;
 	}
 	
+	@Override
 	public Throwable getException() {
 		return throwable;
 	}
 
+	@Override
 	public Object getResult() {
 		return result;
 	}

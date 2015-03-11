@@ -95,6 +95,7 @@ public class EnumsUiPackageImpl extends EPackageImpl implements EnumsUiPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getExistingEnum() {
 		return existingEnumEEnum;
 	}
@@ -104,6 +105,7 @@ public class EnumsUiPackageImpl extends EPackageImpl implements EnumsUiPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnumsUiFactory getEnumsUiFactory() {
 		return (EnumsUiFactory)getEFactoryInstance();
 	}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="Bug378967TestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Bug378967Test" basePackage="org.eclipse.xtext.parser.antlr"
+      disposableProviderFactory="true" ecorePackage="Bug378967TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug378967TestLanguage.ecore#//FirstEnum">
+      <genEnumLiterals ecoreEnumLiteral="Bug378967TestLanguage.ecore#//FirstEnum/value"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug378967TestLanguage.ecore#//SecondEnum">
+      <genEnumLiterals ecoreEnumLiteral="Bug378967TestLanguage.ecore#//SecondEnum/value"/>
+    </genEnums>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug378967TestLanguage.ecore#//Root/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//Rule1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule1/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule1/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule1/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//Rule2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule2/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//Rule3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule3/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//Rule4">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug378967TestLanguage.ecore#//Rule4/after"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//Rule4/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug378967TestLanguage.ecore#//Rule4/s"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//AfterObj">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//AfterObj/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug378967TestLanguage.ecore#//SObj">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug378967TestLanguage.ecore#//SObj/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

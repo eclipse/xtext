@@ -12,17 +12,17 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalTerminalRulesTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_ID=4;
-    public static final int RULE_ESCAPED_CHAR=12;
-    public static final int RULE_WS=10;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int RULE_RICH_STRING=7;
     public static final int RULE_STRING=6;
+    public static final int RULE_RICH_STRING=7;
     public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=10;
     public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ESCAPED_CHAR=12;
+    public static final int EOF=-1;
     public static final int RULE_IN_RICH_STRING=13;
+    public static final int RULE_ML_COMMENT=8;
 
     // delegates
     // delegators
@@ -871,13 +871,11 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
     static final String DFA17_maxS =
         "\1\uffff\1\172\2\uffff\2\uffff\1\57\5\uffff\1\47\4\uffff";
     static final String DFA17_acceptS =
-        "\2\uffff\1\1\1\2\3\uffff\1\7\1\10\1\1\1\2\1\3\1\uffff\1\5\1\6\1"+
-        "\7\1\4";
+        "\2\uffff\1\1\1\2\3\uffff\1\7\1\10\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\4";
     static final String DFA17_specialS =
-        "\1\1\3\uffff\1\2\1\0\13\uffff}>";
+        "\1\0\3\uffff\1\2\1\1\13\uffff}>";
     static final String[] DFA17_transitionS = {
-            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12"+
-            "\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
+            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
             "\32\11\4\uffff\1\11\1\uffff\32\11",
             "",
             "",
@@ -912,7 +910,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA17 extends DFA {
+    static class DFA17 extends DFA {
 
         public DFA17(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -933,18 +931,6 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA17_5 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA17_5=='\'') ) {s = 12;}
-
-                        else if ( ((LA17_5>='\u0000' && LA17_5<='&')||(LA17_5>='(' && LA17_5<='\uFFFF')) ) {s = 11;}
-
-                        else s = 8;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA17_0 = input.LA(1);
 
                         s = -1;
@@ -963,6 +949,18 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                         else if ( ((LA17_0>='\t' && LA17_0<='\n')||LA17_0=='\r'||LA17_0==' ') ) {s = 7;}
 
                         else if ( ((LA17_0>='\u0000' && LA17_0<='\b')||(LA17_0>='\u000B' && LA17_0<='\f')||(LA17_0>='\u000E' && LA17_0<='\u001F')||LA17_0=='!'||(LA17_0>='#' && LA17_0<='&')||(LA17_0>='(' && LA17_0<='.')||(LA17_0>=':' && LA17_0<='@')||(LA17_0>='[' && LA17_0<=']')||LA17_0=='`'||(LA17_0>='{' && LA17_0<='\uFFFF')) ) {s = 8;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA17_5 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA17_5=='\'') ) {s = 12;}
+
+                        else if ( ((LA17_5>='\u0000' && LA17_5<='&')||(LA17_5>='(' && LA17_5<='\uFFFF')) ) {s = 11;}
+
+                        else s = 8;
 
                         if ( s>=0 ) return s;
                         break;

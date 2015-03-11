@@ -1,23 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.util.Switch;
+
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +22,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage
  * @generated
  */
-public class SimpleExpressionsSwitch<T>
+public class SimpleExpressionsSwitch<T> extends Switch<T>
 {
   /**
    * The cached model package
@@ -57,15 +47,17 @@ public class SimpleExpressionsSwitch<T>
   }
 
   /**
-   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @parameter ePackage the package in question.
+   * @return whether this is a switch for the given package.
    * @generated
    */
-  public T doSwitch(EObject theEObject)
+  @Override
+  protected boolean isSwitchFor(EPackage ePackage)
   {
-    return doSwitch(theEObject.eClass(), theEObject);
+    return ePackage == modelPackage;
   }
 
   /**
@@ -75,29 +67,7 @@ public class SimpleExpressionsSwitch<T>
    * @return the first non-null result returned by a <code>caseXXX</code> call.
    * @generated
    */
-  protected T doSwitch(EClass theEClass, EObject theEObject)
-  {
-    if (theEClass.eContainer() == modelPackage)
-    {
-      return doSwitch(theEClass.getClassifierID(), theEObject);
-    }
-    else
-    {
-      List<EClass> eSuperTypes = theEClass.getESuperTypes();
-      return
-        eSuperTypes.isEmpty() ?
-          defaultCase(theEObject) :
-          doSwitch(eSuperTypes.get(0), theEObject);
-    }
-  }
-
-  /**
-   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the first non-null result returned by a <code>caseXXX</code> call.
-   * @generated
-   */
+  @Override
   protected T doSwitch(int classifierID, EObject theEObject)
   {
     switch (classifierID)
@@ -307,6 +277,7 @@ public class SimpleExpressionsSwitch<T>
    * @see #doSwitch(org.eclipse.emf.ecore.EObject)
    * @generated
    */
+  @Override
   public T defaultCase(EObject object)
   {
     return null;

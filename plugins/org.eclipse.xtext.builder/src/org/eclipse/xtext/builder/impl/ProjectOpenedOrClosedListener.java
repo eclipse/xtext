@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -23,6 +24,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -35,6 +38,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -42,10 +46,13 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  */
 public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 	private final static Logger log = Logger.getLogger(ProjectOpenedOrClosedListener.class);
+	
+	private static boolean reflectErrorLogged = false;
 
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
@@ -77,26 +84,29 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	@Inject
 	private IWorkspace workspace;
 
+	@Override
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {
 			if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 				try {
 					final Set<IProject> toUpdate = Sets.newLinkedHashSet();
 					event.getDelta().accept(new IResourceDeltaVisitor() {
+						@Override
 						public boolean visit(IResourceDelta delta) throws CoreException {
 							if (delta.getResource() instanceof IWorkspaceRoot)
 								return true;
 							if (delta.getResource() instanceof IProject) {
 								IProject project = (IProject) delta.getResource();
-								if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
-									toUpdate.add(project);
-								}
 								if ((delta.getKind() & IResourceDelta.CHANGED) != 0 && project.isOpen()) {
-									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
-										if (XtextProjectHelper.hasNature(project))
+									if ((delta.getFlags() & IResourceDelta.OPEN) != 0) {
+										toUpdate.add(project);
+									}
+									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {	
+										if ((delta.findMember(new Path(".project")) != null)  
+												&& XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project))
 											toUpdate.add(project);
-										else {
-											scheduleRemoveProjectJob(project);
+										else if(!XtextProjectHelper.hasNature(project)){
+											scheduleRemoveProjectJobIfNecessary(project, delta);
 										}
 									}
 								}
@@ -104,7 +114,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 							return false;
 						}
 					});
-					buildScheduler.scheduleBuildIfNecessary(toUpdate);
+					buildScheduler.scheduleBuildIfNecessary(toUpdate, IBuildFlag.FORGET_BUILD_STATE_ONLY);
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
 				}
@@ -120,6 +130,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 	protected void scheduleRemoveProjectJob(final IProject project) {
 		final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject(project, new NullProgressMonitor());
+		if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty())
+			return;
 		new Job(Messages.ProjectOpenedOrClosedListener_RemovingProject + project.getName() + Messages.ProjectOpenedOrClosedListener_FromIndex) {
 			{
 				setRule(workspace.getRoot());
@@ -149,6 +161,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 								
 								resourceSet.getResources().clear();
 								resourceSet.eAdapters().clear();
+							} catch (OperationCanceledException e) {
+								throw new InterruptedException();
 							} finally {
 								if (monitor != null)
 									monitor.done();
@@ -158,11 +172,31 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 				} catch (InvocationTargetException e) {
 					log.error(e.getMessage(), e);
 				} catch (InterruptedException e) {
-					log.error(e.getMessage(), e);
+					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
 			}
 		}.schedule();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void scheduleRemoveProjectJobIfNecessary(IProject project, IResourceDelta delta) {
+		try {
+			ReflectExtensions reflector = new ReflectExtensions();
+			Object oldInfo = reflector.get(delta, "oldInfo");
+			Map<?, ?> natures = reflector.get(oldInfo, "natures");
+			if (natures != null && natures.containsKey(XtextProjectHelper.NATURE_ID)) {
+				scheduleRemoveProjectJob(project);
+			}
+		} catch(Exception e) {
+			if (!reflectErrorLogged) {
+				log.error("Scheduled unnecessary build due to reflective code failure", e);
+				reflectErrorLogged = true;
+			}
+			scheduleRemoveProjectJob(project);
+		}
 	}
 
 }

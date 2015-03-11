@@ -12,7 +12,9 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -20,7 +22,7 @@ import com.google.inject.Inject;
 
 /**
  * Represents an implementation of interface {@link IHyperlinkDetector} to find
- * and convert {@link CrossReference elements}, at a given location, to
+ * and convert {@link org.eclipse.xtext.CrossReference elements}, at a given location, to
  * <code>IHyperlink</code>.
  *
  * @author Michael Clay - Initial contribution and API
@@ -32,9 +34,17 @@ public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 	@Inject
 	private IHyperlinkHelper helper;
 
-	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
+	@Override
+	public IHyperlink[] detectHyperlinks(final ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
 		return ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
+			@Override
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
+				if (resource == null) {
+					return null;
+				}
+				if (helper instanceof ISourceViewerAware && textViewer instanceof ISourceViewer) {
+					((ISourceViewerAware) helper).setSourceViewer((ISourceViewer) textViewer);
+				}
 				return helper.createHyperlinksByOffset(resource, region.getOffset(), canShowMultipleHyperlinks);
 			}
 		});

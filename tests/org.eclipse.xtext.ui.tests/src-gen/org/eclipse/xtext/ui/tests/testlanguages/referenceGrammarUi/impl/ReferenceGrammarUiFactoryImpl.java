@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl;
 
@@ -33,7 +30,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
   {
     try
     {
-      ReferenceGrammarUiFactory theReferenceGrammarUiFactory = (ReferenceGrammarUiFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/ReferenceGrammar"); 
+      ReferenceGrammarUiFactory theReferenceGrammarUiFactory = (ReferenceGrammarUiFactory)EPackage.Registry.INSTANCE.getEFactory(ReferenceGrammarUiPackage.eNS_URI);
       if (theReferenceGrammarUiFactory != null)
       {
         return theReferenceGrammarUiFactory;

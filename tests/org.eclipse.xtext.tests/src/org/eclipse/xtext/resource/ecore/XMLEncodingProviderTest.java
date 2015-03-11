@@ -7,29 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ecore;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.generic.XMLEncodingProvider;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XMLEncodingProviderTest extends TestCase {
+public class XMLEncodingProviderTest extends Assert {
 	
 	private String packagePath;
 	private IClasspathUriResolver resolver;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		packagePath = getClass().getPackage().getName().replaceAll("\\.", "/");
 		resolver = new ClassloaderClasspathUriResolver();
 	}
 
-	public void testName() throws Exception {
+	@Test public void testName() throws Exception {
 		XMLEncodingProvider xmlEncodingProvider = new XMLEncodingProvider();
 		assertEquals("UTF-8", xmlEncodingProvider.getEncoding(getURI("utf8.ecore")));
 		assertEquals("ISO-8859-1", xmlEncodingProvider.getEncoding(getURI("iso-8859-1.ecore")));

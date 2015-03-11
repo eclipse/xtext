@@ -1,25 +1,16 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
+
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +30,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
   {
     try
     {
-      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions");
+      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleExpressionsPackage.eNS_URI);
       if (theSimpleExpressionsFactory != null)
       {
         return theSimpleExpressionsFactory;
@@ -91,7 +82,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public IfCondition createIfCondition()
+  @Override
+public IfCondition createIfCondition()
   {
     IfConditionImpl ifCondition = new IfConditionImpl();
     return ifCondition;
@@ -102,7 +94,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression createExpression()
+  @Override
+public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -113,7 +106,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumberLiteral createNumberLiteral()
+  @Override
+public NumberLiteral createNumberLiteral()
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
     return numberLiteral;
@@ -124,7 +118,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public MethodCall createMethodCall()
+  @Override
+public MethodCall createMethodCall()
   {
     MethodCallImpl methodCall = new MethodCallImpl();
     return methodCall;
@@ -135,7 +130,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public OrExpression createOrExpression()
+  @Override
+public OrExpression createOrExpression()
   {
     OrExpressionImpl orExpression = new OrExpressionImpl();
     return orExpression;
@@ -146,7 +142,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public AndExpression createAndExpression()
+  @Override
+public AndExpression createAndExpression()
   {
     AndExpressionImpl andExpression = new AndExpressionImpl();
     return andExpression;
@@ -157,7 +154,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public Comparison createComparison()
+  @Override
+public Comparison createComparison()
   {
     ComparisonImpl comparison = new ComparisonImpl();
     return comparison;
@@ -168,7 +166,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotExpression createNotExpression()
+  @Override
+public NotExpression createNotExpression()
   {
     NotExpressionImpl notExpression = new NotExpressionImpl();
     return notExpression;
@@ -179,7 +178,8 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleExpressionsPackage getSimpleExpressionsPackage()
+  @Override
+public SimpleExpressionsPackage getSimpleExpressionsPackage()
   {
     return (SimpleExpressionsPackage)getEPackage();
   }

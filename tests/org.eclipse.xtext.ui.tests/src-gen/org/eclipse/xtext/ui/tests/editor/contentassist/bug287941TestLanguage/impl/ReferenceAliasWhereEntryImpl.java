@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl;
 
@@ -23,12 +20,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Ref
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ReferenceAliasWhereEntryImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ReferenceAliasWhereEntryImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ReferenceAliasWhereEntryImpl#getRightAlias <em>Right Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

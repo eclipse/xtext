@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -15,17 +16,17 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class Bug313089Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug313089TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testUnassignedAction() throws Exception {
+	@Test public void testUnassignedAction() throws Exception {
 		getModelAndExpect("foo bar foo", 0);
 		
 	}
 	
-	public void testAssignedAction() throws Exception {
+	@Test public void testAssignedAction() throws Exception {
 		getModelAndExpect("foo baz baz0 baz baz1 foo",0);
 	}
 }

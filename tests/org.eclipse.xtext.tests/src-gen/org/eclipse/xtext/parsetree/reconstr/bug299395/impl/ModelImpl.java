@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.bug299395.impl;
 
@@ -30,13 +27,13 @@ import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getStrings <em>Strings</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getSubModel <em>Sub Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

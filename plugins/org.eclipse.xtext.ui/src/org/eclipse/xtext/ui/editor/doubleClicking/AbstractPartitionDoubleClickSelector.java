@@ -17,11 +17,10 @@ import org.eclipse.jface.text.TextUtilities;
  * <p>This {@link org.eclipse.jface.text.ITextDoubleClickStrategy strategy} treats partition boundaries 
  * in a special way. It allows to select a complete partition at once.</p>
  * <p>Implementors may override {@link #getSelectedRegion(IDocument, ITypedRegion)} to customize the
- * contents of the partition that should be selected.</p>.
- * <p>The implementation was heavily adapted from <code>org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector</code></p>.
+ * contents of the partition that should be selected.</p>
+ * <p>The implementation was heavily adapted from <code>org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector</code></p>
  * 
  * @see FixedCharCountPartitionDoubleClickSelector
- * @see org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractPartitionDoubleClickSelector extends AbstractWordAwareDoubleClickStrategy {

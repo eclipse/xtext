@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl;
 
@@ -33,7 +30,7 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
   {
     try
     {
-      ElementmatchertestlanguageFactory theElementmatchertestlanguageFactory = (ElementmatchertestlanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/elementmatchertestlanguage"); 
+      ElementmatchertestlanguageFactory theElementmatchertestlanguageFactory = (ElementmatchertestlanguageFactory)EPackage.Registry.INSTANCE.getEFactory(ElementmatchertestlanguagePackage.eNS_URI);
       if (theElementmatchertestlanguageFactory != null)
       {
         return theElementmatchertestlanguageFactory;

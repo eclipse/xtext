@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -24,10 +21,10 @@ import org.eclipse.xtext.validation.csvalidationtest.List2;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.List2Impl#getVal1 <em>Val1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

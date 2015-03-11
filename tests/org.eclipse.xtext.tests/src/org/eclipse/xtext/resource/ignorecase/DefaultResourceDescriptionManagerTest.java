@@ -10,8 +10,6 @@ package org.eclipse.xtext.resource.ignorecase;
 import java.util.Collection;
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -24,24 +22,27 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescriptionManagerTest extends TestCase {
+public class DefaultResourceDescriptionManagerTest extends Assert {
 
 	private Resource resource;
 	private DefaultResourceDescription resourceDescription;
 	private DefaultResourceDescriptionManager manager;
 	private Collection<QualifiedName> importedNames;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		EObject copy = EcoreUtil.copy(EcorePackage.eINSTANCE);
 		resource = new ResourceImpl();
 		resource.getContents().add(copy);
 		IQualifiedNameProvider nameProvider = new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
 					return QualifiedName.create(((ENamedElement) obj).getName());
@@ -60,7 +61,7 @@ public class DefaultResourceDescriptionManagerTest extends TestCase {
 		importedNames = Collections.emptySet();
 	}
 	
-	public void testIsAffected() {
+	@Test public void testIsAffected() {
 		DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(null, resourceDescription);
 		assertFalse(manager.isAffected(delta, resourceDescription));
 		importedNames = Collections.singleton(QualifiedName.create("eclass"));

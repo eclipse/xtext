@@ -32,14 +32,17 @@ public class TypeResourceDescription extends AbstractResourceDescription {
 		this.exportedObjects = exportedObjects;
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}

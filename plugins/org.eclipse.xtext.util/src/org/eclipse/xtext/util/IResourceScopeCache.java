@@ -29,9 +29,11 @@ public interface IResourceScopeCache {
 	
 	static class NullImpl implements IResourceScopeCache {
 		public final static IResourceScopeCache INSTANCE = new NullImpl();
+		@Override
 		public <T> T get(Object key, Resource res, Provider<T> provider) {
 			return provider.get();
 		}
+		@Override
 		public void clear(Resource res) {}
 	}
 }

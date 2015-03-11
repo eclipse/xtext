@@ -11,25 +11,25 @@ package org.eclipse.xtext.scoping;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class ScopesTest extends TestCase {
+public class ScopesTest extends Assert {
 	
 	private QualifiedName FOO = QualifiedName.create("Foo");
 	private QualifiedName BAR = QualifiedName.create("Bar");
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
 		attr.setName("Foo");
 		EAttribute attr2 = EcoreFactory.eINSTANCE.createEAttribute();
@@ -45,7 +45,7 @@ public class ScopesTest extends TestCase {
 		assertEquals(BAR, iterator.next().getName());
 	}
 	
-	public void testWithNull() throws Exception {
+	@Test public void testWithNull() throws Exception {
 		EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
 		attr.setName("Foo");
 		EAttribute attr2 = EcoreFactory.eINSTANCE.createEAttribute();
@@ -63,7 +63,7 @@ public class ScopesTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testWithDifferentElements() throws Exception {
+	@Test public void testWithDifferentElements() throws Exception {
 		EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
 		attr.setName("Foo");
 		EDataType datatype = EcoreFactory.eINSTANCE.createEDataType();
@@ -85,7 +85,7 @@ public class ScopesTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testEmptyIterable() throws Exception {
+	@Test public void testEmptyIterable() throws Exception {
 		ArrayList<EAttribute> list = new ArrayList<EAttribute>();
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		assertFalse(iterable.iterator().hasNext());

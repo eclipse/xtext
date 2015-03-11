@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class TerminalRulesTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      TerminalRulesTestLanguageFactory theTerminalRulesTestLanguageFactory = (TerminalRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest"); 
+      TerminalRulesTestLanguageFactory theTerminalRulesTestLanguageFactory = (TerminalRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(TerminalRulesTestLanguagePackage.eNS_URI);
       if (theTerminalRulesTestLanguageFactory != null)
       {
         return theTerminalRulesTestLanguageFactory;

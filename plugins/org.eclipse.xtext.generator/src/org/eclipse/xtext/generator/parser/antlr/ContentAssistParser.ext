@@ -11,6 +11,17 @@ import org::eclipse::xtext::generator;
 
 extension org::eclipse::xtext::generator::Naming;
 
+String getParserSuperClassName(boolean partialParsing, boolean hasIDE) :
+	hasIDE 
+	?
+		(partialParsing
+		? "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser"
+		: "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser")
+	:
+		(partialParsing
+		? "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractPartialContentAssistParser"
+	    : "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser");
+
 String getParserClassName(Grammar grammar) :
 	getParserClassName(grammar, getNaming());
 	

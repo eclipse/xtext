@@ -22,19 +22,20 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
+var emfRuntimeVersion = "2.9"
 
 CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
-	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}
-	fragment = parser.antlr.XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 }

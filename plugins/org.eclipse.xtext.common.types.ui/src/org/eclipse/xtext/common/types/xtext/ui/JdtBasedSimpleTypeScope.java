@@ -67,7 +67,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 					}
 					for(char[] enclosingType: enclosingTypeNames) {
 						fqName.append(enclosingType);
-						fqName.append('$');
+						fqName.append('.');
 					}
 					fqName.append(simpleTypeName);
 					String fullyQualifiedName = fqName.toString();

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Res
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Resource Scope</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

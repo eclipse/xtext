@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
@@ -24,25 +28,54 @@ public class BuilderStateUtil {
 	public static ResourceDescriptionImpl create(IResourceDescription desc) {
 		if (desc instanceof ResourceDescriptionImpl)
 			return (ResourceDescriptionImpl) desc;
-		ResourceDescriptionImpl description = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
-		description.setURI(desc.getURI());
-		for (IEObjectDescription objDesc : desc.getExportedObjects()) {
-			description.getExportedObjects().add(create(objDesc));
+		ResourceDescriptionImpl result = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
+		result.setURI(desc.getURI());
+		copyExportedObject(desc, result);
+		copyReferenceDescriptions(desc, result);
+		copyImportedNames(desc, result);
+		return result;
+	}
+
+	public static void copyImportedNames(IResourceDescription from, ResourceDescriptionImpl result) {
+		Iterable<QualifiedName> importedNames = from.getImportedNames();
+		if (importedNames instanceof Collection<?>) {
+			Collection<? extends QualifiedName> sourceImportedNames = (Collection<? extends QualifiedName>) importedNames;
+			if (!sourceImportedNames.isEmpty()) {
+				InternalEList<QualifiedName> targetImportedNames = (InternalEList<QualifiedName>) result.getImportedNames();
+				targetImportedNames.addAllUnique(sourceImportedNames);
+			}
+		} else {
+			Iterator<QualifiedName> importedNamesIterator = importedNames.iterator();
+			if (importedNamesIterator.hasNext()) {
+				InternalEList<QualifiedName> targetImportedNames = (InternalEList<QualifiedName>) result.getImportedNames();
+				do {
+					targetImportedNames.addUnique(importedNamesIterator.next());
+				} while(importedNamesIterator.hasNext());
+			}
 		}
-		Iterable<IReferenceDescription> referenceDescriptions = desc.getReferenceDescriptions();
-		for (IReferenceDescription iReferenceDescription : referenceDescriptions) {
-			description.getReferenceDescriptions().add(create(iReferenceDescription));
+	}
+
+	public static void copyReferenceDescriptions(IResourceDescription from, ResourceDescriptionImpl result) {
+		Iterator<IReferenceDescription> sourceReferenceDescriptions = from.getReferenceDescriptions().iterator();
+		if (sourceReferenceDescriptions.hasNext()) {
+			InternalEList<IReferenceDescription> targetReferenceDescriptions = (InternalEList<IReferenceDescription>) result.getReferenceDescriptions();
+			do {
+				targetReferenceDescriptions.addUnique(BuilderStateUtil.create(sourceReferenceDescriptions.next()));	
+			} while(sourceReferenceDescriptions.hasNext());
 		}
-		Iterable<QualifiedName> importedNames = desc.getImportedNames();
-		for (QualifiedName importedName : importedNames) {
-			description.getImportedNames().add(importedName);
+	}
+
+	public static void copyExportedObject(IResourceDescription from, ResourceDescriptionImpl result) {
+		Iterator<IEObjectDescription> sourceExportedObjects = from.getExportedObjects().iterator();
+		if (sourceExportedObjects.hasNext()) {
+			InternalEList<IEObjectDescription> targetExportedObjects = (InternalEList<IEObjectDescription>) result.getExportedObjects();
+			do {
+				targetExportedObjects.addUnique(BuilderStateUtil.create(sourceExportedObjects.next()));
+			} while(sourceExportedObjects.hasNext());
 		}
-		return description;
 	}
 	
 	public static ReferenceDescriptionImpl create(IReferenceDescription desc) {
-		if (desc instanceof ReferenceDescriptionImpl)
-			return (ReferenceDescriptionImpl) desc;
 		ReferenceDescriptionImpl description = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
 		description.setIndexInList(desc.getIndexInList());
 		description.setSourceEObjectUri(desc.getSourceEObjectUri());
@@ -53,8 +86,6 @@ public class BuilderStateUtil {
 	}
 
 	public static EObjectDescriptionImpl create(IEObjectDescription desc) {
-		if (desc instanceof EObjectDescriptionImpl)
-			return (EObjectDescriptionImpl) desc;
 		EObjectDescriptionImpl objectDescription = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE.createEObjectDescription();
 		objectDescription.setEClass(desc.getEClass());
 		objectDescription.setFragment(desc.getEObjectURI().fragment());

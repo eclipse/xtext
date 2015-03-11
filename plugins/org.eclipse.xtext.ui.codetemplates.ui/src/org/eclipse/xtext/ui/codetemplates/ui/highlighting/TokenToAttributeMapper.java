@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.codetemplates.ui.highlighting;
 
 import java.util.Set;
 
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 
 import com.google.common.collect.ImmutableSet;
@@ -26,10 +26,10 @@ public class TokenToAttributeMapper extends DefaultAntlrTokenToAttributeIdMapper
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
 		if (keywords.contains(tokenName)) {
-			return DefaultHighlightingConfiguration.KEYWORD_ID;
+			return HighlightingStyles.KEYWORD_ID;
 		}
 		if (tokenName.startsWith("KEYWORD_"))
-			return DefaultHighlightingConfiguration.PUNCTUATION_ID;
+			return HighlightingStyles.PUNCTUATION_ID;
 		if (tokenName.equals("RULE_BODY"))
 			return TemplatesHighlightingConfiguration.TEMPLATE_BODY;
 		return super.calculateId(tokenName, tokenType);

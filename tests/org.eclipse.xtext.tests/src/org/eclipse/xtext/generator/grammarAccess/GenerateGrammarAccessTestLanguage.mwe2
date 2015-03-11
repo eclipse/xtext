@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.Generator
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -24,7 +25,7 @@ Workflow {
 		directory="${runtimeProject}/src-gen/org/eclipse/xtext/generator/grammarAccess"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		
@@ -32,7 +33,7 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 			}
-			fragment = org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment {}
+			fragment = org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment auto-inject {}
 		}
 	}
 }

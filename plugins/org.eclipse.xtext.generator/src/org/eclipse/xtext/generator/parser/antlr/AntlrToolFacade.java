@@ -3,10 +3,12 @@ package org.eclipse.xtext.generator.parser.antlr;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.Charset;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
@@ -23,7 +25,7 @@ public class AntlrToolFacade {
 		this.loader = loader;
 	}
 
-	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0.jar";
+	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0-patch.jar";
 	private boolean askBeforeDownload = true;
 
 	public void setAskBeforeDownload(boolean shouldAsk) {
@@ -33,8 +35,8 @@ public class AntlrToolFacade {
 	public void setDownloadFrom(String downloadURL) {
 		this.downloadURL = downloadURL;
 	}
-
-	private String downloadTo = "./.antlr-generator-3.2.0.jar";
+	
+	private String downloadTo = "./.antlr-generator-3.2.0-patch.jar";
 
 	public void setDownloadTo(String path) {
 		this.downloadTo = path;
@@ -42,10 +44,18 @@ public class AntlrToolFacade {
 	protected File file() {
 		return new File(downloadTo);
 	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.4
+	 */
+	protected String getToolRunnerClassName() {
+		return className;
+	}
 
 	protected Class<?> getToolClass() {
 		try {
-			return loader.loadClass(className);
+			return loader.loadClass(getToolRunnerClassName());
 		} catch (ClassNotFoundException e) {
 			if (!file().exists()) {
 				if (!download())
@@ -63,7 +73,7 @@ public class AntlrToolFacade {
 						Thread.currentThread().setContextClassLoader(contextClassLoader);
 					}
 				} catch (MalformedURLException e1) {
-					log.error(e1.getMessage());
+					log.error(e1.getMessage(), e1);
 				} catch (ClassNotFoundException e1) {
 					log.error(e1.getMessage(),e1);
 				}
@@ -105,6 +115,14 @@ public class AntlrToolFacade {
 				in.close();
 			}
 			log.info("finished downloading.");
+		} catch (IOException e) {
+			System.err.println("Downloading ANTLR parser generator failed: " + e.getMessage());
+			System.err.println("Please install the feature 'Xtext Antlr SDK' manually using the external updatesite:");
+			System.err.println();
+			System.err.println("\t\t'http://download.itemis.com/updates/'."); 
+			System.err.println();
+			System.err.println("(see http://www.eclipse.org/Xtext/download.html for details)");
+			return false;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 			return false;
@@ -121,6 +139,10 @@ public class AntlrToolFacade {
 				+ downloadURL + "' and put it on the classpath.");
 	}
 
+	/**
+	 * @deprecated use runWithEncodingAndParams(grammar, encoding, args) instead
+	 */
+	@Deprecated
 	public void runWithParams(String grammarFullPath, String... furtherArgs) {
 		ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 		try {
@@ -130,6 +152,33 @@ public class AntlrToolFacade {
 				throw getNoClassFoundException();
 			Method method = class1.getMethod("runWithParams", new Class[] { String.class, String[].class });
 			method.invoke(null, grammarFullPath, furtherArgs);
+		} catch (Exception e) {
+			throw new WrappedException(e);
+		} finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void runWithEncodingAndParams(String grammarFullPath, String explicitEncoding, String... furtherArgs) {
+		ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+		try {
+			Thread.currentThread().setContextClassLoader(loader);
+			Class<?> class1 = getToolClass();
+			if (class1 == null)
+				throw getNoClassFoundException();
+			Method method = class1.getMethod("runWithEncodingAndParams", new Class[] { String.class, String.class, String[].class });
+			method.invoke(null, grammarFullPath, explicitEncoding, furtherArgs);
+		} catch (NoSuchMethodException e) {
+			if (explicitEncoding == null || Charset.defaultCharset().name().equals(explicitEncoding)) {
+				runWithParams(grammarFullPath, furtherArgs);
+			} else {
+				throw new IllegalStateException(
+						"Explicit encoding was set but is not supported by the available version of the AntlrToolRunner.\n" +
+						"Please use the ANTLR parser generator in version 2.1 or better");
+			}
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage;
 
@@ -18,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model#getIntValues <em>Int Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model#getDoubleValues <em>Double Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model#getDateValues <em>Date Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage#getModel()
  * @model

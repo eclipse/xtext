@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.importedURI.impl;
 
@@ -22,11 +19,11 @@ import org.eclipse.xtext.linking.importedURI.Type;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.importedURI.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.importedURI.impl.TypeImpl#getExtends <em>Extends</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

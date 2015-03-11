@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage;
 
@@ -16,11 +13,11 @@ import org.eclipse.xtext.enumrules.enumsUi.ExistingEnum;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.Model#getExisting <em>Existing</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.Model#getGenerated <em>Generated</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.EnumRulesUiTestLanguagePackage#getModel()
  * @model

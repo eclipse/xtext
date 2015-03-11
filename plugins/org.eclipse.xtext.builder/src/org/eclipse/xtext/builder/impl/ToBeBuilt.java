@@ -32,4 +32,15 @@ public class ToBeBuilt {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ToBeBuilt [\n\ttoBeUpdated=");
+		builder.append(toBeUpdated);
+		builder.append(",\n\ttoBeDeleted=");
+		builder.append(toBeDeleted);
+		builder.append("\n]");
+		return builder.toString();
+	}
+
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug#getFarbe <em>Farbe</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage#getSpielzeug()
  * @model

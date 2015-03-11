@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.refactoring.referring.impl;
 
@@ -23,10 +20,10 @@ import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferenceImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

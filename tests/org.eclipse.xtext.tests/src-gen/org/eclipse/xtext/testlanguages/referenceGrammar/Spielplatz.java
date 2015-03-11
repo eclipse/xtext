@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielplatz#getGroesse <em>Groesse</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielplatz#getBeschreibung <em>Beschreibung</em>}</li>
@@ -24,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielplatz#getSpielzeuge <em>Spielzeuge</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.Spielplatz#getFamilie <em>Familie</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage#getSpielplatz()
  * @model

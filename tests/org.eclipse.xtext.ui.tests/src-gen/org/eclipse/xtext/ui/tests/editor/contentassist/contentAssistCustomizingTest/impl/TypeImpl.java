@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingT
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

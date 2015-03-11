@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug289524ExTest.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.parser.antlr.bug289524ExTest.Contained;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524ExTest.impl.ContainedImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 
@@ -31,12 +28,12 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Statemachine;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getStates <em>States</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

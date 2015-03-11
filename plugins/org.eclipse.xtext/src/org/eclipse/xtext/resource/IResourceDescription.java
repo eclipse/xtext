@@ -36,6 +36,7 @@ public interface IResourceDescription extends ISelectable {
 	 *         combination of <code>name</code> and <code>eObjectOrProxy</code> only once as an
 	 *         {@link IEObjectDescription}. The order of the exported objects matters.
 	 */
+	@Override
 	Iterable<IEObjectDescription> getExportedObjects();
 
 	/**
@@ -55,6 +56,7 @@ public interface IResourceDescription extends ISelectable {
 
 	@ImplementedBy(DefaultResourceDescriptionManager.class)
 	interface Manager {
+		
 
 		/**
 		 * @return a resource description for the given resource. The result represents the current state of the given
@@ -91,6 +93,29 @@ public interface IResourceDescription extends ISelectable {
 				IResourceDescriptions context)
 				throws IllegalArgumentException;
 
+		/**
+		 * Implement this interface if your language should be notified of all {@link Delta}s, even
+		 * if they don't contain any changed {@link EObjectDescription}s
+		 * @since 2.7
+		 */
+		interface AllChangeAware extends Manager {
+			/**
+			 * Batch operation to check whether a description is affected by any given delta in
+			 * the given context. Implementations may perform any optimizations to return <code>false</code> whenever
+			 * possible, e.g. check the deltas against the visible containers.
+			 * @param deltas List of deltas to check. May not be <code>null</code>. In contrast to {@link #isAffected(Collection, IResourceDescription, IResourceDescriptions)}
+			 * callers of this method are expected to pass in all deltas, even if they don't have changed {@link IEObjectDescription}s
+			 * @param candidate The description to check. May not be <code>null</code>.
+			 * @param context The current context of the batch operation. May not be <code>null</code>.
+			 * @return whether the condidate is affected by any of the given changes.
+			 * @throws IllegalArgumentException
+			 *             if this manager is not responsible for the given candidate.
+			 */
+			boolean isAffectedByAny(Collection<IResourceDescription.Delta> deltas,
+					IResourceDescription candidate,
+					IResourceDescriptions context)
+					throws IllegalArgumentException;
+		}
 	}
 
 	/**
@@ -134,11 +159,6 @@ public interface IResourceDescription extends ISelectable {
 		 */
 		ImmutableList<Delta> getDeltas();
 
-		/**
-		 * @return the sender of this event. Is never <code>null</code>.
-		 */
-		Source getSender();
-
 		interface Source {
 
 			/**
@@ -161,6 +181,16 @@ public interface IResourceDescription extends ISelectable {
 			 *            the listener to be removed. May not be <code>null</code>.
 			 */
 			void removeListener(Listener listener);
+
+			/**
+			 * <p>
+			 * Notify listeners about the given event.
+			 * </p>
+			 * @param event
+			 * 				the fired event. My not be <code>null</code>.
+			 * @since 2.5
+			 */
+			void notifyListeners(IResourceDescription.Event event);
 		}
 
 		/**
@@ -187,6 +217,25 @@ public interface IResourceDescription extends ISelectable {
 			 */
 			void descriptionsChanged(Event event);
 		}
+	}
+	
+	/**
+	 * 
+	 * <p>
+	 * This event is used to indicate that there were changes but it was not possible to determine what kind of changes
+	 * had been done. This event does not contain any deltas.
+	 * </p>
+	 * 
+	 * @since 2.5
+	 */
+	interface CoarseGrainedEvent extends Event {
+		
+		/**
+		 * @return the empty list of changes. It is never <code>null</code> but always empty.
+		 */
+		@Override
+		ImmutableList<Delta> getDeltas();
+		
 	}
 
 }

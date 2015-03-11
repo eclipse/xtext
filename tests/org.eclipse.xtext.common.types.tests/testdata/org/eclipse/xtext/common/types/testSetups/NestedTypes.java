@@ -17,6 +17,8 @@ public abstract class NestedTypes extends TestScenario {
 		public abstract class Inner extends TestScenario {
 			
 			abstract void method();
+			
+			protected Inner(String ignored) {}
 		}
 		
 		abstract int method();

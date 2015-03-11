@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainMod
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Data Type</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

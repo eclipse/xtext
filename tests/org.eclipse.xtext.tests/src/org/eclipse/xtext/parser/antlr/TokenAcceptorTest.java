@@ -11,32 +11,32 @@ import java.util.NoSuchElementException;
 
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TokenAcceptorTest extends TestCase {
+public class TokenAcceptorTest extends Assert {
 
 	private TokenAcceptor tokenAcceptor;
 	private int tokenCount;
 	private int expectedToken;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		tokenAcceptor = new TokenAcceptor();
 		tokenCount = 0;
 		expectedToken = 1;
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		tokenAcceptor = null;
 		tokenCount = -1;
 		expectedToken = -1;
-		super.tearDown();
 	}
 	
 	protected Token createToken() {
@@ -60,7 +60,7 @@ public class TokenAcceptorTest extends TestCase {
 		expectedToken++;
 	}
 	
-	public void testNextOnEmpty() {
+	@Test public void testNextOnEmpty() {
 		assertFalse(tokenAcceptor.hasNext());
 		try {
 			next();
@@ -70,7 +70,7 @@ public class TokenAcceptorTest extends TestCase {
 		}
 	}
 	
-	public void testNextCalledToOften() {
+	@Test public void testNextCalledToOften() {
 		accept();
 		accept();
 		next();
@@ -84,7 +84,7 @@ public class TokenAcceptorTest extends TestCase {
 		}
 	}
 	
-	public void testAlternateCalls() {
+	@Test public void testAlternateCalls() {
 		for(int i = 0; i < 10; i++) {
 			accept();
 			next();
@@ -92,7 +92,7 @@ public class TokenAcceptorTest extends TestCase {
 		}
 	}
 	
-	public void testSubsequentCalls() {
+	@Test public void testSubsequentCalls() {
 		for(int i = 0; i < 10; i++) {
 			accept();
 		}
@@ -102,7 +102,7 @@ public class TokenAcceptorTest extends TestCase {
 		assertFalse(tokenAcceptor.hasNext());
 	}
 	
-	public void testRepeatedSubsequentCalls() {
+	@Test public void testRepeatedSubsequentCalls() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				accept();
@@ -117,7 +117,7 @@ public class TokenAcceptorTest extends TestCase {
 	private static final int PERF_LOOPS = 100 * 100; // 10 * 1000 * 1000
 	private static final int PERF_INNER_LOOPS = 10;
 	
-	public void testPerformance_01() {
+	@Test public void testPerformance_01() {
 		for(int i = 0; i < PERF_LOOPS; i++) {
 			for(int j = 0; j < PERF_INNER_LOOPS; j++) {
 				accept();
@@ -128,14 +128,14 @@ public class TokenAcceptorTest extends TestCase {
 		}
 	}
 	
-	public void testPerformance_02() {
+	@Test public void testPerformance_02() {
 		for(int i = 0; i < PERF_LOOPS * PERF_INNER_LOOPS; i++) {
 			accept();
 			next();
 		}
 	}
 	
-	public void testPerformanceNoop() {
+	@Test public void testPerformanceNoop() {
 		for(int i = 0; i < PERF_LOOPS; i++) {
 			for(int j = 0; j < PERF_INNER_LOOPS; j++) {
 				Token token = createToken();

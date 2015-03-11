@@ -11,9 +11,10 @@ import java.util.List;
 
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -23,12 +24,12 @@ import com.google.common.collect.Lists;
 public class CommentTest extends AbstractXtextTests{
 
     @Override
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         with(DummyTestLanguageStandaloneSetup.class);
     }
 
-    public void testSingleLineComment() throws Exception {
+    @Test public void testSingleLineComment() throws Exception {
         String model = "// comment\n/*element foo;\nelement bar;*/";
         INode node = getRootNode(model);
         List<ILeafNode> leafNodes = Lists.newArrayList(node.getLeafNodes());

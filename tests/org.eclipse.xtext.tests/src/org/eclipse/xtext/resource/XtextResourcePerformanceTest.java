@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -21,7 +22,7 @@ public class XtextResourcePerformanceTest extends AbstractXtextTests {
 	private String model;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
@@ -38,7 +39,7 @@ public class XtextResourcePerformanceTest extends AbstractXtextTests {
 		model = modelBuilder.toString();
 	}
 
-	public void testLoad() throws Exception {
+	@Test public void testLoad() throws Exception {
 		XtextResource resource = getResourceFromString(model);
 		assertNotNull(resource);
 		assertFalse(resource.getParseResult().hasSyntaxErrors());
@@ -46,7 +47,7 @@ public class XtextResourcePerformanceTest extends AbstractXtextTests {
 		assertTrue(resource.getErrors().isEmpty());
 	}
 
-	public void testLoadModelWithLinkingErrors() throws Exception {
+	@Test public void testLoadModelWithLinkingErrors() throws Exception {
 		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
 		modelBuilder.append("spielplatz " + NUM_ELEMENTS + " {\n");
 		for (int i = 1; i <= NUM_ELEMENTS; i++) {

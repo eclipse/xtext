@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -24,12 +21,12 @@ import org.eclipse.xtext.validation.csvalidationtest.Heuristic1;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getB <em>B</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getC <em>C</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

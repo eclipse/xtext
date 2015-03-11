@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=5;
-    public static final int T__12=12;
-    public static final int T__13=13;
     public static final int T__19=19;
-    public static final int T__9=9;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int RULE_WS=4;
-    public static final int T__17=17;
-    public static final int T__8=8;
-    public static final int EOF=-1;
     public static final int T__16=16;
-    public static final int T__10=10;
-    public static final int RULE_ANY_OTHER=7;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int T__18=18;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=7;
+    public static final int T__10=10;
+    public static final int RULE_WS=4;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int RULE_ML_COMMENT=5;
 
     // delegates
     // delegators
@@ -648,21 +648,15 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
     static final String DFA6_eofS =
         "\42\uffff";
     static final String DFA6_minS =
-        "\1\0\2\151\1\uffff\1\166\2\uffff\1\141\1\156\1\141\1\165\1\52\2"+
-        "\uffff\1\164\1\144\13\uffff\1\150\1\144\1\157\4\uffff";
+        "\1\0\2\151\1\uffff\1\166\2\uffff\1\141\1\156\1\141\1\165\1\52\2\uffff\1\164\1\144\13\uffff\1\150\1\144\1\157\4\uffff";
     static final String DFA6_maxS =
-        "\1\uffff\2\151\1\uffff\1\166\2\uffff\1\141\1\156\1\141\1\165\1\57"+
-        "\2\uffff\1\164\1\144\13\uffff\1\150\1\151\1\157\4\uffff";
+        "\1\uffff\2\151\1\uffff\1\166\2\uffff\1\141\1\156\1\141\1\165\1\57\2\uffff\1\164\1\144\13\uffff\1\150\1\151\1\157\4\uffff";
     static final String DFA6_acceptS =
-        "\3\uffff\1\3\1\uffff\1\6\1\7\5\uffff\1\17\1\20\2\uffff\1\3\1\5\1"+
-        "\6\1\7\1\10\1\11\1\12\1\13\1\15\1\16\1\17\3\uffff\1\2\1\14\1\1\1"+
-        "\4";
+        "\3\uffff\1\3\1\uffff\1\6\1\7\5\uffff\1\17\1\20\2\uffff\1\3\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\15\1\16\1\17\3\uffff\1\2\1\14\1\1\1\4";
     static final String DFA6_specialS =
         "\1\0\41\uffff}>";
     static final String[] DFA6_transitionS = {
-            "\11\15\2\14\2\15\1\14\22\15\1\14\7\15\1\5\1\6\5\15\1\13\13\15"+
-            "\1\3\47\15\1\7\1\11\3\15\1\2\1\10\5\15\1\4\2\15\1\12\4\15\1"+
-            "\1\uff88\15",
+            "\11\15\2\14\2\15\1\14\22\15\1\14\7\15\1\5\1\6\5\15\1\13\13\15\1\3\47\15\1\7\1\11\3\15\1\2\1\10\5\15\1\4\2\15\1\12\4\15\1\1\uff88\15",
             "\1\16",
             "\1\17",
             "",
@@ -714,7 +708,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA6 extends DFA {
+    static class DFA6 extends DFA {
 
         public DFA6(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

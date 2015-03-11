@@ -12,10 +12,10 @@ package testdata;
  */
 public class FieldAccess {
 
+	public String shadowedByPrivateField;
 	public String stringField;
 	public final String finalField;
 	public static String staticField;
-	
 	
 	public FieldAccess() {
 		finalField = "finalField";

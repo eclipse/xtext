@@ -1,0 +1,3 @@
+entity Foo {
+	Fo<caret>o foo
+}

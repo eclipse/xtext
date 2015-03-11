@@ -18,12 +18,14 @@ import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * TypesAwareDefaultGlobalScopeProvider for the common case
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class TypesAwareDefaultGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	
 	@Inject

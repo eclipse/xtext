@@ -13,28 +13,27 @@ import org.antlr.runtime.Token;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class TokenTool {
 	/**
-	 * @param t
-	 * @return
+	 * @param t the token
+	 * @return the parsed text or <code>null</code> if the {@link Token} t was <code>null</code> or the token's text was <code>null</code>.
 	 */
 	public static String getText(Token t) {
 		return t!=null ? t.getText() : null;
 	}
 	
 	/**
-	 * @param t
-	 * @return
+	 * @param t the token
+	 * @return the line of the token or <code>-1</code> if the {@link Token} t was <code>null</code> or the token did not provide line information.
 	 */
 	public static int getLine(Token t) {
 		return  t!=null ? t.getLine() : -1;
 	}
 	
 	/**
-	 * @param t
-	 * @return
+	 * @param t the token
+	 * @return the offset of the token or <code>-1</code> if the {@link Token} t was <code>null</code> or the token did not provide offset information.
 	 */
 	public static int getOffset(Token t) {
 		if (t instanceof CommonToken) {
@@ -44,8 +43,8 @@ public class TokenTool {
 	}
 	
 	/**
-	 * @param t
-	 * @return
+	 * @param t the token
+	 * @return the length of the token or <code>0</code> if the {@link Token} t was <code>null</code> or the token did not provide line information.
 	 */
 	public static int getLength(Token t) {
 		String text = getText(t);

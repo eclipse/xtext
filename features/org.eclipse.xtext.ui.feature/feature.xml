@@ -2,8 +2,9 @@
 <feature
       id="org.eclipse.xtext.ui"
       label="%featureName"
-      version="2.0.1.qualifier"
-      provider-name="%providerName">
+      version="2.8.0.qualifier"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -18,15 +19,16 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">
-      %license
-   </license>
-
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.0.0" match="equivalent"/>
-      <import feature="org.eclipse.emf.mwe.ui" version="1.1.0" match="equivalent"/>
-      <import feature="org.eclipse.xpand.ui" version="1.1.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.8.0" match="equivalent"/>
    </requires>
+
+   <plugin
+         id="org.apache.commons.lang"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtext.ui"
@@ -41,12 +43,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.shared"
          download-size="0"
          install-size="0"
          version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.common.types.shared.jdt38"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
    <plugin
@@ -69,12 +79,26 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.codetemplates.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
+   <plugin
+         id="org.eclipse.xtext.common.types.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

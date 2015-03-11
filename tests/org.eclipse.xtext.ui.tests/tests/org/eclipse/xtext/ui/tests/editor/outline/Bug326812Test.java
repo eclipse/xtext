@@ -9,8 +9,9 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,19 +19,19 @@ import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribu
 public class Bug326812Test extends AbstractOutlineWorkbenchTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		preferenceStore.setValue(LinkWithEditorOutlineContribution.PREFERENCE_KEY, true);
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		preferenceStore.setValue(LinkWithEditorOutlineContribution.PREFERENCE_KEY,
 				preferenceStore.getDefaultBoolean(LinkWithEditorOutlineContribution.PREFERENCE_KEY));
 	}
 
-	public void testCloseTwoEditorsForSameLanguage() throws Exception {
+	@Test public void testCloseTwoEditorsForSameLanguage() throws Exception {
 		modelAsText = "one { two {} three {} } four {}";
 		IFile file = IResourcesSetupUtil.createFile("test/othertest.outlinetestlanguage", modelAsText);
 		openEditor(file);

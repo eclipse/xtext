@@ -1,0 +1,119 @@
+Xtext 2.4.0 M5 - sources from xtext.xbase.formatting (as of M5)
+=========================================================================================================================
+Test 'testFullBuild(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'XtextBuilder.build' took 5635ms (1 measurements).
+Task 'AbstractParser.parse' took 207ms (16 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 211ms (20 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 43ms (20 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 4667ms (5174 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 46ms (5658 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 426ms (496 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 10ms (365 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 81ms (170 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 459ms (170 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (20 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'ResourceValidatorImpl.validation' took 657ms (10 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+Test 'testFullBuildAgain(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'XtextBuilder.build' took 4800ms (1 measurements).
+Task 'AbstractParser.parse' took 146ms (16 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 201ms (20 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 38ms (20 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 4244ms (5174 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 60ms (5658 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 366ms (496 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 2ms (365 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 147ms (170 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 408ms (170 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (20 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'ResourceValidatorImpl.validation' took 587ms (10 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+Test 'testCleanBuildTwice(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'XtextBuilder.build' took 8182ms (2 measurements).
+Task 'AbstractParser.parse' took 224ms (32 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 271ms (40 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 56ms (40 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 6882ms (10348 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 46ms (11316 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 447ms (992 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 7ms (730 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 146ms (340 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 512ms (340 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (40 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'ResourceValidatorImpl.validation' took 965ms (20 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+Xtext 2.4.0 - 2013-02-27 - sources from xtext.xbase.formatting
+=========================================================================================================================
+Test 'testFullBuild(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'DebugSourceInstallingCompilationParticipant.install' took 0ms (1 measurements).
+Task 'XtextBuilder.build' took 4877ms (1 measurements).
+Task 'AbstractParser.parse' took 158ms (16 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 268ms (20 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 35ms (20 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 598ms (1702 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 70ms (6727 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 527ms (541 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 2ms (374 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 124ms (185 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 555ms (185 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (20 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 7ms (375 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 45ms (14779 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 2362ms (46 measurements).
+Task 'LightweightTypeReference.copyInto' took 41ms (124611 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 392ms (78646 measurements).
+Task 'ResourceValidatorImpl.validation' took 419ms (10 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+Test 'testFullBuildAgain(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'DebugSourceInstallingCompilationParticipant.install' took 357ms (1 measurements).
+Task 'XtextBuilder.build' took 4084ms (1 measurements).
+Task 'AbstractParser.parse' took 189ms (16 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 312ms (20 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 44ms (20 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 554ms (1702 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 99ms (6727 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 432ms (541 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 8ms (374 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 115ms (185 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 473ms (185 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (20 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 9ms (375 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 39ms (14779 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 1783ms (46 measurements).
+Task 'LightweightTypeReference.copyInto' took 23ms (124611 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 309ms (78646 measurements).
+Task 'ResourceValidatorImpl.validation' took 362ms (10 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+Test 'testCleanBuildTwice(org.eclipse.xtend.performance.tests.PerformanceTest)' :
+-------------------------------------------------------------------------------------------------------------------------
+Task 'DebugSourceInstallingCompilationParticipant.install' took 0ms (2 measurements).
+Task 'XtextBuilder.build' took 6482ms (2 measurements).
+Task 'AbstractParser.parse' took 227ms (32 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 305ms (40 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 48ms (40 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 699ms (3404 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 130ms (13454 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 579ms (1082 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 10ms (748 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 158ms (370 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 637ms (370 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (40 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 11ms (750 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 62ms (29558 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 2914ms (92 measurements).
+Task 'LightweightTypeReference.copyInto' took 63ms (249222 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 487ms (157292 measurements).
+Task 'ResourceValidatorImpl.validation' took 629ms (20 measurements).
+-------------------------------------------------------------------------------------------------------------------------

@@ -23,7 +23,7 @@ public class QualifiedNamesFragment extends DefaultGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addfinalTypeToType(IQualifiedNameProvider.class.getName(),
+		return new BindFactory().addTypeToType(IQualifiedNameProvider.class.getName(),
 				DefaultDeclarativeQualifiedNameProvider.class.getName()).getBindings();
 	}
 

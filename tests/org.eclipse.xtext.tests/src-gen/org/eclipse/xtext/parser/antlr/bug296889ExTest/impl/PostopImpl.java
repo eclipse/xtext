@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug296889ExTest.impl;
 
@@ -23,11 +20,11 @@ import org.eclipse.xtext.parser.antlr.bug296889ExTest.Postop;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889ExTest.impl.PostopImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889ExTest.impl.PostopImpl#getFunctionName <em>Function Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

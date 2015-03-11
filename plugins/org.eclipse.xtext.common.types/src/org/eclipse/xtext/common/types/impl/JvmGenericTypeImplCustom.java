@@ -7,54 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	
-	protected Iterable<JvmTypeReference> extendedInterfaces;
-
-	@Override
-	public Iterable<JvmTypeReference> getExtendedInterfaces() {
-		if (extendedInterfaces == null) {
-			extendedInterfaces = Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
-						public boolean apply(JvmTypeReference typeReference) {
-							JvmType type = typeReference.getType();
-							if (type instanceof JvmGenericType) {
-								return ((JvmGenericType) type).isInterface();
-							}
-							return false;
-						}
-					});
-		}
-		return extendedInterfaces;
-	}
-
-	@Override
-	public JvmTypeReference getExtendedClass() {
-		for(JvmTypeReference candidate: getSuperTypes()) {
-			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
-				return candidate;
-		}
-		return null;
-	}
-
 	@Override
 	public boolean isInstantiateable() {
 		return !isAbstract() && !isInterface();
 	}
 
+	// late initialization
+	
 	@Override
-	public Iterable<JvmConstructor> getDeclaredConstructors() {
-		return Iterables.filter(getMembers(), JvmConstructor.class);
+	public EList<JvmTypeParameter> getTypeParameters() {
+		checkPendingInitialization();
+		return super.getTypeParameters();
 	}
-
+	
+	@Override
+	public boolean isStrictFloatingPoint() {
+		checkPendingInitialization();
+		return super.isStrictFloatingPoint();
+	}
+	
+	@Override
+	public boolean isAnonymous() {
+		checkPendingInitialization();
+		return super.isAnonymous();
+	}
 }

@@ -6,6 +6,7 @@ import org.eclipse.xtext.ui.search.IXtextSearchFilter;
 
 public class DomainmodelSearchFilter implements IXtextSearchFilter {
 
+	@Override
 	public boolean reject(IEObjectDescription input) {
 		return TypesPackage.Literals.JVM_FORMAL_PARAMETER.equals(input.getEClass());
 	}

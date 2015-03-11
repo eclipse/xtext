@@ -19,6 +19,7 @@ public abstract class AbstractHyperlink implements IHyperlink {
 	private String typeLabel;
 	private Region hyperlinkRegion;
 
+	@Override
 	public String getHyperlinkText() {
 		return hyperlinkText;
 	}
@@ -27,6 +28,7 @@ public abstract class AbstractHyperlink implements IHyperlink {
 		this.hyperlinkText = hyperlinkText;
 	}
 
+	@Override
 	public String getTypeLabel() {
 		return typeLabel;
 	}
@@ -35,6 +37,7 @@ public abstract class AbstractHyperlink implements IHyperlink {
 		this.typeLabel = typeLabel;
 	}
 
+	@Override
 	public Region getHyperlinkRegion() {
 		return hyperlinkRegion;
 	}

@@ -13,14 +13,14 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»
-	«EXPAND IContentAssistParser::parser(helper)»
+«DEFINE generate(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper, boolean partialParsing, boolean hasIDE) FOR Grammar»
+	«EXPAND IContentAssistParser::parser(partialParsing, helper, hasIDE)»
 	«EXPAND LexerGrammar::grammar(options, helper)»
-	«EXPAND ParserGrammar::grammar(options, helper)»
+	«EXPAND ParserGrammar::grammar(options, helper, hasIDE)»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper, boolean partialParsing, boolean hasIDE) FOR Grammar»«ENDDEFINE»

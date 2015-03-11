@@ -16,10 +16,12 @@ var uri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
 var projectName = "org.eclipse.xtext.builder.tests"
 var runtimeProject = "../${projectName}"
 var classSplitting = true
+var lineDelimiter = '\n'
 
 Workflow {
 	
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 	}
 	
@@ -27,23 +29,25 @@ Workflow {
 		directory = "${runtimeProject}/src-gen"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = runtimeProject
 		projectNameRt = projectName
 		activator = "org.eclipse.xtext.builder.tests.Activator" 
 		
 		language = auto-inject {
-			fragment = ecore.EcoreGeneratorFragment {}
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = ecore.EMFGeneratorFragment {
+				emfRuntimeVersion = "2.9"
+			}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {}
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {} 
 			}
 			fragment = validation.JavaValidatorFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment { 
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject { 
 				options = auto-inject {}
 			}
 			fragment = builder.BuilderIntegrationFragment {}

@@ -14,19 +14,17 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::ModuleExtensions»
 
-«DEFINE generate(Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
+«DEFINE generate(String superClassName, Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
 «EXPAND guiceModuleRt»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRtGenerated().toJavaPackage()»;
 
+«annotationImports()-»
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -34,8 +32,8 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {«guiceModuleRt()»}
  */
- @SuppressWarnings("all")
-public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultRuntimeModule {
+@SuppressWarnings("all")
+«classAnnotations()»public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superClassName» {
 
 	protected Properties properties = null;
 
@@ -61,9 +59,7 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultR
 	
 «DEFINE guiceModuleRt FOR Grammar»
 «FILE guiceModuleRt().asPath()+'.java' SRC -»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRt().toJavaPackage()»;
 
 /**

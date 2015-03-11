@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTes
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.impl.ModelImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

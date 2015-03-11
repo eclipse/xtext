@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest;
 
@@ -14,11 +11,11 @@ import org.eclipse.emf.ecore.EEnumLiteral;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.EnumLiteralDeclaration#getEnumLiteral <em>Enum Literal</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.EnumLiteralDeclaration#getLiteral <em>Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getEnumLiteralDeclaration()
  * @model

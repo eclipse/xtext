@@ -8,6 +8,8 @@
 package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,11 +22,6 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		return getQualifiedName('$');
-	}
-	
-	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
 		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameConcatHelper.NameType.QUALIFIED);
 	}
@@ -34,6 +31,11 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 		return NameConcatHelper.computeFor(this, '$', NameConcatHelper.NameType.SIMPLE);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Returns always <code>null</code>.
+	 */
 	@Override
 	public JvmType getType() {
 		return null;
@@ -43,8 +45,20 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");
-		result.append(getIdentifier());
+		result.append(NameConcatHelper.computeFor(this, '$', NameConcatHelper.NameType.TO_STRING));
 		return result.toString();
+	}
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitWildcardTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitWildcardTypeReference(this, parameter);
+		return result;
 	}
 
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -33,11 +30,11 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplatesImpl#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.CodetemplatesImpl#getTemplates <em>Templates</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

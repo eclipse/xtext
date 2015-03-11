@@ -15,52 +15,60 @@ import org.eclipse.jface.text.templates.TemplateBuffer;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextTemplateContextTest extends TestCase {
+public class XtextTemplateContextTest extends Assert {
 
 	private Document document;
 	private Position position;
 	private XtextTemplateContext testMe;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		document = new Document();
 		position = new Position(0);
 		testMe = new XtextTemplateContext(new TemplateContextType(), document, position, null, null);
 	}
 	
-	public void testEmptyDocAndEmptyTemplate() {
+	@After
+	public void tearDown() {
+		document = null;
+		position = null;
+		testMe = null;
+	}
+	
+	@Test public void testEmptyDocAndEmptyTemplate() {
 		assertTemplateBuffer("", "", 0, "");
 	}
 	
-	public void testBadLocation() {
+	@Test public void testBadLocation() {
 		assertTemplateBuffer("", "", 1, "");
 		assertTemplateBuffer("foo\nbar", "\t", 2, "foo\nbar");
 	}
 	
-	public void testSingleLineTemplate() {
+	@Test public void testSingleLineTemplate() {
 		assertTemplateBuffer("foo", "\t", 1, "foo");
 	}
 	
-	public void testMultiLineTemplate() {
+	@Test public void testMultiLineTemplate() {
 		assertTemplateBuffer("foo\n\tbar", "\t", 1, "foo\nbar");
 		assertTemplateBuffer("foo\r\n\tbar", "\t", 1, "foo\r\nbar");
 		assertTemplateBuffer("foo\r\tbar", "\t", 1, "foo\rbar");
 	}
 	
-	public void testMultiLineTemplateWithPrecedingText() {
+	@Test public void testMultiLineTemplateWithPrecedingText() {
 		assertTemplateBuffer("foo\n\tbar", "\tzonk", 5, "foo\nbar");
 		assertTemplateBuffer("foo\r\n\tbar", "\tzonk", 5, "foo\r\nbar");
 		assertTemplateBuffer("foo\r\tbar", "\tzonk", 5, "foo\rbar");
 	}
 	
-	public void testTrailingLineBreak() {
+	@Test public void testTrailingLineBreak() {
 		assertTemplateBuffer("foo\n\t  ", "\t  ", 3, "foo\n");
 		assertTemplateBuffer("foo\r\n\t  ", "\t  ", 3, "foo\r\n");
 		assertTemplateBuffer("foo\r\t  ", "\t  ", 3, "foo\r");

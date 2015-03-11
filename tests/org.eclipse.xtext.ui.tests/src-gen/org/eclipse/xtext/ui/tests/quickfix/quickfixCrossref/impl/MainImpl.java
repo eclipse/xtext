@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

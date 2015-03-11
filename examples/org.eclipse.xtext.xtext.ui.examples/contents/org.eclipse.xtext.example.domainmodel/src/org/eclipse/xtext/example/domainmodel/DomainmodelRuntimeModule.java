@@ -7,37 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel;
 
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelIdentifiableSimpleNameProvider;
-import org.eclipse.xtext.example.domainmodel.naming.DomainmodelQualifiedNameProvider;
-import org.eclipse.xtext.example.domainmodel.typing.DomainmodelTypeProvider;
-import org.eclipse.xtext.example.domainmodel.valueconverter.DomainmodelValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
+import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
+
 
 /**
  * used to register components to be used within the IDE.
  */
 public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	
-	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return DomainmodelValueConverterService.class;
+	public Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
+		return BatchLinkableResourceStorageFacade.class;
 	}
 	
-	@Override
-	public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
-		return DomainmodelIdentifiableSimpleNameProvider.class;
-	}
-	
-	@Override
-	public Class<? extends ITypeProvider> bindITypeProvider() {
-		return DomainmodelTypeProvider.class;
-	}
-	
-	@Override
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return DomainmodelQualifiedNameProvider.class;
+	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
+		return JavaIOFileSystemSupport.class;
 	}
 }

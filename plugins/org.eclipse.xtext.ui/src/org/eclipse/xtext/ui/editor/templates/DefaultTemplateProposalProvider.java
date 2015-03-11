@@ -129,6 +129,7 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 			return Boolean.TRUE;
 		}
 
+		@Override
 		public void accept(AbstractElement element) {
 			doSwitch(element);
 		}

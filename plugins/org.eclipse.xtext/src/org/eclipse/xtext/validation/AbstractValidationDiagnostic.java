@@ -42,6 +42,7 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 		this.issueData = issueData;
 	}
 	
+	@Override
 	public List<Diagnostic> getChildren() {
 		return Collections.emptyList();
 	}
@@ -49,10 +50,12 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 	// it turns out, the EMF Diagnostic works well with 0,
 	// look at getIssueCode() to retrieve the string-based
 	// code
+	@Override
 	public int getCode() {
 		return 0;
 	}
 	
+	@Override
 	public String getSource() {
 		return source == null ? "" : source.toString();
 	}
@@ -61,14 +64,17 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 		return source;
 	}
 	
+	@Override
 	public Throwable getException() {
 		return null;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}
 
+	@Override
 	public int getSeverity() {
 		return severity;
 	}

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.serializer;
 
 import java.util.List;
@@ -5,6 +12,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -17,15 +25,21 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAdditiveExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAndExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAssignmentElements;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XConstructorCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XEqualityExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XFeatureCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
@@ -37,13 +51,18 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XRelationalExpression
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
-@SuppressWarnings("restriction")
 public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
+	
+	public static final String OPERATOR_NOT_SUPPORTED = "operation not supported";
+	
+	@Inject
+	private XbaseGrammarAccess grammarAccess;
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
+	@SerializerScopeProviderBinding
 	private IScopeProvider scopeProvider;
 	
 	@Inject
@@ -63,7 +82,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *     )
 	 */
 	@Override
-	protected void sequence_XAdditiveExpression_XBinaryOperation(EObject context, XBinaryOperation operation) {
+	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(EObject context, XBinaryOperation operation) {
 		INodesForEObjectProvider nodes = createNodeProvider(operation);
 		SequenceFeeder acceptor = createSequencerFeeder(operation, nodes);
 		XAdditiveExpressionElements opAdd = grammarAccess.getXAdditiveExpressionAccess();
@@ -116,7 +135,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			acceptor.accept(opMultiAssign.getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1(), operation.getFeature(), featureToken, featureNode);
 			acceptor.accept(opMultiAssign.getRightOperandXAssignmentParserRuleCall_1_1_1_0(), operation.getRightOperand());
 		} else if (errorAcceptor != null) {
-			errorAcceptor.accept(new SerializationDiagnostic(operation, context, "Operator "+operatorNames+" is not supported."));
+			errorAcceptor.accept(new SerializationDiagnostic(OPERATOR_NOT_SUPPORTED, operation, context, "Operator "+operatorNames+" is not supported."));
 		} 
 		acceptor.finish();
 	}
@@ -153,36 +172,48 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *    declaringType[0, 1]
 	 */
 	@Override
-	protected void sequence_XFeatureCall_XFeatureCall(EObject context, XFeatureCall call) {
-		INodesForEObjectProvider nodes = createNodeProvider(call);
-		SequenceFeeder acceptor = createSequencerFeeder(call, nodes);
-		XFeatureCallElements xfce = grammarAccess.getXFeatureCallAccess();
-
-		// declaringType=[JvmDeclaredType|StaticQualifier]?
-		if (call.getDeclaringType() != null)
-			acceptor.accept(xfce.getDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1(), call.getDeclaringType());
+	protected void sequence_XFeatureCall(EObject context, XFeatureCall featureCall) {
+		INodesForEObjectProvider nodes = createNodeProvider(featureCall);
+		SequenceFeeder acceptor = createSequencerFeeder(featureCall, nodes);
+		XFeatureCallElements featureCallElements = grammarAccess.getXFeatureCallAccess();
 
 		// (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-		List<JvmTypeReference> typeArguments = call.getTypeArguments();
+		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();
 		if (!typeArguments.isEmpty()) {
-			acceptor.accept(xfce.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_1_0(), typeArguments.get(0), 0);
+			acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0(), typeArguments.get(0), 0);
 			for (int i = 1; i < typeArguments.size(); i++)
-				acceptor.accept(xfce.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_2_1_0(), typeArguments.get(i), i);
+				acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0(), typeArguments.get(i), i);
 		}
 
 		// feature=[JvmIdentifiableElement|IdOrSuper]
-		acceptor.accept(xfce.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1(), call.getFeature());
+		acceptor.accept(featureCallElements.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1(), featureCall.getFeature());
 
-		// (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)?
-		if (call.isExplicitOperationCall()) {
-			acceptor.accept(xfce.getExplicitOperationCallLeftParenthesisKeyword_4_0_0());
-			if (!call.getFeatureCallArguments().isEmpty()) {
-				if (isXShortClosure(call, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
-					acceptor.accept(xfce.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0(), call.getFeatureCallArguments().get(0), 0);
+		// (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)? featureCallArguments+=XClosure?
+		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {
+			if (featureCall.isExplicitOperationCall())
+				acceptor.accept(featureCallElements.getExplicitOperationCallLeftParenthesisKeyword_3_0_0());
+			List<XExpression> arguments = featureCall.getFeatureCallArguments();
+			if (!arguments.isEmpty()) {
+				if (featureCall.isExplicitOperationCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_4_0(), arguments.get(1), 1);
+				} else if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0(), arguments.get(0), 0);
 				} else {
-					acceptor.accept(xfce.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_0_0(), call.getFeatureCallArguments().get(0), 0);
-					for (int i = 1; i < call.getFeatureCallArguments().size(); i++)
-						acceptor.accept(xfce.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), call.getFeatureCallArguments().get(i), i);
+					int diff = 0;
+					if (isBuilderSyntax(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, featureCall.isExplicitOperationCall(), nodes)) {
+						diff = 1;
+					}
+					if (featureCall.isExplicitOperationCall()) {
+						if (arguments.size() - diff > 0)
+							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0(), arguments.get(0), 0);
+						for (int i = 1; i < arguments.size() - diff; i++)
+							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0(), arguments.get(i), i);
+					}
+					if (diff != 0) {
+						int lastIdx = arguments.size() - 1;
+						acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_4_0(), arguments.get(lastIdx), lastIdx);
+					}
 				}
 			}
 		}
@@ -194,10 +225,57 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		List<?> values = (List<?>) semanticObject.eGet(reference);
 		if (values.size() != 1 || !(values.get(0) instanceof XClosure))
 			return false;
-		INode node = nodes.getNodeForMultiValue(reference, 0, 0, values.get(0));
-		if (node != null && node.getGrammarElement() instanceof RuleCall)
-			return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureRule();
+		return isXShortClosure(values, reference, nodes);
+	}
+
+	protected boolean isXShortClosure(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
+		if (values.isEmpty() || values.size() > 2 || !(values.get(0) instanceof XClosure))
+			return false;
+		XClosure closure = (XClosure) values.get(0);
+		if (!closure.isExplicitSyntax())
+			return false;
+		INode node = nodes.getNodeForMultiValue(reference, 0, 0, closure);
+		if (node != null) {
+			if (node.getGrammarElement() instanceof RuleCall)
+				return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureRule();
+			if (node.getGrammarElement() instanceof Action)
+				return node.getGrammarElement() == grammarAccess.getXShortClosureAccess().getXClosureAction_0_0_0();
+			return false;
+		}
 		return true;
+	}
+	
+	protected boolean isBuilderSyntax(EObject expression, EReference reference, boolean explicitOperationCall, INodesForEObjectProvider nodes) {
+		List<?> values = (List<?>) expression.eGet(reference);
+		if (values.size() < 1)
+			return false;
+		if (values.size() == 1 && !explicitOperationCall)
+			return true;
+		return isBuilderSyntax(values, reference, nodes);
+	}
+
+	protected boolean isBuilderSyntax(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
+		if (values.isEmpty())
+			return false;
+		int lastIndex = values.size() - 1;
+		Object lastValue = values.get(lastIndex);
+		if (!(lastValue instanceof XClosure))
+			return false;
+		INode node = nodes.getNodeForMultiValue(reference, lastIndex, lastIndex, values.get(lastIndex));
+		if (node != null) {
+			if (node.getGrammarElement() instanceof RuleCall)
+				return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXClosureRule();
+			if (node.getGrammarElement() instanceof Action) 
+				return node.getGrammarElement() == grammarAccess.getXClosureAccess().getXClosureAction_0_0_0();
+			return false;
+		}
+		return true;
+	}
+	
+	protected boolean isXShortClosureAndBuilderSyntax(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
+		if (values.size() != 2)
+			return false;
+		return isXShortClosure(values, reference, nodes) && isBuilderSyntax(values, reference, nodes);
 	}
 	
 	
@@ -229,41 +307,57 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *         EXCLUDE_IF_SET spreading
 	 */
 	@Override
-	protected void sequence_XMemberFeatureCall_XMemberFeatureCall(EObject context, XMemberFeatureCall semanticObject) {
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder acceptor = createSequencerFeeder(semanticObject, nodes);
-		XMemberFeatureCallElements xmfce = grammarAccess.getXMemberFeatureCallAccess();
+	protected void sequence_XMemberFeatureCall(EObject context, XMemberFeatureCall featureCall) {
+		INodesForEObjectProvider nodes = createNodeProvider(featureCall);
+		SequenceFeeder acceptor = createSequencerFeeder(featureCall, nodes);
+		XMemberFeatureCallElements memberFeatureCallElements= grammarAccess.getXMemberFeatureCallAccess();
 
 		// memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
-		acceptor.accept(xmfce.getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0(), semanticObject.getMemberCallTarget());
+		acceptor.accept(memberFeatureCallElements.getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0(), featureCall.getMemberCallTarget());
 
-		// (nullSafe?='?.' | spreading?='*.')?
-		if (semanticObject.isNullSafe())
-			acceptor.accept(xmfce.getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0());
-		else if (semanticObject.isSpreading())
-			acceptor.accept(xmfce.getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0());
+		// (nullSafe?='?.' | explicitStatic?='::')?
+		if (featureCall.isNullSafe())
+			acceptor.accept(memberFeatureCallElements.getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0());
+		else if (featureCall.isExplicitStatic())
+			acceptor.accept(memberFeatureCallElements.getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0());
 
 		// (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-		List<JvmTypeReference> typeArguments = semanticObject.getTypeArguments();
+		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();
 		if (!typeArguments.isEmpty()) {
-			acceptor.accept(xmfce.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0(), typeArguments.get(0), 0);
+			acceptor.accept(memberFeatureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0(), typeArguments.get(0), 0);
 			for (int i = 1; i < typeArguments.size(); i++)
-				acceptor.accept(xmfce.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0(), typeArguments.get(i), i);
+				acceptor.accept(memberFeatureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0(), typeArguments.get(i), i);
 		}
 
 		// feature=[JvmIdentifiableElement|ID]
-		acceptor.accept(xmfce.getFeatureJvmIdentifiableElementValidIDParserRuleCall_1_1_2_0_1(), semanticObject.getFeature());
+		acceptor.accept(memberFeatureCallElements.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1(), featureCall.getFeature());
 
-		// (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)?
-		if (semanticObject.isExplicitOperationCall()) {
-			acceptor.accept(xmfce.getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0());
-			if (!semanticObject.getMemberCallArguments().isEmpty()) {
-				if (isXShortClosure(semanticObject, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, nodes)) {
-					acceptor.accept(xmfce.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0(), semanticObject.getMemberCallArguments().get(0), 0);
+		// (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? memberCallArguments+=XClosure? 
+		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {
+			if (featureCall.isExplicitOperationCall())
+				acceptor.accept(memberFeatureCallElements.getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0());
+			List<XExpression> arguments = featureCall.getMemberCallArguments();
+			if (!arguments.isEmpty()) {
+				if (featureCall.isExplicitOperationCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0(), arguments.get(1), 1);
+				} else if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0(), arguments.get(0), 0);
 				} else {
-					acceptor.accept(xmfce.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0(), semanticObject.getMemberCallArguments().get(0), 0);
-					for (int i = 1; i < semanticObject.getMemberCallArguments().size(); i++)
-						acceptor.accept(xmfce.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0(), semanticObject.getMemberCallArguments().get(i), i);
+					int diff = 0;
+					if (isBuilderSyntax(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, featureCall.isExplicitOperationCall(), nodes)) {
+						diff = 1;
+					}
+					if (featureCall.isExplicitOperationCall()) {
+						if (arguments.size() - diff > 0)
+							acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0(), arguments.get(0), 0);
+						for (int i = 1; i < arguments.size() - diff; i++)
+							acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0(), arguments.get(i), i);
+					}
+					if (diff != 0) {
+						int lastIdx = arguments.size() - 1;
+						acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0(), arguments.get(lastIdx), lastIdx);
+					}
 				}
 			}
 		}
@@ -273,19 +367,89 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         constructor=[JvmConstructor|QualifiedName]
-	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?
+	 *         constructor=[JvmConstructor|QualifiedName] 
+	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
+	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))? 
+	 *         arguments+=XClosure?
 	 *     )
-	 *     
-	 *
-	 * Features:
-	 *    constructor[1, 1]
-	 *    arguments[1, *]
-	 *    typeArguments[0, *]
 	 */
 	@Override
-	protected void sequence_XConstructorCall_XConstructorCall(EObject context, XConstructorCall semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_XConstructorCall(EObject context, XConstructorCall constructorCall) {
+		INodesForEObjectProvider nodes = createNodeProvider(constructorCall);
+		SequenceFeeder acceptor = createSequencerFeeder(constructorCall, nodes);
+		XConstructorCallElements constructorCallElements = grammarAccess.getXConstructorCallAccess();
+
+		// constructor=[types::JvmConstructor|QualifiedName]
+		acceptor.accept(constructorCallElements.getConstructorJvmConstructorQualifiedNameParserRuleCall_2_0_1(), constructorCall.getConstructor());
+
+		// '<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>'
+		List<JvmTypeReference> typeArguments = constructorCall.getTypeArguments();
+		if (!typeArguments.isEmpty()) {
+			acceptor.accept(constructorCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0(), typeArguments.get(0), 0);
+			for (int i = 1; i < typeArguments.size(); i++)
+				acceptor.accept(constructorCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0(), typeArguments.get(i), i);
+		}
+		
+
+		/*
+		 * Constraint:
+		 *      
+		 *     (explicitConstructorCall?='(' (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?)? 
+		 *     arguments+=XClosure?
+		 *     
+		 */
+		if (constructorCall.isExplicitConstructorCall()) {
+			acceptor.accept(constructorCallElements.getExplicitConstructorCallLeftParenthesisKeyword_4_0_0());
+		}
+		List<XExpression> arguments = constructorCall.getArguments();
+		if (!arguments.isEmpty()) {
+			if (constructorCall.isExplicitConstructorCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+				acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(1), 1);
+			} else if (constructorCall.isExplicitConstructorCall() && isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+			} else {
+				int diff = 0;
+				if (isBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+					diff = 1;
+				}
+				if (constructorCall.isExplicitConstructorCall()) {
+					if (arguments.size() - diff > 0)
+						acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
+					for (int i = 1; i < arguments.size() - diff; i++)
+						acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
+				}
+				if (diff != 0) {
+					int lastIdx = arguments.size() - 1;
+					acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(lastIdx), lastIdx);
+				}
+			}
+		}
+		acceptor.finish();
 	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC2 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XExpression(EObject context, XNullLiteral semanticObject) {
+		super.sequence_XNullLiteral(context, semanticObject);
+	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XAdditiveExpression(EObject context, XBinaryOperation operation) {
+		sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, operation);
+	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XAssignment(EObject context, XAssignment semanticObject) {
+		super.sequence_XAssignment_XMemberFeatureCall(context, semanticObject);
+	}
+	
 }

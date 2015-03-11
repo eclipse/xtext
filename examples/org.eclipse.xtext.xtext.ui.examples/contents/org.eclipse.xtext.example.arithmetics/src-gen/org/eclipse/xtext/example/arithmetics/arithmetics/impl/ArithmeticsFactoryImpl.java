@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.arithmetics.arithmetics.impl;
 
@@ -33,7 +30,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
   {
     try
     {
-      ArithmeticsFactory theArithmeticsFactory = (ArithmeticsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/Xtext/example/Arithmetics"); 
+      ArithmeticsFactory theArithmeticsFactory = (ArithmeticsFactory)EPackage.Registry.INSTANCE.getEFactory(ArithmeticsPackage.eNS_URI);
       if (theArithmeticsFactory != null)
       {
         return theArithmeticsFactory;

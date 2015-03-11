@@ -1,0 +1,97 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="migrating-from-0_7">Migrating from Xtext 0.7.x to 1.0</h1>
+
+<p>For the sake of completeness, here is how you migrate from Xtext 0.7.x to Xtext 1.0, so you might do a migration to 2.0 in two steps. Nevertheless, there have been so many new features and changes that it probably makes more sense to just copy the grammar and start with a new Xtext 2.0 project. The grammar language is fully backward compatible. </p>
+
+<h2 id="migrating-step-by-step">Migrating Step By Step</h2>
+
+<p>Once again, you should make sure that no old plug-ins are in your target platform. Some plug-ins from Xtext 0.7.x have been merged and do no longer exist. </p>
+
+<p><em>Hint: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.</em></p>
+
+<h3 id="update-the-plug-in-dependencies-and-import-statements">Update the Plug-in Dependencies and Import Statements</h3>
+
+<p>You should update the constraints from version <em>0.7.x</em> to <em>[1.0.0,2.0.0)</em> in your manifest files if you specified any concrete versions. Make sure that your <em>dsl.ui</em>-projects do not refer to the plug-in <em>org.eclipse.xtext.ui.common</em> or <em>org.eclipse.xtext.ui.core</em> but to <em>org.eclipse.xtext.ui</em> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle <em>org.eclipse.xtext.log4j</em> is obsolete as well. The generator will create <em>import-package</em> entries in the manifests later on.</p>
+
+<p>The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for <code>import org.eclipse.xtext.ui.common.</code> and <code>org.eclipse.xtext.ui.core.</code> and replace the matches with <code>import org.eclipse.xtext.ui.</code>. This fixes most of the problems in the manually written code. </p>
+
+<h3 id="rename-the-packages-in-the-dslui-plug-in">Rename the Packages in the dsl.ui-Plug-in</h3>
+
+<p>We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGi conventions. The easiest way to update your existing projects is to apply a “Rename Package” refactoring on the packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your language. Make sure you ticked “Rename subpackages” in the rename dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the references in your manually written code are properly updated.</p>
+
+<h3 id="update-the-workflow">Update the Workflow</h3>
+
+<p>The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java">ImportURIScopingFragment</a> in combination with the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.java">SimpleNamesFragment</a>. Please replace </p>
+
+<pre><code class="language-xml">&lt;fragment class=
+  "org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;
+</code></pre>
+
+<p>with</p>
+
+<pre><code class="language-xml">&lt;fragment class=
+  "org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/&gt;
+&lt;fragment class=
+  "org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/&gt;
+</code></pre>
+
+<p>The <em>PackratParserFragment</em> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you’ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.</p>
+
+<h3 id="manifestmf-and-pluginxml">MANIFEST.MF and plugin.xml</h3>
+
+<p>The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF</em> and and some entries in the <em>plugin.xml</em>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the <em>plugin.xml</em>.</p>
+
+<ul>
+  <li>In the generated UI plug-in’s <em>MANIFEST.MF</em>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with <em>.ui.</em> in its package name). </li>
+  <li>It was already mentioned that the plug-ins <em>org.eclipse.xtext.ui.core</em> and <em>org.eclipse.xtext.ui.common</em> have been merged into a new single plug-in <em>org.eclipse.xtext.ui</em>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. </li>
+  <li>The plug-in <em>org.eclipse.xtext.log4j</em> no longer exists. We use a package import of <em>org.apache.log4j</em> instead. Also remove the buddy registration. </li>
+  <li>Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. A comparison with the <em>plugin.xml_gen</em> will be a great help. If you haven’t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time. Make sure the <em>MyDslExecutableExtensionFactory</em> has the <em>.ui.</em> package prefix. Classes from <em>org.eclipse.xtext.ui.common</em> and <em>org.eclipse.xtext.ui.core</em> are now usually somewhere in <em>org.eclipse.xtext.ui</em>. They are also referenced by the <em>MyDslExecutableExtensionFactory</em> and thus not covered by the validation of the <em>plugin.xml</em>. </li>
+  <li>A number of new features are being registered in the <em>plugin.xml</em>, e.g. <em>Find references</em>, <em>Quick Outline</em>, and <em>Quick Fixes</em>. You can enable them by manually copying the respective entries from <em>plugin.xml_gen</em> to <em>plugin.xml</em>. </li>
+  <li>To run MWE2 workflows later on, you must change the plug-in dependencies from <em>org.eclipse.emf.mwe.core</em> to <em>org.eclipse.emf.mwe2.launch</em> in your manifest. Optional resolution is fine. </li>
+</ul>
+
+<h3 id="noteworthy-api-changes">Noteworthy API Changes</h3>
+
+<p>The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your <em>src</em>-folder of the <em>ui</em> plug-in. there will now be a <em>MyDslStandaloneSetup</em> inheriting form the generated <em>MyDslStandaloneSetupGenerated</em> to allow customization.</p>
+
+<p>You will face a couple of compilation problems due to changes in the API. Here’s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.</p>
+
+<ul>
+  <li>The method <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider.getScope(EObject,EClass)</a> has been removed. Use <code>getScope(EObject,EReference)</code> instead. </li>
+  <li>Renamed <em>DefaultScopeProvider</em> to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.java">SimpleLocalScopeProvider</a>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="#scoping">section on scoping</a> for details. </li>
+  <li>The return type of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractInjectableValidator.java">AbstractInjectableValidator.getEPackages()</a> was changed from <code>List&lt;? extends EPackage&gt;</code> to <code>List&lt;EPackage&gt;</code>. </li>
+  <li>The parser interfaces now use <a href="http://docs.oracle.com/javase/8/docs/api/java/io/Reader.html">Reader</a> instead of <a href="http://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html">InputStream</a> to explicitly address encoding. Have a look at the <a href="#encoding">section on encoding</a> for details. </li>
+  <li>The handling of <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html">ILabelProvider</a> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">DefaultEObjectLabelProvider</a> instead. See the <a href="#label-provider">section on label providers</a> for details. </li>
+  <li>We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. </li>
+  <li>The runtime and UI modules have separate base classes <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java">DefaultRuntimeModule</a> and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java">DefaultUiModule</a> now. We use Guice’s module overrides to combine them with the newly introduced <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java">SharedModule</a>. You have to add a constructor the your <em>MyDslUiModule</em> that takes an <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/plugin/AbstractUIPlugin.html">AbstractUIPlugin</a> as argument and pass that one to the super constructor. <em>Hint: There is an Eclipse quick fix available for that one.</em></li>
+  <li>The interfaces <em>ILexicalHighlightigConfiguration</em> and <em>ISemanticHighlightingConfiguration</em> have been merged into <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a>. </li>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/DefaultTemplateProposalProvider.java">DefaultTemplateProposalProvider</a> takes an additional, injectable constructor parameter of type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/ContextTypeIdHelper.java">ContextTypeIdHelper</a>. </li>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java">HyperlinkHelper</a> uses field injection instead of constructor injection. The method <code>createHyperlinksByOffset(..)</code> should be overridden instead of the former <code>findCrossLinkedEObject</code>. </li>
+  <li>The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN_NODE</em> you’ll have to implement <code>boolean consumeNode(MyType)</code> and return <em>false</em>. <strong>Note: The outline has been re-implemented in Xtext 2.0</strong>. </li>
+  <li>The <em>Readonly*Storage</em> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/IURIEditorOpener.java">IURIEditorOpener</a> to create an editor or the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/resource/IStorage2UriMapper.java">IStorage2UriMapper</a> to obtain an <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/resources/IStorage.html">IStorage</a> for a given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>. </li>
+  <li>The interfaces <em>IStateAccess</em> and <em>IEObjectHandle</em> have been moved along with the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java">IUnitOfWork</a> to the package <em>org.eclipse.xtext.util.concurrent</em>. <strong>Note: IStateAccess was split into IReadAccess and IWriteAccess in Xtext 2.0.</strong></li>
+  <li>The <em>ValidationJobFactory</em> is gone. Please implement a custom <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IResourceValidator.java">IResourceValidator</a> instead. </li>
+  <li>The grammar elements <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Alternatives.java">Alternatives</a> and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Group.java">Group</a> have a new common super type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CompoundElement.java">CompoundElement</a>. The methods <code>getGroups()</code> and <code>getTokens()</code> have been refactored to <code>getElements()</code>. </li>
+  <li>Completion proposals take a <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html">StyledString</a> instead of a plain string as display string. </li>
+  <li>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java">AbstractLabelProvider</a> does no longer expose its <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java">IImageHelper</a>. Use <code>convertToImage</code> instead or inject your own <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java">IImageHelper</a>. </li>
+  <li>The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java">QualifiedNamesFragment</a> and the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java">ImportNamespacesScopingFragment</a> instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="#index-based">section about the builder infrastructure</a> for details. </li>
+  <li>All the Xtend-based fragments were removed. </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java">ILinkingService.getLinkText</a> was removed. Have a look at the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java">LinkingHelper</a> and the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/CrossReferenceSerializer.java">CrossReferenceSerializer</a> if you relied on this method. </li>
+  <li>The <em>SerializerUtil</em> was renamed to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java">Serializer</a>. There were other heavy refactorings that involved the serializer and its components like e.g. the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java">ITransientValueService</a> but it should be pretty straight forward to migrate existing client code. </li>
+  <li>The method-signatures of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">IFragmentProvider</a> have changed. The <a href="#fragmentProvider">documentation</a> will give a clue on how to update existing implementations. </li>
+  <li>Some static methods were removed from utility classes such as <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java">EcoreUtil2</a> and <em>ParsetreeUtil</em> in favor of more sophisticated implementations. </li>
+</ul>
+
+
+
+</body>
+</html>

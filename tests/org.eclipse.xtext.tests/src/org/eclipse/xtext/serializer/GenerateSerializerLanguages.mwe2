@@ -14,8 +14,10 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
-var generateDotDiagram = true
+var lineDelimiter = '\n'
+
 //var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
+
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/.."
@@ -25,29 +27,32 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/serializer"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		mergeManifest = false
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {
-				//generateDebugData = true
-			}
 		}
 
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"
-			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {
-				// generateDebugData = true
+			fragment = @ TestLanguagesFragments auto-inject {
+				srcGenOnly = false
 			}
 		}
-//		language = {
-//			uri = "classpath:/org/eclipse/xtext/serializer/SerializerFragmentTestLanguage.xtext"
-//			fragment = @ TestLanguagesFragments auto-inject {}
-//			fragment = serializer.SerializerFragment {}
-//		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/serializer/HiddenTokenSequencerTestLanguage.xtext"
+			fragment = @ TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/serializer/ContextFinderTestLanguage.xtext"
+			fragment = @ TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.xtext"
+			fragment = @ TestLanguagesFragments auto-inject {}
+		}
 	}
 }

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl;
 
@@ -29,10 +26,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Sce
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.Scenario1Impl#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

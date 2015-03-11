@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.builder.tests.builderTestLanguage.impl;
 
@@ -27,11 +24,11 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Element;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.ElementImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.ElementImpl#getOtherRefs <em>Other Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

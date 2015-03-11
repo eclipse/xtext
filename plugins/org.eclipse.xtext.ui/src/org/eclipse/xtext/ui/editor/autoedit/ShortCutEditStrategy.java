@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
+import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -49,6 +50,7 @@ public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourc
 		}
 	}
 
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		if (sourceViewer instanceof SourceViewer)
 			this.sourceViewer = sourceViewer;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Until Token</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

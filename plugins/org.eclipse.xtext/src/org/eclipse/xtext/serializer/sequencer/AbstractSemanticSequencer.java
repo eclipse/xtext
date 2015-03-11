@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.sequencer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
@@ -29,9 +30,15 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	protected ISemanticNodeProvider nodeProvider;
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
+	
+	@Inject
+	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
+	
+	@Inject
+	protected ITransientValueService transientValues;
 
 	@Inject
-	protected SequenceFeeder.Provider sequenceFeederProvider;
+	protected SequenceFeeder.Provider feederProvider;
 
 	protected INodesForEObjectProvider createNodeProvider(EObject semanticObject) {
 		return nodeProvider.getNodesForSemanticObject(semanticObject, null);
@@ -39,19 +46,21 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	protected SequenceFeeder createSequencerFeeder(EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
 	protected SequenceFeeder createSequencerFeeder(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
-		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
+	@Override
 	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		init(this, sequenceAcceptor, errorAcceptor);
 	}
 
+	@Override
 	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor) {
 		this.masterSequencer = sequencer;

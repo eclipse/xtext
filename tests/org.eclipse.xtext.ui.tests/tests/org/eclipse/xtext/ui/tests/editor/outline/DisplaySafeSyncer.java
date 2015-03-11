@@ -38,7 +38,7 @@ public class DisplaySafeSyncer {
 			if (Display.getCurrent() != null)
 				Display.getCurrent().readAndDispatch();
 		}
-		throw new TimeoutException("Timeout in Syncer");
+		throw new TimeoutException("Timeout in Syncer (timeout " + timeout + " ms)");
 	}
 
 	public void signal() {

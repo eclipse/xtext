@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
@@ -20,11 +17,11 @@ import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Transient
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl.TestOptionalImpl#getOpt1 <em>Opt1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl.TestOptionalImpl#getOpt2 <em>Opt2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

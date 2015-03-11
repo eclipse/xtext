@@ -29,6 +29,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 	protected String clazzName;
 	protected IConfigurationElement config;
 
+	@Override
 	@SuppressWarnings({ "unchecked" })
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 		throws CoreException {
@@ -43,6 +44,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 		this.config = config;
 	}
 	
+	@Override
 	public Object create() throws CoreException {
 		try {
 			final Class<?> clazz = getBundle().loadClass(clazzName);
@@ -53,7 +55,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 			return result;
 		}
 		catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage() + " ExtensionFactory: "+ getClass().getName(), e));
 		}
 	}

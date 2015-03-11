@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.refactoring.refactoring;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.Element#getContained <em>Contained</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.Element#getReferenced <em>Referenced</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage#getElement()
  * @model

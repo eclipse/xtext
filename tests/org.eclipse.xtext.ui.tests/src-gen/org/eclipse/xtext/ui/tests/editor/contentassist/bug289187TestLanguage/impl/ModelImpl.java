@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl;
 
@@ -28,10 +25,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Mod
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.impl.ModelImpl#getClasses <em>Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

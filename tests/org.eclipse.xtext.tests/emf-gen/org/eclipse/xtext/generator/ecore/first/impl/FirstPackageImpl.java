@@ -1,13 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.first.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -81,6 +79,9 @@ public class FirstPackageImpl extends EPackageImpl implements FirstPackage
     FirstPackageImpl theFirstPackage = (FirstPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FirstPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FirstPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
     SecondPackageImpl theSecondPackage = (SecondPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SecondPackage.eNS_URI) instanceof SecondPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SecondPackage.eNS_URI) : SecondPackage.eINSTANCE);

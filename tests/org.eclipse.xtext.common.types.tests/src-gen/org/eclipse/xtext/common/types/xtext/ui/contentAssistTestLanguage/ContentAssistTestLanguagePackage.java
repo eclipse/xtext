@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage;
 
@@ -79,13 +76,22 @@ public interface ContentAssistTestLanguagePackage extends EPackage
   int MODEL__IMPORTS = 0;
 
   /**
+   * The feature id for the '<em><b>Generate Directive</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__GENERATE_DIRECTIVE = 1;
+
+  /**
    * The feature id for the '<em><b>Reference Holder</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__REFERENCE_HOLDER = 1;
+  int MODEL__REFERENCE_HOLDER = 2;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -94,7 +100,7 @@ public interface ContentAssistTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 2;
+  int MODEL_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ReferenceHolderImpl <em>Reference Holder</em>}' class.
@@ -143,6 +149,34 @@ public interface ContentAssistTestLanguagePackage extends EPackage
   int REFERENCE_HOLDER_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.GenerateDirectiveImpl <em>Generate Directive</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.GenerateDirectiveImpl
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ContentAssistTestLanguagePackageImpl#getGenerateDirective()
+   * @generated
+   */
+  int GENERATE_DIRECTIVE = 2;
+
+  /**
+   * The feature id for the '<em><b>Type Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATE_DIRECTIVE__TYPE_NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Generate Directive</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATE_DIRECTIVE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -150,7 +184,7 @@ public interface ContentAssistTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ContentAssistTestLanguagePackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 2;
+  int IMPORT = 3;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -191,6 +225,17 @@ public interface ContentAssistTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getModel_Imports();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Model#getGenerateDirective <em>Generate Directive</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Generate Directive</em>'.
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Model#getGenerateDirective()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_GenerateDirective();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Model#getReferenceHolder <em>Reference Holder</em>}'.
@@ -245,6 +290,27 @@ public interface ContentAssistTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getReferenceHolder_SubtypeReference();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective <em>Generate Directive</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Generate Directive</em>'.
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective
+   * @generated
+   */
+  EClass getGenerateDirective();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective#getTypeName <em>Type Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type Name</em>'.
+   * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective#getTypeName()
+   * @see #getGenerateDirective()
+   * @generated
+   */
+  EAttribute getGenerateDirective_TypeName();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import <em>Import</em>}'.
@@ -309,6 +375,14 @@ public interface ContentAssistTestLanguagePackage extends EPackage
     EReference MODEL__IMPORTS = eINSTANCE.getModel_Imports();
 
     /**
+     * The meta object literal for the '<em><b>Generate Directive</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__GENERATE_DIRECTIVE = eINSTANCE.getModel_GenerateDirective();
+
+    /**
      * The meta object literal for the '<em><b>Reference Holder</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -349,6 +423,24 @@ public interface ContentAssistTestLanguagePackage extends EPackage
      * @generated
      */
     EReference REFERENCE_HOLDER__SUBTYPE_REFERENCE = eINSTANCE.getReferenceHolder_SubtypeReference();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.GenerateDirectiveImpl <em>Generate Directive</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.GenerateDirectiveImpl
+     * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ContentAssistTestLanguagePackageImpl#getGenerateDirective()
+     * @generated
+     */
+    EClass GENERATE_DIRECTIVE = eINSTANCE.getGenerateDirective();
+
+    /**
+     * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATE_DIRECTIVE__TYPE_NAME = eINSTANCE.getGenerateDirective_TypeName();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ImportImpl <em>Import</em>}' class.

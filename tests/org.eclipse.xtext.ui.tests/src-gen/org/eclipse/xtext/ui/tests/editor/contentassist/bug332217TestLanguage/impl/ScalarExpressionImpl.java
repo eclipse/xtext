@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sca
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Scalar Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

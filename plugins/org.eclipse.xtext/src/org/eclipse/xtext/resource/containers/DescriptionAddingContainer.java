@@ -39,6 +39,7 @@ public class DescriptionAddingContainer extends AbstractContainer {
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return Iterables.concat(Collections.singleton(description), delegate.getResourceDescriptions());
 	}
@@ -64,6 +65,13 @@ public class DescriptionAddingContainer extends AbstractContainer {
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
 		Iterable<IEObjectDescription> added = description.getExportedObjects(type, qualifiedName, ignoreCase);
 		Iterable<IEObjectDescription> delegated = delegate.getExportedObjects(type, qualifiedName, ignoreCase);
+		return Iterables.concat(added, delegated);
+	}
+
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		Iterable<IEObjectDescription> added = description.getExportedObjectsByType(type);
+		Iterable<IEObjectDescription> delegated = delegate.getExportedObjectsByType(type);
 		return Iterables.concat(added, delegated);
 	}
 

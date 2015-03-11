@@ -11,12 +11,13 @@ import java.util.List;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.RelationalDependencyType;
 import org.eclipse.xtext.util.Pair;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -27,7 +28,7 @@ import com.google.common.collect.Lists;
 public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -50,7 +51,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		return Joiner.on("\n").join(result);
 	}
 
-	public void testMandatoryGroup1() throws Exception {
+	@Test public void testMandatoryGroup1() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' a1='a1' a2+='a2'* a3+='a3'+ a4+='a4'?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -60,7 +61,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testMandatoryGroup2() throws Exception {
+	@Test public void testMandatoryGroup2() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2='a2') (b1='b1'? b2='b2'?) (c1+='c1'+ c2+='c2'+) (d1+='a1'* d2+='d2'*);");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -74,7 +75,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testOptionalGroup1() throws Exception {
+	@Test public void testOptionalGroup1() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2+='a2'* a3+='a3'+ a4+='a4'?)?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -96,7 +97,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testOptionalGroup2() throws Exception {
+	@Test public void testOptionalGroup2() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2='a2')? (b1='b1'? b2='b2'?)? (c1+='c1'+ c2+='c2'+)? (d1+='a1'* d2+='d2'*)?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -118,7 +119,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testManyGroup1() throws Exception {
+	@Test public void testManyGroup1() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1+='a1' a2+='a2'* a3+='a3'+ a4+='a4'?)+;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1+='a1'\n");
@@ -140,7 +141,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testManyGroup2() throws Exception {
+	@Test public void testManyGroup2() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2='a2')+ (b1='b1'? b2='b2'?)+ (c1+='c1'+ c2+='c2'+)+ (d1+='a1'* d2+='d2'*)+;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -160,7 +161,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testOptionalManyGroup1() throws Exception {
+	@Test public void testOptionalManyGroup1() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2+='a2'* a3+='a3'+ a4+='a4'?)*;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -182,7 +183,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testOptionalManyGroup2() throws Exception {
+	@Test public void testOptionalManyGroup2() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' a2='a2')* (b1='b1'? b2='b2'?)* (c1+='c1'+ c2+='c2'+)* (d1+='a1'* d2+='d2'*)*;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -202,7 +203,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testKeywords2() throws Exception {
+	@Test public void testKeywords2() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' (a1='a1' | a2+='a2') b1='b1' b2+='b2'* b3+='b3'+ b4+='b4'?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");
@@ -216,7 +217,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testKeywords3() throws Exception {
+	@Test public void testKeywords3() throws Exception {
 		String actual = getParserRule("Rule: 'kw1' ((a1='a1' | a2+='a2') b1='b1' b2+='b2'* b3+='b3'+ b4+='b4'?)?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("a1='a1'\n");

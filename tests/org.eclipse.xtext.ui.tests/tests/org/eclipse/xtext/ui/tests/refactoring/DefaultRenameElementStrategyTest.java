@@ -19,20 +19,22 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
+import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class DefaultRenameElementStrategyTest extends AbstractXtextTests implements IRefactoringUpdateAcceptor {
 
 	@Inject
@@ -42,13 +44,13 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 	private List<Change> changes = newArrayList();
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		with(RefactoringTestLanguageStandaloneSetup.class);
+		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 	}
 	
-	public void testRenameElementStrategy() throws Exception {
+	@Test public void testRenameElementStrategy() throws Exception {
 		final XtextResource resource = getResourceFromString("A { B { C } }");
 		EObject targetElement = resource.getContents().get(0).eContents().get(0);
 		assertNotNull(targetElement);
@@ -58,10 +60,11 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertNotNull(renameElementStrategy);
 		assertEquals("A", renameElementStrategy.getOriginalName());
 		RefactoringStatus validateNewNameStatus = renameElementStrategy.validateNewName("A");
-		assertTrue(validateNewNameStatus.hasWarning());
-		assertFalse(validateNewNameStatus.hasError());
-		validateNewNameStatus = renameElementStrategy.validateNewName("D");
 		assertTrue(validateNewNameStatus.isOK());
+		validateNewNameStatus = renameElementStrategy.validateNewName("}");
+		assertTrue(validateNewNameStatus.hasFatalError());
+		validateNewNameStatus = renameElementStrategy.validateNewName("ref");
+		assertTrue(validateNewNameStatus.hasError());
 		renameElementStrategy.applyDeclarationChange("D", resource.getResourceSet());
 		assertEquals("D", ((Element) targetElement).getName());
 		renameElementStrategy.createDeclarationUpdates("D", resource.getResourceSet(), this);
@@ -74,18 +77,18 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertEquals("D", renameEdit.getText());
 	}
 
-	public void testValueConversion() throws Exception {
-		DefaultRenameStrategy.Provider strategyProvider = new DefaultRenameStrategy.Provider() {
+	@Test public void testValueConversion() throws Exception {
+		DefaultRenameStrategy strategy = new DefaultRenameStrategy() {
 			@Override
 			protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
 				return "STRING";
 			}
 		};
-		getInjector().injectMembers(strategyProvider);
+		getInjector().injectMembers(strategy);
 		final XtextResource resource = getResourceFromString("foo { }");
 		Element targetElement = (Element) resource.getContents().get(0).eContents().get(0);
 		assertEquals("foo", targetElement.getName());
-		IRenameStrategy strategy = strategyProvider.get(targetElement, null);
+		strategy.initialize(targetElement, null);
 		assertEquals("\"foo\"", strategy.getOriginalName());
 		strategy.createDeclarationUpdates("\"bar\"", resource.getResourceSet(), this);
 		assertEquals(1, textEdits.size());
@@ -98,22 +101,27 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertEquals("foo", targetElement.getName());
 	}
 	
+	@Override
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		textEdits.add(textEdit);		
 	}
 
+	@Override
 	public void accept(URI resourceURI, Change change) {
 		changes.add(change);
 	}
 
-	public RefactoringStatus getRefactoringStatus() {
+	@Override
+	public StatusWrapper getRefactoringStatus() {
 		return null;
 	}
 
+	@Override
 	public IRefactoringDocument getDocument(URI resourceURI) {
 		return null;
 	}
 
+	@Override
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
 		// TODO Auto-generated method stub
 		return null;

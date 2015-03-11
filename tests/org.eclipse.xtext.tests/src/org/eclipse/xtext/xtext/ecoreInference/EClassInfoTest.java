@@ -10,20 +10,22 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EClassInfoTest extends TestCase {
+public class EClassInfoTest extends Assert {
 
-	public void testContainsCompatibleFeature_01() throws Exception {
+	@Test public void testContainsCompatibleFeature_01() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass eClass = pack.getEClass();
-		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet());
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet(), null);
 		assertEquals(true,objectUnderTest.containsCompatibleFeature("name", false, true, pack.getEString(), new StringBuilder()));
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("name", true, true, pack.getEString(), new StringBuilder()));
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("name", true, true, pack.getEAnnotation(), new StringBuilder()));
@@ -37,10 +39,27 @@ public class EClassInfoTest extends TestCase {
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("eStructuralFeatures", true, true, pack.getEAnnotation(), new StringBuilder()));
 	}
 	
-	public void testContainsCompatibleFeature_02() throws Exception {
+	
+	public void testChangeable(){
+		EcorePackage pack = EcorePackage.eINSTANCE;
+		EClass eClass = pack.getEClass();
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet(), null);
+		EcoreFactory fac = EcoreFactory.eINSTANCE;
+		EReference reference = fac.createEReference();
+		reference.setName("newReference");
+		reference.setEType(eClass);
+		reference.setChangeable(true);
+		reference.setContainment(true);
+		eClass.getEStructuralFeatures().add(reference);
+		assertEquals(true,objectUnderTest.containsCompatibleFeature("newReference", false, true, eClass, new StringBuilder()));
+		reference.setChangeable(false);
+		assertEquals(false,objectUnderTest.containsCompatibleFeature("newReference", false, true, eClass, new StringBuilder()));
+	}
+		
+	@Test public void testContainsCompatibleFeature_02() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass attribute = pack.getEAttribute();
-		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(attribute, false, Collections.<String>emptySet());
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(attribute, false, Collections.<String>emptySet(), null);
 		assertEquals(true, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getEInt(), new StringBuilder()));
 		assertEquals(true, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getEIntegerObject(), new StringBuilder()));
 		assertEquals(false, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getELong(), new StringBuilder()));

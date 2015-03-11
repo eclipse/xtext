@@ -11,17 +11,18 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
+import org.eclipse.xtext.util.ReflectionUtil;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Provider;
-import com.google.inject.internal.MoreTypes;
 import com.google.inject.util.Types;
 
-public class GenericModuleTest extends TestCase {
+public class GenericModuleTest extends Assert {
 
 	public void assertConfigures(CompoundModule module, Class<?> from, Object to, boolean singleton,
 			boolean eagerSingleton, boolean provider) {
@@ -44,7 +45,7 @@ public class GenericModuleTest extends TestCase {
 					continue;
 				if (provider != m instanceof ProviderModule)
 					continue;
-				if (!MoreTypes.getRawType(mod.getKeyType()).equals(from))
+				if (!ReflectionUtil.getRawType(mod.getKeyType()).equals(from))
 					continue;
 				Object object = mod.invokeMethod();
 				if (object==null && to==null || object!=null && object.equals(to))
@@ -54,16 +55,16 @@ public class GenericModuleTest extends TestCase {
 		return false;
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		AbstractGenericModule module = new TestModule();
 		CompoundModule bindings = module.getBindings();
 		assertEquals(3, bindings.size());
 		assertConfigures(bindings, CharSequence.class, String.class, false, false, false);
 		assertConfigures(bindings, Type.class, Class.class, false, false, false);
-		assertConfigures(bindings, TestCase.class, GenericModuleTest.class, false, false, false);
+		assertConfigures(bindings, Assert.class, GenericModuleTest.class, false, false, false);
 	}
 	
-	public void testParameterizedTypes() throws Exception {
+	@Test public void testParameterizedTypes() throws Exception {
 		ParameterizedTypeModule module = new ParameterizedTypeModule();
 		Injector createInjector = Guice.createInjector(module);
 		Object bindToType = createInjector.getInstance(Key.get(Types.newParameterizedType(Comparable.class, ParameterizedTypeModule.X.class)));
@@ -74,7 +75,7 @@ public class GenericModuleTest extends TestCase {
 		assertSame(module.PROVIDE_X,provide );
 	}
 
-	public void testOverride() throws Exception {
+	@Test public void testOverride() throws Exception {
 		AbstractGenericModule module = new MyModule();
 		CompoundModule bindings = module.getBindings();
 		assertEquals(4, bindings.size());
@@ -83,7 +84,7 @@ public class GenericModuleTest extends TestCase {
 		assertConfiguresNot(bindings, CharSequence.class, String.class, false, false, false);
 	}
 
-	public void testInstanceBinding() throws Exception {
+	@Test public void testInstanceBinding() throws Exception {
 		final Date date = new Date();
 		AbstractGenericModule m = new AbstractGenericModule() {
 			@SuppressWarnings("unused")
@@ -99,13 +100,14 @@ public class GenericModuleTest extends TestCase {
 
 	public static class DateProvider implements Provider<Date> {
 
+		@Override
 		public Date get() {
 			return null;
 		}
 
 	}
 
-	public void testProviderClassBinding() throws Exception {
+	@Test public void testProviderClassBinding() throws Exception {
 		AbstractGenericModule m = new AbstractGenericModule() {
 			@SuppressWarnings("unused")
 			public Class<? extends Provider<Date>> provideDate() {
@@ -118,7 +120,7 @@ public class GenericModuleTest extends TestCase {
 		assertConfigures(bindings, Date.class, DateProvider.class, false, false, true);
 	}
 
-	public void testProviderClassDeactivation() throws Exception {
+	@Test public void testProviderClassDeactivation() throws Exception {
 		AbstractGenericModule m = new AbstractGenericModule() {
 			@SuppressWarnings("unused")
 			public Class<? extends Provider<Date>> provideDate() {
@@ -132,13 +134,15 @@ public class GenericModuleTest extends TestCase {
 	}
 	
 	static class FooProvider implements Provider<String> {
+		@Override
 		public String get() {
 			 return "foo";
 		}
 	}
 
-	public void testProviderInstanceBinding() throws Exception {
+	@Test public void testProviderInstanceBinding() throws Exception {
 		final Provider<Date> provider = new Provider<Date>() {
+			@Override
 			public Date get() {
 				return null;
 			}
@@ -161,7 +165,7 @@ public class GenericModuleTest extends TestCase {
 		assertConfigures(bindings, String.class, FooProvider.class,false,false,true);
 	}
 
-	public void testDeactivation() throws Exception {
+	@Test public void testDeactivation() throws Exception {
 		TestModule module = new TestModule() {
 			@Override
 			public Class<? extends CharSequence> bindString() {
@@ -169,7 +173,7 @@ public class GenericModuleTest extends TestCase {
 			}
 
 			@Override
-			public Class<? extends TestCase> bindTestCase() {
+			public Class<? extends Assert> bindTestCase() {
 				return null;
 			}
 
@@ -184,14 +188,13 @@ public class GenericModuleTest extends TestCase {
 		assertConfigures(bindings, CharSequence.class, null, false, false,
 				false);
 		assertConfigures(bindings, Type.class, null, false, false, false);
-		assertConfigures(bindings, TestCase.class, null, false, false, false);
+		assertConfigures(bindings, Assert.class, null, false, false, false);
 	}
 
-	public void testSingletonBinding() throws Exception {
+	@Test public void testSingletonBinding() throws Exception {
 		Foo.instantiations = 0;
 
 		AbstractGenericModule m = new AbstractGenericModule() {
-			@SuppressWarnings("unused")
 			@SingletonBinding()
 			public Class<Foo> bindFoo() {
 				return Foo.class;
@@ -207,11 +210,10 @@ public class GenericModuleTest extends TestCase {
 		assertEquals(1, Foo.instantiations);
 	}
 
-	public void testEagerSingletonBinding() throws Exception {
+	@Test public void testEagerSingletonBinding() throws Exception {
 		Foo.instantiations = 0;
 
 		AbstractGenericModule m = new AbstractGenericModule() {
-			@SuppressWarnings("unused")
 			@SingletonBinding(eager = true)
 			public Class<Foo> bindFoo() {
 				return Foo.class;
@@ -227,7 +229,7 @@ public class GenericModuleTest extends TestCase {
 		assertEquals(1, Foo.instantiations);
 	}
 
-	public void testNamedBinding() throws Exception {
+	@Test public void testNamedBinding() throws Exception {
 		@SuppressWarnings("unused")
 		AbstractGenericModule module = new AbstractGenericModule() {
 			String foo() {

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -22,10 +19,10 @@ import org.eclipse.xtext.grammarinheritance.foo.Subrule1;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.impl.Subrule1Impl#getSub1 <em>Sub1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

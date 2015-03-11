@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
 /**
  * Scheduling rule factory for asynchronous operations. Mostly copied from
- * {@link org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory}.
+ * org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory.
  * 
  * @author Michael Clay - Initial contribution and API
  */
@@ -26,10 +26,12 @@ public class SchedulingRuleFactory {
 	 */
 	public static class Sequence implements ISchedulingRule {
 
+		@Override
 		public boolean contains(ISchedulingRule rule) {
 			return rule == this;
 		}
 
+		@Override
 		public boolean isConflicting(ISchedulingRule rule) {
 			return rule instanceof Sequence;
 		}
@@ -38,17 +40,19 @@ public class SchedulingRuleFactory {
 	/**
 	 * Rule allows only one job for each given lock object to run at a time
 	 */
-	class SerialPerObjectRule implements ISchedulingRule {
+	static class SerialPerObjectRule implements ISchedulingRule {
 		private Object lockObject = null;
 
 		public SerialPerObjectRule(Object lock) {
 			lockObject = lock;
 		}
 
+		@Override
 		public boolean contains(ISchedulingRule rule) {
 			return rule == this;
 		}
 
+		@Override
 		public boolean isConflicting(ISchedulingRule rule) {
 			if (rule instanceof SerialPerObjectRule) {
 				SerialPerObjectRule serialPerObjectRule = (SerialPerObjectRule) rule;

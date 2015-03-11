@@ -1,0 +1,6 @@
+/*
+ * This is a pure language only containing the expression language Xbase.
+ * You can type down expressions. When hitting enter the evaluated result as well as the type of the expression is printed out.
+ * Also look into the generated Java class to understand how Xbase maps to Java code. 
+ */
+

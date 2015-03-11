@@ -1,0 +1,190 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="http-routing">Http Routing Language</h1>
+
+<p>This is a little language that lets you dispatch incoming HTTP requests.</p>
+
+<p><img src="images/httprouting_screenshot.png" alt="" /></p>
+
+<h2 id="routing-solution">Overview</h2>
+
+<p>For server-side web development one needs to match any incoming HTTP requests to some handling code. A request is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters, etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses annotations to match incoming URLs and other frameworks have their own external DSLs for that.</p>
+
+<p>The HTTP routing language explained in this section uses an approach very similar to the one from the <a href="http://playframework.org">Play framework</a>. You basically declare a list of URL patterns and explain what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare so called dependencies which are translated to fields annotated with <code>@Inject</code>. So this DSL plays nicely with dependency injection and especially with the <a href="205_guice.html">Guice modules DSL</a>.</p>
+
+<pre><code class="language-routing">inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+</code></pre>
+
+<p>As you can see, you can have named variable placeholders in the URL and use them in the <code>do</code>-part. There also is a <code>when</code>-part which allows to specify an additional condition using the request object as well as any parameters:</p>
+
+<pre><code class="language-routing">inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  when !controller.isValidGuess(theGuess)
+  do controller.handleWrongRange(theGuess)
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+</code></pre>
+
+<h2 id="routing-running">Running the Example</h2>
+
+<p>The example project’s name is <em>org.xtext.httprouting.examples</em> and includes a simple but runnable number guessing game. Just start the server (an embedded Jetty) by running <code>framework.StartServer</code> as a Java Application. Then point your browser to the URL <a href="http://localhost:8080/guess">http://localhost:8080/guess</a>.</p>
+
+<h2 id="routing-grammar">Grammar</h2>
+
+<p>The Routing DSL extends <em>org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</em> to make use of expressions predefined by <a href="305_xbase.html#xbase-expressions">Xbase</a> plus support for Annotations. </p>
+
+<pre><code class="language-xtext">grammar org.xtext.httprouting.Route 
+  with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+
+generate route "http://www.xtext.org/httprouting/Route"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+
+Model :
+	importSection=XImportSection?
+	declarations+=AbstractDeclaration*;
+
+AbstractDeclaration :
+	Dependency | Route;
+
+Dependency :
+	'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
+
+Route :
+	requestType=RequestType url=URL 
+	('when' condition=XExpression)? 
+	'do' call=XExpression;
+
+enum RequestType :
+	GET | POST | PUT | DELETE | HEAD;
+
+/**
+ * matches URLs like 
+ * 	'/foo/bar.html' or 
+ * 	'/customer/:customerID/save'
+ */
+URL :
+	{URL} 
+	( '/' | ('/' (QualifiedName | variables+=Variable))* 
+	('/' variables+=Variable wildcard?='*')?);
+
+Variable :
+	':' name=ID;
+</code></pre>
+
+<p>There should not be any surprises if you know the grammar language: A <em>Model</em> consists of an <em>XImportSection</em> followed by any number of <em>Dependencies</em> and <em>Routes</em>. A <em>Route</em> starts with a <em>RequestType</em>, i.e. HTTP method, followed by a <em>URL</em> pattern. Then an optional when-clause can be specified followed by a mandatory do-clause.</p>
+
+<h2 id="routing-inferrer">Translation to Java</h2>
+
+<p>In <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a> you can see that a Java class extending the class <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> is derived. First the <em>Dependencies</em> are translated to Java fields. This is almost a one-to-one mapping.</p>
+
+<pre><code class="language-xtend">// translate the dependencies to fields annotated with @Inject
+for (field : model.declarations.filter(Dependency)) {
+  members += field.toField(field.name, field.type) [
+    annotations += annotationRef(Inject)
+		addAnnotations(field.annotations)
+  ]
+}
+</code></pre>
+
+<p>Next up a field for the <em>URL</em> patterns is generated and a method for the used expressions, such giving them a proper scope and context.</p>
+
+<pre><code class="language-xtend">// declare fields for the URL regexp, a method for each when-part 
+// and of course the call part of a route
+for (route : model.routes.filter[ url != null ]) {
+  members += route.toRoutePatternField
+  if (route.condition != null)
+    members += route.toRouteConditionMethod
+  members += route.toRouteCallMethod
+}
+</code></pre>
+
+<p>Note that the code in a model inferrer has to be very defensive, because it is called for any kind of broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because the user might have written syntactically incorrect code.</p>
+
+<p>Next up the handler methods from <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> are implemented such that they dispatch according the URL patterns and when-clauses. Here is a translated example:</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-routing">import com.acme.GuessTheNumber
+    
+inject GuessTheNumber controller
+    
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">@SuppressWarnings("serial")
+public class NumberGuessing extends HttpServlet {
+  @Inject
+  private GuessTheNumber controller;
+      
+  private static Pattern _pattern2 = Pattern.compile("/guess/(\\w+)");
+      
+  public void _doGet2(final HttpServletRequest request, 
+                      final HttpServletResponse response, 
+                      final String theGuess) {
+    this.controller.handleGuess(theGuess);
+  }
+      
+  @Override
+  public void doGet(final HttpServletRequest request, 
+                    final HttpServletResponse response) {
+    String url =  request.getRequestURL().toString();
+    {
+      Matcher _matcher = _pattern2.matcher(url);
+      if (_matcher.find()) {
+        String theGuess = _matcher.group(1);
+        _doGet2(request, response, theGuess);
+      }
+    }
+  }
+}
+</code></pre>
+  </li>
+</ul>
+
+<p>As you can see the expression <code>controller.handleGuess(theGuess)</code> is put into a method with three parameters. This is done in the following method from <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a>:</p>
+
+<pre><code class="language-xtend">  /**
+   * Creates a method for the route's target call.
+   * Gives scope and live to the expression.
+   */
+  def protected toRouteCallMethod(Route route) {
+    route.toMethod(route.nameOfRouteMethod, typeRef(Void.TYPE)) [
+      parameters += route.toParameter("request",  typeRef(HTTP_REQUEST))
+      parameters += route.toParameter("response", typeRef(HTTP_RESPONSE))
+      for (variable : route.url.variables) {
+        parameters += variable.toParameter(variable.name, typeRef(String))
+      }
+      body = route.call
+    ]
+  }
+</code></pre>
+
+<p>Just because of that code you can now refer to the local variables <code>request</code>, <code>response</code>, and <code>theGuess</code>. Also it defines that the expected type is <code>void</code> so you are not allowed to write things like <code>return 42</code>. </p>
+
+<hr />
+
+<p><strong><a href="207_template.html">Next Chapter: Template Language</a></strong></p>
+
+
+</body>
+</html>

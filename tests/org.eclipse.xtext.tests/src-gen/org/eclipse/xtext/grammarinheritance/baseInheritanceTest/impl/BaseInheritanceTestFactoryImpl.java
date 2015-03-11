@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.baseInheritanceTest.impl;
 
@@ -33,7 +30,7 @@ public class BaseInheritanceTestFactoryImpl extends EFactoryImpl implements Base
   {
     try
     {
-      BaseInheritanceTestFactory theBaseInheritanceTestFactory = (BaseInheritanceTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage"); 
+      BaseInheritanceTestFactory theBaseInheritanceTestFactory = (BaseInheritanceTestFactory)EPackage.Registry.INSTANCE.getEFactory(BaseInheritanceTestPackage.eNS_URI);
       if (theBaseInheritanceTestFactory != null)
       {
         return theBaseInheritanceTestFactory;

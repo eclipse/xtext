@@ -12,9 +12,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions.FunctionDelegate;
+import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
+import org.eclipse.xtext.xbase.lib.internal.KeyComparator;
 
-import com.google.common.collect.Iterables;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Lists;
 
 /**
@@ -30,7 +31,7 @@ import com.google.common.collect.Lists;
  * List#take -> List
  * List#drop -> List
  */
-public class ListExtensions {
+@GwtCompatible public class ListExtensions {
 
 	/**
 	 * Sorts the specified list itself into ascending order, according to the natural ordering of its elements.
@@ -56,7 +57,7 @@ public class ListExtensions {
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List, Comparator)
 	 * @see #sortInplace(List)
-	 * @see #sortInplaceBy(List, Function1)
+	 * @see #sortInplaceBy(List, org.eclipse.xtext.xbase.lib.Functions.Function1)
 	 */
 	public static <T> List<T> sortInplace(List<T> list, Comparator<? super T> comparator) {
 		Collections.sort(list, comparator);
@@ -64,8 +65,8 @@ public class ListExtensions {
 	}
 
 	/**
-	 * Sorts the specified list itself according to the order induced by applying a key function to each element which yields a
-	 * comparable criteria.
+	 * Sorts the specified list itself according to the order induced by applying a key function to each element which
+	 * yields a comparable criteria.
 	 * 
 	 * @param list
 	 *            the list to be sorted. May not be <code>null</code>.
@@ -74,17 +75,11 @@ public class ListExtensions {
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list, final Functions.Function1<? super T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list,
+			final Functions.Function1<? super T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
-		Comparator<T> comparator = new Comparator<T>() {
-			public int compare(T o1, T o2) {
-				C left = key.apply(o1);
-				C right = key.apply(o2);
-				return left.compareTo(right);
-			}
-		};
-		Collections.sort(list, comparator);
+		Collections.sort(list, new KeyComparator<T, C>(key));
 		return list;
 	}
 
@@ -94,10 +89,11 @@ public class ListExtensions {
 	 * 
 	 * @param list
 	 *            the list whose elements should be traversed in reverse. May not be <code>null</code>.
-	 * @return an iterable with the same elements as the list, in reverse
+	 * @return a list with the same elements as the given list, in reverse
 	 */
-	public static <T> Iterable<T> reverseView(List<T> list) {
-		return Iterables.reverse(list);
+	@Pure
+	public static <T> List<T> reverseView(List<T> list) {
+		return Lists.reverse(list);
 	}
 
 	/**
@@ -116,18 +112,19 @@ public class ListExtensions {
 
 	/**
 	 * Returns a list that performs the given {@code transformation} for each element of {@code original} when
-	 * requested. The mapping is done lazily. That is, subsequent iterations of the elements in the iterable will
+	 * requested. The mapping is done lazily. That is, subsequent iterations of the elements in the list will
 	 * repeatedly apply the transformation. The returned list is a transformed view of {@code original}; changes to
-	 * {@code original} will be reflected in the returned list and vice versa.
+	 * {@code original} will be reflected in the returned list and vice versa (e.g. invocations of {@link List#remove(int)}).
 	 * 
 	 * 
 	 * @param original
-	 *            the original iterable. May not be <code>null</code>.
+	 *            the original list. May not be <code>null</code>.
 	 * @param transformation
 	 *            the transformation. May not be <code>null</code>.
 	 * @return a list that effectively contains the results of the transformation. Never <code>null</code>.
 	 */
-	public static final <T, R> List<R> map(List<T> original, Function1<? super T, R> transformation) {
+	@Pure
+	public static <T, R> List<R> map(List<T> original, Function1<? super T, ? extends R> transformation) {
 		return Lists.transform(original, new FunctionDelegate<T, R>(transformation));
 	}
 

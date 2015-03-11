@@ -16,11 +16,17 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.util.Strings;
 
@@ -39,8 +45,8 @@ public abstract class EClassifierInfo {
 		this.eClassifier = metaType;
 	}
 
-	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated, Set<String> generatedEPackageURIs) {
-		return new EClassInfo(eClass, isGenerated, generatedEPackageURIs);
+	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated, Set<String> generatedEPackageURIs, Grammar grammar) {
+		return new EClassInfo(eClass, isGenerated, generatedEPackageURIs, grammar);
 	}
 
 	public static EClassifierInfo createEDataTypeInfo(EDataType eDataType, boolean isGenerated) {
@@ -67,16 +73,58 @@ public abstract class EClassifierInfo {
 	public static class EClassInfo extends EClassifierInfo {
 
 		private Set<String> generatedEPackageURIs;
+		private Grammar grammar;
 		
-		public EClassInfo(EClassifier metaType, boolean isGenerated, Set<String> generatedEPackageURIs) {
+		public EClassInfo(EClass metaType, boolean isGenerated, Set<String> generatedEPackageURIs, Grammar grammar) {
 			super(metaType, isGenerated);
 			this.generatedEPackageURIs = generatedEPackageURIs;
+			this.grammar = grammar;
+		}
+		
+		@Override
+		public String toString() {
+			return "ClassifierInfo : " + getEClass().getName();
 		}
 
 		@Override
 		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
 			return super.isAssignableFrom(subTypeInfo) || (subTypeInfo instanceof EClassInfo)
-					&& EcoreUtil2.isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
+					&& isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
+		}
+		
+		/**
+	     * Determine whether the class represented by {@code left} is either the same as
+	     * or is a superclass of the class represented by {@code right}.
+		 */
+		protected boolean isAssignableFrom(EClass left, EClass right) {
+			if (right != null && left.isSuperTypeOf(right))
+				return true;
+			EClass eObjectType = GrammarUtil.findEObject(grammar);
+			if (left == eObjectType)
+				return true;
+			if (grammar != null) {
+				Resource grammarResource = grammar.eResource();
+				if (grammarResource != null) {
+					ResourceSet resourceSet = grammarResource.getResourceSet();
+					if (resourceSet != null) {
+						EPackage.Registry registry = resourceSet.getPackageRegistry();
+						if (registry != null) {
+							EPackage ecorePackage = registry.getEPackage(EcorePackage.eNS_URI);
+							if (ecorePackage != null) {
+								EClassifier eObjectFromRegistry = ecorePackage.getEClassifier(EcorePackage.Literals.EOBJECT.getName());
+								if (left == eObjectFromRegistry) {
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (right != null && left.getInstanceClass() != null && right.getInstanceClass() != null) {
+				boolean result = left.getInstanceClass().isAssignableFrom(right.getInstanceClass());
+				return result;
+			}
+			return false;
 		}
 
 		@Override
@@ -138,53 +186,101 @@ public abstract class EClassifierInfo {
 				String name, 
 				boolean isMulti, 
 				boolean isContainment,
-				EClassifier featureType,
+				EClassifier expectedType,
 				StringBuilder errorMessage) {
-			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(name);
-			if (existingFeature != null) {
-				boolean many = existingFeature.isMany();
-				if (many == isMulti) {
-					if (featureType instanceof EClass && existingFeature.getEType() instanceof EClass) {
-						EClass expected = (EClass) featureType;
-						EClass actual = (EClass) existingFeature.getEType();
-						boolean result = EcoreUtil2.isAssignableFrom(actual, expected);
-						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' has an incompatible type '" + actual.getName() + "'.");
-							return result;
-						}
-						result &= isContainment == ((EReference) existingFeature).isContainment();
-						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' has a different containment status.");
-							return result;
-						}
-						result &= !((EReference) existingFeature).isContainer();
-						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' is a container reference.");
-							return result;
-						}
-						return result;
-					} else if (featureType instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
-						EDataType expected = (EDataType) featureType;
-						EDataType actual = (EDataType) existingFeature.getEType();
-						Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(expected.getInstanceClass());
-						Class<?> actualInstanceClass = ReflectionUtil.getObjectType(actual.getInstanceClass());
-						boolean result = actual.equals(expected) || expectedInstanceClass != null && actualInstanceClass != null
-								&& actualInstanceClass.isAssignableFrom(expectedInstanceClass);
-						if (!result) {
-							errorMessage.append("The existing attribute '" + name + "' has an incompatible type '" + actual.getName() + "'.");
-						}
-						return result;
-					} else {
-						String msgPart = " has no type.";
-						if (existingFeature.getEType() != null)
-							msgPart = " has an incompatible type '" + existingFeature.getEType().getName()+"'.";
-						errorMessage.append("The existing feature '" + name + "'" + msgPart);
-					}
+			EStructuralFeature assignedExistingFeature = getEClass().getEStructuralFeature(name);
+			if (assignedExistingFeature != null) {
+				if (!assignedExistingFeature.isChangeable()) {
+					errorMessage.append("The existing feature '" + name + "' is not changeable.");
+					return false;
 				} else {
-					errorMessage.append("The existing feature '" + name + "' has a different cardinality.");
+					boolean many = assignedExistingFeature.isMany();
+					if (many == isMulti) {
+						if (expectedType instanceof EClass && assignedExistingFeature.getEType() instanceof EClass) {
+							EClass castedExpectedType = (EClass) expectedType;
+							EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
+							boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
+							if (!result) {
+								if (isAssignableByID(castedExistingType, castedExpectedType)) {
+									errorMessage.append("The type " + classifierToString(castedExistingType) + " used in the reference '" + name + "' is inconsistent. " +
+											"Probably this is due to an unsupported kind of metamodel hierarchy.");
+								} else {
+									errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+											"The expected type is " + classifierToString(castedExpectedType) + ".");
+								}
+								return result;
+							}
+							result &= isContainment == ((EReference) assignedExistingFeature).isContainment();
+							if (!result) {
+								if (isContainment)
+									errorMessage.append("The existing reference '" + name + "' is not a containment reference.");
+								else
+									errorMessage.append("The existing reference '" + name + "' is a containment reference.");
+								return result;
+							}
+							result &= !((EReference) assignedExistingFeature).isContainer();
+							if (!result) {
+								errorMessage.append("The existing reference '" + name + "' is a container reference.");
+								return result;
+							}
+							return result;
+						} else if (expectedType instanceof EDataType && assignedExistingFeature.getEType() instanceof EDataType) {
+							EDataType castedExpectedType = (EDataType) expectedType;
+							EDataType castedExistingType = (EDataType) assignedExistingFeature.getEType();
+							Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(castedExpectedType.getInstanceClass());
+							Class<?> existingInstanceClass = ReflectionUtil.getObjectType(castedExistingType.getInstanceClass());
+							boolean result = castedExistingType.equals(castedExpectedType) || expectedInstanceClass != null && existingInstanceClass != null
+									&& existingInstanceClass.isAssignableFrom(expectedInstanceClass);
+							if (!result) {
+								errorMessage.append("The existing attribute '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+										"The expected type is " + classifierToString(castedExpectedType) + ".");
+							}
+							return result;
+						} else {
+							String msgPart = " has no type.";
+							if (assignedExistingFeature.getEType() != null)
+								msgPart = " has an incompatible type " + classifierToString(assignedExistingFeature.getEType())+ ". " +
+										"The expected type is " + classifierToString(expectedType) + ".";
+							errorMessage.append("The existing feature '" + name + "'" + msgPart);
+						}
+					} else {	
+						errorMessage.append("The existing feature '" + name + "' has a different cardinality.");
+					}
 				}
 			} else {
 				errorMessage.append("The type '" + getEClass().getName() + "' does not have a feature '" + name + "'.");
+			}
+			return false;
+		}
+		
+		private String classifierToString(EClassifier classifier) {
+			String result = "'" + classifier.getName() + "'";
+			if (classifier.getInstanceTypeName() != null)
+				result += " [" + classifier.getInstanceTypeName() + "]";
+			return result;
+		}
+		
+		/**
+	     * Determine whether the class represented by {@code left} is either the same as
+	     * or is a superclass of the class represented by {@code right} comparing the classifier ID
+	     * and namespace URI.
+		 */
+		private boolean isAssignableByID(EClass left, EClass right) {
+			if (left.getEPackage() != null) {
+				// Compare namespace URI and classifier Id
+				if (left.getClassifierID() == right.getClassifierID()
+						&& right.getEPackage() != null
+						&& left.getEPackage().getNsURI().equals(right.getEPackage().getNsURI())) {
+					return true;
+				}
+				// Check all supertypes of the right class
+				for (EClass superClass : right.getEAllSuperTypes()) {
+					if (left.getClassifierID() == superClass.getClassifierID()
+							&& superClass.getEPackage() != null
+							&& left.getEPackage().getNsURI().equals(superClass.getEPackage().getNsURI())) {
+						return true;
+					}
+				}
 			}
 			return false;
 		}
@@ -205,8 +301,9 @@ public abstract class EClassifierInfo {
 				result &= f1Type.isSuperTypeOf(f2Type);
 				result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 				result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
-			} else
-				result &= f1.getEType().equals(f2.getEType());
+			} else {
+				result &= f1.getEType().equals(EcoreUtil2.getCompatibleType(f1.getEType(), f2.getEType()));
+			}
 			return result;
 		}
 
@@ -244,7 +341,7 @@ public abstract class EClassifierInfo {
 				StringBuilder errorMessage = new StringBuilder();
 				if (!containsCompatibleFeature(featureName, isMultivalue, isContainment, featureClassifier, errorMessage)) {
 					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
-							"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+". " + errorMessage.toString(), 
+							"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+": " + errorMessage.toString(), 
 							grammarElement);
 				}
 				return true;
@@ -281,10 +378,10 @@ public abstract class EClassifierInfo {
 								"configuration already exists in type '" + getEClass().getName() + "'.",
 						grammarElement);
 			
-			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
+			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType(), grammarElement);
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
-						"Cannot find compatible type for features", grammarElement);
+						"Cannot find compatible type for the feature '" + existingFeature.getName() + "'", grammarElement);
 			
 			if (isGenerated(existingFeature)) {
 				existingFeature.setEType(compatibleType);

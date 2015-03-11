@@ -8,6 +8,8 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 /**
+ * Normalizes human readable source type names to their binary represenation.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ClassNameUtil {

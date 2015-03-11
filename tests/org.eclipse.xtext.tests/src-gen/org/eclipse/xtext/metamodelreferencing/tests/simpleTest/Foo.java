@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.simpleTest;
 
@@ -18,11 +15,11 @@ import org.eclipse.xtext.metamodelreferencing.tests.otherTest.FooBar;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.simpleTest.Foo#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.simpleTest.Foo#getNameRefs <em>Name Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage#getFoo()
  * @model

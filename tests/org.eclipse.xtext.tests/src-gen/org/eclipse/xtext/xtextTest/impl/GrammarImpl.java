@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtextTest.impl;
 
@@ -33,6 +30,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getUsedGrammars <em>Used Grammars</em>}</li>
@@ -41,7 +39,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

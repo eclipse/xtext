@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest;
 
@@ -14,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt0 <em>Int0</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt1 <em>Int1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt2 <em>Int2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getOptional()
  * @model

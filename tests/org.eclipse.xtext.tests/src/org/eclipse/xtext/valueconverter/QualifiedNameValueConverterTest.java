@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.valueconverter.qualifiedName.Element;
 import org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNameFactory;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,14 +20,15 @@ import org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNameFactory;
 public class QualifiedNameValueConverterTest extends AbstractXtextTests {
 
 	public static final String KEYWORD = "keyword";
+	
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(QualifiedNameTestLanguageStandaloneSetup.class);
 	}
 
-	public void testQualifiedNameValueConverter() throws Exception {
+	@Test public void testQualifiedNameValueConverter() throws Exception {
 		checkBothDirections("keywrd", "keywrd");
 		checkBothDirections("nokeyword", "nokeyword");
 		checkBothDirections("^keyword.nokeyword", "keyword.nokeyword");
@@ -52,6 +55,10 @@ public class QualifiedNameValueConverterTest extends AbstractXtextTests {
 		XtextResource resource = getResource(model, "tempuri");
 		Element element = (Element) resource.getContents().get(0);
 		assertEquals(nameAsValue, element.getQualifiedName());
+	}
+	
+	@Test public void testBug367949() throws Exception {
+		assertEquals("org.eclipse.create", get(QualifiedNameValueConverter.class).toValue("org.eclipse.^create", null));
 	}
 	
 }

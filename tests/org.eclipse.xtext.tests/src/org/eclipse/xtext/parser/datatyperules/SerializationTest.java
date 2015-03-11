@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +33,7 @@ public class SerializationTest extends AbstractXtextTests {
 	private EStructuralFeature modelFeature;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
 		pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
@@ -45,7 +46,7 @@ public class SerializationTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testSerializeSimple() {
+	@Test public void testSerializeSimple() {
 		EObject compositeModel = factory.create(compositeModelClass);
 		EObject firstModel = factory.create(modelClass);
 		((List<EObject>) compositeModel.eGet(modelFeature)).add(firstModel);
@@ -55,7 +56,7 @@ public class SerializationTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testSerializeTwoModels() {
+	@Test public void testSerializeTwoModels() {
 		EObject compositeModel = factory.create(compositeModelClass);
 		EObject firstModel = factory.create(modelClass);
 		((List<EObject>) compositeModel.eGet(modelFeature)).add(firstModel);
@@ -68,7 +69,7 @@ public class SerializationTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testSerializeFracton() {
+	@Test public void testSerializeFracton() {
 		EObject compositeModel = factory.create(compositeModelClass);
 		EObject firstModel = factory.create(modelClass);
 		((List<EObject>) compositeModel.eGet(modelFeature)).add(firstModel);

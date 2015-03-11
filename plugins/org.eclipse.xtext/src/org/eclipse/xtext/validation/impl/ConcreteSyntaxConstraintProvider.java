@@ -94,6 +94,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return false;
 		}
 
+		@Override
 		public boolean dependsOn(ISyntaxConstraint ele) {
 			ISyntaxConstraint cnt = findCommonContainer(ele);
 			while (ele != cnt) {
@@ -111,6 +112,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return false;
 		}
 
+		@Override
 		public ISyntaxConstraint findCommonContainer(ISyntaxConstraint obj1) {
 			ISyntaxConstraint cnt1 = obj1;
 			while (cnt1 != null) {
@@ -161,6 +163,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return Tuples.create(mandatory, optional);
 		}
 
+		@Override
 		public EStructuralFeature getAssignmentFeature(EClass clazz) {
 			String name = getAssignmentName();
 			EStructuralFeature f = clazz.getEStructuralFeature(name);
@@ -169,24 +172,29 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return f;
 		}
 
+		@Override
 		public String getAssignmentName() {
 			if (type != ConstraintType.ASSIGNMENT)
 				throw new RuntimeException("Constraint '" + this + "' is not an assignment, but a " + getType());
 			return ((Assignment) element).getFeature();
 		}
 
+		@Override
 		public String getCardinality() {
 			return optional ? (multiple ? "*" : "?") : (multiple ? "+" : "");
 		}
 
+		@Override
 		public ISyntaxConstraint getContainer() {
 			return container;
 		}
 
+		@Override
 		public List<ISyntaxConstraint> getContents() {
 			return contents;
 		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return element;
 		}
@@ -206,11 +214,13 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return ((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(exclude);
 		}
 
+		@Override
 		public Set<EClass> getSemanticTypes() {
 			Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(null);
 			return !types.getFirst().isEmpty() ? types.getFirst() : types.getSecond();
 		}
 
+		@Override
 		public Set<EClass> getSemanticTypesToCheck() {
 			if (semanticTypes == UNINITIALIZED) {
 				semanticTypes = getSemanticTypes();
@@ -222,6 +232,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return semanticTypes;
 		}
 
+		@Override
 		public ConstraintType getType() {
 			return type;
 		}
@@ -231,14 +242,17 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return element.hashCode();
 		}
 
+		@Override
 		public boolean isMultiple() {
 			return multiple;
 		}
 
+		@Override
 		public boolean isOptional() {
 			return optional;
 		}
 
+		@Override
 		public boolean isRoot() {
 			return container == null;
 		}
@@ -248,10 +262,12 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return toString(null);
 		}
 
+		@Override
 		public String toString(final Map<ISyntaxConstraint, String> postfix) {
 			// String t = getSemanticTypes() == null ? "" : getSemanticTypes().getName() + ":";
 			String p = postfix != null && postfix.containsKey(this) ? postfix.get(this) : "";
 			Iterable<String> contents = Iterables.transform(getContents(), new Function<ISyntaxConstraint, String>() {
+				@Override
 				public String apply(ISyntaxConstraint from) {
 					return from.toString(postfix);
 				}
@@ -443,6 +459,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		return result;
 	}
 
+	@Override
 	public ISyntaxConstraint getConstraint(ParserRule rule) {
 		ISyntaxConstraint e = rule2element.get(rule);
 		if (e == null) {
@@ -455,6 +472,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		return e != INVALID_RULE ? e : null;
 	}
 
+	@Override
 	public Collection<ISyntaxConstraint> getConstraints(EClass cls) {
 		List<ISyntaxConstraint> eles = type2Elements.get(cls);
 		if (eles != null)

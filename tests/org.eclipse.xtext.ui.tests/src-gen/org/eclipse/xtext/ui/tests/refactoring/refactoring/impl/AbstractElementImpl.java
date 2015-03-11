@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.refactoring.refactoring.impl;
 
@@ -16,8 +13,6 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Abstract Element</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

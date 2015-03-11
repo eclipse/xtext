@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -22,13 +19,13 @@ import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enu
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl#getEnum1 <em>Enum1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl#getInt1 <em>Int1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

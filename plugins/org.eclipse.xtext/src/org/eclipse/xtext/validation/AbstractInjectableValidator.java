@@ -31,6 +31,10 @@ import com.google.inject.name.Named;
 public abstract class AbstractInjectableValidator implements EValidator {
 
 	public static final String CURRENT_LANGUAGE_NAME = AbstractInjectableValidator.class.getCanonicalName() + ".currentLanguageName";
+	/**
+	 * @since 2.4
+	 */
+	public static final String ISSUE_SEVERITIES = AbstractInjectableValidator.class.getCanonicalName() + ".issueSeverities";
 
 	@Inject@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
@@ -50,14 +54,17 @@ public abstract class AbstractInjectableValidator implements EValidator {
 		throw new UnsupportedOperationException("please overwrite");
 	}
 
+	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
+	@Override
 	final public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate(eObject.eClass(), eObject, diagnostics, context);
 	}
 
+	@Override
 	final public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return (isResponsible(context, eObject)) ? internalValidate(eObject.eClass(), eObject, diagnostics, context) : true;
 	}
@@ -66,6 +73,10 @@ public abstract class AbstractInjectableValidator implements EValidator {
 	
 	public boolean isLanguageSpecific() {
 		return languageName != null;
+	}
+	
+	String getLanguageName() {
+		return languageName;
 	}
 	
 	protected boolean isResponsible(Map<Object, Object> context, EObject eObject) {
@@ -85,4 +96,5 @@ public abstract class AbstractInjectableValidator implements EValidator {
 		}
 		return currentLanguage;
 	}
+	
 }

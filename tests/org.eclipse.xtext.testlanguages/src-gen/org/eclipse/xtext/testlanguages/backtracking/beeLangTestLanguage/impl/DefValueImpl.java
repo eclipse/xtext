@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -24,6 +21,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#getType <em>Type</em>}</li>
@@ -31,7 +29,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.TypeRef;
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#getValueExpr <em>Value Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl.DefValueImpl#isImmutable <em>Immutable</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,16 +1,16 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
@@ -87,7 +87,8 @@ public class IfConditionImpl extends MinimalEObjectImpl.Container implements IfC
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isElseif()
+  @Override
+public boolean isElseif()
   {
     return elseif;
   }
@@ -97,7 +98,8 @@ public class IfConditionImpl extends MinimalEObjectImpl.Container implements IfC
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElseif(boolean newElseif)
+  @Override
+public void setElseif(boolean newElseif)
   {
     boolean oldElseif = elseif;
     elseif = newElseif;
@@ -110,7 +112,8 @@ public class IfConditionImpl extends MinimalEObjectImpl.Container implements IfC
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getCondition()
+  @Override
+public Expression getCondition()
   {
     return condition;
   }
@@ -137,7 +140,8 @@ public class IfConditionImpl extends MinimalEObjectImpl.Container implements IfC
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCondition(Expression newCondition)
+  @Override
+public void setCondition(Expression newCondition)
   {
     if (newCondition != condition)
     {

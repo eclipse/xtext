@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.serializer;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,48 +28,17 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SyntacticSequencerUtil {
-	/*
-	 * def allPDAs() {
-			val result = <ISyntacticSequencerPDAProvider$ISynAbsorberState>newArrayList()
-			for(context:contextProvider.getAllContexts(grammar))
-				for(type:contextProvider.getTypesForContext(context))
-					result.add(pdaProvider.getPDA(context, type))
-			result
-		}
-		
-		def collectAllAmbiguousTransitions(ISyntacticSequencerPDAProvider$ISynFollowerOwner state, Set<ISyntacticSequencerPDAProvider$ISynTransition> result, Set<Object> visited) {
-			if(!visited.add(state)) 
-				return;
-			if(state instanceof ISyntacticSequencerPDAProvider$ISynTransition && (state as ISyntacticSequencerPDAProvider$ISynTransition).syntacticallyAmbiguous)
-				result.add(state as ISyntacticSequencerPDAProvider$ISynTransition)
-			if(state instanceof ISyntacticSequencerPDAProvider$ISynAbsorberState)
-				for(follower:(state as ISyntacticSequencerPDAProvider$ISynAbsorberState).outTransitions)
-					collectAllAmbiguousTransitions(follower, result, visited)
-			else 
-				for(follower:state.followers)
-					collectAllAmbiguousTransitions(follower, result, visited)
-		}
-		
-		def allAmbiguousTransitions() {
-			val result = <ISyntacticSequencerPDAProvider$ISynTransition>newHashSet()
-			for(pda:allPDAs)
-				collectAllAmbiguousTransitions(pda, result, newHashSet())
-			result
-		}
-	 */
 
 	@Inject
 	protected IContextProvider contextProvider;
@@ -103,38 +71,29 @@ public class SyntacticSequencerUtil {
 				collectAllAmbiguousTransitions(follower, result, visited);
 	}
 
-	protected Set<ISynTransition> getAllAmbiguousTransitions() {
-		Set<ISynTransition> result = Sets.newHashSet();
+	public Set<ISynTransition> getAllAmbiguousTransitions() {
+		Set<ISynTransition> result = Sets.newLinkedHashSet();
 		for (ISynAbsorberState start : getAllPDAs())
 			collectAllAmbiguousTransitions(start, result, Sets.newHashSet());
 		return result;
 	}
 
-	protected List<Triple<String, AbstractElementAlias, List<ISynTransition>>> ambiguousTransitions;
+	protected List<EqualAmbiguousTransitions> ambiguousTransitions;
 
-	public List<Triple<String, AbstractElementAlias, List<ISynTransition>>> getAllAmbiguousTransitionsBySyntax() {
+	public List<EqualAmbiguousTransitions> getAllAmbiguousTransitionsBySyntax() {
 		if (ambiguousTransitions != null)
 			return ambiguousTransitions;
-		Map<AbstractElementAlias, List<ISynTransition>> result = Maps.newHashMap();
+		Map<AbstractElementAlias, EqualAmbiguousTransitions> result = Maps.newHashMap();
 		for (ISynTransition transition : getAllAmbiguousTransitions()) {
-			AbstractElementAlias syntax = transition.getAmbiguousSyntax();
-			if (syntax != null) {
-				List<ISynTransition> list = result.get(syntax);
+			for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
+				EqualAmbiguousTransitions list = result.get(syntax);
 				if (list == null)
-					result.put(syntax, list = Lists.newArrayList());
-				list.add(transition);
+					result.put(syntax, list = new EqualAmbiguousTransitions(elementAliasToIdentifyer(syntax), syntax));
+				list.getTransitions().add(transition);
 			}
 		}
-		ambiguousTransitions = Lists.newArrayList();
-		for (Map.Entry<AbstractElementAlias, List<ISynTransition>> e : result.entrySet())
-			ambiguousTransitions.add(Tuples.create(elementAliasToIdentifyer(e.getKey()), e.getKey(), e.getValue()));
-		Collections.sort(ambiguousTransitions,
-				new Comparator<Triple<String, AbstractElementAlias, List<ISynTransition>>>() {
-					public int compare(Triple<String, AbstractElementAlias, List<ISynTransition>> o1,
-							Triple<String, AbstractElementAlias, List<ISynTransition>> o2) {
-						return o1.getFirst().compareTo(o2.getFirst());
-					}
-				});
+		ambiguousTransitions = Lists.newArrayList(result.values());
+		Collections.sort(ambiguousTransitions);
 		return ambiguousTransitions;
 	}
 
@@ -155,7 +114,7 @@ public class SyntacticSequencerUtil {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
-			String body = Join.join("_", children);
+			String body = Joiner.on("_").join(children);
 			if (isNested || card != null) {
 				card = card == null ? "" : card;
 				return "__" + body + "__" + card;
@@ -166,7 +125,7 @@ public class SyntacticSequencerUtil {
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
 			Collections.sort(children);
-			String body = Join.join("_or_", children);
+			String body = Joiner.on("_or_").join(children);
 			if (isNested || card != null) {
 				card = card == null ? "" : card;
 				return "__" + body + "__" + card;
@@ -187,22 +146,22 @@ public class SyntacticSequencerUtil {
 			TokenAlias ele = (TokenAlias) alias;
 			String eleAlias = file.imported(TokenAlias.class);
 			String eleAcc = "grammarAccess." + grammarAccess.gaAccessor(ele.getToken());
-			return "new " + eleAlias + "(" + optional + ", " + many + ", " + eleAcc + ")";
+			return "new " + eleAlias + "(" + many + ", " + optional + ", " + eleAcc + ")";
 		} else if (alias instanceof GroupAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
-			String body = Join.join(", ", children);
+			String body = Joiner.on(", ").join(children);
 			String grpAlias = file.imported(GroupAlias.class);
-			return "new " + grpAlias + "(" + optional + ", " + many + ", " + body + ")";
+			return "new " + grpAlias + "(" + many + ", " + optional + ", " + body + ")";
 		} else if (alias instanceof AlternativeAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
 			Collections.sort(children);
-			String body = Join.join(", ", children);
+			String body = Joiner.on(", ").join(children);
 			String altAlias = file.imported(AlternativeAlias.class);
-			return "new " + altAlias + "(" + optional + ", " + many + ", " + body + ")";
+			return "new " + altAlias + "(" + many + ", " + optional + ", " + body + ")";
 		}
 		throw new RuntimeException("unknown element");
 	}
@@ -212,7 +171,7 @@ public class SyntacticSequencerUtil {
 		String body = elementAliasToIdentifyer(alias, rulesSet, false);
 		List<String> rulesList = Lists.newArrayList(rulesSet);
 		Collections.sort(rulesList);
-		String rule = Join.join("_", rulesList);
+		String rule = Joiner.on("_").join(rulesList);
 		return rule + "_" + body;
 	}
 

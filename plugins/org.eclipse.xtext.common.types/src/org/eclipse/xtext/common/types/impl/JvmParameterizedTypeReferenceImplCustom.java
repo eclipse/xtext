@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.impl.NameConcatHelper.NameType;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,9 +43,20 @@ public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTyp
 			result.append(((InternalEObject) type).eProxyURI());
 			result.append(')');
 		} else {
-			result.append(getIdentifier());
+			result.append(NameConcatHelper.computeFor(this, '$', NameType.TO_STRING));
 		}
 		return result.toString();
 	}
 
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitParameterizedTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitParameterizedTypeReference(this, parameter);
+		return result;
+	}
 }

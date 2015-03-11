@@ -18,21 +18,25 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
  */
 public abstract class AbstractTypesProposalProvider implements ITypesProposalProvider {
 
+	@Override
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
 			EReference typeReference, ICompletionProposalAcceptor acceptor) {
 		createTypeProposals(proposalFactory, context, typeReference, TypeMatchFilters.all(), acceptor);
 	}
 	
+	@Override
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, EReference typeReference, ICompletionProposalAcceptor acceptor) {
 		createSubTypeProposals(superType, proposalFactory, context, typeReference, TypeMatchFilters.all(), acceptor);
 	}
 	
+	@Override
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
 		createSubTypeProposals(superType, proposalFactory, context, typeReference, filter, null, acceptor);
 	}
 	
+	@Override
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
 			EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
 		createTypeProposals(proposalFactory, context, typeReference, filter, null, acceptor);

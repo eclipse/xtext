@@ -32,6 +32,8 @@ public class NameProvider extends IQualifiedNameProvider.AbstractImpl {
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
+		if(obj.eIsProxy())
+			return null;
 		String name = new ArithmeticsSwitch<String>() {
 
 			public String caseModule(Module object) {

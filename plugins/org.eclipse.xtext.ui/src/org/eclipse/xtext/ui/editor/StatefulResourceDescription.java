@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -43,9 +45,15 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 	}
 
 	protected ImmutableList<IEObjectDescription> copyExportedObjects(IResourceDescription original) {
-		return ImmutableList.copyOf(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
+		return ImmutableList.copyOf(Iterables.filter(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
+			@Override
 			public IEObjectDescription apply(IEObjectDescription from) {
-				if (from.getEObjectOrProxy().eIsProxy())
+				if (from == null)
+					return null;
+				EObject proxy = from.getEObjectOrProxy();
+				if (proxy == null)
+					return null;
+				if (proxy.eIsProxy())
 					return from;
 				InternalEObject result = (InternalEObject) EcoreUtil.create(from.getEClass());
 				result.eSetProxyURI(EcoreUtil.getURI(from.getEObjectOrProxy()));
@@ -58,7 +66,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 				}
 				return EObjectDescription.create(from.getName(), result, userData);
 			}
-		}));
+		}), Predicates.notNull()));
 	}
 
 	@Override
@@ -66,21 +74,27 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 		return exported;
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
-		throw new UnsupportedOperationException("getImportedNames()");
+		IResourceDescription snapShot = snapShotProvider.get();
+		if (snapShot != null)
+			return snapShot.getImportedNames();
+		return Collections.emptyList();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		// find references was triggered - use up-to-date reference descriptions
 		// the content of this copied description is updated as soon as the exported
 		// objects of a resource change thus the default algorithm of the find 
-		// references ui for the display string should work
+		// references UI for the display string should work
 		IResourceDescription snapShot = snapShotProvider.get();
 		if (snapShot != null)
 			return snapShot.getReferenceDescriptions();
 		return Collections.emptyList();
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}

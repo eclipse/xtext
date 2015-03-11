@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.impl;
 
@@ -33,7 +30,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
   {
     try
     {
-      DatatypeRuleTestFactory theDatatypeRuleTestFactory = (DatatypeRuleTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest"); 
+      DatatypeRuleTestFactory theDatatypeRuleTestFactory = (DatatypeRuleTestFactory)EPackage.Registry.INSTANCE.getEFactory(DatatypeRuleTestPackage.eNS_URI);
       if (theDatatypeRuleTestFactory != null)
       {
         return theDatatypeRuleTestFactory;

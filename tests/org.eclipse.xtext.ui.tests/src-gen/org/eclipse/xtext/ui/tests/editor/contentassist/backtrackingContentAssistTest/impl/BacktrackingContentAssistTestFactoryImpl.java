@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl;
 
@@ -33,7 +30,7 @@ public class BacktrackingContentAssistTestFactoryImpl extends EFactoryImpl imple
   {
     try
     {
-      BacktrackingContentAssistTestFactory theBacktrackingContentAssistTestFactory = (BacktrackingContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2010/backtrackingContentAssistTest"); 
+      BacktrackingContentAssistTestFactory theBacktrackingContentAssistTestFactory = (BacktrackingContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory(BacktrackingContentAssistTestPackage.eNS_URI);
       if (theBacktrackingContentAssistTestFactory != null)
       {
         return theBacktrackingContentAssistTestFactory;

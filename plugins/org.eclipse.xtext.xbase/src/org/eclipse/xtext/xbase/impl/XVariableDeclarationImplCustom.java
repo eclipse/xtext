@@ -31,4 +31,12 @@ public class XVariableDeclarationImplCustom extends XVariableDeclarationImpl {
 	public String getQualifiedName(char innerClassDelimiter) {
 		return name;
 	}
+	
+	@Override
+	public String toString() {
+		if (isWriteable()) {
+			return "var " + getSimpleName(); 
+		}
+		return "val " + getSimpleName();
+	}
 }

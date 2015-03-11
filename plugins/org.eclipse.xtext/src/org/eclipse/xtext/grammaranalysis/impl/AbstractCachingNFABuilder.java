@@ -22,10 +22,12 @@ public abstract class AbstractCachingNFABuilder<S, T> implements NFABuilder<S, T
 
 	protected abstract T createTransition(S source, S target, boolean isRuleCall, AbstractElement loopCenter);
 
+	@Override
 	public boolean filter(AbstractElement ele) {
 		return false;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public final S getState(AbstractElement ele) {
 		if (ele == null)
@@ -41,6 +43,7 @@ public abstract class AbstractCachingNFABuilder<S, T> implements NFABuilder<S, T
 		return t;
 	}
 
+	@Override
 	public final T getTransition(S source, S target, boolean isRuleCall, AbstractElement loopCenter) {
 		return createTransition(source, target, isRuleCall, loopCenter);
 	}

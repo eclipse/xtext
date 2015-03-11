@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationerror.impl;
 
@@ -31,12 +28,12 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.IndentImpl#getReq <em>Req</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.IndentImpl#getOpt <em>Opt</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.IndentImpl#getIndent <em>Indent</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.lazyLinking;
 
@@ -16,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage#getUnresolvedProxyProperty()
  * @model

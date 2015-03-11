@@ -159,6 +159,7 @@ public class XtextTokenStream extends CommonTokenStream {
 		private MyHiddenTokens(BitSet prev) {
 			this. prev = prev;
 		}
+		@Override
 		public void restore() {
 			skipHiddenTokens();
 			XtextTokenStream.this.hiddenTokens = prev;
@@ -197,6 +198,13 @@ public class XtextTokenStream extends CommonTokenStream {
 			super.consume();
 			currentLookAhead--;
 		}
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected int getFirstMarker() {
+		return firstMarker;
 	}
 	
 	@Override

@@ -52,6 +52,7 @@ public class RuntimeResourceSetInitializer {
 	
 	protected Multimap<String, URI> getPathToUriMap(List<String> pathes, final UriFilter filter) {
 		return traverser.resolvePathes(pathes, new Predicate<URI>() {
+			@Override
 			public boolean apply(URI input) {
 				boolean result = true;
 				if (filter != null)

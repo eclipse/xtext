@@ -38,6 +38,7 @@ public class LexerProvider<T extends Lexer> implements Provider<T> {
 	 * constructor because it will not initialize the backtracking state of the lexer.
 	 * Instead, we pass <code>null</code> as CharStream argument.
 	 */
+	@Override
 	public T get() {
 		try {
 			return clazz.getConstructor(CharStream.class).newInstance(new Object[] { null });

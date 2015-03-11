@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: model.in.eclipse.project
+Bundle-Version: 1.0.0.qualifier

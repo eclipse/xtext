@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl;
 
@@ -34,7 +31,7 @@ public class EnumAndReferenceTestLanguageFactoryImpl extends EFactoryImpl implem
   {
     try
     {
-      EnumAndReferenceTestLanguageFactory theEnumAndReferenceTestLanguageFactory = (EnumAndReferenceTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EnumAndReferenceTest"); 
+      EnumAndReferenceTestLanguageFactory theEnumAndReferenceTestLanguageFactory = (EnumAndReferenceTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(EnumAndReferenceTestLanguagePackage.eNS_URI);
       if (theEnumAndReferenceTestLanguageFactory != null)
       {
         return theEnumAndReferenceTestLanguageFactory;

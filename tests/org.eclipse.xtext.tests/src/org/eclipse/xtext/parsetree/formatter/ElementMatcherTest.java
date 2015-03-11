@@ -20,7 +20,7 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherExtension;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.LoopElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.OptionalCallsElements;
@@ -28,6 +28,7 @@ import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguage
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.SimpleElements;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -35,6 +36,7 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ElementMatcherTest extends AbstractXtextTests {
+	
 	private ElementMatcherTestLanguageGrammarAccess g;
 
 	private static class Patterns {
@@ -46,6 +48,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void after(final String name, final AbstractElement ele) {
 			patterns.add(new IAfterElement() {
+				@Override
 				public AbstractElement matchAfter() {
 					return ele;
 				}
@@ -63,6 +66,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void before(final String name, final AbstractElement ele) {
 			patterns.add(new IBeforeElement() {
+				@Override
 				public AbstractElement matchBefore() {
 					return ele;
 				}
@@ -80,6 +84,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void between(final String name, final AbstractElement first, final AbstractElement second) {
 			patterns.add(new IBetweenElements() {
+				@Override
 				public Pair<AbstractElement, AbstractElement> matchBetween() {
 					return Tuples.create(first, second);
 				}
@@ -125,20 +130,20 @@ public class ElementMatcherTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ElementMatcherTestLanguageStandaloneSetup.class);
 		g = (ElementMatcherTestLanguageGrammarAccess) getGrammarAccess();
 	}
 
-	public void testSimple1() throws Exception {
+	@Test public void testSimple1() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.after(g.getSimpleAccess().getNumberSignDigitOneKeyword_0());
 		pattern.before(g.getSimpleAccess().getKw1Keyword_2_0());
 		assertEquals("#1 ! abc ! kw1 efg long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleAssignments() throws Exception {
+	@Test public void testSimpleAssignments() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.after(g.getSimpleAccess().getNameAssignment_1());
 		pattern.before(g.getSimpleAccess().getOptionalAssignment_2_1());
@@ -146,40 +151,40 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#1 abc ! kw1 ! efg ! long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleGroup1() throws Exception {
+	@Test public void testSimpleGroup1() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getSimpleAccess().getGroup_2());
 		assertEquals("#1 abc ! kw1 efg long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleGroup2() throws Exception {
+	@Test public void testSimpleGroup2() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.after(g.getSimpleAccess().getGroup_2());
 		assertEquals("#1 abc kw1 efg ! long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleGroup3() throws Exception {
+	@Test public void testSimpleGroup3() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getSimpleAccess().getGroup());
 		pattern.after(g.getSimpleAccess().getGroup());
 		assertEquals("! #1 abc kw1 efg long.name !", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleBetween1() throws Exception {
+	@Test public void testSimpleBetween1() throws Exception {
 		SimpleElements se = g.getSimpleAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(se.getNumberSignDigitOneKeyword_0(), se.getNameIDTerminalRuleCall_1_0());
 		assertEquals("#1 ! abc kw1 efg long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleBetween2() throws Exception {
+	@Test public void testSimpleBetween2() throws Exception {
 		SimpleElements se = g.getSimpleAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(se.getNumberSignDigitOneKeyword_0(), se.getNameAssignment_1());
 		assertEquals("#1 ! abc kw1 efg long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleBetween3() throws Exception {
+	@Test public void testSimpleBetween3() throws Exception {
 		SimpleElements se = g.getSimpleAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(se.getNameIDTerminalRuleCall_1_0(), se.getDatatypeAssignment_3());
@@ -187,7 +192,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#1 abc kw1 efg long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testSimpleBetween4() throws Exception {
+	@Test public void testSimpleBetween4() throws Exception {
 		SimpleElements se = g.getSimpleAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(se.getGroup_2(), se.getDatatypeFQNParserRuleCall_3_0());
@@ -195,14 +200,14 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#1 abc kw1 efg ! long.name", match("#1 abc kw1 efg long.name", pattern));
 	}
 
-	public void testRuleCalls1() throws Exception {
+	@Test public void testRuleCalls1() throws Exception {
 		RuleCallsElements rce = g.getRuleCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern.before(rce.getRuleCallsSubParserRuleCall_1());
 		assertEquals("#2 ! sub foo", match("#2 sub foo", pattern));
 	}
 
-	public void testRuleCalls2() throws Exception {
+	@Test public void testRuleCalls2() throws Exception {
 		RuleCallsElements rce = g.getRuleCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern = new Patterns();
@@ -210,7 +215,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#2 sub ! foo", match("#2 sub foo", pattern));
 	}
 
-	public void testRuleCalls3() throws Exception {
+	@Test public void testRuleCalls3() throws Exception {
 		RuleCallsElements rce = g.getRuleCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(rce.getNameAssignment_2(), rce.getCall1Assignment_3());
@@ -219,63 +224,63 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#2 sub foo ! ass2 zonk", match("#2 sub foo ass2 zonk", pattern));
 	}
 
-	public void testRuleCalls4() throws Exception {
+	@Test public void testRuleCalls4() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsSubAccess().getSubAssignment());
 		pattern.after(g.getRuleCallsSubAccess().getSubAssignment());
 		assertEquals("#2 ! sub ! foo", match("#2 sub foo", pattern));
 	}
 
-	public void testRuleCalls5() throws Exception {
+	@Test public void testRuleCalls5() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsAss1Access().getGroup());
 		pattern.after(g.getRuleCallsAss1Access().getGroup());
 		assertEquals("#2 sub foo ! ass1 foo !", match("#2 sub foo ass1 foo", pattern));
 	}
 
-	public void testRuleCalls6() throws Exception {
+	@Test public void testRuleCalls6() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsAss2Access().getGroup());
 		pattern.after(g.getRuleCallsAss2Access().getGroup());
 		assertEquals("#2 sub foo ass1 bar ! ass2 zonk !", match("#2 sub foo ass1 bar ass2 zonk", pattern));
 	}
 
-	public void testRuleCalls7() throws Exception {
+	@Test public void testRuleCalls7() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsAccess().getCall1Assignment_3());
 		pattern.after(g.getRuleCallsAccess().getCall1Assignment_3());
 		assertEquals("#2 sub foo ! ass1 bar ! ass2 zonk", match("#2 sub foo ass1 bar ass2 zonk", pattern));
 	}
 
-	public void testRuleCalls8() throws Exception {
+	@Test public void testRuleCalls8() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsAccess().getCall2Assignment_4());
 		pattern.after(g.getRuleCallsAccess().getCall2Assignment_4());
 		assertEquals("#2 sub foo ass1 bar ! ass2 zonk !", match("#2 sub foo ass1 bar ass2 zonk", pattern));
 	}
 
-	public void testRuleCalls9() throws Exception {
+	@Test public void testRuleCalls9() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsSubAccess().getSubAssignment());
 		pattern.after(g.getRuleCallsSubAccess().getSubAssignment());
 		assertEquals("#2 ! sub ! foo", match("#2 sub foo", pattern));
 	}
 	
-	public void testRuleCalls10() throws Exception {
+	@Test public void testRuleCalls10() throws Exception {
 		Patterns pattern = new Patterns();
 		pattern.before(g.getRuleCallsAccess().getCall1Assignment_3());
 		pattern.after(g.getRuleCallsAccess().getCall1Assignment_3());
 		assertEquals("#2 sub foo ass2 bar", match("#2 sub foo ass2 bar", pattern));
 	}
 
-	public void testOptionalCalls1() throws Exception {
+	@Test public void testOptionalCalls1() throws Exception {
 		OptionalCallsElements oce = g.getOptionalCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(oce.getNumberSignDigitThreeKeyword_0(), oce.getNameAssignment_3());
 		assertEquals("#3 ! foo", match("#3 foo", pattern));
 	}
 
-	public void testOptionalCalls2() throws Exception {
+	@Test public void testOptionalCalls2() throws Exception {
 		OptionalCallsElements oce = g.getOptionalCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(oce.getNumberSignDigitThreeKeyword_0(), g.getOptionalCallsSub1Access().getSubKeyword_2());
@@ -283,7 +288,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#3 ! sub ! foo", match("#3 sub foo", pattern));
 	}
 
-	public void testOptionalCalls3() throws Exception {
+	@Test public void testOptionalCalls3() throws Exception {
 		OptionalCallsElements oce = g.getOptionalCallsAccess();
 		Patterns pattern = new Patterns();
 		pattern.between(oce.getNumberSignDigitThreeKeyword_0(), g.getOptionalCallsSub2Access().getSub2Keyword_0());
@@ -291,91 +296,92 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#3 ! sub2 foo sub sub3 bar ! baz", match("#3 sub2 foo sub sub3 bar baz", pattern));
 	}
 
-	public void testRecursion() throws Exception {
+	@Test public void testRecursion() throws Exception {
+		disableSerializerTest();
 		Patterns p = new Patterns();
 		p.after(g.getRecursionSubAccess().getLeftCurlyBracketKeyword_1());
 		p.before(g.getRecursionSubAccess().getRightCurlyBracketKeyword_3());
 		assertEquals("#4 { ! bar { ! foo ! } { ! { ! zonk ! } ! } ! }", match("#4 { { foo } bar { { zonk } } }", p));
 	}
 
-	public void testLoop1() throws Exception {
+	@Test public void testLoop1() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.before(le.getNamesAssignment_1());
 		assertEquals("#5 ! foo ! bar ! baz", match("#5 foo bar baz", p));
 	}
 
-	public void testLoop2() throws Exception {
+	@Test public void testLoop2() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.after(le.getNamesAssignment_1());
 		assertEquals("#5 foo ! bar ! baz !", match("#5 foo bar baz", p));
 	}
 
-	public void testLoop3() throws Exception {
+	@Test public void testLoop3() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getNamesAssignment_1(), le.getNamesAssignment_1());
 		assertEquals("#5 foo ! bar ! baz", match("#5 foo bar baz", p));
 	}
 
-	public void testLoop4() throws Exception {
+	@Test public void testLoop4() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.before(le.getGroup_2());
 		assertEquals("#5 foo bar ! gr grfoo ! gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
 	}
 
-	public void testLoop5() throws Exception {
+	@Test public void testLoop5() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.after(le.getGroup_2());
 		assertEquals("#5 foo bar gr grfoo ! gr grbar !", match("#5 foo bar gr grfoo gr grbar", p));
 	}
 
-	public void testLoop6() throws Exception {
+	@Test public void testLoop6() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getGroup_2(), le.getGroup_2());
 		assertEquals("#5 foo bar gr grfoo ! gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
 	}
 
-	public void testLoop7() throws Exception {
+	@Test public void testLoop7() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getNamesAssignment_1(), le.getGroup_2());
 		assertEquals("#5 foo bar ! gr grfoo gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
 	}
 
-	public void testLoop8() throws Exception {
+	@Test public void testLoop8() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.before(le.getAlternatives_3());
 		assertEquals("#5 x gr gf gr gb ! '1' ! '2' ! 1 ! 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
 	}
 
-	public void testLoop9() throws Exception {
+	@Test public void testLoop9() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.after(le.getAlternatives_3());
 		assertEquals("#5 x gr gf gr gb '1' ! '2' ! 1 ! 2 !", match("#5 x gr gf gr gb '1' '2' 1 2", p));
 	}
 
-	public void testLoop10() throws Exception {
+	@Test public void testLoop10() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getAlternatives_3(), le.getAlternatives_3());
 		assertEquals("#5 x gr gf gr gb '1' ! '2' ! 1 ! 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
 	}
 
-	public void testLoop11() throws Exception {
+	@Test public void testLoop11() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getGroup_2(), le.getAlternatives_3());
 		assertEquals("#5 x gr gf gr gb ! '1' '2' 1 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
 	}
 
-	public void testLoop12() throws Exception {
+	@Test public void testLoop12() throws Exception {
 		LoopElements le = g.getLoopAccess();
 		Patterns p = new Patterns();
 		p.between(le.getNamesAssignment_1(), le.getAlternatives_3());
@@ -383,7 +389,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#5 x ! '1' '2' 1 2", match("#5 x '1' '2' 1 2", p));
 	}
 
-	public void testExpression1() throws Exception {
+	@Test public void testExpression1() throws Exception {
 		Patterns p = new Patterns();
 		p.before("<p", g.getAddAccess().getPlusSignKeyword_1_1());
 		p.after("p>", g.getAddAccess().getPlusSignKeyword_1_1());
@@ -393,7 +399,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected1, match("#6 1 + 2 * 4 * ((3 + 4) + foo(4, 6 +7))", p));
 	}
 
-	public void testExpression2() throws Exception {
+	@Test public void testExpression2() throws Exception {
 		Patterns p = new Patterns();
 		p.before("<", g.getPrimAccess().getValAssignment_0_1());
 		p.after(">", g.getPrimAccess().getValAssignment_0_1());
@@ -401,7 +407,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected2, match("#6 1 + 2 * 4 * ((3 + 4) + foo(4, 6 +7))", p));
 	}
 
-	public void testExpression3() throws Exception {
+	@Test public void testExpression3() throws Exception {
 		Patterns p = new Patterns();
 		p.before("<", g.getPrimAccess().getAddParserRuleCall_3_1());
 		p.after(">", g.getPrimAccess().getAddParserRuleCall_3_1());
@@ -409,7 +415,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected3, match("#6 (1 + 2) * 4 * ((3 + 4 * (5 + 5)) + foo(4, 6 * (7 + 9)))", p));
 	}
 
-	public void testExpression4() throws Exception {
+	@Test public void testExpression4() throws Exception {
 		Patterns p = new Patterns();
 		p.before("(", g.getPrimAccess().getTargetAssignment_2_2());
 		p.after(")", g.getPrimAccess().getTargetAssignment_2_2());
@@ -417,7 +423,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected4, match("#6 => => => => 5", p));
 	}
 
-	public void testExpression5() throws Exception {
+	@Test public void testExpression5() throws Exception {
 		Patterns p = new Patterns();
 		p.before("<", g.getAddAccess().getRightAssignment_1_2());
 		p.after(">", g.getAddAccess().getRightAssignment_1_2());
@@ -429,13 +435,14 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected, match("#6 (1 + 2) * 4 * ((3 + 4 * (5 + 5)) + foo(4, 6 * (7 + 9)))", p));
 	}
 
-	public void testExpression6() throws Exception {
+	@Test public void testExpression6() throws Exception {
 		Patterns p = new Patterns();
 		p.between(g.getPrimAccess().getRightParenthesisKeyword_3_2(), g.getMultAccess().getAsteriskKeyword_1_1());
 		assertEquals("#6 ( 5 + 4 ) ! * 7", match("#6 (5 + 4) * 7", p));
 	}
 
-	public void testRuleCalls2a() throws Exception {
+	@Test public void testRuleCalls2a() throws Exception {
+		disableSerializerTest();
 		Patterns p = new Patterns();
 		p.before(g.getConstructorRule().getAlternatives());
 		p.after(g.getConstructorRule().getAlternatives());
@@ -445,7 +452,8 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		//		assertEquals("#7 ! ! foo kw3", match("#7 foo kw3", p));
 	}
 
-	public void testRuleCalls2b() throws Exception {
+	@Test public void testRuleCalls2b() throws Exception {
+		disableSerializerTest();
 		Patterns p = new Patterns();
 		p.before(g.getFieldRule().getAlternatives());
 		p.after(g.getFieldRule().getAlternatives());
@@ -455,7 +463,8 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#7 ! foo ! kw3", match("#7 foo kw3", p));
 	}
 
-	public void testRuleCalls2c() throws Exception {
+	@Test public void testRuleCalls2c() throws Exception {
+		disableSerializerTest();
 		Patterns p = new Patterns();
 		p.before(g.getParameterRule().getAlternatives());
 		p.after(g.getParameterRule().getAlternatives());
@@ -465,13 +474,13 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		//		assertEquals("#7 foo ! ! kw3", match("#7 foo kw3", p));
 	}
 
-	public void testNestedStart() throws Exception {
+	@Test public void testNestedStart() throws Exception {
 		Patterns p = new Patterns();
 		p.after(g.getNestedStartSubAccess().getGroup());
 		assertEquals("#8 ! foo", match("#8 foo", p));
 	}
 
-	public void testNestedStart2() throws Exception {
+	@Test public void testNestedStart2() throws Exception {
 		Patterns p = new Patterns();
 		p.after(g.getNestedStartAccess().getGroup());
 		p.before(g.getNestedStartAccess().getGroup());

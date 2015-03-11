@@ -12,13 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,11 +34,17 @@ public class UniqueNameUtil {
 			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current", "fragment", "EOF" });
 
 	public static String uniqueName(ENamedElement element) {
-		return uniqueName(element, element.getName(), element2uniqueName);
+		String name = element.getName();
+		if (name == null)
+			name = element.eClass().getName();
+		return uniqueName(element, name, element2uniqueName);
 	}
 
 	public static String uniqueImplName(ENamedElement element) {
-		return uniqueName(element, element.getName() + IMPL_NAME_SUFFIX, element2uniqueImplName);
+		String name = element.getName();
+		if (name == null)
+			name = element.eClass().getName();
+		return uniqueName(element, name + IMPL_NAME_SUFFIX, element2uniqueImplName);
 	}
 
 	private static String uniqueName(ENamedElement element, String originalName,
@@ -58,26 +60,13 @@ public class UniqueNameUtil {
 		uniqueNameMap.put(element, uniqueName);
 		return uniqueName;
 	}
-
+	
 	public static void clearUniqueNames(EPackageInfo defaultPackageInfo) {
 		element2uniqueName.clear();
 		element2uniqueImplName.clear();
 		if (defaultPackageInfo != null) {
 			element2uniqueName.put(defaultPackageInfo.getEPackage(), null);
 		}
-	}
-
-	public static String importURI(EPackage ePackage) {
-		Resource resource = ePackage.eResource();
-		if (resource != null) {
-			URI uri = resource.getURI();
-			if (uri != null) {
-				if (!Strings.equal(uri.scheme(), URI.createURI(ePackage.getNsURI()).scheme())) {
-					return resource.getURI().toString();
-				}
-			}
-		}
-		return ePackage.getNsURI();
 	}
 
 	public static EClassifier eString() {

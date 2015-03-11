@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,6 +20,7 @@ import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 import org.eclipse.xtext.ISetup;
 
+import com.google.common.base.Function;
 import com.google.inject.Injector;
 
 /**
@@ -30,6 +32,19 @@ public class GeneratorComponent implements IWorkflowComponent {
 	private List<String> slotNames = newArrayList();
 	private Map<String,String> outlets = newHashMap();
 
+	/**
+	 * @since 2.4
+	 */
+	protected List<String> getSlotNames() {
+		return slotNames;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Map<String, String> getOutlets() {
+		return outlets;
+	}
 	
 	/**
 	 * registering an {@link ISetup}, which causes the execution of {@link ISetup#createInjectorAndDoEMFRegistration()}
@@ -53,9 +68,8 @@ public class GeneratorComponent implements IWorkflowComponent {
 		this.slotNames.add(slot);
 	}
 
+	@Override
 	public void preInvoke() {
-		if (slotNames.isEmpty())
-			throw new IllegalStateException("no 'slot' has been configured.");
 		if (injector == null)
 			throw new IllegalStateException("no Injector has been configured. Use 'register' with an ISetup or 'injector' directly.");
 		if (outlets.isEmpty())
@@ -65,7 +79,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 			if (outlet.getKey()==null)
 				throw new IllegalStateException("One of the outlets was configured without a name");
 			if (outlet.getValue()==null)
-				throw new IllegalStateException("The path of outle '"+outlet.getKey()+"' was null.");
+				throw new IllegalStateException("The path of outlet '"+outlet.getKey()+"' was null.");
 		}
 	}
 	
@@ -98,6 +112,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 		outlets.put(out.outletName,out.path);
 	}
 	
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 		IGenerator instance = getCompiler();
 		IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess();
@@ -128,14 +143,31 @@ public class GeneratorComponent implements IWorkflowComponent {
 
 	protected IFileSystemAccess getConfiguredFileSystemAccess() {
 		final JavaIoFileSystemAccess configuredFileSystemAccess = injector.getInstance(JavaIoFileSystemAccess.class);
+		configuredFileSystemAccess.setOutputConfigurations(getOutputConfigurations());
 		for (Entry<String, String> outs : outlets.entrySet()) {
 			configuredFileSystemAccess.setOutputPath(outs.getKey(), outs.getValue());
 		}
 		return configuredFileSystemAccess;
 	}
 
+	@Override
 	public void postInvoke() {
 		
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected Map<String, OutputConfiguration> getOutputConfigurations() {
+		IOutputConfigurationProvider outputConfigurationProvider = injector
+				.getInstance(IOutputConfigurationProvider.class);
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations();
+		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
+			@Override
+			public String apply(OutputConfiguration from) {
+				return from.getName();
+			}
+		});
 	}
 	
 }

@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.builder.impl;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -20,21 +18,23 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PackageFragmentRootWalkerTest extends TestCase {
+public class PackageFragmentRootWalkerTest extends Assert {
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
-		super.tearDown();
 	}
 	
-	public void testTraversePackageFragmentRoot() throws Exception {
+	@Test public void testTraversePackageFragmentRoot() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		String jarName = "JarWalkerTest.jar";
 		IFile file = project.getProject().getFile(jarName);

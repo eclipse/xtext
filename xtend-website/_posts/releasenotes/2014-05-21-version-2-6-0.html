@@ -1,0 +1,206 @@
+---
+layout: post
+title:  Xtend 2.6.0 Release Notes
+date:   2014-05-21 09:30:28
+categories: releasenotes
+---
+
+<p>
+  Version 2.6 got many bug fixes and performance improvements (<a href="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&status_whiteboard=v2.6">full bugzilla list</a>). The new features are the following.
+</p>
+
+<section id="anonymous_classes" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Anonymous Classes</h3>
+	<p>Xtend supports using lambdas to implement anonymous classes with just one abstract method since its inception. 
+	For interfaces and abstract classes with more than one method you can now also use the an anonymous class using the following syntax:</p>
+
+<pre class="prettyprint lang-xtend linenums">
+val tabListener = new ActionBar.TabListener() {
+
+    override onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        // show the given tab
+    }
+
+    override onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        // hide the given tab
+    }
+
+    override onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        // probably ignore this event
+    }
+};
+</pre>     
+</section>
+<section id="static_nested_classes" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Static Nested Classes</h3>
+	<p>Xtend now supports static nested classes.</p>
+<pre class="prettyprint lang-xtend linenums">
+class A {
+    static class NestedClass {
+    }
+}
+</pre>
+</section>
+<section id="operator_declaration" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Operator Declarations</h3>
+	<p>In addition to overloading operators by adhering to the name mappings, listed in <a href="documentation.html#operators">the documentation</a>, 
+	one can now use the actual operator in the declaration as well.</p>
+<pre class="prettyprint lang-xtend linenums">
+class Money {
+    def + (Money other) { ... }
+    def - (Money other) { ... }
+    def * (BigDecimal times) { ... }
+    ...
+}
+</pre>
+</section>
+<section id="synchronized_expression" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Synchronized Expression</h3>
+	<p>
+		The synchronized expression works basically like Java's synchronized statement.
+	</p>
+<pre class="prettyprint lang-xtend linenums">
+synchronized(lock) {
+    // do stuff
+}
+</pre>
+	<p>
+		But of course it is an expression, as everything in Xtend/Xbase. So you can write the following as well:
+	</p>
+<pre class="prettyprint lang-xtend linenums">
+someMethodCall(synchronized(lock) { ... })
+</pre>
+</section>
+<section id="qualified_static_imports" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Qualified Static Imports</h3>
+	<p>It is now possible to import features in a fully qualified way. This works for regular static imports as well as for extension imports.</p>
+<pre class="prettyprint lang-xtend linenums">
+// static import
+import static java.util.Collections.singleton
+// extension import
+import static extension java.util.Collections.min
+import static extension java.util.Collections.max
+</pre>
+</section>
+<section id="switch_fall_through" style="padding-top: 68px; margin-top: -68px;">
+<h3>Switch Fall Through</h3>
+	<p>The switch expression now supports a kind of fall through. Here's an example</p>
+	<pre class="prettyprint lang-xtend linenums">
+	switch myOperator {
+		case '+',
+		case '-' : handlePlusMinus()    
+		case '*',
+		case '/' : handleDivMultiply()
+		default : throw new IllegalStateException
+	}
+	</pre>
+</section>
+<section id="compound_assignments" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Compound Assignments</h3>
+	<p>Xtend now supports compound assignment operators.</p>
+<pre class="prettyprint lang-xtend linenums">
+var i = 0
+i += 42
+</pre>
+	<p>Compound operators work on overloaded operators as well. That is you don't need to declare '+=' if you have '+' defined. 
+	Example:</p>
+<pre class="prettyprint lang-xtend linenums">
+var distance = 15.km
+distance += 5.km
+</pre>
+</section>
+<section id="postfix_operators" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Postfix Operators</h3>
+	<p>Postfix operators for incrementing and decrementing numbers have been added.</p>
+<pre class="prettyprint lang-xtend linenums">
+var i = 0
+while (condition()) {
+    i++
+}
+</pre>
+</section>
+<section id="traditional_for_loop" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Traditional For-Loop</h3>
+	<p>The traditional for-loop from Java is now available in Xtend, too.</p>
+<pre class="prettyprint lang-xtend linenums">
+for (var i = 0; i < 99; i++) {
+    println(''+i+' bottles of beer on the wall.')
+}
+</pre>
+</section>
+<section id="multivalued_annotation_sugar" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Multivalued Annotations Sugar</h3>
+	<p>Instead of writing </p>
+<pre class="prettyprint lang-xtend linenums">
+@SurpressWarnings(#["unused", "unchecked"])
+</pre>
+	<p> you can write</p>
+<pre class="prettyprint lang-xtend linenums">
+@SurpressWarnings("unused", "unchecked")
+</pre>
+</section>
+<section id="active_annotation_mark_as_read" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Active Annotations - Flag fields as read resp. initialized</h3>
+	<p>When initializing a final field within a synthetic constructor, the control flow analysis couldn't detect it was in fact initialized and would raise an error. Another typical solution was a warning when a private field was only accessed through methods added by an active annotation (e.g. a setter or getter). You can now mark a field as read resp. initialized.</p>
+</section><section id="style_checks" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Style Checks</h3>
+	<p>2.6 adds the following optional compiler checks (inactive by default):</p>
+    <h4>Force return expression</h4>
+    <img class="image_between_p" src="images/releasenotes/2_6_0_validation-explicit-return.png"/>
+    <h4>Force declare return types</h4>
+    <img class="image_between_p" src="images/releasenotes/2_6_0_validation-explicit-return-declaration.png"/>
+    <h4>Force empty parenthesis on method invocation</h4>
+    <img class="image_between_p" src="images/releasenotes/2_6_0_validation-empty-parenthesis.png"/>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Task Tags</h3>
+	<p>TODO, FIXME, and XXX markers in comments are now recognized by the IDE as task markers.
+	The Xtend editor picks up the preference of JDT for adding new kind of markers or removing existing ones.</p>
+	<img class="image_between_p" src="images/releasenotes/2_6_0_task_markers.png"/>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Open Implementation</h3>
+	<p>In addition to the "Go to declaration"-action, you can now navigate to existing implementations of a method. It works just like in JDT</p>
+	<img class="image_between_p" src="images/releasenotes/2_6_0_open_implementation.png"/>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Debug Hover Shows Inspect Dialog</h3>
+	<p>In a debug session, when hovering over a local variable or a visible field, the popo up shows the inspection tree of the hovered value.</p>
+	<img class="image_between_p" src="images/releasenotes/2_6_0_debug_hover_variable.png"/>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Hover Shows Annotations</h3>
+	<p>The declaration hover now includes the annotations.</p>
+	<img class="image_between_p" src="images/releasenotes/2_6_0_annotations_in_hover.png"/>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Gradle Plug-in</h3>
+	<p>A gradle plug-in for easy integration of the Xtend compiler in any gradle based Java projects is now available.
+	The gradle plug-in even also works with the new Android buildsystem developed by Google. <br/>
+	The gradle plug-in is hosted <a href="https://github.com/oehme/xtend-gradle-plugin">at github</a>. </p>
+<pre class="prettyprint lang-xtend linenums">
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.xtend:xtend-gradle-plugin:0.0.8'
+  }
+}
+apply plugin: 'xtend'
+repositories {
+    mavenCentral()
+}
+dependencies {
+  //or testCompile if you only want to use Xtend for some tests
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.6.0'
+}
+</pre>
+</section>
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+	<h3>Treeshaken Lib for Android</h3>
+	<p>For large Android projects there is a need to have as little code packaged as possible. 
+	Usually this is achieved by proguarding cour code and the dependencies during the build. 
+	For people who find that tedious and want to work with a reduced lib from the get go, we offer a treeshaken version of the library, which is only 300k small.</p>
+	<p>The library can be <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib.slim">downloaded from maven central</a>.</p>
+</section>

@@ -20,6 +20,7 @@ public class NameBasedFilter implements UriFilter {
 	
 	private Pattern regularExpression;
 	
+	@Override
 	public boolean matches(URI uri) {
 		if (uri == null)
 			return false;

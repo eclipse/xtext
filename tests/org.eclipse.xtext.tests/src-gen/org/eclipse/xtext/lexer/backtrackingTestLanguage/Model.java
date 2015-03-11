@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.backtrackingTestLanguage;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getEnums <em>Enums</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYcs <em>Ycs</em>}</li>
@@ -24,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYs <em>Ys</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAs <em>As</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel()
  * @model

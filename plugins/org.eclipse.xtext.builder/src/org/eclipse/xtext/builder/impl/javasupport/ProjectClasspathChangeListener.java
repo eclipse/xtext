@@ -22,8 +22,10 @@ import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
+import org.eclipse.xtext.builder.impl.IBuildFlag;
+import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -45,11 +47,11 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	
 	@Inject 
 	private BuildScheduler buildManager;
+	
+	@Inject 
+	private IDirtyStateManager dirtyStateManager;
 
-	public ProjectClasspathChangeListener() {
-		JavaCore.addElementChangedListener(this);
-	}
-
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {
 			try {
@@ -58,11 +60,13 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 					if (!javaProjects.isEmpty()) {
 						Set<IProject> projects = Sets.newHashSet(Iterables.filter(Iterables.transform(javaProjects,
 								new Function<IJavaProject, IProject>() {
+									@Override
 									public IProject apply(IJavaProject from) {
 										return from.getProject();
 									}
 								}), Predicates.notNull()));
-						buildManager.scheduleBuildIfNecessary(projects);
+						dirtyStateManager.notifyListeners(new CoarseGrainedChangeEvent());
+						buildManager.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
 					}
 				}
 			} catch (WrappedException e) {

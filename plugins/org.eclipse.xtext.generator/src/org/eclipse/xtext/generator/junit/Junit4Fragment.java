@@ -24,12 +24,16 @@ import com.google.common.collect.Lists;
  */
 public class Junit4Fragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
+
+	@Deprecated
 	private boolean genContentAssistTest;
 
+	@Deprecated
 	public boolean isGenContentAssistTest() {
 		return genContentAssistTest;
 	}
 
+	@Deprecated
 	public void setGenContentAssistTest(boolean genUiTest) {
 		this.genContentAssistTest = genUiTest;
 	}
@@ -71,6 +75,45 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return new String[] { getNaming().activatorPackageName()};
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getRequiredBundlesTests(Grammar grammar) {
+		return new String[] {
+				getNaming().getProjectNameRt(),
+				getNaming().getProjectNameUi(),
+				"org.eclipse.core.runtime",
+				"org.eclipse.xtext.junit4",
+				"org.eclipse.xtext.xbase.lib",
+				"org.eclipse.ui.workbench;resolution:=optional"
+		};
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getExportedPackagesTests(Grammar grammar) {
+		return new String[]{ getNaming().basePackageRuntime(grammar) };
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public String[] getImportedPackagesTests(Grammar grammar) {
+		return new String[] {
+				"org.junit.runner;version=\"4.5.0\"",
+				"org.junit.runner.manipulation;version=\"4.5.0\"",
+				"org.junit.runner.notification;version=\"4.5.0\"",
+				"org.junit.runners;version=\"4.5.0\"",
+				"org.junit.runners.model;version=\"4.5.0\"",
+				"org.hamcrest.core"
+		};
+	}
+
 
 
 }

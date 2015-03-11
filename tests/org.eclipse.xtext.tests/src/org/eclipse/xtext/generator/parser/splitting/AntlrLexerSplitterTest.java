@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import org.eclipse.xtext.generator.parser.AbstractAntlrSplitterTest;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter.ExtractedMethod;
+import org.junit.Test;
 
 
 /**
@@ -22,13 +23,13 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter.Ext
  */
 public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 
-	public void testMethodSignaturePattern() throws Exception {
+	@Test public void testMethodSignaturePattern() throws Exception {
 		Pattern p = AntlrLexerSplitter.METHOD_SIGNATURE_PATTERN;
 		assertFalse(p.matcher("    public final void mRULE_ANY_OTHER() throws RecognitionException {").find());
 		assertTrue(p.matcher("    public void mTokens() throws RecognitionException {").find());
 	}
 	
-	public void testAssignmentPattern() throws Exception {
+	@Test public void testAssignmentPattern() throws Exception {
 		Pattern p = AntlrLexerSplitter.ASSIGNMENT_PATTERN;
 		assertFalse(p.matcher("    string foo").find());
 		Matcher m = p.matcher("        int alt12=16;");
@@ -36,7 +37,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertEquals("alt12", m.group(1));
 	}
 	
-	public void testIndentLevelPattern() throws Exception {
+	@Test public void testIndentLevelPattern() throws Exception {
 		Pattern p = AntlrLexerSplitter.INDENT_LEVEL_PATTERN;
 		assertFalse(p.matcher("").matches());
 		assertFalse(p.matcher("a                  b").matches());
@@ -46,7 +47,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		
 	}
 	
-	public void testTransform() throws Exception {
+	@Test public void testTransform() throws Exception {
 		String content = readFileIntoString("org/eclipse/xtext/generator/parser/InternalLexerExample.java.txt"); 
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 		String actual = splitter.transform();
@@ -55,13 +56,13 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertTrue(!actual.equals(content));
 	}
 	
-	public void testDFAPattern() throws Exception {
+	@Test public void testDFAPattern() throws Exception {
 		Pattern p = AntlrLexerSplitter.DFA_ASSIGNMENT_PATTERN;
 		assertTrue(p.matcher("        alt12 = dfa12.predict(input);").find());
 		assertFalse(p.matcher("        int LA12_0 = input.LA(1);").find());
 	}
 	
-	public void testNoDFATransform() throws Exception {
+	@Test public void testNoDFATransform() throws Exception {
 		String content = readFileIntoString("org/eclipse/xtext/generator/parser/InternalLexerExample2.java.txt"); 
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 		String actual = splitter.transform();
@@ -69,7 +70,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertTrue(actual.equals(content));
 	}
 	
-	public void testOuterBraceInIfCascadePattern() throws Exception {
+	@Test public void testOuterBraceInIfCascadePattern() throws Exception {
 		Pattern p = AntlrLexerSplitter.OUTER_BRACE_IN_IF_CASCADE_PATTERN;
 		Matcher m = p.matcher("            alt13=62;}  ");
 		assertTrue(m.find());
@@ -77,7 +78,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertFalse(p.matcher("            alt13=62; ").find());
 		assertFalse(p.matcher("            } ").find());
 	}
-	public void testIfCascadeWithOneLineElse() throws Exception {
+	@Test public void testIfCascadeWithOneLineElse() throws Exception {
 		String content = 
 		    "    public void mTokens() throws RecognitionException {\n" +
 		    "        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )\n" +
@@ -102,7 +103,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertNotNull(actual);
 	}
 
-	public void testExtractedLine() throws Exception {
+	@Test public void testExtractedLine() throws Exception {
 		ExtractedMethod m = new ExtractedMethod("myVar", 1);
 		assertEquals("mTokensHelper001", m.getName());
 		assertEquals("  foo();", m.getAsExtractedLine("  foo();"));
@@ -111,7 +112,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertEquals("  return 123;}", m.getAsExtractedLine("  myVar=123;}"));
 	}
 	
-	public void testExtectedMethodSimple() throws Exception {
+	@Test public void testExtectedMethodSimple() throws Exception {
 		ExtractedMethod m = new ExtractedMethod("myVar", 1);
 		m.addLine("            if ( someComplexExpression ) {");
 		m.addLine("                myVar=1;");
@@ -132,7 +133,7 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		assertEquals(expected, sb.toString());
 	}
 	
-	public void testExtectedMethodRemoveBreaks() throws Exception {
+	@Test public void testExtectedMethodRemoveBreaks() throws Exception {
 		ExtractedMethod m = new ExtractedMethod("alt12", 1);
 		m.addLine("            switch ( input.LA(2) ) {");
 		m.addLine("            case '*':");

@@ -7,6 +7,14 @@ import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
+import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
+import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
@@ -21,7 +29,8 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -37,8 +46,9 @@ import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.eclipse.xtext.xtext.ui.editor.validation.XtextValidatorConfigurationBlock;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextDependentElementsCalculator;
-import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameElementHandler;
+import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameContextFactory;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameStrategyProvider;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
@@ -73,7 +83,7 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	public Class<? extends IProjectCreator> bindIProjectCreator() {
 		return XtextProjectCreator.class;
 	}
-
+	
 	@Override
 	public ICharacterPairMatcher bindICharacterPairMatcher() {
 		return new DefaultCharacterPairMatcher(new char[] { ':', ';', '{', '}', '(', ')', '[', ']' });
@@ -147,7 +157,28 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextRenameStrategyProvider.class;
 	}
 
-	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
-		return XtextRenameElementHandler.class;
+	public Class<? extends IRenameContextFactory> bindIRenameContextFactory() {
+		return XtextRenameContextFactory.class;
 	}
+	
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(CurrentDescriptions.ResourceSetAware.class);
+	}
+
+	public void configureIResourceDescriptionsPersisted(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(IBuilderState.class);
+	}
+
+	public Class<? extends DocumentBasedDirtyResource> bindDocumentBasedDirtyResource() {
+		return PersistentDataAwareDirtyResource.class;
+	}
+	
+	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		return StateBasedContainerManager.class;
+	}
+	
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return XtextValidatorConfigurationBlock.class;
+	}
+	
 }

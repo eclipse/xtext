@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,12 +18,12 @@ import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 public class Bug285605Test extends AbstractValidationMessageAcceptingTestCase {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
-	public void testBug285605() throws Exception {
+	@Test public void testBug285605() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"\n" + 

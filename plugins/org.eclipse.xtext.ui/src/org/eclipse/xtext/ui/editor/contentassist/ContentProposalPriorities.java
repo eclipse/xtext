@@ -34,14 +34,17 @@ public class ContentProposalPriorities implements IContentProposalPriorities {
 		castedProposal.setPriority(adjustedPriority);
 	}
 	
+	@Override
 	public void adjustKeywordPriority(ICompletionProposal proposal, String prefix) {
 		adjustPriority(proposal, prefix, keywordPriority);
 	}
 
+	@Override
 	public void adjustCrossReferencePriority(ICompletionProposal proposal, String prefix) {
 		adjustPriority(proposal, prefix, crossReferencePriority);
 	}
 
+	@Override
 	public int getDefaultPriority() {
 		return defaultPriority;
 	}

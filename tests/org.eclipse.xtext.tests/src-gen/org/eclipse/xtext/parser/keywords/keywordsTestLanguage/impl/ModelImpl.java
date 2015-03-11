@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 
@@ -21,6 +18,7 @@ import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl.ModelImpl#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl.ModelImpl#isSecond <em>Second</em>}</li>
@@ -31,7 +29,6 @@ import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model;
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl.ModelImpl#isSeventh <em>Seventh</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl.ModelImpl#isEighth <em>Eighth</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

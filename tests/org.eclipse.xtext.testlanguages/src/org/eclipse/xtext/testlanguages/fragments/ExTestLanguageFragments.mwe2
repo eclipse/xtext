@@ -8,11 +8,18 @@ var grammarURI
 var backtrack = false
 var memoize = false
 var classSplitting = true
-var parser = parser.antlr.ex.rt.AntlrGeneratorFragment {
-  	options = auto-inject {}
+
+var parser = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
+  	options = auto-inject {
+  		fieldsPerClass = "100"
+  		methodsPerClass = "100"
+  	}
 }
-var contentAssist.parser = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
-	options = auto-inject {}
+var contentAssist.parser = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {
+	options = auto-inject {
+  		fieldsPerClass = "100"
+  		methodsPerClass = "100"
+	}
 }
 
 @SimpleTestLanguageFragments auto-inject {

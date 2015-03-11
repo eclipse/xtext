@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.superPackage.impl;
 
@@ -21,10 +18,10 @@ import org.eclipse.xtext.generator.ecore.superPackage.SuperPackagePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.superPackage.impl.SuperMainImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

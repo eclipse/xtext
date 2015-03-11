@@ -10,6 +10,7 @@ package testdata;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class Constructors {
 
 	public Constructors(String x) {

@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AsubpackagePackage;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.SubsubpackagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,7 +28,7 @@ public class FragmentFakingEcoreResourceTest extends AbstractXtextTests {
 	private EPackage metamodel;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		XtextResourceSet set = new XtextResourceSet();
 		set.setClasspathURIContext(getClass());
@@ -36,12 +37,12 @@ public class FragmentFakingEcoreResourceTest extends AbstractXtextTests {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		metamodel = null;
 		super.tearDown();
 	}
 	
-	public void testFakedURIs_01() {
+	@Test public void testFakedURIs_01() {
 		ResourceSaveIndicator indicator = new ResourceSaveIndicator();
 		EPackage sub = metamodel.getESubpackages().get(0);
 		Resource resource = new FragmentFakingEcoreResource(URI.createURI(sub.getNsURI()), indicator);
@@ -65,7 +66,7 @@ public class FragmentFakingEcoreResourceTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testFakedURIs_02() {
+	@Test public void testFakedURIs_02() {
 		ResourceSaveIndicator indicator = new ResourceSaveIndicator();
 		EPackage sub = metamodel.getESubpackages().get(0);
 		Resource resource = new FragmentFakingEcoreResource(URI.createURI(sub.getNsURI()), indicator);
@@ -89,7 +90,7 @@ public class FragmentFakingEcoreResourceTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertNotNull(metamodel);
 		assertTrue(metamodel.getEClassifiers().isEmpty());
 		assertFalse(metamodel.getESubpackages().isEmpty());

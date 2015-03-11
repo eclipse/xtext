@@ -6,6 +6,7 @@
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -15,11 +16,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.DataConverter;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.EObjectDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
@@ -38,7 +42,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 */
 	public static BuilderStateFactory init() {
 		try {
-			BuilderStateFactory theBuilderStateFactory = (BuilderStateFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/builderstate/1.0"); 
+			BuilderStateFactory theBuilderStateFactory = (BuilderStateFactory)EPackage.Registry.INSTANCE.getEFactory(BuilderStatePackage.eNS_URI);
 			if (theBuilderStateFactory != null) {
 				return theBuilderStateFactory;
 			}
@@ -68,9 +72,9 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case BuilderStatePackage.RESOURCE_DESCRIPTION: return (EObject)createResourceDescription();
-			case BuilderStatePackage.EOBJECT_DESCRIPTION: return (EObject)createEObjectDescription();
+			case BuilderStatePackage.EOBJECT_DESCRIPTION: return createEObjectDescription();
 			case BuilderStatePackage.USER_DATA_ENTRY: return (EObject)createUserDataEntry();
-			case BuilderStatePackage.REFERENCE_DESCRIPTION: return (EObject)createReferenceDescription();
+			case BuilderStatePackage.REFERENCE_DESCRIPTION: return createReferenceDescription();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,7 +133,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IEObjectDescription createEObjectDescription() {
+	public EObjectDescription createEObjectDescription() {
 		EObjectDescriptionImpl eObjectDescription = new EObjectDescriptionImpl();
 		return eObjectDescription;
 	}
@@ -149,7 +153,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IReferenceDescription createReferenceDescription() {
+	public ReferenceDescription createReferenceDescription() {
 		ReferenceDescriptionImpl referenceDescription = new ReferenceDescriptionImpl();
 		return referenceDescription;
 	}
@@ -214,6 +218,43 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 		return packed; 
 	}
 
+	private static final DataConverter<QualifiedName> QUALIFIED_NAME_DATA_CONVERTER =
+		new DataConverter<QualifiedName>() {
+			@Override
+			public QualifiedName read(EObjectInputStream eObjectInputStream) throws IOException {
+				return QualifiedName.createFromStream(eObjectInputStream);
+			}
+
+			@Override
+			protected void doWrite(EObjectOutputStream eObjectOutputStream, QualifiedName value) throws IOException {
+				value.writeToStream(eObjectOutputStream);
+			}
+		};
+
+	private static final DataConverter<URI> URI_DATA_CONVERTER =
+		new DataConverter<URI>() {
+			@Override
+			public URI read(EObjectInputStream eObjectInputStream) throws IOException {
+				return eObjectInputStream.readURI();
+			}
+
+			@Override
+			protected void doWrite(EObjectOutputStream eObjectOutputStream, URI value) throws IOException {
+				eObjectOutputStream.writeURI(value);
+			}
+		};
+
+	@Override
+	public DataConverter<?> create(EDataType eDataType) {
+		if (eDataType == BuilderStatePackage.Literals.QUALIFIED_NAME) {
+			return QUALIFIED_NAME_DATA_CONVERTER;
+		} else if (eDataType == BuilderStatePackage.Literals.EURI) {
+			return URI_DATA_CONVERTER;
+		} else {
+			return super.create(eDataType);
+		}
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,8 +267,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
+	 * @generated NOT
 	 */
 	@Deprecated
 	public static BuilderStatePackage getPackage() {

@@ -52,9 +52,9 @@ public class SequenceFeeder {
 		@Inject
 		protected IValueSerializer valueSerializer;
 
-		public SequenceFeeder create(EObject semanitcObject, INodesForEObjectProvider nodes,
+		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceFeeder(this, semanitcObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+			return new SequenceFeeder(this, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 	}
 
@@ -70,13 +70,13 @@ public class SequenceFeeder {
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
-	protected SequenceFeeder(Provider provider, EObject semanitcObject, INodesForEObjectProvider nodes,
+	protected SequenceFeeder(Provider provider, EObject semanticObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
-		if (semanitcObject == null || nodes == null || sequenceAcceptor == null)
+		if (semanticObject == null || nodes == null || sequenceAcceptor == null)
 			throw new NullPointerException();
 		this.provider = provider;
-		this.semanticObject = semanitcObject;
+		this.semanticObject = semanticObject;
 		this.nodes = nodes;
 		this.masterSequencer = masterSequencer;
 		this.sequenceAcceptor = sequenceAcceptor;
@@ -301,12 +301,12 @@ public class SequenceFeeder {
 		}
 	}
 
-	// TODO: test boolean assignments with terminal- and datatype rules.
 	protected void acceptKeyword(Assignment ass, Keyword keyword, Object value, String token, int index, ILeafNode node) {
-		if (GrammarUtil.isBooleanAssignment(ass))
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, Boolean.TRUE.equals(value), index, node);
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			sequenceAcceptor.acceptAssignedCrossRefKeyword(keyword, token, (EObject) value, index, node);
 		else
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value.toString(), index, node);
+			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	protected void acceptRuleCall(RuleCall rc, Object value, String token, int index, INode node) {
@@ -357,11 +357,12 @@ public class SequenceFeeder {
 	}
 
 	protected void assertValue(EStructuralFeature feature, Object value) {
-		if (!feature.getEType().isInstance(value)) {
-			String valueType = value == null ? "null" : value.getClass().getSimpleName();
+		if (value != null && !feature.getEType().isInstance(value)) {
+			String valueType = value.getClass().getSimpleName();
 			String featureName = feature.eClass().getName() + "." + feature.getName();
-			throw new RuntimeException("The value of type '" + valueType + "' can not be assigned to feature "
-					+ featureName + " of type  '" + feature.getEType().getName() + "'.");
+			String msg = "The value of type '" + valueType + "' can not be assigned to feature " + featureName
+					+ " of type  '" + feature.getEType().getName() + "'.";
+			throw new RuntimeException(msg);
 		}
 	}
 
@@ -439,18 +440,24 @@ public class SequenceFeeder {
 	}
 
 	protected String getToken(Keyword keyword, Object value, ILeafNode node) {
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
+					errorAcceptor);
 		return provider.keywordSerializer.serializeAssignedKeyword(semanticObject, keyword, value, node, errorAcceptor);
 	}
 
 	protected String getToken(RuleCall rc, Object value, INode node) {
 		CrossReference crossRef = GrammarUtil.containingCrossReference(rc);
+		Assignment assignment = GrammarUtil.containingAssignment(rc);
 		if (crossRef != null)
 			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
 					errorAcceptor);
-		else if (GrammarUtil.isEObjectRuleCall(rc))
+		else if (GrammarUtil.isEObjectRuleCall(rc) || GrammarUtil.isBooleanAssignment(assignment))
 			return null;
 		else if (GrammarUtil.isEnumRuleCall(rc))
-			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node, errorAcceptor);
+			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node,
+					errorAcceptor);
 		else
 			return provider.valueSerializer.serializeAssignedValue(semanticObject, rc, value, node, errorAcceptor);
 	}

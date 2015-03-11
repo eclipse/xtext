@@ -13,9 +13,9 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit.validation.AssertableDiagnostics.DiagnosticPredicate;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.DiagnosticChainAcceptor;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider.ConcreteSyntaxFeatureDiagnostic;
 
@@ -48,6 +48,7 @@ public abstract class AbstractConcreteSyntaxValidationTest extends AbstractXtext
 					+ constraint + "]";
 		}
 
+		@Override
 		public boolean apply(Diagnostic input) {
 			if (input instanceof ConcreteSyntaxFeatureDiagnostic) {
 				ConcreteSyntaxFeatureDiagnostic s = (ConcreteSyntaxFeatureDiagnostic) input;

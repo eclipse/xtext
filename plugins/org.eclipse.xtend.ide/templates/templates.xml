@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<templates>
+	<template 
+    name="main" 
+    description="main method" 
+    id="main"
+      context="org.eclipse.xtend.core.Xtend.Member" 
+      enabled="true"
+      autoinsert="false">def static void main(String[] args) {
+	${cursor}
+}
+</template> 
+</templates>

@@ -80,6 +80,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 
 	protected String getInvalidCharactersMessage(String value, Set<Character> invalidChars) {
 		String chars = Joiner.on(", ").join(Iterables.transform(invalidChars, new Function<Character, String>() {
+			@Override
 			public String apply(Character from) {
 				return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
 			}
@@ -104,6 +105,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 		return result;
 	}
 	
+	@Override
 	public String toValue(String string, INode node) {
 		if (string == null)
 			return null;

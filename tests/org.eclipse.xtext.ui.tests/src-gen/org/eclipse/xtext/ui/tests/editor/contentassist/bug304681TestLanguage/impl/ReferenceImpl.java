@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl;
 
@@ -21,13 +18,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Ref
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#isMany <em>Many</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getShortDescription <em>Short Description</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getLongDescription <em>Long Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

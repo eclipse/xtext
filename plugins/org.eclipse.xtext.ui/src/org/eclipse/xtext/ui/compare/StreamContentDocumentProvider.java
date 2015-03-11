@@ -152,7 +152,10 @@ public class StreamContentDocumentProvider extends AbstractDocumentProvider {
 		String encoding = ResourcesPlugin.getEncoding();
 		if (element instanceof IEncodedStreamContentAccessor) {
 			try {
-				encoding = ((IEncodedStreamContentAccessor) element).getCharset();
+				String streamEncoding = ((IEncodedStreamContentAccessor) element).getCharset();
+				if (streamEncoding != null) {
+					encoding = streamEncoding;
+				}
 			} catch (CoreException exception) {
 			}
 		}

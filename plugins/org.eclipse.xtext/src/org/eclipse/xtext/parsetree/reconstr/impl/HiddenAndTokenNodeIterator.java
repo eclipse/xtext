@@ -61,16 +61,19 @@ public class HiddenAndTokenNodeIterator implements Iterator<INode> {
 		return nextNodes.poll();
 	}
 
+	@Override
 	public boolean hasNext() {
 		return next != null;
 	}
 
+	@Override
 	public INode next() {
 		INode result = next;
 		next = findNext();
 		return result;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

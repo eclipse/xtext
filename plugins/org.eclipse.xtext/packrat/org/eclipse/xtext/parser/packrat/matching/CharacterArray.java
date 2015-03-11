@@ -22,6 +22,7 @@ public class CharacterArray implements ICharacterClass {
 		Arrays.sort(this.characters);
 	}
 	
+	@Override
 	public boolean matches(char candidate) {
 		return candidate >= characters[0] && candidate <= characters[characters.length -1 ] &&
 			Arrays.binarySearch(characters, candidate) >= 0;

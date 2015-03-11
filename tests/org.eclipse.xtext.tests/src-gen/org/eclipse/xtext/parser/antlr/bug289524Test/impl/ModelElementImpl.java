@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug289524Test.impl;
 
@@ -30,11 +27,11 @@ import org.eclipse.xtext.parser.antlr.bug289524Test.ModelElement;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524Test.impl.ModelElementImpl#getContainments <em>Containments</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524Test.impl.ModelElementImpl#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

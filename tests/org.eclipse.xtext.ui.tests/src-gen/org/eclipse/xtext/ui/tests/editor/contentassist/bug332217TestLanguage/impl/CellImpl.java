@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl;
 
@@ -26,6 +23,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Vie
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.CellImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.CellImpl#getText <em>Text</em>}</li>
@@ -34,7 +32,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Vie
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.CellImpl#getAction <em>Action</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.CellImpl#getAccessory <em>Accessory</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

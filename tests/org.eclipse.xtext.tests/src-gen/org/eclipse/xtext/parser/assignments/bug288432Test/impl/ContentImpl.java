@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug288432Test.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.Content;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Content</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

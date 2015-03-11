@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class AssignmentsTestLanguageFactoryImpl extends EFactoryImpl implements 
   {
     try
     {
-      AssignmentsTestLanguageFactory theAssignmentsTestLanguageFactory = (AssignmentsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest"); 
+      AssignmentsTestLanguageFactory theAssignmentsTestLanguageFactory = (AssignmentsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(AssignmentsTestLanguagePackage.eNS_URI);
       if (theAssignmentsTestLanguageFactory != null)
       {
         return theAssignmentsTestLanguageFactory;

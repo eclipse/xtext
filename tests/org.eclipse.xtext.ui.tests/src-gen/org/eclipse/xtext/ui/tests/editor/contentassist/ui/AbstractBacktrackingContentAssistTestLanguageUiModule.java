@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractBacktrackingContentAssistTestLanguageUiModule extends DefaultUiModule {
+public abstract class AbstractBacktrackingContentAssistTestLanguageUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractBacktrackingContentAssistTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

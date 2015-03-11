@@ -51,6 +51,7 @@ public class EmfFormatter {
 						Collections.singleton(ignoredFeatures[0]) ) :
 			Collections.<EStructuralFeature>emptySet();
 		return objToStr(obj, new Predicate<EStructuralFeature>() {
+			@Override
 			public boolean apply(EStructuralFeature input) {
 				return ignoreUs.contains(input);
 			}
@@ -193,11 +194,6 @@ public class EmfFormatter {
 			buf.append(r.getURI().toString()).append("#").append(r.getURIFragment(target));
 	}
 
-	/**
-	 * @param firstSetGrammarElements
-	 * @param object
-	 * @return
-	 */
 	public static String listToStr(List<? extends EObject> elements) {
 		StringBuffer buff = new StringBuffer();
 		for (int i = 0; i < elements.size(); i++) {
@@ -209,7 +205,9 @@ public class EmfFormatter {
 		return buff.toString();
 	}
 	
-	public static String objPath( EObject obj) {
+	public static String objPath(EObject obj) {
+		if (obj == null)
+			return "null";
 		StringBuffer b = new StringBuffer();
 		objPath(b, obj);
 		return b.toString();

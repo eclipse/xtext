@@ -17,10 +17,13 @@ public class Messages extends NLS {
 	public static String BuildScheduler_BuildOf;
 	public static String BuildScheduler_FailedEtc;
 	public static String BuildScheduler_JobName;
+	public static String BuildScheduler_SingleJobName;
+	public static String BuildScheduler_TwoJobsName;
+	public static String BuildScheduler_ManyJobsName;
 	public static String ProjectOpenedOrClosedListener_FromIndex;
 	public static String ProjectOpenedOrClosedListener_RemovingProject;
 	public static String RegistryBuilderParticipant_InvokingBuildParticipants;
-	public static String ToBeBuiltComputer_CollectingReosurces;
+	public static String ToBeBuiltComputer_CollectingResources;
 	public static String XtextBuilder_Building;
 	public static String XtextBuilder_CollectingResources;
 	static {

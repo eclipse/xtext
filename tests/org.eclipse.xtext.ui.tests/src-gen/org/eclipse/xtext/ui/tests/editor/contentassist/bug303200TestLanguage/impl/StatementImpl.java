@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl;
 
@@ -14,8 +11,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Sta
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

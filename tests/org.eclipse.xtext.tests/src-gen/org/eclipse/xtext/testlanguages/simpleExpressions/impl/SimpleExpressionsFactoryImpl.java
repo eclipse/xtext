@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.impl;
 
@@ -33,7 +30,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
   {
     try
     {
-      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/test/simpleExpressions"); 
+      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleExpressionsPackage.eNS_URI);
       if (theSimpleExpressionsFactory != null)
       {
         return theSimpleExpressionsFactory;

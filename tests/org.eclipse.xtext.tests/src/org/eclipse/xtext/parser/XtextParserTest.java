@@ -14,22 +14,23 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 public class XtextParserTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void test_resolveReturnType() throws Exception {
+	@Test public void test_resolveReturnType() throws Exception {
 		Grammar model = (Grammar) getModel("grammar foo with org.eclipse.xtext.common.Terminals " +
 				"generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
-		assertWithXtend("'x'", "metamodelDeclarations.first().alias", model);
+		assertEquals("x", model.getMetamodelDeclarations().get(0).getAlias());
 	}
 
-	public void testParseCrossRef() throws Exception {
+	@Test public void testParseCrossRef() throws Exception {
 		Grammar model = (Grammar) getModel("grammar foo with org.eclipse.xtext.common.Terminals " +
 				"generate foo 'bar' as boo " +
 				"Model returns boo::Model : 'a' stuff+=Stuff*; " +

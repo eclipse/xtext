@@ -9,22 +9,23 @@ package org.eclipse.xtext.ui.editor.model;
 
 import java.text.CharacterIterator;
 
-import com.ibm.icu.text.BreakIterator;
-
 import org.eclipse.core.runtime.Assert;
+
+import com.ibm.icu.text.BreakIterator;
 
 /**
  * Copied from <code>org.eclipse.jdt.internal.ui.text.JavaWordIterator</code>.
- * @see org.eclipse.jdt.internal.ui.text.JavaWordIterator
  */
+/*
+ * @see org.eclipse.jdt.internal.ui.text.JavaWordIterator
+  */
 public class CommonWordIterator extends BreakIterator {
 
 	/**
-	 * The underlying common break iterator. It returns all breaks, including
-	 * before and after every whitespace.
+	 * The underlying common break iterator. It returns all breaks, including before and after every whitespace.
 	 */
 	private CommonBreakIterator fIterator;
-	
+
 	/** The current index for the stateful operations. */
 	private int fIndex;
 
@@ -32,7 +33,7 @@ public class CommonWordIterator extends BreakIterator {
 	 * Creates a new word iterator.
 	 */
 	public CommonWordIterator(boolean camelCase) {
-		fIterator= createIteratorDelegate(camelCase);
+		fIterator = createIteratorDelegate(camelCase);
 		first();
 	}
 
@@ -45,7 +46,7 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int first() {
-		fIndex= fIterator.first();
+		fIndex = fIterator.first();
 		return fIndex;
 	}
 
@@ -54,7 +55,7 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int last() {
-		fIndex= fIterator.last();
+		fIndex = fIterator.last();
 		return fIndex;
 	}
 
@@ -63,9 +64,9 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int next(int n) {
-		int next= 0;
+		int next = 0;
 		while (--n > 0 && next != DONE) {
-			next= next();
+			next = next();
 		}
 		return next;
 	}
@@ -75,7 +76,7 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int next() {
-		fIndex= following(fIndex);
+		fIndex = following(fIndex);
 		return fIndex;
 	}
 
@@ -84,19 +85,18 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int previous() {
-		fIndex= preceding(fIndex);
+		fIndex = preceding(fIndex);
 		return fIndex;
 	}
-
 
 	/*
 	 * @see java.text.BreakIterator#preceding(int)
 	 */
 	@Override
 	public int preceding(int offset) {
-		int first= fIterator.preceding(offset);
+		int first = fIterator.preceding(offset);
 		if (isWhitespace(first, offset)) {
-			int second= fIterator.preceding(first);
+			int second = fIterator.preceding(first);
 			if (second != DONE && !isDelimiter(second, first))
 				return second;
 		}
@@ -108,9 +108,9 @@ public class CommonWordIterator extends BreakIterator {
 	 */
 	@Override
 	public int following(int offset) {
-		int first= fIterator.following(offset);
+		int first = fIterator.following(offset);
 		if (eatFollowingWhitespace(offset, first)) {
-			int second= fIterator.following(first);
+			int second = fIterator.following(first);
 			if (isWhitespace(first, second))
 				return second;
 		}
@@ -130,11 +130,13 @@ public class CommonWordIterator extends BreakIterator {
 	}
 
 	/**
-	 * Returns <code>true</code> if the given sequence into the underlying text
-	 * represents a delimiter, <code>false</code> otherwise.
-	 *
-	 * @param offset the offset
-	 * @param exclusiveEnd the end offset
+	 * Returns <code>true</code> if the given sequence into the underlying text represents a delimiter,
+	 * <code>false</code> otherwise.
+	 * 
+	 * @param offset
+	 *            the offset
+	 * @param exclusiveEnd
+	 *            the end offset
 	 * @return <code>true</code> if the given range is a delimiter
 	 */
 	protected boolean isDelimiter(int offset, int exclusiveEnd) {
@@ -145,10 +147,10 @@ public class CommonWordIterator extends BreakIterator {
 		Assert.isTrue(exclusiveEnd <= getText().getEndIndex());
 		Assert.isTrue(exclusiveEnd > offset);
 
-		CharSequence seq= fIterator.fText;
+		CharSequence seq = fIterator.fText;
 
 		while (offset < exclusiveEnd) {
-			char ch= seq.charAt(offset);
+			char ch = seq.charAt(offset);
 			if (ch != '\n' && ch != '\r')
 				return false;
 			offset++;
@@ -158,11 +160,13 @@ public class CommonWordIterator extends BreakIterator {
 	}
 
 	/**
-	 * Returns <code>true</code> if the given sequence into the underlying text
-	 * represents whitespace, but not a delimiter, <code>false</code> otherwise.
-	 *
-	 * @param offset the offset
-	 * @param exclusiveEnd the end offset
+	 * Returns <code>true</code> if the given sequence into the underlying text represents whitespace, but not a
+	 * delimiter, <code>false</code> otherwise.
+	 * 
+	 * @param offset
+	 *            the offset
+	 * @param exclusiveEnd
+	 *            the end offset
 	 * @return <code>true</code> if the given range is whitespace
 	 */
 	protected boolean isWhitespace(int offset, int exclusiveEnd) {
@@ -173,10 +177,10 @@ public class CommonWordIterator extends BreakIterator {
 		Assert.isTrue(exclusiveEnd <= getText().getEndIndex());
 		Assert.isTrue(exclusiveEnd > offset);
 
-		CharSequence seq= fIterator.fText;
+		CharSequence seq = fIterator.fText;
 
 		while (offset < exclusiveEnd) {
-			char ch= seq.charAt(offset);
+			char ch = seq.charAt(offset);
 			if (!Character.isWhitespace(ch))
 				return false;
 			if (ch == '\n' || ch == '\r')
@@ -205,7 +209,9 @@ public class CommonWordIterator extends BreakIterator {
 
 	/**
 	 * Sets the text as <code>CharSequence</code>.
-	 * @param newText the new text
+	 * 
+	 * @param newText
+	 *            the new text
 	 */
 	public void setText(CharSequence newText) {
 		fIterator.setText(newText);

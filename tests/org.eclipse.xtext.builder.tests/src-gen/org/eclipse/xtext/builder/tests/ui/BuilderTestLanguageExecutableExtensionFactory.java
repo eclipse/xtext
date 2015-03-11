@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.builder.tests.Activator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class BuilderTestLanguageExecutableExtensionFactory extends AbstractGuice
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.builder.tests.Activator.getInstance().getBundle();
+		return Activator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.builder.tests.Activator.getInstance().getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage");
+		return Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
 	}
 	
 }

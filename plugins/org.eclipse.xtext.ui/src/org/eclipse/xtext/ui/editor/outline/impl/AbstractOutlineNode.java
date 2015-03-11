@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -26,9 +27,11 @@ import com.google.common.collect.Lists;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractOutlineNode implements IOutlineNode {
+public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.Extension {
 
 	private Image image;
+
+	private ImageDescriptor imageDescriptor;
 
 	private Object text;
 
@@ -40,9 +43,24 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 
 	private ITextRegion textRegion;
 
+	/**
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #AbstractOutlineNode(IOutlineNode, ImageDescriptor, Object, boolean)} instead.
+	 */
 	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		this.text = text == null ? "<unnamed>" : text;
 		this.image = image;
+		this.isLeaf = isLeaf;
+		setParent(parent);
+		textRegion = ITextRegion.EMPTY_REGION;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected AbstractOutlineNode(IOutlineNode parent, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
+		this.text = text == null ? "<unnamed>" : text;
+		this.imageDescriptor = imageDescriptor;
 		this.isLeaf = isLeaf;
 		setParent(parent);
 		textRegion = ITextRegion.EMPTY_REGION;
@@ -70,6 +88,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return children.remove(outlineNode);
 	}
 
+	@Override
 	public List<IOutlineNode> getChildren() {
 		if (isLeaf)
 			return Collections.emptyList();
@@ -80,7 +99,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 					getTreeProvider().createChildren(AbstractOutlineNode.this, eObject);
 				}
 			});
-			if(children == null) {
+			if (children == null) {
 				// tree provider did not create any child
 				isLeaf = true;
 				return Collections.emptyList();
@@ -89,14 +108,17 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return Collections.unmodifiableList(children);
 	}
 
+	@Override
 	public IOutlineNode getParent() {
 		return parent;
 	}
 
+	@Override
 	public boolean hasChildren() {
 		return !isLeaf;
 	}
 
+	@Override
 	public Object getText() {
 		return text;
 	}
@@ -105,12 +127,32 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		this.text = text;
 	}
 
+	/**
+	 * @deprecated use {@link #getImageDescriptor()} instead.
+	 */
+	@Override
+	@Deprecated
 	public Image getImage() {
 		return image;
 	}
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public ImageDescriptor getImageDescriptor() {
+		return imageDescriptor;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
+		this.imageDescriptor = imageDescriptor;
 	}
 
 	public IXtextDocument getDocument() {
@@ -131,10 +173,12 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		this.textRegion = textRegion;
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion() {
 		return textRegion;
 	}
 
+	@Override
 	public ITextRegion getSignificantTextRegion() {
 		return textRegion;
 	}
@@ -144,6 +188,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return "[" + getClass().getSimpleName() + "] " + text.toString();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapterType) {
 		return Platform.getAdapterManager().getAdapter(this, adapterType);
@@ -153,12 +198,21 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return null;
 	}
 
+	@Override
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		if (getEObjectURI() != null) {
 			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
+				@Override
 				public T exec(XtextResource state) throws Exception {
-					EObject eObject = state.getEObject(getEObjectURI().fragment());
-					return work.exec(eObject);
+					if (state != null) {
+						EObject eObject;
+						if (state.getResourceSet() != null)
+							eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
+						else
+							eObject = state.getEObject(getEObjectURI().fragment());
+						return work.exec(eObject);
+					}
+					return null;
 				}
 
 			});

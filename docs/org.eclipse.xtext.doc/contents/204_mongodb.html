@@ -1,0 +1,468 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title></title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="mongoDB">DSL for MongoDB</h1>
+
+<p><a href="http://www.mongodb.org">MongoDB</a> is a very popular document-based database management system. In mongoDB, database entries (AKA <em>documents</em>) have fields, which are essentially <em>(key, value)</em> pairs. MongoDB is schema free, i.e. there are no rules, which fields have to be defined and of what type they are. This allows for very flexible and heterogeneous data structures and is a perfect match with JSON. </p>
+
+<p><img src="images/mongobeans_screenshot.png" alt="" /></p>
+
+<p>OTOH, Java is statically typed: The available types, their field names and field types are known and validated at compile time. The JavaBeans convention defines how instances can be manipulated. The standard mongoDB Java driver reflects the fact that mongoDB is schema-free by providing mongo documents as plain Java maps. </p>
+
+<p>With this language you can describe statically typed Java-facades for MongoDB documents without hiding the dynamic nature of them. The language uses a tree-like syntax similar to JSON but lets you add static Java type information.</p>
+
+<h2 id="mongo-solution">Overview</h2>
+
+<p>In this project, we have created a small DSL <em>mongoBeans</em> based on Xtext that allows to create basic entity classes. These are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of the language as a description how to map mongoDB documents to JavaBeans, in analogy to well known object relational mappers.</p>
+
+<p>An example mongoBeans file looks like this: </p>
+
+<pre><code class="language-mongobeans">import java.util.*
+
+package org.musicdb {
+    // a mongo bean
+    Artist {
+        String name    // single valued property
+        Album* albums  // array property
+        // an operation
+        Iterable&lt;Track&gt; getOeuvre() {
+            albums.map[track].flatten
+        }
+    }
+
+    // another mongo bean
+    Album {
+        String title 
+        int year 
+        // inline definition of a mongo bean
+        Track {        
+            String title
+            int seconds
+        }* tracks
+    }
+}
+</code></pre>
+
+<p>For each <em>MongoBean</em> definition in a <em>MongoFile</em> file, we generate a Java class that wraps a <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a>. The class provides statically typed getter and setter methods for all defined <em>MongoProperties</em>. In the implementation of these accessor methods we delegate to the wrapped <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a> and do all the casting and conversion work. For the <code>Artist</code> in the above example, this would look like</p>
+
+<pre><code class="language-java">public class Artist implements IMongoBean {
+
+  private DBObject _dbObject;  
+  ...
+  public String getName() {
+    return (String) _dbObject.get("name");
+  }
+  
+  public void setName(final String name) {
+     _dbObject.put("name", name);
+  }
+  ...
+}
+</code></pre>
+
+<p>By using the generated Java code, the rest of the application can use a type-safe and JavaBeans conformant API to access the data model. In addition, <em>MongoBeans</em> can define <em>MongoOperations</em>, which are translated to Java methods. We can use <em>MongoProperties</em> as well as Java types inside the operations’ bodies. </p>
+
+<p>Client code could then look like this: </p>
+
+<pre><code class="language-java">Artist john = new Artist();
+john.setName("John Coltrane");
+Album album = new Album();
+album.setTitle("A Love Supreme");
+john.getAlbums().add(album);
+Track...  // create some tracks and add them to the album
+ 
+System.out.println(john.getName() + "'s Oeuvre");
+for(Track track: john.getOeuvre()) 
+  System.out.println(track.getTitle());
+
+DBCollection dbCollection = ... // standard mongoDB driver code
+dbCollection.save(john.getDBObject())
+</code></pre>
+
+<h2 id="mongo-running">Running the Example</h2>
+
+<p>In addition to the <a href="201_sevenlang_introduction.html#common-requirements">common requirements</a>, you need the <a href="http://www.mongodb.org/downloads">mongoDB implementation</a> for your platform. We have included the mongoDB Java driver from <a href="http://download.eclipse.org/tools/orbit/downloads/">Eclipse Orbit</a> in the code base. </p>
+
+<p>Import the projects into an Eclipse workspace and run the launch configuration <em>Run (org.eclipse.xtext.mongobeans)</em>. Import the example plug-in into the new workspace and run <code>MusicDBXtendTest</code> as a JUnit test.</p>
+
+<h2 id="mongo-grammar">Grammar</h2>
+
+<p>The complete mongoBeans grammar looks like this: </p>
+
+<pre><code class="language-xtext">grammar org.xtext.mongobeans.MongoBeans with org.eclipse.xtext.xbase.Xbase
+
+generate mongoBeans "http://www.eclipse.org/xtext/mongobeans/MongoBeans"
+
+MongoFile:
+	importSection=XImportSection?
+	elements+=AbstractElement*;
+
+AbstractElement:
+	PackageDeclaration | MongoBean;
+
+PackageDeclaration:
+	'package' name=QualifiedName '{'
+		elements+=AbstractElement*
+	'}';
+
+MongoBean:
+	name=ValidID '{'
+		features+=AbstractFeature*
+	'}';
+
+AbstractFeature:
+	MongoOperation | MongoProperty;
+
+MongoProperty:
+	(type=JvmTypeReference | inlineType=MongoBean) (many?='*')? name=ValidID;
+
+MongoOperation:
+	=&gt;(returnType=JvmTypeReference name=ValidID '(') 
+		(parameters+=FullJvmFormalParameter 
+			(',' parameters+=FullJvmFormalParameter)*
+		)? 
+	')' 
+	body=XBlockExpression;
+</code></pre>
+
+<p>The language inherits from the <code>Xbase</code> grammar in order to allow Xbase expressions and references to Java elements. A <em>MongoFile</em> starts with an import section (see <a href="203_builddsl.html#builddsl-imports">Build DSL</a> for details). The import section is followed by any number of <em>AbstractElements</em>, which can be <em>PackageDeclarations</em> or <em>MongoBeans</em>. Note that as opposed to Java, <em>PackageDeclarations</em> can be nested. <em>MongoBeans</em> define statically typed <em>MongoProperties</em>, which can be single-valued or multi-valued denoted by an <code>*</code> following the type name. The type of a <em>MongoProperty</em> can also be defined inline. <em>MongoBeans</em> can also define <em>MongoOperations</em>. The body of such an operation is an <em>XBlockExpression</em> from Xbase. </p>
+
+<h2 id="mongo-inferrer">Translation to Java</h2>
+
+<p>The JVM model inference is implemented in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.xtend">MongoBeansJvmModelInferrer</a>. As the generated code is quite rich, this is the most complex component of this language.</p>
+
+<p>For each <em>MongoBean</em>, we create a Java class implementing the interface <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">IMongoBean</a>. This interface is the first type of a small runtime library that has to be on the classpath at runtime.</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-mongobeans">package org.musicdb {
+  Artist { ...
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">package org.musicdb;
+...
+public class Artist implements IMongoBean {  ...
+</code></pre>
+  </li>
+</ul>
+
+<p>The inferrer code responsible for this section looks like this: </p>
+
+<pre><code class="language-xtend">@Inject extension JvmTypesBuilder
+@Inject extension IQualifiedNameProvider  
+...
+def dispatch void infer(MongoFile file, 
+                        IJvmDeclaredTypeAcceptor acceptor, 
+                        boolean isPreIndexingPhase) {
+  for(bean : file.eAllOfType(MongoBean)) {
+       acceptor.accept(bean.toClass(bean.fullyQualifiedName))[
+           documentation = bean.documentation
+           superTypes += typeRef(IMongoBean)
+... // calling various methods to create Java members
+    // from the AbstractFeatures
+      ]
+  }
+}
+</code></pre>
+
+<p>First, it finds all elements of type <em>MongoBean</em> in the given <em>MongoFile</em>. For each of these, it creates a new Java class. Then the documentation is copied and the interface <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">IMongoBean</a> is added to the list of supertypes. This will also insert a Java import at the appropriate location. </p>
+
+<p>Each <em>MongoBean</em> wraps a <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a>, which is represented as a Java field with a getter. There are two constructors, one for a given <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a> and one that creates a new one. We have to store the class name in the DB object, if we want to be able to restore JavaBeans from query results.</p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-mongobeans">Artist { ...
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">public class Artist implements IMongoBean { 
+  private DBObject _dbObject;
+      
+  public DBObject getDbObject() {
+    return this._dbObject;
+  }
+    
+  public Artist(final DBObject dbObject) {
+    this._dbObject = dbObject;
+  }
+      
+  public Artist() {
+    _dbObject = new BasicDBObject();
+    _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
+  }
+...
+</code></pre>
+  </li>
+</ul>
+
+<p>The inferrer code does this in two separate methods: One for the property <code>_dbObject</code> and another for the constructors. </p>
+
+<pre><code class="language-xtend">def protected addDbObjectProperty(JvmDeclaredType 
+                                  inferredType, 
+                                  MongoBean bean) {
+  inferredType.members += bean.toField('_dbObject', typeRef(DBObject))
+  inferredType.members += bean.toGetter('dbObject', '_dbObject', typeRef(DBObject))
+}
+
+def protected addConstructors(JvmDeclaredType inferredType, 
+                              MongoBean bean) {
+  inferredType.members += bean.toConstructor [
+    documentation = '''...'''
+    parameters += bean.toParameter("dbObject", typeRef(DBObject))
+    body = '''
+      this._dbObject = dbObject;
+    '''
+  ]
+  inferredType.members += bean.toConstructor [
+    documentation = '''...'''
+    body = '''
+      _dbObject = new com.mongodb.BasicDBObject();
+      _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+    '''
+  ]
+}
+</code></pre>
+
+<p>Next on our list are the getters and setters delegating to the <code>_dbObject</code>. We have to handle four cases: Properties with a type that can be handled by the mongoDB Java-driver directly (most primitive types, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html">Date</a>, etc.), <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">IMongoBean</a> properties, and their respective multi-valued counterparts: </p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-mongobeans">...
+  String name     // primitive property
+  Artist friend   // bean-type property
+  String* aliases // multi-valued primitive property
+  Album* albums   // multi-valued bean-type property
+...
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">...
+  public String getName() {
+    return (String) _dbObject.get("name");
+  }
+  public void setName(final String name) {
+     _dbObject.put("name", name);
+  }
+      
+  public Artist getFriend() {
+    return WrappingUtil.wrapAndCast(
+        (DBObject) _dbObject.get("friend"));
+  }
+  public void setFriend(final Artist friend) {
+     _dbObject.put("friend", WrappingUtil.unwrap(friend));
+  }
+      
+  public List&lt;String&gt; getAliases() {
+    return (List&lt;String&gt;) _dbObject.get("aliases");
+  }
+      
+  private MongoBeanList&lt;Album&gt; _albums;
+  public List&lt;Album&gt; getAlbums() {
+    if(_albums==null)
+      _albums = new MongoBeanList&lt;Album&gt;(_dbObject, "albums");
+    return _albums;
+  }
+...
+</code></pre>
+  </li>
+</ul>
+
+<p>The runtime helper class <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/WrappingUtil.xtend">WrappingUtil</a> does the conversion between <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">IMongoBean</a>. For multi-valued <em>MongoProperties</em> we need getters only. If they have a primitive type, they can be handled by the Java-driver directly. Multi-valued <em>MongoBean</em> typed properties require a special <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/MongoBeanList.xtend">MongoBeanList</a> to automatically wrap/unwrap the elements. </p>
+
+<p>The corresponding inferrer code does not show anything particularly new so we skip most of it for brevity. To detect whether a type is an <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">IMongoBean</a> or a primitive mongoDB type, we use the last helper class <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoTypes.xtend">MongoTypes</a>. The following snippet shows the inference of the getter for multi-valued properties:</p>
+
+<pre><code class="language-xtend">def protected addListAccessor(JvmDeclaredType inferredType,
+                              MongoProperty property) {
+  val propertyType = property.jvmType.asWrapperTypeIfPrimitive
+  if(propertyType.isMongoPrimitiveType) {
+    inferredType.members += property.toMethod(
+      'get' + property.name.toFirstUpper, 
+       typeRef(List, propertyType)
+    ) [
+...
+    ]    
+  } else {
+    inferredType.members += property.toField(
+      '_' + property.name, typeRef(MongoBeanList, propertyType))
+    inferredType.members += property.toMethod(
+      'get' + property.name.toFirstUpper, typeRef(List, propertyType)
+    ) [
+ ...
+</code></pre>
+
+<p>Last but not least, we infer Java methods for <em>MongoOperations</em>. </p>
+
+<ul>
+  <li>
+    <p>DSL:</p>
+
+    <pre><code class="language-mongobeans">...
+  Iterable&lt;Track&gt; getOeuvre() {
+      albums.map[tracks].flatten
+  }
+...
+</code></pre>
+  </li>
+  <li>
+    <p>Java:</p>
+
+    <pre><code class="language-java">...
+  public Iterable&lt;Track&gt; getOeuvre() {
+    // some java code you really don't care about 
+    // but it should just do the right thing
+  }
+...
+</code></pre>
+  </li>
+</ul>
+
+<p>The inferrer code for this particular task is surprisingly simple, as we can directly associate the body of the <em>MongoOperation</em> to the generated Java method. The Xbase compiler will automatically transform that to Java. </p>
+
+<pre><code class="language-xtend">def protected addMethod(JvmDeclaredType inferredType, 
+                        MongoOperation operation) {
+  inferredType.members += operation.toMethod(operation.name, 
+      operation.returnType) [
+    documentation = operation.documentation
+    for(parameter: operation.parameters)
+      parameters += parameter.toParameter(parameter.name, 
+          parameter.parameterType)
+    body = operation.body
+  ]
+}
+</code></pre>
+
+<h2 id="mongo-name-provider">Qualified Name Provider</h2>
+
+<p>By default, the qualified name of an element is calculated by joining all the simple names of its containers with a dot. In our example, the <em>MongoBean</em> <code>Track</code> would consequently be named <code>org.musicdb.Album.track.Track</code>. To ignore properties and beans on the path, we implemented our own <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.xtend">MongoQualifiedNameProvider</a>. </p>
+
+<pre><code class="language-xtend">class MongoQualifiedNameProvider extends XbaseQualifiedNameProvider {
+  
+  def qualifiedName(MongoBean mongoBean) {
+    val packageDeclaration = 
+      mongoBean.getContainerOfType(PackageDeclaration)
+    if(packageDeclaration != null) 
+      packageDeclaration.fullyQualifiedName.append(mongoBean.name)
+    else
+      return QualifiedName.create(mongoBean.name)
+  }
+}
+</code></pre>
+
+<p>To make the framework pick up our customization, we have to add a binding in the respective <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/MongoBeansRuntimeModule.java">Guice module</a>. </p>
+
+<pre><code class="language-java">@Override
+public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider() {
+  return MongoQualifiedNameProvider.class;
+}
+</code></pre>
+
+<p>See <a href="302_configuration.html#dependency-injection">Dependency Injection</a> to learn more about Xtext’s dependency injection.</p>
+
+<h2 id="mongo-validation">Validation</h2>
+
+<p>The Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, we have added the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/validation/MongoBeansValidator.xtend">MongoBeansValidator</a>. It also checks for missing types and avoids name collisions in the generated code with the implicitly defined property <code>dbObject</code>.</p>
+
+<pre><code class="language-xtend">class MongoBeansValidator extends XbaseJavaValidator {
+...
+  @Inject extension MongoTypes mongoTypes
+  
+  @Check def checkMongoProperty(MongoProperty it) {
+    if (name == 'dbObject') 
+      error("Illegal property name 'dbObject'", 
+            ABSTRACT_FEATURE__NAME, 
+            ILLEGAL_PROPERTY_NAME, 
+            '_' + name)
+    if (type != null) {
+      if (!type.isMongoType)
+        error('Only MongoBeans and mappable types are allowed',
+              MONGO_PROPERTY__TYPE, ILLEGAL_TYPE)
+    } else if (inlineType == null) {
+      error('Type must be set', ABSTRACT_FEATURE__NAME, MISSING_TYPE)
+    }
+  }
+...
+</code></pre>
+
+<h2 id="mongo-visual">IDE Enhancements</h2>
+
+<p>The validator from the previous section raises an error <code>ILLEGAL_PROPERTY_NAME</code> when a property is named <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html">DBObject</a>. We have implemented a quick fix to replace the invalid name: </p>
+
+<pre><code class="language-xtend">class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
+
+  @Fix(MongoBeansValidator.ILLEGAL_PROPERTY_NAME)
+  def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
+    acceptor.accept(issue, 
+        'Rename to ' + issue.data.head, 
+        '''Rename property to «issue.data.head».''', 
+        null) [
+      xtextDocument.replace(issue.offset, issue.length, issue.data.head)
+    ]
+  }
+}
+</code></pre>
+
+<p>To improve the language IDE visually, we have tuned the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.xtend">outline</a> a bit</p>
+
+<pre><code class="language-xtend">class MongoBeansOutlineTreeProvider extends DefaultOutlineTreeProvider {
+  // don't show children of operations
+  def _isLeaf(MongoOperation operation) {
+    true
+  }
+  
+  // show inline declared MongoBeans
+  def _createChildren(IOutlineNode parentNode, MongoProperty property) {
+    if(property.inlineType != null)
+      parentNode.createNode(property.inlineType)
+  }
+  
+  def _isLeaf(MongoProperty property) {
+    property.inlineType == null
+  }
+}
+</code></pre>
+
+<p>and the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.xtend">label provider</a> as well:</p>
+
+<pre><code class="language-xtend">class MongoBeansLabelProvider extends XbaseLabelProvider {
+...  
+  override image(Object element) {
+    // icons are stored in the 'icons' folder of this project
+    switch element {
+      MongoBean: 'Letter-B-blue-icon.png'
+      MongoProperty: 'Letter-P-orange-icon.png'
+      MongoOperation: 'Letter-O-red-icon.png'
+      Import: 'imp_obj.gif'
+      PackageDeclaration: 'package_obj.gif'
+      default:
+        super.image(element)
+    }
+  } 
+</code></pre>
+
+<hr />
+
+<p><strong><a href="205_guice.html">Next Chapter: DSL for Guice</a></strong></p>
+
+
+</body>
+</html>

@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeId
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class XbaseTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 	
 }

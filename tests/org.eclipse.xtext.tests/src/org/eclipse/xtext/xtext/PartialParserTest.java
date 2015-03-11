@@ -10,8 +10,9 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -19,20 +20,20 @@ import org.eclipse.xtext.resource.XtextResource;
 public class PartialParserTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
-	public void testEditGroupWithCardinality_01() throws Exception {
+	@Test public void testEditGroupWithCardinality_01() throws Exception {
 		performTest("'bar'");
 	}
 	
-	public void testEditGroupWithCardinality_02() throws Exception {
+	@Test public void testEditGroupWithCardinality_02() throws Exception {
 		performTest("{Test}");
 	}
 	
-	public void testEditGroupWithCardinality_03() throws Exception {
+	@Test public void testEditGroupWithCardinality_03() throws Exception {
 		performTest("'bar' ");
 	}
 	

@@ -36,28 +36,35 @@ public class LayeredTypeResourceDescription implements IResourceDescription {
 		this.additionallyExported = additionallyExported;
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		return delegate.getImportedNames();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return delegate.getReferenceDescriptions();
 	}
 
+	@Override
 	public URI getURI() {
 		return delegate.getURI();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Iterables.concat(delegate.getExportedObjects(), additionallyExported);
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return delegate.isEmpty() && additionallyExported.isEmpty();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
 		Iterable<IEObjectDescription> additionallyFiltered = Iterables.filter(additionallyExported, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
 			}
@@ -65,9 +72,11 @@ public class LayeredTypeResourceDescription implements IResourceDescription {
 		return Iterables.concat(delegate.getExportedObjectsByType(type), additionallyFiltered);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
-		final URI uri = EcoreUtil2.getNormalizedURI(object);
+		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		Iterable<IEObjectDescription> additionallyFiltered = Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
 					return true;
@@ -80,14 +89,17 @@ public class LayeredTypeResourceDescription implements IResourceDescription {
 		return Iterables.concat(delegate.getExportedObjectsByObject(object), additionallyFiltered);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, boolean ignoreCase) {
 		Predicate<IEObjectDescription> predicate = ignoreCase 
 			?	new Predicate<IEObjectDescription>() {
+					@Override
 					public boolean apply(IEObjectDescription input) {
 						return EcoreUtil2.isAssignableFrom(type, input.getEClass());
 					}
 				}
 			:	new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(type, input.getEClass());
 				}

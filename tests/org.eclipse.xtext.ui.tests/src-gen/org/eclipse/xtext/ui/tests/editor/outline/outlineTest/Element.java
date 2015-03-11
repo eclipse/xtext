@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.outline.outlineTest;
 
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element#getXrefs <em>Xrefs</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage#getElement()
  * @model

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 
@@ -24,11 +21,11 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Transition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.TransitionImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.TransitionImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

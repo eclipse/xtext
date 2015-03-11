@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest;
 
@@ -16,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared1 <em>Shared1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared2 <em>Shared2</em>}</li>
@@ -26,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra3 <em>Extra3</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra4 <em>Extra4</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getTwoVersion()
  * @model

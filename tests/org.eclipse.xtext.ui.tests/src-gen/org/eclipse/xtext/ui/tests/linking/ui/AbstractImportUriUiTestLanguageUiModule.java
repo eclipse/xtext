@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.ui.tests.linking.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.linking.ui.ImportUriUiTestLanguageUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractImportUriUiTestLanguageUiModule extends DefaultUiModule {
+public abstract class AbstractImportUriUiTestLanguageUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractImportUriUiTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

@@ -3,9 +3,9 @@
 */
 package org.eclipse.xtext.builder.tests.ui.contentassist;
 
-import org.eclipse.xtext.builder.tests.ui.contentassist.AbstractBuilderTestLanguageProposalProvider;
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
+ * on how to customize the content assistant.
  */
 public class BuilderTestLanguageProposalProvider extends AbstractBuilderTestLanguageProposalProvider {
 

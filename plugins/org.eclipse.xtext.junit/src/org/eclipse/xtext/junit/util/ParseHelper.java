@@ -27,7 +27,10 @@ import com.google.inject.Provider;
  * Some convenience methods for parsing (i.e. testing, etc.) 
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use org.eclipse.xtext.junit4.util.ParseHelper<T extends EObject> instead. This class will be removed in Xtext 2.9.
  */
+@Deprecated
 public class ParseHelper<T extends EObject> {
 	
 	@Inject
@@ -56,6 +59,10 @@ public class ParseHelper<T extends EObject> {
 	public T parse(CharSequence text, ResourceSet resourceSetToUse) throws Exception {
 		return parse(getAsStream(text), computeUnusedUri(resourceSetToUse),null, resourceSetToUse);
 	}
+	
+	public T parse(CharSequence text, URI uriToUse, ResourceSet resourceSetToUse) throws Exception {
+        return parse(getAsStream(text), uriToUse, null, resourceSetToUse);
+    }
 	
 	protected URI computeUnusedUri(ResourceSet resourceSet) {
 		String name = "__synthetic";

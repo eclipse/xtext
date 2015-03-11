@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
 
@@ -13,6 +10,7 @@ package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef#getLeftRes <em>Left Res</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef#getLeftFrag <em>Left Frag</em>}</li>
@@ -20,7 +18,6 @@ package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef#getRightFrag <em>Right Frag</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef#getRightMig <em>Right Mig</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage#getObjectRef()
  * @model

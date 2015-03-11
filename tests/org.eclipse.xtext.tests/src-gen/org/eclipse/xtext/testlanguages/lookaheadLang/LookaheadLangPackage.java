@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.lookaheadLang;
 
@@ -172,13 +169,22 @@ public interface LookaheadLangPackage extends EPackage
   int LOOK_AHEAD1__Y = ALTS_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Z</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_AHEAD1__Z = ALTS_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Look Ahead1</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD1_FEATURE_COUNT = ALTS_FEATURE_COUNT + 1;
+  int LOOK_AHEAD1_FEATURE_COUNT = ALTS_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead2Impl <em>Look Ahead2</em>}' class.
@@ -348,6 +354,17 @@ public interface LookaheadLangPackage extends EPackage
   EReference getLookAhead1_Y();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ <em>Z</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Z</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ()
+   * @see #getLookAhead1()
+   * @generated
+   */
+  EAttribute getLookAhead1_Z();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead2 <em>Look Ahead2</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -496,6 +513,14 @@ public interface LookaheadLangPackage extends EPackage
      * @generated
      */
     EReference LOOK_AHEAD1__Y = eINSTANCE.getLookAhead1_Y();
+
+    /**
+     * The meta object literal for the '<em><b>Z</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOK_AHEAD1__Z = eINSTANCE.getLookAhead1_Z();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead2Impl <em>Look Ahead2</em>}' class.
