@@ -1,4 +1,4 @@
-# Xtext
+# Ytext
 
 Xtext is a framework for development of programming languages and domain specific languages. It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch Eclipse IDE integration. It comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
 
