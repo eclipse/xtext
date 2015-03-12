@@ -3562,4 +3562,87 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B")
 	}
 
+	@Test
+	def void privateFeatureFromSubclass_1() {
+		create('Foo.xtend', '''
+			class Foo {
+				private int x
+				def foo() {
+					val bar = new Bar
+					println(bar.|x)
+				}
+			}
+			class Bar extends Foo {
+			}
+		''')
+		.assertIssueCodes(FEATURE_NOT_VISIBLE)
+		.assertResolutionLabels("Add cast to Foo.")
+	}
+
+	@Test
+	def void privateFeatureFromSubclass_2() {
+		create('Foo.xtend', '''
+			class Foo {
+				private int x
+				def foo() {
+					val bar = new Bar
+					bar.|x = 2
+				}
+			}
+			class Bar extends Foo {
+			}
+		''')
+		.assertIssueCodes(FEATURE_NOT_VISIBLE)
+		.assertResolutionLabels("Add cast to Foo.")
+	}
+
+	@Test
+	def void privateFeatureFromSubclass_3() {
+		create('Foo.xtend', '''
+			class Foo {
+				private int x
+				def foo() {
+					#[new Bar].map[|x]
+				}
+			}
+			class Bar extends Foo {
+			}
+		''')
+		.assertIssueCodes(FEATURE_NOT_VISIBLE)
+		.assertResolutionLabels("Add cast to Foo.")
+	}
+
+	@Test
+	def void privateFeatureFromSubclass_4() {
+		create('Foo.xtend', '''
+			class Foo {
+				private def void exec() {}
+				def foo() {
+					val bar = new Bar
+					bar.|exec
+				}
+			}
+			class Bar extends Foo {
+			}
+		''')
+		.assertIssueCodes(FEATURE_NOT_VISIBLE)
+		.assertResolutionLabels("Add cast to Foo.")
+	}
+
+	@Test
+	def void privateFeatureFromSubclass_5() {
+		create('Foo.xtend', '''
+			class Foo {
+				private def exec() { "" }
+				def foo() {
+					#[new Bar].map[|exec]
+				}
+			}
+			class Bar extends Foo {
+			}
+		''')
+		.assertIssueCodes(FEATURE_NOT_VISIBLE)
+		.assertResolutionLabels("Add cast to Foo.")
+	}
+
 }
