@@ -1072,15 +1072,18 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	void checkNullSafeFeatureCallWithPrimitives(XMemberFeatureCall featureCall) {
-		if (featureCall.isNullSafe() && getActualType(featureCall.getMemberCallTarget()).isPrimitive()) {
-			error("Cannot use null-safe feature call on primitive receiver", featureCall,
-					Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
-		}
-		LightweightTypeReference type = getActualType(featureCall);
-		if (featureCall.isNullSafe() && type.isPrimitive()) {
-			addIssue("Null-safe call of primitive-valued feature " + featureCall.getConcreteSyntaxFeatureName() 
-					+ ", default value "+ getDefaultValue(type) +" will be used", 
-					featureCall, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+		if (featureCall.isNullSafe()) {
+			if (getActualType(featureCall.getMemberCallTarget()).isPrimitive()) {
+				error("Cannot use null-safe feature call on primitive receiver", featureCall,
+						Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+				return;
+			}
+			LightweightTypeReference type = getActualType(featureCall);
+			if (type.isPrimitive() && isValueExpectedRecursive(featureCall)) {
+				addIssue("Null-safe call of primitive-valued feature " + featureCall.getConcreteSyntaxFeatureName() 
+						+ ", default value "+ getDefaultValue(type) +" will be used", 
+						featureCall, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+			}
 		}
 	}
 	
@@ -1310,7 +1313,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.TRIPLE_NOT_EQUALS, ObjectExtensions.class)
 					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
 				if(right instanceof XNullLiteral) {
-					LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+					LightweightTypeReference leftType = getActualType(left);
 					if(leftType != null) {
 						if (leftType.isPrimitive()) { 
 							error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getHumanReadableName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
@@ -1320,7 +1323,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					}
 				}
 				if(left instanceof XNullLiteral) {
-					LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
+					LightweightTypeReference rightType = getActualType(right);
 					if(rightType != null) {
 						if (rightType.isPrimitive()) { 
 							error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
