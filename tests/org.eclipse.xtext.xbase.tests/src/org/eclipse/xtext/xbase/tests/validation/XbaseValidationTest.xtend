@@ -1018,6 +1018,39 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoIssues
 	}
+	
+	@Test def void testBug458742_01() {
+		'''
+			{
+				val list = #["foo"]
+				list?.add("bar")
+				return false
+			}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testBug458742_02() {
+		'''
+			{
+				val list = #["foo"]
+				list?.add("bar")
+			}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE,
+				"Null-safe call of primitive-valued feature")
+	}
+	
+	@Test def void testBug458742_03() {
+		'''
+		    {
+		    	val list = #["foo"]
+		        val b = list?.add("bar")
+		        return b
+		    }
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE,
+				"Null-safe call of primitive-valued feature")
+	}
 
 	@Test def void testRedundantCases_01() {
 		'''

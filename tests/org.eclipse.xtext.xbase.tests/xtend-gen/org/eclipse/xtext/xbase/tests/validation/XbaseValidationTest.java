@@ -2409,6 +2409,79 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testBug458742_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val list = #[\"foo\"]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("list?.add(\"bar\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return false");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug458742_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val list = #[\"foo\"]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("list?.add(\"bar\")");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+        IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
+        "Null-safe call of primitive-valued feature");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug458742_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val list = #[\"foo\"]");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("val b = list?.add(\"bar\")");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("return b");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+        IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
+        "Null-safe call of primitive-valued feature");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testRedundantCases_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
