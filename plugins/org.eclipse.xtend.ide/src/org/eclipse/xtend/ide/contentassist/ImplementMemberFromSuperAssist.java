@@ -36,6 +36,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -81,6 +83,9 @@ public class ImplementMemberFromSuperAssist {
 	
 	@Inject
 	private IImageHelper imageHelper;
+	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
 
 	private static Pattern bodyExpressionPattern = Pattern.compile("\\{\\s*(.*?)\\s*$\\s*\\}", Pattern.MULTILINE
 			| Pattern.DOTALL);
@@ -89,11 +94,12 @@ public class ImplementMemberFromSuperAssist {
 		final JvmDeclaredType inferredType = associations.getInferredType(clazz);
 		if (inferredType == null || !(inferredType instanceof JvmGenericType))
 			return Collections.emptyList();
-		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType);
+		JavaVersion sourceVersion = generatorConfigProvider.get(clazz).getJavaSourceVersion();
+		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType, sourceVersion);
 		List<IResolvedExecutable> result = newArrayList();
 		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, resolvedFeatures.getType());
 		addOperationCandidates(resolvedFeatures, contextualVisibilityHelper, result);
-		if (!clazz.isAnonymous())
+		if (!clazz.isAnonymous() && !((JvmGenericType) inferredType).isInterface())
 			addConstructorCandidates(resolvedFeatures, contextualVisibilityHelper, result);
 		return result;
 	}
@@ -134,11 +140,18 @@ public class ImplementMemberFromSuperAssist {
 	}
 
 	protected boolean isCandidate(LightweightTypeReference type, IResolvedExecutable executable, IVisibilityHelper visibilityHelper) {
-		if (type.getType() != executable.getDeclaration().getDeclaringType() && isVisible(executable, visibilityHelper)) {
+		JvmDeclaredType declaringType = executable.getDeclaration().getDeclaringType();
+		if (type.getType() != declaringType && isVisible(executable, visibilityHelper)) {
 			JvmExecutable rawExecutable = executable.getDeclaration();
 			if (rawExecutable instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) rawExecutable;
-				return !operation.isFinal() && !operation.isStatic();
+				if (operation.isFinal() || operation.isStatic())
+					return false;
+				else if (type.getType() instanceof JvmGenericType && ((JvmGenericType) type.getType()).isInterface())
+					return declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isInterface()
+							&& !operation.isAbstract();
+				else
+					return true;
 			} else {
 				return true;
 			}

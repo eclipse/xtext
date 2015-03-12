@@ -88,8 +88,9 @@ public class QuickfixTestBuilder {
     _preferenceStore.setValue(issueCode, "error");
   }
   
-  public void setTargetVersion(final JavaVersion targetVersion) {
-    this.xbaseBuilderPreferenceAccess.setJavaVersion(null, targetVersion);
+  public void setJavaVersion(final JavaVersion javaVersion) {
+    IProject _project = this._workbenchTestHelper.getProject();
+    this.xbaseBuilderPreferenceAccess.setJavaVersion(_project, javaVersion);
   }
   
   public QuickfixTestBuilder create(final String fileName, final CharSequence model) {

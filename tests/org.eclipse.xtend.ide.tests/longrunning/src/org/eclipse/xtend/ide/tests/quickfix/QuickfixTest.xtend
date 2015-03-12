@@ -3547,7 +3547,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 
 	@Test
 	def void conflictingDefaultMethods() {
-		targetVersion = JavaVersion.JAVA8
+		javaVersion = JavaVersion.JAVA8
 		create('Foo.xtend', '''
 			interface A {
 				def void foo() { }
