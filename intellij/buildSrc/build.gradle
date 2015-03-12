@@ -5,14 +5,11 @@ plugins {
 
 repositories {
 	jcenter()
-	maven {
-		url "https://oss.sonatype.org/content/repositories/snapshots/"
-	}
 }
 
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.8.0-SNAPSHOT'
+	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.8.0'
 	compile 'org.apache.httpcomponents:httpclient:4.4'
 }
