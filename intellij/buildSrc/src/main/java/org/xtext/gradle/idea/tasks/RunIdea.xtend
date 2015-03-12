@@ -1,19 +1,19 @@
 package org.xtext.gradle.idea.tasks
 
+import com.google.common.base.Splitter
 import com.google.common.collect.Lists
 import java.io.File
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.gradle.api.internal.tasks.options.Option
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.JavaExec
 
-/**
- * @see https://github.com/JetBrains/intellij-community/blob/3f7e93e20b7e79ba389adf593b3b59e46a3e01d1/plugins/devkit/src/run/PluginRunConfiguration.java
- */
+@Accessors
 class RunIdea extends JavaExec {
-	@Input @Accessors
-	File sandboxDir
-	@Input @Accessors
-	File ideaHome
+	@Input File sandboxDir
+	@Input File ideaHome
+	@Input List<String> pluginsToRun = Lists.newArrayList
 
 	new() {
 		main = "com.intellij.idea.Main"
@@ -23,8 +23,17 @@ class RunIdea extends JavaExec {
 
 	override getJvmArgs() {
 		val args = Lists.newArrayList(super.jvmArgs)
-		args += '''-Didea.plugins.path=«sandboxDir»'''
 		args += '''-Didea.home.path=«ideaHome»'''
+		if (pluginsToRun.isEmpty) {
+			args += '''-Didea.plugins.path=«sandboxDir»'''
+		} else {
+			args += '''-Dplugin.path=«pluginsToRun.join(',')[new File(sandboxDir, it).path]»'''
+		}
 		args
+	}
+
+	@Option(option="ideaPlugins", description="A comma-separated list of the IDs of the plugins to activate. By default, all plugins in the sandbox are activated")
+	def setPluginsToRun(String pluginsToRun) {
+		this.pluginsToRun = Splitter.on(',').trimResults.omitEmptyStrings.split(pluginsToRun).toList
 	}
 }
