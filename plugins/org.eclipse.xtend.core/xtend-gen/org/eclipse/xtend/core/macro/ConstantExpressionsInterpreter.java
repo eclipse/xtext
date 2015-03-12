@@ -231,22 +231,25 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
             for (final XImportDeclaration imp : _importDeclarations) {
               boolean _isStatic = imp.isStatic();
               if (_isStatic) {
-                String _importedTypeName = imp.getImportedTypeName();
-                final JvmType type = ConstantExpressionsInterpreter.this.findTypeByName(imp, _importedTypeName);
-                boolean _matched = false;
-                if (!_matched) {
-                  if (type instanceof JvmGenericType) {
-                    _matched=true;
-                    ConstantExpressionsInterpreter.this.collectAllVisibleFields(((JvmDeclaredType)type), result);
+                final String importedTypeName = imp.getImportedTypeName();
+                boolean _notEquals_1 = (!Objects.equal(importedTypeName, null));
+                if (_notEquals_1) {
+                  final JvmType type = ConstantExpressionsInterpreter.this.findTypeByName(imp, importedTypeName);
+                  boolean _matched = false;
+                  if (!_matched) {
+                    if (type instanceof JvmGenericType) {
+                      _matched=true;
+                      ConstantExpressionsInterpreter.this.collectAllVisibleFields(((JvmDeclaredType)type), result);
+                    }
                   }
-                }
-                if (!_matched) {
-                  if (type instanceof JvmEnumerationType) {
-                    _matched=true;
-                    EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
-                    for (final JvmEnumerationLiteral feature : _literals) {
-                      String _simpleName = feature.getSimpleName();
-                      result.put(_simpleName, feature);
+                  if (!_matched) {
+                    if (type instanceof JvmEnumerationType) {
+                      _matched=true;
+                      EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
+                      for (final JvmEnumerationLiteral feature : _literals) {
+                        String _simpleName = feature.getSimpleName();
+                        result.put(_simpleName, feature);
+                      }
                     }
                   }
                 }
