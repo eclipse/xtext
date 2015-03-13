@@ -11,6 +11,7 @@ import org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory
 import org.xtext.gradle.idea.tasks.DownloadIdea
 
 import static extension org.xtext.gradle.idea.tasks.GradleExtensions.*
+import org.gradle.plugins.ide.eclipse.EclipsePlugin
 
 class IdeaComponentPlugin implements Plugin<Project> {
 
@@ -34,7 +35,7 @@ class IdeaComponentPlugin implements Plugin<Project> {
 				compileClasspath = compileClasspath.plus(ideaProvided)
 			]
 			
-			project.pluginManager.withPlugin("eclipse") [
+			project.plugins.withType(EclipsePlugin) [
 				project.tasks.getByName("eclipseClasspath").dependsOn(downloadTask)
 				project.extensions.getByType(EclipseModel).classpath => [
 					plusConfigurations.add(ideaProvided)
