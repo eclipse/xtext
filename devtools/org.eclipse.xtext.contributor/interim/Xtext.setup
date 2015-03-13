@@ -96,28 +96,13 @@
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
   </setupTask>
-  <setupTask
-      xsi:type="git:GitCloneTask"
-      id="git.clone.xtext"
-      remoteURI="tmf/org.eclipse.xtext"
-      checkoutBranch="${xtext.git.branch}">
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/InducedChoices">
-      <detail
-          key="inherit">
-        <value>eclipse.git.gerrit.remoteURIs</value>
-      </detail>
-      <detail
-          key="label">
-        <value>Xtext Git or Gerrit Repository</value>
-      </detail>
-      <detail
-          key="target">
-        <value>remoteURI</value>
-      </detail>
-    </annotation>
-    <description>Xtext</description>
-  </setupTask>
+	<setupTask
+			xsi:type="git:GitCloneTask"
+			id="git.clone.xtext"
+			remoteURI="git@github.com:eclipse/xtext.git"
+			checkoutBranch="${xtext.git.branch}">
+		<description>${scope.project.label}</description>
+	</setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
