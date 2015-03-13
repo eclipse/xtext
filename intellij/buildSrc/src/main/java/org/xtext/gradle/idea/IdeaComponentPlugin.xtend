@@ -35,6 +35,7 @@ class IdeaComponentPlugin implements Plugin<Project> {
 			]
 			
 			project.pluginManager.withPlugin("eclipse") [
+				project.tasks.getByName("eclipseClasspath").dependsOn(downloadTask)
 				project.extensions.getByType(EclipseModel).classpath => [
 					plusConfigurations.add(ideaProvided)
 					
