@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 /**
  * A local scope that uses the qualified names of all elements of an {@link org.eclipse.emf.ecore.resource.Resource} and
  * delegates to a global scope.
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  */
 public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
@@ -52,7 +52,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		ISelectable resourceContent = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(), reference), 
+		ISelectable resourceContent = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(), reference),
 				context.eResource(), new Provider<ISelectable>() {
 			@Override
 			public ISelectable get() {
@@ -73,8 +73,8 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
-		}; 
-		Iterable<IEObjectDescription> allDescriptions = Scopes.scopedElementsFor(allContents, qualifiedNameProvider);
+		};
+		Iterable<IEObjectDescription> allDescriptions = Scopes.scopedElementsFor(allContents, getNameProvider());
 		return new MultimapBasedSelectable(allDescriptions);
 	}
 }
