@@ -26,7 +26,7 @@
       option="-Xmx"
       value="2g"
       vm="true"/>
-   <setup:EclipseIniTask
+  <setup:EclipseIniTask
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
@@ -98,18 +98,22 @@
         name="org.eclipse.epp.mpc.feature.group"/>
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
+    <requirement
+      name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
     <repository
         url="${xtext.nightly.composite}"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
+    <repository
+      url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
   </setupTask>
-	<setupTask
-			xsi:type="git:GitCloneTask"
-			id="git.clone.xtext"
-			remoteURI="git@github.com:eclipse/xtext.git"
-			checkoutBranch="${xtext.git.branch}">
-		<description>${scope.project.label}</description>
-	</setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="git.clone.xtext"
+      remoteURI="git@github.com:eclipse/xtext.git"
+      checkoutBranch="${xtext.git.branch}">
+    <description>${scope.project.label}</description>
+  </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
