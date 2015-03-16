@@ -41,7 +41,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	protected class ExpandRuleCalls implements Function<ISerState, Pda<ISerState, RuleCall>> {
 		@Override
 		public Pda<ISerState, RuleCall> apply(ISerState input) {
-			if (GrammarUtil.isUnassignedParserRuleCall(input.getGrammarElement()))
+			if (GrammarUtil.isUnassignedEObjectRuleCall(input.getGrammarElement()))
 				return getContextPDA((((RuleCall) input.getGrammarElement()).getRule()));
 			return null;
 		}
