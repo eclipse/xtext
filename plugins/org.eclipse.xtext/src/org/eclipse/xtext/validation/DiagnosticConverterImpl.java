@@ -181,7 +181,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 				IssueLocation result = new IssueLocation();
 				if (parserNode != null) {
 					String completeText = parserNode.getRootNode().getText();
-					int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
+					int startLine = Strings.countLineBreaks(completeText, 0, castedDiagnostic.getOffset()) + 1;
 					result.lineNumber = startLine;
 				}
 				result.offset = castedDiagnostic.getOffset();

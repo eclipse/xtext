@@ -103,7 +103,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 			if (diff == nested.length) {
 				allNested.remove(i);
 			} else {
-				nested.lineNumber += Strings.countLineBreaks(completeContent.substring(offset, offset + diff));
+				nested.lineNumber += Strings.countLineBreaks(completeContent, offset, offset + diff);
 				nested.offset += diff;
 				nested.length -= diff;
 				nested.leftCompressTrace(completeContent);
@@ -123,7 +123,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 				diff++;
 			}
 			if (diff != 0) {
-				nested.endLineNumber -= Strings.countLineBreaks(completeContent.substring(endOffset - diff + 1, endOffset + 1));
+				nested.endLineNumber -= Strings.countLineBreaks(completeContent, endOffset - diff + 1, endOffset + 1);
 				nested.length -= diff;
 				nested.rightCompressTrace(completeContent);
 			}
