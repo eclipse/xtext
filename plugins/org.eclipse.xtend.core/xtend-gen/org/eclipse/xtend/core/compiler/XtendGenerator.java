@@ -350,12 +350,54 @@ public class XtendGenerator extends JvmModelGenerator {
                 XtendGenerator.this.generateJavaDoc(it, tracedAppendable_1, config);
                 EList<JvmAnnotationReference> _annotations = ((JvmField)it).getAnnotations();
                 XtendGenerator.this.generateAnnotations(_annotations, tracedAppendable_1, true, config);
+                boolean _and = false;
+                boolean _isFinal = ((JvmField)it).isFinal();
+                if (!_isFinal) {
+                  _and = false;
+                } else {
+                  boolean _isStatic = ((JvmField)it).isStatic();
+                  _and = _isStatic;
+                }
+                if (_and) {
+                  tracedAppendable_1.append("final ");
+                }
+                boolean _isStatic_1 = ((JvmField)it).isStatic();
+                if (_isStatic_1) {
+                  tracedAppendable_1.append("static ");
+                }
+                boolean _isTransient = ((JvmField)it).isTransient();
+                if (_isTransient) {
+                  tracedAppendable_1.append("transient ");
+                }
+                boolean _isVolatile = ((JvmField)it).isVolatile();
+                if (_isVolatile) {
+                  tracedAppendable_1.append("volatile ");
+                }
                 JvmTypeReference _type = ((JvmField)it).getType();
                 XtendGenerator.this._errorSafeExtensions.serializeSafely(_type, "Object", tracedAppendable_1);
                 tracedAppendable_1.append(" ");
                 ITreeAppendable _traceSignificant_1 = XtendGenerator.this._treeAppendableUtil.traceSignificant(tracedAppendable_1, it);
                 String _simpleName_1 = ((JvmField)it).getSimpleName();
                 _traceSignificant_1.append(_simpleName_1);
+                boolean _and_1 = false;
+                boolean _isFinal_1 = ((JvmField)it).isFinal();
+                if (!_isFinal_1) {
+                  _and_1 = false;
+                } else {
+                  boolean _isStatic_2 = ((JvmField)it).isStatic();
+                  _and_1 = _isStatic_2;
+                }
+                if (_and_1) {
+                  Object _constantValue = ((JvmField)it).getConstantValue();
+                  boolean _notEquals = (!Objects.equal(_constantValue, null));
+                  if (_notEquals) {
+                    tracedAppendable_1.append(" = ");
+                    Object _constantValue_1 = ((JvmField)it).getConstantValue();
+                    XtendGenerator.this.generateJavaConstant(_constantValue_1, tracedAppendable_1);
+                  } else {
+                    XtendGenerator.this.generateInitialization(((JvmField)it), tracedAppendable_1, config);
+                  }
+                }
                 tracedAppendable_1.append(";");
               } else {
                 XtendGenerator.this.generateMember(it, memberAppendable, config);
@@ -372,6 +414,57 @@ public class XtendGenerator extends JvmModelGenerator {
       }
     };
     IterableExtensions.<JvmGenericType>forEach(_filter, _function_1);
+  }
+  
+  private ITreeAppendable generateJavaConstant(final Object value, final ITreeAppendable appendable) {
+    ITreeAppendable _xifexpression = null;
+    if ((value instanceof Float)) {
+      String _string = ((Float)value).toString();
+      ITreeAppendable _append = appendable.append(_string);
+      _xifexpression = _append.append("f");
+    } else {
+      ITreeAppendable _xifexpression_1 = null;
+      if ((value instanceof Long)) {
+        String _string_1 = ((Long)value).toString();
+        ITreeAppendable _append_1 = appendable.append(_string_1);
+        _xifexpression_1 = _append_1.append("l");
+      } else {
+        ITreeAppendable _xifexpression_2 = null;
+        if ((value instanceof Character)) {
+          char _charValue = ((Character)value).charValue();
+          String _string_2 = Integer.toString(_charValue);
+          _xifexpression_2 = appendable.append(_string_2);
+        } else {
+          ITreeAppendable _xifexpression_3 = null;
+          if ((value instanceof CharSequence)) {
+            ITreeAppendable _append_2 = appendable.append("\"");
+            String _string_3 = ((CharSequence)value).toString();
+            String _doConvertToJavaString = this.doConvertToJavaString(_string_3);
+            ITreeAppendable _append_3 = _append_2.append(_doConvertToJavaString);
+            _xifexpression_3 = _append_3.append("\"");
+          } else {
+            ITreeAppendable _xifexpression_4 = null;
+            boolean _or = false;
+            if ((value instanceof Number)) {
+              _or = true;
+            } else {
+              _or = (value instanceof Boolean);
+            }
+            if (_or) {
+              String _string_4 = value.toString();
+              _xifexpression_4 = appendable.append(_string_4);
+            } else {
+              _xifexpression_4 = appendable.append("null /* ERROR: illegal constant value */");
+            }
+            _xifexpression_3 = _xifexpression_4;
+          }
+          _xifexpression_2 = _xifexpression_3;
+        }
+        _xifexpression_1 = _xifexpression_2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   private boolean needSyntheticThisVariable(final AnonymousClass anonymousClass, final JvmDeclaredType localType) {
@@ -441,14 +534,12 @@ public class XtendGenerator extends JvmModelGenerator {
         _and = _isLocal;
       }
       if (_and) {
-        if ((it instanceof JvmOperation)) {
-          JvmDeclaredType _declaringType_1 = ((JvmOperation)it).getDeclaringType();
-          final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
-          boolean _isAnonymous = declarator.isAnonymous();
-          boolean _not = (!_isAnonymous);
-          if (_not) {
-            return result;
-          }
+        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
+        final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
+        boolean _isAnonymous = declarator.isAnonymous();
+        boolean _not = (!_isAnonymous);
+        if (_not) {
+          return result;
         }
       }
       _xblockexpression = super.generateVisibilityModifier(it, result);
@@ -506,17 +597,28 @@ public class XtendGenerator extends JvmModelGenerator {
                 if (_notEquals_1) {
                   return Boolean.valueOf(true);
                 } else {
-                  final XExpression expression = XtendGenerator.this._iLogicalContainerProvider.getAssociatedExpression(it);
                   boolean _and = false;
-                  boolean _notEquals_2 = (!Objects.equal(expression, null));
-                  if (!_notEquals_2) {
+                  boolean _isFinal = it.isFinal();
+                  if (!_isFinal) {
                     _and = false;
                   } else {
-                    boolean _isGenerateExpressions = config.isGenerateExpressions();
-                    _and = _isGenerateExpressions;
+                    boolean _isStatic = it.isStatic();
+                    _and = _isStatic;
                   }
-                  if (_and) {
-                    return Boolean.valueOf(true);
+                  boolean _not = (!_and);
+                  if (_not) {
+                    final XExpression expression = XtendGenerator.this._iLogicalContainerProvider.getAssociatedExpression(it);
+                    boolean _and_1 = false;
+                    boolean _notEquals_2 = (!Objects.equal(expression, null));
+                    if (!_notEquals_2) {
+                      _and_1 = false;
+                    } else {
+                      boolean _isGenerateExpressions = config.isGenerateExpressions();
+                      _and_1 = _isGenerateExpressions;
+                    }
+                    if (_and_1) {
+                      return Boolean.valueOf(true);
+                    }
                   }
                 }
               }

@@ -111,6 +111,7 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -186,6 +187,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
 	
 	@Inject
 	private IVisibilityHelper visibilityHelper;
@@ -635,6 +639,27 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			JvmType superType = superTypeRef.getType();
 			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
 				error("Attempt to override final class", anonymousClass.getConstructorCall(), XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
+		}
+	}
+	
+	@Check
+	public void checkStaticMembers(AnonymousClass anonymousClass) {
+		for (XtendMember member : anonymousClass.getMembers()) {
+			if (member.isStatic()) {
+				if (member instanceof XtendExecutable) {
+					error("A method of an anonymous class cannot be static.", member, XTEND_MEMBER__MODIFIERS,
+							INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_METHOD);
+				} else if (member instanceof XtendField) {
+					JvmField field = (JvmField) jvmModelAssociations.getPrimaryJvmElement(member);
+					if (!member.isFinal()) {
+						error("A static field of an anonymous class must be final.", member, XTEND_MEMBER__MODIFIERS,
+								INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
+					} else if (!field.isConstant()) {
+						error("A static field of an anonymous class must be initialized with a constant expression.",
+								member, XTEND_FIELD__INITIAL_VALUE, INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
+					}
+				}
+			}
 		}
 	}
 	
