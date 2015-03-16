@@ -41,8 +41,8 @@ public class XtextSyntaxDiagnosticWithRange extends XtextSyntaxDiagnostic {
 	@Override
 	public int getLine() {
 		int startLine = getNode().getTotalStartLine();
-		String text = getNode().getText().substring(0, offset);
-		int result = Strings.countLineBreaks(text) + startLine;
+		String text = getNode().getText();
+		int result = Strings.countLineBreaks(text, 0, offset) + startLine;
 		return result;
 	}
 	
