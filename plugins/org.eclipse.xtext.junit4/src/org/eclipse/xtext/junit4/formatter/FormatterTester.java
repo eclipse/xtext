@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
@@ -50,10 +53,13 @@ public class FormatterTester {
 	private Provider<FormatterTestRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelTokenAccessBuilderProvider;
+	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelBasedRegionAccessBuilderProvider;
 
 	@Inject
 	private ParseHelper<EObject> parseHelper;
+
+	@Inject
+	private Serializer serializer;
 
 	protected void assertAllHiddenRegionsAre(ITextRegionAccess expectation, List<ITextReplacement> actual) {
 		// TODO implement
@@ -74,7 +80,7 @@ public class FormatterTester {
 			assertNoSyntaxErrors(parsed);
 			request.setExceptionHandler(ExceptionAcceptor.THROWING);
 		}
-		request.setTextRegionAccess(nodeModelTokenAccessBuilderProvider.get().withResource(parsed).create());
+		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
 		List<ITextReplacement> format = createFormatter(req).format(request);
@@ -84,7 +90,6 @@ public class FormatterTester {
 		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), applied);
 
 		// TODO: assert formatting a second time only produces identity replacements
-		// TODO: assert formatting with serializer
 		// TODO: assert formatting with undefined whitespace only
 	}
 
@@ -107,7 +112,8 @@ public class FormatterTester {
 		}
 	}
 
-	protected void assertReplacementsAreInRegion(List<ITextReplacement> rep, Collection<ITextRegion> regions, String doc) {
+	protected void assertReplacementsAreInRegion(List<ITextReplacement> rep, Collection<ITextRegion> regions,
+			String doc) {
 		Set<ITextReplacement> invalid = Sets.newHashSet();
 		ALLOWED: for (ITextRegion allowed : regions)
 			for (ITextReplacement r : rep) {
@@ -122,7 +128,36 @@ public class FormatterTester {
 	}
 
 	protected IFormatter2 createFormatter(FormatterTestRequest request) {
+		checkNotNull(formatter, "There is a Guice Binding missing for " + IFormatter2.class.getName());
 		return formatter.get();
+	}
+
+	protected ITextRegionAccess createRegionAccess(XtextResource resource, FormatterTestRequest req) {
+		boolean useSerializer = req.isUseSerializer() && !req.isAllowSyntaxErrors();
+		if (req.isUseNodeModel() && useSerializer) {
+			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
+			ITextRegionAccess serRegions = createRegionAccessViaSerializer(resource);
+			Assert.assertEquals(toString(nmRegions), toString(serRegions));
+			return nmRegions;
+		} else if (req.isUseNodeModel()) {
+			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
+			return nmRegions;
+		} else if (useSerializer) {
+			ITextRegionAccess serRegions = createRegionAccessViaSerializer(resource);
+			return serRegions;
+		} else
+			throw new IllegalStateException("Can't format anything when using neither NodeModel nor Serializer.");
+	}
+
+	protected ITextRegionAccess createRegionAccessViaNodeModel(XtextResource resource) {
+		ITextRegionAccess access = nodeModelBasedRegionAccessBuilderProvider.get().withResource(resource).create();
+		return access;
+	}
+
+	protected ITextRegionAccess createRegionAccessViaSerializer(XtextResource resource) {
+		EObject root = resource.getContents().get(0);
+		ITextRegionAccess regionAccess = serializer.serializeToRegions(root);
+		return regionAccess;
 	}
 
 	protected void fail(CharSequence error, CharSequence document) {
@@ -143,5 +178,9 @@ public class FormatterTester {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected String toString(ITextRegionAccess nmRegions) {
+		return new TextRegionAccessToString().withOrigin((ITextSegment) nmRegions).hideColumnExplanation() + "\n";
 	}
 }
