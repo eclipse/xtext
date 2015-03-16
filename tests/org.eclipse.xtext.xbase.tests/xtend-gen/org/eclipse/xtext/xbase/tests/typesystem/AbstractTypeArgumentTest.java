@@ -229,6 +229,126 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testBug461923_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_03() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }", "Object");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_04() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String", "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_05() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? extends String", "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_06() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }", "Object");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? super String", "Object");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_07() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_08() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? extends String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_09() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }", "Object");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? super String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testBug461923_10() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    Iterator<XExpression> _and_1 = this.and(_and, "String");
+    this.done(_and_1);
+  }
+  
+  @Test
+  public void testBug461923_11() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? extends String");
+    Iterator<XExpression> _and_1 = this.and(_and, "? extends String");
+    this.done(_and_1);
+  }
+  
+  @Test
+  public void testBug461923_12() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }", "Object");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "? super String");
+    Iterator<XExpression> _and_1 = this.and(_and, "? super String");
+    this.done(_and_1);
+  }
+  
+  @Test
+  public void testBug461923_13() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<String> it = null new java.util.ArrayList().addAll(it) }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_14() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<? extends String> it = null new java.util.ArrayList().addAll(it) }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_15() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<? super String> it = null new java.util.ArrayList().addAll(it) }", "Object");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_16() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.List<String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_17() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.List<? extends String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testBug461923_18() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.List<? super String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }", "Object");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testRawType_01() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set set = newHashSet() set }", "");
     this.done(_bindTypeArgumentsTo);
