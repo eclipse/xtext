@@ -112,6 +112,78 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		]
 	}
 	
+	@Test def void testBug461923_01() throws Exception {
+		"{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_02() throws Exception {
+		"{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_03() throws Exception {
+		"{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it).build }".bindTypeArgumentsTo("Object").done
+	}
+	
+	@Test def void testBug461923_04() throws Exception {
+		"{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }".bindTypeArgumentsTo("String").and("String", "String").done
+	}
+	
+	@Test def void testBug461923_05() throws Exception {
+		"{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }".bindTypeArgumentsTo("String").and("? extends String", "String").done
+	}
+	
+	@Test def void testBug461923_06() throws Exception {
+		"{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.map[it]).build }".bindTypeArgumentsTo("Object").and("? super String", "Object").done
+	}
+	
+	@Test def void testBug461923_07() throws Exception {
+		"{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }".bindTypeArgumentsTo("String").and("String").done
+	}
+	
+	@Test def void testBug461923_08() throws Exception {
+		"{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }".bindTypeArgumentsTo("String").and("? extends String").done
+	}
+	
+	@Test def void testBug461923_09() throws Exception {
+		"{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).build }".bindTypeArgumentsTo("Object").and("? super String").done
+	}
+	
+	@Test def void testBug461923_10() throws Exception {
+		"{ val Iterable<String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }".bindTypeArgumentsTo("String").and("String").and("String").done
+	}
+	
+	@Test def void testBug461923_11() throws Exception {
+		"{ val Iterable<? extends String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }".bindTypeArgumentsTo("String").and("? extends String").and("? extends String").done
+	}
+	
+	@Test def void testBug461923_12() throws Exception {
+		"{ val Iterable<? super String> it = null com.google.common.collect.ImmutableList.builder.addAll(it.filter[true]).addAll(it.filter[true]).build }".bindTypeArgumentsTo("Object").and("? super String").and("? super String").done
+	}
+	
+	@Test def void testBug461923_13() throws Exception {
+		"{ val java.util.Set<String> it = null new java.util.ArrayList().addAll(it) }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_14() throws Exception {
+		"{ val java.util.Set<? extends String> it = null new java.util.ArrayList().addAll(it) }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_15() throws Exception {
+		"{ val java.util.Set<? super String> it = null new java.util.ArrayList().addAll(it) }".bindTypeArgumentsTo("Object").done
+	}
+	
+	@Test def void testBug461923_16() throws Exception {
+		"{ val java.util.List<String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_17() throws Exception {
+		"{ val java.util.List<? extends String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testBug461923_18() throws Exception {
+		"{ val java.util.List<? super String> it = null new java.util.ArrayList().addAll(it.subList(1,1)) }".bindTypeArgumentsTo("Object").done
+	}
+	
 	@Test def void testRawType_01() throws Exception {
 		"{ val java.util.Set set = newHashSet() set }".bindTypeArgumentsTo("").done
 	}
