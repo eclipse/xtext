@@ -8,13 +8,15 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal
 
 import com.google.inject.Inject
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.serializer.impl.Serializer
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,6 +29,7 @@ import org.junit.runner.RunWith
 class RegionAccessTest {
 	@Inject ParseHelper<Root> parseHelper
 	@Inject ValidationTestHelper validationTestHelper
+	@Inject extension Serializer serializer
 
 	@Test def void testSimple() {
 		'''
@@ -479,12 +482,20 @@ class RegionAccessTest {
 			18 0 Hidden
 		'''
 	}
-
+	
 	private def ===(CharSequence file, CharSequence expectation) {
+		val exp = expectation.toString
 		val obj = parseHelper.parse(file)
 		validationTestHelper.assertNoErrors(obj)
-		val access = new NodeModelBasedRegionAccess.Builder().withResource(obj.eResource as XtextResource).create
-		val actual = new TokenAccessToString().withOrigin(access).hideColumnExplanation().toString
-		Assert.assertEquals(expectation.toString, actual + "\n")
+		val access1 = obj.createFromNodeModel
+		val access2 = obj.serializeToRegions
+		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access1).hideColumnExplanation() + "\n")
+		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access2).hideColumnExplanation() + "\n")
 	}
+
+	private def createFromNodeModel(EObject obj) {
+		new NodeModelBasedRegionAccess.Builder().withResource(obj.eResource as XtextResource).create
+	}
+
 }
+

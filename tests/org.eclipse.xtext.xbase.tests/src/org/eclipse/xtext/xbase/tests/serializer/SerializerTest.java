@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -53,7 +52,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("[| \"value\"] instanceof String", string);
+		assertEquals("[|\"value\"] instanceof String", string);
 	}
 	
 	@Test public void testSerialize_02() throws IOException {
@@ -73,7 +72,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("(if(false)" + Strings.newLine() + indent.getIndentString() + "\"value\") instanceof String", string);
+		assertEquals("(if(false) \"value\") instanceof String", string);
 	}
 
 }
