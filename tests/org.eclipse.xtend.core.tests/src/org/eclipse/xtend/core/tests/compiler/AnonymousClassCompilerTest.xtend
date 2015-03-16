@@ -2196,4 +2196,82 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def void testFinalField_01() {
+		'''
+			class Foo {
+				def void foo() {
+					val y = 1
+					new Object {
+						val x = y
+						def void bar() {
+							println(x)
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    abstract class __Foo_1 {
+			      int x;
+			      
+			      public abstract void bar();
+			    }
+			    
+			    final int y = 1;
+			    new __Foo_1() {
+			      {
+			        x = y;
+			      }
+			      public void bar() {
+			        InputOutput.<Integer>println(Integer.valueOf(this.x));
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testFinalField_02() {
+		'''
+			class Foo {
+				def void foo() {
+					val y = 1
+					new Object {
+						static val x = y
+						def void bar() {
+							println(x)
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    abstract class __Foo_1 {
+			      final static int x = 1;
+			      
+			      public abstract void bar();
+			    }
+			    
+			    final int y = 1;
+			    new __Foo_1() {
+			      public void bar() {
+			        InputOutput.<Integer>println(Integer.valueOf(__Foo_1.x));
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
 }
