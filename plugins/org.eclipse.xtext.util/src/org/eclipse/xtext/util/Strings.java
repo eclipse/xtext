@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -431,17 +432,29 @@ public class Strings {
 
 	/**
 	 * Counts the number of line breaks. Assumes {@code '\r'}, {@code '\n'} or {@code '\r\n'} to be valid line breaks.
+	 * 
+	 * This follows the semantics of the {@link LineNumberReader}.
+	 * 
 	 * @since 2.3
 	 */
 	public static int countLineBreaks(CharSequence text) {
+		return countLineBreaks(text, 0, text.length());
+	}
+	
+	/**
+	 * Counts the number of line breaks. Assumes {@code '\r'}, {@code '\n'} or {@code '\r\n'} to be valid line breaks.
+	 * 
+	 * This follows the semantics of the {@link LineNumberReader}.
+	 * 
+	 * @since 2.8
+	 */
+	public static int countLineBreaks(CharSequence text, int startInclusive, int endExclusive) {
 		int result = 0;
-		char ch;
-		int length= text.length();
-		for (int i= 0; i < length; i++) {
-			ch= text.charAt(i);
+		for (int i = startInclusive; i < endExclusive; i++) {
+			char ch= text.charAt(i);
 			if (ch == '\r') {
 				result++;
-				if (i + 1 < length) {
+				if (i + 1 < endExclusive) {
 					if (text.charAt(i + 1) == '\n') {
 						i++;
 					}
@@ -475,19 +488,34 @@ public class Strings {
 		return s;
 	}
 	
-
 	/**
-	 * Counts the number of lines where {@link #separator} is assumed to be a valid line break.
+	 * Counts the number of lines where {@link #separator} is assumed to be the only valid line break sequence.
+	 * A string without any line separators returns {@code 0} as the number of lines.
 	 */
 	public static int countLines(String text) {
 		return countLines(text, separator);
 	}
 
+	/**
+	 * Counts the number of lines where the given separator sequence is the only valid line break sequence.
+	 * A string without any line separators returns {@code 0} as the number of lines.
+	 */
 	public static int countLines(String text, char[] separator) {
+		return countLines(text, separator, 0, text.length());
+	}
+
+	/**
+	 * Counts the number of lines between {@code startInclusive} and {@code endExclusive}
+	 * where the given separator sequence is the only valid line break sequence.
+	 * A string without any line separators in that range returns {@code 0} as the number of lines.
+	 * 
+	 * @since 2.8
+	 */
+	public static int countLines(String text, char[] separator, int startInclusive, int endExclusive) {
 		int line = 0;
 		if (separator.length == 1) {
 			char c = separator[0];
-			for (int i = 0; i < text.length(); i++) {
+			for (int i = startInclusive; i < endExclusive; i++) {
 				if (text.charAt(i) == c) {
 					line++;
 				}
@@ -495,8 +523,8 @@ public class Strings {
 		} else if (separator.length == 2) {
 			char c1 = separator[0];
 			char c2 = separator[1];
-			for (int i = 0; i < text.length(); i++) {
-				if (text.charAt(i) == c1 && text.length() > i + 1 && text.charAt(i + 1) == c2) {
+			for (int i = startInclusive; i < endExclusive; i++) {
+				if (text.charAt(i) == c1 && endExclusive > i + 1 && text.charAt(i + 1) == c2) {
 					line++;
 					i++;
 				} else if (text.charAt(i) == c2) {
@@ -509,6 +537,7 @@ public class Strings {
 		return line;
 	}
 	
+	// TODO is it worthwhile to deprecate this method and fix the typo 'Whitespace'?
 	public static String getLeadingWhiteSpace(String original) {
 		for(int i=0; i < original.length(); i++) {
 			if (!Character.isWhitespace(original.charAt(i))) {

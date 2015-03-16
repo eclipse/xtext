@@ -22,13 +22,18 @@ class DefaultTaskParser implements ITaskParser {
 		val taskTagsByName = Maps.uniqueIndex(taskTags)[name.toLowerCase]
 		val matcher = taskTags.toPattern.matcher(source)
 		val tasks = newArrayList
+		// keep track of the offset and line numbers to avoid unnecessary line counting from start
+		var prevLine = 1;
+		var prevOffset = 0;
 		while (matcher.find) {
-			tasks += new Task => [
-				tag = taskTagsByName.get(matcher.group(2).toLowerCase)
-				description = matcher.group(3)
-				offset = matcher.start(2)
-				lineNumber = Strings.countLineBreaks(source.substring(0, offset)) + 1
-			]
+			val task = new Task()
+			task.tag = taskTagsByName.get(matcher.group(2).toLowerCase)
+			task.description = matcher.group(3)
+			task.offset = matcher.start(2)
+			task.lineNumber = Strings.countLineBreaks(source, prevOffset, task.offset) + prevLine
+			prevLine = task.lineNumber
+			prevOffset = task.offset
+			tasks += task
 		}
 		tasks
 	}
