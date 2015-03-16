@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TokenAccessToString {
+public class TextRegionAccessToString {
 
 	private static final int TITLE_WIDTH = 9;
 	private static final String SEMANTIC_PADDED = Strings.padEnd("Semantic", TITLE_WIDTH, ' ');
@@ -55,33 +55,6 @@ public class TokenAccessToString {
 	private boolean hightlightOrigin = false;
 
 	private ITextSegment origin;
-
-	public TokenAccessToString hideColumnExplanation() {
-		this.hideColumnExplanation = true;
-		return this;
-	}
-
-	public TokenAccessToString hightlightOrigin() {
-		this.hightlightOrigin = true;
-		return this;
-	}
-
-	public boolean isHideColumnExplanation() {
-		return hideColumnExplanation;
-	}
-
-	public boolean isHightlightOrigin() {
-		return hightlightOrigin;
-	}
-
-	protected String quote(String string, int maxLength) {
-		if (string == null)
-			return "null";
-		if (string.length() > maxLength)
-			string = string.substring(0, maxLength - 3) + "...";
-		string = string.replace("\n", "\\n").replace("\r", "\\r");
-		return "\"" + string + "\"";
-	}
 
 	protected void collectHiddenRegionsBySemanticObject(List<ITextSegment> regions,
 			Multimap<IHiddenRegion, EObject> leadingHiddens, Multimap<IHiddenRegion, EObject> trailingHiddens,
@@ -119,30 +92,31 @@ public class TokenAccessToString {
 		}
 	}
 
-	protected String toString(Collection<EObject> objs) {
-		List<String> result = Lists.newArrayList();
-		for (EObject obj : objs) {
-			StringBuilder builder = new StringBuilder();
-			EStructuralFeature containingFeature = obj.eContainingFeature();
-			if (containingFeature != null) {
-				builder.append(containingFeature.getName());
-				if (containingFeature.isMany()) {
-					int index = ((List<?>) obj.eContainer().eGet(containingFeature)).indexOf(obj);
-					builder.append("[" + index + "]");
-				}
-				builder.append("=");
-			}
-			builder.append(obj.eClass().getName());
-			EStructuralFeature nameFeature = obj.eClass().getEStructuralFeature("name");
-			if (nameFeature != null) {
-				Object name = obj.eGet(nameFeature);
-				if (name != null)
-					builder.append("'" + name + "'");
-			}
-			result.add(builder.toString());
-		}
-		Collections.sort(result);
-		return Joiner.on(", ").join(result);
+	public TextRegionAccessToString hideColumnExplanation() {
+		this.hideColumnExplanation = true;
+		return this;
+	}
+
+	public TextRegionAccessToString hightlightOrigin() {
+		this.hightlightOrigin = true;
+		return this;
+	}
+
+	public boolean isHideColumnExplanation() {
+		return hideColumnExplanation;
+	}
+
+	public boolean isHightlightOrigin() {
+		return hightlightOrigin;
+	}
+
+	protected String quote(String string, int maxLength) {
+		if (string == null)
+			return "null";
+		if (string.length() > maxLength)
+			string = string.substring(0, maxLength - 3) + "...";
+		string = string.replace("\n", "\\n").replace("\r", "\\r");
+		return "\"" + string + "\"";
 	}
 
 	@Override
@@ -177,6 +151,32 @@ public class TokenAccessToString {
 
 	protected String toString(AbstractRule rule) {
 		return rule == null ? "null" : rule.getName();
+	}
+
+	protected String toString(Collection<EObject> objs) {
+		List<String> result = Lists.newArrayList();
+		for (EObject obj : objs) {
+			StringBuilder builder = new StringBuilder();
+			EStructuralFeature containingFeature = obj.eContainingFeature();
+			if (containingFeature != null) {
+				builder.append(containingFeature.getName());
+				if (containingFeature.isMany()) {
+					int index = ((List<?>) obj.eContainer().eGet(containingFeature)).indexOf(obj);
+					builder.append("[" + index + "]");
+				}
+				builder.append("=");
+			}
+			builder.append(obj.eClass().getName());
+			EStructuralFeature nameFeature = obj.eClass().getEStructuralFeature("name");
+			if (nameFeature != null) {
+				Object name = obj.eGet(nameFeature);
+				if (name != null)
+					builder.append("'" + name + "'");
+			}
+			result.add(builder.toString());
+		}
+		Collections.sort(result);
+		return Joiner.on(", ").join(result);
 	}
 
 	protected String toString(EObject ele) {
@@ -270,7 +270,13 @@ public class TokenAccessToString {
 		return result;
 	}
 
-	public TokenAccessToString withOrigin(ITextSegment origin) {
+	public TextRegionAccessToString withRegionAccess(ITextRegionAccess access) {
+		this.origin = (ITextSegment) access;
+		this.hightlightOrigin = false;
+		return this;
+	}
+
+	public TextRegionAccessToString withOrigin(ITextSegment origin) {
 		this.origin = origin;
 		return this;
 	}

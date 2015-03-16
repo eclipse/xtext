@@ -19,6 +19,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.formatting.IFormatterExtension;
+import org.eclipse.xtext.formatting2.FormatterRequest;
+import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegionAccessBuildingSequencer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
@@ -52,8 +59,17 @@ public class Serializer implements ISerializer {
 		return serialize(obj, SaveOptions.defaultOptions());
 	}
 
-	@Inject
+	@Inject(optional = true)
 	protected IFormatter formatter;
+
+	@Inject(optional = true)
+	private Provider<IFormatter2> formatter2Provider;
+
+	@Inject
+	private Provider<FormatterRequest> formatterRequestProvider;
+
+	@Inject
+	private Provider<TextRegionAccessBuildingSequencer> textRegionAccessBuildingSequencerProvider;
 
 	@Inject
 	protected Provider<ISemanticSequencer> semanticSequencerProvider;
@@ -100,14 +116,34 @@ public class Serializer implements ISerializer {
 
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
 		ITokenStream formatterTokenStream;
-		if(formatter instanceof IFormatterExtension)
-			formatterTokenStream = ((IFormatterExtension) formatter).createFormatterStream(obj, null, tokenStream, !options.isFormatting());
-		else 
+		if (formatter instanceof IFormatterExtension)
+			formatterTokenStream = ((IFormatterExtension) formatter).createFormatterStream(obj, null, tokenStream,
+					!options.isFormatting());
+		else
 			formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		EObject context = getContext(obj);
 		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
 		serialize(obj, context, acceptor, errors);
 		formatterTokenStream.flush();
+	}
+
+	public ITextRegionAccess serializeToRegions(EObject obj) {
+		EObject context = getContext(obj);
+		TextRegionAccessBuildingSequencer builder = textRegionAccessBuildingSequencerProvider.get().withRoot(obj);
+		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
+		serialize(obj, context, builder, errors);
+		ITextRegionAccess regionAccess = builder.getRegionAccess();
+		return regionAccess;
+	}
+
+	protected void serialize(EObject obj, Appendable appendable, SaveOptions options) {
+		ITextRegionAccess regionAccess = serializeToRegions(obj);
+		FormatterRequest request = formatterRequestProvider.get();
+		request.setFormatUndenfinedTokensOnly(!options.isFormatting());
+		request.setTextRegionAccess(regionAccess);
+		IFormatter2 formatter2 = formatter2Provider.get();
+		List<ITextReplacement> replacements = formatter2.format(request);
+		TextReplacements.apply(((ITextSegment) regionAccess).getText(), replacements, appendable);
 	}
 
 	protected EObject getContext(EObject semanticObject) {
@@ -119,18 +155,28 @@ public class Serializer implements ISerializer {
 
 	@Override
 	public String serialize(EObject obj, SaveOptions options) {
-		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
-		try {
-			serialize(obj, tokenStringBuffer, options);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		if (formatter2Provider != null) {
+			StringBuilder builder = new StringBuilder();
+			serialize(obj, builder, options);
+			return builder.toString();
+		} else {
+			TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
+			try {
+				serialize(obj, tokenStringBuffer, options);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			return tokenStringBuffer.toString();
 		}
-		return tokenStringBuffer.toString();
 	}
 
 	@Override
 	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
-		serialize(obj, new WriterTokenStream(writer), options);
+		if (formatter2Provider != null) {
+			serialize(obj, writer, options);
+		} else {
+			serialize(obj, new WriterTokenStream(writer), options);
+		}
 	}
 
 	@Override
