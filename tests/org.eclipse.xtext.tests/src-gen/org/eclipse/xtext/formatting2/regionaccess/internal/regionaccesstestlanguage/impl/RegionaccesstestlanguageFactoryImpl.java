@@ -71,6 +71,9 @@ public class RegionaccesstestlanguageFactoryImpl extends EFactoryImpl implements
       case RegionaccesstestlanguagePackage.PREFIXED_UNASSIGNED: return createPrefixedUnassigned();
       case RegionaccesstestlanguagePackage.PREFIXED_DELEGATE: return createPrefixedDelegate();
       case RegionaccesstestlanguagePackage.DELEGATE: return createDelegate();
+      case RegionaccesstestlanguagePackage.EXPRESSION: return createExpression();
+      case RegionaccesstestlanguagePackage.ADD: return createAdd();
+      case RegionaccesstestlanguagePackage.NAMED: return createNamed();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -151,6 +154,39 @@ public class RegionaccesstestlanguageFactoryImpl extends EFactoryImpl implements
   {
     DelegateImpl delegate = new DelegateImpl();
     return delegate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Add createAdd()
+  {
+    AddImpl add = new AddImpl();
+    return add;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Named createNamed()
+  {
+    NamedImpl named = new NamedImpl();
+    return named;
   }
 
   /**

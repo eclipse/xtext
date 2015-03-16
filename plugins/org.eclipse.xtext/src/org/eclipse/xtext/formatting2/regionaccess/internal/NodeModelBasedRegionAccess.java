@@ -38,12 +38,12 @@ import com.google.common.collect.Maps;
  */
 public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 
-	public static class Builder extends AbstractRegionAccess.Builder {
+	public static class Builder {
 
-		private Map<EObject, EObjectTokens> eObjToTokens;
+		private Map<EObject, NodeEObjectTokens> eObjToTokens;
 		private ISemanticRegion firstToken;
 		private ITextSegment lastTokenOrGap;
-		private EObjectTokens lastTokens;
+		private NodeEObjectTokens lastTokens;
 		private XtextResource resource;
 
 		protected boolean add(NodeModelBasedRegionAccess tokenAccess, INode node) {
@@ -58,16 +58,16 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 					ILeafNode leafNode = (ILeafNode) node;
 					if (lastTokenOrGap instanceof NodeSemanticRegion) {
 						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
-						HiddenRegion gap = createGap(tokenAccess);
+						AbstractHiddenRegion gap = createGap(tokenAccess);
 						lastToken.setTrailingGap(gap);
 						gap.setPrevious(lastToken);
 						gap.hiddens.add(createHidden(gap, leafNode));
 						lastTokenOrGap = gap;
-					} else if (lastTokenOrGap instanceof HiddenRegion) {
-						HiddenRegion lastGap = (HiddenRegion) lastTokenOrGap;
+					} else if (lastTokenOrGap instanceof AbstractHiddenRegion) {
+						AbstractHiddenRegion lastGap = (AbstractHiddenRegion) lastTokenOrGap;
 						lastGap.hiddens.add(createHidden(lastGap, leafNode));
 					} else if (lastTokenOrGap == null) {
-						HiddenRegion gap = createGap(tokenAccess);
+						AbstractHiddenRegion gap = createGap(tokenAccess);
 						gap.hiddens.add(createHidden(gap, leafNode));
 						lastTokenOrGap = gap;
 					} else {
@@ -79,13 +79,13 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 						lastTokenOrGap = createGap(tokenAccess);
 					if (lastTokenOrGap instanceof NodeSemanticRegion) {
 						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
-						HiddenRegion gap = createGap(tokenAccess);
+						AbstractHiddenRegion gap = createGap(tokenAccess);
 						lastToken.setTrailingGap(gap);
 						gap.setPrevious(lastToken);
 						newToken.setLeadingGap(gap);
 						gap.setNext(newToken);
-					} else if (lastTokenOrGap instanceof HiddenRegion) {
-						HiddenRegion lastGap = (HiddenRegion) lastTokenOrGap;
+					} else if (lastTokenOrGap instanceof AbstractHiddenRegion) {
+						AbstractHiddenRegion lastGap = (AbstractHiddenRegion) lastTokenOrGap;
 						lastGap.setNext(newToken);
 						newToken.setLeadingGap(lastGap);
 					} else {
@@ -107,11 +107,11 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return tokenAccess;
 		}
 
-		protected HiddenRegion createGap(ITextRegionAccess tokenAccess) {
-			return new HiddenRegion(tokenAccess);
+		protected AbstractHiddenRegion createGap(ITextRegionAccess tokenAccess) {
+			return new NodeHiddenRegion(tokenAccess);
 		}
 
-		protected NodeHidden createHidden(HiddenRegion gap, ILeafNode node) {
+		protected NodeHidden createHidden(AbstractHiddenRegion gap, ILeafNode node) {
 			if (isComment(node))
 				return new NodeComment(gap, node);
 			else
@@ -122,11 +122,10 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return new NodeSemanticRegion(tokenAccess, node);
 		}
 
-		protected EObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
-			return new EObjectTokens(access, node);
+		protected NodeEObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
+			return new NodeEObjectTokens(access, node);
 		}
 
-		@Override
 		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
 			this.eObjToTokens = Maps.newHashMap();
 			this.lastTokenOrGap = null;
@@ -156,7 +155,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			}
 			if (lastTokenOrGap instanceof NodeSemanticRegion) {
 				NodeSemanticRegion last = (NodeSemanticRegion) lastTokenOrGap;
-				HiddenRegion gap = createGap(tokenAccess);
+				AbstractHiddenRegion gap = createGap(tokenAccess);
 				last.setTrailingGap(gap);
 				gap.setPrevious(last);
 			}
@@ -165,12 +164,10 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
 		}
 
-		@Override
 		protected IHiddenRegion getFirstRegion() {
 			return this.firstToken.getNextHiddenRegion();
 		}
 
-		@Override
 		protected XtextResource getXtextResource() {
 			return resource;
 		}
@@ -198,7 +195,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			ISemanticRegion token = firstToken;
 			while (token != null) {
 				IHiddenRegion gap = token.getPreviousHiddenRegion();
-				EObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
+				NodeEObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
 				while (tokens != null && tokens.getLeadingGap() == null) {
 					tokens.setLeadingGap(gap);
 					tokens = eObjToTokens.get(tokens.getSemanticElement().eContainer());
@@ -215,7 +212,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 				token = (ISemanticRegion) lastTokenOrGap;
 			while (token != null) {
 				IHiddenRegion gap = token.getNextHiddenRegion();
-				EObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
+				NodeEObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
 				while (tokens != null && tokens.getTrailingGap() == null) {
 					tokens.setTrailingGap(gap);
 					tokens = eObjToTokens.get(tokens.getSemanticElement().eContainer());
@@ -230,8 +227,14 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		}
 	}
 
+	private final Map<EObject, AbstractEObjectTokens> eObjectToTokens;
+	private final IHiddenRegion firstRegion;
+	private final XtextResource resource;
+
 	protected NodeModelBasedRegionAccess(Builder builder) {
-		super(builder);
+		this.resource = builder.getXtextResource();
+		this.eObjectToTokens = ImmutableMap.copyOf(builder.getEObjectToTokensMap(this));
+		this.firstRegion = builder.getFirstRegion();
 	}
 
 	@Override
@@ -306,13 +309,33 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
+	public IHiddenRegion getFirstRegionInFile() {
+		return this.firstRegion;
+	}
+
+	@Override
 	public int getLength() {
 		return getResource().getParseResult().getRootNode().getTotalEndOffset();
 	}
 
 	@Override
+	public XtextResource getResource() {
+		return this.resource;
+	}
+
+	@Override
 	public String getText() {
 		return getResource().getParseResult().getRootNode().getText();
+	}
+
+	@Override
+	public String getText(int offset, int length) {
+		return getResource().getParseResult().getRootNode().getText().substring(offset, offset + length);
+	}
+
+	@Override
+	protected AbstractEObjectTokens getTokens(EObject obj) {
+		return eObjectToTokens.get(obj);
 	}
 
 	@Override

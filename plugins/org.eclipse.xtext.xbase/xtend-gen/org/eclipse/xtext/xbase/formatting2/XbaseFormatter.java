@@ -18,7 +18,6 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -695,14 +694,11 @@ public class XbaseFormatter extends XtypeFormatter {
       _and = false;
     } else {
       AbstractElement _grammarElement = node.getGrammarElement();
-      _and = (_grammarElement instanceof CrossReference);
+      _and = (_grammarElement instanceof RuleCall);
     }
     if (_and) {
       AbstractElement _grammarElement_1 = node.getGrammarElement();
-      final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
-      if ((terminal instanceof RuleCall)) {
-        return ((RuleCall)terminal).getRule();
-      }
+      return ((RuleCall) _grammarElement_1).getRule();
     }
     return null;
   }

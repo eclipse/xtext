@@ -11,6 +11,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -18,10 +20,14 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RegionAccessTestLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_Parenthesized_LeftParenthesisKeyword_0_a;
+	protected AbstractElementAlias match_Parenthesized_LeftParenthesisKeyword_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RegionAccessTestLanguageGrammarAccess) access;
+		match_Parenthesized_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParenthesizedAccess().getLeftParenthesisKeyword_0());
+		match_Parenthesized_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getParenthesizedAccess().getLeftParenthesisKeyword_0());
 	}
 	
 	@Override
@@ -36,8 +42,38 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if(match_Parenthesized_LeftParenthesisKeyword_0_a.equals(syntax))
+				emit_Parenthesized_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Parenthesized_LeftParenthesisKeyword_0_p.equals(syntax))
+				emit_Parenthesized_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'test' '5' (ambiguity) name=ID
+	 *     (rule start) 'test' '5' (ambiguity) {Add.left=}
+	 *     (rule start) (ambiguity) name=ID
+	 *     (rule start) (ambiguity) {Add.left=}
+	 */
+	protected void emit_Parenthesized_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) name=ID
+	 *     (rule start) (ambiguity) {Add.left=}
+	 */
+	protected void emit_Parenthesized_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

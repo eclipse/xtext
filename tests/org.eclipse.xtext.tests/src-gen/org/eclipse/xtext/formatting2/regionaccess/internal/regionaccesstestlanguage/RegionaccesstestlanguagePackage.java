@@ -225,6 +225,90 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    */
   int DELEGATE_FEATURE_COUNT = UNASSIGNED_FEATURE_COUNT + 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 7;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
+   * @generated
+   */
+  int ADD = 8;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Add</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl <em>Named</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
+   * @generated
+   */
+  int NAMED = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED__NAME = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Named</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root <em>Root</em>}'.
@@ -339,6 +423,69 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   EAttribute getDelegate_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add <em>Add</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Add</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add
+   * @generated
+   */
+  EClass getAdd();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getLeft()
+   * @see #getAdd()
+   * @generated
+   */
+  EReference getAdd_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getRight()
+   * @see #getAdd()
+   * @generated
+   */
+  EReference getAdd_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named
+   * @generated
+   */
+  EClass getNamed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named#getName()
+   * @see #getNamed()
+   * @generated
+   */
+  EAttribute getNamed_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -464,6 +611,60 @@ public interface RegionaccesstestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute DELEGATE__NAME = eINSTANCE.getDelegate_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
+     * @generated
+     */
+    EClass ADD = eINSTANCE.getAdd();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ADD__LEFT = eINSTANCE.getAdd_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ADD__RIGHT = eINSTANCE.getAdd_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl <em>Named</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
+     * @generated
+     */
+    EClass NAMED = eINSTANCE.getNamed();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NAMED__NAME = eINSTANCE.getNamed_Name();
 
   }
 

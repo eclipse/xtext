@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.AbstractRule
-import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
@@ -251,10 +250,8 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
 		val node = op.regionForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
-		if (node != null && node.grammarElement instanceof CrossReference) {
-			val terminal = (node.grammarElement as CrossReference).terminal
-			if (terminal instanceof RuleCall)
-				return terminal.rule
+		if (node != null && node.grammarElement instanceof RuleCall) {
+			return (node.grammarElement as RuleCall).rule
 		}
 	}
 

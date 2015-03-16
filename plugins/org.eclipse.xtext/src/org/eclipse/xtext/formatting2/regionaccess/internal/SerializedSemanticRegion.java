@@ -9,29 +9,29 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
+public class SerializedSemanticRegion extends SerializedRegion implements ISemanticRegion {
 
+	private final AbstractElement grammarElement;
 	private IHiddenRegion leading;
+	private final EObject semanticElement;
 	private IHiddenRegion trailing;
 
-	protected NodeSemanticRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
-		super(tokenAccess, node);
+	protected SerializedSemanticRegion(SerializerBasedRegionAccess regionAccess, EObject semanticElement,
+			AbstractElement grammarElement, int offset, String text) {
+		super(regionAccess, offset, text);
+		this.semanticElement = semanticElement;
+		this.grammarElement = grammarElement;
 	}
 
 	@Override
 	public AbstractElement getGrammarElement() {
-		EObject element = super.getGrammarElement();
-		if (element instanceof CrossReference)
-			return ((CrossReference) element).getTerminal();
-		return element instanceof AbstractElement ? (AbstractElement) element : null;
+		return grammarElement;
 	}
 
 	@Override
@@ -52,6 +52,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
+	}
+
+	@Override
+	public EObject getSemanticElement() {
+		return semanticElement;
 	}
 
 	protected void setLeadingGap(IHiddenRegion leading) {

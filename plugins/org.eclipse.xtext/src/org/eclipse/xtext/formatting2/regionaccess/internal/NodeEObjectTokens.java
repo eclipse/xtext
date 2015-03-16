@@ -17,11 +17,11 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class EObjectTokens extends AbstractEObjectTokens {
+public class NodeEObjectTokens extends AbstractEObjectTokens {
 	private final INode node;
 	private final NodeModelBasedRegionAccess tokenAccess;
 
-	public EObjectTokens(NodeModelBasedRegionAccess tokenAccess, INode node) {
+	public NodeEObjectTokens(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super();
 		this.tokenAccess = tokenAccess;
 		this.node = node;

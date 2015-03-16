@@ -12,7 +12,7 @@ with org.eclipse.xtext.common.Terminals
 generate regionaccesstestlanguage "http://formatter2/regionaccesstestlanguage"
 
 Root:
-	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
+	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression);
 
 Simple:
 	"1" name=ID;
@@ -31,3 +31,12 @@ PrefixedDelegate:
 
 Delegate:
 	name=ID;
+
+Expression:
+	Primary ({Add.left=current} "+" right=Primary)*;
+
+Primary returns Expression:
+	{Named} name=ID | Parenthesized;
+
+Parenthesized returns Expression:
+	"(" Expression ")";
