@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -134,8 +133,8 @@ public class BoundTypeArgumentMerger {
 		LightweightTypeReference typeReference = argument.getTypeReference();
 		VarianceInfo varianceInfo = argument.getDeclaredVariance().mergeDeclaredWithActual(argument.getActualVariance());
 		if (argument.getDeclaredVariance() == VarianceInfo.IN && varianceInfo == VarianceInfo.INVARIANT) {
-			if (typeReference instanceof WildcardTypeReference) {
-				typeReference = ((WildcardTypeReference) typeReference).getInvariantBoundSubstitute();
+			if (typeReference.getKind() == LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) {
+				typeReference = typeReference.getInvariantBoundSubstitute();
 			}
 		}
 		return new LightweightMergedBoundTypeArgument(typeReference, varianceInfo);
