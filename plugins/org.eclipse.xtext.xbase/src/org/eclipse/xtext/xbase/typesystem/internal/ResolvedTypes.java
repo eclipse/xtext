@@ -1288,6 +1288,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 							}
 						}
 					}
+				} else if (source == BoundTypeArgumentSource.INFERRED_LATER) {
+					if (existingTypeReference instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeReference;
+						if (!isResolved(existingReference.getHandle())) {
+							// we have a dependent type resolved to a wildcard:
+							// normalize the wildcard to the invariant for this type reference
+							// and add it as a hint iff this type argument is used as an invariant
+							// bound type in a position, where an existential type can be applied
+							// see bug 461923
+							if (boundTypeReference.isWildcard()) {
+								if (existingTypeArgument.getActualVariance() == VarianceInfo.INVARIANT && existingTypeArgument.getDeclaredVariance() == VarianceInfo.OUT) {
+									existingReference.acceptHint(boundTypeReference.getInvariantBoundSubstitute(), 
+											BoundTypeArgumentSource.INFERRED, boundTypeArgument, VarianceInfo.OUT, VarianceInfo.OUT);
+								}
+							}
+						}
+					}
 				}
 			}
 		}
