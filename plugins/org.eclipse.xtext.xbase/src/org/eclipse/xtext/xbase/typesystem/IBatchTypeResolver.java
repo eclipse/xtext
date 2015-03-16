@@ -49,7 +49,7 @@ public interface IBatchTypeResolver {
 	
 	/**
 	 * Return a handle to resolved types of expressions that are related
-	 * to the given {@code object}.
+	 * to the given {@code resource}.
 	 * 
 	 * @param resource the resource that shall be resolved.
 	 * @return a handle to resolved types of expressions and identifiables.
@@ -72,7 +72,7 @@ public interface IBatchTypeResolver {
 	
 	/**
 	 * Return a handle to resolved types of expressions that are related
-	 * to the given {@code object}.
+	 * to the given {@code resource}.
 	 * 
 	 * @param resource the resource that shall be resolved.
 	 * @param monitor used to cancel type resolution, e.g. by the reconciler.
