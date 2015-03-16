@@ -99,6 +99,23 @@ class DefaultTaskParserTest {
 				]
 			])
 	}
+	
+	@Test
+	def void testLongInputManyTasks() {
+		val expectation = 100000
+		val String source = '''
+			/*
+			 «FOR i: 1..expectation»
+			 	* FIXME this cannot work
+			 «ENDFOR»
+			 */
+		'''
+		val parsed = parser.parseTasks(LineDelimiters.toUnix(source), definitions)
+		assertEquals(expectation, parsed.size)
+		for(i: 0..<expectation) {
+			assertEquals(i+2, parsed.get(i).lineNumber)
+		}
+	}
 
 	private def assertContainsTasks(CharSequence source, List<Task> expectedTasks) {
 		val actualTasks = parser.parseTasks(LineDelimiters.toUnix(source.toString), definitions)
