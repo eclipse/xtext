@@ -7,14 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeWhitespace extends NodeHidden implements IWhitespace {
-	protected NodeWhitespace(NodeHiddenRegion gap, INode node) {
-		super(gap, node);
+public class StringEObjectTokens extends AbstractEObjectTokens {
+	private final AbstractElement grammarElement;
+
+	public StringEObjectTokens(StringBasedRegionAccess tokenAccess, AbstractElement grammarElement,
+			EObject semanticElement) {
+		super(tokenAccess);
+		this.grammarElement = grammarElement;
+		this.setSemantcElement(semanticElement);
+	}
+
+	@Override
+	public AbstractElement getGrammarElement() {
+		return grammarElement;
 	}
 }

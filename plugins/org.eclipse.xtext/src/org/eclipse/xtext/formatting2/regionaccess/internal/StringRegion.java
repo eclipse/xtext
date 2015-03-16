@@ -7,46 +7,38 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeRegion extends AbstractTextSegment {
-	private final INode node;
-	private final NodeModelBasedRegionAccess tokenAccess;
+public class StringRegion extends AbstractTextSegment {
+	private final int length;
+	private final int offset;
+	private final StringBasedRegionAccess access;
 
-	protected NodeRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
+	protected StringRegion(StringBasedRegionAccess access, int offset, int length) {
 		super();
-		this.tokenAccess = tokenAccess;
-		this.node = node;
-	}
-
-	public EObject getGrammarElement() {
-		return node.getGrammarElement();
+		this.access = access;
+		this.offset = offset;
+		this.length = length;
 	}
 
 	@Override
 	public int getLength() {
-		return node.getLength();
-	}
-
-	public INode getNode() {
-		return node;
+		return length;
 	}
 
 	@Override
 	public int getOffset() {
-		return node.getOffset();
+		return offset;
 	}
 
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
-		return tokenAccess;
+		return access;
 	}
 
 	@Override
