@@ -41,6 +41,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	Bug450911Test.class,
 	Bug453271Test.class,
 	Bug458611Test.class,
+	Bug461923Test.class,
 	MemberFeatureCallProposalsTest.class
 })
 public class ContentAssistSuite {
