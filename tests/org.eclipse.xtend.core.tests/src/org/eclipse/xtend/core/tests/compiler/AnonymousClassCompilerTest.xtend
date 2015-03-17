@@ -2196,4 +2196,44 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def void testBug462313() {
+		'''
+			import test.Visibilities
+			class MyXtendClass {
+				def void bar() {
+					new Visibilities {
+						override publicMethod() {
+							new Thread {
+								override run() {
+									protectedMethod
+								}
+							}
+							super.publicMethod
+						}
+					}
+				}	
+			}
+		'''.assertCompilesTo('''
+			import test.Visibilities;
+			
+			@SuppressWarnings("all")
+			public class MyXtendClass {
+			  public void bar() {
+			    new Visibilities() {
+			      public void publicMethod() {
+			        new Thread() {
+			          public void run() {
+			            protectedMethod();
+			          }
+			        };
+			        super.publicMethod();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
 }
