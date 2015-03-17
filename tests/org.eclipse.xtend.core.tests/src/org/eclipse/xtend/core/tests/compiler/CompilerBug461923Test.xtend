@@ -250,4 +250,38 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def test_08() {
+		'''
+			import java.util.List
+			import com.google.common.collect.ImmutableList
+			
+			class C {
+			    def static <T> m(T[] arr, T value) {
+			        ImmutableList.builder.addAll(arr.filter[it != value]).build
+			    }
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.base.Objects;
+			import com.google.common.collect.ImmutableList;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public static <T extends Object> ImmutableList<T> m(final T[] arr, final T value) {
+			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
+			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
+			      public Boolean apply(final T it) {
+			        return Boolean.valueOf((!Objects.equal(it, value)));
+			      }
+			    };
+			    Iterable<T> _filter = IterableExtensions.<T>filter(((Iterable<T>)Conversions.doWrapArray(arr)), _function);
+			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
+			    return _addAll.build();
+			  }
+			}
+		''')
+	}
+	
 }
