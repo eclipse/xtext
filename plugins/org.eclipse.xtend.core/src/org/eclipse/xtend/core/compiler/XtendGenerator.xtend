@@ -186,9 +186,25 @@ class XtendGenerator extends JvmModelGenerator {
 						tracedAppendable.newLine
 						generateJavaDoc(tracedAppendable, config)
 						annotations.generateAnnotations(tracedAppendable, true, config)
+						if (isFinal && isStatic)
+							tracedAppendable.append("final ")
+						if (isStatic)
+							tracedAppendable.append("static ")
+						if (isTransient)
+							tracedAppendable.append("transient ")
+						if (isVolatile)
+							tracedAppendable.append("volatile ")
 						type.serializeSafely("Object", tracedAppendable)
 						tracedAppendable.append(" ")
 						tracedAppendable.traceSignificant(it).append(simpleName)
+						if (isFinal && isStatic) {
+							if (constantValue != null) {
+								tracedAppendable.append(" = ")
+								generateJavaConstant(constantValue, tracedAppendable)
+							} else {
+								generateInitialization(tracedAppendable, config)
+							}
+						}
 						tracedAppendable.append(";")
 					} else {
 						generateMember(memberAppendable, config)
@@ -198,6 +214,21 @@ class XtendGenerator extends JvmModelGenerator {
 			childAppendable.decreaseIndentation.newLine.append('}')
 			appendable.newLine
 		]
+	}
+	
+	private def generateJavaConstant(Object value, ITreeAppendable appendable) {
+		if (value instanceof Float)
+			appendable.append(value.toString).append('f')
+		else if (value instanceof Long)
+			appendable.append(value.toString).append('l')
+		else if (value instanceof Character)
+			appendable.append(Integer.toString(value.charValue))
+		else if (value instanceof CharSequence)
+			appendable.append('"').append(doConvertToJavaString(value.toString)).append('"')
+		else if (value instanceof Number || value instanceof Boolean)
+			appendable.append(value.toString)
+		else
+			appendable.append('null /* ERROR: illegal constant value */')
 	}
 	
 	private def boolean needSyntheticThisVariable(AnonymousClass anonymousClass, JvmDeclaredType localType) {
@@ -229,11 +260,9 @@ class XtendGenerator extends JvmModelGenerator {
 	
 	override generateVisibilityModifier(JvmMember it, ITreeAppendable result) {
 		if (visibility == JvmVisibility.PRIVATE && declaringType.local) {
-			if (it instanceof JvmOperation) {
-				val declarator = declaringType as JvmGenericType
-				if (!declarator.anonymous) {
-					return result
-				}
+			val declarator = declaringType as JvmGenericType
+			if (!declarator.anonymous) {
+				return result
 			}
 		}
 		super.generateVisibilityModifier(it, result)
@@ -254,7 +283,7 @@ class XtendGenerator extends JvmModelGenerator {
 					return true
 				} else if (compilationTemplate != null) {
 					return true
-				} else {
+				} else if (!(isFinal && isStatic)) {
 					val expression = associatedExpression
 					if (expression != null && config.generateExpressions) {
 						return true
