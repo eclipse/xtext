@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -52,6 +54,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -375,38 +378,69 @@ public class XtendGenerator extends JvmModelGenerator {
   }
   
   private boolean needSyntheticThisVariable(final AnonymousClass anonymousClass, final JvmDeclaredType localType) {
-    final ArrayList<EObject> references = CollectionLiterals.<EObject>newArrayList();
+    final ArrayList<EObject> references = Lists.<EObject>newArrayListWithCapacity(1);
     try {
       Set<JvmDeclaredType> _newImmutableSet = CollectionLiterals.<JvmDeclaredType>newImmutableSet(localType);
       final EcoreUtil2.ElementReferenceAcceptor _function = new EcoreUtil2.ElementReferenceAcceptor() {
         @Override
         public void accept(final EObject referrer, final EObject referenced, final EReference reference, final int index) {
           try {
-            final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(enclosingType, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _notEquals_1 = (!Objects.equal(enclosingType, anonymousClass));
-              _and = _notEquals_1;
-            }
-            if (_and) {
-              references.add(referrer);
-              throw new XtendGenerator.StopCollecting();
-            } else {
-              final XClosure enclosingLambda = EcoreUtil2.<XClosure>getContainerOfType(referrer, XClosure.class);
+            EObject _eContainer = referrer.eContainer();
+            if ((_eContainer instanceof XAbstractFeatureCall)) {
+              EObject _eContainer_1 = referrer.eContainer();
+              final XAbstractFeatureCall containingFeature = ((XAbstractFeatureCall) _eContainer_1);
+              boolean _and = false;
               boolean _and_1 = false;
-              boolean _notEquals_2 = (!Objects.equal(enclosingLambda, null));
-              if (!_notEquals_2) {
+              XExpression _actualReceiver = containingFeature.getActualReceiver();
+              boolean _equals = Objects.equal(_actualReceiver, referrer);
+              if (!_equals) {
                 _and_1 = false;
               } else {
-                boolean _isAncestor = EcoreUtil.isAncestor(anonymousClass, enclosingLambda);
-                _and_1 = _isAncestor;
+                JvmIdentifiableElement _feature = containingFeature.getFeature();
+                _and_1 = (_feature instanceof JvmMember);
               }
-              if (_and_1) {
-                references.add(referrer);
+              if (!_and_1) {
+                _and = false;
+              } else {
+                JvmIdentifiableElement _feature_1 = containingFeature.getFeature();
+                boolean _isVisible = XtendGenerator.this.isVisible(((JvmMember) _feature_1), localType);
+                boolean _not = (!_isVisible);
+                _and = _not;
+              }
+              if (_and) {
+                references.clear();
                 throw new XtendGenerator.StopCollecting();
+              }
+            }
+            final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
+            boolean _and_2 = false;
+            boolean _notEquals = (!Objects.equal(enclosingType, null));
+            if (!_notEquals) {
+              _and_2 = false;
+            } else {
+              boolean _notEquals_1 = (!Objects.equal(enclosingType, anonymousClass));
+              _and_2 = _notEquals_1;
+            }
+            if (_and_2) {
+              boolean _isEmpty = references.isEmpty();
+              if (_isEmpty) {
+                references.add(referrer);
+              }
+              return;
+            }
+            final XClosure enclosingLambda = EcoreUtil2.<XClosure>getContainerOfType(referrer, XClosure.class);
+            boolean _and_3 = false;
+            boolean _notEquals_2 = (!Objects.equal(enclosingLambda, null));
+            if (!_notEquals_2) {
+              _and_3 = false;
+            } else {
+              boolean _isAncestor = EcoreUtil.isAncestor(anonymousClass, enclosingLambda);
+              _and_3 = _isAncestor;
+            }
+            if (_and_3) {
+              boolean _isEmpty_1 = references.isEmpty();
+              if (_isEmpty_1) {
+                references.add(referrer);
               }
             }
           } catch (Throwable _e) {
@@ -424,6 +458,75 @@ public class XtendGenerator extends JvmModelGenerator {
     }
     boolean _isEmpty = references.isEmpty();
     return (!_isEmpty);
+  }
+  
+  /**
+   * Determine whether the given member is visible without considering the class hierarchy.
+   */
+  private boolean isVisible(final JvmMember member, final JvmDeclaredType context) {
+    final JvmVisibility visibility = member.getVisibility();
+    boolean _equals = Objects.equal(visibility, JvmVisibility.PUBLIC);
+    if (_equals) {
+      return true;
+    }
+    JvmDeclaredType _xifexpression = null;
+    if ((member instanceof JvmDeclaredType)) {
+      _xifexpression = ((JvmDeclaredType)member);
+    } else {
+      _xifexpression = member.getDeclaringType();
+    }
+    final JvmDeclaredType type = _xifexpression;
+    boolean _or = false;
+    boolean _equals_1 = Objects.equal(type, context);
+    if (_equals_1) {
+      _or = true;
+    } else {
+      boolean _isAncestor = EcoreUtil.isAncestor(context, type);
+      _or = _isAncestor;
+    }
+    if (_or) {
+      return true;
+    }
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(type, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _or_1 = false;
+      boolean _equals_2 = Objects.equal(visibility, JvmVisibility.DEFAULT);
+      if (_equals_2) {
+        _or_1 = true;
+      } else {
+        boolean _equals_3 = Objects.equal(visibility, JvmVisibility.PROTECTED);
+        _or_1 = _equals_3;
+      }
+      _and = _or_1;
+    }
+    if (_and) {
+      boolean _or_2 = false;
+      boolean _and_1 = false;
+      String _packageName = context.getPackageName();
+      boolean _isEmpty = Strings.isEmpty(_packageName);
+      if (!_isEmpty) {
+        _and_1 = false;
+      } else {
+        String _packageName_1 = type.getPackageName();
+        boolean _isEmpty_1 = Strings.isEmpty(_packageName_1);
+        _and_1 = _isEmpty_1;
+      }
+      if (_and_1) {
+        _or_2 = true;
+      } else {
+        String _packageName_2 = context.getPackageName();
+        String _packageName_3 = type.getPackageName();
+        boolean _equals_4 = Objects.equal(_packageName_2, _packageName_3);
+        _or_2 = _equals_4;
+      }
+      if (_or_2) {
+        return true;
+      }
+    }
+    return false;
   }
   
   @Override
