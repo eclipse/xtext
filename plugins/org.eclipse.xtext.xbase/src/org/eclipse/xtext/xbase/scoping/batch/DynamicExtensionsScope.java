@@ -123,7 +123,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 		String simpleName = feature.getSimpleName();
 		QualifiedName featureName = QualifiedName.create(simpleName);
 		boolean validStaticState = isValidStaticState(receiver);
-		if (firstArgument != null && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+		if (firstArgument != null && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameterDeepCheck((JvmOperation) feature)) {
 			IEObjectDescription description = doCreateExtensionDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
 				addToList(description, result);
