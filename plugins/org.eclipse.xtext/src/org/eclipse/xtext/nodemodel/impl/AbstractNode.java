@@ -183,8 +183,7 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 				return -insertionPoint;
 			}
 		}
-		String leadingText = rootNode.getText().substring(0, offset);
-		int result = Strings.countLines(leadingText);
+		int result = Strings.countLineBreaks(rootNode.getText(), 0, offset);
 		return result + 1;
 	}
 	

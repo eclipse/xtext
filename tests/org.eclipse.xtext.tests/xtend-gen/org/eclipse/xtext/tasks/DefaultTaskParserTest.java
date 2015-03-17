@@ -21,6 +21,7 @@ import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -183,6 +184,36 @@ public class DefaultTaskParserTest {
     Task _doubleArrow_3 = ObjectExtensions.<Task>operator_doubleArrow(_task_3, _function_3);
     this.assertContainsTasks(_builder, 
       Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3)));
+  }
+  
+  @Test
+  public void testLongInputManyTasks() {
+    final int expectation = 100000;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    {
+      IntegerRange _upTo = new IntegerRange(1, expectation);
+      for(final Integer i : _upTo) {
+        _builder.append(" ");
+        _builder.append("* FIXME this cannot work");
+        _builder.newLine();
+      }
+    }
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    final String source = _builder.toString();
+    String _unix = LineDelimiters.toUnix(source);
+    final List<Task> parsed = this.parser.parseTasks(_unix, this.definitions);
+    int _size = parsed.size();
+    Assert.assertEquals(expectation, _size);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, expectation, true);
+    for (final Integer i_1 : _doubleDotLessThan) {
+      Task _get = parsed.get((i_1).intValue());
+      int _lineNumber = _get.getLineNumber();
+      Assert.assertEquals(((i_1).intValue() + 2), _lineNumber);
+    }
   }
   
   private void assertContainsTasks(final CharSequence source, final List<Task> expectedTasks) {

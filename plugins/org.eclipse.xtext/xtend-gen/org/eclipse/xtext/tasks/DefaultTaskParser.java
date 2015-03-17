@@ -24,8 +24,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -52,28 +50,29 @@ public class DefaultTaskParser implements ITaskParser {
       Pattern _pattern = this.toPattern(taskTags);
       final Matcher matcher = _pattern.matcher(source);
       final ArrayList<Task> tasks = CollectionLiterals.<Task>newArrayList();
+      int prevLine = 1;
+      int prevOffset = 0;
       while (matcher.find()) {
-        Task _task = new Task();
-        final Procedure1<Task> _function_1 = new Procedure1<Task>() {
-          @Override
-          public void apply(final Task it) {
-            String _group = matcher.group(2);
-            String _lowerCase = _group.toLowerCase();
-            TaskTag _get = taskTagsByName.get(_lowerCase);
-            it.setTag(_get);
-            String _group_1 = matcher.group(3);
-            it.setDescription(_group_1);
-            int _start = matcher.start(2);
-            it.setOffset(_start);
-            int _offset = it.getOffset();
-            String _substring = source.substring(0, _offset);
-            int _countLineBreaks = Strings.countLineBreaks(_substring);
-            int _plus = (_countLineBreaks + 1);
-            it.setLineNumber(_plus);
-          }
-        };
-        Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
-        tasks.add(_doubleArrow);
+        {
+          final Task task = new Task();
+          String _group = matcher.group(2);
+          String _lowerCase = _group.toLowerCase();
+          TaskTag _get = taskTagsByName.get(_lowerCase);
+          task.setTag(_get);
+          String _group_1 = matcher.group(3);
+          task.setDescription(_group_1);
+          int _start = matcher.start(2);
+          task.setOffset(_start);
+          int _offset = task.getOffset();
+          int _countLineBreaks = Strings.countLineBreaks(source, prevOffset, _offset);
+          int _plus = (_countLineBreaks + prevLine);
+          task.setLineNumber(_plus);
+          int _lineNumber = task.getLineNumber();
+          prevLine = _lineNumber;
+          int _offset_1 = task.getOffset();
+          prevOffset = _offset_1;
+          tasks.add(task);
+        }
       }
       _xblockexpression = tasks;
     }
