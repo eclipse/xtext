@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.compiler
 
+import com.google.common.collect.Lists
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -30,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
@@ -232,20 +234,29 @@ class XtendGenerator extends JvmModelGenerator {
 	}
 	
 	private def boolean needSyntheticThisVariable(AnonymousClass anonymousClass, JvmDeclaredType localType) {
-		val references = newArrayList
+		val references = Lists.newArrayListWithCapacity(1)
 		try {
 			EcoreUtil2.findCrossReferences(anonymousClass, newImmutableSet(localType), [
 					referrer, referenced, reference, index |
-				val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
-				if (enclosingType != null && enclosingType != anonymousClass) {
-					references.add(referrer)
-					throw new StopCollecting
-				} else {
-					val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
-					if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
-						references.add(referrer)
+				if (referrer.eContainer instanceof XAbstractFeatureCall) {
+					val containingFeature = referrer.eContainer as XAbstractFeatureCall
+					if (containingFeature.actualReceiver == referrer && containingFeature.feature instanceof JvmMember
+							&& !isVisible(containingFeature.feature as JvmMember, localType)) {
+						// We reference a feature that would not be visible if accessed through a synthetic _this variable
+						references.clear
 						throw new StopCollecting
 					}
+				}
+				val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
+				if (enclosingType != null && enclosingType != anonymousClass) {
+					if (references.empty)
+						references.add(referrer)
+					return
+				}
+				val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
+				if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
+					if (references.empty)
+						references.add(referrer)
 				}
 			])
 		} catch(StopCollecting e) {
@@ -253,6 +264,23 @@ class XtendGenerator extends JvmModelGenerator {
 		}
 		
 		return !references.empty
+	}
+	
+	/**
+	 * Determine whether the given member is visible without considering the class hierarchy.
+	 */
+	private def isVisible(JvmMember member, JvmDeclaredType context) {
+		val visibility = member.visibility
+		if (visibility == JvmVisibility.PUBLIC)
+			return true
+		val type = if (member instanceof JvmDeclaredType) member else member.declaringType
+		if (type == context || EcoreUtil.isAncestor(context, type))
+			return true
+		if (type != null && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {
+			if (Strings.isEmpty(context.packageName) && Strings.isEmpty(type.packageName)
+					|| context.packageName == type.packageName)
+				return true
+		}
 	}
 	
 	private static class StopCollecting extends Exception {
