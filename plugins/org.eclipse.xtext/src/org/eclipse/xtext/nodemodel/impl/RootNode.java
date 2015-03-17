@@ -9,6 +9,7 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.List;
 import java.util.Map;
 
@@ -147,6 +148,7 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	 * <p>Computes the line breaks in the given text and returns an array of offsets.
 	 * A line break is either <code>\r\n</code>, <code>\n</code>, or a single <code>\r</code>.</p>
 	 * This implementation was heavily adapted from <code>org.eclipse.jface.text.DefaultLineTracker</code>.
+	 * It follows the semantics of {@link LineNumberReader}.
 	 * @param text the text whose line-breaks should be computed. May not be <code>null</code>.
 	 * @return the array of line-break offsets in the given text. May be empty but is never <code>null</code>.
 	 * @since 2.0
