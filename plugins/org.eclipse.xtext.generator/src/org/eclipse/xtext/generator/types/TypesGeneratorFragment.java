@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.generator.IGeneratorFragmentExtension4;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +26,13 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment implements 
 		new StandaloneSetup().addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
 	}
 
+	@Override
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToType(IGlobalScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider")
+			.getBindings();
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
