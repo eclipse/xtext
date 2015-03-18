@@ -125,9 +125,13 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 			ITextRegion selectedTextRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
 			Object input = treeViewer.getInput();
 			if (input instanceof IOutlineNode) {
-				IOutlineNode nodeToBeSelected = findBestNode((IOutlineNode) input, selectedTextRegion);
-				if (nodeToBeSelected != null)
-					treeViewer.setSelection(new StructuredSelection(nodeToBeSelected));
+				try {
+					IOutlineNode nodeToBeSelected = findBestNode((IOutlineNode) input, selectedTextRegion);
+					if (nodeToBeSelected != null)
+						treeViewer.setSelection(new StructuredSelection(nodeToBeSelected));
+				} catch(Exception exc) {
+					// ignore, editor can have a different state than the tree
+				}
 			}
 		}
 	}
