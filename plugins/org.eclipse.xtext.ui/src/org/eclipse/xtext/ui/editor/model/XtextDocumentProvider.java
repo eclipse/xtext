@@ -534,4 +534,10 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 		super.doUpdateStateCache(element);
 	}
+	
+	@Override
+	protected void handleCoreException(CoreException exception, String message) {
+		if(exception.getStatus() == null || exception.getStatus().getCode() != IResourceStatus.RESOURCE_NOT_FOUND)
+			super.handleCoreException(exception, message);
+	}
 }
