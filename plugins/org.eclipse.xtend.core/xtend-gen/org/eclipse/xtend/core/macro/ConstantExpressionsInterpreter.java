@@ -200,25 +200,37 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   protected Map<String, JvmIdentifiableElement> findVisibleFeatures(final XExpression expression) {
     HashMap<String, JvmIdentifiableElement> _xblockexpression = null;
     {
-      JvmDeclaredType _switchResult = null;
-      JvmIdentifiableElement _nearestLogicalContainer = this.containerProvider.getNearestLogicalContainer(expression);
-      final JvmIdentifiableElement cont = _nearestLogicalContainer;
+      Resource _eResource = expression.eResource();
+      final Resource res = _eResource;
       boolean _matched = false;
       if (!_matched) {
+        if (res instanceof StorageAwareResource) {
+          boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
+          if (_isLoadedFromStorage) {
+            _matched=true;
+            return CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
+          }
+        }
+      }
+      JvmDeclaredType _switchResult_1 = null;
+      JvmIdentifiableElement _nearestLogicalContainer = this.containerProvider.getNearestLogicalContainer(expression);
+      final JvmIdentifiableElement cont = _nearestLogicalContainer;
+      boolean _matched_1 = false;
+      if (!_matched_1) {
         if (cont instanceof JvmGenericType) {
-          _matched=true;
-          _switchResult = ((JvmGenericType)cont);
+          _matched_1=true;
+          _switchResult_1 = ((JvmGenericType)cont);
         }
       }
-      if (!_matched) {
+      if (!_matched_1) {
         if (cont instanceof JvmMember) {
-          _matched=true;
-          _switchResult = ((JvmMember)cont).getDeclaringType();
+          _matched_1=true;
+          _switchResult_1 = ((JvmMember)cont).getDeclaringType();
         }
       }
-      final JvmDeclaredType container = _switchResult;
+      final JvmDeclaredType container = _switchResult_1;
       Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("visibleFeaturesForAnnotationValues", container);
-      Resource _eResource = expression.eResource();
+      Resource _eResource_1 = expression.eResource();
       final Provider<HashMap<String, JvmIdentifiableElement>> _function = new Provider<HashMap<String, JvmIdentifiableElement>>() {
         @Override
         public HashMap<String, JvmIdentifiableElement> get() {
@@ -260,7 +272,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           return result;
         }
       };
-      _xblockexpression = this.cache.<HashMap<String, JvmIdentifiableElement>>get(_mappedTo, _eResource, _function);
+      _xblockexpression = this.cache.<HashMap<String, JvmIdentifiableElement>>get(_mappedTo, _eResource_1, _function);
     }
     return _xblockexpression;
   }

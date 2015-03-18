@@ -26,6 +26,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import org.eclipse.core.runtime.NullProgressMonitor
 import com.google.common.io.CharStreams
 import java.io.InputStreamReader
+import org.junit.Ignore
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -77,7 +78,189 @@ class MoreActiveAnnotationsTest {
 		waitForAutoBuild
 		assertNoErrorsInWorkspace
 	}
-
+	
+	@Test def void testBug461761_01() {
+		val macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject.newSource("annotation/DItemMini.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+			import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+			
+			@Active(DItemMiniProcessor)
+			annotation DItemMini {
+				String value
+			}
+			
+			class DItemMiniProcessor extends AbstractClassProcessor {
+			
+				override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+					val suffix = annotatedClass.annotations.head.getValue("value")
+					registerClass(annotatedClass.qualifiedName + suffix)
+				}
+			
+			}
+		''')
+		macroProject.newSource("annotation/StaticFeatures.xtend", '''
+			package annotation
+			
+			class StaticFeatures {
+				public final static String BAR = "Bar"
+				public final static String FOOBAR = "Foo" + BAR 
+			}
+		''')
+		macroProject.addExportedPackage("annotation")
+		waitForAutoBuild
+				
+		val userProject = JavaCore.create(
+			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		userProject.newSource("client/UserCode.xtend", '''
+			package client
+			
+			import static annotation.StaticFeatures.FOOBAR
+			
+			@annotation.DItemMini(FOOBAR)
+			class UserCode{
+				UserCodeFooBar item
+			}
+		''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+	}
+	
+	@Test def void testBug461761_02() {
+		val macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject.newSource("annotation/DItemMini.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+			import org.eclipse.xtend.lib.macro.declaration.*
+			
+			@Active(DItemMiniProcessor)
+			annotation DItemMini {
+				MyEnum[] enumVals = #[MyEnum.VAL1]
+				Class<?> someType = MyEnum
+			}
+			
+			class DItemMiniProcessor extends AbstractClassProcessor {
+			
+				override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+					val suffix = annotatedClass.annotations.head.getValue("someType") as TypeReference
+					val enums = annotatedClass.annotations.head.getValue("enumVals") as EnumerationValueDeclaration[]
+					registerClass(annotatedClass.qualifiedName + suffix.simpleName + enums.map[simpleName].join)
+				}
+			
+			}
+		''')
+		macroProject.newSource("annotation/StaticFeatures.xtend", '''
+			package annotation
+			
+			enum MyEnum {
+				VAL1, VAL2
+			}
+		''')
+		macroProject.addExportedPackage("annotation")
+		waitForAutoBuild
+				
+		val userProject = JavaCore.create(
+			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		userProject.newSource("client/UserCode.xtend", '''
+			package client
+			
+			import annotation.*
+			import static annotation.MyEnum.VAL2
+			
+			@DItemMini
+			class Defaults {
+				DefaultsMyEnumVAL1 field
+			}
+			
+			@DItemMini(enumVals=#[VAL2, MyEnum.VAL1], someType=typeof(Defaults))
+			class Explicit {
+				ExplicitDefaultsVAL2VAL1 field
+			}
+			
+			@DItemMini(someType=Object)
+			class Mixed {
+				MixedObjectVAL1 field
+			}
+		''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+	}
+	
+	@Ignore("It fails because JDT doesn't provide annotation values of annotation.MyClass. For some unknown reason the binding is set to null which makes JDT filtering them out.")
+	@Test def void testBug461761_03() {
+		val macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject.newSource("annotation/DItemMini.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+			import org.eclipse.xtend.lib.macro.declaration.*
+			
+			@Active(DItemMiniProcessor)
+			annotation DItemMini {
+				MyEnum[] enumVals = #[MyEnum.VAL1]
+				Class<?> someType = MyEnum
+			}
+			
+			class DItemMiniProcessor extends AbstractClassProcessor {
+			
+				override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+					val annotationRef = (findUpstreamType("annotation.MyClass") as ClassDeclaration).annotations.head
+					val suffix = annotationRef.getValue("someType") as TypeReference
+					val enums = annotationRef.getValue("enumVals") as EnumerationValueDeclaration[]
+					registerClass(annotatedClass.qualifiedName + suffix.simpleName + enums.map[simpleName].join)
+				}
+			
+			}
+		''')
+		macroProject.newSource("annotation/StaticFeatures.xtend", '''
+			package annotation
+			
+			enum MyEnum {
+				VAL1, VAL2
+			}
+		''')
+		macroProject.newSource("annotation/MyClass.java", '''
+			package annotation;
+			
+			import static annotation.MyEnum.*;
+			
+			@DItemMini(enumVals={VAL2, VAL2}, someType=String.class) 
+			public class MyClass {
+			}
+		''')
+		macroProject.addExportedPackage("annotation")
+		waitForAutoBuild
+				
+		val userProject = JavaCore.create(
+			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		
+		userProject.newSource("client/UserCode.xtend", '''
+			package client
+			
+			import annotation.*
+			import static annotation.MyEnum.VAL2
+			
+			@DItemMini
+			class Processed {
+				ProcessedStringVAL2VAL1 field
+			}
+		''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+	}
+	
 	@Test def void testStaticInitializers() {
 		val macroProject = JavaCore.create(createPluginProject("macroProject"))
 		macroProject.newSource("annotation/MyAA.xtend", '''

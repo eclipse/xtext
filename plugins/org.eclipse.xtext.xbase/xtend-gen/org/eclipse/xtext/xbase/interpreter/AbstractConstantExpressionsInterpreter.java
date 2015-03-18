@@ -12,15 +12,20 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -36,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -45,6 +51,9 @@ public class AbstractConstantExpressionsInterpreter {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private ConstantOperators constantOperators;
+  
+  @Inject
+  private OperatorMapping operatorMapping;
   
   protected Object evaluate(final XExpression expression, final Context ctx) {
     Object _xifexpression = null;
@@ -154,7 +163,7 @@ public class AbstractConstantExpressionsInterpreter {
   protected Object evaluateBinaryOperation(final XBinaryOperation binaryOperation, final Object left, final Object right) {
     Object _xblockexpression = null;
     {
-      final String op = binaryOperation.getConcreteSyntaxFeatureName();
+      final String op = this.getOperator(binaryOperation);
       Object _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
@@ -280,7 +289,7 @@ public class AbstractConstantExpressionsInterpreter {
     {
       XExpression _operand = it.getOperand();
       final Object value = this.evaluate(_operand, ctx);
-      final String op = it.getConcreteSyntaxFeatureName();
+      final String op = this.getOperator(it);
       Object _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
@@ -316,11 +325,39 @@ public class AbstractConstantExpressionsInterpreter {
         }
       }
       if (!_matched) {
-        throw new ConstantExpressionEvaluationException(((("Couldn\'t evaluate unary operator \'" + value) + "\' on value ") + value));
+        throw new ConstantExpressionEvaluationException(((("Couldn\'t evaluate unary operator \'" + op) + "\' on value ") + value));
       }
       _xblockexpression = _switchResult;
     }
     return _xblockexpression;
+  }
+  
+  protected String getOperator(final XAbstractFeatureCall call) {
+    String _switchResult = null;
+    Resource _eResource = call.eResource();
+    final Resource res = _eResource;
+    boolean _matched = false;
+    if (!_matched) {
+      if (res instanceof StorageAwareResource) {
+        boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
+        if (_isLoadedFromStorage) {
+          _matched=true;
+          JvmIdentifiableElement _feature = call.getFeature();
+          String _simpleName = _feature.getSimpleName();
+          QualifiedName _create = QualifiedName.create(_simpleName);
+          QualifiedName _operator = this.operatorMapping.getOperator(_create);
+          String _string = null;
+          if (_operator!=null) {
+            _string=_operator.toString();
+          }
+          return _string;
+        }
+      }
+    }
+    if (!_matched) {
+      _switchResult = call.getConcreteSyntaxFeatureName();
+    }
+    return _switchResult;
   }
   
   protected String toText(final XExpression expression) {

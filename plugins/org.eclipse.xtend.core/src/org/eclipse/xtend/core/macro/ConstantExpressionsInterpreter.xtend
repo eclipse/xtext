@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.common.types.access.impl.ClassFinder
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.IResourceScopeCache
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
@@ -53,7 +54,6 @@ import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver
 import org.eclipse.xtext.xtype.XComputedTypeReference
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtext.resource.persistence.StorageAwareResource
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
@@ -94,6 +94,10 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	 * That essentially includes static imports and the fields declared in the containing types
 	 */
 	protected def Map<String, JvmIdentifiableElement> findVisibleFeatures(XExpression expression) {
+		// don't build a scope for a storage loaded resource, since everything is computed and we will resolve the proxies
+		switch res : expression.eResource {
+			StorageAwareResource case res.isLoadedFromStorage : return newHashMap
+		}
 		val container = switch cont : containerProvider.getNearestLogicalContainer(expression) {
 			JvmGenericType: {
 				cont
@@ -225,7 +229,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			default : false
 		}
 	}
-
+	
 	def dispatch Object internalEvaluate(XFeatureCall it, Context ctx) {
 		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, resolveProxies) as EObject
 		if (!feature.eIsProxy) {
