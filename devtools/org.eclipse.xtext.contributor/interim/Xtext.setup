@@ -99,7 +99,7 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.xtext"
-      remoteURI="tmf/org.eclipse.xtext"
+      remoteURI="https://github.com/eclipse/xtext.git"
       checkoutBranch="${xtext.git.branch}">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
@@ -669,6 +669,7 @@
         name="master">
       <setupTask
           xsi:type="pde:APIBaselineTask"
+          disabled="true"
           name="xtext"
           version="2.7"
           location="${installation.location}/api"
