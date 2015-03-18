@@ -51,7 +51,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	
 	@Override
 	protected List<IEObjectDescription> getAllLocalElements() {
-		if (receiverType != null && !receiverType.isResolved()) {
+		if (receiverType != null && !helper.isResolvedReceiverType()) {
 			return Collections.emptyList();
 		}
 		return super.getAllLocalElements();
@@ -61,7 +61,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	protected void getAllLocalElements(TypeBucket bucket, JvmDeclaredType type, List<IEObjectDescription> result) {
 		Iterable<JvmFeature> features = type.getAllFeatures();
 		for(JvmFeature feature: features) {
-			if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+			if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameterDeepCheck((JvmOperation) feature)) {
 				fastAddDescriptions(feature, bucket, result);
 			}
 		}
@@ -72,7 +72,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		Iterable<JvmFeature> features = type.getAllFeatures();
 		for(JvmFeature feature: features) {
 			if (feature.isStatic() && restrictedNames.contains(feature.getSimpleName())
-					&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+					&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameterDeepCheck((JvmOperation) feature)) {
 				fastAddDescriptions(feature, bucket, result);
 			}
 		}
