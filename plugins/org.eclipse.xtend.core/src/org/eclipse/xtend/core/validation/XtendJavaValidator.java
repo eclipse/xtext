@@ -957,6 +957,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void reportMissingImplementations(XtendTypeDeclaration xtendClass, JvmGenericType inferredType, List<IResolvedOperation> operationsMissingImplementation) {
 		StringBuilder errorMsg = new StringBuilder();
 		String name = xtendClass.getName();
+		boolean needsNewLine = operationsMissingImplementation.size() > 1;
 		if (xtendClass.isAnonymous()) {
 			JvmTypeReference superType = Iterables.getLast(inferredType.getSuperTypes());
 			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
@@ -964,8 +965,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		} else {
 			errorMsg.append("The class ").append(name);	
 			errorMsg.append(" must be defined abstract because it does not implement ");
+			if (needsNewLine) {
+				errorMsg.append("its inherited abstract methods ");
+			}
 		}
-		boolean needsNewLine = operationsMissingImplementation.size() > 1;
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
 			operation = operationsMissingImplementation.get(i);
