@@ -94,6 +94,7 @@ class XAnnotationExtensions {
 				return annoVal.values.head?.type
 			}
 			JvmCustomAnnotationValue : {
+				// must be some kind of type literal, but lets reuse the interpreter to do the work
 				val type = constantExpressionsInterpreter.evaluate(annoVal.values.head as XExpression, annoVal.operation?.returnType)
 				if (type instanceof JvmTypeReference) {
 					return type.type
