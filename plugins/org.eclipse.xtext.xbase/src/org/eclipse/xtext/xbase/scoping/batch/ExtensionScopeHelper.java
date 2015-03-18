@@ -59,7 +59,7 @@ public class ExtensionScopeHelper {
 			return resolved;
 		}
 		resolvedComputed = true;
-		return resolved = isResolved(argumentType);
+		return resolved = isResolvedOrKnownTypeParam(argumentType);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class ExtensionScopeHelper {
 		if (isMatchingFirstParameter(feature)) {
 			if (isResolvedReceiverType()) {
 				LightweightTypeReference parameterType = argumentType.getOwner().toLightweightTypeReference(feature.getParameters().get(0).getParameterType());
-				if (isResolved(parameterType) && !parameterType.isAssignableFrom(argumentType)) {
+				if (isResolvedOrKnownTypeParam(parameterType) && !parameterType.isAssignableFrom(argumentType)) {
 					return false;
 				}
 			}
@@ -137,11 +137,15 @@ public class ExtensionScopeHelper {
 		return false;
 	}
 	
-	protected boolean isResolved(LightweightTypeReference type) {
-		return type.accept(new Visitor());
+	protected boolean isResolvedOrKnownTypeParam(LightweightTypeReference type) {
+		return type.accept(new IsResolvedKnownTypeParamHelper());
 	}
 	
-	static class Visitor extends TypeReferenceVisitorWithResult<Boolean> {
+	/**
+	 * Determines if a reference is fully resolved or uses only type parameters from the
+	 * current context.
+	 */
+	protected static class IsResolvedKnownTypeParamHelper extends TypeReferenceVisitorWithResult<Boolean> {
 		@Override
 		protected Boolean doVisitTypeReference(LightweightTypeReference reference) {
 			return reference.isResolved();
@@ -154,6 +158,9 @@ public class ExtensionScopeHelper {
 		
 		@Override
 		protected Boolean doVisitWildcardTypeReference(WildcardTypeReference reference) {
+			if (reference.isResolved()) {
+				return true;
+			}
 			if (!visit(reference.getUpperBounds())) {
 				return false;
 			}
@@ -180,6 +187,9 @@ public class ExtensionScopeHelper {
 		
 		@Override
 		protected Boolean doVisitCompoundTypeReference(CompoundTypeReference reference) {
+			if (reference.isResolved()) {
+				return true;
+			}
 			return visit(reference.getMultiTypeComponents());
 		}
 		
