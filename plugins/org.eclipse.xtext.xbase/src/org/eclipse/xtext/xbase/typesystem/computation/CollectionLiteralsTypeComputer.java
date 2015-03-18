@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -104,7 +105,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 				refineElementTypeExpectation(literal, commonElementType, state);
 			}
 		} else {
-			if(expectedType != null && (expectedType.isType(Map.class) || expectedType.isResolved() && expectedType.isSubtypeOf(Map.class))) {
+			if(isMapExpectation(expectedType)) {
 				ParameterizedTypeReference unboundCollectionType = owner.newParameterizedTypeReference(mapType);
 				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(0)));
 				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(1)));
@@ -134,10 +135,14 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected boolean isMapLiteral(LightweightTypeReference expectation, LightweightTypeReference elementType) {
-		if (expectation != null && (!expectation.isResolved() || expectation.isSubtypeOf(Iterable.class))) {
+		if (isIterableExpectation(expectation)) {
 			return false;
 		}
 		return elementType.isType(Pair.class) && elementType.getTypeArguments().size() == 2;
+	}
+
+	protected boolean isMapExpectation(LightweightTypeReference expectation) {
+		return isExpectedType(expectation, Map.class);
 	}
 
 	protected void computeType(XListLiteral literal, JvmGenericType listType, ITypeExpectation expectation,
@@ -228,7 +233,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	}
 
 	/**
-	 * Creates a collection type reference that comes as close as possible / necesary to its expected type.
+	 * Creates a collection type reference that comes as close as possible / necessary to its expected type.
 	 */
 	protected LightweightTypeReference createCollectionTypeReference(JvmGenericType collectionType, LightweightTypeReference elementType, LightweightTypeReference expectedType, ITypeReferenceOwner owner) {
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, collectionType);
@@ -275,7 +280,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	 * types would match the actual element type, the collection literal will be successfully typed according to the expectation.
 	 */
 	protected boolean matchesExpectation(LightweightTypeReference elementType, LightweightTypeReference expectation) {
-		return expectation != null && !expectation.isWildcard() && expectation.isAssignableFrom(elementType);
+		return expectation != null && expectation.isResolved() && !expectation.isWildcard() && expectation.isAssignableFrom(elementType);
 	}
 
 	/**
@@ -307,7 +312,30 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected boolean isIterableExpectation(LightweightTypeReference expectation) {
-		return expectation != null && expectation.isResolved() && expectation.isSubtypeOf(Iterable.class);
+		return isExpectedType(expectation, Iterable.class);
+	}
+
+	protected boolean isExpectedType(LightweightTypeReference expectation, Class<?> clazz) {
+		if (expectation != null) {
+			if (expectation.isResolved() && expectation.isSubtypeOf(clazz)) {
+				return true;
+			}
+			if (expectation instanceof UnboundTypeReference) {
+				if (expectation.getOwner().newParameterizedTypeReference(((UnboundTypeReference) expectation).getTypeParameter()).isSubtypeOf(clazz)) {
+					return true;
+				}
+				List<LightweightBoundTypeArgument> hints = ((UnboundTypeReference) expectation).getAllHints();
+				for(LightweightBoundTypeArgument hint: hints) {
+					LightweightTypeReference hintReference = hint.getTypeReference();
+					if (hintReference.isSubtypeOf(clazz)) {
+						return true;
+					}
+				}
+			} else if (expectation instanceof ParameterizedTypeReference) {
+				return expectation.isSubtypeOf(clazz);
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -329,7 +357,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	 * If the expected type is not a wildcard, it may supersede the actual element type.
 	 */
 	protected LightweightTypeReference doNormalizeElementType(LightweightTypeReference actual, LightweightTypeReference expected) {
-		if (!expected.isWildcard() && expected.isAssignableFrom(actual)) {
+		if (matchesExpectation(actual, expected)) {
 			return expected;
 		}
 		return normalizeFunctionTypeReference(actual);
