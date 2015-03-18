@@ -127,8 +127,10 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 			public void process(XtextResource resource) throws Exception {
 				XtendFunction xtendFunction = (XtendFunction) resource.getEObject(overrideIndicatorAnnotation.getFunctionURIFragment());
 				JvmOperation operation = associations.getDirectlyInferredOperation(xtendFunction);
-				JvmOperation overridden = overrideHelper.findOverriddenOperation(operation);
-				uriEditorOpener.open(EcoreUtil.getURI(overridden), javaElementFinder.findElementFor(overridden), true);
+				if (operation != null) {
+					JvmOperation overridden = overrideHelper.findOverriddenOperation(operation);
+					uriEditorOpener.open(EcoreUtil.getURI(overridden), javaElementFinder.findElementFor(overridden), true);
+				}
 			}
 		});
 	}

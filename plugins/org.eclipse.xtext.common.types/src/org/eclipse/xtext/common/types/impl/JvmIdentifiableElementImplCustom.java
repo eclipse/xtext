@@ -26,7 +26,12 @@ public abstract class JvmIdentifiableElementImplCustom extends JvmIdentifiableEl
 			result.append(eProxyURI());
 			result.append(')');
 		} else {
-			result.append(getIdentifier());
+			try {
+				result.append(getIdentifier());
+			} catch (Exception e) {
+				// Some types could not be resolved while computing the identifier
+				result.append(getSimpleName());
+			}
 		}
 		return result.toString();
 	}

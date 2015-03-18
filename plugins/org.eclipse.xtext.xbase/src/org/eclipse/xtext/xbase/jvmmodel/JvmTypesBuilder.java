@@ -9,10 +9,7 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
 
-import java.util.Iterator;
-
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -164,15 +161,16 @@ public class JvmTypesBuilder {
 	 * @param member the member to remove the body from
 	 */
 	public void removeExistingBody(/* @Nullable */ JvmMember member) {
-		if(member != null) {
-			// remove old adapters
-			Iterator<Adapter> iterator = member.eAdapters().iterator();
-			while (iterator.hasNext()) {
-				Adapter adapter = iterator.next();
-				if (adapter instanceof CompilationStrategyAdapter) {
-					iterator.remove();
-				} else if (adapter instanceof CompilationTemplateAdapter) {
-					iterator.remove();
+		if (member != null) {
+			// We have to be careful how to remove existing adapters due to an EMF bug:
+			// https://bugs.eclipse.org/bugs/show_bug.cgi?id=462451
+			Object[] adapters = member.eAdapters().toArray();
+			for (int i = 0, j = 0; i < adapters.length; i++) {
+				if (adapters[i] instanceof CompilationStrategyAdapter
+						|| adapters[i] instanceof CompilationTemplateAdapter) {
+					member.eAdapters().remove(j);
+				} else {
+					j++;
 				}
 			}
 			associator.removeLogicalChildAssociation(member);

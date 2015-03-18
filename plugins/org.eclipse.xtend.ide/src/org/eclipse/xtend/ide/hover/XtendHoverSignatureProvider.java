@@ -78,22 +78,27 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 
 	protected String _signature(XtendFunction function, boolean typeAtEnd) {
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
-		String returnTypeString = "void";
-		JvmTypeReference returnType = inferredOperation.getReturnType();
-		if (returnType != null) {
-			if (returnType instanceof JvmAnyTypeReference) {
-				throw new IllegalStateException();
-			} else {
-				returnTypeString = getTypeName(returnType);
+		if (inferredOperation != null) {
+			String returnTypeString = "void";
+			JvmTypeReference returnType = inferredOperation.getReturnType();
+			if (returnType != null) {
+				if (returnType instanceof JvmAnyTypeReference) {
+					throw new IllegalStateException();
+				} else {
+					returnTypeString = getTypeName(returnType);
+				}
 			}
+			StringBuilder signature = new StringBuilder();
+			String typeParameter = uiStrings.typeParameters(function.getTypeParameters());
+			if (typeParameter != null && typeParameter.length() > 0){
+				signature.append(typeParameter).append(" ");
+			}
+			signature.append(returnTypeString).append(" ");
+			signature.append(function.getName()).append(hoverUiStrings.parameters(inferredOperation));
+			signature.append(getThrowsDeclaration(inferredOperation));
+			return signature.toString();
 		}
-		String signature = function.getName() + hoverUiStrings.parameters(inferredOperation)
-				+ getThrowsDeclaration(inferredOperation);
-		String typeParameter = uiStrings.typeParameters(function.getTypeParameters());
-		if(typeParameter != null && typeParameter.length() > 0){
-			return typeParameter + " " + returnTypeString + " " + signature;
-		}
-		return returnTypeString + " " + signature;
+		return function.getName() + "()";
 	}
 
 	protected String _signature(XtendField field, boolean typeAtEnd) {
@@ -162,7 +167,9 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 		if(container instanceof XtendFunction){
 			XtendFunction function = (XtendFunction) container;
 			JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
-			return function.getName() + uiStrings.parameters(inferredOperation);
+			if (inferredOperation != null) {
+				return function.getName() + uiStrings.parameters(inferredOperation);
+			}
 		}
 		else if (container instanceof XtendConstructor){
 			XtendConstructor constructor = (XtendConstructor) container;

@@ -207,8 +207,10 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected LightweightTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, featureCall);
-		if(actualReceiver == null) {
-			return owner.newParameterizedTypeReference(getCallersType(featureCall));
+		if (actualReceiver == null) {
+			JvmDeclaredType callersType = getCallersType(featureCall);
+			if (callersType != null)
+				return owner.newParameterizedTypeReference(callersType);
 		} else if (actualReceiver instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) actualReceiver).isTypeLiteral()) {
 			JvmType type = (JvmType) ((XAbstractFeatureCall) actualReceiver).getFeature();
 			ParameterizedTypeReference reference = owner.newParameterizedTypeReference(type);

@@ -115,10 +115,19 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendFunction element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-    int _get = this.adornments.get(_directlyInferredOperation);
-    return this.images.forOperation(_visibility, _get);
+    ImageDescriptor _xblockexpression = null;
+    {
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
+      ImageDescriptor _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(operation, null));
+      if (_notEquals) {
+        JvmVisibility _visibility = element.getVisibility();
+        int _get = this.adornments.get(operation);
+        _xifexpression = this.images.forOperation(_visibility, _get);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   protected ImageDescriptor _imageDescriptor(final AnonymousClass element) {
