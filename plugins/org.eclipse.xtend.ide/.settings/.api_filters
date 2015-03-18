@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component id="org.eclipse.xtext.generator" version="2">
+<component id="org.eclipse.xtend.ide" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="version will be generated during buckminster build" id="927989779">
+        <filter id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
-                <message_argument value="org.eclipse.xtext.xbase.lib"/>
+                <message_argument value="org.eclipse.xtend.ide.common"/>
             </message_arguments>
         </filter>
     </resource>
