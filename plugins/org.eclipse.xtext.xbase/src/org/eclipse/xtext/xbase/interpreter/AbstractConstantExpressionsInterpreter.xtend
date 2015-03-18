@@ -27,6 +27,10 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
+import org.eclipse.xtext.naming.QualifiedName
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -35,6 +39,7 @@ class AbstractConstantExpressionsInterpreter {
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject ConstantOperators constantOperators
+	@Inject OperatorMapping operatorMapping
 
 	def protected evaluate(XExpression expression, Context ctx) {
 		if (ctx.alreadyEvaluating.add(expression)) {
@@ -105,7 +110,7 @@ class AbstractConstantExpressionsInterpreter {
 	}
 	
 	protected def evaluateBinaryOperation(XBinaryOperation binaryOperation, Object left, Object right) {
-		val op = binaryOperation.concreteSyntaxFeatureName
+		val op = binaryOperation.operator
 		switch op {
 			case '+': constantOperators.plus(left, right)
 			case '-': constantOperators.minus(left, right)
@@ -131,12 +136,22 @@ class AbstractConstantExpressionsInterpreter {
 
 	def dispatch Object internalEvaluate(XUnaryOperation it, Context ctx) {
 		val value = operand.evaluate(ctx)
-		val op = concreteSyntaxFeatureName
+		val op = operator
 		switch op {
 			case '-': constantOperators.minus(value)
 			case op=='!' && value instanceof Boolean: !(value as Boolean)
 			case op=='+' && value instanceof Number: value
-			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate unary operator '" + value + "' on value " + value)
+			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate unary operator '" + op + "' on value " + value)
+		}
+	}
+	
+	protected def String getOperator(XAbstractFeatureCall call) {
+		switch res : call.eResource {
+			StorageAwareResource case res.isLoadedFromStorage : {
+				// we don't have a node model, but can resolve proxies
+				return operatorMapping.getOperator(QualifiedName.create(call.feature.simpleName))?.toString
+			}
+			default: call.concreteSyntaxFeatureName
 		}
 	}
 
