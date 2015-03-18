@@ -446,7 +446,7 @@ public class Strings {
 	 * 
 	 * This follows the semantics of the {@link LineNumberReader}.
 	 * 
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	public static int countLineBreaks(CharSequence text, int startInclusive, int endExclusive) {
 		int result = 0;
@@ -509,7 +509,7 @@ public class Strings {
 	 * where the given separator sequence is the only valid line break sequence.
 	 * A string without any line separators in that range returns {@code 0} as the number of lines.
 	 * 
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	public static int countLines(String text, char[] separator, int startInclusive, int endExclusive) {
 		int line = 0;
