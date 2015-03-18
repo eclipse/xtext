@@ -26,13 +26,6 @@
       option="-Xmx"
       value="2g"
       vm="true"/>
-  <setup:EclipseIniTask
-    xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
-    option="-Doomph.redirection.xtext"
-    value="=https://raw.githubusercontent.com/eclipse/xtext/master/devtools/org.eclipse.xtext.contributor/interim/->${git.clone.xtext.location|uri}/devtools/org.eclipse.xtext.contributor/interim/"
-    vm="true"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
@@ -67,7 +60,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
+      value="http://download.eclipse.org/modeling/emf/emf/updates/2.11milestones/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="antlr-gen.update.site"
@@ -99,13 +92,13 @@
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <requirement
-      name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
+        name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
     <repository
         url="${xtext.nightly.composite}"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
     <repository
-      url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
+        url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
@@ -642,9 +635,9 @@
       <sourceLocator
           rootFolder="${git.clone.xtext.location/intellij}"/>
       <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtext.website}"/>
+          rootFolder="${git.clone.xtext.location/xtext-website}"/>
       <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtend.website}"/>
+          rootFolder="${git.clone.xtext.location/xtend-website}"/>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
@@ -665,17 +658,18 @@
         name="master">
       <setupTask
           xsi:type="pde:APIBaselineTask"
+          disabled="true"
           name="xtext"
-          version="2.7"
-          location="${installation.location}/api"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-Update-2.7.0.zip&amp;r=1"/>
+          version="2.8"
+          location="${installation.location}/api/v2.8/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
     </stream>
     <stream
         name="maintenance">
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.git.branch"
-          value="v2.7_Maintenance"/>
+          value="2.8_Maintenance"/>
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.nightly.composite"
@@ -684,10 +678,23 @@
           xsi:type="setup:VariableTask"
           name="emf.update.site"
           value="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
+      <setupTask
+          xsi:type="pde:APIBaselineTask"
+          disabled="true"
+          name="xtext"
+          version="2.7"
+          location="${installation.location}/api/v2.7/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-Update-2.7.0.zip&amp;r=1"/>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
+  <setup:EclipseIniTask
+      option="-Doomph.redirection.xtext"
+      value="=https://raw.githubusercontent.com/eclipse/xtext/master/devtools/org.eclipse.xtext.contributor/interim/->${git.clone.xtext.location|uri}/devtools/org.eclipse.xtext.contributor/interim/"
+      vm="true"
+      xmlns:xmi="http://www.omg.org/XMI"
+      xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"/>
 </setup:Project>
