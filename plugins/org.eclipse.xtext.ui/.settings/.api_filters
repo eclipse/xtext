@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.8.0"/>
+                <message_argument value="2.9.0"/>
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
@@ -14,26 +14,6 @@
                 <message_argument value="ResourceStorageLoadable"/>
                 <message_argument value="ICurrentStateProvidingExtension"/>
                 <message_argument value="getResourceStorageLoadable()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument"/>
-                <message_argument value="getOutdatedStateCancelIndicator(XtextResource)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument"/>
-                <message_argument value="isOutdated()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338886760">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.OutdatedStateAdapter"/>
-                <message_argument value="org.eclipse.xtext.ui_2.8.0"/>
             </message_arguments>
         </filter>
     </resource>
