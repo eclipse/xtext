@@ -21,12 +21,11 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			import java.util.List
 			
 			abstract class Bug {
-				def <E> Graph<E, E> graph(Set<E> vertices, Map<E, List<E>> edges)
+				def <E> Map<E, E> graph(Set<E> vertices, Map<E, List<E>> edges)
 				def test() {
 					graph(#{"a"}, #{"a" -> #["b"]})
 				}
 			}
-			class Graph<K, V> {}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
 			import java.util.List;
@@ -37,9 +36,9 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public abstract class Bug {
-			  public abstract <E extends Object> Graph<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
+			  public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
 			  
-			  public Graph<String, String> test() {
+			  public Map<String, String> test() {
 			    Pair<String, List<String>> _mappedTo = Pair.<String, List<String>>of("a", Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
 			    return this.<String>graph(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("a")), Collections.<String, List<String>>unmodifiableMap(CollectionLiterals.<String, List<String>>newHashMap(_mappedTo)));
 			  }
@@ -54,12 +53,11 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			import java.util.List
 			
 			abstract class Bug {
-				def <E> Graph<E, E> graph(Set<E> vertices, Map<E, List<E>> edges)
+				def <E> Map<E, E> graph(Set<E> vertices, Map<E, List<E>> edges)
 				def test() {
 					graph(#{}, #{})
 				}
 			}
-			class Graph<K, V> {}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
 			import java.util.List;
@@ -69,9 +67,9 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public abstract class Bug {
-			  public abstract <E extends Object> Graph<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
+			  public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
 			  
-			  public Graph<Object, Object> test() {
+			  public Map<Object, Object> test() {
 			    return this.<Object>graph(Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet()), Collections.<Object, List<Object>>unmodifiableMap(CollectionLiterals.<Object, List<Object>>newHashMap()));
 			  }
 			}
@@ -85,12 +83,11 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			import java.util.List
 			
 			abstract class Bug {
-				def <E, M extends Map<E, List<E>>> Graph<E, E> graph(Set<E> vertices, M edges)
+				def <E, M extends Map<E, List<E>>> Map<E, E> graph(Set<E> vertices, M edges)
 				def test() {
 					graph(#{"a"}, #{"a" -> #["b"]})
 				}
 			}
-			class Graph<K, V> {}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
 			import java.util.List;
@@ -101,9 +98,9 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public abstract class Bug {
-			  public abstract <E extends Object, M extends Map<E, List<E>>> Graph<E, E> graph(final Set<E> vertices, final M edges);
+			  public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);
 			  
-			  public Graph<String, String> test() {
+			  public Map<String, String> test() {
 			    Pair<String, List<String>> _mappedTo = Pair.<String, List<String>>of("a", Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
 			    return this.<String, Map<String, List<String>>>graph(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("a")), Collections.<String, List<String>>unmodifiableMap(CollectionLiterals.<String, List<String>>newHashMap(_mappedTo)));
 			  }
@@ -118,12 +115,11 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			import java.util.List
 			
 			abstract class Bug {
-				def <E, M extends Map<E, List<E>>> Graph<E, E> graph(Set<E> vertices, M edges)
+				def <E, M extends Map<E, List<E>>> Map<E, E> graph(Set<E> vertices, M edges)
 				def test() {
 					graph(#{}, #{})
 				}
 			}
-			class Graph<K, V> {}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
 			import java.util.List;
@@ -133,9 +129,9 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public abstract class Bug {
-			  public abstract <E extends Object, M extends Map<E, List<E>>> Graph<E, E> graph(final Set<E> vertices, final M edges);
+			  public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);
 			  
-			  public Graph<Object, Object> test() {
+			  public Map<Object, Object> test() {
 			    return this.<Object, Map<Object, List<Object>>>graph(Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet()), Collections.<Object, List<Object>>unmodifiableMap(CollectionLiterals.<Object, List<Object>>newHashMap()));
 			  }
 			}
@@ -154,7 +150,6 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 					graph(newHashMap, #{})
 				}
 			}
-			class Graph<K, V> {}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
 			import java.util.HashMap;
