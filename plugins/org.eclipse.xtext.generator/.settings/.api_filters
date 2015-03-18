@@ -3,21 +3,8 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.8.0"/>
+                <message_argument value="2.9.0"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/generator/validation/ValidatorNaming.java" type="org.eclipse.xtext.generator.validation.ValidatorNaming">
-        <filter comment="fileHeader() has been moved to the Naming class" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.validation.ValidatorNaming"/>
-                <message_argument value="fileHeader()"/>
-            </message_arguments>
-        </filter>
-        <filter comment="The superclass fields of ValidatorNaming were not initialized" id="338849923">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.validation.ValidatorNaming"/>
             </message_arguments>
         </filter>
     </resource>
