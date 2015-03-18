@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.8.0"/>
-                <message_argument value="2.7.0"/>
-            </message_arguments>
-        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.8.0"/>
+                <message_argument value="2.9.0"/>
                 <message_argument value="org.eclipse.xtext.util"/>
             </message_arguments>
         </filter>
@@ -168,34 +162,6 @@
                 <message_argument value="IPreferenceValuesProvider"/>
                 <message_argument value="IssueSeveritiesProvider"/>
                 <message_argument value="getValuesProvider()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessQueue.java" type="org.eclipse.xtext.generator.FileSystemAccessQueue">
-        <filter id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessQueue"/>
-                <message_argument value="FileSystemAccessQueue(BlockingQueue&lt;FileSystemAccessRequest&gt;)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessRequest.java" type="org.eclipse.xtext.generator.FileSystemAccessRequest">
-        <filter id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
-                <message_argument value="FileSystemAccessRequest()"/>
-            </message_arguments>
-        </filter>
-        <filter id="388018290">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
-                <message_argument value="procedure"/>
-            </message_arguments>
-        </filter>
-        <filter id="388018290">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
-                <message_argument value="uri"/>
             </message_arguments>
         </filter>
     </resource>
