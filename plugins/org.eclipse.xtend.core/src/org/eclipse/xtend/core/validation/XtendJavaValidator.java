@@ -1513,9 +1513,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkCreateFunctionIsNotTypeVoid(XtendFunction func) {
 		if (func.getCreateExtensionInfo() == null)
 			return;
-		JvmOperation operation = associations.getDirectlyInferredOperation(func);
 		if (func.getReturnType() == null) {
-			if (isPrimitiveVoid(operation.getReturnType())) {
+			JvmOperation operation = associations.getDirectlyInferredOperation(func);
+			if (operation != null && isPrimitiveVoid(operation.getReturnType())) {
 				error("void is an invalid type for the create method " + func.getName(), func,
 						XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_USE_OF_TYPE);
 			}
@@ -2022,7 +2022,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			return;
 		JvmOperation jvmOperation = associations.getDirectlyInferredOperation(method);
 		IResolvedTypes types = batchTypeResolver.resolveTypes(method);
-		if (types.getActualType(jvmOperation).isPrimitiveVoid()) 
+		if (jvmOperation != null && types.getActualType(jvmOperation).isPrimitiveVoid()) 
 			return;
 		implicitReturnFinder.findImplicitReturns(method.getExpression(), new Acceptor() {
 			@Override

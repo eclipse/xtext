@@ -15,13 +15,13 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
 import org.eclipse.xtext.xbase.validation.UIStrings
-import org.eclipse.xtend.core.xtend.XtendParameter
 
 /**
  * Provides labels for Xtend elements.
@@ -68,7 +68,9 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 	}
 
 	protected def dispatch imageDescriptor(XtendFunction element) {
-		images.forOperation(element.visibility, adornments.get(element.directlyInferredOperation))
+		val operation = element.directlyInferredOperation
+		if (operation != null)
+			images.forOperation(element.visibility, adornments.get(operation))
 	}
 
 	protected def dispatch imageDescriptor(AnonymousClass element) {

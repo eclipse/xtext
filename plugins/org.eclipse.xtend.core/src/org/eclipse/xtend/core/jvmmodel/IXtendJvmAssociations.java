@@ -64,11 +64,14 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	JvmConstructor getInferredConstructor(XtendConstructor xtendConstructor);
 	
 	/**
-	 * Returns the directly inferred operation for the given function.
-	 * If the function is a dispatch function, the dispatch case is returned and not the dispatcher.
+	 * Returns the directly inferred operation for the given function. If possible, this method returns
+	 * an operation with exactly the same name as the {@code xtendFunction}, otherwise the first
+	 * associated JVM operation. {@code null} is returned if there is no associated operation.
 	 * 
-	 * If the function is a create function, the public visible function is returned and not
-	 * the synthetic initializer function.
+	 * <p>If the function is a dispatch function, the dispatch case is returned and not the dispatcher.</p>
+	 * 
+	 * <p>If the function is a create function, the public visible function is returned and not
+	 * the synthetic initializer function.</p>
 	 * 
 	 * @see #getDispatchOperation(XtendFunction)
 	 */
@@ -157,6 +160,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 					return jvmOperation;
 				}
 			}
+			// The operation might have been renamed by an active annotation - return the primary JVM element
+			Iterator<JvmOperation> iterator = jvmElements.iterator();
+			if (iterator.hasNext())
+				return iterator.next();
 			return null;
 		}
 		
