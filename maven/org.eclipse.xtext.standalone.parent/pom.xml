@@ -11,7 +11,7 @@
 	<name>Xtext Standalone Library parent</name>
 	<packaging>pom</packaging>
 	<properties>
-		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/nightly/</xtext-url>
+		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/</xtext-url>
 		<mwe2-url>http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.7.1/</mwe2-url>
 		<xpand-url>http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201406030414/</xpand-url>
 		<scripts.dir>${basedir}</scripts.dir>
