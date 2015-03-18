@@ -275,9 +275,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
 				if (actualType == null) {
 					JvmOperation operation = typeResolver.associations.getDirectlyInferredOperation(createFunction);
-					IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
-					typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
-					actualType = resolvedTypes.getReturnType(expression);
+					if (operation != null) {
+						IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
+						typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
+						actualType = resolvedTypes.getReturnType(expression);
+					}
 				}
 				if (actualType == null)
 					return null;
@@ -637,11 +639,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				XtendFunction function = (XtendFunction) sourceElement;
 				if (function.getCreateExtensionInfo() != null) {
 					JvmOperation operation = associations.getDirectlyInferredOperation(function);
-					declareTypeParameters(resolvedTypes, field, resolvedTypesByContext);
-					XComputedTypeReference fieldType = getServices().getXtypeFactory().createXComputedTypeReference();
-					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes, featureScopeSession));
-					castedKnownType.setEquivalent(fieldType);
-					return;
+					if (operation != null) {
+						declareTypeParameters(resolvedTypes, field, resolvedTypesByContext);
+						XComputedTypeReference fieldType = getServices().getXtypeFactory().createXComputedTypeReference();
+						fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes, featureScopeSession));
+						castedKnownType.setEquivalent(fieldType);
+						return;
+					}
 				}
 			}
 		}
