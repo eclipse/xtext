@@ -58,9 +58,13 @@ public class IResourcesSetupUtil {
 	
 	public static void assertNoErrorsInWorkspace() throws CoreException {
 		IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+		String msg = "";
 		for (IMarker iMarker : findMarkers) {
-			Assert.assertFalse(MarkerUtilities.getMarkerType(iMarker)+"-"+MarkerUtilities.getMessage(iMarker), MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR);
+			if (MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR)
+				msg += "\n - "+iMarker.getResource().getName()+":"+MarkerUtilities.getLineNumber(iMarker)+" - "+MarkerUtilities.getMessage(iMarker) + "("+MarkerUtilities.getMarkerType(iMarker)+")";
 		}
+		if (msg.length()>0)
+			Assert.fail("Workspace contained errors: "+msg);
 	}
 
 	public static void addNature(IProject project, String nature)
