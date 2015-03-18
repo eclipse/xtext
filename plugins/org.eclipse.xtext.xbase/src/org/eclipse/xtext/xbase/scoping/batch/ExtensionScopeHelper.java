@@ -16,7 +16,12 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,16 +29,21 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class ExtensionScopeHelper {
 
 	private LightweightTypeReference rawArgumentType;
+	private LightweightTypeReference argumentType;
+	private boolean resolvedComputed;
+	private boolean resolved;
 
 	public ExtensionScopeHelper(LightweightTypeReference argumentType) {
+		this.argumentType = argumentType;
 		this.rawArgumentType = argumentType.getRawTypeReference();
+		
 	}
 	
 	/**
 	 * Features that are valid extensions are all {@link JvmOperation operations}
 	 * with at least one {@link JvmExecutable#getParameters() parameter}.
 	 */
-	boolean isPossibleExtension(JvmFeature feature) {
+	protected boolean isPossibleExtension(JvmFeature feature) {
 		if (!(feature instanceof JvmOperation)) {
 			return false;
 		}
@@ -42,6 +52,32 @@ public class ExtensionScopeHelper {
 			return false;
 		}
 		return true;
+	}
+	
+	protected boolean isResolvedReceiverType() {
+		if (resolvedComputed) {
+			return resolved;
+		}
+		resolvedComputed = true;
+		return resolved = isResolvedOrKnownTypeParam(argumentType);
+	}
+
+	/**
+	 * Check the type of the first parameter against the argument type rather
+	 * than the {@link #rawArgumentType}. Should not be used during linking
+	 * since we need proper error messages there for type mismatches.
+	 */
+	protected boolean isMatchingFirstParameterDeepCheck(JvmOperation feature) {
+		if (isMatchingFirstParameter(feature)) {
+			if (isResolvedReceiverType()) {
+				LightweightTypeReference parameterType = argumentType.getOwner().toLightweightTypeReference(feature.getParameters().get(0).getParameterType());
+				if (isResolvedOrKnownTypeParam(parameterType) && !parameterType.isAssignableFrom(argumentType)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	protected boolean isMatchingFirstParameter(JvmOperation feature) {
@@ -99,6 +135,72 @@ public class ExtensionScopeHelper {
 			}
 		}
 		return false;
+	}
+	
+	protected boolean isResolvedOrKnownTypeParam(LightweightTypeReference type) {
+		return type.accept(new IsResolvedKnownTypeParamHelper());
+	}
+	
+	/**
+	 * Determines if a reference is fully resolved or uses only type parameters from the
+	 * current context.
+	 */
+	protected static class IsResolvedKnownTypeParamHelper extends TypeReferenceVisitorWithResult<Boolean> {
+		@Override
+		protected Boolean doVisitTypeReference(LightweightTypeReference reference) {
+			return reference.isResolved();
+		}
+		
+		@Override
+		protected Boolean doVisitArrayTypeReference(ArrayTypeReference reference) {
+			return reference.getComponentType().accept(this);
+		}
+		
+		@Override
+		protected Boolean doVisitWildcardTypeReference(WildcardTypeReference reference) {
+			if (reference.isResolved()) {
+				return true;
+			}
+			if (!visit(reference.getUpperBounds())) {
+				return false;
+			}
+			LightweightTypeReference lowerBound = reference.getLowerBound();
+			if (lowerBound != null) {
+				return lowerBound.accept(this);
+			}
+			return true;
+		}
+		
+		@Override
+		protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
+			if (reference.isResolved()) {
+				return true;
+			}
+			if (reference.getOwner().getDeclaredTypeParameters().contains(reference.getType())) {
+				return true;
+			}
+			if (!visit(reference.getTypeArguments())) {
+				return false;
+			}
+			return !(reference.getType() instanceof JvmTypeParameter);
+		}
+		
+		@Override
+		protected Boolean doVisitCompoundTypeReference(CompoundTypeReference reference) {
+			if (reference.isResolved()) {
+				return true;
+			}
+			return visit(reference.getMultiTypeComponents());
+		}
+		
+		protected boolean visit(List<LightweightTypeReference> list) {
+			for(LightweightTypeReference arg: list) {
+				if (!arg.accept(this)) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 	
 }

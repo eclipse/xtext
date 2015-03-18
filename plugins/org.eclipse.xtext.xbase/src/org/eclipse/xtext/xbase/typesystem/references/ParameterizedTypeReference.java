@@ -64,7 +64,6 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			}
 		}
 		this.type = type;
-		// TODO check against owner or specialized representation of the owner
 		this.resolved = !(type instanceof JvmTypeParameter);
 	}
 	
