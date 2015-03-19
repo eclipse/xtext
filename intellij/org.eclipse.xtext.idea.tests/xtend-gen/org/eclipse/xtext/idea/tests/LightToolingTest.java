@@ -35,7 +35,6 @@ import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightProjectDescriptor;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.tree.TreeUtil;
@@ -48,7 +47,6 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -59,9 +57,6 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   @Accessors
   private final LanguageFileType fileType;
   
-  @Extension
-  protected JavaCodeInsightTestFixture myFixture;
-  
   public LightToolingTest(final LanguageFileType fileType) {
     this.fileType = fileType;
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
@@ -71,7 +66,6 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    this.myFixture = super.myFixture;
     CodeInsightSettings _instance = CodeInsightSettings.getInstance();
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false;
   }
