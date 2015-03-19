@@ -20,3 +20,18 @@ As a subproject of Eclipse, Xtext uses [Bugzilla](https://bugs.eclipse.org/bugs/
 - [create a new bug report](https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF).
 
 More information: [projects.eclipse.org](http://projects.eclipse.org/projects/modeling.tmf.xtext/developer)
+
+## How to Build an Xtext p2 repository
+
+Xtext is build with [buckminster] (http://wiki.eclipse.org/index.php/Buckminster_Project). You can run the full Xtext build on your machine using an [ant script](releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant).
+
+in eclipse:
+ - launch the /org.eclipse.xtext.releng/local-xtext-build.launch file.
+
+in terminal:
+ - From the xtext git repository root
+   
+   ```cd releng/org.eclipse.xtext.releng/releng/ant/```
+ - Run xtext-build.ant script
+   
+   ```ant -f xtext-build.ant ```
