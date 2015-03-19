@@ -48,7 +48,7 @@ public abstract class PackageFragmentRootWalker<T> {
 	
 	public T traverse(IPackageFragmentRoot root, boolean stopOnFirstResult) throws JavaModelException {
 		T result = null;
-		if (root.exists()) {
+		if (root.exists() && existsPhysically(root)) {
 			Object[] resources = root.getNonJavaResources();
 			TraversalState state = new TraversalState(root);
 			for (Object object : resources) {
@@ -69,6 +69,16 @@ public abstract class PackageFragmentRootWalker<T> {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected boolean existsPhysically(IPackageFragmentRoot root) throws JavaModelException {
+		if(root.isExternal()) 
+			return root.getPath().toFile().exists();
+		else
+			return root.getUnderlyingResource().exists();
 	}
 
 	protected T traverse(IPackageFragment pack, boolean stopOnFirstResult, TraversalState state) throws JavaModelException {
