@@ -99,24 +99,9 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.xtext"
-      remoteURI="https://github.com/eclipse/xtext.git"
+      remoteURI="git@github.com:eclipse/xtext.git"
       checkoutBranch="${xtext.git.branch}">
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/InducedChoices">
-      <detail
-          key="inherit">
-        <value>eclipse.git.gerrit.remoteURIs</value>
-      </detail>
-      <detail
-          key="label">
-        <value>Xtext Git or Gerrit Repository</value>
-      </detail>
-      <detail
-          key="target">
-        <value>remoteURI</value>
-      </detail>
-    </annotation>
-    <description>Xtext</description>
+    <description>${scope.project.label}</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -646,9 +631,9 @@
       <sourceLocator
           rootFolder="${git.clone.xtext.location/intellij}"/>
       <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtext.website}"/>
+          rootFolder="${git.clone.xtext.location/xtext-website}"/>
       <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtend.website}"/>
+          rootFolder="${git.clone.xtext.location/xtend-website}"/>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
@@ -669,7 +654,6 @@
         name="master">
       <setupTask
           xsi:type="pde:APIBaselineTask"
-          disabled="true"
           name="xtext"
           version="2.7"
           location="${installation.location}/api"
