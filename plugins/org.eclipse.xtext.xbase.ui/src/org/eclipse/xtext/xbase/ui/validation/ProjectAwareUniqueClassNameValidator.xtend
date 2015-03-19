@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.validation
 
 import com.google.inject.Inject
+import java.util.Collection
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin
@@ -31,8 +32,9 @@ import org.eclipse.jdt.internal.core.search.indexing.IIndexConstants
 import org.eclipse.jdt.internal.core.search.matching.TypeDeclarationPattern
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
 import org.eclipse.xtext.generator.IDerivedResourceMarkers
-import org.eclipse.xtext.generator.IOutputConfigurationProvider
+import org.eclipse.xtext.generator.OutputConfiguration
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.ResourceSetContext
@@ -47,7 +49,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	
 	@Inject IDerivedResourceMarkers derivedResourceMarkers
 	
-	@Inject IOutputConfigurationProvider outputConfigurationProvider
+	@Inject IContextualOutputConfigurationProvider outputConfigurationProvider
 	
 	override doCheckUniqueName(QualifiedName name, JvmDeclaredType type) {
 		if (super.doCheckUniqueName(name, type)) {
@@ -57,7 +59,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				return true
 			}
 		} else {
-			return true
+			return false
 		}
 	}
 	
@@ -65,17 +67,18 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		INTERRUPT, DUPLICATE, UNIQUE
 	}
 	
-	private def SourceTraversal doCheckUniqueInProjectSource(String packageName, String typeName, JvmDeclaredType type, IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
+	private def SourceTraversal doCheckUniqueInProjectSource(String packageName, String typeName, JvmDeclaredType type,
+			IPackageFragmentRoot[] sourceFolders, Collection<OutputConfiguration> outputConfigurations) throws JavaModelException {
 		var indexManager = JavaModelManager.getIndexManager
 		for (sourceFolder : sourceFolders) {
 			if (indexManager.awaitingJobsCount > 0) {
-				if (!isDerived(sourceFolder.resource)) {
+				if (!isDerived(sourceFolder.resource, outputConfigurations)) {
 					var packageFragment = sourceFolder.getPackageFragment(packageName)
 					if (packageFragment.exists()) {
 						var units = packageFragment.getCompilationUnits()
 						for (unit : units) {
 							val resource = unit.resource
-							if (!isDerived(resource)) {
+							if (!isDerived(resource, outputConfigurations)) {
 								var javaType = unit.getType(typeName)
 								if (javaType.exists()) {
 									addIssue(type, unit.elementName)
@@ -94,6 +97,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	
 	def boolean doCheckUniqueInProject(QualifiedName name, JvmDeclaredType type) throws JavaModelException {
 		val javaProject = javaProjectProvider.getJavaProject(type.eResource.resourceSet)
+		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(type.eResource)
 		val packageName = type.packageName
 		val typeName = type.simpleName
 		val sourceFolders = javaProject.packageFragmentRoots.filter[ kind == IPackageFragmentRoot.K_SOURCE ]
@@ -101,7 +105,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		
 		if (sourceFolders.length == 0 || indexManager.awaitingJobsCount() > 0) {
 			// still indexing - don't enter a busy wait loop but ask the source folders directly
-			switch doCheckUniqueInProjectSource(packageName?:'', typeName, type, sourceFolders) {
+			switch doCheckUniqueInProjectSource(packageName?:'', typeName, type, sourceFolders, outputConfigurations) {
 				case DUPLICATE: return false
 				case UNIQUE: return true
 				default: {
@@ -115,7 +119,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		if (copies != null) {
 			for (workingCopy: copies) {
 				val path = workingCopy.path
-				if (javaProject.path.isPrefixOf(path) && !isDerived(workingCopy.resource)) {
+				if (javaProject.path.isPrefixOf(path) && !isDerived(workingCopy.resource, outputConfigurations)) {
 					if (workingCopy.getPackageDeclaration(packageName).exists()) {
 						var IType result = workingCopy.getType(typeName)
 						if (result.exists()) {
@@ -140,7 +144,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				return true // filter out working copies
 			}
 			var IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(documentPath))
-			if (!isDerived(file)) {
+			if (!isDerived(file, outputConfigurations)) {
 				addIssue(type, file.name)
 				return false
 			}
@@ -165,13 +169,13 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
 	}
 
-	def protected isDerived(IResource resource) {
+	def protected isDerived(IResource resource, Collection<OutputConfiguration> outputConfigurations) {
 		try {
 			if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
 				return true
 			}
 			val projectRelativePath = resource.projectRelativePath
-			for(outputConfiguration: outputConfigurationProvider.outputConfigurations) {
+			for(outputConfiguration: outputConfigurations) {
 				for(dir: outputConfiguration.outputDirectories) {
 					if (new Path(dir).isPrefixOf(projectRelativePath)) {
 						return true
