@@ -32,7 +32,6 @@ import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ExceptionAcceptor;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -118,20 +117,19 @@ public class ContentFormatter implements IContentFormatter {
 		return preferencesProvider;
 	}
 
-	protected IAcceptor<Exception> getProblemHandler() {
-		return ExceptionAcceptor.LOGGING;
-	}
-
 	protected void initRequest(IXtextDocument document, IRegion region, XtextResource resource, FormatterRequest request) {
 		ITextRegion textRegion = new TextRegion(region.getOffset(), region.getLength());
 		request.setAllowIdentityEdits(false);
 		request.setFormatUndenfinedTokensOnly(false);
-		request.setExceptionHandler(getProblemHandler());
 		request.setRegions(singletonList(textRegion));
 		NodeModelBasedRegionAccess tokenAccess = nodeModelTokenAccessBuilder.withResource(resource).create();
 		IPreferenceValues preferenceValues = preferencesProvider.getPreferenceValues(resource);
 		request.setPreferences(TypedPreferenceValues.castOrWrap(preferenceValues));
 		request.setTextRegionAccess(tokenAccess);
+		if (tokenAccess.hasSyntaxError())
+			request.setExceptionHandler(ExceptionAcceptor.IGNORING);
+		else
+			request.setExceptionHandler(ExceptionAcceptor.LOGGING);
 	}
 
 	public void setPreferencesProvider(IPreferenceValuesProvider cfgProvider) {
