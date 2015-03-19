@@ -365,9 +365,12 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 	
 	protected def evaluateField(XAbstractFeatureCall call, JvmField field, Context context) {
-		if (field.eResource instanceof TypeResource) {
-			val clazz = getJavaType(field.declaringType, context.classFinder)
-			return clazz.getField(field.simpleName)?.get(null)
+		if (field.isSetConstant || field.eResource instanceof TypeResource) {
+			if (field.isConstant) {
+				return field.constantValue
+			} else {
+				throw new ConstantExpressionEvaluationException("Field "+field.declaringType.simpleName+"."+field.simpleName+" is not a constant")
+			}
 		}
 		val expression = containerProvider.getAssociatedExpression(field)
 		if (context.alreadyEvaluating.contains(expression)) {

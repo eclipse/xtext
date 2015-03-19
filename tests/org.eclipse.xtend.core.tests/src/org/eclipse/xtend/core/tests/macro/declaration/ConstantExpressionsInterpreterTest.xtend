@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 import test.Constants1
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 
 /**
  * @author Sven Efftinge
@@ -49,6 +50,28 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		val field = file.xtendTypes.head.members.filter(XtendField).head
 		val blue = interpreter.evaluate(field.initialValue, field.type) as JvmEnumerationLiteral
 		assertEquals("RED", blue.simpleName)
+	}
+	
+	@Test def void testNonConstant() {
+		val file = file('''
+			class C { 
+				public final static Class<?> REF = D.testFoo;
+			}
+			
+			class D {
+				public final static Class<?> testFoo = Object
+			}
+		''')
+		// make sure the full resolution happened, so the constant values are set on the fields
+		(file.eResource as BatchLinkableResource).resolveLazyCrossReferences(null)
+		
+		val field = file.xtendTypes.head.members.filter(XtendField).head
+		try {
+			interpreter.evaluate(field.initialValue, field.type)
+			fail("exception expected")
+		} catch (ConstantExpressionEvaluationException e) {
+			// expected
+		}
 	}
 	
 	@Test def void testConstants_WithStaticImport() {

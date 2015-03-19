@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.junit.Assert;
 import org.junit.Test;
 import test.Constants1;
@@ -101,6 +103,50 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       final JvmEnumerationLiteral blue = ((JvmEnumerationLiteral) _evaluate);
       String _simpleName = blue.getSimpleName();
       Assert.assertEquals("RED", _simpleName);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNonConstant() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C { ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public final static Class<?> REF = D.testFoo;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class D {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public final static Class<?> testFoo = Object");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.file(_builder.toString());
+      Resource _eResource = file.eResource();
+      ((BatchLinkableResource) _eResource).resolveLazyCrossReferences(null);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = _head.getMembers();
+      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
+      final XtendField field = IterableExtensions.<XtendField>head(_filter);
+      try {
+        XExpression _initialValue = field.getInitialValue();
+        JvmTypeReference _type = field.getType();
+        this.interpreter.evaluate(_initialValue, _type);
+        Assert.fail("exception expected");
+      } catch (final Throwable _t) {
+        if (_t instanceof ConstantExpressionEvaluationException) {
+          final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
