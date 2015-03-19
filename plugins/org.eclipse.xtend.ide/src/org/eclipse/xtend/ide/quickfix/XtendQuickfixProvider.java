@@ -538,20 +538,22 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					jvmElement = associations.getJvmField((XtendField) element);
 				}
 				
-				LightweightTypeReference type = batchTypeResolver.resolveTypes(element).getActualType(jvmElement);
-				INode node = Iterables.getFirst(NodeModelUtils.findNodesForFeature(element, featureAfterType), null);
-				
-				if (node == null) {
-					throw new IllegalStateException("Could not determine node for " + element);
+				if (jvmElement != null) {
+					LightweightTypeReference type = batchTypeResolver.resolveTypes(element).getActualType(jvmElement);
+					INode node = Iterables.getFirst(NodeModelUtils.findNodesForFeature(element, featureAfterType), null);
+					
+					if (node == null) {
+						throw new IllegalStateException("Could not determine node for " + element);
+					}
+					if (type == null) {
+						throw new IllegalStateException("Could not determine type for " + element);
+					}
+					ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+							(XtextResource) element.eResource(), node.getOffset(), 0);
+					appendable.append(type);
+					appendable.append(" ");
+					appendable.commitChanges();
 				}
-				if (type == null) {
-					throw new IllegalStateException("Could not determine type for " + element);
-				}
-				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
-						(XtextResource) element.eResource(), node.getOffset(), 0);
-				appendable.append(type);
-				appendable.append(" ");
-				appendable.commitChanges();
 			}
 		});
 	}
