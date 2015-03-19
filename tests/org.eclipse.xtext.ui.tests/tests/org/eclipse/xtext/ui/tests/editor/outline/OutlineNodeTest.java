@@ -93,7 +93,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 				return state != null;
 			}
 		};
-		assertNull(rootNode.readOnly(work));
+		assertTrue(rootNode.readOnly(work));
 		assertTrue(parentNode.readOnly(work));
 		assertTrue(featureNode.readOnly(work));
 	}
