@@ -299,7 +299,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		if (fileEditor == null) {
 			throw new AssertionError('''editor not opened for «myFile»''')
 		}
-		val builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(file)
+		val builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(myFixture.file)
 		if (builder == null) {
 			throw new AssertionError('''no builder for «myFile»''')
 		}
