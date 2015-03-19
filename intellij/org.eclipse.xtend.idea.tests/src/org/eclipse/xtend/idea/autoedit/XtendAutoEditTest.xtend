@@ -28,7 +28,7 @@ class XtendAutoEditTest extends LightXtendTest {
 				def bar«CARET»
 			}
 		''')
-		type("(")
+		myFixture.type("(")
 		assertEditor('''
 			class Foo {
 				def bar(«CARET»)
@@ -60,7 +60,7 @@ class XtendAutoEditTest extends LightXtendTest {
 				}
 			}
 		''')
-		type("(")
+		myFixture.type("(")
 		assertEditor('''
 			class Foo {
 				def bar() {
@@ -76,7 +76,7 @@ class XtendAutoEditTest extends LightXtendTest {
 				def bar(int«CARET»)
 			}
 		''')
-		type("[")
+		myFixture.type("[")
 		assertEditor('''
 			class Foo {
 				def bar(int[«CARET»])
@@ -104,7 +104,7 @@ class XtendAutoEditTest extends LightXtendTest {
 	}
 	
 	private def newLine() {
-		type('\n')
+		myFixture.type('\n')
 	}
 
 	private def assertEditor(String editorState) {
@@ -113,8 +113,8 @@ class XtendAutoEditTest extends LightXtendTest {
 		var text = normalized
 		if (caretPosition != -1) {
 			text = normalized.replace(CARET, "")
-			assertEquals(caretPosition, editor.caretModel.primaryCaret.offset)
+			assertEquals(caretPosition, myFixture.editor.caretModel.primaryCaret.offset)
 		}
-		assertEquals(text, editor.document.text)
+		assertEquals(text, myFixture.editor.document.text)
 	}
 }

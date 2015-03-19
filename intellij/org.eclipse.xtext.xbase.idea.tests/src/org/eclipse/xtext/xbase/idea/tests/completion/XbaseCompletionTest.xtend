@@ -18,14 +18,14 @@ import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 abstract class AbstractXbaseCompletionTest extends LightToolingTest {
 
 	def testMemberFeatureCall() {
-		type('''"".toSt''')
-		completeBasic
+		myFixture.type('''"".toSt''')
+		myFixture.completeBasic
 		assertLookupStrings("toString")
 	}
 	
 	def testFeatureCall() {
-		type('''printl''')
-		completeBasic
+		myFixture.type('''printl''')
+		myFixture.completeBasic
 		assertLookupStrings("println")
 	}
 	

@@ -35,7 +35,7 @@ class XtendCompletionTest extends LightXtendTest {
 	
 	def void testJvmParameterizedTypeReference_Type() {
 		"class Foo extends Array<caret>".complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
@@ -45,7 +45,7 @@ class XtendCompletionTest extends LightXtendTest {
 		   		def Array<caret> foo() {}
 		   }
 		'''.toString.complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
@@ -59,13 +59,13 @@ class XtendCompletionTest extends LightXtendTest {
 	
 	def void testXImportDeclaration_ImportedType() {
 		"import <caret>".complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
 	def void testXImportDeclaration_ImportedType_02() {
 		"import java.util.Array<caret>".complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
@@ -83,7 +83,7 @@ class XtendCompletionTest extends LightXtendTest {
 		   
 		   interface InterfaceBar {}
 		'''.toString.complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Bar"))
 		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("AbstractBar"))
@@ -98,7 +98,7 @@ class XtendCompletionTest extends LightXtendTest {
 		   		}
 		   }
 		'''.toString.complete
-		val lookupElementStrings = lookupElementStrings
+		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Foo"))
 	}
