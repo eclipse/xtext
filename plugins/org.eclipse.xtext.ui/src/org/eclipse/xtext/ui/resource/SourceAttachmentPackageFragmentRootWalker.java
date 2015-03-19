@@ -70,7 +70,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 							}
 						}
 					} catch (IOException e) {
-						LOG.error(e.getMessage(), e);
+						LOG.debug(e.getMessage(), e);
 					}
 				}
 			}
