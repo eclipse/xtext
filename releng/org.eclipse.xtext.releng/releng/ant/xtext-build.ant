@@ -3,27 +3,28 @@
      20.01.2012 09:55:02                                                        
 
      Local build    
-     description
+     Executes xtext buckminster build on local machine
                    
      dhuebner                                                                
      ====================================================================== -->
 
 <project name="xtext-build" default="run-buckminster-build">
 	<description>
-            Executes buckminster build on local machine
+            Executes xtext buckminster build on local machine
     </description>
 
-	<property name="WORKSPACE" location="${user.home}/hudsonbuild/tmf-xtext-head/" />
+	<property name="WORKSPACE" location="${user.home}/buckminster-builds/xtext" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="checkout.location" location="/Users/dhuebner/git/org.eclipse.xtext-master" />
+	<property name="checkout.location" location="${ant.file}/../../../../../" />
+	
 	<!-- Debug session suspend on start? -->
 	<property name="suspend.debug" value="n" />
 
 	<import file="common.ant" as="common" />
 
-	<!-- Buckminster headless to use. See http://www.eclipse.org/buckminster/downloads.html -->
-	<property name="buckminster.home" location="${user.home}/buckminster" />
 	<!-- Locations -->
+	<!-- Buckminster headless to use. Will be auto-installed if location is empty. See http://www.eclipse.org/buckminster/downloads.html -->
+	<property name="buckminster.home" location="${user.home}/buckminster" />
 	<property name="build.properties" location="${releng.project}/releng/xtext-build.properties" />
 	<property name="temp.commands.location" location="${ant.file}/.." />
 
@@ -34,10 +35,23 @@
 	<property name="DEV.BUILD" value="false" />
 	<property name="JAVA8" value="false" />
 
+	<!--
+		Steps:
+			Set API Baseline
+			Materialize target platform
+			Import xtext/xtend projects from ${checkout.location}
+			Zip examples
+			Compile java (build workspace)
+			* Compile xtend (optional, off by default)
+			Package (create p2 repository and zips)
+	-->
 	<target name="run-buckminster-build" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 		<antcall target="-buckminster-resolve" />
-		<!--<antcall target="buckminster-zip-compile-bootstrap" />-->
+		<antcall target="buckminster-zip_examples-compile" />
+		<!--  Enable to bootstrap re-compile Xtend files 
+		<antcall target="compile-xtend" />
+		-->
 		<antcall target="buckminster-package" />
 	</target>
 
@@ -133,11 +147,19 @@
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
-	<target name="buckminster-zip-compile-bootstrap">
-		<property name="commands.file" location="${temp.commands.location}/compile-cmd.txt" />
+	<target name="buckminster-zip_examples-compile">
+		<property name="commands.file" location="${temp.commands.location}/zip_examples-compile-cmd.txt" />
 		<echo file="${commands.file}" append="false">
 			perform "org.eclipse.xtext.build#zip.examples"
 			build
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="compile-xtend">
+		<property name="commands.file" location="${temp.commands.location}/compile-xtend-cmd.txt" />
+		<echo file="${commands.file}" append="false">
 			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-build.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/builder-run.result.xml" 
 		</echo>
 		<echo message="build.properties: ${build.properties}" />

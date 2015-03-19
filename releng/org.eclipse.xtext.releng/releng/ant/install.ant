@@ -20,7 +20,7 @@
 				</fileset>
 			</classpath>
 			<arg line='-data "${director.dir}/workspace"' />
-			<arg line="-r ${eclipse.download}/tools/buckminster/headless-4.3,http://download.cloudsmith.com/buckminster/external-4.3,${eclipse.download}/modeling/tmf/xtext/updates/composite/releases" />
+			<arg line="-r ${eclipse.download}/tools/buckminster/headless-4.3,http://download.cloudsmith.com/buckminster/external-4.3,${eclipse.download}/modeling/emft/mwe/updates/releases/2.7.1/,${eclipse.download}/modeling/tmf/xtext/updates/releases/head/R201503090534/,${eclipse.download}/modeling/m2t/xpand/updates/releases/R201406030414/,${eclipse.download}/modeling/emf/emf/updates/2.10.x/" />
 			<arg line='-d "${buckminster.home}"' />
 			<arg line="-p Buckminster" />
 			<arg line="-roaming" />
