@@ -14,11 +14,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Interface for providing default output configurations. These do not consider any context such as
+ * an IDE project with specific output folder settings. If you need the actual output configurations
+ * for a resource in a specific context, use {@link IContextualOutputConfigurationProvider} instead.
+ * 
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
  */
 @ImplementedBy(OutputConfigurationProvider.class)
 public interface IOutputConfigurationProvider {
+	
+	/**
+	 * Return the default output configurations without considering any context.
+	 */
 	Set<OutputConfiguration> getOutputConfigurations();
 
 	class Delegate implements IOutputConfigurationProvider, IContextualOutputConfigurationProvider {
