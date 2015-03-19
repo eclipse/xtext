@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -737,43 +736,49 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
-    try {
+    boolean _or = false;
+    boolean _isSetConstant = field.isSetConstant();
+    if (_isSetConstant) {
+      _or = true;
+    } else {
       Resource _eResource = field.eResource();
-      if ((_eResource instanceof TypeResource)) {
+      _or = (_eResource instanceof TypeResource);
+    }
+    if (_or) {
+      boolean _isConstant = field.isConstant();
+      if (_isConstant) {
+        return field.getConstantValue();
+      } else {
         JvmDeclaredType _declaringType = field.getDeclaringType();
-        ClassFinder _classFinder = context.getClassFinder();
-        final Class<?> clazz = this.getJavaType(_declaringType, _classFinder);
-        String _simpleName = field.getSimpleName();
-        Field _field = clazz.getField(_simpleName);
-        Object _get = null;
-        if (_field!=null) {
-          _get=_field.get(null);
-        }
-        return _get;
+        String _simpleName = _declaringType.getSimpleName();
+        String _plus = ("Field " + _simpleName);
+        String _plus_1 = (_plus + ".");
+        String _simpleName_1 = field.getSimpleName();
+        String _plus_2 = (_plus_1 + _simpleName_1);
+        String _plus_3 = (_plus_2 + " is not a constant");
+        throw new ConstantExpressionEvaluationException(_plus_3);
       }
-      final XExpression expression = this.containerProvider.getAssociatedExpression(field);
-      Set<XExpression> _alreadyEvaluating = context.getAlreadyEvaluating();
-      boolean _contains = _alreadyEvaluating.contains(expression);
-      if (_contains) {
-        throw new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
+    }
+    final XExpression expression = this.containerProvider.getAssociatedExpression(field);
+    Set<XExpression> _alreadyEvaluating = context.getAlreadyEvaluating();
+    boolean _contains = _alreadyEvaluating.contains(expression);
+    if (_contains) {
+      throw new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
+    }
+    try {
+      final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
+      JvmTypeReference _type = field.getType();
+      ClassFinder _classFinder = context.getClassFinder();
+      Set<XExpression> _alreadyEvaluating_1 = context.getAlreadyEvaluating();
+      final Context ctx = new Context(_type, _classFinder, visibleFeatures, _alreadyEvaluating_1);
+      return this.evaluate(expression, ctx);
+    } catch (final Throwable _t) {
+      if (_t instanceof ConstantExpressionEvaluationException) {
+        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
+        throw new StackedConstantExpressionEvaluationException(call, field, e);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-      try {
-        final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
-        JvmTypeReference _type = field.getType();
-        ClassFinder _classFinder_1 = context.getClassFinder();
-        Set<XExpression> _alreadyEvaluating_1 = context.getAlreadyEvaluating();
-        final Context ctx = new Context(_type, _classFinder_1, visibleFeatures, _alreadyEvaluating_1);
-        return this.evaluate(expression, ctx);
-      } catch (final Throwable _t) {
-        if (_t instanceof ConstantExpressionEvaluationException) {
-          final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
-          throw new StackedConstantExpressionEvaluationException(call, field, e);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   
