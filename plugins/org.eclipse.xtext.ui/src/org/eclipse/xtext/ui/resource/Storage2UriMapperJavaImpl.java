@@ -289,7 +289,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
 		} catch (JavaModelException e) {
-			log.error(e.getMessage(), e);
+			log.debug(e.getMessage(), e);
 		}
 		return data;
 	}
