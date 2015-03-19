@@ -658,7 +658,6 @@
         name="master">
       <setupTask
           xsi:type="pde:APIBaselineTask"
-          disabled="true"
           name="xtext"
           version="2.8"
           location="${installation.location}/api/v2.8/"
@@ -680,7 +679,6 @@
           value="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
       <setupTask
           xsi:type="pde:APIBaselineTask"
-          disabled="true"
           name="xtext"
           version="2.7"
           location="${installation.location}/api/v2.7/"
