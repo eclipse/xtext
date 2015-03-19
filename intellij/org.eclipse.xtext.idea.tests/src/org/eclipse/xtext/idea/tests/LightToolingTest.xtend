@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.tests
 
 import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.ide.highlighter.HighlighterFactory
+import com.intellij.ide.structureView.newStructureView.StructureViewComponent
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.module.Module
@@ -20,8 +21,8 @@ import com.intellij.openapi.roots.LanguageLevelModuleExtension
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.pom.java.LanguageLevel
 import com.intellij.testFramework.LightProjectDescriptor
-import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import com.intellij.util.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.junit4.internal.LineDelimiters
@@ -29,15 +30,12 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
-import com.intellij.ide.structureView.newStructureView.StructureViewComponent
-import com.intellij.util.Consumer
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 	@Accessors
 	val LanguageFileType fileType
-	protected var extension JavaCodeInsightTestFixture myFixture
-
+	
 	new(LanguageFileType fileType) {
 		this.fileType = fileType
 		xtextLanguage.injectMembers(this)
@@ -45,7 +43,6 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 	override protected setUp() throws Exception {
 		super.setUp
-		myFixture = super.myFixture
 		CodeInsightSettings.instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false
 	}
 	
@@ -92,23 +89,23 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def configureByText(String code) {
-		configureByText(fileType, LineDelimiters.toUnix(code))
+		myFixture.configureByText(fileType, LineDelimiters.toUnix(code))
 	}
 
 	protected def complete(String text) {
 		configureByText(text)
-		completeBasic
+		myFixture.completeBasic
 	}
 
 	protected def assertLookupStrings(String... items) {
-		assertEquals(items.toList, lookupElementStrings)
+		assertEquals(items.toList, myFixture.lookupElementStrings)
 	}
 	
 	protected def assertHighlights(String lineDelimitedHighlights) {
 		val expectedHighlights = LineDelimiters.toUnix(lineDelimitedHighlights)
-		val highlighter = HighlighterFactory.createHighlighter(project, file.virtualFile) => [
-	    	text = editor.document.text
-	    	colorScheme = editor.colorsScheme
+		val highlighter = HighlighterFactory.createHighlighter(project, myFixture.file.virtualFile) => [
+	    	text = myFixture.editor.document.text
+	    	colorScheme = myFixture.editor.colorsScheme
 		]
 		val highlights = highlighter.createIterator(0)
 		val actualHighlights = compactHighlights(highlights)
@@ -132,7 +129,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def getXtextFile() {
-		file as BaseXtextFile
+		myFixture.file as BaseXtextFile
 	}
 
 	protected def void testStructureView(String model, String expected) {
@@ -147,7 +144,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def void testStructureView(String model, Consumer<StructureViewComponent> consumer) {
-		configureByText(fileType, model)
+		myFixture.configureByText(fileType, model)
 		testStructureView(consumer)
 	}
 	

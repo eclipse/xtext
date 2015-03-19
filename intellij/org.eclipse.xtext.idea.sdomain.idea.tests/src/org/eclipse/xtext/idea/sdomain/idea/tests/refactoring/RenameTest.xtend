@@ -17,21 +17,21 @@ class RenameTest extends LightToolingTest {
 	}
 
 	def void testRenameQualifiedName() {
-		configureByText("Foo.sdomain",
+		myFixture.configureByText("Foo.sdomain",
 			'''
 				foo {
 					entity Foo {
 					}
 				}
 			''')
-		configureByText("Bar.sdomain",
+		myFixture.configureByText("Bar.sdomain",
 			'''
 				entity Bar {
 					foo.Fo<caret>o foo
 				}
 			''')
-		renameElementAtCaret("Foo2")
-		checkResult(
+		myFixture.renameElementAtCaret("Foo2")
+		myFixture.checkResult(
 			'''
 				entity Bar {
 					foo.Foo2 foo
@@ -40,7 +40,7 @@ class RenameTest extends LightToolingTest {
 	}
 
 	def void testRenameWithSeveralCandidates() {
-		configureByText("Foo.sdomain",
+		myFixture.configureByText("Foo.sdomain",
 			'''
 				foo {
 				    import bar.*
@@ -53,8 +53,8 @@ class RenameTest extends LightToolingTest {
 				    datatype Strin<caret>g2
 				}
 			''')
-		renameElementAtCaret("String")
-		checkResult(
+		myFixture.renameElementAtCaret("String")
+		myFixture.checkResult(
 			'''
 				foo {
 				    import bar.*

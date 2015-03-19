@@ -22,13 +22,13 @@ class IssueAnnotatorTest extends LightToolingTest {
 				<error descr="Couldn't resolve reference to Type 'Bar'.">Bar</error> bar
 			}
 		''')
-		checkHighlighting
+		myFixture.checkHighlighting
 	}
 	
 	def void testNoDuplicateSyntaxErrors() {
 		configureByText('''
 			<error descr="missing EOF at '{'">{</error>}''')
-		checkHighlighting
+		myFixture.checkHighlighting
 	}
 	
 }
