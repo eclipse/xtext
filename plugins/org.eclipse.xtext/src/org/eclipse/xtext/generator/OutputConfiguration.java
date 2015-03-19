@@ -269,6 +269,11 @@ public class OutputConfiguration {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return getName() + ": " + getOutputDirectory() + " (" + getDescription() + ")";
+	}
 
 	/**
 	 * Specifies the output folder for a source folder (may be null, in which case the output folder of the enclosing

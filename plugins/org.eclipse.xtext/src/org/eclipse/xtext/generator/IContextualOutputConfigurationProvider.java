@@ -14,10 +14,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Interface for providing output configurations with a given context. The context may,
+ * for example, include specific settings of the IDE project in which a resource is contained.
+ * 
  * @since 2.8
  */
 @ImplementedBy(OutputConfigurationProvider.class)
 public interface IContextualOutputConfigurationProvider {
 	
+	/**
+	 * Return the output configurations that are applicable to the given resource.
+	 */
 	Set<OutputConfiguration> getOutputConfigurations(Resource context);
+	
 }
