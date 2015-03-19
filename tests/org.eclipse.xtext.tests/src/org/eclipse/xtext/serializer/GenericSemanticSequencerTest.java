@@ -170,5 +170,20 @@ public class GenericSemanticSequencerTest extends AbstractSemanticSequencerTest 
 	@Test public void testUnorderedGroupBoolean8() throws Exception {
 		// unsupported
 	}
+	
+	@Override
+	@Test public void testSingleKeyword1OrID() throws Exception {
+		// unsupported
+	}
+	
+	@Override
+	@Test public void testSingleKeywordOrID2() throws Exception {
+		// unsupported
+	}
+	
+	@Override
+	@Test public void testSingleKeywordOrID3() throws Exception {
+		// unsupported
+	}
 
 }
