@@ -940,10 +940,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		} else {
 			errorMsg.append("The class ").append(name);	
 			errorMsg.append(" must be defined abstract because it does not implement ");
+		}
 			if (needsNewLine) {
 				errorMsg.append("its inherited abstract methods ");
 			}
-		}
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
 			operation = operationsMissingImplementation.get(i);
