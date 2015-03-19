@@ -44,6 +44,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -285,18 +286,21 @@ public class ExtractMethodRefactoring extends Refactoring {
 		appendable.append("def ");
 		if (isStatic)
 			appendable.append("static ");
-		if(!neededTypeParameters.isEmpty()) {
-			appendable.append("<");
-			boolean isFirst = true;
-			for(JvmTypeParameter typeParameter: associations.getDirectlyInferredOperation(originalMethod).getTypeParameters()) {
-				if(neededTypeParameters.contains(typeParameter)) {
-					if(!isFirst)
-						appendable.append(", ");
-					isFirst = false;
-					appendable.append(typeParameter);
+		if (!neededTypeParameters.isEmpty()) {
+			JvmOperation operation = associations.getDirectlyInferredOperation(originalMethod);
+			if (operation != null) {
+				appendable.append("<");
+				boolean isFirst = true;
+				for(JvmTypeParameter typeParameter: operation.getTypeParameters()) {
+					if(neededTypeParameters.contains(typeParameter)) {
+						if(!isFirst)
+							appendable.append(", ");
+						isFirst = false;
+						appendable.append(typeParameter);
+					}
 				}
+				appendable.append("> ");
 			}
-			appendable.append("> ");
 		}
 		if (isExplicitlyDeclareReturnType) {
 			appendable
@@ -368,13 +372,15 @@ public class ExtractMethodRefactoring extends Refactoring {
 						status.add(RefactoringStatus.FATAL,
 							"Extracting method would break control flow due to return statements.");
 						break;
-					}  else if(element instanceof JvmTypeReference) {
+					} else if (element instanceof JvmTypeReference) {
 						JvmType type = ((JvmTypeReference) element).getType();
-						if(type instanceof JvmTypeParameter) {
-							List<JvmTypeParameter> typeParameters = 
-									associations.getDirectlyInferredOperation(originalMethod).getTypeParameters();
-							if(typeParameters.contains(type)) 
-								neededTypeParameters.add((JvmTypeParameter) type);
+						if (type instanceof JvmTypeParameter) {
+							JvmOperation operation = associations.getDirectlyInferredOperation(originalMethod);
+							if (operation != null) {
+								List<JvmTypeParameter> typeParameters = operation.getTypeParameters();
+								if (typeParameters.contains(type)) 
+									neededTypeParameters.add((JvmTypeParameter) type);
+							}
 						}
 					} else if (element instanceof JvmFormalParameter)
 						localFeatureNames.add(((JvmFormalParameter) element).getName());

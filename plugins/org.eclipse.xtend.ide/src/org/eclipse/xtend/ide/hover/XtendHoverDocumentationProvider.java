@@ -44,7 +44,9 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 	protected JvmDeclaredType getDeclaringType(EObject eObject) {
 		if (eObject instanceof XtendFunction) {
 			JvmOperation jvmOperation = associations.getDirectlyInferredOperation((XtendFunction) eObject);
-			return super.getDeclaringType(jvmOperation);
+			if (jvmOperation != null) {
+				return super.getDeclaringType(jvmOperation);
+			}
 		}
 		return super.getDeclaringType(eObject);
 	}
