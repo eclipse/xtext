@@ -1,4 +1,9 @@
 dependencies {
 	compile project(':org.eclipse.xtext.idea.sdomain')
-	ideaProvided project(':org.eclipse.xtext.idea')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		id 'org.eclipse.xtext.idea'
+	}
 }

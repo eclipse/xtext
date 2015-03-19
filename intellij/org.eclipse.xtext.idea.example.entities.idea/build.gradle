@@ -1,5 +1,10 @@
 dependencies {
 	compile project(':org.eclipse.xtext.idea.example.entities.ide')
-	ideaProvided project(':org.eclipse.xtext.idea')
-	ideaProvided project(':org.eclipse.xtext.xbase.idea')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		id 'org.eclipse.xtext.idea'
+		id 'org.eclipse.xtext.xbase.idea'
+	}
 }
