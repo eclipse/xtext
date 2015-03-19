@@ -124,7 +124,7 @@ class ConstantConditionsInterpreter {
 			}
 			JvmType,
 			JvmEnumerationLiteral: {
-				return new EvaluationResult(feature, true)
+				return new EvaluationResult(feature, false)
 			}
 			JvmField: {
 				if (feature.setConstant) {
@@ -367,7 +367,7 @@ class ConstantConditionsInterpreter {
 	}
 
 	def dispatch EvaluationResult internalEvaluate(XTypeLiteral it, EvaluationContext context) {
-		return new EvaluationResult(it, true)
+		return new EvaluationResult(it, false)
 	}
 
 }
