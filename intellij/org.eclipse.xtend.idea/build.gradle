@@ -2,6 +2,11 @@ dependencies {
 	compile ("org.eclipse.xtend:org.eclipse.xtend.core:$version")
 	compile ("org.eclipse.xtend:org.eclipse.xtend.ide.common:$version")
 	compile ("org.eclipse.xtend:org.eclipse.xtend.lib:${version}")
-	ideaProvided project(':org.eclipse.xtext.idea')
-	ideaProvided project(':org.eclipse.xtext.xbase.idea')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		id 'org.eclipse.xtext.idea'
+		id 'org.eclipse.xtext.xbase.idea'
+	}
 }

@@ -1,3 +1,19 @@
+buildscript {
+	repositories {
+		if (!System.getProperty("JOB_NAME")) {
+			mavenLocal()
+		}
+		jcenter()
+		maven {
+			url "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+	}
+	
+	dependencies {
+		classpath 'org.xtext:xtext-idea-gradle-plugin:0.3.0'
+	}
+}
+
 allprojects {
 	apply plugin: 'maven'
 	apply plugin: 'org.xtext.idea-dev'
@@ -5,15 +21,7 @@ allprojects {
 	group = 'org.eclipse.xtext'
 	version = '2.9.0-SNAPSHOT'
 	
-	repositories {
-		if (!System.getProperty("JOB_NAME")) {
-			mavenLocal()
-		}
-		mavenCentral()
-		maven {
-			url "https://oss.sonatype.org/content/repositories/snapshots/"
-		}
-	}
+	repositories.addAll(rootProject.buildscript.repositories)
 	
 	ideaDevelopment {
 		ideaHome = "${rootDir}/intellij-ce"
@@ -21,6 +29,7 @@ allprojects {
 }
 
 apply plugin: 'org.xtext.idea-repository'
+apply plugin: 'org.xtext.idea-aggregator'
 ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij'
 
 subprojects {
