@@ -259,4 +259,58 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testConstantValueIsPersisted_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static val CONSTANT = Object");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String contents = _builder.toString();
+      final XtendFile file = this.file(contents);
+      final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+      ((ResourceStorageFacade) this.resourceStorageFacade).setStoreNodeModel(true);
+      ResourceStorageWritable _createResourceStorageWritable = this.resourceStorageFacade.createResourceStorageWritable(bout);
+      Resource _eResource = file.eResource();
+      _createResourceStorageWritable.writeResource(((StorageAwareResource) _eResource));
+      byte[] _byteArray = bout.toByteArray();
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+      final ResourceStorageLoadable in = this.resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
+      Resource _eResource_1 = file.eResource();
+      ResourceSet _resourceSet = _eResource_1.getResourceSet();
+      URI _createURI = URI.createURI("synthetic:/test/MyClass.xtend");
+      Resource _createResource = _resourceSet.createResource(_createURI);
+      final StorageAwareResource resource = ((StorageAwareResource) _createResource);
+      final InMemoryURIConverter converter = new InMemoryURIConverter();
+      URI _uRI = resource.getURI();
+      String _string = _uRI.toString();
+      converter.addModel(_string, contents);
+      ResourceSet _resourceSet_1 = resource.getResourceSet();
+      _resourceSet_1.setURIConverter(converter);
+      Resource _eResource_2 = file.eResource();
+      ResourceSet _resourceSet_2 = _eResource_2.getResourceSet();
+      EList<Resource> _resources = _resourceSet_2.getResources();
+      _resources.add(resource);
+      resource.loadFromStorage(in);
+      EList<EObject> _contents = resource.getContents();
+      EObject _get = _contents.get(1);
+      final JvmGenericType jvmClass = ((JvmGenericType) _get);
+      EList<JvmMember> _members = jvmClass.getMembers();
+      JvmMember _last = IterableExtensions.<JvmMember>last(_members);
+      final JvmField field = ((JvmField) _last);
+      boolean _isConstant = field.isConstant();
+      Assert.assertFalse(_isConstant);
+      boolean _isSetConstant = field.isSetConstant();
+      Assert.assertTrue(_isSetConstant);
+      Object _constantValue = field.getConstantValue();
+      Assert.assertNull(_constantValue);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -176,7 +176,7 @@ public class ConstantConditionsInterpreter {
         }
       }
       if (_matched) {
-        return new EvaluationResult(feature, true);
+        return new EvaluationResult(feature, false);
       }
     }
     if (!_matched) {
@@ -786,7 +786,7 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XTypeLiteral it, final EvaluationContext context) {
-    return new EvaluationResult(it, true);
+    return new EvaluationResult(it, false);
   }
   
   public EvaluationResult internalEvaluate(final XExpression it, final EvaluationContext context) {
