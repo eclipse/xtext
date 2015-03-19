@@ -49,7 +49,9 @@ import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated use {@link BacktrackingSemanticSequencer}
  */
+@Deprecated
 public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected abstract class Allocation {
