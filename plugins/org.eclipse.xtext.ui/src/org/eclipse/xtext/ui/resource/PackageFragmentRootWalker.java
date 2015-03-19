@@ -71,10 +71,7 @@ public abstract class PackageFragmentRootWalker<T> {
 		return result;
 	}
 	
-	/**
-	 * @since 2.9
-	 */
-	protected boolean existsPhysically(IPackageFragmentRoot root) throws JavaModelException {
+	private boolean existsPhysically(IPackageFragmentRoot root) throws JavaModelException {
 		if(root.isExternal()) 
 			return root.getPath().toFile().exists();
 		else
