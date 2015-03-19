@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.validation;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
@@ -49,8 +50,8 @@ import org.eclipse.jdt.internal.core.search.indexing.IndexManager;
 import org.eclipse.jdt.internal.core.search.matching.TypeDeclarationPattern;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
-import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -82,7 +83,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   private IDerivedResourceMarkers derivedResourceMarkers;
   
   @Inject
-  private IOutputConfigurationProvider outputConfigurationProvider;
+  private IContextualOutputConfigurationProvider outputConfigurationProvider;
   
   @Override
   public boolean doCheckUniqueName(final QualifiedName name, final JvmDeclaredType type) {
@@ -99,18 +100,18 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         }
       }
     } else {
-      return true;
+      return false;
     }
   }
   
-  private ProjectAwareUniqueClassNameValidator.SourceTraversal doCheckUniqueInProjectSource(final String packageName, final String typeName, final JvmDeclaredType type, final IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
+  private ProjectAwareUniqueClassNameValidator.SourceTraversal doCheckUniqueInProjectSource(final String packageName, final String typeName, final JvmDeclaredType type, final IPackageFragmentRoot[] sourceFolders, final Collection<OutputConfiguration> outputConfigurations) throws JavaModelException {
     IndexManager indexManager = JavaModelManager.getIndexManager();
     for (final IPackageFragmentRoot sourceFolder : sourceFolders) {
       int _awaitingJobsCount = indexManager.awaitingJobsCount();
       boolean _greaterThan = (_awaitingJobsCount > 0);
       if (_greaterThan) {
         IResource _resource = sourceFolder.getResource();
-        boolean _isDerived = this.isDerived(_resource);
+        boolean _isDerived = this.isDerived(_resource, outputConfigurations);
         boolean _not = (!_isDerived);
         if (_not) {
           IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
@@ -120,7 +121,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
             for (final ICompilationUnit unit : units) {
               {
                 final IResource resource = unit.getResource();
-                boolean _isDerived_1 = this.isDerived(resource);
+                boolean _isDerived_1 = this.isDerived(resource, outputConfigurations);
                 boolean _not_1 = (!_isDerived_1);
                 if (_not_1) {
                   IType javaType = unit.getType(typeName);
@@ -146,6 +147,8 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     Resource _eResource = type.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final IJavaProject javaProject = this.javaProjectProvider.getJavaProject(_resourceSet);
+    Resource _eResource_1 = type.eResource();
+    final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(_eResource_1);
     final String packageName = type.getPackageName();
     final String typeName = type.getSimpleName();
     IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
@@ -179,7 +182,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       } else {
         _elvis = "";
       }
-      ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(_elvis, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)));
+      ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(_elvis, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)), outputConfigurations);
       if (_doCheckUniqueInProjectSource != null) {
         switch (_doCheckUniqueInProjectSource) {
           case DUPLICATE:
@@ -206,7 +209,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
             _and = false;
           } else {
             IResource _resource = workingCopy.getResource();
-            boolean _isDerived = this.isDerived(_resource);
+            boolean _isDerived = this.isDerived(_resource, outputConfigurations);
             boolean _not = (!_isDerived);
             _and = _not;
           }
@@ -250,7 +253,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         IWorkspaceRoot _root = _workspace.getRoot();
         Path _path = new Path(documentPath);
         IFile file = _root.getFile(_path);
-        boolean _isDerived = ProjectAwareUniqueClassNameValidator.this.isDerived(file);
+        boolean _isDerived = ProjectAwareUniqueClassNameValidator.this.isDerived(file, outputConfigurations);
         boolean _not = (!_isDerived);
         if (_not) {
           String _name = file.getName();
@@ -288,7 +291,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     return _javaModelManager.getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
   }
   
-  protected boolean isDerived(final IResource resource) {
+  protected boolean isDerived(final IResource resource, final Collection<OutputConfiguration> outputConfigurations) {
     try {
       IMarker[] _findDerivedResourceMarkers = this.derivedResourceMarkers.findDerivedResourceMarkers(resource);
       int _length = _findDerivedResourceMarkers.length;
@@ -297,8 +300,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         return true;
       }
       final IPath projectRelativePath = resource.getProjectRelativePath();
-      Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations();
-      for (final OutputConfiguration outputConfiguration : _outputConfigurations) {
+      for (final OutputConfiguration outputConfiguration : outputConfigurations) {
         Set<String> _outputDirectories = outputConfiguration.getOutputDirectories();
         for (final String dir : _outputDirectories) {
           Path _path = new Path(dir);
