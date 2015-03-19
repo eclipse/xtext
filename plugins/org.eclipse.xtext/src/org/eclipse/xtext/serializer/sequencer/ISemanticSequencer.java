@@ -6,7 +6,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 
 import com.google.inject.ImplementedBy;
 
-@ImplementedBy(GenericSemanticSequencer.class)
+@ImplementedBy(BacktrackingSemanticSequencer.class)
 public interface ISemanticSequencer {
 
 	void init(ISemanticSequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor);
