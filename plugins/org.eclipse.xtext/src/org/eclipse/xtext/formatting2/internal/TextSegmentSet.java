@@ -32,15 +32,13 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		this.titleGetter = title;
 	}
 
-	protected String getTitle(T t) {
-		return titleGetter.apply(t);
-	}
-
 	public void add(T segment) throws ConflictingRegionsException {
 		add(segment, null);
 	}
 
 	public abstract void add(T segment, IMerger<T> merger) throws ConflictingRegionsException;
+	
+	public abstract T get(T segment);
 
 	protected ITextSegment getRegion(T t) {
 		return regionGetter.apply(t);
@@ -48,6 +46,10 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 
 	public Function<? super T, ? extends ITextSegment> getRegionAccess() {
 		return regionGetter;
+	}
+
+	protected String getTitle(T t) {
+		return titleGetter.apply(t);
 	}
 
 	public IdentityHashMap<T, RegionTrace> getTraces() {
