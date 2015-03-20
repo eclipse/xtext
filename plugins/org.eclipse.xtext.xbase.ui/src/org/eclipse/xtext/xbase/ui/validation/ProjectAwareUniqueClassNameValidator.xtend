@@ -45,6 +45,9 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator
  */
 class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	
+	/** Context key for output configurations. */
+	static val OUTPUT_CONFIGS = "ProjectAwareUniqueClassNameValidator.outputConfigs"
+	
 	@Inject IJavaProjectProvider javaProjectProvider
 	
 	@Inject IDerivedResourceMarkers derivedResourceMarkers
@@ -68,17 +71,17 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	}
 	
 	private def SourceTraversal doCheckUniqueInProjectSource(String packageName, String typeName, JvmDeclaredType type,
-			IPackageFragmentRoot[] sourceFolders, Collection<OutputConfiguration> outputConfigurations) throws JavaModelException {
-		var indexManager = JavaModelManager.getIndexManager
+			IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
+		val indexManager = JavaModelManager.getIndexManager
 		for (sourceFolder : sourceFolders) {
 			if (indexManager.awaitingJobsCount > 0) {
-				if (!isDerived(sourceFolder.resource, outputConfigurations)) {
+				if (!isDerived(sourceFolder.resource)) {
 					var packageFragment = sourceFolder.getPackageFragment(packageName)
 					if (packageFragment.exists()) {
 						var units = packageFragment.getCompilationUnits()
 						for (unit : units) {
 							val resource = unit.resource
-							if (!isDerived(resource, outputConfigurations)) {
+							if (!isDerived(resource)) {
 								var javaType = unit.getType(typeName)
 								if (javaType.exists()) {
 									addIssue(type, unit.elementName)
@@ -97,7 +100,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	
 	def boolean doCheckUniqueInProject(QualifiedName name, JvmDeclaredType type) throws JavaModelException {
 		val javaProject = javaProjectProvider.getJavaProject(type.eResource.resourceSet)
-		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(type.eResource)
+		context.put(OUTPUT_CONFIGS, outputConfigurationProvider.getOutputConfigurations(type.eResource))
 		val packageName = type.packageName
 		val typeName = type.simpleName
 		val sourceFolders = javaProject.packageFragmentRoots.filter[ kind == IPackageFragmentRoot.K_SOURCE ]
@@ -105,7 +108,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		
 		if (sourceFolders.length == 0 || indexManager.awaitingJobsCount() > 0) {
 			// still indexing - don't enter a busy wait loop but ask the source folders directly
-			switch doCheckUniqueInProjectSource(packageName?:'', typeName, type, sourceFolders, outputConfigurations) {
+			switch doCheckUniqueInProjectSource(packageName?:'', typeName, type, sourceFolders) {
 				case DUPLICATE: return false
 				case UNIQUE: return true
 				default: {
@@ -119,7 +122,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		if (copies != null) {
 			for (workingCopy: copies) {
 				val path = workingCopy.path
-				if (javaProject.path.isPrefixOf(path) && !isDerived(workingCopy.resource, outputConfigurations)) {
+				if (javaProject.path.isPrefixOf(path) && !isDerived(workingCopy.resource)) {
 					if (workingCopy.getPackageDeclaration(packageName).exists()) {
 						var IType result = workingCopy.getType(typeName)
 						if (result.exists()) {
@@ -144,7 +147,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				return true // filter out working copies
 			}
 			var IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(documentPath))
-			if (!isDerived(file, outputConfigurations)) {
+			if (!isDerived(file)) {
 				addIssue(type, file.name)
 				return false
 			}
@@ -169,16 +172,19 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
 	}
 
-	def protected isDerived(IResource resource, Collection<OutputConfiguration> outputConfigurations) {
+	def protected isDerived(IResource resource) {
 		try {
 			if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
 				return true
 			}
-			val projectRelativePath = resource.projectRelativePath
-			for(outputConfiguration: outputConfigurations) {
-				for(dir: outputConfiguration.outputDirectories) {
-					if (new Path(dir).isPrefixOf(projectRelativePath)) {
-						return true
+			val outputConfigurations = context.get(OUTPUT_CONFIGS) as Collection<OutputConfiguration>
+			if (outputConfigurations != null) {
+				val projectRelativePath = resource.projectRelativePath
+				for(outputConfiguration: outputConfigurations) {
+					for(dir: outputConfiguration.outputDirectories) {
+						if (new Path(dir).isPrefixOf(projectRelativePath)) {
+							return true
+						}
 					}
 				}
 			}
