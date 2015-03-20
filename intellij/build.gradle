@@ -45,6 +45,9 @@ subprojects {
 	}
 	
 	sourceCompatibility = 1.6
+	tasks.withType(JavaCompile) {
+		options.encoding = 'ISO-8859-1'
+	}
 }
 
 def intellijPluginProjects = [
