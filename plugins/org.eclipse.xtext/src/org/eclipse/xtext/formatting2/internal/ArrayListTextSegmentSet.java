@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 
 	private final List<T> contents = Lists.newArrayList();
-	
+
 	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
 		super(region, title);
 	}
@@ -44,6 +44,12 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 			else
 				insertAtIndex(segment, -searchResult - 1, merger);
 		}
+	}
+
+	@Override
+	public T get(T segment) {
+		int searchResult = Collections.binarySearch(contents, segment, new RegionComparator<T>(getRegionAccess()));
+		return searchResult >= 0 ? contents.get(searchResult) : null;
 	}
 
 	protected void insertAtIndex(T segment, int newIndex, IMerger<T> merger) throws ConflictingRegionsException {
