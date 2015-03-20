@@ -689,10 +689,8 @@
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
-  <setup:EclipseIniTask
+  <eclipseIniTask
       option="-Doomph.redirection.xtext"
       value="=https://raw.githubusercontent.com/eclipse/xtext/master/devtools/org.eclipse.xtext.contributor/interim/->${git.clone.xtext.location|uri}/devtools/org.eclipse.xtext.contributor/interim/"
-      vm="true"
-      xmlns:xmi="http://www.omg.org/XMI"
-      xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"/>
+      vm="true">
 </setup:Project>
