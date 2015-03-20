@@ -15,7 +15,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
 abstract class AbstractXtendFormatterTest {
-	@Inject FormatterTester tester
+	@Inject protected FormatterTester tester
 
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted/* .parse.flattenWhitespace  */)
