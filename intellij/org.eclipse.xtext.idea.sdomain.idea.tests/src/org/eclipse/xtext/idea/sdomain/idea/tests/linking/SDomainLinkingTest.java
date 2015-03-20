@@ -17,7 +17,7 @@ public class SDomainLinkingTest extends LightCodeInsightFixtureTestCase {
 	
 	@Override
 	protected String getTestDataPath() {
-		return "./testData";
+		return "testData";
 	}
 	
 	public void testLocalLinking() {
