@@ -10,6 +10,8 @@ package org.eclipse.xtext.formatting2.internal;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
+import com.google.common.base.Preconditions;
+
 public class TextReplacement extends AbstractTextSegment implements ITextReplacement {
 	private final int length;
 	private final int offset;
@@ -18,6 +20,8 @@ public class TextReplacement extends AbstractTextSegment implements ITextReplace
 
 	public TextReplacement(ITextRegionAccess tokens, int offset, int length, String text) {
 		super();
+		Preconditions.checkArgument(offset >= 0, "offset must be >= 0");
+		Preconditions.checkArgument(length >= 0, "length must be >= 0");
 		this.tokens = tokens;
 		this.offset = offset;
 		this.length = length;
