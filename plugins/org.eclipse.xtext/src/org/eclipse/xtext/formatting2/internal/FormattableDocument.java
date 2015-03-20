@@ -124,7 +124,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				// TODO: raise report if replacer claims it can do autowrap but then doesn't
 				while (context != wrappable) {
 					ITextReplacer r = context.getReplacer();
-					if (r != null) {
+					if (r != null && replacers.get(r) == r) {
 						queue.addFirst(r);
 					}
 					context = context.getPreviousContext();
