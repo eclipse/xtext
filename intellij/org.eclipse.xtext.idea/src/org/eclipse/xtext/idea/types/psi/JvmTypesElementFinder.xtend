@@ -18,7 +18,7 @@ import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex
 class JvmTypesElementFinder extends PsiElementFinder {
 	
 	@Inject
-	extension PsiJvmDeclaredTypes
+	extension JvmPsiClasses
 	
 	@Inject
 	ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex 
@@ -41,7 +41,7 @@ class JvmTypesElementFinder extends PsiElementFinder {
 		val result = newArrayList 
 		for (xtextFile : exportedObjectQualifiedNameIndex.get(qualifiedName, project, scope)) {
 			if (xtextFile.language == language) {
-				result += xtextFile.getPsiJvmDeclaredTypes(QualifiedName.create(qualifiedName.split("\\.")))
+				result += xtextFile.getJvmPsiClassesByQualifiedName(QualifiedName.create(qualifiedName.split("\\.")))
 			}
 		}
 		result

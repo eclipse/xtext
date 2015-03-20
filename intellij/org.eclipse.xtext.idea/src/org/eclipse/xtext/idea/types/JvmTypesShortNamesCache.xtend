@@ -18,8 +18,8 @@ import com.intellij.util.Processor
 import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.containers.HashSet
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.types.psi.PsiJvmDeclaredTypes
 import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex
+import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
 
 class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	
@@ -27,7 +27,7 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
     static final val PsiField[] NO_FIELDS = #[]
     
     @Inject
-    extension PsiJvmDeclaredTypes
+    extension JvmPsiClasses
     
     @Inject
     JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex
@@ -70,7 +70,7 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
 		val xtextFiles = jvmDeclaredTypeShortNameIndex.get(name, project, scope)
 		for (xtextFile : xtextFiles) {
 			if (xtextFile.language == language) {
-				result += xtextFile.getPsiJvmDeclaredTypesByName(name)
+				result += xtextFile.getJvmPsiClassesByName(name)
 			}
 		}
 		result

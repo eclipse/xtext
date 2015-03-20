@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.types.psi.impl;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiManager;
@@ -20,6 +21,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class LightFieldBuilder extends LightVariableBuilder<LightFieldBuilder> implements PsiField {
+  @Accessors
+  private PsiElement parent;
+  
   @Accessors
   private PsiClass containingClass;
   
@@ -34,6 +38,15 @@ public class LightFieldBuilder extends LightVariableBuilder<LightFieldBuilder> i
   
   public LightFieldBuilder(final PsiManager manager, final Language language, final String name, final PsiType type) {
     super(manager, name, type, language);
+  }
+  
+  @Pure
+  public PsiElement getParent() {
+    return this.parent;
+  }
+  
+  public void setParent(final PsiElement parent) {
+    this.parent = parent;
   }
   
   @Pure

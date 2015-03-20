@@ -45,7 +45,6 @@ import com.intellij.psi.impl.PsiImplUtil;
 import com.intellij.psi.impl.PsiSuperMethodImplUtil;
 import com.intellij.psi.impl.light.LightClassReference;
 import com.intellij.psi.impl.light.LightElement;
-import com.intellij.psi.impl.light.LightMethodBuilder;
 import com.intellij.psi.impl.light.LightParameter;
 import com.intellij.psi.impl.light.LightParameterListBuilder;
 import com.intellij.psi.impl.light.LightReferenceListBuilder;
@@ -88,6 +87,7 @@ import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.idea.types.psi.impl.AnnotatableModifierList;
 import org.eclipse.xtext.idea.types.psi.impl.LightAnnotation;
 import org.eclipse.xtext.idea.types.psi.impl.LightFieldBuilder;
+import org.eclipse.xtext.idea.types.psi.impl.LightMethodBuilder;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
@@ -197,6 +197,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
         final Procedure1<LightFieldBuilder> _function = new Procedure1<LightFieldBuilder>() {
           @Override
           public void apply(final LightFieldBuilder it) {
+            it.setParent(JvmPsiClassImpl.this);
             it.setContainingClass(JvmPsiClassImpl.this);
             AnnotatableModifierList _psiModifiers = JvmPsiClassImpl.this.getPsiModifiers(f);
             it.setModifierList(_psiModifiers);
@@ -235,6 +236,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
         final Procedure1<LightMethodBuilder> _function = new Procedure1<LightMethodBuilder>() {
           @Override
           public void apply(final LightMethodBuilder it) {
+            it.setParent(JvmPsiClassImpl.this);
             it.setContainingClass(JvmPsiClassImpl.this);
             it.setConstructor((m instanceof JvmConstructor));
             if ((m instanceof JvmOperation)) {

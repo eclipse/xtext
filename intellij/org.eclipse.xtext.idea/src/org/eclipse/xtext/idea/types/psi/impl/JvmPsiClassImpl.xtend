@@ -37,7 +37,6 @@ import com.intellij.psi.impl.PsiImplUtil
 import com.intellij.psi.impl.PsiSuperMethodImplUtil
 import com.intellij.psi.impl.light.LightClassReference
 import com.intellij.psi.impl.light.LightElement
-import com.intellij.psi.impl.light.LightMethodBuilder
 import com.intellij.psi.impl.light.LightModifierList
 import com.intellij.psi.impl.light.LightParameter
 import com.intellij.psi.impl.light.LightParameterListBuilder
@@ -75,6 +74,9 @@ import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
+import com.intellij.psi.PsiParameterList
+import com.intellij.psi.PsiModifierList
+import com.intellij.psi.PsiTypeParameterList
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
@@ -147,6 +149,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	override getOwnFields() {
 		jvmType.declaredFields.map [ f |
 			(new LightFieldBuilder(manager, language, f.simpleName, f.type.toPsiType) => [
+				parent = this
 				containingClass = this
 				modifierList = f.psiModifiers
 				docComment = f.psiDocComment
@@ -168,6 +171,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				m.psiThrowsList,
 				m.psiTypeParameterList
 			) => [
+				parent = this
 				containingClass = this
 				constructor = m instanceof JvmConstructor
 				// TODO subclass to allow doccomment
@@ -543,8 +547,27 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 }
 
+public class LightMethodBuilder extends com.intellij.psi.impl.light.LightMethodBuilder {
+
+	@Accessors PsiElement parent
+
+	new(
+		PsiManager manager,
+		Language language,
+		String name,
+		PsiParameterList parameterList,
+		PsiModifierList modifierList,
+		PsiReferenceList throwsList,
+		PsiTypeParameterList typeParameterList
+	) {
+		super(manager, language, name, parameterList, modifierList, throwsList, typeParameterList)
+	}
+
+}
+
 public class LightFieldBuilder extends LightVariableBuilder<LightFieldBuilder> implements PsiField {
 
+	@Accessors PsiElement parent
 	@Accessors PsiClass containingClass
 	@Accessors PsiExpression initializer
 	@Accessors PsiDocComment docComment

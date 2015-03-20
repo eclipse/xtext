@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
-import org.eclipse.xtext.idea.types.psi.PsiJvmDeclaredTypes;
+import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -40,7 +40,7 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   
   @Inject
   @Extension
-  private PsiJvmDeclaredTypes _psiJvmDeclaredTypes;
+  private JvmPsiClasses _jvmPsiClasses;
   
   @Inject
   private JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex;
@@ -94,8 +94,8 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
         Language _language = xtextFile.getLanguage();
         boolean _equals = Objects.equal(_language, this.language);
         if (_equals) {
-          ArrayList<JvmPsiClass> _psiJvmDeclaredTypesByName = this._psiJvmDeclaredTypes.getPsiJvmDeclaredTypesByName(xtextFile, name);
-          Iterables.<JvmPsiClass>addAll(result, _psiJvmDeclaredTypesByName);
+          ArrayList<JvmPsiClass> _jvmPsiClassesByName = this._jvmPsiClasses.getJvmPsiClassesByName(xtextFile, name);
+          Iterables.<JvmPsiClass>addAll(result, _jvmPsiClassesByName);
         }
       }
       _xblockexpression = result;

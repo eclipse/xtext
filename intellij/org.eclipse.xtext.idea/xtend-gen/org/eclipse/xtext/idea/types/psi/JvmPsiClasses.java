@@ -8,10 +8,12 @@
 package org.eclipse.xtext.idea.types.psi;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
 import java.util.ArrayList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,15 +28,17 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class PsiJvmDeclaredTypes {
+public class JvmPsiClasses {
   @Inject
   @Extension
   private IPsiModelAssociations _iPsiModelAssociations;
   
-  public ArrayList<JvmPsiClass> getPsiJvmDeclaredTypesByName(final BaseXtextFile it, final String name) {
+  public ArrayList<JvmPsiClass> getJvmPsiClassesByName(final BaseXtextFile it, final String name) {
     ArrayList<JvmPsiClass> _xblockexpression = null;
     {
       final Resource resource = it.getResource();
@@ -64,7 +68,7 @@ public class PsiJvmDeclaredTypes {
     return _xblockexpression;
   }
   
-  public ArrayList<JvmPsiClass> getPsiJvmDeclaredTypes(final BaseXtextFile it, final QualifiedName qualifiedName) {
+  public ArrayList<JvmPsiClass> getJvmPsiClassesByQualifiedName(final BaseXtextFile it, final QualifiedName qualifiedName) {
     ArrayList<JvmPsiClass> _xblockexpression = null;
     {
       final Resource resource = it.getResource();
@@ -88,5 +92,19 @@ public class PsiJvmDeclaredTypes {
       _xblockexpression = result;
     }
     return _xblockexpression;
+  }
+  
+  public Iterable<JvmPsiClass> getJvmPsiClasses(final BaseXtextFile it) {
+    Resource _resource = it.getResource();
+    EList<EObject> _contents = _resource.getContents();
+    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
+    final Function1<JvmDeclaredType, PsiElement> _function = new Function1<JvmDeclaredType, PsiElement>() {
+      @Override
+      public PsiElement apply(final JvmDeclaredType it) {
+        return JvmPsiClasses.this._iPsiModelAssociations.getPsiElement(it);
+      }
+    };
+    Iterable<PsiElement> _map = IterableExtensions.<JvmDeclaredType, PsiElement>map(_filter, _function);
+    return Iterables.<JvmPsiClass>filter(_map, JvmPsiClass.class);
   }
 }

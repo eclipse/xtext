@@ -17,12 +17,12 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_DECLARED_TYPE
 
 @Singleton
-class PsiJvmDeclaredTypes {
+class JvmPsiClasses {
 
 	@Inject
 	extension IPsiModelAssociations
 
-	def getPsiJvmDeclaredTypesByName(BaseXtextFile it, String name) {
+	def getJvmPsiClassesByName(BaseXtextFile it, String name) {
 		val resource = resource
 
 		val result = newArrayList
@@ -35,7 +35,7 @@ class PsiJvmDeclaredTypes {
 		result
 	}
 
-	def getPsiJvmDeclaredTypes(BaseXtextFile it, QualifiedName qualifiedName) {
+	def getJvmPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
 		val resource = resource
 
 		val result = newArrayList
@@ -46,6 +46,10 @@ class PsiJvmDeclaredTypes {
 			}
 		}
 		result
+	}
+	
+	def getJvmPsiClasses(BaseXtextFile it) {
+		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(JvmPsiClass)
 	}
 
 }

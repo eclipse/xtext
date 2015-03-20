@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
-import org.eclipse.xtext.idea.types.psi.PsiJvmDeclaredTypes;
+import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class JvmTypesElementFinder extends PsiElementFinder {
   @Inject
   @Extension
-  private PsiJvmDeclaredTypes _psiJvmDeclaredTypes;
+  private JvmPsiClasses _jvmPsiClasses;
   
   @Inject
   private ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex;
@@ -65,8 +65,8 @@ public class JvmTypesElementFinder extends PsiElementFinder {
         if (_equals) {
           String[] _split = qualifiedName.split("\\.");
           QualifiedName _create = QualifiedName.create(_split);
-          ArrayList<JvmPsiClass> _psiJvmDeclaredTypes = this._psiJvmDeclaredTypes.getPsiJvmDeclaredTypes(xtextFile, _create);
-          Iterables.<JvmPsiClass>addAll(result, _psiJvmDeclaredTypes);
+          ArrayList<JvmPsiClass> _jvmPsiClassesByQualifiedName = this._jvmPsiClasses.getJvmPsiClassesByQualifiedName(xtextFile, _create);
+          Iterables.<JvmPsiClass>addAll(result, _jvmPsiClassesByQualifiedName);
         }
       }
       _xblockexpression = result;
