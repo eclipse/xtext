@@ -24,10 +24,13 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -298,6 +301,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			}
 		}
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
+		createEnumerationProposals(model, context, acceptor);				
 	}
 
 	@Override
@@ -613,6 +617,53 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		// TODO use the type name information
 		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
 //		System.out.printf("XbaseProposalProvider.proposeDeclaringTypeForStaticInvocation = %d\n", System.currentTimeMillis() - time);
+	}
+	
+	private void createEnumerationProposals(EObject model, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XFeatureCall == false){
+			return;
+		}
+		XFeatureCall fc = ((XFeatureCall) model);
+		if (fc.isExplicitOperationCall() == false){
+			return;
+		}
+		Object op = fc.getFeature();
+		if (op instanceof JvmOperation == false) {
+			return;
+		}
+		JvmOperation op2 = (JvmOperation) op;
+		int argumentIndex = fc.getFeatureCallArguments().size();
+		if (argumentIndex < 0 || argumentIndex > op2.getParameters().size()) {
+			return;
+		}
+		JvmFormalParameter param = op2.getParameters().get(argumentIndex);
+		JvmTypeReference typeRef = param.getParameterType();
+		if (typeRef.getType() instanceof JvmEnumerationType == false) {
+			return;
+		}
+		final JvmEnumerationType theEnum = (JvmEnumerationType) typeRef.getType(); 
+		for (JvmEnumerationLiteral tt: theEnum.getLiterals()) {
+			if (tt.getSimpleName().toLowerCase().startsWith(contentAssistContext.getPrefix().toLowerCase())) {
+				//TODO replace with FQN
+				//TODO find methods that return Enum
+				String text = theEnum.getSimpleName() + "." + tt.getSimpleName();
+				ConfigurableCompletionProposal proposal = new ConfigurableCompletionProposal(theEnum.getSimpleName() + "." + tt.getSimpleName(),
+						contentAssistContext.getReplaceRegion().getOffset(), contentAssistContext.getReplaceRegion().getLength(), text.length(),
+						getImage(theEnum), new StyledString(text), null, null);
+				proposal.setPriority(1000);
+				//TODO use stock prefix matcher
+				proposal.setMatcher(new PrefixMatcher() {
+
+					@Override
+					public boolean isCandidateMatchingPrefix(String name, String prefix) {
+						return name.toLowerCase().startsWith(theEnum.getSimpleName().toLowerCase() + "." +
+							prefix.toLowerCase());
+					}
+				});
+				acceptor.accept(proposal);
+			}
+		}
 	}
 
 	protected String getFeatureCallRuleName() {
