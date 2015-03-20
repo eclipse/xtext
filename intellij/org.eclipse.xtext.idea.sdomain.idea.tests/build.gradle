@@ -1,0 +1,13 @@
+sourceSets.test.java.srcDirs ('src', 'src-gen', 'xtend-gen')
+sourceSets.main.java.srcDirs = []
+
+dependencies {
+	testCompile project(':org.eclipse.xtext.idea.tests')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		id 'org.eclipse.xtext.idea'
+		id 'org.eclipse.xtext.idea.sdomain.idea'
+	}
+}
