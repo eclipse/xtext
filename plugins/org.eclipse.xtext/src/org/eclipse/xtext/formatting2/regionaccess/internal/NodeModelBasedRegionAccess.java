@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
@@ -258,12 +259,40 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		return new TextSegment(this, offset, endOffset - offset);
 	}
 
-	protected EObject findSemanticElement(INode node) {
-		EObject element = node.getGrammarElement();
-		if (element instanceof Action)
+	protected EObject getSemanticElement(INode node) {
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement instanceof RuleCall || grammarElement instanceof CrossReference) {
+			if (GrammarUtil.isAssigned(grammarElement))
+				return node.getSemanticElement();
+		} else if (grammarElement instanceof Action || grammarElement instanceof ParserRule) {
 			return node.getSemanticElement();
-		if (GrammarUtil.isParserRuleCall(element))
-			return findSemanticElementFromChildren(node);
+		}
+		return null;
+	}
+
+	protected EObject findSemanticElement(INode node) {
+		EObject semanticElement = getSemanticElement(node);
+		if (semanticElement != null)
+			return semanticElement;
+		return findSemanticElementFromChildren(node, null);
+	}
+
+	protected EObject findSemanticElementFromChildren(INode node, INode skip) {
+		EObject semanticElement = getSemanticElement(node);
+		if (semanticElement != null)
+			return semanticElement;
+		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
+		while (iterator.hasNext()) {
+			INode next = iterator.next();
+			if (next == skip) {
+				iterator.prune();
+				continue;
+			} else {
+				EObject semanticElement2 = getSemanticElement(next);
+				if (semanticElement2 != null)
+					return semanticElement2;
+			}
+		}
 		ICompositeNode parent = node.getParent();
 		if (parent == null) {
 			BidiTreeIterator<INode> it = node.getAsTreeIterable().iterator();
@@ -273,28 +302,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 					return EcoreUtil.getRootContainer(sem);
 			}
 		}
-		return findSemanticElement(parent);
-	}
-
-	protected EObject findSemanticElementFromChildren(INode node) {
-		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
-		while (iterator.hasNext()) {
-			INode next = iterator.next();
-			EObject grammarElement = next.getGrammarElement();
-			if (next != node) {
-				if (grammarElement instanceof RuleCall) {
-					if (GrammarUtil.isAssigned(grammarElement)) {
-						EObject semanticElement = next.getParent().getSemanticElement();
-						if (semanticElement != null)
-							return semanticElement;
-					}
-					EObject semanticElement = next.getSemanticElement();
-					if (semanticElement != null)
-						return semanticElement;
-				}
-			}
-		}
-		return node.getParent().getSemanticElement();
+		return findSemanticElementFromChildren(parent, node);
 	}
 
 	@Override
