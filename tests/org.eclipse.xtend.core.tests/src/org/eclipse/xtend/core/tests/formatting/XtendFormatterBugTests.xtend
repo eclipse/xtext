@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
@@ -211,5 +212,20 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			}
 		}''', '''  abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }''')
 	}
-
+	
+	@Test def bug462628() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format() {
+						mmmmmmmmmmmmmmmcontainsBlockExprmmmmmmmexprcasesemptymmmmexprmmdefaultmmmmmmmm &&
+							mexprmcasesmexists[multiline] && mexprmmdefaultmmultilineOrInNewLine
+					}
+				}
+			'''
+		]
+	}
 }
