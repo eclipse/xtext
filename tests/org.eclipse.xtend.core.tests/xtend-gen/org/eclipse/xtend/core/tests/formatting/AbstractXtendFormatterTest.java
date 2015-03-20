@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public abstract class AbstractXtendFormatterTest {
   @Inject
-  private FormatterTester tester;
+  protected FormatterTester tester;
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
