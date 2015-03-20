@@ -10,7 +10,7 @@ buildscript {
 	}
 	
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.4"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.5"
 	}
 }
 

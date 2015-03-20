@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.psi.PsiFile;
-import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.PlatformTestCase;
 import com.intellij.testFramework.builders.EmptyModuleFixtureBuilder;
 import com.intellij.testFramework.fixtures.IdeaProjectTestFixture;
 import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory;
@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
+public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
   @Inject
   private IContainer.Manager containerManager;
   

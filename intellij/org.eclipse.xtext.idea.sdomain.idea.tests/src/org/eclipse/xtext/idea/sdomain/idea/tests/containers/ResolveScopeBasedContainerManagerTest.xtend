@@ -19,8 +19,9 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import com.intellij.testFramework.PlatformTestCase
 
-class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
+class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 	
 	@Inject
 	IContainer.Manager containerManager
