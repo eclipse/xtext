@@ -66,6 +66,8 @@
 								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
+
+    	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
 	</extensions>
 
 </idea-plugin>
