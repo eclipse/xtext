@@ -327,7 +327,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 				List<LightweightBoundTypeArgument> hints = ((UnboundTypeReference) expectation).getAllHints();
 				for(LightweightBoundTypeArgument hint: hints) {
 					LightweightTypeReference hintReference = hint.getTypeReference();
-					if (hintReference.isSubtypeOf(clazz)) {
+					if (hintReference != null && hintReference.isSubtypeOf(clazz)) {
 						return true;
 					}
 				}
