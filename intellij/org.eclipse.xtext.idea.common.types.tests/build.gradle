@@ -1,11 +1,13 @@
+sourceSets*.java*.srcDirs = [] //ignore for now, doesn't compile yet
+
 dependencies {
-	testCompile project(':org.eclipse.xtext.idea.tests')
+	testCompile project(':intellij:org.eclipse.xtext.idea.tests')
 	compile ("org.eclipse.xtend:org.eclipse.xtend.lib:${version}")
 }
 
 ideaDevelopment {
 	pluginDependencies {
-		id 'org.eclipse.xtext.idea'
-		id 'org.eclipse.xtext.xbase.idea'
+		project ':intellij:org.eclipse.xtext.idea'
+		project ':intellij:org.eclipse.xtext.xbase.idea'
 	}
 }

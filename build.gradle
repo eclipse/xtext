@@ -1,0 +1,26 @@
+allprojects {
+	buildscript {
+		repositories {
+			if (!System.getProperty("JOB_NAME")) {
+				mavenLocal()
+			}
+			jcenter()
+			maven {
+				url "https://oss.sonatype.org/content/repositories/snapshots/"
+			}
+		}
+	}
+	
+	group = 'org.eclipse.xtext'
+	version = '2.9.0-SNAPSHOT'
+	
+	repositories.addAll(rootProject.buildscript.repositories)
+	
+	plugins.withType(JavaPlugin) {
+		project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+		sourceCompatibility = 1.6
+		tasks.withType(JavaCompile) {
+			options.encoding = 'ISO-8859-1'
+		}
+	}
+}

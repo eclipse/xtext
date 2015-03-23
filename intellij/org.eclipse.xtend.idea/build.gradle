@@ -6,7 +6,7 @@ dependencies {
 
 ideaDevelopment {
 	pluginDependencies {
-		id 'org.eclipse.xtext.idea'
-		id 'org.eclipse.xtext.xbase.idea'
+		project ':intellij:org.eclipse.xtext.idea'
+		project ':intellij:org.eclipse.xtext.xbase.idea'
 	}
 }

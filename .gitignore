@@ -5,3 +5,7 @@ target
 *.java._trace
 *.java_trace
 *.smap
+.gradle
+build/
+!**/src/**/build/
+!**/xtend-gen/**/build/

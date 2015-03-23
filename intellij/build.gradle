@@ -1,30 +1,14 @@
 buildscript {
-	repositories {
-		if (!System.getProperty("JOB_NAME")) {
-			mavenLocal()
-		}
-		jcenter()
-		maven {
-			url "https://oss.sonatype.org/content/repositories/snapshots/"
-		}
-	}
-	
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.5"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.6"
 	}
 }
 
 allprojects {
-	apply plugin: 'maven'
 	apply plugin: 'org.xtext.idea-dev'
 	
-	group = 'org.eclipse.xtext'
-	version = '2.9.0-SNAPSHOT'
-	
-	repositories.addAll(rootProject.buildscript.repositories)
-	
 	ideaDevelopment {
-		ideaHome = "${rootDir}/intellij-ce"
+		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
 		ideaVersion = "140.2683.2"
 	}
 }
@@ -35,7 +19,6 @@ ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/la
 
 subprojects {
 	apply plugin: 'org.xtext.idea-component'
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	
 	configurations.compile {
 		exclude module:'cglib'
@@ -43,20 +26,15 @@ subprojects {
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 	}
-	
-	sourceCompatibility = 1.6
-	tasks.withType(JavaCompile) {
-		options.encoding = 'ISO-8859-1'
-	}
 }
 
 def intellijPluginProjects = [
-	project(':org.eclipse.xtext.idea'),
-	project(':org.eclipse.xtext.xtext.idea'),
-	project(':org.eclipse.xtext.xbase.idea'),
-	project(':org.eclipse.xtext.idea.sdomain.idea'),
-	project(':org.eclipse.xtext.idea.example.entities.idea'),
-	project(':org.eclipse.xtend.idea')
+	project('org.eclipse.xtext.idea'),
+	project('org.eclipse.xtext.xtext.idea'),
+	project('org.eclipse.xtext.xbase.idea'),
+	project('org.eclipse.xtext.idea.sdomain.idea'),
+	project('org.eclipse.xtext.idea.example.entities.idea'),
+	project('org.eclipse.xtend.idea')
 ]
 
 configure(intellijPluginProjects) {
