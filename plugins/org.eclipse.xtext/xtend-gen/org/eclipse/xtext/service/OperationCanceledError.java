@@ -7,51 +7,17 @@
  */
 package org.eclipse.xtext.service;
 
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.xbase.lib.Pure;
-
 /**
  * @since 2.8
  */
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class OperationCanceledError extends Error {
-  @Accessors
-  private final RuntimeException wrapped;
-  
-  @Override
-  public Throwable fillInStackTrace() {
-    return super.fillInStackTrace();
+  public OperationCanceledError(final RuntimeException cause) {
+    super(cause);
   }
   
-  @Override
-  public Throwable getCause() {
-    return this.wrapped;
-  }
-  
-  @Override
-  public String getLocalizedMessage() {
-    return this.wrapped.getLocalizedMessage();
-  }
-  
-  @Override
-  public String getMessage() {
-    return this.wrapped.getMessage();
-  }
-  
-  @Override
-  public StackTraceElement[] getStackTrace() {
-    return this.wrapped.getStackTrace();
-  }
-  
-  public OperationCanceledError(final RuntimeException wrapped) {
-    super();
-    this.wrapped = wrapped;
-  }
-  
-  @Pure
   public RuntimeException getWrapped() {
-    return this.wrapped;
+    Throwable _cause = this.getCause();
+    return ((RuntimeException) _cause);
   }
 }

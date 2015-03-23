@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.validation.CachingResourceValidatorImpl;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtext.resource.ResourceSetContext;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -26,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class XtendResourceValidator extends CachingResourceValidatorImpl {
   @Override
-  public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
+  public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) throws OperationCanceledError {
     List<Issue> _xtrycatchfinallyexpression = null;
     try {
       _xtrycatchfinallyexpression = super.validate(resource, mode, mon);
