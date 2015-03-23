@@ -1,8 +1,10 @@
-new File(settingsDir, "plugins").listFiles().findAll {
-	new File(it, 'build.properties').exists()
-}
-.each {
-	include "plugins:${it.name}"
+['plugins', 'tests'].each { folder ->
+	new File(settingsDir, folder).listFiles().findAll {
+		new File(it, 'build.properties').exists()
+	}
+	.each {
+		include "${folder}:${it.name}"
+	}
 }
 
 include 'intellij:intellij-dependencies'

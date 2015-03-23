@@ -1,0 +1,49 @@
+import java.util.jar.Manifest
+
+apply plugin: 'java-base'
+
+dependencies {
+	def manifestFile = new File(projectDir, 'META-INF/MANIFEST.MF')
+	def manifest
+	manifestFile.withInputStream {
+			manifest = new Manifest(it)
+	}
+	def requiredBundles = manifest.mainAttributes.getValue('Require-Bundle')
+	if (requiredBundles) {
+		requiredBundles.split(',')
+			.collect{it.split(';')[0]}
+			.collect{name -> rootProject.subprojects.findResult {it.name == name ? it : null}}
+			.findAll {it != null}
+			.each {
+				add('default', it)
+			}
+	}
+}
+
+task jar(type:Jar) {
+	from('bin')
+	manifest {
+		from('META-INF/MANIFEST.MF')
+	}
+	with {
+		Properties buildProperties = new Properties()
+		File propertiesFile = new File(projectDir, 'build.properties')
+		propertiesFile.withInputStream {
+				buildProperties.load(it)
+		}
+		def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+		binIncludes.each{ include ->
+			if (project.file(include).isDirectory()) {
+				from(include) {
+					into(include)
+				}
+			} else {
+				from(include)
+			}
+		}
+	}
+}
+
+artifacts {
+	archives jar
+}
