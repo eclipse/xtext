@@ -104,6 +104,23 @@ class TestBatchCompiler {
 		]
 		log.assertLogEntry("xtend", "cannot be a child")
 	}
+	
+	@Test def void testInvalidConfiguration_2() {
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			val log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler) [
+				batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+				batchCompiler.outputPath = XTEND_SRC_DIRECTORY.toUpperCase+"/xtend-gen"
+				batchCompiler.compile	
+			]
+			log.assertLogEntry("xtend", "cannot be a child")
+		}
+	}
+	
+	@Test def void testBug462723() {
+		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+		batchCompiler.outputPath = XTEND_SRC_DIRECTORY+"-gen"
+		assertTrue(batchCompiler.compile)	
+	}
 
 	@Test def void testWorkspaceConfig() {
 		assertTrue(batchCompiler.configureWorkspace());
