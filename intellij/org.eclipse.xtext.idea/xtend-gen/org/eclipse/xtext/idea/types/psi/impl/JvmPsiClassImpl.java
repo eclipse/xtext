@@ -59,6 +59,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.IncorrectOperationException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.Icon;
 import org.eclipse.emf.common.notify.Adapter;
@@ -92,7 +93,9 @@ import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -230,9 +233,9 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
         String _simpleName = m.getSimpleName();
         LightParameterListBuilder _psiParameters = JvmPsiClassImpl.this.getPsiParameters(m);
         AnnotatableModifierList _psiModifiers = JvmPsiClassImpl.this.getPsiModifiers(m);
-        LightReferenceListBuilder _psiThrowsList = JvmPsiClassImpl.this.psiThrowsList(m);
+        LightReferenceListBuilder _throwsList = JvmPsiClassImpl.this.getThrowsList(m);
         LightTypeParameterListBuilder _psiTypeParameterList = JvmPsiClassImpl.this.getPsiTypeParameterList(m);
-        LightMethodBuilder _lightMethodBuilder = new LightMethodBuilder(_manager, _language, _simpleName, _psiParameters, _psiModifiers, _psiThrowsList, _psiTypeParameterList);
+        LightMethodBuilder _lightMethodBuilder = new LightMethodBuilder(_manager, _language, _simpleName, _psiParameters, _psiModifiers, _throwsList, _psiTypeParameterList);
         final Procedure1<LightMethodBuilder> _function = new Procedure1<LightMethodBuilder>() {
           @Override
           public void apply(final LightMethodBuilder it) {
@@ -257,25 +260,9 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
     return IterableExtensions.<PsiMethod>toList(_map);
   }
   
-  private LightReferenceListBuilder psiThrowsList(final JvmExecutable executable) {
-    PsiManager _manager = this.getManager();
-    Language _language = this.getLanguage();
-    LightReferenceListBuilder _lightReferenceListBuilder = new LightReferenceListBuilder(_manager, _language, PsiReferenceList.Role.THROWS_LIST);
-    final Procedure1<LightReferenceListBuilder> _function = new Procedure1<LightReferenceListBuilder>() {
-      @Override
-      public void apply(final LightReferenceListBuilder it) {
-        EList<JvmTypeReference> _exceptions = executable.getExceptions();
-        final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-          @Override
-          public void apply(final JvmTypeReference e) {
-            PsiType _psiType = JvmPsiClassImpl.this.toPsiType(e);
-            it.addReference(((PsiClassReferenceType) _psiType));
-          }
-        };
-        IterableExtensions.<JvmTypeReference>forEach(_exceptions, _function);
-      }
-    };
-    return ObjectExtensions.<LightReferenceListBuilder>operator_doubleArrow(_lightReferenceListBuilder, _function);
+  protected LightReferenceListBuilder getThrowsList(final JvmExecutable executable) {
+    EList<JvmTypeReference> _exceptions = executable.getExceptions();
+    return this.toReferenceList(_exceptions, PsiReferenceList.Role.THROWS_LIST);
   }
   
   private LightParameterListBuilder getPsiParameters(final JvmExecutable m) {
@@ -452,25 +439,18 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   }
   
   private PsiType toPsiType(final JvmTypeReference type) {
-    PsiType _xtrycatchfinallyexpression = null;
     try {
-      PsiType _xifexpression = null;
       boolean _equals = Objects.equal(type, null);
       if (_equals) {
-        _xifexpression = null;
-      } else {
-        PsiType _xifexpression_1 = null;
-        if ((type instanceof XComputedTypeReference)) {
-          JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
-          _xifexpression_1 = this.toPsiType(_equivalent);
-        } else {
-          String _qualifiedName = type.getQualifiedName('.');
-          PsiFile _containingFile = this.getContainingFile();
-          _xifexpression_1 = this.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
-        }
-        _xifexpression = _xifexpression_1;
+        return null;
       }
-      _xtrycatchfinallyexpression = _xifexpression;
+      if ((type instanceof XComputedTypeReference)) {
+        JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
+        return this.toPsiType(_equivalent);
+      }
+      String _qualifiedName = type.getQualifiedName('.');
+      PsiFile _containingFile = this.getContainingFile();
+      return this.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledError) {
         final OperationCanceledError e = (OperationCanceledError)_t;
@@ -479,7 +459,6 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
         throw Exceptions.sneakyThrow(_t);
       }
     }
-    return _xtrycatchfinallyexpression;
   }
   
   /**
@@ -580,57 +559,64 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   
   @Override
   public PsiReferenceList getExtendsList() {
-    PsiManager _manager = this.getManager();
-    Language _language = this.getLanguage();
-    LightReferenceListBuilder _lightReferenceListBuilder = new LightReferenceListBuilder(_manager, _language, PsiReferenceList.Role.EXTENDS_LIST);
-    final Procedure1<LightReferenceListBuilder> _function = new Procedure1<LightReferenceListBuilder>() {
-      @Override
-      public void apply(final LightReferenceListBuilder it) {
-        boolean _isInterface = JvmPsiClassImpl.this.isInterface();
-        if (_isInterface) {
-          Iterable<JvmTypeReference> _extendedInterfaces = JvmPsiClassImpl.this.jvmType.getExtendedInterfaces();
-          final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-            @Override
-            public void apply(final JvmTypeReference type) {
-              PsiType _psiType = JvmPsiClassImpl.this.toPsiType(type);
-              it.addReference(((PsiClassType) _psiType));
-            }
-          };
-          IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
-        } else {
-          JvmTypeReference _extendedClass = JvmPsiClassImpl.this.jvmType.getExtendedClass();
-          PsiType _psiType = JvmPsiClassImpl.this.toPsiType(_extendedClass);
-          it.addReference(((PsiClassType) _psiType));
-        }
+    LightReferenceListBuilder _xblockexpression = null;
+    {
+      Iterable<JvmTypeReference> _xifexpression = null;
+      boolean _isInterface = this.isInterface();
+      if (_isInterface) {
+        _xifexpression = this.jvmType.getExtendedInterfaces();
+      } else {
+        JvmTypeReference _extendedClass = this.jvmType.getExtendedClass();
+        _xifexpression = Collections.<JvmTypeReference>unmodifiableList(CollectionLiterals.<JvmTypeReference>newArrayList(_extendedClass));
       }
-    };
-    return ObjectExtensions.<LightReferenceListBuilder>operator_doubleArrow(_lightReferenceListBuilder, _function);
+      final Iterable<JvmTypeReference> references = _xifexpression;
+      _xblockexpression = this.toReferenceList(references, PsiReferenceList.Role.EXTENDS_LIST);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public PsiReferenceList getImplementsList() {
-    PsiManager _manager = this.getManager();
-    Language _language = this.getLanguage();
-    LightReferenceListBuilder _lightReferenceListBuilder = new LightReferenceListBuilder(_manager, _language, PsiReferenceList.Role.IMPLEMENTS_LIST);
-    final Procedure1<LightReferenceListBuilder> _function = new Procedure1<LightReferenceListBuilder>() {
-      @Override
-      public void apply(final LightReferenceListBuilder it) {
-        boolean _isInterface = JvmPsiClassImpl.this.isInterface();
-        boolean _not = (!_isInterface);
-        if (_not) {
-          Iterable<JvmTypeReference> _extendedInterfaces = JvmPsiClassImpl.this.jvmType.getExtendedInterfaces();
-          final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-            @Override
-            public void apply(final JvmTypeReference type) {
-              PsiType _psiType = JvmPsiClassImpl.this.toPsiType(type);
-              it.addReference(((PsiClassType) _psiType));
-            }
-          };
-          IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
-        }
+    LightReferenceListBuilder _xblockexpression = null;
+    {
+      Iterable<JvmTypeReference> _xifexpression = null;
+      boolean _isInterface = this.isInterface();
+      if (_isInterface) {
+        _xifexpression = CollectionLiterals.<JvmTypeReference>emptyList();
+      } else {
+        _xifexpression = this.jvmType.getExtendedInterfaces();
       }
-    };
-    return ObjectExtensions.<LightReferenceListBuilder>operator_doubleArrow(_lightReferenceListBuilder, _function);
+      final Iterable<JvmTypeReference> references = _xifexpression;
+      _xblockexpression = this.toReferenceList(references, PsiReferenceList.Role.IMPLEMENTS_LIST);
+    }
+    return _xblockexpression;
+  }
+  
+  protected LightReferenceListBuilder toReferenceList(final Iterable<JvmTypeReference> references, final PsiReferenceList.Role role) {
+    LightReferenceListBuilder _xblockexpression = null;
+    {
+      PsiManager _manager = this.getManager();
+      Language _language = this.getLanguage();
+      @Extension
+      final LightReferenceListBuilder referenceList = new LightReferenceListBuilder(_manager, _language, role);
+      final Function1<JvmTypeReference, PsiType> _function = new Function1<JvmTypeReference, PsiType>() {
+        @Override
+        public PsiType apply(final JvmTypeReference it) {
+          return JvmPsiClassImpl.this.toPsiType(it);
+        }
+      };
+      Iterable<PsiType> _map = IterableExtensions.<JvmTypeReference, PsiType>map(references, _function);
+      Iterable<PsiClassType> _filter = Iterables.<PsiClassType>filter(_map, PsiClassType.class);
+      final Procedure1<PsiClassType> _function_1 = new Procedure1<PsiClassType>() {
+        @Override
+        public void apply(final PsiClassType it) {
+          referenceList.addReference(it);
+        }
+      };
+      IterableExtensions.<PsiClassType>forEach(_filter, _function_1);
+      _xblockexpression = referenceList;
+    }
+    return _xblockexpression;
   }
   
   @Override

@@ -25,11 +25,14 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiModifier
+import com.intellij.psi.PsiModifierList
 import com.intellij.psi.PsiNameHelper
 import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.PsiParameterList
 import com.intellij.psi.PsiReferenceList
 import com.intellij.psi.PsiSubstitutor
 import com.intellij.psi.PsiType
+import com.intellij.psi.PsiTypeParameterList
 import com.intellij.psi.ResolveState
 import com.intellij.psi.impl.InheritanceImplUtil
 import com.intellij.psi.impl.PsiClassImplUtil
@@ -74,9 +77,6 @@ import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
-import com.intellij.psi.PsiParameterList
-import com.intellij.psi.PsiModifierList
-import com.intellij.psi.PsiTypeParameterList
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
@@ -168,7 +168,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				m.simpleName,
 				m.psiParameters,
 				m.psiModifiers,
-				m.psiThrowsList,
+				m.throwsList,
 				m.psiTypeParameterList
 			) => [
 				parent = this
@@ -184,12 +184,8 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 		].toList
 	}
 
-	private def psiThrowsList(JvmExecutable executable) {
-		new LightReferenceListBuilder(manager, language, PsiReferenceList.Role.THROWS_LIST) => [
-			executable.exceptions.forEach [ e |
-				addReference(e.toPsiType as PsiClassReferenceType)
-			]
-		]
+	protected def getThrowsList(JvmExecutable executable) {
+		executable.exceptions.toReferenceList(PsiReferenceList.Role.THROWS_LIST)
 	}
 
 	private def getPsiParameters(JvmExecutable m) {
@@ -276,12 +272,12 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	private def PsiType toPsiType(JvmTypeReference type) {
 		try {
 			if (type == null) {
-				null
-			} else if (type instanceof XComputedTypeReference) {
-				type.equivalent.toPsiType
-			} else {
-				buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
+				return null
+			} 
+			if (type instanceof XComputedTypeReference) {
+				return type.equivalent.toPsiType
 			}
+			return buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
 		} catch (OperationCanceledError e) {
 			throw e.wrapped
 		}
@@ -332,21 +328,25 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	override getExtendsList() {
-		new LightReferenceListBuilder(manager, language, PsiReferenceList.Role.EXTENDS_LIST) => [
-			if (isInterface) {
-				jvmType.extendedInterfaces.forEach[type|addReference(type.toPsiType as PsiClassType)]
-			} else {
-				addReference(jvmType.extendedClass.toPsiType as PsiClassType)
-			}
-		]
+		val references = if (interface)
+				jvmType.extendedInterfaces
+			else
+				#[jvmType.extendedClass]
+		references.toReferenceList(PsiReferenceList.Role.EXTENDS_LIST)
 	}
 
 	override getImplementsList() {
-		new LightReferenceListBuilder(manager, language, PsiReferenceList.Role.IMPLEMENTS_LIST) => [
-			if (!isInterface) {
-				jvmType.extendedInterfaces.forEach[type|addReference(type.toPsiType as PsiClassType)]
-			}
-		]
+		val references = if (interface)
+				emptyList
+			else
+				jvmType.extendedInterfaces
+		references.toReferenceList(PsiReferenceList.Role.IMPLEMENTS_LIST)
+	}
+	
+	protected def toReferenceList(Iterable<JvmTypeReference> references, PsiReferenceList.Role role) {
+		val extension referenceList = new LightReferenceListBuilder(manager, language, role)
+		references.map[toPsiType].filter(PsiClassType).forEach[addReference]
+		referenceList
 	}
 
 	override getInitializers() {
