@@ -41,7 +41,7 @@ public class IdeaBuildData {
   }
   
   public Collection<File> getClasspath() {
-    return ProjectPaths.getCompilationClasspath(this.chunk, false);
+    return ProjectPaths.getCompilationClasspath(this.chunk, true);
   }
   
   public Set<File> getSourceRoots() {

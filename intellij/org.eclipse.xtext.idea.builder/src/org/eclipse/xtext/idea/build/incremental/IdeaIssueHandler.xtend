@@ -13,15 +13,15 @@ class IdeaIssueHandler implements IIssueHandler {
 	IdeaBuildData buildData
 	
 	override handleIssue(Iterable<Issue> issues) {
-		var hasErrors = false
+		var errorFree = true
 		for(it: issues.filter[severity != Severity.IGNORE]) {
 			buildData.context.processMessage(new CompilerMessage(
 				buildData.compilerName, kind, message, uriToProblem.path, 
-				offset, offset + length, offset, lineNumber, 0 // we have to find out the column :-(
+				offset, offset + length, offset, lineNumber, 0 // FIXME we have to find out the column :-(
 			))
-			hasErrors = hasErrors || severity == Severity.ERROR
+			errorFree = errorFree && severity != Severity.ERROR
 		}
-		return hasErrors
+		return errorFree
 	}
 	
 	private def getKind(Issue issue) {

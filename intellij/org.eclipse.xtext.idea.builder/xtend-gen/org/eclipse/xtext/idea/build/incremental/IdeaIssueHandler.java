@@ -21,7 +21,7 @@ public class IdeaIssueHandler implements IIssueHandler {
   
   @Override
   public boolean handleIssue(final Iterable<Issue> issues) {
-    boolean hasErrors = false;
+    boolean errorFree = true;
     final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
       @Override
       public Boolean apply(final Issue it) {
@@ -46,18 +46,18 @@ public class IdeaIssueHandler implements IIssueHandler {
         Integer _lineNumber = it.getLineNumber();
         CompilerMessage _compilerMessage = new CompilerMessage(_compilerName, _kind, _message, _path, (_offset).intValue(), _plus, (_offset_2).intValue(), (_lineNumber).intValue(), 0);
         _context.processMessage(_compilerMessage);
-        boolean _or = false;
-        if (hasErrors) {
-          _or = true;
+        boolean _and = false;
+        if (!errorFree) {
+          _and = false;
         } else {
           Severity _severity = it.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          _or = _equals;
+          boolean _notEquals = (!Objects.equal(_severity, Severity.ERROR));
+          _and = _notEquals;
         }
-        hasErrors = _or;
+        errorFree = _and;
       }
     }
-    return hasErrors;
+    return errorFree;
   }
   
   private BuildMessage.Kind getKind(final Issue issue) {

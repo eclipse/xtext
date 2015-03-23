@@ -21,7 +21,7 @@ class IdeaBuildData {
 	}
 
 	def getClasspath() {
-		ProjectPaths.getCompilationClasspath(chunk, false)
+		ProjectPaths.getCompilationClasspath(chunk, true)
 	}
 
 	def getSourceRoots() {
