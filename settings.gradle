@@ -1,3 +1,10 @@
+new File(settingsDir, "plugins").listFiles().findAll {
+	new File(it, 'build.properties').exists()
+}
+.each {
+	include "plugins:${it.name}"
+}
+
 include 'intellij:intellij-dependencies'
 new File(settingsDir, "intellij").listFiles().findAll {
 	it.isDirectory() && it.name.startsWith("org.eclipse") && !it.name.endsWith("ui")

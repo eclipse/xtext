@@ -1,0 +1,32 @@
+subprojects {
+	apply plugin: 'java-base'
+	
+	task jar(type:Jar) {
+		from('bin')
+		manifest {
+			from('META-INF/Manifest.mf')
+		}
+		with {
+			Properties buildProperties = new Properties()
+			File propertiesFile = new File(projectDir, 'build.properties')
+			propertiesFile.withInputStream {
+					buildProperties.load(it)
+			}
+			def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+			binIncludes.each{ include ->
+				if (project.file(include).isDirectory()) {
+					from(include) {
+						into(include)
+					}
+				} else {
+					from(include)
+				}
+			}
+		}
+	}
+	
+	artifacts {
+		archives jar
+	}
+}
+
