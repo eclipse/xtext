@@ -10,20 +10,20 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.jetbrains.jps.service.JpsServiceManager
 
 class XtextLanguages {
-	
+
 	static Map<String, LanguageAccess> languageAccesses
-	
+
 	static def getLanguageAccesses() {
-		languageAccesses ?: (languageAccesses = createLanguageAccesses) 
+		languageAccesses ?: (languageAccesses = createLanguageAccesses)
 	}
-	
+
 	static def Map<String, LanguageAccess> createLanguageAccesses() {
 		val result = newHashMap
 		for (setup : JpsServiceManager.instance.getExtensions(ISetup)) {
 			val injector = setup.createInjectorAndDoEMFRegistration
 			val languageAccess = injector.createXtendLanguageAccess
 			for (fileExtension : injector.getInstance(FileExtensionProvider).fileExtensions) {
-				result.put(fileExtension, languageAccess)	
+				result.put(fileExtension, languageAccess)
 			}
 		}
 		result
@@ -32,8 +32,11 @@ class XtextLanguages {
 	static def createXtendLanguageAccess(Injector injector) {
 		val outputConfigurationProvider = injector.getInstance(IOutputConfigurationProvider)
 		val resourceServiceProvider = injector.getInstance(IResourceServiceProvider)
-		return new LanguageAccess(outputConfigurationProvider.outputConfigurations.toSet,
-			resourceServiceProvider, true)
+		return new IdeaLanguageAccess(
+			outputConfigurationProvider.outputConfigurations.toSet,
+			resourceServiceProvider,
+			true
+		)
 	}
 
 }

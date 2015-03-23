@@ -5,7 +5,7 @@ import org.apache.log4j.Logger
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.StandaloneBuilder
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.xtext.idea.generator.FileSystemAccessDelegate
+import org.eclipse.xtext.idea.generator.IdeaJavaIoFileSystemAccess
 
 class IdeaStandaloneBuilder extends StandaloneBuilder {
 
@@ -26,7 +26,10 @@ class IdeaStandaloneBuilder extends StandaloneBuilder {
 	}
 	
 	override protected configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
-		new FileSystemAccessDelegate(fsa, buildData)
+		if (fsa instanceof IdeaJavaIoFileSystemAccess) {
+			fsa.buildData = buildData
+		}
+		fsa
 	}
 	
 	private def getOrCreateTmpDir() {

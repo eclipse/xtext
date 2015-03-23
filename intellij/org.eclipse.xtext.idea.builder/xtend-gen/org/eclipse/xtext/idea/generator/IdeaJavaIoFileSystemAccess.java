@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.Delegate;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.idea.build.XtextIdeaRefreshComponent;
@@ -17,11 +17,13 @@ import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.jetbrains.jps.ModuleChunk;
 import org.jetbrains.jps.incremental.CompileContext;
 import org.jetbrains.jps.incremental.FSOperations;
 import org.jetbrains.jps.incremental.ModuleBuildTarget;
 import org.jetbrains.jps.incremental.ModuleLevelBuilder;
+import org.jetbrains.jps.incremental.fs.CompilationRound;
 import org.jetbrains.jps.model.java.JavaSourceRootProperties;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.module.JpsModule;
@@ -29,23 +31,13 @@ import org.jetbrains.jps.model.module.JpsModuleSourceRoot;
 import org.jetbrains.jps.model.module.JpsTypedModuleSourceRoot;
 
 @SuppressWarnings("all")
-public class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
-  @Delegate
-  private JavaIoFileSystemAccess delegate;
-  
+public class IdeaJavaIoFileSystemAccess extends JavaIoFileSystemAccess {
+  @Accessors
   private IdeaBuildData buildData;
-  
-  public FileSystemAccessDelegate(final JavaIoFileSystemAccess delegate, final IdeaBuildData buildData) {
-    this.delegate = delegate;
-    this.buildData = buildData;
-    String _baseDir = buildData.getBaseDir();
-    String _plus = (_baseDir + "/src-gen");
-    this.setOutputPath(_plus);
-  }
   
   @Override
   public void generateFile(final String fileName, final String outputConfigName, final CharSequence contents) throws RuntimeIOException {
-    this.delegate.generateFile(fileName, outputConfigName, contents);
+    super.generateFile(fileName, outputConfigName, contents);
     this.markDirty(fileName, outputConfigName);
   }
   
@@ -74,7 +66,7 @@ public class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
   
   @Override
   public void deleteFile(final String fileName, final String outputConfiguration) {
-    this.delegate.deleteFile(fileName, outputConfiguration);
+    super.deleteFile(fileName, outputConfiguration);
     this.markDeleted(fileName, outputConfiguration);
   }
   
@@ -114,7 +106,7 @@ public class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
       String _path = file.getPath();
       this.refresh(_path);
       CompileContext _context = this.buildData.getContext();
-      FSOperations.markDirty(_context, file);
+      FSOperations.markDirty(_context, CompilationRound.CURRENT, file);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException e = (IOException)_t;
@@ -181,27 +173,12 @@ public class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
     _refreshComponent.refresh(path);
   }
   
-  public URI getURI(final String path, final String outputConfiguration) {
-    return this.delegate.getURI(path, outputConfiguration);
+  @Pure
+  public IdeaBuildData getBuildData() {
+    return this.buildData;
   }
   
-  public URI getURI(final String path) {
-    return this.delegate.getURI(path);
-  }
-  
-  public InputStream readBinaryFile(final String fileName, final String outputCfgName) throws RuntimeIOException {
-    return this.delegate.readBinaryFile(fileName, outputCfgName);
-  }
-  
-  public InputStream readBinaryFile(final String fileName) throws RuntimeIOException {
-    return this.delegate.readBinaryFile(fileName);
-  }
-  
-  public CharSequence readTextFile(final String fileName, final String outputCfgName) throws RuntimeIOException {
-    return this.delegate.readTextFile(fileName, outputCfgName);
-  }
-  
-  public CharSequence readTextFile(final String fileName) throws RuntimeIOException {
-    return this.delegate.readTextFile(fileName);
+  public void setBuildData(final IdeaBuildData buildData) {
+    this.buildData = buildData;
   }
 }

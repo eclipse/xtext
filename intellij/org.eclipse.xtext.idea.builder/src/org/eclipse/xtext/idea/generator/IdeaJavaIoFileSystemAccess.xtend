@@ -4,32 +4,28 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.util.Arrays
-import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.idea.build.incremental.IdeaBuildData
 import org.eclipse.xtext.util.RuntimeIOException
 import org.jetbrains.jps.incremental.FSOperations
+import org.jetbrains.jps.incremental.fs.CompilationRound
 import org.jetbrains.jps.model.java.JavaSourceRootType
 
-class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
+class IdeaJavaIoFileSystemAccess extends JavaIoFileSystemAccess {
 
-	@Delegate
-	JavaIoFileSystemAccess delegate
-
+	@Accessors
 	IdeaBuildData buildData
 
-	new(JavaIoFileSystemAccess delegate, IdeaBuildData buildData) {
-		this.delegate = delegate
-		this.buildData = buildData
-		outputPath = buildData.baseDir + '/src-gen'
-	}
-	
-	override void generateFile(String fileName, String outputConfigName,
-		CharSequence contents) throws RuntimeIOException {
-		delegate.generateFile(fileName, outputConfigName, contents)
+	override void generateFile(
+		String fileName,
+		String outputConfigName,
+		CharSequence contents
+	) throws RuntimeIOException {
+		super.generateFile(fileName, outputConfigName, contents)
 		markDirty(fileName, outputConfigName)
 	}
-	
+
 	override generateFile(String fileName, CharSequence contents) {
 		super.generateFile(fileName, contents)
 		markDirty(fileName, DEFAULT_OUTPUT)
@@ -39,7 +35,7 @@ class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
 		super.generateFile(fileName, content)
 		markDirty(fileName, DEFAULT_OUTPUT)
 	}
-	
+
 	override generateFile(String fileName, String outputConfigName, InputStream content) throws RuntimeIOException {
 		super.generateFile(fileName, outputConfigName, content)
 		markDirty(fileName, outputConfigName)
@@ -47,11 +43,11 @@ class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
 
 	override protected generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		super.generateTrace(generatedFile, outputConfigName, contents)
-		
+
 	}
-	
+
 	@Override override void deleteFile(String fileName, String outputConfiguration) {
-		delegate.deleteFile(fileName, outputConfiguration)
+		super.deleteFile(fileName, outputConfiguration)
 		markDeleted(fileName, outputConfiguration)
 	}
 
@@ -59,12 +55,14 @@ class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
 		super.deleteFile(fileName)
 		markDeleted(fileName, DEFAULT_OUTPUT)
 	}
-	
+
 	def protected void registerOutputFile(File file, String outputConfigName) {
 		var String outlet = getPathes().get(outputConfigName)
 		try {
 			buildData.outputConsumer.registerOutputFile(
-				buildData.chunk.representativeTarget, file, Arrays.asList(outlet)
+				buildData.chunk.representativeTarget,
+				file,
+				Arrays.asList(outlet)
 			)
 		} catch (IOException e) {
 			throw new RuntimeException(e)
@@ -80,16 +78,16 @@ class FileSystemAccessDelegate extends JavaIoFileSystemAccess {
 			createSourceRoot(fileName, outputConfigName)
 			var File file = getFile(fileName, outputConfigName)
 			refresh(file.getPath())
-			FSOperations.markDirty(buildData.context, file)
+			FSOperations.markDirty(buildData.context, CompilationRound.CURRENT, file)
 		} catch (IOException e) {
 			throw new RuntimeException(e)
 		}
 
 	}
-	
+
 	protected def createSourceRoot(String fileName, String outputConfigName) {
 		val outletUrl = getURI(fileName, outputConfigName).toString
-		if(!buildData.module.getSourceRoots(JavaSourceRootType.SOURCE).exists[url == outletUrl])
+		if (!buildData.module.getSourceRoots(JavaSourceRootType.SOURCE).exists[url == outletUrl])
 			buildData.module.addSourceRoot(outletUrl, JavaSourceRootType.SOURCE)
 	}
 

@@ -8,6 +8,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.idea.build.incremental.IdeaLanguageAccess;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -38,7 +39,7 @@ public class XtextLanguages {
       for (final ISetup setup : _extensions) {
         {
           final Injector injector = setup.createInjectorAndDoEMFRegistration();
-          final LanguageAccess languageAccess = XtextLanguages.createXtendLanguageAccess(injector);
+          final IdeaLanguageAccess languageAccess = XtextLanguages.createXtendLanguageAccess(injector);
           FileExtensionProvider _instance_1 = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
           Set<String> _fileExtensions = _instance_1.getFileExtensions();
           for (final String fileExtension : _fileExtensions) {
@@ -51,11 +52,12 @@ public class XtextLanguages {
     return _xblockexpression;
   }
   
-  public static LanguageAccess createXtendLanguageAccess(final Injector injector) {
+  public static IdeaLanguageAccess createXtendLanguageAccess(final Injector injector) {
     final IOutputConfigurationProvider outputConfigurationProvider = injector.<IOutputConfigurationProvider>getInstance(IOutputConfigurationProvider.class);
     final IResourceServiceProvider resourceServiceProvider = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
     Set<OutputConfiguration> _outputConfigurations = outputConfigurationProvider.getOutputConfigurations();
     Set<OutputConfiguration> _set = IterableExtensions.<OutputConfiguration>toSet(_outputConfigurations);
-    return new LanguageAccess(_set, resourceServiceProvider, true);
+    return new IdeaLanguageAccess(_set, resourceServiceProvider, 
+      true);
   }
 }

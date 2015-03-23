@@ -9,7 +9,7 @@ import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.idea.build.incremental.IdeaBuildData;
 import org.eclipse.xtext.idea.build.incremental.IdeaIssueHandler;
-import org.eclipse.xtext.idea.generator.FileSystemAccessDelegate;
+import org.eclipse.xtext.idea.generator.IdeaJavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -51,7 +51,14 @@ public class IdeaStandaloneBuilder extends StandaloneBuilder {
   
   @Override
   protected JavaIoFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
-    return new FileSystemAccessDelegate(fsa, this.buildData);
+    JavaIoFileSystemAccess _xblockexpression = null;
+    {
+      if ((fsa instanceof IdeaJavaIoFileSystemAccess)) {
+        ((IdeaJavaIoFileSystemAccess)fsa).setBuildData(this.buildData);
+      }
+      _xblockexpression = fsa;
+    }
+    return _xblockexpression;
   }
   
   private File getOrCreateTmpDir() {
