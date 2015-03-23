@@ -13,13 +13,14 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtend.core.validation.CachingResourceValidatorImpl
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider.ProcessorClassloaderAdapter
+import org.eclipse.xtext.service.OperationCanceledError
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class XtendResourceValidator extends CachingResourceValidatorImpl {
 	
-	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
+	override validate(Resource resource, CheckMode mode, CancelIndicator mon) throws OperationCanceledError {
 		try {
 			super.validate(resource, mode, mon)
 		} finally {
