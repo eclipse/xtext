@@ -174,6 +174,34 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void testInvalidConfiguration_2() {
+    String _property = System.getProperty("os.name");
+    boolean _startsWith = _property.startsWith("Windows");
+    if (_startsWith) {
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+          String _upperCase = TestBatchCompiler.XTEND_SRC_DIRECTORY.toUpperCase();
+          String _plus = (_upperCase + "/xtend-gen");
+          TestBatchCompiler.this.batchCompiler.setOutputPath(_plus);
+          TestBatchCompiler.this.batchCompiler.compile();
+        }
+      };
+      final LoggingTester.LogCapture log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
+      log.assertLogEntry("xtend", "cannot be a child");
+    }
+  }
+  
+  @Test
+  public void testBug462723() {
+    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "-gen"));
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+  }
+  
+  @Test
   public void testWorkspaceConfig() {
     try {
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
