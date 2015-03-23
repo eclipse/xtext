@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceV
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword
+import org.eclipse.xtext.service.OperationCanceledError
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
@@ -33,7 +34,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 	@Inject extension JvmTypeExtensions 
 	@Inject OperationCanceledManager operationCanceledManager
 	
-	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
+	override validate(Resource resource, CheckMode mode, CancelIndicator mon) throws OperationCanceledError {
 		return cache.get(mode, resource) [ |
 			operationCanceledManager.checkCanceled(mon)
 			return super.validate(resource, mode, mon)

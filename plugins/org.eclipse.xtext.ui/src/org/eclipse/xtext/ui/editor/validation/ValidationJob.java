@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
@@ -64,6 +65,8 @@ public class ValidationJob extends Job {
 		List<Issue> issues = null;
 		try {
 			issues = createIssues(monitor);
+		} catch (OperationCanceledError canceled) {
+			return Status.CANCEL_STATUS;
 		} catch (OperationCanceledException canceled) {
 			return Status.CANCEL_STATUS;
 		} catch (Exception e) {
