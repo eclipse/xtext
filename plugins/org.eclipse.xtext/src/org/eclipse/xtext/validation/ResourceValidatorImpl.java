@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
@@ -66,7 +67,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	private OperationCanceledManager operationCanceledManager;
 	
 	@Override
-	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
+	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) throws OperationCanceledError {
 		StoppedTask task = Stopwatches.forTask("ResourceValidatorImpl.validation");
 		try {
 			task.start();

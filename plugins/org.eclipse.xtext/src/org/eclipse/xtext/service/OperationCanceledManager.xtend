@@ -9,8 +9,6 @@ package org.eclipse.xtext.service
 
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
@@ -89,27 +87,11 @@ class OperationCanceledManager {
 /**
  * @since 2.8
  */
-@FinalFieldsConstructor class OperationCanceledError extends Error {
-	@Accessors final RuntimeException wrapped
-	
-	override fillInStackTrace() {
-		super.fillInStackTrace
+class OperationCanceledError extends Error {
+	new(RuntimeException cause) {
+		super(cause)
 	}
-
-	override getCause() {
-		wrapped
+	def RuntimeException getWrapped() {
+		return cause as RuntimeException
 	}
-	
-	override getLocalizedMessage() {
-		wrapped.localizedMessage
-	}
-	
-	override getMessage() {
-		wrapped.message
-	}
-	
-	override getStackTrace() {
-		wrapped.stackTrace
-	}
-	
 }
