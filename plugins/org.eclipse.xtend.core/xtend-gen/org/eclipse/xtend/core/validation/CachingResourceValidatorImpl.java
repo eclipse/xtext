@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
@@ -69,7 +70,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   private OperationCanceledManager operationCanceledManager;
   
   @Override
-  public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
+  public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) throws OperationCanceledError {
     final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
       @Override
       public List<Issue> get() {

@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.compiler;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -66,6 +69,8 @@ public class ElementIssueProvider implements IElementIssueProvider {
 	
 	public static class Factory implements IElementIssueProvider.Factory {
 		
+		private static final Logger LOG = Logger.getLogger(Factory.class);
+		
 		@Inject IJvmModelAssociations associations;
 		
 		@Inject IResourceValidator resourceValidator;
@@ -90,9 +95,14 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		}
 
 		protected List<Issue> collectIssues(Resource resource) {
-			List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl));
-			synthesizeIssuesForFollowUpErrors(resource, issues);
-			return issues;
+			try {
+				List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl));
+				synthesizeIssuesForFollowUpErrors(resource, issues);
+				return issues;
+			} catch(OperationCanceledError e) {
+				LOG.error("Unexpected cancellation: " + e.getMessage(), e);
+				return Collections.emptyList();
+			}
 		}
 
 		protected void synthesizeIssuesForFollowUpErrors(Resource resource, List<Issue> result) {
