@@ -488,14 +488,26 @@ public class XtendBatchCompiler {
 	 * @since 2.8
 	 */
 	protected boolean checkConfiguration() {
-		String absoluteOutputPath = getOutputPathFile().getAbsolutePath();
+		File output = getOutputPathFile();
 		for (String sourcePath : getSourcePathDirectories()) {
-			if (absoluteOutputPath.startsWith(sourcePath)) {
+			File sourceDirectory = new File(sourcePath);
+			if (isContainedIn(output, sourceDirectory)) {
 				log.error("The configured output path \""+getOutputPathFile()+"\" cannot be a child of the configured source directory \""+sourcePath+"\".");
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	private boolean isContainedIn(File child, File possibleParent) {
+		File parent = child;
+		while(parent != null) {
+			if (parent.equals(possibleParent)) {
+				return true;
+			}
+			parent = parent.getParentFile();
+		}
+		return false;
 	}
 
 	protected ResourceSet loadXtendFiles(final ResourceSet resourceSet) {
