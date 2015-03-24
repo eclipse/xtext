@@ -19,9 +19,8 @@ import com.google.common.collect.Lists;
 public class ContentAssistInElseBlockTest extends ContentAssistTest {
 
 	@Override
-	@Test
-	public void testEmptyInput() throws Exception {
-		newBuilder().assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords(), STRING_OPERATORS, CAST_INSTANCEOF));
+	@Test public void testEmptyInput() throws Exception {
+		newBuilder().assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates(), STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
 	@Override
