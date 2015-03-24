@@ -50,6 +50,18 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
+	
+	@Test public void testClasspathUriForFileInWorkspaceWithFragmentInProjectRoot() throws Exception {
+		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
+		_project = _javaProject.getProject();
+		_project.getFolder("model").create(true, true, null);
+		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
+				+ MODEL_FILE);
+		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
+		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/model/" + MODEL_FILE + "#/";
+		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
+		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
+	}
 
 	@Test public void testClasspathUriForFileInJarInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
