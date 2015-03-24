@@ -59,9 +59,8 @@ class XtextIncrementalBuilder extends ModuleLevelBuilder {
 		val filesToRefresh = refreshComponent.filesToRefresh
 		if (!filesToRefresh.empty) {
 			for (file : filesToRefresh) 
-				context.processMessage(new CustomBuilderMessage(presentableName, "generated", file))
-			
-			context.processMessage(new CustomBuilderMessage(presentableName, "refresh", ""))
+				context.processMessage(new CustomBuilderMessage('xtext', 'generated', file))
+			context.processMessage(new CustomBuilderMessage('xtext', 'refresh', ""))
 		}
 	}
 	

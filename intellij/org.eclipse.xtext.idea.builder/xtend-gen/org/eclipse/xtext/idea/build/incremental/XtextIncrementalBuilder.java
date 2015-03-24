@@ -112,12 +112,10 @@ public class XtextIncrementalBuilder extends ModuleLevelBuilder {
     boolean _not = (!_isEmpty);
     if (_not) {
       for (final String file : filesToRefresh) {
-        String _presentableName = this.getPresentableName();
-        CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", file);
+        CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage("xtext", "generated", file);
         context.processMessage(_customBuilderMessage);
       }
-      String _presentableName_1 = this.getPresentableName();
-      CustomBuilderMessage _customBuilderMessage_1 = new CustomBuilderMessage(_presentableName_1, "refresh", "");
+      CustomBuilderMessage _customBuilderMessage_1 = new CustomBuilderMessage("xtext", "refresh", "");
       context.processMessage(_customBuilderMessage_1);
     }
   }
