@@ -20,4 +20,6 @@ public class XtendIcons {
   }
   
   public final static Icon Xtend_16x16 = XtendIcons.load("/org/eclipse/xtend/core/idea/icons/xtend_16x16.png");
+  
+  public final static Icon Xtend_FILE_16x16 = XtendIcons.load("/org/eclipse/xtend/core/idea/icons/xtend_file_16x16.png");
 }

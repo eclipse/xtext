@@ -7,18 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.icons
 
-import com.intellij.openapi.util.IconLoader
-import javax.swing.Icon
+import com.intellij.ide.IconProvider
+import com.intellij.psi.PsiElement
+import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class XtendIcons {
-	def private static Icon load(String path) {
-		IconLoader.getIcon(path, XtendIcons)
+class XtendIconProvider extends IconProvider {
+
+	override getIcon(PsiElement element, int flags) {
+		if (element instanceof XtendFileImpl) {
+			XtendIcons.Xtend_FILE_16x16
+		}
 	}
 
-	public static val Xtend_16x16 = load("/org/eclipse/xtend/core/idea/icons/xtend_16x16.png")
-
-	public static val Xtend_FILE_16x16 = load("/org/eclipse/xtend/core/idea/icons/xtend_file_16x16.png")
 }
