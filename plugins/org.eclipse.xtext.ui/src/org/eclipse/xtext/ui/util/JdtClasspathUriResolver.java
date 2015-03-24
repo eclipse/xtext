@@ -103,6 +103,11 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 					}
 				}
 			}
+			// not found in a source folder - look for a resource relative to project root
+			IResource resourceFromProjectRoot = javaProject.getProject().findMember(classpathUri.path());
+			if (resourceFromProjectRoot != null && resourceFromProjectRoot.exists()) {
+				return createPlatformResourceURI(resourceFromProjectRoot);
+			}
 		}
 		return classpathUri;
 	}
