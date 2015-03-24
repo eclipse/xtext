@@ -668,7 +668,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.git.branch"
-          value="2.8_Maintenance"/>
+          value="maintenance"/>
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.nightly.composite"
