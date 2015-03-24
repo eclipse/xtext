@@ -1,4 +1,4 @@
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext:${version}"
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${version}"
+	compile project(":plugins:org.eclipse.xtend.lib")
 }
