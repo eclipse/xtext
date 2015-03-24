@@ -71,6 +71,9 @@
     	
     	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />
     	<library.presentationProvider implementation="org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider" />
+    	
+    	<iconProvider implementation="org.eclipse.xtend.core.idea.icons.XtendIconProvider"/>
+    	<treeStructureProvider implementation="org.eclipse.xtend.core.idea.projectview.XtendSelectableTreeStructureProvider" order="last"/>
 	</extensions>
 
 </idea-plugin>
