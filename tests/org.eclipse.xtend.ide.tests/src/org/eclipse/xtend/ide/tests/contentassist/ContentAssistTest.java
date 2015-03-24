@@ -40,6 +40,22 @@ import com.google.inject.Injector;
 public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	
 	protected static String[] VARIABLE_DECL = {"val", "var", "extension"};
+	
+	protected static String[] EXPRESSION_TEMPLATES = {
+		"do - do-while loop with condition",
+		"for - for loop over an Iterable",
+		"if - if expression",
+		"ifelse - if-else expression",
+		"instanceof - type test and autocast",
+		"switch - switch expression",
+		"synchronized - synchronized expression",
+		"syserr - print to standard error stream",
+		"sysout - print to standard output",
+		"try - try-catch block",
+		"val - unmodifiable local variable",
+		"var - modifiable local variable",
+		"while - while loop with condition"
+	};
 
 	private static IProject project;
 	
@@ -60,6 +76,160 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 		return VARIABLE_DECL;
 	}
 	
+	protected String[] getExpressionTemplates() {
+		return EXPRESSION_TEMPLATES;
+	}
+	
+	@Override
+	@Test public void testEmptyInput() throws Exception {
+		newBuilder().assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_01() throws Exception {
+		newBuilder().append("''").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_03() throws Exception {
+		newBuilder().append("''.").assertTextAtCursorPosition(".", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_04() throws Exception {
+		newBuilder().append("''+''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_10() throws Exception {
+		newBuilder().append("'' ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_12() throws Exception {
+		newBuilder().append("'' .").assertTextAtCursorPosition(".", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_13() throws Exception {
+		newBuilder().append("'' + ''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_28() throws Exception {
+		newBuilder().append("''.toString.toString").assertTextAtCursorPosition(".", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_30() throws Exception {
+		newBuilder().append("('')").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_32() throws Exception {
+		newBuilder().append("(''.toString)").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_34() throws Exception {
+		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_35() throws Exception {
+		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnStringLiteral_36() throws Exception {
+		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterVariableDeclaration_01() throws Exception {
+		newBuilder().appendNl("var x = '';").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterVariableDeclaration_02() throws Exception {
+		newBuilder().appendNl("var x = '';").appendNl("var y = '';").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterVariableDeclaration_03() throws Exception {
+		newBuilder().appendNl("var x = ''").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, getVariableDeclarationKeywords(), getExpressionTemplates(), STRING_OPERATORS));
+	}
+	
+	@Override
+	@Test public void testAfterVariableDeclaration_04() throws Exception {
+		newBuilder().appendNl("var x = ''").appendNl("var y = ''").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, getVariableDeclarationKeywords(), getExpressionTemplates(), STRING_OPERATORS));
+	}
+	
+	@Override
+	@Test public void testAfterVariableDeclaration_09() throws Exception {
+		newBuilder().appendNl("var x = ''").appendNl("var y = ").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testOnVoidMethod_01() throws Exception {
+		newBuilder().append("(null as java.util.List).clear ").assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterBinaryOperation_01() throws Exception {
+		newBuilder().append("''+''").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterBinaryOperation_02() throws Exception {
+		newBuilder().append("'' + ''+''").assertTextAtCursorPosition("''+", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterBinaryOperation_03() throws Exception {
+		newBuilder().append("(''+'')").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testAfterBinaryOperation_05() throws Exception {
+		newBuilder().append("((''+''))").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testCatchParameter_01() throws Exception {
+		newBuilder().append("try {} catch(NullPointerException e) e").assertTextAtCursorPosition(") e", 2, expect(new String[]{"e"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testCatchParameter_02() throws Exception {
+		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testSwitchOnEnum_01() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testSwitchOnEnum_03() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOURCE: ").assertText(expect(getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testForLoop_01() throws Exception {
+		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testForLoop_04() throws Exception {
+		newBuilder().append("for (String string: ").assertText(expect(getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Override
+	@Test public void testForLoop_05() throws Exception {
+		newBuilder().append("for (String string: )").assertTextAtCursorPosition(")", expect(getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
 	@Override
 	@Test public void testStaticFeatures_02() throws Exception {
 		newBuilder().append("String.").assertText(expect(new String[]{ "this", "super" }, getStaticStringFeatures(), getClassFeatures()));
@@ -73,37 +243,37 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
 	@Override
 	@Test public void testForLoop_06() throws Exception {
-		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics()));
+		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics(), getExpressionTemplates()));
 	}
 	
 	@Override
 	@Test public void testForLoop_07() throws Exception {
-		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics()));
+		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics(), getExpressionTemplates()));
 	}
 	
 	@Override
 	@Test public void testAfterVariableDeclaration_05() throws Exception {
-		newBuilder().appendNl("var x = '';").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), VARIABLE_DECL));
+		newBuilder().appendNl("var x = '';").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates(), VARIABLE_DECL));
 	}
 	
 	@Override
 	@Test public void testAfterVariableDeclaration_06() throws Exception {
-		newBuilder().appendNl("var x = '';").appendNl("var y = '';").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), VARIABLE_DECL));
+		newBuilder().appendNl("var x = '';").appendNl("var y = '';").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates(), VARIABLE_DECL));
 	}
 	
 	@Override
 	@Test public void testAfterVariableDeclaration_07() throws Exception {
-		newBuilder().appendNl("var x = ''").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
+		newBuilder().appendNl("var x = ''").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
 	}
 	
 	@Override
 	@Test public void testAfterVariableDeclaration_08() throws Exception {
-		newBuilder().appendNl("var x = ''").appendNl("var y = ''").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
+		newBuilder().appendNl("var x = ''").appendNl("var y = ''").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
 	}
 	
 	@Override
 	@Test public void testAfterVariableDeclaration_10() throws Exception {
-		newBuilder().appendNl("var x = ''").appendNl("var y = ").assertText(expect(new String[] {"x"}, getKeywordsAndStatics()));
+		newBuilder().appendNl("var x = ''").appendNl("var y = ").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), getExpressionTemplates()));
 	}
 	
 	@Test public void testRichString_01() throws Exception {
@@ -159,7 +329,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	@Override
 	@Test
 	public void testClosure_01() throws Exception {
-		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics(), VARIABLE_DECL));
+		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics(), getExpressionTemplates(), VARIABLE_DECL));
 	}
 	
 	@Override
@@ -169,6 +339,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
 				VARIABLE_DECL, 
 				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getExpressionTemplates(),
 				getStringFeatures()));
 	}
 
@@ -179,6 +350,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
 				VARIABLE_DECL, 
 				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getExpressionTemplates(),
 				getStringFeatures()));
 	}
 	
@@ -189,6 +361,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
 				VARIABLE_DECL, 
 				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getExpressionTemplates(),
 				getBigDecimalFeatures()));
 	}
 	
