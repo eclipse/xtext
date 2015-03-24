@@ -1,7 +1,11 @@
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext:${version}"
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib.macro:${version}"
+	compile project(":plugins:org.eclipse.xtext.ide")
+	compile project(":plugins:org.eclipse.xtext.xbase")
+	compile project(":plugins:org.eclipse.xtend.lib.macro")
 	compile project(':intellij:org.eclipse.xtext.idea.builder')
+	
+	//TODO get mwe, xtend1, xpand on maven central, so we don't need this fat jar
+	compile ("org.eclipse.xtext:org.eclipse.xtext.xtext:${version}") {
+		exclude group: 'org.eclipse.emf'
+	}
 }

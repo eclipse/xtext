@@ -1,4 +1,4 @@
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
+	compile project(":plugins:org.eclipse.xtext.xbase")
+	compile project(":plugins:org.eclipse.xtext.ide")
 }

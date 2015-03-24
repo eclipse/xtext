@@ -1,26 +1,67 @@
-import java.util.jar.Manifest
+import org.apache.ivy.osgi.core.ManifestParser
 
-apply plugin: 'java-base'
-
-dependencies {
-	def manifestFile = new File(projectDir, 'META-INF/MANIFEST.MF')
-	def manifest
-	manifestFile.withInputStream {
-			manifest = new Manifest(it)
-	}
-	def requiredBundles = manifest.mainAttributes.getValue('Require-Bundle')
-	if (requiredBundles) {
-		requiredBundles.split(',')
-			.collect{it.split(';')[0]}
-			.collect{name -> rootProject.subprojects.findResult {it.name == name ? it : null}}
-			.findAll {it != null}
-			.each {
-				add('default', it)
-			}
+buildscript {
+	repositories.jcenter()
+	dependencies {
+		classpath 'org.apache.ivy:ivy:2.4.0'
 	}
 }
 
-task jar(type:Jar) {
+apply plugin: 'java'
+
+dependencies {
+	def manifestFile = new File(projectDir, 'META-INF/MANIFEST.MF')
+	def manifest = ManifestParser.parseManifest(manifestFile)
+	manifest.requires
+		.collect{toDependency(it)}
+		.findAll {it != null}
+		.each {
+			add('compile', it)
+		}
+}
+
+def toDependency(requirement) {
+	if (requirement.resolution == 'optional') {
+		return null
+	}
+	if (requirement.name.contains('mwe')) {
+		return null
+	}
+	def projectDependency = rootProject.subprojects.findResult {it.name == requirement.name ? it : null}
+	if (projectDependency) {
+		return projectDependency
+	}
+	/*
+	* TODO these belong into the dependency resolution rules of the downstream projects
+	*/
+	if (requirement.name == 'com.google.inject') {
+		return 'com.google.inject:guice:3.0'
+	}
+	if (requirement.name == 'org.antlr.runtime') {
+		return 'org.antlr:antlr-runtime:3.2'
+	}
+	if (requirement.name == 'org.eclipse.equinox.common') {
+		return 'org.eclipse.equinox:org.eclipse.equinox.common:3.6.0'
+	}
+	if (requirement.name.startsWith('org.eclipse.emf')) {
+		return "org.eclipse.emf:${requirement.name}:${requirement.version.startVersion}+"
+	}
+	if (requirement.name == 'org.eclipse.jdt.core') {
+		return 'org.eclipse.tycho:org.eclipse.jdt.core:3.10.0+'
+	}
+	if (requirement.name == 'org.apache.log4j') {
+		return 'log4j:log4j:1.2.16'
+	}
+	if (requirement.name == 'com.google.guava') {
+		return 'com.google.guava:guava:[10.0.1,19.0.0)'
+	}
+	if (requirement.name == 'org.objectweb.asm') {
+		return 'org.ow2.asm:asm:[5.0.1,6.0.0)'
+	}
+	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
+}
+
+jar {
 	from('bin')
 	manifest {
 		from('META-INF/MANIFEST.MF')
@@ -44,6 +85,6 @@ task jar(type:Jar) {
 	}
 }
 
-artifacts {
-	archives jar
-}
+//skip compilation, done by Eclipse/Buckminster
+sourceSets*.java*.srcDirs = []
+sourceSets*.resources*.srcDirs = []

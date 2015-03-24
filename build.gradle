@@ -24,3 +24,9 @@ allprojects {
 		}
 	}
 }
+
+task buckminsterBuild << {
+	ant.ant(
+		antfile: 'releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant'
+	)
+}
