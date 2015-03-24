@@ -275,13 +275,16 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		private final IFeatureScopeSession featureScopeSession;
 		private final Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
 		private final XtendReentrantTypeResolver typeResolver;
+		private final JvmFormalParameter param;
 
 		public InitializerParameterTypeReferenceProvider(
+				JvmFormalParameter param,
 				XtendFunction createFunction,
 				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext,
 				ResolvedTypes resolvedTypes,
 				IFeatureScopeSession featureScopeSession,
 				XtendReentrantTypeResolver typeResolver) {
+			this.param = param;
 			this.createFunction = createFunction;
 			this.resolvedTypesByContext = resolvedTypesByContext;
 			this.resolvedTypes = resolvedTypes;
@@ -306,7 +309,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				if (actualType == null)
 					return null;
-				return typeResolver.toJavaCompliantTypeReference(actualType, featureScopeSession);
+				// actualType may not be java compliant but still carry more information than the
+				// java compliant reference
+				JvmTypeReference result = typeResolver.toJavaCompliantTypeReference(actualType, featureScopeSession);
+				if (actualType.isMultiType() || result.getType() != actualType.getType()) {
+					resolvedTypes.setType(param, resolvedTypes.getReferenceOwner().toLightweightTypeReference(result));
+					resolvedTypes.reassignType(param, actualType);
+				}
+				return result;
 			} finally {
 				context.unsetTypeProviderWithoutNotification();
 			}
@@ -720,7 +730,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					if (InferredTypeIndicator.isInferred(parameterType)) {
 						XComputedTypeReference casted = (XComputedTypeReference) parameterType;
 						XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function, resolvedTypesByContext, resolvedTypes, featureScopeSession, this));
+						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(
+								firstParameter,
+								function,
+								resolvedTypesByContext,
+								resolvedTypes,
+								featureScopeSession,
+								this));
 						casted.setEquivalent(computedParameterType);
 					}
 				}
