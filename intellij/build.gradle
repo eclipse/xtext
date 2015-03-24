@@ -4,6 +4,10 @@ buildscript {
 	}
 }
 
+apply plugin: 'org.xtext.idea-repository'
+apply plugin: 'org.xtext.idea-aggregator'
+ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij'
+
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 	
@@ -11,11 +15,9 @@ allprojects {
 		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
 		ideaVersion = "140.2683.2"
 	}
+	
+	runIdea.systemProperties ('compiler.process.debug.port':-1) // replace -1 by port number to enable debugging
 }
-
-apply plugin: 'org.xtext.idea-repository'
-apply plugin: 'org.xtext.idea-aggregator'
-ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij'
 
 subprojects {
 	apply plugin: 'org.xtext.idea-component'
