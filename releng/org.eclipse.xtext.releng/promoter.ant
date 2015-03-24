@@ -2,7 +2,9 @@
 <project name="Promoter / Publisher" default="publish.build">
 	<property name="promoter.properties.file.name" value="promote.properties" />
 	<property name="publisher.properties.file.name" value="publisher.properties" />
-	
+
+	<property name="build.root" location="/Users/dhuebner/Downloads/build-result/" />
+
 	<target name="-setup.promoter">
 		<property name="promoter.setup.directory" location="${sp:output}" />
 		<property name="promoter.properties.file" location="${promoter.setup.directory}/${promoter.properties.file.name}" />
@@ -234,7 +236,7 @@
 		<condition property="composite.repository.base" value="milestones/${scm.stream}/${saved.build.id}">
 			<matches pattern="^[IMS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/${version}/${saved.build.id}">
+		<condition property="composite.repository.base" value="releases/${version}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
@@ -301,6 +303,15 @@
 			<property name="build.repository.directory" location="${composite.repository.directory}/${saved.build.id}" />
 		 -->
 		<property name="build.repository.directory" location="${composite.repository.directory}" />
+		<available file="${composite.repository.directory}/plugins" type="dir" property="targetDirExists" value="true"/>
+		<condition property="releaseExists">
+			<and>
+				<matches pattern="^R" string="${saved.build.id}" />
+				<istrue value="${targetDirExists}"/>
+			</and>
+		</condition>
+
+		<fail message="Overwriting release repository is not permitted. ${composite.repository.directory} " if="releaseExists" />
 
 		<delete dir="${build.repository.directory}" />
 
@@ -318,7 +329,7 @@
 
 
 		<!-- change Group owner  -->
-		<fileset id="repository.resources" dir="${composite.repository.directory}"/>
+		<fileset id="repository.resources" dir="${composite.repository.directory}" />
 
 		<antcall target="-change.group.owner" inheritall="true">
 			<reference refid="repository.resources" torefid="change.group.owner.resources" />
@@ -328,7 +339,7 @@
 	<target name="-publish.javadoc" if="build.stable" unless="skip.javadoc">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true" >
+		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true">
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>
