@@ -70,6 +70,8 @@ import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.util.internal.Stopwatches
 
+import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+
 class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
 	val final createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
@@ -99,19 +101,21 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	override createType(PsiClass psiClass) {
-		try {
-			createTypeTask.start
-			val fqn = new StringBuilder(100)
-			val packageName = psiClass.packageName
-			if (packageName != null) {
-				fqn.append(packageName).append('.')
+		psiClass.project.withAlternativeResolvedEnabled [
+			try {
+				createTypeTask.start
+				val fqn = new StringBuilder(100)
+				val packageName = psiClass.packageName
+				if (packageName != null) {
+					fqn.append(packageName).append('.')
+				}
+				val type = psiClass.createType(fqn)
+				type.packageName = packageName
+				type
+			} finally {
+				createTypeTask.stop
 			}
-			val type = psiClass.createType(fqn)
-			type.packageName = packageName
-			type
-		} finally {
-			createTypeTask.stop
-		}
+		]
 	}
 
 	protected def JvmDeclaredType createType(PsiClass psiClass, StringBuilder fqn) {

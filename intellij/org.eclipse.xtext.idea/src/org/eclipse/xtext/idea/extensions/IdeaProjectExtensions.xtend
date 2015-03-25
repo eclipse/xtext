@@ -41,7 +41,7 @@ class IdeaProjectExtensions {
 		try {
 			function.apply
 		} catch (IndexNotReadyException e) {
-			// Never should not happen
+			// Should never happen
 			LOG.warn(e.message, e)
 			null
 		} finally {

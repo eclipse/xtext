@@ -93,6 +93,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom;
+import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.idea.types.access.StubURIHelper;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
@@ -100,6 +101,7 @@ import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -144,27 +146,34 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   @Override
   public JvmDeclaredType createType(final PsiClass psiClass) {
-    JvmDeclaredType _xtrycatchfinallyexpression = null;
-    try {
-      JvmDeclaredType _xblockexpression = null;
-      {
-        this.createTypeTask.start();
-        final StringBuilder fqn = new StringBuilder(100);
-        final String packageName = this.getPackageName(psiClass);
-        boolean _notEquals = (!Objects.equal(packageName, null));
-        if (_notEquals) {
-          StringBuilder _append = fqn.append(packageName);
-          _append.append(".");
+    Project _project = psiClass.getProject();
+    final Function0<JvmDeclaredType> _function = new Function0<JvmDeclaredType>() {
+      @Override
+      public JvmDeclaredType apply() {
+        JvmDeclaredType _xtrycatchfinallyexpression = null;
+        try {
+          JvmDeclaredType _xblockexpression = null;
+          {
+            PsiBasedTypeFactory.this.createTypeTask.start();
+            final StringBuilder fqn = new StringBuilder(100);
+            final String packageName = PsiBasedTypeFactory.this.getPackageName(psiClass);
+            boolean _notEquals = (!Objects.equal(packageName, null));
+            if (_notEquals) {
+              StringBuilder _append = fqn.append(packageName);
+              _append.append(".");
+            }
+            final JvmDeclaredType type = PsiBasedTypeFactory.this.createType(psiClass, fqn);
+            type.setPackageName(packageName);
+            _xblockexpression = type;
+          }
+          _xtrycatchfinallyexpression = _xblockexpression;
+        } finally {
+          PsiBasedTypeFactory.this.createTypeTask.stop();
         }
-        final JvmDeclaredType type = this.createType(psiClass, fqn);
-        type.setPackageName(packageName);
-        _xblockexpression = type;
+        return _xtrycatchfinallyexpression;
       }
-      _xtrycatchfinallyexpression = _xblockexpression;
-    } finally {
-      this.createTypeTask.stop();
-    }
-    return _xtrycatchfinallyexpression;
+    };
+    return IdeaProjectExtensions.<JvmDeclaredType>withAlternativeResolvedEnabled(_project, _function);
   }
   
   protected JvmDeclaredType createType(final PsiClass psiClass, final StringBuilder fqn) {
