@@ -31,4 +31,44 @@ class CompilerBug406066Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+
+	@Test
+	def testBug406066_02() {
+		assertCompilesTo('''
+			class Error {
+				def static err(Integer i) {
+					i.toString
+					val java.lang.Error e = new AssertionError()
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Error {
+			  public static void err(final Integer i) {
+			    i.toString();
+			    final java.lang.Error e = new AssertionError();
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def testBug406066_03() {
+		assertCompilesTo('''
+			class Error2 {
+				def static err(Integer i) {
+					i.toString
+					val Error e = new AssertionError()
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Error2 {
+			  public static void err(final Integer i) {
+			    i.toString();
+			    final Error e = new AssertionError();
+			  }
+			}
+		''')
+	}
 }
