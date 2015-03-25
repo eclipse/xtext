@@ -17,32 +17,41 @@
 							Default: http://download.eclipse.org
 -->
 <project name="common">
+	<macrodef name="pathProperty">
+		<attribute name="name"/>
+		<attribute name="location"/>
+		<sequential>
+			<pathconvert targetos="unix" property="@{name}">
+				<path location="@{location}"/>
+			</pathconvert>
+		</sequential>
+	</macrodef>
 
-	<property name="releng.project" value="${checkout.location}/releng/org.eclipse.xtext.releng" />
+	<pathProperty name="releng.project" location="${checkout.location}/releng/org.eclipse.xtext.releng" />
 
 	<property name="target.platform" value="target.platform" />
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
-	<property name="buckminster.home" location="${user.home}/buckminster" />
-	<property name="b3.home" location="${user.home}/b3" />
+	<pathProperty name="buckminster.home" location="${user.home}/buckminster" />
+	<pathProperty name="b3.home" location="${user.home}/b3" />
 
-	<property name="buckminster.output.root" value="${build.root}/buckminster.output" />
-	<property name="buckminster.temp.root" value="${build.root}/buckminster.temp" />
-	<property name="buckminster.workspace" value="${build.root}/buckminster.workspace" />
-	<property name="buckminster.configuration" value="${build.root}/configuration" />
-	<property name="buckminster.target.platform" value="${build.root}/${target.platform}" />
+	<pathProperty name="buckminster.output.root" location="${build.root}/buckminster.output" />
+	<pathProperty name="buckminster.temp.root" location="${build.root}/buckminster.temp" />
+	<pathProperty name="buckminster.workspace" location="${build.root}/buckminster.workspace" />
+	<pathProperty name="buckminster.configuration" location="${build.root}/configuration" />
+	<pathProperty name="buckminster.target.platform" location="${build.root}/${target.platform}" />
 	<property name="buckminster.loglevel" value="INFO" />
-	<property name="parent.folder" location="${ant.file}/.." />
-	<property name="debug.options.file" location="${parent.folder}/debug.options" />
+	<pathProperty name="parent.folder" location="${ant.file}/.." />
+	<pathProperty name="debug.options.file" location="${parent.folder}/debug.options" />
 
-	<property name="director.install.dest" location="${user.home}" />
-	<property name="director.dir" location="${director.install.dest}/director" />
+	<pathProperty name="director.install.dest" location="${user.home}" />
+	<pathProperty name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
 	<property name="findbugs.version" value="2.0.3" />
 	<property name="findbugs.url" value="http://prdownloads.sourceforge.net/findbugs/findbugs-${findbugs.version}.zip?download" />
-	<property name="findbugs.install.dest" value="${user.home}" />
-	<property name="findbugs.home" value="${findbugs.install.dest}/findbugs-${findbugs.version}" />
+	<pathProperty name="findbugs.install.dest" location="${user.home}" />
+	<pathProperty name="findbugs.home" location="${findbugs.install.dest}/findbugs-${findbugs.version}" />
 
 	<property name="eclipse.p2.mirrors" value="true" />
 	<property name="java.net.preferIPv4Stack" value="true" />
@@ -80,7 +89,8 @@
 				<arg line='-S "@{commandsfile}"' />
 				<arg line='-L ${buckminster.loglevel}' />
 				<arg line='-debug ${debug.options.file}' />
-				<sysproperty key="checkout.location" value="${checkout.location}" />
+				<sysproperty key="checkout.location" value="file:/${checkout.location}" />
+				<sysproperty key="git.clone.dest" value="${checkout.location}" />
 				<sysproperty key="WITH.MWE2" value="${WITH.MWE2}" />
 				<sysproperty key="JAVA8" value="${JAVA8}" />
 				<sysproperty key="DEV.BUILD" value="${DEV.BUILD}" />
