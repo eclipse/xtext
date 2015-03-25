@@ -22,6 +22,7 @@ import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.junit.ComparisonFailure;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,6 +47,12 @@ public class FormatterSmokeSuite {
 
 		@Inject
 		private ParseHelper<XtendFile> parseHelper;
+		
+		@Inject
+		private ClassLoader classLoader;
+		
+		@Inject
+		private Provider<XtextResourceSet> resourceSetProvider;
 
 		private MessageDigest messageDigest;
 		private Set<BigInteger> seen;
@@ -58,7 +66,9 @@ public class FormatterSmokeSuite {
 		public void processFile(String data) throws Exception {
 			byte[] hash = ((MessageDigest) messageDigest.clone()).digest(data.getBytes("UTF-8"));
 			if (seen.add(new BigInteger(hash))) {
-				XtendFile file = parseHelper.parse(data);
+				XtextResourceSet resourceSet = resourceSetProvider.get();
+				resourceSet.setClasspathURIContext(classLoader);
+				XtendFile file = parseHelper.parse(data, resourceSet);
 				if (file != null) {
 					try {
 						XtextResource resource = (XtextResource) file.eResource();

@@ -40,20 +40,26 @@ class XAnnotationExtensions {
 	@Inject ConstantExpressionsInterpreter constantExpressionsInterpreter
 	
 	def XtendAnnotationTarget getAnnotatedTarget(XAnnotation annotation) {
-		// ignore synthetic containers
 		switch container : annotation.eContainer {
-			XtendAnnotationType : container
-			XtendClass : container
-			XtendInterface : container
-			XtendEnum : container
-			XtendField : container
-			XtendFunction : container
-			XtendConstructor : container
-			XtendEnumLiteral : container
+			XtendAnnotationType,
+			XtendClass,
+			XtendInterface,
+			XtendEnum,
+			XtendField,
+			XtendFunction,
+			XtendConstructor,
+			XtendEnumLiteral,
 			XtendParameter : container
-			XtendAnnotationTarget 	: container.eContainer as XtendAnnotationTarget
-			XAnnotation 			: getAnnotatedTarget(container)
-			default 				: null
+			// ignore synthetic containers
+			XtendAnnotationTarget : {
+				val containerContainer = container.eContainer
+				if (containerContainer instanceof XtendAnnotationTarget)
+					containerContainer
+			}
+			XAnnotation : 
+				getAnnotatedTarget(container)
+			default :
+				null
 		}
 	}
 	
