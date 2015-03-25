@@ -22,13 +22,13 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 
@@ -305,15 +305,32 @@ public class NodeModelUtils {
 	public static String compactDump(INode node, boolean showHidden) {
 		StringBuilder result = new StringBuilder();
 		try {
-			compactDump(node, showHidden, "", result);
+			compactDump(node, showHidden, true, "", result);
 		} catch (IOException e) {
 			return e.getMessage();
 		}
 		return result.toString();
 	}
 
-	private static void compactDump(INode node, boolean showHidden, String prefix, Appendable result)
-			throws IOException {
+	/**
+	 * Creates a string representation of the given node. Useful for debugging.
+	 * 
+	 * In contrast to {@link #compactDump(INode, boolean)}, the output omits synthetic nodes.
+	 * 
+	 * @return a debug string for the given node.
+	 */
+	public static String compactBasicDump(INode node, boolean showHidden) {
+		StringBuilder result = new StringBuilder();
+		try {
+			compactDump(node, showHidden, false, "", result);
+		} catch (IOException e) {
+			return e.getMessage();
+		}
+		return result.toString();
+	}
+
+	private static void compactDump(INode node, boolean showHidden, boolean showSynthetic, String prefix,
+			Appendable result) throws IOException {
 		if (!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
 			return;
 		if (prefix.length() != 0) {
@@ -327,10 +344,12 @@ public class NodeModelUtils {
 				result.append("(unknown)");
 			String newPrefix = prefix + "  ";
 			result.append(" {");
-			BidiIterator<INode> children = ((ICompositeNode) node).getChildren().iterator();
-			while (children.hasNext()) {
-				INode child = children.next();
-				compactDump(child, showHidden, newPrefix, result);
+			if (!showSynthetic && node instanceof CompositeNode) {
+				for (INode child : ((CompositeNode) node).basicGetChildren())
+					compactDump(child, showHidden, showSynthetic, newPrefix, result);
+			} else {
+				for (INode child : ((ICompositeNode) node).getChildren())
+					compactDump(child, showHidden, showSynthetic, newPrefix, result);
 			}
 			result.append("\n");
 			result.append(prefix);
