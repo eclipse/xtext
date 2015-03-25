@@ -691,6 +691,11 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
     TextRange _textRange_1 = identifier.getTextRange();
     int _endOffset = _textRange_1.getEndOffset();
     TestCase.assertEquals(_plus, _endOffset);
+    int _textOffset = identifier.getTextOffset();
+    TestCase.assertEquals(nameOffset, _textOffset);
+    int _length_1 = name.length();
+    int _textLength = identifier.getTextLength();
+    TestCase.assertEquals(_length_1, _textLength);
   }
   
   protected PsiNamedEObject findPsiNamedEObject(final String text, final String textAfterCaret) {

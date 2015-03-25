@@ -433,6 +433,8 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 		assertEquals(name, identifier.text)
 		assertEquals(nameOffset, identifier.textRange.startOffset)
 		assertEquals(nameOffset + name.length, identifier.textRange.endOffset)
+		assertEquals(nameOffset, identifier.textOffset)
+		assertEquals(name.length, identifier.textLength)
 	}
 
 	protected def findPsiNamedEObject(String text, String textAfterCaret) {

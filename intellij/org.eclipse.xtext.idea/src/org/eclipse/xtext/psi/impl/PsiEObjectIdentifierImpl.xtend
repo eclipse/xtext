@@ -68,6 +68,10 @@ class PsiEObjectIdentifierImpl extends LightElement implements PsiEObjectIdentif
 		containingFile.text.substring(textRange.startOffset, textRange.endOffset)
 	}
 	
+	override getTextOffset() {
+		textRange.startOffset
+	}
+	
 	override getNode() {
 		psiElement.node
 	}

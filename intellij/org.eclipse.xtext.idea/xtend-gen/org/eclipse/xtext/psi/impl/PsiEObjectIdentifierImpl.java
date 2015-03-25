@@ -100,6 +100,12 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
   }
   
   @Override
+  public int getTextOffset() {
+    TextRange _textRange = this.getTextRange();
+    return _textRange.getStartOffset();
+  }
+  
+  @Override
   public ASTNode getNode() {
     return this.psiElement.getNode();
   }
