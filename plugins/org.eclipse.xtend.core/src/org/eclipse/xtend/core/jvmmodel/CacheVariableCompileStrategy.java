@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -24,7 +25,11 @@ public class CacheVariableCompileStrategy implements Procedures.Procedure1<ITree
 
 	@Override
 	public void apply(ITreeAppendable builder) {
-		builder.append(typeReferences.findDeclaredType(CollectionLiterals.class, context));
+		JvmType collectionLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, context);
+		if (collectionLiterals != null)
+			builder.append(collectionLiterals);
+		else
+			builder.append(CollectionLiterals.class.getName());
 		builder.append(".newHashMap()");
 	}
 
