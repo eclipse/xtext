@@ -240,9 +240,8 @@ class XbaseFormatter extends XtypeFormatter {
 			val autowrapLength = Math.min(entry.region.length, feature.length * 2)
 			operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
 			if (call.explicitOperationCall) {
-				// There can be multiple regions for parentheses, e.g. when the receiver is a parenthesized expression
-				val open = call.regionsForKeywords("(").last.prepend[noSpace]
-				val close = call.regionsForKeywords(")").last
+				val open = call.regionForKeyword("(").prepend[noSpace]
+				val close = call.regionForKeyword(")")
 				formatFeatureCallParams(call.memberCallArguments, open, close, format)
 			} else if (!call.memberCallArguments.empty) {
 				formatBuilderWithLeadingGap(call.memberCallArguments.builder, format)
@@ -252,10 +251,8 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
 		val node = op.regionForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
-		if (node != null && node.grammarElement instanceof CrossReference) {
-			val terminal = (node.grammarElement as CrossReference).terminal
-			if (terminal instanceof RuleCall)
-				return terminal.rule
+		if (node != null && node.grammarElement instanceof RuleCall) {
+			return (node.grammarElement as RuleCall).rule
 		}
 	}
 
