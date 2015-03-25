@@ -185,6 +185,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			try {
 				contexts = contextProvider.computeContext(xtendFile);
 			} catch (Throwable t) {
+				operationCanceledManager.propagateAsErrorIfCancelException(t);
 				logger.error("Couldn't create annotation contexts", t);
 				return;
 			}
