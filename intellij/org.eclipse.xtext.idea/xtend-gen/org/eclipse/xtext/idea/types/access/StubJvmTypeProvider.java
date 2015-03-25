@@ -10,8 +10,8 @@ package org.eclipse.xtext.idea.types.access;
 import com.google.common.base.Objects;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.impl.JavaPsiFacadeEx;
 import com.intellij.psi.impl.compiled.SignatureParsing;
 import com.intellij.psi.search.GlobalSearchScope;
 import java.text.StringCharacterIterator;
@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.idea.types.access.PsiBasedTypeFactory;
 import org.eclipse.xtext.idea.types.access.PsiClassMirror;
 import org.eclipse.xtext.idea.types.access.StubURIHelper;
@@ -229,23 +230,9 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   protected IMirror createMirrorForFQN(final String name) {
     PsiClassMirror _xblockexpression = null;
     {
-      GlobalSearchScope _switchResult = null;
-      ResourceSet _resourceSet = this.getResourceSet();
-      final ResourceSet it = _resourceSet;
-      boolean _matched = false;
-      if (!_matched) {
-        if (it instanceof XtextResourceSet) {
-          _matched=true;
-          Object _classpathURIContext = ((XtextResourceSet)it).getClasspathURIContext();
-          _switchResult = ((GlobalSearchScope) _classpathURIContext);
-        }
-      }
-      if (!_matched) {
-        _switchResult = GlobalSearchScope.allScope(this.project);
-      }
-      final GlobalSearchScope scope = _switchResult;
-      JavaPsiFacadeEx _instanceEx = JavaPsiFacadeEx.getInstanceEx(this.project);
-      final PsiClass psiClass = _instanceEx.findClass(name, scope);
+      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
+      GlobalSearchScope _searchScope = this.getSearchScope();
+      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
       boolean _or = false;
       boolean _equals = Objects.equal(psiClass, null);
       if (_equals) {
@@ -264,6 +251,24 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);
     }
     return _xblockexpression;
+  }
+  
+  protected GlobalSearchScope getSearchScope() {
+    GlobalSearchScope _switchResult = null;
+    ResourceSet _resourceSet = this.getResourceSet();
+    final ResourceSet resourceSet = _resourceSet;
+    boolean _matched = false;
+    if (!_matched) {
+      if (resourceSet instanceof XtextResourceSet) {
+        _matched=true;
+        Object _classpathURIContext = ((XtextResourceSet)resourceSet).getClasspathURIContext();
+        _switchResult = ((GlobalSearchScope) _classpathURIContext);
+      }
+    }
+    if (!_matched) {
+      _switchResult = GlobalSearchScope.allScope(this.project);
+    }
+    return _switchResult;
   }
   
   @Pure

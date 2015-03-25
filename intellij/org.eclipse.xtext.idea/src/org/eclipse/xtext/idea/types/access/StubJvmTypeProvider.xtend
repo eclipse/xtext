@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.types.access
 import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
-import com.intellij.psi.impl.JavaPsiFacadeEx
 import com.intellij.psi.impl.compiled.SignatureParsing
 import com.intellij.psi.search.GlobalSearchScope
 import java.text.StringCharacterIterator
@@ -34,38 +33,40 @@ import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
+import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
-	
+
 	val static String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0)
-	
+
 	@Accessors(AccessorType.PUBLIC_GETTER)
 	val Project project
-	
+
 	val ITypeFactory<PsiClass, JvmDeclaredType> psiClassFactory
-	
+
 	@Accessors(AccessorType.PUBLIC_GETTER)
 	val extension StubURIHelper uriHelper
-	
-	protected new(Project project, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, TypeResourceServices services, IPsiModelAssociator psiModelAssociator) {
+
+	protected new(Project project, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess,
+		TypeResourceServices services, IPsiModelAssociator psiModelAssociator) {
 		super(resourceSet, indexedJvmTypeAccess, services)
 		this.project = project
 		this.uriHelper = createStubURIHelper
 		this.psiClassFactory = createPsiClassFactory(psiModelAssociator)
 	}
-	
+
 	def createPsiClassFactory(IPsiModelAssociator psiModelAssociator) {
 		new PsiBasedTypeFactory(uriHelper, psiModelAssociator)
 	}
-	
+
 	protected def createStubURIHelper() {
 		new StubURIHelper
 	}
 
 	override findTypeByName(String name) {
 		doFindTypeByName(name, false)
-	} 
-	
+	}
+
 	override findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
 		var result = doFindTypeByName(name, false)
 		if (result != null || isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
@@ -78,7 +79,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		result
 	}
-	
+
 	def doFindTypeByName(String name, boolean traverseNestedTypes) {
 		ProgressIndicatorProvider.checkCanceled
 		val normalizedName = name.normalize
@@ -93,7 +94,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 				findType(resourceURI, fragment, traverseNestedTypes)
 		}
 	}
-	
+
 	protected def normalize(String name) {
 		if (name.startsWith('[')) {
 			SignatureParsing.parseTypeString(new StringCharacterIterator(name))
@@ -101,7 +102,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			name
 		}
 	}
-	
+
 	def findType(URI resourceURI, String fragment, boolean traverseNestedTypes) {
 		val indexedJvmTypeAccess = indexedJvmTypeAccess
 		if (indexedJvmTypeAccess != null) {
@@ -119,7 +120,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			throw e.wrapped
 		}
 	}
-	
+
 	protected def findType(Resource resource, String fragment, boolean traverseNestedTypes) {
 		val result = resource.getEObject(fragment) as JvmType
 		if (result != null || !traverseNestedTypes) {
@@ -134,13 +135,9 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		return null
 	}
-	
+
 	protected override createMirrorForFQN(String name) {
-		val scope = switch it:resourceSet {
-			XtextResourceSet: classpathURIContext as GlobalSearchScope
-			default: GlobalSearchScope.allScope(project)
-		}
-		val psiClass = JavaPsiFacadeEx.getInstanceEx(project).findClass(name, scope)
+		val psiClass = project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
 		if (psiClass == null || psiClass.containingClass != null) {
 			return null
 		}
@@ -149,5 +146,14 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		new PsiClassMirror(psiClass, psiClassFactory)
 	}
-	
+
+	protected def getSearchScope() {
+		switch resourceSet : resourceSet {
+			XtextResourceSet:
+				resourceSet.classpathURIContext as GlobalSearchScope
+			default:
+				GlobalSearchScope.allScope(project)
+		}
+	}
+
 }
