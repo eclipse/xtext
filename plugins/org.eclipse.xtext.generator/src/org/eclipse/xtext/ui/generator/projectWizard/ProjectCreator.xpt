@@ -65,6 +65,7 @@ public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorS
 		return («projectInfoClassName().toSimpleName()») super.getProjectInfo();
 	}
 	
+	@Override
 	protected String getModelFolderName() {
 		return SRC_ROOT;
 	}
@@ -83,6 +84,7 @@ public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorS
 	}
 «ENDIF-»
 
+	@Override
 	protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
 		OutputImpl output = new OutputImpl();
 		output.addOutlet(new Outlet(false, getEncoding(), null, true, project.getLocation().makeAbsolute().toOSString()));
