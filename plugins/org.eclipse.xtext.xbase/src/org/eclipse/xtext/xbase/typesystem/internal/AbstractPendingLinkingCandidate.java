@@ -890,12 +890,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					} else if ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
 						return CandidateCompareResult.OTHER;
 					}
-					if ((leftConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
-						if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) == 0) {
-							return CandidateCompareResult.OTHER;
+					if ((leftConformance & rightConformance & ConformanceFlags.LAMBDA_WITH_EXPECTATION) != 0) {
+						// we prefer expected types with a non void return type in case the lambda is only void compatible
+						if ((leftConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+							if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) == 0) {
+								return CandidateCompareResult.OTHER;
+							}
+						} else if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+							return CandidateCompareResult.THIS;
 						}
-					} else if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
-						return CandidateCompareResult.THIS;
 					}
 				}
 				return CandidateCompareResult.AMBIGUOUS;
