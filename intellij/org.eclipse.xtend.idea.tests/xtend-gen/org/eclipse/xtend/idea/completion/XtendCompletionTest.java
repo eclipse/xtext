@@ -43,7 +43,7 @@ public class XtendCompletionTest extends LightXtendTest {
     TestCase.assertTrue(_string, _contains);
   }
   
-  public void testJvmParameterizedTypeReference_Type_02() {
+  public void testTypeReferenceNoTypeArgs_Type() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -65,6 +65,29 @@ public class XtendCompletionTest extends LightXtendTest {
     this.assertLookupStrings(
       "extends", 
       "implements");
+  }
+  
+  public void testXRelationalExpression_Type() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def foo(Object foo) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("foo instanceof Array<caret>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testXImportDeclaration_ImportedType() {
@@ -148,5 +171,53 @@ public class XtendCompletionTest extends LightXtendTest {
     String _string_2 = lookupElementStrings.toString();
     boolean _contains_1 = lookupElementStrings.contains("Foo");
     TestCase.assertTrue(_string_2, _contains_1);
+  }
+  
+  public void testXAnnotation_AnnotationType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Deprecat<caret>");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("Deprecated");
+    TestCase.assertTrue(_string_1, _contains);
+  }
+  
+  public void testXAnnotation_AnnotationType_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Array<caret>");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testXAnnotation_Value() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@org.eclipse.xtend.lib.macro.Active(Array<caret>)");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertTrue(_string_1, _contains);
   }
 }

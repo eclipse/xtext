@@ -99,24 +99,28 @@ public class XbaseCompletionContributor extends AbstractXbaseCompletionContribut
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
-        int _invocationCount = $0.getInvocationCount();
-        boolean _lessEqualsThan = (_invocationCount <= 2);
-        CompletionResultSet _addJavaSorting = JavaCompletionSorting.addJavaSorting($0, $2);
-        PrefixMatcher _prefixMatcher = _addJavaSorting.getPrefixMatcher();
-        final Consumer<LookupElement> _function = new Consumer<LookupElement>() {
-          @Override
-          public void consume(final LookupElement it) {
-            if ((it instanceof JavaPsiClassReferenceElement)) {
-              Boolean _apply = filter.apply(((JavaPsiClassReferenceElement)it));
-              if ((_apply).booleanValue()) {
-                $2.addElement(it);
-              }
-            }
-          }
-        };
-        JavaClassNameCompletionContributor.addAllClasses($0, _lessEqualsThan, _prefixMatcher, _function);
+        XbaseCompletionContributor.this.completeJavaTypes($0, $2, filter);
       }
     };
     this.extend(CompletionType.BASIC, _withEReference, _function);
+  }
+  
+  protected void completeJavaTypes(final CompletionParameters completionParameters, final CompletionResultSet completionResultSet, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
+    int _invocationCount = completionParameters.getInvocationCount();
+    boolean _lessEqualsThan = (_invocationCount <= 2);
+    CompletionResultSet _addJavaSorting = JavaCompletionSorting.addJavaSorting(completionParameters, completionResultSet);
+    PrefixMatcher _prefixMatcher = _addJavaSorting.getPrefixMatcher();
+    final Consumer<LookupElement> _function = new Consumer<LookupElement>() {
+      @Override
+      public void consume(final LookupElement it) {
+        if ((it instanceof JavaPsiClassReferenceElement)) {
+          Boolean _apply = filter.apply(((JavaPsiClassReferenceElement)it));
+          if ((_apply).booleanValue()) {
+            completionResultSet.addElement(it);
+          }
+        }
+      }
+    };
+    JavaClassNameCompletionContributor.addAllClasses(completionParameters, _lessEqualsThan, _prefixMatcher, _function);
   }
 }

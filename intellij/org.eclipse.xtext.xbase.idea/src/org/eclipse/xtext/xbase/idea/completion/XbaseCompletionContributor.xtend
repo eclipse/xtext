@@ -20,6 +20,8 @@ import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage
 import org.eclipse.xtext.xtype.XtypePackage
 
 import static com.intellij.patterns.PlatformPatterns.*
+import com.intellij.codeInsight.completion.CompletionParameters
+import com.intellij.codeInsight.completion.CompletionResultSet
 
 class XbaseCompletionContributor extends AbstractXbaseCompletionContributor {
 
@@ -34,22 +36,22 @@ class XbaseCompletionContributor extends AbstractXbaseCompletionContributor {
 		completeXConstructorCall_Constructor
 		completeXTypeLiteral_Type
 	}
-	
+
 	protected def completeJvmParameterizedTypeReference_Type() {
 		completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)
 	}
-	
+
 	protected def completeXImportDeclaration_ImportedType() {
 		completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE)
 	}
-	
+
 	protected def completeXConstructorCall_Constructor() {
 		completeJavaTypes(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) [
 			val type = object
 			!type.hasModifierProperty(PsiModifier.ABSTRACT) && !type.interface
 		]
 	}
-	
+
 	protected def completeXTypeLiteral_Type() {
 		completeJavaTypes(XbasePackage.Literals.XTYPE_LITERAL__TYPE)
 	}
@@ -60,17 +62,25 @@ class XbaseCompletionContributor extends AbstractXbaseCompletionContributor {
 
 	protected def completeJavaTypes(EReference reference, (JavaPsiClassReferenceElement)=>boolean filter) {
 		extend(CompletionType.BASIC, psiElement.withEReference(reference)) [
-			JavaClassNameCompletionContributor.addAllClasses(
-				$0,
-				$0.invocationCount <= 2,
-				JavaCompletionSorting.addJavaSorting($0, $2).prefixMatcher
-			) [
-				if (it instanceof JavaPsiClassReferenceElement) {
-					if (filter.apply(it)) {
-						$2.addElement(it)
-					}
+			completeJavaTypes($0, $2, filter)
+		]
+	}
+
+	protected def completeJavaTypes(
+		CompletionParameters completionParameters,
+		CompletionResultSet completionResultSet,
+		(JavaPsiClassReferenceElement)=>boolean filter
+	) {
+		JavaClassNameCompletionContributor.addAllClasses(
+			completionParameters,
+			completionParameters.invocationCount <= 2,
+			JavaCompletionSorting.addJavaSorting(completionParameters, completionResultSet).prefixMatcher
+		) [
+			if (it instanceof JavaPsiClassReferenceElement) {
+				if (filter.apply(it)) {
+					completionResultSet.addElement(it)
 				}
-			]
+			}
 		]
 	}
 
