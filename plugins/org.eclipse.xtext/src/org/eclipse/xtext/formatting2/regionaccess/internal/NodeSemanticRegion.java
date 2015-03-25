@@ -9,6 +9,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.nodemodel.INode;
@@ -20,6 +21,7 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
+	private NodeEObjectTokens eObjectTokens;
 
 	protected NodeSemanticRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super(tokenAccess, node);
@@ -28,6 +30,8 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	@Override
 	public AbstractElement getGrammarElement() {
 		EObject element = super.getGrammarElement();
+		if (element instanceof CrossReference)
+			return ((CrossReference) element).getTerminal();
 		return element instanceof AbstractElement ? (AbstractElement) element : null;
 	}
 
@@ -57,5 +61,14 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 
 	protected void setTrailingGap(IHiddenRegion trailing) {
 		this.trailing = trailing;
+	}
+
+	protected void setEObjectTokens(NodeEObjectTokens eObjectTokens) {
+		this.eObjectTokens = eObjectTokens;
+	}
+
+	@Override
+	public EObject getSemanticElement() {
+		return eObjectTokens != null ? eObjectTokens.getSemanticElement() : null;
 	}
 }

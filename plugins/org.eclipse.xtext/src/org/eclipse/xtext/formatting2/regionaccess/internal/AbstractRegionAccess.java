@@ -32,9 +32,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -43,32 +41,9 @@ import com.google.common.collect.Sets;
  */
 public abstract class AbstractRegionAccess extends AbstractTextSegment implements ITextRegionAccess {
 
-	public static abstract class Builder {
-		protected abstract Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess);
-
-		protected abstract IHiddenRegion getFirstRegion();
-
-		protected abstract XtextResource getXtextResource();
-	}
-
-	private final Map<EObject, AbstractEObjectTokens> eObjectToTokens;
-	private final IHiddenRegion firstRegion;
-	private final XtextResource resource;
-
-	protected AbstractRegionAccess(Builder builder) {
-		this.resource = builder.getXtextResource();
-		this.eObjectToTokens = ImmutableMap.copyOf(builder.getEObjectToTokensMap(this));
-		this.firstRegion = builder.getFirstRegion();
-	}
-
-	@Override
-	public IHiddenRegion getFirstRegionInFile() {
-		return this.firstRegion;
-	}
-
 	@Override
 	public AbstractElement getInvokingGrammarElement(EObject obj) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(obj);
+		AbstractEObjectTokens tokens = getTokens(obj);
 		if (tokens == null)
 			return null;
 		return tokens.getGrammarElement();
@@ -80,22 +55,11 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	}
 
 	@Override
-	public XtextResource getResource() {
-		return resource;
-	}
-
-	@Override
-	public abstract String getText();
-
-	@Override
-	public String getText(int offset, int length) {
-		return resource.getParseResult().getRootNode().getText().substring(offset, offset + length);
-	}
-
-	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return this;
 	}
+
+	protected abstract AbstractEObjectTokens getTokens(EObject obj);
 
 	@Override
 	public ISemanticRegion immediatelyFollowingKeyword(EObject owner, String keyword) {
@@ -166,7 +130,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public boolean isMultiline(EObject object) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(object);
+		AbstractEObjectTokens tokens = getTokens(object);
 		if (tokens == null)
 			return false;
 		ISemanticRegion current = tokens.getLeadingGap().getNextSemanticRegion();
@@ -185,26 +149,26 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	}
 
 	@Override
-	public ITextSegment regionForEObject(EObject object) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(object);
-		int offset = tokens.leadingGap.getEndOffset();
-		int endOffset = tokens.trailingGap.getOffset();
-		return new TextSegment(this, offset, endOffset - offset);
-	}
-
-	@Override
 	public IHiddenRegion leadingHiddenRegion(EObject owner) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return null;
 		return tokens.getLeadingGap();
 	}
 
 	@Override
+	public ITextSegment regionForEObject(EObject object) {
+		AbstractEObjectTokens tokens = getTokens(object);
+		int offset = tokens.leadingGap.getEndOffset();
+		int endOffset = tokens.trailingGap.getOffset();
+		return new TextSegment(this, offset, endOffset - offset);
+	}
+
+	@Override
 	public ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feat) {
 		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
 			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return null;
 		for (ISemanticRegion token : tokens.getTokens()) {
@@ -217,7 +181,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public ISemanticRegion regionForKeyword(EObject owner, String keyword) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return null;
 		for (ISemanticRegion token : tokens.getTokens()) {
@@ -233,7 +197,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return null;
 		for (ISemanticRegion token : tokens.getTokens()) {
@@ -249,7 +213,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public List<ISemanticRegion> regionsForKeywords(EObject owner, String... keywords) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return Collections.emptyList();
 		Collection<String> kwSet = keywords.length <= 1 ? Arrays.asList(keywords) : Sets.newHashSet(keywords);
@@ -266,7 +230,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	@Override
 	public List<ISemanticRegion> regionsForRuleCallsTo(EObject owner, AbstractRule... rule) {
 		HashSet<AbstractRule> set = Sets.newHashSet(rule);
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return Collections.emptyList();
 		List<ISemanticRegion> result = Lists.newArrayList();
@@ -288,7 +252,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public IHiddenRegion trailingHiddenRegion(EObject owner) {
-		AbstractEObjectTokens tokens = eObjectToTokens.get(owner);
+		AbstractEObjectTokens tokens = getTokens(owner);
 		if (tokens == null)
 			return null;
 		return tokens.getTrailingGap();

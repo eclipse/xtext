@@ -2,9 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="regionaccesstestlanguage" nsURI="http://formatter2/regionaccesstestlanguage"
     nsPrefix="regionaccesstestlanguage">
-  <eClassifiers xsi:type="ecore:EClass" name="Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mixed" eType="#//Mixed"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Simple" eSuperTypes="#//Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Delegation" eSuperTypes="#//Root">
     <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//Delegate"
@@ -17,6 +20,35 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrefixedDelegate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Delegate" eSuperTypes="#//Unassigned #//PrefixedDelegate">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mixed" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eobj" eType="#//Mixed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="datatype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//Mixed"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lit" eType="#//Enum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Enum">
+    <eLiterals name="lit1" literal="lit1"/>
+    <eLiterals name="lit2" value="1" literal="lit2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Named" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//Mixed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignedAction" eSuperTypes="#//Mixed">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="#//Mixed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Mixed"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -5,10 +5,16 @@
     forceOverwrite="true" modelName="RegionAccessTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
     copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
-    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    runtimeVersion="2.9">
   <genPackages prefix="Regionaccesstestlanguage" basePackage="org.eclipse.xtext.formatting2.regionaccess.internal"
       disposableProviderFactory="true" ecorePackage="RegionAccessTestLanguage.ecore#/">
-    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Root"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="RegionAccessTestLanguage.ecore#//Enum">
+      <genEnumLiterals ecoreEnumLiteral="RegionAccessTestLanguage.ecore#//Enum/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="RegionAccessTestLanguage.ecore#//Enum/lit2"/>
+    </genEnums>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Root/mixed"/>
+    </genClasses>
     <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Simple">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Simple/name"/>
     </genClasses>
@@ -22,6 +28,26 @@
     <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//PrefixedDelegate"/>
     <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Delegate">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Delegate/name"/>
+    </genClasses>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Mixed">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Mixed/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Mixed/eobj"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Mixed/datatype"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Mixed/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Mixed/lit"/>
+    </genClasses>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Add/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Add/right"/>
+    </genClasses>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Named">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Named/name"/>
+    </genClasses>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Action"/>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//AssignedAction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//AssignedAction/child"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//AssignedAction/body"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

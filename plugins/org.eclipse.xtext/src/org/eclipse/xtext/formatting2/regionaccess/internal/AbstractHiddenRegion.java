@@ -23,14 +23,14 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
+public abstract class AbstractHiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 
-	List<NodeHidden> hiddens = Lists.newArrayList();
+	List<IHiddenRegionPart> hiddens = Lists.newArrayList();
 	private ISemanticRegion next;
 	private ISemanticRegion previous;
 	private final ITextRegionAccess tokenAccess;
 
-	protected HiddenRegion(ITextRegionAccess tokenAccess) {
+	protected AbstractHiddenRegion(ITextRegionAccess tokenAccess) {
 		super();
 		this.tokenAccess = tokenAccess;
 	}
@@ -47,8 +47,8 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 	public int getLength() {
 		if (hiddens.isEmpty())
 			return 0;
-		int start = hiddens.get(0).getNode().getOffset();
-		int end = hiddens.get(hiddens.size() - 1).getNode().getEndOffset();
+		int start = hiddens.get(0).getOffset();
+		int end = hiddens.get(hiddens.size() - 1).getEndOffset();
 		return end - start;
 	}
 
@@ -91,11 +91,6 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return tokenAccess;
-	}
-
-	@Override
-	public boolean isUndefined() {
-		return false;
 	}
 
 	protected void setNext(ISemanticRegion next) {

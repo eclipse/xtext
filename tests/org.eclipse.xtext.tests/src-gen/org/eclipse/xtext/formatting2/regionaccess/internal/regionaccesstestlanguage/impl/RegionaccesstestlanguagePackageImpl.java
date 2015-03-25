@@ -4,14 +4,20 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlang
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegate;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedDelegate;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory;
@@ -78,6 +84,55 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
   private EClass delegateEClass = null;
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mixedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass addEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass namedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assignedActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum enumEEnum = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -125,9 +180,6 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
 
     isInited = true;
 
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
-
     // Create package meta-data objects
     theRegionaccesstestlanguagePackage.createPackageContents();
 
@@ -151,6 +203,16 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
   public EClass getRoot()
   {
     return rootEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoot_Mixed()
+  {
+    return (EReference)rootEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -258,6 +320,176 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getExpression()
+  {
+    return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMixed()
+  {
+    return mixedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMixed_Name()
+  {
+    return (EAttribute)mixedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMixed_Eobj()
+  {
+    return (EReference)mixedEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMixed_Datatype()
+  {
+    return (EAttribute)mixedEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMixed_Ref()
+  {
+    return (EReference)mixedEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMixed_Lit()
+  {
+    return (EAttribute)mixedEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAdd()
+  {
+    return addEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAdd_Left()
+  {
+    return (EReference)addEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAdd_Right()
+  {
+    return (EReference)addEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNamed()
+  {
+    return namedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNamed_Name()
+  {
+    return (EAttribute)namedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction()
+  {
+    return actionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAssignedAction()
+  {
+    return assignedActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssignedAction_Child()
+  {
+    return (EReference)assignedActionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssignedAction_Body()
+  {
+    return (EReference)assignedActionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getEnum()
+  {
+    return enumEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RegionaccesstestlanguageFactory getRegionaccesstestlanguageFactory()
   {
     return (RegionaccesstestlanguageFactory)getEFactoryInstance();
@@ -284,6 +516,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
 
     // Create classes and their features
     rootEClass = createEClass(ROOT);
+    createEReference(rootEClass, ROOT__MIXED);
 
     simpleEClass = createEClass(SIMPLE);
     createEAttribute(simpleEClass, SIMPLE__NAME);
@@ -300,6 +533,31 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
 
     delegateEClass = createEClass(DELEGATE);
     createEAttribute(delegateEClass, DELEGATE__NAME);
+
+    expressionEClass = createEClass(EXPRESSION);
+
+    mixedEClass = createEClass(MIXED);
+    createEAttribute(mixedEClass, MIXED__NAME);
+    createEReference(mixedEClass, MIXED__EOBJ);
+    createEAttribute(mixedEClass, MIXED__DATATYPE);
+    createEReference(mixedEClass, MIXED__REF);
+    createEAttribute(mixedEClass, MIXED__LIT);
+
+    addEClass = createEClass(ADD);
+    createEReference(addEClass, ADD__LEFT);
+    createEReference(addEClass, ADD__RIGHT);
+
+    namedEClass = createEClass(NAMED);
+    createEAttribute(namedEClass, NAMED__NAME);
+
+    actionEClass = createEClass(ACTION);
+
+    assignedActionEClass = createEClass(ASSIGNED_ACTION);
+    createEReference(assignedActionEClass, ASSIGNED_ACTION__CHILD);
+    createEReference(assignedActionEClass, ASSIGNED_ACTION__BODY);
+
+    // Create enums
+    enumEEnum = createEEnum(ENUM);
   }
 
   /**
@@ -326,9 +584,6 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -340,12 +595,19 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     prefixedUnassignedEClass.getESuperTypes().add(this.getRoot());
     delegateEClass.getESuperTypes().add(this.getUnassigned());
     delegateEClass.getESuperTypes().add(this.getPrefixedDelegate());
+    expressionEClass.getESuperTypes().add(this.getRoot());
+    mixedEClass.getESuperTypes().add(this.getRoot());
+    addEClass.getESuperTypes().add(this.getExpression());
+    namedEClass.getESuperTypes().add(this.getExpression());
+    actionEClass.getESuperTypes().add(this.getMixed());
+    assignedActionEClass.getESuperTypes().add(this.getMixed());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRoot_Mixed(), this.getMixed(), null, "mixed", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleEClass, Simple.class, "Simple", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSimple_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Simple.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimple_Name(), ecorePackage.getEString(), "name", null, 0, 1, Simple.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(delegationEClass, Delegation.class, "Delegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDelegation_Delegate(), this.getDelegate(), null, "delegate", null, 0, 1, Delegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -358,7 +620,34 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     initEClass(prefixedDelegateEClass, PrefixedDelegate.class, "PrefixedDelegate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(delegateEClass, Delegate.class, "Delegate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDelegate_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Delegate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDelegate_Name(), ecorePackage.getEString(), "name", null, 0, 1, Delegate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(mixedEClass, Mixed.class, "Mixed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMixed_Name(), ecorePackage.getEString(), "name", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMixed_Eobj(), this.getMixed(), null, "eobj", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMixed_Datatype(), ecorePackage.getEString(), "datatype", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMixed_Ref(), this.getMixed(), null, "ref", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMixed_Lit(), this.getEnum(), "lit", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAdd_Right(), this.getExpression(), null, "right", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(namedEClass, Named.class, "Named", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNamed_Name(), ecorePackage.getEString(), "name", null, 0, 1, Named.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(assignedActionEClass, AssignedAction.class, "AssignedAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAssignedAction_Child(), this.getMixed(), null, "child", null, 0, 1, AssignedAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssignedAction_Body(), this.getMixed(), null, "body", null, 0, 1, AssignedAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(enumEEnum, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum.class, "Enum");
+    addEEnumLiteral(enumEEnum, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum.LIT1);
+    addEEnumLiteral(enumEEnum, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum.LIT2);
 
     // Create resource
     createResource(eNS_URI);

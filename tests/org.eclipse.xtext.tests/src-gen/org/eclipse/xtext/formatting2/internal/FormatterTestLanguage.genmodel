@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="FormatterTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
     copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
-    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    runtimeVersion="2.9">
   <genPackages prefix="Formattertestlanguage" basePackage="org.eclipse.xtext.formatting2.internal"
       disposableProviderFactory="true" ecorePackage="FormatterTestLanguage.ecore#/">
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//Root"/>
