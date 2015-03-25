@@ -108,6 +108,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
           } catch (final Throwable _t) {
             if (_t instanceof Throwable) {
               final Throwable t = (Throwable)_t;
+              this.operationCanceledManager.propagateAsErrorIfCancelException(t);
               ctx.handleProcessingError(resource, t);
             } else {
               throw Exceptions.sneakyThrow(_t);

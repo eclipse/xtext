@@ -53,6 +53,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -88,6 +89,9 @@ public class XtendGenerator extends JvmModelGenerator {
   
   @Inject
   private IBatchTypeResolver typeResolver;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
@@ -137,6 +141,7 @@ public class XtendGenerator extends JvmModelGenerator {
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {
             final Throwable t = (Throwable)_t;
+            this.operationCanceledManager.propagateAsErrorIfCancelException(t);
             context.handleProcessingError(input, t);
           } else {
             throw Exceptions.sneakyThrow(_t);
