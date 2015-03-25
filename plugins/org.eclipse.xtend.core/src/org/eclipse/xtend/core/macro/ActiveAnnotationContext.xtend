@@ -38,6 +38,8 @@ import com.google.common.base.Throwables
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.emf.common.notify.Notification
 import org.apache.log4j.Logger
+import org.eclipse.xtext.service.OperationCanceledError
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Sven Efftinge
@@ -168,6 +170,7 @@ class ActiveAnnotationContextProvider {
 	@Inject extension XAnnotationExtensions
 	@Inject extension ProcessorInstanceForJvmTypeProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
+	@Inject OperationCanceledManager operationCanceledManager
 	
 	def ActiveAnnotationContexts computeContext(XtendFile file) {
 		//TODO measure and improve (is called twice for each xtendfile)
@@ -192,6 +195,7 @@ class ActiveAnnotationContextProvider {
 					} catch (VirtualMachineError e) {
 						throw e
 					} catch (Throwable e) {
+						operationCanceledManager.propagateAsErrorIfCancelException(e)
 						val msg = switch e {
 							ExceptionInInitializerError : e.exception.message
 							default : e.message
@@ -206,6 +210,7 @@ class ActiveAnnotationContextProvider {
 			]
 			return result
 		} catch (Throwable e) {
+			operationCanceledManager.propagateAsErrorIfCancelException(e)
 			switch e {
 				VirtualMachineError : throw e
 				LinkageError: throw e // e.g. java.lang.UnsupportedClassVersionError: activetest/Processor : Unsupported major.minor version 51.0
