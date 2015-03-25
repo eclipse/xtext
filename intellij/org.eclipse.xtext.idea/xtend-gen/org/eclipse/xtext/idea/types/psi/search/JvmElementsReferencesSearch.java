@@ -44,6 +44,7 @@ public class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference,
   private final IXtextLanguage language;
   
   public JvmElementsReferencesSearch(final IXtextLanguage language) {
+    super(true);
     this.language = language;
     this.language.injectMembers(this);
   }

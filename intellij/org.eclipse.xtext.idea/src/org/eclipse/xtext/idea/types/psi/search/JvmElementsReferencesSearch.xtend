@@ -31,6 +31,7 @@ class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference, Refere
 	val IXtextLanguage language
 
 	new(IXtextLanguage language) {
+		super(true)
 		this.language = language
 		this.language.injectMembers(this)
 	}
