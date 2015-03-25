@@ -44,10 +44,6 @@ public class NodeRegion extends AbstractTextSegment {
 		return node.getOffset();
 	}
 
-	public EObject getSemanticElement() {
-		return tokenAccess.findSemanticElement(node);
-	}
-
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return tokenAccess;

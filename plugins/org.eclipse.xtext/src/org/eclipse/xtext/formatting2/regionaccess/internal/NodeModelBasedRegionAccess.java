@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -21,12 +19,13 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -41,73 +40,35 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	public static class Builder {
 
 		private Map<EObject, NodeEObjectTokens> eObjToTokens;
-		private ISemanticRegion firstToken;
-		private ITextSegment lastTokenOrGap;
-		private NodeEObjectTokens lastTokens;
+		private LinkedList<NodeEObjectTokens> stack = new LinkedList<NodeEObjectTokens>();
+		private NodeHiddenRegion firstHidden;
+		private NodeHiddenRegion lastHidden;
 		private XtextResource resource;
 
-		protected boolean add(NodeModelBasedRegionAccess tokenAccess, INode node) {
-			EObject semanticElement = tokenAccess.findSemanticElement(node);
-			if (lastTokens == null || semanticElement != lastTokens.getSemanticElement())
-				lastTokens = eObjToTokens.get(semanticElement);
-			if (lastTokens == null)
-				eObjToTokens.put(semanticElement, lastTokens = createTokens(tokenAccess, node));
-			boolean result = include(node);
-			if (result) {
-				if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
-					ILeafNode leafNode = (ILeafNode) node;
-					if (lastTokenOrGap instanceof NodeSemanticRegion) {
-						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
-						AbstractHiddenRegion gap = createGap(tokenAccess);
-						lastToken.setTrailingGap(gap);
-						gap.setPrevious(lastToken);
-						gap.hiddens.add(createHidden(gap, leafNode));
-						lastTokenOrGap = gap;
-					} else if (lastTokenOrGap instanceof AbstractHiddenRegion) {
-						AbstractHiddenRegion lastGap = (AbstractHiddenRegion) lastTokenOrGap;
-						lastGap.hiddens.add(createHidden(lastGap, leafNode));
-					} else if (lastTokenOrGap == null) {
-						AbstractHiddenRegion gap = createGap(tokenAccess);
-						gap.hiddens.add(createHidden(gap, leafNode));
-						lastTokenOrGap = gap;
-					} else {
-						throw new IllegalStateException();
-					}
-				} else {
-					NodeSemanticRegion newToken = createToken(tokenAccess, node);
-					if (lastTokenOrGap == null)
-						lastTokenOrGap = createGap(tokenAccess);
-					if (lastTokenOrGap instanceof NodeSemanticRegion) {
-						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
-						AbstractHiddenRegion gap = createGap(tokenAccess);
-						lastToken.setTrailingGap(gap);
-						gap.setPrevious(lastToken);
-						newToken.setLeadingGap(gap);
-						gap.setNext(newToken);
-					} else if (lastTokenOrGap instanceof AbstractHiddenRegion) {
-						AbstractHiddenRegion lastGap = (AbstractHiddenRegion) lastTokenOrGap;
-						lastGap.setNext(newToken);
-						newToken.setLeadingGap(lastGap);
-					} else {
-						throw new IllegalStateException();
-					}
-					if (lastTokens != null)
-						lastTokens.getTokens().add(newToken);
-					lastTokenOrGap = newToken;
-					if (firstToken == null)
-						firstToken = newToken;
-				}
+		protected void add(NodeModelBasedRegionAccess tokenAccess, INode node) {
+			if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
+				ILeafNode leafNode = (ILeafNode) node;
+				lastHidden.hiddens.add(createHidden(lastHidden, leafNode));
+			} else {
+				NodeEObjectTokens eObjectTokens = stack.peek();
+				NodeSemanticRegion newToken = createToken(tokenAccess, node);
+				NodeHiddenRegion newHidden = createGap(tokenAccess);
+				newToken.setTrailingGap(newHidden);
+				newHidden.setPrevious(newToken);
+				newToken.setLeadingGap(lastHidden);
+				lastHidden.setNext(newToken);
+				eObjectTokens.getTokens().add(newToken);
+				newToken.setEObjectTokens(eObjectTokens);
+				lastHidden = newHidden;
 			}
-			return result;
 		}
 
 		public NodeModelBasedRegionAccess create() {
 			NodeModelBasedRegionAccess tokenAccess = new NodeModelBasedRegionAccess(this);
-			//			System.out.println(tokenAccess);
 			return tokenAccess;
 		}
 
-		protected AbstractHiddenRegion createGap(ITextRegionAccess tokenAccess) {
+		protected NodeHiddenRegion createGap(ITextRegionAccess tokenAccess) {
 			return new NodeHiddenRegion(tokenAccess);
 		}
 
@@ -126,46 +87,57 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return new NodeEObjectTokens(access, node);
 		}
 
+		protected void process(INode node, NodeModelBasedRegionAccess access) {
+			NodeEObjectTokens tokens = stack.peek();
+			boolean creator = isEObjectRoot(node);
+			if (creator || tokens == null) {
+				tokens = new NodeEObjectTokens(access, node);
+				tokens.setLeadingGap(lastHidden);
+				stack.push(tokens);
+			}
+			if (tokens.getSemanticElement() == null) {
+				if (node instanceof RootNode)
+					tokens.setSemantcElement(resource.getContents().get(0));
+				else if (node.hasDirectSemanticElement())
+					tokens.setSemantcElement(node.getSemanticElement());
+			}
+			if (include(node)) {
+				if (node instanceof ICompositeNode) {
+					for (ILeafNode leaf : node.getLeafNodes())
+						if (leaf.isHidden())
+							this.add(access, leaf);
+						else
+							break;
+				}
+				this.add(access, node);
+			} else if (node instanceof ICompositeNode) {
+				for (INode child : ((ICompositeNode) node).getChildren())
+					process(child, access);
+			}
+			if (creator) {
+				NodeEObjectTokens popped = stack.pop();
+				popped.setTrailingGap(lastHidden);
+				EObject semanticElement = popped.getSemanticElement();
+				if (semanticElement == null)
+					throw new IllegalStateException();
+				NodeEObjectTokens old = eObjToTokens.put(semanticElement, popped);
+				if (old != null)
+					throw new IllegalStateException();
+			}
+		}
+
 		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
 			this.eObjToTokens = Maps.newHashMap();
-			this.lastTokenOrGap = null;
-			this.lastTokens = null;
-			this.firstToken = null;
+			this.firstHidden = createGap(tokenAccess);
+			this.lastHidden = this.firstHidden;
 			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) tokenAccess;
-			ICompositeNode rootNode = resource.getParseResult().getRootNode();
-			TreeIterator<INode> iterator = rootNode.getAsTreeIterable().iterator();
-			while (iterator.hasNext()) {
-				INode next = iterator.next();
-				if (next instanceof ICompositeNode && include(next)) {
-					Iterator<INode> it = next.getAsTreeIterable().iterator();
-					while (it.hasNext()) {
-						INode next2 = it.next();
-						if (next2 == next)
-							continue;
-						if (next2 instanceof ILeafNode) {
-							if (((ILeafNode) next2).isHidden())
-								this.add(access, next2);
-							else
-								break;
-						}
-					}
-				}
-				if (this.add(access, next))
-					iterator.prune();
-			}
-			if (lastTokenOrGap instanceof NodeSemanticRegion) {
-				NodeSemanticRegion last = (NodeSemanticRegion) lastTokenOrGap;
-				AbstractHiddenRegion gap = createGap(tokenAccess);
-				last.setTrailingGap(gap);
-				gap.setPrevious(last);
-			}
-			setLeadingGaps();
-			setTrailingGaps();
+			CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
+			process(rootNode, access);
 			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
 		}
 
 		protected IHiddenRegion getFirstRegion() {
-			return this.firstToken.getNextHiddenRegion();
+			return firstHidden;
 		}
 
 		protected XtextResource getXtextResource() {
@@ -183,42 +155,58 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return false;
 		}
 
+		protected boolean isDeadend(INode node) {
+			if (node instanceof ICompositeNode) {
+				ICompositeNode c = (ICompositeNode) node;
+				INode firstChild = c.getFirstChild();
+				if (firstChild == null)
+					return true;
+				if (firstChild == c.getLastChild() && firstChild instanceof ICompositeNode)
+					return isDeadend(firstChild);
+			}
+			return false;
+		}
+
+		protected boolean isEObjectRoot(INode node) {
+			if (node instanceof ICompositeNode) {
+				EObject element = node.getGrammarElement();
+				if (element instanceof RuleCall) {
+					if (GrammarUtil.isEObjectRuleCall(element) && !isDeadend(node)) {
+						if (GrammarUtil.isAssigned(element))
+							return true;
+						if (GrammarUtil.isParserRuleCall(node.getParent().getGrammarElement()))
+							return false;
+						if (node.getParent().getGrammarElement() instanceof ParserRule)
+							return false;
+						BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
+						iterator.next();
+						while (iterator.hasNext()) {
+							INode next = iterator.next();
+							if (next instanceof ICompositeNode) {
+								EObject ge = next.getGrammarElement();
+								if (ge instanceof Action)
+									return true;
+								if (GrammarUtil.isAssigned(ge))
+									return false;
+							}
+						}
+
+					}
+				}
+				if (element instanceof Action) {
+					return node.getParent().hasDirectSemanticElement();
+				}
+				return element instanceof ParserRule;
+			}
+			return false;
+		}
+
 		protected boolean isComment(ILeafNode leaf) {
 			String text = leaf.getText();
 			for (int i = 0; i < text.length(); i++)
 				if (!Character.isWhitespace(text.charAt(i)))
 					return true;
 			return false;
-		}
-
-		protected void setLeadingGaps() {
-			ISemanticRegion token = firstToken;
-			while (token != null) {
-				IHiddenRegion gap = token.getPreviousHiddenRegion();
-				NodeEObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
-				while (tokens != null && tokens.getLeadingGap() == null) {
-					tokens.setLeadingGap(gap);
-					tokens = eObjToTokens.get(tokens.getSemanticElement().eContainer());
-				}
-				token = token.getNextSemanticRegion();
-			}
-		}
-
-		protected void setTrailingGaps() {
-			ISemanticRegion token;
-			if (lastTokenOrGap instanceof IHiddenRegion)
-				token = ((IHiddenRegion) lastTokenOrGap).getPreviousSemanticRegion();
-			else
-				token = (ISemanticRegion) lastTokenOrGap;
-			while (token != null) {
-				IHiddenRegion gap = token.getNextHiddenRegion();
-				NodeEObjectTokens tokens = eObjToTokens.get(token.getSemanticElement());
-				while (tokens != null && tokens.getTrailingGap() == null) {
-					tokens.setTrailingGap(gap);
-					tokens = eObjToTokens.get(tokens.getSemanticElement().eContainer());
-				}
-				token = token.getPreviousSemanticRegion();
-			}
 		}
 
 		public Builder withResource(XtextResource resource) {
@@ -260,52 +248,6 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		if (endOffset < 0 || endOffset > text.length())
 			endOffset = text.length();
 		return new TextSegment(this, offset, endOffset - offset);
-	}
-
-	protected EObject getSemanticElement(INode node) {
-		EObject grammarElement = node.getGrammarElement();
-		if (grammarElement instanceof RuleCall || grammarElement instanceof CrossReference) {
-			if (GrammarUtil.isAssigned(grammarElement))
-				return node.getSemanticElement();
-		} else if (grammarElement instanceof Action || grammarElement instanceof ParserRule) {
-			return node.getSemanticElement();
-		}
-		return null;
-	}
-
-	protected EObject findSemanticElement(INode node) {
-		EObject semanticElement = getSemanticElement(node);
-		if (semanticElement != null)
-			return semanticElement;
-		return findSemanticElementFromChildren(node, null);
-	}
-
-	protected EObject findSemanticElementFromChildren(INode node, INode skip) {
-		EObject semanticElement = getSemanticElement(node);
-		if (semanticElement != null)
-			return semanticElement;
-		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
-		while (iterator.hasNext()) {
-			INode next = iterator.next();
-			if (next == skip) {
-				iterator.prune();
-				continue;
-			} else {
-				EObject semanticElement2 = getSemanticElement(next);
-				if (semanticElement2 != null)
-					return semanticElement2;
-			}
-		}
-		ICompositeNode parent = node.getParent();
-		if (parent == null) {
-			BidiTreeIterator<INode> it = node.getAsTreeIterable().iterator();
-			while (it.hasNext()) {
-				EObject sem = it.next().getSemanticElement();
-				if (sem != null)
-					return EcoreUtil.getRootContainer(sem);
-			}
-		}
-		return findSemanticElementFromChildren(parent, node);
 	}
 
 	@Override

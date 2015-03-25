@@ -20,6 +20,7 @@ import org.eclipse.xtext.nodemodel.INode;
 public class NodeEObjectTokens extends AbstractEObjectTokens {
 	private final INode node;
 	private final NodeModelBasedRegionAccess tokenAccess;
+	private EObject semantcElement;
 
 	public NodeEObjectTokens(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super();
@@ -51,6 +52,10 @@ public class NodeEObjectTokens extends AbstractEObjectTokens {
 
 	@Override
 	public EObject getSemanticElement() {
-		return tokenAccess.findSemanticElement(node);
+		return semantcElement;
+	}
+
+	protected void setSemantcElement(EObject semantcElement) {
+		this.semantcElement = semantcElement;
 	}
 }
