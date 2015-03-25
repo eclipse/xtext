@@ -18,9 +18,9 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
-	private final HiddenRegion hiddenRegion;
+	private final NodeHiddenRegion hiddenRegion;
 
-	protected NodeHidden(HiddenRegion gap, INode node) {
+	protected NodeHidden(NodeHiddenRegion gap, INode node) {
 		super((NodeModelBasedRegionAccess) gap.getTextRegionAccess(), node);
 		this.hiddenRegion = gap;
 	}

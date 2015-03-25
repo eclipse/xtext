@@ -14,7 +14,7 @@ import org.eclipse.xtext.nodemodel.INode;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class NodeComment extends NodeHidden implements IComment {
-	public NodeComment(HiddenRegion gap, INode node) {
+	public NodeComment(NodeHiddenRegion gap, INode node) {
 		super(gap, node);
 	}
 }
