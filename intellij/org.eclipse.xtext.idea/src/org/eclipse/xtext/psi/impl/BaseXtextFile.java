@@ -159,6 +159,8 @@ public abstract class BaseXtextFile extends PsiFileBase {
 			 */
 			FileBasedIndexImpl.disableUpToDateCheckForCurrentThread();
 			ResourceDescriptionAdapter.install(resource);
+		} catch(OperationCanceledError e) {
+			throw e.getWrapped();
 		} finally {
 			compilerPhases.setIndexing(resource, false);
 			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
