@@ -37,6 +37,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
@@ -66,6 +67,9 @@ public class ActiveAnnotationContextProvider {
   
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   public ActiveAnnotationContexts computeContext(final XtendFile file) {
     try {
@@ -106,6 +110,7 @@ public class ActiveAnnotationContextProvider {
                     throw e;
                   } else if (_t instanceof Throwable) {
                     final Throwable e_1 = (Throwable)_t;
+                    ActiveAnnotationContextProvider.this.operationCanceledManager.propagateAsErrorIfCancelException(e_1);
                     String _switchResult = null;
                     boolean _matched = false;
                     if (!_matched) {
@@ -154,6 +159,7 @@ public class ActiveAnnotationContextProvider {
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {
           final Throwable e = (Throwable)_t;
+          this.operationCanceledManager.propagateAsErrorIfCancelException(e);
           boolean _matched = false;
           if (!_matched) {
             if (e instanceof VirtualMachineError) {
