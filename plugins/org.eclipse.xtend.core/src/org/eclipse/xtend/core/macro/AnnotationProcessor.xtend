@@ -22,6 +22,12 @@ import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.lib.macro.ValidationParticipant
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import com.google.inject.Singleton
+import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.concurrent.RejectedExecutionException
+import org.apache.log4j.Logger
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -33,6 +39,7 @@ class AnnotationProcessor {
 	@Inject Provider<TransformationContextImpl> modifyContextProvider
 	@Inject Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider
 	@Inject Provider<ValidationContextImpl> validationContextProvider
+	@Inject CancellationObserver cancellationObserver
 
 	/**
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -115,21 +122,45 @@ class AnnotationProcessor {
 	 */
 	private def runWithCancelIndiciator(ActiveAnnotationContext ctx, CancelIndicator cancelIndicator, Runnable runnable) {
 		val AtomicBoolean isFinished = new AtomicBoolean(false)
-		new Thread ([|
-			while (!isFinished.get) {
-				if (cancelIndicator.canceled) {
-					ctx.compilationUnit.canceled = true
-					return;
-				}
-				Thread.sleep(100)
-			}
-		]).start
+		cancellationObserver.monitorUntil(ctx, cancelIndicator, [isFinished.get])
 		try {
 			runnable.run
 		} catch (CancellationException e) {
 		} finally {
 			isFinished.set(true)
 		}
+	}
+	
+	@Singleton
+	protected static class CancellationObserver {
+		private static final Logger log = Logger.getLogger(CancellationObserver)
+		
+		@Accessors(PROTECTED_GETTER)
+		private ExecutorService pool = initPool()
+		
+		protected def ExecutorService initPool() {
+			return Executors.newCachedThreadPool();
+		}
+	
+		def monitorUntil(ActiveAnnotationContext ctx, CancelIndicator cancelIndicator, ()=>boolean isFinished) {
+			val Runnable r = [
+				while (!isFinished.apply) {
+					if (cancelIndicator.canceled) {
+						ctx.compilationUnit.canceled = true
+						return;
+					}
+					Thread.sleep(100)
+				}
+			]
+			try {
+				pool.submit(r)
+			} catch(RejectedExecutionException e) {
+				log.debug(e.message, e)
+				// fallback to a fresh thread
+				new Thread(r).start
+			}
+		}
+	
 	}
 	
 }
