@@ -39,7 +39,7 @@ class XtendCompletionTest extends LightXtendTest {
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
-	def void testJvmParameterizedTypeReference_Type_02() {
+	def void testTypeReferenceNoTypeArgs_Type() {
 		'''
 		   class Foo {
 		   		def Array<caret> foo() {}
@@ -55,6 +55,18 @@ class XtendCompletionTest extends LightXtendTest {
 			"extends",
 			"implements"
 		)
+	}
+	
+	def void testXRelationalExpression_Type() {
+		'''
+		   class Foo {
+		   		def foo(Object foo) {
+		   			foo instanceof Array<caret>
+		   		}
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
 	def void testXImportDeclaration_ImportedType() {
@@ -101,5 +113,35 @@ class XtendCompletionTest extends LightXtendTest {
 		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Foo"))
+	}
+	
+	def void testXAnnotation_AnnotationType() {
+		'''
+		   @Deprecat<caret>
+		   class Foo {
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("Deprecated"))
+	}
+	
+	def void testXAnnotation_AnnotationType_02() {
+		'''
+		   @Array<caret>
+		   class Foo {
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testXAnnotation_Value() {
+		'''
+		   @org.eclipse.xtend.lib.macro.Active(Array<caret>)
+		   class Foo {
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 }
