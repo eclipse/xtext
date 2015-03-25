@@ -37,6 +37,9 @@ class OperationCanceledManager {
 	 * Rethrows OperationCanceledErrors and wraps platform specific OperationCanceledExceptions. Does nothing for any other type of Throwable.
 	 */
 	def void propagateAsErrorIfCancelException(Throwable t) {
+		if (t instanceof OperationCanceledError) {
+			throw t;
+		}
 		val opCanceledException = getPlatformOperationCanceledException(t);
 		if (opCanceledException != null)
 			throw new OperationCanceledError(opCanceledException);

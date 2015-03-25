@@ -69,6 +69,7 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
@@ -145,6 +146,9 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	@Inject
 	private IGeneratorConfigProvider generatorConfigProvider;
 	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+	
 	private GeneratorConfig generatorConfig;
 	
 	@Override
@@ -190,6 +194,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 					try {
 						annotationProcessor.indexingPhase(ctx, wrapper, CancelIndicator.NullImpl);
 					} catch (Throwable t) {
+						operationCanceledManager.propagateAsErrorIfCancelException(t);
 						ctx.handleProcessingError(xtendFile.eResource(), t);
 					}
 				}
@@ -216,6 +221,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 							try {
 								annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
 							} catch (Throwable t) {
+								operationCanceledManager.propagateAsErrorIfCancelException(t);
 								ctx.handleProcessingError(xtendFile.eResource(), t);
 							}
 						}

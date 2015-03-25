@@ -65,6 +65,9 @@ public class OperationCanceledManager {
    */
   public void propagateAsErrorIfCancelException(final Throwable t) {
     try {
+      if ((t instanceof OperationCanceledError)) {
+        throw t;
+      }
       final RuntimeException opCanceledException = this.getPlatformOperationCanceledException(t);
       boolean _notEquals = (!Objects.equal(opCanceledException, null));
       if (_notEquals) {
