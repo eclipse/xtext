@@ -18,7 +18,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},plugins/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -29,7 +29,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},intellij/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -40,7 +40,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},features/{1}.feature">
 				<bc:propertyRef key="git.clone.dest" />
@@ -51,7 +51,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},tests/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -62,7 +62,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},devtools/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -73,7 +73,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},docs/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -86,7 +86,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri
 				format="{0},examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
@@ -100,7 +100,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},examples/org.eclipse.xtext.xtext.ui.examples/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -113,7 +113,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},examples/org.eclipse.xtext.xtext.ui.examples">
 				<bc:propertyRef key="git.clone.dest" />
@@ -127,7 +127,7 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
-				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.releng.git" />
+				value="https://github.com/eclipse/xtext.git" />
 			<rm:property key="git.auto.fetch" value="false" />
 			<rm:uri format="{0},releng/{1}">
 				<bc:propertyRef key="git.clone.dest" />
