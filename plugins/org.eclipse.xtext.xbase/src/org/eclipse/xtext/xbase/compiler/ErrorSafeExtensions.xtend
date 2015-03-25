@@ -145,6 +145,10 @@ class ErrorSafeExtensions {
 	}
 }
 
+/**
+ * A visitor that detects broken type references. Returns <code>true</code> if a broken reference
+ * was detected.
+ */
 class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
 	
 	override protected handleNullReference() {
