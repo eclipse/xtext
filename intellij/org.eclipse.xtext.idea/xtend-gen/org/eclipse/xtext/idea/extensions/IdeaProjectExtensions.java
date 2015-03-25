@@ -3,6 +3,7 @@ package org.eclipse.xtext.idea.extensions;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -76,5 +77,9 @@ public class IdeaProjectExtensions {
   
   public static DumbService getDumbService(final Project project) {
     return DumbService.getInstance(project);
+  }
+  
+  public static ProjectFileIndex getProjectFileIndex(final Project project) {
+    return ProjectFileIndex.SERVICE.getInstance(project);
   }
 }
