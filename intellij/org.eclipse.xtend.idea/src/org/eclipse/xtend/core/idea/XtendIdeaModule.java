@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.idea;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewBuilder;
+import org.eclipse.xtend.core.idea.validation.XtendIdeaValidator;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -77,6 +78,11 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 
 	public Class<? extends XtextFileAwareStructureViewBuilder> bindXtextFileAwareStructureViewBuilder() {
 		return XtendStructureViewBuilder.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager = true)
+	public Class<? extends XtendIdeaValidator> bindXtendIdeaValidator() {
+		return XtendIdeaValidator.class;
 	}
 
 }
