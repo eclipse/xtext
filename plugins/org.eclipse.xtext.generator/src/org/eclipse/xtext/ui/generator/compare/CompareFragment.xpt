@@ -18,32 +18,32 @@
 «DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
-  <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="«name».compare.contentViewers"
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="«modelFileExtensions.toString(",")»">
-    </viewer>
-  </extension>
-  <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="«name».compare.contentMergeViewers"
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="«modelFileExtensions.toString(",")»" label="«name.toSimpleName()» Compare">
-     </viewer>
-  </extension>
-  <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="«name».editors.documentProviders"
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="«modelFileExtensions.toString(",")»">
-    </provider>
-  </extension>
-  <extension point="org.eclipse.team.core.fileTypes">
-  «FOREACH modelFileExtensions AS modelFileExtension-»
-    <fileTypes
-            extension="«modelFileExtension»"
-            type="text">
-    </fileTypes>
-  «ENDFOREACH-» 
-  </extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="«name».compare.contentViewers"
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="«modelFileExtensions.toString(",")»">
+		</viewer>
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="«name».compare.contentMergeViewers"
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="«modelFileExtensions.toString(",")»" label="«name.toSimpleName()» Compare">
+		</viewer>
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="«name».editors.documentProviders"
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="«modelFileExtensions.toString(",")»">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+	«FOREACH modelFileExtensions AS modelFileExtension-»
+		<fileTypes
+			extension="«modelFileExtension»"
+			type="text">
+		</fileTypes>
+	«ENDFOREACH-»
+	</extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»

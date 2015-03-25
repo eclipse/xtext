@@ -33,17 +33,17 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents a generated, default implementation of superclass {@link «superClassName»}.
- * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
- * with a more concrete subtype. 
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them
+ * with a more concrete subtype.
  */
 @SuppressWarnings("all")
 «classAnnotations()»public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
-		
+
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
 			«LET getFqFeatureName(assignment) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
-					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»
 	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 	«LET containingParserRule(assignment).containedAssignments().select(a|a.feature==assignment.feature).terminal AS terminals-»
 	«IF terminals.eClassName().toSet().size>1-»
@@ -64,18 +64,18 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 	}
 				«ENDIF-»
 			«ENDLET-»
-  	  «ENDFOREACH-»
-    
-  	  «FOREACH rules AS rule-»
+		«ENDFOREACH-»
+
+		«FOREACH rules AS rule-»
 			«LET getFqFeatureName(rule) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
-					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»
 	public void complete«fqnFeatureName»(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
 				«ENDIF-»
 			«ENDLET-»
-    	«ENDFOREACH-»
+		«ENDFOREACH-»
 	«ENDLET-»
 }
 «ENDFILE»
@@ -111,7 +111,7 @@ public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvi
 
 «DEFINE assignmentTerminal(String indentation,String accessor) FOR Alternatives-»
 «FOREACH elements AS group ITERATOR iter-»
-«EXPAND assignmentTerminal(indentation,"((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-» 
+«EXPAND assignmentTerminal(indentation,"((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-»
 «ENDFOREACH-»
 «ENDDEFINE»
 

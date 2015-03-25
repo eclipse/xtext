@@ -15,13 +15,13 @@
 «DEFINE getEPackages(List[String] packageQNames) FOR Grammar-»
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    «FOREACH packageQNames AS e-»
-	    result.add(«e».eINSTANCE);
-	    «ENDFOREACH-»
-	    «FOREACH allEPackagesToValidate().removeAll(allMetamodelDeclarations().typeSelect(GeneratedMetamodel).EPackage).nsURI AS referencedNsURI-»
-	    result.add(EPackage.Registry.INSTANCE.getEPackage("«referencedNsURI»"));
-	   	«ENDFOREACH-»
+		List<EPackage> result = new ArrayList<EPackage>();
+		«FOREACH packageQNames AS e-»
+		result.add(«e».eINSTANCE);
+		«ENDFOREACH-»
+		«FOREACH allEPackagesToValidate().removeAll(allMetamodelDeclarations().typeSelect(GeneratedMetamodel).EPackage).nsURI AS referencedNsURI-»
+		result.add(EPackage.Registry.INSTANCE.getEPackage("«referencedNsURI»"));
+		«ENDFOREACH-»
 		return result;
 	}
 «ENDDEFINE»

@@ -21,20 +21,16 @@
 
 «DEFINE addToPluginXmlUi FOR Grammar»
 	<!-- Quick Outline -->
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler 
+	<extension point="org.eclipse.ui.handlers">
+		<handler
 			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
+				<reference definitionId="«name».Editor.opened"/>
 			</activeWhen>
 		</handler>
 	</extension>
-	<extension
-		point="org.eclipse.ui.commands">
+	<extension point="org.eclipse.ui.commands">
 		<command
 			description="Open the quick outline."
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"

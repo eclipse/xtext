@@ -34,10 +34,10 @@ import com.google.inject.Inject;
 @RunWith(XtextRunner.class)
 @InjectWith(«qualifiedInjectorProviderName().toSimpleName()».class)
 public class «qualifiedTestName().toSimpleName()» {
-	
+
 	@Inject
 	private ParseHelper<EObject> parseHelper;
-	
+
 	@Test
 	public void loadModel() throws Exception {
 		EObject result = parseHelper.parse("Hello Xtext!");
@@ -61,8 +61,8 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import com.google.inject.Injector;
 
 «classAnnotations()»public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
-	
-    protected GlobalStateMemento stateBeforeInjectorCreation;
+
+	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
@@ -80,9 +80,9 @@ import com.google.inject.Injector;
 		}
 		return injector;
 	}
-	
+
 	protected Injector internalCreateInjector() {
-	    return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+		return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
 	}
 
 	@Override
@@ -110,12 +110,12 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import com.google.inject.Injector;
 
 «classAnnotations()»public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
-	
+
 	@Override
 	public Injector getInjector() {
 		return «activatorName()».getInstance().getInjector("«name»");
 	}
-	
+
 }
 «ENDFILE»
 «ENDIF»

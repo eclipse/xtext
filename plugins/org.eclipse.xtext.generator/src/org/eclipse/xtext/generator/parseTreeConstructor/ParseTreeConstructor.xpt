@@ -35,20 +35,20 @@ import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 «classAnnotations()»public class «getParseTreeConstructorName().toSimpleName()» extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
-		
+
 	@Inject
 	private «gaSimpleName()» grammarAccess;
-	
+
 	@Override
 	protected AbstractToken getRootToken(IEObjectConsumer inst) {
-		return new ThisRootNode(inst);	
+		return new ThisRootNode(inst);
 	}
-	
+
 protected class ThisRootNode extends RootToken {
 	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
-	
+
 	@Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
@@ -56,10 +56,10 @@ protected class ThisRootNode extends RootToken {
 			case «i.counter0»: return new «e.elementMethodName()»(this, this, «i.counter0», inst);
 «ENDFOREACH-»
 			default: return null;
-		}	
-	}	
+		}
+	}
 }
-	
+
 «EXPAND rule(lineDelimiter) FOREACH allParserRules()-»
 }
 «ENDFILE»
@@ -82,7 +82,7 @@ protected class ThisRootNode extends RootToken {
 	public «elementMethodName()»(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
-	
+
 	@Override
 	public «getJavaTypeName().toSimpleName()» getGrammarElement() {
 		return grammarAccess.«gaRuleElementAccessor()»;
@@ -100,7 +100,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE typeCheckTryConsume FOR AbstractElement-»
 «IF !getTreeConstState().typesToCheck.isEmpty-»
-    @Override
+	@Override
 	public IEObjectConsumer tryConsume() {
 «EXPAND typeCheckInline-»
 		return eObjectConsumer;
@@ -112,7 +112,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createFollowerMethod FOR TreeConstState-»
 «IF enabledOutgoing.size > 0 || endState-»
-    @Override
+	@Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 «FOREACH enabledOutgoing AS e-»
@@ -122,8 +122,8 @@ protected class ThisRootNode extends RootToken {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index«enabledOutgoing.size > 0 ? (" - " + enabledOutgoing.size) : ""», inst);
 «ELSE-»
 			default: return null;
-«ENDIF-»			
-		}	
+«ENDIF-»
+		}
 	}
 
 «ENDIF-»
@@ -132,7 +132,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createFollowerAfterReturnMethod(boolean isAss) FOR TreeConstState-»
 «IF enabledOutgoing.exists(e|e.ruleCall)-»
-    @Override
+	@Override
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 «IF isAss-»
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
@@ -146,15 +146,15 @@ protected class ThisRootNode extends RootToken {
 «ELSE-»
 			default: return null;
 «ENDIF-»
-		}	
-	}	
+		}
+	}
 «ENDIF-»
 «ENDDEFINE»
 
 
 
 «DEFINE element(String lineDelimiter) FOR AbstractElement»
-«ERROR "unhandled element " + metaType.name + " in " + elementMethodName()» 
+«ERROR "unhandled element " + metaType.name + " in " + elementMethodName()»
 «ENDDEFINE»
 
 
@@ -166,7 +166,7 @@ protected class ThisRootNode extends RootToken {
 «DEFINE element(String lineDelimiter) FOR Group»
 «grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends GroupToken {
-	
+
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }
@@ -178,7 +178,7 @@ protected class «elementMethodName()» extends GroupToken {
 «DEFINE element(String lineDelimiter) FOR UnorderedGroup»
 «grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends UnorderedGroupToken {
-	
+
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }
@@ -206,15 +206,15 @@ protected class «elementMethodName()» extends AlternativesToken {
 «grammarFragmentToStr("// ", lineDelimiter)»
 «IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 protected class «elementMethodName()» extends RuleCallToken {
-	
+
 «EXPAND constructor-»
-    @Override
+	@Override
 	public IEObjectConsumer tryConsume() {
 «EXPAND typeCheckInline-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
-	
+
 «EXPAND createFollowerAfterReturnMethod(false) FOR getTreeConstState()-»
 }
 «ELSE-»
@@ -253,7 +253,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())«IF crossReferenceExistsWithDifferentTerminal()» && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», (EObject)value , null)«ENDIF») {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.«gaRuleElementAccessor()»; 
+				element = grammarAccess.«gaRuleElementAccessor()»;
 				return obj;
 			}
 		}
@@ -266,7 +266,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.«gaRuleElementAccessor()»; 
+				element = grammarAccess.«gaRuleElementAccessor()»;
 				consumed = obj;
 				return param;
 			}
@@ -279,7 +279,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 		}
 «ENDIF-»
 «ELSEIF calledEnumRule()!=null-»
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) { 
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
 			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
@@ -297,9 +297,9 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «DEFINE element(String lineDelimiter) FOR Assignment»
 «grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends AssignmentToken  {
-	
+
 «EXPAND constructor-»
-    @Override	
+	@Override
 	public IEObjectConsumer tryConsume() {
 «EXPAND typeCheckInline-»
 		if((value = eObjectConsumer.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
@@ -320,16 +320,16 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends ActionToken  {
 
-«EXPAND constructor-»	
+«EXPAND constructor-»
 «IF feature == null || feature == ""-»
-    @Override
+	@Override
 	public IEObjectConsumer tryConsume() {
 «EXPAND typeCheckInline-»
 		if(!eObjectConsumer.isConsumed()) return null;
 		return eObjectConsumer;
 	}
 «ELSE-»
-    @Override
+	@Override
 	public IEObjectConsumer tryConsume() {
 «EXPAND typeCheckInline-»
 		Object val = eObjectConsumer.getConsumable("«feature»", false);
@@ -337,7 +337,7 @@ protected class «elementMethodName()» extends ActionToken  {
 		if(!eObjectConsumer.isConsumedWithLastConsumtion("«feature»")) return null;
 		return createEObjectConsumer((EObject) val);
 	}
-«ENDIF-»	
+«ENDIF-»
 }
 «ENDDEFINE»
 
@@ -348,7 +348,7 @@ protected class «elementMethodName()» extends ActionToken  {
 «DEFINE element(String lineDelimiter) FOR Keyword»
 «grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends KeywordToken  {
-	
+
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }

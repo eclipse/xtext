@@ -19,14 +19,14 @@
 
 «DEFINE addToPluginXmlRt(String basePackage, String genmodelPath) FOR Grammar-»
 «IF !metamodelDeclarations.typeSelect(GeneratedMetamodel).isEmpty»
-  <extension point="org.eclipse.emf.ecore.generated_package">
-  «FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
-    <package 
-       uri = "«p.EPackage.nsURI»" 
-       class = "«basePackage».«p.name».«p.name.toFirstUpper()»Package"
-       genModel = "«genmodelPath»" /> 
+	<extension point="org.eclipse.emf.ecore.generated_package">
+	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
+		<package
+			uri = "«p.EPackage.nsURI»"
+			class = "«basePackage».«p.name».«p.name.toFirstUpper()»Package"
+			genModel = "«genmodelPath»" />
 	«ENDFOREACH»
-  </extension>
+	</extension>
 «ENDIF»
 «ENDDEFINE»
 

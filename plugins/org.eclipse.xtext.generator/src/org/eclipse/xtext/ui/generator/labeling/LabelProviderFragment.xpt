@@ -23,7 +23,7 @@
 			«EXPAND eObjectLabelProvider»
 			«EXPAND descriptionLabelProvider»
 		«ENDIF»
-	«ENDIF» 
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE eObjectLabelProvider FOR Grammar-»
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for EObjects.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
@@ -46,7 +46,7 @@ public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObje
 	}
 
 	// Labels and icons can be computed like this:
-	
+
 //	String text(Greeting ele) {
 //		return "A greeting to " + ele.getName();
 //	}
@@ -67,7 +67,7 @@ import com.google.inject.Inject
 
 /**
  * Provides labels for EObjects.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
@@ -78,7 +78,7 @@ class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabel
 	}
 
 	// Labels and icons can be computed like this:
-	
+
 //	def text(Greeting ele) {
 //		'A greeting to ' + ele.name
 //	}
@@ -97,20 +97,20 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
 	// Labels and icons can be computed like this:
-	
+
 //	String text(IEObjectDescription ele) {
-//	   return ele.getName().toString();
+//		return ele.getName().toString();
 //	}
-//	 
-//  String image(IEObjectDescription ele) {
-//     return ele.getEClass().getName() + ".gif";
-//  }	 
+//
+//	String image(IEObjectDescription ele) {
+//		return ele.getEClass().getName() + ".gif";
+//	}
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -124,20 +124,20 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
 	// Labels and icons can be computed like this:
-	
+
 //	override text(IEObjectDescription ele) {
 //		ele.name.toString
 //	}
-//	 
+//
 //	override image(IEObjectDescription ele) {
 //		ele.EClass.name + '.gif'
-//	}	 
+//	}
 }
 «ENDFILE»
 «ENDDEFINE»
