@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -1025,19 +1026,31 @@ public class JvmModelGenerator implements IGenerator {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
     boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
     if (_notEquals) {
-      appendable.append(" = ");
-      appendable.increaseIndentation();
-      Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(it);
-      _compilationStrategy_1.apply(appendable);
-      appendable.decreaseIndentation();
+      final Iterable<Issue> errors = this.getDirectErrorsOrLogicallyContainedErrors(it);
+      boolean _isEmpty = IterableExtensions.isEmpty(errors);
+      if (_isEmpty) {
+        appendable.append(" = ");
+        appendable.increaseIndentation();
+        Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(it);
+        _compilationStrategy_1.apply(appendable);
+        appendable.decreaseIndentation();
+      } else {
+        appendable.append(" /* Skipped initializer because of errors */");
+      }
     } else {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
       boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
       if (_notEquals_1) {
-        ITreeAppendable _append = appendable.append(" = ");
-        _append.increaseIndentation();
-        this.appendCompilationTemplate(appendable, it);
-        appendable.decreaseIndentation();
+        final Iterable<Issue> errors_1 = this.getDirectErrorsOrLogicallyContainedErrors(it);
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
+        if (_isEmpty_1) {
+          ITreeAppendable _append = appendable.append(" = ");
+          _append.increaseIndentation();
+          this.appendCompilationTemplate(appendable, it);
+          appendable.decreaseIndentation();
+        } else {
+          appendable.append(" /* Skipped initializer because of errors */");
+        }
       } else {
         final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
         boolean _and = false;
@@ -1225,11 +1238,30 @@ public class JvmModelGenerator implements IGenerator {
     return _or;
   }
   
+  /**
+   * Returns the errors that are produced for elements that are directly contained
+   * in this feature (e.g. unresolved type proxies) or that are associated with
+   * the expression that may be logically contained in the given feature.
+   */
+  private Iterable<Issue> getDirectErrorsOrLogicallyContainedErrors(final JvmFeature feature) {
+    Iterable<Issue> errors = this._errorSafeExtensions.getErrors(feature);
+    boolean _isEmpty = IterableExtensions.isEmpty(errors);
+    if (_isEmpty) {
+      final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
+      boolean _notEquals = (!Objects.equal(expression, null));
+      if (_notEquals) {
+        Iterable<Issue> _errors = this._errorSafeExtensions.getErrors(expression);
+        errors = _errors;
+      }
+    }
+    return errors;
+  }
+  
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
     if (_notEquals) {
-      final Iterable<Issue> errors = this._errorSafeExtensions.getErrors(op);
+      Iterable<Issue> errors = this.getDirectErrorsOrLogicallyContainedErrors(op);
       boolean _isEmpty = IterableExtensions.isEmpty(errors);
       if (_isEmpty) {
         ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
@@ -1247,7 +1279,7 @@ public class JvmModelGenerator implements IGenerator {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(op);
       boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
       if (_notEquals_1) {
-        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(op);
+        final Iterable<Issue> errors_1 = this.getDirectErrorsOrLogicallyContainedErrors(op);
         boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
         if (_isEmpty_1) {
           ITreeAppendable _increaseIndentation_1 = appendable.increaseIndentation();

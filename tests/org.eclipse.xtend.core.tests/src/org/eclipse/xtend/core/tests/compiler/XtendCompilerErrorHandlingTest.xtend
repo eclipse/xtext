@@ -287,6 +287,34 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def testBug462914() {
+		'''
+			class C {
+				def create DoesNotExists::createZonk m(String s) {
+				}
+			}
+		'''.assertCompilesTo( '''
+			import java.util.ArrayList;
+			import java.util.HashMap;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m(final String s) {
+			    throw new Error("Unresolved compilation problems:"
+			      + "\nDoesNotExists cannot be resolved to a type."
+			      + "\ncreateZonk cannot be resolved");
+			  }
+			  
+			  private final /* HashMap<ArrayList<?>, Object> */Object _createCache_m = CollectionLiterals.newHashMap();
+			  
+			  private void _init_m(final Object it, final String s) {
+			  }
+			}
+		''')
+	}
 		
 	
 	def assertCompilesTo(CharSequence input, CharSequence expected) {

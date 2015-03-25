@@ -19,6 +19,10 @@ import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * A visitor that detects broken type references. Returns <code>true</code> if a broken reference
+ * was detected.
+ */
 @SuppressWarnings("all")
 public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
   @Override
