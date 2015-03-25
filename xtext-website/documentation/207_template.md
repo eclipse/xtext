@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Template Language
 part: Seven JVM Languages Built With Xbase
 ---
 
-# Template Language {#template}
+# {{page.title}} {#template}
 
 This is a little template language specialized in generating HTML documents.
 

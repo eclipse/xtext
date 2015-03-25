@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Classes and Members
 part: Reference Documentation
 ---
 
-# Classes and Members {#xtend-classes-members}
+# {{page.title}} {#xtend-classes-members}
 
 At a first glance an Xtend file pretty much looks like a Java file. It starts with a package declaration followed by an import section and class definitions. The classes in fact are directly translated to Java classes in the corresponding Java package. A class can have constructors, fields, methods and annotations. 
 

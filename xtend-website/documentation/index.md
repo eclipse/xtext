@@ -1,5 +1,6 @@
 ---
 layout: documentation
+title: Documentation
 part: Xtend User Guide
 ---
 

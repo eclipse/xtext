@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: DSL for MongoDB
 part: Seven JVM Languages Built With Xbase
 ---
 
-# DSL for MongoDB {#mongoDB}
+# {{page.title}} {#mongoDB}
 
 [MongoDB](http://www.mongodb.org) is a very popular document-based database management system. In mongoDB, database entries (AKA *documents*) have fields, which are essentially *(key, value)* pairs. MongoDB is schema free, i.e. there are no rules, which fields have to be defined and of what type they are. This allows for very flexible and heterogeneous data structures and is a perfect match with JSON. 
 

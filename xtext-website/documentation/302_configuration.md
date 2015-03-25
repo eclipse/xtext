@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Configuration
 part: Reference Documentation
 ---
 
-# Configuration {#configuration}
+# {{page.title}} {#configuration}
 
 ## The Language Generator {#generator}
 

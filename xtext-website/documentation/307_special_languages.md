@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Typical Language Configurations
 part: Reference Documentation
 ---
 
-# Typical Language Configurations {#special-languages}
+# {{page.title}} {#special-languages}
 
 ## Case Insensitive Languages {#case-insensitive-languages}
 

@@ -1,5 +1,6 @@
 ---
 layout: download
+title: Download
 ---
 
 Installation Instructions

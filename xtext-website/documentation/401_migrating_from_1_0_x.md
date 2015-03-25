@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Migrating from Xtext 1.0.x to 2.0
 part: Appendix
 ---
 
-# Migrating from Xtext 1.0.x to 2.0 {#migrating-from-1_0_x}
+# {{page.title}} {#migrating-from-1_0_x}
 
 Most of the tasks when migrating to Xtext 2.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully verify that your implementation is still working with Xtext 2.0. A reliable test-suite helps a lot. 
 

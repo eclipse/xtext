@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Build Language
 part: Seven JVM Languages Built With Xbase
 ---
 
-# Build Language {#builddsl}
+# {{page.title}} {#builddsl}
 
 Build tools like Ant or [Gradle](http://gradle.org/) decompose the build process into a set of tasks. A task can stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from the dependencies of the defined tasks.
 
