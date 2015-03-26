@@ -9,9 +9,15 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import java.util.List;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.apache.log4j.Logger;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
@@ -20,6 +26,8 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.ValidationParticipant;
@@ -32,8 +40,10 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -42,6 +52,66 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class AnnotationProcessor {
+  @Singleton
+  protected static class CancellationObserver {
+    private final static Logger log = Logger.getLogger(AnnotationProcessor.CancellationObserver.class);
+    
+    @Accessors(AccessorType.PROTECTED_GETTER)
+    private ExecutorService pool = this.initPool();
+    
+    protected ExecutorService initPool() {
+      return Executors.newCachedThreadPool();
+    }
+    
+    public Future<?> monitorUntil(final ActiveAnnotationContext ctx, final CancelIndicator cancelIndicator, final Function0<? extends Boolean> isFinished) {
+      Future<?> _xblockexpression = null;
+      {
+        final Runnable _function = new Runnable() {
+          @Override
+          public void run() {
+            try {
+              while ((!(isFinished.apply()).booleanValue())) {
+                {
+                  boolean _isCanceled = cancelIndicator.isCanceled();
+                  if (_isCanceled) {
+                    CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                    _compilationUnit.setCanceled(true);
+                    return;
+                  }
+                  Thread.sleep(100);
+                }
+              }
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        final Runnable r = _function;
+        Future<?> _xtrycatchfinallyexpression = null;
+        try {
+          _xtrycatchfinallyexpression = this.pool.submit(r);
+        } catch (final Throwable _t) {
+          if (_t instanceof RejectedExecutionException) {
+            final RejectedExecutionException e = (RejectedExecutionException)_t;
+            String _message = e.getMessage();
+            AnnotationProcessor.CancellationObserver.log.debug(_message, e);
+            Thread _thread = new Thread(r);
+            _thread.start();
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        _xblockexpression = _xtrycatchfinallyexpression;
+      }
+      return _xblockexpression;
+    }
+    
+    @Pure
+    protected ExecutorService getPool() {
+      return this.pool;
+    }
+  }
+  
   @Inject
   private Provider<TransformationContextImpl> modifyContextProvider;
   
@@ -50,6 +120,9 @@ public class AnnotationProcessor {
   
   @Inject
   private Provider<ValidationContextImpl> validationContextProvider;
+  
+  @Inject
+  private AnnotationProcessor.CancellationObserver cancellationObserver;
   
   /**
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -241,28 +314,13 @@ public class AnnotationProcessor {
     Object _xblockexpression = null;
     {
       final AtomicBoolean isFinished = new AtomicBoolean(false);
-      final Runnable _function = new Runnable() {
+      final Function0<Boolean> _function = new Function0<Boolean>() {
         @Override
-        public void run() {
-          try {
-            while ((!isFinished.get())) {
-              {
-                boolean _isCanceled = cancelIndicator.isCanceled();
-                if (_isCanceled) {
-                  CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                  _compilationUnit.setCanceled(true);
-                  return;
-                }
-                Thread.sleep(100);
-              }
-            }
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+        public Boolean apply() {
+          return Boolean.valueOf(isFinished.get());
         }
       };
-      Thread _thread = new Thread(_function);
-      _thread.start();
+      this.cancellationObserver.monitorUntil(ctx, cancelIndicator, _function);
       Object _xtrycatchfinallyexpression = null;
       try {
         runnable.run();
