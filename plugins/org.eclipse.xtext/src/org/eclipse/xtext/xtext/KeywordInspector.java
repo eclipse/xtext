@@ -44,12 +44,17 @@ public class KeywordInspector {
 		Grammar grammar = GrammarUtil.getGrammar(container);
 		List<TerminalRule> rules = GrammarUtil.allTerminalRules(grammar);
 		for(TerminalRule rule: rules) {
+			if (!rule.isFragment()) {
 			AbstractElement element = rule.getAlternatives();
-			if (element instanceof Keyword && Strings.isEmpty(element.getCardinality())) {
-				String value = ((Keyword) element).getValue();
-				if (value.equals(keyword.getValue()))
-				acceptor.acceptError("The keyword '" + value + "' hides the terminal rule " + rule.getName()+ ".", 
-						keyword, XtextPackage.Literals.KEYWORD__VALUE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+				if (element instanceof Keyword && Strings.isEmpty(element.getCardinality())) {
+					String value = ((Keyword) element).getValue();
+					if (value.equals(keyword.getValue()))
+					acceptor.acceptError(
+							"The keyword '" + value + "' hides the terminal rule " + rule.getName()+ ".", 
+							keyword,
+							XtextPackage.Literals.KEYWORD__VALUE,
+							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+				}
 			}
 		}
 	}
