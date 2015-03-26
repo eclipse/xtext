@@ -83,7 +83,7 @@ public class ASTFlattenerUtils {
     return false;
   }
   
-  public boolean isOverrideMethode(final MethodDeclaration declaration) {
+  public boolean isOverrideMethod(final MethodDeclaration declaration) {
     List _modifiers = declaration.modifiers();
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
     final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
@@ -94,10 +94,8 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(Objects.equal("Override", _string));
       }
     };
-    Iterable<Annotation> _filter_1 = IterableExtensions.<Annotation>filter(_filter, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_filter_1);
-    boolean _not = (!_isEmpty);
-    if (_not) {
+    boolean _exists = IterableExtensions.<Annotation>exists(_filter, _function);
+    if (_exists) {
       return true;
     }
     final IMethodBinding iMethodBinding = declaration.resolveBinding();
