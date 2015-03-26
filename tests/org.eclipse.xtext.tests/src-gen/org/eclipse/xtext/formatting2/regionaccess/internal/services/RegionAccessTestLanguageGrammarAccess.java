@@ -20,38 +20,70 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final RuleCall cSimpleParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
-		private final RuleCall cDelegationParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
-		private final RuleCall cUnassignedParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
-		private final RuleCall cPrefixedUnassignedParserRuleCall_1_3 = (RuleCall)cAlternatives_1.eContents().get(3);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cSimpleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDelegationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cUnassignedParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cPrefixedUnassignedParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Keyword cDigitFiveKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
+		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
+		private final Keyword cDigitSixKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final RuleCall cMixedParserRuleCall_5_1 = (RuleCall)cGroup_5.eContents().get(1);
+		private final Group cGroup_6 = (Group)cAlternatives.eContents().get(6);
+		private final Keyword cDigitSevenKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cMixedAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cMixedMixedParserRuleCall_6_1_0 = (RuleCall)cMixedAssignment_6_1.eContents().get(0);
 		
 		//Root:
-		//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
+		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"test" (Simple | Delegation | Unassigned | PrefixedUnassigned)
-		public Group getGroup() { return cGroup; }
-
-		//"test"
-		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
-
-		//Simple | Delegation | Unassigned | PrefixedUnassigned
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed
+		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Simple
-		public RuleCall getSimpleParserRuleCall_1_0() { return cSimpleParserRuleCall_1_0; }
+		public RuleCall getSimpleParserRuleCall_0() { return cSimpleParserRuleCall_0; }
 
 		//Delegation
-		public RuleCall getDelegationParserRuleCall_1_1() { return cDelegationParserRuleCall_1_1; }
+		public RuleCall getDelegationParserRuleCall_1() { return cDelegationParserRuleCall_1; }
 
 		//Unassigned
-		public RuleCall getUnassignedParserRuleCall_1_2() { return cUnassignedParserRuleCall_1_2; }
+		public RuleCall getUnassignedParserRuleCall_2() { return cUnassignedParserRuleCall_2; }
 
 		//PrefixedUnassigned
-		public RuleCall getPrefixedUnassignedParserRuleCall_1_3() { return cPrefixedUnassignedParserRuleCall_1_3; }
+		public RuleCall getPrefixedUnassignedParserRuleCall_3() { return cPrefixedUnassignedParserRuleCall_3; }
+
+		//"5" Expression
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"5"
+		public Keyword getDigitFiveKeyword_4_0() { return cDigitFiveKeyword_4_0; }
+
+		//Expression
+		public RuleCall getExpressionParserRuleCall_4_1() { return cExpressionParserRuleCall_4_1; }
+
+		//"6" Mixed
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"6"
+		public Keyword getDigitSixKeyword_5_0() { return cDigitSixKeyword_5_0; }
+
+		//Mixed
+		public RuleCall getMixedParserRuleCall_5_1() { return cMixedParserRuleCall_5_1; }
+
+		//"7" mixed=Mixed
+		public Group getGroup_6() { return cGroup_6; }
+
+		//"7"
+		public Keyword getDigitSevenKeyword_6_0() { return cDigitSevenKeyword_6_0; }
+
+		//mixed=Mixed
+		public Assignment getMixedAssignment_6_1() { return cMixedAssignment_6_1; }
+
+		//Mixed
+		public RuleCall getMixedMixedParserRuleCall_6_1_0() { return cMixedMixedParserRuleCall_6_1_0; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -181,7 +213,301 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
+
+	public class ExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cPrimaryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cAddLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cPlusSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightPrimaryParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//Expression:
+		//	Primary ({Add.left=current} "+" right=Primary)*;
+		@Override public ParserRule getRule() { return rule; }
+
+		//Primary ({Add.left=current} "+" right=Primary)*
+		public Group getGroup() { return cGroup; }
+
+		//Primary
+		public RuleCall getPrimaryParserRuleCall_0() { return cPrimaryParserRuleCall_0; }
+
+		//({Add.left=current} "+" right=Primary)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Add.left=current}
+		public Action getAddLeftAction_1_0() { return cAddLeftAction_1_0; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
+
+		//right=Primary
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+
+		//Primary
+		public RuleCall getRightPrimaryParserRuleCall_1_2_0() { return cRightPrimaryParserRuleCall_1_2_0; }
+	}
+
+	public class PrimaryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Primary");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cNamedAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final RuleCall cParenthesizedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Primary returns Expression:
+		//	{Named} name=ID | Parenthesized;
+		@Override public ParserRule getRule() { return rule; }
+
+		//{Named} name=ID | Parenthesized
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//{Named} name=ID
+		public Group getGroup_0() { return cGroup_0; }
+
+		//{Named}
+		public Action getNamedAction_0_0() { return cNamedAction_0_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
+
+		//Parenthesized
+		public RuleCall getParenthesizedParserRuleCall_1() { return cParenthesizedParserRuleCall_1; }
+	}
+
+	public class ParenthesizedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parenthesized");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Parenthesized returns Expression:
+		//	"(" Expression ")";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"(" Expression ")"
+		public Group getGroup() { return cGroup; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+
+		//Expression
+		public RuleCall getExpressionParserRuleCall_1() { return cExpressionParserRuleCall_1; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+
+	public class MixedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mixed");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cUnassignedKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_1_1_0 = (RuleCall)cAlternatives_1_1.eContents().get(0);
+		private final RuleCall cDatatypeParserRuleCall_1_1_1 = (RuleCall)cAlternatives_1_1.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Action cActionAction_2_0 = (Action)cAlternatives_2.eContents().get(0);
+		private final RuleCall cMixedParserRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
+		private final Alternatives cAlternatives_2_2 = (Alternatives)cAlternatives_2.eContents().get(2);
+		private final Assignment cNameAssignment_2_2_0 = (Assignment)cAlternatives_2_2.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_2_2_0_0 = (RuleCall)cNameAssignment_2_2_0.eContents().get(0);
+		private final Group cGroup_2_2_1 = (Group)cAlternatives_2_2.eContents().get(1);
+		private final Keyword cChildKeyword_2_2_1_0 = (Keyword)cGroup_2_2_1.eContents().get(0);
+		private final Assignment cEobjAssignment_2_2_1_1 = (Assignment)cGroup_2_2_1.eContents().get(1);
+		private final RuleCall cEobjMixedParserRuleCall_2_2_1_1_0 = (RuleCall)cEobjAssignment_2_2_1_1.eContents().get(0);
+		private final Assignment cDatatypeAssignment_2_2_2 = (Assignment)cAlternatives_2_2.eContents().get(2);
+		private final RuleCall cDatatypeDatatypeParserRuleCall_2_2_2_0 = (RuleCall)cDatatypeAssignment_2_2_2.eContents().get(0);
+		private final Group cGroup_2_2_3 = (Group)cAlternatives_2_2.eContents().get(3);
+		private final Keyword cRefKeyword_2_2_3_0 = (Keyword)cGroup_2_2_3.eContents().get(0);
+		private final Assignment cRefAssignment_2_2_3_1 = (Assignment)cGroup_2_2_3.eContents().get(1);
+		private final CrossReference cRefMixedCrossReference_2_2_3_1_0 = (CrossReference)cRefAssignment_2_2_3_1.eContents().get(0);
+		private final RuleCall cRefMixedIDTerminalRuleCall_2_2_3_1_0_1 = (RuleCall)cRefMixedCrossReference_2_2_3_1_0.eContents().get(1);
+		private final Assignment cLitAssignment_2_2_4 = (Assignment)cAlternatives_2_2.eContents().get(4);
+		private final RuleCall cLitEnumEnumRuleCall_2_2_4_0 = (RuleCall)cLitAssignment_2_2_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Action cAssignedActionChildAction_4_0 = (Action)cGroup_4.eContents().get(0);
+		private final Keyword cActionKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Assignment cBodyAssignment_4_2_0 = (Assignment)cGroup_4_2.eContents().get(0);
+		private final RuleCall cBodyMixedParserRuleCall_4_2_0_0 = (RuleCall)cBodyAssignment_4_2_0.eContents().get(0);
+		private final Keyword cEndKeyword_4_2_1 = (Keyword)cGroup_4_2.eContents().get(1);
+		
+		//Mixed:
+		//	"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
+		//	ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+		@Override public ParserRule getRule() { return rule; }
+
+		//"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
+		//ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*
+		public Group getGroup() { return cGroup; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+
+		//("unassigned" (ID | Datatype))?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"unassigned"
+		public Keyword getUnassignedKeyword_1_0() { return cUnassignedKeyword_1_0; }
+
+		//ID | Datatype
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1_0() { return cIDTerminalRuleCall_1_1_0; }
+
+		//Datatype
+		public RuleCall getDatatypeParserRuleCall_1_1_1() { return cDatatypeParserRuleCall_1_1_1; }
+
+		//{Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//{Action}
+		public Action getActionAction_2_0() { return cActionAction_2_0; }
+
+		//Mixed
+		public RuleCall getMixedParserRuleCall_2_1() { return cMixedParserRuleCall_2_1; }
+
+		//name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum
+		public Alternatives getAlternatives_2_2() { return cAlternatives_2_2; }
+
+		//name=ID
+		public Assignment getNameAssignment_2_2_0() { return cNameAssignment_2_2_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_2_0_0() { return cNameIDTerminalRuleCall_2_2_0_0; }
+
+		//"child" eobj=Mixed
+		public Group getGroup_2_2_1() { return cGroup_2_2_1; }
+
+		//"child"
+		public Keyword getChildKeyword_2_2_1_0() { return cChildKeyword_2_2_1_0; }
+
+		//eobj=Mixed
+		public Assignment getEobjAssignment_2_2_1_1() { return cEobjAssignment_2_2_1_1; }
+
+		//Mixed
+		public RuleCall getEobjMixedParserRuleCall_2_2_1_1_0() { return cEobjMixedParserRuleCall_2_2_1_1_0; }
+
+		//datatype=Datatype
+		public Assignment getDatatypeAssignment_2_2_2() { return cDatatypeAssignment_2_2_2; }
+
+		//Datatype
+		public RuleCall getDatatypeDatatypeParserRuleCall_2_2_2_0() { return cDatatypeDatatypeParserRuleCall_2_2_2_0; }
+
+		//"ref" ref=[Mixed]
+		public Group getGroup_2_2_3() { return cGroup_2_2_3; }
+
+		//"ref"
+		public Keyword getRefKeyword_2_2_3_0() { return cRefKeyword_2_2_3_0; }
+
+		//ref=[Mixed]
+		public Assignment getRefAssignment_2_2_3_1() { return cRefAssignment_2_2_3_1; }
+
+		//[Mixed]
+		public CrossReference getRefMixedCrossReference_2_2_3_1_0() { return cRefMixedCrossReference_2_2_3_1_0; }
+
+		//ID
+		public RuleCall getRefMixedIDTerminalRuleCall_2_2_3_1_0_1() { return cRefMixedIDTerminalRuleCall_2_2_3_1_0_1; }
+
+		//lit=Enum
+		public Assignment getLitAssignment_2_2_4() { return cLitAssignment_2_2_4; }
+
+		//Enum
+		public RuleCall getLitEnumEnumRuleCall_2_2_4_0() { return cLitEnumEnumRuleCall_2_2_4_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+
+		//({AssignedAction.child=current} "action" (body=Mixed "end")?)*
+		public Group getGroup_4() { return cGroup_4; }
+
+		//{AssignedAction.child=current}
+		public Action getAssignedActionChildAction_4_0() { return cAssignedActionChildAction_4_0; }
+
+		//"action"
+		public Keyword getActionKeyword_4_1() { return cActionKeyword_4_1; }
+
+		//(body=Mixed "end")?
+		public Group getGroup_4_2() { return cGroup_4_2; }
+
+		//body=Mixed
+		public Assignment getBodyAssignment_4_2_0() { return cBodyAssignment_4_2_0; }
+
+		//Mixed
+		public RuleCall getBodyMixedParserRuleCall_4_2_0_0() { return cBodyMixedParserRuleCall_4_2_0_0; }
+
+		//"end"
+		public Keyword getEndKeyword_4_2_1() { return cEndKeyword_4_2_1; }
+	}
+
+	public class DatatypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cDatatypeParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
+		
+		//Datatype:
+		//	"datatype" (Datatype | ID);
+		@Override public ParserRule getRule() { return rule; }
+
+		//"datatype" (Datatype | ID)
+		public Group getGroup() { return cGroup; }
+
+		//"datatype"
+		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
+
+		//Datatype | ID
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//Datatype
+		public RuleCall getDatatypeParserRuleCall_1_0() { return cDatatypeParserRuleCall_1_0; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+	}
 	
+	
+	public class EnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Enum");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cLit2Lit2Keyword_1_0 = (Keyword)cLit2EnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum Enum:
+		//	lit1 | lit2;
+		public EnumRule getRule() { return rule; }
+
+		//lit1 | lit2
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//lit1
+		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
+
+		//"lit1"
+		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
+
+		//lit2
+		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
+
+		//"lit2"
+		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
+	}
 	
 	private final RootElements pRoot;
 	private final SimpleElements pSimple;
@@ -190,6 +516,12 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final PrefixedUnassignedElements pPrefixedUnassigned;
 	private final PrefixedDelegateElements pPrefixedDelegate;
 	private final DelegateElements pDelegate;
+	private final ExpressionElements pExpression;
+	private final PrimaryElements pPrimary;
+	private final ParenthesizedElements pParenthesized;
+	private final MixedElements pMixed;
+	private final DatatypeElements pDatatype;
+	private final EnumElements unknownRuleEnum;
 	
 	private final Grammar grammar;
 
@@ -207,6 +539,12 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		this.pPrefixedUnassigned = new PrefixedUnassignedElements();
 		this.pPrefixedDelegate = new PrefixedDelegateElements();
 		this.pDelegate = new DelegateElements();
+		this.pExpression = new ExpressionElements();
+		this.pPrimary = new PrimaryElements();
+		this.pParenthesized = new ParenthesizedElements();
+		this.pMixed = new MixedElements();
+		this.pDatatype = new DatatypeElements();
+		this.unknownRuleEnum = new EnumElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -237,7 +575,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	
 	//Root:
-	//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
+	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -304,6 +642,67 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	public ParserRule getDelegateRule() {
 		return getDelegateAccess().getRule();
+	}
+
+	//Expression:
+	//	Primary ({Add.left=current} "+" right=Primary)*;
+	public ExpressionElements getExpressionAccess() {
+		return pExpression;
+	}
+	
+	public ParserRule getExpressionRule() {
+		return getExpressionAccess().getRule();
+	}
+
+	//Primary returns Expression:
+	//	{Named} name=ID | Parenthesized;
+	public PrimaryElements getPrimaryAccess() {
+		return pPrimary;
+	}
+	
+	public ParserRule getPrimaryRule() {
+		return getPrimaryAccess().getRule();
+	}
+
+	//Parenthesized returns Expression:
+	//	"(" Expression ")";
+	public ParenthesizedElements getParenthesizedAccess() {
+		return pParenthesized;
+	}
+	
+	public ParserRule getParenthesizedRule() {
+		return getParenthesizedAccess().getRule();
+	}
+
+	//Mixed:
+	//	"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
+	//	ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+	public MixedElements getMixedAccess() {
+		return pMixed;
+	}
+	
+	public ParserRule getMixedRule() {
+		return getMixedAccess().getRule();
+	}
+
+	//Datatype:
+	//	"datatype" (Datatype | ID);
+	public DatatypeElements getDatatypeAccess() {
+		return pDatatype;
+	}
+	
+	public ParserRule getDatatypeRule() {
+		return getDatatypeAccess().getRule();
+	}
+
+	//enum Enum:
+	//	lit1 | lit2;
+	public EnumElements getEnumAccess() {
+		return unknownRuleEnum;
+	}
+	
+	public EnumRule getEnumRule() {
+		return getEnumAccess().getRule();
 	}
 
 	//terminal ID:

@@ -4,6 +4,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlang
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -67,13 +68,22 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int ROOT = 0;
 
   /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOT__MIXED = 0;
+
+  /**
    * The number of structural features of the '<em>Root</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOT_FEATURE_COUNT = 0;
+  int ROOT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.SimpleImpl <em>Simple</em>}' class.
@@ -84,6 +94,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   int SIMPLE = 1;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE__MIXED = ROOT__MIXED;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -114,6 +133,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int DELEGATION = 2;
 
   /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELEGATION__MIXED = ROOT__MIXED;
+
+  /**
    * The feature id for the '<em><b>Delegate</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -142,6 +170,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int UNASSIGNED = 3;
 
   /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNASSIGNED__MIXED = ROOT__MIXED;
+
+  /**
    * The number of structural features of the '<em>Unassigned</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -159,6 +196,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   int PREFIXED_UNASSIGNED = 4;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREFIXED_UNASSIGNED__MIXED = ROOT__MIXED;
 
   /**
    * The feature id for the '<em><b>Delegate</b></em>' containment reference.
@@ -208,6 +254,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int DELEGATE = 6;
 
   /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELEGATE__MIXED = UNASSIGNED__MIXED;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -225,6 +280,364 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    */
   int DELEGATE_FEATURE_COUNT = UNASSIGNED_FEATURE_COUNT + 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 7;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__MIXED = ROOT__MIXED;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl <em>Mixed</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getMixed()
+   * @generated
+   */
+  int MIXED = 8;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__MIXED = ROOT__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__NAME = ROOT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Eobj</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__EOBJ = ROOT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Datatype</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__DATATYPE = ROOT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__REF = ROOT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Lit</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__LIT = ROOT_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>Mixed</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED_FEATURE_COUNT = ROOT_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
+   * @generated
+   */
+  int ADD = 9;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD__MIXED = EXPRESSION__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Add</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl <em>Named</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
+   * @generated
+   */
+  int NAMED = 10;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED__MIXED = EXPRESSION__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED__NAME = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Named</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ActionImpl <em>Action</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ActionImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAction()
+   * @generated
+   */
+  int ACTION = 11;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__MIXED = MIXED__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__NAME = MIXED__NAME;
+
+  /**
+   * The feature id for the '<em><b>Eobj</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__EOBJ = MIXED__EOBJ;
+
+  /**
+   * The feature id for the '<em><b>Datatype</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__DATATYPE = MIXED__DATATYPE;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__REF = MIXED__REF;
+
+  /**
+   * The feature id for the '<em><b>Lit</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__LIT = MIXED__LIT;
+
+  /**
+   * The number of structural features of the '<em>Action</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_FEATURE_COUNT = MIXED_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AssignedActionImpl <em>Assigned Action</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AssignedActionImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAssignedAction()
+   * @generated
+   */
+  int ASSIGNED_ACTION = 12;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__MIXED = MIXED__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__NAME = MIXED__NAME;
+
+  /**
+   * The feature id for the '<em><b>Eobj</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__EOBJ = MIXED__EOBJ;
+
+  /**
+   * The feature id for the '<em><b>Datatype</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__DATATYPE = MIXED__DATATYPE;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__REF = MIXED__REF;
+
+  /**
+   * The feature id for the '<em><b>Lit</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__LIT = MIXED__LIT;
+
+  /**
+   * The feature id for the '<em><b>Child</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__CHILD = MIXED_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__BODY = MIXED_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Assigned Action</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION_FEATURE_COUNT = MIXED_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum <em>Enum</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getEnum()
+   * @generated
+   */
+  int ENUM = 13;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root <em>Root</em>}'.
@@ -235,6 +648,17 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   EClass getRoot();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root#getMixed <em>Mixed</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Mixed</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root#getMixed()
+   * @see #getRoot()
+   * @generated
+   */
+  EReference getRoot_Mixed();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple <em>Simple</em>}'.
@@ -341,6 +765,186 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   EAttribute getDelegate_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed <em>Mixed</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Mixed</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed
+   * @generated
+   */
+  EClass getMixed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getName()
+   * @see #getMixed()
+   * @generated
+   */
+  EAttribute getMixed_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getEobj <em>Eobj</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Eobj</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getEobj()
+   * @see #getMixed()
+   * @generated
+   */
+  EReference getMixed_Eobj();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getDatatype <em>Datatype</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Datatype</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getDatatype()
+   * @see #getMixed()
+   * @generated
+   */
+  EAttribute getMixed_Datatype();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getRef()
+   * @see #getMixed()
+   * @generated
+   */
+  EReference getMixed_Ref();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getLit <em>Lit</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Lit</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getLit()
+   * @see #getMixed()
+   * @generated
+   */
+  EAttribute getMixed_Lit();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add <em>Add</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Add</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add
+   * @generated
+   */
+  EClass getAdd();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getLeft()
+   * @see #getAdd()
+   * @generated
+   */
+  EReference getAdd_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add#getRight()
+   * @see #getAdd()
+   * @generated
+   */
+  EReference getAdd_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named
+   * @generated
+   */
+  EClass getNamed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named#getName()
+   * @see #getNamed()
+   * @generated
+   */
+  EAttribute getNamed_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action
+   * @generated
+   */
+  EClass getAction();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction <em>Assigned Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assigned Action</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction
+   * @generated
+   */
+  EClass getAssignedAction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction#getChild <em>Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Child</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction#getChild()
+   * @see #getAssignedAction()
+   * @generated
+   */
+  EReference getAssignedAction_Child();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction#getBody()
+   * @see #getAssignedAction()
+   * @generated
+   */
+  EReference getAssignedAction_Body();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum <em>Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Enum</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum
+   * @generated
+   */
+  EEnum getEnum();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -372,6 +976,14 @@ public interface RegionaccesstestlanguagePackage extends EPackage
      * @generated
      */
     EClass ROOT = eINSTANCE.getRoot();
+
+    /**
+     * The meta object literal for the '<em><b>Mixed</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOT__MIXED = eINSTANCE.getRoot_Mixed();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.SimpleImpl <em>Simple</em>}' class.
@@ -464,6 +1076,156 @@ public interface RegionaccesstestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute DELEGATE__NAME = eINSTANCE.getDelegate_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ExpressionImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl <em>Mixed</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getMixed()
+     * @generated
+     */
+    EClass MIXED = eINSTANCE.getMixed();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MIXED__NAME = eINSTANCE.getMixed_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Eobj</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MIXED__EOBJ = eINSTANCE.getMixed_Eobj();
+
+    /**
+     * The meta object literal for the '<em><b>Datatype</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MIXED__DATATYPE = eINSTANCE.getMixed_Datatype();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MIXED__REF = eINSTANCE.getMixed_Ref();
+
+    /**
+     * The meta object literal for the '<em><b>Lit</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MIXED__LIT = eINSTANCE.getMixed_Lit();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
+     * @generated
+     */
+    EClass ADD = eINSTANCE.getAdd();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ADD__LEFT = eINSTANCE.getAdd_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ADD__RIGHT = eINSTANCE.getAdd_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl <em>Named</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.NamedImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
+     * @generated
+     */
+    EClass NAMED = eINSTANCE.getNamed();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NAMED__NAME = eINSTANCE.getNamed_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ActionImpl <em>Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ActionImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAction()
+     * @generated
+     */
+    EClass ACTION = eINSTANCE.getAction();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AssignedActionImpl <em>Assigned Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AssignedActionImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAssignedAction()
+     * @generated
+     */
+    EClass ASSIGNED_ACTION = eINSTANCE.getAssignedAction();
+
+    /**
+     * The meta object literal for the '<em><b>Child</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSIGNED_ACTION__CHILD = eINSTANCE.getAssignedAction_Child();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSIGNED_ACTION__BODY = eINSTANCE.getAssignedAction_Body();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum <em>Enum</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getEnum()
+     * @generated
+     */
+    EEnum ENUM = eINSTANCE.getEnum();
 
   }
 

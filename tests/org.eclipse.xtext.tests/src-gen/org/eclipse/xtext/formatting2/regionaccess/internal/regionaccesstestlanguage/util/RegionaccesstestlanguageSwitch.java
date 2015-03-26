@@ -7,7 +7,20 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.*;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegate;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedDelegate;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
 /**
  * <!-- begin-user-doc -->
@@ -128,6 +141,58 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RegionaccesstestlanguagePackage.EXPRESSION:
+      {
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = caseRoot(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.MIXED:
+      {
+        Mixed mixed = (Mixed)theEObject;
+        T result = caseMixed(mixed);
+        if (result == null) result = caseRoot(mixed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.ADD:
+      {
+        Add add = (Add)theEObject;
+        T result = caseAdd(add);
+        if (result == null) result = caseExpression(add);
+        if (result == null) result = caseRoot(add);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.NAMED:
+      {
+        Named named = (Named)theEObject;
+        T result = caseNamed(named);
+        if (result == null) result = caseExpression(named);
+        if (result == null) result = caseRoot(named);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.ACTION:
+      {
+        Action action = (Action)theEObject;
+        T result = caseAction(action);
+        if (result == null) result = caseMixed(action);
+        if (result == null) result = caseRoot(action);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.ASSIGNED_ACTION:
+      {
+        AssignedAction assignedAction = (AssignedAction)theEObject;
+        T result = caseAssignedAction(assignedAction);
+        if (result == null) result = caseMixed(assignedAction);
+        if (result == null) result = caseRoot(assignedAction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -240,6 +305,102 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDelegate(Delegate object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mixed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mixed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMixed(Mixed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Add</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Add</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAdd(Add object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Named</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Named</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNamed(Named object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction(Action object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assigned Action</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assigned Action</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssignedAction(AssignedAction object)
   {
     return null;
   }

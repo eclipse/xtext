@@ -18,7 +18,6 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -662,17 +661,15 @@ public class XbaseFormatter extends XtypeFormatter {
         format.append(_prepend, _function_1);
         boolean _isExplicitOperationCall = call.isExplicitOperationCall();
         if (_isExplicitOperationCall) {
-          List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(call, "(");
-          ISemanticRegion _last = IterableExtensions.<ISemanticRegion>last(_regionsForKeywords);
+          ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(call, "(");
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          final ISemanticRegion open = format.prepend(_last, _function_2);
-          List<ISemanticRegion> _regionsForKeywords_1 = this.regionAccess.regionsForKeywords(call, ")");
-          final ISemanticRegion close = IterableExtensions.<ISemanticRegion>last(_regionsForKeywords_1);
+          final ISemanticRegion open = format.prepend(_regionForKeyword, _function_2);
+          final ISemanticRegion close = this.regionAccess.regionForKeyword(call, ")");
           EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
           this.formatFeatureCallParams(_memberCallArguments, open, close, format);
         } else {
@@ -697,14 +694,11 @@ public class XbaseFormatter extends XtypeFormatter {
       _and = false;
     } else {
       AbstractElement _grammarElement = node.getGrammarElement();
-      _and = (_grammarElement instanceof CrossReference);
+      _and = (_grammarElement instanceof RuleCall);
     }
     if (_and) {
       AbstractElement _grammarElement_1 = node.getGrammarElement();
-      final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
-      if ((terminal instanceof RuleCall)) {
-        return ((RuleCall)terminal).getRule();
-      }
+      return ((RuleCall) _grammarElement_1).getRule();
     }
     return null;
   }

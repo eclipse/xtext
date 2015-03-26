@@ -9,7 +9,20 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.*;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegate;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedDelegate;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,6 +121,36 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDelegate(Delegate object)
       {
         return createDelegateAdapter();
+      }
+      @Override
+      public Adapter caseExpression(Expression object)
+      {
+        return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseMixed(Mixed object)
+      {
+        return createMixedAdapter();
+      }
+      @Override
+      public Adapter caseAdd(Add object)
+      {
+        return createAddAdapter();
+      }
+      @Override
+      public Adapter caseNamed(Named object)
+      {
+        return createNamedAdapter();
+      }
+      @Override
+      public Adapter caseAction(Action object)
+      {
+        return createActionAdapter();
+      }
+      @Override
+      public Adapter caseAssignedAction(AssignedAction object)
+      {
+        return createAssignedActionAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -232,6 +275,96 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDelegateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression
+   * @generated
+   */
+  public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed <em>Mixed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed
+   * @generated
+   */
+  public Adapter createMixedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add <em>Add</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add
+   * @generated
+   */
+  public Adapter createAddAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named
+   * @generated
+   */
+  public Adapter createNamedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action
+   * @generated
+   */
+  public Adapter createActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction <em>Assigned Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction
+   * @generated
+   */
+  public Adapter createAssignedActionAdapter()
   {
     return null;
   }
