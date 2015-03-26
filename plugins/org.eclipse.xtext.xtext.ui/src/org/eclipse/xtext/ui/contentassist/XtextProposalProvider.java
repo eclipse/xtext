@@ -163,6 +163,16 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	}
 	
 	@Override
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		if (keyword == grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0()) {
+			// don't propose the comma after the used grammar
+			return;
+		}
+		super.completeKeyword(keyword, contentAssistContext, acceptor);
+	}
+	
+	@Override
 	public void completeGrammar_UsedGrammars(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		ContentAssistContext decorated = context.copy().setMatcher(fqnPrefixMatcher).toContext();
