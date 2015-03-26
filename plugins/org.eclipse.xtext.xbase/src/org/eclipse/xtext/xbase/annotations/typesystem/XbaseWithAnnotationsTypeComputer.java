@@ -73,8 +73,20 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					}
 				} else {
 					List<XAnnotationElementValuePair> valuePairs = object.getElementValuePairs();
-					for(XAnnotationElementValuePair pair: valuePairs) {
-						computeTypes(object, pair.getElement(), pair.getValue(), state);
+					if (valuePairs.isEmpty()) {
+						Iterable<JvmFeature> iterable = ((JvmAnnotationType) annotationType).findAllFeaturesByName("value");
+						JvmFeature value = Iterables.getOnlyElement(iterable, null);
+						if (value != null) {
+							if (value instanceof JvmOperation) {
+								computeTypes(object, (JvmOperation) value, null, state);
+							} else {
+								throw new IllegalStateException("Unexpected feature type " + value);
+							}
+						}
+					} else {
+						for(XAnnotationElementValuePair pair: valuePairs) {
+							computeTypes(object, pair.getElement(), pair.getValue(), state);
+						}
 					}
 				}
 			} else {
@@ -120,6 +132,10 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					? expectation
 					: componentType;
 			ITypeComputationState expectationState = addEnumImportsIfNecessary(state, actualExpectation, componentType.getType());
+			expectationState.withinScope(annotation);
+			if (value == null) {
+				return;
+			}
 			ITypeComputationResult result = expectationState.computeTypes(value);
 			LightweightTypeReference resultType = result.getActualExpressionType();
 			if (resultType != null && !actualExpectation.isAssignableFrom(resultType)) {
@@ -137,6 +153,10 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			state.withNonVoidExpectation().computeTypes(value);
 		} else {
 			ITypeComputationState expectationState = addEnumImportsIfNecessary(state, expectation, expectation.getType());
+			expectationState.withinScope(annotation);
+			if (value == null) {
+				return;
+			}
 			ITypeComputationResult valueResult = expectationState.computeTypes(value);
 			LightweightTypeReference valueResultType = valueResult.getActualExpressionType();
 			if (valueResultType != null && !expectation.isAssignableFrom(valueResultType)) {
