@@ -256,7 +256,7 @@ NumberLiteral:
   INT;
 ```
 
-The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Assignments and actions have to added to store all the important information in the AST and to create reasonable subtypes for the additive and multiplicative expressions. The fully working Xtext grammar is this:
+The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Assignments and actions have to be added to store all the important information in the AST and to create reasonable subtypes for the additive and multiplicative expressions. The fully working Xtext grammar is this:
 
 ```xtext
 Addition returns Expression:
