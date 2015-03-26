@@ -79,10 +79,21 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (annotationValue instanceof JvmCustomAnnotationValue) {
         _matched=true;
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
         EObject _head = IterableExtensions.<EObject>head(_values_1);
-        return _compilationUnit.toExpression(((XExpression) _head));
+        final XExpression expression = ((XExpression) _head);
+        boolean _and = false;
+        if (!(expression != null)) {
+          _and = false;
+        } else {
+          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+          boolean _isBelongedToCompilationUnit = _compilationUnit.isBelongedToCompilationUnit(expression);
+          _and = _isBelongedToCompilationUnit;
+        }
+        if (_and) {
+          CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+          return _compilationUnit_1.toExpression(expression);
+        }
       }
     }
     return null;

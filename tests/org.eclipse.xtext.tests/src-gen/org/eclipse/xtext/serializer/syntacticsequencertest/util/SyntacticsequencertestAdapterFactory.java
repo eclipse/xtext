@@ -150,6 +150,11 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createLongAlternativeAdapter();
       }
       @Override
+      public Adapter caseActionOnly(ActionOnly object)
+      {
+        return createActionOnlyAdapter();
+      }
+      @Override
       public Adapter caseAdd0(Add0 object)
       {
         return createAdd0Adapter();
@@ -427,6 +432,21 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLongAlternativeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.ActionOnly <em>Action Only</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.ActionOnly
+   * @generated
+   */
+  public Adapter createActionOnlyAdapter()
   {
     return null;
   }

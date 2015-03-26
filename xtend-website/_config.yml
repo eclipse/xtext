@@ -11,6 +11,9 @@ url: "http://xtend-lang.org" # the base hostname & protocol for your site
 twitter_username: xtendlang
 github_username:  xtext
 encoding: UTF-8
+exclude:
+  - README.md
+  - Gemfile
 
 # Build settings
 markdown: kramdown
@@ -40,4 +43,4 @@ javadoc:
   java: "http://docs.oracle.com/javase/8/docs/api"
   guava: "http://docs.guava-libraries.googlecode.com/git-history/release/javadoc"
 
-edit-repo : "https://github.com/eclipse/xtext/edit/master/xtend-website/"
+edit-repo : "https://github.com/eclipse/xtext/edit/maintenance/xtend-website/"

@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Xtext and Java
 part: Reference Documentation
 ---
 
-# Xtext and Java {#xbase}
+# {{page.title}} {#xbase}
 
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four stages: First, you will learn how to refer to existing Java elements from within your language. Then you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase expressions and execute it. 
 

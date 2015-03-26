@@ -22,6 +22,10 @@ import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGramm
 public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SyntacticSequencerTestLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_ActionOnly_IDTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_ActionOnly_IDTerminalRuleCall_5_q;
+	protected AbstractElementAlias match_ActionOnly_Kw1Keyword_1_q;
+	protected AbstractElementAlias match_ActionOnly_Kw2Keyword_4_q;
 	protected AbstractElementAlias match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1;
 	protected AbstractElementAlias match_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a;
 	protected AbstractElementAlias match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p;
@@ -43,6 +47,10 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SyntacticSequencerTestLanguageGrammarAccess) access;
+		match_ActionOnly_IDTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_2());
+		match_ActionOnly_IDTerminalRuleCall_5_q = new TokenAlias(false, true, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_5());
+		match_ActionOnly_Kw1Keyword_1_q = new TokenAlias(false, true, grammarAccess.getActionOnlyAccess().getKw1Keyword_1());
+		match_ActionOnly_Kw2Keyword_4_q = new TokenAlias(false, true, grammarAccess.getActionOnlyAccess().getKw2Keyword_4());
 		match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getAlternativeTransitionAccess().getKW1ParserRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getAlternativeTransitionAccess().getKw2Keyword_1_1()));
 		match_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw1Keyword_2_0_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw2Keyword_2_1_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw3Keyword_2_2_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw4Keyword_2_3_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw5Keyword_2_4_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw6Keyword_2_5_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw7Keyword_2_6_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw8Keyword_2_7_0()));
 		match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p = new GroupAlias(true, false, new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw1Keyword_2_0_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw2Keyword_2_1_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw3Keyword_2_2_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw4Keyword_2_3_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw5Keyword_2_4_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw6Keyword_2_5_0()), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw7Keyword_2_6_0())), new TokenAlias(false, false, grammarAccess.getLongAlternativeAccess().getKw8Keyword_2_7_0()));
@@ -68,6 +76,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 			return getBOOLEAN_TERMINAL_IDToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getBooleanDatatypeIDRule())
 			return getBooleanDatatypeIDToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getIDRule())
+			return getIDToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getKW1Rule())
 			return getKW1Token(semanticObject, ruleCall, node);
 		return "";
@@ -94,6 +104,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	}
 	
 	/**
+	 * terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+	 */
+	protected String getIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
 	 * KW1:
 	 * 	"kw1" | "matched" INT?;
 	 */
@@ -109,7 +128,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1.equals(syntax))
+			if(match_ActionOnly_IDTerminalRuleCall_2_q.equals(syntax))
+				emit_ActionOnly_IDTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ActionOnly_IDTerminalRuleCall_5_q.equals(syntax))
+				emit_ActionOnly_IDTerminalRuleCall_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ActionOnly_Kw1Keyword_1_q.equals(syntax))
+				emit_ActionOnly_Kw1Keyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ActionOnly_Kw2Keyword_4_q.equals(syntax))
+				emit_ActionOnly_Kw2Keyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1.equals(syntax))
 				emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a.equals(syntax))
 				emit_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -147,6 +174,50 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ID?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#14' 'kw1'? (ambiguity) 'kw2'? ID? (rule start)
+	 */
+	protected void emit_ActionOnly_IDTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ID?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#14' 'kw1'? ID? 'kw2'? (ambiguity) (rule start)
+	 */
+	protected void emit_ActionOnly_IDTerminalRuleCall_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'kw1'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#14' (ambiguity) ID? 'kw2'? ID? (rule start)
+	 */
+	protected void emit_ActionOnly_Kw1Keyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'kw2'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#14' 'kw1'? ID? (ambiguity) ID? (rule start)
+	 */
+	protected void emit_ActionOnly_Kw2Keyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     KW1 | 'kw2'

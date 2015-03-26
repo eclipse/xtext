@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: IDE Concepts
 part: Reference Documentation
 ---
 
-# IDE Concepts {#ide-concepts}
+# {{page.title}} {#ide-concepts}
 
 For the following part we will refer to the [state machine example](301_grammarlanguage.html#statemachine) to describe the different aspects of Xtext's UI features.
 

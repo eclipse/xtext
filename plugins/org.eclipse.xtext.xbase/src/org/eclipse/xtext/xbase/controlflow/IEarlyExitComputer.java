@@ -40,5 +40,10 @@ public interface IEarlyExitComputer {
 		public XExpression getExpression() {
 			return expression;
 		}
+		
+		@Override
+		public String toString() {
+			return "exit point: " + expression;
+		}
 	}
 }

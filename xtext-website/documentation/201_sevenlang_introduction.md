@@ -1,5 +1,6 @@
 ---
 layout: documentation
+title: Introduction to the Seven Languages
 part: Seven JVM Languages Built With Xbase
 ---
 

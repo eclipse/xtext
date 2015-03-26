@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Scripting Language
 part: Seven JVM Languages Built With Xbase
 ---
 
-# Scripting Language {#scripting}
+# {{page.title}} {#scripting}
 
 The scripting language allows writing code without any preludes such as package, class or method declarations. Just open a file and start coding. It's the simplest of the seven languages and is therefore a good starting point.
 

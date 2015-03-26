@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Java Interoperability
 part: Reference Documentation
 ---
 
-# Java Interoperability {#types}
+# {{page.title}} {#types}
 
 Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types like `int` or `boolean`, arrays and all the Java classes, interfaces, enums and annotations that reside on the class path. 
 

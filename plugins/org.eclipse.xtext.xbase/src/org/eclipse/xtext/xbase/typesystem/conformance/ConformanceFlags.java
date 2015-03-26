@@ -151,8 +151,11 @@ public final class ConformanceFlags {
 	 * A lambda's last expression has a non-void implicit type but void was expected.
 	 */
 	public static final int LAMBDA_VOID_COMPATIBLE = PREFERRED_LAMBDA_SUGAR << 1;
-
-	// Additional flags have to start from RAW_TYPE << 1 again since SUCCESS is used from RawTypeConformanceComputer#SUCCESS which does not start at 1
+	
+	/**
+	 * A lambda's type was computed with a valid expectation (a functional interface / SAM type was expected).
+	 */
+	public static final int LAMBDA_WITH_EXPECTATION = RAW_TYPE << 1; 
 
 	// Composed flags below
 

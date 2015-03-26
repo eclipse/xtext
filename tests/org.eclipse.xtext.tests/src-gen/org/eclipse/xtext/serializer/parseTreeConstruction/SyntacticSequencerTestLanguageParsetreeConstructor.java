@@ -52,6 +52,7 @@ protected class ThisRootNode extends RootToken {
 			case 19: return new AlternativeTransition_Group(this, this, 19, inst);
 			case 20: return new BooleanValues_Group(this, this, 20, inst);
 			case 21: return new LongAlternative_Group(this, this, 21, inst);
+			case 22: return new ActionOnly_Group(this, this, 22, inst);
 			default: return null;
 		}	
 	}	
@@ -63,13 +64,13 @@ protected class ThisRootNode extends RootToken {
  * Model:
  * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
  * 	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
- * 	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative;
+ * 	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
  *
  **/
 
 // x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 // x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-// x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative
+// x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -97,6 +98,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 10: return new Model_X11Assignment_10(lastRuleCallOrigin, this, 10, inst);
 			case 11: return new Model_X12Assignment_11(lastRuleCallOrigin, this, 11, inst);
 			case 12: return new Model_X13Assignment_12(lastRuleCallOrigin, this, 12, inst);
+			case 13: return new Model_X14Assignment_13(lastRuleCallOrigin, this, 13, inst);
 			default: return null;
 		}	
 	}
@@ -679,6 +681,51 @@ protected class Model_X13Assignment_12 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getLongAlternativeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX13LongAlternativeParserRuleCall_12_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x14=ActionOnly
+protected class Model_X14Assignment_13 extends AssignmentToken  {
+	
+	public Model_X14Assignment_13(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX14Assignment_13();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ActionOnly_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x14",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x14");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getActionOnlyRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX14ActionOnlyParserRuleCall_13_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4874,5 +4921,93 @@ protected class LongAlternative_ExclamationMarkKeyword_3 extends KeywordToken  {
 
 
 /************ end Rule LongAlternative ****************/
+
+
+/************ begin Rule ActionOnly ****************
+ *
+ * ActionOnly:
+ * 	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+ *
+ **/
+
+// "#14" "kw1"? ID? {ActionOnly} "kw2"? ID?
+protected class ActionOnly_Group extends GroupToken {
+	
+	public ActionOnly_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getActionOnlyAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ActionOnly_ActionOnlyAction_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getActionOnlyAccess().getActionOnlyAction_3().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#14"
+protected class ActionOnly_NumberSignDigitOneDigitFourKeyword_0 extends KeywordToken  {
+	
+	public ActionOnly_NumberSignDigitOneDigitFourKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getActionOnlyAccess().getNumberSignDigitOneDigitFourKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// {ActionOnly}
+protected class ActionOnly_ActionOnlyAction_3 extends ActionToken  {
+
+	public ActionOnly_ActionOnlyAction_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getActionOnlyAccess().getActionOnlyAction_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ActionOnly_NumberSignDigitOneDigitFourKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+
+/************ end Rule ActionOnly ****************/
 
 }

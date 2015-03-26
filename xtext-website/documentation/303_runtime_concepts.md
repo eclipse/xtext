@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Runtime Concepts
 part: Reference Documentation
 ---
 
-# Runtime Concepts {#runtime-concepts}
+# {{page.title}} {#runtime-concepts}
 
 Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using [dependency injection](302_configuration.html#dependency-injection). Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java)-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment.
 

@@ -39,7 +39,9 @@ public class EmitterNodeIterator implements Iterator<INode> {
 			this.iterator = new NodeIterator(fromNode);
 			this.passAbsorber = passAbsorber;
 			if (toNode != null) {
-				if (toNode.getOffset() < fromNode.getOffset())
+				if (toNode == fromNode)
+					this.end = toNode.getOffset() + toNode.getLength();
+				else if (toNode.getOffset() < fromNode.getOffset())
 					this.end = toNode.getOffset() + toNode.getLength();
 				else
 					this.end = toNode.getOffset();

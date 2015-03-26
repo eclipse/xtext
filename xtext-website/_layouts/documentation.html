@@ -2,21 +2,33 @@
 layout: default
 ---
 <div class="page-content">
+  <script>
+    function startSearch(event) {
+        if (event.keyCode == 13) {
+            var q = 'site:eclipse.org/Xtext/documentation+' + event.target.value;
+            window.open('https://www.google.com/search?q=' + q, "_self");
+        }
+    }
+  </script>
   <div class="wrapper">
   	<div id="page">  
-			<div class="inner">
-				<div id="maincontainer" class="container">
+      <div class="inner">
+        <div id="maincontainer" class="container">
           <span class="edit-on-github pull-right">
             <a href="{{site.edit-repo}}{{page.path}}">Edit on Github</a>
           </span>
           <div class="span3" style="margin-left: 0px;">
+            <div class="search-bar">
+              <img src="{{site.baseurl}}/images/search-gray.png"/>
+              <input type="search" id="google-search" onkeyup="startSearch(event);"/>
+            </div>
             {% include documentation-menu.md %}
           </div>
-					<div class="span8 doc-contents">
-						{{ content }}
-					</div>
-				</div>
-		  </div>
-		</div>
+          <div class="span8 doc-contents">
+            {{ content }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

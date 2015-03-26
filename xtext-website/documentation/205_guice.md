@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: DSL for Guice
 part: Seven JVM Languages Built With Xbase
 ---
 
-# DSL for Guice {#guice}
+# {{page.title}} {#guice}
 
 The Guice DSL is a little language that lets you define Guice modules in a readable and declarative way. 
 

@@ -80,7 +80,7 @@ public interface JvmAnnotationReference extends EObject
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * <p>Returns all annotation values. That is, default values are not included if not explicitely given.</p>
+	 * <p>Returns all annotation values. That is, default values are included if not explicitly given.</p>
 	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated

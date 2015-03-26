@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGrammarAccess;
+import org.eclipse.xtext.serializer.syntacticsequencertest.ActionOnly;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
@@ -47,6 +48,9 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SyntacticsequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case SyntacticsequencertestPackage.ACTION_ONLY:
+				sequence_ActionOnly(context, (ActionOnly) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.ADD0:
 				sequence_Addition0(context, (Add0) semanticObject); 
 				return; 
@@ -107,6 +111,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     {ActionOnly}
+	 */
+	protected void sequence_ActionOnly(EObject context, ActionOnly semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:
@@ -289,7 +302,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         x10=MandatoryManyTransition | 
 	 *         x11=AlternativeTransition | 
 	 *         x12=BooleanValues | 
-	 *         x13=LongAlternative
+	 *         x13=LongAlternative | 
+	 *         x14=ActionOnly
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {

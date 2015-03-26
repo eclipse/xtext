@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: 15 Minutes Tutorial
 part: Getting Started
 ---
 
-# 15 Minutes Tutorial {#domain-model-walkthrough}
+# {{page.title}} {#domain-model-walkthrough}
 
 In this tutorial we will implement a small domain-specific language to model entities and properties similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
 
