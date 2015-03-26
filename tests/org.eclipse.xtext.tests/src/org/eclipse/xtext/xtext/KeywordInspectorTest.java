@@ -48,6 +48,17 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 			inspector.inspectKeywordHidesTerminalRule(keywords.next());
 	}
 	
+	@Test public void testBug462486() throws Exception {
+		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
+				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
+				"Type : 'type' '#' name=ID;\n" + 
+				"terminal fragment POUND: '#';";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Type");
+		validateRule(rule);
+		assertEquals(errors.toString(), 0, errors.size());
+	}
+	
 	@Test public void testBug285146_01() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
