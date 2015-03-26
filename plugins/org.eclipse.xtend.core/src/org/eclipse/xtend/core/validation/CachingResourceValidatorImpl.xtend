@@ -61,6 +61,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 				try {
 					annotationProcessor.validationPhase(ctx, monitor)
 				} catch (Throwable t) {
+					operationCanceledManager.propagateAsErrorIfCancelException(t);
 					ctx.handleProcessingError(resource, t)
 				}
 			}
