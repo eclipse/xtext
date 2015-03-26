@@ -97,4 +97,168 @@ class Bug439019Test extends AbstractXtendContentAssistBugTest {
 		''')
 			.assertProposalAtCursor('NAME')
 	}
+	
+	@Test def void testBug463053_01() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(<|>)
+				String s1
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_02() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(NAME, <|>)
+				String s1
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_03() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(#[<|>])
+				String s3
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_04() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(value=<|>)
+				String s4
+				@A(value=#[NAME])
+				String s5
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_05() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(value=#[NAME, <|>])
+				String s5
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_06() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(<|>NAME)
+				String s1
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_07() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(NAME, <|>NAME)
+				String s1
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_08() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(#[<|>NAME])
+				String s3
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_09() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(value=<|>NAME)
+				String s4
+				@A(value=#[NAME])
+				String s5
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
+	
+	@Test def void testBug463053_19() throws Exception {
+		newBuilder.append('''
+			class C {
+				@A(value=#[NAME, <|>NAME])
+				String s5
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''')
+			.assertProposalAtCursor('NAME')
+	}
 }

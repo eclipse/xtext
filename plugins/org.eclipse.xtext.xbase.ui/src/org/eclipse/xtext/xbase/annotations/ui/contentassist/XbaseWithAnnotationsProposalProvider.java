@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -101,6 +102,21 @@ public class XbaseWithAnnotationsProposalProvider extends AbstractXbaseWithAnnot
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XAnnotation) {
+			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+			return;
+		} else if (model instanceof XAnnotationElementValuePair) {
+			XAnnotationElementValuePair pair = (XAnnotationElementValuePair) model;
+			XAnnotation annotation = (XAnnotation) pair.eContainer();
+			createLocalVariableAndImplicitProposals(annotation, IExpressionScope.Anchor.WITHIN, context, acceptor);
+			return;
+		}
+		super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
 	}
 
 	private String getRawReturnType(JvmOperation singleOperation) {
