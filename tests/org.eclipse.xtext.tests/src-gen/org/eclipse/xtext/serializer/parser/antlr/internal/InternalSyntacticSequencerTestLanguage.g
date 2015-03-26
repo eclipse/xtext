@@ -323,6 +323,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX14ActionOnlyParserRuleCall_13_0()); 
+	    }
+		lv_x14_13_0=ruleActionOnly		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x14",
+        		lv_x14_13_0, 
+        		"ActionOnly");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -1814,6 +1833,53 @@ ruleLongAlternative returns [EObject current=null]
     	newLeafNode(otherlv_18, grammarAccess.getLongAlternativeAccess().getExclamationMarkKeyword_3());
     }
 )
+;
+
+
+
+
+
+// Entry rule entryRuleActionOnly
+entryRuleActionOnly returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getActionOnlyRule()); }
+	 iv_ruleActionOnly=ruleActionOnly 
+	 { $current=$iv_ruleActionOnly.current; } 
+	 EOF 
+;
+
+// Rule ActionOnly
+ruleActionOnly returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#14' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getActionOnlyAccess().getNumberSignDigitOneDigitFourKeyword_0());
+    }
+(	otherlv_1='kw1' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getActionOnlyAccess().getKw1Keyword_1());
+    }
+)?(this_ID_2=RULE_ID
+    { 
+    newLeafNode(this_ID_2, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_2()); 
+    }
+)?(
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getActionOnlyAccess().getActionOnlyAction_3(),
+            $current);
+    }
+)(	otherlv_4='kw2' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getActionOnlyAccess().getKw2Keyword_4());
+    }
+)?(this_ID_5=RULE_ID
+    { 
+    newLeafNode(this_ID_5, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_5()); 
+    }
+)?)
 ;
 
 

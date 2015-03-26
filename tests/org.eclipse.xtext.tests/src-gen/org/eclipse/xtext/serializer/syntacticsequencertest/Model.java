@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX11 <em>X11</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12 <em>X12</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX13 <em>X13</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX14 <em>X14</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel()
@@ -371,5 +372,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX13(LongAlternative value);
+
+  /**
+   * Returns the value of the '<em><b>X14</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X14</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X14</em>' containment reference.
+   * @see #setX14(ActionOnly)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X14()
+   * @model containment="true"
+   * @generated
+   */
+  ActionOnly getX14();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX14 <em>X14</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X14</em>' containment reference.
+   * @see #getX14()
+   * @generated
+   */
+  void setX14(ActionOnly value);
 
 } // Model

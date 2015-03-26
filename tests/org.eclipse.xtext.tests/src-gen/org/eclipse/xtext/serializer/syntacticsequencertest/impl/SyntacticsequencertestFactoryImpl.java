@@ -79,6 +79,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.ALTERNATIVE_TRANSITION: return createAlternativeTransition();
       case SyntacticsequencertestPackage.BOOLEAN_VALUES: return createBooleanValues();
       case SyntacticsequencertestPackage.LONG_ALTERNATIVE: return createLongAlternative();
+      case SyntacticsequencertestPackage.ACTION_ONLY: return createActionOnly();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -254,6 +255,17 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     LongAlternativeImpl longAlternative = new LongAlternativeImpl();
     return longAlternative;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActionOnly createActionOnly()
+  {
+    ActionOnlyImpl actionOnly = new ActionOnlyImpl();
+    return actionOnly;
   }
 
   /**

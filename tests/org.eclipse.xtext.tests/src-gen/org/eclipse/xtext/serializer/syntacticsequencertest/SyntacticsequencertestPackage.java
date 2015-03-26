@@ -184,13 +184,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X13 = 12;
 
   /**
+   * The feature id for the '<em><b>X14</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X14 = 13;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 13;
+  int MODEL_FEATURE_COUNT = 14;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -702,6 +711,25 @@ public interface SyntacticsequencertestPackage extends EPackage
   int LONG_ALTERNATIVE_FEATURE_COUNT = 9;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ActionOnlyImpl <em>Action Only</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.ActionOnlyImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getActionOnly()
+   * @generated
+   */
+  int ACTION_ONLY = 15;
+
+  /**
+   * The number of structural features of the '<em>Action Only</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_ONLY_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -709,7 +737,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 15;
+  int ADD0 = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -746,7 +774,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 16;
+  int VAL0 = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -774,7 +802,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 17;
+  int ADD1 = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -811,7 +839,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 18;
+  int VAL1 = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -839,7 +867,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 19;
+  int ADD2 = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -876,7 +904,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 20;
+  int MULT2 = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -913,7 +941,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 21;
+  int VAL2 = 22;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1086,6 +1114,17 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X13();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX14 <em>X14</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X14</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX14()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X14();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -1525,6 +1564,16 @@ public interface SyntacticsequencertestPackage extends EPackage
   EAttribute getLongAlternative_Val8();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.ActionOnly <em>Action Only</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action Only</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.ActionOnly
+   * @generated
+   */
+  EClass getActionOnly();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1851,6 +1900,14 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X13 = eINSTANCE.getModel_X13();
+
+    /**
+     * The meta object literal for the '<em><b>X14</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X14 = eINSTANCE.getModel_X14();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -2207,6 +2264,16 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EAttribute LONG_ALTERNATIVE__VAL8 = eINSTANCE.getLongAlternative_Val8();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ActionOnlyImpl <em>Action Only</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.ActionOnlyImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getActionOnly()
+     * @generated
+     */
+    EClass ACTION_ONLY = eINSTANCE.getActionOnly();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
