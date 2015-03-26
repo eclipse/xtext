@@ -308,6 +308,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected List<INode> collectNodes(INode fromNode, INode toNode) {
 		if (fromNode == null)
 			return null;
+		if (fromNode == toNode)
+			return Lists.newArrayList(new EmitterNodeIterator(fromNode, null, false, false));
 		return Lists.newArrayList(new EmitterNodeIterator(fromNode, toNode, false, false));
 	}
 

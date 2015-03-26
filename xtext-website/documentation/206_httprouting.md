@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: HTTP Routing Language
 part: Seven JVM Languages Built With Xbase
 ---
 
-# Http Routing Language {#http-routing}
+# {{page.title}} {#http-routing}
 
 This is a little language that lets you dispatch incoming HTTP requests.
 

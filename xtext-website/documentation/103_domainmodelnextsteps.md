@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: 15 Minutes Tutorial - Extended
 part: Getting Started
 ---
 
-# 15 Minutes Tutorial - Extended {#domainmodel-next-steps}
+# {{page.title}} {#domainmodel-next-steps}
 
 After you have developed you first own DSL, the question arises, how the behavior and the semantics of the language can be customized. Therefore a couple of mini-tutorials are available, that illustrate common use cases when crafting an own DSL.
 

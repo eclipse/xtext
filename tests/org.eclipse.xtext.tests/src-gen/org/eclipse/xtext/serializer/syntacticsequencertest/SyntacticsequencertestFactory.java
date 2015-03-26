@@ -158,6 +158,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   LongAlternative createLongAlternative();
 
   /**
+   * Returns a new object of class '<em>Action Only</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action Only</em>'.
+   * @generated
+   */
+  ActionOnly createActionOnly();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Migrating from Xtext 0.7.x to 1.0
 part: Appendix
 ---
 
-# Migrating from Xtext 0.7.x to 1.0 {#migrating-from-0_7}
+# {{page.title}} {#migrating-from-0_7}
 
 For the sake of completeness, here is how you migrate from Xtext 0.7.x to Xtext 1.0, so you might do a migration to 2.0 in two steps. Nevertheless, there have been so many new features and changes that it probably makes more sense to just copy the grammar and start with a new Xtext 2.0 project. The grammar language is fully backward compatible. 
 

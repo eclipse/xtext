@@ -6,7 +6,7 @@ author: Sebastian Zarnekow
 categories: news
 ---
 
-We proudly announce Xtext 2.7.0. The new version includes many improvements, new features and bugfixes. Also the crucial parts of the Xbase APIs have left the incubator status and are no longer considered provisional. More information about the changes in 2.7.0 can be found in the [release notes]({{ base.siteurl }}/releasenotes.html#/releasenotes/2014/09/02/version-2-7-0).
+We proudly announce Xtext 2.7.0. The new version includes many improvements, new features and bugfixes. Also the crucial parts of the Xbase APIs have left the incubator status and are no longer considered provisional. More information about the changes in 2.7.0 can be found in the [release notes]({{ site.baseurl }}/releasenotes.html#/releasenotes/2014/09/02/version-2-7-0).
 
 Special thanks go to all those who contributed to this release: Anton Kosyakov, Dennis Huebner, Holger Schill, Jan Koehnlein, Jan Rosczak, Jörg Reichert, Knut Wannheden, Michael Vorburger, Moritz Eysholdt, Ralf Kretzschmar-Auer, Sebastian Zarnekow, Stefan Oehme, Stéphane Galland, Sven Efftinge, Thomas Fritsch, and Vladimir Piskarev.
 

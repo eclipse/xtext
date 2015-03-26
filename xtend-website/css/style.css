@@ -1155,3 +1155,17 @@ h2.front-title {
 	margin-top: 80px;
   }
 }
+
+.search-bar {
+  margin-top: 24px;
+  white-space: nowrap;
+}
+
+.search-bar input {
+  width: 140px;
+}
+
+.search-bar img {
+  width: 20px;
+  margin-bottom: 10px;
+}

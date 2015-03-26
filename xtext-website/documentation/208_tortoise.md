@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Little Tortoise
 part: Seven JVM Languages Built With Xbase
 ---
 
-# Little Tortoise {#tortoise}
+# {{page.title}} {#tortoise}
 
 Do you remember the programming language [Logo](http://en.wikipedia.org/wiki/Logo_%28programming_language%29)? Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP! But the remarkable part was the so-called *turtle*, a graphical cursor that can be given commands to move and turn, thereby drawing lines.
 

@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: The Grammar Language
 part: Reference Documentation
 ---
 
-# The Grammar Language {#grammarLanguage}
+# {{page.title}} {#grammarLanguage}
 
 The [grammar language]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext) is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation - the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file.
 

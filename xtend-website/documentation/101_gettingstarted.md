@@ -1,9 +1,10 @@
 ---
 layout: documentation
+title: Hello World
 part: Getting Started
 ---
 
-# Hello World {#getting-started}
+# {{page.title}} {#getting-started}
 
 The first thing you want to see in any language is a *Hello World* example. In Xtend, that reads as 
 
