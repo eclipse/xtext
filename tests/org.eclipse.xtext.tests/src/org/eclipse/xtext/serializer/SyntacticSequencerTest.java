@@ -395,4 +395,9 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	public void testLongAlternative6() throws Exception {
 		testSequence("#13 x0 kw8 kw7 kw6 kw5 kw4 kw3 kw2 kw1!");
 	}
+	
+	@Test
+	public void testActionOnlyWithOptionals() throws Exception {
+		testSequence("#14 kw1 foo kw2 bar");
+	}
 }

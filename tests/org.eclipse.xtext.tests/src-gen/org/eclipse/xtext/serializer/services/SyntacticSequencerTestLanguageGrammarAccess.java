@@ -47,16 +47,18 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX12BooleanValuesParserRuleCall_11_0 = (RuleCall)cX12Assignment_11.eContents().get(0);
 		private final Assignment cX13Assignment_12 = (Assignment)cAlternatives.eContents().get(12);
 		private final RuleCall cX13LongAlternativeParserRuleCall_12_0 = (RuleCall)cX13Assignment_12.eContents().get(0);
+		private final Assignment cX14Assignment_13 = (Assignment)cAlternatives.eContents().get(13);
+		private final RuleCall cX14ActionOnlyParserRuleCall_13_0 = (RuleCall)cX14Assignment_13.eContents().get(0);
 		
 		//Model:
 		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative;
+		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
 		@Override public ParserRule getRule() { return rule; }
 
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative
+		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -136,6 +138,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//LongAlternative
 		public RuleCall getX13LongAlternativeParserRuleCall_12_0() { return cX13LongAlternativeParserRuleCall_12_0; }
+
+		//x14=ActionOnly
+		public Assignment getX14Assignment_13() { return cX14Assignment_13; }
+
+		//ActionOnly
+		public RuleCall getX14ActionOnlyParserRuleCall_13_0() { return cX14ActionOnlyParserRuleCall_13_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -1086,6 +1094,42 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"!"
 		public Keyword getExclamationMarkKeyword_3() { return cExclamationMarkKeyword_3; }
 	}
+
+	public class ActionOnlyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActionOnly");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cKw1Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Action cActionOnlyAction_3 = (Action)cGroup.eContents().get(3);
+		private final Keyword cKw2Keyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final RuleCall cIDTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
+		
+		//ActionOnly:
+		//	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?
+		public Group getGroup() { return cGroup; }
+
+		//"#14"
+		public Keyword getNumberSignDigitOneDigitFourKeyword_0() { return cNumberSignDigitOneDigitFourKeyword_0; }
+
+		//"kw1"?
+		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
+
+		//ID?
+		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
+
+		//{ActionOnly}
+		public Action getActionOnlyAction_3() { return cActionOnlyAction_3; }
+
+		//"kw2"?
+		public Keyword getKw2Keyword_4() { return cKw2Keyword_4; }
+
+		//ID?
+		public RuleCall getIDTerminalRuleCall_5() { return cIDTerminalRuleCall_5; }
+	}
 	
 	
 	private final ModelElements pModel;
@@ -1115,6 +1159,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private final BooleanDatatypeIDElements pBooleanDatatypeID;
 	private final BooleanValuesElements pBooleanValues;
 	private final LongAlternativeElements pLongAlternative;
+	private final ActionOnlyElements pActionOnly;
 	
 	private final Grammar grammar;
 
@@ -1152,6 +1197,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pBooleanDatatypeID = new BooleanDatatypeIDElements();
 		this.pBooleanValues = new BooleanValuesElements();
 		this.pLongAlternative = new LongAlternativeElements();
+		this.pActionOnly = new ActionOnlyElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1184,7 +1230,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative;
+	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1445,6 +1491,16 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getLongAlternativeRule() {
 		return getLongAlternativeAccess().getRule();
+	}
+
+	//ActionOnly:
+	//	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+	public ActionOnlyElements getActionOnlyAccess() {
+		return pActionOnly;
+	}
+	
+	public ParserRule getActionOnlyRule() {
+		return getActionOnlyAccess().getRule();
 	}
 
 	//terminal ID:
