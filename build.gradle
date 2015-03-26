@@ -27,6 +27,7 @@ allprojects {
 
 task buckminsterBuild << {
 	ant.ant(
-		antfile: 'releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant'
+		antfile: 'releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant',
+		target: 'resolve-and-compile-all'
 	)
 }
