@@ -26,16 +26,6 @@
 							<layout>p2</layout>
 							<url>${xtext-url}</url>
 						</repository>
-						<repository>
-							<id>mwe2</id>
-							<layout>p2</layout>
-							<url>${mwe2-url}</url>
-						</repository>
-						<repository>
-							<id>xpand</id>
-							<layout>p2</layout>
-							<url>${xpand-url}</url>
-						</repository>
 					</source>
 					<ius>
 						<iu>
@@ -44,63 +34,12 @@
 						<iu>
 							<id>org.eclipse.xtext.generator</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.xtend</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xpand</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtend.typesystem.emf</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe.utils</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.launch</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.language</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.runtime</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.lib</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe.core</id>
-						</iu>
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.xtext.ecore.source</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.generator.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtend.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xpand.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtend.typesystem.emf.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe.utils.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.launch.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.runtime.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe2.lib.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.emf.mwe.core.source</id>
 						</iu>
 					</ius>
 				</configuration>
@@ -152,6 +91,51 @@
 			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.runtime</artifactId>
+			<version>${mwe2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
+			<version>${mwe2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.language</artifactId>
+			<version>${mwe2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+			<version>${mwe2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe.core</artifactId>
+			<version>${mwe-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe.utils</artifactId>
+			<version>${mwe-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xpand</groupId>
+			<artifactId>org.eclipse.xpand</artifactId>
+			<version>${xpand-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xpand</groupId>
+			<artifactId>org.eclipse.xtend</artifactId>
+			<version>${xpand-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xpand</groupId>
+			<artifactId>org.eclipse.xtend.typesystem.emf</artifactId>
+			<version>${xpand-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
 			<version>${icu4j.version}</version>
@@ -181,6 +165,11 @@
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>xtext-antlr-generator</artifactId>
 			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.6.0,)</version>
 		</dependency>
 	</dependencies>
 </project>
