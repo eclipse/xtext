@@ -29,7 +29,9 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		val annotationValue = delegate.values.findFirst[ operation == op || (operation == null && op.simpleName == 'value') ]
 		switch annotationValue {
 			JvmCustomAnnotationValue : {
-				return compilationUnit.toExpression(annotationValue.values.head as XExpression)
+				val expression = annotationValue.values.head as XExpression
+				if (expression !== null && compilationUnit.isBelongedToCompilationUnit(expression))
+					return compilationUnit.toExpression(expression)
 			}
 		}
 		return null
