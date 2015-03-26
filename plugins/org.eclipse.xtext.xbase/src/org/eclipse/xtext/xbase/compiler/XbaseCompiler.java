@@ -1455,7 +1455,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected boolean allCasesAreExitedEarly(XSwitchExpression expr) {
 		for(XCasePart casePart: expr.getCases()) {
-			if(!isEarlyExit(casePart.getThen())) {
+			if(casePart.getThen() != null && !isEarlyExit(casePart.getThen())) {
 				return false;
 			}
 		}
