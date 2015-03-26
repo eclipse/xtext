@@ -89,8 +89,8 @@
 				<arg line='-S "@{commandsfile}"' />
 				<arg line='-L ${buckminster.loglevel}' />
 				<arg line='-debug ${debug.options.file}' />
-				<sysproperty key="checkout.location" value="/${checkout.location}" />
-				<sysproperty key="git.clone.dest" value="/${checkout.location}" />
+				<sysproperty key="checkout.location" value="${checkout.location}" />
+				<sysproperty key="git.clone.dest" value="${checkout.location}" />
 				<sysproperty key="WITH.MWE2" value="${WITH.MWE2}" />
 				<sysproperty key="JAVA8" value="${JAVA8}" />
 				<sysproperty key="DEV.BUILD" value="${DEV.BUILD}" />
