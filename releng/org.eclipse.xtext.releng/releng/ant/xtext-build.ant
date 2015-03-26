@@ -14,15 +14,15 @@
     </description>
 
 	<pathconvert targetos="unix" property="WORKSPACE">
-		<path location="${user.home}/buckminster-builds/xtext"/>
+		<path location="${user.home}/buckminster-builds/xtext" />
 	</pathconvert>
 	<pathconvert targetos="unix" property="build.root">
-		<path location="${WORKSPACE}/buildroot"/>
+		<path location="${WORKSPACE}/buildroot" />
 	</pathconvert>
 	<pathconvert targetos="unix" property="checkout.location">
-		<path location="${ant.file}/../../../../../"/>
+		<path location="${ant.file}/../../../../../" />
 	</pathconvert>
-	
+
 	<import file="common.ant" as="common" />
 	<!-- Debug session suspend on start? -->
 	<property name="suspend.debug" value="n" />
@@ -58,6 +58,20 @@
 		<antcall target="compile-xtend" />
 		-->
 		<antcall target="buckminster-package" />
+	</target>
+
+	<target name="resolve-and-compile-all" depends="common.cleanup">
+		<antcall target="-buckminster-resolve" />
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<property name="commands.file" location="${temp.commands.location}/resolve-and-compile-all-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			resolve "${releng.project}/releng/tests/xtext-test.mspec"
+			resolve "${releng.project}/releng/tests-xtend/xtend-test.mspec"
+			build
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
 	<target name="run-buckminster-build-dev" depends="common.cleanup">
