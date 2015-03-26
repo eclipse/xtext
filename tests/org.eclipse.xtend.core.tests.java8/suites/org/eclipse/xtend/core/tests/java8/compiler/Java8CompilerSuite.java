@@ -37,6 +37,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug457539Test.class,
 	CompilerBug458010Test.class,
 	CompilerBug460691Test.class,
+	CompilerBug462845Test.class,
 	Java8CompilerTest1.class,
 	Java8CompilerTest2.class,
 })
