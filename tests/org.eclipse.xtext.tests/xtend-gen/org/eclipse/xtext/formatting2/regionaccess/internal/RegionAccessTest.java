@@ -8,11 +8,14 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguageInjectorProvider;
+import org.eclipse.xtext.formatting2.regionaccess.internal.SerializerBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.SerializerHelper;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -32,6 +35,9 @@ import org.junit.runner.RunWith;
 public class RegionAccessTest {
   @Inject
   private ParseHelper<Root> parseHelper;
+  
+  @Inject
+  private SerializerHelper serializerHelper;
   
   @Test
   public void testSimple() {
@@ -191,21 +197,183 @@ public class RegionAccessTest {
     this.operator_tripleEquals(_trim, _builder_1);
   }
   
+  @Test
+  public void testExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("test 5 a + b");
+    _builder.newLine();
+    String _string = _builder.toString();
+    String _trim = _string.trim();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0 0 Hidden");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    Add");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("0 4 Semantic \"test\" Root:\'test\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("4 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("5 1 Semantic \"5\" Root:\'5\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("6 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    left=Named\'a\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("7 1 Semantic \"a\" Primary:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      left=Named\'a\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("8 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("9 1 Semantic \"+\" Expression:\'+\'");
+    _builder_1.newLine();
+    _builder_1.append("10 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    right=Named\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("11 1 Semantic \"b\" Primary:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      Add, right=Named\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("12 0 Hidden");
+    _builder_1.newLine();
+    this.operator_tripleEquals(_trim, _builder_1);
+  }
+  
+  @Test
+  public void testExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("test 5 (a + b) + c");
+    _builder.newLine();
+    String _string = _builder.toString();
+    String _trim = _string.trim();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0 0 Hidden");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    Add");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("0 4 Semantic \"test\" Root:\'test\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("4 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("5 1 Semantic \"5\" Root:\'5\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("6 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    left=Add");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("7 1 Semantic \"(\" Parenthesized:\'(\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("8 0 Hidden");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    left=Named\'a\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("8 1 Semantic \"a\" Primary:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      left=Named\'a\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("9 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("10 1 Semantic \"+\" Expression:\'+\'");
+    _builder_1.newLine();
+    _builder_1.append("11 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    right=Named\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("12 1 Semantic \"b\" Primary:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      right=Named\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("13 0 Hidden");
+    _builder_1.newLine();
+    _builder_1.append("13 1 Semantic \")\" Parenthesized:\')\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      left=Add");
+    _builder_1.newLine();
+    _builder_1.append("14 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("15 1 Semantic \"+\" Expression:\'+\'");
+    _builder_1.newLine();
+    _builder_1.append("16 1 Hidden   \" \" Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("Start    right=Named\'c\'");
+    _builder_1.newLine();
+    _builder_1.append("17 1 Semantic \"c\" Primary:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("End      Add, right=Named\'c\'");
+    _builder_1.newLine();
+    _builder_1.append("18 0 Hidden");
+    _builder_1.newLine();
+    this.operator_tripleEquals(_trim, _builder_1);
+  }
+  
   private void operator_tripleEquals(final CharSequence file, final CharSequence expectation) {
     try {
+      final String exp = expectation.toString();
       final Root obj = this.parseHelper.parse(file);
-      NodeModelBasedRegionAccess.Builder _builder = new NodeModelBasedRegionAccess.Builder();
-      Resource _eResource = obj.eResource();
-      NodeModelBasedRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
-      final NodeModelBasedRegionAccess access = _withResource.create();
-      TokenAccessToString _tokenAccessToString = new TokenAccessToString();
-      TokenAccessToString _withOrigin = _tokenAccessToString.withOrigin(access);
-      TokenAccessToString _hideColumnExplanation = _withOrigin.hideColumnExplanation();
-      final String actual = _hideColumnExplanation.toString();
-      String _string = expectation.toString();
-      Assert.assertEquals(_string, (actual + "\n"));
+      final NodeModelBasedRegionAccess access1 = this.createFromNodeModel(obj);
+      final SerializerBasedRegionAccess access2 = this.createFromSerializer(obj);
+      TextRegionAccessToString _textRegionAccessToString = new TextRegionAccessToString();
+      TextRegionAccessToString _withOrigin = _textRegionAccessToString.withOrigin(access1);
+      TextRegionAccessToString _hideColumnExplanation = _withOrigin.hideColumnExplanation();
+      String _plus = (_hideColumnExplanation + "\n");
+      Assert.assertEquals(exp, _plus);
+      TextRegionAccessToString _textRegionAccessToString_1 = new TextRegionAccessToString();
+      TextRegionAccessToString _withOrigin_1 = _textRegionAccessToString_1.withOrigin(access2);
+      TextRegionAccessToString _hideColumnExplanation_1 = _withOrigin_1.hideColumnExplanation();
+      String _plus_1 = (_hideColumnExplanation_1 + "\n");
+      Assert.assertEquals(exp, _plus_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private NodeModelBasedRegionAccess createFromNodeModel(final EObject obj) {
+    NodeModelBasedRegionAccess.Builder _builder = new NodeModelBasedRegionAccess.Builder();
+    Resource _eResource = obj.eResource();
+    NodeModelBasedRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
+    return _withResource.create();
+  }
+  
+  private SerializerBasedRegionAccess createFromSerializer(final EObject obj) {
+    SerializerBasedRegionAccess _xblockexpression = null;
+    {
+      SerializerBasedRegionAccess.Builder _builder = new SerializerBasedRegionAccess.Builder();
+      final SerializerBasedRegionAccess.Builder builder = _builder.withRoot(obj);
+      this.serializerHelper.serialize(obj, builder);
+      _xblockexpression = builder.getRegionAccess();
+    }
+    return _xblockexpression;
   }
 }

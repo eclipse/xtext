@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TokenAccessToString {
+public class TextRegionAccessToString {
 
 	private static final int TITLE_WIDTH = 9;
 	private static final String SEMANTIC_PADDED = Strings.padEnd("Semantic", TITLE_WIDTH, ' ');
@@ -56,12 +56,12 @@ public class TokenAccessToString {
 
 	private ITextSegment origin;
 
-	public TokenAccessToString hideColumnExplanation() {
+	public TextRegionAccessToString hideColumnExplanation() {
 		this.hideColumnExplanation = true;
 		return this;
 	}
 
-	public TokenAccessToString hightlightOrigin() {
+	public TextRegionAccessToString hightlightOrigin() {
 		this.hightlightOrigin = true;
 		return this;
 	}
@@ -84,7 +84,7 @@ public class TokenAccessToString {
 	}
 
 	protected void collectHiddenRegionsBySemanticObject(List<ITextSegment> regions,
-			Multimap<IHiddenRegion, EObject> LeadingHiddens, Multimap<IHiddenRegion, EObject> trailingHiddens,
+			Multimap<IHiddenRegion, EObject> leadingHiddens, Multimap<IHiddenRegion, EObject> trailingHiddens,
 			List<String> errors) {
 		Set<EObject> sem = Sets.newHashSet();
 		for (ITextSegment s : regions)
@@ -110,7 +110,7 @@ public class TokenAccessToString {
 			if (leading == null)
 				errors.add("ERROR: " + EmfFormatter.objPath(s) + " has no leading HiddenRegion.");
 			else
-				LeadingHiddens.put(leading, s);
+				leadingHiddens.put(leading, s);
 			IHiddenRegion trailing = access.trailingHiddenRegion(s);
 			if (trailing == null)
 				errors.add("ERROR: " + EmfFormatter.objPath(s) + " has no trailing HiddenRegion.");
@@ -239,14 +239,14 @@ public class TokenAccessToString {
 				first = current;
 				if (current instanceof ITextRegionAccess)
 					current = ((ITextRegionAccess) current).getFirstRegionInFile();
-				if (current instanceof ISemanticRegion)
+				else if (current instanceof ISemanticRegion)
 					current = ((ISemanticRegion) current).getPreviousHiddenRegion();
 				else if (current instanceof IHiddenRegion)
 					current = ((IHiddenRegion) current).getPreviousSemanticRegion();
 				else if (current instanceof IHiddenRegionPart)
 					current = ((IHiddenRegionPart) current).getHiddenRegion();
 				else
-					throw new IllegalStateException();
+					throw new IllegalStateException("Unexpected Type: " + current.getClass());
 			}
 		}
 		if (first == null)
@@ -261,13 +261,13 @@ public class TokenAccessToString {
 				else if (current instanceof IHiddenRegion)
 					current = ((IHiddenRegion) current).getNextSemanticRegion();
 				else
-					throw new IllegalStateException();
+					throw new IllegalStateException("Unexpected Type: " + current.getClass());
 			}
 		}
 		return result;
 	}
 
-	public TokenAccessToString withOrigin(ITextSegment origin) {
+	public TextRegionAccessToString withOrigin(ITextSegment origin) {
 		this.origin = origin;
 		return this;
 	}

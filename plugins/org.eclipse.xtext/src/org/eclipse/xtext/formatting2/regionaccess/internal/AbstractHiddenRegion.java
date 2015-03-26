@@ -9,7 +9,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.List;
 
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -23,14 +23,14 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
+public abstract class AbstractHiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 
-	List<NodeHidden> hiddens = Lists.newArrayList();
+	List<IHiddenRegionPart> hiddens = Lists.newArrayList();
 	private ISemanticRegion next;
 	private ISemanticRegion previous;
 	private final ITextRegionAccess tokenAccess;
 
-	protected HiddenRegion(ITextRegionAccess tokenAccess) {
+	protected AbstractHiddenRegion(ITextRegionAccess tokenAccess) {
 		super();
 		this.tokenAccess = tokenAccess;
 	}
@@ -47,8 +47,8 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 	public int getLength() {
 		if (hiddens.isEmpty())
 			return 0;
-		int start = hiddens.get(0).getNode().getOffset();
-		int end = hiddens.get(hiddens.size() - 1).getNode().getEndOffset();
+		int start = hiddens.get(0).getOffset();
+		int end = hiddens.get(hiddens.size() - 1).getEndOffset();
 		return end - start;
 	}
 
@@ -93,11 +93,6 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 		return tokenAccess;
 	}
 
-	@Override
-	public boolean isUndefined() {
-		return false;
-	}
-
 	protected void setNext(ISemanticRegion next) {
 		this.next = next;
 	}
@@ -108,7 +103,7 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 
 	@Override
 	public String toString() {
-		return new TokenAccessToString().withOrigin(this).hightlightOrigin().toString();
+		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
 	}
 
 }

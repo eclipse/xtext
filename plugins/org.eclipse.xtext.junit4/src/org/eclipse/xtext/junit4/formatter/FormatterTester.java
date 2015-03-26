@@ -17,15 +17,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.SerializerBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.SerializerBasedRegionAccess.Builder;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.ExceptionThrowingAcceptor;
+import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
@@ -43,6 +54,9 @@ import com.google.inject.Provider;
  */
 public class FormatterTester {
 
+	@Inject
+	private IContextFinder contextFinder;
+
 	@Inject(optional = true)
 	private Provider<IFormatter2> formatter;
 
@@ -50,13 +64,46 @@ public class FormatterTester {
 	private Provider<FormatterTestRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelTokenAccessBuilderProvider;
+	private Provider<IHiddenTokenSequencer> hiddenTokenSequencerProvider;
+
+	@Inject
+	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelBasedRegionAccessBuilderProvider;
 
 	@Inject
 	private ParseHelper<EObject> parseHelper;
 
+	@Inject
+	private Provider<ISemanticSequencer> semanticSequencerProvider;
+
+	@Inject
+	private Provider<SerializerBasedRegionAccess.Builder> serializerBasedRegionAccessBuilderProvider;
+
+	@Inject
+	private Provider<ISyntacticSequencer> syntacticSequencerProvider;
+
 	protected void assertAllHiddenRegionsAre(ITextRegionAccess expectation, List<ITextReplacement> actual) {
 		// TODO implement
+	}
+
+	protected ITextRegionAccess createRegionAccess(XtextResource resource, FormatterTestRequest req) {
+		boolean useSerializer = req.isUseSerializer() && !req.isAllowSyntaxErrors();
+		if (req.isUseNodeModel() && useSerializer) {
+			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
+			ITextRegionAccess serRegions = createRegionAccessViaSerializer(resource);
+			Assert.assertEquals(toString(nmRegions), toString(serRegions));
+			return nmRegions;
+		} else if (req.isUseNodeModel()) {
+			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
+			return nmRegions;
+		} else if (useSerializer) {
+			ITextRegionAccess serRegions = createRegionAccessViaSerializer(resource);
+			return serRegions;
+		} else
+			throw new IllegalStateException("Can't format anything when using neither NodeModel nor Serializer.");
+	}
+
+	protected String toString(ITextRegionAccess nmRegions) {
+		return new TextRegionAccessToString().withOrigin((ITextSegment) nmRegions).hideColumnExplanation() + "\n";
 	}
 
 	public void assertFormatted(FormatterTestRequest req) {
@@ -74,7 +121,7 @@ public class FormatterTester {
 			assertNoSyntaxErrors(parsed);
 			request.setExceptionHandler(ExceptionAcceptor.THROWING);
 		}
-		request.setTextRegionAccess(nodeModelTokenAccessBuilderProvider.get().withResource(parsed).create());
+		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
 		List<ITextReplacement> format = createFormatter(req).format(request);
@@ -84,7 +131,6 @@ public class FormatterTester {
 		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), applied);
 
 		// TODO: assert formatting a second time only produces identity replacements
-		// TODO: assert formatting with serializer
 		// TODO: assert formatting with undefined whitespace only
 	}
 
@@ -123,6 +169,27 @@ public class FormatterTester {
 
 	protected IFormatter2 createFormatter(FormatterTestRequest request) {
 		return formatter.get();
+	}
+
+	protected ITextRegionAccess createRegionAccessViaNodeModel(XtextResource resource) {
+		ITextRegionAccess access = nodeModelBasedRegionAccessBuilderProvider.get().withResource(resource).create();
+		return access;
+	}
+
+	protected ITextRegionAccess createRegionAccessViaSerializer(XtextResource resource) {
+		EObject root = resource.getContents().get(0);
+		Builder builder = serializerBasedRegionAccessBuilderProvider.get().withRoot(root);
+		ExceptionThrowingAcceptor errors = new ExceptionThrowingAcceptor();
+		EObject context = contextFinder.findContextsByContentsAndContainer(root, null).iterator().next();
+		ISemanticSequencer semantic = semanticSequencerProvider.get();
+		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
+		IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
+		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
+		syntactic.init(context, root, (ISyntacticSequenceAcceptor) hidden, errors);
+		hidden.init(context, root, builder, errors);
+		semantic.createSequence(context, root);
+		ITextRegionAccess access = builder.getRegionAccess();
+		return access;
 	}
 
 	protected void fail(CharSequence error, CharSequence document) {

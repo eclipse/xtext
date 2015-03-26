@@ -7,28 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
-
+public class SerializedHidden extends SerializedRegion implements IHiddenRegionPart {
 	private final AbstractHiddenRegion hiddenRegion;
+	private final AbstractRule rule;
 
-	protected NodeHidden(AbstractHiddenRegion gap, INode node) {
-		super((NodeModelBasedRegionAccess) gap.getTextRegionAccess(), node);
+	protected SerializedHidden(AbstractHiddenRegion gap, AbstractRule rule, int offset, String text) {
+		super((SerializerBasedRegionAccess) gap.getTextRegionAccess(), offset, text);
 		this.hiddenRegion = gap;
+		this.rule = rule;
 	}
 
 	@Override
 	public AbstractRule getGrammarElement() {
-		EObject element = super.getGrammarElement();
-		return element instanceof AbstractRule ? (AbstractRule) element : null;
+		return rule;
 	}
 
 	@Override

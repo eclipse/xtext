@@ -27,18 +27,21 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cDelegationParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		private final RuleCall cUnassignedParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		private final RuleCall cPrefixedUnassignedParserRuleCall_1_3 = (RuleCall)cAlternatives_1.eContents().get(3);
+		private final Group cGroup_1_4 = (Group)cAlternatives_1.eContents().get(4);
+		private final Keyword cDigitFiveKeyword_1_4_0 = (Keyword)cGroup_1_4.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_1_4_1 = (RuleCall)cGroup_1_4.eContents().get(1);
 		
 		//Root:
-		//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
+		//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"test" (Simple | Delegation | Unassigned | PrefixedUnassigned)
+		//"test" (Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression)
 		public Group getGroup() { return cGroup; }
 
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//Simple | Delegation | Unassigned | PrefixedUnassigned
+		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//Simple
@@ -52,6 +55,15 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 		//PrefixedUnassigned
 		public RuleCall getPrefixedUnassignedParserRuleCall_1_3() { return cPrefixedUnassignedParserRuleCall_1_3; }
+
+		//"5" Expression
+		public Group getGroup_1_4() { return cGroup_1_4; }
+
+		//"5"
+		public Keyword getDigitFiveKeyword_1_4_0() { return cDigitFiveKeyword_1_4_0; }
+
+		//Expression
+		public RuleCall getExpressionParserRuleCall_1_4_1() { return cExpressionParserRuleCall_1_4_1; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -181,6 +193,98 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
+
+	public class ExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cPrimaryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cAddLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cPlusSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightPrimaryParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//Expression:
+		//	Primary ({Add.left=current} "+" right=Primary)*;
+		@Override public ParserRule getRule() { return rule; }
+
+		//Primary ({Add.left=current} "+" right=Primary)*
+		public Group getGroup() { return cGroup; }
+
+		//Primary
+		public RuleCall getPrimaryParserRuleCall_0() { return cPrimaryParserRuleCall_0; }
+
+		//({Add.left=current} "+" right=Primary)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Add.left=current}
+		public Action getAddLeftAction_1_0() { return cAddLeftAction_1_0; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
+
+		//right=Primary
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+
+		//Primary
+		public RuleCall getRightPrimaryParserRuleCall_1_2_0() { return cRightPrimaryParserRuleCall_1_2_0; }
+	}
+
+	public class PrimaryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Primary");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cNamedAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final RuleCall cParenthesizedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Primary returns Expression:
+		//	{Named} name=ID | Parenthesized;
+		@Override public ParserRule getRule() { return rule; }
+
+		//{Named} name=ID | Parenthesized
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//{Named} name=ID
+		public Group getGroup_0() { return cGroup_0; }
+
+		//{Named}
+		public Action getNamedAction_0_0() { return cNamedAction_0_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
+
+		//Parenthesized
+		public RuleCall getParenthesizedParserRuleCall_1() { return cParenthesizedParserRuleCall_1; }
+	}
+
+	public class ParenthesizedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parenthesized");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Parenthesized returns Expression:
+		//	"(" Expression ")";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"(" Expression ")"
+		public Group getGroup() { return cGroup; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+
+		//Expression
+		public RuleCall getExpressionParserRuleCall_1() { return cExpressionParserRuleCall_1; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
 	
 	
 	private final RootElements pRoot;
@@ -190,6 +294,9 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final PrefixedUnassignedElements pPrefixedUnassigned;
 	private final PrefixedDelegateElements pPrefixedDelegate;
 	private final DelegateElements pDelegate;
+	private final ExpressionElements pExpression;
+	private final PrimaryElements pPrimary;
+	private final ParenthesizedElements pParenthesized;
 	
 	private final Grammar grammar;
 
@@ -207,6 +314,9 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		this.pPrefixedUnassigned = new PrefixedUnassignedElements();
 		this.pPrefixedDelegate = new PrefixedDelegateElements();
 		this.pDelegate = new DelegateElements();
+		this.pExpression = new ExpressionElements();
+		this.pPrimary = new PrimaryElements();
+		this.pParenthesized = new ParenthesizedElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -237,7 +347,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	
 	//Root:
-	//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
+	//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression);
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -304,6 +414,36 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	public ParserRule getDelegateRule() {
 		return getDelegateAccess().getRule();
+	}
+
+	//Expression:
+	//	Primary ({Add.left=current} "+" right=Primary)*;
+	public ExpressionElements getExpressionAccess() {
+		return pExpression;
+	}
+	
+	public ParserRule getExpressionRule() {
+		return getExpressionAccess().getRule();
+	}
+
+	//Primary returns Expression:
+	//	{Named} name=ID | Parenthesized;
+	public PrimaryElements getPrimaryAccess() {
+		return pPrimary;
+	}
+	
+	public ParserRule getPrimaryRule() {
+		return getPrimaryAccess().getRule();
+	}
+
+	//Parenthesized returns Expression:
+	//	"(" Expression ")";
+	public ParenthesizedElements getParenthesizedAccess() {
+		return pParenthesized;
+	}
+	
+	public ParserRule getParenthesizedRule() {
+		return getParenthesizedAccess().getRule();
 	}
 
 	//terminal ID:

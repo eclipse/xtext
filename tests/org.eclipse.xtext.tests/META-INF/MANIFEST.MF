@@ -21,10 +21,11 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.core.runtime;bundle-version="3.6.0",
  org.eclipse.xtend.lib,
  org.eclipse.ui.workbench;resolution:=optional,
- org.eclipse.xtext.idea.generator;bundle-version="1.0.0"
+ org.eclipse.xtext.idea.generator;bundle-version="1.0.0",
+ org.eclipse.xtext.tests.ui,
+ org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/simple.jar,
- .
+Bundle-ClassPath: lib/simple.jar,.
 Import-Package: com.ibm.icu.text;version="4.0.0",
  org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
@@ -454,5 +455,23 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.util,
  org.eclipse.xtext.parser.indentation.parseTreeConstruction,
  org.eclipse.xtext.parser.indentation.serializer,
- org.eclipse.xtext.parser.unorderedGroups.serializer
+ org.eclipse.xtext.parser.unorderedGroups.serializer,
+ org.eclipse.xtext.formatting2.internal.parser.antlr,
+ org.eclipse.xtext.formatting2.internal.parser.antlr.internal,
+ org.eclipse.xtext.formatting2.internal,
+ org.eclipse.xtext.formatting2.internal.services,
+ org.eclipse.xtext.formatting2.internal.formattertestlanguage,
+ org.eclipse.xtext.formatting2.internal.formattertestlanguage.impl,
+ org.eclipse.xtext.formatting2.internal.formattertestlanguage.util,
+ org.eclipse.xtext.formatting2.internal.parseTreeConstruction,
+ org.eclipse.xtext.formatting2.internal.serializer,
+ org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr,
+ org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr.internal,
+ org.eclipse.xtext.formatting2.regionaccess.internal,
+ org.eclipse.xtext.formatting2.regionaccess.internal.services,
+ org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage,
+ org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl,
+ org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.util,
+ org.eclipse.xtext.formatting2.regionaccess.internal.parseTreeConstruction,
+ org.eclipse.xtext.formatting2.regionaccess.internal.serializer
 

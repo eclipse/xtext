@@ -9,7 +9,8 @@ ruleRoot :
 		ruleSimple |
 		ruleDelegation |
 		ruleUnassigned |
-		rulePrefixedUnassigned
+		rulePrefixedUnassigned |
+		'5' ruleExpression
 	)
 ;
 
@@ -41,6 +42,24 @@ rulePrefixedDelegate :
 // Rule Delegate
 ruleDelegate :
 	RULE_ID
+;
+
+// Rule Expression
+ruleExpression :
+	rulePrimary (
+		'+' rulePrimary
+	)*
+;
+
+// Rule Primary
+rulePrimary :
+	RULE_ID |
+	ruleParenthesized
+;
+
+// Rule Parenthesized
+ruleParenthesized :
+	'(' ruleExpression ')'
 ;
 
 RULE_ID :

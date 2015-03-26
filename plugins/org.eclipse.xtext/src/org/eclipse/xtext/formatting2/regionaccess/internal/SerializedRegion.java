@@ -7,41 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeRegion extends AbstractTextSegment {
-	private final INode node;
-	private final NodeModelBasedRegionAccess tokenAccess;
+public class SerializedRegion extends AbstractTextSegment {
+	private final SerializerBasedRegionAccess tokenAccess;
+	private final int offset;
+	private final String text;
 
-	protected NodeRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
+	protected SerializedRegion(SerializerBasedRegionAccess tokenAccess, int offset, String text) {
 		super();
 		this.tokenAccess = tokenAccess;
-		this.node = node;
-	}
-
-	public EObject getGrammarElement() {
-		return node.getGrammarElement();
+		this.offset = offset;
+		this.text = text;
 	}
 
 	@Override
 	public int getLength() {
-		return node.getLength();
-	}
-
-	public INode getNode() {
-		return node;
+		return text.length();
 	}
 
 	@Override
 	public int getOffset() {
-		return node.getOffset();
+		return offset;
 	}
 
 	@Override
@@ -52,5 +44,10 @@ public class NodeRegion extends AbstractTextSegment {
 	@Override
 	public String toString() {
 		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
+	}
+
+	@Override
+	public String getText() {
+		return text;
 	}
 }

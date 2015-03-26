@@ -128,6 +128,32 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RegionaccesstestlanguagePackage.EXPRESSION:
+      {
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = caseRoot(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.ADD:
+      {
+        Add add = (Add)theEObject;
+        T result = caseAdd(add);
+        if (result == null) result = caseExpression(add);
+        if (result == null) result = caseRoot(add);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.NAMED:
+      {
+        Named named = (Named)theEObject;
+        T result = caseNamed(named);
+        if (result == null) result = caseExpression(named);
+        if (result == null) result = caseRoot(named);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -240,6 +266,54 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDelegate(Delegate object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Add</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Add</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAdd(Add object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Named</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Named</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNamed(Named object)
   {
     return null;
   }

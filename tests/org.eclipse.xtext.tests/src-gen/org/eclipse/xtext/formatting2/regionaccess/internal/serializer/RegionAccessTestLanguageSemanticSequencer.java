@@ -6,8 +6,10 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegate;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Named;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
@@ -32,11 +34,17 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == RegionaccesstestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case RegionaccesstestlanguagePackage.ADD:
+				sequence_Expression(context, (Add) semanticObject); 
+				return; 
 			case RegionaccesstestlanguagePackage.DELEGATE:
 				sequence_Delegate(context, (Delegate) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.DELEGATION:
 				sequence_Delegation(context, (Delegation) semanticObject); 
+				return; 
+			case RegionaccesstestlanguagePackage.NAMED:
+				sequence_Primary(context, (Named) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.PREFIXED_UNASSIGNED:
 				sequence_PrefixedUnassigned(context, (PrefixedUnassigned) semanticObject); 
@@ -82,6 +90,25 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
+	 *     (left=Expression_Add_1_0 right=Primary)
+	 */
+	protected void sequence_Expression(EObject context, Add semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__LEFT));
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__RIGHT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getExpressionAccess().getAddLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpressionAccess().getRightPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     delegate=PrefixedDelegate
 	 */
 	protected void sequence_PrefixedUnassigned(EObject context, PrefixedUnassigned semanticObject) {
@@ -92,6 +119,22 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getPrefixedUnassignedAccess().getDelegatePrefixedDelegateParserRuleCall_1_0(), semanticObject.getDelegate());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Primary(EObject context, Named semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.NAMED__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrimaryAccess().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
