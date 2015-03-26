@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
+import org.eclipse.xtext.common.types.JvmFeature
 
 /**
  * A generator implementation that processes the 
@@ -499,14 +500,24 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateInitialization(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (compilationStrategy != null) {
-			appendable.append(" = ")
-			appendable.increaseIndentation
-			compilationStrategy.apply(appendable)
-			appendable.decreaseIndentation
+			val errors = directErrorsOrLogicallyContainedErrors
+			if (errors.isEmpty) {
+				appendable.append(" = ")
+				appendable.increaseIndentation
+				compilationStrategy.apply(appendable)
+				appendable.decreaseIndentation
+			} else {
+				appendable.append(" /* Skipped initializer because of errors */")
+			}
 		} else if (compilationTemplate != null) {
-			appendable.append(" = ").increaseIndentation
-			appendCompilationTemplate(appendable, it)
-			appendable.decreaseIndentation
+			val errors = directErrorsOrLogicallyContainedErrors
+			if (errors.isEmpty) {
+				appendable.append(" = ").increaseIndentation
+				appendCompilationTemplate(appendable, it)
+				appendable.decreaseIndentation
+			} else {
+				appendable.append(" /* Skipped initializer because of errors */")
+			}
 		} else {
 			val expression = associatedExpression
 			if (expression != null && config.generateExpressions) {
@@ -587,10 +598,26 @@ class JvmModelGenerator implements IGenerator {
 	def hasBody(JvmExecutable it) {
 		compilationTemplate != null || compilationStrategy != null || associatedExpression != null
 	}
+	
+	/**
+	 * Returns the errors that are produced for elements that are directly contained
+	 * in this feature (e.g. unresolved type proxies) or that are associated with
+	 * the expression that may be logically contained in the given feature.
+	 */
+	private def getDirectErrorsOrLogicallyContainedErrors(JvmFeature feature) {
+		var errors = feature.errors
+		if(errors.empty) {
+			val expression = feature.associatedExpression
+			if (expression != null) {
+				errors = expression.errors
+			}
+		}
+		return errors
+	}
 
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, GeneratorConfig config) {
 		if (op.compilationStrategy != null) {
-			val errors = op.errors
+			var errors = op.directErrorsOrLogicallyContainedErrors
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
 				op.compilationStrategy.apply(appendable)
@@ -599,7 +626,7 @@ class JvmModelGenerator implements IGenerator {
 				generateBodyWithIssues(appendable, errors)
 			}
 		} else if (op.compilationTemplate != null) {
-			val errors = op.errors
+			val errors = op.directErrorsOrLogicallyContainedErrors
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
 				appendCompilationTemplate(appendable, op)
