@@ -1,1 +1,9 @@
-sourceSets*.java*.srcDirs = [] //ignore for now, doesn't compile yet
+dependencies {
+	compile project(':tests:org.eclipse.xtext.testlanguages')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		project ':intellij:org.eclipse.xtext.idea'
+	}
+}

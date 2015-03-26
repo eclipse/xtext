@@ -24,7 +24,7 @@ def toDependency(requirement) {
 	if (requirement.resolution == 'optional') {
 		return null
 	}
-	if (requirement.name.contains('mwe')) {
+	if (requirement.name.contains('mwe') || requirement.name.contains('.ui')) {
 		return null
 	}
 	def projectDependency = rootProject.subprojects.findResult {it.name == requirement.name ? it : null}

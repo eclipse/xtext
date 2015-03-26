@@ -1,1 +1,10 @@
-sourceSets*.java*.srcDirs = [] //ignore for now, doesn't compile yet
+dependencies {
+	testCompile project(':tests:org.eclipse.xtext.xbase.tests')
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		project ':intellij:org.eclipse.xtext.idea'
+		project ':intellij:org.eclipse.xtext.xbase.idea'
+	}
+}

@@ -8,10 +8,12 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
+import org.junit.Ignore;
 
 import com.google.inject.Inject;
 import com.intellij.openapi.project.Project;
 
+@Ignore
 public class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest {
 
 	@Inject

@@ -1,8 +1,7 @@
-sourceSets*.java*.srcDirs = [] //ignore for now, doesn't compile yet
-
 dependencies {
 	testCompile project(':intellij:org.eclipse.xtext.idea.tests')
-	compile project(":plugins:org.eclipse.xtend.lib")
+	testCompile project(":plugins:org.eclipse.xtend.lib")
+	testCompile project(':tests:org.eclipse.xtext.common.types.tests')
 }
 
 ideaDevelopment {
