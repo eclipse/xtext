@@ -66,62 +66,64 @@ public class XAnnotationExtensions {
     if (!_matched) {
       if (container instanceof XtendAnnotationType) {
         _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendClass) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendClass) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendInterface) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendInterface) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendEnum) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendEnum) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendField) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendField) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendFunction) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendFunction) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendConstructor) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendConstructor) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendEnumLiteral) {
-        _matched=true;
-        _switchResult = ((XtendAnnotationTarget)container);
+      if (!_matched) {
+        if (container instanceof XtendEnumLiteral) {
+          _matched=true;
+        }
       }
-    }
-    if (!_matched) {
-      if (container instanceof XtendParameter) {
-        _matched=true;
+      if (!_matched) {
+        if (container instanceof XtendParameter) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
         _switchResult = ((XtendAnnotationTarget)container);
       }
     }
     if (!_matched) {
       if (container instanceof XtendAnnotationTarget) {
         _matched=true;
-        EObject _eContainer_1 = ((XtendAnnotationTarget)container).eContainer();
-        _switchResult = ((XtendAnnotationTarget) _eContainer_1);
+        XtendAnnotationTarget _xblockexpression = null;
+        {
+          final EObject containerContainer = ((XtendAnnotationTarget)container).eContainer();
+          XtendAnnotationTarget _xifexpression = null;
+          if ((containerContainer instanceof XtendAnnotationTarget)) {
+            _xifexpression = ((XtendAnnotationTarget)containerContainer);
+          }
+          _xblockexpression = _xifexpression;
+        }
+        _switchResult = _xblockexpression;
       }
     }
     if (!_matched) {
