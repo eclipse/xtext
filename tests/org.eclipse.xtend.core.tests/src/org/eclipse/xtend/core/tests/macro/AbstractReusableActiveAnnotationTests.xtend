@@ -2266,6 +2266,49 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testAnnotationDefaultValuesBug463161() {
+		assertProcessing(
+			'myannotation/AnnotationDefaultValues.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import java.lang.annotation.RetentionPolicy
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(AnnotationDefaultValuesProcessor)
+				annotation AnnotationDefaultValues { }
+				
+				class AnnotationDefaultValuesProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration mutableClass, extension TransformationContext context) {
+						val annotationRef = mutableClass.findAnnotation(findTypeGlobally(MyAnnotation))
+						mutableClass.addField(annotationRef.getExpression('value')?.toString ?: 'wasNull') [
+							type = string
+						]
+					}
+					
+				}
+				annotation MyAnnotation {
+					int value = 1
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AnnotationDefaultValues
+				@myannotation.MyAnnotation
+				class MyClass {}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			val field = clazz.declaredFields.head
+			assertEquals('wasNull', field.simpleName)
+		]
+	}
+	
 	@Test def void testAnnotationDefaultValues_01() {
 		assertProcessing(
 			'myannotation/AnnotationDefaultValues.xtend' -> '''
