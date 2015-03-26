@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +49,8 @@ class XtendGenerator extends JvmModelGenerator {
 	
 	@Inject 
 	private IBatchTypeResolver typeResolver;
+	@Inject
+	private OperationCanceledManager operationCanceledManager
 	
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)
@@ -72,6 +75,7 @@ class XtendGenerator extends JvmModelGenerator {
 						}
 					}
 				} catch (Throwable t) {
+					operationCanceledManager.propagateAsErrorIfCancelException(t)
 					context.handleProcessingError(input, t)
 				}
 			}
