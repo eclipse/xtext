@@ -4723,6 +4723,89 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testAnnotationDefaultValuesBug463161() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.RetentionPolicy");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(AnnotationDefaultValuesProcessor)");
+    _builder.newLine();
+    _builder.append("annotation AnnotationDefaultValues { }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class AnnotationDefaultValuesProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration mutableClass, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val annotationRef = mutableClass.findAnnotation(findTypeGlobally(MyAnnotation))");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("mutableClass.addField(annotationRef.getExpression(\'value\')?.toString ?: \'wasNull\') [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("type = string");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation MyAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int value = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationDefaultValues.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.AnnotationDefaultValues");
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.MyAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
+        final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
+        String _simpleName = field.getSimpleName();
+        Assert.assertEquals("wasNull", _simpleName);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testAnnotationDefaultValues_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
