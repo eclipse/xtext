@@ -5443,6 +5443,72 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testBug463050() {
+		'''
+			class Foo {
+				def String foo(java.util.Collection input) {
+					switch input {
+						java.util.ArrayList,
+						java.util.LinkedList,
+						java.util.Vector:
+							return 'list'
+						java.util.Map,
+						java.util.Dictionary:
+							return 'map'
+						default :
+							return null
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import java.util.Collection;
+			import java.util.Dictionary;
+			import java.util.LinkedList;
+			import java.util.Map;
+			import java.util.Vector;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String foo(final Collection input) {
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (input instanceof ArrayList) {
+			        _matched=true;
+			      }
+			      if (!_matched) {
+			        if (input instanceof LinkedList) {
+			          _matched=true;
+			        }
+			      }
+			      if (!_matched) {
+			        if (input instanceof Vector) {
+			          _matched=true;
+			        }
+			      }
+			      if (_matched) {
+			        return "list";
+			      }
+			    }
+			    if (!_matched) {
+			      if (input instanceof Map) {
+			        _matched=true;
+			      }
+			      if (!_matched) {
+			        if (input instanceof Dictionary) {
+			          _matched=true;
+			        }
+			      }
+			      if (_matched) {
+			        return "map";
+			      }
+			    }
+			    return null;
+			  }
+			}
+		''')
+	}
+	
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {
