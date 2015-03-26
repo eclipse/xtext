@@ -317,6 +317,7 @@ public interface AnnotationReference extends Element {
 	
 	/**
 	 * Returns the expression for the given annotation property.
+	 * 
 	 * Returns <code>null</code> if no expression is set, or this annotation reference is an external element
 	 * (i.e. {@link Tracability#isExternal(Element)} returns <code>true</code>). 
 	 * 
