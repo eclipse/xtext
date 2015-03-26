@@ -116,55 +116,59 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 			markUncheckedValid();
 		}
 	}
+	
+	private void acceptActualType(int flags) {
+		getExpectation().acceptActualType(resultClosureType, flags | ConformanceFlags.LAMBDA_WITH_EXPECTATION);
+	}
 
 	protected void markUncheckedValid() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.UNCHECKED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
+			acceptActualType(ConformanceFlags.UNCHECKED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.UNCHECKED);
+			acceptActualType(ConformanceFlags.UNCHECKED);
 		}
 	}
 
 	protected void markIncompatibleParameterList() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markCompatibleParameterList() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markIncompatible() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markRawCompatible() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
 					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
+			acceptActualType(ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
 					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markVoidCompatible() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
+			acceptActualType(ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
 					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
+			acceptActualType(ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
 					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
 		}
 	}

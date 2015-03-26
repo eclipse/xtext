@@ -650,14 +650,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			}
 		}
 		super._doPrepare(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
-		doPrepareLocalTypes(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
+		doPrepareLocalTypes(resolvedTypesByContext.get(field), featureScopeSession, field, resolvedTypesByContext);
 	}
 	
 	@Override
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		super._doPrepare(resolvedTypes, featureScopeSession, constructor, resolvedTypesByContext);
-		doPrepareLocalTypes(resolvedTypes, featureScopeSession, constructor, resolvedTypesByContext);
+		doPrepareLocalTypes(resolvedTypesByContext.get(constructor), featureScopeSession, constructor, resolvedTypesByContext);
 	}
 
 	@Override
