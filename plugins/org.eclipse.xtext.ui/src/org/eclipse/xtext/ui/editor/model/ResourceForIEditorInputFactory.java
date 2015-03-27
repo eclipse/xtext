@@ -135,7 +135,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	}
 
 	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
-		//TODO use the resource factory directly (injected), since the use might open any file with this editor.
+		//TODO use the resource factory directly (injected), since the user might open any file with this editor.
 		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + uri

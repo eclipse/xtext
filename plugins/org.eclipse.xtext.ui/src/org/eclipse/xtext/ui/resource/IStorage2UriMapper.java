@@ -34,7 +34,7 @@ public interface IStorage2UriMapper {
 	Iterable<Pair<IStorage, IProject>> getStorages(URI uri);
 
 	/**
-	 * Returns the URI for the given {@link IStorage} or <code>null</code> if not valid URI exists.
+	 * Returns the URI for the given {@link IStorage} or <code>null</code> if no valid URI exists.
 	 * @return returns the URI for the given {@link IStorage} or <code>null</code>. 
 	 */
 	URI getUri(IStorage storage);
