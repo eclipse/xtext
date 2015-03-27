@@ -179,13 +179,13 @@ ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='\r' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnCrKeyword_1_0()); 
+        newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0()); 
     }
 )?
 	kw='\n' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getNLAccess().getLineFeedLfKeyword_1_1()); 
+        newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1()); 
     }
 )(    this_WS_3=RULE_WS    {
 		$current.merge(this_WS_3);
