@@ -64,7 +64,7 @@ ext.toDependency = { requirement ->
 		return [group:'commons-logging', name: 'commons-logging', version:'[1.2, 2.0)']
 	}
 	if (requirement.name == 'javax.inject') {
-		return [group:'javax.inject', name: 'javax.inject', version:'[1, 2)']
+		return [group:'javax.inject', name: 'javax.inject', version:'1']
 	}
 	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
 }
