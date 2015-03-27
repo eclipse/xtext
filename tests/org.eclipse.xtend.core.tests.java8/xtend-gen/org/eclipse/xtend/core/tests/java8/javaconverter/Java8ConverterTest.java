@@ -22,7 +22,7 @@ public class Java8ConverterTest extends JavaConverterTest {
   @Test
   public void testDiamondOperator() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("def List<?> foo(){");
+    _builder.append("def List<?> foo() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("var List<String> x=new ArrayList() ");

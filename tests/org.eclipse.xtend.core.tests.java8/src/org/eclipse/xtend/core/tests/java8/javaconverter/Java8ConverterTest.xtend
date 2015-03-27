@@ -18,7 +18,7 @@ class Java8ConverterTest extends JavaConverterTest {
 
 	@Test def void testDiamondOperator() throws Exception {
 		assertEquals('''
-		def List<?> foo(){
+		def List<?> foo() {
 			var List<String> x=new ArrayList() 
 			return new ArrayList() 
 		}'''.toString, '''
