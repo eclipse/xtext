@@ -432,14 +432,14 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/* ML */
 			int i=1
 			//singleline
-			def package void doStuff(){
+			def package void doStuff() {
 				/*
 				 multiline
 				*/
 				
 			}
 			/**/
-			def package void doStuff2(){
+			def package void doStuff2() {
 				/* some comments */
 				return;
 			}
@@ -757,7 +757,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		'''
 		assertEquals('''
 		int[] ar=newIntArrayOfSize(1)
-		def void arDim(){
+		def void arDim() {
 			var int[] ar2=newIntArrayOfSize(2) 
 			
 		}'''.toString, toXtendClassBodyDeclr(xtendCode))
@@ -1060,7 +1060,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			}
 		}''')
 		assertEquals('''
-		def private String doSwitch(){
+		def private String doSwitch() {
 			var int i=0 
 			
 			switch (i) {
@@ -1175,7 +1175,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertEquals(xtendCode,
 			'''
 			class Foo {
-				def protected void doStuff(){
+				def protected void doStuff() {
 					val List<String> values/* FIXME empty initializer for final variable is not supported */ val List<String> values2=null val List<String> values3/* FIXME empty initializer for final variable is not supported */ 
 					values=new ArrayList<String>() 
 				}
@@ -1199,7 +1199,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}'''
 		var body = toXtendClassBodyDeclr(java)
 		assertEquals('''
-		def void doBitwiseOperation(){
+		def void doBitwiseOperation() {
 			if ((1.bitwiseAnd(2)) > 0) {
 				return;
 			}
@@ -1221,7 +1221,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertNotNull(clazz)
 		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
-		def void doBitwiseOperation(){
+		def void doBitwiseOperation() {
 			var int i=1 
 			i=i.bitwiseNot 
 		}'''.toString, body)
@@ -1243,7 +1243,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertNotNull(clazz)
 		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
-		def void checkTryCatch(){
+		def void checkTryCatch() {
 			try {
 				
 			} catch (Exception e) {
@@ -1319,7 +1319,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			 }
 		'''
 		assertEquals('''
-		def void add(int value){
+		def void add(int value) {
 			synchronized (this) {
 				this.count+=value 
 			}
@@ -1356,6 +1356,59 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		String comments
 		}'''.toString, body)
 
+	}
+	
+	@Test def void testBug462099() throws Exception {
+		var xtendCode = toXtendCode('''
+			public class Foo {
+				public int foo(Object obj) {
+					if (obj == null) {
+						return 0;
+					} else if (obj == "test") {
+						return 1;
+					} else if (obj != null) {
+						return 2;
+					} else {
+						return 3;
+					}
+				}
+			}
+		''')
+		val expected = '''
+			class Foo {
+				def int foo(Object obj) {
+					if (obj === null) {
+						return 0 
+					} else if (obj == "test") {
+						return 1 
+					} else if (obj !== null) {
+						return 2 
+					} else {
+						return 3 
+					}
+				}
+				
+			}'''
+		assertEquals(expected, xtendCode)
+	}
+	
+	@Test def void testBug462100() throws Exception {
+		var xtendCode = toXtendCode('''
+			public class Foo {
+				@Override
+				public String toString() {
+					return "bar";
+				}
+			}
+		''')
+		val expected = '''
+			class Foo {
+				override String toString() {
+					return "bar" 
+				}
+				
+			}'''
+		assertEquals(expected, xtendCode)
 	}
 
 	def protected XtendClass toValidXtendClass(String javaCode) throws Exception {
