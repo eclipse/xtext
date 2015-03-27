@@ -11,6 +11,7 @@ import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -45,6 +46,8 @@ import com.google.inject.Inject;
  */
 public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 
+	private static final Logger log = Logger.getLogger(DefaultReferenceUpdater.class);
+	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 
@@ -100,6 +103,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
 		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription.getTargetEObjectUri());
 		EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
+		if (newTargetElement == null) {
+			updateAcceptor.getRefactoringStatus().add(RefactoringStatus.ERROR, "Cannot find new target element.", targetElementNewURI);
+			log.error("Cannot find new target element. ReferringElement:" + referringElement + " targetElementNewURI:" + targetElementNewURI);
+			return;
+		}
 		createReferenceUpdate(referringElement, referringResourceURI, referenceDescription.getEReference(),
 				referenceDescription.getIndexInList(), newTargetElement, updateAcceptor);
 	}
