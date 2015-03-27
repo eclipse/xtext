@@ -30,7 +30,7 @@ def toDependency(requirement) {
 	def projectDependency = rootProject.project(':plugins').findProject(requirement.name) 
 		?: rootProject.project(':tests').findProject(requirement.name)
 		?: rootProject.project(':intellij').findProject(requirement.name)
-	if (projectDependency) {
+	if (projectDependency && requirement.version == null) {
 		return projectDependency
 	}
 	/*
