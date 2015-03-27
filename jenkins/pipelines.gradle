@@ -59,6 +59,7 @@ branches.each { branch ->
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
 					config.scm.branches.'hudson.plugins.git.BranchSpec'[1].name = job.branch
+					config.description = "This job was generated on ${new java.util.Date()}"
 					config.jdk = job.jdk
 					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
 						.project = "xtext-${branch.name}"
