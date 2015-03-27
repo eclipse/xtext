@@ -6,6 +6,8 @@ def smokeSuites = ['smoke-tests']
 def onPushSuites = runtimeSuites + ideSuites + java8Suites
 def allSuites = onPushSuites + slowSuites + smokeSuites 
 
+def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
+
 branches.each { branch ->
 	def testJobs = [allSuites, ['oldest', 'latest']]
 		.combinations{ suite, platformName -> 
@@ -24,8 +26,7 @@ branches.each { branch ->
 	jenkins {
 		
 		jobs.create("xtext-${branch.name}").definition {
-			xml file ('templates/push-job.xml')
-			xml override { config -> 
+			xml templates.push.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
@@ -40,8 +41,7 @@ branches.each { branch ->
 		}
 		
 		jobs.create("target-platforms-${branch.name}").definition {
-			xml file ('templates/target-platforms.xml')
-			xml override { config -> 
+			xml templates.targetPlatforms.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
@@ -55,8 +55,7 @@ branches.each { branch ->
 		
 		testJobs.each { job -> 
 			jobs.create(job.name).definition {
-				xml file ('templates/test-job.xml')
-				xml override { config -> 
+				xml templates.test.override { config -> 
 					config.properties.'hudson.model.ParametersDefinitionProperty'
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
@@ -71,16 +70,15 @@ branches.each { branch ->
 					if (job.jdk == jdks['1.8']) {
 						params += '\n-DJAVA8=true'
 					}
-					config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'.with { builder ->
-						builder.commands = file("scripts/${job.suite}.txt").text
-						builder.params = params
-					}
-					config.triggers.'org.jenkinsci.plugins.ghprb.GhprbTrigger'.with {	trigger ->
-						trigger.triggerPhrase = "Jenkins ${job.name}"
-						trigger.commitStatusContext = "Jenkins/${job.name}"
-						trigger.project = job.name
-					}
-    			if ((slowSuites + ideSuites).contains(job.suite)) {
+					def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
+					builder.commands = testScripts[job.suite]
+					builder.params = params
+					
+					def trigger = config.triggers.'org.jenkinsci.plugins.ghprb.GhprbTrigger'
+					trigger.triggerPhrase = "Jenkins ${job.name}"
+					trigger.commitStatusContext = "Jenkins/${job.name}"
+					trigger.project = job.name
+					if ((slowSuites + ideSuites).contains(job.suite)) {
 						config.buildWrappers.appendNode {
 							'hudson.plugins.xvnc.Xvnc'() {
 								takeScreenshot(false)

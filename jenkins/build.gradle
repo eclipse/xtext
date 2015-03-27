@@ -58,6 +58,12 @@ jenkins {
 	}
 	
 	defaultServer servers.xtext
+	
+	project.file('templates').listFiles().each {templateFile ->
+		templates.create(templateFile.name.split('\\.')[0]) {
+			xml file(templateFile)
+		}
+	}
 }
 
 apply from: 'pipelines.gradle'
