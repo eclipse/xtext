@@ -58,7 +58,7 @@ branches.each { branch ->
 					config.properties.'hudson.model.ParametersDefinitionProperty'
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
-					config.scm.branches.'hudson.plugins.git.BranchSpec'.name = job.branch
+					config.scm.branches.'hudson.plugins.git.BranchSpec'[1].name = job.branch
 					config.jdk = job.jdk
 					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
 						.project = "xtext-${branch.name}"
@@ -72,8 +72,12 @@ branches.each { branch ->
 						builder.commands = file("scripts/${job.suite}.txt").text
 						builder.params = params
 					}
-						
-					if ((slowSuites + ideSuites).contains(job.suite)) {
+					config.triggers.'org.jenkinsci.plugins.ghprb.GhprbTrigger'.with {	trigger ->
+						trigger.triggerPhrase = "Jenkins ${job.name}"
+						trigger.commitStatusContext = "Jenkins/${job.name}"
+						trigger.project = job.name
+					}
+    			if ((slowSuites + ideSuites).contains(job.suite)) {
 						config.buildWrappers.appendNode {
 							'hudson.plugins.xvnc.Xvnc'() {
 								takeScreenshot(false)
