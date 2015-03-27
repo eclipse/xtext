@@ -203,11 +203,21 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	 * @since 2.4
 	 */
 	protected void setDocumentResource(XtextDocument xtextDocument, IEditorInput editorInput, String encoding) throws CoreException {
-		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
-		// encoding can be null for FileRevisionEditorInput
-		loadResource(xtextResource, xtextDocument.get(), encoding == null ? getWorkspaceOrDefaultEncoding() : encoding);
-		xtextResource.setModificationStamp(xtextDocument.getModificationStamp());
-		xtextDocument.setInput(xtextResource);
+		try {
+			XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
+			// encoding can be null for FileRevisionEditorInput
+			loadResource(xtextResource, xtextDocument.get(), encoding == null ? getWorkspaceOrDefaultEncoding() : encoding);
+			xtextResource.setModificationStamp(xtextDocument.getModificationStamp());
+			xtextDocument.setInput(xtextResource);
+		} catch(CoreException e) {
+			throw e;
+		} catch(RuntimeException e) {
+			Throwable cause = e.getCause();
+			if (cause instanceof CoreException) {
+				throw (CoreException) cause;
+			}
+			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
+		}
 	}
 
 	@Override
@@ -229,7 +239,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			resource.load(new ByteArrayInputStream(bytes), Collections.singletonMap(XtextResource.OPTION_ENCODING, encoding));
 		} catch (IOException ex) {
 			String message = (ex.getMessage() != null ? ex.getMessage() : ex.toString());
-			IStatus s = new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.OK, message, ex);
+			IStatus s = new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, ex);
 			throw new CoreException(s);
 		}
 	}

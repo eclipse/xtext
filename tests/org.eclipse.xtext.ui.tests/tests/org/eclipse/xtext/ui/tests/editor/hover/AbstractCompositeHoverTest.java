@@ -38,7 +38,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		String modelAsText = "// file content doesn't mater";
+		String modelAsText = "// file content doesn't matter";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
