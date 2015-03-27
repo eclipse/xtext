@@ -360,7 +360,7 @@ public class PsiInternalBug301935ExTestLanguageParser extends AbstractPsiAntlrPa
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/antlr/idea/parser/antlr/internal/PsiInternalBug301935ExTestLanguage.g:154:5: kw= '\\r'
                     {
 
-                    					markLeaf(elementTypeProvider.getNL_CarriageReturnCrKeyword_1_0ElementType());
+                    					markLeaf(elementTypeProvider.getNL_Control000dKeyword_1_0ElementType());
                     				
                     kw=(Token)match(input,7,FollowSets000.FOLLOW_7_in_ruleNL328); 
 
@@ -373,7 +373,7 @@ public class PsiInternalBug301935ExTestLanguageParser extends AbstractPsiAntlrPa
             }
 
 
-            				markLeaf(elementTypeProvider.getNL_LineFeedLfKeyword_1_1ElementType());
+            				markLeaf(elementTypeProvider.getNL_Control000aKeyword_1_1ElementType());
             			
             kw=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleNL352); 
 

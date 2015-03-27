@@ -1,5 +1,6 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageElementTypeProvider;
 import org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.psi.impl.RegionAccessTestLanguageFileImpl;
 import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
@@ -25,7 +26,7 @@ public class RegionAccessTestLanguageParserDefinition extends TerminalsParserDef
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getRoot_SimpleParserRuleCall_1_0ElementType()) {
+		if (elementType == elementTypeProvider.getRoot_SimpleParserRuleCall_0ElementType()) {
 			return new PsiNamedEObjectImpl(node,
 				elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType()
 			);
@@ -44,6 +45,59 @@ public class RegionAccessTestLanguageParserDefinition extends TerminalsParserDef
 			return new PsiNamedEObjectImpl(node,
 				elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType()
 			);
+		}
+		if (elementType == elementTypeProvider.getExpression_PrimaryParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getPrimary_NamedAction_0_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getExpression_RightPrimaryParserRuleCall_1_2_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getRoot_MixedParserRuleCall_5_1ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_ActionAction_2_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_AssignedActionChildAction_4_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getMixed_RefMixedCrossReference_2_2_3_1_0ElementType()) {
+			return new PsiEObjectReference(node);
 		}
 		return super.createElement(node);
 	}

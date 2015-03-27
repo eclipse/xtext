@@ -18,9 +18,10 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_TERMINAL_ID", "RULE_INT", "RULE_BOOLEAN_TERMINAL_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'kw1'", "'kw2'", "'kw3'", "'kw4'", "'#2'", "'+'", "'#3'", "'('", "')'", "'#4'", "'*'", "'#5'", "'#6'", "'#7'", "'matched'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'kw5'", "'kw6'", "'kw7'", "'kw8'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_TERMINAL_ID", "RULE_INT", "RULE_BOOLEAN_TERMINAL_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'kw1'", "'kw2'", "'kw3'", "'kw4'", "'#2'", "'+'", "'#3'", "'('", "')'", "'#4'", "'*'", "'#5'", "'#6'", "'#7'", "'matched'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'kw5'", "'kw6'", "'kw7'", "'kw8'", "'!'", "'#14'"
     };
     public static final int RULE_ID=4;
+    public static final int T__40=40;
     public static final int T__29=29;
     public static final int T__28=28;
     public static final int T__27=27;
@@ -125,14 +126,14 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:58:1: ruleModel : ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:58:1: ruleModel : ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:58:10: ( ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:58:10: ( ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) )
-            int alt1=13;
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) )
+            int alt1=14;
             switch ( input.LA(1) ) {
             case 13:
                 {
@@ -197,6 +198,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             case 34:
                 {
                 alt1=13;
+                }
+                break;
+            case 40:
+                {
+                alt1=14;
                 }
                 break;
             default:
@@ -584,6 +590,35 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
                     break;
+                case 14 :
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:216:3: ( (lv_x14_13_0= ruleActionOnly ) )
+                    {
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:216:3: ( (lv_x14_13_0= ruleActionOnly ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:217:4: (lv_x14_13_0= ruleActionOnly )
+                    {
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:217:4: (lv_x14_13_0= ruleActionOnly )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:218:5: lv_x14_13_0= ruleActionOnly
+                    {
+
+                    					markComposite(elementTypeProvider.getModel_X14ActionOnlyParserRuleCall_13_0ElementType());
+                    				
+                    pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_ruleModel687);
+                    ruleActionOnly();
+
+                    state._fsp--;
+
+
+                    					doneComposite();
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -603,19 +638,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMandatoryKeywords"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:219:1: entryRuleMandatoryKeywords : ruleMandatoryKeywords EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:231:1: entryRuleMandatoryKeywords : ruleMandatoryKeywords EOF ;
     public final void entryRuleMandatoryKeywords() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:219:27: ( ruleMandatoryKeywords EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:220:2: ruleMandatoryKeywords EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:231:27: ( ruleMandatoryKeywords EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:232:2: ruleMandatoryKeywords EOF
             {
              markComposite(elementTypeProvider.getMandatoryKeywordsElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords672);
+            pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords718);
             ruleMandatoryKeywords();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords675); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords721); 
 
             }
 
@@ -632,7 +667,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMandatoryKeywords"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:225:1: ruleMandatoryKeywords : (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:237:1: ruleMandatoryKeywords : (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) ;
     public final void ruleMandatoryKeywords() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val1_1_0=null;
@@ -644,29 +679,29 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_7=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:225:22: ( (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:226:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:237:22: ( (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:238:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:226:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:227:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:238:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:239:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
             {
 
             			markLeaf(elementTypeProvider.getMandatoryKeywords_NumberSignDigitOneKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords694); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords740); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:234:3: ( (lv_val1_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:235:4: (lv_val1_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:246:3: ( (lv_val1_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:235:4: (lv_val1_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:236:5: lv_val1_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:248:5: lv_val1_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
             				
-            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords721); 
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords767); 
 
             					doneLeaf(lv_val1_1_0);
             				
@@ -679,20 +714,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw1Keyword_2ElementType());
             		
-            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords746); 
+            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords792); 
 
             			doneLeaf(otherlv_2);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:252:3: ( (lv_val2_3_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:253:4: (lv_val2_3_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:264:3: ( (lv_val2_3_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:253:4: (lv_val2_3_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:254:5: lv_val2_3_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:266:5: lv_val2_3_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
             				
-            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords773); 
+            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords819); 
 
             					doneLeaf(lv_val2_3_0);
             				
@@ -705,27 +740,27 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw2Keyword_4ElementType());
             		
-            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords798); 
+            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords844); 
 
             			doneLeaf(otherlv_4);
             		
 
             			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw3Keyword_5ElementType());
             		
-            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords812); 
+            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords858); 
 
             			doneLeaf(otherlv_5);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:277:3: ( (lv_val3_6_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:278:4: (lv_val3_6_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:289:3: ( (lv_val3_6_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:278:4: (lv_val3_6_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:279:5: lv_val3_6_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:291:5: lv_val3_6_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
             				
-            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords839); 
+            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords885); 
 
             					doneLeaf(lv_val3_6_0);
             				
@@ -738,7 +773,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw4Keyword_7ElementType());
             		
-            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords864); 
+            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords910); 
 
             			doneLeaf(otherlv_7);
             		
@@ -761,19 +796,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:299:1: entryRuleExp0 : ruleExp0 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:311:1: entryRuleExp0 : ruleExp0 EOF ;
     public final void entryRuleExp0() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:299:14: ( ruleExp0 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:300:2: ruleExp0 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:311:14: ( ruleExp0 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:312:2: ruleExp0 EOF
             {
              markComposite(elementTypeProvider.getExp0ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExp0_in_entryRuleExp0884);
+            pushFollow(FollowSets000.FOLLOW_ruleExp0_in_entryRuleExp0930);
             ruleExp0();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0887); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0933); 
 
             }
 
@@ -790,28 +825,28 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:305:1: ruleExp0 : (otherlv_0= '#2' ruleAddition0 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:317:1: ruleExp0 : (otherlv_0= '#2' ruleAddition0 ) ;
     public final void ruleExp0() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:305:9: ( (otherlv_0= '#2' ruleAddition0 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:306:2: (otherlv_0= '#2' ruleAddition0 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:317:9: ( (otherlv_0= '#2' ruleAddition0 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:318:2: (otherlv_0= '#2' ruleAddition0 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:306:2: (otherlv_0= '#2' ruleAddition0 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:307:3: otherlv_0= '#2' ruleAddition0
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:318:2: (otherlv_0= '#2' ruleAddition0 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:319:3: otherlv_0= '#2' ruleAddition0
             {
 
             			markLeaf(elementTypeProvider.getExp0_NumberSignDigitTwoKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0906); 
+            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0952); 
 
             			doneLeaf(otherlv_0);
             		
 
             			markComposite(elementTypeProvider.getExp0_Addition0ParserRuleCall_1ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_ruleExp0918);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_ruleExp0964);
             ruleAddition0();
 
             state._fsp--;
@@ -838,19 +873,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:325:1: entryRuleAddition0 : ruleAddition0 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:337:1: entryRuleAddition0 : ruleAddition0 EOF ;
     public final void entryRuleAddition0() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:325:19: ( ruleAddition0 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:326:2: ruleAddition0 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:337:19: ( ruleAddition0 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:338:2: ruleAddition0 EOF
             {
              markComposite(elementTypeProvider.getAddition0ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_entryRuleAddition0938);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_entryRuleAddition0984);
             ruleAddition0();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0941); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0987); 
 
             }
 
@@ -867,21 +902,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:331:1: ruleAddition0 : ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:343:1: ruleAddition0 : ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) ;
     public final void ruleAddition0() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:331:14: ( ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:332:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:343:14: ( ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:344:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:332:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:333:3: rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:344:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:345:3: rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             {
 
             			markComposite(elementTypeProvider.getAddition0_Prim0ParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition0958);
+            pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition01004);
             rulePrim0();
 
             state._fsp--;
@@ -889,7 +924,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:340:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:352:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -902,10 +937,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:341:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:353:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:341:4: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:342:5: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:353:4: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:354:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getAddition0_Add0LeftAction_1_0ElementType());
@@ -917,20 +952,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             	    				markLeaf(elementTypeProvider.getAddition0_PlusSignKeyword_1_1ElementType());
             	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition0994); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition01040); 
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:354:4: ( (lv_right_3_0= rulePrim0 ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:355:5: (lv_right_3_0= rulePrim0 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:366:4: ( (lv_right_3_0= rulePrim0 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:355:5: (lv_right_3_0= rulePrim0 )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:356:6: lv_right_3_0= rulePrim0
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:368:6: lv_right_3_0= rulePrim0
             	    {
 
             	    						markComposite(elementTypeProvider.getAddition0_RightPrim0ParserRuleCall_1_2_0ElementType());
             	    					
-            	    pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition01026);
+            	    pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition01072);
             	    rulePrim0();
 
             	    state._fsp--;
@@ -972,19 +1007,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:370:1: entryRulePrim0 : rulePrim0 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:382:1: entryRulePrim0 : rulePrim0 EOF ;
     public final void entryRulePrim0() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:370:15: ( rulePrim0 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:371:2: rulePrim0 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:382:15: ( rulePrim0 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:383:2: rulePrim0 EOF
             {
              markComposite(elementTypeProvider.getPrim0ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_rulePrim0_in_entryRulePrim01065);
+            pushFollow(FollowSets000.FOLLOW_rulePrim0_in_entryRulePrim01111);
             rulePrim0();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim01068); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim01114); 
 
             }
 
@@ -1001,19 +1036,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim0"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:376:1: rulePrim0 : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:388:1: rulePrim0 : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void rulePrim0() throws RecognitionException {
         Token lv_name_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:376:10: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:377:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:388:10: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:389:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:377:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:378:3: () ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:389:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:390:3: () ( (lv_name_1_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:378:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:379:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:390:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:391:4: 
             {
 
             				precedeComposite(elementTypeProvider.getPrim0_Val0Action_0ElementType());
@@ -1022,16 +1057,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:384:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:385:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:396:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:397:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:385:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:386:5: lv_name_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:397:4: (lv_name_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:398:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01113); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01159); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -1060,19 +1095,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:399:1: entryRuleExp1 : ruleExp1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:411:1: entryRuleExp1 : ruleExp1 EOF ;
     public final void entryRuleExp1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:399:14: ( ruleExp1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:400:2: ruleExp1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:411:14: ( ruleExp1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:412:2: ruleExp1 EOF
             {
              markComposite(elementTypeProvider.getExp1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExp1_in_entryRuleExp11144);
+            pushFollow(FollowSets000.FOLLOW_ruleExp1_in_entryRuleExp11190);
             ruleExp1();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11147); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11193); 
 
             }
 
@@ -1089,28 +1124,28 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:405:1: ruleExp1 : (otherlv_0= '#3' ruleAddition1 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:417:1: ruleExp1 : (otherlv_0= '#3' ruleAddition1 ) ;
     public final void ruleExp1() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:405:9: ( (otherlv_0= '#3' ruleAddition1 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:406:2: (otherlv_0= '#3' ruleAddition1 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:417:9: ( (otherlv_0= '#3' ruleAddition1 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:418:2: (otherlv_0= '#3' ruleAddition1 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:406:2: (otherlv_0= '#3' ruleAddition1 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:407:3: otherlv_0= '#3' ruleAddition1
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:418:2: (otherlv_0= '#3' ruleAddition1 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:419:3: otherlv_0= '#3' ruleAddition1
             {
 
             			markLeaf(elementTypeProvider.getExp1_NumberSignDigitThreeKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11166); 
+            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11212); 
 
             			doneLeaf(otherlv_0);
             		
 
             			markComposite(elementTypeProvider.getExp1_Addition1ParserRuleCall_1ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_ruleExp11178);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_ruleExp11224);
             ruleAddition1();
 
             state._fsp--;
@@ -1137,19 +1172,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:425:1: entryRuleAddition1 : ruleAddition1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:437:1: entryRuleAddition1 : ruleAddition1 EOF ;
     public final void entryRuleAddition1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:425:19: ( ruleAddition1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:426:2: ruleAddition1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:437:19: ( ruleAddition1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:438:2: ruleAddition1 EOF
             {
              markComposite(elementTypeProvider.getAddition1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_entryRuleAddition11198);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_entryRuleAddition11244);
             ruleAddition1();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11201); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11247); 
 
             }
 
@@ -1166,21 +1201,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:431:1: ruleAddition1 : ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:443:1: ruleAddition1 : ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) ;
     public final void ruleAddition1() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:431:14: ( ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:432:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:443:14: ( ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:444:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:432:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:433:3: rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:444:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:445:3: rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             {
 
             			markComposite(elementTypeProvider.getAddition1_Prim1ParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11218);
+            pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11264);
             rulePrim1();
 
             state._fsp--;
@@ -1188,7 +1223,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:440:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:452:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -1201,10 +1236,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:441:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:453:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:441:4: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:442:5: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:453:4: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:454:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getAddition1_Add1LeftAction_1_0ElementType());
@@ -1216,20 +1251,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             	    				markLeaf(elementTypeProvider.getAddition1_PlusSignKeyword_1_1ElementType());
             	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11254); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11300); 
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:454:4: ( (lv_right_3_0= rulePrim1 ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:455:5: (lv_right_3_0= rulePrim1 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:466:4: ( (lv_right_3_0= rulePrim1 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:455:5: (lv_right_3_0= rulePrim1 )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:456:6: lv_right_3_0= rulePrim1
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:468:6: lv_right_3_0= rulePrim1
             	    {
 
             	    						markComposite(elementTypeProvider.getAddition1_RightPrim1ParserRuleCall_1_2_0ElementType());
             	    					
-            	    pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11286);
+            	    pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11332);
             	    rulePrim1();
 
             	    state._fsp--;
@@ -1271,19 +1306,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:470:1: entryRulePrim1 : rulePrim1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:482:1: entryRulePrim1 : rulePrim1 EOF ;
     public final void entryRulePrim1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:470:15: ( rulePrim1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:471:2: rulePrim1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:482:15: ( rulePrim1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:483:2: rulePrim1 EOF
             {
              markComposite(elementTypeProvider.getPrim1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_rulePrim1_in_entryRulePrim11325);
+            pushFollow(FollowSets000.FOLLOW_rulePrim1_in_entryRulePrim11371);
             rulePrim1();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11328); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11374); 
 
             }
 
@@ -1300,17 +1335,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:476:1: rulePrim1 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:488:1: rulePrim1 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) ;
     public final void rulePrim1() throws RecognitionException {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:476:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:477:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:488:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:489:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:477:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:489:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1328,13 +1363,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:478:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:490:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:478:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:479:4: () ( (lv_name_1_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:490:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:491:4: () ( (lv_name_1_0= RULE_ID ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:479:4: ()
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:480:5: 
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:491:4: ()
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:492:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getPrim1_Val1Action_0_0ElementType());
@@ -1343,16 +1378,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:485:4: ( (lv_name_1_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:486:5: (lv_name_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:497:4: ( (lv_name_1_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:498:5: (lv_name_1_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:486:5: (lv_name_1_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:487:6: lv_name_1_0= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:498:5: (lv_name_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:499:6: lv_name_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
                     					
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11384); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11430); 
 
                     						doneLeaf(lv_name_1_0);
                     					
@@ -1369,22 +1404,22 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:498:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:510:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:498:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:499:4: otherlv_2= '(' ruleAddition1 otherlv_4= ')'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:510:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:511:4: otherlv_2= '(' ruleAddition1 otherlv_4= ')'
                     {
 
                     				markLeaf(elementTypeProvider.getPrim1_LeftParenthesisKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11430); 
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11476); 
 
                     				doneLeaf(otherlv_2);
                     			
 
                     				markComposite(elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_rulePrim11445);
+                    pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_rulePrim11491);
                     ruleAddition1();
 
                     state._fsp--;
@@ -1395,7 +1430,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     				markLeaf(elementTypeProvider.getPrim1_RightParenthesisKeyword_1_2ElementType());
                     			
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11462); 
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11508); 
 
                     				doneLeaf(otherlv_4);
                     			
@@ -1424,19 +1459,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:525:1: entryRuleExp2 : ruleExp2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:537:1: entryRuleExp2 : ruleExp2 EOF ;
     public final void entryRuleExp2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:525:14: ( ruleExp2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:526:2: ruleExp2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:537:14: ( ruleExp2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:538:2: ruleExp2 EOF
             {
              markComposite(elementTypeProvider.getExp2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExp2_in_entryRuleExp21487);
+            pushFollow(FollowSets000.FOLLOW_ruleExp2_in_entryRuleExp21533);
             ruleExp2();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21490); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21536); 
 
             }
 
@@ -1453,28 +1488,28 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:531:1: ruleExp2 : (otherlv_0= '#4' ruleAddition2 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:543:1: ruleExp2 : (otherlv_0= '#4' ruleAddition2 ) ;
     public final void ruleExp2() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:531:9: ( (otherlv_0= '#4' ruleAddition2 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:532:2: (otherlv_0= '#4' ruleAddition2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:543:9: ( (otherlv_0= '#4' ruleAddition2 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:544:2: (otherlv_0= '#4' ruleAddition2 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:532:2: (otherlv_0= '#4' ruleAddition2 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:533:3: otherlv_0= '#4' ruleAddition2
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:544:2: (otherlv_0= '#4' ruleAddition2 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:545:3: otherlv_0= '#4' ruleAddition2
             {
 
             			markLeaf(elementTypeProvider.getExp2_NumberSignDigitFourKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21509); 
+            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21555); 
 
             			doneLeaf(otherlv_0);
             		
 
             			markComposite(elementTypeProvider.getExp2_Addition2ParserRuleCall_1ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_ruleExp21521);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_ruleExp21567);
             ruleAddition2();
 
             state._fsp--;
@@ -1501,19 +1536,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:551:1: entryRuleAddition2 : ruleAddition2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:563:1: entryRuleAddition2 : ruleAddition2 EOF ;
     public final void entryRuleAddition2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:551:19: ( ruleAddition2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:552:2: ruleAddition2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:563:19: ( ruleAddition2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:564:2: ruleAddition2 EOF
             {
              markComposite(elementTypeProvider.getAddition2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_entryRuleAddition21541);
+            pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_entryRuleAddition21587);
             ruleAddition2();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21544); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21590); 
 
             }
 
@@ -1530,21 +1565,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:557:1: ruleAddition2 : ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:569:1: ruleAddition2 : ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) ;
     public final void ruleAddition2() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:557:14: ( ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:558:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:569:14: ( ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:570:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:558:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:559:3: ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:570:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:571:3: ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             {
 
             			markComposite(elementTypeProvider.getAddition2_Multiplication2ParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21561);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21607);
             ruleMultiplication2();
 
             state._fsp--;
@@ -1552,7 +1587,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:566:3: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:578:3: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             loop5:
             do {
                 int alt5=2;
@@ -1565,10 +1600,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:567:4: () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:579:4: () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:567:4: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:568:5: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:579:4: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:580:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getAddition2_Add2LeftAction_1_0ElementType());
@@ -1580,20 +1615,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             	    				markLeaf(elementTypeProvider.getAddition2_PlusSignKeyword_1_1ElementType());
             	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21597); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21643); 
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:580:4: ( (lv_right_3_0= ruleMultiplication2 ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:581:5: (lv_right_3_0= ruleMultiplication2 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:592:4: ( (lv_right_3_0= ruleMultiplication2 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:581:5: (lv_right_3_0= ruleMultiplication2 )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:582:6: lv_right_3_0= ruleMultiplication2
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:594:6: lv_right_3_0= ruleMultiplication2
             	    {
 
             	    						markComposite(elementTypeProvider.getAddition2_RightMultiplication2ParserRuleCall_1_2_0ElementType());
             	    					
-            	    pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21629);
+            	    pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21675);
             	    ruleMultiplication2();
 
             	    state._fsp--;
@@ -1635,19 +1670,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMultiplication2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:596:1: entryRuleMultiplication2 : ruleMultiplication2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:608:1: entryRuleMultiplication2 : ruleMultiplication2 EOF ;
     public final void entryRuleMultiplication2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:596:25: ( ruleMultiplication2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:597:2: ruleMultiplication2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:608:25: ( ruleMultiplication2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:609:2: ruleMultiplication2 EOF
             {
              markComposite(elementTypeProvider.getMultiplication2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21668);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21714);
             ruleMultiplication2();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21671); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21717); 
 
             }
 
@@ -1664,21 +1699,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMultiplication2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:602:1: ruleMultiplication2 : ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:614:1: ruleMultiplication2 : ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) ;
     public final void ruleMultiplication2() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:602:20: ( ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:603:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:614:20: ( ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:615:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:603:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:604:3: rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:615:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:616:3: rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             {
 
             			markComposite(elementTypeProvider.getMultiplication2_Prim2ParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21688);
+            pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21734);
             rulePrim2();
 
             state._fsp--;
@@ -1686,7 +1721,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:611:3: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:623:3: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1699,10 +1734,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt6) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:612:4: () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:624:4: () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:612:4: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:613:5: 
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:624:4: ()
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:625:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getMultiplication2_Mult2LeftAction_1_0ElementType());
@@ -1714,20 +1749,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             	    				markLeaf(elementTypeProvider.getMultiplication2_AsteriskKeyword_1_1ElementType());
             	    			
-            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21724); 
+            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21770); 
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:625:4: ( (lv_right_3_0= rulePrim2 ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:626:5: (lv_right_3_0= rulePrim2 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:637:4: ( (lv_right_3_0= rulePrim2 ) )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:626:5: (lv_right_3_0= rulePrim2 )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:627:6: lv_right_3_0= rulePrim2
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:639:6: lv_right_3_0= rulePrim2
             	    {
 
             	    						markComposite(elementTypeProvider.getMultiplication2_RightPrim2ParserRuleCall_1_2_0ElementType());
             	    					
-            	    pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21756);
+            	    pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21802);
             	    rulePrim2();
 
             	    state._fsp--;
@@ -1769,19 +1804,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:641:1: entryRulePrim2 : rulePrim2 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:653:1: entryRulePrim2 : rulePrim2 EOF ;
     public final void entryRulePrim2() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:641:15: ( rulePrim2 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:642:2: rulePrim2 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:653:15: ( rulePrim2 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:654:2: rulePrim2 EOF
             {
              markComposite(elementTypeProvider.getPrim2ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_rulePrim2_in_entryRulePrim21795);
+            pushFollow(FollowSets000.FOLLOW_rulePrim2_in_entryRulePrim21841);
             rulePrim2();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21798); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21844); 
 
             }
 
@@ -1798,17 +1833,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim2"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:647:1: rulePrim2 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:659:1: rulePrim2 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) ;
     public final void rulePrim2() throws RecognitionException {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:647:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:648:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:659:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:660:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:648:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:660:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1826,13 +1861,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:649:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:661:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:649:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:650:4: () ( (lv_name_1_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:661:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:662:4: () ( (lv_name_1_0= RULE_ID ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:650:4: ()
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:651:5: 
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:662:4: ()
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:663:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getPrim2_Val2Action_0_0ElementType());
@@ -1841,16 +1876,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:656:4: ( (lv_name_1_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:657:5: (lv_name_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:668:4: ( (lv_name_1_0= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:669:5: (lv_name_1_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:657:5: (lv_name_1_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:658:6: lv_name_1_0= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:669:5: (lv_name_1_0= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:670:6: lv_name_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
                     					
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21854); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21900); 
 
                     						doneLeaf(lv_name_1_0);
                     					
@@ -1867,22 +1902,22 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:669:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:681:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:669:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:670:4: otherlv_2= '(' ruleAddition2 otherlv_4= ')'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:681:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:682:4: otherlv_2= '(' ruleAddition2 otherlv_4= ')'
                     {
 
                     				markLeaf(elementTypeProvider.getPrim2_LeftParenthesisKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21900); 
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21946); 
 
                     				doneLeaf(otherlv_2);
                     			
 
                     				markComposite(elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_rulePrim21915);
+                    pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_rulePrim21961);
                     ruleAddition2();
 
                     state._fsp--;
@@ -1893,7 +1928,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     				markLeaf(elementTypeProvider.getPrim2_RightParenthesisKeyword_1_2ElementType());
                     			
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21932); 
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21978); 
 
                     				doneLeaf(otherlv_4);
                     			
@@ -1922,19 +1957,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleDatatypeID"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:696:1: entryRuleDatatypeID : ruleDatatypeID EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:708:1: entryRuleDatatypeID : ruleDatatypeID EOF ;
     public final void entryRuleDatatypeID() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:696:20: ( ruleDatatypeID EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:697:2: ruleDatatypeID EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:708:20: ( ruleDatatypeID EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:709:2: ruleDatatypeID EOF
             {
              markComposite(elementTypeProvider.getDatatypeIDElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID1957);
+            pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID2003);
             ruleDatatypeID();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID1960); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID2006); 
 
             }
 
@@ -1951,18 +1986,18 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleDatatypeID"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:702:1: ruleDatatypeID : this_ID_0= RULE_ID ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:714:1: ruleDatatypeID : this_ID_0= RULE_ID ;
     public final void ruleDatatypeID() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:702:15: (this_ID_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:703:2: this_ID_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:714:15: (this_ID_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:715:2: this_ID_0= RULE_ID
             {
 
             		markLeaf(elementTypeProvider.getDatatypeID_IDTerminalRuleCallElementType());
             	
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID1974); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID2020); 
 
             		doneLeaf(this_ID_0);
             	
@@ -1982,19 +2017,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleSingleCrossReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:713:1: entryRuleSingleCrossReference : ruleSingleCrossReference EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:725:1: entryRuleSingleCrossReference : ruleSingleCrossReference EOF ;
     public final void entryRuleSingleCrossReference() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:713:30: ( ruleSingleCrossReference EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:714:2: ruleSingleCrossReference EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:725:30: ( ruleSingleCrossReference EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:726:2: ruleSingleCrossReference EOF
             {
              markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference1990);
+            pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference2036);
             ruleSingleCrossReference();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference1993); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference2039); 
 
             }
 
@@ -2011,7 +2046,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleSingleCrossReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:719:1: ruleSingleCrossReference : (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:731:1: ruleSingleCrossReference : (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) ;
     public final void ruleSingleCrossReference() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_1=null;
@@ -2025,26 +2060,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_9=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:719:25: ( (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:720:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:731:25: ( (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:732:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:720:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:721:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:732:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:733:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             {
 
             			markLeaf(elementTypeProvider.getSingleCrossReference_NumberSignDigitFiveKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2012); 
+            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2058); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:728:3: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:729:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:740:3: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:741:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:729:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:730:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:741:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:742:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:730:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:742:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -2062,12 +2097,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt8) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:731:6: lv_name_1_1= RULE_TERMINAL_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:743:6: lv_name_1_1= RULE_TERMINAL_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
                     					
-                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2047); 
+                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2093); 
 
                     						doneLeaf(lv_name_1_1);
                     					
@@ -2075,12 +2110,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:739:6: lv_name_1_2= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:751:6: lv_name_1_2= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
                     					
-                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2081); 
+                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2127); 
 
                     						doneLeaf(lv_name_1_2);
                     					
@@ -2096,7 +2131,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:749:3: (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:761:3: (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2105,25 +2140,25 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt9) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:750:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:762:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleCrossReference_Kw1Keyword_2_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2119); 
+                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2165); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:757:4: ( (otherlv_3= RULE_TERMINAL_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:758:5: (otherlv_3= RULE_TERMINAL_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:769:4: ( (otherlv_3= RULE_TERMINAL_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:758:5: (otherlv_3= RULE_TERMINAL_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:759:6: otherlv_3= RULE_TERMINAL_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:771:6: otherlv_3= RULE_TERMINAL_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceCrossReference_2_1_0ElementType());
                     					
-                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2151); 
+                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2197); 
 
                     						doneLeaf(otherlv_3);
                     					
@@ -2139,7 +2174,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:769:3: (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:781:3: (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2148,25 +2183,25 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:770:4: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:782:4: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleCrossReference_Kw2Keyword_3_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2190); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2236); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:777:4: ( ( ruleDatatypeID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:778:5: ( ruleDatatypeID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:789:4: ( ( ruleDatatypeID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:778:5: ( ruleDatatypeID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:779:6: ruleDatatypeID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:791:6: ruleDatatypeID
                     {
 
                     						markComposite(elementTypeProvider.getSingleCrossReference_Ref2SingleCrossReferenceCrossReference_3_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2220);
+                    pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2266);
                     ruleDatatypeID();
 
                     state._fsp--;
@@ -2186,7 +2221,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:789:3: (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:801:3: (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2195,25 +2230,25 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt11) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:790:4: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:802:4: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleCrossReference_Kw3Keyword_4_0ElementType());
                     			
-                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2259); 
+                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2305); 
 
                     				doneLeaf(otherlv_6);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:797:4: ( (otherlv_7= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:798:5: (otherlv_7= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:809:4: ( (otherlv_7= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:798:5: (otherlv_7= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:799:6: otherlv_7= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:811:6: otherlv_7= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceCrossReference_4_1_0ElementType());
                     					
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2291); 
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2337); 
 
                     						doneLeaf(otherlv_7);
                     					
@@ -2229,7 +2264,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:809:3: (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:821:3: (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2238,25 +2273,25 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt12) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:810:4: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:822:4: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleCrossReference_Kw4Keyword_5_0ElementType());
                     			
-                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2330); 
+                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2376); 
 
                     				doneLeaf(otherlv_8);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:817:4: ( (otherlv_9= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:818:5: (otherlv_9= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:829:4: ( (otherlv_9= RULE_ID ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:818:5: (otherlv_9= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:819:6: otherlv_9= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:831:6: otherlv_9= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceCrossReference_5_1_0ElementType());
                     					
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2362); 
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2408); 
 
                     						doneLeaf(otherlv_9);
                     					
@@ -2291,19 +2326,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanAlternative"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:833:1: entryRuleBooleanAlternative : ruleBooleanAlternative EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:845:1: entryRuleBooleanAlternative : ruleBooleanAlternative EOF ;
     public final void entryRuleBooleanAlternative() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:833:28: ( ruleBooleanAlternative EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:834:2: ruleBooleanAlternative EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:845:28: ( ruleBooleanAlternative EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:846:2: ruleBooleanAlternative EOF
             {
              markComposite(elementTypeProvider.getBooleanAlternativeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2401);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2447);
             ruleBooleanAlternative();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2404); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2450); 
 
             }
 
@@ -2320,34 +2355,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanAlternative"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:839:1: ruleBooleanAlternative : (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:851:1: ruleBooleanAlternative : (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) ;
     public final void ruleBooleanAlternative() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:839:23: ( (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:840:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:851:23: ( (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:852:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:840:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:841:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:852:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:853:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             {
 
             			markLeaf(elementTypeProvider.getBooleanAlternative_NumberSignDigitSixKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2423); 
+            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2469); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:848:3: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:849:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:860:3: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:849:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:850:5: lv_bool_1_0= ruleBooleanAlternativeLiteral
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:862:5: lv_bool_1_0= ruleBooleanAlternativeLiteral
             {
 
             					markComposite(elementTypeProvider.getBooleanAlternative_BoolBooleanAlternativeLiteralParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2450);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2496);
             ruleBooleanAlternativeLiteral();
 
             state._fsp--;
@@ -2380,19 +2415,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanAlternativeLiteral"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:863:1: entryRuleBooleanAlternativeLiteral : ruleBooleanAlternativeLiteral EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:875:1: entryRuleBooleanAlternativeLiteral : ruleBooleanAlternativeLiteral EOF ;
     public final void entryRuleBooleanAlternativeLiteral() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:863:35: ( ruleBooleanAlternativeLiteral EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:864:2: ruleBooleanAlternativeLiteral EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:875:35: ( ruleBooleanAlternativeLiteral EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:876:2: ruleBooleanAlternativeLiteral EOF
             {
              markComposite(elementTypeProvider.getBooleanAlternativeLiteralElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2481);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2527);
             ruleBooleanAlternativeLiteral();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2484); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2530); 
 
             }
 
@@ -2409,20 +2444,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanAlternativeLiteral"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:869:1: ruleBooleanAlternativeLiteral : ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:881:1: ruleBooleanAlternativeLiteral : ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) ;
     public final void ruleBooleanAlternativeLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_isTrue_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:869:30: ( ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:870:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:881:30: ( ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:882:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:870:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:871:3: () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:882:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:883:3: () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:871:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:872:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:883:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:884:4: 
             {
 
             				precedeComposite(elementTypeProvider.getBooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0ElementType());
@@ -2431,7 +2466,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:877:3: (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:889:3: (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2449,12 +2484,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt13) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:878:4: otherlv_1= 'kw1'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:890:4: otherlv_1= 'kw1'
                     {
 
                     				markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_Kw1Keyword_1_0ElementType());
                     			
-                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2522); 
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2568); 
 
                     				doneLeaf(otherlv_1);
                     			
@@ -2462,18 +2497,18 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:886:4: ( (lv_isTrue_2_0= 'kw2' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:898:4: ( (lv_isTrue_2_0= 'kw2' ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:886:4: ( (lv_isTrue_2_0= 'kw2' ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:887:5: (lv_isTrue_2_0= 'kw2' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:898:4: ( (lv_isTrue_2_0= 'kw2' ) )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:899:5: (lv_isTrue_2_0= 'kw2' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:887:5: (lv_isTrue_2_0= 'kw2' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:888:6: lv_isTrue_2_0= 'kw2'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:899:5: (lv_isTrue_2_0= 'kw2' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:900:6: lv_isTrue_2_0= 'kw2'
                     {
 
                     						markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_IsTrueKw2Keyword_1_1_0ElementType());
                     					
-                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2563); 
+                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2609); 
 
                     						doneLeaf(lv_isTrue_2_0);
                     					
@@ -2508,19 +2543,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleUnassignedDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:902:1: entryRuleUnassignedDatatype : ruleUnassignedDatatype EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:914:1: entryRuleUnassignedDatatype : ruleUnassignedDatatype EOF ;
     public final void entryRuleUnassignedDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:902:28: ( ruleUnassignedDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:903:2: ruleUnassignedDatatype EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:914:28: ( ruleUnassignedDatatype EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:915:2: ruleUnassignedDatatype EOF
             {
              markComposite(elementTypeProvider.getUnassignedDatatypeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2601);
+            pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2647);
             ruleUnassignedDatatype();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2604); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2650); 
 
             }
 
@@ -2537,35 +2572,35 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleUnassignedDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:908:1: ruleUnassignedDatatype : (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:920:1: ruleUnassignedDatatype : (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) ;
     public final void ruleUnassignedDatatype() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:908:23: ( (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:909:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:920:23: ( (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:921:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:909:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:910:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:921:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:922:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
             {
 
             			markLeaf(elementTypeProvider.getUnassignedDatatype_NumberSignDigitSevenKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2623); 
+            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2669); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:917:3: ( (lv_val_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:918:4: (lv_val_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:929:3: ( (lv_val_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:918:4: (lv_val_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:919:5: lv_val_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:931:5: lv_val_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
             				
-            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2650); 
+            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2696); 
 
             					doneLeaf(lv_val_1_0);
             				
@@ -2578,7 +2613,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markComposite(elementTypeProvider.getUnassignedDatatype_KW1ParserRuleCall_2ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleUnassignedDatatype2673);
+            pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleUnassignedDatatype2719);
             ruleKW1();
 
             state._fsp--;
@@ -2605,19 +2640,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleKW1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:939:1: entryRuleKW1 : ruleKW1 EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:951:1: entryRuleKW1 : ruleKW1 EOF ;
     public final void entryRuleKW1() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:939:13: ( ruleKW1 EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:940:2: ruleKW1 EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:951:13: ( ruleKW1 EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:952:2: ruleKW1 EOF
             {
              markComposite(elementTypeProvider.getKW1ElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleKW1_in_entryRuleKW12693);
+            pushFollow(FollowSets000.FOLLOW_ruleKW1_in_entryRuleKW12739);
             ruleKW1();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12696); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12742); 
 
             }
 
@@ -2634,16 +2669,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleKW1"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:945:1: ruleKW1 : (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:957:1: ruleKW1 : (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) ;
     public final void ruleKW1() throws RecognitionException {
         Token kw=null;
         Token this_INT_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:945:8: ( (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:946:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:957:8: ( (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:958:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:946:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:958:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2661,12 +2696,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt15) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:947:3: kw= 'kw1'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:959:3: kw= 'kw1'
                     {
 
                     			markLeaf(elementTypeProvider.getKW1_Kw1Keyword_0ElementType());
                     		
-                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12715); 
+                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12761); 
 
                     			doneLeaf(kw);
                     		
@@ -2674,19 +2709,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:955:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:967:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:955:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:956:4: kw= 'matched' (this_INT_2= RULE_INT )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:967:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:968:4: kw= 'matched' (this_INT_2= RULE_INT )?
                     {
 
                     				markLeaf(elementTypeProvider.getKW1_MatchedKeyword_1_0ElementType());
                     			
-                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12743); 
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12789); 
 
                     				doneLeaf(kw);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:963:4: (this_INT_2= RULE_INT )?
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:975:4: (this_INT_2= RULE_INT )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2695,12 +2730,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:964:5: this_INT_2= RULE_INT
+                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:976:5: this_INT_2= RULE_INT
                             {
 
                             					markLeaf(elementTypeProvider.getKW1_INTTerminalRuleCall_1_1ElementType());
                             				
-                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12767); 
+                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12813); 
 
                             					doneLeaf(this_INT_2);
                             				
@@ -2735,19 +2770,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleOptionalSingleTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:977:1: entryRuleOptionalSingleTransition : ruleOptionalSingleTransition EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:989:1: entryRuleOptionalSingleTransition : ruleOptionalSingleTransition EOF ;
     public final void entryRuleOptionalSingleTransition() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:977:34: ( ruleOptionalSingleTransition EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:978:2: ruleOptionalSingleTransition EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:989:34: ( ruleOptionalSingleTransition EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:990:2: ruleOptionalSingleTransition EOF
             {
              markComposite(elementTypeProvider.getOptionalSingleTransitionElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2799);
+            pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2845);
             ruleOptionalSingleTransition();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2802); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2848); 
 
             }
 
@@ -2764,26 +2799,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleOptionalSingleTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:983:1: ruleOptionalSingleTransition : (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:995:1: ruleOptionalSingleTransition : (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleOptionalSingleTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:983:29: ( (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:984:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:995:29: ( (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:996:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:984:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:985:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:996:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:997:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getOptionalSingleTransition_NumberSignDigitEightKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2821); 
+            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2867); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:992:3: ( ruleKW1 )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1004:3: ( ruleKW1 )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2792,12 +2827,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt16) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:993:4: ruleKW1
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1005:4: ruleKW1
                     {
 
                     				markComposite(elementTypeProvider.getOptionalSingleTransition_KW1ParserRuleCall_1ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2839);
+                    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2885);
                     ruleKW1();
 
                     state._fsp--;
@@ -2811,16 +2846,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1001:3: ( (lv_val_2_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1002:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1013:3: ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1014:4: (lv_val_2_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1002:4: (lv_val_2_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1003:5: lv_val_2_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1014:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1015:5: lv_val_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
             				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2872); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2918); 
 
             					doneLeaf(lv_val_2_0);
             				
@@ -2849,19 +2884,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleOptionalManyTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1016:1: entryRuleOptionalManyTransition : ruleOptionalManyTransition EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1028:1: entryRuleOptionalManyTransition : ruleOptionalManyTransition EOF ;
     public final void entryRuleOptionalManyTransition() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1016:32: ( ruleOptionalManyTransition EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1017:2: ruleOptionalManyTransition EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1028:32: ( ruleOptionalManyTransition EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1029:2: ruleOptionalManyTransition EOF
             {
              markComposite(elementTypeProvider.getOptionalManyTransitionElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2903);
+            pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2949);
             ruleOptionalManyTransition();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2906); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2952); 
 
             }
 
@@ -2878,26 +2913,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleOptionalManyTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1022:1: ruleOptionalManyTransition : (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1034:1: ruleOptionalManyTransition : (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleOptionalManyTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1022:27: ( (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1023:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1034:27: ( (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1035:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1023:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1024:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1035:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1036:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getOptionalManyTransition_NumberSignDigitNineKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition2925); 
+            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition2971); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1031:3: ( ruleKW1 )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1043:3: ( ruleKW1 )*
             loop17:
             do {
                 int alt17=2;
@@ -2910,12 +2945,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt17) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1032:4: ruleKW1
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1044:4: ruleKW1
             	    {
 
             	    				markComposite(elementTypeProvider.getOptionalManyTransition_KW1ParserRuleCall_1ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalManyTransition2943);
+            	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalManyTransition2989);
             	    ruleKW1();
 
             	    state._fsp--;
@@ -2932,16 +2967,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1040:3: ( (lv_val_2_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1041:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1052:3: ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1053:4: (lv_val_2_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1041:4: (lv_val_2_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1042:5: lv_val_2_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1053:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1054:5: lv_val_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
             				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition2976); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition3022); 
 
             					doneLeaf(lv_val_2_0);
             				
@@ -2970,19 +3005,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMandatoryManyTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1055:1: entryRuleMandatoryManyTransition : ruleMandatoryManyTransition EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1067:1: entryRuleMandatoryManyTransition : ruleMandatoryManyTransition EOF ;
     public final void entryRuleMandatoryManyTransition() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1055:33: ( ruleMandatoryManyTransition EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1056:2: ruleMandatoryManyTransition EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1067:33: ( ruleMandatoryManyTransition EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1068:2: ruleMandatoryManyTransition EOF
             {
              markComposite(elementTypeProvider.getMandatoryManyTransitionElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3007);
+            pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3053);
             ruleMandatoryManyTransition();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3010); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3056); 
 
             }
 
@@ -2999,26 +3034,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMandatoryManyTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1061:1: ruleMandatoryManyTransition : (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1073:1: ruleMandatoryManyTransition : (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleMandatoryManyTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1061:28: ( (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1062:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1073:28: ( (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1074:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1062:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1063:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1074:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1075:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getMandatoryManyTransition_NumberSignDigitOneDigitZeroKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3029); 
+            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3075); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1070:3: ( ruleKW1 )+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1082:3: ( ruleKW1 )+
             int cnt18=0;
             loop18:
             do {
@@ -3032,12 +3067,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt18) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1071:4: ruleKW1
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1083:4: ruleKW1
             	    {
 
             	    				markComposite(elementTypeProvider.getMandatoryManyTransition_KW1ParserRuleCall_1ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3047);
+            	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3093);
             	    ruleKW1();
 
             	    state._fsp--;
@@ -3058,16 +3093,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 cnt18++;
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1079:3: ( (lv_val_2_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1080:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1091:3: ( (lv_val_2_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1092:4: (lv_val_2_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1080:4: (lv_val_2_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1081:5: lv_val_2_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1092:4: (lv_val_2_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1093:5: lv_val_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
             				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3080); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3126); 
 
             					doneLeaf(lv_val_2_0);
             				
@@ -3096,19 +3131,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAlternativeTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1094:1: entryRuleAlternativeTransition : ruleAlternativeTransition EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1106:1: entryRuleAlternativeTransition : ruleAlternativeTransition EOF ;
     public final void entryRuleAlternativeTransition() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1094:31: ( ruleAlternativeTransition EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1095:2: ruleAlternativeTransition EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1106:31: ( ruleAlternativeTransition EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1107:2: ruleAlternativeTransition EOF
             {
              markComposite(elementTypeProvider.getAlternativeTransitionElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3111);
+            pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3157);
             ruleAlternativeTransition();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3114); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3160); 
 
             }
 
@@ -3125,27 +3160,27 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAlternativeTransition"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1100:1: ruleAlternativeTransition : (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1112:1: ruleAlternativeTransition : (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) ;
     public final void ruleAlternativeTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token lv_val_3_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1100:26: ( (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1101:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1112:26: ( (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1113:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1101:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1102:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1113:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1114:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getAlternativeTransition_NumberSignDigitOneDigitOneKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3133); 
+            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3179); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1109:3: ( ruleKW1 | otherlv_2= 'kw2' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1121:3: ( ruleKW1 | otherlv_2= 'kw2' )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3163,12 +3198,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt19) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1110:4: ruleKW1
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1122:4: ruleKW1
                     {
 
                     				markComposite(elementTypeProvider.getAlternativeTransition_KW1ParserRuleCall_1_0ElementType());
                     			
-                    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleAlternativeTransition3151);
+                    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleAlternativeTransition3197);
                     ruleKW1();
 
                     state._fsp--;
@@ -3180,12 +3215,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1118:4: otherlv_2= 'kw2'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1130:4: otherlv_2= 'kw2'
                     {
 
                     				markLeaf(elementTypeProvider.getAlternativeTransition_Kw2Keyword_1_1ElementType());
                     			
-                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3177); 
+                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3223); 
 
                     				doneLeaf(otherlv_2);
                     			
@@ -3195,16 +3230,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1126:3: ( (lv_val_3_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1127:4: (lv_val_3_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1138:3: ( (lv_val_3_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1139:4: (lv_val_3_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1127:4: (lv_val_3_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1128:5: lv_val_3_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1139:4: (lv_val_3_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1140:5: lv_val_3_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
             				
-            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3209); 
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3255); 
 
             					doneLeaf(lv_val_3_0);
             				
@@ -3233,19 +3268,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanDatatypeID"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1141:1: entryRuleBooleanDatatypeID : ruleBooleanDatatypeID EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1153:1: entryRuleBooleanDatatypeID : ruleBooleanDatatypeID EOF ;
     public final void entryRuleBooleanDatatypeID() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1141:27: ( ruleBooleanDatatypeID EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1142:2: ruleBooleanDatatypeID EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1153:27: ( ruleBooleanDatatypeID EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1154:2: ruleBooleanDatatypeID EOF
             {
              markComposite(elementTypeProvider.getBooleanDatatypeIDElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3240);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3286);
             ruleBooleanDatatypeID();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3243); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3289); 
 
             }
 
@@ -3262,18 +3297,18 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanDatatypeID"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1147:1: ruleBooleanDatatypeID : this_ID_0= RULE_ID ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1159:1: ruleBooleanDatatypeID : this_ID_0= RULE_ID ;
     public final void ruleBooleanDatatypeID() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1147:22: (this_ID_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1148:2: this_ID_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1159:22: (this_ID_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1160:2: this_ID_0= RULE_ID
             {
 
             		markLeaf(elementTypeProvider.getBooleanDatatypeID_IDTerminalRuleCallElementType());
             	
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3257); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3303); 
 
             		doneLeaf(this_ID_0);
             	
@@ -3293,19 +3328,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanValues"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1158:1: entryRuleBooleanValues : ruleBooleanValues EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1170:1: entryRuleBooleanValues : ruleBooleanValues EOF ;
     public final void entryRuleBooleanValues() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1158:23: ( ruleBooleanValues EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1159:2: ruleBooleanValues EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1170:23: ( ruleBooleanValues EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1171:2: ruleBooleanValues EOF
             {
              markComposite(elementTypeProvider.getBooleanValuesElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3273);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3319);
             ruleBooleanValues();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3276); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3322); 
 
             }
 
@@ -3322,21 +3357,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanValues"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1164:1: ruleBooleanValues : ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1176:1: ruleBooleanValues : ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) ;
     public final void ruleBooleanValues() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_val1_2_0=null;
         Token lv_val2_3_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1164:18: ( ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1165:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1176:18: ( ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1177:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1165:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1166:3: () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1177:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1178:3: () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1166:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1167:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1178:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1179:4: 
             {
 
             				precedeComposite(elementTypeProvider.getBooleanValues_BooleanValuesAction_0ElementType());
@@ -3348,11 +3383,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getBooleanValues_NumberSignDigitOneDigitTwoKeyword_1ElementType());
             		
-            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3308); 
+            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3354); 
 
             			doneLeaf(otherlv_1);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1179:3: ( (lv_val1_2_0= 'kw1' ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1191:3: ( (lv_val1_2_0= 'kw1' ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -3361,15 +3396,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt20) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1180:4: (lv_val1_2_0= 'kw1' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1192:4: (lv_val1_2_0= 'kw1' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1180:4: (lv_val1_2_0= 'kw1' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1181:5: lv_val1_2_0= 'kw1'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1192:4: (lv_val1_2_0= 'kw1' )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1193:5: lv_val1_2_0= 'kw1'
                     {
 
                     					markLeaf(elementTypeProvider.getBooleanValues_Val1Kw1Keyword_2_0ElementType());
                     				
-                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3335); 
+                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3381); 
 
                     					doneLeaf(lv_val1_2_0);
                     				
@@ -3382,7 +3417,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1190:3: ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1202:3: ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -3391,15 +3426,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt21) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1191:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1203:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1191:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1192:5: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1203:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1204:5: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
                     {
 
                     					markLeaf(elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
                     				
-                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3374); 
+                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3420); 
 
                     					doneLeaf(lv_val2_3_0);
                     				
@@ -3412,7 +3447,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1201:3: ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1213:3: ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -3421,15 +3456,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt22) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1202:4: (lv_val3_4_0= ruleBooleanDatatypeID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1214:4: (lv_val3_4_0= ruleBooleanDatatypeID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1202:4: (lv_val3_4_0= ruleBooleanDatatypeID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1203:5: lv_val3_4_0= ruleBooleanDatatypeID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1214:4: (lv_val3_4_0= ruleBooleanDatatypeID )
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1215:5: lv_val3_4_0= ruleBooleanDatatypeID
                     {
 
                     					markComposite(elementTypeProvider.getBooleanValues_Val3BooleanDatatypeIDParserRuleCall_4_0ElementType());
                     				
-                    pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3413);
+                    pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3459);
                     ruleBooleanDatatypeID();
 
                     state._fsp--;
@@ -3465,19 +3500,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleLongAlternative"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1216:1: entryRuleLongAlternative : ruleLongAlternative EOF ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1228:1: entryRuleLongAlternative : ruleLongAlternative EOF ;
     public final void entryRuleLongAlternative() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1216:25: ( ruleLongAlternative EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1217:2: ruleLongAlternative EOF
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1228:25: ( ruleLongAlternative EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1229:2: ruleLongAlternative EOF
             {
              markComposite(elementTypeProvider.getLongAlternativeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3445);
+            pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3491);
             ruleLongAlternative();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3448); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3494); 
 
             }
 
@@ -3494,7 +3529,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleLongAlternative"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1222:1: ruleLongAlternative : (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1234:1: ruleLongAlternative : (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) ;
     public final void ruleLongAlternative() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_foo_1_0=null;
@@ -3517,29 +3552,29 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_18=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1222:20: ( (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1223:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1234:20: ( (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1235:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1223:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1224:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1235:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1236:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
             {
 
             			markLeaf(elementTypeProvider.getLongAlternative_NumberSignDigitOneDigitThreeKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3467); 
+            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3513); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1231:3: ( (lv_foo_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1232:4: (lv_foo_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1243:3: ( (lv_foo_1_0= RULE_ID ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1232:4: (lv_foo_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1233:5: lv_foo_1_0= RULE_ID
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1245:5: lv_foo_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
             				
-            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3494); 
+            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3540); 
 
             					doneLeaf(lv_foo_1_0);
             				
@@ -3549,7 +3584,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1242:3: ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )*
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1254:3: ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )*
             loop31:
             do {
                 int alt31=9;
@@ -3599,19 +3634,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt31) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1243:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1255:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1243:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1244:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1255:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1256:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw1Keyword_2_0_0ElementType());
             	    				
-            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3532); 
+            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3578); 
 
             	    					doneLeaf(otherlv_2);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1251:5: ( (lv_val1_3_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1263:5: ( (lv_val1_3_0= RULE_ID ) )?
             	    int alt23=2;
             	    int LA23_0 = input.LA(1);
 
@@ -3620,15 +3655,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt23) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1252:6: (lv_val1_3_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1264:6: (lv_val1_3_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1252:6: (lv_val1_3_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1253:7: lv_val1_3_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1264:6: (lv_val1_3_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1265:7: lv_val1_3_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
             	            						
-            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3569); 
+            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3615); 
 
             	            							doneLeaf(lv_val1_3_0);
             	            						
@@ -3648,19 +3683,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1264:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1276:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1264:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1265:5: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1276:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1277:5: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw2Keyword_2_1_0ElementType());
             	    				
-            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3624); 
+            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3670); 
 
             	    					doneLeaf(otherlv_4);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1272:5: ( (lv_val2_5_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1284:5: ( (lv_val2_5_0= RULE_ID ) )?
             	    int alt24=2;
             	    int LA24_0 = input.LA(1);
 
@@ -3669,15 +3704,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt24) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1273:6: (lv_val2_5_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1285:6: (lv_val2_5_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1273:6: (lv_val2_5_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1274:7: lv_val2_5_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1285:6: (lv_val2_5_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1286:7: lv_val2_5_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
             	            						
-            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3661); 
+            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3707); 
 
             	            							doneLeaf(lv_val2_5_0);
             	            						
@@ -3697,19 +3732,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 3 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1285:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1297:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1285:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1286:5: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1297:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1298:5: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw3Keyword_2_2_0ElementType());
             	    				
-            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3716); 
+            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3762); 
 
             	    					doneLeaf(otherlv_6);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1293:5: ( (lv_val3_7_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1305:5: ( (lv_val3_7_0= RULE_ID ) )?
             	    int alt25=2;
             	    int LA25_0 = input.LA(1);
 
@@ -3718,15 +3753,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt25) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1294:6: (lv_val3_7_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1306:6: (lv_val3_7_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1294:6: (lv_val3_7_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1295:7: lv_val3_7_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1306:6: (lv_val3_7_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1307:7: lv_val3_7_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
             	            						
-            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3753); 
+            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3799); 
 
             	            							doneLeaf(lv_val3_7_0);
             	            						
@@ -3746,19 +3781,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 4 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1306:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1318:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1306:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1307:5: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1318:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1319:5: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw4Keyword_2_3_0ElementType());
             	    				
-            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3808); 
+            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3854); 
 
             	    					doneLeaf(otherlv_8);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1314:5: ( (lv_val4_9_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1326:5: ( (lv_val4_9_0= RULE_ID ) )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
 
@@ -3767,15 +3802,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt26) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1315:6: (lv_val4_9_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1327:6: (lv_val4_9_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1315:6: (lv_val4_9_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1316:7: lv_val4_9_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1327:6: (lv_val4_9_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1328:7: lv_val4_9_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
             	            						
-            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3845); 
+            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3891); 
 
             	            							doneLeaf(lv_val4_9_0);
             	            						
@@ -3795,19 +3830,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 5 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1327:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1339:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1327:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1328:5: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1339:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1340:5: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw5Keyword_2_4_0ElementType());
             	    				
-            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3900); 
+            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3946); 
 
             	    					doneLeaf(otherlv_10);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1335:5: ( (lv_val5_11_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1347:5: ( (lv_val5_11_0= RULE_ID ) )?
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
 
@@ -3816,15 +3851,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt27) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1336:6: (lv_val5_11_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1348:6: (lv_val5_11_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1336:6: (lv_val5_11_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1337:7: lv_val5_11_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1348:6: (lv_val5_11_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1349:7: lv_val5_11_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
             	            						
-            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3937); 
+            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3983); 
 
             	            							doneLeaf(lv_val5_11_0);
             	            						
@@ -3844,19 +3879,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 6 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1348:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1360:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1348:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1349:5: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1360:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1361:5: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw6Keyword_2_5_0ElementType());
             	    				
-            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative3992); 
+            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative4038); 
 
             	    					doneLeaf(otherlv_12);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1356:5: ( (lv_val6_13_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1368:5: ( (lv_val6_13_0= RULE_ID ) )?
             	    int alt28=2;
             	    int LA28_0 = input.LA(1);
 
@@ -3865,15 +3900,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt28) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1357:6: (lv_val6_13_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1369:6: (lv_val6_13_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1357:6: (lv_val6_13_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1358:7: lv_val6_13_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1369:6: (lv_val6_13_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1370:7: lv_val6_13_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
             	            						
-            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4029); 
+            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4075); 
 
             	            							doneLeaf(lv_val6_13_0);
             	            						
@@ -3893,19 +3928,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 7 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1369:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1381:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1369:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1370:5: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1381:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1382:5: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw7Keyword_2_6_0ElementType());
             	    				
-            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative4084); 
+            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative4130); 
 
             	    					doneLeaf(otherlv_14);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1377:5: ( (lv_val7_15_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1389:5: ( (lv_val7_15_0= RULE_ID ) )?
             	    int alt29=2;
             	    int LA29_0 = input.LA(1);
 
@@ -3914,15 +3949,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt29) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1378:6: (lv_val7_15_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1390:6: (lv_val7_15_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1378:6: (lv_val7_15_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1379:7: lv_val7_15_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1390:6: (lv_val7_15_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1391:7: lv_val7_15_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
             	            						
-            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4121); 
+            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4167); 
 
             	            							doneLeaf(lv_val7_15_0);
             	            						
@@ -3942,19 +3977,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 8 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1390:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1402:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1390:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1391:5: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1402:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1403:5: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
             	    {
 
             	    					markLeaf(elementTypeProvider.getLongAlternative_Kw8Keyword_2_7_0ElementType());
             	    				
-            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4176); 
+            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4222); 
 
             	    					doneLeaf(otherlv_16);
             	    				
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1398:5: ( (lv_val8_17_0= RULE_ID ) )?
+            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1410:5: ( (lv_val8_17_0= RULE_ID ) )?
             	    int alt30=2;
             	    int LA30_0 = input.LA(1);
 
@@ -3963,15 +3998,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt30) {
             	        case 1 :
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1399:6: (lv_val8_17_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1411:6: (lv_val8_17_0= RULE_ID )
             	            {
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1399:6: (lv_val8_17_0= RULE_ID )
-            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1400:7: lv_val8_17_0= RULE_ID
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1411:6: (lv_val8_17_0= RULE_ID )
+            	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1412:7: lv_val8_17_0= RULE_ID
             	            {
 
             	            							markLeaf(elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
             	            						
-            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4213); 
+            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4259); 
 
             	            							doneLeaf(lv_val8_17_0);
             	            						
@@ -3999,7 +4034,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getLongAlternative_ExclamationMarkKeyword_3ElementType());
             		
-            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4255); 
+            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4301); 
 
             			doneLeaf(otherlv_18);
             		
@@ -4019,6 +4054,182 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         return ;
     }
     // $ANTLR end "ruleLongAlternative"
+
+
+    // $ANTLR start "entryRuleActionOnly"
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1434:1: entryRuleActionOnly : ruleActionOnly EOF ;
+    public final void entryRuleActionOnly() throws RecognitionException {
+        try {
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1434:20: ( ruleActionOnly EOF )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1435:2: ruleActionOnly EOF
+            {
+             markComposite(elementTypeProvider.getActionOnlyElementType()); 
+            pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_entryRuleActionOnly4321);
+            ruleActionOnly();
+
+            state._fsp--;
+
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleActionOnly4324); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleActionOnly"
+
+
+    // $ANTLR start "ruleActionOnly"
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:1: ruleActionOnly : (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
+    public final void ruleActionOnly() throws RecognitionException {
+        Token otherlv_0=null;
+        Token otherlv_1=null;
+        Token this_ID_2=null;
+        Token otherlv_4=null;
+        Token this_ID_5=null;
+
+        try {
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:15: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            {
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1442:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
+            {
+
+            			markLeaf(elementTypeProvider.getActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType());
+            		
+            otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleActionOnly4343); 
+
+            			doneLeaf(otherlv_0);
+            		
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1449:3: (otherlv_1= 'kw1' )?
+            int alt32=2;
+            int LA32_0 = input.LA(1);
+
+            if ( (LA32_0==14) ) {
+                alt32=1;
+            }
+            switch (alt32) {
+                case 1 :
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1450:4: otherlv_1= 'kw1'
+                    {
+
+                    				markLeaf(elementTypeProvider.getActionOnly_Kw1Keyword_1ElementType());
+                    			
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleActionOnly4363); 
+
+                    				doneLeaf(otherlv_1);
+                    			
+
+                    }
+                    break;
+
+            }
+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1458:3: (this_ID_2= RULE_ID )?
+            int alt33=2;
+            int LA33_0 = input.LA(1);
+
+            if ( (LA33_0==RULE_ID) ) {
+                alt33=1;
+            }
+            switch (alt33) {
+                case 1 :
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1459:4: this_ID_2= RULE_ID
+                    {
+
+                    				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_2ElementType());
+                    			
+                    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4389); 
+
+                    				doneLeaf(this_ID_2);
+                    			
+
+                    }
+                    break;
+
+            }
+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1467:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1468:4: 
+            {
+
+            				precedeComposite(elementTypeProvider.getActionOnly_ActionOnlyAction_3ElementType());
+            				doneComposite();
+            			
+
+            }
+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1473:3: (otherlv_4= 'kw2' )?
+            int alt34=2;
+            int LA34_0 = input.LA(1);
+
+            if ( (LA34_0==15) ) {
+                alt34=1;
+            }
+            switch (alt34) {
+                case 1 :
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1474:4: otherlv_4= 'kw2'
+                    {
+
+                    				markLeaf(elementTypeProvider.getActionOnly_Kw2Keyword_4ElementType());
+                    			
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleActionOnly4428); 
+
+                    				doneLeaf(otherlv_4);
+                    			
+
+                    }
+                    break;
+
+            }
+
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1482:3: (this_ID_5= RULE_ID )?
+            int alt35=2;
+            int LA35_0 = input.LA(1);
+
+            if ( (LA35_0==RULE_ID) ) {
+                alt35=1;
+            }
+            switch (alt35) {
+                case 1 :
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1483:4: this_ID_5= RULE_ID
+                    {
+
+                    				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_5ElementType());
+                    			
+                    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4454); 
+
+                    				doneLeaf(this_ID_5);
+                    			
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "ruleActionOnly"
 
     // Delegated rules
 
@@ -4042,148 +4253,156 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         public static final BitSet FOLLOW_ruleAlternativeTransition_in_ruleModel549 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleBooleanValues_in_ruleModel595 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLongAlternative_in_ruleModel641 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords672 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMandatoryKeywords675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleMandatoryKeywords694 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords721 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleMandatoryKeywords746 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords773 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleMandatoryKeywords798 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleMandatoryKeywords812 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords839 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleMandatoryKeywords864 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExp0_in_entryRuleExp0884 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExp0887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleExp0906 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleAddition0_in_ruleExp0918 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAddition0_in_entryRuleAddition0938 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAddition0941 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrim0_in_ruleAddition0958 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_19_in_ruleAddition0994 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rulePrim0_in_ruleAddition01026 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_rulePrim0_in_entryRulePrim01065 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrim01068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rulePrim01113 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExp1_in_entryRuleExp11144 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExp11147 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleExp11166 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_ruleAddition1_in_ruleExp11178 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAddition1_in_entryRuleAddition11198 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAddition11201 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrim1_in_ruleAddition11218 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_19_in_ruleAddition11254 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_rulePrim1_in_ruleAddition11286 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_rulePrim1_in_entryRulePrim11325 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrim11328 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rulePrim11384 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_rulePrim11430 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_ruleAddition1_in_rulePrim11445 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_rulePrim11462 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExp2_in_entryRuleExp21487 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExp21490 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleExp21509 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_ruleAddition2_in_ruleExp21521 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAddition2_in_entryRuleAddition21541 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAddition21544 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplication2_in_ruleAddition21561 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_19_in_ruleAddition21597 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_ruleMultiplication2_in_ruleAddition21629 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21668 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplication21671 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrim2_in_ruleMultiplication21688 = new BitSet(new long[]{0x0000000001000002L});
-        public static final BitSet FOLLOW_24_in_ruleMultiplication21724 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_rulePrim2_in_ruleMultiplication21756 = new BitSet(new long[]{0x0000000001000002L});
-        public static final BitSet FOLLOW_rulePrim2_in_entryRulePrim21795 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrim21798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rulePrim21854 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_rulePrim21900 = new BitSet(new long[]{0x0000000000200010L});
-        public static final BitSet FOLLOW_ruleAddition2_in_rulePrim21915 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_rulePrim21932 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID1957 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDatatypeID1960 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleDatatypeID1974 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference1990 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSingleCrossReference1993 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_ruleSingleCrossReference2012 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2047 = new BitSet(new long[]{0x000000000003C002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2081 = new BitSet(new long[]{0x000000000003C002L});
-        public static final BitSet FOLLOW_14_in_ruleSingleCrossReference2119 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2151 = new BitSet(new long[]{0x0000000000038002L});
-        public static final BitSet FOLLOW_15_in_ruleSingleCrossReference2190 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2220 = new BitSet(new long[]{0x0000000000030002L});
-        public static final BitSet FOLLOW_16_in_ruleSingleCrossReference2259 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2291 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleSingleCrossReference2330 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2362 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2401 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanAlternative2404 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_ruleBooleanAlternative2423 = new BitSet(new long[]{0x000000000000C000L});
-        public static final BitSet FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2450 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2481 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2484 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleBooleanAlternativeLiteral2522 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleBooleanAlternativeLiteral2563 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2601 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedDatatype2604 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_27_in_ruleUnassignedDatatype2623 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleUnassignedDatatype2650 = new BitSet(new long[]{0x0000000010004000L});
-        public static final BitSet FOLLOW_ruleKW1_in_ruleUnassignedDatatype2673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKW1_in_entryRuleKW12693 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleKW12696 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleKW12715 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_28_in_ruleKW12743 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleKW12767 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2799 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOptionalSingleTransition2802 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_ruleOptionalSingleTransition2821 = new BitSet(new long[]{0x0000000010004010L});
-        public static final BitSet FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2839 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2872 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2903 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOptionalManyTransition2906 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_ruleOptionalManyTransition2925 = new BitSet(new long[]{0x0000000010004010L});
-        public static final BitSet FOLLOW_ruleKW1_in_ruleOptionalManyTransition2943 = new BitSet(new long[]{0x0000000010004010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleOptionalManyTransition2976 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3007 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMandatoryManyTransition3010 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_ruleMandatoryManyTransition3029 = new BitSet(new long[]{0x0000000010004000L});
-        public static final BitSet FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3047 = new BitSet(new long[]{0x0000000010004010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3080 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3111 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAlternativeTransition3114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_ruleAlternativeTransition3133 = new BitSet(new long[]{0x000000001000C000L});
-        public static final BitSet FOLLOW_ruleKW1_in_ruleAlternativeTransition3151 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_15_in_ruleAlternativeTransition3177 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAlternativeTransition3209 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3240 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanDatatypeID3243 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3257 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3273 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanValues3276 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_ruleBooleanValues3308 = new BitSet(new long[]{0x0000000000004092L});
-        public static final BitSet FOLLOW_14_in_ruleBooleanValues3335 = new BitSet(new long[]{0x0000000000000092L});
-        public static final BitSet FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3374 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3445 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLongAlternative3448 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_ruleLongAlternative3467 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3494 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_14_in_ruleLongAlternative3532 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3569 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_15_in_ruleLongAlternative3624 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3661 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_16_in_ruleLongAlternative3716 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3753 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_17_in_ruleLongAlternative3808 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3845 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_35_in_ruleLongAlternative3900 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3937 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_36_in_ruleLongAlternative3992 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4029 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_37_in_ruleLongAlternative4084 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4121 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_38_in_ruleLongAlternative4176 = new BitSet(new long[]{0x000000F80003C010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4213 = new BitSet(new long[]{0x000000F80003C000L});
-        public static final BitSet FOLLOW_39_in_ruleLongAlternative4255 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleActionOnly_in_ruleModel687 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords718 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMandatoryKeywords721 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleMandatoryKeywords740 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords767 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleMandatoryKeywords792 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords819 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleMandatoryKeywords844 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleMandatoryKeywords858 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryKeywords885 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleMandatoryKeywords910 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExp0_in_entryRuleExp0930 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExp0933 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleExp0952 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleAddition0_in_ruleExp0964 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAddition0_in_entryRuleAddition0984 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAddition0987 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrim0_in_ruleAddition01004 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_ruleAddition01040 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rulePrim0_in_ruleAddition01072 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rulePrim0_in_entryRulePrim01111 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrim01114 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rulePrim01159 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExp1_in_entryRuleExp11190 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExp11193 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_ruleExp11212 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_ruleAddition1_in_ruleExp11224 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAddition1_in_entryRuleAddition11244 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAddition11247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrim1_in_ruleAddition11264 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_ruleAddition11300 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_rulePrim1_in_ruleAddition11332 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rulePrim1_in_entryRulePrim11371 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrim11374 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rulePrim11430 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rulePrim11476 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_ruleAddition1_in_rulePrim11491 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_rulePrim11508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExp2_in_entryRuleExp21533 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExp21536 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_ruleExp21555 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_ruleAddition2_in_ruleExp21567 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAddition2_in_entryRuleAddition21587 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAddition21590 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplication2_in_ruleAddition21607 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_ruleAddition21643 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_ruleMultiplication2_in_ruleAddition21675 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21714 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplication21717 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrim2_in_ruleMultiplication21734 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_24_in_ruleMultiplication21770 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_rulePrim2_in_ruleMultiplication21802 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rulePrim2_in_entryRulePrim21841 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrim21844 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rulePrim21900 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rulePrim21946 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_ruleAddition2_in_rulePrim21961 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_rulePrim21978 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID2003 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDatatypeID2006 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleDatatypeID2020 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference2036 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSingleCrossReference2039 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_ruleSingleCrossReference2058 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2093 = new BitSet(new long[]{0x000000000003C002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2127 = new BitSet(new long[]{0x000000000003C002L});
+        public static final BitSet FOLLOW_14_in_ruleSingleCrossReference2165 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2197 = new BitSet(new long[]{0x0000000000038002L});
+        public static final BitSet FOLLOW_15_in_ruleSingleCrossReference2236 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2266 = new BitSet(new long[]{0x0000000000030002L});
+        public static final BitSet FOLLOW_16_in_ruleSingleCrossReference2305 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2337 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleSingleCrossReference2376 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleCrossReference2408 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2447 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanAlternative2450 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_ruleBooleanAlternative2469 = new BitSet(new long[]{0x000000000000C000L});
+        public static final BitSet FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2496 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2527 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2530 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleBooleanAlternativeLiteral2568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleBooleanAlternativeLiteral2609 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2647 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedDatatype2650 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_ruleUnassignedDatatype2669 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleUnassignedDatatype2696 = new BitSet(new long[]{0x0000000010004000L});
+        public static final BitSet FOLLOW_ruleKW1_in_ruleUnassignedDatatype2719 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKW1_in_entryRuleKW12739 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKW12742 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleKW12761 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_ruleKW12789 = new BitSet(new long[]{0x0000000000000042L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleKW12813 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2845 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOptionalSingleTransition2848 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_ruleOptionalSingleTransition2867 = new BitSet(new long[]{0x0000000010004010L});
+        public static final BitSet FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2885 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2949 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOptionalManyTransition2952 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_ruleOptionalManyTransition2971 = new BitSet(new long[]{0x0000000010004010L});
+        public static final BitSet FOLLOW_ruleKW1_in_ruleOptionalManyTransition2989 = new BitSet(new long[]{0x0000000010004010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleOptionalManyTransition3022 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3053 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMandatoryManyTransition3056 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_ruleMandatoryManyTransition3075 = new BitSet(new long[]{0x0000000010004000L});
+        public static final BitSet FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3093 = new BitSet(new long[]{0x0000000010004010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3157 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAlternativeTransition3160 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_ruleAlternativeTransition3179 = new BitSet(new long[]{0x000000001000C000L});
+        public static final BitSet FOLLOW_ruleKW1_in_ruleAlternativeTransition3197 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_15_in_ruleAlternativeTransition3223 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAlternativeTransition3255 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3286 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanDatatypeID3289 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3303 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3319 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanValues3322 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_ruleBooleanValues3354 = new BitSet(new long[]{0x0000000000004092L});
+        public static final BitSet FOLLOW_14_in_ruleBooleanValues3381 = new BitSet(new long[]{0x0000000000000092L});
+        public static final BitSet FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3420 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3459 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3491 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLongAlternative3494 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_ruleLongAlternative3513 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3540 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_14_in_ruleLongAlternative3578 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3615 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_15_in_ruleLongAlternative3670 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3707 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_16_in_ruleLongAlternative3762 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3799 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_17_in_ruleLongAlternative3854 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3891 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_35_in_ruleLongAlternative3946 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative3983 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_36_in_ruleLongAlternative4038 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4075 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_37_in_ruleLongAlternative4130 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4167 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_38_in_ruleLongAlternative4222 = new BitSet(new long[]{0x000000F80003C010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleLongAlternative4259 = new BitSet(new long[]{0x000000F80003C000L});
+        public static final BitSet FOLLOW_39_in_ruleLongAlternative4301 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleActionOnly_in_entryRuleActionOnly4321 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleActionOnly4324 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_ruleActionOnly4343 = new BitSet(new long[]{0x000000000000C012L});
+        public static final BitSet FOLLOW_14_in_ruleActionOnly4363 = new BitSet(new long[]{0x0000000000008012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4389 = new BitSet(new long[]{0x0000000000008012L});
+        public static final BitSet FOLLOW_15_in_ruleActionOnly4428 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4454 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

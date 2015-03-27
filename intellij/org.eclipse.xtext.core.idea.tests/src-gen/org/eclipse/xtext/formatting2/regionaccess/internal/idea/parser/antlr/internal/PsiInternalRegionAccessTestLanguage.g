@@ -58,44 +58,90 @@ entryRuleRoot:
 ruleRoot:
 	(
 		{
-			markLeaf(elementTypeProvider.getRoot_TestKeyword_0ElementType());
+			markComposite(elementTypeProvider.getRoot_SimpleParserRuleCall_0ElementType());
 		}
-		otherlv_0='test'
+		ruleSimple
 		{
-			doneLeaf(otherlv_0);
+			doneComposite();
 		}
+		    |
+		{
+			markComposite(elementTypeProvider.getRoot_DelegationParserRuleCall_1ElementType());
+		}
+		ruleDelegation
+		{
+			doneComposite();
+		}
+		    |
+		{
+			markComposite(elementTypeProvider.getRoot_UnassignedParserRuleCall_2ElementType());
+		}
+		ruleUnassigned
+		{
+			doneComposite();
+		}
+		    |
+		{
+			markComposite(elementTypeProvider.getRoot_PrefixedUnassignedParserRuleCall_3ElementType());
+		}
+		rulePrefixedUnassigned
+		{
+			doneComposite();
+		}
+		    |
 		(
 			{
-				markComposite(elementTypeProvider.getRoot_SimpleParserRuleCall_1_0ElementType());
+				markLeaf(elementTypeProvider.getRoot_DigitFiveKeyword_4_0ElementType());
 			}
-			ruleSimple
+			otherlv_4='5'
+			{
+				doneLeaf(otherlv_4);
+			}
+			{
+				markComposite(elementTypeProvider.getRoot_ExpressionParserRuleCall_4_1ElementType());
+			}
+			ruleExpression
 			{
 				doneComposite();
 			}
-			    |
+		)
+		    |
+		(
 			{
-				markComposite(elementTypeProvider.getRoot_DelegationParserRuleCall_1_1ElementType());
+				markLeaf(elementTypeProvider.getRoot_DigitSixKeyword_5_0ElementType());
 			}
-			ruleDelegation
+			otherlv_6='6'
 			{
-				doneComposite();
+				doneLeaf(otherlv_6);
 			}
-			    |
 			{
-				markComposite(elementTypeProvider.getRoot_UnassignedParserRuleCall_1_2ElementType());
+				markComposite(elementTypeProvider.getRoot_MixedParserRuleCall_5_1ElementType());
 			}
-			ruleUnassigned
-			{
-				doneComposite();
-			}
-			    |
-			{
-				markComposite(elementTypeProvider.getRoot_PrefixedUnassignedParserRuleCall_1_3ElementType());
-			}
-			rulePrefixedUnassigned
+			ruleMixed
 			{
 				doneComposite();
 			}
+		)
+		    |
+		(
+			{
+				markLeaf(elementTypeProvider.getRoot_DigitSevenKeyword_6_0ElementType());
+			}
+			otherlv_8='7'
+			{
+				doneLeaf(otherlv_8);
+			}
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_1_0ElementType());
+					}
+					lv_mixed_9_0=ruleMixed
+					{
+						doneComposite();
+					}
+				)
+			)
 		)
 	)
 ;
@@ -258,6 +304,367 @@ ruleDelegate:
 			lv_name_0_0=RULE_ID
 			{
 				doneLeaf(lv_name_0_0);
+			}
+		)
+	)
+;
+
+//Entry rule entryRuleExpression
+entryRuleExpression:
+	{ markComposite(elementTypeProvider.getExpressionElementType()); }
+	ruleExpression
+	EOF;
+
+// Rule Expression
+ruleExpression:
+	(
+		{
+			markComposite(elementTypeProvider.getExpression_PrimaryParserRuleCall_0ElementType());
+		}
+		rulePrimary
+		{
+			doneComposite();
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getExpression_AddLeftAction_1_0ElementType());
+					doneComposite();
+				}
+			)
+			{
+				markLeaf(elementTypeProvider.getExpression_PlusSignKeyword_1_1ElementType());
+			}
+			otherlv_2='+'
+			{
+				doneLeaf(otherlv_2);
+			}
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getExpression_RightPrimaryParserRuleCall_1_2_0ElementType());
+					}
+					lv_right_3_0=rulePrimary
+					{
+						doneComposite();
+					}
+				)
+			)
+		)*
+	)
+;
+
+//Entry rule entryRulePrimary
+entryRulePrimary:
+	{ markComposite(elementTypeProvider.getPrimaryElementType()); }
+	rulePrimary
+	EOF;
+
+// Rule Primary
+rulePrimary:
+	(
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getPrimary_NamedAction_0_0ElementType());
+					doneComposite();
+				}
+			)
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType());
+					}
+					lv_name_1_0=RULE_ID
+					{
+						doneLeaf(lv_name_1_0);
+					}
+				)
+			)
+		)
+		    |
+		{
+			markComposite(elementTypeProvider.getPrimary_ParenthesizedParserRuleCall_1ElementType());
+		}
+		ruleParenthesized
+		{
+			doneComposite();
+		}
+	)
+;
+
+//Entry rule entryRuleParenthesized
+entryRuleParenthesized:
+	{ markComposite(elementTypeProvider.getParenthesizedElementType()); }
+	ruleParenthesized
+	EOF;
+
+// Rule Parenthesized
+ruleParenthesized:
+	(
+		{
+			markLeaf(elementTypeProvider.getParenthesized_LeftParenthesisKeyword_0ElementType());
+		}
+		otherlv_0='('
+		{
+			doneLeaf(otherlv_0);
+		}
+		{
+			markComposite(elementTypeProvider.getParenthesized_ExpressionParserRuleCall_1ElementType());
+		}
+		ruleExpression
+		{
+			doneComposite();
+		}
+		{
+			markLeaf(elementTypeProvider.getParenthesized_RightParenthesisKeyword_2ElementType());
+		}
+		otherlv_2=')'
+		{
+			doneLeaf(otherlv_2);
+		}
+	)
+;
+
+//Entry rule entryRuleMixed
+entryRuleMixed:
+	{ markComposite(elementTypeProvider.getMixedElementType()); }
+	ruleMixed
+	EOF;
+
+// Rule Mixed
+ruleMixed:
+	(
+		{
+			markLeaf(elementTypeProvider.getMixed_LeftParenthesisKeyword_0ElementType());
+		}
+		otherlv_0='('
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			{
+				markLeaf(elementTypeProvider.getMixed_UnassignedKeyword_1_0ElementType());
+			}
+			otherlv_1='unassigned'
+			{
+				doneLeaf(otherlv_1);
+			}
+			(
+				{
+					markLeaf(elementTypeProvider.getMixed_IDTerminalRuleCall_1_1_0ElementType());
+				}
+				this_ID_2=RULE_ID
+				{
+					doneLeaf(this_ID_2);
+				}
+				    |
+				{
+					markComposite(elementTypeProvider.getMixed_DatatypeParserRuleCall_1_1_1ElementType());
+				}
+				ruleDatatype
+				{
+					doneComposite();
+				}
+			)
+		)?
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getMixed_ActionAction_2_0ElementType());
+					doneComposite();
+				}
+			)
+			    |
+			{
+				markComposite(elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType());
+			}
+			ruleMixed
+			{
+				doneComposite();
+			}
+			    |
+			(
+				(
+					(
+						{
+							markLeaf(elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType());
+						}
+						lv_name_6_0=RULE_ID
+						{
+							doneLeaf(lv_name_6_0);
+						}
+					)
+				)
+				    |
+				(
+					{
+						markLeaf(elementTypeProvider.getMixed_ChildKeyword_2_2_1_0ElementType());
+					}
+					otherlv_7='child'
+					{
+						doneLeaf(otherlv_7);
+					}
+					(
+						(
+							{
+								markComposite(elementTypeProvider.getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType());
+							}
+							lv_eobj_8_0=ruleMixed
+							{
+								doneComposite();
+							}
+						)
+					)
+				)
+				    |
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getMixed_DatatypeDatatypeParserRuleCall_2_2_2_0ElementType());
+						}
+						lv_datatype_9_0=ruleDatatype
+						{
+							doneComposite();
+						}
+					)
+				)
+				    |
+				(
+					{
+						markLeaf(elementTypeProvider.getMixed_RefKeyword_2_2_3_0ElementType());
+					}
+					otherlv_10='ref'
+					{
+						doneLeaf(otherlv_10);
+					}
+					(
+						(
+							{
+								markLeaf(elementTypeProvider.getMixed_RefMixedCrossReference_2_2_3_1_0ElementType());
+							}
+							otherlv_11=RULE_ID
+							{
+								doneLeaf(otherlv_11);
+							}
+						)
+					)
+				)
+				    |
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getMixed_LitEnumEnumRuleCall_2_2_4_0ElementType());
+						}
+						lv_lit_12_0=ruleEnum
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
+		)
+		{
+			markLeaf(elementTypeProvider.getMixed_RightParenthesisKeyword_3ElementType());
+		}
+		otherlv_13=')'
+		{
+			doneLeaf(otherlv_13);
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getMixed_AssignedActionChildAction_4_0ElementType());
+					doneComposite();
+				}
+			)
+			{
+				markLeaf(elementTypeProvider.getMixed_ActionKeyword_4_1ElementType());
+			}
+			otherlv_15='action'
+			{
+				doneLeaf(otherlv_15);
+			}
+			(
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType());
+						}
+						lv_body_16_0=ruleMixed
+						{
+							doneComposite();
+						}
+					)
+				)
+				{
+					markLeaf(elementTypeProvider.getMixed_EndKeyword_4_2_1ElementType());
+				}
+				otherlv_17='end'
+				{
+					doneLeaf(otherlv_17);
+				}
+			)?
+		)*
+	)
+;
+
+//Entry rule entryRuleDatatype
+entryRuleDatatype:
+	{ markComposite(elementTypeProvider.getDatatypeElementType()); }
+	ruleDatatype
+	EOF;
+
+// Rule Datatype
+ruleDatatype:
+	(
+		{
+			markLeaf(elementTypeProvider.getDatatype_DatatypeKeyword_0ElementType());
+		}
+		kw='datatype'
+		{
+			doneLeaf(kw);
+		}
+		(
+			{
+				markComposite(elementTypeProvider.getDatatype_DatatypeParserRuleCall_1_0ElementType());
+			}
+			ruleDatatype
+			{
+				doneComposite();
+			}
+			    |
+			{
+				markLeaf(elementTypeProvider.getDatatype_IDTerminalRuleCall_1_1ElementType());
+			}
+			this_ID_2=RULE_ID
+			{
+				doneLeaf(this_ID_2);
+			}
+		)
+	)
+;
+
+// Rule Enum
+ruleEnum:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getEnum_Lit1EnumLiteralDeclaration_0ElementType());
+			}
+			enumLiteral_0='lit1'
+			{
+				doneLeaf(enumLiteral_0);
+			}
+		)
+		    |
+		(
+			{
+				markLeaf(elementTypeProvider.getEnum_Lit2EnumLiteralDeclaration_1ElementType());
+			}
+			enumLiteral_1='lit2'
+			{
+				doneLeaf(enumLiteral_1);
 			}
 		)
 	)

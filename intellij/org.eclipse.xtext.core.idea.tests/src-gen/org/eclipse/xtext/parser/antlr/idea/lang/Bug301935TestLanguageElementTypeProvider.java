@@ -97,11 +97,11 @@ public class Bug301935TestLanguageElementTypeProvider implements IElementTypePro
 		public static IGrammarAwareElementType createNL_Group_1ElementType() {
 			return new IGrammarAwareElementType("NL_Group_1_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getGroup_1());
 		}
-		public static IGrammarAwareElementType createNL_CarriageReturnCrKeyword_1_0ElementType() {
-			return new IGrammarAwareElementType("NL_CarriageReturnCrKeyword_1_0_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getCarriageReturnCrKeyword_1_0());
+		public static IGrammarAwareElementType createNL_Control000dKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("NL_Control000dKeyword_1_0_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getControl000dKeyword_1_0());
 		}
-		public static IGrammarAwareElementType createNL_LineFeedLfKeyword_1_1ElementType() {
-			return new IGrammarAwareElementType("NL_LineFeedLfKeyword_1_1_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getLineFeedLfKeyword_1_1());
+		public static IGrammarAwareElementType createNL_Control000aKeyword_1_1ElementType() {
+			return new IGrammarAwareElementType("NL_Control000aKeyword_1_1_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getControl000aKeyword_1_1());
 		}
 		public static IGrammarAwareElementType createNL_WSTerminalRuleCall_2ElementType() {
 			return new IGrammarAwareElementType("NL_WSTerminalRuleCall_2_ELEMENT_TYPE", Bug301935TestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNLAccess().getWSTerminalRuleCall_2());
@@ -116,9 +116,9 @@ public class Bug301935TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType NL_Group_1_ELEMENT_TYPE = associate(NLFactory.createNL_Group_1ElementType());
 
-	public static final IGrammarAwareElementType NL_CarriageReturnCrKeyword_1_0_ELEMENT_TYPE = associate(NLFactory.createNL_CarriageReturnCrKeyword_1_0ElementType());
+	public static final IGrammarAwareElementType NL_Control000dKeyword_1_0_ELEMENT_TYPE = associate(NLFactory.createNL_Control000dKeyword_1_0ElementType());
 
-	public static final IGrammarAwareElementType NL_LineFeedLfKeyword_1_1_ELEMENT_TYPE = associate(NLFactory.createNL_LineFeedLfKeyword_1_1ElementType());
+	public static final IGrammarAwareElementType NL_Control000aKeyword_1_1_ELEMENT_TYPE = associate(NLFactory.createNL_Control000aKeyword_1_1ElementType());
 
 	public static final IGrammarAwareElementType NL_WSTerminalRuleCall_2_ELEMENT_TYPE = associate(NLFactory.createNL_WSTerminalRuleCall_2ElementType());
 
@@ -190,12 +190,12 @@ public class Bug301935TestLanguageElementTypeProvider implements IElementTypePro
 		return NL_Group_1_ELEMENT_TYPE;
 	}
 	
-	public IGrammarAwareElementType getNL_CarriageReturnCrKeyword_1_0ElementType() {
-		return NL_CarriageReturnCrKeyword_1_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getNL_Control000dKeyword_1_0ElementType() {
+		return NL_Control000dKeyword_1_0_ELEMENT_TYPE;
 	}
 	
-	public IGrammarAwareElementType getNL_LineFeedLfKeyword_1_1ElementType() {
-		return NL_LineFeedLfKeyword_1_1_ELEMENT_TYPE;
+	public IGrammarAwareElementType getNL_Control000aKeyword_1_1ElementType() {
+		return NL_Control000aKeyword_1_1_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getNL_WSTerminalRuleCall_2ElementType() {

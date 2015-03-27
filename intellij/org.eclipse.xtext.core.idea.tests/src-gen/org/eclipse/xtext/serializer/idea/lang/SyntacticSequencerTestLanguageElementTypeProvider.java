@@ -111,6 +111,12 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 		public static IGrammarAwareElementType createModel_X13LongAlternativeParserRuleCall_12_0ElementType() {
 			return new IGrammarAwareElementType("Model_X13LongAlternativeParserRuleCall_12_0_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX13LongAlternativeParserRuleCall_12_0());
 		}
+		public static IGrammarAwareElementType createModel_X14Assignment_13ElementType() {
+			return new IGrammarAwareElementType("Model_X14Assignment_13_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX14Assignment_13());
+		}
+		public static IGrammarAwareElementType createModel_X14ActionOnlyParserRuleCall_13_0ElementType() {
+			return new IGrammarAwareElementType("Model_X14ActionOnlyParserRuleCall_13_0_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX14ActionOnlyParserRuleCall_13_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType Model_ELEMENT_TYPE = associate(ModelFactory.createModelElementType());
@@ -168,6 +174,10 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 	public static final IGrammarAwareElementType Model_X13Assignment_12_ELEMENT_TYPE = associate(ModelFactory.createModel_X13Assignment_12ElementType());
 
 	public static final IGrammarAwareElementType Model_X13LongAlternativeParserRuleCall_12_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X13LongAlternativeParserRuleCall_12_0ElementType());
+
+	public static final IGrammarAwareElementType Model_X14Assignment_13_ELEMENT_TYPE = associate(ModelFactory.createModel_X14Assignment_13ElementType());
+
+	public static final IGrammarAwareElementType Model_X14ActionOnlyParserRuleCall_13_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X14ActionOnlyParserRuleCall_13_0ElementType());
 
 	private static class MandatoryKeywordsFactory {
 		public static IGrammarAwareElementType createMandatoryKeywordsElementType() {
@@ -1301,6 +1311,49 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType LongAlternative_ExclamationMarkKeyword_3_ELEMENT_TYPE = associate(LongAlternativeFactory.createLongAlternative_ExclamationMarkKeyword_3ElementType());
 
+	private static class ActionOnlyFactory {
+		public static IGrammarAwareElementType createActionOnlyElementType() {
+			return new IGrammarAwareElementType("ActionOnly_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyRule());
+		}
+		public static IGrammarAwareElementType createActionOnly_GroupElementType() {
+			return new IGrammarAwareElementType("ActionOnly_Group_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_NumberSignDigitOneDigitFourKeyword_0_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getNumberSignDigitOneDigitFourKeyword_0());
+		}
+		public static IGrammarAwareElementType createActionOnly_Kw1Keyword_1ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_Kw1Keyword_1_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getKw1Keyword_1());
+		}
+		public static IGrammarAwareElementType createActionOnly_IDTerminalRuleCall_2ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_IDTerminalRuleCall_2_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getIDTerminalRuleCall_2());
+		}
+		public static IGrammarAwareElementType createActionOnly_ActionOnlyAction_3ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_ActionOnlyAction_3_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getActionOnlyAction_3());
+		}
+		public static IGrammarAwareElementType createActionOnly_Kw2Keyword_4ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_Kw2Keyword_4_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getKw2Keyword_4());
+		}
+		public static IGrammarAwareElementType createActionOnly_IDTerminalRuleCall_5ElementType() {
+			return new IGrammarAwareElementType("ActionOnly_IDTerminalRuleCall_5_ELEMENT_TYPE", SyntacticSequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getActionOnlyAccess().getIDTerminalRuleCall_5());
+		}
+	}
+
+	public static final IGrammarAwareElementType ActionOnly_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnlyElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_Group_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_GroupElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_NumberSignDigitOneDigitFourKeyword_0_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_Kw1Keyword_1_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_Kw1Keyword_1ElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_IDTerminalRuleCall_2_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_IDTerminalRuleCall_2ElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_ActionOnlyAction_3_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_ActionOnlyAction_3ElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_Kw2Keyword_4_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_Kw2Keyword_4ElementType());
+
+	public static final IGrammarAwareElementType ActionOnly_IDTerminalRuleCall_5_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_IDTerminalRuleCall_5ElementType());
+
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
@@ -1419,6 +1472,14 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 	
 	public IGrammarAwareElementType getModel_X13LongAlternativeParserRuleCall_12_0ElementType() {
 		return Model_X13LongAlternativeParserRuleCall_12_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getModel_X14Assignment_13ElementType() {
+		return Model_X14Assignment_13_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getModel_X14ActionOnlyParserRuleCall_13_0ElementType() {
+		return Model_X14ActionOnlyParserRuleCall_13_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getMandatoryKeywordsElementType() {
@@ -2267,6 +2328,38 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 	
 	public IGrammarAwareElementType getLongAlternative_ExclamationMarkKeyword_3ElementType() {
 		return LongAlternative_ExclamationMarkKeyword_3_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnlyElementType() {
+		return ActionOnly_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_GroupElementType() {
+		return ActionOnly_Group_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType() {
+		return ActionOnly_NumberSignDigitOneDigitFourKeyword_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_Kw1Keyword_1ElementType() {
+		return ActionOnly_Kw1Keyword_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_IDTerminalRuleCall_2ElementType() {
+		return ActionOnly_IDTerminalRuleCall_2_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_ActionOnlyAction_3ElementType() {
+		return ActionOnly_ActionOnlyAction_3_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_Kw2Keyword_4ElementType() {
+		return ActionOnly_Kw2Keyword_4_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getActionOnly_IDTerminalRuleCall_5ElementType() {
+		return ActionOnly_IDTerminalRuleCall_5_ELEMENT_TYPE;
 	}
 
 }
