@@ -3,7 +3,7 @@ import org.apache.ivy.osgi.core.ManifestParser
 buildscript {
 	repositories.jcenter()
 	dependencies {
-		classpath 'org.apache.ivy:ivy:2.4.0'
+		classpath (group: 'org.apache.ivy', name: 'ivy', version: '2.4.0')
 	}
 }
 
@@ -27,7 +27,9 @@ def toDependency(requirement) {
 	if (requirement.name.contains('.ui')) {
 		return null
 	}
-	def projectDependency = rootProject.subprojects.findResult {it.name == requirement.name ? it : null}
+	def projectDependency = rootProject.project(':plugins').findProject(requirement.name) 
+		?: rootProject.project(':tests').findProject(requirement.name)
+		?: rootProject.project(':intellij').findProject(requirement.name)
 	if (projectDependency) {
 		return projectDependency
 	}
@@ -35,37 +37,37 @@ def toDependency(requirement) {
 	* TODO these belong into the dependency resolution rules of the downstream projects
 	*/
 	if (requirement.name == 'com.google.inject') {
-		return 'com.google.inject:guice:3.0'
+		return [group:'com.google.inject', name:'guice', version:'3.0']
 	}
 	if (requirement.name == 'org.antlr.runtime') {
-		return 'org.antlr:antlr-runtime:3.2'
+		return [group:'org.antlr', name:'antlr-runtime', version:'3.2']
 	}
 	if (requirement.name == 'org.eclipse.equinox.common') {
-		return 'org.eclipse.equinox:org.eclipse.equinox.common:3.6.0'
+		return [group:'org.eclipse.equinox', name:'org.eclipse.equinox.common', version:'3.6.0']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf.mwe2')) {
-		return "org.eclipse.emf:${requirement.name}:(2.7,3.0)"
+		return [group:'org.eclipse.emf', name: requirement.name, version:'(2.7,3.0)']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf.mwe')) {
-		return "org.eclipse.emf:${requirement.name}:(1.2,2.0]"
+		return [group:'org.eclipse.emf', name: requirement.name, version:'(1.2,2.0]']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf')) {
-		return "org.eclipse.emf:${requirement.name}:(2.8,3.0)"
+		return [group:'org.eclipse.emf', name: requirement.name, version:'(2.8,3.0)']
 	}
 	if (requirement.name == 'org.eclipse.jdt.core') {
-		return 'org.eclipse.tycho:org.eclipse.jdt.core:3.10.0+'
+		return [group:'org.eclipse.tycho', name: 'org.eclipse.jdt.core', version:'3.10.0+']
 	}
 	if (requirement.name == 'org.apache.log4j') {
-		return 'log4j:log4j:1.2.16'
+		return [group:'log4j', name: 'log4j', version:'1.2.16']
 	}
 	if (requirement.name == 'com.google.guava') {
-		return 'com.google.guava:guava:[10.0.1,19.0.0)'
+		return [group:'com.google.guava', name: 'guava', version:'[10.0.1,19.0.0)']
 	}
 	if (requirement.name == 'org.objectweb.asm') {
-		return 'org.ow2.asm:asm:[5.0.1,6.0.0)'
+		return [group:'org.ow2.asm', name: 'asm', version:'[5.0.1,6.0.0)']
 	}
 	if (requirement.name.startsWith('org.eclipse.xtend') || requirement.name == 'org.eclipse.xpand') {
-		return "org.eclipse.xpand:${requirement.name}:[1.1, 3.0]"
+		return [group:'org.eclipse.xpand', name: requirement.name, version:'[1.1, 3.0]']
 	}
 	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
 }
@@ -75,21 +77,19 @@ jar {
 	manifest {
 		from('META-INF/MANIFEST.MF')
 	}
-	with {
-		Properties buildProperties = new Properties()
-		File propertiesFile = new File(projectDir, 'build.properties')
-		propertiesFile.withInputStream {
-				buildProperties.load(it)
-		}
-		def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
-		binIncludes.each{ include ->
-			if (project.file(include).isDirectory()) {
-				from(include) {
-					into(include)
-				}
-			} else {
-				from(include)
+	Properties buildProperties = new Properties()
+	File propertiesFile = new File(projectDir, 'build.properties')
+	propertiesFile.withInputStream {
+			buildProperties.load(it)
+	}
+	def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+	binIncludes.each{ include ->
+		if (project.file(include).isDirectory()) {
+			from(include) {
+				into(include)
 			}
+		} else {
+			from(include)
 		}
 	}
 }
