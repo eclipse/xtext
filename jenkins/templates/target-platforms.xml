@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>14</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>B3_ACTION</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>CLEAN_BUILD</string>
+              <string>BUILD</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/eclipse/xtext.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name/>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.CloneOption>
+        <shallow>true</shallow>
+        <reference></reference>
+      </hudson.plugins.git.extensions.impl.CloneOption>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 17 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -f ${WORKSPACE}/*.b3aggr ${WORKSPACE}/*.b3aggrcon
+
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Helios.b3aggr --action ${B3_ACTION}
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Indigo.b3aggr --action ${B3_ACTION}
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Juno.b3aggr --action ${B3_ACTION}
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Kepler.b3aggr --action ${B3_ACTION}
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Luna.b3aggr --action ${B3_ACTION}
+/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Latest.b3aggr --action ${B3_ACTION}
+
+rm -rf Latest Luna Kepler Juno Indigo Helios Galileo 
+
+mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/* .</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>*/final/**/*</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets>Helios/final/*,Indigo/final/*,Juno/final/*,Kepler/final/*,Luna/final/*,Latest/final/*</targets>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.25">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.git.GitRevisionBuildParameters plugin="git@2.3.5">
+              <combineQueuedCommits>false</combineQueuedCommits>
+            </hudson.plugins.git.GitRevisionBuildParameters>
+          </configs>
+          <projects/>
+          <condition>SUCCESS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>
+    <hudson.tasks.test.AggregatedTestResultPublisher plugin="junit@1.1">
+      <includeFailedBuilds>false</includeFailedBuilds>
+    </hudson.tasks.test.AggregatedTestResultPublisher>
+    <hudson.tasks.Mailer plugin="mailer@1.11">
+      <recipients>alle-ki@itemis.de</recipients>
+      <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>150</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
+      <locks>
+        <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+          <name/>
+        </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+      </locks>
+    </hudson.plugins.locksandlatches.LockWrapper>
+  </buildWrappers>
+</project>

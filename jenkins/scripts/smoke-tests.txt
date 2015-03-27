@@ -1,0 +1,8 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec"
+
+build
+junit --stderr --stdout --launch "org.eclipse.xtext.xbase.tests/org.eclipse.xtext.xbase.tests.smoke-suites.launch" --flatXML --output "${WORKSPACE}/test.results/xbase.tests.smoke-suites-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --stderr --stdout --launch "org.eclipse.xtend.core.tests/org.eclipse.xtend.core.tests.smoke-suites.launch" --flatXML --output "${WORKSPACE}/test.results/xtend.core.tests.smoke-suites-${ECLIPSE_TARGET_ALIAS}.xml"

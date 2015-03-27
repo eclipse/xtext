@@ -1,0 +1,12 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+
+build
+
+junit --stderr --launch "org.eclipse.xtext.tests/xtext.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.tests-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.tests/xtext.tests (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.tests.xtend-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.junit4.tests-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.builder.tests/xtext.standalone.builder.junit.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.standalone.builder.junit-${ECLIPSE_TARGET_ALIAS}.xml"

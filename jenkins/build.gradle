@@ -1,0 +1,63 @@
+plugins {
+	id "com.terrafolio.jenkins" version "1.2.3"
+}
+
+ext.jdks = [
+	'1.6' : 'Java 6 Oracle',
+	'1.7' : 'Oracle JDK 1.7 Autoinstall',
+	'1.8' : 'JDK 1.8 Autoinstall'
+]
+
+ext.branches = [
+	[
+		name: 'master',
+		platforms: [
+			oldest: [
+				target: 'Helios',
+				jdk: jdks['1.6']
+			],
+			latest: [
+				target: 'Latest',
+				jdk: jdks['1.7']
+			],
+		]
+	],
+	[
+		name: 'maintenance',
+		platforms: [
+			oldest: [
+				target: 'Helios',
+				jdk: jdks['1.6']
+			],
+			latest: [
+				target: 'Latest',
+				jdk: jdks['1.7']
+			],
+		]
+	]
+]
+
+task printJobs << {
+	jenkins.jobs.each {
+		println(it.name)
+	}
+}
+
+jenkins {
+	servers {
+		xtext {
+			url 'https://xtext-builds.itemis.de/jenkins'
+			secure true
+			if (project.hasProperty('jenkinsUserName')) {
+				username jenkinsUserName
+			}
+			if (project.hasProperty('jenkinsPassword')) {
+				password jenkinsPassword
+			}
+		}
+	}
+	
+	defaultServer servers.xtext
+}
+
+apply from: 'pipelines.gradle'

@@ -1,0 +1,16 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+
+build
+
+junit --launch "org.eclipse.xtext.common.types.tests/xtext.common.types.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.common.types.tests-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.purexbase.tests/xtext.purexbase.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.purexbase.tests-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.ui.tests/xtext.xbase.ui.tests (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.ui.tests.xtend-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xtext.ui.tests/xtext.xtext.ui.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xtext.ui.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/xtext.xtext.ui.graph.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xtext.ui.graph.tests-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.ui.tests/xtext.xbase.ui.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.ui.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.ui.tests/xtext.ui.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.ui.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.ui.tests/xtext.ui.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.ui.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.builder.tests/xtext.builder.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.builder.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.example.domainmodel.tests/xtext.example.domainmodel.tests (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.example.domainmodel.tests.xtend-${ECLIPSE_TARGET_ALIAS}.xml"

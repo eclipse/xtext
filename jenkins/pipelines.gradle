@@ -1,0 +1,109 @@
+def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
+def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
+def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
+def java8Suites= ['xtend-runtime-tests-java8']
+def smokeSuites = ['smoke-tests']
+def onPushSuites = runtimeSuites + ideSuites + java8Suites
+def allSuites = onPushSuites + slowSuites + smokeSuites 
+
+branches.each { branch ->
+	def testJobs = [allSuites, ['oldest', 'latest']]
+		.combinations{ suite, platformName -> 
+			def platform = branch.platforms[platformName]
+			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk)
+		}
+		.findAll {
+			!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest'
+		}
+		.each {
+			if(java8Suites.contains(it.suite)) {
+				it.jdk = jdks['1.8']
+			}
+		}
+
+	jenkins {
+		
+		jobs.create("xtext-${branch.name}").definition {
+			xml file ('templates/push-job.xml')
+			xml override { config -> 
+				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
+					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
+					.name = "target-platform-refresh-${branch.name}"
+				config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
+					.project = "target-platforms-${branch.name}"
+				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
+					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
+					.projects	= testJobs.findAll{onPushSuites.contains(it.suite)}.collect{it.name}.join(',')
+				}
+		}
+		
+		jobs.create("target-platforms-${branch.name}").definition {
+			xml file ('templates/target-platforms.xml')
+			xml override { config -> 
+				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
+					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
+					.name = "target-platform-refresh-${branch.name}"
+				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
+					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
+					.projects	= testJobs.findAll{slowSuites.contains(it.suite)}.collect{it.name}.join(',')
+				}
+		}
+		
+		testJobs.each { job -> 
+			jobs.create(job.name).definition {
+				xml file ('templates/test-job.xml')
+				xml override { config -> 
+					config.properties.'hudson.model.ParametersDefinitionProperty'
+						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
+						.choices.a.string = job.target
+					config.scm.branches.'hudson.plugins.git.BranchSpec'.name = job.branch
+					config.jdk = job.jdk
+					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
+						.project = "xtext-${branch.name}"
+					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
+						.project = "target-platforms-${branch.name}"
+					def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
+					if (job.jdk == jdks['1.8']) {
+						params += '\n-DJAVA8=true'
+					}
+					config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'.with { builder ->
+						builder.commands = file("scripts/${job.suite}.txt").text
+						builder.params = params
+					}
+						
+					if ((slowSuites + ideSuites).contains(job.suite)) {
+						config.buildWrappers.appendNode {
+							'hudson.plugins.xvnc.Xvnc'() {
+								takeScreenshot(false)
+								useXauthority(true)
+							}
+						}
+					}
+					
+					if (smokeSuites.contains(job.suite)) {
+						config.triggers.appendNode {
+							'hudson.triggers.TimerTrigger'() {
+								spec("H 21 * * *")
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@groovy.transform.Canonical
+class TestJob {
+	String suite
+	String platformName
+	String target
+	String jdk
+	String branch
+	
+	def getName() {
+		suite + "-" + branch + "-" + platformName
+	}
+}

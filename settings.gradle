@@ -1,3 +1,5 @@
+include 'jenkins'
+
 ['plugins', 'tests'].each { folder ->
 	new File(settingsDir, folder).listFiles().findAll {
 		new File(it, 'build.properties').exists()

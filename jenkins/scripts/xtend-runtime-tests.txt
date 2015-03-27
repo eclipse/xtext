@@ -1,0 +1,7 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec"
+
+build
+junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtend.core.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtend.core.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml"

@@ -1,0 +1,12 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+
+build
+#junit --launch "org.eclipse.xtext.builder.tests/xtext.builder.tests.nojdt.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.builder.tests.nojdt-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.builder.tests/xtext.builder.tests.slow.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.builder.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.ui.tests/xtext.ui.tests.slow.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.slow.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.slow (xtend).launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.tests.slow.xtend-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xbase.ui.tests/xtext.xbase.ui.tests.slow.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xbase.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml"
+junit --launch "org.eclipse.xtext.xtext.ui.tests/xtext.xtext.ui.tests.slow.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xtext.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml"
