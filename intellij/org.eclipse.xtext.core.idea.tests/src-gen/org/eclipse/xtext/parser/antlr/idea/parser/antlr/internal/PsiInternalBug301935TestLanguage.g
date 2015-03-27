@@ -135,7 +135,7 @@ ruleNL:
 		(
 			(
 				{
-					markLeaf(elementTypeProvider.getNL_CarriageReturnCrKeyword_1_0ElementType());
+					markLeaf(elementTypeProvider.getNL_Control000dKeyword_1_0ElementType());
 				}
 				kw='\r'
 				{
@@ -143,7 +143,7 @@ ruleNL:
 				}
 			)?
 			{
-				markLeaf(elementTypeProvider.getNL_LineFeedLfKeyword_1_1ElementType());
+				markLeaf(elementTypeProvider.getNL_Control000aKeyword_1_1ElementType());
 			}
 			kw='\n'
 			{
