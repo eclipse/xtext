@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply from: "${rootDir}/gradle/dependency-mapping.gradle"
 
 dependencies {
 	def manifestFile = new File(projectDir, 'META-INF/MANIFEST.MF')
@@ -20,76 +21,6 @@ dependencies {
 		}
 }
 
-def toDependency(requirement) {
-	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
-		return null
-	}
-	def projectDependency = rootProject.project(':plugins').findProject(requirement.name) 
-		?: rootProject.project(':tests').findProject(requirement.name)
-		?: rootProject.project(':intellij').findProject(requirement.name)
-	if (projectDependency) {
-		return projectDependency
-	}
-	
-	/*
-	* TODO these belong into the dependency resolution rules of the downstream projects
-	*/
-	if (requirement.name == 'com.google.inject') {
-		return [group:'com.google.inject', name:'guice', version:'3.0']
-	}
-	if (requirement.name == 'org.antlr.runtime') {
-		return [group:'org.antlr', name:'antlr-runtime', version:'3.2']
-	}
-	if (requirement.name == 'org.eclipse.equinox.common') {
-		return [group:'org.eclipse.equinox', name:'org.eclipse.equinox.common', version:'3.6.0']
-	}
-	if (requirement.name.startsWith('org.eclipse.emf.mwe2')) {
-		return [group:'org.eclipse.emf', name: requirement.name, version:'(2.7,3.0)']
-	}
-	if (requirement.name.startsWith('org.eclipse.emf.mwe')) {
-		return [group:'org.eclipse.emf', name: requirement.name, version:'(1.2,2.0]']
-	}
-	if (requirement.name.startsWith('org.eclipse.emf')) {
-		return [group:'org.eclipse.emf', name: requirement.name, version:'(2.8,3.0)']
-	}
-	if (requirement.name == 'org.eclipse.jdt.core') {
-		return [group:'org.eclipse.tycho', name: 'org.eclipse.jdt.core', version:'3.10.0+']
-	}
-	if (requirement.name == 'org.apache.log4j') {
-		return [group:'log4j', name: 'log4j', version:'1.2.16']
-	}
-	if (requirement.name == 'com.google.guava') {
-		return [group:'com.google.guava', name: 'guava', version:'[10.0.1,19.0.0)']
-	}
-	if (requirement.name == 'org.objectweb.asm') {
-		return [group:'org.ow2.asm', name: 'asm', version:'[5.0.1,6.0.0)']
-	}
-	if (requirement.name.startsWith('org.eclipse.xtend') || requirement.name == 'org.eclipse.xpand') {
-		return [group:'org.eclipse.xpand', name: requirement.name, version:'[1.1, 3.0]']
-	}
-	if (requirement.name == 'de.itemis.xtext.antlr') {
-		return [group:'org.eclipse.xtext', name: 'xtext-antlr-generator', version:'[2.0, 3.0)']
-	}
-	if (requirement.name == 'org.hamcrest.core') {
-		return [group:'org.hamcrest', name: 'hamcrest-core', version:'1.3']
-	}
-	if (requirement.name == 'org.hamcrest.library') {
-		return [group:'org.hamcrest', name: 'hamcrest-library', version:'1.3']
-	}
-	if (requirement.name == 'org.junit') {
-		return [group:'junit', name: 'junit', version:'[4.7, 5.0)']
-	}
-	if (requirement.name == 'org.apache.commons.lang') {
-		return [group:'commons-lang', name: 'commons-lang', version:'[2.1, 3.0)']
-	}
-	if (requirement.name == 'org.apache.commons.logging') {
-		return [group:'commons-logging', name: 'commons-logging', version:'[1.2, 2.0)']
-	}
-	if (requirement.name == 'javax.inject') {
-		return [group:'javax.inject', name: 'javax.inject', version:'[1, 2)']
-	}
-	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
-}
 
 jar {
 	from('bin')
