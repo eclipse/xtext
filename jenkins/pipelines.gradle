@@ -27,6 +27,7 @@ branches.each { branch ->
 			xml file ('templates/push-job.xml')
 			xml override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+				config.description = "This job was generated"
 				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
 					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
 					.name = "target-platform-refresh-${branch.name}"
@@ -42,6 +43,7 @@ branches.each { branch ->
 			xml file ('templates/target-platforms.xml')
 			xml override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+				config.description = "This job was generated"
 				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
 					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
 					.name = "target-platform-refresh-${branch.name}"
@@ -59,7 +61,7 @@ branches.each { branch ->
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
 					config.scm.branches.'hudson.plugins.git.BranchSpec'[1].name = job.branch
-					config.description = "This job was generated on ${new java.util.Date()}"
+					config.description = "This job was generated"
 					config.jdk = job.jdk
 					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
 						.project = "xtext-${branch.name}"
