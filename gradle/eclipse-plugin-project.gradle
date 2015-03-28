@@ -11,7 +11,7 @@ apply plugin: 'java'
 apply from: "${rootDir}/gradle/dependency-mapping.gradle"
 
 dependencies {
-	def manifestFile = new File(projectDir, 'META-INF/MANIFEST.MF')
+	def manifestFile = file('META-INF/MANIFEST.MF')
 	def manifest = ManifestParser.parseManifest(manifestFile)
 	manifest.requires
 		.collect{toDependency(it)}
@@ -21,28 +21,33 @@ dependencies {
 		}
 }
 
-
-jar {
-	from('bin')
-	manifest {
-		from('META-INF/MANIFEST.MF')
-	}
-	Properties buildProperties = new Properties()
-	File propertiesFile = new File(projectDir, 'build.properties')
-	propertiesFile.withInputStream {
-			buildProperties.load(it)
-	}
-	def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
-	binIncludes.each{ include ->
-		if (project.file(include).isDirectory()) {
-			from(include) {
-				into(include)
+task configureJarFromBuildProperties {
+	doLast {
+		jar {
+			from('bin')
+			manifest {
+				from('META-INF/MANIFEST.MF')
 			}
-		} else {
-			from(include)
+			Properties buildProperties = new Properties()
+			File propertiesFile = file('build.properties')
+			propertiesFile.withInputStream {
+					buildProperties.load(it)
+			}
+			def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+			binIncludes.each{ include ->
+				if (project.file(include).isDirectory()) {
+					from(include) {
+						into(include)
+					}
+				} else {
+					from(include)
+				}
+			}
 		}
 	}
 }
+
+jar.dependsOn(configureJarFromBuildProperties)
 
 //skip compilation, done by Eclipse/Buckminster
 sourceSets*.java*.srcDirs = []
