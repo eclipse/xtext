@@ -81,7 +81,7 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 	@Test public void testBug463258_02() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile[0]), true, monitor());
+		file.create(jarInputStream(new TextFile("do/not", "care")), true, monitor());
 		addJarToClasspath(project, file);
 		
 		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
