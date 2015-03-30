@@ -125,7 +125,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import types.SomeClassWithNestedInterface;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@java.lang.SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {");
     _builder_1.newLine();
@@ -154,7 +154,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import types.SomeClassWithNestedInterface;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@java.lang.SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo extends SomeClassWithNestedInterface {");
     _builder_1.newLine();
@@ -3618,7 +3618,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def foo(int x) { ");
+    _builder.append("def foo(int x) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("switch x {");
@@ -3749,7 +3749,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("}    ");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -7336,10 +7336,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("else");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("super.equals(p) ");
+    _builder.append("super.equals(p)");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("} ");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -9097,7 +9097,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("override <LocalName extends CharSequence> accept(LocalName param) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("[ if (true) it?.apply(param) ] ");
+    _builder.append("[ if (true) it?.apply(param) ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -9187,7 +9187,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("abstract class A {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def CharSequence m() ");
+    _builder.append("def CharSequence m()");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -9570,7 +9570,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("package foo");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class bar { ");
+    _builder.append("class bar {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("String name = \'foobar\'");
@@ -9628,7 +9628,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("*/");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class bar { ");
+    _builder.append("class bar {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -9673,7 +9673,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
-    _builder.append("class bar { ");
+    _builder.append("class bar {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -10271,7 +10271,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void testNullSafeFeatureCall_07() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo { ");
+    _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("extension org.eclipse.xtext.xbase.lib.util.ReflectExtensions");
@@ -10340,7 +10340,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void testNullSafeFeatureCall_08() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo { ");
+    _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("String field");
@@ -11461,7 +11461,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("def m() {");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("val x = ");
+    _builder.append("val x =");
     _builder.newLine();
     _builder.append("            ");
     _builder.append("if(false) {");
@@ -11543,7 +11543,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("def m() {");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("val x = ");
+    _builder.append("val x =");
     _builder.newLine();
     _builder.append("         ");
     _builder.append("identity(");

@@ -66,7 +66,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import types.SomeClassWithNestedInterface;
 			
-			@java.lang.SuppressWarnings("all")
+			@SuppressWarnings("all")
 			public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {
 			}
 		''')
@@ -82,7 +82,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import types.SomeClassWithNestedInterface;
 			
-			@java.lang.SuppressWarnings("all")
+			@SuppressWarnings("all")
 			public class Foo extends SomeClassWithNestedInterface {
 			  public SomeClassWithNestedInterface.String convert(final java.lang.String s) {
 			    return null;
@@ -963,7 +963,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testAbstractIterator_04() { 
+	def testAbstractIterator_04() {
 		assertCompilesTo(
 			'''
 				import java.util.Iterator
@@ -1326,7 +1326,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testJavaLangReflectImport() { 
+	def testJavaLangReflectImport() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -1571,7 +1571,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	def testSwitchWithBooleanExpression_3() {
 		'''
 		class Foo {
-			def foo(int x) { 
+			def foo(int x) {
 				switch x {
 					case [|1 == x].apply || x == 2: true
 					default: false
@@ -1623,7 +1623,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			            case null : [Object it|it]
 			            case null : [Integer it|it]
 			        }
-			    }    
+			    }
 			}
 		''', '''
 			import com.google.common.base.Objects;
@@ -2266,7 +2266,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testTryCatch() { 
+	def testTryCatch() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2315,7 +2315,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testTryCatch_01() { 
+	def testTryCatch_01() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2361,7 +2361,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testTryCatch_02() { 
+	def testTryCatch_02() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2399,7 +2399,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 
-	@Test	
+	@Test
 	def testClosureSneakyThrow() {
 		assertCompilesTo('''
 			import java.io.File
@@ -2496,7 +2496,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testFieldInitialization_01() { 
+	def testFieldInitialization_01() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2519,7 +2519,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testFieldInitialization_02() { 
+	def testFieldInitialization_02() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2545,7 +2545,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testFieldInitialization_03() { 
+	def testFieldInitialization_03() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2564,7 +2564,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testFieldInitialization_04() { 
+	def testFieldInitialization_04() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2581,7 +2581,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testConstructorDeclaration_01() { 
+	def testConstructorDeclaration_01() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2602,7 +2602,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testConstructorDeclaration_02() { 
+	def testConstructorDeclaration_02() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2630,7 +2630,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testConstructorDeclaration_03() { 
+	def testConstructorDeclaration_03() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2655,7 +2655,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testSneakyThrow() { 
+	def testSneakyThrow() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2683,7 +2683,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testSneakyThrow_01() { 
+	def testSneakyThrow_01() {
 		assertCompilesTo('''
 			package foo
 			
@@ -2708,7 +2708,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	@Test
-	def testSneakyThrow_02() { 
+	def testSneakyThrow_02() {
 		assertCompilesTo('''
 			package foo
 			
@@ -2739,7 +2739,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	@Test
-	def testSneakyThrow_04() { 
+	def testSneakyThrow_04() {
 		assertCompilesTo('''
 			package foo
 			
@@ -2770,7 +2770,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	@Test
-	def testSneakyThrow_03() { 
+	def testSneakyThrow_03() {
 		assertCompilesTo('''
 			package foo
 			
@@ -2798,7 +2798,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def testSimple() { 
+	def testSimple() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -2817,7 +2817,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def testConstructor() { 
+	def testConstructor() {
 		assertCompilesTo('''
 			package foo
 			class Bar {
@@ -3239,8 +3239,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					if ('foo' == p)
 						return true
 					else
-						super.equals(p) 
-				} 
+						super.equals(p)
+				}
 			}
 		''', '''
 			package x;
@@ -3997,7 +3997,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testFindFirstOnIt_01() { 
+	def testFindFirstOnIt_01() {
 		assertCompilesTo(
 			'''
 				class FindFirstOnIt {
@@ -4055,7 +4055,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				class MyClass implements ReturnTypeUsesTypeParameter {
 				
 					override <LocalName extends CharSequence> accept(LocalName param) {
-						[ if (true) it?.apply(param) ] 
+						[ if (true) it?.apply(param) ]
 					}
 				}
 			''', '''
@@ -4080,7 +4080,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			''')
 	}
 	
-	@Test 
+	@Test
 	def void testReturnType_03() {
 		'''
 			import java.util.LinkedList
@@ -4095,7 +4095,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 			
 			abstract class A {
-				def CharSequence m() 
+				def CharSequence m()
 			}
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
@@ -4254,7 +4254,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testRichStringNoAutoConversionToString_02(){
 		assertCompilesTo(
-			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
+			"class Foo { def test(){ System::out.println('''SomeString''') } }",
 			'''
 				import org.eclipse.xtend2.lib.StringConcatenation;
 				
@@ -4272,7 +4272,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testRichStringAutoConversionDueToUnboundTypeParam_02(){
 		assertCompilesTo(
-			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
+			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }",
 			'''
 				import org.eclipse.xtend2.lib.StringConcatenation;
 				import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -4292,7 +4292,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def compileClassWithFileHeader(){
 		assertCompilesTo(
-		''' 
+		'''
 			/**
 			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
 			 * All rights reserved. This program and the accompanying materials
@@ -4302,7 +4302,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			 */
 			package foo
 			
-			class bar { 
+			class bar {
 			    String name = 'foobar'
 			}
 		''',
@@ -4325,13 +4325,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compileClassInDefaultPackageWithFileHeader(){
-		assertCompilesTo(''' 
+		assertCompilesTo('''
 			/**
 			 * This comment is ambiguous because it could be both a file header and a
 			 * class comment. In any case it should be generated only once.
 			 */
 			
-			class bar { 
+			class bar {
 			}
 		''',
 		'''
@@ -4347,7 +4347,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compileClassInDefaultPackageWithFileHeaderAndJavaDoc(){
-		assertCompilesTo(''' 
+		assertCompilesTo('''
 			/**
 			 * header
 			 */
@@ -4355,7 +4355,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			/**
 			 * javadoc
 			 */
-			class bar { 
+			class bar {
 			}
 		''',
 		'''
@@ -4374,7 +4374,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def compileClassInDefaultPackageWithFileHeaderAndImport(){
 		assertCompilesTo(
-		''' 
+		'''
 			/**
 			 * header
 			 */
@@ -4400,7 +4400,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compileClassInDefaultPackageWithJavadDocAndImport(){
-		assertCompilesTo(''' 
+		assertCompilesTo('''
 			import java.util.Date
 			
 			/**
@@ -4678,7 +4678,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def testNullSafeFeatureCall_07() {
 		assertCompilesTo(
 				'''
-					class Foo { 
+					class Foo {
 						extension org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 						def bar() throws Throwable {
 							new String().get('toString')?.get('substring')
@@ -4709,7 +4709,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def testNullSafeFeatureCall_08() {
 		assertCompilesTo(
 				'''
-					class Foo { 
+					class Foo {
 						String field
 						def bar(String str) {
 							new Foo().field?.toString?.substring(1) ?: ''
@@ -5094,7 +5094,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	} 
+	}
 	
 	@Test def void basicForLoopWithReturnStatement() {
 		'''
@@ -5116,7 +5116,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	} 
+	}
 	
 	@Test def void basicForLoopWithDuplicateSyntheticVariables() {
 		'''
@@ -5187,7 +5187,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 			class Foo {
 				def m() {
-			      val x = 
+			      val x =
 			            if(false) {
 			               return ''
 			            }
@@ -5213,7 +5213,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	} 
+	}
 	
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=437027
@@ -5222,7 +5222,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 			class Foo {
 			   def m() {
-			      val x = 
+			      val x =
 			         identity(
 			            if(false) {
 			               return ''
@@ -5252,7 +5252,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	} 
+	}
 	
 	@Test def void testXFunctionTypeRefAsSuperType_01() {
 		'''
@@ -5289,7 +5289,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract void apply();
 			}
 		''')
-	} 
+	}
 	
 	@Test def void testXFunctionTypeRefAsSuperType_03() {
 		'''
@@ -5326,7 +5326,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract void apply(final String value);
 			}
 		''')
-	} 
+	}
 	
 	@Test def void testXFunctionTypeRefAsSuperType_05() {
 		'''
@@ -5363,7 +5363,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract void apply(final Procedure1<? super String> procedure);
 			}
 		''')
-	} 
+	}
 	
 	@Test def void testXFunctionTypeRefAsSuperType_07() {
 		'''
@@ -5401,7 +5401,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract String apply();
 			}
 		''')
-	} 
+	}
 	
 	@Test def void testXFunctionTypeRefAsSuperType_09() {
 		'''
@@ -5446,17 +5446,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {
-//	
+//
 //	/*
 //	 * Refined questionable expectation.
 //	 */
 //	@Test
 //	override testRichStringNoAutoConversionToString_03(){
 //		assertCompilesTo(
-//			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
+//			"class Foo { def test(){ System::out.println('''SomeString''') } }",
 //			'''
 //				import org.eclipse.xtend2.lib.StringConcatenation;
-//				
+//
 //				@SuppressWarnings("all")
 //				public class Foo {
 //				  public void test() {
@@ -5467,18 +5467,18 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 //				}
 //			''')
 //	}
-//	
+//
 //	/*
 //	 * Refined questionable expectation.
 //	 */
 //	@Test
 //	override testRichStringNoAutoConversionToString_04(){
 //		assertCompilesTo(
-//			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
+//			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }",
 //			'''
 //				import org.eclipse.xtend2.lib.StringConcatenation;
 //				import org.eclipse.xtext.xbase.lib.InputOutput;
-//				
+//
 //				@SuppressWarnings("all")
 //				public class Foo {
 //				  public void test() {
@@ -5490,5 +5490,5 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 //				}
 //			''')
 //	}
-//	
+//
 //}
