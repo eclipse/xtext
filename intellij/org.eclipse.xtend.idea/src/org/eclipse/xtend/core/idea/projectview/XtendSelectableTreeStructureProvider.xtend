@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.idea.projectview
 import com.google.inject.Inject
 import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
+import com.intellij.ide.projectView.impl.nodes.ClassTreeNode
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
@@ -17,7 +18,7 @@ import com.intellij.psi.PsiElement
 import java.util.Collection
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -46,8 +47,8 @@ class XtendSelectableTreeStructureProvider implements SelectableTreeStructurePro
 		if (parent instanceof PsiFileNode) {
 			val value = parent.value
 			if (value instanceof XtendFileImpl) {
-				return value.jvmPsiClasses.map [ psiClass |
-					new JvmPsiClassTreeNode(project, psiClass, parent.settings)
+				return value.psiClasses.map [ psiClass |
+					new ClassTreeNode(project, psiClass, parent.settings)
 				].filter(AbstractTreeNode).toList
 			}
 		}
