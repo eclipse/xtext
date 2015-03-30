@@ -95,14 +95,9 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		}
 
 		protected List<Issue> collectIssues(Resource resource) {
-			try {
-				List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl));
-				synthesizeIssuesForFollowUpErrors(resource, issues);
-				return issues;
-			} catch(OperationCanceledError e) {
-				LOG.error("Unexpected cancellation: " + e.getMessage(), e);
-				return Collections.emptyList();
-			}
+			List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl));
+			synthesizeIssuesForFollowUpErrors(resource, issues);
+			return issues;
 		}
 
 		protected void synthesizeIssuesForFollowUpErrors(Resource resource, List<Issue> result) {
