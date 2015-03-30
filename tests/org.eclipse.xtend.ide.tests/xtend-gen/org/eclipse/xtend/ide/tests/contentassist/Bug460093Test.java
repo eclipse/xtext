@@ -13,17 +13,11 @@ import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * FIXME This test works locally, but fails on the server. It requires the Eclipse instance
- *       running the plug-in tests to have a reference to a JavaSE-1.8 compatible JRE.
- *       The test is disabled until a solution is found.
- * 
  * @author Miro Spoenemann - Initial contribution and API
  */
-@Ignore
 @SuppressWarnings("all")
 public class Bug460093Test extends AbstractXtendContentAssistBugTest {
   @Before
