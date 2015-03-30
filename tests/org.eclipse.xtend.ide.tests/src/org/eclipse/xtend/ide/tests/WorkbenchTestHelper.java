@@ -313,7 +313,7 @@ public class WorkbenchTestHelper extends Assert {
 		javaProject.setOptions(options);
 	}
 	
-	public static void changeBree(IJavaProject javaProject, JavaVersion javaVersion) throws Exception {
+	public static String changeBree(IJavaProject javaProject, JavaVersion javaVersion) throws Exception {
 		IFile manifest = javaProject.getProject().getFile("META-INF/MANIFEST.MF");
 		Manifest mf = new Manifest(manifest.getContents());
 		String bree = getBree(javaVersion);
@@ -322,6 +322,7 @@ public class WorkbenchTestHelper extends Assert {
 		mf.write(stream);
 		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);
 		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree);
+		return bree;
 	}
 	
 	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{
