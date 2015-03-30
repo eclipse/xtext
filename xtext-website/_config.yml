@@ -37,7 +37,7 @@ kramdown:
 
 src:
   xtext: "https://github.com/eclipse/xtext/blob/v2.8.0"
-  mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
+  mwe: "https://github.com/eclipse/mwe/blob/v2.8.0"
   emf: "https://github.com/eclipse/emf/blob/R2_9_0"
   gef: "https://github.com/eclipse/gef/blob/master"
   sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"

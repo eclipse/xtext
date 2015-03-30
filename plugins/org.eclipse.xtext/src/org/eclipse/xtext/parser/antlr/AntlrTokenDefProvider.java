@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.ImmutableMap;
@@ -30,14 +32,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class AntlrTokenDefProvider implements ITokenDefProvider {
-	
+
 	private static final Logger log = Logger.getLogger(AntlrTokenDefProvider.class);
-	
+
 	@Inject
 	private IAntlrTokenFileProvider antlrTokenFileProvider;
-	
+	@Inject
+	private IEncodingProvider encodingProvider;
+
 	protected volatile Map<Integer, String> tokenDefMap;
-	
+
 	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		if (antlrTokenFileProvider == null)
@@ -94,13 +98,17 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	 * @since 2.7
 	 */
 	protected BufferedReader createReader(InputStream stream) {
-		return new BufferedReader(new InputStreamReader(stream));
+		try {
+			return new BufferedReader(new InputStreamReader(stream, encodingProvider.getEncoding(null)));
+		} catch (UnsupportedEncodingException e) {
+			return new BufferedReader(new InputStreamReader(stream));
+		}
 	}
 
 	protected void setTokenDefMap(Map<Integer, String> tokenDefMap) {
 		this.tokenDefMap = ImmutableMap.copyOf(tokenDefMap);
 	}
-	
+
 	public void setAntlrTokenFileProvider(IAntlrTokenFileProvider antlrTokenFileProvider) {
 		this.antlrTokenFileProvider = antlrTokenFileProvider;
 	}
