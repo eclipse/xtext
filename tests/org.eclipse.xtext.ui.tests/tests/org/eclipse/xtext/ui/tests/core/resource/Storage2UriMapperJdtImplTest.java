@@ -10,16 +10,26 @@ package org.eclipse.xtext.ui.tests.core.resource;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.Map;
 
+import org.apache.log4j.Level;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.internal.core.JarEntryFile;
+import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
+import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.jdt.internal.core.NonJavaResource;
 import org.eclipse.xtext.junit4.Flaky;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
@@ -31,6 +41,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import com.google.common.io.ByteStreams;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -44,6 +56,139 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 	@After
 	public void cleanWorkspace() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
+	}
+	
+	@Flaky
+	@Test public void testBug463258_01() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/bar.notindexed", "//empty")), true, monitor());
+		addJarToClasspath(project, file);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
+		IPackageFragment foo = root.getPackageFragment("foo");
+		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
+		fileInJar.setParent(foo);
+		
+		URI uri = impl.getUri(fileInJar);
+		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/bar.notindexed", uri.toString());
+		
+		InputStream stream = new ResourceSetImpl().getURIConverter().createInputStream(uri);
+		byte[] bytes = ByteStreams.toByteArray(stream);
+		assertEquals("//empty", new String(bytes));
+	}
+	
+	@Flaky
+	@Test public void testBug463258_02() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("do/not", "care")), true, monitor());
+		addJarToClasspath(project, file);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
+		IPackageFragment foo = root.getPackageFragment("unknown");
+		JarEntryFile fileInJar = new JarEntryFile("doesNotExist.notindexed");
+		fileInJar.setParent(foo);
+		
+		URI uri = impl.getUri(fileInJar);
+		assertEquals("archive:platform:/resource/foo/foo.jar!/unknown/doesNotExist.notindexed", uri.toString());
+	}
+	
+	@Flaky
+	@Test public void testBug463258_03a() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/bar.notindexed", "//empty")), true, monitor());
+		addJarToClasspath(project, file);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
+		IPackageFragment foo = root.getPackageFragment("foo");
+		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
+		fileInJar.setParent(foo);
+		
+		File jarFile = file.getRawLocation().toFile();
+		assertTrue("exists", jarFile.exists());
+		assertTrue("delete", jarFile.delete());
+		
+		URI uri = impl.getUri(fileInJar);
+		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/bar.notindexed", uri.toString());
+	}
+	
+	@Test public void testBug463258_03b() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/bar.notindexed", "//empty")), true, monitor());
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		
+		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragment foo = root.getPackageFragment("foo");
+		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
+		fileInJar.setParent(foo);
+		
+		File jarFile = file.getLocation().toFile();
+		assertTrue("exists", jarFile.exists());
+		assertTrue("delete", jarFile.delete());
+		
+		URI uri = impl.getUri(fileInJar);
+		assertNull(uri);
+	}
+	
+	@Test public void testBug463258_03c() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/bar.notindexed", "//empty")), true, monitor());
+		addJarToClasspath(project, file);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		
+		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragment foo = root.getPackageFragment("foo");
+		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
+		fileInJar.setParent(foo);
+		
+		File jarFile = file.getLocation().toFile();
+		assertTrue("exists", jarFile.exists());
+		assertTrue("delete", jarFile.delete());
+		// simulate an automated refresh
+		file.refreshLocal(IResource.DEPTH_ONE, null);
+		URI uri = impl.getUri(fileInJar);
+		assertNull(uri);
+	}
+	
+	@Test public void testBug463258_04() throws Exception {
+		IFolder externalFolder = createExternalFolder("externalFolder");
+		IJavaProject project = createJavaProject("foo");
+		
+		addExternalFolderToClasspath(project, externalFolder);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
+		IPackageFragment foo = root.getPackageFragment("foo");
+		NonJavaResource fileInFolder = new NonJavaResource(foo, externalFolder.getFile("foo/does.notexist"));
+		
+		externalFolder.delete(true, null);
+		URI uri = impl.getUri(fileInFolder);
+		assertNull(uri);
+	}
+	
+	@Test public void testBug463258_05() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		final Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		IPackageFragmentRoot root = project.getPackageFragmentRoot("does/not/exist.jar");
+		IPackageFragment foo = root.getPackageFragment("foo");
+		final JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
+		fileInJar.setParent(foo);
+		LoggingTester.captureLogging(Level.ERROR, Storage2UriMapperJavaImpl.class, new Runnable() {
+			@Override
+			public void run() {
+				URI uri = impl.getUri(fileInJar);
+				assertNull(uri);
+			}
+		}).assertNoLogEntries();
 	}
 	
 	@Flaky

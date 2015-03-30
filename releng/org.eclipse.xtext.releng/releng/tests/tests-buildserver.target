@@ -21,6 +21,7 @@
 <unit id="org.antlr.runtime" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
 <unit id="org.objectweb.asm" version="0.0.0"/>
+<unit id="org.objectweb.asm.source" version="0.0.0"/>
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xpand" version="0.0.0"/>
 <unit id="org.eclipse.xtend" version="0.0.0"/>

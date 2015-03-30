@@ -188,11 +188,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Override
 	public Map<URI, IStorage> getAllEntries(IPackageFragmentRoot root) {
 		try {
-			if (root.getUnderlyingResource() instanceof IFolder) {
-				return host.getAllEntries((IFolder)root.getUnderlyingResource());
+			IResource underlyingResource = root.getUnderlyingResource();
+			if (underlyingResource instanceof IFolder) {
+				return host.getAllEntries((IFolder) underlyingResource);
 			}
 		} catch (JavaModelException e) {
-			log.error(e.getMessage(), e);
+			if (!e.isDoesNotExist())
+				log.error(e.getMessage(), e);
 			return emptyMap();
 		}
 		PackageFragmentRootData data = getData(root);
@@ -348,11 +350,23 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Override
 	public URI getUri(/* @NonNull */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
-			final IJarEntryResource storage2 = (IJarEntryResource) storage;
-			Map<URI, IStorage> data = getAllEntries(storage2.getPackageFragmentRoot());
+			final IJarEntryResource casted = (IJarEntryResource) storage;
+			IPackageFragmentRoot packageFragmentRoot = casted.getPackageFragmentRoot();
+			Map<URI, IStorage> data = getAllEntries(packageFragmentRoot);
 			for (Map.Entry<URI, IStorage> entry : data.entrySet()) {
-				if (entry.getValue().equals(storage2))
+				if (entry.getValue().equals(casted))
 					return entry.getKey();
+			}
+			if (packageFragmentRoot.exists() && packageFragmentRoot.isArchive()) {
+				IPath jarPath = packageFragmentRoot.getPath();
+				URI jarURI;
+				if (packageFragmentRoot.isExternal()) {
+					jarURI = URI.createFileURI(jarPath.toOSString());
+				} else {
+					jarURI = URI.createPlatformResourceURI(jarPath.toString(), true);
+				}
+				URI result = URI.createURI("archive:" + jarURI + "!" + storage.getFullPath());
+				return result;
 			}
 		}
 		return null;
