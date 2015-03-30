@@ -12,6 +12,7 @@ import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.LightToolingTest
+import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClass
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
@@ -24,4 +25,9 @@ abstract class LightXtendTest extends LightToolingTest {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		model.addXtendLibrary
 	}
+
+	protected def findJvmPsiClass(String qualifiedName) {
+		myFixture.findClass(qualifiedName) as JvmPsiClass
+	}
+
 }

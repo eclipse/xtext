@@ -1,8 +1,9 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import org.jetbrains.annotations.NotNull;
 
 public class EntitiesFileTypeFactory extends FileTypeFactory {
 

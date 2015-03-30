@@ -2,8 +2,9 @@ package org.eclipse.xtext.idea.example.entities.idea.lang;
 
 import javax.swing.Icon;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NonNls;
+
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 public final class EntitiesFileType extends LanguageFileType {
 

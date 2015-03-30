@@ -139,7 +139,7 @@ public class DaemonConnector {
           Iterable<String> _filter = IterableExtensions.<String>filter(_inputArguments, _function_1);
           Iterables.<String>addAll(command, _filter);
           if (this.debug) {
-            command.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006");
+            command.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006");
           }
           String _canonicalName = XtextBuildDaemon.class.getCanonicalName();
           command.add(_canonicalName);

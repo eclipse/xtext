@@ -65,6 +65,8 @@
 								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.xbase.idea.ide.hierarchy.call.XbaseCallReferenceProcessor"/>
+		
+    	<lang.parserDefinition language="org.eclipse.xtext.jvm.JVM" implementationClass="org.eclipse.xtext.xbase.idea.jvm.JvmParserDefinition"/>
 	</extensions>
 
 </idea-plugin>

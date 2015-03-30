@@ -46,7 +46,7 @@ class XtendSelectableTreeStructureProvider implements SelectableTreeStructurePro
 		if (parent instanceof PsiFileNode) {
 			val value = parent.value
 			if (value instanceof XtendFileImpl) {
-				return value.jvmPsiClasses.map [ psiClass |
+				return value.psiClasses.map [ psiClass |
 					new JvmPsiClassTreeNode(project, psiClass, parent.settings)
 				].filter(AbstractTreeNode).toList
 			}

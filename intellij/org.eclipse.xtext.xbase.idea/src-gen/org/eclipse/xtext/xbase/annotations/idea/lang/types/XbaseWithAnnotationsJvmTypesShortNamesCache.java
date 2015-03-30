@@ -1,8 +1,9 @@
 package org.eclipse.xtext.xbase.annotations.idea.lang.types;
 
-import com.intellij.openapi.project.Project;
 import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;
 import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsLanguage;
+
+import com.intellij.openapi.project.Project;
 
 class XbaseWithAnnotationsJvmTypesShortNamesCache extends JvmTypesShortNamesCache {
 

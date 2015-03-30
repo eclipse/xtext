@@ -3,7 +3,6 @@
 package org.eclipse.xtext.idea.common.types.refactoringTestLanguage;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.common.types.JvmType;
 
 /**

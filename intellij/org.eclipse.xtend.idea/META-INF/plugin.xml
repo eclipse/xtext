@@ -23,9 +23,6 @@
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtend.core.idea.lang.psi.XtendCodeBlockModificationListener"/>
 
 		<referencesSearch implementation="org.eclipse.xtend.core.idea.lang.types.psi.search.XtendJvmElementsReferencesSearch"/>
-		<targetElementEvaluator language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtend.core.idea.lang.XtendFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider"/>

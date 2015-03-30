@@ -1,10 +1,13 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.parser;
 
-import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.*;
+import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.RULE_ML_COMMENT;
+import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.RULE_SL_COMMENT;
+import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.RULE_STRING;
+import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.RULE_WS;
 
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
 import org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;

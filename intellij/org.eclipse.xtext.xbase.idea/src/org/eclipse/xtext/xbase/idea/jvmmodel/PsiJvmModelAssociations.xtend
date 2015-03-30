@@ -11,9 +11,10 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.intellij.psi.PsiElement
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.idea.types.psi.impl.JvmPsiClassImpl
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+
+import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -28,10 +29,7 @@ class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
 	IJvmModelAssociations jvmModelAssociations
 
 	override getSourceElements(PsiElement jvmElement) {
-		if (jvmElement == null) {
-			return null
-		}
-		jvmElement.getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY).sourceElements
+		jvmElement.jvmElement.sourceElements
 	}
 
 	override getSourceElements(EObject jvmElement) {
@@ -51,10 +49,7 @@ class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
 	}
 
 	override getPrimarySourceElement(PsiElement jvmElement) {
-		if (jvmElement == null) {
-			return null
-		}
-		jvmElement.getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY).primarySourceElement
+		jvmElement.jvmElement.primarySourceElement
 	}
 
 	override getPrimarySourceElement(EObject jvmElement) {
@@ -70,10 +65,7 @@ class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
 	}
 
 	override isPrimaryJvmElement(PsiElement jvmElement) {
-		if (jvmElement == null) {
-			return false
-		}
-		jvmElement.getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY).isPrimaryJvmElement
+		jvmElement.jvmElement.isPrimaryJvmElement
 	}
 
 	override isPrimaryJvmElement(EObject jvmElement) {

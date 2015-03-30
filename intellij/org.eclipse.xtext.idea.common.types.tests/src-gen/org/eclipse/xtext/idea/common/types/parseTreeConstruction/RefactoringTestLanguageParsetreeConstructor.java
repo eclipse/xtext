@@ -3,11 +3,11 @@
  */
 package org.eclipse.xtext.idea.common.types.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.*;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 
 import com.google.inject.Inject;
 

@@ -36,7 +36,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		
 		private final CompositeElement composite;
 
-		private final PsiElementProvider psiElementProvider;
+		private PsiElementProvider psiElementProvider;
 
 		public PsiAdapter(final PsiElement psiElement) {
 			this(new PsiElementProvider() {
@@ -72,10 +72,14 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 			if (composite != null) {
 				return composite.getPsi();
 			}
-			if (psiElement == null && psiElementProvider != null) {
+			if (psiElement == null) {
 				psiElement = psiElementProvider.get();
 			}
 			return psiElement;
+		}
+		
+		public PsiElementProvider getPsiElementProvider() {
+			return psiElementProvider;
 		}
 		
 		public static CompositeElement getComposite(EObject object) {

@@ -70,7 +70,7 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
 		val xtextFiles = jvmDeclaredTypeShortNameIndex.get(name, project, scope)
 		for (xtextFile : xtextFiles) {
 			if (xtextFile.language == language) {
-				result += xtextFile.getJvmPsiClassesByName(name)
+				result += xtextFile.getPsiClassesByName(name)
 			}
 		}
 		result

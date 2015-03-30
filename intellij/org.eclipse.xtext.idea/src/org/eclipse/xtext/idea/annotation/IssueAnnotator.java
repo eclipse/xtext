@@ -84,7 +84,7 @@ public class IssueAnnotator implements Annotator {
 					public List<Issue> exec(Resource state) throws Exception {
 						return doGetIssues(state, resourceValidator); 
 					}
-					
+
 				});
 			} catch (Throwable e) {
 				Exceptions.sneakyThrow(e);

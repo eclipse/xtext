@@ -1,8 +1,9 @@
 package org.eclipse.xtext.idea.common.types.idea.lang.types;
 
-import com.intellij.openapi.project.Project;
-import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
+import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;
+
+import com.intellij.openapi.project.Project;
 
 class RefactoringTestLanguageJvmTypesShortNamesCache extends JvmTypesShortNamesCache {
 
