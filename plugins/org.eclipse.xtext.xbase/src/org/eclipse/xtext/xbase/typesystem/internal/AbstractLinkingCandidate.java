@@ -179,10 +179,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 					if (!typeParameter.internalIsResolved() && getExpectedVariance() == VarianceInfo.INVARIANT) {
 						if (getExpectedVariance() == getActualVariance() && reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
-							doAddHint(typeParameter, reference);
+							doAddHint(typeParameter, reference, BoundTypeArgumentSource.INFERRED_EXPECTATION);
 						} else if (getActualVariance() == VarianceInfo.IN && !typeParameter.hasSignificantHints()) {
 							if (reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
-								doAddHint(typeParameter, reference);
+								doAddHint(typeParameter, reference, BoundTypeArgumentSource.INFERRED_EXPECTATION);
 							} else {
 								UnboundTypeReference casted = (UnboundTypeReference)reference;
 								List<LightweightBoundTypeArgument> hints = casted.getAllHints();
@@ -193,16 +193,16 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 										return;
 									}
 								}
-								doAddHint(typeParameter, reference);
+								doAddHint(typeParameter, reference, BoundTypeArgumentSource.INFERRED_EXPECTATION);
 							}
 						}
 					}
 				}
 
-				protected void doAddHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+				protected void doAddHint(UnboundTypeReference typeParameter, LightweightTypeReference reference, BoundTypeArgumentSource source) {
 					typeParameter.acceptHint(
 							reference.getWrapperTypeIfPrimitive(),
-							BoundTypeArgumentSource.INFERRED,
+							source,
 							getOrigin(),
 							getExpectedVariance(),
 							getActualVariance());
@@ -467,6 +467,24 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!substitutedComponentType.isAny()) {
 			if (arguments.size() == 1) {
 				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
+				// If we have a single arg, infer the expected type to avoid bogus inference
+				// when the arg is List<String> but the expectation would be an array conversion rather
+				// than a List<String>[]
+				if (substitutedComponentType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+					UnboundTypeReference casted = (UnboundTypeReference) substitutedComponentType.copyInto(first.getReferenceOwner());
+					List<LightweightBoundTypeArgument> hints = first.getResolvedTypes().getHints(casted.getHandle());
+					for(int i = 0; i < hints.size(); i++) {
+						LightweightBoundTypeArgument hint = hints.get(i);
+						if (hint.getSource() == BoundTypeArgumentSource.INFERRED_EXPECTATION) {
+							casted.acceptHint(
+									hint.getTypeReference(),
+									BoundTypeArgumentSource.INFERRED,
+									hint.getOrigin(),
+									hint.getDeclaredVariance(),
+									hint.getActualVariance());
+						}
+					}
+				}
 				ArrayTypeReference arrayTypeReference = substitutedComponentType.getOwner().newArrayTypeReference(substitutedComponentType);
 				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
 				argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
@@ -567,8 +585,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceFlags.NONE);
 	}
 	
-	protected ArgumentTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
-		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceFlags.VAR_ARG);
+	protected ArgumentTypeComputationState createVarArgTypeComputationState(LightweightTypeReference componentType) {
+		return new ArgumentTypeComputationState(state, componentType.getLowerBoundSubstitute(), ConformanceFlags.VAR_ARG);
 	}
 	
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
