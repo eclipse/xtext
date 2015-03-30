@@ -5,7 +5,7 @@
     modelPluginID="org.eclipse.xtext.idea.example.entities" forceOverwrite="true"
     modelName="Entities" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.idea.example.entities.edit"
-    editorPluginID="org.eclipse.xtext.idea.example.entities.editor" runtimeVersion="2.10"
+    editorPluginID="org.eclipse.xtext.idea.example.entities.editor" runtimeVersion="2.11"
     usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.idea.example.entities"
       disposableProviderFactory="true" fileExtensions="entities" ecorePackage="Entities.ecore#/">
