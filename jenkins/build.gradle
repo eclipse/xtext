@@ -37,12 +37,6 @@ ext.branches = [
 	]
 ]
 
-task printJobs << {
-	jenkins.jobs.each {
-		println(it.name)
-	}
-}
-
 jenkins {
 	servers {
 		xtext {
