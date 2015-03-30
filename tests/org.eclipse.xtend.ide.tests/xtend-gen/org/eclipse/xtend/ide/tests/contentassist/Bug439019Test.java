@@ -184,4 +184,336 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
     _append.assertProposalAtCursor("NAME");
   }
+  
+  @Test
+  public void testBug463053_01() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(<|>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_02() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(NAME, <|>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_03() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(#[<|>])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_04() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=<|>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s4");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=#[NAME])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s5");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_05() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=#[NAME, <|>])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s5");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_06() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(<|>NAME)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_07() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(NAME, <|>NAME)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_08() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(#[<|>NAME])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_09() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=<|>NAME)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s4");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=#[NAME])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s5");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
+  
+  @Test
+  public void testBug463053_19() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@A(value=#[NAME, <|>NAME])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s5");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("E[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("NAME");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("NAME");
+  }
 }

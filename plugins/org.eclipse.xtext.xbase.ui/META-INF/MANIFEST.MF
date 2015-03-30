@@ -33,7 +33,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
- org.eclipse.xtext.xbase.annotations.ui.contentassist;x-internal:=true,
+ org.eclipse.xtext.xbase.annotations.ui.contentassist;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr.internal;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.labeling;x-internal:=true,

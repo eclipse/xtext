@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.editor.model;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -16,6 +18,7 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
@@ -39,7 +42,11 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 	@Override
 	protected Resource createResource(IStorage storage) throws CoreException {
 		if (storage instanceof IJarEntryResource) {
-			return createResourceFor((IJarEntryResource) storage);
+			Resource result = createResourceFor((IJarEntryResource) storage);
+			if (result == null) {
+				throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Cannot create resource for storage with path " + storage.getFullPath()));
+			}
+			return result;
 		}
 		return super.createResource(storage);
 	}
@@ -47,6 +54,9 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 	protected Resource createResourceFor(IJarEntryResource storage) {
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = storageToUriMapper.getUri(storage);
+		if (uri == null) {
+			return null;
+		}
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = createResource(resourceSet, uri);
 		resource.setValidationDisabled(isValidationDisabled(uri, storage));

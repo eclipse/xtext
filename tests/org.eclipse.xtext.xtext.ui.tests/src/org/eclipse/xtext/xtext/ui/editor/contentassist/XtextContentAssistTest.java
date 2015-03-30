@@ -87,6 +87,28 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	/**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=463215
+     */
+    @Test public void testBug463215_01() throws Exception {
+        newBuilder()
+	        .appendNl("grammar foo with Terminal")
+	        .appendNl("generate meta \"url\"")
+	        .appendNl("Rule: name=ID;")
+	        .assertTextAtCursorPosition("Terminal", 2, "org.eclipse.xtext.common.Terminals");
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=463215
+     */
+    @Test public void testBug463215_02() throws Exception {
+    	newBuilder()
+    	.appendNl("grammar foo with or.e.xt")
+    	.appendNl("generate meta \"url\"")
+    	.appendNl("Rule: name=ID;")
+    	.assertTextAtCursorPosition("xt", 1, "org.eclipse.xtext.Xtext", "org.eclipse.xtext.common.Terminals");
+    }
+	
+	/**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269680
      */
     @Test public void testCompletionOnDatatypeReference_01() throws Exception {
@@ -94,7 +116,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals", ",");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.Xtext", "org.eclipse.xtext.common.Terminals");
     }
     
     /**
@@ -105,7 +127,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals", ",");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.Xtext", "org.eclipse.xtext.common.Terminals");
     }
     
     @Test public void testCompletionOnDatatypeReference_03() throws Exception {
@@ -113,7 +135,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.Xtext","org.eclipse.xtext.common.Terminals");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.Xtext", "org.eclipse.xtext.common.Terminals");
     }
     
     @Test public void testCompletionOnDatatypeReference_04() throws Exception {
@@ -293,7 +315,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	@Test public void testCompleteTypeRefReturnForParserRule() throws Exception {
         doTestCompleteTypeRefSetup()
                 .appendNl("NewType returns").assertText(
-                                "Class", "Import","Model","NewType"
+                                "Class", "Import", "Model", "NewType"
                 );
     }
 	
@@ -729,7 +751,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	@Test public void testCompleteTypeRef_02() throws Exception {
 		doTestCompleteTypeRefWithAliasSetup()
 	        .append("NewRule returns mYal").assertText(
-	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias", ":", "::"
+	                        "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias", ":", "::"
 	        );
     }
 	
@@ -757,7 +779,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	@Test public void testCompleteTypeRef_06() throws Exception {
 		doTestCompleteTypeRefWithAliasSetup()
 			.append("NewRule returns myAlias::NewRule: reference=[mYal").assertText(
-	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias::NewRule", "myAlias", "]", "::", "|"
+	                        "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias::NewRule", "myAlias", "]", "::", "|"
 	        );
     }
 	
@@ -785,7 +807,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	@Test public void testCompleteTypeRef_10() throws Exception {
 		doTestCompleteTypeRefWithAliasSetup()
 			.append("NewRule returns myAlias::NewRule: {mYal").assertText(
-	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias::NewRule", "myAlias", "}", ".", "::"
+	                        "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias::NewRule", "myAlias", "}", ".", "::"
 	        );
     }
 	
