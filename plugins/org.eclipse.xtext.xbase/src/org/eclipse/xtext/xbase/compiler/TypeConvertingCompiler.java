@@ -232,12 +232,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	private void convertMultiType(LightweightTypeReference expectation, CompoundTypeReference multiType, XExpression context,
 			ITreeAppendable b, Later expression) {
 		LightweightTypeReference castTo = null;
-		if (!isJavaConformant(expectation, multiType.toJavaType())) {
-			for(LightweightTypeReference candidate: multiType.getMultiTypeComponents()) {
-				if (isJavaConformant(expectation, candidate)) {
-					castTo = candidate;
-					break;
-				}
+		for(LightweightTypeReference candidate: multiType.getMultiTypeComponents()) {
+			if (isJavaConformant(expectation, candidate)) {
+				castTo = candidate;
+				break;
 			}
 		}
 		if (castTo != null && mustInsertTypeCast(context, castTo)) {
