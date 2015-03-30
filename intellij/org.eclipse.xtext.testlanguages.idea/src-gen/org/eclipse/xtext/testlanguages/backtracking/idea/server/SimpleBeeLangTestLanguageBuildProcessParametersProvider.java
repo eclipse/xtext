@@ -1,6 +1,7 @@
 package org.eclipse.xtext.testlanguages.backtracking.idea.server;
 
-import java.util.Arrays;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.intellij.compiler.server.BuildProcessParametersProvider;
@@ -10,11 +11,24 @@ import com.intellij.openapi.extensions.PluginId;
 public class SimpleBeeLangTestLanguageBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
 	public List<String> getClassPath() {
-		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.testlanguages.backtracking.idea")).getPath().getPath();
-		return Arrays.asList(
-			path + "/bin", 
-			path + "/../org.eclipse.xtext.testlanguages/bin"
-		);
+		PluginId pluginId = PluginId.getId("org.eclipse.xtext.testlanguages.idea");
+		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();
+
+		List<String> result = new ArrayList<String>();
+
+		File libFolder = new File(pluginFolder, "lib");
+		if (libFolder.exists()) {
+			for (File file : libFolder.listFiles()) {
+				result.add(file.getAbsolutePath());
+			}
+		}
+
+		File classesFolder = new File(pluginFolder, "classes");
+		if (classesFolder.exists()) {
+			result.add(classesFolder.getAbsolutePath());
+		}
+
+		return result;
 	}
 
 }

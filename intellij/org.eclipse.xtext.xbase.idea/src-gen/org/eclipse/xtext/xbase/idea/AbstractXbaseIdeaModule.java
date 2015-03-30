@@ -33,20 +33,20 @@ public class AbstractXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
-		return org.eclipse.xtext.idea.types.access.StubTypeProviderFactory.class;
+		return org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
-		return org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider.class;
+		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator> bindJvmModelAssociator() {
-		return org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator.class;
+		return org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	@org.eclipse.xtext.service.SingletonBinding
-	public Class<? extends org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex> bindJvmDeclaredTypeShortNameIndex() {
-		return org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex.class;
+	public Class<? extends org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex> bindJvmDeclaredTypeShortNameIndex() {
+		return org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {

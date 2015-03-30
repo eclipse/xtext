@@ -3,8 +3,10 @@ package org.eclipse.xtext.idea.extensions
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.LanguageLevelProjectExtension
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.search.GlobalSearchScope
 import org.apache.log4j.Logger
 
@@ -64,6 +66,14 @@ class IdeaProjectExtensions {
 	
 	static def getProjectFileIndex(Project project) {
 		ProjectFileIndex.SERVICE.getInstance(project)
+	}
+	
+	static def getLanguageLevelProjectExtension(Project project) {
+		LanguageLevelProjectExtension.getInstance(project)
+	}
+	
+	static def getPsiFileFactory(Project project) {
+		PsiFileFactory.getInstance(project)
 	}
 
 }

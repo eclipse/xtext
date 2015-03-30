@@ -8,7 +8,7 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
-import org.junit.Ignore;
+import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
 
 import com.google.inject.Inject;
 import com.intellij.openapi.project.Project;

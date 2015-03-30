@@ -4,17 +4,29 @@
 package org.eclipse.xtext.generator.ecore;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class EcoreFragmentTestLanguageStandaloneSetupGenerated implements ISetup {
+public class EcoreFragmentTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("ecorefragmenttestlanguage");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

@@ -151,10 +151,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", _elementTypeProviderName);
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
-      bindFactory.addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.idea.types.access.StubTypeProviderFactory");
-      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider");
-      bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator");
-      bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex");
+      bindFactory.addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory");
+      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider");
+      bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator");
+      bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
       bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider");
       bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider");
@@ -1139,7 +1139,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.project.Project;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.types.JvmTypesShortNamesCache;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1186,7 +1186,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.search.JvmElementsReferencesSearch;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1235,7 +1235,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.project.Project;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1501,7 +1501,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       boolean _doesUseXbase_2 = XbaseGeneratorFragment.doesUseXbase(grammar);
       if (_doesUseXbase_2) {
         _builder.append("\t\t");
-        _builder.append("<stubIndex implementation=\"org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex\"/>");
+        _builder.append("<stubIndex implementation=\"org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex\"/>");
         _builder.newLine();
       }
     }
@@ -1522,10 +1522,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append(_jvmElementsReferencesSearch, "\t\t");
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        CharSequence _compileExtension = this.compileExtension(grammar, "targetElementEvaluator", "org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator");
-        _builder.append(_compileExtension, "\t\t");
-        _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
@@ -1542,25 +1538,25 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.ast.factory", "org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
-    _builder.append(_compileExtension_1, "\t\t");
+    CharSequence _compileExtension = this.compileExtension(grammar, "lang.ast.factory", "org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
+    _builder.append(_compileExtension, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    CharSequence _compileExtension_2 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinitionName);
+    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinitionName);
+    _builder.append(_compileExtension_1, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_2 = this.compileExtension(grammar, "lang.findUsagesProvider", "org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
     _builder.append(_compileExtension_2, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_3 = this.compileExtension(grammar, "lang.findUsagesProvider", "org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
+    CharSequence _compileExtension_3 = this.compileExtension(grammar, "lang.refactoringSupport", "org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
     _builder.append(_compileExtension_3, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.refactoringSupport", "org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
+    CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.namesValidator", "com.intellij.lang.refactoring.NamesValidator");
     _builder.append(_compileExtension_4, "\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.namesValidator", "com.intellij.lang.refactoring.NamesValidator");
-    _builder.append(_compileExtension_5, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<lang.syntaxHighlighterFactory key=\"");
@@ -1572,12 +1568,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_6 = this.compileExtension(grammar, "lang.braceMatcher", "com.intellij.lang.PairedBraceMatcher");
-    _builder.append(_compileExtension_6, "\t\t");
+    CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.braceMatcher", "com.intellij.lang.PairedBraceMatcher");
+    _builder.append(_compileExtension_5, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
-    CharSequence _compileExtension_7 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
-    _builder.append(_compileExtension_7, "      \t");
+    CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
+    _builder.append(_compileExtension_6, "      \t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<completion.contributor language=\"");
@@ -1602,20 +1598,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("      \t");
-    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
-    _builder.append(_compileExtension_8, "      \t");
+    CharSequence _compileExtension_7 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
+    _builder.append(_compileExtension_7, "      \t");
     _builder.newLineIfNotEmpty();
     {
       boolean _doesUseXbase_4 = XbaseGeneratorFragment.doesUseXbase(grammar);
       if (_doesUseXbase_4) {
         _builder.newLine();
         _builder.append("\t\t");
-        CharSequence _compileExtension_9 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
-        _builder.append(_compileExtension_9, "\t\t");
+        CharSequence _compileExtension_8 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
+        _builder.append(_compileExtension_8, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        CharSequence _compileExtension_10 = this.compileExtension(grammar, "callHierarchyProvider", "com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider");
-        _builder.append(_compileExtension_10, "\t\t");
+        CharSequence _compileExtension_9 = this.compileExtension(grammar, "callHierarchyProvider", "com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider");
+        _builder.append(_compileExtension_9, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("<hierarchy.referenceProcessor implementation=\"");
@@ -2203,12 +2199,25 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_grammarAccessName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileElementType;");
-    _builder.newLine();
+    {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      boolean _not = (!_doesUseXbase);
+      if (_not) {
+        _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileElementType;");
+        _builder.newLine();
+      }
+    }
     _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileStub;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;");
     _builder.newLine();
+    {
+      boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_1) {
+        _builder.append("import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("import com.intellij.psi.tree.IFileElementType;");
     _builder.newLine();
@@ -2221,7 +2230,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<");
+    _builder.append("public static final IFileElementType FILE_TYPE = new ");
+    {
+      boolean _doesUseXbase_2 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_2) {
+        _builder.append("XtypeFileElementType");
+      } else {
+        _builder.append("XtextFileElementType");
+      }
+    }
+    _builder.append("<XtextFileStub<");
     String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
     String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
     _builder.append(_simpleName_1, "\t");

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

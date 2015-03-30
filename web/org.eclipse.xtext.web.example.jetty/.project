@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>org.eclipse.xtext.web.example.jetty</name>
-	<comment></comment>
-	<projects>
-	</projects>
+	<comment/>
+	<projects/>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+	</natures>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
@@ -12,13 +15,11 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
-			<arguments>
-			</arguments>
+			<arguments/>
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
+			<arguments/>
 		</buildCommand>
 	</buildSpec>
 	<natures>
