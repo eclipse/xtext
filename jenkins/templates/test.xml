@@ -151,7 +151,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
     <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
-      <installationName>buckminster-4.4</installationName>
+      <installationName>buckminster-headless</installationName>
       <commands/>
       <logLevel>info</logLevel>
       <params/>

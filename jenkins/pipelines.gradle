@@ -66,11 +66,12 @@ branches.each { branch ->
 						.project = "xtext-${branch.name}"
 					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
 						.project = "target-platforms-${branch.name}"
+					def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
 					def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
 					if (job.jdk == jdks['1.8']) {
 						params += '\n-DJAVA8=true'
+						builder.installationName = 'buckminster-4.4'
 					}
-					def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
 					builder.commands = testScripts[job.suite]
 					builder.params = params
 					
