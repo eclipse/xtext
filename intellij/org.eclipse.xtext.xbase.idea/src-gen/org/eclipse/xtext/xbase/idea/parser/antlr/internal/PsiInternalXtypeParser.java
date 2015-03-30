@@ -1,21 +1,19 @@
 package org.eclipse.xtext.xbase.idea.parser.antlr.internal;
 
+import org.antlr.runtime.BaseRecognizer;
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.DFA;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.xbase.idea.lang.XtypeElementTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 @SuppressWarnings("all")
 public class PsiInternalXtypeParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {

@@ -18,7 +18,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
@@ -55,9 +54,9 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   
   @Override
   public PsiClass[] findClasses(final String qualifiedName, final GlobalSearchScope scope) {
-    ArrayList<JvmPsiClass> _xblockexpression = null;
+    ArrayList<PsiClass> _xblockexpression = null;
     {
-      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
+      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
       Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(qualifiedName, this.project, scope);
       for (final BaseXtextFile xtextFile : _get) {
         Language _language = xtextFile.getLanguage();
@@ -65,8 +64,8 @@ public class JvmTypesElementFinder extends PsiElementFinder {
         if (_equals) {
           String[] _split = qualifiedName.split("\\.");
           QualifiedName _create = QualifiedName.create(_split);
-          ArrayList<JvmPsiClass> _jvmPsiClassesByQualifiedName = this._jvmPsiClasses.getJvmPsiClassesByQualifiedName(xtextFile, _create);
-          Iterables.<JvmPsiClass>addAll(result, _jvmPsiClassesByQualifiedName);
+          ArrayList<PsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
+          Iterables.<PsiClass>addAll(result, _psiClassesByQualifiedName);
         }
       }
       _xblockexpression = result;

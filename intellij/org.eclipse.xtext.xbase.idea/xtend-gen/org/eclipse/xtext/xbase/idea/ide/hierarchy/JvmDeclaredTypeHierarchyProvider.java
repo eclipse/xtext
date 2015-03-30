@@ -7,6 +7,24 @@
  */
 package org.eclipse.xtext.xbase.idea.ide.hierarchy;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
+import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.jetbrains.annotations.NotNull;
+
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -22,22 +40,6 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMember;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("all")
 public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider {

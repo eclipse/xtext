@@ -7,23 +7,10 @@
  */
 package org.eclipse.xtext.xbase.idea.ide.hierarchy;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
-import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
-import com.intellij.ide.hierarchy.HierarchyTreeStructure;
-import com.intellij.ide.hierarchy.call.CallHierarchyNodeDescriptor;
-import com.intellij.lang.Language;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMember;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.search.searches.OverridingMethodsSearch;
-import com.intellij.util.Query;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -38,6 +25,21 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
+import com.intellij.ide.hierarchy.HierarchyTreeStructure;
+import com.intellij.ide.hierarchy.call.CallHierarchyNodeDescriptor;
+import com.intellij.lang.Language;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMember;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.search.searches.OverridingMethodsSearch;
+import com.intellij.util.Query;
 
 /**
  * @author kosyakov - Initial contribution and API

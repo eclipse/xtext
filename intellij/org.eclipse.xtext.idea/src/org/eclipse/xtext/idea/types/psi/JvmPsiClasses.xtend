@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.types.psi
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import com.intellij.psi.PsiClass
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.IPsiModelAssociations
@@ -22,34 +23,34 @@ class JvmPsiClasses {
 	@Inject
 	extension IPsiModelAssociations
 
-	def getJvmPsiClassesByName(BaseXtextFile it, String name) {
+	def getPsiClassesByName(BaseXtextFile it, String name) {
 		val resource = resource
 
 		val result = newArrayList
 		for (description : resourceDescription.getExportedObjectsByType(JVM_DECLARED_TYPE)) {
 			switch jvmDeclaredType : resource.resourceSet.getEObject(description.EObjectURI, true) {
 				JvmDeclaredType case jvmDeclaredType.simpleName == name:
-					result += jvmDeclaredType.psiElement as JvmPsiClass
+					result += jvmDeclaredType.psiElement as PsiClass
 			}
 		}
 		result
 	}
 
-	def getJvmPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
+	def getPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
 		val resource = resource
 
 		val result = newArrayList
 		for (description : resourceDescription.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false)) {
 			switch jvmDeclaredType : resource.resourceSet.getEObject(description.EObjectURI, true) {
 				JvmDeclaredType:
-					result += jvmDeclaredType.psiElement as JvmPsiClass
+					result += jvmDeclaredType.psiElement as PsiClass
 			}
 		}
 		result
 	}
 	
-	def getJvmPsiClasses(BaseXtextFile it) {
-		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(JvmPsiClass)
+	def getPsiClasses(BaseXtextFile it) {
+		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(PsiClass)
 	}
 
 }

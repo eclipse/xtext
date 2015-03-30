@@ -41,7 +41,7 @@ class JvmTypesElementFinder extends PsiElementFinder {
 		val result = newArrayList 
 		for (xtextFile : exportedObjectQualifiedNameIndex.get(qualifiedName, project, scope)) {
 			if (xtextFile.language == language) {
-				result += xtextFile.getJvmPsiClassesByQualifiedName(QualifiedName.create(qualifiedName.split("\\.")))
+				result += xtextFile.getPsiClassesByQualifiedName(QualifiedName.create(qualifiedName.split("\\.")))
 			}
 		}
 		result

@@ -7,13 +7,11 @@
  */
 package org.eclipse.xtext.xbase.idea.presentation;
 
-import com.google.common.base.Objects;
-import com.google.inject.Inject;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.swing.Icon;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -40,6 +38,11 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author kosyakov - Initial contribution and API

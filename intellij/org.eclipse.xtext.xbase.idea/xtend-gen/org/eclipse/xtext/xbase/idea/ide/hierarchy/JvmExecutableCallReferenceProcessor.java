@@ -7,6 +7,13 @@
  */
 package org.eclipse.xtext.xbase.idea.ide.hierarchy;
 
+import java.util.Map;
+
+import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.psi.XtextPsiReference;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.Extension;
+
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.ide.hierarchy.call.CallHierarchyNodeDescriptor;
@@ -18,11 +25,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiReference;
-import java.util.Map;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.psi.XtextPsiReference;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class JvmExecutableCallReferenceProcessor implements CallReferenceProcessor {

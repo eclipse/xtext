@@ -3,7 +3,6 @@
 package org.eclipse.xtext.idea.common.types.refactoringTestLanguage;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

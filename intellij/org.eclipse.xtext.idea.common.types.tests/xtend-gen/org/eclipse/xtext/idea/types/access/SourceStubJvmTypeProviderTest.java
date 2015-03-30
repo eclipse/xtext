@@ -1,5 +1,10 @@
 package org.eclipse.xtext.idea.types.access;
 
+import java.io.File;
+
+import org.eclipse.xtext.idea.tests.LibraryUtil;
+import org.eclipse.xtext.idea.tests.TestDecorator;
+
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -10,10 +15,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.testFramework.PsiTestCase;
 import com.intellij.testFramework.PsiTestUtil;
-import java.io.File;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.idea.tests.TestDecorator;
-import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
 
 @TestDecorator
 @SuppressWarnings("all")

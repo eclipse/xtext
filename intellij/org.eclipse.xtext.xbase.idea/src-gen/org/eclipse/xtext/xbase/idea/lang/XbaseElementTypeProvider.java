@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.xbase.idea.lang.psi.impl.XbaseFileImpl;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.xbase.idea.lang.psi.impl.XbaseFileImpl;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.intellij.psi.tree.IFileElementType;
 

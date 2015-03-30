@@ -157,7 +157,7 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 			return emptyList
 		}
 		if (element instanceof BaseXtextFile) {
-			return element.jvmPsiClasses
+			return element.psiClasses
 		}
 		val jvmElements = element.jvmElements
 		if (!jvmElements.empty) {

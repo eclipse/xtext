@@ -7,6 +7,23 @@
  */
 package org.eclipse.xtext.xbase.annotations.idea.completion;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsLanguage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.completion.CompletionParameters;
@@ -21,22 +38,6 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import java.util.List;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
-import org.eclipse.xtext.xbase.annotations.idea.completion.AbstractXbaseWithAnnotationsCompletionContributor;
-import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsLanguage;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class XbaseWithAnnotationsCompletionContributor extends AbstractXbaseWithAnnotationsCompletionContributor {

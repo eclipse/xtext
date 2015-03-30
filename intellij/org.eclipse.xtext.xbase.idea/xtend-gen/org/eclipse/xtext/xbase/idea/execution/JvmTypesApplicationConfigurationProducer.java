@@ -200,7 +200,7 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
       return CollectionLiterals.<PsiElement>emptyList();
     }
     if ((element instanceof BaseXtextFile)) {
-      return this._jvmPsiClasses.getJvmPsiClasses(((BaseXtextFile)element));
+      return this._jvmPsiClasses.getPsiClasses(((BaseXtextFile)element));
     }
     final Set<PsiElement> jvmElements = this._iPsiJvmModelAssociations.getJvmElements(element);
     boolean _isEmpty = jvmElements.isEmpty();

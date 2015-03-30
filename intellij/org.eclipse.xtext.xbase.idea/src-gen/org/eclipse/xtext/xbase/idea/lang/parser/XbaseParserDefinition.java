@@ -1,10 +1,9 @@
 package org.eclipse.xtext.xbase.idea.lang.parser;
 
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 import org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider;
 import org.eclipse.xtext.xbase.idea.lang.psi.impl.XbaseFileImpl;
-import org.eclipse.xtext.xbase.idea.lang.parser.XtypeParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;

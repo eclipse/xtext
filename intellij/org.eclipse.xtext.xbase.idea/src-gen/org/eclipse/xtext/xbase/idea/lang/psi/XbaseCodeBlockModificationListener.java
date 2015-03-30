@@ -1,9 +1,10 @@
 package org.eclipse.xtext.xbase.idea.lang.psi;
 
-import com.intellij.psi.impl.PsiTreeChangeEventImpl;
-import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
+
+import com.intellij.psi.impl.PsiTreeChangeEventImpl;
+import com.intellij.psi.util.PsiModificationTracker;
 
 public class XbaseCodeBlockModificationListener extends BaseXtextCodeBlockModificationListener {
 

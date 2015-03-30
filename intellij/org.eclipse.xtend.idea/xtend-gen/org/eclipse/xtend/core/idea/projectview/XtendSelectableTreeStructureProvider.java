@@ -14,13 +14,13 @@ import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import java.util.Collection;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
 import org.eclipse.xtend.core.idea.projectview.JvmPsiClassTreeNode;
-import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -60,15 +60,15 @@ public class XtendSelectableTreeStructureProvider implements SelectableTreeStruc
       if ((parent instanceof PsiFileNode)) {
         final PsiFile value = ((PsiFileNode)parent).getValue();
         if ((value instanceof XtendFileImpl)) {
-          Iterable<JvmPsiClass> _jvmPsiClasses = this._jvmPsiClasses.getJvmPsiClasses(((BaseXtextFile)value));
-          final Function1<JvmPsiClass, JvmPsiClassTreeNode> _function = new Function1<JvmPsiClass, JvmPsiClassTreeNode>() {
+          Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(((BaseXtextFile)value));
+          final Function1<PsiClass, JvmPsiClassTreeNode> _function = new Function1<PsiClass, JvmPsiClassTreeNode>() {
             @Override
-            public JvmPsiClassTreeNode apply(final JvmPsiClass psiClass) {
+            public JvmPsiClassTreeNode apply(final PsiClass psiClass) {
               ViewSettings _settings = ((PsiFileNode)parent).getSettings();
               return new JvmPsiClassTreeNode(XtendSelectableTreeStructureProvider.this.project, psiClass, _settings);
             }
           };
-          Iterable<JvmPsiClassTreeNode> _map = IterableExtensions.<JvmPsiClass, JvmPsiClassTreeNode>map(_jvmPsiClasses, _function);
+          Iterable<JvmPsiClassTreeNode> _map = IterableExtensions.<PsiClass, JvmPsiClassTreeNode>map(_psiClasses, _function);
           Iterable<AbstractTreeNode> _filter = Iterables.<AbstractTreeNode>filter(_map, AbstractTreeNode.class);
           return IterableExtensions.<AbstractTreeNode>toList(_filter);
         }

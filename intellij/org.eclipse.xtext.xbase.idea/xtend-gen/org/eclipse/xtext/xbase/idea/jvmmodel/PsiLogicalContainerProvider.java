@@ -7,16 +7,16 @@
  */
 package org.eclipse.xtext.xbase.idea.jvmmodel;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.PsiEObject;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author kosyakov - Initial contribution and API

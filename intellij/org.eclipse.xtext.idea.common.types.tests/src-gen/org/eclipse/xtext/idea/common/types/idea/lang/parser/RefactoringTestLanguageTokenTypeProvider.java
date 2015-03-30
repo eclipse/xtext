@@ -1,10 +1,13 @@
 package org.eclipse.xtext.idea.common.types.idea.lang.parser;
 
-import static org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser.*;
+import static org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser.RULE_ML_COMMENT;
+import static org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser.RULE_SL_COMMENT;
+import static org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser.RULE_STRING;
+import static org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser.RULE_WS;
 
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 import org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal.PsiInternalRefactoringTestLanguageParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;

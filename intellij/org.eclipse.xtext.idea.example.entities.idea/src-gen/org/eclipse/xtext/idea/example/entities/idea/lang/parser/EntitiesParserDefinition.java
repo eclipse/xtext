@@ -2,8 +2,8 @@ package org.eclipse.xtext.idea.example.entities.idea.lang.parser;
 
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider;
 import org.eclipse.xtext.idea.example.entities.idea.lang.psi.impl.EntitiesFileImpl;
-import org.eclipse.xtext.xbase.idea.lang.parser.XbaseParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+import org.eclipse.xtext.xbase.idea.lang.parser.XbaseParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;

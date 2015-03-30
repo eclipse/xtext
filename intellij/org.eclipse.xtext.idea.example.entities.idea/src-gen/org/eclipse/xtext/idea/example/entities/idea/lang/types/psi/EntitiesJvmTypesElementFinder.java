@@ -1,8 +1,9 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.types.psi;
 
-import com.intellij.openapi.project.Project;
-import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
+import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
+
+import com.intellij.openapi.project.Project;
 
 public class EntitiesJvmTypesElementFinder extends JvmTypesElementFinder {
 

@@ -1,8 +1,8 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.psi.impl;
 
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileType;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;

@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.xbase.idea.jvmmodel;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+
 import com.google.inject.ImplementedBy;
 import com.intellij.psi.PsiElement;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.idea.jvmmodel.PsiLogicalContainerProvider;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 /**
  * An equivalent of {@link ILogicalContainerProvider ILogicalContainerProvider} for PSI model.
