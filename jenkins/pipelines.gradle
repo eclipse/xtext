@@ -78,13 +78,19 @@ branches.each { branch ->
 					trigger.triggerPhrase = "Jenkins ${job.name}"
 					trigger.commitStatusContext = "Jenkins/${job.name}"
 					trigger.project = job.name
-					if ((slowSuites + ideSuites).contains(job.suite)) {
+					if ((slowSuites + ideSuites).contains(job.suite)
+						|| job.suite == 'xtext-runtime-tests' // these currently contain ui tests
+						) {
 						config.buildWrappers.appendNode {
 							'hudson.plugins.xvnc.Xvnc'() {
 								takeScreenshot(false)
 								useXauthority(true)
 							}
 						}
+					}
+					if (slowSuites.contains(job.suite)) {
+						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
+							.strategy.timeoutMinutes = 180
 					}
 					
 					if (smokeSuites.contains(job.suite)) {
