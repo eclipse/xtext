@@ -8,6 +8,8 @@
 package org.eclipse.xtend.ide.tests;
 
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -57,7 +60,10 @@ public abstract class AbstractXtendUITestCase extends Assert {
 	
 	protected void setJavaVersion(JavaVersion javaVersion) throws Exception {
 		IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
-		WorkbenchTestHelper.changeBree(javaProject, javaVersion);
+		String bree = WorkbenchTestHelper.changeBree(javaProject, javaVersion);
+		IExecutionEnvironment execEnv = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(bree);
+		Assume.assumeNotNull(execEnv);
+		Assume.assumeTrue(execEnv.getCompatibleVMs().length > 0);
 		WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
 		IResourcesSetupUtil.waitForAutoBuild();
 	}

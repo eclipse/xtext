@@ -8,19 +8,13 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 
 /**
- * FIXME This test works locally, but fails on the server. It requires the Eclipse instance
- *       running the plug-in tests to have a reference to a JavaSE-1.8 compatible JRE.
- *       The test is disabled until a solution is found.
- * 
  * @author Miro Spoenemann - Initial contribution and API
  */
-@Ignore
 class Bug460093Test extends AbstractXtendContentAssistBugTest {
 	
 	@Before
