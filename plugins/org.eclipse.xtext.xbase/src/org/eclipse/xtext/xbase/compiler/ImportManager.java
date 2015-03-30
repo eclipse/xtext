@@ -195,7 +195,7 @@ public class ImportManager {
 	}
 
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return thisTypeQualifiedNames.contains(qualifiedName) || (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches())
+		return thisTypeQualifiedNames.contains(qualifiedName) || ((!thisCollidesWithJavaLang || !thisTypeSimpleNames.contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
 				|| equal(qualifiedName, simpleName);
 	}
 
