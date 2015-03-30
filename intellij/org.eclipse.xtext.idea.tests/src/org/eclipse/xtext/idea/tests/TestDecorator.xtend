@@ -18,21 +18,23 @@ annotation TestDecorator {
 
 class TestDecoratorProcessor extends AbstractClassProcessor {
 
-	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
-		val delegate = findDeclaredField('delegate')
+	override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+		val delegate = cls.findDeclaredField('delegate')
 		if (delegate == null) {
-			addWarning("Delegate is not declared")
+			cls.addWarning("Delegate is not declared")
 			return
 		}
 		delegate.markAsRead
-		for (declaredMethod : delegate.type.allResolvedMethods.map[declaration].filter [
-			simpleName.startsWith('test')
-		]) {
-			addMethod(declaredMethod.simpleName) [
-				body = '''delegate.«declaredMethod.simpleName»();'''
-				exceptions = declaredMethod.exceptions
+		delegate.type.allResolvedMethods
+			.map[declaration]
+			.filter [simpleName.startsWith('test')]
+			.filter[cls.findDeclaredMethod(simpleName) == null]
+			.forEach[declaredMethod|
+				cls.addMethod(declaredMethod.simpleName) [
+					body = '''delegate.«declaredMethod.simpleName»();'''
+					exceptions = declaredMethod.exceptions
+				]
 			]
-		}
 	}
 
 }

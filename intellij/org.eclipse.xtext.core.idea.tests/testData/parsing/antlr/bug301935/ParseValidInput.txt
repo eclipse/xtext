@@ -4,6 +4,6 @@ org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug301935TestLanguageFileImpl:
     PsiElement(Model_WSTerminalRuleCall_1_ELEMENT_TYPE)(' ')(1,2)
     PsiElement(Model_ValueIDTerminalRuleCall_2_0_ELEMENT_TYPE)('b')(2,3)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_NLParserRuleCall_3_ELEMENT_TYPE)(3,4)
-      PsiElement(NL_LineFeedLfKeyword_1_1_ELEMENT_TYPE)('\n')(3,4)
+      PsiElement(NL_Control000aKeyword_1_1_ELEMENT_TYPE)('\n')(3,4)
     PsiElement(Model_Value2IDTerminalRuleCall_4_0_ELEMENT_TYPE)('c')(4,5)
     PsiElement(Model_WSTerminalRuleCall_5_ELEMENT_TYPE)(' ')(5,6)

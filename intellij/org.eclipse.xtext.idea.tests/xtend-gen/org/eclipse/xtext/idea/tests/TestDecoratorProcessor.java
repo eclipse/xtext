@@ -26,11 +26,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class TestDecoratorProcessor extends AbstractClassProcessor {
   @Override
-  public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    final MutableFieldDeclaration delegate = it.findDeclaredField("delegate");
+  public void doTransform(final MutableClassDeclaration cls, @Extension final TransformationContext context) {
+    final MutableFieldDeclaration delegate = cls.findDeclaredField("delegate");
     boolean _equals = Objects.equal(delegate, null);
     if (_equals) {
-      context.addWarning(it, "Delegate is not declared");
+      context.addWarning(cls, "Delegate is not declared");
       return;
     }
     delegate.markAsRead();
@@ -51,26 +51,39 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
       }
     };
     Iterable<MethodDeclaration> _filter = IterableExtensions.<MethodDeclaration>filter(_map, _function_1);
-    for (final MethodDeclaration declaredMethod : _filter) {
-      String _simpleName = declaredMethod.getSimpleName();
-      final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
-        @Override
-        public void apply(final MutableMethodDeclaration it) {
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("delegate.");
-              String _simpleName = declaredMethod.getSimpleName();
-              _builder.append(_simpleName, "");
-              _builder.append("();");
-            }
-          };
-          it.setBody(_client);
-          Iterable<? extends TypeReference> _exceptions = declaredMethod.getExceptions();
-          it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
-        }
-      };
-      it.addMethod(_simpleName, _function_2);
-    }
+    final Function1<MethodDeclaration, Boolean> _function_2 = new Function1<MethodDeclaration, Boolean>() {
+      @Override
+      public Boolean apply(final MethodDeclaration it) {
+        String _simpleName = it.getSimpleName();
+        MutableMethodDeclaration _findDeclaredMethod = cls.findDeclaredMethod(_simpleName);
+        return Boolean.valueOf(Objects.equal(_findDeclaredMethod, null));
+      }
+    };
+    Iterable<MethodDeclaration> _filter_1 = IterableExtensions.<MethodDeclaration>filter(_filter, _function_2);
+    final Procedure1<MethodDeclaration> _function_3 = new Procedure1<MethodDeclaration>() {
+      @Override
+      public void apply(final MethodDeclaration declaredMethod) {
+        String _simpleName = declaredMethod.getSimpleName();
+        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
+          public void apply(final MutableMethodDeclaration it) {
+            StringConcatenationClient _client = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                _builder.append("delegate.");
+                String _simpleName = declaredMethod.getSimpleName();
+                _builder.append(_simpleName, "");
+                _builder.append("();");
+              }
+            };
+            it.setBody(_client);
+            Iterable<? extends TypeReference> _exceptions = declaredMethod.getExceptions();
+            it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
+          }
+        };
+        cls.addMethod(_simpleName, _function);
+      }
+    };
+    IterableExtensions.<MethodDeclaration>forEach(_filter_1, _function_3);
   }
 }
