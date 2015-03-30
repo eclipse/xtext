@@ -1004,9 +1004,9 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 		'''.assertCompilesTo('''
 			import types.SomeClassWithNestedInterface;
 			
-			@java.lang.SuppressWarnings("all")
+			@SuppressWarnings("all")
 			public class Foo extends SomeClassWithNestedInterface {
-			  @java.lang.Override
+			  @Override
 			  public SomeClassWithNestedInterface.String convert(final java.lang.String s) {
 			    return null;
 			  }

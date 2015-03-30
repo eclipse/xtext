@@ -2298,12 +2298,12 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("import types.SomeClassWithNestedInterface;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@java.lang.SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo extends SomeClassWithNestedInterface {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("@java.lang.Override");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public SomeClassWithNestedInterface.String convert(final java.lang.String s) {");
