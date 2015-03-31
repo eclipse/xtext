@@ -1,5 +1,5 @@
 allprojects {
-	ext.isBuildServer = System.getProperty("JOB_NAME") != null
+	ext.isBuildServer = System.getEnv("JOB_NAME") != null
 	buildscript {
 		repositories {
 			if (!isBuildServer) {
