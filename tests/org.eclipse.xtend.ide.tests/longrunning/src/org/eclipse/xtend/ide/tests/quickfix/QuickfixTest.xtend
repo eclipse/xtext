@@ -1,18 +1,19 @@
 package org.eclipse.xtend.ide.tests.quickfix
 
 import com.google.inject.Inject
+import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.xbase.compiler.JavaVersion
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import org.eclipse.xtext.xbase.compiler.JavaVersion
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.core.runtime.NullProgressMonitor
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -3545,7 +3546,11 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 
-	@Test
+	/**
+	 * This test is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
+	 * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+	 */
+	@Ignore @Test
 	def void conflictingDefaultMethods() {
 		javaVersion = JavaVersion.JAVA8
 		create('Foo.xtend', '''

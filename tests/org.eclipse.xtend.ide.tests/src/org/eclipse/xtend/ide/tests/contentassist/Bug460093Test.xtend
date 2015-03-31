@@ -8,13 +8,18 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 
 /**
+ * This test class is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
+ * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+ * 
  * @author Miro Spoenemann - Initial contribution and API
  */
+@Ignore
 class Bug460093Test extends AbstractXtendContentAssistBugTest {
 	
 	@Before
