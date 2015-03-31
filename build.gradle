@@ -1,7 +1,8 @@
 allprojects {
+	ext.isBuildServer = System.getProperty("JOB_NAME") != null
 	buildscript {
 		repositories {
-			if (!System.getProperty("JOB_NAME")) {
+			if (!isBuildServer) {
 				mavenLocal()
 			}
 			jcenter()
@@ -21,6 +22,11 @@ allprojects {
 		sourceCompatibility = 1.6
 		tasks.withType(JavaCompile) {
 			options.encoding = 'ISO-8859-1'
+		}
+		tasks.withType(Test) {
+			if (isBuildServer) {
+				ignoreFailures = true
+			}
 		}
 	}
 }
