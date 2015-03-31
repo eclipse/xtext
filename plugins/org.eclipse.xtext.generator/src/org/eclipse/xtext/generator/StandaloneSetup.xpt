@@ -14,7 +14,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 
-«DEFINE pre FOR Grammar-»
+«DEFINE pre(List[String] fileExtensions) FOR Grammar-»
 «FILE setup().asPath()+".java" SRC-»
 «fileHeader()»
 package «setup().toJavaPackage()»;
@@ -36,17 +36,29 @@ package «setupImpl().toJavaPackage()»;
 
 «annotationImports()-»
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-«classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup {
+«classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup, ISetupExtension {
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList(«FOREACH fileExtensions AS fileExtension SEPARATOR ","»"«fileExtension»"«ENDFOREACH»);
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

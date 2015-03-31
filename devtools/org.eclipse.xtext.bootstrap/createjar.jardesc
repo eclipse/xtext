@@ -11,11 +11,10 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
-        <javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
         <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
         <javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
         <javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
-        <javaElement handleIdentifier="=de.itemis.xtext.antlr/src"/>
     </selectedElements>
 </jardesc>
