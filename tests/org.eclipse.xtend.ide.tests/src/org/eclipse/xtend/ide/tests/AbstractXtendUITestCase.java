@@ -29,16 +29,16 @@ import com.google.inject.Injector;
 public abstract class AbstractXtendUITestCase extends Assert {
 
 	private static Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
-	
+
 	@Before
 	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@BeforeClass
 	public static void setUpProject() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
@@ -53,17 +53,18 @@ public abstract class AbstractXtendUITestCase extends Assert {
 	public final Injector getInjector() {
 		return injector;
 	}
-	
+
 	public final <T> T get(Class<T> clazz) {
 		return getInjector().getInstance(clazz);
 	}
-	
+
 	protected void setJavaVersion(JavaVersion javaVersion) throws Exception {
 		IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 		String bree = WorkbenchTestHelper.changeBree(javaProject, javaVersion);
 		IExecutionEnvironment execEnv = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(bree);
-		Assume.assumeNotNull(execEnv);
-		Assume.assumeTrue(execEnv.getCompatibleVMs().length > 0);
+		Assume.assumeNotNull("Execution environment not found for: " + javaVersion.getLabel(), execEnv);
+		Assume.assumeTrue("No compatible VM was found for: " + javaVersion.getLabel(),
+				execEnv.getCompatibleVMs().length > 0);
 		WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
 		IResourcesSetupUtil.waitForAutoBuild();
 	}
