@@ -37,8 +37,10 @@ class IdeaProjectExtensions {
 	}
 
 	static def <T> T withAlternativeResolvedEnabled(DumbService dumbService, ()=>T function) {
-		val alternativeResolvedEnabled = dumbService.alternativeResolveEnabled
-		dumbService.alternativeResolveEnabled = true
+		val wasEnabled = dumbService.alternativeResolveEnabled
+		if (!wasEnabled) {
+			dumbService.alternativeResolveEnabled = true
+		}
 		try {
 			function.apply
 		} catch (IndexNotReadyException e) {
@@ -46,7 +48,9 @@ class IdeaProjectExtensions {
 			LOG.warn(e.message, e)
 			null
 		} finally {
-			dumbService.alternativeResolveEnabled = alternativeResolvedEnabled
+			if (!wasEnabled) {
+				dumbService.alternativeResolveEnabled = false
+			}
 		}
 	}
 

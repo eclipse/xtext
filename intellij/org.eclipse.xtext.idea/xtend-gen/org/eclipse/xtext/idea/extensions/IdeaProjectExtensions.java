@@ -45,8 +45,10 @@ public class IdeaProjectExtensions {
   public static <T extends Object> T withAlternativeResolvedEnabled(final DumbService dumbService, final Function0<? extends T> function) {
     T _xblockexpression = null;
     {
-      final boolean alternativeResolvedEnabled = dumbService.isAlternativeResolveEnabled();
-      dumbService.setAlternativeResolveEnabled(true);
+      final boolean wasEnabled = dumbService.isAlternativeResolveEnabled();
+      if ((!wasEnabled)) {
+        dumbService.setAlternativeResolveEnabled(true);
+      }
       T _xtrycatchfinallyexpression = null;
       try {
         _xtrycatchfinallyexpression = function.apply();
@@ -64,7 +66,9 @@ public class IdeaProjectExtensions {
           throw Exceptions.sneakyThrow(_t);
         }
       } finally {
-        dumbService.setAlternativeResolveEnabled(alternativeResolvedEnabled);
+        if ((!wasEnabled)) {
+          dumbService.setAlternativeResolveEnabled(false);
+        }
       }
       _xblockexpression = _xtrycatchfinallyexpression;
     }
