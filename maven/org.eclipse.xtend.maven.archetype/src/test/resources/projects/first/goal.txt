@@ -1,1 +1,1 @@
-package
+clean verify
