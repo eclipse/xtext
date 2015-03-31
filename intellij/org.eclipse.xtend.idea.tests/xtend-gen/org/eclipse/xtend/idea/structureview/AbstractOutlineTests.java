@@ -513,17 +513,17 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
         _builder_1.append(myFile, "");
         throw new AssertionError(_builder_1);
       }
-      StructureViewComponent component = null;
+      StructureView view = null;
       try {
         Project _project_1 = this.getProject();
         StructureView _createStructureView = builder.createStructureView(fileEditor, _project_1);
-        StructureViewComponent _structureViewComponent = this.getStructureViewComponent(_createStructureView);
-        component = _structureViewComponent;
+        view = _createStructureView;
+        final StructureViewComponent component = this.getStructureViewComponent(view);
         consumer.consume(component);
       } finally {
-        boolean _notEquals_1 = (!Objects.equal(component, null));
+        boolean _notEquals_1 = (!Objects.equal(view, null));
         if (_notEquals_1) {
-          Disposer.dispose(component);
+          Disposer.dispose(view);
         }
       }
     } catch (Throwable _e) {
