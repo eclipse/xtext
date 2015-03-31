@@ -16,11 +16,11 @@ import org.eclipse.xtext.resource.XtextResource
 @TestDecorator
 class IdeaBug443221Test extends AbstractLanguageParsingTestCase {
 	
-	Delgate delegate
+	Delegate delegate
 	
 	new() {
 		super(Bug443221TestLanguageFileType.INSTANCE)
-		delegate = new Delgate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -33,7 +33,7 @@ class IdeaBug443221Test extends AbstractLanguageParsingTestCase {
 	}
 	
 	@FinalFieldsConstructor
-	private static class Delgate extends Bug443221Test {
+	private static class Delegate extends Bug443221Test {
 		
 		val ModelChecker modelChecker
 		
