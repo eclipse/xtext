@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -6687,6 +6688,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertModelAfterQuickfix.assertModelAfterQuickfix("Assign empty expression.", _builder_2);
   }
   
+  /**
+   * This test is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
+   * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+   */
+  @Ignore
   @Test
   public void conflictingDefaultMethods() {
     try {

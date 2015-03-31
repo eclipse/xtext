@@ -13,11 +13,16 @@ import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
+ * This test class is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
+ * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+ * 
  * @author Miro Spoenemann - Initial contribution and API
  */
+@Ignore
 @SuppressWarnings("all")
 public class Bug460093Test extends AbstractXtendContentAssistBugTest {
   @Before
