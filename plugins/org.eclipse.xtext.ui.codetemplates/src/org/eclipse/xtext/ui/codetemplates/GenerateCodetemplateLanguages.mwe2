@@ -18,7 +18,7 @@ Workflow {
     	ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/.."
 		scanClassPath = true
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
 	}
 
