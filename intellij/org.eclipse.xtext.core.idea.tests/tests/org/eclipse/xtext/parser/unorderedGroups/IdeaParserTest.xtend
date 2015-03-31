@@ -12,16 +12,15 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageFileType
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageLanguage
 import org.eclipse.xtext.resource.XtextResource
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaParserTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaParserTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(SimpleUnorderedGroupsTestLanguageFileType.INSTANCE)
-		delegate = new IdeaParserTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -33,21 +32,19 @@ class IdeaParserTest extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaParserTestDelegate extends ParserTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends ParserTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
-	}
-	
 }

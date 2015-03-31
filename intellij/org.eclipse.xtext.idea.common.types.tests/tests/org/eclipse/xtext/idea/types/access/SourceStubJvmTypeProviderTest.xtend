@@ -14,7 +14,7 @@ import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 @TestDecorator
 class SourceStubJvmTypeProviderTest extends PsiTestCase {
 
-	val StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate
+	val StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate(){}
 
 	override void setUp() throws Exception {
 		super.setUp

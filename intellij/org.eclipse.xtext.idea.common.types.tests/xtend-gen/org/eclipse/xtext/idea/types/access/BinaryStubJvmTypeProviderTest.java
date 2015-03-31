@@ -14,7 +14,8 @@ import org.junit.Ignore;
 @TestDecorator
 @SuppressWarnings("all")
 public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
-  private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate();
+  private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate() {
+  };
   
   @Override
   public void setUp() throws Exception {

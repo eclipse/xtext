@@ -18,7 +18,8 @@ import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
 @TestDecorator
 @SuppressWarnings("all")
 public class SourceStubJvmTypeProviderTest extends PsiTestCase {
-  private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate();
+  private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate() {
+  };
   
   @Override
   public void setUp() throws Exception {

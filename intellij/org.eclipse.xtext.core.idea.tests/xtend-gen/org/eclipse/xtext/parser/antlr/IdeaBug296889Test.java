@@ -1,19 +1,57 @@
 package org.eclipse.xtext.parser.antlr;
 
+import com.google.common.io.CharStreams;
+import com.google.inject.Injector;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-import org.eclipse.xtext.parser.antlr.IdeaBug296889TestDelegate;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.parser.antlr.Bug296889Test;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageFileType;
+import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageLanguage;
+import org.eclipse.xtext.resource.XtextResource;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class IdeaBug296889Test extends AbstractLanguageParsingTestCase {
-  private IdeaBug296889TestDelegate delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends Bug296889Test {
+    private final ModelChecker modelChecker;
+    
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Injector _instance = Bug296889TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
+      this.setInjector(_instance);
+    }
+    
+    @Override
+    protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
+      InputStreamReader _inputStreamReader = new InputStreamReader(in);
+      String _string = CharStreams.toString(_inputStreamReader);
+      return this.modelChecker.checkResource(_string, false);
+    }
+    
+    @Override
+    protected boolean shouldTestSerializer(final XtextResource resource) {
+      return false;
+    }
+    
+    public Delegate(final ModelChecker modelChecker) {
+      super();
+      this.modelChecker = modelChecker;
+    }
+  }
+  
+  private IdeaBug296889Test.Delegate delegate;
   
   public IdeaBug296889Test() {
     super(Bug296889TestLanguageFileType.INSTANCE);
-    IdeaBug296889TestDelegate _ideaBug296889TestDelegate = new IdeaBug296889TestDelegate(this);
-    this.delegate = _ideaBug296889TestDelegate;
+    IdeaBug296889Test.Delegate _delegate = new IdeaBug296889Test.Delegate(this);
+    this.delegate = _delegate;
   }
   
   @Override

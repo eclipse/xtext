@@ -1,19 +1,56 @@
 package org.eclipse.xtext.parser.unorderedGroups;
 
+import com.google.common.io.CharStreams;
+import com.google.inject.Injector;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745ParserTestDelegate;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745ParserTest;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageFileType;
+import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageLanguage;
+import org.eclipse.xtext.resource.XtextResource;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsingTestCase {
-  private BacktrackingBug325745ParserTestDelegate delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends BacktrackingBug325745ParserTest {
+    private final ModelChecker modelChecker;
+    
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Injector _instance = SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
+      this.setInjector(_instance);
+    }
+    
+    @Override
+    protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
+      InputStreamReader _inputStreamReader = new InputStreamReader(in);
+      String _string = CharStreams.toString(_inputStreamReader);
+      EObject _checkModel = this.modelChecker.<EObject>checkModel(_string, false);
+      Resource _eResource = _checkModel.eResource();
+      return ((XtextResource) _eResource);
+    }
+    
+    public Delegate(final ModelChecker modelChecker) {
+      super();
+      this.modelChecker = modelChecker;
+    }
+  }
+  
+  private IdeaBacktrackingBug325745ParserTest.Delegate delegate;
   
   public IdeaBacktrackingBug325745ParserTest() {
     super(SimpleBacktrackingBug325745TestLanguageFileType.INSTANCE);
-    BacktrackingBug325745ParserTestDelegate _backtrackingBug325745ParserTestDelegate = new BacktrackingBug325745ParserTestDelegate(this);
-    this.delegate = _backtrackingBug325745ParserTestDelegate;
+    IdeaBacktrackingBug325745ParserTest.Delegate _delegate = new IdeaBacktrackingBug325745ParserTest.Delegate(this);
+    this.delegate = _delegate;
   }
   
   @Override

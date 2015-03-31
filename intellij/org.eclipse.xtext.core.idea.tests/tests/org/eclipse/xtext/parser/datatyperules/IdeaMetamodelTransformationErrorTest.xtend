@@ -12,16 +12,15 @@ import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.resource.XtextResource
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaMetamodelTransformationErrorTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaMetamodelTransformationErrorTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(XtextFileType.INSTANCE)
-		delegate = new IdeaMetamodelTransformationErrorTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -33,21 +32,19 @@ class IdeaMetamodelTransformationErrorTest extends AbstractLanguageParsingTestCa
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaMetamodelTransformationErrorTestDelegate extends MetamodelTransformationErrorTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = XtextLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends MetamodelTransformationErrorTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = XtextLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
-	}
-	
 }

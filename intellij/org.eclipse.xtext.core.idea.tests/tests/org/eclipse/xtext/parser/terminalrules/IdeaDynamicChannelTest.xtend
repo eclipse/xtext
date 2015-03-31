@@ -7,16 +7,15 @@ import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaDynamicChannelTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaDynamicChannelTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(XtextTerminalsTestLanguageFileType.INSTANCE)
-		delegate = new IdeaDynamicChannelTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -28,21 +27,19 @@ class IdeaDynamicChannelTest extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaDynamicChannelTestDelegate extends DynamicChannelTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp()
-		injector = XtextTerminalsTestLanguageLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends DynamicChannelTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp()
+			injector = XtextTerminalsTestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected parse(String model) {
+			modelChecker.checkResource(model, false).parseResult
+		}
+		
 	}
-	
-	override protected parse(String model) {
-		modelChecker.checkResource(model, false).parseResult
-	}
-	
 }

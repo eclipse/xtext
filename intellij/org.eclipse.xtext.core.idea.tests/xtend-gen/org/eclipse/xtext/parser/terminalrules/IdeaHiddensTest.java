@@ -1,19 +1,52 @@
 package org.eclipse.xtext.parser.terminalrules;
 
+import com.google.common.io.CharStreams;
+import com.google.inject.Injector;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-import org.eclipse.xtext.parser.terminalrules.IdeaHiddensTestDelegate;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.parser.terminalrules.HiddensTest;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.HiddenTerminalsTestLanguageFileType;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.HiddenTerminalsTestLanguageLanguage;
+import org.eclipse.xtext.resource.XtextResource;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class IdeaHiddensTest extends AbstractLanguageParsingTestCase {
-  private IdeaHiddensTestDelegate delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends HiddensTest {
+    private final ModelChecker modelChecker;
+    
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Injector _instance = HiddenTerminalsTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
+      this.setInjector(_instance);
+    }
+    
+    @Override
+    protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
+      InputStreamReader _inputStreamReader = new InputStreamReader(in);
+      String _string = CharStreams.toString(_inputStreamReader);
+      return this.modelChecker.checkResource(_string, false);
+    }
+    
+    public Delegate(final ModelChecker modelChecker) {
+      super();
+      this.modelChecker = modelChecker;
+    }
+  }
+  
+  private IdeaHiddensTest.Delegate delegate;
   
   public IdeaHiddensTest() {
     super(HiddenTerminalsTestLanguageFileType.INSTANCE);
-    IdeaHiddensTestDelegate _ideaHiddensTestDelegate = new IdeaHiddensTestDelegate(this);
-    this.delegate = _ideaHiddensTestDelegate;
+    IdeaHiddensTest.Delegate _delegate = new IdeaHiddensTest.Delegate(this);
+    this.delegate = _delegate;
   }
   
   @Override

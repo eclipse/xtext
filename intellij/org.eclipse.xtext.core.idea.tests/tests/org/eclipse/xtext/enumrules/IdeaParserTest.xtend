@@ -8,16 +8,15 @@ import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaParserTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaParserTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(EnumRulesTestLanguageFileType.INSTANCE)
-		delegate = new IdeaParserTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -28,22 +27,21 @@ class IdeaParserTest extends AbstractLanguageParsingTestCase {
 		super.setUp
 		delegate.setUp
 	}
-	
-}
 
-@Ignore
-@FinalFieldsConstructor
-class IdeaParserTestDelegate extends ParserTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = EnumRulesTestLanguageLanguage.INSTANCE.getInstance(Injector)
-	}
-	
-	override protected parse(String modelAsString) throws IOException {
-		modelChecker.checkModel(modelAsString, false)
+	@FinalFieldsConstructor
+	private static class Delegate extends ParserTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = EnumRulesTestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected parse(String modelAsString) throws IOException {
+			modelChecker.checkModel(modelAsString, false)
+		}
+		
 	}
 	
 }

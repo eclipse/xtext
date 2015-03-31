@@ -12,16 +12,15 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaBacktrackingParserTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(SimpleBeeLangTestLanguageFileType.INSTANCE)
-		delegate = new IdeaBacktrackingParserTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -33,21 +32,19 @@ class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaBacktrackingParserTestDelegate extends BacktrackingParserTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = SimpleBeeLangTestLanguageLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends BacktrackingParserTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = SimpleBeeLangTestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkModel(CharStreams.toString(new InputStreamReader(in)), false).eResource as XtextResource
-	}
-	
 }

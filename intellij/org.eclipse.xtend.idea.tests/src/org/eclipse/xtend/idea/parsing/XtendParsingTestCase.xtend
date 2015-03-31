@@ -8,8 +8,12 @@
 package org.eclipse.xtend.idea.parsing
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType
+import org.eclipse.xtend.core.tests.parsing.ParserTest
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.junit.Test
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -17,12 +21,35 @@ import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
 @TestDecorator
 class XtendParsingTestCase extends AbstractModelTestCase {
 
-	IdeaXtendParserTest delegate
+	Delegate delegate
 
 	new() {
 		super(XtendFileType.INSTANCE)
-		delegate = new IdeaXtendParserTest(this)
+		delegate = new Delegate(this)
 		xtextLanguage.injectMembers(delegate)
 	}
 
+	@FinalFieldsConstructor
+	private static class Delegate extends ParserTest {
+
+		val ModelChecker modelChecker
+
+		override file(String string, boolean validate) {
+			modelChecker.checkModel(string, validate)
+		}
+
+		@Test
+		def void testErrorRecovery() {
+			file('''
+					package foo
+					
+					class Foo2323 {
+					
+				    def create val result = newArrayList foo() {
+				        result.
+				    }
+				}
+			''')
+		}
+	}
 }

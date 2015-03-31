@@ -7,20 +7,45 @@
  */
 package org.eclipse.xtext.xbase.idea.tests.parsing;
 
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.idea.lang.XbaseFileType;
-import org.eclipse.xtext.xbase.idea.tests.parsing.IdeaXbaseParserTest;
+import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class XbaseModelTestCase extends AbstractModelTestCase {
-  private IdeaXbaseParserTest delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends XbaseParserTest {
+    private final ModelChecker expresssionChecker;
+    
+    @Override
+    protected XExpression expression(final CharSequence string) throws Exception {
+      String _string = string.toString();
+      return this.expresssionChecker.<XExpression>checkModel(_string, false);
+    }
+    
+    @Override
+    protected XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
+      String _string = string.toString();
+      return this.expresssionChecker.<XExpression>checkModel(_string, resolve);
+    }
+    
+    public Delegate(final ModelChecker expresssionChecker) {
+      super();
+      this.expresssionChecker = expresssionChecker;
+    }
+  }
+  
+  private XbaseModelTestCase.Delegate delegate;
   
   public XbaseModelTestCase() {
     super(XbaseFileType.INSTANCE);
-    IdeaXbaseParserTest _ideaXbaseParserTest = new IdeaXbaseParserTest(this);
-    this.delegate = _ideaXbaseParserTest;
+    XbaseModelTestCase.Delegate _delegate = new XbaseModelTestCase.Delegate(this);
+    this.delegate = _delegate;
   }
   
   public void testAddition_1() throws Exception {

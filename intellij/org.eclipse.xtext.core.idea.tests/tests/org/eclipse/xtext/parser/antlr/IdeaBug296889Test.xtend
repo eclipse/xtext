@@ -12,16 +12,15 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageFileType
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageLanguage
 import org.eclipse.xtext.resource.XtextResource
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaBug296889Test extends AbstractLanguageParsingTestCase {
 	
-	IdeaBug296889TestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(Bug296889TestLanguageFileType.INSTANCE)
-		delegate = new IdeaBug296889TestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -33,25 +32,23 @@ class IdeaBug296889Test extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaBug296889TestDelegate extends Bug296889Test {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = Bug296889TestLanguageLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends Bug296889Test {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = Bug296889TestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
+		}
+		
+		override protected shouldTestSerializer(XtextResource resource) {
+			false
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
-	}
-	
-	override protected shouldTestSerializer(XtextResource resource) {
-		false
-	}
-	
 }

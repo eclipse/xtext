@@ -11,16 +11,15 @@ import org.eclipse.xtext.idea.lang.XtextLanguage
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
-import org.junit.Ignore
 
 @TestDecorator
 class IdeaXtextParserTest extends AbstractLanguageParsingTestCase {
 	
-	IdeaXtextParserTestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(XtextFileType.INSTANCE)
-		delegate = new IdeaXtextParserTestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -32,21 +31,19 @@ class IdeaXtextParserTest extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaXtextParserTestDelegate extends XtextParserTest {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = XtextLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends XtextParserTest {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = XtextLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
-	}
-	
 }

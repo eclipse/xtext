@@ -11,7 +11,7 @@ import org.junit.Ignore
 @TestDecorator
 class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 
-	val StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate
+	val StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate(){}
 
 	override void setUp() throws Exception {
 		super.setUp

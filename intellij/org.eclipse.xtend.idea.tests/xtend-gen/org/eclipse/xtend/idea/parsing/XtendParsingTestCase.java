@@ -8,10 +8,16 @@
 package org.eclipse.xtend.idea.parsing;
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtend.idea.parsing.IdeaXtendParserTest;
+import org.eclipse.xtend.core.tests.parsing.ParserTest;
+import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Test;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -19,12 +25,58 @@ import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
 @TestDecorator
 @SuppressWarnings("all")
 public class XtendParsingTestCase extends AbstractModelTestCase {
-  private IdeaXtendParserTest delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends ParserTest {
+    private final ModelChecker modelChecker;
+    
+    @Override
+    public XtendFile file(final String string, final boolean validate) {
+      return this.modelChecker.<XtendFile>checkModel(string, validate);
+    }
+    
+    @Test
+    public void testErrorRecovery() {
+      try {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\t");
+        _builder.append("package foo");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("class Foo2323 {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("def create val result = newArrayList foo() {");
+        _builder.newLine();
+        _builder.append("        ");
+        _builder.append("result.");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        this.file(_builder.toString());
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    }
+    
+    public Delegate(final ModelChecker modelChecker) {
+      super();
+      this.modelChecker = modelChecker;
+    }
+  }
+  
+  private XtendParsingTestCase.Delegate delegate;
   
   public XtendParsingTestCase() {
     super(XtendFileType.INSTANCE);
-    IdeaXtendParserTest _ideaXtendParserTest = new IdeaXtendParserTest(this);
-    this.delegate = _ideaXtendParserTest;
+    XtendParsingTestCase.Delegate _delegate = new XtendParsingTestCase.Delegate(this);
+    this.delegate = _delegate;
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this.delegate);
   }

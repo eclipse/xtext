@@ -13,8 +13,7 @@ import org.junit.Ignore;
 import com.google.inject.Inject;
 import com.intellij.openapi.project.Project;
 
-@Ignore
-public class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest {
+abstract class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest {
 
 	@Inject
 	protected IResourceSetProvider resourceSetProvider;

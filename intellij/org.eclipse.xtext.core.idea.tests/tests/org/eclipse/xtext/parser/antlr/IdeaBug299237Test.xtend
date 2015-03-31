@@ -19,11 +19,11 @@ import org.junit.Ignore
 @TestDecorator
 class IdeaBug299237Test extends AbstractLanguageParsingTestCase {
 	
-	IdeaBug299237TestDelegate delegate
+	Delegate delegate
 	
 	new() {
 		super(Bug299237TestLanguageFileType.INSTANCE)
-		delegate = new IdeaBug299237TestDelegate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -35,25 +35,23 @@ class IdeaBug299237Test extends AbstractLanguageParsingTestCase {
 		delegate.setUp
 	}
 	
-}
-
-@Ignore
-@FinalFieldsConstructor
-class IdeaBug299237TestDelegate extends Bug299237Test {
-	
-	val ModelChecker modelChecker
-	
-	override setUp() throws Exception {
-		super.setUp
-		injector = Bug299237TestLanguageLanguage.INSTANCE.getInstance(Injector)
+	@FinalFieldsConstructor
+	private static class Delegate extends Bug299237Test {
+		
+		val ModelChecker modelChecker
+		
+		override setUp() throws Exception {
+			super.setUp
+			injector = Bug299237TestLanguageLanguage.INSTANCE.getInstance(Injector)
+		}
+		
+		override protected doGetResource(InputStream in, URI uri) throws Exception {
+			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
+		}
+		
+		override protected shouldTestSerializer(XtextResource resource) {
+			false
+		}
+		
 	}
-	
-	override protected doGetResource(InputStream in, URI uri) throws Exception {
-		modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
-	}
-	
-	override protected shouldTestSerializer(XtextResource resource) {
-		false
-	}
-	
 }

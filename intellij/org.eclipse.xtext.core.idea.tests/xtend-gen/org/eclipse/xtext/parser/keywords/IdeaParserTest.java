@@ -1,19 +1,52 @@
 package org.eclipse.xtext.parser.keywords;
 
+import com.google.common.io.CharStreams;
+import com.google.inject.Injector;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-import org.eclipse.xtext.parser.keywords.IdeaParserTestDelegate;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.parser.keywords.ParserTest;
 import org.eclipse.xtext.parser.keywords.idea.lang.KeywordsTestLanguageFileType;
+import org.eclipse.xtext.parser.keywords.idea.lang.KeywordsTestLanguageLanguage;
+import org.eclipse.xtext.resource.XtextResource;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class IdeaParserTest extends AbstractLanguageParsingTestCase {
-  private IdeaParserTestDelegate delegate;
+  @FinalFieldsConstructor
+  private static class Delegate extends ParserTest {
+    private final ModelChecker modelChecker;
+    
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Injector _instance = KeywordsTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
+      this.setInjector(_instance);
+    }
+    
+    @Override
+    protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
+      InputStreamReader _inputStreamReader = new InputStreamReader(in);
+      String _string = CharStreams.toString(_inputStreamReader);
+      return this.modelChecker.checkResource(_string, false);
+    }
+    
+    public Delegate(final ModelChecker modelChecker) {
+      super();
+      this.modelChecker = modelChecker;
+    }
+  }
+  
+  private IdeaParserTest.Delegate delegate;
   
   public IdeaParserTest() {
     super(KeywordsTestLanguageFileType.INSTANCE);
-    IdeaParserTestDelegate _ideaParserTestDelegate = new IdeaParserTestDelegate(this);
-    this.delegate = _ideaParserTestDelegate;
+    IdeaParserTest.Delegate _delegate = new IdeaParserTest.Delegate(this);
+    this.delegate = _delegate;
   }
   
   @Override
