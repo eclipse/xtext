@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.XtextResource;
 @SuppressWarnings("all")
 public class IdeaParserTest extends AbstractLanguageParsingTestCase {
   @FinalFieldsConstructor
-  private static class Delgate extends ParserTest {
+  private static class Delegate extends ParserTest {
     private final ModelChecker modelChecker;
     
     @Override
@@ -35,18 +35,18 @@ public class IdeaParserTest extends AbstractLanguageParsingTestCase {
       return this.modelChecker.checkResource(_string, false);
     }
     
-    public Delgate(final ModelChecker modelChecker) {
+    public Delegate(final ModelChecker modelChecker) {
       super();
       this.modelChecker = modelChecker;
     }
   }
   
-  private IdeaParserTest.Delgate delegate;
+  private IdeaParserTest.Delegate delegate;
   
   public IdeaParserTest() {
     super(TerminalRulesTestLanguageFileType.INSTANCE);
-    IdeaParserTest.Delgate _delgate = new IdeaParserTest.Delgate(this);
-    this.delegate = _delgate;
+    IdeaParserTest.Delegate _delegate = new IdeaParserTest.Delegate(this);
+    this.delegate = _delegate;
   }
   
   @Override

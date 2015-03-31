@@ -15,11 +15,11 @@ import org.eclipse.xtext.parser.terminalrules.idea.lang.TerminalRulesTestLanguag
 @TestDecorator
 class IdeaParserTest extends AbstractLanguageParsingTestCase {
 	
-	Delgate delegate
+	Delegate delegate
 	
 	new() {
 		super(TerminalRulesTestLanguageFileType.INSTANCE)
-		delegate = new Delgate(this)
+		delegate = new Delegate(this)
 	}
 	
 	override protected getTestDataPath() {
@@ -32,7 +32,7 @@ class IdeaParserTest extends AbstractLanguageParsingTestCase {
 	}
 	
 	@FinalFieldsConstructor
-	private static class Delgate extends ParserTest {
+	private static class Delegate extends ParserTest {
 		
 		val ModelChecker modelChecker
 		
