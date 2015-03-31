@@ -139,7 +139,12 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 	
 	private def configureExportedPackages(IJavaProject pluginProject) {
 		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
-		val manifest = new MergeableManifest(manifestFile.contents)
+		val contents = manifestFile.contents
+		val manifest = try {
+			new MergeableManifest(contents)	
+		} finally {
+			contents.close
+		}
 		manifest.addExportedPackages(#{'allowed', 'discouraged;x-internal:=true'})
 		val out = new ByteArrayOutputStream()
 		manifest.write(out)
