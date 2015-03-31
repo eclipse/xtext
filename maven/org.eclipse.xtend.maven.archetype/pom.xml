@@ -1,16 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.parent</artifactId>
 		<version>2.9.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.parent</relativePath>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>xtend-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
 	<name>Create a simple Xtend project</name>
 	<url>http://xtend-lang.org</url>
+
+	<properties>
+		<maven.archetype.version>2.3</maven.archetype.version>
+	</properties>
 
 	<build>
 		<resources>
@@ -33,7 +40,7 @@
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>2.2</version>
+				<version>${maven.archetype.version}</version>
 			</extension>
 		</extensions>
 		<pluginManagement>
@@ -41,7 +48,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-archetype-plugin</artifactId>
-					<version>2.2</version>
+					<version>${maven.archetype.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -53,6 +60,20 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-archetype-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+				</executions>
+				
+			</plugin>
+		</plugins>
 	</build>
-	<groupId>org.eclipse.xtend</groupId>
+	
 </project>
