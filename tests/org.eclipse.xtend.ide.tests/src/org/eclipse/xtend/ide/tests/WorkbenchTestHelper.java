@@ -315,7 +315,13 @@ public class WorkbenchTestHelper extends Assert {
 	
 	public static String changeBree(IJavaProject javaProject, JavaVersion javaVersion) throws Exception {
 		IFile manifest = javaProject.getProject().getFile("META-INF/MANIFEST.MF");
-		Manifest mf = new Manifest(manifest.getContents());
+		InputStream content = manifest.getContents();
+		Manifest mf;
+		try {
+			mf = new Manifest(content);
+		} finally {
+			content.close();
+		}
 		String bree = getBree(javaVersion);
 		mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -327,7 +333,13 @@ public class WorkbenchTestHelper extends Assert {
 	
 	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{
 		IFile manifest = project.getFile("META-INF/MANIFEST.MF");
-		Manifest mf = new Manifest(manifest.getContents());
+		InputStream content = manifest.getContents();
+		Manifest mf;
+		try {
+			mf = new Manifest(content);
+		} finally {
+			content.close();
+		}
 		String value = mf.getMainAttributes().getValue("Export-Package");
 		for (String exported : exportedPackages) {
 			if (value == null) {

@@ -247,8 +247,14 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     try {
       IProject _project = pluginProject.getProject();
       final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
-      InputStream _contents = manifestFile.getContents();
-      final MergeableManifest manifest = new MergeableManifest(_contents);
+      final InputStream contents = manifestFile.getContents();
+      MergeableManifest _xtrycatchfinallyexpression = null;
+      try {
+        _xtrycatchfinallyexpression = new MergeableManifest(contents);
+      } finally {
+        contents.close();
+      }
+      final MergeableManifest manifest = _xtrycatchfinallyexpression;
       manifest.addExportedPackages(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
       final ByteArrayOutputStream out = new ByteArrayOutputStream();
       manifest.write(out);
