@@ -303,12 +303,13 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 		if (builder == null) {
 			throw new AssertionError('''no builder for «myFile»''')
 		}
-		var StructureViewComponent component = null
+		var StructureView view = null
 		try {
-			component = builder.createStructureView(fileEditor, project).structureViewComponent
+			view = builder.createStructureView(fileEditor, project)
+			val component = view.structureViewComponent
 			consumer.consume(component)
 		} finally {
-			if(component != null) Disposer.dispose(component)
+			if(view != null) Disposer.dispose(view)
 		}
 	}
 
