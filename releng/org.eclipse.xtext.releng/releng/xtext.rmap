@@ -25,7 +25,7 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
+		<rm:provider componentTypes="osgi.bundle,buckminster" readerType="git"
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri"
