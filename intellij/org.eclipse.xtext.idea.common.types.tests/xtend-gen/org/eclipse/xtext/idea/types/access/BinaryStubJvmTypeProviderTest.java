@@ -4,13 +4,11 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
-import com.intellij.testFramework.PlatformTestCase;
 import com.intellij.testFramework.PsiTestCase;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Ignore;
 
 @TestDecorator
@@ -21,27 +19,13 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   
   @Override
   public void setUp() throws Exception {
-    try {
-      super.setUp();
-      try {
-        Module _module = this.getModule();
-        LibraryUtil.addGuavaLibrary(_module);
-        Module _module_1 = this.getModule();
-        LibraryUtil.addLibrary(_module_1, "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
-        Project _project = this.getProject();
-        this.delegate.setUp(_project);
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable e = (Throwable)_t;
-          PlatformTestCase.LOG.error("Error during test setup", e);
-          throw e;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    super.setUp();
+    Module _module = this.getModule();
+    LibraryUtil.addGuavaLibrary(_module);
+    Module _module_1 = this.getModule();
+    LibraryUtil.addLibrary(_module_1, "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
+    Project _project = this.getProject();
+    this.delegate.setUp(_project);
   }
   
   @Override

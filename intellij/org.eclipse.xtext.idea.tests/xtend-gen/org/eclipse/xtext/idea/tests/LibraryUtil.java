@@ -17,6 +17,7 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.util.Consumer;
 import com.intellij.util.PathUtil;
 import java.io.File;
@@ -116,8 +117,9 @@ public class LibraryUtil {
   public static String getUrlForLibraryRoot(final Class<?> clazz) {
     String _xblockexpression = null;
     {
-      String _jarPathForClass = PathUtil.getJarPathForClass(clazz);
-      final File libraryRoot = new File(_jarPathForClass);
+      final String path = PathUtil.getJarPathForClass(clazz);
+      VfsRootAccess.allowRootAccess(path);
+      final File libraryRoot = new File(path);
       LocalFileSystem _instance = LocalFileSystem.getInstance();
       _instance.refreshAndFindFileByIoFile(libraryRoot);
       _xblockexpression = VfsUtil.getUrlForLibraryRoot(libraryRoot);

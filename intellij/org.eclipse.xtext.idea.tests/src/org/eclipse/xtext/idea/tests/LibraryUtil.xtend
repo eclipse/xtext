@@ -14,13 +14,14 @@ import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.OrderRootType
 import com.intellij.openapi.vfs.LocalFileSystem
 import java.io.File
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
 import static extension com.intellij.openapi.roots.ModuleRootModificationUtil.*
 import static extension com.intellij.openapi.vfs.VfsUtil.*
 import static extension com.intellij.util.PathUtil.*
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.lib.macro.Active
+import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess
 
 class LibraryUtil {
 
@@ -72,7 +73,9 @@ class LibraryUtil {
 	}
 
 	static def getUrlForLibraryRoot(Class<?> clazz) {
-		val libraryRoot = new File(clazz.jarPathForClass)
+		val path = clazz.jarPathForClass
+		VfsRootAccess.allowRootAccess(path)
+		val libraryRoot = new File(path)
 		LocalFileSystem.instance.refreshAndFindFileByIoFile(libraryRoot)
 		libraryRoot.urlForLibraryRoot
 	}

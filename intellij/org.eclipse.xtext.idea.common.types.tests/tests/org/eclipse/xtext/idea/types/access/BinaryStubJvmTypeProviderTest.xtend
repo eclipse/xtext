@@ -4,9 +4,9 @@ import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl
 import com.intellij.testFramework.PsiTestCase
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods
 import org.eclipse.xtext.idea.tests.TestDecorator
+import org.junit.Ignore
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-import org.junit.Ignore
 
 @TestDecorator
 class BinaryStubJvmTypeProviderTest extends PsiTestCase {
@@ -15,14 +15,9 @@ class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 
 	override void setUp() throws Exception {
 		super.setUp
-		try {
-			module.addGuavaLibrary
-			module.addLibrary("org.eclipse.xtext.common.types.tests.testData", AbstractMethods)
-			delegate.setUp(project)
-		} catch (Throwable e) {
-			LOG.error("Error during test setup", e)
-			throw e
-		}
+		module.addGuavaLibrary
+		module.addLibrary("org.eclipse.xtext.common.types.tests.testData", AbstractMethods)
+		delegate.setUp(project)
 	}
 	
 	override protected getTestProjectJdk() {
