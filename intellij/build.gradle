@@ -32,8 +32,6 @@ allprojects {
 		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
 		ideaVersion = "140.2683.2"
 	}
-	
-	runIdea.systemProperties ('compiler.process.debug.port':-1) // replace -1 by port number to enable debugging
 }
 
 subprojects {
