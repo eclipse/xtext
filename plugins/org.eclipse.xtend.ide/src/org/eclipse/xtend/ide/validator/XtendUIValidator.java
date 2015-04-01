@@ -67,10 +67,16 @@ public class XtendUIValidator extends XbaseUIValidator {
 	
 	@Check
 	protected void checkAnnotationInSameProject(XAnnotation annotation) throws JavaModelException {
-		if (annotationExtensions.isProcessed(annotation)) {
-			JvmType annotationType = annotation.getAnnotationType();
-			if (isSameProject(annotation, annotationType)) {
-				error("The referenced active annotation cannot be used from within the same project.",XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, ACTIVE_ANNOTAION_IN_SAME_CONTAINER);
+		try {
+			if (annotationExtensions.isProcessed(annotation)) {
+				JvmType annotationType = annotation.getAnnotationType();
+				if (isSameProject(annotation, annotationType)) {
+					error("The referenced active annotation cannot be used from within the same project.",XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, ACTIVE_ANNOTAION_IN_SAME_CONTAINER);
+				}
+			}
+		} catch(JavaModelException e) {
+			if (!e.isDoesNotExist()) {
+				throw e;
 			}
 		}
 	}
