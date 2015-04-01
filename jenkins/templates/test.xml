@@ -50,7 +50,6 @@
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
         <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-			<hudson.plugins.git.extensions.impl.PruneStaleBranch/>
 			<hudson.plugins.git.extensions.impl.CleanCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
         <shallow>false</shallow>
