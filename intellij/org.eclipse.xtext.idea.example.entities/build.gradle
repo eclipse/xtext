@@ -1,4 +1,0 @@
-dependencies {
-	compile project(":plugins:org.eclipse.xtext.xbase")
-	compile project(":plugins:org.eclipse.xtext.ide")
-}
