@@ -1,1 +1,0 @@
-sourceSets*.java*.srcDirs = [] //ignore for now, doesn't compile yet
