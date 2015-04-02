@@ -40,6 +40,7 @@ import static org.eclipse.core.resources.IResourceDelta.*
 import java.io.InputStream
 import java.io.BufferedOutputStream
 import java.io.BufferedInputStream
+import java.util.Collections
 
 @Singleton
 class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
@@ -87,19 +88,15 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 		changesNotRelevantListeners.put(string, uri)
 	}
 	
-	override discardCreateOrModifyInformation(URI uri) {
-		val iter = changesNotRelevantListeners.values.iterator
-		while(iter.hasNext) {
-			if (iter.next == uri) {
-				iter.remove
-			}
-		}
+	override synchronized discardCreateOrModifyInformation(URI uri) {
+		changesNotRelevantListeners.values.removeAll(Collections.singleton(uri))
 	}
 	
 	override synchronized resourceChanged(IResourceChangeEvent event) {
 		event.delta.accept(this)
 	}
 
+	// Only called from synchronized context
 	override visit(IResourceDelta delta) throws CoreException {
 		if (!existsListeners.isEmpty && delta.hasExistsChanged) {
 			val interestedFiles = existsListeners.removeAll(delta.resource.fullPath.toString)

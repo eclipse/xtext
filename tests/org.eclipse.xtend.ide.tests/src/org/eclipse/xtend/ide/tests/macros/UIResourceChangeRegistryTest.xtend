@@ -25,6 +25,9 @@ import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
+import java.util.concurrent.Executors
+import java.security.SecureRandom
+import java.util.concurrent.ExecutionException
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -42,6 +45,35 @@ class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
 	}
 	
 	val URI uri = URI.createURI("synthetic://testing/uri")
+	
+	@Test def void testConcurrentDiscard() throws Exception {
+		(1..10000).forEach[ 
+			resourceChangeRegistry.registerCreateOrModify('/foo', uri.appendSegment(it.toString))
+		]
+		
+		val Runnable r = [
+			val random = new SecureRandom(#[1 as byte])
+			(1..1000).forEach[
+				val removedURI = uri.appendSegment(random.nextInt(10000).toString)
+				resourceChangeRegistry.discardCreateOrModifyInformation(removedURI)
+			]
+		]  
+		val executorService = Executors.newCachedThreadPool
+		try {
+			val future1 = executorService.submit(r)
+			val future2 = executorService.submit(r)
+			val future3 = executorService.submit(r)
+			val future4 = executorService.submit(r)
+			future1.get
+			future2.get
+			future3.get
+			future4.get
+		} catch(ExecutionException e) {
+			throw e.cause
+		} finally {
+			executorService.shutdown()
+		}
+	}
 	
 	@Test def void testSerialization() {
 		resourceChangeRegistry.registerExists('/foo', uri)
