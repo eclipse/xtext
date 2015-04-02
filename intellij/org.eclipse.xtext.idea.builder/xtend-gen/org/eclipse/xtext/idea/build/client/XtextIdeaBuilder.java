@@ -12,11 +12,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+import java.io.Serializable;
+import java.nio.channels.SocketChannel;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.idea.build.client.DaemonConnector;
 import org.eclipse.xtext.idea.build.daemon.Protocol;
+import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -87,17 +85,16 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
       return ModuleLevelBuilder.ExitCode.NOTHING_DONE;
     }
     ModuleLevelBuilder.ExitCode result = null;
+    SocketChannel socketChannel = null;
     try {
       final Protocol.BuildRequest buildRequest = this.createBuildRequest(chunk, context, dirtyFilesHolder);
-      final Socket socket = this.connector.connect();
-      OutputStream _outputStream = socket.getOutputStream();
-      final ObjectOutputStream out = new ObjectOutputStream(_outputStream);
-      out.writeObject(buildRequest);
-      InputStream _inputStream = socket.getInputStream();
-      final ObjectInputStream inp = new ObjectInputStream(_inputStream);
+      SocketChannel _connect = this.connector.connect();
+      socketChannel = _connect;
+      final ObjectChannel channel = new ObjectChannel(socketChannel);
+      channel.writeObject(buildRequest);
       while (Objects.equal(result, null)) {
         {
-          final Object message = inp.readObject();
+          final Serializable message = channel.readObject();
           boolean _matched = false;
           if (!_matched) {
             if (message instanceof Protocol.BuildResult) {
@@ -124,6 +121,10 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         result = ModuleLevelBuilder.ExitCode.ABORT;
       } else {
         throw Exceptions.sneakyThrow(_t);
+      }
+    } finally {
+      if (socketChannel!=null) {
+        socketChannel.close();
       }
     }
     return result;

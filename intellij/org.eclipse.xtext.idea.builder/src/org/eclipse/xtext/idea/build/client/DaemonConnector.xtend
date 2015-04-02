@@ -13,14 +13,14 @@ import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
 import java.lang.management.ManagementFactory
+import java.net.ConnectException
 import java.net.InetAddress
 import java.net.InetSocketAddress
-import java.net.Socket
 import java.net.URLClassLoader
+import java.nio.channels.SocketChannel
 import java.util.regex.Pattern
 import org.apache.log4j.Logger
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon
-import java.net.ConnectException
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,15 +35,16 @@ class DaemonConnector {
 
 	boolean debug = true
 
-	def Socket connect() {
+	def SocketChannel connect() {
 		val portFile = new File(DaemonConnector.DAEMON_LOCK_FILE)
 		try {
 			if (portFile.exists) {
 				val line = new BufferedReader(new FileReader(portFile)).readLine
 				val port = Integer.parseInt(line.trim)
-				val socket = new Socket()
-				socket.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port), 1000)
-				return socket
+				var socketChannel = SocketChannel.open() 
+				socketChannel.configureBlocking(true)
+				socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
+				return socketChannel
 			}
 		} catch (Exception exc) {
 			// ignore and launch new process
@@ -72,7 +73,7 @@ class DaemonConnector {
 				!startsWith('-agentlib')
 			]
 			if (debug) {
-				command += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
+				command += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
 			}
 			command += XtextBuildDaemon.canonicalName
 			command += '-port'
@@ -80,10 +81,11 @@ class DaemonConnector {
 			val daemonProcess = new ProcessBuilder().command(command).start
 			for (i : 0 .. 200) {
 				try {
-					val socket = new Socket()
-					socket.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port), 1000)
+					var socketChannel = SocketChannel.open() 
+					socketChannel.configureBlocking(true)
+					socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
 					writeLockFile(lockFile, port)
-					return socket
+					return socketChannel
 				} catch (ConnectException exc) {
 					Thread.sleep(100)
 				}

@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.build.daemon
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
 import org.eclipse.xtext.idea.build.daemon.Protocol.BuildResult
-import java.io.ObjectOutputStream
+import org.eclipse.xtext.idea.build.net.ObjectChannel
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -21,7 +21,7 @@ class XtextBuildResultCollector {
 	BuildResult buildResult = new BuildResult
 	
 	@Accessors
-	ObjectOutputStream output
+	ObjectChannel output
 	
 	def addIssue(BuildIssue issue) {
 		output.writeObject(issue)

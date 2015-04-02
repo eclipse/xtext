@@ -19,10 +19,10 @@ import java.lang.management.RuntimeMXBean;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -51,8 +51,8 @@ public class DaemonConnector {
   
   private boolean debug = true;
   
-  public Socket connect() {
-    Socket _xblockexpression = null;
+  public SocketChannel connect() {
+    SocketChannel _xblockexpression = null;
     {
       final File portFile = new File(DaemonConnector.DAEMON_LOCK_FILE);
       try {
@@ -63,11 +63,12 @@ public class DaemonConnector {
           final String line = _bufferedReader.readLine();
           String _trim = line.trim();
           final int port = Integer.parseInt(_trim);
-          final Socket socket = new Socket();
+          SocketChannel socketChannel = SocketChannel.open();
+          socketChannel.configureBlocking(true);
           InetAddress _byName = InetAddress.getByName("127.0.0.1");
           InetSocketAddress _inetSocketAddress = new InetSocketAddress(_byName, port);
-          socket.connect(_inetSocketAddress, 1000);
-          return socket;
+          socketChannel.connect(_inetSocketAddress);
+          return socketChannel;
         }
       } catch (final Throwable _t) {
         if (_t instanceof Exception) {
@@ -81,7 +82,7 @@ public class DaemonConnector {
     return _xblockexpression;
   }
   
-  public Socket launch(final File lockFile) {
+  public SocketChannel launch(final File lockFile) {
     try {
       IntegerRange _upTo = new IntegerRange(DaemonConnector.DEFAULT_PORT, (DaemonConnector.DEFAULT_PORT + 10));
       for (final Integer port : _upTo) {
@@ -151,12 +152,13 @@ public class DaemonConnector {
           IntegerRange _upTo_1 = new IntegerRange(0, 200);
           for (final Integer i : _upTo_1) {
             try {
-              final Socket socket = new Socket();
+              SocketChannel socketChannel = SocketChannel.open();
+              socketChannel.configureBlocking(true);
               InetAddress _byName = InetAddress.getByName("127.0.0.1");
               InetSocketAddress _inetSocketAddress = new InetSocketAddress(_byName, (port).intValue());
-              socket.connect(_inetSocketAddress, 1000);
+              socketChannel.connect(_inetSocketAddress);
               this.writeLockFile(lockFile, (port).intValue());
-              return socket;
+              return socketChannel;
             } catch (final Throwable _t) {
               if (_t instanceof ConnectException) {
                 final ConnectException exc = (ConnectException)_t;

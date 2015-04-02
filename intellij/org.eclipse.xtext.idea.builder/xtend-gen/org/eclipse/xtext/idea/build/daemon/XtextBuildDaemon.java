@@ -12,17 +12,19 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.channels.spi.AbstractSelector;
+import java.nio.channels.spi.SelectorProvider;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.apache.log4j.Category;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.idea.build.daemon.Protocol;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildParameters;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
+import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -58,10 +61,15 @@ public class XtextBuildDaemon {
         ServerSocket serverSocket = null;
         try {
           XtextBuildDaemon.LOG.info((("Starting xtext build daemon at port " + Integer.valueOf(arguments.port)) + "..."));
+          SelectorProvider _provider = SelectorProvider.provider();
+          final AbstractSelector socketSelector = _provider.openSelector();
+          final ServerSocketChannel serverChannel = ServerSocketChannel.open();
+          serverChannel.configureBlocking(false);
           InetAddress _byName = InetAddress.getByName("127.0.0.1");
-          ServerSocket _serverSocket = new ServerSocket(arguments.port, 0, _byName);
-          serverSocket = _serverSocket;
-          serverSocket.setSoTimeout(5000);
+          final InetSocketAddress socketAddress = new InetSocketAddress(_byName, arguments.port);
+          ServerSocket _socket = serverChannel.socket();
+          _socket.bind(socketAddress);
+          serverChannel.register(socketSelector, SelectionKey.OP_ACCEPT);
           boolean receivedRequests = false;
           XtextBuildDaemon.LOG.info("... success");
           boolean shutdown = false;
@@ -69,21 +77,42 @@ public class XtextBuildDaemon {
             {
               XtextBuildDaemon.LOG.info("Accepting connections...");
               try {
-                final Socket socket = serverSocket.accept();
-                receivedRequests = true;
-                XtextBuildDaemon.Worker _get = this.workerProvider.get();
-                boolean _serve = _get.serve(socket);
-                shutdown = _serve;
-              } catch (final Throwable _t) {
-                if (_t instanceof SocketTimeoutException) {
-                  final SocketTimeoutException exc = (SocketTimeoutException)_t;
-                  if ((!receivedRequests)) {
-                    int _soTimeout = serverSocket.getSoTimeout();
-                    String _plus = ("No requests within " + Integer.valueOf(_soTimeout));
-                    String _plus_1 = (_plus + "ms.");
-                    XtextBuildDaemon.LOG.info(_plus_1);
-                    shutdown = true;
+                socketSelector.select(5000);
+                Set<SelectionKey> _selectedKeys = socketSelector.selectedKeys();
+                for (final SelectionKey key : _selectedKeys) {
+                  boolean _isAcceptable = key.isAcceptable();
+                  if (_isAcceptable) {
+                    SocketChannel socketChannel = null;
+                    try {
+                      SocketChannel _accept = serverChannel.accept();
+                      socketChannel = _accept;
+                      boolean _equals = Objects.equal(socketChannel, null);
+                      if (_equals) {
+                        if ((!receivedRequests)) {
+                          int _soTimeout = serverSocket.getSoTimeout();
+                          String _plus = ("No requests within " + Integer.valueOf(_soTimeout));
+                          String _plus_1 = (_plus + "ms.");
+                          XtextBuildDaemon.LOG.info(_plus_1);
+                          shutdown = true;
+                        }
+                      } else {
+                        socketChannel.configureBlocking(true);
+                        receivedRequests = true;
+                        XtextBuildDaemon.Worker _get = this.workerProvider.get();
+                        boolean _serve = _get.serve(socketChannel);
+                        shutdown = _serve;
+                      }
+                    } finally {
+                      if (socketChannel!=null) {
+                        socketChannel.close();
+                      }
+                    }
                   }
+                }
+              } catch (final Throwable _t) {
+                if (_t instanceof Exception) {
+                  final Exception exc = (Exception)_t;
+                  XtextBuildDaemon.LOG.error("Error during build", exc);
                 } else {
                   throw Exceptions.sneakyThrow(_t);
                 }
@@ -93,7 +122,7 @@ public class XtextBuildDaemon {
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
             final Exception exc = (Exception)_t;
-            XtextBuildDaemon.LOG.error("Error during build", exc);
+            XtextBuildDaemon.LOG.error("Error starting server socket", exc);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -115,41 +144,37 @@ public class XtextBuildDaemon {
     @Inject
     private XtextBuildResultCollector resultCollector;
     
-    public boolean serve(final Socket socket) {
-      try {
-        InputStream _inputStream = socket.getInputStream();
-        final ObjectInputStream input = new ObjectInputStream(_inputStream);
-        final Object msg = input.readObject();
-        OutputStream _outputStream = socket.getOutputStream();
-        final ObjectOutputStream output = new ObjectOutputStream(_outputStream);
-        boolean _matched = false;
-        if (!_matched) {
-          if (msg instanceof Protocol.StopServer) {
-            _matched=true;
-            XtextBuildDaemon.LOG.info("Received StopServer");
-            return true;
-          }
+    private ObjectChannel channel;
+    
+    public boolean serve(final SocketChannel socketChannel) {
+      ObjectChannel _objectChannel = new ObjectChannel(socketChannel);
+      this.channel = _objectChannel;
+      final Serializable msg = this.channel.readObject();
+      boolean _matched = false;
+      if (!_matched) {
+        if (msg instanceof Protocol.StopServer) {
+          _matched=true;
+          XtextBuildDaemon.LOG.info("Received StopServer");
+          return true;
         }
-        if (!_matched) {
-          if (msg instanceof Protocol.BuildRequest) {
-            _matched=true;
-            XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");
-            final Protocol.BuildResult buildResult = this.build(((Protocol.BuildRequest)msg), output);
-            XtextBuildDaemon.LOG.info("...finished.");
-            output.writeObject(buildResult);
-            XtextBuildDaemon.LOG.info("Result sent.");
-          }
-        }
-        return false;
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
       }
+      if (!_matched) {
+        if (msg instanceof Protocol.BuildRequest) {
+          _matched=true;
+          XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");
+          final Protocol.BuildResult buildResult = this.build(((Protocol.BuildRequest)msg));
+          XtextBuildDaemon.LOG.info("...finished.");
+          this.channel.writeObject(buildResult);
+          XtextBuildDaemon.LOG.info("Result sent.");
+        }
+      }
+      return false;
     }
     
-    public Protocol.BuildResult build(final Protocol.BuildRequest request, final ObjectOutputStream output) {
+    public Protocol.BuildResult build(final Protocol.BuildRequest request) {
       Protocol.BuildResult _xblockexpression = null;
       {
-        this.resultCollector.setOutput(output);
+        this.resultCollector.setOutput(this.channel);
         final Procedure1<IdeaStandaloneBuilder> _function = new Procedure1<IdeaStandaloneBuilder>() {
           @Override
           public void apply(final IdeaStandaloneBuilder it) {

@@ -7,12 +7,11 @@
  */
 package org.eclipse.xtext.idea.build.daemon;
 
-import java.io.ObjectOutputStream;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.build.daemon.Protocol;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -24,14 +23,10 @@ public class XtextBuildResultCollector {
   private Protocol.BuildResult buildResult = new Protocol.BuildResult();
   
   @Accessors
-  private ObjectOutputStream output;
+  private ObjectChannel output;
   
   public void addIssue(final Protocol.BuildIssue issue) {
-    try {
-      this.output.writeObject(issue);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    this.output.writeObject(issue);
   }
   
   public boolean addChangedFile(final String path) {
@@ -62,11 +57,11 @@ public class XtextBuildResultCollector {
   }
   
   @Pure
-  public ObjectOutputStream getOutput() {
+  public ObjectChannel getOutput() {
     return this.output;
   }
   
-  public void setOutput(final ObjectOutputStream output) {
+  public void setOutput(final ObjectChannel output) {
     this.output = output;
   }
 }

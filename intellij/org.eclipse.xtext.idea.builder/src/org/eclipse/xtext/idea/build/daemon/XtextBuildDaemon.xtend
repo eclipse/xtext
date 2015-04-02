@@ -10,18 +10,20 @@ package org.eclipse.xtext.idea.build.daemon
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
 import java.net.InetAddress
+import java.net.InetSocketAddress
 import java.net.ServerSocket
-import java.net.Socket
-import java.net.SocketTimeoutException
+import java.nio.channels.SelectionKey
+import java.nio.channels.ServerSocketChannel
+import java.nio.channels.SocketChannel
+import java.nio.channels.spi.SelectorProvider
 import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.TTCCLayout
 import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
 import org.eclipse.xtext.idea.build.daemon.Protocol.StopServer
+import org.eclipse.xtext.idea.build.net.ObjectChannel
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
@@ -31,18 +33,18 @@ import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 class XtextBuildDaemon {
 
 	static val LOG = Logger.getLogger(XtextBuildDaemon)
-	
+
 	def static void main(String[] args) {
 		try {
-			LOG.parent.addAppender(new FileAppender(new TTCCLayout(), 'xtext_builder_daemon.log', true))	
+			LOG.parent.addAppender(new FileAppender(new TTCCLayout(), 'xtext_builder_daemon.log', true))
 			LOG.level = Level.INFO
 			val injector = Guice.createInjector(new BuildDaemonModule)
-			injector.getInstance(Server).run(args.parse)	
-		} catch(Exception exc) {
+			injector.getInstance(Server).run(args.parse)
+		} catch (Exception exc) {
 			System.err.println('Error ' + exc.message)
 		}
-	}	
-	
+	}
+
 	private static def parse(String... args) {
 		val arguments = new Arguments
 		val i = args.iterator
@@ -55,76 +57,97 @@ class XtextBuildDaemon {
 					throw new IllegalArgumentException("Invalid argument '" + arg + "'")
 			}
 		}
-		if(arguments.port == 0)
+		if (arguments.port == 0)
 			throw new IllegalArgumentException('Port number must be set')
 		return arguments
-	} 
-	
+	}
+
 	static class Arguments {
 		int port
 	}
 
 	static class Server {
 		@Inject Provider<Worker> workerProvider
-		
+
 		def run(Arguments arguments) {
 			var ServerSocket serverSocket = null
 			try {
 				LOG.info('Starting xtext build daemon at port ' + arguments.port + '...')
-				serverSocket = new ServerSocket(arguments.port, 0, InetAddress.getByName('127.0.0.1'))
-				serverSocket.soTimeout = 5000
+				val socketSelector = SelectorProvider.provider().openSelector()
+				val serverChannel = ServerSocketChannel.open()
+				serverChannel.configureBlocking(false)
+				val socketAddress = new InetSocketAddress(InetAddress.getByName('127.0.0.1'), arguments.port)
+				serverChannel.socket.bind(socketAddress)
+				serverChannel.register(socketSelector, SelectionKey.OP_ACCEPT)
+
 				var receivedRequests = false
 				LOG.info('... success')
 				var shutdown = false
-				while(!shutdown) {
+				while (!shutdown) {
 					LOG.info('Accepting connections...')
 					try {
-						val socket = serverSocket.accept
-						receivedRequests = true
-						shutdown = workerProvider.get.serve(socket)		
-					} catch (SocketTimeoutException exc) {
-						if(!receivedRequests) {
-							LOG.info('No requests within ' + serverSocket.soTimeout + 'ms.')
-							shutdown = true
+						socketSelector.select(5000)
+						for (key : socketSelector.selectedKeys) {
+							if (key.acceptable) {
+								var SocketChannel socketChannel = null
+								try {
+									socketChannel = serverChannel.accept
+									if (socketChannel == null) {
+										if (!receivedRequests) {
+											LOG.info('No requests within ' + serverSocket.soTimeout + 'ms.')
+											shutdown = true
+										}
+									} else {
+										socketChannel.configureBlocking(true)
+										receivedRequests = true
+										shutdown = workerProvider.get.serve(socketChannel)
+									}
+								} finally {
+									socketChannel?.close
+								}
+							}
 						}
+					} catch (Exception exc) {
+						LOG.error('Error during build', exc)
 					}
-				} 
+				}
 			} catch (Exception exc) {
-				LOG.error('Error during build', exc)
+				LOG.error('Error starting server socket', exc)
 			}
 			LOG.info('Shutting down')
 			serverSocket?.close
 		}
 	}
-	
+
 	static class Worker {
-		
+
 		@Inject IdeaStandaloneBuilder standaloneBuilder
-		
+
 		@Inject XtextBuildResultCollector resultCollector
-		
-		def serve(Socket socket) {
-			val input = new ObjectInputStream(socket.inputStream)
-			val msg = input.readObject
-			val output = new ObjectOutputStream(socket.outputStream)
-			switch(msg) {
+
+		ObjectChannel channel
+
+		def serve(SocketChannel socketChannel) {
+			channel = new ObjectChannel(socketChannel)
+			val msg = channel.readObject
+			switch (msg) {
 				StopServer: {
-					LOG.info('Received StopServer')					
+					LOG.info('Received StopServer')
 					return true
 				}
-				BuildRequest:  {
-					LOG.info('Received BuildRequest. Start build...')			
-					val buildResult = build(msg, output)
+				BuildRequest: {
+					LOG.info('Received BuildRequest. Start build...')
+					val buildResult = build(msg)
 					LOG.info('...finished.')
-					output.writeObject(buildResult)
+					channel.writeObject(buildResult)
 					LOG.info('Result sent.')
 				}
 			}
 			return false
 		}
-	
-		def build(BuildRequest request, ObjectOutputStream output) {
-			resultCollector.output = output
+
+		def build(BuildRequest request) {
+			resultCollector.output = channel
 			standaloneBuilder => [
 				failOnValidationError = false
 				languages = XtextLanguages.getLanguageAccesses
