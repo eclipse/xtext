@@ -56,6 +56,7 @@
         <reference></reference>
         <timeout>30</timeout>
       </hudson.plugins.git.extensions.impl.CloneOption>
+      <hudson.plugins.git.extensions.impl.PruneStaleBranch/>
     </extensions>
   </scm>
   <quietPeriod>2</quietPeriod>
