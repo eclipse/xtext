@@ -10,11 +10,13 @@ package org.eclipse.xtext.resource;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -30,6 +32,8 @@ import com.google.inject.Inject;
  * @since 2.1
  */
 public class DerivedStateAwareResource extends StorageAwareResource {
+	
+	private final static Logger LOG = Logger.getLogger(DerivedStateAwareResource.class);
 
 	@Inject(optional=true)
 	private IDerivedStateComputer derivedStateComputer;
@@ -233,10 +237,19 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 						throw Throwables.propagate(e);
 					}
 				}
-				fullyInitialized = true;
+			} catch (RuntimeException e) {
+				getErrors().add(new ExceptionDiagnostic(e));
+				throw e;
 			} finally {
+				//always set fully initialized to true, so we don't try initializing again on error. 
+				fullyInitialized = true;
 				isInitializing = false;
-				getCache().clear(this);
+				try {
+					getCache().clear(this);
+				} catch (RuntimeException e) {
+					// don't rethrow as there might have been an exception in the try block.
+					LOG.error(e.getMessage(), e);
+				}
 			}
 		}
 	}
