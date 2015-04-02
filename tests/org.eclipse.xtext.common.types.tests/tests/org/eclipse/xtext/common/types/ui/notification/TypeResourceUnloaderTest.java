@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.ui.notification;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -44,7 +45,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeResourceUnloaderTest extends Assert implements IResourceDescription.Event.Listener, IElementChangedListener {
+public class TypeResourceUnloaderTest extends Assert implements IResourceDescription.Event.Listener {
 
 	private static final String NESTED_TYPES = "org.eclipse.xtext.common.types.testSetups.NestedTypes";
 
@@ -54,7 +55,6 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	private IEditorPart editor;
 	private IType type;
 	private IJavaProject project;
-	private volatile List<String> firedElementChangedEvents;
 
 	private IStateChangeEventBroker eventBroker;
 
@@ -67,8 +67,6 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 
 	private String originalContent;
 	
-	private NullPointerException exception = null;
-
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();
 	}
@@ -82,13 +80,19 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		type = project.findType(NESTED_TYPES);
 		compilationUnit = type.getCompilationUnit();
 		compilationUnit.becomeWorkingCopy(null);
-		editor = JavaUI.openInEditor(compilationUnit);
+		
+		// wait until the BackgroundThread for the reconciler was started
+		editor = waitForElementChangedEvent(new Callable<IEditorPart>() {
+			@Override
+			public IEditorPart call() throws Exception {
+				return JavaUI.openInEditor(compilationUnit);
+			}
+		}, true);
+		
 		eventBroker.addListener(this);
 		document = getDocument();
 		originalContent = document.get();
-		firedElementChangedEvents = Lists.newArrayList();
 		subsequentEvents = Lists.newArrayList();
-		exception = null;
 	}
 	
 	@After
@@ -105,9 +109,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		type = null;
 		project = null;
 		event = null;
-		firedElementChangedEvents = null;
 		subsequentEvents = null;
-		exception = null;
 	}
 	
 	@Test public void testNullChange() throws BadLocationException, InterruptedException {
@@ -124,7 +126,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNull(String.valueOf(firedElementChangedEvents), event);
+		assertNull(event);
 	}
 	
 	@Test public void testCloseEditor() throws InterruptedException {
@@ -132,11 +134,28 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 
 			@Override
 			public void apply() {
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
+				((ITextEditor) editor).close(false);
 			}
 
-		});
-		assertNull(String.valueOf(firedElementChangedEvents), event);
+		}, false);
+		assertNull(event);
+	}
+	
+	@Test public void testCloseEditorAndDiscardWorkingCopy() throws InterruptedException {
+		waitForEvent(new Procedure0() {
+
+			@Override
+			public void apply() {
+				try {
+					compilationUnit.discardWorkingCopy();
+					((ITextEditor) editor).close(false);
+				} catch (JavaModelException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+		}, false);
+		assertNull(event);
 	}
 	
 	@Test public void testCloseAndReopenEditor() throws InterruptedException, PartInitException, JavaModelException {
@@ -154,7 +173,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 				}		
 			}
 		});
-		assertNull(String.valueOf(firedElementChangedEvents), event);
+		assertNull(event);
 	}
 	
 	@Test
@@ -173,7 +192,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 				
 			}
 		});
-		assertNull(String.valueOf(firedElementChangedEvents), event);
+		assertNull(event);
 	}
 	
 	@Test public void testTypeParameterAdded() throws BadLocationException, JavaModelException, InterruptedException {
@@ -192,7 +211,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
@@ -220,7 +239,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
@@ -253,7 +272,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		Collection<String> allNames = getNames(event.getDeltas());
@@ -277,7 +296,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		Collection<String> allNames = getNames(event.getDeltas());
@@ -300,7 +319,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		Collection<String> allNames = getNames(event.getDeltas());
@@ -323,7 +342,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		Collection<String> allNames = getNames(event.getDeltas());
@@ -347,7 +366,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 
 		});
 		String foobar = "org.eclipse.xtext.common.types.testSetups.FooBar";
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 6, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
@@ -391,7 +410,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		assertNull(event.getDeltas().get(2).getNew());
@@ -417,7 +436,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			}
 
 		});
-		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertNotNull(event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 4, event.getDeltas().size());
 		assertNull(event.getDeltas().get(3).getOld());
@@ -453,38 +472,64 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		}
 	}
 	
-	protected void waitForEvent(Procedures.Procedure0 procedure) throws InterruptedException {
+	/**
+	 * Same as {@code waitForEvent(procedure, true} which is that an {@link ElementChangedEvent} is expected.
+	 * @see #waitForEvent(Procedure0, boolean)
+	 */
+	protected void waitForEvent(final Procedures.Procedure0 procedure) throws InterruptedException {
+		waitForEvent(procedure, true);
+	}
+	
+	protected void waitForEvent(final Procedures.Procedure0 procedure, boolean expectEvent) throws InterruptedException {
 		try {
-			JavaCore.addElementChangedListener(this);
-			procedure.apply();
-			// the Java reconciler is blazingly fast, it should never
-			// be necessary to increase the counter here
-			int counter = 100;
-			while(event == null && counter > 0) {
+			waitForElementChangedEvent(new Callable<Void>() {
+				@Override
+				public Void call() throws Exception {
+					procedure.apply();
+					return null;
+				}
+			}, expectEvent);
+		} catch(InterruptedException e) {
+			throw e;
+		} catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Wait explicitly for an {@link ElementChangedEvent} that is propagated when the given Callable is executed.
+	 * May also be used to assert that no such event occurred. 
+	 */
+	protected <T> T waitForElementChangedEvent(Callable<T> callMe, boolean expectEvent) throws Exception {
+		class Listener implements IElementChangedListener {
+			private volatile boolean eventSeen = false;
+			@Override
+			public void elementChanged(ElementChangedEvent event) {
+				eventSeen = true;
+				JavaCore.removeElementChangedListener(this);
+			}
+		}
+		Listener listener = new Listener();
+		JavaCore.addElementChangedListener(listener);
+		try {
+			return callMe.call();
+		} finally {
+			// usually a counter of 100 is way more than enough, but on the CI server we see a longer
+			// delay, maybe the threading model on linux is slightly different. Anyway, the overall runtime
+			// on dev boxes is not affected but the test is green on the server
+			int counter = expectEvent ? 250 : 150;
+			while(!listener.eventSeen && counter > 0) {
 				counter--;
 				Thread.sleep(15);
 			}
-			if(exception != null){
-				throw exception;
-			}
-		} finally {
-			JavaCore.removeElementChangedListener(this);
+			assertEquals(expectEvent, listener.eventSeen);
 		}
-	} 
-	
-	@Override
-	public void elementChanged(ElementChangedEvent elementChanged) {
-		if (firedElementChangedEvents != null)
-			firedElementChangedEvents.add(String.valueOf(elementChanged));
 	}
 	
 	@Override
 	public void descriptionsChanged(IResourceDescription.Event event) {
 		if (this.event != null && subsequentEvents != null) {
 			subsequentEvents.add(event);
-		}
-		if(event == null){
-			exception = new NullPointerException();
 		}
 		this.event = event;
 	}
