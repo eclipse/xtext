@@ -159,6 +159,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertNull(uri);
 	}
 	
+	@Flaky
 	@Test public void testBug463258_04() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
