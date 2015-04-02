@@ -8,6 +8,21 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="OptionsAware&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TypeResource"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+                <message_argument value="createType(IType, TypeResource, Map&lt;?,?&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/common/types/ui/notification/JavaBuilderState.java" type="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState">
         <filter comment="As the DeltaConverter is the only client, this class is not ment to be used by clients" id="338792546">
             <message_arguments>
