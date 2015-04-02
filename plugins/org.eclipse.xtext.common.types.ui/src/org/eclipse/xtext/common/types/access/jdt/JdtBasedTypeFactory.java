@@ -41,6 +41,7 @@ import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -458,23 +459,30 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private IBinding resolveBindings(IType jdtType, IJavaProject javaProject) {
-		resolveBinding.start();
-
-		parser.setWorkingCopyOwner(workingCopyOwner);
-		parser.setIgnoreMethodBodies(true);
-		
-		parser.setProject(javaProject);
-		
-		@SuppressWarnings("unchecked")
-		Map<Object, Object> options = javaProject.getOptions(true);
-		
-		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
-		parser.setCompilerOptions(options);
-
-		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
-		resolveBinding.stop();
-		return bindings[0];
+		ThreadLocal<Object> abortOnMissingSource = JavaModelManager.getJavaModelManager().abortOnMissingSource;
+		Object wasAbortOnMissingSource = abortOnMissingSource.get();
+		try {
+			abortOnMissingSource.set(Boolean.TRUE);
+			resolveBinding.start();
+	
+			parser.setWorkingCopyOwner(workingCopyOwner);
+			parser.setIgnoreMethodBodies(true);
+			
+			parser.setProject(javaProject);
+			
+			Map<Object, Object> options = javaProject.getOptions(true);
+			
+			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
+			parser.setCompilerOptions(options);
+	
+			IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
+			resolveBinding.stop();
+			return bindings[0];
+		} finally {
+			abortOnMissingSource.set(wasAbortOnMissingSource);
+		}
 	}
 	
 	/**
