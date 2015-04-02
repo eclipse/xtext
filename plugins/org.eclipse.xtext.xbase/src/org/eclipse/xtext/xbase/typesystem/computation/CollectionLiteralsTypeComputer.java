@@ -13,12 +13,14 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -317,7 +319,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 
 	protected boolean isExpectedType(LightweightTypeReference expectation, Class<?> clazz) {
 		if (expectation != null) {
-			if (expectation.isResolved() && expectation.isSubtypeOf(clazz)) {
+			if (expectation.isResolved() && isSubtypeButNotSynonym(expectation, clazz)) {
 				return true;
 			}
 			if (expectation instanceof UnboundTypeReference) {
@@ -327,15 +329,34 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 				List<LightweightBoundTypeArgument> hints = ((UnboundTypeReference) expectation).getAllHints();
 				for(LightweightBoundTypeArgument hint: hints) {
 					LightweightTypeReference hintReference = hint.getTypeReference();
-					if (hintReference != null && hintReference.isSubtypeOf(clazz)) {
+					if (hintReference != null && isSubtypeButNotSynonym(hintReference, clazz)) {
 						return true;
 					}
 				}
 			} else if (expectation instanceof ParameterizedTypeReference) {
-				return expectation.isSubtypeOf(clazz);
+				return isSubtypeButNotSynonym(expectation, clazz);
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Same as {@link LightweightTypeReference#isSubtypeOf(Class)} but does not accept synonym types as subtypes.
+	 */
+	protected boolean isSubtypeButNotSynonym(LightweightTypeReference expectation, Class<?> clazz) {
+		if (expectation.isType(clazz)) {
+			return true;
+		}
+		ITypeReferenceOwner owner = expectation.getOwner();
+		JvmType declaredType = owner.getServices().getTypeReferences().findDeclaredType(clazz, owner.getContextResourceSet());
+		if (declaredType == null) {
+			return false;
+		}
+		LightweightTypeReference superType = owner.newParameterizedTypeReference(declaredType);
+		// don't allow synonyms, e.g. Iterable is not considered to be a supertype of Functions.Function0
+		boolean result = superType.isAssignableFrom(expectation.getRawTypeReference(), 
+				new TypeConformanceComputationArgument(false, false, true, true, false, false));
+		return result;
 	}
 
 	/**
