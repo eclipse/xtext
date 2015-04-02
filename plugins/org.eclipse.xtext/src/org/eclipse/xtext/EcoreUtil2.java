@@ -51,6 +51,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
@@ -165,8 +166,13 @@ public class EcoreUtil2 extends EcoreUtil {
 		EList<Resource> resources = source.getResources();
 		EcoreUtil.Copier copier = new EcoreUtil.Copier();
 		for (Resource resource : resources) {
-			Resource resource2 = target.createResource(resource.getURI());
-			resource2.getContents().addAll(copier.copyAll(resource.getContents()));
+			Resource targetResource = target.createResource(resource.getURI());
+			targetResource.getContents().addAll(copier.copyAll(resource.getContents()));
+			// mark all resources as fully initialized
+			if (resource instanceof DerivedStateAwareResource && targetResource instanceof DerivedStateAwareResource) {
+				((DerivedStateAwareResource) targetResource).setFullyInitialized(((DerivedStateAwareResource) resource)
+						.isFullyInitialized());
+			}
 		}
 		copier.copyReferences();
 		return target;
