@@ -507,7 +507,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		ctx.getOutput().openFile(naming.asPath(naming.setupImpl(config.getGrammar())) + ".java", SRC_GEN);
 		try {
 			XpandFacade facade = XpandFacade.create(ctx);
-			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());
+			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar(), config.getFileExtensions(config.getGrammar()));
 			config.addToStandaloneSetup(config, ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::post", config.getGrammar());
 		} finally {

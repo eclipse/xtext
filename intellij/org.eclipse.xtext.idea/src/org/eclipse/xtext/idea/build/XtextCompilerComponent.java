@@ -38,7 +38,7 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 		private final AtomicReference<List<File>> myAffectedFiles = new AtomicReference<List<File>>(new ArrayList<File>());
 
 		public void messageReceived(String builderId, String messageType, String messageText) {
-			if (!"xtext".equals(builderId)) {
+			if (!"Xtext".equals(builderId)) {
 				return;
 			}
 

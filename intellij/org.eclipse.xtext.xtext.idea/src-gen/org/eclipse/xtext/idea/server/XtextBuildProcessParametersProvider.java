@@ -1,6 +1,7 @@
 package org.eclipse.xtext.idea.server;
 
-import java.util.Arrays;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.intellij.compiler.server.BuildProcessParametersProvider;
@@ -10,11 +11,24 @@ import com.intellij.openapi.extensions.PluginId;
 public class XtextBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
 	public List<String> getClassPath() {
-		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea")).getPath().getPath();
-		return Arrays.asList(
-			path + "/bin", 
-			path + "/../../plugins/org.eclipse.xtext/bin"
-		);
+		PluginId pluginId = PluginId.getId("org.eclipse.xtext.xtext.idea");
+		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();
+
+		List<String> result = new ArrayList<String>();
+
+		File libFolder = new File(pluginFolder, "lib");
+		if (libFolder.exists()) {
+			for (File file : libFolder.listFiles()) {
+				result.add(file.getAbsolutePath());
+			}
+		}
+
+		File classesFolder = new File(pluginFolder, "classes");
+		if (classesFolder.exists()) {
+			result.add(classesFolder.getAbsolutePath());
+		}
+
+		return result;
 	}
 
 }

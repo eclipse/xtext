@@ -4,17 +4,29 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class XtextStandaloneSetupGenerated implements ISetup {
+public class XtextStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("xtext","xtext2");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
