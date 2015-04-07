@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -108,6 +109,29 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertSame(b.getESuperTypes().get(0),a);
 	}
 
+	@Test
+	public void testClone_2() throws Exception {
+		ResourceSetImpl sourceSet = new DerivedStateAwareResourceSet();
+		DerivedStateAwareResource resource = (DerivedStateAwareResource) sourceSet.createResource(URI
+				.createURI("http://derived.res"));
+		boolean stateToCheck = !resource.isFullyInitialized();
+		resource.setFullyInitialized(stateToCheck);
+		
+		Resource targetRes = EcoreUtil2.clone(new DerivedStateAwareResourceSet(), sourceSet).getResources().get(0);
+		
+		assertTrue(targetRes instanceof DerivedStateAwareResource);
+		assertEquals("FullyInitialized flag not copied ", stateToCheck, ((DerivedStateAwareResource) targetRes).isFullyInitialized());
+	}
+	
+	private final class DerivedStateAwareResourceSet extends ResourceSetImpl {
+		@Override
+		public Resource createResource(URI uri) {
+			DerivedStateAwareResource result = new DerivedStateAwareResource();
+			getResources().add(result);
+			return result;
+		}
+	}
+	
 	@Test public void testCommonCompatibleType01() {
 		EClass a = createEClass("a");
 		EClass b = createEClass("b");
