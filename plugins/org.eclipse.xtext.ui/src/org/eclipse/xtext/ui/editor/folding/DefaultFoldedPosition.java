@@ -25,16 +25,6 @@ public class DefaultFoldedPosition extends FoldedPosition {
 	private final int contentLength;
 	private boolean initiallyFolded;
 	
-	/**
-	 * @since 2.8
-	 */
-	public void setInitiallyFolded(boolean initiallyFolded) {
-		this.initiallyFolded = initiallyFolded;
-	}
-	
-	/**
-	 * 
-	 */
 	public DefaultFoldedPosition(int offset, int length, int contentStart, int contentLength) {
 		this(offset, length, contentStart, contentLength, false);
 	}
@@ -50,8 +40,6 @@ public class DefaultFoldedPosition extends FoldedPosition {
 		this.contentLength = contentLength;
 		this.initiallyFolded = initiallyFolded;
 	}
-	
-	
 	
 	@Override
 	public IRegion[] computeProjectionRegions(IDocument document) throws BadLocationException {
@@ -135,6 +123,13 @@ public class DefaultFoldedPosition extends FoldedPosition {
 	 */
 	public boolean isInitiallyFolded() {
 		return initiallyFolded;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setInitiallyFolded(boolean initiallyFolded) {
+		this.initiallyFolded = initiallyFolded;
 	}
 
 }
