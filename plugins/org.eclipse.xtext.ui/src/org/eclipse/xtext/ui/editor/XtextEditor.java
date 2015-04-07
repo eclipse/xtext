@@ -1419,7 +1419,13 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	 */
 	@Override
 	public void forceReconcile() {
-		((XtextReconciler) ((IAdaptable) getInternalSourceViewer()).getAdapter(IReconciler.class)).forceReconcile();
+		IAdaptable iAdaptable = (IAdaptable) getInternalSourceViewer();
+		if (iAdaptable == null) {
+			return;
+		}
+		Object reconciler = iAdaptable.getAdapter(IReconciler.class);
+		if (reconciler instanceof XtextReconciler)
+			((XtextReconciler)reconciler).forceReconcile();
 	}
 	
 	/**

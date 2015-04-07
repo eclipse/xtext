@@ -49,8 +49,11 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExten
 			}
 		} catch (BadLocationException e) {
 		}
-		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion, initiallyFolded);
+		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion);
 		if (foldingRegion != null) {
+			if (foldingRegion instanceof DefaultFoldedPosition) {
+				((DefaultFoldedPosition) foldingRegion).setInitiallyFolded(initiallyFolded);
+			}
 			result.add(foldingRegion);
 		}
 	}
@@ -91,16 +94,19 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExten
 	}
 
 	/**
-	 * @deprecated use {@link #newFoldedPosition(IRegion, ITextRegion, boolean)}
+	 * @return a freshly created {@link FoldedPosition}
 	 */
-	@Deprecated
 	protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion) {
 		return newFoldedPosition(region, significantRegion, false);
 	}
 	
 	/**
+	 * @return a freshly created {@link FoldedPosition}
+	 * 
 	 * @since 2.8
+	 * @deprecated use / override {@link #newFoldedPosition(IRegion, ITextRegion)} instead
 	 */
+	@Deprecated
 	protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion, boolean initiallyFolded) {
 		if (region == null)
 			return null;

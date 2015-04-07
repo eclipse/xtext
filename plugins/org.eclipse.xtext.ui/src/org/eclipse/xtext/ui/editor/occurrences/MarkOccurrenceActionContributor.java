@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class MarkOccurrenceActionContributor extends AbstractToggleActionContributor implements IActionContributor {
 
-	public static final String EDITOR_MARK_OCCURRENCES = "markOccurrences"; //$NON-NLS-1$
+	public static final String EDITOR_MARK_OCCURRENCES = "ui.editor.markOccurrences"; //$NON-NLS-1$
 
 	@Inject
 	private Provider<OccurrenceMarker> occurrenceMarkerProvider;
