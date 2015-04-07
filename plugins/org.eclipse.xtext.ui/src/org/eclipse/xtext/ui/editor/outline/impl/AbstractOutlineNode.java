@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -28,6 +29,8 @@ import com.google.common.collect.Lists;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.Extension {
+	
+	private final static Logger LOG = Logger.getLogger(AbstractOutlineNode.class);
 
 	private Image image;
 
@@ -201,21 +204,26 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	@Override
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		if (getEObjectURI() != null) {
-			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
-				@Override
-				public T exec(XtextResource state) throws Exception {
-					if (state != null) {
-						EObject eObject;
-						if (state.getResourceSet() != null)
-							eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
-						else
-							eObject = state.getEObject(getEObjectURI().fragment());
-						return work.exec(eObject);
+			try {
+				return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
+					@Override
+					public T exec(XtextResource state) throws Exception {
+						if (state != null) {
+							EObject eObject;
+							if (state.getResourceSet() != null)
+								eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
+							else
+								eObject = state.getEObject(getEObjectURI().fragment());
+							return work.exec(eObject);
+						}
+						return null;
 					}
-					return null;
-				}
-
-			});
+	
+				});
+			} catch (RuntimeException e) {
+				LOG.warn(e.getMessage(), e);
+				return null;
+			}
 		} else {
 			return null;
 		}

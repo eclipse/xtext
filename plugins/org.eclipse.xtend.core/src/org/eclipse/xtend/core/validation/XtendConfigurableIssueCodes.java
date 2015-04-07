@@ -43,4 +43,9 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 	protected String getUnqualifiedSuperCallSeverity() {
 		return SeverityConverter.SEVERITY_ERROR;
 	}
+	
+	@Override
+	protected String getAbstractMethodInvocationSeverity() {
+		return SeverityConverter.SEVERITY_ERROR;
+	}
 }

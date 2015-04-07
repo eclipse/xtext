@@ -1,2 +1,3 @@
 bin
 target
+src/test/resources/it/compile/encoding/src/main/generated-sources

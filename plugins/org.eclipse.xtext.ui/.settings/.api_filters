@@ -17,4 +17,13 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/occurrences/MarkOccurrenceActionContributor.java" type="org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor">
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor"/>
+                <message_argument value="EDITOR_MARK_OCCURRENCES"/>
+                <message_argument value="markOccurrences"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

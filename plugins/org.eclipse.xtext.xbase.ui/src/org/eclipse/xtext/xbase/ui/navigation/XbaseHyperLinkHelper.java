@@ -172,7 +172,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 			ILeafNode node, final IHyperlinkAcceptor acceptor) {
 		IResolvedTypes resolveTypes = typeResolver.resolveTypes(resource);
 		final LightweightTypeReference type = resolveTypes.getActualType(typedElement);
-		if (type != null && !type.isUnknown()) {
+		if (type != null && !type.isUnknown() && type.getType() != null) {
 			createHyperlinksTo(resource, new Region(node.getOffset(), node.getLength()), type.getType(), new IHyperlinkAcceptor() {
 				@Override
 				public void accept(IHyperlink hyperlink) {

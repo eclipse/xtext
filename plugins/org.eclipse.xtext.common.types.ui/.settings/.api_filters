@@ -8,4 +8,19 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="OptionsAware&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TypeResource"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+                <message_argument value="createType(IType, TypeResource, Map&lt;?,?&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

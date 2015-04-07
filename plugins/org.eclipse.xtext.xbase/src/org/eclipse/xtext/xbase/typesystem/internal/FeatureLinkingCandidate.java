@@ -245,7 +245,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 						declaringType = enclosingTypes.get(0);
 					if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isInterface()) {
 						if (!getState().isIgnored(IssueCodes.UNQUALIFIED_SUPER_CALL)) {
-							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(getState().getSeverity(IssueCodes.UNQUALIFIED_SUPER_CALL),
+							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(getSeverity(IssueCodes.UNQUALIFIED_SUPER_CALL),
 									IssueCodes.UNQUALIFIED_SUPER_CALL,
 									"Unqualified super reference is not allowed in interface context", getExpression(),
 									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
@@ -292,18 +292,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (feature instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) feature;
 				if (operation.isAbstract() && featureCall instanceof XMemberFeatureCall) {
-					XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) featureCall;
-					XExpression target = memberFeatureCall.getMemberCallTarget();
-					if (target instanceof XAbstractFeatureCall
-							&& SUPER.getFirstSegment().equals(((XAbstractFeatureCall) target).getConcreteSyntaxFeatureName())) {
-						JvmIdentifiableElement targetFeature = ((XAbstractFeatureCall) target).getFeature();
-						String message = String.format("Cannot directly invoke the abstract method %s%s of the type %s",
-								operation.getSimpleName(), getFeatureParameterTypesAsString(operation), targetFeature.getSimpleName());
-						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-								IssueCodes.ABSTRACT_METHOD_INVOCATION, message, memberFeatureCall,
-								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-						result.accept(diagnostic);
-						return false;
+					Severity severity = getSeverity(IssueCodes.ABSTRACT_METHOD_INVOCATION);
+					if (severity != Severity.IGNORE) {
+						XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) featureCall;
+						XExpression target = memberFeatureCall.getMemberCallTarget();
+						if (target instanceof XAbstractFeatureCall
+								&& SUPER.getFirstSegment().equals(((XAbstractFeatureCall) target).getConcreteSyntaxFeatureName())) {
+							JvmIdentifiableElement targetFeature = ((XAbstractFeatureCall) target).getFeature();
+							String message = String.format("Cannot directly invoke the abstract method %s%s of the type %s",
+									operation.getSimpleName(), getFeatureParameterTypesAsString(operation), targetFeature.getSimpleName());
+							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(severity,
+									IssueCodes.ABSTRACT_METHOD_INVOCATION, message, memberFeatureCall,
+									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+							result.accept(diagnostic);
+							return false;
+						}
 					}
 				}
 			}

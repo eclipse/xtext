@@ -13,9 +13,14 @@ import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -36,9 +41,11 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -162,6 +169,62 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   }
   
   private final URI uri = URI.createURI("synthetic://testing/uri");
+  
+  @Test
+  public void testConcurrentDiscard() throws Exception {
+    try {
+      IntegerRange _upTo = new IntegerRange(1, 10000);
+      final Procedure1<Integer> _function = new Procedure1<Integer>() {
+        @Override
+        public void apply(final Integer it) {
+          String _string = it.toString();
+          URI _appendSegment = UIResourceChangeRegistryTest.this.uri.appendSegment(_string);
+          UIResourceChangeRegistryTest.this.resourceChangeRegistry.registerCreateOrModify("/foo", _appendSegment);
+        }
+      };
+      IterableExtensions.<Integer>forEach(_upTo, _function);
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          final SecureRandom random = new SecureRandom(new byte[] { ((byte) 1) });
+          IntegerRange _upTo = new IntegerRange(1, 1000);
+          final Procedure1<Integer> _function = new Procedure1<Integer>() {
+            @Override
+            public void apply(final Integer it) {
+              int _nextInt = random.nextInt(10000);
+              String _string = Integer.valueOf(_nextInt).toString();
+              final URI removedURI = UIResourceChangeRegistryTest.this.uri.appendSegment(_string);
+              UIResourceChangeRegistryTest.this.resourceChangeRegistry.discardCreateOrModifyInformation(removedURI);
+            }
+          };
+          IterableExtensions.<Integer>forEach(_upTo, _function);
+        }
+      };
+      final Runnable r = _function_1;
+      final ExecutorService executorService = Executors.newCachedThreadPool();
+      try {
+        final Future<?> future1 = executorService.submit(r);
+        final Future<?> future2 = executorService.submit(r);
+        final Future<?> future3 = executorService.submit(r);
+        final Future<?> future4 = executorService.submit(r);
+        future1.get();
+        future2.get();
+        future3.get();
+        future4.get();
+      } catch (final Throwable _t) {
+        if (_t instanceof ExecutionException) {
+          final ExecutionException e = (ExecutionException)_t;
+          throw e.getCause();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      } finally {
+        executorService.shutdown();
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @Test
   public void testSerialization() {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.builder;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -22,7 +21,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -132,16 +130,10 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   }
   
   @Override
-  public void discardCreateOrModifyInformation(final URI uri) {
+  public synchronized void discardCreateOrModifyInformation(final URI uri) {
     Collection<URI> _values = this.changesNotRelevantListeners.values();
-    final Iterator<URI> iter = _values.iterator();
-    while (iter.hasNext()) {
-      URI _next = iter.next();
-      boolean _equals = Objects.equal(_next, uri);
-      if (_equals) {
-        iter.remove();
-      }
-    }
+    Set<URI> _singleton = Collections.<URI>singleton(uri);
+    _values.removeAll(_singleton);
   }
   
   @Override
