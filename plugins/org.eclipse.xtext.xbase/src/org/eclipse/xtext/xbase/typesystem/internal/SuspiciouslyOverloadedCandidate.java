@@ -99,7 +99,7 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 			messageBuilder.append("\noverloads the ").append(getFeatureTypeName()).append("\n\t");
 			appendCandidate(rejectedCandidate, messageBuilder);
 			messageBuilder.append(".");
-			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(chosenCandidate.getState().getSeverity(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE),
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(chosenCandidate.getSeverity(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE),
 					IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, messageBuilder.toString(), getExpression(),
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
