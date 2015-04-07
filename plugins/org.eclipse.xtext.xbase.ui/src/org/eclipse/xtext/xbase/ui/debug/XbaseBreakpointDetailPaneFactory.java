@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.debug;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +25,12 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
 
+/**
+ * Creates the detail pane for Xbase breakpoints, e.g. Stratum breakpoint that have a special
+ * xbase source marker.
+ * 
+ * @author Stefan Oehme - Initial contribution and API
+ */
 @SuppressWarnings("restriction")
 public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactory {
 	public static final String XBASE_DETAIL_PANE = "org.eclipse.xtext.xbase.debug.DetailPane";
@@ -37,17 +43,19 @@ public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactor
 	@Override
 	public Set<String> getDetailPaneTypes(IStructuredSelection selection) {
 		prioritizer.prioritizeXbaseOverJdt();
-		HashSet<String> paneTypes = new HashSet<String>();
 		if (selection.size() == 1) {
-			IBreakpoint b = (IBreakpoint) selection.getFirstElement();
-			try {
-				Object sourceUri = b.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
-				if (sourceUri != null) {
-					paneTypes.add(XBASE_DETAIL_PANE);
-				}
-			} catch (CoreException e) {}
+			Object selectedElement = selection.getFirstElement();
+			if (selectedElement instanceof IBreakpoint) {
+				IBreakpoint b = (IBreakpoint) selectedElement;
+				try {
+					Object sourceUri = b.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
+					if (sourceUri != null) {
+						return Collections.singleton(XBASE_DETAIL_PANE);
+					}
+				} catch (CoreException e) {}
+			}
 		}
-		return paneTypes;
+		return Collections.emptySet();
 	}
 	
 	@Override
