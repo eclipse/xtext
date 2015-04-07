@@ -443,7 +443,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param executable the executable that declares the exception.
 	 */
 	protected Severity getUnhandledExceptionSeverity(JvmExecutable executable) {
-		return getState().getSeverity(IssueCodes.UNHANDLED_EXCEPTION);
+		return getSeverity(IssueCodes.UNHANDLED_EXCEPTION);
+	}
+
+	/**
+	 * Returns the current severity for the given issue code.
+	 */
+	protected Severity getSeverity(String issueCode) {
+		return getState().getSeverity(issueCode);
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
