@@ -229,6 +229,15 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		assertEquals("Open Inferred Type - String", hyperlinks[0].getHyperlinkText());
 	}
 	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=463247
+	@Test public void testOpenInferredType_on_any() throws Exception {
+		String modelAsString = "class Baz { def void foo() { var myVar=null println(myVar) } }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("myVar");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertNull(hyperlinks);
+	}
+	
 	@Test public void testOpenInferredTypeOnReference() throws Exception {
 		String modelAsString = "class Baz { def void foo() { var myVar='' println(myVar) } }";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
