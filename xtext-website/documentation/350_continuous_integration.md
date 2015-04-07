@@ -1,6 +1,7 @@
 ---
 layout: documentation
-
+title: Continuous Integration
+part: Reference Documentation
 upsite:
   eclipse: http://download.eclipse.org/
   xtext: http://download.eclipse.org/modeling/tmf/xtext/updates/
@@ -9,16 +10,15 @@ upsite:
   xpand: http://download.eclipse.org/modeling/m2t/xpand/updates/
 ---
 
-Continuous Integration (with Maven)
-=====================
+# Continuous Integration (with Maven)
 
-There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language, that runs all tests and creates an Eclipse update site and other needed artifacts and secondly you may want to have your language and its corresponding code generator integrated in your application builds. We will discuss both cases in the section along a set of example projects, which you can clone, inspect or download from [github.com/xtext/maven-xtext-example](https://github.com/xtext/maven-xtext-example).
+There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language that runs all tests and creates an Eclipse update site and other needed artifacts, and secondly you may want to have your language and its corresponding code generator integrated in your application builds. We will discuss both cases in this section along with a set of example projects, which you can clone, inspect or download from [github.com/xtext/maven-xtext-example](https://github.com/xtext/maven-xtext-example).
 
-To follow this section you need to have a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it. 
+To follow this section you need a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it. 
 
 ### An overview of the example projects
 
-If you have a look at the example, you'll find seven different projects of which six are for the various aspects of the language and its build. First we have the language's runtime project, ui project and test project. In addition we need a feature project, an update site project and a project where we put the parent pom. The seventh project is called `example-project` and is really a small application project that uses the built language and triggers the code generator through a dedicated maven plug-in. Let's first have a look at how to build the language.
+If you have a look at the example, you'll find seven different projects of which six are for the various aspects of the language and its build. First we have the language's runtime project, UI project and test project. In addition we need a feature project, an update site project and a project where we put the parent pom. The seventh project is called `example-project` and is really a small application project that uses the built language and triggers the code generator through a dedicated maven plug-in. Let's first have a look at how to build the language.
 
 ### Building an Xtext language with Maven and Tycho {#tycho-build}
 
@@ -75,7 +75,7 @@ All of the projects are aggregated in a parent pom in `my.mavenized.herolanguage
 
 #### The update site project (my.mavenized.herolanguage.updatesite)
 
-The project `my.mavenized.herolanguage.updatesite` denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features are contained in the update site. As you can see, the `category.xml` file points to the single feature, which is defined in ...
+The project `my.mavenized.herolanguage.updatesite` denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features are contained in the update site. As you can see, the `category.xml` file points to the single feature, which is defined in the project `my.mavenized.herolanguage.sdk`.
 
 #### The feature project (my.mavenized.herolanguage.sdk)
 
@@ -157,7 +157,7 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 
 You need to adjust the mwe file as well to be able to run it this way. There are three important adjustments you need to make:
 
-First you need to use a *platform:resource* `URI` instead of a *classpath* `URI` to point to your Xtext grammar file. This is because we don't have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example: 
+First you need to use a *platform:resource* URI instead of a *classpath* URI to point to your Xtext grammar file. This is because we don't have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example: 
 
 ```mwe2
   // grammarURI has to be platform:/resource as it is not on the classpath
@@ -193,7 +193,7 @@ Finally we need to tell the generator to use the created `XtextResourceSet` by a
 
 ### Integration in Standard Maven Builds {#standalone-build}
 
-Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For that a dedicated maven-plugin is available in Maven central. We now refer to the project `example-project` which is a standard Java-project that shouldn't contain any Eclipse plug-in specific information nor should it be built with Tycho. Let's have a look at the pom.xml and therein the Xtext plug-in.
+Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For this purpose a dedicated maven-plugin is available in Maven central. We now refer to the project `example-project`, which is a standard Java-project that shouldn't contain any Eclipse plug-in specific information, nor should it be built with Tycho. Let's have a look at the pom.xml and therein the Xtext plug-in.
 
 ```xml
 <plugin>
@@ -235,17 +235,17 @@ As the comments suggest, you may add multiple languages in the languages section
 
 ## Maven Tycho Hints
 
-Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. First one, is to define the repository URLs directly in the `pom.xml` using maven `<repositories>` section. The p2 repositories need to be marked with layout=p2.
-The second way, is to use eclipse [target platform files](https://wiki.eclipse.org/Tycho/Target_Platform#Target_files). This approach is much faster, because the target platform resolution is performed only once, where the repository look up have to be done for every module. Using the target platform, will drastically reduce the build time especially in a bigger projects with a lot of modules.
+Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the `pom.xml` using maven `<repositories>` section. The p2 repositories need to be marked with layout=p2.
+The second way is to use eclipse [target platform files](https://wiki.eclipse.org/Tycho/Target_Platform#Target_files). This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.
 
-To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project's or the huge [eclipse common]({{page.upsite.eclipse}}releases/mars/) composite repository. In the table below you can find p2 repository URLs for Xtext releases and its dependencies. Versions in parentheses represent the minimal required version.
+To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project's repository or the huge [eclipse common]({{page.upsite.eclipse}}releases/mars/) composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.
 
 | Xtext 													|				EMF  								| MWE2/MWE | Xpand   | Eclipse  | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
 | [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) 					| [2.11.0]({{page.upsite.emf}}2.11milestones/core/) (2.10.2)  	 | [2.7.1/1.3.5]({{page.upsite.mwe}}releases/2.7.1/) (2.7.1/1.3.5) | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5milestones) (3.6) | [Mars M6*]({{page.upsite.eclipse}}releases/mars/)|
 | [2.7.3]({{page.upsite.xtext}}releases/maintenance/R201411190455/) | [2.10.2]({{page.upsite.emf}}2.10.x/core/S201501230452/) (2.10) | [2.7.0]({{page.upsite.mwe}}releases/R201409021051/mwe2lang/) [1.3.4]({{page.upsite.mwe}}releases/R201409021027/mwe) (2.7.0/1.2)  | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4) | [4.4.2]({{page.upsite.eclipse}}eclipse/updates/4.4/R-4.4.2-201502041700) (3.6) |[Luna SR2]({{page.upsite.eclipse}}releases/luna/201502271000/)|
 
-Following is an example target platform definition for Xtext 2.8.1 and eclipse 4.4.2 alias Luna SR2.
+The following is an example target platform definition for Xtext 2.8.1 and eclipse 4.4.2 alias Luna SR2.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -278,3 +278,7 @@ Following is an example target platform definition for Xtext 2.8.1 and eclipse 4
 <!---
 | [2.8.0]({{page.upsite.xtext}}releases/head/R201503090534/) 		| [2.11.0]({{page.upsite.emf}}2.11milestones/core/) (2.10.2)  	 | [2.7.1/1.3.5]({{page.upsite.mwe}}releases/2.7.1/) | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5milestones) (3.6) | [Mars M6]({{page.upsite.eclipse}}releases/mars/)|
 -->
+
+---
+
+**[Next Chapter: Migrating from Xtext 1.0.x to 2.0](401_migrating_from_1_0_x.html)**
