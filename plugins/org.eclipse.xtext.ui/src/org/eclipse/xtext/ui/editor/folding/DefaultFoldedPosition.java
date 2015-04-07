@@ -23,26 +23,35 @@ public class DefaultFoldedPosition extends FoldedPosition {
 	
 	private final int contentStart;
 	private final int contentLength;
-	private final boolean initiallyFolded;
+	private boolean initiallyFolded;
 	
-
 	/**
-	 * @deprecated use {@link #DefaultFoldedPosition(int, int, int, int, boolean)}
+	 * @since 2.8
 	 */
-	@Deprecated
+	public void setInitiallyFolded(boolean initiallyFolded) {
+		this.initiallyFolded = initiallyFolded;
+	}
+	
+	/**
+	 * 
+	 */
 	public DefaultFoldedPosition(int offset, int length, int contentStart, int contentLength) {
 		this(offset, length, contentStart, contentLength, false);
 	}
 	
 	/**
 	 * @since 2.8
+	 * @deprecated use / override {@link #DefaultFoldedPosition(int, int, int, int)} instead
 	 */
+	@Deprecated
 	public DefaultFoldedPosition(int offset, int length, int contentStart, int contentLength, boolean initiallyFolded) {
 		super(offset, length);
 		this.contentStart = contentStart;
 		this.contentLength = contentLength;
 		this.initiallyFolded = initiallyFolded;
 	}
+	
+	
 	
 	@Override
 	public IRegion[] computeProjectionRegions(IDocument document) throws BadLocationException {
@@ -102,7 +111,6 @@ public class DefaultFoldedPosition extends FoldedPosition {
 		int result = super.hashCode();
 		result = prime * result + contentLength;
 		result = prime * result + contentStart;
-		result = prime * result + (initiallyFolded ? 1231 : 1237);
 		return result;
 	}
 
@@ -118,8 +126,6 @@ public class DefaultFoldedPosition extends FoldedPosition {
 		if (contentLength != other.contentLength)
 			return false;
 		if (contentStart != other.contentStart)
-			return false;
-		if (initiallyFolded != other.initiallyFolded)
 			return false;
 		return true;
 	}
