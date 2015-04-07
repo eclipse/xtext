@@ -1423,9 +1423,9 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		if (iAdaptable == null) {
 			return;
 		}
-		XtextReconciler xtextReconciler = (XtextReconciler) iAdaptable.getAdapter(IReconciler.class);
-		if (xtextReconciler != null)
-			xtextReconciler.forceReconcile();
+		Object reconciler = iAdaptable.getAdapter(IReconciler.class);
+		if (reconciler instanceof XtextReconciler)
+			((XtextReconciler)reconciler).forceReconcile();
 	}
 	
 	/**
