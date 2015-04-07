@@ -76,12 +76,20 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/src-gen/IntegrationTestXbase.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/target/xtext-temp/classes/IntegrationTestXbase.class");
 	}
+	
 	@Test
 	public void xcore() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
 		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
+	}
+	
+	@Test
+	public void bug463946() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/bug463946");
+		verifier.addCliOption("-U");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/xcore/bug463946/pack/MyModel.java");
 	}
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {

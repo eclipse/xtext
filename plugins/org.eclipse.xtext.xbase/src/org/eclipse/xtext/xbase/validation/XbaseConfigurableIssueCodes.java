@@ -84,9 +84,14 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.DUPLICATE_TYPE, SeverityConverter.SEVERITY_ERROR));
 		
 		iAcceptor.accept(create(IssueCodes.UNQUALIFIED_SUPER_CALL, getUnqualifiedSuperCallSeverity()));
+		iAcceptor.accept(create(IssueCodes.ABSTRACT_METHOD_INVOCATION, getAbstractMethodInvocationSeverity()));
 	}
 
 	protected String getUnqualifiedSuperCallSeverity() {
+		return SeverityConverter.SEVERITY_IGNORE;
+	}
+	
+	protected String getAbstractMethodInvocationSeverity() {
 		return SeverityConverter.SEVERITY_IGNORE;
 	}
 

@@ -1,0 +1,13 @@
+@GenModel(modelDirectory="bug463946/src-gen", rootExtendsInterface="xcore.bug463946.Bug463946SuperIntf", rootExtendsClass="xcore.bug463946.Bug463946SuperImpl")
+package xcore.bug463946.pack
+
+import org.eclipse.emf.common.notify.Notification
+
+type Bug463946Notification wraps Notification
+
+abstract class MyModel {
+   op void eNotify(Bug463946Notification notification)
+   {
+      super.eNotify(notification)
+   }
+}
