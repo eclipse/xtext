@@ -173,6 +173,15 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 		}
 	}
 	
+	/*
+	 * Overridden to avoid unnecessary derived state computation internal to the call graphs of
+	 * {@link #updateInternalState(IParseResult)}. 
+	 */
+	@Override
+	boolean containsRootElement(EObject newRootASTElement) {
+		return doGetContents().contains(newRootASTElement);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 * <p>
