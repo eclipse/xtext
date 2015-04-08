@@ -55,10 +55,12 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 		Map<IStorage, ITextRegion> result = Maps.newHashMap();
 		for (ILocationInResource location : locations) {
 			IStorage storage = location.getStorage();
-			ITextRegion old = result.put(storage, location.getTextRegion());
-			if (old != null) {
-				ITextRegion merged = old.merge(location.getTextRegion());
-				result.put(storage, merged);
+			if (storage != null) {
+				ITextRegion old = result.put(storage, location.getTextRegion());
+				if (old != null) {
+					ITextRegion merged = old.merge(location.getTextRegion());
+					result.put(storage, merged);
+				}
 			}
 		}
 		for (Map.Entry<IStorage, ITextRegion> e : result.entrySet()) {

@@ -104,7 +104,9 @@ class XbaseEditorInputRedirector {
 			if (sourceInformation == null)
 				return input;
 			val originalStorage = sourceInformation.getStorage()
-			return EditorUtils.createEditorInput(originalStorage)
+			if (originalStorage != null) {
+				return EditorUtils.createEditorInput(originalStorage)
+			}
 		}
 		return input;
 	}
