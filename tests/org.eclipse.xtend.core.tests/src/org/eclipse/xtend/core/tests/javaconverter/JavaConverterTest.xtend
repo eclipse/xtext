@@ -1379,7 +1379,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				def int foo(Object obj) {
 					if (obj === null) {
 						return 0 
-					} else if (obj == "test") {
+					} else if (obj === "test") {
 						return 1 
 					} else if (obj !== null) {
 						return 2 
