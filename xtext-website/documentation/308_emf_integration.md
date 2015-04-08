@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Integration with EMF and Other EMF Editors
+title: Integration with EMF
 part: Reference Documentation
 ---
 
