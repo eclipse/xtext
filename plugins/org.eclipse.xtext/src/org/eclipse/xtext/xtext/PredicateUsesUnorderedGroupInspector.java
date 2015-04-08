@@ -149,7 +149,10 @@ public class PredicateUsesUnorderedGroupInspector extends XtextSwitch<Boolean> i
 	public Boolean caseParserRule(ParserRule object) {
 		if (!validatedRules.add(object))
 			return Boolean.FALSE;
-		return doSwitch(object.getAlternatives());
+		AbstractElement alternatives = object.getAlternatives();
+		if (alternatives == null)
+			return Boolean.FALSE;
+		return doSwitch(alternatives);
 	}
 
 	public void createErrorMessages(UnorderedGroup object) {
