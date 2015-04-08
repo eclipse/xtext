@@ -31,6 +31,7 @@ import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
 import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
 import org.eclipse.xtend.ide.contentassist.XtendImportingTypesProposalProvider;
+import org.eclipse.xtend.ide.contentassist.XtendTemplateContextType;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexProposalConflictHelper;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
@@ -136,6 +137,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -147,7 +149,6 @@ import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
@@ -266,10 +267,12 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendHoverProvider.class;
 	}
 
+	@Override
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return SourceRelativeFileSystemAccess.class;
 	}
 	
+	@Override
 	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
 		return JDTAwareSourceFolderProvider.class;
 	}
@@ -532,7 +535,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	@Override
-	public Class<? extends  IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
+	public Class<? extends IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
 		return FlexerBasedPartialXtendContentAssistParser.class;
 	}
 
@@ -563,5 +566,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return XtendResourceValidator.class;
+	}
+	
+	@Override
+	public Class<? extends XtextTemplateContextType> bindXtextTemplateContextType() {
+		return XtendTemplateContextType.class;
 	}
 }

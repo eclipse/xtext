@@ -457,8 +457,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 					}
 				} catch (RuntimeException e) {
 					try {
-						if (state != null)
-							state.reparse(get());
+						if (state != null) {
+							synchronized (getResourceLock(state)) {
+								acquireWriteLock();
+								try {
+									state.reparse(get());
+								} finally {
+									releaseWriteLock();
+								}
+							}
+						}
 					} catch (IOException ioe) {
 					}
 					throw e;
@@ -559,10 +567,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @since 2.7
 	 */
 	protected Object getResourceLock() {
-		if (resource != null) {
-			return (resource instanceof ISynchronizable<?>) 
-					? ((ISynchronizable<?>) resource).getLock() 
-							: resource;
+		return getResourceLock(resource);
+	}
+
+	private Object getResourceLock(XtextResource r) {
+		if (r != null) {
+			return (r instanceof ISynchronizable<?>) ? ((ISynchronizable<?>) r).getLock() : r;
 		} else {
 			return this;
 		}

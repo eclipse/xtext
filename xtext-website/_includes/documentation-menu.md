@@ -45,6 +45,8 @@
 	</li>
 	<li><a href="308_emf_integration.html">Integration with EMF and Other EMF Editors</a>
 	</li>
+	<li><a href="350_continuous_integration.html">Continuous Integration</a>
+	</li>
 	<li>&nbsp;</li>
 	<li style="color : #333;">Appendix</li>
 	<li><a href="401_migrating_from_1_0_x.html">Migrating from Xtext 1.0.x to 2.0</a>

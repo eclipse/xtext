@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Integration with EMF and Other EMF Editors
+title: Integration with EMF
 part: Reference Documentation
 ---
 
@@ -150,4 +150,4 @@ Note that there still are synchronization issues, that's why we keep this one ma
 
 ---
 
-**[Next Chapter: Migrating from Xtext 1.0.x to 2.0](401_migrating_from_1_0_x.html)**
+**[Next Chapter: Continuous Integration](350_continuous_integration.html)**
