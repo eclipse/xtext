@@ -260,12 +260,20 @@ public class XtextResource extends ResourceImpl {
 	
 	protected void updateInternalState(IParseResult newParseResult) {
 		this.parseResult = newParseResult;
-		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
-			getContents().add(0, parseResult.getRootASTElement());
-		reattachModificationTracker(parseResult.getRootASTElement());
+		EObject newRootASTElement = parseResult.getRootASTElement();
+		if (newRootASTElement != null && !containsRootElement(newRootASTElement))
+			getContents().add(0, newRootASTElement);
+		reattachModificationTracker(newRootASTElement);
 		clearErrorsAndWarnings();
 		addSyntaxErrors();
 		doLinking();
+	}
+
+	/*
+	 * Extracted to allow this to be overriden from the DerivedStateAwareResource
+	 */
+	boolean containsRootElement(EObject newRootASTElement) {
+		return getContents().contains(newRootASTElement);
 	}
 	
 	protected void clearErrorsAndWarnings() {

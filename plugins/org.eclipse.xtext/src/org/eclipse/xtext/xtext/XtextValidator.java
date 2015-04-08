@@ -148,7 +148,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkGrammarName(Grammar g) {
-		String[] split = g.getName().split("\\.");
+		String name = g.getName();
+		if (name == null) {
+			return;
+		}
+		String[] split = name.split("\\.");
 		if (split.length == 1)
 			error("You must use a namespace.", XtextPackage.Literals.GRAMMAR__NAME);
 		for (int i = 0; i < split.length - 1; i++) {
