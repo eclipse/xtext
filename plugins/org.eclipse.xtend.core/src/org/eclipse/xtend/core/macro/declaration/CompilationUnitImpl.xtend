@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
+import com.google.common.base.Throwables
 import com.google.common.collect.Iterables
 import com.google.common.primitives.Booleans
 import com.google.common.primitives.Bytes
@@ -17,16 +18,23 @@ import com.google.common.primitives.Ints
 import com.google.common.primitives.Longs
 import com.google.common.primitives.Shorts
 import com.google.inject.Inject
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.util.Collection
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
+import org.eclipse.xtend.core.macro.AnnotationProcessor
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
+import org.eclipse.xtend.core.validation.IssueCodes
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -877,6 +885,67 @@ class CompilationUnitImpl implements CompilationUnit {
 			}
 		}
 		value.evaluate(expectedType).translate
+	}
+	
+	def void handleProcessingError(Iterable<? extends EObject> sourceElements, Resource resource, Throwable t) {
+		if (t instanceof VirtualMachineError)
+			throw t;
+		if (this.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
+			Throwables.propagateIfPossible(t)
+			throw new RuntimeException(getMessageWithoutStackTrace(t), t)
+		}
+		val msg = getMessageWithStackTrace(t)
+		val errors = resource.errors
+		for (EObject target : sourceElements) {
+			switch target {
+				XtendAnnotationTarget : {
+					val annotations = target.annotations
+					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, if (annotations.isEmpty()) target else annotations.head, null, -1, null));
+				}
+				default : {
+					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
+				}
+			}
+		}
+	}
+	
+	protected def getMessageWithStackTrace(Throwable t) {
+		t.getMessageWithReducedStackTrace [
+			val writer = new StringWriter => [
+				new PrintWriter(it) => [
+					println(t.messageWithoutStackTrace)
+					t.printStackTrace(it)
+					flush
+				]
+			]
+			writer.toString
+		]
+	}
+	
+	protected def getMessageWithoutStackTrace(Throwable t) {
+		if (t instanceof IncompatibleClassChangeError && t.message.contains("org.eclipse.xtend.lib.macro")) {
+			"An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed."
+		} else {
+			"Error during annotation processing:"
+		}
+	}
+
+	protected def getMessageWithReducedStackTrace(Throwable t, (Throwable)=>String getMessage) {
+		val stackTrace = t.stackTrace
+		val reducedStackTrace = <StackTraceElement>newArrayList
+		for (it : stackTrace) {
+			if (className.contains(AnnotationProcessor.name) ||
+				className.contains(ProblemSupportImpl.name)) {
+				try {
+					t.stackTrace = reducedStackTrace
+					return getMessage.apply(t)
+				} finally {
+					t.stackTrace = stackTrace
+				}
+			}
+			reducedStackTrace.add(it)
+		}
+		return getMessage.apply(t)
 	}
 	
 }
