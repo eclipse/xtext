@@ -104,13 +104,15 @@ public class StorageAwareTrace extends AbstractTrace {
 				return storage.getFirst();
 			}
 		}
-		throw new IllegalStateException("No storage found for given path: " + uri + " for project " + project.getName()
-				+ " resolved to: " + resolvePath);
+		return null;
 	}
 
 	@Override
 	protected InputStream getContents(URI uri, IProject project) throws CoreException {
-		return findStorage(uri, project).getContents();
+		IStorage storage = findStorage(uri, project);
+		if (storage == null)
+			return null;
+		return storage.getContents();
 	}
 
 }
