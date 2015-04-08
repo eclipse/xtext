@@ -79,6 +79,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -243,13 +244,13 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 			} else {
 				derivedSources = Sets.newHashSet();
 				TextRegion localRegion = mapTextRegion(workbenchPartSelection);
-				Iterable<IStorage> transform = transform(trace.getAllAssociatedLocations(localRegion),
+				Iterable<IStorage> transform = Iterables.filter(transform(trace.getAllAssociatedLocations(localRegion),
 						new Function<ILocationInResource, IStorage>() {
 							@Override
 							public IStorage apply(ILocationInResource input) {
 								return input.getStorage();
 							}
-						});
+						}), Predicates.notNull());
 				addAll(derivedSources, transform);
 				ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
 				if (bestAssociatedLocation != null) {
