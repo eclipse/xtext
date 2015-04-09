@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -358,6 +359,9 @@ public class DomainmodelFormatter extends XbaseFormatter {
       return;
     } else if (entity instanceof XIfExpression) {
       _format((XIfExpression)entity, document);
+      return;
+    } else if (entity instanceof XInstanceOfExpression) {
+      _format((XInstanceOfExpression)entity, document);
       return;
     } else if (entity instanceof XReturnExpression) {
       _format((XReturnExpression)entity, document);

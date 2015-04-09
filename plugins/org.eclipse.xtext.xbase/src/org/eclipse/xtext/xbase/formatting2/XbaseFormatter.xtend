@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.xbase.XInstanceOfExpression
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API
@@ -649,6 +650,12 @@ class XbaseFormatter extends XtypeFormatter {
 					formatExpressionsMultiline(children, last, close, doc)
 				])
 		}
+	}
+	
+	def dispatch void format(XInstanceOfExpression expr, extension IFormattableDocument doc) {
+		expr.regionForKeyword("instanceof").surround[oneSpace]
+		expr.expression.format(doc)
+		expr.type.format(doc)
 	}
 
 	def protected void formatExpressionsMultiline(Collection<? extends XExpression> expressions, ISemanticRegion open,
