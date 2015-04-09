@@ -92,7 +92,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.10.2";visibility:=re
  org.eclipse.xtend;bundle-version="1.1.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util;visibility:=reexport,
- org.eclipse.xtext.smap;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.smap;x-installation:=greedy,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.resources;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib;resolution:=optional,
