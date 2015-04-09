@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
 import com.google.common.collect.Lists;
 
@@ -20,12 +21,15 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractEObjectTokens {
-	IHiddenRegion leadingGap;
+	private IHiddenRegion leadingGap;
+	private EObject semantcElement;
+	private final ITextRegionAccess tokenAccess;
 	private final List<ISemanticRegion> tokens = Lists.newArrayList();
-	IHiddenRegion trailingGap;
+	private IHiddenRegion trailingGap;
 
-	public AbstractEObjectTokens() {
+	public AbstractEObjectTokens(AbstractRegionAccess tokenAccess) {
 		super();
+		this.tokenAccess = tokenAccess;
 	}
 
 	public abstract AbstractElement getGrammarElement();
@@ -34,7 +38,13 @@ public abstract class AbstractEObjectTokens {
 		return leadingGap;
 	}
 
-	public abstract EObject getSemanticElement();
+	public EObject getSemanticElement() {
+		return semantcElement;
+	}
+
+	public ITextRegionAccess getTokenAccess() {
+		return tokenAccess;
+	}
 
 	public List<ISemanticRegion> getTokens() {
 		return tokens;
@@ -46,6 +56,10 @@ public abstract class AbstractEObjectTokens {
 
 	protected void setLeadingGap(IHiddenRegion leadingGap) {
 		this.leadingGap = leadingGap;
+	}
+
+	protected void setSemantcElement(EObject semantcElement) {
+		this.semantcElement = semantcElement;
 	}
 
 	protected void setTrailingGap(IHiddenRegion trailingGap) {

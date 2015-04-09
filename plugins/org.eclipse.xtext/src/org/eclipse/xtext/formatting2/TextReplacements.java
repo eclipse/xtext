@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,15 +22,25 @@ import org.eclipse.xtext.formatting2.internal.TextReplacementList;
  */
 public class TextReplacements {
 	/**
-	 * <p>Applies all 'replacements' on 'input'.</p>
+	 * <p>
+	 * Applies all 'replacements' on 'input'.
+	 * </p>
 	 * 
-	 * <p>Replaces the text regions in 'input' identified by {@link ITextReplacement#getOffset()} and
-	 * {@link ITextReplacement#getLength()} with {@link ITextReplacement#getReplacementText()}.</p>
+	 * <p>
+	 * Replaces the text regions in 'input' identified by {@link ITextReplacement#getOffset()} and
+	 * {@link ITextReplacement#getLength()} with {@link ITextReplacement#getReplacementText()}.
+	 * </p>
 	 * 
 	 * @return The text after the replacements have been applied.
 	 */
 	public static String apply(CharSequence input, Iterable<? extends ITextReplacement> replacements) {
-		return doApply(input, 0, replacements);
+		StringBuilder result = new StringBuilder();
+		doApply(input, 0, replacements, result);
+		return result.toString();
+	}
+
+	public static void apply(CharSequence input, Iterable<? extends ITextReplacement> replacements, Appendable result) {
+		doApply(input, 0, replacements, result);
 	}
 
 	/**
@@ -37,20 +48,26 @@ public class TextReplacements {
 	 * is treated as relative to {@link ITextSegment#getOffset()} from 'input'.
 	 */
 	public static String apply(ITextSegment input, Iterable<? extends ITextReplacement> replacements) {
-		return doApply(input.getText(), input.getOffset(), replacements);
+		StringBuilder result = new StringBuilder();
+		doApply(input.getText(), input.getOffset(), replacements, result);
+		return result.toString();
 	}
 
-	private static String doApply(CharSequence input, int offset, Iterable<? extends ITextReplacement> replacements) {
+	private static String doApply(CharSequence input, int offset, Iterable<? extends ITextReplacement> replacements,
+			Appendable result) {
 		List<ITextReplacement> list = new TextReplacementList<ITextReplacement>(replacements);
 		Collections.sort(list);
 		int lastOffset = 0;
-		StringBuilder result = new StringBuilder();
-		for (ITextReplacement r : list) {
-			result.append(input.subSequence(lastOffset, r.getOffset() - offset));
-			result.append(r.getReplacementText());
-			lastOffset = (r.getOffset() - offset) + r.getLength();
+		try {
+			for (ITextReplacement r : list) {
+				result.append(input.subSequence(lastOffset, r.getOffset() - offset));
+				result.append(r.getReplacementText());
+				lastOffset = (r.getOffset() - offset) + r.getLength();
+			}
+			result.append(input.subSequence(lastOffset, input.length()));
+			return result.toString();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
-		result.append(input.subSequence(lastOffset, input.length()));
-		return result.toString();
 	}
 }

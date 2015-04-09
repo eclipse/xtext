@@ -16,8 +16,6 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -40,15 +38,15 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	public static class Builder {
 
 		private Map<EObject, NodeEObjectTokens> eObjToTokens;
-		private LinkedList<NodeEObjectTokens> stack = new LinkedList<NodeEObjectTokens>();
 		private NodeHiddenRegion firstHidden;
 		private NodeHiddenRegion lastHidden;
 		private XtextResource resource;
+		private LinkedList<NodeEObjectTokens> stack = new LinkedList<NodeEObjectTokens>();
 
 		protected void add(NodeModelBasedRegionAccess tokenAccess, INode node) {
 			if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
 				ILeafNode leafNode = (ILeafNode) node;
-				lastHidden.hiddens.add(createHidden(lastHidden, leafNode));
+				lastHidden.addPart(createHidden(lastHidden, leafNode));
 			} else {
 				NodeEObjectTokens eObjectTokens = stack.peek();
 				NodeSemanticRegion newToken = createToken(tokenAccess, node);
@@ -85,6 +83,80 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 
 		protected NodeEObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
 			return new NodeEObjectTokens(access, node);
+		}
+
+		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
+			this.eObjToTokens = Maps.newHashMap();
+			this.firstHidden = createGap(tokenAccess);
+			this.lastHidden = this.firstHidden;
+			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) tokenAccess;
+			CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
+			process(rootNode, access);
+			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
+		}
+
+		protected IHiddenRegion getFirstRegion() {
+			return firstHidden;
+		}
+
+		protected XtextResource getXtextResource() {
+			return resource;
+		}
+
+		protected boolean include(INode node) {
+			if (node instanceof ILeafNode) {
+				return true;
+			} else if (node instanceof ICompositeNode) {
+				EObject element = node.getGrammarElement();
+				return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference
+						|| GrammarUtil.isEnumRuleCall(element);
+			}
+			return false;
+		}
+
+		protected boolean isComment(ILeafNode leaf) {
+			String text = leaf.getText();
+			for (int i = 0; i < text.length(); i++)
+				if (!Character.isWhitespace(text.charAt(i)))
+					return true;
+			return false;
+		}
+
+		protected boolean isEObjectRoot(INode node) {
+			if (node instanceof ICompositeNode) {
+				ICompositeNode parent = node.getParent();
+				if (parent == null)
+					return true;
+				INode root = parent;
+				while (root != null && !root.hasDirectSemanticElement())
+					root = root.getParent();
+				if (root == null)
+					return false;
+				EObject element = node.getGrammarElement();
+				if (GrammarUtil.isEObjectRuleCall(element)) {
+					if (!parent.hasDirectSemanticElement())
+						return false;
+					BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
+					iterator.next();
+					while (iterator.hasNext()) {
+						INode next = iterator.next();
+						if (next.hasDirectSemanticElement())
+							return true;
+						EObject ge = next.getGrammarElement();
+						if (ge instanceof Action)
+							return true;
+						if (ge instanceof RuleCall && GrammarUtil.isAssigned(ge)
+								&& ((RuleCall) ge).getRule().getType().getClassifier() instanceof EDataType)
+							return true;
+						if (ge instanceof CrossReference)
+							return true;
+					}
+				}
+				if (element instanceof Action) {
+					return parent.hasDirectSemanticElement();
+				}
+			}
+			return false;
 		}
 
 		protected void process(INode node, NodeModelBasedRegionAccess access) {
@@ -126,92 +198,6 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			}
 		}
 
-		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
-			this.eObjToTokens = Maps.newHashMap();
-			this.firstHidden = createGap(tokenAccess);
-			this.lastHidden = this.firstHidden;
-			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) tokenAccess;
-			CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
-			process(rootNode, access);
-			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
-		}
-
-		protected IHiddenRegion getFirstRegion() {
-			return firstHidden;
-		}
-
-		protected XtextResource getXtextResource() {
-			return resource;
-		}
-
-		protected boolean include(INode node) {
-			if (node instanceof ILeafNode) {
-				return true;
-			} else if (node instanceof ICompositeNode) {
-				EObject element = node.getGrammarElement();
-				return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference
-						|| GrammarUtil.isEnumRuleCall(element);
-			}
-			return false;
-		}
-
-		protected boolean isDeadend(INode node) {
-			if (node instanceof ICompositeNode) {
-				ICompositeNode c = (ICompositeNode) node;
-				INode firstChild = c.getFirstChild();
-				if (firstChild == null)
-					return true;
-				if (firstChild == c.getLastChild() && firstChild instanceof ICompositeNode)
-					return isDeadend(firstChild);
-			}
-			return false;
-		}
-
-		protected boolean isEObjectRoot(INode node) {
-			if (node instanceof ICompositeNode) {
-				ICompositeNode parent = node.getParent();
-				if (parent == null)
-					return true;
-				INode root = parent;
-				while (root != null && !root.hasDirectSemanticElement())
-					root = root.getParent();
-				if (root == null)
-					return false;
-				EObject element = node.getGrammarElement();
-				if (GrammarUtil.isEObjectRuleCall(element)) {
-					if (!parent.hasDirectSemanticElement())
-						return false;
-					BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
-					iterator.next();
-					while (iterator.hasNext()) {
-						INode next = iterator.next();
-						if (next.hasDirectSemanticElement())
-							return true;
-						EObject ge = next.getGrammarElement();
-						if (ge instanceof Action)
-							return true;
-						if (ge instanceof RuleCall && GrammarUtil.isAssigned(ge)
-								&& ((RuleCall) ge).getRule().getType().getClassifier() instanceof EDataType)
-							return true;
-						if (ge instanceof CrossReference)
-							return true;
-					}
-				}
-				if (element instanceof Action) {
-					return parent.hasDirectSemanticElement();
-				}
-			}
-			return false;
-		}
-
-		protected boolean isComment(ILeafNode leaf) {
-			String text = leaf.getText();
-			for (int i = 0; i < text.length(); i++)
-				if (!Character.isWhitespace(text.charAt(i)))
-					return true;
-			return false;
-		}
-
 		public Builder withResource(XtextResource resource) {
 			this.resource = resource;
 			return this;
@@ -226,31 +212,6 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		this.resource = builder.getXtextResource();
 		this.eObjectToTokens = ImmutableMap.copyOf(builder.getEObjectToTokensMap(this));
 		this.firstRegion = builder.getFirstRegion();
-	}
-
-	@Override
-	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
-		int offset = regions[0].getOffset();
-		int endOffset = regions[0].getEndOffset();
-		for (int i = 1; i < regions.length; i++) {
-			ITextSegment region = regions[i];
-			int o = region.getOffset();
-			if (o < offset)
-				offset = o;
-			int e = region.getEndOffset();
-			if (e > endOffset)
-				endOffset = e;
-		}
-		String text = getText();
-		for (int i = 0; i < leadingLines && offset >= 0; i++)
-			offset = text.lastIndexOf("\n", offset) - 1;
-		for (int i = 0; i < trailingLines && endOffset <= text.length() && endOffset > 0; i++)
-			endOffset = text.indexOf("\n", endOffset);
-		if (offset < 0)
-			offset = 0;
-		if (endOffset < 0 || endOffset > text.length())
-			endOffset = text.length();
-		return new TextSegment(this, offset, endOffset - offset);
 	}
 
 	@Override
@@ -296,16 +257,6 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 				return true;
 		}
 		return false;
-	}
-
-	@Override
-	public ITextSegment indentationRegion(int offset) {
-		String text = getText();
-		int lineStart = text.lastIndexOf('\n', offset) + 1;
-		for (int i = lineStart; i < text.length(); i++)
-			if (!Character.isWhitespace(text.charAt(i)))
-				return new TextSegment(getTextRegionAccess(), lineStart, i - lineStart);
-		return null;
 	}
 
 }

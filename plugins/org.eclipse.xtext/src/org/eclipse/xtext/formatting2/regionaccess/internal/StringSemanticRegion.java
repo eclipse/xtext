@@ -9,30 +9,29 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
+public class StringSemanticRegion extends StringRegion implements ISemanticRegion {
 
+	private final AbstractElement grammarElement;
 	private IHiddenRegion leading;
+	private final EObject semanticElement;
 	private IHiddenRegion trailing;
-	private NodeEObjectTokens eObjectTokens;
 
-	protected NodeSemanticRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
-		super(tokenAccess, node);
+	protected StringSemanticRegion(StringBasedRegionAccess regionAccess, EObject semanticElement,
+			AbstractElement grammarElement, int offset, int length) {
+		super(regionAccess, offset, length);
+		this.semanticElement = semanticElement;
+		this.grammarElement = grammarElement;
 	}
 
 	@Override
 	public AbstractElement getGrammarElement() {
-		EObject element = super.getGrammarElement();
-		if (element instanceof CrossReference)
-			return ((CrossReference) element).getTerminal();
-		return element instanceof AbstractElement ? (AbstractElement) element : null;
+		return grammarElement;
 	}
 
 	@Override
@@ -55,20 +54,16 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
 	}
 
+	@Override
+	public EObject getSemanticElement() {
+		return semanticElement;
+	}
+
 	protected void setLeadingGap(IHiddenRegion leading) {
 		this.leading = leading;
 	}
 
 	protected void setTrailingGap(IHiddenRegion trailing) {
 		this.trailing = trailing;
-	}
-
-	protected void setEObjectTokens(NodeEObjectTokens eObjectTokens) {
-		this.eObjectTokens = eObjectTokens;
-	}
-
-	@Override
-	public EObject getSemanticElement() {
-		return eObjectTokens != null ? eObjectTokens.getSemanticElement() : null;
 	}
 }

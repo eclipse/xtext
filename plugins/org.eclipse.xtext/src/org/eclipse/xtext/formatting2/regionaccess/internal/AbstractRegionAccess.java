@@ -25,7 +25,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -40,6 +40,31 @@ import com.google.common.collect.Sets;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractRegionAccess extends AbstractTextSegment implements ITextRegionAccess {
+
+	@Override
+	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
+		int offset = regions[0].getOffset();
+		int endOffset = regions[0].getEndOffset();
+		for (int i = 1; i < regions.length; i++) {
+			ITextSegment region = regions[i];
+			int o = region.getOffset();
+			if (o < offset)
+				offset = o;
+			int e = region.getEndOffset();
+			if (e > endOffset)
+				endOffset = e;
+		}
+		String text = getText();
+		for (int i = 0; i < leadingLines && offset >= 0; i++)
+			offset = text.lastIndexOf("\n", offset) - 1;
+		for (int i = 0; i < trailingLines && endOffset <= text.length() && endOffset > 0; i++)
+			endOffset = text.indexOf("\n", endOffset);
+		if (offset < 0)
+			offset = 0;
+		if (endOffset < 0 || endOffset > text.length())
+			endOffset = text.length();
+		return new TextSegment(this, offset, endOffset - offset);
+	}
 
 	@Override
 	public AbstractElement getInvokingGrammarElement(EObject obj) {
@@ -124,6 +149,16 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		return null;
 	}
 
+	@Override
+	public ITextSegment indentationRegion(int offset) {
+		String text = getText();
+		int lineStart = text.lastIndexOf('\n', offset) + 1;
+		for (int i = lineStart; i < text.length(); i++)
+			if (!Character.isWhitespace(text.charAt(i)))
+				return new TextSegment(getTextRegionAccess(), lineStart, i - lineStart);
+		return null;
+	}
+
 	protected Map<? extends EObject, ? extends AbstractEObjectTokens> initMap() {
 		return null;
 	}
@@ -159,8 +194,8 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	@Override
 	public ITextSegment regionForEObject(EObject object) {
 		AbstractEObjectTokens tokens = getTokens(object);
-		int offset = tokens.leadingGap.getEndOffset();
-		int endOffset = tokens.trailingGap.getOffset();
+		int offset = tokens.getLeadingGap().getEndOffset();
+		int endOffset = tokens.getTrailingGap().getOffset();
 		return new TextSegment(this, offset, endOffset - offset);
 	}
 
@@ -247,7 +282,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public String toString() {
-		return new TokenAccessToString().withOrigin(this).toString();
+		return new TextRegionAccessToString().withOrigin(this).toString();
 	}
 
 	@Override
