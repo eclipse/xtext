@@ -43,38 +43,39 @@ public class BoundTypeArgumentMerger {
 			LightweightBoundTypeArgument argument = Iterables.getOnlyElement(allArguments);
 			return getSingleArgumentAsMergedArgument(argument);
 		}
-		List<LightweightTypeReference> invariantTypes = Lists.newArrayListWithCapacity(3);
-		List<VarianceInfo> invariantVariances = Lists.newArrayListWithCapacity(3);
-		List<LightweightTypeReference> outTypes = Lists.newArrayListWithCapacity(3);
-		List<LightweightTypeReference> constraintOutTypes = Lists.newArrayListWithCapacity(3);
-		List<VarianceInfo> outVariances = Lists.newArrayListWithCapacity(3);
-		List<LightweightTypeReference> inTypes = Lists.newArrayListWithCapacity(3);
-		List<VarianceInfo> inVariances = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> invariantTypes = Lists.newArrayListWithCapacity(0);
+		List<VarianceInfo> invariantVariances = Lists.newArrayListWithCapacity(0);
+		List<LightweightTypeReference> invariantTypesFromOut = Lists.newArrayListWithCapacity(0);
+		List<VarianceInfo> invariantVariancesFromOut = Lists.newArrayListWithCapacity(0);
+		List<LightweightTypeReference> outTypes = Lists.newArrayListWithCapacity(0);
+		List<LightweightTypeReference> constraintOutTypes = Lists.newArrayListWithCapacity(0);
+		List<VarianceInfo> outVariances = Lists.newArrayListWithCapacity(0);
+		List<LightweightTypeReference> inTypes = Lists.newArrayListWithCapacity(0);
+		List<VarianceInfo> inVariances = Lists.newArrayListWithCapacity(0);
 		Set<Object> seenOrigin = Sets.newHashSet();
 		for(LightweightBoundTypeArgument boundTypeArgument: allArguments) {
 			Object origin = boundTypeArgument.getOrigin();
 			switch(boundTypeArgument.getDeclaredVariance()) {
 				case INVARIANT:
-					invariantTypes.add(boundTypeArgument.getTypeReference());
-					if (seenOrigin.add(origin) || origin == null || boundTypeArgument.isValidVariancePair()) {
-						invariantVariances.add(boundTypeArgument.getActualVariance());
-					}
+					processBoundTypeArgument(boundTypeArgument, invariantTypes, invariantVariances, origin, seenOrigin);
 					break;
 				case OUT:
-					if (boundTypeArgument.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					BoundTypeArgumentSource source = boundTypeArgument.getSource();
+					if (invariantTypes.isEmpty() && isTransitiveHintFromReslved(boundTypeArgument, origin, source)) {
+						invariantTypesFromOut.add(boundTypeArgument.getTypeReference());
+						if (seenOrigin.add(origin)) {
+							invariantVariancesFromOut.add(VarianceInfo.INVARIANT);
+						}
+					} 
+					if (source == BoundTypeArgumentSource.CONSTRAINT) {
 						constraintOutTypes.add(boundTypeArgument.getTypeReference());
 					} else {
 						outTypes.add(boundTypeArgument.getTypeReference());
 					}
-					if (seenOrigin.add(origin) || origin == null || boundTypeArgument.isValidVariancePair()) {
-						outVariances.add(boundTypeArgument.getActualVariance());
-					}
+					addVariance(boundTypeArgument, outVariances, origin, seenOrigin);
 					break;
 				case IN:
-					inTypes.add(boundTypeArgument.getTypeReference());
-					if (seenOrigin.add(origin) || origin == null || boundTypeArgument.isValidVariancePair()) {
-						inVariances.add(boundTypeArgument.getActualVariance());
-					}
+					processBoundTypeArgument(boundTypeArgument, inTypes, inVariances, origin, seenOrigin);
 					break;
 			}
 		}
@@ -89,6 +90,12 @@ public class BoundTypeArgumentMerger {
 			if (variance == null && invariantVariances.contains(VarianceInfo.IN) && invariantTypes.size() > 1) {
 				TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
 				type = conformanceComputer.getCommonSuperType(invariantTypes, owner);
+			} else if (!invariantTypesFromOut.isEmpty()) {
+				LightweightTypeReference fromOut = invariantTypesFromOut.get(0);
+				if (fromOut.isAssignableFrom(type)) {
+					type = fromOut;
+					variance = VarianceInfo.INVARIANT;
+				}
 			}
 			if (!outVariances.isEmpty()) {
 				VarianceInfo outVariance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
@@ -127,6 +134,22 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
 		return new LightweightMergedBoundTypeArgument(type, variance);
+	}
+
+	private boolean isTransitiveHintFromReslved(LightweightBoundTypeArgument boundTypeArgument, Object origin, BoundTypeArgumentSource source) {
+		return (origin instanceof LightweightBoundTypeArgument && ((LightweightBoundTypeArgument) origin).getSource() == BoundTypeArgumentSource.RESOLVED) && source == BoundTypeArgumentSource.INFERRED && boundTypeArgument.getActualVariance() == VarianceInfo.OUT;
+	}
+
+	private void processBoundTypeArgument(LightweightBoundTypeArgument boundTypeArgument, List<LightweightTypeReference> types, List<VarianceInfo> variances,
+			Object origin, Set<Object> seenOrigin) {
+		types.add(boundTypeArgument.getTypeReference());
+		addVariance(boundTypeArgument, variances, origin, seenOrigin);
+	}
+
+	private void addVariance(LightweightBoundTypeArgument boundTypeArgument, List<VarianceInfo> result, Object origin, Set<Object> seenOrigin) {
+		if (seenOrigin.add(origin) || origin == null || boundTypeArgument.isValidVariancePair()) {
+			result.add(boundTypeArgument.getActualVariance());
+		}
 	}
 
 	protected LightweightMergedBoundTypeArgument getSingleArgumentAsMergedArgument(LightweightBoundTypeArgument argument) {
