@@ -6,36 +6,29 @@
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
+
+	<name>Xtext Parent/Container</name>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.9.0-SNAPSHOT</version>
+
 	<modules>
-		<module>../../plugins/org.eclipse.xtext.util</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
-		<module>../../plugins/org.eclipse.xtend.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
+		<!-- OSGI bundles -->
+		<module>../org.eclipse.xtext.tycho.parent</module>
 
-		<module>../org.eclipse.xtext.standalone.parent</module>
-		<module>../org.eclipse.xtext</module>
-		<module>../org.eclipse.xtext.ide</module>
-		<module>../org.eclipse.xtext.common.types</module>
-		<module>../org.eclipse.xtext.xbase</module>
+		<!-- Pure maven -->
 		<module>../org.eclipse.xtext.xbase.lib.slim</module>
-		<module>../org.eclipse.xtend.core</module>
-		<module>../org.eclipse.xtend.ide.common</module>
-		<module>../org.eclipse.xtext.xtext</module>
-
-		<module>../../plugins/org.eclipse.xtext.builder.standalone</module>
 		<module>../org.eclipse.xtext.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.archetype</module>
 		<module>../org.eclipse.xtend.maven.android.archetype</module>
-		<module>../org.eclipse.xtend.lib.gwt.test</module>
+
+		<!-- <module>../org.eclipse.xtend.lib.gwt.test</module> -->
+		<module>../org.eclipse.xtext.dependencies</module>
+
+
 	</modules>
-	<name>Xtext Parent/Container</name>
 
 	<properties>
 		<mavenVersion>3.2.1</mavenVersion>
@@ -44,8 +37,9 @@
 		<mwe2-version>(2.7,3.0)</mwe2-version>
 		<mwe-version>(1.2,]</mwe-version>
 		<xpand-version>(1.9,]</xpand-version>
-		
+
 		<maven-install-version>2.5.1</maven-install-version>
+		<jar-plugin-version>2.4</jar-plugin-version>
 		<asm.version>5.0.1</asm.version>
 		<guava.version>[10.0.1,14.0.1]</guava.version>
 		<javax-inject.version>1</javax-inject.version>
