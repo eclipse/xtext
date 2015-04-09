@@ -8,9 +8,9 @@
 package org.eclipse.xtext.idea.build.daemon
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildResult
 import org.eclipse.xtext.idea.build.net.ObjectChannel
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssue
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResult
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

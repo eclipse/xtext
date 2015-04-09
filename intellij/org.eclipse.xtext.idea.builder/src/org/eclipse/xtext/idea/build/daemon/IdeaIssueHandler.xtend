@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.build.daemon
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssue
 import org.eclipse.xtext.validation.Issue
 import org.jetbrains.jps.incremental.messages.BuildMessage.Kind
 

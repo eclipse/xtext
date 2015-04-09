@@ -10,8 +10,8 @@ package org.eclipse.xtext.idea.build.daemon;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.idea.build.daemon.Protocol;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
+import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**

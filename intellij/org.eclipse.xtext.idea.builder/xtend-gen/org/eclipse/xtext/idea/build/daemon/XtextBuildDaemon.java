@@ -12,6 +12,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import java.io.File;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -31,15 +32,18 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.TTCCLayout;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IdeaStandaloneBuilder;
-import org.eclipse.xtext.idea.build.daemon.Protocol;
-import org.eclipse.xtext.idea.build.daemon.XtextBuildParameters;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
+import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -139,7 +143,7 @@ public class XtextBuildDaemon {
   
   public static class Worker {
     @Inject
-    private IdeaStandaloneBuilder standaloneBuilder;
+    private IncrementalStandaloneBuilder.Factory builderFactory;
     
     @Inject
     private XtextBuildResultCollector resultCollector;
@@ -175,23 +179,55 @@ public class XtextBuildDaemon {
       Protocol.BuildResult _xblockexpression = null;
       {
         this.resultCollector.setOutput(this.channel);
-        final Procedure1<IdeaStandaloneBuilder> _function = new Procedure1<IdeaStandaloneBuilder>() {
+        BuildRequest _buildRequest = new BuildRequest();
+        final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+          @Override
+          public void apply(final BuildRequest it) {
+            String _baseDir = request.getBaseDir();
+            File _file = Worker.this.toFile(_baseDir);
+            it.setBaseDir(_file);
+            String _encoding = request.getEncoding();
+            it.setDefaultEncoding(_encoding);
+            List<String> _classpath = request.getClasspath();
+            final Function1<String, File> _function = new Function1<String, File>() {
+              @Override
+              public File apply(final String it) {
+                return Worker.this.toFile(it);
+              }
+            };
+            List<File> _map = ListExtensions.<String, File>map(_classpath, _function);
+            it.setClassPath(_map);
+            List<String> _sourceRoots = request.getSourceRoots();
+            final Function1<String, File> _function_1 = new Function1<String, File>() {
+              @Override
+              public File apply(final String it) {
+                return Worker.this.toFile(it);
+              }
+            };
+            List<File> _map_1 = ListExtensions.<String, File>map(_sourceRoots, _function_1);
+            it.setSourceRoots(_map_1);
+            it.setFailOnValidationError(false);
+          }
+        };
+        final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);
+        Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
+        IncrementalStandaloneBuilder _create = this.builderFactory.create(buildRequest, _languageAccesses);
+        final IdeaStandaloneBuilder builder = ((IdeaStandaloneBuilder) _create);
+        final Procedure1<IdeaStandaloneBuilder> _function_1 = new Procedure1<IdeaStandaloneBuilder>() {
           @Override
           public void apply(final IdeaStandaloneBuilder it) {
-            it.setFailOnValidationError(false);
-            Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
-            it.setLanguages(_languageAccesses);
-            XtextBuildParameters _xtextBuildParameters = new XtextBuildParameters(request);
-            it.setBuildData(_xtextBuildParameters);
             it.setBuildResultCollector(Worker.this.resultCollector);
             it.launch();
           }
         };
-        ObjectExtensions.<IdeaStandaloneBuilder>operator_doubleArrow(
-          this.standaloneBuilder, _function);
+        ObjectExtensions.<IdeaStandaloneBuilder>operator_doubleArrow(builder, _function_1);
         _xblockexpression = this.resultCollector.getBuildResult();
       }
       return _xblockexpression;
+    }
+    
+    private File toFile(final String path) {
+      return new File(path);
     }
   }
   

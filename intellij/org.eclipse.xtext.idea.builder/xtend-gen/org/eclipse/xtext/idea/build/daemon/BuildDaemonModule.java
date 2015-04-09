@@ -7,9 +7,12 @@
  */
 package org.eclipse.xtext.idea.build.daemon;
 
+import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
+import org.eclipse.xtext.idea.build.daemon.IdeaStandaloneBuilder;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -19,5 +22,12 @@ public class BuildDaemonModule extends StandaloneBuilderModule {
   @Override
   public Class<? extends IIssueHandler> bindIIssueHandler() {
     return IdeaIssueHandler.class;
+  }
+  
+  @Override
+  protected void configure() {
+    super.configure();
+    AnnotatedBindingBuilder<IncrementalStandaloneBuilder> _bind = this.<IncrementalStandaloneBuilder>bind(IncrementalStandaloneBuilder.class);
+    _bind.to(IdeaStandaloneBuilder.class);
   }
 }

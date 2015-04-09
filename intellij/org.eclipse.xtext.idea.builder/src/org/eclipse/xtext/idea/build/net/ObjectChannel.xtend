@@ -76,7 +76,7 @@ class ObjectChannel {
 				offset += availableBytes
 			} else {
 				inputBuffer.clear
-				val length = channel.read(inputBuffer)
+				channel.read(inputBuffer)
 				inputBuffer.flip			
 			}
 		}

@@ -8,62 +8,29 @@
 package org.eclipse.xtext.idea.build.daemon;
 
 import java.io.File;
-import java.util.List;
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonFileSystemAccess;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
-import org.eclipse.xtext.idea.build.daemon.XtextBuildParameters;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class IdeaStandaloneBuilder extends StandaloneBuilder {
+public class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
   private final static Logger LOG = Logger.getLogger(IdeaStandaloneBuilder.class);
-  
-  private XtextBuildParameters buildParameters;
   
   private XtextBuildResultCollector buildResultCollector;
   
-  public void setBuildData(final XtextBuildParameters buildParameters) {
-    this.buildParameters = buildParameters;
-    File _baseDir = buildParameters.getBaseDir();
-    String _path = _baseDir.getPath();
-    this.setBaseDir(_path);
-    List<File> _classpath = buildParameters.getClasspath();
-    final Function1<File, String> _function = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        return it.getPath();
-      }
-    };
-    List<String> _map = ListExtensions.<File, String>map(_classpath, _function);
-    this.setClassPathEntries(_map);
-    String _encoding = buildParameters.getEncoding();
-    this.setEncoding(_encoding);
-    File _orCreateTmpDir = this.getOrCreateTmpDir();
-    String _path_1 = _orCreateTmpDir.getPath();
-    this.setTempDir(_path_1);
-    List<File> _sourceRoots = buildParameters.getSourceRoots();
-    final Function1<File, String> _function_1 = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        return it.getPath();
-      }
-    };
-    List<String> _map_1 = ListExtensions.<File, String>map(_sourceRoots, _function_1);
-    this.setSourceDirs(_map_1);
-  }
-  
   public void setBuildResultCollector(final XtextBuildResultCollector buildResultCollector) {
     this.buildResultCollector = buildResultCollector;
-    ((IdeaIssueHandler) this.issueHandler).setBuildResultCollector(buildResultCollector);
+    IIssueHandler _issueHandler = this.getIssueHandler();
+    ((IdeaIssueHandler) _issueHandler).setBuildResultCollector(buildResultCollector);
   }
   
   @Override
@@ -78,9 +45,11 @@ public class IdeaStandaloneBuilder extends StandaloneBuilder {
     return _xblockexpression;
   }
   
-  private File getOrCreateTmpDir() {
-    final String contentRoot = this.getBaseDir();
-    final File tmpDir = new File(contentRoot, "xtend-stubs");
+  @Override
+  protected File createTempDir(final String subDir) {
+    BuildRequest _request = this.getRequest();
+    File _baseDir = _request.getBaseDir();
+    final File tmpDir = new File(_baseDir, subDir);
     boolean _exists = tmpDir.exists();
     boolean _not = (!_exists);
     if (_not) {

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.idea.build.daemon;
+package org.eclipse.xtext.idea.build.net;
 
 import java.io.Serializable;
 import java.util.List;

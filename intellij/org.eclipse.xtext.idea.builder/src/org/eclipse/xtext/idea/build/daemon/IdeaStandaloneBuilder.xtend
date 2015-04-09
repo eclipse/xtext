@@ -10,29 +10,18 @@ package org.eclipse.xtext.idea.build.daemon
 import java.io.File
 import org.apache.log4j.Logger
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-import org.eclipse.xtext.builder.standalone.StandaloneBuilder
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class IdeaStandaloneBuilder extends StandaloneBuilder {
+class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
 
-	// TODO find the right way to log
 	static val LOG = Logger.getLogger(IdeaStandaloneBuilder)
 
-	XtextBuildParameters buildParameters
 	XtextBuildResultCollector buildResultCollector
 
-	def setBuildData(XtextBuildParameters buildParameters) {
-		this.buildParameters = buildParameters
-		this.baseDir = buildParameters.baseDir.path
-		this.classPathEntries = buildParameters.classpath.map[path]
-		this.encoding = buildParameters.encoding
-		this.tempDir = getOrCreateTmpDir.path
-		this.sourceDirs = buildParameters.sourceRoots.map[path]
-	}
-	
 	def setBuildResultCollector(XtextBuildResultCollector buildResultCollector) {
 		this.buildResultCollector = buildResultCollector;
 		(issueHandler as IdeaIssueHandler).buildResultCollector = buildResultCollector
@@ -45,9 +34,8 @@ class IdeaStandaloneBuilder extends StandaloneBuilder {
 		fsa
 	}
 	
-	private def getOrCreateTmpDir() {
-		val contentRoot = baseDir
-		val tmpDir = new File(contentRoot, 'xtend-stubs')
+	override protected createTempDir(String subDir) {
+		val tmpDir = new File(request.baseDir, subDir)
 		if(!tmpDir.exists) 
 			tmpDir.mkdir
 		else if(!tmpDir.isDirectory)

@@ -15,10 +15,10 @@ import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildResult
 import org.eclipse.xtext.idea.build.net.ObjectChannel
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssue
+import org.eclipse.xtext.idea.build.net.Protocol.BuildRequest
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResult
 import org.jetbrains.jps.ModuleChunk
 import org.jetbrains.jps.ProjectPaths
 import org.jetbrains.jps.builders.DirtyFilesHolder

@@ -5,32 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.build.daemon
+package org.eclipse.xtext.builder.standalone.incremental
 
-import java.io.File
-import java.util.List
+import java.util.Map
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
+import org.eclipse.xtext.builder.standalone.LanguageAccess
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.9
  */
 @Data
-class XtextBuildParameters {
-
-	List<File> classpath
-	List<File> sourceRoots
-	File baseDir
-	String encoding
-
-	new(BuildRequest request) {
-		classpath =  request.classpath.map[toFile]
-		sourceRoots = request.sourceRoots.map[toFile]
-		baseDir = request.baseDir.toFile
-		encoding = request.encoding
-	}
+class BuildContext {
+	Map<String, LanguageAccess> languages
 	
-	protected def toFile(String it) {
-		new File(it)
-	}
+	boolean needsJava
+	
+	XtextResourceSet resourceSet
+	
+	IResourceClusteringPolicy clusteringPolicy
 }

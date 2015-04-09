@@ -108,7 +108,7 @@ public class ObjectChannel {
             offset = (_offset + availableBytes);
           } else {
             this.inputBuffer.clear();
-            final int length = this.channel.read(this.inputBuffer);
+            this.channel.read(this.inputBuffer);
             this.inputBuffer.flip();
           }
         }

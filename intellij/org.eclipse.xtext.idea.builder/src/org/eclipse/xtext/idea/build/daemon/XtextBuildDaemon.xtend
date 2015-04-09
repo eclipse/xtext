@@ -10,6 +10,7 @@ package org.eclipse.xtext.idea.build.daemon
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.io.File
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -21,9 +22,10 @@ import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.TTCCLayout
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
-import org.eclipse.xtext.idea.build.daemon.Protocol.StopServer
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.idea.build.net.ObjectChannel
+import org.eclipse.xtext.idea.build.net.Protocol.BuildRequest
+import org.eclipse.xtext.idea.build.net.Protocol.StopServer
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
@@ -121,7 +123,7 @@ class XtextBuildDaemon {
 
 	static class Worker {
 
-		@Inject IdeaStandaloneBuilder standaloneBuilder
+		@Inject IncrementalStandaloneBuilder.Factory builderFactory
 
 		@Inject XtextBuildResultCollector resultCollector
 
@@ -148,14 +150,23 @@ class XtextBuildDaemon {
 
 		def build(BuildRequest request) {
 			resultCollector.output = channel
-			standaloneBuilder => [
+			val buildRequest = new org.eclipse.xtext.builder.standalone.incremental.BuildRequest => [
+				baseDir = request.baseDir.toFile
+				defaultEncoding = request.encoding
+				classPath = request.classpath.map[toFile]
+				sourceRoots = request.sourceRoots.map[toFile]
 				failOnValidationError = false
-				languages = XtextLanguages.getLanguageAccesses
-				buildData = new XtextBuildParameters(request)
+			]
+			val builder = builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) as IdeaStandaloneBuilder
+			builder => [
 				buildResultCollector = resultCollector
 				launch
 			]
 			resultCollector.buildResult
+		}
+		
+		private def toFile(String path) {
+			new File(path)
 		}
 	}
 }

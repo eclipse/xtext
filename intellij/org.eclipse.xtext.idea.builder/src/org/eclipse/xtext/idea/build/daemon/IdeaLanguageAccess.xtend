@@ -18,21 +18,15 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
  */
 class IdeaLanguageAccess extends LanguageAccess {
 
-	new(
-		Set<OutputConfiguration> outputConfigurations,
-		IResourceServiceProvider resourceServiceProvider
-	) {
+	new(Set<OutputConfiguration> outputConfigurations, IResourceServiceProvider resourceServiceProvider) {
 		super(outputConfigurations, resourceServiceProvider, false)
 	}
 
-	new(
-		Set<OutputConfiguration> outputConfigurations,
-		IResourceServiceProvider resourceServiceProvider,
-		boolean linksAgainstJavaTypes
-	) {
+	new(Set<OutputConfiguration> outputConfigurations, IResourceServiceProvider resourceServiceProvider,
+		boolean linksAgainstJavaTypes) {
 		super(outputConfigurations, resourceServiceProvider, linksAgainstJavaTypes)
 	}
-	
+
 	override createFileSystemAccess(File baseDir) {
 		resourceServiceProvider.get(BuildDaemonFileSystemAccess) => [
 			outputConfigurations = super.createFileSystemAccess(baseDir).outputConfigurations

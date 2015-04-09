@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.build.daemon
 
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -17,4 +18,10 @@ class BuildDaemonModule extends StandaloneBuilderModule {
 	override bindIIssueHandler() {
 		IdeaIssueHandler
 	}
+	
+	override protected configure() {
+		super.configure()
+		bind(IncrementalStandaloneBuilder).to(IdeaStandaloneBuilder)
+	}
+	
 }
