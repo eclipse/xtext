@@ -13,7 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.ByteChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -21,22 +23,24 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ObjectChannel {
-  private final static int BUFFER_SIZE = 32768;
+  public final static int BUFFER_SIZE = 32768;
   
   private ByteBuffer inputBuffer = ByteBuffer.allocate(ObjectChannel.BUFFER_SIZE);
   
   private ByteBuffer outputBuffer = ByteBuffer.allocate(ObjectChannel.BUFFER_SIZE);
   
-  private SocketChannel channel;
+  private ReadableByteChannel inputChannel;
   
-  public ObjectChannel(final SocketChannel channel) {
-    try {
-      this.channel = channel;
-      channel.configureBlocking(true);
-      this.inputBuffer.flip();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private WritableByteChannel outputChannel;
+  
+  public ObjectChannel(final ByteChannel channel) {
+    this(channel, channel);
+  }
+  
+  public ObjectChannel(final ReadableByteChannel inputChannel, final WritableByteChannel outputChannel) {
+    this.inputChannel = inputChannel;
+    this.outputChannel = outputChannel;
+    this.inputBuffer.flip();
   }
   
   public void writeObject(final Serializable o) {
@@ -58,7 +62,7 @@ public class ObjectChannel {
             int numBytes = Math.min(_remaining, _minus);
             this.outputBuffer.put(bytes, offset, numBytes);
             this.outputBuffer.flip();
-            this.channel.write(this.outputBuffer);
+            this.outputChannel.write(this.outputBuffer);
             this.outputBuffer.clear();
             int _offset = offset;
             offset = (_offset + numBytes);
@@ -108,13 +112,22 @@ public class ObjectChannel {
             offset = (_offset + availableBytes);
           } else {
             this.inputBuffer.clear();
-            this.channel.read(this.inputBuffer);
+            this.inputChannel.read(this.inputBuffer);
             this.inputBuffer.flip();
           }
         }
         _xblockexpression = result;
       }
       return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void close() {
+    try {
+      this.inputChannel.close();
+      this.outputChannel.close();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

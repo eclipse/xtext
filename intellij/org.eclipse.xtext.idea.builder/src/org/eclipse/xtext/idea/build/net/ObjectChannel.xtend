@@ -13,7 +13,9 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.io.Serializable
 import java.nio.ByteBuffer
-import java.nio.channels.SocketChannel
+import java.nio.channels.ByteChannel
+import java.nio.channels.ReadableByteChannel
+import java.nio.channels.WritableByteChannel
 
 import static java.lang.Math.*
 
@@ -22,15 +24,21 @@ import static java.lang.Math.*
  */
 class ObjectChannel {
 	
-	static val BUFFER_SIZE=32768
+	public static val BUFFER_SIZE = 32768
+	
 	ByteBuffer inputBuffer = ByteBuffer.allocate(BUFFER_SIZE)
 	ByteBuffer outputBuffer = ByteBuffer.allocate(BUFFER_SIZE)
 	
-	SocketChannel channel
+	ReadableByteChannel inputChannel
+	WritableByteChannel outputChannel
+
+	new(ByteChannel channel) {
+		this(channel, channel)
+	}	
 	
-	new(SocketChannel channel) {
-		this.channel = channel
-		channel.configureBlocking(true)
+	new(ReadableByteChannel inputChannel, WritableByteChannel outputChannel) {
+		this.inputChannel = inputChannel
+		this.outputChannel = outputChannel
 		inputBuffer.flip
 	}
 	
@@ -47,7 +55,7 @@ class ObjectChannel {
 				var numBytes = min(outputBuffer.remaining, bytes.length-offset)
 				outputBuffer.put(bytes, offset, numBytes)
 				outputBuffer.flip
-				channel.write(outputBuffer)
+				outputChannel.write(outputBuffer)
 				outputBuffer.clear
 				offset += numBytes
 			} 
@@ -76,10 +84,15 @@ class ObjectChannel {
 				offset += availableBytes
 			} else {
 				inputBuffer.clear
-				channel.read(inputBuffer)
+				inputChannel.read(inputBuffer)
 				inputBuffer.flip			
 			}
 		}
 		result
+	}
+	
+	def close() {
+		inputChannel.close
+		outputChannel.close
 	}
 }

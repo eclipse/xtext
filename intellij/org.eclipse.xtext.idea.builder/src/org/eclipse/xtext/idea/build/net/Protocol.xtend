@@ -11,6 +11,7 @@ import java.io.Serializable
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.jetbrains.jps.incremental.messages.BuildMessage
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,6 +19,7 @@ import org.jetbrains.jps.incremental.messages.BuildMessage
 class Protocol {
 	
 	@Accessors
+	@EqualsHashCode
 	static class BuildRequestMessage implements Serializable {
 		List<String> dirtyFiles	= newArrayList
 		List<String> deletedFiles = newArrayList
@@ -28,6 +30,7 @@ class Protocol {
 	}
 	
 	@Accessors
+	@EqualsHashCode
 	static class BuildResultMessage implements Serializable {
 		List<String> dirtyFiles = newArrayList		
 		List<String> deletedFiles = newArrayList
@@ -35,6 +38,7 @@ class Protocol {
 	}
 	
 	@Accessors
+	@EqualsHashCode
 	static class BuildIssueMessage implements Serializable {
 		BuildMessage.Kind kind
 		String message
