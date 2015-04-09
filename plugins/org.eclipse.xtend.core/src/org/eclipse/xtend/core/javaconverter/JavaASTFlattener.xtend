@@ -916,19 +916,11 @@ class JavaASTFlattener extends ASTVisitor {
 				}
 			}
 			case InfixExpression.Operator.EQUALS: {
-				if (isNullInvolved(infixParent)) {
-					appendToBuffer(' === ')
-				} else {
-					appendToBuffer(' == ')
-				}
+				appendToBuffer(' === ')
 				rightSide.accept(this)
 			}
 			case InfixExpression.Operator.NOT_EQUALS: {
-				if (isNullInvolved(infixParent)) {
-					appendToBuffer(' !== ')
-				} else {
-					appendToBuffer(' != ')
-				}
+				appendToBuffer(' !== ')
 				rightSide.accept(this)
 			}
 			default: {
@@ -944,10 +936,6 @@ class JavaASTFlattener extends ASTVisitor {
 		return leftOperand.isBooleanType || rightOperand.isBooleanType
 	}
 	
-	def boolean isNullInvolved(InfixExpression it) {
-		return leftOperand instanceof NullLiteral || rightOperand instanceof NullLiteral
-	}
-
 	def boolean isBooleanType(Expression expression) {
 		if (expression instanceof BooleanLiteral) {
 			return true
