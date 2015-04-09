@@ -78,7 +78,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 			logger.warn("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
 		logger.warn("Please note that no information about compile time constants is available.");
-		logger.warn("It's recommended to use org.objectweb.asm 5.0.1 or better.");
+		logger.warn("It's recommended to use org.objectweb.asm 5.0.1 or better (Maven group id: org.ow2.asm).");
 		logger.warn("--------------------------------------------------------------------------");
 		return false;
 	}
