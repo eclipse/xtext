@@ -9,7 +9,9 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -102,14 +105,28 @@ public class ProblemSupportImpl implements ProblemSupport {
   }
   
   public void validationPhaseStarted() {
-    final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
-      @Override
-      public void apply(final Procedure0 it) {
-        it.apply();
+    try {
+      final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
+        @Override
+        public void apply(final Procedure0 it) {
+          it.apply();
+        }
+      };
+      IterableExtensions.<Procedure0>forEach(this.delayedTasks, _function);
+    } catch (final Throwable _t) {
+      if (_t instanceof Throwable) {
+        final Throwable t = (Throwable)_t;
+        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+        Set<XtendFile> _singleton = Collections.<XtendFile>singleton(_xtendFile);
+        XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
+        Resource _eResource = _xtendFile_1.eResource();
+        this.compilationUnit.handleProcessingError(_singleton, _eResource, t);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-    };
-    IterableExtensions.<Procedure0>forEach(this.delayedTasks, _function);
-    this.delayedTasks.clear();
+    } finally {
+      this.delayedTasks.clear();
+    }
   }
   
   @Override

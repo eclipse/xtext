@@ -192,7 +192,10 @@ public class XbaseEditorInputRedirector {
         return input;
       }
       final IStorage originalStorage = sourceInformation.getStorage();
-      return EditorUtils.createEditorInput(originalStorage);
+      boolean _notEquals_1 = (!Objects.equal(originalStorage, null));
+      if (_notEquals_1) {
+        return EditorUtils.createEditorInput(originalStorage);
+      }
     }
     return input;
   }

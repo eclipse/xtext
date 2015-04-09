@@ -191,11 +191,9 @@ public class DerivedResourceMarkerCopier {
 	}
 
 	private IFile findIFile(ILocationInResource locationInResource, IWorkspace workspace) {
-		IStorage storage;
-		try {
-			storage = locationInResource.getStorage();
-		} catch (IllegalStateException e) {
-			LOG.error("Failed to find Storage. Please make sure there are no outdated generated files.", e);
+		IStorage storage = locationInResource.getStorage();
+		if (storage == null) {
+			LOG.error("Failed to find Storage. Please make sure there are no outdated generated files.");
 			return null;
 		}
 		return workspace.getRoot().getFile(storage.getFullPath());
