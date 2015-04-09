@@ -1663,5 +1663,16 @@ class XbaseFormatterTest {
 			'''
 		]
 	}
+	
+	@Test def formatInstanceOf() {
+		assertFormattedExpression [
+			expectation = '''
+				"x".toString instanceof String
+			'''
+			toBeFormatted = '''
+				"x".toString  instanceof  String
+			'''
+		]
+	}
 
 }
