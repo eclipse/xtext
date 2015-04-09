@@ -1601,24 +1601,14 @@ public class JavaASTFlattener extends ASTVisitor {
     if (!_matched) {
       if (Objects.equal(operator, InfixExpression.Operator.EQUALS)) {
         _matched=true;
-        boolean _isNullInvolved = this.isNullInvolved(infixParent);
-        if (_isNullInvolved) {
-          this.appendToBuffer(" === ");
-        } else {
-          this.appendToBuffer(" == ");
-        }
+        this.appendToBuffer(" === ");
         rightSide.accept(this);
       }
     }
     if (!_matched) {
       if (Objects.equal(operator, InfixExpression.Operator.NOT_EQUALS)) {
         _matched=true;
-        boolean _isNullInvolved_1 = this.isNullInvolved(infixParent);
-        if (_isNullInvolved_1) {
-          this.appendToBuffer(" !== ");
-        } else {
-          this.appendToBuffer(" != ");
-        }
+        this.appendToBuffer(" !== ");
         rightSide.accept(this);
       }
     }
@@ -1644,18 +1634,6 @@ public class JavaASTFlattener extends ASTVisitor {
       Expression _rightOperand = it.getRightOperand();
       boolean _isBooleanType_1 = this.isBooleanType(_rightOperand);
       _or = _isBooleanType_1;
-    }
-    return _or;
-  }
-  
-  public boolean isNullInvolved(final InfixExpression it) {
-    boolean _or = false;
-    Expression _leftOperand = it.getLeftOperand();
-    if ((_leftOperand instanceof NullLiteral)) {
-      _or = true;
-    } else {
-      Expression _rightOperand = it.getRightOperand();
-      _or = (_rightOperand instanceof NullLiteral);
     }
     return _or;
   }
