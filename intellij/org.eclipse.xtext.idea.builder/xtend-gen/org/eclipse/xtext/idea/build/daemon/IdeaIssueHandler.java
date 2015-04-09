@@ -43,10 +43,10 @@ public class IdeaIssueHandler implements IIssueHandler {
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
     for (final Issue issue : _filter) {
       {
-        Protocol.BuildIssue _buildIssue = new Protocol.BuildIssue();
-        final Procedure1<Protocol.BuildIssue> _function_1 = new Procedure1<Protocol.BuildIssue>() {
+        Protocol.BuildIssueMessage _buildIssueMessage = new Protocol.BuildIssueMessage();
+        final Procedure1<Protocol.BuildIssueMessage> _function_1 = new Procedure1<Protocol.BuildIssueMessage>() {
           @Override
-          public void apply(final Protocol.BuildIssue it) {
+          public void apply(final Protocol.BuildIssueMessage it) {
             BuildMessage.Kind _kind = IdeaIssueHandler.this.getKind(issue);
             it.setKind(_kind);
             String _message = issue.getMessage();
@@ -67,7 +67,7 @@ public class IdeaIssueHandler implements IIssueHandler {
             it.setColumn(0);
           }
         };
-        Protocol.BuildIssue _doubleArrow = ObjectExtensions.<Protocol.BuildIssue>operator_doubleArrow(_buildIssue, _function_1);
+        Protocol.BuildIssueMessage _doubleArrow = ObjectExtensions.<Protocol.BuildIssueMessage>operator_doubleArrow(_buildIssueMessage, _function_1);
         this.buildResultCollector.addIssue(_doubleArrow);
         boolean _and = false;
         if (!errorFree) {

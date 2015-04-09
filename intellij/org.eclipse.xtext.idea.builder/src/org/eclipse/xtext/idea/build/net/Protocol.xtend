@@ -18,7 +18,7 @@ import org.jetbrains.jps.incremental.messages.BuildMessage
 class Protocol {
 	
 	@Accessors
-	static class BuildRequest implements Serializable {
+	static class BuildRequestMessage implements Serializable {
 		List<String> dirtyFiles	= newArrayList
 		List<String> deletedFiles = newArrayList
 		List<String> classpath = newArrayList
@@ -28,14 +28,14 @@ class Protocol {
 	}
 	
 	@Accessors
-	static class BuildResult implements Serializable {
+	static class BuildResultMessage implements Serializable {
 		List<String> dirtyFiles = newArrayList		
 		List<String> deletedFiles = newArrayList
 		List<String> outputDirs = newArrayList
 	}
 	
 	@Accessors
-	static class BuildIssue implements Serializable {
+	static class BuildIssueMessage implements Serializable {
 		BuildMessage.Kind kind
 		String message
 		String path
@@ -46,6 +46,6 @@ class Protocol {
 		int column
 	}
 	
-	static class StopServer implements Serializable {
+	static class StopServerMessage implements Serializable {
 	}
 }

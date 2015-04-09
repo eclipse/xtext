@@ -22,10 +22,11 @@ import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.TTCCLayout
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.idea.build.net.ObjectChannel
-import org.eclipse.xtext.idea.build.net.Protocol.BuildRequest
-import org.eclipse.xtext.idea.build.net.Protocol.StopServer
+import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
+import org.eclipse.xtext.idea.build.net.Protocol.StopServerMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
@@ -38,7 +39,7 @@ class XtextBuildDaemon {
 
 	def static void main(String[] args) {
 		try {
-			LOG.parent.addAppender(new FileAppender(new TTCCLayout(), 'xtext_builder_daemon.log', true))
+			LOG.parent.addAppender(new FileAppender(new TTCCLayout(), 'xtext_builder_daemon.log', false))
 			LOG.level = Level.INFO
 			val injector = Guice.createInjector(new BuildDaemonModule)
 			injector.getInstance(Server).run(args.parse)
@@ -52,9 +53,13 @@ class XtextBuildDaemon {
 		val i = args.iterator
 		while (i.hasNext) {
 			val arg = i.next
-			switch arg {
+			switch arg.toLowerCase {
 				case '-port':
 					arguments.port = Integer.parseInt(i.next)
+				case '-timeout':
+					arguments.timeout= Long.parseLong(i.next)
+				case '-initialtimeout':
+					arguments.timeout= Long.parseLong(i.next)
 				default:
 					throw new IllegalArgumentException("Invalid argument '" + arg + "'")
 			}
@@ -66,6 +71,8 @@ class XtextBuildDaemon {
 
 	static class Arguments {
 		int port
+		long timeout = 1000 * 60 * 60 * 3 // 3h in ms
+		long initialTimeout = 5000
 	}
 
 	static class Server {
@@ -75,33 +82,31 @@ class XtextBuildDaemon {
 			var ServerSocket serverSocket = null
 			try {
 				LOG.info('Starting xtext build daemon at port ' + arguments.port + '...')
-				val socketSelector = SelectorProvider.provider().openSelector()
-				val serverChannel = ServerSocketChannel.open()
+				val socketSelector = SelectorProvider.provider.openSelector
+				val serverChannel = ServerSocketChannel.open
 				serverChannel.configureBlocking(false)
 				val socketAddress = new InetSocketAddress(InetAddress.getByName('127.0.0.1'), arguments.port)
 				serverChannel.socket.bind(socketAddress)
 				serverChannel.register(socketSelector, SelectionKey.OP_ACCEPT)
 
-				var receivedRequests = false
 				LOG.info('... success')
+				var currentTimeout = arguments.initialTimeout
 				var shutdown = false
 				while (!shutdown) {
 					LOG.info('Accepting connections...')
 					try {
-						socketSelector.select(5000)
+						socketSelector.select(currentTimeout)
 						for (key : socketSelector.selectedKeys) {
 							if (key.acceptable) {
 								var SocketChannel socketChannel = null
 								try {
 									socketChannel = serverChannel.accept
 									if (socketChannel == null) {
-										if (!receivedRequests) {
-											LOG.info('No requests within ' + serverSocket.soTimeout + 'ms.')
-											shutdown = true
-										}
+										LOG.info('No requests within ' + currentTimeout + 'ms.')
+										shutdown = true
 									} else {
 										socketChannel.configureBlocking(true)
-										receivedRequests = true
+										currentTimeout = arguments.timeout
 										shutdown = workerProvider.get.serve(socketChannel)
 									}
 								} finally {
@@ -133,11 +138,11 @@ class XtextBuildDaemon {
 			channel = new ObjectChannel(socketChannel)
 			val msg = channel.readObject
 			switch (msg) {
-				StopServer: {
+				StopServerMessage: {
 					LOG.info('Received StopServer')
 					return true
 				}
-				BuildRequest: {
+				BuildRequestMessage: {
 					LOG.info('Received BuildRequest. Start build...')
 					val buildResult = build(msg)
 					LOG.info('...finished.')
@@ -148,9 +153,9 @@ class XtextBuildDaemon {
 			return false
 		}
 
-		def build(BuildRequest request) {
+		def build(BuildRequestMessage request) {
 			resultCollector.output = channel
-			val buildRequest = new org.eclipse.xtext.builder.standalone.incremental.BuildRequest => [
+			val buildRequest = new BuildRequest => [
 				baseDir = request.baseDir.toFile
 				defaultEncoding = request.encoding
 				classPath = request.classpath.map[toFile]

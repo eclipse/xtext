@@ -20,7 +20,7 @@ import org.jetbrains.jps.incremental.messages.BuildMessage;
 @SuppressWarnings("all")
 public class Protocol {
   @Accessors
-  public static class BuildRequest implements Serializable {
+  public static class BuildRequestMessage implements Serializable {
     private List<String> dirtyFiles = CollectionLiterals.<String>newArrayList();
     
     private List<String> deletedFiles = CollectionLiterals.<String>newArrayList();
@@ -89,7 +89,7 @@ public class Protocol {
   }
   
   @Accessors
-  public static class BuildResult implements Serializable {
+  public static class BuildResultMessage implements Serializable {
     private List<String> dirtyFiles = CollectionLiterals.<String>newArrayList();
     
     private List<String> deletedFiles = CollectionLiterals.<String>newArrayList();
@@ -125,7 +125,7 @@ public class Protocol {
   }
   
   @Accessors
-  public static class BuildIssue implements Serializable {
+  public static class BuildIssueMessage implements Serializable {
     private BuildMessage.Kind kind;
     
     private String message;
@@ -215,6 +215,6 @@ public class Protocol {
     }
   }
   
-  public static class StopServer implements Serializable {
+  public static class StopServerMessage implements Serializable {
   }
 }

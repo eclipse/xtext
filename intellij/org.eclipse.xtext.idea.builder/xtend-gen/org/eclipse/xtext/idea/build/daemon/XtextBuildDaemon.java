@@ -54,6 +54,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class XtextBuildDaemon {
   public static class Arguments {
     private int port;
+    
+    private long timeout = (((1000 * 60) * 60) * 3);
+    
+    private long initialTimeout = 5000;
   }
   
   public static class Server {
@@ -74,14 +78,14 @@ public class XtextBuildDaemon {
           ServerSocket _socket = serverChannel.socket();
           _socket.bind(socketAddress);
           serverChannel.register(socketSelector, SelectionKey.OP_ACCEPT);
-          boolean receivedRequests = false;
           XtextBuildDaemon.LOG.info("... success");
+          long currentTimeout = arguments.initialTimeout;
           boolean shutdown = false;
           while ((!shutdown)) {
             {
               XtextBuildDaemon.LOG.info("Accepting connections...");
               try {
-                socketSelector.select(5000);
+                socketSelector.select(currentTimeout);
                 Set<SelectionKey> _selectedKeys = socketSelector.selectedKeys();
                 for (final SelectionKey key : _selectedKeys) {
                   boolean _isAcceptable = key.isAcceptable();
@@ -92,16 +96,11 @@ public class XtextBuildDaemon {
                       socketChannel = _accept;
                       boolean _equals = Objects.equal(socketChannel, null);
                       if (_equals) {
-                        if ((!receivedRequests)) {
-                          int _soTimeout = serverSocket.getSoTimeout();
-                          String _plus = ("No requests within " + Integer.valueOf(_soTimeout));
-                          String _plus_1 = (_plus + "ms.");
-                          XtextBuildDaemon.LOG.info(_plus_1);
-                          shutdown = true;
-                        }
+                        XtextBuildDaemon.LOG.info((("No requests within " + Long.valueOf(currentTimeout)) + "ms."));
+                        shutdown = true;
                       } else {
                         socketChannel.configureBlocking(true);
-                        receivedRequests = true;
+                        currentTimeout = arguments.timeout;
                         XtextBuildDaemon.Worker _get = this.workerProvider.get();
                         boolean _serve = _get.serve(socketChannel);
                         shutdown = _serve;
@@ -156,17 +155,17 @@ public class XtextBuildDaemon {
       final Serializable msg = this.channel.readObject();
       boolean _matched = false;
       if (!_matched) {
-        if (msg instanceof Protocol.StopServer) {
+        if (msg instanceof Protocol.StopServerMessage) {
           _matched=true;
           XtextBuildDaemon.LOG.info("Received StopServer");
           return true;
         }
       }
       if (!_matched) {
-        if (msg instanceof Protocol.BuildRequest) {
+        if (msg instanceof Protocol.BuildRequestMessage) {
           _matched=true;
           XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");
-          final Protocol.BuildResult buildResult = this.build(((Protocol.BuildRequest)msg));
+          final Protocol.BuildResultMessage buildResult = this.build(((Protocol.BuildRequestMessage)msg));
           XtextBuildDaemon.LOG.info("...finished.");
           this.channel.writeObject(buildResult);
           XtextBuildDaemon.LOG.info("Result sent.");
@@ -175,8 +174,8 @@ public class XtextBuildDaemon {
       return false;
     }
     
-    public Protocol.BuildResult build(final Protocol.BuildRequest request) {
-      Protocol.BuildResult _xblockexpression = null;
+    public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
+      Protocol.BuildResultMessage _xblockexpression = null;
       {
         this.resultCollector.setOutput(this.channel);
         BuildRequest _buildRequest = new BuildRequest();
@@ -237,7 +236,7 @@ public class XtextBuildDaemon {
     try {
       Category _parent = XtextBuildDaemon.LOG.getParent();
       TTCCLayout _tTCCLayout = new TTCCLayout();
-      FileAppender _fileAppender = new FileAppender(_tTCCLayout, "xtext_builder_daemon.log", true);
+      FileAppender _fileAppender = new FileAppender(_tTCCLayout, "xtext_builder_daemon.log", false);
       _parent.addAppender(_fileAppender);
       XtextBuildDaemon.LOG.setLevel(Level.INFO);
       BuildDaemonModule _buildDaemonModule = new BuildDaemonModule();
@@ -263,13 +262,30 @@ public class XtextBuildDaemon {
     while (i.hasNext()) {
       {
         final String arg = i.next();
+        String _lowerCase = arg.toLowerCase();
         boolean _matched = false;
         if (!_matched) {
-          if (Objects.equal(arg, "-port")) {
+          if (Objects.equal(_lowerCase, "-port")) {
             _matched=true;
             String _next = i.next();
             int _parseInt = Integer.parseInt(_next);
             arguments.port = _parseInt;
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_lowerCase, "-timeout")) {
+            _matched=true;
+            String _next_1 = i.next();
+            long _parseLong = Long.parseLong(_next_1);
+            arguments.timeout = _parseLong;
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_lowerCase, "-initialtimeout")) {
+            _matched=true;
+            String _next_2 = i.next();
+            long _parseLong_1 = Long.parseLong(_next_2);
+            arguments.timeout = _parseLong_1;
           }
         }
         if (!_matched) {

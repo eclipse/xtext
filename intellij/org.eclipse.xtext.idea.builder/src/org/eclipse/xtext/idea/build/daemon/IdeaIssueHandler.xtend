@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.build.daemon
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.idea.build.net.Protocol.BuildIssue
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
 import org.eclipse.xtext.validation.Issue
 import org.jetbrains.jps.incremental.messages.BuildMessage.Kind
 
@@ -24,7 +24,7 @@ class IdeaIssueHandler implements IIssueHandler {
 	override handleIssue(Iterable<Issue> issues) {
 		var errorFree = true
 		for(issue: issues.filter[severity != Severity.IGNORE]) {
-			buildResultCollector.addIssue(new BuildIssue() => [
+			buildResultCollector.addIssue(new BuildIssueMessage() => [
 				kind = issue.kind
 				message = issue.message
 				path = issue.uriToProblem.path

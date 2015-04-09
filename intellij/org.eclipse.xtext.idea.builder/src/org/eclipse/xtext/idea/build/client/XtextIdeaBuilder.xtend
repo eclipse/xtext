@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.idea.build.net.ObjectChannel
-import org.eclipse.xtext.idea.build.net.Protocol.BuildIssue
-import org.eclipse.xtext.idea.build.net.Protocol.BuildRequest
-import org.eclipse.xtext.idea.build.net.Protocol.BuildResult
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import org.jetbrains.jps.ModuleChunk
 import org.jetbrains.jps.ProjectPaths
 import org.jetbrains.jps.builders.DirtyFilesHolder
@@ -68,11 +68,11 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 			while (result == null) {
 				val message = channel.readObject
 				switch message {
-					BuildResult: {
+					BuildResultMessage: {
 						handleBuildResult(message, context, chunk, outputConsumer)
 						result = OK
 					}
-					BuildIssue:
+					BuildIssueMessage:
 						message.reportIssue(context)
 				}
 			}
@@ -89,7 +89,7 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 
 	private def createBuildRequest(ModuleChunk chunk, CompileContext context,
 		DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) {
-		val buildRequest = new BuildRequest()
+		val buildRequest = new BuildRequestMessage()
 		dirtyFilesHolder.processDirtyFiles [ target, file, root |
 			buildRequest.dirtyFiles += file.path
 			true
@@ -107,7 +107,7 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		buildRequest
 	}
 
-	private def handleBuildResult(BuildResult result, CompileContext context, ModuleChunk chunk,
+	private def handleBuildResult(BuildResultMessage result, CompileContext context, ModuleChunk chunk,
 		OutputConsumer outputConsumer) {
 		val module = chunk.representativeTarget.module
 		result.outputDirs.forEach [
@@ -125,7 +125,7 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		]
 	}
 
-	private def reportIssue(BuildIssue it, CompileContext context) {
+	private def reportIssue(BuildIssueMessage it, CompileContext context) {
 		context.processMessage(new CompilerMessage(
 			presentableName,
 			kind,

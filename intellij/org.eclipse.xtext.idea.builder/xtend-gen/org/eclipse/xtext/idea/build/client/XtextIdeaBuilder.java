@@ -87,7 +87,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     ModuleLevelBuilder.ExitCode result = null;
     SocketChannel socketChannel = null;
     try {
-      final Protocol.BuildRequest buildRequest = this.createBuildRequest(chunk, context, dirtyFilesHolder);
+      final Protocol.BuildRequestMessage buildRequest = this.createBuildRequest(chunk, context, dirtyFilesHolder);
       SocketChannel _connect = this.connector.connect();
       socketChannel = _connect;
       final ObjectChannel channel = new ObjectChannel(socketChannel);
@@ -97,16 +97,16 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           final Serializable message = channel.readObject();
           boolean _matched = false;
           if (!_matched) {
-            if (message instanceof Protocol.BuildResult) {
+            if (message instanceof Protocol.BuildResultMessage) {
               _matched=true;
-              this.handleBuildResult(((Protocol.BuildResult)message), context, chunk, outputConsumer);
+              this.handleBuildResult(((Protocol.BuildResultMessage)message), context, chunk, outputConsumer);
               result = ModuleLevelBuilder.ExitCode.OK;
             }
           }
           if (!_matched) {
-            if (message instanceof Protocol.BuildIssue) {
+            if (message instanceof Protocol.BuildIssueMessage) {
               _matched=true;
-              this.reportIssue(((Protocol.BuildIssue)message), context);
+              this.reportIssue(((Protocol.BuildIssueMessage)message), context);
             }
           }
         }
@@ -130,11 +130,11 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     return result;
   }
   
-  private Protocol.BuildRequest createBuildRequest(final ModuleChunk chunk, final CompileContext context, final DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) {
+  private Protocol.BuildRequestMessage createBuildRequest(final ModuleChunk chunk, final CompileContext context, final DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) {
     try {
-      Protocol.BuildRequest _xblockexpression = null;
+      Protocol.BuildRequestMessage _xblockexpression = null;
       {
-        final Protocol.BuildRequest buildRequest = new Protocol.BuildRequest();
+        final Protocol.BuildRequestMessage buildRequest = new Protocol.BuildRequestMessage();
         final FileProcessor<JavaSourceRootDescriptor, ModuleBuildTarget> _function = new FileProcessor<JavaSourceRootDescriptor, ModuleBuildTarget>() {
           @Override
           public boolean apply(final ModuleBuildTarget target, final File file, final JavaSourceRootDescriptor root) throws IOException {
@@ -208,7 +208,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     }
   }
   
-  private void handleBuildResult(final Protocol.BuildResult result, final CompileContext context, final ModuleChunk chunk, final ModuleLevelBuilder.OutputConsumer outputConsumer) {
+  private void handleBuildResult(final Protocol.BuildResultMessage result, final CompileContext context, final ModuleChunk chunk, final ModuleLevelBuilder.OutputConsumer outputConsumer) {
     ModuleBuildTarget _representativeTarget = chunk.representativeTarget();
     final JpsModule module = _representativeTarget.getModule();
     List<String> _outputDirs = result.getOutputDirs();
@@ -259,7 +259,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     IterableExtensions.<String>forEach(_deletedFiles, _function_2);
   }
   
-  private void reportIssue(final Protocol.BuildIssue it, final CompileContext context) {
+  private void reportIssue(final Protocol.BuildIssueMessage it, final CompileContext context) {
     String _presentableName = this.getPresentableName();
     BuildMessage.Kind _kind = it.getKind();
     String _message = it.getMessage();

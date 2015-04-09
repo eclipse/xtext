@@ -20,12 +20,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class XtextBuildResultCollector {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private Protocol.BuildResult buildResult = new Protocol.BuildResult();
+  private Protocol.BuildResultMessage buildResult = new Protocol.BuildResultMessage();
   
   @Accessors
   private ObjectChannel output;
   
-  public void addIssue(final Protocol.BuildIssue issue) {
+  public void addIssue(final Protocol.BuildIssueMessage issue) {
     this.output.writeObject(issue);
   }
   
@@ -52,7 +52,7 @@ public class XtextBuildResultCollector {
   }
   
   @Pure
-  public Protocol.BuildResult getBuildResult() {
+  public Protocol.BuildResultMessage getBuildResult() {
     return this.buildResult;
   }
   
