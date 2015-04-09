@@ -6,8 +6,6 @@ Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
- de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe.core;resolution:=optional,
@@ -20,8 +18,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib;visibility:=reexport,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.xtext.idea.generator;resolution:=optional
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.annotations;x-friends:="org.eclipse.xtext.xbase.tests",
