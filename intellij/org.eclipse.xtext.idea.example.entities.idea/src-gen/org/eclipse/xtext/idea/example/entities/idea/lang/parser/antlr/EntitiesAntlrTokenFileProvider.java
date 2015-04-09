@@ -1,7 +1,6 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.parser.antlr;
 
 import java.io.InputStream;
-
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class EntitiesAntlrTokenFileProvider implements IAntlrTokenFileProvider {

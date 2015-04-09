@@ -7,10 +7,6 @@
  */
 package org.eclipse.xtext.xbase.idea.ide.hierarchy;
 
-import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
-import org.eclipse.xtext.xbase.lib.Extension;
-
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.ide.hierarchy.HierarchyBrowser;
@@ -20,6 +16,10 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
+import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
+import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyBrowser;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class JvmExecutableCallHierarchyProvider extends JavaCallHierarchyProvider {

@@ -7,11 +7,6 @@
  */
 package org.eclipse.xtext.idea.example.entities.idea.completion;
 
-import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider;
-import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
@@ -23,6 +18,11 @@ import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import org.eclipse.xtext.idea.example.entities.idea.completion.AbstractEntitiesCompletionContributor;
+import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider;
+import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class EntitiesCompletionContributor extends AbstractEntitiesCompletionContributor {

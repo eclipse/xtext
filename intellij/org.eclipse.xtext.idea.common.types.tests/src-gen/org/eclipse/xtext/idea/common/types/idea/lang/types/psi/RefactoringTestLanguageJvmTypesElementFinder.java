@@ -1,9 +1,8 @@
 package org.eclipse.xtext.idea.common.types.idea.lang.types.psi;
 
-import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
-import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
-
 import com.intellij.openapi.project.Project;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;
+import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 
 public class RefactoringTestLanguageJvmTypesElementFinder extends JvmTypesElementFinder {
 

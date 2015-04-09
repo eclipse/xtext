@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.common.types.idea.completion;
 
+import org.eclipse.xtext.idea.common.types.idea.completion.AbstractRefactoringTestLanguageCompletionContributor;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 

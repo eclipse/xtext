@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.psi
+package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Inject
 import com.intellij.openapi.project.Project

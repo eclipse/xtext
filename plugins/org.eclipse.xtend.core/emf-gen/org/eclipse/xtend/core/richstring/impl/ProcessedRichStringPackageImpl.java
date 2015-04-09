@@ -33,8 +33,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
-import org.eclipse.xtext.xtype.XtypePackage;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -177,7 +175,6 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 
 		// Initialize simple dependencies
 		XtendPackage.eINSTANCE.eClass();
-		XtypePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theProcessedRichStringPackage.createPackageContents();

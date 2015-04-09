@@ -18,14 +18,11 @@
 		<java.shortNamesCache implementation="org.eclipse.xtext.idea.common.types.idea.lang.types.RefactoringTestLanguageJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.common.types.idea.lang.psi.RefactoringTestLanguageCodeBlockModificationListener"/>
 
 		<referencesSearch implementation="org.eclipse.xtext.idea.common.types.idea.lang.types.psi.search.RefactoringTestLanguageJvmElementsReferencesSearch"/>
-		<targetElementEvaluator language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider"/>

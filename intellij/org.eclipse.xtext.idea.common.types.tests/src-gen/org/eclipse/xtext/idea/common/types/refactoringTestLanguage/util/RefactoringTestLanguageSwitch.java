@@ -4,10 +4,10 @@ package org.eclipse.xtext.idea.common.types.refactoringTestLanguage.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.Model;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.ReferenceHolder;
+
+import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.*;
 
 /**
  * <!-- begin-user-doc -->

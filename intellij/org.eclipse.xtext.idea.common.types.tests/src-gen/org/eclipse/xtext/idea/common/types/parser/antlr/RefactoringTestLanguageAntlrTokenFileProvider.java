@@ -4,7 +4,6 @@
 package org.eclipse.xtext.idea.common.types.parser.antlr;
 
 import java.io.InputStream;
-
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class RefactoringTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.types.psi.search;
 
-import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
 import org.eclipse.xtext.xbase.idea.search.JvmElementsReferencesSearch;
+import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
 
 public class EntitiesJvmElementsReferencesSearch extends JvmElementsReferencesSearch {
 

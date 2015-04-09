@@ -111,10 +111,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		
 		if (typesIntegrationRequired) {
-			bindFactory.addTypeToType('org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory', 'org.eclipse.xtext.idea.types.access.StubTypeProviderFactory')
-			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider')
-			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator')
-			bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex', 'org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex')
+			bindFactory.addTypeToType('org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory', 'org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory')
+			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator')
+			bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex', 'org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider', 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider')
 			bindFactory.addTypeToTypeSingleton('com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider', 'org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider')
 			bindFactory.addTypeToTypeSingleton('com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider', 'org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider')
@@ -408,7 +408,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		package «grammar.jvmTypesShortNamesCacheName.toPackageName»;
 		
 		import com.intellij.openapi.project.Project;
-		import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;
+		import org.eclipse.xtext.xbase.idea.types.JvmTypesShortNamesCache;
 		import «grammar.languageName»;
 		
 		class «grammar.jvmTypesShortNamesCacheName.toSimpleName» extends JvmTypesShortNamesCache {
@@ -423,7 +423,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileJvmElementsReferencesSearch(Grammar grammar) '''
 		package «grammar.jvmElementsReferencesSearch.toPackageName»;
 
-		import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;
+		import org.eclipse.xtext.xbase.idea.search.JvmElementsReferencesSearch;
 		import «grammar.languageName»;
 		
 		public class «grammar.jvmElementsReferencesSearch.toSimpleName» extends JvmElementsReferencesSearch {
@@ -439,7 +439,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		package «grammar.jvmTypesElementFinderName.toPackageName»;
 		
 		import com.intellij.openapi.project.Project;
-		import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
+		import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;
 		import «grammar.languageName»;
 		
 		public class «grammar.jvmTypesElementFinderName.toSimpleName» extends JvmTypesElementFinder {
@@ -545,14 +545,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 				<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
 				«IF typesIntegrationRequired»
-				<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+				<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 				«ENDIF»
 		
 				<psi.treeChangePreprocessor implementation="«grammar.codeBlockModificationListenerName»"/>
 				«IF typesIntegrationRequired»
 
 				<referencesSearch implementation="«grammar.jvmElementsReferencesSearch»"/>
-				«grammar.compileExtension('targetElementEvaluator', 'org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator')»
 				«ENDIF»
 		
 				<fileTypeFactory implementation="«grammar.fileTypeFactoryName»"/>
@@ -772,15 +771,20 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 		import «grammar.fileImplName»;
 		import «grammar.grammarAccessName»;
+		«IF !typesIntegrationRequired»
 		import org.eclipse.xtext.psi.stubs.XtextFileElementType;
+		«ENDIF»
 		import org.eclipse.xtext.psi.stubs.XtextFileStub;
 		import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+		«IF typesIntegrationRequired»
+		import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;
+		«ENDIF»
 		
 		import com.intellij.psi.tree.IFileElementType;
 		
 		public class «grammar.elementTypeProviderName.toSimpleName» implements IElementTypeProvider {
 
-			public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
+			public static final IFileElementType FILE_TYPE = new «IF typesIntegrationRequired»XtypeFileElementType«ELSE»XtextFileElementType«ENDIF»<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
 
 			private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 

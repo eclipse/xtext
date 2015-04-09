@@ -7,13 +7,12 @@
  */
 package org.eclipse.xtext.xbase.idea.jvmmodel;
 
-import java.util.Set;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-
 import com.google.inject.ImplementedBy;
 import com.intellij.psi.PsiElement;
+import java.util.Set;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 /**
  * An equivalent of {@link IJvmModelAssociations IJvmModelAssociations} for PSI model.

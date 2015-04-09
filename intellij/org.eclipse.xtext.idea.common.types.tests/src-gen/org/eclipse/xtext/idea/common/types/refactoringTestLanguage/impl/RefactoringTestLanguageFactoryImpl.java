@@ -5,12 +5,12 @@ package org.eclipse.xtext.idea.common.types.refactoringTestLanguage.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.Model;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguageFactory;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.ReferenceHolder;
+
+import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.*;
 
 /**
  * <!-- begin-user-doc -->

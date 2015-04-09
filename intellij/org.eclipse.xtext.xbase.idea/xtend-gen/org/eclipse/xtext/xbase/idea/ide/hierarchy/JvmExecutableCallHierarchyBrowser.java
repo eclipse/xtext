@@ -13,6 +13,7 @@ import com.intellij.ide.hierarchy.call.CallHierarchyBrowser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
+import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCalleeMethodsTreeStructure;
 
 /**
  * @author kosyakov - Initial contribution and API

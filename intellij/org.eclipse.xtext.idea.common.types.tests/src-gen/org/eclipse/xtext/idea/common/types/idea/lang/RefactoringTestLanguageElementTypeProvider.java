@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.idea.common.types.idea.lang.psi.impl.RefactoringTestLanguageFileImpl;
 import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
-import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;
 
 import com.intellij.psi.tree.IFileElementType;
 
 public class RefactoringTestLanguageElementTypeProvider implements IElementTypeProvider {
 
-	public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<RefactoringTestLanguageFileImpl>>(RefactoringTestLanguageLanguage.INSTANCE);
+	public static final IFileElementType FILE_TYPE = new XtypeFileElementType<XtextFileStub<RefactoringTestLanguageFileImpl>>(RefactoringTestLanguageLanguage.INSTANCE);
 
 	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 

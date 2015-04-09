@@ -1,9 +1,8 @@
 package org.eclipse.xtext.xbase.annotations.idea.lang.types.psi;
 
-import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
-import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsLanguage;
-
 import com.intellij.openapi.project.Project;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;
+import org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsLanguage;
 
 public class XbaseWithAnnotationsJvmTypesElementFinder extends JvmTypesElementFinder {
 

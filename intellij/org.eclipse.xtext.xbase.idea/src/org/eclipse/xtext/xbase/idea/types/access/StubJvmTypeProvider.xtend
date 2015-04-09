@@ -30,10 +30,10 @@ import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
-import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClass
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 

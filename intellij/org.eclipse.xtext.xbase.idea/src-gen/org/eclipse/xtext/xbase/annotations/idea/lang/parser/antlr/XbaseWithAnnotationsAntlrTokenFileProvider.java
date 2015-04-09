@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.annotations.idea.lang.parser.antlr;
 
 import java.io.InputStream;
-
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class XbaseWithAnnotationsAntlrTokenFileProvider implements IAntlrTokenFileProvider {

@@ -7,14 +7,6 @@
  */
 package org.eclipse.xtext.xbase.idea.completion;
 
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
-import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xtype.XtypePackage;
-
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
@@ -31,6 +23,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiModifier;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.idea.completion.AbstractXbaseCompletionContributor;
+import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
 public class XbaseCompletionContributor extends AbstractXbaseCompletionContributor {

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.idea.jvmmodel
+package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Provider
 import com.intellij.psi.PsiClass

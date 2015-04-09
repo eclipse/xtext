@@ -4,11 +4,12 @@ package org.eclipse.xtext.idea.common.types.refactoringTestLanguage.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.Model;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.RefactoringTestLanguagePackage;
-import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.ReferenceHolder;
+
+import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.*;
 
 /**
  * <!-- begin-user-doc -->

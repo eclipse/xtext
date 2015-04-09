@@ -18,7 +18,7 @@
 		<java.shortNamesCache implementation="org.eclipse.xtend.core.idea.lang.types.XtendJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtend.core.idea.lang.psi.XtendCodeBlockModificationListener"/>
 
@@ -63,7 +63,8 @@
 								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
-
+		
+		
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
     	
     	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />

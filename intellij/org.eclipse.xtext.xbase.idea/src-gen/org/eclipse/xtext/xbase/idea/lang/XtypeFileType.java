@@ -2,9 +2,8 @@ package org.eclipse.xtext.xbase.idea.lang;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NonNls;
-
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.jetbrains.annotations.NonNls;
 
 public final class XtypeFileType extends LanguageFileType {
 

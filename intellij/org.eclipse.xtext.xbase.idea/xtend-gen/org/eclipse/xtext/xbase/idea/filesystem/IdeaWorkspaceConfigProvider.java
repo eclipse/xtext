@@ -7,19 +7,19 @@
  */
 package org.eclipse.xtext.xbase.idea.filesystem;
 
-import org.eclipse.xtext.generator.IOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.idea.filesystem.IdeaModuleConfig;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {

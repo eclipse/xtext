@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types
+package org.eclipse.xtext.xbase.idea.types
 
 import com.google.inject.Inject
 import com.intellij.openapi.project.Project
@@ -18,8 +18,8 @@ import com.intellij.util.Processor
 import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.containers.HashSet
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
+import org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex
 
 class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	
