@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public abstract class AbstractProblemHover extends AbstractHover {
 
 	public List<Annotation> getAnnotations(final int lineNumber, final int offset) {
 		if (getAnnotationModel() == null) {
-			return null;
+			return Collections.emptyList();
 		}
 		final Iterator<?> iterator = getAnnotationModel().getAnnotationIterator();
 		List<Annotation> result = Lists.newArrayList();
