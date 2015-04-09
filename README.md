@@ -5,7 +5,7 @@ Xtext is a f ramework for development of programming languages and domain specif
 More information: [xtext.org](http://xtext.org) (source maintained in the [*xtext-website* subfolder](xtext-website/))
 
 ## Xtend
-
+ 
 In addition to Xtext, this repository also hosts the Xtend programming language. Xtend is a flexible and expressive dialect of Java that compiles into readable Java 5 compatible source code. You can use any existing Java library seamlessly. The compiled output is readable and pretty-printed, and tends to run as fast as the equivalent handwritten Java code. Become productive and write beautiful code with powerful macros, lambdas, operator overloading, and many more modern language features.
 
 More information: [xtend-lang.org](http://xtend-lang.org) (source maintained in the [*xtend-website* subfolder](xtend-website/))
