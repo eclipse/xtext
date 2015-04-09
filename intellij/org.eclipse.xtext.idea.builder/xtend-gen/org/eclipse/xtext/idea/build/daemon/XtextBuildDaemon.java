@@ -155,13 +155,6 @@ public class XtextBuildDaemon {
       final Serializable msg = this.channel.readObject();
       boolean _matched = false;
       if (!_matched) {
-        if (msg instanceof Protocol.StopServerMessage) {
-          _matched=true;
-          XtextBuildDaemon.LOG.info("Received StopServer");
-          return true;
-        }
-      }
-      if (!_matched) {
         if (msg instanceof Protocol.BuildRequestMessage) {
           _matched=true;
           XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");

@@ -45,7 +45,4 @@ class Protocol {
 		int line
 		int column
 	}
-	
-	static class StopServerMessage implements Serializable {
-	}
 }

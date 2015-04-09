@@ -26,7 +26,6 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
-import org.eclipse.xtext.idea.build.net.Protocol.StopServerMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
@@ -138,10 +137,6 @@ class XtextBuildDaemon {
 			channel = new ObjectChannel(socketChannel)
 			val msg = channel.readObject
 			switch (msg) {
-				StopServerMessage: {
-					LOG.info('Received StopServer')
-					return true
-				}
 				BuildRequestMessage: {
 					LOG.info('Received BuildRequest. Start build...')
 					val buildResult = build(msg)
