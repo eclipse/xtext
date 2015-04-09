@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -1144,6 +1145,9 @@ public class RuleEngineFormatter extends XbaseFormatter {
       return;
     } else if (expr instanceof XIfExpression) {
       _format((XIfExpression)expr, format);
+      return;
+    } else if (expr instanceof XInstanceOfExpression) {
+      _format((XInstanceOfExpression)expr, format);
       return;
     } else if (expr instanceof XReturnExpression) {
       _format((XReturnExpression)expr, format);

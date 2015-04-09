@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -193,6 +194,9 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       return;
     } else if (ann instanceof XIfExpression) {
       _format((XIfExpression)ann, document);
+      return;
+    } else if (ann instanceof XInstanceOfExpression) {
+      _format((XInstanceOfExpression)ann, document);
       return;
     } else if (ann instanceof XReturnExpression) {
       _format((XReturnExpression)ann, document);
