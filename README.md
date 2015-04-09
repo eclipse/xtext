@@ -1,11 +1,11 @@
-# Xtext
+# Xtext 
 
-Xtext is a framework for development of programming languages and domain specific languages. It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch Eclipse IDE integration. It comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
-
+Xtext is a f ramework for development of programming languages and domain specific languages. It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch Eclipse IDE integrati on. It comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
+ 
 More information: [xtext.org](http://xtext.org) (source maintained in the [*xtext-website* subfolder](xtext-website/))
 
 ## Xtend
-
+ 
 In addition to Xtext, this repository also hosts the Xtend programming language. Xtend is a flexible and expressive dialect of Java that compiles into readable Java 5 compatible source code. You can use any existing Java library seamlessly. The compiled output is readable and pretty-printed, and tends to run as fast as the equivalent handwritten Java code. Become productive and write beautiful code with powerful macros, lambdas, operator overloading, and many more modern language features.
 
 More information: [xtend-lang.org](http://xtend-lang.org) (source maintained in the [*xtend-website* subfolder](xtend-website/))
