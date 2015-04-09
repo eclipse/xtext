@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.homeautomation.formatting2;
 
-import com.google.inject.Inject
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Declaration
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Model
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State
-import org.eclipse.xtext.example.homeautomation.services.RuleEngineGrammarAccess
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
@@ -37,8 +35,6 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
  * </pre>
  */
 class RuleEngineFormatter extends XbaseFormatter {
-
-	@Inject extension RuleEngineGrammarAccess
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		model.prepend[setNewLines(0, 0, 1); noSpace]
