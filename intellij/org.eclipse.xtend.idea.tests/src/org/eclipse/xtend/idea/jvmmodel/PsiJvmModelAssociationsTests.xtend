@@ -9,8 +9,8 @@ package org.eclipse.xtend.idea.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.xtend.idea.LightXtendTest
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.serializer.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.serializer.SequencerTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

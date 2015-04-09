@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtend.core.XtendStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

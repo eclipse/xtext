@@ -30,6 +30,7 @@ import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.idea.jvm.JvmFileType
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*

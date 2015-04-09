@@ -25,7 +25,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClass;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 

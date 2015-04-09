@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.idea.types.psi;
+package org.eclipse.xtext.xbase.idea.types.psi;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -18,10 +18,11 @@ import com.intellij.psi.search.GlobalSearchScope;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -54,9 +55,9 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   
   @Override
   public PsiClass[] findClasses(final String qualifiedName, final GlobalSearchScope scope) {
-    ArrayList<PsiClass> _xblockexpression = null;
+    ArrayList<JvmPsiClass> _xblockexpression = null;
     {
-      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
+      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
       Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(qualifiedName, this.project, scope);
       for (final BaseXtextFile xtextFile : _get) {
         Language _language = xtextFile.getLanguage();
@@ -64,8 +65,8 @@ public class JvmTypesElementFinder extends PsiElementFinder {
         if (_equals) {
           String[] _split = qualifiedName.split("\\.");
           QualifiedName _create = QualifiedName.create(_split);
-          ArrayList<PsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
-          Iterables.<PsiClass>addAll(result, _psiClassesByQualifiedName);
+          ArrayList<JvmPsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
+          Iterables.<JvmPsiClass>addAll(result, _psiClassesByQualifiedName);
         }
       }
       _xblockexpression = result;

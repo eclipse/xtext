@@ -1,15 +1,19 @@
 package org.eclipse.xtext.idea.common.types.idea.parser.antlr.internal;
 
-import org.antlr.runtime.BitSet;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.RecognizerSharedState;
-import org.antlr.runtime.Token;
-import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider;
-import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
 
 import com.intellij.lang.PsiBuilder;
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrParser {

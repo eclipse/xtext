@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.idea.sdomain;
 
-import org.eclipse.xtext.idea.sdomain.SDomainStandaloneSetupGenerated;
 
 /**
  * Initialization support for running Xtext languages 

@@ -17,7 +17,7 @@ import com.intellij.psi.PsiElement
 import java.util.Collection
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API

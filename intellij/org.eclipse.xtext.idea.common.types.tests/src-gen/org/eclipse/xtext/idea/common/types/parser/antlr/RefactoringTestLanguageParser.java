@@ -3,10 +3,10 @@
  */
 package org.eclipse.xtext.idea.common.types.parser.antlr;
 
-import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
 import com.google.inject.Inject;
+
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
 
 public class RefactoringTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	

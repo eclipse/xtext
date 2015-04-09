@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.idea.lang.types.psi;
 
 import com.intellij.openapi.project.Project;
-import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 
 public class XtendJvmTypesElementFinder extends JvmTypesElementFinder {
