@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.xtext.common.types.maven</name>
+	<name>org.eclipse.xtext.tycho.parent</name>
 	<comment></comment>
 	<projects>
 	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
 </projectDescription>

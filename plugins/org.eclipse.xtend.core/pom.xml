@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
@@ -9,23 +8,26 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-	
-	<groupId>org.eclipse.xtend</groupId>
-	<artifactId>org.eclipse.xtend.lib</artifactId>
 
-	<name>Eclipse Xtend Runtime Library</name>
-	<description>The runtime library for the Xtend programming language.</description>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.core</artifactId>
+	<name>Xtend Core Library</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-			<version>${project.version}</version>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend.lib.macro</artifactId>
-			<version>${project.version}</version>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>common</artifactId>
+			<version>${equinox-common-version}</version>
 		</dependency>
 	</dependencies>
 </project>

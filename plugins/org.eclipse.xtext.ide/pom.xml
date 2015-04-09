@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
@@ -7,19 +7,16 @@
 		<version>2.9.0-SNAPSHOT</version>
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
-
-	<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 	<packaging>eclipse-plugin</packaging>
+
+	<name>Xtext IDE Library</name>
+	<artifactId>org.eclipse.xtext.ide</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>[${project.version}]</version>
 		</dependency>
 	</dependencies>
-
-	<name>Eclipse Xbase Runtime Library</name>
-	<description>The runtime library for the Xbase programming language.
-	</description>
 </project>
