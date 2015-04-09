@@ -34,6 +34,13 @@ public class ScopeStack {
 	
 	/* @Nullable */
 	public Object get(String name) {
+		Variable var = internalGet(name);
+		if (var != null) {
+			return var.getReferenced();
+		}
+		return null;
+	}
+	private Variable internalGet(String name) {
 		if (name == null)
 			throw new NullPointerException("name");
 		if (scopes.isEmpty())
@@ -44,8 +51,9 @@ public class ScopeStack {
 		while (i >= 0) {
 			Scope currentScope = scopes.get(i--);
 			Variable var = currentScope.get(name);
-			if (var != null)
-				return var.referenced;
+			if (var != null) {
+				return var;
+			}
 		}
 		return null;
 	}
@@ -83,7 +91,7 @@ public class ScopeStack {
 		while(iterator.hasNext()) {
 			Variable v = iterator.next();
 			if (v.referenced.equals(referenced)) {
-				iterator.remove();
+				v.markRemoved();
 				return v.name;
 			}
 		}
@@ -108,7 +116,7 @@ public class ScopeStack {
 		if (scopes.isEmpty())
 			throw new IllegalArgumentException("No scope has been opened yet.");
 		Scope currentScope = scopes.peek();
-		if (get(proposedName) == null) {
+		if (internalGet(proposedName) == null) {
 			currentScope.addVariable(proposedName, synthetic, key);
 			return proposedName;
 		}
@@ -181,6 +189,8 @@ public class ScopeStack {
 	}
 	
 	final static class Variable {
+		private static final Object REMOVED = new Object();
+		
 		Variable(String name2, boolean synthetic2, Object referenced) {
 			this.name = name2;
 			this.synthetic = synthetic2;
@@ -192,7 +202,19 @@ public class ScopeStack {
 		
 		@Override
 		public String toString() {
+			if (referenced == REMOVED) {
+				return "[removed]";
+			}
 			return referenced.getClass().getSimpleName();
+		}
+		private Object getReferenced() {
+			if (referenced == REMOVED) {
+				return null;
+			}
+			return referenced;
+		}
+		private void markRemoved() {
+			this.referenced = REMOVED;
 		}
 	}
 }
