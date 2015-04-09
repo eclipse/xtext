@@ -38,6 +38,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.PsiElementProvider;
+import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.idea.jvm.JvmFileType;
@@ -47,9 +49,11 @@ import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClassStubGenerator;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -91,12 +95,12 @@ public class JvmPsiClassProvider implements PsiElementProvider {
     final Procedure1<JvmPsiClass> _function = new Procedure1<JvmPsiClass>() {
       @Override
       public void apply(final JvmPsiClass it) {
-        PsiClass _generateStub = JvmPsiClassProvider.this.generateStub();
-        it.setStub(_generateStub);
+        PsiClass _createStub = JvmPsiClassProvider.this.createStub();
+        it.setStub(_createStub);
         final Provider<PsiClass> _function = new Provider<PsiClass>() {
           @Override
           public PsiClass get() {
-            return JvmPsiClassProvider.this.generatePsiClass();
+            return JvmPsiClassProvider.this.createPsiClass();
           }
         };
         it.setPsiClassProvider(_function);
@@ -105,36 +109,83 @@ public class JvmPsiClassProvider implements PsiElementProvider {
     return ObjectExtensions.<JvmPsiClass>operator_doubleArrow(_get, _function);
   }
   
-  protected PsiClass generatePsiClass() {
-    PsiClass _xblockexpression = null;
-    {
-      final ArrayList<PsiClass> classResult = CollectionLiterals.<PsiClass>newArrayList();
-      Resource _eResource = this.jvmDeclaredType.eResource();
-      this.elementIssueProviderFactory.attachData(_eResource);
-      try {
-        IFileSystemAccess _fileSystemAccess = this.getFileSystemAccess(classResult);
-        this.jvmModelGenerator.internalDoGenerate(this.jvmDeclaredType, _fileSystemAccess);
-      } finally {
-        Resource _eResource_1 = this.jvmDeclaredType.eResource();
-        this.elementIssueProviderFactory.detachData(_eResource_1);
+  protected PsiClass createPsiClass() {
+    final Procedure1<IFileSystemAccess> _function = new Procedure1<IFileSystemAccess>() {
+      @Override
+      public void apply(final IFileSystemAccess fileSystemAccess) {
+        JvmPsiClassProvider.this.generatePsiClass(fileSystemAccess);
       }
-      _xblockexpression = IterableExtensions.<PsiClass>head(classResult);
-    }
-    return _xblockexpression;
+    };
+    return this.createPsiClass(_function);
   }
   
-  protected PsiClass generateStub() {
+  protected void generatePsiClass(final IFileSystemAccess fileSystemAccess) {
+    try {
+      Resource _eResource = this.jvmDeclaredType.eResource();
+      final Resource synchronizable = _eResource;
+      boolean _matched = false;
+      if (!_matched) {
+        if (synchronizable instanceof ISynchronizable) {
+          _matched=true;
+          final IUnitOfWork<Object, Resource> _function = new IUnitOfWork<Object, Resource>() {
+            @Override
+            public Object exec(final Resource it) throws Exception {
+              Object _xblockexpression = null;
+              {
+                JvmPsiClassProvider.this.doGeneratePsiClass(fileSystemAccess);
+                _xblockexpression = null;
+              }
+              return _xblockexpression;
+            }
+          };
+          ((ISynchronizable<Resource>)synchronizable).<Object>execute(_function);
+        }
+      }
+      if (!_matched) {
+        this.doGeneratePsiClass(fileSystemAccess);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void doGeneratePsiClass(final IFileSystemAccess fileSystemAccess) {
+    Resource _eResource = this.jvmDeclaredType.eResource();
+    this.elementIssueProviderFactory.attachData(_eResource);
+    try {
+      this.jvmModelGenerator.internalDoGenerate(this.jvmDeclaredType, fileSystemAccess);
+    } finally {
+      Resource _eResource_1 = this.jvmDeclaredType.eResource();
+      this.elementIssueProviderFactory.detachData(_eResource_1);
+    }
+  }
+  
+  protected PsiClass createStub() {
+    final Procedure1<IFileSystemAccess> _function = new Procedure1<IFileSystemAccess>() {
+      @Override
+      public void apply(final IFileSystemAccess fileSystemAccess) {
+        JvmPsiClassProvider.this._jvmPsiClassStubGenerator.generateStub(JvmPsiClassProvider.this.jvmDeclaredType, fileSystemAccess);
+      }
+    };
+    return this.createPsiClass(_function);
+  }
+  
+  protected PsiClass createPsiClass(final Procedure1<? super IFileSystemAccess> generator) {
     PsiClass _xblockexpression = null;
     {
-      final ArrayList<PsiClass> classStubResult = CollectionLiterals.<PsiClass>newArrayList();
-      IFileSystemAccess _fileSystemAccess = this.getFileSystemAccess(classStubResult);
-      this._jvmPsiClassStubGenerator.generateStub(this.jvmDeclaredType, _fileSystemAccess);
-      _xblockexpression = IterableExtensions.<PsiClass>head(classStubResult);
+      final ArrayList<Pair<String, CharSequence>> result = CollectionLiterals.<Pair<String, CharSequence>>newArrayList();
+      IFileSystemAccess _fileSystemAccess = this.getFileSystemAccess(result);
+      generator.apply(_fileSystemAccess);
+      Pair<String, CharSequence> _head = IterableExtensions.<Pair<String, CharSequence>>head(result);
+      final String fileName = _head.getKey();
+      Pair<String, CharSequence> _head_1 = IterableExtensions.<Pair<String, CharSequence>>head(result);
+      final CharSequence contents = _head_1.getValue();
+      _xblockexpression = this.createPsiClass(fileName, contents);
     }
     return _xblockexpression;
   }
   
-  protected IFileSystemAccess getFileSystemAccess(final List<PsiClass> result) {
+  protected IFileSystemAccess getFileSystemAccess(final List<Pair<String, CharSequence>> result) {
     return new IFileSystemAccess() {
       @Override
       public void deleteFile(final String fileName) {
@@ -142,25 +193,47 @@ public class JvmPsiClassProvider implements PsiElementProvider {
       
       @Override
       public void generateFile(final String fileName, final CharSequence contents) {
-        PsiElement _psiElement = JvmPsiClassProvider.this._iPsiModelAssociations.getPsiElement(JvmPsiClassProvider.this.sourceElement);
-        Project _project = _psiElement.getProject();
-        final PsiFileFactory psiFileFactory = IdeaProjectExtensions.getPsiFileFactory(_project);
-        PsiFile _createFileFromText = psiFileFactory.createFileFromText(fileName, 
-          JvmFileType.INSTANCE, contents);
-        final PsiJavaFile psiFile = ((PsiJavaFile) _createFileFromText);
-        PsiClass[] _classes = psiFile.getClasses();
-        final PsiClass psiClass = IterableExtensions.<PsiClass>head(((Iterable<PsiClass>)Conversions.doWrapArray(_classes)));
-        boolean _notEquals = (!Objects.equal(psiClass, null));
-        if (_notEquals) {
-          JvmPsiClassProvider.this.bindTo(psiClass, JvmPsiClassProvider.this.jvmDeclaredType);
-          result.add(psiClass);
-        }
+        Pair<String, CharSequence> _mappedTo = Pair.<String, CharSequence>of(fileName, contents);
+        result.add(_mappedTo);
       }
       
       @Override
       public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
       }
     };
+  }
+  
+  protected PsiClass createPsiClass(final String fileName, final CharSequence contents) {
+    PsiClass _xblockexpression = null;
+    {
+      PsiElement _psiElement = this._iPsiModelAssociations.getPsiElement(this.sourceElement);
+      Project _project = _psiElement.getProject();
+      final PsiFileFactory psiFileFactory = IdeaProjectExtensions.getPsiFileFactory(_project);
+      final PsiFile psiFile = psiFileFactory.createFileFromText(fileName, 
+        JvmFileType.INSTANCE, contents);
+      PsiClass _xifexpression = null;
+      if ((psiFile instanceof PsiJavaFile)) {
+        PsiClass _xblockexpression_1 = null;
+        {
+          PsiClass[] _classes = ((PsiJavaFile)psiFile).getClasses();
+          final PsiClass psiClass = IterableExtensions.<PsiClass>head(((Iterable<PsiClass>)Conversions.doWrapArray(_classes)));
+          PsiClass _xifexpression_1 = null;
+          boolean _notEquals = (!Objects.equal(psiClass, null));
+          if (_notEquals) {
+            PsiClass _xblockexpression_2 = null;
+            {
+              this.bindTo(psiClass, this.jvmDeclaredType);
+              _xblockexpression_2 = psiClass;
+            }
+            _xifexpression_1 = _xblockexpression_2;
+          }
+          _xblockexpression_1 = _xifexpression_1;
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   protected void _bindTo(final PsiElement psiElement, final Void void_) {

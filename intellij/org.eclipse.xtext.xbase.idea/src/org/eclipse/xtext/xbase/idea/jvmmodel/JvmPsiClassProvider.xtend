@@ -17,6 +17,7 @@ import com.intellij.psi.PsiMethod
 import java.util.Iterator
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.PsiElementProvider
+import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.idea.jvm.JvmFileType
@@ -66,49 +68,79 @@ class JvmPsiClassProvider implements PsiElementProvider {
 
 	override get() {
 		jvmPsiClassProvider.get => [
-			stub = generateStub
-			psiClassProvider = [generatePsiClass]
+			stub = createStub
+			psiClassProvider = [createPsiClass]
 		]
 	}
 
-	protected def generatePsiClass() {
-		val classResult = <PsiClass>newArrayList
+	protected def createPsiClass() {
+		createPsiClass [ fileSystemAccess |
+			generatePsiClass(fileSystemAccess)
+		]
+	}
+
+	protected def void generatePsiClass(IFileSystemAccess fileSystemAccess) {
+		switch synchronizable : jvmDeclaredType.eResource {
+			ISynchronizable<Resource>:
+				synchronizable.execute [
+					doGeneratePsiClass(fileSystemAccess)
+					null
+				]
+			default:
+				doGeneratePsiClass(fileSystemAccess)
+		}
+	}
+
+	protected def void doGeneratePsiClass(IFileSystemAccess fileSystemAccess) {
 		elementIssueProviderFactory.attachData(jvmDeclaredType.eResource)
 		try {
-			jvmModelGenerator.internalDoGenerate(jvmDeclaredType, classResult.fileSystemAccess)
+			jvmModelGenerator.internalDoGenerate(jvmDeclaredType, fileSystemAccess)
 		} finally {
 			elementIssueProviderFactory.detachData(jvmDeclaredType.eResource)
 		}
-		classResult.head
 	}
 
-	protected def generateStub() {
-		val classStubResult = <PsiClass>newArrayList
-		jvmDeclaredType.generateStub(classStubResult.fileSystemAccess)
-		classStubResult.head
+	protected def createStub() {
+		createPsiClass	[ fileSystemAccess |
+			jvmDeclaredType.generateStub(fileSystemAccess)
+		]
 	}
 
-	protected def getFileSystemAccess(List<PsiClass> result) {
+	protected def createPsiClass((IFileSystemAccess)=>void generator) {
+		val result = <Pair<String, CharSequence>>newArrayList
+		generator.apply(result.fileSystemAccess)
+		val fileName = result.head.key
+		val contents = result.head.value
+		createPsiClass(fileName, contents)
+	}
+
+	protected def getFileSystemAccess(List<Pair<String, CharSequence>> result) {
 		new IFileSystemAccess() {
 
 			override deleteFile(String fileName) {}
 
 			override generateFile(String fileName, CharSequence contents) {
-				val psiFileFactory = sourceElement.psiElement.project.psiFileFactory
-				val psiFile = psiFileFactory.createFileFromText(
-					fileName,
-					JvmFileType.INSTANCE,
-					contents
-				) as PsiJavaFile
-				val psiClass = psiFile.classes.head
-				if (psiClass != null) {
-					psiClass.bindTo(jvmDeclaredType)
-					result += psiClass
-				}
+				result += fileName -> contents
 			}
 
 			override generateFile(String fileName, String outputConfigurationName, CharSequence contents) {}
 
+		}
+	}
+
+	protected def createPsiClass(String fileName, CharSequence contents) {
+		val psiFileFactory = sourceElement.psiElement.project.psiFileFactory
+		val psiFile = psiFileFactory.createFileFromText(
+			fileName,
+			JvmFileType.INSTANCE,
+			contents
+		)
+		if (psiFile instanceof PsiJavaFile) {
+			val psiClass = psiFile.classes.head
+			if (psiClass != null) {
+				psiClass.bindTo(jvmDeclaredType)
+				psiClass
+			}
 		}
 	}
 
