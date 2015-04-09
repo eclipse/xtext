@@ -29,18 +29,12 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
-import org.eclipse.xtend.core.xtend.XtendAnnotationType
-import com.google.common.base.Throwables
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.emf.common.notify.Notification
-import org.apache.log4j.Logger
-import org.eclipse.xtext.service.OperationCanceledError
-import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Sven Efftinge
