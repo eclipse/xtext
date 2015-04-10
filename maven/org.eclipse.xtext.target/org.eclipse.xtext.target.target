@@ -18,5 +18,16 @@
 
 <repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
 </location>
+
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.7.1/"/>
+</location>
+
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+</location>
+
 </locations>
 </target>
