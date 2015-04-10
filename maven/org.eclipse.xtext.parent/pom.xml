@@ -23,11 +23,11 @@
 		<module>../org.eclipse.xtend.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.archetype</module>
 		<module>../org.eclipse.xtend.maven.android.archetype</module>
-
+		
+		<!-- Deprecated -->
+		<module>../org.eclipse.xtext.xtext</module>
+		
 		<!-- <module>../org.eclipse.xtend.lib.gwt.test</module> -->
-		<module>../org.eclipse.xtext.dependencies</module>
-
-
 	</modules>
 
 	<properties>
