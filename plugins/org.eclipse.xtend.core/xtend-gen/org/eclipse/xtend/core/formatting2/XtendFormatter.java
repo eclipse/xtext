@@ -31,7 +31,6 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -779,7 +778,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-        final AbstractElement grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
+        final EObject grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;

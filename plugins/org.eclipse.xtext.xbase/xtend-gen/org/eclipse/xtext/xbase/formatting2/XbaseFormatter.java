@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -412,7 +411,7 @@ public class XbaseFormatter extends XtypeFormatter {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-        final AbstractElement grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
+        final EObject grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;
@@ -694,11 +693,11 @@ public class XbaseFormatter extends XtypeFormatter {
     if (!_notEquals) {
       _and = false;
     } else {
-      AbstractElement _grammarElement = node.getGrammarElement();
+      EObject _grammarElement = node.getGrammarElement();
       _and = (_grammarElement instanceof RuleCall);
     }
     if (_and) {
-      AbstractElement _grammarElement_1 = node.getGrammarElement();
+      EObject _grammarElement_1 = node.getGrammarElement();
       return ((RuleCall) _grammarElement_1).getRule();
     }
     return null;
