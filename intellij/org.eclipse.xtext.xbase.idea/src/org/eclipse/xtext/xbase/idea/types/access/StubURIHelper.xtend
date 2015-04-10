@@ -90,12 +90,16 @@ class StubURIHelper implements URIHelperConstants {
 				builder.appendTypeResourceURI(type.componentType)
 			PsiPrimitiveType:
 				builder.append(PRIMITIVES)
-			PsiClassType:
-				switch resolvedType : type.resolve {
-					PsiTypeParameter: builder.appendTypeParameterResourceURI(resolvedType)
-					PsiClass: builder.appendClassResourceURI(resolvedType)
-					default: throw new IllegalStateException("Unknown type: " + type?.canonicalText)
+			PsiClassType: {
+				val resolveResult = type.resolveGenerics
+				if (!resolveResult.validResult) {
+					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
+				switch resolvedType : resolveResult.element {
+					PsiTypeParameter: builder.appendTypeParameterResourceURI(resolvedType)
+					default: builder.appendClassResourceURI(resolvedType)
+				}
+			}
 			default:
 				throw new IllegalStateException("Unknown type: " + type?.canonicalText)
 		}
@@ -126,10 +130,9 @@ class StubURIHelper implements URIHelperConstants {
 				if (!resolveResult.validResult) {
 					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
-				switch resolvedType : type.resolve {
+				switch resolvedType : resolveResult.element {
 					PsiTypeParameter: builder.appendTypeParameterFragment(resolvedType)
-					PsiClass: builder.appendClassFragment(resolvedType)
-					default: throw new IllegalStateException("Unknown type: " + type?.canonicalText)
+					default: builder.appendClassFragment(resolvedType)
 				}
 			}
 			PsiArrayType:
@@ -174,17 +177,15 @@ class StubURIHelper implements URIHelperConstants {
 			PsiPrimitiveType:
 				builder.append(type.getCanonicalText(false))
 			PsiClassType: {
-				val resovleResult = type.resolveGenerics
-				if (!resovleResult.validResult) {
-					throw new UnresolvedPsiClassType(type, resovleResult)
+				val resolveResult = type.resolveGenerics
+				if (!resolveResult.validResult) {
+					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
-				switch resolvedType : resovleResult.element {
+				switch resolvedType : resolveResult.element {
 					PsiTypeParameter:
 						builder.append(resolvedType.name)
-					PsiClass:
-						builder.appendClassFragment(resolvedType)
 					default:
-						throw new IllegalStateException("Unknown type: " + type?.canonicalText)
+						builder.appendClassFragment(resolvedType)
 				}
 			}
 			PsiArrayType:
