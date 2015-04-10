@@ -21,16 +21,16 @@ import com.google.common.collect.Maps;
  */
 public class StringBasedRegionAccess extends AbstractRegionAccess {
 
-	private final Map<EObject, AbstractEObjectTokens> eObjectToTokens = Maps.newLinkedHashMap();
+	private final Map<EObject, AbstractEObjectRegion> eObjectToTokens = Maps.newLinkedHashMap();
 	private final XtextResource resource;
-	private AbstractEObjectTokens root;
+	private AbstractEObjectRegion root;
 	private final StringBuilder string = new StringBuilder();
 
 	protected StringBasedRegionAccess(XtextResource resource) {
 		this.resource = resource;
 	}
 
-	protected void add(AbstractEObjectTokens tokens) {
+	protected void add(AbstractEObjectRegion tokens) {
 		eObjectToTokens.put(tokens.getSemanticElement(), tokens);
 	}
 
@@ -71,7 +71,7 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	protected AbstractEObjectTokens getTokens(EObject obj) {
+	public AbstractEObjectRegion regionForEObject(EObject obj) {
 		return eObjectToTokens.get(obj);
 	}
 
@@ -90,7 +90,7 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 		return null;
 	}
 
-	public void setRootEObject(AbstractEObjectTokens root) {
+	public void setRootEObject(AbstractEObjectRegion root) {
 		this.root = root;
 	}
 

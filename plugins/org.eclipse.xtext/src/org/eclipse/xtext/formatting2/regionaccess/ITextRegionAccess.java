@@ -158,7 +158,7 @@ public interface ITextRegionAccess {
 	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
 	 *         semantic region.
 	 */
-	ITextSegment regionForEObject(EObject object); // TODO: should be semantic region?
+	IEObjectRegion regionForEObject(EObject object); // TODO: should be semantic region?
 
 	/**
 	 * @return returns the first {@link ISemanticRegion} that represents the value of {@code owner.eGet(feature)}. May

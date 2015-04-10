@@ -13,10 +13,10 @@ import org.eclipse.xtext.AbstractElement;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class StringEObjectTokens extends AbstractEObjectTokens {
+public class StringEObjectRegion extends AbstractEObjectRegion {
 	private final AbstractElement grammarElement;
 
-	public StringEObjectTokens(StringBasedRegionAccess access, AbstractElement grammarElement,
+	public StringEObjectRegion(StringBasedRegionAccess access, AbstractElement grammarElement,
 			EObject semanticElement) {
 		super(access);
 		this.grammarElement = grammarElement;

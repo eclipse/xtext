@@ -31,6 +31,7 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.ISubFormatter;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
@@ -597,7 +598,7 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XMemberFeatureCall expr, @Extension final IFormattableDocument format) {
     EObject top = expr;
-    ITextSegment _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
     SeparatorRegions<XMemberFeatureCall, ISemanticRegion> calls = new SeparatorRegions<XMemberFeatureCall, ISemanticRegion>(_regionForEObject);
     while ((top instanceof XMemberFeatureCall)) {
       {
@@ -705,7 +706,7 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XBinaryOperation expr, @Extension final IFormattableDocument format) {
     final AbstractRule precendece = this.binaryOperationPrecedence(expr);
-    ITextSegment _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
     final SeparatorRegions<XBinaryOperation, ISemanticRegion> calls = new SeparatorRegions<XBinaryOperation, ISemanticRegion>(_regionForEObject);
     EObject top = expr;
     while (Objects.equal(this.binaryOperationPrecedence(top), precendece)) {
