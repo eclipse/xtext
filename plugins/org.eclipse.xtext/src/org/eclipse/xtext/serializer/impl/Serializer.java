@@ -22,8 +22,6 @@ import org.eclipse.xtext.formatting.IFormatterExtension;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -143,7 +141,7 @@ public class Serializer implements ISerializer {
 		request.setTextRegionAccess(regionAccess);
 		IFormatter2 formatter2 = formatter2Provider.get();
 		List<ITextReplacement> replacements = formatter2.format(request);
-		TextReplacements.apply(((ITextSegment) regionAccess).getText(), replacements, appendable);
+		regionAccess.getRewriter().renderToAppendable(replacements, appendable);
 	}
 
 	protected EObject getContext(EObject semanticObject) {

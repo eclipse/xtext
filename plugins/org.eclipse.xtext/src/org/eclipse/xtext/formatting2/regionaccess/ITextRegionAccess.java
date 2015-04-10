@@ -185,4 +185,6 @@ public interface ITextRegionAccess {
 	 * @see #leadingHiddenRegion(EObject)
 	 */
 	IHiddenRegion trailingHiddenRegion(EObject owner);
+
+	ITextRegionRewriter getRewriter();
 }

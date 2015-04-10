@@ -293,4 +293,9 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		return tokens.getTrailingGap();
 	}
 
+	@Override
+	public TextRegionRewriter getRewriter() {
+		return new TextRegionRewriter(this);
+	}
+
 }

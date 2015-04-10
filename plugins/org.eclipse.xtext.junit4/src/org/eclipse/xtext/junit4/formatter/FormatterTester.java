@@ -18,7 +18,6 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -83,10 +82,11 @@ public class FormatterTester {
 		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
-		List<ITextReplacement> format = createFormatter(req).format(request);
-		assertReplacementsAreInRegion(format, request.getRegions(), document);
-		assertAllHiddenRegionsAre(request.getTextRegionAccess(), format);
-		String applied = TextReplacements.apply(document, format);
+		List<ITextReplacement> replacements = createFormatter(req).format(request);
+		assertReplacementsAreInRegion(replacements, request.getRegions(), document);
+		assertAllHiddenRegionsAre(request.getTextRegionAccess(), replacements);
+		String applied = request.getTextRegionAccess().getRewriter().renderToString(replacements);
+
 		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), applied);
 
 		// TODO: assert formatting a second time only produces identity replacements
