@@ -163,60 +163,63 @@ public class StubURIHelper implements URIHelperConstants {
   }
   
   protected StringBuilder appendTypeResourceURI(final StringBuilder builder, final PsiType type) {
-    StringBuilder _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiArrayType) {
-        _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        _switchResult = this.appendTypeResourceURI(builder, _componentType);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        _switchResult = builder.append(URIHelperConstants.PRIMITIVES);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiClassType) {
-        _matched=true;
-        StringBuilder _switchResult_1 = null;
-        PsiClass _resolve = ((PsiClassType)type).resolve();
-        final PsiClass resolvedType = _resolve;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiTypeParameter) {
-            _matched_1=true;
-            _switchResult_1 = this.appendTypeParameterResourceURI(builder, ((PsiTypeParameter)resolvedType));
-          }
+    try {
+      StringBuilder _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (type instanceof PsiArrayType) {
+          _matched=true;
+          PsiType _componentType = ((PsiArrayType)type).getComponentType();
+          _switchResult = this.appendTypeResourceURI(builder, _componentType);
         }
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiClass) {
-            _matched_1=true;
-            _switchResult_1 = this.appendClassResourceURI(builder, resolvedType);
-          }
-        }
-        if (!_matched_1) {
-          String _canonicalText = null;
-          if (((PsiClassType)type)!=null) {
-            _canonicalText=((PsiClassType)type).getCanonicalText();
-          }
-          String _plus = ("Unknown type: " + _canonicalText);
-          throw new IllegalStateException(_plus);
-        }
-        _switchResult = _switchResult_1;
       }
-    }
-    if (!_matched) {
-      String _canonicalText = null;
-      if (type!=null) {
-        _canonicalText=type.getCanonicalText();
+      if (!_matched) {
+        if (type instanceof PsiPrimitiveType) {
+          _matched=true;
+          _switchResult = builder.append(URIHelperConstants.PRIMITIVES);
+        }
       }
-      String _plus = ("Unknown type: " + _canonicalText);
-      throw new IllegalStateException(_plus);
+      if (!_matched) {
+        if (type instanceof PsiClassType) {
+          _matched=true;
+          StringBuilder _xblockexpression = null;
+          {
+            final PsiClassType.ClassResolveResult resolveResult = ((PsiClassType)type).resolveGenerics();
+            boolean _isValidResult = resolveResult.isValidResult();
+            boolean _not = (!_isValidResult);
+            if (_not) {
+              throw new UnresolvedPsiClassType(((PsiClassType)type), resolveResult);
+            }
+            StringBuilder _switchResult_1 = null;
+            PsiClass _element = resolveResult.getElement();
+            final PsiClass resolvedType = _element;
+            boolean _matched_1 = false;
+            if (!_matched_1) {
+              if (resolvedType instanceof PsiTypeParameter) {
+                _matched_1=true;
+                _switchResult_1 = this.appendTypeParameterResourceURI(builder, ((PsiTypeParameter)resolvedType));
+              }
+            }
+            if (!_matched_1) {
+              _switchResult_1 = this.appendClassResourceURI(builder, resolvedType);
+            }
+            _xblockexpression = _switchResult_1;
+          }
+          _switchResult = _xblockexpression;
+        }
+      }
+      if (!_matched) {
+        String _canonicalText = null;
+        if (type!=null) {
+          _canonicalText=type.getCanonicalText();
+        }
+        String _plus = ("Unknown type: " + _canonicalText);
+        throw new IllegalStateException(_plus);
+      }
+      return _switchResult;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _switchResult;
   }
   
   protected StringBuilder appendTypeParameterResourceURI(final StringBuilder builder, final PsiTypeParameter typeParameter) {
@@ -281,8 +284,8 @@ public class StubURIHelper implements URIHelperConstants {
               throw new UnresolvedPsiClassType(((PsiClassType)type), resolveResult);
             }
             StringBuilder _switchResult_1 = null;
-            PsiClass _resolve = ((PsiClassType)type).resolve();
-            final PsiClass resolvedType = _resolve;
+            PsiClass _element = resolveResult.getElement();
+            final PsiClass resolvedType = _element;
             boolean _matched_1 = false;
             if (!_matched_1) {
               if (resolvedType instanceof PsiTypeParameter) {
@@ -291,18 +294,7 @@ public class StubURIHelper implements URIHelperConstants {
               }
             }
             if (!_matched_1) {
-              if (resolvedType instanceof PsiClass) {
-                _matched_1=true;
-                _switchResult_1 = this.appendClassFragment(builder, resolvedType);
-              }
-            }
-            if (!_matched_1) {
-              String _canonicalText = null;
-              if (((PsiClassType)type)!=null) {
-                _canonicalText=((PsiClassType)type).getCanonicalText();
-              }
-              String _plus = ("Unknown type: " + _canonicalText);
-              throw new IllegalStateException(_plus);
+              _switchResult_1 = this.appendClassFragment(builder, resolvedType);
             }
             _xblockexpression = _switchResult_1;
           }
@@ -424,14 +416,14 @@ public class StubURIHelper implements URIHelperConstants {
           _matched=true;
           StringBuilder _xblockexpression = null;
           {
-            final PsiClassType.ClassResolveResult resovleResult = ((PsiClassType)type).resolveGenerics();
-            boolean _isValidResult = resovleResult.isValidResult();
+            final PsiClassType.ClassResolveResult resolveResult = ((PsiClassType)type).resolveGenerics();
+            boolean _isValidResult = resolveResult.isValidResult();
             boolean _not = (!_isValidResult);
             if (_not) {
-              throw new UnresolvedPsiClassType(((PsiClassType)type), resovleResult);
+              throw new UnresolvedPsiClassType(((PsiClassType)type), resolveResult);
             }
             StringBuilder _switchResult_1 = null;
-            PsiClass _element = resovleResult.getElement();
+            PsiClass _element = resolveResult.getElement();
             final PsiClass resolvedType = _element;
             boolean _matched_1 = false;
             if (!_matched_1) {
@@ -442,18 +434,7 @@ public class StubURIHelper implements URIHelperConstants {
               }
             }
             if (!_matched_1) {
-              if (resolvedType instanceof PsiClass) {
-                _matched_1=true;
-                _switchResult_1 = this.appendClassFragment(builder, resolvedType);
-              }
-            }
-            if (!_matched_1) {
-              String _canonicalText = null;
-              if (((PsiClassType)type)!=null) {
-                _canonicalText=((PsiClassType)type).getCanonicalText();
-              }
-              String _plus = ("Unknown type: " + _canonicalText);
-              throw new IllegalStateException(_plus);
+              _switchResult_1 = this.appendClassFragment(builder, resolvedType);
             }
             _xblockexpression = _switchResult_1;
           }
