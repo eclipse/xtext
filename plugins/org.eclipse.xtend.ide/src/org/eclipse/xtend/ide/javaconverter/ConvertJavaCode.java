@@ -47,9 +47,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -193,12 +192,13 @@ public class ConvertJavaCode {
 	private String formatXtendCode(IFile xtendFile, final String xtendCode) {
 		try {
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
+			ITextRegionAccess regionAccess = regionAccessBuilder.get().forNodeModel(resource).create();
 			FormatterRequest request = new FormatterRequest();
 			request.setAllowIdentityEdits(false);
-			request.setTextRegionAccess(regionAccessBuilder.get().forNodeModel(resource).create());
+			request.setTextRegionAccess(regionAccess);
 			request.setPreferences(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
 			List<ITextReplacement> replacements = formatter.format(request);
-			String formatted = TextReplacements.apply(xtendCode, replacements);
+			String formatted = regionAccess.getRewriter().renderToString(replacements);
 			return formatted;
 		} catch (Exception e) {
 			LOG.error("Formatting step canceled due to an exception.", e);
