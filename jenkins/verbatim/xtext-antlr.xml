@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>&lt;img src=&quot;http://wiki.eclipse.org/images/d/db/Xtext_logo.png&quot; width=&quot;200&quot; height=&quot;60&quot;/&gt;&lt;br&gt;&#xd;
+&lt;b&gt;Baut xtext Antlr Feature.&lt;/b&gt;&lt;br&gt;&#xd;
+SCM Abfrage täglich: H 1,7,13,19 * * * &lt;br&gt;&#xd;
+&lt;br&gt;&#xd;
+Speichert Buildartefakte unter: antlr.downloads bzw. antlr.p2.repository&lt;br&gt;&#xd;
+wenn FTPUpload auf yes gesetzt ist, werden Updatesite und der/die Zip/-s auf ftp.itemis.de Server hoch geladen.&lt;br&gt;&#xd;
+&lt;br&gt;&#xd;
+Archiviert werden antlr.downloads bzw. antlr.p2.repository Ordner.&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.9.1">
+      <projectUrl>https://github.com/svenefftinge/org.xtext.antlr.generator/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.BooleanParameterDefinition>
+          <name>FTPUpload</name>
+          <description>should uplod to sftp server</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BUILD_TYPE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>N</string>
+              <string>S</string>
+              <string>R</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BUILD_ALIAS</name>
+          <description>set an alias like 2.6.0M6 and type = S to build a milestone</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>-2147483647</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git://github.com/svenefftinge/org.xtext.antlr.generator.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>org.xtext.antlr.generator.git</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Vorgabewert)</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H 1,7,13,19 * * * </spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf buildroot antlr.*
+mkdir buildroot
+:
+COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
+COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
+:
+{
+	cat &quot;${WORKSPACE}/org.xtext.antlr.generator.git/de.itemis.xtext.antlr.releng/releng/antlr-build.properties&quot;
+
+	echo
+	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
+	echo &quot;build.id=${BUILD_TYPE}${COMPACT_BUILD_ID}&quot;
+
+	echo
+	echo &quot;# Define the timestamp to use for changed components (added by Hudson job definition)&quot;
+	echo &quot;buckminster.build.timestamp=${BUILD_ID}&quot;
+
+	echo
+	echo &quot;# Define the Build Alias (added by Hudson job definition)&quot;
+	echo &quot;build.alias=${BUILD_ALIAS}&quot;
+
+	echo
+	echo &quot;# Define Hudson Build ID (added by Hudson job definition)&quot;
+	echo &quot;hudson.build.id=${BUILD_ID}&quot;
+
+	echo
+	echo &quot;# Override default locations (added by Hudson job definition)&quot;
+	echo &quot;buckminster.output.root=${WORKSPACE}/buildroot/buckminster.build&quot;
+	echo &quot;buckminster.temp.root=${WORKSPACE}/buildroot/buckminster.temp&quot;
+	echo &quot;eclipse.staging.area=${WORKSPACE}/buildroot/buckminster.staging&quot;
+
+	echo
+	echo &quot;# Sign the jars (added by Hudson job definition)&quot;
+	echo &quot;site.signing=false&quot;
+
+} &gt; buildroot/build.properties
+:
+{
+	echo &quot;# Define the Build ID to use for tagging (added by Hudson job definition)&quot;
+	echo &quot;build.id=${COMPACT_BUILD_ID}&quot;
+
+} &gt; buildroot/tagging.properties
+:</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-headless</installationName>
+      <commands>setpref targetPlatformPath=&quot;${WORKSPACE}/buildroot/target.platform&quot;
+
+import &quot;${checkout.location}/de.itemis.xtext.antlr.releng/releng/antlr-platform.mspec&quot;
+resolve &quot;${checkout.location}/de.itemis.xtext.antlr.releng/releng/antlr.cquery&quot;
+
+build
+
+perform --properties &quot;${WORKSPACE}/buildroot/build.properties&quot; -Dbuckminster.reference.repository=&quot;https://kiel2.itemis.de/jenkins/job/xtext-antlr-bucky/lastSuccessfulBuild&quot;  &quot;de.itemis.xtext.antlr.build.feature#build&quot;
+
+perform --properties &quot;${WORKSPACE}/buildroot/build.properties&quot; &quot;de.itemis.xtext.antlr.releng#setup.promoter&quot;</commands>
+      <logLevel>info</logLevel>
+      <params>-Dcheckout.location=${WORKSPACE}/org.xtext.antlr.generator.git</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand></userCommand>
+      <userWorkspace></userWorkspace>
+      <globalPropertiesFile></globalPropertiesFile>
+      <equinoxLauncherArgs></equinoxLauncherArgs>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+    <hudson.tasks.Shell>
+      <command>mv buildroot/buckminster.build/de.itemis.xtext.antlr.build.feature_*-eclipse.feature/site.p2 antlr.p2.repository
+mv buildroot/buckminster.build/de.itemis.xtext.antlr.build.feature_*-eclipse.feature/zips antlr.downloads
+mv org.xtext.antlr.generator.git/de.itemis.xtext.antlr.releng/promoter.ant .
+mv org.xtext.antlr.generator.git/de.itemis.xtext.antlr.releng/publisher.properties .
+mv buildroot/buckminster.build/de.itemis.xtext.antlr.releng_*-buckminster/promoter/promote.properties .
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant plugin="ant@1.2">
+      <targets>-lib $WORKSPACE/org.xtext.antlr.generator.git/de.itemis.xtext.antlr/create-download/ upload</targets>
+      <antName>(Default)</antName>
+      <buildFile>org.xtext.antlr.generator.git/de.itemis.xtext.antlr.releng/ftpUpload.xml</buildFile>
+      <properties>workspace=$WORKSPACE
+ftpProperties=$WORKSPACE/../../../ftp.properties</properties>
+    </hudson.tasks.Ant>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>antlr.*/**,promote.properties,promoter.ant,publisher.properties,commands.txt</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+    </hudson.tasks.ArtifactArchiver>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>60</timeoutMinutes>
+      </strategy>
+      <operationList/>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+  </buildWrappers>
+</project>

@@ -61,3 +61,4 @@ jenkins {
 }
 
 apply from: 'pipelines.gradle'
+apply from: 'verbatim-jobs.gradle'

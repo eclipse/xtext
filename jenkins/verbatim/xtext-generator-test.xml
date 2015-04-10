@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>30</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <artifactDaysToKeep>14</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
+      <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>-1</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/eclipse/xtext.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/eclipse/xtext</url>
+    </browser>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.PruneStaleBranch/>
+      <hudson.plugins.git.extensions.impl.CleanCheckout/>
+      <hudson.plugins.git.extensions.impl.CloneOption>
+        <shallow>false</shallow>
+        <reference></reference>
+        <timeout>60</timeout>
+      </hudson.plugins.git.extensions.impl.CloneOption>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <jdk>Oracle JDK 1.6u38</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H 7 * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>java -version
+cd ${WORKSPACE}
+rm -rf buildroot xte*test.results output
+mkdir buildroot
+mkdir output
+:
+COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
+COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
+:
+{
+	cat &quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
+	echo
+	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
+	echo &quot;build.id=N${COMPACT_BUILD_ID}&quot;
+
+	echo
+	echo &quot;# Define the timestamp to use for changed components (added by Hudson job definition)&quot;
+	echo &quot;buckminster.build.timestamp=${BUILD_ID}&quot;
+
+	echo
+	echo &quot;# Define Hudson Build ID (added by Hudson job definition)&quot;
+	echo &quot;hudson.build.id=${BUILD_ID}&quot;
+	echo
+	echo &quot;# Sign the jars (added by Hudson job definition)&quot;
+	echo &quot;site.signing=false&quot;
+} &gt; buildroot/build.properties
+:
+{
+	echo &quot;# Define the Build ID to use for tagging (added by Hudson job definition)&quot;
+	echo &quot;build.id=${COMPACT_BUILD_ID}&quot;
+
+} &gt; buildroot/tagging.properties
+:</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-mwe2-headless</installationName>
+      <commands>setpref targetPlatformPath=&quot;${WORKSPACE}/buildroot/target.platform&quot;
+importprefs -F ${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf
+
+importtargetdefinition &quot;${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target&quot;
+addbaseline -A &quot;api-baseline&quot;
+
+import &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec&quot;
+
+resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery&quot;
+resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec&quot;
+#resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec&quot;
+
+build
+
+launch --stderr --stdout --launch &quot;org.eclipse.xtext.language-generator/GenerateAllLanguages.mwe2.launch&quot;
+
+
+build
+
+junit --launch &quot;org.eclipse.xtext.tests/xtext.tests.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.tests.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xtext.ui.tests/xtext.xtext.ui.tests.fast.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xtext.ui.tests.fast.xml&quot;
+junit --launch &quot;org.eclipse.xtext.ui.tests/xtext.ui.tests.fast.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.ui.tests.fast.xml&quot;
+</commands>
+      <logLevel>info</logLevel>
+      <params>-DWITH.MWE2=true
+-DEV.BUILD=false
+-DECLIPSE.TARGET.ALIAS=Helios
+-Dforce.javadoc=false
+-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dxtext.checkout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly
+-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/
+</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand></userCommand>
+      <userWorkspace>${WORKSPACE}/buildroot/buckminster.workspace</userWorkspace>
+      <globalPropertiesFile></globalPropertiesFile>
+      <equinoxLauncherArgs></equinoxLauncherArgs>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
+      <testResults>*.test.results/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+      <healthScaleFactor>1.0</healthScaleFactor>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.tasks.Mailer plugin="mailer@1.11">
+      <recipients>alle-ki@itemis.de</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>org.eclipse.xtext.git/*</pattern>
+          <type>EXCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>true</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>false</cleanWhenUnstable>
+      <cleanWhenFailure>false</cleanWhenFailure>
+      <cleanWhenNotBuilt>false</cleanWhenNotBuilt>
+      <cleanWhenAborted>false</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>60</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.17">
+      <takeScreenshot>false</takeScreenshot>
+      <useXauthority>true</useXauthority>
+    </hudson.plugins.xvnc.Xvnc>
+  </buildWrappers>
+</project>

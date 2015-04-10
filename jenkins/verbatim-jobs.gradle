@@ -1,0 +1,5 @@
+file('verbatim').listFiles().each { jobXml -> 
+	jenkins.jobs.create(jobXml.name.replace('.xml', '')).definition {
+		xml jobXml
+	}
+}
