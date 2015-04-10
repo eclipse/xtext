@@ -20,9 +20,6 @@ import java.util.Arrays;
 @SuppressWarnings("all")
 public class ExBeeLangTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
 
-	/**
-	 * @since 2.9
-	 */
 	@Override
 	public List<String> getFileExtensions() {
 		return Arrays.asList("exbeelangtestlanguage");

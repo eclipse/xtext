@@ -18,7 +18,6 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -1839,7 +1838,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       _switchResult = Iterables.<Object>toArray(collection, ((Class<Object>) componentType));
     }
-    return ((Serializable)_switchResult);
+    return _switchResult;
   }
   
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {
