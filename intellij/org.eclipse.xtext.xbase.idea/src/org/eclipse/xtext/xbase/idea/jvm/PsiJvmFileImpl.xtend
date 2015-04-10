@@ -15,9 +15,13 @@ import com.intellij.psi.tree.IElementType
  * @author kosyakov - Initial contribution and API
  */
 class PsiJvmFileImpl extends PsiJavaFileBaseImpl {
-
+	
 	new(IElementType elementType, IElementType contentElementType, FileViewProvider viewProvider) {
 		super(elementType, contentElementType, viewProvider)
+	}
+	
+	override isPhysical() {
+		true
 	}
 	
 	override getFileType() {

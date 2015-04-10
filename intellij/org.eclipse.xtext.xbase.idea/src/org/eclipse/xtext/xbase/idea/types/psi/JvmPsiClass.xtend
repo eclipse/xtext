@@ -80,5 +80,17 @@ class JvmPsiClass implements PsiClass {
 	override isAnnotationType() {
 		psiClassOrStub.annotationType
 	}
+	
+	override equals(Object obj) {
+		delegate.equals(obj)
+	}
+	
+	override hashCode() {
+		delegate.hashCode
+	}
+	
+	override toString() {
+		class.simpleName + ':' + delegate.toString
+	}
 
 }

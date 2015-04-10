@@ -25,6 +25,11 @@ public class PsiJvmFileImpl extends PsiJavaFileBaseImpl {
   }
   
   @Override
+  public boolean isPhysical() {
+    return true;
+  }
+  
+  @Override
   public FileType getFileType() {
     return JvmFileType.INSTANCE;
   }

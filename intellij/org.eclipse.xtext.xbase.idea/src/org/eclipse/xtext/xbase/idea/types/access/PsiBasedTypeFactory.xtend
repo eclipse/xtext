@@ -598,7 +598,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			PsiClassType: {
 				val resolveResult = psiType.resolveGenerics
 				val psiClass = resolveResult.element
-				if (psiClass == null) {
+				if (psiClass === null) {
 					createJvmUnknownTypeReference
 				} else if (psiType.parameterCount == 0) {
 					resolveResult.createClassTypeReference => [

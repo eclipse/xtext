@@ -11,12 +11,12 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
@@ -42,8 +42,9 @@ import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.idea.jvm.JvmFileType;
+import org.eclipse.xtext.xbase.idea.jvm.JvmLanguage;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
+import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
 import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClassStubGenerator;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
@@ -206,16 +207,21 @@ public class JvmPsiClassProvider implements PsiElementProvider {
   protected PsiClass createPsiClass(final String fileName, final CharSequence contents) {
     PsiClass _xblockexpression = null;
     {
-      PsiElement _psiElement = this._iPsiModelAssociations.getPsiElement(this.sourceElement);
-      Project _project = _psiElement.getProject();
+      final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(this.sourceElement);
+      Project _project = psiElement.getProject();
       final PsiFileFactory psiFileFactory = IdeaProjectExtensions.getPsiFileFactory(_project);
+      PsiFile _containingFile = psiElement.getContainingFile();
+      VirtualFile _virtualFile = _containingFile.getVirtualFile();
       final PsiFile psiFile = psiFileFactory.createFileFromText(fileName, 
-        JvmFileType.INSTANCE, contents);
+        JvmLanguage.INSTANCE, contents, 
+        false, 
+        true, 
+        true, _virtualFile);
       PsiClass _xifexpression = null;
-      if ((psiFile instanceof PsiJavaFile)) {
+      if ((psiFile instanceof PsiJvmFileImpl)) {
         PsiClass _xblockexpression_1 = null;
         {
-          PsiClass[] _classes = ((PsiJavaFile)psiFile).getClasses();
+          PsiClass[] _classes = ((PsiJvmFileImpl)psiFile).getClasses();
           final PsiClass psiClass = IterableExtensions.<PsiClass>head(((Iterable<PsiClass>)Conversions.doWrapArray(_classes)));
           PsiClass _xifexpression_1 = null;
           boolean _notEquals = (!Objects.equal(psiClass, null));

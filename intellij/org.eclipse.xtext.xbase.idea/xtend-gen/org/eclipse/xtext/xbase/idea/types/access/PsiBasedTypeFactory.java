@@ -1366,14 +1366,13 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           final PsiClassType.ClassResolveResult resolveResult = ((PsiClassType)psiType).resolveGenerics();
           final PsiClass psiClass = resolveResult.getElement();
           JvmTypeReference _xifexpression = null;
-          boolean _equals = Objects.equal(psiClass, null);
-          if (_equals) {
+          if ((psiClass == null)) {
             _xifexpression = this._typesFactory.createJvmUnknownTypeReference();
           } else {
             JvmParameterizedTypeReference _xifexpression_1 = null;
             int _parameterCount = ((PsiClassType)psiType).getParameterCount();
-            boolean _equals_1 = (_parameterCount == 0);
-            if (_equals_1) {
+            boolean _equals = (_parameterCount == 0);
+            if (_equals) {
               JvmParameterizedTypeReference _createClassTypeReference = this.createClassTypeReference(resolveResult);
               final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
                 @Override

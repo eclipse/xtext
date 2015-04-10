@@ -36,7 +36,7 @@ class JvmPsiClassStubGenerator {
 	}
 
 	protected def getJavaStubSource(JvmDeclaredType it) '''
-		package «packageName»;
+		«IF packageName != null»package «packageName»;«ENDIF»
 		«compileVisibility» «compileType» «simpleName»«compileTypeParameters» {}
 	'''
 

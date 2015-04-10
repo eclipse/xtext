@@ -12,7 +12,6 @@ import com.google.inject.Provider
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
-import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiMethod
 import java.util.Iterator
 import java.util.List
@@ -31,7 +30,8 @@ import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtext.xbase.idea.jvm.JvmFileType
+import org.eclipse.xtext.xbase.idea.jvm.JvmLanguage
+import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
@@ -129,13 +129,18 @@ class JvmPsiClassProvider implements PsiElementProvider {
 	}
 
 	protected def createPsiClass(String fileName, CharSequence contents) {
-		val psiFileFactory = sourceElement.psiElement.project.psiFileFactory
+		val psiElement = sourceElement.psiElement
+		val psiFileFactory = psiElement.project.psiFileFactory
 		val psiFile = psiFileFactory.createFileFromText(
 			fileName,
-			JvmFileType.INSTANCE,
-			contents
+			JvmLanguage.INSTANCE,
+			contents,
+			false,
+			true,
+			true,
+			psiElement.containingFile.virtualFile
 		)
-		if (psiFile instanceof PsiJavaFile) {
+		if (psiFile instanceof PsiJvmFileImpl) {
 			val psiClass = psiFile.classes.head
 			if (psiClass != null) {
 				psiClass.bindTo(jvmDeclaredType)

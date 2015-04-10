@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.idea.projectview
 import com.google.inject.Inject
 import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
+import com.intellij.ide.projectView.impl.nodes.ClassTreeNode
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
@@ -47,7 +48,7 @@ class XtendSelectableTreeStructureProvider implements SelectableTreeStructurePro
 			val value = parent.value
 			if (value instanceof XtendFileImpl) {
 				return value.psiClasses.map [ psiClass |
-					new JvmPsiClassTreeNode(project, psiClass, parent.settings)
+					new ClassTreeNode(project, psiClass, parent.settings)
 				].filter(AbstractTreeNode).toList
 			}
 		}

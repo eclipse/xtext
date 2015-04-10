@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.idea.jvmmodel;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -49,10 +50,16 @@ public class JvmPsiClassStubGenerator {
   
   protected CharSequence getJavaStubSource(final JvmDeclaredType it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
-    String _packageName = it.getPackageName();
-    _builder.append(_packageName, "");
-    _builder.append(";");
+    {
+      String _packageName = it.getPackageName();
+      boolean _notEquals = (!Objects.equal(_packageName, null));
+      if (_notEquals) {
+        _builder.append("package ");
+        String _packageName_1 = it.getPackageName();
+        _builder.append(_packageName_1, "");
+        _builder.append(";");
+      }
+    }
     _builder.newLineIfNotEmpty();
     String _compileVisibility = this.compileVisibility(it);
     _builder.append(_compileVisibility, "");

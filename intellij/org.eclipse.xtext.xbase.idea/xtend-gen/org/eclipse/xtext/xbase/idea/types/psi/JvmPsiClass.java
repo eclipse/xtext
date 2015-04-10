@@ -156,6 +156,28 @@ public class JvmPsiClass implements PsiClass {
     return _psiClassOrStub.isAnnotationType();
   }
   
+  @Override
+  public boolean equals(final Object obj) {
+    PsiClass _delegate = this.getDelegate();
+    return _delegate.equals(obj);
+  }
+  
+  @Override
+  public int hashCode() {
+    PsiClass _delegate = this.getDelegate();
+    return _delegate.hashCode();
+  }
+  
+  @Override
+  public String toString() {
+    Class<? extends JvmPsiClass> _class = this.getClass();
+    String _simpleName = _class.getSimpleName();
+    String _plus = (_simpleName + ":");
+    PsiClass _delegate = this.getDelegate();
+    String _string = _delegate.toString();
+    return (_plus + _string);
+  }
+  
   @Pure
   public PsiClass getStub() {
     return this.stub;
