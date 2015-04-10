@@ -16,9 +16,9 @@ import org.eclipse.xtext.AbstractElement;
 public class StringEObjectTokens extends AbstractEObjectTokens {
 	private final AbstractElement grammarElement;
 
-	public StringEObjectTokens(StringBasedRegionAccess tokenAccess, AbstractElement grammarElement,
+	public StringEObjectTokens(StringBasedRegionAccess access, AbstractElement grammarElement,
 			EObject semanticElement) {
-		super(tokenAccess);
+		super(access);
 		this.grammarElement = grammarElement;
 		this.setSemantcElement(semanticElement);
 	}

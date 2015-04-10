@@ -20,9 +20,9 @@ public class StringHidden extends StringRegion implements IHiddenRegionPart {
 	private final AbstractHiddenRegion hiddenRegion;
 	private final AbstractRule rule;
 
-	protected StringHidden(AbstractHiddenRegion gap, AbstractRule rule, int offset, int lenght) {
-		super((StringBasedRegionAccess) gap.getTextRegionAccess(), offset, lenght);
-		this.hiddenRegion = gap;
+	protected StringHidden(AbstractHiddenRegion hidden, AbstractRule rule, int offset, int lenght) {
+		super((StringBasedRegionAccess) hidden.getTextRegionAccess(), offset, lenght);
+		this.hiddenRegion = hidden;
 		this.rule = rule;
 	}
 

@@ -72,9 +72,9 @@ public abstract class AbstractTextSegment implements ITextSegment {
 
 	@Override
 	public String getText() {
-		ITextRegionAccess tokenAccess = getTextRegionAccess();
-		if (tokenAccess != null)
-			return tokenAccess.getText(getOffset(), getLength());
+		ITextRegionAccess access = getTextRegionAccess();
+		if (access != null)
+			return access.getText(getOffset(), getLength());
 		return null;
 	}
 

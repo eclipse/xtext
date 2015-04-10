@@ -113,13 +113,13 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		int offset = regionAccess.append(token);
 		StringSemanticRegion semantic = createSemanticRegion(element, token, obj, offset);
 		last.setNext(semantic);
-		semantic.setLeadingGap(last);
+		semantic.setLeadingHiddenRegion(last);
 		last = createHiddenRegion();
 		last.setPrevious(semantic);
-		semantic.setTrailingGap(last);
+		semantic.setTrailingHiddenRegion(last);
 		if (tokens != null) {
-			tokens.getTokens().add(semantic);
-			tokens.setTrailingGap(last);
+			tokens.getSemanticRegions().add(semantic);
+			tokens.setTrailingHiddenRegion(last);
 		}
 	}
 
@@ -154,8 +154,8 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	protected StringEObjectTokens enterEObject(AbstractElement ele, EObject semanticChild) {
 		StringEObjectTokens tokens = new StringEObjectTokens(regionAccess, ele, semanticChild);
 		regionAccess.add(tokens);
-		tokens.setLeadingGap(last);
-		tokens.setTrailingGap(last);
+		tokens.setLeadingHiddenRegion(last);
+		tokens.setTrailingHiddenRegion(last);
 		stack.push(tokens);
 		return tokens;
 	}
@@ -187,7 +187,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		AbstractEObjectTokens popped = stack.pop();
 		AbstractEObjectTokens peek = stack.peek();
 		if (peek != null)
-			peek.setTrailingGap(popped.getTrailingGap());
+			peek.setTrailingHiddenRegion(popped.getTrailingHiddenRegion());
 	}
 
 	@Override

@@ -21,48 +21,48 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractEObjectTokens {
-	private IHiddenRegion leadingGap;
+	private IHiddenRegion leadingHiddens;
 	private EObject semantcElement;
-	private final ITextRegionAccess tokenAccess;
-	private final List<ISemanticRegion> tokens = Lists.newArrayList();
-	private IHiddenRegion trailingGap;
+	private final ITextRegionAccess access;
+	private final List<ISemanticRegion> semanticRegions = Lists.newArrayList();
+	private IHiddenRegion trailingHiddens;
 
-	public AbstractEObjectTokens(AbstractRegionAccess tokenAccess) {
+	public AbstractEObjectTokens(AbstractRegionAccess access) {
 		super();
-		this.tokenAccess = tokenAccess;
+		this.access = access;
 	}
 
 	public abstract AbstractElement getGrammarElement();
 
-	public IHiddenRegion getLeadingGap() {
-		return leadingGap;
+	public IHiddenRegion getLeadingHiddenRegion() {
+		return leadingHiddens;
 	}
 
 	public EObject getSemanticElement() {
 		return semantcElement;
 	}
 
-	public ITextRegionAccess getTokenAccess() {
-		return tokenAccess;
+	public ITextRegionAccess getRegionAccess() {
+		return access;
 	}
 
-	public List<ISemanticRegion> getTokens() {
-		return tokens;
+	public List<ISemanticRegion> getSemanticRegions() {
+		return semanticRegions;
 	}
 
-	public IHiddenRegion getTrailingGap() {
-		return trailingGap;
+	public IHiddenRegion getTrailingHiddenRegion() {
+		return trailingHiddens;
 	}
 
-	protected void setLeadingGap(IHiddenRegion leadingGap) {
-		this.leadingGap = leadingGap;
+	protected void setLeadingHiddenRegion(IHiddenRegion leading) {
+		this.leadingHiddens = leading;
 	}
 
 	protected void setSemantcElement(EObject semantcElement) {
 		this.semantcElement = semantcElement;
 	}
 
-	protected void setTrailingGap(IHiddenRegion trailingGap) {
-		this.trailingGap = trailingGap;
+	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
+		this.trailingHiddens = trailing;
 	}
 }

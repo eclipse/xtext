@@ -43,53 +43,53 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		private XtextResource resource;
 		private LinkedList<NodeEObjectTokens> stack = new LinkedList<NodeEObjectTokens>();
 
-		protected void add(NodeModelBasedRegionAccess tokenAccess, INode node) {
+		protected void add(NodeModelBasedRegionAccess access, INode node) {
 			if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
 				ILeafNode leafNode = (ILeafNode) node;
 				lastHidden.addPart(createHidden(lastHidden, leafNode));
 			} else {
 				NodeEObjectTokens eObjectTokens = stack.peek();
-				NodeSemanticRegion newToken = createToken(tokenAccess, node);
-				NodeHiddenRegion newHidden = createGap(tokenAccess);
-				newToken.setTrailingGap(newHidden);
-				newHidden.setPrevious(newToken);
-				newToken.setLeadingGap(lastHidden);
-				lastHidden.setNext(newToken);
-				eObjectTokens.getTokens().add(newToken);
-				newToken.setEObjectTokens(eObjectTokens);
+				NodeSemanticRegion newSemantic = createSemanticRegion(access, node);
+				NodeHiddenRegion newHidden = createHiddenRegion(access);
+				newSemantic.setTrailingHiddenRegion(newHidden);
+				newHidden.setPrevious(newSemantic);
+				newSemantic.setLeadingHiddenRegion(lastHidden);
+				lastHidden.setNext(newSemantic);
+				eObjectTokens.getSemanticRegions().add(newSemantic);
+				newSemantic.setEObjectTokens(eObjectTokens);
 				lastHidden = newHidden;
 			}
 		}
 
 		public NodeModelBasedRegionAccess create() {
-			NodeModelBasedRegionAccess tokenAccess = new NodeModelBasedRegionAccess(this);
-			return tokenAccess;
+			NodeModelBasedRegionAccess access = new NodeModelBasedRegionAccess(this);
+			return access;
 		}
 
-		protected NodeHiddenRegion createGap(ITextRegionAccess tokenAccess) {
-			return new NodeHiddenRegion(tokenAccess);
+		protected NodeHiddenRegion createHiddenRegion(ITextRegionAccess access) {
+			return new NodeHiddenRegion(access);
 		}
 
-		protected NodeHidden createHidden(NodeHiddenRegion gap, ILeafNode node) {
+		protected NodeHidden createHidden(NodeHiddenRegion hidden, ILeafNode node) {
 			if (isComment(node))
-				return new NodeComment(gap, node);
+				return new NodeComment(hidden, node);
 			else
-				return new NodeWhitespace(gap, node);
+				return new NodeWhitespace(hidden, node);
 		}
 
-		protected NodeSemanticRegion createToken(NodeModelBasedRegionAccess tokenAccess, INode node) {
-			return new NodeSemanticRegion(tokenAccess, node);
+		protected NodeSemanticRegion createSemanticRegion(NodeModelBasedRegionAccess access, INode node) {
+			return new NodeSemanticRegion(access, node);
 		}
 
 		protected NodeEObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
 			return new NodeEObjectTokens(access, node);
 		}
 
-		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
+		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess regionAccess) {
 			this.eObjToTokens = Maps.newHashMap();
-			this.firstHidden = createGap(tokenAccess);
+			this.firstHidden = createHiddenRegion(regionAccess);
 			this.lastHidden = this.firstHidden;
-			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) tokenAccess;
+			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) regionAccess;
 			CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
 			process(rootNode, access);
 			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
@@ -164,7 +164,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			boolean creator = isEObjectRoot(node);
 			if (creator || tokens == null) {
 				tokens = new NodeEObjectTokens(access, node);
-				tokens.setLeadingGap(lastHidden);
+				tokens.setLeadingHiddenRegion(lastHidden);
 				stack.push(tokens);
 			}
 			if (tokens.getSemanticElement() == null) {
@@ -188,7 +188,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			}
 			if (creator) {
 				NodeEObjectTokens popped = stack.pop();
-				popped.setTrailingGap(lastHidden);
+				popped.setTrailingHiddenRegion(lastHidden);
 				EObject semanticElement = popped.getSemanticElement();
 				if (semanticElement == null)
 					throw new IllegalStateException();

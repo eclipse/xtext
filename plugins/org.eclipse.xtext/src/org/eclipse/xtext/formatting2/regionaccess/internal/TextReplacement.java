@@ -16,13 +16,13 @@ public class TextReplacement extends AbstractTextSegment implements ITextReplace
 	private final int length;
 	private final int offset;
 	private final String replacement;
-	private final ITextRegionAccess tokens;
+	private final ITextRegionAccess access;
 
-	public TextReplacement(ITextRegionAccess tokens, int offset, int length, String text) {
+	public TextReplacement(ITextRegionAccess access, int offset, int length, String text) {
 		super();
 		Preconditions.checkArgument(offset >= 0, "offset must be >= 0");
 		Preconditions.checkArgument(length >= 0, "length must be >= 0");
-		this.tokens = tokens;
+		this.access = access;
 		this.offset = offset;
 		this.length = length;
 		this.replacement = text;
@@ -45,7 +45,7 @@ public class TextReplacement extends AbstractTextSegment implements ITextReplace
 
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
-		return tokens;
+		return access;
 	}
 
 	@Override
