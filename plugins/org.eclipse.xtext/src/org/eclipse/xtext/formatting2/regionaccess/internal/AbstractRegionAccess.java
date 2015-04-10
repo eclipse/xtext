@@ -101,7 +101,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		ISemanticRegion nextToken = token.getNextSemanticRegion();
 		if (nextToken == null)
 			return null;
-		AbstractElement grammarElement = nextToken.getGrammarElement();
+		EObject grammarElement = nextToken.getGrammarElement();
 		if (grammarElement instanceof Keyword && ((Keyword) grammarElement).getValue().equals(keyword))
 			return nextToken;
 		return null;
@@ -128,7 +128,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		ISemanticRegion previousToken = token.getPreviousSemanticRegion();
 		if (previousToken == null)
 			return null;
-		AbstractElement grammarElement = previousToken.getGrammarElement();
+		EObject grammarElement = previousToken.getGrammarElement();
 		if (grammarElement instanceof Keyword)
 			return previousToken;
 		return null;
@@ -141,7 +141,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		ISemanticRegion previousToken = token.getPreviousSemanticRegion();
 		if (previousToken == null)
 			return null;
-		AbstractElement grammarElement = previousToken.getGrammarElement();
+		EObject grammarElement = previousToken.getGrammarElement();
 		if (grammarElement instanceof Keyword && ((Keyword) grammarElement).getValue().equals(keyword))
 			return previousToken;
 		return null;
@@ -218,7 +218,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		if (tokens == null)
 			return null;
 		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+			EObject element = token.getGrammarElement();
 			if (element instanceof Keyword) {
 				Keyword kw = (Keyword) element;
 				if (kw.getValue().equals(keyword))
@@ -234,7 +234,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		if (tokens == null)
 			return null;
 		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+			EObject element = token.getGrammarElement();
 			if (element instanceof RuleCall) {
 				RuleCall rc = (RuleCall) element;
 				if (rc.getRule() == rule)
@@ -268,7 +268,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 			return Collections.emptyList();
 		List<ISemanticRegion> result = Lists.newArrayList();
 		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+			EObject element = token.getGrammarElement();
 			if (element instanceof RuleCall) {
 				RuleCall rc = (RuleCall) element;
 				if (set.contains(rc.getRule()))
