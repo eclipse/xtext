@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
-import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
-
 /**
  * 
  * Use {@link ITextRegionAccess#getRewriter()} to obtain an instance implementing this interface.

@@ -9,7 +9,6 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.INode;
 

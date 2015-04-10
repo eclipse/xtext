@@ -10,8 +10,8 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.collect.Maps;

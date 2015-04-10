@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.IMerger;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;

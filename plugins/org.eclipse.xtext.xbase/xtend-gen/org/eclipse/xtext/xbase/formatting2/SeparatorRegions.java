@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.xbase.formatting2.Entry;
 import org.eclipse.xtext.xbase.formatting2.ObjectEntry;
 import org.eclipse.xtext.xbase.formatting2.SeparatorEntry;

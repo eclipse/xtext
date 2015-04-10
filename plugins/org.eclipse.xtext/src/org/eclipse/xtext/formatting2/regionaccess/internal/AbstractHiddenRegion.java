@@ -10,7 +10,6 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.internal;
 
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

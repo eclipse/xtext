@@ -9,7 +9,7 @@ package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.ITextReplacer;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 
 /**

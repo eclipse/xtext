@@ -5,27 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2.internal;
+package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.Preconditions;
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
-public class TextSegment extends AbstractTextSegment {
-
+public class TextReplacement extends AbstractTextSegment implements ITextReplacement {
 	private final int length;
 	private final int offset;
-	private final ITextRegionAccess regionAccess;
+	private final String replacement;
+	private final ITextRegionAccess tokens;
 
-	public TextSegment(ITextRegionAccess regionAccess, int offset, int length) {
+	public TextReplacement(ITextRegionAccess tokens, int offset, int length, String text) {
 		super();
-		this.regionAccess = regionAccess;
+		Preconditions.checkArgument(offset >= 0, "offset must be >= 0");
+		Preconditions.checkArgument(length >= 0, "length must be >= 0");
+		this.tokens = tokens;
 		this.offset = offset;
 		this.length = length;
+		this.replacement = text;
 	}
 
 	@Override
@@ -39,16 +39,18 @@ public class TextSegment extends AbstractTextSegment {
 	}
 
 	@Override
+	public String getReplacementText() {
+		return replacement;
+	}
+
+	@Override
 	public ITextRegionAccess getTextRegionAccess() {
-		return regionAccess;
+		return tokens;
 	}
 
 	@Override
 	public String toString() {
-		ToStringHelper helper = Objects.toStringHelper(this).add("offset", offset).add("length", length);
-		if (regionAccess != null)
-			helper.add("text", regionAccess.getText(offset, length));
-		return helper.toString();
+		return "[" + getText() + "|" + getReplacementText() + "]";
 	}
 
 }
