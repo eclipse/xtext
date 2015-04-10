@@ -6,7 +6,7 @@ allprojects {
 	apply plugin: 'base'
 	apply plugin: 'maven'
 	group = 'org.eclipse.xtext'
-	version = '2.8.1-SNAPSHOT'
+	version = '2.8.2-SNAPSHOT'
 	
 	repositories {
 		if (!System.getProperty("JOB_NAME")) {

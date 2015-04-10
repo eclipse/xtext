@@ -20,6 +20,7 @@ import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1845,7 +1846,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       _switchResult = Iterables.<Object>toArray(collection, ((Class<Object>) componentType));
     }
-    return _switchResult;
+    return ((Serializable)_switchResult);
   }
   
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {

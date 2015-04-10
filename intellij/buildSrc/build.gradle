@@ -13,6 +13,6 @@ repositories {
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.8.1-SNAPSHOT'
+	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.8.1'
 	compile 'org.apache.httpcomponents:httpclient:4.4'
 }
