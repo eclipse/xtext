@@ -11,10 +11,10 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.FormattingNotApplicableException;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
-import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

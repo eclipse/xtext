@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -32,10 +31,11 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.ISubFormatter;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.internal.TextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -412,7 +412,7 @@ public class XbaseFormatter extends XtypeFormatter {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-        final AbstractElement grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
+        final EObject grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;
@@ -598,7 +598,7 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XMemberFeatureCall expr, @Extension final IFormattableDocument format) {
     EObject top = expr;
-    ITextSegment _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
     SeparatorRegions<XMemberFeatureCall, ISemanticRegion> calls = new SeparatorRegions<XMemberFeatureCall, ISemanticRegion>(_regionForEObject);
     while ((top instanceof XMemberFeatureCall)) {
       {
@@ -694,11 +694,11 @@ public class XbaseFormatter extends XtypeFormatter {
     if (!_notEquals) {
       _and = false;
     } else {
-      AbstractElement _grammarElement = node.getGrammarElement();
+      EObject _grammarElement = node.getGrammarElement();
       _and = (_grammarElement instanceof RuleCall);
     }
     if (_and) {
-      AbstractElement _grammarElement_1 = node.getGrammarElement();
+      EObject _grammarElement_1 = node.getGrammarElement();
       return ((RuleCall) _grammarElement_1).getRule();
     }
     return null;
@@ -706,7 +706,7 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XBinaryOperation expr, @Extension final IFormattableDocument format) {
     final AbstractRule precendece = this.binaryOperationPrecedence(expr);
-    ITextSegment _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
     final SeparatorRegions<XBinaryOperation, ISemanticRegion> calls = new SeparatorRegions<XBinaryOperation, ISemanticRegion>(_regionForEObject);
     EObject top = expr;
     while (Objects.equal(this.binaryOperationPrecedence(top), precendece)) {

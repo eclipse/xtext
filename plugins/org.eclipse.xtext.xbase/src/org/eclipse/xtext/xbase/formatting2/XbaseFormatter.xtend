@@ -22,8 +22,8 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.formatting2.ITextReplacer
 import org.eclipse.xtext.formatting2.ITextReplacerContext
-import org.eclipse.xtext.formatting2.internal.TextSegment
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBasicForLoopExpression
@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtext.xbase.XInstanceOfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -51,7 +52,6 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.xbase.XInstanceOfExpression
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API

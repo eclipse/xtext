@@ -11,9 +11,9 @@ import org.eclipse.xtext.formatting2.IAutowrapFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

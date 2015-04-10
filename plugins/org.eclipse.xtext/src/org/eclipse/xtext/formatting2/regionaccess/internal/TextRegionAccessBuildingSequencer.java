@@ -24,7 +24,7 @@ import org.eclipse.xtext.util.Strings;
 public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	private StringHiddenRegion last;
 	private StringBasedRegionAccess regionAccess;
-	private final LinkedList<AbstractEObjectTokens> stack = new LinkedList<AbstractEObjectTokens>();
+	private final LinkedList<AbstractEObjectRegion> stack = new LinkedList<AbstractEObjectRegion>();
 
 	@Override
 	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
@@ -108,18 +108,18 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	private void appendSemantic(AbstractElement element, String token) {
-		AbstractEObjectTokens tokens = stack.peek();
+		AbstractEObjectRegion tokens = stack.peek();
 		EObject obj = tokens == null ? null : tokens.getSemanticElement();
 		int offset = regionAccess.append(token);
 		StringSemanticRegion semantic = createSemanticRegion(element, token, obj, offset);
 		last.setNext(semantic);
-		semantic.setLeadingGap(last);
+		semantic.setLeadingHiddenRegion(last);
 		last = createHiddenRegion();
 		last.setPrevious(semantic);
-		semantic.setTrailingGap(last);
+		semantic.setTrailingHiddenRegion(last);
 		if (tokens != null) {
-			tokens.getTokens().add(semantic);
-			tokens.setTrailingGap(last);
+			tokens.getSemanticLeafRegions().add(semantic);
+			tokens.setTrailingHiddenRegion(last);
 		}
 	}
 
@@ -151,11 +151,11 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return true;
 	}
 
-	protected StringEObjectTokens enterEObject(AbstractElement ele, EObject semanticChild) {
-		StringEObjectTokens tokens = new StringEObjectTokens(regionAccess, ele, semanticChild);
+	protected StringEObjectRegion enterEObject(AbstractElement ele, EObject semanticChild) {
+		StringEObjectRegion tokens = new StringEObjectRegion(regionAccess, ele, semanticChild);
 		regionAccess.add(tokens);
-		tokens.setLeadingGap(last);
-		tokens.setTrailingGap(last);
+		tokens.setLeadingHiddenRegion(last);
+		tokens.setTrailingHiddenRegion(last);
 		stack.push(tokens);
 		return tokens;
 	}
@@ -184,10 +184,10 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	private void leaveEObject() {
-		AbstractEObjectTokens popped = stack.pop();
-		AbstractEObjectTokens peek = stack.peek();
+		AbstractEObjectRegion popped = stack.pop();
+		AbstractEObjectRegion peek = stack.peek();
 		if (peek != null)
-			peek.setTrailingGap(popped.getTrailingGap());
+			peek.setTrailingHiddenRegion(popped.getTrailingHiddenRegion());
 	}
 
 	@Override

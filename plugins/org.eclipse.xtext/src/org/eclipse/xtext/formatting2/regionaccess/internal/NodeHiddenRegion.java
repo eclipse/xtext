@@ -14,8 +14,8 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
  */
 public class NodeHiddenRegion extends AbstractHiddenRegion {
 
-	protected NodeHiddenRegion(ITextRegionAccess tokenAccess) {
-		super(tokenAccess);
+	protected NodeHiddenRegion(ITextRegionAccess access) {
+		super(access);
 	}
 
 	@Override

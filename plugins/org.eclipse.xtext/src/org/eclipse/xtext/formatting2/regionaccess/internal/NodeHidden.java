@@ -22,9 +22,9 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
 	private final NodeHiddenRegion hiddenRegion;
 
-	protected NodeHidden(NodeHiddenRegion gap, INode node) {
-		super((NodeModelBasedRegionAccess) gap.getTextRegionAccess(), node);
-		this.hiddenRegion = gap;
+	protected NodeHidden(NodeHiddenRegion hidden, INode node) {
+		super((NodeModelBasedRegionAccess) hidden.getTextRegionAccess(), node);
+		this.hiddenRegion = hidden;
 	}
 
 	@Override

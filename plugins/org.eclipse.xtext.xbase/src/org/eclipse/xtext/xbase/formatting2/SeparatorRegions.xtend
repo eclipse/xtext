@@ -11,8 +11,8 @@ import com.google.common.collect.AbstractIterator
 import java.util.Iterator
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.formatting2.ITextSegment
-import org.eclipse.xtext.formatting2.internal.TextSegment
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
