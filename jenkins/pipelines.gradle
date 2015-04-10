@@ -1,10 +1,12 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
-def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
-def smokeSuites = ['smoke-tests']
 def onPushSuites = runtimeSuites + ideSuites + java8Suites
-def allSuites = onPushSuites + slowSuites + smokeSuites 
+
+def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
+def smokeSuites = ['smoke-tests']
+def generatorSuites = ['generator-tests']
+def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
 
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
 
@@ -49,7 +51,7 @@ branches.each { branch ->
 					.name = "target-platform-refresh-${branch.name}"
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
-					.projects	= testJobs.findAll{slowSuites.contains(it.suite)}.collect{it.name}.join(',')
+					.projects	= testJobs.findAll{slowSuites.contains(it.suite) || generatorSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
 		}
 		
@@ -71,6 +73,9 @@ branches.each { branch ->
 					if (job.jdk == jdks['1.8']) {
 						params += '\n-DJAVA8=true'
 						builder.installationName = 'buckminster-4.4'
+					}
+					if (generatorSuites.contains(job.suite)) {
+						params += '-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
 					}
 					builder.commands = testScripts[job.suite]
 					builder.params = params
