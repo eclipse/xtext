@@ -55,33 +55,44 @@ annotation ToString {
 	 * Only list the values of the fields, not their names
 	 */
 	val hideFieldNames = false
+	
+	/**
+	 * By default, Iterables, Arrays and multiline Strings are pretty-printed.
+	 * Switching to their normal representation makes the toString method significantly faster.
+	 * @since 2.9
+	 */
+	val verbatimValues = false
 }
 
 /**
  * @since 2.7
- * @noextend
- * @noreference
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noreference This class is not intended to be referenced by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 @Beta
 class ToStringConfiguration {
 	val boolean skipNulls
 	val boolean singleLine
 	val boolean hideFieldNames
+	val boolean verbatimValues
 	
 	new() {
-		this(false, false, false)
+		this(false, false, false, false)
 	}
 
-	new(boolean skipNulls, boolean singleLine, boolean hideFieldNames) {
+	new(boolean skipNulls, boolean singleLine, boolean hideFieldNames, boolean verbatimValues) {
 		this.skipNulls = skipNulls
 		this.singleLine = singleLine
 		this.hideFieldNames = hideFieldNames
+		this.verbatimValues = verbatimValues
 	}
 
 	new(AnnotationReference annotation) {
 		this.skipNulls = annotation.getBooleanValue("skipNulls")
 		this.singleLine = annotation.getBooleanValue("singleLine")
 		this.hideFieldNames = annotation.getBooleanValue("hideFieldNames")
+		this.verbatimValues = annotation.getBooleanValue("verbatimValues")
 	}
 
 	def isSkipNulls() {
@@ -94,6 +105,10 @@ class ToStringConfiguration {
 
 	def isHideFieldNames() {
 		hideFieldNames
+	}
+	
+	def isVerbatimValues() {
+		verbatimValues
 	}
 }
 
@@ -155,6 +170,7 @@ class ToStringProcessor extends AbstractClassProcessor {
 						«IF config.skipNulls».skipNulls()«ENDIF»
 						«IF config.singleLine».singleLine()«ENDIF»
 						«IF config.hideFieldNames».hideFieldNames()«ENDIF»
+						«IF config.verbatimValues».verbatimValues()«ENDIF»
 						.toString();
 					return result;
 				'''
@@ -173,6 +189,7 @@ class ToStringProcessor extends AbstractClassProcessor {
 					«IF config.skipNulls»b.skipNulls();«ENDIF»
 					«IF config.singleLine»b.singleLine();«ENDIF»
 					«IF config.hideFieldNames»b.hideFieldNames();«ENDIF»
+					«IF config.verbatimValues»b.verbatimValues();«ENDIF»
 					«FOR field : fields»
 						b.add("«field.simpleName»", this.«field.simpleName»);
 					«ENDFOR»

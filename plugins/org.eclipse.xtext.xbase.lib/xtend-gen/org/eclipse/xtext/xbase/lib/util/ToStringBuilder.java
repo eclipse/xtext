@@ -105,6 +105,8 @@ public final class ToStringBuilder {
   
   private boolean showFieldNames = true;
   
+  private boolean prettyPrint = true;
+  
   private final ArrayList<Part> parts = CollectionLiterals.<Part>newArrayList();
   
   /**
@@ -144,6 +146,17 @@ public final class ToStringBuilder {
    */
   public ToStringBuilder hideFieldNames() {
     this.showFieldNames = false;
+    return this;
+  }
+  
+  /**
+   * By default, Iterables, Arrays and multiline Strings are pretty-printed.
+   * Switching to their normal representation makes the toString method significantly faster.
+   * @since 2.9
+   * @return this
+   */
+  public ToStringBuilder verbatimValues() {
+    this.prettyPrint = false;
     return this;
   }
   
@@ -313,10 +326,7 @@ public final class ToStringBuilder {
   }
   
   private void internalToString(final Object object, final IndentationAwareStringBuilder sb) {
-    boolean _equals = Objects.equal(object, null);
-    if (_equals) {
-      sb.append("null");
-    } else {
+    if (this.prettyPrint) {
       if ((object instanceof Iterable<?>)) {
         this.serializeIterable(((Iterable<?>)object), sb);
       } else {
@@ -364,8 +374,8 @@ public final class ToStringBuilder {
                             String _name = ((Enum<?>)object).name();
                             sb.append(_name);
                           } else {
-                            String _string_9 = object.toString();
-                            sb.append(_string_9);
+                            String _valueOf = String.valueOf(object);
+                            sb.append(_valueOf);
                           }
                         }
                       }
@@ -377,6 +387,9 @@ public final class ToStringBuilder {
           }
         }
       }
+    } else {
+      String _valueOf_1 = String.valueOf(object);
+      sb.append(_valueOf_1);
     }
   }
   
