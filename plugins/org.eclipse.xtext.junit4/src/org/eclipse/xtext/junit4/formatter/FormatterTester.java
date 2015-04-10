@@ -22,7 +22,7 @@ import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
@@ -53,7 +53,7 @@ public class FormatterTester {
 	private Provider<FormatterTestRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelBasedRegionAccessBuilderProvider;
+	private Provider<TextRegionAccessBuilder> textRegionBuilderProvider;
 
 	@Inject
 	private ParseHelper<EObject> parseHelper;
@@ -150,7 +150,7 @@ public class FormatterTester {
 	}
 
 	protected ITextRegionAccess createRegionAccessViaNodeModel(XtextResource resource) {
-		ITextRegionAccess access = nodeModelBasedRegionAccessBuilderProvider.get().withResource(resource).create();
+		ITextRegionAccess access = textRegionBuilderProvider.get().forNodeModel(resource).create();
 		return access;
 	}
 

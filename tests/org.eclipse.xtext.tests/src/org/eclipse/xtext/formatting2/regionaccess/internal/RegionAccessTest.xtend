@@ -20,6 +20,8 @@ import org.eclipse.xtext.serializer.impl.Serializer
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Provider
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,6 +30,7 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 class RegionAccessTest {
 	@Inject ParseHelper<Root> parseHelper
+	@Inject Provider<TextRegionAccessBuilder> textRegionAccessBuilder
 	@Inject ValidationTestHelper validationTestHelper
 	@Inject extension Serializer serializer
 
@@ -494,7 +497,7 @@ class RegionAccessTest {
 	}
 
 	private def createFromNodeModel(EObject obj) {
-		new NodeModelBasedRegionAccess.Builder().withResource(obj.eResource as XtextResource).create
+		textRegionAccessBuilder.get.forNodeModel(obj.eResource as XtextResource).create
 	}
 
 }
