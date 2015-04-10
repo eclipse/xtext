@@ -37,25 +37,25 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 
 	public static class Builder {
 
-		private Map<EObject, NodeEObjectTokens> eObjToTokens;
+		private Map<EObject, NodeEObjectRegion> eObjToTokens;
 		private NodeHiddenRegion firstHidden;
 		private NodeHiddenRegion lastHidden;
 		private XtextResource resource;
-		private LinkedList<NodeEObjectTokens> stack = new LinkedList<NodeEObjectTokens>();
+		private LinkedList<NodeEObjectRegion> stack = new LinkedList<NodeEObjectRegion>();
 
 		protected void add(NodeModelBasedRegionAccess access, INode node) {
 			if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
 				ILeafNode leafNode = (ILeafNode) node;
 				lastHidden.addPart(createHidden(lastHidden, leafNode));
 			} else {
-				NodeEObjectTokens eObjectTokens = stack.peek();
+				NodeEObjectRegion eObjectTokens = stack.peek();
 				NodeSemanticRegion newSemantic = createSemanticRegion(access, node);
 				NodeHiddenRegion newHidden = createHiddenRegion(access);
 				newSemantic.setTrailingHiddenRegion(newHidden);
 				newHidden.setPrevious(newSemantic);
 				newSemantic.setLeadingHiddenRegion(lastHidden);
 				lastHidden.setNext(newSemantic);
-				eObjectTokens.getSemanticRegions().add(newSemantic);
+				eObjectTokens.getSemanticLeafRegions().add(newSemantic);
 				newSemantic.setEObjectTokens(eObjectTokens);
 				lastHidden = newHidden;
 			}
@@ -81,18 +81,18 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 			return new NodeSemanticRegion(access, node);
 		}
 
-		protected NodeEObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
-			return new NodeEObjectTokens(access, node);
+		protected NodeEObjectRegion createTokens(NodeModelBasedRegionAccess access, INode node) {
+			return new NodeEObjectRegion(access, node);
 		}
 
-		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess regionAccess) {
+		protected Map<EObject, AbstractEObjectRegion> getEObjectToTokensMap(ITextRegionAccess regionAccess) {
 			this.eObjToTokens = Maps.newHashMap();
 			this.firstHidden = createHiddenRegion(regionAccess);
 			this.lastHidden = this.firstHidden;
 			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) regionAccess;
 			CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
 			process(rootNode, access);
-			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
+			return ImmutableMap.<EObject, AbstractEObjectRegion> copyOf(this.eObjToTokens);
 		}
 
 		protected IHiddenRegion getFirstRegion() {
@@ -160,10 +160,10 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		}
 
 		protected void process(INode node, NodeModelBasedRegionAccess access) {
-			NodeEObjectTokens tokens = stack.peek();
+			NodeEObjectRegion tokens = stack.peek();
 			boolean creator = isEObjectRoot(node);
 			if (creator || tokens == null) {
-				tokens = new NodeEObjectTokens(access, node);
+				tokens = new NodeEObjectRegion(access, node);
 				tokens.setLeadingHiddenRegion(lastHidden);
 				stack.push(tokens);
 			}
@@ -187,12 +187,12 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 					process(child, access);
 			}
 			if (creator) {
-				NodeEObjectTokens popped = stack.pop();
+				NodeEObjectRegion popped = stack.pop();
 				popped.setTrailingHiddenRegion(lastHidden);
 				EObject semanticElement = popped.getSemanticElement();
 				if (semanticElement == null)
 					throw new IllegalStateException();
-				NodeEObjectTokens old = eObjToTokens.put(semanticElement, popped);
+				NodeEObjectRegion old = eObjToTokens.put(semanticElement, popped);
 				if (old != null)
 					throw new IllegalStateException();
 			}
@@ -204,7 +204,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 		}
 	}
 
-	private final Map<EObject, AbstractEObjectTokens> eObjectToTokens;
+	private final Map<EObject, AbstractEObjectRegion> eObjectToTokens;
 	private final IHiddenRegion firstRegion;
 	private final XtextResource resource;
 
@@ -240,7 +240,7 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	protected AbstractEObjectTokens getTokens(EObject obj) {
+	public AbstractEObjectRegion regionForEObject(EObject obj) {
 		return eObjectToTokens.get(obj);
 	}
 
