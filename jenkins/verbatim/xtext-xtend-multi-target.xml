@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<matrix-project plugin="matrix-project@1.4">
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>2</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
+      <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>8</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
+        <url>https://github.com/eclipse/xtext.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
+      <hudson.plugins.git.extensions.impl.CloneOption>
+        <shallow>false</shallow>
+        <reference></reference>
+        <timeout>60</timeout>
+      </hudson.plugins.git.extensions.impl.CloneOption>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 6 * * 6</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <axes>
+    <hudson.matrix.TextAxis>
+      <name>ECLIPSE_TARGET_ALIAS</name>
+      <values>
+        <string>Helios</string>
+        <string>Indigo</string>
+        <string>Juno</string>
+        <string>Kepler</string>
+        <string>Luna</string>
+        <string>Latest</string>
+      </values>
+    </hudson.matrix.TextAxis>
+  </axes>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf buildroot xtend.* repositories/* output
+mkdir buildroot
+mkdir output
+</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
+      <project>xtext-master</project>
+      <filter>xtext.p2.repository/**</filter>
+      <target>repositories</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
+      <project>target-platforms-master</project>
+      <filter>${ECLIPSE_TARGET_ALIAS}/**</filter>
+      <target>repositories/eclipse/</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.WorkspaceSelector"/>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Ant plugin="ant@1.2">
+      <targets>resolve.variables</targets>
+      <antName>(Default)</antName>
+      <buildFile>${WORKSPACE}/org.eclipse.xtext.git/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
+      <properties>xtext.p2.repository=file:${WORKSPACE}/repositories/xtext.p2.repository
+eclipse.tp=&quot;file:${WORKSPACE}/repositories/eclipse/${ECLIPSE_TARGET_ALIAS}/final&quot;
+src.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;
+dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;</properties>
+    </hudson.tasks.Ant>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-headless</installationName>
+      <commands>importtargetdefinition  -DuseMirror=false -A &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+
+resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec&quot;
+resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec&quot;
+
+build
+junit --launch &quot;org.eclipse.xtext.tests/xtext.tests.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.tests-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.junit4.tests-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.common.types.tests/xtext.common.types.tests.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.common.types.tests-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xbase.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xbase.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+
+junit --launch &quot;org.eclipse.xtend.core.tests/xtend.core.tests.fast.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.core.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.core.tests/xtend.core.tests.fast (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.core.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+
+junit --launch &quot;org.eclipse.xtext.builder.tests/xtext.builder.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.builder.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.ui.tests/xtext.ui.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xbase.tests/xtext.xbase.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xbase.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xbase.tests/xtext.xbase.tests.slow (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xbase.tests.slow.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xbase.ui.tests/xtext.xbase.ui.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xbase.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtext.xtext.ui.tests/xtext.xtext.ui.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtext.test.results/xtext.xtext.ui.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+
+junit --launch &quot;org.eclipse.xtend.core.tests/xtend.core.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.core.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.core.tests/xtend.core.tests.slow (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.core.tests.slow.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+
+junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.slow.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.slow-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.slow (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.slow.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.fast-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.fast.xtend-${ECLIPSE_TARGET_ALIAS}.xml&quot;
+junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.quarantain-${ECLIPSE_TARGET_ALIAS}.xml&quot;</commands>
+      <logLevel>info</logLevel>
+      <params>-Declipse.p2.mirrors=false
+-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dxtext.checkout.location=${checkout.location}
+-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand></userCommand>
+      <userWorkspace>${WORKSPACE}/buildroot/buckminster.workspace</userWorkspace>
+      <globalPropertiesFile></globalPropertiesFile>
+      <equinoxLauncherArgs></equinoxLauncherArgs>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
+      <testResults>*.test.results/**</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+      <healthScaleFactor>1.0</healthScaleFactor>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>false</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>true</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>800</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.AbortOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.17">
+      <takeScreenshot>false</takeScreenshot>
+      <useXauthority>true</useXauthority>
+    </hudson.plugins.xvnc.Xvnc>
+  </buildWrappers>
+  <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+  </executionStrategy>
+</matrix-project>
