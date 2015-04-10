@@ -19,7 +19,6 @@
 		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
 
 		<module>../org.eclipse.xtext.standalone.parent</module>
-		<module>../org.eclipse.xtext.dependencies</module>
 		<module>../org.eclipse.xtext</module>
 		<module>../org.eclipse.xtext.ide</module>
 		<module>../org.eclipse.xtext.common.types</module>
