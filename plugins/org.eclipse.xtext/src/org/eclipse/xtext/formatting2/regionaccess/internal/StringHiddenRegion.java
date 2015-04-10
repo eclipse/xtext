@@ -16,8 +16,8 @@ public class StringHiddenRegion extends AbstractHiddenRegion {
 
 	private boolean undefined = true;
 
-	protected StringHiddenRegion(ITextRegionAccess tokenAccess) {
-		super(tokenAccess);
+	protected StringHiddenRegion(ITextRegionAccess access) {
+		super(access);
 	}
 
 	@Override

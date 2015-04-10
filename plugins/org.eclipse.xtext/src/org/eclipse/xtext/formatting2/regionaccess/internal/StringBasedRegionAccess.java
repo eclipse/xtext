@@ -47,7 +47,7 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 
 	@Override
 	public IHiddenRegion getFirstRegionInFile() {
-		return root.getLeadingGap();
+		return root.getLeadingHiddenRegion();
 	}
 
 	@Override

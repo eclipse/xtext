@@ -15,8 +15,8 @@ import org.eclipse.xtext.formatting2.regionaccess.IComment;
  */
 public class StringComment extends StringHidden implements IComment {
 
-	protected StringComment(AbstractHiddenRegion gap, AbstractRule rule, int offset, int length) {
-		super(gap, rule, offset, length);
+	protected StringComment(AbstractHiddenRegion hidden, AbstractRule rule, int offset, int length) {
+		super(hidden, rule, offset, length);
 	}
 
 }

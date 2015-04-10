@@ -23,8 +23,8 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	private IHiddenRegion trailing;
 	private NodeEObjectTokens eObjectTokens;
 
-	protected NodeSemanticRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
-		super(tokenAccess, node);
+	protected NodeSemanticRegion(NodeModelBasedRegionAccess access, INode node) {
+		super(access, node);
 	}
 
 	@Override
@@ -55,11 +55,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
 	}
 
-	protected void setLeadingGap(IHiddenRegion leading) {
+	protected void setLeadingHiddenRegion(IHiddenRegion leading) {
 		this.leading = leading;
 	}
 
-	protected void setTrailingGap(IHiddenRegion trailing) {
+	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
 		this.trailing = trailing;
 	}
 

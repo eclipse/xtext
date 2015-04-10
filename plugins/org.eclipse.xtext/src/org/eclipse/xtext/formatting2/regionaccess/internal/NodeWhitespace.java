@@ -14,7 +14,7 @@ import org.eclipse.xtext.nodemodel.INode;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class NodeWhitespace extends NodeHidden implements IWhitespace {
-	protected NodeWhitespace(NodeHiddenRegion gap, INode node) {
-		super(gap, node);
+	protected NodeWhitespace(NodeHiddenRegion hidden, INode node) {
+		super(hidden, node);
 	}
 }

@@ -17,11 +17,11 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeRegion extends AbstractTextSegment {
 	private final INode node;
-	private final NodeModelBasedRegionAccess tokenAccess;
+	private final NodeModelBasedRegionAccess access;
 
-	protected NodeRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
+	protected NodeRegion(NodeModelBasedRegionAccess access, INode node) {
 		super();
-		this.tokenAccess = tokenAccess;
+		this.access = access;
 		this.node = node;
 	}
 
@@ -45,7 +45,7 @@ public class NodeRegion extends AbstractTextSegment {
 
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
-		return tokenAccess;
+		return access;
 	}
 
 	@Override
