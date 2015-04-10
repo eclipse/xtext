@@ -70,6 +70,19 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(toUnix('''Foo [1]'''), instance.toString)
 		]
 	}
+	@Test
+	def void testVerbatimValues() {
+		'''
+			import org.eclipse.xtend.lib.annotations.ToString
+			@ToString(singleLine=true, verbatimValues = true) class Foo {
+				int[] a = #[1, 2, 3]
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertTrue(instance.toString.contains('[I@'))
+		]
+	}
 	
 	@Test
 	def void testSkipNulls() {
