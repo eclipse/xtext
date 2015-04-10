@@ -138,7 +138,9 @@ dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.rele
 resolve &quot;${releng.project}/releng/xtext.cquery&quot;
 importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</commands>
         <logLevel>info</logLevel>
-        <params>-Dreleng.project=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/</params>
+        <params>-Dreleng.project=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/
+-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dxtext.checkout.location=${checkout.location}</params>
         <targetPlatformName>None</targetPlatformName>
         <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
         <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
