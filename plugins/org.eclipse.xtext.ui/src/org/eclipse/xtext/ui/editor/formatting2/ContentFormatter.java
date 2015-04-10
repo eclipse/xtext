@@ -24,6 +24,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.preferences.IPreferenceValues;
@@ -63,7 +65,7 @@ public class ContentFormatter implements IContentFormatter {
 	private Provider<IFormatter2> formatterProvider;
 
 	@Inject
-	private NodeModelBasedRegionAccess.Builder nodeModelTokenAccessBuilder;
+	private TextRegionAccessBuilder regionBuilder;
 
 	@Inject
 	@FormatterPreferences
@@ -122,7 +124,7 @@ public class ContentFormatter implements IContentFormatter {
 		request.setAllowIdentityEdits(false);
 		request.setFormatUndenfinedTokensOnly(false);
 		request.setRegions(singletonList(textRegion));
-		NodeModelBasedRegionAccess tokenAccess = nodeModelTokenAccessBuilder.withResource(resource).create();
+		ITextRegionAccess tokenAccess = regionBuilder.forNodeModel(resource).create();
 		IPreferenceValues preferenceValues = preferencesProvider.getPreferenceValues(resource);
 		request.setPreferences(TypedPreferenceValues.castOrWrap(preferenceValues));
 		request.setTextRegionAccess(tokenAccess);

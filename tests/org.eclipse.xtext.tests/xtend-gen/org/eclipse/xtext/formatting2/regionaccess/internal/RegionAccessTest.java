@@ -8,12 +8,13 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import com.google.inject.Inject;
+import javax.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -37,6 +38,9 @@ import org.junit.runner.RunWith;
 public class RegionAccessTest {
   @Inject
   private ParseHelper<Root> parseHelper;
+  
+  @Inject
+  private Provider<TextRegionAccessBuilder> textRegionAccessBuilder;
   
   @Inject
   private ValidationTestHelper validationTestHelper;
@@ -1070,7 +1074,7 @@ public class RegionAccessTest {
       final String exp = expectation.toString();
       final Root obj = this.parseHelper.parse(file);
       this.validationTestHelper.assertNoErrors(obj);
-      final NodeModelBasedRegionAccess access1 = this.createFromNodeModel(obj);
+      final ITextRegionAccess access1 = this.createFromNodeModel(obj);
       final ITextRegionAccess access2 = this.serializer.serializeToRegions(obj);
       TextRegionAccessToString _textRegionAccessToString = new TextRegionAccessToString();
       TextRegionAccessToString _withRegionAccess = _textRegionAccessToString.withRegionAccess(access1);
@@ -1087,10 +1091,10 @@ public class RegionAccessTest {
     }
   }
   
-  private NodeModelBasedRegionAccess createFromNodeModel(final EObject obj) {
-    NodeModelBasedRegionAccess.Builder _builder = new NodeModelBasedRegionAccess.Builder();
+  private ITextRegionAccess createFromNodeModel(final EObject obj) {
+    TextRegionAccessBuilder _get = this.textRegionAccessBuilder.get();
     Resource _eResource = obj.eResource();
-    NodeModelBasedRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
-    return _withResource.create();
+    TextRegionAccessBuilder _forNodeModel = _get.forNodeModel(((XtextResource) _eResource));
+    return _forNodeModel.create();
   }
 }

@@ -25,7 +25,7 @@ import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegionAccessBuildingSequencer;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
@@ -69,7 +69,7 @@ public class Serializer implements ISerializer {
 	private Provider<FormatterRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<TextRegionAccessBuildingSequencer> textRegionAccessBuildingSequencerProvider;
+	private Provider<TextRegionAccessBuilder> textRegionBuilderProvider;
 
 	@Inject
 	protected Provider<ISemanticSequencer> semanticSequencerProvider;
@@ -129,10 +129,10 @@ public class Serializer implements ISerializer {
 
 	public ITextRegionAccess serializeToRegions(EObject obj) {
 		EObject context = getContext(obj);
-		TextRegionAccessBuildingSequencer builder = textRegionAccessBuildingSequencerProvider.get().withRoot(obj);
+		TextRegionAccessBuilder builder = textRegionBuilderProvider.get();
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-		serialize(obj, context, builder, errors);
-		ITextRegionAccess regionAccess = builder.getRegionAccess();
+		serialize(obj, context, builder.forSequence(obj), errors);
+		ITextRegionAccess regionAccess = builder.create();
 		return regionAccess;
 	}
 

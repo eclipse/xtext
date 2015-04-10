@@ -48,6 +48,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
@@ -77,6 +78,7 @@ public class ConvertJavaCode {
 	private @Inject FileExtensionProvider fileExtensionProvider;
 	private @Inject @FormatterPreferences IPreferenceValuesProvider cfgProvider;
 	private @Inject IFormatter2 formatter;
+	private @Inject Provider<TextRegionAccessBuilder> regionAccessBuilder;
 	private @Inject DontAskAgainDialogs dialogs;
 	private static final Logger LOG = Logger.getLogger(ConvertJavaCode.class);
 
@@ -193,7 +195,7 @@ public class ConvertJavaCode {
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
 			FormatterRequest request = new FormatterRequest();
 			request.setAllowIdentityEdits(false);
-			request.setTextRegionAccess(new NodeModelBasedRegionAccess.Builder().withResource(resource).create());
+			request.setTextRegionAccess(regionAccessBuilder.get().forNodeModel(resource).create());
 			request.setPreferences(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
 			List<ITextReplacement> replacements = formatter.format(request);
 			String formatted = TextReplacements.apply(xtendCode, replacements);
