@@ -9,6 +9,8 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
+
 /**
  * <p>
  * Use this interface to invoke a formatter.
@@ -21,8 +23,7 @@ import java.util.List;
  * @see org.eclipse.xtext.formatting2 The package org.eclipse.xtext.formatting2 for an introduction to formatting
  * @see AbstractFormatter2 The base class {@code AbstractFormatter2} to implement your own formatter.
  * @see FormatterRequest The class {@code FormatterRequest} to specify what and how sould be formatted.
- * @see TextReplacements#apply(CharSequence, Iterable) {@çode Textplacements#apply} to apply replacements to a
- *      CharSequence or String.
+ * @see ITextRegionRewriter to apply replacements to a CharSequence or String.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8

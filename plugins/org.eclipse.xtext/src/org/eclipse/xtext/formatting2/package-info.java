@@ -13,7 +13,7 @@
  * <p>To run the formatter, you'll need to construct a {@link org.eclipse.xtext.formatting2.FormatterRequest},
  * get an instance of {@link org.eclipse.xtext.formatting2.IFormatter2} from your language's Guice Injector,
  * and call {@link org.eclipse.xtext.formatting2.IFormatter2#format(FormatterRequest)}. The result will be a list
- * of text replacements. Use {@link org.eclipse.xtext.formatting2.TextReplacements#apply(CharSequence, Iterable)}
+ * of text replacements. Use {@link org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter}
  * to apply the replacements to a String/CharSequence, if desired.</p>
  * 
  * <p>To implement a formatter or to understand how to implement a formatter, see

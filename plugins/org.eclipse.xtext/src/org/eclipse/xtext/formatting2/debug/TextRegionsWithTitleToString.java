@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.internal.TextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
@@ -146,7 +145,7 @@ public class TextRegionsWithTitleToString {
 			replacements.add(new TextReplacement(access, region.getOffset(), 0, open));
 			replacements.add(new TextReplacement(access, region.getEndOffset(), 0, close));
 		}
-		String vizualized = TextReplacements.apply(frame, replacements);
+		String vizualized = access.getRewriter().renderToString(frame, replacements);
 		builder.append(box("document snippet", vizualized));
 		return builder.toString();
 	}
