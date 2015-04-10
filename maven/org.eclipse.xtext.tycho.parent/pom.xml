@@ -35,6 +35,11 @@
 		<module>../../plugins/org.eclipse.xtext.builder</module>
 		<module>../../plugins/org.eclipse.xtext.ui</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.ui</module>
+		<module>../../plugins/org.eclipse.xtext.common.types.ui</module>
+		<module>../../plugins/org.eclipse.xtext.ui.codetemplates</module>
+		<module>../../plugins/org.eclipse.xtext.ui.codetemplates.ui</module>
+		<module>../../plugins/org.eclipse.xtext.ui.shared</module>
+		<module>../../plugins/org.eclipse.xtext.common.types.edit</module>
 		
 		<module>../../plugins/org.eclipse.xtext.xbase.junit</module>
 		<module>../../plugins/org.eclipse.xtend.core</module>
