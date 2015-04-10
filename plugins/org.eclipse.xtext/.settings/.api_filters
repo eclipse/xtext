@@ -8,6 +8,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src-gen/org/eclipse/xtext/XtextStandaloneSetupGenerated.java" type="org.eclipse.xtext.XtextStandaloneSetupGenerated">
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="getFileExtensions()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/common/TerminalsStandaloneSetupGenerated.java" type="org.eclipse.xtext.common.TerminalsStandaloneSetupGenerated">
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="getFileExtensions()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/GrammarToDot.java" type="org.eclipse.xtext.GrammarToDot">
         <filter id="627060751">
             <message_arguments>
