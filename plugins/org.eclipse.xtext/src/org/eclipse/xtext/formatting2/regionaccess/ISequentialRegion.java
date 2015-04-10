@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
-import org.eclipse.xtext.formatting2.ITextSegment;
-
 /**
  * <p>Common interface for {@link IHiddenRegion} and {@link ISemanticRegion}.</p>
  * 

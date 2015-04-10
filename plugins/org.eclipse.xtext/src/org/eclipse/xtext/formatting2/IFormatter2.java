@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 
 /**
  * <p>

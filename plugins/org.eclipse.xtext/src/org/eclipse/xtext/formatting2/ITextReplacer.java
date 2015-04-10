@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+
 import com.google.common.base.Function;
 
 /**

@@ -9,7 +9,6 @@ package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.formatting2.ITextSegment;
 
 /**
  * Common interface for {@link IWhitespace} and {@link IComment}.
