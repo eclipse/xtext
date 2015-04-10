@@ -9,11 +9,10 @@ package org.eclipse.xtext.formatting2.debug;
 
 import java.util.List;
 
-import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
-import org.eclipse.xtext.formatting2.internal.TextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextReplacement;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -146,7 +145,7 @@ public class TextRegionsWithTitleToString {
 			replacements.add(new TextReplacement(access, region.getOffset(), 0, open));
 			replacements.add(new TextReplacement(access, region.getEndOffset(), 0, close));
 		}
-		String vizualized = TextReplacements.apply(frame, replacements);
+		String vizualized = access.getRewriter().renderToString(frame, replacements);
 		builder.append(box("document snippet", vizualized));
 		return builder.toString();
 	}

@@ -9,6 +9,9 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+
 /**
  * Relevant state and methods during execution of a {@link ITextReplacer text replacer}.
  * 

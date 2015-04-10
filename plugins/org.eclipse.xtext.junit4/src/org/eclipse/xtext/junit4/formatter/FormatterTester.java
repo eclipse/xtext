@@ -16,13 +16,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
@@ -53,7 +52,7 @@ public class FormatterTester {
 	private Provider<FormatterTestRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelBasedRegionAccessBuilderProvider;
+	private Provider<TextRegionAccessBuilder> textRegionBuilderProvider;
 
 	@Inject
 	private ParseHelper<EObject> parseHelper;
@@ -83,10 +82,11 @@ public class FormatterTester {
 		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
-		List<ITextReplacement> format = createFormatter(req).format(request);
-		assertReplacementsAreInRegion(format, request.getRegions(), document);
-		assertAllHiddenRegionsAre(request.getTextRegionAccess(), format);
-		String applied = TextReplacements.apply(document, format);
+		List<ITextReplacement> replacements = createFormatter(req).format(request);
+		assertReplacementsAreInRegion(replacements, request.getRegions(), document);
+		assertAllHiddenRegionsAre(request.getTextRegionAccess(), replacements);
+		String applied = request.getTextRegionAccess().getRewriter().renderToString(replacements);
+
 		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), applied);
 
 		// TODO: assert formatting a second time only produces identity replacements
@@ -150,7 +150,7 @@ public class FormatterTester {
 	}
 
 	protected ITextRegionAccess createRegionAccessViaNodeModel(XtextResource resource) {
-		ITextRegionAccess access = nodeModelBasedRegionAccessBuilderProvider.get().withResource(resource).create();
+		ITextRegionAccess access = textRegionBuilderProvider.get().forNodeModel(resource).create();
 		return access;
 	}
 

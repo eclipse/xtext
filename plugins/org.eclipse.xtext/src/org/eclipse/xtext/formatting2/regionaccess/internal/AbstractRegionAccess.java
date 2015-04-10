@@ -18,20 +18,17 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
-import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -67,8 +64,8 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	}
 
 	@Override
-	public AbstractElement getInvokingGrammarElement(EObject obj) {
-		AbstractEObjectTokens tokens = getTokens(obj);
+	public EObject getInvokingGrammarElement(EObject obj) {
+		AbstractEObjectRegion tokens = regionForEObject(obj);
 		if (tokens == null)
 			return null;
 		return tokens.getGrammarElement();
@@ -84,42 +81,43 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		return this;
 	}
 
-	protected abstract AbstractEObjectTokens getTokens(EObject obj);
+	@Override
+	public abstract AbstractEObjectRegion regionForEObject(EObject obj);
 
 	@Override
 	public ISemanticRegion immediatelyFollowingKeyword(EObject owner, String keyword) {
 		IHiddenRegion trailingHiddenRegion = trailingHiddenRegion(owner);
 		if (trailingHiddenRegion == null)
 			return null;
-		ISemanticRegion lastToken = trailingHiddenRegion.getPreviousSemanticRegion();
-		ISemanticRegion result = immediatelyFollowingKeyword(lastToken, keyword);
+		ISemanticRegion lastRegion = trailingHiddenRegion.getPreviousSemanticRegion();
+		ISemanticRegion result = immediatelyFollowingKeyword(lastRegion, keyword);
 		return result;
 	}
 
 	@Override
-	public ISemanticRegion immediatelyFollowingKeyword(ISequentialRegion token, String keyword) {
-		if (token == null)
+	public ISemanticRegion immediatelyFollowingKeyword(ISequentialRegion region, String keyword) {
+		if (region == null)
 			return null;
-		ISemanticRegion nextToken = token.getNextSemanticRegion();
-		if (nextToken == null)
+		ISemanticRegion nextregion = region.getNextSemanticRegion();
+		if (nextregion == null)
 			return null;
-		AbstractElement grammarElement = nextToken.getGrammarElement();
+		EObject grammarElement = nextregion.getGrammarElement();
 		if (grammarElement instanceof Keyword && ((Keyword) grammarElement).getValue().equals(keyword))
-			return nextToken;
+			return nextregion;
 		return null;
 	}
 
 	@Override
 	public ISemanticRegion immediatelyPrecedingKeyword(EObject owner) {
-		ISemanticRegion firstToken = leadingHiddenRegion(owner).getNextSemanticRegion();
-		ISemanticRegion result = immediatelyPrecedingKeyword(firstToken);
+		ISemanticRegion firstRegion = leadingHiddenRegion(owner).getNextSemanticRegion();
+		ISemanticRegion result = immediatelyPrecedingKeyword(firstRegion);
 		return result;
 	}
 
 	@Override
 	public ISemanticRegion immediatelyPrecedingKeyword(EObject owner, String keyword) {
-		ISemanticRegion firstToken = leadingHiddenRegion(owner).getNextSemanticRegion();
-		ISemanticRegion result = immediatelyPrecedingKeyword(firstToken, keyword);
+		ISemanticRegion firstRegion = leadingHiddenRegion(owner).getNextSemanticRegion();
+		ISemanticRegion result = immediatelyPrecedingKeyword(firstRegion, keyword);
 		return result;
 	}
 
@@ -127,12 +125,12 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	public ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion token) {
 		if (token == null)
 			return null;
-		ISemanticRegion previousToken = token.getPreviousSemanticRegion();
-		if (previousToken == null)
+		ISemanticRegion previousRegion = token.getPreviousSemanticRegion();
+		if (previousRegion == null)
 			return null;
-		AbstractElement grammarElement = previousToken.getGrammarElement();
+		EObject grammarElement = previousRegion.getGrammarElement();
 		if (grammarElement instanceof Keyword)
-			return previousToken;
+			return previousRegion;
 		return null;
 	}
 
@@ -140,12 +138,12 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	public ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion token, String keyword) {
 		if (token == null)
 			return null;
-		ISemanticRegion previousToken = token.getPreviousSemanticRegion();
-		if (previousToken == null)
+		ISemanticRegion previousRegion = token.getPreviousSemanticRegion();
+		if (previousRegion == null)
 			return null;
-		AbstractElement grammarElement = previousToken.getGrammarElement();
+		EObject grammarElement = previousRegion.getGrammarElement();
 		if (grammarElement instanceof Keyword && ((Keyword) grammarElement).getValue().equals(keyword))
-			return previousToken;
+			return previousRegion;
 		return null;
 	}
 
@@ -159,24 +157,24 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		return null;
 	}
 
-	protected Map<? extends EObject, ? extends AbstractEObjectTokens> initMap() {
+	protected Map<? extends EObject, ? extends AbstractEObjectRegion> initMap() {
 		return null;
 	}
 
 	@Override
 	public boolean isMultiline(EObject object) {
-		AbstractEObjectTokens tokens = getTokens(object);
+		AbstractEObjectRegion tokens = regionForEObject(object);
 		if (tokens == null)
 			return false;
-		ISemanticRegion current = tokens.getLeadingGap().getNextSemanticRegion();
-		ISemanticRegion last = tokens.getTrailingGap().getPreviousSemanticRegion();
+		ISemanticRegion current = tokens.getLeadingHiddenRegion().getNextSemanticRegion();
+		ISemanticRegion last = tokens.getTrailingHiddenRegion().getPreviousSemanticRegion();
 		while (current != null) {
 			if (current.isMultiline())
 				return true;
 			if (current == last)
 				return false;
-			IHiddenRegion gap = current.getNextHiddenRegion();
-			if (gap.isMultiline())
+			IHiddenRegion next = current.getNextHiddenRegion();
+			if (next.isMultiline())
 				return true;
 			current = current.getNextSemanticRegion();
 		}
@@ -185,46 +183,38 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public IHiddenRegion leadingHiddenRegion(EObject owner) {
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
-		return tokens.getLeadingGap();
-	}
-
-	@Override
-	public ITextSegment regionForEObject(EObject object) {
-		AbstractEObjectTokens tokens = getTokens(object);
-		int offset = tokens.getLeadingGap().getEndOffset();
-		int endOffset = tokens.getTrailingGap().getOffset();
-		return new TextSegment(this, offset, endOffset - offset);
+		return tokens.getLeadingHiddenRegion();
 	}
 
 	@Override
 	public ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feat) {
 		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
 			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
-		for (ISemanticRegion token : tokens.getTokens()) {
-			Assignment assignment = GrammarUtil.containingAssignment(token.getGrammarElement());
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions()) {
+			Assignment assignment = GrammarUtil.containingAssignment(region.getGrammarElement());
 			if (assignment != null && assignment.getFeature().equals(feat.getName()))
-				return token;
+				return region;
 		}
 		return null;
 	}
 
 	@Override
 	public ISemanticRegion regionForKeyword(EObject owner, String keyword) {
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
-		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions()) {
+			EObject element = region.getGrammarElement();
 			if (element instanceof Keyword) {
 				Keyword kw = (Keyword) element;
 				if (kw.getValue().equals(keyword))
-					return token;
+					return region;
 			}
 		}
 		return null;
@@ -232,11 +222,11 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule) {
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
-		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+		for (ISemanticRegion token : tokens.getSemanticLeafRegions()) {
+			EObject element = token.getGrammarElement();
 			if (element instanceof RuleCall) {
 				RuleCall rc = (RuleCall) element;
 				if (rc.getRule() == rule)
@@ -248,12 +238,12 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public List<ISemanticRegion> regionsForKeywords(EObject owner, String... keywords) {
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return Collections.emptyList();
 		Collection<String> kwSet = keywords.length <= 1 ? Arrays.asList(keywords) : Sets.newHashSet(keywords);
 		List<ISemanticRegion> result = Lists.newArrayList();
-		for (ISemanticRegion token : tokens.getTokens())
+		for (ISemanticRegion token : tokens.getSemanticLeafRegions())
 			if (token.getGrammarElement() instanceof Keyword) {
 				Keyword kw = (Keyword) token.getGrammarElement();
 				if (kwSet.contains(kw.getValue()))
@@ -265,16 +255,16 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	@Override
 	public List<ISemanticRegion> regionsForRuleCallsTo(EObject owner, AbstractRule... rule) {
 		HashSet<AbstractRule> set = Sets.newHashSet(rule);
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return Collections.emptyList();
 		List<ISemanticRegion> result = Lists.newArrayList();
-		for (ISemanticRegion token : tokens.getTokens()) {
-			AbstractElement element = token.getGrammarElement();
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions()) {
+			EObject element = region.getGrammarElement();
 			if (element instanceof RuleCall) {
 				RuleCall rc = (RuleCall) element;
 				if (set.contains(rc.getRule()))
-					result.add(token);
+					result.add(region);
 			}
 		}
 		return result;
@@ -287,10 +277,15 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public IHiddenRegion trailingHiddenRegion(EObject owner) {
-		AbstractEObjectTokens tokens = getTokens(owner);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
-		return tokens.getTrailingGap();
+		return tokens.getTrailingHiddenRegion();
+	}
+
+	@Override
+	public TextRegionRewriter getRewriter() {
+		return new TextRegionRewriter(this);
 	}
 
 }

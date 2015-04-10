@@ -9,7 +9,6 @@ package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -30,7 +29,7 @@ public interface ISemanticRegion extends ISequentialRegion {
 	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall},
 	 *         {@link CrossReference}, or {@link Keyword}.
 	 */
-	AbstractElement getGrammarElement();
+	EObject getGrammarElement();
 
 	/**
 	 * The EObject this semantic region belongs to.

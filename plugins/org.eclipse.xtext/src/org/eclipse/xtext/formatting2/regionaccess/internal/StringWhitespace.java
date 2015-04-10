@@ -15,8 +15,8 @@ import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
  */
 public class StringWhitespace extends StringHidden implements IWhitespace {
 
-	protected StringWhitespace(AbstractHiddenRegion gap, AbstractRule rule, int offset, int length) {
-		super(gap, rule, offset, length);
+	protected StringWhitespace(AbstractHiddenRegion hidden, AbstractRule rule, int offset, int length) {
+		super(hidden, rule, offset, length);
 	}
 
 }

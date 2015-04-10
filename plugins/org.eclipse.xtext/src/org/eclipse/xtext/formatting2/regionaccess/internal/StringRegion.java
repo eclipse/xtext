@@ -8,7 +8,6 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
 /**

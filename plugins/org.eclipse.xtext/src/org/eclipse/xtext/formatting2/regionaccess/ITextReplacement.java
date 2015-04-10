@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2;
+package org.eclipse.xtext.formatting2.regionaccess;
 
 /**
  * A replacement describes which new text should substitute the text at the given offset and length.

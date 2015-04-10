@@ -5,28 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2.regionaccess.internal;
+package org.eclipse.xtext.formatting2.regionaccess;
 
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import java.util.List;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class StringHiddenRegion extends AbstractHiddenRegion {
+public interface IEObjectRegion extends ISemanticRegion {
 
-	private boolean undefined = true;
-
-	protected StringHiddenRegion(ITextRegionAccess access) {
-		super(access);
-	}
-
-	@Override
-	public boolean isUndefined() {
-		return undefined;
-	}
-
-	protected void setUndefined(boolean undefined) {
-		this.undefined = undefined;
-	}
+	List<ISemanticRegion> getSemanticLeafRegions();
 
 }

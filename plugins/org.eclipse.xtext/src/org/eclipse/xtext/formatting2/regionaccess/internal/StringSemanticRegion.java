@@ -59,11 +59,11 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 		return semanticElement;
 	}
 
-	protected void setLeadingGap(IHiddenRegion leading) {
+	protected void setLeadingHiddenRegion(IHiddenRegion leading) {
 		this.leading = leading;
 	}
 
-	protected void setTrailingGap(IHiddenRegion trailing) {
+	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
 		this.trailing = trailing;
 	}
 }

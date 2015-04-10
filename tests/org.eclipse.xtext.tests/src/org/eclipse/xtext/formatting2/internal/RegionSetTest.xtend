@@ -10,7 +10,8 @@ package org.eclipse.xtext.formatting2.internal
 import com.google.common.base.Functions
 import java.util.List
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.formatting2.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.junit.Test
 
 import static org.junit.Assert.*
