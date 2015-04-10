@@ -162,7 +162,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			Iterator<ILocationInResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
 			if (sourceInformationIterator.hasNext()) {
 				ILocationInResource sourceInformation = sourceInformationIterator.next();
-				if (sourceInformation.getStorage() != null) {
+				if (traceToSource.getLocalURI() == null || sourceInformation.getStorage() != null) {
 					URI uri = sourceInformation.getAbsoluteResourceURI();
 					return getXtextEditor(uri);
 				}
