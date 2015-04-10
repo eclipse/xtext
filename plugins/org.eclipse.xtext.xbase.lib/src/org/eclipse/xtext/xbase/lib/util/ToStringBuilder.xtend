@@ -38,6 +38,7 @@ final class ToStringBuilder {
 	boolean multiLine = true
 	boolean skipNulls = false
 	boolean showFieldNames = true
+	boolean prettyPrint = true
 	val parts = <ToStringBuilder.Part>newArrayList
 
 	/**
@@ -75,6 +76,17 @@ final class ToStringBuilder {
 	 */
 	def hideFieldNames() {
 		showFieldNames = false
+		return this
+	}
+	
+	/**
+	 * By default, Iterables, Arrays and multiline Strings are pretty-printed.
+	 * Switching to their normal representation makes the toString method significantly faster.
+	 * @since 2.9
+	 * @return this
+	 */
+	def verbatimValues() {
+		prettyPrint = false
 		return this
 	}
 
@@ -191,32 +203,34 @@ final class ToStringBuilder {
 	}
 
 	private def void internalToString(Object object, ToStringBuilder.IndentationAwareStringBuilder sb) {
-		if (object == null) {
-			sb.append("null")
-		} else if (object instanceof Iterable<?>) {
-			serializeIterable(object, sb)
-		} else if (object instanceof Object[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof byte[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof char[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof int[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof boolean[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof long[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof float[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof double[]) {
-			sb.append(Arrays.toString(object))
-		} else if (object instanceof CharSequence) {
-			sb.append('"').append(object.toString.replace("\n", "\\n").replace("\r", "\\r")).append('"')
-		} else if (object instanceof Enum<?>) {
-			sb.append(object.name)
+		if (prettyPrint) {
+			if (object instanceof Iterable<?>) {
+				serializeIterable(object, sb)
+			} else if (object instanceof Object[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof byte[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof char[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof int[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof boolean[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof long[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof float[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof double[]) {
+				sb.append(Arrays.toString(object))
+			} else if (object instanceof CharSequence) {
+				sb.append('"').append(object.toString.replace("\n", "\\n").replace("\r", "\\r")).append('"')
+			} else if (object instanceof Enum<?>) {
+				sb.append(object.name)
+			} else {
+				sb.append(String.valueOf(object))
+			}
 		} else {
-			sb.append(object.toString)
+			sb.append(String.valueOf(object))
 		}
 	}
 
