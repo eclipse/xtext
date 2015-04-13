@@ -1,7 +1,8 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
-def onPushSuites = runtimeSuites + ideSuites + java8Suites
+def intellijSuites = ['intellij-tests']
+def onPushSuites = runtimeSuites + ideSuites + java8Suites + intellijSuites
 
 def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def smokeSuites = ['smoke-tests']
@@ -18,6 +19,7 @@ branches.each { branch ->
 		}
 		.findAll {
 			!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest'
+			!intellijSuites.contains(it.suite) || it.branch == 'master'
 		}
 		.each {
 			if(java8Suites.contains(it.suite)) {
@@ -107,6 +109,10 @@ branches.each { branch ->
 						}
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 600
+					}
+					if (intellijSuites.contains(job.suite)) {
+						def gradleBuilder = new XmlSlurper().parse(file('scripts/intellij-tests.xml'))
+						config.builders.appendNode(gradleBuilder)
 					}
 				}
 			}

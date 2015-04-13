@@ -1,0 +1,12 @@
+<hudson.plugins.gradle.Gradle plugin="gradle@1.24">
+	<description></description>
+	<switches>--refresh-dependencies --profile --stacktrace</switches>
+	<tasks>clean check</tasks>
+	<rootBuildScriptDir>org.eclipse.xtext.git</rootBuildScriptDir>
+	<buildFile></buildFile>
+	<gradleName>(Default)</gradleName>
+	<useWrapper>true</useWrapper>
+	<makeExecutable>true</makeExecutable>
+	<fromRootBuildScriptDir>true</fromRootBuildScriptDir>
+	<useWorkspaceAsHome>true</useWorkspaceAsHome>
+</hudson.plugins.gradle.Gradle>
