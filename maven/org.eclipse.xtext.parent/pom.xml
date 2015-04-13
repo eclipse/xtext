@@ -6,36 +6,29 @@
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
+
+	<name>Xtext Parent/Container</name>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.9.0-SNAPSHOT</version>
+
 	<modules>
-		<module>../../plugins/org.eclipse.xtext.util</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
-		<module>../../plugins/org.eclipse.xtend.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
+		<!-- OSGI bundles -->
+		<module>../org.eclipse.xtext.tycho.parent</module>
 
-		<module>../org.eclipse.xtext.standalone.parent</module>
-		<module>../org.eclipse.xtext</module>
-		<module>../org.eclipse.xtext.ide</module>
-		<module>../org.eclipse.xtext.common.types</module>
-		<module>../org.eclipse.xtext.xbase</module>
+		<!-- Pure maven -->
 		<module>../org.eclipse.xtext.xbase.lib.slim</module>
-		<module>../org.eclipse.xtend.core</module>
-		<module>../org.eclipse.xtend.ide.common</module>
-		<module>../org.eclipse.xtext.xtext</module>
-
-		<module>../../plugins/org.eclipse.xtext.builder.standalone</module>
 		<module>../org.eclipse.xtext.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.archetype</module>
 		<module>../org.eclipse.xtend.maven.android.archetype</module>
-		<module>../org.eclipse.xtend.lib.gwt.test</module>
+		
+		<!-- Deprecated -->
+		<module>../org.eclipse.xtext.xtext</module>
+		
+		<!-- <module>../org.eclipse.xtend.lib.gwt.test</module> -->
 	</modules>
-	<name>Xtext Parent/Container</name>
 
 	<properties>
 		<mavenVersion>3.2.1</mavenVersion>
@@ -44,8 +37,9 @@
 		<mwe2-version>(2.7,3.0)</mwe2-version>
 		<mwe-version>(1.2,]</mwe-version>
 		<xpand-version>(1.9,]</xpand-version>
-		
+
 		<maven-install-version>2.5.1</maven-install-version>
+		<jar-plugin-version>2.4</jar-plugin-version>
 		<asm.version>5.0.1</asm.version>
 		<guava.version>[10.0.1,14.0.1]</guava.version>
 		<javax-inject.version>1</javax-inject.version>
@@ -54,14 +48,13 @@
 		<commons-logging.version>1.1.3</commons-logging.version>
 		<commons-cli.version>1.2</commons-cli.version>
 		<equinox-common-version>3.6.200-v20130402-1505</equinox-common-version>
+		<jdt-core-version>3.10.0.v20140604-1726</jdt-core-version>
 		<icu4j.version>52.1</icu4j.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<mirroring.phase>prepare-package</mirroring.phase>
-		<skipMirroring>false</skipMirroring>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<pgp.sign.skip>true</pgp.sign.skip>
 	</properties>
@@ -241,52 +234,6 @@
 	</scm>
 
 	<profiles>
-		<profile>
-			<id>local-build</id>
-			<properties>
-				<!-- local.build changes ant script behavior which creates standalone 
-					jars -->
-				<local.build>true</local.build>
-			</properties>
-
-			<distributionManagement>
-				<repository>
-					<id>local-nexus</id>
-					<name>Nexus Release Repository</name>
-					<url>http://localhost:8081/nexus/content/repositories/releases/</url>
-				</repository>
-				<snapshotRepository>
-					<id>local-nexus-snapshots</id>
-					<name>Sonatype Nexus Snapshots</name>
-					<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
-				</snapshotRepository>
-			</distributionManagement>
-			<pluginRepositories>
-				<pluginRepository>
-					<releases>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>Central Repository</name>
-					<url>http://repo.maven.apache.org/maven2</url>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>skip-mirror</id>
-			<activation>
-				<property>
-					<name>skipMirroring</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-				<mirroring.phase>never</mirroring.phase>
-			</properties>
-		</profile>
 		<profile>
 			<id>doclint-java8-disable</id>
 			<activation>
