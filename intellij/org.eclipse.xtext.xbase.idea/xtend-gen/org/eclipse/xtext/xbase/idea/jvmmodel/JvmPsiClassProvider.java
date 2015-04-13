@@ -216,7 +216,7 @@ public class JvmPsiClassProvider implements PsiElementProvider {
       final PsiFile psiFile = psiFileFactory.createFileFromText(fileName, 
         JvmLanguage.INSTANCE, contents, 
         false, 
-        true, 
+        false, 
         true, _virtualFile);
       PsiClass _xifexpression = null;
       if ((psiFile instanceof PsiJvmFileImpl)) {
