@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
+		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
 		<version>2.9.0-SNAPSHOT</version>
-		<relativePath>../../maven/org.eclipse.xtext.parent</relativePath>
+		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
+
 	<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-	<name>Eclipse Xbase Runtime Library</name>
-	<description>The runtime library for the Xbase programming language.
-	</description>
+	<packaging>eclipse-plugin</packaging>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -18,28 +18,8 @@
 			<version>${guava.version}</version>
 		</dependency>
 	</dependencies>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>xtend-gen</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+
+	<name>Eclipse Xbase Runtime Library</name>
+	<description>The runtime library for the Xbase programming language.
+	</description>
 </project>
