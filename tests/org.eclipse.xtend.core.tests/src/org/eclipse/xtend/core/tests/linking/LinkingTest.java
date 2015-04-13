@@ -12,6 +12,7 @@ import static com.google.common.collect.Iterables.*;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -91,13 +93,37 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testBug464264_01() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" + 
+				"class C {\n" + 
+				"	def m(I i, List<CharSequence> list) {\n" + 
+				"		i.strings += list.map[it]\n" + 
+				"	}\n" + 
+				"	interface I {\n" + 
+				"		def List<String> getStrings()\n" + 
+				"	}\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XBinaryOperation featureCall = (XBinaryOperation) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+		List<Diagnostic> errors = c.eResource().getErrors();
+		assertEquals(1, errors.size());
+		assertEquals("Type mismatch: cannot convert from List<CharSequence> to Iterable<? extends String>", errors.get(0).getMessage());
+	}
+	
 	@Test public void testOverloadStaticInstance_01() throws Exception {
 		XtendFile file = file(
 				"class C {\n" + 
-				"	def void m(CharSequence c) {\n" + 
-				"		m('')\n" + 
-				"	}\n" + 
-				"	def static void m(String s) {}\n" + 
+						"	def void m(CharSequence c) {\n" + 
+						"		m('')\n" + 
+						"	}\n" + 
+						"	def static void m(String s) {}\n" + 
 				"}");
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction m = (XtendFunction) c.getMembers().get(0);
