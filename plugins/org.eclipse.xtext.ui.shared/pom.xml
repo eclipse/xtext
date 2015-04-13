@@ -9,14 +9,6 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.ui</artifactId>
-	<name>Xtext UI</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
-			<version>[${project.version}]</version>
-		</dependency>
-	</dependencies>
+	<artifactId>org.eclipse.xtext.ui.shared</artifactId>
+	<name>Xtext UI Shared</name>
 </project>

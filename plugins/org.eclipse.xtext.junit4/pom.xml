@@ -9,8 +9,8 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.ui</artifactId>
-	<name>Xtext UI</name>
+	<artifactId>org.eclipse.xtext.junit4</artifactId>
+	<name>Xtext Junit Library</name>
 
 	<dependencies>
 		<dependency>

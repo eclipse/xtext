@@ -9,13 +9,13 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.ui</artifactId>
-	<name>Xtext UI</name>
+	<name>Common Types Edit Library</name>
+	<artifactId>org.eclipse.xtext.common.types.edit</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
+			<artifactId>org.eclipse.xtext.common.types</artifactId>
 			<version>[${project.version}]</version>
 		</dependency>
 	</dependencies>
