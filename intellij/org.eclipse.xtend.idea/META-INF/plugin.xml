@@ -64,7 +64,6 @@
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
 		
-		
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
     	
     	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />

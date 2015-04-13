@@ -11,7 +11,10 @@ import com.google.inject.Provider
 import com.intellij.psi.PsiClass
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.service.OperationCanceledError
+
+import static extension org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -21,74 +24,40 @@ class JvmPsiClass implements PsiClass {
 	@Accessors
 	PsiClass stub
 
-	PsiClass psiClass
+	@Accessors
+	JvmDeclaredType type
+
+	PsiClass myPsiClass
 
 	@Accessors
 	Provider<PsiClass> psiClassProvider
 
 	@Delegate
-	def synchronized PsiClass getDelegate() {
-		if (psiClass == null)
+	def PsiClass getDelegate() {
+		if (type.loadingTypeResource)
+			stub
+		else
+			psiClass
+	}
+
+	protected synchronized def getPsiClass() {
+		if (myPsiClass == null)
 			try {
-				psiClass = psiClassProvider.get
+				myPsiClass = psiClassProvider.get
 			} catch (OperationCanceledError e) {
 				throw e.wrapped
 			}
-		psiClass
+		myPsiClass
 	}
 
-	protected def getPsiClassOrStub() {
-		if(psiClass != null) psiClass else stub
-	}
-
-	override getName() {
-		psiClassOrStub.name
-	}
-
-	override getQualifiedName() {
-		psiClassOrStub.qualifiedName
-	}
-
-	override getModifierList() {
-		psiClassOrStub.modifierList
-	}
-
-	override hasModifierProperty(String name) {
-		psiClassOrStub.hasModifierProperty(name)
-	}
-
-	override hasTypeParameters() {
-		psiClassOrStub.hasTypeParameters
-	}
-
-	override getContainingClass() {
-		psiClassOrStub.containingClass
-	}
-
-	override getContainingFile() {
-		psiClassOrStub.containingFile
-	}
-
-	override isInterface() {
-		psiClassOrStub.interface
-	}
-
-	override isEnum() {
-		psiClassOrStub.enum
-	}
-
-	override isAnnotationType() {
-		psiClassOrStub.annotationType
-	}
-	
 	override equals(Object obj) {
 		delegate.equals(obj)
 	}
-	
+
 	override hashCode() {
 		delegate.hashCode
 	}
-	
+
 	override toString() {
 		class.simpleName + ':' + delegate.toString
 	}

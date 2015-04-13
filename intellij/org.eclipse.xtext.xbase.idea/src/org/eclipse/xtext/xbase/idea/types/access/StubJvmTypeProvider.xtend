@@ -37,8 +37,6 @@ import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
-	val static String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0)
-
 	@Accessors(AccessorType.PUBLIC_GETTER)
 	val Project project
 

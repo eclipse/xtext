@@ -9,10 +9,15 @@ package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiMember
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_DECLARED_TYPE
 
@@ -22,7 +27,13 @@ class JvmPsiClasses {
 	@Inject
 	extension IPsiModelAssociations
 
-	def getPsiClassesByName(BaseXtextFile it, String name) {
+	@Inject
+	extension IPsiJvmModelAssociations
+
+	@Inject
+	extension IPsiLogicalContainerProvider
+
+	def Iterable<JvmPsiClass> getPsiClassesByName(BaseXtextFile it, String name) {
 		val resource = resource
 
 		val result = newArrayList
@@ -35,7 +46,7 @@ class JvmPsiClasses {
 		result
 	}
 
-	def getPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
+	def Iterable<JvmPsiClass> getPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
 		val resource = resource
 
 		val result = newArrayList
@@ -47,9 +58,37 @@ class JvmPsiClasses {
 		}
 		result
 	}
-	
-	def getPsiClasses(BaseXtextFile it) {
+
+	def Iterable<JvmPsiClass> getPsiClasses(BaseXtextFile it) {
 		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(JvmPsiClass)
+	}
+
+	def Iterable<JvmPsiClass> getPsiClasses(PsiElement element) {
+		element.jvmElements.filter(JvmPsiClass)
+	}
+
+	def dispatch Iterable<JvmPsiClass> findPsiClasses(BaseXtextFile element) {
+		element.psiClasses
+	}
+
+	def dispatch Iterable<JvmPsiClass> findPsiClasses(PsiElement element) {
+		switch container : element.nearestLogicalContainer {
+			PsiClass:
+				#[container].filter(JvmPsiClass)
+			PsiMember:
+				#[container.containingClass].filter(JvmPsiClass)
+			default: {
+				val psiClasses = element.psiClasses
+				if (psiClasses.empty)
+					element.parent.findPsiClasses
+				else
+					psiClasses
+			}
+		}
+	}
+
+	def dispatch Iterable<JvmPsiClass> findPsiClasses(Void element) {
+		emptyList
 	}
 
 }

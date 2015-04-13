@@ -95,16 +95,17 @@ public class JvmPsiClassProvider implements PsiElementProvider {
     JvmPsiClass _get = this.jvmPsiClassProvider.get();
     final Procedure1<JvmPsiClass> _function = new Procedure1<JvmPsiClass>() {
       @Override
-      public void apply(final JvmPsiClass it) {
+      public void apply(final JvmPsiClass jvmPsiClass) {
         PsiClass _createStub = JvmPsiClassProvider.this.createStub();
-        it.setStub(_createStub);
+        jvmPsiClass.setStub(_createStub);
+        jvmPsiClass.setType(JvmPsiClassProvider.this.jvmDeclaredType);
         final Provider<PsiClass> _function = new Provider<PsiClass>() {
           @Override
           public PsiClass get() {
             return JvmPsiClassProvider.this.createPsiClass();
           }
         };
-        it.setPsiClassProvider(_function);
+        jvmPsiClass.setPsiClassProvider(_function);
       }
     };
     return ObjectExtensions.<JvmPsiClass>operator_doubleArrow(_get, _function);

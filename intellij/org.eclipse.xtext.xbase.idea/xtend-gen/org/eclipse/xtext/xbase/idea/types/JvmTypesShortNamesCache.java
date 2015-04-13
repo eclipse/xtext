@@ -94,7 +94,7 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
         Language _language = xtextFile.getLanguage();
         boolean _equals = Objects.equal(_language, this.language);
         if (_equals) {
-          ArrayList<JvmPsiClass> _psiClassesByName = this._jvmPsiClasses.getPsiClassesByName(xtextFile, name);
+          Iterable<JvmPsiClass> _psiClassesByName = this._jvmPsiClasses.getPsiClassesByName(xtextFile, name);
           Iterables.<JvmPsiClass>addAll(result, _psiClassesByName);
         }
       }

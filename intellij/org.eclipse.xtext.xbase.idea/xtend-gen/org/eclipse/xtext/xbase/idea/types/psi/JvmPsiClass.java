@@ -45,7 +45,9 @@ import java.util.List;
 import javax.swing.Icon;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -57,20 +59,34 @@ public class JvmPsiClass implements PsiClass {
   @Accessors
   private PsiClass stub;
   
-  private PsiClass psiClass;
+  @Accessors
+  private JvmDeclaredType type;
+  
+  private PsiClass myPsiClass;
   
   @Accessors
   private Provider<PsiClass> psiClassProvider;
   
   @Delegate
-  public synchronized PsiClass getDelegate() {
+  public PsiClass getDelegate() {
+    PsiClass _xifexpression = null;
+    boolean _isLoadingTypeResource = LoadingTypeResourcePhase.isLoadingTypeResource(this.type);
+    if (_isLoadingTypeResource) {
+      _xifexpression = this.stub;
+    } else {
+      _xifexpression = this.getPsiClass();
+    }
+    return _xifexpression;
+  }
+  
+  protected synchronized PsiClass getPsiClass() {
     PsiClass _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.psiClass, null);
+      boolean _equals = Objects.equal(this.myPsiClass, null);
       if (_equals) {
         try {
           PsiClass _get = this.psiClassProvider.get();
-          this.psiClass = _get;
+          this.myPsiClass = _get;
         } catch (final Throwable _t) {
           if (_t instanceof OperationCanceledError) {
             final OperationCanceledError e = (OperationCanceledError)_t;
@@ -80,80 +96,9 @@ public class JvmPsiClass implements PsiClass {
           }
         }
       }
-      _xblockexpression = this.psiClass;
+      _xblockexpression = this.myPsiClass;
     }
     return _xblockexpression;
-  }
-  
-  protected PsiClass getPsiClassOrStub() {
-    PsiClass _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(this.psiClass, null));
-    if (_notEquals) {
-      _xifexpression = this.psiClass;
-    } else {
-      _xifexpression = this.stub;
-    }
-    return _xifexpression;
-  }
-  
-  @Override
-  public String getName() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.getName();
-  }
-  
-  @Override
-  public String getQualifiedName() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.getQualifiedName();
-  }
-  
-  @Override
-  public PsiModifierList getModifierList() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.getModifierList();
-  }
-  
-  @Override
-  public boolean hasModifierProperty(final String name) {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.hasModifierProperty(name);
-  }
-  
-  @Override
-  public boolean hasTypeParameters() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.hasTypeParameters();
-  }
-  
-  @Override
-  public PsiClass getContainingClass() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.getContainingClass();
-  }
-  
-  @Override
-  public PsiFile getContainingFile() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.getContainingFile();
-  }
-  
-  @Override
-  public boolean isInterface() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.isInterface();
-  }
-  
-  @Override
-  public boolean isEnum() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.isEnum();
-  }
-  
-  @Override
-  public boolean isAnnotationType() {
-    PsiClass _psiClassOrStub = this.getPsiClassOrStub();
-    return _psiClassOrStub.isAnnotationType();
   }
   
   @Override
@@ -185,6 +130,15 @@ public class JvmPsiClass implements PsiClass {
   
   public void setStub(final PsiClass stub) {
     this.stub = stub;
+  }
+  
+  @Pure
+  public JvmDeclaredType getType() {
+    return this.type;
+  }
+  
+  public void setType(final JvmDeclaredType type) {
+    this.type = type;
   }
   
   @Pure
@@ -240,6 +194,10 @@ public class JvmPsiClass implements PsiClass {
     return this.getDelegate().getConstructors();
   }
   
+  public PsiClass getContainingClass() {
+    return this.getDelegate().getContainingClass();
+  }
+  
   public PsiReferenceList getExtendsList() {
     return this.getDelegate().getExtendsList();
   }
@@ -284,6 +242,10 @@ public class JvmPsiClass implements PsiClass {
     return this.getDelegate().getNameIdentifier();
   }
   
+  public String getQualifiedName() {
+    return this.getDelegate().getQualifiedName();
+  }
+  
   public PsiElement getRBrace() {
     return this.getDelegate().getRBrace();
   }
@@ -308,6 +270,14 @@ public class JvmPsiClass implements PsiClass {
     return this.getDelegate().getVisibleSignatures();
   }
   
+  public boolean isAnnotationType() {
+    return this.getDelegate().isAnnotationType();
+  }
+  
+  public boolean isEnum() {
+    return this.getDelegate().isEnum();
+  }
+  
   public boolean isInheritor(final PsiClass baseClass, final boolean checkDeep) {
     return this.getDelegate().isInheritor(baseClass, checkDeep);
   }
@@ -316,8 +286,16 @@ public class JvmPsiClass implements PsiClass {
     return this.getDelegate().isInheritorDeep(baseClass, classToByPass);
   }
   
+  public boolean isInterface() {
+    return this.getDelegate().isInterface();
+  }
+  
   public PsiElement setName(final String name) throws IncorrectOperationException {
     return this.getDelegate().setName(name);
+  }
+  
+  public String getName() {
+    return this.getDelegate().getName();
   }
   
   public void accept(final PsiElementVisitor visitor) {
@@ -382,6 +360,10 @@ public class JvmPsiClass implements PsiClass {
   
   public PsiElement[] getChildren() {
     return this.getDelegate().getChildren();
+  }
+  
+  public PsiFile getContainingFile() throws PsiInvalidElementAccessException {
+    return this.getDelegate().getContainingFile();
   }
   
   public PsiElement getContext() {
@@ -528,6 +510,14 @@ public class JvmPsiClass implements PsiClass {
     return this.getDelegate().getIcon(flags);
   }
   
+  public PsiModifierList getModifierList() {
+    return this.getDelegate().getModifierList();
+  }
+  
+  public boolean hasModifierProperty(final String name) {
+    return this.getDelegate().hasModifierProperty(name);
+  }
+  
   public PsiDocComment getDocComment() {
     return this.getDelegate().getDocComment();
   }
@@ -558,5 +548,9 @@ public class JvmPsiClass implements PsiClass {
   
   public PsiTypeParameter[] getTypeParameters() {
     return this.getDelegate().getTypeParameters();
+  }
+  
+  public boolean hasTypeParameters() {
+    return this.getDelegate().hasTypeParameters();
   }
 }

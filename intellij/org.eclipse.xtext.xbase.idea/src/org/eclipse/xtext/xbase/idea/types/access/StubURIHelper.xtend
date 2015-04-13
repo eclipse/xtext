@@ -101,7 +101,7 @@ class StubURIHelper implements URIHelperConstants {
 				}
 			}
 			default:
-				throw new IllegalStateException("Unknown type: " + type?.canonicalText)
+				throw new IllegalStateException("Unknown type: " + type)
 		}
 	}
 
@@ -138,7 +138,7 @@ class StubURIHelper implements URIHelperConstants {
 			PsiArrayType:
 				builder.appendTypeFragment(type.componentType).append('[]')
 			default:
-				throw new IllegalStateException("Unknown type: " + type?.canonicalText)
+				throw new IllegalStateException("Unknown type: " + type)
 		}
 	}
 

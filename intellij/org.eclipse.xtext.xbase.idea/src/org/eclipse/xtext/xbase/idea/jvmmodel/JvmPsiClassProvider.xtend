@@ -67,9 +67,10 @@ class JvmPsiClassProvider implements PsiElementProvider {
 	ElementIssueProvider.Factory elementIssueProviderFactory
 
 	override get() {
-		jvmPsiClassProvider.get => [
-			stub = createStub
-			psiClassProvider = [createPsiClass]
+		jvmPsiClassProvider.get => [ jvmPsiClass |
+			jvmPsiClass.stub = createStub
+			jvmPsiClass.type = jvmDeclaredType
+			jvmPsiClass.psiClassProvider = [createPsiClass]
 		]
 	}
 
