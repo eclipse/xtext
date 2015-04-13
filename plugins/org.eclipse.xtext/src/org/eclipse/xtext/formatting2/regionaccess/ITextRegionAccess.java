@@ -74,12 +74,6 @@ public interface ITextRegionAccess {
 	ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions);
 
 	/**
-	 * @return The very first {@link IHiddenRegion} inside the linked list of alternating {@link IHiddenRegion hidden
-	 *         regions} and {@link ISemanticRegion semantic regions}.
-	 */
-	IHiddenRegion getFirstRegionInFile();
-
-	/**
 	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
 	 *         model's root element, the {@link ParserRule} is returned.
 	 */
@@ -89,9 +83,6 @@ public interface ITextRegionAccess {
 	 * @return The {@link XtextResource} that backs the document this class provides access to.
 	 */
 	XtextResource getResource();
-
-	// TODO: better getTextRegion(int offset, int length)?
-	String getText(int offset, int length);
 
 	/**
 	 * @return true, if one or more parse error occurred when parsing the document.
@@ -201,4 +192,12 @@ public interface ITextRegionAccess {
 	IHiddenRegion trailingHiddenRegion(EObject owner); // rename to nextHiddenRegion; do same with leading()
 
 	ITextRegionRewriter getRewriter();
+
+	IEObjectRegion regionForRootEObject();
+
+	ITextSegment regionForDocument();
+
+	ITextSegment regionForOffset(int offset, int length);
+
+	String textForOffset(int offset, int length);
 }

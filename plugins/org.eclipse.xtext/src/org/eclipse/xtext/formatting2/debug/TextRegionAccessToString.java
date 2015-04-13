@@ -241,11 +241,9 @@ public class TextRegionAccessToString {
 			for (int i = 0; i < range && current != null; i++) {
 				first = current;
 				if (current instanceof ITextRegionAccess)
-					current = ((ITextRegionAccess) current).getFirstRegionInFile();
-				else if (current instanceof ISemanticRegion)
-					current = ((ISemanticRegion) current).getPreviousHiddenRegion();
-				else if (current instanceof IHiddenRegion)
-					current = ((IHiddenRegion) current).getPreviousSemanticRegion();
+					current = ((ITextRegionAccess) current).regionForRootEObject().getPreviousHiddenRegion();
+				else if (current instanceof ISequentialRegion)
+					current = ((ISequentialRegion) current).getPreviousHiddenRegion();
 				else if (current instanceof IHiddenRegionPart)
 					current = ((IHiddenRegionPart) current).getHiddenRegion();
 				else
@@ -271,7 +269,7 @@ public class TextRegionAccessToString {
 	}
 
 	public TextRegionAccessToString withRegionAccess(ITextRegionAccess access) {
-		this.origin = (ITextSegment) access;
+		this.origin = access.regionForRootEObject();
 		this.hightlightOrigin = false;
 		return this;
 	}

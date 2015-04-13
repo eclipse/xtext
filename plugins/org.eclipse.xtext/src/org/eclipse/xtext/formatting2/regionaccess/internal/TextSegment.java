@@ -47,7 +47,7 @@ public class TextSegment extends AbstractTextSegment {
 	public String toString() {
 		ToStringHelper helper = Objects.toStringHelper(this).add("offset", offset).add("length", length);
 		if (regionAccess != null)
-			helper.add("text", regionAccess.getText(offset, length));
+			helper.add("text", getText());
 		return helper.toString();
 	}
 

@@ -10,7 +10,8 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -24,23 +25,11 @@ import com.google.common.collect.ImmutableMap;
 public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 
 	private final Map<EObject, AbstractEObjectRegion> eObjectToTokens;
-	private final IHiddenRegion firstRegion;
 	private final XtextResource resource;
 
 	protected NodeModelBasedRegionAccess(NodeModelBasedRegionAccessBuilder builder) {
 		this.resource = builder.getXtextResource();
 		this.eObjectToTokens = ImmutableMap.copyOf(builder.getEObjectToTokensMap(this));
-		this.firstRegion = builder.getFirstRegion();
-	}
-
-	@Override
-	public IHiddenRegion getFirstRegionInFile() {
-		return this.firstRegion;
-	}
-
-	@Override
-	public int getLength() {
-		return getResource().getParseResult().getRootNode().getTotalEndOffset();
 	}
 
 	@Override
@@ -49,12 +38,12 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	public String getText() {
+	protected String getText() {
 		return getResource().getParseResult().getRootNode().getText();
 	}
 
 	@Override
-	public String getText(int offset, int length) {
+	public String textForOffset(int offset, int length) {
 		return getResource().getParseResult().getRootNode().getText().substring(offset, offset + length);
 	}
 
@@ -76,6 +65,16 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	@Override
 	public AbstractEObjectRegion regionForEObject(EObject obj) {
 		return eObjectToTokens.get(obj);
+	}
+
+	@Override
+	public IEObjectRegion regionForRootEObject() {
+		return regionForEObject(resource.getContents().get(0));
+	}
+
+	@Override
+	public ITextSegment regionForDocument() {
+		return new TextSegment(this, 0, resource.getParseResult().getRootNode().getTotalEndOffset());
 	}
 
 }

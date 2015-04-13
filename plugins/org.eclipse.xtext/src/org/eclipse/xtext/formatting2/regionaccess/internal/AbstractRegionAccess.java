@@ -36,7 +36,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractRegionAccess extends AbstractTextSegment implements ITextRegionAccess {
+public abstract class AbstractRegionAccess implements ITextRegionAccess {
 
 	@Override
 	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
@@ -71,18 +71,12 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		return tokens.getGrammarElement();
 	}
 
-	@Override
-	public int getOffset() {
-		return 0;
-	}
+	protected abstract String getText();
 
 	@Override
-	public ITextRegionAccess getTextRegionAccess() {
-		return this;
+	public TextRegionRewriter getRewriter() {
+		return new TextRegionRewriter(this);
 	}
-
-	@Override
-	public abstract AbstractEObjectRegion regionForEObject(EObject obj);
 
 	@Override
 	public ISemanticRegion immediatelyFollowingKeyword(EObject owner, String keyword) {
@@ -153,7 +147,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 		int lineStart = text.lastIndexOf('\n', offset) + 1;
 		for (int i = lineStart; i < text.length(); i++)
 			if (!Character.isWhitespace(text.charAt(i)))
-				return new TextSegment(getTextRegionAccess(), lineStart, i - lineStart);
+				return new TextSegment(this, lineStart, i - lineStart);
 		return null;
 	}
 
@@ -190,6 +184,9 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	}
 
 	@Override
+	public abstract AbstractEObjectRegion regionForEObject(EObject obj);
+
+	@Override
 	public ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feat) {
 		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
 			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
@@ -218,6 +215,11 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public ITextSegment regionForOffset(int offset, int length) {
+		return new TextSegment(this, offset, length);
 	}
 
 	@Override
@@ -272,7 +274,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 
 	@Override
 	public String toString() {
-		return new TextRegionAccessToString().withOrigin(this).toString();
+		return new TextRegionAccessToString().withRegionAccess(this).toString();
 	}
 
 	@Override
@@ -282,10 +284,4 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 			return null;
 		return tokens.getTrailingHiddenRegion();
 	}
-
-	@Override
-	public TextRegionRewriter getRewriter() {
-		return new TextRegionRewriter(this);
-	}
-
 }
