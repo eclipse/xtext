@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
@@ -43,6 +44,7 @@ public class MultilineCommentReplacer extends CommentReplacer {
 		if (!multiline)
 			return context;
 		IComment comment = getComment();
+		ITextRegionAccess access = comment.getTextRegionAccess();
 		String oldIndentation = comment.getIndentation().getText();
 		String indentationString = context.getIndentationString();
 		String newIndentation = indentationString + " " + prefix + " ";
@@ -51,17 +53,19 @@ public class MultilineCommentReplacer extends CommentReplacer {
 			ITextSegment line = lines.get(i);
 			String text = line.getText();
 			int prefixOffset = prefixOffset(text);
+			ITextSegment toReplace;
 			if (prefixOffset >= 0) {
-				context.replaceText(line.getOffset(), prefixOffset + 1, newIndentation);
+				toReplace = access.regionForOffset(line.getOffset(), prefixOffset + 1);
 			} else if (text.startsWith(oldIndentation)) {
-				context.replaceText(line.getOffset(), oldIndentation.length(), newIndentation);
+				toReplace = access.regionForOffset(line.getOffset(), oldIndentation.length());
 			} else {
-				context.replaceText(line.getOffset(), 0, newIndentation);
+				toReplace = access.regionForOffset(line.getOffset(), 0);
 			}
+			context.addReplacement(toReplace.replaceWith(newIndentation));
 		}
 		if (lines.size() > 1) {
 			ITextSegment line = lines.get(lines.size() - 1);
-			context.replaceText(line.getIndentation(), indentationString + " ");
+			context.addReplacement(line.getIndentation().replaceWith(indentationString + " "));
 		}
 		return context;
 	}

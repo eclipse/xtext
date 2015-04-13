@@ -25,9 +25,9 @@ public class SinglelineDocCommentReplacer extends SinglelineCommentReplacer {
 		ITextSegment firstSpace = getFirstSpace();
 		if (firstSpace != null) {
 			if (hasEmptyBody())
-				context.replaceText(firstSpace, "");
+				context.addReplacement(firstSpace.replaceWith(""));
 			else
-				context.replaceText(firstSpace, " ");
+				context.addReplacement(firstSpace.replaceWith(" "));
 		}
 		return context;
 	}

@@ -228,10 +228,6 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new HiddenRegionReplacer(region, formatting);
 	}
 
-	public ITextReplacement createTextReplacement(int offset, int length, String text) {
-		return new TextReplacement(getRequest().getTextRegionAccess(), offset, length, text);
-	}
-
 	public ITextReplacerContext createTextReplacerContext(IFormattableDocument document) {
 		return new TextReplacerContext(document);
 	}
