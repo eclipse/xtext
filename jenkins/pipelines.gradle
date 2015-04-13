@@ -19,7 +19,7 @@ branches.each { branch ->
 		}
 		.findAll {
 			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
-			(!intellijSuites.contains(it.suite) || it.branch == 'master')
+			(!intellijSuites.contains(it.suite) || it.branch == 'master' && it.target == 'Latest')
 		}
 		.each {
 			if(java8Suites.contains(it.suite)) {
@@ -86,7 +86,7 @@ branches.each { branch ->
 					trigger.triggerPhrase = "Jenkins ${job.name}"
 					trigger.commitStatusContext = "Jenkins/${job.name}"
 					trigger.project = job.name
-					if ((slowSuites + ideSuites).contains(job.suite)
+					if ((slowSuites + ideSuites + generatorSuites).contains(job.suite)
 						|| job.suite == 'xtext-runtime-tests' // these currently contain ui tests
 						) {
 						config.buildWrappers.appendNode {
