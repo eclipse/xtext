@@ -94,6 +94,34 @@ class JvmPsiClassTest extends LightXtendTest {
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
 
+	def void testResolution() {
+		myFixture.addFileToProject('mypackage/Foo.xtend', '''
+			package mypackage
+			
+			class Foo {
+			
+				def void someMethod() {
+				}
+			
+			}
+		''')
+		val class = myFixture.addClass('''
+			package mypackage;
+			
+			public class Bar extends Foo {
+			
+			}
+		''')
+		val methods = class.findMethodsByName('someMethod', true)
+		assertSize(1, methods)
+		
+		val method = methods.head
+		assertEquals('someMethod', method.name)
+		
+		val psiClass = 'mypackage.Foo'.findJvmPsiClass
+		assertEquals(psiClass.delegate, method.containingClass)
+	}
+
 	def void testMethodBodyWithErrors() {
 		myFixture.addFileToProject('mypackage/Foo.xtend', '''
 			package mypackage
