@@ -16,6 +16,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.UserDataHolderEx;
 import com.intellij.psi.HierarchicalMethodSignature;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassInitializer;
@@ -55,7 +56,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class JvmPsiClass implements PsiClass {
+public class JvmPsiClass implements PsiClass, UserDataHolderEx {
   @Accessors
   private PsiClass stub;
   
@@ -121,6 +122,18 @@ public class JvmPsiClass implements PsiClass {
     PsiClass _delegate = this.getDelegate();
     String _string = _delegate.toString();
     return (_plus + _string);
+  }
+  
+  @Override
+  public <T extends Object> T putUserDataIfAbsent(final Key<T> key, final T value) {
+    PsiClass _delegate = this.getDelegate();
+    return ((UserDataHolderEx) _delegate).<T>putUserDataIfAbsent(key, value);
+  }
+  
+  @Override
+  public <T extends Object> boolean replace(final Key<T> key, final T oldValue, final T newValue) {
+    PsiClass _delegate = this.getDelegate();
+    return ((UserDataHolderEx) _delegate).<T>replace(key, oldValue, newValue);
   }
   
   @Pure

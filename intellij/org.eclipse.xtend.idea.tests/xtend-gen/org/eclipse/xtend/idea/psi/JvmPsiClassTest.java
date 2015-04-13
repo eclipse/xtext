@@ -165,6 +165,45 @@ public class JvmPsiClassTest extends LightXtendTest {
     this.myFixture.testHighlighting(true, true, true, _virtualFile);
   }
   
+  public void testResolution() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void someMethod() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class Bar extends Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiClass class_ = this.myFixture.addClass(_builder_1.toString());
+    final PsiMethod[] methods = class_.findMethodsByName("someMethod", true);
+    UsefulTestCase.assertSize(1, methods);
+    final PsiMethod method = IterableExtensions.<PsiMethod>head(((Iterable<PsiMethod>)Conversions.doWrapArray(methods)));
+    String _name = method.getName();
+    TestCase.assertEquals("someMethod", _name);
+    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    PsiClass _delegate = psiClass.getDelegate();
+    PsiClass _containingClass = method.getContainingClass();
+    TestCase.assertEquals(_delegate, _containingClass);
+  }
+  
   public void testMethodBodyWithErrors() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage");

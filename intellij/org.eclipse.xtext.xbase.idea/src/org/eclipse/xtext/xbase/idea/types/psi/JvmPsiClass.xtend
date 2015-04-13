@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Provider
+import com.intellij.openapi.util.Key
+import com.intellij.openapi.util.UserDataHolderEx
 import com.intellij.psi.PsiClass
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Delegate
@@ -19,7 +21,7 @@ import static extension org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResour
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiClass implements PsiClass {
+class JvmPsiClass implements PsiClass, UserDataHolderEx {
 
 	@Accessors
 	PsiClass stub
@@ -60,6 +62,14 @@ class JvmPsiClass implements PsiClass {
 
 	override toString() {
 		class.simpleName + ':' + delegate.toString
+	}
+
+	override <T> putUserDataIfAbsent(Key<T> key, T value) {
+		(delegate as UserDataHolderEx).putUserDataIfAbsent(key, value)
+	}
+
+	override <T> replace(Key<T> key, T oldValue, T newValue) {
+		(delegate as UserDataHolderEx).replace(key, oldValue, newValue)
 	}
 
 }
