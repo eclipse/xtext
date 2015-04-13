@@ -134,7 +134,7 @@ public class Serializer implements ISerializer {
 		return regionAccess;
 	}
 
-	protected void serialize(EObject obj, Appendable appendable, SaveOptions options) {
+	protected void serialize(EObject obj, Appendable appendable, SaveOptions options) throws IOException {
 		ITextRegionAccess regionAccess = serializeToRegions(obj);
 		FormatterRequest request = formatterRequestProvider.get();
 		request.setFormatUndenfinedTokensOnly(!options.isFormatting());
@@ -153,18 +153,18 @@ public class Serializer implements ISerializer {
 
 	@Override
 	public String serialize(EObject obj, SaveOptions options) {
-		if (formatter2Provider != null) {
-			StringBuilder builder = new StringBuilder();
-			serialize(obj, builder, options);
-			return builder.toString();
-		} else {
-			TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
-			try {
+		try {
+			if (formatter2Provider != null) {
+				StringBuilder builder = new StringBuilder();
+				serialize(obj, builder, options);
+				return builder.toString();
+			} else {
+				TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 				serialize(obj, tokenStringBuffer, options);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+				return tokenStringBuffer.toString();
 			}
-			return tokenStringBuffer.toString();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

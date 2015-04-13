@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
+import java.io.IOException;
+
 /**
  * 
  * Use {@link ITextRegionAccess#getRewriter()} to obtain an instance implementing this interface.
@@ -15,10 +17,11 @@ package org.eclipse.xtext.formatting2.regionaccess;
  */
 public interface ITextRegionRewriter {
 
-	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result);
+	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result)
+			throws IOException;
 
 	public void renderToAppendable(ITextSegment segment, Iterable<? extends ITextReplacement> replacements,
-			Appendable result);
+			Appendable result) throws IOException;
 
 	/**
 	 * <p>
