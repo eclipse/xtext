@@ -9,7 +9,7 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.generator</artifactId>
-	<name>Xtext Generator</name>
+	<artifactId>org.eclipse.xtext.ecore</artifactId>
+	<name>Xtext Ecore Support</name>
 	
 </project>
