@@ -137,7 +137,7 @@ class JvmPsiClassProvider implements PsiElementProvider {
 			JvmLanguage.INSTANCE,
 			contents,
 			false,
-			true,
+			false,
 			true,
 			psiElement.containingFile.virtualFile
 		)
