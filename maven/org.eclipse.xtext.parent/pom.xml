@@ -54,8 +54,6 @@
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<mirroring.phase>prepare-package</mirroring.phase>
-		<skipMirroring>false</skipMirroring>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<pgp.sign.skip>true</pgp.sign.skip>
 	</properties>
@@ -235,52 +233,6 @@
 	</scm>
 
 	<profiles>
-		<profile>
-			<id>local-build</id>
-			<properties>
-				<!-- local.build changes ant script behavior which creates standalone 
-					jars -->
-				<local.build>true</local.build>
-			</properties>
-
-			<distributionManagement>
-				<repository>
-					<id>local-nexus</id>
-					<name>Nexus Release Repository</name>
-					<url>http://localhost:8081/nexus/content/repositories/releases/</url>
-				</repository>
-				<snapshotRepository>
-					<id>local-nexus-snapshots</id>
-					<name>Sonatype Nexus Snapshots</name>
-					<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
-				</snapshotRepository>
-			</distributionManagement>
-			<pluginRepositories>
-				<pluginRepository>
-					<releases>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>Central Repository</name>
-					<url>http://repo.maven.apache.org/maven2</url>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>skip-mirror</id>
-			<activation>
-				<property>
-					<name>skipMirroring</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-				<mirroring.phase>never</mirroring.phase>
-			</properties>
-		</profile>
 		<profile>
 			<id>doclint-java8-disable</id>
 			<activation>
