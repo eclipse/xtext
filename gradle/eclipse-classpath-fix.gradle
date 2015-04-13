@@ -4,10 +4,8 @@ unrollDependencies = { configuration, notation ->
 		dependencies.add(configuration, notation) {
 			transitive = false
 		}
-		notation.afterEvaluate {
-			notation.configurations[configuration].allDependencies.each {
-				unrollDependencies(configuration, it)
-			}
+		notation.configurations[configuration].allDependencies.all {
+			unrollDependencies(configuration, it)
 		}
 	} else if (notation instanceof ProjectDependency) {
 		unrollDependencies(configuration, notation.dependencyProject)
