@@ -7,10 +7,10 @@
 <stringAttribute key="M2_PROFILES" value=""/>
 <listAttribute key="M2_PROPERTIES">
 <listEntry value="maven.javadoc.skip=true"/>
-<listEntry value="source.skip=false"/>
+<listEntry value="source.skip=true"/>
 </listAttribute>
 <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
-<booleanAttribute key="M2_SKIP_TESTS" value="false"/>
+<booleanAttribute key="M2_SKIP_TESTS" value="true"/>
 <intAttribute key="M2_THREADS" value="1"/>
 <booleanAttribute key="M2_UPDATE_SNAPSHOTS" value="false"/>
 <stringAttribute key="M2_USER_SETTINGS" value=""/>
