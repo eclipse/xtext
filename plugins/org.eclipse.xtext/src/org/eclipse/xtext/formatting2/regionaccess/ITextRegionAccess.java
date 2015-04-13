@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
@@ -79,7 +80,8 @@ public interface ITextRegionAccess {
 	IHiddenRegion getFirstRegionInFile();
 
 	/**
-	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject.
+	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
+	 *         model's root element, the {@link ParserRule} is returned.
 	 */
 	EObject getInvokingGrammarElement(EObject obj);
 
