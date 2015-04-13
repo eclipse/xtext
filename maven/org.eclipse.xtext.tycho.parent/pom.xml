@@ -13,7 +13,7 @@
 
 	<modules>
 		<module>../org.eclipse.xtext.target</module>
-		
+
 		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
 		<module>../../plugins/org.eclipse.xtend.lib</module>
 		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
@@ -30,8 +30,8 @@
 		<module>../../plugins/org.eclipse.xtext.generator</module>
 		<module>../../plugins/org.eclipse.xtext.xbase</module>
 		<module>../../plugins/org.eclipse.xtext.junit4</module>
-		
-		<!--  new deps from xbase.junit -->
+
+		<!-- new deps from xbase.junit -->
 		<module>../../plugins/org.eclipse.xtext.builder</module>
 		<module>../../plugins/org.eclipse.xtext.ui</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.ui</module>
@@ -40,7 +40,7 @@
 		<module>../../plugins/org.eclipse.xtext.ui.codetemplates.ui</module>
 		<module>../../plugins/org.eclipse.xtext.ui.shared</module>
 		<module>../../plugins/org.eclipse.xtext.common.types.edit</module>
-		
+
 		<module>../../plugins/org.eclipse.xtext.xbase.junit</module>
 		<module>../../plugins/org.eclipse.xtend.core</module>
 		<module>../../plugins/org.eclipse.xtend.ide.common</module>
@@ -94,6 +94,14 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'v'yyyyMMdd-HHmm</format>
 				</configuration>
 			</plugin>
 		</plugins>
