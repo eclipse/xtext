@@ -18,8 +18,8 @@ branches.each { branch ->
 			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk)
 		}
 		.findAll {
-			!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest'
-			!intellijSuites.contains(it.suite) || it.branch == 'master'
+			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
+			(!intellijSuites.contains(it.suite) || it.branch == 'master')
 		}
 		.each {
 			if(java8Suites.contains(it.suite)) {
