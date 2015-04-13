@@ -1,14 +1,9 @@
-setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
 importprefs -F ${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf
 
-importtargetdefinition "${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target"
-addbaseline -A "api-baseline"
-
 import "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"
-
 resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery"
 resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
-#resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec"
 
 build
 
