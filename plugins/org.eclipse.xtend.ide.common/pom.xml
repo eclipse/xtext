@@ -9,13 +9,14 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.ui</artifactId>
-	<name>Xtext UI</name>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.ide.common</artifactId>
+	<name>Xtend IDE Common</name>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.core</artifactId>
 			<version>[${project.version}]</version>
 		</dependency>
 	</dependencies>

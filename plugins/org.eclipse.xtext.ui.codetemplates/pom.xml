@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
+		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
 		<version>2.9.0-SNAPSHOT</version>
-		<relativePath>../../maven/org.eclipse.xtext.parent</relativePath>
+		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
+	<packaging>eclipse-plugin</packaging>
 
-	<artifactId>org.eclipse.xtext.xtext</artifactId>
-	<name>Xtext Generator + Xtext Ecore (deprecated)</name>
-	
+	<artifactId>org.eclipse.xtext.ui.codetemplates</artifactId>
+	<name>Xtext UI Codetemplates</name>
 </project>
