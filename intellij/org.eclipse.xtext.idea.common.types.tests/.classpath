@@ -5,9 +5,7 @@
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
