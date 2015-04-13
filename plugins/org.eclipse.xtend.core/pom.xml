@@ -20,6 +20,11 @@
 			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.smap</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>[${project.version}]</version>
@@ -28,6 +33,11 @@
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>common</artifactId>
 			<version>${equinox-common-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>${jdt-core-version}</version>
 		</dependency>
 	</dependencies>
 </project>
