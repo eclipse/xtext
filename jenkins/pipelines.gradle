@@ -77,7 +77,7 @@ branches.each { branch ->
 						builder.installationName = 'buckminster-4.4'
 					}
 					if (generatorSuites.contains(job.suite)) {
-						params += '\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
+						params += '\n-DECLIPSE.TARGET.ALIAS=${ECLIPSE_TARGET_ALIAS}\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
 					}
 					builder.commands = testScripts[job.suite]
 					builder.params = params
