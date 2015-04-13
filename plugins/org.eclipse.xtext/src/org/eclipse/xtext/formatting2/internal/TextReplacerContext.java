@@ -209,21 +209,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	@Override
-	public void replaceText(CharSequence text) {
-		Preconditions.checkNotNull(replacer);
-		ITextSegment region = replacer.getRegion();
-		replaceText(region.getOffset(), region.getLength(), text);
-	}
-
-	@Override
-	public void replaceText(int offset, int length, CharSequence text) {
-		Preconditions.checkNotNull(text);
-		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, length, text.toString());
-		replaceText(replacement);
-	}
-
-	@Override
-	public void replaceText(ITextReplacement replacement) {
+	public void addReplacement(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
 		ITextSegment replacerRegion = replacer.getRegion();
 		if (!replacerRegion.contains(replacement)) {
@@ -253,11 +239,6 @@ public class TextReplacerContext implements ITextReplacerContext {
 		} catch (ConflictingRegionsException e) {
 			document.getRequest().getExceptionHandler().accept(e);
 		}
-	}
-
-	@Override
-	public void replaceText(ITextSegment region, CharSequence text) {
-		replaceText(region.getOffset(), region.getLength(), text);
 	}
 
 	@Override

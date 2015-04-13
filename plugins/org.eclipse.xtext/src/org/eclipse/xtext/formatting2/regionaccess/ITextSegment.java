@@ -12,8 +12,8 @@ import java.util.List;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
- * A text segment describes a part of a document and carries a few more information,
- * e.g. about the current indentation level.
+ * A text segment describes a part of a document and carries a few more information, e.g. about the current indentation
+ * level.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
@@ -30,6 +30,8 @@ public interface ITextSegment extends Comparable<ITextSegment>, ITextRegion {
 	ITextRegionAccess getTextRegionAccess();
 
 	boolean isMultiline();
+
+	ITextReplacement replaceWith(String text);
 
 	List<ITextSegment> splitIntoLines();
 }

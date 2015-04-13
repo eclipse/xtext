@@ -72,4 +72,9 @@ public class TextRegionRewriter implements ITextRegionRewriter {
 		}
 		return result.toString();
 	}
+
+	@Override
+	public ITextReplacement createReplacement(int offset, int length, String text) {
+		return new TextReplacement(access, offset, length, text);
+	}
 }

@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextReplacement;
 
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
@@ -36,7 +35,7 @@ public class TextRegionsInTextToString {
 	}
 
 	public TextRegionsInTextToString add(ITextSegment region, String title) {
-		items.add(new TextReplacement(region.getTextRegionAccess(), region.getOffset(), region.getLength(), title));
+		items.add(region.replaceWith(title));
 		return this;
 	}
 

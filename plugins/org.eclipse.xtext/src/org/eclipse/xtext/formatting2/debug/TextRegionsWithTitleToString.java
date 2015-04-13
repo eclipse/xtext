@@ -10,9 +10,9 @@ package org.eclipse.xtext.formatting2.debug;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextReplacement;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -133,6 +133,7 @@ public class TextRegionsWithTitleToString {
 		ITextSegment frame = getFrame();
 		if (access == null || frame == null)
 			return "(null)";
+		ITextRegionRewriter rewriter = access.getRewriter();
 		StringBuilder builder = new StringBuilder();
 		List<ITextReplacement> replacements = Lists.newArrayList();
 		for (int i = 0; i < this.items.size(); i++) {
@@ -142,10 +143,10 @@ public class TextRegionsWithTitleToString {
 			String open = i < BRACKETS_OPEN.length ? BRACKETS_OPEN[i] : "[" + i + "[";
 			String close = i < BRACKETS_CLOSE.length ? BRACKETS_CLOSE[i] : "]" + i + "]";
 			builder.append(open + close + ": " + item.getTitle() + " at " + regionStr + "\n");
-			replacements.add(new TextReplacement(access, region.getOffset(), 0, open));
-			replacements.add(new TextReplacement(access, region.getEndOffset(), 0, close));
+			replacements.add(rewriter.createReplacement(region.getOffset(), 0, open));
+			replacements.add(rewriter.createReplacement(region.getEndOffset(), 0, close));
 		}
-		String vizualized = access.getRewriter().renderToString(frame, replacements);
+		String vizualized = rewriter.renderToString(frame, replacements);
 		builder.append(box("document snippet", vizualized));
 		return builder.toString();
 	}

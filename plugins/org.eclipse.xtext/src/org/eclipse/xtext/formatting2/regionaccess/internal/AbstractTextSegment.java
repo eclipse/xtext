@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
@@ -114,5 +115,10 @@ public abstract class AbstractTextSegment implements ITextSegment {
 		}
 		result.add(new TextSegment(access, offset + lastIndex, text.length() - lastIndex));
 		return ImmutableList.copyOf(result);
+	}
+
+	@Override
+	public ITextReplacement replaceWith(String text) {
+		return getTextRegionAccess().getRewriter().createReplacement(getOffset(), getLength(), text);
 	}
 }

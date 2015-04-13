@@ -84,12 +84,12 @@ public class WhitespaceReplacer implements ITextReplacer {
 		int indentationCount = computeNewIndentation(context);
 		if (newLineCount == 0 && trailingNewLinesOfPreviousRegion == 0) {
 			if (space != null)
-				context.replaceText(region, space);
+				context.addReplacement(region.replaceWith(space));
 		} else {
 			boolean noIndentation = formatting.getNoIndentation() == Boolean.TRUE;
 			String newLines = context.getNewLinesString(newLineCount);
 			String indentation = noIndentation ? "" : context.getIndentationString(indentationCount);
-			context.replaceText(region, newLines + indentation);
+			context.addReplacement(region.replaceWith(newLines + indentation));
 		}
 		return context.withIndentation(indentationCount);
 	}
