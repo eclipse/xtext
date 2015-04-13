@@ -112,7 +112,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 		int offset = region.getOffset();
 		if (offset < 1)
 			return 0;
-		String previous = region.getTextRegionAccess().getText(offset - 1, 1);
+		String previous = region.getTextRegionAccess().textForOffset(offset - 1, 1);
 		if ("\n".equals(previous))
 			return 1;
 		return 0;

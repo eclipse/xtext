@@ -30,7 +30,7 @@ public class RootDocument extends FormattableDocument {
 
 	@Override
 	public ITextSegment getRegion() {
-		return (ITextSegment) formatter.getRequest().getTextRegionAccess();
+		return formatter.getRequest().getTextRegionAccess().regionForDocument();
 	}
 
 	@Override

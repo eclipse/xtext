@@ -32,7 +32,7 @@ public class TextRegionRewriter implements ITextRegionRewriter {
 	@Override
 	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result)
 			throws IOException {
-		renderToAppendable((ITextSegment) access, replacements, result);
+		renderToAppendable(access.regionForDocument(), replacements, result);
 	}
 
 	@Override

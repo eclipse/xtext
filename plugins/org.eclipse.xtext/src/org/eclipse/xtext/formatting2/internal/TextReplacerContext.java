@@ -109,7 +109,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 					//					System.out.println("error");
 					continue;
 				}
-				String between = access.getText(endOffset, lastOffset - endOffset);
+				String between = access.textForOffset(endOffset, lastOffset - endOffset);
 				int idx = between.lastIndexOf('\n');
 				if (idx >= 0)
 					return count + logicalLength(between.substring(idx + 1));
@@ -123,7 +123,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 			}
 			current = current.getPreviousContext();
 		}
-		String rest = access.getText(0, lastOffset);
+		String rest = access.textForOffset(0, lastOffset);
 		int idx = rest.lastIndexOf('\n');
 		if (idx >= 0)
 			return count + logicalLength(rest.substring(idx + 1));

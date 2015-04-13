@@ -13,6 +13,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -45,6 +46,13 @@ public class NodeEObjectRegion extends AbstractEObjectRegion {
 			current = current.getParent();
 		}
 		return null;
+	}
+
+	@Override
+	public String getText() {
+		if (node instanceof RootNode)
+			return node.getText();
+		return super.getText();
 	}
 
 }

@@ -16,7 +16,6 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -87,10 +86,6 @@ public class NodeModelBasedRegionAccessBuilder {
 		CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
 		process(rootNode, access);
 		return ImmutableMap.<EObject, AbstractEObjectRegion> copyOf(this.eObjToTokens);
-	}
-
-	protected IHiddenRegion getFirstRegion() {
-		return firstHidden;
 	}
 
 	protected XtextResource getXtextResource() {
