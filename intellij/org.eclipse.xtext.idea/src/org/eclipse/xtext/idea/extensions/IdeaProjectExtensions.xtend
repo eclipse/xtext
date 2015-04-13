@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.LanguageLevelProjectExtension
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.search.GlobalSearchScope
 import org.apache.log4j.Logger
@@ -74,6 +75,10 @@ class IdeaProjectExtensions {
 	
 	static def getPsiFileFactory(Project project) {
 		PsiFileFactory.getInstance(project)
+	}
+	
+	static def getPsiDocumentManager(Project project) {
+		PsiDocumentManager.getInstance(project)
 	}
 
 }

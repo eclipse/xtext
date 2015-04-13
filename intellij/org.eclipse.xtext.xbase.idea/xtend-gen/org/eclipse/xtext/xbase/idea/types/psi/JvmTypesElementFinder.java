@@ -65,7 +65,7 @@ public class JvmTypesElementFinder extends PsiElementFinder {
         if (_equals) {
           String[] _split = qualifiedName.split("\\.");
           QualifiedName _create = QualifiedName.create(_split);
-          ArrayList<JvmPsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
+          Iterable<JvmPsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
           Iterables.<JvmPsiClass>addAll(result, _psiClassesByQualifiedName);
         }
       }

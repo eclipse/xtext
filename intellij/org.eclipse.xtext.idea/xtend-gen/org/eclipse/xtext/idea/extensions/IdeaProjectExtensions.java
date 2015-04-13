@@ -7,6 +7,7 @@ import com.intellij.openapi.roots.LanguageLevelProjectExtension;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.search.GlobalSearchScope;
 import org.apache.log4j.Logger;
@@ -95,5 +96,9 @@ public class IdeaProjectExtensions {
   
   public static PsiFileFactory getPsiFileFactory(final Project project) {
     return PsiFileFactory.getInstance(project);
+  }
+  
+  public static PsiDocumentManager getPsiDocumentManager(final Project project) {
+    return PsiDocumentManager.getInstance(project);
   }
 }

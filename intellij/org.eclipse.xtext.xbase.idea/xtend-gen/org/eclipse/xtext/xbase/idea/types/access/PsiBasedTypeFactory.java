@@ -19,6 +19,7 @@ import com.intellij.psi.PsiAnnotationParameterList;
 import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiArrayInitializerMemberValue;
 import com.intellij.psi.PsiArrayType;
+import com.intellij.psi.PsiCapturedWildcardType;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassObjectAccessExpression;
 import com.intellij.psi.PsiClassType;
@@ -45,6 +46,7 @@ import com.intellij.psi.PsiTypeElement;
 import com.intellij.psi.PsiTypeParameter;
 import com.intellij.psi.PsiTypeParameterListOwner;
 import com.intellij.psi.PsiWildcardType;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1491,41 +1493,39 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     return _and;
   }
   
-  protected JvmTypeReference createTypeArgument(final PsiType type) {
-    JvmTypeReference _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiWildcardType) {
-        _matched=true;
-        JvmWildcardTypeReference _createJvmWildcardTypeReference = this._typesFactory.createJvmWildcardTypeReference();
-        final Procedure1<JvmWildcardTypeReference> _function = new Procedure1<JvmWildcardTypeReference>() {
-          @Override
-          public void apply(final JvmWildcardTypeReference it) {
-            JvmUpperBound _createJvmUpperBound = PsiBasedTypeFactory.this._typesFactory.createJvmUpperBound();
-            final JvmTypeConstraintImplCustom upperBound = ((JvmTypeConstraintImplCustom) _createJvmUpperBound);
-            JvmTypeReference _createUpperBoundReference = PsiBasedTypeFactory.this.createUpperBoundReference(((PsiWildcardType)type));
-            upperBound.internalSetTypeReference(_createUpperBoundReference);
-            EList<JvmTypeConstraint> _constraints = it.getConstraints();
-            PsiBasedTypeFactory.this.addUnique(_constraints, upperBound);
-            final PsiType superBound = ((PsiWildcardType)type).getSuperBound();
-            boolean _notEquals = (!Objects.equal(superBound, PsiType.NULL));
-            if (_notEquals) {
-              JvmLowerBound _createJvmLowerBound = PsiBasedTypeFactory.this._typesFactory.createJvmLowerBound();
-              final JvmTypeConstraintImplCustom lowerBound = ((JvmTypeConstraintImplCustom) _createJvmLowerBound);
-              JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(superBound);
-              lowerBound.internalSetTypeReference(_createTypeReference);
-              EList<JvmTypeConstraint> _constraints_1 = it.getConstraints();
-              PsiBasedTypeFactory.this.addUnique(_constraints_1, lowerBound);
-            }
-          }
-        };
-        _switchResult = ObjectExtensions.<JvmWildcardTypeReference>operator_doubleArrow(_createJvmWildcardTypeReference, _function);
+  protected JvmTypeReference _createTypeArgument(final PsiType type) {
+    return this.createTypeReference(type);
+  }
+  
+  protected JvmTypeReference _createTypeArgument(final PsiWildcardType type) {
+    JvmWildcardTypeReference _createJvmWildcardTypeReference = this._typesFactory.createJvmWildcardTypeReference();
+    final Procedure1<JvmWildcardTypeReference> _function = new Procedure1<JvmWildcardTypeReference>() {
+      @Override
+      public void apply(final JvmWildcardTypeReference it) {
+        JvmUpperBound _createJvmUpperBound = PsiBasedTypeFactory.this._typesFactory.createJvmUpperBound();
+        final JvmTypeConstraintImplCustom upperBound = ((JvmTypeConstraintImplCustom) _createJvmUpperBound);
+        JvmTypeReference _createUpperBoundReference = PsiBasedTypeFactory.this.createUpperBoundReference(type);
+        upperBound.internalSetTypeReference(_createUpperBoundReference);
+        EList<JvmTypeConstraint> _constraints = it.getConstraints();
+        PsiBasedTypeFactory.this.addUnique(_constraints, upperBound);
+        final PsiType superBound = type.getSuperBound();
+        boolean _notEquals = (!Objects.equal(superBound, PsiType.NULL));
+        if (_notEquals) {
+          JvmLowerBound _createJvmLowerBound = PsiBasedTypeFactory.this._typesFactory.createJvmLowerBound();
+          final JvmTypeConstraintImplCustom lowerBound = ((JvmTypeConstraintImplCustom) _createJvmLowerBound);
+          JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(superBound);
+          lowerBound.internalSetTypeReference(_createTypeReference);
+          EList<JvmTypeConstraint> _constraints_1 = it.getConstraints();
+          PsiBasedTypeFactory.this.addUnique(_constraints_1, lowerBound);
+        }
       }
-    }
-    if (!_matched) {
-      _switchResult = this.createTypeReference(type);
-    }
-    return _switchResult;
+    };
+    return ObjectExtensions.<JvmWildcardTypeReference>operator_doubleArrow(_createJvmWildcardTypeReference, _function);
+  }
+  
+  protected JvmTypeReference _createTypeArgument(final PsiCapturedWildcardType type) {
+    PsiWildcardType _wildcard = type.getWildcard();
+    return this.createTypeArgument(_wildcard);
   }
   
   protected JvmTypeReference createUpperBoundReference(final PsiWildcardType type) {
@@ -1728,5 +1728,18 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   protected boolean isArray(final PsiType type) {
     return (type instanceof PsiArrayType);
+  }
+  
+  protected JvmTypeReference createTypeArgument(final PsiType type) {
+    if (type instanceof PsiCapturedWildcardType) {
+      return _createTypeArgument((PsiCapturedWildcardType)type);
+    } else if (type instanceof PsiWildcardType) {
+      return _createTypeArgument((PsiWildcardType)type);
+    } else if (type != null) {
+      return _createTypeArgument(type);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(type).toString());
+    }
   }
 }

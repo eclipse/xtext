@@ -25,7 +25,9 @@ import com.intellij.testFramework.UsefulTestCase;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
+import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -79,6 +81,90 @@ public class JvmPsiClassTest extends LightXtendTest {
     this.myFixture.testHighlighting(true, true, true, _virtualFile);
   }
   
+  public void testCyclicResolution2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Bar extends Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void someMethod() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addClass(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void callToBar(Bar bar) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar.someMethod");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder_1.toString());
+    VirtualFile _virtualFile = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile);
+  }
+  
+  public void testCyclicResolution3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Bar extends Foo<? extends Bar> {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void someMethod() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addClass(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo<T extends Bar> {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void callToBar(T bar) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar.someMethod");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder_1.toString());
+    VirtualFile _virtualFile = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile);
+  }
+  
   public void testMethodBodyWithErrors() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage");
@@ -118,6 +204,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmDeclaredType _type = psiClass.getType();
+    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
     final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
       public PsiClass get() {
@@ -172,6 +260,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmDeclaredType _type = psiClass.getType();
+    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
     final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
       public PsiClass get() {
@@ -212,6 +302,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmDeclaredType _type = psiClass.getType();
+    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
     final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
       public PsiClass get() {
@@ -239,6 +331,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmDeclaredType _type = psiClass.getType();
+    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
     final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
       public PsiClass get() {
@@ -266,6 +360,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmDeclaredType _type = psiClass.getType();
+    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
     final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
       public PsiClass get() {

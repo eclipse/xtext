@@ -17,6 +17,7 @@ import com.intellij.psi.PsiAnnotationMethod
 import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiArrayInitializerMemberValue
 import com.intellij.psi.PsiArrayType
+import com.intellij.psi.PsiCapturedWildcardType
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiClassObjectAccessExpression
 import com.intellij.psi.PsiClassType
@@ -645,24 +646,27 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		psiClass.containingClass != null && !psiClass.hasModifierProperty(PsiModifier.STATIC)
 	}
 
-	protected def createTypeArgument(PsiType type) {
-		switch type {
-			PsiWildcardType:
-				createJvmWildcardTypeReference => [
-					val upperBound = createJvmUpperBound as JvmTypeConstraintImplCustom
-					upperBound.internalSetTypeReference(type.createUpperBoundReference)
-					constraints.addUnique(upperBound)
-
-					val superBound = type.superBound
-					if (superBound != PsiType.NULL) {
-						val lowerBound = createJvmLowerBound as JvmTypeConstraintImplCustom
-						lowerBound.internalSetTypeReference(superBound.createTypeReference)
-						constraints.addUnique(lowerBound)
-					}
-				]
-			default:
-				type.createTypeReference
-		}
+	protected def dispatch JvmTypeReference createTypeArgument(PsiType type) {
+		type.createTypeReference
+	}
+	
+	protected def dispatch JvmTypeReference createTypeArgument(PsiWildcardType type) {
+		createJvmWildcardTypeReference => [
+			val upperBound = createJvmUpperBound as JvmTypeConstraintImplCustom
+			upperBound.internalSetTypeReference(type.createUpperBoundReference)
+			constraints.addUnique(upperBound)
+		
+			val superBound = type.superBound
+			if (superBound != PsiType.NULL) {
+				val lowerBound = createJvmLowerBound as JvmTypeConstraintImplCustom
+				lowerBound.internalSetTypeReference(superBound.createTypeReference)
+				constraints.addUnique(lowerBound)
+			}
+		]
+	}
+	
+	protected def dispatch JvmTypeReference createTypeArgument(PsiCapturedWildcardType type) {
+		type.wildcard.createTypeArgument
 	}
 
 	protected def createUpperBoundReference(PsiWildcardType type) {

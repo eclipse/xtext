@@ -209,12 +209,7 @@ public class StubURIHelper implements URIHelperConstants {
         }
       }
       if (!_matched) {
-        String _canonicalText = null;
-        if (type!=null) {
-          _canonicalText=type.getCanonicalText();
-        }
-        String _plus = ("Unknown type: " + _canonicalText);
-        throw new IllegalStateException(_plus);
+        throw new IllegalStateException(("Unknown type: " + type));
       }
       return _switchResult;
     } catch (Throwable _e) {
@@ -310,12 +305,7 @@ public class StubURIHelper implements URIHelperConstants {
         }
       }
       if (!_matched) {
-        String _canonicalText = null;
-        if (type!=null) {
-          _canonicalText=type.getCanonicalText();
-        }
-        String _plus = ("Unknown type: " + _canonicalText);
-        throw new IllegalStateException(_plus);
+        throw new IllegalStateException(("Unknown type: " + type));
       }
       return _switchResult;
     } catch (Throwable _e) {

@@ -12,7 +12,6 @@ import com.google.inject.Singleton
 import com.intellij.psi.PsiElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.psi.IPsiModelAssociations
-import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 
 /**
@@ -28,11 +27,7 @@ class PsiLogicalContainerProvider implements IPsiLogicalContainerProvider {
 	ILogicalContainerProvider logicalContainerProvider
 
 	override getNearestLogicalContainer(PsiElement expr) {
-		if (expr instanceof PsiEObject) {
-			expr.EObject.nearestLogicalContainer
-		} else {
-			null
-		}
+		expr.EObject.nearestLogicalContainer
 	}
 
 	override getNearestLogicalContainer(EObject expr) {
