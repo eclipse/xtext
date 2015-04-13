@@ -382,6 +382,42 @@
     </targlet>
     <description>Target platform</description>
   </setupTask>
+  <setupTask
+      xsi:type="setup.targlets:TargletTask">
+    <targlet
+        name="Xtext/Xtend Examples">
+      <requirement
+          name="org.eclipse.xtend.examples-container"/>
+      <requirement
+          name="xtend-examples"/>
+      <requirement
+          name="xtend-annotation-examples-client"/>
+      <requirement
+          name="xtend-annotation-examples"/>
+      <requirement
+          name="org.eclipse.xtext.xtext.ui.examples-container"/>
+      <requirement
+          name="org.eclipse.xtext.xtext.ui.examples"/>
+      <requirement
+          name="org.eclipse.xtext.example.arithmetics.tests"/>
+      <requirement
+          name="org.eclipse.xtext.example.homeautomation.tests"/>
+      <requirement
+          name="org.eclipse.xtext.example.fowlerdsl.ui"/>
+      <requirement
+          name="xbase.tutorial"/>
+      <requirement
+          name="xtend-euler"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/examples/}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
+    </targlet>
+  </setupTask>
   <project name="core"
       label="Core">
     <setupTask
@@ -593,42 +629,6 @@
       </targlet>
     </setupTask>
     <setupTask
-        xsi:type="setup.targlets:TargletTask">
-      <targlet
-          name="Xtext/Xtend Examples">
-        <requirement
-            name="org.eclipse.xtend.examples-container"/>
-        <requirement
-            name="xtend-examples"/>
-        <requirement
-            name="xtend-annotation-examples-client"/>
-        <requirement
-            name="xtend-annotation-examples"/>
-        <requirement
-            name="org.eclipse.xtext.xtext.ui.examples-container"/>
-        <requirement
-            name="org.eclipse.xtext.xtext.ui.examples"/>
-        <requirement
-            name="org.eclipse.xtext.example.arithmetics.tests"/>
-        <requirement
-            name="org.eclipse.xtext.example.homeautomation.tests"/>
-        <requirement
-            name="org.eclipse.xtext.example.fowlerdsl.ui"/>
-        <requirement
-            name="xbase.tutorial"/>
-        <requirement
-            name="xtend-euler"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
-      </targlet>
-    </setupTask>
-    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.location/maven}"/>
@@ -644,7 +644,7 @@
         xsi:type="launching:LaunchTask"
         id="Maven build"
         excludedTriggers="MANUAL"
-        launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch">
+        launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent-notests.launch">
       <description>Xtext-Maven build</description>
     </setupTask>
     <setupTask
