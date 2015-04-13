@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>By deafult uses http://download.eclipse.org/modeling/tmf/xtext/updates/nightly&lt;br&gt;&#xd;
-as source for uber jars.&lt;br&gt;&#xd;
-&lt;br&gt;&#xd;
+  <description>
 mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -17,43 +15,19 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
       <useJobPriority>true</useJobPriority>
       <priority>2</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>XTEXT_REPOSITORY</name>
-          <description>For releases use: 
-xtext-url=http://download.eclipse.org/modeling/tmf/xtext/updates/releases 
-for SNAPSHOTS please use 
-http://download.eclipse.org/modeling/tmf/xtext/updates/latest
-for MAINTENANCE SNAPSHOTS please use 
-http://download.eclipse.org/modeling/tmf/xtext/updates/maintenance/nightly</description>
-          <defaultValue>http://download.eclipse.org/modeling/tmf/xtext/updates/nightly</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.ChoiceParameterDefinition>
-          <name>GIT_BRANCH_SPEC</name>
-          <description>Branch to use</description>
-          <choices class="java.util.Arrays$ArrayList">
-            <a class="string-array">
-              <string>master</string>
-              <string>2.8_Maintenance</string>
-            </a>
-          </choices>
-        </hudson.model.ChoiceParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <refspec>+refs/heads/${GIT_BRANCH_SPEC}:refs/remotes/origin/${GIT_BRANCH_SPEC}</refspec>
+         <refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
         <url>https://github.com/eclipse/xtext.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>${GIT_BRANCH_SPEC}</name>
+        <name>master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -87,14 +61,10 @@ http://download.eclipse.org/modeling/tmf/xtext/updates/maintenance/nightly</desc
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>set</command>
-    </hudson.tasks.Shell>
     <hudson.tasks.Maven>
-      <targets>-U -T 1C clean deploy</targets>
+      <targets>-U clean deploy</targets>
       <mavenName>Maven 3.0.4</mavenName>
       <pom>org.eclipse.xtext.git/maven/org.eclipse.xtext.parent/pom.xml</pom>
-      <properties>xtext-url=${XTEXT_REPOSITORY}</properties>
       <usePrivateRepository>true</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
@@ -108,7 +78,7 @@ http://download.eclipse.org/modeling/tmf/xtext/updates/maintenance/nightly</desc
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
     <hudson.tasks.Mailer plugin="mailer@1.11">
-      <recipients>dennis.huebner@itemis.de</recipients>
+      <recipients>alle-ki@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
