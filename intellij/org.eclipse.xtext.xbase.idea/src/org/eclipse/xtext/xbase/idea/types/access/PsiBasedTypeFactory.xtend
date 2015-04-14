@@ -35,14 +35,12 @@ import com.intellij.psi.PsiType
 import com.intellij.psi.PsiTypeParameter
 import com.intellij.psi.PsiTypeParameterListOwner
 import com.intellij.psi.PsiWildcardType
-import java.util.Map
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.util.InternalEList
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
-import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmAnnotationValue
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue
@@ -77,14 +75,6 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
 	val final createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
 
-	val Map<PsiType, JvmType> typeProxies
-
-	val Map<PsiMethod, JvmOperation> operationProxies
-
-	val Map<PsiType, JvmAnnotationType> annotationProxies
-
-	val Map<PsiEnumConstant, JvmEnumerationLiteral> enumerationLiteralProxies
-
 	val extension TypesFactory = TypesFactory.eINSTANCE
 
 	val extension StubURIHelper uriHelper
@@ -94,10 +84,6 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	@Inject
 	new(StubURIHelper uriHelper, IPsiModelAssociator psiModelAssociator) {
 		this.uriHelper = uriHelper
-		this.typeProxies = newHashMap
-		this.operationProxies = newHashMap
-		this.annotationProxies = newHashMap
-		this.enumerationLiteralProxies = newHashMap
 		this.psiModelAssociator = psiModelAssociator
 	}
 
@@ -168,53 +154,46 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	protected def JvmAnnotationReference createAnnotationReference(PsiAnnotation annotation) {
-		val project = annotation.project
-		val type = project.psiElementFactory.createTypeByFQClassName(annotation.qualifiedName)
-		val resovleResult = type.resolveGenerics
-		if (!type.resolveGenerics.validResult) {
-			return null
+		val psiClass = annotation.nameReferenceElement.resolve
+		if (psiClass instanceof PsiClass) {
+			createJvmAnnotationReference => [
+				it.annotation = psiClass.craeteAnnotationProxy
+				for (attribute : annotation.parameterList.attributes) {
+					val attributeName = attribute.name ?: 'value'
+					val value = attribute.value.computeAnnotationValue(annotation.project)
+					val method = psiClass.methods.findFirst[name == attributeName]
+					val annotationValue = value.createAnnotationValue(method)
+					annotationValue.operation = method.createMethodProxy
+					explicitValues.addUnique(annotationValue)
+				}
+			]
 		}
-		val psiClass = resovleResult.element
-		createJvmAnnotationReference => [
-			it.annotation = type.craeteAnnotationProxy
-			for (attribute : annotation.parameterList.attributes) {
-				val attributeName = attribute.name ?: 'value'
-				val value = attribute.value.computeAnnotationValue(project)
-				val method = psiClass.methods.findFirst[name == attributeName]
-				val annotationValue = value.createAnnotationValue(method)
-				annotationValue.operation = method.createMethodProxy
-				explicitValues.addUnique(annotationValue)
-			}
-		]
 	}
 
 	protected def createMethodProxy(PsiMethod method) {
-		operationProxies.get(method) ?: createJvmOperation => [
+		createJvmOperation => [
 			val uri = method.fullURI
 			if (it instanceof InternalEObject) {
 				eSetProxyURI(uri)
 			}
-			operationProxies.put(method, it)
 		]
 	}
 
 	protected def JvmEnumerationLiteral createEnumLiteralProxy(PsiEnumConstant constant) {
-		enumerationLiteralProxies.get(constant) ?: createJvmEnumerationLiteral => [
+		createJvmEnumerationLiteral => [
 			val uri = constant.fullURI
 			if (it instanceof InternalEObject) {
 				eSetProxyURI(uri)
 			}
-			enumerationLiteralProxies.put(constant, it)
 		]
 	}
 
-	protected def craeteAnnotationProxy(PsiType annotationType) {
-		annotationProxies.get(annotationType) ?: createJvmAnnotationType => [
+	protected def craeteAnnotationProxy(PsiClass annotationType) {
+		createJvmAnnotationType => [
 			val uri = annotationType.fullURI
 			if (it instanceof InternalEObject) {
 				eSetProxyURI(uri)
 			}
-			annotationProxies.put(annotationType, it)
 		]
 	}
 
@@ -685,12 +664,11 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	protected def JvmType createProxy(PsiType psiType) {
-		typeProxies.get(psiType) ?: createJvmVoid => [
+		createJvmVoid => [
 			val uri = psiType.fullURI
 			if (it instanceof InternalEObject) {
 				eSetProxyURI(uri)
 			}
-			typeProxies.put(psiType, it)
 		]
 	}
 
