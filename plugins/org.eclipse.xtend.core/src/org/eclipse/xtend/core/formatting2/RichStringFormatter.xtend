@@ -211,7 +211,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	new(ITextRegionAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess
 		this.string = string
-		this.document = (nodeModelAccess as ITextSegment).getText()
+		this.document = nodeModelAccess.regionForDocument.text
 	}
 
 	def outdentThisLine() {
