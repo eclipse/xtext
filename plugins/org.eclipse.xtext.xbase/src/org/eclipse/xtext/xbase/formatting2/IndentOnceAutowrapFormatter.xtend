@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.formatting2
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.formatting2.IAutowrapFormatter
 import org.eclipse.xtext.formatting2.IFormattableDocument
-import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatting
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -20,10 +22,10 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion
 	val IHiddenRegion last
 	var hasWrapped = false
 
-	override format(IHiddenRegionFormatter wrapped, extension IFormattableDocument document) {
+	override format(ITextSegment region, IHiddenRegionFormatting wrapped, extension IFormattableDocument document) {
 		if (!hasWrapped) {
-			wrapped.increaseIndentation
-			last.set[decreaseIndentation]
+			val hiddenRegion = switch region { IHiddenRegion: region IHiddenRegionPart: region.hiddenRegion }
+			set(hiddenRegion, last)[indent]
 			hasWrapped = true
 		}
 	}
