@@ -30,40 +30,46 @@ public class TextRegionRewriter implements ITextRegionRewriter {
 	}
 
 	@Override
-	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result) {
+	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result)
+			throws IOException {
 		renderToAppendable((ITextSegment) access, replacements, result);
 	}
 
 	@Override
-	public void renderToAppendable(ITextSegment input, Iterable<? extends ITextReplacement> rep, Appendable result) {
+	public void renderToAppendable(ITextSegment input, Iterable<? extends ITextReplacement> rep, Appendable result)
+			throws IOException {
 		int offset = input.getOffset();
 		String text = input.getText();
 		List<ITextReplacement> list = new TextReplacementList<ITextReplacement>(rep);
 		Collections.sort(list);
 		int lastOffset = 0;
-		try {
-			for (ITextReplacement r : rep) {
-				result.append(text.subSequence(lastOffset, r.getOffset() - offset));
-				result.append(r.getReplacementText());
-				lastOffset = (r.getOffset() - offset) + r.getLength();
-			}
-			result.append(text.subSequence(lastOffset, text.length()));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		for (ITextReplacement r : rep) {
+			result.append(text.subSequence(lastOffset, r.getOffset() - offset));
+			result.append(r.getReplacementText());
+			lastOffset = (r.getOffset() - offset) + r.getLength();
 		}
+		result.append(text.subSequence(lastOffset, text.length()));
 	}
 
 	@Override
 	public String renderToString(Iterable<? extends ITextReplacement> replacements) {
 		StringBuilder result = new StringBuilder();
-		renderToAppendable(replacements, result);
+		try {
+			renderToAppendable(replacements, result);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		return result.toString();
 	}
 
 	@Override
 	public String renderToString(ITextSegment input, Iterable<? extends ITextReplacement> replacements) {
 		StringBuilder result = new StringBuilder();
-		renderToAppendable(input, replacements, result);
+		try {
+			renderToAppendable(input, replacements, result);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		return result.toString();
 	}
 }
