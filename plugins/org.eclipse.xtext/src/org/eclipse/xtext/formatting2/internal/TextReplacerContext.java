@@ -11,6 +11,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
@@ -223,19 +225,28 @@ public class TextReplacerContext implements ITextReplacerContext {
 	@Override
 	public void replaceText(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
-		if (!replacer.getRegion().contains(replacement)) {
+		ITextSegment replacerRegion = replacer.getRegion();
+		if (!replacerRegion.contains(replacement)) {
 			String frameTitle = replacer.getClass().getSimpleName();
 			ITextSegment frameRegion = replacer.getRegion();
 			String replacerTitle = replacement.getReplacementText();
-			ITextSegment replacerRegion = replacement;
 			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
-					Tuples.create(replacerTitle, replacerRegion));
+					Tuples.create(replacerTitle, (ITextSegment) replacement));
 			document.getRequest().getExceptionHandler().accept(exception);
 			return;
 		}
 		if (!isInRequestedRange(replacement)) {
 			return;
+		}
+		if (document.getRequest().isFormatUndefinedHiddenRegionsOnly()) {
+			IHiddenRegion hidden = null;
+			if (replacerRegion instanceof IHiddenRegionPart)
+				hidden = ((IHiddenRegionPart) replacerRegion).getHiddenRegion();
+			else if (replacerRegion instanceof IHiddenRegion)
+				hidden = (IHiddenRegion) replacerRegion;
+			if (hidden == null || !hidden.isUndefined())
+				return;
 		}
 		try {
 			replacements.add(replacement);
@@ -288,8 +299,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 			items.add("canAutowrap");
 		if (replacer != null) {
 			ITextSegment region = replacer.getRegion();
-			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(), replacer.getClass()
-					.getSimpleName(), replacer.toString()));
+			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(),
+					replacer.getClass().getSimpleName(), replacer.toString()));
 		}
 		if (replacements != null)
 			for (ITextReplacement r : replacements) {
@@ -321,8 +332,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 				if (nextReplacerIsChild) {
 					Preconditions.checkArgument(lastReplacer.getRegion().contains(replacer.getRegion()));
 				} else {
-					Preconditions.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion()
-							.getOffset());
+					Preconditions
+							.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
 				}
 				break;
 			}
