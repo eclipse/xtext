@@ -150,7 +150,6 @@ public class XbaseFormatter extends XtypeFormatter {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
-              it.increaseIndentation();
             }
           };
           format.append(open, _function_1);
@@ -179,10 +178,16 @@ public class XbaseFormatter extends XtypeFormatter {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
-              it.decreaseIndentation();
             }
           };
           format.<EObject>append(_last, _function_2);
+          final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
+            public void apply(final IHiddenRegionFormatter it) {
+              it.indent();
+            }
+          };
+          format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_3);
         } else {
           IHiddenRegion _previousHiddenRegion_1 = close.getPreviousHiddenRegion();
           final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_previousHiddenRegion_1);
@@ -209,7 +214,7 @@ public class XbaseFormatter extends XtypeFormatter {
               if (_prependNewLineIfMultiline) {
                 boolean _equals_2 = Objects.equal(sep, null);
                 if (_equals_2) {
-                  final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+                  final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
                     @Override
                     public void apply(final IHiddenRegionFormatter it) {
                       it.noSpace();
@@ -219,9 +224,9 @@ public class XbaseFormatter extends XtypeFormatter {
                       it.setOnAutowrap(indent);
                     }
                   };
-                  format.append(open, _function_3);
+                  format.append(open, _function_4);
                 } else {
-                  final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+                  final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
                     @Override
                     public void apply(final IHiddenRegionFormatter it) {
                       it.oneSpace();
@@ -231,35 +236,35 @@ public class XbaseFormatter extends XtypeFormatter {
                       it.setOnAutowrap(indent);
                     }
                   };
-                  format.append(sep, _function_4);
+                  format.append(sep, _function_5);
                 }
               } else {
-                final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+                final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.oneSpace();
                   }
                 };
-                format.append(sep, _function_5);
+                format.append(sep, _function_6);
               }
-              final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
+              final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.noSpace();
                 }
               };
-              format.prepend(sep, _function_6);
+              format.prepend(sep, _function_7);
               EObject _object_1 = ele_1.getObject();
               this.format(_object_1, format);
             }
           }
-          final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          format.prepend(close, _function_3);
+          format.prepend(close, _function_4);
         }
       }
     }
@@ -797,21 +802,13 @@ public class XbaseFormatter extends XtypeFormatter {
   protected void _format(final XSynchronizedExpression expr, @Extension final IFormattableDocument format) {
     EObject _eContainer = expr.eContainer();
     if ((_eContainer instanceof XVariableDeclaration)) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "synchronized");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.increaseIndentation();
+          it.indent();
         }
       };
-      format.append(_regionForKeyword, _function);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
-        }
-      };
-      format.<XSynchronizedExpression>append(expr, _function_1);
+      format.<XSynchronizedExpression>surround(expr, _function);
     }
     boolean _or = false;
     XExpression _expression = expr.getExpression();
@@ -826,13 +823,13 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     final boolean multiline = _or;
     XExpression _param = expr.getParam();
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.<XExpression>surround(_param, _function_2);
+    format.<XExpression>surround(_param, _function_1);
     boolean _or_1 = false;
     XExpression _expression_2 = expr.getExpression();
     if ((_expression_2 instanceof XBlockExpression)) {
@@ -841,11 +838,11 @@ public class XbaseFormatter extends XtypeFormatter {
       _or_1 = multiline;
     }
     if (_or_1) {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "synchronized");
-      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "synchronized");
+      format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     } else {
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(expr, "synchronized");
-      format.append(_regionForKeyword_2, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
+      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "synchronized");
+      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _expression_3 = expr.getExpression();
     if ((_expression_3 instanceof XBlockExpression)) {
@@ -854,30 +851,29 @@ public class XbaseFormatter extends XtypeFormatter {
     } else {
       if ((!multiline)) {
         XExpression _expression_5 = expr.getExpression();
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
         };
-        format.<XExpression>prepend(_expression_5, _function_3);
+        format.<XExpression>prepend(_expression_5, _function_2);
       } else {
         XExpression _expression_6 = expr.getExpression();
-        final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.newLine();
-            it.increaseIndentation();
           }
         };
-        XExpression _prepend = format.<XExpression>prepend(_expression_6, _function_4);
-        final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+        XExpression _prepend = format.<XExpression>prepend(_expression_6, _function_3);
+        final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
-            it.decreaseIndentation();
+            it.indent();
           }
         };
-        format.<XExpression>append(_prepend, _function_5);
+        format.<XExpression>surround(_prepend, _function_4);
       }
     }
     XExpression _param_1 = expr.getParam();
@@ -889,21 +885,13 @@ public class XbaseFormatter extends XtypeFormatter {
   protected void _format(final XIfExpression expr, @Extension final IFormattableDocument format) {
     EObject _eContainer = expr.eContainer();
     if ((_eContainer instanceof XVariableDeclaration)) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "if");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.increaseIndentation();
+          it.indent();
         }
       };
-      format.append(_regionForKeyword, _function);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
-        }
-      };
-      format.<XIfExpression>append(expr, _function_1);
+      format.<XIfExpression>surround(expr, _function);
     }
     boolean _or = false;
     XExpression _then = expr.getThen();
@@ -917,13 +905,13 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     final boolean multiline = _or;
     XExpression _if = expr.getIf();
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.<XExpression>surround(_if, _function_2);
+    format.<XExpression>surround(_if, _function_1);
     boolean _or_1 = false;
     XExpression _then_1 = expr.getThen();
     if ((_then_1 instanceof XBlockExpression)) {
@@ -932,11 +920,11 @@ public class XbaseFormatter extends XtypeFormatter {
       _or_1 = multiline;
     }
     if (_or_1) {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "if");
-      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "if");
+      format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     } else {
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(expr, "if");
-      format.append(_regionForKeyword_2, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
+      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "if");
+      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _then_2 = expr.getThen();
     if ((_then_2 instanceof XBlockExpression)) {
@@ -951,35 +939,41 @@ public class XbaseFormatter extends XtypeFormatter {
     } else {
       if ((!multiline)) {
         XExpression _then_5 = expr.getThen();
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
         };
-        format.<XExpression>prepend(_then_5, _function_3);
+        format.<XExpression>prepend(_then_5, _function_2);
         XExpression _else_2 = expr.getElse();
         boolean _notEquals_1 = (!Objects.equal(_else_2, null));
         if (_notEquals_1) {
           XExpression _then_6 = expr.getThen();
-          final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+          final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          format.<XExpression>append(_then_6, _function_4);
+          format.<XExpression>append(_then_6, _function_3);
         }
       } else {
         XExpression _then_7 = expr.getThen();
-        final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.newLine();
-            it.increaseIndentation();
           }
         };
-        format.<XExpression>prepend(_then_7, _function_5);
+        XExpression _prepend = format.<XExpression>prepend(_then_7, _function_4);
+        final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.indent();
+          }
+        };
+        format.<XExpression>surround(_prepend, _function_5);
         XExpression _else_3 = expr.getElse();
         boolean _notEquals_2 = (!Objects.equal(_else_3, null));
         if (_notEquals_2) {
@@ -988,19 +982,9 @@ public class XbaseFormatter extends XtypeFormatter {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
-              it.decreaseIndentation();
             }
           };
           format.<XExpression>append(_then_8, _function_6);
-        } else {
-          XExpression _then_9 = expr.getThen();
-          final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
-            @Override
-            public void apply(final IHiddenRegionFormatter it) {
-              it.decreaseIndentation();
-            }
-          };
-          format.<XExpression>append(_then_9, _function_7);
         }
       }
     }
@@ -1018,42 +1002,40 @@ public class XbaseFormatter extends XtypeFormatter {
       }
       if (_or_2) {
         XExpression _else_7 = expr.getElse();
-        final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
         };
-        format.<XExpression>prepend(_else_7, _function_8);
+        format.<XExpression>prepend(_else_7, _function_7);
       } else {
         XExpression _else_8 = expr.getElse();
-        final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.newLine();
-            it.increaseIndentation();
           }
         };
-        format.<XExpression>prepend(_else_8, _function_9);
-        XExpression _else_9 = expr.getElse();
-        final Procedure1<IHiddenRegionFormatter> _function_10 = new Procedure1<IHiddenRegionFormatter>() {
+        XExpression _prepend_1 = format.<XExpression>prepend(_else_8, _function_8);
+        final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
-            it.decreaseIndentation();
+            it.indent();
           }
         };
-        format.<XExpression>append(_else_9, _function_10);
+        format.<XExpression>surround(_prepend_1, _function_9);
       }
     }
     XExpression _if_1 = expr.getIf();
     this.format(_if_1, format);
-    XExpression _then_10 = expr.getThen();
-    this.format(_then_10, format);
-    XExpression _else_10 = expr.getElse();
-    boolean _notEquals_3 = (!Objects.equal(_else_10, null));
+    XExpression _then_9 = expr.getThen();
+    this.format(_then_9, format);
+    XExpression _else_9 = expr.getElse();
+    boolean _notEquals_3 = (!Objects.equal(_else_9, null));
     if (_notEquals_3) {
-      XExpression _else_11 = expr.getElse();
-      this.format(_else_11, format);
+      XExpression _else_10 = expr.getElse();
+      this.format(_else_10, format);
     }
   }
   
@@ -1106,23 +1088,21 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
         }
       };
-      format.<XExpression>prepend(_eachExpression_2, _function_5);
-      XExpression _eachExpression_3 = expr.getEachExpression();
+      XExpression _prepend_2 = format.<XExpression>prepend(_eachExpression_2, _function_5);
       final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
+          it.indent();
         }
       };
-      format.<XExpression>append(_eachExpression_3, _function_6);
+      format.<XExpression>surround(_prepend_2, _function_6);
     }
     XExpression _forExpression_1 = expr.getForExpression();
     this.format(_forExpression_1, format);
-    XExpression _eachExpression_4 = expr.getEachExpression();
-    this.format(_eachExpression_4, format);
+    XExpression _eachExpression_3 = expr.getEachExpression();
+    this.format(_eachExpression_3, format);
   }
   
   protected void _format(final XBasicForLoopExpression expr, @Extension final IFormattableDocument format) {
@@ -1238,21 +1218,19 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
         }
       };
-      format.<XExpression>prepend(_eachExpression_2, _function_9);
-      XExpression _eachExpression_3 = expr.getEachExpression();
+      XExpression _prepend = format.<XExpression>prepend(_eachExpression_2, _function_9);
       final Procedure1<IHiddenRegionFormatter> _function_10 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
+          it.indent();
         }
       };
-      format.<XExpression>append(_eachExpression_3, _function_10);
+      format.<XExpression>surround(_prepend, _function_10);
     }
-    XExpression _eachExpression_4 = expr.getEachExpression();
-    this.format(_eachExpression_4, format);
+    XExpression _eachExpression_3 = expr.getEachExpression();
+    this.format(_eachExpression_3, format);
   }
   
   protected void _format(final XWhileExpression expr, @Extension final IFormattableDocument format) {
@@ -1283,23 +1261,21 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
         }
       };
-      format.<XExpression>prepend(_body_2, _function_2);
-      XExpression _body_3 = expr.getBody();
+      XExpression _prepend_1 = format.<XExpression>prepend(_body_2, _function_2);
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
+          it.indent();
         }
       };
-      format.<XExpression>append(_body_3, _function_3);
+      format.<XExpression>surround(_prepend_1, _function_3);
     }
     XExpression _predicate_1 = expr.getPredicate();
     this.format(_predicate_1, format);
-    XExpression _body_4 = expr.getBody();
-    this.format(_body_4, format);
+    XExpression _body_3 = expr.getBody();
+    this.format(_body_3, format);
   }
   
   protected void _format(final XDoWhileExpression expr, @Extension final IFormattableDocument format) {
@@ -1331,18 +1307,10 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
+          it.indent();
         }
       };
-      XExpression _prepend_2 = format.<XExpression>prepend(_body_2, _function_2);
-      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.newLine();
-          it.decreaseIndentation();
-        }
-      };
-      format.<XExpression>append(_prepend_2, _function_3);
+      format.<XExpression>surround(_body_2, _function_2);
     }
     XExpression _predicate_1 = expr.getPredicate();
     this.format(_predicate_1, format);
@@ -1481,18 +1449,10 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
+          it.indent();
         }
       };
-      XExpression _prepend_1 = format.<XExpression>prepend(_expression_2, _function);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.newLine();
-          it.decreaseIndentation();
-        }
-      };
-      format.<XExpression>append(_prepend_1, _function_1);
+      format.<XExpression>surround(_expression_2, _function);
     }
     XExpression _expression_3 = expr.getExpression();
     this.format(_expression_3, format);
@@ -1516,13 +1476,13 @@ public class XbaseFormatter extends XtypeFormatter {
           if ((_expression_4 instanceof XBlockExpression)) {
             format.<XCatchClause>append(cc, XbaseFormatterPreferenceKeys.bracesInNewLine);
           } else {
-            final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+            final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.newLine();
               }
             };
-            format.<XCatchClause>append(cc, _function_2);
+            format.<XCatchClause>append(cc, _function_1);
           }
         }
       }
@@ -1536,21 +1496,20 @@ public class XbaseFormatter extends XtypeFormatter {
         format.<XExpression>prepend(_finallyExpression_2, XbaseFormatterPreferenceKeys.bracesInNewLine);
       } else {
         XExpression _finallyExpression_3 = expr.getFinallyExpression();
-        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.newLine();
-            it.increaseIndentation();
           }
         };
-        XExpression _prepend_2 = format.<XExpression>prepend(_finallyExpression_3, _function_2);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        XExpression _prepend_1 = format.<XExpression>prepend(_finallyExpression_3, _function_1);
+        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
-            it.decreaseIndentation();
+            it.indent();
           }
         };
-        format.<XExpression>append(_prepend_2, _function_3);
+        format.<XExpression>surround(_prepend_1, _function_2);
       }
       XExpression _finallyExpression_4 = expr.getFinallyExpression();
       this.format(_finallyExpression_4, format);
@@ -1585,23 +1544,21 @@ public class XbaseFormatter extends XtypeFormatter {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
-          it.increaseIndentation();
         }
       };
-      format.<XExpression>prepend(_expression_2, _function_2);
-      XExpression _expression_3 = expr.getExpression();
+      XExpression _prepend_1 = format.<XExpression>prepend(_expression_2, _function_2);
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
+          it.indent();
         }
       };
-      format.<XExpression>append(_expression_3, _function_3);
+      format.<XExpression>surround(_prepend_1, _function_3);
     }
     JvmFormalParameter _declaredParam_1 = expr.getDeclaredParam();
     this.format(_declaredParam_1, format);
-    XExpression _expression_4 = expr.getExpression();
-    this.format(_expression_4, format);
+    XExpression _expression_3 = expr.getExpression();
+    this.format(_expression_3, format);
   }
   
   protected void _format(final JvmFormalParameter expr, @Extension final IFormattableDocument format) {
@@ -1786,10 +1743,10 @@ public class XbaseFormatter extends XtypeFormatter {
         final Procedure1<IHiddenRegionFormatter> _function_11 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
-            it.increaseIndentation();
+            it.indent();
           }
         };
-        format.append(open, _function_11);
+        format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_11);
         EList<XCasePart> _cases_5 = expr.getCases();
         for (final XCasePart c_1 : _cases_5) {
           {
@@ -1846,7 +1803,6 @@ public class XbaseFormatter extends XtypeFormatter {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.newLine();
-            it.decreaseIndentation();
           }
         };
         format.prepend(close, _function_15);
@@ -1874,238 +1830,173 @@ public class XbaseFormatter extends XtypeFormatter {
           final Procedure1<IHiddenRegionFormatter> _function_17 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
-              it.increaseIndentation();
+              it.indent();
             }
           };
-          format.append(open, _function_17);
+          format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_17);
         }
         EList<XCasePart> _cases_7 = expr.getCases();
         for (final XCasePart c_2 : _cases_7) {
           XExpression _then_2 = c_2.getThen();
           if ((_then_2 instanceof XBlockExpression)) {
             XExpression _then_3 = c_2.getThen();
-            format.<XExpression>prepend(_then_3, XbaseFormatterPreferenceKeys.bracesInNewLine);
-            boolean _or_2 = false;
-            XExpression _default_7 = expr.getDefault();
-            boolean _notEquals_4 = (!Objects.equal(_default_7, null));
-            if (_notEquals_4) {
-              _or_2 = true;
-            } else {
-              EList<XCasePart> _cases_8 = expr.getCases();
-              XCasePart _last = IterableExtensions.<XCasePart>last(_cases_8);
-              boolean _notEquals_5 = (!Objects.equal(c_2, _last));
-              _or_2 = _notEquals_5;
-            }
-            if (_or_2) {
-              XExpression _then_4 = c_2.getThen();
-              final Procedure1<IHiddenRegionFormatter> _function_18 = new Procedure1<IHiddenRegionFormatter>() {
-                @Override
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.newLine();
-                }
-              };
-              format.<XExpression>append(_then_4, _function_18);
-            } else {
-              XExpression _then_5 = c_2.getThen();
-              final Procedure1<IHiddenRegionFormatter> _function_19 = new Procedure1<IHiddenRegionFormatter>() {
-                @Override
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.newLine();
-                  it.decreaseIndentation();
-                }
-              };
-              format.<XExpression>append(_then_5, _function_19);
-            }
+            XExpression _prepend_2 = format.<XExpression>prepend(_then_3, XbaseFormatterPreferenceKeys.bracesInNewLine);
+            final Procedure1<IHiddenRegionFormatter> _function_18 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
+              public void apply(final IHiddenRegionFormatter it) {
+                it.newLine();
+              }
+            };
+            format.<XExpression>append(_prepend_2, _function_18);
           } else {
             boolean _isFallThrough = c_2.isFallThrough();
             if (_isFallThrough) {
               ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(c_2, XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
-              final Procedure1<IHiddenRegionFormatter> _function_20 = new Procedure1<IHiddenRegionFormatter>() {
+              final Procedure1<IHiddenRegionFormatter> _function_19 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.noSpace();
                 }
               };
-              ISemanticRegion _prepend_2 = format.prepend(_regionForFeature, _function_20);
+              ISemanticRegion _prepend_3 = format.prepend(_regionForFeature, _function_19);
+              final Procedure1<IHiddenRegionFormatter> _function_20 = new Procedure1<IHiddenRegionFormatter>() {
+                @Override
+                public void apply(final IHiddenRegionFormatter it) {
+                  it.newLine();
+                }
+              };
+              format.append(_prepend_3, _function_20);
+            } else {
+              XExpression _then_4 = c_2.getThen();
               final Procedure1<IHiddenRegionFormatter> _function_21 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.newLine();
+                  it.indent();
                 }
               };
-              format.append(_prepend_2, _function_21);
-            } else {
-              XExpression _then_6 = c_2.getThen();
-              final Procedure1<IHiddenRegionFormatter> _function_22 = new Procedure1<IHiddenRegionFormatter>() {
-                @Override
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.newLine();
-                  it.increaseIndentation();
-                }
-              };
-              format.<XExpression>prepend(_then_6, _function_22);
-              boolean _or_3 = false;
-              XExpression _default_8 = expr.getDefault();
-              boolean _notEquals_6 = (!Objects.equal(_default_8, null));
-              if (_notEquals_6) {
-                _or_3 = true;
-              } else {
-                EList<XCasePart> _cases_9 = expr.getCases();
-                XCasePart _last_1 = IterableExtensions.<XCasePart>last(_cases_9);
-                boolean _notEquals_7 = (!Objects.equal(c_2, _last_1));
-                _or_3 = _notEquals_7;
-              }
-              if (_or_3) {
-                XExpression _then_7 = c_2.getThen();
-                final Procedure1<IHiddenRegionFormatter> _function_23 = new Procedure1<IHiddenRegionFormatter>() {
-                  @Override
-                  public void apply(final IHiddenRegionFormatter it) {
-                    it.newLine();
-                    it.decreaseIndentation();
-                  }
-                };
-                format.<XExpression>append(_then_7, _function_23);
-              } else {
-                XExpression _then_8 = c_2.getThen();
-                final Procedure1<IHiddenRegionFormatter> _function_24 = new Procedure1<IHiddenRegionFormatter>() {
-                  @Override
-                  public void apply(final IHiddenRegionFormatter it) {
-                    it.newLine();
-                    it.setDecreaseIndentation(2);
-                  }
-                };
-                format.<XExpression>append(_then_8, _function_24);
-              }
+              format.<XExpression>surround(_then_4, _function_21);
             }
           }
         }
-        XExpression _default_9 = expr.getDefault();
-        boolean _notEquals_8 = (!Objects.equal(_default_9, null));
-        if (_notEquals_8) {
+        XExpression _default_7 = expr.getDefault();
+        boolean _notEquals_4 = (!Objects.equal(_default_7, null));
+        if (_notEquals_4) {
           ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(expr, "default");
-          final Procedure1<IHiddenRegionFormatter> _function_25 = new Procedure1<IHiddenRegionFormatter>() {
+          final Procedure1<IHiddenRegionFormatter> _function_22 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          format.append(_regionForKeyword_3, _function_25);
-          XExpression _default_10 = expr.getDefault();
-          if ((_default_10 instanceof XBlockExpression)) {
-            XExpression _default_11 = expr.getDefault();
-            XExpression _prepend_3 = format.<XExpression>prepend(_default_11, XbaseFormatterPreferenceKeys.bracesInNewLine);
-            final Procedure1<IHiddenRegionFormatter> _function_26 = new Procedure1<IHiddenRegionFormatter>() {
+          format.append(_regionForKeyword_3, _function_22);
+          XExpression _default_8 = expr.getDefault();
+          if ((_default_8 instanceof XBlockExpression)) {
+            XExpression _default_9 = expr.getDefault();
+            XExpression _prepend_4 = format.<XExpression>prepend(_default_9, XbaseFormatterPreferenceKeys.bracesInNewLine);
+            final Procedure1<IHiddenRegionFormatter> _function_23 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.newLine();
-                it.decreaseIndentation();
               }
             };
-            format.<XExpression>append(_prepend_3, _function_26);
+            format.<XExpression>append(_prepend_4, _function_23);
           } else {
-            XExpression _default_12 = expr.getDefault();
-            final Procedure1<IHiddenRegionFormatter> _function_27 = new Procedure1<IHiddenRegionFormatter>() {
+            XExpression _default_10 = expr.getDefault();
+            final Procedure1<IHiddenRegionFormatter> _function_24 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.newLine();
-                it.increaseIndentation();
+                it.indent();
               }
             };
-            XExpression _prepend_4 = format.<XExpression>prepend(_default_12, _function_27);
-            final Procedure1<IHiddenRegionFormatter> _function_28 = new Procedure1<IHiddenRegionFormatter>() {
-              @Override
-              public void apply(final IHiddenRegionFormatter it) {
-                it.newLine();
-                it.setDecreaseIndentation(2);
-              }
-            };
-            format.<XExpression>append(_prepend_4, _function_28);
+            format.<XExpression>surround(_default_10, _function_24);
           }
         }
       }
     }
-    EList<XCasePart> _cases_10 = expr.getCases();
-    for (final XCasePart c_3 : _cases_10) {
+    EList<XCasePart> _cases_8 = expr.getCases();
+    for (final XCasePart c_3 : _cases_8) {
       {
         boolean _and_4 = false;
         JvmTypeReference _typeGuard = c_3.getTypeGuard();
-        boolean _notEquals_9 = (!Objects.equal(_typeGuard, null));
-        if (!_notEquals_9) {
+        boolean _notEquals_5 = (!Objects.equal(_typeGuard, null));
+        if (!_notEquals_5) {
           _and_4 = false;
         } else {
           XExpression _case = c_3.getCase();
-          boolean _notEquals_10 = (!Objects.equal(_case, null));
-          _and_4 = _notEquals_10;
+          boolean _notEquals_6 = (!Objects.equal(_case, null));
+          _and_4 = _notEquals_6;
         }
         if (_and_4) {
           JvmTypeReference _typeGuard_1 = c_3.getTypeGuard();
-          final Procedure1<IHiddenRegionFormatter> _function_29 = new Procedure1<IHiddenRegionFormatter>() {
+          final Procedure1<IHiddenRegionFormatter> _function_25 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          format.<JvmTypeReference>append(_typeGuard_1, _function_29);
+          format.<JvmTypeReference>append(_typeGuard_1, _function_25);
           XExpression _case_1 = c_3.getCase();
-          final Procedure1<IHiddenRegionFormatter> _function_30 = new Procedure1<IHiddenRegionFormatter>() {
+          final Procedure1<IHiddenRegionFormatter> _function_26 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          XExpression _prepend_5 = format.<XExpression>prepend(_case_1, _function_30);
-          final Procedure1<IHiddenRegionFormatter> _function_31 = new Procedure1<IHiddenRegionFormatter>() {
+          XExpression _prepend_5 = format.<XExpression>prepend(_case_1, _function_26);
+          final Procedure1<IHiddenRegionFormatter> _function_27 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          format.<XExpression>append(_prepend_5, _function_31);
+          format.<XExpression>append(_prepend_5, _function_27);
         } else {
           JvmTypeReference _typeGuard_2 = c_3.getTypeGuard();
-          boolean _notEquals_11 = (!Objects.equal(_typeGuard_2, null));
-          if (_notEquals_11) {
+          boolean _notEquals_7 = (!Objects.equal(_typeGuard_2, null));
+          if (_notEquals_7) {
             JvmTypeReference _typeGuard_3 = c_3.getTypeGuard();
-            final Procedure1<IHiddenRegionFormatter> _function_32 = new Procedure1<IHiddenRegionFormatter>() {
+            final Procedure1<IHiddenRegionFormatter> _function_28 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            format.<JvmTypeReference>append(_typeGuard_3, _function_32);
+            format.<JvmTypeReference>append(_typeGuard_3, _function_28);
           } else {
             XExpression _case_2 = c_3.getCase();
-            boolean _notEquals_12 = (!Objects.equal(_case_2, null));
-            if (_notEquals_12) {
+            boolean _notEquals_8 = (!Objects.equal(_case_2, null));
+            if (_notEquals_8) {
               XExpression _case_3 = c_3.getCase();
-              final Procedure1<IHiddenRegionFormatter> _function_33 = new Procedure1<IHiddenRegionFormatter>() {
+              final Procedure1<IHiddenRegionFormatter> _function_29 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.oneSpace();
                 }
               };
-              XExpression _prepend_6 = format.<XExpression>prepend(_case_3, _function_33);
-              final Procedure1<IHiddenRegionFormatter> _function_34 = new Procedure1<IHiddenRegionFormatter>() {
+              XExpression _prepend_6 = format.<XExpression>prepend(_case_3, _function_29);
+              final Procedure1<IHiddenRegionFormatter> _function_30 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.noSpace();
                 }
               };
-              format.<XExpression>append(_prepend_6, _function_34);
+              format.<XExpression>append(_prepend_6, _function_30);
             }
           }
         }
         XExpression _case_4 = c_3.getCase();
         this.format(_case_4, format);
-        XExpression _then_9 = c_3.getThen();
-        this.format(_then_9, format);
+        XExpression _then_5 = c_3.getThen();
+        this.format(_then_5, format);
       }
     }
-    XExpression _default_13 = expr.getDefault();
-    boolean _notEquals_9 = (!Objects.equal(_default_13, null));
-    if (_notEquals_9) {
-      XExpression _default_14 = expr.getDefault();
-      this.format(_default_14, format);
+    XExpression _default_11 = expr.getDefault();
+    boolean _notEquals_5 = (!Objects.equal(_default_11, null));
+    if (_notEquals_5) {
+      XExpression _default_12 = expr.getDefault();
+      this.format(_default_12, format);
     }
   }
   
@@ -2210,8 +2101,7 @@ public class XbaseFormatter extends XtypeFormatter {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
-              it.increaseIndentation();
-              it.decreaseIndentation();
+              it.indent();
             }
           };
           format.append(open, _function);
@@ -2341,64 +2231,43 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatExpressionsMultiline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
+    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.indent();
+      }
+    };
+    format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function);
     boolean _isEmpty = expressions.isEmpty();
     if (_isEmpty) {
-      IHiddenRegion _nextHiddenRegion = open.getNextHiddenRegion();
-      boolean _containsComment = _nextHiddenRegion.containsComment();
-      if (_containsComment) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.newLine();
-            it.increaseIndentation();
-            it.decreaseIndentation();
-          }
-        };
-        format.append(open, _function);
-      } else {
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.newLine();
-          }
-        };
-        format.append(open, _function_1);
-      }
-    } else {
-      ISemanticRegion _append = format.append(open, XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
-      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
-          it.increaseIndentation();
+          it.newLine();
         }
       };
-      format.append(_append, _function_2);
+      format.append(open, _function_1);
+    } else {
+      format.append(open, XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
       for (final XExpression child : expressions) {
         {
           this.format(child, format);
           final ISemanticRegion sem = this.regionAccess.immediatelyFollowingKeyword(child, ";");
           boolean _notEquals = (!Objects.equal(sem, null));
           if (_notEquals) {
-            final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+            final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            ISemanticRegion _prepend = format.prepend(sem, _function_3);
+            ISemanticRegion _prepend = format.prepend(sem, _function_2);
             format.append(_prepend, XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
           } else {
             format.<XExpression>append(child, XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
           }
         }
       }
-      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.decreaseIndentation();
-        }
-      };
-      format.prepend(close, _function_3);
     }
   }
   

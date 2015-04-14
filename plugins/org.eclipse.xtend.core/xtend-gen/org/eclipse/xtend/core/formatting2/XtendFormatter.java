@@ -272,21 +272,22 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   protected ISemanticRegion formatBody(final XtendTypeDeclaration type, @Extension final IFormattableDocument format) {
     ISemanticRegion _xblockexpression = null;
     {
-      final ISemanticRegion clazzOpenBrace = this.regionAccess.regionForKeyword(type, "{");
-      format.prepend(clazzOpenBrace, XbaseFormatterPreferenceKeys.bracesInNewLine);
+      final ISemanticRegion open = this.regionAccess.regionForKeyword(type, "{");
+      final ISemanticRegion close = this.regionAccess.regionForKeyword(type, "}");
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.indent();
+        }
+      };
+      format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function);
+      format.prepend(open, XbaseFormatterPreferenceKeys.bracesInNewLine);
       ISemanticRegion _xifexpression = null;
       EList<XtendMember> _members = type.getMembers();
       boolean _isEmpty = _members.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.increaseIndentation();
-          }
-        };
-        format.append(clazzOpenBrace, _function);
-        format.append(clazzOpenBrace, XtendFormatterPreferenceKeys.blankLinesBeforeFirstMember);
+        format.append(open, XtendFormatterPreferenceKeys.blankLinesBeforeFirstMember);
         EList<XtendMember> _members_1 = type.getMembers();
         int _size = _members_1.size();
         int _minus = (_size - 1);
@@ -327,47 +328,18 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
             } else {
               EList<XtendMember> _members_5 = type.getMembers();
               final XtendMember member = _members_5.get((i).intValue());
-              final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-                @Override
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.decreaseIndentation();
-                }
-              };
-              format.<XtendMember>append(member, _function_1);
               format.<XtendMember>append(member, XtendFormatterPreferenceKeys.blankLinesAfterLastMember);
             }
           }
         }
       } else {
-        ISemanticRegion _xifexpression_1 = null;
-        IHiddenRegion _nextHiddenRegion = null;
-        if (clazzOpenBrace!=null) {
-          _nextHiddenRegion=clazzOpenBrace.getNextHiddenRegion();
-        }
-        boolean _containsComment = false;
-        if (_nextHiddenRegion!=null) {
-          _containsComment=_nextHiddenRegion.containsComment();
-        }
-        if (_containsComment) {
-          final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-            @Override
-            public void apply(final IHiddenRegionFormatter it) {
-              it.newLine();
-              it.increaseIndentation();
-              it.decreaseIndentation();
-            }
-          };
-          _xifexpression_1 = format.append(clazzOpenBrace, _function_1);
-        } else {
-          final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-            @Override
-            public void apply(final IHiddenRegionFormatter it) {
-              it.newLine();
-            }
-          };
-          _xifexpression_1 = format.append(clazzOpenBrace, _function_2);
-        }
-        _xifexpression = _xifexpression_1;
+        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.newLine();
+          }
+        };
+        _xifexpression = format.append(open, _function_1);
       }
       _xblockexpression = _xifexpression;
     }
@@ -444,20 +416,21 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
     };
     format.append(_regionForKeyword, _function);
-    final ISemanticRegion clazzOpenBrace = this.regionAccess.regionForKeyword(enumeration, "{");
-    format.prepend(clazzOpenBrace, XbaseFormatterPreferenceKeys.bracesInNewLine);
+    final ISemanticRegion open = this.regionAccess.regionForKeyword(enumeration, "{");
+    final ISemanticRegion close = this.regionAccess.regionForKeyword(enumeration, "}");
+    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.indent();
+      }
+    };
+    format.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_1);
+    format.prepend(open, XbaseFormatterPreferenceKeys.bracesInNewLine);
     EList<XtendMember> _members = enumeration.getMembers();
     boolean _isEmpty = _members.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.increaseIndentation();
-        }
-      };
-      format.append(clazzOpenBrace, _function_1);
-      format.append(clazzOpenBrace, XtendFormatterPreferenceKeys.blankLinesBeforeFirstMember);
+      format.append(open, XtendFormatterPreferenceKeys.blankLinesBeforeFirstMember);
       EList<XtendMember> _members_1 = enumeration.getMembers();
       int _size = _members_1.size();
       int _minus = (_size - 1);
@@ -482,13 +455,6 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
             ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
             format.append(_prepend, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals);
           } else {
-            final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-              @Override
-              public void apply(final IHiddenRegionFormatter it) {
-                it.decreaseIndentation();
-              }
-            };
-            format.<XtendMember>append(current, _function_3);
             format.<XtendMember>append(current, XtendFormatterPreferenceKeys.blankLinesAfterLastMember);
           }
         }
@@ -500,7 +466,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
           it.newLine();
         }
       };
-      format.append(clazzOpenBrace, _function_2);
+      format.append(open, _function_2);
     }
   }
   

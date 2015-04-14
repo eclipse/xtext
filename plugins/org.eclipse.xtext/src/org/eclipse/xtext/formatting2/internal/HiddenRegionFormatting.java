@@ -15,9 +15,7 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 
-import com.google.common.base.Preconditions;
-
-public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRegionFormatting {
+public class HiddenRegionFormatting implements IHiddenRegionFormatting {
 	private Integer autowrap = null;
 	private final AbstractFormatter2 formatter;
 	private Integer indentationDecrease = null;
@@ -33,32 +31,6 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 	public HiddenRegionFormatting(AbstractFormatter2 formatter) {
 		super();
 		this.formatter = formatter;
-	}
-
-	@Override
-	public IHiddenRegionFormatting asBean() {
-		return this;
-	}
-
-	@Override
-	public IHiddenRegionFormatter asFormatter() {
-		return this;
-	}
-
-	@Override
-	public void autowrap() {
-		if (this.autowrap == null || this.autowrap < 0)
-			this.autowrap = 0; // TODO: can newLineMax = 0 suppress autowrap?
-	}
-
-	@Override
-	public void autowrap(int triggerLength) {
-		autowrap = triggerLength;
-	}
-
-	@Override
-	public void decreaseIndentation() {
-		indentationDecrease = indentationDecrease == null ? 1 : indentationDecrease + 1;
 	}
 
 	@Override
@@ -120,21 +92,6 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 		return space;
 	}
 
-	@Override
-	public void highPriority() {
-		setPriority(IHiddenRegionFormatter.HIGH_PRIORITY);
-	}
-
-	@Override
-	public void increaseIndentation() {
-		indentationIncrease = indentationIncrease == null ? 1 : indentationIncrease + 1;
-	}
-
-	@Override
-	public void lowPriority() {
-		setPriority(IHiddenRegionFormatter.LOW_PRIORITY);
-	}
-
 	protected <T> T merge(T val1, T val2, int strategy, String propertyname) throws ConflictingFormattingException {
 		if (val1 != null && val2 != null) {
 			if (val1.equals(val2) || strategy < 0)
@@ -161,53 +118,18 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 		if (getIndentationIncrease() != null && other.getIndentationIncrease() != null)
 			setIndentationIncrease(getIndentationIncrease() + other.getIndentationIncrease());
 		else
-			setIndentationIncrease(getIndentationIncrease() != null ? getIndentationIncrease() : other
-					.getIndentationIncrease());
+			setIndentationIncrease(
+					getIndentationIncrease() != null ? getIndentationIncrease() : other.getIndentationIncrease());
 		if (getIndentationDecrease() != null && other.getIndentationDecrease() != null)
 			setIndentationDecrease(getIndentationDecrease() + other.getIndentationDecrease());
 		else
-			setIndentationDecrease(getIndentationDecrease() != null ? getIndentationDecrease() : other
-					.getIndentationDecrease());
-	}
-
-	@Override
-	public void newLine() {
-		setNewLines(1);
-	}
-
-	@Override
-	public void noAutowrap() {
-		this.autowrap = -1;
-	}
-
-	@Override
-	public void noIndentation() {
-		this.noIndentation = Boolean.TRUE;
-	}
-
-	@Override
-	public void noSpace() {
-		setSpace("");
-	}
-
-	@Override
-	public void oneSpace() {
-		setSpace(" ");
+			setIndentationDecrease(
+					getIndentationDecrease() != null ? getIndentationDecrease() : other.getIndentationDecrease());
 	}
 
 	@Override
 	public void setAutowrap(Integer value) {
 		this.autowrap = value;
-	}
-
-	@Override
-	public void setDecreaseIndentation(int indentation) {
-		this.indentationDecrease = indentation;
-	}
-
-	@Override
-	public void setIncreaseIndentation(int indentation) {
-		this.indentationIncrease = indentation;
 	}
 
 	@Override
@@ -218,21 +140,6 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 	@Override
 	public void setIndentationIncrease(Integer indentation) {
 		this.indentationIncrease = indentation;
-	}
-
-	@Override
-	public void setNewLines(int newLines) {
-		setNewLines(newLines, newLines, newLines);
-	}
-
-	@Override
-	public void setNewLines(int minNewLines, int defaultNewLines, int maxNewLines) {
-		Preconditions.checkArgument(minNewLines >= 0);
-		Preconditions.checkArgument(defaultNewLines >= 0);
-		Preconditions.checkArgument(maxNewLines >= 0);
-		this.newLineMin = minNewLines;
-		this.newLineDefault = defaultNewLines;
-		this.newLineMax = maxNewLines;
 	}
 
 	@Override
@@ -257,7 +164,6 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatter, IHiddenRe
 
 	@Override
 	public void setOnAutowrap(IAutowrapFormatter formatter) {
-		autowrap();
 		this.onAutowrap = formatter;
 	}
 
