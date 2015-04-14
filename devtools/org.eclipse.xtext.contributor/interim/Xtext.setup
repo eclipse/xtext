@@ -250,6 +250,30 @@
           key="/instance/org.eclipse.jdt.ui/content_assist_favorite_static_members"
           value="com.google.common.collect.Lists.*;com.google.common.collect.Iterables.*;com.google.common.collect.Sets.*;java.util.Collections.*;com.google.common.collect.Maps.*;java.lang.Math.*"/>
     </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.springsource.ide.eclipse.gradle.core">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferences.AUTO_REFRESH_DEPENDENCIES"
+          value="false"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferences.EXPORT_DEPENDENCIES"
+          value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferences.JAR_REMAP_GRADLE_TO_GRADLE"
+          value="false"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferences.JAR_REMAP_GRADLE_TO_MAVEN"
+          value="false"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferencesUSE_CUSTOM_TOOLING_MODEL"
+          value="false"/>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup.targlets:TargletTask">
