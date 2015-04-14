@@ -68,12 +68,6 @@ import org.eclipse.xtext.resource.XtextResource;
 public interface ITextRegionAccess {
 
 	/**
-	 * @return a text region that spans all regions form parameter 'regions' and additionally the specified number of
-	 *         'leadingLines' and 'trailingLines'. This method is useful to create debug messages.
-	 */
-	ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions);
-
-	/**
 	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
 	 *         model's root element, the {@link ParserRule} is returned.
 	 */
@@ -127,12 +121,6 @@ public interface ITextRegionAccess {
 	 *         preceding semantic region or the preceding semantic region does not represent the provided keyword.
 	 */
 	ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion region, String keyword);
-
-	/**
-	 * @return a text region for all leading whitespace in the same line as 'offset'. Characters are whitespace iff
-	 *         {@link Character#isWhitespace(char)}.
-	 */
-	ITextSegment indentationRegion(int offset);
 
 	/**
 	 * @return true, if the EObject's text range contains a line-wrap ("\n"). The EObject's text range reaches from the
@@ -199,5 +187,11 @@ public interface ITextRegionAccess {
 
 	ITextSegment regionForOffset(int offset, int length);
 
+	ILineRegion lineForOffset(int offset);
+
 	String textForOffset(int offset, int length);
+
+	ITextSegment merge(Iterable<? extends ITextSegment> segments);
+
+	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
 }

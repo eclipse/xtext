@@ -21,9 +21,9 @@ import org.eclipse.xtext.util.ITextRegion;
 public interface ITextSegment extends Comparable<ITextSegment>, ITextRegion {
 	int getEndOffset();
 
-	ITextSegment getIndentation(); //TODO: redundant with ITextRegionAccess#getIndentation(int offset)?
-
 	int getLineCount();
+
+	List<ILineRegion> getLineRegions();
 
 	String getText();
 
@@ -31,7 +31,8 @@ public interface ITextSegment extends Comparable<ITextSegment>, ITextRegion {
 
 	boolean isMultiline();
 
-	ITextReplacement replaceWith(String text);
+	@Override
+	ITextSegment merge(ITextRegion region);
 
-	List<ITextSegment> splitIntoLines();
+	ITextReplacement replaceWith(String text);
 }

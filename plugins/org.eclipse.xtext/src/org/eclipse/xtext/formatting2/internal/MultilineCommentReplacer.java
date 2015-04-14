@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
@@ -45,26 +46,25 @@ public class MultilineCommentReplacer extends CommentReplacer {
 			return context;
 		IComment comment = getComment();
 		ITextRegionAccess access = comment.getTextRegionAccess();
-		String oldIndentation = comment.getIndentation().getText();
+		List<ILineRegion> lines = comment.getLineRegions();
+		String oldIndentation = lines.get(0).getIndentation().getText();
 		String indentationString = context.getIndentationString();
 		String newIndentation = indentationString + " " + prefix + " ";
-		List<ITextSegment> lines = comment.splitIntoLines();
 		for (int i = 1; i < lines.size() - 1; i++) {
 			ITextSegment line = lines.get(i);
 			String text = line.getText();
 			int prefixOffset = prefixOffset(text);
-			ITextSegment toReplace;
-			if (prefixOffset >= 0) {
-				toReplace = access.regionForOffset(line.getOffset(), prefixOffset + 1);
-			} else if (text.startsWith(oldIndentation)) {
-				toReplace = access.regionForOffset(line.getOffset(), oldIndentation.length());
-			} else {
-				toReplace = access.regionForOffset(line.getOffset(), 0);
-			}
-			context.addReplacement(toReplace.replaceWith(newIndentation));
+			ITextSegment target;
+			if (prefixOffset >= 0)
+				target = access.regionForOffset(line.getOffset(), prefixOffset + 1);
+			else if (text.startsWith(oldIndentation))
+				target = access.regionForOffset(line.getOffset(), oldIndentation.length());
+			else
+				target = access.regionForOffset(line.getOffset(), 0);
+			context.addReplacement(target.replaceWith(newIndentation));
 		}
 		if (lines.size() > 1) {
-			ITextSegment line = lines.get(lines.size() - 1);
+			ILineRegion line = lines.get(lines.size() - 1);
 			context.addReplacement(line.getIndentation().replaceWith(indentationString + " "));
 		}
 		return context;

@@ -9,14 +9,13 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.TextRegion;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 /**
@@ -62,13 +61,24 @@ public abstract class AbstractTextSegment implements ITextSegment {
 	}
 
 	@Override
-	public ITextSegment getIndentation() {
-		return getTextRegionAccess().indentationRegion(getOffset());
+	public int getLineCount() {
+		return Strings.countLines(getText());
 	}
 
 	@Override
-	public int getLineCount() {
-		return Strings.countLines(getText());
+	public List<ILineRegion> getLineRegions() {
+		ILineRegion current = getTextRegionAccess().lineForOffset(getOffset());
+		List<ILineRegion> result = Lists.newArrayList();
+		int endOffset = getEndOffset();
+		while (current != null) {
+			result.add(current);
+			if (current.getEndOffset() >= endOffset)
+				return result;
+			current = current.getNextLine();
+			if (current.getOffset() >= endOffset)
+				return result;
+		}
+		return result;
 	}
 
 	@Override
@@ -90,31 +100,16 @@ public abstract class AbstractTextSegment implements ITextSegment {
 	}
 
 	@Override
-	public ITextRegion merge(ITextRegion other) {
+	public ITextSegment merge(ITextRegion other) {
 		if (contains(other))
 			return this;
-		if (other.contains(this))
-			return other;
+		if (other instanceof ITextSegment && other.contains(this))
+			return (ITextSegment) other;
 		int offset = getOffset();
 		int length = getLength();
 		int newOffset = Math.min(offset, other.getOffset());
 		int newLength = Math.max(offset + length, other.getOffset() + other.getLength()) - newOffset;
-		return new TextRegion(newOffset, newLength);
-	}
-
-	@Override
-	public List<ITextSegment> splitIntoLines() {
-		ITextRegionAccess access = getTextRegionAccess();
-		List<ITextSegment> result = Lists.newArrayList();
-		String text = getText();
-		int index, lastIndex = 0, offset = getOffset();
-		while ((index = text.indexOf('\n', lastIndex)) >= 0) {
-			int end = index > 0 && text.charAt(index - 1) == '\r' ? index - 1 : index;
-			result.add(new TextSegment(access, offset + lastIndex, end - lastIndex));
-			lastIndex = index + 1;
-		}
-		result.add(new TextSegment(access, offset + lastIndex, text.length() - lastIndex));
-		return ImmutableList.copyOf(result);
+		return new TextSegment(getTextRegionAccess(), newOffset, newLength);
 	}
 
 	@Override
