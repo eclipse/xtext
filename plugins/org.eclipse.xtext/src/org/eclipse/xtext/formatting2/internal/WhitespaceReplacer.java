@@ -55,7 +55,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 				if (newLineMax != null)
 					return newLineMax;
 			} else {
-				int lineCount = region.getLineCount();
+				int lineCount = region.getLineCount() - 1;
 				if (newLineMin != null && newLineMin > lineCount)
 					lineCount = newLineMin;
 				if (newLineMax != null && newLineMax < lineCount)
