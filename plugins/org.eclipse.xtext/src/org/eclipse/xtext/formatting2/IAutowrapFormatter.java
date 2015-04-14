@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+
 /**
  * A strategy for formatting that is to be applied on auto wrapping.
  * 
@@ -14,9 +16,9 @@ package org.eclipse.xtext.formatting2;
  * 
  * @see IHiddenRegionFormatter#setOnAutowrap(IAutowrapFormatter)
  */
-public interface IAutowrapFormatter { // TODO: add region
+public interface IAutowrapFormatter {
 	/**
 	 * Called if the region is supposed to be wrapped.
 	 */
-	void format(IHiddenRegionFormatter wrapped, IFormattableDocument document);
+	void format(ITextSegment region, IHiddenRegionFormatting wrapped, IFormattableDocument document);
 }

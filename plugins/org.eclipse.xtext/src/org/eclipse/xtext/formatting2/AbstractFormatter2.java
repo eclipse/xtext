@@ -15,11 +15,13 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.internal.CommentReplacer;
+import org.eclipse.xtext.formatting2.internal.DoubleHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.internal.MultilineCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.RootDocument;
+import org.eclipse.xtext.formatting2.internal.SingleHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.SinglelineCodeCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.SinglelineDocCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.SubDocument;
@@ -174,8 +176,8 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	/**
-	 * For {@link XtextResource resources}, assume we want to format the first EObject from the contents list only. Because
-	 * that's where the parser puts the semantic model.
+	 * For {@link XtextResource resources}, assume we want to format the first EObject from the contents list only.
+	 * Because that's where the parser puts the semantic model.
 	 */
 	protected void _format(XtextResource resource, IFormattableDocument document) {
 		List<EObject> contents = resource.getContents();
@@ -210,6 +212,14 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new HiddenRegionFormatting(this);
 	}
 
+	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting formatting) {
+		return new SingleHiddenRegionFormatter(formatting);
+	}
+
+	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting f1, IHiddenRegionFormatting f2) {
+		return new DoubleHiddenRegionFormatter(f1, f2);
+	}
+
 	public IMerger<IHiddenRegionFormatting> createHiddenRegionFormattingMerger() {
 		return new HiddenRegionFormattingMerger(this);
 	}
@@ -233,7 +243,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	public ITextReplacer createWhitespaceReplacer(ITextSegment hiddens, IHiddenRegionFormatting formatting) {
 		return new WhitespaceReplacer(hiddens, formatting);
 	}
-	
+
 	public IFormattableDocument createFormattableRootDocument() {
 		return new RootDocument(this);
 	}
