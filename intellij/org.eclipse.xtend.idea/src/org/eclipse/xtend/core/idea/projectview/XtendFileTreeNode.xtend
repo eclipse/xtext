@@ -8,12 +8,11 @@
 package org.eclipse.xtend.core.idea.projectview
 
 import com.google.inject.Inject
-import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
+import com.intellij.ide.projectView.impl.nodes.ClassTreeNode
+import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiElement
-import java.util.Collection
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
@@ -21,32 +20,24 @@ import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 /**
  * @author kosyakov - Initial contribution and API
  */
-class XtendSelectableTreeStructureProvider implements SelectableTreeStructureProvider {
+class XtendFileTreeNode extends PsiFileNode {
 
-	val Project project
+	@Inject
+	extension JvmPsiClasses
 
-	new(Project project) {
-		this.project = project
+	new(Project project, XtendFileImpl value, ViewSettings viewSettings) {
+		super(project, value, viewSettings)
 		XtendLanguage.INSTANCE.injectMembers(this)
 	}
 
-	override getTopLevelElement(PsiElement element) {
-		null
+	def getXtendFile() {
+		value as XtendFileImpl
 	}
 
-	override getData(Collection<AbstractTreeNode> selected, String dataName) {
-		null
-	}
-
-	override modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings) {
-		children.map [ child |
-			val value = child.value
-			if (value instanceof XtendFileImpl) {
-				new XtendFileTreeNode(project, value, settings)
-			} else {
-				child
-			}
-		].toList
+	override getChildrenImpl() {
+		xtendFile.psiClasses.map [ psiClass |
+			new ClassTreeNode(project, psiClass, settings)
+		].filter(AbstractTreeNode).toList
 	}
 
 }
