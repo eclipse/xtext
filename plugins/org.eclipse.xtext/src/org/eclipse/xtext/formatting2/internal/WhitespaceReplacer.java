@@ -77,7 +77,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 		if (newLineCount == 0 && context.isAutowrap()) {
 			IAutowrapFormatter onAutowrap = formatting.getOnAutowrap();
 			if (onAutowrap != null) {
-				onAutowrap.format(formatting.asFormatter(), context.getDocument());
+				onAutowrap.format(region, formatting, context.getDocument());
 			}
 			newLineCount = 1;
 		}
