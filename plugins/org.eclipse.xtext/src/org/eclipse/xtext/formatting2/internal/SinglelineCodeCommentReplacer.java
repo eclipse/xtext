@@ -26,7 +26,7 @@ public class SinglelineCodeCommentReplacer extends SinglelineCommentReplacer {
 
 	@Override
 	public void configureWhitespace(WhitespaceReplacer leading, WhitespaceReplacer trailing) {
-		leading.getFormatting().asFormatter().noIndentation();
+		leading.getFormatting().setNoIndentation(true);
 	}
 
 }

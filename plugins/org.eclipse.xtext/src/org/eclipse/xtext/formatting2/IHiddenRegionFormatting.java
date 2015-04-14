@@ -30,8 +30,6 @@ public interface IHiddenRegionFormatting {
 
 	void mergeValuesFrom(IHiddenRegionFormatting other) throws ConflictingFormattingException;
 
-	IHiddenRegionFormatter asFormatter();
-
 	Integer getAutowrap();
 
 	Integer getIndentationDecrease();
