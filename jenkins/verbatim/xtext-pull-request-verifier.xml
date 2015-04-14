@@ -88,7 +88,10 @@
       <filter>Helios/final/**</filter>
       <target>repositories/eclipse/</target>
       <excludes></excludes>
-      <selector class="hudson.plugins.copyartifact.WorkspaceSelector"/>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
