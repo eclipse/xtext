@@ -97,7 +97,9 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(WRONG_PACKAGE)
 		.assertResolutionLabels("Change package declaration to 'test'")
 		.assertModelAfterQuickfix('''
-			package test class Foo {
+			package test
+			
+			class Foo {
 			}
 		''')
 	}
@@ -155,7 +157,9 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Change package declaration to 'test'")
 		// TODO formatting is wrong but this is currently expected
 		.assertModelAfterQuickfix('''
-			package test import static test.C.D.*
+			package test
+			
+			import static test.C.D.*
 			class Foo {
 				def void m() {
 					staticM
