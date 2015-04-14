@@ -9,6 +9,7 @@ package org.eclipse.xtext.formatting2.debug;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
@@ -61,10 +62,12 @@ public class TextRegionsInTextToString {
 	public ITextSegment getFrame() {
 		if (this.frame != null)
 			return this.frame;
-		ITextSegment[] array = items.toArray(new ITextSegment[items.size()]);
-		ITextRegionAccess regionAccess = getTextRegionAccess();
-		if (regionAccess != null)
-			return regionAccess.expandRegionsByLines(getLeadingLines(), getTrailingLines(), array);
+		ITextRegionAccess access = getTextRegionAccess();
+		if (access != null) {
+			ITextSegment impactRegion = access.merge(this.items);
+			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
+			return access.merge(expandToLines);
+		}
 		return null;
 	}
 

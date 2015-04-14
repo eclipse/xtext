@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -37,31 +39,6 @@ import com.google.common.collect.Sets;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractRegionAccess implements ITextRegionAccess {
-
-	@Override
-	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
-		int offset = regions[0].getOffset();
-		int endOffset = regions[0].getEndOffset();
-		for (int i = 1; i < regions.length; i++) {
-			ITextSegment region = regions[i];
-			int o = region.getOffset();
-			if (o < offset)
-				offset = o;
-			int e = region.getEndOffset();
-			if (e > endOffset)
-				endOffset = e;
-		}
-		String text = getText();
-		for (int i = 0; i < leadingLines && offset >= 0; i++)
-			offset = text.lastIndexOf("\n", offset) - 1;
-		for (int i = 0; i < trailingLines && endOffset <= text.length() && endOffset > 0; i++)
-			endOffset = text.indexOf("\n", endOffset);
-		if (offset < 0)
-			offset = 0;
-		if (endOffset < 0 || endOffset > text.length())
-			endOffset = text.length();
-		return new TextSegment(this, offset, endOffset - offset);
-	}
 
 	@Override
 	public EObject getInvokingGrammarElement(EObject obj) {
@@ -138,16 +115,6 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 		EObject grammarElement = previousRegion.getGrammarElement();
 		if (grammarElement instanceof Keyword && ((Keyword) grammarElement).getValue().equals(keyword))
 			return previousRegion;
-		return null;
-	}
-
-	@Override
-	public ITextSegment indentationRegion(int offset) {
-		String text = getText();
-		int lineStart = text.lastIndexOf('\n', offset) + 1;
-		for (int i = lineStart; i < text.length(); i++)
-			if (!Character.isWhitespace(text.charAt(i)))
-				return new TextSegment(this, lineStart, i - lineStart);
 		return null;
 	}
 
@@ -284,4 +251,58 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 			return null;
 		return tokens.getTrailingHiddenRegion();
 	}
+
+	@Override
+	public ILineRegion lineForOffset(int offset) {
+		String text = getText();
+		if (offset < 0 || offset >= text.length())
+			return null;
+		int start = text.lastIndexOf('\n', offset) + 1;
+		if (start < 0)
+			start = 0;
+		int end = text.indexOf('\n', offset);
+		if (end > 0) {
+			if (text.charAt(end - 1) == '\r')
+				end = end - 1;
+		} else
+			end = text.length() - 1;
+		return new LineRegion(this, start, end - start);
+	}
+
+	@Override
+	public ITextSegment merge(Iterable<? extends ITextSegment> segments) {
+		Iterator<? extends ITextSegment> it = segments.iterator();
+		if (!it.hasNext())
+			throw new IllegalStateException();
+		ITextSegment first = it.next();
+		int minOffset = first.getOffset();
+		int maxEndOffset = first.getEndOffset();
+		while (it.hasNext()) {
+			ITextSegment next = it.next();
+			int offset = next.getOffset();
+			int endOffset = next.getEndOffset();
+			if (offset < minOffset)
+				minOffset = offset;
+			if (endOffset > maxEndOffset)
+				maxEndOffset = endOffset;
+		}
+		return new TextSegment(this, minOffset, maxEndOffset - minOffset);
+	}
+
+	@Override
+	public List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd) {
+		List<ILineRegion> lines = Lists.newArrayList(segment.getLineRegions());
+		for (int i = 1; i < leadingLinesToAdd; i++) {
+			ILineRegion line = lines.get(0).getPreviousLine();
+			if (line != null)
+				lines.add(0, line);
+		}
+		for (int i = 1; i < trailingLinesToAdd; i++) {
+			ILineRegion line = lines.get(lines.size() - 1).getNextLine();
+			if (line != null)
+				lines.add(line);
+		}
+		return lines;
+	}
+
 }

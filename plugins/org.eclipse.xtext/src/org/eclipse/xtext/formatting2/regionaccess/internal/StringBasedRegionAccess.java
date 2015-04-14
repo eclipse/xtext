@@ -41,11 +41,6 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
-		return null;
-	}
-
-	@Override
 	public XtextResource getResource() {
 		return resource;
 	}
@@ -63,11 +58,6 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 	@Override
 	public boolean hasSyntaxError(EObject object) {
 		return false;
-	}
-
-	@Override
-	public ITextSegment indentationRegion(int offset) {
-		return null;
 	}
 
 	@Override

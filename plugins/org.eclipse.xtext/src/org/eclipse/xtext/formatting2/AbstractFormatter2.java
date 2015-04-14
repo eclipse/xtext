@@ -194,7 +194,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 			if (ruleName.startsWith("ML"))
 				return new MultilineCommentReplacer(comment, '*');
 			if (ruleName.startsWith("SL")) {
-				if (comment.getIndentation().getLength() > 0)
+				if (comment.getLineRegions().get(0).getIndentation().getLength() > 0)
 					return new SinglelineDocCommentReplacer(comment, "//");
 				else
 					return new SinglelineCodeCommentReplacer(comment, "//");
