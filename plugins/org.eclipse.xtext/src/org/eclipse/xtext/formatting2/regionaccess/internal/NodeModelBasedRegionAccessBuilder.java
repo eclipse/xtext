@@ -21,8 +21,6 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.CompositeNode;
-import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.collect.ImmutableMap;
@@ -83,7 +81,7 @@ public class NodeModelBasedRegionAccessBuilder {
 		this.firstHidden = createHiddenRegion(regionAccess);
 		this.lastHidden = this.firstHidden;
 		NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) regionAccess;
-		CompositeNode rootNode = (CompositeNode) resource.getParseResult().getRootNode();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		process(rootNode, access);
 		return ImmutableMap.<EObject, AbstractEObjectRegion> copyOf(this.eObjToTokens);
 	}
@@ -157,7 +155,7 @@ public class NodeModelBasedRegionAccessBuilder {
 			stack.push(tokens);
 		}
 		if (tokens.getSemanticElement() == null) {
-			if (node instanceof RootNode)
+			if (node.getParent() == null)
 				tokens.setSemantcElement(resource.getContents().get(0));
 			else if (node.hasDirectSemanticElement())
 				tokens.setSemantcElement(node.getSemanticElement());
