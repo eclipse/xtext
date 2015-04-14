@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -2330,6 +2331,21 @@ public class XbaseFormatter extends XtypeFormatter {
     }
   }
   
+  protected void _format(final XInstanceOfExpression expr, @Extension final IFormattableDocument doc) {
+    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "instanceof");
+    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.oneSpace();
+      }
+    };
+    doc.surround(_regionForKeyword, _function);
+    XExpression _expression = expr.getExpression();
+    this.format(_expression, doc);
+    JvmTypeReference _type = expr.getType();
+    this.format(_type, doc);
+  }
+  
   protected void formatExpressionsMultiline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     boolean _isEmpty = expressions.isEmpty();
     if (_isEmpty) {
@@ -2524,6 +2540,9 @@ public class XbaseFormatter extends XtypeFormatter {
       return;
     } else if (expr instanceof XIfExpression) {
       _format((XIfExpression)expr, format);
+      return;
+    } else if (expr instanceof XInstanceOfExpression) {
+      _format((XInstanceOfExpression)expr, format);
       return;
     } else if (expr instanceof XReturnExpression) {
       _format((XReturnExpression)expr, format);
