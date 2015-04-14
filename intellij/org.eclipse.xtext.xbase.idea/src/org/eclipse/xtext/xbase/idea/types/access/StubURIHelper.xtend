@@ -66,14 +66,16 @@ class StubURIHelper implements URIHelperConstants {
 		builder.append(name)
 	}
 
+	def getFullURI(PsiClass psiClass) {
+		createURIBuilder.appendFullURI(psiClass).createURI
+	}
+
 	def getFullURI(PsiMethod method) {
-		val type = method.psiElementFactory.createType(method.containingClass)
-		createURIBuilder.appendFullURI(type).append('''.«method.name»()''').createURI
+		createURIBuilder.appendFullURI(method.containingClass).append('''.«method.name»()''').createURI
 	}
 
 	def getFullURI(PsiField field) {
-		val type = field.psiElementFactory.createType(field.containingClass)
-		createURIBuilder.appendFullURI(type).append('''.«field.name»''').createURI
+		createURIBuilder.appendFullURI(field.containingClass).append('''.«field.name»''').createURI
 	}
 
 	def getFullURI(PsiType type) {
@@ -82,6 +84,10 @@ class StubURIHelper implements URIHelperConstants {
 
 	protected def appendFullURI(StringBuilder it, PsiType type) {
 		appendTypeResourceURI(type).append('#').appendTypeFragment(type)
+	}
+	
+	protected def appendFullURI(StringBuilder it, PsiClass psiClass) {
+		appendClassResourceURI(psiClass).append('#').appendClassFragment(psiClass)
 	}
 
 	protected def StringBuilder appendTypeResourceURI(StringBuilder builder, PsiType type) {
@@ -95,13 +101,22 @@ class StubURIHelper implements URIHelperConstants {
 				if (!resolveResult.validResult) {
 					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
-				switch resolvedType : resolveResult.element {
-					PsiTypeParameter: builder.appendTypeParameterResourceURI(resolvedType)
-					default: builder.appendClassResourceURI(resolvedType)
-				}
+				builder.appendClassResourceURI(resolveResult.element)
 			}
 			default:
 				throw new IllegalStateException("Unknown type: " + type)
+		}
+	}
+
+	protected def StringBuilder appendClassResourceURI(StringBuilder builder, PsiClass psiClass) {
+		if (psiClass instanceof PsiTypeParameter) {
+			return builder.appendTypeParameterResourceURI(psiClass)
+		}
+		val containingClass = psiClass.containingClass
+		if (containingClass != null) {
+			builder.appendClassResourceURI(containingClass)
+		} else {
+			builder.append(OBJECTS).append(psiClass.qualifiedName)
 		}
 	}
 
@@ -109,15 +124,6 @@ class StubURIHelper implements URIHelperConstants {
 		switch owner : typeParameter.owner {
 			PsiClass: builder.appendClassResourceURI(owner)
 			PsiMethod: builder.appendClassResourceURI(owner.containingClass)
-		}
-	}
-
-	protected def StringBuilder appendClassResourceURI(StringBuilder builder, PsiClass psiClass) {
-		val containingClass = psiClass.containingClass
-		if (containingClass != null) {
-			builder.appendClassResourceURI(containingClass)
-		} else {
-			builder.append(OBJECTS).append(psiClass.qualifiedName)
 		}
 	}
 
@@ -130,15 +136,24 @@ class StubURIHelper implements URIHelperConstants {
 				if (!resolveResult.validResult) {
 					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
-				switch resolvedType : resolveResult.element {
-					PsiTypeParameter: builder.appendTypeParameterFragment(resolvedType)
-					default: builder.appendClassFragment(resolvedType)
-				}
+				builder.appendClassFragment(resolveResult.element)
 			}
 			PsiArrayType:
 				builder.appendTypeFragment(type.componentType).append('[]')
 			default:
 				throw new IllegalStateException("Unknown type: " + type)
+		}
+	}
+
+	protected def StringBuilder appendClassFragment(StringBuilder builder, PsiClass psiClass) {
+		if (psiClass instanceof PsiTypeParameter) {
+			return builder.appendTypeParameterFragment(psiClass);	
+		}
+		val containingClass = psiClass.containingClass
+		if (containingClass == null) {
+			builder.append(psiClass.qualifiedName)
+		} else {
+			builder.appendClassFragment(containingClass).append('$').append(psiClass.name)
 		}
 	}
 
@@ -148,15 +163,6 @@ class StubURIHelper implements URIHelperConstants {
 			PsiMethod: builder.appendMethodFragment(owner)
 		}
 		builder.append('''/«typeParameter.name»''')
-	}
-
-	protected def StringBuilder appendClassFragment(StringBuilder builder, PsiClass psiClass) {
-		val containingClass = psiClass.containingClass
-		if (containingClass == null) {
-			builder.append(psiClass.qualifiedName)
-		} else {
-			builder.appendClassFragment(containingClass).append('$').append(psiClass.name)
-		}
 	}
 
 	protected def appendMethodFragment(StringBuilder builder, PsiMethod method) {
@@ -182,10 +188,8 @@ class StubURIHelper implements URIHelperConstants {
 					throw new UnresolvedPsiClassType(type, resolveResult)
 				}
 				switch resolvedType : resolveResult.element {
-					PsiTypeParameter:
-						builder.append(resolvedType.name)
-					default:
-						builder.appendClassFragment(resolvedType)
+					PsiTypeParameter: builder.append(resolvedType.name)
+					default: builder.appendClassFragment(resolvedType)
 				}
 			}
 			PsiArrayType:
