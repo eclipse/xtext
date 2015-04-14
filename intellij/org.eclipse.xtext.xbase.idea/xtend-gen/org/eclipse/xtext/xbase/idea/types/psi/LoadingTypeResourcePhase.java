@@ -28,10 +28,18 @@ public class LoadingTypeResourcePhase extends AdapterImpl {
   }
   
   public static boolean isLoadingTypeResource(final Notifier ctx) {
-    ResourceSet _resourceSet = EcoreUtil2.getResourceSet(ctx);
-    EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, LoadingTypeResourcePhase.class);
-    return (!Objects.equal(_adapter, null));
+    boolean _xblockexpression = false;
+    {
+      final ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
+      boolean _equals = Objects.equal(resourceSet, null);
+      if (_equals) {
+        return false;
+      }
+      EList<Adapter> _eAdapters = resourceSet.eAdapters();
+      Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, LoadingTypeResourcePhase.class);
+      _xblockexpression = (!Objects.equal(_adapter, null));
+    }
+    return _xblockexpression;
   }
   
   public static void setLoadingTypeResource(final Notifier ctx, final boolean loadingTypeResource) {
