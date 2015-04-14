@@ -34,6 +34,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.ISetup
+import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -61,9 +62,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	@Accessors
 	private boolean deployable = true
-	
-	@Accessors
-	private boolean typesIntegrationRequired = false
 	
 	@Inject
 	extension GrammarAccess
@@ -110,7 +108,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		
-		if (typesIntegrationRequired) {
+		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory', 'org.eclipse.xtext.idea.types.access.StubTypeProviderFactory')
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator')
@@ -142,7 +140,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
 		ctx.writeFile(outlet_src_gen, grammar.antlrTokenFileProvider.toJavaPath, grammar.compileAntlrTokenFileProvider)
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
-		if (typesIntegrationRequired) {
+		if (grammar.doesUseXbase) {
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toJavaPath, grammar.compileJvmTypesShortNamesCache)
 			ctx.writeFile(outlet_src_gen, grammar.jvmElementsReferencesSearch.toJavaPath, grammar.compileJvmElementsReferencesSearch)
@@ -272,7 +270,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileCodeBlockModificationListener(Grammar grammar) '''
 		package «grammar.codeBlockModificationListenerName.toPackageName»;
 		
-		«IF typesIntegrationRequired»
+		«IF grammar.doesUseXbase()»
 		import com.intellij.psi.impl.PsiTreeChangeEventImpl;
 		«ENDIF»
 		import com.intellij.psi.util.PsiModificationTracker;
@@ -284,7 +282,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			public «grammar.codeBlockModificationListenerName.toSimpleName»(PsiModificationTracker psiModificationTracker) {
 				super(«grammar.languageName.toSimpleName».INSTANCE, psiModificationTracker);
 			}
-			«IF typesIntegrationRequired»
+			«IF grammar.doesUseXbase()»
 
 			protected boolean hasJavaStructuralChanges(PsiTreeChangeEventImpl event) {
 				return true;
@@ -489,7 +487,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			<classpathentry kind="src" path="src-gen"/>
 			<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
-			«IF typesIntegrationRequired»
+			«IF grammar.doesUseXbase()»
 			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
 			«ENDIF»
 			«IF runtimeProjectName != ideaProjectName»
@@ -531,25 +529,25 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			<idea-version since-build="131"/>
 			<depends>org.eclipse.xtext.idea</depends>
-			«IF typesIntegrationRequired && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
+			«IF grammar.doesUseXbase() && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
 			<depends>org.eclipse.xtext.xbase.idea</depends>
 			«ENDIF»
 
 			<extensions defaultExtensionNs="com.intellij">
 				<buildProcess.parametersProvider implementation="«grammar.buildProcessParametersProviderName»"/>
-				«IF typesIntegrationRequired»
+				«IF grammar.doesUseXbase()»
 				
 				<java.elementFinder implementation="«grammar.jvmTypesElementFinderName»" order="first, before java"/>
 				<java.shortNamesCache implementation="«grammar.jvmTypesShortNamesCacheName»"/>
 				«ENDIF»
 		
 				<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-				«IF typesIntegrationRequired»
+				«IF grammar.doesUseXbase()»
 				<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
 				«ENDIF»
 		
 				<psi.treeChangePreprocessor implementation="«grammar.codeBlockModificationListenerName»"/>
-				«IF typesIntegrationRequired»
+				«IF grammar.doesUseXbase()»
 
 				<referencesSearch implementation="«grammar.jvmElementsReferencesSearch»"/>
 				«grammar.compileExtension('targetElementEvaluator', 'org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator')»
@@ -570,7 +568,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		      	<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcherName»"/>
 
 		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»
-				«IF typesIntegrationRequired»
+				«IF grammar.doesUseXbase()»
 
 				«grammar.compileExtension('typeHierarchyProvider', 'com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider')»
 				«grammar.compileExtension('callHierarchyProvider', 'com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider')»

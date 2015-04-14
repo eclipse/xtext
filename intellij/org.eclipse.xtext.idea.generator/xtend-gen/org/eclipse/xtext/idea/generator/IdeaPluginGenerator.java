@@ -45,6 +45,7 @@ import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
+import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames;
 import org.eclipse.xtext.idea.generator.IdeaPluginExtension;
 import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions;
@@ -83,9 +84,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   @Accessors
   private boolean deployable = true;
-  
-  @Accessors
-  private boolean typesIntegrationRequired = false;
   
   @Inject
   @Extension
@@ -151,7 +149,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     bindFactory.addTypeToType("com.intellij.lang.ParserDefinition", _parserDefinitionName);
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
     bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", _elementTypeProviderName);
-    if (this.typesIntegrationRequired) {
+    boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+    if (_doesUseXbase) {
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.idea.types.access.StubTypeProviderFactory");
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator");
@@ -247,7 +246,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_pomDeclarationSearcherName);
     CharSequence _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
     ctx.writeFile(outlet_src_gen, _javaPath_18, _compilePomDeclarationSearcher);
-    if (this.typesIntegrationRequired) {
+    boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+    if (_doesUseXbase_1) {
       String _jvmTypesElementFinderName = this._ideaPluginClassNames.getJvmTypesElementFinderName(grammar);
       String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_jvmTypesElementFinderName);
       CharSequence _compileJvmTypesElementFinder = this.compileJvmTypesElementFinder(grammar);
@@ -734,7 +734,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase) {
         _builder.append("import com.intellij.psi.impl.PsiTreeChangeEventImpl;");
         _builder.newLine();
       }
@@ -774,7 +775,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_1) {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected boolean hasJavaStructuralChanges(PsiTreeChangeEventImpl event) {");
@@ -1327,7 +1329,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.idea\"/>");
     _builder.newLine();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase) {
         _builder.append("\t");
         _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.xbase.idea\"/>");
         _builder.newLine();
@@ -1448,7 +1451,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     {
       boolean _and = false;
-      if (!this.typesIntegrationRequired) {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (!_doesUseXbase) {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(this.ideaProjectName, "org.eclipse.xtext.xbase.idea"));
@@ -1471,7 +1475,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_1) {
         _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
@@ -1493,7 +1498,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("<stubIndex implementation=\"org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex\"/>");
     _builder.newLine();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase_2 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_2) {
         _builder.append("\t\t");
         _builder.append("<stubIndex implementation=\"org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex\"/>");
         _builder.newLine();
@@ -1507,7 +1513,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase_3 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_3) {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<referencesSearch implementation=\"");
@@ -1599,7 +1606,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_compileExtension_8, "      \t");
     _builder.newLineIfNotEmpty();
     {
-      if (this.typesIntegrationRequired) {
+      boolean _doesUseXbase_4 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_4) {
         _builder.newLine();
         _builder.append("\t\t");
         CharSequence _compileExtension_9 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
@@ -3140,14 +3148,5 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   public void setDeployable(final boolean deployable) {
     this.deployable = deployable;
-  }
-  
-  @Pure
-  public boolean isTypesIntegrationRequired() {
-    return this.typesIntegrationRequired;
-  }
-  
-  public void setTypesIntegrationRequired(final boolean typesIntegrationRequired) {
-    this.typesIntegrationRequired = typesIntegrationRequired;
   }
 }

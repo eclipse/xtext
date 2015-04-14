@@ -139,7 +139,6 @@ Workflow {
     		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
     			runtimeProjectName = projectName
     			runtimeProjectPath = runtimeProject
-	            typesIntegrationRequired = true
 	        }
 	        
 	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}

@@ -237,7 +237,6 @@ final class GenerateXbase {
 			boolean typesIntegrationRequired) {
 		IdeaPluginGenerator ideaPluginGenerator = new IdeaPluginGenerator();
 		ideaPluginGenerator.setDeployable(deploayble);
-		ideaPluginGenerator.setTypesIntegrationRequired(typesIntegrationRequired);
 		ideaPluginGenerator.setRuntimeProjectName(runtimeProjectName);
 		ideaPluginGenerator.setRuntimeProjectPath(runtimeProjectPath);
 		ideaPluginGenerator.setIdeaProjectName(ideaProjectName);
