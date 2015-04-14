@@ -73,9 +73,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
     
-    protected final CachedValue<Resource> resourceCache;
-    
     protected final Object resourceCacheLock;
+    
+    protected final CachedValue<XtextResource> resourceCache;
     
 	protected BaseXtextFile(@NotNull FileViewProvider viewProvider, @NotNull Language language) {
         super(viewProvider, language);
@@ -85,15 +85,12 @@ public abstract class BaseXtextFile extends PsiFileBase {
         	throw new IllegalArgumentException("Expected an Xtext language but got " + language.getDisplayName());
         }
         resourceCacheLock = new Object();
-        resourceCache = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Resource>() {
+        resourceCache = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<XtextResource>() {
 
 			@Override
-			public com.intellij.psi.util.CachedValueProvider.Result<Resource> compute() {
-				Resource resource = createResource();
-		        installResourceDescription(resource);
-				return Result.create(resource, new Object[] {
-					PsiModificationTracker.MODIFICATION_COUNT
-				});
+			public Result<XtextResource> compute() {
+				XtextResource resource = createResource();
+				return Result.create(resource, BaseXtextFile.this);
 			}
         	
         }, false);
@@ -111,7 +108,23 @@ public abstract class BaseXtextFile extends PsiFileBase {
     
     protected Resource doGetResource() {
     	synchronized(resourceCacheLock) {
-    		return resourceCache.getValue();
+    		return CachedValuesManager.getManager(getProject()).<XtextResource, BaseXtextFile>getCachedValue(this, new CachedValueProvider<XtextResource>() {
+
+    			@Override
+				public Result<XtextResource> compute() {
+					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
+					XtextResource resource = resourceCache.getValue();
+					if (hasUpToDateValue) {
+						resource.relink();
+					}
+			        installResourceDescription(resource);
+					return Result.create(resource, new Object[] {
+							PsiModificationTracker.MODIFICATION_COUNT, 
+							BaseXtextFile.this
+					});
+				}
+    			
+    		});
     	}
     }
 	
@@ -127,7 +140,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		return astNodes;
 	}
 
-	protected Resource createResource() {    	
+	protected XtextResource createResource() {    	
     	VirtualFile virtualFile = getViewProvider().getVirtualFile();
         if (virtualFile == null) {
             return null;

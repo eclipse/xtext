@@ -23,7 +23,11 @@ class LoadingTypeResourcePhase extends AdapterImpl {
 	}
 
 	static def isLoadingTypeResource(Notifier ctx) {
-		ctx.resourceSet.eAdapters.getAdapter(LoadingTypeResourcePhase) != null
+		val resourceSet = ctx.resourceSet
+		if (resourceSet == null) {
+			return false
+		} 
+		resourceSet.eAdapters.getAdapter(LoadingTypeResourcePhase) != null
 	}
 
 	static def void setLoadingTypeResource(Notifier ctx, boolean loadingTypeResource) {
