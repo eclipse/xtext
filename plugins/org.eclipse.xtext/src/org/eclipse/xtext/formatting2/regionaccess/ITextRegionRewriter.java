@@ -20,6 +20,8 @@ public interface ITextRegionRewriter {
 	public void renderToAppendable(Iterable<? extends ITextReplacement> replacements, Appendable result)
 			throws IOException;
 
+	public ITextReplacement createReplacement(int offset, int length, String text);
+
 	public void renderToAppendable(ITextSegment segment, Iterable<? extends ITextReplacement> replacements,
 			Appendable result) throws IOException;
 

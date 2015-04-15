@@ -109,7 +109,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 					//					System.out.println("error");
 					continue;
 				}
-				String between = access.getText(endOffset, lastOffset - endOffset);
+				String between = access.textForOffset(endOffset, lastOffset - endOffset);
 				int idx = between.lastIndexOf('\n');
 				if (idx >= 0)
 					return count + logicalLength(between.substring(idx + 1));
@@ -123,7 +123,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 			}
 			current = current.getPreviousContext();
 		}
-		String rest = access.getText(0, lastOffset);
+		String rest = access.textForOffset(0, lastOffset);
 		int idx = rest.lastIndexOf('\n');
 		if (idx >= 0)
 			return count + logicalLength(rest.substring(idx + 1));
@@ -209,21 +209,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	@Override
-	public void replaceText(CharSequence text) {
-		Preconditions.checkNotNull(replacer);
-		ITextSegment region = replacer.getRegion();
-		replaceText(region.getOffset(), region.getLength(), text);
-	}
-
-	@Override
-	public void replaceText(int offset, int length, CharSequence text) {
-		Preconditions.checkNotNull(text);
-		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, length, text.toString());
-		replaceText(replacement);
-	}
-
-	@Override
-	public void replaceText(ITextReplacement replacement) {
+	public void addReplacement(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
 		ITextSegment replacerRegion = replacer.getRegion();
 		if (!replacerRegion.contains(replacement)) {
@@ -253,11 +239,6 @@ public class TextReplacerContext implements ITextReplacerContext {
 		} catch (ConflictingRegionsException e) {
 			document.getRequest().getExceptionHandler().accept(e);
 		}
-	}
-
-	@Override
-	public void replaceText(ITextSegment region, CharSequence text) {
-		replaceText(region.getOffset(), region.getLength(), text);
 	}
 
 	@Override

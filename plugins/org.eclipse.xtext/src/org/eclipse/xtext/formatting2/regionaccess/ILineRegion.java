@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
-import java.util.List;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IEObjectRegion extends ISequentialRegion, IAstRegion {
+public interface ILineRegion extends ITextSegment {
 
-	List<ISemanticRegion> getSemanticLeafRegions();
+	ILineRegion getNextLine();
+
+	ILineRegion getPreviousLine();
+
+	ITextSegment getIndentation();
 }

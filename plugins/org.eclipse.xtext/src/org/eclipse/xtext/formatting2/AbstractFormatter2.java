@@ -194,7 +194,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 			if (ruleName.startsWith("ML"))
 				return new MultilineCommentReplacer(comment, '*');
 			if (ruleName.startsWith("SL")) {
-				if (comment.getIndentation().getLength() > 0)
+				if (comment.getLineRegions().get(0).getIndentation().getLength() > 0)
 					return new SinglelineDocCommentReplacer(comment, "//");
 				else
 					return new SinglelineCodeCommentReplacer(comment, "//");
@@ -226,10 +226,6 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 
 	public ITextReplacer createHiddenRegionReplacer(IHiddenRegion region, IHiddenRegionFormatting formatting) {
 		return new HiddenRegionReplacer(region, formatting);
-	}
-
-	public ITextReplacement createTextReplacement(int offset, int length, String text) {
-		return new TextReplacement(getRequest().getTextRegionAccess(), offset, length, text);
 	}
 
 	public ITextReplacerContext createTextReplacerContext(IFormattableDocument document) {

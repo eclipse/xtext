@@ -7,12 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
-import java.util.List;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IEObjectRegion extends ISequentialRegion, IAstRegion {
+public interface IAstRegion {
 
-	List<ISemanticRegion> getSemanticLeafRegions();
+	/**
+	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall},
+	 *         {@link CrossReference}, or {@link Keyword}.
+	 */
+	EObject getGrammarElement();
+
+	/**
+	 * The EObject this semantic region belongs to.
+	 */
+	EObject getSemanticElement();
+
 }

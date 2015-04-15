@@ -46,5 +46,4 @@ public class NodeEObjectRegion extends AbstractEObjectRegion {
 		}
 		return null;
 	}
-
 }

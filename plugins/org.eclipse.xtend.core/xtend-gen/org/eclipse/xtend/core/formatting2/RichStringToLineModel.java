@@ -64,7 +64,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public RichStringToLineModel(final ITextRegionAccess nodeModelAccess, final RichString string) {
     this.nodeModelAccess = nodeModelAccess;
     this.string = string;
-    String _text = ((ITextSegment) nodeModelAccess).getText();
+    ITextSegment _regionForDocument = nodeModelAccess.regionForDocument();
+    String _text = _regionForDocument.getText();
     this.document = _text;
   }
   

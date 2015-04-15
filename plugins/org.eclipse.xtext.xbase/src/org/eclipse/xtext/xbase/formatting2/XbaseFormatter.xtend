@@ -691,7 +691,7 @@ class XbaseFormatter extends XtypeFormatter {
 		val offset = region.offset
 		for (var i = 0; i < t.length; i++)
 			if (Character.isWhitespace(t.charAt(i)))
-				replaceText(offset + i, 1, "")
+				addReplacement(region.textRegionAccess.rewriter.createReplacement( offset + i, 1, ""))
 		return it
 	}
 }

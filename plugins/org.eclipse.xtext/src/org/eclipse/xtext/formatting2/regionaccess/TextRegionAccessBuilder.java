@@ -8,7 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegionAccessBuildingSequencer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
@@ -20,10 +20,10 @@ public class TextRegionAccessBuilder {
 
 	private TextRegionAccessBuildingSequencer fromSequencer;
 
-	private NodeModelBasedRegionAccess.Builder fromNodeModel;
+	private NodeModelBasedRegionAccessBuilder fromNodeModel;
 
 	public TextRegionAccessBuilder forNodeModel(XtextResource resource) {
-		this.fromNodeModel = new NodeModelBasedRegionAccess.Builder().withResource(resource);
+		this.fromNodeModel = new NodeModelBasedRegionAccessBuilder().withResource(resource);
 		return this;
 	}
 
