@@ -113,7 +113,7 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
 		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git</pattern>
+          <pattern>org.eclipse.xtext.git/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
       </patterns>

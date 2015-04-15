@@ -186,7 +186,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
 		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git</pattern>
+          <pattern>org.eclipse.xtext.git/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
       </patterns>
