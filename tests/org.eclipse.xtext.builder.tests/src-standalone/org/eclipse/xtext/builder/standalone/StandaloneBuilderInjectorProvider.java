@@ -41,7 +41,18 @@ public class StandaloneBuilderInjectorProvider implements IInjectorProvider, IRe
 
 	protected Injector internalCreateInjector() {
 		new BuilderTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
-		return Guice.createInjector(new StandaloneBuilderModule());
+		return Guice.createInjector(new StandaloneBuilderModule() {
+			@Override
+			protected void configure() {
+				super.configure();
+				bind(StandaloneBuilder.class).to(bindStandaloneBuilder());
+			}
+
+			protected Class<? extends StandaloneBuilder> bindStandaloneBuilder() {
+				return TestableStandaloneBuilder.class;
+			}
+
+		});
 	}
 
 	@Override
