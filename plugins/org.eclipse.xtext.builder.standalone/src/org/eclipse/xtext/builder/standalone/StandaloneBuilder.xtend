@@ -52,6 +52,12 @@ class StandaloneBuilder {
 	@Accessors File tempDir = Files.createTempDir
 	@Accessors String encoding
 	@Accessors String classPathLookUpFilter
+	/**
+	 * If failOnValidationError is set to <code>false</code>, StandaloneBuilder will try to execute<br>
+	 * language generator in spite of validation errors.<br>
+	 * Note that {@link #launch()} will still return the current validation state.
+	 * <br>Default is <code>true</code>
+	 */
 	@Accessors boolean failOnValidationError = true
 	@Accessors boolean debugLog
 	@Accessors boolean writeStorageResources
@@ -70,9 +76,13 @@ class StandaloneBuilder {
 		}
 	}
 
-	def launch() {
+	/**
+	 * 
+	 *  @return <code>false</code> if some of processed resources contains severe validation issues. <code>true</code> otherwise
+	 */
+	def boolean launch() {
 		val needsJava = languages.values.exists[linksAgainstJava]
-		if(baseDir == null) {
+		if (baseDir == null) {
 			baseDir = System.getProperty('user.dir')
 			LOG.warn("Property baseDir not set. Using '" + baseDir + "'")
 		}
@@ -149,7 +159,7 @@ class StandaloneBuilder {
 		// Validate and generate
 		LOG.info("Validate and generate.")
 		val sourceResourceIterator = sourceResourceURIs.iterator
-		var isErrorFree = true
+		var hasValidationErrors = false
 		while (sourceResourceIterator.hasNext) {
 			var List<Resource> resources = newArrayList()
 			var int clusterIndex = 0
@@ -160,20 +170,20 @@ class StandaloneBuilder {
 				resources.add(resource)
 				resource.contents // full initialize
 				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-				isErrorFree = validate(resource)
+				hasValidationErrors = !validate(resource) || hasValidationErrors
 				clusterIndex++
 				if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
 					continue = false
 				}
 			}
-			if (failOnValidationError && !isErrorFree) {
-				return isErrorFree
+			if (failOnValidationError && hasValidationErrors) {
+				return !hasValidationErrors
 			}
 			generate(resources)
 			if (!continue)
 				resourceSet.clearResourceSet
 		}
-		return isErrorFree
+		return !hasValidationErrors
 	}
 
 	def fillIndex(URI uri, Resource resource, ResourceDescriptionsData index) {
@@ -188,9 +198,8 @@ class StandaloneBuilder {
 					provider.setDefaultEncoding(encoding)
 				}
 				default: {
-					forceDebugLog(
-						"Couldn't set encoding '" + encoding + "' for provider '" + provider +
-							"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+					forceDebugLog("Couldn't set encoding '" + encoding + "' for provider '" + provider +
+						"'. Only subclasses of IEncodingProvider.Runtime are supported.")
 				}
 			}
 		}
@@ -235,7 +244,7 @@ class StandaloneBuilder {
 		return stubsDir
 	}
 
-	def protected validate(Resource resource) {
+	def protected boolean validate(Resource resource) {
 		LOG.info("Starting validation for input: '" + resource.getURI().lastSegment() + "'");
 		val resourceValidator = languageAccess(resource.URI).getResourceValidator();
 		val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
@@ -250,7 +259,7 @@ class StandaloneBuilder {
 			val fileSystemAccess = access.fileSystemAccess
 			if (isWriteStorageResources) {
 				switch it {
-					StorageAwareResource case resourceStorageFacade != null : {
+					StorageAwareResource case resourceStorageFacade != null: {
 						resourceStorageFacade.saveResource(it, fileSystemAccess)
 					}
 				}
@@ -261,9 +270,9 @@ class StandaloneBuilder {
 
 	def protected registerCurrentSource(URI uri) {
 		val fsa = uri.languageAccess.fileSystemAccess
-		val absoluteSource = sourceDirs.map[new File(it).absolutePath.createFileURI.toString].filter[
-			uri.toString.startsWith(it)].reduce[longest, current|
-			if(current.length > longest.length) current else longest]?.createFileURI
+		val absoluteSource = sourceDirs.map[new File(it).absolutePath.createFileURI.toString].filter [
+			uri.toString.startsWith(it)
+		].reduce[longest, current|if(current.length > longest.length) current else longest]?.createFileURI
 		if (absoluteSource == null) {
 			throw new IllegalStateException(
 				'''Resource «uri» is not contained in any of the known source folders «sourceDirs».''')
@@ -278,17 +287,17 @@ class StandaloneBuilder {
 	}
 
 	Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = newHashMap()
-	
+
 	private def getFileSystemAccess(LanguageAccess language) {
 		var fsa = configuredFsas.get(language)
-		if(fsa == null) {
+		if (fsa == null) {
 			fsa = language.createFileSystemAccess(new File(baseDir))
 			fsa = fsa.configureFileSystemAccess(language)
 			configuredFsas.put(language, fsa)
 		}
 		return fsa
 	}
-	
+
 	protected def configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
 		fsa
 	}
@@ -306,7 +315,7 @@ class StandaloneBuilder {
 	def protected void installTypeProvider(Iterable<String> classPathRoots, XtextResourceSet resSet,
 		IndexedJvmTypeAccess typeAccess) {
 		val classLoader = createURLClassLoader(classPathRoots)
-		new ClasspathTypeProvider(classLoader, resSet, typeAccess)
+		new ClasspathTypeProvider(classLoader, resSet, typeAccess, null)
 		resSet.setClasspathURIContext(classLoader);
 	}
 
@@ -319,7 +328,7 @@ class StandaloneBuilder {
 		val extensions = languages.keySet.join("|")
 		val nameBasedFilter = new NameBasedFilter
 
-		//TODO test with whitespaced file extensions
+		// TODO test with whitespaced file extensions
 		nameBasedFilter.setRegularExpression(".*\\.(?:(" + extensions + "))$");
 		val List<URI> resources = newArrayList();
 
@@ -382,9 +391,9 @@ class StandaloneBuilder {
 	}
 
 	/**
-     * Clears the content of the resource set without sending notifications.
-     * This avoids unnecessary, explicit unloads.
-     */
+	 * Clears the content of the resource set without sending notifications.
+	 * This avoids unnecessary, explicit unloads.
+	 */
 	def void clearResourceSet(ResourceSet resourceSet) {
 		val wasDeliver = resourceSet.eDeliver();
 		try {

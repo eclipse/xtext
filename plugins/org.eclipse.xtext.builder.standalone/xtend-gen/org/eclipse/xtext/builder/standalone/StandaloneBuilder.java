@@ -102,6 +102,12 @@ public class StandaloneBuilder {
   @Accessors
   private String classPathLookUpFilter;
   
+  /**
+   * If failOnValidationError is set to <code>false</code>, StandaloneBuilder will try to execute<br>
+   * language generator in spite of validation errors.<br>
+   * Note that {@link #launch()} will still return the current validation state.
+   * <br>Default is <code>true</code>
+   */
   @Accessors
   private boolean failOnValidationError = true;
   
@@ -140,6 +146,9 @@ public class StandaloneBuilder {
     }
   }
   
+  /**
+   * @return <code>false</code> if some of processed resources contains severe validation issues. <code>true</code> otherwise
+   */
   public boolean launch() {
     Collection<LanguageAccess> _values = this.languages.values();
     final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
@@ -268,7 +277,7 @@ public class StandaloneBuilder {
     }
     StandaloneBuilder.LOG.info("Validate and generate.");
     final Iterator<URI> sourceResourceIterator = sourceResourceURIs.iterator();
-    boolean isErrorFree = true;
+    boolean hasValidationErrors = false;
     while (sourceResourceIterator.hasNext()) {
       {
         List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
@@ -281,12 +290,19 @@ public class StandaloneBuilder {
             resources.add(resource);
             resource.getContents();
             EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+            boolean _or = false;
             boolean _validate = this.validate(resource);
-            isErrorFree = _validate;
+            boolean _not = (!_validate);
+            if (_not) {
+              _or = true;
+            } else {
+              _or = hasValidationErrors;
+            }
+            hasValidationErrors = _or;
             clusterIndex++;
             boolean _continueProcessing = strategy.continueProcessing(resourceSet, null, clusterIndex);
-            boolean _not = (!_continueProcessing);
-            if (_not) {
+            boolean _not_1 = (!_continueProcessing);
+            if (_not_1) {
               continue_ = false;
             }
           }
@@ -295,10 +311,10 @@ public class StandaloneBuilder {
         if (!this.failOnValidationError) {
           _and = false;
         } else {
-          _and = (!isErrorFree);
+          _and = hasValidationErrors;
         }
         if (_and) {
-          return isErrorFree;
+          return (!hasValidationErrors);
         }
         this.generate(resources);
         if ((!continue_)) {
@@ -306,7 +322,7 @@ public class StandaloneBuilder {
         }
       }
     }
-    return isErrorFree;
+    return (!hasValidationErrors);
   }
   
   public void fillIndex(final URI uri, final Resource resource, final ResourceDescriptionsData index) {
@@ -328,9 +344,8 @@ public class StandaloneBuilder {
         }
       }
       if (!_matched) {
-        this.forceDebugLog(
-          (((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
-            "\'. Only subclasses of IEncodingProvider.Runtime are supported."));
+        this.forceDebugLog((((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
+          "\'. Only subclasses of IEncodingProvider.Runtime are supported."));
       }
     }
   }
@@ -581,7 +596,7 @@ public class StandaloneBuilder {
   
   protected void installTypeProvider(final Iterable<String> classPathRoots, final XtextResourceSet resSet, final IndexedJvmTypeAccess typeAccess) {
     final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
-    new ClasspathTypeProvider(classLoader, resSet, typeAccess);
+    new ClasspathTypeProvider(classLoader, resSet, typeAccess, null);
     resSet.setClasspathURIContext(classLoader);
   }
   
