@@ -74,14 +74,12 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
   }
   
   public static ResourceDescriptionAdapter install(final Resource it) {
-    ResourceDescriptionAdapter _elvis = null;
-    ResourceDescriptionAdapter _get = ResourceDescriptionAdapter.get(it);
-    if (_get != null) {
-      _elvis = _get;
-    } else {
+    ResourceDescriptionAdapter _xblockexpression = null;
+    {
+      ResourceDescriptionAdapter.remove(it);
       ResourceDescriptionAdapter _xifexpression = null;
       if ((it instanceof XtextResource)) {
-        ResourceDescriptionAdapter _xblockexpression = null;
+        ResourceDescriptionAdapter _xblockexpression_1 = null;
         {
           IResourceServiceProvider _resourceServiceProvider = ((XtextResource)it).getResourceServiceProvider();
           @Extension
@@ -95,13 +93,13 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
               _eAdapters.add(adapter);
             }
           };
-          _xblockexpression = ObjectExtensions.<ResourceDescriptionAdapter>operator_doubleArrow(_resourceDescriptionAdapter, _function);
+          _xblockexpression_1 = ObjectExtensions.<ResourceDescriptionAdapter>operator_doubleArrow(_resourceDescriptionAdapter, _function);
         }
-        _xifexpression = _xblockexpression;
+        _xifexpression = _xblockexpression_1;
       }
-      _elvis = _xifexpression;
+      _xblockexpression = _xifexpression;
     }
-    return _elvis;
+    return _xblockexpression;
   }
   
   public static boolean remove(final Resource it) {

@@ -54,7 +54,8 @@ class ResourceDescriptionAdapter extends AdapterImpl implements IResourceDescrip
 	}
 	
 	def static install(Resource it) {
-		get ?: if (it instanceof XtextResource) {
+		remove
+		if (it instanceof XtextResource) {
 			val extension resourceDescriptionManager = resourceServiceProvider.resourceDescriptionManager
 			new ResourceDescriptionAdapter(resourceDescription) => [ adapter |
 				eAdapters += adapter
