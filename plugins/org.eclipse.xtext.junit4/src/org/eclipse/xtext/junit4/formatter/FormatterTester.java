@@ -20,7 +20,6 @@ import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
-import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
@@ -181,6 +180,6 @@ public class FormatterTester {
 	}
 
 	protected String toString(ITextRegionAccess nmRegions) {
-		return new TextRegionAccessToString().withOrigin((ITextSegment) nmRegions).hideColumnExplanation() + "\n";
+		return new TextRegionAccessToString().withRegionAccess(nmRegions).hideColumnExplanation() + "\n";
 	}
 }
