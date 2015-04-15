@@ -24,7 +24,6 @@ import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPacka
  */
 class DomainmodelFormatter extends XbaseFormatter {
 
-
 	def dispatch void format(DomainModel domainmodel, extension IFormattableDocument document) {
 		domainmodel.prepend[setNewLines(0, 0, 1); noSpace].append[newLine]
 		format(domainmodel.getImportSection(), document);
