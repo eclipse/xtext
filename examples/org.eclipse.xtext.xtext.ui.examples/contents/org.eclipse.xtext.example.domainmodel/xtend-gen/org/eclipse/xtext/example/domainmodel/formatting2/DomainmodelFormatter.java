@@ -151,23 +151,30 @@ public class DomainmodelFormatter extends XbaseFormatter {
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
+        it.newLine();
+      }
+    };
+    document.append(open, _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
         it.indent();
       }
     };
-    document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_2);
+    document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_3);
     JvmParameterizedTypeReference _superType_1 = entity.getSuperType();
     this.format(_superType_1, document);
     EList<Feature> _features = entity.getFeatures();
     for (final Feature feature : _features) {
       {
         this.format(feature, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.setNewLines(1, 1, 2);
           }
         };
-        document.<Feature>append(feature, _function_3);
+        document.<Feature>append(feature, _function_4);
       }
     }
   }
