@@ -54,7 +54,7 @@
       <hudson.plugins.git.extensions.impl.CloneOption>
         <shallow>false</shallow>
         <reference></reference>
-        <timeout>30</timeout>
+        <timeout>60</timeout>
       </hudson.plugins.git.extensions.impl.CloneOption>
     </extensions>
   </scm>
