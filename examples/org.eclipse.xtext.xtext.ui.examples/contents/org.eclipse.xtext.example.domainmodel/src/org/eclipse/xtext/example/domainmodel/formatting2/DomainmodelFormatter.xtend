@@ -50,6 +50,7 @@ class DomainmodelFormatter extends XbaseFormatter {
 		val close = entity.regionForKeyword("}")
 		entity.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
 		entity.superType.surround[oneSpace]
+		open.append[newLine]
 		interior(open, close)[indent]
 		format(entity.getSuperType(), document);
 		for (Feature feature : entity.features) {
