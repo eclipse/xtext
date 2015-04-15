@@ -235,4 +235,13 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 			throw new RuntimeIOException(e);
 		}
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isFile(String path, String outputConfigurationName) throws RuntimeIOException {
+		File file = getFile(path, outputConfigurationName);
+		return file!=null && file.exists() && file.isFile();
+	}
 }
