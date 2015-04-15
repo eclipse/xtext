@@ -26,7 +26,7 @@ public class TextRegionsToString {
 
 	public TextRegionsToString add(ITextSegment region, String description) {
 		text.add(region, getReplacement(region, region.getText()));
-		list.add(region, quote(region.getText(), 20) + ":" + description);
+		list.add(region, quote(region.getText(), 20) + ": " + description);
 		return this;
 	}
 

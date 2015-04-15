@@ -19,7 +19,7 @@ public class RegionTrace extends RuntimeException {
 	private final ITextSegment region;
 
 	public RegionTrace(String message, ITextSegment region) {
-		super(message + " at offset=" + region.getOffset() + " length=" + region.getLength());
+		super(message);
 		this.region = region;
 	}
 

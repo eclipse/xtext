@@ -75,7 +75,7 @@ public abstract class AbstractTextSegment implements ITextSegment {
 			if (current.getEndOffset() >= endOffset)
 				return result;
 			current = current.getNextLine();
-			if (current.getOffset() >= endOffset)
+			if (current == null || current.getOffset() >= endOffset)
 				return result;
 		}
 		return result;

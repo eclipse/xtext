@@ -27,12 +27,14 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	private final LinkedList<AbstractEObjectRegion> stack = new LinkedList<AbstractEObjectRegion>();
 
 	@Override
-	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
+	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index,
+			ICompositeNode node) {
 		appendSemantic(rc, token);
 	}
 
 	@Override
-	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
+	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index,
+			ICompositeNode node) {
 		appendSemantic(enumRC, token);
 	}
 
@@ -47,7 +49,8 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	@Override
-	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
+	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index,
+			ICompositeNode node) {
 		appendSemantic(datatypeRC, token);
 	}
 
@@ -108,6 +111,8 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	private void appendSemantic(AbstractElement element, String token) {
+		if (token == null || token.length() == 0)
+			return;
 		AbstractEObjectRegion tokens = stack.peek();
 		EObject obj = tokens == null ? null : tokens.getSemanticElement();
 		int offset = regionAccess.append(token);
@@ -131,7 +136,8 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return new StringHiddenRegion(regionAccess);
 	}
 
-	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, EObject obj, int offset) {
+	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, EObject obj,
+			int offset) {
 		return new StringSemanticRegion(regionAccess, obj, element, offset, token.length());
 	}
 
