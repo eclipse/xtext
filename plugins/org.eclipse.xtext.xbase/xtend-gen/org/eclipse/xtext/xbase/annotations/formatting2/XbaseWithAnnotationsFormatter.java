@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -224,9 +223,6 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       return;
     } else if (ann instanceof JvmTypeConstraint) {
       _format((JvmTypeConstraint)ann, document);
-      return;
-    } else if (ann instanceof XCatchClause) {
-      _format((XCatchClause)ann, document);
       return;
     } else if (ann instanceof XExpression) {
       _format((XExpression)ann, document);
