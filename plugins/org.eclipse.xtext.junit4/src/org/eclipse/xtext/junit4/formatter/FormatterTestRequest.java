@@ -19,13 +19,21 @@ import com.google.inject.Inject;
 
 public class FormatterTestRequest {
 	private boolean allowSyntaxErrors = false;
+	private boolean allowUnformattedWhitespace = true; // TODO: default should be false
 	private CharSequence expectation;
 	private FormatterRequest request;
 	private CharSequence toBeFormatted;
-
 	private boolean useNodeModel = true;
-
 	private boolean useSerializer = true;
+	
+	public boolean isAllowUnformattedWhitespace() {
+		return allowUnformattedWhitespace;
+	}
+	
+	public FormatterTestRequest setAllowUnformattedWhitespace(boolean allowUnformattedWhitespace) {
+		this.allowUnformattedWhitespace = allowUnformattedWhitespace;
+		return this;
+	}
 
 	public boolean isUseNodeModel() {
 		return useNodeModel;
@@ -46,7 +54,6 @@ public class FormatterTestRequest {
 	}
 
 	// make all HiddenRegions as 'unknown' aka "ignoreOldHiddens"
-	// boolean allowUnformattedGaps = false
 	// boolean allowReplacementsAcrossTokens = false;
 
 	public CharSequence getExpectation() {
