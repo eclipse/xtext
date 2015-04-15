@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,6 +26,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,8 +43,15 @@ public class StandaloneBuilderTest {
 
 	private static final File PROJECT_DIR = new File("test-data/standalone");
 	private static final File TMP_DIR = new File(PROJECT_DIR, "tmp");
+
 	@Inject
-	private StandaloneBuilder builder;
+	private TestableStandaloneBuilder testBuilder;
+
+	@Before
+	public void setUp() {
+		testBuilder.resetCallStatistic();
+		testBuilder.resetTestSetup();
+	}
 
 	@After
 	public void cleanup() throws IOException {
@@ -56,7 +66,7 @@ public class StandaloneBuilderTest {
 	@Test
 	public void testDifferentOutputFolders() {
 		initBuilder(new TestLanguageConfiguration(true));
-		assertTrue(builder.launch());
+		assertTrue(testBuilder.launch());
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
@@ -68,23 +78,23 @@ public class StandaloneBuilderTest {
 		unexpectedFile = getFile("src2-gen/Foo.txt");
 		assertFalse(unexpectedFile.exists());
 	}
-	
+
 	@Test
 	public void testWriteStorageResource() {
 		initBuilder(new TestLanguageConfiguration(true));
-		builder.setWriteStorageResources(true);
-		assertTrue(builder.launch());
-		
+		testBuilder.setWriteStorageResources(true);
+		assertTrue(testBuilder.launch());
+
 		File generatedFile = getFile("src-gen/.Foo.buildertestlanguagebin");
 		assertTrue(generatedFile.exists());
 	}
-	
+
 	@Test
 	public void testNoWriteStorageResource() {
 		initBuilder(new TestLanguageConfiguration(true));
-		builder.setWriteStorageResources(false);
-		assertTrue(builder.launch());
-		
+		testBuilder.setWriteStorageResources(false);
+		assertTrue(testBuilder.launch());
+
 		File generatedFile = getFile("src-gen/.Foo.buildertestlanguagebin");
 		assertFalse(generatedFile.exists());
 	}
@@ -92,7 +102,7 @@ public class StandaloneBuilderTest {
 	@Test
 	public void testSameOutputFolder() {
 		initBuilder(new TestLanguageConfiguration(false));
-		assertTrue(builder.launch());
+		assertTrue(testBuilder.launch());
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
@@ -108,8 +118,8 @@ public class StandaloneBuilderTest {
 	@Test
 	public void testOnlyOneSourceFolder() {
 		initBuilder(new TestLanguageConfiguration(false));
-		builder.setSourceDirs(ImmutableList.of(new File(PROJECT_DIR, "src").getAbsolutePath()));
-		assertTrue(builder.launch());
+		testBuilder.setSourceDirs(ImmutableList.of(new File(PROJECT_DIR, "src").getAbsolutePath()));
+		assertTrue(testBuilder.launch());
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
@@ -125,8 +135,8 @@ public class StandaloneBuilderTest {
 	@Test
 	public void testRelativeSourceFolder() {
 		initBuilder(new TestLanguageConfiguration(false));
-		builder.setSourceDirs(ImmutableList.of("test-data/standalone/src"));
-		assertTrue(builder.launch());
+		testBuilder.setSourceDirs(ImmutableList.of("test-data/standalone/src"));
+		assertTrue(testBuilder.launch());
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
@@ -142,11 +152,11 @@ public class StandaloneBuilderTest {
 	@Test
 	public void testJarToPlatformMapping() {
 		initBuilder(new TestLanguageConfiguration(false));
-		builder.setSourceDirs(ImmutableList.of("test-data/standalone.with.reference/model"));
-		builder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
+		testBuilder.setSourceDirs(ImmutableList.of("test-data/standalone.with.reference/model"));
+		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
 				"test-data/model.in.eclipse.project.jar"));
 
-		assertTrue("Builder launch returned false", builder.launch());
+		assertTrue("Builder launch returned false", testBuilder.launch());
 		URI uri = EcorePlugin.getPlatformResourceMap().get("model.in.eclipse.project");
 		assertNotNull("No platform mapping found for 'model.in.eclipse.project'", uri);
 		assertTrue("Platform mapping is archive", uri.toString().startsWith("archive:file:/"));
@@ -159,12 +169,41 @@ public class StandaloneBuilderTest {
 		TestLanguageConfiguration config = new TestLanguageConfiguration(false);
 		config.setJavaSupport(true);
 		initBuilder(config);
-		builder.setJavaSourceDirs(ImmutableList.of(new File(PROJECT_DIR, "src2").getPath()));
-		builder.setTempDir(TMP_DIR);
-		builder.setDebugLog(true);
-		assertTrue("Builder launch returned false", builder.launch());
+		testBuilder.setJavaSourceDirs(ImmutableList.of(new File(PROJECT_DIR, "src2").getPath()));
+		testBuilder.setTempDir(TMP_DIR);
+		testBuilder.setDebugLog(true);
+		assertTrue("Builder launch returned false", testBuilder.launch());
 		File compiledClazz = getFile("tmp/classes/JavaClass.class");
 		assertTrue("java compilation failed", compiledClazz.exists());
+
+	}
+
+	@Test
+	public void testValidateMultipleResources() {
+		TestLanguageConfiguration config = new TestLanguageConfiguration(false);
+		initBuilder(config, "src", "src-error");
+		testBuilder.setTempDir(TMP_DIR);
+		testBuilder.setDebugLog(true);
+		testBuilder.setMockGeneration(true);
+		
+		assertFalse("Build should return false, but returned -success-", testBuilder.launch());
+		assertEquals("Build should fail early, but validate all resources", 2, testBuilder.getValidateCalled());
+		assertEquals("Build should fail early", 0, testBuilder.getGenerateCalled());
+
+		// revert resource process order - https://bugs.eclipse.org/bugs/show_bug.cgi?id=464663
+		initBuilder(config, "src-error", "src");
+		
+		assertFalse("Build should fail, but returned -success-", testBuilder.launch());
+		assertEquals("Build should fail early, but validation was executed", 2, testBuilder.getValidateCalled());
+		assertEquals("Build should fail early", 0, testBuilder.getGenerateCalled());
+
+		// allow errors, generator should run in spite validation errors, but launch should return "validation error was found"
+		initBuilder(config, "src-error", "src");
+		testBuilder.setFailOnValidationError(false);
+		assertFalse("Build should fail, but returned -success-", testBuilder.launch());
+
+		assertEquals("Validation was executed", 2, testBuilder.getValidateCalled());
+		assertEquals("Generator was executed in spite of validation errors", 1, testBuilder.getGenerateCalled());
 
 	}
 
@@ -181,15 +220,26 @@ public class StandaloneBuilderTest {
 	}
 
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config) {
-		String sourceDir1 = new File(PROJECT_DIR, "src").getAbsolutePath();
-		String sourceDir2 = new File(PROJECT_DIR, "src2").getAbsolutePath();
-		builder.setSourceDirs(ImmutableList.of(sourceDir1, sourceDir2));
+		return initBuilder(config, "src", "src2");
+	}
+
+	/**
+	 * @param srcDirs
+	 *            source dirs from {@value #PROJECT_DIR}
+	 */
+	private StandaloneBuilder initBuilder(ILanguageConfiguration config, String... srcDirs) {
+		List<String> patthes = new ArrayList<String>();
+		for (String srcDir : srcDirs) {
+			patthes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
+		}
+		testBuilder.setSourceDirs(patthes);
+		testBuilder.resetCallStatistic();
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
 				ImmutableList.of(config), getClass().getClassLoader());
-		builder.setBaseDir(PROJECT_DIR.getAbsolutePath());
-		builder.setLanguages(languages);
-		builder.setClassPathEntries(ImmutableList.<String> of());
-		return builder;
+		testBuilder.setBaseDir(PROJECT_DIR.getAbsolutePath());
+		testBuilder.setLanguages(languages);
+		testBuilder.setClassPathEntries(ImmutableList.<String> of());
+		return testBuilder;
 	}
 
 	public static class TestLanguageConfiguration implements ILanguageConfiguration {
