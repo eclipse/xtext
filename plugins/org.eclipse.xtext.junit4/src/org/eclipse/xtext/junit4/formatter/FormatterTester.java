@@ -10,6 +10,7 @@ package org.eclipse.xtext.junit4.formatter;
 import static com.google.common.base.Preconditions.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -18,8 +19,12 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
@@ -34,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -59,8 +65,49 @@ public class FormatterTester {
 	@Inject
 	private Serializer serializer;
 
-	protected void assertAllHiddenRegionsAre(ITextRegionAccess expectation, List<ITextReplacement> actual) {
-		// TODO implement
+	protected void assertAllWhitespaceIsFormatted(ITextRegionAccess access, List<ITextReplacement> replacements) {
+		List<ITextReplacement> actual = Lists.newArrayList(replacements);
+		Collections.sort(actual);
+		List<ITextSegment> expected = Lists.newArrayList();
+		IHiddenRegion current = access.regionForRootEObject().getPreviousHiddenRegion();
+		while (current != null) {
+			if (current.getLength() == 0) {
+				expected.add(current);
+			} else {
+				for (IHiddenRegionPart part : current.getParts())
+					if (part instanceof IWhitespace)
+						expected.add(part);
+			}
+			current = current.getNextHiddenRegion();
+		}
+		int e = 0, a = 0;
+		List<ITextSegment> missing = Lists.newArrayList();
+		while (e < expected.size() && a < actual.size()) {
+			ITextSegment hidden = expected.get(e);
+			ITextReplacement replacement = actual.get(a);
+			int compareTo = hidden.compareTo(replacement);
+			if (compareTo == 0) {
+				e++;
+				a++;
+			} else if (compareTo < 1) {
+				missing.add(hidden);
+				e++;
+			} else {
+				a++;
+			}
+		}
+		while (e < expected.size()) {
+			missing.add(expected.get(e));
+			e++;
+		}
+		if (!missing.isEmpty()) {
+			TextRegionsToString toString = new TextRegionsToString().setTextRegionAccess(access);
+			for (ITextSegment region : missing)
+				toString.add(region, region.getClass().getSimpleName());
+			String msg = "The following regions are not formatted:\n" + toString;
+			System.err.println(msg);
+			Assert.fail(msg);
+		}
 	}
 
 	public void assertFormatted(FormatterTestRequest req) {
@@ -83,10 +130,11 @@ public class FormatterTester {
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
 		List<ITextReplacement> replacements = createFormatter(req).format(request);
 		assertReplacementsAreInRegion(replacements, request.getRegions(), document);
-		assertAllHiddenRegionsAre(request.getTextRegionAccess(), replacements);
-		String applied = request.getTextRegionAccess().getRewriter().renderToString(replacements);
+		if (!req.isAllowUnformattedWhitespace())
+			assertAllWhitespaceIsFormatted(request.getTextRegionAccess(), replacements);
+		String formatted = request.getTextRegionAccess().getRewriter().renderToString(replacements);
 
-		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), applied);
+		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), formatted);
 
 		// TODO: assert formatting a second time only produces identity replacements
 		// TODO: assert formatting with undefined whitespace only
