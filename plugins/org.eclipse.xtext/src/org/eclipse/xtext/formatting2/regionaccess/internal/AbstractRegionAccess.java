@@ -255,7 +255,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 	@Override
 	public ILineRegion lineForOffset(int offset) {
 		String text = getText();
-		if (offset < 0 || offset >= text.length())
+		if (offset < 0 || offset > text.length())
 			return null;
 		int start = text.lastIndexOf('\n', offset) + 1;
 		if (start < 0)
@@ -265,7 +265,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 			if (text.charAt(end - 1) == '\r')
 				end = end - 1;
 		} else
-			end = text.length() - 1;
+			end = text.length();
 		return new LineRegion(this, start, end - start);
 	}
 

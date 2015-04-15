@@ -24,6 +24,7 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ISubFormatter;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
+import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -159,6 +160,9 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				new Function<ITextReplacer, String>() {
 					@Override
 					public String apply(ITextReplacer input) {
+						if (input instanceof HiddenRegionReplacer)
+							return new HiddenRegionFormattingToString()
+									.apply(((HiddenRegionReplacer) input).getFormatting());
 						return input.getClass().getSimpleName();
 					}
 				});

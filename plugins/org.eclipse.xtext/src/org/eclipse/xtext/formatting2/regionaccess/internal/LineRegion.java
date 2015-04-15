@@ -31,11 +31,44 @@ public class LineRegion extends TextSegment implements ILineRegion {
 
 	@Override
 	public ILineRegion getNextLine() {
-		return getTextRegionAccess().lineForOffset(getEndOffset() + 1);
+		ITextRegionAccess access = getTextRegionAccess();
+		int start = getEndOffset() + 1;
+		String text = access.regionForDocument().getText();
+		while (true) {
+			if (start >= text.length())
+				return null;
+			char c = text.charAt(start);
+			if (c == '\n' || c == '\r')
+				start++;
+			else
+				break;
+		}
+		int end = text.indexOf('\n', start);
+		if (end > 0) {
+			if (text.charAt(end - 1) == '\r')
+				end = end - 1;
+		} else
+			end = text.length();
+		return new LineRegion(access, start, end - start);
 	}
 
 	@Override
 	public ILineRegion getPreviousLine() {
-		return getTextRegionAccess().lineForOffset(getOffset() -1 );
+		ITextRegionAccess access = getTextRegionAccess();
+		int end = getOffset() - 1;
+		String text = access.regionForDocument().getText();
+		while (true) {
+			if (end < 0)
+				return null;
+			char c = text.charAt(end);
+			if (c == '\n' || c == '\r')
+				end--;
+			else
+				break;
+		}
+		int start = text.lastIndexOf('\n', end);
+		if (start < 0)
+			start = 0;
+		return new LineRegion(access, start, end - start);
 	}
 }
