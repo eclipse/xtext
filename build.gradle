@@ -31,9 +31,13 @@ allprojects {
 	}
 }
 
-task buckminsterBuild << {
-	ant.ant(
-		antfile: 'releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant',
-		target: 'resolve-and-compile-all'
-	)
+task compileEclipsePlugins(type: Exec) {
+	if (org.gradle.internal.os.OperatingSystem.current().windows) {
+		executable 'cmd'
+		args '/c', 'mvn'
+	} else {
+		executable 'mvn'
+	}
+	args 'clean', 'compile', '-Pinclude-unpublished', '-T', '1C'
+	workingDir 'maven/org.eclipse.xtext.tycho.parent'
 }

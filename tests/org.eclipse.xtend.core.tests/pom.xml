@@ -9,6 +9,6 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 
-	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.core.tests</artifactId>
 </project>

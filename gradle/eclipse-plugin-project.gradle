@@ -24,7 +24,14 @@ dependencies {
 task configureJarFromBuildProperties {
 	doLast {
 		jar {
-			from('bin')
+			//TODO get rid of this distinction by reconfiguring
+			//the Eclipse output folder for the mavenized projects
+			if(buildServer) {
+				from('target/classes')
+			} else {
+				from('bin')
+			}
+			
 			manifest {
 				from('META-INF/MANIFEST.MF')
 			}
