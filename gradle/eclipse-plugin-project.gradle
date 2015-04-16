@@ -50,6 +50,7 @@ task configureJarFromBuildProperties {
 					from(include)
 				}
 			}
+			duplicatesStrategy 'exclude'
 		}
 	}
 }
