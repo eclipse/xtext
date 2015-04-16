@@ -12,6 +12,9 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -31,7 +34,10 @@ public class ArrayBracketsFormattingReplacer implements ITextReplacer {
       char _charAt = t.charAt(i);
       boolean _isWhitespace = Character.isWhitespace(_charAt);
       if (_isWhitespace) {
-        it.replaceText((offset + i), 1, "");
+        ITextRegionAccess _textRegionAccess = this.region.getTextRegionAccess();
+        ITextRegionRewriter _rewriter = _textRegionAccess.getRewriter();
+        ITextReplacement _createReplacement = _rewriter.createReplacement((offset + i), 1, "");
+        it.addReplacement(_createReplacement);
       }
     }
     return it;

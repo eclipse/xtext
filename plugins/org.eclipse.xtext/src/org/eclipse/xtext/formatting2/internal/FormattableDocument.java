@@ -22,16 +22,19 @@ import org.eclipse.xtext.formatting2.IFormattableSubDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ISubFormatter;
-import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Function;
@@ -157,6 +160,9 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				new Function<ITextReplacer, String>() {
 					@Override
 					public String apply(ITextReplacer input) {
+						if (input instanceof HiddenRegionReplacer)
+							return new HiddenRegionFormattingToString()
+									.apply(((HiddenRegionReplacer) input).getFormatting());
 						return input.getClass().getSimpleName();
 					}
 				});
@@ -233,7 +239,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		if (hiddenRegion != null) {
 			AbstractFormatter2 formatter = getFormatter();
 			IHiddenRegionFormatting formatting = formatter.createHiddenRegionFormatting();
-			init.apply(formatting.asFormatter());
+			init.apply(formatter.createHiddenRegionFormatter(formatting));
 			ITextReplacer replacer = formatter.createHiddenRegionReplacer(hiddenRegion, formatting);
 			addReplacer(replacer);
 		}
@@ -241,17 +247,55 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
+	public Pair<IHiddenRegion, IHiddenRegion> set(IHiddenRegion first, IHiddenRegion second,
+			Procedure1<? super IHiddenRegionFormatter> init) {
+		if (first != null && second != null) {
+			AbstractFormatter2 formatter = getFormatter();
+			IHiddenRegionFormatting f1 = formatter.createHiddenRegionFormatting();
+			IHiddenRegionFormatting f2 = formatter.createHiddenRegionFormatting();
+			init.apply(formatter.createHiddenRegionFormatter(f1, f2));
+			ITextReplacer replacer1 = formatter.createHiddenRegionReplacer(first, f1);
+			ITextReplacer replacer2 = formatter.createHiddenRegionReplacer(second, f2);
+			addReplacer(replacer1);
+			addReplacer(replacer2);
+		}
+		return Pair.of(first, second);
+	}
+
+	@Override
 	public ISemanticRegion surround(ISemanticRegion token, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
-		prepend(token, beforeAndAfter);
-		append(token, beforeAndAfter);
+		if (token != null) {
+			IHiddenRegion previous = token.getPreviousHiddenRegion();
+			IHiddenRegion next = token.getNextHiddenRegion();
+			set(previous, next, beforeAndAfter);
+		}
 		return token;
 	}
 
 	@Override
 	public <T extends EObject> T surround(T owner, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
-		prepend(owner, beforeAndAfter);
-		append(owner, beforeAndAfter);
+		if (owner != null && !owner.eIsProxy()) {
+			IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
+			IHiddenRegion previous = region.getPreviousHiddenRegion();
+			IHiddenRegion next = region.getNextHiddenRegion();
+			set(previous, next, beforeAndAfter);
+		}
 		return owner;
+	}
+
+	@Override
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init) {
+		return interior(pair.getKey(), pair.getValue(), init);
+	}
+
+	@Override
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(T1 first, T2 second, Procedure1<? super IHiddenRegionFormatter> init) {
+		if (first != null && second != null) {
+			set(first.getNextHiddenRegion(), second.getPreviousHiddenRegion(), init);
+		}
+		return Pair.of(first, second);
 	}
 
 	@Override

@@ -1,88 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.xtext</groupId>
-  <artifactId>xtext-generator</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>Xtext Generator</name>
-  <description>Manually created POM</description>
-
-
-  <dependencies>
-  	<!-- own stuff -->
-	<dependency>
-		<groupId>org.eclipse.emf.mwe</groupId>
-		<artifactId>emf-mwe-utils</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.m2t.xpand</groupId>
-		<artifactId>m2t-xpand-xpand</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.m2t.xpand</groupId>
-		<artifactId>m2t-xpand-xtend</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.m2t.xpand</groupId>
-		<artifactId>m2t-xpand-xtend-typesystem-emf</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.m2t.xpand</groupId>
-		<artifactId>m2t-xpand-xtend-util-stdlib</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.15</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>xtext-core</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>xtext-util</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</dependency>
-	
-	<!-- Eclipse stuff -->
-	<dependency>
-		<groupId>org.eclipse.emf</groupId>
-		<artifactId>codegen</artifactId>
-		<version>2.5.0</version>
-		<scope>runtime</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.emf</groupId>
-		<artifactId>codegen-ecore</artifactId>
-		<version>2.5.0</version>
-		<scope>runtime</scope>
-	</dependency>
+		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
+		<version>2.9.0-SNAPSHOT</version>
+		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
+	</parent>
+	<packaging>eclipse-plugin</packaging>
 
-	<!-- other stuff -->
-	<dependency>
-		<groupId>com.ibm</groupId>
-		<artifactId>icu</artifactId>
-		<version>4.0.1</version>
-	</dependency>
-	
-  </dependencies>
+	<artifactId>org.eclipse.xtext.generator</artifactId>
+	<name>Xtext Generator</name>
 
-  <licenses>
-    <license>
-      <name>Eclipse Public License</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <organization>
-    <name>Eclipse</name>
-    <url>http://www.eclipse.org</url>
-  </organization>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.ecore</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+	</dependencies>
 </project>

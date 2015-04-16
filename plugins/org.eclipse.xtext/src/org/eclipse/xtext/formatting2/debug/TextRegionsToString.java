@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.debug;
 
-import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -26,7 +26,7 @@ public class TextRegionsToString {
 
 	public TextRegionsToString add(ITextSegment region, String description) {
 		text.add(region, getReplacement(region, region.getText()));
-		list.add(region, quote(region.getText(), 20) + ":" + description);
+		list.add(region, quote(region.getText(), 20) + ": " + description);
 		return this;
 	}
 

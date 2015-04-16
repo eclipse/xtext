@@ -76,6 +76,15 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<!-- IT Tests require xtend-maven-plugin is fully build -->
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>xtend-maven-plugin</artifactId>
+			<version>[${project.version}]</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<profiles>
 		<profile>
 			<id>m2e-embedded</id>

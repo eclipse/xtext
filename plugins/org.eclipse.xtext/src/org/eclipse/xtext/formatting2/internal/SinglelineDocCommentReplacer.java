@@ -8,8 +8,8 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -25,9 +25,9 @@ public class SinglelineDocCommentReplacer extends SinglelineCommentReplacer {
 		ITextSegment firstSpace = getFirstSpace();
 		if (firstSpace != null) {
 			if (hasEmptyBody())
-				context.replaceText(firstSpace, "");
+				context.addReplacement(firstSpace.replaceWith(""));
 			else
-				context.replaceText(firstSpace, " ");
+				context.addReplacement(firstSpace.replaceWith(" "));
 		}
 		return context;
 	}

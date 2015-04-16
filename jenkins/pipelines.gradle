@@ -1,10 +1,13 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
-def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
+def intellijSuites = ['intellij-tests']
+def onPushSuites = runtimeSuites + ideSuites + java8Suites + intellijSuites
+
+def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def smokeSuites = ['smoke-tests']
-def onPushSuites = runtimeSuites + ideSuites + java8Suites
-def allSuites = onPushSuites + slowSuites + smokeSuites 
+def generatorSuites = ['generator-tests']
+def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
 
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
 
@@ -15,7 +18,8 @@ branches.each { branch ->
 			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk)
 		}
 		.findAll {
-			!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest'
+			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
+			(!intellijSuites.contains(it.suite) || it.branch == 'master' && it.target == 'Latest')
 		}
 		.each {
 			if(java8Suites.contains(it.suite)) {
@@ -49,7 +53,7 @@ branches.each { branch ->
 					.name = "target-platform-refresh-${branch.name}"
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
-					.projects	= testJobs.findAll{slowSuites.contains(it.suite)}.collect{it.name}.join(',')
+					.projects	= testJobs.findAll{slowSuites.contains(it.suite) || generatorSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
 		}
 		
@@ -72,6 +76,10 @@ branches.each { branch ->
 						params += '\n-DJAVA8=true'
 						builder.installationName = 'buckminster-4.4'
 					}
+					if (generatorSuites.contains(job.suite)) {
+						params += '\n-DECLIPSE.TARGET.ALIAS=${ECLIPSE_TARGET_ALIAS}\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
+						builder.installationName = 'buckminster-mwe2-headless'
+					}
 					builder.commands = testScripts[job.suite]
 					builder.params = params
 					
@@ -79,7 +87,7 @@ branches.each { branch ->
 					trigger.triggerPhrase = "Jenkins ${job.name}"
 					trigger.commitStatusContext = "Jenkins/${job.name}"
 					trigger.project = job.name
-					if ((slowSuites + ideSuites).contains(job.suite)
+					if ((slowSuites + ideSuites + generatorSuites).contains(job.suite)
 						|| job.suite == 'xtext-runtime-tests' // these currently contain ui tests
 						) {
 						config.buildWrappers.appendNode {
@@ -102,6 +110,10 @@ branches.each { branch ->
 						}
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 600
+					}
+					if (intellijSuites.contains(job.suite)) {
+						def gradleBuilder = new XmlSlurper().parse(file('scripts/intellij-tests.xml'))
+						config.builders.appendNode(gradleBuilder)
 					}
 				}
 			}

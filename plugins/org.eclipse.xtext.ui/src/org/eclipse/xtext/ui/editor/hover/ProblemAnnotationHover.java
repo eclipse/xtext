@@ -62,8 +62,9 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 		final Set<String> messages = Sets.newLinkedHashSet();
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
 		for (Annotation annotation : annotations) {
-			if (annotation.getText() != null) {
-				messages.add(annotation.getText().trim());
+			String text = annotation.getText();
+			if (text != null) {
+				messages.add(text.trim());
 			}
 		}
 		if (messages.size()>0)
@@ -72,7 +73,7 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 	}
 	
 	protected String formatInfo(final Collection<String> messages) {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		if (messages.size() > 1) {
 			buffer.append(XtextUIMessages.AbstractHover_MultipleMarkers);
 			final Iterator<String> e = messages.iterator();
@@ -87,7 +88,7 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 		return buffer.toString();
 	}
 	
-	private String splitInfo(final String message, final StringBuffer buffer) {
+	private String splitInfo(final String message, final StringBuilder buffer) {
 		String msg = message;
 		String prefix = "";
 		int pos;

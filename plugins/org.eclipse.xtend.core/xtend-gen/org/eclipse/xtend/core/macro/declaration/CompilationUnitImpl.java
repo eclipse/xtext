@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.primitives.Booleans;
 import com.google.common.primitives.Bytes;
@@ -18,6 +19,8 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +35,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
@@ -88,6 +92,8 @@ import org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
+import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -185,6 +191,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -1983,6 +1990,127 @@ public class CompilationUnitImpl implements CompilationUnit {
       _xblockexpression = this.translate(_evaluate);
     }
     return _xblockexpression;
+  }
+  
+  public void handleProcessingError(final Iterable<? extends EObject> sourceElements, final Resource resource, final Throwable t) {
+    try {
+      if ((t instanceof VirtualMachineError)) {
+        throw t;
+      }
+      boolean _equals = Objects.equal(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+      if (_equals) {
+        Throwables.propagateIfPossible(t);
+        String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
+        throw new RuntimeException(_messageWithoutStackTrace, t);
+      }
+      final String msg = this.getMessageWithStackTrace(t);
+      final EList<Resource.Diagnostic> errors = resource.getErrors();
+      for (final EObject target : sourceElements) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (target instanceof XtendAnnotationTarget) {
+            _matched=true;
+            final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
+            EObject _xifexpression = null;
+            boolean _isEmpty = annotations.isEmpty();
+            if (_isEmpty) {
+              _xifexpression = target;
+            } else {
+              _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
+            }
+            EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
+            errors.add(_eObjectDiagnosticImpl);
+          }
+        }
+        if (!_matched) {
+          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, (-1), null);
+          errors.add(_eObjectDiagnosticImpl);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String getMessageWithStackTrace(final Throwable t) {
+    final Function1<Throwable, String> _function = new Function1<Throwable, String>() {
+      @Override
+      public String apply(final Throwable it) {
+        String _xblockexpression = null;
+        {
+          StringWriter _stringWriter = new StringWriter();
+          final Procedure1<StringWriter> _function = new Procedure1<StringWriter>() {
+            @Override
+            public void apply(final StringWriter it) {
+              PrintWriter _printWriter = new PrintWriter(it);
+              final Procedure1<PrintWriter> _function = new Procedure1<PrintWriter>() {
+                @Override
+                public void apply(final PrintWriter it) {
+                  String _messageWithoutStackTrace = CompilationUnitImpl.this.getMessageWithoutStackTrace(t);
+                  it.println(_messageWithoutStackTrace);
+                  t.printStackTrace(it);
+                  it.flush();
+                }
+              };
+              ObjectExtensions.<PrintWriter>operator_doubleArrow(_printWriter, _function);
+            }
+          };
+          final StringWriter writer = ObjectExtensions.<StringWriter>operator_doubleArrow(_stringWriter, _function);
+          _xblockexpression = writer.toString();
+        }
+        return _xblockexpression;
+      }
+    };
+    return this.getMessageWithReducedStackTrace(t, _function);
+  }
+  
+  protected String getMessageWithoutStackTrace(final Throwable t) {
+    String _xifexpression = null;
+    boolean _and = false;
+    if (!(t instanceof IncompatibleClassChangeError)) {
+      _and = false;
+    } else {
+      String _message = t.getMessage();
+      boolean _contains = _message.contains("org.eclipse.xtend.lib.macro");
+      _and = _contains;
+    }
+    if (_and) {
+      _xifexpression = "An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed.";
+    } else {
+      _xifexpression = "Error during annotation processing:";
+    }
+    return _xifexpression;
+  }
+  
+  protected String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable, ? extends String> getMessage) {
+    final StackTraceElement[] stackTrace = t.getStackTrace();
+    final ArrayList<StackTraceElement> reducedStackTrace = CollectionLiterals.<StackTraceElement>newArrayList();
+    for (final StackTraceElement it : stackTrace) {
+      {
+        boolean _or = false;
+        String _className = it.getClassName();
+        String _name = AnnotationProcessor.class.getName();
+        boolean _contains = _className.contains(_name);
+        if (_contains) {
+          _or = true;
+        } else {
+          String _className_1 = it.getClassName();
+          String _name_1 = ProblemSupportImpl.class.getName();
+          boolean _contains_1 = _className_1.contains(_name_1);
+          _or = _contains_1;
+        }
+        if (_or) {
+          try {
+            t.setStackTrace(((StackTraceElement[])Conversions.unwrapArray(reducedStackTrace, StackTraceElement.class)));
+            return getMessage.apply(t);
+          } finally {
+            t.setStackTrace(stackTrace);
+          }
+        }
+        reducedStackTrace.add(it);
+      }
+    }
+    return getMessage.apply(t);
   }
   
   @Pure

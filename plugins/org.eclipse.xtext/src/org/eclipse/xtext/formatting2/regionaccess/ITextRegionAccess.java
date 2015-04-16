@@ -11,32 +11,43 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * <p>This class provides access to {@link ITextSegment text regions } based on the semantic model. A text region
- * describes the offset and length in characters of a semantic elements within a text document.</p>
+ * <p>
+ * This class provides access to {@link ITextSegment text regions } based on the semantic model. A text region describes
+ * the offset and length in characters of a semantic elements within a text document.
+ * </p>
  * 
- * <p>Technically, it is a lightweight facade over the node model or the serializer's output.</p>
+ * <p>
+ * Technically, it is a lightweight facade over the node model or the serializer's output.
+ * </p>
  * 
- * <p>The text regions are arranged as a linked list of strictly alternating {@link ISemanticRegion semantic regions} and
- * {@link IHiddenRegion hidden region}. HiddenRegions group all hidden tokens (typically whitespace, newlines, tabs and comments)
- * between two semantic tokens. HiddenRegions are empty, but do exist, if there are no hidden tokens between two
- * semantic elements.</p>
+ * <p>
+ * The text regions are arranged as a linked list of strictly alternating {@link ISemanticRegion semantic regions} and
+ * {@link IHiddenRegion hidden region}. HiddenRegions group all hidden tokens (typically whitespace, newlines, tabs and
+ * comments) between two semantic tokens. HiddenRegions are empty, but do exist, if there are no hidden tokens between
+ * two semantic elements.
+ * </p>
  * 
- * <p>Tokens are considered to be hidden, when they have been parsed via terminal rule referenced in "hidden(...)" in the
- * Xtext grammar. In the node model, hidden tokens are usually marked as {@link ILeafNode#isHidden() hidden == true}.</p>
+ * <p>
+ * Tokens are considered to be hidden, when they have been parsed via terminal rule referenced in "hidden(...)" in the
+ * Xtext grammar. In the node model, hidden tokens are usually marked as {@link ILeafNode#isHidden() hidden == true}.
+ * </p>
  * 
- * <p>A semantic token can be the value of an EAttribute, a CrossReference or a keyword.</p>
+ * <p>
+ * A semantic token can be the value of an EAttribute, a CrossReference or a keyword.
+ * </p>
  * 
- * <p>A {@link IHiddenRegion} contains a list of {@link IHiddenRegionPart parts}, which are either {@link IWhitespace white space} or
- * {@link IComment comments}. A HiddenRegion can be empty.</p>
+ * <p>
+ * A {@link IHiddenRegion} contains a list of {@link IHiddenRegionPart parts}, which are either {@link IWhitespace white
+ * space} or {@link IComment comments}. A HiddenRegion can be empty.
+ * </p>
  * 
  * The purpose of this class is:
  * <ul>
@@ -57,29 +68,15 @@ import org.eclipse.xtext.resource.XtextResource;
 public interface ITextRegionAccess {
 
 	/**
-	 * @return a text region that spans all regions form parameter 'regions' and additionally the specified number of
-	 *         'leadingLines' and 'trailingLines'. This method is useful to create debug messages.
+	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
+	 *         model's root element, the {@link ParserRule} is returned.
 	 */
-	ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions);
-
-	/**
-	 * @return The very first {@link IHiddenRegion} inside the linked list of alternating {@link IHiddenRegion hidden regions} and
-	 *         {@link ISemanticRegion semantic regions}.
-	 */
-	IHiddenRegion getFirstRegionInFile();
-
-	/**
-	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject.
-	 */
-	AbstractElement getInvokingGrammarElement(EObject obj);
+	EObject getInvokingGrammarElement(EObject obj);
 
 	/**
 	 * @return The {@link XtextResource} that backs the document this class provides access to.
 	 */
 	XtextResource getResource();
-
-	// TODO: better getTextRegion(int offset, int length)?
-	String getText(int offset, int length);
 
 	/**
 	 * @return true, if one or more parse error occurred when parsing the document.
@@ -126,12 +123,6 @@ public interface ITextRegionAccess {
 	ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion region, String keyword);
 
 	/**
-	 * @return a text region for all leading whitespace in the same line as 'offset'. Characters are whitespace iff
-	 *         {@link Character#isWhitespace(char)}.
-	 */
-	ITextSegment indentationRegion(int offset);
-
-	/**
 	 * @return true, if the EObject's text range contains a line-wrap ("\n"). The EObject's text range reaches from the
 	 *         beginning of its first semantic region to the end of its last semantic region.
 	 */
@@ -148,10 +139,11 @@ public interface ITextRegionAccess {
 	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
 	 *         semantic region.
 	 */
-	ITextSegment regionForEObject(EObject object); // TODO: should be semantic region?
+	IEObjectRegion regionForEObject(EObject object); // TODO: should be semantic region?
 
 	/**
-	 * @return returns the first {@link ISemanticRegion} that represents the value of {@code owner.eGet(feature)}. May be null.
+	 * @return returns the first {@link ISemanticRegion} that represents the value of {@code owner.eGet(feature)}. May
+	 *         be null.
 	 */
 	ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feature);
 
@@ -168,14 +160,15 @@ public interface ITextRegionAccess {
 	ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule);
 
 	/**
-	 * @return All {@link ISemanticRegion semantic regions} that represent one of the provided 'keyword's and directly belong to the
-	 *         provided 'EObject'. Keywords of child-EObjects are not considered.
+	 * @return All {@link ISemanticRegion semantic regions} that represent one of the provided 'keyword's and directly
+	 *         belong to the provided 'EObject'. Keywords of child-EObjects are not considered.
 	 */
 	List<ISemanticRegion> regionsForKeywords(EObject owner, String... string);
 
 	/**
-	 * @return All {@link ISemanticRegion semantic regions} that represent a RuleCall to one of the provided AbstractRules and directly
-	 *         belong to the provided 'EObject'. RuleCalls of child-EObjects are not considered. May be null.
+	 * @return All {@link ISemanticRegion semantic regions} that represent a RuleCall to one of the provided
+	 *         AbstractRules and directly belong to the provided 'EObject'. RuleCalls of child-EObjects are not
+	 *         considered. May be null.
 	 */
 	List<ISemanticRegion> regionsForRuleCallsTo(EObject owner, AbstractRule... rule);
 
@@ -184,5 +177,21 @@ public interface ITextRegionAccess {
 	 * 
 	 * @see #leadingHiddenRegion(EObject)
 	 */
-	IHiddenRegion trailingHiddenRegion(EObject owner);
+	IHiddenRegion trailingHiddenRegion(EObject owner); // rename to nextHiddenRegion; do same with leading()
+
+	ITextRegionRewriter getRewriter();
+
+	IEObjectRegion regionForRootEObject();
+
+	ITextSegment regionForDocument();
+
+	ITextSegment regionForOffset(int offset, int length);
+
+	ILineRegion lineForOffset(int offset);
+
+	String textForOffset(int offset, int length);
+
+	ITextSegment merge(Iterable<? extends ITextSegment> segments);
+
+	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
 }

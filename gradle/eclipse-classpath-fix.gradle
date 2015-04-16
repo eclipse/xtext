@@ -1,0 +1,18 @@
+def unrollDependencies 
+unrollDependencies = { configuration, notation -> 
+	if (notation instanceof Project) {
+		dependencies.add(configuration, notation) {
+			transitive = false
+		}
+		notation.configurations[configuration].allDependencies.all {
+			unrollDependencies(configuration, it)
+		}
+	} else if (notation instanceof ProjectDependency) {
+		unrollDependencies(configuration, notation.dependencyProject)
+	} else {
+		dependencies.add(configuration, notation)
+	}
+}
+
+dependencies.ext.compile = unrollDependencies.curry('compile')
+dependencies.ext.testCompile = unrollDependencies.curry('testCompile')

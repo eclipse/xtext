@@ -9,11 +9,13 @@ import java.util.List;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Tuples;
@@ -107,7 +109,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 					//					System.out.println("error");
 					continue;
 				}
-				String between = access.getText(endOffset, lastOffset - endOffset);
+				String between = access.textForOffset(endOffset, lastOffset - endOffset);
 				int idx = between.lastIndexOf('\n');
 				if (idx >= 0)
 					return count + logicalLength(between.substring(idx + 1));
@@ -121,7 +123,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 			}
 			current = current.getPreviousContext();
 		}
-		String rest = access.getText(0, lastOffset);
+		String rest = access.textForOffset(0, lastOffset);
 		int idx = rest.lastIndexOf('\n');
 		if (idx >= 0)
 			return count + logicalLength(rest.substring(idx + 1));
@@ -207,46 +209,36 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	@Override
-	public void replaceText(CharSequence text) {
+	public void addReplacement(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
-		ITextSegment region = replacer.getRegion();
-		replaceText(region.getOffset(), region.getLength(), text);
-	}
-
-	@Override
-	public void replaceText(int offset, int length, CharSequence text) {
-		Preconditions.checkNotNull(text);
-		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, length, text.toString());
-		replaceText(replacement);
-	}
-
-	@Override
-	public void replaceText(ITextReplacement replacement) {
-		Preconditions.checkNotNull(replacer);
-		if (!replacer.getRegion().contains(replacement)) {
+		ITextSegment replacerRegion = replacer.getRegion();
+		if (!replacerRegion.contains(replacement)) {
 			String frameTitle = replacer.getClass().getSimpleName();
 			ITextSegment frameRegion = replacer.getRegion();
 			String replacerTitle = replacement.getReplacementText();
-			ITextSegment replacerRegion = replacement;
 			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
-					Tuples.create(replacerTitle, replacerRegion));
+					Tuples.create(replacerTitle, (ITextSegment) replacement));
 			document.getRequest().getExceptionHandler().accept(exception);
 			return;
 		}
 		if (!isInRequestedRange(replacement)) {
 			return;
 		}
+		if (document.getRequest().isFormatUndefinedHiddenRegionsOnly()) {
+			IHiddenRegion hidden = null;
+			if (replacerRegion instanceof IHiddenRegionPart)
+				hidden = ((IHiddenRegionPart) replacerRegion).getHiddenRegion();
+			else if (replacerRegion instanceof IHiddenRegion)
+				hidden = (IHiddenRegion) replacerRegion;
+			if (hidden == null || !hidden.isUndefined())
+				return;
+		}
 		try {
 			replacements.add(replacement);
 		} catch (ConflictingRegionsException e) {
 			document.getRequest().getExceptionHandler().accept(e);
 		}
-	}
-
-	@Override
-	public void replaceText(ITextSegment region, CharSequence text) {
-		replaceText(region.getOffset(), region.getLength(), text);
 	}
 
 	@Override
@@ -288,8 +280,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 			items.add("canAutowrap");
 		if (replacer != null) {
 			ITextSegment region = replacer.getRegion();
-			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(), replacer.getClass()
-					.getSimpleName(), replacer.toString()));
+			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(),
+					replacer.getClass().getSimpleName(), replacer.toString()));
 		}
 		if (replacements != null)
 			for (ITextReplacement r : replacements) {
@@ -321,8 +313,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 				if (nextReplacerIsChild) {
 					Preconditions.checkArgument(lastReplacer.getRegion().contains(replacer.getRegion()));
 				} else {
-					Preconditions.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion()
-							.getOffset());
+					Preconditions
+							.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
 				}
 				break;
 			}

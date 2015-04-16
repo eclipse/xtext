@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>180</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
+      <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>-1</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/eclipse/xtext.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.UserIdentity>
+        <name>Dennis Hübner</name>
+        <email>dennis.huebner@gmail.com</email>
+      </hudson.plugins.git.extensions.impl.UserIdentity>
+      <hudson.plugins.git.extensions.impl.PruneStaleBranch/>
+      <hudson.plugins.git.extensions.impl.CleanCheckout/>
+      <hudson.plugins.git.extensions.impl.CloneOption>
+        <shallow>true</shallow>
+        <reference></reference>
+        <timeout>60</timeout>
+      </hudson.plugins.git.extensions.impl.CloneOption>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>Java 6 Oracle</jdk>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf buildroot xtend.* repositories/* output
+mkdir buildroot
+mkdir output
+metacity --sm-disable --replace &amp;</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
+      <project>target-platforms-master</project>
+      <filter>Kepler/**</filter>
+      <target>repositories/eclipse/</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
+      <project>xtext-master</project>
+      <filter>xtext.p2.repository/**</filter>
+      <target>repositories</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Ant plugin="ant@1.2">
+      <targets>resolve.variables</targets>
+      <antName>(Default)</antName>
+      <buildFile>${WORKSPACE}/org.eclipse.xtext.git/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
+      <properties>xtext.p2.repository=file:${WORKSPACE}/repositories/xtext.p2.repository
+eclipse.tp=&quot;file:${WORKSPACE}/repositories/eclipse/Kepler/final&quot;
+src.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;
+dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;</properties>
+    </hudson.tasks.Ant>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-headless</installationName>
+      <commands>importtargetdefinition  -DuseMirror=false -A &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target
+
+resolve &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec&quot;
+
+build
+
+junit --launch &quot;org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml&quot;</commands>
+      <logLevel>debug</logLevel>
+      <params>-Declipse.p2.mirrors=false
+-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dxtext.checkout.location=${checkout.location}
+-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository
+-DSWTBOT=true</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand></userCommand>
+      <userWorkspace>${WORKSPACE}/buildroot/buckminster.workspace</userWorkspace>
+      <globalPropertiesFile></globalPropertiesFile>
+      <equinoxLauncherArgs></equinoxLauncherArgs>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>xtend.test.results/**,org.eclipse.xtext.git/tests/org.eclipse.xtend.ide.swtbot.tests/screenshots/**</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
+      <testResults>xtend.test.results/**</testResults>
+      <keepLongStdio>true</keepLongStdio>
+      <testDataPublishers/>
+      <healthScaleFactor>1.0</healthScaleFactor>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.tasks.Mailer plugin="mailer@1.11">
+      <recipients>alle-ki@itemis.de</recipients>
+      <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>org.eclipse.xtext.git/**</pattern>
+          <type>EXCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>xtend.test.results/**</pattern>
+          <type>EXCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>false</cleanWhenUnstable>
+      <cleanWhenFailure>false</cleanWhenFailure>
+      <cleanWhenNotBuilt>false</cleanWhenNotBuilt>
+      <cleanWhenAborted>false</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>30</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+          <description>Build timed out (after {0} minutes). Marking the build as failed.</description>
+        </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+        <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.17">
+      <takeScreenshot>false</takeScreenshot>
+      <useXauthority>true</useXauthority>
+    </hudson.plugins.xvnc.Xvnc>
+  </buildWrappers>
+</project>

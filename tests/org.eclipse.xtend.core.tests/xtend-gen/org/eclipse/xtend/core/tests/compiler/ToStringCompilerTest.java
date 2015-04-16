@@ -165,6 +165,39 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testVerbatimValues() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
+      _builder.append("@ToString(singleLine=true, verbatimValues = true) class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int[] a = #[1, 2, 3]");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            String _string = instance.toString();
+            boolean _contains = _string.contains("[I@");
+            Assert.assertTrue(_contains);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSkipNulls() {
     try {
       StringConcatenation _builder = new StringConcatenation();

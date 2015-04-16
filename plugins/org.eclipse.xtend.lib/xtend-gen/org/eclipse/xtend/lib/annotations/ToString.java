@@ -50,4 +50,10 @@ public @interface ToString {
    * Only list the values of the fields, not their names
    */
   public boolean hideFieldNames() default false;
+  /**
+   * By default, Iterables, Arrays and multiline Strings are pretty-printed.
+   * Switching to their normal representation makes the toString method significantly faster.
+   * @since 2.9
+   */
+  public boolean verbatimValues() default false;
 }

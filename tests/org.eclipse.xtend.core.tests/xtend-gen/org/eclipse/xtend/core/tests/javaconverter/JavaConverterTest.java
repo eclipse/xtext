@@ -2613,7 +2613,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("return 0 ");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("} else if (obj == \"test\") {");
+    _builder_1.append("} else if (obj === \"test\") {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("return 1 ");

@@ -10,8 +10,10 @@ package org.eclipse.xtext.formatting2.internal;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -43,25 +45,27 @@ public class MultilineCommentReplacer extends CommentReplacer {
 		if (!multiline)
 			return context;
 		IComment comment = getComment();
-		String oldIndentation = comment.getIndentation().getText();
+		ITextRegionAccess access = comment.getTextRegionAccess();
+		List<ILineRegion> lines = comment.getLineRegions();
+		String oldIndentation = lines.get(0).getIndentation().getText();
 		String indentationString = context.getIndentationString();
 		String newIndentation = indentationString + " " + prefix + " ";
-		List<ITextSegment> lines = comment.splitIntoLines();
 		for (int i = 1; i < lines.size() - 1; i++) {
 			ITextSegment line = lines.get(i);
 			String text = line.getText();
 			int prefixOffset = prefixOffset(text);
-			if (prefixOffset >= 0) {
-				context.replaceText(line.getOffset(), prefixOffset + 1, newIndentation);
-			} else if (text.startsWith(oldIndentation)) {
-				context.replaceText(line.getOffset(), oldIndentation.length(), newIndentation);
-			} else {
-				context.replaceText(line.getOffset(), 0, newIndentation);
-			}
+			ITextSegment target;
+			if (prefixOffset >= 0)
+				target = access.regionForOffset(line.getOffset(), prefixOffset + 1);
+			else if (text.startsWith(oldIndentation))
+				target = access.regionForOffset(line.getOffset(), oldIndentation.length());
+			else
+				target = access.regionForOffset(line.getOffset(), 0);
+			context.addReplacement(target.replaceWith(newIndentation));
 		}
 		if (lines.size() > 1) {
-			ITextSegment line = lines.get(lines.size() - 1);
-			context.replaceText(line.getIndentation(), indentationString + " ");
+			ILineRegion line = lines.get(lines.size() - 1);
+			context.addReplacement(line.getIndentation().replaceWith(indentationString + " "));
 		}
 		return context;
 	}

@@ -21,9 +21,9 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -64,7 +64,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public RichStringToLineModel(final ITextRegionAccess nodeModelAccess, final RichString string) {
     this.nodeModelAccess = nodeModelAccess;
     this.string = string;
-    String _text = ((ITextSegment) nodeModelAccess).getText();
+    ITextSegment _regionForDocument = nodeModelAccess.regionForDocument();
+    String _text = _regionForDocument.getText();
     this.document = _text;
   }
   

@@ -24,7 +24,6 @@ import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPacka
  */
 class DomainmodelFormatter extends XbaseFormatter {
 
-
 	def dispatch void format(DomainModel domainmodel, extension IFormattableDocument document) {
 		domainmodel.prepend[setNewLines(0, 0, 1); noSpace].append[newLine]
 		format(domainmodel.getImportSection(), document);
@@ -33,26 +32,30 @@ class DomainmodelFormatter extends XbaseFormatter {
 		}
 	}
 
-	def dispatch void format(PackageDeclaration packagedeclaration, extension IFormattableDocument document) {
-		packagedeclaration.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
-		packagedeclaration.regionForKeyword("{").append[newLine; increaseIndentation]
-		for (AbstractElement element : packagedeclaration.elements) {
+	def dispatch void format(PackageDeclaration pkg, extension IFormattableDocument document) {
+		val open = pkg.regionForKeyword("{")
+		val close = pkg.regionForKeyword("}")
+		pkg.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+		open.append[newLine]
+		interior(open, close)[indent]
+		for (AbstractElement element : pkg.elements) {
 			format(element, document);
 			element.append[setNewLines(1, 1, 2)]
 		}
-		packagedeclaration.regionForKeyword("}").prepend[decreaseIndentation]
 	}
 
 	def dispatch void format(Entity entity, extension IFormattableDocument document) {
+		val open = entity.regionForKeyword("{")
+		val close = entity.regionForKeyword("}")
 		entity.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
 		entity.superType.surround[oneSpace]
-		entity.regionForKeyword("{").append[newLine; increaseIndentation]
+		open.append[newLine]
+		interior(open, close)[indent]
 		format(entity.getSuperType(), document);
 		for (Feature feature : entity.features) {
 			format(feature, document);
 			feature.append[setNewLines(1, 1, 2)]
 		}
-		entity.regionForKeyword("}").prepend[decreaseIndentation]
 	}
 
 	def dispatch void format(Property property, extension IFormattableDocument document) {

@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import static org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback.*
 import java.util.List
+import java.util.Collections
 
 class ProblemSupportImpl implements ProblemSupport {
 	
@@ -67,8 +68,13 @@ class ProblemSupportImpl implements ProblemSupport {
 	}
 	
 	def validationPhaseStarted() {
-		delayedTasks.forEach[apply]
-		delayedTasks.clear
+		try {
+			delayedTasks.forEach[apply]
+		} catch (Throwable t) {
+			compilationUnit.handleProcessingError(Collections.singleton(compilationUnit.xtendFile) , compilationUnit.xtendFile.eResource, t)
+		} finally {
+			delayedTasks.clear
+		}
 	}
 	
 	override getProblems(Element element) {

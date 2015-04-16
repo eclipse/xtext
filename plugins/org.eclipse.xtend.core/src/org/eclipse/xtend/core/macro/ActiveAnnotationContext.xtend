@@ -9,108 +9,44 @@ package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.PrintWriter
-import java.io.StringWriter
 import java.util.List
 import java.util.Map
+import org.apache.log4j.Logger
+import org.eclipse.emf.common.notify.Notification
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendEnum
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
-import org.eclipse.xtend.core.xtend.XtendAnnotationType
-import com.google.common.base.Throwables
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.emf.common.notify.Notification
-import org.apache.log4j.Logger
-import org.eclipse.xtext.service.OperationCanceledError
-import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Sven Efftinge
  */
 @Accessors class ActiveAnnotationContext {
-	
 	val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
 	Object processorInstance
 	CompilationUnitImpl compilationUnit
 	
 	def void handleProcessingError(Resource resource, Throwable t) {
-		if (t instanceof VirtualMachineError)
-			throw t;
-		if (compilationUnit.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
-			Throwables.propagateIfPossible(t)
-			throw new RuntimeException(t.messageWithoutStackTrace, t)
-		}
-		val msg = t.messageWithStackTrace
-		val errors = resource.errors
-		val List<? extends EObject> sourceElements = getAnnotatedSourceElements();
-		for (EObject target : sourceElements) {
-			switch target {
-				XtendAnnotationTarget : {
-					val annotations = target.annotations
-					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, if (annotations.isEmpty()) target else annotations.head, null, -1, null));
-				}
-				default : {
-					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
-				}
-			}
-		}
+		compilationUnit.handleProcessingError(annotatedSourceElements, resource, t)
 	}
-	
-	def getMessageWithoutStackTrace(Throwable t) {
-		if (t instanceof IncompatibleClassChangeError && t.message.contains("org.eclipse.xtend.lib.macro")) {
-			"An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed."
-		} else {
-			"Error during annotation processing:"
-		}
-	}
-	
-	def getMessageWithStackTrace(Throwable t) {
-		t.getMessageWithReducedStackTrace [
-			val writer = new StringWriter => [
-				new PrintWriter(it) => [
-					println(t.messageWithoutStackTrace)
-					t.printStackTrace(it)
-					flush
-				]
-			]
-			writer.toString
-		]
-	}
-
-	def getMessageWithReducedStackTrace(Throwable t, (Throwable)=>String getMessage) {
-		val stackTrace = t.stackTrace
-		val reducedStackTrace = <StackTraceElement>newArrayList
-		for (it : stackTrace) {
-			if (className.contains(AnnotationProcessor.name)) {
-				try {
-					t.stackTrace = reducedStackTrace
-					return getMessage.apply(t)
-				} finally {
-					t.stackTrace = stackTrace
-				}
-			}
-			reducedStackTrace.add(it)
-		}
-		return getMessage.apply(t)
-	}
-	
 }
 
 class ActiveAnnotationContexts extends AdapterImpl {

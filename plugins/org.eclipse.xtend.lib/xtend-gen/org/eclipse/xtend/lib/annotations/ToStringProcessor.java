@@ -115,6 +115,14 @@ public class ToStringProcessor extends AbstractClassProcessor {
               }
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
+              {
+                boolean _isVerbatimValues = config.isVerbatimValues();
+                if (_isVerbatimValues) {
+                  _builder.append(".verbatimValues()");
+                }
+              }
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
               _builder.append(".toString();");
               _builder.newLine();
               _builder.append("return result;");
@@ -165,6 +173,13 @@ public class ToStringProcessor extends AbstractClassProcessor {
                 boolean _isHideFieldNames = config.isHideFieldNames();
                 if (_isHideFieldNames) {
                   _builder.append("b.hideFieldNames();");
+                }
+              }
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isVerbatimValues = config.isVerbatimValues();
+                if (_isVerbatimValues) {
+                  _builder.append("b.verbatimValues();");
                 }
               }
               _builder.newLineIfNotEmpty();

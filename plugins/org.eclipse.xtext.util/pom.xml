@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
+		<version>2.9.0-SNAPSHOT</version>
+		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
+	</parent>
+	<packaging>eclipse-plugin</packaging>
+
 	<artifactId>org.eclipse.xtext.util</artifactId>
 	<name>Xtext Util</name>
-	<description>Manually created POM</description>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-	</build>
+	<description>Xtext Util</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -51,18 +57,5 @@
 			<artifactId>org.eclipse.emf.common</artifactId>
 			<version>[2.9.0,)</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.dependencies</artifactId>
-			<version>[${project.version}]</version>
-			<type>pom</type>
-		</dependency>
 	</dependencies>
-
-	<parent>
-		<relativePath>../../maven/org.eclipse.xtext.parent</relativePath>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
-		<version>2.9.0-SNAPSHOT</version>
-	</parent>
 </project>

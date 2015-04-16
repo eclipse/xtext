@@ -150,7 +150,10 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_PACKAGE);
     QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change package declaration to \'test\'");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package test class Foo {");
+    _builder_1.append("package test");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -237,7 +240,10 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_PACKAGE);
     QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change package declaration to \'test\'");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package test import static test.C.D.*");
+    _builder_1.append("package test");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import static test.C.D.*");
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();

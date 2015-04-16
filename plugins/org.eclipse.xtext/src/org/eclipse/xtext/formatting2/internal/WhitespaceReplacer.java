@@ -11,9 +11,9 @@ import org.eclipse.xtext.formatting2.IAutowrapFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -55,7 +55,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 				if (newLineMax != null)
 					return newLineMax;
 			} else {
-				int lineCount = region.getLineCount();
+				int lineCount = region.getLineCount() - 1;
 				if (newLineMin != null && newLineMin > lineCount)
 					lineCount = newLineMin;
 				if (newLineMax != null && newLineMax < lineCount)
@@ -77,19 +77,19 @@ public class WhitespaceReplacer implements ITextReplacer {
 		if (newLineCount == 0 && context.isAutowrap()) {
 			IAutowrapFormatter onAutowrap = formatting.getOnAutowrap();
 			if (onAutowrap != null) {
-				onAutowrap.format(formatting.asFormatter(), context.getDocument());
+				onAutowrap.format(region, formatting, context.getDocument());
 			}
 			newLineCount = 1;
 		}
 		int indentationCount = computeNewIndentation(context);
 		if (newLineCount == 0 && trailingNewLinesOfPreviousRegion == 0) {
 			if (space != null)
-				context.replaceText(region, space);
+				context.addReplacement(region.replaceWith(space));
 		} else {
 			boolean noIndentation = formatting.getNoIndentation() == Boolean.TRUE;
 			String newLines = context.getNewLinesString(newLineCount);
 			String indentation = noIndentation ? "" : context.getIndentationString(indentationCount);
-			context.replaceText(region, newLines + indentation);
+			context.addReplacement(region.replaceWith(newLines + indentation));
 		}
 		return context.withIndentation(indentationCount);
 	}
@@ -112,7 +112,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 		int offset = region.getOffset();
 		if (offset < 1)
 			return 0;
-		String previous = region.getTextRegionAccess().getText(offset - 1, 1);
+		String previous = region.getTextRegionAccess().textForOffset(offset - 1, 1);
 		if ("\n".equals(previous))
 			return 1;
 		return 0;

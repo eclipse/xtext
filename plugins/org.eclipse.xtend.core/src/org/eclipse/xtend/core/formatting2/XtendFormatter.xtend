@@ -102,11 +102,12 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	def protected formatBody(XtendTypeDeclaration type, extension IFormattableDocument format) {
-		val clazzOpenBrace = type.regionForKeyword("{")
-		clazzOpenBrace.prepend(bracesInNewLine)
+		val open = type.regionForKeyword("{")
+		val close = type.regionForKeyword("}")
+		interior(open, close) [indent]
+		open.prepend(bracesInNewLine)
 		if (!type.members.empty) {
-			clazzOpenBrace.append[increaseIndentation]
-			clazzOpenBrace.append(blankLinesBeforeFirstMember)
+			open.append(blankLinesBeforeFirstMember)
 			for (i : 0 .. (type.members.size - 1)) {
 				val current = type.members.get(i)
 				current.format(format)
@@ -120,15 +121,11 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 						current.append(blankLinesBetweenFieldsAndMethods)
 				} else {
 					val member = type.members.get(i)
-					member.append[decreaseIndentation]
 					member.append(blankLinesAfterLastMember)
 				}
 			}
 		} else {
-			if (clazzOpenBrace?.nextHiddenRegion?.containsComment)
-				clazzOpenBrace.append[newLine increaseIndentation decreaseIndentation]
-			else
-				clazzOpenBrace.append[newLine]
+			open.append[newLine]
 		}
 	}
 
@@ -156,23 +153,23 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		formatAnnotations(enumeration, format, newLineAfterClassAnnotations)
 		formatModifiers(enumeration, format)
 		enumeration.regionForKeyword("enum").append[oneSpace]
-		val clazzOpenBrace = enumeration.regionForKeyword("{")
-		clazzOpenBrace.prepend(bracesInNewLine)
+		val open = enumeration.regionForKeyword("{")
+		val close = enumeration.regionForKeyword("}")
+		interior(open, close)[indent]
+		open.prepend(bracesInNewLine)
 		if (!enumeration.members.empty) {
-			clazzOpenBrace.append[increaseIndentation]
-			clazzOpenBrace.append(blankLinesBeforeFirstMember)
+			open.append(blankLinesBeforeFirstMember)
 			for (i : 0 .. (enumeration.members.size - 1)) {
 				val current = enumeration.members.get(i)
 				current.format(format)
 				if (i < enumeration.members.size - 1) {
 					current.immediatelyFollowingKeyword(",").prepend[noSpace].append(blankLinesBetweenEnumLiterals)
 				} else {
-					current.append[decreaseIndentation]
 					current.append(blankLinesAfterLastMember)
 				}
 			}
 		} else {
-			clazzOpenBrace.append[newLine]
+			open.append[newLine]
 		}
 	}
 

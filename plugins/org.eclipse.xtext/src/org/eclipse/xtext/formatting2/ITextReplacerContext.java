@@ -9,6 +9,8 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+
 /**
  * Relevant state and methods during execution of a {@link ITextReplacer text replacer}.
  * 
@@ -18,6 +20,8 @@ import java.util.List;
  * @author Moritz Eysholdt - Initial API and implementation
  */
 public interface ITextReplacerContext {
+
+	void addReplacement(ITextReplacement replacement);
 
 	Integer canAutowrap();
 
@@ -29,6 +33,7 @@ public interface ITextReplacerContext {
 
 	/**
 	 * Returns the current indentation as a string.
+	 * 
 	 * @see #getIndentationString(int)
 	 * @see #getIndentation()
 	 */
@@ -36,11 +41,11 @@ public interface ITextReplacerContext {
 
 	String getIndentationString(int indentationLevel);
 
-	String getNewLinesString(int count);
-
 	int getLeadingCharsInLineCount();
 
 	Iterable<ITextReplacement> getLocalReplacements();
+
+	String getNewLinesString(int count);
 
 	ITextReplacerContext getPreviousContext();
 
@@ -52,23 +57,15 @@ public interface ITextReplacerContext {
 
 	boolean isInsideFormattedRegion();
 
-	void replaceText(CharSequence text);
-
-	void replaceText(int offset, int length, CharSequence text);
-
-	void replaceText(ITextReplacement replacement);
-
-	void replaceText(ITextSegment region, CharSequence text);
-
 	void setAutowrap(boolean value);
 
 	void setCanAutowrap(Integer value);
 
 	void setNextReplacerIsChild();
 
-	ITextReplacerContext withIndentation(int indentation);
-	
 	ITextReplacerContext withDocument(IFormattableDocument document);
+
+	ITextReplacerContext withIndentation(int indentation);
 
 	ITextReplacerContext withReplacer(ITextReplacer replacer);
 

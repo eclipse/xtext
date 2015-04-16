@@ -8,11 +8,8 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 
 /**
  * Represents the value of an {@link EAttribute}, {@link CrossReference}, or {@link Keyword} inside a text document.
@@ -24,16 +21,6 @@ import org.eclipse.xtext.RuleCall;
  * 
  * @since 2.8
  */
-public interface ISemanticRegion extends ISequentialRegion {
+public interface ISemanticRegion extends ISequentialRegion, IAstRegion {
 
-	/**
-	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall},
-	 *         {@link CrossReference}, or {@link Keyword}.
-	 */
-	AbstractElement getGrammarElement();
-
-	/**
-	 * The EObject this semantic region belongs to.
-	 */
-	EObject getSemanticElement();
 }

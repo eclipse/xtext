@@ -8,10 +8,13 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import com.google.inject.Inject;
+import javax.inject.Provider;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -19,7 +22,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +40,14 @@ public class RegionAccessTest {
   private ParseHelper<Root> parseHelper;
   
   @Inject
+  private Provider<TextRegionAccessBuilder> textRegionAccessBuilder;
+  
+  @Inject
   private ValidationTestHelper validationTestHelper;
+  
+  @Inject
+  @Extension
+  private Serializer serializer;
   
   @Test
   public void testSimple() {
@@ -1059,20 +1071,30 @@ public class RegionAccessTest {
   
   private void operator_tripleEquals(final CharSequence file, final CharSequence expectation) {
     try {
+      final String exp = expectation.toString();
       final Root obj = this.parseHelper.parse(file);
       this.validationTestHelper.assertNoErrors(obj);
-      NodeModelBasedRegionAccess.Builder _builder = new NodeModelBasedRegionAccess.Builder();
-      Resource _eResource = obj.eResource();
-      NodeModelBasedRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
-      final NodeModelBasedRegionAccess access = _withResource.create();
-      TokenAccessToString _tokenAccessToString = new TokenAccessToString();
-      TokenAccessToString _withOrigin = _tokenAccessToString.withOrigin(access);
-      TokenAccessToString _hideColumnExplanation = _withOrigin.hideColumnExplanation();
-      final String actual = _hideColumnExplanation.toString();
-      String _string = expectation.toString();
-      Assert.assertEquals(_string, (actual + "\n"));
+      final ITextRegionAccess access1 = this.createFromNodeModel(obj);
+      final ITextRegionAccess access2 = this.serializer.serializeToRegions(obj);
+      TextRegionAccessToString _textRegionAccessToString = new TextRegionAccessToString();
+      TextRegionAccessToString _withRegionAccess = _textRegionAccessToString.withRegionAccess(access1);
+      TextRegionAccessToString _hideColumnExplanation = _withRegionAccess.hideColumnExplanation();
+      String _plus = (_hideColumnExplanation + "\n");
+      Assert.assertEquals(exp, _plus);
+      TextRegionAccessToString _textRegionAccessToString_1 = new TextRegionAccessToString();
+      TextRegionAccessToString _withRegionAccess_1 = _textRegionAccessToString_1.withRegionAccess(access2);
+      TextRegionAccessToString _hideColumnExplanation_1 = _withRegionAccess_1.hideColumnExplanation();
+      String _plus_1 = (_hideColumnExplanation_1 + "\n");
+      Assert.assertEquals(exp, _plus_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private ITextRegionAccess createFromNodeModel(final EObject obj) {
+    TextRegionAccessBuilder _get = this.textRegionAccessBuilder.get();
+    Resource _eResource = obj.eResource();
+    TextRegionAccessBuilder _forNodeModel = _get.forNodeModel(((XtextResource) _eResource));
+    return _forNodeModel.create();
   }
 }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -20,9 +22,9 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
 	private final NodeHiddenRegion hiddenRegion;
 
-	protected NodeHidden(NodeHiddenRegion gap, INode node) {
-		super((NodeModelBasedRegionAccess) gap.getTextRegionAccess(), node);
-		this.hiddenRegion = gap;
+	protected NodeHidden(NodeHiddenRegion hidden, INode node) {
+		super((NodeModelBasedRegionAccess) hidden.getTextRegionAccess(), node);
+		this.hiddenRegion = hidden;
 	}
 
 	@Override
@@ -38,17 +40,19 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
 	@Override
 	public IHiddenRegionPart getNextHiddenPart() {
-		int i = hiddenRegion.hiddens.indexOf(this) + 1;
-		if (i < hiddenRegion.hiddens.size())
-			return hiddenRegion.hiddens.get(i);
+		List<IHiddenRegionPart> parts = hiddenRegion.getParts();
+		int i = parts.indexOf(this) + 1;
+		if (i < parts.size())
+			return parts.get(i);
 		return null;
 	}
 
 	@Override
 	public IHiddenRegionPart getPreviousHiddenPart() {
-		int i = hiddenRegion.hiddens.indexOf(this) - 1;
+		List<IHiddenRegionPart> parts = hiddenRegion.getParts();
+		int i = parts.indexOf(this) - 1;
 		if (i > 0)
-			return hiddenRegion.hiddens.get(i);
+			return parts.get(i);
 		return null;
 	}
 

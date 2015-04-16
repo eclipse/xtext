@@ -228,9 +228,13 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			RuleCall rc = (RuleCall) ge;
 			if (rc.getRule() instanceof TerminalRule)
 				acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
-			else if (rc.getRule() instanceof ParserRule)
-				acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
-			else if (rc.getRule() instanceof EnumRule)
+			else if (rc.getRule() instanceof ParserRule) {
+				StringBuilder text = new StringBuilder();
+				for (ILeafNode leaf : node.getLeafNodes())
+					if (text.length() > 0 || !leaf.isHidden())
+						text.append(leaf.getText());
+				acceptUnassignedDatatype(rc, text.toString(), (ICompositeNode) node);
+			} else if (rc.getRule() instanceof EnumRule)
 				acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
 		} else if (ge instanceof Action)
 			acceptUnassignedAction((Action) ge);

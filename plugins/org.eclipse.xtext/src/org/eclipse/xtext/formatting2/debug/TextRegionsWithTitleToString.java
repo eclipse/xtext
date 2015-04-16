@@ -9,11 +9,11 @@ package org.eclipse.xtext.formatting2.debug;
 
 import java.util.List;
 
-import org.eclipse.xtext.formatting2.ITextReplacement;
-import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.TextReplacements;
-import org.eclipse.xtext.formatting2.internal.TextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -75,13 +75,15 @@ public class TextRegionsWithTitleToString {
 	public ITextSegment getFrame() {
 		if (this.frame != null)
 			return this.frame;
-		List<ITextSegment> segments = Lists.newArrayList();
-		for (Item item : items)
-			segments.add(item.getRegion());
-		ITextSegment[] array = segments.toArray(new ITextSegment[segments.size()]);
-		ITextRegionAccess regionAccess = getTextRegionAccess();
-		if (regionAccess != null)
-			return regionAccess.expandRegionsByLines(getLeadingLines(), getTrailingLines(), array);
+		ITextRegionAccess access = getTextRegionAccess();
+		if (access != null) {
+			List<ITextSegment> segments = Lists.newArrayList();
+			for (Item item : items)
+				segments.add(item.getRegion());
+			ITextSegment impactRegion = access.merge(segments);
+			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
+			return access.merge(expandToLines);
+		}
 		return null;
 	}
 
@@ -134,6 +136,7 @@ public class TextRegionsWithTitleToString {
 		ITextSegment frame = getFrame();
 		if (access == null || frame == null)
 			return "(null)";
+		ITextRegionRewriter rewriter = access.getRewriter();
 		StringBuilder builder = new StringBuilder();
 		List<ITextReplacement> replacements = Lists.newArrayList();
 		for (int i = 0; i < this.items.size(); i++) {
@@ -143,10 +146,10 @@ public class TextRegionsWithTitleToString {
 			String open = i < BRACKETS_OPEN.length ? BRACKETS_OPEN[i] : "[" + i + "[";
 			String close = i < BRACKETS_CLOSE.length ? BRACKETS_CLOSE[i] : "]" + i + "]";
 			builder.append(open + close + ": " + item.getTitle() + " at " + regionStr + "\n");
-			replacements.add(new TextReplacement(access, region.getOffset(), 0, open));
-			replacements.add(new TextReplacement(access, region.getEndOffset(), 0, close));
+			replacements.add(rewriter.createReplacement(region.getOffset(), 0, open));
+			replacements.add(rewriter.createReplacement(region.getEndOffset(), 0, close));
 		}
-		String vizualized = TextReplacements.apply(frame, replacements);
+		String vizualized = rewriter.renderToString(frame, replacements);
 		builder.append(box("document snippet", vizualized));
 		return builder.toString();
 	}

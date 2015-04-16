@@ -27,10 +27,10 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting
 import org.eclipse.xtext.formatting2.ITextReplacer
-import org.eclipse.xtext.formatting2.ITextSegment
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer
-import org.eclipse.xtext.formatting2.internal.TextSegment
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XbasePackage
 
@@ -211,7 +211,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	new(ITextRegionAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess
 		this.string = string
-		this.document = (nodeModelAccess as ITextSegment).getText()
+		this.document = nodeModelAccess.regionForDocument.text
 	}
 
 	def outdentThisLine() {

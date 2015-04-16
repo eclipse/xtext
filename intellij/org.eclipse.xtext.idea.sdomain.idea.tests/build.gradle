@@ -1,3 +1,7 @@
+dependencies {
+	testCompile project(':intellij:org.eclipse.xtext.idea.tests')
+}
+
 ideaDevelopment {
 	pluginDependencies {
 		project ':intellij:org.eclipse.xtext.idea'

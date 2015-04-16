@@ -18,12 +18,42 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 public class FormatterTestRequest {
-	boolean allowSyntaxErrors = false;
+	private boolean allowSyntaxErrors = false;
+	private boolean allowUnformattedWhitespace = true; // TODO: default should be false
 	private CharSequence expectation;
 	private FormatterRequest request;
 	private CharSequence toBeFormatted;
+	private boolean useNodeModel = true;
+	private boolean useSerializer = true;
+	
+	public boolean isAllowUnformattedWhitespace() {
+		return allowUnformattedWhitespace;
+	}
+	
+	public FormatterTestRequest setAllowUnformattedWhitespace(boolean allowUnformattedWhitespace) {
+		this.allowUnformattedWhitespace = allowUnformattedWhitespace;
+		return this;
+	}
 
-	// boolean allowUnformattedGaps = false
+	public boolean isUseNodeModel() {
+		return useNodeModel;
+	}
+
+	public boolean isUseSerializer() {
+		return useSerializer;
+	}
+
+	public FormatterTestRequest setUseNodeModel(boolean useNodeModel) {
+		this.useNodeModel = useNodeModel;
+		return this;
+	}
+
+	public FormatterTestRequest setUseSerializer(boolean useSerializer) {
+		this.useSerializer = useSerializer;
+		return this;
+	}
+
+	// make all HiddenRegions as 'unknown' aka "ignoreOldHiddens"
 	// boolean allowReplacementsAcrossTokens = false;
 
 	public CharSequence getExpectation() {

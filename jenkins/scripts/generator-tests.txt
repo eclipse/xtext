@@ -1,0 +1,18 @@
+setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+importprefs -F ${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf
+
+import "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+
+build
+
+launch --stderr --stdout --launch "org.eclipse.xtext.language-generator/GenerateAllLanguages.mwe2.launch"
+
+
+build
+
+junit --launch "org.eclipse.xtext.tests/xtext.tests.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.tests.xml"
+junit --launch "org.eclipse.xtext.xtext.ui.tests/xtext.xtext.ui.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.xtext.ui.tests.fast.xml"
+junit --launch "org.eclipse.xtext.ui.tests/xtext.ui.tests.fast.launch" --flatXML --output "${WORKSPACE}/test.results/xtext.ui.tests.fast.xml"

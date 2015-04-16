@@ -1,0 +1,9 @@
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery"
+importprefs -F "${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-idea.cquery"
+
+build

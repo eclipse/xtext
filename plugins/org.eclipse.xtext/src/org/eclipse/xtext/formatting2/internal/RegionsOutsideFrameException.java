@@ -9,8 +9,8 @@ package org.eclipse.xtext.formatting2.internal;
 
 import java.util.List;
 
-import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.debug.TextRegionsWithTitleToString;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Joiner;

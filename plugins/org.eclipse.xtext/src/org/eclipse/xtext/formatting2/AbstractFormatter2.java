@@ -15,15 +15,16 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.internal.CommentReplacer;
+import org.eclipse.xtext.formatting2.internal.DoubleHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.internal.MultilineCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.RootDocument;
+import org.eclipse.xtext.formatting2.internal.SingleHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.SinglelineCodeCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.SinglelineDocCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.SubDocument;
-import org.eclipse.xtext.formatting2.internal.TextReplacement;
 import org.eclipse.xtext.formatting2.internal.TextReplacerContext;
 import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
 import org.eclipse.xtext.formatting2.internal.WhitespaceReplacer;
@@ -31,6 +32,9 @@ import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextReplacement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.TypedPreferenceKey;
@@ -172,8 +176,8 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	/**
-	 * For {@link XtextResource resources}, assume we want to format the first EObject from the contents list only. Because
-	 * that's where the parser puts the semantic model.
+	 * For {@link XtextResource resources}, assume we want to format the first EObject from the contents list only.
+	 * Because that's where the parser puts the semantic model.
 	 */
 	protected void _format(XtextResource resource, IFormattableDocument document) {
 		List<EObject> contents = resource.getContents();
@@ -190,7 +194,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 			if (ruleName.startsWith("ML"))
 				return new MultilineCommentReplacer(comment, '*');
 			if (ruleName.startsWith("SL")) {
-				if (comment.getIndentation().getLength() > 0)
+				if (comment.getLineRegions().get(0).getIndentation().getLength() > 0)
 					return new SinglelineDocCommentReplacer(comment, "//");
 				else
 					return new SinglelineCodeCommentReplacer(comment, "//");
@@ -208,16 +212,20 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new HiddenRegionFormatting(this);
 	}
 
+	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting formatting) {
+		return new SingleHiddenRegionFormatter(formatting);
+	}
+
+	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting f1, IHiddenRegionFormatting f2) {
+		return new DoubleHiddenRegionFormatter(f1, f2);
+	}
+
 	public IMerger<IHiddenRegionFormatting> createHiddenRegionFormattingMerger() {
 		return new HiddenRegionFormattingMerger(this);
 	}
 
 	public ITextReplacer createHiddenRegionReplacer(IHiddenRegion region, IHiddenRegionFormatting formatting) {
 		return new HiddenRegionReplacer(region, formatting);
-	}
-
-	public ITextReplacement createTextReplacement(int offset, int length, String text) {
-		return new TextReplacement(getRequest().getTextRegionAccess(), offset, length, text);
 	}
 
 	public ITextReplacerContext createTextReplacerContext(IFormattableDocument document) {
@@ -231,7 +239,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	public ITextReplacer createWhitespaceReplacer(ITextSegment hiddens, IHiddenRegionFormatting formatting) {
 		return new WhitespaceReplacer(hiddens, formatting);
 	}
-	
+
 	public IFormattableDocument createFormattableRootDocument() {
 		return new RootDocument(this);
 	}

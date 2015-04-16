@@ -13,6 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -150,4 +153,12 @@ public interface IFormattableDocument {
 	 */
 	IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<? super IHiddenRegionFormatter> init);
 
+	Pair<IHiddenRegion, IHiddenRegion> set(IHiddenRegion first, IHiddenRegion second,
+			Procedure1<? super IHiddenRegionFormatter> init);
+
+	<T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(T1 first, T2 second, Procedure1<? super IHiddenRegionFormatter> init);
+
+	<T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init);
 }

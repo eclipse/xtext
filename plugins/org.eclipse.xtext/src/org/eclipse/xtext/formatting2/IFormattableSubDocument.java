@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+
 /**
  * A sub document describes the formatting for a part of the entire document.
  * 

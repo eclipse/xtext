@@ -8,8 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -18,11 +17,11 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeRegion extends AbstractTextSegment {
 	private final INode node;
-	private final NodeModelBasedRegionAccess tokenAccess;
+	private final NodeModelBasedRegionAccess access;
 
-	protected NodeRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
+	protected NodeRegion(NodeModelBasedRegionAccess access, INode node) {
 		super();
-		this.tokenAccess = tokenAccess;
+		this.access = access;
 		this.node = node;
 	}
 
@@ -46,11 +45,11 @@ public class NodeRegion extends AbstractTextSegment {
 
 	@Override
 	public ITextRegionAccess getTextRegionAccess() {
-		return tokenAccess;
+		return access;
 	}
 
 	@Override
 	public String toString() {
-		return new TokenAccessToString().withOrigin(this).hightlightOrigin().toString();
+		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
 	}
 }

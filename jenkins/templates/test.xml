@@ -54,7 +54,7 @@
       <hudson.plugins.git.extensions.impl.CloneOption>
         <shallow>false</shallow>
         <reference></reference>
-        <timeout>30</timeout>
+        <timeout>60</timeout>
       </hudson.plugins.git.extensions.impl.CloneOption>
     </extensions>
   </scm>
@@ -113,7 +113,10 @@ mkdir output</command>
       <filter>${ECLIPSE_TARGET_ALIAS}/**</filter>
       <target>repositories/eclipse/</target>
       <excludes></excludes>
-      <selector class="hudson.plugins.copyartifact.WorkspaceSelector"/>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Ant plugin="ant@1.2">
@@ -138,7 +141,9 @@ dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.rele
 resolve &quot;${releng.project}/releng/xtext.cquery&quot;
 importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</commands>
         <logLevel>info</logLevel>
-        <params>-Dreleng.project=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/</params>
+        <params>-Dreleng.project=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/
+-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dxtext.checkout.location=${checkout.location}</params>
         <targetPlatformName>None</targetPlatformName>
         <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
         <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
@@ -165,7 +170,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
   </builders>
   <publishers>
     <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
-      <testResults>test.results/**</testResults>
+      <testResults>**/test.results/**.xml,**/test-results/**.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
@@ -178,6 +183,24 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
 		<com.cloudbees.jenkins.GitHubCommitNotifier>
       <resultOnFailure>FAILURE</resultOnFailure>
     </com.cloudbees.jenkins.GitHubCommitNotifier>
+		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>org.eclipse.xtext.git/**</pattern>
+          <type>EXCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>true</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>false</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>true</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
     <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
