@@ -2593,37 +2593,39 @@ org.eclipse.xtext.xbase.lib.util.ToStringBuilder -> org.eclipse.xtext.xbase.lib.
     boolean multiLine -> multiLine
     boolean skipNulls -> skipNulls
     boolean showFieldNames -> showFieldNames
+    boolean prettyPrint -> prettyPrint
     java.util.ArrayList parts -> parts
-    128:129:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
-    137:138:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
-    146:147:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
-    156:165:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
-    174:183:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
-    192:202:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
-    208:224:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
-    234:234:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
-    242:242:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
-    246:248:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
-    252:254:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
-    258:261:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
-    269:312:java.lang.String toString() -> toString
-    316:381:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
-    384:420:void serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
-    423:427:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
-    432:442:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
-    206:206:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
+    130:131:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
+    139:140:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
+    148:149:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
+    159:160:org.eclipse.xtext.xbase.lib.util.ToStringBuilder verbatimValues() -> verbatimValues
+    169:178:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
+    187:196:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
+    205:215:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
+    221:237:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
+    247:247:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
+    255:255:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
+    259:261:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
+    265:267:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
+    271:274:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
+    282:325:java.lang.String toString() -> toString
+    329:394:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
+    397:433:void serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
+    436:440:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
+    445:455:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
+    219:219:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
-    161:162:void apply(java.lang.reflect.Field) -> apply
+    174:175:void apply(java.lang.reflect.Field) -> apply
     1:1:void apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
-    179:180:void apply(java.lang.reflect.Field) -> apply
+    192:193:void apply(java.lang.reflect.Field) -> apply
     1:1:void apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3:
     org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
     java.lang.String val$fieldName -> val$fieldName
-    197:198:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
+    210:211:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
     1:1:java.lang.Object apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder:
     java.lang.StringBuilder builder -> builder
