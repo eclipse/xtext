@@ -121,7 +121,7 @@ public class ContentFormatter implements IContentFormatter {
 	protected void initRequest(IXtextDocument document, IRegion region, XtextResource resource, FormatterRequest request) {
 		ITextRegion textRegion = new TextRegion(region.getOffset(), region.getLength());
 		request.setAllowIdentityEdits(false);
-		request.setFormatUndenfinedTokensOnly(false);
+		request.setFormatUndefinedHiddenRegionsOnly(false);
 		request.setRegions(singletonList(textRegion));
 		ITextRegionAccess tokenAccess = regionBuilder.forNodeModel(resource).create();
 		IPreferenceValues preferenceValues = preferencesProvider.getPreferenceValues(resource);
