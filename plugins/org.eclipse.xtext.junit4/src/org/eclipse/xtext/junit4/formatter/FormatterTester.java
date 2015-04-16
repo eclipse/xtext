@@ -10,7 +10,6 @@ package org.eclipse.xtext.junit4.formatter;
 import static com.google.common.base.Preconditions.*;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -20,12 +19,11 @@ import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
-import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
@@ -66,40 +64,13 @@ public class FormatterTester {
 	private Serializer serializer;
 
 	protected void assertAllWhitespaceIsFormatted(ITextRegionAccess access, List<ITextReplacement> replacements) {
-		List<ITextReplacement> actual = Lists.newArrayList(replacements);
-		Collections.sort(actual);
 		List<ITextSegment> expected = Lists.newArrayList();
 		IHiddenRegion current = access.regionForRootEObject().getPreviousHiddenRegion();
 		while (current != null) {
-			if (current.getLength() == 0) {
-				expected.add(current);
-			} else {
-				for (IHiddenRegionPart part : current.getParts())
-					if (part instanceof IWhitespace)
-						expected.add(part);
-			}
+			expected.addAll(current.getMergedSpaces());
 			current = current.getNextHiddenRegion();
 		}
-		int e = 0, a = 0;
-		List<ITextSegment> missing = Lists.newArrayList();
-		while (e < expected.size() && a < actual.size()) {
-			ITextSegment hidden = expected.get(e);
-			ITextReplacement replacement = actual.get(a);
-			int compareTo = hidden.compareTo(replacement);
-			if (compareTo == 0) {
-				e++;
-				a++;
-			} else if (compareTo < 1) {
-				missing.add(hidden);
-				e++;
-			} else {
-				a++;
-			}
-		}
-		while (e < expected.size()) {
-			missing.add(expected.get(e));
-			e++;
-		}
+		List<ITextSegment> missing = TextRegions.difference(expected, replacements);
 		if (!missing.isEmpty()) {
 			TextRegionsToString toString = new TextRegionsToString().setTextRegionAccess(access);
 			for (ITextSegment region : missing)
