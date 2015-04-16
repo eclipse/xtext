@@ -19,7 +19,6 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 
 import com.google.common.collect.Lists;
 
@@ -91,12 +90,12 @@ public class HiddenRegionReplacer implements ITextReplacer {
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		AbstractFormatter2 formatter = context.getFormatter();
 		List<IHiddenRegionPart> hiddens = region.getParts();
-		if (region.isUndefined() || hiddens.isEmpty()) {
+		if (hiddens.isEmpty()) {
 			return formatter.createWhitespaceReplacer(region, formatting).createReplacements(context);
 		} else if ((hiddens.size() == 1 && hiddens.get(0) instanceof IWhitespace)) {
 			return formatter.createWhitespaceReplacer(hiddens.get(0), formatting).createReplacements(context);
 		} else {
-			List<ITextReplacer> replacers = createReplacers(formatter, hiddens);
+			List<ITextReplacer> replacers = createReplacers(formatter);
 			applyHiddenRegionFormatting(replacers);
 			ITextReplacerContext current = context;
 			current.setNextReplacerIsChild();
@@ -106,38 +105,16 @@ public class HiddenRegionReplacer implements ITextReplacer {
 		}
 	}
 
-	/**
-	 * returns a list that starts with whitespace, ends with whitespace and contains a sequence of strictly alternating
-	 * whitespace- and comment-regions.
-	 */
-	protected List<ITextReplacer> createReplacers(AbstractFormatter2 formatter, List<IHiddenRegionPart> parts) {
-		ITextSegment last = null;
-		List<ITextReplacer> result = Lists.newArrayList();
-		for (IHiddenRegionPart part : parts) {
-			if (part instanceof IWhitespace) {
-				if (last == null || last instanceof IComment) {
-					result.add(formatter.createWhitespaceReplacer(part, formatter.createHiddenRegionFormatting()));
-				} else {
-					int mergedLength = last.getLength() + part.getLength();
-					TextSegment merged = new TextSegment(part.getTextRegionAccess(), last.getOffset(), mergedLength);
-					IHiddenRegionFormatting formatting2 = formatter.createHiddenRegionFormatting();
-					result.set(result.size() - 1, formatter.createWhitespaceReplacer(merged, formatting2));
-				}
-			}
-			if (part instanceof IComment) {
-				if (last == null || last instanceof IComment) {
-					TextSegment region = new TextSegment(part.getTextRegionAccess(), part.getOffset(), 0);
-					result.add(formatter.createWhitespaceReplacer(region, formatter.createHiddenRegionFormatting()));
-				}
-				result.add(formatter.createCommentReplacer((IComment) part));
-			}
-			last = part;
+	protected List<ITextReplacer> createReplacers(AbstractFormatter2 formatter) {
+		List<ITextSegment> regions = region.getAlternatingMergedSpaceAndComments();
+		List<ITextReplacer> replacers = Lists.newArrayListWithCapacity(regions.size());
+		for (ITextSegment region : regions) {
+			if (region instanceof IComment)
+				replacers.add(formatter.createCommentReplacer((IComment) region));
+			else
+				replacers.add(formatter.createWhitespaceReplacer(region, formatter.createHiddenRegionFormatting()));
 		}
-		if (last instanceof IComment) {
-			TextSegment region = new TextSegment(last.getTextRegionAccess(), last.getOffset() + last.getLength(), 0);
-			result.add(formatter.createWhitespaceReplacer(region, formatter.createHiddenRegionFormatting()));
-		}
-		return result;
+		return replacers;
 	}
 
 	protected WhitespaceReplacer findWhitespaceThatSeparatesSemanticRegions(List<ITextReplacer> replacers) {
