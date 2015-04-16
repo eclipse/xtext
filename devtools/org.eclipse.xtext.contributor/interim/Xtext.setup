@@ -29,7 +29,8 @@
   <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
-        name="org.eclipse.m2e.feature.feature.group"/>
+        name="org.eclipse.m2e.feature.feature.group"
+        versionRange="[1.0.0,1.6.0)"/>
     <requirement
         name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
     <requirement
@@ -38,6 +39,8 @@
         url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
     <repository
         url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
+    <repository
+        url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
   </setupTask>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
