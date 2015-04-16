@@ -137,7 +137,7 @@ public class Serializer implements ISerializer {
 	protected void serialize(EObject obj, Appendable appendable, SaveOptions options) throws IOException {
 		ITextRegionAccess regionAccess = serializeToRegions(obj);
 		FormatterRequest request = formatterRequestProvider.get();
-		request.setFormatUndenfinedTokensOnly(!options.isFormatting());
+		request.setFormatUndefinedHiddenRegionsOnly(!options.isFormatting());
 		request.setTextRegionAccess(regionAccess);
 		IFormatter2 formatter2 = formatter2Provider.get();
 		List<ITextReplacement> replacements = formatter2.format(request);
@@ -171,7 +171,8 @@ public class Serializer implements ISerializer {
 	@Override
 	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
 		if (formatter2Provider != null) {
-			serialize(obj, writer, options);
+			serialize(obj, (Appendable) writer, options);
+			writer.flush();
 		} else {
 			serialize(obj, new WriterTokenStream(writer), options);
 		}
