@@ -43,12 +43,13 @@ public class TextRegionRewriter implements ITextRegionRewriter {
 		List<ITextReplacement> list = new TextReplacementList<ITextReplacement>(rep);
 		Collections.sort(list);
 		int lastOffset = 0;
-		for (ITextReplacement r : rep) {
+		for (ITextReplacement r : list) {
 			result.append(text.subSequence(lastOffset, r.getOffset() - offset));
 			result.append(r.getReplacementText());
 			lastOffset = (r.getOffset() - offset) + r.getLength();
 		}
-		result.append(text.subSequence(lastOffset, text.length()));
+		if (lastOffset <= text.length())
+			result.append(text.subSequence(lastOffset, text.length()));
 	}
 
 	@Override

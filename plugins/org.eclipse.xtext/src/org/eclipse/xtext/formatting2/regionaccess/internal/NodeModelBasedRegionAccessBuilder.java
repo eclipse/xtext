@@ -38,7 +38,7 @@ public class NodeModelBasedRegionAccessBuilder {
 		if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
 			ILeafNode leafNode = (ILeafNode) node;
 			lastHidden.addPart(createHidden(lastHidden, leafNode));
-		} else {
+		} else if (node.getLength() > 0) {
 			NodeEObjectRegion eObjectTokens = stack.peek();
 			NodeSemanticRegion newSemantic = createSemanticRegion(access, node);
 			NodeHiddenRegion newHidden = createHiddenRegion(access);

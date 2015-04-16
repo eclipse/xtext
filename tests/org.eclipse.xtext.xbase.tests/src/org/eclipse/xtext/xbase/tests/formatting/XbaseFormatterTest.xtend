@@ -47,7 +47,7 @@ class XbaseFormatterTest {
 					x.join
 				
 				}
-			'''
+			'''.toString.trim
 			toBeFormatted = '''
 				  {  
 				

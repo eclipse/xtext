@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -387,9 +386,6 @@ public class DomainmodelFormatter extends XbaseFormatter {
       return;
     } else if (entity instanceof DomainModel) {
       _format((DomainModel)entity, document);
-      return;
-    } else if (entity instanceof XCatchClause) {
-      _format((XCatchClause)entity, document);
       return;
     } else if (entity instanceof XExpression) {
       _format((XExpression)entity, document);

@@ -21,7 +21,7 @@ class TypeReferenceFormatterTest {
 				{
 					var «toBeFormatted» x
 				}
-			'''
+			'''.toString.trim
 		]
 	}
 
