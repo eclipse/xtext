@@ -10,8 +10,9 @@ package org.eclipse.xtext.formatting2.regionaccess;
 import java.util.List;
 
 /**
- * <p>Represents and groups all {@link IWhitespace} and {@link IComment comments} between two {@link ISemanticRegion semantic regions}. May be
- * empty.
+ * <p>
+ * Represents and groups all {@link IWhitespace} and {@link IComment comments} between two {@link ISemanticRegion
+ * semantic regions}. May be empty.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * 
@@ -30,7 +31,8 @@ public interface IHiddenRegion extends ISequentialRegion {
 	boolean containsComment();
 
 	/**
-	 * @return all {@link IWhitespace white spaces} and {@link IComment comments} that belong to this {@link IHiddenRegion}.
+	 * @return all {@link IWhitespace white spaces} and {@link IComment comments} that belong to this
+	 *         {@link IHiddenRegion}.
 	 */
 	List<IHiddenRegionPart> getParts();
 
@@ -40,4 +42,12 @@ public interface IHiddenRegion extends ISequentialRegion {
 	 *         semantic model has been constructed or modified programmatically.
 	 */
 	boolean isUndefined();
+
+	/**
+	 * @return returns a list that starts with whitespace, ends with whitespace and contains a sequence of strictly
+	 *         alternating whitespace- and comment-regions.
+	 */
+	List<ITextSegment> getAlternatingMergedSpaceAndComments();
+
+	List<ITextSegment> getMergedSpaces();
 }
