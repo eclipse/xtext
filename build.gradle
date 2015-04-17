@@ -31,13 +31,19 @@ allprojects {
 	}
 }
 
-task compileEclipsePlugins(type: Exec) {
-	if (org.gradle.internal.os.OperatingSystem.current().windows) {
-		executable 'cmd'
-		args '/c', 'mvn'
-	} else {
-		executable 'mvn'
-	}
-	args 'clean', 'compile', '-Pinclude-unpublished', '-T', '1C'
+task compileEclipsePlugins(type: MavenExec) {
+	args 'clean', 'compile', '-Pinclude-unpublished'
 	workingDir 'maven/org.eclipse.xtext.tycho.parent'
+}
+
+class MavenExec extends Exec {
+	MavenExec() {
+		if (org.gradle.internal.os.OperatingSystem.current().windows) {
+			executable 'cmd'
+			args '/c', "${project.rootDir}/gradle/maven-wrapper/mvnw.bat"
+		} else {
+			executable "${project.rootDir}/gradle/maven-wrapper/mvnw"
+		}
+		args '-T', '1C'
+	}
 }
