@@ -14,6 +14,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -80,9 +81,9 @@ public class TextRegionsWithTitleToString {
 			List<ITextSegment> segments = Lists.newArrayList();
 			for (Item item : items)
 				segments.add(item.getRegion());
-			ITextSegment impactRegion = access.merge(segments);
+			ITextSegment impactRegion = TextRegions.merge(segments);
 			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
-			return access.merge(expandToLines);
+			return TextRegions.merge(expandToLines);
 		}
 		return null;
 	}
