@@ -13,6 +13,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
 
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
@@ -64,9 +65,9 @@ public class TextRegionsInTextToString {
 			return this.frame;
 		ITextRegionAccess access = getTextRegionAccess();
 		if (access != null) {
-			ITextSegment impactRegion = access.merge(this.items);
+			ITextSegment impactRegion = TextRegions.merge(this.items);
 			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
-			return access.merge(expandToLines);
+			return TextRegions.merge(expandToLines);
 		}
 		return null;
 	}

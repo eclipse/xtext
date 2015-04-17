@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -267,26 +266,6 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 		} else
 			end = text.length();
 		return new LineRegion(this, start, end - start);
-	}
-
-	@Override
-	public ITextSegment merge(Iterable<? extends ITextSegment> segments) {
-		Iterator<? extends ITextSegment> it = segments.iterator();
-		if (!it.hasNext())
-			throw new IllegalStateException();
-		ITextSegment first = it.next();
-		int minOffset = first.getOffset();
-		int maxEndOffset = first.getEndOffset();
-		while (it.hasNext()) {
-			ITextSegment next = it.next();
-			int offset = next.getOffset();
-			int endOffset = next.getEndOffset();
-			if (offset < minOffset)
-				minOffset = offset;
-			if (endOffset > maxEndOffset)
-				maxEndOffset = endOffset;
-		}
-		return new TextSegment(this, minOffset, maxEndOffset - minOffset);
 	}
 
 	@Override
