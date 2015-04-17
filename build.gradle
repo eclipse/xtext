@@ -44,6 +44,9 @@ class MavenExec extends Exec {
 		} else {
 			executable "${project.rootDir}/gradle/maven-wrapper/mvnw"
 		}
+		if (project.gradle.startParameter.refreshDependencies) {
+			args '-U'
+		}
 		args '-T', '1C'
 	}
 }
