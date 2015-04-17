@@ -41,6 +41,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -108,6 +109,30 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", feature.getIdentifier());
 		assertNull(featureCall.getImplicitReceiver());
 		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
+	@Test public void testBug464264_01() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" + 
+				"class C {\n" + 
+				"	def m(I i, List<CharSequence> list) {\n" + 
+				"		i.strings += list.map[it]\n" + 
+				"	}\n" + 
+				"	interface I {\n" + 
+				"		def List<String> getStrings()\n" + 
+				"	}\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XBinaryOperation featureCall = (XBinaryOperation) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+		List<Diagnostic> errors = c.eResource().getErrors();
+		assertEquals(1, errors.size());
+		assertEquals("Type mismatch: cannot convert from List<CharSequence> to Iterable<? extends String>", errors.get(0).getMessage());
 	}
 	
 	@Test public void testOverloadStaticInstance_01() throws Exception {
