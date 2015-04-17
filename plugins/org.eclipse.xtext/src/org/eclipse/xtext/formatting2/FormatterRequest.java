@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
  * <li>{@link #preferences Preferences} with keys from e.g. {@link FormatterPreferenceKeys}.</li>
  * <li>{@link #regions} that describe how to restrict the text regions for which {@link ITextReplacement replacements} are produced.</li>
  * <li>An option to {@link #allowIdentityEdits()} which will disable automated suppression of text replacements that do not cause changes.</li>
- * <li>A setting for green-field formatting ({@link #formatUndenfinedTokensOnly}): only format regions that have no whitespace information yet.</li>
+ * <li>A setting for green-field formatting ({@link #formatUndefinedHiddenRegionsOnly}): only format regions that have no whitespace information yet.</li>
  * </ul>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
@@ -145,20 +145,20 @@ public class FormatterRequest {
 	 * Enable this options if, for example, you serialize a model after applying a quick fix, refactoring or have it
 	 * edited in a graphical editor and you want to keep the whitespace-changes to a minimum.
 	 */
-	private boolean formatUndenfinedTokensOnly;
+	private boolean formatUndefinedHiddenRegionsOnly;
 	
 	/**
-	 * @see #formatUndenfinedTokensOnly
+	 * @see #formatUndefinedHiddenRegionsOnly
 	 */
 	public boolean isFormatUndefinedHiddenRegionsOnly() {
-		return formatUndenfinedTokensOnly;
+		return formatUndefinedHiddenRegionsOnly;
 	}
 
 	/**
-	 * @see #formatUndenfinedTokensOnly
+	 * @see #formatUndefinedHiddenRegionsOnly
 	 */
-	public FormatterRequest setFormatUndenfinedTokensOnly(boolean formatUndenfinedTokensOnly) {
-		this.formatUndenfinedTokensOnly = formatUndenfinedTokensOnly;
+	public FormatterRequest setFormatUndefinedHiddenRegionsOnly(boolean formatUndefinedHiddenRegionsOnly) {
+		this.formatUndefinedHiddenRegionsOnly = formatUndefinedHiddenRegionsOnly;
 		return this;
 	}
 
