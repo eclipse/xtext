@@ -236,14 +236,16 @@ class XbaseFormatter extends XtypeFormatter {
 			val operator = entry.leadingSeparator.separator
 			formatFeatureCallTypeParameters(call, format)
 			val feature = call.regionForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
-			val autowrapLength = Math.min(entry.region.length, feature.length * 2)
-			operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
-			if (call.explicitOperationCall) {
-				val open = call.regionForKeyword("(").prepend[noSpace]
-				val close = call.regionForKeyword(")")
-				formatFeatureCallParams(call.memberCallArguments, open, close, format)
-			} else if (!call.memberCallArguments.empty) {
-				formatBuilderWithLeadingGap(call.memberCallArguments.builder, format)
+			if (feature != null) {
+				val autowrapLength = Math.min(entry.region.length, feature.length * 2)
+				operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
+				if (call.explicitOperationCall) {
+					val open = call.regionForKeyword("(").prepend[noSpace]
+					val close = call.regionForKeyword(")")
+					formatFeatureCallParams(call.memberCallArguments, open, close, format)
+				} else if (!call.memberCallArguments.empty) {
+					formatBuilderWithLeadingGap(call.memberCallArguments.builder, format)
+				}
 			}
 		}
 	}
