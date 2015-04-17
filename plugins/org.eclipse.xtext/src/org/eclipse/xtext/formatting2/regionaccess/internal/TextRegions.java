@@ -10,8 +10,10 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.ImmutableList;
@@ -65,4 +67,24 @@ public class TextRegions {
 		}
 		return ImmutableList.copyOf(missing);
 	}
+
+	public static ITextSegment merge(Iterable<? extends ITextSegment> segments) {
+		Iterator<? extends ITextSegment> it = segments.iterator();
+		if (!it.hasNext())
+			throw new IllegalStateException();
+		ITextSegment first = it.next();
+		int minOffset = first.getOffset();
+		int maxEndOffset = first.getEndOffset();
+		while (it.hasNext()) {
+			ITextSegment next = it.next();
+			int offset = next.getOffset();
+			int endOffset = next.getEndOffset();
+			if (offset < minOffset)
+				minOffset = offset;
+			if (endOffset > maxEndOffset)
+				maxEndOffset = endOffset;
+		}
+		return new TextSegment(first.getTextRegionAccess(), minOffset, maxEndOffset - minOffset);
+	}
+
 }

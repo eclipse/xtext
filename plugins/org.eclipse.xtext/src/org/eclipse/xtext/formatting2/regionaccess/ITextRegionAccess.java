@@ -191,7 +191,5 @@ public interface ITextRegionAccess {
 
 	String textForOffset(int offset, int length);
 
-	ITextSegment merge(Iterable<? extends ITextSegment> segments);
-
 	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
 }
