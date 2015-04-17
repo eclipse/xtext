@@ -28,6 +28,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
+ * Makes an eager copy of the exported objects of another resource description.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
