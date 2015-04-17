@@ -1142,21 +1142,15 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     if (_or) {
       List _modifiers = it.modifiers();
-      final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+      Iterable<IExtendedModifier> _filter = Iterables.<IExtendedModifier>filter(_modifiers, IExtendedModifier.class);
+      final Function1<IExtendedModifier, Boolean> _function = new Function1<IExtendedModifier, Boolean>() {
         @Override
-        public Boolean apply(final Object e) {
-          boolean _and = false;
-          if (!(e instanceof Modifier)) {
-            _and = false;
-          } else {
-            boolean _isFinal = ((Modifier) e).isFinal();
-            _and = _isFinal;
-          }
-          return Boolean.valueOf((!_and));
+        public Boolean apply(final IExtendedModifier it) {
+          return Boolean.valueOf(it.isAnnotation());
         }
       };
-      Iterable<IExtendedModifier> _filter = IterableExtensions.<IExtendedModifier>filter(_modifiers, _function);
-      this.appendModifiers(it, _filter);
+      Iterable<IExtendedModifier> _filter_1 = IterableExtensions.<IExtendedModifier>filter(_filter, _function);
+      this.appendModifiers(it, _filter_1);
     } else {
       List _modifiers_1 = it.modifiers();
       this.appendModifiers(it, _modifiers_1);
