@@ -28,6 +28,15 @@ configure(eclipsePluginProjects) {
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'org.xtext.idea-component'
 	apply from: "$rootDir/gradle/eclipse-classpath-fix.gradle"
+	// this fixes the Eclipse source attachement for the gradle cp container
+	// background: gradle cp container does not support source attachements
+	//             at the moment thus we put the intellij-dependencies onto
+	//             the cp of all other idea projects
+	if (name!="intellij-dependencies") {
+		dependencies {
+			compile project(":intellij:intellij-dependencies") 
+		}	
+	}
 	
 	configurations.compile {
 		exclude module:'cglib'
