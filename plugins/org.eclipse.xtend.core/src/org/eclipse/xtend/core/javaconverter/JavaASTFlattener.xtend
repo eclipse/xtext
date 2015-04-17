@@ -677,7 +677,7 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(SingleVariableDeclaration it) {
 		if (parent instanceof MethodDeclaration || parent instanceof CatchClause ||
 			parent instanceof EnhancedForStatement) {
-			appendModifiers(modifiers().filter[Object e|!(e instanceof Modifier && (e as Modifier).final)])
+			appendModifiers(modifiers().filter(IExtendedModifier).filter[annotation])
 		} else {
 			appendModifiers(modifiers())
 		}
