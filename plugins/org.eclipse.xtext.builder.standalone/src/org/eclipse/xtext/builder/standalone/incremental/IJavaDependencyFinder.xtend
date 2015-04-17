@@ -7,18 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import java.util.List
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import org.eclipse.xtend.lib.annotations.Data
 
 /**
- * @author koehnlein - Initial contribution and API
- * @since 2.9 
+ * @author Jan Koehnlein - Initial contribution and API
  */
-@Data
-class IndexerResult {
-	List<URI> changedResources
-	List<URI> deletedResources
-	ResourceDescriptionsData newIndex
+interface IJavaDependencyFinder {
+	
+	def Iterable<URI> getDependentJavaFiles(Iterable<URI> javaFiles) 
 }

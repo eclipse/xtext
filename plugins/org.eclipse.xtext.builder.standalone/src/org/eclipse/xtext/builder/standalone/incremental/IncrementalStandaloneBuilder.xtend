@@ -10,9 +10,6 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
-import java.io.IOException
-import java.util.Collection
-import java.util.List
 import java.util.Map
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
@@ -22,10 +19,6 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
-import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult
-import org.eclipse.xtext.generator.AbstractFileSystemAccess
-import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -47,146 +40,77 @@ import static extension org.eclipse.emf.common.util.URI.createFileURI
 class IncrementalStandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(IncrementalStandaloneBuilder);
 
-	@Accessors(PROTECTED_SETTER, PROTECTED_GETTER) BuildContext context
+	@Accessors(PROTECTED_SETTER, PROTECTED_GETTER) extension BuildContext context
 	@Accessors(PROTECTED_SETTER, PROTECTED_GETTER) BuildRequest request
 
 	File baseDir
 
 	@Inject Indexer indexer
-	@Inject AbstractFileSystemAccess commonFileAccess
 	@Inject IIssueHandler issueHandler
-	@Inject IJavaCompiler compiler
-	@Inject JavaSupport javaSupport
-	@Inject extension ResourceSetClearer
 
 	protected new() {
 	}
 
 	def launch() {
+		initialize
+		val affectedResources = indexer.computeAndIndexAffected(request, context)
+		val isErrorFree = affectedResources.executeClustered [
+			Resource resource |
+			resource.contents // fully initialize
+			EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+			if(resource.validate) {
+				resource.generate
+				return true				
+			}
+			return false 
+		].reduce[$0 && $1]
+		return isErrorFree
+	}
+	
+	def protected initialize() {
 		baseDir = request.baseDir ?: {
 			val userDir = System.getProperty('user.dir')
 			LOG.warn("Property baseDir not set. Using '" + userDir + "'")
 			new File(userDir)
 		}
-		if (context.needsJava) {
+		if (needsJava) 
 			LOG.info("Using common types.")
-		}
-		val resourceSet = context.resourceSet
 		if (request.defaultEncoding != null) {
 			LOG.info("Setting encoding.")
-			fileEncodingSetup(context.languages.values, request.defaultEncoding)
-		}
-
-		val indexerResult = indexer.computeAffected(request, context)
-
-		// Generate Stubs
-		if (context.needsJava) {
-			val stubsClasses = compileStubs(generateStubs(indexerResult))
-			LOG.info("Installing type provider for stubs.")
-			javaSupport.installTypeProvider(request.sourceRoots + request.classPath + newArrayList(stubsClasses),
-				resourceSet)
-		}
-
-		// Validate and generate
-		LOG.info("Validate and generate.")
-		val sourceResourceIterator = indexerResult.changedResources.iterator
-		var isErrorFree = true
-		while (sourceResourceIterator.hasNext) {
-			var List<Resource> resources = newArrayList()
-			var int clusterIndex = 0
-			var continue = true
-			while (sourceResourceIterator.hasNext && continue) {
-				val uri = sourceResourceIterator.next
-				val resource = resourceSet.getResource(uri, true)
-				resources.add(resource)
-				resource.contents // full initialize
-				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-				isErrorFree = validate(resource)
-				clusterIndex++
-				if (!context.clusteringPolicy.continueProcessing(resourceSet, null, clusterIndex)) {
-					continue = false
-				}
-			}
-			if (request.failOnValidationError && !isErrorFree) {
-				return isErrorFree
-			}
-			generate(resources)
-			if (!continue)
-				resourceSet.clearResourceSet
-		}
-		return isErrorFree
-	}
-
-	def fileEncodingSetup(Collection<LanguageAccess> langs, String encoding) {
-		for (lang : langs) {
-			switch provider : lang.encodingProvider {
-				IEncodingProvider.Runtime: {
-					provider.setDefaultEncoding(encoding)
-				}
-				default: {
-					LOG.info("Couldn't set encoding '" + encoding + "' for provider '" + provider +
-						"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+			for (lang : languages.values) {
+				switch provider : lang.encodingProvider {
+					IEncodingProvider.Runtime: {
+						provider.setDefaultEncoding(request.defaultEncoding)
+					}
+					default: {
+						LOG.info("Couldn't set encoding '" + request.defaultEncoding + "' for provider '" + provider +
+							"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+					}
 				}
 			}
 		}
-	}
-
-	def protected compileStubs(File stubsDir) {
-		val stubsClassesFolder = createTempDir("classes")
-		compiler.setClassPath(request.classPath.map[absolutePath])
-		LOG.info("Compiling stubs located in " + stubsDir.absolutePath)
-		val sourcesToCompile = uniqueEntries(request.sourceRoots.map[absolutePath] +
-			newArrayList(stubsDir.absolutePath))
-		LOG.info("Compiler source roots: " + sourcesToCompile.join(','))
-		val result = compiler.compile(sourcesToCompile, stubsClassesFolder)
-		switch (result) {
-			case CompilationResult.SKIPPED:
-				LOG.info("Nothing to compile. Stubs compilation was skipped.")
-			case CompilationResult.FAILED:
-				LOG.info("Stubs compilation finished with errors.")
-			case CompilationResult.SUCCEEDED:
-				LOG.info("Stubs compilation successfully finished.")
-		}
-		return stubsClassesFolder
-	}
-
-	def protected uniqueEntries(Iterable<String> pathes) {
-		pathes.map[new File(it).absolutePath].toSet
-	}
-
-	def protected generateStubs(IndexerResult result) {
-		val stubsDir = createTempDir("stubs")
-		LOG.info("Generating stubs into " + stubsDir.absolutePath)
-		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
-		val generateStubs = result.changedResources.filter[languageAccess.linksAgainstJava]
-		generateStubs.forEach [
-			languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, result.newIndex.getResourceDescription(it))
-		]
-		return stubsDir
 	}
 
 	def protected validate(Resource resource) {
 		LOG.info("Starting validation for input: '" + resource.getURI().lastSegment() + "'");
-		val resourceValidator = languageAccess(resource.URI).getResourceValidator();
+		val resourceValidator = resource.URI.languageAccess.getResourceValidator();
 		val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
 		return issueHandler.handleIssue(validationResult)
 	}
 
-	def protected generate(List<Resource> sourceResources) {
-		for (Resource it : sourceResources) {
-			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
-			registerCurrentSource(it.URI)
-			val access = URI.languageAccess
-			val fileSystemAccess = access.fileSystemAccess
-			if (request.isWriteStorageResources) {
-				switch it {
-					StorageAwareResource case resourceStorageFacade != null: {
-						resourceStorageFacade.saveResource(it, fileSystemAccess)
-					}
+	def protected generate(Resource resource) {
+		LOG.info("Starting generator for input: '" + resource.getURI().lastSegment() + "'");
+		registerCurrentSource(resource.URI)
+		val access = resource.URI.languageAccess
+		val fileSystemAccess = access.fileSystemAccess
+		if (request.isWriteStorageResources) {
+			switch resource {
+				StorageAwareResource case resource.resourceStorageFacade != null: {
+					resource.resourceStorageFacade.saveResource(resource, fileSystemAccess)
 				}
 			}
-			access.generator.doGenerate(it, fileSystemAccess);
 		}
+		access.generator.doGenerate(resource, fileSystemAccess);
 	}
 
 	def protected registerCurrentSource(URI uri) {
@@ -209,7 +133,7 @@ class IncrementalStandaloneBuilder {
 
 	Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = newHashMap()
 
-	private def getFileSystemAccess(LanguageAccess language) {
+	protected def getFileSystemAccess(LanguageAccess language) {
 		var fsa = configuredFsas.get(language)
 		if (fsa == null) {
 			fsa = language.createFileSystemAccess(baseDir)
@@ -221,17 +145,6 @@ class IncrementalStandaloneBuilder {
 
 	protected def configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
 		fsa
-	}
-
-	def private languageAccess(URI uri) {
-		context.languages.get(uri.fileExtension)
-	}
-
-	def protected createTempDir(String subDir) {
-		val file = new File(request.tempDir, subDir)
-		if (!file.mkdirs && !file.exists)
-			throw new IOException("Failed to create directory '" + file.absolutePath + "'")
-		return file
 	}
 
 	static class Factory {

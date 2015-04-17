@@ -8,6 +8,8 @@
 package org.eclipse.xtext.builder.standalone.incremental
 
 import java.util.Map
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -26,4 +28,17 @@ class BuildContext {
 	XtextResourceSet resourceSet
 	
 	IResourceClusteringPolicy clusteringPolicy
+	
+	transient ClusteringStorageAwareResourceLoader loader
+	
+	def <T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
+		if(loader == null) 
+			loader = new ClusteringStorageAwareResourceLoader(this)
+		loader.executeClustered(uri, operation)
+	}
+	
+	def getLanguageAccess(URI uri) {
+		languages.get(uri.fileExtension)
+	}
+	
 }

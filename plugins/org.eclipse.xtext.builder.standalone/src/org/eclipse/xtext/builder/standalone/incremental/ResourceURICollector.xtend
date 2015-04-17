@@ -27,7 +27,15 @@ class ResourceURICollector {
 	
 	static val LOG = Logger.getLogger(ResourceURICollector)
 	
-	def protected List<URI> collectResources(List<File> roots, BuildContext context) {
+	def Iterable<URI> collectAllResources(BuildRequest request, BuildContext context) {
+		LOG.info("Collecting source models.")
+		val startedAt = System.currentTimeMillis
+		val result = (request.sourceRoots.collectResources(context) + request.classPath.collectResources(context)).toSet
+		LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
+		result
+	} 
+	
+	def protected collectResources(List<File> roots, BuildContext context) {
 		val extensions = context.languages.keySet.join("|")
 		val nameBasedFilter = new NameBasedFilter
 

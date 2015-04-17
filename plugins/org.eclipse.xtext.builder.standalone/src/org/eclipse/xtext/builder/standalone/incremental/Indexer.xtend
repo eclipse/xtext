@@ -8,69 +8,151 @@
 package org.eclipse.xtext.builder.standalone.incremental
 
 import com.google.inject.Inject
-import java.util.List
+import com.google.inject.Singleton
+import java.util.Collection
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.mwe.ResourceDescriptionsProvider
+import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
+@Singleton
 class Indexer {
-	
+
 	static val LOG = Logger.getLogger(Indexer)
-	
-	@Inject extension ResourceURICollector uriCollector
-	@Inject extension ResourceSetClearer
-	
+
+	@Inject ResourceURICollector uriCollector
+
 	@Inject JavaSupport javaSupport
-	
-	def computeAffected(BuildRequest request, BuildContext context) {
-		LOG.info("Collecting source models.")
-		val startedAt = System.currentTimeMillis
-		val sourceResourceURIs = request.sourceRoots.collectResources(context)
-		val allResourcesURIs = sourceResourceURIs + request.classPath.collectResources(context)
-		LOG.info("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
 
-		val allClassPathEntries = (request.sourceRoots + request.classPath)
-		if (context.needsJava) {
-			LOG.info("Installing type provider.")
-			javaSupport.installLocalOnlyTypeProvider(allClassPathEntries, context.resourceSet)
-		}
+	@Inject CompilerPhases compilerPhases
 
-		// Fill index
-		var ResourceDescriptionsData index = new ResourceDescriptionsData(newArrayList());
-		var allResourceIterator = allResourcesURIs.iterator
-		while (allResourceIterator.hasNext) {
-			var List<Resource> resources = newArrayList()
-			var int clusterIndex = 0
-			var continue = true
-			while (allResourceIterator.hasNext && continue) {
-				val uri = allResourceIterator.next
-				val resource = context.resourceSet.getResource(uri, true)
-				resources.add(resource)
-				fillIndex(uri, resource, index, context)
-				clusterIndex++
-				if (!context.clusteringPolicy.continueProcessing(context.resourceSet, null, clusterIndex)) {
-					continue = false
-				}
-			}
-			if (!continue)
-				context.resourceSet.clearResourceSet
+	@Inject ResourceDescriptionsProvider resourceDescriptionsProvider
+
+	ResourceDescriptionsData index
+
+	def Iterable<URI> computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
+		val needsJava = context.needsJava
+		val fullBuild = request.fullBuild || index == null
+		
+		LOG.info('Creating new index')
+		val ResourceDescriptionsData newIndex = index?.copy ?: new ResourceDescriptionsData(newArrayList)
+		val resourceDescriptions = installIndex(resourceSet, newIndex)
+
+		val allResources = uriCollector.collectAllResources(request, context)
+		val affectionCandidates = newHashSet
+		if (!fullBuild) {
+			val allModified = (request.dirtyFiles + request.deletedFiles).toSet
+			affectionCandidates += allResources.filter[!allModified.contains(it)]
 		}
-		context.resourceSet.installIndex(index)
-		return new IndexerResult(sourceResourceURIs, request.deletedFiles, index)
+		val directlyAffected = if (fullBuild)
+				allResources
+			else
+				request.dirtyFiles
+
+		LOG.info('Removing deleted files from index')
+		val currentDeltas = <IResourceDescription.Delta>newArrayList
+		request.deletedFiles.forEach [
+			val IResourceDescription oldDescription = index.getResourceDescription(it)
+			if (oldDescription != null)
+				currentDeltas += new DefaultResourceDescriptionDelta(oldDescription, null)
+			newIndex.removeDescription(it)
+		]
+
+		val allAffected = <URI>newHashSet
+		allAffected += directlyAffected
+		if (needsJava) 
+			preprocessJavaResources(directlyAffected, newIndex, request, context)
+
+		LOG.info("Indexing changed and added files")
+		val toBeIndexed = newArrayList
+		toBeIndexed.addAll(directlyAffected)
+		val allDeltas = newHashSet
+		while (!toBeIndexed.empty) {
+			allAffected.addAll(toBeIndexed)
+			toBeIndexed.executeClustered [ Resource resource |
+				currentDeltas += resource.addToIndex(newIndex, context)
+				null
+			]
+				// TODO: Java dependencies
+//			if (needsJava) {
+//				val dependentJavaFiles = javaDependencyFinder.getDependentJavaFiles(toBeIndexed.filter [
+//					fileExtension == 'java'
+//				])
+//			// addJavaDependencies
+////				toBeIndexed.addAll(DSL deps by java)
+//			}
+			toBeIndexed.clear
+			allDeltas += currentDeltas
+			toBeIndexed.addAll(
+				affectionCandidates.filter [
+					val manager = languages.get(fileExtension).resourceDescriptionManager
+				val resourceDescription = index.getResourceDescription(it)
+				resourceDescription.isAffected(manager, currentDeltas, allDeltas, resourceDescriptions)
+			])
+			affectionCandidates.removeAll(toBeIndexed)
+			currentDeltas.clear
+			if(!toBeIndexed.empty)
+				LOG.info('Indexing affected files')
+		}
+		index = newIndex
+		return allAffected
 	}
-	
+
+	protected def preprocessJavaResources(Iterable<URI> directlyAffected, ResourceDescriptionsData newIndex, BuildRequest request,
+		extension BuildContext context) {
+		LOG.info("Pre-indexing changed files")
+		val allClasspathRoots = request.sourceRoots + request.classPath
+		javaSupport.installLocalOnlyTypeProvider(allClasspathRoots, resourceSet)
+		try {
+			compilerPhases.setIndexing(resourceSet, true)
+			directlyAffected.executeClustered [
+				addToIndex(newIndex, context)
+				null
+			]
+		} finally {
+			compilerPhases.setIndexing(resourceSet, false)
+		}
+		javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
+		javaSupport.installTypeProvider(allClasspathRoots, resourceSet)
+	}
+
+	def protected addToIndex(Resource resource, ResourceDescriptionsData newIndex, BuildContext context) {
+		val uri = resource.URI
+		val languageAccess = context.languages.get(uri.fileExtension)
+		val manager = languageAccess.resourceDescriptionManager
+		val newDescription = manager.getResourceDescription(resource)
+		val IResourceDescription copiedDescription = new ResolvedResourceDescription(newDescription)
+		newIndex.addDescription(uri, copiedDescription)
+		val delta = new DefaultResourceDescriptionDelta(index?.getResourceDescription(uri), copiedDescription)
+		delta
+	}
+
 	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
 		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
+		resourceDescriptionsProvider.get(resourceSet)
 	}
 
-	def protected fillIndex(URI uri, Resource resource, ResourceDescriptionsData index, BuildContext context) {
-		val description = context.languages.get(uri.fileExtension).resourceDescriptionManager.getResourceDescription(resource)
-		index.addDescription(uri, description)
+	def protected boolean isAffected(IResourceDescription affectionCandidate, IResourceDescription.Manager manager,
+		Collection<IResourceDescription.Delta> newDeltas, Collection<IResourceDescription.Delta> allDeltas,
+		IResourceDescriptions resourceDescriptions) {
+		if ((manager instanceof IResourceDescription.Manager.AllChangeAware)) {
+			return manager.isAffectedByAny(allDeltas, affectionCandidate, resourceDescriptions);
+		} else {
+			if (newDeltas.empty) {
+				return false;
+			} else {
+				return manager.isAffected(newDeltas, affectionCandidate, resourceDescriptions);
+			}
+		}
 	}
 }
