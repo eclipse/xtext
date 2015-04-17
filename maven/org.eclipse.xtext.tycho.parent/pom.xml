@@ -83,6 +83,18 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<excludeResources>
+						<excludeResource>**/*.xtend</excludeResource>
+						<excludeResource>**/*.xtendbin</excludeResource>
+						<excludeResource>**/*._trace</excludeResource>
+					</excludeResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-versions-plugin</artifactId>
 				<version>${tycho-version}</version>
 			</plugin>
