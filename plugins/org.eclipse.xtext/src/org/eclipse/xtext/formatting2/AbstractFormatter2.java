@@ -30,16 +30,20 @@ import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
 import org.eclipse.xtext.formatting2.internal.WhitespaceReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextReplacement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.TypedPreferenceKey;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
+
+import com.google.common.collect.Lists;
 
 /**
  * <p>
@@ -204,12 +208,12 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		throw new IllegalStateException("No " + ITextReplacer.class.getSimpleName() + " configured for " + elementName);
 	}
 
-	public IFormattableSubDocument createFormattableSubDocument(ITextSegment region, IFormattableDocument parent) {
-		return new SubDocument(region, parent);
+	public IFormattableDocument createFormattableRootDocument() {
+		return new RootDocument(this);
 	}
 
-	public IHiddenRegionFormatting createHiddenRegionFormatting() {
-		return new HiddenRegionFormatting(this);
+	public IFormattableSubDocument createFormattableSubDocument(ITextSegment region, IFormattableDocument parent) {
+		return new SubDocument(region, parent);
 	}
 
 	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting formatting) {
@@ -218,6 +222,10 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 
 	public IHiddenRegionFormatter createHiddenRegionFormatter(IHiddenRegionFormatting f1, IHiddenRegionFormatting f2) {
 		return new DoubleHiddenRegionFormatter(f1, f2);
+	}
+
+	public IHiddenRegionFormatting createHiddenRegionFormatting() {
+		return new HiddenRegionFormatting(this);
 	}
 
 	public IMerger<IHiddenRegionFormatting> createHiddenRegionFormattingMerger() {
@@ -240,10 +248,6 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new WhitespaceReplacer(hiddens, formatting);
 	}
 
-	public IFormattableDocument createFormattableRootDocument() {
-		return new RootDocument(this);
-	}
-
 	@Override
 	public final List<ITextReplacement> format(FormatterRequest request) {
 		try {
@@ -251,8 +255,9 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 			IFormattableDocument document = createFormattableRootDocument();
 			XtextResource xtextResource = request.getTextRegionAccess().getResource();
 			format(xtextResource, document);
-			List<ITextReplacement> replacements = document.renderToTextReplacements();
-			return replacements;
+			List<ITextReplacement> rendered = document.renderToTextReplacements();
+			List<ITextReplacement> postprocessed = postProcess(document, rendered);
+			return postprocessed;
 		} finally {
 			reset();
 		}
@@ -298,6 +303,34 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	protected void initalize(FormatterRequest request) {
 		this.request = request;
 		this.regionAccess = request.getTextRegionAccess();
+	}
+
+	protected List<ITextReplacement> postProcess(IFormattableDocument document, List<ITextReplacement> replacements) {
+		List<ITextSegment> expected = Lists.newArrayList();
+		IHiddenRegion current = regionAccess.regionForRootEObject().getPreviousHiddenRegion();
+		while (current != null) {
+			if (current.isUndefined())
+				expected.addAll(current.getMergedSpaces());
+			current = current.getNextHiddenRegion();
+		}
+		if (expected.isEmpty())
+			return replacements;
+		List<ITextSegment> missing = TextRegions.difference(expected, replacements);
+		if (missing.isEmpty())
+			return replacements;
+		List<ITextReplacement> result = Lists.newArrayList(replacements);
+		for (ITextSegment seg : missing) {
+			IHiddenRegion h = null;
+			if (seg instanceof IHiddenRegion)
+				h = (IHiddenRegion) seg;
+			if (seg instanceof IHiddenRegionPart)
+				h = ((IHiddenRegionPart) seg).getHiddenRegion();
+			if (h != null && (h.getNextSemanticRegion() == null || h.getPreviousSemanticRegion() == null))
+				result.add(seg.replaceWith(""));
+			else
+				result.add(seg.replaceWith(" "));
+		}
+		return result;
 	}
 
 	/**

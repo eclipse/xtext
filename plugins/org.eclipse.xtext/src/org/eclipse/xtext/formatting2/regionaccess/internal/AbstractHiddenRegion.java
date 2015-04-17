@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
@@ -15,6 +16,8 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -23,10 +26,10 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractHiddenRegion extends AbstractTextSegment implements IHiddenRegion {
+	private final ITextRegionAccess access;
 	private final List<IHiddenRegionPart> hiddens = Lists.newArrayList();
 	private ISemanticRegion next;
 	private ISemanticRegion previous;
-	private final ITextRegionAccess access;
 
 	protected AbstractHiddenRegion(ITextRegionAccess access) {
 		super();
@@ -37,12 +40,48 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 		this.hiddens.add(part);
 	}
 
+	protected List<ITextSegment> collectAlternatingSpaceAndComments(boolean includeComments) {
+		List<IHiddenRegionPart> parts = getParts();
+		if (parts.isEmpty()) {
+			return Collections.<ITextSegment> singletonList(this);
+		} else {
+			ITextSegment last = null;
+			List<ITextSegment> result = Lists.newArrayList();
+			for (IHiddenRegionPart part : parts) {
+				if (part instanceof IWhitespace) {
+					if (last == null || last instanceof IComment) {
+						result.add(part);
+					} else {
+						int mergedLength = last.getLength() + part.getLength();
+						result.add(new TextSegment(part.getTextRegionAccess(), last.getOffset(), mergedLength));
+					}
+				} else if (part instanceof IComment) {
+					if (last == null || last instanceof IComment) {
+						result.add(new TextSegment(part.getTextRegionAccess(), part.getOffset(), 0));
+					}
+					if (includeComments)
+						result.add(part);
+				}
+				last = part;
+			}
+			if (last instanceof IComment) {
+				result.add(new TextSegment(last.getTextRegionAccess(), last.getOffset() + last.getLength(), 0));
+			}
+			return ImmutableList.copyOf(result);
+		}
+	}
+
 	@Override
 	public boolean containsComment() {
 		for (IHiddenRegionPart hidden : hiddens)
 			if (hidden instanceof IComment)
 				return true;
 		return false;
+	}
+
+	@Override
+	public List<ITextSegment> getAlternatingMergedSpaceAndComments() {
+		return collectAlternatingSpaceAndComments(true);
 	}
 
 	@Override
@@ -88,6 +127,11 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return previous;
+	}
+
+	@Override
+	public List<ITextSegment> getMergedSpaces() {
+		return collectAlternatingSpaceAndComments(false);
 	}
 
 	@Override
