@@ -170,7 +170,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
   </builders>
   <publishers>
     <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
-      <testResults>**/test.results/**.xml,**/test-results/**.xml</testResults>
+      <testResults>test.results/**.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>

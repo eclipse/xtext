@@ -15,7 +15,7 @@ branches.each { branch ->
 	def testJobs = [allSuites, ['oldest', 'latest']]
 		.combinations{ suite, platformName -> 
 			def platform = branch.platforms[platformName]
-			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk)
+			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk, buildSystem: 'buckminster')
 		}
 		.findAll {
 			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
@@ -24,6 +24,9 @@ branches.each { branch ->
 		.each {
 			if(java8Suites.contains(it.suite)) {
 				it.jdk = jdks['1.8']
+			}
+			if(intellijSuites.contains(it.suite)) {
+				it.buildSystem = 'gradle'
 			}
 		}
 
@@ -59,29 +62,14 @@ branches.each { branch ->
 		
 		testJobs.each { job -> 
 			jobs.create(job.name).definition {
-				xml templates.test.override { config -> 
+				def template = templates["${job.buildSystem}StyleTest"]
+				xml template.override { config -> 
 					config.properties.'hudson.model.ParametersDefinitionProperty'
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
 					config.scm.branches.'hudson.plugins.git.BranchSpec'[1].name = job.branch
 					config.description = "This job was generated"
 					config.jdk = job.jdk
-					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
-						.project = "xtext-${branch.name}"
-					config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
-						.project = "target-platforms-${branch.name}"
-					def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
-					def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
-					if (job.jdk == jdks['1.8']) {
-						params += '\n-DJAVA8=true'
-						builder.installationName = 'buckminster-4.4'
-					}
-					if (generatorSuites.contains(job.suite)) {
-						params += '\n-DECLIPSE.TARGET.ALIAS=${ECLIPSE_TARGET_ALIAS}\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
-						builder.installationName = 'buckminster-mwe2-headless'
-					}
-					builder.commands = testScripts[job.suite]
-					builder.params = params
 					
 					def trigger = config.triggers.'org.jenkinsci.plugins.ghprb.GhprbTrigger'
 					trigger.triggerPhrase = "Jenkins ${job.name}"
@@ -111,9 +99,28 @@ branches.each { branch ->
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 600
 					}
-					if (intellijSuites.contains(job.suite)) {
-						def gradleBuilder = new XmlSlurper().parse(file('scripts/intellij-tests.xml'))
-						config.builders.appendNode(gradleBuilder)
+					
+					if (job.buildSystem == 'buckminster') {
+						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
+							.project = "xtext-${branch.name}"
+						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
+							.project = "target-platforms-${branch.name}"
+						def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
+						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
+						if (job.jdk == jdks['1.8']) {
+							params += '\n-DJAVA8=true'
+							builder.installationName = 'buckminster-4.4'
+						}
+						if (generatorSuites.contains(job.suite)) {
+							params += '\n-DECLIPSE.TARGET.ALIAS=${ECLIPSE_TARGET_ALIAS}\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
+							builder.installationName = 'buckminster-mwe2-headless'
+						}
+						builder.commands = testScripts[job.suite]
+						builder.params = params
+					}
+					
+					if (job.buildSystem == 'gradle') {
+						config.builders.'hudson.plugins.gradle.Gradle'.tasks = testScripts[job.suite]
 					}
 				}
 			}
@@ -128,6 +135,7 @@ class TestJob {
 	String target
 	String jdk
 	String branch
+	String buildSystem
 	
 	def getName() {
 		suite + "-" + branch + "-" + platformName
