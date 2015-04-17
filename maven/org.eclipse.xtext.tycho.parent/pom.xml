@@ -50,6 +50,28 @@
 		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
 
 	</modules>
+	
+	<profiles>
+		<profile>
+			<id>include-unpublished</id>
+			<modules>
+				<module>../../intellij/org.eclipse.xtext.idea.example.entities</module>
+				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ide</module>
+				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ui</module>
+				<module>../../intellij/org.eclipse.xtext.idea.example.entities.tests</module>
+				<module>../../intellij/org.eclipse.xtext.idea.sdomain</module>
+				<module>../../intellij/org.eclipse.xtext.idea.sdomain.ui</module>
+				<module>../../intellij/org.eclipse.xtext.idea.sdomain.tests</module>
+				<module>../../tests/org.eclipse.xtext.testlanguages</module>
+				<module>../../tests/org.eclipse.xtend.core.tests</module>
+				<module>../../tests/org.eclipse.xtext.tests</module>
+				<module>../../tests/org.eclipse.xtext.common.types.tests</module>
+				<module>../../tests/org.eclipse.xtext.xbase.tests</module>
+				<module>../../tests/org.eclipse.xtext.xbase.testlanguages</module>
+				<module>../../tests/org.eclipse.xtext.xbase.testlanguages.ui</module>
+			</modules>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -58,6 +80,18 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<excludeResources>
+						<excludeResource>**/*.xtend</excludeResource>
+						<excludeResource>**/*.xtendbin</excludeResource>
+						<excludeResource>**/*._trace</excludeResource>
+					</excludeResources>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>

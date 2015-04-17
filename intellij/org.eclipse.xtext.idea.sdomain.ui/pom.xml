@@ -10,5 +10,5 @@
 	<packaging>eclipse-plugin</packaging>
 
 	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+	<artifactId>org.eclipse.xtext.idea.sdomain.ui</artifactId>
 </project>

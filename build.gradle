@@ -31,9 +31,19 @@ allprojects {
 	}
 }
 
-task buckminsterBuild << {
-	ant.ant(
-		antfile: 'releng/org.eclipse.xtext.releng/releng/ant/xtext-build.ant',
-		target: 'resolve-and-compile-all'
-	)
+task compileEclipsePlugins(type: MavenExec) {
+	args 'clean', 'compile', '-Pinclude-unpublished'
+	workingDir 'maven/org.eclipse.xtext.tycho.parent'
+}
+
+class MavenExec extends Exec {
+	MavenExec() {
+		if (org.gradle.internal.os.OperatingSystem.current().windows) {
+			executable 'cmd'
+			args '/c', "${project.rootDir}/gradle/maven-wrapper/mvnw.bat"
+		} else {
+			executable "${project.rootDir}/gradle/maven-wrapper/mvnw"
+		}
+		args '-T', '1C'
+	}
 }

@@ -9,7 +9,7 @@
 	<modules>
 		<!-- Needed and build only at IT runtime -->
 		<module>../../../../../../plugins/org.eclipse.xtext.purexbase</module>
-		<module>../../../../../../tests/org.eclipse.xtext.testlanguages</module>
+		<module>../../../../../../tests/org.eclipse.xtext.testlanguages/integration-test-pom.xml</module>
 	</modules>
 	<repositories>
 		<repository>

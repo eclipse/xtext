@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.idea.example.entities.ui
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.idea.example.entities.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.idea.example.entities;visibility:=reexport,
@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext.idea.example.entities;visibility:=reexport,
  org.eclipse.jdt.debug.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- org.eclipse.xtext.idea.example.entities.ide;bundle-version="1.0.0"
+ org.eclipse.xtext.idea.example.entities.ide
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.idea.example.entities.ui.quickfix,

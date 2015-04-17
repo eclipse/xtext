@@ -62,7 +62,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>-U clean deploy</targets>
+      <targets>-T 1C -U clean deploy</targets>
       <mavenName>Maven 3.0.4</mavenName>
       <pom>org.eclipse.xtext.git/maven/org.eclipse.xtext.parent/pom.xml</pom>
       <usePrivateRepository>true</usePrivateRepository>
