@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -42,6 +44,27 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 @SuppressWarnings("all")
 public class ResourceURICollector {
   private final static Logger LOG = Logger.getLogger(ResourceURICollector.class);
+  
+  public Iterable<URI> collectAllResources(final BuildRequest request, final BuildContext context) {
+    Set<URI> _xblockexpression = null;
+    {
+      ResourceURICollector.LOG.info("Collecting source models.");
+      final long startedAt = System.currentTimeMillis();
+      List<File> _sourceRoots = request.getSourceRoots();
+      List<URI> _collectResources = this.collectResources(_sourceRoots, context);
+      List<File> _classPath = request.getClassPath();
+      List<URI> _collectResources_1 = this.collectResources(_classPath, context);
+      Iterable<URI> _plus = Iterables.<URI>concat(_collectResources, _collectResources_1);
+      final Set<URI> result = IterableExtensions.<URI>toSet(_plus);
+      long _currentTimeMillis = System.currentTimeMillis();
+      long _minus = (_currentTimeMillis - startedAt);
+      String _plus_1 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
+      String _plus_2 = (_plus_1 + " ms.");
+      ResourceURICollector.LOG.debug(_plus_2);
+      _xblockexpression = result;
+    }
+    return _xblockexpression;
+  }
   
   protected List<URI> collectResources(final List<File> roots, final BuildContext context) {
     Map<String, LanguageAccess> _languages = context.getLanguages();

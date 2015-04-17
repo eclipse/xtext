@@ -33,7 +33,7 @@ class DaemonConnector {
 
 	static val DEFAULT_PORT = 8000
 
-	boolean debug = false
+	boolean debug = true
 
 	def SocketChannel connect() {
 		val portFile = new File(DaemonConnector.DAEMON_LOCK_FILE)

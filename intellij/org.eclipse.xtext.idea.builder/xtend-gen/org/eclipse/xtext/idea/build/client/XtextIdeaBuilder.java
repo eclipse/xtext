@@ -109,6 +109,14 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
               this.reportIssue(((Protocol.BuildIssueMessage)message), context);
             }
           }
+          if (!_matched) {
+            if (message instanceof Protocol.BuildFailureMessage) {
+              _matched=true;
+              String _message = ((Protocol.BuildFailureMessage)message).getMessage();
+              this.reportError(_message, context);
+              result = ModuleLevelBuilder.ExitCode.ABORT;
+            }
+          }
         }
       }
     } catch (final Throwable _t) {
@@ -116,8 +124,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         final Exception exc = (Exception)_t;
         XtextIdeaBuilder.LOG.error("Error in build", exc);
         String _message = exc.getMessage();
-        context.processMessage(new BuildMessage(_message, BuildMessage.Kind.ERROR) {
-        });
+        this.reportError(_message, context);
         result = ModuleLevelBuilder.ExitCode.ABORT;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -271,6 +278,11 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     int _column = it.getColumn();
     CompilerMessage _compilerMessage = new CompilerMessage(_presentableName, _kind, _message, _path, _startOffset, _endOffset, _locationOffset, _line, _column);
     context.processMessage(_compilerMessage);
+  }
+  
+  protected void reportError(final String message, final CompileContext context) {
+    context.processMessage(new BuildMessage(message, BuildMessage.Kind.ERROR) {
+    });
   }
   
   protected JpsModuleSourceRoot createSourceRoot(final String outputDir, final JpsModule module) {

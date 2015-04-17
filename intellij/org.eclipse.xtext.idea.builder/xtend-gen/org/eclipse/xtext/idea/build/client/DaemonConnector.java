@@ -49,7 +49,7 @@ public class DaemonConnector {
   
   private final static int DEFAULT_PORT = 8000;
   
-  private boolean debug = false;
+  private boolean debug = true;
   
   public SocketChannel connect() {
     SocketChannel _xblockexpression = null;

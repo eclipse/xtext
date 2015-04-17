@@ -39,6 +39,7 @@ import org.jetbrains.jps.service.JpsServiceManager
 
 import static org.jetbrains.jps.incremental.BuilderCategory.*
 import static org.jetbrains.jps.incremental.ModuleLevelBuilder.ExitCode.*
+import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -72,14 +73,18 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 						handleBuildResult(message, context, chunk, outputConsumer)
 						result = OK
 					}
-					BuildIssueMessage:
+					BuildIssueMessage: {
 						message.reportIssue(context)
+					}
+					BuildFailureMessage: {
+						reportError(message.message, context)
+						result = ABORT						
+					}
 				}
 			}
 		} catch (Exception exc) {
 			LOG.error('Error in build', exc)
-			context.processMessage(new BuildMessage(exc.message, BuildMessage.Kind.ERROR) {
-			})
+			reportError(exc.message, context)
 			result = ABORT
 		} finally {
 			socketChannel?.close
@@ -137,6 +142,10 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 			line,
 			column
 		))
+	}
+	
+	protected def reportError(String message, CompileContext context) {
+		context.processMessage(new BuildMessage(message, BuildMessage.Kind.ERROR) {})
 	}
 
 	protected def createSourceRoot(String outputDir, JpsModule module) {

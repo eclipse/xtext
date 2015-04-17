@@ -33,7 +33,8 @@ public class IdeaLanguageAccess extends LanguageAccess {
   
   @Override
   public JavaIoFileSystemAccess createFileSystemAccess(final File baseDir) {
-    BuildDaemonFileSystemAccess _get = this.resourceServiceProvider.<BuildDaemonFileSystemAccess>get(BuildDaemonFileSystemAccess.class);
+    IResourceServiceProvider _resourceServiceProvider = this.getResourceServiceProvider();
+    BuildDaemonFileSystemAccess _get = _resourceServiceProvider.<BuildDaemonFileSystemAccess>get(BuildDaemonFileSystemAccess.class);
     final Procedure1<BuildDaemonFileSystemAccess> _function = new Procedure1<BuildDaemonFileSystemAccess>() {
       @Override
       public void apply(final BuildDaemonFileSystemAccess it) {

@@ -152,19 +152,38 @@ public class XtextBuildDaemon {
     public boolean serve(final SocketChannel socketChannel) {
       ObjectChannel _objectChannel = new ObjectChannel(socketChannel);
       this.channel = _objectChannel;
-      final Serializable msg = this.channel.readObject();
-      boolean _matched = false;
-      if (!_matched) {
-        if (msg instanceof Protocol.BuildRequestMessage) {
-          _matched=true;
-          XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");
-          final Protocol.BuildResultMessage buildResult = this.build(((Protocol.BuildRequestMessage)msg));
-          XtextBuildDaemon.LOG.info("...finished.");
-          this.channel.writeObject(buildResult);
-          XtextBuildDaemon.LOG.info("Result sent.");
+      try {
+        final Serializable msg = this.channel.readObject();
+        boolean _matched = false;
+        if (!_matched) {
+          if (msg instanceof Protocol.BuildRequestMessage) {
+            _matched=true;
+            XtextBuildDaemon.LOG.info("Received BuildRequest. Start build...");
+            final Protocol.BuildResultMessage buildResult = this.build(((Protocol.BuildRequestMessage)msg));
+            XtextBuildDaemon.LOG.info("...finished.");
+            this.channel.writeObject(buildResult);
+            XtextBuildDaemon.LOG.info("Result sent.");
+          }
+        }
+        return false;
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+          final Exception exc = (Exception)_t;
+          Protocol.BuildFailureMessage _buildFailureMessage = new Protocol.BuildFailureMessage();
+          final Procedure1<Protocol.BuildFailureMessage> _function = new Procedure1<Protocol.BuildFailureMessage>() {
+            @Override
+            public void apply(final Protocol.BuildFailureMessage it) {
+              String _message = exc.getMessage();
+              it.setMessage(_message);
+            }
+          };
+          Protocol.BuildFailureMessage _doubleArrow = ObjectExtensions.<Protocol.BuildFailureMessage>operator_doubleArrow(_buildFailureMessage, _function);
+          this.channel.writeObject(_doubleArrow);
+          return false;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      return false;
     }
     
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {

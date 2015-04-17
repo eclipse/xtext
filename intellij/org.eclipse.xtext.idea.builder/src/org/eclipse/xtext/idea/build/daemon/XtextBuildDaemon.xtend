@@ -28,6 +28,7 @@ import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
+import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -135,17 +136,24 @@ class XtextBuildDaemon {
 
 		def serve(SocketChannel socketChannel) {
 			channel = new ObjectChannel(socketChannel)
-			val msg = channel.readObject
-			switch (msg) {
-				BuildRequestMessage: {
-					LOG.info('Received BuildRequest. Start build...')
-					val buildResult = build(msg)
-					LOG.info('...finished.')
-					channel.writeObject(buildResult)
-					LOG.info('Result sent.')
+			try {
+				val msg = channel.readObject
+				switch (msg) {
+					BuildRequestMessage: {
+						LOG.info('Received BuildRequest. Start build...')
+						val buildResult = build(msg)
+						LOG.info('...finished.')
+						channel.writeObject(buildResult)
+						LOG.info('Result sent.')
+					}
 				}
+				return false
+			} catch(Exception exc) {
+				channel.writeObject(new BuildFailureMessage => [
+					message = exc.message
+				])
+				return false
 			}
-			return false
 		}
 
 		def build(BuildRequestMessage request) {

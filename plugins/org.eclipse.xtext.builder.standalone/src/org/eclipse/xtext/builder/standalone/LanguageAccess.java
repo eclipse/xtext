@@ -34,7 +34,7 @@ public class LanguageAccess {
 	private static final Logger LOG = Logger.getLogger(LanguageAccess.class);
 
 	private Set<OutputConfiguration> outputConfigs;
-	protected IResourceServiceProvider resourceServiceProvider;
+	private IResourceServiceProvider resourceServiceProvider;
 	private boolean linksAgainstJava = true;
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
@@ -55,6 +55,13 @@ public class LanguageAccess {
 
 	public IStubGenerator getStubGenerator() {
 		return resourceServiceProvider.get(IStubGenerator.class);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public IResourceServiceProvider getResourceServiceProvider() {
+		return resourceServiceProvider;
 	}
 
 	public JavaIoFileSystemAccess createFileSystemAccess(final File baseDir) {

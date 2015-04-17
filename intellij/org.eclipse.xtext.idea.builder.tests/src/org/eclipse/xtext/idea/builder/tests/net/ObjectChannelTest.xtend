@@ -69,18 +69,18 @@ class ObjectChannelTest {
 	@Test
 	def void testProtocol() {
 		val request = new BuildRequestMessage => [
-					dirtyFiles += 'dirty.txt'
-					deletedFiles += 'deleted.txt'
-					classpath += 'foo.jar'
-					sourceRoots += 'src'
-					baseDir = 'bar'
-					encoding = 'UTF-8'
-				]
+			dirtyFiles += 'dirty.txt'
+			deletedFiles += 'deleted.txt'
+			classpath += 'foo.jar'
+			sourceRoots += 'src'
+			baseDir = 'bar'
+			encoding = 'UTF-8'
+		]
 		alice.writeObject(request)
 		assertEquals(request, bob.readObject)
 		val issue = new BuildIssueMessage => [
 			kind = BuildMessage.Kind.ERROR
-			message = 'So ja nu nich!'
+			message = 'So ja nu nich!' 
 			path = 'foo'
 			startOffset = 42
 			endOffset = 43

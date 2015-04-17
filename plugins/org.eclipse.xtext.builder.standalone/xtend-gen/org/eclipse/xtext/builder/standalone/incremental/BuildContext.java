@@ -7,11 +7,16 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
+import com.google.common.base.Objects;
 import java.util.Map;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
+import org.eclipse.xtext.builder.standalone.incremental.ClusteringStorageAwareResourceLoader;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -29,6 +34,26 @@ public class BuildContext {
   private final XtextResourceSet resourceSet;
   
   private final IResourceClusteringPolicy clusteringPolicy;
+  
+  private transient ClusteringStorageAwareResourceLoader loader;
+  
+  public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
+    Iterable<T> _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(this.loader, null);
+      if (_equals) {
+        ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
+        this.loader = _clusteringStorageAwareResourceLoader;
+      }
+      _xblockexpression = this.loader.<T>executeClustered(uri, operation);
+    }
+    return _xblockexpression;
+  }
+  
+  public LanguageAccess getLanguageAccess(final URI uri) {
+    String _fileExtension = uri.fileExtension();
+    return this.languages.get(_fileExtension);
+  }
   
   public BuildContext(final Map<String, LanguageAccess> languages, final boolean needsJava, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
     super();

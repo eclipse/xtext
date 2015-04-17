@@ -225,6 +225,48 @@ public class Protocol {
   
   @Accessors
   @EqualsHashCode
+  public static class BuildFailureMessage implements Serializable {
+    private String message;
+    
+    @Pure
+    public String getMessage() {
+      return this.message;
+    }
+    
+    public void setMessage(final String message) {
+      this.message = message;
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      Protocol.BuildFailureMessage other = (Protocol.BuildFailureMessage) obj;
+      if (this.message == null) {
+        if (other.message != null)
+          return false;
+      } else if (!this.message.equals(other.message))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.message== null) ? 0 : this.message.hashCode());
+      return result;
+    }
+  }
+  
+  @Accessors
+  @EqualsHashCode
   public static class BuildIssueMessage implements Serializable {
     private BuildMessage.Kind kind;
     

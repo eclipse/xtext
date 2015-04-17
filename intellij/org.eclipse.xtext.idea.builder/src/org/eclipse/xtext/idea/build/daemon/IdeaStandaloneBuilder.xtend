@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import java.io.File
-import org.apache.log4j.Logger
+//import java.io.File
+//import org.apache.log4j.Logger
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
@@ -18,7 +18,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
  */
 class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
 
-	static val LOG = Logger.getLogger(IdeaStandaloneBuilder)
+//	static val LOG = Logger.getLogger(IdeaStandaloneBuilder)
 
 	XtextBuildResultCollector buildResultCollector
 
@@ -34,12 +34,12 @@ class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
 		fsa
 	}
 	
-	override protected createTempDir(String subDir) {
-		val tmpDir = new File(request.baseDir, subDir)
-		if(!tmpDir.exists) 
-			tmpDir.mkdir
-		else if(!tmpDir.isDirectory)
-			LOG.error('Compilation tmpDir ' + tmpDir + ' exists and is a file')
-		return tmpDir
-	}
+//	override protected createTempDir(String subDir) {
+//		val tmpDir = new File(request.baseDir, subDir)
+//		if(!tmpDir.exists) 
+//			tmpDir.mkdir
+//		else if(!tmpDir.isDirectory)
+//			LOG.error('Compilation tmpDir ' + tmpDir + ' exists and is a file')
+//		return tmpDir
+//	}
 }

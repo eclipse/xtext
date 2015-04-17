@@ -8,14 +8,10 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,26 +25,17 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
-import org.eclipse.xtext.builder.standalone.incremental.IndexerResult;
-import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
-import org.eclipse.xtext.builder.standalone.incremental.ResourceSetClearer;
-import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
-import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -56,7 +43,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -136,6 +122,7 @@ public class IncrementalStandaloneBuilder {
   private final static Logger LOG = Logger.getLogger(IncrementalStandaloneBuilder.class);
   
   @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
+  @Extension
   private BuildContext context;
   
   @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
@@ -147,25 +134,45 @@ public class IncrementalStandaloneBuilder {
   private Indexer indexer;
   
   @Inject
-  private AbstractFileSystemAccess commonFileAccess;
-  
-  @Inject
   private IIssueHandler issueHandler;
-  
-  @Inject
-  private IJavaCompiler compiler;
-  
-  @Inject
-  private JavaSupport javaSupport;
-  
-  @Inject
-  @Extension
-  private ResourceSetClearer _resourceSetClearer;
   
   protected IncrementalStandaloneBuilder() {
   }
   
-  public boolean launch() {
+  public Boolean launch() {
+    this.initialize();
+    final Iterable<URI> affectedResources = this.indexer.computeAndIndexAffected(this.request, this.context);
+    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
+      @Override
+      public Boolean apply(final Resource resource) {
+        resource.getContents();
+        EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+        boolean _validate = IncrementalStandaloneBuilder.this.validate(resource);
+        if (_validate) {
+          IncrementalStandaloneBuilder.this.generate(resource);
+          return Boolean.valueOf(true);
+        }
+        return Boolean.valueOf(false);
+      }
+    };
+    Iterable<Boolean> _executeClustered = this.context.<Boolean>executeClustered(affectedResources, _function);
+    final Function2<Boolean, Boolean, Boolean> _function_1 = new Function2<Boolean, Boolean, Boolean>() {
+      @Override
+      public Boolean apply(final Boolean $0, final Boolean $1) {
+        boolean _and = false;
+        if (!($0).booleanValue()) {
+          _and = false;
+        } else {
+          _and = ($1).booleanValue();
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    final Boolean isErrorFree = IterableExtensions.<Boolean>reduce(_executeClustered, _function_1);
+    return isErrorFree;
+  }
+  
+  protected void initialize() {
     File _elvis = null;
     File _baseDir = this.request.getBaseDir();
     if (_baseDir != null) {
@@ -184,181 +191,34 @@ public class IncrementalStandaloneBuilder {
     if (_isNeedsJava) {
       IncrementalStandaloneBuilder.LOG.info("Using common types.");
     }
-    final XtextResourceSet resourceSet = this.context.getResourceSet();
     String _defaultEncoding = this.request.getDefaultEncoding();
     boolean _notEquals = (!Objects.equal(_defaultEncoding, null));
     if (_notEquals) {
       IncrementalStandaloneBuilder.LOG.info("Setting encoding.");
       Map<String, LanguageAccess> _languages = this.context.getLanguages();
       Collection<LanguageAccess> _values = _languages.values();
-      String _defaultEncoding_1 = this.request.getDefaultEncoding();
-      this.fileEncodingSetup(_values, _defaultEncoding_1);
-    }
-    final IndexerResult indexerResult = this.indexer.computeAffected(this.request, this.context);
-    boolean _isNeedsJava_1 = this.context.isNeedsJava();
-    if (_isNeedsJava_1) {
-      File _generateStubs = this.generateStubs(indexerResult);
-      final File stubsClasses = this.compileStubs(_generateStubs);
-      IncrementalStandaloneBuilder.LOG.info("Installing type provider for stubs.");
-      List<File> _sourceRoots = this.request.getSourceRoots();
-      List<File> _classPath = this.request.getClassPath();
-      Iterable<File> _plus = Iterables.<File>concat(_sourceRoots, _classPath);
-      ArrayList<File> _newArrayList = CollectionLiterals.<File>newArrayList(stubsClasses);
-      Iterable<File> _plus_1 = Iterables.<File>concat(_plus, _newArrayList);
-      this.javaSupport.installTypeProvider(_plus_1, resourceSet);
-    }
-    IncrementalStandaloneBuilder.LOG.info("Validate and generate.");
-    List<URI> _changedResources = indexerResult.getChangedResources();
-    final Iterator<URI> sourceResourceIterator = _changedResources.iterator();
-    boolean isErrorFree = true;
-    while (sourceResourceIterator.hasNext()) {
-      {
-        List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
-        int clusterIndex = 0;
-        boolean continue_ = true;
-        while ((sourceResourceIterator.hasNext() && continue_)) {
-          {
-            final URI uri = sourceResourceIterator.next();
-            final Resource resource = resourceSet.getResource(uri, true);
-            resources.add(resource);
-            resource.getContents();
-            EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-            boolean _validate = this.validate(resource);
-            isErrorFree = _validate;
-            clusterIndex++;
-            IResourceClusteringPolicy _clusteringPolicy = this.context.getClusteringPolicy();
-            boolean _continueProcessing = _clusteringPolicy.continueProcessing(resourceSet, null, clusterIndex);
-            boolean _not = (!_continueProcessing);
-            if (_not) {
-              continue_ = false;
-            }
+      for (final LanguageAccess lang : _values) {
+        IEncodingProvider _encodingProvider = lang.getEncodingProvider();
+        final IEncodingProvider provider = _encodingProvider;
+        boolean _matched = false;
+        if (!_matched) {
+          if (provider instanceof IEncodingProvider.Runtime) {
+            _matched=true;
+            String _defaultEncoding_1 = this.request.getDefaultEncoding();
+            ((IEncodingProvider.Runtime)provider).setDefaultEncoding(_defaultEncoding_1);
           }
         }
-        boolean _and = false;
-        boolean _isFailOnValidationError = this.request.isFailOnValidationError();
-        if (!_isFailOnValidationError) {
-          _and = false;
-        } else {
-          _and = (!isErrorFree);
-        }
-        if (_and) {
-          return isErrorFree;
-        }
-        this.generate(resources);
-        if ((!continue_)) {
-          this._resourceSetClearer.clearResourceSet(resourceSet);
+        if (!_matched) {
+          String _defaultEncoding_1 = this.request.getDefaultEncoding();
+          String _plus = ("Couldn\'t set encoding \'" + _defaultEncoding_1);
+          String _plus_1 = (_plus + "\' for provider \'");
+          String _plus_2 = (_plus_1 + provider);
+          String _plus_3 = (_plus_2 + 
+            "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
+          IncrementalStandaloneBuilder.LOG.info(_plus_3);
         }
       }
     }
-    return isErrorFree;
-  }
-  
-  public void fileEncodingSetup(final Collection<LanguageAccess> langs, final String encoding) {
-    for (final LanguageAccess lang : langs) {
-      IEncodingProvider _encodingProvider = lang.getEncodingProvider();
-      final IEncodingProvider provider = _encodingProvider;
-      boolean _matched = false;
-      if (!_matched) {
-        if (provider instanceof IEncodingProvider.Runtime) {
-          _matched=true;
-          ((IEncodingProvider.Runtime)provider).setDefaultEncoding(encoding);
-        }
-      }
-      if (!_matched) {
-        IncrementalStandaloneBuilder.LOG.info((((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
-          "\'. Only subclasses of IEncodingProvider.Runtime are supported."));
-      }
-    }
-  }
-  
-  protected File compileStubs(final File stubsDir) {
-    final File stubsClassesFolder = this.createTempDir("classes");
-    List<File> _classPath = this.request.getClassPath();
-    final Function1<File, String> _function = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        return it.getAbsolutePath();
-      }
-    };
-    List<String> _map = ListExtensions.<File, String>map(_classPath, _function);
-    this.compiler.setClassPath(_map);
-    String _absolutePath = stubsDir.getAbsolutePath();
-    String _plus = ("Compiling stubs located in " + _absolutePath);
-    IncrementalStandaloneBuilder.LOG.info(_plus);
-    List<File> _sourceRoots = this.request.getSourceRoots();
-    final Function1<File, String> _function_1 = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        return it.getAbsolutePath();
-      }
-    };
-    List<String> _map_1 = ListExtensions.<File, String>map(_sourceRoots, _function_1);
-    String _absolutePath_1 = stubsDir.getAbsolutePath();
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
-    Iterable<String> _plus_1 = Iterables.<String>concat(_map_1, _newArrayList);
-    final Set<String> sourcesToCompile = this.uniqueEntries(_plus_1);
-    String _join = IterableExtensions.join(sourcesToCompile, ",");
-    String _plus_2 = ("Compiler source roots: " + _join);
-    IncrementalStandaloneBuilder.LOG.info(_plus_2);
-    final IJavaCompiler.CompilationResult result = this.compiler.compile(sourcesToCompile, stubsClassesFolder);
-    if (result != null) {
-      switch (result) {
-        case SKIPPED:
-          IncrementalStandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
-          break;
-        case FAILED:
-          IncrementalStandaloneBuilder.LOG.info("Stubs compilation finished with errors.");
-          break;
-        case SUCCEEDED:
-          IncrementalStandaloneBuilder.LOG.info("Stubs compilation successfully finished.");
-          break;
-        default:
-          break;
-      }
-    }
-    return stubsClassesFolder;
-  }
-  
-  protected Set<String> uniqueEntries(final Iterable<String> pathes) {
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        File _file = new File(it);
-        return _file.getAbsolutePath();
-      }
-    };
-    Iterable<String> _map = IterableExtensions.<String, String>map(pathes, _function);
-    return IterableExtensions.<String>toSet(_map);
-  }
-  
-  protected File generateStubs(final IndexerResult result) {
-    final File stubsDir = this.createTempDir("stubs");
-    String _absolutePath = stubsDir.getAbsolutePath();
-    String _plus = ("Generating stubs into " + _absolutePath);
-    IncrementalStandaloneBuilder.LOG.info(_plus);
-    String _absolutePath_1 = stubsDir.getAbsolutePath();
-    this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    List<URI> _changedResources = result.getChangedResources();
-    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        LanguageAccess _languageAccess = IncrementalStandaloneBuilder.this.languageAccess(it);
-        return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
-      }
-    };
-    final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(_changedResources, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        LanguageAccess _languageAccess = IncrementalStandaloneBuilder.this.languageAccess(it);
-        IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
-        ResourceDescriptionsData _newIndex = result.getNewIndex();
-        IResourceDescription _resourceDescription = _newIndex.getResourceDescription(it);
-        _stubGenerator.doGenerateStubs(IncrementalStandaloneBuilder.this.commonFileAccess, _resourceDescription);
-      }
-    };
-    IterableExtensions.<URI>forEach(generateStubs, _function_1);
-    return stubsDir;
   }
   
   protected boolean validate(final Resource resource) {
@@ -368,48 +228,44 @@ public class IncrementalStandaloneBuilder {
     String _plus_1 = (_plus + "\'");
     IncrementalStandaloneBuilder.LOG.info(_plus_1);
     URI _uRI_1 = resource.getURI();
-    LanguageAccess _languageAccess = this.languageAccess(_uRI_1);
+    LanguageAccess _languageAccess = this.context.getLanguageAccess(_uRI_1);
     final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
     final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
     return this.issueHandler.handleIssue(validationResult);
   }
   
-  protected void generate(final List<Resource> sourceResources) {
-    for (final Resource it : sourceResources) {
-      {
-        URI _uRI = it.getURI();
-        String _lastSegment = _uRI.lastSegment();
-        String _plus = ("Starting generator for input: \'" + _lastSegment);
-        String _plus_1 = (_plus + "\'");
-        IncrementalStandaloneBuilder.LOG.info(_plus_1);
-        URI _uRI_1 = it.getURI();
-        this.registerCurrentSource(_uRI_1);
-        URI _uRI_2 = it.getURI();
-        final LanguageAccess access = this.languageAccess(_uRI_2);
-        final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access);
-        boolean _isWriteStorageResources = this.request.isWriteStorageResources();
-        if (_isWriteStorageResources) {
-          boolean _matched = false;
-          if (!_matched) {
-            if (it instanceof StorageAwareResource) {
-              IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)it).getResourceStorageFacade();
-              boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-              if (_notEquals) {
-                _matched=true;
-                IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
-                _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), fileSystemAccess);
-              }
-            }
+  protected void generate(final Resource resource) {
+    URI _uRI = resource.getURI();
+    String _lastSegment = _uRI.lastSegment();
+    String _plus = ("Starting generator for input: \'" + _lastSegment);
+    String _plus_1 = (_plus + "\'");
+    IncrementalStandaloneBuilder.LOG.info(_plus_1);
+    URI _uRI_1 = resource.getURI();
+    this.registerCurrentSource(_uRI_1);
+    URI _uRI_2 = resource.getURI();
+    final LanguageAccess access = this.context.getLanguageAccess(_uRI_2);
+    final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access);
+    boolean _isWriteStorageResources = this.request.isWriteStorageResources();
+    if (_isWriteStorageResources) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (resource instanceof StorageAwareResource) {
+          IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
+          boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
+          if (_notEquals) {
+            _matched=true;
+            IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
+            _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
           }
         }
-        IGenerator _generator = access.getGenerator();
-        _generator.doGenerate(it, fileSystemAccess);
       }
     }
+    IGenerator _generator = access.getGenerator();
+    _generator.doGenerate(resource, fileSystemAccess);
   }
   
   protected void registerCurrentSource(final URI uri) {
-    LanguageAccess _languageAccess = this.languageAccess(uri);
+    LanguageAccess _languageAccess = this.context.getLanguageAccess(uri);
     final JavaIoFileSystemAccess fsa = this.getFileSystemAccess(_languageAccess);
     List<File> _sourceRoots = this.request.getSourceRoots();
     final Function1<File, String> _function = new Function1<File, String>() {
@@ -477,7 +333,7 @@ public class IncrementalStandaloneBuilder {
   
   private Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = CollectionLiterals.<LanguageAccess, JavaIoFileSystemAccess>newHashMap();
   
-  private JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language) {
+  protected JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language) {
     JavaIoFileSystemAccess fsa = this.configuredFsas.get(language);
     boolean _equals = Objects.equal(fsa, null);
     if (_equals) {
@@ -492,38 +348,6 @@ public class IncrementalStandaloneBuilder {
   
   protected JavaIoFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
     return fsa;
-  }
-  
-  private LanguageAccess languageAccess(final URI uri) {
-    Map<String, LanguageAccess> _languages = this.context.getLanguages();
-    String _fileExtension = uri.fileExtension();
-    return _languages.get(_fileExtension);
-  }
-  
-  protected File createTempDir(final String subDir) {
-    try {
-      File _tempDir = this.request.getTempDir();
-      final File file = new File(_tempDir, subDir);
-      boolean _and = false;
-      boolean _mkdirs = file.mkdirs();
-      boolean _not = (!_mkdirs);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _exists = file.exists();
-        boolean _not_1 = (!_exists);
-        _and = _not_1;
-      }
-      if (_and) {
-        String _absolutePath = file.getAbsolutePath();
-        String _plus = ("Failed to create directory \'" + _absolutePath);
-        String _plus_1 = (_plus + "\'");
-        throw new IOException(_plus_1);
-      }
-      return file;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   @Pure
@@ -555,28 +379,8 @@ public class IncrementalStandaloneBuilder {
   }
   
   @Pure
-  protected AbstractFileSystemAccess getCommonFileAccess() {
-    return this.commonFileAccess;
-  }
-  
-  @Pure
   protected IIssueHandler getIssueHandler() {
     return this.issueHandler;
-  }
-  
-  @Pure
-  protected IJavaCompiler getCompiler() {
-    return this.compiler;
-  }
-  
-  @Pure
-  protected JavaSupport getJavaSupport() {
-    return this.javaSupport;
-  }
-  
-  @Pure
-  protected ResourceSetClearer get_resourceSetClearer() {
-    return this._resourceSetClearer;
   }
   
   @Pure

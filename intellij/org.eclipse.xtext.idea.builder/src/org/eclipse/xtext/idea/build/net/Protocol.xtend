@@ -39,6 +39,12 @@ class Protocol {
 	
 	@Accessors
 	@EqualsHashCode
+	static class BuildFailureMessage implements Serializable {
+		String message		
+	}
+	
+	@Accessors
+	@EqualsHashCode
 	static class BuildIssueMessage implements Serializable {
 		BuildMessage.Kind kind
 		String message

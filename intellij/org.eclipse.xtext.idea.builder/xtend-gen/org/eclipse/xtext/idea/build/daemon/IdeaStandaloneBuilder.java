@@ -7,11 +7,8 @@
  */
 package org.eclipse.xtext.idea.build.daemon;
 
-import java.io.File;
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonFileSystemAccess;
@@ -23,8 +20,6 @@ import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
  */
 @SuppressWarnings("all")
 public class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
-  private final static Logger LOG = Logger.getLogger(IdeaStandaloneBuilder.class);
-  
   private XtextBuildResultCollector buildResultCollector;
   
   public void setBuildResultCollector(final XtextBuildResultCollector buildResultCollector) {
@@ -43,24 +38,5 @@ public class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
       _xblockexpression = fsa;
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  protected File createTempDir(final String subDir) {
-    BuildRequest _request = this.getRequest();
-    File _baseDir = _request.getBaseDir();
-    final File tmpDir = new File(_baseDir, subDir);
-    boolean _exists = tmpDir.exists();
-    boolean _not = (!_exists);
-    if (_not) {
-      tmpDir.mkdir();
-    } else {
-      boolean _isDirectory = tmpDir.isDirectory();
-      boolean _not_1 = (!_isDirectory);
-      if (_not_1) {
-        IdeaStandaloneBuilder.LOG.error((("Compilation tmpDir " + tmpDir) + " exists and is a file"));
-      }
-    }
-    return tmpDir;
   }
 }
