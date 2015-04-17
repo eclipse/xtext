@@ -6,7 +6,7 @@
 ##
 ##############################################################################
 
-# Add default JVM options here. You can also use JAVA_OPTS and MAVEN_OPTS to pass JVM options to this script.
+# Add default JVM options here. You can also use JAVA_OPTS, JAVA_ARGS and MAVEN_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
 APP_NAME="Maven"
@@ -149,6 +149,6 @@ fi
 function splitJvmOpts() {
     JVM_OPTS=("$@")
 }
-eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $MAVEN_OPTS
+eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $JAVA_ARGS $MAVEN_OPTS
 
 exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.apache.maven.wrapper.MavenWrapperMain "$@"
