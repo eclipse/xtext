@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.homeautomation.formatting2;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.example.homeautomation.ruleEngine.Model;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEnginePackage;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State;
-import org.eclipse.xtext.example.homeautomation.services.RuleEngineGrammarAccess;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -77,10 +75,6 @@ import org.eclipse.xtext.xtype.XImportSection;
  */
 @SuppressWarnings("all")
 public class RuleEngineFormatter extends XbaseFormatter {
-  @Inject
-  @Extension
-  private RuleEngineGrammarAccess _ruleEngineGrammarAccess;
-  
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
