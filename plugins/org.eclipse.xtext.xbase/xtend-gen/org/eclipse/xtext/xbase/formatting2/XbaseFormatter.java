@@ -644,48 +644,51 @@ public class XbaseFormatter extends XtypeFormatter {
         final ISemanticRegion operator = _leadingSeparator.getSeparator();
         this.formatFeatureCallTypeParameters(call, format);
         final ISemanticRegion feature = this.regionAccess.regionForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-        ITextSegment _region = entry.getRegion();
-        int _length = _region.getLength();
-        int _length_1 = feature.getLength();
-        int _multiply = (_length_1 * 2);
-        final int autowrapLength = Math.min(_length, _multiply);
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = format.prepend(operator, _function);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-            it.autowrap(autowrapLength);
-            it.setOnAutowrap(indentOnce);
-          }
-        };
-        format.append(_prepend, _function_1);
-        boolean _isExplicitOperationCall = call.isExplicitOperationCall();
-        if (_isExplicitOperationCall) {
-          ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(call, "(");
-          final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        boolean _notEquals = (!Objects.equal(feature, null));
+        if (_notEquals) {
+          ITextSegment _region = entry.getRegion();
+          int _length = _region.getLength();
+          int _length_1 = feature.getLength();
+          int _multiply = (_length_1 * 2);
+          final int autowrapLength = Math.min(_length, _multiply);
+          final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          final ISemanticRegion open = format.prepend(_regionForKeyword, _function_2);
-          final ISemanticRegion close = this.regionAccess.regionForKeyword(call, ")");
-          EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-          this.formatFeatureCallParams(_memberCallArguments, open, close, format);
-        } else {
-          EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
-          boolean _isEmpty = _memberCallArguments_1.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (_not) {
-            EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
-            XClosure _builder = this.builder(_memberCallArguments_2);
-            this.formatBuilderWithLeadingGap(_builder, format);
+          ISemanticRegion _prepend = format.prepend(operator, _function);
+          final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
+            public void apply(final IHiddenRegionFormatter it) {
+              it.noSpace();
+              it.autowrap(autowrapLength);
+              it.setOnAutowrap(indentOnce);
+            }
+          };
+          format.append(_prepend, _function_1);
+          boolean _isExplicitOperationCall = call.isExplicitOperationCall();
+          if (_isExplicitOperationCall) {
+            ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(call, "(");
+            final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
+              public void apply(final IHiddenRegionFormatter it) {
+                it.noSpace();
+              }
+            };
+            final ISemanticRegion open = format.prepend(_regionForKeyword, _function_2);
+            final ISemanticRegion close = this.regionAccess.regionForKeyword(call, ")");
+            EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
+            this.formatFeatureCallParams(_memberCallArguments, open, close, format);
+          } else {
+            EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
+            boolean _isEmpty = _memberCallArguments_1.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
+              XClosure _builder = this.builder(_memberCallArguments_2);
+              this.formatBuilderWithLeadingGap(_builder, format);
+            }
           }
         }
       }
