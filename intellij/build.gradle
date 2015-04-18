@@ -28,7 +28,6 @@ configure(eclipsePluginProjects) {
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'org.xtext.idea-component'
 	apply plugin: 'eclipse'
-	apply from: "$rootDir/gradle/eclipse-classpath-fix.gradle"
 	
 	configurations.compile {
 		exclude module:'cglib'

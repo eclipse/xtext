@@ -1,3 +1,10 @@
+/**
+ * This allows us to reference projects built by tycho/eclipse from
+ * normal Java projects, for instance the intellij plugins.
+ * We read the manifest and build.properties to build a Jar file
+ * just like tycho would do it and then use that in the downstream projects.
+ */
+
 import org.apache.ivy.osgi.core.ManifestParser
 
 buildscript {

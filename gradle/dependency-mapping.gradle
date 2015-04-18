@@ -1,3 +1,7 @@
+/**
+ * This is where we translate Manifest.MF dependencies to Maven Central dependencies.
+ */
+
 ext.toDependency = { requirement -> 
 	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
 		return null
@@ -10,7 +14,9 @@ ext.toDependency = { requirement ->
 	}
 	
 	/*
-	* TODO these belong into the dependency resolution rules of the downstream projects
+	* TODO read these from the org.eclipse.xtext.parent pom.xml
+	* TODO we could use this to automatically update all the other poms 
+	* according to their manifest.
 	*/
 	if (requirement.name == 'com.google.inject') {
 		return [group:'com.google.inject', name:'guice', version:'3.0']
@@ -19,7 +25,7 @@ ext.toDependency = { requirement ->
 		return [group:'org.antlr', name:'antlr-runtime', version:'3.2']
 	}
 	if (requirement.name == 'org.eclipse.equinox.common') {
-		return [group:'org.eclipse.equinox', name:'org.eclipse.equinox.common', version:'3.6.0']
+		return [group:'org.eclipse.equinox', name:'common', version:'3.6.200-v20130402-1505']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf.mwe2')) {
 		return [group:'org.eclipse.emf', name: requirement.name, version:'(2.7,3.0)']
