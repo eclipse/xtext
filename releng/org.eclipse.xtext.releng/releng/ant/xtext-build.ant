@@ -68,7 +68,6 @@
 		<echo file="${commands.file}" append="false">
 			resolve "${releng.project}/releng/tests/xtext-test.mspec"
 			resolve "${releng.project}/releng/tests-xtend/xtend-test.mspec"
-			resolve "${releng.project}/releng/xtext-idea.cquery"
 			build
 		</echo>
 		<echo message="build.properties: ${build.properties}" />

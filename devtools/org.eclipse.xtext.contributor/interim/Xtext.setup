@@ -623,7 +623,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern=".*\.idea.*|intellij-dependencies"/>
+              pattern=".*\.idea.*|intellij"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -676,10 +676,12 @@
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="gradle-build"
-        excludedTriggers="MANUAL"
-        launcher="/org.eclipse.xtext.idea.all/launch-gradle-build.launch">
-      <description>Run IDEA  gradle build</description>
+        id="refresh-gradle-dependencies"
+        launcher="/intellij/refresh-gradle-dependencies.launch">
+      <description>
+        Refreshes the .classpath files for the Gradle projects
+        Downloads Intellij IDEA if needed
+      </description>
     </setupTask>
     <stream
         name="master">

@@ -1,19 +1,13 @@
 sourceSets {
 	main {
-		java {
-			srcDirs = ['src', 'xtend-gen', 'src-gen']
-			exclude (
-				'**/*.xtendbin',
-			)
-		}
+		java.srcDirs = ['src', 'xtend-gen', 'src-gen']
 		resources {
 			srcDirs = ['src', 'src-gen']
 			exclude (
-				'**/*.xtend', 
-				'**/*.xtext', 
-				'**/*.mwe2',
 				'**/*._trace',
 				'**/*.xtendbin',
+				'**/*.xtend', 
+				'**/*.mwe2',
 			)
 		}
 	}
@@ -22,5 +16,15 @@ sourceSets {
 jar {
 	metaInf {
 		from('META-INF')
+	}
+}
+
+plugins.withId('eclipse') {
+	if (file('META-INF/MANIFEST.MF').exists()) {
+		eclipse.classpath.containers 'org.eclipse.pde.core.requiredPlugins'
+	}
+	eclipse.classpath.file.whenMerged { classpath ->
+		classpath.entries.findAll { it.kind == 'src' && !it.path.startsWith('/')}.each {it.excludes = []}
+		classpath.entries = classpath.entries.unique()
 	}
 }

@@ -47,6 +47,9 @@ class MavenExec extends Exec {
 		if (project.gradle.startParameter.refreshDependencies) {
 			args '-U'
 		}
+		if (project.gradle.startParameter.logLevel == LogLevel.DEBUG) {
+			args '-X'
+		}
 		args '-T', '1C'
 	}
 }
