@@ -69,7 +69,7 @@ set CMD_LINE_ARGS=%$
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\maven\wrapper\maven-wrapper.jar
+set CLASSPATH=%APP_HOME%\wrapper\maven-wrapper.jar
 
 @rem Execute Maven
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JAVA_ARGS% %MAVEN_OPTS% -classpath "%CLASSPATH%" org.apache.maven.wrapper.MavenWrapperMain %CMD_LINE_ARGS%

@@ -30,26 +30,3 @@ allprojects {
 		}
 	}
 }
-
-task compileEclipsePlugins(type: MavenExec) {
-	args 'clean', 'compile', '-Pinclude-unpublished'
-	workingDir 'maven/org.eclipse.xtext.tycho.parent'
-}
-
-class MavenExec extends Exec {
-	MavenExec() {
-		if (org.gradle.internal.os.OperatingSystem.current().windows) {
-			executable 'cmd'
-			args '/c', "${project.rootDir}/gradle/maven-wrapper/mvnw.bat"
-		} else {
-			executable "${project.rootDir}/gradle/maven-wrapper/mvnw"
-		}
-		if (project.gradle.startParameter.refreshDependencies) {
-			args '-U'
-		}
-		if (project.gradle.startParameter.logLevel == LogLevel.DEBUG) {
-			args '-X'
-		}
-		args '-T', '1C'
-	}
-}
