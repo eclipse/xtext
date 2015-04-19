@@ -36,9 +36,6 @@ branches.each { branch ->
 			xml templates.push.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
-				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
-					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
-					.name = "target-platform-refresh-${branch.name}"
 				config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
 					.project = "target-platforms-${branch.name}"
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
@@ -51,9 +48,6 @@ branches.each { branch ->
 			xml templates.targetPlatforms.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
-				config.buildWrappers.'hudson.plugins.locksandlatches.LockWrapper'
-					.locks.'hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig'
-					.name = "target-platform-refresh-${branch.name}"
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
 					.projects	= testJobs.findAll{slowSuites.contains(it.suite) || generatorSuites.contains(it.suite)}.collect{it.name}.join(',')
