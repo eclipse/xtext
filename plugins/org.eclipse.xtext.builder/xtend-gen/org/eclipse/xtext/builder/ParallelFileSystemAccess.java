@@ -11,6 +11,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension2;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
+import org.eclipse.xtext.generator.IFileSystemAccessExtension4;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
@@ -21,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @since 2.7
  */
 @SuppressWarnings("all")
-public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3 {
+public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3, IFileSystemAccessExtension4 {
   private IResourceDescription.Delta delta;
   
   private String sourceFolder;
@@ -178,5 +179,20 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
       return ((EclipseResourceFileSystemAccess2)this.delegate).readTextFile(fileName, _nullProgressMonitor);
     }
     return ((IFileSystemAccessExtension3) this.delegate).readTextFile(fileName);
+  }
+  
+  /**
+   * @since 2.9
+   */
+  @Override
+  public boolean isFile(final String path, final String outputConfigurationName) throws RuntimeIOException {
+    if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      return ((EclipseResourceFileSystemAccess2)this.delegate).isFile(path, outputConfigurationName, _nullProgressMonitor);
+    }
+    if ((this.delegate instanceof IFileSystemAccessExtension4)) {
+      return ((IFileSystemAccessExtension4) this.delegate).isFile(path, outputConfigurationName);
+    }
+    return false;
   }
 }

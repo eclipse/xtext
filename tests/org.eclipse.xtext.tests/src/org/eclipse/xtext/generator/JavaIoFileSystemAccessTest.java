@@ -55,6 +55,8 @@ public class JavaIoFileSystemAccessTest extends Assert {
 
 			binFile = new File(dir, "Y");
 			assertTrue(binFile.exists());
+			assertFalse(fileSystemAccess.isFile("tmp", IFileSystemAccess.DEFAULT_OUTPUT)); // isFile evaluates to false for directories
+			assertTrue(fileSystemAccess.isFile("tmp/Y", IFileSystemAccess.DEFAULT_OUTPUT));
 			assertTrue(binFile.isFile());
 			InputStream stream = fileSystemAccess.readBinaryFile("tmp/Y");
 			try {

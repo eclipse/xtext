@@ -19,6 +19,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
@@ -28,6 +29,20 @@ import com.google.inject.Injector;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class EclipseResourceFileSystemAccess2Test extends Assert {
+	private IProject project;
+	private EclipseResourceFileSystemAccess2 fsa;
+
+	@Before
+	public void setUp () throws Exception {
+		project = IResourcesSetupUtil.createProject("test");
+		Injector injector = Activator.getInstance().getInjector(
+				Activator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
+		fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
+		fsa.setProject(project);
+		fsa.setOutputPath("src-gen");
+		fsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
+		fsa.setMonitor(new NullProgressMonitor());
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -36,15 +51,6 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 
 	@Test
 	public void testWriteReadFiles() throws Exception {
-		IProject project = IResourcesSetupUtil.createProject("test");
-		Injector injector = Activator.getInstance().getInjector(
-				Activator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
-		EclipseResourceFileSystemAccess2 fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
-		fsa.setProject(project);
-		fsa.setOutputPath("src-gen");
-		fsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
-		fsa.setMonitor(new NullProgressMonitor());
-
 		fsa.generateFile("tmp/X", "XX");
 		IFolder dir = project.getFolder("src-gen/tmp");
 		assertTrue(dir.exists());
@@ -59,5 +65,12 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 		} finally {
 			stream.close();
 		}
+	}
+
+	@Test
+	public void textIsFile() throws Exception {
+		assertFalse(fsa.isFile("tmp/X", IFileSystemAccess.DEFAULT_OUTPUT));
+		fsa.generateFile("tmp/X", "XX");
+		assertTrue(fsa.isFile("tmp/X", IFileSystemAccess.DEFAULT_OUTPUT));
 	}
 }
