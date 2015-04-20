@@ -19,4 +19,5 @@ public class StringEObjectRegion extends AbstractEObjectRegion {
 		this.setGrammarElement(grammarElement);
 		this.setSemantcElement(semanticElement);
 	}
+
 }
