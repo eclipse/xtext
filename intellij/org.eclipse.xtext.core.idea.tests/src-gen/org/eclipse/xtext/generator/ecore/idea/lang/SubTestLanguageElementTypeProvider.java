@@ -125,10 +125,12 @@ public class SubTestLanguageElementTypeProvider implements IElementTypeProvider 
 
 	public static final IGrammarAwareElementType SuperMain_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(SuperMainFactory.createSuperMain_NameIDTerminalRuleCall_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

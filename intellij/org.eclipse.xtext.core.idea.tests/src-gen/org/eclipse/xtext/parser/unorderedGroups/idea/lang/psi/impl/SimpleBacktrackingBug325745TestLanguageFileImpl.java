@@ -13,6 +13,7 @@ public final class SimpleBacktrackingBug325745TestLanguageFileImpl extends BaseX
 		super(viewProvider, SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SimpleBacktrackingBug325745TestLanguageFileType.INSTANCE;
 	}

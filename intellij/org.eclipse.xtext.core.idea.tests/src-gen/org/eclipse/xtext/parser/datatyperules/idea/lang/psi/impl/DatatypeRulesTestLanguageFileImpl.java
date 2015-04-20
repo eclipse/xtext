@@ -13,6 +13,7 @@ public final class DatatypeRulesTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, DatatypeRulesTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return DatatypeRulesTestLanguageFileType.INSTANCE;
 	}

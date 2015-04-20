@@ -17,6 +17,7 @@ public class ElementMatcherTestLanguageParserDefinition extends TerminalsParserD
 	@Inject 
 	private ElementMatcherTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ElementMatcherTestLanguageFileImpl(viewProvider);
 	}

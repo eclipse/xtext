@@ -13,6 +13,7 @@ public final class RegionAccessTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, RegionAccessTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return RegionAccessTestLanguageFileType.INSTANCE;
 	}

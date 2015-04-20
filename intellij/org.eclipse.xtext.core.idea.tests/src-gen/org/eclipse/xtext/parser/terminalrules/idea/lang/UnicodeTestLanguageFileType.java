@@ -16,18 +16,22 @@ public final class UnicodeTestLanguageFileType extends LanguageFileType {
 		super(UnicodeTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "UnicodeTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "UnicodeTestLanguage";
 	}

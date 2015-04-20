@@ -16,18 +16,22 @@ public final class HiddenTerminalsTestLanguageFileType extends LanguageFileType 
 		super(HiddenTerminalsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "HiddenTerminalsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "HiddenTerminalsTestLanguage";
 	}

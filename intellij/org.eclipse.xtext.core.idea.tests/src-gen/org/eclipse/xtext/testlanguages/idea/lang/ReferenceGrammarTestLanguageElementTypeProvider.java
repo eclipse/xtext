@@ -447,10 +447,12 @@ public class ReferenceGrammarTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType Familie_RightParenthesisKeyword_7_ELEMENT_TYPE = associate(FamilieFactory.createFamilie_RightParenthesisKeyword_7ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

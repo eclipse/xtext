@@ -16,6 +16,7 @@ public class Bug301935ExTestLanguageParserDefinition extends Bug301935TestLangua
 	@Inject 
 	private Bug301935ExTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new Bug301935ExTestLanguageFileImpl(viewProvider);
 	}

@@ -13,6 +13,7 @@ public final class SerializationBug269362TestLanguageFileImpl extends BaseXtextF
 		super(viewProvider, SerializationBug269362TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SerializationBug269362TestLanguageFileType.INSTANCE;
 	}

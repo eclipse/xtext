@@ -13,6 +13,7 @@ public final class PartialSerializationTestLanguageFileImpl extends BaseXtextFil
 		super(viewProvider, PartialSerializationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return PartialSerializationTestLanguageFileType.INSTANCE;
 	}

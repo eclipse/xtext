@@ -13,6 +13,7 @@ public final class SimpleExpressionsTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, SimpleExpressionsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SimpleExpressionsTestLanguageFileType.INSTANCE;
 	}

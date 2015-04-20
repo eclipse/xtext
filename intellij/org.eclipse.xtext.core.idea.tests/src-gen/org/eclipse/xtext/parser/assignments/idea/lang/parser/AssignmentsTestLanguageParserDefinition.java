@@ -16,6 +16,7 @@ public class AssignmentsTestLanguageParserDefinition extends TerminalsParserDefi
 	@Inject 
 	private AssignmentsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new AssignmentsTestLanguageFileImpl(viewProvider);
 	}

@@ -17,6 +17,7 @@ public class ComplexReconstrTestLanguageParserDefinition extends TerminalsParser
 	@Inject 
 	private ComplexReconstrTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ComplexReconstrTestLanguageFileImpl(viewProvider);
 	}

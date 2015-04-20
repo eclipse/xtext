@@ -16,6 +16,7 @@ public class EcoreTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@Inject 
 	private EcoreTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EcoreTerminalsTestLanguageFileImpl(viewProvider);
 	}

@@ -17,6 +17,7 @@ public class BacktrackingBug325745TestLanguageParserDefinition extends Terminals
 	@Inject 
 	private BacktrackingBug325745TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new BacktrackingBug325745TestLanguageFileImpl(viewProvider);
 	}

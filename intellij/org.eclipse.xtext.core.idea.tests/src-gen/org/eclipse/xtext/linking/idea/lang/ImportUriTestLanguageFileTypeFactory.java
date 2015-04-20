@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ImportUriTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageFileType.DEFAULT_EXTENSION);
 	}

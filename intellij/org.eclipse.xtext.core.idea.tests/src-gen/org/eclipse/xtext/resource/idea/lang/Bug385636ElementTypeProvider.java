@@ -384,10 +384,12 @@ public class Bug385636ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType Expression_VariableName_VariableNVariableAccessParserRuleCall_0_ELEMENT_TYPE = associate(Expression_VariableNameFactory.createExpression_VariableName_VariableNVariableAccessParserRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SubTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileType.INSTANCE, org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileType.DEFAULT_EXTENSION);
 	}

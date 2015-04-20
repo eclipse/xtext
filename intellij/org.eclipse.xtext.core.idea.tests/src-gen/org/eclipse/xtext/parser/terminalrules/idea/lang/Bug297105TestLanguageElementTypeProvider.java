@@ -205,10 +205,12 @@ public class Bug297105TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Real_INTTerminalRuleCall_2_1_ELEMENT_TYPE = associate(RealFactory.createReal_INTTerminalRuleCall_2_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

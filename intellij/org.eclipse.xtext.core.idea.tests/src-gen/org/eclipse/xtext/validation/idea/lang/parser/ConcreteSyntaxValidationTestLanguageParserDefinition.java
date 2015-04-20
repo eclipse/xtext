@@ -16,6 +16,7 @@ public class ConcreteSyntaxValidationTestLanguageParserDefinition extends Termin
 	@Inject 
 	private ConcreteSyntaxValidationTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ConcreteSyntaxValidationTestLanguageFileImpl(viewProvider);
 	}

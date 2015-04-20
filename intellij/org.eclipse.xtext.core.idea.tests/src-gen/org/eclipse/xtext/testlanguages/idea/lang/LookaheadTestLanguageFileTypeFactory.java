@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LookaheadTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.LookaheadTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.LookaheadTestLanguageFileType.DEFAULT_EXTENSION);
 	}

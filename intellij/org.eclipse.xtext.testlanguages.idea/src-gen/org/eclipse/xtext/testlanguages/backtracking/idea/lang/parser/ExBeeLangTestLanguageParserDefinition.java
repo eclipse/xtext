@@ -16,6 +16,7 @@ public class ExBeeLangTestLanguageParserDefinition extends BeeLangTestLanguagePa
 	@Inject 
 	private ExBeeLangTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ExBeeLangTestLanguageFileImpl(viewProvider);
 	}

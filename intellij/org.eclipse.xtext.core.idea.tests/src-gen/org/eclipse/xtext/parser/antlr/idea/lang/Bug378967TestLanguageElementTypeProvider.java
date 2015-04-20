@@ -369,10 +369,12 @@ public class Bug378967TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType S_SKeyword_ELEMENT_TYPE = associate(SFactory.createS_SKeywordElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -13,6 +13,7 @@ public final class BacktrackingBug325745TestLanguageFileImpl extends BaseXtextFi
 		super(viewProvider, BacktrackingBug325745TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return BacktrackingBug325745TestLanguageFileType.INSTANCE;
 	}

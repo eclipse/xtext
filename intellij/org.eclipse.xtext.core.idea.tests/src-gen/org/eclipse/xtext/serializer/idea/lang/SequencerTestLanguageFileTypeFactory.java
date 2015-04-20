@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SequencerTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageFileType.DEFAULT_EXTENSION);
 	}

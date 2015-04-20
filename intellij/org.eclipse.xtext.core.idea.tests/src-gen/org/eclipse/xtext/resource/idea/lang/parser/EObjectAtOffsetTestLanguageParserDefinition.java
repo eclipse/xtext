@@ -18,6 +18,7 @@ public class EObjectAtOffsetTestLanguageParserDefinition extends TerminalsParser
 	@Inject 
 	private EObjectAtOffsetTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EObjectAtOffsetTestLanguageFileImpl(viewProvider);
 	}

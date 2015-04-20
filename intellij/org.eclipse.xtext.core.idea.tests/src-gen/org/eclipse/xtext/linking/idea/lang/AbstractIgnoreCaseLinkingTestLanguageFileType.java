@@ -16,18 +16,22 @@ public final class AbstractIgnoreCaseLinkingTestLanguageFileType extends Languag
 		super(AbstractIgnoreCaseLinkingTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "AbstractIgnoreCaseLinkingTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "AbstractIgnoreCaseLinkingTestLanguage";
 	}

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class IndexTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.index.idea.lang.IndexTestLanguageFileType.INSTANCE, org.eclipse.xtext.index.idea.lang.IndexTestLanguageFileType.DEFAULT_EXTENSION);
 	}

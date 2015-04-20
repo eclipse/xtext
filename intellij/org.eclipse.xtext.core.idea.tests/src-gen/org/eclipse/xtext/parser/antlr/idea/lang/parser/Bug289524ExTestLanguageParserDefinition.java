@@ -18,6 +18,7 @@ public class Bug289524ExTestLanguageParserDefinition extends TerminalsParserDefi
 	@Inject 
 	private Bug289524ExTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new Bug289524ExTestLanguageFileImpl(viewProvider);
 	}

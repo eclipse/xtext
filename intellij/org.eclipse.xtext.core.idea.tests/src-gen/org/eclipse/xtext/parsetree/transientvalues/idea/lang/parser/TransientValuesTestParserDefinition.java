@@ -16,6 +16,7 @@ public class TransientValuesTestParserDefinition extends TerminalsParserDefiniti
 	@Inject 
 	private TransientValuesTestElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new TransientValuesTestFileImpl(viewProvider);
 	}

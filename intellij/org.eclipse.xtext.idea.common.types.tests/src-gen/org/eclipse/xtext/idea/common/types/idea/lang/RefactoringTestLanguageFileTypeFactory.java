@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RefactoringTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageFileType.INSTANCE, org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageFileType.DEFAULT_EXTENSION);
 	}

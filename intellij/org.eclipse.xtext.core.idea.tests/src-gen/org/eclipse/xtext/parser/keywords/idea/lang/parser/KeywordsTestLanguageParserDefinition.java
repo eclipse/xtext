@@ -16,6 +16,7 @@ public class KeywordsTestLanguageParserDefinition extends TerminalsParserDefinit
 	@Inject 
 	private KeywordsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new KeywordsTestLanguageFileImpl(viewProvider);
 	}

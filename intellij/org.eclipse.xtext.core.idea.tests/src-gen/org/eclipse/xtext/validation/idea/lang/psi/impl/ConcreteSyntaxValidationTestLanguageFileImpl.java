@@ -13,6 +13,7 @@ public final class ConcreteSyntaxValidationTestLanguageFileImpl extends BaseXtex
 		super(viewProvider, ConcreteSyntaxValidationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ConcreteSyntaxValidationTestLanguageFileType.INSTANCE;
 	}

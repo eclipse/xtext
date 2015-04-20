@@ -994,10 +994,12 @@ public class EcoreReferenceTestLanguageElementTypeProvider implements IElementTy
 
 	public static final IGrammarAwareElementType ValidID_IDTerminalRuleCall_ELEMENT_TYPE = associate(ValidIDFactory.createValidID_IDTerminalRuleCallElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

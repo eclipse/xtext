@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LiveContainerTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.resource.idea.lang.LiveContainerTestLanguageFileType.INSTANCE, org.eclipse.xtext.resource.idea.lang.LiveContainerTestLanguageFileType.DEFAULT_EXTENSION);
 	}

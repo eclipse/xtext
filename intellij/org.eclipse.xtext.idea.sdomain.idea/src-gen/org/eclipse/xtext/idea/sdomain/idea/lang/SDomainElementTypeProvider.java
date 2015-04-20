@@ -336,10 +336,12 @@ public class SDomainElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType Property_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(PropertyFactory.createProperty_NameIDTerminalRuleCall_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

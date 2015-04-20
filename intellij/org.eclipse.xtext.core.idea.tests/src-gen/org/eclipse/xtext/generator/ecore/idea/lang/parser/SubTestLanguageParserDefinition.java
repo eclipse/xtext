@@ -17,6 +17,7 @@ public class SubTestLanguageParserDefinition extends SuperTestLanguageParserDefi
 	@Inject 
 	private SubTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SubTestLanguageFileImpl(viewProvider);
 	}

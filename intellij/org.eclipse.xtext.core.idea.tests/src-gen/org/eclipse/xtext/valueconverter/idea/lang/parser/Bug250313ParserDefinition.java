@@ -18,6 +18,7 @@ public class Bug250313ParserDefinition extends TerminalsParserDefinition {
 	@Inject 
 	private Bug250313ElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new Bug250313FileImpl(viewProvider);
 	}

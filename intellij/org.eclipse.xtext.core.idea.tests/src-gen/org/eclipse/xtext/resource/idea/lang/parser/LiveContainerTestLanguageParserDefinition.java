@@ -16,6 +16,7 @@ public class LiveContainerTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private LiveContainerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new LiveContainerTestLanguageFileImpl(viewProvider);
 	}

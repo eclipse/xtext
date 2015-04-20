@@ -13,6 +13,7 @@ public final class EcoreFragmentTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, EcoreFragmentTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return EcoreFragmentTestLanguageFileType.INSTANCE;
 	}

@@ -16,18 +16,22 @@ public final class MultiGenMMTestLanguageFileType extends LanguageFileType {
 		super(MultiGenMMTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "MultiGenMMTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "MultiGenMMTestLanguage";
 	}

@@ -16,6 +16,7 @@ public class BacktrackingLexerTestLanguageParserDefinition extends AbstractXtext
 	@Inject 
 	private BacktrackingLexerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new BacktrackingLexerTestLanguageFileImpl(viewProvider);
 	}

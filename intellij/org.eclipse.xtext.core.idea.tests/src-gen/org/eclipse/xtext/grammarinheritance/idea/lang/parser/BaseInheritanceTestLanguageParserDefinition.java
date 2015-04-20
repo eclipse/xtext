@@ -16,6 +16,7 @@ public class BaseInheritanceTestLanguageParserDefinition extends TerminalsParser
 	@Inject 
 	private BaseInheritanceTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new BaseInheritanceTestLanguageFileImpl(viewProvider);
 	}

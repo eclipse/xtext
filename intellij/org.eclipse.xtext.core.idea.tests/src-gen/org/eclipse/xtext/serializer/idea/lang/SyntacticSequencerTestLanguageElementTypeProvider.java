@@ -1354,10 +1354,12 @@ public class SyntacticSequencerTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType ActionOnly_IDTerminalRuleCall_5_ELEMENT_TYPE = associate(ActionOnlyFactory.createActionOnly_IDTerminalRuleCall_5ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

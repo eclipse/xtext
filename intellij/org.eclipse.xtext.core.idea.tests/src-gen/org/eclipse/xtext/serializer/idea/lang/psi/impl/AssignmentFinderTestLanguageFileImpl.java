@@ -13,6 +13,7 @@ public final class AssignmentFinderTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, AssignmentFinderTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return AssignmentFinderTestLanguageFileType.INSTANCE;
 	}

@@ -17,6 +17,7 @@ public class AbstractTestLanguageParserDefinition extends TerminalsParserDefinit
 	@Inject 
 	private AbstractTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new AbstractTestLanguageFileImpl(viewProvider);
 	}

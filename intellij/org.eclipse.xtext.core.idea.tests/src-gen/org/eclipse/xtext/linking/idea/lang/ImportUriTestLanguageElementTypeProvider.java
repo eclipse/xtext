@@ -135,10 +135,12 @@ public class ImportUriTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Type_ExtendsTypeIDTerminalRuleCall_3_0_1_ELEMENT_TYPE = associate(TypeFactory.createType_ExtendsTypeIDTerminalRuleCall_3_0_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

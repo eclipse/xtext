@@ -1001,10 +1001,12 @@ public class FormatterTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType WrappingDataType_IDTerminalRuleCall_ELEMENT_TYPE = associate(WrappingDataTypeFactory.createWrappingDataType_IDTerminalRuleCallElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

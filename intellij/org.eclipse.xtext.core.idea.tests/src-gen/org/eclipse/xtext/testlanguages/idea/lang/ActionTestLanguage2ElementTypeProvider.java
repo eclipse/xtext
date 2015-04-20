@@ -87,10 +87,12 @@ public class ActionTestLanguage2ElementTypeProvider implements IElementTypeProvi
 
 	public static final IGrammarAwareElementType Value_ValueAKeyword_0_ELEMENT_TYPE = associate(ValueFactory.createValue_ValueAKeyword_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

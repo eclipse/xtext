@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class UnicodeTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageFileType.DEFAULT_EXTENSION);
 	}

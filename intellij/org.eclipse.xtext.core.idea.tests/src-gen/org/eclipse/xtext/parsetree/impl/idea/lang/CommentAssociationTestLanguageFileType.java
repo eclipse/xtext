@@ -16,18 +16,22 @@ public final class CommentAssociationTestLanguageFileType extends LanguageFileTy
 		super(CommentAssociationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "CommentAssociationTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "CommentAssociationTestLanguage";
 	}

@@ -283,10 +283,12 @@ public class LazyLinkingTestLanguageElementTypeProvider implements IElementTypeP
 
 	public static final IGrammarAwareElementType UnresolvedProxyProperty_SemicolonKeyword_3_ELEMENT_TYPE = associate(UnresolvedProxyPropertyFactory.createUnresolvedProxyProperty_SemicolonKeyword_3ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

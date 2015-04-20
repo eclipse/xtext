@@ -13,6 +13,7 @@ public final class BeeLangTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, BeeLangTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return BeeLangTestLanguageFileType.INSTANCE;
 	}

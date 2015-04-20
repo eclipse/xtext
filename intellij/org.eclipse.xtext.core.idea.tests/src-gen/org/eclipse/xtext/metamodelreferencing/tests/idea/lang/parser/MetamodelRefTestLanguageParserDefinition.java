@@ -17,6 +17,7 @@ public class MetamodelRefTestLanguageParserDefinition extends TerminalsParserDef
 	@Inject 
 	private MetamodelRefTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new MetamodelRefTestLanguageFileImpl(viewProvider);
 	}

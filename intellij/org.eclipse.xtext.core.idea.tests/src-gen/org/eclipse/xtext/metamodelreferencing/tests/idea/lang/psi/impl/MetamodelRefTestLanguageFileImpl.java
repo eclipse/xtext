@@ -13,6 +13,7 @@ public final class MetamodelRefTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, MetamodelRefTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return MetamodelRefTestLanguageFileType.INSTANCE;
 	}

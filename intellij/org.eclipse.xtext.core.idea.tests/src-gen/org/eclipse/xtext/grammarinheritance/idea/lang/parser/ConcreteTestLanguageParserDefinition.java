@@ -17,6 +17,7 @@ public class ConcreteTestLanguageParserDefinition extends AbstractTestLanguagePa
 	@Inject 
 	private ConcreteTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ConcreteTestLanguageFileImpl(viewProvider);
 	}

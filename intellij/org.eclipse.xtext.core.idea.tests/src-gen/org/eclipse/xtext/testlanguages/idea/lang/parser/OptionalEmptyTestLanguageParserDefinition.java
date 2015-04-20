@@ -17,6 +17,7 @@ public class OptionalEmptyTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private OptionalEmptyTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new OptionalEmptyTestLanguageFileImpl(viewProvider);
 	}

@@ -16,6 +16,7 @@ public class SerializationBug269362TestLanguageParserDefinition extends Terminal
 	@Inject 
 	private SerializationBug269362TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SerializationBug269362TestLanguageFileImpl(viewProvider);
 	}

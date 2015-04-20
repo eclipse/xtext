@@ -18,6 +18,7 @@ public class RegionAccessTestLanguageParserDefinition extends TerminalsParserDef
 	@Inject 
 	private RegionAccessTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new RegionAccessTestLanguageFileImpl(viewProvider);
 	}

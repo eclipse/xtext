@@ -16,18 +16,22 @@ public final class MultiValueFeatureTestLanguageFileType extends LanguageFileTyp
 		super(MultiValueFeatureTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "MultiValueFeatureTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "MultiValueFeatureTestLanguage";
 	}

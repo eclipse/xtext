@@ -13,6 +13,7 @@ public final class ImportUriTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ImportUriTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ImportUriTestLanguageFileType.INSTANCE;
 	}

@@ -16,6 +16,7 @@ public class SerializationErrorTestLanguageParserDefinition extends TerminalsPar
 	@Inject 
 	private SerializationErrorTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SerializationErrorTestLanguageFileImpl(viewProvider);
 	}

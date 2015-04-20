@@ -13,6 +13,7 @@ public final class ContextFinderTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ContextFinderTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ContextFinderTestLanguageFileType.INSTANCE;
 	}

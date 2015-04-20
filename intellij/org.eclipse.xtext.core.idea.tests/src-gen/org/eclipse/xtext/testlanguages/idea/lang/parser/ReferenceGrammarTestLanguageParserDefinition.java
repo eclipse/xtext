@@ -18,6 +18,7 @@ public class ReferenceGrammarTestLanguageParserDefinition extends TerminalsParse
 	@Inject 
 	private ReferenceGrammarTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ReferenceGrammarTestLanguageFileImpl(viewProvider);
 	}

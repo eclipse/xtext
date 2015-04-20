@@ -16,6 +16,7 @@ public class SuperTestLanguageParserDefinition extends TerminalsParserDefinition
 	@Inject 
 	private SuperTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SuperTestLanguageFileImpl(viewProvider);
 	}

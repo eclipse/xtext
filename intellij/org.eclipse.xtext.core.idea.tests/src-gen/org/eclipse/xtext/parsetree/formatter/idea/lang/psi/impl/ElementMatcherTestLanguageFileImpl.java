@@ -13,6 +13,7 @@ public final class ElementMatcherTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ElementMatcherTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ElementMatcherTestLanguageFileType.INSTANCE;
 	}

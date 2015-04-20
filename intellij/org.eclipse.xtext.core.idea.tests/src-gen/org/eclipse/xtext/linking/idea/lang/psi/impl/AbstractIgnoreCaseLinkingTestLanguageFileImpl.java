@@ -13,6 +13,7 @@ public final class AbstractIgnoreCaseLinkingTestLanguageFileImpl extends BaseXte
 		super(viewProvider, AbstractIgnoreCaseLinkingTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return AbstractIgnoreCaseLinkingTestLanguageFileType.INSTANCE;
 	}

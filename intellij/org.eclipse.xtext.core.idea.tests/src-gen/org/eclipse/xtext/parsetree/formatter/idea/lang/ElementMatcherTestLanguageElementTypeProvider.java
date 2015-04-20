@@ -1018,10 +1018,12 @@ public class ElementMatcherTestLanguageElementTypeProvider implements IElementTy
 
 	public static final IGrammarAwareElementType NestedStartSub_NestedStartSubAction_1_ELEMENT_TYPE = associate(NestedStartSubFactory.createNestedStartSub_NestedStartSubAction_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

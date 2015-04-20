@@ -18,6 +18,7 @@ public class PartialParserTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private PartialParserTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new PartialParserTestLanguageFileImpl(viewProvider);
 	}

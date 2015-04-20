@@ -130,10 +130,12 @@ public class RefactoringTestLanguageElementTypeProvider implements IElementTypeP
 
 	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE = associate(FQNFactory.createFQN_IDTerminalRuleCall_2_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

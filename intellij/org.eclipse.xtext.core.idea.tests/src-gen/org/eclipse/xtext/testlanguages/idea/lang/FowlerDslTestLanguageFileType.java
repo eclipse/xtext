@@ -16,18 +16,22 @@ public final class FowlerDslTestLanguageFileType extends LanguageFileType {
 		super(FowlerDslTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "FowlerDslTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "FowlerDslTestLanguage";
 	}

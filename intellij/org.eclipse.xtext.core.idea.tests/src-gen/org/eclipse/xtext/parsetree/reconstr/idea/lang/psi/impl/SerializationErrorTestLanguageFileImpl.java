@@ -13,6 +13,7 @@ public final class SerializationErrorTestLanguageFileImpl extends BaseXtextFile 
 		super(viewProvider, SerializationErrorTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SerializationErrorTestLanguageFileType.INSTANCE;
 	}

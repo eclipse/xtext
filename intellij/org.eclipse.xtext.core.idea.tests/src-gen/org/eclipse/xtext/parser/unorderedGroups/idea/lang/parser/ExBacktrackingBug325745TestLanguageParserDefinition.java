@@ -16,6 +16,7 @@ public class ExBacktrackingBug325745TestLanguageParserDefinition extends Backtra
 	@Inject 
 	private ExBacktrackingBug325745TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ExBacktrackingBug325745TestLanguageFileImpl(viewProvider);
 	}

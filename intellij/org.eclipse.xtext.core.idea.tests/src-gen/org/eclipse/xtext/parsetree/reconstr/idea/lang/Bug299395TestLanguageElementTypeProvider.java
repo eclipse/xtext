@@ -172,10 +172,12 @@ public class Bug299395TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType SubModel_StringsSTRINGTerminalRuleCall_1_2_0_ELEMENT_TYPE = associate(SubModelFactory.createSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

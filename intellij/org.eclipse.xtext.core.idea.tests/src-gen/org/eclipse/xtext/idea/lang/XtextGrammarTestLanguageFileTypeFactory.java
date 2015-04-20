@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class XtextGrammarTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageFileType.INSTANCE, org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageFileType.DEFAULT_EXTENSION);
 	}

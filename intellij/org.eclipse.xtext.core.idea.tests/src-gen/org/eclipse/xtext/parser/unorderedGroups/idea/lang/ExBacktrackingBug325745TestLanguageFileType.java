@@ -16,18 +16,22 @@ public final class ExBacktrackingBug325745TestLanguageFileType extends LanguageF
 		super(ExBacktrackingBug325745TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ExBacktrackingBug325745TestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ExBacktrackingBug325745TestLanguage";
 	}
