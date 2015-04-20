@@ -11,8 +11,10 @@ package org.eclipse.xtext.generator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,10 +25,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
@@ -57,7 +62,7 @@ import com.google.common.collect.Maps;
 /**
  * The main xtext generator. Can be configured with {@link IGeneratorFragment} instances as well as with some properties
  * declared via setter or adder methods.
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
@@ -99,11 +104,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 	 */
 	public static final String MODEL = "MODEL";
 	public static final String PLUGIN_RT = "PLUGIN";
-	
+
 	private static final String FILE_HEADER_VAR_TIME = "${time}";
 	private static final String FILE_HEADER_VAR_DATE = "${date}";
 	private static final String FILE_HEADER_VAR_YEAR = "${year}";
 	private static final String FILE_HEADER_VAR_USER = "${user}";
+	private static final String FILE_HEADER_VAR_VERSION = "${version}";
 
 	private Naming naming = new Naming();
 	private String encoding;
@@ -223,7 +229,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		return true;
 	}
-	
+
 	public void addPostProcessor(PostProcessor postProcessor) {
 		this.postProcessors.add(postProcessor);
 	}
@@ -239,14 +245,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public void setPathRtProject(String pathRtProject) {
 		this.pathRtProject = pathRtProject;
 	}
-	
+
 	/**
 	 * @since 2.8
 	 */
 	public String getPathIdeProject() {
 		return pathIdeProject;
 	}
-	
+
 	/**
 	 * @since 2.8
 	 */
@@ -293,19 +299,19 @@ public class Generator extends AbstractWorkflowComponent2 {
 		String result = fileHeader;
 		if (result != null) {
 			if (result.contains(FILE_HEADER_VAR_TIME)) {
-			    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-			    String time = dateFormat.format(new Date());
-			    result = result.replace(FILE_HEADER_VAR_TIME, time);
+				DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+				String time = dateFormat.format(new Date());
+				result = result.replace(FILE_HEADER_VAR_TIME, time);
 			}
 			if (result.contains(FILE_HEADER_VAR_DATE)) {
-			    DateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
-			    String date = dateFormat.format(new Date());
-			    result = result.replace(FILE_HEADER_VAR_DATE, date);
+				DateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
+				String date = dateFormat.format(new Date());
+				result = result.replace(FILE_HEADER_VAR_DATE, date);
 			}
 			if (result.contains(FILE_HEADER_VAR_YEAR)) {
-			    DateFormat dateFormat = new SimpleDateFormat("yyyy");
-			    String year = dateFormat.format(new Date());
-			    result = result.replace(FILE_HEADER_VAR_YEAR, year);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy");
+				String year = dateFormat.format(new Date());
+				result = result.replace(FILE_HEADER_VAR_YEAR, year);
 			}
 			if (result.contains(FILE_HEADER_VAR_USER)) {
 				String user = System.getProperty("user.name");
@@ -313,8 +319,46 @@ public class Generator extends AbstractWorkflowComponent2 {
 					result = result.replace(FILE_HEADER_VAR_USER, user);
 				}
 			}
+			if (result.contains(FILE_HEADER_VAR_VERSION)) {
+				String version = getVersion();
+				if (version != null) {
+					result = result.replace(FILE_HEADER_VAR_VERSION, version);
+				}
+			}
 		}
 		return result;
+	}
+
+	private String getVersion() {
+		// Read the exact version from the Manifest of the plugin.
+		InputStream is = null;
+		try {
+			URL url = new URL(Plugin.INSTANCE.getBaseURL() + "META-INF/MANIFEST.MF");
+			is = url.openStream();
+			final Manifest manifest = new Manifest(is);
+			return manifest.getMainAttributes().getValue("Bundle-Version");
+		}
+		catch (Exception e) {
+			return null;
+		} finally {
+			if (is!=null) {
+				try { is.close(); }
+				catch (IOException e) {}
+			}
+		}
+	}
+
+	// only needed to determine the Manifest file and its version of this plugin in standalone mode
+	private static class Plugin extends EMFPlugin {
+		public static final Plugin INSTANCE = new Plugin();
+		private Plugin() {
+			super(new ResourceLocator[] {});
+		}
+
+		@Override
+		public ResourceLocator getPluginResourceLocator() {
+			return null;
+		}
 	}
 
 	/**
@@ -324,8 +368,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 	 *   <li><code>\${date}</code></li>
 	 *   <li><code>\${year}</code></li>
 	 *   <li><code>\${user}</code></li>
+	 *   <li><code>\${version}</code></li>
 	 * </ul>
-	 * 
+	 *
 	 * @since 2.8
 	 */
 	public void setFileHeader(String fileHeader) {
@@ -409,16 +454,16 @@ public class Generator extends AbstractWorkflowComponent2 {
 		langConfig.initialize(isUi());
 		this.languageConfigs.add(langConfig);
 	}
-	
+
 	/**
 	 * Class annotations are used configure specific Java annotations to be added to each generated class.
-	 * 
+	 *
 	 * @since 2.8
 	 */
 	public void addClassAnnotation(IClassAnnotation annotation) {
 		this.classAnnotations.add(annotation);
 	}
-	
+
 	private String getClassAnnotationsAsString() {
 		if (classAnnotations.isEmpty()) {
 			return null;
@@ -429,7 +474,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		return stringBuilder.toString();
 	}
-	
+
 	private String getAnnotationImportsAsString() {
 		if (classAnnotations.isEmpty()) {
 			return null;
@@ -502,7 +547,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			}
 		}
 	}
-	
+
 	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
 		ctx.getOutput().openFile(naming.asPath(naming.setupImpl(config.getGrammar())) + ".java", SRC_GEN);
 		try {
@@ -541,7 +586,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean isUi() {
 		return getPathUiProject() != null;
 	}
-	
+
 	private boolean isIde() {
 		return getPathIdeProject() != null;
 	}
@@ -678,7 +723,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			}
 		}
 	}
-	
+
 	private void generateManifestIde(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		if (isIde() && !isIdeMergedIntoRt() ) {
 			String manifestPath = "META-INF/MANIFEST.MF";
@@ -760,11 +805,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean isUiMergedIntoRt() {
 		return getPathRtProject().equals(getPathUiProject());
 	}
-	
+
 	private boolean isIdeMergedIntoRt() {
 		return getPathRtProject().equals(getPathIdeProject());
 	}
-	
+
 	private String getBundleVersion() {
 		return "0.0.1";
 	}
@@ -790,16 +835,16 @@ public class Generator extends AbstractWorkflowComponent2 {
 			return getProjectNameRt() + ".ui";
 		return projectNameUi;
 	}
-	
+
 	private String projectNameIde;
-	
+
 	/**
 	 * @since 2.8
 	 */
 	public void setProjectNameIde(String projectNameIde) {
 		this.projectNameIde = projectNameIde;
 	}
-	
+
 	private String getProjectNameIde() {
 		if (projectNameIde == null)
 			return getProjectNameRt() + ".ide";
@@ -837,19 +882,19 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
-	
+
 	/**
 	 * Sets the line delimiter that is to be used by this generator. By default,
 	 * the system's line delimiter is used.
-	 * 
-	 * Usually one of {@code \n} and {@code \r\n} is to be configured. 
-	 * 
+	 *
+	 * Usually one of {@code \n} and {@code \r\n} is to be configured.
+	 *
 	 * @since 2.7
 	 */
 	public void setLineDelimiter(String lineDelimiter) {
 		this.naming.setLineDelimiter(lineDelimiter);
 	}
-	
+
 	/**
 	 * @since 2.7
 	 */
