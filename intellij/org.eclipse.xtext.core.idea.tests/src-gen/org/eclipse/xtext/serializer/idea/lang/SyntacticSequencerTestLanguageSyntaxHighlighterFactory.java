@@ -7,6 +7,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 
 public class SyntacticSequencerTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
+	@Override
     @NotNull
     protected SyntaxHighlighter createHighlighter() {
         return SyntacticSequencerTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);

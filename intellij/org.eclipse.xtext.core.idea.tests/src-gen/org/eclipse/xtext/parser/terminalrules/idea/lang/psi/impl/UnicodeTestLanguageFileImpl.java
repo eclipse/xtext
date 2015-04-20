@@ -13,6 +13,7 @@ public final class UnicodeTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, UnicodeTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return UnicodeTestLanguageFileType.INSTANCE;
 	}

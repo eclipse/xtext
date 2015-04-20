@@ -16,6 +16,7 @@ public class UnassignedTextTestLanguageParserDefinition extends TerminalsParserD
 	@Inject 
 	private UnassignedTextTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new UnassignedTextTestLanguageFileImpl(viewProvider);
 	}

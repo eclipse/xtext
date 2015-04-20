@@ -17,6 +17,7 @@ public class EnumAndReferenceTestLanguageParserDefinition extends TerminalsParse
 	@Inject 
 	private EnumAndReferenceTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EnumAndReferenceTestLanguageFileImpl(viewProvider);
 	}

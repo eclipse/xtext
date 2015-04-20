@@ -13,6 +13,7 @@ public final class BaseInheritanceTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, BaseInheritanceTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return BaseInheritanceTestLanguageFileType.INSTANCE;
 	}

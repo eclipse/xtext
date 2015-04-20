@@ -7,6 +7,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 
 public class PartialParserTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
+	@Override
     @NotNull
     protected SyntaxHighlighter createHighlighter() {
         return PartialParserTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);

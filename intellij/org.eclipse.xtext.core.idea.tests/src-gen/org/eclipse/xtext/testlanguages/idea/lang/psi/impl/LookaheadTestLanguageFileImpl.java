@@ -13,6 +13,7 @@ public final class LookaheadTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, LookaheadTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return LookaheadTestLanguageFileType.INSTANCE;
 	}

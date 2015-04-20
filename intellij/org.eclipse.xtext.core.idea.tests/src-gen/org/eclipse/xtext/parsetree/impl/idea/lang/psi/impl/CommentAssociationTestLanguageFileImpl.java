@@ -13,6 +13,7 @@ public final class CommentAssociationTestLanguageFileImpl extends BaseXtextFile 
 		super(viewProvider, CommentAssociationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return CommentAssociationTestLanguageFileType.INSTANCE;
 	}

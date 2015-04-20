@@ -7,6 +7,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 
 public class Bug305397SyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
+	@Override
     @NotNull
     protected SyntaxHighlighter createHighlighter() {
         return Bug305397Language.INSTANCE.getInstance(SyntaxHighlighter.class);

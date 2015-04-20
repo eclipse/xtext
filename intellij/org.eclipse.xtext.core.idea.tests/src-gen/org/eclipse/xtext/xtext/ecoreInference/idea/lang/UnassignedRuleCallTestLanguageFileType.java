@@ -16,18 +16,22 @@ public final class UnassignedRuleCallTestLanguageFileType extends LanguageFileTy
 		super(UnassignedRuleCallTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "UnassignedRuleCallTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "UnassignedRuleCallTestLanguage";
 	}

@@ -16,6 +16,7 @@ public class DatatypeRulesTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private DatatypeRulesTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new DatatypeRulesTestLanguageFileImpl(viewProvider);
 	}

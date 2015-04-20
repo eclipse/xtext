@@ -16,18 +16,22 @@ public final class OptionalEmptyTestLanguageFileType extends LanguageFileType {
 		super(OptionalEmptyTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "OptionalEmptyTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "OptionalEmptyTestLanguage";
 	}

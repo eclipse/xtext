@@ -13,6 +13,7 @@ public final class MultiRuleEnumTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, MultiRuleEnumTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return MultiRuleEnumTestLanguageFileType.INSTANCE;
 	}

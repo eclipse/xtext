@@ -18,6 +18,7 @@ public class EpatchTestLanguageParserDefinition extends TerminalsParserDefinitio
 	@Inject 
 	private EpatchTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EpatchTestLanguageFileImpl(viewProvider);
 	}

@@ -3692,10 +3692,12 @@ public class ExBeeLangTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType QID_IDTerminalRuleCall_2_2_2_ELEMENT_TYPE = associate(QIDFactory.createQID_IDTerminalRuleCall_2_2_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

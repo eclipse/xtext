@@ -16,6 +16,7 @@ public class EnumRulesTestLanguageParserDefinition extends TerminalsParserDefini
 	@Inject 
 	private EnumRulesTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EnumRulesTestLanguageFileImpl(viewProvider);
 	}

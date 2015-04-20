@@ -16,6 +16,7 @@ public class SimpleBeeLangTestLanguageParserDefinition extends BeeLangTestLangua
 	@Inject 
 	private SimpleBeeLangTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SimpleBeeLangTestLanguageFileImpl(viewProvider);
 	}

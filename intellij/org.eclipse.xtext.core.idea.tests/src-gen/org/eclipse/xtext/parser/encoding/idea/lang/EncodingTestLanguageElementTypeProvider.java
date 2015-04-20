@@ -62,10 +62,12 @@ public class EncodingTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public static final IGrammarAwareElementType Word_ValueLEXEMETerminalRuleCall_0_ELEMENT_TYPE = associate(WordFactory.createWord_ValueLEXEMETerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

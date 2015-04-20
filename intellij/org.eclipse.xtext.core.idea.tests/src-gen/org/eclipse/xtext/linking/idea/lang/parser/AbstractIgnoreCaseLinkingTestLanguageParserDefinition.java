@@ -18,6 +18,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageParserDefinition extends Termi
 	@Inject 
 	private AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new AbstractIgnoreCaseLinkingTestLanguageFileImpl(viewProvider);
 	}

@@ -16,18 +16,22 @@ public final class IgnoreCaseLexerTestLanguageFileType extends LanguageFileType 
 		super(IgnoreCaseLexerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "IgnoreCaseLexerTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "IgnoreCaseLexerTestLanguage";
 	}

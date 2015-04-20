@@ -16,18 +16,22 @@ public final class EnumAndReferenceTestLanguageFileType extends LanguageFileType
 		super(EnumAndReferenceTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "EnumAndReferenceTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "EnumAndReferenceTestLanguage";
 	}

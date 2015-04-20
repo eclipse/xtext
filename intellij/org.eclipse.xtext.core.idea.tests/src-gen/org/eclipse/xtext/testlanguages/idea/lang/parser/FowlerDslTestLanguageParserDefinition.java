@@ -18,6 +18,7 @@ public class FowlerDslTestLanguageParserDefinition extends TerminalsParserDefini
 	@Inject 
 	private FowlerDslTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new FowlerDslTestLanguageFileImpl(viewProvider);
 	}

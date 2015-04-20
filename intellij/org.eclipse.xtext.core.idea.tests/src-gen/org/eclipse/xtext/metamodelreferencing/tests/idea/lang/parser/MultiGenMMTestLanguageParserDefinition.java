@@ -17,6 +17,7 @@ public class MultiGenMMTestLanguageParserDefinition extends TerminalsParserDefin
 	@Inject 
 	private MultiGenMMTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new MultiGenMMTestLanguageFileImpl(viewProvider);
 	}

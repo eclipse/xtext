@@ -16,18 +16,22 @@ public final class XtextGrammarTestLanguageFileType extends LanguageFileType {
 		super(XtextGrammarTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "XtextGrammarTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "XtextGrammarTestLanguage";
 	}

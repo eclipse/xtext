@@ -17,6 +17,7 @@ public class TreeTestLanguageParserDefinition extends TerminalsParserDefinition 
 	@Inject 
 	private TreeTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new TreeTestLanguageFileImpl(viewProvider);
 	}

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DatatypeRulesTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageFileType.DEFAULT_EXTENSION);
 	}

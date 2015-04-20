@@ -18,6 +18,7 @@ public class EcoreReferenceTestLanguageParserDefinition extends TerminalsParserD
 	@Inject 
 	private EcoreReferenceTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EcoreReferenceTestLanguageFileImpl(viewProvider);
 	}

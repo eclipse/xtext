@@ -13,6 +13,7 @@ public final class ActionTestLanguage2FileImpl extends BaseXtextFile {
 		super(viewProvider, ActionTestLanguage2Language.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ActionTestLanguage2FileType.INSTANCE;
 	}

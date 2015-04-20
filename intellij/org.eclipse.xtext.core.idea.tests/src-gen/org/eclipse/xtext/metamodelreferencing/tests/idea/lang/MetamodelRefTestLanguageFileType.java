@@ -16,18 +16,22 @@ public final class MetamodelRefTestLanguageFileType extends LanguageFileType {
 		super(MetamodelRefTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "MetamodelRefTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "MetamodelRefTestLanguage";
 	}

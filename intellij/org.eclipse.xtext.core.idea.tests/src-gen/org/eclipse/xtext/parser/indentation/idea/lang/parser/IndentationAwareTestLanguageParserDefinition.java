@@ -17,6 +17,7 @@ public class IndentationAwareTestLanguageParserDefinition extends TerminalsParse
 	@Inject 
 	private IndentationAwareTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IndentationAwareTestLanguageFileImpl(viewProvider);
 	}

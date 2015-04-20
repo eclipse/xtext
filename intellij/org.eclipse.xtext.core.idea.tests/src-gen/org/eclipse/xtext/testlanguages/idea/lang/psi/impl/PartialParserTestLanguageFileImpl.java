@@ -13,6 +13,7 @@ public final class PartialParserTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, PartialParserTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return PartialParserTestLanguageFileType.INSTANCE;
 	}

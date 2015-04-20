@@ -18,6 +18,7 @@ public class LazyLinkingTestLanguageParserDefinition extends TerminalsParserDefi
 	@Inject 
 	private LazyLinkingTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new LazyLinkingTestLanguageFileImpl(viewProvider);
 	}

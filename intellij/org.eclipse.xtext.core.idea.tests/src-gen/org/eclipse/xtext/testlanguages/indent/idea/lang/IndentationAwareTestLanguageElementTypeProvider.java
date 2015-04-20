@@ -135,10 +135,12 @@ public class IndentationAwareTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType String_OTHERTerminalRuleCall_ELEMENT_TYPE = associate(StringFactory.createString_OTHERTerminalRuleCallElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

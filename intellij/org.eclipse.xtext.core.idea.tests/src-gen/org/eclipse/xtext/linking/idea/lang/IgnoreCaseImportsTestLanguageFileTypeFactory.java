@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class IgnoreCaseImportsTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageFileType.DEFAULT_EXTENSION);
 	}

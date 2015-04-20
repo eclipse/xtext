@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class HiddenTokenSequencerTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageFileType.DEFAULT_EXTENSION);
 	}

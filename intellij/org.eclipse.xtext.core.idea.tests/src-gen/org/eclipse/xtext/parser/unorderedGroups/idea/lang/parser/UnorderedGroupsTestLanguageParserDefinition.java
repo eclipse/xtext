@@ -16,6 +16,7 @@ public class UnorderedGroupsTestLanguageParserDefinition extends TerminalsParser
 	@Inject 
 	private UnorderedGroupsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new UnorderedGroupsTestLanguageFileImpl(viewProvider);
 	}

@@ -315,10 +315,12 @@ public class Bug288432TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType MyInt_IntINTTerminalRuleCall_0_ELEMENT_TYPE = associate(MyIntFactory.createMyInt_IntINTTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

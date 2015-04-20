@@ -17,6 +17,7 @@ public class EntitiesParserDefinition extends XbaseParserDefinition {
 	@Inject 
 	private EntitiesElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EntitiesFileImpl(viewProvider);
 	}

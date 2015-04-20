@@ -13,6 +13,7 @@ public final class FormatterTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, FormatterTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return FormatterTestLanguageFileType.INSTANCE;
 	}

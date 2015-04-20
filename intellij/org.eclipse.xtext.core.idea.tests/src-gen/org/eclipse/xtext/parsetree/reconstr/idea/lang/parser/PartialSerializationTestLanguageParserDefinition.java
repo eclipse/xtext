@@ -17,6 +17,7 @@ public class PartialSerializationTestLanguageParserDefinition extends TerminalsP
 	@Inject 
 	private PartialSerializationTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new PartialSerializationTestLanguageFileImpl(viewProvider);
 	}

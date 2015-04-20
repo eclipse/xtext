@@ -16,18 +16,22 @@ public final class PartialSerializationTestLanguageFileType extends LanguageFile
 		super(PartialSerializationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "PartialSerializationTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "PartialSerializationTestLanguage";
 	}

@@ -17,6 +17,7 @@ public class CommentAssociationTestLanguageParserDefinition extends TerminalsPar
 	@Inject 
 	private CommentAssociationTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new CommentAssociationTestLanguageFileImpl(viewProvider);
 	}

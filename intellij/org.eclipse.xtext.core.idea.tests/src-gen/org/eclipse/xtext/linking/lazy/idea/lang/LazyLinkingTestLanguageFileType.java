@@ -16,18 +16,22 @@ public final class LazyLinkingTestLanguageFileType extends LanguageFileType {
 		super(LazyLinkingTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "LazyLinkingTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "LazyLinkingTestLanguage";
 	}

@@ -18,6 +18,7 @@ public class XtextTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@Inject 
 	private XtextTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtextTerminalsTestLanguageFileImpl(viewProvider);
 	}

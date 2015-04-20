@@ -16,18 +16,22 @@ public final class SimpleExpressionsTestLanguageFileType extends LanguageFileTyp
 		super(SimpleExpressionsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SimpleExpressionsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SimpleExpressionsTestLanguage";
 	}

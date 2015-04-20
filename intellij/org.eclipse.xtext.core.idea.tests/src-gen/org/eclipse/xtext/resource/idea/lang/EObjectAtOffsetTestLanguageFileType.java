@@ -16,18 +16,22 @@ public final class EObjectAtOffsetTestLanguageFileType extends LanguageFileType 
 		super(EObjectAtOffsetTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "EObjectAtOffsetTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "EObjectAtOffsetTestLanguage";
 	}

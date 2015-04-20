@@ -453,10 +453,12 @@ public class LocationProviderTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType Data_SemicolonKeyword_2_ELEMENT_TYPE = associate(DataFactory.createData_SemicolonKeyword_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

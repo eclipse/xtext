@@ -16,6 +16,7 @@ public class TerminalRulesTestLanguageParserDefinition extends AbstractXtextPars
 	@Inject 
 	private TerminalRulesTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new TerminalRulesTestLanguageFileImpl(viewProvider);
 	}

@@ -10,6 +10,7 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class RefactoringTestLanguageBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
+	@Override
 	public List<String> getClassPath() {
 		PluginId pluginId = PluginId.getId("org.eclipse.xtext.idea.common.types.tests");
 		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();

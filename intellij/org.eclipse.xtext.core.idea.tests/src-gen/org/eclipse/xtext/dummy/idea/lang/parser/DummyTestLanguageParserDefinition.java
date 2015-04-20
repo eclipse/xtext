@@ -17,6 +17,7 @@ public class DummyTestLanguageParserDefinition extends TerminalsParserDefinition
 	@Inject 
 	private DummyTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new DummyTestLanguageFileImpl(viewProvider);
 	}

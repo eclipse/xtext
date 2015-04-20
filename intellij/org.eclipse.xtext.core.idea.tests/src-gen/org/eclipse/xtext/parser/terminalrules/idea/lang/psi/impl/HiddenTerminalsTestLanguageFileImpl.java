@@ -13,6 +13,7 @@ public final class HiddenTerminalsTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, HiddenTerminalsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return HiddenTerminalsTestLanguageFileType.INSTANCE;
 	}

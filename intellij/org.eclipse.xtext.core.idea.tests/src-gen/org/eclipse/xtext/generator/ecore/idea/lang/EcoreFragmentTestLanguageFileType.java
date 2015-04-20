@@ -16,18 +16,22 @@ public final class EcoreFragmentTestLanguageFileType extends LanguageFileType {
 		super(EcoreFragmentTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "EcoreFragmentTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "EcoreFragmentTestLanguage";
 	}

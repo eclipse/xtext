@@ -18,6 +18,7 @@ public class FormatterTestLanguageParserDefinition extends TerminalsParserDefini
 	@Inject 
 	private FormatterTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new FormatterTestLanguageFileImpl(viewProvider);
 	}

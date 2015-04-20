@@ -16,18 +16,22 @@ public final class AssignmentFinderTestLanguageFileType extends LanguageFileType
 		super(AssignmentFinderTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "AssignmentFinderTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "AssignmentFinderTestLanguage";
 	}

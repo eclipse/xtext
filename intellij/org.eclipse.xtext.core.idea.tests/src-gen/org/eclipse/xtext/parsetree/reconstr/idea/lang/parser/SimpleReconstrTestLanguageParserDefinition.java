@@ -18,6 +18,7 @@ public class SimpleReconstrTestLanguageParserDefinition extends TerminalsParserD
 	@Inject 
 	private SimpleReconstrTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SimpleReconstrTestLanguageFileImpl(viewProvider);
 	}

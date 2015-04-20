@@ -13,6 +13,7 @@ public final class MultiGenMMTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, MultiGenMMTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return MultiGenMMTestLanguageFileType.INSTANCE;
 	}

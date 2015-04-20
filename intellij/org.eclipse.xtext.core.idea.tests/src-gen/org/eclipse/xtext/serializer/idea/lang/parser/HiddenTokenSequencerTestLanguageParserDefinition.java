@@ -17,6 +17,7 @@ public class HiddenTokenSequencerTestLanguageParserDefinition extends TerminalsP
 	@Inject 
 	private HiddenTokenSequencerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new HiddenTokenSequencerTestLanguageFileImpl(viewProvider);
 	}

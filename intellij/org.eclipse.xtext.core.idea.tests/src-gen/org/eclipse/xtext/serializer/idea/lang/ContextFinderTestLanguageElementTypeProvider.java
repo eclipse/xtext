@@ -969,10 +969,12 @@ public class ContextFinderTestLanguageElementTypeProvider implements IElementTyp
 
 	public static final IGrammarAwareElementType NodeExclusion2List_RefModelSTRINGTerminalRuleCall_0_1_ELEMENT_TYPE = associate(NodeExclusion2ListFactory.createNodeExclusion2List_RefModelSTRINGTerminalRuleCall_0_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -13,6 +13,7 @@ public final class TransientValuesTestFileImpl extends BaseXtextFile {
 		super(viewProvider, TransientValuesTestLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return TransientValuesTestFileType.INSTANCE;
 	}

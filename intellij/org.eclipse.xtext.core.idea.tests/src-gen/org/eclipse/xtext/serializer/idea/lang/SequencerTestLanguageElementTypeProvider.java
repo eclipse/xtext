@@ -2657,10 +2657,12 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType NullCrossRefInterpreted_FooIDTerminalRuleCall_2_0_ELEMENT_TYPE = associate(NullCrossRefInterpretedFactory.createNullCrossRefInterpreted_FooIDTerminalRuleCall_2_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

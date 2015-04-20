@@ -16,6 +16,7 @@ public class InheritanceTest2LanguageParserDefinition extends InheritanceTestLan
 	@Inject 
 	private InheritanceTest2LanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new InheritanceTest2LanguageFileImpl(viewProvider);
 	}

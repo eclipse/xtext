@@ -17,6 +17,7 @@ public class ContextFinderTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private ContextFinderTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ContextFinderTestLanguageFileImpl(viewProvider);
 	}

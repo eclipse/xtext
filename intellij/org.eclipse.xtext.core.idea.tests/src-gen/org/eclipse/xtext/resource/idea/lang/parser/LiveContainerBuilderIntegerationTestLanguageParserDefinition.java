@@ -16,6 +16,7 @@ public class LiveContainerBuilderIntegerationTestLanguageParserDefinition extend
 	@Inject 
 	private LiveContainerBuilderIntegerationTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new LiveContainerBuilderIntegerationTestLanguageFileImpl(viewProvider);
 	}

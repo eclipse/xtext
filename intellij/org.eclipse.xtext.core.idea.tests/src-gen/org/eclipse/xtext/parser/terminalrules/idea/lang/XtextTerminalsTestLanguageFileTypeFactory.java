@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class XtextTerminalsTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType.DEFAULT_EXTENSION);
 	}

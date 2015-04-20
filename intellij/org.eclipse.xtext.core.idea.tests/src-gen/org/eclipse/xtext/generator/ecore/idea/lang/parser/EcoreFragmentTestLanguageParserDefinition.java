@@ -17,6 +17,7 @@ public class EcoreFragmentTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private EcoreFragmentTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EcoreFragmentTestLanguageFileImpl(viewProvider);
 	}

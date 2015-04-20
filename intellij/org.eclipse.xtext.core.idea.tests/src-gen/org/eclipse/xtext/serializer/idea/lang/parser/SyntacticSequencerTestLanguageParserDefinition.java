@@ -18,6 +18,7 @@ public class SyntacticSequencerTestLanguageParserDefinition extends TerminalsPar
 	@Inject 
 	private SyntacticSequencerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SyntacticSequencerTestLanguageFileImpl(viewProvider);
 	}

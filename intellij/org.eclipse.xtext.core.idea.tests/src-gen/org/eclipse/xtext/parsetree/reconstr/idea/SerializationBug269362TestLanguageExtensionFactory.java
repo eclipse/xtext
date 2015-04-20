@@ -6,6 +6,7 @@ import com.intellij.openapi.extensions.ExtensionFactory;
 
 public class SerializationBug269362TestLanguageExtensionFactory implements ExtensionFactory {
 
+	@Override
 	public Object createInstance(final String factoryArgument, final String implementationClass) {
 		Class<?> clazz;
 		try {

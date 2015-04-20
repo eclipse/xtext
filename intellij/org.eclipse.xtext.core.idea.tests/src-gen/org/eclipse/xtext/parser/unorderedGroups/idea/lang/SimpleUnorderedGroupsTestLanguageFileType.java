@@ -16,18 +16,22 @@ public final class SimpleUnorderedGroupsTestLanguageFileType extends LanguageFil
 		super(SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SimpleUnorderedGroupsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SimpleUnorderedGroupsTestLanguage";
 	}

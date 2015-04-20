@@ -166,10 +166,12 @@ public class TestLanguageElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType TerminalRule_StringFeatureSTRINGTerminalRuleCall_0_ELEMENT_TYPE = associate(TerminalRuleFactory.createTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
