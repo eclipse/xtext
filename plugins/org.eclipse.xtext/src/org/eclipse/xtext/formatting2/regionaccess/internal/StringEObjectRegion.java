@@ -8,23 +8,16 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StringEObjectRegion extends AbstractEObjectRegion {
-	private final AbstractElement grammarElement;
 
-	public StringEObjectRegion(StringBasedRegionAccess access, AbstractElement grammarElement,
-			EObject semanticElement) {
+	public StringEObjectRegion(StringBasedRegionAccess access, EObject grammarElement, EObject semanticElement) {
 		super(access);
-		this.grammarElement = grammarElement;
+		this.setGrammarElement(grammarElement);
 		this.setSemantcElement(semanticElement);
 	}
 
-	@Override
-	public AbstractElement getGrammarElement() {
-		return grammarElement;
-	}
 }
