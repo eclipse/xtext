@@ -29,6 +29,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 			.map[declaration]
 			.filter [simpleName.startsWith('test')]
 			.filter[cls.findDeclaredMethod(simpleName) == null]
+			.sortBy[simpleName]
 			.forEach[declaredMethod|
 				cls.addMethod(declaredMethod.simpleName) [
 					body = '''delegate.«declaredMethod.simpleName»();'''
