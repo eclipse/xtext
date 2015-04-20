@@ -75,8 +75,6 @@ class IncrementalStandaloneBuilder {
 			LOG.warn("Property baseDir not set. Using '" + userDir + "'")
 			new File(userDir)
 		}
-		if (needsJava) 
-			LOG.info("Using common types.")
 		if (request.defaultEncoding != null) {
 			LOG.info("Setting encoding.")
 			for (lang : languages.values) {
@@ -169,8 +167,9 @@ class IncrementalStandaloneBuilder {
 					]
 				} else
 					new DisabledClusteringPolicy
-			val needsJava = languages.values.exists[linksAgainstJava]
-			val context = new BuildContext(languages, needsJava, resourceSetProvider.get, strategy)
+					
+			
+			val context = new BuildContext(languages, resourceSetProvider.get, strategy)
 			val builder = provider.get
 			builder.context = context
 			builder.request = request

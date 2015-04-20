@@ -41,7 +41,6 @@ class Indexer {
 	ResourceDescriptionsData index
 
 	def Iterable<URI> computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
-		val needsJava = context.needsJava
 		val fullBuild = request.fullBuild || index == null
 		
 		LOG.info('Creating new index')
@@ -49,15 +48,24 @@ class Indexer {
 		val resourceDescriptions = installIndex(resourceSet, newIndex)
 
 		val allResources = uriCollector.collectAllResources(request, context)
+		val jvmLanguageExtensions = languages
+				.entrySet
+				.filter[value.linksAgainstJava]
+				.map[key]
+				.toSet
+
 		val affectionCandidates = newHashSet
-		if (!fullBuild) {
+		var Iterable<URI> directlyAffected = null
+		var boolean isConsiderJava 
+		if (fullBuild) {
+			directlyAffected = allResources
+			isConsiderJava = allResources.exists[jvmLanguageExtensions.contains(fileExtension)]
+		} else {
 			val allModified = (request.dirtyFiles + request.deletedFiles).toSet
 			affectionCandidates += allResources.filter[!allModified.contains(it)]
+			directlyAffected = request.dirtyFiles
+			isConsiderJava = allModified.exists[jvmLanguageExtensions.contains(fileExtension)]
 		}
-		val directlyAffected = if (fullBuild)
-				allResources
-			else
-				request.dirtyFiles
 
 		LOG.info('Removing deleted files from index')
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
@@ -72,9 +80,14 @@ class Indexer {
 
 		val allAffected = <URI>newHashSet
 		allAffected += directlyAffected
-		if (needsJava) 
-			preprocessJavaResources(directlyAffected, newIndex, request, context)
-
+		if (isConsiderJava) 
+			javaSupport.installLocalOnlyTypeProvider(request.sourceRoots + request.classPath, resourceSet)
+		preIndexChangedResources(directlyAffected, newIndex, request, context)
+		if(isConsiderJava) {
+			val stubsClassesDir = javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
+			javaSupport.installTypeProvider(request.sourceRoots + request.classPath + #[stubsClassesDir], resourceSet)
+		}
+	
 		LOG.info("Indexing changed and added files")
 		val toBeIndexed = newArrayList
 		toBeIndexed.addAll(directlyAffected)
@@ -82,7 +95,7 @@ class Indexer {
 		while (!toBeIndexed.empty) {
 			allAffected.addAll(toBeIndexed)
 			toBeIndexed.executeClustered [ Resource resource |
-				currentDeltas += resource.addToIndex(newIndex, context)
+				currentDeltas += resource.addToIndex(false, newIndex, context)
 				null
 			]
 				// TODO: Java dependencies
@@ -97,10 +110,12 @@ class Indexer {
 			allDeltas += currentDeltas
 			toBeIndexed.addAll(
 				affectionCandidates.filter [
+					if(fileExtension == 'java')
+						return false
 					val manager = languages.get(fileExtension).resourceDescriptionManager
-				val resourceDescription = index.getResourceDescription(it)
-				resourceDescription.isAffected(manager, currentDeltas, allDeltas, resourceDescriptions)
-			])
+					val resourceDescription = index.getResourceDescription(it)
+					resourceDescription.isAffected(manager, currentDeltas, allDeltas, resourceDescriptions)
+				])
 			affectionCandidates.removeAll(toBeIndexed)
 			currentDeltas.clear
 			if(!toBeIndexed.empty)
@@ -110,33 +125,33 @@ class Indexer {
 		return allAffected
 	}
 
-	protected def preprocessJavaResources(Iterable<URI> directlyAffected, ResourceDescriptionsData newIndex, BuildRequest request,
+	protected def preIndexChangedResources(Iterable<URI> directlyAffected, ResourceDescriptionsData newIndex, BuildRequest request,
 		extension BuildContext context) {
 		LOG.info("Pre-indexing changed files")
-		javaSupport.installLocalOnlyTypeProvider(request.sourceRoots + request.classPath, resourceSet)
 		try {
 			compilerPhases.setIndexing(resourceSet, true)
 			directlyAffected
-				
 				.executeClustered [
-					addToIndex(newIndex, context)
+					addToIndex(true, newIndex, context)
 					null
 				]
 		} finally {
 			compilerPhases.setIndexing(resourceSet, false)
 		}
-		val stubsClassesDir = javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
-		javaSupport.installTypeProvider(request.sourceRoots + request.classPath + #[stubsClassesDir], resourceSet)
 	}
 
-	def protected addToIndex(Resource resource, ResourceDescriptionsData newIndex, BuildContext context) {
+	def protected addToIndex(Resource resource, boolean isPreIndexing, ResourceDescriptionsData newIndex, BuildContext context) {
 		val uri = resource.URI
 		val languageAccess = context.languages.get(uri.fileExtension)
 		val manager = languageAccess.resourceDescriptionManager
 		val newDescription = manager.getResourceDescription(resource)
-		val IResourceDescription copiedDescription = new ResolvedResourceDescription(newDescription)
-		newIndex.addDescription(uri, copiedDescription)
-		val delta = new DefaultResourceDescriptionDelta(index?.getResourceDescription(uri), copiedDescription)
+		val IResourceDescription toBeAdded = 
+			if(isPreIndexing) 
+				new ResolvedResourceDescription(newDescription)
+			else 
+				newDescription
+		newIndex.addDescription(uri, toBeAdded)
+		val delta = new DefaultResourceDescriptionDelta(index?.getResourceDescription(uri), toBeAdded)
 		delta
 	}
 
