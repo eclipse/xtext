@@ -31,11 +31,14 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	@Inject
 	protected Provider<RichStringPartitionDelimiterSkippingStrategy> richStringPartitionEndSkippingEditStrategy;
 	
+	@Inject
+	protected Provider<RichStringPartionIndentationStrategy> richStringPartionIndentationStrategy;
+
 	@Override
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
 		super.configureIndentationEditStrategy(acceptor);
 		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), JAVA_DOC_PARTITION);
-		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(richStringPartionIndentationStrategy.get(), RICH_STRING_LITERAL_PARTITION);
 	}
 	
 	@Override
