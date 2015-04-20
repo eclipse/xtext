@@ -23,8 +23,6 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
 class BuildContext {
 	Map<String, LanguageAccess> languages
 	
-	boolean needsJava
-	
 	XtextResourceSet resourceSet
 	
 	IResourceClusteringPolicy clusteringPolicy

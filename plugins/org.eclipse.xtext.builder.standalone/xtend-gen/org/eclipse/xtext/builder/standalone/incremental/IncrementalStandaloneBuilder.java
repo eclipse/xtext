@@ -100,16 +100,8 @@ public class IncrementalStandaloneBuilder {
           _xifexpression = new DisabledClusteringPolicy();
         }
         final IResourceClusteringPolicy strategy = _xifexpression;
-        Collection<LanguageAccess> _values = languages.values();
-        final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
-          @Override
-          public Boolean apply(final LanguageAccess it) {
-            return Boolean.valueOf(it.isLinksAgainstJava());
-          }
-        };
-        final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
         XtextResourceSet _get = this.resourceSetProvider.get();
-        final BuildContext context = new BuildContext(languages, needsJava, _get, strategy);
+        final BuildContext context = new BuildContext(languages, _get, strategy);
         final IncrementalStandaloneBuilder builder = this.provider.get();
         builder.context = context;
         builder.request = request;
@@ -187,10 +179,6 @@ public class IncrementalStandaloneBuilder {
       _elvis = _xblockexpression;
     }
     this.baseDir = _elvis;
-    boolean _isNeedsJava = this.context.isNeedsJava();
-    if (_isNeedsJava) {
-      IncrementalStandaloneBuilder.LOG.info("Using common types.");
-    }
     String _defaultEncoding = this.request.getDefaultEncoding();
     boolean _notEquals = (!Objects.equal(_defaultEncoding, null));
     if (_notEquals) {

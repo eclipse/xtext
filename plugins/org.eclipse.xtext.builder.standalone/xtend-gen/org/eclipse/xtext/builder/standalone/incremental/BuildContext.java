@@ -29,8 +29,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class BuildContext {
   private final Map<String, LanguageAccess> languages;
   
-  private final boolean needsJava;
-  
   private final XtextResourceSet resourceSet;
   
   private final IResourceClusteringPolicy clusteringPolicy;
@@ -55,10 +53,9 @@ public class BuildContext {
     return this.languages.get(_fileExtension);
   }
   
-  public BuildContext(final Map<String, LanguageAccess> languages, final boolean needsJava, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
     super();
     this.languages = languages;
-    this.needsJava = needsJava;
     this.resourceSet = resourceSet;
     this.clusteringPolicy = clusteringPolicy;
   }
@@ -69,7 +66,6 @@ public class BuildContext {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.languages== null) ? 0 : this.languages.hashCode());
-    result = prime * result + (this.needsJava ? 1231 : 1237);
     result = prime * result + ((this.resourceSet== null) ? 0 : this.resourceSet.hashCode());
     result = prime * result + ((this.clusteringPolicy== null) ? 0 : this.clusteringPolicy.hashCode());
     return result;
@@ -90,8 +86,6 @@ public class BuildContext {
         return false;
     } else if (!this.languages.equals(other.languages))
       return false;
-    if (other.needsJava != this.needsJava)
-      return false;
     if (this.resourceSet == null) {
       if (other.resourceSet != null)
         return false;
@@ -110,7 +104,6 @@ public class BuildContext {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("languages", this.languages);
-    b.add("needsJava", this.needsJava);
     b.add("resourceSet", this.resourceSet);
     b.add("clusteringPolicy", this.clusteringPolicy);
     return b.toString();
@@ -119,11 +112,6 @@ public class BuildContext {
   @Pure
   public Map<String, LanguageAccess> getLanguages() {
     return this.languages;
-  }
-  
-  @Pure
-  public boolean isNeedsJava() {
-    return this.needsJava;
   }
   
   @Pure
