@@ -11,7 +11,6 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -23,15 +22,10 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SerializerTest extends AbstractXbaseTestCase {
-	
-	@Inject
-	private IIndentationInformation indent;
 	
 	@Test public void testSerialize_01() throws IOException {
 		Resource resource = newResource("'foo' as String");
@@ -72,7 +66,8 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("(if(false) \"value\") instanceof String", string);
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=464846
+		assertEquals("( if(false) \"value\" ) instanceof String", string);
 	}
 
 }

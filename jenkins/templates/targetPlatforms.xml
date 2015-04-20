@@ -138,12 +138,5 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
         <hudson.plugins.build__timeout.operations.FailOperation/>
       </operationList>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
-      <locks>
-        <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
-          <name/>
-        </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
-      </locks>
-    </hudson.plugins.locksandlatches.LockWrapper>
-  </buildWrappers>
+    </buildWrappers>
 </project>

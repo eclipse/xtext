@@ -10,12 +10,13 @@ import org.eclipse.xtext.generator.IFileSystemAccessExtension2
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.util.RuntimeIOException
+import org.eclipse.xtext.generator.IFileSystemAccessExtension4
 
 /**
  * @author Anton Kosyakov
  * @since 2.7
  */
-class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3 {
+class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3, IFileSystemAccessExtension4 {
 
 	Delta delta
 	
@@ -125,6 +126,19 @@ class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessEx
 			return delegate.readTextFile(fileName, new NullProgressMonitor)
 		}
 		return (delegate as IFileSystemAccessExtension3).readTextFile(fileName)
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	override isFile(String path, String outputConfigurationName) throws RuntimeIOException {
+		if (delegate instanceof EclipseResourceFileSystemAccess2) {
+			return delegate.isFile(path, outputConfigurationName, new NullProgressMonitor)
+		}
+		if (delegate instanceof IFileSystemAccessExtension4) {
+			return (delegate as IFileSystemAccessExtension4).isFile(path, outputConfigurationName)
+		}
+		return false
 	}
 
 }

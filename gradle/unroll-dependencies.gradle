@@ -1,3 +1,11 @@
+/**
+ * Gradle assumes that projects inside Eclipse reexport their dependencies.
+ * This is not true for our plugin projects. To work around this,
+ * we flatten the dependency tree. As a result, the projects will
+ * explicitly list all their transitive dependencies instead of relying
+ * on reexports.
+ */
+
 def unrollDependencies 
 unrollDependencies = { configuration, notation -> 
 	if (notation instanceof Project) {

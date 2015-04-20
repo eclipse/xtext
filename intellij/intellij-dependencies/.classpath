@@ -1,52 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="xtend-gen"/>
-	<classpathentry kind="src" path="testSrc"/>
-	<classpathentry kind="src" path="testSrc-xtend-gen"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer" exported="true"/>
 	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.idea.tests" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.core.tests" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.core" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.common.types" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.util" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.smap" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.lib" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.xbase.lib" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.lib.macro" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.xbase" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.idea.generator" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.generator" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.ecore" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.xbase.junit" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.junit4" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.builder" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.idea" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.idea" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.xbase.idea" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore/2.11.0-v20150123-0347/org.eclipse.emf.ecore-2.11.0-v20150123-0347-sources.jar" kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore/2.11.0-v20150123-0347/org.eclipse.emf.ecore-2.11.0-v20150123-0347.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.common/2.11.0-v20150123-0347/org.eclipse.emf.common-2.11.0-v20150123-0347.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.m2/repository/com/google/inject/guice/3.0/guice-3.0-sources.jar" kind="lib" path="/Users/zarnekow/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.11.0-v20150123-0347/org.eclipse.emf.ecore.xmi-2.11.0-v20150123-0347.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.codegen/2.10.0/9c79cf9eb0ead19e05269539cf37ec26c17fff90/org.eclipse.emf.codegen-2.10.0-sources.jar" kind="lib" path="/Users/zarnekow/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.codegen/2.10.0/ab49c04e96b44a58d2e13cbc1ffb42c4cc9b613a/org.eclipse.emf.codegen-2.10.0.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.11.0-v20150123-0357/org.eclipse.emf.codegen.ecore-2.11.0-v20150123-0357.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe.core/1.3.10-SNAPSHOT/org.eclipse.emf.mwe.core-1.3.10-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe.utils/1.3.10-SNAPSHOT/org.eclipse.emf.mwe.utils-1.3.10-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/xpand/org.eclipse.xtend/2.1.0-SNAPSHOT/org.eclipse.xtend-2.1.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/xpand/org.eclipse.xtend.typesystem.emf/2.1.0-SNAPSHOT/org.eclipse.xtend.typesystem.emf-2.1.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.m2/repository/javax/inject/javax.inject/1/javax.inject-1-sources.jar" kind="lib" path="/Users/zarnekow/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.m2/repository/org/eclipse/equinox/common/3.6.200-v20130402-1505/common-3.6.200-v20130402-1505-sources.jar" kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/equinox/common/3.6.200-v20130402-1505/common-3.6.200-v20130402-1505.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.8.0-SNAPSHOT/org.eclipse.emf.mwe2.lib-2.8.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/eclipse/xpand/org.eclipse.xpand/2.1.0-SNAPSHOT/org.eclipse.xpand-2.1.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/zarnekow/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar" kind="lib" path="/Users/zarnekow/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/org/antlr/stringtemplate/3.2/stringtemplate-3.2.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/zarnekow/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar" exported="true"/>
 	<classpathentry sourcepath="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/sources.zip" kind="lib" path="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/lib/annotations.jar" exported="true"/>
 	<classpathentry sourcepath="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/sources.zip" kind="lib" path="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/lib/asm-all.jar" exported="true"/>
 	<classpathentry sourcepath="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/sources.zip" kind="lib" path="/development/java/git/org.eclipse.xtext/master/intellij/intellij-ce/lib/asm-commons.jar" exported="true"/>

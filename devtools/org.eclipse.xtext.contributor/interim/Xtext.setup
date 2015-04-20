@@ -623,7 +623,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern=".*\.idea.*|intellij-dependencies"/>
+              pattern=".*\.idea.*|intellij"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -660,26 +660,10 @@
       <sourceLocator
           rootFolder="${git.clone.xtext.location/maven}"/>
       <sourceLocator
-          rootFolder="${git.clone.xtext.location/intellij}"/>
-      <sourceLocator
           rootFolder="${git.clone.xtext.location/xtext-website}"/>
       <sourceLocator
           rootFolder="${git.clone.xtext.location/xtend-website}"/>
       <description>Maven Dependencies</description>
-    </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="Maven build"
-        excludedTriggers="MANUAL"
-        launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent-notests.launch">
-      <description>Xtext-Maven build</description>
-    </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="gradle-build"
-        excludedTriggers="MANUAL"
-        launcher="/org.eclipse.xtext.idea.all/launch-gradle-build.launch">
-      <description>Run IDEA  gradle build</description>
     </setupTask>
     <stream
         name="master">
@@ -689,6 +673,22 @@
           version="2.8"
           location="${installation.location}/api/v2.8/"
           remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
+      <setupTask
+          xsi:type="projects:ProjectsImportTask">
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/intellij}"
+            locateNestedProjects="true"/>
+        <description>Maven Dependencies</description>
+      </setupTask>
+      <setupTask
+          xsi:type="launching:LaunchTask"
+          id="refresh-gradle-dependencies"
+          launcher="/intellij/refresh-gradle-dependencies.launch">
+        <description>
+          Refreshes the .classpath files for the Gradle projects
+          Downloads Intellij IDEA if needed
+        </description>
+      </setupTask>
     </stream>
     <stream
         name="maintenance">
@@ -710,6 +710,11 @@
           version="2.7"
           location="${installation.location}/api/v2.7/"
           remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-Update-2.7.0.zip&amp;r=1"/>
+      <setupTask
+          xsi:type="launching:LaunchTask"
+          id="Maven Install"
+          excludedTriggers="MANUAL"
+          launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch"/>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>

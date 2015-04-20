@@ -1,4 +1,5 @@
 include 'jenkins'
+include 'maven'
 
 ['plugins', 'tests'].each { folder ->
 	new File(settingsDir, folder).listFiles().findAll {
@@ -9,7 +10,6 @@ include 'jenkins'
 	}
 }
 
-include 'intellij:intellij-dependencies'
 new File(settingsDir, "intellij").listFiles().findAll {
 	it.isDirectory() && it.name.startsWith("org.eclipse") && !it.name.endsWith("ui")
 }.each {
