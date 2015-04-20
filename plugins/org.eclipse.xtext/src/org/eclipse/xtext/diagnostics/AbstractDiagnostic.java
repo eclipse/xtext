@@ -41,7 +41,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 
 	@Override
 	public int getColumn() {
-		throw new UnsupportedOperationException();
+		return 0;
 	}
 
 	@Override
