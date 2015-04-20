@@ -18,6 +18,7 @@ public class XtextParserDefinition extends TerminalsParserDefinition {
 	@Inject 
 	private XtextElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtextFileImpl(viewProvider);
 	}
