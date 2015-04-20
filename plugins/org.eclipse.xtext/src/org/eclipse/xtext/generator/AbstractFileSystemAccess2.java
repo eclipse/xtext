@@ -7,18 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 /**
- * 
- * Abstract base class for file system access supporting {@link IFileSystemAccessExtension3}.
- * 
+ *
+ * Abstract base class for file system access supporting {@link IFileSystemAccessExtension3} and {@link IFileSystemAccessExtension4}.
+ *
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess implements IFileSystemAccessExtension3 {
+public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess implements IFileSystemAccessExtension3, IFileSystemAccessExtension4 {
 
 	/**
 	 * @since 2.4
@@ -44,17 +46,39 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 		return readTextFile(fileName, DEFAULT_OUTPUT);
 	}
 
-	
+
 	/**
 	 * Sets the context to further configure this file system access instance.
-	 * 
-	 * @param context - a context from which project configuration can be obtained. Supported context types 
-	 * 	depend on the concrete implementation, but {@link Resource} is usually a good fit. 
-	 * 
+	 *
+	 * @param context - a context from which project configuration can be obtained. Supported context types
+	 * 	depend on the concrete implementation, but {@link Resource} is usually a good fit.
+	 *
 	 * @since 2.8
 	 */
 	public void setContext(Object context) {
 		// do nothing
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 * @since 2.9
+	 */
+	@Override
+	public boolean isFile(String path, String outputConfigurationName) throws RuntimeIOException {
+		InputStream is = null;
+		try {
+			is = readBinaryFile(path, outputConfigurationName);
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					throw new RuntimeIOException(e);
+				}
+			}
+			return is!=null; // no exception => file exists
+		} catch (RuntimeIOException e) {
+			return false;
+		}
+	}
+
 }
