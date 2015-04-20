@@ -1,6 +1,7 @@
 buildscript {
 	dependencies {
 		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.10"
+		classpath 'org.xtend:xtend-gradle-plugin:+'
 	}
 }
 
@@ -26,8 +27,14 @@ configure(eclipsePluginProjects) {
 }
 
 configure(subprojects - eclipsePluginProjects) {
+	apply plugin: 'org.xtend.xtend'
 	apply plugin: 'org.xtext.idea-component'
 	apply plugin: 'eclipse'
+	
+	sourceSets*.xtendOutputDir = 'xtend-gen'
+	tasks.withType(org.xtend.gradle.tasks.XtendCompile) {
+		options.encoding = 'ISO-8859-1'
+	}
 	
 	configurations.compile {
 		exclude module:'cglib'
@@ -43,7 +50,10 @@ configure(ideaPluginProjects) {
 
 configure(ideaTestProjects) {
 	sourceSets.test.java.srcDirs ('src', 'src-gen', 'xtend-gen', 'tests')
-	sourceSets.main.java.srcDirs = []
+	project.afterEvaluate{
+		sourceSets.main.java.srcDirs = []
+	}
+	
 	dependencies {
 		testCompile project(':intellij:org.eclipse.xtext.idea.tests')
 	}

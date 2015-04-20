@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.tests;
 
 import com.google.common.base.Objects;
+import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
@@ -60,7 +61,14 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
       }
     };
     Iterable<MethodDeclaration> _filter_1 = IterableExtensions.<MethodDeclaration>filter(_filter, _function_2);
-    final Procedure1<MethodDeclaration> _function_3 = new Procedure1<MethodDeclaration>() {
+    final Function1<MethodDeclaration, String> _function_3 = new Function1<MethodDeclaration, String>() {
+      @Override
+      public String apply(final MethodDeclaration it) {
+        return it.getSimpleName();
+      }
+    };
+    List<MethodDeclaration> _sortBy = IterableExtensions.<MethodDeclaration, String>sortBy(_filter_1, _function_3);
+    final Procedure1<MethodDeclaration> _function_4 = new Procedure1<MethodDeclaration>() {
       @Override
       public void apply(final MethodDeclaration declaredMethod) {
         String _simpleName = declaredMethod.getSimpleName();
@@ -84,6 +92,6 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
         cls.addMethod(_simpleName, _function);
       }
     };
-    IterableExtensions.<MethodDeclaration>forEach(_filter_1, _function_3);
+    IterableExtensions.<MethodDeclaration>forEach(_sortBy, _function_4);
   }
 }

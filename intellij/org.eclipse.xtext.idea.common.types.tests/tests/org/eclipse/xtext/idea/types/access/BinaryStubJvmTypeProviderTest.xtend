@@ -46,5 +46,10 @@ class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 	@Ignore def void testParameterNames_02() {}
 
 	@Ignore def void test_ParameterizedTypes_inner_return_02() {}
+	
+	//FIXME Workaround until https://bugs.eclipse.org/bugs/show_bug.cgi?id=464977 is fixed
+	@Ignore def void testDeprecatedBit_01() {}
+	
+	@Ignore def void testDeprecatedBit_02() {}
 
 }
