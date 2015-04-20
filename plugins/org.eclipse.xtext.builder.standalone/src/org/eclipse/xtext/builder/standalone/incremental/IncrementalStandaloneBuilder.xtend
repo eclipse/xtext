@@ -54,16 +54,18 @@ class IncrementalStandaloneBuilder {
 	def launch() {
 		initialize
 		val affectedResources = indexer.computeAndIndexAffected(request, context)
-		val isErrorFree = affectedResources.executeClustered [
-			Resource resource |
-			resource.contents // fully initialize
-			EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-			if(resource.validate) {
-				resource.generate
-				return true				
-			}
-			return false 
-		].reduce[$0 && $1]
+		val isErrorFree = affectedResources
+			.executeClustered [
+				Resource resource |
+				resource.contents // fully initialize
+				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+				if(resource.validate) {
+					resource.generate
+					return true				
+				}
+				return false 
+			]
+			.reduce[$0 && $1]
 		return isErrorFree
 	}
 	
@@ -161,17 +163,17 @@ class IncrementalStandaloneBuilder {
 					LOG.info("Clustering configured.")
 					new DynamicResourceClusteringPolicy => [
 						// Convert MB to byte to make it easier for the user
-						setMinimumFreeMemory(clusteringConfig.minimumFreeMemory * 1024 * 1024)
-						setMinimumClusterSize(clusteringConfig.minimumClusterSize)
-						setMinimumPercentFreeMemory(clusteringConfig.minimumPercentFreeMemory)
+						minimumFreeMemory = clusteringConfig.minimumFreeMemory * 1024 * 1024
+						minimumClusterSize = clusteringConfig.minimumClusterSize
+						minimumPercentFreeMemory = clusteringConfig.minimumPercentFreeMemory
 					]
 				} else
 					new DisabledClusteringPolicy
 			val needsJava = languages.values.exists[linksAgainstJava]
 			val context = new BuildContext(languages, needsJava, resourceSetProvider.get, strategy)
-			val builder = provider.get()
-			builder.setContext(context)
-			builder.setRequest(request)
+			val builder = provider.get
+			builder.context = context
+			builder.request = request
 			builder
 		}
 	}

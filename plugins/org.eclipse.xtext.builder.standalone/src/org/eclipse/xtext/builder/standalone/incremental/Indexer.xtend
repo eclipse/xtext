@@ -62,10 +62,12 @@ class Indexer {
 		LOG.info('Removing deleted files from index')
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
 		request.deletedFiles.forEach [
-			val IResourceDescription oldDescription = index.getResourceDescription(it)
-			if (oldDescription != null)
-				currentDeltas += new DefaultResourceDescriptionDelta(oldDescription, null)
-			newIndex.removeDescription(it)
+			if(fileExtension != 'java') {
+				val IResourceDescription oldDescription = index.getResourceDescription(it)
+				if (oldDescription != null)
+					currentDeltas += new DefaultResourceDescriptionDelta(oldDescription, null)
+				newIndex.removeDescription(it)
+			}
 		]
 
 		val allAffected = <URI>newHashSet
@@ -111,19 +113,20 @@ class Indexer {
 	protected def preprocessJavaResources(Iterable<URI> directlyAffected, ResourceDescriptionsData newIndex, BuildRequest request,
 		extension BuildContext context) {
 		LOG.info("Pre-indexing changed files")
-		val allClasspathRoots = request.sourceRoots + request.classPath
-		javaSupport.installLocalOnlyTypeProvider(allClasspathRoots, resourceSet)
+		javaSupport.installLocalOnlyTypeProvider(request.sourceRoots + request.classPath, resourceSet)
 		try {
 			compilerPhases.setIndexing(resourceSet, true)
-			directlyAffected.executeClustered [
-				addToIndex(newIndex, context)
-				null
-			]
+			directlyAffected
+				
+				.executeClustered [
+					addToIndex(newIndex, context)
+					null
+				]
 		} finally {
 			compilerPhases.setIndexing(resourceSet, false)
 		}
-		javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
-		javaSupport.installTypeProvider(allClasspathRoots, resourceSet)
+		val stubsClassesDir = javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
+		javaSupport.installTypeProvider(request.sourceRoots + request.classPath + #[stubsClassesDir], resourceSet)
 	}
 
 	def protected addToIndex(Resource resource, ResourceDescriptionsData newIndex, BuildContext context) {

@@ -14,6 +14,7 @@ import com.google.common.collect.Multimap;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +70,8 @@ public class ResourceURICollector {
   protected List<URI> collectResources(final List<File> roots, final BuildContext context) {
     Map<String, LanguageAccess> _languages = context.getLanguages();
     Set<String> _keySet = _languages.keySet();
-    final String extensions = IterableExtensions.join(_keySet, "|");
+    Iterable<String> _plus = Iterables.<String>concat(_keySet, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
+    final String extensions = IterableExtensions.join(_plus, "|");
     final NameBasedFilter nameBasedFilter = new NameBasedFilter();
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
     final List<URI> resources = CollectionLiterals.<URI>newArrayList();

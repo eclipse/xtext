@@ -14,6 +14,7 @@ import com.google.inject.Singleton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -120,13 +121,17 @@ public class Indexer {
     final Procedure1<URI> _function_1 = new Procedure1<URI>() {
       @Override
       public void apply(final URI it) {
-        final IResourceDescription oldDescription = Indexer.this.index.getResourceDescription(it);
-        boolean _notEquals = (!Objects.equal(oldDescription, null));
+        String _fileExtension = it.fileExtension();
+        boolean _notEquals = (!Objects.equal(_fileExtension, "java"));
         if (_notEquals) {
-          DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
-          currentDeltas.add(_defaultResourceDescriptionDelta);
+          final IResourceDescription oldDescription = Indexer.this.index.getResourceDescription(it);
+          boolean _notEquals_1 = (!Objects.equal(oldDescription, null));
+          if (_notEquals_1) {
+            DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
+            currentDeltas.add(_defaultResourceDescriptionDelta);
+          }
+          newIndex.removeDescription(it);
         }
-        newIndex.removeDescription(it);
       }
     };
     IterableExtensions.<URI>forEach(_deletedFiles_1, _function_1);
@@ -191,9 +196,9 @@ public class Indexer {
     Indexer.LOG.info("Pre-indexing changed files");
     List<File> _sourceRoots = request.getSourceRoots();
     List<File> _classPath = request.getClassPath();
-    final Iterable<File> allClasspathRoots = Iterables.<File>concat(_sourceRoots, _classPath);
+    Iterable<File> _plus = Iterables.<File>concat(_sourceRoots, _classPath);
     XtextResourceSet _resourceSet = context.getResourceSet();
-    this.javaSupport.installLocalOnlyTypeProvider(allClasspathRoots, _resourceSet);
+    this.javaSupport.installLocalOnlyTypeProvider(_plus, _resourceSet);
     try {
       XtextResourceSet _resourceSet_1 = context.getResourceSet();
       this.compilerPhases.setIndexing(_resourceSet_1, true);
@@ -213,9 +218,13 @@ public class Indexer {
       XtextResourceSet _resourceSet_2 = context.getResourceSet();
       this.compilerPhases.setIndexing(_resourceSet_2, false);
     }
-    this.javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context);
+    final File stubsClassesDir = this.javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context);
+    List<File> _sourceRoots_1 = request.getSourceRoots();
+    List<File> _classPath_1 = request.getClassPath();
+    Iterable<File> _plus_1 = Iterables.<File>concat(_sourceRoots_1, _classPath_1);
+    Iterable<File> _plus_2 = Iterables.<File>concat(_plus_1, Collections.<File>unmodifiableList(CollectionLiterals.<File>newArrayList(stubsClassesDir)));
     XtextResourceSet _resourceSet_3 = context.getResourceSet();
-    this.javaSupport.installTypeProvider(allClasspathRoots, _resourceSet_3);
+    this.javaSupport.installTypeProvider(_plus_2, _resourceSet_3);
   }
   
   protected DefaultResourceDescriptionDelta addToIndex(final Resource resource, final ResourceDescriptionsData newIndex, final BuildContext context) {

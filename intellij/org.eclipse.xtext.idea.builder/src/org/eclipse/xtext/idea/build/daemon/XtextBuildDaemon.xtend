@@ -29,6 +29,7 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
+import static extension org.eclipse.emf.common.util.URI.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -163,6 +164,8 @@ class XtextBuildDaemon {
 				defaultEncoding = request.encoding
 				classPath = request.classpath.map[toFile]
 				sourceRoots = request.sourceRoots.map[toFile]
+				dirtyFiles = request.dirtyFiles.map[createFileURI]
+				deletedFiles = request.deletedFiles.map[createFileURI]
 				failOnValidationError = false
 			]
 			val builder = builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) as IdeaStandaloneBuilder

@@ -7,17 +7,17 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
-import com.google.common.collect.Iterables;
+import com.google.common.base.Objects;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
@@ -38,7 +38,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -67,11 +66,6 @@ public class JavaSupport {
     resourceSet.setClasspathURIContext(classLoader);
   }
   
-  public File generateAndCompileJavaStubs(final Iterable<URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
-    File _generateStubs = this.generateStubs(changedResources, newIndex, request, context);
-    return this.compileStubs(_generateStubs, request);
-  }
-  
   public void installTypeProvider(final Iterable<File> classPathRoots, final XtextResourceSet resSet) {
     JavaSupport.LOG.info("Installing type provider with stubs");
     final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
@@ -84,7 +78,7 @@ public class JavaSupport {
       @Override
       public URL apply(final File it) {
         try {
-          java.net.URI _uRI = it.toURI();
+          URI _uRI = it.toURI();
           return _uRI.toURL();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -93,6 +87,93 @@ public class JavaSupport {
     };
     final Iterable<URL> classPathUrls = IterableExtensions.<File, URL>map(classPathEntries, _function);
     return new URLClassLoader(((URL[])Conversions.unwrapArray(classPathUrls, URL.class)));
+  }
+  
+  public File generateAndCompileJavaStubs(final Iterable<org.eclipse.emf.common.util.URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
+    File _xblockexpression = null;
+    {
+      final File stubsDir = this.generateStubs(changedResources, newIndex, request, context);
+      _xblockexpression = this.compileStubs(stubsDir, request);
+    }
+    return _xblockexpression;
+  }
+  
+  protected File generateStubs(final Iterable<org.eclipse.emf.common.util.URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
+    try {
+      final File stubsDir = this.createTempDir("stubs", request);
+      String _absolutePath = stubsDir.getAbsolutePath();
+      String _plus = ("Generating stubs into " + _absolutePath);
+      JavaSupport.LOG.info(_plus);
+      String _absolutePath_1 = stubsDir.getAbsolutePath();
+      this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
+      List<File> _sourceRoots = request.getSourceRoots();
+      final Function1<File, org.eclipse.emf.common.util.URI> _function = new Function1<File, org.eclipse.emf.common.util.URI>() {
+        @Override
+        public org.eclipse.emf.common.util.URI apply(final File it) {
+          org.eclipse.emf.common.util.URI _xblockexpression = null;
+          {
+            String _path = it.getPath();
+            final org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createFileURI(_path);
+            org.eclipse.emf.common.util.URI _xifexpression = null;
+            boolean _hasTrailingPathSeparator = uri.hasTrailingPathSeparator();
+            if (_hasTrailingPathSeparator) {
+              _xifexpression = uri;
+            } else {
+              _xifexpression = uri.appendSegment("");
+            }
+            _xblockexpression = _xifexpression;
+          }
+          return _xblockexpression;
+        }
+      };
+      final List<org.eclipse.emf.common.util.URI> sourceRootURIs = ListExtensions.<File, org.eclipse.emf.common.util.URI>map(_sourceRoots, _function);
+      for (final org.eclipse.emf.common.util.URI resource : changedResources) {
+        String _fileExtension = resource.fileExtension();
+        boolean _equals = Objects.equal(_fileExtension, "java");
+        if (_equals) {
+          final org.eclipse.emf.common.util.URI relativeURI = this.findSourceRootRelativeURI(resource, sourceRootURIs);
+          boolean _equals_1 = Objects.equal(relativeURI, null);
+          if (_equals_1) {
+            JavaSupport.LOG.error((("Changed java file " + resource) + " is not in any sourceRoot"));
+          } else {
+            String _fileString = resource.toFileString();
+            final File source = new File(_fileString);
+            String _string = relativeURI.toString();
+            final File target = new File(stubsDir, _string);
+            Files.createParentDirs(target);
+            Files.copy(source, target);
+          }
+        } else {
+          LanguageAccess _languageAccess = context.getLanguageAccess(resource);
+          boolean _isLinksAgainstJava = false;
+          if (_languageAccess!=null) {
+            _isLinksAgainstJava=_languageAccess.isLinksAgainstJava();
+          }
+          if (_isLinksAgainstJava) {
+            LanguageAccess _languageAccess_1 = context.getLanguageAccess(resource);
+            IStubGenerator _stubGenerator = _languageAccess_1.getStubGenerator();
+            IResourceDescription _resourceDescription = newIndex.getResourceDescription(resource);
+            _stubGenerator.doGenerateStubs(this.commonFileAccess, _resourceDescription);
+          }
+        }
+      }
+      return stubsDir;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected org.eclipse.emf.common.util.URI findSourceRootRelativeURI(final org.eclipse.emf.common.util.URI uri, final List<org.eclipse.emf.common.util.URI> sourceRootURIs) {
+    for (final org.eclipse.emf.common.util.URI sourceRootURI : sourceRootURIs) {
+      {
+        final org.eclipse.emf.common.util.URI relativeURI = uri.deresolve(sourceRootURI);
+        boolean _notEquals = (!Objects.equal(relativeURI, uri));
+        if (_notEquals) {
+          return relativeURI;
+        }
+      }
+    }
+    return null;
   }
   
   protected File compileStubs(final File stubsDir, final BuildRequest request) {
@@ -109,21 +190,11 @@ public class JavaSupport {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Compiling stubs located in " + _absolutePath);
     JavaSupport.LOG.info(_plus);
-    List<File> _sourceRoots = request.getSourceRoots();
-    final Function1<File, String> _function_1 = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        return it.getAbsolutePath();
-      }
-    };
-    List<String> _map_1 = ListExtensions.<File, String>map(_sourceRoots, _function_1);
     String _absolutePath_1 = stubsDir.getAbsolutePath();
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
-    Iterable<String> _plus_1 = Iterables.<String>concat(_map_1, _newArrayList);
-    final Set<String> sourcesToCompile = this.uniqueEntries(_plus_1);
+    final List<String> sourcesToCompile = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_absolutePath_1));
     String _join = IterableExtensions.join(sourcesToCompile, ",");
-    String _plus_2 = ("Compiler source roots: " + _join);
-    JavaSupport.LOG.info(_plus_2);
+    String _plus_1 = ("Compiler source roots: " + _join);
+    JavaSupport.LOG.info(_plus_1);
     final IJavaCompiler.CompilationResult result = this.compiler.compile(sourcesToCompile, stubsClassesFolder);
     if (result != null) {
       switch (result) {
@@ -141,34 +212,6 @@ public class JavaSupport {
       }
     }
     return stubsClassesFolder;
-  }
-  
-  protected File generateStubs(final Iterable<URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
-    final File stubsDir = this.createTempDir("stubs", request);
-    String _absolutePath = stubsDir.getAbsolutePath();
-    String _plus = ("Generating stubs into " + _absolutePath);
-    JavaSupport.LOG.info(_plus);
-    String _absolutePath_1 = stubsDir.getAbsolutePath();
-    this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        LanguageAccess _languageAccess = context.getLanguageAccess(it);
-        return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
-      }
-    };
-    final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(changedResources, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        LanguageAccess _languageAccess = context.getLanguageAccess(it);
-        IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
-        IResourceDescription _resourceDescription = newIndex.getResourceDescription(it);
-        _stubGenerator.doGenerateStubs(JavaSupport.this.commonFileAccess, _resourceDescription);
-      }
-    };
-    IterableExtensions.<URI>forEach(generateStubs, _function_1);
-    return stubsDir;
   }
   
   protected File createTempDir(final String subDir, final BuildRequest request) {
@@ -195,17 +238,5 @@ public class JavaSupport {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  protected Set<String> uniqueEntries(final Iterable<String> pathes) {
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        File _file = new File(it);
-        return _file.getAbsolutePath();
-      }
-    };
-    Iterable<String> _map = IterableExtensions.<String, String>map(pathes, _function);
-    return IterableExtensions.<String>toSet(_map);
   }
 }

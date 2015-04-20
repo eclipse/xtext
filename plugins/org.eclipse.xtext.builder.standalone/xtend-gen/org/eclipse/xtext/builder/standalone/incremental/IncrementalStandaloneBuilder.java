@@ -111,8 +111,8 @@ public class IncrementalStandaloneBuilder {
         XtextResourceSet _get = this.resourceSetProvider.get();
         final BuildContext context = new BuildContext(languages, needsJava, _get, strategy);
         final IncrementalStandaloneBuilder builder = this.provider.get();
-        builder.setContext(context);
-        builder.setRequest(request);
+        builder.context = context;
+        builder.request = request;
         _xblockexpression = builder;
       }
       return _xblockexpression;

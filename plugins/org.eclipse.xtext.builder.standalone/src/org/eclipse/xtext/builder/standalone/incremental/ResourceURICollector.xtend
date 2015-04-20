@@ -36,7 +36,7 @@ class ResourceURICollector {
 	} 
 	
 	def protected collectResources(List<File> roots, BuildContext context) {
-		val extensions = context.languages.keySet.join("|")
+		val extensions = (context.languages.keySet + #['java']).join("|")
 		val nameBasedFilter = new NameBasedFilter
 
 		// TODO test with whitespaced file extensions

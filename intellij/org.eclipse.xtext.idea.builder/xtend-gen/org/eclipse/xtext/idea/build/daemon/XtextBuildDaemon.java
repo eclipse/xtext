@@ -31,6 +31,7 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.TTCCLayout;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
@@ -217,6 +218,24 @@ public class XtextBuildDaemon {
             };
             List<File> _map_1 = ListExtensions.<String, File>map(_sourceRoots, _function_1);
             it.setSourceRoots(_map_1);
+            List<String> _dirtyFiles = request.getDirtyFiles();
+            final Function1<String, URI> _function_2 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return URI.createFileURI(it);
+              }
+            };
+            List<URI> _map_2 = ListExtensions.<String, URI>map(_dirtyFiles, _function_2);
+            it.setDirtyFiles(_map_2);
+            List<String> _deletedFiles = request.getDeletedFiles();
+            final Function1<String, URI> _function_3 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return URI.createFileURI(it);
+              }
+            };
+            List<URI> _map_3 = ListExtensions.<String, URI>map(_deletedFiles, _function_3);
+            it.setDeletedFiles(_map_3);
             it.setFailOnValidationError(false);
           }
         };
