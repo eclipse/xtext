@@ -42,6 +42,13 @@ configure(subprojects - eclipsePluginProjects) {
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 	}
+
+	task debugIdea {
+		dependsOn(runIdea)
+		runIdea.debug = true
+		group = 'intelliJ Idea'
+		description = 'Debugs Intellij IDEA remotely on port 5005 with this project and its dependencies installed'
+	}
 }
 
 configure(ideaPluginProjects) {
