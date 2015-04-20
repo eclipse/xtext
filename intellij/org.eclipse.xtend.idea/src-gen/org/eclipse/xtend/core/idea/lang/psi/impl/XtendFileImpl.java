@@ -13,6 +13,7 @@ public final class XtendFileImpl extends BaseXtextFile {
 		super(viewProvider, XtendLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return XtendFileType.INSTANCE;
 	}
