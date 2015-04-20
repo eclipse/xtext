@@ -217,6 +217,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.extensionFactoryName.toSimpleName» implements ExtensionFactory {
 
+			@Override
 			public Object createInstance(final String factoryArgument, final String implementationClass) {
 				Class<?> clazz;
 				try {
@@ -243,6 +244,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends BuildProcessParametersProvider {
 		
+			@Override
 			public List<String> getClassPath() {
 				PluginId pluginId = PluginId.getId("«ideaProjectName»");
 				File pluginFolder = PluginManager.getPlugin(pluginId).getPath();
@@ -641,6 +643,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				super(viewProvider, «grammar.languageName.toSimpleName».INSTANCE);
 			}
 		
+			@Override
 			public FileType getFileType() {
 				return «grammar.fileTypeName.toSimpleName».INSTANCE;
 			}
@@ -657,6 +660,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.fileTypeFactoryName.toSimpleName» extends FileTypeFactory {
 		
+			@Override
 			public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 				consumer.consume(«grammar.fileTypeName».INSTANCE, «grammar.fileTypeName».DEFAULT_EXTENSION);
 			}
@@ -683,18 +687,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				super(«grammar.languageName.toSimpleName».INSTANCE);
 			}
 		
+			@Override
 			public String getDefaultExtension() {
 				return DEFAULT_EXTENSION;
 			}
 		
+			@Override
 			public String getDescription() {
 				return "«grammar.simpleName» files";
 			}
 		
+			@Override
 			public Icon getIcon() {
 				return null;
 			}
 		
+			@Override
 			public String getName() {
 				return "«grammar.simpleName»";
 			}
@@ -812,10 +820,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			«ENDFOR»
 			«ENDFOR»
 		
+			@Override
 			public IFileElementType getFileType() {
 				return FILE_TYPE;
 			}
 		
+			@Override
 			public IGrammarAwareElementType findElementType(EObject grammarElement) {
 				return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 			}
@@ -880,10 +890,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			private static final TokenSet STRING_TOKENS = TokenSet.EMPTY;
 			«ENDIF»
 		
+			@Override
 		    public int getAntlrType(IElementType iElementType) {
 		        return ((IndexedElementType)iElementType).getLocalIndex();
 		    }
 		    
+		    @Override
 		    public IElementType getIElementType(int antlrType) {
 		    	return tokenTypes[antlrType];
 		    }
@@ -916,6 +928,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.syntaxHighlighterFactoryName.toSimpleName» extends SingleLazyInstanceSyntaxHighlighterFactory {
 			
+			@Override
 		    @NotNull
 		    protected SyntaxHighlighter createHighlighter() {
 		        return «grammar.languageName.toSimpleName».INSTANCE.getInstance(SyntaxHighlighter.class);
@@ -964,6 +977,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				@Inject 
 				private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 			
+				@Override
 				public PsiFile createFile(FileViewProvider viewProvider) {
 					return new «grammar.fileImplName.toSimpleName»(viewProvider);
 				}
@@ -1021,8 +1035,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				//custom rules here
 			}
 		}
-		
-		
 	'''
 	
 	def compileServicesISetup(Grammar grammar) '''
