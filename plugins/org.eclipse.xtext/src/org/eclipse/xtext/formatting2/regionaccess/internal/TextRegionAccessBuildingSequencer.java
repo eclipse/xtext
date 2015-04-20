@@ -157,7 +157,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return true;
 	}
 
-	protected StringEObjectRegion enterEObject(AbstractElement ele, EObject semanticChild) {
+	protected StringEObjectRegion enterEObject(EObject ele, EObject semanticChild) {
 		StringEObjectRegion tokens = new StringEObjectRegion(regionAccess, ele, semanticChild);
 		regionAccess.add(tokens);
 		tokens.setLeadingHiddenRegion(last);
@@ -201,10 +201,10 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		// not relevant
 	}
 
-	public TextRegionAccessBuildingSequencer withRoot(EObject root) {
+	public TextRegionAccessBuildingSequencer withRoot(EObject ctx, EObject root) {
 		this.regionAccess = new StringBasedRegionAccess((XtextResource) root.eResource());
 		this.last = createHiddenRegion();
-		this.regionAccess.setRootEObject(enterEObject(null, root));
+		this.regionAccess.setRootEObject(enterEObject(ctx, root));
 		return this;
 	}
 

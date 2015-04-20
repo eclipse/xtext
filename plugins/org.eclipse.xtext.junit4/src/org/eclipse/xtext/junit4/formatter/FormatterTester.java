@@ -155,7 +155,9 @@ public class FormatterTester {
 		if (req.isUseNodeModel() && useSerializer) {
 			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
 			ITextRegionAccess serRegions = createRegionAccessViaSerializer(resource);
-			Assert.assertEquals(toString(nmRegions), toString(serRegions));
+			String nmString = toString(nmRegions);
+			String serString = toString(serRegions);
+			Assert.assertEquals(nmString, serString);
 			return nmRegions;
 		} else if (req.isUseNodeModel()) {
 			ITextRegionAccess nmRegions = createRegionAccessViaNodeModel(resource);
