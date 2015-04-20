@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -75,6 +77,11 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	@Override
 	public ITextSegment regionForDocument() {
 		return new TextSegment(this, 0, resource.getParseResult().getRootNode().getTotalEndOffset());
+	}
+
+	@Override
+	public List<IEObjectRegion> regionsForAllEObjects() {
+		return ImmutableList.<IEObjectRegion> copyOf(eObjectToTokens.values());
 	}
 
 }

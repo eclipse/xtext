@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractEObjectRegion extends AbstractTextSegment implements IEObjectRegion {
 	private final ITextRegionAccess access;
+	private EObject grammarElement;
 	private IHiddenRegion nextHidden;
 	private IHiddenRegion previousHidden;
 	private EObject semantcElement;
@@ -30,6 +31,11 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	public AbstractEObjectRegion(AbstractRegionAccess access) {
 		super();
 		this.access = access;
+	}
+
+	@Override
+	public EObject getGrammarElement() {
+		return grammarElement;
 	}
 
 	public IHiddenRegion getLeadingHiddenRegion() {
@@ -83,6 +89,10 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 
 	public IHiddenRegion getTrailingHiddenRegion() {
 		return nextHidden;
+	}
+
+	protected void setGrammarElement(EObject grammarElement) {
+		this.grammarElement = grammarElement;
 	}
 
 	protected void setLeadingHiddenRegion(IHiddenRegion leading) {

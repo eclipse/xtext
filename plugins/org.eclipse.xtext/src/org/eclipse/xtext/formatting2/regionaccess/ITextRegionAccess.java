@@ -192,4 +192,6 @@ public interface ITextRegionAccess {
 	String textForOffset(int offset, int length);
 
 	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
+
+	List<IEObjectRegion> regionsForAllEObjects();
 }

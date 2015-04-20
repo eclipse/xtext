@@ -39,11 +39,11 @@ class RegionAccessTest {
 			1 foo
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Simple'foo'
+			    Start    Simple'foo' via Root
 			0 1 Semantic "1" Simple:'1'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 3 Semantic "foo" Simple:name=ID
-			    End      Simple'foo'
+			    End      Simple'foo' via Root
 			5 0 Hidden
 		'''
 	}
@@ -53,12 +53,13 @@ class RegionAccessTest {
 			2 foo
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Delegation
+			    Start    Delegation via Root
 			0 1 Semantic "2" Delegation:'2'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    delegate=Delegate'foo'
+			    Start    delegate=Delegate'foo' via Delegation:delegate=Delegate
 			2 3 Semantic "foo" Delegate:name=ID
-			    End      Delegation, delegate=Delegate'foo'
+			    End      delegate=Delegate'foo' via Delegation:delegate=Delegate
+			    End      Delegation via Root
 			5 0 Hidden
 		'''
 	}
@@ -68,11 +69,11 @@ class RegionAccessTest {
 			3 foo
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Delegate'foo'
+			    Start    Delegate'foo' via Root
 			0 1 Semantic "3" Unassigned:'3'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 3 Semantic "foo" Delegate:name=ID
-			    End      Delegate'foo'
+			    End      Delegate'foo' via Root
 			5 0 Hidden
 		'''
 	}
@@ -82,14 +83,15 @@ class RegionAccessTest {
 			4 prefix foo
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    PrefixedUnassigned
+			     Start    PrefixedUnassigned via Root
 			 0 1 Semantic "4" PrefixedUnassigned:'4'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    delegate=Delegate'foo'
+			     Start    delegate=Delegate'foo' via PrefixedUnassigned:delegate=PrefixedDelegate
 			 2 6 Semantic "prefix" PrefixedDelegate:'prefix'
 			 8 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 9 3 Semantic "foo" Delegate:name=ID
-			     End      PrefixedUnassigned, delegate=Delegate'foo'
+			     End      delegate=Delegate'foo' via PrefixedUnassigned:delegate=PrefixedDelegate
+			     End      PrefixedUnassigned via Root
 			12 0 Hidden
 		'''
 	}
@@ -99,18 +101,19 @@ class RegionAccessTest {
 			5 a + b
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Add
+			    Start    Add via Root
 			0 1 Semantic "5" Root:'5'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    left=Named'a'
+			    Start    left=Named'a' via Expression:{Add.left=}
 			2 1 Semantic "a" Primary:name=ID
-			    End      left=Named'a'
+			    End      left=Named'a' via Expression:{Add.left=}
 			3 1 Hidden   " " Whitespace:TerminalRule'WS'
 			4 1 Semantic "+" Expression:'+'
 			5 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    right=Named'b'
+			    Start    right=Named'b' via Expression:right=Primary
 			6 1 Semantic "b" Primary:name=ID
-			    End      Add, right=Named'b'
+			    End      right=Named'b' via Expression:right=Primary
+			    End      Add via Root
 			7 0 Hidden
 		'''
 	}
@@ -120,30 +123,31 @@ class RegionAccessTest {
 			5 (a + b) + c
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    Add
+			     Start    Add via Root
 			 0 1 Semantic "5" Root:'5'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    left=Add
+			     Start    left=Add via Expression:{Add.left=}
 			 2 1 Semantic "(" Parenthesized:'('
 			 3 0 Hidden
-			     Start    left=Named'a'
+			     Start    left=Named'a' via Expression:{Add.left=}
 			 3 1 Semantic "a" Primary:name=ID
-			     End      left=Named'a'
+			     End      left=Named'a' via Expression:{Add.left=}
 			 4 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 5 1 Semantic "+" Expression:'+'
 			 6 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    right=Named'b'
+			     Start    right=Named'b' via Expression:right=Primary
 			 7 1 Semantic "b" Primary:name=ID
-			     End      right=Named'b'
+			     End      right=Named'b' via Expression:right=Primary
 			 8 0 Hidden
 			 8 1 Semantic ")" Parenthesized:')'
-			     End      left=Add
+			     End      left=Add via Expression:{Add.left=}
 			 9 1 Hidden   " " Whitespace:TerminalRule'WS'
 			10 1 Semantic "+" Expression:'+'
 			11 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    right=Named'c'
+			     Start    right=Named'c' via Expression:right=Primary
 			12 1 Semantic "c" Primary:name=ID
-			     End      Add, right=Named'c'
+			     End      right=Named'c' via Expression:right=Primary
+			     End      Add via Root
 			13 0 Hidden
 		'''
 	}
@@ -153,7 +157,7 @@ class RegionAccessTest {
 			6 (unassigned foo)
 		'''.toString.trim === '''
 			 0  0 Hidden
-			      Start    Action
+			      Start    Action via Root
 			 0  1 Semantic "6" Root:'6'
 			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2  1 Semantic "(" Mixed:'('
@@ -163,7 +167,7 @@ class RegionAccessTest {
 			14  3 Semantic "foo" Mixed:ID
 			17  0 Hidden
 			17  1 Semantic ")" Mixed:')'
-			      End      Action
+			      End      Action via Root
 			18  0 Hidden
 		'''
 	}
@@ -173,7 +177,7 @@ class RegionAccessTest {
 			6 (unassigned datatype foo)
 		'''.toString.trim === '''
 			 0  0 Hidden
-			      Start    Action
+			      Start    Action via Root
 			 0  1 Semantic "6" Root:'6'
 			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2  1 Semantic "(" Mixed:'('
@@ -183,7 +187,7 @@ class RegionAccessTest {
 			14 12 Semantic "datatyp..." Mixed:Datatype
 			26  0 Hidden
 			26  1 Semantic ")" Mixed:')'
-			      End      Action
+			      End      Action via Root
 			27  0 Hidden
 		'''
 	}
@@ -193,7 +197,7 @@ class RegionAccessTest {
 			6 (unassigned datatype datatype foo)
 		'''.toString.trim === '''
 			 0  0 Hidden
-			      Start    Action
+			      Start    Action via Root
 			 0  1 Semantic "6" Root:'6'
 			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2  1 Semantic "(" Mixed:'('
@@ -203,7 +207,7 @@ class RegionAccessTest {
 			14 21 Semantic "datatyp..." Mixed:Datatype
 			35  0 Hidden
 			35  1 Semantic ")" Mixed:')'
-			      End      Action
+			      End      Action via Root
 			36  0 Hidden
 		'''
 	}
@@ -213,13 +217,13 @@ class RegionAccessTest {
 			6 ()
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Action
+			    Start    Action via Root
 			0 1 Semantic "6" Root:'6'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 1 Semantic "(" Mixed:'('
 			3 0 Hidden
 			3 1 Semantic ")" Mixed:')'
-			    End      Action
+			    End      Action via Root
 			4 0 Hidden
 		'''
 	}
@@ -229,7 +233,7 @@ class RegionAccessTest {
 			6 (())
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Action
+			    Start    Action via Root
 			0 1 Semantic "6" Root:'6'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 1 Semantic "(" Mixed:'('
@@ -239,7 +243,7 @@ class RegionAccessTest {
 			4 1 Semantic ")" Mixed:')'
 			5 0 Hidden
 			5 1 Semantic ")" Mixed:')'
-			    End      Action
+			    End      Action via Root
 			6 0 Hidden
 		'''
 	}
@@ -249,7 +253,7 @@ class RegionAccessTest {
 			6 ((()))
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Action
+			    Start    Action via Root
 			0 1 Semantic "6" Root:'6'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 1 Semantic "(" Mixed:'('
@@ -263,7 +267,7 @@ class RegionAccessTest {
 			6 1 Semantic ")" Mixed:')'
 			7 0 Hidden
 			7 1 Semantic ")" Mixed:')'
-			    End      Action
+			    End      Action via Root
 			8 0 Hidden
 		'''
 	}
@@ -273,7 +277,7 @@ class RegionAccessTest {
 			6 (((foo)))
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    Mixed'foo'
+			     Start    Mixed'foo' via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2 1 Semantic "(" Mixed:'('
@@ -289,7 +293,7 @@ class RegionAccessTest {
 			 9 1 Semantic ")" Mixed:')'
 			10 0 Hidden
 			10 1 Semantic ")" Mixed:')'
-			     End      Mixed'foo'
+			     End      Mixed'foo' via Root
 			11 0 Hidden
 		'''
 	}
@@ -299,14 +303,14 @@ class RegionAccessTest {
 			6 (child(((foo))))
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    Mixed
+			     Start    Mixed via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2 1 Semantic "(" Mixed:'('
 			 3 0 Hidden
 			 3 5 Semantic "child" Mixed:'child'
 			 8 0 Hidden
-			     Start    eobj=Mixed'foo'
+			     Start    eobj=Mixed'foo' via Mixed:eobj=Mixed
 			 8 1 Semantic "(" Mixed:'('
 			 9 0 Hidden
 			 9 1 Semantic "(" Mixed:'('
@@ -320,10 +324,10 @@ class RegionAccessTest {
 			15 1 Semantic ")" Mixed:')'
 			16 0 Hidden
 			16 1 Semantic ")" Mixed:')'
-			     End      eobj=Mixed'foo'
+			     End      eobj=Mixed'foo' via Mixed:eobj=Mixed
 			17 0 Hidden
 			17 1 Semantic ")" Mixed:')'
-			     End      Mixed
+			     End      Mixed via Root
 			18 0 Hidden
 		'''
 	}
@@ -333,7 +337,7 @@ class RegionAccessTest {
 			6 (datatype foo)
 		'''.toString.trim === '''
 			 0  0 Hidden
-			      Start    Mixed
+			      Start    Mixed via Root
 			 0  1 Semantic "6" Root:'6'
 			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2  1 Semantic "(" Mixed:'('
@@ -341,7 +345,7 @@ class RegionAccessTest {
 			 3 12 Semantic "datatyp..." Mixed:datatype=Datatype
 			15  0 Hidden
 			15  1 Semantic ")" Mixed:')'
-			      End      Mixed
+			      End      Mixed via Root
 			16  0 Hidden
 		'''
 	}
@@ -351,7 +355,7 @@ class RegionAccessTest {
 			6 (datatype datatype foo)
 		'''.toString.trim === '''
 			 0  0 Hidden
-			      Start    Mixed
+			      Start    Mixed via Root
 			 0  1 Semantic "6" Root:'6'
 			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
 			 2  1 Semantic "(" Mixed:'('
@@ -359,7 +363,7 @@ class RegionAccessTest {
 			 3 21 Semantic "datatyp..." Mixed:datatype=Datatype
 			24  0 Hidden
 			24  1 Semantic ")" Mixed:')'
-			      End      Mixed
+			      End      Mixed via Root
 			25  0 Hidden
 		'''
 	}
@@ -369,20 +373,20 @@ class RegionAccessTest {
 			6 (foo) action (ref foo) end
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    AssignedAction
+			     Start    AssignedAction via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=Mixed'foo'
+			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 2 1 Semantic "(" Mixed:'('
 			 3 0 Hidden
 			 3 3 Semantic "foo" Mixed:name=ID
 			 6 0 Hidden
 			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo'
+			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 8 6 Semantic "action" Mixed:'action'
 			14 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    body=Mixed
+			     Start    body=Mixed via Mixed:body=Mixed
 			15 1 Semantic "(" Mixed:'('
 			16 0 Hidden
 			16 3 Semantic "ref" Mixed:'ref'
@@ -390,10 +394,10 @@ class RegionAccessTest {
 			20 3 Semantic "foo" Mixed:ref=[Mixed|ID]
 			23 0 Hidden
 			23 1 Semantic ")" Mixed:')'
-			     End      body=Mixed
+			     End      body=Mixed via Mixed:body=Mixed
 			24 1 Hidden   " " Whitespace:TerminalRule'WS'
 			25 3 Semantic "end" Mixed:'end'
-			     End      AssignedAction
+			     End      AssignedAction via Root
 			28 0 Hidden
 		'''
 	}
@@ -403,7 +407,7 @@ class RegionAccessTest {
 			6 (lit1)
 		'''.toString.trim === '''
 			0 0 Hidden
-			    Start    Mixed
+			    Start    Mixed via Root
 			0 1 Semantic "6" Root:'6'
 			1 1 Hidden   " " Whitespace:TerminalRule'WS'
 			2 1 Semantic "(" Mixed:'('
@@ -411,7 +415,7 @@ class RegionAccessTest {
 			3 4 Semantic "lit1" Mixed:lit=Enum
 			7 0 Hidden
 			7 1 Semantic ")" Mixed:')'
-			    End      Mixed
+			    End      Mixed via Root
 			8 0 Hidden
 		'''
 	}
@@ -421,19 +425,19 @@ class RegionAccessTest {
 			6 (foo) action
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    AssignedAction
+			     Start    AssignedAction via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=Mixed'foo'
+			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 2 1 Semantic "(" Mixed:'('
 			 3 0 Hidden
 			 3 3 Semantic "foo" Mixed:name=ID
 			 6 0 Hidden
 			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo'
+			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 8 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction
+			     End      AssignedAction via Root
 			14 0 Hidden
 		'''
 	}
@@ -443,22 +447,23 @@ class RegionAccessTest {
 			6 (foo) action action
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    AssignedAction
+			     Start    AssignedAction via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=AssignedAction, child=Mixed'foo'
+			     Start    child=AssignedAction via Mixed:{AssignedAction.child=}
+			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 2 1 Semantic "(" Mixed:'('
 			 3 0 Hidden
 			 3 3 Semantic "foo" Mixed:name=ID
 			 6 0 Hidden
 			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo'
+			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
 			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 8 6 Semantic "action" Mixed:'action'
-			     End      child=AssignedAction
+			     End      child=AssignedAction via Mixed:{AssignedAction.child=}
 			14 1 Hidden   " " Whitespace:TerminalRule'WS'
 			15 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction
+			     End      AssignedAction via Root
 			21 0 Hidden
 		'''
 	}
@@ -468,20 +473,21 @@ class RegionAccessTest {
 			6 () action action
 		'''.toString.trim === '''
 			 0 0 Hidden
-			     Start    AssignedAction
+			     Start    AssignedAction via Root
 			 0 1 Semantic "6" Root:'6'
 			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=Action, child=AssignedAction
+			     Start    child=AssignedAction via Mixed:{AssignedAction.child=}
+			     Start    child=Action via Mixed:{AssignedAction.child=}
 			 2 1 Semantic "(" Mixed:'('
 			 3 0 Hidden
 			 3 1 Semantic ")" Mixed:')'
-			     End      child=Action
+			     End      child=Action via Mixed:{AssignedAction.child=}
 			 4 1 Hidden   " " Whitespace:TerminalRule'WS'
 			 5 6 Semantic "action" Mixed:'action'
-			     End      child=AssignedAction
+			     End      child=AssignedAction via Mixed:{AssignedAction.child=}
 			11 1 Hidden   " " Whitespace:TerminalRule'WS'
 			12 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction
+			     End      AssignedAction via Root
 			18 0 Hidden
 		'''
 	}

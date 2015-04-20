@@ -129,7 +129,7 @@ public class Serializer implements ISerializer {
 		EObject context = getContext(obj);
 		TextRegionAccessBuilder builder = textRegionBuilderProvider.get();
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-		serialize(obj, context, builder.forSequence(obj), errors);
+		serialize(obj, context, builder.forSequence(context, obj), errors);
 		ITextRegionAccess regionAccess = builder.create();
 		return regionAccess;
 	}

@@ -27,8 +27,8 @@ public class TextRegionAccessBuilder {
 		return this;
 	}
 
-	public ISequenceAcceptor forSequence(EObject root) {
-		return this.fromSequencer = createTextRegionAccessBuildingSequencer().withRoot(root);
+	public ISequenceAcceptor forSequence(EObject ctx, EObject root) {
+		return this.fromSequencer = createTextRegionAccessBuildingSequencer().withRoot(ctx, root);
 	}
 
 	private TextRegionAccessBuildingSequencer createTextRegionAccessBuildingSequencer() {
