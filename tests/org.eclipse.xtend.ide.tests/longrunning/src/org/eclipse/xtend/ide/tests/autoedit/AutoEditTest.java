@@ -315,6 +315,105 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("'''|'''", editor);
 	}
 	
+	@Test 
+	public void testBug434717_01() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''\n" + 
+				"		|\n" +
+				"		'''\n" + 
+				"}\n" + 
+				"");
+		pasteText(editor, "foo\n" +
+						  "\tbar\n"
+						  + "foo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''\n" + 
+				"		foo\n" +
+				"			bar\n" +
+				"		foo|\n" +
+				"		'''\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
+	@Test 
+	public void testBug434717_02() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''\n" + 
+				"		|\n" +
+				"		'''\n" + 
+				"}\n" + 
+				"");
+		pasteText(editor, "\tfoo\n" +
+						  "\t\tbar\n"
+						  + "\tfoo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''\n" + 
+				"			foo\n" +
+				"				bar\n" +
+				"			foo|\n" +
+				"		'''\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
+	@Test 
+	public void testBug434717_03() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''|'''\n" + 
+				"}\n" + 
+				"");
+		pasteText(editor, "\tfoo\n" +
+						  "\t\tbar\n"
+						  + "\tfoo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''	foo\n" +
+				"				bar\n" +
+				"			foo|'''\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
+	@Test 
+	public void testBug434717_04() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''|'''" + 
+				"");
+		pasteText(editor, "\tfoo\n" +
+						  "\t\tbar\n"
+						  + "\tfoo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''	foo\n" +
+				"				bar\n" +
+				"			foo|'''" + 
+				"", editor);
+	}
+	
+	@Test 
+	public void testBug434717_05() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''|'''" + 
+				"");
+		pasteText(editor, "\tfoo\r" +
+						  "\t\tbar\r"
+						  + "\tfoo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''	foo\n" +
+				"				bar\n" +
+				"			foo|'''" + 
+				"", editor);
+	}
+	
 	@Test public void testBug342030_01() throws Exception {
 		XtextEditor editor = openEditor(
 				"genPlainText(Object this){\n" + 
