@@ -27,22 +27,6 @@
       value="2g"
       vm="true"/>
   <setupTask
-      xsi:type="setup.p2:P2Task">
-    <requirement
-        name="org.eclipse.m2e.feature.feature.group"
-        versionRange="[1.0.0,1.6.0)"/>
-    <requirement
-        name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
-    <requirement
-        name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
-    <repository
-        url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
-    <repository
-        url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
-    <repository
-        url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
-  </setupTask>
-  <setupTask
       xsi:type="setup:ResourceCreationTask"
       excludedTriggers="STARTUP MANUAL"
       content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;section name=&quot;Workbench&quot;>&#xD;&#xA;&#x9;&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>&#xD;&#xA;&#x9;&lt;/section>&#xD;&#xA;&lt;/section>&#xD;&#xA;"
@@ -79,37 +63,6 @@
       name="eclipse.target.platform"
       defaultValue="Luna"
       storageURI="scope://Workspace"/>
-  <setupTask
-      xsi:type="setup.p2:P2Task">
-    <requirement
-        name="org.eclipse.emf.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.xtext.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-    <requirement
-        name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
-        optional="true"/>
-    <requirement
-        name="org.eclipse.epp.mpc.feature.group"/>
-    <requirement
-        name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
-    <requirement
-        name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
-    <repository
-        url="${xtext.nightly.composite}"/>
-    <repository
-        url="http://findbugs.cs.umd.edu/eclipse"/>
-    <repository
-        url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
-  </setupTask>
-  <setupTask
-      xsi:type="git:GitCloneTask"
-      id="git.clone.xtext"
-      remoteURI="git@github.com:eclipse/xtext.git"
-      checkoutBranch="${xtext.git.branch}">
-    <description>${scope.project.label}</description>
-  </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
@@ -279,6 +232,57 @@
     </setupTask>
   </setupTask>
   <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="eclipse">
+    <requirement
+        name="org.eclipse.emf.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.xtext.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.epp.mpc.feature.group"/>
+    <requirement
+        name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
+    <requirement
+        name="org.eclipse.pde.feature.group"/>
+    <repository
+        url="${xtext.nightly.composite}"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="tools">
+    <requirement
+        name="org.eclipse.m2e.feature.feature.group"
+        versionRange="[1.0.0,1.6.0)"/>
+    <requirement
+        name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
+    <requirement
+        name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
+    <requirement
+        name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
+    <requirement
+        name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
+        optional="true"/>
+    <repository
+        url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
+    <repository
+        url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
+    <repository
+        url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
+    <repository
+        url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
+    <repository
+        url="http://findbugs.cs.umd.edu/eclipse"/>
+  </setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="git.clone.xtext"
+      remoteURI="git@github.com:eclipse/xtext.git"
+      checkoutBranch="${xtext.git.branch}">
+    <description>${scope.project.label}</description>
+  </setupTask>
+  <setupTask
       xsi:type="setup.targlets:TargletTask">
     <targlet
         name="Xtext Target Platform"
@@ -409,42 +413,6 @@
     </targlet>
     <description>Target platform</description>
   </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask">
-    <targlet
-        name="Xtext/Xtend Examples">
-      <requirement
-          name="org.eclipse.xtend.examples-container"/>
-      <requirement
-          name="xtend-examples"/>
-      <requirement
-          name="xtend-annotation-examples-client"/>
-      <requirement
-          name="xtend-annotation-examples"/>
-      <requirement
-          name="org.eclipse.xtext.xtext.ui.examples-container"/>
-      <requirement
-          name="org.eclipse.xtext.xtext.ui.examples"/>
-      <requirement
-          name="org.eclipse.xtext.example.arithmetics.tests"/>
-      <requirement
-          name="org.eclipse.xtext.example.homeautomation.tests"/>
-      <requirement
-          name="org.eclipse.xtext.example.fowlerdsl.ui"/>
-      <requirement
-          name="xbase.tutorial"/>
-      <requirement
-          name="xtend-euler"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/examples/}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
-    </targlet>
-  </setupTask>
   <project name="core"
       label="Core">
     <setupTask
@@ -460,7 +428,7 @@
                 project="org.eclipse.xtext"/>
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern=".*\.xtext\.contributor|.*releng|.*build.feature"/>
+                pattern=".*\.xtext\.contributor|.*releng|.*build.feature|^jenkins$"/>
           </operand>
           <operand
               xsi:type="predicates:NamePredicate"
@@ -592,14 +560,8 @@
               xsi:type="predicates:RepositoryPredicate"
               project="org.eclipse.xtext"/>
           <operand
-              xsi:type="predicates:OrPredicate">
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*maven.*|.*parent"/>
-            <operand
-                xsi:type="predicates:NaturePredicate"
-                nature="org.eclipse.m2e.core.maven2Nature"/>
-          </operand>
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.maven.*|.*\.parent|.*\.target"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -624,6 +586,9 @@
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.idea.*|intellij"/>
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="intellij"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -653,6 +618,42 @@
             name="org.eclipse.xtext.releng"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location}"/>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Xtext/Xtend Examples">
+        <requirement
+            name="org.eclipse.xtend.examples-container"/>
+        <requirement
+            name="xtend-examples"/>
+        <requirement
+            name="xtend-annotation-examples-client"/>
+        <requirement
+            name="xtend-annotation-examples"/>
+        <requirement
+            name="org.eclipse.xtext.xtext.ui.examples-container"/>
+        <requirement
+            name="org.eclipse.xtext.xtext.ui.examples"/>
+        <requirement
+            name="org.eclipse.xtext.example.arithmetics.tests"/>
+        <requirement
+            name="org.eclipse.xtext.example.homeautomation.tests"/>
+        <requirement
+            name="org.eclipse.xtext.example.fowlerdsl.ui"/>
+        <requirement
+            name="xbase.tutorial"/>
+        <requirement
+            name="xtend-euler"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/}"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
       </targlet>
     </setupTask>
     <setupTask
