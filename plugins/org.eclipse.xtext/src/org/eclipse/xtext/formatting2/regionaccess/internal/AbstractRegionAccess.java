@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -154,8 +156,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 
 	@Override
 	public ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feat) {
-		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
-			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
+		assertNoContainment(feat);
 		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
 			return null;
@@ -165,6 +166,31 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 				return region;
 		}
 		return null;
+	}
+
+	protected void assertNoContainment(EStructuralFeature feat) {
+		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
+			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
+	}
+
+	@Override
+	public List<ISemanticRegion> regionsForFeatures(EObject owner, EStructuralFeature... features) {
+		Set<String> names = Sets.newHashSet();
+		for (int i = 0; i < features.length; i++) {
+			EStructuralFeature feat = features[i];
+			assertNoContainment(feat);
+			names.add(feat.getName());
+		}
+		AbstractEObjectRegion tokens = regionForEObject(owner);
+		if (tokens == null)
+			return null;
+		List<ISemanticRegion> result = Lists.newArrayList();
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions()) {
+			Assignment assignment = GrammarUtil.containingAssignment(region.getGrammarElement());
+			if (assignment != null && names.contains(assignment.getFeature()))
+				result.add(region);
+		}
+		return ImmutableList.copyOf(result);
 	}
 
 	@Override

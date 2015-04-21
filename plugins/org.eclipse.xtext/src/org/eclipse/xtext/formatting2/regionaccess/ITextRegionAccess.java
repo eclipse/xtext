@@ -67,6 +67,8 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public interface ITextRegionAccess {
 
+	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
+
 	/**
 	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
 	 *         model's root element, the {@link ParserRule} is returned.
@@ -77,6 +79,8 @@ public interface ITextRegionAccess {
 	 * @return The {@link XtextResource} that backs the document this class provides access to.
 	 */
 	XtextResource getResource();
+
+	ITextRegionRewriter getRewriter();
 
 	/**
 	 * @return true, if one or more parse error occurred when parsing the document.
@@ -135,6 +139,10 @@ public interface ITextRegionAccess {
 	 */
 	IHiddenRegion leadingHiddenRegion(EObject owner);
 
+	ILineRegion lineForOffset(int offset);
+
+	ITextSegment regionForDocument();
+
 	/**
 	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
 	 *         semantic region.
@@ -148,16 +156,27 @@ public interface ITextRegionAccess {
 	ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feature);
 
 	/**
+	 * no containment; returned order same as syntactic oder
+	 */
+	List<ISemanticRegion> regionsForFeatures(EObject owner, EStructuralFeature... features);
+
+	/**
 	 * @return the first {@link ISemanticRegion} that represent 'keyword' and directly belongs to the provided
 	 *         'EObject'. Keywords of child-EObjects are not considered. May be null.
 	 */
 	ISemanticRegion regionForKeyword(EObject owner, String keyword);
+
+	ITextSegment regionForOffset(int offset, int length);
+
+	IEObjectRegion regionForRootEObject();
 
 	/**
 	 * @return the first {@link ISemanticRegion} that represent a RuleCall to the provided AbstractRule and directly
 	 *         belongs to the provided 'EObject'. RuleCalls of child-EObjects are not considered. May be null.
 	 */
 	ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule);
+
+	List<IEObjectRegion> regionsForAllEObjects();
 
 	/**
 	 * @return All {@link ISemanticRegion semantic regions} that represent one of the provided 'keyword's and directly
@@ -172,26 +191,12 @@ public interface ITextRegionAccess {
 	 */
 	List<ISemanticRegion> regionsForRuleCallsTo(EObject owner, AbstractRule... rule);
 
+	String textForOffset(int offset, int length);
+
 	/**
 	 * @return the {@link IHiddenRegion} that follows after the EObject's last {@link ISemanticRegion}.
 	 * 
 	 * @see #leadingHiddenRegion(EObject)
 	 */
 	IHiddenRegion trailingHiddenRegion(EObject owner); // rename to nextHiddenRegion; do same with leading()
-
-	ITextRegionRewriter getRewriter();
-
-	IEObjectRegion regionForRootEObject();
-
-	ITextSegment regionForDocument();
-
-	ITextSegment regionForOffset(int offset, int length);
-
-	ILineRegion lineForOffset(int offset);
-
-	String textForOffset(int offset, int length);
-
-	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
-
-	List<IEObjectRegion> regionsForAllEObjects();
 }
