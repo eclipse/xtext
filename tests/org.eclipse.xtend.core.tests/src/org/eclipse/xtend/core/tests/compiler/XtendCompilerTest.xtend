@@ -267,6 +267,44 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def testNonExplicitDispatchCases() {
+		assertCompilesTo('''
+			class C {
+				def dispatch testFunction1(CharSequence i) {
+					42
+				}
+				protected def _testFunction1(String s) {
+					s.length
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected int _testFunction1(final CharSequence i) {
+			    return 42;
+			  }
+			  
+			  protected int _testFunction1(final String s) {
+			    return s.length();
+			  }
+			  
+			  public int testFunction1(final CharSequence s) {
+			    if (s instanceof String) {
+			      return _testFunction1((String)s);
+			    } else if (s != null) {
+			      return _testFunction1(s);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(s).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
 	/**
 	 * Do not throw an exception for inherited dispatch methods.
 	 */
