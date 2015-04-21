@@ -35,6 +35,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
+import org.eclipse.emf.ecore.EObject
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -938,24 +939,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileParserDefinition(Grammar grammar) {
-		val namedGrammarElement = LinkedHashMultimap.<String, String>create
-		for (nameRuleCall : grammar.eAllContents.filter(RuleCall).filter [
-			assigned && containingAssignment.feature == 'name'
-		].toIterable) {
-			for (ruleCall : grammar.eAllContents.filter(RuleCall).filter [
-				rule.eAllContents.exists[it == nameRuleCall]
-			].toIterable) {
-				namedGrammarElement.put(ruleCall.grammarElementIdentifier, nameRuleCall.grammarElementIdentifier)
-				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
-					namedGrammarElement.put(action.grammarElementIdentifier, nameRuleCall.grammarElementIdentifier)
-				}
-			}
-		}
+		val crossReferences = grammar.crossReferences
+		val namedGrammarElement = grammar.namedGrammarElements
 		
 		'''
 			package «grammar.parserDefinitionName.toPackageName»;
 			
-			«IF !grammar.eAllContents.filter(CrossReference).filter[assigned].empty»
+			«IF !crossReferences.empty»
 				import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 			«ENDIF»
 			import «grammar.elementTypeProviderName»;
@@ -995,7 +985,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 						);
 					}
 					«ENDFOR»
-					«FOR crossReference : grammar.eAllContents.filter(CrossReference).filter[assigned].toIterable»
+					«FOR crossReference : crossReferences»
 					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
 						return new PsiEObjectReference(node);
 					}
@@ -1005,6 +995,46 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			
 			}
 		'''
+	}
+	
+	protected def getCrossReferences(Grammar grammar) {
+		grammar.allRules.map[
+			eAllContents.filter(CrossReference).filter[assigned].toIterable
+		].flatten
+	}
+	
+	protected def getNamedGrammarElements(Grammar grammar) {
+		val namedGrammarElements = LinkedHashMultimap.<String, String>create
+		for (nameRuleCall : grammar.nameRuleCalls) {
+			val nameRuleCallIdentifier = nameRuleCall.grammarElementIdentifier
+			for (ruleCall : grammar.getRuleCallsWithName(nameRuleCall)) {
+				namedGrammarElements.put(ruleCall.grammarElementIdentifier, nameRuleCallIdentifier)
+				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
+					namedGrammarElements.put(action.grammarElementIdentifier, nameRuleCallIdentifier)
+				}
+			}
+		}
+		namedGrammarElements
+	}
+	
+	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
+		grammar.allRules.map[getRuleCallsWithName(nameRuleCall)].flatten
+	}
+	
+	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
+		element.eAllContents.filter(RuleCall).filter [
+			rule.eAllContents.exists[it == nameRuleCall]
+		].toIterable
+	}
+	
+	protected def getNameRuleCalls(Grammar grammar) {
+		grammar.allRules.map[nameRuleCalls].flatten
+	}
+	
+	protected def getNameRuleCalls(EObject element) {
+		element.eAllContents.filter(RuleCall).filter [
+			assigned && containingAssignment.feature == 'name'
+		].toIterable
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) '''

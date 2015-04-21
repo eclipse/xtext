@@ -2,7 +2,7 @@ package org.eclipse.xtext.parser.unorderedGroups.idea.lang.parser;
 
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.BacktrackingBug325745TestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -12,7 +12,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class BacktrackingBug325745TestLanguageParserDefinition extends TerminalsParserDefinition {
+public class BacktrackingBug325745TestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private BacktrackingBug325745TestLanguageElementTypeProvider elementTypeProvider;

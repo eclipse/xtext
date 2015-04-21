@@ -206,19 +206,7 @@ public class IdeaPluginClassNames {
   }
   
   public String getSuperParserDefinitionName(final Grammar it) {
-    String _elvis = null;
-    EList<Grammar> _usedGrammars = it.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
-    String _parserDefinitionName = null;
-    if (_head!=null) {
-      _parserDefinitionName=this.getParserDefinitionName(_head);
-    }
-    if (_parserDefinitionName != null) {
-      _elvis = _parserDefinitionName;
-    } else {
-      _elvis = "org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition";
-    }
-    return _elvis;
+    return "org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition";
   }
   
   public String getParserDefinitionName(final Grammar it) {

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.generator;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
@@ -56,6 +57,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -2800,63 +2802,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      final LinkedHashMultimap<String, String> namedGrammarElement = LinkedHashMultimap.<String, String>create();
-      TreeIterator<EObject> _eAllContents = grammar.eAllContents();
-      Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-      final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-        @Override
-        public Boolean apply(final RuleCall it) {
-          boolean _and = false;
-          boolean _isAssigned = GrammarUtil.isAssigned(it);
-          if (!_isAssigned) {
-            _and = false;
-          } else {
-            Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-            String _feature = _containingAssignment.getFeature();
-            boolean _equals = Objects.equal(_feature, "name");
-            _and = _equals;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-      Iterable<RuleCall> _iterable = IteratorExtensions.<RuleCall>toIterable(_filter_1);
-      for (final RuleCall nameRuleCall : _iterable) {
-        TreeIterator<EObject> _eAllContents_1 = grammar.eAllContents();
-        Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
-        final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
-          @Override
-          public Boolean apply(final RuleCall it) {
-            AbstractRule _rule = it.getRule();
-            TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-            final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-              @Override
-              public Boolean apply(final EObject it) {
-                return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-              }
-            };
-            return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-          }
-        };
-        Iterator<RuleCall> _filter_3 = IteratorExtensions.<RuleCall>filter(_filter_2, _function_1);
-        Iterable<RuleCall> _iterable_1 = IteratorExtensions.<RuleCall>toIterable(_filter_3);
-        for (final RuleCall ruleCall : _iterable_1) {
-          {
-            String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-            String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-            namedGrammarElement.put(_grammarElementIdentifier, _grammarElementIdentifier_1);
-            AbstractRule _rule = ruleCall.getRule();
-            TreeIterator<EObject> _eAllContents_2 = _rule.eAllContents();
-            Iterator<Action> _filter_4 = Iterators.<Action>filter(_eAllContents_2, Action.class);
-            Iterable<Action> _iterable_2 = IteratorExtensions.<Action>toIterable(_filter_4);
-            for (final Action action : _iterable_2) {
-              String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(action);
-              String _grammarElementIdentifier_3 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-              namedGrammarElement.put(_grammarElementIdentifier_2, _grammarElementIdentifier_3);
-            }
-          }
-        }
-      }
+      final Iterable<CrossReference> crossReferences = this.getCrossReferences(grammar);
+      final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
@@ -2866,16 +2813,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        TreeIterator<EObject> _eAllContents_2 = grammar.eAllContents();
-        Iterator<CrossReference> _filter_4 = Iterators.<CrossReference>filter(_eAllContents_2, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function_2 = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_5 = IteratorExtensions.<CrossReference>filter(_filter_4, _function_2);
-        boolean _isEmpty = IteratorExtensions.isEmpty(_filter_5);
+        boolean _isEmpty = IterableExtensions.isEmpty(crossReferences);
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectReference;");
@@ -3012,17 +2950,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         }
       }
       {
-        TreeIterator<EObject> _eAllContents_3 = grammar.eAllContents();
-        Iterator<CrossReference> _filter_6 = Iterators.<CrossReference>filter(_eAllContents_3, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function_3 = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_7 = IteratorExtensions.<CrossReference>filter(_filter_6, _function_3);
-        Iterable<CrossReference> _iterable_2 = IteratorExtensions.<CrossReference>toIterable(_filter_7);
-        for(final CrossReference crossReference : _iterable_2) {
+        for(final CrossReference crossReference : crossReferences) {
           _builder.append("\t\t");
           _builder.append("if (elementType == elementTypeProvider.get");
           String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
@@ -3050,6 +2978,125 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xblockexpression = _builder;
     }
     return _xblockexpression;
+  }
+  
+  protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
+    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
+      @Override
+      public Iterable<CrossReference> apply(final AbstractRule it) {
+        TreeIterator<EObject> _eAllContents = it.eAllContents();
+        Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
+        final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
+          @Override
+          public Boolean apply(final CrossReference it) {
+            return Boolean.valueOf(GrammarUtil.isAssigned(it));
+          }
+        };
+        Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
+        return IteratorExtensions.<CrossReference>toIterable(_filter_1);
+      }
+    };
+    List<Iterable<CrossReference>> _map = ListExtensions.<AbstractRule, Iterable<CrossReference>>map(_allRules, _function);
+    return Iterables.<CrossReference>concat(_map);
+  }
+  
+  protected LinkedHashMultimap<String, String> getNamedGrammarElements(final Grammar grammar) {
+    LinkedHashMultimap<String, String> _xblockexpression = null;
+    {
+      final LinkedHashMultimap<String, String> namedGrammarElements = LinkedHashMultimap.<String, String>create();
+      Iterable<RuleCall> _nameRuleCalls = this.getNameRuleCalls(grammar);
+      for (final RuleCall nameRuleCall : _nameRuleCalls) {
+        {
+          final String nameRuleCallIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
+          Iterable<RuleCall> _ruleCallsWithName = this.getRuleCallsWithName(grammar, nameRuleCall);
+          for (final RuleCall ruleCall : _ruleCallsWithName) {
+            {
+              String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
+              namedGrammarElements.put(_grammarElementIdentifier, nameRuleCallIdentifier);
+              AbstractRule _rule = ruleCall.getRule();
+              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
+              Iterator<Action> _filter = Iterators.<Action>filter(_eAllContents, Action.class);
+              Iterable<Action> _iterable = IteratorExtensions.<Action>toIterable(_filter);
+              for (final Action action : _iterable) {
+                String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(action);
+                namedGrammarElements.put(_grammarElementIdentifier_1, nameRuleCallIdentifier);
+              }
+            }
+          }
+        }
+      }
+      _xblockexpression = namedGrammarElements;
+    }
+    return _xblockexpression;
+  }
+  
+  protected Iterable<RuleCall> getRuleCallsWithName(final Grammar grammar, final RuleCall nameRuleCall) {
+    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
+      @Override
+      public Iterable<RuleCall> apply(final AbstractRule it) {
+        return IdeaPluginGenerator.this.getRuleCallsWithName(it, nameRuleCall);
+      }
+    };
+    List<Iterable<RuleCall>> _map = ListExtensions.<AbstractRule, Iterable<RuleCall>>map(_allRules, _function);
+    return Iterables.<RuleCall>concat(_map);
+  }
+  
+  protected Iterable<RuleCall> getRuleCallsWithName(final EObject element, final RuleCall nameRuleCall) {
+    TreeIterator<EObject> _eAllContents = element.eAllContents();
+    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
+    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
+      @Override
+      public Boolean apply(final RuleCall it) {
+        AbstractRule _rule = it.getRule();
+        TreeIterator<EObject> _eAllContents = _rule.eAllContents();
+        final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+          @Override
+          public Boolean apply(final EObject it) {
+            return Boolean.valueOf(Objects.equal(it, nameRuleCall));
+          }
+        };
+        return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
+      }
+    };
+    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
+    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
+  }
+  
+  protected Iterable<RuleCall> getNameRuleCalls(final Grammar grammar) {
+    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
+      @Override
+      public Iterable<RuleCall> apply(final AbstractRule it) {
+        return IdeaPluginGenerator.this.getNameRuleCalls(it);
+      }
+    };
+    List<Iterable<RuleCall>> _map = ListExtensions.<AbstractRule, Iterable<RuleCall>>map(_allRules, _function);
+    return Iterables.<RuleCall>concat(_map);
+  }
+  
+  protected Iterable<RuleCall> getNameRuleCalls(final EObject element) {
+    TreeIterator<EObject> _eAllContents = element.eAllContents();
+    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
+    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
+      @Override
+      public Boolean apply(final RuleCall it) {
+        boolean _and = false;
+        boolean _isAssigned = GrammarUtil.isAssigned(it);
+        if (!_isAssigned) {
+          _and = false;
+        } else {
+          Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
+          String _feature = _containingAssignment.getFeature();
+          boolean _equals = Objects.equal(_feature, "name");
+          _and = _equals;
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
+    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
   }
   
   public CharSequence compileAbstractCompletionContributor(final Grammar grammar) {

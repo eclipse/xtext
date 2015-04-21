@@ -3,7 +3,7 @@ package org.eclipse.xtext.index.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.index.idea.lang.IndexTestLanguageElementTypeProvider;
 import org.eclipse.xtext.index.idea.lang.psi.impl.IndexTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -13,7 +13,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class IndexTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class IndexTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private IndexTestLanguageElementTypeProvider elementTypeProvider;

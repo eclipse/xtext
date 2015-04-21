@@ -2,7 +2,8 @@ package org.eclipse.xtext.parser.unorderedGroups.idea.lang.parser;
 
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleBacktrackingBug325745TestLanguageFileImpl;
-import org.eclipse.xtext.parser.unorderedGroups.idea.lang.parser.BacktrackingBug325745TestLanguageParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -11,7 +12,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class SimpleBacktrackingBug325745TestLanguageParserDefinition extends BacktrackingBug325745TestLanguageParserDefinition {
+public class SimpleBacktrackingBug325745TestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private SimpleBacktrackingBug325745TestLanguageElementTypeProvider elementTypeProvider;
@@ -25,6 +26,11 @@ public class SimpleBacktrackingBug325745TestLanguageParserDefinition extends Bac
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getModel_FieldsElementParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 
