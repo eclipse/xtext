@@ -33,7 +33,6 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IPath projectsRootLocation;
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
-	private boolean createFeatureProject;
 	private boolean createUiProject;
 
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
@@ -74,14 +73,6 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public void setCreateTestProject(boolean createTestProject) {
 		this.createTestProject = createTestProject;
-	}
-
-	public boolean isCreateFeatureProject() {
-		return createFeatureProject;
-	}
-
-	public void setCreateFeatureProject(boolean createFeatureProject) {
-		this.createFeatureProject = createFeatureProject;
 	}
 
 	public String getFileExtension() {

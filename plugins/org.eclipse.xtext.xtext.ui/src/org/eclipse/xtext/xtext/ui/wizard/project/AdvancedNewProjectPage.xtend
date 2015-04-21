@@ -22,7 +22,6 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
-	Button createFeatureProject
 	Button createTestProject
 	Combo buildSystem
 	Combo projectLayout
@@ -54,9 +53,6 @@ class AdvancedNewProjectPage extends WizardPage {
 				createIdeProject = CheckBox [
 					text = "Generic IDE Support"
 					enabled = false
-				]
-				createFeatureProject = CheckBox [
-					text = Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel
 				]
 				createTestProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
@@ -118,7 +114,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.selection = false
 		createWebProject.selection = false
 		createIdeProject.selection = false
-		createFeatureProject.selection = false
 		createTestProject.selection = false
 		buildSystem.select(0)
 		projectLayout.select(0)
@@ -136,10 +131,6 @@ class AdvancedNewProjectPage extends WizardPage {
 	
 	def boolean isCreateUiProject() {
 		createUiProject.selection
-	}
-
-	def boolean isCreateFeatureProject() {
-		createFeatureProject.selection
 	}
 
 	def boolean isCreateTestProject() {

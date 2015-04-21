@@ -38,8 +38,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createIdeProject;
   
-  private Button createFeatureProject;
-  
   private Button createTestProject;
   
   private Combo buildSystem;
@@ -106,19 +104,11 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function_4 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
-              }
-            };
-            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
-            AdvancedNewProjectPage.this.createFeatureProject = _CheckBox_4;
-            final Procedure1<Button> _function_5 = new Procedure1<Button>() {
-              @Override
-              public void apply(final Button it) {
                 it.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
               }
             };
-            Button _CheckBox_5 = AdvancedNewProjectPage.this.CheckBox(it, _function_5);
-            AdvancedNewProjectPage.this.createTestProject = _CheckBox_5;
+            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
+            AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function);
@@ -243,7 +233,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
     this.createIdeProject.setSelection(false);
-    this.createFeatureProject.setSelection(false);
     this.createTestProject.setSelection(false);
     this.buildSystem.select(0);
     this.projectLayout.select(0);
@@ -274,10 +263,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateUiProject() {
     return this.createUiProject.getSelection();
-  }
-  
-  public boolean isCreateFeatureProject() {
-    return this.createFeatureProject.getSelection();
   }
   
   public boolean isCreateTestProject() {

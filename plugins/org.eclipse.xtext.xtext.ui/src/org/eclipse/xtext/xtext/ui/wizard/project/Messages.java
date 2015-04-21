@@ -4,9 +4,7 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.xtext.ui.wizard.project.messages"; //$NON-NLS-1$
-	public static String WizardNewXtextProjectCreationPage_CreateFeatureLabel;
 	public static String XtextProjectCreator_CreatingProjectsMessage2;
-	public static String XtextProjectCreator_FeatureLabel;
 	public static String NewXtextProjectWizard_WindowTitle;
 	public static String NewRelengProjectWizard_WindowTitle;
 	public static String WizardNewXtextProjectCreationPage_CreateAGeneratorProject;
