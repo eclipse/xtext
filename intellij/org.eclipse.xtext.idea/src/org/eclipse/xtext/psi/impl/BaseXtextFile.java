@@ -115,6 +115,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
 					XtextResource resource = resourceCache.getValue();
 					if (hasUpToDateValue) {
+						resource.getResourceSet().getResources().retainAll(Collections.singletonList(resource));
 						resource.relink();
 					}
 			        installResourceDescription(resource);
