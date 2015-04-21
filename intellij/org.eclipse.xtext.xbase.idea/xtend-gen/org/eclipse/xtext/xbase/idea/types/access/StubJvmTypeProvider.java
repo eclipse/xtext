@@ -38,6 +38,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl;
 import org.eclipse.xtext.xbase.idea.types.access.PsiBasedTypeFactory;
 import org.eclipse.xtext.xbase.idea.types.access.PsiClassMirror;
 import org.eclipse.xtext.xbase.idea.types.access.StubURIHelper;
@@ -225,29 +226,42 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   
   @Override
   protected IMirror createMirrorForFQN(final String name) {
-    PsiClassMirror _xblockexpression = null;
-    {
-      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
-      GlobalSearchScope _searchScope = this.getSearchScope();
-      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
-      boolean _or = false;
-      boolean _equals = Objects.equal(psiClass, null);
-      if (_equals) {
-        _or = true;
-      } else {
+    PsiClassMirror _switchResult = null;
+    JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
+    GlobalSearchScope _searchScope = this.getSearchScope();
+    PsiClass _findClassWithAlternativeResolvedEnabled = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
+    final PsiClass psiClass = _findClassWithAlternativeResolvedEnabled;
+    boolean _matched = false;
+    if (!_matched) {
+      if (psiClass instanceof JvmPsiClass) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (psiClass instanceof JvmPsiClassImpl) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        boolean _equals = Objects.equal(psiClass, null);
+        if (_equals) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
         PsiClass _containingClass = psiClass.getContainingClass();
         boolean _notEquals = (!Objects.equal(_containingClass, null));
-        _or = _notEquals;
+        if (_notEquals) {
+          _matched=true;
+        }
       }
-      if (_or) {
-        return null;
+      if (_matched) {
+        _switchResult = null;
       }
-      if ((psiClass instanceof JvmPsiClass)) {
-        return null;
-      }
-      _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);
     }
-    return _xblockexpression;
+    if (!_matched) {
+      _switchResult = new PsiClassMirror(psiClass, this.psiClassFactory);
+    }
+    return _switchResult;
   }
   
   protected GlobalSearchScope getSearchScope() {

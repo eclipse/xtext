@@ -20,6 +20,7 @@ import com.intellij.psi.impl.source.tree.java.EnumConstantElement;
 import com.intellij.psi.impl.source.tree.java.EnumConstantInitializerElement;
 import com.intellij.psi.impl.source.tree.java.FieldElement;
 import com.intellij.psi.impl.source.tree.java.MethodElement;
+import com.intellij.psi.impl.source.tree.java.ParameterElement;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnnotationMethodImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClassImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl;
@@ -27,12 +28,38 @@ import org.eclipse.xtext.xbase.idea.jvm.JvmPsiEnumConstantImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiEnumConstantInitializerImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiFieldImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiMethodImpl;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiParameterImpl;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiReceiverParameterImpl;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public interface JvmStubElementTypes {
+public interface JvmElementTypes {
+  public final static JavaClassElementType PARAMETER = new JavaClassElementType("PARAMETER") {
+    @Override
+    public ASTNode createCompositeNode() {
+      return new ParameterElement(JavaElementType.PARAMETER) {
+        @Override
+        protected PsiElement createPsiNoLock() {
+          return new JvmPsiParameterImpl(this);
+        }
+      };
+    }
+  };
+  
+  public final static JavaClassElementType RECEIVER_PARAMETER = new JavaClassElementType("RECEIVER_PARAMETER") {
+    @Override
+    public ASTNode createCompositeNode() {
+      return new ParameterElement(JavaElementType.RECEIVER_PARAMETER) {
+        @Override
+        protected PsiElement createPsiNoLock() {
+          return new JvmPsiReceiverParameterImpl(this);
+        }
+      };
+    }
+  };
+  
   public final static JavaClassElementType CLASS = new JavaClassElementType("CLASS") {
     @Override
     public ASTNode createCompositeNode() {

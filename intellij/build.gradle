@@ -36,11 +36,15 @@ configure(subprojects - eclipsePluginProjects) {
 		options.encoding = 'ISO-8859-1'
 	}
 	
-	configurations.compile {
+	configurations.all {
 		exclude module:'cglib'
 		exclude module:'icu4j'
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
+	}
+
+	task cleanTestSystem(type: Delete) {
+		delete "${ideaDevelopment.ideaHome}/test-system"
 	}
 }
 

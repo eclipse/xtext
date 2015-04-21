@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.idea.jvm;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMirrorElement;
 import com.intellij.psi.impl.source.PsiClassImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 
@@ -16,7 +17,7 @@ import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class JvmPsiClassImpl extends PsiClassImpl {
+public class JvmPsiClassImpl extends PsiClassImpl implements PsiMirrorElement {
   public JvmPsiClassImpl(final ASTNode node) {
     super(node);
   }
@@ -32,5 +33,10 @@ public class JvmPsiClassImpl extends PsiClassImpl {
       _elvis = _navigationElement_1;
     }
     return _elvis;
+  }
+  
+  @Override
+  public PsiElement getPrototype() {
+    return this;
   }
 }

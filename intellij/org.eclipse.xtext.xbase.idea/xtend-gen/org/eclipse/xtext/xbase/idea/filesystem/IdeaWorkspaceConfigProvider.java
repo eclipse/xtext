@@ -13,13 +13,14 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
@@ -37,14 +38,14 @@ public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
       final SimpleWorkspaceConfig result = new SimpleWorkspaceConfig(_basePath);
       ModuleManager _instance_1 = ModuleManager.getInstance(project);
       Module[] _modules = _instance_1.getModules();
-      final Procedure1<Module> _function = new Procedure1<Module>() {
+      final Consumer<Module> _function = new Consumer<Module>() {
         @Override
-        public void apply(final Module m) {
+        public void accept(final Module m) {
           IdeaModuleConfig _ideaModuleConfig = new IdeaModuleConfig(m, IdeaWorkspaceConfigProvider.this.outputConfigurations);
           result.addProjectConfig(_ideaModuleConfig);
         }
       };
-      IterableExtensions.<Module>forEach(((Iterable<Module>)Conversions.doWrapArray(_modules)), _function);
+      ((List<Module>)Conversions.doWrapArray(_modules)).forEach(_function);
       _xblockexpression = result;
     }
     return _xblockexpression;

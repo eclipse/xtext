@@ -30,9 +30,9 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
@@ -46,7 +46,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -156,8 +155,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     final Procedure1<CompletionResult> filteredConsumer = _function;
     CompletionService _completionService = CompletionService.getCompletionService();
     final CompletionResultSet filteredResult = _completionService.createResultSet(parameters, new Consumer<CompletionResult>() {
-        public void consume(CompletionResult t) {
-          filteredConsumer.apply(t);
+        public void consume(CompletionResult arg0) {
+          filteredConsumer.apply(arg0);
         }
     }, this);
     this.createMatcherBasedProposals(parameters, filteredResult);
@@ -196,20 +195,20 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     int _offset = parameters.getOffset();
     XtextResource _resource = this.getResource(parameters);
     final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset, _resource);
-    final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
+    final java.util.function.Consumer<ContentAssistContext> _function = new java.util.function.Consumer<ContentAssistContext>() {
       @Override
-      public void apply(final ContentAssistContext c) {
+      public void accept(final ContentAssistContext c) {
         ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
-        final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
+        final java.util.function.Consumer<AbstractElement> _function = new java.util.function.Consumer<AbstractElement>() {
           @Override
-          public void apply(final AbstractElement e) {
+          public void accept(final AbstractElement e) {
             AbstractCompletionContributor.this.createProposal(e, c, parameters, result);
           }
         };
-        IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
+        _firstSetGrammarElements.forEach(_function);
       }
     };
-    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
+    ((List<ContentAssistContext>)Conversions.doWrapArray(contexts)).forEach(_function);
   }
   
   protected ContentAssistContextFactory getParserBasedDelegate() {
@@ -270,7 +269,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       @Override
       public XtextResource compute() {
         PsiFile _originalFile = parameters.getOriginalFile();
-        Resource _resource = ((BaseXtextFile) _originalFile).getResource();
+        XtextResource _resource = ((BaseXtextFile) _originalFile).getResource();
         return ((XtextResource) _resource);
       }
     };

@@ -89,14 +89,17 @@ class JvmPsiBuilderExtensions {
 
 	static def getJvmType(IElementType type) {
 		switch type {
-			case JavaElementType.CLASS: JvmStubElementTypes.CLASS
-			case JavaElementType.ANONYMOUS_CLASS: JvmStubElementTypes.ANONYMOUS_CLASS
-			case JavaElementType.ENUM_CONSTANT_INITIALIZER: JvmStubElementTypes.ENUM_CONSTANT_INITIALIZER
-			case JavaElementType.METHOD: JvmStubElementTypes.METHOD
-			case JavaElementType.ANNOTATION_METHOD: JvmStubElementTypes.ANNOTATION_METHOD
-			case JavaElementType.FIELD: JvmStubElementTypes.FIELD
-			case JavaElementType.ENUM_CONSTANT: JvmStubElementTypes.ENUM_CONSTANT
+			case JavaElementType.PARAMETER: JvmElementTypes.PARAMETER
+			case JavaElementType.RECEIVER_PARAMETER : JvmElementTypes.RECEIVER_PARAMETER
+			case JavaElementType.CLASS: JvmElementTypes.CLASS
+			case JavaElementType.ANONYMOUS_CLASS: JvmElementTypes.ANONYMOUS_CLASS
+			case JavaElementType.ENUM_CONSTANT_INITIALIZER: JvmElementTypes.ENUM_CONSTANT_INITIALIZER
+			case JavaElementType.METHOD: JvmElementTypes.METHOD
+			case JavaElementType.ANNOTATION_METHOD: JvmElementTypes.ANNOTATION_METHOD
+			case JavaElementType.FIELD: JvmElementTypes.FIELD
+			case JavaElementType.ENUM_CONSTANT: JvmElementTypes.ENUM_CONSTANT
 			default: type
 		}
 	}
+
 }

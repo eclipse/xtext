@@ -8,26 +8,33 @@
 package org.eclipse.xtext.xbase.idea.jvm
 
 import com.intellij.psi.FileViewProvider
+import com.intellij.psi.PsiElement
 import com.intellij.psi.impl.source.PsiJavaFileBaseImpl
 import com.intellij.psi.tree.IElementType
+import java.util.Map
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class PsiJvmFileImpl extends PsiJavaFileBaseImpl {
-	
+
+	@Accessors
+	Map<EObject, PsiElement> mapping
+
 	new(IElementType elementType, IElementType contentElementType, FileViewProvider viewProvider) {
 		super(elementType, contentElementType, viewProvider)
 	}
-	
+
 	override isPhysical() {
 		true
 	}
-	
+
 	override getFileType() {
 		JvmFileType.INSTANCE
 	}
-	
+
 	override getLanguage() {
 		JvmLanguage.INSTANCE
 	}

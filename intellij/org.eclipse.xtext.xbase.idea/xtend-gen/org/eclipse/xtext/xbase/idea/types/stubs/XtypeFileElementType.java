@@ -19,6 +19,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubs.ExportedObject;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -27,6 +28,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class XtypeFileElementType<T extends XtextFileStub<?>> extends XtextFileElementType<T> {
+  @Inject
+  @Extension
+  private JvmPsiClasses _jvmPsiClasses;
+  
   @Inject
   private JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex;
   
@@ -42,8 +47,8 @@ public class XtypeFileElementType<T extends XtextFileStub<?>> extends XtextFileE
     if (_isAssignableFrom) {
       StubIndexKey<String, BaseXtextFile> _key = this.jvmDeclaredTypeShortNameIndex.getKey();
       QualifiedName _qualifiedName = exportedObject.getQualifiedName();
-      String _lastSegment = _qualifiedName.getLastSegment();
-      sink.<BaseXtextFile, String>occurrence(_key, _lastSegment);
+      String _shortName = this._jvmPsiClasses.getShortName(_qualifiedName);
+      sink.<BaseXtextFile, String>occurrence(_key, _shortName);
     }
   }
 }

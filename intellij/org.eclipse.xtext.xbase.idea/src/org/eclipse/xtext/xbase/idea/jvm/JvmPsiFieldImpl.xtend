@@ -9,11 +9,12 @@ package org.eclipse.xtext.xbase.idea.jvm
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.impl.source.PsiFieldImpl
+import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiFieldImpl extends PsiFieldImpl {
+class JvmPsiFieldImpl extends PsiFieldImpl implements PsiMirrorElement {
 	
 	new(ASTNode node) {
 		super(node)
@@ -21,6 +22,10 @@ class JvmPsiFieldImpl extends PsiFieldImpl {
 
 	override getNavigationElement() {
 		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+	}
+	
+	override getPrototype() {
+		this
 	}
 	
 }

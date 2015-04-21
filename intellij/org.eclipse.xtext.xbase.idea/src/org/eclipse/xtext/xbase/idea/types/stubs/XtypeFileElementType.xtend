@@ -15,11 +15,15 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.psi.stubs.ExportedObject
 import org.eclipse.xtext.psi.stubs.XtextFileElementType
 import org.eclipse.xtext.psi.stubs.XtextFileStub
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class XtypeFileElementType<T extends XtextFileStub<?>> extends XtextFileElementType<T> {
+	
+	@Inject
+	extension JvmPsiClasses
 
 	@Inject
 	JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex
@@ -31,7 +35,7 @@ class XtypeFileElementType<T extends XtextFileStub<?>> extends XtextFileElementT
 	override protected indexExportedObject(ExportedObject exportedObject, extension IndexSink sink) {
 		super.indexExportedObject(exportedObject, sink)
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, exportedObject.EClass)) {
-			jvmDeclaredTypeShortNameIndex.key.occurrence(exportedObject.qualifiedName.lastSegment)
+			jvmDeclaredTypeShortNameIndex.key.occurrence(exportedObject.qualifiedName.shortName)
 		}
 	}
 

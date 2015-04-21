@@ -9,11 +9,12 @@ package org.eclipse.xtext.xbase.idea.jvm
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.impl.source.PsiEnumConstantInitializerImpl
+import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiEnumConstantInitializerImpl extends PsiEnumConstantInitializerImpl {
+class JvmPsiEnumConstantInitializerImpl extends PsiEnumConstantInitializerImpl implements PsiMirrorElement {
 
 	new(ASTNode node) {
 		super(node)
@@ -21,6 +22,10 @@ class JvmPsiEnumConstantInitializerImpl extends PsiEnumConstantInitializerImpl {
 
 	override getNavigationElement() {
 		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+	}
+	
+	override getPrototype() {
+		this
 	}
 
 }

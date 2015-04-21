@@ -14,15 +14,11 @@ import com.google.inject.Singleton;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMember;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -30,9 +26,10 @@ import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -53,64 +50,59 @@ public class JvmPsiClasses {
   @Extension
   private IPsiLogicalContainerProvider _iPsiLogicalContainerProvider;
   
-  public Iterable<JvmPsiClass> getPsiClassesByName(final BaseXtextFile it, final String name) {
-    ArrayList<JvmPsiClass> _xblockexpression = null;
+  public Iterable<PsiClass> getPsiClassesByName(final BaseXtextFile xtextFile, final String name) {
+    Iterable<PsiClass> _xblockexpression = null;
     {
-      final Resource resource = it.getResource();
-      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
-      IResourceDescription _resourceDescription = it.getResourceDescription();
+      final XtextResource resource = xtextFile.getResource();
+      IResourceDescription _resourceDescription = this.getResourceDescription(resource);
       Iterable<IEObjectDescription> _exportedObjectsByType = _resourceDescription.getExportedObjectsByType(TypesPackage.Literals.JVM_DECLARED_TYPE);
-      for (final IEObjectDescription description : _exportedObjectsByType) {
-        ResourceSet _resourceSet = resource.getResourceSet();
-        URI _eObjectURI = description.getEObjectURI();
-        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
-        final EObject jvmDeclaredType = _eObject;
-        boolean _matched = false;
-        if (!_matched) {
-          if (jvmDeclaredType instanceof JvmDeclaredType) {
-            String _simpleName = ((JvmDeclaredType)jvmDeclaredType).getSimpleName();
-            boolean _equals = Objects.equal(_simpleName, name);
-            if (_equals) {
-              _matched=true;
-              PsiElement _psiElement = this._iPsiModelAssociations.getPsiElement(jvmDeclaredType);
-              result.add(((JvmPsiClass) _psiElement));
-            }
-          }
+      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+        @Override
+        public Boolean apply(final IEObjectDescription description) {
+          QualifiedName _qualifiedName = description.getQualifiedName();
+          String _shortName = JvmPsiClasses.this.getShortName(_qualifiedName);
+          return Boolean.valueOf(Objects.equal(_shortName, name));
         }
-      }
-      _xblockexpression = result;
+      };
+      Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByType, _function);
+      final Function1<IEObjectDescription, PsiElement> _function_1 = new Function1<IEObjectDescription, PsiElement>() {
+        @Override
+        public PsiElement apply(final IEObjectDescription description) {
+          return JvmPsiClasses.this._iPsiModelAssociations.getPsiElement(description, resource);
+        }
+      };
+      Iterable<PsiElement> _map = IterableExtensions.<IEObjectDescription, PsiElement>map(_filter, _function_1);
+      _xblockexpression = Iterables.<PsiClass>filter(_map, PsiClass.class);
     }
     return _xblockexpression;
   }
   
-  public Iterable<JvmPsiClass> getPsiClassesByQualifiedName(final BaseXtextFile it, final QualifiedName qualifiedName) {
-    ArrayList<JvmPsiClass> _xblockexpression = null;
+  public Iterable<PsiClass> getPsiClassesByQualifiedName(final BaseXtextFile xtextFile, final QualifiedName qualifiedName) {
+    Iterable<PsiClass> _xblockexpression = null;
     {
-      final Resource resource = it.getResource();
-      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
-      IResourceDescription _resourceDescription = it.getResourceDescription();
+      final XtextResource resource = xtextFile.getResource();
+      IResourceDescription _resourceDescription = this.getResourceDescription(resource);
       Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, qualifiedName, false);
-      for (final IEObjectDescription description : _exportedObjects) {
-        ResourceSet _resourceSet = resource.getResourceSet();
-        URI _eObjectURI = description.getEObjectURI();
-        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
-        final EObject jvmDeclaredType = _eObject;
-        boolean _matched = false;
-        if (!_matched) {
-          if (jvmDeclaredType instanceof JvmDeclaredType) {
-            _matched=true;
-            PsiElement _psiElement = this._iPsiModelAssociations.getPsiElement(jvmDeclaredType);
-            result.add(((JvmPsiClass) _psiElement));
-          }
+      final Function1<IEObjectDescription, PsiElement> _function = new Function1<IEObjectDescription, PsiElement>() {
+        @Override
+        public PsiElement apply(final IEObjectDescription description) {
+          return JvmPsiClasses.this._iPsiModelAssociations.getPsiElement(description, resource);
         }
-      }
-      _xblockexpression = result;
+      };
+      Iterable<PsiElement> _map = IterableExtensions.<IEObjectDescription, PsiElement>map(_exportedObjects, _function);
+      _xblockexpression = Iterables.<PsiClass>filter(_map, PsiClass.class);
     }
     return _xblockexpression;
   }
   
-  public Iterable<JvmPsiClass> getPsiClasses(final BaseXtextFile it) {
-    Resource _resource = it.getResource();
+  protected IResourceDescription getResourceDescription(final XtextResource resource) {
+    IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
+    IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
+    return _resourceDescriptionManager.getResourceDescription(resource);
+  }
+  
+  public Iterable<PsiClass> getPsiClasses(final BaseXtextFile it) {
+    XtextResource _resource = it.getResource();
     EList<EObject> _contents = _resource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final Function1<JvmDeclaredType, PsiElement> _function = new Function1<JvmDeclaredType, PsiElement>() {
@@ -120,41 +112,41 @@ public class JvmPsiClasses {
       }
     };
     Iterable<PsiElement> _map = IterableExtensions.<JvmDeclaredType, PsiElement>map(_filter, _function);
-    return Iterables.<JvmPsiClass>filter(_map, JvmPsiClass.class);
+    return Iterables.<PsiClass>filter(_map, PsiClass.class);
   }
   
-  public Iterable<JvmPsiClass> getPsiClasses(final PsiElement element) {
+  public Iterable<PsiClass> getPsiClasses(final PsiElement element) {
     Set<PsiElement> _jvmElements = this._iPsiJvmModelAssociations.getJvmElements(element);
-    return Iterables.<JvmPsiClass>filter(_jvmElements, JvmPsiClass.class);
+    return Iterables.<PsiClass>filter(_jvmElements, PsiClass.class);
   }
   
-  protected Iterable<JvmPsiClass> _findPsiClasses(final BaseXtextFile element) {
+  protected Iterable<PsiClass> _findPsiClasses(final BaseXtextFile element) {
     return this.getPsiClasses(element);
   }
   
-  protected Iterable<JvmPsiClass> _findPsiClasses(final PsiElement element) {
-    Iterable<JvmPsiClass> _switchResult = null;
+  protected Iterable<PsiClass> _findPsiClasses(final PsiElement element) {
+    Iterable<PsiClass> _switchResult = null;
     PsiElement _nearestLogicalContainer = this._iPsiLogicalContainerProvider.getNearestLogicalContainer(element);
     final PsiElement container = _nearestLogicalContainer;
     boolean _matched = false;
     if (!_matched) {
       if (container instanceof PsiClass) {
         _matched=true;
-        _switchResult = Iterables.<JvmPsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(((PsiClass)container))), JvmPsiClass.class);
+        _switchResult = Iterables.<PsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(((PsiClass)container))), PsiClass.class);
       }
     }
     if (!_matched) {
       if (container instanceof PsiMember) {
         _matched=true;
         PsiClass _containingClass = ((PsiMember)container).getContainingClass();
-        _switchResult = Iterables.<JvmPsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(_containingClass)), JvmPsiClass.class);
+        _switchResult = Iterables.<PsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(_containingClass)), PsiClass.class);
       }
     }
     if (!_matched) {
-      Iterable<JvmPsiClass> _xblockexpression = null;
+      Iterable<PsiClass> _xblockexpression = null;
       {
-        final Iterable<JvmPsiClass> psiClasses = this.getPsiClasses(element);
-        Iterable<JvmPsiClass> _xifexpression = null;
+        final Iterable<PsiClass> psiClasses = this.getPsiClasses(element);
+        Iterable<PsiClass> _xifexpression = null;
         boolean _isEmpty = IterableExtensions.isEmpty(psiClasses);
         if (_isEmpty) {
           PsiElement _parent = element.getParent();
@@ -169,11 +161,27 @@ public class JvmPsiClasses {
     return _switchResult;
   }
   
-  protected Iterable<JvmPsiClass> _findPsiClasses(final Void element) {
-    return CollectionLiterals.<JvmPsiClass>emptyList();
+  protected Iterable<PsiClass> _findPsiClasses(final Void element) {
+    return CollectionLiterals.<PsiClass>emptyList();
   }
   
-  public Iterable<JvmPsiClass> findPsiClasses(final PsiElement element) {
+  public String getShortName(final QualifiedName qualifiedName) {
+    String _xblockexpression = null;
+    {
+      final String lastSegment = qualifiedName.getLastSegment();
+      final int index = lastSegment.indexOf("$");
+      String _xifexpression = null;
+      if ((index == (-1))) {
+        _xifexpression = lastSegment;
+      } else {
+        _xifexpression = lastSegment.substring(index);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public Iterable<PsiClass> findPsiClasses(final PsiElement element) {
     if (element instanceof BaseXtextFile) {
       return _findPsiClasses((BaseXtextFile)element);
     } else if (element != null) {

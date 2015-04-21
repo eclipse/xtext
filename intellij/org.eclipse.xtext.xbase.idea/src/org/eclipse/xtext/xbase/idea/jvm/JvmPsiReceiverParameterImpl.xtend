@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.idea.jvm
 
+import com.intellij.psi.impl.source.PsiReceiverParameterImpl
 import com.intellij.lang.ASTNode
-import com.intellij.psi.impl.source.PsiClassImpl
 import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiClassImpl extends PsiClassImpl implements PsiMirrorElement {
-
+class JvmPsiReceiverParameterImpl extends PsiReceiverParameterImpl implements PsiMirrorElement {
+	
 	new(ASTNode node) {
 		super(node)
 	}
@@ -27,5 +27,5 @@ class JvmPsiClassImpl extends PsiClassImpl implements PsiMirrorElement {
 	override getPrototype() {
 		this
 	}
-
+	
 }

@@ -30,6 +30,7 @@ import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
 import org.eclipse.xtext.idea.structureview.IStructureViewTreeElementProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeElement;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -58,7 +59,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   
   protected void _buildChildren(final XtextFileTreeElement it) {
     BaseXtextFile _element = it.getElement();
-    Resource _resource = _element.getResource();
+    XtextResource _resource = _element.getResource();
     EList<EObject> _contents = _resource.getContents();
     final EObject modelElement = IterableExtensions.<EObject>head(_contents);
     boolean _equals = Objects.equal(modelElement, null);

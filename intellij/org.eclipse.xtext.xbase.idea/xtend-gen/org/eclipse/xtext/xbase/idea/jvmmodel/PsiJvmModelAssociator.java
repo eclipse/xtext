@@ -10,39 +10,24 @@ package org.eclipse.xtext.xbase.idea.jvmmodel;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
-import com.intellij.psi.PsiParameterList;
+import com.intellij.psi.PsiFile;
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
+import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl;
 import org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClassProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class PsiJvmModelAssociator extends JvmModelAssociator {
   @Inject
   @Extension
   private IPsiModelAssociator _iPsiModelAssociator;
-  
-  @Inject
-  @Extension
-  private IPsiModelAssociations _iPsiModelAssociations;
   
   @Inject
   private Provider<JvmPsiClassProvider> psiClassProviderProvider;
@@ -68,130 +53,39 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
   }
   
   protected PsiElementProvider createPsiElementProvider(final EObject sourceElement, final EObject jvmElement) {
-    PsiElementProvider _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (jvmElement instanceof JvmDeclaredType) {
-        JvmDeclaredType _declaringType = ((JvmDeclaredType)jvmElement).getDeclaringType();
-        boolean _equals = Objects.equal(_declaringType, null);
-        if (_equals) {
-          _matched=true;
-          JvmPsiClassProvider _get = this.psiClassProviderProvider.get();
-          final Procedure1<JvmPsiClassProvider> _function = new Procedure1<JvmPsiClassProvider>() {
-            @Override
-            public void apply(final JvmPsiClassProvider provider) {
-              provider.setJvmDeclaredType(((JvmDeclaredType)jvmElement));
-              provider.setSourceElement(sourceElement);
-            }
-          };
-          _switchResult = ObjectExtensions.<JvmPsiClassProvider>operator_doubleArrow(_get, _function);
-        }
-      }
-    }
-    if (!_matched) {
-      if (jvmElement instanceof JvmDeclaredType) {
-        _matched=true;
-        final PsiElementProvider _function = new PsiElementProvider() {
-          @Override
-          public PsiElement get() {
-            PsiElement _xblockexpression = null;
-            {
-              JvmDeclaredType _declaringType = ((JvmDeclaredType)jvmElement).getDeclaringType();
-              final PsiElement psiClass = PsiJvmModelAssociator.this._iPsiModelAssociations.getPsiElement(_declaringType);
-              PsiElement _xifexpression = null;
-              if ((psiClass instanceof PsiClass)) {
-                PsiClass[] _innerClasses = ((PsiClass)psiClass).getInnerClasses();
-                _xifexpression = PsiJvmModelAssociator.this.findByJvmElement(_innerClasses, jvmElement);
-              }
-              _xblockexpression = _xifexpression;
-            }
-            return _xblockexpression;
-          }
-        };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (jvmElement instanceof JvmExecutable) {
-        _matched=true;
-        final PsiElementProvider _function = new PsiElementProvider() {
-          @Override
-          public PsiElement get() {
-            PsiElement _xblockexpression = null;
-            {
-              JvmDeclaredType _declaringType = ((JvmExecutable)jvmElement).getDeclaringType();
-              final PsiElement psiClass = PsiJvmModelAssociator.this._iPsiModelAssociations.getPsiElement(_declaringType);
-              PsiElement _xifexpression = null;
-              if ((psiClass instanceof PsiClass)) {
-                PsiMethod[] _methods = ((PsiClass)psiClass).getMethods();
-                _xifexpression = PsiJvmModelAssociator.this.findByJvmElement(_methods, jvmElement);
-              }
-              _xblockexpression = _xifexpression;
-            }
-            return _xblockexpression;
-          }
-        };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (jvmElement instanceof JvmField) {
-        _matched=true;
-        final PsiElementProvider _function = new PsiElementProvider() {
-          @Override
-          public PsiElement get() {
-            PsiElement _xblockexpression = null;
-            {
-              JvmDeclaredType _declaringType = ((JvmField)jvmElement).getDeclaringType();
-              final PsiElement psiClass = PsiJvmModelAssociator.this._iPsiModelAssociations.getPsiElement(_declaringType);
-              PsiElement _xifexpression = null;
-              if ((psiClass instanceof PsiClass)) {
-                PsiField[] _fields = ((PsiClass)psiClass).getFields();
-                _xifexpression = PsiJvmModelAssociator.this.findByJvmElement(_fields, jvmElement);
-              }
-              _xblockexpression = _xifexpression;
-            }
-            return _xblockexpression;
-          }
-        };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (jvmElement instanceof JvmFormalParameter) {
-        _matched=true;
-        final PsiElementProvider _function = new PsiElementProvider() {
-          @Override
-          public PsiElement get() {
-            PsiElement _xblockexpression = null;
-            {
-              EObject _eContainer = ((JvmFormalParameter)jvmElement).eContainer();
-              final PsiElement psiMethod = PsiJvmModelAssociator.this._iPsiModelAssociations.getPsiElement(_eContainer);
-              PsiElement _xifexpression = null;
-              if ((psiMethod instanceof PsiMethod)) {
-                PsiParameterList _parameterList = ((PsiMethod)psiMethod).getParameterList();
-                PsiParameter[] _parameters = _parameterList.getParameters();
-                _xifexpression = PsiJvmModelAssociator.this.findByJvmElement(_parameters, jvmElement);
-              }
-              _xblockexpression = _xifexpression;
-            }
-            return _xblockexpression;
-          }
-        };
-        _switchResult = _function;
-      }
-    }
-    return _switchResult;
-  }
-  
-  protected PsiElement findByJvmElement(final PsiElement[] elements, final EObject jvmElement) {
-    final Function1<PsiElement, Boolean> _function = new Function1<PsiElement, Boolean>() {
+    final PsiElementProvider _function = new PsiElementProvider() {
       @Override
-      public Boolean apply(final PsiElement element) {
-        EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(element);
-        return Boolean.valueOf(Objects.equal(_jvmElement, jvmElement));
+      public PsiElement get() {
+        PsiElement _xblockexpression = null;
+        {
+          final EObject root = EcoreUtil.getRootContainer(jvmElement);
+          PsiElement _xifexpression = null;
+          if ((root instanceof JvmDeclaredType)) {
+            PsiElement _xblockexpression_1 = null;
+            {
+              final JvmPsiClassProvider provider = PsiJvmModelAssociator.this.psiClassProviderProvider.get();
+              provider.setJvmDeclaredType(((JvmDeclaredType)root));
+              provider.setSourceElement(sourceElement);
+              _xblockexpression_1 = provider.get();
+            }
+            _xifexpression = _xblockexpression_1;
+          }
+          final PsiElement psiClass = _xifexpression;
+          boolean _equals = Objects.equal(root, jvmElement);
+          if (_equals) {
+            return psiClass;
+          }
+          final PsiFile psiFile = psiClass.getContainingFile();
+          PsiElement _xifexpression_1 = null;
+          if ((psiFile instanceof PsiJvmFileImpl)) {
+            Map<EObject, PsiElement> _mapping = ((PsiJvmFileImpl)psiFile).getMapping();
+            _xifexpression_1 = _mapping.get(jvmElement);
+          }
+          _xblockexpression = _xifexpression_1;
+        }
+        return _xblockexpression;
       }
     };
-    return IterableExtensions.<PsiElement>findFirst(((Iterable<PsiElement>)Conversions.doWrapArray(elements)), _function);
+    return _function;
   }
 }

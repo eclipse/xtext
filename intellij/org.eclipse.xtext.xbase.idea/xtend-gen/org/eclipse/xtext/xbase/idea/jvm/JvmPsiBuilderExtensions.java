@@ -12,8 +12,8 @@ import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.xbase.idea.jvm.JvmElementTypes;
 import org.eclipse.xtext.xbase.idea.jvm.JvmMarker;
-import org.eclipse.xtext.xbase.idea.jvm.JvmStubElementTypes;
 import org.eclipse.xtext.xbase.idea.jvm.LighterJvmMarker;
 
 @SuppressWarnings("all")
@@ -52,45 +52,57 @@ public class JvmPsiBuilderExtensions {
     IElementType _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
+      if (Objects.equal(type, JavaElementType.PARAMETER)) {
+        _matched=true;
+        _switchResult = JvmElementTypes.PARAMETER;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type, JavaElementType.RECEIVER_PARAMETER)) {
+        _matched=true;
+        _switchResult = JvmElementTypes.RECEIVER_PARAMETER;
+      }
+    }
+    if (!_matched) {
       if (Objects.equal(type, JavaElementType.CLASS)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.CLASS;
+        _switchResult = JvmElementTypes.CLASS;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.ANONYMOUS_CLASS)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.ANONYMOUS_CLASS;
+        _switchResult = JvmElementTypes.ANONYMOUS_CLASS;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.ENUM_CONSTANT_INITIALIZER)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.ENUM_CONSTANT_INITIALIZER;
+        _switchResult = JvmElementTypes.ENUM_CONSTANT_INITIALIZER;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.METHOD)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.METHOD;
+        _switchResult = JvmElementTypes.METHOD;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.ANNOTATION_METHOD)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.ANNOTATION_METHOD;
+        _switchResult = JvmElementTypes.ANNOTATION_METHOD;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.FIELD)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.FIELD;
+        _switchResult = JvmElementTypes.FIELD;
       }
     }
     if (!_matched) {
       if (Objects.equal(type, JavaElementType.ENUM_CONSTANT)) {
         _matched=true;
-        _switchResult = JvmStubElementTypes.ENUM_CONSTANT;
+        _switchResult = JvmElementTypes.ENUM_CONSTANT;
       }
     }
     if (!_matched) {

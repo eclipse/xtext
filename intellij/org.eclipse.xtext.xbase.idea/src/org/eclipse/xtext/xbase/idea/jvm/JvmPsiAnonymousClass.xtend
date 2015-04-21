@@ -7,23 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.idea.jvm
 
-import com.intellij.lang.ASTNode
-import com.intellij.psi.impl.source.PsiClassImpl
+import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiMirrorElement
+import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiClassImpl extends PsiClassImpl implements PsiMirrorElement {
+@FinalFieldsConstructor
+class JvmPsiAnonymousClass implements PsiAnonymousClass, PsiMirrorElement {
 
-	new(ASTNode node) {
-		super(node)
-	}
+	@Delegate
+	val PsiAnonymousClass delegate
 
 	override getNavigationElement() {
-		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+		JvmPsiElementExtensions.getNavigationElement(this) ?: delegate.navigationElement
 	}
-	
+
 	override getPrototype() {
 		this
 	}

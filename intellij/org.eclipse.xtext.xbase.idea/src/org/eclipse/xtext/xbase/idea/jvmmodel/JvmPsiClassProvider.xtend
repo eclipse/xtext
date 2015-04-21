@@ -9,18 +9,26 @@ package org.eclipse.xtext.xbase.idea.jvmmodel
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiMirrorElement
+import com.intellij.psi.impl.source.tree.JavaElementType
+import com.intellij.psi.impl.source.tree.RecursiveTreeElementWalkingVisitor
+import com.intellij.psi.impl.source.tree.TreeElement
+import com.intellij.psi.tree.TokenSet
 import java.util.Iterator
 import java.util.List
+import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmOperation
@@ -31,8 +39,11 @@ import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.idea.jvm.JvmLanguage
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClass
 import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
+
+import static org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClassProvider.*
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*
@@ -144,45 +155,92 @@ class JvmPsiClassProvider implements PsiElementProvider {
 		if (psiFile instanceof PsiJvmFileImpl) {
 			val psiClass = psiFile.classes.head
 			if (psiClass != null) {
-				psiClass.bindTo(jvmDeclaredType)
+				val mapping = newHashMap
+				psiClass.bindTo(jvmDeclaredType, mapping)
+				psiFile.mapping = mapping
 				psiClass
 			}
 		}
 	}
 
-	protected def dispatch void bindTo(PsiElement psiElement, Void void) {
+	protected def dispatch void bindTo(PsiElement psiElement, Void void, Map<EObject, PsiElement> mapping) {
 	}
 
-	protected def dispatch void bindTo(PsiElement psiElement, EObject object) {
-		psiElement.doBindTo(object)
+	protected def dispatch void bindTo(PsiElement psiElement, EObject object, Map<EObject, PsiElement> mapping) {
+		psiElement.doBindTo(object, mapping)
 	}
 
-	protected def dispatch void bindTo(PsiMethod psiMethod, JvmExecutable jvmExecutable) {
-		psiMethod.doBindTo(jvmExecutable)
+	protected def dispatch void bindTo(
+		PsiMethod psiMethod,
+		JvmExecutable jvmExecutable,
+		Map<EObject, PsiElement> mapping
+	) {
+		psiMethod._bindTo(jvmExecutable as JvmFeature, mapping)
 
 		val i = jvmExecutable.parameters.iterator
 		for (parameter : psiMethod.parameterList.parameters) {
-			parameter.bindTo(i.nextEObject(JvmFormalParameter))
+			parameter.bindTo(i.nextEObject(JvmFormalParameter), mapping)
 			if (!i.hasNext) {
 				return
 			}
 		}
 	}
 
-	protected def dispatch void bindTo(PsiClass psiClass, JvmDeclaredType jvmDeclaredType) {
-		psiClass.doBindTo(jvmDeclaredType)
+	static val BLOCK_ELEMENTS = TokenSet.create(
+		JavaElementType.ANNOTATION,
+		JavaElementType.CLASS,
+		JavaElementType.ANONYMOUS_CLASS
+	)
+
+	protected def dispatch void bindTo(PsiElement psiElement, JvmFeature jvmFeature, Map<EObject, PsiElement> mapping) {
+		psiElement.doBindTo(jvmFeature, mapping)
+
+		val localClassesIterator = jvmFeature.localClasses.iterator
+		if (localClassesIterator.hasNext) {
+			val codeBlock = psiElement.node.findChildByType(JavaElementType.CODE_BLOCK)
+			if (codeBlock instanceof TreeElement) {
+				codeBlock.acceptTree(new RecursiveTreeElementWalkingVisitor() {
+
+					override protected visitNode(TreeElement element) {
+						if (BLOCK_ELEMENTS.contains(element.elementType)) {
+							element.psi.bindTo(localClassesIterator.next, mapping)
+							if (!localClassesIterator.hasNext) {
+								super.stopWalking
+							}
+						} else {
+							super.visitNode(element)
+						}
+					}
+
+				})
+			}
+		}
+	}
+
+	protected def dispatch void bindTo(
+		PsiClass psiClass,
+		JvmDeclaredType jvmDeclaredType,
+		Map<EObject, PsiElement> mapping
+	) {
+		val mirror = psiClass.doBindTo(jvmDeclaredType, mapping)
+		
+		if (psiClass.constructors.empty) {
+			for (declaredConstructor : jvmDeclaredType.declaredConstructors) {
+				mapping.put(declaredConstructor, mirror)
+			}
+		}
 
 		val i = jvmDeclaredType.eContents.iterator
 		for (psiElement : psiClass.children) {
 			switch psiElement {
 				PsiField:
-					psiElement.bindTo(i.nextEObject(JvmField))
+					psiElement.bindTo(i.nextEObject(JvmField), mapping)
 				PsiMethod case psiElement.constructor:
-					psiElement.bindTo(i.nextEObject(JvmConstructor))
+					psiElement.bindTo(i.nextEObject(JvmConstructor), mapping)
 				PsiMethod:
-					psiElement.bindTo(i.nextEObject(JvmOperation))
+					psiElement.bindTo(i.nextEObject(JvmOperation), mapping)
 				PsiClass:
-					psiElement.bindTo(i.nextEObject(JvmDeclaredType))
+					psiElement.bindTo(i.nextEObject(JvmDeclaredType), mapping)
 			}
 			if (!i.hasNext) {
 				return
@@ -200,11 +258,22 @@ class JvmPsiClassProvider implements PsiElementProvider {
 		return null
 	}
 
-	protected def void doBindTo(PsiElement element, EObject object) {
-		element.jvmElement = object
-		element.navigationElementProvider = [|
+	protected def doBindTo(PsiElement element, EObject object, Map<EObject, PsiElement> mapping) {
+		val mirror = element.mirror
+		mapping.put(object, mirror)
+		mirror.jvmElement = object
+		mirror.navigationElementProvider = [|
 			object.primarySourceElement
 		]
+		mirror
+	}
+
+	protected def mirror(PsiElement element) {
+		switch element {
+			PsiMirrorElement: element
+			PsiAnonymousClass: new JvmPsiAnonymousClass(element)
+			default: element
+		}
 	}
 
 }

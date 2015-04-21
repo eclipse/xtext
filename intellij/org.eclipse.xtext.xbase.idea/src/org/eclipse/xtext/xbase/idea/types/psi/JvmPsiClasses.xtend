@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider
 
@@ -33,50 +34,46 @@ class JvmPsiClasses {
 	@Inject
 	extension IPsiLogicalContainerProvider
 
-	def Iterable<JvmPsiClass> getPsiClassesByName(BaseXtextFile it, String name) {
-		val resource = resource
+	def Iterable<PsiClass> getPsiClassesByName(BaseXtextFile xtextFile, String name) {
+		val resource = xtextFile.resource
 
-		val result = newArrayList
-		for (description : resourceDescription.getExportedObjectsByType(JVM_DECLARED_TYPE)) {
-			switch jvmDeclaredType : resource.resourceSet.getEObject(description.getEObjectURI, true) {
-				JvmDeclaredType case jvmDeclaredType.simpleName == name:
-					result += jvmDeclaredType.psiElement as JvmPsiClass
-			}
-		}
-		result
+		resource.resourceDescription.getExportedObjectsByType(JVM_DECLARED_TYPE).filter [ description |
+			description.qualifiedName.shortName == name
+		].map [ description |
+			description.getPsiElement(resource)
+		].filter(PsiClass)
 	}
 
-	def Iterable<JvmPsiClass> getPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
-		val resource = resource
+	def Iterable<PsiClass> getPsiClassesByQualifiedName(BaseXtextFile xtextFile, QualifiedName qualifiedName) {
+		val resource = xtextFile.resource
 
-		val result = newArrayList
-		for (description : resourceDescription.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false)) {
-			switch jvmDeclaredType : resource.resourceSet.getEObject(description.getEObjectURI, true) {
-				JvmDeclaredType:
-					result += jvmDeclaredType.psiElement as JvmPsiClass
-			}
-		}
-		result
+		resource.resourceDescription.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false).map [ description |
+			description.getPsiElement(resource)
+		].filter(PsiClass)
+	}
+	
+	protected def getResourceDescription(XtextResource resource) {
+		resource.resourceServiceProvider.resourceDescriptionManager.getResourceDescription(resource)
 	}
 
-	def Iterable<JvmPsiClass> getPsiClasses(BaseXtextFile it) {
-		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(JvmPsiClass)
+	def Iterable<PsiClass> getPsiClasses(BaseXtextFile it) {
+		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(PsiClass)
 	}
 
-	def Iterable<JvmPsiClass> getPsiClasses(PsiElement element) {
-		element.jvmElements.filter(JvmPsiClass)
+	def Iterable<PsiClass> getPsiClasses(PsiElement element) {
+		element.jvmElements.filter(PsiClass)
 	}
 
-	def dispatch Iterable<JvmPsiClass> findPsiClasses(BaseXtextFile element) {
+	def dispatch Iterable<PsiClass> findPsiClasses(BaseXtextFile element) {
 		element.psiClasses
 	}
 
-	def dispatch Iterable<JvmPsiClass> findPsiClasses(PsiElement element) {
+	def dispatch Iterable<PsiClass> findPsiClasses(PsiElement element) {
 		switch container : element.nearestLogicalContainer {
 			PsiClass:
-				#[container].filter(JvmPsiClass)
+				#[container].filter(PsiClass)
 			PsiMember:
-				#[container.containingClass].filter(JvmPsiClass)
+				#[container.containingClass].filter(PsiClass)
 			default: {
 				val psiClasses = element.psiClasses
 				if (psiClasses.empty)
@@ -87,8 +84,17 @@ class JvmPsiClasses {
 		}
 	}
 
-	def dispatch Iterable<JvmPsiClass> findPsiClasses(Void element) {
+	def dispatch Iterable<PsiClass> findPsiClasses(Void element) {
 		emptyList
+	}
+
+	def getShortName(QualifiedName qualifiedName) {
+		val lastSegment = qualifiedName.lastSegment
+		val index = lastSegment.indexOf('$')
+		if (index == -1)
+			lastSegment
+		else
+			lastSegment.substring(index)
 	}
 
 }

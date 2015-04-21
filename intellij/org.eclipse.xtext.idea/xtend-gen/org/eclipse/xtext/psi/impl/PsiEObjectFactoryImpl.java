@@ -157,8 +157,8 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       }
     };
     treeElement.acceptTree(((RecursiveTreeElementVisitor) new RecursiveTreeElementVisitor() {
-        public boolean visitNode(TreeElement element) {
-          return _function.apply(element);
+        public boolean visitNode(TreeElement arg0) {
+          return _function.apply(arg0);
         }
     }));
   }

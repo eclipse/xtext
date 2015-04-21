@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -86,16 +85,16 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   
   @Override
   public PsiClass[] getClassesByName(final String name, final GlobalSearchScope scope) {
-    ArrayList<JvmPsiClass> _xblockexpression = null;
+    ArrayList<PsiClass> _xblockexpression = null;
     {
-      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
+      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
       final Collection<BaseXtextFile> xtextFiles = this.jvmDeclaredTypeShortNameIndex.get(name, this.project, scope);
       for (final BaseXtextFile xtextFile : xtextFiles) {
         Language _language = xtextFile.getLanguage();
         boolean _equals = Objects.equal(_language, this.language);
         if (_equals) {
-          Iterable<JvmPsiClass> _psiClassesByName = this._jvmPsiClasses.getPsiClassesByName(xtextFile, name);
-          Iterables.<JvmPsiClass>addAll(result, _psiClassesByName);
+          Iterable<PsiClass> _psiClassesByName = this._jvmPsiClasses.getPsiClassesByName(xtextFile, name);
+          Iterables.<PsiClass>addAll(result, _psiClassesByName);
         }
       }
       _xblockexpression = result;
