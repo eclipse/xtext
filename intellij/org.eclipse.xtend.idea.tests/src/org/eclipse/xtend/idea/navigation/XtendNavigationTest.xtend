@@ -14,9 +14,13 @@ import java.util.Map
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiEObject
-import org.eclipse.xtext.psi.impl.LeafXtextPsiElement
+import org.eclipse.xtext.psi.PsiNamedEObject
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnnotationMethodImpl
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClass
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClassImpl
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiEnumConstantImpl
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiFieldImpl
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiMethodImpl
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiParameterImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
@@ -36,7 +40,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				class Greeter {
 				
-					def void sayHello(«NAVIGATION_ELEMENT_START_OFFSET»String name«NAVIGATION_ELEMENT_END_OFFSET») {
+					def void sayHello(String «NAVIGATION_ELEMENT_START_OFFSET»name«NAVIGATION_ELEMENT_END_OFFSET») {
 						println(na«REFERENCE_OFFSET»me)
 					}
 				
@@ -52,7 +56,7 @@ class XtendNavigationTest extends LightXtendTest {
 			'''
 				package mypackage
 				
-				«NAVIGATION_ELEMENT_START_OFFSET»class Greeter {
+				class «NAVIGATION_ELEMENT_START_OFFSET»Greeter«NAVIGATION_ELEMENT_END_OFFSET» {
 				
 					def static void main(String ... args) {
 						new «REFERENCE_OFFSET»Greeter().sayHello(args.head)
@@ -62,20 +66,20 @@ class XtendNavigationTest extends LightXtendTest {
 						println(name)
 					}
 				
-				}«NAVIGATION_ELEMENT_END_OFFSET»
+				}
 			''',
 			JvmPsiClassImpl
 		)
 	}
 
-	def void testNavigateToClass2() {
+	def void testNavigateToClass_Extends() {
 		testNavigateTo(
 			'mypackage/Foo.xtend',
 			'''
 				package mypackage
 				
-				«NAVIGATION_ELEMENT_START_OFFSET»class Foo {
-				}«NAVIGATION_ELEMENT_END_OFFSET»
+				class «NAVIGATION_ELEMENT_START_OFFSET»Foo«NAVIGATION_ELEMENT_END_OFFSET» {
+				}
 				
 				class Bar extends «REFERENCE_OFFSET»Foo {
 				}
@@ -84,14 +88,65 @@ class XtendNavigationTest extends LightXtendTest {
 		)
 	}
 
-	def void testNavigateToClass3() {
+	def void testNavigateToClass_Implements() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				interface «NAVIGATION_ELEMENT_START_OFFSET»Foo«NAVIGATION_ELEMENT_END_OFFSET» {
+				}
+				
+				class Bar implements «REFERENCE_OFFSET»Foo {
+				}
+			''',
+			JvmPsiClass
+		)
+	}
+
+	def void testNavigateToClass_Throws() {
+		testNavigateTo(
+			'mypackage/Exception.xtend',
+			'''
+				package mypackage
+				
+				class «NAVIGATION_ELEMENT_START_OFFSET»MyException«NAVIGATION_ELEMENT_END_OFFSET» extends Exception {
+				}
+				
+				class Client {
+				
+					def void someMethod() throws My«REFERENCE_OFFSET»Exception {}
+				
+				}
+			''',
+			JvmPsiClass
+		)
+	}
+
+	def void testNavigateToClass_ExtendsBound() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				class «NAVIGATION_ELEMENT_START_OFFSET»Foo«NAVIGATION_ELEMENT_END_OFFSET» {
+				}
+				
+				class Bar<T extends Fo«REFERENCE_OFFSET»o> {
+				}
+			''',
+			JvmPsiClass
+		)
+	}
+
+	def void testNavigateToInnerClass() {
 		testNavigateTo(
 			'mypackage/Foo.xtend',
 			'''
 				package mypackage
 				
 				class Foo {
-					«NAVIGATION_ELEMENT_START_OFFSET»static class Bar {}«NAVIGATION_ELEMENT_END_OFFSET»
+					static class «NAVIGATION_ELEMENT_START_OFFSET»Bar«NAVIGATION_ELEMENT_END_OFFSET» {}
 					static class Baz extends «REFERENCE_OFFSET»Bar {}
 				}
 			''',
@@ -111,8 +166,8 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				class Foo {
 				
-					def static void main(String ... args) {
-						«NAVIGATION_ELEMENT_START_OFFSET»new Greeter() {
+					def static void main(String ... args) {«NAVIGATION_ELEMENT_START_OFFSET»
+						new Greeter() {
 							override sayHello(String name) {
 								«REFERENCE_OFFSET»this.sayHello(name)
 							}
@@ -147,8 +202,8 @@ class XtendNavigationTest extends LightXtendTest {
 							override sayHello(String name) {
 								throw new UnsupportedOperationException("TODO: auto-generated method stub")
 							}
-						}
-						«NAVIGATION_ELEMENT_START_OFFSET»new Greeter() {
+						}«NAVIGATION_ELEMENT_START_OFFSET»
+						new Greeter() {
 							override sayHello(String name) {
 								«REFERENCE_OFFSET»this.sayHello(name)
 							}
@@ -158,6 +213,144 @@ class XtendNavigationTest extends LightXtendTest {
 				}
 			''',
 			JvmPsiAnonymousClass
+		)
+	}
+
+	def void testNavigateToAnnonymousClass3() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				interface «NAVIGATION_ELEMENT_START_OFFSET»Greeter«NAVIGATION_ELEMENT_END_OFFSET» {
+					def void sayHello(String name)
+				}
+				
+				class Foo {
+				
+					def static void main(String ... args) {
+						acceptGreeter [ String name |
+							«REFERENCE_OFFSET»self.sayHello(name)
+						]
+						new Greeter() {
+							override sayHello(String name) {
+								throw new UnsupportedOperationException("TODO: auto-generated method stub")
+							}
+						}
+					}
+				
+					def static void acceptGreeter(Greeter greeter) {}
+				
+				}
+			''',
+			JvmPsiClass
+		)
+	}
+
+	def void testNavigateToAnnonymousClass4() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				abstract class Greeter {
+					abstract def void sayHello(String name)
+				}
+				
+				class Foo {
+				
+					def static void main(String ... args) {
+						acceptGreeter [ String name |
+							throw new UnsupportedOperationException("TODO: auto-generated method stub")
+						]«NAVIGATION_ELEMENT_START_OFFSET»
+						new Greeter() {
+							override sayHello(String name) {
+								«REFERENCE_OFFSET»this.sayHello(name)
+							}
+						}«NAVIGATION_ELEMENT_END_OFFSET»
+					}
+				
+					def static void acceptGreeter(Greeter greeter) {}
+				
+				}
+			''',
+			JvmPsiAnonymousClass
+		)
+	}
+
+	def void testNavigateToAnnonymousClass5() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				abstract class Greeter {
+					abstract def void sayHello(String name)
+				}
+				
+				class Foo {
+				
+					static val greeter =«NAVIGATION_ELEMENT_START_OFFSET» new Greeter() {
+							override sayHello(String name) {
+								«REFERENCE_OFFSET»this.sayHello(name)
+							}
+						}«NAVIGATION_ELEMENT_END_OFFSET»
+				
+					def static void main(String ... args) {
+						greeter.sayHello(args.head)
+					}
+				
+				}
+			''',
+			JvmPsiAnonymousClassImpl
+		)
+	}
+
+	def void testNavigateToEnumeration() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				enum «NAVIGATION_ELEMENT_START_OFFSET»Light«NAVIGATION_ELEMENT_END_OFFSET» {
+					ON, OFF
+				}
+				
+				class Room {
+				
+					«REFERENCE_OFFSET»Light light
+				
+					def void enable() {
+						light = Light.ON
+					}
+				
+				}
+			''',
+			JvmPsiClass
+		)
+	}
+
+	def void testNavigateToEnumConstant() {
+		testNavigateTo(
+			'mypackage/Foo.xtend',
+			'''
+				package mypackage
+				
+				enum Light {
+					«NAVIGATION_ELEMENT_START_OFFSET»ON«NAVIGATION_ELEMENT_END_OFFSET», OFF
+				}
+				
+				class Room {
+				
+					Light light
+				
+					def void enable() {
+						light = Light.«REFERENCE_OFFSET»ON
+					}
+				
+				}
+			''',
+			JvmPsiEnumConstantImpl
 		)
 	}
 
@@ -173,7 +366,7 @@ class XtendNavigationTest extends LightXtendTest {
 						new «REFERENCE_OFFSET»Greeter(args.head)
 					}
 				
-					«NAVIGATION_ELEMENT_START_OFFSET»new(String name)«NAVIGATION_ELEMENT_END_OFFSET» {
+					«NAVIGATION_ELEMENT_START_OFFSET»new«NAVIGATION_ELEMENT_END_OFFSET»(String name) {
 						println(name)
 					}
 				
@@ -196,15 +389,77 @@ class XtendNavigationTest extends LightXtendTest {
 						new Greeter().«REFERENCE_OFFSET»sayHello(args.head)
 					}
 				
-					«NAVIGATION_ELEMENT_START_OFFSET»def void sayHello(String name) {
+					def void «NAVIGATION_ELEMENT_START_OFFSET»sayHello«NAVIGATION_ELEMENT_END_OFFSET»(String name) {
 						println(name)
-					}«NAVIGATION_ELEMENT_END_OFFSET»
+					}
 				
 				}
 			''',
 			JvmPsiMethodImpl
 		)
 		assertFalse(psiMethod.constructor)
+	}
+
+	def void testNavigateToAnnotationMethod() {
+		testNavigateTo(
+			'mypackage/MyAnnotation.xtend',
+			'''
+				package mypackage
+				
+				annotation MyAnnotation {
+					Class<?> «NAVIGATION_ELEMENT_START_OFFSET»type«NAVIGATION_ELEMENT_END_OFFSET»
+				}
+				
+				class Foo {
+					
+					def getType(MyAnnotation myAnnotation) {
+						myAnnotation.ty«REFERENCE_OFFSET»pe()
+					}
+				
+				}
+			''',
+			JvmPsiAnnotationMethodImpl
+		)
+	}
+
+	def void testNavigateToField() {
+		testNavigateTo(
+			'mypackage/MyAnnotation.xtend',
+			'''
+				package mypackage
+				
+				class Greeter {
+				
+					String «NAVIGATION_ELEMENT_START_OFFSET»name«NAVIGATION_ELEMENT_END_OFFSET»
+				
+					def void sayHello() {
+						println('Hello ' + na«REFERENCE_OFFSET»me)
+					}
+				
+				}
+			''',
+			JvmPsiFieldImpl
+		)
+	}
+
+	def void testNavigateToVariable() {
+		testNavigateTo(
+			'mypackage/MyFunction.xtend',
+			'''
+				package mypackage
+				
+				class MyFunction {
+				
+					def calc() {
+						val «NAVIGATION_ELEMENT_START_OFFSET»x«NAVIGATION_ELEMENT_END_OFFSET» = 1
+						val y = 1
+						«REFERENCE_OFFSET»x + y
+					}
+				
+				}
+			''',
+			PsiEObject
+		)
 	}
 
 	protected def <T> T testNavigateTo(String relativePath, String fileText, Class<T> expectedType) {
@@ -240,21 +495,33 @@ class XtendNavigationTest extends LightXtendTest {
 
 	protected def findNavigationElement(TextRange range) {
 		var element = file.findElementAt(range.startOffset)
-		var navigationElement = if (element instanceof LeafXtextPsiElement) {
-				element.parent
-			} else
-				element
+		assertNotNull(element)
 
-		assertNotNull(navigationElement)
-		assertTrue('' + navigationElement.class, PsiEObject.isAssignableFrom(navigationElement.class))
-
-		while (!navigationElement.textRange.contains(range)) {
-			navigationElement = navigationElement.parent
-			assertNotNull(navigationElement)
+		val namedEObject = element.findPsiNamedEObject(range)
+		if (namedEObject != null) {
+			assertEquals(namedEObject, namedEObject.navigationElement)
+			return namedEObject
 		}
 
-		assertEquals(navigationElement, navigationElement.navigationElement)
-		navigationElement
+		while (element.textRange != range) {
+			element = element.parent
+			assertNotNull(element)
+		}
+		assertEquals(element, element.navigationElement)
+		element
+	}
+
+	protected def PsiElement findPsiNamedEObject(PsiElement element, TextRange identifierRange) {
+		if (element == null) {
+			return null
+		}
+		if (element instanceof PsiNamedEObject) {
+			if (element.nameIdentifier?.textRange == identifierRange) {
+				return element
+			}
+			return null
+		}
+		return element.parent.findPsiNamedEObject(identifierRange)
 	}
 
 	protected def openFileInEditor(String relativePath, String fileText) {
@@ -271,7 +538,7 @@ class NavigationTestData {
 	public static val NAVIGATION_ELEMENT_START_OFFSET = '<navigationElementStartOffset>'
 	public static val NAVIGATION_ELEMENT_END_OFFSET = '<navigationElementEndOffset>'
 	public static val REFERENCE_OFFSET = '<referenceOffset>'
-	static val TAGS = #[NAVIGATION_ELEMENT_START_OFFSET, NAVIGATION_ELEMENT_END_OFFSET, REFERENCE_OFFSET]
+	static val OFFSET_MARKERS = #[NAVIGATION_ELEMENT_START_OFFSET, NAVIGATION_ELEMENT_END_OFFSET, REFERENCE_OFFSET]
 
 	val String model
 	val int navigationElementStartOffset
@@ -279,15 +546,28 @@ class NavigationTestData {
 	val int referenceOffset
 
 	new(String model) {
-		val offsets = newHashMap
-		this.model = model.findOffsets(offsets)
-		this.navigationElementStartOffset = offsets.get(NAVIGATION_ELEMENT_START_OFFSET)
-		this.navigationElementEndOffset = offsets.get(NAVIGATION_ELEMENT_END_OFFSET)
-		this.referenceOffset = offsets.get(REFERENCE_OFFSET)
+		val offsetMarkers = newHashMap
+		this.model = model.removeOffsetMarkers(offsetMarkers)
+		this.navigationElementStartOffset = offsetMarkers.get(NAVIGATION_ELEMENT_START_OFFSET)
+		this.navigationElementEndOffset = offsetMarkers.get(NAVIGATION_ELEMENT_END_OFFSET)
+		this.referenceOffset = offsetMarkers.get(REFERENCE_OFFSET)
 	}
 
-	protected def String findOffsets(String model, Map<String, Integer> offsets) {
-		val tagToOffset = TAGS.map[it -> model.indexOf(it)].reduce [
+	protected def String removeOffsetMarkers(String model, Map<String, Integer> offsetMarkers) {
+		val offsetMarker = model.findFirstOffsetMarker
+		if (offsetMarker.value == -1) {
+			return model
+		}
+		offsetMarkers.put(offsetMarker.key, offsetMarker.value)
+		model.removeOffsetMarker(offsetMarker).removeOffsetMarkers(offsetMarkers)
+	}
+	
+	protected def removeOffsetMarker(String model, Pair<String, Integer> offsetMarker) {
+		model.substring(0, offsetMarker.value) + model.substring(offsetMarker.value + offsetMarker.key.length)
+	}
+	
+	protected def findFirstOffsetMarker(String model) {
+		model.findOffsetMarkers.reduce [
 			if ($0.value == -1)
 				$1
 			else if ($1.value == -1)
@@ -297,13 +577,10 @@ class NavigationTestData {
 			else
 				$1
 		]
-		if (tagToOffset.value == -1) {
-			return model
-		}
-		offsets.put(tagToOffset.key, tagToOffset.value)
-		val newModel = model.substring(0, tagToOffset.value) +
-			model.substring(tagToOffset.value + tagToOffset.key.length)
-		newModel.findOffsets(offsets)
+	}
+	
+	protected def findOffsetMarkers(String model) {
+		OFFSET_MARKERS.map[it -> model.indexOf(it)]
 	}
 
 }
