@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -166,6 +168,8 @@ public interface ITextRegionAccess {
 	 */
 	ISemanticRegion regionForKeyword(EObject owner, String keyword);
 
+	ISemanticRegion regionForKeyword(EObject owner, Keyword keyword);
+
 	ITextSegment regionForOffset(int offset, int length);
 
 	IEObjectRegion regionForRootEObject();
@@ -178,6 +182,8 @@ public interface ITextRegionAccess {
 
 	ISemanticRegion regionForRuleCall(EObject owner, RuleCall ruleCall);
 
+	ISemanticRegion regionForCrossRef(EObject owner, CrossReference crossRef);
+
 	List<ISemanticRegion> regionsForRuleCalls(EObject owner, RuleCall... ruleCalls);
 
 	List<IEObjectRegion> regionsForAllEObjects();
@@ -186,7 +192,11 @@ public interface ITextRegionAccess {
 	 * @return All {@link ISemanticRegion semantic regions} that represent one of the provided 'keyword's and directly
 	 *         belong to the provided 'EObject'. Keywords of child-EObjects are not considered.
 	 */
-	List<ISemanticRegion> regionsForKeywords(EObject owner, String... string);
+	List<ISemanticRegion> regionsForKeywords(EObject owner, String... keywords);
+
+	List<ISemanticRegion> regionsForKeywords(EObject owner, Keyword... keywords);
+
+	List<ISemanticRegion> regionsForCrossRefs(EObject owner, CrossReference... crossRefs);
 
 	/**
 	 * @return All {@link ISemanticRegion semantic regions} that represent a RuleCall to one of the provided

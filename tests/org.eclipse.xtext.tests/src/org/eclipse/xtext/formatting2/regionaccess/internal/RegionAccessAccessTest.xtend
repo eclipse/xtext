@@ -57,7 +57,7 @@ class RegionAccessAccessTest {
 		assertEquals("foo", actual, actuals)
 	}
 
-	def void regionForFeatureContainmentReference() {
+	@Test def void regionForFeatureContainmentReference() {
 		val mixed = '''6 (foo) action'''.parseAs(AssignedAction)
 		val access = mixed.toAccess
 		try {
@@ -112,8 +112,8 @@ class RegionAccessAccessTest {
 		assertEquals("foo", actual, actuals)
 	}
 
-	def void regionForRuleCallEObjectParserRule() {
-		val mixed = '''6 (child foo)'''.parseAs(Mixed)
+	@Test def void regionForRuleCallEObjectParserRule() {
+		val mixed = '''6 (child (foo))'''.parseAs(Mixed)
 		val access = mixed.toAccess
 		try {
 			access.regionForRuleCall(mixed, mixedAccess.eobjMixedParserRuleCall_2_2_1_1_0)
@@ -125,6 +125,30 @@ class RegionAccessAccessTest {
 			fail()
 		} catch (IllegalStateException e) {
 		}
+	}
+
+	@Test def void regionForKeywordString() {
+		val mixed = '''6 (foo)'''.parseAs(Mixed)
+		val access = mixed.toAccess
+		val actual = access.regionForKeyword(mixed, "(")
+		val actuals = access.regionsForKeywords(mixed, "(")
+		assertEquals("(", actual, actuals)
+	}
+
+	@Test def void regionForKeyword() {
+		val mixed = '''6 (foo)'''.parseAs(Mixed)
+		val access = mixed.toAccess
+		val actual = access.regionForKeyword(mixed, mixedAccess.leftParenthesisKeyword_0)
+		val actuals = access.regionsForKeywords(mixed, mixedAccess.leftParenthesisKeyword_0)
+		assertEquals("(", actual, actuals)
+	}
+
+	@Test def void regionForCrossReference() {
+		val mixed = '''6 (ref foo) action (foo) end'''.parseAs(AssignedAction)
+		val access = mixed.toAccess
+		val actual = access.regionForCrossRef(mixed.child, mixedAccess.refMixedCrossReference_2_2_3_1_0)
+		val actuals = access.regionsForCrossRefs(mixed.child, mixedAccess.refMixedCrossReference_2_2_3_1_0)
+		assertEquals("foo", actual, actuals)
 	}
 
 	def private <T extends EObject> parseAs(CharSequence seq, Class<T> cls) {

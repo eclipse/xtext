@@ -15,6 +15,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -84,6 +86,7 @@ public class RegionAccessAccessTest {
     this.assertEquals("foo", actual, actuals);
   }
   
+  @Test
   public void regionForFeatureContainmentReference() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (foo) action");
@@ -188,9 +191,10 @@ public class RegionAccessAccessTest {
     this.assertEquals("foo", actual, actuals);
   }
   
+  @Test
   public void regionForRuleCallEObjectParserRule() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("6 (child foo)");
+    _builder.append("6 (child (foo))");
     final Mixed mixed = this.<Mixed>parseAs(_builder, Mixed.class);
     final ITextRegionAccess access = this.toAccess(mixed);
     try {
@@ -217,6 +221,49 @@ public class RegionAccessAccessTest {
         throw Exceptions.sneakyThrow(_t_1);
       }
     }
+  }
+  
+  @Test
+  public void regionForKeywordString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("6 (foo)");
+    final Mixed mixed = this.<Mixed>parseAs(_builder, Mixed.class);
+    final ITextRegionAccess access = this.toAccess(mixed);
+    final ISemanticRegion actual = access.regionForKeyword(mixed, "(");
+    final List<ISemanticRegion> actuals = access.regionsForKeywords(mixed, "(");
+    this.assertEquals("(", actual, actuals);
+  }
+  
+  @Test
+  public void regionForKeyword() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("6 (foo)");
+    final Mixed mixed = this.<Mixed>parseAs(_builder, Mixed.class);
+    final ITextRegionAccess access = this.toAccess(mixed);
+    RegionAccessTestLanguageGrammarAccess.MixedElements _mixedAccess = this._regionAccessTestLanguageGrammarAccess.getMixedAccess();
+    Keyword _leftParenthesisKeyword_0 = _mixedAccess.getLeftParenthesisKeyword_0();
+    final ISemanticRegion actual = access.regionForKeyword(mixed, _leftParenthesisKeyword_0);
+    RegionAccessTestLanguageGrammarAccess.MixedElements _mixedAccess_1 = this._regionAccessTestLanguageGrammarAccess.getMixedAccess();
+    Keyword _leftParenthesisKeyword_0_1 = _mixedAccess_1.getLeftParenthesisKeyword_0();
+    final List<ISemanticRegion> actuals = access.regionsForKeywords(mixed, _leftParenthesisKeyword_0_1);
+    this.assertEquals("(", actual, actuals);
+  }
+  
+  @Test
+  public void regionForCrossReference() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("6 (ref foo) action (foo) end");
+    final AssignedAction mixed = this.<AssignedAction>parseAs(_builder, AssignedAction.class);
+    final ITextRegionAccess access = this.toAccess(mixed);
+    Mixed _child = mixed.getChild();
+    RegionAccessTestLanguageGrammarAccess.MixedElements _mixedAccess = this._regionAccessTestLanguageGrammarAccess.getMixedAccess();
+    CrossReference _refMixedCrossReference_2_2_3_1_0 = _mixedAccess.getRefMixedCrossReference_2_2_3_1_0();
+    final ISemanticRegion actual = access.regionForCrossRef(_child, _refMixedCrossReference_2_2_3_1_0);
+    Mixed _child_1 = mixed.getChild();
+    RegionAccessTestLanguageGrammarAccess.MixedElements _mixedAccess_1 = this._regionAccessTestLanguageGrammarAccess.getMixedAccess();
+    CrossReference _refMixedCrossReference_2_2_3_1_0_1 = _mixedAccess_1.getRefMixedCrossReference_2_2_3_1_0();
+    final List<ISemanticRegion> actuals = access.regionsForCrossRefs(_child_1, _refMixedCrossReference_2_2_3_1_0_1);
+    this.assertEquals("foo", actual, actuals);
   }
   
   private <T extends EObject> T parseAs(final CharSequence seq, final Class<T> cls) {
