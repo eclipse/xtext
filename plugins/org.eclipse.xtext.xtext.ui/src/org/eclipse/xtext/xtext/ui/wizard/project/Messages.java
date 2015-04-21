@@ -20,6 +20,8 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_LabelFacets;
 	public static String WizardNewXtextProjectCreationPage_LabelName;
 	public static String WizardNewXtextProjectCreationPage_WindowTitle;
+	public static String AdvancedNewProjectPage_WindowTitle;
+	public static String AdvancedNewProjectPage_Description;
 	
 	static {
 		// initialize resource bundle

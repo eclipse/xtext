@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
-import java.util.List
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.layout.GridData
@@ -16,7 +15,6 @@ import org.eclipse.swt.widgets.Button
 import org.eclipse.swt.widgets.Combo
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Group
-import org.eclipse.swt.widgets.Label
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -26,70 +24,68 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	new(String pageName) {
 		super(pageName)
-		title = Messages.WizardNewXtextProjectCreationPage_WindowTitle
-		description = Messages.WizardNewXtextProjectCreationPage_Description
+		title = Messages.AdvancedNewProjectPage_WindowTitle
+		description = Messages.AdvancedNewProjectPage_Description
 	}
 
 	override createControl(Composite parent) {
-		val showGeneratorConfigCombo = WizardContribution.fromRegistry.size > 1
-		val facetsGroup = new Group(parent, SWT.NONE) => [
-			font = parent.font
-			text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-			layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
-			layout = new GridLayout(if(showGeneratorConfigCombo) 2 else 1, false)
-		]
-
-		val composite = new Composite(facetsGroup, SWT.NONE) => [
+		control = new Composite(parent, SWT.NONE) => [
 			layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
 			layout = new GridLayout(1, false)
-		]
-
-		createFeatureProject = composite.newCheckBox => [
-			text = Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel
-			selection = true
-		]
-
-		createTestProject = composite.newCheckBox => [
-			text = Messages.WizardNewXtextProjectCreationPage_CreateATestProject
-			selection = true
-		]
-
-		if (showGeneratorConfigCombo) {
-			new Label(composite, SWT.NONE) => [
-				text = Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration
-			]
-			generatorConfigurationField = new Combo(composite, SWT.READ_ONLY) => [
-				layoutData = new GridData(GridData.FILL_HORIZONTAL) => [
-					horizontalSpan = 1
+			Group [
+				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+				createFeatureProject = CheckBox [
+					text = Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel
 				]
-				font = parent.font
+				createTestProject = CheckBox [
+					text = Messages.WizardNewXtextProjectCreationPage_CreateATestProject
+				]
 			]
-			fillMweSnippet
-		}
-
-		control = facetsGroup
+			Group [
+				text = Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration
+				val contributions = WizardContribution.getFromRegistry.values
+				visible = contributions.size > 1
+				generatorConfigurationField = DropDown [
+					items = contributions.toList.sortInplace.map[name]
+				]
+			]
+		]
+		setDefaults
 	}
 
-	def protected newCheckBox(Composite composite) {
-		new Button(composite, SWT.CHECK) => [
-			layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false) => [
-				horizontalSpan = 1
-			]
+	def protected Group(Composite parent, (Group)=>void config) {
+		new Group(parent, SWT.NONE) => [
+			font = parent.font
+			layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+			layout = new GridLayout(1, false)
+			config.apply(it)
 		]
 	}
 
-	def protected void fillMweSnippet() {
-		val contributions = WizardContribution.getFromRegistry.values
-		val names = contributions.toList.sortInplace.map[name]
-		if (generatorConfigurationField !== null) {
-			generatorConfigurationField.items = names
-			generatorConfigurationField.select(names.indexOfDefault)
-		}
-
+	def protected CheckBox(Composite composite, (Button)=>void config) {
+		new Button(composite, SWT.CHECK) => [
+			font = parent.font
+			layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false)
+			config.apply(it)
+		]
 	}
 
-	def protected int indexOfDefault(List<String> contributions) {
-		val index = contributions.indexOf(defaultConfigName)
+	def protected DropDown(Composite parent, (Combo)=>void config) {
+		new Combo(parent, SWT.READ_ONLY) => [
+			font = parent.font
+			layoutData = new GridData(GridData.FILL_HORIZONTAL)
+			config.apply(it)
+		]
+	}
+
+	def protected setDefaults() {
+		createFeatureProject.selection = true
+		createTestProject.selection = true
+		generatorConfigurationField.select(indexOfDefaultConfig)
+	}
+
+	def protected int indexOfDefaultConfig() {
+		val index = generatorConfigurationField.items.indexOf(defaultConfigName)
 		if(index !== -1) index else 0
 	}
 
@@ -106,12 +102,8 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def String getGeneratorConfig() {
-		if (generatorConfigurationField === null)
-			WizardContribution.fromRegistry.values.head.name
-		else {
-			val index = generatorConfigurationField.selectionIndex
-			generatorConfigurationField.items.get(index)
-		}
+		val index = generatorConfigurationField.selectionIndex
+		generatorConfigurationField.items.get(index)
 	}
 
 }
