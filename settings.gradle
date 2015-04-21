@@ -11,7 +11,7 @@ include 'maven'
 }
 
 new File(settingsDir, "intellij").listFiles().findAll {
-	it.isDirectory() && it.name.startsWith("org.eclipse") && !it.name.endsWith("ui")
+	it.isDirectory() && it.name.startsWith("org.eclipse")
 }.each {
 	include "intellij:${it.name}"
 }
