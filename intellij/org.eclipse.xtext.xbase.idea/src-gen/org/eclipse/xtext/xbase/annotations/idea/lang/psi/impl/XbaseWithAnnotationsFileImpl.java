@@ -13,6 +13,7 @@ public final class XbaseWithAnnotationsFileImpl extends BaseXtextFile {
 		super(viewProvider, XbaseWithAnnotationsLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return XbaseWithAnnotationsFileType.INSTANCE;
 	}

@@ -18,6 +18,7 @@ public class XbaseParserDefinition extends XtypeParserDefinition {
 	@Inject 
 	private XbaseElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XbaseFileImpl(viewProvider);
 	}
