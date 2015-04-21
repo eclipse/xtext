@@ -210,6 +210,38 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 	}
 
 	@Override
+	public ISemanticRegion regionForRuleCall(EObject owner, RuleCall ruleCall) {
+		assertNoEObjectRuleCall(ruleCall);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
+		if (tokens == null)
+			return null;
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions())
+			if (region.getGrammarElement() == ruleCall)
+				return region;
+		return null;
+	}
+
+	@Override
+	public List<ISemanticRegion> regionsForRuleCalls(EObject owner, RuleCall... ruleCalls) {
+		for (int i = 0; i < ruleCalls.length; i++)
+			assertNoEObjectRuleCall(ruleCalls[i]);
+		AbstractEObjectRegion tokens = regionForEObject(owner);
+		if (tokens == null)
+			return null;
+		List<ISemanticRegion> result = Lists.newArrayList();
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions())
+			for (int i = 0; i < ruleCalls.length; i++)
+				if (region.getGrammarElement() == ruleCalls[i])
+					result.add(region);
+		return ImmutableList.copyOf(result);
+	}
+
+	protected void assertNoEObjectRuleCall(RuleCall ruleCall) {
+		if (GrammarUtil.isEObjectRuleCall(ruleCall))
+			throw new IllegalStateException("Only Enum, Datatype and Terminal Rule Calls allowed.");
+	}
+
+	@Override
 	public ITextSegment regionForOffset(int offset, int length) {
 		return new TextSegment(this, offset, length);
 	}
