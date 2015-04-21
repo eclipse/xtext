@@ -17,6 +17,7 @@ public class XbaseWithAnnotationsParserDefinition extends XbaseParserDefinition 
 	@Inject 
 	private XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XbaseWithAnnotationsFileImpl(viewProvider);
 	}

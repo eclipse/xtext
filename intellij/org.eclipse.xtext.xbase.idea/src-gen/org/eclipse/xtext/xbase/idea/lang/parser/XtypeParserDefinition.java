@@ -17,6 +17,7 @@ public class XtypeParserDefinition extends AbstractXtextParserDefinition {
 	@Inject 
 	private XtypeElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtypeFileImpl(viewProvider);
 	}

@@ -827,10 +827,12 @@ public class XtypeElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType QualifiedNameInStaticImport_FullStopKeyword_1_ELEMENT_TYPE = associate(QualifiedNameInStaticImportFactory.createQualifiedNameInStaticImport_FullStopKeyword_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
