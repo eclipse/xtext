@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -168,6 +169,19 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 		return null;
 	}
 
+	@Override
+	public ISemanticRegion regionForCrossRef(EObject owner, CrossReference crossRef) {
+		return regionForRuleCall(owner, (RuleCall) crossRef.getTerminal());
+	}
+
+	@Override
+	public List<ISemanticRegion> regionsForCrossRefs(EObject owner, CrossReference... crossRefs) {
+		List<RuleCall> rcs = Lists.newArrayList();
+		for (int i = 0; i < crossRefs.length; i++)
+			rcs.add((RuleCall) crossRefs[i].getTerminal());
+		return regionsForRuleCalls(owner, rcs.toArray(new RuleCall[rcs.size()]));
+	}
+
 	protected void assertNoContainment(EStructuralFeature feat) {
 		if (!(feat instanceof EAttribute) && !(feat instanceof EReference && !((EReference) feat).isContainment()))
 			throw new IllegalStateException("Only EAttributes and CrossReferences allowed.");
@@ -183,7 +197,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 		}
 		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
-			return null;
+			return Collections.emptyList();
 		List<ISemanticRegion> result = Lists.newArrayList();
 		for (ISemanticRegion region : tokens.getSemanticLeafRegions()) {
 			Assignment assignment = GrammarUtil.containingAssignment(region.getGrammarElement());
@@ -210,6 +224,17 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 	}
 
 	@Override
+	public ISemanticRegion regionForKeyword(EObject owner, Keyword keyword) {
+		AbstractEObjectRegion tokens = regionForEObject(owner);
+		if (tokens == null)
+			return null;
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions())
+			if (region.getGrammarElement() == keyword)
+				return region;
+		return null;
+	}
+
+	@Override
 	public ISemanticRegion regionForRuleCall(EObject owner, RuleCall ruleCall) {
 		assertNoEObjectRuleCall(ruleCall);
 		AbstractEObjectRegion tokens = regionForEObject(owner);
@@ -227,7 +252,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 			assertNoEObjectRuleCall(ruleCalls[i]);
 		AbstractEObjectRegion tokens = regionForEObject(owner);
 		if (tokens == null)
-			return null;
+			return Collections.emptyList();
 		List<ISemanticRegion> result = Lists.newArrayList();
 		for (ISemanticRegion region : tokens.getSemanticLeafRegions())
 			for (int i = 0; i < ruleCalls.length; i++)
@@ -275,7 +300,20 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess {
 				if (kwSet.contains(kw.getValue()))
 					result.add(token);
 			}
-		return result;
+		return ImmutableList.copyOf(result);
+	}
+
+	@Override
+	public List<ISemanticRegion> regionsForKeywords(EObject owner, Keyword... keywords) {
+		AbstractEObjectRegion tokens = regionForEObject(owner);
+		if (tokens == null)
+			return Collections.emptyList();
+		List<ISemanticRegion> result = Lists.newArrayList();
+		for (ISemanticRegion region : tokens.getSemanticLeafRegions())
+			for (int i = 0; i < keywords.length; i++)
+				if (region.getGrammarElement() == keywords[i])
+					result.add(region);
+		return ImmutableList.copyOf(result);
 	}
 
 	@Override
