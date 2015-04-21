@@ -26,7 +26,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.util.FeatureProjectFactory;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
@@ -69,8 +68,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	@Inject
 	private Provider<PluginProjectFactory> projectFactoryProvider;
-	@Inject
-	private Provider<FeatureProjectFactory> featureProjFactoryProvider;
 
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
@@ -88,9 +85,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		if (getXtextProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
 		}
-		if (getXtextProjectInfo().isCreateFeatureProject()) {
-			createFeatureProject(subMonitor.newChild(1));
-		}
 
 		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getXtextProjectInfo().getGrammarFilePath());
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
@@ -100,19 +94,12 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected int getMonitorTicks() {
 		int ticks = 2;
 		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks + 1 : ticks;
-		if (getXtextProjectInfo().isCreateFeatureProject()) {
-			ticks++;
-		}
 		return ticks;
 	}
 
 	@Override
 	protected PluginProjectFactory createProjectFactory() {
 		return projectFactoryProvider.get();
-	}
-
-	protected FeatureProjectFactory createFeatureFactory() {
-		return featureProjFactoryProvider.get();
 	}
 
 	@Override
@@ -227,27 +214,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	private TestProjectContributor createTestProjectContributor() {
 		return new TestProjectContributor(getXtextProjectInfo());
-	}
-
-	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
-		FeatureProjectFactory factory = createFeatureFactory();
-		configureFeatureProjectFactory(factory);
-		return factory.createProject(monitor, null);
-	}
-
-	protected void configureFeatureProjectFactory(FeatureProjectFactory factory) {
-		factory.setProjectName(getXtextProjectInfo().getFeatureProjectName());
-		factory.setLocation(getXtextProjectInfo().getFeatureProjectLocation());
-		factory.setFeatureLabel(String.format(Messages.XtextProjectCreator_FeatureLabel, getXtextProjectInfo()
-				.getLanguageNameAbbreviation()));
-		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
-		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
-		factory.addBundle(getXtextProjectInfo().getProjectName());
-		if (getXtextProjectInfo().isCreateUiProject()) {
-			factory.addBundle(getXtextProjectInfo().getUiProjectName());
-		}
-		
-		factory.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
 	}
 
 	protected void configureTestProjectFactory(PluginProjectFactory factory) {
