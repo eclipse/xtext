@@ -3,7 +3,7 @@ package org.eclipse.xtext.valueconverter.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.valueconverter.idea.lang.Bug250313ElementTypeProvider;
 import org.eclipse.xtext.valueconverter.idea.lang.psi.impl.Bug250313FileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -13,7 +13,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class Bug250313ParserDefinition extends TerminalsParserDefinition {
+public class Bug250313ParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private Bug250313ElementTypeProvider elementTypeProvider;

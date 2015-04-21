@@ -3,7 +3,7 @@ package org.eclipse.xtext.testlanguages.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.PartialParserTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -13,7 +13,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class PartialParserTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class PartialParserTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private PartialParserTestLanguageElementTypeProvider elementTypeProvider;

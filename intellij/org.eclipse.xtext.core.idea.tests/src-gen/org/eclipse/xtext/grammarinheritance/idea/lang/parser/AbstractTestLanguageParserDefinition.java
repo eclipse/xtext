@@ -2,7 +2,7 @@ package org.eclipse.xtext.grammarinheritance.idea.lang.parser;
 
 import org.eclipse.xtext.grammarinheritance.idea.lang.AbstractTestLanguageElementTypeProvider;
 import org.eclipse.xtext.grammarinheritance.idea.lang.psi.impl.AbstractTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -12,7 +12,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class AbstractTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class AbstractTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private AbstractTestLanguageElementTypeProvider elementTypeProvider;

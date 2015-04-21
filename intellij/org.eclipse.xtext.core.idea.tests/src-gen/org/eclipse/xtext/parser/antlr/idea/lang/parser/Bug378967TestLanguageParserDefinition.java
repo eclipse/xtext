@@ -2,7 +2,7 @@ package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug378967TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug378967TestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -11,7 +11,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class Bug378967TestLanguageParserDefinition extends TerminalsParserDefinition {
+public class Bug378967TestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private Bug378967TestLanguageElementTypeProvider elementTypeProvider;

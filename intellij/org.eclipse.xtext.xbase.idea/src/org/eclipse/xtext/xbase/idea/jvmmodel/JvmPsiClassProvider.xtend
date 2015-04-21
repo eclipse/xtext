@@ -18,7 +18,6 @@ import com.intellij.psi.PsiMirrorElement
 import com.intellij.psi.impl.source.tree.JavaElementType
 import com.intellij.psi.impl.source.tree.RecursiveTreeElementWalkingVisitor
 import com.intellij.psi.impl.source.tree.TreeElement
-import com.intellij.psi.tree.TokenSet
 import java.util.Iterator
 import java.util.List
 import java.util.Map
@@ -42,8 +41,6 @@ import org.eclipse.xtext.xbase.idea.jvm.JvmLanguage
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClass
 import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
-
-import static org.eclipse.xtext.xbase.idea.jvmmodel.JvmPsiClassProvider.*
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*
@@ -186,23 +183,18 @@ class JvmPsiClassProvider implements PsiElementProvider {
 		}
 	}
 
-	static val BLOCK_ELEMENTS = TokenSet.create(
-		JavaElementType.ANNOTATION,
-		JavaElementType.CLASS,
-		JavaElementType.ANONYMOUS_CLASS
-	)
-
 	protected def dispatch void bindTo(PsiElement psiElement, JvmFeature jvmFeature, Map<EObject, PsiElement> mapping) {
 		psiElement.doBindTo(jvmFeature, mapping)
 
 		val localClassesIterator = jvmFeature.localClasses.iterator
 		if (localClassesIterator.hasNext) {
-			val codeBlock = psiElement.node.findChildByType(JavaElementType.CODE_BLOCK)
-			if (codeBlock instanceof TreeElement) {
-				codeBlock.acceptTree(new RecursiveTreeElementWalkingVisitor() {
+			val node = psiElement.node
+			if (node instanceof TreeElement) {
+				node.acceptTree(new RecursiveTreeElementWalkingVisitor() {
 
+					// FIXME: it should distinguish between local classes for anonymous classes and closures
 					override protected visitNode(TreeElement element) {
-						if (BLOCK_ELEMENTS.contains(element.elementType)) {
+						if (element.elementType == JavaElementType.ANONYMOUS_CLASS) {
 							element.psi.bindTo(localClassesIterator.next, mapping)
 							if (!localClassesIterator.hasNext) {
 								super.stopWalking

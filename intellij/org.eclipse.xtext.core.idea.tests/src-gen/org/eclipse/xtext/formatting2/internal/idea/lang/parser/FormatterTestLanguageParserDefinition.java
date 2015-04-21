@@ -2,7 +2,7 @@ package org.eclipse.xtext.formatting2.internal.idea.lang.parser;
 
 import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageElementTypeProvider;
 import org.eclipse.xtext.formatting2.internal.idea.lang.psi.impl.FormatterTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -11,7 +11,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class FormatterTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class FormatterTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private FormatterTestLanguageElementTypeProvider elementTypeProvider;

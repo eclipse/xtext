@@ -27,7 +27,6 @@ import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.impl.source.tree.RecursiveTreeElementWalkingVisitor;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -284,26 +283,20 @@ public class JvmPsiClassProvider implements PsiElementProvider {
     }
   }
   
-  private final static TokenSet BLOCK_ELEMENTS = TokenSet.create(
-    JavaElementType.ANNOTATION, 
-    JavaElementType.CLASS, 
-    JavaElementType.ANONYMOUS_CLASS);
-  
   protected void _bindTo(final PsiElement psiElement, final JvmFeature jvmFeature, final Map<EObject, PsiElement> mapping) {
     this.doBindTo(psiElement, jvmFeature, mapping);
     EList<JvmGenericType> _localClasses = jvmFeature.getLocalClasses();
     final Iterator<JvmGenericType> localClassesIterator = _localClasses.iterator();
     boolean _hasNext = localClassesIterator.hasNext();
     if (_hasNext) {
-      ASTNode _node = psiElement.getNode();
-      final ASTNode codeBlock = _node.findChildByType(JavaElementType.CODE_BLOCK);
-      if ((codeBlock instanceof TreeElement)) {
-        ((TreeElement)codeBlock).acceptTree(new RecursiveTreeElementWalkingVisitor() {
+      final ASTNode node = psiElement.getNode();
+      if ((node instanceof TreeElement)) {
+        ((TreeElement)node).acceptTree(new RecursiveTreeElementWalkingVisitor() {
           @Override
           protected void visitNode(final TreeElement element) {
             IElementType _elementType = element.getElementType();
-            boolean _contains = JvmPsiClassProvider.BLOCK_ELEMENTS.contains(_elementType);
-            if (_contains) {
+            boolean _equals = Objects.equal(_elementType, JavaElementType.ANONYMOUS_CLASS);
+            if (_equals) {
               PsiElement _psi = element.getPsi();
               JvmGenericType _next = localClassesIterator.next();
               JvmPsiClassProvider.this.bindTo(_psi, _next, mapping);

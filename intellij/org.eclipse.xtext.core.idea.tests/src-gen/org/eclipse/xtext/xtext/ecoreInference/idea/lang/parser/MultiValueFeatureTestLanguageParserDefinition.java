@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.ecoreInference.idea.lang.parser;
 
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageElementTypeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.psi.impl.MultiValueFeatureTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -11,7 +11,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class MultiValueFeatureTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class MultiValueFeatureTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private MultiValueFeatureTestLanguageElementTypeProvider elementTypeProvider;

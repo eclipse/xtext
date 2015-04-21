@@ -2,7 +2,7 @@ package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889ExTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889ExTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -12,7 +12,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class Bug296889ExTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class Bug296889ExTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private Bug296889ExTestLanguageElementTypeProvider elementTypeProvider;
