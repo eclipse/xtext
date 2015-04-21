@@ -18,10 +18,10 @@ import org.eclipse.swt.widgets.Group
 
 class AdvancedNewProjectPage extends WizardPage {
 
-	Button createEclipsePlugin
-	Button createIdeaPlugin
-	Button createWebIntegration
-	Button createIdeSupport
+	Button createUiProject
+	Button createIdeaProject
+	Button createWebProject
+	Button createIdeProject
 	Button createFeatureProject
 	Button createTestProject
 	Combo buildSystem
@@ -40,19 +40,18 @@ class AdvancedNewProjectPage extends WizardPage {
 			layout = new GridLayout(1, false)
 			Group [
 				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-				createEclipsePlugin = CheckBox [
+				createUiProject = CheckBox [
 					text = "Eclipse Plugin"
-					enabled = false
 				]
-				createIdeaPlugin = CheckBox [
+				createIdeaProject = CheckBox [
 					text = "IntelliJ IDEA Plugin"
 					enabled = false
 				]
-				createWebIntegration = CheckBox [
+				createWebProject = CheckBox [
 					text = "Web Integration"
 					enabled = false
 				]
-				createIdeSupport = CheckBox [
+				createIdeProject = CheckBox [
 					text = "Generic IDE Support"
 					enabled = false
 				]
@@ -115,10 +114,10 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def protected setDefaults() {
-		createEclipsePlugin.selection = true
-		createIdeaPlugin.selection = false
-		createWebIntegration.selection = false
-		createIdeSupport.selection = false
+		createUiProject.selection = true
+		createIdeaProject.selection = false
+		createWebProject.selection = false
+		createIdeProject.selection = false
 		createFeatureProject.selection = true
 		createTestProject.selection = true
 		buildSystem.select(0)
@@ -133,6 +132,10 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def protected String getDefaultConfigName() {
 		"Standard"
+	}
+	
+	def boolean isCreateUiProject() {
+		createUiProject.selection
 	}
 
 	def boolean isCreateFeatureProject() {

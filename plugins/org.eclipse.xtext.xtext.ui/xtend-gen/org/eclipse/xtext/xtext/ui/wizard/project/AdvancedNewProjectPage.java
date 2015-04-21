@@ -30,13 +30,13 @@ import org.eclipse.xtext.xtext.ui.wizard.project.WizardContribution;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
-  private Button createEclipsePlugin;
+  private Button createUiProject;
   
-  private Button createIdeaPlugin;
+  private Button createIdeaProject;
   
-  private Button createWebIntegration;
+  private Button createWebProject;
   
-  private Button createIdeSupport;
+  private Button createIdeProject;
   
   private Button createFeatureProject;
   
@@ -72,11 +72,10 @@ public class AdvancedNewProjectPage extends WizardPage {
               @Override
               public void apply(final Button it) {
                 it.setText("Eclipse Plugin");
-                it.setEnabled(false);
               }
             };
             Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
-            AdvancedNewProjectPage.this.createEclipsePlugin = _CheckBox;
+            AdvancedNewProjectPage.this.createUiProject = _CheckBox;
             final Procedure1<Button> _function_1 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
@@ -85,7 +84,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               }
             };
             Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
-            AdvancedNewProjectPage.this.createIdeaPlugin = _CheckBox_1;
+            AdvancedNewProjectPage.this.createIdeaProject = _CheckBox_1;
             final Procedure1<Button> _function_2 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
@@ -94,7 +93,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               }
             };
             Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
-            AdvancedNewProjectPage.this.createWebIntegration = _CheckBox_2;
+            AdvancedNewProjectPage.this.createWebProject = _CheckBox_2;
             final Procedure1<Button> _function_3 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
@@ -103,7 +102,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               }
             };
             Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
-            AdvancedNewProjectPage.this.createIdeSupport = _CheckBox_3;
+            AdvancedNewProjectPage.this.createIdeProject = _CheckBox_3;
             final Procedure1<Button> _function_4 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
@@ -240,10 +239,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   protected void setDefaults() {
-    this.createEclipsePlugin.setSelection(true);
-    this.createIdeaPlugin.setSelection(false);
-    this.createWebIntegration.setSelection(false);
-    this.createIdeSupport.setSelection(false);
+    this.createUiProject.setSelection(true);
+    this.createIdeaProject.setSelection(false);
+    this.createWebProject.setSelection(false);
+    this.createIdeProject.setSelection(false);
     this.createFeatureProject.setSelection(true);
     this.createTestProject.setSelection(true);
     this.buildSystem.select(0);
@@ -271,6 +270,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   protected String getDefaultConfigName() {
     return "Standard";
+  }
+  
+  public boolean isCreateUiProject() {
+    return this.createUiProject.getSelection();
   }
   
   public boolean isCreateFeatureProject() {

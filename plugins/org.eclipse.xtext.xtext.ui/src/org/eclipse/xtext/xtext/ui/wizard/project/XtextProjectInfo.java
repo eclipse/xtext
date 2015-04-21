@@ -34,6 +34,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
 	private boolean createFeatureProject;
+	private boolean createUiProject;
 
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
 		return createEclipseRuntimeLaunchConfig;
@@ -57,6 +58,14 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getEncoding() {
 		return encoding;
+	}
+	
+	public void setCreateUiProject(boolean createUiProject) {
+		this.createUiProject = createUiProject;
+	}
+	
+	public boolean isCreateUiProject() {
+		return createUiProject;
 	}
 
 	public boolean isCreateTestProject() {
