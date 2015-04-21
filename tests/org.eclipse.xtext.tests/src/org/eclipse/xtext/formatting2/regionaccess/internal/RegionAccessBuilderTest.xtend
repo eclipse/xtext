@@ -28,7 +28,7 @@ import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
  */
 @InjectWith(RegionAccessTestLanguageInjectorProvider)
 @RunWith(XtextRunner)
-class RegionAccessTest {
+class RegionAccessBuilderTest {
 	@Inject ParseHelper<Root> parseHelper
 	@Inject Provider<TextRegionAccessBuilder> textRegionAccessBuilder
 	@Inject ValidationTestHelper validationTestHelper
